@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:ctl="using:Material.Design.Controls">
+
+	<Style x:Key="DefaultCardStyle"
+		   TargetType="ctl:Card">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ctl:Card">
+					<Grid>
+						<StackPanel>
+							
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="ctl:Card"
+		   BasedOn="{StaticResource DefaultCardStyle}" />
+
+</ResourceDictionary>
