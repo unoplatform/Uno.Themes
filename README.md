@@ -1,25 +1,15 @@
-# Open Source Project Template
+# Uno Material
 
-This repository contains a template to seed a repository for an Open Source
-project.
+This library offers a suite of solutions to help you theme your application with the [material design theme](https://material.io/design):
+- Color system
+- Styles for existing WinUI controls
+- Custom Controls for 
 
-## How to use this template
-
-1. Check out this repository
-2. Delete the `.git` folder
-3. Git init this repository and start working on your project!
-4. Prior to submitting your request for publication, make sure to review the
-   [Open Source guidelines for publications](https://nventive.visualstudio.com/Internal/_wiki/wikis/Internal_wiki?wikiVersion=GBwikiMaster&pagePath=%2FOpen%20Source%2FPublishing&pageId=7120).
-
-The following is the template for the final README.md file:
-
----
-
-# Project Title
-
-{Project tag line}
-
-{Small description of the purpose of the project}
+Platform support: 
+- WinUI / UWP
+- iOS
+- Android
+- WebAssembly
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
@@ -27,6 +17,8 @@ The following is the template for the final README.md file:
 
 {Instructions to quickly get started using the project: pre-requisites, packages
 to install, sample code, etc.}
+
+// TODO
 
 ## Features
 
@@ -51,4 +43,4 @@ Be mindful of our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Acknowledgments
 
-{List similar projects, inspirations, etc. related to this project.}
+[Material Design](https://material.io/design)
