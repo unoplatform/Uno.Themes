@@ -1,0 +1,45 @@
+﻿<Page
+	x:Class="Uno.Material.Samples.MainPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="using:Uno.Material.Samples"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:content="using:Uno.Material.Samples.Content"
+	mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup>
+				<VisualState x:Name="wide">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="1024" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="ControlsList.Orientation"
+								Value="Horizontal" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<CommandBar Content="Material Styles"
+					Style="{StaticResource MaterialCommandBarStyle}" />
+
+		<ScrollViewer Grid.Row="1">
+			<StackPanel x:Name="ControlsList">
+				<content:ButtonOverview MinWidth="320" />
+				<content:TextBoxOverview MinWidth="320"
+										 MaxWidth="350" />
+				<content:CheckBoxOverview MinWidth="320" />
+				<content:RadioButtonOverview MinWidth="320" />
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>
