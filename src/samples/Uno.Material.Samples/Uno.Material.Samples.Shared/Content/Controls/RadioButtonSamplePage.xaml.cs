@@ -13,13 +13,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Uno.Material.Samples.Content
+namespace Uno.Material.Samples.Content.Controls
 {
-    public sealed partial class TextBoxOverview : UserControl
-    {
-        public TextBoxOverview()
-        {
-            this.InitializeComponent();
-        }
-    }
+	public sealed partial class RadioButtonSamplePage : Page
+	{
+		public RadioButtonSamplePage()
+		{
+			this.InitializeComponent();
+		}
+	}
 }
