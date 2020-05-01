@@ -13,11 +13,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Uno.Material.Samples.Content
+namespace Uno.Material.Samples.Content.Controls
 {
-	public sealed partial class CheckBoxOverview : UserControl
+	public sealed partial class ButtonSamplePage : Page
 	{
-		public CheckBoxOverview()
+		public ButtonSamplePage()
 		{
 			this.InitializeComponent();
 		}
