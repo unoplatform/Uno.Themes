@@ -39,9 +39,11 @@ namespace Uno.Material.Samples
             NavView.MenuItems.Add(new NavigationViewItemHeader() { Content = "Controls" });
             NavView.MenuItems.Add(new NavigationViewItem()
             { Content = "Button Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ButtonSamplePage" });
-            NavView.MenuItems.Add(new NavigationViewItem()
-            { Content = "TextBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
-            NavView.MenuItems.Add(new NavigationViewItem()
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "TextBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "TextBlock Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
             { Content = "CheckBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
             NavView.MenuItems.Add(new NavigationViewItem()
             { Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
@@ -88,10 +90,13 @@ namespace Uno.Material.Samples
                 case "ButtonSamplePage":
                     ContentFrame.Navigate(typeof(ButtonSamplePage));
                     break;
-                case "TextBoxSamplePage":
-                    ContentFrame.Navigate(typeof(TextBoxSamplePage));
-                    break;
-                case "CheckBoxSamplePage":
+				case "TextBoxSamplePage":
+					ContentFrame.Navigate(typeof(TextBoxSamplePage));
+					break;
+				case "TextBlockSamplePage":
+					ContentFrame.Navigate(typeof(TextBlockSamplePage));
+					break;
+				case "CheckBoxSamplePage":
                     ContentFrame.Navigate(typeof(CheckBoxSamplePage));
                     break;
                 case "RadioButtonSamplePage":
