@@ -1,0 +1,45 @@
+﻿<Page x:Class="Uno.Material.Samples.SamplesPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Material.Samples.Shared"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  mc:Ignorable="d">
+
+	<Grid toolkit:VisibleBoundsPadding.PaddingMask="All">
+		<NavigationView x:Name="NavView"
+						ItemInvoked="NavView_ItemInvoked"
+						Loaded="NavView_Loaded"
+						PaneTitle="Uno Material"
+						Margin="0,12,0,0"
+						IsSettingsVisible="true"
+						IsTabStop="False"
+						PaneDisplayMode="Auto"
+						IsBackButtonVisible="Collapsed">
+
+			<!-- Search Box -->
+			<NavigationView.AutoSuggestBox>
+				<AutoSuggestBox x:Name="SearchBox"
+								VerticalAlignment="Center"
+								PlaceholderText="Search"
+								QueryIcon="Find"
+								RequestedTheme="Light">
+				</AutoSuggestBox>
+			</NavigationView.AutoSuggestBox>
+
+			<!-- NavigationView Items -->
+			<Frame x:Name="ContentFrame">
+				<Frame.ContentTransitions>
+					<TransitionCollection>
+						<NavigationThemeTransition>
+							<NavigationThemeTransition.DefaultNavigationTransitionInfo>
+								<EntranceNavigationTransitionInfo />
+							</NavigationThemeTransition.DefaultNavigationTransitionInfo>
+						</NavigationThemeTransition>
+					</TransitionCollection>
+				</Frame.ContentTransitions>
+			</Frame>
+		</NavigationView>
+	</Grid>
+</Page>

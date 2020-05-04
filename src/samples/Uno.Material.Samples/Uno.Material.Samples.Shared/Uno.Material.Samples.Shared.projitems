@@ -18,40 +18,47 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\ButtonOverview.xaml.cs">
-      <DependentUpon>ButtonOverview.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ButtonSamplePage.xaml.cs">
+      <DependentUpon>ButtonSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\CheckBoxOverview.xaml.cs">
-      <DependentUpon>CheckBoxOverview.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\CheckBoxSamplePage.xaml.cs">
+      <DependentUpon>CheckBoxSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\RadioButtonOverview.xaml.cs">
-      <DependentUpon>RadioButtonOverview.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\RadioButtonSamplePage.xaml.cs">
+      <DependentUpon>RadioButtonSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\TextBoxOverview.xaml.cs">
-      <DependentUpon>TextBoxOverview.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\TextBoxSamplePage.xaml.cs">
+      <DependentUpon>TextBoxSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\ColorsSamplePage.xaml.cs">
+      <DependentUpon>ColorsSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SamplesPage.xaml.cs">
+      <DependentUpon>SamplesPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Content\ButtonOverview.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ButtonSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\CheckBoxOverview.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\CheckBoxSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\RadioButtonOverview.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\RadioButtonSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\TextBoxOverview.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\TextBoxSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\ColorsSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SamplesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -61,5 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Assets\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Content\Controls\" />
   </ItemGroup>
 </Project>
