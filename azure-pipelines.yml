@@ -1,9 +1,71 @@
 trigger:
-- master
+  branches:
+    include:
+      - master
+      - release/beta/*
+      - release/stable/*
+      - feature/*
 
-pool:
-  vmImage: 'windows-2019'
+pr: 
+  branches:
+    include:
+      - master
+      - release/beta/*
+      - release/stable/*
 
-steps:
-- script: echo Change me
-  displayName: 'Run a one-line script'
+variables:
+  windowsVMImage: 'windows-2019'
+  linuxVMImage: 'ubuntu-16.04'
+  macOSVMImage: 'macOS-10.15'
+  xCodeRoot: '/Applications/Xcode_11.3.app'
+  XamarinSDKVersion: 6_6_0
+  NUGET_VERSION: 5.4.0
+  SolutionFileName: Uno.Material.sln
+  NugetPackagesArtifactName: Packages
+  ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build_on_Windows # Build samples possible on a windows machine
+    strategy:
+      maxParallel: 3
+      matrix:
+        Android:
+          ApplicationConfiguration: Release
+          ApplicationPlatform: Android
+          ArtifactName: Android
+        UWP:
+          ApplicationConfiguration: Release
+          ApplicationPlatform: UWP_x64
+          ArtifactName: UWP
+        Packages:
+          ApplicationConfiguration: Release
+          ApplicationPlatform: Packages
+          GeneratePackageOnBuild: true
+          ArtifactName: $(NugetPackagesArtifactName)
+    pool:
+      vmImage: $(windowsVMImage)
+      
+    variables:
+      PackageOutputPath: $(Build.ArtifactStagingDirectory) # Path where nuget packages will be copied to.
+
+    steps:
+      - template: build/stage-build.yml
+
+
+- stage: Release
+  # Only release when the build is not for a Pull Request.
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  jobs:
+  - job: Publish_NuGet_Internal
+  
+    pool:
+      vmImage: $(windowsVMImage)
+
+    steps:
+    - template: build/stage-release.yml
+
+
