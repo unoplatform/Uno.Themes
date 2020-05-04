@@ -1,0 +1,21 @@
+steps:
+- checkout: none
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: current
+    downloadType: single
+    artifactName: $(NugetPackagesArtifactName)
+
+- task: NuGetToolInstaller@0
+  displayName: 'Install NuGet $(NUGET_VERSION)'
+  inputs:
+    versionSpec: $(NUGET_VERSION)
+    checkLatest: false
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/$(NugetPackagesArtifactName)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'unoplatformdev'
