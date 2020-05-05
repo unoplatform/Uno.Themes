@@ -13,25 +13,60 @@
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<CornerRadius x:Key="ButtonCornerRadius">4</CornerRadius>
+	<!-- Contained Button Colors and Variables -->
+	<SolidColorBrush x:Key="ButtonContainedBackgroundColor"
+					 Color="{StaticResource PrimaryColor}" />
+	<SolidColorBrush x:Key="ButtonContainedLabelColor"
+					 Color="{StaticResource OnPrimaryColor}" />
+
+	<!-- Outlined Button Variables -->
+	<SolidColorBrush x:Key="ButtonOutlinedBackgroundColor"
+					 Color="{StaticResource OnPrimaryColor}" />
+	<SolidColorBrush x:Key="ButtonOutlinedStrokeColor"
+					 Color="{StaticResource PrimaryColor}" />
+	<SolidColorBrush x:Key="ButtonOutlinedLabelColor"
+					 Color="{StaticResource PrimaryColor}" />
+	<Thickness x:Key="ButtonOutlinedStrokeWidth">1</Thickness>
+
+	<!-- Text Button Variables -->
+	<SolidColorBrush x:Key="ButtonTextLabelColor"
+					 Color="{StaticResource PrimaryColor}" />
+
+	<!-- All Button Variables -->
+	<CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
+	<FontFamily x:Key="ButtonFontFamily">Roboto</FontFamily>
+	<x:Double x:Key="ButtonFontSize">14</x:Double>
 	<Thickness x:Key="ButtonPadding">16,8</Thickness>
+
+	<SolidColorBrush x:Key="BlackLightHover"
+					 Color="{StaticResource BlackLightHoverColor}" />
+	<SolidColorBrush x:Key="BlackLightFocused"
+					 Color="{StaticResource BlackLightFocusedColor}" />
+	<SolidColorBrush x:Key="BlackLightPressed"
+					 Color="{StaticResource BlackLightPressedColor}" />
+	<SolidColorBrush x:Key="BlackLightSelected"
+					 Color="{StaticResource BlackLightSelectedColor}" />
 
 	<Style x:Key="ContainedMaterialButtonStyle"
 		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{StaticResource Color01Brush}" />
+				Value="{StaticResource ButtonContainedLabelColor}" />
 		<Setter Property="Background"
-				Value="{StaticResource PrimaryColor01Brush}" />
+				Value="{StaticResource ButtonContainedBackgroundColor}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Padding"
 				Value="{StaticResource ButtonPadding}" />
 		<!--<Setter Property="CornerRadius"
-				Value="{StaticResource ButtonCornerRadius}" />-->
+				Value="{StaticResource ButtonBorderRadius}" />-->
 		<Setter Property="MinHeight"
 				Value="40" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource ButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource ButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
-				Value="False" />
+				Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -39,41 +74,98 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{TemplateBinding CornerRadius}">
+						  CornerRadius="{StaticResource ButtonBorderRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="0" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+										<Setter Target="PressedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="0:0:0.3"
+														 BeginTime="0:0:1"
+														 From="0"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource Color03Brush}" />
+												Value="{StaticResource OnSurfaceDisabledColor}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource Color03Brush}" />
+												Value="{StaticResource OnSurfaceMediumColor}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="Overlay.Opacity"
+										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
-										<Setter Target="Overlay.Opacity"
+										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Border x:Name="Overlay"
-								CornerRadius="{TemplateBinding CornerRadius}"
-								Background="{StaticResource Color03Brush}"
+								Background="{StaticResource OnSurfaceColor}"
+								Opacity="0" />
+
+						<Border x:Name="HoverOverlay"
+								Background="{StaticResource BlackLightHover}"
+								Opacity="0" />
+
+						<Border x:Name="FocusedOverlay"
+								Background="{StaticResource BlackLightFocused}"
+								Opacity="0" />
+
+						<Border x:Name="PressedOverlay"
+								CornerRadius="14"
+								Background="{StaticResource BlackLightPressed}"
+								Margin="22,0"
+								Width="48"
+								Opacity="0" />
+
+						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
+						<Border x:Name="SelectedOverlay"
+								Background="{StaticResource BlackLightSelected}"
 								Opacity="0" />
 
 						<ContentPresenter x:Name="ContentPresenter"
@@ -83,6 +175,8 @@
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
+										  FontFamily="{TemplateBinding FontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
 										  Padding="{TemplateBinding Padding}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -93,17 +187,28 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="OutlineMaterialButtonStyle"
-		   TargetType="Button"
-		   BasedOn="{StaticResource ContainedMaterialButtonStyle}">
+	<Style x:Key="OutlinedMaterialButtonStyle"
+		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryColor01Brush}" />
+				Value="{StaticResource ButtonOutlinedLabelColor}" />
 		<Setter Property="Background"
-				Value="{StaticResource Color01Brush}" />
+				Value="{StaticResource ButtonOutlinedBackgroundColor}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource Color03Brush}" />
+				Value="{StaticResource ButtonOutlinedStrokeColor}" />
 		<Setter Property="BorderThickness"
-				Value="1" />
+				Value="{StaticResource ButtonOutlinedStrokeWidth}" />
+		<Setter Property="Padding"
+				Value="{StaticResource ButtonPadding}" />
+		<!--<Setter Property="CornerRadius"
+				Value="{StaticResource ButtonBorderRadius}" />-->
+		<Setter Property="MinHeight"
+				Value="40" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource ButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource ButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -111,54 +216,111 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{TemplateBinding CornerRadius}">
+						  CornerRadius="{StaticResource ButtonBorderRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="0" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+										<Setter Target="PressedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+										<Setter Target="Root.BorderBrush"
+												Value="{StaticResource OnSurfaceDisabledColor}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+										<Setter Target="Root.BorderBrush"
+												Value="{StaticResource OnSurfaceDisabledColor}" />
+									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="0:0:0.3"
+														 BeginTime="0:0:1"
+														 From="0"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background"
-												Value="{StaticResource Color03Brush}" />
-										<Setter Target="ContentPresenter.Opacity"
-												Value="0.5" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource OnSurfaceDisabledColor}" />
+										<Setter Target="Root.BorderBrush"
+												Value="{StaticResource OnSurfaceDisabledColor}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource PrimaryColor01Brush}" />
-										<Setter Target="Overlay.Opacity"
+										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource PrimaryColor01Brush}" />
-										<Setter Target="Overlay.Opacity"
+										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Border x:Name="Overlay"
-								CornerRadius="{TemplateBinding CornerRadius}"
-								Background="{StaticResource Color03Brush}"
+								Background="{StaticResource OnSurfaceColor}"
+								Opacity="0" />
+
+						<Border x:Name="HoverOverlay"
+								Background="{StaticResource BlackLightHover}"
+								Opacity="0" />
+
+						<Border x:Name="FocusedOverlay"
+								Background="{StaticResource BlackLightFocused}"
+								Opacity="0" />
+
+						<Border x:Name="PressedOverlay"
+								CornerRadius="14"
+								Background="{StaticResource BlackLightPressed}"
+								Margin="22,0"
+								Width="48"
+								Opacity="0" />
+
+						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
+						<Border x:Name="SelectedOverlay"
+								Background="{StaticResource BlackLightSelected}"
 								Opacity="0" />
 
 						<ContentPresenter x:Name="ContentPresenter"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  CornerRadius="{TemplateBinding CornerRadius}"
+										  CornerRadius="{StaticResource ButtonBorderRadius}"
+										  FontFamily="{TemplateBinding FontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
 										  Padding="{TemplateBinding Padding}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -169,15 +331,131 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="BorderlessMaterialButtonStyle"
+	<Style x:Key="TextMaterialButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource ContainedMaterialButtonStyle}">
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryColor01Brush}" />
+				Value="{StaticResource ButtonTextLabelColor}" />
 		<Setter Property="Background"
 				Value="{StaticResource TransparentBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{StaticResource ButtonBorderRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="0" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+										<Setter Target="PressedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="0:0:0.3"
+														 BeginTime="0:0:1"
+														 From="0"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource OnSurfaceDisabledColor}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="Overlay"
+								Background="{StaticResource OnSurfaceColor}"
+								Opacity="0" />
+
+						<Border x:Name="HoverOverlay"
+								Background="{StaticResource BlackLightHover}"
+								Opacity="0" />
+
+						<Border x:Name="FocusedOverlay"
+								Background="{StaticResource BlackLightFocused}"
+								Opacity="0" />
+
+						<Border x:Name="PressedOverlay"
+								CornerRadius="14"
+								Background="{StaticResource BlackLightPressed}"
+								Margin="22,0"
+								Width="48"
+								Opacity="0" />
+
+						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
+						<Border x:Name="SelectedOverlay"
+								Background="{StaticResource BlackLightSelected}"
+								Opacity="0" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  BorderBrush="{TemplateBinding BorderBrush}"
+										  BorderThickness="{TemplateBinding BorderThickness}"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  CornerRadius="{TemplateBinding CornerRadius}"
+										  FontFamily="{TemplateBinding FontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 </ResourceDictionary>
