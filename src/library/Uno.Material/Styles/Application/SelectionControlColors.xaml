@@ -8,6 +8,10 @@
 	
 	-->
 
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
 	<SolidColorBrush x:Key="SelectControlBackgroundColor"
 					 Color="{StaticResource PrimaryColor}" />
 	<SolidColorBrush x:Key="SelectControlIndicatorColor"
@@ -17,20 +21,27 @@
 					 Opacity="0.74" />
 	<SolidColorBrush x:Key="SelectControlToggleOnButtonColor"
 					 Color="{StaticResource PrimaryColor}" />
+	<!-- TODO: This is the OnPrimaryDisabledBrush, remove when brush issue #41 is fixed -->
 	<SolidColorBrush x:Key="SelectControlToggleOnBackgroundColor"
-					 Color="{StaticResource OnPrimaryColor}"
-					 Opacity="0.74"/>
+					 Color="#615B4CF5" />
 	<SolidColorBrush x:Key="SelectControlToggleOnFocusBackgroundColor"
 					 Color="{StaticResource PrimaryColor}"
-					 Opacity="0.1"/>
+					 Opacity="0.1" />
 	<SolidColorBrush x:Key="SelectControlToggleOffButtonColor"
 					 Color="{StaticResource SurfaceColor}" />
 	<SolidColorBrush x:Key="SelectControlToggleOffHoverButtonColor"
 					 Color="{StaticResource OnSurfaceColor}"
-					 Opacity="0.05"/>
+					 Opacity="0.05" />
 	<SolidColorBrush x:Key="SelectControlToggleOffFocusButtonColor"
 					 Color="{StaticResource OnSurfaceColor}"
-					 Opacity="0.08"/>
+					 Opacity="0.08" />
+	<!-- TODO: This is the OnSurfaceDisabledBrush, remove when brush issue #41 is fixed -->
 	<SolidColorBrush x:Key="SelectControlToggleOffBackgroundColor"
-					 Color="{StaticResource OnSurfaceDisabledColor}" />
+					 Color="#61000000" />
+	<!-- TODO: This is the OnPrimaryMediumBrush, remove when brush issue #41 is fixed -->
+	<SolidColorBrush x:Key="SelectControlToggleOnDisabledButtonColor"
+					 Color="#B6A8FB" />
+	<!-- TODO: This is a color not defined by a name in zeplin -->
+	<SolidColorBrush x:Key="SelectControlToggleOnDisabledBackgroundColor"
+					 Color="#61BB86FC" />
 </ResourceDictionary>

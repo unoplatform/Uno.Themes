@@ -67,14 +67,15 @@
 
 	<!-- OnPrimary Brushes -->
 	<!-- Only opacity should differ -->
+	<!-- Issue #41 TODO: SolidColorBrushes set this way do not function with android thumbtints and tracktints -->
 	<SolidColorBrush x:Key="OnPrimaryBrush"
-					 Color="{StaticResource OnPrimaryColor}"
+					 Color="{StaticResource PrimaryColor}"
 					 Opacity="1.0"/>
 	<SolidColorBrush x:Key="OnPrimaryMediumBrush"
-					 Color="{StaticResource OnPrimaryColor}"
+					 Color="{StaticResource PrimaryColor}"
 					 Opacity="0.74"/>
 	<SolidColorBrush x:Key="OnPrimaryDisabledBrush"
-					 Color="{StaticResource OnPrimaryColor}"
+					 Color="{StaticResource PrimaryColor}"
 					 Opacity="0.38"/>
 	<SolidColorBrush x:Key="OnPrimaryHoverBrush"
 					 Color="{StaticResource OnPrimaryColor}"
@@ -137,7 +138,7 @@
 		but instead of being based as a gray shade, they would be a shade of the primary color?
 
 	-->
-
+	
 	<!-- 
 	*
 	*

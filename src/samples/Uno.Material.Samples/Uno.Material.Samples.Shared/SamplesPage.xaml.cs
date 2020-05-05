@@ -47,9 +47,11 @@ namespace Uno.Material.Samples
             { Content = "CheckBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
             NavView.MenuItems.Add(new NavigationViewItem()
             { Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "ToggleSwitch Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
 
-            // Set the initial SelectedItem 
-            foreach (NavigationViewItemBase item in NavView.MenuItems)
+			// Set the initial SelectedItem 
+			foreach (NavigationViewItemBase item in NavView.MenuItems)
             {
                 if (item is NavigationViewItem && item.Tag.ToString() == "TextBoxSamplePage")
                 {
@@ -102,7 +104,10 @@ namespace Uno.Material.Samples
                 case "RadioButtonSamplePage":
                     ContentFrame.Navigate(typeof(RadioButtonSamplePage));
                     break;
-            }
+				case "ToggleSwitchSamplePage":
+					ContentFrame.Navigate(typeof(ToggleSwitchSamplePage));
+					break;
+			}
         }
 
         public void SetHeader(string header)
