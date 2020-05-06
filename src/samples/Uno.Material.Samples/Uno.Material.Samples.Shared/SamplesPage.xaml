@@ -7,17 +7,16 @@
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  mc:Ignorable="d">
 
-	<Grid toolkit:VisibleBoundsPadding.PaddingMask="All">
+	<Grid toolkit:VisibleBoundsPadding.PaddingMask="All"
+		  Background="{StaticResource BackgroundBrush}">
 		<NavigationView x:Name="NavView"
 						ItemInvoked="NavView_ItemInvoked"
 						Loaded="NavView_Loaded"
 						PaneTitle="Uno Material"
 						Margin="0,12,0,0"
-						IsSettingsVisible="true"
 						IsTabStop="False"
 						PaneDisplayMode="Auto"
 						IsBackButtonVisible="Collapsed">
-
 			<!-- Search Box -->
 			<NavigationView.AutoSuggestBox>
 				<AutoSuggestBox x:Name="SearchBox"
