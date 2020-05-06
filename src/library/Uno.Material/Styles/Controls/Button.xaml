@@ -16,22 +16,22 @@
 
 	<!-- Contained Button Colors and Variables -->
 	<SolidColorBrush x:Key="ButtonContainedBackgroundColor"
-					 Color="{StaticResource PrimaryColor}" />
+					 Color="{ThemeResource PrimaryColor}" />
 	<SolidColorBrush x:Key="ButtonContainedLabelColor"
-					 Color="{StaticResource OnPrimaryColor}" />
+					 Color="{ThemeResource OnPrimaryColor}" />
 
 	<!-- Outlined Button Variables -->
 	<SolidColorBrush x:Key="ButtonOutlinedBackgroundColor"
-					 Color="{StaticResource OnPrimaryColor}" />
+					 Color="{ThemeResource OnPrimaryColor}" />
 	<SolidColorBrush x:Key="ButtonOutlinedStrokeColor"
-					 Color="{StaticResource PrimaryColor}" />
+					 Color="{ThemeResource PrimaryColor}" />
 	<SolidColorBrush x:Key="ButtonOutlinedLabelColor"
-					 Color="{StaticResource PrimaryColor}" />
+					 Color="{ThemeResource PrimaryColor}" />
 	<Thickness x:Key="ButtonOutlinedStrokeWidth">1</Thickness>
 
 	<!-- Text Button Variables -->
 	<SolidColorBrush x:Key="ButtonTextLabelColor"
-					 Color="{StaticResource PrimaryColor}" />
+					 Color="{ThemeResource PrimaryColor}" />
 
 	<!-- All Button Variables -->
 	<CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
@@ -49,15 +49,15 @@
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Padding"
-				Value="{StaticResource ButtonPadding}" />
+				Value="{ThemeResource ButtonPadding}" />
 		<!--<Setter Property="CornerRadius"
 				Value="{StaticResource ButtonBorderRadius}" />-->
 		<Setter Property="MinHeight"
 				Value="40" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource ButtonFontFamily}" />
+				Value="{ThemeResource ButtonFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource ButtonFontSize}" />
+				Value="{ThemeResource ButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 		<Setter Property="Template">
@@ -107,9 +107,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceMediumBrush}" />
+												Value="{ThemeResource OnSurfaceMediumBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
