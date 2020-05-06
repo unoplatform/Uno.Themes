@@ -1,17 +1,54 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:converters="using:Uno.Material.Converters">
 
-	<CornerRadius x:Key="TextBoxCornerRadius">4</CornerRadius>
-	<Thickness x:Key="TextBoxPadding">12,4,12,4</Thickness>
+	<!-- Label Resources -->
+	<StaticResource x:Key="TextBoxLabelDefaultColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+	<x:Double x:Key="TextBoxLabelFontSize">16</x:Double>
+	<StaticResource x:Key="TextBoxLabelFocusColorBrush" ResourceKey="PrimaryBrush" />
+	<StaticResource x:Key="TextBoxInputDefaultColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxInputFocusColorBrush" ResourceKey="OnSurfaceBrush" />
+
+	<!-- Icon Resources -->
+	<StaticResource x:Key="TextBoxIconColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+
+	<!-- Filled Resources -->
+	<SolidColorBrush x:Key="TextBoxFilledBackgroundColorBrush"
+					 Color="{StaticResource OnSurfaceColor}"
+					 Opacity="0.12" />
+	<StaticResource x:Key="TextBoxFilledIndicatorColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+	<x:Double x:Key="TextBoxStrokeWidth">1</x:Double>
+	<StaticResource x:Key="TextBoxFilledFocusIndicatorColorBrush" ResourceKey="PrimaryBrush" />
+	<x:Double x:Key="TextBoxFocusStrokeWidth">2</x:Double>
+
+	<!-- Outline Resources -->
+	<StaticResource x:Key="TextBoxOutlinedStrokeColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxOutlinedFocusStrokeColorBrush" ResourceKey="PrimaryBrush" />
+	<x:Double x:Key="TextBoxOutlinedStrokeWidth">1</x:Double>
+
+	<!-- Corner Radius Resources -->
+	<Thickness x:Key="TextBoxFilledBorderRadius">4,4,0,0</Thickness>
+	<Thickness x:Key="TextBoxOutlinedBorderRadius">4</Thickness>
+
+	<!-- Converters -->
+	<converters:FromEmptyStringToValueConverter x:Name="EmptyToFalse"
+												NotNullOrEmptyValue="True"
+												NullOrEmptyValue="False" />
+
+	<converters:FromEmptyStringToValueConverter x:Name="EmptyToTrue"
+												NotNullOrEmptyValue="False"
+												NullOrEmptyValue="True" />
 
 	<Style x:Key="DefaultMaterialTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Foreground"
-				Value="{StaticResource Color02Brush}" />
+				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
+		<Setter Property="PlaceholderForeground"
+				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource Color03Brush}" />
+				Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource Color04Brush}" />
+				Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0,0,0,1" />
 		<Setter Property="HorizontalContentAlignment"
@@ -19,11 +56,9 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Padding"
-				Value="{StaticResource TextBoxPadding}" />
+				Value="12,4" />
 		<Setter Property="MinHeight"
-				Value="40" />
-		<!--<Setter Property="CornerRadius"
-				Value="0" />-->
+				Value="50" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">
@@ -42,7 +77,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentElement.Opacity"
 												Value="{StaticResource ControlPressedOpacity}" />
-										<Setter Target="PlaceholderTextElement.Opacity"
+										<Setter Target="PlaceholderElement.Opacity"
 												Value="{StaticResource ControlPressedOpacity}" />
 										<Setter Target="Root.BorderThickness"
 												Value="0" />
@@ -51,24 +86,60 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource PrimaryColor01Brush}" />
-										<Setter Target="DeleteButton.Foreground"
-												Value="{StaticResource PrimaryColor01Brush}" />
+												Value="{StaticResource TextBoxFilledFocusIndicatorColorBrush}" />
+										<Setter Target="PlaceholderElement.Foreground"
+												Value="{StaticResource TextBoxLabelFocusColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderTextElement.Visibility"
-												Value="Collapsed" />
 										<Setter Target="DeleteButton.Visibility"
 												Value="Visible" />
-										<Setter Target="DeleteButton.Foreground"
-												Value="{StaticResource PrimaryColor01Brush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="ButtonCollapsed" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="HeaderStates">
+								<VisualState x:Name="NotEmpty">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="Transform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="0:0:0.15"
+														 To="-16" />
+										<DoubleAnimation Storyboard.TargetName="Transform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.15"
+														 To="0.7" />
+										<DoubleAnimation Storyboard.TargetName="Transform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.15"
+														 To="0.7" />
+									</Storyboard>
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+								<VisualState x:Name="Empty">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="Transform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="0:0:0.15"
+														 To="0" />
+										<DoubleAnimation Storyboard.TargetName="Transform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.15"
+														 To="1" />
+										<DoubleAnimation Storyboard.TargetName="Transform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.15"
+														 To="1" />
+									</Storyboard>
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
@@ -97,7 +168,7 @@
 
 												<Path x:Name="GlyphElement"
 													  Data="M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z"
-													  Fill="{TemplateBinding Foreground}"
+													  Fill="{StaticResource TextBoxIconColorBrush}"
 													  VerticalAlignment="Center"
 													  HorizontalAlignment="Center"
 													  Stretch="Uniform"
@@ -130,169 +201,27 @@
 									  AutomationProperties.AccessibilityView="Raw"
 									  ZoomMode="Disabled" />
 
-						<TextBlock x:Name="PlaceholderTextElement"
-								   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={StaticResource Color04Brush}}"
+						<TextBlock x:Name="PlaceholderElement"
+								   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
 								   Margin="{TemplateBinding Padding}"
 								   Text="{TemplateBinding PlaceholderText}"
 								   TextAlignment="{TemplateBinding TextAlignment}"
 								   TextWrapping="{TemplateBinding TextWrapping}"
 								   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 								   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-								   IsHitTestVisible="False" />
-						
+								   IsHitTestVisible="False"
+								   RenderTransformOrigin="0,0.5">
+							<TextBlock.RenderTransform>
+								<CompositeTransform x:Name="Transform"
+													ScaleX="0.7"
+													ScaleY="0.7"
+													TranslateY="-16" />
+							</TextBlock.RenderTransform>
+						</TextBlock>
+
 						<Button x:Name="DeleteButton"
 								Grid.Column="1"
 								Style="{StaticResource DeleteButtonStyle}"
-								Foreground="{TemplateBinding BorderBrush}"
-								IsTabStop="False"
-								Visibility="Collapsed"
-								AutomationProperties.AccessibilityView="Raw"
-								MinHeight="34"
-								MinWidth="34"
-								VerticalAlignment="Stretch" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
-	<Style x:Key="DefaultMaterialTextBoxStyle2"
-		   TargetType="TextBox">
-		<Setter Property="Foreground"
-				Value="{StaticResource Color02Brush}" />
-		<Setter Property="Background"
-				Value="{StaticResource Color03Brush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource Color04Brush}" />
-		<Setter Property="BorderThickness"
-				Value="0,0,0,1" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Padding"
-				Value="{StaticResource TextBoxPadding}" />
-		<Setter Property="MinHeight"
-				Value="44" />
-		<!--<Setter Property="CornerRadius"
-				Value="0" />-->
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="TextBox">
-					<Grid x:Name="Root"
-						  Padding="{TemplateBinding Padding}"
-						  Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{TemplateBinding CornerRadius}">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource ControlPressedOpacity}" />
-										<Setter Target="PlaceholderTextElement.Opacity"
-												Value="{StaticResource ControlPressedOpacity}" />
-										<Setter Target="Root.BorderThickness"
-												Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource PrimaryColor01Brush}" />
-										<Setter Target="DeleteButton.Foreground"
-												Value="{StaticResource PrimaryColor01Brush}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-							<VisualStateGroup x:Name="ButtonStates">
-								<VisualState x:Name="ButtonVisible">
-									<VisualState.Setters>
-										<Setter Target="PlaceholderTextElement.Visibility"
-												Value="Collapsed" />
-										<Setter Target="DeleteButton.Visibility"
-												Value="Visible" />
-										<Setter Target="DeleteButton.Foreground"
-												Value="{StaticResource PrimaryColor01Brush}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="ButtonCollapsed" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Grid.Resources>
-							<Style x:Name="DeleteButtonStyle2"
-								   TargetType="Button">
-								<Setter Property="Template">
-									<Setter.Value>
-										<ControlTemplate TargetType="Button">
-											<Grid x:Name="ButtonLayoutGrid"
-												  Background="{StaticResource TransparentBrush}">
-
-												<VisualStateManager.VisualStateGroups>
-													<VisualStateGroup x:Name="CommonStates">
-														<VisualState x:Name="Normal" />
-														<VisualState x:Name="PointerOver" />
-														<VisualState x:Name="Pressed" />
-														<VisualState x:Name="Disabled">
-															<VisualState.Setters>
-																<Setter Target="ButtonLayoutGrid.Opacity"
-																		Value="0" />
-															</VisualState.Setters>
-														</VisualState>
-													</VisualStateGroup>
-												</VisualStateManager.VisualStateGroups>
-
-												<Path x:Name="GlyphElement"
-													  Data="M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z"
-													  Fill="{TemplateBinding Foreground}"
-													  VerticalAlignment="Center"
-													  HorizontalAlignment="Center"
-													  Stretch="Uniform"
-													  Width="16"
-													  Height="16"
-													  AutomationProperties.AccessibilityView="Raw" />
-											</Grid>
-										</ControlTemplate>
-									</Setter.Value>
-								</Setter>
-							</Style>
-						</Grid.Resources>
-
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
-
-						<StackPanel>
-							<TextBlock x:Name="LabelTextElement"
-									   FontSize="8"
-									   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={StaticResource Color04Brush}}"
-									   Text="{TemplateBinding PlaceholderText}"
-									   IsHitTestVisible="False" />
-							
-							<ScrollViewer x:Name="ContentElement"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-										  IsTabStop="False"
-										  AutomationProperties.AccessibilityView="Raw"
-										  ZoomMode="Disabled" />
-						</StackPanel>
-
-						<Button x:Name="DeleteButton"
-								Grid.Column="1"
-								Style="{StaticResource DeleteButtonStyle2}"
 								Foreground="{TemplateBinding BorderBrush}"
 								IsTabStop="False"
 								Visibility="Collapsed"
@@ -313,8 +242,8 @@
 				Value="{StaticResource Color01Brush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
-		<!--<Setter Property="CornerRadius"
-				Value="{StaticResource TextBoxCornerRadius}" />-->
+		<Setter Property="CornerRadius"
+				Value="4" />
 	</Style>
 
 </ResourceDictionary>
