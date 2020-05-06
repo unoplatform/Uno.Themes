@@ -38,14 +38,6 @@
 	<x:Double x:Key="ButtonFontSize">14</x:Double>
 	<Thickness x:Key="ButtonPadding">16,8</Thickness>
 
-	<SolidColorBrush x:Key="BlackLightHover"
-					 Color="{StaticResource BlackLightHoverColor}" />
-	<SolidColorBrush x:Key="BlackLightFocused"
-					 Color="{StaticResource BlackLightFocusedColor}" />
-	<SolidColorBrush x:Key="BlackLightPressed"
-					 Color="{StaticResource BlackLightPressedColor}" />
-	<SolidColorBrush x:Key="BlackLightSelected"
-					 Color="{StaticResource BlackLightSelectedColor}" />
 
 	<Style x:Key="ContainedMaterialButtonStyle"
 		   TargetType="Button">
@@ -85,8 +77,6 @@
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="0" />
-										<Setter Target="PressedOverlay.Opacity"
-												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOver">
@@ -116,9 +106,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSurfaceDisabledColor}" />
+												Value="{StaticResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceMediumColor}" />
+												Value="{StaticResource OnSurfaceMediumBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -144,28 +134,21 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Border x:Name="Overlay"
-								Background="{StaticResource OnSurfaceColor}"
-								Opacity="0" />
-
 						<Border x:Name="HoverOverlay"
-								Background="{StaticResource BlackLightHover}"
+								Background="{StaticResource OnPrimaryHoverBrush}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource BlackLightFocused}"
+								Background="{StaticResource OnPrimaryFocusedBrush}"
 								Opacity="0" />
 
 						<Border x:Name="PressedOverlay"
-								CornerRadius="14"
-								Background="{StaticResource BlackLightPressed}"
-								Margin="22,0"
-								Width="48"
+								Background="{StaticResource OnPrimaryPressedBrush}"
 								Opacity="0" />
 
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource BlackLightSelected}"
+								Background="{StaticResource OnPrimarySelectedBrush}"
 								Opacity="0" />
 
 						<ContentPresenter x:Name="ContentPresenter"
@@ -227,8 +210,6 @@
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="0" />
-										<Setter Target="PressedOverlay.Opacity"
-												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOver">
@@ -236,7 +217,7 @@
 										<Setter Target="HoverOverlay.Opacity"
 												Value="1" />
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource OnSurfaceDisabledColor}" />
+												Value="{StaticResource OnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
@@ -244,7 +225,7 @@
 										<Setter Target="PressedOverlay.Opacity"
 												Value="1" />
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource OnSurfaceDisabledColor}" />
+												Value="{StaticResource OnSurfacePressedBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
@@ -262,9 +243,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledColor}" />
+												Value="{StaticResource OnSurfaceDisabledBrush}" />
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource OnSurfaceDisabledColor}" />
+												Value="{StaticResource OnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -290,28 +271,21 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Border x:Name="Overlay"
-								Background="{StaticResource OnSurfaceColor}"
-								Opacity="0" />
-
 						<Border x:Name="HoverOverlay"
-								Background="{StaticResource BlackLightHover}"
+								Background="{StaticResource OnSurfaceHoverBrush}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource BlackLightFocused}"
+								Background="{StaticResource OnSurfaceFocusedBrush}"
 								Opacity="0" />
 
 						<Border x:Name="PressedOverlay"
-								CornerRadius="14"
-								Background="{StaticResource BlackLightPressed}"
-								Margin="22,0"
-								Width="48"
+								Background="{StaticResource OnSurfacePressedBrush}"
 								Opacity="0" />
 
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource BlackLightSelected}"
+								Background="{StaticResource OnSurfaceSelectedBrush}"
 								Opacity="0" />
 
 						<ContentPresenter x:Name="ContentPresenter"
@@ -358,8 +332,6 @@
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="0" />
-										<Setter Target="PressedOverlay.Opacity"
-												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOver">
@@ -389,7 +361,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledColor}" />
+												Value="{StaticResource OnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -415,28 +387,21 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Border x:Name="Overlay"
-								Background="{StaticResource OnSurfaceColor}"
-								Opacity="0" />
-
 						<Border x:Name="HoverOverlay"
-								Background="{StaticResource BlackLightHover}"
+								Background="{StaticResource OnSurfaceHoverBrush}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource BlackLightFocused}"
+								Background="{StaticResource OnSurfaceFocusedBrush}"
 								Opacity="0" />
 
 						<Border x:Name="PressedOverlay"
-								CornerRadius="14"
-								Background="{StaticResource BlackLightPressed}"
-								Margin="22,0"
-								Width="48"
+								Background="{StaticResource OnSurfacePressedBrush}"
 								Opacity="0" />
 
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource BlackLightSelected}"
+								Background="{StaticResource OnSurfaceSelectedBrush}"
 								Opacity="0" />
 
 						<ContentPresenter x:Name="ContentPresenter"
