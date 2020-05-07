@@ -1,0 +1,98 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.FabSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:not_win="http://uno.ui/not_win"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="not_win android">
+
+	<StackPanel BorderBrush="{StaticResource OnSurfaceBrush}"
+				BorderThickness="1"
+				Margin="12">
+
+		<!-- Floating Acion Buttons Text -->
+		<TextBlock Text="FLOATING ACTION BUTTONS"
+				   FontSize="20"
+				   FontWeight="Bold"
+				   Foreground="{StaticResource PrimaryBrush}"
+				   Margin="12" />
+
+		<!-- Windows Fab With Icon -->
+		<win:Button Style="{StaticResource FabMaterialButtonStyle}"
+					Margin="12">
+			<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+				  Fill="Black"
+				  HorizontalAlignment="Center"
+				  VerticalAlignment="Center"
+				  Margin="0,0,6,4" />
+		</win:Button>
+
+		 <!--Known Issue, ElevatedView adds white border around fab in WASM-->
+		<!-- Not Windows Fab With Icon -->
+		<not_win:Grid>
+			<toolkit:ElevatedView Elevation="6"
+								  ShadowColor="Black"
+								  HorizontalAlignment="Left"
+								  Background="{StaticResource TransparentBrush}"
+								  CornerRadius="{StaticResource FabBorderRadius}"
+								  Width="{StaticResource FabLargeAreaSize}"
+								  Height="{StaticResource FabLargeAreaSize}"
+								  Margin="12">
+				<Button Style="{StaticResource FabMaterialButtonStyle}">
+					<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+						  Fill="Black"
+						  HorizontalAlignment="Center"
+						  VerticalAlignment="Center"
+						  Margin="0,0,4,4" />
+				</Button>
+			</toolkit:ElevatedView>
+		</not_win:Grid>
+	
+		<!-- Windows Fab With Icon And Label -->
+		<win:Button Style="{StaticResource FabLabelMaterialButtonStyle}"
+					Margin="12">
+			<StackPanel Orientation="Horizontal">
+				<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+					  Fill="Black"
+					  HorizontalAlignment="Center"
+					  VerticalAlignment="Center"
+					  Margin="12,0,16,3" />
+
+				<TextBlock Text="CREATE"
+						   FontWeight="SemiBold"
+						   Margin="0,4,16,0" />
+			</StackPanel>
+		</win:Button>
+
+		<!-- Not Windows Fab With Icon and Label -->
+		<not_win:Grid>
+			<toolkit:ElevatedView Elevation="6"
+								  ShadowColor="Black"
+								  HorizontalAlignment="Left"
+								  Background="{StaticResource TransparentBrush}"
+								  CornerRadius="{StaticResource FabBorderRadius}"
+								  Width="{Binding Width, ElementName=FabLabelButton}"
+								  Height="{Binding Height, ElementName=FabLabelButton}"
+								  Margin="12">
+				<Button Style="{StaticResource FabLabelMaterialButtonStyle}"
+						x:Name="FabLabelButton">
+					<StackPanel Orientation="Horizontal">
+						<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+							  Fill="Black"
+							  HorizontalAlignment="Center"
+							  VerticalAlignment="Center"
+							  Margin="12,1,16,3" />
+
+						<TextBlock Text="CREATE"
+								   FontWeight="SemiBold"
+								   not_android:Margin="0,4,16,0"
+								   android:Margin="0,3,16,0" />
+					</StackPanel>
+				</Button>
+			</toolkit:ElevatedView>
+		</not_win:Grid>
+	</StackPanel>
+</Page>
