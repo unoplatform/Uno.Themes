@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Uno.Material.Samples.Content.Controls;
 using Uno.Material.Samples.Content.Styles;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 
 namespace Uno.Material.Samples
@@ -27,10 +17,19 @@ namespace Uno.Material.Samples
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-            // Adding NavigationView items in code behind
+#if WINDOWS_UWP
+			NavView.IsSettingsVisible = true;
+			// Change the settings text to toggle the theme
+			var settingsItem = (NavigationViewItem)NavView.SettingsItem;
+			settingsItem.Content = "Toggle Light/Dark theme";
+#else
+			NavView.IsSettingsVisible = false;
+#endif
 
-            // Styles
-            NavView.MenuItems.Add(new NavigationViewItemHeader() { Content = "Styles" });
+			// Adding NavigationView items in code behind
+
+			// Styles
+			NavView.MenuItems.Add(new NavigationViewItemHeader() { Content = "Styles" });
             NavView.MenuItems.Add(new NavigationViewItem()
             { Content = "Colors Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ColorsSamplePage" });
             NavView.MenuItems.Add(new NavigationViewItemSeparator());
@@ -65,18 +64,36 @@ namespace Uno.Material.Samples
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            // TO-DO : Verify if we want a SettingPage
-            //if (args.IsSettingsInvoked)
-            //{
-            //    ContentFrame.Navigate(typeof(SettingsPage));
-            //}
-            //else
-            //{
-                // Find NavigationViewItem with Content that equals InvokedItem
-                var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
-                NavView_Navigate(item as NavigationViewItem);
-            //}
+            if (args.IsSettingsInvoked)
+            {
+#if WINDOWS_UWP
+				ToggleTheme();
+				void ToggleTheme()
+				{
+					// Set theme for window root.
+					if (Window.Current.Content is FrameworkElement frameworkElement)
+					{
+						if (frameworkElement.ActualTheme == ElementTheme.Dark)
+						{
+							frameworkElement.RequestedTheme = ElementTheme.Light;
+						}
+						else
+						{
+							frameworkElement.RequestedTheme = ElementTheme.Dark;
+						}
+					}
+				}
+#endif
+			}
+            else
+            {
+              // Find NavigationViewItem with Content that equals InvokedItem
+              var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
+              NavView_Navigate(item as NavigationViewItem);
+            }
         }
+
+
 
         private void NavView_Navigate(NavigationViewItem item)
         {
