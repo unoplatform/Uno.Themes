@@ -7,7 +7,8 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
 					xmlns:wasm="http://uno.ui/wasm"
-					mc:Ignorable="d ios android wasm">
+					xmlns:not_wasm="http://uno.ui/not_wasm"
+					mc:Ignorable="d ios android wasm not_wasm">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
@@ -33,12 +34,22 @@
 	<SolidColorBrush x:Key="ButtonTextLabelColor"
 					 Color="{ThemeResource PrimaryColor}" />
 
+	<!-- Floating Action Button Variables -->
+	<SolidColorBrush x:Key="FabBackgroundColor"
+					 Color="{StaticResource SecondaryColor}" />
+	<SolidColorBrush x:Key="FabIconColor"
+					 Color="{StaticResource OnSurfaceColor}" />
+	<SolidColorBrush x:Key="FabLabelColor"
+					 Color="{StaticResource OnSurfaceColor}" />
+	<CornerRadius x:Key="FabBorderRadius">23</CornerRadius>
+	<x:Double x:Key="FabLargeAreaSize">56</x:Double>
+	<x:Double x:Key="FabSmallAreaSize">40</x:Double>
+
 	<!-- All Button Variables -->
 	<CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
 	<FontFamily x:Key="ButtonFontFamily">Roboto</FontFamily>
 	<x:Double x:Key="ButtonFontSize">14</x:Double>
 	<Thickness x:Key="ButtonPadding">16,8</Thickness>
-
 
 	<Style x:Key="ContainedMaterialButtonStyle"
 		   TargetType="Button">
@@ -418,6 +429,274 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Issue #41: Todo remove not_wasm when fix for Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
+	<Style x:Key="FabButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Background"
+				Value="{StaticResource Color05Brush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource Color01Brush}" />
+		<Setter Property="Height"
+				Value="60" />
+		<Setter Property="Width"
+				Value="60" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Margin"
+				Value="0" />
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid Background="Transparent">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="FabBorder.Fill"
+												Value="{StaticResource Color03Brush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="FabBorder.Fill"
+												Value="{StaticResource Color03Brush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Ellipse x:Name="FabBorder"
+								 Width="{TemplateBinding Width}"
+								 Height="{TemplateBinding Height}"
+								 Fill="{TemplateBinding Background}"
+								 Stroke="{TemplateBinding BorderBrush}"
+								 StrokeThickness="0"
+								 IsHitTestVisible="False" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Content="{TemplateBinding Content}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  Margin="{TemplateBinding Padding}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Issue #41: Todo remove not_wasm when fix for Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
+	<Style x:Key="FabMaterialButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Background"
+				Value="{StaticResource FabBackgroundColor}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource FabIconColor}" />
+		<Setter Property="Height"
+				Value="56" />
+		<Setter Property="Width"
+				Value="56" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource ButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource ButtonFontSize}" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Margin"
+				Value="0" />
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid Background="Transparent">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfaceHoverBrush}" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfacePressedBrush}" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.StrokeThickness"
+												Value="1" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.StrokeThickness"
+												Value="1" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unfocused">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Ellipse x:Name="FabBorder"
+								 Width="{TemplateBinding Width}"
+								 Height="{TemplateBinding Height}"
+								 Fill="{TemplateBinding Background}"
+								 Stroke="{TemplateBinding BorderBrush}"
+								 StrokeThickness="0"
+								 IsHitTestVisible="False" />
+
+						<Ellipse x:Name="FabFocusBorder"
+								 Width="{TemplateBinding Width}"
+								 Height="{TemplateBinding Height}"
+								 Fill="{StaticResource TransparentBrush}"
+								 Stroke="{StaticResource OnPrimaryBrush}"
+								 StrokeThickness="0"
+								 IsHitTestVisible="False" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Content="{TemplateBinding Content}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontFamily="{TemplateBinding FontSize}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  Margin="{TemplateBinding Padding}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="FabLabelMaterialButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Background"
+				Value="{StaticResource FabBackgroundColor}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource FabLabelColor}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource ButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource ButtonFontSize}" />
+		<Setter Property="MinHeight"
+				Value="48" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Margin"
+				Value="0" />
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid Background="Transparent">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfaceHoverBrush}" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfacePressedBrush}" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.BorderThickness"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.BorderThickness"
+												Value="1" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unfocused">
+									<not_wasm:VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</not_wasm:VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid x:Name="FabBorder"
+							  CornerRadius="{StaticResource FabBorderRadius}"
+							  Background="{TemplateBinding Background}"
+							  BorderBrush="{TemplateBinding BorderBrush}"
+							  BorderThickness="0"
+							  IsHitTestVisible="False" />
+
+						<Grid x:Name="FabFocusBorder"
+							  CornerRadius="{StaticResource FabBorderRadius}"
+							  Background="{StaticResource TransparentBrush}"
+							  BorderBrush="{StaticResource OnPrimaryBrush}"
+							  BorderThickness="0"
+							  IsHitTestVisible="False" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Content="{TemplateBinding Content}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontFamily="{TemplateBinding FontSize}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  Margin="{TemplateBinding Padding}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
