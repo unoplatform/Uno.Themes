@@ -28,8 +28,7 @@ Please check if your PR fulfills the following requirements:
 - [ ] Tested Android
 - [ ] Tested WASM
 - [ ] Contains **No** breaking changes
-
-- If the pull request contains breaking changes, commit message must contain a detailed description of the action to take for the consumer of this library. As explained by the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+  > If the pull request contains breaking changes, commit message must contain a detailed description of the action to take for the consumer of this library. As explained by the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 
 
 
