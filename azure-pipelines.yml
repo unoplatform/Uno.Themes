@@ -1,4 +1,4 @@
-trigger:
+﻿trigger:
   branches:
     include:
       - master
@@ -25,11 +25,12 @@ variables:
   ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')] # For Application.Building.Light optimizations
 
 stages:
 - stage: Build
   jobs:
-  - job: Build_on_Windows # Build samples possible on a windows machine
+  - job: Build_on_Windows # Build samples possible on a windows machine and nuget packages
     strategy:
       maxParallel: 3
       matrix:
@@ -51,6 +52,23 @@ stages:
       
     variables:
       PackageOutputPath: $(Build.ArtifactStagingDirectory) # Path where nuget packages will be copied to.
+
+    steps:
+      - template: build/stage-build.yml
+
+  - job: Build_on_Mac # Build iOS samples
+    strategy:
+      maxParallel: 3
+      matrix:
+        iOS:
+          ApplicationConfiguration: Release
+          ApplicationPlatform: iPhone
+          ArtifactName: iOS
+    pool:
+      vmImage: $(macOSVMImage)
+      
+    variables:
+      SkipUnknowFrameworks: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
 
     steps:
       - template: build/stage-build.yml
