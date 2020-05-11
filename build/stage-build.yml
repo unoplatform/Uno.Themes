@@ -1,17 +1,9 @@
 ﻿steps:
-## Install .netcore runtime required by GitVersion@5
-## We install type SDK because runtime is not always available on the hosted agents
-- task: UseDotNet@2
+- task: UseGitVersion@5
   inputs:
-    packageType: 'sdk'
-    version: '2.1.0'
-    installationPath: '$(Agent.ToolsDirectory)/dotnet'
-
-- task: GitVersion@5
-  inputs:
-    runtime: 'core'
+    versionSpec: '5.0.0'
     useConfigFile: true
-    configFilePath: build/gitversion.yml
+    configFilePath: 'build/gitversion.yml'
   displayName: 'Calculate version'
 
 - task: NuGetToolInstaller@0
