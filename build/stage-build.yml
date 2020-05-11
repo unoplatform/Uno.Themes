@@ -1,8 +1,9 @@
-steps:
+﻿steps:
 ## Install .netcore runtime required by GitVersion@5
+## We install type SDK because runtime is not always available on the hosted agents
 - task: UseDotNet@2
   inputs:
-    packageType: 'runtime'
+    packageType: 'sdk'
     version: '2.1.0'
     installationPath: '$(Agent.ToolsDirectory)/dotnet'
 
