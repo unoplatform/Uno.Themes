@@ -6,6 +6,7 @@
 					xmlns:xamarin="http:///umbrella/ui/xamarin"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="ios android xamarin wasm">
 
 	<ResourceDictionary.MergedDictionaries>
@@ -184,7 +185,12 @@
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="FocusRing.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<Grid Margin="20,0"
@@ -281,7 +287,7 @@
 								 Height="{StaticResource FocusAreaSize}"
 								 Width="{StaticResource FocusAreaSize}"
 								 Margin="10,0,20,0"
-								 Opacity="1"
+								 Opacity="0"
 								 IsHitTestVisible="False"
 								 Fill="{StaticResource OnSurfaceHoverBrush}"
 								 Stroke="{ThemeResource SelectControlToggleOnDisabledBackgroundColor}"
@@ -445,8 +451,8 @@
 									IsHitTestVisible="False"
 									Grid.Column="2" />
 
-							<!-- TODO add toolkit:UIElementExtensions.Elevation="4" to switch knob -->
 							<Grid x:Name="SwitchKnob"
+								  toolkit:UIElementExtensions.Elevation="4"
 								  CornerRadius="30,30,30,30"
 								  HorizontalAlignment="Left"
 								  Height="24"
