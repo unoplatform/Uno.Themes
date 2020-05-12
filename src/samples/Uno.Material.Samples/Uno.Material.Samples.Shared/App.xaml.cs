@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+#if WINDOWS_UWP
+using ShowMeTheXAML;
+#endif
 
 namespace Uno.Material.Samples
 {
@@ -31,6 +34,9 @@ namespace Uno.Material.Samples
 		{
 			ConfigureFilters(global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory);
 
+#if WINDOWS_UWP
+			XamlDisplay.Init();
+#endif
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
 		}

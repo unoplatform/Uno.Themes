@@ -83,6 +83,12 @@
     <Content Include="Assets\wide310x150logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SMTX, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SMTX\bin\Debug\uap10.0.17763\SMTX.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Import Project="..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems')" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
