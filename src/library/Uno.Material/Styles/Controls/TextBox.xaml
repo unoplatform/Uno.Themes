@@ -39,6 +39,9 @@
 												NotNullOrEmptyValue="False"
 												NullOrEmptyValue="True" />
 
+	<CubicEase x:Key="EaseInOutFunction"
+			   EasingMode="EaseInOut" />
+
 	<Style x:Name="DeleteButtonStyle"
 		   TargetType="Button">
 		<Setter Property="Template">
@@ -122,7 +125,8 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="Scale"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 								</VisualState>
@@ -141,15 +145,18 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="-16" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
@@ -160,15 +167,18 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="0" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="1" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 									<VisualState.StateTriggers>
@@ -305,15 +315,18 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="-16" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
@@ -324,15 +337,18 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="0" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="1" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.15"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 									<VisualState.StateTriggers>
