@@ -25,6 +25,8 @@
 			<Color x:Key="OnSecondaryColor">#000000</Color>
 			<Color x:Key="OnBackgroundColor">#000000</Color>
 			<Color x:Key="OnSurfaceColor">#000000</Color>
+			<Color x:Key="OnErrorColor">#000000</Color>
+			<Color x:Key="OverlayColor">#51000000</Color>
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
@@ -42,10 +44,10 @@
 			<Color x:Key="OnSecondaryColor">#000000</Color>
 			<Color x:Key="OnBackgroundColor">#FFFFFF</Color>
 			<Color x:Key="OnSurfaceColor">#DEFFFFFF</Color>
+			<Color x:Key="OnErrorColor">#000000</Color>
+			<Color x:Key="OverlayColor">#51FFFFFF</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
-
-	
 
 	<!-- Global brushes -->
 	<SolidColorBrush x:Key="PrimaryBrush"
@@ -66,18 +68,38 @@
 					 Color="{ThemeResource SurfaceColor}"/>
 	<SolidColorBrush x:Key="ErrorBrush"
 					 Color="{ThemeResource ErrorColor}"/>
+	<SolidColorBrush x:Key="OnErrorBrush"
+					 Color="{ThemeResource OnErrorColor}"/>
+	<SolidColorBrush x:Key="OverlayBrush"
+					 Color="{ThemeResource OverlayColor}"/>
 
+	<!-- Primary Brushes -->
+	<SolidColorBrush x:Key="PrimaryHoverBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="0.04"/>
+	<SolidColorBrush x:Key="PrimaryFocusedBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="0.12"/>
+	<SolidColorBrush x:Key="PrimaryPressedBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="0.10"/>
+	<SolidColorBrush x:Key="PrimaryDraggedBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="0.08"/>
+	<SolidColorBrush x:Key="PrimarySelectedBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="0.08"/>
+	
 	<!-- OnPrimary Brushes -->
 	<!-- Only opacity should differ -->
 	<!-- Issue #41 TODO: SolidColorBrushes set this way do not function with android thumbtints and tracktints -->
 	<SolidColorBrush x:Key="OnPrimaryBrush"
-					 Color="{StaticResource OnPrimaryColor}"
-					 Opacity="1.0"/>
+					 Color="{ThemeResource OnPrimaryColor}"/>
 	<SolidColorBrush x:Key="OnPrimaryMediumBrush"
-					 Color="{StaticResource PrimaryColor}"
+					 Color="{ThemeResource OnPrimaryColor}"
 					 Opacity="0.74"/>
 	<SolidColorBrush x:Key="OnPrimaryDisabledBrush"
-					 Color="{StaticResource PrimaryColor}"
+					 Color="{ThemeResource OnPrimaryColor}"
 					 Opacity="0.38"/>
 	<SolidColorBrush x:Key="OnPrimaryHoverBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
@@ -93,7 +115,7 @@
 					 Opacity="0.08"/>
 	<SolidColorBrush x:Key="OnPrimarySelectedBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
-					 Opacity="0.08"/>
+					 Opacity="0.08" />
 
 	<!-- OnSecondary Brushes -->
 	<!-- Only opacity should differ -->
@@ -134,12 +156,6 @@
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.08"/>
 	
-	<!-- OnSurfacePrimary Brushes -->
-	<!-- TODO : Understand them and add -->
-	<!-- They are brushes following the same pattern as OnSurface
-		but instead of being based as a gray shade, they would be a shade of the primary color?
-
-	-->
 	
 	<!-- 
 	*
