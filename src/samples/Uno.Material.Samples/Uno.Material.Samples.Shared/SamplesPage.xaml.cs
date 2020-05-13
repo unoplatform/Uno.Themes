@@ -48,6 +48,8 @@ namespace Uno.Material.Samples
             { Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "ToggleSwitch Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "FAB Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "FabSamplePage" });
 
 			// Set the initial SelectedItem 
 			foreach (NavigationViewItemBase item in NavView.MenuItems)
@@ -123,6 +125,9 @@ namespace Uno.Material.Samples
                     break;
 				case "ToggleSwitchSamplePage":
 					ContentFrame.Navigate(typeof(ToggleSwitchSamplePage));
+					break;
+				case "FabSamplePage":
+					ContentFrame.Navigate(typeof(FabSamplePage));
 					break;
 			}
         }
