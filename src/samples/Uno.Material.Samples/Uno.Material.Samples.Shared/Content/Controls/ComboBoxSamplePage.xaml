@@ -1,0 +1,60 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.ComboBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d">
+
+	<StackPanel BorderBrush="{StaticResource Color04Brush}"
+				BorderThickness="1"
+				Margin="12">
+
+		<!-- COMBO BOX -->
+		<TextBlock Text="COMBO BOX"
+				   FontSize="20"
+				   FontWeight="Bold"
+				   Foreground="{StaticResource PrimaryColor01Brush}"
+				   Margin="12" />
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<!-- NORMAL -->
+			<StackPanel>
+
+				<!-- LABEL -->
+				<TextBlock Text="NORMAL"
+						   Style="{StaticResource Subtitle1}"
+						   Margin="12,12,12,0" />
+
+				<!-- COMBO BOX -->
+				<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+						  PlaceholderText="Placeholder"
+						  ItemsSource="abcdefg"
+						  SelectedItem="g"
+						  Margin="12" />
+			</StackPanel>
+
+			<!-- DISABLED -->
+			<StackPanel Grid.Column="1">
+
+				<!-- LABEL -->
+				<TextBlock Text="DISABLED"
+						   Style="{StaticResource Subtitle1}"
+						   Margin="12,12,12,0" />
+
+				<!-- COMBO BOX -->
+				<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+						  PlaceholderText="Placeholder"
+						  ItemsSource="abcde"
+						  SelectedItem="g"
+						  IsEnabled="False"
+						  Margin="12" />
+			</StackPanel>
+		</Grid>
+	</StackPanel>
+</Page>

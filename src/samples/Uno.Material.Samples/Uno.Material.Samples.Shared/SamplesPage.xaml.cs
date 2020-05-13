@@ -43,8 +43,10 @@ namespace Uno.Material.Samples
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "TextBlock Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-            { Content = "CheckBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
-            NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "CheckBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "ComboBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ComboBoxSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
             { Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "ToggleSwitch Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
@@ -118,9 +120,12 @@ namespace Uno.Material.Samples
 					ContentFrame.Navigate(typeof(TextBlockSamplePage));
 					break;
 				case "CheckBoxSamplePage":
-                    ContentFrame.Navigate(typeof(CheckBoxSamplePage));
-                    break;
-                case "RadioButtonSamplePage":
+					ContentFrame.Navigate(typeof(CheckBoxSamplePage));
+					break;
+				case "ComboBoxSamplePage":
+					ContentFrame.Navigate(typeof(ComboBoxSamplePage));
+					break;
+				case "RadioButtonSamplePage":
                     ContentFrame.Navigate(typeof(RadioButtonSamplePage));
                     break;
 				case "ToggleSwitchSamplePage":
