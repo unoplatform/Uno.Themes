@@ -20,36 +20,190 @@
 				   Foreground="{StaticResource PrimaryBrush}"
 				   Margin="12" />
 
-		<!-- Fab With Icon -->
-		<!--Known Issue, ElevatedView adds white border around fab in WASM-->
-		<Button Style="{StaticResource FabMaterialButtonStyle}"
-				Margin="12">
-			<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-				  Fill="Black"
-				  HorizontalAlignment="Center"
-				  VerticalAlignment="Center"
-				  win:Margin="0,0,6,4"
-				  not_win:Margin="0,0,4,4" />
-		</Button>
+		<StackPanel Orientation="Horizontal">
 
-		<!-- Fab With Icon And Label -->
-		<Button Style="{StaticResource FabLabelMaterialButtonStyle}"
-				Margin="12">
-			<StackPanel Orientation="Horizontal">
+			<!-- Fab With Icon -->
+			<!--Known Issue, ElevatedView adds white border around fab in WASM-->
+			<Button Style="{StaticResource FabMaterialButtonStyle}"
+					Margin="12">
 				<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
 					  Fill="Black"
 					  HorizontalAlignment="Center"
 					  VerticalAlignment="Center"
-					  win:Margin="12,0,16,3"
-					  not_win:Margin="12,1,16,3" />
+					  win:Margin="0,0,6,4"
+					  not_win:Margin="0,0,4,4" />
+			</Button>
 
-				<TextBlock Text="CREATE"
-						   FontWeight="SemiBold"
-						   win:Margin="0,4,16,0"
-						   wasm:Margin="0,4,16,0"
-						   ios:Margin="0,4,16,0"
-						   android:Margin="0,3,16,0" />
-			</StackPanel>
-		</Button>
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
+				<StackPanel>
+					<TextBlock Text="/open Button"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource FabMaterialButtonStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="/open Path"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Data='M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Fill='Black'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="HorizontalAlignment='Center'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="VerticalAlignment='Center'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="win:Margin='0,0,6,4'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="not_win:Margin='0,0,4,4'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="/close Path"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="/close Button"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal">
+
+			<!-- Fab With Icon And Label -->
+			<Button Style="{StaticResource FabLabelMaterialButtonStyle}"
+					Margin="12">
+				<StackPanel Orientation="Horizontal">
+					<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+						  Fill="Black"
+						  HorizontalAlignment="Center"
+						  VerticalAlignment="Center"
+						  win:Margin="12,0,16,3"
+						  not_win:Margin="12,1,16,3" />
+
+					<TextBlock Text="CREATE"
+							   FontWeight="SemiBold"
+							   win:Margin="0,4,16,0"
+							   wasm:Margin="0,4,16,0"
+							   ios:Margin="0,4,16,0"
+							   android:Margin="0,3,16,0" />
+				</StackPanel>
+			</Button>
+
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
+				<StackPanel>
+					<TextBlock Text="/open Button"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource FabLabelMaterialButtonStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text=" /open StackPanel"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Orientation='Horizontal'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text=" /open Path"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Data='M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Fill='Black'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="HorizontalAlignment='Center'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="VerticalAlignment='Center'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="win:Margin='12,0,16,3'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="not_win:Margin='12,1,16,3'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="/close Path>"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text=" /open TextBlock"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Text='CREATE'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="FontWeight='SemiBold'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="win:Margin='0,4,16,0'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="wasm:Margin='0,4,16,0'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="ios:Margin='0,4,16,0'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="android:Margin='0,3,16,0'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="/close TextBlock"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="/close StackPanel"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="/close Button>"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
 	</StackPanel>
 </Page>

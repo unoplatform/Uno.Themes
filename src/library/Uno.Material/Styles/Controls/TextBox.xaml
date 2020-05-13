@@ -2,28 +2,42 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:converters="using:Uno.Material.Converters">
 
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Colors.xaml" />
+		<ResourceDictionary Source="../Application/SelectionControlColors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
 	<!-- Label Resources -->
-	<StaticResource x:Key="TextBoxLabelDefaultColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxLabelDefaultColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
 	<x:Double x:Key="TextBoxLabelFontSize">16</x:Double>
-	<StaticResource x:Key="TextBoxLabelFocusColorBrush" ResourceKey="PrimaryBrush" />
-	<StaticResource x:Key="TextBoxInputDefaultColorBrush" ResourceKey="OnSurfaceMediumBrush" />
-	<StaticResource x:Key="TextBoxInputFocusColorBrush" ResourceKey="OnSurfaceBrush" />
+	<StaticResource x:Key="TextBoxLabelFocusColorBrush"
+					ResourceKey="PrimaryBrush" />
+	<StaticResource x:Key="TextBoxInputDefaultColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxInputFocusColorBrush"
+					ResourceKey="OnSurfaceBrush" />
 
 	<!-- Icon Resources -->
-	<StaticResource x:Key="TextBoxIconColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxIconColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
 
 	<!-- Filled Resources -->
 	<SolidColorBrush x:Key="TextBoxFilledBackgroundColorBrush"
 					 Color="{StaticResource OnSurfaceColor}"
 					 Opacity="0.12" />
-	<StaticResource x:Key="TextBoxFilledIndicatorColorBrush" ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxFilledIndicatorColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
 	<x:Double x:Key="TextBoxStrokeWidth">1</x:Double>
-	<StaticResource x:Key="TextBoxFilledFocusIndicatorColorBrush" ResourceKey="PrimaryBrush" />
+	<StaticResource x:Key="TextBoxFilledFocusIndicatorColorBrush"
+					ResourceKey="PrimaryBrush" />
 	<x:Double x:Key="TextBoxFocusStrokeWidth">2</x:Double>
 
 	<!-- Outline Resources -->
-	<StaticResource x:Key="TextBoxOutlinedStrokeColorBrush" ResourceKey="OnSurfaceMediumBrush" />
-	<StaticResource x:Key="TextBoxOutlinedFocusStrokeColorBrush" ResourceKey="PrimaryBrush" />
+	<StaticResource x:Key="TextBoxOutlinedStrokeColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxOutlinedFocusStrokeColorBrush"
+					ResourceKey="PrimaryBrush" />
 	<x:Double x:Key="TextBoxOutlinedStrokeWidth">1</x:Double>
 
 	<!-- Corner Radius Resources -->

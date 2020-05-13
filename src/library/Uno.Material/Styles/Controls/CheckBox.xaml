@@ -11,7 +11,7 @@
 
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
-		
+
 		<Setter Property="Background"
 				Value="{ThemeResource SelectControlToggleOffButtonColor}" />
 		<Setter Property="BorderBrush"
@@ -34,37 +34,37 @@
 				Value="{StaticResource CheckAreaSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="False" />
-		
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CheckBox">
 					<Grid x:Name="Root">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CombinedStates">
-								
+
 								<VisualState x:Name="UncheckedNormal" />
-								
+
 								<VisualState x:Name="UncheckedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Fill"
 												Value="{ThemeResource SelectControlToggleOffHoverButtonColor}" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="UncheckedPressed">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Fill"
 												Value="{ThemeResource SelectControlToggleOffFocusButtonColor}" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Opacity"
 												Value="{StaticResource ControlDisabledOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="CheckedNormal">
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
@@ -75,7 +75,7 @@
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
@@ -86,7 +86,7 @@
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="CheckedPressed">
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
@@ -101,7 +101,7 @@
 												Value="{ThemeResource SelectControlToggleOnFocusBackgroundColor}" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Opacity"
@@ -112,7 +112,7 @@
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="IndeterminateNormal">
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
@@ -123,7 +123,7 @@
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="IndeterminatePointerOver">
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
@@ -134,7 +134,7 @@
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="IndeterminatePressed">
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
@@ -149,7 +149,7 @@
 												Value="{ThemeResource SelectControlToggleOnFocusBackgroundColor}" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Opacity"
@@ -163,7 +163,7 @@
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
-							
+
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
@@ -171,14 +171,14 @@
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
@@ -217,7 +217,7 @@
 								  Height="4"
 								  Opacity="0"
 								  AutomationProperties.AccessibilityView="Raw"
-								  xamarin:Margin="0,2,0,0"/>
+								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
 								  Data="M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z"
