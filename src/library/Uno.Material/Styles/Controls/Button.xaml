@@ -33,12 +33,22 @@
 	<SolidColorBrush x:Key="ButtonTextLabelColor"
 					 Color="{ThemeResource PrimaryColor}" />
 
+	<!-- Floating Action Button Variables -->
+	<SolidColorBrush x:Key="FabBackgroundColor"
+					 Color="{StaticResource SecondaryColor}" />
+	<SolidColorBrush x:Key="FabIconColor"
+					 Color="{StaticResource OnSurfaceColor}" />
+	<SolidColorBrush x:Key="FabLabelColor"
+					 Color="{StaticResource OnSurfaceColor}" />
+	<CornerRadius x:Key="FabBorderRadius">23</CornerRadius>
+	<x:Double x:Key="FabLargeAreaSize">56</x:Double>
+	<x:Double x:Key="FabSmallAreaSize">40</x:Double>
+
 	<!-- All Button Variables -->
 	<CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
 	<FontFamily x:Key="ButtonFontFamily">Roboto</FontFamily>
 	<x:Double x:Key="ButtonFontSize">14</x:Double>
 	<Thickness x:Key="ButtonPadding">16,8</Thickness>
-
 
 	<Style x:Key="ContainedMaterialButtonStyle"
 		   TargetType="Button">
@@ -418,6 +428,258 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Known Issue - Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
+	<!-- Known Issue - VisualState Setters can not be applied inside ElevatedView -->
+	<Style x:Key="FabMaterialButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Background"
+				Value="{StaticResource FabBackgroundColor}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource FabIconColor}" />
+		<Setter Property="Height"
+				Value="{StaticResource FabLargeAreaSize}" />
+		<Setter Property="Width"
+				Value="{StaticResource FabLargeAreaSize}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource ButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource ButtonFontSize}" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Margin"
+				Value="0" />
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfacePressedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.StrokeThickness"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Fill"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.StrokeThickness"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unfocused" />
+							</VisualStateGroup>
+							<VisualStateGroup>
+								<!-- Known Issue - Must be applied before smalldevices else issues on wasm and ios -->
+								<VisualState x:Name="OtherDevices">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="460" />
+									</VisualState.StateTriggers>
+									<VisualState.Setters>
+										<Setter Target="FabButton.Width"
+												Value="{StaticResource FabLargeAreaSize}" />
+										<Setter Target="FabButton.Height"
+												Value="{StaticResource FabLargeAreaSize}" />
+										<Setter Target="FabBorder.Width"
+												Value="{StaticResource FabLargeAreaSize}" />
+										<Setter Target="FabBorder.Height"
+												Value="{StaticResource FabLargeAreaSize}" />
+										<Setter Target="FabFocusBorder.Width"
+												Value="{StaticResource FabLargeAreaSize}" />
+										<Setter Target="FabFocusBorder.Height"
+												Value="{StaticResource FabLargeAreaSize}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="SmallDevices">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="0" />
+									</VisualState.StateTriggers>
+									<VisualState.Setters>
+										<Setter Target="FabButton.Width"
+												Value="{StaticResource FabSmallAreaSize}" />
+										<Setter Target="FabButton.Height"
+												Value="{StaticResource FabSmallAreaSize}" />
+										<Setter Target="FabBorder.Width"
+												Value="{StaticResource FabSmallAreaSize}" />
+										<Setter Target="FabBorder.Height"
+												Value="{StaticResource FabSmallAreaSize}" />
+										<Setter Target="FabFocusBorder.Width"
+												Value="{StaticResource FabSmallAreaSize}" />
+										<Setter Target="FabFocusBorder.Height"
+												Value="{StaticResource FabSmallAreaSize}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<toolkit:ElevatedView x:Name="FabButton"
+											  Elevation="6"
+											  ShadowColor="Black"
+											  IsHitTestVisible="False"
+											  Background="{StaticResource TransparentBrush}"
+											  CornerRadius="{StaticResource FabBorderRadius}"
+											  Width="{TemplateBinding Width}"
+											  Height="{TemplateBinding Height}">
+							<Grid>
+								<Ellipse x:Name="FabBorder"
+										 Width="{TemplateBinding Width}"
+										 Height="{TemplateBinding Height}"
+										 Fill="{TemplateBinding Background}"
+										 Stroke="{TemplateBinding BorderBrush}"
+										 StrokeThickness="0"
+										 IsHitTestVisible="False" />
+
+								<ContentPresenter x:Name="ContentPresenter"
+												  AutomationProperties.AccessibilityView="Raw"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentTransitions="{TemplateBinding ContentTransitions}"
+												  Content="{TemplateBinding Content}"
+												  FontSize="{TemplateBinding FontSize}"
+												  FontFamily="{TemplateBinding FontSize}"
+												  Foreground="{TemplateBinding Foreground}"
+												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  Margin="{TemplateBinding Padding}"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+							</Grid>
+						</toolkit:ElevatedView>
+
+						<Ellipse x:Name="FabFocusBorder"
+								 Width="{TemplateBinding Width}"
+								 Height="{TemplateBinding Height}"
+								 Fill="{StaticResource TransparentBrush}"
+								 Stroke="{StaticResource OnPrimaryBrush}"
+								 StrokeThickness="0" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Known Issue - Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
+	<!-- Known Issue - VisualState Setters can not be applied inside ElevatedView -->
+	<Style x:Key="FabLabelMaterialButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Background"
+				Value="{StaticResource FabBackgroundColor}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource FabLabelColor}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource ButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource ButtonFontSize}" />
+		<Setter Property="MinHeight"
+				Value="48" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Margin"
+				Value="0" />
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfacePressedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.BorderThickness"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource OnSurfaceFocusedBrush}" />
+										<Setter Target="FabFocusBorder.BorderThickness"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unfocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<toolkit:ElevatedView Elevation="6"
+											  ShadowColor="Black"
+											  IsHitTestVisible="False"
+											  Background="{StaticResource TransparentBrush}"
+											  CornerRadius="{StaticResource FabBorderRadius}">
+							<Grid>
+								<Grid x:Name="FabBorder"
+									  CornerRadius="{StaticResource FabBorderRadius}"
+									  Background="{TemplateBinding Background}"
+									  BorderBrush="{TemplateBinding BorderBrush}"
+									  BorderThickness="0" />
+
+								<ContentPresenter x:Name="ContentPresenter"
+												  AutomationProperties.AccessibilityView="Raw"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentTransitions="{TemplateBinding ContentTransitions}"
+												  Content="{TemplateBinding Content}"
+												  FontSize="{TemplateBinding FontSize}"
+												  FontFamily="{TemplateBinding FontSize}"
+												  Foreground="{TemplateBinding Foreground}"
+												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  Margin="{TemplateBinding Padding}"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							</Grid>
+						</toolkit:ElevatedView>
+
+						<Grid x:Name="FabFocusBorder"
+							  CornerRadius="{StaticResource FabBorderRadius}"
+							  Background="{StaticResource TransparentBrush}"
+							  BorderBrush="{StaticResource OnPrimaryBrush}"
+							  BorderThickness="0" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
