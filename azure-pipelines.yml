@@ -25,6 +25,7 @@ variables:
   ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  PackageOutputPath: $(Build.ArtifactStagingDirectory) # Path where packages (nuget or app packages) will be copied to.
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')] # For Application.Building.Light optimizations
 
 stages:
@@ -49,9 +50,6 @@ stages:
           ArtifactName: $(NugetPackagesArtifactName)
     pool:
       vmImage: $(windowsVMImage)
-      
-    variables:
-      PackageOutputPath: $(Build.ArtifactStagingDirectory) # Path where nuget packages will be copied to.
 
     steps:
       - template: build/stage-build.yml
@@ -68,7 +66,7 @@ stages:
       vmImage: $(macOSVMImage)
       
     variables:
-      - name: SkipUnknowFrameworks
+      - name: SkipUnknownFrameworks
         value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
       - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
 
@@ -101,5 +99,26 @@ stages:
 
     steps:
     - template: build/stage-release.yml
+    
+  - job: Publish_iOS_TestFlight
+
+    pool:
+      vmImage: $(macOSVMImage)
+    
+    variables:
+       - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
+    
+    steps:
+    - task: AppStoreRelease@1
+      displayName: 'Push to testflight'
+      inputs:
+        serviceEndpoint: 'apple appstore connection'
+        appIdentifier: 'uno.platform.material'
+        appType: 'iOS'
+        ipaPath: '**/*.ipa'
+        releaseTrack: 'TestFlight'
+        shouldSkipWaitingForProcessing: true
+        teamId: $(appleTeamId)
+        teamName: $(appleTeamName)
 
 
