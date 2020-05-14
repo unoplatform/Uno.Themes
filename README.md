@@ -44,3 +44,4 @@ Be mindful of our [Code of Conduct](CODE_OF_CONDUCT.md).
 ## Acknowledgments
 
 [Material Design](https://material.io/design)
+[Material Design In XAML, for uwp ripple effect](https://github.com/MaterialDesignInXAML)
