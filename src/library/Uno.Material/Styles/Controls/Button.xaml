@@ -7,7 +7,8 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
 					xmlns:wasm="http://uno.ui/wasm"
-					mc:Ignorable="d ios android wasm">
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d ios android wasm not_win">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
@@ -680,6 +681,77 @@
 							  Background="{StaticResource TransparentBrush}"
 							  BorderBrush="{StaticResource OnPrimaryBrush}"
 							  BorderThickness="0" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SeeStyleFlyoutButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter_NotWin.Visibility"
+												Value="Visible" />
+										<Setter Target="HeaderText.Visibility"
+												Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter_NotWin.Visibility"
+												Value="Visible" />
+										<Setter Target="HeaderText.Visibility"
+												Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<win:Button Content="See Style"
+									FontSize="10"
+									Style="{StaticResource TextMaterialButtonStyle}"
+									Margin="12,0">
+							<Button.Flyout>
+								<Flyout>
+									<ContentPresenter x:Name="ContentPresenter"
+													  BorderBrush="{TemplateBinding BorderBrush}"
+													  BorderThickness="{TemplateBinding BorderThickness}"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  CornerRadius="{TemplateBinding CornerRadius}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontSize="{TemplateBinding FontSize}"
+													  Padding="{TemplateBinding Padding}"
+													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+													  AutomationProperties.AccessibilityView="Raw" />
+								</Flyout>
+							</Button.Flyout>
+						</win:Button>
+
+						<!-- Known Issue - Windows solution does not work on other platforms, content of flyout remains empty -->
+						<not_win:TextBlock x:Name="HeaderText"
+										   Text="See Style"
+										   Foreground="{StaticResource PrimaryBrush}"
+										   FontSize="10"
+										   Margin="12,0" />
+						<not_win:ContentPresenter x:Name="ContentPresenter_NotWin"
+												  Content="{TemplateBinding Content}"
+												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+												  AutomationProperties.AccessibilityView="Raw"
+												  Margin="12,0"
+												  Visibility="Collapsed" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

@@ -14,32 +14,135 @@
 				   Foreground="{StaticResource PrimaryColor01Brush}"
 				   Margin="12" />
 
-		<TextBlock Text="Default"
-				   Margin="12,0" />
+		<StackPanel Orientation="Horizontal">
+			<ToggleSwitch Header="DEFAULT"
+						  Style="{StaticResource MaterialToggleSwitchStyle}"
+						  Margin="12" />
 
-		<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
-					  Margin="12" />
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
+					VerticalAlignment="Center">
+				<StackPanel>
+					<TextBlock Text="ToggleSwitch"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
 
-		<TextBlock Text="Default On"
-				   Margin="12,0" />
+					<TextBlock Text="Header='DEFAULT'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
 
-		<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
-					  IsOn="True"
-					  Margin="12" />
+					<TextBlock Text="Style='{StaticResource MaterialToggleSwitchStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
 
-		<TextBlock Text="Disabled"
-				   Margin="12,0" />
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
 
-		<ToggleSwitch IsEnabled="False"
-					  Style="{StaticResource MaterialToggleSwitchStyle}"
-					  Margin="12" />
+		<StackPanel Orientation="Horizontal">
 
-		<TextBlock Text="On Disabled"
-				   Margin="12,0" />
+			<ToggleSwitch Header="DEFAULT ON"
+						  IsOn="True"
+						  Style="{StaticResource MaterialToggleSwitchStyle}"
+						  Margin="12" />
 
-		<ToggleSwitch IsEnabled="False"
-					  IsOn="True"
-					  Style="{StaticResource MaterialToggleSwitchStyle}"
-					  Margin="12" />
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
+					VerticalAlignment="Center">
+				<StackPanel>
+					<TextBlock Text="ToggleSwitch"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Header='DEFAULT ON'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsOn='True'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource MaterialToggleSwitchStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal">
+
+			<ToggleSwitch Header="DISABLED"
+						  IsEnabled="False"
+						  Style="{StaticResource MaterialToggleSwitchStyle}"
+						  Margin="12" />
+
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
+					VerticalAlignment="Center">
+				<StackPanel>
+					<TextBlock Text="ToggleSwitch"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Header='DISABLED'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsEnabled='False'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource MaterialToggleSwitchStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal">
+
+			<ToggleSwitch Header="ON DISABLED"
+						  IsEnabled="False"
+						  IsOn="True"
+						  Style="{StaticResource MaterialToggleSwitchStyle}"
+						  Margin="12" />
+
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
+					VerticalAlignment="Center">
+				<StackPanel>
+					<TextBlock Text="ToggleSwitch"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Header='ON DISABLED'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsEnabled='False'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsOn='True'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource MaterialToggleSwitchStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
 	</StackPanel>
 </Page>

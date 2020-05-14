@@ -193,9 +193,23 @@
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Header}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontWeight="{TemplateBinding FontWeight}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  VerticalAlignment="Center" />
+
 						<Grid Margin="20,0"
 							  VerticalAlignment="Center"
-							  HorizontalAlignment="Stretch">
+							  HorizontalAlignment="Stretch"
+							  Grid.Row="1">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="10" />
@@ -209,6 +223,7 @@
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
+
 							<Grid Grid.Row="1"
 								  Grid.RowSpan="3"
 								  Grid.ColumnSpan="3"
@@ -284,6 +299,7 @@
 
 						<Ellipse x:Name="FocusRing"
 								 HorizontalAlignment="Left"
+								 VerticalAlignment="Bottom"
 								 Height="{StaticResource FocusAreaSize}"
 								 Width="{StaticResource FocusAreaSize}"
 								 Margin="10,0,20,0"
@@ -291,7 +307,8 @@
 								 IsHitTestVisible="False"
 								 Fill="{StaticResource OnSurfaceHoverBrush}"
 								 Stroke="{ThemeResource SelectControlToggleOnDisabledBackgroundColor}"
-								 StrokeThickness="0" />
+								 StrokeThickness="0"
+								 Grid.Row="1" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -402,6 +419,7 @@
 								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
+
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
@@ -409,6 +427,7 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
+							<!-- Known Issue - not showing on wasm -->
 							<ContentPresenter x:Name="ContentPresenter"
 											  Content="{TemplateBinding Header}"
 											  FontSize="{TemplateBinding FontSize}"
@@ -494,7 +513,7 @@
 							</Thumb>
 						</Grid>
 
-						<!-- Investigate why wasm focusring ellipse is broken and colors are appropriately applied --> 
+						<!-- Investigate why wasm focusring ellipse is broken and colors are appropriately applied -->
 						<!--<Ellipse x:Name="FocusRing"
 								 HorizontalAlignment="Left"
 								 Height="{StaticResource FocusAreaSize}"
@@ -520,9 +539,9 @@
 		<Setter Property="Foreground"
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
 		<Setter Property="Height"
-				Value="36" />
+				Value="50" />
 		<Setter Property="Width"
-				Value="56" />
+				Value="70" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
@@ -532,10 +551,32 @@
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  HorizontalAlignment="Stretch">
 
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="10" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+
+						<!-- The margin here is used to properly align the content with the UI switch -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  VerticalAlignment="Stretch"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  ios:Margin="0,0,0,5"
+										  Grid.ColumnSpan="3" />
+
 						<!-- Do not add x:Name to BindableUiSwitch or else page will not load -->
 						<BindableUISwitch IsOn="{TemplateBinding IsOn, Mode=TwoWay}"
 										  Enabled="{TemplateBinding IsEnabled}"
-										  Background="{TemplateBinding Foreground}" />
+										  Background="{TemplateBinding Foreground}"
+										  Grid.Column="2"
+										  Grid.Row="1" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -551,9 +592,9 @@
 		<Setter Property="Foreground"
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
 		<Setter Property="Height"
-				Value="36" />
+				Value="50" />
 		<Setter Property="Width"
-				Value="56" />
+				Value="70" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
@@ -603,9 +644,30 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="10" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+
+						<!-- The margin here is used to properly align the content with the UI switch -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  VerticalAlignment="Stretch"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  Grid.ColumnSpan="3" />
+
 						<!-- TODO: fix disabled on thumbtint, using SelectControlToggleOnDisabledButtonColor -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
-						<Grid x:Name="onDisabledGrid">
+						<Grid x:Name="onDisabledGrid"
+							  Grid.Column="2"
+							  Grid.Row="1">
 							<!-- Provides a disabled state for an on switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
@@ -614,7 +676,9 @@
 						</Grid>
 
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
-						<Grid x:Name="offDisabledGrid">
+						<Grid x:Name="offDisabledGrid"
+							  Grid.Column="2"
+							  Grid.Row="1">
 							<!-- Provides a disabled state for an off switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
@@ -624,7 +688,9 @@
 
 
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
-						<Grid x:Name="switchGrid">
+						<Grid x:Name="switchGrid"
+							  Grid.Column="2"
+							  Grid.Row="1">
 							<BindableSwitchCompat x:Name="androidSwitch"
 												  Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}" />
