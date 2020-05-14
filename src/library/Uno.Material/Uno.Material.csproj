@@ -9,6 +9,10 @@
     <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="nventive.Nimue.TargetFrameworks.Filtering" Version="0.1.0-alpha.55">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Uno.UI" Version="2.2.0-feature.styles-compat.201" />
   </ItemGroup>
   <ItemGroup>
@@ -22,15 +26,19 @@
   </ItemGroup>
   <ItemGroup>
 		<None Remove="Styles\Application\Colors.xaml" />
+		<None Remove="Styles\Application\NavigationDrawerColors.xaml" />
     <None Remove="Styles\Application\SelectionControlColors.xaml" />
     <None Remove="Styles\Controls\ComboBox.xaml" />
+    <None Remove="Styles\Controls\NavigationView.xaml" />
     <None Remove="Styles\Controls\TextBlock.xaml" />
     <None Remove="Styles\Controls\ToggleSwitch.xaml" />
   </ItemGroup>
   <ItemGroup>
     <UpToDateCheckInput Remove="Styles\Application\Colors.xaml" />
+    <UpToDateCheckInput Remove="Styles\Application\NavigationDrawerColors.xaml" />
     <UpToDateCheckInput Remove="Styles\Application\SelectionControlColors.xaml" />
     <UpToDateCheckInput Remove="Styles\Controls\ComboBox.xaml" />
+    <UpToDateCheckInput Remove="Styles\Controls\NavigationView.xaml" />
     <UpToDateCheckInput Remove="Styles\Controls\TextBlock.xaml" />
     <UpToDateCheckInput Remove="Styles\Controls\ToggleSwitch.xaml" />
   </ItemGroup>
