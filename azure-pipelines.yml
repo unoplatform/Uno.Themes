@@ -68,10 +68,26 @@ stages:
       vmImage: $(macOSVMImage)
       
     variables:
-      SkipUnknowFrameworks: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+      - name: SkipUnknowFrameworks
+        value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+      - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
 
     steps:
-      - template: build/stage-build.yml
+    - task: InstallAppleCertificate@2
+      displayName: Install Apple Certificate
+      inputs:
+        certSecureFile: 'apple.appstore.distribution.p12' # Certificate located in the Library's secure files
+        certPwd: '$(appleappstorecertificatepassword)' # password in Library's Variable group
+        keychain: 'temp'
+        deleteCert: true
+    
+    - task: InstallAppleProvisioningProfile@1
+      displayName: 'Install Apple Provisioning Profile'
+      inputs:
+        provisioningProfileLocation: 'secureFiles'
+        provProfileSecureFile: UnoMaterial.mobileprovision # Located in the Library's secure files
+        
+    - template: build/stage-build.yml
 
 
 - stage: Release
