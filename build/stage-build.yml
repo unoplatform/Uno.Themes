@@ -17,8 +17,8 @@
   inputs:
     command: restore
     solution: $(Build.SourcesDirectory)/$(SolutionFileName)
-    selectOrConfig: select
-    includeNuGetOrg: true
+    feedsToUse: 'config'
+    nugetConfigPath: 'nuget.config'
     verbosityRestore: Normal
     noCache: true
 
