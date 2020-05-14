@@ -694,7 +694,7 @@
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="Root">
 
-						<VisualStateManager.VisualStateGroups>
+						<not_win:VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
@@ -714,7 +714,7 @@
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
+						</not_win:VisualStateManager.VisualStateGroups>
 
 						<win:Button Content="See Style"
 									FontSize="10"
