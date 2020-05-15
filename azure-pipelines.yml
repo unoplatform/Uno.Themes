@@ -54,14 +54,14 @@ stages:
     strategy:
       maxParallel: 3
       matrix:
-        Android:
-          ApplicationConfiguration: Release
-          ApplicationPlatform: Android
-          ArtifactName: $(AndroidArtifactName)
-        UWP:
-          ApplicationConfiguration: Release
-          ApplicationPlatform: UWP_x64
-          ArtifactName: $(UWPArtifactName)
+        # Android:
+        #   ApplicationConfiguration: Release
+        #   ApplicationPlatform: Android
+        #   ArtifactName: $(AndroidArtifactName)
+        # UWP:
+        #   ApplicationConfiguration: Release
+        #   ApplicationPlatform: UWP_x64
+        #   ArtifactName: $(UWPArtifactName)
         Packages:
           ApplicationConfiguration: Release
           ApplicationPlatform: Packages
