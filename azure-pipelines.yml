@@ -14,19 +14,38 @@ pr:
       - release/stable/*
 
 variables:
+  # Image names
   windowsVMImage: 'windows-2019'
   linuxVMImage: 'ubuntu-16.04'
   macOSVMImage: 'macOS-10.15'
-  xCodeRoot: '/Applications/Xcode_11.3.app'
-  XamarinSDKVersion: 6_6_0
+
+  # Nuget Version to use
   NUGET_VERSION: 5.4.0
+  
+  # Solution to build
   SolutionFileName: Uno.Material.sln
+
+  # name of the folder where artefacts will be placed. Variable used in build and release phases.
+  # We make seperate folders so that releases can each download only the folder they need.
   NugetPackagesArtifactName: Packages
+  AndroidArtifactName: Android
+  iOSArtifactName: iOS
+  UWPArtifactName: UWP
+
+  # Path where packages (nuget or app packages) will be copied to.
+  PackageOutputPath: $(Build.ArtifactStagingDirectory)
+  
+  # For Application.Building.Light optimizations
+  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')] 
+
+  # Android configurations
   ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  PackageOutputPath: $(Build.ArtifactStagingDirectory) # Path where packages (nuget or app packages) will be copied to.
-  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')] # For Application.Building.Light optimizations
+  
+  # Optional, specifiy xcode and xamarin versions. See ios-build-select-version.yml if needed.
+  # xCodeRoot: '/Applications/Xcode_11.3.app'
+  # XamarinSDKVersion: 6_6_0
 
 stages:
 - stage: Build
@@ -38,11 +57,11 @@ stages:
         Android:
           ApplicationConfiguration: Release
           ApplicationPlatform: Android
-          ArtifactName: Android
+          ArtifactName: $(AndroidArtifactName)
         UWP:
           ApplicationConfiguration: Release
           ApplicationPlatform: UWP_x64
-          ArtifactName: UWP
+          ArtifactName: $(UWPArtifactName)
         Packages:
           ApplicationConfiguration: Release
           ApplicationPlatform: Packages
@@ -61,7 +80,7 @@ stages:
         iOS:
           ApplicationConfiguration: Release
           ApplicationPlatform: iPhone
-          ArtifactName: iOS
+          ArtifactName: $(iOSArtifactName)
     pool:
       vmImage: $(macOSVMImage)
       
@@ -109,16 +128,6 @@ stages:
        - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
     
     steps:
-    - task: AppStoreRelease@1
-      displayName: 'Push to testflight'
-      inputs:
-        serviceEndpoint: 'apple appstore connection'
-        appIdentifier: 'uno.platform.material'
-        appType: 'iOS'
-        ipaPath: '**/*.ipa'
-        releaseTrack: 'TestFlight'
-        shouldSkipWaitingForProcessing: true
-        teamId: $(appleTeamId)
-        teamName: $(appleTeamName)
+    - template: build/stage-release-testflight.yml
 
 

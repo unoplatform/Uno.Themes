@@ -1,0 +1,20 @@
+steps:
+- checkout: none
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: current
+    downloadType: single
+    artifactName: $(iOSArtifactName)
+
+- task: AppStoreRelease@1
+  displayName: 'Push to testflight'
+  inputs:
+    serviceEndpoint: 'apple appstore connection'
+    appIdentifier: 'uno.platform.material'
+    appType: 'iOS'
+    ipaPath: '$(System.DefaultWorkingDirectory)/$(iOSArtifactName)/Uno.Material.Samples.ipa'
+    releaseTrack: 'TestFlight'
+    shouldSkipWaitingForProcessing: true
+    teamId: $(appleTeamId)
+    teamName: $(appleTeamName)
