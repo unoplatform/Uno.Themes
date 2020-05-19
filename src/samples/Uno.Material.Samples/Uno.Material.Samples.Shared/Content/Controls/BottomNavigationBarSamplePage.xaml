@@ -4,6 +4,7 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:controls="using:Uno.Material.Controls"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:ex="using:Uno.Material.Samples.MarkupExtensions"
 	  mc:Ignorable="d">
 
 	<Page.Resources>
@@ -14,25 +15,48 @@
 		<x:String x:Key="SettingsIcon">M15.480948,9.3740862C11.821038,9.349078 8.835932,12.302046 8.8129828,15.962005 8.7910101,19.622958 11.734978,22.608914 15.390982,22.628934 19.05492,22.651914 22.040026,19.712952 22.06798,16.044997 22.093981,12.388043 19.14098,9.3940753 15.480948,9.3740862z M15.536978,0.00018994781C16.92504,0.010184512,18.260975,0.21619097,19.536976,0.55418442L20.067982,4.0571488C21.364001,4.5541366,22.550036,5.2501277,23.598007,6.1201123L26.91197,4.8681282C28.776961,6.7871116,30.152935,9.1710862,30.869,11.835056L28.094954,14.04702C28.197005,14.711014,28.262923,15.391013,28.259016,16.081008L28.257918,16.081008C28.24803,16.779988,28.177962,17.459988,28.063948,18.126973L30.813946,20.369943C30.061016,23.017905,28.655989,25.384883,26.767927,27.287875L23.473984,25.99187C22.413927,26.838876,21.209948,27.517852,19.920033,28.001855L19.339955,31.501813C18.056019,31.822823 16.719961,32.006814 15.332022,31.999823 13.946037,31.992804 12.609978,31.791819 11.326043,31.449813L10.801995,27.946864C9.5119574,27.448853,8.3179877,26.756875,7.2650101,25.886889L3.9580054,27.140874C2.0959458,25.219907,0.71594182,22.834926,0,20.172953L2.7800278,17.964972C2.6729719,17.299987 2.6080305,16.624991 2.6099839,15.921997 2.62097,15.229012 2.6960432,14.548021 2.8039536,13.888025L0.053955107,11.638052C0.80102477,8.9870823,2.2080064,6.6141099,4.0939915,4.7241329L7.3969681,6.0201224C8.453974,5.1601323,9.6610052,4.4851373,10.960931,3.9981435L11.520989,0.50418179C12.812981,0.18019591,14.150993,-0.0068135771,15.536978,0.00018994781z</x:String>
 	</Page.Resources>
 
-	<Grid>
+	<Grid x:DefaultBindMode="OneWay">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
-		
-		<controls:BottomNavigationBar VerticalAlignment="Top">
-			<controls:BottomNavigationBar.Items>
-				<controls:BottomNavigationBarItem Data="{StaticResource FavoritesIcon}"
-												  Content="Favorites" />
-				<controls:BottomNavigationBarItem Data="{StaticResource SearchIcon}"
-												  Content="Search" />
-				<controls:BottomNavigationBarItem Data="{StaticResource InformationIcon}"
-												  Content="Information" />
-			</controls:BottomNavigationBar.Items>
-		</controls:BottomNavigationBar>
 
-		<controls:BottomNavigationBar VerticalAlignment="Center"
+		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=0}}">
+			<TextBlock Text="FAVORITES"
+					   FontWeight="Bold"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center" />
+		</Border>
+
+		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=1}}">
+			<TextBlock Text="SEARCH"
+					   FontWeight="Bold"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center" />
+		</Border>
+
+		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=2}}">
+			<TextBlock Text="ALERT"
+					   FontWeight="Bold"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center" />
+		</Border>
+
+		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=3}}">
+			<TextBlock Text="NOTIFICATION"
+					   FontWeight="Bold"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center" />
+		</Border>
+
+		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=4}}">
+			<TextBlock Text="SETTINGS"
+					   FontWeight="Bold"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center" />
+		</Border>
+
+		<controls:BottomNavigationBar x:Name="BottomNavBar"
 									  Grid.Row="1">
 			<controls:BottomNavigationBar.Items>
 				<controls:BottomNavigationBarItem Data="{StaticResource FavoritesIcon}"
@@ -40,22 +64,10 @@
 				<controls:BottomNavigationBarItem Data="{StaticResource SearchIcon}"
 												  Content="Search" />
 				<controls:BottomNavigationBarItem Data="{StaticResource InformationIcon}"
+												  Badge="Alert"
 												  Content="Information" />
 				<controls:BottomNavigationBarItem Data="{StaticResource NotificationIcon}"
-												  Content="Notification" />
-			</controls:BottomNavigationBar.Items>
-		</controls:BottomNavigationBar>
-
-		<controls:BottomNavigationBar VerticalAlignment="Bottom"
-									  Grid.Row="2">
-			<controls:BottomNavigationBar.Items>
-				<controls:BottomNavigationBarItem Data="{StaticResource FavoritesIcon}"
-												  Content="Favorites" />
-				<controls:BottomNavigationBarItem Data="{StaticResource SearchIcon}"
-												  Content="Search" />
-				<controls:BottomNavigationBarItem Data="{StaticResource InformationIcon}"
-												  Content="Information" />
-				<controls:BottomNavigationBarItem Data="{StaticResource NotificationIcon}"
+												  Badge="45"
 												  Content="Notification" />
 				<controls:BottomNavigationBarItem Data="{StaticResource SettingsIcon}"
 												  Content="Settings" />

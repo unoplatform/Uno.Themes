@@ -1,6 +1,5 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Media;
 
 namespace Uno.Material.Controls
 {
@@ -15,6 +14,19 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty DataProperty =
 			DependencyProperty.Register(
 				"Data",
+				typeof(string),
+				typeof(BottomNavigationBarItem),
+				new PropertyMetadata(string.Empty));
+
+		public string Badge
+		{
+			get => (string)GetValue(BadgeProperty);
+			set => SetValue(BadgeProperty, value);
+		}
+
+		public static readonly DependencyProperty BadgeProperty =
+			DependencyProperty.Register(
+				"Badge",
 				typeof(string),
 				typeof(BottomNavigationBarItem),
 				new PropertyMetadata(string.Empty));
