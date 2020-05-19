@@ -1,0 +1,86 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:ctl="using:Uno.Material.Controls">
+
+	<StaticResource x:Key="BottomNavLabelFocusColorBrush"
+					ResourceKey="OnPrimaryBrush" />
+	<x:Double x:Key="BottomNavLabelFontSize">12</x:Double>
+	<StaticResource x:Key="BottomNavIconFocusColorBrush"
+					ResourceKey="OnPrimaryBrush" />
+	<StaticResource x:Key="BottomNavLabelColorBrush"
+					ResourceKey="OnPrimaryMediumBrush" />
+	<StaticResource x:Key="BottomNavIconColorBrush"
+					ResourceKey="OnPrimaryMediumBrush" />
+	<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
+					ResourceKey="ErrorBrush" />
+	<StaticResource x:Key="BottomNavNotifLabelColorBrush"
+					ResourceKey="OnErrorBrush" />
+
+	<Style x:Key="DefaultBottomNavigationBarItemStyle"
+		   TargetType="ctl:BottomNavigationBarItem">
+		<Setter Property="Foreground"
+				Value="{StaticResource BottomNavLabelColorBrush}" />
+		<Setter Property="Margin"
+				Value="0,4" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ctl:BottomNavigationBarItem">
+					<Grid Margin="{TemplateBinding Margin}"
+						  Background="Transparent">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="CheckedPointerOver" />
+								<VisualState x:Name="CheckedPressed" />
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="Icon.Fill"
+												Value="{StaticResource BottomNavIconFocusColorBrush}" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource BottomNavLabelFocusColorBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<Path x:Name="Icon"
+							  Data="{Binding Path=Data, RelativeSource={RelativeSource TemplatedParent}}"
+							  Fill="{StaticResource BottomNavIconColorBrush}"
+							  Stretch="Uniform"
+							  Height="20"
+							  Width="20"
+							  Margin="0,0,0,4"
+							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Grid.Row="1"
+										  Foreground="{TemplateBinding Foreground}"
+										  BorderBrush="{TemplateBinding BorderBrush}"
+										  BorderThickness="{TemplateBinding BorderThickness}"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  CornerRadius="{TemplateBinding CornerRadius}"
+										  FontFamily="{TemplateBinding FontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="ctl:BottomNavigationBarItem"
+		   BasedOn="{StaticResource DefaultBottomNavigationBarItemStyle}" />
+
+</ResourceDictionary>
