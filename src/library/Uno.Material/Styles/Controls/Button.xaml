@@ -3,6 +3,7 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:controls="using:Uno.Material.Controls"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
@@ -83,8 +84,6 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="0" />
 										<Setter Target="HoverOverlay.Opacity"
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
@@ -98,10 +97,6 @@
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
 														 Storyboard.TargetProperty="Opacity"
@@ -154,28 +149,26 @@
 								Background="{StaticResource OnPrimaryFocusedBrush}"
 								Opacity="0" />
 
-						<Border x:Name="PressedOverlay"
-								Background="{StaticResource OnPrimaryPressedBrush}"
-								Opacity="0" />
-
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
 								Background="{StaticResource OnPrimarySelectedBrush}"
 								Opacity="0" />
 
-						<ContentPresenter x:Name="ContentPresenter"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  CornerRadius="{TemplateBinding CornerRadius}"
-										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
+						<controls:Ripple x:Name="ContentPresenter"
+										 Feedback="{StaticResource OnPrimaryPressedBrush}"
+										 RippleSizeMultiplier="0.75"
+										 BorderBrush="{TemplateBinding BorderBrush}"
+										 BorderThickness="{TemplateBinding BorderThickness}"
+										 Content="{TemplateBinding Content}"
+										 ContentTemplate="{TemplateBinding ContentTemplate}"
+										 ContentTransitions="{TemplateBinding ContentTransitions}"
+										 CornerRadius="{TemplateBinding CornerRadius}"
+										 FontFamily="{TemplateBinding FontFamily}"
+										 FontSize="{TemplateBinding FontSize}"
+										 Padding="{TemplateBinding Padding}"
+										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										 AutomationProperties.AccessibilityView="Raw" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -216,8 +209,6 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="0" />
 										<Setter Target="HoverOverlay.Opacity"
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
@@ -226,16 +217,23 @@
 								</VisualState>
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
 										<Setter Target="Root.BorderBrush"
 												Value="{StaticResource OnSurfaceHoverBrush}" />
 									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="0:0:0.25"
+														 From="0"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
 										<Setter Target="Root.BorderBrush"
 												Value="{StaticResource OnSurfacePressedBrush}" />
 									</VisualState.Setters>
@@ -291,26 +289,26 @@
 								Background="{StaticResource OnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<Border x:Name="PressedOverlay"
-								Background="{StaticResource OnSurfacePressedBrush}"
-								Opacity="0" />
-
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
 								Background="{StaticResource OnSurfaceSelectedBrush}"
 								Opacity="0" />
 
-						<ContentPresenter x:Name="ContentPresenter"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  CornerRadius="{StaticResource ButtonBorderRadius}"
-										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
+						<controls:Ripple x:Name="ContentPresenter"
+										 Feedback="{StaticResource OnSurfacePressedBrush}"
+										 RippleSizeMultiplier="0.75"
+										 BorderBrush="{TemplateBinding BorderBrush}"
+										 BorderThickness="{TemplateBinding BorderThickness}"
+										 Content="{TemplateBinding Content}"
+										 ContentTemplate="{TemplateBinding ContentTemplate}"
+										 ContentTransitions="{TemplateBinding ContentTransitions}"
+										 CornerRadius="{StaticResource ButtonBorderRadius}"
+										 FontFamily="{TemplateBinding FontFamily}"
+										 FontSize="{TemplateBinding FontSize}"
+										 Padding="{TemplateBinding Padding}"
+										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										 AutomationProperties.AccessibilityView="Raw" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -338,8 +336,6 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="0" />
 										<Setter Target="HoverOverlay.Opacity"
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
@@ -347,20 +343,23 @@
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="0:0:0.25"
+														 From="0"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.3"
+														 Duration="0:0:0.25"
 														 BeginTime="0:0:1"
 														 From="0"
 														 To="1">
@@ -407,28 +406,26 @@
 								Background="{StaticResource OnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<Border x:Name="PressedOverlay"
-								Background="{StaticResource OnSurfacePressedBrush}"
-								Opacity="0" />
-
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource OnSurfaceSelectedBrush}"
+								Background="{StaticResource OnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<ContentPresenter x:Name="ContentPresenter"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  CornerRadius="{TemplateBinding CornerRadius}"
-										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
+						<controls:Ripple x:Name="ContentPresenter"
+										 Feedback="{StaticResource OnSurfaceFocusedBrush}"
+										 RippleSizeMultiplier="0.85"
+										 BorderBrush="{TemplateBinding BorderBrush}"
+										 BorderThickness="{TemplateBinding BorderThickness}"
+										 Content="{TemplateBinding Content}"
+										 ContentTemplate="{TemplateBinding ContentTemplate}"
+										 ContentTransitions="{TemplateBinding ContentTransitions}"
+										 CornerRadius="{StaticResource ButtonBorderRadius}"
+										 FontFamily="{TemplateBinding FontFamily}"
+										 FontSize="{TemplateBinding FontSize}"
+										 Padding="{TemplateBinding Padding}"
+										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										 AutomationProperties.AccessibilityView="Raw" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -437,6 +434,7 @@
 
 	<!-- Known Issue - Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
 	<!-- Known Issue - VisualState Setters can not be applied inside ElevatedView -->
+	<!-- Known Issue - Wasm ElevatedView is cut off for some shapes (including ellipses) -->
 	<Style x:Key="FabMaterialButtonStyle"
 		   TargetType="Button">
 		<Setter Property="Background"
@@ -470,12 +468,6 @@
 									<VisualState.Setters>
 										<Setter Target="FabFocusBorder.Fill"
 												Value="{StaticResource OnSurfaceHoverBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Fill"
-												Value="{StaticResource OnSurfacePressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled" />
@@ -518,6 +510,10 @@
 												Value="{StaticResource FabLargeAreaSize}" />
 										<Setter Target="FabFocusBorder.Height"
 												Value="{StaticResource FabLargeAreaSize}" />
+										<android:Setter Target="Ripple.MinWidth"
+														Value="{StaticResource FabLargeAreaSize}" />
+										<android:Setter Target="Ripple.MinHeight"
+														Value="{StaticResource FabLargeAreaSize}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="SmallDevices">
@@ -537,48 +533,63 @@
 												Value="{StaticResource FabSmallAreaSize}" />
 										<Setter Target="FabFocusBorder.Height"
 												Value="{StaticResource FabSmallAreaSize}" />
+										<android:Setter Target="Ripple.MinWidth"
+														Value="{StaticResource FabSmallAreaSize}" />
+										<android:Setter Target="Ripple.MinHeight"
+														Value="{StaticResource FabSmallAreaSize}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<toolkit:ElevatedView x:Name="FabButton"
-											  Elevation="6"
-											  ShadowColor="Black"
-											  IsHitTestVisible="False"
-											  Background="{StaticResource TransparentBrush}"
-											  CornerRadius="{StaticResource FabBorderRadius}"
-											  Width="{TemplateBinding Width}"
-											  Height="{TemplateBinding Height}">
+						<controls:Ripple x:Name="Ripple"
+										 Feedback="{StaticResource OnSurfaceFocusedBrush}"
+										 CornerRadius="{StaticResource FabBorderRadius}"
+										 RippleSizeMultiplier="0.9">
 							<Grid>
-								<Ellipse x:Name="FabBorder"
+								<toolkit:ElevatedView x:Name="FabButton"
+													  Elevation="6"
+													  wasm:Margin="0,0,6,6"
+													  ShadowColor="Black"
+													  IsHitTestVisible="False"
+													  Background="{StaticResource TransparentBrush}"
+													  CornerRadius="{StaticResource FabBorderRadius}"
+													  Width="{TemplateBinding Width}"
+													  Height="{TemplateBinding Height}">
+									<Grid>
+										<Ellipse x:Name="FabBorder"
+												 Width="{TemplateBinding Width}"
+												 Height="{TemplateBinding Height}"
+												 Fill="{TemplateBinding Background}"
+												 Stroke="{TemplateBinding BorderBrush}"
+												 StrokeThickness="0"
+												 IsHitTestVisible="False" />
+
+										<ContentPresenter x:Name="ContentPresenter"
+														  BorderBrush="{TemplateBinding BorderBrush}"
+														  BorderThickness="{TemplateBinding BorderThickness}"
+														  Content="{TemplateBinding Content}"
+														  ContentTemplate="{TemplateBinding ContentTemplate}"
+														  ContentTransitions="{TemplateBinding ContentTransitions}"
+														  CornerRadius="{TemplateBinding CornerRadius}"
+														  FontFamily="{TemplateBinding FontFamily}"
+														  FontSize="{TemplateBinding FontSize}"
+														  Padding="{TemplateBinding Padding}"
+														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+														  AutomationProperties.AccessibilityView="Raw" />
+									</Grid>
+								</toolkit:ElevatedView>
+
+								<Ellipse x:Name="FabFocusBorder"
+										 wasm:Margin="0,0,6,6"
 										 Width="{TemplateBinding Width}"
 										 Height="{TemplateBinding Height}"
-										 Fill="{TemplateBinding Background}"
-										 Stroke="{TemplateBinding BorderBrush}"
-										 StrokeThickness="0"
-										 IsHitTestVisible="False" />
-
-								<ContentPresenter x:Name="ContentPresenter"
-												  AutomationProperties.AccessibilityView="Raw"
-												  ContentTemplate="{TemplateBinding ContentTemplate}"
-												  ContentTransitions="{TemplateBinding ContentTransitions}"
-												  Content="{TemplateBinding Content}"
-												  FontSize="{TemplateBinding FontSize}"
-												  FontFamily="{TemplateBinding FontSize}"
-												  Foreground="{TemplateBinding Foreground}"
-												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-												  Margin="{TemplateBinding Padding}"
-												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+										 Fill="{StaticResource TransparentBrush}"
+										 Stroke="{StaticResource OnPrimaryBrush}"
+										 StrokeThickness="0" />
 							</Grid>
-						</toolkit:ElevatedView>
-
-						<Ellipse x:Name="FabFocusBorder"
-								 Width="{TemplateBinding Width}"
-								 Height="{TemplateBinding Height}"
-								 Fill="{StaticResource TransparentBrush}"
-								 Stroke="{StaticResource OnPrimaryBrush}"
-								 StrokeThickness="0" />
+						</controls:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -620,12 +631,6 @@
 												Value="{StaticResource OnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource OnSurfacePressedBrush}" />
-									</VisualState.Setters>
-								</VisualState>
 								<VisualState x:Name="Disabled" />
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="FocusStates">
@@ -649,38 +654,50 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<toolkit:ElevatedView Elevation="6"
-											  ShadowColor="Black"
-											  IsHitTestVisible="False"
-											  Background="{StaticResource TransparentBrush}"
-											  CornerRadius="{StaticResource FabBorderRadius}">
+						<controls:Ripple Feedback="{StaticResource OnSurfaceFocusedBrush}"
+										 RippleSizeMultiplier="0.75"
+										 CornerRadius="{StaticResource FabBorderRadius}"
+										 HorizontalContentAlignment="Stretch"
+										 VerticalContentAlignment="Stretch">
 							<Grid>
-								<Grid x:Name="FabBorder"
+								<toolkit:ElevatedView Elevation="6"
+													  wasm:Margin="0,0,6,6"
+													  ShadowColor="Black"
+													  IsHitTestVisible="False"
+													  Background="{StaticResource TransparentBrush}"
+													  CornerRadius="{StaticResource FabBorderRadius}">
+									<Grid>
+										<Grid x:Name="FabBorder"
+											  CornerRadius="{StaticResource FabBorderRadius}"
+											  Background="{TemplateBinding Background}"
+											  BorderBrush="{TemplateBinding BorderBrush}"
+											  BorderThickness="0" />
+
+										<ContentPresenter x:Name="ContentPresenter"
+														  BorderBrush="{TemplateBinding BorderBrush}"
+														  BorderThickness="{TemplateBinding BorderThickness}"
+														  Content="{TemplateBinding Content}"
+														  ContentTemplate="{TemplateBinding ContentTemplate}"
+														  ContentTransitions="{TemplateBinding ContentTransitions}"
+														  CornerRadius="{TemplateBinding CornerRadius}"
+														  FontFamily="{TemplateBinding FontFamily}"
+														  FontSize="{TemplateBinding FontSize}"
+														  Padding="{TemplateBinding Padding}"
+														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+														  AutomationProperties.AccessibilityView="Raw" />
+
+									</Grid>
+								</toolkit:ElevatedView>
+
+								<Grid x:Name="FabFocusBorder"
+									  wasm:Margin="0,0,6,6"
 									  CornerRadius="{StaticResource FabBorderRadius}"
-									  Background="{TemplateBinding Background}"
-									  BorderBrush="{TemplateBinding BorderBrush}"
+									  Background="{StaticResource TransparentBrush}"
+									  BorderBrush="{StaticResource OnPrimaryBrush}"
 									  BorderThickness="0" />
-
-								<ContentPresenter x:Name="ContentPresenter"
-												  AutomationProperties.AccessibilityView="Raw"
-												  ContentTemplate="{TemplateBinding ContentTemplate}"
-												  ContentTransitions="{TemplateBinding ContentTransitions}"
-												  Content="{TemplateBinding Content}"
-												  FontSize="{TemplateBinding FontSize}"
-												  FontFamily="{TemplateBinding FontSize}"
-												  Foreground="{TemplateBinding Foreground}"
-												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-												  Margin="{TemplateBinding Padding}"
-												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-
 							</Grid>
-						</toolkit:ElevatedView>
-
-						<Grid x:Name="FabFocusBorder"
-							  CornerRadius="{StaticResource FabBorderRadius}"
-							  Background="{StaticResource TransparentBrush}"
-							  BorderBrush="{StaticResource OnPrimaryBrush}"
-							  BorderThickness="0" />
+						</controls:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
