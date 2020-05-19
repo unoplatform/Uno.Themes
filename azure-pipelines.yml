@@ -14,19 +14,55 @@ pr:
       - release/stable/*
 
 variables:
+  # Image names
   windowsVMImage: 'windows-2019'
   linuxVMImage: 'ubuntu-16.04'
   macOSVMImage: 'macOS-10.15'
-  xCodeRoot: '/Applications/Xcode_11.3.app'
-  XamarinSDKVersion: 6_6_0
+
+  # Nuget Version to use
   NUGET_VERSION: 5.4.0
+  
+  # Solution to build
   SolutionFileName: Uno.Material.sln
+
+  # name of the folder where artefacts will be placed. Variable used in build and release phases.
+  # We make seperate folders so that releases can each download only the folder they need.
   NugetPackagesArtifactName: Packages
+  AndroidArtifactName: Android
+  iOSArtifactName: iOS
+  UWPArtifactName: UWP
+
+  # Path where packages (nuget or app packages) will be copied to.
+  PackageOutputPath: $(Build.ArtifactStagingDirectory)
+  
+  # For Application.Building.Light optimizations
+  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')] 
+
+  # Android configurations
   ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  PackageOutputPath: $(Build.ArtifactStagingDirectory) # Path where packages (nuget or app packages) will be copied to.
-  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')] # For Application.Building.Light optimizations
+  
+  # Optional, specifiy xcode and xamarin versions. See ios-build-select-version.yml if needed.
+  # xCodeRoot: '/Applications/Xcode_11.3.app'
+  # XamarinSDKVersion: 6_6_0
+
+  # Configuration requirements on the azure devops pipeline
+  # Those variables must be configured in the AzureDevops Library
+  #### iOS ####
+  ## Secure files:
+  # distribution certificate (.p12) 
+  # distribution provisioning profile (.mobileprovision)
+  
+  ## Variable group containing : "group: apple.appstore.distribution"
+  # $(appleappstorecertificatepassword) : password for the p12 certificate (this is marked private in azdo)
+  # $(UnoMaterialStoreProvisioningProfileName) : Name of the .mobileprovision file in the secure files.
+  # $(appleTeamId) : id of the apple team (Required if the secure connection used has access to more than one team, which is often the case)
+  # $(appleTeamName) : name of the apple developer team. (Required if the secure connection used has access to more than one team, which is often the case)
+  ## Code to update below
+  # In InstallAppleCertificate@ task: Set the value for certSecureFile
+  # In InstallAppleProvisioningProfile@ task: Set the value for provProfileSecureFile
+  # In stage-release-testflight.yml, AppStoreRelease : Set the name of the service connection and the identifier of the app (aka the Bundle ID)
 
 stages:
 - stage: Build
@@ -38,11 +74,11 @@ stages:
         Android:
           ApplicationConfiguration: Release
           ApplicationPlatform: Android
-          ArtifactName: Android
+          ArtifactName: $(AndroidArtifactName)
         UWP:
           ApplicationConfiguration: Release
           ApplicationPlatform: UWP_x64
-          ArtifactName: UWP
+          ArtifactName: $(UWPArtifactName)
         Packages:
           ApplicationConfiguration: Release
           ApplicationPlatform: Packages
@@ -61,21 +97,21 @@ stages:
         iOS:
           ApplicationConfiguration: Release
           ApplicationPlatform: iPhone
-          ArtifactName: iOS
+          ArtifactName: $(iOSArtifactName)
     pool:
       vmImage: $(macOSVMImage)
       
     variables:
-      - name: SkipUnknownFrameworks
-        value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
-      - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
+    - name: SkipUnknownFrameworks
+      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+    - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
 
     steps:
     - task: InstallAppleCertificate@2
       displayName: Install Apple Certificate
       inputs:
-        certSecureFile: 'apple.appstore.distribution.p12' # Certificate located in the Library's secure files
-        certPwd: '$(appleappstorecertificatepassword)' # password in Library's Variable group
+        certSecureFile: 'apple.appstore.distribution.p12' # Name of the p12 certificate in the secure files (in azure devops pipeline)
+        certPwd: '$(appleappstorecertificatepassword)' 
         keychain: 'temp'
         deleteCert: true
     
@@ -83,7 +119,7 @@ stages:
       displayName: 'Install Apple Provisioning Profile'
       inputs:
         provisioningProfileLocation: 'secureFiles'
-        provProfileSecureFile: UnoMaterial.mobileprovision # Located in the Library's secure files
+        provProfileSecureFile: 'UnoMaterial.mobileprovision' # Name of the .mobileprovision file in the secure files.
         
     - template: build/stage-build.yml
 
@@ -106,19 +142,9 @@ stages:
       vmImage: $(macOSVMImage)
     
     variables:
-       - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
-    
+    - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
+
     steps:
-    - task: AppStoreRelease@1
-      displayName: 'Push to testflight'
-      inputs:
-        serviceEndpoint: 'apple appstore connection'
-        appIdentifier: 'uno.platform.material'
-        appType: 'iOS'
-        ipaPath: '**/*.ipa'
-        releaseTrack: 'TestFlight'
-        shouldSkipWaitingForProcessing: true
-        teamId: $(appleTeamId)
-        teamName: $(appleTeamName)
+    - template: build/stage-release-testflight.yml
 
 
