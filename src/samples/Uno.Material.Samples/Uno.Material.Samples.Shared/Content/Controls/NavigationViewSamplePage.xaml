@@ -1,0 +1,41 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.NavigationViewSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Material.Samples.Shared.Content.Controls"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d">
+
+	<StackPanel BorderBrush="{StaticResource OnSurfaceBrush}"
+				BorderThickness="1"
+				Margin="12">
+
+		<!-- NavigationView Text -->
+		<TextBlock Text="The Navigation View control is the expandable and collapseable menu that you see in the top-left of your screen"
+				   FontSize="16"
+				   Foreground="{StaticResource PrimaryBrush}"
+				   Margin="12,12,12,0" />
+		
+		<TextBlock Text="It is used to navigate the application."
+				   FontSize="16"
+				   Foreground="{StaticResource PrimaryBrush}"
+				   Margin="12,2,12,12" />
+
+
+		<!-- Explanation Text -->
+		<TextBlock Text="To use the navigation view to navigate to various pages in your application, code must be added into the xaml and xaml.cs of the page you choose to add it on."
+				   FontSize="14"
+				   Foreground="{StaticResource PrimaryBrush}"
+				   Margin="12" />
+
+		<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
+			<StackPanel>
+				<Image Source="ms-appx:///Assets/NavigationView_xaml.png" />
+				<Image Source="ms-appx:///Assets/NavigationView_xamlcs_1.png" />
+				<Image Source="ms-appx:///Assets/NavigationView_xamlcs_2.png" />
+				<Image Source="ms-appx:///Assets/NavigationView_xamlcs_3.png" />
+				<Image Source="ms-appx:///Assets/NavigationView_xamlcs_4.png" />
+			</StackPanel>
+		</Button>
+	</StackPanel>
+</Page>
