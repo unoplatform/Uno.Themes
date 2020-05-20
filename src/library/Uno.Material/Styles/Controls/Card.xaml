@@ -1,15 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:ctl="using:Uno.Material.Controls">
+					xmlns:controls="using:Uno.Material.Controls">
 
 	<Style x:Key="DefaultCardStyle"
-		   TargetType="ctl:Card">
+		   TargetType="controls:Card">
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="ctl:Card">
+				<ControlTemplate TargetType="controls:Card">
 					<Grid>
 						<StackPanel>
-							
+
 						</StackPanel>
 					</Grid>
 				</ControlTemplate>
@@ -17,7 +17,7 @@
 		</Setter>
 	</Style>
 
-	<Style TargetType="ctl:Card"
+	<Style TargetType="controls:Card"
 		   BasedOn="{StaticResource DefaultCardStyle}" />
 
 </ResourceDictionary>
