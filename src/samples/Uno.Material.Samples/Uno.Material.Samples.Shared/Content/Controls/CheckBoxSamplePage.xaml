@@ -42,8 +42,8 @@
 
 		<StackPanel Orientation="Horizontal">
 
-			<!-- DEFAULT UNCHECKED -->
-			<CheckBox Content="DEFAULT UNCHECKED"
+			<!-- UNCHECKED -->
+			<CheckBox Content="UNCHECKED"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
 					  Margin="12" />
 
@@ -53,7 +53,7 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Content='DEFAULT UNCHECKED'"
+					<TextBlock Text="Content='UNCHECKED'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -70,10 +70,10 @@
 
 		<StackPanel Orientation="Horizontal">
 
-			<!-- DEFAULT CHECKED -->
-			<CheckBox Content="DEFAULT CHECKED"
-					  IsChecked="True"
+			<!-- CHECKED -->
+			<CheckBox Content="CHECKED"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
+					  IsChecked="True"
 					  Margin="12" />
 
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
@@ -82,7 +82,11 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Content='DEFAULT CHECKED'"
+					<TextBlock Text="Content='CHECKED'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource MaterialCheckBoxStyle}'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -90,10 +94,6 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Style='{StaticResource MaterialCheckBoxStyle}'"
-							   Foreground="{StaticResource PrimaryBrush}"
-							   FontSize="14" />
-
 					<TextBlock Text="Margin='12'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
@@ -103,43 +103,11 @@
 
 		<StackPanel Orientation="Horizontal">
 
-			<!-- DEFAULT DISABLED -->
-			<CheckBox Content="DEFAULT DISABLED"
-					  IsEnabled="False"
+			<!-- INDETERMINATE -->
+			<CheckBox Content="INDETERMINATE"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  Margin="12" />
-
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<TextBlock Text="CheckBox"
-							   Foreground="{StaticResource PrimaryBrush}"
-							   FontSize="14" />
-
-					<TextBlock Text="Content='DEFAULT DISABLED'"
-							   Foreground="{StaticResource PrimaryBrush}"
-							   FontSize="14" />
-
-					<TextBlock Text="IsEnabled='False'"
-							   Foreground="{StaticResource PrimaryBrush}"
-							   FontSize="14" />
-
-					<TextBlock Text="Style='{StaticResource MaterialCheckBoxStyle}'"
-							   Foreground="{StaticResource PrimaryBrush}"
-							   FontSize="14" />
-
-					<TextBlock Text="Margin='12'"
-							   Foreground="{StaticResource PrimaryBrush}"
-							   FontSize="14" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- DEFAULT INDETERMINATE -->
-			<CheckBox Content="DEFAULT INDETERMINATE"
+					  IsThreeState="True"
 					  IsChecked="{x:Null}"
-					  Style="{StaticResource MaterialCheckBoxStyle}"
 					  Margin="12" />
 
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
@@ -148,7 +116,15 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Content='DEFAULT INDETERMINATE'"
+					<TextBlock Text="Content='INDETERMINATE'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource MaterialCheckBoxStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsThreeState='True'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -156,7 +132,36 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal">
+
+			<!-- DISABLED -->
+			<CheckBox Content="DISABLED"
+					  Style="{StaticResource MaterialCheckBoxStyle}"
+					  IsEnabled="False"
+					  Margin="12" />
+
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
+				<StackPanel>
+					<TextBlock Text="CheckBox"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Content='DISABLED'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
 					<TextBlock Text="Style='{StaticResource MaterialCheckBoxStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsEnabled='False'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -169,11 +174,11 @@
 
 		<StackPanel Orientation="Horizontal">
 
-			<!-- DEFAULT INDETERMINATE DISABLED -->
-			<CheckBox Content="DEFAULT INDETERMINATE DISABLED"
-					  IsEnabled="False"
-					  IsChecked="{x:Null}"
+			<!-- CHECKED DISABLED -->
+			<CheckBox Content="CHECKED DISABLED"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
+					  IsEnabled="False"
+					  IsChecked="True"
 					  Margin="12" />
 
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
@@ -182,7 +187,11 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Content='DEFAULT INDETERMINATE DISABLED'"
+					<TextBlock Text="Content='CHECKED DISABLED'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource MaterialCheckBoxStyle}'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -190,11 +199,50 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="IsChecked='{x:Null}'"
+					<TextBlock Text="IsChecked='True'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal">
+
+			<!-- INDETERMINATE DISABLED -->
+			<CheckBox Content="INDETERMINATE DISABLED"
+					  Style="{StaticResource MaterialCheckBoxStyle}"
+					  IsEnabled="False"
+					  IsThreeState="True"
+					  IsChecked="{x:Null}"
+					  Margin="12" />
+
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
+				<StackPanel>
+					<TextBlock Text="CheckBox"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Content='INDETERMINATE DISABLED'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
 					<TextBlock Text="Style='{StaticResource MaterialCheckBoxStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsEnabled='False'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsThreeState='True'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+					
+					<TextBlock Text="IsChecked='{x:Null}'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 

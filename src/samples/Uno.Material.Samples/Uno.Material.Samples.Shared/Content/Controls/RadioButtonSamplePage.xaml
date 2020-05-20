@@ -16,7 +16,8 @@
 				   Margin="12" />
 
 		<StackPanel Orientation="Horizontal">
-			<RadioButton Content="DEFAULT"
+			<RadioButton GroupName="RadioButtonDemo"
+						 Content="UNCHECKED"
 						 Style="{StaticResource MaterialRadioButtonStyle}"
 						 Margin="12" />
 
@@ -26,7 +27,7 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Content='DEFAULT'"
+					<TextBlock Text="Content='UNCHECKED'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -42,7 +43,8 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal">
-			<RadioButton Content="DEFAULT CHECKED"
+			<RadioButton GroupName="RadioButtonDemo"
+						 Content="CHECKED"
 						 Style="{StaticResource MaterialRadioButtonStyle}"
 						 IsChecked="True"
 						 Margin="12" />
@@ -53,7 +55,7 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Content='DEFAULT CHECKED'"
+					<TextBlock Text="Content='CHECKED'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -73,7 +75,7 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal">
-			<RadioButton Content="DEFAULT DISABLED"
+			<RadioButton Content="UNCHECKED DISABLED"
 						 IsEnabled="False"
 						 Style="{StaticResource MaterialRadioButtonStyle}"
 						 Margin="12" />
@@ -84,7 +86,7 @@
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
-					<TextBlock Text="Content='DEFAULT DISABLED'"
+					<TextBlock Text="Content='UNCHECKED DISABLED'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
@@ -93,6 +95,42 @@
 							   FontSize="14" />
 
 					<TextBlock Text="Style='{StaticResource MaterialRadioButtonStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Margin='12'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
+		
+		<StackPanel Orientation="Horizontal">
+			<RadioButton Content="CHECKED DISABLED"
+						 Style="{StaticResource MaterialRadioButtonStyle}"
+						 IsEnabled="False"
+						 IsChecked="True"
+						 Margin="12" />
+
+			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
+				<StackPanel>
+					<TextBlock Text="RadioButton"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Content='CHECKED DISABLED'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="Style='{StaticResource MaterialRadioButtonStyle}'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsEnabled='False'"
+							   Foreground="{StaticResource PrimaryBrush}"
+							   FontSize="14" />
+
+					<TextBlock Text="IsChecked='True'"
 							   Foreground="{StaticResource PrimaryBrush}"
 							   FontSize="14" />
 
