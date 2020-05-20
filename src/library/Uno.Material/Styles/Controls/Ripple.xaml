@@ -60,25 +60,34 @@
 												<CubicEase EasingMode="EaseInOut" />
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
-										<DoubleAnimation Storyboard.TargetName="ClickEllipse"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.05"
-														 From="0"
-														 To="1">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-										<DoubleAnimation Storyboard.TargetName="ClickEllipse"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.2"
-														 BeginTime="0:0:0.2"
-														 From="1"
-														 To="0">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
+
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="ClickEllipse"
+																	   Storyboard.TargetProperty="Opacity">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0">
+												<EasingDoubleKeyFrame.EasingFunction>
+													<CubicEase EasingMode="EaseIn" />
+												</EasingDoubleKeyFrame.EasingFunction>
+											</EasingDoubleKeyFrame>
+											<EasingDoubleKeyFrame KeyTime="0:0:0.05"
+																  Value="1">
+												<EasingDoubleKeyFrame.EasingFunction>
+													<CubicEase EasingMode="EaseIn" />
+												</EasingDoubleKeyFrame.EasingFunction>
+											</EasingDoubleKeyFrame>
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="1">
+												<EasingDoubleKeyFrame.EasingFunction>
+													<CubicEase EasingMode="EaseIn" />
+												</EasingDoubleKeyFrame.EasingFunction>
+											</EasingDoubleKeyFrame>
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0">
+												<EasingDoubleKeyFrame.EasingFunction>
+													<CubicEase EasingMode="EaseIn" />
+												</EasingDoubleKeyFrame.EasingFunction>
+											</EasingDoubleKeyFrame>
+										</DoubleAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
