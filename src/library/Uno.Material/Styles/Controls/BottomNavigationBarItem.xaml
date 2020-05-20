@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:ctl="using:Uno.Material.Controls"
+					xmlns:controls="using:Uno.Material.Controls"
 					xmlns:converters="using:Uno.Material.Converters">
 
 	<StaticResource x:Key="BottomNavLabelFocusColorBrush"
@@ -21,19 +21,49 @@
 												NotNullOrEmptyValue="Visible"
 												NullOrEmptyValue="Collapsed" />
 
+	<CubicEase x:Key="EaseOutFunction"
+			   EasingMode="EaseOut" />
+
 	<Style x:Key="DefaultBottomNavigationBarItemStyle"
-		   TargetType="ctl:BottomNavigationBarItem">
+		   TargetType="controls:BottomNavigationBarItem">
 		<Setter Property="Foreground"
 				Value="{StaticResource BottomNavLabelColorBrush}" />
 		<Setter Property="Margin"
 				Value="0,4" />
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="ctl:BottomNavigationBarItem">
+				<ControlTemplate TargetType="controls:BottomNavigationBarItem">
 					<Grid Margin="{TemplateBinding Margin}"
 						  Background="Transparent">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
+								<VisualStateGroup.Transitions>
+									<VisualTransition x:Name="ToPressedTransition"
+													  To="Pressed"
+													  GeneratedDuration="0">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="Scale"
+															 Storyboard.TargetProperty="ScaleX"
+															 Duration="0:0:0.4"
+															 From="1"
+															 To="4"
+															 EasingFunction="{StaticResource EaseInOutFunction}" />
+											<DoubleAnimation Storyboard.TargetName="Scale"
+															 Storyboard.TargetProperty="ScaleY"
+															 Duration="0:0:0.4"
+															 From="1"
+															 To="4"
+															 EasingFunction="{StaticResource EaseInOutFunction}" />
+											<DoubleAnimation Storyboard.TargetName="Ripple"
+															 Storyboard.TargetProperty="Opacity"
+															 Duration="0:0:0.4"
+															 From="0.5"
+															 To="0"
+															 EasingFunction="{StaticResource EaseInOutFunction}" />
+										</Storyboard>
+									</VisualTransition>
+								</VisualStateGroup.Transitions>
+
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed" />
@@ -56,6 +86,22 @@
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 
+							<Ellipse x:Name="Ripple"
+									 Opacity="0"
+									 Stretch="Uniform"
+									 Height="24"
+									 Width="24"
+									 VerticalAlignment="Center"
+									 HorizontalAlignment="Center"
+									 Grid.RowSpan="2"
+									 IsHitTestVisible="False"
+									 RenderTransformOrigin="0.5,0.5"
+									 Fill="{StaticResource BottomNavLabelColorBrush}">
+								<Ellipse.RenderTransform>
+									<ScaleTransform x:Name="Scale" />
+								</Ellipse.RenderTransform>
+							</Ellipse>
+
 							<Path x:Name="Icon"
 								  Data="{Binding Path=Data, RelativeSource={RelativeSource TemplatedParent}}"
 								  Fill="{StaticResource BottomNavIconColorBrush}"
@@ -74,7 +120,7 @@
 								<TextBlock x:Name="PART_BadgeLabel"
 										   Text="{Binding Path=Badge, RelativeSource={RelativeSource TemplatedParent}}"
 										   Foreground="{StaticResource BottomNavNotifLabelColorBrush}"
-										   FontSize="8"
+										   FontSize="10"
 										   TextTrimming="CharacterEllipsis"
 										   Margin="4,2" />
 							</Border>
@@ -100,7 +146,7 @@
 		</Setter>
 	</Style>
 
-	<Style TargetType="ctl:BottomNavigationBarItem"
+	<Style TargetType="controls:BottomNavigationBarItem"
 		   BasedOn="{StaticResource DefaultBottomNavigationBarItemStyle}" />
 
 </ResourceDictionary>
