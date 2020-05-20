@@ -27,16 +27,16 @@
 					ResourceKey="OnSurfaceFocusedBrush" />
 
 	<StaticResource x:Key="ComboBoxArrowForegroundThemeBrush"
-					ResourceKey="OnSecondaryMediumBrush" />
+					ResourceKey="OnBackgroundBrush" />
 
-	<SolidColorBrush x:Key="ComboBoxForegroundThemeBrush"
-					 Color="{ThemeResource OnSecondaryColor}" />
+	<StaticResource x:Key="ComboBoxForegroundThemeBrush"
+					ResourceKey="OnBackgroundBrush" />
 
-	<StaticResource x:Key="ComboBoxFocusedBackgroundThemeBrush"
-					ResourceKey="OnSecondaryMediumBrush" />
+	<SolidColorBrush x:Key="ComboBoxPlaceholderTextColor"
+					 Color="{ThemeResource OnBackgroundColor}"
+					 Opacity="0.74" />
 
-	<StaticResource x:Key="ComboBoxPlaceholderTextForegroundThemeBrush"
-					ResourceKey="OnSecondaryMediumBrush" />
+	<CornerRadius x:Key="ComboBoxBorderRadius">4</CornerRadius>
 
 	<!-- Style -->
 	<Style x:Key="MaterialComboBoxItemStyle"
@@ -180,7 +180,7 @@
 				Value="{StaticResource MaterialComboBoxItemStyle}" />
 		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 						Value="Below" />
-		
+
 		<Setter Property="ItemsPanel">
 			<Setter.Value>
 				<ItemsPanelTemplate>
@@ -192,7 +192,8 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ComboBox">
-					<Grid x:Name="RootGrid">
+					<Grid x:Name="RootGrid"
+						  CornerRadius="{StaticResource ComboBoxBorderRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -285,7 +286,7 @@
 						<!-- Elevated View -->
 						<toolkit:ElevatedView Background="{ThemeResource ComboBoxBackgroundColorBrush}"
 											  HorizontalAlignment="Stretch"
-											  CornerRadius="4"
+											  CornerRadius="{StaticResource ComboBoxBorderRadius}"
 											  Elevation="8"
 											  win:BorderBrush="{StaticResource ComboBoxBorderBrush}"
 											  win:BorderThickness="1">
@@ -334,7 +335,7 @@
 											   Text="{TemplateBinding PlaceholderText}"
 											   Style="{StaticResource Body2}"
 											   MaxLines="1"
-											   Foreground="{ThemeResource ComboBoxPlaceholderTextForegroundThemeBrush}" />
+											   Foreground="{ThemeResource ComboBoxPlaceholderTextColor}" />
 								</ContentPresenter>
 
 								<!-- PlaceholderTextBlock -->
@@ -398,7 +399,7 @@
 									</Border>
 								</Popup>
 							</Grid>
-						</toolkit:ElevatedView> 
+						</toolkit:ElevatedView>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
