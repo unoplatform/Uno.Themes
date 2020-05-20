@@ -2,7 +2,10 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:xamarin="http://nventive.com/xamarin"
-					mc:Ignorable="xamarin">
+					xmlns:ios="http://uno.ui/ios"
+					xmlns:android="http://uno.ui/android"
+					xmlns:wasm="http://uno.ui/wasm"
+					mc:Ignorable="xamarin ios android wasm">
 
 	<GridLength x:Key="CheckAreaLength">40</GridLength>
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
@@ -38,13 +41,73 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CheckBox">
-					<Grid x:Name="Root">
+					<Grid x:Name="Root"
+						  Background="Transparent">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CombinedStates">
 
-								<VisualState x:Name="UncheckedNormal" />
+								<VisualState x:Name="UncheckedNormal">
+									<xamarin:Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+										
+										<android:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.5"
+																 EasingFunction="{StaticResource EaseInOutFunction}"
+																 From="1"
+																 To="0" />
+
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																	   Storyboard.TargetName="PressRing">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</xamarin:Storyboard>
+								</VisualState>
 
 								<VisualState x:Name="UncheckedPointerOver">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																	   Storyboard.TargetName="PressRing">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Fill"
 												Value="{ThemeResource SelectControlToggleOffHoverButtonColor}" />
@@ -60,12 +123,47 @@
 
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Opacity"
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="{StaticResource ControlDisabledOpacity}" />
+										<Setter Target="ContentPresenter.Opacity"
 												Value="{StaticResource ControlDisabledOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckedNormal">
+									<xamarin:Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<android:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.5"
+																 EasingFunction="{StaticResource EaseInOutFunction}"
+																 From="1"
+																 To="0" />
+
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																	   Storyboard.TargetName="PressRing">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</xamarin:Storyboard>
+
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
 												Value="{ThemeResource SelectControlBackgroundColor}" />
@@ -77,6 +175,32 @@
 								</VisualState>
 
 								<VisualState x:Name="CheckedPointerOver">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																	   Storyboard.TargetName="PressRing">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
 												Value="{ThemeResource SelectControlBackgroundColor}" />
@@ -104,16 +228,53 @@
 
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Opacity"
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="{StaticResource ControlDisabledOpacity}" />
+										<Setter Target="ContentPresenter.Opacity"
 												Value="{StaticResource ControlDisabledOpacity}" />
 										<Setter Target="BackgroundBorder.Background"
-												Value="{ThemeResource SelectControlToggleOffBackgroundColor}" />
+												Value="{ThemeResource SelectControlBackgroundColor}" />
+										<Setter Target="BackgroundBorder.BorderThickness"
+												Value="0" />
 										<Setter Target="CheckGlyph.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="IndeterminateNormal">
+									<xamarin:Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<android:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.5"
+																 EasingFunction="{StaticResource EaseInOutFunction}"
+																 From="1"
+																 To="0" />
+										
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																	   Storyboard.TargetName="PressRing">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</xamarin:Storyboard>
+
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
 												Value="{ThemeResource SelectControlBackgroundColor}" />
@@ -125,6 +286,32 @@
 								</VisualState>
 
 								<VisualState x:Name="IndeterminatePointerOver">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																	   Storyboard.TargetName="PressRing">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+
 									<VisualState.Setters>
 										<Setter Target="BackgroundBorder.Background"
 												Value="{ThemeResource SelectControlBackgroundColor}" />
@@ -152,8 +339,10 @@
 
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Opacity"
-												Value="{StaticResource ControlPressedOpacity}" />
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="{StaticResource ControlDisabledOpacity}" />
+										<Setter Target="ContentPresenter.Opacity"
+												Value="{StaticResource ControlDisabledOpacity}" />
 										<Setter Target="BackgroundBorder.Background"
 												Value="{ThemeResource SelectControlBackgroundColor}" />
 										<Setter Target="BackgroundBorder.BorderThickness"
@@ -200,13 +389,32 @@
 								 StrokeThickness="0"
 								 Opacity="0" />
 
-						<Grid x:Name="BackgroundBorder"
-							  Height="{StaticResource CheckAreaSize}"
-							  Width="{StaticResource CheckAreaSize}"
-							  Background="{TemplateBinding Background}"
-							  BorderBrush="{TemplateBinding BorderBrush}"
-							  BorderThickness="{TemplateBinding BorderThickness}"
-							  CornerRadius="2">
+						<Ellipse x:Name="PressRing"
+								 HorizontalAlignment="Center"
+								 VerticalAlignment="Center"
+								 Stretch="Uniform"
+								 Width="{StaticResource FocusAreaSize}"
+								 Height="{StaticResource FocusAreaSize}"
+								 Fill="{StaticResource OnSurfaceDisabledBrush}"
+								 IsHitTestVisible="False"
+								 Opacity="0">
+							<Ellipse.RenderTransform>
+								<CompositeTransform x:Name="PressRingTransform"
+													ScaleX="0"
+													ScaleY="0"
+													CenterX="20"
+													CenterY="20" />
+							</Ellipse.RenderTransform>
+						</Ellipse>
+
+						<Grid Height="{StaticResource CheckAreaSize}"
+							  Width="{StaticResource CheckAreaSize}">
+							<Grid x:Name="BackgroundBorder"
+								  Background="{TemplateBinding Background}"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  CornerRadius="2" />
+
 							<Path x:Name="HyphenGlyph"
 								  Data="M0,0L32,0 32,5.3 0,5.3z"
 								  Fill="{ThemeResource SelectControlIndicatorColor}"
