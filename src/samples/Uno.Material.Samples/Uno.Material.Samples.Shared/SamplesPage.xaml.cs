@@ -41,23 +41,23 @@ namespace Uno.Material.Samples
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "Cards Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CardsSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "TextBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "TextBlock Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "CheckBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "ComboBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ComboBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "FAB Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "FabSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "NavigationView Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "NavigationViewSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "SnackBar Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "SnackBarSamplePage" });
-      NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "NavigationView Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "NavigationViewSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "TextBlock Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "TextBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "ToggleSwitch Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "FAB Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "FabSamplePage" });
 
 			// Set the initial SelectedItem 
 			foreach (NavigationViewItemBase item in NavView.MenuItems)
