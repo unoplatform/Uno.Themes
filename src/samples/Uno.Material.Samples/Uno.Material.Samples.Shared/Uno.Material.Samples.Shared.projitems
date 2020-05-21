@@ -30,6 +30,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\FabSamplePage.xaml.cs">
       <DependentUpon>FabSamplePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage.xaml.cs">
+      <DependentUpon>NavigationViewSamplePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\RadioButtonSamplePage.xaml.cs">
       <DependentUpon>RadioButtonSamplePage.xaml</DependentUpon>
     </Compile>
@@ -66,6 +69,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\RadioButtonSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +102,11 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Assets\" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xaml.PNG" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xamlcs_1.PNG" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xamlcs_2.PNG" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xamlcs_3.PNG" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xamlcs_4.PNG" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\UnoLogo.scale-200.png" />
   </ItemGroup>
 </Project>

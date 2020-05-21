@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!-- 
+	
+	For more information on the color system, consult this page
+	https://material.io/design/color/the-color-system.html#color-theme-creation 
+	
+	-->
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<SolidColorBrush x:Key="NavDrawersBackgroundColor"
+					 Color="{ThemeResource SurfaceColor}" />
+	<StaticResource x:Key="NavDrawersTextColor"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="NavDrawersIconColor"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="NavDrawersSelectedColor"
+					ResourceKey="PrimarySelectedBrush" />
+	<SolidColorBrush x:Key="NavDrawersSelectedTextColor"
+					 Color="{ThemeResource PrimaryColor}" />
+	<SolidColorBrush x:Key="NavDrawersSelectedIconColor"
+					 Color="{ThemeResource PrimaryColor}" />
+</ResourceDictionary>
