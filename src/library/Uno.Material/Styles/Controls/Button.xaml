@@ -356,18 +356,12 @@
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
-														 BeginTime="0:0:1"
-														 From="0"
-														 To="1">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>

@@ -1,0 +1,140 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.CardsSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Material.Samples.Shared.Content.Controls"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:converters="using:Uno.Material.Converters"
+	  xmlns:controls="using:Uno.Material.Controls"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  mc:Ignorable="d">
+
+	<Page.Resources>
+		<converters:FromBoolToValueConverter x:Name="TrueToCollapsed"
+											 TrueValue="COLLAPSED"
+											 FalseValue="EXPAND"
+											 NullValue="EXPAND" />
+		
+		<x:String x:Key="SupportingTextSample">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</x:String>
+
+		<DataTemplate x:Key="AvatarImageTemplate">
+			<Image Source="{Binding}"
+				   Stretch="Uniform"
+				   MaxHeight="40"/>
+		</DataTemplate>
+
+		<DataTemplate x:Key="SampleImageTemplate">
+			<Image Source="{Binding}"
+				   Stretch="Uniform"
+				   MaxHeight="194" />
+		</DataTemplate>
+	</Page.Resources>
+
+	<ScrollViewer>
+		<StackPanel BorderBrush="{StaticResource OnSurfaceBrush}"
+					BorderThickness="1"
+					Margin="12">
+			<TextBlock Text="CARDS"
+					   FontSize="20"
+					   FontWeight="Bold"
+					   Foreground="{StaticResource PrimaryBrush}"
+					   Margin="12" />
+
+			<StackPanel Margin="12"
+						Orientation="Vertical">
+				<controls:Card Header="Outlined card"
+							   SubHeader="With title and subitle only"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<controls:Card Header="Outlined disabled Card"
+							   SubHeader="With title and subitle only"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   IsEnabled="False"
+							   Margin="0,0,0,12" />
+
+				<controls:Card Header="Outlined card"
+							   SubHeader="With supporting text"
+							   SupportingText="{StaticResource SupportingTextSample}"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<controls:Card Header="Outlined card"
+							   SubHeader="With supporting text and expander"
+							   ExpanderHeaderContent="{Binding RelativeSource={RelativeSource Self}, Path=IsOpened, Converter={StaticResource TrueToCollapsed}}"
+							   SupportingText="{StaticResource SupportingTextSample}"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12">
+					<controls:Card.ExpanderContentTemplate>
+						<DataTemplate>
+							<StackPanel Margin="12">
+								<TextBlock Text="Subtitle part 2"
+										   Style="{StaticResource Subtitle2}" />
+
+								<ItemsControl ItemsSource="ABC">
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<StackPanel Orientation="Horizontal" />
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<Button Content="{Binding}"
+													Margin="0,12,12,0"
+													CornerRadius="32"
+													Style="{StaticResource OutlinedMaterialButtonStyle}" />
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</StackPanel>
+						</DataTemplate>
+					</controls:Card.ExpanderContentTemplate>
+				</controls:Card>
+
+				<controls:Card Header="Outlined card"
+							   SubHeader="With media"
+							   MediaContent="ms-appx:///Assets/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<controls:Card Header="Outlined card"
+							   SubHeader="With media and supporting text"
+							   MediaContent="ms-appx:///Assets/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingText="{StaticResource SupportingTextSample}"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<controls:Card x:Name="CardWithButtons"
+							   Header="Outlined card"
+							   SubHeader="With media, supporting text and action buttons"
+							   MediaContent="ms-appx:///Assets/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingText="{StaticResource SupportingTextSample}"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<controls:Card x:Name="CardWithButtonsAndIcons"
+							   Header="Outlined card"
+							   SubHeader="With media, supporting text, action buttons and supplemental action buttons"
+							   MediaContent="ms-appx:///Assets/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingText="{StaticResource SupportingTextSample}"
+							   Style="{StaticResource OutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<controls:Card x:Name="CardWithOtherLayout"
+							   Header="Outlined card"
+							   SubHeader="With a different layout"
+							   AvatarContent="ms-appx:///Assets/Avatar.png"
+							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+							   MediaContent="ms-appx:///Assets/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingText="{StaticResource SupportingTextSample}"
+							   Style="{StaticResource OtherOutlinedLayoutMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+			</StackPanel>
+		</StackPanel>
+	</ScrollViewer>
+</Page>
