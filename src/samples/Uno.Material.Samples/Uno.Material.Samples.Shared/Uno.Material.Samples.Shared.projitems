@@ -21,6 +21,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ButtonSamplePage.xaml.cs">
       <DependentUpon>ButtonSamplePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\CardsSamplePage.xaml.cs">
+      <DependentUpon>CardsSamplePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\CheckBoxSamplePage.xaml.cs">
       <DependentUpon>CheckBoxSamplePage.xaml</DependentUpon>
     </Compile>
@@ -54,6 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ButtonSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\CardsSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,6 +109,8 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Avatar.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Media.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xaml.PNG" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xamlcs_1.PNG" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationView_xamlcs_2.PNG" />

@@ -39,6 +39,8 @@ namespace Uno.Material.Samples
             NavView.MenuItems.Add(new NavigationViewItem()
             { Content = "Button Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ButtonSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "Cards Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CardsSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "TextBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "TextBlock Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
@@ -114,7 +116,10 @@ namespace Uno.Material.Samples
                 //Controls
                 case "ButtonSamplePage":
                     ContentFrame.Navigate(typeof(ButtonSamplePage));
-                    break;
+					break;
+				case "CardsSamplePage":
+					ContentFrame.Navigate(typeof(CardsSamplePage));
+					break;
 				case "TextBoxSamplePage":
 					ContentFrame.Navigate(typeof(TextBoxSamplePage));
 					break;
