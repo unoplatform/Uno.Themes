@@ -22,7 +22,52 @@ to install, sample code, etc.}
 
 ## Features
 
-{More details/listing of features of the project}
+- Material Colors
+- Material Styles for Button
+- Material Styles for TextBox
+- Material Styles for TextBlock
+- Material Styles for CheckBox
+- Material Styles for ComboBox
+- Material Styles for RadioButton
+- Material Styles for ToggleSwitch
+- FAB button component
+- Light and Dark theme
+
+<p>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/ColorSample.png" width="335" height="600"/>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/ColorSampleDark.png" width="335" height="600"/>
+</p>
+
+<p>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/ButtonSample.png" width="335" height="600"/>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/ButtonSampleDark.png" width="335" height="600"/>
+</p>
+
+<p>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/CheckboxSample.png" width="335" height="600"/>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/CheckBoxSampleDark.png" width="335" height="600"/>
+</p>
+
+<p>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/RadioButtonSample.png" width="335" height="600"/>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/RadioButtonSampleDark.png" width="335" height="600"/>
+</p>
+
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/SnackBarSample.png" width="335" height="600"/>
+
+<p>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/TextblockSample.png" width="335" height="600"/>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/TextBlockSampleDark.png" width="335" height="600"/>
+</p>
+
+<p>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/ToggleSwitchSample.png" width="796" height="527"/>
+</p>
+
+<p>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/FabSample.png" width="335" height="600"/>
+<img src ="https://github.com/unoplatform/Uno.Material/blob/dev/madi/read-me/doc/images/FABSampleDark.png" width="335" height="600"/>
+</p>
 
 ## Changelog
 
