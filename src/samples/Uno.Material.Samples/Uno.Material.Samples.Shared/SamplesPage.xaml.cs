@@ -47,7 +47,9 @@ namespace Uno.Material.Samples
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "ComboBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ComboBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-            { Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
+			{ Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
+			NavView.MenuItems.Add(new NavigationViewItem()
+			{ Content = "SnackBar Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "SnackBarSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
 			{ Content = "ToggleSwitch Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
@@ -126,8 +128,11 @@ namespace Uno.Material.Samples
 					ContentFrame.Navigate(typeof(ComboBoxSamplePage));
 					break;
 				case "RadioButtonSamplePage":
-                    ContentFrame.Navigate(typeof(RadioButtonSamplePage));
-                    break;
+					ContentFrame.Navigate(typeof(RadioButtonSamplePage));
+					break;
+				case "SnackBarSamplePage":
+					ContentFrame.Navigate(typeof(SnackBarSamplePage));
+					break;
 				case "ToggleSwitchSamplePage":
 					ContentFrame.Navigate(typeof(ToggleSwitchSamplePage));
 					break;
