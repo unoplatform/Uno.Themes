@@ -10,13 +10,31 @@
 	<Grid toolkit:VisibleBoundsPadding.PaddingMask="All"
 		  Background="{StaticResource BackgroundBrush}">
 		<NavigationView x:Name="NavView"
+						Style="{StaticResource MaterialNavigationViewStyle}"
 						ItemInvoked="NavView_ItemInvoked"
 						Loaded="NavView_Loaded"
 						PaneTitle="Uno Material"
+						Header="Component: NavigationView with MaterialNavigationViewStyle"
 						Margin="0,12,0,0"
 						IsTabStop="False"
 						PaneDisplayMode="Auto"
 						IsBackButtonVisible="Collapsed">
+			<NavigationView.PaneHeader>
+				<StackPanel>
+					<Image Source="ms-appx:///Assets/UnoLogo.png"
+						   Margin="16,50,16,30"
+						   Height="30"
+						   Width="30"
+						   HorizontalAlignment="Left"
+						   Stretch="Uniform" />
+
+					<TextBlock Text="{Binding PaneTitle, ElementName=NavView}"
+							   HorizontalAlignment="Left"
+							   VerticalAlignment="Center"
+							   Margin="16,0,0,0"
+							   Style="{StaticResource Headline6}" />
+				</StackPanel>
+			</NavigationView.PaneHeader>
 
 			<!-- NavigationView Items -->
 			<Frame x:Name="ContentFrame">
