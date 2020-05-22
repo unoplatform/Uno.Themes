@@ -5,20 +5,19 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  mc:Ignorable="d">
+	
 	<StackPanel BorderBrush="{StaticResource Color04Brush}"
 				BorderThickness="1"
 				Margin="12">
-		<TextBlock Text="TOGGLESWITCHES"
-				   FontSize="20"
-				   FontWeight="Bold"
-				   Foreground="{StaticResource PrimaryColor01Brush}"
-				   Margin="12" />
 
 		<StackPanel Orientation="Horizontal">
-			<ToggleSwitch Header="DEFAULT"
+
+			<!-- ToggleSwitch OFF -->
+			<ToggleSwitch Header="OFF"
 						  Style="{StaticResource MaterialToggleSwitchStyle}"
 						  Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
 					VerticalAlignment="Center">
 				<StackPanel>
@@ -30,11 +29,13 @@
 
 		<StackPanel Orientation="Horizontal">
 
-			<ToggleSwitch Header="DEFAULT ON"
+			<!-- ToggleSwitch ON -->
+			<ToggleSwitch Header="ON"
 						  IsOn="True"
 						  Style="{StaticResource MaterialToggleSwitchStyle}"
 						  Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
 					VerticalAlignment="Center">
 				<StackPanel>
@@ -46,11 +47,13 @@
 
 		<StackPanel Orientation="Horizontal">
 
-			<ToggleSwitch Header="DISABLED"
-						  IsEnabled="False"
+			<!-- ToggleSwitch OFF Disabled -->
+			<ToggleSwitch Header="OFF DISABLED"
 						  Style="{StaticResource MaterialToggleSwitchStyle}"
+						  IsEnabled="False"
 						  Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
 					VerticalAlignment="Center">
 				<StackPanel>
@@ -62,12 +65,14 @@
 
 		<StackPanel Orientation="Horizontal">
 
+			<!-- ToggleSwitch ON Disabled -->
 			<ToggleSwitch Header="ON DISABLED"
+						  Style="{StaticResource MaterialToggleSwitchStyle}"
 						  IsEnabled="False"
 						  IsOn="True"
-						  Style="{StaticResource MaterialToggleSwitchStyle}"
 						  Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
 					VerticalAlignment="Center">
 				<StackPanel>
