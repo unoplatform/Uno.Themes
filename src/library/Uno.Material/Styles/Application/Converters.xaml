@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:converters="using:Uno.Material.Converters">
+
+	<converters:FromEmptyStringToValueConverter x:Key="Material_EmptyToFalse"
+												NotNullOrEmptyValue="True"
+												NullOrEmptyValue="False" />
+
+	<converters:FromEmptyStringToValueConverter x:Key="Material_EmptyToTrue"
+												NotNullOrEmptyValue="False"
+												NullOrEmptyValue="True" />
+
+	<converters:FromEmptyStringToValueConverter x:Key="Material_EmptyToCollapsed"
+												NotNullOrEmptyValue="Visible"
+												NullOrEmptyValue="Collapsed" />
+
+</ResourceDictionary>

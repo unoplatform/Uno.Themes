@@ -5,6 +5,7 @@
 	  xmlns:controls="using:Uno.Material.Controls"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ex="using:Uno.Material.Samples.MarkupExtensions"
+	  xmlns:sys="using:System"
 	  mc:Ignorable="d">
 
 	<Page.Resources>
@@ -21,40 +22,10 @@
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=0}}">
-			<TextBlock Text="FAVORITES"
-					   FontWeight="Bold"
-					   HorizontalAlignment="Center"
-					   VerticalAlignment="Center" />
-		</Border>
-
-		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=1}}">
-			<TextBlock Text="SEARCH"
-					   FontWeight="Bold"
-					   HorizontalAlignment="Center"
-					   VerticalAlignment="Center" />
-		</Border>
-
-		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=2}}">
-			<TextBlock Text="ALERT"
-					   FontWeight="Bold"
-					   HorizontalAlignment="Center"
-					   VerticalAlignment="Center" />
-		</Border>
-
-		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=3}}">
-			<TextBlock Text="NOTIFICATION"
-					   FontWeight="Bold"
-					   HorizontalAlignment="Center"
-					   VerticalAlignment="Center" />
-		</Border>
-
-		<Border Visibility="{Binding SelectedIndex, ElementName=BottomNavBar, Converter={ex:VisibleIndex TargetIndex=4}}">
-			<TextBlock Text="SETTINGS"
-					   FontWeight="Bold"
-					   HorizontalAlignment="Center"
-					   VerticalAlignment="Center" />
-		</Border>
+		<TextBlock Text="{Binding SelectedItem.Content, ElementName=BottomNavBar}"
+				   FontWeight="Bold"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center" />
 
 		<controls:BottomNavigationBar x:Name="BottomNavBar"
 									  Grid.Row="1">
@@ -68,7 +39,7 @@
 												  Content="Information" />
 				<controls:BottomNavigationBarItem Data="{StaticResource NotificationIcon}"
 												  Badge="45"
-												  Content="Notification" />
+												  Content="Notifications" />
 				<controls:BottomNavigationBarItem Data="{StaticResource SettingsIcon}"
 												  Content="Settings" />
 			</controls:BottomNavigationBar.Items>

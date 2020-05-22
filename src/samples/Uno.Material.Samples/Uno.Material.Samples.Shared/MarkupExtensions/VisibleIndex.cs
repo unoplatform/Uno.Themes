@@ -5,15 +5,15 @@ using Windows.UI.Xaml.Markup;
 
 namespace Uno.Material.Samples.MarkupExtensions
 {
-	public class VisibleIndex : MarkupExtension, IValueConverter
+	public class StringEquals : MarkupExtension, IValueConverter
 	{
-		public int TargetIndex { get; set; }
+		public string Match { get; set; }
 
 		protected override object ProvideValue() => this;
 
 		public object Convert(object value, Type targetType, object parameter, string language)
 		{
-			return (value is int index && index == TargetIndex)
+			return (value is string str && string.Equals(str, Match, StringComparison.OrdinalIgnoreCase))
 				? Visibility.Visible
 				: Visibility.Collapsed;
 		}
