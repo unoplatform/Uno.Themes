@@ -29,31 +29,66 @@
 					  VerticalAlignment="Top"
 					  Margin="12" />
 
-		<Grid Grid.Row="1">
+		<StackPanel Grid.Row="1">
 
-			<!-- SNACK BAR WITHOUT BUTTON -->
-			<controls:SnackBar x:Name="SnackBar_1"
-							   Text="Snack bar without Action Button"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Top" />
+			<StackPanel Orientation="Vertical">
+				<!-- SNACK BAR WITHOUT BUTTON -->
+				<controls:SnackBar x:Name="SnackBar_1"
+								   Text="Snack bar without Action Button"
+								   HorizontalAlignment="Center" />
 
-			<!-- SNACK BAR WITH BUTTON -->
-			<controls:SnackBar x:Name="SnackBar_2"
-							   Text="Snack bar with Action Button"
-							   ActionLabel="ACTION"
-							   Command="{Binding SnackBarCommand}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
-							   Margin="8,0"/>
+				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
+						HorizontalAlignment="Center">
+					<StackPanel>
+						<Image Source="ms-appx:///Assets/SnackBar/SnackBar.png"
+							   HorizontalAlignment="Left" />
+						<Image Source="ms-appx:///Assets/SnackBar/SnackBar_Xamlcs.png"
+							   HorizontalAlignment="Left" />
+					</StackPanel>
+				</Button>
+			</StackPanel>
 
-			<!-- SNACK BAR WITH 2 LINES OF TEXT -->
-			<controls:SnackBar x:Name="SnackBar_3"
-							   Text="Snack bar with an Action Button and 2 lines of text"
-							   ActionLabel="ACTION"
-							   Command="{Binding SnackBarCommand}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Bottom"
-							   MaxWidth="320" />
-		</Grid>
+			<StackPanel Orientation="Vertical">
+
+				<!-- SNACK BAR WITH BUTTON -->
+				<controls:SnackBar x:Name="SnackBar_2"
+								   Text="Snack bar with Action Button"
+								   ActionLabel="ACTION"
+								   Command="{Binding SnackBarCommand}"
+								   HorizontalAlignment="Center"
+								   Margin="8,0" />
+
+				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
+						HorizontalAlignment="Center">
+					<StackPanel>
+						<Image Source="ms-appx:///Assets/SnackBar/SnackBar_Button.png"
+							   HorizontalAlignment="Left" />
+						<Image Source="ms-appx:///Assets/SnackBar/SnackBar_Xamlcs.png"
+							   HorizontalAlignment="Left" />
+					</StackPanel>
+				</Button>
+			</StackPanel>
+
+			<StackPanel Orientation="Vertical">
+
+				<!-- SNACK BAR WITH 2 LINES OF TEXT -->
+				<controls:SnackBar x:Name="SnackBar_3"
+								   Text="Snack bar with an Action Button and 2 lines of text"
+								   ActionLabel="ACTION"
+								   Command="{Binding SnackBarCommand}"
+								   HorizontalAlignment="Center"
+								   MaxWidth="320" />
+
+				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
+						HorizontalAlignment="Center">
+					<StackPanel>
+						<Image Source="ms-appx:///Assets/SnackBar/SnackBar_Button_Text.png"
+							   HorizontalAlignment="Left" />
+						<Image Source="ms-appx:///Assets/SnackBar/SnackBar_Xamlcs.png"
+							   HorizontalAlignment="Left" />
+					</StackPanel>
+				</Button>
+			</StackPanel>
+		</StackPanel>
 	</Grid>
 </Page>
