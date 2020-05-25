@@ -9,17 +9,15 @@
 	<StackPanel BorderBrush="{StaticResource Color04Brush}"
 				BorderThickness="1"
 				Margin="12">
-		<TextBlock Text="TEXTBOXES"
-				   FontSize="20"
-				   FontWeight="Bold"
-				   Foreground="{StaticResource PrimaryColor01Brush}"
-				   Margin="12" />
 
 		<StackPanel Orientation="Vertical">
+
+			<!-- Default -->
 			<TextBox PlaceholderText="Default"
 					 Style="{StaticResource DefaultMaterialTextBoxStyle}"
 					 Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 				<StackPanel>
 					<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox.png"
@@ -29,11 +27,14 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Vertical">
+
+			<!-- TexBox With Header -->
 			<TextBox PlaceholderText="Default"
 					 Header="Header"
 					 Style="{StaticResource DefaultMaterialTextBoxStyle}"
 					 Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 				<StackPanel>
 					<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox_Header.png"
@@ -43,11 +44,14 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Vertical">
+
+			<!-- TexBox Disabled -->
 			<TextBox PlaceholderText="Disabled"
-					 IsEnabled="False"
 					 Style="{StaticResource DefaultMaterialTextBoxStyle}"
+					 IsEnabled="False"
 					 Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 				<StackPanel>
 					<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox_Disabled.png"
@@ -57,11 +61,14 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Vertical">
+
+			<!-- TexBox Outline -->
 			<TextBox PlaceholderText="Outline"
 					 Header="Header"
 					 Style="{StaticResource OutlineMaterialTextBoxStyle}"
 					 Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 				<StackPanel>
 					<Image Source="ms-appx:///Assets/TextBox/OutlineTextBox.png"
@@ -71,11 +78,14 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Vertical">
+
+			<!-- TexBox Outline Disabled -->
 			<TextBox PlaceholderText="Outline Disabled"
-					 IsEnabled="False"
 					 Style="{StaticResource OutlineMaterialTextBoxStyle}"
+					 IsEnabled="False"
 					 Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 				<StackPanel>
 					<Image Source="ms-appx:///Assets/TextBox/OutlineTextBox_Disabled.png"
@@ -85,11 +95,14 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Vertical">
+
+			<!-- TexBox MultiLine -->
 			<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
-					 TextWrapping="Wrap"
 					 Style="{StaticResource DefaultMaterialTextBoxStyle}"
+					 TextWrapping="Wrap"
 					 Margin="12" />
 
+			<!-- Style -->
 			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 				<StackPanel>
 					<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox_Wrap.png"

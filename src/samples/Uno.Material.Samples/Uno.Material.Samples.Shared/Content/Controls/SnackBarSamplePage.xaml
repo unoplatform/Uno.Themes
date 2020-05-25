@@ -10,19 +10,13 @@
 	<Grid BorderBrush="{StaticResource Color04Brush}"
 		  BorderThickness="1"
 		  Margin="12">
+
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<!-- TITLE -->
-		<TextBlock Text="SnackBar"
-				   FontSize="20"
-				   FontWeight="Bold"
-				   Foreground="{StaticResource PrimaryColor01Brush}"
-				   Margin="12" />
-
-		<!-- SHOW HIDE BUTTON -->
+		<!-- Show / Hide Switch -->
 		<ToggleSwitch Toggled="ToggleSwitch_Toggled"
 					  Style="{StaticResource MaterialToggleSwitchStyle}"
 					  HorizontalAlignment="Right"
@@ -30,13 +24,14 @@
 					  Margin="12" />
 
 		<StackPanel Grid.Row="1">
-
 			<StackPanel Orientation="Vertical">
-				<!-- SNACK BAR WITHOUT BUTTON -->
+
+				<!-- SnackBar without button -->
 				<controls:SnackBar x:Name="SnackBar_1"
 								   Text="Snack bar without Action Button"
 								   HorizontalAlignment="Center" />
 
+				<!-- Style -->
 				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
 						HorizontalAlignment="Center">
 					<StackPanel>
@@ -50,7 +45,7 @@
 
 			<StackPanel Orientation="Vertical">
 
-				<!-- SNACK BAR WITH BUTTON -->
+				<!-- SnackBar With Button -->
 				<controls:SnackBar x:Name="SnackBar_2"
 								   Text="Snack bar with Action Button"
 								   ActionLabel="ACTION"
@@ -58,6 +53,7 @@
 								   HorizontalAlignment="Center"
 								   Margin="8,0" />
 
+				<!-- Style -->
 				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
 						HorizontalAlignment="Center">
 					<StackPanel>
@@ -79,6 +75,7 @@
 								   HorizontalAlignment="Center"
 								   MaxWidth="320" />
 
+				<!-- Style -->
 				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
 						HorizontalAlignment="Center">
 					<StackPanel>
