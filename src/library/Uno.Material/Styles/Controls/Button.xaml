@@ -282,7 +282,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Border x:Name="HoverOverlay"
-								Background="{StaticResource OnSurfaceHoverBrush}"
+								Background="{StaticResource PrimaryHoverBrush}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
@@ -318,12 +318,14 @@
 	<Style x:Key="TextMaterialButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource ContainedMaterialButtonStyle}">
+
 		<Setter Property="Foreground"
 				Value="{StaticResource ButtonTextLabelColor}" />
 		<Setter Property="Background"
 				Value="{StaticResource TransparentBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
+		
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -332,8 +334,10 @@
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  CornerRadius="{StaticResource ButtonBorderRadius}">
+
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
+
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -342,6 +346,7 @@
 												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="PointerOver">
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
@@ -355,6 +360,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -363,6 +369,7 @@
 												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
@@ -370,19 +377,23 @@
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="FocusStates">
+
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
@@ -393,7 +404,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Border x:Name="HoverOverlay"
-								Background="{StaticResource OnSurfaceHoverBrush}"
+								Background="{StaticResource PrimaryHoverBrush}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
