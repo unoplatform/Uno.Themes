@@ -31,33 +31,33 @@ namespace Uno.Material.Samples
 			// Styles
 			NavView.MenuItems.Add(new NavigationViewItemHeader() { Content = "Styles" });
             NavView.MenuItems.Add(new NavigationViewItem()
-            { Content = "Colors Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ColorsSamplePage" });
+            { Content = "Colors", Icon = new SymbolIcon(Symbol.Next), Tag = "ColorsSamplePage" });
             NavView.MenuItems.Add(new NavigationViewItemSeparator());
 
             // Controls
             NavView.MenuItems.Add(new NavigationViewItemHeader() { Content = "Controls" });
             NavView.MenuItems.Add(new NavigationViewItem()
-            { Content = "Button Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ButtonSamplePage" });
+            { Content = "Button", Icon = new SymbolIcon(Symbol.Next), Tag = "ButtonSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "Cards Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CardsSamplePage" });
+			{ Content = "Cards", Icon = new SymbolIcon(Symbol.Next), Tag = "CardsSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "CheckBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
+			{ Content = "CheckBox", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "ComboBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ComboBoxSamplePage" });
+			{ Content = "ComboBox", Icon = new SymbolIcon(Symbol.Next), Tag = "ComboBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "FAB Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "FabSamplePage" });
+			{ Content = "FAB", Icon = new SymbolIcon(Symbol.Next), Tag = "FabSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "NavigationView Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "NavigationViewSamplePage" });
+			{ Content = "NavigationView", Icon = new SymbolIcon(Symbol.Next), Tag = "NavigationViewSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "RadioButton Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
+			{ Content = "RadioButton", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "SnackBar Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "SnackBarSamplePage" });
+			{ Content = "SnackBar", Icon = new SymbolIcon(Symbol.Next), Tag = "SnackBarSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "TextBlock Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
+			{ Content = "TextBlock", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "TextBox Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
+			{ Content = "TextBox", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
 			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "ToggleSwitch Overview", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
+			{ Content = "ToggleSwitch", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
 
 			// Set the initial SelectedItem 
 			foreach (NavigationViewItemBase item in NavView.MenuItems)

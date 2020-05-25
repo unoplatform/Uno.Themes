@@ -10,19 +10,24 @@
 	  mc:Ignorable="d">
 
 	<Page.Resources>
+
+		<!-- Converters -->
 		<converters:FromBoolToValueConverter x:Name="TrueToCollapsed"
 											 TrueValue="COLLAPSED"
 											 FalseValue="EXPAND"
 											 NullValue="EXPAND" />
 
+		<!-- Text Sample -->
 		<x:String x:Key="SupportingTextSample">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</x:String>
 
+		<!-- Avatar Image -->
 		<DataTemplate x:Key="AvatarImageTemplate">
 			<Image Source="{Binding}"
 				   Stretch="Uniform"
 				   MaxHeight="40" />
 		</DataTemplate>
 
+		<!-- Sample Image -->
 		<DataTemplate x:Key="SampleImageTemplate">
 			<Image Source="{Binding}"
 				   Stretch="Uniform"
@@ -31,24 +36,22 @@
 	</Page.Resources>
 
 	<ScrollViewer>
-		<StackPanel BorderBrush="{StaticResource OnSurfaceBrush}"
-					BorderThickness="1"
-					Margin="12">
-			<TextBlock Text="CARDS"
-					   FontSize="20"
-					   FontWeight="Bold"
-					   Foreground="{StaticResource PrimaryBrush}"
-					   Margin="12" />
+		<Grid BorderBrush="{StaticResource OnSurfaceBrush}"
+			  BorderThickness="1"
+			  Margin="12">
 
-			<StackPanel Margin="12"
-						Orientation="Vertical">
+			<StackPanel Orientation="Vertical"
+						Margin="12">
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined -->
 					<controls:Card Header="Outlined card"
 								   SubHeader="With title and subitle only"
 								   Style="{StaticResource OutlinedMaterialCardStyle}"
 								   Margin="0,0,0,12" />
 
+					<!-- Style -->
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard.png"
@@ -58,12 +61,15 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Outlined disabled Card-->
 					<controls:Card Header="Outlined disabled Card"
 								   SubHeader="With title and subitle only"
 								   Style="{StaticResource OutlinedMaterialCardStyle}"
 								   IsEnabled="False"
 								   Margin="0,0,0,12" />
 
+					<!-- Style -->
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Disabled.png"
@@ -73,12 +79,15 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined With supporting text -->
 					<controls:Card Header="Outlined card"
 								   SubHeader="With supporting text"
 								   SupportingText="{StaticResource SupportingTextSample}"
 								   Style="{StaticResource OutlinedMaterialCardStyle}"
 								   Margin="0,0,0,12" />
 
+					<!-- Style -->
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting.png"
@@ -90,6 +99,8 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined with supporting text and expander-->
 					<controls:Card Header="Outlined card"
 								   SubHeader="With supporting text and expander"
 								   ExpanderHeaderContent="{Binding RelativeSource={RelativeSource Self}, Path=IsOpened, Converter={StaticResource TrueToCollapsed}}"
@@ -103,11 +114,13 @@
 											   Style="{StaticResource Subtitle2}" />
 
 									<ItemsControl ItemsSource="ABC">
+
 										<ItemsControl.ItemsPanel>
 											<ItemsPanelTemplate>
 												<StackPanel Orientation="Horizontal" />
 											</ItemsPanelTemplate>
 										</ItemsControl.ItemsPanel>
+
 										<ItemsControl.ItemTemplate>
 											<DataTemplate>
 												<Button Content="{Binding}"
@@ -122,6 +135,7 @@
 						</controls:Card.ExpanderContentTemplate>
 					</controls:Card>
 
+					<!-- Style -->
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Expander.png"
@@ -133,6 +147,8 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined -->
 					<controls:Card Header="Outlined card"
 								   SubHeader="With media"
 								   MediaContent="ms-appx:///Assets/Media.png"
@@ -142,8 +158,12 @@
 
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
+
+							<!-- OutlinedCard Media Image -->
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Media.png"
 								   HorizontalAlignment="Left" />
+
+							<!-- Card Resources Image -->
 							<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
 								   HorizontalAlignment="Left" />
 						</StackPanel>
@@ -151,6 +171,8 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined with media and supporting text -->
 					<controls:Card Header="Outlined card"
 								   SubHeader="With media and supporting text"
 								   MediaContent="ms-appx:///Assets/Media.png"
@@ -159,6 +181,7 @@
 								   Style="{StaticResource OutlinedMaterialCardStyle}"
 								   Margin="0,0,0,12" />
 
+					<!-- Style -->
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Media.png"
@@ -170,6 +193,8 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined with media, supporting text and action buttons -->
 					<controls:Card x:Name="CardWithButtons"
 								   Header="Outlined card"
 								   SubHeader="With media, supporting text and action buttons"
@@ -179,10 +204,15 @@
 								   Style="{StaticResource OutlinedMaterialCardStyle}"
 								   Margin="0,0,0,12" />
 
+					<!-- Style -->
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
+
+							<!-- OutlinedCard Supporting Media Action -->
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Media_Action.png"
 								   HorizontalAlignment="Left" />
+
+							<!-- Card Resources -->
 							<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
 								   HorizontalAlignment="Left" />
 						</StackPanel>
@@ -190,6 +220,8 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined with media, supporting text, action buttons and supplemental action buttons -->
 					<controls:Card x:Name="CardWithButtonsAndIcons"
 								   Header="Outlined card"
 								   SubHeader="With media, supporting text, action buttons and supplemental action buttons"
@@ -201,8 +233,12 @@
 
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
+
+							<!-- OutlinedCard Supporting Media Action Supp -->
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Media_Action_Supp.png"
 								   HorizontalAlignment="Left" />
+
+							<!-- Card Resources -->
 							<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
 								   HorizontalAlignment="Left" />
 						</StackPanel>
@@ -210,6 +246,8 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">
+
+					<!-- Card Outlined with a different layout -->
 					<controls:Card x:Name="CardWithOtherLayout"
 								   Header="Outlined card"
 								   SubHeader="With a different layout"
@@ -223,14 +261,18 @@
 
 					<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 						<StackPanel>
+
+							<!-- OutlinedCard Other -->
 							<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Other.png"
 								   HorizontalAlignment="Left" />
+
+							<!-- Card Resources -->
 							<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
 								   HorizontalAlignment="Left" />
 						</StackPanel>
 					</Button>
 				</StackPanel>
 			</StackPanel>
-		</StackPanel>
+		</Grid>
 	</ScrollViewer>
 </Page>

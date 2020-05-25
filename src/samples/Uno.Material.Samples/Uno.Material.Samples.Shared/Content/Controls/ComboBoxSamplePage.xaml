@@ -10,34 +10,27 @@
 				BorderThickness="1"
 				Margin="12">
 
-		<!-- COMBO BOX -->
-		<TextBlock Text="COMBO BOX"
-				   FontSize="20"
-				   FontWeight="Bold"
-				   Foreground="{StaticResource PrimaryColor01Brush}"
-				   Margin="12" />
-
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<!-- NORMAL -->
 			<StackPanel>
 
-				<!-- LABEL -->
+				<!-- Label -->
 				<TextBlock Text="NORMAL"
 						   Style="{StaticResource Subtitle1}"
 						   Margin="12,12,12,0" />
 
-				<!-- COMBO BOX -->
+				<!-- ComboBox -->
 				<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 						  PlaceholderText="Placeholder"
 						  ItemsSource="abcdefg"
 						  SelectedItem="g"
 						  Margin="12" />
 
+				<!-- Style -->
 				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 					<StackPanel>
 						<Image Source="ms-appx:///Assets/ComboBox/ComboBox.png"
@@ -46,15 +39,14 @@
 				</Button>
 			</StackPanel>
 
-			<!-- DISABLED -->
 			<StackPanel Grid.Column="1">
 
-				<!-- LABEL -->
+				<!-- Label -->
 				<TextBlock Text="DISABLED"
 						   Style="{StaticResource Subtitle1}"
 						   Margin="12,12,12,0" />
 
-				<!-- COMBO BOX -->
+				<!-- ComboBox -->
 				<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 						  PlaceholderText="Placeholder"
 						  ItemsSource="abcde"
@@ -62,6 +54,7 @@
 						  IsEnabled="False"
 						  Margin="12" />
 
+				<!-- Style -->
 				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
 					<StackPanel>
 						<Image Source="ms-appx:///Assets/ComboBox/ComboBox_Disabled.png"
