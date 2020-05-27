@@ -60,16 +60,10 @@ namespace Uno.Material.Samples
 			{ Content = "ToggleSwitch", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
 
 			// Set the initial SelectedItem 
-			foreach (NavigationViewItemBase item in NavView.MenuItems)
-            {
-                if (item is NavigationViewItem && item.Tag.ToString() == "TextBoxSamplePage")
-                {
-                    NavView.SelectedItem = item;
-                    SetHeader(item.Content.ToString());
-                    ContentFrame.Navigate(typeof(TextBoxSamplePage));
-                    break;
-                }
-            }
+			NavView.SelectedItem = NavView.MenuItems
+				.OfType<NavigationViewItem>()
+				.FirstOrDefault(x => x.Tag.ToString() == "ButtonSamplePage");
+			NavView_Navigate(NavView.SelectedItem as NavigationViewItem);
         }
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -102,8 +96,6 @@ namespace Uno.Material.Samples
               NavView_Navigate(item as NavigationViewItem);
             }
         }
-
-
 
         private void NavView_Navigate(NavigationViewItem item)
         {

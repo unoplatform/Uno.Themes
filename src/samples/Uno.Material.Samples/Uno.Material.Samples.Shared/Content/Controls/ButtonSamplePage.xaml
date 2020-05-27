@@ -4,11 +4,21 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:Uno.ShowMeTheXaml"
 	  mc:Ignorable="d">
 
 	<StackPanel BorderBrush="{StaticResource OnSurfaceBrush}"
 				BorderThickness="1"
 				Margin="12">
+
+		<TextBlock Text="asd" />
+		<smtx:XamlDisplay UniqueKey="Test312">
+			<!-- Button Contained -->
+			<Button Content="CONTAINED"
+					Style="{StaticResource ContainedMaterialButtonStyle}"
+					Margin="12" />
+		</smtx:XamlDisplay>
+		<TextBlock Text="asd" />
 
 		<StackPanel Orientation="Horizontal">
 

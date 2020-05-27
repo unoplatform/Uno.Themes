@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Uno.ShowMeTheXaml;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -56,6 +58,8 @@ namespace Uno.Material.Samples
 			{
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
+
+				XamlDisplay.Init();
 
 				rootFrame.NavigationFailed += OnNavigationFailed;
 

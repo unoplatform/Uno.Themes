@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:smtx="using:Uno.ShowMeTheXaml">
+	<Style x:Key="DefaultXamlDisplayStyle"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<StackPanel>
+						<ContentPresenter Content="{TemplateBinding Content}" />
+						<TextBlock Text="312" />
+						<TextBlock Text="{TemplateBinding Xaml}" />
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="smtx:XamlDisplay"
+		   BasedOn="{StaticResource DefaultXamlDisplayStyle}" />
+</ResourceDictionary>
