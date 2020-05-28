@@ -6,8 +6,15 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:converters="using:Uno.Material.Converters"
 					mc:Ignorable="xamarin not_win">
 
+	<!-- Converters -->
+	<converters:FromNullToValueConverter x:Name="NullToVisible"
+										 NotNullValue="Collapsed"
+										 NullValue="Visible" />
+	
+	<!-- Brushes -->
 	<SolidColorBrush x:Key="ComboBoxBackgroundColorBrush"
 					 Color="{ThemeResource SurfaceColor}" />
 
@@ -327,23 +334,17 @@
 								<!-- ContentPresenter -->
 								<ContentPresenter x:Name="ContentPresenter"
 												  VerticalAlignment="Center"
-												  Margin="16,0,16,0">
-
-									<!-- PlaceholderTextBlock -->
-									<!-- suppress: NVX014 -->
-									<TextBlock x:Name="PlaceholderTextBlock"
-											   Text="{TemplateBinding PlaceholderText}"
-											   Style="{StaticResource Body2}"
-											   MaxLines="1"
-											   Foreground="{ThemeResource ComboBoxPlaceholderTextColor}" />
-								</ContentPresenter>
+												  Margin="16,0,16,0" />
 
 								<!-- PlaceholderTextBlock -->
-
-								<!-- Not a localized string (Special unicode char) -->
-								<!-- suppress: NVX018 -->
-								<TextBlock x:Name="DropDownGlyph"
-										   Text="" />
+								<TextBlock x:Name="PlaceholderTextBlock"
+										   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+										   Text="{TemplateBinding PlaceholderText}"
+										   Style="{StaticResource Body2}"
+										   Foreground="{ThemeResource ComboBoxPlaceholderTextColor}"
+										   VerticalAlignment="Center"
+										   MaxLines="1"
+										   Margin="16,0,16,0" />
 
 								<!-- Down -->
 								<Path x:Name="DropDownGlyph_Down"
