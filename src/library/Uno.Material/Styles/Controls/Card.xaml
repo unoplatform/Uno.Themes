@@ -6,7 +6,33 @@
 	<!-- Card ToggleButton Variables -->
 	<SolidColorBrush x:Key="CardsBackgroundColorBrush"
 					 Color="{ThemeResource SurfaceColor}" />
+	<StaticResource x:Key="CardsStrokeColor"
+					ResourceKey="OnSurfaceMediumBrush" />
 
+	<StaticResource x:Key="CardsHoverOverlayColor"
+					ResourceKey="OnSurfaceHoverBrush" />
+	<StaticResource x:Key="CardsFocusedOverlayColor"
+					ResourceKey="OnSurfaceFocusedBrush" />
+	<StaticResource x:Key="CardsSelectedOverlayColor"
+					ResourceKey="OnSurfaceFocusedBrush" />
+	<StaticResource x:Key="CardsRippleColor"
+					ResourceKey="OnSurfaceFocusedBrush" />
+	<StaticResource x:Key="CardsIconColor"
+					ResourceKey="OnSurfaceBrush" />
+					
+	<StaticResource x:Key="CardsExpanderSeparatorColor"
+					ResourceKey="OnSurfaceFocusedBrush" />
+					
+	<StaticResource x:Key="CardsHeaderTypo"
+					ResourceKey="Headline6" />
+	<StaticResource x:Key="CardsSubHeaderTypo"
+					ResourceKey="Body2" />
+	<StaticResource x:Key="CardsSupportingTextTypo"
+					ResourceKey="Body2" />
+
+	<StaticResource x:Key="CardsExpenderToggleButtonStyle"
+					ResourceKey="TextMaterialToggleButtonStyle" />
+	
 	<!-- Other Card Variables -->
 	<CornerRadius x:Key="CardsBorderRadius">4</CornerRadius>
 	<Thickness x:Key="CardsStrokeWidth">1</Thickness>
@@ -32,7 +58,7 @@
 		<Setter Property="Background"
 				Value="{StaticResource CardsBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource OnSurfaceMediumBrush}" />
+				Value="{StaticResource CardsStrokeColor}" />
 		<Setter Property="BorderThickness"
 				Value="{StaticResource CardsStrokeWidth}" />
 		<Setter Property="CornerRadius"
@@ -41,10 +67,11 @@
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
-		
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Card">
+
 					<Grid x:Name="GridRoot"
 						  MinWidth="{TemplateBinding MinWidth}"
 						  MinHeight="{TemplateBinding MinHeight}"
@@ -55,8 +82,10 @@
 						  CornerRadius="{TemplateBinding CornerRadius}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
+
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -65,6 +94,7 @@
 												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="PointerOver">
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
@@ -78,6 +108,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -86,6 +117,7 @@
 												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -97,6 +129,7 @@
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="OpenStates">
 								<VisualState x:Name="Closed">
 									<Storyboard>
@@ -112,6 +145,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualState x:Name="Opened">
 									<Storyboard>
 										<DoubleAnimation x:Name="OpeningAnimation"
@@ -126,6 +160,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualStateGroup.Transitions>
 									<VisualTransition From="Opened"
 													  To="Closed">
@@ -141,6 +176,7 @@
 											</DoubleAnimation>
 										</Storyboard>
 									</VisualTransition>
+
 									<VisualTransition From="Closed"
 													  To="Opened">
 										<Storyboard>
@@ -157,19 +193,23 @@
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="FocusStates">
+
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
@@ -185,138 +225,146 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
+
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 
 						<!-- Border for PointerOver State-->
-						<Border Grid.RowSpan="4"
-								Grid.ColumnSpan="2"
-								x:Name="HoverOverlay"
-								Background="{StaticResource OnSurfaceHoverBrush}"
-								Opacity="0" />
+						<Border x:Name="HoverOverlay"
+								Background="{StaticResource CardsHoverOverlayColor}"
+								Opacity="0"
+								Grid.RowSpan="4"
+								Grid.ColumnSpan="2" />
 
 						<!-- Border for Focused State-->
-						<Border Grid.RowSpan="4"
-								Grid.ColumnSpan="2"
-								x:Name="FocusedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
-								Opacity="0" />
+						<Border x:Name="FocusedOverlay"
+								Background="{StaticResource CardsFocusedOverlayColor}"
+								Opacity="0"
+								Grid.RowSpan="4"
+								Grid.ColumnSpan="2" />
 
 						<!-- Border for Dragged/Selected State-->
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
-						<Border Grid.RowSpan="4"
-								Grid.ColumnSpan="2"
-								x:Name="SelectedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
-								Opacity="0" />
+						<Border x:Name="SelectedOverlay"
+								Background="{StaticResource CardsSelectedOverlayColor}"
+								Opacity="0"
+								Grid.RowSpan="4"
+								Grid.ColumnSpan="2" />
 
 						<!-- Ripple effect -->
-						<controls:Ripple Grid.RowSpan="4"
-										 Grid.ColumnSpan="2"
-										 Feedback="{StaticResource OnSurfaceFocusedBrush}"
-										 RippleSizeMultiplier="0.85"
+						<controls:Ripple Feedback="{StaticResource CardsRippleColor}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 CornerRadius="{StaticResource CardsBorderRadius}"
+										 RippleSizeMultiplier="0.85"
 										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw" />
+										 AutomationProperties.AccessibilityView="Raw"
+										 Grid.RowSpan="4"
+										 Grid.ColumnSpan="2" />
 
 						<!-- Media content part -->
-						<ContentPresenter Grid.ColumnSpan="2"
-										  x:Name="MediaContentPresenter"
+						<ContentPresenter x:Name="MediaContentPresenter"
 										  Content="{TemplateBinding MediaContent}"
 										  ContentTemplate="{TemplateBinding MediaContentTemplate}"
+										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  IsHitTestVisible="False"
-										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+										  Grid.ColumnSpan="2" />
 
-						<StackPanel Grid.Row="1"
-									Grid.ColumnSpan="2"
-									IsHitTestVisible="False"
-									Padding="{TemplateBinding Padding}">
+						<StackPanel IsHitTestVisible="False"
+									Padding="{TemplateBinding Padding}"
+									Grid.Row="1"
+									Grid.ColumnSpan="2">
+
 							<!-- Header part-->
 							<TextBlock Text="{TemplateBinding Header}"
-									   Style="{ThemeResource Headline6}" />
+									   Style="{StaticResource CardsHeaderTypo}" />
 
 							<!-- SubHeader part-->
-							<TextBlock Grid.Row="1"
-									   Text="{TemplateBinding SubHeader}"
-									   Style="{ThemeResource Body2}" />
+							<TextBlock Text="{TemplateBinding SubHeader}"
+									   Style="{StaticResource CardsSubHeaderTypo}"
+									   Grid.Row="1" />
 
 							<!-- SupportingText part-->
-							<TextBlock Grid.Row="1"
-									   Margin="0,12,0,0"
-									   Style="{ThemeResource Body2}"
+							<TextBlock Visibility="{Binding SupportingText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}"
 									   Text="{TemplateBinding SupportingText}"
-									   Visibility="{Binding SupportingText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+									   Style="{StaticResource CardsSupportingTextTypo}"
+									   Margin="0,12,0,0"
+									   Grid.Row="1" />
 						</StackPanel>
 
 						<!-- Expender part -->
-						<StackPanel Grid.Row="2"
-									Grid.ColumnSpan="2"
-									Visibility="{Binding ExpanderHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}">
+						<StackPanel Visibility="{Binding ExpanderHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}"
+									Grid.Row="2"
+									Grid.ColumnSpan="2">
+
 							<Rectangle x:Name="ExpanderSeparator"
+									   Fill="{StaticResource CardsExpanderSeparatorColor}"
 									   Height="1"
-									   Margin="0,12,0,0"
 									   HorizontalAlignment="Stretch"
-									   Fill="{StaticResource OnSurfaceFocusedBrush}" />
+									   Margin="0,12,0,0" />
 
 							<ContentPresenter x:Name="ExpanderPresenter"
 											  Content="{TemplateBinding ExpanderContent}"
 											  ContentTemplate="{TemplateBinding ExpanderContentTemplate}"
 											  Height="0" />
 
-							<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+							<ToggleButton Content="{TemplateBinding ExpanderHeaderContent}"
+										  Style="{StaticResource CardsExpenderToggleButtonStyle}"
+										  IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  Content="{TemplateBinding ExpanderHeaderContent}"
-										  Style="{StaticResource TextMaterialToggleButtonStyle}"
-										  Margin="6"
-										  Padding="10,2" />
+										  Padding="10,2"
+										  Margin="6" />
 						</StackPanel>
 
 						<!-- Buttons section part -->
-						<ItemsControl Grid.Row="3"
+						<ItemsControl Visibility="{Binding ButtonsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}"
 									  ItemsSource="{TemplateBinding ButtonsItemsSource}"
-									  Visibility="{Binding ButtonsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}">
+									  Grid.Row="3">
+
 							<ItemsControl.ItemsPanel>
 								<ItemsPanelTemplate>
 									<StackPanel Orientation="Horizontal" />
 								</ItemsPanelTemplate>
 							</ItemsControl.ItemsPanel>
+
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<Button Content="{Binding}"
-											Margin="6"
+											Style="{StaticResource TextMaterialButtonStyle}"
 											Padding="10,2"
-											Style="{StaticResource TextMaterialButtonStyle}" />
+											Margin="6" />
 								</DataTemplate>
 							</ItemsControl.ItemTemplate>
 						</ItemsControl>
 
 						<!-- Icons section part -->
-						<ItemsControl Grid.Row="3"
-									  Grid.Column="1"
+						<ItemsControl Visibility="{Binding IconsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}"
 									  ItemsSource="{TemplateBinding IconsItemsSource}"
-									  Visibility="{Binding IconsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}">
+									  Grid.Row="3"
+									  Grid.Column="1">
+
 							<ItemsControl.ItemsPanel>
 								<ItemsPanelTemplate>
 									<StackPanel Orientation="Horizontal" />
 								</ItemsPanelTemplate>
 							</ItemsControl.ItemsPanel>
+
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
+
 									<Button Content="{Binding}"
+											Style="{StaticResource TextMaterialButtonStyle}"
 											Margin="6"
-											Padding="10,2"
-											Style="{StaticResource TextMaterialButtonStyle}">
+											Padding="10,2">
 										<Button.ContentTemplate>
 											<DataTemplate>
-												<Path Fill="{StaticResource OnSurfaceBrush}"
+												<Path Fill="{StaticResource CardsIconColor}"
 													  Data="{Binding}"
 													  HorizontalAlignment="Left" />
 											</DataTemplate>
@@ -333,7 +381,7 @@
 
 	<Style x:Key="OtherOutlinedLayoutMaterialCardStyle"
 		   TargetType="controls:Card">
-		
+
 		<Setter Property="MinHeight"
 				Value="72" />
 		<Setter Property="MaxWidth"
@@ -343,7 +391,7 @@
 		<Setter Property="Background"
 				Value="{StaticResource CardsBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource OnSurfaceMediumBrush}" />
+				Value="{StaticResource CardsStrokeColor}" />
 		<Setter Property="BorderThickness"
 				Value="{StaticResource CardsStrokeWidth}" />
 		<Setter Property="CornerRadius"
@@ -352,10 +400,11 @@
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
-		
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Card">
+
 					<Grid x:Name="GridRoot"
 						  MinWidth="{TemplateBinding MinWidth}"
 						  MinHeight="{TemplateBinding MinHeight}"
@@ -366,8 +415,10 @@
 						  CornerRadius="{TemplateBinding CornerRadius}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
+
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -376,6 +427,7 @@
 												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="PointerOver">
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
@@ -389,6 +441,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -397,6 +450,7 @@
 												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -408,7 +462,9 @@
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="OpenStates">
+
 								<VisualState x:Name="Closed">
 									<Storyboard>
 										<DoubleAnimation x:Name="CloseAnimation"
@@ -423,6 +479,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualState x:Name="Opened">
 									<Storyboard>
 										<DoubleAnimation x:Name="OpeningAnimation"
@@ -437,6 +494,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualStateGroup.Transitions>
 									<VisualTransition From="Opened"
 													  To="Closed">
@@ -452,6 +510,7 @@
 											</DoubleAnimation>
 										</Storyboard>
 									</VisualTransition>
+
 									<VisualTransition From="Closed"
 													  To="Opened">
 										<Storyboard>
@@ -468,19 +527,23 @@
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="FocusStates">
+
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="1" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
@@ -497,6 +560,7 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
+
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
@@ -504,79 +568,84 @@
 						</Grid.ColumnDefinitions>
 
 						<!-- Border for PointedOver state -->
-						<Border Grid.RowSpan="5"
-								Grid.ColumnSpan="3"
-								x:Name="HoverOverlay"
-								Background="{StaticResource OnSurfaceHoverBrush}"
-								Opacity="0" />
+						<Border x:Name="HoverOverlay"
+								Background="{StaticResource CardsHoverOverlayColor}"
+								Opacity="0"
+								Grid.RowSpan="5"
+								Grid.ColumnSpan="3" />
 
 						<!-- Border for Focus state -->
-						<Border Grid.RowSpan="5"
-								Grid.ColumnSpan="3"
-								x:Name="FocusedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
-								Opacity="0" />
+						<Border x:Name="FocusedOverlay"
+								Background="{StaticResource CardsFocusedOverlayColor}"
+								Opacity="0"
+								Grid.RowSpan="5"
+								Grid.ColumnSpan="3" />
 
 						<!-- Border for Dragged/Selected state -->
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
-						<Border Grid.RowSpan="5"
-								Grid.ColumnSpan="3"
-								x:Name="SelectedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
-								Opacity="0" />
+						<Border x:Name="SelectedOverlay"
+								Background="{StaticResource CardsSelectedOverlayColor}"
+								Opacity="0"
+								Grid.RowSpan="5"
+								Grid.ColumnSpan="3" />
 
 						<!-- Ripple effect -->
-						<controls:Ripple Grid.RowSpan="5"
-										 Grid.ColumnSpan="3"
-										 Feedback="{StaticResource OnSurfaceFocusedBrush}"
+						<controls:Ripple Feedback="{StaticResource CardsRippleColor}"
 										 RippleSizeMultiplier="0.85"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 CornerRadius="{StaticResource CardsBorderRadius}"
 										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw" />
+										 AutomationProperties.AccessibilityView="Raw"
+										 Grid.RowSpan="5"
+										 Grid.ColumnSpan="3" />
 
 						<!-- Avatart part -->
 						<ContentPresenter x:Name="AvatarContentPresenter"
 										  Content="{TemplateBinding AvatarContent}"
 										  ContentTemplate="{TemplateBinding AvatarContentTemplate}"
+										  Visibility="{Binding AvatarContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  IsHitTestVisible="False"
-										  Margin="16,0,0,0"
-										  Visibility="{Binding AvatarContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+										  Margin="16,0,0,0" />
 
-						<StackPanel Grid.Column="1"
-									IsHitTestVisible="False"
-									Padding="{TemplateBinding Padding}">
+						<StackPanel IsHitTestVisible="False"
+									Padding="{TemplateBinding Padding}"
+									Grid.Column="1">
+
 							<!-- Header part -->
 							<TextBlock Text="{TemplateBinding Header}"
-									   Style="{ThemeResource Headline6}" />
+									   Style="{StaticResource CardsHeaderTypo}" />
+
 							<!-- SubHeader part -->
-							<TextBlock Grid.Row="1"
-									   Text="{TemplateBinding SubHeader}"
-									   Style="{ThemeResource Body2}" />
+							<TextBlock Text="{TemplateBinding SubHeader}"
+									   Style="{StaticResource CardsSubHeaderTypo}"
+									   Grid.Row="1" />
 						</StackPanel>
 
 						<!-- Icons buttons part -->
-						<ItemsControl Grid.Column="2"
+						<ItemsControl Visibility="{Binding IconsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}"
 									  ItemsSource="{TemplateBinding IconsItemsSource}"
-									  Visibility="{Binding IconsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}">
+									  Grid.Column="2">
+
 							<ItemsControl.ItemsPanel>
 								<ItemsPanelTemplate>
 									<StackPanel Orientation="Horizontal" />
 								</ItemsPanelTemplate>
 							</ItemsControl.ItemsPanel>
+
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
+
 									<Button Content="{Binding}"
+											Style="{StaticResource TextMaterialButtonStyle}"
 											Margin="6"
-											Padding="10,2"
-											Style="{StaticResource TextMaterialButtonStyle}">
+											Padding="10,2">
 										<Button.ContentTemplate>
 											<DataTemplate>
-												<Path Fill="{StaticResource OnSurfaceBrush}"
+												<Path Fill="{StaticResource CardsIconColor}"
 													  Data="{Binding}"
 													  HorizontalAlignment="Left" />
 											</DataTemplate>
@@ -587,63 +656,66 @@
 						</ItemsControl>
 
 						<!-- Media content part -->
-						<ContentPresenter Grid.Row="1"
-										  Grid.ColumnSpan="3"
-										  x:Name="MediaContentPresenter"
+						<ContentPresenter x:Name="MediaContentPresenter"
 										  Content="{TemplateBinding MediaContent}"
 										  ContentTemplate="{TemplateBinding MediaContentTemplate}"
+										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  IsHitTestVisible="False"
-										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+										  Grid.Row="1"
+										  Grid.ColumnSpan="3" />
 
-						<!-- Supporting text part-->
-						<TextBlock Grid.Row="2"
-								   Grid.ColumnSpan="3"
-								   Margin="16,12"
-								   Style="{ThemeResource Body2}"
+						<!-- Supporting text part -->
+						<TextBlock Visibility="{Binding SupportingText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}"
 								   Text="{TemplateBinding SupportingText}"
-								   Visibility="{Binding SupportingText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+								   Style="{StaticResource CardsSupportingTextTypo}"
+								   Margin="16,12"
+								   Grid.Row="2"
+								   Grid.ColumnSpan="3" />
 
 						<!-- Expander part -->
-						<StackPanel Grid.Row="3"
-									Grid.ColumnSpan="3"
-									Visibility="{Binding ExpanderHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}">
+						<StackPanel Visibility="{Binding ExpanderHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}"
+									Grid.Row="3"
+									Grid.ColumnSpan="3">
+
 							<Rectangle x:Name="ExpanderSeparator"
+									   Fill="{StaticResource OnSurfaceFocusedBrush}"
 									   Height="1"
-									   Margin="0,12,0,0"
 									   HorizontalAlignment="Stretch"
-									   Fill="{StaticResource OnSurfaceFocusedBrush}" />
+									   Margin="0,12,0,0" />
 
 							<ContentPresenter x:Name="ExpanderPresenter"
 											  Content="{TemplateBinding ExpanderContent}"
 											  ContentTemplate="{TemplateBinding ExpanderContentTemplate}"
 											  Height="0" />
 
-							<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+							<ToggleButton Content="{TemplateBinding ExpanderHeaderContent}"
+										  Style="{StaticResource CardsExpenderToggleButtonStyle}"
+										  IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
 										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  Content="{TemplateBinding ExpanderHeaderContent}"
-										  Style="{StaticResource TextMaterialToggleButtonStyle}" />
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 						</StackPanel>
 
 						<!-- Action Buttons part -->
-						<ItemsControl Grid.Row="4"
-									  Grid.ColumnSpan="3"
+						<ItemsControl Visibility="{Binding ButtonsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}"
 									  ItemsSource="{TemplateBinding ButtonsItemsSource}"
-									  Visibility="{Binding ButtonsItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}">
+									  Grid.Row="4"
+									  Grid.ColumnSpan="3">
+
 							<ItemsControl.ItemsPanel>
 								<ItemsPanelTemplate>
 									<StackPanel Orientation="Horizontal" />
 								</ItemsPanelTemplate>
 							</ItemsControl.ItemsPanel>
+
 							<ItemsControl.ItemTemplate>
 								<DataTemplate>
 									<Button Content="{Binding}"
+											Style="{StaticResource TextMaterialButtonStyle}"
 											Margin="6"
-											Padding="10,2"
-											Style="{StaticResource TextMaterialButtonStyle}" />
+											Padding="10,2" />
 								</DataTemplate>
 							</ItemsControl.ItemTemplate>
 						</ItemsControl>
