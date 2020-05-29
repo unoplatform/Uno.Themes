@@ -34,18 +34,18 @@ namespace Uno.Material.Controls
 				typeof(BottomNavigationBar),
 				new PropertyMetadata(null, OnSelectedItemChanged));
 
-		public int SelectedIndex
+		public bool ShowBadge
 		{
-			get => (int)GetValue(SelectedIndexProperty);
-			set => SetValue(SelectedIndexProperty, value);
+			get => (bool)GetValue(ShowBadgeProperty);
+			set => SetValue(ShowBadgeProperty, value);
 		}
 
-		public static readonly DependencyProperty SelectedIndexProperty =
+		public static readonly DependencyProperty ShowBadgeProperty =
 			DependencyProperty.Register(
-				"SelectedIndex",
-				typeof(int),
+				nameof(ShowBadge),
+				typeof(bool),
 				typeof(BottomNavigationBar),
-				new PropertyMetadata(0));
+				new PropertyMetadata(false));
 
 		public BottomNavigationBar()
 		{
@@ -85,6 +85,12 @@ namespace Uno.Material.Controls
 
 		internal void GenerateTabItems()
 		{
+			// Unhook events of any previous items
+			for (var i = 0; i < Items.Count; i++)
+			{
+				Items[i].Checked -= BottomNavigationBarItem_Checked;
+			}
+
 			var rootGrid = GetTemplateChild("PART_Grid") as Grid;
 
 			rootGrid.ColumnDefinitions.Clear();
@@ -111,12 +117,12 @@ namespace Uno.Material.Controls
 		{
 			var navItem = sender as BottomNavigationBarItem;
 
+			SelectedItem = navItem;
+
 			foreach (BottomNavigationBarItem item in Items.Where(i => !i.Equals(navItem)))
 			{
 				item.IsChecked = false;
 			}
-
-			SelectedIndex = Items.IndexOf(navItem);
 		}
 	}
 }

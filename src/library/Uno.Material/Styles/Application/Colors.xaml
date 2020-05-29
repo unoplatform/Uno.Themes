@@ -27,6 +27,24 @@
 			<Color x:Key="OnSurfaceColor">#000000</Color>
 			<Color x:Key="OnErrorColor">#000000</Color>
 			<Color x:Key="OverlayColor">#51000000</Color>
+
+			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
+			<StaticResource x:Key="BottomNavBackgroundColorBrush"
+							ResourceKey="PrimaryBrush" />
+
+			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
+			<StaticResource x:Key="BottomNavLabelFocusColorBrush"
+							ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="BottomNavIconFocusColorBrush"
+							ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="BottomNavLabelColorBrush"
+							ResourceKey="OnPrimaryMediumBrush" />
+			<StaticResource x:Key="BottomNavIconColorBrush"
+							ResourceKey="OnPrimaryMediumBrush" />
+			<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
+							ResourceKey="ErrorBrush" />
+			<StaticResource x:Key="BottomNavNotifLabelColorBrush"
+							ResourceKey="OnErrorBrush" />
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
@@ -46,6 +64,22 @@
 			<Color x:Key="OnSurfaceColor">#DEFFFFFF</Color>
 			<Color x:Key="OnErrorColor">#000000</Color>
 			<Color x:Key="OverlayColor">#51FFFFFF</Color>
+
+			<StaticResource x:Key="BottomNavBackgroundColorBrush"
+							ResourceKey="SurfaceBrush" />
+
+			<StaticResource x:Key="BottomNavLabelFocusColorBrush"
+							ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="BottomNavIconFocusColorBrush"
+							ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="BottomNavLabelColorBrush"
+							ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="BottomNavIconColorBrush"
+							ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
+							ResourceKey="ErrorBrush" />
+			<StaticResource x:Key="BottomNavNotifLabelColorBrush"
+							ResourceKey="OnErrorBrush" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 

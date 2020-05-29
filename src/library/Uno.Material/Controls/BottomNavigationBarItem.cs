@@ -1,35 +1,50 @@
-﻿using Windows.UI.Xaml;
+﻿using Uno.Material.Entities;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Uno.Material.Controls
 {
 	public partial class BottomNavigationBarItem : ToggleButton
 	{
-		public string Data
+		public string Header
 		{
-			get => (string)GetValue(DataProperty);
-			set => SetValue(DataProperty, value);
+			get => (string)GetValue(TitleProperty);
+			set => SetValue(TitleProperty, value);
 		}
 
-		public static readonly DependencyProperty DataProperty =
+		public static readonly DependencyProperty TitleProperty =
 			DependencyProperty.Register(
-				"Data",
+				nameof(Header),
 				typeof(string),
 				typeof(BottomNavigationBarItem),
 				new PropertyMetadata(string.Empty));
 
-		public string Badge
+		public IconElement Icon
 		{
-			get => (string)GetValue(BadgeProperty);
+			get => (IconElement)GetValue(IconProperty);
+			set => SetValue(IconProperty, value);
+		}
+
+		public static readonly DependencyProperty IconProperty =
+			DependencyProperty.Register(
+				"Icon",
+				typeof(IconElement),
+				typeof(BottomNavigationBarItem),
+				new PropertyMetadata(null));
+
+		public BottomNavigationBarBadge Badge
+		{
+			get => (BottomNavigationBarBadge)GetValue(BadgeProperty);
 			set => SetValue(BadgeProperty, value);
 		}
 
 		public static readonly DependencyProperty BadgeProperty =
 			DependencyProperty.Register(
 				"Badge",
-				typeof(string),
+				typeof(BottomNavigationBarBadge),
 				typeof(BottomNavigationBarItem),
-				new PropertyMetadata(string.Empty));
+				new PropertyMetadata(null));
 
 		public BottomNavigationBarItem()
 		{

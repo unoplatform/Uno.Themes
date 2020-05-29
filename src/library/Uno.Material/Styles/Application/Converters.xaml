@@ -2,6 +2,11 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:converters="using:Uno.Material.Converters">
 
+	<converters:FromBoolToValueConverter x:Name="Material_TrueToVisible"
+										 TrueValue="Visible"
+										 FalseValue="Collapsed"
+										 NullValue="Collapsed" />
+
 	<converters:FromEmptyStringToValueConverter x:Key="Material_EmptyToFalse"
 												NotNullOrEmptyValue="True"
 												NullOrEmptyValue="False" />
@@ -9,6 +14,10 @@
 	<converters:FromEmptyStringToValueConverter x:Key="Material_EmptyToTrue"
 												NotNullOrEmptyValue="False"
 												NullOrEmptyValue="True" />
+
+	<converters:FromEmptyStringToValueConverter x:Key="Material_EmptyToVisible"
+												NotNullOrEmptyValue="Collapsed"
+												NullOrEmptyValue="Visible" />
 
 	<converters:FromEmptyStringToValueConverter x:Key="Material_EmptyToCollapsed"
 												NotNullOrEmptyValue="Visible"

@@ -2,9 +2,10 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:controls="using:Uno.Material.Controls">
 
-	<StaticResource x:Key="BottomNavLabelFocusColorBrush"
+	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
+	
+	<!--<StaticResource x:Key="BottomNavLabelFocusColorBrush"
 					ResourceKey="OnPrimaryBrush" />
-	<x:Double x:Key="BottomNavLabelFontSize">12</x:Double>
 	<StaticResource x:Key="BottomNavIconFocusColorBrush"
 					ResourceKey="OnPrimaryBrush" />
 	<StaticResource x:Key="BottomNavLabelColorBrush"
@@ -14,14 +15,16 @@
 	<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
 					ResourceKey="ErrorBrush" />
 	<StaticResource x:Key="BottomNavNotifLabelColorBrush"
-					ResourceKey="OnErrorBrush" />
+					ResourceKey="OnErrorBrush" />-->
+
+	<x:Double x:Key="BottomNavLabelFontSize">12</x:Double>
 
 	<Style x:Key="DefaultBottomNavigationBarItemStyle"
 		   TargetType="controls:BottomNavigationBarItem">
 		<Setter Property="Foreground"
 				Value="{StaticResource BottomNavLabelColorBrush}" />
 		<Setter Property="Margin"
-				Value="0,4" />
+				Value="4" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:BottomNavigationBarItem">
@@ -63,9 +66,9 @@
 								<VisualState x:Name="CheckedPressed" />
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="Icon.Fill"
+										<Setter Target="Icon.Foreground"
 												Value="{StaticResource BottomNavIconFocusColorBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
+										<Setter Target="Title.Foreground"
 												Value="{StaticResource BottomNavLabelFocusColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -94,43 +97,49 @@
 								</Ellipse.RenderTransform>
 							</Ellipse>
 
-							<Path x:Name="Icon"
-								  Data="{Binding Path=Data, RelativeSource={RelativeSource TemplatedParent}}"
-								  Fill="{StaticResource BottomNavIconColorBrush}"
-								  Stretch="Uniform"
-								  Height="20"
-								  Width="20"
-								  Margin="0,0,0,4"
-								  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+							<!-- Icon -->
+							<ContentPresenter x:Name="Icon"
+											  Content="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}}"
+											  Height="20"
+											  Width="20"
+											  Margin="0,0,0,4"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
-							<Border CornerRadius="6"
-									Background="{StaticResource BottomNavNotifBackgroundColorBrush}"
-									HorizontalAlignment="Right"
-									VerticalAlignment="Top"
-									Visibility="{Binding Text, ElementName=PART_BadgeLabel, Converter={StaticResource Material_EmptyToCollapsed}}">
-								<TextBlock x:Name="PART_BadgeLabel"
-										   Text="{Binding Path=Badge, RelativeSource={RelativeSource TemplatedParent}}"
-										   Foreground="{StaticResource BottomNavNotifLabelColorBrush}"
-										   FontSize="10"
-										   TextTrimming="CharacterEllipsis"
-										   Margin="4,2" />
-							</Border>
+							<!-- Badge Container -->
+							<Grid DataContext="{Binding Badge, RelativeSource={RelativeSource TemplatedParent}}"
+								  Visibility="{Binding IsVisible, Converter={StaticResource Material_TrueToVisible}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+								  HorizontalAlignment="Right"
+								  VerticalAlignment="Top">
+								<!-- Badge Circle Notification -->
+								<Ellipse Height="14"
+										 Width="14"
+										 Stretch="Uniform"
+										 Fill="{StaticResource BottomNavNotifBackgroundColorBrush}"
+										 Visibility="{Binding Text, Converter={StaticResource Material_EmptyToVisible}}" />
 
-							<ContentPresenter x:Name="ContentPresenter"
-											  Grid.Row="1"
-											  Foreground="{TemplateBinding Foreground}"
-											  BorderBrush="{TemplateBinding BorderBrush}"
-											  BorderThickness="{TemplateBinding BorderThickness}"
-											  Content="{TemplateBinding Content}"
-											  ContentTemplate="{TemplateBinding ContentTemplate}"
-											  ContentTransitions="{TemplateBinding ContentTransitions}"
-											  CornerRadius="{TemplateBinding CornerRadius}"
-											  FontFamily="{TemplateBinding FontFamily}"
-											  FontSize="{TemplateBinding FontSize}"
-											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-											  AutomationProperties.AccessibilityView="Raw" />
+								<!-- Badge Text Notification -->
+								<Border CornerRadius="6"
+										Background="{StaticResource BottomNavNotifBackgroundColorBrush}"
+										Visibility="{Binding Text, Converter={StaticResource Material_EmptyToCollapsed}}">
+									<TextBlock Text="{Binding Text}"
+											   Foreground="{StaticResource BottomNavNotifLabelColorBrush}"
+											   FontSize="10"
+											   TextTrimming="CharacterEllipsis"
+											   Margin="4,2" />
+								</Border>
+							</Grid>
+
+							<!-- Header Label -->
+							<TextBlock x:Name="Title"
+									   Grid.Row="1"
+									   TextTrimming="CharacterEllipsis"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Header}"
+									   FontFamily="{TemplateBinding FontFamily}"
+									   FontSize="{TemplateBinding FontSize}"
+									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 						</Grid>
 					</Grid>
 				</ControlTemplate>
