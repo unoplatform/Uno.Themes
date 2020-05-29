@@ -7,15 +7,15 @@ namespace Uno.Material.Controls
 {
 	public partial class BottomNavigationBarItem : ToggleButton
 	{
-		public string Header
+		public string Label
 		{
-			get => (string)GetValue(TitleProperty);
-			set => SetValue(TitleProperty, value);
+			get => (string)GetValue(LabelProperty);
+			set => SetValue(LabelProperty, value);
 		}
 
-		public static readonly DependencyProperty TitleProperty =
+		public static readonly DependencyProperty LabelProperty =
 			DependencyProperty.Register(
-				nameof(Header),
+				nameof(Label),
 				typeof(string),
 				typeof(BottomNavigationBarItem),
 				new PropertyMetadata(string.Empty));
@@ -28,7 +28,7 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty IconProperty =
 			DependencyProperty.Register(
-				"Icon",
+				nameof(Icon),
 				typeof(IconElement),
 				typeof(BottomNavigationBarItem),
 				new PropertyMetadata(null));
@@ -41,7 +41,7 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty BadgeProperty =
 			DependencyProperty.Register(
-				"Badge",
+				nameof(Badge),
 				typeof(BottomNavigationBarBadge),
 				typeof(BottomNavigationBarItem),
 				new PropertyMetadata(null));

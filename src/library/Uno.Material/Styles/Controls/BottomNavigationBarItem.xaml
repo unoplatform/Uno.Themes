@@ -68,7 +68,7 @@
 									<VisualState.Setters>
 										<Setter Target="Icon.Foreground"
 												Value="{StaticResource BottomNavIconFocusColorBrush}" />
-										<Setter Target="Title.Foreground"
+										<Setter Target="Label.Foreground"
 												Value="{StaticResource BottomNavLabelFocusColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -130,12 +130,12 @@
 								</Border>
 							</Grid>
 
-							<!-- Header Label -->
-							<TextBlock x:Name="Title"
+							<!-- Label -->
+							<TextBlock x:Name="Label"
 									   Grid.Row="1"
 									   TextTrimming="CharacterEllipsis"
 									   Foreground="{TemplateBinding Foreground}"
-									   Text="{TemplateBinding Header}"
+									   Text="{TemplateBinding Label}"
 									   FontFamily="{TemplateBinding FontFamily}"
 									   FontSize="{TemplateBinding FontSize}"
 									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

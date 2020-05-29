@@ -16,7 +16,7 @@ namespace Uno.Material.Controls
 
 		public readonly DependencyProperty ItemsProperty =
 			DependencyProperty.Register(
-				"Items",
+				nameof(Items),
 				typeof(List<BottomNavigationBarItem>),
 				typeof(BottomNavigationBar),
 				new PropertyMetadata(new List<BottomNavigationBarItem>(), OnItemsChanged));
@@ -29,23 +29,10 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty SelectedItemProperty =
 			DependencyProperty.Register(
-				"SelectedItem",
+				nameof(SelectedItem),
 				typeof(BottomNavigationBarItem),
 				typeof(BottomNavigationBar),
 				new PropertyMetadata(null, OnSelectedItemChanged));
-
-		public bool ShowBadge
-		{
-			get => (bool)GetValue(ShowBadgeProperty);
-			set => SetValue(ShowBadgeProperty, value);
-		}
-
-		public static readonly DependencyProperty ShowBadgeProperty =
-			DependencyProperty.Register(
-				nameof(ShowBadge),
-				typeof(bool),
-				typeof(BottomNavigationBar),
-				new PropertyMetadata(false));
 
 		public BottomNavigationBar()
 		{
