@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Uno.Material.Controls
 {
+	[TemplatePart(Name = "PART_Grid", Type = typeof(Grid))]
 	public partial class BottomNavigationBar : Control
 	{
 		public List<BottomNavigationBarItem> Items

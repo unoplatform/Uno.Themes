@@ -29,22 +29,15 @@
 			<Color x:Key="OverlayColor">#51000000</Color>
 
 			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
-			<StaticResource x:Key="BottomNavBackgroundColorBrush"
-							ResourceKey="PrimaryBrush" />
+			<Color x:Key="BottomNavBackgroundColor">#5B4CF5</Color>
 
 			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBarItem -->
-			<StaticResource x:Key="BottomNavLabelFocusColorBrush"
-							ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="BottomNavIconFocusColorBrush"
-							ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="BottomNavLabelColorBrush"
-							ResourceKey="OnPrimaryMediumBrush" />
-			<StaticResource x:Key="BottomNavIconColorBrush"
-							ResourceKey="OnPrimaryMediumBrush" />
-			<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
-							ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="BottomNavNotifLabelColorBrush"
-							ResourceKey="OnErrorBrush" />
+			<Color x:Key="BottomNavLabelFocusColor">#FFFFFF</Color>
+			<Color x:Key="BottomNavIconFocusColor">#FFFFFF</Color>
+			<Color x:Key="BottomNavLabelColor">#FFFFFF</Color>
+			<Color x:Key="BottomNavIconColor">#FFFFFF</Color>
+			<Color x:Key="BottomNavNotifBackgroundColor">#F85977</Color>
+			<Color x:Key="BottomNavNotifLabelColor">#000000</Color>
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
@@ -66,22 +59,15 @@
 			<Color x:Key="OverlayColor">#51FFFFFF</Color>
 
 			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
-			<StaticResource x:Key="BottomNavBackgroundColorBrush"
-							ResourceKey="SurfaceBrush" />
+			<Color x:Key="BottomNavBackgroundColor">#121212</Color>
 
 			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBarItem -->
-			<StaticResource x:Key="BottomNavLabelFocusColorBrush"
-							ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="BottomNavIconFocusColorBrush"
-							ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="BottomNavLabelColorBrush"
-							ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="BottomNavIconColorBrush"
-							ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
-							ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="BottomNavNotifLabelColorBrush"
-							ResourceKey="OnErrorBrush" />
+			<Color x:Key="BottomNavLabelFocusColor">#B6A8FB</Color>
+			<Color x:Key="BottomNavIconFocusColor">#B6A8FB</Color>
+			<Color x:Key="BottomNavLabelColor">#DEFFFFFF</Color>
+			<Color x:Key="BottomNavIconColor">#DEFFFFFF</Color>
+			<Color x:Key="BottomNavNotifBackgroundColor">#CF6679</Color>
+			<Color x:Key="BottomNavNotifLabelColor">#000000</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
@@ -193,6 +179,26 @@
 	<SolidColorBrush x:Key="OnSurfaceSelectedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.08"/>
+
+	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
+	<SolidColorBrush x:Key="BottomNavBackgroundColorBrush"
+					 Color="{StaticResource BottomNavBackgroundColor}" />
+
+	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBarItem -->
+	<SolidColorBrush x:Key="BottomNavLabelFocusColorBrush"
+					 Color="{StaticResource BottomNavLabelFocusColor}" />
+	<SolidColorBrush x:Key="BottomNavIconFocusColorBrush"
+					 Color="{StaticResource BottomNavIconFocusColor}" />
+	<SolidColorBrush x:Key="BottomNavLabelColorBrush"
+					 Color="{StaticResource BottomNavLabelColor}"
+					 Opacity="0.74" />
+	<SolidColorBrush x:Key="BottomNavIconColorBrush"
+					 Color="{StaticResource BottomNavIconColor}"
+					 Opacity="0.74" />
+	<SolidColorBrush x:Key="BottomNavNotifBackgroundColorBrush"
+					 Color="{StaticResource BottomNavNotifBackgroundColor}" />
+	<SolidColorBrush x:Key="BottomNavNotifLabelColorBrush"
+					 Color="{StaticResource BottomNavNotifLabelColor}" />
 	
 	
 	<!-- 

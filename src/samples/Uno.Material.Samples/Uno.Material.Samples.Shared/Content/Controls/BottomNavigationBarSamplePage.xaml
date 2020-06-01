@@ -4,26 +4,18 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:controls="using:Uno.Material.Controls"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:ex="using:Uno.Material.Samples.MarkupExtensions"
-	  xmlns:sys="using:System"
 	  xmlns:entities="using:Uno.Material.Entities"
 	  mc:Ignorable="d">
 
-	<Grid x:DefaultBindMode="OneWay">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-			<RowDefinition Height="auto" />
-		</Grid.RowDefinitions>
-
+	<Grid>
 		<TextBlock Text="{x:Bind BottomNavBar.SelectedItem.Label, Mode=OneWay}"
 				   FontWeight="Bold"
 				   HorizontalAlignment="Center"
 				   VerticalAlignment="Center" />
 
-		<controls:BottomNavigationBar x:Name="BottomNavBar"
-									  Grid.Row="1">
+		<controls:BottomNavigationBar x:Name="BottomNavBar">
 			<controls:BottomNavigationBar.Items>
-				<controls:BottomNavigationBarItem Label="Favorites">
+				<controls:BottomNavigationBarItem>
 					<controls:BottomNavigationBarItem.Icon>
 						<SymbolIcon Symbol="Favorite" />
 					</controls:BottomNavigationBarItem.Icon>
@@ -50,7 +42,7 @@
 														   Text="12" />
 					</controls:BottomNavigationBarItem.Badge>
 				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem Label="Settings">
+				<controls:BottomNavigationBarItem>
 					<controls:BottomNavigationBarItem.Icon>
 						<SymbolIcon Symbol="Setting" />
 					</controls:BottomNavigationBarItem.Icon>
