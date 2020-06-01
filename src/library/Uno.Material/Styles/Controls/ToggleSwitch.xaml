@@ -16,6 +16,7 @@
 
 	<win:Style x:Key="MaterialToggleSwitchStyle"
 			   TargetType="ToggleSwitch">
+
 		<Setter Property="Foreground"
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
 		<Setter Property="VerticalAlignment"
@@ -24,15 +25,19 @@
 				Value="System,TranslateX" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
+		
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
+
 					<Grid Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}">
+
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
+
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
@@ -41,6 +46,7 @@
 												Value="{StaticResource OnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
@@ -49,6 +55,7 @@
 												Value="{StaticResource OnSurfacePressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="SwitchKnobBoundsDisabled.Opacity"
@@ -540,8 +547,7 @@
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
 		<Setter Property="Height"
 				Value="50" />
-		<Setter Property="Width"
-				Value="70" />
+		
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
