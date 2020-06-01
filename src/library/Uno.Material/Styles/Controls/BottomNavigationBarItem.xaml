@@ -1,0 +1,153 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:controls="using:Uno.Material.Controls">
+
+	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
+	
+	<!--<StaticResource x:Key="BottomNavLabelFocusColorBrush"
+					ResourceKey="OnPrimaryBrush" />
+	<StaticResource x:Key="BottomNavIconFocusColorBrush"
+					ResourceKey="OnPrimaryBrush" />
+	<StaticResource x:Key="BottomNavLabelColorBrush"
+					ResourceKey="OnPrimaryMediumBrush" />
+	<StaticResource x:Key="BottomNavIconColorBrush"
+					ResourceKey="OnPrimaryMediumBrush" />
+	<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
+					ResourceKey="ErrorBrush" />
+	<StaticResource x:Key="BottomNavNotifLabelColorBrush"
+					ResourceKey="OnErrorBrush" />-->
+
+	<x:Double x:Key="BottomNavLabelFontSize">12</x:Double>
+
+	<Style x:Key="DefaultBottomNavigationBarItemStyle"
+		   TargetType="controls:BottomNavigationBarItem">
+		<Setter Property="Foreground"
+				Value="{StaticResource BottomNavLabelColorBrush}" />
+		<Setter Property="Margin"
+				Value="4" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:BottomNavigationBarItem">
+					<Grid Margin="{TemplateBinding Margin}"
+						  Background="Transparent">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualStateGroup.Transitions>
+									<VisualTransition x:Name="ToPressedTransition"
+													  To="Pressed"
+													  GeneratedDuration="0">
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetName="RippleScale"
+															 Storyboard.TargetProperty="ScaleX"
+															 Duration="0:0:0.4"
+															 From="1"
+															 To="4"
+															 EasingFunction="{StaticResource Material_EaseOutFunction}" />
+											<DoubleAnimation Storyboard.TargetName="RippleScale"
+															 Storyboard.TargetProperty="ScaleY"
+															 Duration="0:0:0.4"
+															 From="1"
+															 To="4"
+															 EasingFunction="{StaticResource Material_EaseOutFunction}" />
+											<DoubleAnimation Storyboard.TargetName="Ripple"
+															 Storyboard.TargetProperty="Opacity"
+															 Duration="0:0:0.4"
+															 From="0.5"
+															 To="0"
+															 EasingFunction="{StaticResource Material_EaseOutFunction}" />
+										</Storyboard>
+									</VisualTransition>
+								</VisualStateGroup.Transitions>
+
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="CheckedPointerOver" />
+								<VisualState x:Name="CheckedPressed" />
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="Icon.Foreground"
+												Value="{StaticResource BottomNavIconFocusColorBrush}" />
+										<Setter Target="Label.Foreground"
+												Value="{StaticResource BottomNavLabelFocusColorBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid HorizontalAlignment="Center">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+
+							<Ellipse x:Name="Ripple"
+									 Opacity="0"
+									 Stretch="Uniform"
+									 Height="24"
+									 Width="24"
+									 VerticalAlignment="Center"
+									 HorizontalAlignment="Center"
+									 Grid.RowSpan="2"
+									 IsHitTestVisible="False"
+									 RenderTransformOrigin="0.5,0.5"
+									 Fill="{StaticResource BottomNavLabelColorBrush}">
+								<Ellipse.RenderTransform>
+									<ScaleTransform x:Name="RippleScale" />
+								</Ellipse.RenderTransform>
+							</Ellipse>
+
+							<!-- Icon -->
+							<ContentPresenter x:Name="Icon"
+											  Content="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}}"
+											  Height="20"
+											  Width="20"
+											  Margin="0,0,0,4"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							<!-- Badge Container -->
+							<Grid DataContext="{Binding Badge, RelativeSource={RelativeSource TemplatedParent}}"
+								  Visibility="{Binding IsVisible, Converter={StaticResource Material_TrueToVisible}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+								  HorizontalAlignment="Right"
+								  VerticalAlignment="Top">
+								<!-- Badge Circle Notification -->
+								<Ellipse Height="14"
+										 Width="14"
+										 Stretch="Uniform"
+										 Fill="{StaticResource BottomNavNotifBackgroundColorBrush}"
+										 Visibility="{Binding Text, Converter={StaticResource Material_EmptyToVisible}}" />
+
+								<!-- Badge Text Notification -->
+								<Border CornerRadius="6"
+										Background="{StaticResource BottomNavNotifBackgroundColorBrush}"
+										Visibility="{Binding Text, Converter={StaticResource Material_EmptyToCollapsed}}">
+									<TextBlock Text="{Binding Text}"
+											   Foreground="{StaticResource BottomNavNotifLabelColorBrush}"
+											   FontSize="10"
+											   TextTrimming="CharacterEllipsis"
+											   Margin="4,2" />
+								</Border>
+							</Grid>
+
+							<!-- Label -->
+							<TextBlock x:Name="Label"
+									   Grid.Row="1"
+									   TextTrimming="CharacterEllipsis"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Label}"
+									   FontFamily="{TemplateBinding FontFamily}"
+									   FontSize="{TemplateBinding FontSize}"
+									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="controls:BottomNavigationBarItem"
+		   BasedOn="{StaticResource DefaultBottomNavigationBarItemStyle}" />
+
+</ResourceDictionary>

@@ -45,16 +45,7 @@
 	<Thickness x:Key="TextBoxOutlinedBorderRadius">4</Thickness>
 
 	<!-- Converters -->
-	<converters:FromEmptyStringToValueConverter x:Name="EmptyToFalse"
-												NotNullOrEmptyValue="True"
-												NullOrEmptyValue="False" />
-
-	<converters:FromEmptyStringToValueConverter x:Name="EmptyToTrue"
-												NotNullOrEmptyValue="False"
-												NullOrEmptyValue="True" />
-
-	<CubicEase x:Key="EaseInOutFunction"
-			   EasingMode="EaseInOut" />
+	
 
 	<Style x:Name="DeleteButtonStyle"
 		   TargetType="Button">
@@ -140,7 +131,7 @@
 										<DoubleAnimation Storyboard.TargetName="Scale"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 								</VisualState>
@@ -160,21 +151,21 @@
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="-16" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 								<VisualState x:Name="Empty">
@@ -182,21 +173,21 @@
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="0" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="1" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -330,21 +321,21 @@
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="-16" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 								<VisualState x:Name="Empty">
@@ -352,21 +343,21 @@
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="0" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="1" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleY"
 														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
