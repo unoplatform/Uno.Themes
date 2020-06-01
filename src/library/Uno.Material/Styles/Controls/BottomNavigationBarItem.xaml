@@ -71,6 +71,18 @@
 										<Setter Target="Label.Foreground"
 												Value="{StaticResource BottomNavLabelFocusColorBrush}" />
 									</VisualState.Setters>
+
+									<!-- TODO: Investigate why ColorAnimation isn't working -->
+									<!--<Storyboard>
+										<ColorAnimation Storyboard.TargetName="Icon"
+														Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+														Duration="0:0:0.4"
+														To="{ThemeResource PrimaryColor}" />
+										<ColorAnimation Storyboard.TargetName="Label"
+														Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+														Duration="0:0:0.4"
+														To="{ThemeResource PrimaryColor}" />
+									</Storyboard>-->
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
@@ -139,7 +151,8 @@
 									   FontFamily="{TemplateBinding FontFamily}"
 									   FontSize="{TemplateBinding FontSize}"
 									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									   Visibility="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyToCollapsed}}" />
 						</Grid>
 					</Grid>
 				</ControlTemplate>
