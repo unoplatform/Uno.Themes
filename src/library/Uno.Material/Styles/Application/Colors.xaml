@@ -38,6 +38,11 @@
 			<Color x:Key="BottomNavIconColor">#FFFFFF</Color>
 			<Color x:Key="BottomNavNotifBackgroundColor">#F85977</Color>
 			<Color x:Key="BottomNavNotifLabelColor">#000000</Color>
+
+			<SolidColorBrush x:Key="BottomNavPressedBrush"
+							 Color="{StaticResource OnPrimaryColor}"
+							 Opacity="0.10"/>
+
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
@@ -57,6 +62,10 @@
 			<Color x:Key="OnSurfaceColor">#DEFFFFFF</Color>
 			<Color x:Key="OnErrorColor">#000000</Color>
 			<Color x:Key="OverlayColor">#51FFFFFF</Color>
+
+			<SolidColorBrush x:Key="BottomNavPressedBrush"
+							 Color="{StaticResource OnSurfaceColor}"
+							 Opacity="0.10"/>
 
 			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
 			<Color x:Key="BottomNavBackgroundColor">#121212</Color>
@@ -182,23 +191,23 @@
 
 	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
 	<SolidColorBrush x:Key="BottomNavBackgroundColorBrush"
-					 Color="{StaticResource BottomNavBackgroundColor}" />
+					 Color="{ThemeResource BottomNavBackgroundColor}" />
 
 	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBarItem -->
 	<SolidColorBrush x:Key="BottomNavLabelFocusColorBrush"
-					 Color="{StaticResource BottomNavLabelFocusColor}" />
+					 Color="{ThemeResource BottomNavLabelFocusColor}" />
 	<SolidColorBrush x:Key="BottomNavIconFocusColorBrush"
-					 Color="{StaticResource BottomNavIconFocusColor}" />
+					 Color="{ThemeResource BottomNavIconFocusColor}" />
 	<SolidColorBrush x:Key="BottomNavLabelColorBrush"
-					 Color="{StaticResource BottomNavLabelColor}"
+					 Color="{ThemeResource BottomNavLabelColor}"
 					 Opacity="0.74" />
 	<SolidColorBrush x:Key="BottomNavIconColorBrush"
-					 Color="{StaticResource BottomNavIconColor}"
+					 Color="{ThemeResource BottomNavIconColor}"
 					 Opacity="0.74" />
 	<SolidColorBrush x:Key="BottomNavNotifBackgroundColorBrush"
-					 Color="{StaticResource BottomNavNotifBackgroundColor}" />
+					 Color="{ThemeResource BottomNavNotifBackgroundColor}" />
 	<SolidColorBrush x:Key="BottomNavNotifLabelColorBrush"
-					 Color="{StaticResource BottomNavNotifLabelColor}" />
+					 Color="{ThemeResource BottomNavNotifLabelColor}" />
 	
 	
 	<!-- 
