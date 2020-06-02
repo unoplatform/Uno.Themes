@@ -435,16 +435,18 @@
 											<RowDefinition Height="*" />
 										</Grid.RowDefinitions>
 
-										<ContentControl x:Name="HeaderContent"
-														MinHeight="{StaticResource PaneToggleButtonHeight}"
-														IsTabStop="False"
-														Margin="4,4,0,0"
-														Content="{TemplateBinding Header}"
-														ContentTemplate="{TemplateBinding HeaderTemplate}"
-														VerticalContentAlignment="Stretch"
-														HorizontalContentAlignment="Stretch"
-														Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" />
-
+										<Grid Margin="8,0,0,0">
+											<ContentControl x:Name="HeaderContent"
+															MinHeight="{StaticResource PaneToggleButtonHeight}"
+															IsTabStop="False"
+															Margin="4,4,0,0"
+															Content="{TemplateBinding Header}"
+															ContentTemplate="{TemplateBinding HeaderTemplate}"
+															VerticalContentAlignment="Stretch"
+															HorizontalContentAlignment="Stretch"
+															Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" />
+										</Grid>
+										
 										<ContentPresenter AutomationProperties.LandmarkType="Main"
 														  Grid.Row="1"
 														  win:Margin="-8,0,0,0"
