@@ -38,24 +38,16 @@
 								<VisualState x:Name="CheckedPointerOver" />
 								<VisualState x:Name="CheckedPressed" />
 								<VisualState x:Name="Checked">
-									<VisualState.Setters>
-										<Setter Target="Icon.Foreground"
-												Value="{ThemeResource BottomNavIconFocusColorBrush}" />
-										<Setter Target="Label.Foreground"
-												Value="{ThemeResource BottomNavLabelFocusColorBrush}" />
-									</VisualState.Setters>
-
-									<!-- TODO: Investigate why ColorAnimation isn't working -->
-									<!--<Storyboard>
+									<Storyboard>
 										<ColorAnimation Storyboard.TargetName="Icon"
-														Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+														Storyboard.TargetProperty="(ContentPresenter.Foreground).(SolidColorBrush.Color)"
 														Duration="0:0:0.4"
 														To="{ThemeResource PrimaryColor}" />
 										<ColorAnimation Storyboard.TargetName="Label"
-														Storyboard.TargetProperty="(UIElement.Foreground).(SolidColorBrush.Color)"
+														Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
 														Duration="0:0:0.4"
 														To="{ThemeResource PrimaryColor}" />
-									</Storyboard>-->
+									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
@@ -79,7 +71,9 @@
 								</Grid.RowDefinitions>
 
 								<!-- Icon -->
+								
 								<ContentPresenter x:Name="Icon"
+												  Foreground="{TemplateBinding Foreground}"
 												  Content="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}}"
 												  Height="20"
 												  Width="20"
