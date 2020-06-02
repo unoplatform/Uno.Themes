@@ -117,9 +117,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource ControlPressedOpacity}" />
+												Value="0.5" />
 										<Setter Target="PlaceholderElement.Opacity"
-												Value="{StaticResource ControlPressedOpacity}" />
+												Value="0.5" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Focused">
@@ -268,7 +268,7 @@
 		   TargetType="TextBox"
 		   BasedOn="{StaticResource DefaultMaterialTextBoxStyle}">
 		<Setter Property="Background"
-				Value="{StaticResource Color01Brush}" />
+				Value="{StaticResource TransparentBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="CornerRadius"
@@ -290,9 +290,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource ControlPressedOpacity}" />
+												Value="0.5" />
 										<Setter Target="PlaceholderElement.Opacity"
-												Value="{StaticResource ControlPressedOpacity}" />
+												Value="0.5" />
 										<Setter Target="Root.BorderThickness"
 												Value="0" />
 									</VisualState.Setters>
