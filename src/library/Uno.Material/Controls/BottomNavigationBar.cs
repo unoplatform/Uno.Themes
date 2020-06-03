@@ -77,6 +77,7 @@ namespace Uno.Material.Controls
 			for (var i = 0; i < Items.Count; i++)
 			{
 				Items[i].Checked -= BottomNavigationBarItem_Checked;
+				Items[i].Unchecked -= BottomNavigationBarItem_Unchecked;
 			}
 
 			var rootGrid = GetTemplateChild("PART_Grid") as Grid;
@@ -93,6 +94,7 @@ namespace Uno.Material.Controls
 				Grid.SetColumn(item, i);
 
 				item.Checked += BottomNavigationBarItem_Checked;
+				item.Unchecked += BottomNavigationBarItem_Unchecked;
 
 				if (i == 0)
 				{
@@ -110,6 +112,15 @@ namespace Uno.Material.Controls
 			foreach (BottomNavigationBarItem item in Items.Where(i => !i.Equals(navItem)))
 			{
 				item.IsChecked = false;
+			}
+		}
+
+		private void BottomNavigationBarItem_Unchecked(object sender, RoutedEventArgs e)
+		{
+			// We make sure to not unselect the currently selected item
+			if (sender is BottomNavigationBarItem item && item == SelectedItem)
+			{
+				item.IsChecked = true;
 			}
 		}
 	}
