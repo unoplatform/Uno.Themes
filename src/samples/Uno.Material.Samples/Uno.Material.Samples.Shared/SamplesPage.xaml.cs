@@ -17,6 +17,12 @@ namespace Uno.Material.Samples
 
 		private void NavView_Loaded(object sender, RoutedEventArgs e)
 		{
+			if (NavView.MenuItems.Any())
+			{
+				// on android, this can also fire when the app is resumed from background ("alt-tabbed back")
+				return;
+			}
+
 #if WINDOWS_UWP
 			NavView.IsSettingsVisible = true;
 			// Change the settings text to toggle the theme
