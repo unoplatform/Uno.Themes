@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Uno.Disposables;
 using Uno.Material.Samples.Content.Controls;
 using Uno.Material.Samples.Content.Styles;
 using Windows.UI.Xaml;
@@ -27,139 +30,94 @@ namespace Uno.Material.Samples
 #endif
 
 			// Adding NavigationView items in code behind
+			InitializeNavigationViewItems();
 
-			// Styles
-			NavView.MenuItems.Add(new NavigationViewItemHeader() { Content = "Styles" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "Colors", Icon = new SymbolIcon(Symbol.Next), Tag = "ColorsSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItemSeparator());
+			// Set the starting page
+			var type = typeof(ColorsSamplePage);
+			var item = NavView.MenuItems
+				.OfType<NavigationViewItem>()
+				.FirstOrDefault(x => (Type)x.Tag == type)
+				?? throw new Exception($"Navigation item for {type} was not found.");
 
-			// Controls
-			NavView.MenuItems.Add(new NavigationViewItemHeader() { Content = "Controls" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "Button", Icon = new SymbolIcon(Symbol.Next), Tag = "ButtonSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "Cards", Icon = new SymbolIcon(Symbol.Next), Tag = "CardsSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "CheckBox", Icon = new SymbolIcon(Symbol.Next), Tag = "CheckBoxSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "ComboBox", Icon = new SymbolIcon(Symbol.Next), Tag = "ComboBoxSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "FAB", Icon = new SymbolIcon(Symbol.Next), Tag = "FabSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "NavigationView", Icon = new SymbolIcon(Symbol.Next), Tag = "NavigationViewSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "RadioButton", Icon = new SymbolIcon(Symbol.Next), Tag = "RadioButtonSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "SnackBar", Icon = new SymbolIcon(Symbol.Next), Tag = "SnackBarSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "TextBlock", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBlockSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "TextBox", Icon = new SymbolIcon(Symbol.Next), Tag = "TextBoxSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "ToggleSwitch", Icon = new SymbolIcon(Symbol.Next), Tag = "ToggleSwitchSamplePage" });
-			NavView.MenuItems.Add(new NavigationViewItem()
-			{ Content = "BottomBarNavigation", Icon = new SymbolIcon(Symbol.Next), Tag = "BottomNavigationBarSamplePage" });
-
-			// Set the initial SelectedItem 
-			foreach (NavigationViewItemBase item in NavView.MenuItems)
-			{
-				if (item is NavigationViewItem && item.Tag.ToString() == "TextBoxSamplePage")
-				{
-					NavView.SelectedItem = item;
-					SetHeader(item.Content.ToString());
-					ContentFrame.Navigate(typeof(TextBoxSamplePage));
-					break;
-				}
-			}
+			NavView.SelectedItem = item;
+			NavView.Header = item.Content;
+			ContentFrame.Navigate((Type)item.Tag);
 		}
 
 		private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
 		{
 			if (args.IsSettingsInvoked)
 			{
-#if WINDOWS_UWP
 				ToggleTheme();
-				void ToggleTheme()
+			}
+			else if (args.InvokedItemContainer is NavigationViewItem item)
+			{
+				NavView.Header = item.Content;
+				ContentFrame.Navigate((Type)item.Tag);
+			}
+		}
+
+		private void InitializeNavigationViewItems()
+		{
+			// Styles
+			using (AddMenuHeader("Styles"))
+			{
+				AddMenuItem<ColorsSamplePage>();
+				NavView.MenuItems.Add(new NavigationViewItemSeparator());
+			}
+
+			// Controls
+			using (AddMenuHeader("Controls"))
+			{
+				AddMenuItem<ButtonSamplePage>();
+				AddMenuItem<CardsSamplePage>();
+				AddMenuItem<CheckBoxSamplePage>();
+				AddMenuItem<ComboBoxSamplePage>();
+				AddMenuItem<NavigationViewSamplePage>(content: "FAB");
+				AddMenuItem<RadioButtonSamplePage>();
+				AddMenuItem<SnackBarSamplePage>();
+				AddMenuItem<TextBlockSamplePage>();
+				AddMenuItem<TextBoxSamplePage>();
+				AddMenuItem<ToggleSwitchSamplePage>();
+				AddMenuItem<BottomNavigationBarSamplePage>(content: "BottomBarNavigation");
+			}
+
+			IDisposable AddMenuHeader(string content)
+			{
+				NavView.MenuItems.Add(new NavigationViewItemHeader()
 				{
-					// Set theme for window root.
-					if (Window.Current.Content is FrameworkElement frameworkElement)
-					{
-						if (frameworkElement.ActualTheme == ElementTheme.Dark)
-						{
-							frameworkElement.RequestedTheme = ElementTheme.Light;
-						}
-						else
-						{
-							frameworkElement.RequestedTheme = ElementTheme.Dark;
-						}
-					}
+					Content = content,
+				});
+				return Disposable.Empty;
+			}
+			void AddMenuItem<TSamplePage>(string content = null, Symbol iconSymbol = Symbol.Next)
+				where TSamplePage : Page
+			{
+				NavView.MenuItems.Add(new NavigationViewItem()
+				{
+					Content = content ?? Regex.Replace(typeof(TSamplePage).Name, @"SamplePage$", string.Empty),
+					Icon = new SymbolIcon(iconSymbol),
+					Tag = typeof(TSamplePage),
+				});
+			}
+		}
+
+		void ToggleTheme()
+		{
+#if WINDOWS_UWP
+			// Set theme for window root.
+			if (Window.Current.Content is FrameworkElement frameworkElement)
+			{
+				if (frameworkElement.ActualTheme == ElementTheme.Dark)
+				{
+					frameworkElement.RequestedTheme = ElementTheme.Light;
 				}
+				else
+				{
+					frameworkElement.RequestedTheme = ElementTheme.Dark;
+				}
+			}
 #endif
-			}
-			else
-			{
-			  // Find NavigationViewItem with Content that equals InvokedItem
-			  var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
-			  NavView_Navigate(item as NavigationViewItem);
-			}
-		}
-
-
-
-		private void NavView_Navigate(NavigationViewItem item)
-		{
-			SetHeader(item.Content.ToString());
-
-			switch (item.Tag)
-			{
-				//Styles
-				case "ColorsSamplePage":
-					ContentFrame.Navigate(typeof(ColorsSamplePage));
-					break;
-				//Controls
-				case "ButtonSamplePage":
-					ContentFrame.Navigate(typeof(ButtonSamplePage));
-					break;
-				case "CardsSamplePage":
-					ContentFrame.Navigate(typeof(CardsSamplePage));
-					break;
-				case "TextBoxSamplePage":
-					ContentFrame.Navigate(typeof(TextBoxSamplePage));
-					break;
-				case "TextBlockSamplePage":
-					ContentFrame.Navigate(typeof(TextBlockSamplePage));
-					break;
-				case "CheckBoxSamplePage":
-					ContentFrame.Navigate(typeof(CheckBoxSamplePage));
-					break;
-				case "ComboBoxSamplePage":
-					ContentFrame.Navigate(typeof(ComboBoxSamplePage));
-					break;
-				case "NavigationViewSamplePage":
-					ContentFrame.Navigate(typeof(NavigationViewSamplePage));
-					break;
-				case "RadioButtonSamplePage":
-					ContentFrame.Navigate(typeof(RadioButtonSamplePage));
-					break;
-				case "SnackBarSamplePage":
-					ContentFrame.Navigate(typeof(SnackBarSamplePage));
-					break;
-				case "ToggleSwitchSamplePage":
-					ContentFrame.Navigate(typeof(ToggleSwitchSamplePage));
-					break;
-				case "FabSamplePage":
-					ContentFrame.Navigate(typeof(FabSamplePage));
-					break;
-				case "BottomNavigationBarSamplePage":
-					ContentFrame.Navigate(typeof(BottomNavigationBarSamplePage));
-					break;
-			}
-		}
-
-		public void SetHeader(string header)
-		{
-			NavView.Header = header;
 		}
 	}
 }
