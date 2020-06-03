@@ -9,7 +9,7 @@ namespace Uno.Material.Samples.Droid
 	[Activity(
 			MainLauncher = true,
 			ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize,
-			WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.StateHidden
+			WindowSoftInputMode = SoftInput.AdjustNothing | SoftInput.StateHidden
 		)]
 	public class MainActivity : Windows.UI.Xaml.ApplicationActivity
 	{
