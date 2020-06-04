@@ -75,17 +75,18 @@ namespace Uno.Material.Samples
 			// Controls
 			using (AddMenuHeader("Controls"))
 			{
+				AddMenuItem<BottomNavigationBarSamplePage>(content: "BottomBarNavigation");
 				AddMenuItem<ButtonSamplePage>();
 				AddMenuItem<CardsSamplePage>();
 				AddMenuItem<CheckBoxSamplePage>();
 				AddMenuItem<ComboBoxSamplePage>();
-				AddMenuItem<NavigationViewSamplePage>(content: "FAB");
+				AddMenuItem<FabSamplePage>(content: "FAB");
+				AddMenuItem<NavigationViewSamplePage>();
 				AddMenuItem<RadioButtonSamplePage>();
 				AddMenuItem<SnackBarSamplePage>();
 				AddMenuItem<TextBlockSamplePage>();
 				AddMenuItem<TextBoxSamplePage>();
 				AddMenuItem<ToggleSwitchSamplePage>();
-				AddMenuItem<BottomNavigationBarSamplePage>(content: "BottomBarNavigation");
 			}
 
 			IDisposable AddMenuHeader(string content)
