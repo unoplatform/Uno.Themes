@@ -27,7 +27,7 @@
 			<Button Style="{StaticResource FabMaterialButtonStyle}"
 					Margin="12">
 				<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-					  Fill="Black"
+					  Fill="{StaticResource FabIconColor}"
 					  HorizontalAlignment="Center"
 					  VerticalAlignment="Center"
 					  win:Margin="0,0,6,4"
@@ -50,13 +50,14 @@
 					Margin="12">
 				<StackPanel Orientation="Horizontal">
 					<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-						  Fill="Black"
+						  Fill="{StaticResource FabIconColor}"
 						  HorizontalAlignment="Center"
 						  VerticalAlignment="Center"
 						  win:Margin="12,0,16,3"
 						  not_win:Margin="12,1,16,3" />
 
 					<TextBlock Text="CREATE"
+							   Foreground="{StaticResource FabLabelColor}"
 							   FontWeight="SemiBold"
 							   win:Margin="0,4,16,0"
 							   wasm:Margin="0,4,16,0"
