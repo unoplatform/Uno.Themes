@@ -21,7 +21,7 @@ Platform support:
 1. Install the nuget package Uno.Material
 2. Unless you want our default color palette (inspired by our Uno logo), you'll want to override the following color resources in you application. We suggest creating a Color.xaml `ResourceDictionary`.
 For more information on the color system, consult this [page](https://material.io/design/color/the-color-system.html#color-theme-creation) for all the official documentation and tools to help you create your own palette. 
-Here is what Colors.xaml would contain if you want both light and dark theme.
+Here is what Colors.xaml would contain if you want both light and dark theme. (see 7. for android native ToggleSwitch colors)
 ```xaml
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
@@ -129,6 +129,88 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 ```
 <CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
 ```
+
+7. If you are using our ToggleSwitches to get the proper native colors on android their is some modification needed.
+The reasoning for this is to apply the native android shadowing on the off value of the ToggleSwitch, and proper focus shadow colors when ToggleSwitches are clicked
+
+7.1 From your Android project head go to YourProject.Droid/Resources/values/Styles.xml
+Inside your AppTheme add two item's "colorControlActivated" (the on color for your ToggleSwitches thumb) and "colorSwitchThumbNormal" (the off color for your ToggleSwitches thumb) you may add your colors here directly, for example #ffffff, or by files (see our example code below)
+
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.Light">
+
+		<!-- Color style for toggle switch -->
+		<item name="colorControlActivated">@color/PrimaryColor</item>
+		<item name="colorSwitchThumbNormal">@color/SurfaceColor</item>
+	</style>
+</resources>
+
+```
+
+7.2 (Optional) If your application uses Light/Dark color palettes.
+7.2.1 Inside the Styles.xml file change the AppTheme's parent to Theme.Compat.DayNight
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
+
+		<!-- Color style for toggle switch -->
+		<item name="colorControlActivated">@color/PrimaryColor</item>
+		<item name="colorSwitchThumbNormal">@color/SurfaceColor</item>
+	</style>
+</resources>
+
+```
+
+7.2.2 From your Android project head go to YourProject.Droid/Resources/values create a file called "colors.xml", inside include your "Light" theme colors.
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="PrimaryColor">#5B4CF5</color>
+	<color name="SurfaceColor">#FFFFFF</color>
+</resources>
+
+```
+
+7.2.3 From your Android project head go to YourProject.Droid/Resources create a folder called "values-night", inside the folder add a file called "colors.xml", and inside the file include your "Dark" theme colors.
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="PrimaryColor">#B6A8FB</color>
+	<color name="SurfaceColor">#121212</color>
+</resources>
+
+```
+
+7.3 (Optional) If you have changed the material color palette for your application (2.) then there are two more colors that must be overridden for android native ToggleSwitch disabled colors to be properly applied.
+Colors are named PrimaryVariantDisabledThumbColor and SurfaceVariantLightColor, they can be overridden in your colors.xaml file.
+PrimaryVariantDisabledThumbColor is a non-transparent version of PrimaryDisabled color ("Light") in "Light" palette, and a non-transparent version of PrimaryMedium color ("Dark") in "Dark" palette.
+SurfaceVariantLightColor is the Surface color however in "Light" Palette is an off white color to be visible on light backgrounds.
+
+```
+<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. (Unwanted behavior) -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- Light Theme -->
+		<ResourceDictionary x:Key="Light">
+			<!-- Non-opaque/transparent primary disabled color -->
+			<Color x:Key="PrimaryVariantDisabledThumbColor">#E9E5FA</Color>
+			<!-- Non-opaque/transparent white color that shows on white surfaces -->
+			<Color x:Key="SurfaceVariantLightColor">#F7F7F7</Color>
+		</ResourceDictionary>
+
+		<!-- Dark Theme -->
+		<ResourceDictionary x:Key="Dark">
+			<!-- Non-opaque/transparent primary medium color -->
+			<Color x:Key="PrimaryVariantDisabledThumbColor">#57507C</Color>
+			<Color x:Key="SurfaceVariantLightColor">#121212</Color>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+```
+
+
 <!-- TODO: Add reference on where to get those resource names -->
 
 ## Features

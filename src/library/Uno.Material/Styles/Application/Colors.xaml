@@ -41,7 +41,13 @@
 
 			<SolidColorBrush x:Key="BottomNavPressedBrush"
 							 Color="{StaticResource OnPrimaryColor}"
-							 Opacity="0.10"/>
+							 Opacity="0.10" />
+
+			<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. -->
+			<!-- Non-opaque/transparent primary disabled color -->
+			<Color x:Key="PrimaryVariantDisabledThumbColor">#E9E5FA</Color>
+			<!-- Non-opaque/transparent white color that shows on white surfaces -->
+			<Color x:Key="SurfaceVariantLightColor">#F7F7F7</Color>
 
 		</ResourceDictionary>
 
@@ -65,7 +71,7 @@
 
 			<SolidColorBrush x:Key="BottomNavPressedBrush"
 							 Color="{StaticResource OnSurfaceColor}"
-							 Opacity="0.10"/>
+							 Opacity="0.10" />
 
 			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
 			<Color x:Key="BottomNavBackgroundColor">#121212</Color>
@@ -77,75 +83,86 @@
 			<Color x:Key="BottomNavIconColor">#DEFFFFFF</Color>
 			<Color x:Key="BottomNavNotifBackgroundColor">#CF6679</Color>
 			<Color x:Key="BottomNavNotifLabelColor">#000000</Color>
+
+			<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. -->
+			<!-- Non-opaque/transparent primary medium color -->
+			<Color x:Key="PrimaryVariantDisabledThumbColor">#57507C</Color>
+			<Color x:Key="SurfaceVariantLightColor">#121212</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Global brushes -->
 	<SolidColorBrush x:Key="PrimaryBrush"
-					 Color="{ThemeResource PrimaryColor}"/>
+					 Color="{ThemeResource PrimaryColor}" />
 	<SolidColorBrush x:Key="PrimaryVariantDarkBrush"
-					 Color="{ThemeResource PrimaryVariantDarkColor}"/>
+					 Color="{ThemeResource PrimaryVariantDarkColor}" />
 	<SolidColorBrush x:Key="PrimaryVariantLightBrush"
-					 Color="{ThemeResource PrimaryVariantLightColor}"/>
+					 Color="{ThemeResource PrimaryVariantLightColor}" />
 	<SolidColorBrush x:Key="SecondaryBrush"
-					 Color="{ThemeResource SecondaryColor}"/>
+					 Color="{ThemeResource SecondaryColor}" />
 	<SolidColorBrush x:Key="SecondaryVariantDarkBrush"
-					 Color="{ThemeResource SecondaryVariantDarkColor}"/>
+					 Color="{ThemeResource SecondaryVariantDarkColor}" />
 	<SolidColorBrush x:Key="SecondaryVariantLightBrush"
-					 Color="{ThemeResource SecondaryVariantLightColor}"/>
+					 Color="{ThemeResource SecondaryVariantLightColor}" />
 	<SolidColorBrush x:Key="BackgroundBrush"
-					 Color="{ThemeResource BackgroundColor}"/>
+					 Color="{ThemeResource BackgroundColor}" />
 	<SolidColorBrush x:Key="SurfaceBrush"
-					 Color="{ThemeResource SurfaceColor}"/>
+					 Color="{ThemeResource SurfaceColor}" />
 	<SolidColorBrush x:Key="ErrorBrush"
-					 Color="{ThemeResource ErrorColor}"/>
+					 Color="{ThemeResource ErrorColor}" />
 	<SolidColorBrush x:Key="OnErrorBrush"
-					 Color="{ThemeResource OnErrorColor}"/>
+					 Color="{ThemeResource OnErrorColor}" />
 	<SolidColorBrush x:Key="OnBackgroundBrush"
-					 Color="{ThemeResource OnBackgroundColor}"/>
+					 Color="{ThemeResource OnBackgroundColor}" />
 	<SolidColorBrush x:Key="OverlayBrush"
-					 Color="{ThemeResource OverlayColor}"/>
+					 Color="{ThemeResource OverlayColor}" />
 
 	<!-- Primary Brushes -->
+	<SolidColorBrush x:Key="PrimaryMediumBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="0.74" />
+	<SolidColorBrush x:Key="PrimaryDisabledBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="0.38" />
 	<SolidColorBrush x:Key="PrimaryHoverBrush"
 					 Color="{ThemeResource PrimaryColor}"
-					 Opacity="0.04"/>
+					 Opacity="0.04" />
 	<SolidColorBrush x:Key="PrimaryFocusedBrush"
 					 Color="{ThemeResource PrimaryColor}"
-					 Opacity="0.12"/>
+					 Opacity="0.12" />
 	<SolidColorBrush x:Key="PrimaryPressedBrush"
 					 Color="{ThemeResource PrimaryColor}"
-					 Opacity="0.10"/>
+					 Opacity="0.10" />
 	<SolidColorBrush x:Key="PrimaryDraggedBrush"
 					 Color="{ThemeResource PrimaryColor}"
-					 Opacity="0.08"/>
+					 Opacity="0.08" />
 	<SolidColorBrush x:Key="PrimarySelectedBrush"
 					 Color="{ThemeResource PrimaryColor}"
-					 Opacity="0.08"/>
-	
+					 Opacity="0.08" />
+
 	<!-- OnPrimary Brushes -->
 	<!-- Only opacity should differ -->
 	<!-- Issue #41 TODO: SolidColorBrushes set this way do not function with android thumbtints and tracktints -->
 	<SolidColorBrush x:Key="OnPrimaryBrush"
-					 Color="{ThemeResource OnPrimaryColor}"/>
+					 Color="{ThemeResource OnPrimaryColor}" />
 	<SolidColorBrush x:Key="OnPrimaryMediumBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
-					 Opacity="0.74"/>
+					 Opacity="0.74" />
 	<SolidColorBrush x:Key="OnPrimaryDisabledBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
-					 Opacity="0.38"/>
+					 Opacity="0.38" />
 	<SolidColorBrush x:Key="OnPrimaryHoverBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
-					 Opacity="0.04"/>
+					 Opacity="0.04" />
 	<SolidColorBrush x:Key="OnPrimaryFocusedBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
-					 Opacity="0.12"/>
+					 Opacity="0.12" />
 	<SolidColorBrush x:Key="OnPrimaryPressedBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
-					 Opacity="0.10"/>
+					 Opacity="0.10" />
 	<SolidColorBrush x:Key="OnPrimaryDraggedBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
-					 Opacity="0.08"/>
+					 Opacity="0.08" />
 	<SolidColorBrush x:Key="OnPrimarySelectedBrush"
 					 Color="{ThemeResource OnPrimaryColor}"
 					 Opacity="0.08" />
@@ -154,40 +171,49 @@
 	<!-- Only opacity should differ -->
 	<SolidColorBrush x:Key="OnSecondaryBrush"
 					 Color="{ThemeResource OnSecondaryColor}"
-					 Opacity="1.0"/>
+					 Opacity="1.0" />
 	<SolidColorBrush x:Key="OnSecondaryMediumBrush"
 					 Color="{ThemeResource OnSecondaryColor}"
-					 Opacity="0.74"/>
+					 Opacity="0.74" />
 	<SolidColorBrush x:Key="OnSecondaryDisabledBrush"
 					 Color="{ThemeResource OnSecondaryColor}"
-					 Opacity="0.38"/>
+					 Opacity="0.38" />
+
+	<!-- Surface Brushes -->
+	<!-- Only opacity should differ -->
+	<SolidColorBrush x:Key="SurfaceDisabledBrush"
+					 Color="{ThemeResource SurfaceColor}"
+					 Opacity="0.38" />
 
 	<!-- OnSurface Brushes -->
 	<!-- Only opacity should differ -->
 	<SolidColorBrush x:Key="OnSurfaceBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="1.0"/>
+					 Opacity="1.0" />
 	<SolidColorBrush x:Key="OnSurfaceMediumBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.74"/>
+					 Opacity="0.74" />
 	<SolidColorBrush x:Key="OnSurfaceDisabledBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.38"/>
+					 Opacity="0.38" />
 	<SolidColorBrush x:Key="OnSurfaceHoverBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.04"/>
+					 Opacity="0.04" />
 	<SolidColorBrush x:Key="OnSurfaceFocusedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.12"/>
+					 Opacity="0.12" />
 	<SolidColorBrush x:Key="OnSurfacePressedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.10"/>
+					 Opacity="0.10" />
 	<SolidColorBrush x:Key="OnSurfaceDraggedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.08"/>
+					 Opacity="0.08" />
 	<SolidColorBrush x:Key="OnSurfaceSelectedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.08"/>
+					 Opacity="0.08" />
+	<SolidColorBrush x:Key="OnSurfaceDisabledVariantBrush"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="0.20" />
 
 	<SolidColorBrush x:Key="TransparentBrush"
 					 Color="Transparent" />

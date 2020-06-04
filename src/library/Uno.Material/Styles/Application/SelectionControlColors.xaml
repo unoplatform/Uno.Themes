@@ -1,5 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:android="http:///umbrella/ui/android"
+					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					mc:Ignorable="android">
 
 	<!-- 
 	
@@ -12,37 +16,49 @@
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<SolidColorBrush x:Key="SelectControlBackgroundColor"
-					 Color="{ThemeResource PrimaryColor}" />
-	<SolidColorBrush x:Key="SelectControlIndicatorColor"
-					 Color="{ThemeResource OnPrimaryColor}" />
-	<SolidColorBrush x:Key="SelectControlStrokeColor"
-					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.74" />
-	<SolidColorBrush x:Key="SelectControlToggleOnButtonColor"
-					 Color="{ThemeResource PrimaryColor}" />
-	<!-- TODO: This is the OnPrimaryDisabledBrush, remove when brush issue #41 is fixed -->
-	<SolidColorBrush x:Key="SelectControlToggleOnBackgroundColor"
-					 Color="#615B4CF5" />
-	<SolidColorBrush x:Key="SelectControlToggleOnFocusBackgroundColor"
-					 Color="{ThemeResource PrimaryColor}"
-					 Opacity="0.1" />
-	<!-- TODO: This is the OnSurfaceHoverBrush, remove when brush issue #41 is fixed without oPACITY -->
-	<SolidColorBrush x:Key="SelectControlToggleOffButtonColor"
-					 Color="{ThemeResource BackgroundColor}" />
-	<SolidColorBrush x:Key="SelectControlToggleOffHoverButtonColor"
-					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.05" />
-	<SolidColorBrush x:Key="SelectControlToggleOffFocusButtonColor"
-					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="0.08" />
-	<!-- TODO: This is the OnSurfaceDisabledBrush, remove when brush issue #41 is fixed -->
-	<SolidColorBrush x:Key="SelectControlToggleOffBackgroundColor"
-					 Color="#61000000" />
-	<!-- TODO: This is the OnPrimaryMediumBrush, remove when brush issue #41 is fixed -->
-	<SolidColorBrush x:Key="SelectControlToggleOnDisabledButtonColor"
-					 Color="#B6A8FB" />
-	<!-- TODO: This is a color not defined by a name in zeplin -->
-	<SolidColorBrush x:Key="SelectControlToggleOnDisabledBackgroundColor"
-					 Color="#61BB86FC" />
+	<StaticResource x:Key="SelectControlBackgroundColor"
+					ResourceKey="PrimaryBrush" />
+	<StaticResource x:Key="SelectControlIndicatorColor"
+					ResourceKey="OnPrimaryBrush" />
+	<StaticResource x:Key="SelectControlStrokeColor"
+					ResourceKey="OnSurfaceMediumBrush" />
+
+	<!-- ToggleSwitch Section -->
+
+	<!-- Brushes for thumbtint colors -->
+	<SolidColorBrush x:Key="PrimaryVariantDisabledThumbColorBrush"
+					 Color="{ThemeResource PrimaryVariantDisabledThumbColor}" />
+	<SolidColorBrush x:Key="SurfaceVariantBrush"
+					 Color="{ThemeResource SurfaceVariantLightColor}" />
+
+	<!-- Toggle On -->
+	<StaticResource x:Key="SelectControlToggleOnButtonColor"
+					ResourceKey="PrimaryBrush" />
+	<StaticResource x:Key="SelectControlToggleOnBackgroundColor"
+					ResourceKey="PrimaryDisabledBrush" />
+
+	<!-- Toggle Off -->
+	<not_android:StaticResource x:Key="SelectControlToggleOffButtonColor"
+								ResourceKey="SurfaceBrush" />
+	<android:StaticResource x:Key="SelectControlToggleOffButtonColor"
+							ResourceKey="SurfaceVariantBrush" />
+	<StaticResource x:Key="SelectControlToggleOffBackgroundColor"
+					ResourceKey="OnSurfaceDisabledVariantBrush" />
+
+	<!-- Toggle On Disabled -->
+	<not_android:StaticResource x:Key="SelectControlToggleOnDisabledButtonColor"
+								ResourceKey="PrimaryFocusedBrush" />
+	<android:StaticResource x:Key="SelectControlToggleOnDisabledButtonColor"
+							ResourceKey="PrimaryVariantDisabledThumbColorBrush" />
+	<StaticResource x:Key="SelectControlToggleOnDisabledBackgroundColor"
+					ResourceKey="PrimaryDraggedBrush" />
+
+	<!-- Toggle Hover/Focus Brushes -->
+	<StaticResource x:Key="SelectControlToggleOnFocusBackgroundColor"
+					ResourceKey="PrimaryFocusedBrush" />
+	<StaticResource x:Key="SelectControlToggleOffHoverButtonColor"
+					ResourceKey="OnSurfaceHoverBrush" />
+	<StaticResource x:Key="SelectControlToggleOffFocusButtonColor"
+					ResourceKey="OnSurfaceDraggedBrush" />
+	
 </ResourceDictionary>
