@@ -68,14 +68,14 @@
 										<DoubleAnimation Storyboard.TargetName="Root"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 From="0"
 														 To="1" />
 
 										<DoubleAnimation Storyboard.TargetName="SnackBarTransform"
 														 Storyboard.TargetProperty="Y"
 														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 From="15"
 														 To="0" />
 									</Storyboard>
@@ -86,14 +86,14 @@
 										<DoubleAnimation Storyboard.TargetName="Root"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 From="1"
 														 To="0" />
 
 										<DoubleAnimation Storyboard.TargetName="SnackBarTransform"
 														 Storyboard.TargetProperty="Y"
 														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource EaseInOutFunction}"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 														 From="0"
 														 To="15" />
 									</Storyboard>
@@ -126,7 +126,7 @@
 									Content="{TemplateBinding ActionLabel}"
 									Style="{StaticResource TextMaterialButtonStyle}"
 									Foreground="{StaticResource SnackBarButtonForegroundBrush}"
-									Visibility="{Binding Content, ElementName=ActionButton, Converter={StaticResource EmptyToCollapsed}}"
+									Visibility="{Binding Content, ElementName=ActionButton, Converter={StaticResource Material_EmptyToCollapsed}}"
 									VerticalAlignment="Center"
 									Margin="-8,0,8,0"
 									Grid.Column="1" />
