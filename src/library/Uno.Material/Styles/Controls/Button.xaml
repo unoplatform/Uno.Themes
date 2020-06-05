@@ -7,6 +7,7 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
+					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="d ios android wasm not_win">
@@ -697,8 +698,11 @@
 				Value="{StaticResource ButtonFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource ButtonFontSize}" />
+		<!-- Issue #143 Android needs more height than other platforms to have proper button sizing -->
+		<android:Setter Property="MinHeight"
+						Value="60" />
 		<Setter Property="MinHeight"
-				Value="48" />
+							Value="48" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -756,8 +760,10 @@
 										 HorizontalContentAlignment="Stretch"
 										 VerticalContentAlignment="Stretch">
 							<Grid>
+								<!-- Issue #144 Wasm and Android need extra margin to properly draw their elevation -->
 								<toolkit:ElevatedView Elevation="6"
 													  wasm:Margin="0,0,6,6"
+													  android:Margin="2,2,2,6"
 													  ShadowColor="Black"
 													  IsHitTestVisible="False"
 													  Background="{StaticResource ButtonFabFocusOverlayBackgroundColor}"
@@ -788,6 +794,7 @@
 
 								<Grid x:Name="FabFocusBorder"
 									  wasm:Margin="0,0,6,6"
+									  android:Margin="2,2,2,6"
 									  CornerRadius="{StaticResource FabBorderRadius}"
 									  Background="{StaticResource ButtonFabFocusOverlayBackgroundColor}"
 									  BorderBrush="{StaticResource ButtonFabFocusOverlayBorderColor}"
