@@ -35,6 +35,7 @@ Affected platform(s):
 - [ ] Android
 - [ ] WebAssembly
 - [ ] UWP
+- [ ] MacOS
 
 ## Anything else we need to know?
 

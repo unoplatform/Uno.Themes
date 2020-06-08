@@ -1,4 +1,4 @@
----
+﻿---
 name: Enhancement Request
 about: Suggest an enhancement to the Uno project
 labels: kind/enhancement, triage/untriaged
@@ -16,6 +16,7 @@ labels: kind/enhancement, triage/untriaged
 - [ ] iOS
 - [ ] Android
 - [ ] WebAssembly
+- [ ] MacOS
 
 ## Anything else we need to know?
 
