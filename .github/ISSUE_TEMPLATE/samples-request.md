@@ -1,4 +1,4 @@
----
+﻿---
 name: Samples Request
 about: Request an enhancement to the Uno samples
 labels: kind/contributor-experience, kind/documentation, triage/untriaged
@@ -16,6 +16,7 @@ labels: kind/contributor-experience, kind/documentation, triage/untriaged
 - [ ] Android
 - [ ] WebAssembly
 - [ ] Windows
+- [ ] MacOS
 
 
 ## Anything else we need to know?
