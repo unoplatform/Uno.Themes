@@ -43,7 +43,9 @@
 						  Background="Transparent">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+								</VisualState>
+
 								<VisualState x:Name="PointerOver" />
 
 								<VisualState x:Name="Pressed">
@@ -59,12 +61,12 @@
 												Value="0.5" />
 									</VisualState.Setters>
 								</VisualState>
-							</VisualStateGroup>
 
-							<VisualStateGroup x:Name="CheckStates">
 
-								<VisualState x:Name="Checked">
-									<Storyboard>
+								<VisualStateGroup.Transitions>
+									<VisualTransition From="Normal"
+													  To="Pressed">
+										<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.4"
@@ -85,7 +87,7 @@
 																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 																 From="1"
 																 To="0" />
-										
+
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
 																	   Storyboard.TargetName="PressRing">
 											<EasingDoubleKeyFrame KeyTime="0"
@@ -96,7 +98,48 @@
 																  Value="0" />
 										</DoubleAnimationUsingKeyFrames>
 									</Storyboard>
-									
+									</VisualTransition>
+									<VisualTransition From="PointerOver"
+													  To="Pressed">
+										<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="0:0:0.4"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 From="0"
+														 To="1" />
+
+										<android:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.5"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="1"
+																 To="0" />
+
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+																	   Storyboard.TargetName="PressRing">
+											<EasingDoubleKeyFrame KeyTime="0"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+																  Value="0.5" />
+											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+																  Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+									</VisualTransition>
+								</VisualStateGroup.Transitions>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CheckStates">
+
+								<VisualState x:Name="Checked">
 									<VisualState.Setters>
 										<Setter Target="OuterEllipse.Stroke"
 												Value="{StaticResource SelectControlBackgroundColor}" />
