@@ -78,37 +78,40 @@
 									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
 
-								<!-- Icon -->
-								<ContentPresenter x:Name="Icon"
-												  Content="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}}"
-												  Height="20"
-												  Width="20"
-												  Margin="0,0,0,4"
-												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+								<!-- Icon + Badge Container-->
+								<Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									  Margin="0,0,0,4">
+									<!-- Icon -->
+									<ContentPresenter x:Name="Icon"
+													  Content="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}}"
+													  Height="20"
+													  Width="20"
+													  Margin="12,0" />
 
-								<!-- Badge Container -->
-								<Grid DataContext="{Binding Badge, RelativeSource={RelativeSource TemplatedParent}}"
-									  Visibility="{Binding IsVisible, Converter={StaticResource Material_TrueToVisible}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
-									  HorizontalAlignment="Right"
-									  VerticalAlignment="Top">
-									<!-- Badge Circle Notification -->
-									<Ellipse Height="14"
-											 Width="14"
-											 Stretch="Uniform"
-											 Fill="{ThemeResource BottomNavNotifBackgroundColorBrush}"
-											 Visibility="{Binding Text, Converter={StaticResource Material_EmptyToVisible}}" />
+									<!-- Badge Container -->
+									<Grid DataContext="{Binding Badge, RelativeSource={RelativeSource TemplatedParent}}"
+										  Visibility="{Binding IsVisible, Converter={StaticResource Material_TrueToVisible}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+										  HorizontalAlignment="Right"
+										  VerticalAlignment="Top">
+										<!-- Badge Circle Notification -->
+										<Ellipse Height="14"
+												 Width="14"
+												 Stretch="Uniform"
+												 Fill="{ThemeResource BottomNavNotifBackgroundColorBrush}"
+												 Visibility="{Binding Text, Converter={StaticResource Material_EmptyToVisible}}" />
 
-									<!-- Badge Text Notification -->
-									<Border CornerRadius="6"
-											Background="{ThemeResource BottomNavNotifBackgroundColorBrush}"
-											Visibility="{Binding Text, Converter={StaticResource Material_EmptyToCollapsed}}">
-										<TextBlock Text="{Binding Text}"
-												   Foreground="{ThemeResource BottomNavNotifLabelColorBrush}"
-												   FontSize="10"
-												   TextTrimming="CharacterEllipsis"
-												   Margin="4,2" />
-									</Border>
+										<!-- Badge Text Notification -->
+										<Border CornerRadius="6"
+												Background="{ThemeResource BottomNavNotifBackgroundColorBrush}"
+												Visibility="{Binding Text, Converter={StaticResource Material_EmptyToCollapsed}}">
+											<TextBlock Text="{Binding Text}"
+													   Foreground="{ThemeResource BottomNavNotifLabelColorBrush}"
+													   FontSize="10"
+													   TextTrimming="CharacterEllipsis"
+													   Margin="4,2" />
+										</Border>
+									</Grid>
 								</Grid>
 
 								<!-- Label -->
