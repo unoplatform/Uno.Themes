@@ -8,24 +8,24 @@
 	  mc:Ignorable="d">
 
 	<Grid>
-		<TextBlock Text="{x:Bind BottomNavBar.SelectedItem.Label, Mode=OneWay}"
+		<TextBlock Text="{x:Bind BottomNavBar.SelectedItem.Tag, Mode=OneWay}"
 				   FontWeight="Bold"
 				   HorizontalAlignment="Center"
 				   VerticalAlignment="Center" />
 
 		<controls:BottomNavigationBar x:Name="BottomNavBar">
 			<controls:BottomNavigationBar.Items>
-				<controls:BottomNavigationBarItem Label="Favorites">
+				<controls:BottomNavigationBarItem Label="Favorites" Tag="My Favorites">
 					<controls:BottomNavigationBarItem.Icon>
 						<SymbolIcon Symbol="Favorite" />
 					</controls:BottomNavigationBarItem.Icon>
 				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem Label="Search">
+				<controls:BottomNavigationBarItem Label="Search" Tag="Search Something">
 					<controls:BottomNavigationBarItem.Icon>
 						<SymbolIcon Symbol="Find" />
 					</controls:BottomNavigationBarItem.Icon>
 				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem>
+				<controls:BottomNavigationBarItem Tag="Important Stuff">
 					<controls:BottomNavigationBarItem.Icon>
 						<SymbolIcon Symbol="Important" />
 					</controls:BottomNavigationBarItem.Icon>
@@ -33,7 +33,7 @@
 						<entities:BottomNavigationBarBadge IsVisible="True" />
 					</controls:BottomNavigationBarItem.Badge>
 				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem Label="Notifications">
+				<controls:BottomNavigationBarItem Label="Notifications" Tag="12 Unread Notifications">
 					<controls:BottomNavigationBarItem.Icon>
 						<SymbolIcon Symbol="Flag" />
 					</controls:BottomNavigationBarItem.Icon>
@@ -42,7 +42,7 @@
 														   Text="12" />
 					</controls:BottomNavigationBarItem.Badge>
 				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem>
+				<controls:BottomNavigationBarItem Tag="App Settings">
 					<controls:BottomNavigationBarItem.Icon>
 						<SymbolIcon Symbol="Setting" />
 					</controls:BottomNavigationBarItem.Icon>
