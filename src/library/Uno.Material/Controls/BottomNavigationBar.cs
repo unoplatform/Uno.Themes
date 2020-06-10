@@ -20,7 +20,7 @@ namespace Uno.Material.Controls
 				nameof(Items),
 				typeof(List<BottomNavigationBarItem>),
 				typeof(BottomNavigationBar),
-				new PropertyMetadata(new List<BottomNavigationBarItem>(), OnItemsChanged));
+				new PropertyMetadata(null, OnItemsChanged));
 
 		public BottomNavigationBarItem SelectedItem
 		{
@@ -35,9 +35,12 @@ namespace Uno.Material.Controls
 				typeof(BottomNavigationBar),
 				new PropertyMetadata(null, OnSelectedItemChanged));
 
+		private bool _initialized = false;
+
 		public BottomNavigationBar()
 		{
 			DefaultStyleKey = typeof(BottomNavigationBar);
+			Items = new List<BottomNavigationBarItem>();
 
 			Unloaded += BottomNavigationBar_Unloaded;
 		}
@@ -55,6 +58,8 @@ namespace Uno.Material.Controls
 		protected override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
+
+			_initialized = true;
 			GenerateTabItems();
 		}
 
@@ -73,6 +78,8 @@ namespace Uno.Material.Controls
 
 		internal void GenerateTabItems()
 		{
+			if (!_initialized) return;
+
 			// Unhook events of any previous items
 			for (var i = 0; i < Items.Count; i++)
 			{
