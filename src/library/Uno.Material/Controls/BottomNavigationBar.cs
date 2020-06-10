@@ -15,7 +15,7 @@ namespace Uno.Material.Controls
 			set => SetValue(ItemsProperty, value);
 		}
 
-		public readonly DependencyProperty ItemsProperty =
+		public static readonly DependencyProperty ItemsProperty =
 			DependencyProperty.Register(
 				nameof(Items),
 				typeof(List<BottomNavigationBarItem>),
