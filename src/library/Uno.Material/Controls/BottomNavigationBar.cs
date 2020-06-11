@@ -1,61 +1,104 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Uno.Extensions;
 using Uno.Extensions.Specialized;
+using Uno.Material.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
 
 namespace Uno.Material.Controls
 {
-	[TemplatePart(Name = "PART_Grid", Type = typeof(Grid))]
+	[TemplatePart(Name = LayoutRootName, Type = typeof(Grid))]
 	public partial class BottomNavigationBar : Control
 	{
-		public List<BottomNavigationBarItem> Items
+		private const string LayoutRootName = "PART_LayoutRoot";
+
+		private bool _initialized = false;
+		private Grid _layoutRoot;
+
+		public BottomNavigationBar()
 		{
-			get => (List<BottomNavigationBarItem>)GetValue(ItemsProperty);
+			DefaultStyleKey = typeof(BottomNavigationBar);
+			Items = new List<BottomNavigationBarItem>();
+
+			Unloaded += BottomNavigationBar_Unloaded;
+		}
+
+		#region Property: Items
+
+		public static DependencyProperty ItemsProperty { get; } = DependencyProperty.Register(
+			nameof(Items),
+			typeof(IList<BottomNavigationBarItem>),
+			typeof(BottomNavigationBar),
+			new PropertyMetadata(default, OnItemsChanged));
+		public IList<BottomNavigationBarItem> Items
+		{
+			get => (IList<BottomNavigationBarItem>)GetValue(ItemsProperty);
 			set => SetValue(ItemsProperty, value);
 		}
 
-		public static readonly DependencyProperty ItemsProperty =
-			DependencyProperty.Register(
-				nameof(Items),
-				typeof(List<BottomNavigationBarItem>),
-				typeof(BottomNavigationBar),
-				new PropertyMetadata(new List<BottomNavigationBarItem>(), OnItemsChanged));
+		#endregion
+		#region Property: SelectedItem
 
+		public static DependencyProperty SelectedItemProperty { get; } = DependencyProperty.Register(
+			nameof(SelectedItem),
+			typeof(BottomNavigationBarItem),
+			typeof(BottomNavigationBar),
+			new PropertyMetadata(default, OnSelectedItemChanged));
 		public BottomNavigationBarItem SelectedItem
 		{
 			get => (BottomNavigationBarItem)GetValue(SelectedItemProperty);
 			set => SetValue(SelectedItemProperty, value);
 		}
 
-		public static readonly DependencyProperty SelectedItemProperty =
-			DependencyProperty.Register(
-				nameof(SelectedItem),
-				typeof(BottomNavigationBarItem),
-				typeof(BottomNavigationBar),
-				new PropertyMetadata(null, OnSelectedItemChanged));
+		#endregion
 
-		public BottomNavigationBar()
+		protected override void OnApplyTemplate()
 		{
-			DefaultStyleKey = typeof(BottomNavigationBar);
+			base.OnApplyTemplate();
 
-			Unloaded += BottomNavigationBar_Unloaded;
+			_layoutRoot = this.GetTemplateChild<Grid>(GetTemplateChild, LayoutRootName);
+			_initialized = true;
+
+			GenerateTabItems();
+		}
+
+		internal void GenerateTabItems()
+		{
+			if (!_initialized) return;
+			if (_layoutRoot != null)
+			{
+				// todo: diff update
+				_layoutRoot.ColumnDefinitions.Clear();
+				_layoutRoot.Children.Clear();
+
+				if (Items != null)
+				{
+					foreach (var item in Items)
+					{
+						_layoutRoot.ColumnDefinitions.Add(new ColumnDefinition());
+						_layoutRoot.Children.Add(item);
+						Grid.SetColumn(item, _layoutRoot.Children.Count - 1);
+					}
+
+					RegisterBarItemsEvents();
+
+					SelectedItem = Items.FirstOrDefault(x => x.IsChecked == true) ?? Items.FirstOrDefault();
+				}
+				else
+				{
+					SelectedItem = null;
+				}
+			}
 		}
 
 		private void BottomNavigationBar_Unloaded(object sender, RoutedEventArgs e)
 		{
 			Unloaded -= BottomNavigationBar_Unloaded;
 
-			foreach (var item in Items)
-			{
-				item.Checked -= BottomNavigationBarItem_Checked;
-			}
-		}
-
-		protected override void OnApplyTemplate()
-		{
-			base.OnApplyTemplate();
-			GenerateTabItems();
+			UnregisterBarItemsEvents();
 		}
 
 		private static void OnItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -68,38 +111,6 @@ namespace Uno.Material.Controls
 			if (e.NewValue is BottomNavigationBarItem item)
 			{
 				item.IsChecked = true;
-			}
-		}
-
-		internal void GenerateTabItems()
-		{
-			// Unhook events of any previous items
-			for (var i = 0; i < Items.Count; i++)
-			{
-				Items[i].Checked -= BottomNavigationBarItem_Checked;
-				Items[i].Unchecked -= BottomNavigationBarItem_Unchecked;
-			}
-
-			var rootGrid = GetTemplateChild("PART_Grid") as Grid;
-
-			rootGrid.ColumnDefinitions.Clear();
-			rootGrid.Children.Clear();
-
-			for (var i = 0; i < Items.Count; i++)
-			{
-				var item = Items[i];
-
-				rootGrid.ColumnDefinitions.Add(new ColumnDefinition());
-				rootGrid.Children.Add(item);
-				Grid.SetColumn(item, i);
-
-				item.Checked += BottomNavigationBarItem_Checked;
-				item.Unchecked += BottomNavigationBarItem_Unchecked;
-
-				if (i == 0)
-				{
-					SelectedItem = item;
-				}
 			}
 		}
 
@@ -121,6 +132,24 @@ namespace Uno.Material.Controls
 			if (sender is BottomNavigationBarItem item && item == SelectedItem)
 			{
 				item.IsChecked = true;
+			}
+		}
+
+		private void RegisterBarItemsEvents()
+		{
+			foreach (var item in Items.Safe())
+			{
+				item.Checked += BottomNavigationBarItem_Checked;
+				item.Unchecked += BottomNavigationBarItem_Unchecked;
+			}
+		}
+
+		private void UnregisterBarItemsEvents()
+		{
+			foreach (var item in Items.Safe())
+			{
+				item.Checked -= BottomNavigationBarItem_Checked;
+				item.Unchecked -= BottomNavigationBarItem_Unchecked;
 			}
 		}
 	}
