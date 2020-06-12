@@ -10,17 +10,153 @@
 	  mc:Ignorable="d">
 
 	<Page.Resources>
-
 		<!-- Converters -->
 		<converters:FromBoolToValueConverter x:Name="TrueToCollapsed"
 											 TrueValue="COLLAPSED"
 											 FalseValue="EXPAND"
 											 NullValue="EXPAND" />
 
+		<!-- Sample Button Styles -->
+		<Style x:Key="IconsSampleButtonStyle"
+			   BasedOn="{StaticResource TextMaterialButtonStyle}"
+			   TargetType="Button">
+			<Setter Property="Margin"
+					Value="6" />
+			<Setter Property="Padding"
+					Value="8,12" />
+			<Setter Property="HorizontalContentAlignment"
+					Value="Center" />
+		</Style>
+
+		<Style x:Key="ExpanderSampleButtonStyle"
+			   TargetType="Button"
+			   BasedOn="{StaticResource OutlinedMaterialButtonStyle}">
+			<Setter Property="CornerRadius"
+					Value="32" />
+			<Setter Property="Margin"
+					Value="0,12,12,0" />
+		</Style>
+
 		<!-- Text Sample -->
 		<x:String x:Key="SupportingTextSample">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</x:String>
 
-		<!-- Avatar Image -->
+		<!-- Sample Header Template -->
+		<DataTemplate x:Key="HeaderTemplate">
+			<TextBlock Text="{Binding}"
+					   Margin="16,14,16,0"
+					   Style="{ThemeResource Headline6}" />
+		</DataTemplate>
+
+		<!-- Sample SubHeader Template -->
+		<DataTemplate x:Key="SubHeaderTemplate">
+			<TextBlock Text="{Binding}"
+					   Margin="16,0,16,14"
+					   Style="{ThemeResource Body2}" />
+		</DataTemplate>
+
+		<!-- Sample Supporting Template -->
+		<DataTemplate x:Key="SupportingTemplate">
+			<TextBlock Text="{Binding}"
+					   Margin="16,0,16,14"
+					   Style="{ThemeResource Body2}" />
+		</DataTemplate>
+
+		<!-- Sample Supporting Template with Avatar -->
+		<DataTemplate x:Key="SupportingTemplateForAvatarLayout">
+			<TextBlock Text="{Binding}"
+					   Margin="16,12,16,14"
+					   Style="{ThemeResource Body2}" />
+		</DataTemplate>
+
+		<!-- Sample Supporting Template with Small Media -->
+		<DataTemplate x:Key="SupportingTemplateForSmallMediaLayout">
+			<Border BorderThickness="0,1,0,0"
+					BorderBrush="{StaticResource OnSurfaceFocusedBrush}">
+				<TextBlock Text="{Binding}"
+						   Margin="16,12,16,14"
+						   Style="{ThemeResource Body2}" />
+			</Border>
+		</DataTemplate>
+
+		<!-- Sample Supporting Content With Buttons Template -->
+		<DataTemplate x:Key="SupportingWithButtonsTemplate">
+			<StackPanel>
+				<TextBlock Text="{Binding}"
+						   Margin="16,4,16,0"
+						   Style="{ThemeResource Body2}" />
+				<StackPanel Orientation="Horizontal">
+					<Button Content="ACTION 1"
+							Margin="6"
+							Padding="10,2"
+							Style="{StaticResource TextMaterialButtonStyle}" />
+					<Button Content="ACTION 2"
+							Margin="6"
+							Padding="10,2"
+							Style="{StaticResource TextMaterialButtonStyle}" />
+				</StackPanel>
+			</StackPanel>
+		</DataTemplate>
+
+		<!-- Sample Top Icon Template -->
+		<DataTemplate x:Key="TopIconsTemplate">
+			<Button Content="{Binding}"
+					Style="{StaticResource IconsSampleButtonStyle}">
+				<Button.ContentTemplate>
+					<DataTemplate>
+						<!-- Material more icon -->
+						<Path Fill="{StaticResource OnSurfaceBrush}"
+							  Data="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+					</DataTemplate>
+				</Button.ContentTemplate>
+			</Button>
+		</DataTemplate>
+
+		<!-- Sample Bottom Icons Template -->
+		<DataTemplate x:Key="BottomIconsTemplate">
+			<StackPanel Orientation="Horizontal"
+						VerticalAlignment="Bottom"
+						HorizontalAlignment="Right">
+				<Button Content="{Binding}"
+						Style="{StaticResource IconsSampleButtonStyle}">
+					<Button.ContentTemplate>
+						<DataTemplate>
+							<!-- Material favorite icon -->
+							<Path Fill="{StaticResource OnSurfaceBrush}"
+								  Data="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+						</DataTemplate>
+					</Button.ContentTemplate>
+				</Button>
+				<Button Content="{Binding}"
+						Style="{StaticResource IconsSampleButtonStyle}">
+					<Button.ContentTemplate>
+						<DataTemplate>
+							<!-- Material share icon -->
+							<Path Fill="{StaticResource OnSurfaceBrush}"
+								  Data="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+						</DataTemplate>
+					</Button.ContentTemplate>
+				</Button>
+			</StackPanel>
+		</DataTemplate>
+
+		<!-- Expander Sample Content Template -->
+		<DataTemplate x:Key="ExpanderTemplate">
+			<StackPanel Margin="12">
+				<TextBlock Text="Subtitle part 2"
+						   Style="{StaticResource Subtitle2}" />
+
+				<StackPanel Orientation="Horizontal">
+					<Button Content="A"
+							Style="{StaticResource ExpanderSampleButtonStyle}" />
+					<Button Content="B"
+							Style="{StaticResource ExpanderSampleButtonStyle}" />
+					<Button Content="C"
+							Style="{StaticResource ExpanderSampleButtonStyle}" />
+				</StackPanel>
+			</StackPanel>
+		</DataTemplate>
+
+		<!-- Sample Avatar Image -->
 		<DataTemplate x:Key="AvatarImageTemplate">
 			<Image Source="{Binding}"
 				   Stretch="Uniform"
@@ -33,6 +169,14 @@
 				   Stretch="Uniform"
 				   MaxHeight="194" />
 		</DataTemplate>
+
+		<!-- Sample Small Image -->
+		<DataTemplate x:Key="SampleSmallImageTemplate">
+			<Image Source="{Binding}"
+				   Stretch="Uniform"
+				   MaxHeight="94"
+				   VerticalAlignment="Top" />
+		</DataTemplate>
 	</Page.Resources>
 
 	<ScrollViewer>
@@ -44,220 +188,288 @@
 						Margin="12">
 
 				<!-- Card Outlined -->
-				<controls:Card Header="Outlined card"
-							   SubHeader="With title and subtitle only"
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With title and subtitle only"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
-							   Margin="0,12,0,12" />
+							   Margin="0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Background="Green"
-						Margin="0,0,0,24">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
+				<!-- Card Elevated -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With title and subtitle only"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
 				<!-- Outlined disabled Card-->
-				<controls:Card Header="Outlined disabled Card"
-							   SubHeader="With title and subtitle only"
+				<controls:Card HeaderContent="Outlined disabled Card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With title and subtitle only"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
 							   IsEnabled="False"
 							   Margin="0,0,0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Disabled.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
+				<!-- Elevated disabled Card-->
+				<controls:Card HeaderContent="Elevated disabled Card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With title and subtitle only"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
+							   IsEnabled="False"
+							   Margin="0,0,0,12" />
 
 				<!-- Card Outlined With supporting text -->
-				<controls:Card Header="Outlined card"
-							   SubHeader="With supporting text"
-							   SupportingText="{StaticResource SupportingTextSample}"
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
 							   Margin="0,0,0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting.png"
-							   HorizontalAlignment="Left" />
-						<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
+				<!-- Card Elevated With supporting text -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
 				<!-- Card Outlined with supporting text and expander-->
-				<controls:Card Header="Outlined card"
-							   SubHeader="With supporting text and expander"
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With supporting text and expander"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
 							   ExpanderHeaderContent="{Binding RelativeSource={RelativeSource Self}, Path=IsOpened, Converter={StaticResource TrueToCollapsed}}"
-							   SupportingText="{StaticResource SupportingTextSample}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+							   ExpanderContentTemplate="{StaticResource ExpanderTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
-							   Margin="0,0,0,12">
-					<controls:Card.ExpanderContentTemplate>
-						<DataTemplate>
-							<StackPanel Margin="12">
-								<TextBlock Text="Subtitle part 2"
-										   Style="{StaticResource Subtitle2}" />
+							   Margin="0,0,0,12" />
 
-								<ItemsControl ItemsSource="ABC">
+				<!-- Card Elevated with supporting text and expander-->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With supporting text and expander"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   ExpanderHeaderContent="{Binding RelativeSource={RelativeSource Self}, Path=IsOpened, Converter={StaticResource TrueToCollapsed}}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+							   ExpanderContentTemplate="{StaticResource ExpanderTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
-									<ItemsControl.ItemsPanel>
-										<ItemsPanelTemplate>
-											<StackPanel Orientation="Horizontal" />
-										</ItemsPanelTemplate>
-									</ItemsControl.ItemsPanel>
-
-									<ItemsControl.ItemTemplate>
-										<DataTemplate>
-											<Button Content="{Binding}"
-													Margin="0,12,12,0"
-													CornerRadius="32"
-													Style="{StaticResource OutlinedMaterialButtonStyle}" />
-										</DataTemplate>
-									</ItemsControl.ItemTemplate>
-								</ItemsControl>
-							</StackPanel>
-						</DataTemplate>
-					</controls:Card.ExpanderContentTemplate>
-				</controls:Card>
-
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Expander.png"
-							   HorizontalAlignment="Left" />
-						<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-
-				<!-- Card Outlined -->
-				<controls:Card Header="Outlined card"
-							   SubHeader="With media"
-							   MediaContent="ms-appx:///Assets/Media.png"
+				<!-- Card Outlined with media -->
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
 							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
 							   Margin="0,0,0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
-
-						<!-- OutlinedCard Media Image -->
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Media.png"
-							   HorizontalAlignment="Left" />
-
-						<!-- Card Resources Image -->
-						<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
+				<!-- Card Elevated with media -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
 				<!-- Card Outlined with media and supporting text -->
-				<controls:Card Header="Outlined card"
-							   SubHeader="With media and supporting text"
-							   MediaContent="ms-appx:///Assets/Media.png"
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media and supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
 							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingText="{StaticResource SupportingTextSample}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
 							   Margin="0,0,0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Media.png"
-							   HorizontalAlignment="Left" />
-						<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
+				<!-- Card Elevated with media and supporting text -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media and supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
 				<!-- Card Outlined with media, supporting text and action buttons -->
-				<controls:Card x:Name="CardWithButtons"
-							   Header="Outlined card"
-							   SubHeader="With media, supporting text and action buttons"
-							   MediaContent="ms-appx:///Assets/Media.png"
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media, supporting text and action buttons"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
 							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingText="{StaticResource SupportingTextSample}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
 							   Margin="0,0,0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
-
-						<!-- OutlinedCard Supporting Media Action -->
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Media_Action.png"
-							   HorizontalAlignment="Left" />
-
-						<!-- Card Resources -->
-						<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
+				<!-- Card Elevated with media, supporting text and action buttons -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media, supporting text and action buttons"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
 				<!-- Card Outlined with media, supporting text, action buttons and supplemental action buttons -->
-				<controls:Card x:Name="CardWithButtonsAndIcons"
-							   Header="Outlined card"
-							   SubHeader="With media, supporting text, action buttons and supplemental action buttons"
-							   MediaContent="ms-appx:///Assets/Media.png"
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media, supporting text, action buttons and supplemental action buttons"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
 							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingText="{StaticResource SupportingTextSample}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
+							   IconsContentTemplate="{StaticResource BottomIconsTemplate}"
 							   Style="{StaticResource OutlinedMaterialCardStyle}"
 							   Margin="0,0,0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
-
-						<!-- OutlinedCard Supporting Media Action Supp -->
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Supporting_Media_Action_Supp.png"
-							   HorizontalAlignment="Left" />
-
-						<!-- Card Resources -->
-						<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-
-				<!-- Card Outlined with a different layout -->
-				<controls:Card x:Name="CardWithOtherLayout"
-							   Header="Outlined card"
-							   SubHeader="With a different layout"
-							   AvatarContent="ms-appx:///Assets/Avatar.png"
-							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
-							   MediaContent="ms-appx:///Assets/Media.png"
+				<!-- Card Elevated with media, supporting text, action buttons and supplemental action buttons -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With media, supporting text, action buttons and supplemental action buttons"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
 							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingText="{StaticResource SupportingTextSample}"
-							   Style="{StaticResource OtherOutlinedLayoutMaterialCardStyle}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
+							   IconsContentTemplate="{StaticResource BottomIconsTemplate}"
+							   Style="{StaticResource ElevatedMaterialCardStyle}"
 							   Margin="0,0,0,12" />
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-						Margin="0,0,0,24">
-					<StackPanel>
+				<!-- Card Outlined with small media and supporting text -->
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With small media and supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+							   Style="{StaticResource SmallMediaOutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
-						<!-- OutlinedCard Other -->
-						<Image Source="ms-appx:///Assets/Cards/OutlinedCard_Other.png"
-							   HorizontalAlignment="Left" />
+				<!-- Card Elevated with small media and supporting text -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With small media and supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+							   Style="{StaticResource SmallMediaElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
 
-						<!-- Card Resources -->
-						<Image Source="ms-appx:///Assets/Cards/Card_Resources.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
+				<!-- Card Outlined disabled with small media and supporting text -->
+				<controls:Card HeaderContent="Disabled outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With small media and supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+							   Style="{StaticResource SmallMediaOutlinedMaterialCardStyle}"
+							   IsEnabled="False"
+							   Margin="0,0,0,12" />
+
+				<!-- Card Elevated diabled with small media and supporting text -->
+				<controls:Card HeaderContent="Disabled elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With small media and supporting text"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+							   Style="{StaticResource SmallMediaElevatedMaterialCardStyle}"
+							   IsEnabled="False"
+							   Margin="0,0,0,12" />
+
+				<!-- Card Outlined with Avatar -->
+				<controls:Card HeaderContent="Outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With avatar"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+							   Style="{StaticResource AvatarOutlinedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<!-- Card Elevated with Avatar -->
+				<controls:Card HeaderContent="Elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With avatar"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+							   Style="{StaticResource AvatarElevatedMaterialCardStyle}"
+							   Margin="0,0,0,12" />
+
+				<!-- Card Outlined diabled with Avatar -->
+				<controls:Card HeaderContent="Disabled outlined card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With avatar"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+							   Style="{StaticResource AvatarOutlinedMaterialCardStyle}"
+							   IsEnabled="False"
+							   Margin="0,0,0,12" />
+
+				<!-- Card Elevated disabled with Avatar -->
+				<controls:Card HeaderContent="Disabled elevated card"
+							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+							   SubHeaderContent="With avatar"
+							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+							   MediaContent="ms-appx:///Assets/Cards/Media.png"
+							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+							   SupportingContent="{StaticResource SupportingTextSample}"
+							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+							   Style="{StaticResource AvatarElevatedMaterialCardStyle}"
+							   IsEnabled="False"
+							   Margin="0,0,0,12" />
 			</StackPanel>
 		</Grid>
 	</ScrollViewer>
