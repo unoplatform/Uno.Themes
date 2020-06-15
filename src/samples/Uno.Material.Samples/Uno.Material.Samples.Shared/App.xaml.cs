@@ -33,6 +33,11 @@ namespace Uno.Material.Samples
 
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
+#if ENABLE_TEST_CLOUD
+// requires Xamarin Test Cloud Agent
+Xamarin.Calabash.Start();
+#endif
+
 		}
 
 		/// <summary>
