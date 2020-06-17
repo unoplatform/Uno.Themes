@@ -18,7 +18,7 @@ Platform support:
 
 ## Getting Started
 
-1. Install the nuget package Uno.Material
+1. Install the nuget package Uno.Material. You can find the nuget on [this feed instead of nuget.org](https://dev.azure.com/uno-platform/Uno%20Platform/_packaging?_a=feed&feed=unoplatformdev)
 2. Unless you want our default color palette (inspired by our Uno logo), you'll want to override the following color resources in you application. We suggest creating a Color.xaml `ResourceDictionary`.
 For more information on the color system, consult this [page](https://material.io/design/color/the-color-system.html#color-theme-creation) for all the official documentation and tools to help you create your own palette. 
 Here is what Colors.xaml would contain if you want both light and dark theme. (see 7. for android native ToggleSwitch colors)
