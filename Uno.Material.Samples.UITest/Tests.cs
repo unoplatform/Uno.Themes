@@ -40,8 +40,26 @@ namespace Uno.Material.Samples.UITest
 			app.WaitForElement("NavView");
 			app.ScrollDownTo("bgnError_Brush", "NavView");
 
-			var colorValue = app.Query(x => x.Marked("bgnError_Color").Invoke("getCurrentTextColor"))[0];
+			//var colorValue = app.Query(x => x.Marked("bgnError_Color").Invoke("getCurrentTextColor"))[0];
 
+		}
+
+		[Test]
+		public void BottomNavigationBar()
+		{
+			app.WaitForElement("PaneToggleButtonGrid");
+			app.Tap("PaneToggleButtonGrid");
+
+
+		}
+
+		[Test]
+		public void Button()
+		{
+			app.WaitForElement("PaneToggleButtonGrid");
+			app.Tap("PaneToggleButtonGrid");
+
+			//app.Query(c => c.Marked("btnOutlinedDisabled")).FirstOrDefault().Enabled;
 		}
     }
 }
