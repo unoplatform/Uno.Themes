@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:smtx="using:ShowMeTheXAML">
+
+	<smtx:NiceFormatter x:Key="NiceFormatter" />
+
+	<Style x:Key="DefaultXamlDisplayStyle"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<StackPanel Orientation="Vertical">
+						<ContentPresenter Content="{TemplateBinding Content}" />
+						<Button Content="{TemplateBinding Xaml}"
+								Style="{StaticResource SeeStyleFlyoutButtonStyle}" />
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="DefaultXamlPresenterStyle"
+		   TargetType="smtx:XamlPresenter">
+		<Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlPresenter">
+					<Button Content="{TemplateBinding Xaml}"
+							Style="{StaticResource SeeStyleFlyoutButtonStyle}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="smtx:XamlDisplay"
+		   BasedOn="{StaticResource DefaultXamlDisplayStyle}" />
+
+	<Style TargetType="smtx:XamlPresenter"
+		   BasedOn="{StaticResource DefaultXamlPresenterStyle}" />
+</ResourceDictionary>
