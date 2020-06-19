@@ -4,121 +4,51 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
 	<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
 				BorderThickness="1"
-				Margin="12">
+				Margin="12"
+				Padding="12">
 
-		<StackPanel Orientation="Horizontal">
-
-			<!-- Button Contained -->
+		<!-- Button Contained -->
+		<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Contained">
 			<Button Content="CONTAINED"
-					Style="{StaticResource MaterialContainedButtonStyle}"
-					Margin="12" />
+					Style="{StaticResource MaterialContainedButtonStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Button Contained -->
-			<Button Content="CONTAINED"
-					Style="{StaticResource MaterialContainedSecondaryButtonStyle}"
-					Margin="12" />
-
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/Button/ContainedButton.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-			
-			<!-- Button Contained Disabled -->
+		<!-- Button Contained Disabled -->
+		<smtx:XamlDisplay UniqueKey="ButtonSamplePage_ContainedDisabled">
 			<Button Content="CONTAINED DISABLED"
 					IsEnabled="False"
-					Style="{StaticResource MaterialContainedButtonStyle}"
-					Margin="12" />
-			
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/Button/ContainedButton_Disabled.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
+					Style="{StaticResource MaterialContainedButtonStyle}" />
+		</smtx:XamlDisplay>
 
-		<StackPanel Orientation="Horizontal">
-
-			<!-- Button Outlined -->
+		<!-- Button Outlined -->
+		<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Outline">
 			<Button Content="OUTLINED"
-					Style="{StaticResource MaterialOutlinedButtonStyle}"
-					Margin="12" />
+					Style="{StaticResource MaterialOutlinedButtonStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Button Outlined -->
-			<Button Content="OUTLINED"
-					Style="{StaticResource MaterialOutlinedSecondaryButtonStyle}"
-					Margin="12" />
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/Button/OutlinedButton.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- Button Outlined Disabled -->
+		<!-- Button Outlined Disabled -->
+		<smtx:XamlDisplay UniqueKey="ButtonSamplePage_OutlineDisabled">
 			<Button Content="OUTLINED DISABLED"
 					IsEnabled="False"
-					Style="{StaticResource MaterialOutlinedButtonStyle}"
-					Margin="12" />
+					Style="{StaticResource MaterialOutlinedButtonStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/Button/OutlinedButton_Disabled.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- Button Text -->
+		<!-- Button Text -->
+		<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Text">
 			<Button Content="TEXT"
-					Style="{StaticResource MaterialTextButtonStyle}"
-					Margin="12" />
-			
-			<Button Content="TEXT"
-					Style="{StaticResource MaterialTextSecondaryButtonStyle}"
-					Margin="12" />
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/Button/TextButton.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
+					Style="{StaticResource MaterialTextButtonStyle}" />
+		</smtx:XamlDisplay>
 
-		<StackPanel Orientation="Horizontal">
-
-			<!-- Button Text Disabled -->
+		<!-- Button Text Disabled -->
+		<smtx:XamlDisplay UniqueKey="ButtonSamplePage_TextDisabled">
 			<Button Content="TEXT DISABLED"
 					IsEnabled="False"
-					Style="{StaticResource MaterialTextButtonStyle}"
-					Margin="12" />
-
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/Button/TextButton_Disabled.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
+					Style="{StaticResource MaterialTextButtonStyle}" />
+		</smtx:XamlDisplay>
 	</StackPanel>
 </Page>

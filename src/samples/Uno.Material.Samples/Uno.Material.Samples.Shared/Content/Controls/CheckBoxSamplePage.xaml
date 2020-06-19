@@ -4,130 +4,63 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
 	<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
 				BorderThickness="1"
 				Margin="12">
 
-		<StackPanel Orientation="Horizontal">
+		<!-- CheckBox No Content -->
+		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_NoContent">
+			<CheckBox Style="{StaticResource MaterialCheckBoxStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- CheckBox No Content -->
-			<CheckBox Style="{StaticResource MaterialCheckBoxStyle}"
-					  Margin="12" />
-
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/CheckBox/CheckBox.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- CheckBox OFF -->
+		<!-- CheckBox OFF -->
+		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_Off">
 			<CheckBox Content="UNCHECKED"
-					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  Margin="12" />
+					  Style="{StaticResource MaterialCheckBoxStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/CheckBox/CheckBox_Unchecked.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- CheckBox ON -->
+		<!-- CheckBox ON -->
+		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_On">
 			<CheckBox Content="CHECKED"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  IsChecked="True"
-					  Margin="12" />
+					  IsChecked="True" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/CheckBox/CheckBox_Checked.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- CheckBox Indeterminate -->
+		<!-- CheckBox Indeterminate -->
+		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_Indeterminate">
 			<CheckBox Content="INDETERMINATE"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
 					  IsThreeState="True"
-					  IsChecked="{x:Null}"
-					  Margin="12" />
+					  IsChecked="{x:Null}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/CheckBox/CheckBox_Indeterminate.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- CheckBox OFF Disabled -->
+		<!-- CheckBox OFF Disabled -->
+		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_OffDisabled">
 			<CheckBox Content="DISABLED"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  IsEnabled="False"
-					  Margin="12" />
+					  IsEnabled="False" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/CheckBox/CheckBox_Disabled.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- CheckBox ON Disabled -->
+		<!-- CheckBox ON Disabled -->
+		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_OnDisabled">
 			<CheckBox Content="CHECKED DISABLED"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
 					  IsEnabled="False"
-					  IsChecked="True"
-					  Margin="12" />
+					  IsChecked="True" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/CheckBox/CheckBox_Disabled_Checked.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- Checkbox Indeterminate Disabled -->
+		<!-- Checkbox Indeterminate Disabled -->
+		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_IndeterminateDisabled">
 			<CheckBox Content="INDETERMINATE DISABLED"
 					  Style="{StaticResource MaterialCheckBoxStyle}"
 					  IsEnabled="False"
 					  IsThreeState="True"
-					  IsChecked="{x:Null}"
-					  Margin="12" />
+					  IsChecked="{x:Null}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/CheckBox/CheckBox_Disabled_Indeterminate.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
 	</StackPanel>
+
 </Page>

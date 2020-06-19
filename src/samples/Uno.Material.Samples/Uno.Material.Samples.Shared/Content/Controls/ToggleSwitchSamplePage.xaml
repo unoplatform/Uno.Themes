@@ -4,82 +4,41 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 	
 	<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
 				BorderThickness="1"
-				Margin="12">
+				Margin="12"
+				Padding="12">
 
-		<StackPanel Orientation="Horizontal">
-
-			<!-- ToggleSwitch OFF -->
+		<!-- ToggleSwitch OFF -->
+		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_Off">
 			<ToggleSwitch Header="OFF"
-						  Style="{StaticResource MaterialToggleSwitchStyle}"
-						  Margin="12" />
+						  Style="{StaticResource MaterialToggleSwitchStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-					VerticalAlignment="Center">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/ToggleSwitch/ToggleSwitch.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- ToggleSwitch ON -->
+		<!-- ToggleSwitch ON -->
+		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_On">
 			<ToggleSwitch Header="ON"
 						  IsOn="True"
-						  Style="{StaticResource MaterialToggleSwitchStyle}"
-						  Margin="12" />
+						  Style="{StaticResource MaterialToggleSwitchStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-					VerticalAlignment="Center">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/ToggleSwitch/ToggleSwitch_On.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- ToggleSwitch OFF Disabled -->
+		<!-- ToggleSwitch OFF Disabled -->
+		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OffDisabled">
 			<ToggleSwitch Header="OFF DISABLED"
 						  Style="{StaticResource MaterialToggleSwitchStyle}"
-						  IsEnabled="False"
-						  Margin="12" />
+						  IsEnabled="False" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-					VerticalAlignment="Center">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/ToggleSwitch/ToggleSwitch_Disabled.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-
-			<!-- ToggleSwitch ON Disabled -->
+		<!-- ToggleSwitch ON Disabled -->
+		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OnDisabled">
 			<ToggleSwitch Header="ON DISABLED"
 						  Style="{StaticResource MaterialToggleSwitchStyle}"
 						  IsEnabled="False"
-						  IsOn="True"
-						  Margin="12" />
+						  IsOn="True" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}"
-					VerticalAlignment="Center">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/ToggleSwitch/ToggleSwitch_Disabled_On.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
 	</StackPanel>
 </Page>
