@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style x:Key="SeeSourceFlyoutButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Tag" Value="See Source" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root">
+						<Button Content="{TemplateBinding Tag}"
+								FontSize="10"
+								Style="{StaticResource TextMaterialButtonStyle}">
+							<Button.Flyout>
+								<Flyout>
+									<ScrollViewer HorizontalScrollMode="Enabled"
+												  HorizontalScrollBarVisibility="Visible">
+										<TextBlock Text="{TemplateBinding Content}"
+												   IsTextSelectionEnabled="True" />
+									</ScrollViewer>
+								</Flyout>
+							</Button.Flyout>
+						</Button>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SeeXamlFlyoutButtonStyle"
+		   BasedOn="{StaticResource SeeSourceFlyoutButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Tag" Value="See Xaml" />
+	</Style>
+</ResourceDictionary>

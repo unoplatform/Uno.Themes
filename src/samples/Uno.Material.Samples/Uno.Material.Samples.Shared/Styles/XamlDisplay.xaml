@@ -4,17 +4,66 @@
 
 	<smtx:NiceFormatter x:Key="NiceFormatter" />
 
-	<Style x:Key="DefaultXamlDisplayStyle"
+	<Style x:Key="BaseXamlDisplayStyle"
 		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Margin" Value="0,10,0,0" />
 		<Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<StackPanel Orientation="Horizontal">
+						<ContentPresenter Content="{TemplateBinding Content}" />
+						<Button Content="{TemplateBinding Xaml}"
+								Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="XamlDisplayOnTheSideStyle"
+		   BasedOn="{StaticResource BaseXamlDisplayStyle}"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Padding" Value="5,0,0,0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<StackPanel Orientation="Horizontal">
+						<ContentPresenter Content="{TemplateBinding Content}" />
+						<Button Content="{TemplateBinding Xaml}"
+								Margin="{TemplateBinding Padding}"
+								Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="XamlDisplayBelowStyle"
+		   BasedOn="{StaticResource BaseXamlDisplayStyle}"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Padding" Value="0,5,0,0" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="smtx:XamlDisplay">
 					<StackPanel Orientation="Vertical">
 						<ContentPresenter Content="{TemplateBinding Content}" />
 						<Button Content="{TemplateBinding Xaml}"
-								Style="{StaticResource SeeStyleFlyoutButtonStyle}" />
+								Margin="{TemplateBinding Padding}"
+								Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
 					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="ContentOnlyXamlDisplayStyle"
+		   BasedOn="{StaticResource BaseXamlDisplayStyle}"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<ContentPresenter Content="{TemplateBinding Content}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -27,14 +76,14 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="smtx:XamlPresenter">
 					<Button Content="{TemplateBinding Xaml}"
-							Style="{StaticResource SeeStyleFlyoutButtonStyle}" />
+							Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
 
 	<Style TargetType="smtx:XamlDisplay"
-		   BasedOn="{StaticResource DefaultXamlDisplayStyle}" />
+		   BasedOn="{StaticResource XamlDisplayOnTheSideStyle}" />
 
 	<Style TargetType="smtx:XamlPresenter"
 		   BasedOn="{StaticResource DefaultXamlPresenterStyle}" />
