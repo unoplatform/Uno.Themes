@@ -4,6 +4,7 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content.Controls"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
 	<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
@@ -30,6 +31,10 @@
 				   Foreground="{StaticResource MaterialPrimaryBrush}"
 				   Margin="12" />
 
-		<!-- TODO: add source code + xaml -->
+		<!-- Xaml + Code-behind -->
+		<smtx:XamlPresenter ReferenceKey="SamplesPage_NavigationView" />
+		<Button x:Name="SeeCodeBehindButton"
+				Tag="See Code-behind"
+				Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
 	</StackPanel>
 </Page>

@@ -22,25 +22,34 @@ namespace Uno.Material.Samples.Content.Controls
 		public SnackBarSamplePage()
 		{
 			this.InitializeComponent();
+			this.SeeCodeBehindButton.Content = GetCodeBehindSource().Replace("\t", "    ");
+		}
+
+		private string GetCodeBehindSource()
+		{
+			return
+@"private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+{
+	if (sender is ToggleSwitch toggleSwitch)
+	{
+		var value = toggleSwitch.IsOn ? SnackBarStatus.Visible : SnackBarStatus.Hidden;
+
+		SnackBar_1.SnackBarStatus = value;
+		SnackBar_2.SnackBarStatus = value;
+		SnackBar_3.SnackBarStatus = value;
+	}
+}";
 		}
 
 		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
 		{
-			ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-			if (toggleSwitch != null)
+			if (sender is ToggleSwitch toggleSwitch)
 			{
-				if (toggleSwitch.IsOn == true)
-				{
-					SnackBar_1.SnackBarStatus = SnackBarStatus.Visible;
-					SnackBar_2.SnackBarStatus = SnackBarStatus.Visible;
-					SnackBar_3.SnackBarStatus = SnackBarStatus.Visible;
-				}
-				else
-				{
-					SnackBar_1.SnackBarStatus = SnackBarStatus.Hidden;
-					SnackBar_2.SnackBarStatus = SnackBarStatus.Hidden;
-					SnackBar_3.SnackBarStatus = SnackBarStatus.Hidden;
-				}
+				var value = toggleSwitch.IsOn ? SnackBarStatus.Visible : SnackBarStatus.Hidden;
+
+				SnackBar_1.SnackBarStatus = value;
+				SnackBar_2.SnackBarStatus = value;
+				SnackBar_3.SnackBarStatus = value;
 			}
 		}
 	}
