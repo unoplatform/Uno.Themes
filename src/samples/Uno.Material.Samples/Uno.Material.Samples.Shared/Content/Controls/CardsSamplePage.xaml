@@ -18,7 +18,7 @@
 
 		<!-- Sample Button Styles -->
 		<Style x:Key="IconsSampleButtonStyle"
-			   BasedOn="{StaticResource TextMaterialButtonStyle}"
+			   BasedOn="{StaticResource MaterialTextButtonStyle}"
 			   TargetType="Button">
 			<Setter Property="Margin"
 					Value="6" />
@@ -30,7 +30,7 @@
 
 		<Style x:Key="ExpanderSampleButtonStyle"
 			   TargetType="Button"
-			   BasedOn="{StaticResource OutlinedMaterialButtonStyle}">
+			   BasedOn="{StaticResource MaterialOutlinedButtonStyle}">
 			<Setter Property="CornerRadius"
 					Value="32" />
 			<Setter Property="Margin"
@@ -88,11 +88,11 @@
 					<Button Content="ACTION 1"
 							Margin="6"
 							Padding="10,2"
-							Style="{StaticResource TextMaterialButtonStyle}" />
+							Style="{StaticResource MaterialTextButtonStyle}" />
 					<Button Content="ACTION 2"
 							Margin="6"
 							Padding="10,2"
-							Style="{StaticResource TextMaterialButtonStyle}" />
+							Style="{StaticResource MaterialTextButtonStyle}" />
 				</StackPanel>
 			</StackPanel>
 		</DataTemplate>
