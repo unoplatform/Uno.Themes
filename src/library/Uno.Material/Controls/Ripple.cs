@@ -42,6 +42,19 @@ namespace Uno.Material.Controls
 			set { SetValue(FeedbackProperty, value); }
 		}
 
+		/// <summary>
+		/// Opacity of the feedback ripple effect
+		/// </summary>
+		/// <remarks>Using the Opacity property would affect it's content, while this property only affects the feedback</remarks>
+		public double FeedbackOpacity
+		{
+			get { return (double)GetValue(FeedbackOpacityProperty); }
+			set { SetValue(FeedbackOpacityProperty, value); }
+		}
+
+		public static readonly DependencyProperty FeedbackOpacityProperty =
+			DependencyProperty.Register("FeedbackOpacity", typeof(double), typeof(Ripple), new PropertyMetadata(1));
+
 		protected override void OnApplyTemplate()
 		{
 			VisualStateManager.GoToState(this, "Normal", false);

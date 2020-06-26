@@ -17,43 +17,11 @@
 		<ResourceDictionary Source="../Application/SelectionControlColors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!-- Contained Button Colors and Variables -->
-	<SolidColorBrush x:Key="ButtonContainedBackgroundColor"
-					 Color="{ThemeResource PrimaryColor}" />
-	<SolidColorBrush x:Key="ButtonContainedLabelColor"
-					 Color="{ThemeResource OnPrimaryColor}" />
-
-	<!-- Outlined Button Variables -->
-	<SolidColorBrush x:Key="ButtonOutlinedBackgroundColor"
-					 Color="{ThemeResource OnPrimaryColor}" />
-	<SolidColorBrush x:Key="ButtonOutlinedStrokeColor"
-					 Color="{ThemeResource PrimaryColor}" />
-	<SolidColorBrush x:Key="ButtonOutlinedLabelColor"
-					 Color="{ThemeResource PrimaryColor}" />
-
 	<StaticResource x:Key="ButtonOutlinedDisabledColor"
 					ResourceKey="OnSurfaceDisabledBrush" />
-	<StaticResource x:Key="ButtonOutlinedRippleColor"
-					ResourceKey="OnSurfacePressedBrush" />
-	<StaticResource x:Key="ButtonOutlinedSelectedOverlayColor"
-					ResourceKey="OnSurfaceSelectedBrush" />
 
-	<Thickness x:Key="ButtonOutlinedStrokeWidth">1</Thickness>
-
-	<!-- Text Button Variables -->
-	<SolidColorBrush x:Key="ButtonTextLabelColor"
-					 Color="{ThemeResource PrimaryColor}" />
-	<StaticResource x:Key="ButtonTextBackgroundColor"
-					ResourceKey="TransparentBrush" />
 	<StaticResource x:Key="ButtonTextDisabledColor"
 					ResourceKey="OnSurfaceDisabledBrush" />
-	<StaticResource x:Key="ButtonTextFocusOverlayColor"
-					ResourceKey="OnSurfaceFocusedBrush" />
-
-	<StaticResource x:Key="ButtonTextSelectedOverlayColor"
-					ResourceKey="OnSurfaceFocusedBrush" />
-	<StaticResource x:Key="ButtonTextRippleColor"
-					ResourceKey="OnSurfaceFocusedBrush" />
 
 	<!-- Floating Action Button Variables -->
 	<SolidColorBrush x:Key="FabBackgroundColor"
@@ -79,14 +47,6 @@
 	<StaticResource x:Key="ButtonDisabledLabelColor"
 					ResourceKey="OnSurfaceMediumBrush" />
 
-	<StaticResource x:Key="ButtonHoverBackgroundColor"
-					ResourceKey="OnPrimaryHoverBrush" />
-
-	<StaticResource x:Key="ButtonFocusedBackgroundColor"
-					ResourceKey="OnPrimaryFocusedBrush" />
-	<StaticResource x:Key="ButtonRippleColor"
-					ResourceKey="OnPrimaryPressedBrush" />
-
 	<StaticResource x:Key="ButtonHoverOverlayColor"
 					ResourceKey="OnSurfaceHoverBrush" />
 	<StaticResource x:Key="ButtonFocusOverlayColor"
@@ -95,31 +55,36 @@
 					ResourceKey="OnPrimarySelectedBrush" />
 	<StaticResource x:Key="ButtonPressBorderBrushColor"
 					ResourceKey="OnSurfacePressedBrush" />
+	
 
-	<CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
-	<FontFamily x:Key="ButtonFontFamily">Roboto</FontFamily>
-	<x:Double x:Key="ButtonFontSize">14</x:Double>
-	<Thickness x:Key="ButtonPadding">16,8</Thickness>
+	<!-- Documented variables -->
+	<Thickness x:Key="MaterialButtonPadding">16,8</Thickness>
+	<CornerRadius x:Key="MaterialButtonCornerRadius">4</CornerRadius>
+	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
+	<FontFamily x:Key="MaterialButtonFontFamily">Roboto</FontFamily>
+	
+	<!-- Undocumented variables -->
+	<x:Double x:Key="MaterialButtonRippleMultiplier">2.0</x:Double>
 
-	<Style x:Key="ContainedMaterialButtonStyle"
+	<Style x:Key="MaterialContainedButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource ButtonContainedLabelColor}" />
+				Value="{StaticResource OnPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource ButtonContainedBackgroundColor}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Padding"
-				Value="{ThemeResource ButtonPadding}" />
-		<!--<Setter Property="CornerRadius"
-				Value="{StaticResource ButtonBorderRadius}" />-->
+				Value="{ThemeResource MaterialButtonPadding}" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource MaterialButtonCornerRadius}" />
 		<Setter Property="MinHeight"
 				Value="40" />
 		<Setter Property="FontFamily"
-				Value="{ThemeResource ButtonFontFamily}" />
+				Value="{ThemeResource MaterialButtonFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{ThemeResource ButtonFontSize}" />
+				Value="{ThemeResource MaterialButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 
@@ -131,14 +96,14 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{StaticResource ButtonBorderRadius}">
+						  CornerRadius="{TemplateBinding CornerRadius}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
+										<Setter Target="CommonStatesOverlay.Opacity"
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="0" />
@@ -147,19 +112,18 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<Setter Target="CommonStatesOverlay.Opacity"
+												Value="{StaticResource MaterialHoverOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
+										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0:0:0.3"
 														 BeginTime="0:0:1"
-														 From="0"
-														 To="1">
+														 To="{StaticResource MaterialPressedOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -182,14 +146,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -202,22 +166,18 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Border x:Name="HoverOverlay"
-								Background="{StaticResource ButtonHoverBackgroundColor}"
+						<Border x:Name="CommonStatesOverlay"
+								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource ButtonFocusedBackgroundColor}"
-								Opacity="0" />
-
-						<!-- Todo: Add ElevatedView on Dragged/Selected state of button
-								Background="{StaticResource ButtonSelectedOverlayColor}" -->
-						<Border x:Name="SelectedOverlay"
+								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
 						<controls:Ripple x:Name="ContentPresenter"
-										 Feedback="{StaticResource ButtonRippleColor}"
-										 RippleSizeMultiplier="0.75"
+										 Feedback="{StaticResource OnPrimaryBrush}"
+										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
+										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 Content="{TemplateBinding Content}"
@@ -236,27 +196,36 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="OutlinedMaterialButtonStyle"
+	<Style x:Key="MaterialContainedSecondaryButtonStyle"
+		   BasedOn="{StaticResource MaterialContainedButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSecondaryBrush}" />
+		<Setter Property="Background"
+				Value="{ThemeResource SecondaryBrush}" />
+	</Style>
+	
+	<Style x:Key="MaterialOutlinedButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource ButtonOutlinedLabelColor}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource ButtonOutlinedBackgroundColor}" />
+				Value="{StaticResource BackgroundBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource ButtonOutlinedStrokeColor}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource ButtonOutlinedStrokeWidth}" />
+				Value="1" />
 		<Setter Property="Padding"
-				Value="{StaticResource ButtonPadding}" />
-		<!--<Setter Property="CornerRadius"
-				Value="{StaticResource ButtonBorderRadius}" />-->
+				Value="{StaticResource MaterialButtonPadding}" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource MaterialButtonCornerRadius}" />
 		<Setter Property="MinHeight"
 				Value="40" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource ButtonFontFamily}" />
+				Value="{StaticResource MaterialButtonFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource ButtonFontSize}" />
+				Value="{StaticResource MaterialButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 
@@ -268,14 +237,14 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{StaticResource ButtonBorderRadius}">
+						  CornerRadius="{TemplateBinding CornerRadius}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
+										<Setter Target="CommonStatesOverlay.Opacity"
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="0" />
@@ -283,16 +252,11 @@
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource ButtonHoverOverlayColor}" />
-									</VisualState.Setters>
 									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0:0:0.25"
-														 From="0"
-														 To="1">
+														 To="{StaticResource MaterialHoverOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -301,17 +265,12 @@
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource ButtonPressBorderBrushColor}" />
-									</VisualState.Setters>
 									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="SelectedOverlay"
+										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0:0:0.3"
 														 BeginTime="0:0:1"
-														 From="0"
-														 To="1">
+														 To="{StaticResource MaterialPressedOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -330,17 +289,18 @@
 							</VisualStateGroup>
 
 							<VisualStateGroup x:Name="FocusStates">
+
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -353,28 +313,24 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Border x:Name="HoverOverlay"
-								Background="{StaticResource ButtonHoverOverlayColor}"
+						<Border x:Name="CommonStatesOverlay"
+								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource ButtonFocusOverlayColor}"
-								Opacity="0" />
-
-						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
-						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource ButtonOutlinedSelectedOverlayColor}"
+								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
 						<controls:Ripple x:Name="ContentPresenter"
-										 Feedback="{StaticResource ButtonOutlinedRippleColor}"
-										 RippleSizeMultiplier="0.75"
+										 Feedback="{TemplateBinding Foreground}"
+										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
+										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 Content="{TemplateBinding Content}"
 										 ContentTemplate="{TemplateBinding ContentTemplate}"
 										 ContentTransitions="{TemplateBinding ContentTransitions}"
-										 CornerRadius="{StaticResource ButtonBorderRadius}"
+										 CornerRadius="{StaticResource MaterialButtonCornerRadius}"
 										 FontFamily="{TemplateBinding FontFamily}"
 										 FontSize="{TemplateBinding FontSize}"
 										 Padding="{TemplateBinding Padding}"
@@ -387,17 +343,33 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="TextMaterialButtonStyle"
-		   TargetType="Button"
-		   BasedOn="{StaticResource ContainedMaterialButtonStyle}">
-
+	<Style x:Key="MaterialOutlinedSecondaryButtonStyle"
+		   BasedOn="{StaticResource MaterialOutlinedButtonStyle}"
+		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{StaticResource ButtonTextLabelColor}" />
+				Value="{StaticResource SecondaryBrush}" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource SecondaryBrush}" />
+	</Style>
+
+	<Style x:Key="MaterialTextButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Foreground"
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource ButtonTextBackgroundColor}" />
+				Value="Transparent" />
 		<Setter Property="BorderThickness"
 				Value="0" />
-
+		<Setter Property="Padding"
+				Value="{ThemeResource MaterialButtonPadding}" />
+		<Setter Property="MinHeight"
+				Value="40" />
+		<Setter Property="FontFamily"
+				Value="{ThemeResource MaterialButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource MaterialButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -406,13 +378,13 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{StaticResource ButtonBorderRadius}">
+						  CornerRadius="{StaticResource MaterialButtonCornerRadius}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
+										<Setter Target="CommonStatesOverlay.Opacity"
 												Value="0" />
 										<Setter Target="FocusedOverlay.Opacity"
 												Value="0" />
@@ -421,11 +393,10 @@
 
 								<VisualState x:Name="PointerOver">
 									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0:0:0.25"
-														 From="0"
-														 To="1">
+														 To="{StaticResource MaterialHoverOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -434,12 +405,17 @@
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="0:0:0.3"
+														 BeginTime="0:0:1"
+														 To="{StaticResource MaterialPressedOpacity}">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
@@ -455,14 +431,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -475,28 +451,24 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Border x:Name="HoverOverlay"
-								Background="{StaticResource ButtonHoverOverlayColor}"
+						<Border x:Name="CommonStatesOverlay"
+								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource ButtonFocusOverlayColor}"
-								Opacity="0" />
-
-						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
-						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource ButtonTextSelectedOverlayColor}"
+								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
 						<controls:Ripple x:Name="ContentPresenter"
-										 Feedback="{StaticResource ButtonTextRippleColor}"
-										 RippleSizeMultiplier="0.85"
+										 Feedback="{TemplateBinding Foreground}"
+										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
+										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 Content="{TemplateBinding Content}"
 										 ContentTemplate="{TemplateBinding ContentTemplate}"
 										 ContentTransitions="{TemplateBinding ContentTransitions}"
-										 CornerRadius="{StaticResource ButtonBorderRadius}"
+										 CornerRadius="{StaticResource MaterialButtonCornerRadius}"
 										 FontFamily="{TemplateBinding FontFamily}"
 										 FontSize="{TemplateBinding FontSize}"
 										 Padding="{TemplateBinding Padding}"
@@ -507,6 +479,13 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialTextSecondaryButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource MaterialTextButtonStyle}">
+		<Setter Property="Foreground"
+				Value="{StaticResource SecondaryBrush}" />
 	</Style>
 
 	<!-- Known Issue - Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
@@ -524,9 +503,9 @@
 		<Setter Property="Width"
 				Value="{StaticResource FabLargeAreaSize}" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource ButtonFontFamily}" />
+				Value="{StaticResource MaterialButtonFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource ButtonFontSize}" />
+				Value="{StaticResource MaterialButtonFontSize}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -632,7 +611,7 @@
 						<controls:Ripple x:Name="Ripple"
 										 Feedback="{StaticResource ButtonFabRippleColor}"
 										 CornerRadius="{StaticResource FabBorderRadius}"
-										 RippleSizeMultiplier="0.9">
+										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}">
 							<Grid>
 
 								<toolkit:ElevatedView x:Name="FabButton"
@@ -695,9 +674,9 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource FabLabelColor}" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource ButtonFontFamily}" />
+				Value="{StaticResource MaterialButtonFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource ButtonFontSize}" />
+				Value="{StaticResource MaterialButtonFontSize}" />
 		<!-- Issue #143 Android needs more height than other platforms to have proper button sizing -->
 		<android:Setter Property="MinHeight"
 						Value="60" />
@@ -755,7 +734,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<controls:Ripple Feedback="{StaticResource ButtonFabRippleColor}"
-										 RippleSizeMultiplier="0.75"
+										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 CornerRadius="{StaticResource FabBorderRadius}"
 										 HorizontalContentAlignment="Stretch"
 										 VerticalContentAlignment="Stretch">
@@ -842,7 +821,7 @@
 
 						<win:Button Content="See Style"
 									FontSize="10"
-									Style="{StaticResource TextMaterialButtonStyle}"
+									Style="{StaticResource MaterialTextButtonStyle}"
 									Margin="12,0">
 							<Button.Flyout>
 								<Flyout>

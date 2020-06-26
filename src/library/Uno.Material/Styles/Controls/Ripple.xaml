@@ -48,7 +48,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="ScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.4"
+														 Duration="0:0:0.8"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -57,14 +57,13 @@
 										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="ScaleTransform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.4"
+														 Duration="0:0:0.8"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseInOut" />
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
-
 										<win:DoubleAnimationUsingKeyFrames Storyboard.TargetName="ClickEllipse"
 																	   Storyboard.TargetProperty="Opacity">
 											<EasingDoubleKeyFrame KeyTime="0"
@@ -79,13 +78,13 @@
 													<CubicEase EasingMode="EaseIn" />
 												</EasingDoubleKeyFrame.EasingFunction>
 											</EasingDoubleKeyFrame>
-											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
+											<EasingDoubleKeyFrame KeyTime="0:0:0.8"
 																  Value="1">
 												<EasingDoubleKeyFrame.EasingFunction>
 													<CubicEase EasingMode="EaseIn" />
 												</EasingDoubleKeyFrame.EasingFunction>
 											</EasingDoubleKeyFrame>
-											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
+											<EasingDoubleKeyFrame KeyTime="0:0:1.2"
 																  Value="0">
 												<EasingDoubleKeyFrame.EasingFunction>
 													<CubicEase EasingMode="EaseIn" />
@@ -103,8 +102,8 @@
 										</not_win:DoubleAnimation>
 										<not_win:DoubleAnimation Storyboard.TargetName="ClickEllipse"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.2"
-														 BeginTime="0:0:0.2"
+														 Duration="0:0:0.4"
+														 BeginTime="0:0:0.8"
 														 From="1"
 														 To="0">
 											<DoubleAnimation.EasingFunction>
@@ -127,7 +126,8 @@
 
 						<Canvas IsHitTestVisible="False"
 								HorizontalAlignment="Stretch"
-								VerticalAlignment="Stretch">
+								VerticalAlignment="Stretch"
+								Opacity="{TemplateBinding FeedbackOpacity}">
 							<Ellipse x:Name="ClickEllipse"
 									 Fill="{TemplateBinding Feedback}"
 									 Opacity="0"
