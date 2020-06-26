@@ -68,25 +68,25 @@ namespace Uno.Material.Samples
 			// Styles
 			using (AddMenuHeader("Styles"))
 			{
-				AddMenuItem<ColorsSamplePage>();
+				AddMenuItem<ColorsSamplePage>(icon: "ColorsIcon");
 				NavView.MenuItems.Add(new NavigationViewItemSeparator());
 			}
 
 			// Controls
 			using (AddMenuHeader("Controls"))
 			{
-				AddMenuItem<BottomNavigationBarSamplePage>(content: "BottomBarNavigation");
-				AddMenuItem<ButtonSamplePage>();
-				AddMenuItem<CardsSamplePage>();
-				AddMenuItem<CheckBoxSamplePage>();
-				AddMenuItem<ComboBoxSamplePage>();
-				AddMenuItem<FabSamplePage>(content: "FAB");
-				AddMenuItem<NavigationViewSamplePage>();
-				AddMenuItem<RadioButtonSamplePage>();
-				AddMenuItem<SnackBarSamplePage>();
-				AddMenuItem<TextBlockSamplePage>();
-				AddMenuItem<TextBoxSamplePage>();
-				AddMenuItem<ToggleSwitchSamplePage>();
+				AddMenuItem<BottomNavigationBarSamplePage>(content: "BottomBarNavigation", icon: "BottomBarIcon");
+				AddMenuItem<ButtonSamplePage>(icon: "ButtonIcon");
+				AddMenuItem<CardsSamplePage>(icon: "CardsIcon");
+				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
+				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
+				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
+				AddMenuItem<NavigationViewSamplePage>(icon: "NavigationViewIcon");
+				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");
+				AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
+				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
+				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");
+				AddMenuItem<ToggleSwitchSamplePage>(icon: "ToggleSwitchIcon");
 			}
 
 			IDisposable AddMenuHeader(string content)
@@ -97,13 +97,13 @@ namespace Uno.Material.Samples
 				});
 				return Disposable.Empty;
 			}
-			void AddMenuItem<TSamplePage>(string content = null, Symbol iconSymbol = Symbol.Next)
+			void AddMenuItem<TSamplePage>(string content = null, string icon = null)
 				where TSamplePage : Page
 			{
 				NavView.MenuItems.Add(new NavigationViewItem()
 				{
 					Content = content ?? Regex.Replace(typeof(TSamplePage).Name, @"SamplePage$", string.Empty),
-					Icon = new SymbolIcon(iconSymbol),
+					Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/NavigationViewIcons/" + icon + ".png") },
 					Tag = typeof(TSamplePage),
 				});
 			}
