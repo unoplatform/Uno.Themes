@@ -1,8 +1,6 @@
 ﻿steps:
-- task: UseGitVersion@5
+- task: GitVersion@5
   inputs:
-    versionSpec: '5.3.2'
-    useConfigFile: true
     configFilePath: 'build/gitversion.yml'
   displayName: 'Calculate version'
 

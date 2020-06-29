@@ -14,10 +14,9 @@ pr:
       - release/stable/*
 
 variables:
-  # Image names
-  windowsVMImage: 'windows-2019'
-  linuxVMImage: 'ubuntu-16.04'
-  macOSVMImage: 'macOS-10.15'
+  # Pool names
+  windowsPoolName: 'windows 1809'
+  macOSPoolName: 'Default'
 
   # Nuget Version to use
   NUGET_VERSION: 5.4.0
@@ -85,7 +84,9 @@ stages:
           GeneratePackageOnBuild: true
           ArtifactName: $(NugetPackagesArtifactName)
     pool:
-      vmImage: $(windowsVMImage)
+      name: $(windowsPoolName)
+    
+    container: nventive/build-agent:vs16.6.0
 
     steps:
       - template: build/stage-build.yml
@@ -99,7 +100,9 @@ stages:
           ApplicationPlatform: iPhone
           ArtifactName: $(iOSArtifactName)
     pool:
-      vmImage: $(macOSVMImage)
+      name: $(macOSPoolName)
+      demands:
+        - Xamarin.iOS -equals 13.16
       
     variables:
     - name: SkipUnknownFrameworks
@@ -120,9 +123,17 @@ stages:
       inputs:
         provisioningProfileLocation: 'secureFiles'
         provProfileSecureFile: 'UnoMaterial.mobileprovision' # Name of the .mobileprovision file in the secure files.
+
+    #Fixes gitversion task
+    - bash: |
+       shopt -s nullglob
+       function join_by { local IFS="$1"; shift; echo "$*"; }
+       lib_path=$(join_by ';' $(Agent.WorkFolder)/_tasks/GitVersion*/5.0.*/lib/osx)
+       echo LD_LIBRARY_PATH: $lib_path
+       echo "##vso[task.setvariable variable=LD_LIBRARY_PATH]$lib_path"
+      displayName: 'Fix GitVersion 5 on macOS'
         
     - template: build/stage-build.yml
-
 
 - stage: Release
   # Only release when the build is not for a Pull Request.
@@ -131,7 +142,9 @@ stages:
   - job: Publish_NuGet_Internal
   
     pool:
-      vmImage: $(windowsVMImage)
+      name: $(windowsPoolName)
+
+    container: nventive/build-agent:vs16.6.0
 
     steps:
     - template: build/stage-release.yml
@@ -139,7 +152,9 @@ stages:
   - job: Publish_iOS_TestFlight
 
     pool:
-      vmImage: $(macOSVMImage)
+      name: $(macOSPoolName)
+      demands:
+        - Xamarin.iOS -equals 13.16
     
     variables:
     - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
