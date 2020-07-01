@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<Style x:Key="DefaultTypo"
+	<Style x:Key="MaterialBaseTextBlockStyle"
 		   TargetType="TextBlock">
 		<Setter Property="TextTrimming"
 				Value="CharacterEllipsis" />
@@ -15,10 +15,9 @@
 	******************************************************************
 	-->
 
-	<!-- Headline 1 -->
-	<Style x:Key="Headline1"
+	<Style x:Key="MaterialHeadline1"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="96" />
@@ -26,10 +25,9 @@
 				Value="Light" />
 	</Style>
 
-	<!-- Headline 2 -->
-	<Style x:Key="Headline2"
+	<Style x:Key="MaterialHeadline2"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="60" />
@@ -37,19 +35,17 @@
 				Value="Light" />
 	</Style>
 
-	<!-- Headline 3 -->
-	<Style x:Key="Headline3"
+	<Style x:Key="MaterialHeadline3"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="48" />
 	</Style>
 
-	<!-- Headline 4 -->
-	<Style x:Key="Headline4"
+	<Style x:Key="MaterialHeadline4"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="34" />
@@ -57,10 +53,9 @@
 				Value="Bold" />
 	</Style>
 
-	<!-- Headline 5 -->
-	<Style x:Key="Headline5"
+	<Style x:Key="MaterialHeadline5"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="24" />
@@ -68,10 +63,9 @@
 				Value="Bold" />
 	</Style>
 
-	<!-- Headline 6 -->
-	<Style x:Key="Headline6"
+	<Style x:Key="MaterialHeadline6"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="20" />
@@ -79,19 +73,18 @@
 				Value="Medium" />
 	</Style>
 
-	<!-- Subtitle 1 -->
-	<Style x:Key="Subtitle1"
+	<Style x:Key="MaterialSubtitle1"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="16" />
 	</Style>
 
 	<!-- Subtitle 2 -->
-	<Style x:Key="Subtitle2"
+	<Style x:Key="MaterialSubtitle2"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="14" />
@@ -100,27 +93,27 @@
 	</Style>
 
 	<!-- Body 1 -->
-	<Style x:Key="Body1"
+	<Style x:Key="MaterialBody1"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="16" />
 	</Style>
 
 	<!-- Body 2 -->
-	<Style x:Key="Body2"
+	<Style x:Key="MaterialBody2"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="14" />
 	</Style>
 
 	<!-- Button -->
-	<Style x:Key="Button"
+	<Style x:Key="MaterialButtonTextBlockStyle"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="14" />
@@ -129,18 +122,18 @@
 	</Style>
 
 	<!-- Caption -->
-	<Style x:Key="Caption"
+	<Style x:Key="MaterialCaption"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="12" />
 	</Style>
 
 	<!-- Overline -->
-	<Style x:Key="Overline"
+	<Style x:Key="MaterialOverline"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="10" />

@@ -44,37 +44,37 @@
 		<DataTemplate x:Key="HeaderTemplate">
 			<TextBlock Text="{Binding}"
 					   Margin="16,14,16,0"
-					   Style="{ThemeResource Headline6}" />
+					   Style="{ThemeResource MaterialHeadline6}" />
 		</DataTemplate>
 
 		<!-- Sample SubHeader Template -->
 		<DataTemplate x:Key="SubHeaderTemplate">
 			<TextBlock Text="{Binding}"
 					   Margin="16,0,16,14"
-					   Style="{ThemeResource Body2}" />
+					   Style="{ThemeResource MaterialBody2}" />
 		</DataTemplate>
 
 		<!-- Sample Supporting Template -->
 		<DataTemplate x:Key="SupportingTemplate">
 			<TextBlock Text="{Binding}"
 					   Margin="16,0,16,14"
-					   Style="{ThemeResource Body2}" />
+					   Style="{ThemeResource MaterialBody2}" />
 		</DataTemplate>
 
 		<!-- Sample Supporting Template with Avatar -->
 		<DataTemplate x:Key="SupportingTemplateForAvatarLayout">
 			<TextBlock Text="{Binding}"
 					   Margin="16,12,16,14"
-					   Style="{ThemeResource Body2}" />
+					   Style="{ThemeResource MaterialBody2}" />
 		</DataTemplate>
 
 		<!-- Sample Supporting Template with Small Media -->
 		<DataTemplate x:Key="SupportingTemplateForSmallMediaLayout">
 			<Border BorderThickness="0,1,0,0"
-					BorderBrush="{StaticResource OnSurfaceFocusedBrush}">
+					BorderBrush="{StaticResource MaterialOnSurfaceFocusedBrush}">
 				<TextBlock Text="{Binding}"
 						   Margin="16,12,16,14"
-						   Style="{ThemeResource Body2}" />
+						   Style="{ThemeResource MaterialBody2}" />
 			</Border>
 		</DataTemplate>
 
@@ -83,7 +83,7 @@
 			<StackPanel>
 				<TextBlock Text="{Binding}"
 						   Margin="16,4,16,0"
-						   Style="{ThemeResource Body2}" />
+						   Style="{ThemeResource MaterialBody2}" />
 				<StackPanel Orientation="Horizontal">
 					<Button Content="ACTION 1"
 							Margin="6"
@@ -104,7 +104,7 @@
 				<Button.ContentTemplate>
 					<DataTemplate>
 						<!-- Material more icon -->
-						<Path Fill="{StaticResource OnSurfaceBrush}"
+						<Path Fill="{StaticResource MaterialOnSurfaceBrush}"
 							  Data="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
 					</DataTemplate>
 				</Button.ContentTemplate>
@@ -121,7 +121,7 @@
 					<Button.ContentTemplate>
 						<DataTemplate>
 							<!-- Material favorite icon -->
-							<Path Fill="{StaticResource OnSurfaceBrush}"
+							<Path Fill="{StaticResource MaterialOnSurfaceBrush}"
 								  Data="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
 						</DataTemplate>
 					</Button.ContentTemplate>
@@ -131,7 +131,7 @@
 					<Button.ContentTemplate>
 						<DataTemplate>
 							<!-- Material share icon -->
-							<Path Fill="{StaticResource OnSurfaceBrush}"
+							<Path Fill="{StaticResource MaterialOnSurfaceBrush}"
 								  Data="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
 						</DataTemplate>
 					</Button.ContentTemplate>
@@ -143,7 +143,7 @@
 		<DataTemplate x:Key="ExpanderTemplate">
 			<StackPanel Margin="12">
 				<TextBlock Text="Subtitle part 2"
-						   Style="{StaticResource Subtitle2}" />
+						   Style="{StaticResource MaterialSubtitle2}" />
 
 				<StackPanel Orientation="Horizontal">
 					<Button Content="A"
@@ -180,7 +180,7 @@
 	</Page.Resources>
 
 	<ScrollViewer>
-		<Grid BorderBrush="{StaticResource OnSurfaceBrush}"
+		<Grid BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
 			  BorderThickness="1"
 			  Margin="12">
 
