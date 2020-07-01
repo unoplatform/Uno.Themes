@@ -18,24 +18,25 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<StaticResource x:Key="ButtonOutlinedDisabledColor"
-					ResourceKey="OnSurfaceDisabledBrush" />
+					ResourceKey="MaterialOnSurfaceDisabledBrush" />
 
 	<StaticResource x:Key="ButtonTextDisabledColor"
-					ResourceKey="OnSurfaceDisabledBrush" />
+					ResourceKey="MaterialOnSurfaceDisabledBrush" />
 
 	<!-- Floating Action Button Variables -->
 	<SolidColorBrush x:Key="FabBackgroundColor"
-					 Color="{StaticResource SecondaryColor}" />
+					 Color="{StaticResource MaterialSecondaryColor}" />
 	<SolidColorBrush x:Key="FabIconColor"
-					 Color="{StaticResource OnSurfaceColor}" />
+					 Color="{StaticResource MaterialOnSurfaceColor}" />
 	<SolidColorBrush x:Key="FabLabelColor"
-					 Color="{StaticResource OnSurfaceColor}" />
+					 Color="{StaticResource MaterialOnSurfaceColor}" />
 	<StaticResource x:Key="ButtonFabRippleColor"
-					ResourceKey="OnSurfaceFocusedBrush" />
-	<StaticResource x:Key="ButtonFabFocusOverlayBackgroundColor"
-					ResourceKey="TransparentBrush" />
+					ResourceKey="MaterialOnSurfaceFocusedBrush" />
+	
+	<SolidColorBrush x:Key="ButtonFabFocusOverlayBackgroundColor"
+					 Color="Transparent" />
 	<StaticResource x:Key="ButtonFabFocusOverlayBorderColor"
-					ResourceKey="OnPrimaryBrush" />
+					ResourceKey="MaterialOnPrimaryBrush" />
 
 	<CornerRadius x:Key="FabBorderRadius">23</CornerRadius>
 	<x:Double x:Key="FabLargeAreaSize">56</x:Double>
@@ -43,18 +44,18 @@
 
 	<!-- All Button Variables -->
 	<StaticResource x:Key="ButtonDisabledBackgroundColor"
-					ResourceKey="OnSurfaceDisabledBrush" />
+					ResourceKey="MaterialOnSurfaceDisabledBrush" />
 	<StaticResource x:Key="ButtonDisabledLabelColor"
-					ResourceKey="OnSurfaceMediumBrush" />
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
 	<StaticResource x:Key="ButtonHoverOverlayColor"
-					ResourceKey="OnSurfaceHoverBrush" />
+					ResourceKey="MaterialOnSurfaceHoverBrush" />
 	<StaticResource x:Key="ButtonFocusOverlayColor"
-					ResourceKey="OnSurfaceFocusedBrush" />
+					ResourceKey="MaterialOnSurfaceFocusedBrush" />
 	<StaticResource x:Key="ButtonSelectedOverlayColor"
-					ResourceKey="OnPrimarySelectedBrush" />
+					ResourceKey="MaterialOnPrimarySelectedBrush" />
 	<StaticResource x:Key="ButtonPressBorderBrushColor"
-					ResourceKey="OnSurfacePressedBrush" />
+					ResourceKey="MaterialOnSurfacePressedBrush" />
 	
 
 	<!-- Documented variables -->
@@ -70,9 +71,9 @@
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource OnPrimaryBrush}" />
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Padding"
@@ -175,7 +176,7 @@
 								Opacity="0" />
 
 						<controls:Ripple x:Name="ContentPresenter"
-										 Feedback="{StaticResource OnPrimaryBrush}"
+										 Feedback="{StaticResource MaterialOnPrimaryBrush}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
@@ -200,20 +201,20 @@
 		   BasedOn="{StaticResource MaterialContainedButtonStyle}"
 		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{ThemeResource OnSecondaryBrush}" />
+				Value="{ThemeResource MaterialOnSecondaryBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource SecondaryBrush}" />
+				Value="{ThemeResource MaterialSecondaryBrush}" />
 	</Style>
 	
 	<Style x:Key="MaterialOutlinedButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource BackgroundBrush}" />
+				Value="{StaticResource MaterialBackgroundBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="Padding"
@@ -347,15 +348,15 @@
 		   BasedOn="{StaticResource MaterialOutlinedButtonStyle}"
 		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{StaticResource MaterialSecondaryBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialTextButtonStyle"
 		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="BorderThickness"
@@ -485,7 +486,7 @@
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialTextButtonStyle}">
 		<Setter Property="Foreground"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 
 	<!-- Known Issue - Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
@@ -619,7 +620,7 @@
 													  wasm:Margin="0,0,6,6"
 													  ShadowColor="Black"
 													  IsHitTestVisible="False"
-													  Background="{StaticResource TransparentBrush}"
+													  Background="Transparent"
 													  CornerRadius="{StaticResource FabBorderRadius}"
 													  Width="{TemplateBinding Width}"
 													  Height="{TemplateBinding Height}">
@@ -845,7 +846,7 @@
 						<!-- Known Issue - Windows solution does not work on other platforms, content of flyout remains empty -->
 						<not_win:TextBlock x:Name="HeaderText"
 										   Text="See Style"
-										   Foreground="{StaticResource PrimaryBrush}"
+										   Foreground="{StaticResource MaterialPrimaryBrush}"
 										   FontSize="10"
 										   Margin="12,0" />
 

@@ -16,31 +16,31 @@
 	
 	<!-- Brushes -->
 	<SolidColorBrush x:Key="ComboBoxBackgroundColorBrush"
-					 Color="{ThemeResource SurfaceColor}" />
+					 Color="{ThemeResource MaterialSurfaceColor}" />
 
 	<StaticResource x:Key="ComboBoxSelectedBackgroundThemeBrush"
-					ResourceKey="OnSurfaceHoverBrush" />
+					ResourceKey="MaterialOnSurfaceHoverBrush" />
 
 	<StaticResource x:Key="ComboBoxSelectedPointerOverBackgroundThemeBrush"
-					ResourceKey="OnSurfaceHoverBrush" />
+					ResourceKey="MaterialOnSurfaceHoverBrush" />
 
 	<StaticResource x:Key="ComboBoxPressedHighlightThemeBrush"
-					ResourceKey="OnSurfaceHoverBrush" />
+					ResourceKey="MaterialOnSurfaceHoverBrush" />
 
 	<StaticResource x:Key="ComboBoxPressedBackgroundThemeBrush"
-					ResourceKey="OnSurfaceHoverBrush" />
+					ResourceKey="MaterialOnSurfaceHoverBrush" />
 
 	<StaticResource x:Key="ComboBoxBorderBrush"
-					ResourceKey="OnSurfaceFocusedBrush" />
+					ResourceKey="MaterialOnSurfaceFocusedBrush" />
 
 	<StaticResource x:Key="ComboBoxArrowForegroundThemeBrush"
-					ResourceKey="OnBackgroundBrush" />
+					ResourceKey="MaterialOnBackgroundBrush" />
 
 	<StaticResource x:Key="ComboBoxForegroundThemeBrush"
-					ResourceKey="OnBackgroundBrush" />
+					ResourceKey="MaterialOnBackgroundBrush" />
 
 	<SolidColorBrush x:Key="ComboBoxPlaceholderTextColor"
-					 Color="{ThemeResource OnBackgroundColor}"
+					 Color="{ThemeResource MaterialOnBackgroundColor}"
 					 Opacity="0.74" />
 
 	<CornerRadius x:Key="ComboBoxBorderRadius">4</CornerRadius>
@@ -137,7 +137,7 @@
 								<DataTemplate>
 									<Grid>
 										<TextBlock Text="{Binding }"
-												   Style="{StaticResource Body2}"
+												   Style="{StaticResource MaterialBody2}"
 												   VerticalAlignment="Center"
 												   Margin="16,0,0,0" />
 									</Grid>
@@ -227,7 +227,7 @@
 										<Setter Target="RootGrid.Opacity"
 												Value="0.5" />
 										<Setter Target="ComboBoxContent.Background"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{StaticResource MaterialOnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -340,7 +340,7 @@
 								<TextBlock x:Name="PlaceholderTextBlock"
 										   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
 										   Text="{TemplateBinding PlaceholderText}"
-										   Style="{StaticResource Body2}"
+										   Style="{StaticResource MaterialBody2}"
 										   Foreground="{ThemeResource ComboBoxPlaceholderTextColor}"
 										   VerticalAlignment="Center"
 										   MaxLines="1"

@@ -18,7 +18,7 @@
 
 	<!-- Text ToggleButton Variables -->
 	<SolidColorBrush x:Key="ToggleButtonTextLabelColor"
-					 Color="{ThemeResource PrimaryColor}" />
+					 Color="{ThemeResource MaterialPrimaryColor}" />
 
 	<!-- Other ToggleButton Variables -->
 	<CornerRadius x:Key="ToggleButtonBorderRadius">4</CornerRadius>
@@ -31,7 +31,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource ToggleButtonTextLabelColor}" />
 		<Setter Property="Background"
-				Value="{StaticResource TransparentBrush}" />
+				Value="Transparent" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Padding"
@@ -88,7 +88,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{StaticResource MaterialOnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -116,23 +116,23 @@
 
 						<!-- Border for PointedOver State -->
 						<Border x:Name="HoverOverlay"
-								Background="{StaticResource OnSurfaceHoverBrush}"
+								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 								Opacity="0" />
 
 						<!-- Border for Focus State -->
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
+								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
 						<!-- Border for Dragged/Selected State -->
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
+								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
 						<!-- Ripple effect -->
 						<controls:Ripple x:Name="ContentPresenter"
-										 Feedback="{StaticResource OnSurfaceFocusedBrush}"
+										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 RippleSizeMultiplier="0.85"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"

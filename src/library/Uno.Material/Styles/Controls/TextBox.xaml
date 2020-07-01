@@ -8,35 +8,35 @@
 
 	<!-- Label Resources -->
 	<StaticResource x:Key="TextBoxLabelDefaultColorBrush"
-					ResourceKey="OnSurfaceMediumBrush" />
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 	<x:Double x:Key="TextBoxLabelFontSize">16</x:Double>
 	<StaticResource x:Key="TextBoxLabelFocusColorBrush"
-					ResourceKey="PrimaryBrush" />
+					ResourceKey="MaterialPrimaryBrush" />
 	<StaticResource x:Key="TextBoxInputDefaultColorBrush"
-					ResourceKey="OnSurfaceMediumBrush" />
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 	<StaticResource x:Key="TextBoxInputFocusColorBrush"
-					ResourceKey="OnSurfaceBrush" />
+					ResourceKey="MaterialOnSurfaceBrush" />
 
 	<!-- Icon Resources -->
 	<StaticResource x:Key="TextBoxIconColorBrush"
-					ResourceKey="OnSurfaceMediumBrush" />
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
 	<!-- Filled Resources -->
 	<SolidColorBrush x:Key="TextBoxFilledBackgroundColorBrush"
-					 Color="{StaticResource OnSurfaceColor}"
+					 Color="{StaticResource MaterialOnSurfaceColor}"
 					 Opacity="0.12" />
 	<StaticResource x:Key="TextBoxFilledIndicatorColorBrush"
-					ResourceKey="OnSurfaceMediumBrush" />
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 	<x:Double x:Key="TextBoxStrokeWidth">1</x:Double>
 	<StaticResource x:Key="TextBoxFilledFocusIndicatorColorBrush"
-					ResourceKey="PrimaryBrush" />
+					ResourceKey="MaterialPrimaryBrush" />
 	<x:Double x:Key="TextBoxFocusStrokeWidth">2</x:Double>
 
 	<!-- Outline Resources -->
 	<StaticResource x:Key="TextBoxOutlinedStrokeColorBrush"
-					ResourceKey="OnSurfaceMediumBrush" />
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 	<StaticResource x:Key="TextBoxOutlinedFocusStrokeColorBrush"
-					ResourceKey="PrimaryBrush" />
+					ResourceKey="MaterialPrimaryBrush" />
 	<x:Double x:Key="TextBoxOutlinedStrokeWidth">1</x:Double>
 
 	<!-- Corner Radius Resources -->
@@ -52,7 +52,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="ButtonLayoutGrid"
-						  Background="{StaticResource TransparentBrush}">
+						  Background="Transparent">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -247,7 +247,7 @@
 		   TargetType="TextBox"
 		   BasedOn="{StaticResource DefaultMaterialTextBoxStyle}">
 		<Setter Property="Background"
-				Value="{StaticResource TransparentBrush}" />
+				Value="Transparent" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="CornerRadius"
