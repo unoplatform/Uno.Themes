@@ -14,59 +14,26 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
-		<ResourceDictionary Source="../Application/SelectionControlColors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
-
-	<StaticResource x:Key="ButtonOutlinedDisabledColor"
-					ResourceKey="MaterialOnSurfaceDisabledBrush" />
-
-	<StaticResource x:Key="ButtonTextDisabledColor"
-					ResourceKey="MaterialOnSurfaceDisabledBrush" />
-
-	<!-- Floating Action Button Variables -->
-	<SolidColorBrush x:Key="FabBackgroundColor"
-					 Color="{StaticResource MaterialSecondaryColor}" />
-	<SolidColorBrush x:Key="FabIconColor"
-					 Color="{StaticResource MaterialOnSurfaceColor}" />
-	<SolidColorBrush x:Key="FabLabelColor"
-					 Color="{StaticResource MaterialOnSurfaceColor}" />
-	<StaticResource x:Key="ButtonFabRippleColor"
-					ResourceKey="MaterialOnSurfaceFocusedBrush" />
-	
-	<SolidColorBrush x:Key="ButtonFabFocusOverlayBackgroundColor"
-					 Color="Transparent" />
-	<StaticResource x:Key="ButtonFabFocusOverlayBorderColor"
-					ResourceKey="MaterialOnPrimaryBrush" />
-
-	<CornerRadius x:Key="FabBorderRadius">23</CornerRadius>
-	<x:Double x:Key="FabLargeAreaSize">56</x:Double>
-	<x:Double x:Key="FabSmallAreaSize">40</x:Double>
-
-	<!-- All Button Variables -->
-	<StaticResource x:Key="ButtonDisabledBackgroundColor"
-					ResourceKey="MaterialOnSurfaceDisabledBrush" />
-	<StaticResource x:Key="ButtonDisabledLabelColor"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
-
-	<StaticResource x:Key="ButtonHoverOverlayColor"
-					ResourceKey="MaterialOnSurfaceHoverBrush" />
-	<StaticResource x:Key="ButtonFocusOverlayColor"
-					ResourceKey="MaterialOnSurfaceFocusedBrush" />
-	<StaticResource x:Key="ButtonSelectedOverlayColor"
-					ResourceKey="MaterialOnPrimarySelectedBrush" />
-	<StaticResource x:Key="ButtonPressBorderBrushColor"
-					ResourceKey="MaterialOnSurfacePressedBrush" />
-	
 
 	<!-- Documented variables -->
 	<Thickness x:Key="MaterialButtonPadding">16,8</Thickness>
 	<CornerRadius x:Key="MaterialButtonCornerRadius">4</CornerRadius>
 	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
 	<FontFamily x:Key="MaterialButtonFontFamily">Roboto</FontFamily>
-	
+	<StaticResource x:Key="MaterialContainedButtonDisabledBackgroundBrush"
+					ResourceKey="MaterialOnSurfaceDisabledBrush" />
+	<StaticResource x:Key="MaterialContainedButtonDisabledForegroundBrush"
+					ResourceKey="MaterialOnSurfaceDisabledBrush" />
+	<StaticResource x:Key="MaterialOutlinedButtonDisabledBrush"
+					ResourceKey="MaterialOnSurfaceDisabledBrush" />
+	<StaticResource x:Key="MaterialTextButtonDisabledBrush"
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
+
 	<!-- Undocumented variables -->
 	<x:Double x:Key="MaterialButtonRippleMultiplier">2.0</x:Double>
 
+	<!-- Styles -->
 	<Style x:Key="MaterialContainedButtonStyle"
 		   TargetType="Button">
 
@@ -135,9 +102,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource ButtonDisabledBackgroundColor}" />
+												Value="{StaticResource MaterialContainedButtonDisabledBackgroundBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource ButtonDisabledLabelColor}" />
+												Value="{StaticResource MaterialContainedButtonDisabledForegroundBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -176,7 +143,7 @@
 								Opacity="0" />
 
 						<controls:Ripple x:Name="ContentPresenter"
-										 Feedback="{StaticResource MaterialOnPrimaryBrush}"
+										 Feedback="{TemplateBinding Foreground}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
@@ -282,9 +249,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource ButtonOutlinedDisabledColor}" />
+												Value="{StaticResource MaterialOutlinedButtonDisabledBrush}" />
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource ButtonOutlinedDisabledColor}" />
+												Value="{StaticResource MaterialOutlinedButtonDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -422,7 +389,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource ButtonTextDisabledColor}" />
+												Value="{StaticResource MaterialTextButtonDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -487,304 +454,6 @@
 		   BasedOn="{StaticResource MaterialTextButtonStyle}">
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSecondaryBrush}" />
-	</Style>
-
-	<!-- Known Issue - Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
-	<!-- Known Issue - VisualState Setters can not be applied inside ElevatedView -->
-	<!-- Known Issue - Wasm ElevatedView is cut off for some shapes (including ellipses) -->
-	<Style x:Key="FabMaterialButtonStyle"
-		   TargetType="Button">
-
-		<Setter Property="Background"
-				Value="{StaticResource FabBackgroundColor}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource FabIconColor}" />
-		<Setter Property="Height"
-				Value="{StaticResource FabLargeAreaSize}" />
-		<Setter Property="Width"
-				Value="{StaticResource FabLargeAreaSize}" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialButtonFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Margin"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="0" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Grid>
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Fill"
-												Value="{StaticResource ButtonHoverOverlayColor}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Disabled" />
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="FocusStates">
-
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Fill"
-												Value="{StaticResource ButtonFocusOverlayColor}" />
-										<Setter Target="FabFocusBorder.StrokeThickness"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerFocused">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Fill"
-												Value="{StaticResource ButtonFocusOverlayColor}" />
-										<Setter Target="FabFocusBorder.StrokeThickness"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Unfocused" />
-							</VisualStateGroup>
-							<VisualStateGroup>
-
-								<!-- Known Issue - Must be applied before smalldevices else issues on wasm and ios -->
-								<VisualState x:Name="OtherDevices">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="460" />
-									</VisualState.StateTriggers>
-									<VisualState.Setters>
-										<Setter Target="FabButton.Width"
-												Value="{StaticResource FabLargeAreaSize}" />
-										<Setter Target="FabButton.Height"
-												Value="{StaticResource FabLargeAreaSize}" />
-										<Setter Target="FabBorder.Width"
-												Value="{StaticResource FabLargeAreaSize}" />
-										<Setter Target="FabBorder.Height"
-												Value="{StaticResource FabLargeAreaSize}" />
-										<Setter Target="FabFocusBorder.Width"
-												Value="{StaticResource FabLargeAreaSize}" />
-										<Setter Target="FabFocusBorder.Height"
-												Value="{StaticResource FabLargeAreaSize}" />
-										<android:Setter Target="Ripple.MinWidth"
-														Value="{StaticResource FabLargeAreaSize}" />
-										<android:Setter Target="Ripple.MinHeight"
-														Value="{StaticResource FabLargeAreaSize}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="SmallDevices">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="0" />
-									</VisualState.StateTriggers>
-									<VisualState.Setters>
-										<Setter Target="FabButton.Width"
-												Value="{StaticResource FabSmallAreaSize}" />
-										<Setter Target="FabButton.Height"
-												Value="{StaticResource FabSmallAreaSize}" />
-										<Setter Target="FabBorder.Width"
-												Value="{StaticResource FabSmallAreaSize}" />
-										<Setter Target="FabBorder.Height"
-												Value="{StaticResource FabSmallAreaSize}" />
-										<Setter Target="FabFocusBorder.Width"
-												Value="{StaticResource FabSmallAreaSize}" />
-										<Setter Target="FabFocusBorder.Height"
-												Value="{StaticResource FabSmallAreaSize}" />
-										<android:Setter Target="Ripple.MinWidth"
-														Value="{StaticResource FabSmallAreaSize}" />
-										<android:Setter Target="Ripple.MinHeight"
-														Value="{StaticResource FabSmallAreaSize}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<controls:Ripple x:Name="Ripple"
-										 Feedback="{StaticResource ButtonFabRippleColor}"
-										 CornerRadius="{StaticResource FabBorderRadius}"
-										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}">
-							<Grid>
-
-								<toolkit:ElevatedView x:Name="FabButton"
-													  Elevation="6"
-													  wasm:Margin="0,0,6,6"
-													  ShadowColor="Black"
-													  IsHitTestVisible="False"
-													  Background="Transparent"
-													  CornerRadius="{StaticResource FabBorderRadius}"
-													  Width="{TemplateBinding Width}"
-													  Height="{TemplateBinding Height}">
-									<Grid>
-
-										<Ellipse x:Name="FabBorder"
-												 Width="{TemplateBinding Width}"
-												 Height="{TemplateBinding Height}"
-												 Fill="{TemplateBinding Background}"
-												 Stroke="{TemplateBinding BorderBrush}"
-												 StrokeThickness="0"
-												 IsHitTestVisible="False" />
-
-										<ContentPresenter x:Name="ContentPresenter"
-														  BorderBrush="{TemplateBinding BorderBrush}"
-														  BorderThickness="{TemplateBinding BorderThickness}"
-														  Content="{TemplateBinding Content}"
-														  ContentTemplate="{TemplateBinding ContentTemplate}"
-														  ContentTransitions="{TemplateBinding ContentTransitions}"
-														  CornerRadius="{TemplateBinding CornerRadius}"
-														  FontFamily="{TemplateBinding FontFamily}"
-														  FontSize="{TemplateBinding FontSize}"
-														  Padding="{TemplateBinding Padding}"
-														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-														  AutomationProperties.AccessibilityView="Raw" />
-									</Grid>
-								</toolkit:ElevatedView>
-
-								<Ellipse x:Name="FabFocusBorder"
-										 wasm:Margin="0,0,6,6"
-										 Width="{TemplateBinding Width}"
-										 Height="{TemplateBinding Height}"
-										 Fill="{StaticResource ButtonFabFocusOverlayBackgroundColor}"
-										 Stroke="{StaticResource ButtonFabFocusOverlayBorderColor}"
-										 StrokeThickness="0" />
-							</Grid>
-						</controls:Ripple>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
-	<!-- Known Issue - Ellipse Fill with SolidColorBrushes that contain opacity is merged -->
-	<!-- Known Issue - VisualState Setters can not be applied inside ElevatedView -->
-	<Style x:Key="FabLabelMaterialButtonStyle"
-		   TargetType="Button">
-
-		<Setter Property="Background"
-				Value="{StaticResource FabBackgroundColor}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource FabLabelColor}" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialButtonFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
-		<!-- Issue #143 Android needs more height than other platforms to have proper button sizing -->
-		<android:Setter Property="MinHeight"
-						Value="60" />
-		<Setter Property="MinHeight"
-							Value="48" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Margin"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="0" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Grid>
-						<VisualStateManager.VisualStateGroups>
-
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource ButtonHoverOverlayColor}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Disabled" />
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="FocusStates">
-
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource ButtonFocusOverlayColor}" />
-										<Setter Target="FabFocusBorder.BorderThickness"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerFocused">
-									<VisualState.Setters>
-										<Setter Target="FabFocusBorder.Background"
-												Value="{StaticResource ButtonFocusOverlayColor}" />
-										<Setter Target="FabFocusBorder.BorderThickness"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Unfocused" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<controls:Ripple Feedback="{StaticResource ButtonFabRippleColor}"
-										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
-										 CornerRadius="{StaticResource FabBorderRadius}"
-										 HorizontalContentAlignment="Stretch"
-										 VerticalContentAlignment="Stretch">
-							<Grid>
-								<!-- Issue #144 Wasm and Android need extra margin to properly draw their elevation -->
-								<toolkit:ElevatedView Elevation="6"
-													  wasm:Margin="0,0,6,6"
-													  android:Margin="2,2,2,6"
-													  ShadowColor="Black"
-													  IsHitTestVisible="False"
-													  Background="{StaticResource ButtonFabFocusOverlayBackgroundColor}"
-													  CornerRadius="{StaticResource FabBorderRadius}">
-									<Grid>
-
-										<Grid x:Name="FabBorder"
-											  CornerRadius="{StaticResource FabBorderRadius}"
-											  Background="{TemplateBinding Background}"
-											  BorderBrush="{TemplateBinding BorderBrush}"
-											  BorderThickness="0" />
-
-										<ContentPresenter x:Name="ContentPresenter"
-														  BorderBrush="{TemplateBinding BorderBrush}"
-														  BorderThickness="{TemplateBinding BorderThickness}"
-														  Content="{TemplateBinding Content}"
-														  ContentTemplate="{TemplateBinding ContentTemplate}"
-														  ContentTransitions="{TemplateBinding ContentTransitions}"
-														  CornerRadius="{TemplateBinding CornerRadius}"
-														  FontFamily="{TemplateBinding FontFamily}"
-														  FontSize="{TemplateBinding FontSize}"
-														  Padding="{TemplateBinding Padding}"
-														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-														  AutomationProperties.AccessibilityView="Raw" />
-									</Grid>
-								</toolkit:ElevatedView>
-
-								<Grid x:Name="FabFocusBorder"
-									  wasm:Margin="0,0,6,6"
-									  android:Margin="2,2,2,6"
-									  CornerRadius="{StaticResource FabBorderRadius}"
-									  Background="{StaticResource ButtonFabFocusOverlayBackgroundColor}"
-									  BorderBrush="{StaticResource ButtonFabFocusOverlayBorderColor}"
-									  BorderThickness="0" />
-							</Grid>
-						</controls:Ripple>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
 	</Style>
 
 	<Style x:Key="SeeStyleFlyoutButtonStyle"
