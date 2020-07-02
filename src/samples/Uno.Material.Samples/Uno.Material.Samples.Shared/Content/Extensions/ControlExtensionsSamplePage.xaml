@@ -1,0 +1,47 @@
+﻿<Page x:Class="Uno.Material.Samples.Shared.Content.Extensions.ControlExtensionsSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Material.Samples.Shared.Content.Extensions"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:extensions="using:Uno.Material.Extensions"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+				BorderThickness="1"
+				Margin="12"
+				Padding="12">
+
+		<!-- TextBox -->
+		<TextBlock Text="TextBox"
+				   Style="{StaticResource MaterialSubtitle1}" />
+		<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_TextBox"
+						  Style="{StaticResource XamlDisplayBelowStyle}">
+			<TextBox PlaceholderText="Default"
+					 Style="{StaticResource DefaultMaterialTextBoxStyle}">
+				<extensions:ControlExtensions.Icon>
+					<SymbolIcon Symbol="SolidStar"
+								Foreground="{StaticResource MaterialPrimaryBrush}" />
+				</extensions:ControlExtensions.Icon>
+			</TextBox>
+		</smtx:XamlDisplay>
+
+		<!-- ComboBox -->
+		<TextBlock Text="ComboBox"
+				   Style="{StaticResource MaterialSubtitle1}" />
+		<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ComboBox"
+						  Style="{StaticResource XamlDisplayBelowStyle}">
+			<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+					  PlaceholderText="Placeholder"
+					  ItemsSource="abcdefg">
+				<extensions:ControlExtensions.Icon>
+					<SymbolIcon Symbol="SolidStar"
+								Foreground="{StaticResource MaterialPrimaryBrush}" />
+				</extensions:ControlExtensions.Icon>
+			</ComboBox>
+		</smtx:XamlDisplay>
+
+	</StackPanel>
+</Page>
