@@ -107,7 +107,14 @@ namespace Uno.Material.Samples
 				NavView.MenuItems.Add(new NavigationViewItem()
 				{
 					Content = content ?? Regex.Replace(typeof(TSamplePage).Name, @"SamplePage$", string.Empty),
-					Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/NavigationViewIcons/" + icon + ".png") },
+					Icon = new BitmapIcon()
+					{
+						UriSource = new Uri("ms-appx:///Assets/NavigationViewIcons/" + icon + ".png"),
+#if __IOS__
+						// workaround for BitmapIcon not displaying on ios
+						ShowAsMonochrome = false
+#endif
+					},
 					Tag = typeof(TSamplePage),
 				});
 			}
