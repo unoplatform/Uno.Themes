@@ -22,71 +22,70 @@
 				   Foreground="{StaticResource MaterialPrimaryBrush}" />
 
 		<StackPanel Orientation="Horizontal">
-      <smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab">
-        <!--Known Issue, ElevatedView adds white border around fab in WASM-->
-        <Button Style="{StaticResource MaterialFabStyle}">
-          <Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-              Fill="{StaticResource MaterialOnPrimaryBrush}"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              win:Margin="0,0,6,4"
-              not_win:Margin="0,0,4,4" />
-        </Button>
-        </smtx:XamlDisplay>
-        <smtx:XamlDisplay UniqueKey="FabSamplePage_IconFabSecondary">
-        <Button Style="{StaticResource MaterialSecondaryFabStyle}"
-            Margin="12">
-          <Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-              Fill="{StaticResource MaterialOnSecondaryBrush}"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              win:Margin="0,0,6,4"
-              not_win:Margin="0,0,4,4" />
-        </Button>
-      </smtx:XamlDisplay>
-	  </StackPanel>
+			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab">
+				<!--Known Issue, ElevatedView adds white border around fab in WASM-->
+				<Button Style="{StaticResource MaterialFabStyle}">
+					<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+				  Fill="{StaticResource MaterialOnPrimaryBrush}"
+				  HorizontalAlignment="Center"
+				  VerticalAlignment="Center"
+				  win:Margin="0,0,6,4"
+				  not_win:Margin="0,0,4,4" />
+				</Button>
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFabSecondary">
+				<Button Style="{StaticResource MaterialSecondaryFabStyle}"
+				Margin="12">
+					<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+				  Fill="{StaticResource MaterialOnSecondaryBrush}"
+				  HorizontalAlignment="Center"
+				  VerticalAlignment="Center"
+				  win:Margin="0,0,6,4"
+				  not_win:Margin="0,0,4,4" />
+				</Button>
+			</smtx:XamlDisplay>
+		</StackPanel>
 
 		<StackPanel Orientation="Horizontal">
+			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab">
+				<!-- Fab With Icon And Label -->
+				<Button Style="{StaticResource MaterialLabelFabStyle}"
+				Margin="12">
+					<StackPanel Orientation="Horizontal">
+						<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+					Fill="{StaticResource MaterialOnPrimaryBrush}"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					win:Margin="12,0,16,3"
+					not_win:Margin="12,1,16,3" />
 
-      <smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab">
-        <!-- Fab With Icon And Label -->
-        <Button Style="{StaticResource MaterialLabelFabStyle}"
-            Margin="12">
-          <StackPanel Orientation="Horizontal">
-            <Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-                Fill="{StaticResource MaterialOnPrimaryBrush}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                win:Margin="12,0,16,3"
-                not_win:Margin="12,1,16,3" />
-
-            <TextBlock Text="CREATE"
-                   FontWeight="SemiBold"
-                   win:Margin="0,4,16,0"
-                   wasm:Margin="0,4,16,0"
-                   ios:Margin="0,4,16,0"
-                   android:Margin="0,3,16,0" />
-          </StackPanel>
-        </Button>
-      </smtx:XamlDisplay>
-		  <smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab">
-        <Button Style="{StaticResource MaterialLabelSecondaryFabStyle}">
-          <StackPanel Orientation="Horizontal">
-            <Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-                Fill="{StaticResource MaterialOnSecondaryBrush}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                win:Margin="12,0,16,3"
-                not_win:Margin="12,1,16,3" />
-            <TextBlock Text="CREATE"
-                   FontWeight="SemiBold"
-                   win:Margin="0,4,16,0"
-                   wasm:Margin="0,4,16,0"
-                   ios:Margin="0,4,16,0"
-                   android:Margin="0,3,16,0" />
-          </StackPanel>
-        </Button>
-      </smtx:XamlDisplay>
-    </StackPanel>
+						<TextBlock Text="CREATE"
+					   FontWeight="SemiBold"
+					   win:Margin="0,4,16,0"
+					   wasm:Margin="0,4,16,0"
+					   ios:Margin="0,4,16,0"
+					   android:Margin="0,3,16,0" />
+					</StackPanel>
+				</Button>
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFabSecondary">
+				<Button Style="{StaticResource MaterialLabelSecondaryFabStyle}">
+					<StackPanel Orientation="Horizontal">
+						<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
+					Fill="{StaticResource MaterialOnSecondaryBrush}"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					win:Margin="12,0,16,3"
+					not_win:Margin="12,1,16,3" />
+						<TextBlock Text="CREATE"
+					   FontWeight="SemiBold"
+					   win:Margin="0,4,16,0"
+					   wasm:Margin="0,4,16,0"
+					   ios:Margin="0,4,16,0"
+					   android:Margin="0,3,16,0" />
+					</StackPanel>
+				</Button>
+			</smtx:XamlDisplay>
+		</StackPanel>
 	</StackPanel>
 </Page>
