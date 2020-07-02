@@ -4,80 +4,42 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
 	<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
 				BorderThickness="1"
-				Margin="12">
+				Margin="12"
+				Padding="12">
 
-		<StackPanel Orientation="Horizontal">
-
-			<!-- RadioButton OFF -->
+		<!-- RadioButton OFF -->
+		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Unchecked">
 			<RadioButton GroupName="RadioButtonDemo"
 						 Content="UNCHECKED"
-						 Style="{StaticResource MaterialRadioButtonStyle}"
-						 Margin="12" />
+						 Style="{StaticResource MaterialRadioButtonStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/RadioButton/RadioButton.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-			
-			<!-- RadioButton ON -->
+		<!-- RadioButton ON -->
+		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Checked">
 			<RadioButton GroupName="RadioButtonDemo"
 						 Content="CHECKED"
 						 Style="{StaticResource MaterialRadioButtonStyle}"
-						 IsChecked="True"
-						 Margin="12" />
+						 IsChecked="True" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/RadioButton/RadioButton_Checked.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-			
-			<!-- RadioButton OFF Disabled -->
+		<!-- RadioButton OFF Disabled -->
+		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_UncheckedDisabled">
 			<RadioButton Content="UNCHECKED DISABLED"
 						 IsEnabled="False"
-						 Style="{StaticResource MaterialRadioButtonStyle}"
-						 Margin="12" />
+						 Style="{StaticResource MaterialRadioButtonStyle}" />
+		</smtx:XamlDisplay>
 
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/RadioButton/RadioButton_Disabled.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-			
-			<!-- RadioButton ON Disabled -->
+		<!-- RadioButton ON Disabled -->
+		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_CheckedDisabled">
 			<RadioButton Content="CHECKED DISABLED"
-						 Style="{StaticResource MaterialRadioButtonStyle}"
-						 IsEnabled="False"
 						 IsChecked="True"
-						 Margin="12" />
-
-			<!-- Style -->
-			<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/RadioButton/RadioButton_Disabled_Checked.png"
-						   HorizontalAlignment="Left" />
-				</StackPanel>
-			</Button>
-		</StackPanel>
+						 IsEnabled="False"
+						 Style="{StaticResource MaterialRadioButtonStyle}" />
+		</smtx:XamlDisplay>
 	</StackPanel>
 </Page>

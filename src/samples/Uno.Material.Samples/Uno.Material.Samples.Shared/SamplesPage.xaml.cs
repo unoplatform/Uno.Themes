@@ -18,6 +18,10 @@ namespace Uno.Material.Samples
 			this.InitializeComponent();
 		}
 
+		#region Navigation View
+		// note: This section of code is showcased in NavigationViewSamplePage.
+		// Be sure to keep it updated, if this section receives a major change.
+
 		private void NavView_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (NavView.MenuItems.Any())
@@ -108,6 +112,8 @@ namespace Uno.Material.Samples
 				});
 			}
 		}
+
+		#endregion
 
 		void ToggleTheme()
 		{

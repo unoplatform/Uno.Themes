@@ -4,62 +4,49 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
-	<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
-				BorderThickness="1"
-				Margin="12">
+	<Grid BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
+		  BorderThickness="1"
+		  Margin="12"
+		  Padding="12">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+		<StackPanel Margin="0,0,10,0">
 
-			<StackPanel>
+			<!-- Label -->
+			<TextBlock Text="NORMAL"
+					   Style="{StaticResource MaterialSubtitle1}" />
 
-				<!-- Label -->
-				<TextBlock Text="NORMAL"
-						   Style="{StaticResource MaterialSubtitle1}"
-						   Margin="12,12,12,0" />
-
-				<!-- ComboBox -->
+			<!-- ComboBox -->
+			<smtx:XamlDisplay UniqueKey="ComboBoxSamplePage_Normal"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 						  PlaceholderText="Placeholder"
-						  ItemsSource="abcdefg"
-						  Margin="12" />
+						  ItemsSource="abcdefg" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/ComboBox/ComboBox.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
+		</StackPanel>
 
-			<StackPanel Grid.Column="1">
+		<StackPanel Grid.Column="1">
 
-				<!-- Label -->
-				<TextBlock Text="DISABLED"
-						   Style="{StaticResource MaterialSubtitle1}"
-						   Margin="12,12,12,0" />
+			<!-- Label -->
+			<TextBlock Text="DISABLED"
+					   Style="{StaticResource MaterialSubtitle1}" />
 
-				<!-- ComboBox -->
+			<!-- ComboBox -->
+			<smtx:XamlDisplay UniqueKey="ComboBoxSamplePage_Disabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 						  PlaceholderText="Placeholder"
 						  ItemsSource="abcde"
-						  IsEnabled="False"
-						  Margin="12" />
+						  IsEnabled="False" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/ComboBox/ComboBox_Disabled.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
-		</Grid>
-	</StackPanel>
+		</StackPanel>
+	</Grid>
 </Page>

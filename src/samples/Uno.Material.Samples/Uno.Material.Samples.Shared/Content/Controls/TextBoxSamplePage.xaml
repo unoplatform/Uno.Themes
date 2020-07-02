@@ -4,113 +4,63 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
-	<ScrollViewer>
-		<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
-					BorderThickness="1"
-					Margin="12">
+	<ScrollViewer BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
+				  BorderThickness="1"
+				  Margin="12"
+				  Padding="12">
+		<StackPanel>
 
-			<StackPanel Orientation="Vertical">
-
-				<!-- Default -->
+			<!-- Default -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_1"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<TextBox PlaceholderText="Default"
-						 Style="{StaticResource DefaultMaterialTextBoxStyle}"
-						 Margin="12" />
+						 Style="{StaticResource DefaultMaterialTextBoxStyle}" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
-
-			<StackPanel Orientation="Vertical">
-
-				<!-- TexBox With Header -->
+			<!-- TexBox With Header -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_2"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<TextBox PlaceholderText="Default"
 						 Header="Header"
-						 Style="{StaticResource DefaultMaterialTextBoxStyle}"
-						 Margin="12" />
+						 Style="{StaticResource DefaultMaterialTextBoxStyle}" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox_Header.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
-
-			<StackPanel Orientation="Vertical">
-
-				<!-- TexBox Disabled -->
+			<!-- TexBox Disabled -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_3"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<TextBox PlaceholderText="Disabled"
 						 Style="{StaticResource DefaultMaterialTextBoxStyle}"
-						 IsEnabled="False"
-						 Margin="12" />
+						 IsEnabled="False" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox_Disabled.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
-
-			<StackPanel Orientation="Vertical">
-
-				<!-- TexBox Outline -->
+			<!-- TexBox Outline -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_4"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<TextBox PlaceholderText="Outline"
 						 Header="Header"
-						 Style="{StaticResource OutlineMaterialTextBoxStyle}"
-						 Margin="12" />
+						 Style="{StaticResource OutlineMaterialTextBoxStyle}" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/TextBox/OutlineTextBox.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
-
-			<StackPanel Orientation="Vertical">
-
-				<!-- TexBox Outline Disabled -->
+			<!-- TexBox Outline Disabled -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_5"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<TextBox PlaceholderText="Outline Disabled"
 						 Style="{StaticResource OutlineMaterialTextBoxStyle}"
-						 IsEnabled="False"
-						 Margin="12" />
+						 IsEnabled="False" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/TextBox/OutlineTextBox_Disabled.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
-
-			<StackPanel Orientation="Vertical">
-				<!-- TexBox MultiLine -->
+			<!-- TexBox MultiLine -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_6"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
 				<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
 						 Style="{StaticResource DefaultMaterialTextBoxStyle}"
 						 TextWrapping="Wrap"
-						 AcceptsReturn="True"
-						 Margin="12" />
+						 AcceptsReturn="True" />
+			</smtx:XamlDisplay>
 
-				<!-- Style -->
-				<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-					<StackPanel>
-						<Image Source="ms-appx:///Assets/TextBox/DefaultTextBox_Wrap.png"
-							   HorizontalAlignment="Left" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
 		</StackPanel>
 	</ScrollViewer>
 </Page>

@@ -5,49 +5,68 @@
 	  xmlns:controls="using:Uno.Material.Controls"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:entities="using:Uno.Material.Entities"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
 	<Grid>
-		<TextBlock Text="{x:Bind BottomNavBar.SelectedItem.Tag, Mode=OneWay}"
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+
+		<TextBlock Grid.Row="0"
+				   Text="{x:Bind BottomNavBar.SelectedItem.Tag, Mode=OneWay}"
 				   FontWeight="Bold"
 				   HorizontalAlignment="Center"
 				   VerticalAlignment="Center" />
 
-		<controls:BottomNavigationBar x:Name="BottomNavBar">
-			<controls:BottomNavigationBar.Items>
-				<controls:BottomNavigationBarItem Label="Favorites" Tag="My Favorites">
-					<controls:BottomNavigationBarItem.Icon>
-						<SymbolIcon Symbol="Favorite" />
-					</controls:BottomNavigationBarItem.Icon>
-				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem Label="Search" Tag="Search Something">
-					<controls:BottomNavigationBarItem.Icon>
-						<SymbolIcon Symbol="Find" />
-					</controls:BottomNavigationBarItem.Icon>
-				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem Tag="Important Stuff">
-					<controls:BottomNavigationBarItem.Icon>
-						<SymbolIcon Symbol="Important" />
-					</controls:BottomNavigationBarItem.Icon>
-					<controls:BottomNavigationBarItem.Badge>
-						<entities:BottomNavigationBarBadge IsVisible="True" />
-					</controls:BottomNavigationBarItem.Badge>
-				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem Label="Notifications" Tag="12 Unread Notifications">
-					<controls:BottomNavigationBarItem.Icon>
-						<SymbolIcon Symbol="Flag" />
-					</controls:BottomNavigationBarItem.Icon>
-					<controls:BottomNavigationBarItem.Badge>
-						<entities:BottomNavigationBarBadge IsVisible="True"
-														   Text="12" />
-					</controls:BottomNavigationBarItem.Badge>
-				</controls:BottomNavigationBarItem>
-				<controls:BottomNavigationBarItem Tag="App Settings">
-					<controls:BottomNavigationBarItem.Icon>
-						<SymbolIcon Symbol="Setting" />
-					</controls:BottomNavigationBarItem.Icon>
-				</controls:BottomNavigationBarItem>
-			</controls:BottomNavigationBar.Items>
-		</controls:BottomNavigationBar>
+		<smtx:XamlPresenter Grid.Row="1"
+							ReferenceKey="BottomNavigationBarSamplePage_Content" />
+
+		<smtx:XamlDisplay Grid.Row="2"
+						  UniqueKey="BottomNavigationBarSamplePage_Content"
+						  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+			<controls:BottomNavigationBar x:Name="BottomNavBar">
+				<controls:BottomNavigationBar.Items>
+					<controls:BottomNavigationBarItem Label="Favorites"
+													  Tag="My Favorites">
+						<controls:BottomNavigationBarItem.Icon>
+							<SymbolIcon Symbol="Favorite" />
+						</controls:BottomNavigationBarItem.Icon>
+					</controls:BottomNavigationBarItem>
+					<controls:BottomNavigationBarItem Label="Search"
+													  Tag="Search Something">
+						<controls:BottomNavigationBarItem.Icon>
+							<SymbolIcon Symbol="Find" />
+						</controls:BottomNavigationBarItem.Icon>
+					</controls:BottomNavigationBarItem>
+					<controls:BottomNavigationBarItem Tag="Important Stuff">
+						<controls:BottomNavigationBarItem.Icon>
+							<SymbolIcon Symbol="Important" />
+						</controls:BottomNavigationBarItem.Icon>
+						<controls:BottomNavigationBarItem.Badge>
+							<entities:BottomNavigationBarBadge IsVisible="True" />
+						</controls:BottomNavigationBarItem.Badge>
+					</controls:BottomNavigationBarItem>
+					<controls:BottomNavigationBarItem Label="Notifications"
+													  Tag="12 Unread Notifications">
+						<controls:BottomNavigationBarItem.Icon>
+							<SymbolIcon Symbol="Flag" />
+						</controls:BottomNavigationBarItem.Icon>
+						<controls:BottomNavigationBarItem.Badge>
+							<entities:BottomNavigationBarBadge IsVisible="True"
+															   Text="12" />
+						</controls:BottomNavigationBarItem.Badge>
+					</controls:BottomNavigationBarItem>
+					<controls:BottomNavigationBarItem Tag="App Settings">
+						<controls:BottomNavigationBarItem.Icon>
+							<SymbolIcon Symbol="Setting" />
+						</controls:BottomNavigationBarItem.Icon>
+					</controls:BottomNavigationBarItem>
+				</controls:BottomNavigationBar.Items>
+			</controls:BottomNavigationBar>
+		</smtx:XamlDisplay>
 	</Grid>
 </Page>

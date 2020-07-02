@@ -4,6 +4,7 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content.Controls"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d">
 
 	<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
@@ -30,66 +31,10 @@
 				   Foreground="{StaticResource MaterialPrimaryBrush}"
 				   Margin="12" />
 
-		<!-- Label -->
-		<TextBlock Text="Xaml code"
-				   FontSize="14"
-				   TextWrapping="Wrap"
-				   Foreground="{StaticResource MaterialPrimaryBrush}"
-				   Margin="12" />
-
-		<!-- Style -->
-		<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-			<StackPanel>
-				<Image Source="ms-appx:///Assets/NavigationView/NavigationView_xaml.png"
-					   HorizontalAlignment="Left" />
-			</StackPanel>
-		</Button>
-
-		<!-- Part 1 -->
-		<TextBlock Text="Xaml.cs code, part1"
-				   FontSize="14"
-				   TextWrapping="Wrap"
-				   Foreground="{StaticResource MaterialPrimaryBrush}"
-				   Margin="12" />
-
-		<!-- Style -->
-		<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-			<StackPanel>
-				<Image Source="ms-appx:///Assets/NavigationView/NavigationView_xamlcs_1.png"
-					   HorizontalAlignment="Left" />
-			</StackPanel>
-		</Button>
-
-		<!-- Part 2 -->
-		<TextBlock Text="Xaml.cs code, part2"
-				   FontSize="14" 
-				   TextWrapping="Wrap"
-				   Foreground="{StaticResource MaterialPrimaryBrush}"
-				   Margin="12" />
-
-		<!-- Style -->
-		<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-			<StackPanel>
-				<Image Source="ms-appx:///Assets/NavigationView/NavigationView_xamlcs_2.png"
-					   HorizontalAlignment="Left" />
-			</StackPanel>
-		</Button>
-
-		<!-- Part 3 -->
-		<TextBlock Text="Xaml.cs code, part3"
-				   FontSize="14" 
-				   TextWrapping="Wrap"
-				   Foreground="{StaticResource MaterialPrimaryBrush}"
-				   Margin="12" />
-
-		<!-- Style -->
-		<Button Style="{StaticResource SeeStyleFlyoutButtonStyle}">
-			<StackPanel>
-				<Image Source="ms-appx:///Assets/NavigationView/NavigationView_xamlcs_3.png"
-					   HorizontalAlignment="Left" />
-				<Image Source="ms-appx:///Assets/NavigationView/NavigationView_xamlcs_4.png"
-					   HorizontalAlignment="Left" />
-			</StackPanel>
-		</Button>
+		<!-- Xaml + Code-behind -->
+		<smtx:XamlPresenter ReferenceKey="SamplesPage_NavigationView" />
+		<Button x:Name="SeeCodeBehindButton"
+				Tag="See Code-behind"
+				Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
 	</StackPanel>
 </Page>

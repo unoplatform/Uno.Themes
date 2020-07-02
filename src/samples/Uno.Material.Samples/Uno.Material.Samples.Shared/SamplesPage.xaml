@@ -4,50 +4,56 @@
 	  xmlns:local="using:Uno.Material.Samples.Shared"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  mc:Ignorable="d">
 
 	<Grid toolkit:VisibleBoundsPadding.PaddingMask="All"
 		  Background="{StaticResource MaterialBackgroundBrush}">
-		<NavigationView x:Name="NavView"
-						Style="{StaticResource MaterialNavigationViewStyle}"
-						ItemInvoked="NavView_ItemInvoked"
-						Loaded="NavView_Loaded"
-						PaneTitle="Uno Material"
-						Header="Component: NavigationView with MaterialNavigationViewStyle"
-						Margin="0,12,0,0"
-						IsTabStop="False"
-						PaneDisplayMode="Auto"
-						IsBackButtonVisible="Collapsed">
-			<NavigationView.PaneHeader>
-				<StackPanel>
-					<Image Source="ms-appx:///Assets/UnoLogo.png"
-						   Margin="16,50,16,30"
-						   Height="30"
-						   Width="30"
-						   HorizontalAlignment="Left"
-						   Stretch="Uniform" />
+		<smtx:XamlDisplay UniqueKey="SamplesPage_NavigationView"
+						  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
 
-					<TextBlock Text="{Binding PaneTitle, ElementName=NavView}"
+			<NavigationView x:Name="NavView"
+							Style="{StaticResource MaterialNavigationViewStyle}"
+							ItemInvoked="NavView_ItemInvoked"
+							Loaded="NavView_Loaded"
+							PaneTitle="Uno Material"
+							Header="Component: NavigationView with MaterialNavigationViewStyle"
+							Margin="0,12,0,0"
+							IsTabStop="False"
+							PaneDisplayMode="Auto"
+							IsBackButtonVisible="Collapsed">
+				<NavigationView.PaneHeader>
+					<StackPanel>
+						<Image Source="ms-appx:///Assets/UnoLogo.png"
+							   Margin="16,50,16,30"
+							   Height="30"
+							   Width="30"
 							   HorizontalAlignment="Left"
-							   VerticalAlignment="Center"
-							   Margin="16,0,0,0"
-							   Style="{StaticResource MaterialHeadline6}" />
-				</StackPanel>
-			</NavigationView.PaneHeader>
+							   Stretch="Uniform" />
 
-			<!-- NavigationView Items -->
-			<Frame x:Name="ContentFrame">
-				<Frame.ContentTransitions>
-					<TransitionCollection>
-						<NavigationThemeTransition>
-							<NavigationThemeTransition.DefaultNavigationTransitionInfo>
-								<EntranceNavigationTransitionInfo />
-							</NavigationThemeTransition.DefaultNavigationTransitionInfo>
-						</NavigationThemeTransition>
-					</TransitionCollection>
-				</Frame.ContentTransitions>
-			</Frame>
-		</NavigationView>
+						<TextBlock Text="{Binding PaneTitle, ElementName=NavView}"
+								   HorizontalAlignment="Left"
+								   VerticalAlignment="Center"
+								   Margin="16,0,0,0"
+								   Style="{StaticResource MaterialHeadline6}" />
+					</StackPanel>
+				</NavigationView.PaneHeader>
+
+				<!-- NavigationView Items -->
+				<Frame x:Name="ContentFrame">
+					<Frame.ContentTransitions>
+						<TransitionCollection>
+							<NavigationThemeTransition>
+								<NavigationThemeTransition.DefaultNavigationTransitionInfo>
+									<EntranceNavigationTransitionInfo />
+								</NavigationThemeTransition.DefaultNavigationTransitionInfo>
+							</NavigationThemeTransition>
+						</TransitionCollection>
+					</Frame.ContentTransitions>
+				</Frame>
+			</NavigationView>
+
+		</smtx:XamlDisplay>
 	</Grid>
 </Page>
