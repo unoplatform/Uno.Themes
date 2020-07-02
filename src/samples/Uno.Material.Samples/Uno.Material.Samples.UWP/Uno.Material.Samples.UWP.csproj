@@ -27,6 +27,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Uno.ShowMeTheXAML">
+      <Version>1.0.54</Version>
+    </PackageReference>
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
+      <Version>1.0.54</Version>
+    </PackageReference>
     <PackageReference Include="Uno.UI">
       <Version>3.0.0-feature.styles-compat.216</Version>
     </PackageReference>
@@ -141,6 +147,7 @@
     <Content Include="Assets\wide310x150logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\Fonts\RobotoMono-VariableFont_wght.ttf" />
   </ItemGroup>
   <Import Project="..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems')" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

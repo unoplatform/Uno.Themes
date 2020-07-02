@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using ShowMeTheXAML;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,7 @@ namespace Uno.Material.Samples
 		public App()
 		{
 			ConfigureFilters(global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory);
+			ConfigureXamlDisplay();
 
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
@@ -146,6 +148,11 @@ namespace Uno.Material.Samples
 #else
 				.AddConsole(LogLevel.Information);
 #endif
+		}
+
+		static void ConfigureXamlDisplay()
+		{
+			XamlDisplay.Init();
 		}
 	}
 }
