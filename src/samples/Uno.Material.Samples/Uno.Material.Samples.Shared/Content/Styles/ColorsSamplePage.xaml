@@ -6,6 +6,28 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  mc:Ignorable="d">
 
+	<Page.Resources>
+		<Style TargetType="ContentControl">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ContentControl">
+						<Grid Height="88"
+							  Background="{TemplateBinding Background}">
+
+							<!-- Overlay -->
+							<Border Background="{TemplateBinding Tag}" />
+
+							<TextBlock Text="{TemplateBinding Content}"
+									   Foreground="{TemplateBinding Foreground}"
+									   Margin="12"
+									   Style="{StaticResource MaterialSubtitle2}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Page.Resources>
+
 	<Grid>
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
@@ -41,7 +63,7 @@
 								Value="0" />
 						<Setter Target="ColumnSpacer_2.Width"
 								Value="0" />
-						
+
 						<Setter Target="TitleContainer_1.MinHeight"
 								Value="0" />
 						<Setter Target="TitleContainer_2.MinHeight"
@@ -92,182 +114,53 @@
 								   Style="{StaticResource MaterialSubtitle1}"
 								   Margin="0,0,0,12" />
 
-						<!-- Primary Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="MaterialPrimaryBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- PrimaryVariantDark Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryVariantDarkBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="MaterialPrimaryVariantDarkBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- PrimaryVariantLight Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryVariantLightBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="MaterialPrimaryVariantLightBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- Secondary Brush -->
-						<Grid Background="{StaticResource MaterialSecondaryBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="SecondaryBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnSecondaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- SecondaryVariantDark Brush -->
-						<Grid Background="{StaticResource MaterialSecondaryVariantDarkBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="SecondaryVariantDarkBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- SecondaryVariantLight Brush -->
-						<Grid Background="{StaticResource MaterialSecondaryVariantLightBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="SecondaryVariantLightBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnSecondaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- Background Brush -->
-						<Grid Background="{StaticResource MaterialBackgroundBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="BackgroundBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialSurface Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="SurfaceBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- Error Brush -->
-						<Grid Background="{StaticResource MaterialErrorBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="ErrorBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnSecondaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnPrimary Brushes -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimaryBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimaryBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnPrimaryMedium Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimaryMediumBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimaryMediumBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnPrimaryDisabled Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimaryDisabledBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimaryDisabledBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSecondary Brushes -->
-						<Grid Background="{StaticResource MaterialSecondaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSecondaryBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSecondaryBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="White"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSecondaryMedium Brush -->
-						<Grid Background="{StaticResource MaterialSecondaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSecondaryMediumBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSecondaryMediumBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="White"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSecondaryDisabled Brush -->
-						<Grid Background="{StaticResource MaterialSecondaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSecondaryDisabledBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSecondaryDisabledBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="White"
-									   Margin="12" />
-						</Grid>
+						<!-- Brushes -->
+						<ContentControl Content="MaterialPrimaryBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+						<ContentControl Content="MaterialPrimaryVariantDarkBrush"
+										Background="{StaticResource MaterialPrimaryVariantDarkBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+						<ContentControl Content="MaterialPrimaryVariantLightBrush"
+										Background="{StaticResource MaterialPrimaryVariantLightBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+						<ContentControl Content="MaterialSecondaryBrush"
+										Background="{StaticResource MaterialSecondaryBrush}"
+										Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+						<ContentControl Content="MaterialSecondaryVariantDarkBrush"
+										Background="{StaticResource MaterialSecondaryVariantDarkBrush}"
+										Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+						<ContentControl Content="MaterialSecondaryVariantLightBrush"
+										Background="{StaticResource MaterialSecondaryVariantLightBrush}"
+										Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+						<ContentControl Content="MaterialBackgroundBrush"
+										Background="{StaticResource MaterialBackgroundBrush}" />
+						<ContentControl Content="MaterialSurfaceBrush"
+										Background="{StaticResource MaterialSurfaceBrush}" />
+						<ContentControl Content="MaterialErrorBrush"
+										Background="{StaticResource MaterialErrorBrush}"
+										Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+						<ContentControl Content="MaterialOnPrimaryBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimaryBrush}" />
+						<ContentControl Content="MaterialOnPrimaryMediumBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimaryMediumBrush}" />
+						<ContentControl Content="MaterialOnPrimaryDisabledBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimaryDisabledBrush}" />
+						<ContentControl Content="MaterialOnSecondaryBrush"
+										Background="{StaticResource MaterialSecondaryBrush}"
+										Foreground="White"
+										Tag="{StaticResource MaterialOnSecondaryBrush}" />
+						<ContentControl Content="MaterialOnSecondaryMediumBrush"
+										Background="{StaticResource MaterialSecondaryBrush}"
+										Foreground="White"
+										Tag="{StaticResource MaterialOnSecondaryMediumBrush}" />
+						<ContentControl Content="MaterialOnSecondaryDisabledBrush"
+										Background="{StaticResource MaterialSecondaryBrush}"
+										Foreground="White"
+										Tag="{StaticResource MaterialOnSecondaryDisabledBrush}" />
 					</StackPanel>
 
 					<!-- Content 2 -->
@@ -280,209 +173,77 @@
 								   Style="{StaticResource MaterialSubtitle1}"
 								   Margin="0,0,0,12" />
 
-						<!-- MaterialOnError Brush -->
-						<Grid Background="{StaticResource MaterialOnErrorBrush}"
-							  Height="88">
+						<!-- Brushes -->
+						<ContentControl Content="MaterialOnErrorBrush"
+										Background="{StaticResource MaterialOnErrorBrush}"
+										Foreground="White" />
+						<ContentControl Content="MaterialOverlayBrush"
+										Background="{StaticResource MaterialOverlayBrush}" />
 
-							<!-- Title -->
-							<TextBlock Text="OnErrorBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="White"
-									   Margin="12" />
-						</Grid>
-
-						<!-- Overlay Brush -->
-						<Grid Background="{StaticResource MaterialOverlayBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="OverlayBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
+						<!-- Title -->
 						<!-- Using Grid to manage spacing -->
 						<Grid x:Name="TitleContainer_1"
 							  MinHeight="88">
-
-							<!-- Title -->
 							<TextBlock Text="Surface Containers / OnSurface"
 									   Style="{StaticResource MaterialSubtitle1}"
 									   VerticalAlignment="Bottom"
 									   Margin="0,12" />
 						</Grid>
 
-						<!-- OnSurface Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
+						<!-- Brushes -->
+						<ContentControl Content="MaterialOnSurfaceBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}"
+										Tag="{StaticResource MaterialOnSurfaceBrush}" />
+						<ContentControl Content="MaterialOnSurfaceMediumBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}"
+										Tag="{StaticResource MaterialOnSurfaceMediumBrush}" />
+						<ContentControl Content="MaterialOnSurfaceDisabledBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Tag="{StaticResource MaterialOnSurfaceDisabledBrush}" />
+						<ContentControl Content="MaterialOnSurfaceHoverBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Tag="{StaticResource MaterialOnSurfaceHoverBrush}" />
+						<ContentControl Content="MaterialOnSurfaceFocusedBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Tag="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+						<ContentControl Content="MaterialOnSurfacePressedBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Tag="{StaticResource MaterialOnSurfacePressedBrush}" />
+						<ContentControl Content="MaterialOnSurfaceDraggedBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Tag="{StaticResource MaterialOnSurfaceDraggedBrush}" />
+						<ContentControl Content="MaterialOnSurfaceSelectedBrush"
+										Background="{StaticResource MaterialSurfaceBrush}"
+										Tag="{StaticResource MaterialOnSurfaceSelectedBrush}" />
 
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfaceBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfaceBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSurfaceMedium Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfaceMediumBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfaceMediumBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSurfaceDisabled Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfaceDisabledBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfaceDisabledBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSurfaceHover Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfaceHoverBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfaceHoverBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialSurface Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfaceFocusedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfaceFocusedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSurfacePressed Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfacePressedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfacePressedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSurfaceDragged Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfaceDraggedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfaceDraggedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- MaterialOnSurfaceSelected Brush -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnSurfaceSelectedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnSurfaceSelectedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Margin="12" />
-						</Grid>
-
+						<!-- Title -->
 						<!-- Using Grid to manage spacing -->
 						<Grid x:Name="TitleContainer_2"
 							  MinHeight="88">
-
-							<!-- Title -->
 							<TextBlock Text="Surface Containers / Primary on Surface"
 									   Style="{StaticResource MaterialSubtitle1}"
 									   VerticalAlignment="Bottom"
 									   Margin="0,12" />
 						</Grid>
 
-						<!-- PrimaryHover Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryHoverBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="PrimaryHoverBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- PrimaryFocused Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryFocusedBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="PrimaryFocusedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- PrimaryPressed Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryPressedBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="PrimaryPressedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- PrimaryDragged Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryDraggedBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="PrimaryDraggedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- PrimarySelected Brush -->
-						<Grid Background="{StaticResource MaterialPrimarySelectedBrush}"
-							  Height="88">
-
-							<!-- Title -->
-							<TextBlock Text="PrimarySelectedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
+						<!-- Brushes -->
+						<ContentControl Content="MaterialPrimaryHoverBrush"
+										Background="{StaticResource MaterialPrimaryHoverBrush}"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
+						<ContentControl Content="MaterialPrimaryFocusedBrush"
+										Background="{StaticResource MaterialPrimaryFocusedBrush}"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
+						<ContentControl Content="MaterialPrimaryPressedBrush"
+										Background="{StaticResource MaterialPrimaryPressedBrush}"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
+						<ContentControl Content="MaterialPrimaryDraggedBrush"
+										Background="{StaticResource MaterialPrimaryDraggedBrush}"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
+						<ContentControl Content="MaterialPrimarySelectedBrush"
+										Background="{StaticResource MaterialPrimarySelectedBrush}"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
 					</StackPanel>
 
 					<!-- Content 3 -->
@@ -494,75 +255,27 @@
 								   Style="{StaticResource MaterialSubtitle1}"
 								   Margin="0,0,0,12" />
 
-						<!-- OnPrimaryHover Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimaryHoverBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimaryHoverBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- OnPrimaryFocused Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimaryFocusedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimaryFocusedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- OnPrimaryPressed Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimaryPressedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimaryPressedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- OnPrimaryDragged Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimaryDraggedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimaryDraggedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
-
-						<!-- OnPrimarySelected Brush -->
-						<Grid Background="{StaticResource MaterialPrimaryBrush}"
-							  Height="88">
-
-							<!-- Overlay -->
-							<Border Background="{StaticResource MaterialOnPrimarySelectedBrush}" />
-
-							<!-- Title -->
-							<TextBlock Text="OnPrimarySelectedBrush"
-									   Style="{StaticResource MaterialSubtitle2}"
-									   Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									   Margin="12" />
-						</Grid>
+						<!-- Brushes -->
+						<ContentControl Content="MaterialOnPrimaryHoverBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimaryHoverBrush}" />
+						<ContentControl Content="MaterialOnPrimaryFocusedBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimaryFocusedBrush}" />
+						<ContentControl Content="MaterialOnPrimaryPressedBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimaryPressedBrush}" />
+						<ContentControl Content="MaterialOnPrimaryDraggedBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimaryDraggedBrush}" />
+						<ContentControl Content="MaterialOnPrimarySelectedBrush"
+										Background="{StaticResource MaterialPrimaryBrush}"
+										Foreground="{StaticResource MaterialOnPrimaryBrush}"
+										Tag="{StaticResource MaterialOnPrimarySelectedBrush}" />
 					</StackPanel>
 				</Grid>
 			</StackPanel>
