@@ -115,7 +115,14 @@ namespace Uno.Material.Samples
 				{
 					Content = content ?? Regex.Replace(typeof(TSamplePage).Name, @"SamplePage$", string.Empty),
 					Icon = icon != null
-						? new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/NavigationViewIcons/" + icon + ".png") }
+						? new BitmapIcon()
+						{
+							UriSource = new Uri($"ms-appx:///Assets/NavigationViewIcons/{icon}.png"),
+#if __IOS__
+							// workaround for BitmapIcon not displaying on ios
+							ShowAsMonochrome = false
+#endif
+						}
 						: null,
 					Tag = typeof(TSamplePage),
 				});
