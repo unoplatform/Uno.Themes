@@ -25,7 +25,7 @@
 				Value="System,TranslateX" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
-		
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
@@ -324,18 +324,18 @@
 
 	<wasm:Style x:Key="MaterialToggleSwitchStyle"
 				TargetType="ToggleSwitch">
+		
 		<Setter Property="Foreground"
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
 		<Setter Property="VerticalAlignment"
 				Value="Center" />
-		<Setter Property="Width"
-				Value="50" />
 		<Setter Property="MinWidth"
 				Value="50" />
 		<Setter Property="ManipulationMode"
 				Value="System,TranslateX" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
+		
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
@@ -428,100 +428,105 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="10" />
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
 
-							<!-- Known Issue - not showing on wasm -->
 							<ContentPresenter x:Name="ContentPresenter"
 											  Content="{TemplateBinding Header}"
 											  FontSize="{TemplateBinding FontSize}"
 											  FontWeight="{TemplateBinding FontWeight}"
 											  ContentTemplate="{TemplateBinding HeaderTemplate}"
-											  VerticalAlignment="Center" />
+											  Foreground="{TemplateBinding Foreground}" />
 
-							<Border x:Name="OuterBorder"
-									Background="{TemplateBinding Background}"
-									BorderBrush="{TemplateBinding BorderBrush}"
-									BorderThickness="0"
-									Height="26"
-									CornerRadius="13"
-									HorizontalAlignment="Left"
-									Width="40"
-									IsHitTestVisible="False"
-									Grid.Column="2" />
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="10" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
 
-							<Border x:Name="SwitchKnobBounds"
-									Background="{ThemeResource SelectControlToggleOffBackgroundColor}"
-									BorderThickness="1"
-									BorderBrush="{ThemeResource SelectControlToggleOffBackgroundColor}"
-									Height="26"
-									Opacity="1"
-									CornerRadius="13"
-									Width="40"
-									HorizontalAlignment="Left"
-									IsHitTestVisible="False"
-									Grid.Column="2" />
+								<Border x:Name="OuterBorder"
+										Background="{TemplateBinding Background}"
+										BorderBrush="{TemplateBinding BorderBrush}"
+										BorderThickness="0"
+										Height="26"
+										CornerRadius="13"
+										HorizontalAlignment="Left"
+										Width="40"
+										IsHitTestVisible="False"
+										Grid.Column="2" />
 
-							<Border x:Name="SwitchKnobBoundsDisabled"
-									Background="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
-									BorderThickness="1"
-									BorderBrush="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
-									Height="26"
-									Opacity="0"
-									CornerRadius="13"
-									Width="40"
-									HorizontalAlignment="Left"
-									IsHitTestVisible="False"
-									Grid.Column="2" />
+								<Border x:Name="SwitchKnobBounds"
+										Background="{ThemeResource SelectControlToggleOffBackgroundColor}"
+										BorderThickness="1"
+										BorderBrush="{ThemeResource SelectControlToggleOffBackgroundColor}"
+										Height="26"
+										Opacity="1"
+										CornerRadius="13"
+										Width="40"
+										HorizontalAlignment="Left"
+										IsHitTestVisible="False"
+										Grid.Column="2" />
 
-							<Grid x:Name="SwitchKnob"
-								  toolkit:UIElementExtensions.Elevation="4"
-								  CornerRadius="30,30,30,30"
-								  HorizontalAlignment="Left"
-								  Height="24"
-								  Width="24"
-								  Margin="1,0,0,0"
-								  IsHitTestVisible="False"
-								  Grid.Column="2">
+								<Border x:Name="SwitchKnobBoundsDisabled"
+										Background="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
+										BorderThickness="1"
+										BorderBrush="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
+										Height="26"
+										Opacity="0"
+										CornerRadius="13"
+										Width="40"
+										HorizontalAlignment="Left"
+										IsHitTestVisible="False"
+										Grid.Column="2" />
 
-								<Grid.RenderTransform>
-									<TranslateTransform x:Name="KnobTranslateTransform"
-														X="-1" />
-								</Grid.RenderTransform>
+								<Grid x:Name="SwitchKnob"
+									  toolkit:UIElementExtensions.Elevation="4"
+									  CornerRadius="30,30,30,30"
+									  HorizontalAlignment="Left"
+									  Height="24"
+									  Width="24"
+									  Margin="1,0,0,0"
+									  IsHitTestVisible="False"
+									  Grid.Column="2">
 
-								<Ellipse x:Name="SwitchKnobOn"
-										 Fill="{ThemeResource SelectControlToggleOffButtonColor}"
-										 Stroke="{ThemeResource SelectControlToggleOffButtonColor}"
-										 StrokeThickness="1"
-										 Height="24"
-										 Opacity="0"
-										 Width="24" />
+									<Grid.RenderTransform>
+										<TranslateTransform x:Name="KnobTranslateTransform"
+															X="-1" />
+									</Grid.RenderTransform>
 
-								<Ellipse x:Name="SwitchKnobOff"
-										 Fill="{ThemeResource SelectControlToggleOffButtonColor}"
-										 Stroke="{ThemeResource SelectControlToggleOffButtonColor}"
-										 Opacity="1"
-										 StrokeThickness="1"
-										 Height="24"
-										 Width="24" />
+									<Ellipse x:Name="SwitchKnobOn"
+											 Fill="{ThemeResource SelectControlToggleOffButtonColor}"
+											 Stroke="{ThemeResource SelectControlToggleOffButtonColor}"
+											 StrokeThickness="1"
+											 Height="24"
+											 Opacity="0"
+											 Width="24" />
+
+									<Ellipse x:Name="SwitchKnobOff"
+											 Fill="{ThemeResource SelectControlToggleOffButtonColor}"
+											 Stroke="{ThemeResource SelectControlToggleOffButtonColor}"
+											 Opacity="1"
+											 StrokeThickness="1"
+											 Height="24"
+											 Width="24" />
+								</Grid>
+
+								<Thumb x:Name="SwitchThumb"
+									   AutomationProperties.AccessibilityView="Raw"
+									   Grid.Column="2">
+									<Thumb.Template>
+										<ControlTemplate TargetType="Thumb">
+											<Rectangle Fill="Transparent" />
+										</ControlTemplate>
+									</Thumb.Template>
+								</Thumb>
 							</Grid>
 
-							<Thumb x:Name="SwitchThumb"
-								   AutomationProperties.AccessibilityView="Raw"
-								   Grid.Column="2">
-								<Thumb.Template>
-									<ControlTemplate TargetType="Thumb">
-										<Rectangle Fill="Transparent" />
-									</ControlTemplate>
-								</Thumb.Template>
-							</Thumb>
-						</Grid>
-
-						<!-- Investigate why wasm focusring ellipse is broken and colors are appropriately applied -->
-						<!--<Ellipse x:Name="FocusRing"
+							<!-- Investigate why wasm focusring ellipse is broken and colors are appropriately applied -->
+							<!--<Ellipse x:Name="FocusRing"
 								 HorizontalAlignment="Left"
 								 Height="{StaticResource FocusAreaSize}"
 								 Width="{StaticResource FocusAreaSize}"
@@ -531,6 +536,7 @@
 								 Fill="{StaticResource MaterialOnSurfaceHoverBrush}"
 								 Stroke="{ThemeResource SelectControlToggleOnDisabledBackgroundColor}"
 								 StrokeThickness="0" />-->
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -547,7 +553,7 @@
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
 		<Setter Property="Height"
 				Value="50" />
-		
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
