@@ -8,84 +8,75 @@
 	  xmlns:wasm="http://uno.ui/wasm"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:extensions="using:Uno.Material.Extensions"
+	  xmlns:controls="using:Uno.Material.Controls"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  mc:Ignorable="not_win android ios wasm">
 
-	<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-				BorderThickness="1"
-				Margin="12"
-				Padding="12">
+	<ScrollViewer>
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					Margin="12"
+					Padding="12">
 
-		<!-- Floating Acion Buttons Text -->
-		<TextBlock Text="FLOATING ACTION BUTTONS"
-				   FontSize="20"
-				   FontWeight="Bold"
-				   Foreground="{StaticResource MaterialPrimaryBrush}" />
+			<!-- Header -->
+			<TextBlock Text="FLOATING ACTION BUTTONS"
+					   FontSize="20"
+					   FontWeight="Bold"
+					   Foreground="{StaticResource MaterialPrimaryBrush}" />
 
-		<StackPanel Orientation="Horizontal">
-			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab">
-				<!--Known Issue, ElevatedView adds white border around fab in WASM-->
-				<Button Style="{StaticResource MaterialFabStyle}">
-					<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-				  Fill="{StaticResource MaterialOnPrimaryBrush}"
-				  HorizontalAlignment="Center"
-				  VerticalAlignment="Center"
-				  win:Margin="0,0,6,4"
-				  not_win:Margin="0,0,4,4" />
-				</Button>
-			</smtx:XamlDisplay>
-			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFabSecondary">
-				<Button Style="{StaticResource MaterialSecondaryFabStyle}"
-				Margin="12">
-					<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-				  Fill="{StaticResource MaterialOnSecondaryBrush}"
-				  HorizontalAlignment="Center"
-				  VerticalAlignment="Center"
-				  win:Margin="0,0,6,4"
-				  not_win:Margin="0,0,4,4" />
-				</Button>
-			</smtx:XamlDisplay>
+			<!-- Icon -->
+			<TextBlock Text="Icon only" />
+			<StackPanel Orientation="Horizontal">
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab">
+					<Button Style="{StaticResource MaterialFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab2">
+					<Button Style="{StaticResource MaterialSecondaryFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!-- Text -->
+			<TextBlock Text="Text only" />
+			<StackPanel Orientation="Horizontal">
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialFabStyle}" />
+				</smtx:XamlDisplay>
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab2">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryFabStyle}" />
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!-- Icon Text -->
+			<TextBlock Text="Icon and text" />
+			<StackPanel Orientation="Horizontal">
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
 		</StackPanel>
-
-		<StackPanel Orientation="Horizontal">
-			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab">
-				<!-- Fab With Icon And Label -->
-				<Button Style="{StaticResource MaterialLabelFabStyle}"
-				Margin="12">
-					<StackPanel Orientation="Horizontal">
-						<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-					Fill="{StaticResource MaterialOnPrimaryBrush}"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"
-					win:Margin="12,0,16,3"
-					not_win:Margin="12,1,16,3" />
-
-						<TextBlock Text="CREATE"
-					   FontWeight="SemiBold"
-					   win:Margin="0,4,16,0"
-					   wasm:Margin="0,4,16,0"
-					   ios:Margin="0,4,16,0"
-					   android:Margin="0,3,16,0" />
-					</StackPanel>
-				</Button>
-			</smtx:XamlDisplay>
-			<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFabSecondary">
-				<Button Style="{StaticResource MaterialLabelSecondaryFabStyle}">
-					<StackPanel Orientation="Horizontal">
-						<Path Data="M19 13 13 13 13 19 11 19 11 13 5 13 5 11 11 11 11 5 13 5 13 11 19 11z"
-					Fill="{StaticResource MaterialOnSecondaryBrush}"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"
-					win:Margin="12,0,16,3"
-					not_win:Margin="12,1,16,3" />
-						<TextBlock Text="CREATE"
-					   FontWeight="SemiBold"
-					   win:Margin="0,4,16,0"
-					   wasm:Margin="0,4,16,0"
-					   ios:Margin="0,4,16,0"
-					   android:Margin="0,3,16,0" />
-					</StackPanel>
-				</Button>
-			</smtx:XamlDisplay>
-		</StackPanel>
-	</StackPanel>
+	</ScrollViewer>
 </Page>
