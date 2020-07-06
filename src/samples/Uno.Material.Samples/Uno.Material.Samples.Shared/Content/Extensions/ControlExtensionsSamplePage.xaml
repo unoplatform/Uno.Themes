@@ -14,6 +14,65 @@
 				Margin="12"
 				Padding="12">
 
+		<TextBlock Text="ControlExtensions.Icon"
+				   Style="{StaticResource MaterialHeadline5}" />
+		<StackPanel>
+			<TextBlock Style="{StaticResource MaterialBody1}">
+				This property support a variety of icon sources:
+			</TextBlock>
+
+			<!-- BitmapIcon -->
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="- BitmapIcon:"
+						   VerticalAlignment="Bottom" />
+				<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_BitmapIcon"
+								  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+					<BitmapIcon UriSource="ms-appx:///Assets/UnoLogo.png"
+								Height="20"
+								ShowAsMonochrome="False" />
+				</smtx:XamlDisplay>
+				<smtx:XamlPresenter ReferenceKey="TextBlockSamplePage_BitmapIcon" />
+			</StackPanel>
+
+			<!-- FontIcon -->
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="- FontIcon:"
+						   VerticalAlignment="Bottom" />
+				<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_FontIcon"
+								  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+					<FontIcon Glyph="&#xE0E5;"
+							  FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+				</smtx:XamlDisplay>
+				<smtx:XamlPresenter ReferenceKey="TextBlockSamplePage_FontIcon" />
+			</StackPanel>
+
+			<!-- PathIcon -->
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="- PathIcon:"
+						   VerticalAlignment="Bottom" />
+				<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_PathIcon"
+								  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+					<PathIcon Data="M14 8 8 8 8 14 6 14 6 8 0 8 0 6 6 6 6 0 8 0 8 6 14 6z" />
+				</smtx:XamlDisplay>
+				<smtx:XamlPresenter ReferenceKey="TextBlockSamplePage_PathIcon" />
+			</StackPanel>
+
+			<!-- SymbolIcon -->
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="- SymbolIcon:"
+						   VerticalAlignment="Bottom" />
+				<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_SymbolIcon"
+								  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+					<SymbolIcon Symbol="Add" />
+				</smtx:XamlDisplay>
+				<smtx:XamlPresenter ReferenceKey="TextBlockSamplePage_SymbolIcon" />
+			</StackPanel>
+		</StackPanel>
+
+		<TextBlock Text="Supported controls"
+				   Margin="0,16,0,0"
+				   Style="{StaticResource MaterialHeadline6}" />
+
 		<!-- TextBox -->
 		<TextBlock Text="TextBox"
 				   Style="{StaticResource MaterialSubtitle1}" />
