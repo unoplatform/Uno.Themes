@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Uno.Disposables;
 using Uno.Material.Samples.Content.Controls;
 using Uno.Material.Samples.Content.Styles;
+using Uno.Material.Samples.Shared.Content.Extensions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -93,6 +94,12 @@ namespace Uno.Material.Samples
 				AddMenuItem<ToggleSwitchSamplePage>(icon: "ToggleSwitchIcon");
 			}
 
+			// Controls
+			using (AddMenuHeader("Helpers"))
+			{
+				AddMenuItem<ControlExtensionsSamplePage>();
+			}
+
 			IDisposable AddMenuHeader(string content)
 			{
 				NavView.MenuItems.Add(new NavigationViewItemHeader()
@@ -107,14 +114,16 @@ namespace Uno.Material.Samples
 				NavView.MenuItems.Add(new NavigationViewItem()
 				{
 					Content = content ?? Regex.Replace(typeof(TSamplePage).Name, @"SamplePage$", string.Empty),
-					Icon = new BitmapIcon()
-					{
-						UriSource = new Uri("ms-appx:///Assets/NavigationViewIcons/" + icon + ".png"),
+					Icon = icon != null
+						? new BitmapIcon()
+						{
+							UriSource = new Uri($"ms-appx:///Assets/NavigationViewIcons/{icon}.png"),
 #if __IOS__
-						// workaround for BitmapIcon not displaying on ios
-						ShowAsMonochrome = false
+							// workaround for BitmapIcon not displaying on ios
+							ShowAsMonochrome = false
 #endif
-					},
+						}
+						: null,
 					Tag = typeof(TSamplePage),
 				});
 			}
