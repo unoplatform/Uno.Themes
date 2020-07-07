@@ -41,7 +41,12 @@
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="DisplayModeGroup">
-								<VisualState x:Name="Compact" />
+								<VisualState x:Name="Compact" >
+									<android:VisualState.Setters>
+										<Setter Target="HeaderContent.Margin"
+												Value="48,5,0,0" />
+									</android:VisualState.Setters>
+								</VisualState>
 								<VisualState x:Name="Expanded">
 									<VisualState.Setters>
 										<Setter Target="TopNavGrid.Visibility"
