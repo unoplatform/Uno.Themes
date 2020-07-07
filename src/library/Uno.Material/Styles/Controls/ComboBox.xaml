@@ -7,6 +7,7 @@
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:converters="using:Uno.Material.Converters"
+					xmlns:extensions="using:Uno.Material.Extensions"
 					mc:Ignorable="xamarin not_win">
 
 	<!-- Converters -->
@@ -295,8 +296,8 @@
 											  HorizontalAlignment="Stretch"
 											  CornerRadius="{StaticResource ComboBoxBorderRadius}"
 											  Elevation="8"
-											  win:BorderBrush="{StaticResource ComboBoxBorderBrush}"
-											  win:BorderThickness="1">
+											  BorderBrush="{StaticResource ComboBoxBorderBrush}"
+											  BorderThickness="1">
 
 							<Grid x:Name="ComboBoxContent"
 								  Background="{TemplateBinding Background}"
@@ -331,20 +332,38 @@
 										   Margin="{TemplateBinding BorderThickness}"
 										   Opacity="0" />
 
-								<!-- ContentPresenter -->
-								<ContentPresenter x:Name="ContentPresenter"
-												  VerticalAlignment="Center"
-												  Margin="16,0,16,0" />
+								<Grid Margin="16,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
 
-								<!-- PlaceholderTextBlock -->
-								<TextBlock x:Name="PlaceholderTextBlock"
-										   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
-										   Text="{TemplateBinding PlaceholderText}"
-										   Style="{StaticResource MaterialBody2}"
-										   Foreground="{ThemeResource ComboBoxPlaceholderTextColor}"
-										   VerticalAlignment="Center"
-										   MaxLines="1"
-										   Margin="16,0,16,0" />
+									<!-- IconPresenter -->
+									<ContentPresenter x:Name="IconPresenter"
+													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  MaxHeight="34"
+													  MaxWidth="34"
+													  MinWidth="25"
+													  Margin="0,0,8,0"
+													  HorizontalAlignment="Center"
+													  VerticalAlignment="Center"
+													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"/>
+
+									<!-- ContentPresenter -->
+									<ContentPresenter x:Name="ContentPresenter"
+													  Grid.Column="1"
+													  VerticalAlignment="Center"/>
+
+									<!-- PlaceholderTextBlock -->
+									<TextBlock x:Name="PlaceholderTextBlock"
+											   Grid.Column="1"
+											   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+											   Text="{TemplateBinding PlaceholderText}"
+											   Style="{StaticResource MaterialBody2}"
+											   Foreground="{ThemeResource ComboBoxPlaceholderTextColor}"
+											   VerticalAlignment="Center"
+											   MaxLines="1" />
+								</Grid>
 
 								<!-- Down -->
 								<Path x:Name="DropDownGlyph_Down"
@@ -371,8 +390,6 @@
 
 								<!-- Popup -->
 								<Popup x:Name="Popup">
-
-
 									<Border x:Name="PopupBorder"
 											Background="{ThemeResource ComboBoxBackgroundColorBrush}"
 											HorizontalAlignment="Stretch"
