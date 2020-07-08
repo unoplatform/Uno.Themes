@@ -30,6 +30,7 @@ variables:
   AndroidArtifactName: Android
   iOSArtifactName: iOS
   UWPArtifactName: UWP
+  macOSArtifactName: macOS
 
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
@@ -91,7 +92,7 @@ stages:
     steps:
       - template: build/stage-build.yml
 
-  - job: Build_on_Mac # Build iOS samples
+  - job: Build_on_Mac # Build iOS and macOS samples
     strategy:
       maxParallel: 3
       matrix:
@@ -99,6 +100,10 @@ stages:
           ApplicationConfiguration: Release
           ApplicationPlatform: iPhone
           ArtifactName: $(iOSArtifactName)
+        macOS:
+          ApplicationConfiguration: Release
+          ApplicationPlatform: iPhone
+          ArtifactName: $(macOSArtifactName)          
     pool:
       name: $(macOSPoolName)
       demands:
