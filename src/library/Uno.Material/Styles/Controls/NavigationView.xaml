@@ -33,7 +33,7 @@
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="CompactPaneLength"
-				Value="56" />
+				Value="52" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="NavigationView">
@@ -41,10 +41,10 @@
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="DisplayModeGroup">
-								<VisualState x:Name="Compact" >
+								<VisualState x:Name="Compact">
 									<android:VisualState.Setters>
 										<Setter Target="HeaderContent.Margin"
-												Value="48,5,0,0" />
+												Value="52,5,0,0" />
 									</android:VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Expanded">
@@ -57,7 +57,7 @@
 								<VisualState x:Name="Minimal">
 									<VisualState.Setters>
 										<Setter Target="HeaderContent.Margin"
-												Value="48,5,0,0" />
+												Value="52,5,0,0" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -439,23 +439,19 @@
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="*" />
 										</Grid.RowDefinitions>
-
-										<Grid Margin="8,0,0,0">
-											<ContentControl x:Name="HeaderContent"
-															MinHeight="{StaticResource PaneToggleButtonHeight}"
-															IsTabStop="False"
-															Margin="4,4,0,0"
-															Content="{TemplateBinding Header}"
-															ContentTemplate="{TemplateBinding HeaderTemplate}"
-															VerticalContentAlignment="Stretch"
-															HorizontalContentAlignment="Stretch"
-															Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" />
-										</Grid>
 										
+										<ContentControl x:Name="HeaderContent"
+														MinHeight="{StaticResource PaneToggleButtonHeight}"
+														IsTabStop="False"
+														Margin="4,4,0,0"
+														Content="{TemplateBinding Header}"
+														ContentTemplate="{TemplateBinding HeaderTemplate}"
+														VerticalContentAlignment="Stretch"
+														HorizontalContentAlignment="Stretch"
+														Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" />
+
 										<ContentPresenter AutomationProperties.LandmarkType="Main"
 														  Grid.Row="1"
-														  win:Margin="-8,0,0,0"
-														  wasm:Margin="-8,0,0,0"
 														  Padding="0"
 														  Content="{TemplateBinding Content}" />
 									</Grid>
@@ -498,7 +494,7 @@
 										Style="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Converter={StaticResource OpenToPaneButtonStyle}}"
 										AutomationProperties.LandmarkType="Navigation"
 										Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PaneToggleButtonVisibility}"
-									    Background="Transparent"
+										Background="Transparent"
 										VerticalAlignment="Top" />
 							</Grid>
 						</Grid>

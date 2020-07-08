@@ -3,64 +3,68 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  mc:Ignorable="d">
+	  mc:Ignorable="d android ios">
 
-	<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
-				BorderThickness="1"
-				Margin="12">
+	<ScrollViewer>
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
 
-		<!-- CheckBox No Content -->
-		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_NoContent">
-			<CheckBox Style="{StaticResource MaterialCheckBoxStyle}" />
-		</smtx:XamlDisplay>
+			<!-- CheckBox No Content -->
+			<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_NoContent">
+				<CheckBox Style="{StaticResource MaterialCheckBoxStyle}" />
+			</smtx:XamlDisplay>
 
-		<!-- CheckBox OFF -->
-		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_Off">
-			<CheckBox Content="UNCHECKED"
-					  Style="{StaticResource MaterialCheckBoxStyle}" />
-		</smtx:XamlDisplay>
+			<!-- CheckBox OFF -->
+			<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_Off">
+				<CheckBox Content="UNCHECKED"
+						  Style="{StaticResource MaterialCheckBoxStyle}" />
+			</smtx:XamlDisplay>
 
-		<!-- CheckBox ON -->
-		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_On">
-			<CheckBox Content="CHECKED"
-					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  IsChecked="True" />
-		</smtx:XamlDisplay>
+			<!-- CheckBox ON -->
+			<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_On">
+				<CheckBox Content="CHECKED"
+						  Style="{StaticResource MaterialCheckBoxStyle}"
+						  IsChecked="True" />
+			</smtx:XamlDisplay>
 
-		<!-- CheckBox Indeterminate -->
-		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_Indeterminate">
-			<CheckBox Content="INDETERMINATE"
-					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  IsThreeState="True"
-					  IsChecked="{x:Null}" />
-		</smtx:XamlDisplay>
+			<!-- CheckBox Indeterminate -->
+			<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_Indeterminate">
+				<CheckBox Content="INDETERMINATE"
+						  Style="{StaticResource MaterialCheckBoxStyle}"
+						  IsThreeState="True"
+						  IsChecked="{x:Null}" />
+			</smtx:XamlDisplay>
 
-		<!-- CheckBox OFF Disabled -->
-		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_OffDisabled">
-			<CheckBox Content="DISABLED"
-					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  IsEnabled="False" />
-		</smtx:XamlDisplay>
+			<!-- CheckBox OFF Disabled -->
+			<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_OffDisabled">
+				<CheckBox Content="DISABLED"
+						  Style="{StaticResource MaterialCheckBoxStyle}"
+						  IsEnabled="False" />
+			</smtx:XamlDisplay>
 
-		<!-- CheckBox ON Disabled -->
-		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_OnDisabled">
-			<CheckBox Content="CHECKED DISABLED"
-					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  IsEnabled="False"
-					  IsChecked="True" />
-		</smtx:XamlDisplay>
+			<!-- CheckBox ON Disabled -->
+			<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_OnDisabled">
+				<CheckBox Content="CHECKED DISABLED"
+						  Style="{StaticResource MaterialCheckBoxStyle}"
+						  IsEnabled="False"
+						  IsChecked="True" />
+			</smtx:XamlDisplay>
 
-		<!-- Checkbox Indeterminate Disabled -->
-		<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_IndeterminateDisabled">
-			<CheckBox Content="INDETERMINATE DISABLED"
-					  Style="{StaticResource MaterialCheckBoxStyle}"
-					  IsEnabled="False"
-					  IsThreeState="True"
-					  IsChecked="{x:Null}" />
-		</smtx:XamlDisplay>
-
-	</StackPanel>
-
+			<!-- Checkbox Indeterminate Disabled -->
+			<smtx:XamlDisplay UniqueKey="CheckBoxSamplePage_IndeterminateDisabled">
+				<CheckBox Content="INDETERMINATE DISABLED"
+						  Style="{StaticResource MaterialCheckBoxStyle}"
+						  IsEnabled="False"
+						  IsThreeState="True"
+						  IsChecked="{x:Null}" />
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
 </Page>

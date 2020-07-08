@@ -3,42 +3,46 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  mc:Ignorable="d">
-	
-	<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
-				BorderThickness="1"
-				Margin="12"
-				Padding="12">
+	  mc:Ignorable="d android ios">
 
-		<!-- ToggleSwitch OFF -->
-		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_Off">
-			<ToggleSwitch Header="OFF"
-						  Style="{StaticResource MaterialToggleSwitchStyle}" />
-		</smtx:XamlDisplay>
+	<ScrollViewer>
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
 
-		<!-- ToggleSwitch ON -->
-		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_On">
-			<ToggleSwitch Header="ON"
-						  IsOn="True"
-						  Style="{StaticResource MaterialToggleSwitchStyle}" />
-		</smtx:XamlDisplay>
+			<!-- ToggleSwitch OFF -->
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_Off">
+				<ToggleSwitch Header="OFF"
+							  Style="{StaticResource MaterialToggleSwitchStyle}" />
+			</smtx:XamlDisplay>
 
-		<!-- ToggleSwitch OFF Disabled -->
-		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OffDisabled">
-			<ToggleSwitch Header="OFF DISABLED"
-						  Style="{StaticResource MaterialToggleSwitchStyle}"
-						  IsEnabled="False" />
-		</smtx:XamlDisplay>
+			<!-- ToggleSwitch ON -->
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_On">
+				<ToggleSwitch Header="ON"
+							  IsOn="True"
+							  Style="{StaticResource MaterialToggleSwitchStyle}" />
+			</smtx:XamlDisplay>
 
-		<!-- ToggleSwitch ON Disabled -->
-		<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OnDisabled">
-			<ToggleSwitch Header="ON DISABLED"
-						  Style="{StaticResource MaterialToggleSwitchStyle}"
-						  IsEnabled="False"
-						  IsOn="True" />
-		</smtx:XamlDisplay>
+			<!-- ToggleSwitch OFF Disabled -->
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OffDisabled">
+				<ToggleSwitch Header="OFF DISABLED"
+							  Style="{StaticResource MaterialToggleSwitchStyle}"
+							  IsEnabled="False" />
+			</smtx:XamlDisplay>
 
-	</StackPanel>
+			<!-- ToggleSwitch ON Disabled -->
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OnDisabled">
+				<ToggleSwitch Header="ON DISABLED"
+							  Style="{StaticResource MaterialToggleSwitchStyle}"
+							  IsEnabled="False"
+							  IsOn="True" />
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
 </Page>
