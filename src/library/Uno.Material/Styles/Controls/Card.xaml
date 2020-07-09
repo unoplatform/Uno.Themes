@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:converters="using:Uno.Material.Converters"
@@ -12,6 +12,9 @@
 	<!-- Other Card Variables -->
 	<CornerRadius x:Key="CardsBorderRadius">4</CornerRadius>
 	<Thickness x:Key="CardsStrokeWidth">1</Thickness>
+	<x:Double x:Key="CardsElevation">6</x:Double>
+	<Thickness x:Key="CardsElevationMargin">0,0,6,6</Thickness>
+	<Color x:Key="CardElevationShadowColor">#60000000</Color>
 
 	<!-- Converters -->
 	<converters:FromEmptyStringToValueConverter x:Name="EmptyToCollapsed"
@@ -29,6 +32,8 @@
 				Value="72" />
 		<Setter Property="MaxWidth"
 				Value="344" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
@@ -56,6 +61,7 @@
 						  MinHeight="{TemplateBinding MinHeight}"
 						  MaxWidth="{TemplateBinding MaxWidth}"
 						  MaxHeight="{TemplateBinding MaxHeight}"
+						  Margin="{TemplateBinding Margin}"
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  CornerRadius="{TemplateBinding CornerRadius}"
@@ -185,48 +191,31 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
 
 						<!-- Border for PointerOver State-->
-						<Border Grid.RowSpan="4"
-								Grid.ColumnSpan="2"
+						<Border Grid.RowSpan="6"
 								x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 								Opacity="0" />
 
 						<!-- Border for Focused State-->
-						<Border Grid.RowSpan="4"
-								Grid.ColumnSpan="2"
+						<Border Grid.RowSpan="6"
 								x:Name="FocusedOverlay"
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
 						<!-- Border for Dragged/Selected State-->
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
-						<Border Grid.RowSpan="4"
-								Grid.ColumnSpan="2"
+						<Border Grid.RowSpan="6"
 								x:Name="SelectedOverlay"
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<!-- Ripple effect -->
-						<controls:Ripple Grid.RowSpan="4"
-										 Grid.ColumnSpan="2"
-										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-										 RippleSizeMultiplier="0.85"
-										 BorderBrush="{TemplateBinding BorderBrush}"
-										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardsBorderRadius}"
-										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw" />
-
 						<!-- Media content part -->
-						<ContentPresenter Grid.ColumnSpan="2"
-										  x:Name="MediaContentPresenter"
+						<ContentPresenter x:Name="MediaContentPresenter"
 										  Content="{TemplateBinding MediaContent}"
 										  ContentTemplate="{TemplateBinding MediaContentTemplate}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -235,39 +224,48 @@
 										  IsHitTestVisible="False"
 										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
-						<StackPanel Grid.Row="1"
-									Grid.ColumnSpan="2">
-							<!-- Header part-->
-							<ContentPresenter x:Name="HeaderContentPresenter"
-											  Content="{TemplateBinding HeaderContent}"
-											  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
-											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+						<!-- Header part-->
+						<ContentPresenter Grid.Row="1"
+										  x:Name="HeaderContentPresenter"
+										  Content="{TemplateBinding HeaderContent}"
+										  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
-							<!-- SubHeader part-->
-							<ContentPresenter x:Name="SubHeaderContentPresenter"
-											  Content="{TemplateBinding SubHeaderContent}"
-											  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
-											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+						<!-- SubHeader part-->
+						<ContentPresenter Grid.Row="2"
+										  x:Name="SubHeaderContentPresenter"
+										  Content="{TemplateBinding SubHeaderContent}"
+										  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
-							<!-- Supporting Content part-->
-							<ContentPresenter x:Name="SupportingContentPresenter"
-											  Content="{TemplateBinding SupportingContent}"
-											  ContentTemplate="{TemplateBinding SupportingContentTemplate}"
-											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
-						</StackPanel>
+						<!-- Ripple effect -->
+						<controls:Ripple Grid.RowSpan="4"
+										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+										 RippleSizeMultiplier="0.85"
+										 BorderBrush="{TemplateBinding BorderBrush}"
+										 BorderThickness="{TemplateBinding BorderThickness}"
+										 CornerRadius="{StaticResource CardsBorderRadius}"
+										 Padding="{TemplateBinding Padding}"
+										 AutomationProperties.AccessibilityView="Raw" />
+
+						<!-- Supporting Content part-->
+						<ContentPresenter Grid.Row="3"
+										  x:Name="SupportingContentPresenter"
+										  Content="{TemplateBinding SupportingContent}"
+										  ContentTemplate="{TemplateBinding SupportingContentTemplate}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
 						<!-- Icons section part -->
-						<ContentPresenter Grid.Row="1"
-										  Grid.ColumnSpan="2"
+						<ContentPresenter Grid.Row="3"
 										  x:Name="IconsContentPresenter"
 										  Content="{TemplateBinding IconsContent}"
 										  ContentTemplate="{TemplateBinding IconsContentTemplate}"
@@ -277,8 +275,7 @@
 										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}" />
 
 						<!-- Expender part -->
-						<StackPanel Grid.Row="2"
-									Grid.ColumnSpan="2"
+						<StackPanel Grid.Row="4"
 									Visibility="{Binding ExpanderHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}">
 							<Rectangle x:Name="ExpanderSeparator"
 									   Height="1"
@@ -292,7 +289,7 @@
 											  Height="0" />
 
 							<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+										  HorizontalAlignment="Left"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  Content="{TemplateBinding ExpanderHeaderContent}"
 										  ContentTemplate="{TemplateBinding ExpanderHeaderContentTemplate}"
@@ -313,6 +310,8 @@
 				Value="72" />
 		<Setter Property="MaxWidth"
 				Value="344" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
@@ -332,7 +331,7 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Elevation"
-				Value="4" />
+				Value="{StaticResource CardsElevation}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -343,12 +342,13 @@
 										  MinHeight="{TemplateBinding MinHeight}"
 										  MaxWidth="{TemplateBinding MaxWidth}"
 										  MaxHeight="{TemplateBinding MaxHeight}"
+										  Margin="{TemplateBinding Margin}"
 										  Background="{TemplateBinding Background}"
-										  BorderBrush="{TemplateBinding BorderBrush}"
 										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
-										  Elevation="{TemplateBinding Elevation}">
+										  Elevation="{TemplateBinding Elevation}"
+										  ShadowColor="{StaticResource CardElevationShadowColor}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
@@ -468,11 +468,13 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- TO-DO : Remove BorderBrush and BorderThickness properties when elevation is correclty supported for UWP -->
 						<Grid x:Name="GridRoot"
-							  win:BorderBrush="{TemplateBinding BorderBrush}"
-							  win:BorderThickness="{TemplateBinding BorderThickness}">
+							  BorderBrush="{TemplateBinding BorderBrush}"
+							  BorderThickness="{TemplateBinding BorderThickness}"
+							  CornerRadius="{TemplateBinding CornerRadius}">
 							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
@@ -484,41 +486,26 @@
 							</Grid.ColumnDefinitions>
 
 							<!-- Border for PointerOver State-->
-							<Border Grid.RowSpan="4"
-									Grid.ColumnSpan="2"
+							<Border Grid.RowSpan="6"
 									x:Name="HoverOverlay"
 									Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 									Opacity="0" />
 
 							<!-- Border for Focused State-->
-							<Border Grid.RowSpan="4"
-									Grid.ColumnSpan="2"
+							<Border Grid.RowSpan="6"
 									x:Name="FocusedOverlay"
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
 
 							<!-- Border for Dragged/Selected State-->
 							<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
-							<Border Grid.RowSpan="4"
-									Grid.ColumnSpan="2"
+							<Border Grid.RowSpan="6"
 									x:Name="SelectedOverlay"
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
 
-							<!-- Ripple effect -->
-							<controls:Ripple Grid.RowSpan="4"
-											 Grid.ColumnSpan="2"
-											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 RippleSizeMultiplier="0.85"
-											 BorderBrush="{TemplateBinding BorderBrush}"
-											 BorderThickness="{TemplateBinding BorderThickness}"
-											 CornerRadius="{StaticResource CardsBorderRadius}"
-											 Padding="{TemplateBinding Padding}"
-											 AutomationProperties.AccessibilityView="Raw" />
-
 							<!-- Media content part -->
-							<ContentPresenter Grid.ColumnSpan="2"
-											  x:Name="MediaContentPresenter"
+							<ContentPresenter x:Name="MediaContentPresenter"
 											  Content="{TemplateBinding MediaContent}"
 											  ContentTemplate="{TemplateBinding MediaContentTemplate}"
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -527,39 +514,48 @@
 											  IsHitTestVisible="False"
 											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
-							<StackPanel Grid.Row="1"
-										Grid.ColumnSpan="2">
-								<!-- Header part-->
-								<ContentPresenter x:Name="HeaderContentPresenter"
-												  Content="{TemplateBinding HeaderContent}"
-												  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
-												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-												  AutomationProperties.AccessibilityView="Raw"
-												  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+							<!-- Header part-->
+							<ContentPresenter Grid.Row="1"
+											  x:Name="HeaderContentPresenter"
+											  Content="{TemplateBinding HeaderContent}"
+											  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+											  AutomationProperties.AccessibilityView="Raw"
+											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
-								<!-- SubHeader part-->
-								<ContentPresenter x:Name="SubHeaderContentPresenter"
-												  Content="{TemplateBinding SubHeaderContent}"
-												  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
-												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-												  AutomationProperties.AccessibilityView="Raw"
-												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
+							<!-- SubHeader part-->
+							<ContentPresenter Grid.Row="2"
+											  x:Name="SubHeaderContentPresenter"
+											  Content="{TemplateBinding SubHeaderContent}"
+											  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+											  AutomationProperties.AccessibilityView="Raw"
+											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
-								<!-- Supporting Content part-->
-								<ContentPresenter x:Name="SupportingContentPresenter"
-												  Content="{TemplateBinding SupportingContent}"
-												  ContentTemplate="{TemplateBinding SupportingContentTemplate}"
-												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-												  AutomationProperties.AccessibilityView="Raw"
-												  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
-							</StackPanel>
+							<!-- Ripple effect -->
+							<controls:Ripple Grid.RowSpan="4"
+											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+											 RippleSizeMultiplier="0.85"
+											 BorderBrush="{TemplateBinding BorderBrush}"
+											 BorderThickness="{TemplateBinding BorderThickness}"
+											 CornerRadius="{StaticResource CardsBorderRadius}"
+											 Padding="{TemplateBinding Padding}"
+											 AutomationProperties.AccessibilityView="Raw" />
+
+							<!-- Supporting Content part-->
+							<ContentPresenter Grid.Row="3"
+											  x:Name="SupportingContentPresenter"
+											  Content="{TemplateBinding SupportingContent}"
+											  ContentTemplate="{TemplateBinding SupportingContentTemplate}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+											  AutomationProperties.AccessibilityView="Raw"
+											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 
 							<!-- Icons section part -->
-							<ContentPresenter Grid.Row="1"
-											  Grid.ColumnSpan="2"
+							<ContentPresenter Grid.Row="3"
 											  x:Name="IconsContentPresenter"
 											  Content="{TemplateBinding IconsContent}"
 											  ContentTemplate="{TemplateBinding IconsContentTemplate}"
@@ -569,8 +565,7 @@
 											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}}" />
 
 							<!-- Expender part -->
-							<StackPanel Grid.Row="2"
-										Grid.ColumnSpan="2"
+							<StackPanel Grid.Row="4"
 										Visibility="{Binding ExpanderHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}">
 								<Rectangle x:Name="ExpanderSeparator"
 										   Height="1"
@@ -584,7 +579,7 @@
 												  Height="0" />
 
 								<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-											  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+											  HorizontalAlignment="Left"
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  Content="{TemplateBinding ExpanderHeaderContent}"
 											  ContentTemplate="{TemplateBinding ExpanderHeaderContentTemplate}"
@@ -605,6 +600,8 @@
 				Value="72" />
 		<Setter Property="MaxWidth"
 				Value="344" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
@@ -628,6 +625,7 @@
 						  MinHeight="{TemplateBinding MinHeight}"
 						  MaxWidth="{TemplateBinding MaxWidth}"
 						  MaxHeight="{TemplateBinding MaxHeight}"
+						  Margin="{TemplateBinding Margin}"
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  CornerRadius="{TemplateBinding CornerRadius}"
@@ -787,17 +785,6 @@
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<!-- Ripple effect -->
-						<controls:Ripple Grid.RowSpan="5"
-										 Grid.ColumnSpan="3"
-										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-										 RippleSizeMultiplier="0.85"
-										 BorderBrush="{TemplateBinding BorderBrush}"
-										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardsBorderRadius}"
-										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw" />
-
 						<!-- Avatart part -->
 						<ContentPresenter x:Name="AvatarContentPresenter"
 										  Content="{TemplateBinding AvatarContent}"
@@ -829,6 +816,19 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 						</StackPanel>
+
+						
+
+						<!-- Ripple effect -->
+						<controls:Ripple Grid.RowSpan="2"
+										 Grid.ColumnSpan="3"
+										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+										 RippleSizeMultiplier="0.85"
+										 BorderBrush="{TemplateBinding BorderBrush}"
+										 BorderThickness="{TemplateBinding BorderThickness}"
+										 CornerRadius="{StaticResource CardsBorderRadius}"
+										 Padding="{TemplateBinding Padding}"
+										 AutomationProperties.AccessibilityView="Raw" />
 
 						<!-- Icons section part -->
 						<ContentPresenter Grid.Column="2"
@@ -879,7 +879,7 @@
 											  Height="0" />
 
 							<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+										  HorizontalAlignment="Left"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  Content="{TemplateBinding ExpanderHeaderContent}"
 										  ContentTemplate="{TemplateBinding ExpanderHeaderContentTemplate}"
@@ -911,8 +911,10 @@
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="4" />
+				Value="{StaticResource CardsElevation}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -923,12 +925,14 @@
 										  MinHeight="{TemplateBinding MinHeight}"
 										  MaxWidth="{TemplateBinding MaxWidth}"
 										  MaxHeight="{TemplateBinding MaxHeight}"
+										  Margin="{TemplateBinding Margin}"
 										  Background="{TemplateBinding Background}"
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
-										  Elevation="{TemplateBinding Elevation}">
+										  Elevation="{TemplateBinding Elevation}"
+										  ShadowColor="{StaticResource CardElevationShadowColor}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
@@ -1048,10 +1052,10 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- TO-DO : Remove BorderBrush and BorderThickness properties when elevation is correclty supported for UWP -->
 						<Grid x:Name="GridRoot"
-							  win:BorderBrush="{TemplateBinding BorderBrush}"
-							  win:BorderThickness="{TemplateBinding BorderThickness}">
+							  BorderBrush="{TemplateBinding BorderBrush}"
+							  BorderThickness="{TemplateBinding BorderThickness}"
+							  CornerRadius="{TemplateBinding CornerRadius}">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
@@ -1087,17 +1091,6 @@
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
 
-							<!-- Ripple effect -->
-							<controls:Ripple Grid.RowSpan="5"
-											 Grid.ColumnSpan="3"
-											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 RippleSizeMultiplier="0.85"
-											 BorderBrush="{TemplateBinding BorderBrush}"
-											 BorderThickness="{TemplateBinding BorderThickness}"
-											 CornerRadius="{StaticResource CardsBorderRadius}"
-											 Padding="{TemplateBinding Padding}"
-											 AutomationProperties.AccessibilityView="Raw" />
-
 							<!-- Avatart part -->
 							<ContentPresenter x:Name="AvatarContentPresenter"
 											  Content="{TemplateBinding AvatarContent}"
@@ -1129,6 +1122,16 @@
 												  AutomationProperties.AccessibilityView="Raw"
 												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 							</StackPanel>
+							<!-- Ripple effect -->
+							<controls:Ripple Grid.RowSpan="2"
+											 Grid.ColumnSpan="3"
+											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+											 RippleSizeMultiplier="0.85"
+											 BorderBrush="{TemplateBinding BorderBrush}"
+											 BorderThickness="{TemplateBinding BorderThickness}"
+											 CornerRadius="{StaticResource CardsBorderRadius}"
+											 Padding="{TemplateBinding Padding}"
+											 AutomationProperties.AccessibilityView="Raw" />
 
 							<!-- Icons section part -->
 							<ContentPresenter Grid.Column="2"
@@ -1179,7 +1182,7 @@
 												  Height="0" />
 
 								<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-											  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+											  HorizontalAlignment="Left"
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  Content="{TemplateBinding ExpanderHeaderContent}"
 											  ContentTemplate="{TemplateBinding ExpanderHeaderContentTemplate}"
@@ -1199,6 +1202,8 @@
 				Value="72" />
 		<Setter Property="MaxWidth"
 				Value="344" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="Background"
@@ -1226,6 +1231,7 @@
 						  MinHeight="{TemplateBinding MinHeight}"
 						  MaxWidth="{TemplateBinding MaxWidth}"
 						  MaxHeight="{TemplateBinding MaxHeight}"
+						  Margin="{TemplateBinding Margin}"
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  CornerRadius="{TemplateBinding CornerRadius}"
@@ -1383,17 +1389,6 @@
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<!-- Ripple effect -->
-						<controls:Ripple Grid.RowSpan="3"
-										 Grid.ColumnSpan="2"
-										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-										 RippleSizeMultiplier="0.85"
-										 BorderBrush="{TemplateBinding BorderBrush}"
-										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardsBorderRadius}"
-										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw" />
-
 						<!-- Media content part -->
 						<ContentPresenter x:Name="MediaContentPresenter"
 										  Content="{TemplateBinding MediaContent}"
@@ -1423,6 +1418,16 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 						</StackPanel>
+
+						<!-- Ripple effect -->
+						<controls:Ripple Grid.ColumnSpan="3"
+										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+										 RippleSizeMultiplier="0.85"
+										 BorderBrush="{TemplateBinding BorderBrush}"
+										 BorderThickness="{TemplateBinding BorderThickness}"
+										 CornerRadius="{StaticResource CardsBorderRadius}"
+										 Padding="{TemplateBinding Padding}"
+										 AutomationProperties.AccessibilityView="Raw" />
 
 						<!-- Supporting Content part-->
 						<ContentPresenter Grid.Row="1"
@@ -1462,7 +1467,7 @@
 											  Height="0" />
 
 							<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+										  HorizontalAlignment="Left"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  Content="{TemplateBinding ExpanderHeaderContent}"
 										  ContentTemplate="{TemplateBinding ExpanderHeaderContentTemplate}"
@@ -1483,6 +1488,8 @@
 				Value="72" />
 		<Setter Property="MaxWidth"
 				Value="344" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="Background"
@@ -1501,8 +1508,10 @@
 				Value="Stretch" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="4" />
+				Value="{StaticResource CardsElevation}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -1513,12 +1522,14 @@
 										  MinHeight="{TemplateBinding MinHeight}"
 										  MaxWidth="{TemplateBinding MaxWidth}"
 										  MaxHeight="{TemplateBinding MaxHeight}"
+										  Margin="{TemplateBinding Margin}"
 										  Background="{TemplateBinding Background}"
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
-										  Elevation="{TemplateBinding Elevation}">
+										  Elevation="{TemplateBinding Elevation}"
+										  ShadowColor="{StaticResource CardElevationShadowColor}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
@@ -1638,10 +1649,10 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- TO-DO : Remove BorderBrush and BorderThickness properties when elevation is correclty supported for UWP -->
 						<Grid x:Name="GridRoot"
-							  win:BorderBrush="{TemplateBinding BorderBrush}"
-							  win:BorderThickness="{TemplateBinding BorderThickness}">
+							  BorderBrush="{TemplateBinding BorderBrush}"
+							  BorderThickness="{TemplateBinding BorderThickness}"
+							  CornerRadius="{TemplateBinding CornerRadius}">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
@@ -1675,17 +1686,6 @@
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
 
-							<!-- Ripple effect -->
-							<controls:Ripple Grid.RowSpan="3"
-											 Grid.ColumnSpan="2"
-											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 RippleSizeMultiplier="0.85"
-											 BorderBrush="{TemplateBinding BorderBrush}"
-											 BorderThickness="{TemplateBinding BorderThickness}"
-											 CornerRadius="{StaticResource CardsBorderRadius}"
-											 Padding="{TemplateBinding Padding}"
-											 AutomationProperties.AccessibilityView="Raw" />
-
 							<!-- Media content part -->
 							<ContentPresenter x:Name="MediaContentPresenter"
 											  Content="{TemplateBinding MediaContent}"
@@ -1715,6 +1715,16 @@
 												  AutomationProperties.AccessibilityView="Raw"
 												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsed}}" />
 							</StackPanel>
+
+							<!-- Ripple effect -->
+							<controls:Ripple Grid.ColumnSpan="3"
+											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+											 RippleSizeMultiplier="0.85"
+											 BorderBrush="{TemplateBinding BorderBrush}"
+											 BorderThickness="{TemplateBinding BorderThickness}"
+											 CornerRadius="{StaticResource CardsBorderRadius}"
+											 Padding="{TemplateBinding Padding}"
+											 AutomationProperties.AccessibilityView="Raw" />
 
 							<!-- Supporting Content part-->
 							<ContentPresenter Grid.Row="1"
@@ -1754,7 +1764,7 @@
 												  Height="0" />
 
 								<ToggleButton IsChecked="{Binding IsOpened, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-											  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+											  HorizontalAlignment="Left"
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  Content="{TemplateBinding ExpanderHeaderContent}"
 											  ContentTemplate="{TemplateBinding ExpanderHeaderContentTemplate}"

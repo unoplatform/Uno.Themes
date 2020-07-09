@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/2.0.54">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;xamarinios10;monoandroid90;xamarinmac20</TargetFrameworks>
@@ -14,7 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="3.0.0-dev.660" />
+    <PackageReference Include="Uno.UI" Version="3.0.0-dev.692" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
@@ -33,11 +33,11 @@
     <None Remove="Styles\Application\SelectionControlColors.xaml" />
     <None Remove="Styles\Controls\ComboBox.xaml" />
     <None Remove="Styles\Controls\FloatingActionButton.xaml" />
+    <None Remove="Styles\Controls\PasswordBox.xaml" />
     <None Remove="Styles\Controls\Snackbar.xaml" />
     <None Remove="Styles\Controls\NavigationView.xaml" />
     <None Remove="Styles\Controls\TextBlock.xaml" />
     <None Remove="Styles\Controls\ToggleButton.xaml" />
-    <None Remove="Styles\Controls\ToggleSwitch.xaml" />
     <None Remove="Themes\Generic.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -50,9 +50,10 @@
     <UpToDateCheckInput Remove="Styles\Controls\FloatingActionButton.xaml" />
     <UpToDateCheckInput Remove="Styles\Controls\Snackbar.xaml" />
     <UpToDateCheckInput Remove="Styles\Controls\NavigationView.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\PasswordBox.xaml" />
     <UpToDateCheckInput Remove="Styles\Controls\TextBlock.xaml" />
     <UpToDateCheckInput Remove="Styles\Controls\ToggleButton.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\ToggleSwitch.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\ToggleSwitch.xaml" />
     <UpToDateCheckInput Remove="Themes\Generic.xaml" />
   </ItemGroup>
   <ItemGroup>

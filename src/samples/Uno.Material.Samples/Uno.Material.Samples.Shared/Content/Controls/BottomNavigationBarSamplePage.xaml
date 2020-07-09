@@ -6,9 +6,15 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:entities="using:Uno.Material.Entities"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  mc:Ignorable="d">
+	  xmlns:wasm="http://uno.ui/wasm"
+	  xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  mc:Ignorable="d wasm">
 
-	<Grid>
+	<!-- No Border on phones, to emphasize the position of the BottomBar -->
+	<Grid wasm:BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+		  wasm:BorderThickness="1"
+		  win:BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+		  win:BorderThickness="1">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />

@@ -96,6 +96,7 @@ private void InitializeNavigationViewItems()
 		AddMenuItem<ComboBoxSamplePage>();
 		AddMenuItem<FabSamplePage>(content: ""FAB"");
 		AddMenuItem<NavigationViewSamplePage>();
+		AddMenuItem<PasswordBoxSamplePage>();
 		AddMenuItem<RadioButtonSamplePage>();
 		AddMenuItem<SnackBarSamplePage>();
 		AddMenuItem<TextBlockSamplePage>();
