@@ -4,48 +4,8 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
-		<ResourceDictionary Source="../Application/SelectionControlColors.xaml" />
+		<ResourceDictionary Source="../Application/TextBoxVariables.xaml" />
 	</ResourceDictionary.MergedDictionaries>
-
-	<!-- Label Resources -->
-	<StaticResource x:Key="TextBoxLabelDefaultColorBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
-	<x:Double x:Key="TextBoxLabelFontSize">16</x:Double>
-	<StaticResource x:Key="TextBoxLabelFocusColorBrush"
-					ResourceKey="MaterialPrimaryBrush" />
-	<StaticResource x:Key="TextBoxInputDefaultColorBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
-	<StaticResource x:Key="TextBoxInputFocusColorBrush"
-					ResourceKey="MaterialOnSurfaceBrush" />
-
-	<!-- Icon Resources -->
-	<StaticResource x:Key="TextBoxIconColorBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
-
-	<!-- Filled Resources -->
-	<SolidColorBrush x:Key="TextBoxFilledBackgroundColorBrush"
-					 Color="{StaticResource MaterialOnSurfaceColor}"
-					 Opacity="0.12" />
-	<StaticResource x:Key="TextBoxFilledIndicatorColorBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
-	<x:Double x:Key="TextBoxStrokeWidth">1</x:Double>
-	<StaticResource x:Key="TextBoxFilledFocusIndicatorColorBrush"
-					ResourceKey="MaterialPrimaryBrush" />
-	<x:Double x:Key="TextBoxFocusStrokeWidth">2</x:Double>
-
-	<!-- Outline Resources -->
-	<StaticResource x:Key="TextBoxOutlinedStrokeColorBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
-	<StaticResource x:Key="TextBoxOutlinedFocusStrokeColorBrush"
-					ResourceKey="MaterialPrimaryBrush" />
-	<x:Double x:Key="TextBoxOutlinedStrokeWidth">1</x:Double>
-
-	<!-- Corner Radius Resources -->
-	<Thickness x:Key="TextBoxFilledBorderRadius">4,4,0,0</Thickness>
-	<Thickness x:Key="TextBoxOutlinedBorderRadius">4</Thickness>
-
-	<!-- Converters -->
-
 
 	<Style x:Name="DeleteButtonStyle"
 		   TargetType="Button">
