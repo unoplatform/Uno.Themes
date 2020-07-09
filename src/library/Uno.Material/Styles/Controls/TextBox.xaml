@@ -45,7 +45,7 @@
 	<Thickness x:Key="TextBoxOutlinedBorderRadius">4</Thickness>
 
 	<!-- Converters -->
-	
+
 
 	<Style x:Name="DeleteButtonStyle"
 		   TargetType="Button">
@@ -152,7 +152,12 @@
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="0:0:0.2"
 														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-														 To="-16" />
+														 To="-11" />
+										<DoubleAnimation Storyboard.TargetName="ContentTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 To="5" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.2"
@@ -191,7 +196,7 @@
 											  Margin="0,0,8,0"
 											  HorizontalAlignment="Center"
 											  VerticalAlignment="Center"
-											  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"/>
+											  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 							<ScrollViewer x:Name="ContentElement"
 										  Grid.Column="1"
@@ -205,7 +210,11 @@
 										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
 										  IsTabStop="False"
 										  AutomationProperties.AccessibilityView="Raw"
-										  ZoomMode="Disabled" />
+										  ZoomMode="Disabled">
+								<ScrollViewer.RenderTransform>
+									<CompositeTransform x:Name="ContentTransform" />
+								</ScrollViewer.RenderTransform>
+							</ScrollViewer>
 
 							<TextBlock x:Name="PlaceholderElement"
 									   Grid.Column="1"
@@ -316,7 +325,12 @@
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="0:0:0.2"
 														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-														 To="-16" />
+														 To="-11" />
+										<DoubleAnimation Storyboard.TargetName="ContentTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="0:0:0.2"
+														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 To="5" />
 										<DoubleAnimation Storyboard.TargetName="Transform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.2"
@@ -354,7 +368,7 @@
 										  Margin="0,0,8,0"
 										  HorizontalAlignment="Center"
 										  VerticalAlignment="Center"
-										  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"/>
+										  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 						<ScrollViewer x:Name="ContentElement"
 									  Grid.Column="1"
@@ -368,7 +382,11 @@
 									  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
 									  IsTabStop="False"
 									  AutomationProperties.AccessibilityView="Raw"
-									  ZoomMode="Disabled" />
+									  ZoomMode="Disabled">
+							<ScrollViewer.RenderTransform>
+								<CompositeTransform x:Name="ContentTransform" />
+							</ScrollViewer.RenderTransform>
+						</ScrollViewer>
 
 						<TextBlock x:Name="PlaceholderElement"
 								   Grid.Column="1"
