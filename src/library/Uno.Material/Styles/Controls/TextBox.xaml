@@ -84,8 +84,9 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="DefaultMaterialTextBoxStyle"
+	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
+		
 		<Setter Property="Foreground"
 				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
 		<Setter Property="PlaceholderForeground"
@@ -102,6 +103,7 @@
 				Value="12,4" />
 		<Setter Property="MinHeight"
 				Value="50" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">
@@ -257,15 +259,31 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="OutlineMaterialTextBoxStyle"
-		   TargetType="TextBox"
-		   BasedOn="{StaticResource DefaultMaterialTextBoxStyle}">
+	<Style x:Key="MaterialOutlinedTextBoxStyle"
+		   TargetType="TextBox">
+		
 		<Setter Property="Background"
 				Value="Transparent" />
+		<Setter Property="Foreground"
+				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
+		<Setter Property="PlaceholderForeground"
+				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
 		<Setter Property="CornerRadius"
 				Value="4" />
+
+		<Setter Property="HorizontalContentAlignment"
+				Value="Left" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Padding"
+				Value="12,4" />
+		<Setter Property="MinHeight"
+				Value="50" />
+		
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">

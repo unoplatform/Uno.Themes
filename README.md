@@ -101,7 +101,7 @@ Here is what Colors.xaml would contain if you want both light and dark theme. (s
 - To use styles, just find the name of the style from our documentation or sample app and use it like this
 ```
 <Button Content="CONTAINED"
-	Style="{StaticResource ContainedMaterialButtonStyle}"/>
+	Style="{StaticResource MaterialContainedButtonStyle}"/>
 ```
 
 - Here is how to use our custom controls like a Card
@@ -112,7 +112,7 @@ xmlns:material="using:Uno.Material.Controls"
 
 <material:Card Header="Outlined card"
 	       SubHeader="With title and subitle"
-	       Style="{StaticResource OutlinedMaterialCardStyle}" />
+	       Style="{StaticResource MaterialOutlinedCardStyle}" />
 ```
 5. (Optional) Set material styles as the default for your whole application.
 For example, if you wish to use our ToggleSwitch style as your default style, simply set it as an implicit style in your app by adding the following code in your App.xaml
@@ -219,21 +219,22 @@ SurfaceVariantLightColor is the Surface color however in "Light" Palette is an o
 
 | **Controls** | **StyleNames**                                                                        | **Visual Reference** |
 |----------|-------------------------------------------------------------------------------------------|------------------|
-| Button   | ContainedMaterialButtonStyle <br> OutlinedMaterialButtonStyle<br> TextMaterialButtonStyle | TODO             |
+| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle<br> MaterialTextButtonStyle | TODO             |
 | CheckBox         | MaterialCheckBoxStyle                                                             | TODO             |
 | ComboBox         | MaterialComboBoxStyle                                                             | TODO             |
 | CommandBar       | MaterialCommandBarStyle                                                           | TODO             |
 | NavigationView   | MaterialNavigationViewStyle                                                       | TODO             |
+| PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              | TODO             |
 | RadioButton      | MaterialRadioButtonStyle                                                          | TODO             |
 | TextBlock        | Headline1 <br> Headline2 <br> Headline3 <br> Headline4 <br> Headline5 <br> Headline6 <br> Subtitle1 <br> Subtitle2 <br> Body1 <br> Body2 <br> Button <br> Caption <br> Overline                                 | TODO             |
-| TextBox          | DefaultMaterialTextBoxStyle <br> OutlineMaterialTextBoxStyle                      | TODO             |
-| ToggleButton     | TextMaterialToggleButtonStyle                                                     | TODO             |
+| TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      | TODO             |
+| ToggleButton     | MaterialTextToggleButtonStyle                                                     | TODO             |
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         | TODO             |
                                                                                
 ### Styles for custom controls
 | **Controls** | **StyleNames**                                                                        | **Visual Reference** |
 |--------------|---------------------------------------------------------------------------------------|------------------|
-| Card         | OutlinedMaterialCardStyle <br>  OtherOutlinedLayoutMaterialCardStyle                  | TODO             |
+| Card         | MaterialOutlinedCardStyle <br>  MaterialOtherOutlinedLayoutCardStyle                  | TODO             |
 | SnackBar     | MaterialSnackBarStyle                                                                 | TODO             |
 
 
