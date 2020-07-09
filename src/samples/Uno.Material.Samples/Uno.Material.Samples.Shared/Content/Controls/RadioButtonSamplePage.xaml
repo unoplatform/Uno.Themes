@@ -3,43 +3,48 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  mc:Ignorable="d">
+	  mc:Ignorable="d android ios">
 
-	<StackPanel BorderBrush="{StaticResource MaterialPrimaryVariantLightBrush}"
-				BorderThickness="1"
-				Margin="12"
-				Padding="12">
+	<ScrollViewer>
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
 
-		<!-- RadioButton OFF -->
-		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Unchecked">
-			<RadioButton GroupName="RadioButtonDemo"
-						 Content="UNCHECKED"
-						 Style="{StaticResource MaterialRadioButtonStyle}" />
-		</smtx:XamlDisplay>
+			<!-- RadioButton OFF -->
+			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Unchecked">
+				<RadioButton GroupName="RadioButtonDemo"
+							 Content="UNCHECKED"
+							 Style="{StaticResource MaterialRadioButtonStyle}" />
+			</smtx:XamlDisplay>
 
-		<!-- RadioButton ON -->
-		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Checked">
-			<RadioButton GroupName="RadioButtonDemo"
-						 Content="CHECKED"
-						 Style="{StaticResource MaterialRadioButtonStyle}"
-						 IsChecked="True" />
-		</smtx:XamlDisplay>
+			<!-- RadioButton ON -->
+			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Checked">
+				<RadioButton GroupName="RadioButtonDemo"
+							 Content="CHECKED"
+							 Style="{StaticResource MaterialRadioButtonStyle}"
+							 IsChecked="True" />
+			</smtx:XamlDisplay>
 
-		<!-- RadioButton OFF Disabled -->
-		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_UncheckedDisabled">
-			<RadioButton Content="UNCHECKED DISABLED"
-						 IsEnabled="False"
-						 Style="{StaticResource MaterialRadioButtonStyle}" />
-		</smtx:XamlDisplay>
+			<!-- RadioButton OFF Disabled -->
+			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_UncheckedDisabled">
+				<RadioButton Content="UNCHECKED DISABLED"
+							 IsEnabled="False"
+							 Style="{StaticResource MaterialRadioButtonStyle}" />
+			</smtx:XamlDisplay>
 
-		<!-- RadioButton ON Disabled -->
-		<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_CheckedDisabled">
-			<RadioButton Content="CHECKED DISABLED"
-						 IsChecked="True"
-						 IsEnabled="False"
-						 Style="{StaticResource MaterialRadioButtonStyle}" />
-		</smtx:XamlDisplay>
-	</StackPanel>
+			<!-- RadioButton ON Disabled -->
+			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_CheckedDisabled">
+				<RadioButton Content="CHECKED DISABLED"
+							 IsChecked="True"
+							 IsEnabled="False"
+							 Style="{StaticResource MaterialRadioButtonStyle}" />
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
 </Page>

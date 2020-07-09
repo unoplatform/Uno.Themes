@@ -3,12 +3,14 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content.Controls"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:converters="using:Uno.Material.Converters"
 	  xmlns:controls="using:Uno.Material.Controls"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  mc:Ignorable="d">
+	  mc:Ignorable="d android ios">
 
 	<Page.Resources>
 		<!-- Converters -->
@@ -183,8 +185,8 @@
 	<ScrollViewer>
 		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
 					BorderThickness="1"
-					Margin="12"
-					Orientation="Vertical"
+					android:Margin="12"
+					ios:Margin="12"
 					Padding="12">
 
 			<!-- Card Outlined -->
