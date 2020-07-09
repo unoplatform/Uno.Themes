@@ -87,6 +87,7 @@ namespace Uno.Material.Samples
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
 				AddMenuItem<NavigationViewSamplePage>(icon: "NavigationViewIcon");
+				AddMenuItem<PasswordBoxSamplePage>(icon: "PasswordBoxIcon");
 				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");
 				AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
