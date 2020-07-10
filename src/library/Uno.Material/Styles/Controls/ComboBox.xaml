@@ -14,7 +14,7 @@
 	<converters:FromNullToValueConverter x:Name="NullToVisible"
 										 NotNullValue="Collapsed"
 										 NullValue="Visible" />
-	
+
 	<!-- Brushes -->
 	<SolidColorBrush x:Key="ComboBoxBackgroundColorBrush"
 					 Color="{ThemeResource MaterialSurfaceColor}" />
@@ -137,7 +137,7 @@
 							<ContentPresenter.ContentTemplate>
 								<DataTemplate>
 									<Grid>
-										<TextBlock Text="{Binding }"
+										<TextBlock Text="{Binding}"
 												   Style="{StaticResource MaterialBody2}"
 												   VerticalAlignment="Center"
 												   Margin="16,0,0,0" />
@@ -292,7 +292,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<!-- Elevated View -->
-						<toolkit:ElevatedView Background="{ThemeResource ComboBoxBackgroundColorBrush}"
+						<toolkit:ElevatedView Background="{TemplateBinding Background}"
 											  HorizontalAlignment="Stretch"
 											  CornerRadius="{StaticResource ComboBoxBorderRadius}"
 											  Elevation="8"
@@ -347,12 +347,12 @@
 													  Margin="0,0,8,0"
 													  HorizontalAlignment="Center"
 													  VerticalAlignment="Center"
-													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"/>
+													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<!-- ContentPresenter -->
 									<ContentPresenter x:Name="ContentPresenter"
 													  Grid.Column="1"
-													  VerticalAlignment="Center"/>
+													  VerticalAlignment="Center" />
 
 									<!-- PlaceholderTextBlock -->
 									<TextBlock x:Name="PlaceholderTextBlock"
@@ -390,15 +390,13 @@
 
 								<!-- Popup -->
 								<Popup x:Name="Popup">
-									<Border x:Name="PopupBorder"
-											Background="{ThemeResource ComboBoxBackgroundColorBrush}"
-											HorizontalAlignment="Stretch"
-											CornerRadius="0,0,4,4"
-											BorderBrush="{StaticResource ComboBoxBorderBrush}"
-											BorderThickness="1">
-
-										<!-- ScrollViewer -->
+									<Border x:Name="PopupBorder">
+										<!-- Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
 										<ScrollViewer x:Name="ScrollViewer"
+													  Background="{TemplateBinding Background}"
+													  BorderBrush="{StaticResource ComboBoxBorderBrush}"
+													  BorderThickness="1"
+													  CornerRadius="0,0,4,4"
 													  AutomationProperties.AccessibilityView="Raw"
 													  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
 													  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
