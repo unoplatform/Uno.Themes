@@ -223,7 +223,7 @@ SurfaceVariantLightColor is the Surface color however in "Light" Palette is an o
 | CheckBox         | MaterialCheckBoxStyle                                                             | TODO             |
 | ComboBox         | MaterialComboBoxStyle                                                             | TODO             |
 | CommandBar       | MaterialCommandBarStyle                                                           | TODO             |
-| NavigationView   | MaterialNavigationViewStyle                                                       | TODO             |
+| NavigationView   | MaterialNavigationViewStyle <br> MaterialNoCompactMenuNavigationViewStyle         | TODO             |
 | PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              | TODO             |
 | RadioButton      | MaterialRadioButtonStyle                                                          | TODO             |
 | TextBlock        | Headline1 <br> Headline2 <br> Headline3 <br> Headline4 <br> Headline5 <br> Headline6 <br> Subtitle1 <br> Subtitle2 <br> Body1 <br> Body2 <br> Button <br> Caption <br> Overline                                 | TODO             |
