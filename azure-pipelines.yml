@@ -36,7 +36,10 @@ variables:
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
   
   # For Application.Building.Light optimizations
-  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')] 
+  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
+
+  # For release conditions
+  IsReleaseBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))]
 
   # Android configurations
   ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
@@ -139,8 +142,8 @@ stages:
     - template: build/stage-build.yml
 
 - stage: Release
-  # Only release when the build is not for a Pull Request.
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
   jobs:
   - job: Publish_NuGet_Internal
   
