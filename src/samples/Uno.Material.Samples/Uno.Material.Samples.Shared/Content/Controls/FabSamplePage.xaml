@@ -26,17 +26,25 @@
 					   FontWeight="Bold"
 					   Foreground="{StaticResource MaterialPrimaryBrush}" />
 
-			<!-- Icon -->
+			<!-- Icon Only Text -->
 			<TextBlock Text="Icon only" />
+			
 			<StackPanel Orientation="Horizontal">
-				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
 					<Button Style="{StaticResource MaterialFabStyle}">
 						<extensions:ControlExtensions.Icon>
 							<SymbolIcon Symbol="Add" />
 						</extensions:ControlExtensions.Icon>
 					</Button>
 				</smtx:XamlDisplay>
-				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab2">
+
+				<!-- Secondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
 					<Button Style="{StaticResource MaterialSecondaryFabStyle}">
 						<extensions:ControlExtensions.Icon>
 							<SymbolIcon Symbol="Add" />
@@ -45,23 +53,35 @@
 				</smtx:XamlDisplay>
 			</StackPanel>
 
-			<!-- Text -->
+			<!-- Text Only Text -->
 			<TextBlock Text="Text only" />
+			
 			<StackPanel Orientation="Horizontal">
-				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
 					<Button Content="CREATE"
 							Style="{StaticResource MaterialFabStyle}" />
 				</smtx:XamlDisplay>
-				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab2">
+
+				<!-- Secondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
 					<Button Content="CREATE"
 							Style="{StaticResource MaterialSecondaryFabStyle}" />
 				</smtx:XamlDisplay>
 			</StackPanel>
 
-			<!-- Icon Text -->
+			<!-- Icon and Text Text-->
 			<TextBlock Text="Icon and text" />
+			
 			<StackPanel Orientation="Horizontal">
-				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
 					<Button Content="CREATE"
 							Style="{StaticResource MaterialFabStyle}">
 						<extensions:ControlExtensions.Icon>
@@ -69,7 +89,11 @@
 						</extensions:ControlExtensions.Icon>
 					</Button>
 				</smtx:XamlDisplay>
-				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2">
+
+				<!-- Sedondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
 					<Button Content="CREATE"
 							Style="{StaticResource MaterialSecondaryFabStyle}">
 						<extensions:ControlExtensions.Icon>
