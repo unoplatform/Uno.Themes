@@ -145,4 +145,10 @@
       <ReferencePath Remove="@(_ReferencePathToRemove)" />
     </ItemGroup>
   </Target>
+  <Target Name="_PackageCopyToOutput" BeforeTargets="Build">
+    <ItemGroup>
+        <_packages Include="$(TargetDir)\*.pkg" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_packages)" DestinationFolder="$(PackageOutputPath)\" />
+  </Target>
 </Project>
