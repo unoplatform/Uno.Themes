@@ -1,0 +1,103 @@
+﻿jobs:
+- job: Publish_AppCenter_UWA
+  pool: $(windowsPoolName)
+
+  container: nventive/build-agent:vs16.6.0
+
+  steps:
+  - checkout: none
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: current
+      downloadType: single
+      artifactName: UWP
+      
+  - task: AppCenterDistribute@3
+    displayName: Deploy UWP to AppCenter
+    inputs:
+      serverEndpoint: AppCenter
+      appSlug: 'nventive/Uno-Material-UWP'
+      appFile: $(System.ArtifactsDirectory)/UWP/*.msixbundle
+      releaseNotesInput: |
+        Uno Material
+      isSilent: true
+
+- job:  Publish_AppCenter_iOS
+  pool: 
+    name: $(macOSPoolName)
+    demands:
+    - fastlane
+    - Xamarin.iOS -equals 13.16
+
+  variables:
+  - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
+
+  steps:
+  - checkout: none
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: current
+      downloadType: single
+      artifactName: iOS
+
+  - task: InstallAppleCertificate@2
+    displayName: Install Apple Certificate
+    inputs:
+      certSecureFile: 'apple.appstore.distribution.p12' # Name of the p12 certificate in the secure files (in azure devops pipeline)
+      certPwd: '$(appleappstorecertificatepassword)' 
+      keychain: 'temp'
+      deleteCert: true
+
+  - task: InstallAppleProvisioningProfile@1
+    displayName: 'Install Apple Provisioning Profile'
+    inputs:
+      provisioningProfileLocation: 'secureFiles'
+      provProfileSecureFile: 'UnoMaterial.mobileprovision' # Name of the .mobileprovision file in the secure files.
+  
+  - task: IpaResign@1
+    displayName: 'Resign IPA with latest certificates'
+    inputs:
+      ipaPath: '$(System.ArtifactsDirectory)/iOS/*.ipa'
+      signMethod: id
+      signIdIdentity: '$(Certificate.signingIdentity)'
+      provisionMethod: id
+      provIdProfileUuid: '$(Profile.provisioningProfileUuid)'
+      installFastlane: false
+
+  - task: AppCenterDistribute@3
+    displayName: Deploy iOS to AppCenter
+    inputs:
+      serverEndpoint: AppCenter
+      appSlug: 'nventive/Uno-Material-iOS'
+      appFile: $(System.ArtifactsDirectory)/iOS/*.ipa
+      symbolsDsymFiles: $(System.ArtifactsDirectory)/iOS/*.dSYM
+      symbolsIncludeParentDirectory: true
+      releaseNotesInput: |
+        Uno Material
+      isSilent: true
+
+- job:  Publish_AppCenter_Android
+  pool: $(windowsPoolName)
+
+  container: nventive/build-agent:vs16.6.0
+  
+  steps:
+  - checkout: none
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: current
+      downloadType: single
+      artifactName: Android
+  
+  - task: AppCenterDistribute@3
+    displayName: Deploy Android to AppCenter
+    inputs:
+      serverEndpoint: AppCenter
+      appSlug: 'nventive/Uno-Material-Android'
+      appFile: $(System.ArtifactsDirectory)/Android/*.material-Signed.apk
+      releaseNotesInput: |
+        Uno Material
+      isSilent: true
