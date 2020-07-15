@@ -168,4 +168,9 @@ stages:
     steps:
     - template: build/stage-release-testflight.yml
 
-
+- stage: Release_AppCenter
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  
+  jobs:
+  - template: build/stage-release-appcenter.yml
