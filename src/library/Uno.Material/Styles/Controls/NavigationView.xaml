@@ -434,7 +434,7 @@
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="*" />
 										</Grid.RowDefinitions>
-										
+
 										<ContentControl x:Name="HeaderContent"
 														MinHeight="{StaticResource PaneToggleButtonHeight}"
 														IsTabStop="False"
@@ -490,7 +490,8 @@
 										AutomationProperties.LandmarkType="Navigation"
 										Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PaneToggleButtonVisibility}"
 										Background="Transparent"
-										VerticalAlignment="Top" />
+										VerticalAlignment="Top"
+										HorizontalAlignment="Left" />
 							</Grid>
 						</Grid>
 					</Grid>
@@ -990,11 +991,11 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="LayoutRoot"
-						  Height="{TemplateBinding MinHeight}"
-						  Margin="{TemplateBinding Padding}"
 						  Background="{TemplateBinding Background}"
-						  HorizontalAlignment="Stretch">
-
+						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+						  Height="{TemplateBinding MinHeight}"
+						  Width="{TemplateBinding MinWidth}"
+						  Margin="{TemplateBinding Padding}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -1067,10 +1068,15 @@
 
 						<Border x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
+								android:Visibility="Collapsed"
 								Opacity="0" />
 
 						<Border x:Name="PressedOverlay"
 								Background="{StaticResource MaterialOnSurfacePressedBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
 								Opacity="0" />
 					</Grid>
 				</ControlTemplate>
@@ -1107,9 +1113,10 @@
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="LayoutRoot"
 						  Height="{TemplateBinding MinHeight}"
+						  Width="{TemplateBinding MinWidth}"
 						  Margin="{TemplateBinding Padding}"
 						  Background="{TemplateBinding Background}"
-						  HorizontalAlignment="Stretch">
+						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -1186,10 +1193,14 @@
 
 						<Border x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
 								Opacity="0" />
 
 						<Border x:Name="PressedOverlay"
 								Background="{StaticResource MaterialOnSurfacePressedBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
 								Opacity="0" />
 					</Grid>
 				</ControlTemplate>
