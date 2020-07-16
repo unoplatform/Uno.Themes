@@ -16,7 +16,9 @@
 		   TargetType="RadioButton">
 
 		<Setter Property="Background"
-				Value="{StaticResource SelectControlToggleOffButtonColor}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{StaticResource SelectControlStrokeColor}" />
 		<Setter Property="Padding"
@@ -141,16 +143,12 @@
 
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="OuterEllipse.Stroke"
-												Value="{StaticResource SelectControlBackgroundColor}" />
-										<Setter Target="CheckEllipse.Fill"
-												Value="{StaticResource SelectControlBackgroundColor}" />
 										<Setter Target="CheckEllipse.Opacity"
 												Value="1" />
-										<Setter Target="FocusRing.StrokeThickness"
+										<Setter Target="OuterEllipse_Checked.Opacity"
 												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource SelectControlToggleOnFocusBackgroundColor}" />
+										<Setter Target="OuterEllipse_Unchecked.Opacity"
+												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -164,14 +162,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
-												Value="1" />
+												Value="{StaticResource MaterialFocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -183,15 +181,14 @@
 							<ColumnDefinition Width="{StaticResource RadioCheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-
+						
 						<Ellipse x:Name="FocusRing"
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
 								 Width="{StaticResource FocusAreaSize}"
 								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource SelectControlToggleOffFocusButtonColor}"
-								 Stroke="{StaticResource SelectControlBackgroundColor}"
+								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 StrokeThickness="0"
 								 Opacity="0" />
@@ -216,22 +213,33 @@
 
 						<Grid Height="{StaticResource RadioCheckAreaSize}"
 							  Width="{StaticResource RadioCheckAreaSize}">
-							<Ellipse x:Name="OuterEllipse"
+
+							<Ellipse x:Name="OuterEllipse_Checked"
+									 HorizontalAlignment="Stretch"
+									 VerticalAlignment="Stretch"
+									 Stretch="Uniform"
+									 UseLayoutRounding="False"
+									 Stroke="{TemplateBinding Background}"
+									 StrokeThickness="{StaticResource RadioBorderThickness}"
+									 Opacity="0"/>
+
+							<Ellipse x:Name="OuterEllipse_Unchecked"
 									 HorizontalAlignment="Stretch"
 									 VerticalAlignment="Stretch"
 									 Stretch="Uniform"
 									 UseLayoutRounding="False"
 									 Stroke="{TemplateBinding BorderBrush}"
 									 StrokeThickness="{StaticResource RadioBorderThickness}" />
+
 							<Ellipse x:Name="CheckEllipse"
 									 HorizontalAlignment="Stretch"
 									 VerticalAlignment="Stretch"
 									 Stretch="Uniform"
-									 Margin="5"
 									 UseLayoutRounding="False"
 									 Fill="{TemplateBinding Background}"
 									 Opacity="0"
-									 StrokeThickness="0" />
+									 StrokeThickness="0"
+									 Margin="5" />
 						</Grid>
 
 						<ContentPresenter x:Name="ContentPresenter"
@@ -241,12 +249,23 @@
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Grid.Column="1"
 										  AutomationProperties.AccessibilityView="Raw"
-										  TextWrapping="Wrap" />
+										  TextWrapping="Wrap"
+										  Grid.Column="1" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialSecondaryRadioButtonStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource MaterialRadioButtonStyle}">
+
+		<Setter Property="Background"
+				Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource SelectControlStrokeColor}" />
+	</Style>
+	
 </ResourceDictionary>
