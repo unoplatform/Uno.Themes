@@ -7,6 +7,7 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
 					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					xmlns:converters="using:Uno.Material.Converters"
@@ -434,7 +435,7 @@
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="*" />
 										</Grid.RowDefinitions>
-										
+
 										<ContentControl x:Name="HeaderContent"
 														MinHeight="{StaticResource PaneToggleButtonHeight}"
 														IsTabStop="False"
@@ -1469,8 +1470,9 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<!-- Workaround for #92 - Android PointerOver state is being applied and maintained on click -->
+										<not_android:Setter Target="HoverOverlay.Opacity"
+															Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
@@ -1585,8 +1587,9 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<!-- Workaround for #92 - Android PointerOver state is being applied and maintained on click -->
+										<not_android:Setter Target="HoverOverlay.Opacity"
+															Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
