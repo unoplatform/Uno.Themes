@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Uno.Disposables;
 using Uno.Material.Samples.Content.Controls;
 using Uno.Material.Samples.Content.Styles;
 using Uno.Material.Samples.Shared.Content.Extensions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
 
 namespace Uno.Material.Samples
 {
@@ -64,8 +63,19 @@ namespace Uno.Material.Samples
 			else if (args.InvokedItemContainer is NavigationViewItem item)
 			{
 				NavView.Header = item.Content;
-				ContentFrame.Navigate((Type)item.Tag);
+				ContentNavigation((Type)item.Tag);
 			}
+		}
+
+		private async void ContentNavigation(Type page)
+		{
+#if __ANDROID__
+			// Workaround #251 - By closing the navigation pane with a delay, prior to navigation, we avoid flickers from too much work being done on the UI Thread.
+			NavView.IsPaneOpen = false;
+			await Task.Delay(TimeSpan.FromSeconds(.2));
+#endif
+
+			ContentFrame.Navigate(page);
 		}
 
 		private void InitializeNavigationViewItems()
@@ -130,7 +140,7 @@ namespace Uno.Material.Samples
 			}
 		}
 
-		#endregion
+#endregion
 
 		void ToggleTheme()
 		{
