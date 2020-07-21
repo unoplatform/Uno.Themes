@@ -157,8 +157,8 @@ Inside your AppTheme add two item's "colorControlActivated" (the on color for yo
 	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
 
 		<!-- Color style for toggle switch -->
-		<item name="colorControlActivated">@color/PrimaryColor</item>
-		<item name="colorSwitchThumbNormal">@color/SurfaceColor</item>
+		<item name="colorControlActivated">@color/MaterialPrimaryColor</item>
+		<item name="colorSwitchThumbNormal">@color/MaterialSurfaceVariantColor</item>
 	</style>
 </resources>
 
@@ -168,8 +168,9 @@ Inside your AppTheme add two item's "colorControlActivated" (the on color for yo
 ```
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<color name="PrimaryColor">#5B4CF5</color>
-	<color name="SurfaceColor">#FFFFFF</color>
+	<color name="MaterialPrimaryColor">#5B4CF5</color>
+	<!-- SurfaceColor -->
+	<color name="MaterialSurfaceVariantColor">#FFFFFF</color>
 </resources>
 
 ```
@@ -178,8 +179,9 @@ Inside your AppTheme add two item's "colorControlActivated" (the on color for yo
 ```
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<color name="PrimaryColor">#B6A8FB</color>
-	<color name="SurfaceColor">#121212</color>
+	<color name="MaterialPrimaryColor">#B6A8FB</color>
+	<!-- A variant of OnSurfaceMediumColor without alpha opacity (can't use alphas with android colors)  -->
+	 <color name="MaterialSurfaceVariantColor">#808080</color>
 </resources>
 
 ```
