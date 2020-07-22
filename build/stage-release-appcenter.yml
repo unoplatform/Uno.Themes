@@ -30,7 +30,7 @@
     - fastlane
 
   variables:
-  - group: apple.enterprise # import all variables for certificate from the library in azure devops
+  - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
 
   steps:
   - checkout: none
@@ -55,7 +55,7 @@
     name: Profile
     inputs:
       provisioningProfileLocation: 'secureFiles'
-      provProfileSecureFile: 'UnoMaterial.mobileprovision' # Name of the .mobileprovision file in the secure files.
+      provProfileSecureFile: 'UnoMaterial__Ad_Hoc.mobileprovision' # Name of the .mobileprovision file in the secure files.
   
   - task: IpaResign@1
     displayName: 'Resign IPA with latest certificates'
