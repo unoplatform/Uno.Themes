@@ -73,8 +73,19 @@ private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvoke
 	else if (args.InvokedItemContainer is NavigationViewItem item)
 	{
 		NavView.Header = item.Content;
-		ContentFrame.Navigate((Type)item.Tag);
+		ContentNavigation((Type)item.Tag);
 	}
+}
+
+private async void ContentNavigation(Type page)
+{
+#if __ANDROID__
+	// By closing the navigation pane with a delay, prior to navigation, we avoid flickers from too much work being done on the UI Thread.
+	NavView.IsPaneOpen = false;
+	await Task.Delay(TimeSpan.FromSeconds(.2));
+#endif
+
+	ContentFrame.Navigate(page);
 }
 
 private void InitializeNavigationViewItems()
