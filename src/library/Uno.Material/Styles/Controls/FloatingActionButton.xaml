@@ -17,8 +17,24 @@
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
+	<!-- Need full color for disabled state or else the elevated view looks weird -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- Light Theme -->
+		<ResourceDictionary x:Key="Light">
+			<Color x:Key="ButtonFabDisabledFabBackgroundColor">#9F9F9F</Color>
+		</ResourceDictionary>
+		
+		<!-- Dark Theme -->
+		<ResourceDictionary x:Key="Dark">
+			<Color x:Key="ButtonFabDisabledFabBackgroundColor">#606060</Color>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+			
 	<SolidColorBrush x:Key="ButtonFabFocusOverlayBackgroundColor"
 					 Color="Transparent" />
+	<SolidColorBrush x:Key="ButtonFabDisabledFabBackgroundColorBrush"
+					 Color="{ThemeResource ButtonFabDisabledFabBackgroundColor}" />
 	<StaticResource x:Key="ButtonFabFocusOverlayBorderColor"
 					ResourceKey="MaterialOnPrimaryBrush" />
 
@@ -71,18 +87,22 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Grid>
+
 						<toolkit:ElevatedView x:Name="ElevatedView"
 											  Margin="0,0,6,6"
 											  Elevation="6"
 											  ShadowColor="Black"
 											  CornerRadius="{TemplateBinding CornerRadius}"
 											  Background="Transparent">
+
 							<controls:Ripple x:Name="Ripple"
 											 CornerRadius="{TemplateBinding CornerRadius}"
 											 Feedback="{TemplateBinding Foreground}"
 											 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 											 RippleSizeMultiplier="{StaticResource MaterialFabRippleMultiplier}">
-								<Grid Background="{TemplateBinding Background}">
+
+								<Grid x:Name="Root"
+									  Background="{TemplateBinding Background}">
 									<StackPanel x:Name="ContentPanel"
 												Orientation="Horizontal"
 												Margin="{TemplateBinding Padding}">
@@ -94,7 +114,6 @@
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 												 Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<ContentPresenter Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-															  Background="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
@@ -123,7 +142,9 @@
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
+
 								<VisualState x:Name="Normal" />
+
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="FabFocusBorder.Background"
@@ -131,35 +152,48 @@
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="Disabled" />
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+
+										<Setter Target="Root.Background"
+												Value="{StaticResource ButtonFabDisabledFabBackgroundColorBrush}" />
+									</VisualState.Setters>
+								</VisualState>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="FocusStates">
+
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FabFocusBorder.Background"
 												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="FabFocusBorder.Background"
 												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 
 							<VisualStateGroup>
+
 								<!-- Known Issue - Must be applied before smalldevices else issues on wasm and ios -->
 								<VisualState x:Name="OtherDevices">
 									<VisualState.StateTriggers>
 										<AdaptiveTrigger MinWindowWidth="460" />
 									</VisualState.StateTriggers>
 								</VisualState>
+
 								<VisualState x:Name="SmallDevices">
 									<VisualState.StateTriggers>
 										<AdaptiveTrigger MinWindowWidth="0" />
 									</VisualState.StateTriggers>
+
 									<VisualState.Setters>
 										<Setter Target="ElevatedView.CornerRadius"
 												Value="{StaticResource MaterialFabCorderRadius_Small}" />
@@ -176,9 +210,11 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	
 	<Style x:Key="MaterialSecondaryFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
+		
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSecondaryBrush}" />
 		<Setter Property="Foreground"
