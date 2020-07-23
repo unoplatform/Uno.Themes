@@ -11,14 +11,14 @@
     inputs:
       buildType: current
       downloadType: single
-      artifactName: UWP
+      artifactName: $(UWPArtifactName)
       
   - task: AppCenterDistribute@3
     displayName: Deploy UWP to AppCenter
     inputs:
       serverEndpoint: AppCenter
       appSlug: 'nventive/Uno-Material-UWP'
-      appFile: $(System.ArtifactsDirectory)/UWP/*.msixbundle
+      appFile: $(System.ArtifactsDirectory)/$(UWPArtifactName)/*.msixbundle
       releaseNotesInput: |
         Uno Material
       isSilent: true
@@ -30,7 +30,7 @@
     - fastlane
 
   variables:
-  - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
+  - group: apple.appstore.distribution # Import all variables for certificate from the library in azure devops
 
   steps:
   - checkout: none
@@ -39,14 +39,14 @@
     inputs:
       buildType: current
       downloadType: single
-      artifactName: iOS
+      artifactName: $(iOSArtifactName)
 
   - task: InstallAppleCertificate@2
     displayName: Install Apple Certificate
     name: Certificate
     inputs:
-      certSecureFile: 'nventive_enterprise.p12' # Name of the p12 certificate in the secure files (in azure devops pipeline)
-      certPwd: '$(applecertificatepassword)' 
+      certSecureFile: 'apple.appstore.distribution.p12' # Name of the p12 certificate in the secure files (in azure devops pipeline)
+      certPwd: '$(appleappstorecertificatepassword)' 
       keychain: 'temp'
       deleteCert: true
 
@@ -60,7 +60,7 @@
   - task: IpaResign@1
     displayName: 'Resign IPA with latest certificates'
     inputs:
-      ipaPath: '$(System.ArtifactsDirectory)/iOS/*.ipa'
+      ipaPath: '$(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa'
       signMethod: id
       signIdIdentity: '$(Certificate.signingIdentity)'
       provisionMethod: id
@@ -72,8 +72,8 @@
     inputs:
       serverEndpoint: AppCenter
       appSlug: 'nventive/Uno-Material-iOS'
-      appFile: $(System.ArtifactsDirectory)/iOS/*.ipa
-      symbolsDsymFiles: $(System.ArtifactsDirectory)/iOS/*.dSYM
+      appFile: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa
+      symbolsDsymFiles: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.dSYM
       symbolsIncludeParentDirectory: true
       releaseNotesInput: |
         Uno Material
@@ -91,14 +91,14 @@
     inputs:
       buildType: current
       downloadType: single
-      artifactName: Android
+      artifactName: $(AndroidArtifactName)
   
   - task: AppCenterDistribute@3
     displayName: Deploy Android to AppCenter
     inputs:
       serverEndpoint: AppCenter
       appSlug: 'nventive/Uno-Material-Android'
-      appFile: $(System.ArtifactsDirectory)/Android/*.material-Signed.apk
+      appFile: $(System.ArtifactsDirectory)/$(AndroidArtifactName)/*.material-Signed.apk
       releaseNotesInput: |
         Uno Material
       isSilent: true
