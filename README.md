@@ -10,6 +10,7 @@ This library is designed to help you use the [material design system](https://ma
 Platform support: 
 - WinUI / UWP
 - iOS
+- MacOS
 - Android
 - WebAssembly
 
@@ -221,23 +222,24 @@ SurfaceVariantLightColor is the Surface color however in "Light" Palette is an o
 
 | **Controls** | **StyleNames**                                                                        | **Visual Reference** |
 |----------|-------------------------------------------------------------------------------------------|------------------|
-| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle<br> MaterialTextButtonStyle | TODO             |
-| CheckBox         | MaterialCheckBoxStyle                                                             | TODO             |
+| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle <br> MaterialTextButtonStyle <br> MaterialContainedSecondaryButtonStyle <br> MaterialOutlinedSecondaryButtonStyle<br> MaterialTextSecondaryButtonStyle | TODO             |
+| CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         | TODO             |
 | ComboBox         | MaterialComboBoxStyle                                                             | TODO             |
 | CommandBar       | MaterialCommandBarStyle                                                           | TODO             |
 | NavigationView   | MaterialNavigationViewStyle <br> MaterialNoCompactMenuNavigationViewStyle         | TODO             |
 | PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              | TODO             |
-| RadioButton      | MaterialRadioButtonStyle                                                          | TODO             |
-| TextBlock        | Headline1 <br> Headline2 <br> Headline3 <br> Headline4 <br> Headline5 <br> Headline6 <br> Subtitle1 <br> Subtitle2 <br> Body1 <br> Body2 <br> Button <br> Caption <br> Overline                                 | TODO             |
+| RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   | TODO             |
+| TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonTextBlockStyle <br> MaterialCaption <br> MaterialOverline                                 | TODO             |
 | TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      | TODO             |
 | ToggleButton     | MaterialTextToggleButtonStyle                                                     | TODO             |
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         | TODO             |
                                                                                
 ### Styles for custom controls
 | **Controls** | **StyleNames**                                                                        | **Visual Reference** |
-|--------------|---------------------------------------------------------------------------------------|------------------|
-| Card         | MaterialOutlinedCardStyle <br>  MaterialOtherOutlinedLayoutCardStyle                  | TODO             |
-| SnackBar     | MaterialSnackBarStyle                                                                 | TODO             |
+|----------------------|-------------------------------------------------------------------------------|------------------|
+| Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle | TODO             |
+| BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              | TODO             |
+| SnackBar             | MaterialSnackBarStyle                                                         | TODO             |
 
 
 ## Changelog
