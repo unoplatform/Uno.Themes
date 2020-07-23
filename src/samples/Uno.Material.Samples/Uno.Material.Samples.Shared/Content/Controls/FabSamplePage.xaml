@@ -74,7 +74,7 @@
 				</smtx:XamlDisplay>
 			</StackPanel>
 
-			<!-- Icon and Text Text-->
+			<!-- Icon and Text Text -->
 			<TextBlock Text="Icon and text" />
 			
 			<StackPanel Orientation="Horizontal">
@@ -96,6 +96,40 @@
 								  Margin="16,10,16,0">
 					<Button Content="CREATE"
 							Style="{StaticResource MaterialSecondaryFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+
+
+
+			<!-- Disabled -->
+			<TextBlock Text="Disabled" />
+			
+			<StackPanel Orientation="Horizontal">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab_Disabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialFabStyle}"
+							IsEnabled="False">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Sedondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2_Disabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryFabStyle}"
+							IsEnabled="False">
 						<extensions:ControlExtensions.Icon>
 							<SymbolIcon Symbol="Add" />
 						</extensions:ControlExtensions.Icon>
