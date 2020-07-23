@@ -105,7 +105,7 @@ stages:
           ArtifactName: $(iOSArtifactName)
         macOS:
           ApplicationConfiguration: Release
-          ApplicationPlatform: iPhone
+          ApplicationPlatform: macOS
           ArtifactName: $(macOSArtifactName)          
     pool:
       name: $(macOSPoolName)
@@ -115,13 +115,13 @@ stages:
     variables:
     - name: SkipUnknownFrameworks
       value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
-    - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
+    - group: apple.appstore.distribution # Import all variables for certificate from the library in azure devops
 
     steps:
     - task: InstallAppleCertificate@2
       displayName: Install Apple Certificate
       inputs:
-        certSecureFile: 'apple.appstore.distribution.p12' # Name of the p12 certificate in the secure files (in azure devops pipeline)
+        certSecureFile: 'apple.appstore.distribution.p12' # Name of the p12 certificate in the secure files (in azure devops library)
         certPwd: '$(appleappstorecertificatepassword)' 
         keychain: 'temp'
         deleteCert: true
@@ -141,36 +141,26 @@ stages:
         
     - template: build/stage-build.yml
 
-- stage: Release
+- stage: Release_Nuget
   # Only release when the build is not a Pull Request and it's using one of the proper release branches
   condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  dependsOn: Build
+
   jobs:
-  - job: Publish_NuGet_Internal
-  
-    pool:
-      name: $(windowsPoolName)
-
-    container: nventive/build-agent:vs16.6.0
-
-    steps:
-    - template: build/stage-release.yml
-    
-  - job: Publish_iOS_TestFlight
-
-    pool:
-      name: $(macOSPoolName)
-      demands:
-        - Xamarin.iOS -equals 13.16
-    
-    variables:
-    - group: apple.appstore.distribution # import all variables for certificate from the library in azure devops
-
-    steps:
-    - template: build/stage-release-testflight.yml
+  - template: build/stage-release-nuget.yml
 
 - stage: Release_AppCenter
   # Only release when the build is not a Pull Request and it's using one of the proper release branches
   condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  dependsOn: Build
   
   jobs:
   - template: build/stage-release-appcenter.yml
+
+- stage: Release_TestFlight
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  dependsOn: Build
+    
+  jobs:
+  - template: build/stage-release-testflight.yml
