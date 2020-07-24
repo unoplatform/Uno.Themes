@@ -51,9 +51,6 @@ namespace Uno.Material.Samples
 			this.Resources.MergedDictionaries.Add(new Material.MaterialColorPalette());
 			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Application/ColorPaletteOverride.xaml") });
 			this.Resources.MergedDictionaries.Add(new Material.MaterialLibraryResources());
-			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Application/Fonts.xaml") });
-			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Button.xaml") });
-			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/XamlDisplay.xaml") });
 
 
 #if DEBUG

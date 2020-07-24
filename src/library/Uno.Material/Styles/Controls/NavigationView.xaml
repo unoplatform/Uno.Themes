@@ -23,8 +23,7 @@
 	<StaticResource x:Key="NiceBrush"
 					 ResourceKey="MaterialOnPrimaryBrush" />
 
-	<!--<SolidColorBrush x:Key="NavDrawersTextBrush"
-					 Color="{ThemeResource MaterialOnSurfaceColor}" />-->
+	<!---->
 
 	<Style x:Key="MaterialPaneToggleButtonStyle"
 		   TargetType="Button">
@@ -50,8 +49,8 @@
 				Value="Cyan" />
 		<!-- THIS IS THE ONE CRASHING!! -->
 		<!-- SystemAccentColor works, but anything in Colors.xaml doesnt -->
-		<!--<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />-->
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Content"
 				Value="&#xE700;" />
 		<Setter Property="Template">
@@ -267,7 +266,7 @@
 
 
 	<converters:FromOpenToCustomValueConverter x:Name="OpenToPaneButtonStyle"
-											   ValueIfOpen="{StaticResource MaterialPaneToggleButtonStyle}"
+											   ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}"
 											   ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
 
 	<Style x:Key="MaterialNavigationViewStyle"
