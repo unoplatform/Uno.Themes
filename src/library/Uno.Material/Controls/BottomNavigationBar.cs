@@ -15,7 +15,7 @@ namespace Uno.Material.Controls
 	{
 		private const string LayoutRootName = "PART_LayoutRoot";
 
-		private bool _initialized = false;
+		private bool _templateApplied = false;
 		private Grid _layoutRoot;
 
 		public BottomNavigationBar()
@@ -24,6 +24,7 @@ namespace Uno.Material.Controls
 			Items = new List<BottomNavigationBarItem>();
 
 			Unloaded += BottomNavigationBar_Unloaded;
+			Loaded += BottomNavigationBar_Loaded;
 		}
 
 		#region Property: Items
@@ -60,14 +61,14 @@ namespace Uno.Material.Controls
 			base.OnApplyTemplate();
 
 			_layoutRoot = this.GetTemplateChild<Grid>(GetTemplateChild, LayoutRootName);
-			_initialized = true;
+			_templateApplied = true;
 
 			GenerateTabItems();
 		}
 
 		internal void GenerateTabItems()
 		{
-			if (!_initialized) return;
+			if (!_templateApplied) return;
 			if (_layoutRoot != null)
 			{
 				// todo: diff update
@@ -96,9 +97,12 @@ namespace Uno.Material.Controls
 
 		private void BottomNavigationBar_Unloaded(object sender, RoutedEventArgs e)
 		{
-			Unloaded -= BottomNavigationBar_Unloaded;
-
 			UnregisterBarItemsEvents();
+		}
+
+		private void BottomNavigationBar_Loaded(object sender, RoutedEventArgs e)
+		{
+			RegisterBarItemsEvents();
 		}
 
 		private static void OnItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -137,8 +141,13 @@ namespace Uno.Material.Controls
 
 		private void RegisterBarItemsEvents()
 		{
+			if (!_templateApplied) return;
+
 			foreach (var item in Items.Safe())
 			{
+				item.Checked -= BottomNavigationBarItem_Checked;
+				item.Unchecked -= BottomNavigationBarItem_Unchecked;
+
 				item.Checked += BottomNavigationBarItem_Checked;
 				item.Unchecked += BottomNavigationBarItem_Unchecked;
 			}
