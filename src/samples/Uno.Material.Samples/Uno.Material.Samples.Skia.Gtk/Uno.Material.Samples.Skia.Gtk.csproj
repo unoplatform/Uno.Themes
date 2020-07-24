@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<OutputType Condition="'$(Configuration)'=='Reelase'">WinExe</OutputType>
+		<OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+	
+	<ItemGroup>
+		<!-- Note that for WebAssembly version 1.1.1 of the console logger required -->
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
+		<PackageReference Include="nventive.Nimue.Application.Building.Light" Version="0.1.0-alpha.55">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="nventive.Nimue.Application.Packaging" Version="0.1.0-alpha.55">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="nventive.Nimue.Application.Versioning" Version="0.1.0-alpha.55">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Uno.ShowMeTheXAML" Version="1.0.55" />
+		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild" Version="1.0.55" />
+		<PackageReference Include="Uno.UI.Skia.Gtk" Version="3.0.0-dev.966" />
+		<PackageReference Include="Uno.UI.RemoteControl" Version="3.0.0-dev.966" Condition="'$(Configuration)'=='Debug'" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
+	</ItemGroup>
+	
+	<Import Project="..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems" Label="Shared" />
+
+</Project>
