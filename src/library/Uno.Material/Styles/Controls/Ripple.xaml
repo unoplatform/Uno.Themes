@@ -8,12 +8,6 @@
 
 	<!-- Starting implementation acknowledgement from project https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/2740f14a814896d42032ae0013b765a8a0ec04c3/MaterialDesignThemes.Uwp/Themes/Generic.xaml -->
 
-	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="../Application/Colors.xaml" />
-		<ResourceDictionary Source="../Application/SelectionControlColors.xaml" />
-	</ResourceDictionary.MergedDictionaries>
-
-
 	<!-- Known Issue - Wasm pressed state/ripple effect is only applied on first press -->
 	<Style TargetType="controls:Ripple">
 		<Setter Property="HorizontalAlignment"
@@ -23,7 +17,7 @@
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Feedback"
-				Value="{StaticResource MaterialBackgroundColor}" />
+				Value="White" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Ripple">

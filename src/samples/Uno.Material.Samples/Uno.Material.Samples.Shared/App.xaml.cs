@@ -32,8 +32,9 @@ namespace Uno.Material.Samples
 		{
 			ConfigureFilters(global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory);
 			ConfigureXamlDisplay();
-
+			
 			this.InitializeComponent();
+			
 			this.Suspending += OnSuspending;
 		}
 

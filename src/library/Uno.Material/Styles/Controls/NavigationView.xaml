@@ -15,21 +15,268 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
-		<ResourceDictionary Source="../Application/NavigationDrawerColors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<x:Double x:Key="NavDrawersFontSize">14</x:Double>
 	<x:Int32 x:Key="NavDrawersElevation">16</x:Int32>
 
-	<!-- Converters -->
+	<StaticResource x:Key="NiceBrush"
+					 ResourceKey="MaterialOnPrimaryBrush" />
+
+	<SolidColorBrush x:Key="NavDrawersTextBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialMediumOpacity}" />
+	<SolidColorBrush x:Key="NavDrawersIconBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialMediumOpacity}" />
+
+	<Style x:Key="MaterialPaneToggleButtonStyle"
+		   TargetType="Button">
+		<Setter Property="FontSize"
+				Value="16" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource SymbolThemeFontFamily}" />
+		<Setter Property="MinHeight"
+				Value="10" />
+		<Setter Property="MinWidth"
+				Value="52" />
+		<Setter Property="Padding"
+				Value="2" />
+		<Setter Property="HorizontalAlignment"
+				Value="Left" />
+		<Setter Property="VerticalAlignment"
+				Value="Top" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Background"
+				Value="Cyan" />
+		<!-- THIS IS THE ONE CRASHING!! -->
+		<!-- SystemAccentColor works, but anything in Colors.xaml doesnt -->
+		<Setter Property="Foreground"
+				Value="{StaticResource NavDrawersTextBrush}" />
+		<Setter Property="Content"
+				Value="&#xE700;" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="LayoutRoot"
+						  Height="{TemplateBinding MinHeight}"
+						  Margin="{TemplateBinding Padding}"
+						  Background="{TemplateBinding Background}"
+						  HorizontalAlignment="Stretch">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="Orange" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="Red" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="Yellow" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="Red" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="Yellow" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="Orange" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid Width="{TemplateBinding MinWidth}"
+							  HorizontalAlignment="Left">
+							<Viewbox x:Name="IconHost"
+									 Width="16"
+									 Height="16"
+									 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									 AutomationProperties.AccessibilityView="Raw">
+
+								<ContentPresenter x:Name="ContentPresenter"
+												  Content="{TemplateBinding Content}"
+												  FontSize="{TemplateBinding FontSize}"
+												  AutomationProperties.AccessibilityView="Raw" />
+							</Viewbox>
+						</Grid>
+
+						<Border x:Name="HoverOverlay"
+								Background="Red"
+								Opacity="0" />
+
+						<Border x:Name="PressedOverlay"
+								Background="Red"
+								Opacity="0" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialPaneBackArrowToggleButtonStyle"
+		   TargetType="Button">
+		<Setter Property="FontSize"
+				Value="16" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource SymbolThemeFontFamily}" />
+		<Setter Property="MinHeight"
+				Value="{StaticResource PaneToggleButtonHeight}" />
+		<Setter Property="MinWidth"
+				Value="52" />
+		<Setter Property="Padding"
+				Value="2" />
+		<Setter Property="HorizontalAlignment"
+				Value="Left" />
+		<Setter Property="VerticalAlignment"
+				Value="Top" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Background"
+				Value="{StaticResource NavDrawersBackgroundBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource NavDrawersTextBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="LayoutRoot"
+						  Height="{TemplateBinding MinHeight}"
+						  Margin="{TemplateBinding Padding}"
+						  Background="{TemplateBinding Background}"
+						  HorizontalAlignment="Stretch">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="{ThemeResource MaterialOnSurfaceDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="{ThemeResource ToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{ThemeResource ToggleButtonForegroundChecked}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Background"
+												Value="{ThemeResource MaterialOnSurfaceDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid Width="{TemplateBinding MinWidth}"
+							  HorizontalAlignment="Left">
+							<Viewbox x:Name="IconHost"
+									 Width="16"
+									 Height="16"
+									 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									 AutomationProperties.AccessibilityView="Raw">
+
+								<Path ios:Data="M24.2,0.5 L27.7,4 L7.5,24.2 L27.7,44.4 L24.2,47.9 L0.5,24.2 z"
+									  win:Data="M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z"
+									  android:Data="M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z"
+									  wasm:Data="M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z"
+									  Fill="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
+									  Stretch="Fill"
+									  UseLayoutRounding="False" />
+							</Viewbox>
+						</Grid>
+
+						<Border x:Name="HoverOverlay"
+								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
+								Opacity="0" />
+
+						<Border x:Name="PressedOverlay"
+								Background="{StaticResource MaterialOnSurfacePressedBrush}"
+								Opacity="0" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
 	<converters:FromOpenToCustomValueConverter x:Name="OpenToPaneButtonStyle"
-											   ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}"
+											   ValueIfOpen="{StaticResource MaterialPaneToggleButtonStyle}"
 											   ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
 
 	<Style x:Key="MaterialNavigationViewStyle"
 		   TargetType="NavigationView">
-		<Setter Property="PaneToggleButtonStyle"
-				Value="{StaticResource PaneToggleButtonStyle}" />
+
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="CompactPaneLength"
@@ -198,7 +445,7 @@
 							</Grid.RowDefinitions>
 
 							<StackPanel x:Name="TopNavArea"
-										Background="{StaticResource NavDrawersBackgroundColor}"
+										Background="{StaticResource NavDrawersBackgroundBrush}"
 										Grid.Row="0"
 										HorizontalAlignment="Stretch"
 										VerticalAlignment="Top"
@@ -235,7 +482,7 @@
 													HorizontalContentAlignment="Stretch"
 													Grid.Column="2" />
 
-									<!-- Top nav list -->
+									 <!--Top nav list--> 
 									<NavigationViewList AutomationProperties.LandmarkType="Navigation"
 														x:Name="TopNavMenuItemsHost"
 														Grid.Column="3"
@@ -263,18 +510,16 @@
 									<Button x:Name="TopNavOverflowButton"
 											Grid.Column="4"
 											Content="More"
-											Style="{StaticResource NavigationViewOverflowButtonStyleWhenPaneOnTop}"
+											
 											Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OverflowButtonVisibility}">
 
 										<Button.Flyout>
 											<Flyout Placement="Bottom">
 												<Flyout.FlyoutPresenterStyle>
-													<!-- Based on is required until https://github.com/unoplatform/uno/issues/119 is fixed -->
-													<Style TargetType="FlyoutPresenter"
-														   BasedOn="{StaticResource DefaultFlyoutPresenter}">
+													<Style TargetType="FlyoutPresenter">
 														<Setter Property="Padding"
 																Value="0,8" />
-														<!-- Set negative top margin to make the flyout align exactly with the button -->
+														 <!--Set negative top margin to make the flyout align exactly with the button--> 
 														<Setter Property="Margin"
 																Value="0,-4,0,0" />
 													</Style>
@@ -321,7 +566,7 @@
 													Grid.Column="7" />
 
 									<NavigationViewItem x:Name="SettingsTopNavPaneItem"
-														Style="{ThemeResource NavigationViewSettingsItemStyleWhenOnTopPane}"
+														
 														Grid.Column="8"
 														Icon="Setting" />
 
@@ -338,24 +583,24 @@
 									   IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}"
 									   IsTabStop="False"
 									   OpenPaneLength="{TemplateBinding OpenPaneLength}"
-									   PaneBackground="{StaticResource NavDrawersBackgroundColor}"
+									   PaneBackground="{StaticResource NavDrawersBackgroundBrush}"
 									   Grid.Row="1">
 
-								<!-- Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane -->
+								 <!--Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane--> 
 								<SplitView.Pane>
 									<Grid x:Name="PaneContentGrid"
 										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="0" />
-											<!-- above button margin + back button space -->
+											 <!--above button margin + back button space--> 
 											<RowDefinition x:Name="PaneContentGridToggleButtonRow"
 														   Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="8" />
-											<!-- above list margin -->
+											 <!--above list margin--> 
 											<RowDefinition Height="*" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
@@ -402,7 +647,7 @@
 														HorizontalContentAlignment="Stretch"
 														Grid.Row="5" />
 
-										<!-- Left nav list -->
+										 <!--Left nav list--> 
 										<NavigationViewList x:Name="MenuItemsHost"
 															Grid.Row="7"
 															Margin="0,0,0,20"
@@ -434,7 +679,7 @@
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="*" />
 										</Grid.RowDefinitions>
-										
+
 										<ContentControl x:Name="HeaderContent"
 														MinHeight="{StaticResource PaneToggleButtonHeight}"
 														IsTabStop="False"
@@ -455,6 +700,7 @@
 
 						</Grid>
 
+						
 						<!--
 							Notes:
 							- InternalVisibleBoundsPadding is added to this control to make this template compatible
@@ -462,6 +708,7 @@
 
 							- Canvas.ZIndex is not supported in Uno Grid yet, see https://github.com/unoplatform/uno/issues/325
 						-->
+						
 						<Grid x:Name="PaneToggleButtonGrid"
 							  Margin="0,0,0,8"
 							  HorizontalAlignment="Left"
@@ -486,7 +733,6 @@
 										IsEnabled="{TemplateBinding IsBackEnabled}" />
 
 								<Button x:Name="TogglePaneButton"
-										Style="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Converter={StaticResource OpenToPaneButtonStyle}}"
 										AutomationProperties.LandmarkType="Navigation"
 										Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PaneToggleButtonVisibility}"
 										Background="Transparent"
@@ -499,9 +745,9 @@
 		</Setter>
 	</Style>
 
-
+	
 	<!--Style which ensures the navigation never displays the menu in "Compact" mode-->
-	<Style x:Key="MaterialNoCompactMenuNavigationViewStyle"
+	<!--<Style x:Key="MaterialNoCompactMenuNavigationViewStyle"
 		   BasedOn="{StaticResource MaterialNavigationViewStyle}"
 		   TargetType="NavigationView">
 		<Setter Property="CompactPaneLength"
@@ -597,7 +843,7 @@
 							<VisualStateGroup x:Name="PaneStateListSizeGroup">
 								<VisualState x:Name="ListSizeFull" />
 								
-								<!--Display the list as empty instead of compact-->
+								--><!--Display the list as empty instead of compact--><!--
 								<VisualState x:Name="ListSizeCompact">
 									<VisualState.Setters>
 										<Setter Target="MenuItemsHost.Width"
@@ -659,7 +905,7 @@
 							</Grid.RowDefinitions>
 
 							<StackPanel x:Name="TopNavArea"
-										Background="{StaticResource NavDrawersBackgroundColor}"
+										Background="{StaticResource NavDrawersBackgroundBrush}"
 										Grid.Row="0"
 										HorizontalAlignment="Stretch"
 										VerticalAlignment="Top"
@@ -696,7 +942,7 @@
 													HorizontalContentAlignment="Stretch"
 													Grid.Column="2" />
 
-									<!-- Top nav list -->
+									 --><!-- Top nav list --><!-- 
 									<NavigationViewList AutomationProperties.LandmarkType="Navigation"
 														x:Name="TopNavMenuItemsHost"
 														Grid.Column="3"
@@ -724,18 +970,16 @@
 									<Button x:Name="TopNavOverflowButton"
 											Grid.Column="4"
 											Content="More"
-											Style="{StaticResource NavigationViewOverflowButtonStyleWhenPaneOnTop}"
+											
 											Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OverflowButtonVisibility}">
 
 										<Button.Flyout>
 											<Flyout Placement="Bottom">
 												<Flyout.FlyoutPresenterStyle>
-													<!-- Based on is required until https://github.com/unoplatform/uno/issues/119 is fixed -->
-													<Style TargetType="FlyoutPresenter"
-														   BasedOn="{StaticResource DefaultFlyoutPresenter}">
+													<Style TargetType="FlyoutPresenter">
 														<Setter Property="Padding"
 																Value="0,8" />
-														<!-- Set negative top margin to make the flyout align exactly with the button -->
+														 --><!--Set negative top margin to make the flyout align exactly with the button--><!-- 
 														<Setter Property="Margin"
 																Value="0,-4,0,0" />
 													</Style>
@@ -782,7 +1026,7 @@
 													Grid.Column="7" />
 
 									<NavigationViewItem x:Name="SettingsTopNavPaneItem"
-														Style="{ThemeResource NavigationViewSettingsItemStyleWhenOnTopPane}"
+														
 														Grid.Column="8"
 														Icon="Setting" />
 
@@ -799,24 +1043,24 @@
 									   IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}"
 									   IsTabStop="False"
 									   OpenPaneLength="{TemplateBinding OpenPaneLength}"
-									   PaneBackground="{StaticResource NavDrawersBackgroundColor}"
+									   PaneBackground="{StaticResource NavDrawersBackgroundBrush}"
 									   Grid.Row="1">
 
-								<!-- Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane -->
+								 --><!--Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane--><!-- 
 								<SplitView.Pane>
 									<Grid x:Name="PaneContentGrid"
 										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="0" />
-											<!-- above button margin + back button space -->
+											 --><!--above button margin + back button space--><!-- 
 											<RowDefinition x:Name="PaneContentGridToggleButtonRow"
 														   Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="8" />
-											<!-- above list margin -->
+											 --><!--above list margin--><!-- 
 											<RowDefinition Height="*" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
@@ -863,7 +1107,7 @@
 														HorizontalContentAlignment="Stretch"
 														Grid.Row="5" />
 
-										<!-- Left nav list -->
+										 --><!--Left nav list--><!-- 
 										<NavigationViewList x:Name="MenuItemsHost"
 															Grid.Row="7"
 															Margin="0,0,0,20"
@@ -897,8 +1141,8 @@
 											<RowDefinition Height="*" />
 										</Grid.RowDefinitions>
 
-										<!--Padding to compensate for the fact that there is no side panel in ListSizeCompact for this style, so we must
-										ensure that the content is not placed behind the ToggleButton-->
+										--><!--Padding to compensate for the fact that there is no side panel in ListSizeCompact for this style, so we must
+										ensure that the content is not placed behind the ToggleButton--><!--
 										<Grid x:Name="ListSizeCompactPadding"
 											  Height="{StaticResource PaneToggleButtonHeight}"
 											  Visibility="Collapsed" />
@@ -924,13 +1168,15 @@
 
 						</Grid>
 
-						<!--
+						
+						--><!--
 							Notes:
 							- InternalVisibleBoundsPadding is added to this control to make this template compatible
 							  with notched devices by default. This behavior is not present in Microsoft's default UWP default.
 
 							- Canvas.ZIndex is not supported in Uno Grid yet, see https://github.com/unoplatform/uno/issues/325
-						-->
+						--><!--
+						
 						<Grid x:Name="PaneToggleButtonGrid"
 							  Margin="0,0,0,8"
 							  HorizontalAlignment="Left"
@@ -966,13 +1212,13 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style>-->
 
-	<Style TargetType="NavigationViewItem">
+	<!--<Style TargetType="NavigationViewItem">
 		<Setter Property="Foreground"
-				Value="{StaticResource NavDrawersTextColor}" />
+				Value="{StaticResource NavDrawersTextBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource NavDrawersBackgroundColor}" />
+				Value="{StaticResource NavDrawersBackgroundBrush}" />
 		<Setter Property="FontWeight"
 				Value="Normal" />
 		<Setter Property="FontSize"
@@ -1122,82 +1368,14 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style>-->
 
-	<!-- Default style for Windows.UI.Xaml.Controls.FlyoutPresenter -->
-	<Style x:Key="DefaultFlyoutPresenter"
-		   TargetType="FlyoutPresenter">
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="IsTabStop"
-				Value="False" />
-		<Setter Property="Background"
-				Value="{ThemeResource FlyoutPresenterBackground}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource FlyoutBorderThemeBrush}" />
-		<Setter Property="BorderThickness"
-				Value="{ThemeResource FlyoutBorderThemeThickness}" />
-		<Setter Property="Padding"
-				Value="{ThemeResource FlyoutContentThemePadding}" />
-		<Setter Property="MinWidth"
-				Value="{ThemeResource FlyoutThemeMinWidth}" />
-		<Setter Property="MaxWidth"
-				Value="{ThemeResource FlyoutThemeMaxWidth}" />
-		<Setter Property="MinHeight"
-				Value="{ThemeResource FlyoutThemeMinHeight}" />
-		<Setter Property="MaxHeight"
-				Value="{ThemeResource FlyoutThemeMaxHeight}" />
-		<Setter Property="ScrollViewer.HorizontalScrollMode"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-				Value="Hidden" />
-		<Setter Property="ScrollViewer.VerticalScrollMode"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-				Value="Hidden" />
-		<win:Setter Property="ScrollViewer.ZoomMode"
-					Value="Disabled" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="FlyoutPresenter">
-					<Border Background="{TemplateBinding Background}"
-							BackgroundSizing="OuterBorderEdge"
-							BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							CornerRadius="{TemplateBinding CornerRadius}"
-							Padding="{ThemeResource FlyoutBorderThemePadding}">
-
-						<ScrollViewer x:Name="ScrollViewer"
-									  xamarin:ZoomMode="Disabled"
-									  win:ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
-									  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-									  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-									  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-									  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-									  AutomationProperties.AccessibilityView="Raw">
-
-							<ContentPresenter Content="{TemplateBinding Content}"
-											  ContentTemplate="{TemplateBinding ContentTemplate}"
-											  ContentTransitions="{TemplateBinding ContentTransitions}"
-											  Margin="{TemplateBinding Padding}"
-											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-						</ScrollViewer>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
-	<!-- Settings NavigationViewItem Style-->
-	<Style TargetType="NavigationViewItem"
+	<!--<Style TargetType="NavigationViewItem"
 		   x:Key="NavigationViewSettingsItemStyleWhenOnTopPane">
 		<Setter Property="Foreground"
-				Value="{StaticResource NavDrawersTextColor}" />
+				Value="{StaticResource NavDrawersTextBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource NavDrawersBackgroundColor}" />
+				Value="{StaticResource NavDrawersBackgroundBrush}" />
 		<Setter Property="FontWeight"
 				Value="Normal" />
 		<Setter Property="FontSize"
@@ -1234,9 +1412,9 @@
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background"
-												Value="{StaticResource NavDrawersSelectedColor}" />
+												Value="{StaticResource NavDrawersSelectedBrush}" />
 										<Setter Target="Icon.Foreground"
-												Value="{StaticResource NavDrawersSelectedIconColor}" />
+												Value="{StaticResource NavDrawersSelectedIconBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOverSelected">
@@ -1293,14 +1471,14 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style>-->
 
-	<Style TargetType="NavigationViewItemPresenter"
+	<!--<Style TargetType="NavigationViewItemPresenter"
 		   x:Key="NavigationViewItemPresenterStyleWhenOnLeftPane">
 		<Setter Property="Foreground"
-				Value="{StaticResource NavDrawersTextColor}" />
+				Value="{StaticResource NavDrawersTextBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource NavDrawersBackgroundColor}" />
+				Value="{StaticResource NavDrawersBackgroundBrush}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 		<Setter Property="HorizontalContentAlignment"
@@ -1331,11 +1509,11 @@
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background"
-												Value="{StaticResource NavDrawersSelectedColor}" />
+												Value="{StaticResource NavDrawersSelectedBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource NavDrawersSelectedTextColor}" />
+												Value="{StaticResource NavDrawersSelectedTextBrush}" />
 										<Setter Target="Icon.Foreground"
-												Value="{StaticResource NavDrawersSelectedIconColor}" />
+												Value="{StaticResource NavDrawersSelectedIconBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOverSelected">
@@ -1343,11 +1521,11 @@
 										<Setter Target="HoverOverlay.Opacity"
 												Value="1" />
 										<Setter Target="LayoutRoot.Background"
-												Value="{StaticResource NavDrawersSelectedColor}" />
+												Value="{StaticResource NavDrawersSelectedBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource NavDrawersSelectedTextColor}" />
+												Value="{StaticResource NavDrawersSelectedTextBrush}" />
 										<Setter Target="Icon.Foreground"
-												Value="{StaticResource NavDrawersSelectedIconColor}" />
+												Value="{StaticResource NavDrawersSelectedIconBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PressedSelected">
@@ -1355,11 +1533,11 @@
 										<Setter Target="PressedOverlay.Opacity"
 												Value="1" />
 										<Setter Target="LayoutRoot.Background"
-												Value="{StaticResource NavDrawersSelectedColor}" />
+												Value="{StaticResource NavDrawersSelectedBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource NavDrawersSelectedTextColor}" />
+												Value="{StaticResource NavDrawersSelectedTextBrush}" />
 										<Setter Target="Icon.Foreground"
-												Value="{StaticResource NavDrawersSelectedIconColor}" />
+												Value="{StaticResource NavDrawersSelectedIconBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -1426,247 +1604,11 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style>-->
 
-	<!-- PaneToggleButton Style-->
-	<Style x:Key="MaterialPaneToggleButtonStyle"
-		   TargetType="Button">
-		<Setter Property="FontSize"
-				Value="16" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource SymbolThemeFontFamily}" />
-		<Setter Property="MinHeight"
-				Value="{StaticResource PaneToggleButtonHeight}" />
-		<Setter Property="MinWidth"
-				Value="52" />
-		<Setter Property="Padding"
-				Value="2" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Top" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Background"
-				Value="{StaticResource NavDrawersBackgroundColor}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource NavDrawersTextColor}" />
-		<Setter Property="Content"
-				Value="&#xE700;" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Grid x:Name="LayoutRoot"
-						  Height="{TemplateBinding MinHeight}"
-						  Margin="{TemplateBinding Padding}"
-						  Background="{TemplateBinding Background}"
-						  HorizontalAlignment="Stretch">
+	 <!--PaneToggleButton Style-->
 
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceDisabledBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Checked">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundChecked}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundChecked}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="CheckedPointerOver">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="CheckedPressed">
-									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="CheckedDisabled">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceDisabledBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Grid Width="{TemplateBinding MinWidth}"
-							  HorizontalAlignment="Left">
-							<Viewbox x:Name="IconHost"
-									 Width="16"
-									 Height="16"
-									 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-									 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									 AutomationProperties.AccessibilityView="Raw">
-
-								<ContentPresenter x:Name="ContentPresenter"
-												  Content="{TemplateBinding Content}"
-												  FontSize="{TemplateBinding FontSize}"
-												  AutomationProperties.AccessibilityView="Raw" />
-							</Viewbox>
-						</Grid>
-
-						<Border x:Name="HoverOverlay"
-								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
-								Opacity="0" />
-
-						<Border x:Name="PressedOverlay"
-								Background="{StaticResource MaterialOnSurfacePressedBrush}"
-								Opacity="0" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
-	<Style x:Key="MaterialPaneBackArrowToggleButtonStyle"
-		   TargetType="Button">
-		<Setter Property="FontSize"
-				Value="16" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource SymbolThemeFontFamily}" />
-		<Setter Property="MinHeight"
-				Value="{StaticResource PaneToggleButtonHeight}" />
-		<Setter Property="MinWidth"
-				Value="52" />
-		<Setter Property="Padding"
-				Value="2" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Top" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Background"
-				Value="{StaticResource NavDrawersBackgroundColor}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource NavDrawersTextColor}" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Grid x:Name="LayoutRoot"
-						  Height="{TemplateBinding MinHeight}"
-						  Margin="{TemplateBinding Padding}"
-						  Background="{TemplateBinding Background}"
-						  HorizontalAlignment="Stretch">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceDisabledBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Checked">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundChecked}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundChecked}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="CheckedPointerOver">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="CheckedPressed">
-									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="CheckedDisabled">
-									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceDisabledBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Grid Width="{TemplateBinding MinWidth}"
-							  HorizontalAlignment="Left">
-							<Viewbox x:Name="IconHost"
-									 Width="16"
-									 Height="16"
-									 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-									 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									 AutomationProperties.AccessibilityView="Raw">
-
-								<Path ios:Data="M24.2,0.5 L27.7,4 L7.5,24.2 L27.7,44.4 L24.2,47.9 L0.5,24.2 z"
-									  win:Data="M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z"
-									  android:Data="M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z"
-									  wasm:Data="M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z"
-									  Fill="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
-									  Stretch="Fill"
-									  UseLayoutRounding="False" />
-							</Viewbox>
-						</Grid>
-
-						<Border x:Name="HoverOverlay"
-								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
-								Opacity="0" />
-
-						<Border x:Name="PressedOverlay"
-								Background="{StaticResource MaterialOnSurfacePressedBrush}"
-								Opacity="0" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
-	<Style TargetType="NavigationViewItemSeparator">
+	<!--<Style TargetType="NavigationViewItemSeparator">
 		<Setter Property="IsEnabled"
 				Value="False" />
 		<Setter Property="IsTabStop"
@@ -1700,14 +1642,14 @@
 						<Rectangle x:Name="Separator"
 								   Height="1"
 								   Margin="16,10"
-								   Fill="{StaticResource NavDrawersBackgroundColor}" />
+								   Fill="{StaticResource NavDrawersBackgroundBrush}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style>-->
 
-	<SolidColorBrush x:Key="SplitViewDismissBackgroundColor"
+	<!--<SolidColorBrush x:Key="SplitViewDismissBackgroundBrush"
 					 Color="Black"
 					 Opacity="0.5" />
 
@@ -2270,7 +2212,7 @@
 											  Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<!--Content Area-->
+						--><!--Content Area--><!--
 						<Grid x:Name="ContentRoot"
 							  Grid.ColumnSpan="2">
 							<Border Child="{TemplateBinding Content}" />
@@ -2280,13 +2222,13 @@
 											VerticalAlignment="Stretch">
 								<Button.Template>
 									<ControlTemplate>
-										<Border Background="{StaticResource SplitViewDismissBackgroundColor}" />
+										<Border Background="{StaticResource SplitViewDismissBackgroundBrush}" />
 									</ControlTemplate>
 								</Button.Template>
 							</xamarin:Button>
 						</Grid>
 
-						<!--Pane Content Area-->
+						--><!--Pane Content Area--><!--
 						<Grid x:Name="PaneRoot"
 							  Grid.ColumnSpan="2"
 							  HorizontalAlignment="Left"
@@ -2308,9 +2250,9 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</ios:Style>
+	</ios:Style>-->
 
-	<android:Style x:Key="DefaultSplitViewStyle"
+	<!--<android:Style x:Key="DefaultSplitViewStyle"
 				   TargetType="SplitView">
 		<Setter Property="OpenPaneLength"
 				Value="{StaticResource NativeDefaultSplitViewOpenPaneLength}" />
@@ -2331,6 +2273,6 @@
 	</android:Style>
 
 	<xamarin:Style TargetType="SplitView"
-				   BasedOn="{StaticResource DefaultSplitViewStyle}" />
+				   BasedOn="{StaticResource DefaultSplitViewStyle}" />-->
 
 </ResourceDictionary>
