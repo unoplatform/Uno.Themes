@@ -7,15 +7,23 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<!-- Import all styles from Uno.Material -->
-				<material:MaterialLibraryResources />
+				<!-- Import default color palette --><!--
+				<material:MaterialColorPalette />
+
+				--><!-- Override default colors with your own colors --><!--
+				<ResourceDictionary Source="ms-appx:///Styles/Application/ColorPaletteOverride.xaml"/>
+
+				--><!-- Import all Brushes and control styles -->
+				<!-- IMPORTANT: This must be declared after MaterialColorPalette and your own palette --><!--
+				<material:MaterialLibraryResources />-->
 
 				<!-- Application custom styles -->
-				<ResourceDictionary Source="ms-appx:///Styles/Application/Fonts.xaml" />
+				<!--<ResourceDictionary Source="ms-appx:///Styles/Application/Fonts.xaml" />
 				<ResourceDictionary Source="ms-appx:///Styles/Button.xaml" />
-				<ResourceDictionary Source="ms-appx:///Styles/XamlDisplay.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/XamlDisplay.xaml" />-->
+
 			</ResourceDictionary.MergedDictionaries>
-			
+
 			<!-- Temp: needed in-app until https://github.com/unoplatform/uno/issues/2924 is fixed -->
 			<Style TargetType="toolkit:ElevatedView">
 				<Setter Property="Template">

@@ -33,7 +33,11 @@ namespace Uno.Material.Samples
 			ConfigureFilters(global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory);
 			ConfigureXamlDisplay();
 
+
 			this.InitializeComponent();
+
+
+
 			this.Suspending += OnSuspending;
 		}
 
@@ -44,6 +48,14 @@ namespace Uno.Material.Samples
 		/// <param name="e">Details about the launch request and process.</param>
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
+			this.Resources.MergedDictionaries.Add(new Material.MaterialColorPalette());
+			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Application/ColorPaletteOverride.xaml") });
+			this.Resources.MergedDictionaries.Add(new Material.MaterialLibraryResources());
+			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Application/Fonts.xaml") });
+			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Button.xaml") });
+			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/XamlDisplay.xaml") });
+
+
 #if DEBUG
 			if (System.Diagnostics.Debugger.IsAttached)
 			{
