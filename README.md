@@ -131,88 +131,9 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 <CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
 ```
 
-7. If you are using our ToggleSwitches to get the proper native colors on android their is some modification needed.
-The reasoning for this is to apply the native android shadowing on the off value of the ToggleSwitch, and proper focus shadow colors when ToggleSwitches are clicked
+7. (Optional) If you are using our [ToggleSwitches](#toggleSwitch) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
 
-7.1 From your Android project head go to YourProject.Droid/Resources/values/Styles.xml
-Inside your AppTheme add two item's "colorControlActivated" (the on color for your ToggleSwitches thumb) and "colorSwitchThumbNormal" (the off color for your ToggleSwitches thumb) you may add your colors here directly, for example #ffffff, or by files (see our example code below)
-
-```
-<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-	<style name="AppTheme" parent="Theme.AppCompat.Light">
-
-		<!-- Color style for toggle switch -->
-		<item name="colorControlActivated">@color/PrimaryColor</item>
-		<item name="colorSwitchThumbNormal">@color/SurfaceColor</item>
-	</style>
-</resources>
-
-```
-
-7.2 (Optional) If your application uses Light/Dark color palettes.
-7.2.1 Inside the Styles.xml file change the AppTheme's parent to Theme.Compat.DayNight
-```
-<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
-
-		<!-- Color style for toggle switch -->
-		<item name="colorControlActivated">@color/MaterialPrimaryColor</item>
-		<item name="colorSwitchThumbNormal">@color/MaterialSurfaceVariantColor</item>
-	</style>
-</resources>
-
-```
-
-7.2.2 From your Android project head go to YourProject.Droid/Resources/values create a file called "colors.xml", inside include your "Light" theme colors.
-```
-<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-	<color name="MaterialPrimaryColor">#5B4CF5</color>
-	<!-- SurfaceColor -->
-	<color name="MaterialSurfaceVariantColor">#FFFFFF</color>
-</resources>
-
-```
-
-7.2.3 From your Android project head go to YourProject.Droid/Resources create a folder called "values-night", inside the folder add a file called "colors.xml", and inside the file include your "Dark" theme colors.
-```
-<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-	<color name="MaterialPrimaryColor">#B6A8FB</color>
-	<!-- A variant of OnSurfaceMediumColor without alpha opacity (can't use alphas with android colors)  -->
-	 <color name="MaterialSurfaceVariantColor">#808080</color>
-</resources>
-
-```
-
-7.3 (Optional) If you have changed the material color palette for your application (2.) then there are two more colors that must be overridden for android native ToggleSwitch disabled colors to be properly applied.
-Colors are named PrimaryVariantDisabledThumbColor and SurfaceVariantLightColor, they can be overridden in your colors.xaml file.
-PrimaryVariantDisabledThumbColor is a non-transparent version of PrimaryDisabled color ("Light") in "Light" palette, and a non-transparent version of PrimaryMedium color ("Dark") in "Dark" palette.
-SurfaceVariantLightColor is the Surface color however in "Light" Palette is an off white color to be visible on light backgrounds.
-
-```
-<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. (Unwanted behavior) -->
-	<ResourceDictionary.ThemeDictionaries>
-
-		<!-- Light Theme -->
-		<ResourceDictionary x:Key="Light">
-			<!-- Non-opaque/transparent primary disabled color -->
-			<Color x:Key="PrimaryVariantDisabledThumbColor">#E9E5FA</Color>
-			<!-- Non-opaque/transparent white color that shows on white surfaces -->
-			<Color x:Key="SurfaceVariantLightColor">#F7F7F7</Color>
-		</ResourceDictionary>
-
-		<!-- Dark Theme -->
-		<ResourceDictionary x:Key="Dark">
-			<!-- Non-opaque/transparent primary medium color -->
-			<Color x:Key="PrimaryVariantDisabledThumbColor">#57507C</Color>
-			<Color x:Key="SurfaceVariantLightColor">#121212</Color>
-		</ResourceDictionary>
-	</ResourceDictionary.ThemeDictionaries>
-```
-
+8. (Optional) If you are using our [DatePickers, and TimePickers](#datePickers-and-timePickers) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
 
 <!-- TODO: Add reference on where to get those resource names -->
 
@@ -240,6 +161,160 @@ SurfaceVariantLightColor is the Surface color however in "Light" Palette is an o
 | Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle | TODO             |
 | BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              | TODO             |
 | SnackBar             | MaterialSnackBarStyle                                                         | TODO             |
+
+
+## Controls Setup (Specialized)
+
+### ToggleSwitch
+
+If you are using our ToggleSwitches to get the proper native colors on android their is some modification needed.
+The reasoning for this is to apply the native android shadowing on the off value of the ToggleSwitch, and proper focus shadow colors when ToggleSwitches are clicked
+
+1. From your Android project head go to YourProject.Droid/Resources/values/Styles.xml
+Inside your AppTheme add two item's "colorControlActivated" (the on color for your ToggleSwitches thumb) and "colorSwitchThumbNormal" (the off color for your ToggleSwitches thumb) you may add your colors here directly, for example #ffffff, or by files (see our example code below)
+
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.Light">
+
+		<!-- Color style for toggle switch -->
+		<item name="colorControlActivated">@color/MaterialPrimaryColor</item>
+		<item name="colorSwitchThumbNormal">@color/MaterialSurfaceVariantColor</item>
+	</style>
+</resources>
+
+```
+
+2. (Optional) If your application uses Light/Dark color palettes.
+2.1 Inside the Styles.xml file change the AppTheme's parent to Theme.Compat.DayNight
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
+
+		<!-- Color style for toggle switch -->
+		<item name="colorControlActivated">@color/MaterialPrimaryColor</item>
+		<item name="colorSwitchThumbNormal">@color/MaterialSurfaceVariantColor</item>
+	</style>
+</resources>
+
+```
+
+2.2 From your Android project head go to YourProject.Droid/Resources/values create a file called "colors.xml", inside include your "Light" theme colors.
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="MaterialPrimaryColor">#5B4CF5</color>
+	<!-- SurfaceColor -->
+	<color name="MaterialSurfaceVariantColor">#FFFFFF</color>
+</resources>
+
+```
+
+2.3 From your Android project head go to YourProject.Droid/Resources create a folder called "values-night", inside the folder add a file called "colors.xml", and inside the file include your "Dark" theme colors.
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="MaterialPrimaryColor">#B6A8FB</color>
+	<!-- A variant of OnSurfaceMediumColor without alpha opacity (can't use alphas with android colors)  -->
+	 <color name="MaterialSurfaceVariantColor">#808080</color>
+</resources>
+
+```
+
+2.3 (Optional) If you have changed the material color palette for your application (2.) then there are two more colors that must be overridden for android native ToggleSwitch disabled colors to be properly applied.
+Colors are named PrimaryVariantDisabledThumbColor and SurfaceVariantLightColor, they can be overridden in your colors.xaml file.
+PrimaryVariantDisabledThumbColor is a non-transparent version of PrimaryDisabled color ("Light") in "Light" palette, and a non-transparent version of PrimaryMedium color ("Dark") in "Dark" palette.
+SurfaceVariantLightColor is the Surface color however in "Light" Palette is an off white color to be visible on light backgrounds.
+
+```
+<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. (Unwanted behavior) -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- Light Theme -->
+		<ResourceDictionary x:Key="Light">
+			<!-- Non-opaque/transparent primary disabled color -->
+			<Color x:Key="PrimaryVariantDisabledThumbColor">#E9E5FA</Color>
+			<!-- Non-opaque/transparent white color that shows on white surfaces -->
+			<Color x:Key="SurfaceVariantLightColor">#F7F7F7</Color>
+		</ResourceDictionary>
+
+		<!-- Dark Theme -->
+		<ResourceDictionary x:Key="Dark">
+			<!-- Non-opaque/transparent primary medium color -->
+			<Color x:Key="PrimaryVariantDisabledThumbColor">#57507C</Color>
+			<Color x:Key="SurfaceVariantLightColor">#121212</Color>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+```
+
+### DatePickers and TimePickers
+
+If your application uses DatePickers and/or TimePickers (these are native components).
+To apply your material colors to these android components, do the following (this will affect every DatePicker/TimePicker in the application).
+
+<!-- 8.1 Override the IOS TimePicker ColorBrushes in a binded ResourceDictionary such as colors.xaml:
+
+```
+<SolidColorBrush x:Key="IOSTimePickerAcceptButtonForegroundBrush"
+				 Color="{StaticResource MaterialPrimaryBrush}" />
+<SolidColorBrush x:Key="IOSTimePickerDismissButtonForegroundBrush"
+				 Color="{StaticResource MaterialPrimaryBrush}" />
+``` -->
+
+1. From your Android project head go to YourProject.Droid/Resources/values/Styles.xml
+Inside your AppTheme add two item's "datePickerDialogTheme" (the style for your DatePicker) and "timePickerDialogTheme" (the style for your TimePicker), and a new Style with the MaterialPrimary Color as AccentColor (see our example code below)
+
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.Light">
+
+		<!-- Color style for Time/Date Pickers -->
+		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+		<item name="android:timePickerDialogTheme">@style/AppCompatDialogStyle</item>
+	</style>
+
+	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+		<item name="colorAccent">@color/MaterialPrimaryColor</item>
+	</style>
+</resources>
+
+```
+
+2. (Optional) If your application uses Light/Dark color palettes.
+2.1 Inside the Styles.xml file change the AppTheme's parent of both styles to Theme.Compat.DayNight
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
+
+		<!-- Color style for Time/Date Pickers -->
+		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+		<item name="android:timePickerDialogTheme">@style/AppCompatDialogStyle</item>
+	</style>
+
+	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.DayNight.Dialog">
+		<item name="colorAccent">@color/MaterialPrimaryColor</item>
+	</style>
+</resources>
+
+```
+
+2.2 From your Android project head go to YourProject.Droid/Resources/values create a file called "colors.xml", inside include your "Light" theme colors.
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="MaterialPrimaryColor">#5B4CF5</color>
+</resources>
+
+2.3 From your Android project head go to YourProject.Droid/Resources create a folder called "values-night", inside the folder add a file called "colors.xml", and inside the file include your "Dark" theme colors.
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<color name="MaterialPrimaryColor">#B6A8FB</color>
+</resources>
 
 
 ## Changelog
