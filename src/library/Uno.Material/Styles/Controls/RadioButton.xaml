@@ -12,6 +12,9 @@
 	<x:Double x:Key="RadioCheckAreaSize">18</x:Double>
 	<x:Double x:Key="RadioBorderThickness">2</x:Double>
 
+	<StaticResource x:Key="RadioButtonSelectControlStrokeBrush"
+					ResourceKey="MaterialOnSurfaceMediumBrush"/>
+
 	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">
 
@@ -20,7 +23,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource SelectControlStrokeColor}" />
+				Value="{StaticResource RadioButtonSelectControlStrokeBrush}" />
 		<Setter Property="Padding"
 				Value="8,0,0,0" />
 		<Setter Property="HorizontalAlignment"
@@ -264,8 +267,6 @@
 
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSecondaryBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource SelectControlStrokeColor}" />
 	</Style>
 	
 </ResourceDictionary>

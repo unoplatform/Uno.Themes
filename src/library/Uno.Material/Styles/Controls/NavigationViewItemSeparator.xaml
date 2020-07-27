@@ -1,0 +1,61 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:ios="http://uno.ui/ios"
+					xmlns:android="http://uno.ui/android"
+					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:xamarin="http://uno.ui/xamarin"
+					xmlns:converters="using:Uno.Material.Converters"
+					xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
+					mc:Ignorable="d ios android wasm not_win xamarin primitives">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+	
+	<Style TargetType="NavigationViewItemSeparator">
+		<Setter Property="IsEnabled"
+				Value="False" />
+		<Setter Property="IsTabStop"
+				Value="False" />
+		<Setter Property="MinHeight"
+				Value="0" />
+		<Setter Property="AutomationProperties.AccessibilityView"
+				Value="Raw" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="NavigationSeparatorLineStates">
+								<VisualState x:Name="HorizontalLine" />
+								<VisualState x:Name="VerticalLine">
+									<VisualState.Setters>
+										<Setter Target="SeparatorLine.Height"
+												Value="20" />
+										<Setter Target="SeparatorLine.Width"
+												Value="1" />
+										<Setter Target="SeparatorLine.Margin"
+												Value="10,0" />
+										<Setter Target="SeparatorLine.VerticalAlignment"
+												Value="Center" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Rectangle x:Name="Separator"
+								   Height="1"
+								   Margin="16,10"
+								   Fill="{StaticResource NavDrawersBackgroundBrush}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>
