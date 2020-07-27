@@ -9,7 +9,7 @@ namespace Uno.Material.Helpers
 	internal static class ControlHelper
 	{
 		public static TControl GetTemplateChild<TControl>(this Control control, Func<string, DependencyObject> getTemplateChildImpl, string childName)
-#if __ANDROID__ || __IOS__ || __WASM__ || __MACOS__
+#if HAS_UNO
 			where TControl : class, DependencyObject
 #else
 			where TControl : DependencyObject
