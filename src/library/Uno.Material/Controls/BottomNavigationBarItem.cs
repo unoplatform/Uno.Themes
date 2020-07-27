@@ -1,7 +1,9 @@
-﻿using Uno.Material.Entities;
+﻿using Windows.Foundation;
+using Uno.Material.Entities;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 
 namespace Uno.Material.Controls
 {
@@ -49,6 +51,28 @@ namespace Uno.Material.Controls
 		public BottomNavigationBarItem()
 		{
 			DefaultStyleKey = typeof(BottomNavigationBarItem);
+		}
+
+		private Ripple _ripple;
+
+		/// <inheritdoc />
+		protected override void OnApplyTemplate()
+		{
+			_ripple = GetTemplateChild("ContentPresenter") as Ripple;
+			if (_ripple != null)
+			{
+				_ripple.IsAutoRippleEnabled = false;
+			}
+
+			base.OnApplyTemplate();
+		}
+
+		/// <inheritdoc />
+		protected override void OnPointerPressed(PointerRoutedEventArgs args)
+		{
+			_ripple?.StartRippling(args);
+
+			base.OnPointerPressed(args);
 		}
 	}
 }

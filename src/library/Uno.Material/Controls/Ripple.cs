@@ -64,6 +64,25 @@ namespace Uno.Material.Controls
 
 		protected override void OnPointerPressed(PointerRoutedEventArgs e)
 		{
+			if (IsAutoRippleEnabled)
+			{
+				StartRippling(e);
+			}
+
+			base.OnPointerPressed(e);
+		}
+
+		/// <summary>
+		/// On WASM when the Ripple control is nested into a control that does capture the pointer,
+		/// we won't receive the pointer events as we should.
+		/// ** Noticeably, it's the case for all buttons. **
+		/// To work around this issue, you can turn this flag on and then,
+		/// invoke the "StartRippling" in the OnPointerPressed of the parent control (i.e. the Button).
+		/// </summary>
+		internal bool IsAutoRippleEnabled { get; set; } = true;
+
+		internal void StartRippling(PointerRoutedEventArgs e)
+		{
 			var point = e.GetCurrentPoint(this);
 
 			RippleX = point.Position.X - RippleSize / 2;
@@ -71,8 +90,6 @@ namespace Uno.Material.Controls
 
 			VisualStateManager.GoToState(this, "Normal", true);
 			VisualStateManager.GoToState(this, "Pressed", true);
-
-			base.OnPointerPressed(e);
 		}
 
 		// Uncomment for hover effect
