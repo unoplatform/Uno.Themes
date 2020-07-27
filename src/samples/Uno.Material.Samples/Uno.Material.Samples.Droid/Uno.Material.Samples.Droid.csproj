@@ -33,6 +33,11 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
@@ -77,10 +82,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Uno.ShowMeTheXAML">
-      <Version>1.0.55</Version>
+      <Version>1.0.58</Version>
     </PackageReference>
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
-      <Version>1.0.55</Version>
+      <Version>1.0.58</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI" Version="3.0.0-dev.966" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="3.0.0-dev.966" Condition="'$(Configuration)'=='Debug'" />
