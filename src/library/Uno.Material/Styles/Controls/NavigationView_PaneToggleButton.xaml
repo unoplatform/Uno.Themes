@@ -9,6 +9,7 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:xamarin="http://uno.ui/xamarin"
+					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:converters="using:Uno.Material.Converters"
 					xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
 					mc:Ignorable="d ios android wasm not_win xamarin primitives">
@@ -49,18 +50,19 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="LayoutRoot"
-						  Height="{TemplateBinding MinHeight}"
-						  Margin="{TemplateBinding Padding}"
 						  Background="{TemplateBinding Background}"
-						  HorizontalAlignment="Stretch">
-
+						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+						  Height="{TemplateBinding MinHeight}"
+						  Width="{TemplateBinding MinWidth}"
+						  Margin="{TemplateBinding Padding}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<!-- Workaround for #92 - Android PointerOver state is being applied and maintained on click -->
+										<not_android:Setter Target="HoverOverlay.Opacity"
+															Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
@@ -126,10 +128,15 @@
 
 						<Border x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
+								android:Visibility="Collapsed"
 								Opacity="0" />
 
 						<Border x:Name="PressedOverlay"
 								Background="{StaticResource MaterialOnSurfacePressedBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
 								Opacity="0" />
 					</Grid>
 				</ControlTemplate>
@@ -166,17 +173,19 @@
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="LayoutRoot"
 						  Height="{TemplateBinding MinHeight}"
+						  Width="{TemplateBinding MinWidth}"
 						  Margin="{TemplateBinding Padding}"
 						  Background="{TemplateBinding Background}"
-						  HorizontalAlignment="Stretch">
+						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<!-- Workaround for #92 - Android PointerOver state is being applied and maintained on click -->
+										<not_android:Setter Target="HoverOverlay.Opacity"
+															Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
@@ -245,10 +254,14 @@
 
 						<Border x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
 								Opacity="0" />
 
 						<Border x:Name="PressedOverlay"
 								Background="{StaticResource MaterialOnSurfacePressedBrush}"
+								Width="{TemplateBinding MinWidth}"
+								HorizontalAlignment="Left"
 								Opacity="0" />
 					</Grid>
 				</ControlTemplate>

@@ -15,7 +15,7 @@
 	<SolidColorBrush x:Key="SplitViewDismissBackgroundBrush"
 					 Color="Black"
 					 Opacity="0.5" />
-	
+
 	<ios:Style x:Key="DefaultSplitViewStyle"
 			   TargetType="SplitView">
 		<Setter Property="HorizontalContentAlignment"
@@ -574,7 +574,8 @@
 							<ColumnDefinition x:Name="ColumnDefinition2"
 											  Width="*" />
 						</Grid.ColumnDefinitions>
-						
+
+						<!--Content Area-->
 						<Grid x:Name="ContentRoot"
 							  Grid.ColumnSpan="2">
 							<Border Child="{TemplateBinding Content}" />
@@ -590,6 +591,7 @@
 							</xamarin:Button>
 						</Grid>
 
+						<!--Pane Content Area-->
 						<Grid x:Name="PaneRoot"
 							  Grid.ColumnSpan="2"
 							  HorizontalAlignment="Left"
