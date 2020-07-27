@@ -12,6 +12,9 @@
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
 
+	<StaticResource x:Key="CheckBoxSelectControlStrokeBrush"
+					ResourceKey="MaterialOnSurfaceMediumBrush"/>
+
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 
@@ -20,7 +23,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource SelectControlStrokeColor}" />
+				Value="{StaticResource CheckBoxSelectControlStrokeBrush}" />
 		<Setter Property="BorderThickness"
 				Value="2" />
 		<Setter Property="Padding"
@@ -453,7 +456,5 @@
 				Value="{StaticResource MaterialSecondaryBrush}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnSecondaryBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource SelectControlStrokeColor}" />
 	</Style>
 </ResourceDictionary>
