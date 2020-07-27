@@ -62,63 +62,50 @@
 									</VisualState.Setters>
 								</VisualState>
 
-
 								<VisualStateGroup.Transitions>
 									<VisualTransition From="Normal"
 													  To="Pressed">
 										<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
-														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-														 From="0"
-														 To="0.99" />
 
-										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
-														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-														 From="0"
-														 To="0.99" />
+											<android:DoubleAnimation Storyboard.TargetName="PressRing"
+																	 Storyboard.TargetProperty="Opacity"
+																	 Duration="0:0:0.25"
+																	 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																	 From="1"
+																	 To="0" />
 
-										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
-																	   Storyboard.TargetName="PressRing">
-											<EasingDoubleKeyFrame KeyTime="0"
-																  Value="0.5" />
-											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
-																  Value="0.5" />
-											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
-																  Value="0" />
-										</DoubleAnimationUsingKeyFrames>
-									</Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+																		   Storyboard.TargetName="PressRing">
+												<EasingDoubleKeyFrame KeyTime="0"
+																	  Value="0" />
+												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
+																	  Value="0.5" />
+												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
+																	  Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
 									</VisualTransition>
 									<VisualTransition From="PointerOver"
 													  To="Pressed">
 										<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
-														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-														 From="0"
-														 To="0.99" />
 
-										<DoubleAnimation Storyboard.TargetName="PressRingTransform"
-														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-														 From="0"
-														 To="0.99" />
+											<android:DoubleAnimation Storyboard.TargetName="PressRing"
+																	 Storyboard.TargetProperty="Opacity"
+																	 Duration="0:0:0.25"
+																	 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																	 From="1"
+																	 To="0" />
 
-										<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
-																	   Storyboard.TargetName="PressRing">
-											<EasingDoubleKeyFrame KeyTime="0"
-																  Value="0.5" />
-											<EasingDoubleKeyFrame KeyTime="0:0:0.2"
-																  Value="0.5" />
-											<EasingDoubleKeyFrame KeyTime="0:0:0.4"
-																  Value="0" />
-										</DoubleAnimationUsingKeyFrames>
-									</Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+																		   Storyboard.TargetName="PressRing">
+												<EasingDoubleKeyFrame KeyTime="0"
+																	  Value="0" />
+												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
+																	  Value="0.5" />
+												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
+																	  Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
 							</VisualStateGroup>
@@ -165,7 +152,7 @@
 							<ColumnDefinition Width="{StaticResource RadioCheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						
+
 						<Ellipse x:Name="FocusRing"
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
@@ -185,15 +172,7 @@
 								 Height="{StaticResource FocusAreaSize}"
 								 Fill="{StaticResource MaterialOnSurfaceLowBrush}"
 								 IsHitTestVisible="False"
-								 Opacity="0">
-							<Ellipse.RenderTransform>
-								<CompositeTransform x:Name="PressRingTransform"
-													ScaleX="0"
-													ScaleY="0"
-													CenterX="20"
-													CenterY="20" />
-							</Ellipse.RenderTransform>
-						</Ellipse>
+								 Opacity="0" />
 
 						<Grid Height="{StaticResource RadioCheckAreaSize}"
 							  Width="{StaticResource RadioCheckAreaSize}">
@@ -205,7 +184,7 @@
 									 UseLayoutRounding="False"
 									 Stroke="{TemplateBinding Background}"
 									 StrokeThickness="{StaticResource RadioBorderThickness}"
-									 Opacity="0"/>
+									 Opacity="0" />
 
 							<Ellipse x:Name="OuterEllipse_Unchecked"
 									 HorizontalAlignment="Stretch"
@@ -249,5 +228,5 @@
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
-	
+
 </ResourceDictionary>
