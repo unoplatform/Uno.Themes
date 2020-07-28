@@ -31,4 +31,12 @@
 										 NotNullValue="Visible"
 										 NullValue="Collapsed" />
 
+	<converters:FromEmptyStringOrNullObjectToValueConverter x:Key="Material_EmptyOrNullToVisible"
+															NotEmptyOrNullValue="Collapsed"
+															EmptyOrNullValue="Visible" />
+
+	<converters:FromEmptyStringOrNullObjectToValueConverter x:Key="Material_EmptyOrNullToCollapsed"
+															NotEmptyOrNullValue="Visible"
+															EmptyOrNullValue="Collapsed" />
+
 </ResourceDictionary>
