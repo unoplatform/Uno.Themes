@@ -84,7 +84,6 @@ namespace Uno.Material.Samples
 			using (AddMenuHeader("Styles"))
 			{
 				AddMenuItem<ColorsSamplePage>(icon: "ColorsIcon");
-				NavView.MenuItems.Add(new NavigationViewItemSeparator());
 			}
 
 			// Controls
