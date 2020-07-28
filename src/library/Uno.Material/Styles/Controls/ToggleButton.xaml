@@ -13,11 +13,10 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
-		<ResourceDictionary Source="../Application/SelectionControlColors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Text ToggleButton Variables -->
-	<SolidColorBrush x:Key="ToggleButtonTextLabelColor"
+	<SolidColorBrush x:Key="ToggleButtonTextLabelBrush"
 					 Color="{ThemeResource MaterialPrimaryColor}" />
 
 	<!-- Other ToggleButton Variables -->
@@ -29,7 +28,7 @@
 	<Style x:Key="MaterialTextToggleButtonStyle"
 		   TargetType="ToggleButton">
 		<Setter Property="Foreground"
-				Value="{StaticResource ToggleButtonTextLabelColor}" />
+				Value="{StaticResource ToggleButtonTextLabelBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="BorderThickness"
