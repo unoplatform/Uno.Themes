@@ -25,35 +25,35 @@
 
     You can safely remove this ItemGroup completely.
     -->
-		<None Include="Program.cs" />
-		<None Include="LinkerConfig.xml" />
-		<None Include="wwwroot\web.config" />
-	</ItemGroup>
-	<ItemGroup>
-		<!-- Note that for WebAssembly version 1.1.1 of the console logger required -->
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-		<PackageReference Include="nventive.Nimue.Application.Building.Light" Version="0.1.0-alpha.55">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Packaging" Version="0.1.0-alpha.55">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Versioning" Version="0.1.0-alpha.55">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Uno.ShowMeTheXAML" Version="1.0.58" />
-		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild" Version="1.0.58" />
-		<PackageReference Include="Uno.UI.WebAssembly" Version="3.0.0-dev.966" />
-		<PackageReference Include="Uno.UI.RemoteControl" Version="3.0.0-dev.966" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.Wasm.Bootstrap" Version="1.4.0-dev.12" />
-		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="1.4.0-dev.12" PrivateAssets="all" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
-	</ItemGroup>
-	<Import Project="..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems')" />
+    <None Include="Program.cs" />
+    <None Include="LinkerConfig.xml" />
+    <None Include="wwwroot\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Note that for WebAssembly version 1.1.1 of the console logger required -->
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
+    <PackageReference Include="nventive.Nimue.Application.Building.Light" Version="0.1.0-alpha.55">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Packaging" Version="0.1.0-alpha.55">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Versioning" Version="0.1.0-alpha.55">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Uno.ShowMeTheXAML" Version="1.0.55" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" Version="1.0.55" />
+    <PackageReference Include="Uno.UI" Version="3.0.0-dev.1004" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.0.0-dev.692" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.3.0-dev.48" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="1.3.0-dev.48" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
+  </ItemGroup>
+  <Import Project="..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Material.Samples.Shared\Uno.Material.Samples.Shared.projitems')" />
 </Project>
