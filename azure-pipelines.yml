@@ -133,9 +133,9 @@ stages:
         provProfileSecureFile: 'UnoMaterial.mobileprovision' # Name of the .mobileprovision file in the secure files.
 
     - task: UseDotNet@2
-      displayName: 'Install .Net Core runtime 3.1.0'
+      displayName: 'Install .Net Core runtime 2.1.x'
       inputs:
-        version: 3.1.0
+        version: 2.1.x
         packageType: 'runtime'
         installationPath: '$(Agent.ToolsDirectory)/dotnet'
         
