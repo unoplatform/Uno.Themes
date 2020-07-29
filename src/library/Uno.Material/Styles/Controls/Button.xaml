@@ -21,13 +21,13 @@
 	<CornerRadius x:Key="MaterialButtonCornerRadius">4</CornerRadius>
 	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
 	<FontFamily x:Key="MaterialButtonFontFamily">Roboto</FontFamily>
-	<StaticResource x:Key="MaterialContainedButtonDisabledBackgroundBrush"
-					ResourceKey="MaterialOnSurfaceDisabledBrush" />
-	<StaticResource x:Key="MaterialContainedButtonDisabledForegroundBrush"
-					ResourceKey="MaterialOnSurfaceDisabledBrush" />
-	<StaticResource x:Key="MaterialOutlinedButtonDisabledBrush"
-					ResourceKey="MaterialOnSurfaceDisabledBrush" />
-	<StaticResource x:Key="MaterialTextButtonDisabledBrush"
+	<StaticResource x:Key="MaterialContainedButtonLowBackgroundBrush"
+					ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="MaterialContainedButtonLowForegroundBrush"
+					ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="MaterialOutlinedButtonLowBrush"
+					ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="MaterialTextButtonLowBrush"
 					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
 	<!-- Undocumented variables -->
@@ -102,9 +102,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource MaterialContainedButtonDisabledBackgroundBrush}" />
+												Value="{StaticResource MaterialContainedButtonLowBackgroundBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialContainedButtonDisabledForegroundBrush}" />
+												Value="{StaticResource MaterialContainedButtonLowForegroundBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -249,9 +249,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialOutlinedButtonDisabledBrush}" />
+												Value="{StaticResource MaterialOutlinedButtonLowBrush}" />
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource MaterialOutlinedButtonDisabledBrush}" />
+												Value="{StaticResource MaterialOutlinedButtonLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -389,7 +389,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialTextButtonDisabledBrush}" />
+												Value="{StaticResource MaterialTextButtonLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
