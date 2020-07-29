@@ -30,9 +30,6 @@
 	<StaticResource x:Key="MaterialTextButtonLowBrush"
 					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
-	<!-- Undocumented variables -->
-	<x:Double x:Key="MaterialButtonRippleMultiplier">2.0</x:Double>
-
 	<!-- Styles -->
 	<Style x:Key="MaterialContainedButtonStyle"
 		   TargetType="Button">
@@ -145,7 +142,6 @@
 						<controls:Ripple x:Name="ContentPresenter"
 										 Feedback="{TemplateBinding Foreground}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
-										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 Content="{TemplateBinding Content}"
@@ -292,7 +288,6 @@
 						<controls:Ripple x:Name="ContentPresenter"
 										 Feedback="{TemplateBinding Foreground}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
-										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 Content="{TemplateBinding Content}"
@@ -430,7 +425,6 @@
 						<controls:Ripple x:Name="ContentPresenter"
 										 Feedback="{TemplateBinding Foreground}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
-										 RippleSizeMultiplier="{StaticResource MaterialButtonRippleMultiplier}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 Content="{TemplateBinding Content}"
