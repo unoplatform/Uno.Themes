@@ -169,14 +169,14 @@
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimation Storyboard.TargetName="PressRingTransform"
 															 Storyboard.TargetProperty="ScaleY"
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																		   Storyboard.TargetName="PressRing">
@@ -189,7 +189,7 @@
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
-									
+
 									<VisualTransition From="UncheckedPointerOver"
 													  To="UncheckedPressed">
 										<Storyboard>
@@ -198,14 +198,14 @@
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimation Storyboard.TargetName="PressRingTransform"
 															 Storyboard.TargetProperty="ScaleY"
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																		   Storyboard.TargetName="PressRing">
@@ -218,7 +218,7 @@
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
-									
+
 									<VisualTransition From="CheckedNormal"
 													  To="CheckedPressed">
 										<Storyboard>
@@ -227,14 +227,14 @@
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimation Storyboard.TargetName="PressRingTransform"
 															 Storyboard.TargetProperty="ScaleY"
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																		   Storyboard.TargetName="PressRing">
@@ -247,7 +247,7 @@
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
-									
+
 									<VisualTransition From="CheckedPointerOver"
 													  To="CheckedPressed">
 										<Storyboard>
@@ -256,14 +256,14 @@
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimation Storyboard.TargetName="PressRingTransform"
 															 Storyboard.TargetProperty="ScaleY"
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																		   Storyboard.TargetName="PressRing">
@@ -276,7 +276,7 @@
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
-									
+
 									<VisualTransition From="IndeterminateNormal"
 													  To="IndeterminatePressed">
 
@@ -286,14 +286,14 @@
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimation Storyboard.TargetName="PressRingTransform"
 															 Storyboard.TargetProperty="ScaleY"
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																		   Storyboard.TargetName="PressRing">
@@ -306,7 +306,7 @@
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
-									
+
 									<VisualTransition From="IndeterminatePointerOver"
 													  To="IndeterminatePressed">
 
@@ -316,14 +316,14 @@
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimation Storyboard.TargetName="PressRingTransform"
 															 Storyboard.TargetProperty="ScaleY"
 															 Duration="0:0:0.4"
 															 EasingFunction="{StaticResource Material_EaseInOutFunction}"
 															 From="0"
-															 To="1" />
+															 To="0.99" />
 
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
 																		   Storyboard.TargetName="PressRing">
@@ -394,13 +394,13 @@
 						<Grid x:Name="CheckBoxContainer"
 							  Height="{StaticResource CheckAreaSize}"
 							  Width="{StaticResource CheckAreaSize}">
-							
+
 							<Grid x:Name="BackgroundBorder"
 								  Background="{ThemeResource MaterialBackgroundColor}"
 								  BorderBrush="{TemplateBinding BorderBrush}"
 								  BorderThickness="{TemplateBinding BorderThickness}"
 								  CornerRadius="2" />
-							
+
 							<Grid x:Name="CheckedBackgroundBorder"
 								  Background="{TemplateBinding Background}"
 								  Opacity="0"
