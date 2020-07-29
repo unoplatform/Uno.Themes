@@ -7,7 +7,7 @@
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
-	
+
 	<!-- Converters -->
 	<converters:FromEmptyStringToValueConverter x:Name="EmptyToCollapsed"
 												NotNullOrEmptyValue="Visible"
@@ -23,7 +23,7 @@
 					 Opacity="0.85" />
 
 	<SolidColorBrush x:Key="SnackBarButtonForegroundBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}" />
+					 Color="{ThemeResource MaterialPrimaryVariantColor}" />
 
 	<!-- Style -->
 	<Style x:Key="MaterialSnackBarStyle"
@@ -109,7 +109,7 @@
 							<TranslateTransform x:Name="SnackBarTransform"
 												Y="15" />
 						</toolkit:ElevatedView.RenderTransform>
-						
+
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
