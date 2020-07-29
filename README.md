@@ -1,4 +1,4 @@
-# Uno Material
+﻿# Uno Material
 
 <!-- TODO : Insert logo/branding -->
 
@@ -160,7 +160,6 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 |----------------------|-------------------------------------------------------------------------------|------------------|
 | Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle | TODO             |
 | BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              | TODO             |
-| SnackBar             | MaterialSnackBarStyle                                                         | TODO             |
 
 
 ## Controls Setup (Specialized)
