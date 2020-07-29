@@ -44,10 +44,10 @@ namespace Uno.Material.Samples
 		/// <param name="e">Details about the launch request and process.</param>
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
-			// TODO #238 Find a way to stay xaml-only for the initialization. Or implement a clean Init Method
-			this.Resources.MergedDictionaries.Add(new Material.MaterialColorPalette());
-			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Application/ColorPaletteOverride.xaml") });
-			this.Resources.MergedDictionaries.Add(new Material.MaterialLibraryResources());
+			//// TODO #238 Find a way to stay xaml-only for the initialization. Or implement a clean Init Method
+			//this.Resources.MergedDictionaries.Add(new Material.MaterialColorPalette());
+			//this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Styles/Application/ColorPaletteOverride.xaml") });
+			//this.Resources.MergedDictionaries.Add(new Material.MaterialLibraryResources());
 
 #if DEBUG
 			if (System.Diagnostics.Debugger.IsAttached)
