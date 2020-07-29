@@ -10,53 +10,62 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_wasm="http://uno.ui/not_wasm"
 					mc:Ignorable="not_win xamarin ios android wasm not_wasm">
-
-	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
-
-	<!--<StaticResource x:Key="BottomNavLabelFocusColorBrush"
-					ResourceKey="MaterialOnPrimaryBrush" />
-	<StaticResource x:Key="BottomNavIconFocusColorBrush"
-					ResourceKey="MaterialOnPrimaryBrush" />
-	<StaticResource x:Key="BottomNavLabelColorBrush"
-					ResourceKey="MaterialOnPrimaryMediumBrush" />
-	<StaticResource x:Key="BottomNavIconColorBrush"
-					ResourceKey="MaterialOnPrimaryMediumBrush" />
-	<StaticResource x:Key="BottomNavNotifBackgroundColorBrush"
-					ResourceKey="MaterialErrorBrush" />
-	<StaticResource x:Key="BottomNavNotifLabelColorBrush"
-					ResourceKey="MaterialOnErrorBrush" />-->
-
-	<x:Double x:Key="BottomNavLabelFontSize">12</x:Double>
-	<x:Double x:Key="BottomNavUncheckedOpacity">0.6</x:Double>
-	<x:Double x:Key="BottomNavLabelCheckedOpacity">0.8</x:Double>
+	
+	<x:Double x:Key="MaterialBottomNavLabelFontSize">12</x:Double>
+	<x:Double x:Key="MaterialBottomNavUncheckedOpacity">0.8</x:Double>
+	<x:Double x:Key="MaterialBottomNavLabelCheckedOpacity">0.74</x:Double>
 
 	<Style x:Key="MaterialBottomNavigationBarItemStyle"
 		   TargetType="controls:BottomNavigationBarItem">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource BottomNavLabelColorBrush}" />
 		<Setter Property="Margin"
 				Value="0" />
+		<Setter Property="Background"
+				Value="Transparent" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:BottomNavigationBarItem">
 
-					<Grid Margin="{TemplateBinding Margin}"
-						  Background="Transparent">
+					<Grid Background="{TemplateBinding Background}"
+						  Margin="{TemplateBinding Margin}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
+
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="Icon.Foreground"
+												Value="{ThemeResource MaterialBottomNavUncheckedForegroundBrush}" />
+										<Setter Target="Label.Foreground"
+												Value="{ThemeResource MaterialBottomNavUncheckedForegroundBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Icon.Foreground"
+												Value="{ThemeResource MaterialBottomNavUncheckedForegroundBrush}" />
+										<Setter Target="Label.Foreground"
+												Value="{ThemeResource MaterialBottomNavUncheckedForegroundBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Icon.Foreground"
+												Value="{ThemeResource MaterialBottomNavUncheckedForegroundBrush}" />
+										<Setter Target="Label.Foreground"
+												Value="{ThemeResource MaterialBottomNavUncheckedForegroundBrush}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="Icon.Opacity"
 												Value="1" />
 										<Setter Target="Label.Opacity"
-												Value="{StaticResource BottomNavLabelCheckedOpacity}" />
+												Value="{StaticResource MaterialBottomNavLabelCheckedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -65,7 +74,7 @@
 										<Setter Target="Icon.Opacity"
 												Value="1" />
 										<Setter Target="Label.Opacity"
-												Value="{StaticResource BottomNavLabelCheckedOpacity}" />
+												Value="{StaticResource MaterialBottomNavLabelCheckedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -75,7 +84,7 @@
 										<Setter Target="Icon.Opacity"
 												Value="1" />
 										<Setter Target="Label.Opacity"
-												Value="{StaticResource BottomNavLabelCheckedOpacity}" />
+												Value="{StaticResource MaterialBottomNavLabelCheckedOpacity}" />
 									</VisualState.Setters>
 
 									<xamarin:Storyboard>
@@ -83,22 +92,22 @@
 																  Storyboard.TargetProperty="Opacity"
 																  Duration="0:0:0.4"
 																  EasingFunction="{StaticResource Material_EaseInOutFunction}"
-																  From="{StaticResource BottomNavUncheckedOpacity}"
+																  From="{StaticResource MaterialBottomNavUncheckedOpacity}"
 																  To="1" />
 
 										<not_wasm:DoubleAnimation Storyboard.TargetName="Label"
 																  Storyboard.TargetProperty="Opacity"
 																  Duration="0:0:0.4"
 																  EasingFunction="{StaticResource Material_EaseInOutFunction}"
-																  From="{StaticResource BottomNavUncheckedOpacity}"
-																  To="{StaticResource BottomNavLabelCheckedOpacity}" />
+																  From="{StaticResource MaterialBottomNavUncheckedOpacity}"
+																  To="{StaticResource MaterialBottomNavLabelCheckedOpacity}" />
 									</xamarin:Storyboard>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<controls:Ripple x:Name="ContentPresenter"
-										 Feedback="{ThemeResource BottomNavPressedBrush}"
+										 Feedback="{ThemeResource MaterialBottomNavPressedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
 										 ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -124,7 +133,8 @@
 									<!-- Icon -->
 									<ContentPresenter x:Name="Icon"
 													  Content="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}}"
-													  Opacity="{StaticResource BottomNavUncheckedOpacity}"
+													  Foreground="{TemplateBinding Foreground}"
+													  Opacity="{StaticResource MaterialBottomNavUncheckedOpacity}"
 													  Height="20"
 													  Width="20"
 													  Margin="12,0" />
@@ -139,16 +149,16 @@
 										<Ellipse Height="14"
 												 Width="14"
 												 Stretch="Uniform"
-												 Fill="{ThemeResource BottomNavNotifBackgroundColorBrush}"
+												 Fill="{ThemeResource MaterialBottomNavNotifBackgroundBrush}"
 												 Visibility="{Binding Text, Converter={StaticResource Material_EmptyToVisible}}" />
 
 										<!-- Badge Text Notification -->
 										<Border CornerRadius="6"
-												Background="{ThemeResource BottomNavNotifBackgroundColorBrush}"
+												Background="{ThemeResource MaterialBottomNavNotifBackgroundBrush}"
 												Visibility="{Binding Text, Converter={StaticResource Material_EmptyToCollapsed}}">
 
 											<TextBlock Text="{Binding Text}"
-													   Foreground="{ThemeResource BottomNavNotifLabelColorBrush}"
+													   Foreground="{ThemeResource MaterialBottomNavNotifLabelBrush}"
 													   FontSize="10"
 													   TextTrimming="CharacterEllipsis"
 													   Margin="4,2" />
@@ -166,7 +176,7 @@
 										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										   Visibility="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyToCollapsed}}"
-										   Opacity="{StaticResource BottomNavUncheckedOpacity}"
+										   Opacity="{StaticResource MaterialBottomNavUncheckedOpacity}"
 										   Grid.Row="1" />
 							</Grid>
 						</controls:Ripple>

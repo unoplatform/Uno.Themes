@@ -6,7 +6,6 @@
 	https://material.io/design/color/the-color-system.html#color-theme-creation 
 	
 	-->
-
 	<!-- Global brushes -->
 	<SolidColorBrush x:Key="MaterialPrimaryBrush"
 					 Color="{ThemeResource MaterialPrimaryColor}" />
@@ -33,7 +32,7 @@
 	<SolidColorBrush x:Key="MaterialOverlayBrush"
 					 Color="{ThemeResource MaterialOverlayColor}" />
 
-	<!-- Primary Brushes -->
+		<!-- Primary Brushes -->
 	<SolidColorBrush x:Key="MaterialPrimaryMediumBrush"
 					 Color="{ThemeResource MaterialPrimaryColor}"
 					 Opacity="{StaticResource MatedialMediumOpacity}" />
@@ -130,30 +129,8 @@
 	<SolidColorBrush x:Key="MaterialOnSurfaceLowVariantBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
 					 Opacity="0.20" />
-
-	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
-	<SolidColorBrush x:Key="BottomNavBackgroundColorBrush"
-					 Color="{ThemeResource BottomNavBackgroundColor}" />
-
-	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBarItem -->
-	<SolidColorBrush x:Key="BottomNavLabelFocusColorBrush"
-					 Color="{ThemeResource BottomNavLabelFocusColor}" />
-	<SolidColorBrush x:Key="BottomNavIconFocusColorBrush"
-					 Color="{ThemeResource BottomNavIconFocusColor}" />
-	<SolidColorBrush x:Key="BottomNavLabelColorBrush"
-					 Color="{ThemeResource BottomNavLabelColor}"
-					 Opacity="{StaticResource MaterialMediumOpacity}" />
-	<SolidColorBrush x:Key="BottomNavIconColorBrush"
-					 Color="{ThemeResource BottomNavIconColor}"
-					 Opacity="{StaticResource MaterialMediumOpacity}" />
-	<SolidColorBrush x:Key="BottomNavNotifBackgroundColorBrush"
-					 Color="{ThemeResource BottomNavNotifBackgroundColor}" />
-	<SolidColorBrush x:Key="BottomNavNotifLabelColorBrush"
-					 Color="{ThemeResource BottomNavNotifLabelColor}" />
-
-
 	<StaticResource x:Key="NavDrawersBackgroundBrush"
-					 ResourceKey="MaterialSurfaceBrush" />
+					ResourceKey="MaterialSurfaceBrush" />
 	<StaticResource x:Key="NavDrawersTextBrush"	
 					ResourceKey="MaterialOnSurfaceMediumBrush" />
 	<StaticResource x:Key="NavDrawersIconBrush"	
@@ -161,7 +138,19 @@
 	<StaticResource x:Key="NavDrawersSelectedBrush"
 					ResourceKey="MaterialPrimarySelectedBrush" />
 	<StaticResource x:Key="NavDrawersSelectedTextBrush"
-					 ResourceKey="MaterialPrimaryBrush" />
+					ResourceKey="MaterialPrimaryBrush" />
 	<StaticResource x:Key="NavDrawersSelectedIconBrush"
-					 ResourceKey="MaterialPrimaryBrush" />
+					ResourceKey="MaterialPrimaryBrush" />
+
+	<!-- Bottom Bar Navigation -->
+	<SolidColorBrush x:Key="MaterialBottomNavBackgroundBrush"
+					 Color="{ThemeResource MaterialBottomNavBackgroundColor}" />
+	<SolidColorBrush x:Key="MaterialBottomNavForegroundBrush"
+					 Color="{ThemeResource MaterialBottomNavForegroundColor}" />
+	
+	<SolidColorBrush x:Key="MaterialBottomNavNotifBackgroundBrush"
+					 Color="#CF6679" />
+	<SolidColorBrush x:Key="MaterialBottomNavNotifLabelBrush"
+					 Color="#000000" />
+	
 </ResourceDictionary>

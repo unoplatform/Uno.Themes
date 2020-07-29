@@ -2,25 +2,24 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:controls="using:Uno.Material.Controls">
 
-	<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
-
-	<!--<StaticResource x:Key="BottomNavBackgroundColorBrush"
-							ResourceKey="MaterialPrimaryBrush" />-->
-
 	<Style x:Key="MaterialBottomNavigationBarStyle"
 		   TargetType="controls:BottomNavigationBar">
+		
+		<Setter Property="Background"
+				Value="{StaticResource MaterialBottomNavBackgroundBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialBottomNavForegroundBrush}" />
 		<Setter Property="Height"
 				Value="64" />
 		<Setter Property="VerticalAlignment"
 				Value="Bottom" />
-		<Setter Property="Background"
-				Value="{ThemeResource BottomNavBackgroundColorBrush}" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:BottomNavigationBar">
 					<Grid x:Name="PART_LayoutRoot"
 						  Height="{TemplateBinding Height}"
-						  Background="{TemplateBinding Background}" />
+						  Background="{TemplateBinding Background}"/>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
