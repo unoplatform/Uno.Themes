@@ -15,8 +15,8 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Brushes for thumbtint colors -->
-	<SolidColorBrush x:Key="MaterialPrimaryVariantDisabledThumbColorBrush"
-					 Color="{ThemeResource MaterialPrimaryVariantDisabledThumbColor}" />
+	<SolidColorBrush x:Key="MaterialPrimaryVariantLowThumbColorBrush"
+					 Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}" />
 	<SolidColorBrush x:Key="MaterialSurfaceVariantBrush"
 					 Color="{ThemeResource MaterialSurfaceVariantLightColor}" />
 
@@ -24,21 +24,21 @@
 	<StaticResource x:Key="SelectControlToggleOnButtonColor"
 					ResourceKey="MaterialPrimaryBrush" />
 	<StaticResource x:Key="SelectControlToggleOnBackgroundColor"
-					ResourceKey="MaterialPrimaryDisabledBrush" />
+					ResourceKey="MaterialPrimaryLowBrush" />
 	<!-- Toggle Off -->
 	<not_android:StaticResource x:Key="SelectControlToggleOffButtonColor"
 								ResourceKey="MaterialSurfaceBrush" />
 	<android:StaticResource x:Key="SelectControlToggleOffButtonColor"
 							ResourceKey="MaterialSurfaceVariantBrush" />
 	<StaticResource x:Key="SelectControlToggleOffBackgroundColor"
-					ResourceKey="MaterialOnSurfaceDisabledVariantBrush" />
+					ResourceKey="MaterialOnSurfaceLowVariantBrush" />
 	
 	<!-- Toggle On Disabled -->
-	<not_android:StaticResource x:Key="SelectControlToggleOnDisabledButtonColor"
+	<not_android:StaticResource x:Key="SelectControlToggleOnLowButtonColor"
 								ResourceKey="MaterialPrimaryFocusedBrush" />
-	<android:StaticResource x:Key="SelectControlToggleOnDisabledButtonColor"
-							ResourceKey="MaterialPrimaryVariantDisabledThumbColorBrush" />
-	<StaticResource x:Key="SelectControlToggleOnDisabledBackgroundColor"
+	<android:StaticResource x:Key="SelectControlToggleOnLowButtonColor"
+							ResourceKey="MaterialPrimaryVariantLowThumbColorBrush" />
+	<StaticResource x:Key="SelectControlToggleOnLowBackgroundColor"
 					ResourceKey="MaterialPrimaryDraggedBrush" />
 
 	<win:Style x:Key="MaterialToggleSwitchStyle"
@@ -88,9 +88,9 @@
 										<Setter Target="SwitchKnobBoundsDisabled.Opacity"
 												Value="1" />
 										<Setter Target="SwitchKnobOn.Fill"
-												Value="{ThemeResource SelectControlToggleOnDisabledButtonColor}" />
+												Value="{ThemeResource SelectControlToggleOnLowButtonColor}" />
 										<Setter Target="SwitchKnobOff.Fill"
-												Value="{ThemeResource SelectControlToggleOnDisabledButtonColor}" />
+												Value="{ThemeResource SelectControlToggleOnLowButtonColor}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -311,7 +311,7 @@
 
 							<Rectangle x:Name="SwitchKnobBoundsDisabled"
 									   Fill="{ThemeResource SelectControlToggleOffButtonColor}"
-									   Stroke="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
+									   Stroke="{ThemeResource SelectControlToggleOnLowButtonColor}"
 									   StrokeThickness="2"
 									   Height="20"
 									   Width="44"
@@ -357,7 +357,7 @@
 
 						<Ellipse x:Name="FocusRing"
 								 Fill="{StaticResource MaterialOnSurfaceHoverBrush}"
-								 Stroke="{ThemeResource SelectControlToggleOnDisabledBackgroundColor}"
+								 Stroke="{ThemeResource SelectControlToggleOnLowBackgroundColor}"
 								 StrokeThickness="0"
 								 Height="{StaticResource FocusAreaSize}"
 								 Width="{StaticResource FocusAreaSize}"
@@ -537,8 +537,8 @@
 										Grid.Column="2" />
 
 								<Border x:Name="SwitchKnobBoundsDisabled"
-										Background="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
-										BorderBrush="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
+										Background="{ThemeResource SelectControlToggleOnLowButtonColor}"
+										BorderBrush="{ThemeResource SelectControlToggleOnLowButtonColor}"
 										BorderThickness="1"
 										CornerRadius="13"
 										Width="40"
@@ -595,7 +595,7 @@
 							<!--
 							<Ellipse x:Name="FocusRing"
 									 Fill="{StaticResource MaterialOnSurfaceHoverBrush}"
-									 Stroke="{ThemeResource SelectControlToggleOnDisabledBackgroundColor}"
+									 Stroke="{ThemeResource SelectControlToggleOnLowBackgroundColor}"
 									 StrokeThickness="0"
 									 Height="{StaticResource FocusAreaSize}"
 									 Width="{StaticResource FocusAreaSize}"
@@ -748,7 +748,7 @@
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Grid.ColumnSpan="3" />
 
-						<!-- TODO: fix disabled on thumbtint, using SelectControlToggleOnDisabledButtonColor -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
+						<!-- TODO: fix disabled on thumbtint, using SelectControlToggleOnLowButtonColor -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
 						<Grid x:Name="onDisabledGrid"
 							  Grid.Column="2"
@@ -757,8 +757,8 @@
 							<!-- Provides a disabled state for an on switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{ThemeResource SelectControlToggleOnDisabledButtonColor}"
-												  TrackTint="{ThemeResource SelectControlToggleOnDisabledBackgroundColor}" />
+												  ThumbTint="{ThemeResource SelectControlToggleOnLowButtonColor}"
+												  TrackTint="{ThemeResource SelectControlToggleOnLowBackgroundColor}" />
 						</Grid>
 
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
