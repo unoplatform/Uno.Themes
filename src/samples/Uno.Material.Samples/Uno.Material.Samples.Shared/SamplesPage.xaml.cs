@@ -99,7 +99,7 @@ namespace Uno.Material.Samples
 				AddMenuItem<PasswordBoxSamplePage>(icon: "PasswordBoxIcon");
 				AddMenuItem<ProgressBarSamplePage>(icon: "ProgressBarIcon");
 				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");
-				AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
+				// Incomplete : AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");
 				AddMenuItem<ToggleSwitchSamplePage>(icon: "ToggleSwitchIcon");
