@@ -107,7 +107,7 @@ namespace Uno.Material.Controls
 		//}
 
 		public static readonly DependencyProperty RippleSizeMultiplierProperty = DependencyProperty.Register(
-			"RippleSizeMultiplier", typeof(double), typeof(Ripple), new PropertyMetadata(1.75));
+			"RippleSizeMultiplier", typeof(double), typeof(Ripple), new PropertyMetadata(8.0));
 
 		public double RippleSizeMultiplier
 		{

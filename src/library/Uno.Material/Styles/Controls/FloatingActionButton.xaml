@@ -54,7 +54,6 @@
 	<Thickness x:Key="MaterialFabPadding_Small">12</Thickness>
 
 	<!-- Undocumented variables -->
-	<x:Double x:Key="MaterialFabRippleMultiplier">2.0</x:Double>
 	<x:Double x:Key="MaterialFabContentWidthOrHeight">16</x:Double>
 	<x:Double x:Key="MaterialFabIconTextPadding">12</x:Double>
 
@@ -98,8 +97,7 @@
 							<controls:Ripple x:Name="Ripple"
 											 CornerRadius="{TemplateBinding CornerRadius}"
 											 Feedback="{TemplateBinding Foreground}"
-											 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
-											 RippleSizeMultiplier="{StaticResource MaterialFabRippleMultiplier}">
+											 FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
 
 								<Grid x:Name="Root"
 									  Background="{TemplateBinding Background}">
