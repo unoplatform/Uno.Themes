@@ -22,19 +22,19 @@
 
 		<!-- Light Theme -->
 		<ResourceDictionary x:Key="Light">
-			<Color x:Key="ButtonFabDisabledFabBackgroundColor">#9F9F9F</Color>
+			<Color x:Key="ButtonFabLowFabBackgroundColor">#9F9F9F</Color>
 		</ResourceDictionary>
 		
 		<!-- Dark Theme -->
 		<ResourceDictionary x:Key="Dark">
-			<Color x:Key="ButtonFabDisabledFabBackgroundColor">#606060</Color>
+			<Color x:Key="ButtonFabLowFabBackgroundColor">#606060</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 			
 	<SolidColorBrush x:Key="ButtonFabFocusOverlayBackgroundColor"
 					 Color="Transparent" />
-	<SolidColorBrush x:Key="ButtonFabDisabledFabBackgroundColorBrush"
-					 Color="{ThemeResource ButtonFabDisabledFabBackgroundColor}" />
+	<SolidColorBrush x:Key="ButtonFabLowFabBackgroundColorBrush"
+					 Color="{ThemeResource ButtonFabLowFabBackgroundColor}" />
 	<StaticResource x:Key="ButtonFabFocusOverlayBorderColor"
 					ResourceKey="MaterialOnPrimaryBrush" />
 
@@ -156,7 +156,7 @@
 									<VisualState.Setters>
 
 										<Setter Target="Root.Background"
-												Value="{StaticResource ButtonFabDisabledFabBackgroundColorBrush}" />
+												Value="{StaticResource ButtonFabLowFabBackgroundColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
