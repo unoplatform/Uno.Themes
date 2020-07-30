@@ -82,7 +82,7 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 ```
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
-			Uno.Material.Initialization.Init(this, new ResourceDictionary(){ Source = new Uri("ms-appx:///ColorPaletteOverride.xaml")});
+			Uno.Material.Resources.Init(this, new ResourceDictionary() { Source = new Uri("ms-appx:///ColorPaletteOverride.xaml") });
 
 			[...]
 		}
