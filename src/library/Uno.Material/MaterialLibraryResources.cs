@@ -10,10 +10,6 @@ namespace Uno.Material
 	{
 		public MaterialLibraryResources()
 		{
-#if NETFX_CORE
-			this.MergedDictionaries.Add(new Microsoft.UI.Xaml.Controls.XamlControlsResources());
-#endif
-
 			// Add all ResourceDictionaries for Variables here in alphabetical order
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/AnimationConstants.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Colors.xaml") });

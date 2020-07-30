@@ -16,44 +16,10 @@
 					ios:Margin="12"
 					Padding="12">
 
-			<!-- Button Contained -->
-			<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Contained">
-				<Button Content="CONTAINED"
-						Style="{StaticResource MaterialContainedButtonStyle}" />
-			</smtx:XamlDisplay>
-
-			<!-- Button Contained Disabled -->
-			<smtx:XamlDisplay UniqueKey="ButtonSamplePage_ContainedDisabled">
-				<Button Content="CONTAINED DISABLED"
-						IsEnabled="False"
-						Style="{StaticResource MaterialContainedButtonStyle}" />
-			</smtx:XamlDisplay>
-
-			<!-- Button Outlined -->
-			<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Outline">
-				<Button Content="OUTLINED"
-						Style="{StaticResource MaterialOutlinedButtonStyle}" />
-			</smtx:XamlDisplay>
-
-			<!-- Button Outlined Disabled -->
-			<smtx:XamlDisplay UniqueKey="ButtonSamplePage_OutlineDisabled">
-				<Button Content="OUTLINED DISABLED"
-						IsEnabled="False"
-						Style="{StaticResource MaterialOutlinedButtonStyle}" />
-			</smtx:XamlDisplay>
-
-			<!-- Button Text -->
-			<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Text">
-				<Button Content="TEXT"
-						Style="{StaticResource MaterialTextButtonStyle}" />
-			</smtx:XamlDisplay>
-
-			<!-- Button Text Disabled -->
-			<smtx:XamlDisplay UniqueKey="ButtonSamplePage_TextDisabled">
-				<Button Content="TEXT DISABLED"
-						IsEnabled="False"
-						Style="{StaticResource MaterialTextButtonStyle}" />
-			</smtx:XamlDisplay>
+			<MediaPlayerElement x:Name="MediaPlayer"
+								Background="Red"
+								Foreground="Red"
+								Source="https://sec.ch9.ms/ch9/0686/181a7a11-4afe-4eef-a381-e5b596f10686/automatedbackupsPart2.mp4" />
 		</StackPanel>
 	</ScrollViewer>
 </Page>
