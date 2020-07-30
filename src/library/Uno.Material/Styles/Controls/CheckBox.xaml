@@ -7,13 +7,16 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="xamarin ios android wasm">
 
+	<x:String x:Key="HyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
+	<x:String x:Key="CheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+
 	<GridLength x:Key="CheckAreaLength">40</GridLength>
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
 
 	<StaticResource x:Key="CheckBoxSelectControlStrokeBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush"/>
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
@@ -407,7 +410,7 @@
 								  CornerRadius="2" />
 
 							<Path x:Name="HyphenGlyph"
-								  Data="M0,0L32,0 32,5.3 0,5.3z"
+								  Data="{StaticResource HyphenGlyphPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
@@ -419,7 +422,7 @@
 								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
-								  Data="M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z"
+								  Data="{StaticResource CheckGlyphPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
