@@ -28,27 +28,24 @@
 			<Color x:Key="MaterialOnSurfaceColor">#000000</Color>
 			<Color x:Key="MaterialOnErrorColor">#000000</Color>
 			<Color x:Key="MaterialOverlayColor">#51000000</Color>
-
-			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
-			<Color x:Key="BottomNavBackgroundColor">#5B4CF5</Color>
-
-			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBarItem -->
-			<Color x:Key="BottomNavLabelFocusColor">#FFFFFF</Color>
-			<Color x:Key="BottomNavIconFocusColor">#FFFFFF</Color>
-			<Color x:Key="BottomNavLabelColor">#FFFFFF</Color>
-			<Color x:Key="BottomNavIconColor">#FFFFFF</Color>
-			<Color x:Key="BottomNavNotifBackgroundColor">#F85977</Color>
-			<Color x:Key="BottomNavNotifLabelColor">#000000</Color>
-
-			<SolidColorBrush x:Key="BottomNavPressedBrush"
-							 Color="{StaticResource MaterialOnPrimaryColor}"
-							 Opacity="0.10" />
-
+			
 			<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. -->
 			<!-- Non-opaque/transparent primary disabled color -->
 			<Color x:Key="PrimaryVariantLowThumbColor">#E9E5FA</Color>
 			<!-- Non-opaque/transparent white color that shows on white surfaces -->
 			<Color x:Key="SurfaceVariantLightColor">#F7F7F7</Color>
+
+			<!-- Bottom Bar Navigation -->
+			<Color x:Key="MaterialBottomNavBackgroundColor">#5B4CF5</Color>
+			<Color x:Key="MaterialBottomNavForegroundColor">#FFFFFF</Color>
+			
+			<SolidColorBrush x:Key="MaterialBottomNavPressedBrush"
+							 Color="{ThemeResource MaterialOnPrimaryColor}"
+							 Opacity="0.10" />
+			
+			<SolidColorBrush x:Key="MaterialBottomNavUncheckedForegroundBrush"
+							 Color="{ThemeResource MaterialOnPrimaryColor}"
+							 Opacity="0.60" />
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
@@ -70,25 +67,22 @@
 			<Color x:Key="MaterialOnErrorColor">#000000</Color>
 			<Color x:Key="MaterialOverlayColor">#51FFFFFF</Color>
 
-			<SolidColorBrush x:Key="BottomNavPressedBrush"
-							 Color="{StaticResource MaterialOnSurfaceColor}"
-							 Opacity="0.10" />
-
-			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBar -->
-			<Color x:Key="BottomNavBackgroundColor">#121212</Color>
-
-			<!-- TODO: Temporary until we figure out how to propertly set Theme Colors in BottomNavigationBarItem -->
-			<Color x:Key="BottomNavLabelFocusColor">#B6A8FB</Color>
-			<Color x:Key="BottomNavIconFocusColor">#B6A8FB</Color>
-			<Color x:Key="BottomNavLabelColor">#DEFFFFFF</Color>
-			<Color x:Key="BottomNavIconColor">#DEFFFFFF</Color>
-			<Color x:Key="BottomNavNotifBackgroundColor">#CF6679</Color>
-			<Color x:Key="BottomNavNotifLabelColor">#000000</Color>
-
 			<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. -->
 			<!-- Non-opaque/transparent primary medium color -->
 			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#57507C</Color>
 			<Color x:Key="MaterialSurfaceVariantLightColor">#121212</Color>
+
+			<!-- Bottom Bar Navigation -->
+			<Color x:Key="MaterialBottomNavBackgroundColor">#292929</Color>
+			<Color x:Key="MaterialBottomNavForegroundColor">#B6A8FB</Color>
+			
+			<SolidColorBrush x:Key="MaterialBottomNavPressedBrush"
+							 Color="{StaticResource MaterialOnSurfaceColor}"
+							 Opacity="0.10" />
+			
+			<SolidColorBrush x:Key="MaterialBottomNavUncheckedForegroundBrush"
+							 Color="{StaticResource MaterialOnSurfaceColor}"
+							 Opacity="0.60" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
