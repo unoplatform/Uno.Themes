@@ -32,7 +32,7 @@
 							ResourceKey="MaterialSurfaceVariantBrush" />
 	<StaticResource x:Key="SelectControlToggleOffBackgroundColor"
 					ResourceKey="MaterialOnSurfaceLowVariantBrush" />
-	
+
 	<!-- Toggle On Disabled -->
 	<not_android:StaticResource x:Key="SelectControlToggleOnLowButtonColor"
 								ResourceKey="MaterialPrimaryFocusedBrush" />
@@ -620,28 +620,15 @@
 				Value="Stretch" />
 		<Setter Property="Foreground"
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
-		<Setter Property="Height"
-				Value="50" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
-					<Grid Padding="{TemplateBinding Padding}"
-						  Height="{TemplateBinding Height}"
-						  Width="{TemplateBinding Width}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  HorizontalAlignment="Stretch">
-
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="10" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
+					<StackPanel Padding="{TemplateBinding Padding}"
+								Height="{TemplateBinding Height}"
+								Width="{TemplateBinding Width}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								HorizontalAlignment="Stretch">
 
 						<!-- The margin here is used to properly align the content with the UI switch -->
 						<ContentPresenter x:Name="ContentPresenter"
@@ -649,16 +636,13 @@
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  VerticalAlignment="Stretch"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Margin="0,0,0,5"
-										  Grid.ColumnSpan="3" />
+										  Margin="0,0,0,5" />
 
 						<!-- Do not add x:Name to BindableUiSwitch or else page will not load -->
 						<BindableUISwitch Background="{TemplateBinding Foreground}"
 										  IsOn="{TemplateBinding IsOn, Mode=TwoWay}"
-										  Enabled="{TemplateBinding IsEnabled}"
-										  Grid.Column="2"
-										  Grid.Row="1" />
-					</Grid>
+										  Enabled="{TemplateBinding IsEnabled}" />
+					</StackPanel>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
