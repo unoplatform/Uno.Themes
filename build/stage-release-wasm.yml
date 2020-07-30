@@ -1,0 +1,20 @@
+jobs:
+- job: Publish_WASM
+  pool:
+    vmImage: windows-2019
+
+  steps:
+  - checkout: none
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: current
+      downloadType: single
+      artifactName: $(WASMArtifactName)
+
+  - task: nventivecorp.nventive.nventive.websiteVersion.websiteVersion@5
+    displayName: 'Deploy Uno Material to Azure'
+    inputs:
+      WebsitePath: '$(System.ArtifactsDirectory)/$(WASMArtifactName)'
+      AzureSubscription: 'Uno Platform'
+      AzureStorageAccount: unomaterial
