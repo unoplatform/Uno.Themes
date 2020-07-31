@@ -20,14 +20,13 @@ Platform support:
 ## Getting Started
 
 1. Install the nuget package Uno.Material. You can find the nuget on [this feed instead of nuget.org](https://dev.azure.com/uno-platform/Uno%20Platform/_packaging?_a=feed&feed=unoplatformdev)
-2. Unless you want our default color palette (inspired by our Uno logo), you'll want to override the following color resources in you application. We suggest creating a Color.xaml `ResourceDictionary`.
+2. Unless you want our default color palette (inspired by our Uno logo), you'll want to override the following color resources in you application. We suggest creating a ColorPaletteOverride.xaml `ResourceDictionary`.
 For more information on the color system, consult this [page](https://material.io/design/color/the-color-system.html#color-theme-creation) for all the official documentation and tools to help you create your own palette. 
-Here is what Colors.xaml would contain if you want both light and dark theme. (see 7. for android native ToggleSwitch colors)
+Here is what ColorPaletteOverride.xaml would contain if you want both light and dark theme.
 ```xaml
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Uno.Material.Samples.Shared.Content">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- 
 	
@@ -38,40 +37,40 @@ Here is what Colors.xaml would contain if you want both light and dark theme. (s
 	<ResourceDictionary.ThemeDictionaries>
 		<!-- Light Theme -->
 		<ResourceDictionary x:Key="Light">
-			<Color x:Key="PrimaryColor">#5B4CF5</Color>
-			<Color x:Key="PrimaryVariantDarkColor">#353FE5</Color>
-			<Color x:Key="PrimaryVariantLightColor">#B6A8FB</Color>
-			<Color x:Key="SecondaryColor">#67E5AD</Color>
-			<Color x:Key="SecondaryVariantDarkColor">#2BB27E</Color>
-			<Color x:Key="SecondaryVariantLightColor">#9CFFDF</Color>
-			<Color x:Key="BackgroundColor">#FFFFFF</Color>
-			<Color x:Key="SurfaceColor">#FFFFFF</Color>
-			<Color x:Key="ErrorColor">#F85977</Color>
-			<Color x:Key="OnPrimaryColor">#FFFFFF</Color>
-			<Color x:Key="OnSecondaryColor">#000000</Color>
-			<Color x:Key="OnBackgroundColor">#000000</Color>
-			<Color x:Key="OnSurfaceColor">#000000</Color>
-			<Color x:Key="OnErrorColor">#000000</Color>
-			<Color x:Key="OverlayColor">#51000000</Color>
+			<Color x:Key="MaterialPrimaryColor">#5B4CF5</Color>
+			<Color x:Key="MaterialPrimaryVariantDarkColor">#353FE5</Color>
+			<Color x:Key="MaterialPrimaryVariantLightColor">#B6A8FB</Color>
+			<Color x:Key="MaterialSecondaryColor">#67E5AD</Color>
+			<Color x:Key="MaterialSecondaryVariantDarkColor">#2BB27E</Color>
+			<Color x:Key="MaterialSecondaryVariantLightColor">#9CFFDF</Color>
+			<Color x:Key="MaterialBackgroundColor">#FFFFFF</Color>
+			<Color x:Key="MaterialSurfaceColor">#FFFFFF</Color>
+			<Color x:Key="MaterialErrorColor">#F85977</Color>
+			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
+			<Color x:Key="MaterialOnSecondaryColor">#000000</Color>
+			<Color x:Key="MaterialOnBackgroundColor">#000000</Color>
+			<Color x:Key="MaterialOnSurfaceColor">#000000</Color>
+			<Color x:Key="MaterialOnErrorColor">#000000</Color>
+			<Color x:Key="MaterialOverlayColor">#51000000</Color>
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
 		<ResourceDictionary x:Key="Dark">
-			<Color x:Key="PrimaryColor">#B6A8FB</Color>
-			<Color x:Key="PrimaryVariantDarkColor">#353FE5</Color>
-			<Color x:Key="PrimaryVariantLightColor">#D4CBFC</Color>
-			<Color x:Key="SecondaryColor">#67E5AD</Color>
-			<Color x:Key="SecondaryVariantDarkColor">#2BB27E</Color>
-			<Color x:Key="SecondaryVariantLightColor">#9CFFDF</Color>
-			<Color x:Key="BackgroundColor">#121212</Color>
-			<Color x:Key="SurfaceColor">#121212</Color>
-			<Color x:Key="ErrorColor">#CF6679</Color>
-			<Color x:Key="OnPrimaryColor">#000000</Color>
-			<Color x:Key="OnSecondaryColor">#000000</Color>
-			<Color x:Key="OnBackgroundColor">#FFFFFF</Color>
-			<Color x:Key="OnSurfaceColor">#DEFFFFFF</Color>
-			<Color x:Key="OnErrorColor">#000000</Color>
-			<Color x:Key="OverlayColor">#51FFFFFF</Color>
+			<Color x:Key="MaterialPrimaryColor">#B6A8FB</Color>
+			<Color x:Key="MaterialPrimaryVariantDarkColor">#353FE5</Color>
+			<Color x:Key="MaterialPrimaryVariantLightColor">#D4CBFC</Color>
+			<Color x:Key="MaterialSecondaryColor">#67E5AD</Color>
+			<Color x:Key="MaterialSecondaryVariantDarkColor">#2BB27E</Color>
+			<Color x:Key="MaterialSecondaryVariantLightColor">#9CFFDF</Color>
+			<Color x:Key="MaterialBackgroundColor">#121212</Color>
+			<Color x:Key="MaterialSurfaceColor">#121212</Color>
+			<Color x:Key="MaterialErrorColor">#CF6679</Color>
+			<Color x:Key="MaterialOnPrimaryColor">#000000</Color>
+			<Color x:Key="MaterialOnSecondaryColor">#000000</Color>
+			<Color x:Key="MaterialOnBackgroundColor">#FFFFFF</Color>
+			<Color x:Key="MaterialOnSurfaceColor">#DEFFFFFF</Color>
+			<Color x:Key="MaterialOnErrorColor">#000000</Color>
+			<Color x:Key="MaterialOverlayColor">#51FFFFFF</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
@@ -79,26 +78,32 @@ Here is what Colors.xaml would contain if you want both light and dark theme. (s
 ```
 
 
-3. Include the MergedDictionary in your application resources. We recommend in App.xaml like this:
-```xaml
-<Application x:Class="Uno.Material.Samples.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:material="using:Uno.Material">
-    <Application.Resources>
-        <ResourceDictionary>
-	    <ResourceDictionary.MergedDictionaries>
-		<!-- Import all styles from Uno.Material -->
-		<material:MaterialLibraryResources />
-		<!-- Adjust Path accordingly, this path assumes Colors.xaml is in the same directory as App.xaml -->
-		<ResourceDictionary Source="Colors.xaml" />
-	    </ResourceDictionary.MergedDictionaries>
-	</ResourceDictionary>
-    </Application.Resources>
-</Application>
+3. Initialize the material resources. The order in which the different resources are loaded is important so we created a simple `Init` method to add to `App.xaml.cs` at the beginning on `OnLaunched`
+```
+		protected override void OnLaunched(LaunchActivatedEventArgs e)
+		{
+			Uno.Material.Resources.Init(this, new ResourceDictionary() { Source = new Uri("ms-appx:///ColorPaletteOverride.xaml") });
+
+			[...]
+		}
 ```
 
-4. Start using the styles in your pages! 
+4. (Optional) The material ProgressBar is built on top for the WinUI ProgressBar so make sure you include the appropriate resources in your `App.xaml`
+
+```xaml
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<!-- Load WinUI resources -->
+				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
+				
+				<!-- Application's custom styles -->
+				<!-- other ResourceDictionaries -->
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+```
+5. Start using the styles in your pages! 
 - To use styles, just find the name of the style from our documentation or sample app and use it like this
 ```
 <Button Content="CONTAINED"
@@ -115,7 +120,7 @@ xmlns:material="using:Uno.Material.Controls"
 	       SubHeader="With title and subitle"
 	       Style="{StaticResource MaterialOutlinedCardStyle}" />
 ```
-5. (Optional) Set material styles as the default for your whole application.
+6. (Optional) Set material styles as the default for your whole application.
 For example, if you wish to use our ToggleSwitch style as your default style, simply set it as an implicit style in your app by adding the following code in your App.xaml
 ```
 <Style TargetType="ToggleSwitch"
@@ -124,16 +129,16 @@ For example, if you wish to use our ToggleSwitch style as your default style, si
 You can do the same for each control!
 Learn more about implicit styles from the Microsoft documentation [here](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/xaml-styles#apply-an-implicit-or-explicit-style)
 
-6. (Optional) Per-control customization.
+7. (Optional) Per-control customization.
 Just like WinUI, we documented a set of control-specific resources you can override to further customize our controls.
 For example, if you would like change the `CornerRadius` of all the `Buttons` using our material styles, you could simply override the `ButtonBorderRadius` value in your resources (in App.xaml would be the simplest way to put the following code)
 ```
 <CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
 ```
 
-7. (Optional) If you are using our [ToggleSwitches](#toggleSwitch) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
+8. (Optional) If you are using our [ToggleSwitches](#toggleSwitch) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
 
-8. (Optional) If you are using our [DatePickers, and TimePickers](#datePickers-and-timePickers) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
+9. (Optional) If you are using our [DatePickers, and TimePickers](#datePickers-and-timePickers) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
 
 <!-- TODO: Add reference on where to get those resource names -->
 
