@@ -1,0 +1,25 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.TimePickerSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d android ios">
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
+
+			<!-- TimePicker -->
+			<smtx:XamlDisplay UniqueKey="TimePickerSamplePage_Default">
+				<TimePicker ios:FlyoutPresenterStyle="{StaticResource MaterialTimePickerFlyoutPresenterStyle}" />
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
+</Page>
