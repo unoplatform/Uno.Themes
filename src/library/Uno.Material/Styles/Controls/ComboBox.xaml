@@ -46,6 +46,9 @@
 
 	<CornerRadius x:Key="ComboBoxBorderRadius">4</CornerRadius>
 
+	<x:String x:Key="UpArrowPathData">M15.995972,0L32,21.478999 0,21.478999z</x:String>
+	<x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
+
 	<!-- Style -->
 	<Style x:Key="MaterialComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
@@ -367,7 +370,7 @@
 
 								<!-- Down -->
 								<Path x:Name="DropDownGlyph_Down"
-									  Data="M0,0L32,0 16,19.745z"
+									  Data="{StaticResource DownArrowPathData}"
 									  Fill="{ThemeResource ComboBoxArrowForegroundThemeBrush}"
 									  Stretch="Uniform"
 									  Height="5"
@@ -378,7 +381,7 @@
 
 								<!-- Up -->
 								<Path x:Name="DropDownGlyph_Up"
-									  Data="M15.995972,0L32,21.478999 0,21.478999z"
+									  Data="{StaticResource UpArrowPathData}"
 									  Fill="{ThemeResource ComboBoxArrowForegroundThemeBrush}"
 									  Stretch="Uniform"
 									  Height="5"
