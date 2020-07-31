@@ -233,7 +233,7 @@
 													HorizontalContentAlignment="Stretch"
 													Grid.Column="2" />
 
-									 <!-- Top nav list --> 
+									<!-- Top nav list -->
 									<NavigationViewList AutomationProperties.LandmarkType="Navigation"
 														x:Name="TopNavMenuItemsHost"
 														Grid.Column="3"
@@ -270,7 +270,7 @@
 													<Style TargetType="FlyoutPresenter">
 														<Setter Property="Padding"
 																Value="0,8" />
-														 <!-- Set negative top margin to make the flyout align exactly with the button --> 
+														<!-- Set negative top margin to make the flyout align exactly with the button -->
 														<Setter Property="Margin"
 																Value="0,-4,0,0" />
 													</Style>
@@ -337,21 +337,21 @@
 									   PaneBackground="{StaticResource NavDrawersBackgroundBrush}"
 									   Grid.Row="1">
 
-								 <!-- Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane --> 
+								<!-- Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane -->
 								<SplitView.Pane>
 									<Grid x:Name="PaneContentGrid"
 										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="0" />
-											 <!-- above button margin + back button space --> 
+											<!-- above button margin + back button space -->
 											<RowDefinition x:Name="PaneContentGridToggleButtonRow"
 														   Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="8" />
-											 <!-- above list margin --> 
+											<!-- above list margin -->
 											<RowDefinition Height="*" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
@@ -398,7 +398,7 @@
 														HorizontalContentAlignment="Stretch"
 														Grid.Row="5" />
 
-										 <!-- Left nav list --> 
+										<!-- Left nav list -->
 										<NavigationViewList x:Name="MenuItemsHost"
 															Grid.Row="7"
 															Margin="0,0,0,20"
@@ -496,7 +496,6 @@
 		</Setter>
 	</Style>
 
-	
 	<!--Style which ensures the navigation never displays the menu in "Compact" mode-->
 	<Style x:Key="MaterialNoCompactMenuNavigationViewStyle"
 		   BasedOn="{StaticResource MaterialNavigationViewStyle}"
@@ -593,7 +592,7 @@
 
 							<VisualStateGroup x:Name="PaneStateListSizeGroup">
 								<VisualState x:Name="ListSizeFull" />
-								
+
 								<!-- Display the list as empty instead of compact -->
 								<VisualState x:Name="ListSizeCompact">
 									<VisualState.Setters>
@@ -693,7 +692,7 @@
 													HorizontalContentAlignment="Stretch"
 													Grid.Column="2" />
 
-									  <!-- Top nav list -->  
+									<!-- Top nav list -->
 									<NavigationViewList AutomationProperties.LandmarkType="Navigation"
 														x:Name="TopNavMenuItemsHost"
 														Grid.Column="3"
@@ -730,7 +729,7 @@
 													<Style TargetType="FlyoutPresenter">
 														<Setter Property="Padding"
 																Value="0,8" />
-														 <!-- Set negative top margin to make the flyout align exactly with the button --> 
+														<!-- Set negative top margin to make the flyout align exactly with the button -->
 														<Setter Property="Margin"
 																Value="0,-4,0,0" />
 													</Style>
@@ -797,21 +796,21 @@
 									   PaneBackground="{StaticResource NavDrawersBackgroundBrush}"
 									   Grid.Row="1">
 
-								 <!-- Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane --> 
+								<!-- Known Issue ElevatedView creates abnormal and unwanted behavior inside splitview pane -->
 								<SplitView.Pane>
 									<Grid x:Name="PaneContentGrid"
 										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="0" />
-											 <!-- above button margin + back button space --> 
+											<!-- above button margin + back button space -->
 											<RowDefinition x:Name="PaneContentGridToggleButtonRow"
 														   Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="8" />
-											 <!-- above list margin --> 
+											<!-- above list margin -->
 											<RowDefinition Height="*" />
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
@@ -858,7 +857,7 @@
 														HorizontalContentAlignment="Stretch"
 														Grid.Row="5" />
 
-										 <!-- Left nav list --> 
+										<!-- Left nav list -->
 										<NavigationViewList x:Name="MenuItemsHost"
 															Grid.Row="7"
 															Margin="0,0,0,20"
@@ -907,7 +906,7 @@
 														VerticalContentAlignment="Stretch"
 														HorizontalContentAlignment="Stretch"
 														Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}"
-														Grid.Row="1"/>
+														Grid.Row="1" />
 
 										<ContentPresenter AutomationProperties.LandmarkType="Main"
 														  Grid.Row="2"
@@ -919,13 +918,13 @@
 
 						</Grid>
 
-							<!--
+						<!--
 								Notes:
 								- InternalVisibleBoundsPadding is added to this control to make this template compatible
 								  with notched devices by default. This behavior is not present in Microsoft's default UWP default.
 
 								- Canvas.ZIndex is not supported in Uno Grid yet, see https://github.com/unoplatform/uno/issues/325
-						-->		
+						-->
 						<Grid x:Name="PaneToggleButtonGrid"
 							  Margin="0,0,0,8"
 							  HorizontalAlignment="Left"
@@ -1060,17 +1059,6 @@
 												<DiscreteObjectKeyFrame KeyTime="0:0:0"
 																		Value="Visible" />
 											</ObjectAnimationUsingKeyFrames>
-
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderText"
-																		   Storyboard.TargetProperty="Opacity">
-												<LinearDoubleKeyFrame KeyTime="0:0:0"
-																	  Value="0.0" />
-												<LinearDoubleKeyFrame KeyTime="0:0:0.1"
-																	  Value="0.0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.2"
-																	  KeySpline="0.0,0.35 0.15,1.0"
-																	  Value="1.0" />
-											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
 									<VisualTransition From="HeaderTextVisible"
@@ -1081,15 +1069,6 @@
 												<DiscreteObjectKeyFrame KeyTime="0:0:0.2"
 																		Value="Collapsed" />
 											</ObjectAnimationUsingKeyFrames>
-
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="HeaderText"
-																		   Storyboard.TargetProperty="Opacity">
-												<LinearDoubleKeyFrame KeyTime="0:0:0"
-																	  Value="1.0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.1"
-																	  KeySpline="0.0,0.35 0.15,1.0"
-																	  Value="0.0" />
-											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
