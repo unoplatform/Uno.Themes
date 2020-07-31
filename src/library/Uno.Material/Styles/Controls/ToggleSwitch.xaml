@@ -263,7 +263,7 @@
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  VerticalAlignment="Center" />
 
-						<Grid Margin="20,0"
+						<Grid Margin="10,0,20,0"
 							  VerticalAlignment="Center"
 							  HorizontalAlignment="Stretch"
 							  Grid.Row="1">
@@ -365,7 +365,7 @@
 								 VerticalAlignment="Bottom"
 								 Opacity="0"
 								 IsHitTestVisible="False"
-								 Margin="10,0,20,0"
+								 Margin="0,0,20,0"
 								 Grid.Row="1" />
 					</Grid>
 				</ControlTemplate>
@@ -380,8 +380,6 @@
 				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
 		<Setter Property="VerticalAlignment"
 				Value="Center" />
-		<Setter Property="MinWidth"
-				Value="50" />
 		<Setter Property="ManipulationMode"
 				Value="System,TranslateX" />
 		<Setter Property="UseSystemFocusVisuals"
@@ -392,7 +390,6 @@
 				<ControlTemplate TargetType="ToggleSwitch">
 
 					<Grid Padding="{TemplateBinding Padding}"
-						  MinHeight="44"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  Background="{TemplateBinding Background}"
@@ -493,11 +490,7 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
+						<StackPanel>
 
 							<ContentPresenter x:Name="ContentPresenter"
 											  Content="{TemplateBinding Header}"
@@ -506,7 +499,7 @@
 											  ContentTemplate="{TemplateBinding HeaderTemplate}"
 											  Foreground="{TemplateBinding Foreground}" />
 
-							<Grid Grid.Row="1">
+							<Grid>
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
 									<ColumnDefinition Width="10" />
@@ -604,7 +597,7 @@
 									 IsHitTestVisible="False"
 									 Margin="10,0,20,0" />
 							-->
-						</Grid>
+						</StackPanel>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
