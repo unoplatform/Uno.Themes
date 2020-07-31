@@ -31,6 +31,7 @@ variables:
   iOSArtifactName: iOS
   UWPArtifactName: UWP
   macOSArtifactName: macOS
+  WASMArtifactName: WASM
 
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
@@ -141,6 +142,19 @@ stages:
         
     - template: build/stage-build.yml
 
+  - job: Build_Wasm
+    container: unoplatform/wasm-build:2.2
+
+    pool:
+      vmImage: 'ubuntu-18.04'
+
+    variables:
+      NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
+      SkipUnknowFrameworks: True
+
+    steps:
+      - template: build/stage-build-wasm.yml
+
 - stage: Release_Nuget
   # Only release when the build is not a Pull Request and it's using one of the proper release branches
   condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
@@ -164,3 +178,11 @@ stages:
     
   jobs:
   - template: build/stage-release-testflight.yml
+
+- stage: Release_WASM
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  dependsOn: Build
+
+  jobs:
+  - template: build/stage-release-wasm.yml
