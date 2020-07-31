@@ -102,6 +102,9 @@ namespace Uno.Material.Samples
 				// Incomplete : AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");
+#if __IOS__ || __ANDROID__
+				AddMenuItem<TimePickerSamplePage>(icon: "TimePickerIcon");
+#endif
 				AddMenuItem<ToggleSwitchSamplePage>(icon: "ToggleSwitchIcon");
 			}
 
