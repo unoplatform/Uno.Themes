@@ -1,6 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:extensions="using:Uno.Material.Extensions">
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:macos="http://uno.ui/macos"					
+					xmlns:extensions="using:Uno.Material.Extensions"
+					mc:Ignorable="d macos">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
@@ -211,10 +216,11 @@
 								   VerticalAlignment="Bottom" />
 
 						<Rectangle x:Name="FocusedBorder"
-								   Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}"
-								   Height="{StaticResource TextBoxFocusStrokeWidth}"
-								   RenderTransformOrigin="0.5,0.5"
-								   VerticalAlignment="Bottom">
+									Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}"
+									Height="{StaticResource TextBoxFocusStrokeWidth}"
+									VerticalAlignment="Bottom"
+									not_macos:RenderTransformOrigin="0.5,0.5"
+									macos:RenderTransformOrigin="0.0,0.5">
 							<Rectangle.RenderTransform>
 								<ScaleTransform x:Name="FocusedBorder_ScaleTransform"
 												ScaleX="0" />
@@ -225,6 +231,7 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
 
 	<Style x:Key="MaterialOutlinedTextBoxStyle"
 		   TargetType="TextBox">
