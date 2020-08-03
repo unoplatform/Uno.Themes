@@ -151,6 +151,7 @@ stages:
     variables:
       NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
       SkipUnknowFrameworks: True
+      ArtifactName: $(WASMArtifactName)
 
     steps:
       - template: build/stage-build-wasm.yml
