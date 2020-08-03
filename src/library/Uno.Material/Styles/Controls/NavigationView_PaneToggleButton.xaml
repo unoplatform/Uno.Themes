@@ -253,10 +253,13 @@
 											  Fill="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
 											  Stretch="Fill"
 											  UseLayoutRounding="False" />
-
+									<!--
+										macOS only works with a stretch Uniform and a height or width set
+									-->
 									<Path Data="{StaticResource BackArrowPathData}"
 										  Fill="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
-										  Stretch="Fill"
+										  Stretch="Uniform"
+										  Height="16"
 										  UseLayoutRounding="False"
 										  ios:Visibility="Collapsed" />
 								</Grid>
