@@ -15,26 +15,6 @@
 				<ResourceDictionary Source="ms-appx:///Styles/Button.xaml" />
 				<ResourceDictionary Source="ms-appx:///Styles/XamlDisplay.xaml" />
 			</ResourceDictionary.MergedDictionaries>
-
-			<!-- Temp: needed in-app until https://github.com/unoplatform/uno/issues/2924 is fixed -->
-			<Style TargetType="toolkit:ElevatedView">
-				<Setter Property="Template">
-					<Setter.Value>
-						<ControlTemplate TargetType="toolkit:ElevatedView">
-							<Grid>
-								<Grid x:Name="PART_ShadowHost" />
-
-								<Border x:Name="PART_Border"
-										Background="{TemplateBinding Background}"
-										BorderBrush="{TemplateBinding BorderBrush}"
-										BorderThickness="{TemplateBinding BorderThickness}"
-										CornerRadius="{TemplateBinding CornerRadius}"
-										Child="{TemplateBinding ElevatedContent}" />
-							</Grid>
-						</ControlTemplate>
-					</Setter.Value>
-				</Setter>
-			</Style>
 		</ResourceDictionary>
 	</Application.Resources>
 
