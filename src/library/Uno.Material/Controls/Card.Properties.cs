@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -137,6 +138,17 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty ElevationProperty =
 			DependencyProperty.Register("Elevation", typeof(double), typeof(Card), new PropertyMetadata(0));
+		#endregion
+
+		#region ShadowColor
+		public Color ShadowColor
+		{
+			get { return (Color)GetValue(ShadowColorProperty); }
+			set { SetValue(ShadowColorProperty, value); }
+		}
+
+		public static readonly DependencyProperty ShadowColorProperty =
+			DependencyProperty.Register("ShadowColor", typeof(Color), typeof(Card), new PropertyMetadata(Color.FromArgb(64, 0, 0, 0)));
 		#endregion
 	}
 }

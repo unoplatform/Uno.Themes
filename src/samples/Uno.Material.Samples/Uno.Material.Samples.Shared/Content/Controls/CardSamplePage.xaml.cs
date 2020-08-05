@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Material.Samples.Content.Controls
 {
-	public sealed partial class CardsSamplePage : Page
+	public sealed partial class CardSamplePage : Page
 	{
-		public CardsSamplePage()
+		public CardSamplePage()
 		{
 			this.InitializeComponent();
 		}

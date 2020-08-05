@@ -5,7 +5,7 @@
 This library is designed to help you use the [material design system](https://material.io/design):
 - Color system for both Light and Dark theme
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
-- Custom Controls for Material Components not offered out of the box by WinUI, such as Cards and BottomNavigationBar.
+- Custom Controls for Material Components not offered out of the box by WinUI, such as Card and BottomNavigationBar.
 
 Platform support: 
 - WinUI / UWP

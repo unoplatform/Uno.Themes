@@ -102,7 +102,7 @@ private void InitializeNavigationViewItems()
 	{
 		AddMenuItem<BottomNavigationBarSamplePage>(content: ""BottomBarNavigation"");
 		AddMenuItem<ButtonSamplePage>();
-		AddMenuItem<CardsSamplePage>();
+		AddMenuItem<CardSamplePage>();
 		AddMenuItem<CheckBoxSamplePage>();
 		AddMenuItem<ComboBoxSamplePage>();
 		AddMenuItem<FabSamplePage>(content: ""FAB"");

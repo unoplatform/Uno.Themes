@@ -91,7 +91,7 @@ namespace Uno.Material.Samples
 			{
 				AddMenuItem<BottomNavigationBarSamplePage>(content: "BottomBarNavigation", icon: "BottomBarIcon");
 				AddMenuItem<ButtonSamplePage>(icon: "ButtonIcon");
-				AddMenuItem<CardsSamplePage>(icon: "CardsIcon");
+				AddMenuItem<CardSamplePage>(icon: "CardsIcon");
 				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
