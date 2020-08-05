@@ -16,30 +16,76 @@
 					ios:Margin="12"
 					Padding="12">
 
+			<!-- Primary -->
+			<TextBlock Text="Primary"
+					   Style="{StaticResource MaterialSubtitle2}"
+					   Margin="12,16,12,8" />
+			
 			<!-- ToggleSwitch OFF -->
-			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_Off">
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_Off"
+							  Margin="12,0">
 				<ToggleSwitch Header="OFF"
 							  Style="{StaticResource MaterialToggleSwitchStyle}" />
 			</smtx:XamlDisplay>
 
 			<!-- ToggleSwitch ON -->
-			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_On">
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_On"
+							  Margin="12,0">
 				<ToggleSwitch Header="ON"
 							  IsOn="True"
 							  Style="{StaticResource MaterialToggleSwitchStyle}" />
 			</smtx:XamlDisplay>
 
 			<!-- ToggleSwitch OFF Disabled -->
-			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OffDisabled">
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OffDisabled"
+							  Margin="12,0">
 				<ToggleSwitch Header="OFF DISABLED"
 							  Style="{StaticResource MaterialToggleSwitchStyle}"
 							  IsEnabled="False" />
 			</smtx:XamlDisplay>
 
 			<!-- ToggleSwitch ON Disabled -->
-			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OnDisabled">
+			<smtx:XamlDisplay UniqueKey="ToggleSwitchSamplePage_OnDisabled"
+							  Margin="12,0">
 				<ToggleSwitch Header="ON DISABLED"
 							  Style="{StaticResource MaterialToggleSwitchStyle}"
+							  IsEnabled="False"
+							  IsOn="True" />
+			</smtx:XamlDisplay>
+
+			<!-- Secondary -->
+			<TextBlock Text="Secondary"
+					   Style="{StaticResource MaterialSubtitle2}"
+					   Margin="12,16,12,8" />
+			
+			<!-- ToggleSwitch OFF -->
+			<smtx:XamlDisplay UniqueKey="SecondaryToggleSwitchSamplePage_Off"
+							  Margin="12,0">
+				<ToggleSwitch Header="OFF"
+							  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
+			</smtx:XamlDisplay>
+
+			<!-- ToggleSwitch ON -->
+			<smtx:XamlDisplay UniqueKey="SecondaryToggleSwitchSamplePage_On"
+							  Margin="12,0">
+				<ToggleSwitch Header="ON"
+							  IsOn="True"
+							  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
+			</smtx:XamlDisplay>
+
+			<!-- ToggleSwitch OFF Disabled -->
+			<smtx:XamlDisplay UniqueKey="SecondaryToggleSwitchSamplePage_OffDisabled"
+							  Margin="12,0">
+				<ToggleSwitch Header="OFF DISABLED"
+							  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}"
+							  IsEnabled="False" />
+			</smtx:XamlDisplay>
+
+			<!-- ToggleSwitch ON Disabled -->
+			<smtx:XamlDisplay UniqueKey="SecondaryToggleSwitchSamplePage_OnDisabled"
+							  Margin="12,0">
+				<ToggleSwitch Header="ON DISABLED"
+							  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}"
 							  IsEnabled="False"
 							  IsOn="True" />
 			</smtx:XamlDisplay>

@@ -25,29 +25,34 @@
 					ResourceKey="MaterialPrimaryBrush" />
 	<StaticResource x:Key="SelectControlToggleOnBackgroundColor"
 					ResourceKey="MaterialPrimaryLowBrush" />
+
 	<!-- Toggle Off -->
-	<not_android:StaticResource x:Key="SelectControlToggleOffButtonColor"
-								ResourceKey="MaterialSurfaceBrush" />
-	<android:StaticResource x:Key="SelectControlToggleOffButtonColor"
-							ResourceKey="MaterialSurfaceVariantBrush" />
+	<StaticResource x:Key="SelectControlToggleOffButtonColor"
+					ResourceKey="MaterialSurfaceVariantBrush" />
 	<StaticResource x:Key="SelectControlToggleOffBackgroundColor"
 					ResourceKey="MaterialOnSurfaceLowVariantBrush" />
 
 	<!-- Toggle On Disabled -->
-	<not_android:StaticResource x:Key="SelectControlToggleOnLowButtonColor"
-								ResourceKey="MaterialPrimaryFocusedBrush" />
-	<android:StaticResource x:Key="SelectControlToggleOnLowButtonColor"
-							ResourceKey="MaterialPrimaryVariantLowThumbColorBrush" />
+	<StaticResource x:Key="SelectControlToggleOnLowButtonColor"
+					ResourceKey="MaterialPrimaryVariantLowThumbColorBrush" />
 	<StaticResource x:Key="SelectControlToggleOnLowBackgroundColor"
 					ResourceKey="MaterialPrimaryDraggedBrush" />
 
-	<win:Style x:Key="MaterialToggleSwitchStyle"
-			   TargetType="ToggleSwitch">
+	<Style x:Key="DefaultMaterialToggleSwitchStyle"
+		   TargetType="ToggleSwitch">
 
 		<Setter Property="Foreground"
-				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
+				Value="{ThemeResource MaterialPrimaryColor}" />
+		<Setter Property="Background"
+				Value="{ThemeResource MaterialPrimaryVariantColor}" />
+		<Setter Property="HorizontalAlignment"
+				Value="Left" />
 		<Setter Property="VerticalAlignment"
 				Value="Center" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Left" />
+		<Setter Property="FontSize"
+				Value="15" />
 		<Setter Property="ManipulationMode"
 				Value="System,TranslateX" />
 		<Setter Property="UseSystemFocusVisuals"
@@ -57,41 +62,45 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
 
-					<Grid Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}">
+					<Grid Background="Transparent">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
+
 								<VisualState x:Name="Normal" />
 
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfacePressedBrush}" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
+																	   Storyboard.TargetProperty="StrokeThickness">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="0" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="SwitchKnobBoundsDisabled.Opacity"
-												Value="1" />
-										<Setter Target="SwitchKnobOn.Fill"
-												Value="{ThemeResource SelectControlToggleOnLowButtonColor}" />
-										<Setter Target="SwitchKnobOff.Fill"
-												Value="{ThemeResource SelectControlToggleOnLowButtonColor}" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource SelectControlToggleOnLowBackgroundColor}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource SelectControlToggleOnLowButtonColor}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource SelectControlToggleOnLowButtonColor}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
 
@@ -103,9 +112,6 @@
 													  To="On"
 													  GeneratedDuration="0">
 										<Storyboard>
-
-											<RepositionThemeAnimation TargetName="SwitchKnob"
-																	  FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOnOffset}" />
 
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																		   Storyboard.TargetProperty="Opacity">
@@ -138,8 +144,6 @@
 													  To="Off"
 													  GeneratedDuration="0">
 										<Storyboard>
-											<RepositionThemeAnimation TargetName="SwitchKnob"
-																	  FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobCurrentToOffOffset}" />
 										</Storyboard>
 									</VisualTransition>
 
@@ -148,8 +152,6 @@
 													  To="Off"
 													  GeneratedDuration="0">
 										<Storyboard>
-											<RepositionThemeAnimation TargetName="SwitchKnob"
-																	  FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOnToOffOffset}" />
 										</Storyboard>
 									</VisualTransition>
 
@@ -158,9 +160,6 @@
 													  To="On"
 													  GeneratedDuration="0">
 										<Storyboard>
-
-											<RepositionThemeAnimation TargetName="SwitchKnob"
-																	  FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOffToOnOffset}" />
 
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																		   Storyboard.TargetProperty="Opacity">
@@ -190,418 +189,172 @@
 								</VisualStateGroup.Transitions>
 
 								<VisualState x:Name="Dragging" />
+
 								<VisualState x:Name="Off" />
 
 								<VisualState x:Name="On">
-
 									<Storyboard>
+
 										<DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
 														 Storyboard.TargetProperty="X"
-														 To="24"
+														 To="22"
 														 Duration="0" />
-									</Storyboard>
 
-									<VisualState.Setters>
-										<Setter Target="FocusRing.HorizontalAlignment"
-												Value="Right" />
-										<Setter Target="SwitchKnobBounds.Opacity"
-												Value="1" />
-										<Setter Target="OuterBorder.Opacity"
-												Value="0" />
-										<Setter Target="SwitchKnobOn.Opacity"
-												Value="1" />
-										<Setter Target="SwitchKnobOff.Opacity"
-												Value="0" />
-										<Setter Target="SwitchKnobBounds.Fill"
-												Value="{ThemeResource SelectControlToggleOnButtonColor}" />
-										<Setter Target="SwitchKnobBounds.Stroke"
-												Value="{ThemeResource SelectControlToggleOnButtonColor}" />
-									</VisualState.Setters>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="1" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="0" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="1" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="0" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
 
-							<VisualStateGroup x:Name="FocusStates">
-
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
-									</VisualState.Setters>
+							<VisualStateGroup x:Name="ContentStates">
+								<VisualState x:Name="OffContent">
+									<Storyboard>
+									</Storyboard>
 								</VisualState>
 
-								<VisualState x:Name="PointerFocused">
-									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
-										<Setter Target="FocusRing.StrokeThickness"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="OnContent">
+									<Storyboard>
 
-								<VisualState x:Name="Unfocused">
-									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+										<DoubleAnimation Storyboard.TargetName="OnContentPresenter"
+														 Storyboard.TargetProperty="Opacity"
+														 To="1"
+														 Duration="0" />
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
+																	   Storyboard.TargetName="OnContentPresenter">
+											<DiscreteObjectKeyFrame KeyTime="0">
+												<DiscreteObjectKeyFrame.Value>
+													<x:Boolean>True</x:Boolean>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="10" />
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="10" />
 						</Grid.RowDefinitions>
 
-						<ContentPresenter x:Name="ContentPresenter"
-										  Content="{TemplateBinding Header}"
-										  FontSize="{TemplateBinding FontSize}"
-										  FontWeight="{TemplateBinding FontWeight}"
-										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  VerticalAlignment="Center" />
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="12"
+											  MaxWidth="12" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
 
-						<Grid Margin="10,0,20,0"
-							  VerticalAlignment="Center"
-							  HorizontalAlignment="Stretch"
-							  Grid.Row="1">
+						<TextBlock Text="{TemplateBinding Header}"
+								   Style="{StaticResource MaterialBody2}"
+								   Foreground="{ThemeResource MaterialOnBackgroundColor}"
+								   Grid.ColumnSpan="4" />
 
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="10" />
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="10" />
-							</Grid.RowDefinitions>
+						<ContentPresenter x:Name="OnContentPresenter"
+										  Grid.Row="1"
+										  Grid.RowSpan="3"
+										  Grid.Column="2"
+										  Opacity="0"
+										  Foreground="{TemplateBinding Foreground}"
+										  IsHitTestVisible="False"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
 
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="12"
-												  MaxWidth="12" />
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*" />
-							</Grid.ColumnDefinitions>
+						<Grid Grid.Row="1"
+							  Grid.RowSpan="3"
+							  Grid.ColumnSpan="3"
+							  Control.IsTemplateFocusTarget="True" />
 
-							<Grid Grid.Row="1"
-								  Grid.RowSpan="3"
-								  Grid.ColumnSpan="3"
-								  Margin="0,5"
-								  Control.IsTemplateFocusTarget="True" />
+						<Rectangle x:Name="OuterBorder"
+								   Grid.Row="2"
+								   Margin="2,0"
+								   Height="12"
+								   Width="40"
+								   RadiusX="6"
+								   RadiusY="6"
+								   Fill="{StaticResource SelectControlToggleOffBackgroundColor}" />
 
-							<Rectangle x:Name="OuterBorder"
-									   Stroke="{ThemeResource SelectControlToggleOffBackgroundColor}"
-									   StrokeThickness="2"
-									   Height="20"
-									   Width="44"
-									   RadiusX="10"
-									   RadiusY="10"
-									   Grid.Row="2" />
+						<Rectangle x:Name="SwitchKnobBounds"
+								   Grid.Row="2"
+								   Margin="2,0"
+								   Height="12"
+								   Width="40"
+								   RadiusX="6"
+								   RadiusY="6"
+								   Fill="{TemplateBinding Background}"
+								   Opacity="0" />
 
-							<Rectangle x:Name="SwitchKnobBounds"
-									   Fill="{ThemeResource SelectControlToggleOnButtonColor}"
-									   Stroke="{ThemeResource SelectControlToggleOnBackgroundColor}"
-									   StrokeThickness="2"
-									   Height="20"
-									   Width="44"
-									   RadiusX="10"
-									   RadiusY="10"
-									   Opacity="0"
-									   Grid.Row="2" />
+						<Grid x:Name="SwitchKnob"
+							  Grid.Row="2"
+							  HorizontalAlignment="Left"
+							  Width="22"
+							  Height="22">
 
-							<Rectangle x:Name="SwitchKnobBoundsDisabled"
-									   Fill="{ThemeResource SelectControlToggleOffButtonColor}"
-									   Stroke="{ThemeResource SelectControlToggleOnLowButtonColor}"
-									   StrokeThickness="2"
-									   Height="20"
-									   Width="44"
-									   RadiusX="10"
-									   RadiusY="10"
-									   Opacity="0"
-									   Grid.Row="2" />
+							<Ellipse x:Name="SwitchKnobOn"
+									 Fill="{TemplateBinding Foreground}"
+									 Width="22"
+									 Height="22"
+									 Opacity="0" />
 
-							<Grid x:Name="SwitchKnob"
-								  Grid.Row="2"
-								  HorizontalAlignment="Left"
-								  Width="20"
-								  Height="20">
-
-								<Ellipse x:Name="SwitchKnobOn"
-										 Fill="{ThemeResource SelectControlToggleOffButtonColor}"
-										 Width="10"
-										 Height="10"
-										 Opacity="0" />
-
-								<Ellipse x:Name="SwitchKnobOff"
-										 Fill="{ThemeResource SelectControlToggleOffBackgroundColor}"
-										 Width="10"
-										 Height="10" />
-
-								<Grid.RenderTransform>
-									<TranslateTransform x:Name="KnobTranslateTransform" />
-								</Grid.RenderTransform>
-							</Grid>
-
-							<Thumb x:Name="SwitchThumb"
-								   AutomationProperties.AccessibilityView="Raw"
-								   Grid.Row="1"
-								   Grid.RowSpan="3"
-								   Grid.ColumnSpan="3">
-								<Thumb.Template>
-									<ControlTemplate TargetType="Thumb">
-										<Rectangle Fill="Transparent" />
-									</ControlTemplate>
-								</Thumb.Template>
-							</Thumb>
+							<Ellipse x:Name="SwitchKnobOff"
+									 Fill="{StaticResource SelectControlToggleOffButtonColor}"
+									 Width="22"
+									 Height="22" />
+							<Grid.RenderTransform>
+								<TranslateTransform x:Name="KnobTranslateTransform" />
+							</Grid.RenderTransform>
 						</Grid>
 
-						<Ellipse x:Name="FocusRing"
-								 Fill="{StaticResource MaterialOnSurfaceHoverBrush}"
-								 Stroke="{ThemeResource SelectControlToggleOnLowBackgroundColor}"
-								 StrokeThickness="0"
-								 Height="{StaticResource FocusAreaSize}"
-								 Width="{StaticResource FocusAreaSize}"
-								 HorizontalAlignment="Left"
-								 VerticalAlignment="Bottom"
-								 Opacity="0"
-								 IsHitTestVisible="False"
-								 Margin="0,0,20,0"
-								 Grid.Row="1" />
+						<Thumb x:Name="SwitchThumb"
+							   AutomationProperties.AccessibilityView="Raw"
+							   Grid.Row="1"
+							   Grid.RowSpan="3"
+							   Grid.ColumnSpan="3">
+							<Thumb.Template>
+								<ControlTemplate TargetType="Thumb">
+									<Rectangle Fill="Transparent" />
+								</ControlTemplate>
+							</Thumb.Template>
+						</Thumb>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+	</Style>
+
+	<win:Style x:Key="MaterialToggleSwitchStyle"
+			   TargetType="ToggleSwitch"
+			   BasedOn="{StaticResource DefaultMaterialToggleSwitchStyle}">
 	</win:Style>
 
 	<wasm:Style x:Key="MaterialToggleSwitchStyle"
-				TargetType="ToggleSwitch">
-
-		<Setter Property="Foreground"
-				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
-		<Setter Property="VerticalAlignment"
-				Value="Center" />
-		<Setter Property="ManipulationMode"
-				Value="System,TranslateX" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ToggleSwitch">
-
-					<Grid Padding="{TemplateBinding Padding}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  Background="{TemplateBinding Background}"
-						  HorizontalAlignment="Stretch">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver">
-									<!--<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
-									</VisualState.Setters>-->
-								</VisualState>
-
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<!--
-										<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfacePressedBrush}" />
-										-->
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="SwitchKnobBoundsDisabled.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="ToggleStates">
-								<VisualState x:Name="Dragging" />
-								<VisualState x:Name="Off" />
-
-								<VisualState x:Name="On">
-									<Storyboard>
-										<DoubleAnimation Duration="0"
-														 To="14"
-														 Storyboard.TargetProperty="X"
-														 Storyboard.TargetName="KnobTranslateTransform" />
-									</Storyboard>
-
-									<VisualState.Setters>
-										<Setter Target="SwitchKnobBounds.Opacity"
-												Value="1" />
-										<Setter Target="SwitchKnobBounds.Background"
-												Value="{ThemeResource SelectControlToggleOnButtonColor}" />
-										<Setter Target="SwitchKnobBounds.BorderBrush"
-												Value="{ThemeResource SelectControlToggleOnButtonColor}" />
-										<Setter Target="OuterBorder.Opacity"
-												Value="0" />
-										<Setter Target="SwitchKnobOn.Opacity"
-												Value="1" />
-										<Setter Target="SwitchKnobOff.Opacity"
-												Value="0" />
-										<!--
-										<Setter Target="FocusRing.HorizontalAlignment"
-												Value="Right" />
-										-->
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="ContentStates">
-								<VisualState x:Name="OffContent" />
-								<VisualState x:Name="OnContent" />
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="FocusStates">
-
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<!--<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />-->
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerFocused">
-									<VisualState.Setters>
-										<!--<Setter Target="FocusRing.Opacity"
-												Value="1" />
-										<Setter Target="FocusRing.Fill"
-												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
-										<Setter Target="FocusRing.StrokeThickness"
-												Value="1" />-->
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Unfocused" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<StackPanel>
-
-							<ContentPresenter x:Name="ContentPresenter"
-											  Content="{TemplateBinding Header}"
-											  FontSize="{TemplateBinding FontSize}"
-											  FontWeight="{TemplateBinding FontWeight}"
-											  ContentTemplate="{TemplateBinding HeaderTemplate}"
-											  Foreground="{TemplateBinding Foreground}" />
-
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="10" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<Border x:Name="OuterBorder"
-										Background="{TemplateBinding Background}"
-										BorderBrush="{TemplateBinding BorderBrush}"
-										BorderThickness="0"
-										Height="26"
-										CornerRadius="13"
-										HorizontalAlignment="Left"
-										Width="40"
-										IsHitTestVisible="False"
-										Grid.Column="2" />
-
-								<Border x:Name="SwitchKnobBounds"
-										Background="{ThemeResource SelectControlToggleOffBackgroundColor}"
-										BorderBrush="{ThemeResource SelectControlToggleOffBackgroundColor}"
-										BorderThickness="1"
-										CornerRadius="13"
-										Height="26"
-										Width="40"
-										Opacity="1"
-										HorizontalAlignment="Left"
-										IsHitTestVisible="False"
-										Grid.Column="2" />
-
-								<Border x:Name="SwitchKnobBoundsDisabled"
-										Background="{ThemeResource SelectControlToggleOnLowButtonColor}"
-										BorderBrush="{ThemeResource SelectControlToggleOnLowButtonColor}"
-										BorderThickness="1"
-										CornerRadius="13"
-										Width="40"
-										Height="26"
-										Opacity="0"
-										HorizontalAlignment="Left"
-										IsHitTestVisible="False"
-										Grid.Column="2" />
-
-								<Grid x:Name="SwitchKnob"
-									  toolkit:UIElementExtensions.Elevation="4"
-									  CornerRadius="30"
-									  Height="24"
-									  Width="24"
-									  HorizontalAlignment="Left"
-									  IsHitTestVisible="False"
-									  Margin="1,0,0,0"
-									  Grid.Column="2">
-
-									<Grid.RenderTransform>
-										<TranslateTransform x:Name="KnobTranslateTransform"
-															X="-1" />
-									</Grid.RenderTransform>
-
-									<Ellipse x:Name="SwitchKnobOn"
-											 Fill="{ThemeResource SelectControlToggleOffButtonColor}"
-											 Stroke="{ThemeResource SelectControlToggleOffButtonColor}"
-											 StrokeThickness="1"
-											 Height="24"
-											 Width="24"
-											 Opacity="0" />
-
-									<Ellipse x:Name="SwitchKnobOff"
-											 Fill="{ThemeResource SelectControlToggleOffButtonColor}"
-											 Stroke="{ThemeResource SelectControlToggleOffButtonColor}"
-											 StrokeThickness="1"
-											 Height="24"
-											 Width="24"
-											 Opacity="1" />
-								</Grid>
-
-								<Thumb x:Name="SwitchThumb"
-									   AutomationProperties.AccessibilityView="Raw"
-									   Grid.Column="2">
-									<Thumb.Template>
-										<ControlTemplate TargetType="Thumb">
-											<Rectangle Fill="Transparent" />
-										</ControlTemplate>
-									</Thumb.Template>
-								</Thumb>
-							</Grid>
-
-							<!-- Investigate why wasm focusring ellipse is broken and colors are appropriately applied -->
-							<!--
-							<Ellipse x:Name="FocusRing"
-									 Fill="{StaticResource MaterialOnSurfaceHoverBrush}"
-									 Stroke="{ThemeResource SelectControlToggleOnLowBackgroundColor}"
-									 StrokeThickness="0"
-									 Height="{StaticResource FocusAreaSize}"
-									 Width="{StaticResource FocusAreaSize}"
-									 Opacity="1"
-									 HorizontalAlignment="Left"
-									 IsHitTestVisible="False"
-									 Margin="10,0,20,0" />
-							-->
-						</StackPanel>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+				TargetType="ToggleSwitch"
+				BasedOn="{StaticResource DefaultMaterialToggleSwitchStyle}">
 	</wasm:Style>
 
 	<ios:Style x:Key="MaterialToggleSwitchStyle"
@@ -617,6 +370,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
+
 					<StackPanel Padding="{TemplateBinding Padding}"
 								Height="{TemplateBinding Height}"
 								Width="{TemplateBinding Width}"
@@ -627,9 +381,10 @@
 						<ContentPresenter x:Name="ContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  Foreground="{ThemeResource MaterialOnBackgroundColor}"
 										  VerticalAlignment="Stretch"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Margin="0,0,0,5" />
+										  Margin="0,8,0,5" />
 
 						<!-- Do not add x:Name to BindableUiSwitch or else page will not load -->
 						<BindableUISwitch Background="{TemplateBinding Foreground}"
@@ -642,125 +397,18 @@
 	</ios:Style>
 
 	<android:Style x:Key="MaterialToggleSwitchStyle"
-				   TargetType="ToggleSwitch">
-
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource SelectControlToggleOnButtonColor}" />
-		<Setter Property="Height"
-				Value="50" />
-		<Setter Property="Width"
-				Value="70" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ToggleSwitch">
-
-					<Grid Height="{TemplateBinding Height}"
-						  Width="{TemplateBinding Width}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  HorizontalAlignment="Stretch"
-						  Padding="{TemplateBinding Padding}">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
-
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="switchGrid.Visibility"
-												Value="Collapsed" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="ToggleStates">
-								<VisualState x:Name="Dragging" />
-
-								<VisualState x:Name="Off">
-									<VisualState.Setters>
-										<Setter Target="androidSwitch.TrackTint"
-												Value="{ThemeResource SelectControlToggleOffBackgroundColor}" />
-										<Setter Target="onDisabledGrid.Visibility"
-												Value="Collapsed" />
-										<Setter Target="offDisabledGrid.Visibility"
-												Value="Visible" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="On">
-									<VisualState.Setters>
-										<Setter Target="androidSwitch.TrackTint"
-												Value="{ThemeResource SelectControlToggleOnBackgroundColor}" />
-										<Setter Target="onDisabledGrid.Visibility"
-												Value="Visible" />
-										<Setter Target="offDisabledGrid.Visibility"
-												Value="Collapsed" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="10" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
-
-						<!-- The margin here is used to properly align the content with the UI switch -->
-						<ContentPresenter x:Name="ContentPresenter"
-										  Content="{TemplateBinding Header}"
-										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  VerticalAlignment="Stretch"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Grid.ColumnSpan="3" />
-
-						<!-- TODO: fix disabled on thumbtint, using SelectControlToggleOnLowButtonColor -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
-						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
-						<Grid x:Name="onDisabledGrid"
-							  Grid.Column="2"
-							  Grid.Row="1">
-
-							<!-- Provides a disabled state for an on switch -->
-							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
-												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{ThemeResource SelectControlToggleOnLowButtonColor}"
-												  TrackTint="{ThemeResource SelectControlToggleOnLowBackgroundColor}" />
-						</Grid>
-
-						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
-						<Grid x:Name="offDisabledGrid"
-							  Grid.Column="2"
-							  Grid.Row="1">
-
-							<!-- Provides a disabled state for an off switch -->
-							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
-												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{ThemeResource SelectControlToggleOffButtonColor}"
-												  TrackTint="{ThemeResource SelectControlToggleOffBackgroundColor}" />
-						</Grid>
-
-						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
-						<Grid x:Name="switchGrid"
-							  Grid.Column="2"
-							  Grid.Row="1">
-							<BindableSwitchCompat x:Name="androidSwitch"
-												  Checked="{TemplateBinding IsOn, Mode=TwoWay}"
-												  Enabled="{TemplateBinding IsEnabled}" />
-						</Grid>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+				   TargetType="ToggleSwitch"
+				   BasedOn="{StaticResource DefaultMaterialToggleSwitchStyle}">
 	</android:Style>
+
+	<Style x:Key="MaterialSecondaryToggleSwitchStyle"
+		   TargetType="ToggleSwitch"
+		   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
+
+		<Setter Property="Foreground"
+				Value="{ThemeResource MaterialSecondaryVariantDarkColor}" />
+		<Setter Property="Background"
+				Value="{ThemeResource MaterialSecondaryVariantLightColor}" />
+	</Style>
+
 </ResourceDictionary>
