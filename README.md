@@ -341,5 +341,7 @@ Be mindful of our [Code of Conduct](CODE_OF_CONDUCT.md).
 ## Acknowledgments
 - [Uno Platform](https://platform.uno)
 - [Material Design](https://material.io/design)
-- [Material Design In XAML, for uwp ripple effect](https://github.com/MaterialDesignInXAML)
+- [Material Design In XAML](https://github.com/MaterialDesignInXAML) as inspiration for UWP ripple effect
+- [ShowMeTheXaml](https://github.com/Keboo/ShowMeTheXAML) for code snippets. Through [our Fork](https://github.com/unoplatform/ShowMeTheXAML)
 - [WinUI](https://microsoft.github.io/microsoft-ui-xaml/)
+
