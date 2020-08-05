@@ -6,14 +6,14 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit">
 
 	<!-- Card ToggleButton Variables -->
-	<StaticResource x:Key="CardsBackgroundColorBrush"
-					 ResourceKey="MaterialSurfaceBrush" />
+	<StaticResource x:Key="CardBackgroundColorBrush"
+					ResourceKey="MaterialSurfaceBrush" />
 
 	<!-- Other Card Variables -->
-	<CornerRadius x:Key="CardsBorderRadius">4</CornerRadius>
-	<Thickness x:Key="CardsStrokeWidth">1</Thickness>
-	<x:Double x:Key="CardsElevation">6</x:Double>
-	<Thickness x:Key="CardsElevationMargin">0,0,6,6</Thickness>
+	<CornerRadius x:Key="CardBorderRadius">4</CornerRadius>
+	<Thickness x:Key="CardStrokeWidth">1</Thickness>
+	<x:Double x:Key="CardElevation">6</x:Double>
+	<Thickness x:Key="CardElevationMargin">6</Thickness>
 	<Color x:Key="CardElevationShadowColor">#60000000</Color>
 
 	<Style x:Key="MaterialOutlinedCardStyle"
@@ -24,17 +24,17 @@
 		<Setter Property="MaxWidth"
 				Value="344" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardsElevationMargin}" />
+				Value="{StaticResource CardElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardsBackgroundColorBrush}" />
+				Value="{StaticResource CardBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource CardsStrokeWidth}" />
+				Value="{StaticResource CardStrokeWidth}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardsBorderRadius}" />
+				Value="{StaticResource CardBorderRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -171,7 +171,7 @@
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardsBorderRadius}"
+										 CornerRadius="{StaticResource CardBorderRadius}"
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
@@ -207,14 +207,12 @@
 				Value="72" />
 		<Setter Property="MaxWidth"
 				Value="344" />
-		<Setter Property="Margin"
-				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardsBackgroundColorBrush}" />
+				Value="{StaticResource CardBackgroundColorBrush}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardsBorderRadius}" />
+				Value="{StaticResource CardBorderRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -223,8 +221,12 @@
 				Value="Stretch" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
+		<Setter Property="Margin"
+				Value="{StaticResource CardElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="{StaticResource CardsElevation}" />
+				Value="{StaticResource CardElevation}" />
+		<Setter Property="ShadowColor"
+				Value="{StaticResource CardElevationShadowColor}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -241,7 +243,7 @@
 										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Elevation="{TemplateBinding Elevation}"
-										  ShadowColor="{StaticResource CardElevationShadowColor}">
+										  ShadowColor="{TemplateBinding ShadowColor}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
@@ -308,7 +310,6 @@
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
-								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 
 							<!-- Border for PointerOver State-->
@@ -356,7 +357,7 @@
 							<!-- Ripple effect -->
 							<controls:Ripple Grid.RowSpan="4"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 CornerRadius="{StaticResource CardsBorderRadius}"
+											 CornerRadius="{StaticResource CardBorderRadius}"
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
@@ -393,17 +394,17 @@
 		<Setter Property="MaxWidth"
 				Value="344" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardsElevationMargin}" />
+				Value="{StaticResource CardElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardsBackgroundColorBrush}" />
+				Value="{StaticResource CardBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource CardsStrokeWidth}" />
+				Value="{StaticResource CardStrokeWidth}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardsBorderRadius}" />
+				Value="{StaticResource CardBorderRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -540,12 +541,12 @@
 						</StackPanel>
 
 						<!-- Ripple effect -->
-						<controls:Ripple Grid.RowSpan="2"
+						<controls:Ripple Grid.RowSpan="3"
 										 Grid.ColumnSpan="3"
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardsBorderRadius}"
+										 CornerRadius="{StaticResource CardBorderRadius}"
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
@@ -596,17 +597,19 @@
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardsBackgroundColorBrush}" />
+				Value="{StaticResource CardBackgroundColorBrush}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardsBorderRadius}" />
+				Value="{StaticResource CardBorderRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardsElevationMargin}" />
+				Value="{StaticResource CardElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="{StaticResource CardsElevation}" />
+				Value="{StaticResource CardElevation}" />
+		<Setter Property="ShadowColor"
+				Value="{StaticResource CardElevationShadowColor}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -624,7 +627,7 @@
 										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Elevation="{TemplateBinding Elevation}"
-										  ShadowColor="{StaticResource CardElevationShadowColor}">
+										  ShadowColor="{TemplateBinding ShadowColor}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
@@ -743,10 +746,10 @@
 												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
 							</StackPanel>
 							<!-- Ripple effect -->
-							<controls:Ripple Grid.RowSpan="2"
+							<controls:Ripple Grid.RowSpan="3"
 											 Grid.ColumnSpan="3"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 CornerRadius="{StaticResource CardsBorderRadius}"
+											 CornerRadius="{StaticResource CardBorderRadius}"
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
@@ -797,17 +800,17 @@
 		<Setter Property="MaxWidth"
 				Value="344" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardsElevationMargin}" />
+				Value="{StaticResource CardElevationMargin}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="Background"
-				Value="{StaticResource CardsBackgroundColorBrush}" />
+				Value="{StaticResource CardBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource CardsStrokeWidth}" />
+				Value="{StaticResource CardStrokeWidth}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardsBorderRadius}" />
+				Value="{StaticResource CardBorderRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -903,14 +906,14 @@
 
 						<!-- Border for PointerOver State-->
 						<Border Grid.RowSpan="3"
-								Grid.ColumnSpan="2"
+								Grid.ColumnSpan="3"
 								x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 								Opacity="0" />
 
 						<!-- Border for Focused State-->
 						<Border Grid.RowSpan="3"
-								Grid.ColumnSpan="2"
+								Grid.ColumnSpan="3"
 								x:Name="FocusedOverlay"
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
@@ -946,11 +949,12 @@
 						</StackPanel>
 
 						<!-- Ripple effect -->
-						<controls:Ripple Grid.ColumnSpan="3"
+						<controls:Ripple Grid.RowSpan="3"
+										 Grid.ColumnSpan="3"
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardsBorderRadius}"
+										 CornerRadius="{StaticResource CardBorderRadius}"
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
@@ -988,14 +992,12 @@
 				Value="72" />
 		<Setter Property="MaxWidth"
 				Value="344" />
-		<Setter Property="Margin"
-				Value="{StaticResource CardsElevationMargin}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="Background"
-				Value="{StaticResource CardsBackgroundColorBrush}" />
+				Value="{StaticResource CardBackgroundColorBrush}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardsBorderRadius}" />
+				Value="{StaticResource CardBorderRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -1005,9 +1007,11 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardsElevationMargin}" />
+				Value="{StaticResource CardElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="{StaticResource CardsElevation}" />
+				Value="{StaticResource CardElevation}" />
+		<Setter Property="ShadowColor"
+				Value="{StaticResource CardElevationShadowColor}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -1025,7 +1029,7 @@
 										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Elevation="{TemplateBinding Elevation}"
-										  ShadowColor="{StaticResource CardElevationShadowColor}">
+										  ShadowColor="{TemplateBinding ShadowColor}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
@@ -1100,14 +1104,14 @@
 
 							<!-- Border for PointerOver State-->
 							<Border Grid.RowSpan="3"
-									Grid.ColumnSpan="2"
+									Grid.ColumnSpan="3"
 									x:Name="HoverOverlay"
 									Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 									Opacity="0" />
 
 							<!-- Border for Focused State-->
 							<Border Grid.RowSpan="3"
-									Grid.ColumnSpan="2"
+									Grid.ColumnSpan="3"
 									x:Name="FocusedOverlay"
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
@@ -1143,9 +1147,10 @@
 							</StackPanel>
 
 							<!-- Ripple effect -->
-							<controls:Ripple Grid.ColumnSpan="3"
+							<controls:Ripple Grid.RowSpan="3"
+											 Grid.ColumnSpan="3"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 CornerRadius="{StaticResource CardsBorderRadius}"
+											 CornerRadius="{StaticResource CardBorderRadius}"
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
