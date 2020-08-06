@@ -48,6 +48,7 @@
 				Value="{StaticResource NavDrawersTextBrush}" />
 		<Setter Property="Content"
 				Value="&#xE700;" />
+		
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -115,8 +116,8 @@
 						<Grid Width="{TemplateBinding MinWidth}"
 							  HorizontalAlignment="Left">
 							<Viewbox x:Name="IconHost"
-									 Width="16"
-									 Height="16"
+									 Width="20"
+									 Height="20"
 									 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 									 AutomationProperties.AccessibilityView="Raw">
@@ -238,8 +239,8 @@
 						<Grid Width="{TemplateBinding MinWidth}"
 							  HorizontalAlignment="Left">
 							<Viewbox x:Name="IconHost"
-									 Width="16"
-									 Height="16"
+									 Width="20"
+									 Height="20"
 									 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 									 AutomationProperties.AccessibilityView="Raw">
@@ -259,7 +260,7 @@
 									<Path Data="{StaticResource BackArrowPathData}"
 										  Fill="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"
 										  Stretch="Uniform"
-										  Height="16"
+										  Height="20"
 										  UseLayoutRounding="False"
 										  ios:Visibility="Collapsed" />
 								</Grid>
