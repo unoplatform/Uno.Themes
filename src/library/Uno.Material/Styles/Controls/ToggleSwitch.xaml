@@ -22,10 +22,10 @@
 					 Color="{ThemeResource MaterialSurfaceVariantLightColor}" />
 
 	<!-- Toggle On -->
-	<StaticResource x:Key="SelectControlToggleOnButtonBrush"
-					ResourceKey="MaterialPrimaryBrush" />
-	<StaticResource x:Key="SelectControlToggleOnBackgroundBrush"
-					ResourceKey="MaterialPrimaryLowBrush" />
+	<SolidColorBrush x:Key="SelectControlToggleOnButtonBrush"
+					 Color="{ThemeResource MaterialToggleSwitchButtonColor}" />
+	<SolidColorBrush x:Key="SelectControlToggleOnBackgroundBrush"
+					 Color="{ThemeResource MaterialToggleSwitchBackgroundColor}" />
 
 	<!-- Toggle Off -->
 	<StaticResource x:Key="SelectControlToggleOffButtonBrush"
@@ -46,9 +46,10 @@
 		   TargetType="ToggleSwitch">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource SelectControlToggleOnButtonBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryVariantBrush}" />
+				Value="{StaticResource SelectControlToggleOnBackgroundBrush}" />
+
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"
@@ -480,6 +481,7 @@
 						<ContentPresenter x:Name="ContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  Foreground="{StaticResource MaterialOnBackgroundBrush}"
 										  VerticalAlignment="Stretch"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Grid.ColumnSpan="3" />
@@ -527,9 +529,9 @@
 				   TargetType="ToggleSwitch">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantLightBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryVariantBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
@@ -610,6 +612,7 @@
 						<ContentPresenter x:Name="ContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  Foreground="{StaticResource MaterialOnBackgroundBrush}"
 										  VerticalAlignment="Stretch"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Grid.ColumnSpan="3" />
