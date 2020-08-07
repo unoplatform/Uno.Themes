@@ -110,6 +110,7 @@ private void InitializeNavigationViewItems()
 		AddMenuItem<PasswordBoxSamplePage>();
 		AddMenuItem<RadioButtonSamplePage>();
 		AddMenuItem<SnackBarSamplePage>();
+		AddMenuItem<SliderSamplePage>();
 		AddMenuItem<TextBlockSamplePage>();
 		AddMenuItem<TextBoxSamplePage>();
 		AddMenuItem<ToggleSwitchSamplePage>();
