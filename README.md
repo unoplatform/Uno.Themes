@@ -120,7 +120,35 @@ xmlns:material="using:Uno.Material.Controls"
 	       SubHeader="With title and subitle"
 	       Style="{StaticResource MaterialOutlinedCardStyle}" />
 ```
-6. (Optional) Set material styles as the default for your whole application.
+
+6. In order to display the appropriate font with the material styles on Webassembly,
+make sure that the *Roboto* font is defined on `font.css` located at `[YourProject].Wasm/WasmCSS`.
+This make sure that the font is loaded correctly [Related Issue](https://github.com/unoplatform/uno/issues/693).
+It should look like [this](https://github.com/unoplatform/Uno.Material/blob/master/src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/WasmCSS/Fonts.css):
+
+```
+@font-face {
+  font-family: "Symbols";
+  /* winjs-symbols.woff2: https://github.com/Microsoft/fonts/tree/master/Symbols */
+  src: url(data:application/x-font-woff;charset=utf-8;base64,[...]);
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url(data:application/x-font-woff;charset=utf-8;base64,[...]);
+}
+
+body::after {
+	font-family: 'Roboto';
+	background: transparent;
+	content: "";
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+}
+```
+
+7. (Optional) Set material styles as the default for your whole application.
 For example, if you wish to use our ToggleSwitch style as your default style, simply set it as an implicit style in your app by adding the following code in your App.xaml
 ```
 <Style TargetType="ToggleSwitch"
@@ -129,16 +157,16 @@ For example, if you wish to use our ToggleSwitch style as your default style, si
 You can do the same for each control!
 Learn more about implicit styles from the Microsoft documentation [here](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/xaml-styles#apply-an-implicit-or-explicit-style)
 
-7. (Optional) Per-control customization.
+8. (Optional) Per-control customization.
 Just like WinUI, we documented a set of control-specific resources you can override to further customize our controls.
 For example, if you would like change the `CornerRadius` of all the `Buttons` using our material styles, you could simply override the `ButtonBorderRadius` value in your resources (in App.xaml would be the simplest way to put the following code)
 ```
 <CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
 ```
 
-8. (Optional) If you are using our [ToggleSwitches](#toggleSwitch) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
+9. (Optional) If you are using our [ToggleSwitches](#toggleSwitch) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
 
-9. (Optional) If you are using our [DatePickers, and TimePickers](#datePickers-and-timePickers) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
+10. (Optional) If you are using our [DatePickers, and TimePickers](#datePickers-and-timePickers) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
 
 <!-- TODO: Add reference on where to get those resource names -->
 
