@@ -13,13 +13,14 @@ Platform support:
 - MacOS
 - Android
 - WebAssembly
+- Linux (Skia.Gtk)
 
 <!-- TODO : Insert build status, nuget.org badge, etc -->
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ## Getting Started
 
-1. Install the nuget package Uno.Material. You can find the nuget on [this feed instead of nuget.org](https://dev.azure.com/uno-platform/Uno%20Platform/_packaging?_a=feed&feed=unoplatformdev)
+1. Install the nuget package Uno.Material.
 2. Unless you want our default color palette (inspired by our Uno logo), you'll want to override the following color resources in you application. We suggest creating a ColorPaletteOverride.xaml `ResourceDictionary`.
 For more information on the color system, consult this [page](https://material.io/design/color/the-color-system.html#color-theme-creation) for all the official documentation and tools to help you create your own palette. 
 Here is what ColorPaletteOverride.xaml would contain if you want both light and dark theme.
@@ -78,12 +79,20 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 ```
 
 
-3. Initialize the material resources. The order in which the different resources are loaded is important so we created a simple `Init` method to add to `App.xaml.cs` at the beginning on `OnLaunched`
+3. Initialize the material resources. The order in which the different resources are loaded is important. Add this to `App.xaml.cs` at the beginning on `OnLaunched`
 ```
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
-			Uno.Material.Resources.Init(this, new ResourceDictionary() { Source = new Uri("ms-appx:///ColorPaletteOverride.xaml") });
-
+			// Set a default palette to make sure all colors used by MaterialResources exist
+			this.Resources.MergedDictionaries.Add(new Material.MaterialColorPalette());
+			
+			// Overlap the default colors with the application's colors palette. 
+			// TODO: Replace ms-appx:///Views/ColorPaletteOverride.xaml with your resourceDictionary.
+			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Views/ColorPaletteOverride.xaml") });
+			
+			// Add all the material resources. Those resources depend on the colors above, which is why this one must be added last.
+			this.Resources.MergedDictionaries.Add(new Material.MaterialResources());
+			
 			[...]
 		}
 ```
