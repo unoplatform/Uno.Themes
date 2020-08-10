@@ -9,6 +9,12 @@ namespace Uno.Material.Controls
 {
 	public partial class Card : Control
 	{
+#if __ANDROID__
+		private static readonly Color _defaultShadowColor = Colors.Black;
+#else
+		private static readonly Color _defaultShadowColor = Color.FromArgb(64, 0, 0, 0);
+#endif
+
 		#region HeaderContent and HeaderContentTemplate
 		public object HeaderContent
 		{
@@ -148,7 +154,7 @@ namespace Uno.Material.Controls
 		}
 
 		public static readonly DependencyProperty ShadowColorProperty =
-			DependencyProperty.Register("ShadowColor", typeof(Color), typeof(Card), new PropertyMetadata(Color.FromArgb(64, 0, 0, 0)));
+			DependencyProperty.Register("ShadowColor", typeof(Color), typeof(Card), new PropertyMetadata(_defaultShadowColor));
 		#endregion
 	}
 }
