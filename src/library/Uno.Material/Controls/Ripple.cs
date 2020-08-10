@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
@@ -21,10 +22,16 @@ namespace Uno.Material.Controls
 		private double _rippleX;
 		private double _rippleY;
 
+		private UIElement _touchTarget;
+
 		public Ripple()
 		{
 			DefaultStyleKey = typeof(Ripple);
 			SizeChanged += OnSizeChanged;
+
+			SetBinding(MyParentProperty, new Binding {RelativeSource = new RelativeSource {Mode = RelativeSourceMode.TemplatedParent}});
+			Loaded += ReRegisterPointerPressedHandler;
+			Unloaded += UnRegisterPointerPressedHandler;
 		}
 
 		private void OnSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
@@ -55,6 +62,9 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty FeedbackOpacityProperty =
 			DependencyProperty.Register("FeedbackOpacity", typeof(double), typeof(Ripple), new PropertyMetadata(1));
 
+		private static readonly DependencyProperty MyParentProperty = DependencyProperty.Register(
+			"MyParent", typeof(object), typeof(Ripple), new PropertyMetadata(default(object), (snd, e) => (snd as Ripple)?.ReRegisterPointerPressedHandler()));
+
 		protected override void OnApplyTemplate()
 		{
 			VisualStateManager.GoToState(this, "Normal", false);
@@ -62,26 +72,38 @@ namespace Uno.Material.Controls
 			base.OnApplyTemplate();
 		}
 
-		protected override void OnPointerPressed(PointerRoutedEventArgs e)
+		private static void ReRegisterPointerPressedHandler(object snd, RoutedEventArgs _)
+			=> (snd as Ripple)?.ReRegisterPointerPressedHandler();
+
+		private void ReRegisterPointerPressedHandler()
 		{
-			if (IsAutoRippleEnabled)
+			// On WASM when the Ripple control is nested into a control that does capture the pointer,
+			// we won't receive the pointer events as we should.
+			// **Noticeably, it's the case for all buttons. **
+			// To work around this issue, we are listening pointers directly on the TemplatedParent if possible.
+
+			var updatedTouchTarget = GetValue(MyParentProperty) as UIElement ?? this;
+			if (_touchTarget == updatedTouchTarget)
 			{
-				StartRippling(e);
+				return;
 			}
 
-			base.OnPointerPressed(e);
+			UnRegisterPointerPressedHandler();
+
+			_touchTarget = updatedTouchTarget;
+			_touchTarget.AddHandler(PointerPressedEvent, new PointerEventHandler(StartRippling), handledEventsToo: true);
 		}
 
-		/// <summary>
-		/// On WASM when the Ripple control is nested into a control that does capture the pointer,
-		/// we won't receive the pointer events as we should.
-		/// ** Noticeably, it's the case for all buttons. **
-		/// To work around this issue, you can turn this flag on and then,
-		/// invoke the "StartRippling" in the OnPointerPressed of the parent control (i.e. the Button).
-		/// </summary>
-		internal bool IsAutoRippleEnabled { get; set; } = true;
+		private static void UnRegisterPointerPressedHandler(object snd, RoutedEventArgs _)
+			=> (snd as Ripple)?.UnRegisterPointerPressedHandler();
 
-		internal void StartRippling(PointerRoutedEventArgs e)
+		private void UnRegisterPointerPressedHandler()
+		{
+			_touchTarget?.RemoveHandler(PointerPressedEvent, new PointerEventHandler(StartRippling));
+			_touchTarget = null;
+		}
+
+		private void StartRippling(object _, PointerRoutedEventArgs e)
 		{
 			var point = e.GetCurrentPoint(this);
 

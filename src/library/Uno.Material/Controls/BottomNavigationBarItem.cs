@@ -52,27 +52,5 @@ namespace Uno.Material.Controls
 		{
 			DefaultStyleKey = typeof(BottomNavigationBarItem);
 		}
-
-		private Ripple _ripple;
-
-		/// <inheritdoc />
-		protected override void OnApplyTemplate()
-		{
-			_ripple = GetTemplateChild("ContentPresenter") as Ripple;
-			if (_ripple != null)
-			{
-				_ripple.IsAutoRippleEnabled = false;
-			}
-
-			base.OnApplyTemplate();
-		}
-
-		/// <inheritdoc />
-		protected override void OnPointerPressed(PointerRoutedEventArgs args)
-		{
-			_ripple?.StartRippling(args);
-
-			base.OnPointerPressed(args);
-		}
 	}
 }
