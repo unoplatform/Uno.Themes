@@ -1,11 +1,12 @@
-﻿# Uno Material
+﻿![Uno Material](./images/MaterialBanner.png)
 
-<!-- TODO : Insert logo/branding -->
-
-This library is designed to help you use the [material design system](https://material.io/design):
+This library is designed to help you use the [material design system](https://material.io/design). 
+It includes :
 - Color system for both Light and Dark theme
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
 - Custom Controls for Material Components not offered out of the box by WinUI, such as Card and BottomNavigationBar.
+
+Quickly visualize all the available controls through this [zeplin link](https://zpl.io/scene/bzgq8wG)
 
 Platform support: 
 - WinUI / UWP
@@ -14,6 +15,17 @@ Platform support:
 - Android
 - WebAssembly
 - Linux (Skia.Gtk)
+
+![Uno Material](./images/UnoMaterial.png)
+
+Uno Material Design Guideline is a is a resource for designers and software developers that combines Material and Uno design guidance in single document. It is an easy way to kickstart design and implementation of cross-platform experiences with unified Material design system look and feel, using Sketch and Uno Platform.
+
+Download the [Uno Platform Material Design Guidelines sketch file](./design/uno-platform-material-design-guidelines.sketch) to get started.
+
+It includes:
+- Uno-Material components
+- Uno type resource names
+- Uno asset naming and export guidance
 
 <!-- TODO : Insert build status, nuget.org badge, etc -->
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
@@ -181,27 +193,29 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 
 ## Features
 
+### Quickly visualize all the available controls through this [zeplin link](https://zpl.io/scene/bzgq8wG)
+
 ### Styles for basic controls
 
-| **Controls** | **StyleNames**                                                                        | **Visual Reference** |
-|----------|-------------------------------------------------------------------------------------------|------------------|
-| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle <br> MaterialTextButtonStyle <br> MaterialContainedSecondaryButtonStyle <br> MaterialOutlinedSecondaryButtonStyle<br> MaterialTextSecondaryButtonStyle | TODO             |
-| CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         | TODO             |
-| ComboBox         | MaterialComboBoxStyle                                                             | TODO             |
-| CommandBar       | MaterialCommandBarStyle                                                           | TODO             |
-| NavigationView   | MaterialNavigationViewStyle <br> MaterialNoCompactMenuNavigationViewStyle         | TODO             |
-| PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              | TODO             |
-| RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   | TODO             |
-| TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline                                 | TODO             |
-| TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      | TODO             |
-| ToggleButton     | MaterialTextToggleButtonStyle                                                     | TODO             |
-| ToggleSwitch     | MaterialToggleSwitchStyle                                                         | TODO             |
+| **Controls** | **StyleNames**                                                                        |
+|----------|-------------------------------------------------------------------------------------------|
+| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle <br> MaterialTextButtonStyle <br> MaterialContainedSecondaryButtonStyle <br> MaterialOutlinedSecondaryButtonStyle<br> MaterialTextSecondaryButtonStyle |
+| CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         |
+| ComboBox         | MaterialComboBoxStyle                                                             |
+| CommandBar       | MaterialCommandBarStyle                                                           |
+| NavigationView   | MaterialNavigationViewStyle <br> MaterialNoCompactMenuNavigationViewStyle         |
+| PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              |
+| RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   |
+| TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline                                 |
+| TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      |
+| ToggleButton     | MaterialTextToggleButtonStyle                                                     |
+| ToggleSwitch     | MaterialToggleSwitchStyle                                                         |
                                                                                
 ### Styles for custom controls
-| **Controls** | **StyleNames**                                                                        | **Visual Reference** |
-|----------------------|-------------------------------------------------------------------------------|------------------|
-| Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle | TODO             |
-| BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              | TODO             |
+| **Controls** | **StyleNames**                                                                        |
+|----------------------|-------------------------------------------------------------------------------|
+| Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
+| BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              |
 
 
 ## Controls Setup (Specialized)
