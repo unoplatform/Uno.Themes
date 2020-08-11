@@ -22,33 +22,33 @@
 					 Color="{ThemeResource MaterialSurfaceVariantLightColor}" />
 
 	<!-- Toggle On -->
-	<SolidColorBrush x:Key="SelectControlToggleOnButtonBrush"
+	<SolidColorBrush x:Key="MaterialToggleSwitchOnButtonBrush"
 					 Color="{ThemeResource MaterialToggleSwitchButtonColor}" />
-	<SolidColorBrush x:Key="SelectControlToggleOnBackgroundBrush"
+	<SolidColorBrush x:Key="MaterialToggleSwitchOnBackgroundBrush"
 					 Color="{ThemeResource MaterialToggleSwitchBackgroundColor}" />
 
 	<!-- Toggle Off -->
-	<StaticResource x:Key="SelectControlToggleOffButtonBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOffButtonBrush"
 					ResourceKey="MaterialSurfaceVariantBrush" />
-	<StaticResource x:Key="SelectControlToggleOffBackgroundBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOffBackgroundBrush"
 					ResourceKey="MaterialOnSurfaceLowVariantBrush" />
 	
 	<SolidColorBrush x:Key="AndroidSelectControlToggleOffButtonBrush"
 					 Color="#FAFAFA" />
 
 	<!-- Toggle On Disabled -->
-	<StaticResource x:Key="SelectControlToggleOnLowButtonBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOnLowButtonBrush"
 					ResourceKey="MaterialPrimaryVariantLowThumbColorBrush" />
-	<StaticResource x:Key="SelectControlToggleOnLowBackgroundBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush"
 					ResourceKey="MaterialPrimaryDraggedBrush" />
 
 	<Style x:Key="DefaultMaterialToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource SelectControlToggleOnButtonBrush}" />
+				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource SelectControlToggleOnBackgroundBrush}" />
+				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
@@ -91,19 +91,19 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource SelectControlToggleOnLowBackgroundBrush}" />
+																	Value="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource SelectControlToggleOnLowButtonBrush}" />
+																	Value="{StaticResource MaterialToggleSwitchOnLowButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource SelectControlToggleOnLowButtonBrush}" />
+																	Value="{StaticResource MaterialToggleSwitchOnLowButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -302,7 +302,7 @@
 								   Width="40"
 								   RadiusX="6"
 								   RadiusY="6"
-								   Fill="{StaticResource SelectControlToggleOffBackgroundBrush}" />
+								   Fill="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
 
 						<Rectangle x:Name="SwitchKnobBounds"
 								   Grid.Row="2"
@@ -327,7 +327,7 @@
 									 Opacity="0" />
 
 							<Ellipse x:Name="SwitchKnobOff"
-									 Fill="{StaticResource SelectControlToggleOffButtonBrush}"
+									 Fill="{StaticResource MaterialToggleSwitchOffButtonBrush}"
 									 Width="22"
 									 Height="22" />
 							<Grid.RenderTransform>
@@ -370,7 +370,7 @@
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Foreground"
-				Value="{StaticResource SelectControlToggleOnButtonBrush}" />
+				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -405,7 +405,7 @@
 				   TargetType="ToggleSwitch">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource SelectControlToggleOnButtonBrush}" />
+				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -445,7 +445,7 @@
 								<VisualState x:Name="Off">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
-												Value="{StaticResource SelectControlToggleOffBackgroundBrush}" />
+												Value="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 												Value="Collapsed" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -456,7 +456,7 @@
 								<VisualState x:Name="On">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
-												Value="{StaticResource SelectControlToggleOnBackgroundBrush}" />
+												Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 												Value="Visible" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -486,7 +486,7 @@
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Grid.ColumnSpan="3" />
 
-						<!-- TODO: fix disabled on thumbtint, using SelectControlToggleOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
+						<!-- TODO: fix disabled on thumbtint, using MaterialToggleSwitchOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
 						<Grid x:Name="OnDisabledGrid"
 							  Grid.Column="2"
@@ -495,8 +495,8 @@
 							<!-- Provides a disabled state for an on switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{ThemeResource SelectControlToggleOnLowButtonBrush}"
-												  TrackTint="{ThemeResource SelectControlToggleOnLowBackgroundBrush}" />
+												  ThumbTint="{ThemeResource MaterialToggleSwitchOnLowButtonBrush}"
+												  TrackTint="{ThemeResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 						</Grid>
 
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
@@ -507,8 +507,8 @@
 							<!-- Provides a disabled state for an off switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{StaticResource SelectControlToggleOffButtonBrush}"
-												  TrackTint="{StaticResource SelectControlToggleOffBackgroundBrush}" />
+												  ThumbTint="{StaticResource MaterialToggleSwitchOffButtonBrush}"
+												  TrackTint="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
 						</Grid>
 
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
@@ -574,7 +574,7 @@
 										<Setter Target="AndroidSwitch.ThumbTint"
 												Value="{StaticResource AndroidSelectControlToggleOffButtonBrush}" />
 										<Setter Target="AndroidSwitch.TrackTint"
-												Value="{StaticResource SelectControlToggleOffBackgroundBrush}" />
+												Value="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 												Value="Collapsed" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -617,7 +617,7 @@
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Grid.ColumnSpan="3" />
 
-						<!-- TODO: fix disabled on thumbtint, using SelectControlToggleOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
+						<!-- TODO: fix disabled on thumbtint, using MaterialToggleSwitchOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
 						<Grid x:Name="OnDisabledGrid"
 							  Grid.Column="2"
@@ -626,8 +626,8 @@
 							<!-- Provides a disabled state for an on switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{StaticResource SelectControlToggleOnLowButtonBrush}"
-												  TrackTint="{StaticResource SelectControlToggleOnLowBackgroundBrush}" />
+												  ThumbTint="{StaticResource MaterialToggleSwitchOnLowButtonBrush}"
+												  TrackTint="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 						</Grid>
 
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
@@ -638,8 +638,8 @@
 							<!-- Provides a disabled state for an off switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{StaticResource SelectControlToggleOffButtonBrush}"
-												  TrackTint="{StaticResource SelectControlToggleOffBackgroundBrush}" />
+												  ThumbTint="{StaticResource MaterialToggleSwitchOffButtonBrush}"
+												  TrackTint="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
 						</Grid>
 
 						<!-- Grid is used because we can not collapse the visibility of a BindableSwitchCompat -->
