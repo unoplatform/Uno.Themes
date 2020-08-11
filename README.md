@@ -20,7 +20,7 @@ Platform support:
 
 Uno Material Design Guideline is a is a resource for designers and software developers that combines Material and Uno design guidance in single document. It is an easy way to kickstart design and implementation of cross-platform experiences with unified Material design system look and feel, using Sketch and Uno Platform.
 
-Download the [Uno Platform Design Guidelines sketch file](./design/Uno-Olatform-Design-Guidelines.sketch) to get started.
+Download the [Uno Platform Design Guidelines sketch file](./design/Uno-Platform-Design-Guidelines.sketch) to get started.
 
 It includes:
 - Uno-Material components
