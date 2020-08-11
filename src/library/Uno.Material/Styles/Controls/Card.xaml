@@ -5,15 +5,11 @@
 					xmlns:controls="using:Uno.Material.Controls"
 					xmlns:toolkit="using:Uno.UI.Toolkit">
 
-	<!-- Card ToggleButton Variables -->
-	<StaticResource x:Key="CardBackgroundColorBrush"
-					ResourceKey="MaterialSurfaceBrush" />
-
-	<!-- Other Card Variables -->
-	<CornerRadius x:Key="CardBorderRadius">4</CornerRadius>
-	<Thickness x:Key="CardStrokeWidth">1</Thickness>
-	<x:Double x:Key="CardElevation">6</x:Double>
-	<Thickness x:Key="CardElevationMargin">6</Thickness>
+	<!-- Card Variables -->
+	<CornerRadius x:Key="MaterialCardCornerRadius">4</CornerRadius>
+	<Thickness x:Key="MaterialCardBorderThickness">1</Thickness>
+	<x:Double x:Key="MaterialCardElevation">6</x:Double>
+	<Thickness x:Key="MaterialCardElevationMargin">6</Thickness>
 
 	<Style x:Key="MaterialOutlinedCardStyle"
 		   TargetType="controls:Card">
@@ -23,17 +19,17 @@
 		<Setter Property="MaxWidth"
 				Value="344" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardElevationMargin}" />
+				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardBackgroundColorBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource CardStrokeWidth}" />
+				Value="{StaticResource MaterialCardBorderThickness}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardBorderRadius}" />
+				Value="{StaticResource MaterialCardCornerRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -170,7 +166,7 @@
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardBorderRadius}"
+										 CornerRadius="{StaticResource MaterialCardCornerRadius}"
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
@@ -209,9 +205,9 @@
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardBackgroundColorBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardBorderRadius}" />
+				Value="{StaticResource MaterialCardCornerRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -221,9 +217,9 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardElevationMargin}" />
+				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="{StaticResource CardElevation}" />
+				Value="{StaticResource MaterialCardElevation}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -354,7 +350,7 @@
 							<!-- Ripple effect -->
 							<controls:Ripple Grid.RowSpan="4"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 CornerRadius="{StaticResource CardBorderRadius}"
+											 CornerRadius="{StaticResource MaterialCardCornerRadius}"
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
@@ -391,17 +387,17 @@
 		<Setter Property="MaxWidth"
 				Value="344" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardElevationMargin}" />
+				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardBackgroundColorBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource CardStrokeWidth}" />
+				Value="{StaticResource MaterialCardBorderThickness}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardBorderRadius}" />
+				Value="{StaticResource MaterialCardCornerRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -543,7 +539,7 @@
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardBorderRadius}"
+										 CornerRadius="{StaticResource MaterialCardCornerRadius}"
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
@@ -594,17 +590,17 @@
 		<Setter Property="Padding"
 				Value="16,14" />
 		<Setter Property="Background"
-				Value="{StaticResource CardBackgroundColorBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardBorderRadius}" />
+				Value="{StaticResource MaterialCardCornerRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardElevationMargin}" />
+				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="{StaticResource CardElevation}" />
+				Value="{StaticResource MaterialCardElevation}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -744,7 +740,7 @@
 							<controls:Ripple Grid.RowSpan="3"
 											 Grid.ColumnSpan="3"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 CornerRadius="{StaticResource CardBorderRadius}"
+											 CornerRadius="{StaticResource MaterialCardCornerRadius}"
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
@@ -795,17 +791,17 @@
 		<Setter Property="MaxWidth"
 				Value="344" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardElevationMargin}" />
+				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="Background"
-				Value="{StaticResource CardBackgroundColorBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource CardStrokeWidth}" />
+				Value="{StaticResource MaterialCardBorderThickness}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardBorderRadius}" />
+				Value="{StaticResource MaterialCardCornerRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -949,7 +945,7 @@
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{StaticResource CardBorderRadius}"
+										 CornerRadius="{StaticResource MaterialCardCornerRadius}"
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
@@ -990,9 +986,9 @@
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="Background"
-				Value="{StaticResource CardBackgroundColorBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource CardBorderRadius}" />
+				Value="{StaticResource MaterialCardCornerRadius}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
@@ -1002,9 +998,9 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Margin"
-				Value="{StaticResource CardElevationMargin}" />
+				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Elevation"
-				Value="{StaticResource CardElevation}" />
+				Value="{StaticResource MaterialCardElevation}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -1143,7 +1139,7 @@
 							<controls:Ripple Grid.RowSpan="3"
 											 Grid.ColumnSpan="3"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
-											 CornerRadius="{StaticResource CardBorderRadius}"
+											 CornerRadius="{StaticResource MaterialCardCornerRadius}"
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 

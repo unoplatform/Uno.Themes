@@ -48,10 +48,10 @@
 		large: { height: 56, width: 56 + text?, padding: 20, corner-radius: 28 }
 		small: { height: 40, width: 40 + text?, padding: 12, corner-radius: 20 }
 	-->
-	<CornerRadius x:Key="MaterialFabCorderRadius_Large">28</CornerRadius>
-	<Thickness x:Key="MaterialFabPadding_Large">20</Thickness>
-	<CornerRadius x:Key="MaterialFabCorderRadius_Small">20</CornerRadius>
-	<Thickness x:Key="MaterialFabPadding_Small">12</Thickness>
+	<CornerRadius x:Key="MaterialFabLargeCorderRadius">28</CornerRadius>
+	<Thickness x:Key="MaterialFabLargePadding">20</Thickness>
+	<CornerRadius x:Key="MaterialFabSmallCorderRadius">20</CornerRadius>
+	<Thickness x:Key="MaterialFabSmallPadding">12</Thickness>
 
 	<!-- Undocumented variables -->
 	<x:Double x:Key="MaterialFabContentWidthOrHeight">16</x:Double>
@@ -78,9 +78,9 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialFabCorderRadius_Large}" />
+				Value="{StaticResource MaterialFabLargeCorderRadius}" />
 		<Setter Property="Padding"
-				Value="{StaticResource MaterialFabPadding_Large}" />
+				Value="{StaticResource MaterialFabLargePadding}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -193,11 +193,11 @@
 
 									<VisualState.Setters>
 										<Setter Target="ElevatedView.CornerRadius"
-												Value="{StaticResource MaterialFabCorderRadius_Small}" />
+												Value="{StaticResource MaterialFabSmallCorderRadius}" />
 										<Setter Target="Ripple.CornerRadius"
-												Value="{StaticResource MaterialFabCorderRadius_Small}" />
+												Value="{StaticResource MaterialFabSmallCorderRadius}" />
 										<Setter Target="ContentPanel.Margin"
-												Value="{StaticResource MaterialFabPadding_Small}" />
+												Value="{StaticResource MaterialFabSmallPadding}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

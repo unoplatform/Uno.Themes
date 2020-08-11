@@ -44,7 +44,7 @@
 					 Color="{ThemeResource MaterialOnBackgroundColor}"
 					 Opacity="0.74" />
 
-	<CornerRadius x:Key="ComboBoxBorderRadius">4</CornerRadius>
+	<CornerRadius x:Key="MaterialComboBoxCornerRadius">4</CornerRadius>
 
 	<x:String x:Key="UpArrowPathData">M15.995972,0L32,21.478999 0,21.478999z</x:String>
 	<x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
@@ -204,7 +204,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="ComboBox">
 					<Grid x:Name="RootGrid"
-						  CornerRadius="{StaticResource ComboBoxBorderRadius}">
+						  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -297,7 +297,7 @@
 						<!-- Elevated View -->
 						<toolkit:ElevatedView Background="{TemplateBinding Background}"
 											  HorizontalAlignment="Stretch"
-											  CornerRadius="{StaticResource ComboBoxBorderRadius}"
+											  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 											  Elevation="8"
 											  BorderBrush="{StaticResource ComboBoxBorderBrush}"
 											  BorderThickness="1">

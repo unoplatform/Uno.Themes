@@ -192,7 +192,7 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | NavigationView   | MaterialNavigationViewStyle <br> MaterialNoCompactMenuNavigationViewStyle         | TODO             |
 | PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              | TODO             |
 | RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   | TODO             |
-| TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonTextBlockStyle <br> MaterialCaption <br> MaterialOverline                                 | TODO             |
+| TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline                                 | TODO             |
 | TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      | TODO             |
 | ToggleButton     | MaterialTextToggleButtonStyle                                                     | TODO             |
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         | TODO             |
