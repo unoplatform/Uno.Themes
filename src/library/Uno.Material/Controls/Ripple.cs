@@ -22,16 +22,16 @@ namespace Uno.Material.Controls
 		private double _rippleX;
 		private double _rippleY;
 
-		private UIElement _touchTarget;
-
 		public Ripple()
 		{
 			DefaultStyleKey = typeof(Ripple);
 			SizeChanged += OnSizeChanged;
 
-			SetBinding(MyParentProperty, new Binding {RelativeSource = new RelativeSource {Mode = RelativeSourceMode.TemplatedParent}});
+#if NETSTANDARD2_0
+			SetBinding(MyParentProperty, new Binding { RelativeSource = new RelativeSource { Mode = RelativeSourceMode.TemplatedParent } });
 			Loaded += ReRegisterPointerPressedHandler;
 			Unloaded += UnRegisterPointerPressedHandler;
+#endif
 		}
 
 		private void OnSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
@@ -62,15 +62,19 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty FeedbackOpacityProperty =
 			DependencyProperty.Register("FeedbackOpacity", typeof(double), typeof(Ripple), new PropertyMetadata(1));
 
-		private static readonly DependencyProperty MyParentProperty = DependencyProperty.Register(
-			"MyParent", typeof(object), typeof(Ripple), new PropertyMetadata(default(object), (snd, e) => (snd as Ripple)?.ReRegisterPointerPressedHandler()));
-
 		protected override void OnApplyTemplate()
 		{
 			VisualStateManager.GoToState(this, "Normal", false);
 
 			base.OnApplyTemplate();
 		}
+
+		// Workaround #373 WASM nested Ripple control 
+#if NETSTANDARD2_0
+		private UIElement _touchTarget;
+
+		private static readonly DependencyProperty MyParentProperty = DependencyProperty.Register(
+	"MyParent", typeof(object), typeof(Ripple), new PropertyMetadata(default(object), (snd, e) => (snd as Ripple)?.ReRegisterPointerPressedHandler()));
 
 		private static void ReRegisterPointerPressedHandler(object snd, RoutedEventArgs _)
 			=> (snd as Ripple)?.ReRegisterPointerPressedHandler();
@@ -102,6 +106,13 @@ namespace Uno.Material.Controls
 			_touchTarget?.RemoveHandler(PointerPressedEvent, new PointerEventHandler(StartRippling));
 			_touchTarget = null;
 		}
+#else
+		protected override void OnPointerPressed(PointerRoutedEventArgs e)
+		{
+			StartRippling(null, e);
+			base.OnPointerPressed(e);
+		}
+#endif
 
 		private void StartRippling(object _, PointerRoutedEventArgs e)
 		{
