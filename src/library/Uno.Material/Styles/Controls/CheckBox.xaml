@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:xamarin="http://nventive.com/xamarin"
-					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
+					xmlns:ios="http://uno.ui/ios"
+					xmlns:not_ios="http://uno.ui/not_ios"
 					xmlns:wasm="http://uno.ui/wasm"
-					mc:Ignorable="xamarin ios android wasm">
+					xmlns:xamarin="http://nventive.com/xamarin"
+					mc:Ignorable="android ios not_ios wasm xamarin">
 
 	<x:String x:Key="HyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
 	<x:String x:Key="CheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
@@ -52,6 +53,56 @@
 					<Grid x:Name="Root"
 						  Background="Transparent">
 						<VisualStateManager.VisualStateGroups>
+
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="Disabled" />
+
+								<VisualStateGroup.Transitions>
+									<VisualTransition From="Normal"
+													  To="Pressed">
+										<Storyboard>
+											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0"
+																 To="0.25" />
+
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 BeginTime="0:0:0.15"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0.25"
+																 To="0" />
+										</Storyboard>
+									</VisualTransition>
+									<VisualTransition From="PointerOver"
+													  To="Pressed">
+										<Storyboard>
+											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0"
+																 To="0.25" />
+
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 BeginTime="0:0:0.15"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0.25" />
+										</Storyboard>
+									</VisualTransition>
+								</VisualStateGroup.Transitions>
+							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="CombinedStates">
 
 								<VisualState x:Name="UncheckedNormal" />
@@ -167,60 +218,92 @@
 									<VisualTransition From="UncheckedNormal"
 													  To="UncheckedPressed">
 										<Storyboard>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
-																		   Storyboard.TargetName="PressRing">
+											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																				   Storyboard.TargetName="PressRing">
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
 																	  Value="0.5" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
 																	  Value="0" />
-											</DoubleAnimationUsingKeyFrames>
+											</not_ios:DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
 
 									<VisualTransition From="UncheckedPointerOver"
 													  To="UncheckedPressed">
 										<Storyboard>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
-																		   Storyboard.TargetName="PressRing">
+											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																				   Storyboard.TargetName="PressRing">
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
 																	  Value="0.5" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
 																	  Value="0" />
-											</DoubleAnimationUsingKeyFrames>
+											</not_ios:DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
 
 									<VisualTransition From="CheckedNormal"
 													  To="CheckedPressed">
 										<Storyboard>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
-																		   Storyboard.TargetName="PressRing">
+											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																				   Storyboard.TargetName="PressRing">
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
 																	  Value="0.5" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
 																	  Value="0" />
-											</DoubleAnimationUsingKeyFrames>
+											</not_ios:DoubleAnimationUsingKeyFrames>
+
+											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0"
+																 To="0.25" />
+
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 BeginTime="0:0:0.15"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0.25"
+																 To="0" />
 										</Storyboard>
 									</VisualTransition>
 
 									<VisualTransition From="CheckedPointerOver"
 													  To="CheckedPressed">
 										<Storyboard>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
-																		   Storyboard.TargetName="PressRing">
+											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																				   Storyboard.TargetName="PressRing">
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
 																	  Value="0.5" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
 																	  Value="0" />
-											</DoubleAnimationUsingKeyFrames>
+											</not_ios:DoubleAnimationUsingKeyFrames>
+
+											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0"
+																 To="0.25" />
+
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 BeginTime="0:0:0.15"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0.25"
+																 To="0" />
 										</Storyboard>
 									</VisualTransition>
 
@@ -228,15 +311,31 @@
 													  To="IndeterminatePressed">
 
 										<Storyboard>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
-																		   Storyboard.TargetName="PressRing">
+											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																				   Storyboard.TargetName="PressRing">
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
 																	  Value="0.5" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
 																	  Value="0" />
-											</DoubleAnimationUsingKeyFrames>
+											</not_ios:DoubleAnimationUsingKeyFrames>
+
+											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0"
+																 To="0.25" />
+
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 BeginTime="0:0:0.15"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0.25"
+																 To="0" />
 										</Storyboard>
 									</VisualTransition>
 
@@ -244,15 +343,31 @@
 													  To="IndeterminatePressed">
 
 										<Storyboard>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
-																		   Storyboard.TargetName="PressRing">
+											<not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+																				   Storyboard.TargetName="PressRing">
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
 																	  Value="0.5" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
 																	  Value="0" />
-											</DoubleAnimationUsingKeyFrames>
+											</not_ios:DoubleAnimationUsingKeyFrames>
+
+											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0"
+																 To="0.25" />
+
+											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
+																 Storyboard.TargetProperty="Opacity"
+																 BeginTime="0:0:0.15"
+																 Duration="0:0:0.15"
+																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 From="0.25"
+																 To="0" />
 										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
