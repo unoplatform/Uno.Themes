@@ -1,14 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:xamarin="http://nventive.com/xamarin"
-					xmlns:win="using:Uno.UI.Toolkit"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:uno="using:Uno.UI.Xaml.Controls"
-					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:converters="using:Uno.Material.Converters"
 					xmlns:extensions="using:Uno.Material.Extensions"
-					mc:Ignorable="xamarin not_win">
+					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:uno="using:Uno.UI.Xaml.Controls"
+					xmlns:win="using:Uno.UI.Toolkit"
+					xmlns:xamarin="http://nventive.com/xamarin"
+					mc:Ignorable="not_win xamarin">
 
 	<!-- Converters -->
 	<converters:FromNullToValueConverter x:Name="NullToVisible"
@@ -399,7 +399,7 @@
 													  Background="{TemplateBinding Background}"
 													  BorderBrush="{StaticResource ComboBoxBorderBrush}"
 													  BorderThickness="1"
-													  CornerRadius="0,0,4,4"
+													  CornerRadius="4"
 													  AutomationProperties.AccessibilityView="Raw"
 													  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
 													  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
