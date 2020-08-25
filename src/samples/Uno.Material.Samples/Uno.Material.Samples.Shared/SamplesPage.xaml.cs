@@ -96,6 +96,7 @@ namespace Uno.Material.Samples
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
 				// TODO Add divider icon?
 				AddMenuItem<DividerSamplePage>();
+				AddMenuItem<ExpandingBottomSheetSamplePage>(icon: "ExpandingBottomSheetIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
 				AddMenuItem<NavigationViewSamplePage>(icon: "NavigationViewIcon");
 				AddMenuItem<PasswordBoxSamplePage>(icon: "PasswordBoxIcon");
