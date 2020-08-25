@@ -216,6 +216,7 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 |----------------------|-------------------------------------------------------------------------------|
 | Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
 | BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              |
+| Divider              | MaterialDividerStyle                                                          |
 
 
 ## Controls Setup (Specialized)
