@@ -1,0 +1,45 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.ChipSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Material.Samples.Content.Controls"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:chips="using:Uno.Material.Controls"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<StackPanel>
+		<TextBlock Text="Xaml" />
+		<chips:ChipBag>
+			<chips:Chip Content="asd" />
+			<chips:Chip Content="qwe"
+						IsChecked="True" />
+			<chips:Chip Content="zxc" />
+		</chips:ChipBag>
+
+		<TextBlock Text="Binding: Selected=IsEven" />
+		<TextBlock Text="left: ChipBag, right: ListView (for reference)" />
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<chips:ChipBag Grid.Column="0"
+						   ItemsSource="{Binding}"
+						   ItemIsCheckedBinding="{Binding IsSelected, Mode=TwoWay}"
+						   ItemContentBinding="{Binding Text}" />
+
+			<ListView Grid.Column="1"
+					  ItemsSource="{Binding}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+								  Content="{Binding Text}" />
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</Grid>
+
+	</StackPanel>
+</Page>
