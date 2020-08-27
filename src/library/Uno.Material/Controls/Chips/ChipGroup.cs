@@ -87,9 +87,7 @@ namespace Uno.Material.Controls
 
 		public ChipGroup()
 		{
-#if WINDOWS_UWP
 			RegisterPropertyChangedCallback(ItemsSourceProperty, (s, e) => (s as ChipGroup)?.OnItemsSourceChanged());
-#endif
 
 			this.Loaded += OnLoaded;
 		}
@@ -140,15 +138,6 @@ namespace Uno.Material.Controls
 
 			EnforceSelectionMode();
 		}
-
-#if !WINDOWS_UWP
-		protected override void OnItemsSourceChanged(DependencyPropertyChangedEventArgs e)
-		{
-			base.OnItemsSourceChanged(e);
-
-			OnItemsSourceChanged();
-		}
-#endif
 
 		protected void OnItemsSourceChanged()
 		{
@@ -235,7 +224,6 @@ namespace Uno.Material.Controls
 		private void OnItemChecked(object sender, RoutedEventArgs e) => RaiseItemEvent(ItemChecked, sender);
 
 		private void OnItemUnchecked(object sender, RoutedEventArgs e) => RaiseItemEvent(ItemUnchecked, sender);
-
 
 		private void RaiseItemEvent(ChipItemEventHandler handler, object originalSender)
 		{
