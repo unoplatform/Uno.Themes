@@ -111,7 +111,11 @@ namespace Uno.Material.Controls
 				: null;
 			foreach (var container in GetItemContainers())
 			{
-				if (binding != null) container.SetBinding(Chip.IsCheckedProperty, binding);
+				if (binding != null)
+				{
+					container.SetBinding(Chip.IsCheckedProperty, binding);
+				}
+
 				container.ClearValue(Chip.IsCheckedProperty);
 			}
 		}
