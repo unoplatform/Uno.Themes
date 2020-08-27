@@ -228,10 +228,18 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.5" />
-										<Setter Target="ComboBoxContent.Background"
+										<Setter Target="DropDownGlyph_Down.Fill"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="PlaceholderTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="IconPresenter.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ComboBoxContent.Background"
+												Value="{StaticResource ComboBoxBorderBrush}" />
+										<Setter Target="ElevatedView.BorderThickness"
+												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -295,7 +303,8 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<!-- Elevated View -->
-						<toolkit:ElevatedView Background="{TemplateBinding Background}"
+						<toolkit:ElevatedView x:Name="ElevatedView"
+											  Background="{TemplateBinding Background}"
 											  HorizontalAlignment="Stretch"
 											  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 											  Elevation="8"
