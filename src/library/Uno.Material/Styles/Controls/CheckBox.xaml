@@ -50,8 +50,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CheckBox">
-					<Grid x:Name="Root"
-						  Background="Transparent">
+					<Grid x:Name="Root">
 						<VisualStateManager.VisualStateGroups>
 
 							<VisualStateGroup x:Name="CommonStates">
@@ -397,77 +396,82 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<Ellipse x:Name="FocusRing"
-								 HorizontalAlignment="Center"
-								 VerticalAlignment="Center"
-								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{TemplateBinding Background}"
-								 IsHitTestVisible="False"
-								 Opacity="0" />
+						<!-- For Hittest -->
+						<Grid Background="Transparent">
 
-						<Ellipse x:Name="PressRing"
-								 HorizontalAlignment="Center"
-								 VerticalAlignment="Center"
-								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource MaterialOnSurfaceLowBrush}"
-								 IsHitTestVisible="False"
-								 Opacity="0" />
+							<Ellipse x:Name="FocusRing"
+									 Fill="{TemplateBinding Background}"
+									 Width="{StaticResource FocusAreaSize}"
+									 Height="{StaticResource FocusAreaSize}"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Center"
+									 Stretch="Uniform"
+									 IsHitTestVisible="False"
+									 Opacity="0" />
 
-						<Grid x:Name="CheckBoxContainer"
-							  Height="{StaticResource CheckAreaSize}"
-							  Width="{StaticResource CheckAreaSize}">
+							<Ellipse x:Name="PressRing"
+									 Fill="{StaticResource MaterialOnSurfaceLowBrush}"
+									 Width="{StaticResource FocusAreaSize}"
+									 Height="{StaticResource FocusAreaSize}"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Center"
+									 Stretch="Uniform"
+									 IsHitTestVisible="False"
+									 Opacity="0" />
 
-							<Grid x:Name="BackgroundBorder"
-								  Background="{ThemeResource MaterialBackgroundColor}"
-								  BorderBrush="{TemplateBinding BorderBrush}"
-								  BorderThickness="{TemplateBinding BorderThickness}"
-								  CornerRadius="2" />
+							<Grid x:Name="CheckBoxContainer"
+								  Height="{StaticResource CheckAreaSize}"
+								  Width="{StaticResource CheckAreaSize}">
 
-							<Grid x:Name="CheckedBackgroundBorder"
-								  Background="{TemplateBinding Background}"
-								  Opacity="0"
-								  CornerRadius="2" />
+								<Grid x:Name="BackgroundBorder"
+									  Background="{ThemeResource MaterialBackgroundColor}"
+									  BorderBrush="{TemplateBinding BorderBrush}"
+									  BorderThickness="{TemplateBinding BorderThickness}"
+									  CornerRadius="2" />
 
-							<Path x:Name="HyphenGlyph"
-								  Data="{StaticResource HyphenGlyphPathStyle}"
-								  Fill="{TemplateBinding Foreground}"
-								  VerticalAlignment="Center"
-								  HorizontalAlignment="Center"
-								  Stretch="Uniform"
-								  Width="12"
-								  Height="4"
-								  Opacity="0"
-								  AutomationProperties.AccessibilityView="Raw"
-								  xamarin:Margin="0,2,0,0" />
+								<Grid x:Name="CheckedBackgroundBorder"
+									  Background="{TemplateBinding Background}"
+									  Opacity="0"
+									  CornerRadius="2" />
 
-							<Path x:Name="CheckGlyph"
-								  Data="{StaticResource CheckGlyphPathStyle}"
-								  Fill="{TemplateBinding Foreground}"
-								  VerticalAlignment="Center"
-								  HorizontalAlignment="Center"
-								  Stretch="Uniform"
-								  Width="12"
-								  Height="12"
-								  Opacity="0"
-								  AutomationProperties.AccessibilityView="Raw"
-								  xamarin:Margin="0,2,0,0" />
+								<Path x:Name="HyphenGlyph"
+									  Data="{StaticResource HyphenGlyphPathStyle}"
+									  Fill="{TemplateBinding Foreground}"
+									  VerticalAlignment="Center"
+									  HorizontalAlignment="Center"
+									  Stretch="Uniform"
+									  Width="12"
+									  Height="4"
+									  Opacity="0"
+									  AutomationProperties.AccessibilityView="Raw"
+									  xamarin:Margin="0,2,0,0" />
+
+								<Path x:Name="CheckGlyph"
+									  Data="{StaticResource CheckGlyphPathStyle}"
+									  Fill="{TemplateBinding Foreground}"
+									  VerticalAlignment="Center"
+									  HorizontalAlignment="Center"
+									  Stretch="Uniform"
+									  Width="12"
+									  Height="12"
+									  Opacity="0"
+									  AutomationProperties.AccessibilityView="Raw"
+									  xamarin:Margin="0,2,0,0" />
+							</Grid>
 						</Grid>
 
 						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  Content="{TemplateBinding Content}"
 										  Foreground="{StaticResource MaterialOnBackgroundBrush}"
-										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Grid.Column="1"
+										  IsHitTestVisible="False"
 										  AutomationProperties.AccessibilityView="Raw"
-										  TextWrapping="Wrap" />
+										  TextWrapping="Wrap"
+										  Margin="{TemplateBinding Padding}"
+										  Grid.Column="1" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
