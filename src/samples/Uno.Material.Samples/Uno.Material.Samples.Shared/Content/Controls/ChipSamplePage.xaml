@@ -8,38 +8,83 @@
 	  mc:Ignorable="d"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<StackPanel>
-		<TextBlock Text="Xaml" />
-		<chips:ChipBag>
-			<chips:Chip Content="asd" />
-			<chips:Chip Content="qwe"
-						IsChecked="True" />
-			<chips:Chip Content="zxc" />
-		</chips:ChipBag>
+	<Page.Resources />
 
-		<TextBlock Text="Binding: Selected=IsEven" />
-		<TextBlock Text="left: ChipBag, right: ListView (for reference)" />
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
+	<ScrollViewer>
+		<StackPanel>
+			<TextBlock Text="=== Xaml" />
+			<chips:ChipBag SelectionMode="None">
+				<chips:Chip Content="None1" />
+				<chips:Chip Content="None2"
+							IsChecked="True" />
+				<chips:Chip Content="None3" />
+			</chips:ChipBag>
+			<chips:ChipBag SelectionMode="Single">
+				<chips:Chip Content="Single1" />
+				<chips:Chip Content="Single2"
+							IsChecked="True" />
+				<chips:Chip Content="Single3" />
+			</chips:ChipBag>
+			<chips:ChipBag SelectionMode="Multiple">
+				<chips:Chip Content="Multiple1" />
+				<chips:Chip Content="Multiple2"
+							IsChecked="True" />
+				<chips:Chip Content="Multiple3"
+							IsChecked="True" />
+			</chips:ChipBag>
+			<TextBlock Text="xaml: single with wrong amount of selected" />
+			<chips:ChipBag SelectionMode="Single">
+				<chips:Chip Content="Single1" />
+				<chips:Chip Content="Single2"
+							IsChecked="True" />
+				<chips:Chip Content="Single3"
+							IsChecked="True" />
+			</chips:ChipBag>
 
-			<chips:ChipBag Grid.Column="0"
-						   ItemsSource="{Binding}"
-						   ItemIsCheckedBinding="{Binding IsSelected, Mode=TwoWay}"
-						   ItemContentBinding="{Binding Text}" />
+			<TextBlock Text="== Binding"
+					   Margin="0,20,0,0" />
+			<Button Content="Change ItemsSource" Click="ChangeItemsSource" />
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="SelectionMode:" />
+				<RadioButton GroupName="BindingChipBagSelectionMode"
+							 Content="None"
+							 Checked="SetBindingChipBagSelectionMode" />
+				<RadioButton GroupName="BindingChipBagSelectionMode"
+							 Content="Single"
+							 Checked="SetBindingChipBagSelectionMode" />
+				<RadioButton GroupName="BindingChipBagSelectionMode"
+							 Content="Multiple"
+							 Checked="SetBindingChipBagSelectionMode" />
+			</StackPanel>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-			<ListView Grid.Column="1"
-					  ItemsSource="{Binding}">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
-								  Content="{Binding Text}" />
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</Grid>
+				<chips:ChipBag Grid.Column="0"
+							   x:Name="BindingChipBag"
+							   ItemsSource="{Binding}"
+							   SelectionMode="Multiple"
+							   DisplayMemberPath="Text"
+							   SelectionMemberPath="IsSelected" />
 
-	</StackPanel>
+				<ListView Grid.Column="1"
+						  Header="ListView (for reference)"
+						  ItemsSource="{Binding}">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<CheckBox Content="{Binding Text}"
+									  IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</Grid>
+
+			<TextBlock xml:space="preserve">SelectedItem: <Run Text="{Binding ElementName=BindingChipBag, Path=SelectedItem.Text, FallbackValue='(null)'}" /></TextBlock>
+			<TextBlock xml:space="preserve"
+					   TextWrapping="Wrap">SelectedItem: <Run Text="{Binding ElementName=BindingChipBag, Path=SelectedItems, Converter={StaticResource Material_EnumerableStringJoin}, TargetNullValue='(null)'}" /></TextBlock>
+
+		</StackPanel>
+	</ScrollViewer>
 </Page>

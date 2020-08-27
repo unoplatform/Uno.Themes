@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Uno.Material.Controls;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -28,8 +29,38 @@ namespace Uno.Material.Samples.Content.Controls
 		{
 			this.InitializeComponent();
 			this.DataContext = Enumerable.Range(0, 10)
-				.Select(x => new SelectableData { Text = $"Item {x}", IsSelected = x % 2 == 0 })
+				.Select(x => new SelectableData
+				{
+					Text = $"Item {x}",
+					IsSelected = BindingChipBag.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
+				})
 				.ToArray();
+		}
+
+		private void ChangeItemsSource(object sender, RoutedEventArgs e)
+		{
+			this.DataContext = Enumerable.Range(0, new Random().Next(8, 12 + 2))
+				.Select(x => new SelectableData
+				{
+					Text = $"Item {x}",
+					IsSelected = BindingChipBag.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
+				})
+				.ToArray();
+		}
+
+		private void SetBindingChipBagSelectionMode(object sender, RoutedEventArgs e)
+		{
+			if (sender is RadioButton radio)
+			{
+				switch (radio.Content)
+				{
+					case "None": BindingChipBag.SelectionMode = ChipSelectionMode.None; break;
+					case "Single": BindingChipBag.SelectionMode = ChipSelectionMode.Single; break;
+					case "Multiple": BindingChipBag.SelectionMode = ChipSelectionMode.Multiple; break;
+
+					default: throw new ArgumentOutOfRangeException($"Invalid option: {radio.Content}");
+				}
+			}
 		}
 
 		public class SelectableData : InpcObject
@@ -37,6 +68,8 @@ namespace Uno.Material.Samples.Content.Controls
 			public string Text { get => GetProperty<string>(); set => SetProperty(value); }
 
 			public bool IsSelected { get => GetProperty<bool>(); set => SetProperty(value); }
+
+			public override string ToString() => $"[{(IsSelected ? 'X' : ' ')}] {Text}";
 		}
 
 		public class InpcObject : INotifyPropertyChanged
