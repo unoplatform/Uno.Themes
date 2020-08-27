@@ -12,15 +12,15 @@ using Windows.UI.Xaml.Markup;
 
 namespace Uno.Material.Controls
 {
-	public partial class ChipBag : ItemsControl
+	public partial class ChipGroup : ItemsControl
 	{
 		#region DependencyProperty: SelectedItem
 
 		public static DependencyProperty SelectedItemProperty { get; } = DependencyProperty.Register(
 			nameof(SelectedItem),
 			typeof(object),
-			typeof(ChipBag),
-			new PropertyMetadata(default, (s, e) => (s as ChipBag)?.OnSelectedItemChanged(e)));
+			typeof(ChipGroup),
+			new PropertyMetadata(default, (s, e) => (s as ChipGroup)?.OnSelectedItemChanged(e)));
 
 		public object SelectedItem
 		{
@@ -34,8 +34,8 @@ namespace Uno.Material.Controls
 		public static DependencyProperty SelectedItemsProperty { get; } = DependencyProperty.Register(
 			nameof(SelectedItems),
 			typeof(IList),
-			typeof(ChipBag),
-			new PropertyMetadata(default, (s, e) => (s as ChipBag)?.OnSelectedItemsChanged(e)));
+			typeof(ChipGroup),
+			new PropertyMetadata(default, (s, e) => (s as ChipGroup)?.OnSelectedItemsChanged(e)));
 
 		public IList SelectedItems
 		{
@@ -49,8 +49,8 @@ namespace Uno.Material.Controls
 		public static DependencyProperty SelectionMemberPathProperty { get; } = DependencyProperty.Register(
 			nameof(SelectionMemberPath),
 			typeof(string),
-			typeof(ChipBag),
-			new PropertyMetadata(default, (s, e) => (s as ChipBag)?.OnSelectionMemberPathChanged(e)));
+			typeof(ChipGroup),
+			new PropertyMetadata(default, (s, e) => (s as ChipGroup)?.OnSelectionMemberPathChanged(e)));
 
 		/// <summary>
 		/// Gets or sets the name or path of the property that indicates selection state for each data item.
@@ -67,8 +67,8 @@ namespace Uno.Material.Controls
 		public static DependencyProperty SelectionModeProperty { get; } = DependencyProperty.Register(
 			nameof(SelectionMode),
 			typeof(ChipSelectionMode),
-			typeof(ChipBag),
-			new PropertyMetadata(ChipSelectionMode.Single, (s, e) => (s as ChipBag)?.OnSelectionModeChanged(e)));
+			typeof(ChipGroup),
+			new PropertyMetadata(ChipSelectionMode.Single, (s, e) => (s as ChipGroup)?.OnSelectionModeChanged(e)));
 
 		public ChipSelectionMode SelectionMode
 		{
@@ -81,10 +81,10 @@ namespace Uno.Material.Controls
 		private bool _isSynchronizingSelection = false;
 		private bool _isUpdatingSelection = false;
 
-		public ChipBag()
+		public ChipGroup()
 		{
 #if WINDOWS_UWP
-			RegisterPropertyChangedCallback(ItemsSourceProperty, (s, e) => (s as ChipBag)?.OnItemsSourceChanged());
+			RegisterPropertyChangedCallback(ItemsSourceProperty, (s, e) => (s as ChipGroup)?.OnItemsSourceChanged());
 #endif
 
 			this.Loaded += OnLoaded;

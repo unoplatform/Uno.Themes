@@ -32,7 +32,7 @@ namespace Uno.Material.Samples.Content.Controls
 				.Select(x => new SelectableData
 				{
 					Text = $"Item {x}",
-					IsSelected = BindingChipBag.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
+					IsSelected = BindingChipGroup.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
 				})
 				.ToArray();
 		}
@@ -43,20 +43,20 @@ namespace Uno.Material.Samples.Content.Controls
 				.Select(x => new SelectableData
 				{
 					Text = $"Item {x}",
-					IsSelected = BindingChipBag.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
+					IsSelected = BindingChipGroup.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
 				})
 				.ToArray();
 		}
 
-		private void SetBindingChipBagSelectionMode(object sender, RoutedEventArgs e)
+		private void SetBindingChipGroupSelectionMode(object sender, RoutedEventArgs e)
 		{
 			if (sender is RadioButton radio)
 			{
 				switch (radio.Content)
 				{
-					case "None": BindingChipBag.SelectionMode = ChipSelectionMode.None; break;
-					case "Single": BindingChipBag.SelectionMode = ChipSelectionMode.Single; break;
-					case "Multiple": BindingChipBag.SelectionMode = ChipSelectionMode.Multiple; break;
+					case "None": BindingChipGroup.SelectionMode = ChipSelectionMode.None; break;
+					case "Single": BindingChipGroup.SelectionMode = ChipSelectionMode.Single; break;
+					case "Multiple": BindingChipGroup.SelectionMode = ChipSelectionMode.Multiple; break;
 
 					default: throw new ArgumentOutOfRangeException($"Invalid option: {radio.Content}");
 				}

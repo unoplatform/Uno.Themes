@@ -13,48 +13,49 @@
 	<ScrollViewer>
 		<StackPanel>
 			<TextBlock Text="=== Xaml" />
-			<chips:ChipBag SelectionMode="None">
+			<chips:ChipGroup SelectionMode="None">
 				<chips:Chip Content="None1" />
 				<chips:Chip Content="None2"
 							IsChecked="True" />
 				<chips:Chip Content="None3" />
-			</chips:ChipBag>
-			<chips:ChipBag SelectionMode="Single">
+			</chips:ChipGroup>
+			<chips:ChipGroup SelectionMode="Single">
 				<chips:Chip Content="Single1" />
 				<chips:Chip Content="Single2"
 							IsChecked="True" />
 				<chips:Chip Content="Single3" />
-			</chips:ChipBag>
-			<chips:ChipBag SelectionMode="Multiple">
+			</chips:ChipGroup>
+			<chips:ChipGroup SelectionMode="Multiple">
 				<chips:Chip Content="Multiple1" />
 				<chips:Chip Content="Multiple2"
 							IsChecked="True" />
 				<chips:Chip Content="Multiple3"
 							IsChecked="True" />
-			</chips:ChipBag>
+			</chips:ChipGroup>
 			<TextBlock Text="xaml: single with wrong amount of selected" />
-			<chips:ChipBag SelectionMode="Single">
+			<chips:ChipGroup SelectionMode="Single">
 				<chips:Chip Content="Single1" />
 				<chips:Chip Content="Single2"
 							IsChecked="True" />
 				<chips:Chip Content="Single3"
 							IsChecked="True" />
-			</chips:ChipBag>
+			</chips:ChipGroup>
 
 			<TextBlock Text="== Binding"
 					   Margin="0,20,0,0" />
-			<Button Content="Change ItemsSource" Click="ChangeItemsSource" />
+			<Button Content="Change ItemsSource"
+					Click="ChangeItemsSource" />
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="SelectionMode:" />
-				<RadioButton GroupName="BindingChipBagSelectionMode"
+				<RadioButton GroupName="BindingChipGroupSelectionMode"
 							 Content="None"
-							 Checked="SetBindingChipBagSelectionMode" />
-				<RadioButton GroupName="BindingChipBagSelectionMode"
+							 Checked="SetBindingChipGroupSelectionMode" />
+				<RadioButton GroupName="BindingChipGroupSelectionMode"
 							 Content="Single"
-							 Checked="SetBindingChipBagSelectionMode" />
-				<RadioButton GroupName="BindingChipBagSelectionMode"
+							 Checked="SetBindingChipGroupSelectionMode" />
+				<RadioButton GroupName="BindingChipGroupSelectionMode"
 							 Content="Multiple"
-							 Checked="SetBindingChipBagSelectionMode" />
+							 Checked="SetBindingChipGroupSelectionMode" />
 			</StackPanel>
 			<Grid>
 				<Grid.ColumnDefinitions>
@@ -62,12 +63,12 @@
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
 
-				<chips:ChipBag Grid.Column="0"
-							   x:Name="BindingChipBag"
-							   ItemsSource="{Binding}"
-							   SelectionMode="Multiple"
-							   DisplayMemberPath="Text"
-							   SelectionMemberPath="IsSelected" />
+				<chips:ChipGroup Grid.Column="0"
+								 x:Name="BindingChipGroup"
+								 ItemsSource="{Binding}"
+								 SelectionMode="Multiple"
+								 DisplayMemberPath="Text"
+								 SelectionMemberPath="IsSelected" />
 
 				<ListView Grid.Column="1"
 						  Header="ListView (for reference)"
@@ -81,9 +82,9 @@
 				</ListView>
 			</Grid>
 
-			<TextBlock xml:space="preserve">SelectedItem: <Run Text="{Binding ElementName=BindingChipBag, Path=SelectedItem.Text, FallbackValue='(null)'}" /></TextBlock>
+			<TextBlock xml:space="preserve">SelectedItem: <Run Text="{Binding ElementName=BindingChipGroup, Path=SelectedItem.Text, FallbackValue='(null)'}" /></TextBlock>
 			<TextBlock xml:space="preserve"
-					   TextWrapping="Wrap">SelectedItem: <Run Text="{Binding ElementName=BindingChipBag, Path=SelectedItems, Converter={StaticResource Material_EnumerableStringJoin}, TargetNullValue='(null)'}" /></TextBlock>
+					   TextWrapping="Wrap">SelectedItem: <Run Text="{Binding ElementName=BindingChipGroup, Path=SelectedItems, Converter={StaticResource Material_EnumerableStringJoin}, TargetNullValue='(null)'}" /></TextBlock>
 
 		</StackPanel>
 	</ScrollViewer>
