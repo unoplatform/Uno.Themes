@@ -14,6 +14,10 @@ namespace Uno.Material.Controls
 {
 	public partial class ChipGroup : ItemsControl
 	{
+		public event ChipItemEventHandler ItemClick;
+		public event ChipItemEventHandler ItemChecked;
+		public event ChipItemEventHandler ItemUnchecked;
+
 		#region DependencyProperty: SelectedItem
 
 		public static DependencyProperty SelectedItemProperty { get; } = DependencyProperty.Register(
@@ -201,6 +205,9 @@ namespace Uno.Material.Controls
 				}
 
 				container.IsCheckedChanged += OnItemIsCheckedChanged;
+				container.Click += OnItemClick;
+				container.Checked += OnItemChecked;
+				container.Unchecked += OnItemUnchecked;
 			}
 		}
 
@@ -213,6 +220,24 @@ namespace Uno.Material.Controls
 				container.ClearValue(Chip.IsCheckedProperty);
 
 				container.IsCheckedChanged -= OnItemIsCheckedChanged;
+				container.Click -= OnItemClick;
+				container.Checked -= OnItemChecked;
+				container.Unchecked -= OnItemUnchecked;
+			}
+		}
+
+		private void OnItemClick(object sender, RoutedEventArgs e) => RaiseItemEvent(ItemClick, sender);
+
+		private void OnItemChecked(object sender, RoutedEventArgs e) => RaiseItemEvent(ItemChecked, sender);
+
+		private void OnItemUnchecked(object sender, RoutedEventArgs e) => RaiseItemEvent(ItemUnchecked, sender);
+
+
+		private void RaiseItemEvent(ChipItemEventHandler handler, object originalSender)
+		{
+			if (originalSender is Chip container)
+			{
+				handler?.Invoke(this, new ItemClickEventArgs(ItemFromContainer(container)));
 			}
 		}
 
@@ -222,13 +247,15 @@ namespace Uno.Material.Controls
 
 			if (SelectionMode == ChipSelectionMode.None)
 			{
+				UpdateItemsIsCheckable();
 				UpdateSelection(default);
 			}
 			else if (SelectionMode == ChipSelectionMode.Single)
 			{
-				var containers = GetItemContainers().ToArray();
-				var selectedContainers = GetItemContainers().Where(x => x.IsChecked == true).ToArray();
+				UpdateItemsIsCheckable();
+
 				// either one is selected or none are selected
+				var selectedContainers = GetItemContainers().Where(x => x.IsChecked == true).ToArray();
 				if (selectedContainers.Length > 1)
 				{
 					foreach (var container in selectedContainers)
@@ -244,7 +271,16 @@ namespace Uno.Material.Controls
 			}
 			else if (SelectionMode == ChipSelectionMode.Multiple)
 			{
+				UpdateItemsIsCheckable();
 				UpdateSelection(default);
+			}
+
+			void UpdateItemsIsCheckable()
+			{
+				foreach (var container in GetItemContainers())
+				{
+					container.IsCheckable = SelectionMode != ChipSelectionMode.None;
+				}
 			}
 		}
 

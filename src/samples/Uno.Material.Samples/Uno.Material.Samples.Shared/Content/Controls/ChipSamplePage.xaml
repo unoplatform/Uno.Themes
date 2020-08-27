@@ -12,50 +12,50 @@
 
 	<ScrollViewer>
 		<StackPanel>
+			<!-- XAML -->
 			<TextBlock Text="=== Xaml" />
-			<chips:ChipGroup SelectionMode="None">
+			<chips:ChipGroup x:Name="XamlNoneSelectionChipGroup"
+							 SelectionMode="None">
 				<chips:Chip Content="None1" />
-				<chips:Chip Content="None2"
-							IsChecked="True" />
+				<chips:Chip Content="None2" />
 				<chips:Chip Content="None3" />
 			</chips:ChipGroup>
-			<chips:ChipGroup SelectionMode="Single">
+			<chips:ChipGroup x:Name="XamlSingleSelectionChipGroup"
+							 SelectionMode="Single">
 				<chips:Chip Content="Single1" />
 				<chips:Chip Content="Single2"
 							IsChecked="True" />
 				<chips:Chip Content="Single3" />
 			</chips:ChipGroup>
-			<chips:ChipGroup SelectionMode="Multiple">
+			<chips:ChipGroup x:Name="XamlMultipleSelectionChipGroup"
+							 SelectionMode="Multiple">
 				<chips:Chip Content="Multiple1" />
 				<chips:Chip Content="Multiple2"
 							IsChecked="True" />
 				<chips:Chip Content="Multiple3"
 							IsChecked="True" />
 			</chips:ChipGroup>
-			<TextBlock Text="xaml: single with wrong amount of selected" />
-			<chips:ChipGroup SelectionMode="Single">
-				<chips:Chip Content="Single1" />
-				<chips:Chip Content="Single2"
-							IsChecked="True" />
-				<chips:Chip Content="Single3"
-							IsChecked="True" />
-			</chips:ChipGroup>
+			<TextBlock x:Name="LastClickedTextBlock" />
+			<TextBlock x:Name="LastCheckedTextBlock" />
+			<TextBlock x:Name="LastUncheckedTextBlock" />
 
+			<!-- BINDING -->
 			<TextBlock Text="== Binding"
 					   Margin="0,20,0,0" />
 			<Button Content="Change ItemsSource"
 					Click="ChangeItemsSource" />
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Vertical">
 				<TextBlock Text="SelectionMode:" />
 				<RadioButton GroupName="BindingChipGroupSelectionMode"
 							 Content="None"
-							 Checked="SetBindingChipGroupSelectionMode" />
+							 Click="SetBindingChipGroupSelectionMode" />
 				<RadioButton GroupName="BindingChipGroupSelectionMode"
 							 Content="Single"
-							 Checked="SetBindingChipGroupSelectionMode" />
+							 Click="SetBindingChipGroupSelectionMode" />
 				<RadioButton GroupName="BindingChipGroupSelectionMode"
 							 Content="Multiple"
-							 Checked="SetBindingChipGroupSelectionMode" />
+							 Click="SetBindingChipGroupSelectionMode"
+							 IsChecked="True" />
 			</StackPanel>
 			<Grid>
 				<Grid.ColumnDefinitions>

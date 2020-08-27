@@ -28,6 +28,13 @@ namespace Uno.Material.Samples.Content.Controls
 		public ChipSamplePage()
 		{
 			this.InitializeComponent();
+
+			foreach (var control in new[] { XamlNoneSelectionChipGroup, XamlSingleSelectionChipGroup, XamlMultipleSelectionChipGroup })
+			{
+				control.ItemClick += (s, e) => LastClickedTextBlock.Text = $"Clicked: {(e.Item as Chip)?.Content}";
+				control.ItemChecked += (s, e) => LastCheckedTextBlock.Text = $"Checked: {(e.Item as Chip)?.Content}";
+				control.ItemUnchecked += (s, e) => LastUncheckedTextBlock.Text = $"Unchecked: {(e.Item as Chip)?.Content}";
+			}
 			this.DataContext = Enumerable.Range(0, 10)
 				.Select(x => new SelectableData
 				{
