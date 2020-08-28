@@ -105,6 +105,7 @@ namespace Uno.Material.Samples
 				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");
 				// Incomplete : AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<SliderSamplePage>(icon: "SliderIcon");
+				AddMenuItem<StandardBottomSheetSamplePage>(icon: "StandardBottomSheetIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");
 #if __IOS__ || __ANDROID__

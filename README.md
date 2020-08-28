@@ -218,6 +218,7 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              |
 | Divider              | MaterialDividerStyle                                                          |
 | ExpandingBottomSheet | MaterialExpandingBottomSheetStyle                                             |
+| StandardBottomSheet  | MaterialStandardBottomSheetStyle                                              |
 
 
 ## Controls Setup (Specialized)
