@@ -98,6 +98,7 @@ namespace Uno.Material.Samples
 				AddMenuItem<DividerSamplePage>();
 				AddMenuItem<ExpandingBottomSheetSamplePage>(icon: "ExpandingBottomSheetIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
+				AddMenuItem<HyperlinkButtonSamplePage>(icon: "ButtonIcon");
 				AddMenuItem<NavigationViewSamplePage>(icon: "NavigationViewIcon");
 				AddMenuItem<PasswordBoxSamplePage>(icon: "PasswordBoxIcon");
 				AddMenuItem<ProgressBarSamplePage>(icon: "ProgressBarIcon");
