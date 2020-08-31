@@ -1,0 +1,88 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+					mc:Ignorable="d">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style x:Key="MaterialHyperlinkButtonStyle"
+		   TargetType="HyperlinkButton">
+
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Padding"
+				Value="0"/>
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="HyperlinkButton">
+
+					<Grid Background="{TemplateBinding Background}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Content.Opacity"
+												Value="{StaticResource MaterialMediumOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Content.Opacity"
+												Value="{StaticResource MaterialLowOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource MaterialTextButtonLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused" />
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="PointerFocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<Grid x:Name="Content"
+							  MinHeight="{TemplateBinding MinHeight}"
+							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							  Margin="{TemplateBinding Padding}">
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  AutomationProperties.AccessibilityView="Raw"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Content="{TemplateBinding Content}"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="Top"
+											  TextWrapping="Wrap"/>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialSecondaryHyperlinkButtonStyle"
+		   TargetType="HyperlinkButton"
+		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
+
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialSecondaryBrush}" />
+	</Style>
+
+</ResourceDictionary>
