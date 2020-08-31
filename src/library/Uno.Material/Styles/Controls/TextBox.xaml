@@ -88,14 +88,16 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed" />
+
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentElement.Opacity"
-												Value="0.5" />
-										<Setter Target="PlaceholderElement.Opacity"
-												Value="0.5" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="PlaceholderElement.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
+								
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="PlaceholderElement.Foreground"
@@ -283,14 +285,16 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed" />
+
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentElement.Opacity"
-												Value="0.5" />
-										<Setter Target="PlaceholderElement.Opacity"
-												Value="0.5" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="PlaceholderElement.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
+								
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="Root.BorderBrush"
