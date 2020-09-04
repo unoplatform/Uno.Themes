@@ -149,7 +149,7 @@
 
 
 						<Grid x:Name="CollapsedContentPresenter">
-							<toolkit:ElevatedView Visibility="{Binding IsMinimalSheet, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_TrueToVisible}}"
+							<toolkit:ElevatedView Visibility="{Binding IsMinimalSheet, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToVisible}}"
 												  Background="{TemplateBinding Background}"
 												  Elevation="{StaticResource MaterialExpandingBottomSheetElevation}"
 												  HorizontalAlignment="Right"
@@ -164,7 +164,7 @@
 							</toolkit:ElevatedView>
 
 							<!-- Elevated View -->
-							<toolkit:ElevatedView Visibility="{Binding IsMinimalSheet, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_TrueToCollapsed}}"
+							<toolkit:ElevatedView Visibility="{Binding IsMinimalSheet, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToCollapsed}}"
 												  Background="{TemplateBinding Background}"
 												  Elevation="{StaticResource MaterialExpandingBottomSheetElevation}"
 												  HorizontalAlignment="Right"
