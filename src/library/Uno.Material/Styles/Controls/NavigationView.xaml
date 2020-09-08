@@ -1221,17 +1221,31 @@
 							<VisualStateGroup x:Name="PointerStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
+								
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
-									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
+								
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background"

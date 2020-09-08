@@ -67,7 +67,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -76,14 +76,30 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="FocusedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
+
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity"
@@ -139,7 +155,7 @@
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  IsHitTestVisible="False"
-										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<!-- Header part-->
 						<ContentPresenter Grid.Row="1"
@@ -149,7 +165,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<!-- SubHeader part-->
 						<ContentPresenter Grid.Row="2"
@@ -159,7 +175,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<!-- Ripple effect -->
 						<controls:Ripple Grid.RowSpan="4"
@@ -178,7 +194,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<!-- Icons section part -->
 						<ContentPresenter Grid.Row="3"
@@ -188,7 +204,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}}" />
+										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -251,7 +267,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -261,12 +277,26 @@
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="FocusedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
@@ -325,7 +355,7 @@
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
 											  IsHitTestVisible="False"
-											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- Header part-->
 							<ContentPresenter Grid.Row="1"
@@ -335,7 +365,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- SubHeader part-->
 							<ContentPresenter Grid.Row="2"
@@ -345,7 +375,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- Ripple effect -->
 							<controls:Ripple Grid.RowSpan="4"
@@ -362,7 +392,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- Icons section part -->
 							<ContentPresenter Grid.Row="3"
@@ -372,7 +402,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}}" />
+											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}}" />
 						</Grid>
 					</toolkit:ElevatedView>
 				</ControlTemplate>
@@ -431,7 +461,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -441,12 +471,26 @@
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="FocusedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
@@ -510,7 +554,7 @@
 										  AutomationProperties.AccessibilityView="Raw"
 										  IsHitTestVisible="False"
 										  Margin="16,0,0,0"
-										  Visibility="{Binding AvatarContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding AvatarContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<StackPanel Grid.Column="1"
 									IsHitTestVisible="False">
@@ -521,7 +565,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- SubHeader part-->
 							<ContentPresenter x:Name="SubHeaderContentPresenter"
@@ -530,7 +574,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 						</StackPanel>
 
 						<!-- Ripple effect -->
@@ -551,7 +595,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<!-- Media content part -->
 						<ContentPresenter Grid.Row="1"
@@ -563,7 +607,7 @@
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  IsHitTestVisible="False"
-										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<!-- Supporting Content part-->
 						<ContentPresenter Grid.Row="2"
@@ -574,7 +618,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -633,7 +677,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -643,12 +687,26 @@
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="FocusedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
@@ -714,7 +772,7 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  IsHitTestVisible="False"
 											  Margin="16,0,0,0"
-											  Visibility="{Binding AvatarContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding AvatarContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<StackPanel Grid.Column="1"
 										IsHitTestVisible="False">
@@ -725,7 +783,7 @@
 												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 												  AutomationProperties.AccessibilityView="Raw"
-												  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+												  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 								<!-- SubHeader part-->
 								<ContentPresenter x:Name="SubHeaderContentPresenter"
@@ -734,7 +792,7 @@
 												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 												  AutomationProperties.AccessibilityView="Raw"
-												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 							</StackPanel>
 							<!-- Ripple effect -->
 							<controls:Ripple Grid.RowSpan="3"
@@ -752,7 +810,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}}" />
+											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}}" />
 
 							<!-- Media content part -->
 							<ContentPresenter Grid.Row="1"
@@ -764,7 +822,7 @@
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
 											  IsHitTestVisible="False"
-											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- Supporting Content part-->
 							<ContentPresenter Grid.Row="2"
@@ -775,7 +833,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 						</Grid>
 					</toolkit:ElevatedView>
 				</ControlTemplate>
@@ -839,7 +897,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -849,12 +907,26 @@
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="FocusedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
@@ -917,7 +989,7 @@
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  IsHitTestVisible="False"
-										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<StackPanel Grid.Column="1">
 							<!-- Header part-->
@@ -927,7 +999,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- SubHeader part-->
 							<ContentPresenter x:Name="SubHeaderContentPresenter"
@@ -936,7 +1008,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 						</StackPanel>
 
 						<!-- Ripple effect -->
@@ -958,7 +1030,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<!-- Icons section part -->
 						<ContentPresenter Grid.Row="2"
@@ -969,7 +1041,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}}" />
+										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -1033,7 +1105,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -1043,12 +1115,26 @@
 									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="0" />
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="FocusedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
@@ -1113,7 +1199,7 @@
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
 											  IsHitTestVisible="False"
-											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<StackPanel Grid.Column="1">
 								<!-- Header part-->
@@ -1123,7 +1209,7 @@
 												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 												  AutomationProperties.AccessibilityView="Raw"
-												  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+												  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 								<!-- SubHeader part-->
 								<ContentPresenter x:Name="SubHeaderContentPresenter"
@@ -1132,7 +1218,7 @@
 												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 												  AutomationProperties.AccessibilityView="Raw"
-												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 							</StackPanel>
 
 							<!-- Ripple effect -->
@@ -1152,7 +1238,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyOrNullToCollapsed}}" />
+											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<!-- Icons section part -->
 							<ContentPresenter Grid.Row="2"
@@ -1163,7 +1249,7 @@
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 											  AutomationProperties.AccessibilityView="Raw"
-											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}}" />
+											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}}" />
 						</Grid>
 					</toolkit:ElevatedView>
 				</ControlTemplate>

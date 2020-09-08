@@ -106,8 +106,8 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="FocusedBorder_ScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 								</VisualState>
@@ -126,32 +126,32 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="-11" />
 										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="5" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 								<VisualState x:Name="Empty">
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -173,9 +173,9 @@
 											  MinWidth="25"
 											  not_macos:VerticalAlignment="Top"
 											  macos:VerticalAlignment="Center"
-											  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+											  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
-							
+
 							<ScrollViewer x:Name="ContentElement"
 										  Grid.Column="1"
 										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -228,11 +228,11 @@
 								   VerticalAlignment="Bottom" />
 
 						<Rectangle x:Name="FocusedBorder"
-									Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}"
-									Height="{StaticResource TextBoxFocusStrokeWidth}"
-									VerticalAlignment="Bottom"
-									not_macos:RenderTransformOrigin="0.5,0.5"
-									macos:RenderTransformOrigin="0.0,0.5">
+								   Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}"
+								   Height="{StaticResource TextBoxFocusStrokeWidth}"
+								   VerticalAlignment="Bottom"
+								   not_macos:RenderTransformOrigin="0.5,0.5"
+								   macos:RenderTransformOrigin="0.0,0.5">
 							<Rectangle.RenderTransform>
 								<ScaleTransform x:Name="FocusedBorder_ScaleTransform"
 												ScaleX="0" />
@@ -318,32 +318,32 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="-11" />
 										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="5" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.2"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 								<VisualState x:Name="Empty">
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource Material_EmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -363,7 +363,7 @@
 										  MinWidth="25"
 										  Margin="0,0,8,0"
 										  VerticalAlignment="Bottom"
-										  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+										  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 						<ScrollViewer x:Name="ContentElement"
 									  Grid.Column="1"
