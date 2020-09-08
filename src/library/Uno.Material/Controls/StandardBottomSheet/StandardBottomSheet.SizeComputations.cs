@@ -17,7 +17,7 @@ namespace Uno.Material.Controls
 {
 	public partial class StandardBottomSheet : Control
 	{
-		private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+		protected void OnSizeChanged(object sender, SizeChangedEventArgs e)
 		{
 			if (e.NewSize.Height > 0 && e.NewSize.Width > 0 && !_isInitialSnapAreaSet)
 			{
@@ -33,7 +33,11 @@ namespace Uno.Material.Controls
 			{
 				var hasSnapAreas = SnapAreas.Any();
 
-				if (hasSnapAreas)
+				if (SnapAreas.Any(s => s.Name.Equals(_defaultBottomSnapPoint.Name)))
+				{
+					SetSheetPosition(ActualHeight);
+				}
+				else if (hasSnapAreas)
 				{
 					var area = SnapAreas.Single(a => a.Name == InitialSnapAreaName);
 					var size = GetAreaSize(area);

@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media.Animation;
 namespace Uno.Material.Controls
 {
 	[TemplatePart(Name = RootPartName, Type = typeof(Grid))]
+	[TemplatePart(Name = BackdropPartName, Type = typeof(Grid))]
 	[TemplatePart(Name = SheetPartName, Type = typeof(ElevatedView))]
 	[TemplatePart(Name = HeaderPartName, Type = typeof(Grid))]
 	[TemplatePart(Name = FullScreenHeaderPartName, Type = typeof(ElevatedView))]
@@ -27,6 +28,7 @@ namespace Uno.Material.Controls
 	public partial class StandardBottomSheet : Control
 	{
 		public const string RootPartName = "Part_Root";
+		public const string BackdropPartName = "Part_Backdrop";
 		public const string SheetPartName = "Part_Sheet";
 		public const string HeaderPartName = "Part_Header"; // The header is the part that can be "grabbed" to move the sheet.
 		public const string FullScreenHeaderPartName = "Part_FullScreenHeader";
@@ -35,17 +37,38 @@ namespace Uno.Material.Controls
 		public const string CloseFullScreenButtonPartName = "Part_CloseFullScreenButton";
 		public const int MaximumRetainedMovementCount = 3;
 
-		private Grid _root;
-		private ElevatedView _sheet;
-		private Grid _header;
-		private ElevatedView _fullScreenHeader;
-		private ContentPresenter _headerPresenter;
-		private ContentPresenter _content;
-		private Button _closeFullScreenButton;
-		private TranslateTransform _transform;
+		protected Grid _root;
+		protected Grid _backdrop;
+		protected ElevatedView _sheet;
+		protected Grid _header;
+		protected ElevatedView _fullScreenHeader;
+		protected ContentPresenter _headerPresenter;
+		protected ContentPresenter _content;
+		protected Button _closeFullScreenButton;
+		protected TranslateTransform _transform;
+
+		protected SheetSnapArea _defaultTopSnapPoint = new SheetSnapArea()
+		{
+			Name = "DefaultTopSnapPoint",
+			SnapType = SnapType.Top,
+			Height = new GridLength(0.4, GridUnitType.Star)
+		};
+		protected SheetSnapArea _defaultCenterSnapPoint = new SheetSnapArea()
+		{
+			Name = "DefaultCenterSnapPoint",
+			SnapType = SnapType.Top,
+			Height = new GridLength(0.3, GridUnitType.Star)
+		};
+		protected SheetSnapArea _defaultBottomSnapPoint = new SheetSnapArea()
+		{
+			Name = "DefaultBottomSnapPoint",
+			SnapType = SnapType.Bottom,
+			Height = new GridLength(0.3, GridUnitType.Star)
+		};
 
 		private readonly LinkedList<MoveUpdate> _lastMoves = new LinkedList<MoveUpdate>(); // Used to calculate the sheet's speed when releasing.
 		private readonly Stopwatch _grabbedTimer = new Stopwatch(); // Used to calculate the sheet's speed when releasing.
+		protected readonly double _animationTime = 0.25;
 
 		private SheetState _state;
 		private double _pointerYWhenGrabbed; // Used to calculate the delta position when moving.
@@ -73,6 +96,7 @@ namespace Uno.Material.Controls
 			Loaded += OnLoaded;
 			Unloaded += OnUnloaded;
 #if !__IOS__
+			// Workaround for #405 - iOS ActualHeight of inner elemens not known on creation
 			SizeChanged += OnSizeChanged;
 #endif
 		}
@@ -103,6 +127,7 @@ namespace Uno.Material.Controls
 			base.OnApplyTemplate();
 
 			_root = (Grid)GetTemplateChild(RootPartName);
+			_backdrop = (Grid)GetTemplateChild(BackdropPartName);
 			_sheet = (ElevatedView)GetTemplateChild(SheetPartName);
 			_header = (Grid)GetTemplateChild(HeaderPartName);
 			_fullScreenHeader = (ElevatedView)GetTemplateChild(FullScreenHeaderPartName);
@@ -111,6 +136,7 @@ namespace Uno.Material.Controls
 			_closeFullScreenButton = (Button)GetTemplateChild(CloseFullScreenButtonPartName);
 
 #if __IOS__
+			// Workaround for #405 - iOS ActualHeight of inner elemens not known on creation
 			if (_header != null)
 			{
 				_header.SizeChanged += OnSizeChanged;
@@ -211,7 +237,7 @@ namespace Uno.Material.Controls
 			}
 		}
 
-		private async Task AnimateTo(double finalPosition, double duration)
+		protected async Task AnimateTo(double finalPosition, double duration)
 		{
 			SheetAnimating?.Invoke(finalPosition);
 
@@ -239,9 +265,9 @@ namespace Uno.Material.Controls
 			SheetMoved?.Invoke(y);
 		}
 
-		private async void CloseBottomSheet()
+		protected async virtual void CloseBottomSheet()
 		{
-			await AnimateTo(_sheet.ActualHeight - _header.ActualHeight, 0.25);
+			await AnimateTo(_sheet.ActualHeight - _header.ActualHeight, _animationTime);
 		}
 
 		/// <summary>

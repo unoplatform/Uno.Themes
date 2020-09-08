@@ -31,7 +31,7 @@ namespace Uno.Material.Controls
 				_content.PointerPressed += OnHeaderPressed;
 
 #if __IOS__ && __WASM__
-				// iOS gestures don't work properly so we need to subscribe to the _header's events too.
+				// Workaround for #404 - Gestures don't work properly so we need to subscribe to the _header's events too.
 				_header.PointerMoved -= OnHeaderMoved;
 				_header.PointerMoved += OnHeaderMoved;
 
@@ -69,7 +69,7 @@ namespace Uno.Material.Controls
 			_grabbedTimer.Start();
 
 #if !__IOS__
-			// We don't do this on iOS because it breaks other pointer events afterwards.
+			// Workaround for #404 - We don't do this on iOS because it breaks other pointer events afterwards.
 			e.Handled = true;
 #endif
 		}
@@ -99,7 +99,7 @@ namespace Uno.Material.Controls
 #if __IOS__
 				if (sender == this)
 				{
-					// Since we subscribe on both this and _handle on iOS, we set Handled only the parent.
+					// Workaround for #404 - Since we subscribe on both this and _handle on iOS, we set Handled only the parent.
 					e.Handled = true;
 				}
 #else
@@ -125,7 +125,7 @@ namespace Uno.Material.Controls
 #if __IOS__
 					if (sender == this)
 					{
-						// Since we subscribe on both this and _handle on iOS, we set Handled only the parent.
+						// Workaround for #404 - Since we subscribe on both this and _handle on iOS, we set Handled only the parent.
 						e.Handled = true;
 					}
 #else
