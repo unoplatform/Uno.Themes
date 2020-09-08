@@ -1,0 +1,84 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.ChipSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:controls="using:Uno.Material.Controls"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d">
+
+	<StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+				Spacing="8"
+				Margin="8">
+
+		<!-- Action chip -->
+		<StackPanel Spacing="8"
+					Orientation="Horizontal">
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_Action"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Chip"
+							   Style="{StaticResource MaterialActionChipStyle}" />
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_ActionDisabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Disabled Chip"
+							   Style="{StaticResource MaterialActionChipStyle}"
+							   IsEnabled="False" />
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_ActionCanRemove"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Chip"
+							   CanRemove="True"
+							   Style="{StaticResource MaterialActionChipStyle}" />
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_ActionThumbnail"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Chip"
+							   Style="{StaticResource MaterialActionChipStyle}">
+					<controls:Chip.Thumbnail>
+						<SymbolIcon Symbol="People" />
+					</controls:Chip.Thumbnail>
+				</controls:Chip>
+			</smtx:XamlDisplay>
+		</StackPanel>
+
+		<!-- Action outline chip -->
+		<StackPanel Spacing="8"
+					Orientation="Horizontal">
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_ActionOutline"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Chip"
+							   Style="{StaticResource MaterialActionOutlineChipStyle}" />
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_ActionOutlineDisabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Disabled Chip"
+							   Style="{StaticResource MaterialActionOutlineChipStyle}"
+							   IsEnabled="False" />
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_ActionOutlineCanRemove"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Chip"
+							   CanRemove="True"
+							   Style="{StaticResource MaterialActionOutlineChipStyle}" />
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_ActionOutlineThumbnail"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<controls:Chip Content="Chip"
+							   Style="{StaticResource MaterialActionOutlineChipStyle}">
+					<controls:Chip.Thumbnail>
+						<SymbolIcon Symbol="People" />
+					</controls:Chip.Thumbnail>
+				</controls:Chip>
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</StackPanel>
+</Page>

@@ -93,6 +93,7 @@ namespace Uno.Material.Samples
 				AddMenuItem<ButtonSamplePage>(icon: "ButtonIcon");
 				AddMenuItem<CardSamplePage>(icon: "CardsIcon");
 				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
+				AddMenuItem<ChipSamplePage>();
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
 				// TODO Add divider icon?
 				AddMenuItem<DividerSamplePage>();
