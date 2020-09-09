@@ -103,8 +103,34 @@
 				</smtx:XamlDisplay>
 			</StackPanel>
 
+			<!-- Icon and Text Text -->
+			<TextBlock Text="Inverted Colors" />
+			
+			<StackPanel Orientation="Horizontal">
 
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextInvertedFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialPrimaryInvertedFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
 
+				<!-- Sedondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextInvertedFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryInvertedFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
 
 			<!-- Disabled -->
 			<TextBlock Text="Disabled" />
