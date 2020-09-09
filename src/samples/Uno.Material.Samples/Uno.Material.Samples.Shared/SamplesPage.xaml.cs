@@ -13,6 +13,8 @@ namespace Uno.Material.Samples
 {
 	public sealed partial class SamplesPage : Page
 	{
+		private const string PlaceholderIcon = "Placeholder";
+
 		public SamplesPage()
 		{
 			this.InitializeComponent();
@@ -95,7 +97,6 @@ namespace Uno.Material.Samples
 				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
 				AddMenuItem<ChipSamplePage>();
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
-				// TODO Add divider icon?
 				AddMenuItem<DividerSamplePage>();
 				AddMenuItem<ExpandingBottomSheetSamplePage>(icon: "ExpandingBottomSheetIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
@@ -134,22 +135,27 @@ namespace Uno.Material.Samples
 				NavView.MenuItems.Add(new NavigationViewItem()
 				{
 					Content = content ?? Regex.Replace(typeof(TSamplePage).Name, @"SamplePage$", string.Empty),
-					Icon = icon != null
-						? new BitmapIcon()
-						{
-							UriSource = new Uri($"ms-appx:///Assets/NavigationViewIcons/{icon}.png"),
-#if __IOS__
-							// workaround for BitmapIcon not displaying on ios
-							ShowAsMonochrome = false
-#endif
-						}
-						: null,
+					Icon = GenerateMenuItemBitmapIcon(icon),
 					Tag = typeof(TSamplePage),
 				});
 			}
 		}
 
-#endregion
+		private BitmapIcon GenerateMenuItemBitmapIcon(string icon)
+		{
+			var iconName = icon == null ? PlaceholderIcon : icon;
+
+			return new BitmapIcon()
+			{
+				UriSource = new Uri($"ms-appx:///Assets/NavigationViewIcons/{iconName}.png"),
+#if __IOS__
+				// workaround for BitmapIcon not displaying on ios
+				ShowAsMonochrome = false
+#endif
+			};
+		}
+
+		#endregion
 
 		void ToggleTheme()
 		{
