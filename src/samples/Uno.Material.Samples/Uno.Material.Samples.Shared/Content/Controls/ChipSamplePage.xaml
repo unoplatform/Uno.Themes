@@ -5,87 +5,353 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:chips="using:Uno.Material.Controls"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Page.Resources />
 
 	<ScrollViewer>
-		<StackPanel>
-			<!-- XAML -->
-			<TextBlock Text="=== Xaml" />
-			<chips:ChipGroup x:Name="XamlNoneSelectionChipGroup"
-							 SelectionMode="None">
-				<chips:Chip Content="None1" />
-				<chips:Chip Content="None2" />
-				<chips:Chip Content="None3" />
-			</chips:ChipGroup>
-			<chips:ChipGroup x:Name="XamlSingleSelectionChipGroup"
-							 SelectionMode="Single">
-				<chips:Chip Content="Single1" />
-				<chips:Chip Content="Single2"
-							IsChecked="True" />
-				<chips:Chip Content="Single3" />
-			</chips:ChipGroup>
-			<chips:ChipGroup x:Name="XamlMultipleSelectionChipGroup"
-							 SelectionMode="Multiple">
-				<chips:Chip Content="Multiple1" />
-				<chips:Chip Content="Multiple2"
-							IsChecked="True" />
-				<chips:Chip Content="Multiple3"
-							IsChecked="True" />
-			</chips:ChipGroup>
-			<TextBlock x:Name="LastClickedTextBlock" />
-			<TextBlock x:Name="LastCheckedTextBlock" />
-			<TextBlock x:Name="LastUncheckedTextBlock" />
+		<StackPanel Spacing="4"
+					Padding="8">
 
-			<!-- BINDING -->
-			<TextBlock Text="== Binding"
-					   Margin="0,20,0,0" />
-			<Button Content="Change ItemsSource"
-					Click="ChangeItemsSource" />
-			<StackPanel Orientation="Vertical">
-				<TextBlock Text="SelectionMode:" />
-				<RadioButton GroupName="BindingChipGroupSelectionMode"
-							 Content="None"
-							 Click="SetBindingChipGroupSelectionMode" />
-				<RadioButton GroupName="BindingChipGroupSelectionMode"
-							 Content="Single"
-							 Click="SetBindingChipGroupSelectionMode" />
-				<RadioButton GroupName="BindingChipGroupSelectionMode"
-							 Content="Multiple"
-							 Click="SetBindingChipGroupSelectionMode"
-							 IsChecked="True" />
+			<!-- Chip -->
+			<TextBlock Text="Chip"
+					   Style="{StaticResource MaterialHeadline6}" />
+
+			<!--- MaterialChipStyle -->
+			<TextBlock Text="Default"
+					   Style="{StaticResource MaterialSubtitle1}" />
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								Style="{StaticResource MaterialChipStyle}" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipDisabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Disabled Chip"
+								Style="{StaticResource MaterialChipStyle}"
+								IsEnabled="False" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipCanRemove"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								CanRemove="True"
+								Style="{StaticResource MaterialChipStyle}" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipThumbnail"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								IsCheckable="False"
+								Style="{StaticResource MaterialChipStyle}">
+						<chips:Chip.Thumbnail>
+							<SymbolIcon Symbol="People" />
+						</chips:Chip.Thumbnail>
+					</chips:Chip>
+				</smtx:XamlDisplay>
 			</StackPanel>
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
 
-				<chips:ChipGroup Grid.Column="0"
-								 x:Name="BindingChipGroup"
-								 ItemsSource="{Binding}"
-								 SelectionMode="Multiple"
-								 DisplayMemberPath="Text"
-								 SelectionMemberPath="IsSelected" />
+			<!--- MaterialOutlinedChipStyle -->
+			<TextBlock Text="Outlined"
+					   Style="{StaticResource MaterialSubtitle1}" />
 
-				<ListView Grid.Column="1"
-						  Header="ListView (for reference)"
-						  ItemsSource="{Binding}">
-					<ListView.ItemTemplate>
-						<DataTemplate>
-							<CheckBox Content="{Binding Text}"
-									  IsChecked="{Binding IsSelected, Mode=TwoWay}" />
-						</DataTemplate>
-					</ListView.ItemTemplate>
-				</ListView>
-			</Grid>
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_Outlined"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								Style="{StaticResource MaterialOutlinedChipStyle}" />
+				</smtx:XamlDisplay>
 
-			<TextBlock xml:space="preserve">SelectedItem: <Run Text="{Binding ElementName=BindingChipGroup, Path=SelectedItem.Text, FallbackValue='(null)'}" /></TextBlock>
-			<TextBlock xml:space="preserve"
-					   TextWrapping="Wrap">SelectedItem: <Run Text="{Binding ElementName=BindingChipGroup, Path=SelectedItems, Converter={StaticResource Material_EnumerableStringJoin}, TargetNullValue='(null)'}" /></TextBlock>
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_OutlinedDisabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Disabled Chip"
+								Style="{StaticResource MaterialOutlinedChipStyle}"
+								IsEnabled="False" />
+				</smtx:XamlDisplay>
 
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_OutlinedCanRemove"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								CanRemove="True"
+								Style="{StaticResource MaterialOutlinedChipStyle}" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_OutlinedThumbnail"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								IsCheckable="False"
+								Style="{StaticResource MaterialOutlinedChipStyle}">
+						<chips:Chip.Thumbnail>
+							<SymbolIcon Symbol="People" />
+						</chips:Chip.Thumbnail>
+					</chips:Chip>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!--- MaterialPrimaryChipStyle -->
+			<TextBlock Text="Primary"
+					   Style="{StaticResource MaterialSubtitle1}" />
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_Primary"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								Style="{StaticResource MaterialPrimaryChipStyle}" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_PrimaryDisabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Disabled Chip"
+								Style="{StaticResource MaterialPrimaryChipStyle}"
+								IsEnabled="False" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_PrimaryCanRemove"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								CanRemove="True"
+								Style="{StaticResource MaterialPrimaryChipStyle}" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_PrimaryThumbnail"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								Style="{StaticResource MaterialPrimaryChipStyle}">
+						<chips:Chip.Thumbnail>
+							<SymbolIcon Symbol="People" />
+						</chips:Chip.Thumbnail>
+					</chips:Chip>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!--- MaterialPrimaryOutlinedChipStyle -->
+			<TextBlock Text="Primary Outlined"
+					   Style="{StaticResource MaterialSubtitle1}" />
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_PrimaryOutlined"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								Style="{StaticResource MaterialPrimaryOutlinedChipStyle}" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_PrimaryOutlinedDisabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Disabled Chip"
+								Style="{StaticResource MaterialPrimaryOutlinedChipStyle}"
+								IsEnabled="False" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_PrimaryOutlinedCanRemove"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								CanRemove="True"
+								Style="{StaticResource MaterialPrimaryOutlinedChipStyle}" />
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ChipSamplePage_Chip_PrimaryOutlinedThumbnail"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<chips:Chip Content="Chip"
+								Style="{StaticResource MaterialPrimaryOutlinedChipStyle}">
+						<chips:Chip.Thumbnail>
+							<SymbolIcon Symbol="People" />
+						</chips:Chip.Thumbnail>
+					</chips:Chip>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!-- GroupChip -->
+			<TextBlock Text="GroupChip"
+					   Style="{StaticResource MaterialHeadline6}" />
+
+			<!-- GroupChip Action -->
+			<TextBlock Text="Action"
+					   Style="{StaticResource MaterialSubtitle1}" />
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_Action"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<ScrollViewer HorizontalScrollMode="Auto"
+							  HorizontalScrollBarVisibility="Auto"
+							  VerticalScrollMode="Disabled"
+							  VerticalScrollBarVisibility="Hidden">
+
+					<chips:ChipGroup ItemsSource="{Binding Items}"
+									 Style="{StaticResource MaterialChipGroupStyle}"
+									 SelectionMode="None"
+									 CanRemove="True"
+									 Margin="8,16">
+						<chips:ChipGroup.ThumbnailTemplate>
+							<DataTemplate>
+								<Image Source="{Binding Image}" />
+							</DataTemplate>
+						</chips:ChipGroup.ThumbnailTemplate>
+
+						<chips:ChipGroup.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Style="{StaticResource MaterialBody1}">
+								<Run Text="Item #" /><Run Text="{Binding Index}" />
+								</TextBlock>
+							</DataTemplate>
+						</chips:ChipGroup.ItemTemplate>
+					</chips:ChipGroup>
+				</ScrollViewer>
+			</smtx:XamlDisplay>
+
+			<!-- GroupChip Action Outlined -->
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_ActionOutlined"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<ScrollViewer HorizontalScrollMode="Auto"
+							  HorizontalScrollBarVisibility="Auto"
+							  VerticalScrollMode="Disabled"
+							  VerticalScrollBarVisibility="Hidden">
+
+					<chips:ChipGroup ItemsSource="{Binding Items}"
+									 Style="{StaticResource MaterialChipGroupStyle}"
+									 ItemContainerStyle="{StaticResource MaterialOutlinedChipStyle}"
+									 SelectionMode="None"
+									 CanRemove="True"
+									 Margin="8,16">
+
+						<chips:ChipGroup.ThumbnailTemplate>
+							<DataTemplate>
+								<Image Source="{Binding Image}" />
+							</DataTemplate>
+						</chips:ChipGroup.ThumbnailTemplate>
+
+						<chips:ChipGroup.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Style="{StaticResource MaterialBody1}">
+								<Run Text="Item #" /><Run Text="{Binding Index}" />
+								</TextBlock>
+							</DataTemplate>
+						</chips:ChipGroup.ItemTemplate>
+					</chips:ChipGroup>
+				</ScrollViewer>
+			</smtx:XamlDisplay>
+
+			<!-- GroupChip Choice -->
+			<TextBlock Text="Choice"
+					   Style="{StaticResource MaterialSubtitle1}" />
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_Choice"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<ScrollViewer HorizontalScrollMode="Auto"
+							  HorizontalScrollBarVisibility="Auto"
+							  VerticalScrollMode="Disabled"
+							  VerticalScrollBarVisibility="Hidden">
+
+					<chips:ChipGroup ItemsSource="{Binding Items}"
+									 Style="{StaticResource MaterialChipGroupStyle}"
+									 ItemContainerStyle="{StaticResource MaterialPrimaryChipStyle}"
+									 SelectionMode="Single"
+									 Margin="8,16">
+
+						<chips:ChipGroup.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Style="{StaticResource MaterialBody1}">
+								<Run Text="Item #" /><Run Text="{Binding Index}" />
+								</TextBlock>
+							</DataTemplate>
+						</chips:ChipGroup.ItemTemplate>
+					</chips:ChipGroup>
+				</ScrollViewer>
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_ChoiceOutlined"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<ScrollViewer HorizontalScrollMode="Auto"
+							  HorizontalScrollBarVisibility="Auto"
+							  VerticalScrollMode="Disabled"
+							  VerticalScrollBarVisibility="Hidden">
+
+					<chips:ChipGroup ItemsSource="{Binding Items}"
+									 Style="{StaticResource MaterialChipGroupStyle}"
+									 ItemContainerStyle="{StaticResource MaterialPrimaryOutlinedChipStyle}"
+									 SelectionMode="Single"
+									 Margin="8,16">
+
+						<chips:ChipGroup.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Style="{StaticResource MaterialBody1}">
+								<Run Text="Item #" /><Run Text="{Binding Index}" />
+								</TextBlock>
+							</DataTemplate>
+						</chips:ChipGroup.ItemTemplate>
+					</chips:ChipGroup>
+				</ScrollViewer>
+			</smtx:XamlDisplay>
+
+			<!-- GroupChip Filter -->
+			<TextBlock Text="Filter"
+					   Style="{StaticResource MaterialSubtitle1}" />
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_Filter"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<ScrollViewer HorizontalScrollMode="Auto"
+							  HorizontalScrollBarVisibility="Auto"
+							  VerticalScrollMode="Disabled"
+							  VerticalScrollBarVisibility="Hidden">
+
+					<chips:ChipGroup ItemsSource="{Binding Items}"
+									 Style="{StaticResource MaterialChipGroupStyle}"
+									 SelectionMode="Multiple"
+									 Margin="8,16">
+
+						<chips:ChipGroup.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Style="{StaticResource MaterialBody1}">
+								<Run Text="Item #" /><Run Text="{Binding Index}" />
+								</TextBlock>
+							</DataTemplate>
+						</chips:ChipGroup.ItemTemplate>
+					</chips:ChipGroup>
+				</ScrollViewer>
+			</smtx:XamlDisplay>
+
+			<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_FliterOutlined"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<ScrollViewer HorizontalScrollMode="Auto"
+							  HorizontalScrollBarVisibility="Auto"
+							  VerticalScrollMode="Disabled"
+							  VerticalScrollBarVisibility="Hidden">
+
+					<chips:ChipGroup ItemsSource="{Binding Items}"
+									 Style="{StaticResource MaterialChipGroupStyle}"
+									 ItemContainerStyle="{StaticResource MaterialOutlinedChipStyle}"
+									 SelectionMode="Multiple"
+									 Margin="8,16">
+
+						<chips:ChipGroup.ThumbnailTemplate>
+							<DataTemplate>
+								<Border Background="{StaticResource MaterialSecondaryBrush}" />
+							</DataTemplate>
+						</chips:ChipGroup.ThumbnailTemplate>
+
+						<chips:ChipGroup.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Style="{StaticResource MaterialBody1}">
+								<Run Text="Item #" /><Run Text="{Binding Index}" />
+								</TextBlock>
+							</DataTemplate>
+						</chips:ChipGroup.ItemTemplate>
+					</chips:ChipGroup>
+				</ScrollViewer>
+			</smtx:XamlDisplay>
 		</StackPanel>
 	</ScrollViewer>
 </Page>

@@ -16,67 +16,36 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Uno.Material.Samples.Content.Controls
 {
-	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
-	/// </summary>
 	public sealed partial class ChipSamplePage : Page
 	{
 		public ChipSamplePage()
 		{
 			this.InitializeComponent();
 
-			foreach (var control in new[] { XamlNoneSelectionChipGroup, XamlSingleSelectionChipGroup, XamlMultipleSelectionChipGroup })
+			this.DataContext = new SelectableDataItems()
 			{
-				control.ItemClick += (s, e) => LastClickedTextBlock.Text = $"Clicked: {(e.Item as Chip)?.Content}";
-				control.ItemChecked += (s, e) => LastCheckedTextBlock.Text = $"Checked: {(e.Item as Chip)?.Content}";
-				control.ItemUnchecked += (s, e) => LastUncheckedTextBlock.Text = $"Unchecked: {(e.Item as Chip)?.Content}";
-			}
-			this.DataContext = Enumerable.Range(0, 10)
-				.Select(x => new SelectableData
-				{
-					Text = $"Item {x}",
-					IsSelected = BindingChipGroup.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
-				})
-				.ToArray();
+				Items = Enumerable.Range(0, 10)
+					.Select(x => new SelectableData
+					{
+						Index = x,
+						Image = new Uri("ms-appx:///Assets/Cards/Avatar.png"),
+					})
+					.ToArray()
+			};
 		}
 
-		private void ChangeItemsSource(object sender, RoutedEventArgs e)
+		public class SelectableDataItems : InpcObject
 		{
-			this.DataContext = Enumerable.Range(0, new Random().Next(8, 12 + 2))
-				.Select(x => new SelectableData
-				{
-					Text = $"Item {x}",
-					IsSelected = BindingChipGroup.SelectionMode == ChipSelectionMode.Multiple && x % 2 == 0
-				})
-				.ToArray();
-		}
-
-		private void SetBindingChipGroupSelectionMode(object sender, RoutedEventArgs e)
-		{
-			if (sender is RadioButton radio)
-			{
-				switch (radio.Content)
-				{
-					case "None": BindingChipGroup.SelectionMode = ChipSelectionMode.None; break;
-					case "Single": BindingChipGroup.SelectionMode = ChipSelectionMode.Single; break;
-					case "Multiple": BindingChipGroup.SelectionMode = ChipSelectionMode.Multiple; break;
-
-					default: throw new ArgumentOutOfRangeException($"Invalid option: {radio.Content}");
-				}
-			}
+			public IEnumerable<SelectableData> Items { get => GetProperty<IEnumerable<SelectableData>>(); set => SetProperty(value); }
 		}
 
 		public class SelectableData : InpcObject
 		{
-			public string Text { get => GetProperty<string>(); set => SetProperty(value); }
+			public int Index { get => GetProperty<int>(); set => SetProperty(value); }
 
-			public bool IsSelected { get => GetProperty<bool>(); set => SetProperty(value); }
-
-			public override string ToString() => $"[{(IsSelected ? 'X' : ' ')}] {Text}";
+			public Uri Image { get => GetProperty<Uri>(); set => SetProperty(value); }
 		}
 
 		public class InpcObject : INotifyPropertyChanged
