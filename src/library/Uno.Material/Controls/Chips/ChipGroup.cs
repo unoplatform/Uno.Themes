@@ -18,70 +18,6 @@ namespace Uno.Material.Controls
 		public event ChipItemEventHandler ItemChecked;
 		public event ChipItemEventHandler ItemUnchecked;
 
-		#region DependencyProperty: SelectedItem
-
-		public static DependencyProperty SelectedItemProperty { get; } = DependencyProperty.Register(
-			nameof(SelectedItem),
-			typeof(object),
-			typeof(ChipGroup),
-			new PropertyMetadata(default, (s, e) => (s as ChipGroup)?.OnSelectedItemChanged(e)));
-
-		public object SelectedItem
-		{
-			get => (object)GetValue(SelectedItemProperty);
-			set => SetValue(SelectedItemProperty, value);
-		}
-
-		#endregion
-		#region DependencyProperty: SelectedItems
-
-		public static DependencyProperty SelectedItemsProperty { get; } = DependencyProperty.Register(
-			nameof(SelectedItems),
-			typeof(IList),
-			typeof(ChipGroup),
-			new PropertyMetadata(default, (s, e) => (s as ChipGroup)?.OnSelectedItemsChanged(e)));
-
-		public IList SelectedItems
-		{
-			get => (IList)GetValue(SelectedItemsProperty);
-			set => SetValue(SelectedItemsProperty, value);
-		}
-
-		#endregion
-		#region DependencyProperty: SelectionMemberPath
-
-		public static DependencyProperty SelectionMemberPathProperty { get; } = DependencyProperty.Register(
-			nameof(SelectionMemberPath),
-			typeof(string),
-			typeof(ChipGroup),
-			new PropertyMetadata(default, (s, e) => (s as ChipGroup)?.OnSelectionMemberPathChanged(e)));
-
-		/// <summary>
-		/// Gets or sets the name or path of the property that indicates selection state for each data item.
-		/// </summary>
-		public string SelectionMemberPath
-		{
-			get => (string)GetValue(SelectionMemberPathProperty);
-			set => SetValue(SelectionMemberPathProperty, value);
-		}
-
-		#endregion
-		#region DependencyProperty: SelectionMode = ChipSelectionMode.Single
-
-		public static DependencyProperty SelectionModeProperty { get; } = DependencyProperty.Register(
-			nameof(SelectionMode),
-			typeof(ChipSelectionMode),
-			typeof(ChipGroup),
-			new PropertyMetadata(ChipSelectionMode.Single, (s, e) => (s as ChipGroup)?.OnSelectionModeChanged(e)));
-
-		public ChipSelectionMode SelectionMode
-		{
-			get => (ChipSelectionMode)GetValue(SelectionModeProperty);
-			set => SetValue(SelectionModeProperty, value);
-		}
-
-		#endregion
-
 		private bool _isSynchronizingSelection = false;
 		private bool _isUpdatingSelection = false;
 
@@ -100,6 +36,7 @@ namespace Uno.Material.Controls
 		private void OnLoaded(object sender, RoutedEventArgs e)
 		{
 			EnforceSelectionMode();
+			ApplyThumbnailTemplate();
 		}
 
 		private void OnSelectionMemberPathChanged(DependencyPropertyChangedEventArgs e)
@@ -115,6 +52,26 @@ namespace Uno.Material.Controls
 				}
 
 				container.ClearValue(Chip.IsCheckedProperty);
+			}
+		}
+
+		private void ApplyThumbnailTemplate()
+		{
+			if (ThumbnailTemplate != null)
+			{
+				foreach (var container in GetItemContainers())
+				{
+					container.Thumbnail = container.Content;
+					container.ThumbnailTemplate = ThumbnailTemplate;
+				}
+			}
+		}
+
+		private void ApplyCanRemoveProperty()
+		{
+			foreach (var container in GetItemContainers())
+			{
+				container.CanRemove = CanRemove;
 			}
 		}
 
@@ -197,6 +154,14 @@ namespace Uno.Material.Controls
 					container.SetBinding(Chip.IsCheckedProperty, new Binding { Path = new PropertyPath(SelectionMemberPath), Mode = BindingMode.TwoWay });
 				}
 
+				if (ThumbnailTemplate != null)
+				{
+					container.Thumbnail = container.Content;
+					container.ThumbnailTemplate = ThumbnailTemplate;
+				}
+
+				container.CanRemove = CanRemove;
+
 				container.IsCheckedChanged += OnItemIsCheckedChanged;
 				container.Click += OnItemClick;
 				container.Checked += OnItemChecked;
@@ -211,6 +176,10 @@ namespace Uno.Material.Controls
 			if (element is Chip container)
 			{
 				container.ClearValue(Chip.IsCheckedProperty);
+
+				container.Thumbnail = null;
+				container.ThumbnailTemplate = null;
+				container.CanRemove = false;
 
 				container.IsCheckedChanged -= OnItemIsCheckedChanged;
 				container.Click -= OnItemClick;
@@ -247,7 +216,7 @@ namespace Uno.Material.Controls
 				UpdateItemsIsCheckable();
 
 				// either one is selected or none are selected
-				var selectedContainers = GetItemContainers().Where(x => x.IsChecked == true).ToArray();
+				var selectedContainers = GetItemContainers().Where(x => x.IsChecked ?? false).ToArray();
 				if (selectedContainers.Length > 1)
 				{
 					foreach (var container in selectedContainers)
@@ -288,33 +257,35 @@ namespace Uno.Material.Controls
 				var selectedItems = new List<object>();
 				foreach (var container in GetItemContainers())
 				{
-					if (container.IsChecked == true)
+					if (!container.IsChecked ?? false)
 					{
-						if (ShouldClearSelection())
-						{
-							container.SetIsCheckedSilently(false);
-						}
-						else
-						{
-							selectedItems.Add(ItemFromContainer(container));
-						}
+						continue;
+					}
 
-						bool ShouldClearSelection()
-						{
-							switch (SelectionMode)
-							{
-								case ChipSelectionMode.None:
-									// uncheck all
-									return true;
-								case ChipSelectionMode.Single:
-									// uncheck every other items
-									return newlySelectedContainers?.Contains(container) != true;
-								case ChipSelectionMode.Multiple:
-									// uncheck other items if SelectedItem or SelectedItems got updated
-									return forceClearOthersSelection && newlySelectedContainers?.Contains(container) != true;
+					if (ShouldClearSelection())
+					{
+						container.SetIsCheckedSilently(false);
+					}
+					else
+					{
+						selectedItems.Add(ItemFromContainer(container));
+					}
 
-								default: throw new ArgumentOutOfRangeException(nameof(SelectionMode));
-							}
+					bool ShouldClearSelection()
+					{
+						switch (SelectionMode)
+						{
+							case ChipSelectionMode.None:
+								// uncheck all
+								return true;
+							case ChipSelectionMode.Single:
+								// uncheck every other items
+								return newlySelectedContainers?.Contains(container) != true;
+							case ChipSelectionMode.Multiple:
+								// uncheck other items if SelectedItem or SelectedItems got updated
+								return forceClearOthersSelection && newlySelectedContainers?.Contains(container) != true;
+
+							default: throw new ArgumentOutOfRangeException(nameof(SelectionMode));
 						}
 					}
 				}
