@@ -35,7 +35,7 @@ namespace Uno.Material.Controls
 				_header.PointerMoved -= OnHeaderMoved;
 				_header.PointerMoved += OnHeaderMoved;
 
-				_header.PointerReleased += OnHeaderReleased;
+				_header.PointerReleased -= OnHeaderReleased;
 				_header.PointerReleased += OnHeaderReleased;
 #endif
 				PointerMoved -= OnHeaderMoved;

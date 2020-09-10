@@ -214,13 +214,14 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         |
                                                                                
 ### Styles for custom controls
-| **Controls** | **StyleNames**                                                                        |
-|----------------------|-------------------------------------------------------------------------------|
-| Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
-| BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              |
-| Divider              | MaterialDividerStyle                                                          |
-| ExpandingBottomSheet | MaterialExpandingBottomSheetStyle                                             |
-| StandardBottomSheet  | MaterialStandardBottomSheetStyle                                              |
+| **Controls**              | **StyleNames**                                                                |
+|---------------------------|-------------------------------------------------------------------------------|
+| Card                      | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
+| BottomNavigationBar       | MaterialBottomNavigationBarStyle                                              |
+| Divider                   | MaterialDividerStyle                                                          |
+| ExpandingBottomSheet      | MaterialExpandingBottomSheetStyle                                             |
+| ModalStandardBottomSheet  | MaterialModalStandardBottomSheetStyle                                         |
+| StandardBottomSheet       | MaterialStandardBottomSheetStyle                                              |
 
 
 ## Controls Setup (Specialized)
