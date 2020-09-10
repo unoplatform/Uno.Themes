@@ -100,7 +100,7 @@ namespace Uno.Material.Controls
 		protected async override void CloseBottomSheet()
 		{
 			await AnimateTo(_sheet.ActualHeight, _animationTime);
-			IsOpened = !IsOpened;
+			IsOpened = false;
 		}
 
 		#region IsOpened
