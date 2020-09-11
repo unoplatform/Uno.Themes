@@ -222,7 +222,8 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | ExpandingBottomSheet      | MaterialExpandingBottomSheetStyle                                             |
 | ModalStandardBottomSheet  | MaterialModalStandardBottomSheetStyle                                         |
 | StandardBottomSheet       | MaterialStandardBottomSheetStyle                                              |
-
+| Chip                      | MaterialChipStyle <br> MaterialOutlinedChipStyle <br> MaterialPrimaryChipStyle <br> MaterialPrimaryOutlinedChipStyle |
+| ChipGroup                 | MaterialChipGroupStyle                                                        |
 
 ## Controls Setup (Specialized)
 
