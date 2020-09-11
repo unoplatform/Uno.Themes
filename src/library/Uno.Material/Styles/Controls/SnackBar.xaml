@@ -71,15 +71,15 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="Root"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialSnackbarAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 From="0"
 														 To="1" />
 
 										<DoubleAnimation Storyboard.TargetName="SnackBarTransform"
 														 Storyboard.TargetProperty="Y"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialSnackbarAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 From="15"
 														 To="0" />
 									</Storyboard>
@@ -89,15 +89,15 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="Root"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialSnackbarAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 From="1"
 														 To="0" />
 
 										<DoubleAnimation Storyboard.TargetName="SnackBarTransform"
 														 Storyboard.TargetProperty="Y"
-														 Duration="0:0:0.4"
-														 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+														 Duration="{StaticResource MaterialSnackbarAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 From="0"
 														 To="15" />
 									</Storyboard>
@@ -130,7 +130,7 @@
 									Content="{TemplateBinding ActionLabel}"
 									Style="{StaticResource MaterialTextButtonStyle}"
 									Foreground="{StaticResource SnackBarButtonForegroundBrush}"
-									Visibility="{Binding Content, ElementName=ActionButton, Converter={StaticResource Material_EmptyToCollapsed}}"
+									Visibility="{Binding Content, ElementName=ActionButton, Converter={StaticResource MaterialEmptyToCollapsed}}"
 									VerticalAlignment="Center"
 									Margin="-8,0,8,0"
 									Grid.Column="1" />

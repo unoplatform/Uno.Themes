@@ -189,6 +189,9 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 
 10. (Optional) If you are using our [DatePickers, and TimePickers](#datePickers-and-timePickers) to get proper Material styling in Android there is some extra code to be added to the Android Project Head. (Click the component name to see how to set them up)
 
+11. (Optional) If you are planning to use Bottom Sheets remember to place them in an area where they can take up the most space, such as your application shell or on a page that is covered by parts of another. This allows the control to fill up the whole page.
+See [Sheet.md](./controls/Sheet.md) for more information.
+
 <!-- TODO: Add reference on where to get those resource names -->
 
 ## Features
@@ -212,13 +215,16 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         |
                                                                                
 ### Styles for custom controls
-| **Controls** | **StyleNames**                                                                        |
-|----------------------|-------------------------------------------------------------------------------|
-| Card                 | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
-| BottomNavigationBar  | MaterialBottomNavigationBarStyle                                              |
-| Divider              | MaterialDividerStyle                                                          |
-| ExpandingBottomSheet | MaterialExpandingBottomSheetStyle                                             |
-| ModalBottomSheet	   | MaterialModalBottomSheetStyle												   |
+
+| **Controls**              | **StyleNames**                                                                |
+|---------------------------|-------------------------------------------------------------------------------|
+| Card                      | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
+| BottomNavigationBar       | MaterialBottomNavigationBarStyle                                              |
+| Divider                   | MaterialDividerStyle                                                          |
+| ExpandingBottomSheet      | MaterialExpandingBottomSheetStyle                                             |
+| ModalBottomSheet	        | MaterialModalBottomSheetStyle												                          |
+| ModalStandardBottomSheet  | MaterialModalStandardBottomSheetStyle                                         |
+| StandardBottomSheet       | MaterialStandardBottomSheetStyle                                              |
 
 
 ## Controls Setup (Specialized)

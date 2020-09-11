@@ -86,8 +86,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.3"
-														 BeginTime="0:0:1"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 To="{StaticResource MaterialPressedOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -168,7 +167,7 @@
 		<Setter Property="Background"
 				Value="{ThemeResource MaterialSecondaryBrush}" />
 	</Style>
-	
+
 	<Style x:Key="MaterialOutlinedButtonStyle"
 		   TargetType="Button">
 
@@ -219,7 +218,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 To="{StaticResource MaterialHoverOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -232,8 +231,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.3"
-														 BeginTime="0:0:1"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 To="{StaticResource MaterialPressedOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -358,7 +356,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.25"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 To="{StaticResource MaterialHoverOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -371,8 +369,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.3"
-														 BeginTime="0:0:1"
+														 Duration="{StaticResource MaterialAnimationDuration}"
 														 To="{StaticResource MaterialPressedOpacity}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />

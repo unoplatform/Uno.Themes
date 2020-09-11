@@ -109,15 +109,15 @@
 												 Width="{StaticResource MaterialFabContentWidthOrHeight}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+												 Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<ContentPresenter Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
-										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{StaticResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -207,6 +207,129 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialSmallFabStyle"
+		   TargetType="Button">
+
+		<Setter Property="Background"
+				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialButtonFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource MaterialFabFontSize}" />
+		<Setter Property="FontWeight"
+				Value="SemiBold" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource MaterialFabSmallCorderRadius}" />
+		<Setter Property="Padding"
+				Value="{StaticResource MaterialFabSmallPadding}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+
+						<toolkit:ElevatedView x:Name="ElevatedView"
+											  Margin="0,0,4,4"
+											  Elevation="4"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  Background="Transparent">
+
+							<controls:Ripple x:Name="Ripple"
+											 CornerRadius="{TemplateBinding CornerRadius}"
+											 Feedback="{TemplateBinding Foreground}"
+											 FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
+
+								<Grid x:Name="Root"
+									  Background="{TemplateBinding Background}">
+									<StackPanel x:Name="ContentPanel"
+												Orientation="Horizontal"
+												Margin="{TemplateBinding Padding}">
+
+										<!-- Icon -->
+										<Viewbox Height="{StaticResource MaterialFabContentWidthOrHeight}"
+												 Width="{StaticResource MaterialFabContentWidthOrHeight}"
+												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+												 Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+											<ContentPresenter Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+										</Viewbox>
+
+										<!-- Icon/Content spacing -->
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+											<Border Width="{StaticResource MaterialFabIconTextPadding}"
+													Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+										</Border>
+
+										<!-- Content -->
+										<ContentPresenter x:Name="ContentPresenter"
+														  Content="{TemplateBinding Content}"
+														  ContentTemplate="{TemplateBinding ContentTemplate}"
+														  ContentTransitions="{TemplateBinding ContentTransitions}"
+														  CornerRadius="{StaticResource MaterialButtonCornerRadius}"
+														  FontFamily="{TemplateBinding FontFamily}"
+														  FontSize="{TemplateBinding FontSize}"
+														  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+														  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+									</StackPanel>
+
+									<Border x:Name="FabFocusBorder" />
+								</Grid>
+							</controls:Ripple>
+						</toolkit:ElevatedView>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+
+										<Setter Target="Root.Background"
+												Value="{StaticResource ButtonFabLowFabBackgroundColorBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FabFocusBorder.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Unfocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 	
 	<Style x:Key="MaterialSecondaryFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
@@ -218,4 +341,23 @@
 				Value="{StaticResource MaterialOnSecondaryBrush}" />
 	</Style>
 
+	<Style x:Key="MaterialPrimaryInvertedFabStyle"
+		   BasedOn="{StaticResource MaterialFabStyle}"
+		   TargetType="Button">
+		
+		<Setter Property="Background"
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialPrimaryBrush}" />
+	</Style>
+
+	<Style x:Key="MaterialSecondaryInvertedFabStyle"
+		   BasedOn="{StaticResource MaterialFabStyle}"
+		   TargetType="Button">
+
+		<Setter Property="Background"
+				Value="{StaticResource MaterialBackgroundBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialSecondaryBrush}" />
+	</Style>
 </ResourceDictionary>

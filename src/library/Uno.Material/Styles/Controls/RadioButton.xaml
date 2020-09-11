@@ -12,7 +12,7 @@
 	<x:Double x:Key="RadioBorderThickness">2</x:Double>
 
 	<StaticResource x:Key="MaterialRadioButtonBorderBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush"/>
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
 	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">
@@ -67,26 +67,26 @@
 										<Storyboard>
 
 											<android:DoubleAnimation Storyboard.TargetName="PressRing"
-																 Storyboard.TargetProperty="Opacity"
-																 Duration="0:0:0.25"
-																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-																 From="0.5"
-																 To="0" />
+																	 Storyboard.TargetProperty="Opacity"
+																	 Duration="{StaticResource MaterialAnimationDuration}"
+																	 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																	 From="0.5"
+																	 To="0" />
 
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 Duration="0:0:0.15"
-																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="0.25" />
+																 To="{StaticResource MaterialLowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="0:0:0.15"
-																 Duration="0:0:0.15"
-																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-																 From="0.25"
+																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
+																 Duration="{StaticResource MaterialAnimationDuration}"
+																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 From="{StaticResource MaterialLowOpacity}"
 																 To="0" />
 
 											<wasm:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
@@ -98,7 +98,7 @@
 												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
 																	  Value="0" />
 											</wasm:DoubleAnimationUsingKeyFrames>
-											
+
 										</Storyboard>
 									</VisualTransition>
 									<VisualTransition From="PointerOver"
@@ -107,29 +107,29 @@
 
 											<android:DoubleAnimation Storyboard.TargetName="PressRing"
 																	 Storyboard.TargetProperty="Opacity"
-																	 Duration="0:0:0.25"
-																	 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																	 Duration="{StaticResource MaterialAnimationDuration}"
+																	 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																	 From="0.5"
 																	 To="0" />
 
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 Duration="0:0:0.15"
-																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																 Duration="{StaticResource MaterialAnimationDuration}"
+																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="0.25" />
+																 To="{StaticResource MaterialLowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="0:0:0.15"
-																 Duration="0:0:0.15"
-																 EasingFunction="{StaticResource Material_EaseInOutFunction}"
-																 From="0.25"
+																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
+																 Duration="{StaticResource MaterialAnimationDuration}"
+																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 From="{StaticResource MaterialLowOpacity}"
 																 To="0" />
 
 											<wasm:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
-																		   Storyboard.TargetName="PressRing">
+																				Storyboard.TargetName="PressRing">
 												<EasingDoubleKeyFrame KeyTime="0"
 																	  Value="0" />
 												<EasingDoubleKeyFrame KeyTime="0:0:0.1"

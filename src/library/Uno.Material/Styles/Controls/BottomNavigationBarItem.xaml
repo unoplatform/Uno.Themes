@@ -10,6 +10,10 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_wasm="http://uno.ui/not_wasm"
 					mc:Ignorable="not_win xamarin ios android wasm not_wasm">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/AnimationConstants.xaml" />
+	</ResourceDictionary.MergedDictionaries>
 	
 	<x:Double x:Key="MaterialBottomNavLabelFontSize">12</x:Double>
 	<x:Double x:Key="MaterialBottomNavUncheckedOpacity">0.8</x:Double>
@@ -61,21 +65,48 @@
 								</VisualState>
 
 								<VisualState x:Name="CheckedPointerOver">
-									<VisualState.Setters>
-										<Setter Target="Icon.Opacity"
-												Value="1" />
-										<Setter Target="Label.Opacity"
-												Value="{StaticResource MaterialBottomNavLabelCheckedOpacity}" />
-									</VisualState.Setters>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="Icon"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="Label"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="{StaticResource MaterialBottomNavLabelCheckedOpacity}">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="CheckedPressed">
-									<VisualState.Setters>
-										<Setter Target="Icon.Opacity"
-												Value="1" />
-										<Setter Target="Label.Opacity"
-												Value="{StaticResource MaterialBottomNavLabelCheckedOpacity}" />
-									</VisualState.Setters>
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="Icon"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="Label"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="{StaticResource MaterialBottomNavLabelCheckedOpacity}">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="Checked">
@@ -90,15 +121,15 @@
 									<xamarin:Storyboard>
 										<not_wasm:DoubleAnimation Storyboard.TargetName="Icon"
 																  Storyboard.TargetProperty="Opacity"
-																  Duration="0:0:0.4"
-																  EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																  Duration="{StaticResource MaterialAnimationDuration}"
+																  EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																  From="{StaticResource MaterialBottomNavUncheckedOpacity}"
 																  To="1" />
 
 										<not_wasm:DoubleAnimation Storyboard.TargetName="Label"
 																  Storyboard.TargetProperty="Opacity"
-																  Duration="0:0:0.4"
-																  EasingFunction="{StaticResource Material_EaseInOutFunction}"
+																  Duration="{StaticResource MaterialAnimationDuration}"
+																  EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																  From="{StaticResource MaterialBottomNavUncheckedOpacity}"
 																  To="{StaticResource MaterialBottomNavLabelCheckedOpacity}" />
 									</xamarin:Storyboard>
@@ -141,7 +172,7 @@
 
 									<!-- Badge Container -->
 									<Grid DataContext="{Binding Badge, RelativeSource={RelativeSource TemplatedParent}}"
-										  Visibility="{Binding IsVisible, Converter={StaticResource Material_TrueToVisible}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+										  Visibility="{Binding IsVisible, Converter={StaticResource MaterialTrueToVisible}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 										  HorizontalAlignment="Right"
 										  VerticalAlignment="Top">
 
@@ -150,12 +181,12 @@
 												 Width="14"
 												 Stretch="Uniform"
 												 Fill="{ThemeResource MaterialBottomNavNotifBackgroundBrush}"
-												 Visibility="{Binding Text, Converter={StaticResource Material_EmptyToVisible}}" />
+												 Visibility="{Binding Text, Converter={StaticResource MaterialEmptyToVisible}}" />
 
 										<!-- Badge Text Notification -->
 										<Border CornerRadius="6"
 												Background="{ThemeResource MaterialBottomNavNotifBackgroundBrush}"
-												Visibility="{Binding Text, Converter={StaticResource Material_EmptyToCollapsed}}">
+												Visibility="{Binding Text, Converter={StaticResource MaterialEmptyToCollapsed}}">
 
 											<TextBlock Text="{Binding Text}"
 													   Foreground="{ThemeResource MaterialBottomNavNotifLabelBrush}"
@@ -175,7 +206,7 @@
 										   TextTrimming="CharacterEllipsis"
 										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										   Visibility="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Material_EmptyToCollapsed}}"
+										   Visibility="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}}"
 										   Opacity="{StaticResource MaterialBottomNavUncheckedOpacity}"
 										   Grid.Row="1" />
 							</Grid>
