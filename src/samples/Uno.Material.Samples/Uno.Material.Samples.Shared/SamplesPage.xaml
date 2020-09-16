@@ -6,11 +6,12 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  mc:Ignorable="d">
+	  xmlns:xamarin="http://uno.ui/xamarin"
+	  mc:Ignorable="d xamarin">
 
-	<Grid toolkit:VisibleBoundsPadding.PaddingMask="All"
-		  Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 		<smtx:XamlDisplay UniqueKey="SamplesPage_NavigationView"
+						  toolkit:VisibleBoundsPadding.PaddingMask="All"
 						  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
 
 			<NavigationView x:Name="NavView"
@@ -56,5 +57,10 @@
 			</NavigationView>
 
 		</smtx:XamlDisplay>
+
+		<Frame x:Name="NestedSampleFrame"
+			   Visibility="Collapsed"
+			   xamarin:Style="{StaticResource NativeDefaultFrame}" />
 	</Grid>
+
 </Page>

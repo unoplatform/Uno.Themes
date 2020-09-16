@@ -6,6 +6,7 @@ using Uno.Disposables;
 using Uno.Material.Samples.Content.Controls;
 using Uno.Material.Samples.Content.Styles;
 using Uno.Material.Samples.Shared.Content.Extensions;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -18,6 +19,14 @@ namespace Uno.Material.Samples
 		public SamplesPage()
 		{
 			this.InitializeComponent();
+
+			(NestedSampleFrame as Frame).RegisterPropertyChangedCallback(ContentControl.ContentProperty, OnNestedSampleFrameChanged);
+			SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) => e.Handled = BackNavigateFromNestedSample();
+		}
+
+		public static SamplesPage GetForCurrentView()
+		{
+			return (Windows.UI.Xaml.Window.Current.Content as Frame)?.Content as SamplesPage;
 		}
 
 		#region Navigation View
@@ -97,6 +106,8 @@ namespace Uno.Material.Samples
 				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
 				AddMenuItem<ChipSamplePage>();
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
+				AddMenuItem<CommandBarSamplePage>();
+				// TODO Add divider icon?
 				AddMenuItem<DividerSamplePage>();
 				AddMenuItem<ExpandingBottomSheetSamplePage>(icon: "ExpandingBottomSheetIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
@@ -176,6 +187,57 @@ namespace Uno.Material.Samples
 				}
 			}
 #endif
+		}
+
+		private void OnNestedSampleFrameChanged(DependencyObject sender, DependencyProperty dp)
+		{
+			var isInsideNestedSample = NestedSampleFrame.Content != null;
+
+			// prevent empty frame from blocking the content (nav-view) behind it
+			NestedSampleFrame.Visibility = isInsideNestedSample
+				? Visibility.Visible
+				: Visibility.Collapsed;
+
+			// toggle built-in back button for wasm (from browser) and uwp (on title bar)
+			SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = isInsideNestedSample
+				? AppViewBackButtonVisibility.Visible
+				: AppViewBackButtonVisibility.Collapsed;
+		}
+
+		public void ShowNestedSample<TPage>(bool clearStack = false) where TPage : Page
+		{
+			if (NestedSampleFrame.Navigate(typeof(TPage)) && clearStack)
+			{
+				NestedSampleFrame.BackStack.Clear();
+			}
+		}
+
+		public bool BackNavigateFromNestedSample()
+		{
+			if (NestedSampleFrame.Content == null)
+			{
+				return false;
+			}
+
+			if (NestedSampleFrame.CanGoBack)
+			{
+				NestedSampleFrame.GoBack();
+			}
+			else
+			{
+				NestedSampleFrame.Content = null;
+
+#if __IOS__
+				// This will force reset the UINavigationController, to prevent the back button from appearing when the stack is supposely empty.
+				// note: Merely setting the Frame.Content to null, doesnt fully reset the stack.
+				// When revisiting the page1 again, the previous page1 is still in the UINavigationController stack
+				// causing a back button to appear that takes us back to the previous page1
+				NestedSampleFrame.BackStack.Add(default);
+				NestedSampleFrame.BackStack.Clear();
+#endif
+			}
+
+			return true;
 		}
 	}
 }
