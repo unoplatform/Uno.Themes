@@ -223,7 +223,8 @@ See [Sheet.md](./controls/Sheet.md) for more information.
 | ExpandingBottomSheet      | MaterialExpandingBottomSheetStyle                                             |
 | ModalStandardBottomSheet  | MaterialModalStandardBottomSheetStyle                                         |
 | StandardBottomSheet       | MaterialStandardBottomSheetStyle                                              |
-
+| Chip                      | MaterialChipStyle <br> MaterialOutlinedChipStyle <br> MaterialPrimaryChipStyle <br> MaterialPrimaryOutlinedChipStyle |
+| ChipGroup                 | MaterialChipGroupStyle                                                        |
 
 ## Controls Setup (Specialized)
 
