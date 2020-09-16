@@ -69,6 +69,19 @@
 		</Setter>
 	</Style>
 
+	<Style x:Key="SourceOnlyXamlDisplayStyle"
+		   BasedOn="{StaticResource BaseXamlDisplayStyle}"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<Button Content="{TemplateBinding Xaml}"
+							Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<Style x:Key="DefaultXamlPresenterStyle"
 		   TargetType="smtx:XamlPresenter">
 		<Setter Property="Formatter" Value="{StaticResource NiceFormatter}" />
