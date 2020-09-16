@@ -92,7 +92,7 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 
 
 3. Initialize the material resources. The order in which the different resources are loaded is important. Add this to `App.xaml.cs` at the beginning on `OnLaunched`
-```
+```csharp
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
 			// Set a default palette to make sure all colors used by MaterialResources exist
@@ -126,13 +126,13 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 ```
 5. Start using the styles in your pages! 
 - To use styles, just find the name of the style from our documentation or sample app and use it like this
-```
+```xaml
 <Button Content="CONTAINED"
 	Style="{StaticResource MaterialContainedButtonStyle}"/>
 ```
 
 - Here is how to use our custom controls like a Card
-```
+```xaml
 xmlns:material="using:Uno.Material.Controls"
 
 [...]
@@ -147,7 +147,7 @@ make sure that the *Roboto* font is defined on `font.css` located at `[YourProje
 This make sure that the font is loaded correctly [Related Issue](https://github.com/unoplatform/uno/issues/693).
 It should look like [this](https://github.com/unoplatform/Uno.Material/blob/master/src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/WasmCSS/Fonts.css):
 
-```
+```css
 @font-face {
   font-family: "Symbols";
   /* winjs-symbols.woff2: https://github.com/Microsoft/fonts/tree/master/Symbols */
@@ -171,7 +171,7 @@ body::after {
 
 7. (Optional) Set material styles as the default for your whole application.
 For example, if you wish to use our ToggleSwitch style as your default style, simply set it as an implicit style in your app by adding the following code in your App.xaml
-```
+```xaml
 <Style TargetType="ToggleSwitch"
        BasedOn="{StaticResource MaterialToggleSwitchStyle}"/>
 ```
@@ -181,7 +181,7 @@ Learn more about implicit styles from the Microsoft documentation [here](https:/
 8. (Optional) Per-control customization.
 Just like WinUI, we documented a set of control-specific resources you can override to further customize our controls.
 For example, if you would like change the `CornerRadius` of all the `Buttons` using our material styles, you could simply override the `ButtonBorderRadius` value in your resources (in App.xaml would be the simplest way to put the following code)
-```
+```xaml
 <CornerRadius x:Key="ButtonBorderRadius">4</CornerRadius>
 ```
 
@@ -223,7 +223,8 @@ See [Sheet.md](./controls/Sheet.md) for more information.
 | ExpandingBottomSheet      | MaterialExpandingBottomSheetStyle                                             |
 | ModalStandardBottomSheet  | MaterialModalStandardBottomSheetStyle                                         |
 | StandardBottomSheet       | MaterialStandardBottomSheetStyle                                              |
-
+| Chip                      | MaterialChipStyle <br> MaterialOutlinedChipStyle <br> MaterialPrimaryChipStyle <br> MaterialPrimaryOutlinedChipStyle |
+| ChipGroup                 | MaterialChipGroupStyle                                                        |
 
 ## Controls Setup (Specialized)
 
@@ -235,7 +236,7 @@ The reasoning for this is to apply the native android shadowing on the off value
 1. From your Android project head go to YourProject.Droid/Resources/values/Styles.xml
 Inside your AppTheme add two item's "colorControlActivated" (the on color for your ToggleSwitches thumb) and "colorSwitchThumbNormal" (the off color for your ToggleSwitches thumb) you may add your colors here directly, for example #ffffff, or by files (see our example code below)
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<style name="AppTheme" parent="Theme.AppCompat.Light">
@@ -250,7 +251,7 @@ Inside your AppTheme add two item's "colorControlActivated" (the on color for yo
 
 2. (Optional) If your application uses Light/Dark color palettes.
 2.1 Inside the Styles.xml file change the AppTheme's parent to Theme.Compat.DayNight
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
@@ -264,7 +265,7 @@ Inside your AppTheme add two item's "colorControlActivated" (the on color for yo
 ```
 
 2.2 From your Android project head go to YourProject.Droid/Resources/values create a file called "colors.xml", inside include your "Light" theme colors.
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<color name="MaterialPrimaryColor">#5B4CF5</color>
@@ -275,7 +276,7 @@ Inside your AppTheme add two item's "colorControlActivated" (the on color for yo
 ```
 
 2.3 From your Android project head go to YourProject.Droid/Resources create a folder called "values-night", inside the folder add a file called "colors.xml", and inside the file include your "Dark" theme colors.
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<color name="MaterialPrimaryColor">#B6A8FB</color>
@@ -290,7 +291,7 @@ Colors are named PrimaryVariantDisabledThumbColor and SurfaceVariantLightColor, 
 PrimaryVariantDisabledThumbColor is a non-transparent version of PrimaryDisabled color ("Light") in "Light" palette, and a non-transparent version of PrimaryMedium color ("Dark") in "Dark" palette.
 SurfaceVariantLightColor is the Surface color however in "Light" Palette is an off white color to be visible on light backgrounds.
 
-```
+```xaml
 <!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. (Unwanted behavior) -->
 	<ResourceDictionary.ThemeDictionaries>
 
@@ -318,7 +319,7 @@ To apply your material colors to these android components, do the following (thi
 
 <!-- 8.1 Override the IOS TimePicker ColorBrushes in a binded ResourceDictionary such as colors.xaml:
 
-```
+```xaml
 <SolidColorBrush x:Key="IOSTimePickerAcceptButtonForegroundBrush"
 				 Color="{StaticResource MaterialPrimaryBrush}" />
 <SolidColorBrush x:Key="IOSTimePickerDismissButtonForegroundBrush"
@@ -328,7 +329,7 @@ To apply your material colors to these android components, do the following (thi
 1. From your Android project head go to YourProject.Droid/Resources/values/Styles.xml
 Inside your AppTheme add two item's "datePickerDialogTheme" (the style for your DatePicker) and "timePickerDialogTheme" (the style for your TimePicker), and a new Style with the MaterialPrimary Color as AccentColor (see our example code below)
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<style name="AppTheme" parent="Theme.AppCompat.Light">
@@ -347,7 +348,7 @@ Inside your AppTheme add two item's "datePickerDialogTheme" (the style for your 
 
 2. (Optional) If your application uses Light/Dark color palettes.
 2.1 Inside the Styles.xml file change the AppTheme's parent of both styles to Theme.Compat.DayNight
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
@@ -365,19 +366,20 @@ Inside your AppTheme add two item's "datePickerDialogTheme" (the style for your 
 ```
 
 2.2 From your Android project head go to YourProject.Droid/Resources/values create a file called "colors.xml", inside include your "Light" theme colors.
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<color name="MaterialPrimaryColor">#5B4CF5</color>
 </resources>
+```
 
 2.3 From your Android project head go to YourProject.Droid/Resources create a folder called "values-night", inside the folder add a file called "colors.xml", and inside the file include your "Dark" theme colors.
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<color name="MaterialPrimaryColor">#B6A8FB</color>
 </resources>
-
+```
 
 ## Changelog
 
