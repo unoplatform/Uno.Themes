@@ -9,8 +9,59 @@
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
+	<!-- TimePicker FlyoutButton Style -->
+	<Style x:Key="TimePickerFlyoutButtonStyle"
+		   TargetType="Button">
+
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="Padding"
+				Value="0" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity"
+												Value="0.65" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity"
+												Value="0.65" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Label -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Margin="{TemplateBinding Padding}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<ios:Style x:Key="MaterialTimePickerFlyoutPresenterStyle"
 			   TargetType="TimePickerFlyoutPresenter">
+
 		<Setter Property="Background"
 				Value="{ThemeResource TimePickerFlyoutPresenterBackground}" />
 		<Setter Property="VerticalAlignment"
@@ -27,6 +78,7 @@
 				Value="False" />
 		<Setter Property="AutomationProperties.AutomationId"
 				Value="TimePickerFlyoutPresenter" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TimePickerFlyoutPresenter">
@@ -81,5 +133,144 @@
 			</Setter.Value>
 		</Setter>
 	</ios:Style>
-	
+
+
+	<Style x:Key="MaterialTimePickerStyle"
+		   TargetType="TimePicker">
+
+		<Setter Property="Background"
+				Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="HorizontalAlignment"
+				Value="Stretch" />
+		<Setter Property="Height"
+				Value="53" />
+		<Setter Property="CornerRadius"
+				Value="4,4,0,0" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TimePicker">
+
+					<Grid x:Name="LayoutRoot">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="HeaderTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+
+										<Setter Target="HourTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ColonText.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="MinuteTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="PeriodTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+
+										<Setter Target="BottomBorder.Fill"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="HasTimeStates">
+								<VisualState x:Name="HasTime" />
+								<VisualState x:Name="HasNoTime">
+									<VisualState.Setters>
+										<Setter Target="HourTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ColonText.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="MinuteTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="PeriodTextBlock.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Flyout Button -->
+						<Button x:Name="FlyoutButton"
+								Style="{StaticResource TimePickerFlyoutButtonStyle}"
+								IsEnabled="{TemplateBinding IsEnabled}"
+								UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}"
+								HorizontalAlignment="Stretch"
+								HorizontalContentAlignment="Stretch">
+
+							<Grid Background="{TemplateBinding Background}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  Height="{TemplateBinding Height}">
+
+								<!-- Border -->
+								<Rectangle x:Name="BottomBorder"
+										   Fill="{TemplateBinding BorderBrush}"
+										   VerticalAlignment="Bottom"
+										   Height="2" />
+
+								<!-- Header -->
+								<TextBlock x:Name="HeaderTextBlock"
+										   Text="{TemplateBinding Header}"
+										   Style="{StaticResource MaterialCaption}"
+										   Foreground="{TemplateBinding Foreground}"
+										   HorizontalAlignment="Stretch"
+										   VerticalAlignment="Top"
+										   TextWrapping="Wrap"
+										   Margin="10,8,10,0" />
+
+								<Grid x:Name="FlyoutButtonContentGrid"
+									  VerticalAlignment="Top"
+									  Margin="10,24,10,0"
+									  Height="24">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="4" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+
+									<!-- Hours -->
+									<TextBlock x:Name="HourTextBlock"
+											   Style="{StaticResource MaterialBody2}"
+											   TextAlignment="Right"
+											   AutomationProperties.AccessibilityView="Raw"
+											   Grid.Column="0" />
+
+									<!-- : -->
+									<TextBlock x:Name="ColonText"
+											   Text=":"
+											   Style="{StaticResource MaterialBody2}"
+											   Grid.Column="1" />
+
+									<!-- Minutes -->
+									<Border x:Name="SecondPickerHost"
+											Grid.Column="2">
+										<TextBlock x:Name="MinuteTextBlock"
+												   Style="{StaticResource MaterialBody2}"
+												   AutomationProperties.AccessibilityView="Raw" />
+									</Border>
+
+									<!-- AM/PM -->
+									<Border x:Name="ThirdPickerHost"
+											Grid.Column="4">
+										<TextBlock x:Name="PeriodTextBlock"
+												   Style="{StaticResource MaterialBody2}"
+												   AutomationProperties.AccessibilityView="Raw" />
+									</Border>
+								</Grid>
+							</Grid>
+						</Button>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>
