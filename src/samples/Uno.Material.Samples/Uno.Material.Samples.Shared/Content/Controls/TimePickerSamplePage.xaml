@@ -16,9 +16,32 @@
 					ios:Margin="12"
 					Padding="12">
 
+			<!-- Default -->
+			<TextBlock Text="Default"
+					   Style="{StaticResource MaterialSubtitle2}"
+					   Margin="12,16,12,4" />
+			
 			<!-- TimePicker -->
-			<smtx:XamlDisplay UniqueKey="TimePickerSamplePage_Default">
-				<TimePicker ios:FlyoutPresenterStyle="{StaticResource MaterialTimePickerFlyoutPresenterStyle}" />
+			<smtx:XamlDisplay UniqueKey="TimePickerSamplePage_Default"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<TimePicker Header="Select a Time"
+							Style="{StaticResource MaterialTimePickerStyle}" />
+			</smtx:XamlDisplay>
+
+			<!-- Disabled -->
+			<TextBlock Text="Disabled"
+					   Style="{StaticResource MaterialSubtitle2}"
+					   Margin="12,8,12,4" />
+			
+			<!-- TimePicker -->
+			<smtx:XamlDisplay UniqueKey="TimePickerSamplePage_Disabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+
+				<TimePicker Header="Select a Time"
+							Style="{StaticResource MaterialTimePickerStyle}"
+							ios:FlyoutPresenterStyle="{StaticResource MaterialTimePickerFlyoutPresenterStyle}"
+							IsEnabled="False" />
 			</smtx:XamlDisplay>
 		</StackPanel>
 	</ScrollViewer>

@@ -123,7 +123,7 @@ namespace Uno.Material.Samples
 				AddMenuItem<StandardBottomSheetSamplePage>(icon: "StandardBottomSheetIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");
-#if __IOS__ || __ANDROID__
+#if __IOS__ || __ANDROID__ || WINDOWS_UWP
 				AddMenuItem<TimePickerSamplePage>(icon: "TimePickerIcon");
 #endif
 				AddMenuItem<ToggleSwitchSamplePage>(icon: "ToggleSwitchIcon");
