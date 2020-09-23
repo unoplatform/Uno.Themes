@@ -107,6 +107,9 @@ namespace Uno.Material.Samples
 				AddMenuItem<ChipSamplePage>();
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
 				AddMenuItem<CommandBarSamplePage>();
+#if __IOS__ || __ANDROID__ || WINDOWS_UWP
+				AddMenuItem<DatePickerSamplePage>(icon: "TimePickerIcon");
+#endif
 				// TODO Add divider icon?
 				AddMenuItem<DividerSamplePage>();
 				AddMenuItem<ExpandingBottomSheetSamplePage>(icon: "ExpandingBottomSheetIcon");
