@@ -8,32 +8,26 @@
   inputs:
     useConfigFile: true
     configFilePath: 'build/gitversion.yml'
-  displayName: 'Calculate version'
-
-- task: NuGetToolInstaller@0
-  displayName: 'Install NuGet $(NUGET_VERSION)'
-  inputs:
-    versionSpec: $(NUGET_VERSION)
-    checkLatest: false
+  displayName: 'Calculate SemVer'
 
 - task: NuGetCommand@2
-  displayName: 'Restore solution packages'
+  displayName: 'Restore NuGet packages'
   inputs:
     command: restore
-    solution: $(Build.SourcesDirectory)/$(SolutionFileName)
+    solution: Uno.Material.sln
     feedsToUse: 'config'
     nugetConfigPath: 'nuget.config'
     verbosityRestore: Normal
     noCache: true
 
 - task: MSBuild@1
-  displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  displayName: 'Build solution in Release | $(ApplicationPlatform)'
   inputs:
-    solution: $(Build.SourcesDirectory)/$(SolutionFileName)
+    solution: Uno.Material.sln
     msbuildLocationMethod: version
     msbuildVersion: latest
     msbuildArchitecture: x86
-    configuration: $(ApplicationConfiguration)
+    configuration: Release
     platform: $(ApplicationPlatform)
     clean: false
     maximumCpuCount: true
@@ -43,9 +37,6 @@
     msbuildArguments: /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch)
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  displayName: 'Publish artifact'
   inputs:
-    PathtoPublish: $(PackageOutputPath)
     ArtifactName: $(ArtifactName)
-    ArtifactType: Container
-

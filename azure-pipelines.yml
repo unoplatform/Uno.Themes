@@ -1,38 +1,4 @@
-﻿trigger:
-  branches:
-    include:
-      - master
-      - release/beta/*
-      - release/stable/*
-      - feature/*
-
-pr: 
-  branches:
-    include:
-      - master
-      - release/beta/*
-      - release/stable/*
-
-variables:
-  # Pool names
-  windowsPoolName: 'windows 1809'
-  macOSPoolName: 'Default'
-
-  # Nuget Version to use
-  NUGET_VERSION: 5.4.0
-  
-  # Solution to build
-  SolutionFileName: Uno.Material.sln
-
-  # name of the folder where artefacts will be placed. Variable used in build and release phases.
-  # We make seperate folders so that releases can each download only the folder they need.
-  NugetPackagesArtifactName: Packages
-  AndroidArtifactName: Android
-  iOSArtifactName: iOS
-  UWPArtifactName: UWP
-  macOSArtifactName: macOS
-  WASMArtifactName: WASM
-
+﻿variables:
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
   
@@ -42,148 +8,72 @@ variables:
   # For release conditions
   IsReleaseBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))]
 
-  # Android configurations
-  ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+jobs:
+- job: Windows # Build UWP/Android/NuGet
+  strategy:
+    maxParallel: 3
+    matrix:
+      UWP:
+        ApplicationPlatform: UWP_x64
+        ArtifactName: UWP
+      Android:
+        ApplicationPlatform: Android
+        ArtifactName: Android
+      Packages:
+        ApplicationPlatform: Packages
+        GeneratePackageOnBuild: true
+        ArtifactName: Packages
+  pool:
+    vmImage: windows-2019
   
-  # Optional, specifiy xcode and xamarin versions. See ios-build-select-version.yml if needed.
-  # xCodeRoot: '/Applications/Xcode_11.3.app'
-  # XamarinSDKVersion: 6_6_0
-
-  # Configuration requirements on the azure devops pipeline
-  # Those variables must be configured in the AzureDevops Library
-  #### iOS ####
-  ## Secure files:
-  # distribution certificate (.p12) 
-  # distribution provisioning profile (.mobileprovision)
-  
-  ## Variable group containing : "group: apple.appstore.distribution"
-  # $(appleappstorecertificatepassword) : password for the p12 certificate (this is marked private in azdo)
-  # $(UnoMaterialStoreProvisioningProfileName) : Name of the .mobileprovision file in the secure files.
-  # $(appleTeamId) : id of the apple team (Required if the secure connection used has access to more than one team, which is often the case)
-  # $(appleTeamName) : name of the apple developer team. (Required if the secure connection used has access to more than one team, which is often the case)
-  ## Code to update below
-  # In InstallAppleCertificate@ task: Set the value for certSecureFile
-  # In InstallAppleProvisioningProfile@ task: Set the value for provProfileSecureFile
-  # In stage-release-testflight.yml, AppStoreRelease : Set the name of the service connection and the identifier of the app (aka the Bundle ID)
-
-stages:
-- stage: Build
-  jobs:
-  - job: Build_on_Windows # Build samples possible on a windows machine and nuget packages
-    strategy:
-      maxParallel: 3
-      matrix:
-        Android:
-          ApplicationConfiguration: Release
-          ApplicationPlatform: Android
-          ArtifactName: $(AndroidArtifactName)
-        UWP:
-          ApplicationConfiguration: Release
-          ApplicationPlatform: UWP_x64
-          ArtifactName: $(UWPArtifactName)
-        Packages:
-          ApplicationConfiguration: Release
-          ApplicationPlatform: Packages
-          GeneratePackageOnBuild: true
-          ArtifactName: $(NugetPackagesArtifactName)
-    pool:
-      name: $(windowsPoolName)
-    
-    container: nventive/build-agent:vs16.6.0
-
-    steps:
-      - template: build/stage-build.yml
-
-  - job: Build_on_Mac # Build iOS and macOS samples
-    strategy:
-      maxParallel: 3
-      matrix:
-        iOS:
-          ApplicationConfiguration: Release
-          ApplicationPlatform: iPhone
-          ArtifactName: $(iOSArtifactName)
-        macOS:
-          ApplicationConfiguration: Release
-          ApplicationPlatform: macOS
-          ArtifactName: $(macOSArtifactName)          
-    pool:
-      name: $(macOSPoolName)
-      demands:
-        - Xamarin.iOS -equals 13.16
-      
-    variables:
-    - name: SkipUnknownFrameworks
-      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
-    - group: apple.appstore.distribution # Import all variables for certificate from the library in azure devops
-
-    steps:
-    - task: InstallAppleCertificate@2
-      displayName: Install Apple Certificate
-      inputs:
-        certSecureFile: 'apple.appstore.distribution.p12' # Name of the p12 certificate in the secure files (in azure devops library)
-        certPwd: '$(appleappstorecertificatepassword)' 
-        keychain: 'temp'
-        deleteCert: true
-    
-    - task: InstallAppleProvisioningProfile@1
-      displayName: 'Install Apple Provisioning Profile'
-      inputs:
-        provisioningProfileLocation: 'secureFiles'
-        provProfileSecureFile: 'UnoMaterial.mobileprovision' # Name of the .mobileprovision file in the secure files.
-
-    - task: UseDotNet@2
-      displayName: 'Install .Net Core runtime 2.1.x'
-      inputs:
-        version: 2.1.x
-        packageType: 'runtime'
-        installationPath: '$(Agent.ToolsDirectory)/dotnet'
-        
+  steps:
     - template: build/stage-build.yml
 
-  - job: Build_Wasm
-    container: unoplatform/wasm-build:2.2
-
-    pool:
-      vmImage: 'ubuntu-18.04'
-
-    variables:
-      NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
-      SkipUnknowFrameworks: True
-      ArtifactName: $(WASMArtifactName)
-
-    steps:
-      - template: build/stage-build-wasm.yml
-
-- stage: Release_Nuget
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-  dependsOn: Build
-
-  jobs:
-  - template: build/stage-release-nuget.yml
-
-- stage: Release_AppCenter
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-  dependsOn: Build
-  
-  jobs:
-  - template: build/stage-release-appcenter.yml
-
-- stage: Release_TestFlight
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-  dependsOn: Build
+- job: MacOS # Build iOS/macOS
+  strategy:
+    maxParallel: 2
+    matrix:
+      iOS:
+        ApplicationPlatform: iPhone
+        ArtifactName: iOS
+      macOS:
+        ApplicationPlatform: macOS
+        ArtifactName: macOS
+  pool:
+    vmImage: macOS-10.15
     
-  jobs:
-  - template: build/stage-release-testflight.yml
+  variables:
+  - name: SkipUnknownFrameworks
+    value: true # Used by TargetFrameworks.Filtering package
+  - group: apple.appstore.distribution # Variables for certificate
 
-- stage: Release_WASM
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-  dependsOn: Build
+  steps:
+  - task: InstallAppleCertificate@2
+    displayName: Install Apple Certificate
+    inputs:
+      certSecureFile: 'apple.appstore.distribution.p12' # Name of the p12 certificate
+      certPwd: '$(appleappstorecertificatepassword)' 
+      keychain: 'temp'
+      deleteCert: true
+  
+  - task: InstallAppleProvisioningProfile@1
+    displayName: 'Install Apple Provisioning Profile'
+    inputs:
+      provisioningProfileLocation: 'secureFiles'
+      provProfileSecureFile: 'UnoMaterial.mobileprovision'
 
-  jobs:
-  - template: build/stage-release-wasm.yml
+  - template: build/stage-build.yml
+
+- job: Linux
+
+  pool:
+    vmImage: 'ubuntu-18.04'
+
+  container: unoplatform/wasm-build:2.2
+
+  variables:
+    ArtifactName: WASM
+    SkipUnknownFrameworks: True
+
+  steps:
+    - template: build/stage-build-wasm.yml
