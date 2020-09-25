@@ -9,7 +9,6 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
-		<ResourceDictionary Source="../Controls/FloatingActionButton.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<x:Double x:Key="MaterialStandardBottomSheetWideScreenContentSize">720</x:Double>
@@ -91,7 +90,8 @@
 									<RowDefinition Height="*" />
 								</Grid.RowDefinitions>
 
-								<Grid x:Name="Part_Header">
+								<Grid x:Name="Part_Header"
+									  Background="{StaticResource MaterialBackgroundBrush}">
 
 									<ContentPresenter x:Name="Part_HeaderPresenter"
 													  Background="{TemplateBinding Background}"
