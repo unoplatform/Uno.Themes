@@ -10,26 +10,21 @@
   - task: UseGitVersion@5
     inputs:
       versionSpec: '5.x'
+      useConfigFile: true
+      configFilePath: 'build/gitversion.yml'
       updateAssemblyInfo: 'False'
 
-  - task: Bash@3
-    inputs:
-      targetType: inline
-      script: |
-       source ~/emsdk/emsdk_env.sh
-       msbuild /r /p:Configuration=Release /p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) $(build.sourcesdirectory)/src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/Uno.Material.Samples.Wasm.csproj
+  - bash: |
+      source ~/emsdk/emsdk_env.sh
+      msbuild /r /p:Configuration=Release /p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/Uno.Material.Samples.Wasm.csproj
 
   - task: CopyFiles@2
     displayName: 'Copy version information'
     inputs:
-      Contents: $(build.sourcesdirectory)/src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/Version.txt
+      Contents: src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/Version.txt
       TargetFolder: $(build.artifactstagingdirectory)
       flattenFolders: true
     
   - task: PublishBuildArtifacts@1
-    # https://developercommunity.visualstudio.com/content/problem/284991/public-vsts-previouw-cant-set-build-number-of-pr-b.html
-    condition: eq(variables['System.PullRequest.IsFork'], 'False')
     inputs:
-      PathtoPublish: $(build.artifactstagingdirectory)
       ArtifactName: $(ArtifactName)
-      ArtifactType: Container
