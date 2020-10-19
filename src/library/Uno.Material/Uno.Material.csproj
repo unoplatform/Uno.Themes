@@ -1,108 +1,110 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/2.0.54">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;xamarinios10;monoandroid90;xamarinmac20</TargetFrameworks>
-		 <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.18362;</TargetFrameworks>
-    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.UI.Xaml" Version="2.4.2" />
-    <PackageReference Include="nventive.Nimue.TargetFrameworks.Filtering" Version="0.1.0-alpha.58">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Uno.UI" Version="3.0.0-dev.1533" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-  </ItemGroup>
-  <ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid90;xamarinmac20</TargetFrameworks>
+		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.18362;</TargetFrameworks>
+		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="nventive.Nimue.TargetFrameworks.Filtering" Version="0.1.0-alpha.58">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Uno.UI" Version="3.0.0-dev.1533" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+		<PackageReference Include="Microsoft.UI.Xaml" Version="2.4.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		<Compile Update="**\*.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+	</ItemGroup>
+	<ItemGroup>
 		<None Remove="Styles\Application\AnimationConstants.xaml" />
 		<None Remove="Styles\Application\ColorPalette.xaml" />
 		<None Remove="Styles\Application\Colors.xaml" />
 		<None Remove="Styles\Application\Converters.xaml" />
-    <None Remove="Styles\Application\TextBoxVariables.xaml" />
-    <None Remove="Styles\Controls\Chip.xaml" />
-    <None Remove="Styles\Controls\ChipGroup.xaml" />
-    <None Remove="Styles\Controls\ComboBox.xaml" />
-    <None Remove="Styles\Controls\DatePicker.xaml" />
-    <None Remove="Styles\Controls\Divider.xaml" />
-    <None Remove="Styles\Controls\ExpandingBottomSheet.xaml" />
-    <None Remove="Styles\Controls\FloatingActionButton.xaml" />
-    <None Remove="Styles\Controls\Flyout.xaml" />
-    <None Remove="Styles\Controls\HyperlinkButton.xaml" />
-    <None Remove="Styles\Controls\NavigationViewItemSeparator.xaml" />
-    <None Remove="Styles\Controls\NavigationView_PaneToggleButton.xaml" />
-    <None Remove="Styles\Controls\NavigationView_SplitView.xaml" />
-    <None Remove="Styles\Controls\PasswordBox.xaml" />
-    <None Remove="Styles\Controls\ProgressBar.xaml" />
-    <None Remove="Styles\Controls\Slider.xaml" />
-    <None Remove="Styles\Controls\Snackbar.xaml" />
-    <None Remove="Styles\Controls\NavigationView.xaml" />
-    <None Remove="Styles\Controls\StandardBottomSheet.xaml" />
-    <None Remove="Styles\Controls\TextBlock.xaml" />
-    <None Remove="Styles\Controls\TimePicker.xaml" />
-    <None Remove="Styles\Controls\ToggleButton.xaml" />
-    <None Remove="Themes\Generic.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Styles\Application\AnimationConstants.xaml" />
-    <UpToDateCheckInput Remove="Styles\Application\ColorPalette.xaml" />
-    <UpToDateCheckInput Remove="Styles\Application\Colors.xaml" />
-    <UpToDateCheckInput Remove="Styles\Application\Converters.xaml" />
-    <UpToDateCheckInput Remove="Styles\Application\TextBoxVariables.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\Chip.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\ChipGroup.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\ComboBox.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\DatePicker.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\Divider.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\ExpandingBottomSheet.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\FloatingActionButton.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\Flyout.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\HyperlinkButton.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\NavigationViewItemSeparator.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\NavigationView_PaneToggleButton.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\NavigationView_SplitView.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\Slider.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\Snackbar.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\NavigationView.xaml" />
+		<None Remove="Styles\Application\TextBoxVariables.xaml" />
+		<None Remove="Styles\Controls\Chip.xaml" />
+		<None Remove="Styles\Controls\ChipGroup.xaml" />
+		<None Remove="Styles\Controls\ComboBox.xaml" />
+		<None Remove="Styles\Controls\DatePicker.xaml" />
+		<None Remove="Styles\Controls\Divider.xaml" />
+		<None Remove="Styles\Controls\ExpandingBottomSheet.xaml" />
+		<None Remove="Styles\Controls\FloatingActionButton.xaml" />
+		<None Remove="Styles\Controls\Flyout.xaml" />
+		<None Remove="Styles\Controls\HyperlinkButton.xaml" />
+		<None Remove="Styles\Controls\NavigationViewItemSeparator.xaml" />
+		<None Remove="Styles\Controls\NavigationView_PaneToggleButton.xaml" />
+		<None Remove="Styles\Controls\NavigationView_SplitView.xaml" />
+		<None Remove="Styles\Controls\PasswordBox.xaml" />
+		<None Remove="Styles\Controls\ProgressBar.xaml" />
+		<None Remove="Styles\Controls\Slider.xaml" />
+		<None Remove="Styles\Controls\Snackbar.xaml" />
+		<None Remove="Styles\Controls\NavigationView.xaml" />
+		<None Remove="Styles\Controls\StandardBottomSheet.xaml" />
+		<None Remove="Styles\Controls\TextBlock.xaml" />
+		<None Remove="Styles\Controls\TimePicker.xaml" />
+		<None Remove="Styles\Controls\ToggleButton.xaml" />
+		<None Remove="Themes\Generic.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+		<UpToDateCheckInput Remove="Styles\Application\AnimationConstants.xaml" />
+		<UpToDateCheckInput Remove="Styles\Application\ColorPalette.xaml" />
+		<UpToDateCheckInput Remove="Styles\Application\Colors.xaml" />
+		<UpToDateCheckInput Remove="Styles\Application\Converters.xaml" />
+		<UpToDateCheckInput Remove="Styles\Application\TextBoxVariables.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\Chip.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\ChipGroup.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\ComboBox.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\DatePicker.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\Divider.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\ExpandingBottomSheet.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\FloatingActionButton.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\Flyout.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\HyperlinkButton.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\NavigationViewItemSeparator.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\NavigationView_PaneToggleButton.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\NavigationView_SplitView.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\Slider.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\Snackbar.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\NavigationView.xaml" />
 		<UpToDateCheckInput Remove="Styles\Controls\PasswordBox.xaml" />
 		<UpToDateCheckInput Remove="Styles\Controls\ProgressBar.xaml" />
 		<UpToDateCheckInput Remove="Styles\Controls\StandardBottomSheet.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\TextBlock.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\TimePicker.xaml" />
-    <UpToDateCheckInput Remove="Styles\Controls\ToggleButton.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\TextBlock.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\TimePicker.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\ToggleButton.xaml" />
 		<UpToDateCheckInput Remove="Styles\Controls\ToggleSwitch.xaml" />
-    <UpToDateCheckInput Remove="Themes\Generic.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Styles\Controls\Button.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Styles\Controls\Card.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Styles\Controls\CheckBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Styles\Controls\CommandBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
+		<UpToDateCheckInput Remove="Themes\Generic.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Styles\Controls\Button.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\Card.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\CheckBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\CommandBar.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
 		<None Update="Styles\Controls\ExpandingBottomSheet.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</None>
-    <None Update="Styles\Controls\RadioButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Styles\Controls\TextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
+		<None Update="Styles\Controls\RadioButton.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\TextBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+	</ItemGroup>
 </Project>
