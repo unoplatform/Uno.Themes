@@ -17,6 +17,8 @@ namespace Uno.Material.Controls
 		public event ChipItemEventHandler ItemClick;
 		public event ChipItemEventHandler ItemChecked;
 		public event ChipItemEventHandler ItemUnchecked;
+		public event ChipItemRemovingEventHandler ItemRemoving;
+		public event ChipItemEventHandler ItemRemoved;
 
 		private bool _isSynchronizingSelection = false;
 		private bool _isUpdatingSelection = false;
@@ -166,6 +168,8 @@ namespace Uno.Material.Controls
 				container.Click += OnItemClick;
 				container.Checked += OnItemChecked;
 				container.Unchecked += OnItemUnchecked;
+				container.Removing += OnItemRemoving;
+				container.Removed += OnItemRemoved;
 			}
 		}
 
@@ -185,6 +189,8 @@ namespace Uno.Material.Controls
 				container.Click -= OnItemClick;
 				container.Checked -= OnItemChecked;
 				container.Unchecked -= OnItemUnchecked;
+				container.Removing -= OnItemRemoving;
+				container.Removed -= OnItemRemoved;
 			}
 		}
 
@@ -194,11 +200,41 @@ namespace Uno.Material.Controls
 
 		private void OnItemUnchecked(object sender, RoutedEventArgs e) => RaiseItemEvent(ItemUnchecked, sender);
 
+		private void OnItemRemoving(object sender, ChipRemovingEventArgs e)
+		{
+			if (sender is Chip container)
+			{
+				var args = new ChipItemRemovingEventArgs(ItemFromContainer(container));
+				args.Cancel = e.Cancel;
+
+				ItemRemoving?.Invoke(this, new ChipItemRemovingEventArgs(ItemFromContainer(container)));
+				e.Cancel = args.Cancel;
+			}
+		}
+
+		private void OnItemRemoved(object sender, RoutedEventArgs e)
+		{
+			if (sender is Chip container)
+			{
+				// there isn't much that can be done here if the item is generated from an ItemsSource
+				// in such case, the removal should be handled from the source provider (view-model or code-behind)
+
+				// remove the item only if it was added via xaml or .Add(item)
+				if (ItemsSource == null &&
+					Items?.IndexOf(container) is int index && index != -1)
+				{
+					Items.RemoveAt(index);
+				}
+
+				RaiseItemEvent(ItemRemoved, sender);
+			}
+		}
+
 		private void RaiseItemEvent(ChipItemEventHandler handler, object originalSender)
 		{
 			if (originalSender is Chip container)
 			{
-				handler?.Invoke(this, new ItemClickEventArgs(ItemFromContainer(container)));
+				handler?.Invoke(this, new ChipItemEventArgs(ItemFromContainer(container)));
 			}
 		}
 
