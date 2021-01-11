@@ -21,6 +21,7 @@
 		<Compile Update="**\*.xaml.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
+		<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 	</ItemGroup>
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
