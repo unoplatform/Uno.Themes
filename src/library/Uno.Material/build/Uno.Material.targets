@@ -2,6 +2,6 @@
 <Project>
 	<Target Name="ValidateUWPSDKVersion" BeforeTargets="BeforeBuild">
 		<Error Text="Uno.Material requires your application to set the Minimum SDK version to Windows 1903 SDK (10.0.18362) or later"
-					 Condition="'$(TargetPlatformIdentifier)'=='UAP' and '$(TargetPlatformVersion)'&lt;'10.0.18362.0'" />
+					 Condition="'$(TargetPlatformIdentifier)'=='UAP' and '$(TargetPlatformMinVersion)'&lt;'10.0.18362.0'" />
 	</Target>
 </Project>
