@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Uno.Material.Controls
 {
+	[TemplatePart(Name = RemoveButtonName, Type = typeof(Button))]
 	public partial class Chip : ToggleButton
 	{
+		private const string RemoveButtonName = "PART_RemoveButton";
+
+		public event ChipRemovingEventHandler Removing;
+		public event RoutedEventHandler Removed;
+
 		/// <summary>
 		/// Fires when a ToggleButton is checked or unchecked, except when set with <see cref="SetIsCheckedSilently"/>.
 		/// </summary>
@@ -71,12 +79,38 @@ namespace Uno.Material.Controls
 
 		#endregion
 
+		#region DependencyProperty: RemovedCommand
+
+		public static DependencyProperty RemovedCommandProperty { get; } = DependencyProperty.Register(
+			nameof(RemovedCommand),
+			typeof(ICommand),
+			typeof(Chip),
+			new PropertyMetadata(default));
+
+		public ICommand RemovedCommand
+		{
+			get => (ICommand)GetValue(RemovedCommandProperty);
+			set => SetValue(RemovedCommandProperty, value);
+		}
+
+		#endregion
+
 		private bool _isMuted = false;
 
 		public Chip()
 		{
 			Checked += RaiseIsCheckedChanged;
 			Unchecked += RaiseIsCheckedChanged;
+		}
+
+		protected override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+
+			if (GetTemplateChild(RemoveButtonName) is Button removeButton)
+			{
+				removeButton.Click += RaiseRemoveButtonClicked;
+			}
 		}
 
 		private void OnIsCheckableChanged(DependencyPropertyChangedEventArgs e)
@@ -92,6 +126,28 @@ namespace Uno.Material.Controls
 			if (!_isMuted)
 			{
 				IsCheckedChanged?.Invoke(sender, e);
+			}
+		}
+
+		private void RaiseRemoveButtonClicked(object sender, RoutedEventArgs e)
+		{
+			// note: sender is the RemoveButton, do not pass it as the event sender
+			// as ChipGroup expect the sender to be an instance of Chip
+
+			if (CanRemove)
+			{
+				var removingArgs = new ChipRemovingEventArgs();
+				Removing?.Invoke(this, removingArgs);
+
+				if (!removingArgs.Cancel)
+				{
+					Removed?.Invoke(this, e);
+
+					if (RemovedCommand is ICommand command && command.CanExecute(default))
+					{
+						command.Execute(default);
+					}
+				}
 			}
 		}
 

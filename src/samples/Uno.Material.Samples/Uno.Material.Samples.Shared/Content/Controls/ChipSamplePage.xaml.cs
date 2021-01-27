@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -20,25 +21,37 @@ namespace Uno.Material.Samples.Content.Controls
 {
 	public sealed partial class ChipSamplePage : Page
 	{
+		public ObservableCollection<SelectableData> MutableTestCollection { get; } = new ObservableCollection<SelectableData>(CreateItems());
+		public ObservableCollection<SelectableData> TestCollection { get; } = new ObservableCollection<SelectableData>(CreateItems());
+
 		public ChipSamplePage()
 		{
 			this.InitializeComponent();
-
-			this.DataContext = new SelectableDataItems()
-			{
-				Items = Enumerable.Range(0, 10)
-					.Select(x => new SelectableData
-					{
-						Index = x,
-						Image = new Uri("ms-appx:///Assets/Cards/Avatar.png"),
-					})
-					.ToArray()
-			};
 		}
 
-		public class SelectableDataItems : InpcObject
+		private static IEnumerable<SelectableData> CreateItems()
 		{
-			public IEnumerable<SelectableData> Items { get => GetProperty<IEnumerable<SelectableData>>(); set => SetProperty(value); }
+			return Enumerable.Range(0, 10)
+				.Select(x => new SelectableData
+				{
+					Index = x,
+					Image = new Uri("ms-appx:///Assets/Cards/Avatar.png"),
+				})
+				.ToArray();
+		}
+
+		private void RemoveChipItem(object sender, ChipItemEventArgs e)
+		{
+			MutableTestCollection.Remove(e.Item as SelectableData);
+		}
+
+		private void ResetChipItems(object sender, RoutedEventArgs e)
+		{
+			MutableTestCollection.Clear();
+			foreach (var item in CreateItems())
+			{
+				MutableTestCollection.Add(item);
+			}
 		}
 
 		public class SelectableData : InpcObject
