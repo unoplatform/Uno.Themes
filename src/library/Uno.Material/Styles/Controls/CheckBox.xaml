@@ -5,6 +5,7 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:not_ios="http://uno.ui/not_ios"
 					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:xamarin="http://nventive.com/xamarin"
 					mc:Ignorable="android ios not_ios wasm xamarin">
 
@@ -141,8 +142,16 @@
 								</VisualState>
 
 								<VisualState x:Name="CheckedPressed">
-									<Storyboard>
-
+									<!-- https://github.com/unoplatform/uno/issues/5099 -->
+									<xamarin:VisualState.Setters>
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity"
+												Value="1" />
+										<Setter Target="CheckGlyph.Opacity"
+												Value="1" />
+									</xamarin:VisualState.Setters>
+									<win:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="{StaticResource MaterialAnimationDuration}"
@@ -157,7 +166,7 @@
 														 Duration="{StaticResource MaterialAnimationDuration}"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
+												<CubicEase EasingMode="EaCheckedPressedeIn" />
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
 
@@ -169,7 +178,7 @@
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
-									</Storyboard>
+									</win:Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="CheckedDisabled">
@@ -210,8 +219,16 @@
 								</VisualState>
 
 								<VisualState x:Name="IndeterminatePressed">
-									<Storyboard>
-
+									<!-- https://github.com/unoplatform/uno/issues/5099 -->
+									<xamarin:VisualState.Setters>
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="0" />
+										<Setter Target="CheckedBackgroundBorder.Opacity"
+												Value="1" />
+										<Setter Target="HyphenGlyph.Opacity"
+												Value="1" />
+									</xamarin:VisualState.Setters>
+									<win:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="{StaticResource MaterialAnimationDuration}"
@@ -238,7 +255,7 @@
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
-									</Storyboard>
+									</win:Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="IndeterminateDisabled">

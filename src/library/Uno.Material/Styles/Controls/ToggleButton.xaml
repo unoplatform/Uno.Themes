@@ -7,6 +7,7 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
+					xmlns:xamarin="http://uno.ui/xamarin"
 					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="d ios android wasm not_win">
@@ -78,7 +79,14 @@
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
-									<Storyboard>
+									<!-- https://github.com/unoplatform/uno/issues/5099 -->
+									<xamarin:VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</xamarin:VisualState.Setters>
+									<win:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="{StaticResource MaterialAnimationDuration}"
@@ -96,7 +104,7 @@
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
-									</Storyboard>
+									</win:Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
