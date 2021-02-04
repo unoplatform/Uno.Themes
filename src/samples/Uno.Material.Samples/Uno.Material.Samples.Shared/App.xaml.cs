@@ -139,7 +139,7 @@ namespace Uno.Material.Samples
 						// { "Windows.Storage", LogLevel.Debug },
 
 						// Binding related messages
-						// { "Windows.UI.Xaml.Data", LogLevel.Debug },
+						 { "Windows.UI.Xaml.Data", LogLevel.Debug },
 
 						// DependencyObject memory references tracking
 						// { "ReferenceHolder", LogLevel.Debug },

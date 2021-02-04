@@ -1,0 +1,69 @@
+﻿<Page x:Class="Uno.Material.Samples.Content.Controls.ProgressRingSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+	  mc:Ignorable="d android ios">
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
+
+			<!-- Slider Text -->
+			<TextBlock Text="Slider to Set ProgressRing"
+					   Margin="0,10,0,0" />
+
+			<Slider x:Name="progressSlider"
+					Minimum="0"
+					Maximum="100"
+					HorizontalAlignment="Left"
+					Width="250"
+					Margin="0,10" />
+
+			<!-- Primary ProgressRing Text -->
+			<TextBlock Text="Primary ProgressRing" />
+
+			<smtx:XamlDisplay UniqueKey="ProgressRingSamplePage_Primary">
+				<winui:ProgressRing Style="{StaticResource MaterialProgressRingStyle}"
+								   />
+			</smtx:XamlDisplay>
+
+			<!-- Secondary ProgressRing Text -->
+			<TextBlock Text="Secondary ProgressRing" />
+
+			<smtx:XamlDisplay UniqueKey="ProgressRingSamplePage_Secondary">
+				<winui:ProgressRing Style="{StaticResource MaterialProgressRingStyle}"
+								   />
+			</smtx:XamlDisplay>
+
+			<!-- Indeterminate Primary ProgressRing Text -->
+			<TextBlock Text="Determinate Primary ProgressRing" />
+
+			<smtx:XamlDisplay UniqueKey="ProgressRingSamplePage_PrimaryIndeterminate">
+				<winui:ProgressRing Style="{StaticResource MaterialProgressRingStyle}"
+								   IsIndeterminate="False"
+								   Value="{Binding Value, ElementName=progressSlider}"
+								   Minimum="0"
+								   Maximum="100"  />
+			</smtx:XamlDisplay>
+
+			<!-- Indeterminate Secondary ProgressRing Text -->
+			<TextBlock Text="Determinate Secondary ProgressRing" />
+
+			<smtx:XamlDisplay UniqueKey="ProgressRingSamplePage_SecondaryIndeterminate">
+				<winui:ProgressRing Style="{StaticResource MaterialProgressRingStyle}"
+								   IsIndeterminate="False"
+								   Value="{Binding Value, ElementName=progressSlider}"
+								   Minimum="0"
+								   Maximum="100"/>
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
+</Page>
