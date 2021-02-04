@@ -277,6 +277,7 @@
 						<TextBlock Text="{TemplateBinding Header}"
 								   Style="{StaticResource MaterialBody2}"
 								   Foreground="{StaticResource MaterialOnBackgroundBrush}"
+								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed},TargetNullValue=Collapsed}"
 								   Grid.ColumnSpan="4" />
 
 						<ContentPresenter x:Name="OnContentPresenter"
@@ -389,6 +390,7 @@
 										  Foreground="{StaticResource MaterialOnBackgroundBrush}"
 										  VerticalAlignment="Stretch"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed},TargetNullValue=Collapsed}"
 										  Margin="0,8,0,5" />
 
 						<!-- Do not add x:Name to BindableUiSwitch or else page will not load -->
@@ -411,7 +413,7 @@
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="MinHeight"
-				Value="50" />
+				Value="25" />
 		<Setter Property="MinWidth"
 				Value="70" />
 
@@ -477,7 +479,7 @@
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 
-						<!-- The margin here is used to properly align the content with the UI switch -->
+						<!-- The margin here is used to properly align the content with the UI switch -->	
 						<ContentPresenter x:Name="ContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -532,13 +534,13 @@
 				Value="{StaticResource MaterialPrimaryVariantLightBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
-		
+
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="MinHeight"
-				Value="50" />
+				Value="25" />
 		<Setter Property="MinWidth"
 				Value="70" />
 
@@ -581,7 +583,7 @@
 												Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
-								
+
 								<VisualState x:Name="On">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
@@ -662,8 +664,8 @@
 	</macos:Style>
 
 	<macos:Style x:Key="MaterialSecondaryToggleSwitchStyle"
-		   TargetType="ToggleSwitch"
-		   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
+				 TargetType="ToggleSwitch"
+				 BasedOn="{StaticResource MaterialToggleSwitchStyle}">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSecondaryVariantDarkBrush}" />
@@ -672,8 +674,8 @@
 	</macos:Style>
 
 	<win:Style x:Key="MaterialSecondaryToggleSwitchStyle"
-		   TargetType="ToggleSwitch"
-		   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
+			   TargetType="ToggleSwitch"
+			   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSecondaryVariantDarkBrush}" />
@@ -682,8 +684,8 @@
 	</win:Style>
 
 	<wasm:Style x:Key="MaterialSecondaryToggleSwitchStyle"
-		   TargetType="ToggleSwitch"
-		   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
+				TargetType="ToggleSwitch"
+				BasedOn="{StaticResource MaterialToggleSwitchStyle}">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSecondaryVariantDarkBrush}" />
@@ -692,8 +694,8 @@
 	</wasm:Style>
 
 	<ios:Style x:Key="MaterialSecondaryToggleSwitchStyle"
-		   TargetType="ToggleSwitch"
-		   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
+			   TargetType="ToggleSwitch"
+			   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSecondaryVariantDarkBrush}" />
