@@ -7,6 +7,7 @@
 	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:extensions="using:Uno.Material.Extensions"
 	  mc:Ignorable="d android ios">
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -63,6 +64,17 @@
 						 Style="{StaticResource MaterialFilledTextBoxStyle}"
 						 TextWrapping="Wrap"
 						 AcceptsReturn="True" />
+			</smtx:XamlDisplay>
+
+			<!-- TexBox Icon -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_7"
+			                  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox PlaceholderText="Filled with Icon"
+				         Style="{StaticResource MaterialFilledTextBoxStyle}">
+					<extensions:ControlExtensions.Icon>
+						<SymbolIcon Symbol="Favorite" />
+					</extensions:ControlExtensions.Icon>
+				</TextBox>
 			</smtx:XamlDisplay>
 		</StackPanel>
 	</ScrollViewer>
