@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Uno.Disposables;
 using Uno.Material.Samples.Content.Controls;
 using Uno.Material.Samples.Content.Styles;
+using Uno.Material.Samples.Helpers;
 using Uno.Material.Samples.Shared.Content.Extensions;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -52,7 +53,7 @@ namespace Uno.Material.Samples
 
 			// Adding NavigationView items in code behind
 			InitializeNavigationViewItems();
-
+			SetDarkLightToggleInitialState();
 			// Set the starting page
 			var type = typeof(ColorsSamplePage);
 			var item = NavView.MenuItems
@@ -212,6 +213,55 @@ namespace Uno.Material.Samples
 			if (NestedSampleFrame.Navigate(typeof(TPage)) && clearStack)
 			{
 				NestedSampleFrame.BackStack.Clear();
+			}
+		}
+
+		private void SetDarkLightToggleInitialState()
+		{
+			// Initialize the toggle to the current theme.
+			var root = global::Windows.UI.Xaml.Window.Current.Content as FrameworkElement;
+
+			switch (root.ActualTheme)
+			{
+				case ElementTheme.Default:
+					DarkLightModeToggle.IsOn = SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark;
+					break;
+				case ElementTheme.Light:
+					DarkLightModeToggle.IsOn = false;
+					break;
+				case ElementTheme.Dark:
+					DarkLightModeToggle.IsOn = true;
+					break;
+			}
+
+			root.RequestedTheme = SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light;
+
+		}
+
+		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		{
+			// Set theme for window root.
+			if (global::Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
+			{
+				switch (root.ActualTheme)
+				{
+					case ElementTheme.Default:
+						if (SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark)
+						{
+							root.RequestedTheme = ElementTheme.Light;
+						}
+						else
+						{
+							root.RequestedTheme = ElementTheme.Dark;
+						}
+						break;
+					case ElementTheme.Light:
+						root.RequestedTheme = ElementTheme.Dark;
+						break;
+					case ElementTheme.Dark:
+						root.RequestedTheme = ElementTheme.Light;
+						break;
+				}
 			}
 		}
 
