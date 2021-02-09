@@ -74,7 +74,7 @@ namespace Uno.Material.Controls
 				VisualStateManager.GoToState(this, "Disabled", true);
 			}
 
-
+			UpdateVisualStates(true);
 
 			base.OnApplyTemplate();
 			_backdrop.PointerPressed += ToggleSheet;
