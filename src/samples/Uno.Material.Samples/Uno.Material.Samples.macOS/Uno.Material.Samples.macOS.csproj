@@ -116,14 +116,12 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <BundleResource Include="Resources\Fonts\uno-fluentui-assets.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Fonts\winjs-symbols.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj">
