@@ -7,9 +7,10 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
+					xmlns:xamarin="http://uno.ui/xamarin"
 					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_win="http://uno.ui/not_win"
-					mc:Ignorable="d ios android wasm not_win">
+					mc:Ignorable="d ios android wasm not_win xamarin">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
@@ -77,7 +78,16 @@
 									</Storyboard>
 								</VisualState>
 
-								<VisualState x:Name="Pressed">
+								<xamarin:VisualState x:Name="Pressed">
+									<!-- https://github.com/unoplatform/uno/issues/5099 -->
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</xamarin:VisualState>
+								<win:VisualState x:Name="Pressed">
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
@@ -97,7 +107,7 @@
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
 									</Storyboard>
-								</VisualState>
+								</win:VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
