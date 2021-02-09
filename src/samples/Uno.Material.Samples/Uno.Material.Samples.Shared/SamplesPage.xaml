@@ -40,13 +40,13 @@
 								   Margin="16,0,0,0"
 								   Style="{StaticResource MaterialHeadline6}" />
 
-						<ToggleSwitch x:Name="DarkLightModeToggle"
-									  Style="{StaticResource MaterialToggleSwitchStyle}"
-									  Header="Light/Dark"
-									  Toggled="ToggleSwitch_Toggled"
-									  Margin="0,0,20,16"
-									  HorizontalAlignment="Right"
-									  VerticalAlignment="Bottom" />
+						<ToggleButton x:Name="DarkLightModeToggle"
+								  Content="Light and Dark"
+								  Style="{StaticResource DarkLightToggleTheme}"
+								  Click="ToggleButton_Click"
+								  Margin="0,0,20,16"
+								  HorizontalAlignment="Right"
+								  VerticalAlignment="Bottom" />
 					</StackPanel>
 				</NavigationView.PaneHeader>
 

@@ -225,13 +225,13 @@ namespace Uno.Material.Samples
 			switch (root.ActualTheme)
 			{
 				case ElementTheme.Default:
-					DarkLightModeToggle.IsOn = SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark;
+					DarkLightModeToggle.IsChecked = SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark;
 					break;
 				case ElementTheme.Light:
-					DarkLightModeToggle.IsOn = false;
+					DarkLightModeToggle.IsChecked = false;
 					break;
 				case ElementTheme.Dark:
-					DarkLightModeToggle.IsOn = true;
+					DarkLightModeToggle.IsChecked = true;
 					break;
 			}
 
@@ -239,7 +239,7 @@ namespace Uno.Material.Samples
 
 		}
 
-		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+		private void ToggleButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Set theme for window root.
 			if (global::Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
