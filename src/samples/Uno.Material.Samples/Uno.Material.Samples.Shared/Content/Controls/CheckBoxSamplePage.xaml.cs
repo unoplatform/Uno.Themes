@@ -12,9 +12,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Uno.Material.Samples.Entities;
 
 namespace Uno.Material.Samples.Content.Controls
 {
+	[SamplePage(SampleCategory.Controls, "CheckBox")]
 	public sealed partial class CheckBoxSamplePage : Page
 	{
 		public CheckBoxSamplePage()

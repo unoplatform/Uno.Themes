@@ -16,9 +16,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Uno.Material.Samples.Entities;
 
 namespace Uno.Material.Samples.Content.Controls
 {
+	[SamplePage(SampleCategory.Controls, "Chip")]
 	public sealed partial class ChipSamplePage : Page
 	{
 		public ObservableCollection<SelectableData> MutableTestCollection { get; } = new ObservableCollection<SelectableData>(CreateItems());
