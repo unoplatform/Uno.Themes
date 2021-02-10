@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 
 namespace Uno.Material.Extensions
 {
+	[Bindable]
 	public static class ControlExtensions
 	{
 		#region Property: Icon

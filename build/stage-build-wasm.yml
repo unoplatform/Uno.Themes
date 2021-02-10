@@ -16,12 +16,12 @@
 
   - bash: |
       source ~/emsdk/emsdk_env.sh
-      msbuild /r /p:Configuration=Release /p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/Uno.Material.Samples.Wasm.csproj
+      msbuild /r /p:Configuration=Release /p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
 
   - task: CopyFiles@2
     displayName: 'Copy version information'
     inputs:
-      Contents: src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/Version.txt
+      Contents: src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Version.txt
       TargetFolder: $(build.artifactstagingdirectory)
       flattenFolders: true
     
