@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Uno.Material.Samples.Entities;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -18,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Material.Samples.Content.Styles
 {
+	[SamplePage(SampleCategory.Styles, "Colors")]
 	public sealed partial class ColorsSamplePage : Page
 	{
 		public ColorsSamplePage()
