@@ -28,8 +28,12 @@
 		<Compile Update="**\*.xaml.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
-		<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
-		<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
+		<Content Include="Assets\MaterialDeterminate.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\MaterialIndeterminate.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 	</ItemGroup>
 	<ItemGroup>
