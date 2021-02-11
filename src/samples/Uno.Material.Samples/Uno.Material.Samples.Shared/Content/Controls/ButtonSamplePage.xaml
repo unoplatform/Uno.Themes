@@ -1,7 +1,7 @@
 ﻿<Page x:Class="Uno.Material.Samples.Content.Controls.ButtonSamplePage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:local="using:Uno.Material.Samples"
+	  xmlns:sample="using:Uno.Material.Samples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
@@ -10,8 +10,8 @@
 	  mc:Ignorable="d android ios">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<local:SamplePageLayout>
-			<local:SamplePageLayout.MaterialTemplate>
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
 
@@ -55,13 +55,13 @@
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
-			</local:SamplePageLayout.MaterialTemplate>
-			<local:SamplePageLayout.CupertinoTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
 					</StackPanel>
 				</DataTemplate>
-			</local:SamplePageLayout.CupertinoTemplate>
-		</local:SamplePageLayout>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
 	</Grid>
 </Page>

@@ -3,46 +3,55 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:Uno.Material.Samples.Shared.Content"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:sample="using:Uno.Material.Samples"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios">
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
-		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-					BorderThickness="1"
-					android:Margin="12"
-					ios:Margin="12"
-					Padding="12">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
 
-			<!-- Default -->
-			<TextBlock Text="Default"
-					   Style="{StaticResource MaterialSubtitle2}"
-					   Margin="12,16,12,4" />
+						<!-- Default -->
+						<TextBlock Text="Default"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,16,12,4" />
 
-			<!-- DatePicker -->
-			<smtx:XamlDisplay UniqueKey="DatePickerSamplePage_Default"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				
-				<DatePicker x:Name="myDatePicker"
-							Header="Enter Date"
-							Style="{StaticResource MaterialDatePickerStyle}"/>
-			</smtx:XamlDisplay>
+						<!-- DatePicker -->
+						<smtx:XamlDisplay UniqueKey="DatePickerSamplePage_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 
-			<!-- Disbaled -->
-			<TextBlock Text="Disbaled"
-					   Style="{StaticResource MaterialSubtitle2}"
-					   Margin="12,8,12,4" />
-			
-			<!-- DatePicker -->
-			<smtx:XamlDisplay UniqueKey="DatePickerSamplePage_Secondary"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker x:Name="myDatePicker"
+										Header="Enter Date"
+										Style="{StaticResource MaterialDatePickerStyle}" />
+						</smtx:XamlDisplay>
 
-				<DatePicker Header="Enter Date"
-							Style="{StaticResource MaterialDatePickerStyle}"
-							IsEnabled="False" />
-			</smtx:XamlDisplay>
-		</StackPanel>
-	</ScrollViewer>
+						<!-- Disbaled -->
+						<TextBlock Text="Disbaled"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,8,12,4" />
+
+						<!-- DatePicker -->
+						<smtx:XamlDisplay UniqueKey="DatePickerSamplePage_Secondary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<DatePicker Header="Enter Date"
+										Style="{StaticResource MaterialDatePickerStyle}"
+										IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
 </Page>

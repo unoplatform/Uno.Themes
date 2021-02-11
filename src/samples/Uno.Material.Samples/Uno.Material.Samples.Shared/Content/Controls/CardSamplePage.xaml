@@ -1,7 +1,7 @@
 ﻿<Page x:Class="Uno.Material.Samples.Content.Controls.CardSamplePage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:local="using:Uno.Material.Samples"
+	  xmlns:sample="using:Uno.Material.Samples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
@@ -141,317 +141,323 @@
 	</Page.Resources>
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<local:SamplePageLayout>
-			<local:SamplePageLayout.MaterialTemplate>
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
 
 						<!-- Card Outlined -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_1"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With title and subtitle only"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   Style="{StaticResource MaterialOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With title and subtitle only"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   Style="{StaticResource MaterialOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Outlined disabled Card -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_2"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined disabled Card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With title and subtitle only"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   Style="{StaticResource MaterialOutlinedCardStyle}"
-							   IsEnabled="False" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With title and subtitle only"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   Style="{StaticResource MaterialOutlinedCardStyle}"
+										   IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_3"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With title and subtitle only"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   Style="{StaticResource MaterialElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With title and subtitle only"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   Style="{StaticResource MaterialElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Elevated disabled Card -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_4"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated disabled Card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With title and subtitle only"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   Style="{StaticResource MaterialElevatedCardStyle}"
-							   IsEnabled="False" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With title and subtitle only"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   Style="{StaticResource MaterialElevatedCardStyle}"
+										   IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined With supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_5"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
-							   Style="{StaticResource MaterialOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+										   Style="{StaticResource MaterialOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated With supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_6"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
-							   Style="{StaticResource MaterialElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+										   Style="{StaticResource MaterialElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined with media -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_9"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   Style="{StaticResource MaterialOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   Style="{StaticResource MaterialOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated with media -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_10"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   Style="{StaticResource MaterialElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   Style="{StaticResource MaterialElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined with media and supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_11"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media and supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
-							   Style="{StaticResource MaterialOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media and supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+										   Style="{StaticResource MaterialOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated with media and supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_12"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media and supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplate}"
-							   Style="{StaticResource MaterialElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media and supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplate}"
+										   Style="{StaticResource MaterialElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined with media, supporting text and action buttons -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_13"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media, supporting text and action buttons"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
-							   Style="{StaticResource MaterialOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media, supporting text and action buttons"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
+										   Style="{StaticResource MaterialOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated with media, supporting text and action buttons -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_14"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media, supporting text and action buttons"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
-							   Style="{StaticResource MaterialElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media, supporting text and action buttons"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
+										   Style="{StaticResource MaterialElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined with media, supporting text, action buttons and supplemental action buttons -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_15"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media, supporting text, action buttons and supplemental action buttons"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
-							   IconsContentTemplate="{StaticResource BottomIconTemplate}"
-							   Style="{StaticResource MaterialOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media, supporting text, action buttons and supplemental action buttons"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
+										   IconsContentTemplate="{StaticResource BottomIconTemplate}"
+										   Style="{StaticResource MaterialOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated with media, supporting text, action buttons and supplemental action buttons -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_16"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With media, supporting text, action buttons and supplemental action buttons"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
-							   IconsContentTemplate="{StaticResource BottomIconTemplate}"
-							   Style="{StaticResource MaterialElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With media, supporting text, action buttons and supplemental action buttons"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingWithButtonsTemplate}"
+										   IconsContentTemplate="{StaticResource BottomIconTemplate}"
+										   Style="{StaticResource MaterialElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined with small media and supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_17"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With small media and supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
-							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
-							   Style="{StaticResource MaterialSmallMediaOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With small media and supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+										   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+										   Style="{StaticResource MaterialSmallMediaOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined disabled with small media and supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_18"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Disabled outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With small media and supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
-							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
-							   Style="{StaticResource MaterialSmallMediaOutlinedCardStyle}"
-							   IsEnabled="False" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With small media and supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+										   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+										   Style="{StaticResource MaterialSmallMediaOutlinedCardStyle}"
+										   IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated with small media and supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_19"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With small media and supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
-							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
-							   Style="{StaticResource MaterialSmallMediaElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With small media and supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+										   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+										   Style="{StaticResource MaterialSmallMediaElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated disabled with small media and supporting text -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_20"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Disabled elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With small media and supporting text"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
-							   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
-							   Style="{StaticResource MaterialSmallMediaElevatedCardStyle}"
-							   IsEnabled="False" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With small media and supporting text"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/SmallMedia.png"
+										   MediaContentTemplate="{StaticResource SampleSmallImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForSmallMediaLayout}"
+										   Style="{StaticResource MaterialSmallMediaElevatedCardStyle}"
+										   IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined with Avatar -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_21"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With avatar"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
-							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
-							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
-							   Style="{StaticResource MaterialAvatarOutlinedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With avatar"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+										   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+										   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+										   Style="{StaticResource MaterialAvatarOutlinedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Outlined disabled with Avatar -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_22"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Disabled outlined card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With avatar"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
-							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
-							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
-							   Style="{StaticResource MaterialAvatarOutlinedCardStyle}"
-							   IsEnabled="False" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With avatar"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+										   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+										   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+										   Style="{StaticResource MaterialAvatarOutlinedCardStyle}"
+										   IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated with Avatar -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_23"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With avatar"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
-							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
-							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
-							   Style="{StaticResource MaterialAvatarElevatedCardStyle}" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With avatar"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+										   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+										   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+										   Style="{StaticResource MaterialAvatarElevatedCardStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Card Elevated disabled with Avatar -->
 						<smtx:XamlDisplay UniqueKey="CardSamplePage_24"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<controls:Card HeaderContent="Disabled elevated card"
-							   HeaderContentTemplate="{StaticResource HeaderTemplate}"
-							   SubHeaderContent="With avatar"
-							   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
-							   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
-							   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
-							   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
-							   MediaContentTemplate="{StaticResource SampleImageTemplate}"
-							   SupportingContent="{StaticResource SupportingTextSample}"
-							   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
-							   IconsContentTemplate="{StaticResource TopIconsTemplate}"
-							   Style="{StaticResource MaterialAvatarElevatedCardStyle}"
-							   IsEnabled="False" />
+										   HeaderContentTemplate="{StaticResource HeaderTemplate}"
+										   SubHeaderContent="With avatar"
+										   SubHeaderContentTemplate="{StaticResource SubHeaderTemplate}"
+										   AvatarContent="ms-appx:///Assets/Cards/Avatar.png"
+										   AvatarContentTemplate="{StaticResource AvatarImageTemplate}"
+										   MediaContent="ms-appx:///Assets/Cards/LargeMedia.png"
+										   MediaContentTemplate="{StaticResource SampleImageTemplate}"
+										   SupportingContent="{StaticResource SupportingTextSample}"
+										   SupportingContentTemplate="{StaticResource SupportingTemplateForAvatarLayout}"
+										   IconsContentTemplate="{StaticResource TopIconsTemplate}"
+										   Style="{StaticResource MaterialAvatarElevatedCardStyle}"
+										   IsEnabled="False" />
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
-			</local:SamplePageLayout.MaterialTemplate>
-		</local:SamplePageLayout>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
 	</Grid>
 </Page>

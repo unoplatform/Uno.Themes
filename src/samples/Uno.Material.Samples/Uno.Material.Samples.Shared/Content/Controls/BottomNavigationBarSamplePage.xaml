@@ -2,7 +2,7 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:controls="using:Uno.Material.Controls"
-	  xmlns:local="using:Uno.Material.Samples"
+	  xmlns:sample="using:Uno.Material.Samples"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:entities="using:Uno.Material.Entities"
 	  xmlns:smtx="using:ShowMeTheXAML"
@@ -11,15 +11,14 @@
 	  mc:Ignorable="wasm">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<local:SamplePageLayout>
-
-			<local:SamplePageLayout.MaterialTemplate>
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<!-- No Border on phones, to emphasize the position of the BottomBar -->
 					<Grid wasm:BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-		  wasm:BorderThickness="1"
-		  win:BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-		  win:BorderThickness="1">
+						  wasm:BorderThickness="1"
+						  win:BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+						  win:BorderThickness="1">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*" />
 							<RowDefinition Height="Auto" />
@@ -27,24 +26,24 @@
 						</Grid.RowDefinitions>
 
 						<smtx:XamlPresenter Grid.Row="1"
-							ReferenceKey="BottomNavigationBarSamplePage_Content" />
+											ReferenceKey="BottomNavigationBarSamplePage_Content" />
 
 						<smtx:XamlDisplay Grid.Row="2"
-						  UniqueKey="BottomNavigationBarSamplePage_Content"
-						  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+										  UniqueKey="BottomNavigationBarSamplePage_Content"
+										  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
 
 							<controls:BottomNavigationBar x:Name="BottomNavBar">
 								<controls:BottomNavigationBar.Items>
 
 									<controls:BottomNavigationBarItem Label="Favorites"
-													  Tag="My Favorites">
+																	  Tag="My Favorites">
 										<controls:BottomNavigationBarItem.Icon>
 											<SymbolIcon Symbol="Favorite" />
 										</controls:BottomNavigationBarItem.Icon>
 									</controls:BottomNavigationBarItem>
 
 									<controls:BottomNavigationBarItem Label="Search"
-													  Tag="Search Something">
+																	  Tag="Search Something">
 										<controls:BottomNavigationBarItem.Icon>
 											<SymbolIcon Symbol="Find" />
 										</controls:BottomNavigationBarItem.Icon>
@@ -62,7 +61,7 @@
 									</controls:BottomNavigationBarItem>
 
 									<controls:BottomNavigationBarItem Label="Notifications"
-													  Tag="12 Unread Notifications">
+																	  Tag="12 Unread Notifications">
 
 										<controls:BottomNavigationBarItem.Icon>
 											<SymbolIcon Symbol="Flag" />
@@ -70,7 +69,7 @@
 
 										<controls:BottomNavigationBarItem.Badge>
 											<entities:BottomNavigationBarBadge IsVisible="True"
-															   Text="12" />
+																			   Text="12" />
 										</controls:BottomNavigationBarItem.Badge>
 									</controls:BottomNavigationBarItem>
 
@@ -84,7 +83,13 @@
 						</smtx:XamlDisplay>
 					</Grid>
 				</DataTemplate>
-			</local:SamplePageLayout.MaterialTemplate>
-		</local:SamplePageLayout>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
 	</Grid>
 </Page>
