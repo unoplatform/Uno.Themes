@@ -1,0 +1,56 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.ComboBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Themes.Samples.Shared.Content"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d android ios">
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<Grid BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+			  BorderThickness="1"
+			  android:Margin="12"
+			  ios:Margin="12"
+			  Padding="12">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Margin="0,0,10,0">
+
+				<!-- Label -->
+				<TextBlock Text="NORMAL"
+						   Style="{StaticResource MaterialSubtitle1}" />
+
+				<!-- ComboBox -->
+				<smtx:XamlDisplay UniqueKey="ComboBoxSamplePage_Normal"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="abcdefg" />
+				</smtx:XamlDisplay>
+
+			</StackPanel>
+
+			<StackPanel Grid.Column="1">
+
+				<!-- Label -->
+				<TextBlock Text="DISABLED"
+						   Style="{StaticResource MaterialSubtitle1}" />
+
+				<!-- ComboBox -->
+				<smtx:XamlDisplay UniqueKey="ComboBoxSamplePage_Disabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="abcde"
+							  IsEnabled="False" />
+				</smtx:XamlDisplay>
+			</StackPanel>
+		</Grid>
+	</ScrollViewer>
+</Page>
