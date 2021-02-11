@@ -24,7 +24,10 @@ namespace Uno.Themes.Samples
 
 			// landing navigation
 			ShellNavigateTo<ColorsSamplePage>(
-#if !WINDOWS_UWP
+#if WINDOWS_UWP
+				// note: on uwp, NavigationView.SelectedItem MUST be set on launch to avoid entering compact-mode
+				trySynchronizeCurrentItem: true
+#else
 				// workaround for uno#5069: setting NavView.SelectedItem at launch bricks it
 				trySynchronizeCurrentItem: false
 #endif
@@ -54,8 +57,8 @@ namespace Uno.Themes.Samples
 			if (nv.Content?.GetType() != sample.ViewType)
 			{
 				var selected = trySynchronizeCurrentItem
-					? nv.MenuItems
-						.OfType<MUXC.NavigationViewItem>()
+					? HierarchyHelper
+						.Flatten(nv.MenuItems.OfType<MUXC.NavigationViewItem>(), x => x.MenuItems.OfType<MUXC.NavigationViewItem>())
 						.FirstOrDefault(x => (x.DataContext as Sample)?.ViewType == sample.ViewType)
 					: default;
 				if (selected != null)
@@ -65,7 +68,6 @@ namespace Uno.Themes.Samples
 
 				var page = (Page)Activator.CreateInstance(sample.ViewType);
 				page.DataContext = sample;
-
 
 				_shell.NavigationView.Content = page;
 			}
