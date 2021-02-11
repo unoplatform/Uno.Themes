@@ -7,7 +7,7 @@ namespace Uno.Material.Samples.Entities
 	[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
 	public sealed class SamplePageAttribute : Attribute
 	{
-		public SamplePageAttribute(SampleCategory category, string title, SourceSdk source = SourceSdk.UnoMaterial)
+		public SamplePageAttribute(SampleCategory category, string title, SourceSdk source = SourceSdk.WinUI)
 		{
 			Category = category;
 			Title = title;

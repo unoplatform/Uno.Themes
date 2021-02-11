@@ -9,7 +9,7 @@ using Uno.Material.Samples.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Uno.Material.Samples.Controls
+namespace Uno.Material.Samples
 {
 	public partial class SamplePageLayout : ContentControl
 	{
