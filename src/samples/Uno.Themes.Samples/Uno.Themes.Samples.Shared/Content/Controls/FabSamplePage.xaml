@@ -1,0 +1,167 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.FabSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:not_win="http://uno.ui/not_win"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:wasm="http://uno.ui/wasm"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:extensions="using:Uno.Material.Extensions"
+	  xmlns:controls="using:Uno.Material.Controls"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  mc:Ignorable="not_win android ios wasm">
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
+
+			<!-- Header -->
+			<TextBlock Text="FLOATING ACTION BUTTONS"
+					   FontSize="20"
+					   FontWeight="Bold"
+					   Foreground="{StaticResource MaterialPrimaryBrush}" />
+
+			<!-- Icon Only Text -->
+			<TextBlock Text="Icon only" />
+			
+			<StackPanel Orientation="Horizontal">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Secondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
+					<Button Style="{StaticResource MaterialSecondaryFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!-- Text Only Text -->
+			<TextBlock Text="Text only" />
+			
+			<StackPanel Orientation="Horizontal">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialFabStyle}" />
+				</smtx:XamlDisplay>
+
+				<!-- Secondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryFabStyle}" />
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!-- Icon and Text Text -->
+			<TextBlock Text="Icon and text" />
+			
+			<StackPanel Orientation="Horizontal">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Sedondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!-- Icon and Text Text -->
+			<TextBlock Text="Inverted Colors" />
+			
+			<StackPanel Orientation="Horizontal">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextInvertedFab"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialPrimaryInvertedFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Sedondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextInvertedFab2"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryInvertedFabStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
+
+			<!-- Disabled -->
+			<TextBlock Text="Disabled" />
+			
+			<StackPanel Orientation="Horizontal">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab_Disabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialFabStyle}"
+							IsEnabled="False">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Sedondary Fab -->
+				<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2_Disabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}"
+								  Margin="16,10,16,0">
+					<Button Content="CREATE"
+							Style="{StaticResource MaterialSecondaryFabStyle}"
+							IsEnabled="False">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="Add" />
+						</extensions:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+			</StackPanel>
+		</StackPanel>
+	</ScrollViewer>
+</Page>

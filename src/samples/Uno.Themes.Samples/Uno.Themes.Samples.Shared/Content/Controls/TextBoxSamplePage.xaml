@@ -1,0 +1,81 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.TextBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Themes.Samples.Shared.Content"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:extensions="using:Uno.Material.Extensions"
+	  mc:Ignorable="d android ios">
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
+
+			<!-- Default -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_1"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox PlaceholderText="Filled"
+						 Style="{StaticResource MaterialFilledTextBoxStyle}" />
+			</smtx:XamlDisplay>
+
+			<!-- TexBox With Header -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_2"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox PlaceholderText="Filled"
+						 Header="Header"
+						 Style="{StaticResource MaterialFilledTextBoxStyle}" />
+			</smtx:XamlDisplay>
+
+			<!-- TexBox Disabled -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_3"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox PlaceholderText="Disabled"
+						 Style="{StaticResource MaterialFilledTextBoxStyle}"
+						 IsEnabled="False" />
+			</smtx:XamlDisplay>
+
+			<!-- TexBox Outline -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_4"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox PlaceholderText="Outlined"
+						 Header="Header"
+						 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
+			</smtx:XamlDisplay>
+
+			<!-- TexBox Outline Disabled -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_5"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox PlaceholderText="Outlined Disabled"
+						 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+						 IsEnabled="False" />
+			</smtx:XamlDisplay>
+
+			<!-- TextBox MultiLine -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_6"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+						 PlaceholderText="MultiLine Filled"
+						 Style="{StaticResource MaterialFilledTextBoxStyle}"
+						 TextWrapping="Wrap"
+						 AcceptsReturn="True" />
+			</smtx:XamlDisplay>
+
+			<!-- TexBox Icon -->
+			<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_7"
+			                  Style="{StaticResource XamlDisplayBelowStyle}">
+				<TextBox PlaceholderText="Filled with Icon"
+				         Style="{StaticResource MaterialFilledTextBoxStyle}">
+					<extensions:ControlExtensions.Icon>
+						<SymbolIcon Symbol="Favorite" />
+					</extensions:ControlExtensions.Icon>
+				</TextBox>
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
+</Page>
