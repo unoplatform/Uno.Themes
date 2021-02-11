@@ -4,7 +4,7 @@ using System.Text;
 using Uno.Material.Samples.Entities;
 using Windows.UI.Xaml;
 
-namespace Uno.Material.Samples.Controls
+namespace Uno.Material.Samples
 {
 	public partial class SamplePageLayout
 	{

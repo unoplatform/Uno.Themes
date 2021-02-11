@@ -13,20 +13,38 @@
 
 		<!-- Dark Theme -->
 		<ResourceDictionary x:Key="Dark">
-			<!-- Override default colors with yours -->
-			<!--<Color x:Key="MaterialPrimaryColor">#FFFF00</Color>-->
+			<!-- Override the default dark Material background and surface colors -->
+			<Color x:Key="MaterialBackgroundColor">#222224</Color>
+			<Color x:Key="MaterialSurfaceColor">#252529</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!-- Opacity for control state overlays -->
-	<!--
-	<x:Double x:Key="MaterialMediumOpacity">0.74</x:Double>
-	<x:Double x:Key="MaterialHoverOpacity">0.04</x:Double>
-	<x:Double x:Key="MaterialLowOpacity">0.38</x:Double>
-	<x:Double x:Key="MaterialFocusedOpacity">0.12</x:Double>
-	<x:Double x:Key="MaterialPressedOpacity">0.10</x:Double>
-	<x:Double x:Key="MaterialDraggedOpacity">0.08</x:Double>
-	<x:Double x:Key="MaterialSelectedOpacity">0.08</x:Double>
-	-->
+	<SolidColorBrush x:Key="DividerBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="0.13" />
+
+	<SolidColorBrush x:Key="SampleSecondBackgroundBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="0.05" />
+
+	<SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush"
+					 Color="{ThemeResource MaterialBackgroundColor}" />
+
+	<Color x:Key="UnoBlueColor">#FF229DFC</Color>
+	<Color x:Key="UnoPurpleColor">#FF7A69F5</Color>
+	<Color x:Key="UnoGreenColor">#FF6CE5AE</Color>
+	<Color x:Key="UnoRedColor">#FFF65678</Color>
+
+	<SolidColorBrush x:Key="UnoBlueColorBrush"
+					 Color="{StaticResource UnoBlueColor}" />
+
+	<SolidColorBrush x:Key="UnoPurpleColorBrush"
+					 Color="{StaticResource UnoPurpleColor}" />
+
+	<SolidColorBrush x:Key="UnoGreenColorBrush"
+					 Color="{StaticResource UnoGreenColor}" />
+
+	<SolidColorBrush x:Key="UnoRedColorBrush"
+					 Color="{StaticResource UnoRedColor}" />
 
 </ResourceDictionary>

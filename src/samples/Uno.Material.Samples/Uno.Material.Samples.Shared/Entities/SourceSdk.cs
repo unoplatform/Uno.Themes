@@ -7,6 +7,8 @@ namespace Uno.Material.Samples.Entities
 {
 	public enum SourceSdk
 	{
+		[Description("WinUI/Uno.UI")]
+		WinUI,
 		[Description("Uno.Material")]
 		UnoMaterial,
 		[Description("Uno.Cupertino")]
