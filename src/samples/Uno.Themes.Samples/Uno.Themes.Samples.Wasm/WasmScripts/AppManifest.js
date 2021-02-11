@@ -2,6 +2,6 @@
 
     splashScreenImage: "Assets/splashscreen.png",
 	splashScreenColor: "#363636",
-    displayName: "Uno Material"
+    displayName: "Uno Themes"
 
 }
