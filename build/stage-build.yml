@@ -14,7 +14,7 @@
   displayName: 'Restore NuGet packages'
   inputs:
     command: restore
-    solution: Uno.Material.sln
+    solution: Uno.Themes.sln
     feedsToUse: 'config'
     nugetConfigPath: 'nuget.config'
     verbosityRestore: Normal
@@ -23,7 +23,7 @@
 - task: MSBuild@1
   displayName: 'Build solution in Release | $(ApplicationPlatform)'
   inputs:
-    solution: Uno.Material.sln
+    solution: Uno.Themes.sln
     msbuildLocationMethod: version
     msbuildVersion: latest
     msbuildArchitecture: x86

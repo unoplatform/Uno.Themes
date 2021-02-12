@@ -145,7 +145,7 @@ xmlns:material="using:Uno.Material.Controls"
 6. In order to display the appropriate font with the material styles on Webassembly,
 make sure that the *Roboto* font is defined on `font.css` located at `[YourProject].Wasm/WasmCSS`.
 This make sure that the font is loaded correctly [Related Issue](https://github.com/unoplatform/uno/issues/693).
-It should look like [this](https://github.com/unoplatform/Uno.Material/blob/master/src/samples/Uno.Material.Samples/Uno.Material.Samples.Wasm/WasmCSS/Fonts.css):
+It should look like [this](https://github.com/unoplatform/Uno.Material/blob/master/src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/WasmCSS/Fonts.css):
 
 ```css
 @font-face {
