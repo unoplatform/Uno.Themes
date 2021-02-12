@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
 using Uno.Material.Controls;
 using Uno.Themes.Samples.Entities;
+using Uno.Themes.Samples.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -18,41 +19,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content.Controls
 {
-	[SamplePage(SampleCategory.Controls, "Snack Bar")]
+	[SamplePage(SampleCategory.Controls, "Snack Bar", DataType = typeof(SnackBarViewModel))]
 	public sealed partial class SnackBarSamplePage : Page
 	{
 		public SnackBarSamplePage()
 		{
 			this.InitializeComponent();
-			this.SeeCodeBehindButton.Content = GetCodeBehindSource().Replace("\t", "    ");
-		}
-
-		private string GetCodeBehindSource()
-		{
-			return
-@"private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-{
-	if (sender is ToggleSwitch toggleSwitch)
-	{
-		var value = toggleSwitch.IsOn ? SnackBarStatus.Visible : SnackBarStatus.Hidden;
-
-		SnackBar_1.SnackBarStatus = value;
-		SnackBar_2.SnackBarStatus = value;
-		SnackBar_3.SnackBarStatus = value;
-	}
-}";
-		}
-
-		private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-		{
-			if (sender is ToggleSwitch toggleSwitch)
-			{
-				var value = toggleSwitch.IsOn ? SnackBarStatus.Visible : SnackBarStatus.Hidden;
-
-				SnackBar_1.SnackBarStatus = value;
-				SnackBar_2.SnackBarStatus = value;
-				SnackBar_3.SnackBarStatus = value;
-			}
 		}
 	}
 }

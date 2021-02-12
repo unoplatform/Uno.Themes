@@ -8,4 +8,7 @@
 										   FalseValue="Visible" />
 
 	<converters:EnumDescriptionConverter x:Name="EnumToDescription" />
+	<converters:FromBoolToValueConverter x:Key="TrueToVisible"
+										 TrueValue="Visible"
+										 NullOrFalseValue="Collapsed" />
 </ResourceDictionary>

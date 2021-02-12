@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Uno.Themes.Samples.Entities;
+using Uno.Themes.Samples.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -16,47 +17,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content.Controls
 {
-	[SamplePage(SampleCategory.Controls, "Modal Standard Bottom Sheet")]
+	[SamplePage(SampleCategory.Controls, "Modal Standard Bottom Sheet", DataType = typeof(ModalBottomSheetViewModel))]
 	public sealed partial class ModalStandardBottomSheetSamplePage : Page
 	{
 		public ModalStandardBottomSheetSamplePage()
 		{
 			this.InitializeComponent();
-			this.SeeCodeBehindButton.Content = GetCodeBehindSource().Replace("\t", "    ");
-			this.SeeDataTemplateCodeButton.Content = GetDataTemplateCodeSource().Replace("\t", "    ");
-		}
-
-		private string GetCodeBehindSource()
-		{
-			return
-@"private void Button_Clicked(object sender, RoutedEventArgs e)
-{
-		ModalStandardBottomSheet.IsOpened = true;
-}";
-		}
-
-		private string GetDataTemplateCodeSource()
-		{
-			return
-@"<Page.Resources>
-	<!-- Sample Content Template -->
-	<DataTemplate x:Key'ContentTemplate'>
-		<StackPanel Background='{ThemeResource MaterialBackgroundColor}'
-					HorizontalAlignment='Stretch'
-					VerticalAlignment='Stretch'>
-			<TextBlock Style='{ThemeResource MaterialHeadline6}'
-					   Text'='Sheet Content'
-					   Margin='12' />
-			<ListView ItemsSource='{Binding}' />
- 
-		</StackPanel>
-</DataTemplate>
-</Page.Resources>";
-		}
-
-		private void Button_Clicked(object sender, RoutedEventArgs e)
-		{
-			ModalStandardBottomSheet.IsOpened = true;
 		}
 	}
 }
