@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content.Controls
 {
-	[SamplePage(SampleCategory.Controls, "Modal Standard Bottom Sheet", DataType = typeof(ModalBottomSheetViewModel))]
+	[SamplePage(SampleCategory.Controls, "Modal Standard Bottom Sheet", SourceSdk.UnoMaterial, Description = "This represents a draggable, modal bottom sheet. Sheet Content and FullScreenHeader are customizable", DocumentationLink = "https://material.io/components/sheets-bottom#modal-bottom-sheet", DataType = typeof(ModalBottomSheetViewModel))]
 	public sealed partial class ModalStandardBottomSheetSamplePage : Page
 	{
 		public ModalStandardBottomSheetSamplePage()

@@ -17,7 +17,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content.Controls
 {
-	[SamplePage(SampleCategory.Controls, "Expanding Bottom Sheet", DataType = typeof(ExpandingBottomSheetViewModel))]
+	[SamplePage(SampleCategory.Controls,
+		"Expanding Bottom Sheet",
+		SourceSdk.UnoMaterial,
+		DataType = typeof(ExpandingBottomSheetViewModel),
+		Description = "This control allows users to toggle optional page content.",
+		DocumentationLink = "https://material.io/components/sheets-bottom#expanding-bottom-sheet")]
 	public sealed partial class ExpandingBottomSheetSamplePage : Page
 	{
 		public ExpandingBottomSheetSamplePage()

@@ -122,7 +122,7 @@
 						</smtx:XamlDisplay>
 
 						<smtx:XamlDisplay UniqueKey="Divider_ListView">
-							<ListView ItemsSource="{Binding Items}"
+							<ListView ItemsSource="{Binding Data.Items}"
 									  SelectionMode="None">
 								<ListView.ItemTemplate>
 									<DataTemplate>
@@ -132,7 +132,7 @@
 												<RowDefinition Height="*" />
 											</Grid.RowDefinitions>
 
-											<ItemsControl ItemsSource="{Binding SubItems}"
+											<ItemsControl ItemsSource="{Binding Data.SubItems}"
 														  ItemTemplate="{StaticResource ChildItemTemplate}" />
 
 											<controls:Divider Style="{StaticResource MaterialDividerStyle}"

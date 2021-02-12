@@ -22,7 +22,7 @@ namespace Uno.Themes.Samples.Content.Controls
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	[SamplePage(SampleCategory.Controls, "Navigation View", DataType = typeof(NavigationViewViewModel))]
+	[SamplePage(SampleCategory.Controls, "Navigation View", Description = "This control is used for application navigation from a menu.", DocumentationLink = "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/navigationview", DataType = typeof(NavigationViewViewModel))]
 	public sealed partial class NavigationViewSamplePage : Page
 	{
 		public NavigationViewSamplePage()

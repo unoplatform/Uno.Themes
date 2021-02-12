@@ -16,7 +16,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content.Controls
 {
-	[SamplePage(SampleCategory.Controls, "Divider")]
+	[SamplePage(
+		category: SampleCategory.Controls,
+		title: "Divider",
+		Description = "This control is a thin line than can be used to divide layouts or groups content inside of lists.",
+		DocumentationLink = "https://material.io/components/dividers",
+		DataType = typeof(DividerSamplePageViewModel)
+	)]
 	public class DividerSamplePageViewModel
 	{
 		[Bindable]
@@ -43,7 +49,6 @@ namespace Uno.Themes.Samples.Content.Controls
 		public DividerSamplePage()
 		{
 			this.InitializeComponent();
-			DataContext = new DividerSamplePageViewModel();
 		}
 	}
 }

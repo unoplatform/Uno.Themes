@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content.Controls
 {
-	[SamplePage(SampleCategory.Controls, "Snack Bar", DataType = typeof(SnackBarViewModel))]
+	[SamplePage(SampleCategory.Controls, "Snack Bar", SourceSdk.UnoMaterial, DataType = typeof(SnackBarViewModel))]
 	public sealed partial class SnackBarSamplePage : Page
 	{
 		public SnackBarSamplePage()
