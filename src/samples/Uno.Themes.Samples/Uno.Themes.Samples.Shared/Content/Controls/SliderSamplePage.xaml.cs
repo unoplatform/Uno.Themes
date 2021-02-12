@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Uno.Themes.Samples.Entities;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -20,6 +21,7 @@ namespace Uno.Themes.Samples.Content.Controls
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
+	[SamplePage(SampleCategory.Controls, "Slider")]
 	public sealed partial class SliderSamplePage : Page
 	{
 		public SliderSamplePage()

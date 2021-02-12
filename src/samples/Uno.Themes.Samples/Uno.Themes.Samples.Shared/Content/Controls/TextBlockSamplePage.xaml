@@ -2,6 +2,7 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:Uno.Themes.Samples.Shared.Content"
+	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
@@ -9,105 +10,112 @@
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios">
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
-		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-					BorderThickness="1"
-					android:Margin="12"
-					ios:Margin="12"
-					Padding="12">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
 
-			<!-- Headline 1 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline1"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Headline 1"
-						   Style="{StaticResource MaterialHeadline1}" />
-			</smtx:XamlDisplay>
+						<!-- Headline 1 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline1"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Headline 1"
+									   Style="{StaticResource MaterialHeadline1}" />
+						</smtx:XamlDisplay>
 
-			<!-- Headline 2 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline2"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Headline 2"
-						   Style="{StaticResource MaterialHeadline2}" />
-			</smtx:XamlDisplay>
+						<!-- Headline 2 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline2"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Headline 2"
+									   Style="{StaticResource MaterialHeadline2}" />
+						</smtx:XamlDisplay>
 
-			<!-- Headline 3 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline3"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Headline 3"
-						   Style="{StaticResource MaterialHeadline3}" />
-			</smtx:XamlDisplay>
+						<!-- Headline 3 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline3"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Headline 3"
+									   Style="{StaticResource MaterialHeadline3}" />
+						</smtx:XamlDisplay>
 
-			<!-- Headline 4 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline4"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Headline 4"
-						   Style="{StaticResource MaterialHeadline4}" />
-			</smtx:XamlDisplay>
+						<!-- Headline 4 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline4"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Headline 4"
+									   Style="{StaticResource MaterialHeadline4}" />
+						</smtx:XamlDisplay>
 
-			<!-- Headline 5 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline5"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Headline 5"
-						   Style="{StaticResource MaterialHeadline5}" />
-			</smtx:XamlDisplay>
+						<!-- Headline 5 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline5"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Headline 5"
+									   Style="{StaticResource MaterialHeadline5}" />
+						</smtx:XamlDisplay>
 
-			<!-- Headline 6 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline6"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Headline 6"
-						   Style="{StaticResource MaterialHeadline6}" />
-			</smtx:XamlDisplay>
+						<!-- Headline 6 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Headline6"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Headline 6"
+									   Style="{StaticResource MaterialHeadline6}" />
+						</smtx:XamlDisplay>
 
-			<!-- Subtitle 1 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Subtitle1"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Subtitle 1"
-						   Style="{StaticResource MaterialSubtitle1}" />
-			</smtx:XamlDisplay>
+						<!-- Subtitle 1 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Subtitle1"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Subtitle 1"
+									   Style="{StaticResource MaterialSubtitle1}" />
+						</smtx:XamlDisplay>
 
-			<!-- Subtitle 2 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Subtitle2"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Subtitle 2"
-						   Style="{StaticResource MaterialSubtitle2}" />
-			</smtx:XamlDisplay>
+						<!-- Subtitle 2 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Subtitle2"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Subtitle 2"
+									   Style="{StaticResource MaterialSubtitle2}" />
+						</smtx:XamlDisplay>
 
-			<!-- Body 1 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Body1"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Body 1 - Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
-						   Style="{StaticResource MaterialBody1}" />
-			</smtx:XamlDisplay>
+						<!-- Body 1 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Body1"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Body 1 - Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+									   Style="{StaticResource MaterialBody1}" />
+						</smtx:XamlDisplay>
 
-			<!-- Body 2 -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Body2"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Body 2 - Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
-						   Style="{StaticResource MaterialBody2}" />
-			</smtx:XamlDisplay>
+						<!-- Body 2 -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Body2"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Body 2 - Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+									   Style="{StaticResource MaterialBody2}" />
+						</smtx:XamlDisplay>
 
-			<!-- Button -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Button"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Button"
-						   Style="{StaticResource MaterialButtonText}" />
-			</smtx:XamlDisplay>
+						<!-- Button -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Button"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Button"
+									   Style="{StaticResource MaterialButtonText}" />
+						</smtx:XamlDisplay>
 
-			<!-- Caption -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Caption"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Caption -  Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare"
-						   Style="{StaticResource MaterialCaption}" />
-			</smtx:XamlDisplay>
+						<!-- Caption -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Caption"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Caption -  Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare"
+									   Style="{StaticResource MaterialCaption}" />
+						</smtx:XamlDisplay>
 
-			<!-- Overline -->
-			<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Overline"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBlock Text="Overline"
-						   Style="{StaticResource MaterialOverline}" />
-			</smtx:XamlDisplay>
+						<!-- Overline -->
+						<smtx:XamlDisplay UniqueKey="TextBlockSamplePage_Overline"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Overline"
+									   Style="{StaticResource MaterialOverline}" />
+						</smtx:XamlDisplay>
 
-		</StackPanel>
-	</ScrollViewer>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
 </Page>
-

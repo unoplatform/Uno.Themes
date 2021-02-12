@@ -5,6 +5,7 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:controls="using:Uno.Material.Controls"
+	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
@@ -57,48 +58,58 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-		  BorderThickness="1"
-		  android:Margin="12,12,12,0"
-		  ios:Margin="12,12,12,0">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate x:DataType="local:ExpandingBottomSheetSamplePage">
+					<StackPanel>
+						<StackPanel>
 
-		<StackPanel>
+							<!-- Minimal BottomSheet Toggle -->
+							<ToggleSwitch Header="Toggle Minimal Sheet"
+										  Toggled="ToggleSwitch_Toggled"
+										  Style="{StaticResource MaterialToggleSwitchStyle}"
+										  HorizontalAlignment="Left"
+										  VerticalAlignment="Top"
+										  Margin="12" />
 
-			<!-- Minimal BottomSheet Toggle -->
-			<ToggleSwitch Header="Toggle Minimal Sheet"
-						  Toggled="ToggleSwitch_Toggled"
-						  Style="{StaticResource MaterialToggleSwitchStyle}"
-						  HorizontalAlignment="Left"
-						  VerticalAlignment="Top"
-						  Margin="12" />
+							<Button x:Name="SeeCodeBehindButton"
+									Tag="See code-behind for toggle"
+									Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
 
-			<Button x:Name="SeeCodeBehindButton"
-					Tag="See code-behind for toggle"
-					Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
+							<Button x:Name="SeeDataTemplateCodeButton"
+									Tag="See code behind DataTemplates"
+									Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
+						</StackPanel>
 
-			<Button x:Name="SeeDataTemplateCodeButton"
-					Tag="See code behind DataTemplates"
-					Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
-		</StackPanel>
+						<smtx:XamlPresenter ReferenceKey="ExpandingBottomSheetSamplePage_Content"
+											HorizontalAlignment="Right"
+											VerticalAlignment="Bottom"
+											Margin="10,50" />
 
-		<smtx:XamlPresenter ReferenceKey="ExpandingBottomSheetSamplePage_Content"
-							HorizontalAlignment="Right"
-							VerticalAlignment="Bottom"
-							Margin="10,50"/>
+						<smtx:XamlDisplay UniqueKey="ExpandingBottomSheetSamplePage_Content"
+										  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
+										  Margin="0"
+										  Padding="0">
 
-		<smtx:XamlDisplay UniqueKey="ExpandingBottomSheetSamplePage_Content"
-						  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
-						  Margin="0"
-						  Padding="0">
-
-			<!-- ExpandingBottomSheet -->
-			<controls:ExpandingBottomSheet x:Name="ExpandingBottomSheet"
-										   Style="{StaticResource MaterialExpandingBottomSheetStyle}"
-										   CollapsedContent="Open"
-										   CollapsedContentTemplate="{StaticResource CollapsedTemplate}"
-										   ExpandedContent="Opened"
-										   ExpandedContentTemplate="{StaticResource ExpandedTemplate}"
-										   MinimalCollapsedContentTemplate="{StaticResource MinimalCollapsedTemplate}" />
-		</smtx:XamlDisplay>
+							<!-- ExpandingBottomSheet -->
+							<controls:ExpandingBottomSheet x:Name="ExpandingBottomSheet"
+														   Style="{StaticResource MaterialExpandingBottomSheetStyle}"
+														   CollapsedContent="Open"
+														   CollapsedContentTemplate="{StaticResource CollapsedTemplate}"
+														   ExpandedContent="Opened"
+														   ExpandedContentTemplate="{StaticResource ExpandedTemplate}"
+														   MinimalCollapsedContentTemplate="{StaticResource MinimalCollapsedTemplate}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
 	</Grid>
 </Page>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Uno.Themes.Samples.Entities;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content.Controls
 {
+	[SamplePage(SampleCategory.Controls, "Hyperlink Button")]
 	public sealed partial class HyperlinkButtonSamplePage : Page
 	{
 		public HyperlinkButtonSamplePage()

@@ -2,6 +2,7 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:Uno.Themes.Samples.Shared.Content"
+	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
@@ -9,86 +10,94 @@
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios">
 
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
-		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-					BorderThickness="1"
-					android:Margin="12"
-					ios:Margin="12"
-					Padding="12">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
 
-			<!-- Primary -->
-			<TextBlock Text="Primary"
-					   Style="{StaticResource MaterialSubtitle2}"
-					   Margin="12,16,12,4" />
+						<!-- Primary -->
+						<TextBlock Text="Primary"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,16,12,4" />
 
-			<!-- RadioButton OFF -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Unchecked">
-				<RadioButton GroupName="Primary_a"
-							 Content="UNCHECKED"
-							 Style="{StaticResource MaterialRadioButtonStyle}" />
-			</smtx:XamlDisplay>
+						<!-- RadioButton OFF -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Unchecked">
+							<RadioButton GroupName="Primary_a"
+										 Content="UNCHECKED"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
 
-			<!-- RadioButton ON -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Checked">
-				<RadioButton GroupName="Primary_a"
-							 Content="CHECKED"
-							 Style="{StaticResource MaterialRadioButtonStyle}"
-							 IsChecked="True" />
-			</smtx:XamlDisplay>
+						<!-- RadioButton ON -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_Checked">
+							<RadioButton GroupName="Primary_a"
+										 Content="CHECKED"
+										 Style="{StaticResource MaterialRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
 
-			<!-- RadioButton OFF Disabled -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_UncheckedDisabled">
-				<RadioButton GroupName="Primary_b"
-							 Content="UNCHECKED DISABLED"
-							 IsEnabled="False"
-							 Style="{StaticResource MaterialRadioButtonStyle}" />
-			</smtx:XamlDisplay>
+						<!-- RadioButton OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_UncheckedDisabled">
+							<RadioButton GroupName="Primary_b"
+										 Content="UNCHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
 
-			<!-- RadioButton ON Disabled -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_CheckedDisabled">
-				<RadioButton GroupName="Primary_b"
-							 Content="CHECKED DISABLED"
-							 IsChecked="True"
-							 IsEnabled="False"
-							 Style="{StaticResource MaterialRadioButtonStyle}" />
-			</smtx:XamlDisplay>
+						<!-- RadioButton ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_CheckedDisabled">
+							<RadioButton GroupName="Primary_b"
+										 Content="CHECKED DISABLED"
+										 IsChecked="True"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
 
-			<!-- Secondary -->
-			<TextBlock Text="Secondary"
-					   Style="{StaticResource MaterialSubtitle2}"
-					   Margin="12,16,12,4" />
+						<!-- Secondary -->
+						<TextBlock Text="Secondary"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,16,12,4" />
 
-			<!-- RadioButton OFF -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryUnchecked">
-				<RadioButton GroupName="Secondary_a"
-							 Content="UNCHECKED"
-							 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
-			</smtx:XamlDisplay>
+						<!-- RadioButton OFF -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryUnchecked">
+							<RadioButton GroupName="Secondary_a"
+										 Content="UNCHECKED"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
+						</smtx:XamlDisplay>
 
-			<!-- RadioButton ON -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryChecked">
-				<RadioButton GroupName="Secondary_a"
-							 Content="CHECKED"
-							 Style="{StaticResource MaterialSecondaryRadioButtonStyle}"
-							 IsChecked="True" />
-			</smtx:XamlDisplay>
+						<!-- RadioButton ON -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryChecked">
+							<RadioButton GroupName="Secondary_a"
+										 Content="CHECKED"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
 
-			<!-- RadioButton OFF Disabled -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryUncheckedDisabled">
-				<RadioButton GroupName="Secondary_b"
-							 Content="UNCHECKED DISABLED"
-							 IsEnabled="False"
-							 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
-			</smtx:XamlDisplay>
+						<!-- RadioButton OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryUncheckedDisabled">
+							<RadioButton GroupName="Secondary_b"
+										 Content="UNCHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
+						</smtx:XamlDisplay>
 
-			<!-- RadioButton ON Disabled -->
-			<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryCheckedDisabled">
-				<RadioButton GroupName="Secondary_b"
-							 Content="CHECKED DISABLED"
-							 IsChecked="True"
-							 IsEnabled="False"
-							 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
-			</smtx:XamlDisplay>
-		</StackPanel>
-	</ScrollViewer>
+						<!-- RadioButton ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="RadioButtonSamplePage_SecondaryCheckedDisabled">
+							<RadioButton GroupName="Secondary_b"
+										 Content="CHECKED DISABLED"
+										 IsChecked="True"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
 </Page>

@@ -5,6 +5,7 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:controls="using:Uno.Material.Controls"
+	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:entities="using:Uno.Material.Entities"
 	  xmlns:extensions="using:Uno.Material.Extensions"
 	  xmlns:ios="http://uno.ui/ios"
@@ -84,111 +85,120 @@
 			</Grid>
 		</DataTemplate>
 	</Page.Resources>
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate x:DataType="local:StandardBottomSheetSamplePage">
+					<StackPanel>
+						<StackPanel>
 
-	<Grid BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-		  BorderThickness="1"
-		  android:Margin="12"
-		  ios:Margin="12">
+							<StackPanel Orientation="Vertical">
+								<RadioButton x:Name="RadioButton_Default"
+											 Content="BottomSheet without SnapPoints"
+											 Checked="RadioButton_Default_Checked"
+											 GroupName="SBSGroup"
+											 IsChecked="True"
+											 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-		<StackPanel>
+								<smtx:XamlPresenter ReferenceKey="StandardBottomSheetSamplePage_Standard" />
 
-			<StackPanel Orientation="Vertical">
-				<RadioButton x:Name="RadioButton_Default"
-							 Content="BottomSheet without SnapPoints"
-							 Checked="RadioButton_Default_Checked"
-							 GroupName="SBSGroup"
-							 IsChecked="True"
-							 Style="{StaticResource MaterialRadioButtonStyle}" />
+							</StackPanel>
 
-				<smtx:XamlPresenter ReferenceKey="StandardBottomSheetSamplePage_Standard" />
+							<StackPanel Orientation="Vertical">
+								<RadioButton x:Name="RadioButton_3Snaps"
+											 Content="BottomSheet with 3 SnapPoints"
+											 Checked="RadioButton_3Snaps_Checked"
+											 GroupName="SBSGroup"
+											 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-			</StackPanel>
+								<smtx:XamlPresenter ReferenceKey="StandardBottomSheetSamplePage_3Snaps" />
+							</StackPanel>
 
-			<StackPanel Orientation="Vertical">
-				<RadioButton x:Name="RadioButton_3Snaps"
-							 Content="BottomSheet with 3 SnapPoints"
-							 Checked="RadioButton_3Snaps_Checked"
-							 GroupName="SBSGroup"
-							 Style="{StaticResource MaterialRadioButtonStyle}" />
+							<StackPanel Orientation="Vertical">
+								<RadioButton x:Name="RadioButton_CustomHeader"
+											 Content="BottomSheet with a Custom Header"
+											 Checked="RadioButton_CustomHeader_Checked"
+											 GroupName="SBSGroup"
+											 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-				<smtx:XamlPresenter ReferenceKey="StandardBottomSheetSamplePage_3Snaps" />
-			</StackPanel>
+								<smtx:XamlPresenter ReferenceKey="StandardBottomSheetSamplePage_CustomHeader" />
+							</StackPanel>
 
-			<StackPanel Orientation="Vertical">
-				<RadioButton x:Name="RadioButton_CustomHeader"
-							 Content="BottomSheet with a Custom Header"
-							 Checked="RadioButton_CustomHeader_Checked"
-							 GroupName="SBSGroup"
-							 Style="{StaticResource MaterialRadioButtonStyle}" />
+							<Button x:Name="SeeDataTemplateCodeButton"
+									Tag="See code behind DataTemplates"
+									Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
+						</StackPanel>
 
-				<smtx:XamlPresenter ReferenceKey="StandardBottomSheetSamplePage_CustomHeader" />
-			</StackPanel>
+						<smtx:XamlDisplay UniqueKey="StandardBottomSheetSamplePage_Standard"
+										  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
+										  Margin="0"
+										  Padding="0">
 
-			<Button x:Name="SeeDataTemplateCodeButton"
-					Tag="See code behind DataTemplates"
-					Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
-		</StackPanel>
+							<!-- StandardBottomSheet -->
+							<controls:StandardBottomSheet x:Name="StandardBottomSheet"
+														  Style="{StaticResource MaterialStandardBottomSheetStyle}"
+														  Content="abcdefgh"
+														  ContentTemplate="{StaticResource ContentTemplate}"
+														  HeaderContent="Sheet Header"
+														  HeaderContentTemplate="{StaticResource HeaderTemplate}" />
+						</smtx:XamlDisplay>
 
-		<smtx:XamlDisplay UniqueKey="StandardBottomSheetSamplePage_Standard"
-						  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
-						  Margin="0"
-						  Padding="0">
+						<smtx:XamlDisplay UniqueKey="StandardBottomSheetSamplePage_3Snaps"
+										  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
+										  Margin="0"
+										  Padding="0">
 
-			<!-- StandardBottomSheet -->
-			<controls:StandardBottomSheet x:Name="StandardBottomSheet"
-										  Style="{StaticResource MaterialStandardBottomSheetStyle}"
-										  Content="abcdefgh"
-										  ContentTemplate="{StaticResource ContentTemplate}"
-										  HeaderContent="Sheet Header"
-										  HeaderContentTemplate="{StaticResource HeaderTemplate}" />
-		</smtx:XamlDisplay>
+							<!-- StandardBottomSheet with 3 SnapPoints -->
+							<controls:StandardBottomSheet x:Name="StandardBottomSheet_3Snaps"
+														  Style="{StaticResource MaterialStandardBottomSheetStyle}"
+														  Content="abcdefgh"
+														  ContentTemplate="{StaticResource ContentTemplate}"
+														  HeaderContent="Sheet Header"
+														  HeaderContentTemplate="{StaticResource HeaderTemplate}"
+														  InitialSnapAreaName="FullyClosed"
+														  Visibility="Collapsed">
 
-		<smtx:XamlDisplay UniqueKey="StandardBottomSheetSamplePage_3Snaps"
-						  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
-						  Margin="0"
-						  Padding="0">
+								<controls:StandardBottomSheet.SnapAreas>
+									<entities:SheetSnapAreaCollection>
+										<entities:SheetSnapArea Name="FullyOpened"
+																Height="0.4*"
+																SnapType="Top" />
+										<entities:SheetSnapArea Name="CenterSnap"
+																Height="0.3*"
+																SnapType="Top" />
+										<entities:SheetSnapArea Name="FullyClosed"
+																Height="0.3*"
+																SnapType="Bottom" />
+									</entities:SheetSnapAreaCollection>
+								</controls:StandardBottomSheet.SnapAreas>
 
-			<!-- StandardBottomSheet with 3 SnapPoints -->
-			<controls:StandardBottomSheet x:Name="StandardBottomSheet_3Snaps"
-										  Style="{StaticResource MaterialStandardBottomSheetStyle}"
-										  Content="abcdefgh"
-										  ContentTemplate="{StaticResource ContentTemplate}"
-										  HeaderContent="Sheet Header"
-										  HeaderContentTemplate="{StaticResource HeaderTemplate}"
-										  InitialSnapAreaName="FullyClosed"
-										  Visibility="Collapsed">
+							</controls:StandardBottomSheet>
+						</smtx:XamlDisplay>
 
-				<controls:StandardBottomSheet.SnapAreas>
-					<entities:SheetSnapAreaCollection>
-						<entities:SheetSnapArea Name="FullyOpened"
-												Height="0.4*"
-												SnapType="Top" />
-						<entities:SheetSnapArea Name="CenterSnap"
-												Height="0.3*"
-												SnapType="Top" />
-						<entities:SheetSnapArea Name="FullyClosed"
-												Height="0.3*"
-												SnapType="Bottom" />
-					</entities:SheetSnapAreaCollection>
-				</controls:StandardBottomSheet.SnapAreas>
+						<smtx:XamlDisplay UniqueKey="StandardBottomSheetSamplePage_CustomHeader"
+										  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
+										  Margin="0"
+										  Padding="0">
 
-			</controls:StandardBottomSheet>
-		</smtx:XamlDisplay>
-
-		<smtx:XamlDisplay UniqueKey="StandardBottomSheetSamplePage_CustomHeader"
-						  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
-						  Margin="0"
-						  Padding="0">
-
-			<!-- StandardBottomSheet with Custom Header -->
-			<controls:StandardBottomSheet x:Name="StandardBottomSheet_CustomHeader"
-										  Style="{StaticResource MaterialStandardBottomSheetStyle}"
-										  Content="abcdefgh"
-										  ContentTemplate="{StaticResource ContentTemplate}"
-										  HeaderContent="Sheet Header"
-										  HeaderContentTemplate="{StaticResource CustomHeaderTemplate}"
-										  Visibility="Collapsed">
-			</controls:StandardBottomSheet>
-		</smtx:XamlDisplay>
+							<!-- StandardBottomSheet with Custom Header -->
+							<controls:StandardBottomSheet x:Name="StandardBottomSheet_CustomHeader"
+														  Style="{StaticResource MaterialStandardBottomSheetStyle}"
+														  Content="abcdefgh"
+														  ContentTemplate="{StaticResource ContentTemplate}"
+														  HeaderContent="Sheet Header"
+														  HeaderContentTemplate="{StaticResource CustomHeaderTemplate}"
+														  Visibility="Collapsed">
+							</controls:StandardBottomSheet>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
 	</Grid>
 </Page>
