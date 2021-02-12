@@ -189,7 +189,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{x:Bind MutableTestCollection}"
+								<chips:ChipGroup ItemsSource="{Binding Data.MutableTestCollection}"
 												 ItemRemoved="RemoveChipItem"
 												 Style="{StaticResource MaterialChipGroupStyle}"
 												 SelectionMode="None"
@@ -219,7 +219,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{x:Bind MutableTestCollection}"
+								<chips:ChipGroup ItemsSource="{Binding Data.MutableTestCollection}"
 												 ItemRemoved="RemoveChipItem"
 												 Style="{StaticResource MaterialChipGroupStyle}"
 												 ItemContainerStyle="{StaticResource MaterialOutlinedChipStyle}"
@@ -257,7 +257,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{x:Bind TestCollection}"
+								<chips:ChipGroup ItemsSource="{Binding Data.TestCollection}"
 												 Style="{StaticResource MaterialChipGroupStyle}"
 												 ItemContainerStyle="{StaticResource MaterialPrimaryChipStyle}"
 												 SelectionMode="Single"
@@ -281,7 +281,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{x:Bind TestCollection}"
+								<chips:ChipGroup ItemsSource="{Binding Data.TestCollection}"
 												 Style="{StaticResource MaterialChipGroupStyle}"
 												 ItemContainerStyle="{StaticResource MaterialPrimaryOutlinedChipStyle}"
 												 SelectionMode="Single"
@@ -309,7 +309,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{x:Bind TestCollection}"
+								<chips:ChipGroup ItemsSource="{Binding Data.TestCollection}"
 												 Style="{StaticResource MaterialChipGroupStyle}"
 												 SelectionMode="Multiple"
 												 Margin="8,0,8,8">
@@ -332,7 +332,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{x:Bind TestCollection}"
+								<chips:ChipGroup ItemsSource="{Binding Data.TestCollection}"
 												 Style="{StaticResource MaterialChipGroupStyle}"
 												 ItemContainerStyle="{StaticResource MaterialOutlinedChipStyle}"
 												 SelectionMode="Multiple"
