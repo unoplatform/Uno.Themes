@@ -289,6 +289,140 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup>
+
+								<VisualState x:Name="Medium">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="725" />
+									</VisualState.StateTriggers>
+								</VisualState>
+
+								<VisualState x:Name="Narrow">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="0" />
+									</VisualState.StateTriggers>
+
+									<VisualState.Setters>
+
+										<Setter Target="Content_1.(Grid.Column)"
+												Value="0" />
+										<Setter Target="Content_1.(Grid.Column)"
+												Value="0" />
+										<Setter Target="Content_1.(Grid.Row)"
+												Value="0" />
+
+										<Setter Target="Content_2.(Grid.Column)"
+												Value="0" />
+										<Setter Target="Content_2.(Grid.Row)"
+												Value="1" />
+
+										<Setter Target="Column_2.Width"
+												Value="0" />
+										<Setter Target="ColumnSpacer_1.Width"
+												Value="0" />
+										<Setter Target="ColumnSpacer_2.Width"
+												Value="0" />
+
+										<Setter Target="TitleContainer_1.MinHeight"
+												Value="0" />
+										<Setter Target="TitleContainer_2.MinHeight"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- TODO : Replace white foreground with proper StaticResource  -->
+						<ScrollViewer VerticalScrollBarVisibility="Auto">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition x:Name="Column_1"
+													  Width="*" />
+									<ColumnDefinition x:Name="ColumnSpacer_1"
+													  Width="12" />
+									<ColumnDefinition x:Name="Column_2"
+													  Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+
+								<!-- Content 1 -->
+								<StackPanel x:Name="Content_1"
+											Margin="0,0,0,12"
+											Grid.Column="0">
+
+									<!-- Title -->
+									<TextBlock Text="Color Scheme"
+											   Style="{StaticResource SecondaryTitleTextBlockStyle}"
+											   Margin="0,0,0,12" />
+
+									<!-- Brushes -->
+									<ContentControl Content="CupertinoBlueBrush"
+													Background="{StaticResource CupertinoBlueBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoGreenBrush"
+													Background="{StaticResource CupertinoGreenBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoIndigoBrush"
+													Background="{StaticResource CupertinoIndigoBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoOrangeBrush"
+													Background="{StaticResource CupertinoOrangeBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoPinkBrush"
+													Background="{StaticResource CupertinoPinkBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoPurpleBrush"
+													Background="{StaticResource CupertinoPurpleBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoRedBrush"
+													Background="{StaticResource CupertinoRedBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoTealBrush"
+													Background="{StaticResource CupertinoTealBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoYellowBrush"
+													Background="{StaticResource CupertinoYellowBrush}"
+													Foreground="White" />
+								</StackPanel>
+
+								<!-- Content 2 -->
+								<StackPanel x:Name="Content_2"
+											Margin="0,0,0,12"
+											Grid.Column="2">
+
+									<!-- Title -->
+									<TextBlock Text="Gray Variation Scheme"
+											   Style="{StaticResource SecondaryTitleTextBlockStyle}"
+											   Margin="0,0,0,12" />
+
+									<!-- Brushes -->
+									<ContentControl Content="CupertinoPrimaryGrayBrush"
+													Background="{StaticResource CupertinoPrimaryGrayBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoSecondaryGrayBrush"
+													Background="{StaticResource CupertinoSecondaryGrayBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoTertiaryGrayBrush"
+													Background="{StaticResource CupertinoTertiaryGrayBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoQuaternaryGrayBrush"
+													Background="{StaticResource CupertinoQuaternaryGrayBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoQuinaryGrayBrush"
+													Background="{StaticResource CupertinoQuinaryGrayBrush}"
+													Foreground="White" />
+									<ContentControl Content="CupertinoSenaryGrayBrush"
+													Background="{StaticResource CupertinoSenaryGrayBrush}"
+													Foreground="White" />
+								</StackPanel>
+							</Grid>
+						</ScrollViewer>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
