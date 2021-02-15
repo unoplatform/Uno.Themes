@@ -1,0 +1,74 @@
+﻿<Page x:Class="Uno.Themes.Samples.SamplesPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Themes.Samples"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  xmlns:xamarin="http://uno.ui/xamarin"
+	  mc:Ignorable="d xamarin">
+
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+		<smtx:XamlDisplay UniqueKey="SamplesPage_NavigationView"
+						  toolkit:VisibleBoundsPadding.PaddingMask="All"
+						  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+
+			<NavigationView x:Name="NavView"
+							Style="{StaticResource MaterialNoCompactMenuNavigationViewStyle}"
+							ItemInvoked="NavView_ItemInvoked"
+							Loaded="NavView_Loaded"
+							PaneTitle="Uno Material"
+							Header="Component: NavigationView with MaterialNavigationViewStyle"
+							Margin="0,12,0,0"
+							IsTabStop="False"
+							PaneDisplayMode="Auto"
+							AlwaysShowHeader="True"
+							IsBackButtonVisible="Collapsed">
+				<NavigationView.PaneHeader>
+					<StackPanel>
+						<Image Source="ms-appx:///Assets/UnoLogo.png"
+							   Margin="16,12,16,30"
+							   Height="30"
+							   Width="30"
+							   HorizontalAlignment="Left"
+							   Stretch="Uniform" />
+
+						<TextBlock Text="{Binding PaneTitle, ElementName=NavView}"
+								   HorizontalAlignment="Left"
+								   VerticalAlignment="Center"
+								   Margin="16,0,0,0"
+								   Style="{StaticResource MaterialHeadline6}" />
+
+						<ToggleButton x:Name="DarkLightModeToggle"
+								  Content="Light and Dark"
+								  Style="{StaticResource DarkLightToggleTheme}"
+								  Click="ToggleButton_Click"
+								  Margin="0,0,20,16"
+								  HorizontalAlignment="Right"
+								  VerticalAlignment="Bottom" />
+					</StackPanel>
+				</NavigationView.PaneHeader>
+
+				<!-- NavigationView Items -->
+				<Frame x:Name="ContentFrame">
+					<Frame.ContentTransitions>
+						<TransitionCollection>
+							<NavigationThemeTransition>
+								<NavigationThemeTransition.DefaultNavigationTransitionInfo>
+									<EntranceNavigationTransitionInfo />
+								</NavigationThemeTransition.DefaultNavigationTransitionInfo>
+							</NavigationThemeTransition>
+						</TransitionCollection>
+					</Frame.ContentTransitions>
+				</Frame>
+			</NavigationView>
+
+		</smtx:XamlDisplay>
+
+		<Frame x:Name="NestedSampleFrame"
+			   Visibility="Collapsed"
+			   xamarin:Style="{StaticResource NativeDefaultFrame}" />
+	</Grid>
+
+</Page>

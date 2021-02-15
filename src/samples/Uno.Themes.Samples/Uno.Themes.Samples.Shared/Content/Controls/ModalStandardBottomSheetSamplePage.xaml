@@ -1,0 +1,79 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.ModalStandardBottomSheetSamplePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:android="http://uno.ui/android"
+      xmlns:controls="using:Uno.Material.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ios="http://uno.ui/ios"
+      xmlns:local="using:Uno.Themes.Samples.Content.Controls"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:sample="using:Uno.Themes.Samples"
+      xmlns:smtx="using:ShowMeTheXAML"
+      mc:Ignorable="d android ios">
+
+	<Page.Resources>
+		<!--  Sample Content Template  -->
+		<DataTemplate x:Key="ContentTemplate">
+			<StackPanel HorizontalAlignment="Stretch"
+			            VerticalAlignment="Stretch"
+			            Background="{ThemeResource MaterialBackgroundColor}">
+
+				<TextBlock Margin="12"
+				           Style="{ThemeResource MaterialHeadline6}"
+				           Text="Sheet Content" />
+
+				<ListView ItemsSource="{Binding}" />
+			</StackPanel>
+		</DataTemplate>
+	</Page.Resources>
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<StackPanel>
+
+							<!--  Open ModalStandardBottomSheet  -->
+							<Button Margin="12"
+							        HorizontalAlignment="Left"
+							        VerticalAlignment="Top"
+							        Command="{Binding Data.OpenCommand}"
+							        Content="Open Sheet"
+							        Style="{StaticResource MaterialContainedButtonStyle}" />
+
+							<Button Content="{Binding Data.CodeBehindSource}"
+							        Style="{StaticResource SeeSourceFlyoutButtonStyle}"
+							        Tag="See code-behind button" />
+
+							<Button Content="{Binding Data.DataTemplateCode}"
+							        Style="{StaticResource SeeSourceFlyoutButtonStyle}"
+							        Tag="See code behind DataTemplates" />
+
+							<smtx:XamlPresenter ReferenceKey="ModalBottomSheetSamplePage_Content" />
+						</StackPanel>
+
+						<smtx:XamlDisplay Margin="0"
+						                  Padding="0"
+						                  Style="{StaticResource ContentOnlyXamlDisplayStyle}"
+						                  UniqueKey="ModalBottomSheetSamplePage_Content">
+
+							<!--  ModalStandardBottomSheet  -->
+							<controls:ModalStandardBottomSheet Content="abcdefgh"
+							                                   ContentTemplate="{StaticResource ContentTemplate}"
+							                                   HeaderContent="Full Screen Header"
+							                                   IsOpened="{Binding Data.IsOpened}"
+							                                   Style="{StaticResource MaterialModalStandardBottomSheetStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel />
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>
