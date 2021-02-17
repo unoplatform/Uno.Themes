@@ -317,7 +317,14 @@
 										<Setter Target="Content_2.(Grid.Row)"
 												Value="1" />
 
+										<Setter Target="Content_3.(Grid.Column)"
+												Value="0" />
+										<Setter Target="Content_3.(Grid.Row)"
+												Value="2" />
+
 										<Setter Target="Column_2.Width"
+												Value="0" />
+										<Setter Target="Column_3.Width"
 												Value="0" />
 										<Setter Target="ColumnSpacer_1.Width"
 												Value="0" />
@@ -333,7 +340,6 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- TODO : Replace white foreground with proper StaticResource  -->
 						<ScrollViewer VerticalScrollBarVisibility="Auto">
 							<Grid>
 								<Grid.ColumnDefinitions>
@@ -342,6 +348,10 @@
 									<ColumnDefinition x:Name="ColumnSpacer_1"
 													  Width="12" />
 									<ColumnDefinition x:Name="Column_2"
+													  Width="*" />
+									<ColumnDefinition x:Name="ColumnSpacer_2"
+													  Width="12" />
+									<ColumnDefinition x:Name="Column_3"
 													  Width="*" />
 								</Grid.ColumnDefinitions>
 
@@ -364,31 +374,31 @@
 									<!-- Brushes -->
 									<ContentControl Content="CupertinoBlueBrush"
 													Background="{StaticResource CupertinoBlueBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoGreenBrush"
 													Background="{StaticResource CupertinoGreenBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoIndigoBrush"
 													Background="{StaticResource CupertinoIndigoBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoOrangeBrush"
 													Background="{StaticResource CupertinoOrangeBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoPinkBrush"
 													Background="{StaticResource CupertinoPinkBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoPurpleBrush"
 													Background="{StaticResource CupertinoPurpleBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoRedBrush"
 													Background="{StaticResource CupertinoRedBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoTealBrush"
 													Background="{StaticResource CupertinoTealBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoYellowBrush"
 													Background="{StaticResource CupertinoYellowBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 								</StackPanel>
 
 								<!-- Content 2 -->
@@ -404,22 +414,85 @@
 									<!-- Brushes -->
 									<ContentControl Content="CupertinoPrimaryGrayBrush"
 													Background="{StaticResource CupertinoPrimaryGrayBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoSecondaryGrayBrush"
 													Background="{StaticResource CupertinoSecondaryGrayBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoTertiaryGrayBrush"
 													Background="{StaticResource CupertinoTertiaryGrayBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoQuaternaryGrayBrush"
 													Background="{StaticResource CupertinoQuaternaryGrayBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoQuinaryGrayBrush"
 													Background="{StaticResource CupertinoQuinaryGrayBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 									<ContentControl Content="CupertinoSenaryGrayBrush"
 													Background="{StaticResource CupertinoSenaryGrayBrush}"
-													Foreground="White" />
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+								</StackPanel>
+
+								<!-- Content 3 -->
+								<StackPanel x:Name="Content_3"
+											Grid.Column="4">
+
+									<!-- Title -->
+									<TextBlock Text="Control colors"
+											   Style="{StaticResource SecondaryTitleTextBlockStyle}"
+											   Margin="0,0,0,12" />
+
+									<!-- Brushes -->
+									<ContentControl Content="CupertinoLabelBrush"
+													Background="{StaticResource CupertinoLabelBrush}"
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+									<ContentControl Content="CupertinoSecondaryLabelBrush"
+													Background="{StaticResource CupertinoSecondaryLabelBrush}"
+													Foreground="{StaticResource CupertinoSecondarySystemBackgroundBrush}" />
+									<ContentControl Content="CupertinoTertiaryLabelBrush"
+													Background="{StaticResource CupertinoTertiaryLabelBrush}"
+													Foreground="{StaticResource CupertinoTertiarySystemBackgroundBrush}" />
+									<ContentControl Content="CupertinoQuaternaryLabelBrush"
+													Background="{StaticResource CupertinoQuaternaryLabelBrush}"
+													Foreground="{StaticResource CupertinoTertiarySystemBackgroundBrush}" />
+									<ContentControl Content="CupertinoSystemFillBrush"
+													Background="{StaticResource CupertinoSystemFillBrush}"
+													Foreground="{StaticResource CupertinoLabelBrush}" />
+									<ContentControl Content="CupertinoSecondarySystemFillBrush"
+													Background="{StaticResource CupertinoSecondarySystemFillBrush}"
+													Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
+									<ContentControl Content="CupertinoTertiarySystemFillBrush"
+													Background="{StaticResource CupertinoTertiarySystemFillBrush}"
+													Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
+									<ContentControl Content="CupertinoQuaternarySystemFillBrush"
+													Background="{StaticResource CupertinoQuaternarySystemFillBrush}"
+													Foreground="{StaticResource CupertinoQuaternaryLabelBrush}" />
+									<ContentControl Content="CupertinoSystemBackgroundBrush"
+													Background="{StaticResource CupertinoSystemBackgroundBrush}"
+													Foreground="{StaticResource CupertinoLabelBrush}" />
+									<ContentControl Content="CupertinoSecondarySystemBackgroundBrush"
+													Background="{StaticResource CupertinoSecondarySystemBackgroundBrush}"
+													Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
+									<ContentControl Content="CupertinoTertiarySystemBackgroundBrush"
+													Background="{StaticResource CupertinoTertiarySystemBackgroundBrush}"
+													Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
+									<ContentControl Content="CupertinoSystemGroupedBackgroundBrush"
+													Background="{StaticResource CupertinoSystemGroupedBackgroundBrush}"
+													Foreground="{StaticResource CupertinoLabelBrush}" />
+									<ContentControl Content="CupertinoSecondarySystemGroupedBackgroundBrush"
+													Background="{StaticResource CupertinoSecondarySystemGroupedBackgroundBrush}"
+													Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
+									<ContentControl Content="CupertinoTertiarySystemGroupedBackgroundBrush"
+													Background="{StaticResource CupertinoTertiarySystemGroupedBackgroundBrush}"
+													Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
+									<ContentControl Content="CupertinoSeparatorBrush"
+													Background="{StaticResource CupertinoSeparatorBrush}"
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+									<ContentControl Content="CupertinoOpaqueSeparatorBrush"
+													Background="{StaticResource CupertinoOpaqueSeparatorBrush}"
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+									<ContentControl Content="CupertinoLinkBrush"
+													Background="{StaticResource CupertinoLinkBrush}"
+													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
 								</StackPanel>
 							</Grid>
 						</ScrollViewer>
