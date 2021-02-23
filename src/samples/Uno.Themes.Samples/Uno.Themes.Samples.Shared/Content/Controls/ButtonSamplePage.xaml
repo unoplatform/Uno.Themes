@@ -18,40 +18,40 @@
 						<!-- Button Contained -->
 						<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Contained">
 							<Button Content="CONTAINED"
-						Style="{StaticResource MaterialContainedButtonStyle}" />
+									Style="{StaticResource MaterialContainedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Contained Disabled -->
 						<smtx:XamlDisplay UniqueKey="ButtonSamplePage_ContainedDisabled">
 							<Button Content="CONTAINED DISABLED"
-						IsEnabled="False"
-						Style="{StaticResource MaterialContainedButtonStyle}" />
+									IsEnabled="False"
+									Style="{StaticResource MaterialContainedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Outlined -->
 						<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Outline">
 							<Button Content="OUTLINED"
-						Style="{StaticResource MaterialOutlinedButtonStyle}" />
+									Style="{StaticResource MaterialOutlinedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Outlined Disabled -->
 						<smtx:XamlDisplay UniqueKey="ButtonSamplePage_OutlineDisabled">
 							<Button Content="OUTLINED DISABLED"
-						IsEnabled="False"
-						Style="{StaticResource MaterialOutlinedButtonStyle}" />
+									IsEnabled="False"
+									Style="{StaticResource MaterialOutlinedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Text -->
 						<smtx:XamlDisplay UniqueKey="ButtonSamplePage_Text">
 							<Button Content="TEXT"
-						Style="{StaticResource MaterialTextButtonStyle}" />
+									Style="{StaticResource MaterialTextButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Text Disabled -->
 						<smtx:XamlDisplay UniqueKey="ButtonSamplePage_TextDisabled">
 							<Button Content="TEXT DISABLED"
-						IsEnabled="False"
-						Style="{StaticResource MaterialTextButtonStyle}" />
+									IsEnabled="False"
+									Style="{StaticResource MaterialTextButtonStyle}" />
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
@@ -59,6 +59,33 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<!-- Button Default -->
+						<Button Content="DEFAULT"
+								Style="{StaticResource CupertinoDefaultButtonStyle}"
+								Margin="5"/>
+						<!-- Button Default Disabled -->
+						<Button Content="DISABLED"
+								IsEnabled="False"
+								Style="{StaticResource CupertinoDefaultButtonStyle}"
+								Margin="5" />
+						<!-- Button Contained -->
+						<Button Content="CONTAINED"
+								Style="{StaticResource CupertinoContainedButtonStyle}"
+								Margin="5" />
+						<!-- Button Contained Disabled-->
+						<Button Content="DISABLED"
+								IsEnabled="False"
+								Style="{StaticResource CupertinoContainedButtonStyle}"
+								Margin="5" />
+						<!-- Button Outlined -->
+						<Button Content="OUTLINED"
+								Style="{StaticResource CupertinoOutlinedButtonStyle}"
+								Margin="5" />
+						<!-- Button Outlined Disabled-->
+						<Button Content="DISABLED"
+								IsEnabled="False"
+								Style="{StaticResource CupertinoOutlinedButtonStyle}"
+								Margin="5" />
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
