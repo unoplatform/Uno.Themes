@@ -28,12 +28,8 @@
 		<Compile Update="**\*.xaml.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
-		<Content Include="Assets\MaterialDeterminate.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Assets\MaterialIndeterminate.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+		<Content Include="Assets\MaterialDeterminate.json"/>
+		<Content Include="Assets\MaterialIndeterminate.json"/>
 		<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 	</ItemGroup>
 	<ItemGroup>
