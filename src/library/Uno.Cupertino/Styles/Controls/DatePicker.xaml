@@ -7,26 +7,29 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm not_win">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Converters.xaml" />
+		<ResourceDictionary Source="../Application/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
 
-	<FontFamily x:Key="MaterialDatePickerFlyoutPresenterFontFamily">Roboto</FontFamily>
-	<x:Double x:Key="MaterialDateTimeFlyoutBorderThickness">1</x:Double>
+	<FontFamily x:Key="CupertinoDatePickerFlyoutPresenterFontFamily">SF Pro</FontFamily>
+	<x:Double x:Key="CupertinoDateTimeFlyoutBorderThickness">1</x:Double>
 	<x:Double x:Key="MaterialDatePickerSpacerThemeWidth">1</x:Double>
-	<StaticResource x:Key="MaterialDatePickerFlyoutPresenterBackgroundBrush"
-					ResourceKey="MaterialSurfaceBrush" />
 	<Thickness x:Key="MaterialDatePickerHostPadding">24,24,8,8</Thickness>
 
-	<StaticResource x:Key="MaterialDatePickerFlyoutPresenterBorderBrush"
-					ResourceKey="MaterialOnSurfaceFocusedBrush" />
-	<SolidColorBrush x:Key="MaterialDatePickerFlyoutPresenterHighlightFill"
-					 Opacity="0.20"
-					 Color="{ThemeResource MaterialPrimaryColor}" />
+	<SolidColorBrush x:Key="CupertinoDatePickerFlyoutPresenterHighlightFill"
+					 Color="{ThemeResource CupertinoQuinaryGrayColor}" />
 	<x:Double x:Key="MaterialDatePickerFlyoutElevation">8</x:Double>
 	<StaticResource x:Key="MaterialDatePickerFlyoutPresenterSpacerFill"
 					ResourceKey="MaterialOnSurfaceFocusedBrush" />
+	<SolidColorBrush x:Key="CupertinoDatePickerBorderBrush"
+					 Opacity="0.2"
+					 Color="{ThemeResource LabelColor}" />
 
+	<CornerRadius x:Key="CupertinoDatePickerCornerRadius">5</CornerRadius>
 
 	<!-- DatePicker Style -->
-	<Style x:Key="DatePickerFlyoutButtonStyle"
+	<Style x:Key="CupertinoDatePickerFlyoutButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Background"
@@ -74,7 +77,7 @@
 		</Setter>
 	</Style>
 
-	<not_win:Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
+	<not_win:Style x:Key="CupertinoDatePickerFlyoutPresenterStyle"
 				   TargetType="DatePickerFlyoutPresenter">
 		<Setter Property="Width"
 				Value="296" />
@@ -85,26 +88,26 @@
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialDatePickerFlyoutPresenterFontFamily}" />
+				Value="{StaticResource CupertinoDatePickerFlyoutPresenterFontFamily}" />
 		<Setter Property="FontWeight"
 				Value="Normal" />
 		<Setter Property="FontSize"
 				Value="{ThemeResource ControlContentThemeFontSize}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialDatePickerFlyoutPresenterBackgroundBrush}" />
+				Value="{ThemeResource SystemBackgroundColor}" />
 		<Setter Property="AutomationProperties.AutomationId"
 				Value="DatePickerFlyoutPresenter" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource MaterialDateTimeFlyoutBorderThickness}" />
+				Value="{StaticResource CupertinoDateTimeFlyoutBorderThickness}" />
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource MaterialDatePickerFlyoutPresenterBorderBrush}" />
+				Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
 		<Setter Property="CornerRadius"
-				Value="{ThemeResource OverlayCornerRadius}" />
+				Value="6" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
 					<toolkit:ElevatedView MaxHeight="398"
-										  Background="{TemplateBinding Background}"
+										  Background="{StaticResource CupertinoQuinaryGrayBrush}"
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  BorderThickness="{TemplateBinding BorderThickness}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
@@ -114,9 +117,46 @@
 							<Grid x:Name="ContentPanel">
 
 								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
 									<RowDefinition Height="*" />
 								</Grid.RowDefinitions>
-								<Grid x:Name="PickerHostGrid">
+								<Grid x:Name="AcceptDismissHostGrid"
+									  Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
+									  Background="{TemplateBinding Background}">
+
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<Rectangle Grid.ColumnSpan="3"
+											   Height="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
+											   VerticalAlignment="Bottom"
+											   Fill="{ThemeResource CupertinoOpaqueSeparatorBrush}" />
+									<Button x:Name="DismissButton"
+											x:Uid="DatePickerFlyoutDismissButton"
+											Grid.Column="0"
+											Margin="12,0,0,0"
+											Content="Cancel"
+											Style="{StaticResource CupertinoButtonStyle}" />
+									<TextBlock x:Name="DatePickerFlyoutHeader"
+											   Grid.Column="1"
+											   x:Uid="DatePickerFlyoutDismissButton"
+											   Text="Enter Date"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center"
+											   FontWeight="Bold"
+											   Style="{StaticResource BodyTextBlockStyle}" />
+									<Button x:Name="AcceptButton"
+											x:Uid="DatePickerFlyoutAcceptButton"
+											Grid.Column="2"
+											Margin="0,0,12,0"
+											Content="Done"
+											Style="{StaticResource CupertinoButtonStyle}" />
+								</Grid>
+								<Grid x:Name="PickerHostGrid"
+									  Grid.Row="1"
+									  Background="{TemplateBinding Background}">
 
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition x:Name="DayColumn"
@@ -134,49 +174,23 @@
 											   Grid.Column="0"
 											   Grid.ColumnSpan="5"
 											   Height="{ThemeResource DatePickerFlyoutPresenterHighlightHeight}"
+											   Margin="6,0,6,0"
 											   VerticalAlignment="Center"
-											   Fill="{ThemeResource MaterialDatePickerFlyoutPresenterHighlightFill}" />
+											   Fill="{ThemeResource CupertinoDatePickerFlyoutPresenterHighlightFill}"
+											   RadiusX="6"
+											   RadiusY="6" />
 									<Rectangle x:Name="FirstPickerSpacing"
 											   Grid.Column="1"
-											   Width="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
+											   Width="0"
 											   HorizontalAlignment="Center"
-											   Fill="{ThemeResource MaterialDatePickerFlyoutPresenterSpacerFill}" />
+											   Fill="{ThemeResource CupertinoOpaqueSeparatorBrush}" />
 									<Rectangle x:Name="SecondPickerSpacing"
 											   Grid.Column="3"
-											   Width="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
+											   Width="0"
 											   HorizontalAlignment="Center"
-											   Fill="{ThemeResource MaterialDatePickerFlyoutPresenterSpacerFill}" />
+											   Fill="{ThemeResource CupertinoOpaqueSeparatorBrush}" />
 								</Grid>
-								<Grid x:Name="AcceptDismissHostGrid"
-									  Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
-									  VerticalAlignment="Bottom"
-									  Background="{TemplateBinding Background}">
 
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="Auto" />
-										<ColumnDefinition Width="Auto" />
-									</Grid.ColumnDefinitions>
-									<Rectangle Height="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
-											   VerticalAlignment="Top"
-											   Grid.ColumnSpan="3"
-											   Fill="{ThemeResource MaterialDatePickerFlyoutPresenterSpacerFill}" />
-
-
-									<Button x:Name="DismissButton"
-											x:Uid="DatePickerFlyoutDismissButton"
-											Grid.Column="1"
-											HorizontalAlignment="Right"
-											Content="CANCEL"
-											Style="{StaticResource MaterialTextButtonStyle}" />
-
-									<Button x:Name="AcceptButton"
-											x:Uid="DatePickerFlyoutAcceptButton"
-											Grid.Column="2"
-											HorizontalAlignment="Right"
-											Content="OK"
-											Style="{StaticResource MaterialTextButtonStyle}" />
-								</Grid>
 							</Grid>
 						</Border>
 					</toolkit:ElevatedView>
@@ -185,23 +199,21 @@
 		</Setter>
 	</not_win:Style>
 
-	<Style x:Key="MaterialDatePickerStyle"
+	<Style x:Key="CupertinoDatePickerStyle"
 		   TargetType="DatePicker">
 
 		<Setter Property="Background"
-				Value="{StaticResource TextBoxFilledBackgroundColorBrush}" />
+				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource CupertinoLabelBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource CupertinoDatePickerBorderBrush}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
-		<Setter Property="Height"
-				Value="53" />
 		<Setter Property="CornerRadius"
-				Value="4,4,0,0" />
+				Value="{StaticResource CupertinoDatePickerCornerRadius}" />
 		<not_win:Setter Property="FlyoutPresenterStyle"
-						Value="{StaticResource MaterialDatePickerFlyoutPresenterStyle}" />
+						Value="{StaticResource CupertinoDatePickerFlyoutPresenterStyle}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -209,56 +221,52 @@
 
 					<!-- Root Grid -->
 					<Grid x:Name="LayoutRoot">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<!-- Header -->
+						<TextBlock x:Name="HeaderTextBlock"
+								   Margin="0,8,10,0"
+								   HorizontalAlignment="Stretch"
+								   VerticalAlignment="Top"
+								   Foreground="{TemplateBinding Foreground}"
+								   Style="{StaticResource BodyTextBlockStyle}"
+								   Text="{TemplateBinding Header}"
+								   TextWrapping="Wrap" />
 						<!-- Flyout Button -->
 						<Button x:Name="FlyoutButton"
+								Grid.Row="1"
 								HorizontalAlignment="Stretch"
 								HorizontalContentAlignment="Stretch"
 								IsEnabled="{TemplateBinding IsEnabled}"
-								Style="{StaticResource DatePickerFlyoutButtonStyle}"
+								Style="{StaticResource CupertinoDatePickerFlyoutButtonStyle}"
 								UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}">
 
-							<Grid Height="{TemplateBinding Height}"
+							<Grid x:Name="FlyoutButtonContentGrid"
+								  VerticalAlignment="Top"
 								  Background="{TemplateBinding Background}"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="1"
 								  CornerRadius="{TemplateBinding CornerRadius}">
 
-								<!-- Border -->
-								<Rectangle x:Name="BottomBorder"
-										   Height="2"
-										   VerticalAlignment="Bottom"
-										   Fill="{TemplateBinding BorderBrush}" />
+								<!-- DateText -->
+								<TextBlock x:Name="DateText"
+										   Margin="10,0,0,0"
+										   Style="{StaticResource BodyTextBlockStyle}"
+										   Text="{Binding Date, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0:d}'}" />
 
-								<!-- Header -->
-								<TextBlock x:Name="HeaderTextBlock"
-										   Margin="10,8,10,0"
-										   HorizontalAlignment="Stretch"
-										   VerticalAlignment="Top"
-										   Foreground="{TemplateBinding Foreground}"
-										   Style="{StaticResource MaterialCaption}"
+								<!-- PlaceholderText -->
+								<TextBlock x:Name="PlaceholderText"
+										   Margin="10,0,0,0"
+										   Foreground="{StaticResource CupertinoPlaceholderTextBrush}"
+										   Style="{StaticResource BodyTextBlockStyle}"
 										   Text="{TemplateBinding Header}"
-										   TextWrapping="Wrap" />
+										   Visibility="Collapsed" />
 
-								<Grid x:Name="FlyoutButtonContentGrid"
-									  Height="24"
-									  Margin="6,24,10,0"
-									  VerticalAlignment="Top">
-
-									<!-- DateText -->
-									<TextBlock x:Name="DateText"
-											   Style="{StaticResource MaterialBody2}"
-											   Text="{Binding Date, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0:d}'}" />
-
-									<!-- PlaceholderText -->
-									<TextBlock x:Name="PlaceholderText"
-											   Margin="4,0,0,0"
-											   Foreground="{StaticResource MaterialOnSurfaceLowBrush}"
-											   Style="{StaticResource MaterialBody2}"
-											   Text="{TemplateBinding Header}"
-											   Visibility="Collapsed" />
-
-									<!-- Removing this cause trouble with the DatePicker code -->
-									<TextBlock x:Name="DayTextBlock"
-											   Opacity="0" />
-								</Grid>
+								<!-- Removing this cause trouble with the DatePicker code -->
+								<TextBlock x:Name="DayTextBlock"
+										   Opacity="0" />
 							</Grid>
 						</Button>
 
@@ -271,8 +279,6 @@
 										<Setter Target="DateText.Foreground"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 										<Setter Target="HeaderTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="BottomBorder.Fill"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
