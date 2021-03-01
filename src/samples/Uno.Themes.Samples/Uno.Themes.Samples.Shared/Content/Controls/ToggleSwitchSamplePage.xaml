@@ -107,6 +107,51 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+
+						<!-- Primary -->
+						<TextBlock Text="ToggleSwitch"
+								   Style="{StaticResource TertiaryTitleTextBlockStyle}"
+								   Margin="12,16,12,20" />
+						
+						<!-- ToggleSwitch No Label -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_NoLabel"
+										  Margin="12,0">
+							<ToggleSwitch Style="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- ToggleSwitch OFF -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_Off"
+										  Margin="12,0">
+							<ToggleSwitch Header="OFF"
+										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}"
+										  IsOn="False" />
+						</smtx:XamlDisplay>
+
+						<!-- ToggleSwitch ON -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_On"
+										  Margin="12,0">
+							<ToggleSwitch Header="ON"
+										  IsOn="True"
+										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- ToggleSwitch OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_OffDisabled"
+										  Margin="12,0">
+							<ToggleSwitch Header="OFF DISABLED"
+										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}"
+										  IsEnabled="False"
+										  IsOn="False" />
+						</smtx:XamlDisplay>
+
+						<!-- ToggleSwitch ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_OnDisabled"
+										  Margin="12,0">
+							<ToggleSwitch Header="ON DISABLED"
+										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}"
+										  IsEnabled="False"
+										  IsOn="True" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
