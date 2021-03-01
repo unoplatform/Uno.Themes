@@ -27,7 +27,6 @@ namespace Uno.Cupertino
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/TextBox.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/ToggleSwitch.xaml") });
 
-
 		}
 	}
 }
