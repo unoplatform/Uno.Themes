@@ -1,0 +1,364 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:converters="using:Uno.Cupertino.Converters"
+					xmlns:controls="using:Uno.Cupertino.Controls"
+					xmlns:toolkit="using:Uno.UI.Toolkit">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<SolidColorBrush x:Key="CupertinoSliderTrackBrush"
+					 Color="{ThemeResource CupertinoPrimaryGrayColor}" />
+	<SolidColorBrush x:Key="CupertinoSliderThumbBrush"
+					 Color="{ThemeResource CupertinoWhiteColor}" />
+	<SolidColorBrush x:Key="CupertinoSliderActiveTrackBrush"
+					 Color="{ThemeResource CupertinoBlueColor}" />
+
+	<Color x:Key="CupertinoThumbShadowColor">#AEAEB2</Color>
+	
+	<StaticResource x:Key="CupertinoSliderTickBarFill"
+					ResourceKey="CupertinoPrimaryGrayColor" />
+	<StaticResource x:Key="CupertinoSliderTickBarFillDisabled"
+					ResourceKey="CupertinoTertiaryGrayColor" />
+
+	<StaticResource x:Key="CupertinoSliderInlineTickBarFill"
+					ResourceKey="CupertinoBlueColor" />
+
+	<StaticResource x:Key="CupertinoSliderBackgroundDisabled"
+					ResourceKey="CupertinoQuaternaryGrayColor" />
+	<StaticResource x:Key="CupertinoSliderThumbBackgroundDisabled"
+					ResourceKey="CupertinoWhiteColor" />
+
+	<!-- Cupertino Slider Thumb Style -->
+	<Style x:Key="CupertinoSliderThumbStyle"
+		   TargetType="Thumb">
+
+		<Setter Property="BorderThickness"
+				Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Thumb">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="10" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Cupertino Slider Style -->
+	<Style x:Key="CupertinoSliderStyle"
+		   TargetType="Slider">
+
+		<Setter Property="Background"
+				Value="{StaticResource CupertinoSliderTrackBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource CupertinoSliderActiveTrackBrush}" />
+		<Setter Property="BorderThickness"
+				Value="0" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource ContentControlThemeFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource ControlContentThemeFontSize}" />
+		<Setter Property="ManipulationMode"
+				Value="None" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin"
+				Value="-7,0,-7,0" />
+		<Setter Property="IsFocusEngagementEnabled"
+				Value="True" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource ControlCornerRadius}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Slider">
+
+					<Grid Margin="{TemplateBinding Padding}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Pressed" />
+
+								<VisualState x:Name="Disabled">
+									<Storyboard>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderBackgroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderBackgroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderThumbBackgroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderThumbBackgroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+
+								<VisualState x:Name="PointerOver" />
+
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusEngagementStates">
+								<VisualState x:Name="FocusDisengaged" />
+
+								<VisualState x:Name="FocusEngagedHorizontal">
+
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="False" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="True" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+
+								<VisualState x:Name="FocusEngagedVertical">
+
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="False" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="True" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<!-- SliderContainer -->
+						<Grid x:Name="SliderContainer"
+							  Background="Transparent"
+							  Control.IsTemplateFocusTarget="True"
+							  Grid.Row="1">
+
+							<!-- HorizontalTemplate -->
+							<Grid x:Name="HorizontalTemplate"
+								  MinHeight="34">
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="15" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="15" />
+								</Grid.RowDefinitions>
+
+								<!-- HorizontalTrackRect -->
+								<Rectangle x:Name="HorizontalTrackRect"
+										   Fill="{TemplateBinding Background}"
+										   Height="4"
+										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
+										   Grid.Row="1"
+										   Grid.ColumnSpan="3" />
+
+								<!-- HorizontalDecreaseRect -->
+								<Rectangle x:Name="HorizontalDecreaseRect"
+										   Fill="{TemplateBinding Foreground}"
+										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
+										   Grid.Row="1" />
+
+								<!-- TopTickBar -->
+								<TickBar x:Name="TopTickBar"
+										 Visibility="Collapsed"
+										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Height="4"
+										 VerticalAlignment="Bottom"
+										 Margin="0,0,0,4"
+										 Grid.ColumnSpan="3" />
+
+								<!-- HorizontalInlineTickBar -->
+								<TickBar x:Name="HorizontalInlineTickBar"
+										 Visibility="Collapsed"
+										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
+										 Height="4"
+										 Grid.Row="1"
+										 Grid.ColumnSpan="3" />
+
+								<!-- BottomTickBar -->
+								<TickBar x:Name="BottomTickBar"
+										 Visibility="Collapsed"
+										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Height="4"
+										 VerticalAlignment="Top"
+										 Margin="0,4,0,0"
+										 Grid.Row="2"
+										 Grid.ColumnSpan="3" />
+
+								<!-- HorizontalThumb -->
+								<toolkit:ElevatedView Grid.Row="0"
+													  Grid.RowSpan="3"
+													  Grid.Column="1"
+													  Width="28"
+													  Height="28"
+													  Background="Transparent"
+													  CornerRadius="14"
+													  Elevation="2"
+													  ShadowColor="{StaticResource CupertinoThumbShadowColor}">
+									<Thumb x:Name="HorizontalThumb"
+										   Style="{StaticResource CupertinoSliderThumbStyle}"
+										   Background="{StaticResource CupertinoSliderThumbBrush}"
+										   DataContext="{TemplateBinding Value}"
+										   Height="28"
+										   Width="28"
+										   FocusVisualMargin="-14,-6,-14,-6"
+										   AutomationProperties.AccessibilityView="Raw"/>
+								</toolkit:ElevatedView>
+							</Grid>
+
+							<!-- VerticalTemplate -->
+							<Grid x:Name="VerticalTemplate"
+								  MinWidth="32"
+								  Visibility="Collapsed">
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="15" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="15" />
+								</Grid.ColumnDefinitions>
+
+								<!-- VerticalTrackRect -->
+								<Rectangle x:Name="VerticalTrackRect"
+										   Fill="{TemplateBinding Background}"
+										   Width="4"
+										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
+										   Grid.Column="1"
+										   Grid.RowSpan="3" />
+
+								<!-- VerticalDecreaseRect -->
+								<Rectangle x:Name="VerticalDecreaseRect"
+										   Fill="{TemplateBinding Foreground}"
+										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
+										   Grid.Column="1"
+										   Grid.Row="2" />
+
+								<!-- LeftTickBar -->
+								<TickBar x:Name="LeftTickBar"
+										 Visibility="Collapsed"
+										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Width="4"
+										 HorizontalAlignment="Right"
+										 Margin="0,0,4,0"
+										 Grid.RowSpan="3" />
+
+								<!-- VerticalInlineTickBar -->
+								<TickBar x:Name="VerticalInlineTickBar"
+										 Visibility="Collapsed"
+										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
+										 Width="4"
+										 Grid.Column="1"
+										 Grid.RowSpan="3" />
+
+								<!-- RightTickBar -->
+								<TickBar x:Name="RightTickBar"
+										 Visibility="Collapsed"
+										 Fill="{StaticResource CupertinoSliderTickBarFill}"
+										 Width="4"
+										 HorizontalAlignment="Left"
+										 Margin="4,0,0,0"
+										 Grid.Column="2"
+										 Grid.RowSpan="3" />
+
+								<!-- VerticalThumb -->
+								<toolkit:ElevatedView Grid.Row="1"
+													  Grid.Column="0"
+													  Grid.ColumnSpan="3"
+													  Width="28"
+													  Height="28"
+													  Background="Transparent"
+													  CornerRadius="14"
+													  Elevation="2"
+													  ShadowColor="{StaticResource CupertinoThumbShadowColor}">
+									<Thumb x:Name="VerticalThumb"
+									   Style="{StaticResource CupertinoSliderThumbStyle}"
+									   Background="{StaticResource CupertinoSliderThumbBrush}"
+									   DataContext="{TemplateBinding Value}"
+									   Width="28"
+									   Height="28"
+									   FocusVisualMargin="-6,-14,-6,-14"
+									   AutomationProperties.AccessibilityView="Raw" />
+								</toolkit:ElevatedView>
+							</Grid>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="CupertinoSecondarySliderStyle"
+		   BasedOn="{StaticResource CupertinoSliderStyle}"
+		   TargetType="Slider">
+
+		<Setter Property="Foreground"
+				Value="{StaticResource CupertinoSecondaryBrush}" />
+	</Style>
+</ResourceDictionary>
