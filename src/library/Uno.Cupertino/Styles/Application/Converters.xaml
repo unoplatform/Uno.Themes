@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:converters="using:Uno.Cupertino.Converters">
+
+	<converters:FromEmptyStringToValueConverter x:Key="CupertinoEmptyToFalse"
+												NotNullOrEmptyValue="True"
+												NullOrEmptyValue="False" />
+
+	<converters:FromEmptyStringToValueConverter x:Key="CupertinoEmptyToTrue"
+												NotNullOrEmptyValue="False"
+												NullOrEmptyValue="True" />
+
+	<converters:FromNullToValueConverter x:Key="CupertinoNullToCollapsedConverter"
+										 NotNullValue="Visible"
+										 NullValue="Collapsed" />
+
+</ResourceDictionary>
