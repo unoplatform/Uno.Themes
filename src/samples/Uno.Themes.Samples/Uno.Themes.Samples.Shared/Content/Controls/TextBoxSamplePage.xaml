@@ -18,14 +18,14 @@
 					<StackPanel>
 
 						<!-- Default -->
-						<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_1"
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_1"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- TexBox With Header -->
-						<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_2"
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_2"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled"
 									 Header="Header"
@@ -33,7 +33,7 @@
 						</smtx:XamlDisplay>
 
 						<!-- TexBox Disabled -->
-						<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_3"
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_3"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Disabled"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}"
@@ -41,7 +41,7 @@
 						</smtx:XamlDisplay>
 
 						<!-- TexBox Outline -->
-						<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_4"
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_4"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined"
 									 Header="Header"
@@ -49,7 +49,7 @@
 						</smtx:XamlDisplay>
 
 						<!-- TexBox Outline Disabled -->
-						<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_5"
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_5"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined Disabled"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
@@ -57,7 +57,7 @@
 						</smtx:XamlDisplay>
 
 						<!-- TextBox MultiLine -->
-						<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_6"
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_6"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
 									 PlaceholderText="MultiLine Filled"
@@ -67,7 +67,7 @@
 						</smtx:XamlDisplay>
 
 						<!-- TexBox Icon -->
-						<smtx:XamlDisplay UniqueKey="TextBoxSamplePage_7"
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_7"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled with Icon"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}">
@@ -82,6 +82,41 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+
+						<!-- Default Single Line -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_TextBoxSamplePage_DefaultSingleLine"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource CupertinoDefaultTextBoxStyle}"
+									 PlaceholderText="Placeholder single line" />
+						</smtx:XamlDisplay>
+
+						<!-- Default Multi Line -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_TextBoxSamplePage_DefaultMultiLine"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource CupertinoDefaultTextBoxStyle}"
+									 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pretium augue ut lectus consequat lobortis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque suscipit, diam eu aliquet egestas, dolor sem mattis tortor, eu congue augue ipsum et nulla."
+									 VerticalContentAlignment="Top"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True"
+									 PlaceholderText="Placeholder multi line" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled Empty -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_TextBoxSamplePage_DisabledEmpty"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource CupertinoDefaultTextBoxStyle}"
+									 PlaceholderText="Placeholder"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+						
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_TextBoxSamplePage_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource CupertinoDefaultTextBoxStyle}"
+									 PlaceholderText="Placeholder"
+									 Text="This is my text"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>

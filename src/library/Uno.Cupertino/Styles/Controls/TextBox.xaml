@@ -2,14 +2,22 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:macos="http://uno.ui/macos"
-					xmlns:extensions="using:Uno.Material.Extensions"
-					mc:Ignorable="d macos">
+					mc:Ignorable="d">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
+		<ResourceDictionary Source="../Application/StateConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
+
+	<SolidColorBrush x:Key="CupertinoTextBoxBorderBrush"
+					 Color="{ThemeResource LabelColor}"
+					 Opacity="0.2" />
+
+	<SolidColorBrush x:Key="CupertinoDeleteButtonTextBoxBrush"
+					 Color="{ThemeResource LabelColor}"
+					 Opacity="0.2" />
+
+	<CornerRadius x:Key="CupertinoTextBoxCornerRadius">5</CornerRadius>
 
 	<!-- TODO : Update when design is ready -->
 	<x:String x:Key="ClearGlyphPathData">M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z</x:String>
@@ -38,13 +46,137 @@
 
 						<Path x:Name="GlyphElement"
 							  Data="{StaticResource ClearGlyphPathData}"
-							  Fill="Black"
+							  Fill="{StaticResource CupertinoDeleteButtonTextBoxBrush}"
 							  VerticalAlignment="Center"
 							  HorizontalAlignment="Center"
 							  Stretch="Uniform"
-							  Width="16"
-							  Height="16"
+							  Width="18"
+							  Height="18"
 							  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="CupertinoDefaultTextBoxStyle"
+		   TargetType="TextBox">
+
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="Foreground"
+				Value="{StaticResource CupertinoLabelBrush}" />
+		<Setter Property="PlaceholderForeground"
+				Value="{StaticResource CupertinoTextBoxBorderBrush}" />
+		<Setter Property="BorderThickness"
+				Value="1" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource CupertinoTextBoxBorderBrush}" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource CupertinoTextBoxCornerRadius}" />
+
+		<Setter Property="HorizontalContentAlignment"
+				Value="Left" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Padding"
+				Value="10" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TextBox">
+					<Grid x:Name="Root">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed" />
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentBorder.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="ContentElement.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Focused" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="ButtonStates">
+								<VisualState x:Name="ButtonVisible">
+									<VisualState.Setters>
+										<Setter Target="DeleteButton.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="ButtonCollapsed" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="HeaderStates">
+								<VisualState x:Name="NotEmpty" />
+								<VisualState x:Name="Empty">
+									<VisualState.Setters>
+										<Setter Target="PlaceholderElement.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource CupertinoEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="ContentBorder"
+								Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<Grid Margin="{TemplateBinding Padding}">
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+							
+							<ScrollViewer x:Name="ContentElement"
+										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+										  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+										  IsTabStop="False"
+										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  ZoomMode="Disabled"
+										  AutomationProperties.AccessibilityView="Raw">
+								<ScrollViewer.RenderTransform>
+									<CompositeTransform x:Name="ContentElement_CompositeTransform" />
+								</ScrollViewer.RenderTransform>
+							</ScrollViewer>
+
+							<TextBlock x:Name="PlaceholderElement"
+									   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									   IsHitTestVisible="False"
+									   RenderTransformOrigin="0,0.5"
+									   Text="{TemplateBinding PlaceholderText}"
+									   TextAlignment="{TemplateBinding TextAlignment}"
+									   TextWrapping="{TemplateBinding TextWrapping}"
+									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									   Opacity="0" />
+
+							<Button x:Name="DeleteButton"
+									Grid.Column="1"
+									Foreground="{TemplateBinding BorderBrush}"
+									IsTabStop="False"
+									Style="{StaticResource DeleteButtonStyle}"
+									VerticalAlignment="Center"
+									Visibility="Collapsed"
+									AutomationProperties.AccessibilityView="Raw" />
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

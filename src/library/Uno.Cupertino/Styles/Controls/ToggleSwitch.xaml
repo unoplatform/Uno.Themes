@@ -13,6 +13,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
+		<ResourceDictionary Source="../Application/StateConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Toggle On -->
@@ -63,19 +64,19 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleBackground"
 																	   Storyboard.TargetProperty="Opacity">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="0.5" />
+																	Value="{StaticResource CupertinoDisableStateOpacity}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff"
 																	   Storyboard.TargetProperty="Opacity">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="0.5" />
+																	Value="{StaticResource CupertinoDisableStateOpacity}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
 																	   Storyboard.TargetProperty="Opacity">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="0.5" />
+																	Value="{StaticResource CupertinoDisableStateOpacity}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
