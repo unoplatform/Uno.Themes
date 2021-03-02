@@ -29,6 +29,12 @@
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Styles\Controls\CheckBox.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Controls\CheckBox.xaml" />
+	</ItemGroup>
   <ItemGroup>
 		<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
 		<Compile Update="**\*.xaml.cs">
