@@ -10,6 +10,7 @@
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios">
 
+	<!-- Material/Cupertino ToggleSwitch styles for WASM are present in the Styles/ToggleSwitch.xaml file of the shared project as a workaround for https://github.com/unoplatform/uno/issues/5372-->
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
@@ -116,14 +117,14 @@
 						<!-- ToggleSwitch No Label -->
 						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_NoLabel"
 										  Margin="12,0">
-							<ToggleSwitch Style="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
+							<ToggleSwitch Style="{StaticResource CupertinoToggleSwitchStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- ToggleSwitch OFF -->
 						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_Off"
 										  Margin="12,0">
 							<ToggleSwitch Header="OFF"
-										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}"
+										  Style="{StaticResource CupertinoToggleSwitchStyle}"
 										  IsOn="False" />
 						</smtx:XamlDisplay>
 
@@ -132,14 +133,14 @@
 										  Margin="12,0">
 							<ToggleSwitch Header="ON"
 										  IsOn="True"
-										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
+										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- ToggleSwitch OFF Disabled -->
 						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_OffDisabled"
 										  Margin="12,0">
 							<ToggleSwitch Header="OFF DISABLED"
-										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}"
+										  Style="{StaticResource CupertinoToggleSwitchStyle}"
 										  IsEnabled="False"
 										  IsOn="False" />
 						</smtx:XamlDisplay>
@@ -148,7 +149,7 @@
 						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_OnDisabled"
 										  Margin="12,0">
 							<ToggleSwitch Header="ON DISABLED"
-										  Style="{StaticResource DefaultCupertinoToggleSwitchStyle}"
+										  Style="{StaticResource CupertinoToggleSwitchStyle}"
 										  IsEnabled="False"
 										  IsOn="True" />
 						</smtx:XamlDisplay>

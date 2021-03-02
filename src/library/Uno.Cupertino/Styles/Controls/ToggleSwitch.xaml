@@ -21,7 +21,7 @@
 	<SolidColorBrush x:Key="CupertinoToggleSwitchOnBackgroundBrush"
 					 Color="{ThemeResource CupertinoGreenColor}" />
 
-	<Style x:Key="BaseToggleSwitchStyle"
+	<Style x:Key="DefaultCupertinoToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
 
 		<Setter Property="Foreground"
@@ -343,34 +343,34 @@
 		</Setter>
 	</Style>
 
-	<win:Style x:Key="DefaultCupertinoToggleSwitchStyle"
+	<win:Style x:Key="CupertinoToggleSwitchStyle"
 			   TargetType="ToggleSwitch"
-			   BasedOn="{StaticResource BaseToggleSwitchStyle}">
+			   BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}">
 
 		<Setter Property="CornerRadius"
 				Value="14" />
 
 	</win:Style>
 
-	<wasm:Style x:Key="DefaultCupertinoToggleSwitchStyle"
+	<wasm:Style x:Key="CupertinoToggleSwitchStyle"
 				TargetType="ToggleSwitch"
-				BasedOn="{StaticResource BaseToggleSwitchStyle}">
+				BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}">
 
 		<Setter Property="CornerRadius"
 				Value="14" />
 
 	</wasm:Style>
 
-	<android:Style x:Key="DefaultCupertinoToggleSwitchStyle"
+	<android:Style x:Key="CupertinoToggleSwitchStyle"
 				   TargetType="ToggleSwitch"
-				   BasedOn="{StaticResource BaseToggleSwitchStyle}" />
+				   BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
 
-	<ios:Style x:Key="DefaultCupertinoToggleSwitchStyle"
+	<ios:Style x:Key="CupertinoToggleSwitchStyle"
 			   TargetType="ToggleSwitch"
-			   BasedOn="{StaticResource BaseToggleSwitchStyle}" />
+			   BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
 
-	<macos:Style x:Key="DefaultCupertinoToggleSwitchStyle"
+	<macos:Style x:Key="CupertinoToggleSwitchStyle"
 				 TargetType="ToggleSwitch"
-				 BasedOn="{StaticResource BaseToggleSwitchStyle}" />
+				 BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
 
 </ResourceDictionary>
