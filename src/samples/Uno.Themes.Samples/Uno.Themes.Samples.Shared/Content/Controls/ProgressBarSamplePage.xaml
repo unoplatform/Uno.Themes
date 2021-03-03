@@ -20,7 +20,7 @@
 						<TextBlock Text="Slider to Set ProgressBar"
 								   Margin="0,10,0,0" />
 
-						<Slider x:Name="progressSlider"
+						<Slider x:Name="Material_ProgressSlider"
 								Minimum="0"
 								Maximum="100"
 								HorizontalAlignment="Left"
@@ -30,9 +30,9 @@
 						<!-- Primary ProgressBar Text -->
 						<TextBlock Text="Primary ProgressBar" />
 
-						<smtx:XamlDisplay UniqueKey="ProgressBarSamplePage_Primary">
+						<smtx:XamlDisplay UniqueKey="Material_ProgressBarSamplePage_Primary">
 							<winui:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
-											   Value="{Binding Value, ElementName=progressSlider}"
+											   Value="{Binding Value, ElementName=Material_ProgressSlider}"
 											   Minimum="0"
 											   Maximum="100" />
 						</smtx:XamlDisplay>
@@ -40,9 +40,9 @@
 						<!-- Secondary ProgressBar Text -->
 						<TextBlock Text="Secondary ProgressBar" />
 
-						<smtx:XamlDisplay UniqueKey="ProgressBarSamplePage_Secondary">
+						<smtx:XamlDisplay UniqueKey="Material_ProgressBarSamplePage_Secondary">
 							<winui:ProgressBar Style="{StaticResource MaterialSecondaryProgressBarStyle}"
-											   Value="{Binding Value, ElementName=progressSlider}"
+											   Value="{Binding Value, ElementName=Material_ProgressSlider}"
 											   Minimum="0"
 											   Maximum="100" />
 						</smtx:XamlDisplay>
@@ -50,7 +50,7 @@
 						<!-- Indeterminate Primary ProgressBar Text -->
 						<TextBlock Text="Indeterminate Primary ProgressBar" />
 
-						<smtx:XamlDisplay UniqueKey="ProgressBarSamplePage_PrimaryIndeterminate">
+						<smtx:XamlDisplay UniqueKey="Material_ProgressBarSamplePage_PrimaryIndeterminate">
 							<winui:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
 											   IsIndeterminate="True" />
 						</smtx:XamlDisplay>
@@ -58,7 +58,7 @@
 						<!-- Indeterminate Secondary ProgressBar Text -->
 						<TextBlock Text="Indeterminate Secondary ProgressBar" />
 
-						<smtx:XamlDisplay UniqueKey="ProgressBarSamplePage_SecondaryIndeterminate">
+						<smtx:XamlDisplay UniqueKey="Material_ProgressBarSamplePage_SecondaryIndeterminate">
 							<winui:ProgressBar Style="{StaticResource MaterialSecondaryProgressBarStyle}"
 											   IsIndeterminate="True" />
 						</smtx:XamlDisplay>
@@ -68,6 +68,35 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+
+						<!-- Slider Text -->
+						<TextBlock Text="Slider to Set ProgressBar"
+								   Margin="0,10,0,0" />
+
+						<Slider x:Name="Cupertino_ProgressSlider"
+								Minimum="0"
+								Maximum="100"
+								HorizontalAlignment="Left"
+								Width="250"
+								Margin="0,10" />
+
+						<!-- Primary ProgressBar Text -->
+						<TextBlock Text="Primary ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Cupertino_ProgressBarSamplePage_Primary">
+							<winui:ProgressBar Style="{StaticResource CupertinoProgressBarStyle}"
+											   Value="{Binding Value, ElementName=Cupertino_ProgressSlider}"
+											   Minimum="0"
+											   Maximum="100" />
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate Primary ProgressBar Text -->
+						<TextBlock Text="Indeterminate Primary ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Cupertino_ProgressBarSamplePage_PrimaryIndeterminate">
+							<winui:ProgressBar Style="{StaticResource CupertinoProgressBarStyle}"
+											   IsIndeterminate="True" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
