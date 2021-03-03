@@ -10,31 +10,31 @@
     configFilePath: 'build/gitversion.yml'
   displayName: 'Calculate SemVer'
 
-- task: NuGetCommand@2
-  displayName: 'Restore NuGet packages'
+- task: UseDotNet@2
+  condition: eq(variables['IsCanaryBranch'], true)
   inputs:
-    command: restore
+    packageType: runtime
+    version: 2.2.x
+
+- task: nventiveCanaryUpdater@5
+  condition: eq(variables['IsCanaryBranch'], true)
+  inputs:
     solution: Uno.Themes.sln
-    feedsToUse: 'config'
-    nugetConfigPath: 'nuget.config'
-    verbosityRestore: Normal
-    noCache: true
+    useNuGetOrg: true
+    usePrivateFeed: false
+    mergeBranch: true
+    branchToMerge: master
+    nugetUpdaterVersion: 2.1.1
+    packageAuthor: nventive
 
 - task: MSBuild@1
   displayName: 'Build solution in Release | $(ApplicationPlatform)'
   inputs:
     solution: Uno.Themes.sln
-    msbuildLocationMethod: version
-    msbuildVersion: latest
-    msbuildArchitecture: x86
     configuration: Release
     platform: $(ApplicationPlatform)
-    clean: false
     maximumCpuCount: true
-    restoreNugetPackages: false
-    logProjectEvents: false
-    createLogFile: false
-    msbuildArguments: /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch)
+    msbuildArguments: /ds /r /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch) /p:RestoreConfigFile=$(Build.SourcesDirectory)\nuget.config
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifact'
