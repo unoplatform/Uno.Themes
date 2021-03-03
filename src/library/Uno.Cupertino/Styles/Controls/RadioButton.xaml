@@ -6,8 +6,7 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm">
 
-	<GridLength x:Key="RadioCheckAreaLength">30</GridLength>
-	<x:Double x:Key="RadioFocusAreaSize">30</x:Double>
+	<GridLength x:Key="RadioCheckAreaLength">22</GridLength>
 	<x:Double x:Key="RadioCheckAreaSize">22</x:Double>
 	<x:Double x:Key="RadioBorderThickness">1</x:Double>
 
@@ -22,9 +21,9 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource CupertinoLabelBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource CupertinoBlueBrush}" />
+				Value="{StaticResource RadioButtonBorderBrush}" />
 		<Setter Property="Padding"
-				Value="4,0,0,0" />
+				Value="9,0,0,0" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"
@@ -36,7 +35,7 @@
 		<Setter Property="MinWidth"
 				Value="120" />
 		<Setter Property="MinHeight"
-				Value="{StaticResource CheckAreaSize}" />
+				Value="{StaticResource RadioCheckAreaSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="False" />
 
@@ -93,16 +92,6 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<Ellipse x:Name="PressRing"
-								 HorizontalAlignment="Center"
-								 VerticalAlignment="Center"
-								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource CupertinoLabelBrush}"
-								 IsHitTestVisible="False"
-								 Opacity="0" />
-
 						<Grid Height="{StaticResource RadioCheckAreaSize}"
 							  Width="{StaticResource RadioCheckAreaSize}">
 
@@ -111,7 +100,7 @@
 									 VerticalAlignment="Stretch"
 									 Stretch="Uniform"
 									 UseLayoutRounding="False"
-									 Stroke="{TemplateBinding Background}"
+									 Stroke="{TemplateBinding BorderBrush}"
 									 StrokeThickness="{StaticResource RadioBorderThickness}"
 									 Opacity="0" />
 
@@ -131,7 +120,7 @@
 									 Fill="{TemplateBinding Background}"
 									 Opacity="0"
 									 StrokeThickness="0"
-									 Margin="4" />
+									 Margin="3" />
 						</Grid>
 
 						<ContentPresenter x:Name="ContentPresenter"
