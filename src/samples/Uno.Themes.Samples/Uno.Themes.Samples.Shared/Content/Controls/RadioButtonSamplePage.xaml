@@ -95,6 +95,39 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+
+						<!-- RadioButton OFF -->
+						<smtx:XamlDisplay UniqueKey="CupertinoRadioButtonSamplePage_Unchecked">
+							<RadioButton GroupName="Primary_a"
+										 Content="UNCHECKED"
+										 Style="{StaticResource CupertinoRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON -->
+						<smtx:XamlDisplay UniqueKey="CupertinoRadioButtonSamplePage_Checked">
+							<RadioButton GroupName="Primary_a"
+										 Content="CHECKED"
+										 Style="{StaticResource CupertinoRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="CupertinoRadioButtonSamplePage_UncheckedDisabled">
+							<RadioButton GroupName="Primary_b"
+										 Content="UNCHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource CupertinoRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="CupertinoRadioButtonSamplePage_CheckedDisabled">
+							<RadioButton GroupName="Primary_b"
+										 Content="CHECKED DISABLED"
+										 IsChecked="True"
+										 IsEnabled="False"
+										 Style="{StaticResource CupertinoRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
