@@ -91,6 +91,13 @@ namespace Uno.Themes.Samples
 						root.RequestedTheme = ElementTheme.Light;
 						break;
 				}
+
+				if (NavigationViewControl.PaneDisplayMode == MUXC.NavigationViewPaneDisplayMode.LeftMinimal)
+				{
+					// Close navigation view when changing the theme
+					// to allow the user to see the difference between the themes.
+					NavigationViewControl.IsPaneOpen = false;
+				}
 			}
 		}
 
