@@ -71,9 +71,9 @@
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource CupertinoDisabledOpacity}" />
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource CupertinoDisabledOpacity}" />
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -142,9 +142,9 @@
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource CupertinoDisabledOpacity}" />
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource CupertinoDisabledOpacity}" />
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity"
 												Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity"
@@ -252,12 +252,12 @@
 								  Background="{ThemeResource CupertinoSystemBackgroundBrush}"
 								  BorderBrush="{TemplateBinding BorderBrush}"
 								  BorderThickness="{TemplateBinding BorderThickness}"
-								  CornerRadius="4" />
+								  CornerRadius="{StaticResource CheckAreaCornerRadius}" />
 
 							<Grid x:Name="CheckedBackgroundBorder"
 								  Background="{TemplateBinding Background}"
 								  Opacity="0"
-								  CornerRadius="4" />
+								  CornerRadius="{StaticResource CheckAreaCornerRadius}" />
 
 							<Path x:Name="HyphenGlyph"
 								  Data="{StaticResource HyphenGlyphPathStyle}"
