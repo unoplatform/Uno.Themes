@@ -4,8 +4,26 @@
                     xmlns:ios="http://uno.ui/ios"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:not_win="http://uno.ui/not_win"
+                    xmlns:toolkit="using:Uno.UI.Toolkit"
                     xmlns:wasm="http://uno.ui/wasm"
                     mc:Ignorable="ios android wasm not_win">
+
+	<FontFamily x:Key="MaterialDatePickerFlyoutPresenterFontFamily">Roboto</FontFamily>
+	<x:Double x:Key="MaterialDateTimeFlyoutBorderThickness">1</x:Double>
+	<x:Double x:Key="MaterialDatePickerSpacerThemeWidth">1</x:Double>
+	<StaticResource x:Key="MaterialDatePickerFlyoutPresenterBackgroundBrush"
+	                ResourceKey="MaterialSurfaceBrush" />
+	<Thickness x:Key="MaterialDatePickerHostPadding">24,24,8,8</Thickness>
+
+	<StaticResource x:Key="MaterialDatePickerFlyoutPresenterBorderBrush"
+	                ResourceKey="MaterialOnSurfaceFocusedBrush" />
+	<SolidColorBrush x:Key="MaterialDatePickerFlyoutPresenterHighlightFill"
+	                 Opacity="0.20"
+	                 Color="{ThemeResource MaterialPrimaryColor}" />
+	<x:Double x:Key="MaterialDatePickerFlyoutElevation">8</x:Double>
+	<StaticResource x:Key="MaterialDatePickerFlyoutPresenterSpacerFill"
+	                ResourceKey="MaterialOnSurfaceFocusedBrush" />
+
 
 	<!--  DatePicker Style  -->
 	<Style x:Key="DatePickerFlyoutButtonStyle"
@@ -58,82 +76,110 @@
 
 	<not_win:Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
 	               TargetType="DatePickerFlyoutPresenter">
+		<Setter Property="Width"
+		        Value="296" />
+		<Setter Property="MinWidth"
+		        Value="296" />
+		<Setter Property="MaxHeight"
+		        Value="398" />
+		<Setter Property="IsTabStop"
+		        Value="False" />
+		<Setter Property="FontFamily"
+		        Value="{StaticResource MaterialDatePickerFlyoutPresenterFontFamily}" />
+		<Setter Property="FontWeight"
+		        Value="Normal" />
+		<Setter Property="FontSize"
+		        Value="{ThemeResource ControlContentThemeFontSize}" />
+		<Setter Property="Background"
+		        Value="{StaticResource MaterialDatePickerFlyoutPresenterBackgroundBrush}" />
+		<Setter Property="AutomationProperties.AutomationId"
+		        Value="DatePickerFlyoutPresenter" />
+		<Setter Property="BorderThickness"
+		        Value="{StaticResource MaterialDateTimeFlyoutBorderThickness}" />
+		<Setter Property="BorderBrush"
+		        Value="{ThemeResource MaterialDatePickerFlyoutPresenterBorderBrush}" />
+		<Setter Property="CornerRadius"
+		        Value="{ThemeResource OverlayCornerRadius}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
-					<Border x:Name="Background"
-					        MaxHeight="398"
-					        Padding="{ThemeResource DateTimeFlyoutBorderPadding}"
-					        Background="{TemplateBinding Background}"
-					        BorderBrush="{TemplateBinding BorderBrush}"
-					        BorderThickness="{TemplateBinding BorderThickness}"
-					        CornerRadius="{TemplateBinding CornerRadius}">
-						<Grid x:Name="ContentPanel">
+					<toolkit:ElevatedView MaxHeight="398"
+					                      Background="{TemplateBinding Background}"
+					                      BorderBrush="{TemplateBinding BorderBrush}"
+					                      BorderThickness="{TemplateBinding BorderThickness}"
+					                      CornerRadius="{TemplateBinding CornerRadius}"
+					                      Elevation="{StaticResource MaterialDatePickerFlyoutElevation}"
+					                      ShadowColor="Black">
+						<Border x:Name="Background">
+							<Grid x:Name="ContentPanel">
 
-							<Grid.RowDefinitions>
-								<RowDefinition Height="*" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
-							<Grid x:Name="PickerHostGrid">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<Grid x:Name="PickerHostGrid">
 
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition x:Name="DayColumn"
-									                  Width="78*" />
-									<ColumnDefinition x:Name="FirstSpacerColumn"
-									                  Width="Auto" />
-									<ColumnDefinition x:Name="MonthColumn"
-									                  Width="132*" />
-									<ColumnDefinition x:Name="SecondSpacerColumn"
-									                  Width="Auto" />
-									<ColumnDefinition x:Name="YearColumn"
-									                  Width="78*" />
-								</Grid.ColumnDefinitions>
-								<Rectangle x:Name="HighlightRect"
-								           Grid.Column="0"
-								           Grid.ColumnSpan="5"
-								           Height="{ThemeResource DatePickerFlyoutPresenterHighlightHeight}"
-								           VerticalAlignment="Center"
-								           Fill="{ThemeResource DatePickerFlyoutPresenterHighlightFill}" />
-								<Rectangle x:Name="FirstPickerSpacing"
-								           Grid.Column="1"
-								           Width="{ThemeResource DatePickerSpacerThemeWidth}"
-								           HorizontalAlignment="Center"
-								           Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
-								<Rectangle x:Name="SecondPickerSpacing"
-								           Grid.Column="3"
-								           Width="{ThemeResource DatePickerSpacerThemeWidth}"
-								           HorizontalAlignment="Center"
-								           Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition x:Name="DayColumn"
+										                  Width="78*" />
+										<ColumnDefinition x:Name="FirstSpacerColumn"
+										                  Width="Auto" />
+										<ColumnDefinition x:Name="MonthColumn"
+										                  Width="132*" />
+										<ColumnDefinition x:Name="SecondSpacerColumn"
+										                  Width="Auto" />
+										<ColumnDefinition x:Name="YearColumn"
+										                  Width="78*" />
+									</Grid.ColumnDefinitions>
+									<Rectangle x:Name="HighlightRect"
+									           Grid.Column="0"
+									           Grid.ColumnSpan="5"
+									           Height="{ThemeResource DatePickerFlyoutPresenterHighlightHeight}"
+									           VerticalAlignment="Center"
+									           Fill="{ThemeResource MaterialDatePickerFlyoutPresenterHighlightFill}" />
+									<Rectangle x:Name="FirstPickerSpacing"
+									           Grid.Column="1"
+									           Width="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
+									           HorizontalAlignment="Center"
+									           Fill="{ThemeResource MaterialDatePickerFlyoutPresenterSpacerFill}" />
+									<Rectangle x:Name="SecondPickerSpacing"
+									           Grid.Column="3"
+									           Width="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
+									           HorizontalAlignment="Center"
+									           Fill="{ThemeResource MaterialDatePickerFlyoutPresenterSpacerFill}" />
+								</Grid>
+								<Grid x:Name="AcceptDismissHostGrid"
+								      Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
+								      VerticalAlignment="Bottom"
+								      Background="{TemplateBinding Background}">
+
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<Rectangle Height="{ThemeResource MaterialDatePickerSpacerThemeWidth}"
+									           VerticalAlignment="Top"
+											   Grid.ColumnSpan="3"
+									           Fill="{ThemeResource MaterialDatePickerFlyoutPresenterSpacerFill}" />
+
+
+									<Button x:Name="DismissButton"
+									        x:Uid="DatePickerFlyoutDismissButton"
+									        Grid.Column="1"
+									        HorizontalAlignment="Right"
+									        Content="CANCEL"
+									        Style="{StaticResource MaterialTextButtonStyle}" />
+
+									<Button x:Name="AcceptButton"
+									        x:Uid="DatePickerFlyoutAcceptButton"
+									        Grid.Column="2"
+									        HorizontalAlignment="Right"
+									        Content="OK"
+									        Style="{StaticResource MaterialTextButtonStyle}" />
+								</Grid>
 							</Grid>
-							<Grid x:Name="AcceptDismissHostGrid"
-							      Grid.Row="1"
-							      Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}">
-
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-								<Rectangle Grid.ColumnSpan="2"
-								           Height="{ThemeResource DatePickerSpacerThemeWidth}"
-								           VerticalAlignment="Top"
-								           Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
-								<Button x:Name="DismissButton"
-								        Grid.Column="0"
-								        HorizontalAlignment="Left"
-								        Content="Cancel"
-								        Foreground="{ThemeResource MaterialPrimaryBrush}" />
-
-								<Button x:Name="AcceptButton"
-								        Grid.Column="1"
-								        HorizontalAlignment="Right"
-								        Content="Done"
-								        FontWeight="Bold"
-								        Foreground="{ThemeResource MaterialPrimaryBrush}" />
-							</Grid>
-
-						</Grid>
-					</Border>
-
+						</Border>
+					</toolkit:ElevatedView>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
