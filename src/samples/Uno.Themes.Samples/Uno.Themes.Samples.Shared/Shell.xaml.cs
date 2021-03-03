@@ -92,9 +92,12 @@ namespace Uno.Themes.Samples
 						break;
 				}
 
-				// Close navigation view when changing the theme
-				// to allow the user to see the difference between the themes.
-				NavigationViewControl.IsPaneOpen = false;
+				if (NavigationViewControl.PaneDisplayMode == MUXC.NavigationViewPaneDisplayMode.LeftMinimal)
+				{
+					// Close navigation view when changing the theme
+					// to allow the user to see the difference between the themes.
+					NavigationViewControl.IsPaneOpen = false;
+				}
 			}
 		}
 
