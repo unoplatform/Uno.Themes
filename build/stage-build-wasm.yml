@@ -1,30 +1,30 @@
-﻿  steps:
-  - bash: |
-      cd ~
-      git clone --branch 1.39.11 https://github.com/emscripten-core/emsdk
-      cd emsdk
-      ./emsdk install sdk-1.39.11
-      ./emsdk activate sdk-1.39.11
-    displayName: 'Setup Emscripten'
+﻿steps:
+- task: UseGitVersion@5
+  inputs:
+    versionSpec: '5.x'
+    useConfigFile: true
+    configFilePath: 'build/gitversion.yml'
+    updateAssemblyInfo: 'False'
 
-  - task: UseGitVersion@5
-    inputs:
-      versionSpec: '5.x'
-      useConfigFile: true
-      configFilePath: 'build/gitversion.yml'
-      updateAssemblyInfo: 'False'
+- task: UseDotNet@2
+  condition: eq(variables['IsCanaryBranch'], true)
+  inputs:
+    packageType: runtime
+    version: 2.2.x
 
-  - bash: |
-      source ~/emsdk/emsdk_env.sh
-      msbuild /r /p:Configuration=Release /p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
+- task: nventiveCanaryUpdater@5
+  condition: eq(variables['IsCanaryBranch'], true)
+  inputs:
+    solution: Uno.Themes.sln
+    useNuGetOrg: true
+    usePrivateFeed: false
+    mergeBranch: true
+    branchToMerge: master
+    nugetUpdaterVersion: 2.1.1
+    packageAuthor: nventive
 
-  - task: CopyFiles@2
-    displayName: 'Copy version information'
-    inputs:
-      Contents: src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Version.txt
-      TargetFolder: $(build.artifactstagingdirectory)
-      flattenFolders: true
-    
-  - task: PublishBuildArtifacts@1
-    inputs:
-      ArtifactName: $(ArtifactName)
+- bash: dotnet msbuild -r -p:Configuration=Release -p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    ArtifactName: $(ArtifactName)
