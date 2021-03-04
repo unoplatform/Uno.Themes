@@ -16,19 +16,12 @@
 					 Color="{ThemeResource CupertinoBlueColor}" />
 
 	<Color x:Key="CupertinoThumbShadowColor">#AEAEB2</Color>
-	
+
 	<StaticResource x:Key="CupertinoSliderTickBarFill"
 					ResourceKey="CupertinoPrimaryGrayColor" />
-	<StaticResource x:Key="CupertinoSliderTickBarFillDisabled"
-					ResourceKey="CupertinoTertiaryGrayColor" />
 
 	<StaticResource x:Key="CupertinoSliderInlineTickBarFill"
 					ResourceKey="CupertinoBlueColor" />
-
-	<StaticResource x:Key="CupertinoSliderBackgroundDisabled"
-					ResourceKey="CupertinoQuaternaryGrayColor" />
-	<StaticResource x:Key="CupertinoSliderThumbBackgroundDisabled"
-					ResourceKey="CupertinoWhiteColor" />
 
 	<!-- Cupertino Slider Thumb Style -->
 	<Style x:Key="CupertinoSliderThumbStyle"
@@ -85,52 +78,28 @@
 								<VisualState x:Name="Pressed" />
 
 								<VisualState x:Name="Disabled">
-									<Storyboard>
-
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect"
-																	   Storyboard.TargetProperty="Fill">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderBackgroundDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect"
-																	   Storyboard.TargetProperty="Fill">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderBackgroundDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
-																	   Storyboard.TargetProperty="Background">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderThumbBackgroundDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
-																	   Storyboard.TargetProperty="Background">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderThumbBackgroundDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar"
-																	   Storyboard.TargetProperty="Fill">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar"
-																	   Storyboard.TargetProperty="Fill">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar"
-																	   Storyboard.TargetProperty="Fill">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar"
-																	   Storyboard.TargetProperty="Fill">
-											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource CupertinoSliderTickBarFillDisabled}" />
-										</ObjectAnimationUsingKeyFrames>
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="HorizontalTrackRect.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="HorizontalDecreaseRect.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="TopTickBar.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="HorizontalInlineTickBar.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="BottomTickBar.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="VerticalTrackRect.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="VerticalDecreaseRect.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="LeftTickBar.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="VerticalInlineTickBar.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+										<Setter Target="RightTickBar.Opacity"
+												Value="{StaticResource CupertinoDisableStateOpacity}" />
+									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOver" />
