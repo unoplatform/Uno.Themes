@@ -24,6 +24,7 @@ namespace Uno.Cupertino
 			// Add all ResourceDictionaries for Controls here in alphabetical order
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/Button.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/CheckBox.xaml") });
+			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/HyperlinkButton.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/ProgressBar.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/Slider.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/TextBlock.xaml") });
