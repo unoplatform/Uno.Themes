@@ -52,6 +52,8 @@
 				Value="{ThemeResource MaterialButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
+		<Setter Property="FontWeight"
+				Value="SemiBold" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -149,6 +151,7 @@
 										 CornerRadius="{TemplateBinding CornerRadius}"
 										 FontFamily="{TemplateBinding FontFamily}"
 										 FontSize="{TemplateBinding FontSize}"
+										 FontWeight="{TemplateBinding FontWeight}"
 										 Padding="{TemplateBinding Padding}"
 										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -189,6 +192,8 @@
 				Value="{StaticResource MaterialButtonFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource MaterialButtonFontSize}" />
+		<Setter Property="FontWeight"
+				Value="SemiBold" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 
@@ -294,6 +299,7 @@
 										 CornerRadius="{StaticResource MaterialButtonCornerRadius}"
 										 FontFamily="{TemplateBinding FontFamily}"
 										 FontSize="{TemplateBinding FontSize}"
+										 FontWeight="{TemplateBinding FontWeight}"
 										 Padding="{TemplateBinding Padding}"
 										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -329,6 +335,8 @@
 				Value="{ThemeResource MaterialButtonFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{ThemeResource MaterialButtonFontSize}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 		<Setter Property="Template">
@@ -430,6 +438,7 @@
 										 CornerRadius="{StaticResource MaterialButtonCornerRadius}"
 										 FontFamily="{TemplateBinding FontFamily}"
 										 FontSize="{TemplateBinding FontSize}"
+										 FontWeight="{TemplateBinding FontWeight}"
 										 Padding="{TemplateBinding Padding}"
 										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -496,10 +505,12 @@
 										   Text="See Style"
 										   Foreground="{StaticResource MaterialPrimaryBrush}"
 										   FontSize="10"
+										   FontWeight="{TemplateBinding FontWeight}"
 										   Margin="12,0" />
 
 						<not_win:ContentPresenter x:Name="ContentPresenter_NotWin"
 												  Content="{TemplateBinding Content}"
+												  FontWeight="{TemplateBinding FontWeight}"
 												  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 												  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 												  AutomationProperties.AccessibilityView="Raw"
