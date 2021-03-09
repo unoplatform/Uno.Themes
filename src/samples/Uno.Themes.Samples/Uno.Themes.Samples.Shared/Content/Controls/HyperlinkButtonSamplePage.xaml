@@ -21,10 +21,20 @@
 								   Style="{StaticResource MaterialSubtitle2}"
 								   Margin="12,16,12,4" />
 
-						<!-- Slider Vertical -->
-						<smtx:XamlDisplay UniqueKey="SliderSamplePage_Default">
+						<!-- HyperlinkButton -->
+						<smtx:XamlDisplay UniqueKey="Material_HyperlinkButtonSamplePage">
 
 							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource MaterialHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
+						
+						<!-- HyperlinkButton Disabled -->
+						<smtx:XamlDisplay UniqueKey="Material_HyperlinkButtonSamplePage_Disabled">
+
+							<HyperlinkButton Content="Uno Platform"
+											 IsEnabled="False"
 											 NavigateUri="https://platform.uno/"
 											 Style="{StaticResource MaterialHyperlinkButtonStyle}"
 											 Margin="12,0" />
@@ -35,10 +45,20 @@
 								   Style="{StaticResource MaterialSubtitle2}"
 								   Margin="12,16,12,4" />
 
-						<!-- Slider Vertical -->
-						<smtx:XamlDisplay UniqueKey="SliderSamplePage_Secondary">
+						<!-- HyperlinkButton -->
+						<smtx:XamlDisplay UniqueKey="Material_HyperlinkButtonSamplePage_Secondary">
 
 							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource MaterialSecondaryHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
+						
+						<!-- HyperlinkButton Disabled -->
+						<smtx:XamlDisplay UniqueKey="Material_HyperlinkButtonSamplePage_SecondaryDisabled">
+
+							<HyperlinkButton Content="Uno Platform"
+											 IsEnabled="False"
 											 NavigateUri="https://platform.uno/"
 											 Style="{StaticResource MaterialSecondaryHyperlinkButtonStyle}"
 											 Margin="12,0" />
@@ -49,6 +69,24 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<!-- HyperlinkButton -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_HyperlinkButtonSamplePage">
+
+							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource CupertinoHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
+
+						<!-- HyperlinkButton Disabled -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_HyperlinkButtonSamplePage_Disabled">
+
+							<HyperlinkButton Content="Uno Platform"
+											 IsEnabled="False"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource CupertinoHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
