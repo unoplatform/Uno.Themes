@@ -15,8 +15,6 @@
 	<SolidColorBrush x:Key="CupertinoSliderActiveTrackBrush"
 					 Color="{ThemeResource CupertinoBlueColor}" />
 
-	<Color x:Key="CupertinoThumbShadowColor">#993c3c43</Color>
-
 	<StaticResource x:Key="CupertinoSliderTickBarFill"
 					ResourceKey="CupertinoPrimaryGrayColor" />
 
@@ -223,7 +221,8 @@
 													  Background="Transparent"
 													  CornerRadius="14"
 													  Elevation="3"
-													  ShadowColor="{StaticResource CupertinoThumbShadowColor}">
+													  ShadowColor="{StaticResource ShadowColor}">
+
 									<Thumb x:Name="HorizontalThumb"
 										   Style="{StaticResource CupertinoSliderThumbStyle}"
 										   Background="{StaticResource CupertinoSliderThumbBrush}"
@@ -304,8 +303,8 @@
 													  Height="28"
 													  Background="Transparent"
 													  CornerRadius="14"
-													  Elevation="2"
-													  ShadowColor="{StaticResource CupertinoThumbShadowColor}">
+													  Elevation="3"
+													  ShadowColor="{StaticResource ShadowColor}">
 									<Thumb x:Name="VerticalThumb"
 									   Style="{StaticResource CupertinoSliderThumbStyle}"
 									   Background="{StaticResource CupertinoSliderThumbBrush}"
