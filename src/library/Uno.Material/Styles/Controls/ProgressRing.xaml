@@ -12,34 +12,42 @@
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 		<win:ResourceDictionary>
 			<lottie:LottieVisualSource x:Key="MaterialDeterminateAnimation"
-	                           UriSource="ms-appx:///Uno.Material/Assets/MaterialDeterminate.json"  />
+			                           UriSource="ms-appx:///Uno.Material/Assets/MaterialDeterminate.json" />
 			<lottie:LottieVisualSource x:Key="MaterialIndeterminateAnimation"
-	                           UriSource="ms-appx:///Uno.Material/Assets/MaterialIndeterminate.json" />
+			                           UriSource="ms-appx:///Uno.Material/Assets/MaterialIndeterminate.json" />
 		</win:ResourceDictionary>
 		<not_win:ResourceDictionary>
 			<lottie:LottieVisualSource x:Key="MaterialDeterminateAnimation"
-	                           UriSource="ms-appx:///MaterialDeterminate.json"  />
+			                           UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialDeterminate.json" />
 			<lottie:LottieVisualSource x:Key="MaterialIndeterminateAnimation"
-	                           UriSource="ms-appx:///MaterialIndeterminate.json" />
+			                           UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialIndeterminate.json" />
 		</not_win:ResourceDictionary>
 	</ResourceDictionary.MergedDictionaries>
 
-	
+
 
 	<Style x:Key="MaterialProgressRingStyle"
 	       TargetType="winui:ProgressRing">
-		<Setter Property="DeterminateSource" Value="{StaticResource MaterialDeterminateAnimation}" />
-		<Setter Property="IndeterminateSource" Value="{StaticResource MaterialIndeterminateAnimation}" />
-		<Setter Property="Foreground" Value="{StaticResource MaterialPrimaryBrush}" />
-		<Setter Property="Background" Value="{StaticResource MaterialPrimaryLowBrush}" />
+		<Setter Property="DeterminateSource"
+		        Value="{StaticResource MaterialDeterminateAnimation}" />
+		<Setter Property="IndeterminateSource"
+		        Value="{StaticResource MaterialIndeterminateAnimation}" />
+		<Setter Property="Foreground"
+		        Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="Background"
+		        Value="{StaticResource MaterialPrimaryLowBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialSecondaryProgressRingStyle"
 	       TargetType="winui:ProgressRing">
-		<Setter Property="DeterminateSource" Value="{StaticResource MaterialDeterminateAnimation}" />
-		<Setter Property="IndeterminateSource" Value="{StaticResource MaterialIndeterminateAnimation}" />
-		<Setter Property="Foreground" Value="{StaticResource MaterialSecondaryBrush}" />
-		<Setter Property="Background" Value="{StaticResource MaterialSecondaryLowBrush}" />
+		<Setter Property="DeterminateSource"
+		        Value="{StaticResource MaterialDeterminateAnimation}" />
+		<Setter Property="IndeterminateSource"
+		        Value="{StaticResource MaterialIndeterminateAnimation}" />
+		<Setter Property="Foreground"
+		        Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Background"
+		        Value="{StaticResource MaterialSecondaryLowBrush}" />
 	</Style>
 
 </ResourceDictionary>

@@ -1182,21 +1182,12 @@
 
 							<VisualStateGroup x:Name="AutoSuggestGroup">
 								<VisualState x:Name="AutoSuggestBoxVisible" />
-								<VisualState x:Name="AutoSuggestBoxCollapsed">
-									<VisualState.Setters>
-										<Setter Target="AutoSuggestArea.Visibility" Value="Collapsed" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="AutoSuggestBoxCollapsed" />
 							</VisualStateGroup>
 
 							<VisualStateGroup x:Name="PaneStateGroup">
 								<VisualState x:Name="NotClosedCompact" />
-								<VisualState x:Name="ClosedCompact">
-									<VisualState.Setters>
-										<Setter Target="PaneAutoSuggestBoxPresenter.Visibility" Value="Collapsed" />
-										<Setter Target="PaneAutoSuggestButton.Visibility" Value="Visible" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="ClosedCompact" />
 							</VisualStateGroup>
 
 							<VisualStateGroup x:Name="PaneStateListSizeGroup">
@@ -1205,9 +1196,8 @@
 									<VisualState.Setters>
 										<Setter Target="PaneContentGrid.Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CompactPaneLength}" />
 										<Setter Target="PaneTitleTextBlock.Visibility" Value="Collapsed" />
-										<Setter Target="PaneHeaderContentBorder.Visibility" Value="Collapsed" />
-										<Setter Target="PaneCustomContentBorder.HorizontalAlignment" Value="Left" />
-										<Setter Target="FooterContentBorder.HorizontalAlignment" Value="Left" />
+										<Setter Target="PaneHeaderContentBorder.Visibility"
+												Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -1278,25 +1268,16 @@
 										  BorderThickness="{StaticResource NavigationViewPaneBorderThickness}"
 										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
 										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="0" />
-											<!-- above button margin + back button space -->
 											<RowDefinition x:Name="PaneContentGridToggleButtonRow"
 														   Height="Auto"
 														   MinHeight="{StaticResource NavigationViewPaneHeaderRowMinHeight}" />
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="Auto" />
 											<RowDefinition Height="8" />
 											<!-- above list margin -->
 											<RowDefinition x:Name="ItemsContainerRow"
 														   Height="*" />
 										</Grid.RowDefinitions>
 
-										<Grid x:Name="ContentPaneTopPadding"
-											  Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPadding}" />
-
-										<Grid Grid.Row="2"
-											  x:Name="PaneHeaderContentBorderWrapper"
+										<Grid x:Name="PaneHeaderContentBorderWrapper"
 											  MinHeight="{StaticResource NavigationViewPaneHeaderRowMinHeight}">
 											<!-- TODO: Uno specific: MinHeight and x:Name used here as RowDefinifiont.MinHeight does not work (issue #4727) -->
 											<Grid.RowDefinitions>
@@ -1316,84 +1297,21 @@
 															Grid.Column="2" />
 										</Grid>
 
-										<Grid x:Name="AutoSuggestArea"
-											  Grid.Row="3"
-											  Height="{ThemeResource NavigationViewTopPaneHeight}"
-											  VerticalAlignment="Center">
-
-											<ContentControl x:Name="PaneAutoSuggestBoxPresenter"
-															Margin="{ThemeResource NavigationViewAutoSuggestBoxMargin}"
-															IsTabStop="False"
-															HorizontalContentAlignment="Stretch"
-															VerticalContentAlignment="Center" />
-
-											<Button x:Name="PaneAutoSuggestButton"
-													Visibility="Collapsed"
-													Style="{ThemeResource NavigationViewPaneSearchButtonStyle}"
-													Width="{TemplateBinding CompactPaneLength}" />
-										</Grid>
-
-										<ContentControl x:Name="PaneCustomContentBorder"
-														IsTabStop="False"
-														VerticalContentAlignment="Stretch"
-														HorizontalContentAlignment="Stretch"
-														Grid.Row="4" />
-
 										<!-- "Non header" content -->
-										<Grid x:Name="ItemsContainerGrid"
-											  Grid.Row="6"
-											  Margin="0,0,0,8">
-											<Grid.RowDefinitions>
-												<RowDefinition x:Name="MenuItemsRow"
-															   Height="Auto"
-															   MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}" />
-												<!-- MenuItems -->
-												<RowDefinition Height="*"
-															   MinHeight="21" />
-												<!-- Fill spacing -->
-												<RowDefinition Height="Auto" />
-												<!-- PaneFooter -->
-												<RowDefinition x:Name="FooterItemsRow"
-															   Height="Auto"
-															   MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}" />
-												<!-- FooterItems -->
-											</Grid.RowDefinitions>
-
-											<!-- MenuItems -->
-											<muxc:ItemsRepeaterScrollHost HorizontalAlignment="Stretch"
-																		  VerticalAlignment="Stretch">
-												<ScrollViewer x:Name="MenuItemsScrollViewer"
-															  TabNavigation="Local"
-															  VerticalScrollBarVisibility="Auto">
-													<!-- Left nav ItemsRepeater -->
-													<muxc:ItemsRepeater x:Name="MenuItemsHost"
-																		AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"
-																		AutomationProperties.AccessibilityView="Content" />
-												</ScrollViewer>
-											</muxc:ItemsRepeaterScrollHost>
-
-											<muxc:NavigationViewItemSeparator x:Name="VisualItemsSeparator"
-																			  Grid.Row="1"
-																			  VerticalAlignment="Center"
-																			  Visibility="Collapsed"
-																			  HorizontalAlignment="Stretch" />
-
-											<!-- PaneFooter -->
-											<ContentControl x:Name="FooterContentBorder"
-															IsTabStop="False"
-															VerticalContentAlignment="Stretch"
-															HorizontalContentAlignment="Stretch"
-															Grid.Row="2" />
-
-											<!-- FooterItems -->
-											<muxc:ItemsRepeaterScrollHost Grid.Row="3">
-												<ScrollViewer x:Name="FooterItemsScrollViewer"
-															  contract7Present:VerticalAnchorRatio="1">
-													<muxc:ItemsRepeater x:Name="FooterMenuItemsHost"
-																		AutomationProperties.AccessibilityView="Content" />
-												</ScrollViewer>
-											</muxc:ItemsRepeaterScrollHost>
-										</Grid>
+										<!-- MenuItems -->
+										<ScrollViewer x:Name="ItemsContainerGrid"
+													  Grid.Row="2"
+													  Margin="0,0,0,8"
+													  MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}"
+													  TabNavigation="Local"
+													  HorizontalAlignment="Stretch"
+													  VerticalAlignment="Stretch"
+													  VerticalScrollBarVisibility="Auto">
+											<!-- Left nav ItemsRepeater -->
+											<muxc:ItemsRepeater x:Name="MenuItemsHost"
+																AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"
+																AutomationProperties.AccessibilityView="Content" />
+										</ScrollViewer>
 									</Grid>
 								</SplitView.Pane>
 

@@ -28,9 +28,15 @@
 		<Compile Update="**\*.xaml.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
+		<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+		<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
+		<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
 		<Content Include="Assets\MaterialDeterminate.json" />
 		<Content Include="Assets\MaterialIndeterminate.json" />
-		<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 	</ItemGroup>
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
