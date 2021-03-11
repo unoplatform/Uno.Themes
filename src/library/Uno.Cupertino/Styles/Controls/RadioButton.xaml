@@ -75,8 +75,6 @@
 												Value="1" />
 										<Setter Target="UncheckEllipse.Opacity"
 												Value="0" />
-										<Setter Target="OuterEllipse_Unchecked.Opacity"
-												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -110,14 +108,6 @@
 									 StrokeThickness="{StaticResource RadioBorderCheckedThickness}"
 									 Opacity="0" />
 
-							<Ellipse x:Name="OuterEllipse_Unchecked"
-									 HorizontalAlignment="Stretch"
-									 VerticalAlignment="Stretch"
-									 Stretch="Uniform"
-									 UseLayoutRounding="False"
-									 Stroke="{StaticResource CupertinoRadioButtonBorderBrush}"
-									 StrokeThickness="{StaticResource RadioBorderThickness}" />
-
 							<Ellipse x:Name="CheckEllipse"
 									 HorizontalAlignment="Stretch"
 									 VerticalAlignment="Stretch"
@@ -127,14 +117,15 @@
 									 Opacity="0"
 									 StrokeThickness="0"
 									 Margin="6" />
-							
+
 							<Ellipse x:Name="UncheckEllipse"
 									 HorizontalAlignment="Stretch"
 									 VerticalAlignment="Stretch"
 									 Stretch="Uniform"
 									 UseLayoutRounding="False"
 									 Fill="{StaticResource RadioButtonBackgroundBrush}"
-									 StrokeThickness="0"
+									 Stroke="{StaticResource CupertinoRadioButtonBorderBrush}"
+									 StrokeThickness="{StaticResource RadioBorderThickness}"
 									 Margin="1" />
 						</Grid>
 
