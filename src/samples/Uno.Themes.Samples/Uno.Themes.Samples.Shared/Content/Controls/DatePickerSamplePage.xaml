@@ -32,6 +32,15 @@
 							            Style="{StaticResource MaterialDatePickerStyle}" />
 						</smtx:XamlDisplay>
 
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="DatePickerSamplePage_Fluent_Default">
+
+							<DatePicker x:Name="myDatePicker1"
+							            HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date" />
+						</smtx:XamlDisplay>
+						
 						<!--  Disbaled  -->
 						<TextBlock Margin="12,8,12,4"
 						           Style="{StaticResource MaterialSubtitle2}"
@@ -40,7 +49,7 @@
 						<!--  DatePicker  -->
 						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
 						                  UniqueKey="DatePickerSamplePage_Material_Disabled">
-
+							
 							<DatePicker HorizontalAlignment="Left"
 							            xamarin:UseNativeStyle="False"
 							            Header="Enter Date"
@@ -52,7 +61,17 @@
 			</sample:SamplePageLayout.MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
-					<StackPanel />
+					<StackPanel>
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="DatePickerSamplePage_Cupertino_Default">
+
+							<DatePicker x:Name="myDatePicker2"
+							            HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            Style="{StaticResource CupertinoDatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
 		</sample:SamplePageLayout>
