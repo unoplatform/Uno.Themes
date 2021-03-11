@@ -8,7 +8,7 @@
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
-
+	<FontFamily x:Key="CupertinoHyperlinkButtonFontFamily">SF Pro</FontFamily>
 	<Style x:Key="CupertinoHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
 
@@ -68,6 +68,7 @@
 											  ContentTransitions="{TemplateBinding ContentTransitions}"
 											  Content="{TemplateBinding Content}"
 											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  FontFamily="{StaticResource CupertinoHyperlinkButtonFontFamily}"
 											  VerticalAlignment="Top"
 											  TextWrapping="Wrap" />
 						</Grid>

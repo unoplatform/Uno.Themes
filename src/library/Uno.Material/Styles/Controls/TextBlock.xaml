@@ -1,12 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+	<FontFamily x:Key="MaterialFontFamily">Roboto</FontFamily>
+
 	<Style x:Key="MaterialBaseTextBlockStyle"
 		   TargetType="TextBlock">
 		<Setter Property="TextTrimming"
 				Value="CharacterEllipsis" />
 		<Setter Property="TextWrapping"
 				Value="Wrap" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 	</Style>
 
 	<!--
