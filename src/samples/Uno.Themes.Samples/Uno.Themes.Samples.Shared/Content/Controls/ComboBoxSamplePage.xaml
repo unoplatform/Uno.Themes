@@ -32,11 +32,11 @@
 										   Style="{StaticResource MaterialSubtitle1}" />
 
 								<!-- ComboBox -->
-								<smtx:XamlDisplay UniqueKey="ComboBoxSamplePage_Normal"
+								<smtx:XamlDisplay UniqueKey="Material_ComboBoxSamplePage_Normal"
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcdefg" />
+											  ItemsSource="abcdefghijklmn" />
 								</smtx:XamlDisplay>
 
 							</StackPanel>
@@ -48,11 +48,11 @@
 										   Style="{StaticResource MaterialSubtitle1}" />
 
 								<!-- ComboBox -->
-								<smtx:XamlDisplay UniqueKey="ComboBoxSamplePage_Disabled"
+								<smtx:XamlDisplay UniqueKey="Material_ComboBoxSamplePage_Disabled"
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcde"
+											  ItemsSource="abcdefghijklmn"
 											  IsEnabled="False" />
 								</smtx:XamlDisplay>
 							</StackPanel>
@@ -63,6 +63,40 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<StackPanel BorderBrush="{StaticResource CupertinoOpaqueSeparatorBrush}"
+									BorderThickness="1"
+									android:Margin="12"
+									ios:Margin="12"
+									Padding="12">
+
+							<!-- Label -->
+							<TextBlock Text="NORMAL"
+									   Style="{StaticResource TertiaryTitleTextBlockStyle}" />
+
+							<!-- ComboBox -->
+							<smtx:XamlDisplay UniqueKey="Cupertino_ComboBoxSamplePage_Normal"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<ComboBox Style="{StaticResource CupertinoComboBoxStyle}"
+										  Text="Title"
+										  PlaceholderText="Placeholder"
+										  ItemsSource="abcdefghijklmn" />
+							</smtx:XamlDisplay>
+
+							<!-- Label -->
+							<TextBlock Text="DISABLED"
+									   Margin="0,10,0,0"
+									   Style="{StaticResource TertiaryTitleTextBlockStyle}" />
+
+							<!-- ComboBox -->
+							<smtx:XamlDisplay UniqueKey="Cupertino_ComboBoxSamplePage_Disabled"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<ComboBox Style="{StaticResource CupertinoComboBoxStyle}"
+										  Text="Title"
+										  PlaceholderText="Placeholder"
+										  ItemsSource="abcdefghijklmn"
+										  IsEnabled="False" />
+							</smtx:XamlDisplay>
+						</StackPanel>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
