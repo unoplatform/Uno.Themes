@@ -16,7 +16,7 @@
 		<ResourceDictionary Source="../Application/StateConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!-- Toggle On -->
+	<!--  Toggle On  -->
 	<SolidColorBrush x:Key="CupertinoToggleSwitchOnButtonBrush"
 					 Color="{ThemeResource CupertinoWhiteColor}" />
 	<SolidColorBrush x:Key="CupertinoToggleSwitchOnBackgroundBrush"
@@ -205,8 +205,7 @@
 
 							<VisualStateGroup x:Name="ContentStates">
 								<VisualState x:Name="OffContent">
-									<Storyboard>
-									</Storyboard>
+									<Storyboard />
 								</VisualState>
 
 								<VisualState x:Name="OnContent">
@@ -248,7 +247,7 @@
 						<TextBlock Text="{TemplateBinding Header}"
 								   Style="{StaticResource CupertinoBaseTextBlockStyle}"
 								   Foreground="{StaticResource CupertinoLabelBrush}"
-								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed},TargetNullValue=Collapsed}"
+								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}"
 								   Grid.ColumnSpan="4" />
 
 						<ContentPresenter x:Name="OnContentPresenter"
@@ -267,13 +266,13 @@
 							  Grid.ColumnSpan="3"
 							  Control.IsTemplateFocusTarget="True" />
 
-						<!-- Marker element used to compute draggable zone -->
+						<!--  Marker element used to compute draggable zone  -->
 						<Rectangle x:Name="SwitchKnobBounds"
 								   Grid.Row="2" />
 
-						<Grid  x:Name="ToggleBackground"
-							   Grid.Row="2"
-							   VerticalAlignment="Center">
+						<Grid x:Name="ToggleBackground"
+							  Grid.Row="2"
+							  VerticalAlignment="Center">
 							<Rectangle x:Name="OuterBorder"
 									   Height="31"
 									   Width="51"

@@ -22,7 +22,7 @@
 			<!-- Description -->
 			<TextBlock Text="{Binding Description}"
 					   FontSize="16"
-					   Foreground="{ThemeResource SampleAppTextForegroundBrush}"
+					   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
 					   Opacity="0.8"
 					   Visibility="{Binding Description, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}"
 					   Margin="0,16,0,0" />
@@ -30,14 +30,14 @@
 			<!-- Source label -->
 			<TextBlock Text="SOURCE"
 					   FontSize="10"
-					   Foreground="{ThemeResource SampleAppTextForegroundBrush}"
+					   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
 					   Opacity="0.45"
 					   Margin="0,30,0,0" />
 
 			<!-- Source value -->
 			<TextBlock Text="{Binding Source, Converter={StaticResource EnumToDescription}}"
 					   FontSize="16"
-					   Foreground="{ThemeResource SampleAppTextForegroundBrush}"
+					   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
 					   Opacity="0.8"
 					   Margin="0,0,0,16" />
 		</StackPanel>
@@ -68,7 +68,7 @@
 								   MaxLines="1"
 								   FontSize="34"
 								   TextTrimming="CharacterEllipsis"
-								   Foreground="{ThemeResource SampleAppTextForegroundBrush}"
+								   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
 								   Margin="48,0" />
 
 						<!-- Top bar with Uno logo (visible on mobile) -->
@@ -103,7 +103,7 @@
 											   MaxLines="1"
 											   TextTrimming="CharacterEllipsis"
 											   FontSize="34"
-											   Foreground="{ThemeResource SampleAppTextForegroundBrush}"
+											   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
 											   Visibility="Collapsed" />
 
 									<!-- Header (default template contains Description and Source) -->
@@ -129,7 +129,7 @@
 												<TextBlock Text="Material"
 														   FontSize="20"
 														   FontWeight="Medium"
-														   Foreground="{ThemeResource SampleAppTextForegroundBrush}" />
+														   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
 
 												<!-- Icon -->
 												<Image Source="ms-appx:///Assets/MaterialIcon_Small.png"
@@ -152,7 +152,7 @@
 												<TextBlock Text="Cupertino"
 														   FontSize="20"
 														   FontWeight="Medium"
-														   Foreground="{ThemeResource SampleAppTextForegroundBrush}" />
+														   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
 
 												<!-- Icon -->
 												<Image Source="ms-appx:///Assets/AppleIcon_Small.png"
@@ -193,7 +193,7 @@
 														  Margin="0,48,0,36" />
 
 										<TextBlock FontSize="16"
-												   Foreground="{ThemeResource SampleAppTextForegroundBrush}"
+												   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
 												   Opacity="0.8"
 												   Margin="0,0,0,16">
 										<Run Text="For more information refer to the " />
@@ -239,7 +239,7 @@
 									<TextBlock Text="Material"
 											   FontSize="20"
 											   FontWeight="Medium"
-											   Foreground="{ThemeResource SampleAppTextForegroundBrush}" />
+											   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
 
 									<!-- Icon -->
 									<Image Source="ms-appx:///Assets/MaterialIcon_Small.png"
@@ -262,7 +262,7 @@
 									<TextBlock Text="Cupertino"
 											   FontSize="20"
 											   FontWeight="Medium"
-											   Foreground="{ThemeResource SampleAppTextForegroundBrush}" />
+											   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
 
 									<!-- Icon -->
 									<Image Source="ms-appx:///Assets/AppleIcon_Small.png"

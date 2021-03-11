@@ -56,8 +56,8 @@ namespace Uno.Themes.Samples
 		/// <param name="e">Details about the launch request and process.</param>
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
-			Uno.Material.Resources.Init(this, new ResourceDictionary() { Source = new Uri("ms-appx:///ColorPaletteOverride.xaml") });
-			Uno.Cupertino.Resources.Init(this, null);
+			Material.Resources.Init(this, colorPaletteOverride: new ResourceDictionary() { Source = new Uri("ms-appx:///ColorPaletteOverride.xaml") });
+			Cupertino.Resources.Init(this, null);
 
 #if DEBUG
 			if (System.Diagnostics.Debugger.IsAttached)

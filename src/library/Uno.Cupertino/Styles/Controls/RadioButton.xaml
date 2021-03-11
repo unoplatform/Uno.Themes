@@ -10,10 +10,11 @@
 	<x:Double x:Key="RadioCheckAreaSize">22</x:Double>
 	<x:Double x:Key="RadioBorderThickness">1</x:Double>
 	<x:Double x:Key="RadioBorderCheckedThickness">8</x:Double>
+	<FontFamily x:Key="CupertinoRadioButtonFontFamily">SF Pro</FontFamily>
 
 	<StaticResource x:Key="CupertinoRadioButtonBorderBrush"
 					ResourceKey="CupertinoPrimaryGrayBrush" />
-	
+
 	<StaticResource x:Key="CupertinoRadioButtonCheckedBrush"
 					ResourceKey="CupertinoBlueBrush" />
 
@@ -50,8 +51,7 @@
 						  Background="Transparent">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal">
-								</VisualState>
+								<VisualState x:Name="Normal" />
 
 								<VisualState x:Name="PointerOver" />
 
@@ -135,6 +135,7 @@
 										  Content="{TemplateBinding Content}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  FontFamily="{StaticResource CupertinoRadioButtonFontFamily}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  TextWrapping="Wrap"
@@ -143,14 +144,6 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
-
-	<Style x:Key="CupertinoSecondaryRadioButtonStyle"
-		   TargetType="RadioButton"
-		   BasedOn="{StaticResource CupertinoRadioButtonStyle}">
-
-		<Setter Property="Background"
-				Value="{StaticResource CupertinoSecondaryLabelBrush}" />
 	</Style>
 
 </ResourceDictionary>
