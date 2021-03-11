@@ -1,15 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:controls="using:Uno.Material.Controls"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
+					xmlns:controls="using:Uno.Material.Controls"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:ios="http://uno.ui/ios"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					mc:Ignorable="d ios android wasm not_win">
 
 	<ResourceDictionary.MergedDictionaries>
@@ -17,7 +17,7 @@
 		<ResourceDictionary Source="../Application/AnimationConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!-- Documented variables -->
+	<!--  Documented variables  -->
 	<Thickness x:Key="CupertinoButtonPadding">20</Thickness>
 	<CornerRadius x:Key="CupertinoButtonCornerRadius">8</CornerRadius>
 	<x:Double x:Key="CupertinoButtonFontSize">14</x:Double>
@@ -35,14 +35,14 @@
 	<StaticResource x:Key="CupertinoDisabledButtonBrush"
 					ResourceKey="CupertinoPrimaryGrayColor" />
 
-	<!-- Styles -->
-	<Style x:Key="CupertinoDefaultButtonStyle"
+	<!--  Styles  -->
+	<Style x:Key="CupertinoButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource CupertinoOutlinedButtonForegroundBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource CupertinoOutlinedButtonBackgroundBrush}" />
+				Value="Transparent" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Padding"
@@ -89,8 +89,8 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="ContentPresenter"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource CupertinoAnimationDuration}"
-														 To="{StaticResource CupertinoPressedOpacity}">
+														 To="{StaticResource CupertinoPressedOpacity}"
+														 Duration="{StaticResource CupertinoAnimationDuration}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -134,21 +134,21 @@
 						<Border x:Name="FocusedOverlay"
 								Background="{TemplateBinding Background}"
 								Opacity="0" />
-						
+
 						<ContentPresenter x:Name="ContentPresenter"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  BorderThickness="{TemplateBinding BorderThickness}"
-										  Foreground="{TemplateBinding Foreground}"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  CornerRadius="{StaticResource CupertinoButtonCornerRadius}"
 										  FontFamily="{TemplateBinding FontFamily}"
 										  FontSize="{TemplateBinding FontSize}"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
+										  Foreground="{TemplateBinding Foreground}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -210,8 +210,8 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="CommonStatesOverlay"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource CupertinoAnimationDuration}"
-														 To="{StaticResource CupertinoPressedOverlayOpacity}">
+														 To="{StaticResource CupertinoPressedOverlayOpacity}"
+														 Duration="{StaticResource CupertinoAnimationDuration}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -261,8 +261,12 @@
 						<Border x:Name="FocusedOverlay"
 								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
-						
+
 						<ContentPresenter x:Name="ContentPresenter"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  BorderThickness="{TemplateBinding BorderThickness}"
 										  Content="{TemplateBinding Content}"
@@ -270,136 +274,10 @@
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  CornerRadius="{StaticResource CupertinoButtonCornerRadius}"
 										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
+										  FontSize="{TemplateBinding FontSize}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
-
-	<Style x:Key="CupertinoOutlinedButtonStyle"
-		   TargetType="Button">
-
-		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoOutlinedButtonForegroundBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource CupertinoOutlinedButtonBackgroundBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource CupertinoOutlinedButtonBrush}" />
-		<Setter Property="BorderThickness"
-				Value="0.8" />
-		<Setter Property="Padding"
-				Value="{ThemeResource CupertinoButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource CupertinoButtonCornerRadius}" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="FontFamily"
-				Value="{ThemeResource CupertinoButtonFontFamily}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource CupertinoButtonFontSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-
-					<Grid x:Name="Root"
-						  Background="{TemplateBinding Background}">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-
-								<VisualState x:Name="Normal">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource CupertinoHoverOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Pressed">
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="ContentPresenter"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource CupertinoAnimationDuration}"
-														 To="{StaticResource CupertinoPressedOpacity}">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-									</Storyboard>
-								</VisualState>
-								
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource CupertinoDisabledButtonBrush}" />
-										<Setter Target="ContentPresenter.BorderBrush"
-												Value="{StaticResource CupertinoDisabledButtonBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="FocusStates">
-
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource CupertinoFocusedOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerFocused">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource CupertinoFocusedOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Unfocused">
-									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Border x:Name="FocusedOverlay"
-								Background="{TemplateBinding Background}"
-								Opacity="0" />
-						
-						<ContentPresenter x:Name="ContentPresenter"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  Foreground="{TemplateBinding Foreground}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  CornerRadius="{StaticResource CupertinoButtonCornerRadius}"
-										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
-
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
 </ResourceDictionary>

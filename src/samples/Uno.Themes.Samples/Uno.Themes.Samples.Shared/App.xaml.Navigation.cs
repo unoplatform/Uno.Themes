@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Uno.Extensions;
+using Uno.Themes.Samples.Content;
 using Uno.Themes.Samples.Content.Styles;
 using Uno.Themes.Samples.Entities;
 using Uno.Themes.Samples.Helpers;
@@ -83,7 +84,7 @@ namespace Uno.Themes.Samples
 			AddNavigationItems(nv);
 
 			// landing navigation
-			ShellNavigateTo<ColorsSamplePage>(
+			ShellNavigateTo<OverviewPage>(
 #if WINDOWS_UWP
 				// note: on uwp, NavigationView.SelectedItem MUST be set on launch to avoid entering compact-mode
 				trySynchronizeCurrentItem: true
