@@ -6,7 +6,9 @@
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:android="http:/uno.ui/android"
 	  xmlns:ios="http:/uno.ui/ios"
-	  mc:Ignorable="d android ios"
+	  xmlns:xamarin="http://nventive.com/xamarin"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  mc:Ignorable="d android ios xamarin"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -30,6 +32,14 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<CommandBar Content="Native Control"
+									Style="{StaticResource CupertinoCommandBarStyle}">
+
+							<CommandBar.PrimaryCommands>
+								<AppBarButton Content="Action"
+											  Foreground="{StaticResource CupertinoBlueBrush}" />
+							</CommandBar.PrimaryCommands>
+						</CommandBar>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
