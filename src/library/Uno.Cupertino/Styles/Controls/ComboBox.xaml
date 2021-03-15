@@ -27,6 +27,12 @@
 
 	<x:Double x:Key="ComboBoxPopupMaxHeight">300</x:Double>
 
+	<SolidColorBrush x:Key="CupertinoComboBoxBorderBrush"
+					 Color="{ThemeResource LabelColor}"
+					 Opacity="0.2" />
+
+	<CornerRadius x:Key="CupertinoComboBoxCornerRadius">5</CornerRadius>
+
 	<!-- Style -->
 	<Style x:Key="CupertinoComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
@@ -149,14 +155,14 @@
 				Value="{ThemeResource ComboBoxForegroundThemeBrush}" />
 		<Setter Property="Background"
 				Value="{ThemeResource ComboBoxBackgroundColorBrush}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
 		<Setter Property="Padding"
 				Value="0" />
-		<Setter Property="CornerRadius"
-				Value="0" />
 		<Setter Property="BorderThickness"
-				Value="0" />
+				Value="1" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource CupertinoComboBoxBorderBrush}" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource CupertinoComboBoxCornerRadius}" />
 		<Setter Property="MinHeight"
 				Value="43" />
 		<Setter Property="TabNavigation"
@@ -198,8 +204,8 @@
 					<Grid x:Name="RootGrid"
 						  CornerRadius="{TemplateBinding CornerRadius}"
 						  Background="{TemplateBinding Background}"
-						  BorderBrush="{StaticResource ComboBoxBorderBrush}"
-						  BorderThickness="{TemplateBinding Background}">
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -304,18 +310,6 @@
 									   Opacity="0" />
 
 							<Grid Margin="16,0">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<!-- Title -->
-								<TextBlock x:Name="TitleTextBlock"
-										   Text="{TemplateBinding Text}"
-										   Style="{ThemeResource FootnoteTextBlockStyle}"
-										   TextWrapping="NoWrap"
-										   VerticalAlignment="Center" />
-
 
 								<!-- ContentPresenter -->
 								<ContentPresenter x:Name="ContentPresenter"
