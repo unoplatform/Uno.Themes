@@ -5,14 +5,83 @@
 					xmlns:controls="using:Uno.Material.Controls"
 					xmlns:toolkit="using:Uno.UI.Toolkit">
 
-	<!-- Card Variables -->
+	<!--  Card Variables  -->
 	<CornerRadius x:Key="MaterialCardCornerRadius">4</CornerRadius>
 	<Thickness x:Key="MaterialCardBorderThickness">1</Thickness>
 	<x:Double x:Key="MaterialCardElevation">6</x:Double>
 	<Thickness x:Key="MaterialCardElevationMargin">6</Thickness>
 
-	<Style x:Key="MaterialOutlinedCardStyle"
+	<DataTemplate x:Key="DefaultHeaderContentTemplate">
+		<TextBlock Text="{Binding}"
+				   MaxLines="1"
+				   Margin="16,14,16,0"
+				   Style="{ThemeResource MaterialHeadline6}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DefaultSubHeaderContentTemplate">
+		<TextBlock Text="{Binding}"
+				   MaxLines="2"
+				   Margin="16,0,16,14"
+				   Style="{ThemeResource MaterialBody2}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DefaultSupportingContentTemplate">
+		<TextBlock Text="{Binding}"
+				   Margin="16,0,16,14"
+				   Style="{ThemeResource MaterialBody2}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DefaultAvatarSupportingContentTemplate">
+		<TextBlock Text="{Binding}"
+				   Margin="16,12,16,14"
+				   Style="{ThemeResource MaterialBody2}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DefaultSmallMediaSupportingContentTemplate">
+		<Border BorderThickness="0,1,0,0"
+				BorderBrush="{StaticResource MaterialOnSurfaceFocusedBrush}">
+			<TextBlock Text="{Binding}"
+					   Margin="16,12,16,14"
+					   Style="{ThemeResource MaterialBody2}" />
+		</Border>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DefaultMediaContentTemplate">
+		<Image Source="{Binding}"
+			   Stretch="Uniform"
+			   MaxHeight="194" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DefaultSmallMediaContentTemplate">
+		<Image Source="{Binding}"
+			   Stretch="Uniform"
+			   MaxHeight="94"
+			   VerticalAlignment="Top" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DefaultAvatarContentTemplate">
+		<Image Source="{Binding}"
+			   Stretch="Uniform"
+			   MaxHeight="40" />
+	</DataTemplate>
+
+
+
+	<Style x:Key="MaterialBaseCardStyle"
 		   TargetType="controls:Card">
+		<Setter Property="HeaderContentTemplate"
+				Value="{StaticResource DefaultHeaderContentTemplate}" />
+		<Setter Property="SubHeaderContentTemplate"
+				Value="{StaticResource DefaultSubHeaderContentTemplate}" />
+		<Setter Property="SupportingContentTemplate"
+				Value="{StaticResource DefaultSupportingContentTemplate}" />
+		<Setter Property="MediaContentTemplate"
+				Value="{StaticResource DefaultMediaContentTemplate}" />
+	</Style>
+
+	<Style x:Key="MaterialOutlinedCardStyle"
+		   TargetType="controls:Card"
+		   BasedOn="{StaticResource MaterialBaseCardStyle}">
 
 		<Setter Property="MinHeight"
 				Value="72" />
@@ -38,6 +107,7 @@
 				Value="Stretch" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
+
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -135,19 +205,19 @@
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 
-						<!-- Border for PointerOver State-->
+						<!--  Border for PointerOver State  -->
 						<Border Grid.RowSpan="4"
 								x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 								Opacity="0" />
 
-						<!-- Border for Focused State-->
+						<!--  Border for Focused State  -->
 						<Border Grid.RowSpan="4"
 								x:Name="FocusedOverlay"
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<!-- Media content part -->
+						<!--  Media content part  -->
 						<ContentPresenter x:Name="MediaContentPresenter"
 										  Content="{TemplateBinding MediaContent}"
 										  ContentTemplate="{TemplateBinding MediaContentTemplate}"
@@ -157,7 +227,7 @@
 										  IsHitTestVisible="False"
 										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-						<!-- Header part-->
+						<!--  Header part  -->
 						<ContentPresenter Grid.Row="1"
 										  x:Name="HeaderContentPresenter"
 										  Content="{TemplateBinding HeaderContent}"
@@ -167,7 +237,7 @@
 										  AutomationProperties.AccessibilityView="Raw"
 										  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-						<!-- SubHeader part-->
+						<!--  SubHeader part  -->
 						<ContentPresenter Grid.Row="2"
 										  x:Name="SubHeaderContentPresenter"
 										  Content="{TemplateBinding SubHeaderContent}"
@@ -177,7 +247,7 @@
 										  AutomationProperties.AccessibilityView="Raw"
 										  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-						<!-- Ripple effect -->
+						<!--  Ripple effect  -->
 						<controls:Ripple Grid.RowSpan="4"
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
@@ -186,7 +256,7 @@
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
-						<!-- Supporting Content part-->
+						<!--  Supporting Content part  -->
 						<ContentPresenter Grid.Row="3"
 										  x:Name="SupportingContentPresenter"
 										  Content="{TemplateBinding SupportingContent}"
@@ -196,7 +266,7 @@
 										  AutomationProperties.AccessibilityView="Raw"
 										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-						<!-- Icons section part -->
+						<!--  Icons section part  -->
 						<ContentPresenter Grid.Row="3"
 										  x:Name="IconsContentPresenter"
 										  Content="{TemplateBinding IconsContent}"
@@ -212,6 +282,7 @@
 	</Style>
 
 	<Style x:Key="MaterialElevatedCardStyle"
+		   BasedOn="{StaticResource MaterialBaseCardStyle}"
 		   TargetType="controls:Card">
 
 		<Setter Property="MinHeight"
@@ -240,7 +311,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Card">
-					<!-- Elevated View -->
+					<!--  Elevated View  -->
 					<toolkit:ElevatedView x:Name="ElevatedRoot"
 										  MinWidth="{TemplateBinding MinWidth}"
 										  MinHeight="{TemplateBinding MinHeight}"
@@ -335,19 +406,19 @@
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 
-							<!-- Border for PointerOver State-->
+							<!--  Border for PointerOver State  -->
 							<Border Grid.RowSpan="4"
 									x:Name="HoverOverlay"
 									Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 									Opacity="0" />
 
-							<!-- Border for Focused State-->
+							<!--  Border for Focused State  -->
 							<Border Grid.RowSpan="4"
 									x:Name="FocusedOverlay"
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
 
-							<!-- Media content part -->
+							<!--  Media content part  -->
 							<ContentPresenter x:Name="MediaContentPresenter"
 											  Content="{TemplateBinding MediaContent}"
 											  ContentTemplate="{TemplateBinding MediaContentTemplate}"
@@ -357,7 +428,7 @@
 											  IsHitTestVisible="False"
 											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- Header part-->
+							<!--  Header part  -->
 							<ContentPresenter Grid.Row="1"
 											  x:Name="HeaderContentPresenter"
 											  Content="{TemplateBinding HeaderContent}"
@@ -367,7 +438,7 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- SubHeader part-->
+							<!--  SubHeader part  -->
 							<ContentPresenter Grid.Row="2"
 											  x:Name="SubHeaderContentPresenter"
 											  Content="{TemplateBinding SubHeaderContent}"
@@ -377,14 +448,14 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- Ripple effect -->
+							<!--  Ripple effect  -->
 							<controls:Ripple Grid.RowSpan="4"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
 											 CornerRadius="{StaticResource MaterialCardCornerRadius}"
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
-							<!-- Supporting Content part-->
+							<!--  Supporting Content part  -->
 							<ContentPresenter Grid.Row="3"
 											  x:Name="SupportingContentPresenter"
 											  Content="{TemplateBinding SupportingContent}"
@@ -394,7 +465,7 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- Icons section part -->
+							<!--  Icons section part  -->
 							<ContentPresenter Grid.Row="3"
 											  x:Name="IconsContentPresenter"
 											  Content="{TemplateBinding IconsContent}"
@@ -411,6 +482,7 @@
 	</Style>
 
 	<Style x:Key="MaterialAvatarOutlinedCardStyle"
+		   BasedOn="{StaticResource MaterialBaseCardStyle}"
 		   TargetType="controls:Card">
 		<Setter Property="MinHeight"
 				Value="72" />
@@ -432,6 +504,10 @@
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
+		<Setter Property="SupportingContentTemplate"
+				Value="{StaticResource DefaultAvatarSupportingContentTemplate}" />
+		<Setter Property="AvatarContentTemplate"
+				Value="{StaticResource DefaultAvatarContentTemplate}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -531,21 +607,21 @@
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 
-						<!-- Border for PointedOver state -->
+						<!--  Border for PointedOver state  -->
 						<Border Grid.RowSpan="3"
 								Grid.ColumnSpan="3"
 								x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 								Opacity="0" />
 
-						<!-- Border for Focus state -->
+						<!--  Border for Focus state  -->
 						<Border Grid.RowSpan="3"
 								Grid.ColumnSpan="3"
 								x:Name="FocusedOverlay"
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<!-- Avatart part -->
+						<!--  Avatart part  -->
 						<ContentPresenter x:Name="AvatarContentPresenter"
 										  Content="{TemplateBinding AvatarContent}"
 										  ContentTemplate="{TemplateBinding AvatarContentTemplate}"
@@ -558,7 +634,7 @@
 
 						<StackPanel Grid.Column="1"
 									IsHitTestVisible="False">
-							<!-- Header part-->
+							<!--  Header part  -->
 							<ContentPresenter x:Name="HeaderContentPresenter"
 											  Content="{TemplateBinding HeaderContent}"
 											  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
@@ -567,7 +643,7 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- SubHeader part-->
+							<!--  SubHeader part  -->
 							<ContentPresenter x:Name="SubHeaderContentPresenter"
 											  Content="{TemplateBinding SubHeaderContent}"
 											  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
@@ -577,7 +653,7 @@
 											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 						</StackPanel>
 
-						<!-- Ripple effect -->
+						<!--  Ripple effect  -->
 						<controls:Ripple Grid.RowSpan="3"
 										 Grid.ColumnSpan="3"
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
@@ -587,7 +663,7 @@
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
-						<!-- Icons section part -->
+						<!--  Icons section part  -->
 						<ContentPresenter Grid.Column="2"
 										  x:Name="IconsContentPresenter"
 										  Content="{TemplateBinding IconsContent}"
@@ -597,7 +673,7 @@
 										  AutomationProperties.AccessibilityView="Raw"
 										  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-						<!-- Media content part -->
+						<!--  Media content part  -->
 						<ContentPresenter Grid.Row="1"
 										  Grid.ColumnSpan="3"
 										  x:Name="MediaContentPresenter"
@@ -609,7 +685,7 @@
 										  IsHitTestVisible="False"
 										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-						<!-- Supporting Content part-->
+						<!--  Supporting Content part  -->
 						<ContentPresenter Grid.Row="2"
 										  Grid.ColumnSpan="3"
 										  x:Name="SupportingContentPresenter"
@@ -626,6 +702,7 @@
 	</Style>
 
 	<Style x:Key="MaterialAvatarElevatedCardStyle"
+		   BasedOn="{StaticResource MaterialBaseCardStyle}"
 		   TargetType="controls:Card">
 		<Setter Property="MinHeight"
 				Value="72" />
@@ -645,11 +722,15 @@
 				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Elevation"
 				Value="{StaticResource MaterialCardElevation}" />
+		<Setter Property="SupportingContentTemplate"
+				Value="{StaticResource DefaultAvatarSupportingContentTemplate}" />
+		<Setter Property="AvatarContentTemplate"
+				Value="{StaticResource DefaultAvatarContentTemplate}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Card">
-					<!-- Elevated View -->
+					<!--  Elevated View  -->
 					<toolkit:ElevatedView x:Name="ElevatedRoot"
 										  MinWidth="{TemplateBinding MinWidth}"
 										  MinHeight="{TemplateBinding MinHeight}"
@@ -749,21 +830,21 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<!-- Border for PointedOver state -->
+							<!--  Border for PointedOver state  -->
 							<Border Grid.RowSpan="3"
 									Grid.ColumnSpan="3"
 									x:Name="HoverOverlay"
 									Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 									Opacity="0" />
 
-							<!-- Border for Focus state -->
+							<!--  Border for Focus state  -->
 							<Border Grid.RowSpan="3"
 									Grid.ColumnSpan="3"
 									x:Name="FocusedOverlay"
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
 
-							<!-- Avatart part -->
+							<!--  Avatart part  -->
 							<ContentPresenter x:Name="AvatarContentPresenter"
 											  Content="{TemplateBinding AvatarContent}"
 											  ContentTemplate="{TemplateBinding AvatarContentTemplate}"
@@ -776,7 +857,7 @@
 
 							<StackPanel Grid.Column="1"
 										IsHitTestVisible="False">
-								<!-- Header part-->
+								<!--  Header part  -->
 								<ContentPresenter x:Name="HeaderContentPresenter"
 												  Content="{TemplateBinding HeaderContent}"
 												  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
@@ -785,7 +866,7 @@
 												  AutomationProperties.AccessibilityView="Raw"
 												  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-								<!-- SubHeader part-->
+								<!--  SubHeader part  -->
 								<ContentPresenter x:Name="SubHeaderContentPresenter"
 												  Content="{TemplateBinding SubHeaderContent}"
 												  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
@@ -794,7 +875,7 @@
 												  AutomationProperties.AccessibilityView="Raw"
 												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 							</StackPanel>
-							<!-- Ripple effect -->
+							<!--  Ripple effect  -->
 							<controls:Ripple Grid.RowSpan="3"
 											 Grid.ColumnSpan="3"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
@@ -802,7 +883,7 @@
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
-							<!-- Icons section part -->
+							<!--  Icons section part  -->
 							<ContentPresenter Grid.Column="2"
 											  x:Name="IconsContentPresenter"
 											  Content="{TemplateBinding IconsContent}"
@@ -812,7 +893,7 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding IconsContentTemplate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}}" />
 
-							<!-- Media content part -->
+							<!--  Media content part  -->
 							<ContentPresenter Grid.Row="1"
 											  Grid.ColumnSpan="3"
 											  x:Name="MediaContentPresenter"
@@ -824,7 +905,7 @@
 											  IsHitTestVisible="False"
 											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- Supporting Content part-->
+							<!--  Supporting Content part  -->
 							<ContentPresenter Grid.Row="2"
 											  Grid.ColumnSpan="3"
 											  x:Name="SupportingContentPresenter"
@@ -842,6 +923,7 @@
 	</Style>
 
 	<Style x:Key="MaterialSmallMediaOutlinedCardStyle"
+		   BasedOn="{StaticResource MaterialBaseCardStyle}"
 		   TargetType="controls:Card">
 
 		<Setter Property="MinHeight"
@@ -868,6 +950,10 @@
 				Value="Stretch" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
+		<Setter Property="MediaContentTemplate"
+				Value="{StaticResource DefaultSmallMediaContentTemplate}" />
+		<Setter Property="SupportingContentTemplate"
+				Value="{StaticResource DefaultSmallMediaSupportingContentTemplate}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -967,21 +1053,21 @@
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 
-						<!-- Border for PointerOver State-->
+						<!--  Border for PointerOver State  -->
 						<Border Grid.RowSpan="3"
 								Grid.ColumnSpan="3"
 								x:Name="HoverOverlay"
 								Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 								Opacity="0" />
 
-						<!-- Border for Focused State-->
+						<!--  Border for Focused State  -->
 						<Border Grid.RowSpan="3"
 								Grid.ColumnSpan="3"
 								x:Name="FocusedOverlay"
 								Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 								Opacity="0" />
 
-						<!-- Media content part -->
+						<!--  Media content part  -->
 						<ContentPresenter x:Name="MediaContentPresenter"
 										  Content="{TemplateBinding MediaContent}"
 										  ContentTemplate="{TemplateBinding MediaContentTemplate}"
@@ -992,7 +1078,7 @@
 										  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 						<StackPanel Grid.Column="1">
-							<!-- Header part-->
+							<!--  Header part  -->
 							<ContentPresenter x:Name="HeaderContentPresenter"
 											  Content="{TemplateBinding HeaderContent}"
 											  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
@@ -1001,7 +1087,7 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- SubHeader part-->
+							<!--  SubHeader part  -->
 							<ContentPresenter x:Name="SubHeaderContentPresenter"
 											  Content="{TemplateBinding SubHeaderContent}"
 											  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
@@ -1011,7 +1097,7 @@
 											  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 						</StackPanel>
 
-						<!-- Ripple effect -->
+						<!--  Ripple effect  -->
 						<controls:Ripple Grid.RowSpan="3"
 										 Grid.ColumnSpan="3"
 										 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
@@ -1021,7 +1107,7 @@
 										 Padding="{TemplateBinding Padding}"
 										 AutomationProperties.AccessibilityView="Raw" />
 
-						<!-- Supporting Content part-->
+						<!--  Supporting Content part  -->
 						<ContentPresenter Grid.Row="1"
 										  Grid.ColumnSpan="3"
 										  x:Name="SupportingContentPresenter"
@@ -1032,7 +1118,7 @@
 										  AutomationProperties.AccessibilityView="Raw"
 										  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-						<!-- Icons section part -->
+						<!--  Icons section part  -->
 						<ContentPresenter Grid.Row="2"
 										  Grid.ColumnSpan="3"
 										  x:Name="IconsContentPresenter"
@@ -1049,6 +1135,7 @@
 	</Style>
 
 	<Style x:Key="MaterialSmallMediaElevatedCardStyle"
+		   BasedOn="{StaticResource MaterialBaseCardStyle}"
 		   TargetType="controls:Card">
 
 		<Setter Property="MinHeight"
@@ -1073,11 +1160,15 @@
 				Value="{StaticResource MaterialCardElevationMargin}" />
 		<Setter Property="Elevation"
 				Value="{StaticResource MaterialCardElevation}" />
+		<Setter Property="MediaContentTemplate"
+				Value="{StaticResource DefaultSmallMediaContentTemplate}" />
+		<Setter Property="SupportingContentTemplate"
+				Value="{StaticResource DefaultSmallMediaSupportingContentTemplate}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Card">
-					<!-- Elevated View -->
+					<!--  Elevated View  -->
 					<toolkit:ElevatedView x:Name="ElevatedRoot"
 										  MinWidth="{TemplateBinding MinWidth}"
 										  MinHeight="{TemplateBinding MinHeight}"
@@ -1177,21 +1268,21 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<!-- Border for PointerOver State-->
+							<!--  Border for PointerOver State  -->
 							<Border Grid.RowSpan="3"
 									Grid.ColumnSpan="3"
 									x:Name="HoverOverlay"
 									Background="{StaticResource MaterialOnSurfaceHoverBrush}"
 									Opacity="0" />
 
-							<!-- Border for Focused State-->
+							<!--  Border for Focused State  -->
 							<Border Grid.RowSpan="3"
 									Grid.ColumnSpan="3"
 									x:Name="FocusedOverlay"
 									Background="{StaticResource MaterialOnSurfaceFocusedBrush}"
 									Opacity="0" />
 
-							<!-- Media content part -->
+							<!--  Media content part  -->
 							<ContentPresenter x:Name="MediaContentPresenter"
 											  Content="{TemplateBinding MediaContent}"
 											  ContentTemplate="{TemplateBinding MediaContentTemplate}"
@@ -1202,7 +1293,7 @@
 											  Visibility="{Binding MediaContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
 							<StackPanel Grid.Column="1">
-								<!-- Header part-->
+								<!--  Header part  -->
 								<ContentPresenter x:Name="HeaderContentPresenter"
 												  Content="{TemplateBinding HeaderContent}"
 												  ContentTemplate="{TemplateBinding HeaderContentTemplate}"
@@ -1211,7 +1302,7 @@
 												  AutomationProperties.AccessibilityView="Raw"
 												  Visibility="{Binding HeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-								<!-- SubHeader part-->
+								<!--  SubHeader part  -->
 								<ContentPresenter x:Name="SubHeaderContentPresenter"
 												  Content="{TemplateBinding SubHeaderContent}"
 												  ContentTemplate="{TemplateBinding SubHeaderContentTemplate}"
@@ -1221,7 +1312,7 @@
 												  Visibility="{Binding SubHeaderContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 							</StackPanel>
 
-							<!-- Ripple effect -->
+							<!--  Ripple effect  -->
 							<controls:Ripple Grid.RowSpan="3"
 											 Grid.ColumnSpan="3"
 											 Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
@@ -1229,7 +1320,7 @@
 											 Padding="{TemplateBinding Padding}"
 											 AutomationProperties.AccessibilityView="Raw" />
 
-							<!-- Supporting Content part-->
+							<!--  Supporting Content part  -->
 							<ContentPresenter Grid.Row="1"
 											  Grid.ColumnSpan="3"
 											  x:Name="SupportingContentPresenter"
@@ -1240,7 +1331,7 @@
 											  AutomationProperties.AccessibilityView="Raw"
 											  Visibility="{Binding SupportingContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}}" />
 
-							<!-- Icons section part -->
+							<!--  Icons section part  -->
 							<ContentPresenter Grid.Row="2"
 											  Grid.ColumnSpan="3"
 											  x:Name="IconsContentPresenter"
