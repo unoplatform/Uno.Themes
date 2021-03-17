@@ -21,7 +21,7 @@
 	<StaticResource x:Key="CupertinoSliderInlineTickBarFill"
 					ResourceKey="CupertinoBlueColor" />
 
-	<!-- Cupertino Slider Thumb Style -->
+	<!--  Cupertino Slider Thumb Style  -->
 	<Style x:Key="CupertinoSliderThumbStyle"
 		   TargetType="Thumb">
 
@@ -39,7 +39,7 @@
 		</Setter>
 	</Style>
 
-	<!-- Cupertino Slider Style -->
+	<!--  Cupertino Slider Style  -->
 	<Style x:Key="CupertinoSliderStyle"
 		   TargetType="Slider">
 
@@ -147,13 +147,13 @@
 							<RowDefinition Height="*" />
 						</Grid.RowDefinitions>
 
-						<!-- SliderContainer -->
+						<!--  SliderContainer  -->
 						<Grid x:Name="SliderContainer"
 							  Background="Transparent"
 							  Control.IsTemplateFocusTarget="True"
 							  Grid.Row="1">
 
-							<!-- HorizontalTemplate -->
+							<!--  HorizontalTemplate  -->
 							<Grid x:Name="HorizontalTemplate"
 								  MinHeight="34">
 
@@ -169,7 +169,7 @@
 									<RowDefinition Height="15" />
 								</Grid.RowDefinitions>
 
-								<!-- HorizontalTrackRect -->
+								<!--  HorizontalTrackRect  -->
 								<Rectangle x:Name="HorizontalTrackRect"
 										   Fill="{TemplateBinding Background}"
 										   Height="4"
@@ -178,14 +178,14 @@
 										   Grid.Row="1"
 										   Grid.ColumnSpan="3" />
 
-								<!-- HorizontalDecreaseRect -->
+								<!--  HorizontalDecreaseRect  -->
 								<Rectangle x:Name="HorizontalDecreaseRect"
 										   Fill="{TemplateBinding Foreground}"
 										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
 										   Grid.Row="1" />
 
-								<!-- TopTickBar -->
+								<!--  TopTickBar  -->
 								<TickBar x:Name="TopTickBar"
 										 Visibility="Collapsed"
 										 Fill="{StaticResource CupertinoSliderTickBarFill}"
@@ -194,7 +194,7 @@
 										 Margin="0,0,0,4"
 										 Grid.ColumnSpan="3" />
 
-								<!-- HorizontalInlineTickBar -->
+								<!--  HorizontalInlineTickBar  -->
 								<TickBar x:Name="HorizontalInlineTickBar"
 										 Visibility="Collapsed"
 										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
@@ -202,7 +202,7 @@
 										 Grid.Row="1"
 										 Grid.ColumnSpan="3" />
 
-								<!-- BottomTickBar -->
+								<!--  BottomTickBar  -->
 								<TickBar x:Name="BottomTickBar"
 										 Visibility="Collapsed"
 										 Fill="{StaticResource CupertinoSliderTickBarFill}"
@@ -212,7 +212,7 @@
 										 Grid.Row="2"
 										 Grid.ColumnSpan="3" />
 
-								<!-- HorizontalThumb -->
+								<!--  HorizontalThumb  -->
 								<toolkit:ElevatedView Grid.Row="0"
 													  Grid.RowSpan="3"
 													  Grid.Column="1"
@@ -230,11 +230,11 @@
 										   Height="28"
 										   Width="28"
 										   FocusVisualMargin="-14,-6,-14,-6"
-										   AutomationProperties.AccessibilityView="Raw"/>
+										   AutomationProperties.AccessibilityView="Raw" />
 								</toolkit:ElevatedView>
 							</Grid>
 
-							<!-- VerticalTemplate -->
+							<!--  VerticalTemplate  -->
 							<Grid x:Name="VerticalTemplate"
 								  MinWidth="32"
 								  Visibility="Collapsed">
@@ -251,7 +251,7 @@
 									<ColumnDefinition Width="15" />
 								</Grid.ColumnDefinitions>
 
-								<!-- VerticalTrackRect -->
+								<!--  VerticalTrackRect  -->
 								<Rectangle x:Name="VerticalTrackRect"
 										   Fill="{TemplateBinding Background}"
 										   Width="4"
@@ -260,7 +260,7 @@
 										   Grid.Column="1"
 										   Grid.RowSpan="3" />
 
-								<!-- VerticalDecreaseRect -->
+								<!--  VerticalDecreaseRect  -->
 								<Rectangle x:Name="VerticalDecreaseRect"
 										   Fill="{TemplateBinding Foreground}"
 										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
@@ -268,7 +268,7 @@
 										   Grid.Column="1"
 										   Grid.Row="2" />
 
-								<!-- LeftTickBar -->
+								<!--  LeftTickBar  -->
 								<TickBar x:Name="LeftTickBar"
 										 Visibility="Collapsed"
 										 Fill="{StaticResource CupertinoSliderTickBarFill}"
@@ -277,7 +277,7 @@
 										 Margin="0,0,4,0"
 										 Grid.RowSpan="3" />
 
-								<!-- VerticalInlineTickBar -->
+								<!--  VerticalInlineTickBar  -->
 								<TickBar x:Name="VerticalInlineTickBar"
 										 Visibility="Collapsed"
 										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
@@ -285,7 +285,7 @@
 										 Grid.Column="1"
 										 Grid.RowSpan="3" />
 
-								<!-- RightTickBar -->
+								<!--  RightTickBar  -->
 								<TickBar x:Name="RightTickBar"
 										 Visibility="Collapsed"
 										 Fill="{StaticResource CupertinoSliderTickBarFill}"
@@ -295,7 +295,7 @@
 										 Grid.Column="2"
 										 Grid.RowSpan="3" />
 
-								<!-- VerticalThumb -->
+								<!--  VerticalThumb  -->
 								<toolkit:ElevatedView Grid.Row="1"
 													  Grid.Column="0"
 													  Grid.ColumnSpan="3"
@@ -306,13 +306,13 @@
 													  Elevation="3"
 													  ShadowColor="{StaticResource ShadowColor}">
 									<Thumb x:Name="VerticalThumb"
-									   Style="{StaticResource CupertinoSliderThumbStyle}"
-									   Background="{StaticResource CupertinoSliderThumbBrush}"
-									   DataContext="{TemplateBinding Value}"
-									   Width="28"
-									   Height="28"
-									   FocusVisualMargin="-6,-14,-6,-14"
-									   AutomationProperties.AccessibilityView="Raw" />
+										   Style="{StaticResource CupertinoSliderThumbStyle}"
+										   Background="{StaticResource CupertinoSliderThumbBrush}"
+										   DataContext="{TemplateBinding Value}"
+										   Width="28"
+										   Height="28"
+										   FocusVisualMargin="-6,-14,-6,-14"
+										   AutomationProperties.AccessibilityView="Raw" />
 								</toolkit:ElevatedView>
 							</Grid>
 						</Grid>

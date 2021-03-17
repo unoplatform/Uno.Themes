@@ -1,11 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	
-	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="ms-appx:///Styles/Application/Fonts.xaml" />
-	</ResourceDictionary.MergedDictionaries>
 
-	<!-- Based on https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/#dynamic-type-sizes default style -->
+	<FontFamily x:Key="CupertinoFontFamily">SF Pro</FontFamily>
+
+	<!--  Based on https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/#dynamic-type-sizes default style  -->
 	<Style x:Key="CupertinoBaseTextBlockStyle"
 		   TargetType="TextBlock">
 		<Setter Property="TextTrimming"
@@ -13,118 +11,85 @@
 		<Setter Property="TextWrapping"
 				Value="Wrap" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource SFProFontFamily}" />
+				Value="{StaticResource CupertinoFontFamily}" />
 	</Style>
 
 	<!--
-	******************************************************************
+		******************************************************************
 		STYLE GUIDE TEXTBLOCKS STYLES
-	******************************************************************
+		******************************************************************
 	-->
 
-	<!-- Large Title -->
-	<Style x:Key="LargeTitleTextBlockStyle"
+	<!--  Large Title  -->
+	<Style x:Key="CupertinoLargeTitle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
-				Value="45" />
+				Value="34" />
 		<Setter Property="LineHeight"
-				Value="55" />
+				Value="41" />
 	</Style>
 
-	<!-- Title 1 -->
-	<Style x:Key="PrimaryTitleTextBlockStyle"
+	<!--  Title 1  -->
+	<Style x:Key="CupertinoPrimaryTitle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
-				Value="37" />
-		<Setter Property="LineHeight"
-				Value="45" />
-	</Style>
-
-	<!-- Title 2 -->
-	<Style x:Key="SecondaryTitleTextBlockStyle"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
-
-		<Setter Property="FontSize"
-				Value="30" />
-		<Setter Property="LineHeight"
-				Value="37" />
-	</Style>
-
-	<!-- Title 3 -->
-	<Style x:Key="TertiaryTitleTextBlockStyle"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
-
-		<Setter Property="FontSize"
-				Value="27" />
+				Value="28" />
 		<Setter Property="LineHeight"
 				Value="34" />
 	</Style>
 
-	<!-- Headline -->
-	<Style x:Key="HeadlineTextBlockStyle"
+	<!--  Title 2  -->
+	<Style x:Key="CupertinoSecondaryTitle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="22" />
-		<Setter Property="FontWeight"
-				Value="SemiBold" />
-		<Setter Property="LineHeight"
-				Value="30" />
-	</Style>
-
-	<!-- Body -->
-	<Style x:Key="BodyTextBlockStyle"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
-
-		<Setter Property="FontSize"
-				Value="22" />
-		<Setter Property="LineHeight"
-				Value="30" />
-	</Style>
-
-	<!-- Callout -->
-	<Style x:Key="CalloutTextBlockStyle"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
-
-		<Setter Property="FontSize"
-				Value="21" />
 		<Setter Property="LineHeight"
 				Value="28" />
 	</Style>
 
-	<!-- Subhead -->
-	<Style x:Key="SubheadTextBlockStyle"
+	<!--  Title 3  -->
+	<Style x:Key="CupertinoTertiaryTitle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="20" />
 		<Setter Property="LineHeight"
-				Value="27" />
+				Value="25" />
 	</Style>
 
-	<!-- Footnote -->
-	<Style x:Key="FootnoteTextBlockStyle"
+	<!--  Headline  -->
+	<Style x:Key="CupertinoHeadline"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+
+		<Setter Property="FontSize"
+				Value="17" />
+		<Setter Property="FontWeight"
+				Value="SemiBold" />
+		<Setter Property="LineHeight"
+				Value="22" />
+	</Style>
+
+	<!--  Body  -->
+	<Style x:Key="CupertinoBody"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="17" />
 		<Setter Property="LineHeight"
-				Value="24" />
+				Value="22" />
 	</Style>
 
-	<!-- Caption 1 -->
-	<Style x:Key="PrimaryCaptionTextBlockStyle"
+	<!--  Callout  -->
+	<Style x:Key="CupertinoCallout"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
 
@@ -134,15 +99,48 @@
 				Value="21" />
 	</Style>
 
-	<!-- Caption 2 -->
-	<Style x:Key="SecondaryCaptionTextBlockStyle"
+	<!--  Subhead  -->
+	<Style x:Key="CupertinoSubhead"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
 
 		<Setter Property="FontSize"
 				Value="15" />
 		<Setter Property="LineHeight"
-				Value="17" />
+				Value="20" />
+	</Style>
+
+	<!--  Footnote  -->
+	<Style x:Key="CupertinoFootnote"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+
+		<Setter Property="FontSize"
+				Value="13" />
+		<Setter Property="LineHeight"
+				Value="18" />
+	</Style>
+
+	<!--  Caption 1  -->
+	<Style x:Key="CupertinoPrimaryCaption"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+
+		<Setter Property="FontSize"
+				Value="12" />
+		<Setter Property="LineHeight"
+				Value="16" />
+	</Style>
+
+	<!--  Caption 2  -->
+	<Style x:Key="CupertinoSecondaryCaption"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+
+		<Setter Property="FontSize"
+				Value="11" />
+		<Setter Property="LineHeight"
+				Value="13" />
 	</Style>
 
 </ResourceDictionary>
