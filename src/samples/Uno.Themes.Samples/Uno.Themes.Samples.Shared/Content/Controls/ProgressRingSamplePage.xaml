@@ -68,6 +68,35 @@
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
+
+						<!-- Slider Text -->
+						<TextBlock Text="Slider to Set ProgressRing"
+								   Margin="0,10,0,0" />
+
+						<Slider x:Name="cupertinoProgressSlider"
+								Minimum="0"
+								Maximum="100"
+								HorizontalAlignment="Left"
+								Width="250"
+								Margin="0,10" />
+
+						<!-- Primary ProgressRing Text -->
+						<TextBlock Text="Primary ProgressRing" />
+
+						<smtx:XamlDisplay UniqueKey="ProgressRingSamplePage_Cupertino_Primary">
+							<winui:ProgressRing Style="{StaticResource CupertinoProgressRingStyle}"
+												IsIndeterminate="False"
+												Value="{Binding Value, ElementName=cupertinoProgressSlider}"
+												Minimum="0"
+												Maximum="100" />
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate Primary ProgressRing Text -->
+						<TextBlock Text="Indeterminate Primary ProgressRing" />
+
+						<smtx:XamlDisplay UniqueKey="ProgressRingSamplePage_Cupertino_PrimaryIndeterminate">
+							<winui:ProgressRing Style="{StaticResource CupertinoProgressRingStyle}" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
