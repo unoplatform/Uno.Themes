@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Uno.Extensions;
 using Uno.Logging;
+using Windows.UI.Xaml.Data;
 
 namespace Uno.Themes.Samples.Entities
 {
+	[Bindable]
 	public class Sample
 	{
 		public Sample(SamplePageAttribute attribute, Type viewType)
