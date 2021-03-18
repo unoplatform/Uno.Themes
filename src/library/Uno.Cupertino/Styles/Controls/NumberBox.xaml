@@ -8,51 +8,20 @@
 		<ResourceDictionary Source="../Application/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
+	<x:String x:Key="PlusGlyphPathStyle">M0.578125 5.67236H4.29688V9.47412H5.6416V5.67236H9.36035V4.32764H5.6416V0.525879H4.29688V4.32764H0.578125V5.67236Z</x:String>
+	<x:String x:Key="MinusGlyphPathStyle">M0 1.67236H5.57812V0.327637H0V1.67236Z</x:String>
+
+	<SolidColorBrush x:Key="CupertinoTextBoxBorderBrush"
+					 Color="{ThemeResource LabelColor}"
+					 Opacity="0.2" />
+
+	<SolidColorBrush x:Key="CupertinoDetailsLightBrush"
+					 Color="{StaticResource CupertinoPrimaryGrayColor}"
+					 Opacity="0.3" />
+
+	<x:Double x:Key="CupertinoButtonFontSize">17</x:Double>
+
 	<CornerRadius x:Key="CupertinoCornerRadius">8</CornerRadius>
-
-	<Style x:Name="PlusMinusButtonStyle"
-		   TargetType="Button">
-		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoLabelBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource CupertinoQuinaryGrayBrush}" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Grid x:Name="ButtonLayoutGrid"
-						  Background="Transparent">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="ButtonLayoutGrid.Opacity"
-												Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<ContentPresenter x:Name="ContentPresenter"
-										  Foreground="{TemplateBinding Foreground}"
-										  Content="{TemplateBinding Content}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  FontFamily="{TemplateBinding FontFamily}"
-										  FontSize="{TemplateBinding FontSize}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
 
 	<Style	x:Name="CupertinoNumberBoxStyle"
 			TargetType="winui:NumberBox">
@@ -61,6 +30,12 @@
 				Value="{StaticResource CupertinoSystemBackgroundBrush}" />
 		<Setter Property="CornerRadius"
 				Value="{StaticResource CupertinoCornerRadius}" />
+		<Setter Property="BorderThickness"
+				Value="1" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource CupertinoTextBoxBorderBrush}" />
+		<Setter Property="Padding"
+				Value="7" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="winui:NumberBox">
@@ -79,31 +54,15 @@
 								</VisualState>
 							</VisualStateGroup>
 
-							<VisualStateGroup x:Name="UpSpinButtonEnabledStates">
-								<VisualState x:Name="UpSpinButtonEnabled" />
-								<VisualState x:Name="UpSpinButtonDisabled">
-									<VisualState.Setters>
-										<Setter Target="UpSpinButton.IsEnabled"
-												Value="False" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="DownSpinButtonEnabledStates">
-								<VisualState x:Name="DownSpinButtonEnabled" />
-								<VisualState x:Name="DownSpinButtonDisabled">
-									<VisualState.Setters>
-										<Setter Target="DownSpinButton.IsEnabled"
-												Value="False" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid CornerRadius="{TemplateBinding CornerRadius}"
-							  Background="{TemplateBinding Background}"
-							  Width="241"
-							  Height="34">
+						<Border x:Name="ContentBorder"
+								Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<Grid Margin="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="Auto" />
@@ -111,35 +70,22 @@
 
 							<TextBox x:Name="InputBox"
 									 Grid.Column="0"
-									 BorderThickness="0"
-									 SelectionHighlightColor="{TemplateBinding Background}"
-									 Background="{TemplateBinding Background}"
-									 SelectionHighlightColorWhenNotFocused="{TemplateBinding Background}"
-									 Header="{TemplateBinding Header}"
-									 HeaderTemplate="{TemplateBinding HeaderTemplate}"
-									 PlaceholderText="{TemplateBinding PlaceholderText}"
-									 TextReadingOrder="{TemplateBinding TextReadingOrder}"
-									 PreventKeyboardDisplayOnProgrammaticFocus="{TemplateBinding PreventKeyboardDisplayOnProgrammaticFocus}" />
+									 Style="{StaticResource NumberBoxTextBoxStyle}" />
 
-							<Grid CornerRadius="{TemplateBinding CornerRadius}"
-								  Margin="5"
-								  Grid.Column="1">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<RepeatButton x:Name="UpSpinButton"
-											  FontSize="{TemplateBinding FontSize}"
-											  Content="+"
-											  Style="{StaticResource NumberBoxSpinButtonStyle}" />
+							<StackPanel CornerRadius="{TemplateBinding CornerRadius}"
+										Background="{StaticResource CupertinoQuinaryGrayBrush}"
+										Orientation="Horizontal"
+										Grid.Column="1">
 
 								<RepeatButton x:Name="DownSpinButton"
 											  Grid.Column="1"
-											  FontSize="{TemplateBinding FontSize}"
-											  Content="-"
-											  Style="{StaticResource NumberBoxSpinButtonStyle}" />
-							</Grid>
+											  Style="{StaticResource NumberBoxMinusButtonStyle}" />
+								<Rectangle Width="1"
+										   Height="12"
+										   Fill="{StaticResource CupertinoDetailsLightBrush}" />
+								<RepeatButton x:Name="UpSpinButton"
+											  Style="{StaticResource NumberBoxPlusButtonStyle}" />
+							</StackPanel>
 						</Grid>
 					</Grid>
 				</ControlTemplate>
@@ -147,7 +93,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Name="NumberBoxSpinButtonStyle"
+	<Style x:Name="NumberBoxPlusButtonStyle"
 		   TargetType="RepeatButton">
 		<Style.Setters>
 			<Setter Property="IsTabStop"
@@ -156,15 +102,164 @@
 					Value="50" />
 			<Setter Property="Height"
 					Value="24" />
+			<Setter Property="FontSize"
+					Value="22" />
+			<Setter Property="Padding"
+					Value="7" />
 			<Setter Property="VerticalAlignment"
 					Value="Center" />
+			<Setter Property="HorizontalAlignment"
+					Value="Center" />
 			<Setter Property="Background"
-					Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
+					Value="{StaticResource CupertinoQuinaryGrayBrush}" />
 			<Setter Property="Foreground"
-					Value="{ThemeResource CupertinoLabelBrush}" />
+					Value="{StaticResource CupertinoLabelBrush}" />
 			<Setter Property="BorderThickness"
 					Value="0" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="RepeatButton">
+						<Grid x:Name="ButtonLayoutGrid"
+							  Background="Transparent">
+
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="PointerOver" />
+									<VisualState x:Name="Pressed" />
+									<VisualState x:Name="Disabled" />
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+							<Path x:Name="GlyphElement"
+								  Data="{StaticResource PlusGlyphPathStyle}"
+								  Fill="{TemplateBinding Foreground}"
+								  Margin="{TemplateBinding Padding}"
+								  VerticalAlignment="Center"
+								  HorizontalAlignment="Center"
+								  Width="9"
+								  AutomationProperties.AccessibilityView="Raw" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
 		</Style.Setters>
+	</Style>
+
+	<Style x:Name="NumberBoxMinusButtonStyle"
+		   TargetType="RepeatButton">
+		<Style.Setters>
+			<Setter Property="IsTabStop"
+					Value="False" />
+			<Setter Property="Width"
+					Value="50" />
+			<Setter Property="Height"
+					Value="24" />
+			<Setter Property="FontSize"
+					Value="22" />
+			<Setter Property="Padding"
+					Value="7" />
+			<Setter Property="VerticalAlignment"
+					Value="Center" />
+			<Setter Property="HorizontalAlignment"
+					Value="Center" />
+			<Setter Property="Background"
+					Value="{StaticResource CupertinoQuinaryGrayBrush}" />
+			<Setter Property="Foreground"
+					Value="{StaticResource CupertinoLabelBrush}" />
+			<Setter Property="BorderThickness"
+					Value="0" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="RepeatButton">
+						<Grid x:Name="ButtonLayoutGrid"
+							  Background="Transparent">
+
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="PointerOver" />
+									<VisualState x:Name="Pressed" />
+									<VisualState x:Name="Disabled" />
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+							<Path x:Name="GlyphElement"
+								  Data="{StaticResource MinusGlyphPathStyle}"
+								  Fill="{TemplateBinding Foreground}"
+								  Margin="{TemplateBinding Padding}"
+								  VerticalAlignment="Center"
+								  HorizontalAlignment="Center"
+								  Width="10"
+								  AutomationProperties.AccessibilityView="Raw" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style.Setters>
+	</Style>
+
+	<Style x:Key="NumberBoxTextBoxStyle"
+		   TargetType="TextBox">
+
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="Foreground"
+				Value="{StaticResource CupertinoLabelBrush}" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Left" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Padding"
+				Value="15,5,5,5" />
+		<Setter Property="InputScope"
+				Value="Number" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TextBox">
+					<Grid x:Name="Root">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="Disabled" />
+								<VisualState x:Name="Focused" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="ButtonStates">
+								<VisualState x:Name="ButtonVisible" />
+								<VisualState x:Name="ButtonCollapsed" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="HeaderStates">
+								<VisualState x:Name="NotEmpty" />
+								<VisualState x:Name="Empty" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid>
+							<ScrollViewer x:Name="ContentElement"
+										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+										  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+										  IsTabStop="False"
+										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  ZoomMode="Disabled"
+										  AutomationProperties.AccessibilityView="Raw">
+								<ScrollViewer.RenderTransform>
+									<CompositeTransform x:Name="ContentElement_CompositeTransform" />
+								</ScrollViewer.RenderTransform>
+							</ScrollViewer>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 </ResourceDictionary>
