@@ -16,12 +16,8 @@ namespace Uno.Material.Controls
 	/*
 	 * Starting implementation acknowledgement from project https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/2740f14a814896d42032ae0013b765a8a0ec04c3/MaterialDesignThemes.Uwp/Ripple.cs
 	 */
-	public partial class Ripple : ContentControl, INotifyPropertyChanged
+	public partial class Ripple : ContentControl
 	{
-		private double _rippleSize;
-		private double _rippleX;
-		private double _rippleY;
-
 		public Ripple()
 		{
 			DefaultStyleKey = typeof(Ripple);
@@ -36,7 +32,7 @@ namespace Uno.Material.Controls
 
 		private void OnSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
 		{
-			RippleSize = Math.Max(sizeChangedEventArgs.NewSize.Width, sizeChangedEventArgs.NewSize.Height) * RippleSizeMultiplier;
+			RippleSize = Math.Max(sizeChangedEventArgs.NewSize.Width, sizeChangedEventArgs.NewSize.Height);
 			Clip = new RectangleGeometry { Rect = new Windows.Foundation.Rect(0, 0, sizeChangedEventArgs.NewSize.Width, sizeChangedEventArgs.NewSize.Height) };
 		}
 
@@ -167,48 +163,33 @@ namespace Uno.Material.Controls
 
 		public double RippleSizeMultiplier
 		{
-			get { return (double)GetValue(RippleSizeMultiplierProperty); }
-			set { SetValue(RippleSizeMultiplierProperty, value); }
+			get => (double)GetValue(RippleSizeMultiplierProperty);
+			set => SetValue(RippleSizeMultiplierProperty, value);
 		}
+
+		public static readonly DependencyProperty RippleSizeProperty = DependencyProperty.Register(
+			"RippleSize", typeof(double), typeof(Ripple), new PropertyMetadata(default(double)));
 
 		public double RippleSize
 		{
-			get { return _rippleSize; }
-			private set
-			{
-				if (_rippleSize == value) return;
-				_rippleSize = value;
-				OnPropertyChanged();
-			}
+			get => (double)GetValue(RippleSizeProperty);
+			private set => SetValue(RippleSizeProperty, value);
 		}
+		public static readonly DependencyProperty RippleYProperty = DependencyProperty.Register(
+			"RippleY", typeof(double), typeof(Ripple), new PropertyMetadata(default(double)));
 
 		public double RippleY
 		{
-			get { return _rippleY; }
-			private set
-			{
-				if (_rippleY == value) return;
-				_rippleY = value;
-				OnPropertyChanged();
-			}
+			get => (double)GetValue(RippleYProperty);
+			private set => SetValue(RippleYProperty, value);
 		}
+		public static readonly DependencyProperty RippleXProperty = DependencyProperty.Register(
+			"RippleX", typeof(double), typeof(Ripple), new PropertyMetadata(default(double)));
 
 		public double RippleX
 		{
-			get { return _rippleX; }
-			private set
-			{
-				if (_rippleX == value) return;
-				_rippleX = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			get => (double)GetValue(RippleXProperty);
+			private set => SetValue(RippleXProperty, value);
 		}
 	}
 }
