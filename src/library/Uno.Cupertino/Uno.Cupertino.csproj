@@ -19,6 +19,12 @@
   </ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
 		<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
+		<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie">
+			<Version>6.1.0</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+		<PackageReference Include="Uno.UI.Lottie" Version="3.6.0-dev.445" />
 	</ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
@@ -29,11 +35,11 @@
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Styles\Controls\DatePicker.xaml" />
+	<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+		<EmbeddedResource Include="Assets\CupertinoProgressRing.json" />
 	</ItemGroup>
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Styles\Controls\DatePicker.xaml" />
+	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+		<Content Include="Assets\CupertinoProgressRing.json" />
 	</ItemGroup>
   <ItemGroup>
 		<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
