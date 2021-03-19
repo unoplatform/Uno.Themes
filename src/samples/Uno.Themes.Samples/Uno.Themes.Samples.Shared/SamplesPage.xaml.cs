@@ -119,7 +119,7 @@ namespace Uno.Themes.Samples
 				AddMenuItem<HyperlinkButtonSamplePage>(icon: "ButtonIcon");
 				AddMenuItem<ModalStandardBottomSheetSamplePage>(icon: "StandardBottomSheetIcon");
 				AddMenuItem<NavigationViewSamplePage>(icon: "NavigationViewIcon");
-				AddMenuItem<NumberBoxSamplePage>(icon: "ButtonIcon");
+				AddMenuItem<NumberBoxSamplePage>();
 				AddMenuItem<PasswordBoxSamplePage>(icon: "PasswordBoxIcon");
 				AddMenuItem<ProgressBarSamplePage>(icon: "ProgressBarIcon");
 				AddMenuItem<ProgressRingSamplePage>(icon: "ProgressBarIcon");

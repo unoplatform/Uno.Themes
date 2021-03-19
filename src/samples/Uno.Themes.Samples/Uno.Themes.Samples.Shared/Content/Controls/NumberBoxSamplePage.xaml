@@ -11,12 +11,6 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
-			<sample:SamplePageLayout.MaterialTemplate>
-				<DataTemplate>
-					<StackPanel>
-					</StackPanel>
-				</DataTemplate>
-			</sample:SamplePageLayout.MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel Width="300"
@@ -38,6 +32,29 @@
 							<winui:NumberBox Style="{StaticResource CupertinoNumberBoxStyle}"
 											 SmallChange="1"
 											 Value="0"
+											 PlaceholderText="Add"
+											 IsEnabled="False"
+											 SpinButtonPlacementMode="Inline" />
+						</smtx:XamlDisplay>
+						
+						<!-- NumberBox with header -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_NumberBoxSamplePage_Header"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<winui:NumberBox Style="{StaticResource CupertinoNumberBoxStyle}"
+											 SmallChange="1"
+											 Value="0"
+											 Header="Value"
+											 PlaceholderText="Add"
+											 SpinButtonPlacementMode="Inline" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled NumberBox -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_NumberBoxSamplePage_HeaderDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<winui:NumberBox Style="{StaticResource CupertinoNumberBoxStyle}"
+											 SmallChange="1"
+											 Value="0"
+											 Header="Value"
 											 PlaceholderText="Add"
 											 IsEnabled="False"
 											 SpinButtonPlacementMode="Inline" />
