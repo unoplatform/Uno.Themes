@@ -19,6 +19,11 @@
 					 Opacity="0.3" />
 
 	<x:Double x:Key="CupertinoButtonFontSize">17</x:Double>
+	<x:Double x:Key="CupertinoHeaderFontSize">8</x:Double>
+	
+	<SolidColorBrush x:Key="CupertinoHeaderForegroundBrush"
+					 Color="{ThemeResource LabelColor}"
+					 Opacity="0.7" />
 
 	<CornerRadius x:Key="CupertinoCornerRadius">8</CornerRadius>
 
@@ -81,7 +86,11 @@
 
 							<TextBox x:Name="InputBox"
 									 Grid.Column="0"
-									 Style="{StaticResource NumberBoxTextBoxStyle}" />
+									 Style="{StaticResource NumberBoxTextBoxStyle}"
+									 Text="{TemplateBinding Text}"
+									 Header="{TemplateBinding Header}"
+									 HeaderTemplate="{TemplateBinding HeaderTemplate}"
+									 PlaceholderText="{TemplateBinding PlaceholderText}" />
 
 							<StackPanel CornerRadius="{TemplateBinding CornerRadius}"
 										Background="{StaticResource CupertinoQuinaryGrayBrush}"
@@ -238,9 +247,11 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Padding"
-				Value="15,5,5,5" />
+				Value="5" />
 		<Setter Property="InputScope"
 				Value="Number" />
+		<Setter Property="PlaceholderForeground"
+				Value="{StaticResource CupertinoPlaceholderTextBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -261,12 +272,34 @@
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="HeaderStates">
 								<VisualState x:Name="NotEmpty" />
-								<VisualState x:Name="Empty" />
+								<VisualState x:Name="Empty">
+									<VisualState.Setters>
+										<Setter Target="PlaceholderElement.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource CupertinoEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid>
+						<Grid Margin="{TemplateBinding Padding}">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							
+							<ContentPresenter x:Name="HeaderContentPresenter"
+											  Content="{TemplateBinding Header}"
+											  ContentTemplate="{TemplateBinding HeaderTemplate}"
+											  FontSize="{StaticResource CupertinoHeaderFontSize}"
+											  Foreground="{ThemeResource CupertinoHeaderForegroundBrush}"
+											  TextWrapping="Wrap"
+											  VerticalAlignment="Top"/>
+							
 							<ScrollViewer x:Name="ContentElement"
+										  Grid.Row="1"
 										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
 										  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
 										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -282,6 +315,18 @@
 									<CompositeTransform x:Name="ContentElement_CompositeTransform" />
 								</ScrollViewer.RenderTransform>
 							</ScrollViewer>
+
+							<TextBlock x:Name="PlaceholderElement"
+									   Grid.Row="1"
+									   Foreground="{TemplateBinding PlaceholderForeground}"
+									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									   IsHitTestVisible="False"
+									   RenderTransformOrigin="0,0.5"
+									   Text="{TemplateBinding PlaceholderText}"
+									   TextAlignment="{TemplateBinding TextAlignment}"
+									   TextWrapping="{TemplateBinding TextWrapping}"
+									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									   Opacity="0" />
 						</Grid>
 					</Grid>
 				</ControlTemplate>
