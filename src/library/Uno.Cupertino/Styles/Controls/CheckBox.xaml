@@ -233,8 +233,20 @@
 							</VisualStateGroup>
 
 							<VisualStateGroup x:Name="FocusStates">
-								<VisualState x:Name="Focused" />
-								<VisualState x:Name="PointerFocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusRing.Opacity"
+												Value="{StaticResource CupertinoFocusedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FocusRing.Opacity"
+												Value="{StaticResource CupertinoFocusedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
 								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
@@ -243,6 +255,16 @@
 							<ColumnDefinition Width="{StaticResource CheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
+
+						<Ellipse x:Name="FocusRing"
+								 HorizontalAlignment="Center"
+								 VerticalAlignment="Center"
+								 Stretch="Uniform"
+								 Width="{StaticResource FocusAreaSize}"
+								 Height="{StaticResource FocusAreaSize}"
+								 Fill="{TemplateBinding Background}"
+								 IsHitTestVisible="False"
+								 Opacity="0" />
 
 						<Grid x:Name="CheckBoxContainer"
 							  Height="{StaticResource CheckAreaSize}"
