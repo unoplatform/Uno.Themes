@@ -16,7 +16,7 @@
 		<ResourceDictionary Source="../Application/StateConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!--  Toggle On  -->
+	<!-- Toggle On -->
 	<SolidColorBrush x:Key="CupertinoToggleSwitchOnButtonBrush"
 					 Color="{ThemeResource CupertinoWhiteColor}" />
 	<SolidColorBrush x:Key="CupertinoToggleSwitchOnBackgroundBrush"
@@ -266,7 +266,7 @@
 							  Grid.ColumnSpan="3"
 							  Control.IsTemplateFocusTarget="True" />
 
-						<!--  Marker element used to compute draggable zone  -->
+						<!-- Marker element used to compute draggable zone -->
 						<Rectangle x:Name="SwitchKnobBounds"
 								   Grid.Row="2" />
 
@@ -296,30 +296,16 @@
 							  Width="31"
 							  Height="27">
 
-							<Grid CornerRadius="60">
-								<toolkit:ElevatedView x:Name="SwitchKnobOn"
-													  Elevation="3"
-													  VerticalAlignment="Stretch"
-													  HorizontalAlignment="Stretch"
-													  Background="Transparent"
-													  Opacity="0">
-									<Ellipse Fill="{TemplateBinding Foreground}"
-											 VerticalAlignment="Stretch"
-											 HorizontalAlignment="Stretch" />
-								</toolkit:ElevatedView>
-							</Grid>
+							<Ellipse Fill="{TemplateBinding Foreground}"
+									 x:Name="SwitchKnobOn"
+									 Opacity="0"
+									 VerticalAlignment="Stretch"
+									 HorizontalAlignment="Stretch" />
 
-							<Grid CornerRadius="60">
-								<toolkit:ElevatedView x:Name="SwitchKnobOff"
-													  Elevation="3"
-													  VerticalAlignment="Stretch"
-													  HorizontalAlignment="Stretch"
-													  Background="Transparent">
-									<Ellipse Fill="{TemplateBinding Foreground}"
-											 VerticalAlignment="Stretch"
-											 HorizontalAlignment="Stretch" />
-								</toolkit:ElevatedView>
-							</Grid>
+							<Ellipse Fill="{TemplateBinding Foreground}"
+									 x:Name="SwitchKnobOff"
+									 VerticalAlignment="Stretch"
+									 HorizontalAlignment="Stretch" />
 
 							<Grid.RenderTransform>
 								<TranslateTransform x:Name="KnobTranslateTransform" />
