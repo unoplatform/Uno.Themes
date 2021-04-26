@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
+#if WinUI
+using Microsoft.UI;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#else
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+#endif
 
 namespace Uno.Material.Controls
 {
 	public partial class Card : Control
 	{
 #if __ANDROID__
-		private static readonly Color _defaultShadowColor = Colors.Black;
+		private static readonly Windows.UI.Color _defaultShadowColor = Colors.Black;
 #else
-		private static readonly Color _defaultShadowColor = Color.FromArgb(64, 0, 0, 0);
+		private static readonly Windows.UI.Color _defaultShadowColor = Windows.UI.Color.FromArgb(64, 0, 0, 0);
 #endif
 
-		#region HeaderContent and HeaderContentTemplate
+#region HeaderContent and HeaderContentTemplate
 		public object HeaderContent
 		{
 			get { return (object)GetValue(HeaderContentProperty); }
@@ -33,9 +40,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty HeaderContentTemplateProperty =
 			DependencyProperty.Register("HeaderContentTemplate", typeof(DataTemplate), typeof(Card), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region SubHeaderContent and SubHeaderContentTemplate
+#region SubHeaderContent and SubHeaderContentTemplate
 		public object SubHeaderContent
 		{
 			get { return (object)GetValue(SubHeaderContentProperty); }
@@ -53,9 +60,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty SubHeaderContentTemplateProperty =
 			DependencyProperty.Register("SubHeaderContentTemplate", typeof(DataTemplate), typeof(Card), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region AvatarContent and AvatarContentTemplate
+#region AvatarContent and AvatarContentTemplate
 		public object AvatarContent
 		{
 			get { return (object)GetValue(AvatarContentProperty); }
@@ -73,9 +80,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty AvatarContentTemplateProperty =
 			DependencyProperty.Register("AvatarContentTemplate", typeof(DataTemplate), typeof(Card), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region MediaContent and MediaContentTemplate
+#region MediaContent and MediaContentTemplate
 		public object MediaContent
 		{
 			get { return (object)GetValue(MediaContentProperty); }
@@ -93,9 +100,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty MediaContentTemplateProperty =
 			DependencyProperty.Register("MediaContentTemplate", typeof(DataTemplate), typeof(Card), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region SupportingContent and SupportingContentTemplate
+#region SupportingContent and SupportingContentTemplate
 		public object SupportingContent
 		{
 			get { return (object)GetValue(SupportingContentProperty); }
@@ -113,9 +120,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty SupportingContentTemplateProperty =
 			DependencyProperty.Register("SupportingContentTemplate", typeof(DataTemplate), typeof(Card), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region IconsContent and IconsContentTemplate
+#region IconsContent and IconsContentTemplate
 		public object IconsContent
 		{
 			get { return (object)GetValue(IconsContentProperty); }
@@ -133,9 +140,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty IconsContentTemplateProperty =
 			DependencyProperty.Register("IconsContentTemplate", typeof(DataTemplate), typeof(Card), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region Elevation
+#region Elevation
 		public double Elevation
 		{
 			get { return (double)GetValue(ElevationProperty); }
@@ -144,17 +151,17 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty ElevationProperty =
 			DependencyProperty.Register("Elevation", typeof(double), typeof(Card), new PropertyMetadata(0));
-		#endregion
+#endregion
 
-		#region ShadowColor
-		public Color ShadowColor
+#region ShadowColor
+		public Windows.UI.Color ShadowColor
 		{
-			get { return (Color)GetValue(ShadowColorProperty); }
+			get { return (Windows.UI.Color)GetValue(ShadowColorProperty); }
 			set { SetValue(ShadowColorProperty, value); }
 		}
 
 		public static readonly DependencyProperty ShadowColorProperty =
-			DependencyProperty.Register("ShadowColor", typeof(Color), typeof(Card), new PropertyMetadata(_defaultShadowColor));
-		#endregion
+			DependencyProperty.Register("ShadowColor", typeof(Windows.UI.Color), typeof(Card), new PropertyMetadata(_defaultShadowColor));
+#endregion
 	}
 }

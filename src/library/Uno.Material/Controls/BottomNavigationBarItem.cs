@@ -1,9 +1,15 @@
 ﻿using Windows.Foundation;
 using Uno.Material.Entities;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
+#endif
 
 namespace Uno.Material.Controls
 {

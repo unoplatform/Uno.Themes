@@ -9,11 +9,18 @@ using Uno.Material.Extensions;
 using Uno.UI.Toolkit;
 using Windows.ApplicationModel.Store;
 using Windows.Foundation;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+#endif
 
 namespace Uno.Material.Controls
 {

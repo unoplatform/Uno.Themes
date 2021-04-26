@@ -5,10 +5,14 @@ using Uno.Material.Entities;
 using Uno.UI.Toolkit;
 using Windows.ApplicationModel.Store;
 using Windows.Foundation;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+#endif
 
 namespace Uno.Material.Controls
 {
@@ -19,7 +23,7 @@ namespace Uno.Material.Controls
 		/// </summary>
 		public double MaxY => ActualHeight - _header.ActualHeight;
 
-		#region  HeaderContent, HeaderContentTemplate & FullScreenHeaderContentTemplate
+#region  HeaderContent, HeaderContentTemplate & FullScreenHeaderContentTemplate
 		public object HeaderContent
 		{
 			get { return (object)GetValue(HeaderContentProperty); }
@@ -46,9 +50,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty FullScreenHeaderContentTemplateProperty =
 			DependencyProperty.Register("FullScreenHeaderContentTemplate", typeof(DataTemplate), typeof(StandardBottomSheet), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region Content & ContentTemplate
+#region Content & ContentTemplate
 		public object Content
 		{
 			get { return (object)GetValue(ContentProperty); }
@@ -66,7 +70,7 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty ContentTemplateProperty =
 			DependencyProperty.Register("ContentTemplate", typeof(DataTemplate), typeof(StandardBottomSheet), new PropertyMetadata(null));
-		#endregion
+#endregion
 
 		public SheetSnapAreaCollection SnapAreas
 		{

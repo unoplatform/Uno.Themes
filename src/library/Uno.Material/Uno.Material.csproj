@@ -1,51 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid10.0;monoandroid11.0;xamarinmac20</TargetFrameworks>
-		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.18362;</TargetFrameworks>
-		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 	</PropertyGroup>
+	
 	<ItemGroup>
-		<PackageReference Include="nventive.Nimue.TargetFrameworks.Filtering" Version="0.1.0-alpha.58">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Uno.UI" Version="3.6.0-dev.445" />
+		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
+	</ItemGroup>
+	
+	<Choose>
+		<When Condition="'$(UseWinUI)'=='true'">
+			
+			<PropertyGroup>
+				<DefineConstants>WinUI</DefineConstants>
+				<DefineConstants Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">$(DefineConstants);WinUI_Desktop</DefineConstants>
+				<PackageId>Uno.Material.WinUI</PackageId>
+				<TargetFrameworks>$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
+			</PropertyGroup>
+			
+			<ItemGroup>
+				<PackageReference Include="Uno.WinUI" Version="3.7.0-dev.251" />
+
+				<PackageReference Include="Uno.WinUI.Lottie"
+													Version="3.7.0-dev.251"
+													Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+
+				<PackageReference Include="Microsoft.ProjectReunion"
+													Version="0.5.0"
+													Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+				<Content Include="Assets\MaterialDeterminate.json" />
+				<Content Include="Assets\MaterialIndeterminate.json" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+				<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
+				<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+				<Page Remove="Styles\Controls\NavigationView*.xaml" />
+				<Page Remove="Styles\Controls\ProgressRing.xaml" />
+			</ItemGroup>
+	
+			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+				<Page Include="**\*.xaml" Exclude="Styles\Controls\NavigationView*.xaml;bin\**\*.xaml;obj\**\*.xaml" />
+				<Compile Update="**\*.xaml.cs">
+					<DependentUpon>%(Filename)</DependentUpon>
+				</Compile>
+			</ItemGroup>
 		
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
-		<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
-		<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie">
-			<Version>6.1.0</Version>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-		<PackageReference Include="Uno.UI.Lottie" Version="3.6.0-dev.445" />
-	</ItemGroup>
-	<ItemGroup>
-		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-		<Compile Update="**\*.xaml.cs">
-			<DependentUpon>%(Filename)</DependentUpon>
-		</Compile>
-		<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-		<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
-		<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
-		<Content Include="Assets\MaterialDeterminate.json" />
-		<Content Include="Assets\MaterialIndeterminate.json" />
-	</ItemGroup>
+		</When>
+		<Otherwise>
+
+			<PropertyGroup>
+				<PackageId>Uno.Material</PackageId>
+				<TargetFrameworks Condition="'$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.18362</TargetFrameworks>
+			</PropertyGroup>
+			
+			<ItemGroup>
+				<PackageReference Include="Uno.UI" Version="3.7.0-dev.251" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
+				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+				<PackageReference Include="Uno.UI.Lottie" Version="3.7.0-dev.251" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+				<Content Include="Assets\MaterialDeterminate.json" />
+				<Content Include="Assets\MaterialIndeterminate.json" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+				<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
+				<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
+			</ItemGroup>
+
+			<ItemGroup>
+				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+				<Compile Update="**\*.xaml.cs">
+					<DependentUpon>%(Filename)</DependentUpon>
+				</Compile>
+				<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
+			</ItemGroup>
+		
+		</Otherwise>
+	</Choose>
+	
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
+	
 	<ItemGroup>
 		<EmbeddedResource Include="LinkerConfig.xml">
 			<LogicalName>$(AssemblyName).xml</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
+	
 	<ItemGroup>
 		<None Update="Styles\Controls\Button.xaml">
 			<Generator>MSBuild:Compile</Generator>

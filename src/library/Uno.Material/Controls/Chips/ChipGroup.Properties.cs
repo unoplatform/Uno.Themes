@@ -2,13 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace Uno.Material.Controls
 {
 	public partial class ChipGroup
 	{
-		#region DependencyProperty: SelectedItem
+#region DependencyProperty: SelectedItem
 
 		public static DependencyProperty SelectedItemProperty { get; } = DependencyProperty.Register(
 			nameof(SelectedItem),
@@ -22,9 +27,9 @@ namespace Uno.Material.Controls
 			set => SetValue(SelectedItemProperty, value);
 		}
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: SelectedItems
+#region DependencyProperty: SelectedItems
 
 		public static DependencyProperty SelectedItemsProperty { get; } = DependencyProperty.Register(
 			nameof(SelectedItems),
@@ -38,9 +43,9 @@ namespace Uno.Material.Controls
 			set => SetValue(SelectedItemsProperty, value);
 		}
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: SelectionMemberPath
+#region DependencyProperty: SelectionMemberPath
 
 		public static DependencyProperty SelectionMemberPathProperty { get; } = DependencyProperty.Register(
 			nameof(SelectionMemberPath),
@@ -57,9 +62,9 @@ namespace Uno.Material.Controls
 			set => SetValue(SelectionMemberPathProperty, value);
 		}
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: SelectionMode = ChipSelectionMode.Single
+#region DependencyProperty: SelectionMode = ChipSelectionMode.Single
 
 		public static DependencyProperty SelectionModeProperty { get; } = DependencyProperty.Register(
 			nameof(SelectionMode),
@@ -73,9 +78,9 @@ namespace Uno.Material.Controls
 			set => SetValue(SelectionModeProperty, value);
 		}
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: ThumbnailTemplate
+#region DependencyProperty: ThumbnailTemplate
 
 		public DataTemplate ThumbnailTemplate
 		{
@@ -86,9 +91,9 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty ThumbnailTemplateProperty =
 			DependencyProperty.Register("ThumbnailTemplate", typeof(DataTemplate), typeof(ChipGroup), new PropertyMetadata(null, (s, e) => (s as ChipGroup)?.ApplyThumbnailTemplate()));
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: CanRemove = false
+#region DependencyProperty: CanRemove = false
 
 		// TODO : Implement Remove Command/Event
 
@@ -101,6 +106,6 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty CanRemoveProperty =
 			DependencyProperty.Register("CanRemove", typeof(bool), typeof(ChipGroup), new PropertyMetadata(false, (s, e) => (s as ChipGroup)?.ApplyCanRemoveProperty()));
 
-		#endregion
+#endregion
 	}
 }
