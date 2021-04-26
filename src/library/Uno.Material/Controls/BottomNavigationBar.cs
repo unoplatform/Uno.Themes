@@ -116,6 +116,10 @@ namespace Uno.Material.Controls
 			{
 				item.IsChecked = true;
 			}
+			else if (e.NewValue == null && e.OldValue is BottomNavigationBarItem oldItem)
+			{
+				oldItem.IsChecked = false;
+			}
 		}
 
 		private void BottomNavigationBarItem_Checked(object sender, RoutedEventArgs e)
