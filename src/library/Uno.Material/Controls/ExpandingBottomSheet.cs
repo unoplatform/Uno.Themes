@@ -1,8 +1,13 @@
 ﻿using Windows.ApplicationModel.Store;
 using Windows.Foundation;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
+#endif
 
 namespace Uno.Material.Controls
 {
@@ -50,7 +55,7 @@ namespace Uno.Material.Controls
 			IsExpanded = !IsExpanded;
 		}
 
-		#region IsExpanded
+#region IsExpanded
 		public bool IsExpanded
 		{
 			get { return (bool)GetValue(IsExpandedProperty); }
@@ -65,9 +70,9 @@ namespace Uno.Material.Controls
 			var sheet = d as ExpandingBottomSheet;
 			sheet?.UpdateVisualStates(true);
 		}
-		#endregion
+#endregion
 
-		#region CollapsedContent, CollapsedContentTemplate and MinimalCollapsedContentTemplate
+#region CollapsedContent, CollapsedContentTemplate and MinimalCollapsedContentTemplate
 		public object CollapsedContent
 		{
 			get { return (object)GetValue(CollapsedContentProperty); }
@@ -94,9 +99,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty MinimalCollapsedContentTemplateProperty =
 			DependencyProperty.Register("MinimalCollapsedContentTemplate", typeof(DataTemplate), typeof(ExpandingBottomSheet), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region ExpandedContent, ExpandedContentTemplate and ExpandedHeaderContentTemplate
+#region ExpandedContent, ExpandedContentTemplate and ExpandedHeaderContentTemplate
 		public object ExpandedContent
 		{
 			get { return (object)GetValue(ExpandedContentProperty); }
@@ -123,9 +128,9 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty ExpandedHeaderContentTemplateProperty =
 			DependencyProperty.Register("ExpandedHeaderContentTemplate", typeof(DataTemplate), typeof(ExpandingBottomSheet), new PropertyMetadata(null));
-		#endregion
+#endregion
 
-		#region IsMinimalSheet
+#region IsMinimalSheet
 		public bool IsMinimalSheet
 		{
 			get { return (bool)GetValue(IsMinimalSheetProperty); }
@@ -134,6 +139,6 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty IsMinimalSheetProperty =
 			DependencyProperty.Register("IsMinimalSheet", typeof(bool), typeof(ExpandingBottomSheet), new PropertyMetadata(false));
-		#endregion
+#endregion
 	}
 }

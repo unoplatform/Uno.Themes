@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace Uno.Cupertino
 {

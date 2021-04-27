@@ -4,19 +4,27 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.Devices.Input;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
+#endif
 
 namespace Uno.Material.Controls
 {
 	/*
 	 * Starting implementation acknowledgement from project https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/blob/2740f14a814896d42032ae0013b765a8a0ec04c3/MaterialDesignThemes.Uwp/Ripple.cs
 	 */
-	public partial class Ripple : ContentControl, INotifyPropertyChanged
+	public partial class Ripple : ContentControl, System.ComponentModel.INotifyPropertyChanged
 	{
 		private double _rippleSize;
 		private double _rippleX;
@@ -204,11 +212,11 @@ namespace Uno.Material.Controls
 			}
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
 		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

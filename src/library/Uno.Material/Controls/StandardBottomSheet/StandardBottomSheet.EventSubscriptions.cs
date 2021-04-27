@@ -10,16 +10,22 @@ using Uno.Material.Entities;
 using Uno.UI.Toolkit;
 using Windows.ApplicationModel.Store;
 using Windows.Foundation;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+#endif
 
 namespace Uno.Material.Controls
 {
 	public partial class StandardBottomSheet : Control
 	{
-		#region PointerSubscriptions
+#region PointerSubscriptions
 		private void SubscribeToPointerEvents()
 		{
 			if (_header != null)
@@ -196,9 +202,9 @@ namespace Uno.Material.Controls
 				}
 			}
 		}
-		#endregion
+#endregion
 
-		#region SizeSubscriptions
+#region SizeSubscriptions
 		private void SubscribeToSizeChangedEvents()
 		{
 			if (_header != null)
@@ -225,6 +231,6 @@ namespace Uno.Material.Controls
 		/// This event is raised when the view inside the <see cref="Header"/> changed size.
 		/// </summary>
 		public event Action ComponentSizeChanged;
-		#endregion
+#endregion
 	}
 }
