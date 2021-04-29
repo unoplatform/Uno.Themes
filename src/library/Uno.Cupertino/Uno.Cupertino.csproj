@@ -22,13 +22,9 @@
 			<ItemGroup>
 				<PackageReference Include="Uno.WinUI" Version="3.7.0-dev.251" />
 
-				<PackageReference Include="Uno.WinUI.Lottie"
-													Version="3.7.0-dev.251"
-													Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Uno.WinUI.Lottie" Version="3.7.0-dev.251" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
-				<PackageReference Include="Microsoft.ProjectReunion"
-													Version="0.5.0"
-													Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Microsoft.ProjectReunion" Version="0.5.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
@@ -58,14 +54,14 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="3.7.0-dev.251" />
+				<PackageReference Include="Uno.UI" Version="3.8.0-dev.45" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-				<PackageReference Include="Uno.UI.Lottie" Version="3.7.0-dev.251" />
+				<PackageReference Include="Uno.UI.Lottie" Version="3.8.0-dev.45" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
