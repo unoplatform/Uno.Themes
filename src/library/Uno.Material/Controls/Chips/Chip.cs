@@ -102,6 +102,22 @@ namespace Uno.Material.Controls
 
 #endregion
 
+#region DependencyProperty: RemovedCommandParameter
+
+		public static DependencyProperty RemovedCommandParameterProperty { get; } = DependencyProperty.Register(
+			nameof(RemovedCommandParameter),
+			typeof(object),
+			typeof(Chip),
+			new PropertyMetadata(default));
+
+		public object RemovedCommandParameter
+		{
+			get => (object)GetValue(RemovedCommandParameterProperty);
+			set => SetValue(RemovedCommandParameterProperty, value);
+		}
+
+#endregion
+
 		private bool _isMuted = false;
 
 		public Chip()
@@ -150,9 +166,10 @@ namespace Uno.Material.Controls
 				{
 					Removed?.Invoke(this, e);
 
-					if (RemovedCommand is ICommand command && command.CanExecute(default))
+					var param = RemovedCommandParameter;
+					if (RemovedCommand is ICommand command && command.CanExecute(param))
 					{
-						command.Execute(default);
+						command.Execute(param);
 					}
 				}
 			}
