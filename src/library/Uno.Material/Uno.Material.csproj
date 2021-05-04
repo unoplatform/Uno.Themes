@@ -2,9 +2,16 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid10.0;monoandroid11.0;xamarinmac20</TargetFrameworks>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 	</PropertyGroup>
-	
+
+	<ItemGroup>
+		<PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.26" PrivateAssets="All"/>
+	</ItemGroup>
+
 	<ItemGroup>
 		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
 	</ItemGroup>
@@ -20,11 +27,14 @@
 			</PropertyGroup>
 			
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="3.7.0-dev.251" />
+				<PackageReference Include="Uno.WinUI" Version="3.8.0-dev.72" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="3.7.0-dev.251" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Uno.WinUI.Lottie" Version="3.8.0-dev.72" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
-				<PackageReference Include="Microsoft.ProjectReunion" Version="0.5.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Microsoft.ProjectReunion" Version="0.5.6" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+
+				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.18362.16" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.18362.16" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
@@ -57,14 +67,14 @@
 			</PropertyGroup>
 			
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="3.8.0-dev.45" />
+				<PackageReference Include="Uno.UI" Version="3.8.0-dev.72" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-				<PackageReference Include="Uno.UI.Lottie" Version="3.8.0-dev.45" />
+				<PackageReference Include="Uno.UI.Lottie" Version="3.8.0-dev.72" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
