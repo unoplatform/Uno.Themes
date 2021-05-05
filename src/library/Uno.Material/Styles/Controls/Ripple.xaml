@@ -50,7 +50,8 @@
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="0:0:0.225"
 														 From="0"
-														 To="1">
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSizeMultiplier}"
+														 FillBehavior="Stop">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseInOut" />
 											</DoubleAnimation.EasingFunction>
@@ -59,13 +60,14 @@
 														 Storyboard.TargetProperty="ScaleY"
 														 Duration="0:0:0.225"
 														 From="0"
-														 To="1">
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSizeMultiplier}"
+														 FillBehavior="Stop">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseInOut" />
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
 										<win:DoubleAnimationUsingKeyFrames Storyboard.TargetName="ClickEllipse"
-																	   Storyboard.TargetProperty="Opacity">
+																			Storyboard.TargetProperty="Opacity">
 											<EasingDoubleKeyFrame KeyTime="0"
 																  Value="0">
 												<EasingDoubleKeyFrame.EasingFunction>
@@ -135,12 +137,7 @@
 									 Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleY}"
 									 RenderTransformOrigin=".5,.5">
 								<Ellipse.RenderTransform>
-									<TransformGroup>
-										<ScaleTransform x:Name="ScaleTransform" />
-										<SkewTransform />
-										<RotateTransform />
-										<TranslateTransform x:Name="TranslateTransform" />
-									</TransformGroup>
+									<ScaleTransform x:Name="ScaleTransform" ScaleX="0" ScaleY="0" />
 								</Ellipse.RenderTransform>
 							</Ellipse>
 						</Canvas>
