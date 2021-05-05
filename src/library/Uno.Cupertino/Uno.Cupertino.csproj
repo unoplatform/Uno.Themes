@@ -1,47 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
-  <!--
-	Adding project references to this project requires some manual adjustments.
-	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
-	-->
+<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;xamarinios10;xamarinmac20;MonoAndroid11.0;monoandroid10.0</TargetFrameworks>
-		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.18362;</TargetFrameworks>
-    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <TargetFrameworks>netstandard2.0;xamarinios10;xamarinmac20;MonoAndroid10.0;monoandroid11.0</TargetFrameworks>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
-  <ItemGroup>
-		<PackageReference Include="nventive.Nimue.TargetFrameworks.Filtering" Version="0.1.0-alpha.58">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-    <PackageReference Include="Uno.UI" Version="3.6.0-dev.445" />
-  </ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
-		<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
+	
+	<ItemGroup>
+		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
 	</ItemGroup>
-  <ItemGroup>
-    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	
+	<Choose>
+		<When Condition="'$(UseWinUI)'=='true'">
+
+			<PropertyGroup>
+				<DefineConstants>WinUI</DefineConstants>
+				<DefineConstants Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">$(DefineConstants);WinUI_Desktop</DefineConstants>
+				<PackageId>Uno.Cupertino.WinUI</PackageId>
+				<TargetFrameworks>$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
+			</PropertyGroup>
+
+			<ItemGroup>
+				<PackageReference Include="Uno.WinUI" Version="3.7.0-dev.251" />
+
+				<PackageReference Include="Uno.WinUI.Lottie" Version="3.7.0-dev.251" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+
+				<PackageReference Include="Microsoft.ProjectReunion" Version="0.5.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+				<Content Include="Assets\CupertinoProgressRing.json" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+				<EmbeddedResource Include="Assets\CupertinoProgressRing.json" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+				<Page Remove="Styles\Controls\ProgressRing.xaml" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+				<Compile Update="**\*.xaml.cs">
+					<DependentUpon>%(Filename)</DependentUpon>
+				</Compile>
+			</ItemGroup>
+			
+		</When>
+		<Otherwise>
+
+			<PropertyGroup>
+				<PackageId>Uno.Cupertino</PackageId>
+				<TargetFrameworks Condition="'$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.18362</TargetFrameworks>
+			</PropertyGroup>
+
+			<ItemGroup>
+				<PackageReference Include="Uno.UI" Version="3.8.0-dev.45" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
+				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+				<PackageReference Include="Uno.UI.Lottie" Version="3.8.0-dev.45" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+				<Content Include="Assets\CupertinoProgressRing.json" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+				<EmbeddedResource Include="Assets\CupertinoProgressRing.json" />
+			</ItemGroup>
+
+			<ItemGroup>
+				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+				<Compile Update="**\*.xaml.cs">
+					<DependentUpon>%(Filename)</DependentUpon>
+				</Compile>
+				<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
+			</ItemGroup>
+			
+		</Otherwise>
+	</Choose>
+	
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
+
 	<ItemGroup>
-	  <None Remove="Styles\Controls\DatePicker.xaml" />
-	</ItemGroup>
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Styles\Controls\DatePicker.xaml" />
-	</ItemGroup>
-  <ItemGroup>
-		<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
-		<Compile Update="**\*.xaml.cs">
-			<DependentUpon>%(Filename)</DependentUpon>
-		</Compile>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="LinkerConfig.xml">
       <LogicalName>$(AssemblyName).xml</LogicalName>
     </EmbeddedResource>

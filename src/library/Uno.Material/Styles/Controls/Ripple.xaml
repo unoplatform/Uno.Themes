@@ -22,6 +22,8 @@
 				Value="Transparent" />
 		<Setter Property="Feedback"
 				Value="{StaticResource MaterialBackgroundBrush}" />
+		<Setter Property="IsTabStop"
+				Value="False" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Ripple">
@@ -46,7 +48,7 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="ScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="0:0:0.8"
+														 Duration="0:0:0.225"
 														 From="0"
 														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSizeMultiplier}"
 														 FillBehavior="Stop">
@@ -56,7 +58,7 @@
 										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="ScaleTransform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="0:0:0.8"
+														 Duration="0:0:0.225"
 														 From="0"
 														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSizeMultiplier}"
 														 FillBehavior="Stop">
@@ -72,19 +74,19 @@
 													<CubicEase EasingMode="EaseIn" />
 												</EasingDoubleKeyFrame.EasingFunction>
 											</EasingDoubleKeyFrame>
-											<EasingDoubleKeyFrame KeyTime="0:0:0.05"
+											<EasingDoubleKeyFrame KeyTime="0:0:0.075"
 																  Value="1">
 												<EasingDoubleKeyFrame.EasingFunction>
 													<CubicEase EasingMode="EaseIn" />
 												</EasingDoubleKeyFrame.EasingFunction>
 											</EasingDoubleKeyFrame>
-											<EasingDoubleKeyFrame KeyTime="0:0:0.8"
+											<EasingDoubleKeyFrame KeyTime="0:0:0.6"
 																  Value="1">
 												<EasingDoubleKeyFrame.EasingFunction>
 													<CubicEase EasingMode="EaseIn" />
 												</EasingDoubleKeyFrame.EasingFunction>
 											</EasingDoubleKeyFrame>
-											<EasingDoubleKeyFrame KeyTime="0:0:1.2"
+											<EasingDoubleKeyFrame KeyTime="0:0:1"
 																  Value="0">
 												<EasingDoubleKeyFrame.EasingFunction>
 													<CubicEase EasingMode="EaseIn" />
@@ -93,7 +95,7 @@
 										</win:DoubleAnimationUsingKeyFrames>
 										<not_win:DoubleAnimation Storyboard.TargetName="ClickEllipse"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="0:0:0.05"
+														 Duration="0:0:0.075"
 														 From="0"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
@@ -103,12 +105,9 @@
 										<not_win:DoubleAnimation Storyboard.TargetName="ClickEllipse"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="0:0:0.4"
-														 BeginTime="0:0:0.8"
+														 BeginTime="0:0:0.6"
 														 From="1"
 														 To="0">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
 										</not_win:DoubleAnimation>
 									</Storyboard>
 								</VisualState>

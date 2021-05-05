@@ -2,9 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+#endif
 
 namespace Uno.Material.Controls
 {
@@ -21,7 +28,7 @@ namespace Uno.Material.Controls
 		/// </summary>
 		internal event RoutedEventHandler IsCheckedChanged;
 
-		#region DependencyProperty: IsCheckable = true
+#region DependencyProperty: IsCheckable = true
 
 		public static DependencyProperty IsCheckableProperty { get; } = DependencyProperty.Register(
 			nameof(IsCheckable),
@@ -38,9 +45,9 @@ namespace Uno.Material.Controls
 			set => SetValue(IsCheckableProperty, value);
 		}
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: Thumbnail
+#region DependencyProperty: Thumbnail
 
 		public object Thumbnail
 		{
@@ -51,9 +58,9 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty ThumbnailProperty =
 			DependencyProperty.Register("Thumbnail", typeof(object), typeof(Chip), new PropertyMetadata(null));
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: ThumbnailTemplate
+#region DependencyProperty: ThumbnailTemplate
 
 		public DataTemplate ThumbnailTemplate
 		{
@@ -64,9 +71,9 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty ThumbnailTemplateProperty =
 			DependencyProperty.Register("ThumbnailTemplate", typeof(DataTemplate), typeof(Chip), new PropertyMetadata(null));
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: CanRemove = false
+#region DependencyProperty: CanRemove = false
 
 		public bool CanRemove
 		{
@@ -77,9 +84,9 @@ namespace Uno.Material.Controls
 		public static readonly DependencyProperty CanRemoveProperty =
 			DependencyProperty.Register("CanRemove", typeof(bool), typeof(Chip), new PropertyMetadata(false));
 
-		#endregion
+#endregion
 
-		#region DependencyProperty: RemovedCommand
+#region DependencyProperty: RemovedCommand
 
 		public static DependencyProperty RemovedCommandProperty { get; } = DependencyProperty.Register(
 			nameof(RemovedCommand),
@@ -93,7 +100,23 @@ namespace Uno.Material.Controls
 			set => SetValue(RemovedCommandProperty, value);
 		}
 
-		#endregion
+#endregion
+
+#region DependencyProperty: RemovedCommandParameter
+
+		public static DependencyProperty RemovedCommandParameterProperty { get; } = DependencyProperty.Register(
+			nameof(RemovedCommandParameter),
+			typeof(object),
+			typeof(Chip),
+			new PropertyMetadata(default));
+
+		public object RemovedCommandParameter
+		{
+			get => (object)GetValue(RemovedCommandParameterProperty);
+			set => SetValue(RemovedCommandParameterProperty, value);
+		}
+
+#endregion
 
 		private bool _isMuted = false;
 
@@ -143,9 +166,10 @@ namespace Uno.Material.Controls
 				{
 					Removed?.Invoke(this, e);
 
-					if (RemovedCommand is ICommand command && command.CanExecute(default))
+					var param = RemovedCommandParameter;
+					if (RemovedCommand is ICommand command && command.CanExecute(param))
 					{
-						command.Execute(default);
+						command.Execute(param);
 					}
 				}
 			}

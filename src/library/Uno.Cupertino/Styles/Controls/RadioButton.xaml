@@ -8,6 +8,7 @@
 
 	<GridLength x:Key="RadioCheckAreaLength">22</GridLength>
 	<x:Double x:Key="RadioCheckAreaSize">22</x:Double>
+	<x:Double x:Key="RadioFocusAreaSize">40</x:Double>
 	<x:Double x:Key="RadioBorderThickness">1</x:Double>
 	<x:Double x:Key="RadioBorderCheckedThickness">8</x:Double>
 	<FontFamily x:Key="CupertinoRadioButtonFontFamily">SF Pro</FontFamily>
@@ -85,7 +86,19 @@
 
 							<VisualStateGroup x:Name="FocusStates">
 
-								<VisualState x:Name="Focused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusRing.Opacity"
+												Value="{StaticResource CupertinoFocusedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FocusRing.Opacity"
+												Value="{StaticResource CupertinoFocusedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
@@ -95,6 +108,17 @@
 							<ColumnDefinition Width="{StaticResource RadioCheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
+
+						<Ellipse x:Name="FocusRing"
+								 HorizontalAlignment="Center"
+								 VerticalAlignment="Center"
+								 Stretch="Uniform"
+								 Width="{StaticResource RadioFocusAreaSize}"
+								 Height="{StaticResource RadioFocusAreaSize}"
+								 Fill="{TemplateBinding Background}"
+								 IsHitTestVisible="False"
+								 StrokeThickness="0"
+								 Opacity="0" />
 
 						<Grid Height="{StaticResource RadioCheckAreaSize}"
 							  Width="{StaticResource RadioCheckAreaSize}">
@@ -138,7 +162,7 @@
 										  FontFamily="{StaticResource CupertinoRadioButtonFontFamily}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  TextWrapping="Wrap"
+										  TextWrapping="WrapWholeWords"
 										  Grid.Column="1" />
 					</Grid>
 				</ControlTemplate>

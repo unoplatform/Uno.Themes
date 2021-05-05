@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
+#if WinUI
+using Microsoft.UI.Xaml.Media.Animation;
+#else
 using Windows.UI.Xaml.Media.Animation;
+#endif
 
 namespace Uno.Material.Extensions
 {
-	/// <summary>
-	/// Extension methods for classes in the Windows.UI.Xaml.Media.Animation namespace.
-	/// </summary>
 	internal static class StoryboardExtensions
 	{
 		/// <summary>

@@ -4,9 +4,14 @@ using System.Linq;
 using Uno.Extensions;
 using Uno.Extensions.Specialized;
 using Uno.Material.Helpers;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Markup;
+#endif
 
 namespace Uno.Material.Controls
 {
@@ -27,7 +32,7 @@ namespace Uno.Material.Controls
 			Loaded += BottomNavigationBar_Loaded;
 		}
 
-		#region Property: Items
+#region Property: Items
 
 		public static DependencyProperty ItemsProperty { get; } = DependencyProperty.Register(
 			nameof(Items),
@@ -40,8 +45,8 @@ namespace Uno.Material.Controls
 			set => SetValue(ItemsProperty, value);
 		}
 
-		#endregion
-		#region Property: SelectedItem
+#endregion
+#region Property: SelectedItem
 
 		public static DependencyProperty SelectedItemProperty { get; } = DependencyProperty.Register(
 			nameof(SelectedItem),
@@ -54,7 +59,7 @@ namespace Uno.Material.Controls
 			set => SetValue(SelectedItemProperty, value);
 		}
 
-		#endregion
+#endregion
 
 		protected override void OnApplyTemplate()
 		{
@@ -115,6 +120,10 @@ namespace Uno.Material.Controls
 			if (e.NewValue is BottomNavigationBarItem item)
 			{
 				item.IsChecked = true;
+			}
+			else if (e.NewValue == null && e.OldValue is BottomNavigationBarItem oldItem)
+			{
+				oldItem.IsChecked = false;
 			}
 		}
 

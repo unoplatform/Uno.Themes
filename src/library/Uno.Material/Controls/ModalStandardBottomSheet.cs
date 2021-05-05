@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using Uno.Disposables;
 using Uno.Material.Entities;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace Uno.Material.Controls
 {
@@ -103,7 +108,7 @@ namespace Uno.Material.Controls
 			IsOpened = false;
 		}
 
-		#region IsOpened
+#region IsOpened
 		public bool IsOpened
 		{
 			get { return (bool)GetValue(IsOpenedProperty); }
@@ -134,6 +139,6 @@ namespace Uno.Material.Controls
 				}
 			}
 		}
-		#endregion
+#endregion
 	}
 }

@@ -1,8 +1,15 @@
 ﻿using Windows.ApplicationModel.Store;
 using Windows.Foundation;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+#endif
 
 namespace Uno.Material.Controls
 {

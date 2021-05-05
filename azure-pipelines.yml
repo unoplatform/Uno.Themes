@@ -15,7 +15,7 @@
 jobs:
 - job: Windows # Build UWP/Android/NuGet
   strategy:
-    maxParallel: 3
+    maxParallel: 4
     matrix:
       UWP:
         ApplicationPlatform: UWP_x64
@@ -27,6 +27,12 @@ jobs:
         ApplicationPlatform: Packages
         GeneratePackageOnBuild: true
         ArtifactName: Packages
+      Packages_WinUI:
+        ApplicationPlatform: Packages
+        GeneratePackageOnBuild: true
+        ArtifactName: Packages
+        UseWinUI: true
+
   pool:
     vmImage: windows-2019
   

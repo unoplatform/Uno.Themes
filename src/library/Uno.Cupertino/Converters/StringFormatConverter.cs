@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
+#if WinUI
+using Microsoft.UI.Xaml.Data;
+#else
 using Windows.UI.Xaml.Data;
+#endif
 
 namespace Uno.Cupertino.Converters
 {
@@ -10,8 +15,8 @@ namespace Uno.Cupertino.Converters
 		public object Convert(object value, Type targetType, object parameter, string language)
 		{
 			var format = parameter as string;
-			if (!String.IsNullOrEmpty(format))
-				return String.Format(format, value);
+			if (!string.IsNullOrEmpty(format))
+				return string.Format(format, value);
 
 			return value;
 		}
