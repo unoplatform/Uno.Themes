@@ -34,7 +34,7 @@
 					ResourceKey="MaterialOnSurfaceLowVariantBrush" />
 
 	<SolidColorBrush x:Key="AndroidSelectControlToggleOffButtonBrush"
-					 Color="#FAFAFA" />
+					 Color="#FFFAFAFA" />
 
 	<!-- Toggle On Disabled -->
 	<StaticResource x:Key="MaterialToggleSwitchOnLowButtonBrush"
@@ -74,13 +74,27 @@
 
 								<VisualState x:Name="Normal" />
 
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="SwitchKnobOnShadow.Opacity"
+												Value="0.1" />
+										<Setter Target="SwitchKnobOffShadow.Opacity"
+												Value="0.1" />
+									</VisualState.Setters>
+								</VisualState>
+
 								<VisualState x:Name="Pressed">
 									<Storyboard>
-
-										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
-																	   Storyboard.TargetProperty="StrokeThickness">
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow"
+																	   Storyboard.TargetProperty="Opacity">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="0" />
+																	Value="0.3" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOffShadow"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="0.3" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -109,6 +123,36 @@
 								</VisualState>
 							</VisualStateGroup>
 
+							<VisualStateGroup x:Name="FocusStates">
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="SwitchKnobOnShadow.Opacity"
+												Value="0.2" />
+										<Setter Target="SwitchKnobOffShadow.Opacity"
+												Value="0.2" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="SwitchKnobOnShadow.Opacity"
+												Value="0.2" />
+										<Setter Target="SwitchKnobOffShadow.Opacity"
+												Value="0.2" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="SwitchKnobOnShadow.Opacity"
+												Value="0" />
+										<Setter Target="SwitchKnobOffShadow.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="ToggleStates">
 								<VisualStateGroup.Transitions>
 
@@ -117,7 +161,6 @@
 													  To="On"
 													  GeneratedDuration="0">
 										<Storyboard>
-
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder"
 																		   Storyboard.TargetProperty="Opacity">
 												<DiscreteObjectKeyFrame KeyTime="0"
@@ -165,7 +208,6 @@
 													  To="On"
 													  GeneratedDuration="0">
 										<Storyboard>
-
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder"
 																		   Storyboard.TargetProperty="Opacity">
 												<DiscreteObjectKeyFrame KeyTime="0"
@@ -195,15 +237,29 @@
 
 								<VisualState x:Name="Dragging" />
 
-								<VisualState x:Name="Off" />
+								<VisualState x:Name="Off">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow"
+																	   Storyboard.TargetProperty="Visibility">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="Collapsed" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
 
 								<VisualState x:Name="On">
 									<Storyboard>
 
 										<DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
 														 Storyboard.TargetProperty="X"
-														 To="22"
+														 To="20"
 														 Duration="0" />
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow"
+																	   Storyboard.TargetProperty="Visibility">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="Visible" />
+										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder"
 																	   Storyboard.TargetProperty="Opacity">
@@ -302,42 +358,66 @@
 
 						<Rectangle x:Name="OuterBorder"
 								   Grid.Row="2"
-								   Margin="2,0"
-								   Height="12"
-								   Width="40"
-								   RadiusX="6"
-								   RadiusY="6"
+								   Margin="10,0"
+								   Height="14"
+								   Width="36"
+								   RadiusX="8"
+								   RadiusY="8"
 								   Fill="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
 
 						<Rectangle x:Name="HighlightBorder"
 								   Grid.Row="2"
-								   Margin="2,0"
-								   Height="12"
-								   Width="40"
-								   RadiusX="6"
-								   RadiusY="6"
+								   Margin="10,0"
+								   Height="14"
+								   Width="36"
+								   RadiusX="8"
+								   RadiusY="8"
 								   Fill="{TemplateBinding Background}"
 								   Opacity="0" />
 
 						<Grid x:Name="SwitchKnob"
 							  Grid.Row="2"
 							  HorizontalAlignment="Left"
-							  Width="22"
-							  Height="22">
-
-							<Ellipse x:Name="SwitchKnobOn"
-									 Fill="{TemplateBinding Foreground}"
-									 Width="22"
-									 Height="22"
-									 Opacity="0" />
-
-							<Ellipse x:Name="SwitchKnobOff"
-									 Fill="{StaticResource MaterialToggleSwitchOffButtonBrush}"
-									 Width="22"
-									 Height="22" />
+							  Width="40"
+							  Height="40">
 							<Grid.RenderTransform>
 								<TranslateTransform x:Name="KnobTranslateTransform" />
 							</Grid.RenderTransform>
+
+							<Ellipse x:Name="SwitchKnobOnShadow"
+									 Fill="{TemplateBinding Foreground}"
+									 Width="40"
+									 Height="40"
+									 Opacity="0"
+									 Visibility="Collapsed" />
+
+							<Ellipse x:Name="SwitchKnobOffShadow"
+									 Fill="#FF808080"
+									 Width="40"
+									 Height="40"
+									 Opacity="0" />
+
+							<toolkit:ElevatedView  Width="20"
+												   Height="20"
+												   Elevation="4"
+												   CornerRadius="10"
+												   ShadowColor="Black"
+												   Background="Transparent"
+												   VerticalAlignment="Stretch"
+												   HorizontalAlignment="Stretch">
+								<Grid>
+									<Ellipse x:Name="SwitchKnobOn"
+											 Fill="{TemplateBinding Foreground}"
+											 Width="20"
+											 Height="20"
+											 Opacity="0" />
+
+									<Ellipse x:Name="SwitchKnobOff"
+											 Fill="{StaticResource MaterialToggleSwitchOffButtonBrush}"
+											 Width="20"
+											 Height="20" />
+								</Grid>
+							</toolkit:ElevatedView>
 						</Grid>
 
 						<Thumb x:Name="SwitchThumb"
