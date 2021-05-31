@@ -23,6 +23,12 @@
     nugetUpdaterVersion: 2.1.1
     packageAuthor: nventive
 
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 5.0.102'
+  inputs:
+    packageType: sdk
+    version: 5.0.102
+
 - bash: dotnet msbuild -r -p:Configuration=Release -p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
 
 - task: PublishBuildArtifacts@1
