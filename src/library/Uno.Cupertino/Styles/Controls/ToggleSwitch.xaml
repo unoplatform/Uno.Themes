@@ -43,7 +43,7 @@
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 		<Setter Property="CornerRadius"
-				Value="20" />
+				Value="15.5" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -278,7 +278,7 @@
 									   Width="51"
 									   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 									   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
-									   Fill="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
+									   Fill="{StaticResource CupertinoSecondarySystemFillBrush}" />
 
 							<Rectangle x:Name="HighlightBorder"
 									   Height="31"
@@ -329,34 +329,8 @@
 		</Setter>
 	</Style>
 
-	<win:Style x:Key="CupertinoToggleSwitchStyle"
-			   TargetType="ToggleSwitch"
-			   BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}">
-
-		<Setter Property="CornerRadius"
-				Value="14" />
-
-	</win:Style>
-
-	<wasm:Style x:Key="CupertinoToggleSwitchStyle"
-				TargetType="ToggleSwitch"
-				BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}">
-
-		<Setter Property="CornerRadius"
-				Value="14" />
-
-	</wasm:Style>
-
-	<android:Style x:Key="CupertinoToggleSwitchStyle"
-				   TargetType="ToggleSwitch"
-				   BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
-
-	<ios:Style x:Key="CupertinoToggleSwitchStyle"
-			   TargetType="ToggleSwitch"
-			   BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
-
-	<macos:Style x:Key="CupertinoToggleSwitchStyle"
-				 TargetType="ToggleSwitch"
-				 BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
+	<Style x:Key="CupertinoToggleSwitchStyle"
+		   TargetType="ToggleSwitch"
+		   BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
 
 </ResourceDictionary>
