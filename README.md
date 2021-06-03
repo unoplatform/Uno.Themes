@@ -91,33 +91,25 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 ```
 
 
-3. Initialize the material resources. The order in which the different resources are loaded is important. Add this to `App.xaml.cs` at the beginning on `OnLaunched`
-```csharp
-		protected override void OnLaunched(LaunchActivatedEventArgs e)
-		{
-			// Set a default palette to make sure all colors used by MaterialResources exist
-			this.Resources.MergedDictionaries.Add(new global::Uno.Material.MaterialColorPalette());
-			
-			// Overlap the default colors with the application's colors palette. 
-			// TODO: Replace ms-appx:///Views/ColorPaletteOverride.xaml with your resourceDictionary.
-			this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("ms-appx:///Views/ColorPaletteOverride.xaml") });
-			
-			// Add all the material resources. Those resources depend on the colors above, which is why this one must be added last.
-			this.Resources.MergedDictionaries.Add(new global::Uno.Material.MaterialResources());
-			
-			[...]
-		}
+3. Initialize the material resources. The order in which the different resources are loaded is important. Add this to `App.xaml`
+```xml
+<MaterialColors xmlns="using:Uno.Material"
+				ColorPaletteOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+<MaterialResources xmlns="using:Uno.Material" />
 ```
 
 4. (Optional) The material ProgressBar is built on top for the WinUI ProgressBar so make sure you include the appropriate resources in your `App.xaml`
 
-```xaml
+```xml
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<!-- Load WinUI resources -->
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
 				
+				<MaterialColors xmlns="using:Uno.Material"
+								ColorPaletteOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+				<MaterialResources xmlns="using:Uno.Material" />
 				<!-- Application's custom styles -->
 				<!-- other ResourceDictionaries -->
 			</ResourceDictionary.MergedDictionaries>
