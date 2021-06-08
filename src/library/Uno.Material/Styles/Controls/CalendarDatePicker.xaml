@@ -11,7 +11,7 @@
 					mc:Ignorable="ios android wasm not_win">
 
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="../Application/Colors.xaml" />
+		<MaterialColors xmlns="using:Uno.Material"/>
 		<ResourceDictionary Source="CalendarView.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 	<Style x:Key="MaterialCalendarDatePickerStyle"
@@ -34,7 +34,7 @@
 				Value="53" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
-		<Setter Property="CornerRadius"
+		<not_win:Setter Property="CornerRadius"
 				Value="{ThemeResource ControlCornerRadius}" />
 		<Setter Property="Template">
 			<Setter.Value>

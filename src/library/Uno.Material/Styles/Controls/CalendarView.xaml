@@ -12,7 +12,7 @@
 					mc:Ignorable="ios android wasm not_win">
 
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="../Application/Colors.xaml" />
+		<MaterialColors xmlns="using:Uno.Material"/>
 	</ResourceDictionary.MergedDictionaries>
 
 	<FontFamily x:Key="MaterialFontFamily">Roboto</FontFamily>
@@ -91,7 +91,7 @@
 				Value="False" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="{StaticResource UseSystemFocusVisuals}" />
-		<Setter Property="CornerRadius"
+		<not_win:Setter Property="CornerRadius"
 				Value="{ThemeResource ControlCornerRadius}" />
 		<not_win:Setter Property="DayItemCornerRadius"
 						Value="20" />
