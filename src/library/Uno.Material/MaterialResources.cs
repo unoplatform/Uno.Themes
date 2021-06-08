@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -15,9 +16,13 @@ namespace Uno.Material
 	{
 		public MaterialResources()
 		{
+			UpdateResources();
+		}
+
+		private void UpdateResources()
+		{
 			// Add all ResourceDictionaries for Variables here in alphabetical order
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/AnimationConstants.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Colors.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Converters.xaml") });
 			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/TextBoxVariables.xaml") });
 
