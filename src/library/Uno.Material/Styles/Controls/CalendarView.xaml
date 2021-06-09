@@ -17,7 +17,7 @@
 
 	<FontFamily x:Key="MaterialFontFamily">Roboto</FontFamily>
 
-	<Style x:Key="MaterialCalendarViewStyle"
+	<Style x:Key="DefaultMaterialCalendarViewStyle"
 		   TargetType="CalendarView">
 		<Setter Property="FocusBorderBrush"
 				Value="{ThemeResource MaterialPrimaryFocusedBrush}" />
@@ -841,4 +841,8 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialCalendarViewStyle"
+		   TargetType="CalendarView"
+		   BasedOn="{StaticResource DefaultMaterialCalendarViewStyle}" />
 </ResourceDictionary>
