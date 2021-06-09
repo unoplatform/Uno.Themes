@@ -73,15 +73,14 @@ namespace Uno.Material.Controls
 			base.OnApplyTemplate();
 		}
 
-		// Workaround #373 WASM nested Ripple control
+		// Workaround for themes#373 WASM nested Ripple control
 #if NETSTANDARD2_0
 		private UIElement _touchTarget;
 
+		private static uint _lastHandledFrameId = 0;
+
 		private static readonly DependencyProperty MyParentProperty = DependencyProperty.Register(
 			"MyParent", typeof(object), typeof(Ripple), new PropertyMetadata(default(object), (snd, e) => (snd as Ripple)?.ReRegisterPointerPressedHandler()));
-
-		private static readonly DependencyProperty RippleHandledProperty = DependencyProperty.RegisterAttached(
-			"RippleHandled", typeof(bool), typeof(DependencyObject), new PropertyMetadata(false));
 
 		private static void ReRegisterPointerPressedHandler(object snd, RoutedEventArgs _)
 			=> (snd as Ripple)?.ReRegisterPointerPressedHandler();
@@ -103,7 +102,6 @@ namespace Uno.Material.Controls
 
 			_touchTarget = updatedTouchTarget;
 			_touchTarget.AddHandler(PointerPressedEvent, new PointerEventHandler(StartRippling), handledEventsToo: true);
-			_touchTarget.AddHandler(PointerReleasedEvent, new PointerEventHandler(ClearPointerHandledFlag), handledEventsToo: true);
 		}
 
 		private static void UnRegisterPointerPressedHandler(object snd, RoutedEventArgs _)
@@ -138,19 +136,19 @@ namespace Uno.Material.Controls
 
 		private void StartRippling(object _, PointerRoutedEventArgs e)
 		{
-			// workaround for uno#5033 nested `Ripple` controls all ripples, intead of just the innermost (side effect of workaround material#373)
-#if NETSTANDARD2_0
-			// Because the event couldve been already handled by other control, e.Handled cannot be used here.
-			// RippleHandled is used instead to indicate an ripple has occured, to prevent the next on the line to ripple again.
-			if (e.OriginalSource is DependencyObject os)
-			{
-				if ((bool)os.GetValue(RippleHandledProperty)) return;
-
-				os.SetValue(RippleHandledProperty, true);
-			}
-#endif
-
 			var point = e.GetCurrentPoint(this);
+
+			// workaround for uno#5033 and uno#5874 nested `Ripple` controls all ripples, instead of just the innermost (side effect of workaround themes#373)
+#if NETSTANDARD2_0
+			// Because the event could've been already handled by other control, e.Handled cannot be used here.
+			// FrameId is used instead to verify if a ripple has already occurred with this Id, to prevent the next on the line to ripple again.
+			if (point.FrameId <= _lastHandledFrameId)
+			{
+				return;
+			}
+
+			_lastHandledFrameId = point.FrameId;
+#endif
 
 			RippleX = point.Position.X - RippleSize / 2;
 			RippleY = point.Position.Y - RippleSize / 2;
@@ -158,13 +156,6 @@ namespace Uno.Material.Controls
 			VisualStateManager.GoToState(this, "Normal", true);
 			VisualStateManager.GoToState(this, "Pressed", true);
 		}
-
-#if NETSTANDARD2_0
-		private void ClearPointerHandledFlag(object _, PointerRoutedEventArgs e)
-		{
-			(e.OriginalSource as DependencyObject)?.SetValue(RippleHandledProperty, false);
-		}
-#endif
 
 		public static readonly DependencyProperty RippleSizeMultiplierProperty = DependencyProperty.Register(
 			"RippleSizeMultiplier", typeof(double), typeof(Ripple), new PropertyMetadata(8.0));
