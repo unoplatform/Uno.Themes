@@ -23,8 +23,8 @@
 	<SolidColorBrush x:Key="CupertinoCalendarDatePickerBorderBrushPressed"
 					 Color="{ThemeResource CupertinoPrimaryGrayColor}"
 					 Opacity="{StaticResource CupertinoPressedOpacity}"  />
-	
-	<Style x:Key="CupertinoCalendarDatePickerStyle"
+
+	<Style x:Key="DefaultCupertinoCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
 		<Setter Property="Foreground"
 				Value="{ThemeResource CalendarDatePickerForeground}" />
@@ -229,5 +229,9 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="CupertinoCalendarDatePickerStyle"
+		   TargetType="CalendarDatePicker"
+		   BasedOn="{StaticResource DefaultCupertinoCalendarDatePickerStyle}" />
 </ResourceDictionary>
 

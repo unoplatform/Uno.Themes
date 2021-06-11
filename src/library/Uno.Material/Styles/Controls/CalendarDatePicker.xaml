@@ -14,7 +14,7 @@
 		<MaterialColors xmlns="using:Uno.Material"/>
 		<ResourceDictionary Source="CalendarView.xaml" />
 	</ResourceDictionary.MergedDictionaries>
-	<Style x:Key="MaterialCalendarDatePickerStyle"
+	<Style x:Key="DefaultMaterialCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
 		<Setter Property="Foreground"
 				Value="{ThemeResource CalendarDatePickerForeground}" />
@@ -236,4 +236,8 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialCalendarDatePickerStyle"
+		   TargetType="CalendarDatePicker"
+		   BasedOn="{StaticResource DefaultMaterialCalendarDatePickerStyle}" />
 </ResourceDictionary>
