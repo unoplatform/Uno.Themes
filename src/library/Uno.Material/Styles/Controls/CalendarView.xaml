@@ -12,10 +12,11 @@
 					mc:Ignorable="ios android wasm not_win">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<FontFamily x:Key="MaterialFontFamily">Roboto</FontFamily>
+	<x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
 
 	<Style x:Key="DefaultMaterialCalendarViewStyle"
 		   TargetType="CalendarView">
@@ -92,7 +93,7 @@
 		<Setter Property="UseSystemFocusVisuals"
 				Value="{StaticResource UseSystemFocusVisuals}" />
 		<not_win:Setter Property="CornerRadius"
-				Value="{ThemeResource ControlCornerRadius}" />
+						Value="{ThemeResource ControlCornerRadius}" />
 		<not_win:Setter Property="DayItemCornerRadius"
 						Value="20" />
 		<not_win:Setter Property="CalendarItemCornerRadius"
@@ -106,21 +107,21 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CalendarView">
-					<Border BorderThickness="{TemplateBinding BorderThickness}"
+					<Border Background="{TemplateBinding Background}"
 							BorderBrush="{TemplateBinding BorderBrush}"
-							Background="{TemplateBinding Background}"
+							BorderThickness="{TemplateBinding BorderThickness}"
 							CornerRadius="{TemplateBinding CornerRadius}">
 						<Border.Resources>
-							<Style TargetType="TextBlock"
-								   x:Key="WeekDayNameStyle"
-								   BasedOn="{StaticResource CaptionTextBlockStyle}">
+							<Style x:Key="WeekDayNameStyle"
+								   BasedOn="{StaticResource CaptionTextBlockStyle}"
+								   TargetType="TextBlock">
 								<Setter Property="HorizontalAlignment"
 										Value="Center" />
 								<Setter Property="VerticalAlignment"
 										Value="Center" />
 							</Style>
-							<Style TargetType="Button"
-								   x:Key="NavigationButtonStyle">
+							<Style x:Key="NavigationButtonStyle"
+								   TargetType="Button">
 								<Setter Property="HorizontalAlignment"
 										Value="Stretch" />
 								<Setter Property="VerticalAlignment"
@@ -137,15 +138,15 @@
 									<Setter.Value>
 										<ControlTemplate TargetType="Button">
 											<ContentPresenter x:Name="Text"
+															  Margin="{TemplateBinding Padding}"
+															  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+															  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+															  AutomationProperties.AccessibilityView="Raw"
 															  Background="{TemplateBinding Background}"
 															  BackgroundSizing="{TemplateBinding BackgroundSizing}"
 															  BorderBrush="{ThemeResource CalendarViewNavigationButtonBorderBrush}"
 															  BorderThickness="{TemplateBinding BorderThickness}"
-															  Content="{TemplateBinding Content}"
-															  Margin="{TemplateBinding Padding}"
-															  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-															  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-															  AutomationProperties.AccessibilityView="Raw">
+															  Content="{TemplateBinding Content}">
 												<VisualStateManager.VisualStateGroups>
 													<VisualStateGroup x:Name="CommonStates">
 														<VisualState x:Name="Normal" />
@@ -240,8 +241,8 @@
 									</Setter.Value>
 								</Setter>
 							</Style>
-							<Style TargetType="ScrollViewer"
-								   x:Key="ScrollViewerStyle">
+							<Style x:Key="ScrollViewerStyle"
+								   TargetType="ScrollViewer">
 								<Setter Property="HorizontalScrollMode"
 										Value="Disabled" />
 								<Setter Property="VerticalScrollMode"
@@ -260,6 +261,138 @@
 												Value="False" />
 							</Style>
 						</Border.Resources>
+						<Grid MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.MinViewWidth}"
+							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="40" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="5*" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<Button x:Name="HeaderButton"
+										Padding="12,0,0,0"
+										HorizontalContentAlignment="Left"
+										Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}"
+										Foreground="{TemplateBinding Foreground}"
+										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}"
+										Style="{StaticResource HeaderButtonStyle}" />
+								<Button x:Name="PreviousButton"
+										Grid.Column="1"
+										Padding="1"
+										HorizontalContentAlignment="Center"
+										Content="&#xE76B;"
+										FontFamily="{ThemeResource SymbolThemeFontFamily}"
+										Foreground="{TemplateBinding Foreground}"
+										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentBefore}"
+										IsTabStop="True"
+										Style="{StaticResource NavigationButtonStyle}" />
+								<Button x:Name="NextButton"
+										Grid.Column="2"
+										Padding="1"
+										HorizontalContentAlignment="Center"
+										Content="&#xE76C;"
+										FontFamily="{ThemeResource SymbolThemeFontFamily}"
+										Foreground="{TemplateBinding Foreground}"
+										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentAfter}"
+										IsTabStop="True"
+										Style="{StaticResource NavigationButtonStyle}" />
+							</Grid>
+							<Grid x:Name="Views"
+								  Grid.Row="1">
+								<!--<Grid.Clip>
+                                    <RectangleGeometry Rect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ClipRect}" />
+                                </Grid.Clip>-->
+								<Border x:Name="BackgroundLayer"
+										Background="{TemplateBinding BorderBrush}">
+									<Border.RenderTransform>
+										<ScaleTransform x:Name="BackgroundTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</Border.RenderTransform>
+								</Border>
+								<Grid x:Name="MonthView">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="38" />
+										<RowDefinition Height="*" />
+									</Grid.RowDefinitions>
+									<Grid.RenderTransform>
+										<ScaleTransform x:Name="MonthViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</Grid.RenderTransform>
+									<Grid x:Name="WeekDayNames"
+										  Background="{TemplateBinding Background}">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<TextBlock x:Name="WeekDay1"
+												   Style="{StaticResource WeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay1}" />
+										<TextBlock x:Name="WeekDay2"
+												   Grid.Column="1"
+												   Style="{StaticResource WeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay2}" />
+										<TextBlock x:Name="WeekDay3"
+												   Grid.Column="2"
+												   Style="{StaticResource WeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay3}" />
+										<TextBlock x:Name="WeekDay4"
+												   Grid.Column="3"
+												   Style="{StaticResource WeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay4}" />
+										<TextBlock x:Name="WeekDay5"
+												   Grid.Column="4"
+												   Style="{StaticResource WeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay5}" />
+										<TextBlock x:Name="WeekDay6"
+												   Grid.Column="5"
+												   Style="{StaticResource WeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay6}" />
+										<TextBlock x:Name="WeekDay7"
+												   Grid.Column="6"
+												   Style="{StaticResource WeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay7}" />
+									</Grid>
+									<ScrollViewer x:Name="MonthViewScrollViewer"
+												  Grid.Row="1"
+												  IsFocusEngagementEnabled="True"
+												  Style="{StaticResource ScrollViewerStyle}">
+										<CalendarPanel x:Name="MonthViewPanel" />
+									</ScrollViewer>
+								</Grid>
+								<!-- Uno only: Opacity set to 0 to avoid flicker when changing display mode -->
+								<ScrollViewer x:Name="YearViewScrollViewer"
+											  IsFocusEngagementEnabled="True"
+											  Opacity="0"
+											  Style="{StaticResource ScrollViewerStyle}"
+											  UseLayoutRounding="False"
+											  Visibility="Collapsed">
+									<ScrollViewer.RenderTransform>
+										<ScaleTransform x:Name="YearViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</ScrollViewer.RenderTransform>
+									<CalendarPanel x:Name="YearViewPanel" />
+								</ScrollViewer>
+								<!-- Uno only: Opacity set to 0 to avoid flicker when changing display mode -->
+								<ScrollViewer x:Name="DecadeViewScrollViewer"
+											  IsFocusEngagementEnabled="True"
+											  Opacity="0"
+											  Style="{StaticResource ScrollViewerStyle}"
+											  UseLayoutRounding="False"
+											  Visibility="Collapsed">
+									<ScrollViewer.RenderTransform>
+										<ScaleTransform x:Name="DecadeViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</ScrollViewer.RenderTransform>
+									<CalendarPanel x:Name="DecadeViewPanel" />
+								</ScrollViewer>
+							</Grid>
+						</Grid>
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -387,9 +520,9 @@
 										<Storyboard>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
 																		   Storyboard.TargetProperty="Opacity">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
 																		   Storyboard.TargetProperty="Opacity">
@@ -397,9 +530,9 @@
 																		Value="0" />
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
 																		Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 											<!-- Uno only: Make sure to set visibility only AFTER opacity -->
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
@@ -407,43 +540,15 @@
 												<DiscreteObjectKeyFrame KeyTime="0"
 																		Value="Visible" />
 											</ObjectAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0.84"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0.84"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="1.29" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="1.29" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
 																		   Storyboard.TargetProperty="Opacity">
 												<LinearDoubleKeyFrame KeyTime="0:0:0.000"
 																	  Value="0" />
 												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
 																	  Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.15,0.64,0.25,1" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
@@ -462,9 +567,9 @@
 											</ObjectAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
 																		   Storyboard.TargetProperty="Opacity">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
 																		   Storyboard.TargetProperty="Opacity">
@@ -472,53 +577,9 @@
 																		Value="0" />
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
 																		Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="1.29"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="1.29"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
 																		   Storyboard.TargetProperty="Opacity">
@@ -526,9 +587,9 @@
 																	  Value="0" />
 												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
 																	  Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.15,0.64,0.25,1" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
@@ -545,12 +606,11 @@
 												<DiscreteObjectKeyFrame KeyTime="0:0:0"
 																		Value="Visible" />
 											</ObjectAnimationUsingKeyFrames>
-
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
 																		   Storyboard.TargetProperty="Opacity">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
 																		   Storyboard.TargetProperty="Opacity">
@@ -558,9 +618,9 @@
 																		Value="0" />
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
 																		Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 											<!-- Uno only: Make sure to set visibility only AFTER opacity -->
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
@@ -568,43 +628,15 @@
 												<DiscreteObjectKeyFrame KeyTime="0:0:0"
 																		Value="Visible" />
 											</ObjectAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0.84"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0.84"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="1.29" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="1.29" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
 																		   Storyboard.TargetProperty="Opacity">
 												<LinearDoubleKeyFrame KeyTime="0:0:0.000"
 																	  Value="0" />
 												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
 																	  Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.15,0.64,0.25,1" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
@@ -633,9 +665,9 @@
 											</ObjectAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
 																		   Storyboard.TargetProperty="Opacity">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="0"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
 																		   Storyboard.TargetProperty="Opacity">
@@ -643,53 +675,9 @@
 																		Value="0" />
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
 																		Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="1.29"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<SplineDoubleKeyFrame KeyTime="0:0:0.233"
-																	  Value="1.29"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundTransform"
-																		   Storyboard.TargetProperty="ScaleX">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
-											</DoubleAnimationUsingKeyFrames>
-											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundTransform"
-																		   Storyboard.TargetProperty="ScaleY">
-												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
-																		Value="0.84" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.1,0.9,0.2,1" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
 																		   Storyboard.TargetProperty="Opacity">
@@ -697,145 +685,15 @@
 																	  Value="0" />
 												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
 																	  Value="0" />
-												<SplineDoubleKeyFrame KeyTime="0:0:0.733"
-																	  Value="1"
-																	  KeySpline="0.15,0.64,0.25,1" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						<Grid VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-							  MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.MinViewWidth}">
-							<Grid.RowDefinitions>
-								<RowDefinition Height="40" />
-								<RowDefinition Height="*" />
-							</Grid.RowDefinitions>
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="5*" />
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="*" />
-								</Grid.ColumnDefinitions>
-								<Button x:Name="HeaderButton"
-										Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}"
-										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}"
-										Style="{StaticResource HeaderButtonStyle}"
-										Foreground="{TemplateBinding Foreground}"
-										Padding="12,0,0,0"
-										HorizontalContentAlignment="Left" />
-								<Button x:Name="PreviousButton"
-										Grid.Column="1"
-										Content="&#xE76B;"
-										FontFamily="{ThemeResource SymbolThemeFontFamily}"
-										IsTabStop="True"
-										Padding="1"
-										Foreground="{TemplateBinding Foreground}"
-										HorizontalContentAlignment="Center"
-										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentBefore}"
-										Style="{StaticResource NavigationButtonStyle}" />
-								<Button x:Name="NextButton"
-										Grid.Column="2"
-										Content="&#xE76C;"
-										FontFamily="{ThemeResource SymbolThemeFontFamily}"
-										IsTabStop="True"
-										Padding="1"
-										Foreground="{TemplateBinding Foreground}"
-										HorizontalContentAlignment="Center"
-										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentAfter}"
-										Style="{StaticResource NavigationButtonStyle}" />
-							</Grid>
-							<Grid x:Name="Views"
-								  Grid.Row="1">
-								<!--<Grid.Clip>
-                                    <RectangleGeometry Rect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ClipRect}" />
-                                </Grid.Clip>-->
-								<Border x:Name="BackgroundLayer"
-										Background="{TemplateBinding BorderBrush}">
-									<Border.RenderTransform>
-										<ScaleTransform x:Name="BackgroundTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
-									</Border.RenderTransform>
-								</Border>
-								<Grid x:Name="MonthView">
-									<Grid.RowDefinitions>
-										<RowDefinition Height="38" />
-										<RowDefinition Height="*" />
-									</Grid.RowDefinitions>
-									<Grid.RenderTransform>
-										<ScaleTransform x:Name="MonthViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
-									</Grid.RenderTransform>
-									<Grid x:Name="WeekDayNames"
-										  Background="{TemplateBinding Background}">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="*" />
-										</Grid.ColumnDefinitions>
-										<TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay1}"
-												   x:Name="WeekDay1"
-												   Style="{StaticResource WeekDayNameStyle}" />
-										<TextBlock Grid.Column="1"
-												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay2}"
-												   x:Name="WeekDay2"
-												   Style="{StaticResource WeekDayNameStyle}" />
-										<TextBlock Grid.Column="2"
-												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay3}"
-												   x:Name="WeekDay3"
-												   Style="{StaticResource WeekDayNameStyle}" />
-										<TextBlock Grid.Column="3"
-												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay4}"
-												   x:Name="WeekDay4"
-												   Style="{StaticResource WeekDayNameStyle}" />
-										<TextBlock Grid.Column="4"
-												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay5}"
-												   x:Name="WeekDay5"
-												   Style="{StaticResource WeekDayNameStyle}" />
-										<TextBlock Grid.Column="5"
-												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay6}"
-												   x:Name="WeekDay6"
-												   Style="{StaticResource WeekDayNameStyle}" />
-										<TextBlock Grid.Column="6"
-												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay7}"
-												   x:Name="WeekDay7"
-												   Style="{StaticResource WeekDayNameStyle}" />
-									</Grid>
-									<ScrollViewer x:Name="MonthViewScrollViewer"
-												  Grid.Row="1"
-												  Style="{StaticResource ScrollViewerStyle}"
-												  IsFocusEngagementEnabled="True">
-										<CalendarPanel x:Name="MonthViewPanel" />
-									</ScrollViewer>
-								</Grid>
-								<ScrollViewer x:Name="YearViewScrollViewer"
-											  UseLayoutRounding="False"
-											  Visibility="Collapsed"
-											  IsFocusEngagementEnabled="True"
-											  Opacity="0"
-											  Style="{StaticResource ScrollViewerStyle}">
-									<ScrollViewer.RenderTransform>
-										<ScaleTransform x:Name="YearViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
-									</ScrollViewer.RenderTransform>
-									<CalendarPanel x:Name="YearViewPanel" />
-								</ScrollViewer>
-								<ScrollViewer x:Name="DecadeViewScrollViewer"
-											  UseLayoutRounding="False"
-											  IsFocusEngagementEnabled="True"
-											  Visibility="Collapsed"
-											  Opacity="0"
-											  Style="{StaticResource ScrollViewerStyle}">
-									<ScrollViewer.RenderTransform>
-										<ScaleTransform x:Name="DecadeViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
-									</ScrollViewer.RenderTransform>
-									<CalendarPanel x:Name="DecadeViewPanel" />
-								</ScrollViewer>
-							</Grid>
-						</Grid>
 					</Border>
 				</ControlTemplate>
 			</Setter.Value>
