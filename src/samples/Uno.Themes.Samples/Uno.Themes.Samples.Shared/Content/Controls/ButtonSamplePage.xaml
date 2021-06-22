@@ -5,6 +5,7 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:extensions="using:Uno.Material.Extensions"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios">
@@ -52,6 +53,37 @@
 							<Button Content="TEXT DISABLED"
 									IsEnabled="False"
 									Style="{StaticResource MaterialTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<TextBlock FontSize="14" Margin="0,8,0,0" Text="Material Buttons can specify a leading icon through an attached property"/>
+						<!-- Icon Button Contained -->
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Contained">
+							<Button Content="CONTAINED"
+									Style="{StaticResource MaterialContainedButtonStyle}">
+								<extensions:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;"/>
+								</extensions:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Icon Button Outlined -->
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Outline">
+							<Button Content="OUTLINED"
+									Style="{StaticResource MaterialOutlinedButtonStyle}">
+								<extensions:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;"/>
+								</extensions:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Icon Button Text -->
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Text">
+							<Button Content="TEXT"
+									Style="{StaticResource MaterialTextButtonStyle}" >
+								<extensions:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;"/>
+								</extensions:ControlExtensions.Icon>
+							</Button>
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
