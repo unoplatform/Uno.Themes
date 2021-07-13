@@ -10,6 +10,7 @@
 					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:wasm="http://uno.ui/wasm"
 					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:extensions="using:Uno.Material.Extensions"
 					mc:Ignorable="d ios android wasm not_win">
 
 	<ResourceDictionary.MergedDictionaries>
@@ -30,7 +31,7 @@
 	<StaticResource x:Key="MaterialTextButtonLowBrush"
 					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
-	<!-- Styles -->
+	<!-- Button Styles -->
 	<Style x:Key="MaterialContainedButtonStyle"
 		   TargetType="Button">
 
@@ -145,17 +146,38 @@
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 Content="{TemplateBinding Content}"
-										 ContentTemplate="{TemplateBinding ContentTemplate}"
-										 ContentTransitions="{TemplateBinding ContentTransitions}"
 										 CornerRadius="{TemplateBinding CornerRadius}"
-										 FontFamily="{TemplateBinding FontFamily}"
-										 FontSize="{TemplateBinding FontSize}"
-										 FontWeight="{TemplateBinding FontWeight}"
 										 Padding="{TemplateBinding Padding}"
-										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										 AutomationProperties.AccessibilityView="Raw" />
+										 AutomationProperties.AccessibilityView="Raw" >
+							<controls:Ripple.Content>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									
+									<ContentPresenter x:Name="IconPresenter"
+													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  HorizontalAlignment="Stretch"
+													  Margin="0,0,8,0"
+													  MaxHeight="34"
+													  MaxWidth="34"
+													  MinWidth="25"
+													  VerticalAlignment="Stretch"
+													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+
+									<ContentPresenter Grid.Column="1"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontSize="{TemplateBinding FontSize}"
+													  FontWeight="{TemplateBinding FontWeight}"
+													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+								</Grid>
+							</controls:Ripple.Content>
+						</controls:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -293,17 +315,38 @@
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 Content="{TemplateBinding Content}"
-										 ContentTemplate="{TemplateBinding ContentTemplate}"
-										 ContentTransitions="{TemplateBinding ContentTransitions}"
-										 CornerRadius="{StaticResource MaterialButtonCornerRadius}"
-										 FontFamily="{TemplateBinding FontFamily}"
-										 FontSize="{TemplateBinding FontSize}"
-										 FontWeight="{TemplateBinding FontWeight}"
+										 CornerRadius="{TemplateBinding CornerRadius}"
 										 Padding="{TemplateBinding Padding}"
-										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										 AutomationProperties.AccessibilityView="Raw" />
+										 AutomationProperties.AccessibilityView="Raw" >
+							<controls:Ripple.Content>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<ContentPresenter x:Name="IconPresenter"
+													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  HorizontalAlignment="Stretch"
+													  Margin="0,0,8,0"
+													  MaxHeight="34"
+													  MaxWidth="34"
+													  MinWidth="25"
+													  VerticalAlignment="Stretch"
+													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+
+									<ContentPresenter Grid.Column="1"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontSize="{TemplateBinding FontSize}"
+													  FontWeight="{TemplateBinding FontWeight}"
+													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+								</Grid>
+							</controls:Ripple.Content>
+						</controls:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -432,17 +475,38 @@
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
 										 BorderThickness="{TemplateBinding BorderThickness}"
-										 Content="{TemplateBinding Content}"
-										 ContentTemplate="{TemplateBinding ContentTemplate}"
-										 ContentTransitions="{TemplateBinding ContentTransitions}"
-										 CornerRadius="{StaticResource MaterialButtonCornerRadius}"
-										 FontFamily="{TemplateBinding FontFamily}"
-										 FontSize="{TemplateBinding FontSize}"
-										 FontWeight="{TemplateBinding FontWeight}"
+										 CornerRadius="{TemplateBinding CornerRadius}"
 										 Padding="{TemplateBinding Padding}"
-										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										 AutomationProperties.AccessibilityView="Raw" />
+										 AutomationProperties.AccessibilityView="Raw" >
+							<controls:Ripple.Content>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<ContentPresenter x:Name="IconPresenter"
+													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  HorizontalAlignment="Stretch"
+													  Margin="0,0,8,0"
+													  MaxHeight="34"
+													  MaxWidth="34"
+													  MinWidth="25"
+													  VerticalAlignment="Stretch"
+													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+
+									<ContentPresenter Grid.Column="1"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontSize="{TemplateBinding FontSize}"
+													  FontWeight="{TemplateBinding FontWeight}"
+													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+								</Grid>
+							</controls:Ripple.Content>
+						</controls:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
