@@ -127,6 +127,7 @@ namespace Uno.Themes.Samples
 				// Incomplete : AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<SliderSamplePage>(icon: "SliderIcon");
 				AddMenuItem<StandardBottomSheetSamplePage>(icon: "StandardBottomSheetIcon");
+				AddMenuItem<TabBarSamplePage>();
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");
 #if __IOS__ || __ANDROID__ || WINDOWS_UWP

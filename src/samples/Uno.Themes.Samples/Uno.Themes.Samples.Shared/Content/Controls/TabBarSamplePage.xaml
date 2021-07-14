@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="Uno.Themes.Samples.Content.Controls.TabBarSamplePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Uno.Themes.Samples.Content.Controls"
+	xmlns:sample="using:Uno.Themes.Samples"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:toolkitlib="using:Uno.UI.ToolkitLib"
+	xmlns:smtx="using:ShowMeTheXAML"
+	mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel Spacing="12">
+						<TextBlock Text="Bottom TabBar Style"/>
+						<!--<smtx:XamlDisplay UniqueKey="Material_TabBarSamplePage_Bottom">-->
+							<toolkitlib:TabBar Style="{StaticResource MaterialBottomTabBarStyle}">
+								<toolkitlib:TabBar.Items>
+									<toolkitlib:TabBarItem Content="Home">
+										<toolkitlib:TabBarItem.Icon>
+											<FontIcon Glyph="&#xE80F;"/>
+										</toolkitlib:TabBarItem.Icon>
+									</toolkitlib:TabBarItem>
+									<toolkitlib:TabBarItem Content="Support">
+										<toolkitlib:TabBarItem.Icon>
+											<FontIcon Glyph="&#xE8F2;"/>
+										</toolkitlib:TabBarItem.Icon>
+									</toolkitlib:TabBarItem>
+									<toolkitlib:TabBarItem Content="About">
+										<toolkitlib:TabBarItem.Icon>
+											<FontIcon Glyph="&#xE946;"/>
+										</toolkitlib:TabBarItem.Icon>
+									</toolkitlib:TabBarItem>
+
+								</toolkitlib:TabBar.Items>
+							</toolkitlib:TabBar>
+						<!--</smtx:XamlDisplay>-->
+
+						<TextBlock Text="Standard TabBar Style"/>
+						<!--<smtx:XamlDisplay UniqueKey="Material_TabBarSamplePage_Standard">-->
+							<toolkitlib:TabBar Style="{StaticResource MaterialTabBarStyle}">
+								<toolkitlib:TabBar.Items>
+									<toolkitlib:TabBarItem Content="HOME">
+										<toolkitlib:TabBarItem.Icon>
+											<FontIcon Glyph="&#xE80F;"/>
+										</toolkitlib:TabBarItem.Icon>
+									</toolkitlib:TabBarItem>
+									<toolkitlib:TabBarItem Content="SUPPORT">
+										<toolkitlib:TabBarItem.Icon>
+											<FontIcon Glyph="&#xE8F2;"/>
+										</toolkitlib:TabBarItem.Icon>
+									</toolkitlib:TabBarItem>
+									<toolkitlib:TabBarItem Content="ABOUT">
+										<toolkitlib:TabBarItem.Icon>
+											<FontIcon Glyph="&#xE946;"/>
+										</toolkitlib:TabBarItem.Icon>
+									</toolkitlib:TabBarItem>
+
+								</toolkitlib:TabBar.Items>
+							</toolkitlib:TabBar>
+						<!--</smtx:XamlDisplay>-->
+
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel Spacing="12">
+						<TextBlock Text="Bottom TabBar Style"/>
+						<!--<smtx:XamlDisplay UniqueKey="Material_TabBarSamplePage_Bottom">-->
+						<toolkitlib:TabBar Style="{StaticResource CupertinoBottomTabBarStyle}">
+							<toolkitlib:TabBar.Items>
+								<toolkitlib:TabBarItem Content="Home">
+									<toolkitlib:TabBarItem.Icon>
+										<FontIcon Glyph="&#xE80F;"/>
+									</toolkitlib:TabBarItem.Icon>
+								</toolkitlib:TabBarItem>
+								<toolkitlib:TabBarItem Content="Support">
+									<toolkitlib:TabBarItem.Icon>
+										<FontIcon Glyph="&#xE8F2;"/>
+									</toolkitlib:TabBarItem.Icon>
+								</toolkitlib:TabBarItem>
+								<toolkitlib:TabBarItem Content="About">
+									<toolkitlib:TabBarItem.Icon>
+										<FontIcon Glyph="&#xE946;"/>
+									</toolkitlib:TabBarItem.Icon>
+								</toolkitlib:TabBarItem>
+
+							</toolkitlib:TabBar.Items>
+						</toolkitlib:TabBar>
+						<!--</smtx:XamlDisplay>-->
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>
