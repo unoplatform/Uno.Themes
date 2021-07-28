@@ -11,9 +11,21 @@
 					mc:Ignorable="not_win xamarin">
 
 	<!-- Converters -->
-	<converters:FromNullToValueConverter x:Name="NullToVisible"
-										 NotNullValue="Collapsed"
-										 NullValue="Visible" />
+	<converters:FromNullToValueConverter x:Key="NullToScaleConverter"
+										 NotNullValue="0.7"
+										 NullValue="1" />
+
+	<converters:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter"
+										 NotNullValue="-11"
+										 NullValue="0" />
+
+	<converters:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
+										 NotNullValue="5"
+										 NullValue="0" />
+
+	<converters:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
+										 NotNullValue="{StaticResource ComboBoxPlaceholderFocusedThemeBrush}"
+										 NullValue="{StaticResource ComboBoxPlaceholderForegroundThemeBrush}" />
 
 	<!-- Brushes -->
 	<StaticResource x:Key="ComboBoxBackgroundColorBrush"
@@ -34,18 +46,26 @@
 	<StaticResource x:Key="ComboBoxBorderBrush"
 					ResourceKey="MaterialOnSurfaceFocusedBrush" />
 
+	<StaticResource x:Key="ComboBoxFocusedBorderBrush"
+					ResourceKey="MaterialOnBackgroundBrush" />
+
 	<StaticResource x:Key="ComboBoxArrowForegroundThemeBrush"
 					ResourceKey="MaterialOnBackgroundBrush" />
 
 	<StaticResource x:Key="ComboBoxForegroundThemeBrush"
 					ResourceKey="MaterialOnBackgroundBrush" />
 
-	<SolidColorBrush x:Key="ComboBoxPlaceholderTextColor"
+	<StaticResource x:Key="ComboBoxPlaceholderFocusedThemeBrush"
+					ResourceKey="MaterialPrimaryBrush" />
+
+	<SolidColorBrush x:Key="ComboBoxPlaceholderForegroundThemeBrush"
 					 Color="{ThemeResource MaterialOnBackgroundColor}"
 					 Opacity="0.74" />
 
+	<!-- CornerRadius -->
 	<CornerRadius x:Key="MaterialComboBoxCornerRadius">4</CornerRadius>
 
+	<!-- Path Data -->
 	<x:String x:Key="UpArrowPathData">M15.995972,0L32,21.478999 0,21.478999z</x:String>
 	<x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
 
@@ -62,7 +82,7 @@
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="Height"
-				Value="43" />
+				Value="50" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -86,7 +106,7 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
-								
+
 								<VisualState x:Name="Pressed">
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -194,11 +214,11 @@
 		<Setter Property="Background"
 				Value="{ThemeResource ComboBoxBackgroundColorBrush}" />
 		<Setter Property="BorderThickness"
-				Value="0" />
+				Value="1" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="MinHeight"
-				Value="43" />
+				Value="50" />
 		<Setter Property="TabNavigation"
 				Value="Once" />
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
@@ -244,7 +264,7 @@
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
 												Value="{ThemeResource ComboBoxPointerOverBackgroundThemeBrush}" />
-										<Setter Target="Highlight.Fill"
+										<Setter Target="Highlight.Background"
 												Value="{ThemeResource ComboBoxSelectedPointerOverBackgroundThemeBrush}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -260,7 +280,7 @@
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
 									</Storyboard>
-									
+
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
 												Value="{ThemeResource ComboBoxPressedBackgroundThemeBrush}" />
@@ -271,7 +291,7 @@
 									<VisualState.Setters>
 										<Setter Target="DropDownGlyph_Down.Fill"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-										<Setter Target="PlaceholderTextBlock.Foreground"
+										<Setter Target="PlaceholderElement.Foreground"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
@@ -289,21 +309,27 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="HighlightBackground.Opacity"
+										<Setter Target="HighlightBorder.Opacity"
 												Value="1" />
-										<Setter Target="Highlight.Opacity"
-												Value="1" />
+										<Setter Target="PlaceholderElement.Foreground"
+												Value="{StaticResource TextBoxLabelFocusColorBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="FocusedPressed">
 									<VisualState.Setters>
-										<Setter Target="Highlight.Fill"
+										<Setter Target="Highlight.Background"
 												Value="{ThemeResource ComboBoxPressedHighlightThemeBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="PlaceholderElement.Foreground"
+												Value="{StaticResource ComboBoxPlaceholderForegroundThemeBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
 								<VisualState x:Name="PointerFocused" />
 
 								<VisualState x:Name="FocusedDropDown">
@@ -350,42 +376,52 @@
 											  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 											  Elevation="8"
 											  BorderBrush="{StaticResource ComboBoxBorderBrush}"
-											  BorderThickness="1">
+											  BorderThickness="{TemplateBinding BorderThickness}">
 
 							<Grid x:Name="ComboBoxContent"
 								  Background="{TemplateBinding Background}"
-								  BorderBrush="{TemplateBinding BorderBrush}"
-								  BorderThickness="{TemplateBinding BorderThickness}"
-								  CornerRadius="4">
+								  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
 									<ColumnDefinition Width="40" />
 								</Grid.ColumnDefinitions>
 
-								<!-- Drop Down Border -->
-								<Rectangle Fill="{StaticResource ComboBoxBorderBrush}"
-										   Width="1"
-										   HorizontalAlignment="Right" />
-
 								<!-- Pressed Background -->
-								<Rectangle x:Name="PressedBackground"
-										   Fill="{ThemeResource ComboBoxPressedHighlightThemeBrush}"
-										   Opacity="0" />
+								<Border x:Name="PressedBackground"
+										CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
+										Background="{ThemeResource ComboBoxPressedHighlightThemeBrush}"
+										Opacity="0"
+										Grid.ColumnSpan="2" />
 
 								<!-- Highlight Background -->
-								<Border x:Name="HighlightBackground"
-										Background="{ThemeResource ComboBoxFocusedBackgroundThemeBrush}"
+								<Border x:Name="HighlightBorder"
+										BorderBrush="{StaticResource ComboBoxFocusedBorderBrush}"
+										BorderThickness="{TemplateBinding BorderThickness}"
 										Opacity="0"
-										CornerRadius="4"
+										CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 										Grid.ColumnSpan="2" />
 
 								<!-- Highlight -->
-								<Rectangle x:Name="Highlight"
-										   Fill="{ThemeResource ComboBoxSelectedBackgroundThemeBrush}"
-										   Margin="{TemplateBinding BorderThickness}"
-										   Opacity="0" />
+								<Border x:Name="Highlight"
+										CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
+										Background="{ThemeResource ComboBoxSelectedBackgroundThemeBrush}"
+										Margin="{TemplateBinding BorderThickness}"
+										Opacity="0" />
 
-								<Grid Margin="16,0">
+								<Grid Margin="16,0"
+									  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
+									<Grid.Resources>
+										<!-- Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not -->
+										<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder"
+															TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToContentTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
+
+										<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder"
+															TranslateY="0" />
+
+										<converters:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
+																					NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}"
+																					NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
+									</Grid.Resources>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition Width="*" />
@@ -405,17 +441,27 @@
 									<!-- ContentPresenter -->
 									<ContentPresenter x:Name="ContentPresenter"
 													  Grid.Column="1"
-													  VerticalAlignment="Center" />
+													  VerticalAlignment="Center"
+													  RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}">
+									</ContentPresenter>
 
-									<!-- PlaceholderTextBlock -->
-									<TextBlock x:Name="PlaceholderTextBlock"
+									<!-- PlaceholderElement -->
+									<TextBlock x:Name="PlaceholderElement"
 											   Grid.Column="1"
-											   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
 											   Text="{TemplateBinding PlaceholderText}"
 											   Style="{StaticResource MaterialBody2}"
-											   Foreground="{ThemeResource ComboBoxPlaceholderTextColor}"
+											   Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource ComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource ComboBoxPlaceholderForegroundThemeBrush}}"
 											   VerticalAlignment="Center"
-											   MaxLines="1" />
+											   RenderTransformOrigin="0,0.5"
+											   IsHitTestVisible="False"
+											   MaxLines="1">
+										<TextBlock.RenderTransform>
+											<CompositeTransform x:Name="PlaceholderElement_CompositeTransform"
+																ScaleX="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}"
+																ScaleY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}"
+																TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
+										</TextBlock.RenderTransform>
+									</TextBlock>
 								</Grid>
 
 								<!-- Down -->
@@ -448,8 +494,8 @@
 										<ScrollViewer x:Name="ScrollViewer"
 													  Background="{TemplateBinding Background}"
 													  BorderBrush="{StaticResource ComboBoxBorderBrush}"
-													  BorderThickness="1"
-													  CornerRadius="4"
+													  BorderThickness="{TemplateBinding BorderThickness}"
+													  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 													  AutomationProperties.AccessibilityView="Raw"
 													  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
 													  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
