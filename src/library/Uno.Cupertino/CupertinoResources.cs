@@ -41,6 +41,7 @@ namespace Uno.Cupertino
 			Add("ms-appx:///Uno.Cupertino/Styles/Controls/ProgressRing.xaml");
 #endif
 			Add("ms-appx:///Uno.Cupertino/Styles/Controls/RadioButton.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/SlidingSegmentedControl.xaml");
 			Add("ms-appx:///Uno.Cupertino/Styles/Controls/Slider.xaml");
 			Add("ms-appx:///Uno.Cupertino/Styles/Controls/TextBlock.xaml");
 			Add("ms-appx:///Uno.Cupertino/Styles/Controls/TextBox.xaml");

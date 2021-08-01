@@ -126,6 +126,7 @@ namespace Uno.Themes.Samples
 				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");
 				// Incomplete : AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<SliderSamplePage>(icon: "SliderIcon");
+				AddMenuItem<SlidingSegmentedControlSamplePage>();
 				AddMenuItem<StandardBottomSheetSamplePage>(icon: "StandardBottomSheetIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");

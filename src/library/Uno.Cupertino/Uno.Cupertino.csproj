@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.26" PrivateAssets="All" />
+		<PackageReference Include="Uno.UI.Toolkit" Version="255.255.255.255" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -95,10 +96,24 @@
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Remove="Styles\Controls\SlidingSegmentedControl.xaml" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Controls\SlidingSegmentedControl.xaml" />
+	</ItemGroup>
 
 	<ItemGroup>
     <EmbeddedResource Include="LinkerConfig.xml">
       <LogicalName>$(AssemblyName).xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Styles\Controls\SlidingSegmentedControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
 </Project>
