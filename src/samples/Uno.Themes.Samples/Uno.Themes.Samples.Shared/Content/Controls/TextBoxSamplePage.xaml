@@ -17,47 +17,50 @@
 				<DataTemplate>
 					<StackPanel>
 
-						<!-- Default -->
+						<!-- TexBox Filled -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_1"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Filled"
-									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- TexBox With Header -->
+						<!-- TexBox Filled With PlaceholderText -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_2"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled"
-									 Header="Header"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- TexBox Disabled -->
+						<!-- TexBox Filled Disabled -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_3"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Disabled"
+							<TextBox PlaceholderText="Filled Disabled"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}"
 									 IsEnabled="False" />
 						</smtx:XamlDisplay>
 
-						<!-- TexBox Outline -->
+						<!-- TexBox Outlined -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_4"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TexBox Outlined with PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_5"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined"
-									 Header="Header"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- TexBox Outline Disabled -->
-						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_5"
+						<!-- TexBox Outlined Disabled -->
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_6"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined Disabled"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 									 IsEnabled="False" />
 						</smtx:XamlDisplay>
 
-						<!-- TextBox MultiLine -->
-						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_6"
+						<!-- TextBox Filled MultiLine -->
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_7"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
 									 PlaceholderText="MultiLine Filled"
@@ -66,11 +69,21 @@
 									 AcceptsReturn="True" />
 						</smtx:XamlDisplay>
 
-						<!-- TexBox Icon -->
-						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_7"
+						<!-- TexBox Filled Icon -->
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_8"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
+								<extensions:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</extensions:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TexBox Outlined Icon with PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_9"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled with Icon"
-									 Style="{StaticResource MaterialFilledTextBoxStyle}">
+									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
 								<extensions:ControlExtensions.Icon>
 									<SymbolIcon Symbol="Favorite" />
 								</extensions:ControlExtensions.Icon>
