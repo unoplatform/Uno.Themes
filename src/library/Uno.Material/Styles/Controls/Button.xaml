@@ -155,15 +155,16 @@
 										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
-									
+
 									<ContentPresenter x:Name="IconPresenter"
 													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-													  HorizontalAlignment="Stretch"
 													  Margin="0,0,8,0"
 													  MaxHeight="34"
 													  MaxWidth="34"
 													  MinWidth="25"
+													  HorizontalAlignment="Stretch"
 													  VerticalAlignment="Stretch"
+													  VerticalContentAlignment="Center"
 													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<ContentPresenter Grid.Column="1"
@@ -327,12 +328,13 @@
 
 									<ContentPresenter x:Name="IconPresenter"
 													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-													  HorizontalAlignment="Stretch"
 													  Margin="0,0,8,0"
 													  MaxHeight="34"
 													  MaxWidth="34"
 													  MinWidth="25"
+													  HorizontalAlignment="Stretch"
 													  VerticalAlignment="Stretch"
+													  VerticalContentAlignment="Center"
 													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<ContentPresenter Grid.Column="1"
@@ -487,12 +489,13 @@
 
 									<ContentPresenter x:Name="IconPresenter"
 													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-													  HorizontalAlignment="Stretch"
 													  Margin="0,0,8,0"
 													  MaxHeight="34"
 													  MaxWidth="34"
 													  MinWidth="25"
+													  HorizontalAlignment="Stretch"
 													  VerticalAlignment="Stretch"
+													  VerticalContentAlignment="Center"
 													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<ContentPresenter Grid.Column="1"
