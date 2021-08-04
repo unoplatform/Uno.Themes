@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Uno.Themes.Samples.Entities;
+using Uno.Themes.Samples.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,7 +24,15 @@ namespace Uno.Themes.Samples.Content.Controls
 		DocumentationLink = "https://material.io/components/dividers",
 		DataType = typeof(DividerSamplePageViewModel)
 	)]
-	public class DividerSamplePageViewModel
+	public sealed partial class DividerSamplePage : Page
+	{
+		public DividerSamplePage()
+		{
+			this.InitializeComponent();
+		}
+	}
+
+	public class DividerSamplePageViewModel : ViewModelBase
 	{
 		[Bindable]
 		public class Item
@@ -42,13 +51,5 @@ namespace Uno.Themes.Samples.Content.Controls
 			new Item(2),
 			new Item(3)
 		};
-	}
-
-	public sealed partial class DividerSamplePage : Page
-	{
-		public DividerSamplePage()
-		{
-			this.InitializeComponent();
-		}
 	}
 }
