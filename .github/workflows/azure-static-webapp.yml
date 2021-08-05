@@ -36,7 +36,7 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.7
         with:
           useConfigFile: true
-          configFilePath: gitversion.yml
+          configFilePath: build/gitversion.yml
           
       - name: Setup dotnet 5.0.x
         uses: actions/setup-dotnet@v1.7.2
