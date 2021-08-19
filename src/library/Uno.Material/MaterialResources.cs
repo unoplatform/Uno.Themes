@@ -46,7 +46,7 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/InfoBar.xaml");
 #if !WinUI
-			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView.xaml"); // NavigationView merges it's related dictionaries already
+			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/WUX/NavigationView.xaml"); // NavigationView merges it's related dictionaries already
 #endif
 			Add("ms-appx:///Uno.Material/Styles/Controls/PasswordBox.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressBar.xaml");
