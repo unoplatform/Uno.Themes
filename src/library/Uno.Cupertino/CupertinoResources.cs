@@ -20,32 +20,33 @@ namespace Uno.Cupertino
 		public CupertinoResources()
 		{
 			// Add all ResourceDictionaries for Variables here in alphabetical order
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/AnimationConstants.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/Colors.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/Converters.xaml") });
-			//this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/TextBoxVariables.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/StateConstants.xaml") });
+			Add("ms-appx:///Uno.Cupertino/Styles/Application/AnimationConstants.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Application/Colors.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Application/Converters.xaml");
+			//Add("ms-appx:///Uno.Cupertino/Styles/Application/TextBoxVariables.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Application/StateConstants.xaml");
 
 			// Add all ResourceDictionaries for Controls here in alphabetical order
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/Button.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/CalendarDatePicker.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/CalendarView.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/CheckBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/ComboBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/DatePicker.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/HyperlinkButton.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/NumberBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/PasswordBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/ProgressBar.xaml") });
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/Button.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/CalendarDatePicker.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/CalendarView.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/CheckBox.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/ComboBox.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/DatePicker.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/HyperlinkButton.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/NumberBox.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/PasswordBox.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/ProgressBar.xaml");
 #if !WinUI_Desktop
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/ProgressRing.xaml") });
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/ProgressRing.xaml");
 #endif
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/RadioButton.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/Slider.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/TextBlock.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/TextBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Controls/ToggleSwitch.xaml") });
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/RadioButton.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/Slider.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/TextBlock.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/TextBox.xaml");
+			Add("ms-appx:///Uno.Cupertino/Styles/Controls/ToggleSwitch.xaml");
 
+			void Add(string source) => MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(source) });
 		}
 	}
 }
