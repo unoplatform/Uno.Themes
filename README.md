@@ -1,6 +1,6 @@
 ﻿![Uno Material](./images/MaterialBanner.png)
 
-This library is designed to help you use the [material design system](https://material.io/design). 
+This library is designed to help you use the [material design system](https://material.io/design).
 It includes :
 - Color system for both Light and Dark theme
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
@@ -8,7 +8,7 @@ It includes :
 
 Quickly visualize all the available controls through this [zeplin link](https://zpl.io/scene/bzgq8wG)
 
-Platform support: 
+Platform support:
 - WinUI / UWP
 - iOS
 - MacOS
@@ -34,18 +34,18 @@ It includes:
 
 1. Install the nuget package Uno.Material.
 2. Unless you want our default color palette (inspired by our Uno logo), you'll want to override the following color resources in you application. We suggest creating a ColorPaletteOverride.xaml `ResourceDictionary`.
-For more information on the color system, consult this [page](https://material.io/design/color/the-color-system.html#color-theme-creation) for all the official documentation and tools to help you create your own palette. 
+For more information on the color system, consult this [page](https://material.io/design/color/the-color-system.html#color-theme-creation) for all the official documentation and tools to help you create your own palette.
 Here is what ColorPaletteOverride.xaml would contain if you want both light and dark theme.
 ```xaml
 <ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!-- 
-	
+	<!--
+
 	For more information on the color system, consult this page
-	https://material.io/design/color/the-color-system.html#color-theme-creation 
-	
+	https://material.io/design/color/the-color-system.html#color-theme-creation
+
 	-->
 	<ResourceDictionary.ThemeDictionaries>
 		<!-- Light Theme -->
@@ -106,7 +106,7 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 			<ResourceDictionary.MergedDictionaries>
 				<!-- Load WinUI resources -->
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
-				
+
 				<MaterialColors xmlns="using:Uno.Material"
 								ColorPaletteOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
 				<MaterialResources xmlns="using:Uno.Material" />
@@ -116,7 +116,7 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 		</ResourceDictionary>
 	</Application.Resources>
 ```
-5. Start using the styles in your pages! 
+5. Start using the styles in your pages!
 - To use styles, just find the name of the style from our documentation or sample app and use it like this
 ```xaml
 <Button Content="CONTAINED"
@@ -198,14 +198,14 @@ See [Sheet.md](./controls/Sheet.md) for more information.
 | CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         |
 | ComboBox         | MaterialComboBoxStyle                                                             |
 | CommandBar       | MaterialCommandBarStyle                                                           |
-| NavigationView   | MaterialNavigationViewStyle <br> MaterialNoCompactMenuNavigationViewStyle         |
+| NavigationView (WUX) | MaterialWUXMaterialNavigationViewStyle <br> MaterialMUXNoCompactMenuNavigationViewStyle         |
 | PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              |
 | RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   |
 | TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline                                 |
 | TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      |
 | ToggleButton     | MaterialTextToggleButtonStyle                                                     |
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         |
-                                                                               
+
 ### Styles for custom controls
 | **Controls**              | **StyleNames**                                                                |
 |---------------------------|-------------------------------------------------------------------------------|
