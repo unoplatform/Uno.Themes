@@ -198,7 +198,7 @@ See [Sheet.md](./controls/Sheet.md) for more information.
 | CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         |
 | ComboBox         | MaterialComboBoxStyle                                                             |
 | CommandBar       | MaterialCommandBarStyle                                                           |
-| NavigationView (WUX) | MaterialWUXMaterialNavigationViewStyle <br> MaterialMUXNoCompactMenuNavigationViewStyle         |
+| NavigationView (WUX) | MaterialWUXNavigationViewStyle <br> MaterialMUXNoCompactMenuNavigationViewStyle         |
 | PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              |
 | RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   |
 | TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline                                 |

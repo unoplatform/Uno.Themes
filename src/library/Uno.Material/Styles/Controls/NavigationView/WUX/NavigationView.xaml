@@ -24,7 +24,7 @@
 	<x:Double x:Key="MaterialWUXNavDrawersFontSize">14</x:Double>
 	<x:Int32 x:Key="MaterialWUXNavDrawersElevation">16</x:Int32>
 
-	<Style x:Key="MaterialWUXMaterialNavigationViewStyle"
+	<Style x:Key="MaterialWUXNavigationViewStyle"
 		   TargetType="NavigationView">
 		<Setter Property="PaneToggleButtonStyle"
 				Value="{StaticResource PaneToggleButtonStyle}" />
@@ -496,7 +496,7 @@
 
 	<!--Style which ensures the navigation never displays the menu in "Compact" mode-->
 	<Style x:Key="MaterialMUXNoCompactMenuNavigationViewStyle"
-		   BasedOn="{StaticResource MaterialWUXMaterialNavigationViewStyle}"
+		   BasedOn="{StaticResource MaterialWUXNavigationViewStyle}"
 		   TargetType="NavigationView">
 		<Setter Property="CompactPaneLength"
 				Value="0" />
@@ -958,7 +958,8 @@
 		</Setter>
 	</Style>
 
-	<Style TargetType="NavigationViewItem">
+	<Style x:Key="MaterialWUXNavigationViewItemStyle"
+		   TargetType="NavigationViewItem">
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialWUXNavDrawersTextBrush}" />
 		<Setter Property="Background"
