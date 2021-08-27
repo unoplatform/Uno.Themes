@@ -34,9 +34,10 @@
     configuration: Release
     platform: $(ApplicationPlatform)
     maximumCpuCount: true
-    msbuildArguments: /ds /r /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch) /p:RestoreConfigFile=$(Build.SourcesDirectory)\nuget.config
+    msbuildArguments: /ds /m /r /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch) /p:RestoreConfigFile=$(Build.SourcesDirectory)\nuget.config /bl:$(build.artifactstagingdirectory)/build-$(ApplicationPlatform).binlog
 
 - task: PublishBuildArtifacts@1
+  condition: always()
   displayName: 'Publish artifact'
   inputs:
     ArtifactName: $(ArtifactName)
