@@ -15,79 +15,194 @@
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<!-- BUTTONS -->
 
 						<!-- Button Contained -->
-						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Contained">
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Contained"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="CONTAINED"
 									Style="{StaticResource MaterialContainedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Contained Disabled -->
-						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_ContainedDisabled">
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_ContainedDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="CONTAINED DISABLED"
 									IsEnabled="False"
 									Style="{StaticResource MaterialContainedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Outlined -->
-						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Outline">
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Outline"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="OUTLINED"
 									Style="{StaticResource MaterialOutlinedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Outlined Disabled -->
-						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_OutlineDisabled">
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_OutlineDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="OUTLINED DISABLED"
 									IsEnabled="False"
 									Style="{StaticResource MaterialOutlinedButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Text -->
-						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Text">
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="TEXT"
 									Style="{StaticResource MaterialTextButtonStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- Button Text Disabled -->
-						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_TextDisabled">
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_TextDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="TEXT DISABLED"
 									IsEnabled="False"
 									Style="{StaticResource MaterialTextButtonStyle}" />
 						</smtx:XamlDisplay>
 
-						<TextBlock FontSize="14" Margin="0,8,0,0" Text="Material Buttons can specify a leading icon through an attached property"/>
+						<!-- STRETCHED BUTTONS -->
+
+						<!-- Stretched Button Contained -->
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_ContainedStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="CONTAINED"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialContainedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Contained Disabled -->
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_ContainedDisabledStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="CONTAINED DISABLED"
+									IsEnabled="False"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialContainedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Outlined -->
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_OutlineStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="OUTLINED"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialOutlinedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Outlined Disabled -->
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_OutlineDisabledStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="OUTLINED DISABLED"
+									IsEnabled="False"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialOutlinedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Text -->
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_TextStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="TEXT"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Text Disabled -->
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_TextDisabledStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="TEXT DISABLED"
+									IsEnabled="False"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- BUTTONS WITH ICON -->
+						<TextBlock FontSize="14"
+								   Margin="0,8,0,0"
+								   Text="Material Buttons can specify a leading icon through an attached property" />
+
 						<!-- Icon Button Contained -->
-						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Contained">
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Contained"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="CONTAINED"
 									Style="{StaticResource MaterialContainedButtonStyle}">
 								<extensions:ControlExtensions.Icon>
-									<FontIcon Glyph="&#xE946;"/>
+									<FontIcon Glyph="&#xE946;" />
 								</extensions:ControlExtensions.Icon>
 							</Button>
 						</smtx:XamlDisplay>
 
 						<!-- Icon Button Outlined -->
-						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Outline">
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Outline"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="OUTLINED"
 									Style="{StaticResource MaterialOutlinedButtonStyle}">
 								<extensions:ControlExtensions.Icon>
-									<FontIcon Glyph="&#xE946;"/>
+									<FontIcon Glyph="&#xE946;" />
 								</extensions:ControlExtensions.Icon>
 							</Button>
 						</smtx:XamlDisplay>
 
 						<!-- Icon Button Text -->
-						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Text">
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="TEXT"
-									Style="{StaticResource MaterialTextButtonStyle}" >
+									Style="{StaticResource MaterialTextButtonStyle}">
 								<extensions:ControlExtensions.Icon>
-									<FontIcon Glyph="&#xE946;"/>
+									<FontIcon Glyph="&#xE946;" />
+								</extensions:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- STRETCHED BUTTONS WITH ICON -->
+
+						<!-- Stretched Icon Button Contained -->
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_ContainedStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="CONTAINED"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialContainedButtonStyle}">
+								<extensions:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</extensions:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Icon Button Outlined -->
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_OutlineStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="OUTLINED"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialOutlinedButtonStyle}">
+								<extensions:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</extensions:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Icon Button Text -->
+						<smtx:XamlDisplay UniqueKey="Material_IconButtonSamplePage_TextStretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="TEXT"
+									HorizontalAlignment="Stretch"
+									HorizontalContentAlignment="Center"
+									Style="{StaticResource MaterialTextButtonStyle}">
+								<extensions:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
 								</extensions:ControlExtensions.Icon>
 							</Button>
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>

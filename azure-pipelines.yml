@@ -14,6 +14,7 @@
 
 jobs:
 - job: Windows # Build UWP/Android/NuGet
+  timeoutInMinutes: 90
   strategy:
     maxParallel: 4
     matrix:
@@ -40,6 +41,7 @@ jobs:
     - template: build/stage-build.yml
 
 - job: MacOS # Build iOS/macOS
+  timeoutInMinutes: 90
   strategy:
     maxParallel: 2
     matrix:
