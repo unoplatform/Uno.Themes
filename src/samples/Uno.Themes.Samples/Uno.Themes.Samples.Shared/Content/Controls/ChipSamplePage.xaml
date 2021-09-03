@@ -4,6 +4,7 @@
 	  xmlns:local="using:Uno.Themes.Samples.Content.Controls"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:converters="using:Uno.Cupertino.Converters"
 	  xmlns:chips="using:Uno.Material.Controls"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  xmlns:android="http://uno.ui/android"
@@ -11,7 +12,15 @@
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  mc:Ignorable="d android ios">
 
-	<Page.Resources />
+	<Page.Resources>
+		<converters:FromNullToValueConverter x:Key="SingleSelectionToValueConverter"
+											 NotNullValue="Selected Item: #"
+											 NullValue="No selection" />
+
+		<converters:FromNullToValueConverter x:Key="MultipleSelectionToValueConverter"
+											 NotNullValue="Selected Items:"
+											 NullValue="No selection" />
+	</Page.Resources>
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
@@ -173,15 +182,15 @@
 							</StackPanel>
 						</ScrollViewer>
 
-						<!-- ### GroupChip -->
-						<TextBlock Text="GroupChip"
+						<!-- ### ChipGroup -->
+						<TextBlock Text="ChipGroup"
 								   Margin="0,36,0,0"
 								   Style="{StaticResource MaterialHeadline6}" />
 
-						<!-- GroupChip Action -->
+						<!-- ChipGroup Action -->
 						<TextBlock Text="Action"
 								   Style="{StaticResource MaterialSubtitle1}" />
-						<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_Action"
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_Action"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 
 							<ScrollViewer HorizontalScrollMode="Auto"
@@ -211,7 +220,7 @@
 								</chips:ChipGroup>
 							</ScrollViewer>
 						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_ActionOutlined"
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_ActionOutlined"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 
 							<ScrollViewer HorizontalScrollMode="Auto"
@@ -244,12 +253,13 @@
 							</ScrollViewer>
 						</smtx:XamlDisplay>
 						<Button Content="Reset chip items"
-								Click="ResetChipItems" />
+								Click="ResetChipItems"
+								Margin="0,10,0,20" />
 
-						<!-- GroupChip Choice -->
+						<!-- ChipGroup Choice -->
 						<TextBlock Text="Choice"
 								   Style="{StaticResource MaterialSubtitle1}" />
-						<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_Choice"
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_Choice"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 
 							<ScrollViewer HorizontalScrollMode="Auto"
@@ -273,7 +283,7 @@
 								</chips:ChipGroup>
 							</ScrollViewer>
 						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_ChoiceOutlined"
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_ChoiceOutlined"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 
 							<ScrollViewer HorizontalScrollMode="Auto"
@@ -298,10 +308,10 @@
 							</ScrollViewer>
 						</smtx:XamlDisplay>
 
-						<!-- GroupChip Filter -->
+						<!-- ChipGroup Filter -->
 						<TextBlock Text="Filter"
 								   Style="{StaticResource MaterialSubtitle1}" />
-						<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_Filter"
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_Filter"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 
 							<ScrollViewer HorizontalScrollMode="Auto"
@@ -324,7 +334,7 @@
 								</chips:ChipGroup>
 							</ScrollViewer>
 						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="ChipSamplePage_GroupChip_FliterOutlined"
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_FliterOutlined"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 
 							<ScrollViewer HorizontalScrollMode="Auto"
@@ -348,6 +358,90 @@
 										<DataTemplate>
 											<TextBlock Style="{StaticResource MaterialBody1}">
 									<Run Text="Item #" /><Run Text="{Binding Index}" />
+											</TextBlock>
+										</DataTemplate>
+									</chips:ChipGroup.ItemTemplate>
+								</chips:ChipGroup>
+							</ScrollViewer>
+						</smtx:XamlDisplay>
+
+						<!-- ChipGroup Selection -->
+						<TextBlock Text="Single Selection"
+								   Style="{StaticResource MaterialSubtitle1}" />
+						<TextBlock Style="{StaticResource MaterialSubtitle2}">
+							<Run Text="{Binding ElementName=SingleSelectionChipGroup, Path=SelectedItem, Mode=TwoWay, Converter={StaticResource SingleSelectionToValueConverter}}" /><Run Text="{Binding ElementName=SingleSelectionChipGroup, Path=SelectedItem.Index, Mode=TwoWay}" />
+						</TextBlock>
+
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_SingleSelection_WithSelectedItem"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<ScrollViewer HorizontalScrollMode="Auto"
+										  HorizontalScrollBarVisibility="Auto"
+										  VerticalScrollMode="Disabled"
+										  VerticalScrollBarVisibility="Hidden">
+
+								<chips:ChipGroup x:Name="SingleSelectionChipGroup"
+												 ItemsSource="{Binding Data.TestArray}"
+												 SelectedItem="{Binding Data.TestItem}"
+												 Style="{StaticResource MaterialChipGroupStyle}"
+												 ItemContainerStyle="{StaticResource MaterialPrimaryChipStyle}"
+												 SelectionMode="Single"
+												 Margin="8,0,8,8">
+
+									<chips:ChipGroup.ItemTemplate>
+										<DataTemplate>
+											<TextBlock Style="{StaticResource MaterialBody1}">
+												<Run Text="Item #" /><Run Text="{Binding Index}" />
+											</TextBlock>
+										</DataTemplate>
+									</chips:ChipGroup.ItemTemplate>
+								</chips:ChipGroup>
+							</ScrollViewer>
+						</smtx:XamlDisplay>
+						<TextBlock Text="Multiple selection"
+								   Style="{StaticResource MaterialSubtitle1}" />
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="{Binding ElementName=MultipleSelectionChipGroup, Path=SelectedItems, Mode=TwoWay, Converter={StaticResource MultipleSelectionToValueConverter}}"
+									   Style="{StaticResource MaterialSubtitle2}"
+									   VerticalAlignment="Center"
+									   Margin="0,0,4,0" />
+							<ItemsControl ItemsSource="{Binding ElementName=MultipleSelectionChipGroup, Path=SelectedItems, Mode=TwoWay}"
+										  VerticalAlignment="Center">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Horizontal" />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Margin="0,0,2,0"
+												   Style="{StaticResource MaterialSubtitle2}">
+											<Run Text="#" /><Run Text="{Binding Index}" /><Run Text="," />
+										</TextBlock>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</StackPanel>
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_MultipleSelection_WithSelectedItems"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<ScrollViewer HorizontalScrollMode="Auto"
+										  HorizontalScrollBarVisibility="Auto"
+										  VerticalScrollMode="Disabled"
+										  VerticalScrollBarVisibility="Hidden">
+
+								<chips:ChipGroup x:Name="MultipleSelectionChipGroup"
+												 ItemsSource="{Binding Data.TestArray}"
+												 SelectedItems="{Binding Data.TestSelectedItems}"
+												 Style="{StaticResource MaterialChipGroupStyle}"
+												 ItemContainerStyle="{StaticResource MaterialPrimaryChipStyle}"
+												 SelectionMode="Multiple"
+												 Margin="8,0,8,8">
+
+									<chips:ChipGroup.ItemTemplate>
+										<DataTemplate>
+											<TextBlock Style="{StaticResource MaterialBody1}">
+												<Run Text="Item #" /><Run Text="{Binding Index}" />
 											</TextBlock>
 										</DataTemplate>
 									</chips:ChipGroup.ItemTemplate>

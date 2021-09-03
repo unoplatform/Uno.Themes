@@ -27,6 +27,7 @@ namespace Uno.Material.Controls
 
 		private bool _isSynchronizingSelection = false;
 		private bool _isUpdatingSelection = false;
+		private bool _needsToSynchronizeInitialSelection = false;
 
 		public ChipGroup()
 		{
@@ -42,6 +43,7 @@ namespace Uno.Material.Controls
 
 		private void OnLoaded(object sender, RoutedEventArgs e)
 		{
+			SynchronizeInitialSelection();
 			EnforceSelectionMode();
 			ApplyThumbnailTemplate();
 		}
@@ -112,6 +114,12 @@ namespace Uno.Material.Controls
 		{
 			if (_isSynchronizingSelection || _isUpdatingSelection) return;
 
+			if (!_needsToSynchronizeInitialSelection && ItemsPanelRoot == null && e.NewValue != null)
+			{
+				_needsToSynchronizeInitialSelection = true;
+				return;
+			}
+
 			if (SelectionMode == ChipSelectionMode.Single && FindContainer(SelectedItem) is Chip container)
 			{
 				container.SetIsCheckedSilently(true);
@@ -127,11 +135,20 @@ namespace Uno.Material.Controls
 		{
 			if (_isSynchronizingSelection || _isUpdatingSelection) return;
 
+			if (!_needsToSynchronizeInitialSelection && ItemsPanelRoot == null && e.NewValue != null)
+			{
+				_needsToSynchronizeInitialSelection = true;
+				return;
+			}
+
 			if (SelectionMode == ChipSelectionMode.Multiple)
 			{
-				var selectedContainers = SelectedItems != null
-					? GetItemContainers().Where(x => SelectedItems.Contains(x)).ToArray()
-					: null;
+				var selectedContainers = SelectedItems
+				   ?.Cast<object>()
+				   .Select(x => FindContainer(x))
+				   .Where(x => x != null)
+				   .ToArray();
+
 				foreach (var container in selectedContainers ?? Enumerable.Empty<Chip>())
 				{
 					container.SetIsCheckedSilently(true);
@@ -243,6 +260,21 @@ namespace Uno.Material.Controls
 			}
 		}
 
+		private void SynchronizeInitialSelection()
+		{
+			if (_needsToSynchronizeInitialSelection && SelectedItem != null)
+			{
+				OnSelectedItemChanged(null);
+			}
+
+			if (_needsToSynchronizeInitialSelection && SelectedItems != null)
+			{
+				OnSelectedItemsChanged(null);
+			}
+
+			_needsToSynchronizeInitialSelection = false;
+		}
+
 		private void EnforceSelectionMode()
 		{
 			if (ItemsPanelRoot == null) return;
@@ -332,10 +364,10 @@ namespace Uno.Material.Controls
 				}
 
 				// update selection properties
-				SelectedItem = SelectionMode == ChipSelectionMode.Single && selectedItems.Count == 1
+				SelectedItem = SelectionMode == ChipSelectionMode.Single && selectedItems?.Count == 1
 					? selectedItems[0]
 					: null;
-				SelectedItems = SelectionMode == ChipSelectionMode.Multiple
+				SelectedItems = SelectionMode == ChipSelectionMode.Multiple && selectedItems?.Count >= 1
 					? selectedItems
 					: null;
 			}

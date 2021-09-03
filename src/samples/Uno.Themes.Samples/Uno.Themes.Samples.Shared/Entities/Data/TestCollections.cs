@@ -11,6 +11,9 @@ namespace Uno.Themes.Samples.Entities.Data
 	{
 		public ObservableCollection<SelectableData> MutableTestCollection { get; } = new ObservableCollection<SelectableData>(CreateItems());
 		public ObservableCollection<SelectableData> TestCollection { get; } = new ObservableCollection<SelectableData>(CreateItems());
+		public static IEnumerable<SelectableData> TestArray { get; } = CreateItems();
+		public static IEnumerable<SelectableData> TestSelectedItems { get; } = TestArray.Take(3).ToArray();
+		public static SelectableData TestItem { get; } = TestArray.First();
 
 		private static IEnumerable<SelectableData> CreateItems()
 		{
