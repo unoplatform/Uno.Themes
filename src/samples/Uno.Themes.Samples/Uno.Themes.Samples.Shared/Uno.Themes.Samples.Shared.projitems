@@ -67,8 +67,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ModalStandardBottomSheetSamplePage.xaml.cs">
       <DependentUpon>ModalStandardBottomSheetSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage.xaml.cs">
-      <DependentUpon>NavigationViewSamplePage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage_MUX.xaml.cs">
+      <DependentUpon>NavigationViewSamplePage_MUX.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage_WUX.xaml.cs">
+      <DependentUpon>NavigationViewSamplePage_WUX.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\NumberBoxSamplePage.xaml.cs">
       <DependentUpon>NumberBoxSamplePage.xaml</DependentUpon>
@@ -124,6 +127,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\ColorsSamplePage.xaml.cs">
       <DependentUpon>ColorsSamplePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ClippedGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\OverviewSampleView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SamplePageLayout.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SamplePageLayout.Properties.cs" />
@@ -149,7 +153,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ExpandingBottomSheetViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ModalBottomSheetViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NavigationViewViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SnackBarViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StandardBottomSheetViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
@@ -219,7 +222,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage_MUX.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage_WUX.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

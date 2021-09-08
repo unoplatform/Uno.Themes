@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					x:Class="Uno.Material.MaterialColors">
-	<!-- 
-	
+	<!--
+
 	For more information on the color system, consult this page
-	https://material.io/design/color/the-color-system.html#color-theme-creation 
-	
+	https://material.io/design/color/the-color-system.html#color-theme-creation
+
 	-->
 	<!-- Global brushes -->
 	<SolidColorBrush x:Key="MaterialPrimaryBrush"
@@ -155,17 +155,19 @@
 	<SolidColorBrush x:Key="MaterialOnSurfaceLowVariantBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
 					 Opacity="0.20" />
-	<StaticResource x:Key="NavDrawersBackgroundBrush"
+
+	<!-- Navigation Bar-->
+	<StaticResource x:Key="MaterialWUXNavDrawersBackgroundBrush"
 					ResourceKey="MaterialSurfaceBrush" />
-	<StaticResource x:Key="NavDrawersTextBrush"	
+	<StaticResource x:Key="MaterialWUXNavDrawersTextBrush"
 					ResourceKey="MaterialOnSurfaceMediumBrush" />
-	<StaticResource x:Key="NavDrawersIconBrush"	
+	<StaticResource x:Key="MaterialWUXNavDrawersIconBrush"
 					ResourceKey="MaterialOnSurfaceMediumBrush" />
-	<StaticResource x:Key="NavDrawersSelectedBrush"
+	<StaticResource x:Key="MaterialWUXNavDrawersSelectedBrush"
 					ResourceKey="MaterialPrimarySelectedBrush" />
-	<StaticResource x:Key="NavDrawersSelectedTextBrush"
+	<StaticResource x:Key="MaterialWUXNavDrawersSelectedTextBrush"
 					ResourceKey="MaterialPrimaryBrush" />
-	<StaticResource x:Key="NavDrawersSelectedIconBrush"
+	<StaticResource x:Key="MaterialWUXNavDrawersSelectedIconBrush"
 					ResourceKey="MaterialPrimaryBrush" />
 
 	<!-- Bottom Bar Navigation -->
@@ -173,7 +175,7 @@
 					 Color="{ThemeResource MaterialBottomNavBackgroundColor}" />
 	<SolidColorBrush x:Key="MaterialBottomNavForegroundBrush"
 					 Color="{ThemeResource MaterialBottomNavForegroundColor}" />
-	
+
 	<SolidColorBrush x:Key="MaterialBottomNavNotifBackgroundBrush"
 					 Color="#CF6679" />
 	<SolidColorBrush x:Key="MaterialBottomNavNotifLabelBrush"
@@ -186,5 +188,5 @@
 	<SolidColorBrush x:Key="ExpandingBottomSheetForegroundBrush"
 					 Color="{ThemeResource MaterialOnPrimaryColor}"
 					 Opacity="0.85" />
-	
+
 </ResourceDictionary>

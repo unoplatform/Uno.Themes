@@ -22,47 +22,50 @@ namespace Uno.Material
 		private void UpdateResources()
 		{
 			// Add all ResourceDictionaries for Variables here in alphabetical order
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/AnimationConstants.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Converters.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/TextBoxVariables.xaml") });
+			Add("ms-appx:///Uno.Material/Styles/Application/AnimationConstants.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Application/Converters.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Application/TextBoxVariables.xaml");
 
 			// Add all ResourceDictionaries for Controls here in alphabetical order
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/BottomNavigationBar.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/BottomNavigationBarItem.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/Button.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/Card.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/CalendarDatePicker.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/Chip.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/ChipGroup.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/CheckBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/DatePicker.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/Divider.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/ExpandingBottomSheet.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/FloatingActionButton.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/InfoBar.xaml") });
+			Add("ms-appx:///Uno.Material/Styles/Controls/BottomNavigationBar.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/BottomNavigationBarItem.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Button.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Card.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarDatePicker.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Chip.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ChipGroup.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CheckBox.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/DatePicker.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Divider.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ExpandingBottomSheet.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/FloatingActionButton.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/InfoBar.xaml");
 #if !WinUI
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/NavigationView.xaml") }); // NavigationView merges it's related dictionaries already
+			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/WUX/NavigationView.xaml"); // NavigationView merges it's related dictionaries already
 #endif
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/PasswordBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/ProgressBar.xaml") });
+			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/NavigationView_MUX.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/PasswordBox.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressBar.xaml");
 #if !WinUI_Desktop
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/ProgressRing.xaml") });
+			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressRing.xaml");
 #endif
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/RadioButton.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/Ripple.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/SnackBar.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/Slider.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/StandardBottomSheet.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/TextBox.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/ToggleButton.xaml") });
-			this.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.xaml") });
+			Add("ms-appx:///Uno.Material/Styles/Controls/RadioButton.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Ripple.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/SnackBar.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Slider.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/StandardBottomSheet.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/TextBox.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleButton.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.xaml");
+
+			void Add(string source) => MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(source) });
 		}
 	}
 }

@@ -15,17 +15,25 @@
 	<ItemGroup>
 		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
 	</ItemGroup>
-	
+
+	<ItemGroup>
+		<LottieJson Include="Assets\MaterialDeterminate.json" />
+		<LottieJson Include="Assets\MaterialIndeterminate.json" />
+
+		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\NavigationView\WUX\**\*.xaml" />
+		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\ProgressRing.xaml" />
+	</ItemGroup>
+
 	<Choose>
 		<When Condition="'$(UseWinUI)'=='true'">
-			
+
 			<PropertyGroup>
 				<DefineConstants>WinUI</DefineConstants>
 				<DefineConstants Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">$(DefineConstants);WinUI_Desktop</DefineConstants>
 				<PackageId>Uno.Material.WinUI</PackageId>
 				<TargetFrameworks>$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
 			</PropertyGroup>
-			
+
 			<ItemGroup>
 				<PackageReference Include="Uno.WinUI" Version="3.10.0-dev.156" />
 
@@ -38,26 +46,25 @@
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
-				<Content Include="Assets\MaterialDeterminate.json" />
-				<Content Include="Assets\MaterialIndeterminate.json" />
+				<Content Include="@(LottieJson)" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
-				<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
-				<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
+				<EmbeddedResource Include="@(LottieJson)" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
-				<Page Remove="Styles\Controls\NavigationView*.xaml" />
-				<Page Remove="Styles\Controls\ProgressRing.xaml" />
+				<Page Remove="@(XamlExclusion)" />
 			</ItemGroup>
-	
+
 			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
-				<Page Include="**\*.xaml" Exclude="Styles\Controls\NavigationView*.xaml;bin\**\*.xaml;obj\**\*.xaml" />
+				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+				<Page Remove="@(XamlExclusion)" />
+
 				<Compile Update="**\*.xaml.cs">
 					<DependentUpon>%(Filename)</DependentUpon>
 				</Compile>
 			</ItemGroup>
-		
+
 		</When>
 		<Otherwise>
 
@@ -65,7 +72,7 @@
 				<PackageId>Uno.Material</PackageId>
 				<TargetFrameworks Condition="'$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.18362</TargetFrameworks>
 			</PropertyGroup>
-			
+
 			<ItemGroup>
 				<PackageReference Include="Uno.UI" Version="3.10.0-dev.156" />
 			</ItemGroup>
@@ -77,36 +84,37 @@
 				<PackageReference Include="Uno.UI.Lottie" Version="3.10.0-dev.156" />
 			</ItemGroup>
 
+
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
-				<Content Include="Assets\MaterialDeterminate.json" />
-				<Content Include="Assets\MaterialIndeterminate.json" />
+				<Content Include="@(LottieJson)" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-				<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
-				<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
+				<EmbeddedResource Include="@(LottieJson)" />
 			</ItemGroup>
 
 			<ItemGroup>
 				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+				<Page Remove="@(XamlExclusion)" />
+
 				<Compile Update="**\*.xaml.cs">
 					<DependentUpon>%(Filename)</DependentUpon>
 				</Compile>
 				<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 			</ItemGroup>
-		
+
 		</Otherwise>
 	</Choose>
-	
+
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<EmbeddedResource Include="LinkerConfig.xml">
 			<LogicalName>$(AssemblyName).xml</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<None Update="Styles\Controls\Button.xaml">
 			<Generator>MSBuild:Compile</Generator>
