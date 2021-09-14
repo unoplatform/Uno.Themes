@@ -391,6 +391,18 @@ namespace Uno.Material.Controls
 		{
 			if (item == null) return null;
 
+			// For some obscure reason, ContainerFromItem returns null when item is an enum.
+			// Note however that it works fine for other value types such as int.
+			// Because of this, we retrieve the container using the index instead.
+			if (item is Enum)
+			{
+				var index = GetItems().IndexOf(item);
+				if (index != -1)
+				{
+					return ContainerFromIndex(index) as Chip;
+				}
+			}
+
 			return
 				item as Chip ??
 				ContainerFromItem(item) as Chip;

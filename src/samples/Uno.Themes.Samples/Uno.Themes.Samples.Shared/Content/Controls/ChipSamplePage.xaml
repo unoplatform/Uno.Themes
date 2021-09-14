@@ -398,6 +398,39 @@
 								</chips:ChipGroup>
 							</ScrollViewer>
 						</smtx:XamlDisplay>
+
+						<TextBlock Text="Single Selection with Enum"
+								   Style="{StaticResource MaterialSubtitle1}" />
+						<TextBlock Style="{StaticResource MaterialSubtitle2}">
+							<Run Text="{Binding ElementName=SingleEnumSelectionChipGroup, Path=SelectedItem, Mode=TwoWay, Converter={StaticResource SingleSelectionToValueConverter}}" /><Run Text="{Binding ElementName=SingleEnumSelectionChipGroup, Path=SelectedItem, Mode=TwoWay}" />
+						</TextBlock>
+
+						<smtx:XamlDisplay UniqueKey="ChipSamplePage_ChipGroup_SingleEnumSelection_WithSelectedItem"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<ScrollViewer HorizontalScrollMode="Auto"
+										  HorizontalScrollBarVisibility="Auto"
+										  VerticalScrollMode="Disabled"
+										  VerticalScrollBarVisibility="Hidden">
+
+								<chips:ChipGroup x:Name="SingleEnumSelectionChipGroup"
+												 ItemsSource="{Binding Data.TestEnumArray}"
+												 SelectedItem="{Binding Data.TestEnumItem}"
+												 Style="{StaticResource MaterialChipGroupStyle}"
+												 ItemContainerStyle="{StaticResource MaterialPrimaryChipStyle}"
+												 SelectionMode="Single"
+												 Margin="8,0,8,8">
+
+									<chips:ChipGroup.ItemTemplate>
+										<DataTemplate>
+											<TextBlock Style="{StaticResource MaterialBody1}"
+													   Text="{Binding}" />
+										</DataTemplate>
+									</chips:ChipGroup.ItemTemplate>
+								</chips:ChipGroup>
+							</ScrollViewer>
+						</smtx:XamlDisplay>
+
 						<TextBlock Text="Multiple selection"
 								   Style="{StaticResource MaterialSubtitle1}" />
 						<StackPanel Orientation="Horizontal">

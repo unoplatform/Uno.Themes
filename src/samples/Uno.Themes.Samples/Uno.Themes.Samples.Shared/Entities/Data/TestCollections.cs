@@ -14,6 +14,8 @@ namespace Uno.Themes.Samples.Entities.Data
 		public static IEnumerable<SelectableData> TestArray { get; } = CreateItems();
 		public static IEnumerable<SelectableData> TestSelectedItems { get; } = TestArray.Take(3).ToArray();
 		public static SelectableData TestItem { get; } = TestArray.First();
+		public static IEnumerable<DayOfWeek> TestEnumArray { get; } = new DayOfWeek[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday };
+		public static DayOfWeek TestEnumItem { get; } = DayOfWeek.Monday;
 
 		private static IEnumerable<SelectableData> CreateItems()
 		{
