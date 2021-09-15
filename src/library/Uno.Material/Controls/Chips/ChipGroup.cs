@@ -25,9 +25,9 @@ namespace Uno.Material.Controls
 		public event ChipItemRemovingEventHandler ItemRemoving;
 		public event ChipItemEventHandler ItemRemoved;
 
+		private bool _isLoaded = false;
 		private bool _isSynchronizingSelection = false;
 		private bool _isUpdatingSelection = false;
-		private bool _needsToSynchronizeInitialSelection = false;
 
 		public ChipGroup()
 		{
@@ -43,6 +43,7 @@ namespace Uno.Material.Controls
 
 		private void OnLoaded(object sender, RoutedEventArgs e)
 		{
+			_isLoaded = true;
 			SynchronizeInitialSelection();
 			EnforceSelectionMode();
 			ApplyThumbnailTemplate();
@@ -102,11 +103,13 @@ namespace Uno.Material.Controls
 		{
 			base.OnItemsChanged(e);
 
+			SynchronizeInitialSelection();
 			EnforceSelectionMode();
 		}
 
 		protected void OnItemsSourceChanged()
 		{
+			SynchronizeInitialSelection();
 			EnforceSelectionMode();
 		}
 
@@ -114,9 +117,8 @@ namespace Uno.Material.Controls
 		{
 			if (_isSynchronizingSelection || _isUpdatingSelection) return;
 
-			if (!_needsToSynchronizeInitialSelection && ItemsPanelRoot == null && e.NewValue != null)
+			if (!IsReady && e.NewValue != null)
 			{
-				_needsToSynchronizeInitialSelection = true;
 				return;
 			}
 
@@ -135,9 +137,8 @@ namespace Uno.Material.Controls
 		{
 			if (_isSynchronizingSelection || _isUpdatingSelection) return;
 
-			if (!_needsToSynchronizeInitialSelection && ItemsPanelRoot == null && e.NewValue != null)
+			if (!IsReady && e.NewValue != null)
 			{
-				_needsToSynchronizeInitialSelection = true;
 				return;
 			}
 
@@ -262,22 +263,25 @@ namespace Uno.Material.Controls
 
 		private void SynchronizeInitialSelection()
 		{
-			if (_needsToSynchronizeInitialSelection && SelectedItem != null)
+			if (!IsReady)
+			{
+				return;
+			}
+
+			if (SelectedItem != null)
 			{
 				OnSelectedItemChanged(null);
 			}
 
-			if (_needsToSynchronizeInitialSelection && SelectedItems != null)
+			if (SelectedItems != null)
 			{
 				OnSelectedItemsChanged(null);
 			}
-
-			_needsToSynchronizeInitialSelection = false;
 		}
 
 		private void EnforceSelectionMode()
 		{
-			if (ItemsPanelRoot == null) return;
+			if (!IsReady) return;
 
 			if (SelectionMode == ChipSelectionMode.None)
 			{
@@ -320,7 +324,7 @@ namespace Uno.Material.Controls
 
 		private void UpdateSelection(Chip[] newlySelectedContainers, bool forceClearOthersSelection = false)
 		{
-			if (ItemsPanelRoot == null) return;
+			if (!IsReady) return;
 			if (_isSynchronizingSelection) return;
 
 			try
@@ -376,6 +380,10 @@ namespace Uno.Material.Controls
 				_isSynchronizingSelection = false;
 			}
 		}
+
+		private bool IsReady => _isLoaded && HasItems;
+
+		private bool HasItems => GetItems().Any();
 
 		/// <summary>
 		/// Get the items.
