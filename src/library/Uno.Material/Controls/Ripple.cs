@@ -153,12 +153,12 @@ namespace Uno.Material.Controls
 			RippleX = point.Position.X - RippleSize / 2;
 			RippleY = point.Position.Y - RippleSize / 2;
 
-			VisualStateManager.GoToState(this, "Normal", true);
+			VisualStateManager.GoToState(this, "Normal", false);
 			VisualStateManager.GoToState(this, "Pressed", true);
 		}
 
 		public static readonly DependencyProperty RippleSizeMultiplierProperty = DependencyProperty.Register(
-			"RippleSizeMultiplier", typeof(double), typeof(Ripple), new PropertyMetadata(8.0));
+			"RippleSizeMultiplier", typeof(double), typeof(Ripple), new PropertyMetadata(2 * Math.Sqrt(2)));
 
 		public double RippleSizeMultiplier
 		{
