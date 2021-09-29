@@ -98,8 +98,13 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentElement.Foreground"
+										<Setter Target="NormalBorder.Fill"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{StaticResource MaterialOnSurfaceBrush}" />
+										<!-- In this case the opacity is not applied to the brush -->
+										<Setter Target="ContentElement.Opacity"
+												Value="{StaticResource MaterialLowOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
@@ -296,8 +301,13 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentElement.Foreground"
+										<Setter Target="Root.BorderBrush"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{StaticResource MaterialOnSurfaceBrush}" />
+										<!-- In this case the opacity is not applied to the brush -->
+										<Setter Target="ContentElement.Opacity"
+												Value="{StaticResource MaterialLowOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
