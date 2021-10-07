@@ -93,8 +93,6 @@ namespace Uno.Themes.Samples
 			deferral.Complete();
 		}
 
-
-
 		/// <summary>
 		/// Configures global logging
 		/// </summary>

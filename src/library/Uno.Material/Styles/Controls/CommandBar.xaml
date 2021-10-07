@@ -43,7 +43,12 @@
 
 	<ios:ControlTemplate x:Key="NativeCommandBarTemplate"
 						 TargetType="CommandBar">
-		<NativeCommandBarPresenter />
+		<!-- We use BorderBrush instead of Background to ensure that semi-transparent background of Grid and NativeCommandBarPresenter don't add up -->
+		<Border BorderBrush="{TemplateBinding Background}"
+				BorderThickness="{TemplateBinding Padding}"
+				Background="{TemplateBinding Background}">
+			<NativeCommandBarPresenter Height="44"/>
+		</Border>
 	</ios:ControlTemplate>
 	<android:ControlTemplate x:Key="NativeCommandBarTemplate"
 							 TargetType="CommandBar">
@@ -140,6 +145,7 @@
 	<Style x:Key="MaterialCommandBarStyle"
 		   TargetType="CommandBar"
 		   BasedOn="{StaticResource BaseMaterialCommandBarStyle}">
+		<ios:Setter Property="Height" Value="NaN" />
 		<ios:Setter Property="Template"
 					Value="{StaticResource NativeCommandBarTemplate}" />
 		<android:Setter Property="Template"

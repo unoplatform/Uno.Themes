@@ -110,6 +110,10 @@ namespace Uno.Themes.Samples
 				? Visibility.Visible
 				: Visibility.Collapsed;
 
+			NavViewToggleButton.Visibility = isInsideNestedSample
+				? Visibility.Collapsed
+				: Visibility.Visible;
+
 			// toggle built-in back button for wasm (from browser) and uwp (on title bar)
 			SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = isInsideNestedSample
 				? AppViewBackButtonVisibility.Visible
