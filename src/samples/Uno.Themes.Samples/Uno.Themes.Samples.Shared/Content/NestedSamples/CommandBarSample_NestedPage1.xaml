@@ -11,30 +11,24 @@
 	  mc:Ignorable="d todo xamarin"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-		  toolkit:VisibleBoundsPadding.PaddingMask="Top">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-
-		<smtx:XamlDisplay Grid.Row="0"
-						  UniqueKey="CommandBarSample_NestedPage1_CommandBar"
-						  Margin="0"
-						  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
-			<CommandBar Content="Material Page 1"
-						Style="{StaticResource MaterialCommandBarStyle}">
-				<toolkit:CommandBarExtensions.NavigationCommand>
-					<AppBarButton Click="NavigateBack"
-								  Style="{StaticResource MaterialAppBarButton}">
-						<AppBarButton.Icon>
-							<BitmapIcon UriSource="ms-appx:///Assets/BackButton.png"
-										ShowAsMonochrome="False" />
-						</AppBarButton.Icon>
-					</AppBarButton>
-				</toolkit:CommandBarExtensions.NavigationCommand>
-			</CommandBar>
-		</smtx:XamlDisplay>
+		<CommandBar Content="Material Page 1"
+					toolkit:VisibleBoundsPadding.PaddingMask="Top"
+					Style="{StaticResource MaterialCommandBarStyle}">
+			<toolkit:CommandBarExtensions.NavigationCommand>
+				<AppBarButton Click="NavigateBack"
+							  Style="{StaticResource MaterialAppBarButton}">
+					<AppBarButton.Icon>
+						<BitmapIcon UriSource="ms-appx:///Assets/BackButton.png"
+									ShowAsMonochrome="False" />
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</toolkit:CommandBarExtensions.NavigationCommand>
+		</CommandBar>
 
 		<StackPanel Grid.Row="1"
 					Margin="16">

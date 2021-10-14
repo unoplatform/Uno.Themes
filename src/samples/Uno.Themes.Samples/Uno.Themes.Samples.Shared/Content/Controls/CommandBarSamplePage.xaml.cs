@@ -27,7 +27,7 @@ namespace Uno.Themes.Samples.Content.Controls
 		}
 		private void ShowSampleInNestedFrame(object sender, RoutedEventArgs e)
 		{
-			SamplesPage.GetForCurrentView()?.ShowNestedSample<CommandBarSample_NestedPage1>(clearStack: true);
+			Shell.GetForCurrentView()?.ShowNestedSample<CommandBarSample_NestedPage1>(clearStack: true);
 		}
 	}
 }
