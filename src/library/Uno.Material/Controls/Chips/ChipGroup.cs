@@ -185,6 +185,7 @@ namespace Uno.Material.Controls
 					container.ThumbnailTemplate = ThumbnailTemplate;
 				}
 
+				container.IsChecked = IsItemSelected(item);
 				container.CanRemove = CanRemove;
 
 				container.IsCheckedChanged += OnItemIsCheckedChanged;
@@ -194,6 +195,12 @@ namespace Uno.Material.Controls
 				container.Removing += OnItemRemoving;
 				container.Removed += OnItemRemoved;
 			}
+		}
+
+		private bool IsItemSelected(object item)
+		{
+			// It's important to use Equals and not == because of boxing.
+			return Equals(item, SelectedItem) || (SelectedItems?.Contains(item) ?? false);
 		}
 
 		protected override void ClearContainerForItemOverride(DependencyObject element, object item)
@@ -381,9 +388,11 @@ namespace Uno.Material.Controls
 			}
 		}
 
-		private bool IsReady => _isLoaded && HasItems;
+		private bool IsReady => _isLoaded && HasItems && HasContainers;
 
 		private bool HasItems => GetItems().Any();
+
+		private bool HasContainers => GetItemContainers().Any();
 
 		/// <summary>
 		/// Get the items.
