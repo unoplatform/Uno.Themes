@@ -10,22 +10,121 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="android ios wasm macos">
 
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Chip.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
 	<ItemsPanelTemplate x:Key="MaterialHorizontalChipGroupItemsPanel">
 		<StackPanel Orientation="Horizontal"
 					Spacing="8" />
 	</ItemsPanelTemplate>
 
-	<Style x:Key="MaterialChipGroupStyle"
+	<Style x:Key="BaseMaterialChipGroupStyle"
 		   TargetType="controls:ChipGroup">
-		<Setter Property="ItemContainerStyle"
-				Value="{StaticResource MaterialChipStyle}" />
 		<Setter Property="ItemsPanel"
 				Value="{StaticResource MaterialHorizontalChipGroupItemsPanel}" />
 	</Style>
 
-	<!-- ItemsWrapGrid is not working inside an ItemsControl.
+	<!-- Begin Input Chip Group Style -->
+	<Style x:Key="MaterialFilledInputChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialFilledInputChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="True" />
+		<Setter Property="SelectionMode"
+				Value="Multiple" />
+	</Style>
+
+	<Style x:Key="MaterialOutlinedInputChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialOutlinedInputChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="True" />
+		<Setter Property="SelectionMode"
+				Value="Multiple" />
+	</Style>
+	<!-- End Input Chip Group Style -->
+
+	<!-- Begin Choice Chip Group Style -->
+	<Style x:Key="MaterialFilledChoiceChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialFilledChoiceChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="SelectionMode"
+				Value="Single" />
+	</Style>
+
+	<Style x:Key="MaterialOutlinedChoiceChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialOutlinedChoiceChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="SelectionMode"
+				Value="Single" />
+	</Style>
+	<!-- End Choice Chip Group Style -->
+
+	<!-- Begin Filter Chip Group Style -->
+	<Style x:Key="MaterialFilledFilterChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialFilledFilterChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="SelectionMode"
+				Value="Multiple" />
+	</Style>
+
+	<Style x:Key="MaterialOutlinedFilterChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialOutlinedFilterChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="SelectionMode"
+				Value="Multiple" />
+	</Style>
+	<!-- End Filter Chip Group Style -->
+
+	<!-- Begin Action Chip Group Style -->
+	<Style x:Key="MaterialFilledActionChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialFilledActionChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="SelectionMode"
+				Value="None" />
+	</Style>
+
+	<Style x:Key="MaterialOutlinedActionChipGroupStyle"
+		   BasedOn="{StaticResource BaseMaterialChipGroupStyle}"
+		   TargetType="controls:ChipGroup">
+		<Setter Property="ItemContainerStyle"
+				Value="{StaticResource MaterialOutlinedActionChipStyle}" />
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="SelectionMode"
+				Value="None" />
+	</Style>
+	<!-- End Action Chip Group Style -->
+
+	<!--
+		ItemsWrapGrid is not working inside an ItemsControl.
 		Issue (WASM) https://github.com/unoplatform/uno/issues/468
-			  (All platforms) https://github.com/unoplatform/uno/issues/4023
+		(All platforms) https://github.com/unoplatform/uno/issues/4023
 	-->
 	<!--<ItemsPanelTemplate x:Key="MaterialWrapChipGroupItemsPanel">
 		<ItemsWrapGrid Orientation="Horizontal" />

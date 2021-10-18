@@ -80,16 +80,16 @@ namespace Uno.Material.Controls
 
 #endregion
 
-#region DependencyProperty: ThumbnailTemplate
+#region DependencyProperty: IconTemplate
 
-		public DataTemplate ThumbnailTemplate
+		public DataTemplate IconTemplate
 		{
-			get { return (DataTemplate)GetValue(ThumbnailTemplateProperty); }
-			set { SetValue(ThumbnailTemplateProperty, value); }
+			get { return (DataTemplate)GetValue(IconTemplateProperty); }
+			set { SetValue(IconTemplateProperty, value); }
 		}
 
-		public static readonly DependencyProperty ThumbnailTemplateProperty =
-			DependencyProperty.Register("ThumbnailTemplate", typeof(DataTemplate), typeof(ChipGroup), new PropertyMetadata(null, (s, e) => (s as ChipGroup)?.ApplyThumbnailTemplate()));
+		public static readonly DependencyProperty IconTemplateProperty =
+			DependencyProperty.Register("IconTemplate", typeof(DataTemplate), typeof(ChipGroup), new PropertyMetadata(null, (s, e) => (s as ChipGroup)?.ApplyIconTemplate()));
 
 #endregion
 
