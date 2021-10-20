@@ -47,29 +47,29 @@ namespace Uno.Material.Controls
 
 #endregion
 
-#region DependencyProperty: Thumbnail
+#region DependencyProperty: Icon
 
-		public object Thumbnail
+		public object Icon
 		{
-			get { return (object)GetValue(ThumbnailProperty); }
-			set { SetValue(ThumbnailProperty, value); }
+			get { return (IconElement)GetValue(IconProperty); }
+			set { SetValue(IconProperty, value); }
 		}
 
-		public static readonly DependencyProperty ThumbnailProperty =
-			DependencyProperty.Register("Thumbnail", typeof(object), typeof(Chip), new PropertyMetadata(null));
+		public static readonly DependencyProperty IconProperty =
+			DependencyProperty.Register("Icon", typeof(object), typeof(Chip), new PropertyMetadata(null));
 
 #endregion
 
-#region DependencyProperty: ThumbnailTemplate
+#region DependencyProperty: IconTemplate
 
-		public DataTemplate ThumbnailTemplate
+		public DataTemplate IconTemplate
 		{
-			get { return (DataTemplate)GetValue(ThumbnailTemplateProperty); }
-			set { SetValue(ThumbnailTemplateProperty, value); }
+			get { return (DataTemplate)GetValue(IconTemplateProperty); }
+			set { SetValue(IconTemplateProperty, value); }
 		}
 
-		public static readonly DependencyProperty ThumbnailTemplateProperty =
-			DependencyProperty.Register("ThumbnailTemplate", typeof(DataTemplate), typeof(Chip), new PropertyMetadata(null));
+		public static readonly DependencyProperty IconTemplateProperty =
+			DependencyProperty.Register("IconTemplate", typeof(DataTemplate), typeof(Chip), new PropertyMetadata(null));
 
 #endregion
 

@@ -46,7 +46,7 @@ namespace Uno.Material.Controls
 			_isLoaded = true;
 			SynchronizeInitialSelection();
 			EnforceSelectionMode();
-			ApplyThumbnailTemplate();
+			ApplyIconTemplate();
 		}
 
 		private void OnSelectionMemberPathChanged(DependencyPropertyChangedEventArgs e)
@@ -65,14 +65,14 @@ namespace Uno.Material.Controls
 			}
 		}
 
-		private void ApplyThumbnailTemplate()
+		private void ApplyIconTemplate()
 		{
-			if (ThumbnailTemplate != null)
+			if (IconTemplate != null)
 			{
 				foreach (var container in GetItemContainers())
 				{
-					container.Thumbnail = container.Content;
-					container.ThumbnailTemplate = ThumbnailTemplate;
+					container.Icon = container.Content;
+					container.IconTemplate = IconTemplate;
 				}
 			}
 		}
@@ -179,10 +179,10 @@ namespace Uno.Material.Controls
 					container.SetBinding(Chip.IsCheckedProperty, new Binding { Path = new PropertyPath(SelectionMemberPath), Mode = BindingMode.TwoWay });
 				}
 
-				if (ThumbnailTemplate != null)
+				if (IconTemplate != null)
 				{
-					container.Thumbnail = container.Content;
-					container.ThumbnailTemplate = ThumbnailTemplate;
+					container.Icon = container.Content;
+					container.IconTemplate = IconTemplate;
 				}
 
 				container.IsChecked = IsItemSelected(item);
@@ -211,8 +211,8 @@ namespace Uno.Material.Controls
 			{
 				container.ClearValue(Chip.IsCheckedProperty);
 
-				container.Thumbnail = null;
-				container.ThumbnailTemplate = null;
+				container.Icon = null;
+				container.IconTemplate = null;
 				container.CanRemove = false;
 
 				container.IsCheckedChanged -= OnItemIsCheckedChanged;

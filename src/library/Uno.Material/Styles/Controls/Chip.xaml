@@ -7,6 +7,10 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="not_win">
 
+	<ResourceDictionary.MergedDictionaries>
+		<MaterialColors xmlns="using:Uno.Material" />
+	</ResourceDictionary.MergedDictionaries>
+
 	<x:String x:Key="ClearGlyphPathData">M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z</x:String>
 	<x:String x:Key="CheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 
@@ -15,8 +19,8 @@
 	<x:Double x:Key="CheckGlyphHeight">12</x:Double>
 	<CornerRadius x:Key="ChipCornerRadius">16</CornerRadius>
 
-	<x:Double x:Key="ThumbnailSize">24</x:Double>
-	<CornerRadius x:Key="ThumbnailCornerRadius">12</CornerRadius>
+	<x:Double x:Key="IconSize">24</x:Double>
+	<CornerRadius x:Key="IconCornerRadius">12</CornerRadius>
 
 	<Style x:Name="DeleteButtonStyle"
 		   TargetType="Button">
@@ -76,7 +80,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialChipStyle"
+	<Style x:Key="BaseMaterialFilledChipStyle"
 		   TargetType="controls:Chip">
 		<Setter Property="VerticalAlignment"
 				Value="Stretch" />
@@ -162,14 +166,14 @@
 											<ColumnDefinition Width="Auto" />
 										</Grid.ColumnDefinitions>
 
-										<!-- Thumbnail -->
-										<ContentPresenter x:Name="ThumbnailPresenter"
-														  Content="{TemplateBinding Thumbnail}"
-														  ContentTemplate="{TemplateBinding ThumbnailTemplate}"
-														  Visibility="{Binding Thumbnail, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
-														  Height="{StaticResource ThumbnailSize}"
-														  Width="{StaticResource ThumbnailSize}"
-														  CornerRadius="{StaticResource ThumbnailCornerRadius}"
+										<!-- Icon -->
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{TemplateBinding Icon}"
+														  ContentTemplate="{TemplateBinding IconTemplate}"
+														  Visibility="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
+														  Height="{StaticResource IconSize}"
+														  Width="{StaticResource IconSize}"
+														  CornerRadius="{StaticResource IconCornerRadius}"
 														  AutomationProperties.AccessibilityView="Raw" />
 
 										<Path x:Name="CheckGlyphElement"
@@ -211,9 +215,12 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialOutlinedChipStyle"
-		   TargetType="controls:Chip"
-		   BasedOn="{StaticResource MaterialChipStyle}">
+	<Style x:Key="BaseMaterialOutlinedChipStyle"
+		   TargetType="controls:Chip">
+		<Setter Property="VerticalAlignment"
+				Value="Stretch" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="Foreground"
@@ -222,6 +229,12 @@
 				Value="1" />
 		<Setter Property="BorderBrush"
 				Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+		<Setter Property="Height"
+				Value="{StaticResource ChipHeight}" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource ChipCornerRadius}" />
+		<Setter Property="Padding"
+				Value="4,0" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Chip">
@@ -287,14 +300,14 @@
 											<ColumnDefinition Width="Auto" />
 										</Grid.ColumnDefinitions>
 
-										<!-- Thumbnail -->
-										<ContentPresenter x:Name="ThumbnailPresenter"
-														  Content="{TemplateBinding Thumbnail}"
-														  ContentTemplate="{TemplateBinding ThumbnailTemplate}"
-														  Visibility="{Binding Thumbnail, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
-														  Height="{StaticResource ThumbnailSize}"
-														  Width="{StaticResource ThumbnailSize}"
-														  CornerRadius="{StaticResource ThumbnailCornerRadius}"
+										<!-- Icon -->
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{TemplateBinding Icon}"
+														  ContentTemplate="{TemplateBinding IconTemplate}"
+														  Visibility="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
+														  Height="{StaticResource IconSize}"
+														  Width="{StaticResource IconSize}"
+														  CornerRadius="{StaticResource IconCornerRadius}"
 														  AutomationProperties.AccessibilityView="Raw" />
 
 										<Path x:Name="CheckGlyphElement"
@@ -336,13 +349,40 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialPrimaryChipStyle"
+	<!-- Begin Input Chip -->
+	<Style x:Name="MaterialFilledInputChipStyle"
 		   TargetType="controls:Chip"
-		   BasedOn="{StaticResource MaterialChipStyle}">
+		   BasedOn="{StaticResource BaseMaterialFilledChipStyle}">
+		<Style.Setters>
+			<Setter Property="CanRemove"
+					Value="True" />
+			<Setter Property="IsCheckable"
+					Value="True" />
+		</Style.Setters>
+	</Style>
+
+	<Style x:Name="MaterialOutlinedInputChipStyle"
+		   TargetType="controls:Chip"
+		   BasedOn="{StaticResource BaseMaterialOutlinedChipStyle}">
+		<Style.Setters>
+			<Setter Property="CanRemove"
+					Value="True" />
+		</Style.Setters>
+	</Style>
+	<!-- End Input Chip -->
+
+	<!-- Begin Choice Chip -->
+	<Style x:Key="MaterialFilledChoiceChipStyle"
+		   TargetType="controls:Chip"
+		   BasedOn="{StaticResource BaseMaterialFilledChipStyle}">
 		<Setter Property="Background"
 				Value="{StaticResource MaterialOnSurfacePressedBrush}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnSurfaceMediumBrush}" />
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="IsCheckable"
+				Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Chip">
@@ -415,20 +455,8 @@
 												 Padding="{TemplateBinding Padding}">
 									<Grid>
 										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" />
 											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="Auto" />
 										</Grid.ColumnDefinitions>
-
-										<!-- Thumbnail -->
-										<ContentPresenter x:Name="ThumbnailPresenter"
-														  Content="{TemplateBinding Thumbnail}"
-														  ContentTemplate="{TemplateBinding ThumbnailTemplate}"
-														  Visibility="{Binding Thumbnail, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
-														  Height="{StaticResource ThumbnailSize}"
-														  Width="{StaticResource ThumbnailSize}"
-														  CornerRadius="{StaticResource ThumbnailCornerRadius}"
-														  AutomationProperties.AccessibilityView="Raw" />
 
 										<!-- Content -->
 										<ContentPresenter x:Name="ContentPresenter"
@@ -438,17 +466,7 @@
 														  Foreground="{TemplateBinding Foreground}"
 														  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 														  AutomationProperties.AccessibilityView="Raw"
-														  Margin="8,0"
-														  Grid.Column="1" />
-
-										<!-- Remove button -->
-										<Button x:Name="PART_RemoveButton"
-												Visibility="{Binding CanRemove, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialTrueToVisible}, FallbackValue=Collapsed}"
-												VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												Background="{TemplateBinding Foreground}"
-												Style="{StaticResource DeleteButtonStyle}"
-												Margin="0,0,4,0"
-												Grid.Column="2" />
+														  Margin="8,0" />
 									</Grid>
 								</controls:Ripple>
 							</Grid>
@@ -459,9 +477,9 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialPrimaryOutlinedChipStyle"
+	<Style x:Key="MaterialOutlinedChoiceChipStyle"
 		   TargetType="controls:Chip"
-		   BasedOn="{StaticResource MaterialChipStyle}">
+		   BasedOn="{StaticResource BaseMaterialOutlinedChipStyle}">
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="Foreground"
@@ -470,6 +488,8 @@
 				Value="1" />
 		<Setter Property="BorderBrush"
 				Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+		<Setter Property="CanRemove"
+				Value="False" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Chip">
@@ -546,19 +566,335 @@
 												 Padding="{TemplateBinding Padding}">
 									<Grid>
 										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" />
 											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="Auto" />
 										</Grid.ColumnDefinitions>
 
-										<!-- Thumbnail -->
-										<ContentPresenter x:Name="ThumbnailPresenter"
-														  Content="{TemplateBinding Thumbnail}"
-														  ContentTemplate="{TemplateBinding ThumbnailTemplate}"
-														  Visibility="{Binding Thumbnail, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
-														  Height="{StaticResource ThumbnailSize}"
-														  Width="{StaticResource ThumbnailSize}"
-														  CornerRadius="{StaticResource ThumbnailCornerRadius}"
+										<!-- Content -->
+										<ContentPresenter x:Name="ContentPresenter"
+														  ContentTemplate="{TemplateBinding ContentTemplate}"
+														  ContentTransitions="{TemplateBinding ContentTransitions}"
+														  Content="{TemplateBinding Content}"
+														  Foreground="{TemplateBinding Foreground}"
+														  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+														  AutomationProperties.AccessibilityView="Raw"
+														  Margin="8,0" />
+									</Grid>
+								</controls:Ripple>
+							</Grid>
+						</toolkit:ElevatedView>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!-- End Input Chip -->
+
+	<!-- Begin Filter Chip -->
+	<Style x:Key="MaterialFilledFilterChipStyle"
+		   TargetType="controls:Chip"
+		   BasedOn="{StaticResource BaseMaterialFilledChipStyle}">
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="IsCheckable"
+				Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:Chip">
+					<Grid>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Elevation"
+												Value="{StaticResource ChipElevation}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Opacity"
+												Value="0.5" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+										<Setter Target="CheckGlyphElement.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="CheckGlyphElement.Visibility"
+												Value="Visible" />
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Elevation"
+												Value="{StaticResource ChipElevation}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<toolkit:ElevatedView x:Name="ElevatedRoot"
+											  Background="{TemplateBinding Background}"
+											  CornerRadius="{TemplateBinding CornerRadius}">
+
+							<Grid CornerRadius="{TemplateBinding CornerRadius}">
+
+								<controls:Ripple Feedback="{StaticResource MaterialOnSurfaceLowBrush}"
+												 CornerRadius="{TemplateBinding CornerRadius}"
+												 Padding="{TemplateBinding Padding}">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+
+										<!-- Icon -->
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{TemplateBinding Icon}"
+														  ContentTemplate="{TemplateBinding IconTemplate}"
+														  Visibility="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
+														  Height="{StaticResource IconSize}"
+														  Width="{StaticResource IconSize}"
+														  CornerRadius="{StaticResource IconCornerRadius}"
+														  AutomationProperties.AccessibilityView="Raw" />
+
+										<Path x:Name="CheckGlyphElement"
+											  Data="{StaticResource CheckGlyphPathStyle}"
+											  Fill="{TemplateBinding Foreground}"
+											  Visibility="Collapsed"
+											  VerticalAlignment="Center"
+											  HorizontalAlignment="Center"
+											  Stretch="Uniform"
+											  Height="{StaticResource CheckGlyphHeight}"
+											  AutomationProperties.AccessibilityView="Raw" />
+
+										<!-- Content -->
+										<ContentPresenter x:Name="ContentPresenter"
+														  ContentTemplate="{TemplateBinding ContentTemplate}"
+														  ContentTransitions="{TemplateBinding ContentTransitions}"
+														  Content="{TemplateBinding Content}"
+														  Foreground="{TemplateBinding Foreground}"
+														  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+														  AutomationProperties.AccessibilityView="Raw"
+														  Margin="8,0"
+														  Grid.Column="1" />
+									</Grid>
+								</controls:Ripple>
+							</Grid>
+						</toolkit:ElevatedView>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialOutlinedFilterChipStyle"
+		   TargetType="controls:Chip"
+		   BasedOn="{StaticResource BaseMaterialOutlinedChipStyle}">
+		<Setter Property="CanRemove"
+				Value="False" />
+		<Setter Property="IsCheckable"
+				Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:Chip">
+					<Grid>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Elevation"
+												Value="{StaticResource ChipElevation}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Opacity"
+												Value="0.5" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+										<Setter Target="CheckGlyphElement.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="CheckGlyphElement.Visibility"
+												Value="Visible" />
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<toolkit:ElevatedView x:Name="ElevatedRoot"
+											  Background="{TemplateBinding Background}"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  BorderBrush="{TemplateBinding BorderBrush}"
+											  BorderThickness="{TemplateBinding BorderThickness}">
+
+							<Grid CornerRadius="{TemplateBinding CornerRadius}">
+
+								<controls:Ripple Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+												 CornerRadius="{TemplateBinding CornerRadius}"
+												 Padding="{TemplateBinding Padding}">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+
+										<!-- Icon -->
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{TemplateBinding Icon}"
+														  ContentTemplate="{TemplateBinding IconTemplate}"
+														  Visibility="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
+														  Height="{StaticResource IconSize}"
+														  Width="{StaticResource IconSize}"
+														  CornerRadius="{StaticResource IconCornerRadius}"
+														  AutomationProperties.AccessibilityView="Raw" />
+
+										<Path x:Name="CheckGlyphElement"
+											  Data="{StaticResource CheckGlyphPathStyle}"
+											  Fill="{TemplateBinding Foreground}"
+											  Visibility="Collapsed"
+											  VerticalAlignment="Center"
+											  HorizontalAlignment="Center"
+											  Stretch="Uniform"
+											  Height="{StaticResource CheckGlyphHeight}"
+											  AutomationProperties.AccessibilityView="Raw" />
+
+										<!-- Content -->
+										<ContentPresenter x:Name="ContentPresenter"
+														  ContentTemplate="{TemplateBinding ContentTemplate}"
+														  ContentTransitions="{TemplateBinding ContentTransitions}"
+														  Content="{TemplateBinding Content}"
+														  Foreground="{TemplateBinding Foreground}"
+														  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+														  AutomationProperties.AccessibilityView="Raw"
+														  Margin="8,0"
+														  Grid.Column="1" />
+									</Grid>
+								</controls:Ripple>
+							</Grid>
+						</toolkit:ElevatedView>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!-- End Filter Chip -->
+
+	<!-- Begin Action Chip -->
+	<Style x:Key="MaterialFilledActionChipStyle"
+		   TargetType="controls:Chip"
+		   BasedOn="{StaticResource BaseMaterialFilledChipStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:Chip">
+					<Grid>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Elevation"
+												Value="{StaticResource ChipElevation}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Opacity"
+												Value="0.5" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Elevation"
+												Value="{StaticResource ChipElevation}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<toolkit:ElevatedView x:Name="ElevatedRoot"
+											  Background="{TemplateBinding Background}"
+											  CornerRadius="{TemplateBinding CornerRadius}">
+
+							<Grid CornerRadius="{TemplateBinding CornerRadius}">
+
+								<controls:Ripple Feedback="{StaticResource MaterialOnSurfaceLowBrush}"
+												 CornerRadius="{TemplateBinding CornerRadius}"
+												 Padding="{TemplateBinding Padding}">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+
+										<!-- Icon -->
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{TemplateBinding Icon}"
+														  ContentTemplate="{TemplateBinding IconTemplate}"
+														  Visibility="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
+														  Height="{StaticResource IconSize}"
+														  Width="{StaticResource IconSize}"
+														  CornerRadius="{StaticResource IconCornerRadius}"
 														  AutomationProperties.AccessibilityView="Raw" />
 
 										<!-- Content -->
@@ -571,15 +907,6 @@
 														  AutomationProperties.AccessibilityView="Raw"
 														  Margin="8,0"
 														  Grid.Column="1" />
-
-										<!-- Remove button -->
-										<Button x:Name="PART_RemoveButton"
-												Visibility="{Binding CanRemove, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialTrueToVisible}, FallbackValue=Collapsed}"
-												VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												Background="{TemplateBinding BorderBrush}"
-												Style="{StaticResource DeleteButtonStyle}"
-												Margin="0,0,4,0"
-												Grid.Column="2" />
 									</Grid>
 								</controls:Ripple>
 							</Grid>
@@ -589,4 +916,98 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialOutlinedActionChipStyle"
+		   BasedOn="{StaticResource BaseMaterialOutlinedChipStyle}"
+		   TargetType="controls:Chip">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:Chip">
+					<Grid>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Elevation"
+												Value="{StaticResource ChipElevation}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Opacity"
+												Value="0.5" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="ElevatedRoot.Background"
+												Value="{StaticResource MaterialOnSurfaceHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<toolkit:ElevatedView x:Name="ElevatedRoot"
+											  Background="{TemplateBinding Background}"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  BorderBrush="{TemplateBinding BorderBrush}"
+											  BorderThickness="{TemplateBinding BorderThickness}">
+
+							<Grid CornerRadius="{TemplateBinding CornerRadius}">
+
+								<controls:Ripple Feedback="{StaticResource MaterialOnSurfaceFocusedBrush}"
+												 CornerRadius="{TemplateBinding CornerRadius}"
+												 Padding="{TemplateBinding Padding}">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+
+										<!-- Icon -->
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{TemplateBinding Icon}"
+														  ContentTemplate="{TemplateBinding IconTemplate}"
+														  Visibility="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed}"
+														  Height="{StaticResource IconSize}"
+														  Width="{StaticResource IconSize}"
+														  CornerRadius="{StaticResource IconCornerRadius}"
+														  AutomationProperties.AccessibilityView="Raw" />
+
+										<!-- Content -->
+										<ContentPresenter x:Name="ContentPresenter"
+														  ContentTemplate="{TemplateBinding ContentTemplate}"
+														  ContentTransitions="{TemplateBinding ContentTransitions}"
+														  Content="{TemplateBinding Content}"
+														  Foreground="{TemplateBinding Foreground}"
+														  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+														  AutomationProperties.AccessibilityView="Raw"
+														  Margin="8,0"
+														  Grid.Column="1" />
+									</Grid>
+								</controls:Ripple>
+							</Grid>
+						</toolkit:ElevatedView>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!-- End Action Chip -->
 </ResourceDictionary>

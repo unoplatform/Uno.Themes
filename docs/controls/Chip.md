@@ -11,8 +11,8 @@
 | Properties         | Type         | Description                                                | Supported       |
 |--------------------|--------------|------------------------------------------------------------|-----------------|
 | IsCheckable        | bool         | Whether the chip can be checked. note: When used inside a ChipGroup, this property will be overwritten by ChipGroup's SelectionMode. | All platforms   |
-| Thumbnail          | object       | Thumbnail to display on the chip.                          | All platforms   |
-| ThumbnailTemplate  | DateTemplate | Template to display as the chip thumbanil.                 | All platforms   |
+| Icon          | object       | Icon to display on the chip.                          | All platforms   |
+| IconTemplate  | DataTemplate | Template to display as the chip icon.                 | All platforms   |
 | CanRemove          | bool         | Whether there's a remove icon on the chip.                 | All platforms   |
 | RemoveCommand      | TODO         | TODO                                                       | Not implemented |
 | RemoveEvent        | TODO         | TODO                                                       | Not implemented |
@@ -24,7 +24,7 @@
 | SelectionMode      | ChipSelectionMode | Gets or sets the selection behavior. (None, Single, Multiple) | All platforms   |
 | SelectedItem       | object            | Current selected item. (SelectionMode = Single)               | All platforms   |
 | SelectedItems      | IList             | Current selected items. (SelectionMode = Multiple)            | All platforms   |
-| ThumbnailTemplate  | DataTemplate      | ThumbnailTemplate to use for each `Chip`.                     | All platforms   |
+| IconTemplate  | DataTemplate      | IconTemplate to use for each `Chip`.                     | All platforms   |
 | CanRemove          | bool              | Whether we display a remove icon for each `Chip`              | All platforms   |
 | RemoveCommand      | TODO              | TODO                                                          | Not implemented |
 | RemoveEvent        | TODO              | TODO                                                          | Not implemented |
@@ -33,53 +33,47 @@
 
 ### Chip
 
-```xaml
+```xml
 
-<!-- Default material chip -->
+<!-- Filled Input Material chip -->
 <material:Chip Content="Chip"
             CanRemove="True"
-			Style="{StaticResource MaterialChipStyle}"/>
+			Style="{StaticResource MaterialFilledInputChipStyle}"/>
 
-<!-- Material chip with thumbnail-->
+<!-- Filled Input Material chip chip with icon-->
 <material:Chip Content="Chip"
-			   Style="{StaticResource MaterialChipStyle}">
-	<material:Chip.Thumbnail>
-		<!-- Thumbnail -->
-	</material:Chip.Thumbnail>
+			   Style="{StaticResource MaterialFilledInputChipStyle}">
+	<material:Chip.Icon>
+		<!-- Icon -->
+	</material:Chip.Icon>
 </material:Chip>
 
 ```
 
 ### ChipGroup
 
-```xaml
+```xml
 
-<!-- ChipGroup with static items -->
-<material:ChipGroup Style="{StaticResource MaterialChipGroupStyle}">
+<!-- Filled Input Material ChipGroup with static items -->
+<material:ChipGroup Style="{StaticResource MaterialFilledInputChipGroupStyle}">
+    <material:Chip Content="Chip" />
     <material:Chip Content="Chip"
-                   Style="{StaticResource MaterialChipStyle}" />
-    <material:Chip Content="Chip"
-                   IsChecked="True"
-                   Style="{StaticResource MaterialChipStyle}" />
-    <material:Chip Content="Chip"
-                   Style="{StaticResource MaterialChipStyle}" />
-</material:ChipBag>
+                   IsChecked="True" />
+    <material:Chip Content="Chip" />
+</material:ChipGroup>
 
-<!-- ChipGroup with dynamic items -->
+<!-- Filled Choice Material ChipGroup with dynamic items -->
 <material:ChipGroup ItemsSource="{Binding Items}"
-                 Style="{StaticResource MaterialChipGroupStyle}"
-                 SelectionMode="Single">
+                 Style="{StaticResource MaterialFilledChoiceChipGroupStyle}">
 
-<!-- ChipGroup with custom thumbnail template -->
+<!-- Outlined Input ChipGroup with custom thumbnail template -->
 <material:ChipGroup ItemsSource="{Binding Items}"
-                 Style="{StaticResource MaterialChipGroupStyle}"
-                 ItemContainerStyle="{StaticResource MaterialOutlinedChipStyle}"
-                 SelectionMode="Multiple">
+                 Style="{StaticResource MaterialOutlinedInputChipGroupStyle}">
                  
-    <material:ChipGroup.ThumbnailTemplate>
+    <material:ChipGroup.IconTemplate>
         <DataTemplate>
-             <!-- ThumbnailTemplate -->
+             <!-- IconTemplate -->
         </DataTemplate>
-    </material:ChipGroup.ThumbnailTemplate>
+    </material:ChipGroup.IconTemplate>
 </material:ChipGroup>
 ```
