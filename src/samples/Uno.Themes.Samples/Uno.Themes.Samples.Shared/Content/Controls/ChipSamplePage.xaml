@@ -29,6 +29,7 @@
 					<StackPanel>
 						<!-- MaterialFilledInputChipStyle -->
 						<TextBlock Text="Input - Filled"
+								   Margin="0,20,0,0"
 								   Style="{StaticResource MaterialSubtitle1}" />
 						<ScrollViewer>
 							<StackPanel Orientation="Horizontal"
@@ -301,7 +302,7 @@
 
 						<!-- ### ChipGroup -->
 						<TextBlock Text="ChipGroup"
-								   Margin="0,36,0,0"
+								   Margin="0,36,0,20"
 								   Style="{StaticResource MaterialHeadline6}" />
 
 						<!-- ChipGroup Input -->
@@ -483,8 +484,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{Binding Data.MutableTestCollection}"
-												 ItemRemoved="RemoveChipItem"
+								<chips:ChipGroup ItemsSource="{Binding Data.TestCollection}"
 												 Style="{StaticResource MaterialFilledActionChipGroupStyle}"
 												 Margin="8,0,8,8">
 									<chips:ChipGroup.IconTemplate>
@@ -511,8 +511,7 @@
 										  VerticalScrollMode="Disabled"
 										  VerticalScrollBarVisibility="Hidden">
 
-								<chips:ChipGroup ItemsSource="{Binding Data.MutableTestCollection}"
-												 ItemRemoved="RemoveChipItem"
+								<chips:ChipGroup ItemsSource="{Binding Data.TestCollection}"
 												 Style="{StaticResource MaterialOutlinedActionChipGroupStyle}"
 												 Margin="8,0,8,8">
 
@@ -532,12 +531,9 @@
 								</chips:ChipGroup>
 							</ScrollViewer>
 						</smtx:XamlDisplay>
-						<Button Content="Reset chip items"
-								Click="ResetChipItems"
-								Margin="0,10,0,20" />
 
 						<!-- ChipGroup Selection -->
-						<TextBlock Text="Single Selection"
+						<TextBlock Text="Single Selection with Choice chips"
 								   Style="{StaticResource MaterialSubtitle1}" />
 						<TextBlock Style="{StaticResource MaterialSubtitle2}">
 							<Run Text="{Binding ElementName=SingleSelectionChipGroup, Path=SelectedItem, Mode=TwoWay, Converter={StaticResource SingleSelectionToValueConverter}}" /><Run Text="{Binding ElementName=SingleSelectionChipGroup, Path=SelectedItem.Index, Mode=TwoWay}" />
@@ -568,7 +564,7 @@
 							</ScrollViewer>
 						</smtx:XamlDisplay>
 
-						<TextBlock Text="Single Selection with Enum"
+						<TextBlock Text="Single Selection with Enum and Choice chips"
 								   Style="{StaticResource MaterialSubtitle1}" />
 						<TextBlock Style="{StaticResource MaterialSubtitle2}">
 							<Run Text="{Binding ElementName=SingleEnumSelectionChipGroup, Path=SelectedItem, Mode=TwoWay, Converter={StaticResource SingleSelectionToValueConverter}}" /><Run Text="{Binding ElementName=SingleEnumSelectionChipGroup, Path=SelectedItem, Mode=TwoWay}" />
@@ -598,7 +594,7 @@
 							</ScrollViewer>
 						</smtx:XamlDisplay>
 
-						<TextBlock Text="Multiple selection"
+						<TextBlock Text="Multiple selection with Filter chips"
 								   Style="{StaticResource MaterialSubtitle1}" />
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="{Binding ElementName=MultipleSelectionChipGroup, Path=SelectedItems, Mode=TwoWay, Converter={StaticResource MultipleSelectionToValueConverter}}"
