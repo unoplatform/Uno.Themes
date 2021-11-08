@@ -6,6 +6,10 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm">
 
+	<ResourceDictionary.MergedDictionaries>
+		<CupertinoFonts xmlns="using:Uno.Cupertino"/>
+	</ResourceDictionary.MergedDictionaries>
+	
 	<GridLength x:Key="RadioCheckAreaLength">22</GridLength>
 	<x:Double x:Key="RadioCheckAreaSize">22</x:Double>
 	<x:Double x:Key="RadioFocusAreaSize">40</x:Double>
@@ -21,7 +25,8 @@
 
 	<Style x:Key="CupertinoRadioButtonStyle"
 		   TargetType="RadioButton">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="{StaticResource CupertinoWhiteBrush}" />
 		<Setter Property="Foreground"
@@ -159,7 +164,7 @@
 										  Content="{TemplateBinding Content}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  FontFamily="{StaticResource CupertinoRadioButtonFontFamily}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  TextWrapping="WrapWholeWords"

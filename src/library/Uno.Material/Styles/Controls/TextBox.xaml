@@ -10,6 +10,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<MaterialColors xmlns="using:Uno.Material" />
+		<MaterialFonts xmlns="using:Uno.Material" />
 		<ResourceDictionary Source="../Application/TextBoxVariables.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
@@ -60,7 +61,8 @@
 
 	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
 		<Setter Property="PlaceholderForeground"
@@ -260,7 +262,8 @@
 
 	<Style x:Key="MaterialOutlinedTextBoxStyle"
 		   TargetType="TextBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"

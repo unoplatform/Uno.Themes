@@ -1,8 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<FontFamily x:Key="CupertinoFontFamily">SF Pro</FontFamily>
 
+
+	<ResourceDictionary.MergedDictionaries>
+		<CupertinoFonts xmlns="using:Uno.Cupertino"/>
+	</ResourceDictionary.MergedDictionaries>
+	
 	<!--  Based on https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/#dynamic-type-sizes default style  -->
 	<Style x:Key="CupertinoBaseTextBlockStyle"
 		   TargetType="TextBlock">

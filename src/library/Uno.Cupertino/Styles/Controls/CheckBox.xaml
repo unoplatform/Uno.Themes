@@ -9,6 +9,11 @@
 					xmlns:xamarin="http://nventive.com/xamarin"
 					mc:Ignorable="android ios not_ios wasm xamarin">
 
+
+	<ResourceDictionary.MergedDictionaries>
+		<CupertinoFonts xmlns="using:Uno.Cupertino" />
+	</ResourceDictionary.MergedDictionaries>
+	
 	<x:String x:Key="HyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
 	<x:String x:Key="CheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 
@@ -16,13 +21,13 @@
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
-	<FontFamily x:Key="CupertinoCheckBoxFontFamily">SF Pro</FontFamily>
 	<StaticResource x:Key="CupertinoCheckBoxBorderBrush"
 					ResourceKey="CupertinoOnSurfaceMediumBrush" />
 
 	<Style x:Key="CupertinoCheckBoxStyle"
 		   TargetType="CheckBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="{StaticResource CupertinoBlueBrush}" />
 		<Setter Property="Foreground"
@@ -311,7 +316,7 @@
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
 										  Foreground="{StaticResource CupertinoLabelBrush}"
-										  FontFamily="{StaticResource CupertinoCheckBoxFontFamily}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"

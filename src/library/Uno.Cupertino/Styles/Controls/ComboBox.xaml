@@ -10,6 +10,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<CupertinoColors xmlns="using:Uno.Cupertino"/>
+		<CupertinoFonts xmlns="using:Uno.Cupertino"/>
 		<ResourceDictionary Source="../Application/StateConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
@@ -36,7 +37,8 @@
 	<!-- Style -->
 	<Style x:Key="CupertinoComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="VerticalContentAlignment"
@@ -150,7 +152,8 @@
 
 	<Style x:Key="CupertinoComboBoxStyle"
 		   TargetType="ComboBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{ThemeResource ComboBoxForegroundThemeBrush}" />
 		<Setter Property="Background"

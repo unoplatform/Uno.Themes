@@ -13,6 +13,7 @@
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Converters.xaml" />
 		<CupertinoColors xmlns="using:Uno.Cupertino" />
+		<CupertinoFonts xmlns="using:Uno.Cupertino" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<StaticResource x:Key="CupertinoCalendarViewAccentBrush"
@@ -66,19 +67,19 @@
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource CalendarViewBorderBrush}" />
 		<Setter Property="DayItemFontFamily"
-				Value="XamlAutoFontFamily" />
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="DayItemFontSize"
 				Value="14" />
 		<Setter Property="FirstOfMonthLabelFontFamily"
-				Value="XamlAutoFontFamily" />
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="FirstOfMonthLabelFontSize"
 				Value="0" />
 		<Setter Property="MonthYearItemFontFamily"
-				Value="XamlAutoFontFamily" />
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="MonthYearItemFontSize"
 				Value="14" />
 		<Setter Property="FirstOfYearDecadeLabelFontFamily"
-				Value="XamlAutoFontFamily" />
+				Value="{StaticResource CupertinoFontFamily}" />
 		<not_win:Setter Property="CalendarItemBorderThickness"
 						Value="0" />
 		<win:Setter Property="CalendarItemBorderThickness"

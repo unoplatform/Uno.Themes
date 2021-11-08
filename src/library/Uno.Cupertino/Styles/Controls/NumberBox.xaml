@@ -5,6 +5,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<CupertinoColors xmlns="using:Uno.Cupertino"/>
+		<CupertinoFonts xmlns="using:Uno.Cupertino"/>
 	</ResourceDictionary.MergedDictionaries>
 
 	<x:String x:Key="PlusGlyphPathStyle">M0.578125 5.67236H4.29688V9.47412H5.6416V5.67236H9.36035V4.32764H5.6416V0.525879H4.29688V4.32764H0.578125V5.67236Z</x:String>
@@ -28,7 +29,8 @@
 
 	<Style	x:Name="CupertinoNumberBoxStyle"
 			TargetType="winui:NumberBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="{StaticResource CupertinoSystemBackgroundBrush}" />
 		<Setter Property="CornerRadius"
@@ -236,7 +238,8 @@
 
 	<Style x:Key="NumberBoxTextBoxStyle"
 		   TargetType="TextBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"

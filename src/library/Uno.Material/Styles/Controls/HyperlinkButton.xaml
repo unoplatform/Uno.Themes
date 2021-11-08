@@ -7,6 +7,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialFonts xmlns="using:Uno.Material"/>
 	</ResourceDictionary.MergedDictionaries>
 
 	<Style x:Key="MaterialHyperlinkButtonStyle"
@@ -16,7 +17,8 @@
 				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Padding"
 				Value="0"/>
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="HyperlinkButton">

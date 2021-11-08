@@ -15,6 +15,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialFonts xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Need full color for disabled state or else the elevated view looks weird -->
@@ -40,7 +41,6 @@
 
 	<!-- Documented variables -->
 	<x:Double x:Key="MaterialFabFontSize">14</x:Double>
-	<FontFamily x:Key="MaterialFabFontFamily">Roboto</FontFamily>
 
 	<!-- Documented variables (adaptive) -->
 	<!--
@@ -68,7 +68,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialButtonFontFamily}" />
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource MaterialFabFontSize}" />
 		<Setter Property="FontWeight"
@@ -216,7 +216,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialButtonFontFamily}" />
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource MaterialFabFontSize}" />
 		<Setter Property="FontWeight"

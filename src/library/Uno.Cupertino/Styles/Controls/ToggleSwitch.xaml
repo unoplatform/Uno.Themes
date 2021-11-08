@@ -13,6 +13,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<CupertinoColors xmlns="using:Uno.Cupertino"/>
+		<CupertinoFonts xmlns="using:Uno.Cupertino"/>
 		<ResourceDictionary Source="../Application/StateConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
@@ -24,7 +25,8 @@
 
 	<Style x:Key="DefaultCupertinoToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource CupertinoToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
