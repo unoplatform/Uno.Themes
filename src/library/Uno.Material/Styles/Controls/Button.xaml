@@ -14,6 +14,7 @@
 					mc:Ignorable="d ios android wasm not_win">
 
 	<ResourceDictionary.MergedDictionaries>
+		<MaterialFonts xmlns="using:Uno.Material" />
 		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
@@ -21,7 +22,6 @@
 	<Thickness x:Key="MaterialButtonPadding">16,8</Thickness>
 	<CornerRadius x:Key="MaterialButtonCornerRadius">4</CornerRadius>
 	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
-	<FontFamily x:Key="MaterialButtonFontFamily">Roboto</FontFamily>
 	<StaticResource x:Key="MaterialContainedButtonLowBackgroundBrush"
 					ResourceKey="MaterialOnSurfaceLowBrush" />
 	<StaticResource x:Key="MaterialContainedButtonLowForegroundBrush"
@@ -48,7 +48,7 @@
 		<Setter Property="MinHeight"
 				Value="40" />
 		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialButtonFontFamily}" />
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{ThemeResource MaterialButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
@@ -214,7 +214,7 @@
 		<Setter Property="MinHeight"
 				Value="40" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialButtonFontFamily}" />
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource MaterialButtonFontSize}" />
 		<Setter Property="FontWeight"
@@ -381,7 +381,7 @@
 		<Setter Property="MinHeight"
 				Value="40" />
 		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialButtonFontFamily}" />
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{ThemeResource MaterialButtonFontSize}" />
 		<Setter Property="FontWeight"

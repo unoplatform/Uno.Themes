@@ -13,6 +13,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialFonts xmlns="using:Uno.Material"/>
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Brushes for thumbtint colors -->
@@ -44,7 +45,8 @@
 
 	<Style x:Key="DefaultMaterialToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
@@ -449,7 +451,8 @@
 
 	<ios:Style x:Key="MaterialToggleSwitchStyle"
 			   TargetType="ToggleSwitch">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -489,7 +492,8 @@
 
 	<android:Style x:Key="MaterialToggleSwitchStyle"
 				   TargetType="ToggleSwitch">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="HorizontalAlignment"
@@ -613,7 +617,8 @@
 
 	<android:Style x:Key="MaterialSecondaryToggleSwitchStyle"
 				   TargetType="ToggleSwitch">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialPrimaryVariantLightBrush}" />
 		<Setter Property="Background"

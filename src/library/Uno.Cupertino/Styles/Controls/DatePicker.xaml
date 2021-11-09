@@ -10,9 +10,9 @@
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Application/Converters.xaml" />
 		<CupertinoColors xmlns="using:Uno.Cupertino"/>
+		<CupertinoFonts xmlns="using:Uno.Cupertino"/>
 	</ResourceDictionary.MergedDictionaries>
 
-	<FontFamily x:Key="CupertinoDatePickerFlyoutPresenterFontFamily">SF Pro</FontFamily>
 	<x:Double x:Key="CupertinoDateTimeFlyoutBorderThickness">1</x:Double>
 	<x:Double x:Key="MaterialDatePickerSpacerThemeWidth">1</x:Double>
 	<Thickness x:Key="MaterialDatePickerHostPadding">24,24,8,8</Thickness>
@@ -31,7 +31,8 @@
 	<!-- DatePicker Style -->
 	<Style x:Key="CupertinoDatePickerFlyoutButtonStyle"
 		   TargetType="Button">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Padding"
@@ -48,6 +49,7 @@
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  AutomationProperties.AccessibilityView="Raw"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -88,7 +90,7 @@
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoDatePickerFlyoutPresenterFontFamily}" />
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="FontWeight"
 				Value="Normal" />
 		<Setter Property="FontSize"
@@ -201,7 +203,8 @@
 
 	<Style x:Key="CupertinoDatePickerStyle"
 		   TargetType="DatePicker">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
@@ -300,16 +303,6 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
-
-	<Style x:Key="MaterialSecondaryDatePickerStyle"
-		   BasedOn="{StaticResource MaterialDatePickerStyle}"
-		   TargetType="DatePicker">
-
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSecondaryBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialSecondaryBrush}" />
 	</Style>
 
 </ResourceDictionary>

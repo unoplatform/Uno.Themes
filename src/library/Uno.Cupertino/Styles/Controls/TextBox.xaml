@@ -6,6 +6,7 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<CupertinoColors xmlns="using:Uno.Cupertino"/>
+		<CupertinoFonts xmlns="using:Uno.Cupertino"/>
 		<ResourceDictionary Source="../Application/StateConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
@@ -61,7 +62,8 @@
 
 	<Style x:Key="CupertinoTextBoxStyle"
 		   TargetType="TextBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<!--  Issue with updating foreground on theme change https://github.com/unoplatform/Uno.Themes/issues/522  -->

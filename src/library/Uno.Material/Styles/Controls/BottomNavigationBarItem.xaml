@@ -12,6 +12,7 @@
 					mc:Ignorable="not_win xamarin ios android wasm not_wasm">
 
 	<ResourceDictionary.MergedDictionaries>
+		<MaterialFonts xmlns="using:Uno.Material" />
 		<ResourceDictionary Source="../Application/AnimationConstants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 	
@@ -26,7 +27,8 @@
 				Value="0" />
 		<Setter Property="Background"
 				Value="Transparent" />
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:BottomNavigationBarItem">

@@ -6,6 +6,11 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm">
 
+
+	<ResourceDictionary.MergedDictionaries>
+		<MaterialFonts xmlns="using:Uno.Material" />
+	</ResourceDictionary.MergedDictionaries>
+	
 	<GridLength x:Key="RadioCheckAreaLength">40</GridLength>
 	<x:Double x:Key="RadioFocusAreaSize">40</x:Double>
 	<x:Double x:Key="RadioCheckAreaSize">18</x:Double>
@@ -16,7 +21,8 @@
 
 	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Foreground"

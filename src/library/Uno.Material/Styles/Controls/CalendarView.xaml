@@ -13,9 +13,10 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<MaterialColors xmlns="using:Uno.Material" />
+		<MaterialFonts xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<FontFamily x:Key="MaterialFontFamily">Roboto</FontFamily>
+	
 	<x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
 
 	<Style x:Key="DefaultMaterialCalendarViewStyle"
@@ -67,6 +68,8 @@
 		<Setter Property="FirstOfMonthLabelFontSize"
 				Value="0" />
 		<Setter Property="MonthYearItemFontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
+		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="MonthYearItemFontSize"
 				Value="14" />

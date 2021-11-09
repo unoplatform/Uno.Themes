@@ -9,6 +9,10 @@
 					xmlns:xamarin="http://nventive.com/xamarin"
 					mc:Ignorable="android ios not_ios wasm xamarin">
 
+	<ResourceDictionary.MergedDictionaries>
+		<MaterialFonts xmlns="using:Uno.Material" />
+	</ResourceDictionary.MergedDictionaries>
+
 	<x:String x:Key="HyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
 	<x:String x:Key="CheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 
@@ -22,7 +26,8 @@
 
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
-
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialFontFamily}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Foreground"
@@ -536,7 +541,6 @@
 	<Style x:Key="MaterialSecondaryCheckBoxStyle"
 		   TargetType="CheckBox"
 		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
-
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSecondaryBrush}" />
 		<Setter Property="Foreground"
