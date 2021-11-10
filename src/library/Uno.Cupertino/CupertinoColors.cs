@@ -14,32 +14,32 @@ namespace Uno.Cupertino
 {
 	public sealed partial class CupertinoColors : ResourceDictionary
 	{
-		private static string OverrideSource;
+		private static string ColorPaletteOverrideSource;
 
-		public string ColorPaletteOverrideSource
+		public string OverrideSource
 		{
-			get => (string)GetValue(ColorPaletteOverrideSourceProperty);
-			set => SetValue(ColorPaletteOverrideSourceProperty, value);
+			get => (string)GetValue(OverrideSourceProperty);
+			set => SetValue(OverrideSourceProperty, value);
 		}
 
-		public static DependencyProperty ColorPaletteOverrideSourceProperty { get; } =
+		public static DependencyProperty OverrideSourceProperty { get; } =
 			DependencyProperty.Register(
-				nameof(ColorPaletteOverrideSource),
+				nameof(OverrideSource),
 				typeof(string),
 				typeof(CupertinoColors),
 				new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
 
 		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
 		{
-			OverrideSource = args.NewValue as string;
+			ColorPaletteOverrideSource = args.NewValue as string;
 		}
 
 		public CupertinoColors()
 		{
 			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/ColorPalette.xaml") });
-			if (!string.IsNullOrWhiteSpace(OverrideSource))
+			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
 			{
-				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(OverrideSource) });
+				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
 			}
 
 			InitializeComponent();
