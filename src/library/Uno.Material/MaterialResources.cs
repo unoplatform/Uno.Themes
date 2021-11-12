@@ -39,7 +39,6 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/DatePicker.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/Divider.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/ExpandingBottomSheet.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/FloatingActionButton.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml");
