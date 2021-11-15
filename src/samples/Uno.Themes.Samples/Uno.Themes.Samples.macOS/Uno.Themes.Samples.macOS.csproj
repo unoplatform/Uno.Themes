@@ -84,17 +84,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.0-dev.5485" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.0-dev.5594" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-    <PackageReference Include="Uno.UI" Version="4.0.0-dev.5485" />
+    <PackageReference Include="Uno.UI" Version="4.0.0-dev.5594" />
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
       <Version>1.0.58</Version>
     </PackageReference>
     <PackageReference Include="Uno.ShowMeTheXAML">
       <Version>1.0.58</Version>
     </PackageReference>
-  </ItemGroup>
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.0-dev.5594" />
+		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.0-dev.7" />
+		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.0-dev.7" />
+	</ItemGroup>
   <Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />

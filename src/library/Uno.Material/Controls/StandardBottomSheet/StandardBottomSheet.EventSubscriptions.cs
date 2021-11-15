@@ -4,8 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Uno.Extensions;
-using Uno.Extensions.Specialized;
 using Uno.Material.Entities;
 using Uno.UI.Toolkit;
 using Windows.ApplicationModel.Store;

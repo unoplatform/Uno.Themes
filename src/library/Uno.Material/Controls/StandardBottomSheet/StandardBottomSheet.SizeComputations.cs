@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Uno.Extensions;
-using Uno.Extensions.Specialized;
 using Uno.Material.Entities;
 using Uno.UI.Toolkit;
 using Windows.ApplicationModel.Store;
@@ -64,7 +62,7 @@ namespace Uno.Material.Controls
 
 		private bool TryComputeAreaSizeComponents(SheetSnapAreaCollection areas, out double totalStarSize, out double starDenominator)
 		{
-			if (areas.Empty())
+			if (!areas.Any())
 			{
 				totalStarSize = starDenominator = 0;
 				return false;
