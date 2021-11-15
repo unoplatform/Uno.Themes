@@ -12,7 +12,6 @@ namespace Uno.Material.Controls
 {
 	public enum SnackBarStatus
 	{
-		[FallbackValue]
 		Default = 0,
 		Visible = 1,
 		Hidden = 2,

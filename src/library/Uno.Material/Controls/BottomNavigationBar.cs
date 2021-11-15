@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Uno.Extensions;
-using Uno.Extensions.Specialized;
 using Uno.Material.Helpers;
 
 #if WinUI
@@ -152,22 +150,28 @@ namespace Uno.Material.Controls
 		{
 			if (!_templateApplied) return;
 
-			foreach (var item in Items.Safe())
+			if (Items != null)
 			{
-				item.Checked -= BottomNavigationBarItem_Checked;
-				item.Unchecked -= BottomNavigationBarItem_Unchecked;
+				foreach (var item in Items)
+				{
+					item.Checked -= BottomNavigationBarItem_Checked;
+					item.Unchecked -= BottomNavigationBarItem_Unchecked;
 
-				item.Checked += BottomNavigationBarItem_Checked;
-				item.Unchecked += BottomNavigationBarItem_Unchecked;
+					item.Checked += BottomNavigationBarItem_Checked;
+					item.Unchecked += BottomNavigationBarItem_Unchecked;
+				}
 			}
 		}
 
 		private void UnregisterBarItemsEvents()
 		{
-			foreach (var item in Items.Safe())
+			if (Items != null)
 			{
-				item.Checked -= BottomNavigationBarItem_Checked;
-				item.Unchecked -= BottomNavigationBarItem_Unchecked;
+				foreach (var item in Items)
+				{
+					item.Checked -= BottomNavigationBarItem_Checked;
+					item.Unchecked -= BottomNavigationBarItem_Unchecked;
+				}
 			}
 		}
 	}

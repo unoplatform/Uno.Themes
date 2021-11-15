@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Uno.Extensions.Specialized;
+using Uno.Material.Extensions;
 
 #if WinUI
 using Microsoft.UI.Xaml;
