@@ -111,8 +111,6 @@ namespace Uno.Themes.Samples
 #if __IOS__ || __ANDROID__ || WINDOWS_UWP
 				AddMenuItem<DatePickerSamplePage>(icon: "TimePickerIcon");
 #endif
-				// TODO Add divider icon?
-				AddMenuItem<DividerSamplePage>();
 				AddMenuItem<ExpandingBottomSheetSamplePage>(icon: "ExpandingBottomSheetIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
 				AddMenuItem<FlyoutSamplePage>(icon: "ComboBoxIcon");

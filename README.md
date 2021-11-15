@@ -211,7 +211,6 @@ See [Sheet.md](./controls/Sheet.md) for more information.
 |---------------------------|-------------------------------------------------------------------------------|
 | Card                      | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
 | BottomNavigationBar       | MaterialBottomNavigationBarStyle                                              |
-| Divider                   | MaterialDividerStyle                                                          |
 | ExpandingBottomSheet      | MaterialExpandingBottomSheetStyle                                             |
 | ModalStandardBottomSheet  | MaterialModalStandardBottomSheetStyle                                         |
 | StandardBottomSheet       | MaterialStandardBottomSheetStyle                                              |
