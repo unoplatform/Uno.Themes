@@ -44,7 +44,7 @@
 					ResourceKey="MaterialOnSurfaceHoverBrush" />
 
 	<StaticResource x:Key="ComboBoxBorderBrush"
-					ResourceKey="MaterialOnSurfaceFocusedBrush" />
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
 
 	<StaticResource x:Key="ComboBoxFocusedBorderBrush"
 					ResourceKey="MaterialOnBackgroundBrush" />
@@ -57,6 +57,9 @@
 
 	<StaticResource x:Key="ComboBoxPlaceholderFocusedThemeBrush"
 					ResourceKey="MaterialPrimaryBrush" />
+
+	<StaticResource x:Key="ComboBoxDisabledBackgroundBrush"
+					ResourceKey="MaterialOnSurfaceFocusedBrush" />
 
 	<SolidColorBrush x:Key="ComboBoxPlaceholderForegroundThemeBrush"
 					 Color="{ThemeResource MaterialOnBackgroundColor}"
@@ -178,7 +181,7 @@
 						<!-- Pressed Overlay -->
 						<Grid x:Name="PressedOverlay"
 							  Background="{StaticResource ComboBoxSelectedBackgroundThemeBrush}"
-							  BorderBrush="{StaticResource ComboBoxBorderBrush}"
+							  BorderBrush="{StaticResource ComboBoxDisabledBackgroundBrush}"
 							  BorderThickness="0,1,0,1"
 							  IsHitTestVisible="False"
 							  VerticalAlignment="Stretch"
@@ -298,7 +301,7 @@
 										<Setter Target="IconPresenter.Foreground"
 												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 										<Setter Target="ComboBoxContent.Background"
-												Value="{StaticResource ComboBoxBorderBrush}" />
+												Value="{StaticResource ComboBoxDisabledBackgroundBrush}" />
 										<Setter Target="ElevatedView.BorderThickness"
 												Value="0" />
 									</VisualState.Setters>
