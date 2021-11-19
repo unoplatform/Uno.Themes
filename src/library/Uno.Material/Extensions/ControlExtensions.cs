@@ -17,7 +17,7 @@ namespace Uno.Material.Extensions
 	[Bindable]
 	public static class ControlExtensions
 	{
-#region Property: Icon
+#region DependencyProperty: Icon
 
 		public static DependencyProperty IconProperty { get; } = DependencyProperty.RegisterAttached(
 			"Icon",
@@ -27,6 +27,19 @@ namespace Uno.Material.Extensions
 
 		public static IconElement GetIcon(Control obj) => (IconElement)obj.GetValue(IconProperty);
 		public static void SetIcon(Control obj, IconElement value) => obj.SetValue(IconProperty, value);
+
+#endregion
+
+#region DependencyProperty: AlternateContent
+
+		public static DependencyProperty AlternateContentProperty { get; } = DependencyProperty.RegisterAttached(
+			"AlternateContent",
+			typeof(object),
+			typeof(ControlExtensions),
+			new PropertyMetadata(default(object)));
+
+		public static object GetAlternateContent(Control obj) => (object)obj.GetValue(AlternateContentProperty);
+		public static void SetAlternateContent(Control obj, object value) => obj.SetValue(AlternateContentProperty, value);
 
 #endregion
 	}
