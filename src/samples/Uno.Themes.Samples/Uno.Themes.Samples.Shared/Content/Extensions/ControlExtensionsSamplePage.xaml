@@ -9,6 +9,10 @@
 	  xmlns:extensions="using:Uno.Material.Extensions"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios">
+	<Page.Resources>
+		<x:String x:Key="Icon_more_horizontal">M 2 0 C 0.8999999761581421 0 0 0.8999999761581421 0 2 C 0 3.100000023841858 0.8999999761581421 4 2 4 C 3.100000023841858 4 4 3.100000023841858 4 2 C 4 0.8999999761581421 3.100000023841858 0 2 0 Z M 14 0 C 12.899999976158142 0 12 0.8999999761581421 12 2 C 12 3.100000023841858 12.899999976158142 4 14 4 C 15.100000023841858 4 16 3.100000023841858 16 2 C 16 0.8999999761581421 15.100000023841858 0 14 0 Z M 8 0 C 6.899999976158142 0 6 0.8999999761581421 6 2 C 6 3.100000023841858 6.899999976158142 4 8 4 C 9.100000023841858 4 10 3.100000023841858 10 2 C 10 0.8999999761581421 9.100000023841858 0 8 0 Z</x:String>
+		<x:String x:Key="Icon_more_vertical">M 2 4 C 3.100000023841858 4 4 3.100000023841858 4 2 C 4 0.8999999761581421 3.100000023841858 0 2 0 C 0.8999999761581421 0 0 0.8999999761581421 0 2 C 0 3.100000023841858 0.8999999761581421 4 2 4 Z M 2 6 C 0.8999999761581421 6 0 6.899999976158142 0 8 C 0 9.100000023841858 0.8999999761581421 10 2 10 C 3.100000023841858 10 4 9.100000023841858 4 8 C 4 6.899999976158142 3.100000023841858 6 2 6 Z M 2 12 C 0.8999999761581421 12 0 12.899999976158142 0 14 C 0 15.100000023841858 0.8999999761581421 16 2 16 C 3.100000023841858 16 4 15.100000023841858 4 14 C 4 12.899999976158142 3.100000023841858 12 2 12 Z</x:String>
+	</Page.Resources>
 
 	<ScrollViewer VerticalScrollBarVisibility="Auto">
 		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
@@ -17,12 +21,13 @@
 					ios:Margin="12"
 					Padding="12">
 
-			<TextBlock Text="ControlExtensions.Icon"
-					   Style="{StaticResource MaterialHeadline5}" />
-			<StackPanel>
-				<TextBlock Style="{StaticResource MaterialBody1}">
-				This property support a variety of icon sources:
-				</TextBlock>
+			<StackPanel Spacing="16">
+
+				<TextBlock Text="ControlExtensions.Icon"
+						   Style="{StaticResource MaterialHeadline5}" />
+
+				<TextBlock Text="This property support a variety of icon sources:"
+						   Style="{StaticResource MaterialBody1}" />
 
 				<!-- BitmapIcon -->
 				<StackPanel Orientation="Horizontal">
@@ -70,40 +75,70 @@
 					</smtx:XamlDisplay>
 					<smtx:XamlPresenter ReferenceKey="TextBlockSamplePage_SymbolIcon" />
 				</StackPanel>
+
+				<TextBlock Text="Supported controls"
+						   Margin="0,16,0,0"
+						   Style="{StaticResource MaterialHeadline6}" />
+
+				<!-- TextBox -->
+				<TextBlock Text="TextBox"
+						   Style="{StaticResource MaterialSubtitle1}" />
+				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_TextBox"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<TextBox PlaceholderText="Filled"
+							 Style="{StaticResource MaterialFilledTextBoxStyle}">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="SolidStar"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
+						</extensions:ControlExtensions.Icon>
+					</TextBox>
+				</smtx:XamlDisplay>
+
+				<!-- ComboBox -->
+				<TextBlock Text="ComboBox"
+						   Style="{StaticResource MaterialSubtitle1}" />
+				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ComboBox"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="abcdefg">
+						<extensions:ControlExtensions.Icon>
+							<SymbolIcon Symbol="SolidStar"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
+						</extensions:ControlExtensions.Icon>
+					</ComboBox>
+				</smtx:XamlDisplay>
+
 			</StackPanel>
 
-			<TextBlock Text="Supported controls"
-					   Margin="0,16,0,0"
-					   Style="{StaticResource MaterialHeadline6}" />
+			<StackPanel Spacing="16">
 
-			<!-- TextBox -->
-			<TextBlock Text="TextBox"
-					   Style="{StaticResource MaterialSubtitle1}" />
-			<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_TextBox"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<TextBox PlaceholderText="Filled"
-						 Style="{StaticResource MaterialFilledTextBoxStyle}">
-					<extensions:ControlExtensions.Icon>
-						<SymbolIcon Symbol="SolidStar"
-									Foreground="{StaticResource MaterialPrimaryBrush}" />
-					</extensions:ControlExtensions.Icon>
-				</TextBox>
-			</smtx:XamlDisplay>
+				<TextBlock Text="ControlExtensions.AlternateContent"
+						   Style="{StaticResource MaterialHeadline5}" />
 
-			<!-- ComboBox -->
-			<TextBlock Text="ComboBox"
-					   Style="{StaticResource MaterialSubtitle1}" />
-			<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ComboBox"
-							  Style="{StaticResource XamlDisplayBelowStyle}">
-				<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
-						  PlaceholderText="Placeholder"
-						  ItemsSource="abcdefg">
-					<extensions:ControlExtensions.Icon>
-						<SymbolIcon Symbol="SolidStar"
-									Foreground="{StaticResource MaterialPrimaryBrush}" />
-					</extensions:ControlExtensions.Icon>
-				</ComboBox>
-			</smtx:XamlDisplay>
+				<TextBlock Text="This property can be used in order to have an alternate content for some controls:"
+						   Style="{StaticResource MaterialBody1}" />
+
+				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ToggleButtonText"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<ToggleButton Content="On"
+								  extensions:ControlExtensions.AlternateContent="Off"
+								  Style="{StaticResource MaterialTextToggleButtonStyle}" />
+				</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ToggleButtonIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleButton Style="{StaticResource MaterialToggleButtonIconStyle}">
+								<ToggleButton.Content>
+									<PathIcon Data="{StaticResource Icon_more_horizontal}" />
+								</ToggleButton.Content>
+								<extensions:ControlExtensions.AlternateContent>
+									<PathIcon Data="{StaticResource Icon_more_vertical}" />
+								</extensions:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+
+			</StackPanel>
 		</StackPanel>
 	</ScrollViewer>
 </Page>

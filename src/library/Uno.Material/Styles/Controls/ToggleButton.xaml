@@ -4,6 +4,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:controls="using:Uno.Material.Controls"
+					xmlns:extensions="using:Uno.Material.Extensions"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
@@ -13,13 +14,17 @@
 					mc:Ignorable="d ios android wasm not_win xamarin">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 		<MaterialFonts xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!-- Text ToggleButton Variables -->
+
+	<!-- ToggleButton Brushes -->
 	<SolidColorBrush x:Key="ToggleButtonTextLabelBrush"
 					 Color="{ThemeResource MaterialPrimaryColor}" />
+
+	<StaticResource x:Key="ToggleButtonForegroundThemeBrush"
+					ResourceKey="MaterialOnSurfaceBrush" />
 
 	<!-- Other ToggleButton Variables -->
 	<CornerRadius x:Key="ToggleButtonBorderRadius">4</CornerRadius>
@@ -170,6 +175,139 @@
 										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										 AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialToggleButtonIconStyle"
+		   TargetType="ToggleButton">
+		<Setter Property="Foreground"
+				Value="{StaticResource ToggleButtonForegroundThemeBrush}" />
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="BorderThickness"
+				Value="0" />
+		<Setter Property="MinHeight"
+				Value="40" />
+		<Setter Property="MinWidth"
+				Value="40" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="True" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Ellipse for PointedOver State -->
+						<Ellipse x:Name="HoverOverlay"
+								 HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"
+								 Fill="{StaticResource MaterialPrimaryHoverBrush}"
+								 Opacity="0" />
+
+						<!-- Ellipse for Pressed State -->
+						<Ellipse x:Name="PressedOverlay"
+								 HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"
+								 Fill="{StaticResource MaterialPrimaryPressedBrush}"
+								 Opacity="0" />
+
+						<!-- Content -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{TemplateBinding Content}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+						<!-- Alternate Content -->
+						<ContentPresenter x:Name="AlternateContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{Binding Path=(extensions:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Visibility="Collapsed" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
