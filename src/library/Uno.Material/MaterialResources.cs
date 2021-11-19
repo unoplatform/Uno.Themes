@@ -63,7 +63,11 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleButton.xaml");
+#if __ANDROID__ || __IOS__
+			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.Mobile.xaml");
+#else
 			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.xaml");
+#endif
 
 			void Add(string source) => MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(source) });
 		}
