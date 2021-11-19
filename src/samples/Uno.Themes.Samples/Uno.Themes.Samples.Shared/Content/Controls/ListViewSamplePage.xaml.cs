@@ -21,7 +21,7 @@ namespace Uno.Themes.Samples.Content.Controls
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	[SamplePage(SampleCategory.Controls, "ListView", Description = "This control is an inline notification for essential app-wide messages.", DocumentationLink = "https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.xaml.controls.ListView?view=winui-3.0")]
+	[SamplePage(SampleCategory.Controls, "ListView", Description = "Represents a control that displays data items in a vertical stack.", DocumentationLink = "https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.xaml.controls.ListView?view=winui-3.0")]
 	public sealed partial class ListViewSamplePage : Page
     {
         public ListViewSamplePage()
