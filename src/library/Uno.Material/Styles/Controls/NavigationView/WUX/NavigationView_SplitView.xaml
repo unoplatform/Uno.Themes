@@ -12,11 +12,11 @@
 					xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
 					mc:Ignorable="d ios android wasm not_win xamarin primitives">
 
-	<SolidColorBrush x:Key="SplitViewDismissBackgroundBrush"
+	<SolidColorBrush x:Key="DrawerSplitViewDismissBackgroundBrush"
 					 Color="Black"
 					 Opacity="0.5" />
 
-	<ios:Style x:Key="DefaultSplitViewStyle"
+	<ios:Style x:Key="DrawerSplitViewStyle"
 			   TargetType="SplitView">
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
@@ -585,7 +585,7 @@
 											VerticalAlignment="Stretch">
 								<Button.Template>
 									<ControlTemplate>
-										<Border Background="{StaticResource SplitViewDismissBackgroundBrush}" />
+										<Border Background="{StaticResource DrawerSplitViewDismissBackgroundBrush}" />
 									</ControlTemplate>
 								</Button.Template>
 							</xamarin:Button>
@@ -615,7 +615,7 @@
 		</Setter>
 	</ios:Style>
 
-	<android:Style x:Key="DefaultSplitViewStyle"
+	<android:Style x:Key="DrawerSplitViewStyle"
 				   TargetType="SplitView">
 		<Setter Property="OpenPaneLength"
 				Value="{StaticResource NativeDefaultSplitViewOpenPaneLength}" />
@@ -634,8 +634,5 @@
 			</Setter.Value>
 		</Setter>
 	</android:Style>
-
-	<xamarin:Style TargetType="SplitView"
-				   BasedOn="{StaticResource DefaultSplitViewStyle}" />
 
 </ResourceDictionary>
