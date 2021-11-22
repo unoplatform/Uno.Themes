@@ -55,6 +55,7 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressRing.xaml");
 #endif
 			Add("ms-appx:///Uno.Material/Styles/Controls/RadioButton.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/RatingControl.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/Ripple.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/SnackBar.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/Slider.xaml");
