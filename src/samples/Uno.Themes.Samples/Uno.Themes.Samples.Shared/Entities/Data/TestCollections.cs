@@ -28,20 +28,6 @@ namespace Uno.Themes.Samples.Entities.Data
 				.ToArray();
 		}
 
-		public void RemoveChipItem(SelectableData item)
-		{
-			MutableTestCollection.Remove(item);
-		}
-
-		public void ResetChipItems()
-		{
-			MutableTestCollection.Clear();
-			foreach (var item in CreateItems())
-			{
-				MutableTestCollection.Add(item);
-			}
-		}
-
 		public class SelectableData : InpcObject
 		{
 			public int Index { get => GetProperty<int>(); set => SetProperty(value); }
