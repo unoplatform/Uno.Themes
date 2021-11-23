@@ -39,10 +39,10 @@
     <PackageReference Include="Uno.UI">
       <Version>4.0.0-dev.5612</Version>
     </PackageReference>
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.0-dev.5612" />
-		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.0-dev.7" />
-		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.0-dev.7" />
-	</ItemGroup>
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.0-dev.5612" />
+    <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.0-dev.7" />
+    <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.0-dev.7" />
+  </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
@@ -146,7 +146,6 @@
     <Content Include="Assets\wide310x150logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\Fonts\Material\RobotoMono-VariableFont_wght.ttf" />
   </ItemGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
@@ -161,6 +160,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\Cupertino\SF-Pro.ttf" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Material\Roboto-Light.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Material\Roboto-Medium.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Material\Roboto-Regular.ttf" />
   </ItemGroup>
   <Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

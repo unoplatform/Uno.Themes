@@ -157,16 +157,16 @@
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <BundleResource Include="Resources\Fonts\uno-fluentui-assets.ttf" />
-    <BundleResource Include="Resources\Fonts\Cupertino\SF-Pro.ttf" />
+    <BundleResource Include="Resources\Fonts\SF-Pro.ttf" />
+    <BundleResource Include="Resources\Fonts\Roboto-Light.ttf" />
+    <BundleResource Include="Resources\Fonts\Roboto-Medium.ttf" />
+    <BundleResource Include="Resources\Fonts\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Fonts\Material\RobotoMono-VariableFont_wght.ttf" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="nventive.Nimue.Application.Building.Light">
@@ -194,10 +194,10 @@
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.0-dev.5612" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.0-dev.5612" />
-		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.0-dev.7" />
-		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.0-dev.7" />
-	</ItemGroup>
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.0-dev.5612" />
+    <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.0-dev.7" />
+    <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.0-dev.7" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj">
       <Project>{98c1fdac-c692-4c65-99e7-70fdd53b8f2e}</Project>

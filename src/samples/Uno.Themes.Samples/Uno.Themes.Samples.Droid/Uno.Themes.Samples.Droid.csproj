@@ -97,10 +97,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.1.0.2" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.0-dev.5612" />
-		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.0-dev.7" />
-		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.0-dev.7" />
-	</ItemGroup>
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.0-dev.5612" />
+    <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.0-dev.7" />
+    <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.0-dev.7" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +109,9 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\uno-fluentui-assets.ttf" />
     <AndroidAsset Include="Assets\Fonts\Cupertino\SF-Pro.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Material\Roboto-Light.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Material\Roboto-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Material\Roboto-Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
@@ -208,8 +211,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-night\colors.xml" />
-    <AndroidAsset Include="Assets\Fonts\Material\RobotoMono-VariableFont_wght.ttf" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- This will force the generation of the APK when not building inside visual studio -->
