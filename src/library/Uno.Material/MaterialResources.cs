@@ -33,8 +33,6 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/Card.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarDatePicker.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/Chip.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/ChipGroup.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CheckBox.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml");

@@ -105,7 +105,6 @@ namespace Uno.Themes.Samples
 				AddMenuItem<ButtonSamplePage>(icon: "ButtonIcon");
 				AddMenuItem<CardSamplePage>(icon: "CardsIcon");
 				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
-				AddMenuItem<ChipSamplePage>();
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
 				AddMenuItem<CommandBarSamplePage>();
 #if __IOS__ || __ANDROID__ || WINDOWS_UWP
