@@ -4,7 +4,7 @@ This library is designed to help you use the [material design system](https://ma
 It includes :
 - Color system for both Light and Dark theme
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
-- Custom Controls for Material Components not offered out of the box by WinUI, such as Card and BottomNavigationBar.
+- Custom Controls for Material Components not offered out of the box by WinUI, such as Card.
 
 Quickly visualize all the available controls through this [zeplin link](https://zpl.io/scene/bzgq8wG)
 
@@ -207,7 +207,6 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | **Controls**              | **StyleNames**                                                                |
 |---------------------------|-------------------------------------------------------------------------------|
 | Card                      | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
-| BottomNavigationBar       | MaterialBottomNavigationBarStyle                                              |
 
 ## Controls Setup (Specialized)
 
