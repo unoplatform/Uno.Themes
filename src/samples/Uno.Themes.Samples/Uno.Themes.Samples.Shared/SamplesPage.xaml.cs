@@ -119,7 +119,6 @@ namespace Uno.Themes.Samples
 				AddMenuItem<ProgressBarSamplePage>(icon: "ProgressBarIcon");
 				AddMenuItem<ProgressRingSamplePage>(icon: "ProgressBarIcon");
 				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");
-				// Incomplete : AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<SliderSamplePage>(icon: "SliderIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");

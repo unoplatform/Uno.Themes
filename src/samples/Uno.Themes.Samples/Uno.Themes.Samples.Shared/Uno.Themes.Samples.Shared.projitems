@@ -82,9 +82,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\SliderSamplePage.xaml.cs">
       <DependentUpon>SliderSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\SnackBarSamplePage.xaml.cs">
-      <DependentUpon>SnackBarSamplePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\TextBlockSamplePage.xaml.cs">
       <DependentUpon>TextBlockSamplePage.xaml</DependentUpon>
     </Compile>
@@ -120,7 +117,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SamplePageLayout.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SamplePageLayout.Properties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\EnumDescriptionConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\FromBoolToSnackBarStatusConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromBoolToValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromStringToValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Data\TestCollections.cs" />
@@ -139,7 +135,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SnackBarViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,10 +227,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\TextBoxSamplePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\SnackBarSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -408,7 +399,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ProgressBarIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\RadioButtonIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\SliderIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\SnackBarIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\TextBlockIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\PasswordBoxIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\TextBoxIcon.png" />
