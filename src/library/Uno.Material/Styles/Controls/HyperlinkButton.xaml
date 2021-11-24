@@ -6,8 +6,8 @@
 					mc:Ignorable="d">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
-		<MaterialFonts xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
+		<MaterialFonts xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<Style x:Key="MaterialHyperlinkButtonStyle"
@@ -16,17 +16,17 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Padding"
-				Value="0"/>
+				Value="0" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialFontFamily}" />
+				Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="HyperlinkButton">
 
 					<Grid Background="{TemplateBinding Background}">
-						
+
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -59,7 +59,7 @@
 								<VisualState x:Name="PointerFocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						
+
 						<Grid x:Name="Content"
 							  MinHeight="{TemplateBinding MinHeight}"
 							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -73,7 +73,7 @@
 											  Content="{TemplateBinding Content}"
 											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 											  VerticalAlignment="Top"
-											  TextWrapping="Wrap"/>
+											  TextWrapping="Wrap" />
 						</Grid>
 					</Grid>
 				</ControlTemplate>
