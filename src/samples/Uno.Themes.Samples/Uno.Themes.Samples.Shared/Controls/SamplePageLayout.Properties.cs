@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Windows.UI;
 using Uno.Themes.Samples.Entities;
 using Windows.UI.Xaml;
 
@@ -8,6 +9,31 @@ namespace Uno.Themes.Samples
 {
 	public partial class SamplePageLayout
 	{
+
+		public static DependencyProperty PrimaryColorProperty { get; } = DependencyProperty.Register(
+			"PrimaryColor",
+			typeof(Color),
+			typeof(SamplePageLayout),
+			new PropertyMetadata(Color.FromArgb(255, 255, 0, 150), ColorsChanged));
+
+		public Color PrimaryColor
+		{
+			get { return (Color)GetValue(PrimaryColorProperty); }
+			set { SetValue(PrimaryColorProperty, value); }
+		}
+
+		public static DependencyProperty SecondaryColorProperty { get; } = DependencyProperty.Register(
+			"SecondaryColor",
+			typeof(Color),
+			typeof(SamplePageLayout),
+			new PropertyMetadata(Color.FromArgb(255, 40, 140, 255), ColorsChanged));
+
+		public Color SecondaryColor
+		{
+			get { return (Color)GetValue(SecondaryColorProperty); }
+			set { SetValue(SecondaryColorProperty, value); }
+		}
+
 		#region Property: Title
 
 		public static DependencyProperty TitleProperty { get; } = DependencyProperty.Register(

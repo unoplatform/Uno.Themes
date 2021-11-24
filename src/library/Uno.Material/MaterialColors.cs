@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -10,7 +11,16 @@ namespace Uno.Material
 {
 	public sealed partial class MaterialColors : ResourceDictionary
 	{
-		private static string ColorPaletteOverrideSource;
+		public static ResourceDictionary _overrideDictionary;
+
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public ResourceDictionary OverrideDictionary
+		{
+			get => _overrideDictionary;
+			set => _overrideDictionary = value;
+		}
+
+		private static string _colorPaletteOverrideSource;
 
 		public string OverrideSource
 		{
@@ -27,15 +37,27 @@ namespace Uno.Material
 
 		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
 		{
-			ColorPaletteOverrideSource = args.NewValue as string;
+			_colorPaletteOverrideSource = args.NewValue as string;
 		}
 
 		public MaterialColors()
 		{
 			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/ColorPalette.xaml") });
-			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
+			if (!string.IsNullOrWhiteSpace(_colorPaletteOverrideSource))
 			{
-				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
+				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(_colorPaletteOverrideSource) });
+			}
+
+			if (_overrideDictionary is { } overrideDictionary)
+			{
+				var d = new ResourceDictionary();
+
+				foreach (var key in _overrideDictionary.Keys)
+				{
+					d[key] = _overrideDictionary[key];
+				}
+				
+				MergedDictionaries.Add(d);
 			}
 
 			InitializeComponent();

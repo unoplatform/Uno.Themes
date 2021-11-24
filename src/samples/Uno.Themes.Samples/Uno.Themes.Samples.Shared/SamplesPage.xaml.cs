@@ -79,12 +79,15 @@ namespace Uno.Themes.Samples
 			}
 		}
 
+#if __ANDROID__
 		private async void ContentNavigation(Type page)
 		{
-#if __ANDROID__
 			// Workaround #251 - By closing the navigation pane with a delay, prior to navigation, we avoid flickers from too much work being done on the UI Thread.
 			NavView.IsPaneOpen = false;
 			await Task.Delay(TimeSpan.FromSeconds(.25));
+#else
+		private void ContentNavigation(Type page)
+		{
 #endif
 
 			ContentFrame.Navigate(page);

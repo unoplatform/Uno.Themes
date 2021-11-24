@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using Windows.Foundation;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Windows.UI;
 using Uno.Disposables;
 using Uno.Themes.Samples.Entities;
 using Uno.Themes.Samples.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
+using Uno.Material;
 
 namespace Uno.Themes.Samples
 {
@@ -212,6 +216,46 @@ namespace Uno.Themes.Samples
 				StickyRadioButton = stickyRadioButton;
 				VisualStateName = visualStateName;
 				Template = template;
+			}
+		}
+
+		private static void ColorsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			if (d is SamplePageLayout control)
+			{
+				//var customColorsDictionary = new ResourceDictionary
+				//	{
+				//		["MaterialPrimaryColor"] = control.PrimaryColor,
+				//		["MaterialSecondaryColor"] = control.SecondaryColor,
+				//	};
+
+				//var dictionary = new ResourceDictionary();
+				//dictionary.MergedDictionaries.Add(new MaterialColors { OverrideDictionary = customColorsDictionary});
+				//dictionary.MergedDictionaries.Add(new MaterialResources());
+
+				//control.Resources = dictionary;
+
+				//var xaml = @"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""><Button Style=""{StaticResource MaterialFabStyle}"">BTN</Button></DataTemplate>";
+				//var dataTemplate = XamlReader.Load(xaml);
+				//control.MaterialTemplate = dataTemplate as DataTemplate;
+				//control.MaterialTemplate = null;
+
+				var dictionary = new ResourceDictionary
+				{
+					Source = new Uri("ms-appx:///Uno.Material/Styles/Application/ColorPalette.xaml")
+				};
+
+				if (dictionary is { ThemeDictionaries: { } }
+				    && dictionary.ThemeDictionaries["Light"] is ResourceDictionary lightDictionary)
+				{
+					if (lightDictionary["MaterialPrimaryColor"] is Color primaryColor)
+					{
+						primaryColor.A = control.PrimaryColor.A;
+						primaryColor.R = control.PrimaryColor.R;
+						primaryColor.G = control.PrimaryColor.G;
+						primaryColor.B = control.PrimaryColor.B;
+					}
+				}
 			}
 		}
 	}
