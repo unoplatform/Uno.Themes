@@ -140,10 +140,14 @@ namespace Uno.Material.Controls
 
 		public static readonly DependencyProperty IconsContentTemplateProperty =
 			DependencyProperty.Register("IconsContentTemplate", typeof(DataTemplate), typeof(Card), new PropertyMetadata(null));
-#endregion
+		#endregion
 
-#region Elevation
+		#region Elevation
+#if __ANDROID__
+		public new double Elevation
+#else
 		public double Elevation
+#endif
 		{
 			get { return (double)GetValue(ElevationProperty); }
 			set { SetValue(ElevationProperty, value); }
