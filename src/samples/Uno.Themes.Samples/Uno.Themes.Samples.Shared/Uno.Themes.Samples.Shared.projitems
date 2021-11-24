@@ -43,9 +43,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\CommandBarSamplePage.xaml.cs">
       <DependentUpon>CommandBarSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ExpandingBottomSheetSamplePage.xaml.cs">
-      <DependentUpon>ExpandingBottomSheetSamplePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\FabSamplePage.xaml.cs">
       <DependentUpon>FabSamplePage.xaml</DependentUpon>
     </Compile>
@@ -60,9 +57,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ListViewSamplePage.xaml.cs">
       <DependentUpon>ListViewSamplePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ModalStandardBottomSheetSamplePage.xaml.cs">
-      <DependentUpon>ModalStandardBottomSheetSamplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\NavigationViewSamplePage_MUX.xaml.cs">
       <DependentUpon>NavigationViewSamplePage_MUX.xaml</DependentUpon>
@@ -90,9 +84,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\SnackBarSamplePage.xaml.cs">
       <DependentUpon>SnackBarSamplePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\StandardBottomSheetSamplePage.xaml.cs">
-      <DependentUpon>StandardBottomSheetSamplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\TextBlockSamplePage.xaml.cs">
       <DependentUpon>TextBlockSamplePage.xaml</DependentUpon>
@@ -148,10 +139,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ExpandingBottomSheetViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ModalBottomSheetViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SnackBarViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StandardBottomSheetViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -187,10 +175,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ExpandingBottomSheetSamplePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\FabSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,10 +192,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ListViewSamplePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ModalStandardBottomSheetSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,10 +224,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\SliderSamplePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\StandardBottomSheetSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -427,14 +403,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\CheckboxIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ColorsIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ComboBoxIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ExpandingBottomSheetIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\FabIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\NavigationViewIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ProgressBarIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\RadioButtonIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\SliderIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\SnackBarIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\StandardBottomSheetIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\TextBlockIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\PasswordBoxIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\TextBoxIcon.png" />
