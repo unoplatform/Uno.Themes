@@ -101,7 +101,6 @@ namespace Uno.Themes.Samples
 			// Controls
 			using (AddMenuHeader("Controls"))
 			{
-				AddMenuItem<BottomNavigationBarSamplePage>(content: "BottomBarNavigation", icon: "BottomBarIcon");
 				AddMenuItem<ButtonSamplePage>(icon: "ButtonIcon");
 				AddMenuItem<CardSamplePage>(icon: "CardsIcon");
 				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
