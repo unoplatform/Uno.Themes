@@ -110,11 +110,9 @@ namespace Uno.Themes.Samples
 #if __IOS__ || __ANDROID__ || WINDOWS_UWP
 				AddMenuItem<DatePickerSamplePage>(icon: "TimePickerIcon");
 #endif
-				AddMenuItem<ExpandingBottomSheetSamplePage>(icon: "ExpandingBottomSheetIcon");
 				AddMenuItem<FabSamplePage>(content: "FAB", icon: "FabIcon");
 				AddMenuItem<FlyoutSamplePage>(icon: "ComboBoxIcon");
 				AddMenuItem<HyperlinkButtonSamplePage>(icon: "ButtonIcon");
-				AddMenuItem<ModalStandardBottomSheetSamplePage>(icon: "StandardBottomSheetIcon");
 				AddMenuItem<NavigationViewSamplePage_WUX>(icon: "NavigationViewIcon");
 				AddMenuItem<NumberBoxSamplePage>();
 				AddMenuItem<PasswordBoxSamplePage>(icon: "PasswordBoxIcon");
@@ -123,7 +121,6 @@ namespace Uno.Themes.Samples
 				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");
 				// Incomplete : AddMenuItem<SnackBarSamplePage>(icon: "SnackBarIcon");
 				AddMenuItem<SliderSamplePage>(icon: "SliderIcon");
-				AddMenuItem<StandardBottomSheetSamplePage>(icon: "StandardBottomSheetIcon");
 				AddMenuItem<TextBlockSamplePage>(icon: "TextBlockIcon");
 				AddMenuItem<TextBoxSamplePage>(icon: "TextBoxIcon");
 #if __IOS__ || __ANDROID__ || WINDOWS_UWP

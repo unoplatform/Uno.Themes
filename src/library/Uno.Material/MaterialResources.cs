@@ -37,7 +37,6 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/DatePicker.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/ExpandingBottomSheet.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/FloatingActionButton.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml");
@@ -57,7 +56,6 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/Ripple.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/SnackBar.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/Slider.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/StandardBottomSheet.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/TextBox.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml");
