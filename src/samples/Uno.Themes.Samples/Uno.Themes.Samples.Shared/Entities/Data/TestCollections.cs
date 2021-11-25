@@ -23,7 +23,7 @@ namespace Uno.Themes.Samples.Entities.Data
 				.Select(x => new SelectableData
 				{
 					Index = x,
-					Image = new Uri("ms-appx:///Assets/Cards/Avatar.png"),
+					Image = new Uri("ms-appx:///Assets/Avatar.png"),
 				})
 				.ToArray();
 		}

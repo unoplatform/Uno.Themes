@@ -102,7 +102,6 @@ namespace Uno.Themes.Samples
 			using (AddMenuHeader("Controls"))
 			{
 				AddMenuItem<ButtonSamplePage>(icon: "ButtonIcon");
-				AddMenuItem<CardSamplePage>(icon: "CardsIcon");
 				AddMenuItem<CheckBoxSamplePage>(icon: "CheckboxIcon");
 				AddMenuItem<ComboBoxSamplePage>(icon: "ComboBoxIcon");
 				AddMenuItem<CommandBarSamplePage>();
