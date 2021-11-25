@@ -85,6 +85,11 @@ namespace Uno.Material
 				{
 					if (!this.TryGetValue(key, out var resource) || !(resource is Style style))
 					{
+						// uwp: If the {key} style is clearly defined in {info.Source}, but we can't find it here.
+						// And, that it only happens on uwp, and not other uno platforms.
+						// It means that the style references resources that are not directly included.
+						// This can usually be fixed by including `<MaterialColors xmlns="using:Uno.Material" />` in the MergedDictionaries of {info.Source}.
+						// note: Resources used on Style.Setters need to be directly defined/included, those used in Style.Template dont have to be.
 						throw new ArgumentException($"Missing resource: key={key} from={info.Source}");
 					}
 					if (style.TargetType == null)
