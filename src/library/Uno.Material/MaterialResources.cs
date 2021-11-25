@@ -28,7 +28,6 @@ namespace Uno.Material
 
 			// Add all ResourceDictionaries for Controls here in alphabetical order
 			Add("ms-appx:///Uno.Material/Styles/Controls/Button.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/Card.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarDatePicker.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CheckBox.xaml");

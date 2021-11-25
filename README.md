@@ -4,7 +4,6 @@ This library is designed to help you use the [material design system](https://ma
 It includes :
 - Color system for both Light and Dark theme
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
-- Custom Controls for Material Components not offered out of the box by WinUI, such as Card.
 
 Quickly visualize all the available controls through this [zeplin link](https://zpl.io/scene/bzgq8wG)
 
@@ -123,17 +122,6 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 	Style="{StaticResource MaterialContainedButtonStyle}"/>
 ```
 
-- Here is how to use our custom controls like a Card
-```xaml
-xmlns:material="using:Uno.Material.Controls"
-
-[...]
-
-<material:Card Header="Outlined card"
-	       SubHeader="With title and subitle"
-	       Style="{StaticResource MaterialOutlinedCardStyle}" />
-```
-
 6. In order to display the appropriate font with the material styles on Webassembly,
 make sure that the *Roboto* font is defined on `font.css` located at `[YourProject].Wasm/WasmCSS`.
 This make sure that the font is loaded correctly [Related Issue](https://github.com/unoplatform/uno/issues/693).
@@ -202,11 +190,6 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      |
 | ToggleButton     | MaterialTextToggleButtonStyle                                                     |
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         |
-
-### Styles for custom controls
-| **Controls**              | **StyleNames**                                                                |
-|---------------------------|-------------------------------------------------------------------------------|
-| Card                      | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
 
 ## Controls Setup (Specialized)
 
