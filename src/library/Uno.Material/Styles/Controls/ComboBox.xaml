@@ -10,6 +10,10 @@
 					xmlns:xamarin="http://nventive.com/xamarin"
 					mc:Ignorable="not_win xamarin">
 
+	<ResourceDictionary.MergedDictionaries>
+		<MaterialColors xmlns="using:Uno.Material" />
+	</ResourceDictionary.MergedDictionaries>
+
 	<!-- Converters -->
 	<converters:FromNullToValueConverter x:Key="NullToScaleConverter"
 										 NotNullValue="0.7"

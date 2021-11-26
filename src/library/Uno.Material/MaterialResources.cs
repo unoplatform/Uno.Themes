@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 #if WinUI
@@ -16,53 +17,89 @@ namespace Uno.Material
 	{
 		public MaterialResources()
 		{
-			UpdateResources();
+			ImportResourceDictionaries();
 		}
 
-		private void UpdateResources()
+		public bool WithImplicitStyles { set => ExportImplicitStyles(value); }
+
+		private IEnumerable<(string Source, string[] ImplicitStyles)> GetResourceInfos()
 		{
+			var resources = new List<(string Path, string[] ImplicitStyles)>();
+
 			// Add all ResourceDictionaries for Variables here in alphabetical order
 			Add("ms-appx:///Uno.Material/Styles/Application/AnimationConstants.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Application/Converters.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Application/TextBoxVariables.xaml");
 
 			// Add all ResourceDictionaries for Controls here in alphabetical order
-			Add("ms-appx:///Uno.Material/Styles/Controls/Button.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarDatePicker.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/CheckBox.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/DatePicker.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/FloatingActionButton.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/InfoBar.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/ListView.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Button.xaml", "MaterialContainedButtonStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml", "MaterialCalendarViewStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarDatePicker.xaml", "MaterialCalendarDatePickerStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CheckBox.xaml", "MaterialCheckBoxStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml", "MaterialComboBoxStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml", "MaterialCommandBarStyle", "MaterialAppBarButton");
+			Add("ms-appx:///Uno.Material/Styles/Controls/DatePicker.xaml", "MaterialDatePickerStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/FloatingActionButton.xaml"); // no implicit style, as the target-type is Button
+			Add("ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml", "MaterialFlyoutPresenterStyle", "MaterialMenuFlyoutPresenterStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml", "MaterialHyperlinkButtonStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/InfoBar.xaml", "MaterialInfoBarStyle");
 #if !WinUI
-			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/WUX/NavigationView.xaml"); // NavigationView merges it's related dictionaries already
+			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/WUX/NavigationView.xaml", "MaterialWUXNavigationViewStyle"); // NavigationView merges it's related dictionaries already
 #endif
-			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/NavigationView_MUX.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/PasswordBox.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressBar.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/NavigationView_MUX.xaml", "MaterialNavigationViewStyle", "MaterialNavigationViewItemStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/PasswordBox.xaml", "MaterialFilledPasswordBoxStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressBar.xaml", "MaterialProgressBarStyle");
 #if !WinUI_Desktop
-			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressRing.xaml");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ProgressRing.xaml", "MaterialProgressRingStyle");
 #endif
-			Add("ms-appx:///Uno.Material/Styles/Controls/RadioButton.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/RatingControl.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/Ripple.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/Slider.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/TextBox.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml");
-			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleButton.xaml");
-#if __ANDROID__ || __IOS__
-			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.Mobile.xaml");
-#else
-			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.xaml");
-#endif
+			Add("ms-appx:///Uno.Material/Styles/Controls/RadioButton.xaml", "MaterialRadioButtonStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/RatingControl.xaml", "MaterialRatingControlStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/Ripple.xaml"); // default implicit: (not-keyed)
+			Add("ms-appx:///Uno.Material/Styles/Controls/Slider.xaml", "MaterialSliderStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/TextBox.xaml", "MaterialFilledTextBoxStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml", "MaterialBody2");
+			Add("ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml", "MaterialTimePickerStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleButton.xaml", "MaterialTextToggleButtonStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.xaml", "MaterialToggleSwitchStyle");
 
-			void Add(string source) => MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(source) });
+			return resources;
+
+			void Add(string source, params string[] implicitStyles) => resources.Add((source, implicitStyles));
+		}
+
+		private void ImportResourceDictionaries()
+		{
+			foreach (var info in GetResourceInfos())
+			{
+				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(info.Source) });
+			}
+		}
+
+		private void ExportImplicitStyles(bool value)
+		{
+			if (!value) return; // we don't support teardown
+
+			foreach (var info in GetResourceInfos())
+			{
+				foreach (var key in info.ImplicitStyles ?? Array.Empty<string>())
+				{
+					if (!this.TryGetValue(key, out var resource) || !(resource is Style style))
+					{
+						// uwp: If the {key} style is clearly defined in {info.Source}, but we can't find it here.
+						// And, that it only happens on uwp, and not other uno platforms.
+						// It means that the style references resources that are not directly included.
+						// This can usually be fixed by including `<MaterialColors xmlns="using:Uno.Material" />` in the MergedDictionaries of {info.Source}.
+						// note: Resources used on Style.Setters need to be directly defined/included, those used in Style.Template dont have to be.
+						throw new ArgumentException($"Missing resource: key={key} from={info.Source}");
+					}
+					if (style.TargetType == null)
+					{
+						throw new InvalidOperationException($"Missing TargetType on style: key={key}");
+					}
+					
+					this.Add(style.TargetType, style);
+				}
+			}
 		}
 	}
 }
