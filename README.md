@@ -150,13 +150,29 @@ body::after {
 ```
 
 7. (Optional) Set material styles as the default for your whole application.
-For example, if you wish to use our ToggleSwitch style as your default style, simply set it as an implicit style in your app by adding the following code in your App.xaml
-```xaml
-<Style TargetType="ToggleSwitch"
-       BasedOn="{StaticResource MaterialToggleSwitchStyle}"/>
-```
-You can do the same for each control!
-Learn more about implicit styles from the Microsoft documentation [here](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/xaml-styles#apply-an-implicit-or-explicit-style)
+	```xml
+	<MaterialResources xmlns="using:Uno.Material" WithImplicitStyles="True" />
+	```
+
+	Alternatively, if you wish to only have the default styles for certain controls, simply add the implicit styles to your App.xaml:
+	```xml
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<MaterialColors xmlns="using:Uno.Material" />
+				<MaterialResources xmlns="using:Uno.Material" />
+
+				<!-- implicit styles -->
+				<ResourceDictionary>
+					<Style TargetType="Button" BasedOn="{StaticResource MaterialContainedButtonStyle}"/>
+					<Style TargetType="TextBox" BasedOn="{StaticResource MaterialFilledTextBoxStyle}"/>
+				</ResourceDictionary>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+	```
+
+	Learn more about implicit styles from the Microsoft documentation [here](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/xaml-styles#apply-an-implicit-or-explicit-style)
 
 8. (Optional) Per-control customization.
 Just like WinUI, we documented a set of control-specific resources you can override to further customize our controls.
