@@ -19,15 +19,166 @@
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<!-- FullScreen Flyout -->
+						<TextBlock Text="FullScreen Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="FlyoutSamplePage_FullScreenFlyout">
+
+							<Button x:Name="ShowFullScreenFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+											<CommandBar Content="FullScreen Flyout Example"
+														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														Style="{StaticResource MaterialCommandBarStyle}">
+												<toolkit:CommandBarExtensions.NavigationCommand>
+													<AppBarButton Click="CloseFlyout"
+																  Tag="{Binding ElementName=ShowFullScreenFlyoutButton}"
+																  Style="{StaticResource MaterialAppBarButton}">
+														<AppBarButton.Icon>
+															<PathIcon Data="{StaticResource CloseGlyphPathData}" />
+														</AppBarButton.Icon>
+													</AppBarButton>
+												</toolkit:CommandBarExtensions.NavigationCommand>
+											</CommandBar>
+
+											<TextBlock Grid.Row="1"
+													   Text="Example of a FullScreen Flyout"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Center"
+													   Style="{StaticResource MaterialBody1}" />
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Modal Centered Flyout -->
+						<TextBlock Text="Modal Centered Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="FlyoutSamplePage_ModalCenteredFlyout">
+
+							<Button x:Name="ShowModalCenteredFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											LightDismissOverlayMode="On"
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+											  MaxWidth="300"
+											  MaxHeight="370">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+											<CommandBar Content="Modal Centered Flyout Example"
+														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														Style="{StaticResource MaterialCommandBarStyle}">
+												<toolkit:CommandBarExtensions.NavigationCommand>
+													<AppBarButton Click="CloseFlyout"
+																  Tag="{Binding ElementName=ShowModalCenteredFlyoutButton}"
+																  Style="{StaticResource MaterialAppBarButton}">
+														<AppBarButton.Icon>
+															<PathIcon Data="{StaticResource CloseGlyphPathData}" />
+														</AppBarButton.Icon>
+													</AppBarButton>
+												</toolkit:CommandBarExtensions.NavigationCommand>
+											</CommandBar>
+
+											<TextBlock Grid.Row="1"
+													   Text="Example of a Modal Centered Flyout"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Center"
+													   Style="{StaticResource MaterialBody1}" />
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Bottom Flyout -->
+						<TextBlock Text="Modal Bottom Sheet Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="FlyoutSamplePage_ModalBottomSheetFlyout">
+
+							<Button x:Name="ShowModalBottomSheetFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											LightDismissOverlayMode="On"
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+											  VerticalAlignment="Bottom"
+											  MaxHeight="370">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<Button Content="Share"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<extensions:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Share" />
+												</extensions:ControlExtensions.Icon>
+											</Button>
+
+											<Button Grid.Row="1"
+													Content="Get link"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<extensions:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Link" />
+												</extensions:ControlExtensions.Icon>
+											</Button>
+
+											<Button Grid.Row="2"
+													Content="Edit"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<extensions:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Edit" />
+												</extensions:ControlExtensions.Icon>
+											</Button>
+
+											<Button Grid.Row="3"
+													Content="Delete"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<extensions:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Delete" />
+												</extensions:ControlExtensions.Icon>
+											</Button>
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
 
 						<!-- Flyout Text -->
-						<TextBlock Text="Flyout" />
+						<TextBlock Text="Flyout"
+								   Margin="0,16,0,0" />
 
 						<smtx:XamlDisplay UniqueKey="FlyoutSamplePage_Flyout">
 
 							<Button Content="Flyout">
 								<Button.Flyout>
-									<Flyout FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
+									<Flyout FlyoutPresenterStyle="{StaticResource MaterialContentFlyoutPresenterStyle}">
 										<TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 												   Style="{StaticResource MaterialBody2}" />
 									</Flyout>
