@@ -23,6 +23,13 @@ namespace Uno.Themes.Samples.Content.Controls
 		{
 			this.InitializeComponent();
 		}
+
+		private void CloseFlyout(object sender, RoutedEventArgs e)
+		{
+			var appBarButton = sender as AppBarButton;
+			var button = (Button)appBarButton.Tag;
+			button.Flyout?.Hide();
+		}
 	}
 }
 

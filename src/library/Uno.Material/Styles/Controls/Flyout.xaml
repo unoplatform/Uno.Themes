@@ -11,7 +11,7 @@
 					mc:Ignorable="not_win ios android wasm">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<x:String x:Key="CheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
@@ -27,6 +27,46 @@
 
 	<!-- Material FlyoutPresenter Style -->
 	<Style x:Key="MaterialFlyoutPresenterStyle"
+		   TargetType="FlyoutPresenter">
+		<Setter Property="HorizontalAlignment"
+				Value="Stretch" />
+		<Setter Property="VerticalAlignment"
+				Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="MinWidth"
+				Value="NaN" />
+		<Setter Property="MinHeight"
+				Value="NaN" />
+		<Setter Property="MaxWidth"
+				Value="NaN" />
+		<Setter Property="MaxHeight"
+				Value="NaN" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="FlyoutPresenter">
+					<Border HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+							VerticalAlignment="{TemplateBinding VerticalAlignment}">
+						<Border.Transitions>
+							<TransitionCollection>
+								<PaneThemeTransition Edge="Bottom" />
+							</TransitionCollection>
+						</Border.Transitions>
+						<ContentPresenter Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Material Content FlyoutPresenter Style -->
+	<Style x:Key="MaterialContentFlyoutPresenterStyle"
 		   TargetType="FlyoutPresenter">
 
 		<Setter Property="Foreground"
