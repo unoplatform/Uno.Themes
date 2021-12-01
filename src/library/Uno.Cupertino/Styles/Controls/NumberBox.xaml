@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
 	<ResourceDictionary.MergedDictionaries>
 		<CupertinoColors xmlns="using:Uno.Cupertino"/>
@@ -28,7 +27,7 @@
 	<CornerRadius x:Key="CupertinoCornerRadius">8</CornerRadius>
 
 	<Style	x:Name="CupertinoNumberBoxStyle"
-			TargetType="winui:NumberBox">
+			TargetType="muxc:NumberBox">
 		<Setter Property="FontFamily"
 				Value="{StaticResource CupertinoFontFamily}" />
 		<Setter Property="Background"
@@ -43,7 +42,7 @@
 				Value="7" />
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="winui:NumberBox">
+				<ControlTemplate TargetType="muxc:NumberBox">
 					<Grid>
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">

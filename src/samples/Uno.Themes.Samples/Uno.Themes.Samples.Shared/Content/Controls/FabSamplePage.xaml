@@ -1,18 +1,10 @@
 ﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.FabSamplePage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	  xmlns:not_win="http://uno.ui/not_win"
-	  xmlns:ios="http://uno.ui/ios"
-	  xmlns:android="http://uno.ui/android"
-	  xmlns:wasm="http://uno.ui/wasm"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  xmlns:extensions="using:Uno.Material.Extensions"
-	  xmlns:controls="using:Uno.Material.Controls"
-	  xmlns:sample="using:Uno.Themes.Samples"
-	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  mc:Ignorable="not_win android ios wasm">
+	  xmlns:um="using:Uno.Material"
+	  xmlns:sample="using:Uno.Themes.Samples">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
@@ -35,9 +27,9 @@
 							<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Style="{StaticResource MaterialFabStyle}">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 
@@ -46,9 +38,9 @@
 											  Style="{StaticResource XamlDisplayBelowStyle}"
 											  Margin="16,10,16,0">
 								<Button Style="{StaticResource MaterialSecondaryFabStyle}">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 						</StackPanel>
@@ -84,9 +76,9 @@
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialFabStyle}">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 
@@ -96,9 +88,9 @@
 											  Margin="16,10,16,0">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialSecondaryFabStyle}">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 						</StackPanel>
@@ -113,9 +105,9 @@
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialPrimaryInvertedFabStyle}">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 
@@ -125,9 +117,9 @@
 											  Margin="16,10,16,0">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialSecondaryInvertedFabStyle}">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 						</StackPanel>
@@ -143,9 +135,9 @@
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialFabStyle}"
 										IsEnabled="False">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 
@@ -156,9 +148,9 @@
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialSecondaryFabStyle}"
 										IsEnabled="False">
-									<extensions:ControlExtensions.Icon>
+									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
-									</extensions:ControlExtensions.Icon>
+									</um:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
 						</StackPanel>

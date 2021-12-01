@@ -1,18 +1,11 @@
 ﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.FlyoutSamplePage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	  xmlns:not_win="http://uno.ui/not_win"
-	  xmlns:ios="http://uno.ui/ios"
-	  xmlns:android="http://uno.ui/android"
-	  xmlns:wasm="http://uno.ui/wasm"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  xmlns:extensions="using:Uno.Material.Extensions"
-	  xmlns:controls="using:Uno.Material.Controls"
+	  xmlns:um="using:Uno.Material"
 	  xmlns:sample="using:Uno.Themes.Samples"
-	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  mc:Ignorable="not_win android ios wasm">
+	  xmlns:toolkit="using:Uno.UI.Toolkit">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
@@ -130,9 +123,9 @@
 													HorizontalAlignment="Stretch"
 													HorizontalContentAlignment="Left"
 													Style="{StaticResource MaterialTextButtonStyle}">
-												<extensions:ControlExtensions.Icon>
+												<um:ControlExtensions.Icon>
 													<SymbolIcon Symbol="Share" />
-												</extensions:ControlExtensions.Icon>
+												</um:ControlExtensions.Icon>
 											</Button>
 
 											<Button Grid.Row="1"
@@ -140,9 +133,9 @@
 													HorizontalAlignment="Stretch"
 													HorizontalContentAlignment="Left"
 													Style="{StaticResource MaterialTextButtonStyle}">
-												<extensions:ControlExtensions.Icon>
+												<um:ControlExtensions.Icon>
 													<SymbolIcon Symbol="Link" />
-												</extensions:ControlExtensions.Icon>
+												</um:ControlExtensions.Icon>
 											</Button>
 
 											<Button Grid.Row="2"
@@ -150,9 +143,9 @@
 													HorizontalAlignment="Stretch"
 													HorizontalContentAlignment="Left"
 													Style="{StaticResource MaterialTextButtonStyle}">
-												<extensions:ControlExtensions.Icon>
+												<um:ControlExtensions.Icon>
 													<SymbolIcon Symbol="Edit" />
-												</extensions:ControlExtensions.Icon>
+												</um:ControlExtensions.Icon>
 											</Button>
 
 											<Button Grid.Row="3"
@@ -160,9 +153,9 @@
 													HorizontalAlignment="Stretch"
 													HorizontalContentAlignment="Left"
 													Style="{StaticResource MaterialTextButtonStyle}">
-												<extensions:ControlExtensions.Icon>
+												<um:ControlExtensions.Icon>
 													<SymbolIcon Symbol="Delete" />
-												</extensions:ControlExtensions.Icon>
+												</um:ControlExtensions.Icon>
 											</Button>
 										</Grid>
 									</Flyout>

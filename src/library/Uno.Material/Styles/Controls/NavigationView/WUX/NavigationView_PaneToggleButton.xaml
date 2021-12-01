@@ -2,24 +2,21 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
-					xmlns:wasm="http://uno.ui/wasm"
-					xmlns:not_win="http://uno.ui/not_win"
-					xmlns:xamarin="http://uno.ui/xamarin"
 					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:converters="using:Uno.Material.Converters"
-					xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
-					mc:Ignorable="d ios android wasm not_win xamarin primitives">
+					xmlns:um="using:Uno.Material"
+					mc:Ignorable="d android">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<x:String x:Key="BackArrowPathData">M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z</x:String>
 
+	<um:FromOpenToCustomValueConverter x:Name="OpenToPaneButtonStyle"
+									   ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}"
+									   ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
+	
 	<!-- PaneToggleButton Style-->
 	<Style x:Key="MaterialPaneToggleButtonStyle"
 		   TargetType="Button">
@@ -310,9 +307,5 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-
-	<converters:FromOpenToCustomValueConverter x:Name="OpenToPaneButtonStyle"
-											   ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}"
-											   ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
-
+	
 </ResourceDictionary>

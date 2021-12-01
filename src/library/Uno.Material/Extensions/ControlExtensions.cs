@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 #endif
 
-namespace Uno.Material.Extensions
+namespace Uno.Material
 {
 	[Bindable]
 	public static class ControlExtensions

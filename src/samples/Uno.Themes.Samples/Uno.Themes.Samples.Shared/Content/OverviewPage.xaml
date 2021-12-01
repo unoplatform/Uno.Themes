@@ -2,12 +2,11 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	  xmlns:extensions="using:Uno.Material.Extensions"
+	  xmlns:um="using:Uno.Material"
 	  xmlns:local="using:Uno.Themes.Samples.Content"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:samples="using:Uno.Themes.Samples.Content.Controls"
-	  xmlns:smtx="using:ShowMeTheXAML"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
 	  mc:Ignorable="d">
 
@@ -51,9 +50,9 @@
 							<TextBox AutomationProperties.AutomationId="MaterialFilledIconTextBox"
 									 PlaceholderText="Filled with icon"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<extensions:ControlExtensions.Icon>
+								<um:ControlExtensions.Icon>
 									<SymbolIcon Symbol="Favorite" />
-								</extensions:ControlExtensions.Icon>
+								</um:ControlExtensions.Icon>
 							</TextBox>
 
 							<TextBox AutomationProperties.AutomationId="MaterialOutlinedTextBox"
@@ -63,9 +62,9 @@
 							<TextBox AutomationProperties.AutomationId="MaterialOutlinedWithIconTextBox"
 									 PlaceholderText="Outlined with icon"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-								<extensions:ControlExtensions.Icon>
+								<um:ControlExtensions.Icon>
 									<SymbolIcon Symbol="Favorite" />
-								</extensions:ControlExtensions.Icon>
+								</um:ControlExtensions.Icon>
 							</TextBox>
 						</StackPanel>
 					</sample:OverviewSampleView>

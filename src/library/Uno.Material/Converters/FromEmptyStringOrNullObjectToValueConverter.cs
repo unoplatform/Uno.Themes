@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 #endif
 
-namespace Uno.Material.Converters
+namespace Uno.Material
 {
 	public class FromEmptyStringOrNullObjectToValueConverter : IValueConverter
 	{

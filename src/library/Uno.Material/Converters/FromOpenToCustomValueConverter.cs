@@ -8,7 +8,7 @@ using Microsoft.UI.Xaml.Data;
 using Windows.UI.Xaml.Data;
 #endif
 
-namespace Uno.Material.Converters
+namespace Uno.Material
 {
 	public class FromOpenToCustomValueConverter : IValueConverter
 	{

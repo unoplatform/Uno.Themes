@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:toolkit="using:Uno.UI.Toolkit"
-                    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
-                    mc:Ignorable="">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					mc:Ignorable="">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<!--  Documented variables  -->
@@ -17,37 +17,37 @@
 	<x:String x:Key="CloseGlyphPathData">M1.442037,0L16.002031,14.585751 30.588022,0.025996563 32.001024,1.4409965 17.414783,16.001002 31.97503,30.587006 30.560022,32 15.999268,17.413969 1.4130009,31.973999 0,30.558998 14.586494,15.998742 0.027028472,1.4140019z</x:String>
 
 	<SolidColorBrush x:Key="InfoBarWarningSeverityBrush"
-	                 Color="{StaticResource InfoBarWarningSeverityColor}" />
+					 Color="{StaticResource InfoBarWarningSeverityColor}" />
 	<SolidColorBrush x:Key="InfoBarSuccessSeverityBrush"
-	                 Color="{StaticResource InfoBarSuccessSeverityColor}" />
+					 Color="{StaticResource InfoBarSuccessSeverityColor}" />
 
 	<!--  Style  -->
 	<Style x:Key="MaterialInfoBarStyle"
-	       TargetType="winui:InfoBar">
+		   TargetType="muxc:InfoBar">
 
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="Background"
-		        Value="{StaticResource MaterialBackgroundBrush}" />
+				Value="{StaticResource MaterialBackgroundBrush}" />
 		<win:Setter Property="BorderBrush"
-		            Value="Black" />
+					Value="Black" />
 		<win:Setter Property="BorderThickness"
-		            Value="1" />
+					Value="1" />
 		<win:Setter Property="MinHeight"
-		            Value="120" />
+					Value="120" />
 		<win:Setter Property="Severity"
 					Value="Informational" />
 
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="winui:InfoBar">
+				<ControlTemplate TargetType="muxc:InfoBar">
 
 					<toolkit:ElevatedView x:Name="Root"
-					                      HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-					                      VerticalAlignment="{TemplateBinding VerticalAlignment}"
-					                      Background="{TemplateBinding Background}"
-					                      CornerRadius="{TemplateBinding CornerRadius}"
-					                      Elevation="4">
+										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
+										  Background="{TemplateBinding Background}"
+										  CornerRadius="{TemplateBinding CornerRadius}"
+										  Elevation="4">
 
 						<VisualStateManager.VisualStateGroups>
 
@@ -58,7 +58,7 @@
 								<VisualState x:Name="Error">
 									<VisualState.Setters>
 										<Setter Target="SeverityLevel.BorderBrush"
-										        Value="{StaticResource MaterialErrorBrush}" />
+												Value="{StaticResource MaterialErrorBrush}" />
 										<Setter Target="SeverityLevel.BorderThickness"
 												Value="0,0,0,4" />
 										<Setter Target="StandardIcon.Glyph"
@@ -69,7 +69,7 @@
 								<VisualState x:Name="Warning">
 									<VisualState.Setters>
 										<Setter Target="SeverityLevel.BorderBrush"
-										        Value="{StaticResource InfoBarWarningSeverityBrush}" />
+												Value="{StaticResource InfoBarWarningSeverityBrush}" />
 										<Setter Target="SeverityLevel.BorderThickness"
 												Value="0,0,0,4" />
 										<Setter Target="StandardIcon.Glyph"
@@ -80,7 +80,7 @@
 								<VisualState x:Name="Success">
 									<VisualState.Setters>
 										<Setter Target="SeverityLevel.BorderBrush"
-										        Value="{StaticResource InfoBarSuccessSeverityBrush}" />
+												Value="{StaticResource InfoBarSuccessSeverityBrush}" />
 										<Setter Target="SeverityLevel.BorderThickness"
 												Value="0,0,0,4" />
 										<Setter Target="StandardIcon.Glyph"
@@ -104,7 +104,7 @@
 										<Setter Target="UserIconBorder.Visibility"
 												Value="Visible" />
 										<Setter Target="StandardIcon.Visibility"
-										        Value="Collapsed" />
+												Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -121,7 +121,7 @@
 								<VisualState x:Name="InfoBarCollapsed">
 									<VisualState.Setters>
 										<Setter Target="ContentRoot.Visibility"
-										        Value="Collapsed" />
+												Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -131,18 +131,18 @@
 								<VisualState x:Name="ForegroundSet">
 									<VisualState.Setters>
 										<Setter Target="Title.Foreground"
-										        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
 										<Setter Target="Message.Foreground"
-										        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="ContentRoot"
-						      Background="{TemplateBinding Background}"
-						      BorderBrush="{TemplateBinding BorderBrush}"
-						      BorderThickness="{TemplateBinding BorderThickness}"
+							  Background="{TemplateBinding Background}"
+							  BorderBrush="{TemplateBinding BorderBrush}"
+							  BorderThickness="{TemplateBinding BorderThickness}"
 							  CornerRadius="{TemplateBinding CornerRadius}">
 
 							<Grid x:Name="SeverityLevel"
@@ -186,7 +186,7 @@
 									<StackPanel VerticalAlignment="Center"
 												Margin="24,0,0,0"
 												Grid.Column="1">
-										
+
 										<!--  Title  -->
 										<TextBlock x:Name="Title"
 												   Style="{StaticResource MaterialSubtitle2}"
@@ -213,8 +213,8 @@
 								<ContentPresenter Grid.Row="1"
 												  VerticalAlignment="Bottom"
 												  HorizontalAlignment="Right"
-								                  Content="{TemplateBinding Content}"
-								                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}" />
 							</Grid>
 						</Grid>
 					</toolkit:ElevatedView>

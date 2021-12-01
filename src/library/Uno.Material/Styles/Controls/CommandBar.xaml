@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:controls="using:Uno.Material.Controls"
+					xmlns:um="using:Uno.Material"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:android="http://nventive.com/android"
@@ -27,7 +27,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
-					<controls:Ripple Feedback="{TemplateBinding Foreground}"
+					<um:Ripple Feedback="{TemplateBinding Foreground}"
 									 FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
 						<Viewbox x:Name="ContentViewbox"
 								 Height="{ThemeResource AppBarButtonContentHeight}"
@@ -39,7 +39,7 @@
 											  Content="{TemplateBinding Icon}"
 											  Foreground="{TemplateBinding Foreground}" />
 						</Viewbox>
-					</controls:Ripple>
+					</um:Ripple>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

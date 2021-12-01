@@ -2,19 +2,12 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:controls="using:Uno.Material.Controls"
+					xmlns:um="using:Uno.Material"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:ios="http://uno.ui/ios"
-					xmlns:android="http://uno.ui/android"
-					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:wasm="http://uno.ui/wasm"
-					xmlns:not_win="http://uno.ui/not_win"
-					xmlns:extensions="using:Uno.Material.Extensions"
-					mc:Ignorable="d ios android wasm not_win">
+					mc:Ignorable="d">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 		<MaterialFonts xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
@@ -25,13 +18,13 @@
 		<ResourceDictionary x:Key="Light">
 			<Color x:Key="ButtonFabLowFabBackgroundColor">#9F9F9F</Color>
 		</ResourceDictionary>
-		
+
 		<!-- Dark Theme -->
 		<ResourceDictionary x:Key="Dark">
 			<Color x:Key="ButtonFabLowFabBackgroundColor">#606060</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
-			
+
 	<SolidColorBrush x:Key="ButtonFabFocusOverlayBackgroundColor"
 					 Color="Transparent" />
 	<SolidColorBrush x:Key="ButtonFabLowFabBackgroundColorBrush"
@@ -93,10 +86,10 @@
 											  CornerRadius="{TemplateBinding CornerRadius}"
 											  Background="Transparent">
 
-							<controls:Ripple x:Name="Ripple"
-											 CornerRadius="{TemplateBinding CornerRadius}"
-											 Feedback="{TemplateBinding Foreground}"
-											 FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
+							<um:Ripple x:Name="Ripple"
+									   CornerRadius="{TemplateBinding CornerRadius}"
+									   Feedback="{TemplateBinding Foreground}"
+									   FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
 
 								<Grid x:Name="Root"
 									  Background="{TemplateBinding Background}">
@@ -109,15 +102,15 @@
 												 Width="{StaticResource MaterialFabContentWidthOrHeight}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<ContentPresenter Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+											<ContentPresenter Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
 										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{StaticResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -134,7 +127,7 @@
 
 									<Border x:Name="FabFocusBorder" />
 								</Grid>
-							</controls:Ripple>
+							</um:Ripple>
 						</toolkit:ElevatedView>
 
 						<VisualStateManager.VisualStateGroups>
@@ -241,10 +234,10 @@
 											  CornerRadius="{TemplateBinding CornerRadius}"
 											  Background="Transparent">
 
-							<controls:Ripple x:Name="Ripple"
-											 CornerRadius="{TemplateBinding CornerRadius}"
-											 Feedback="{TemplateBinding Foreground}"
-											 FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
+							<um:Ripple x:Name="Ripple"
+									   CornerRadius="{TemplateBinding CornerRadius}"
+									   Feedback="{TemplateBinding Foreground}"
+									   FeedbackOpacity="{StaticResource MaterialPressedOpacity}">
 
 								<Grid x:Name="Root"
 									  Background="{TemplateBinding Background}">
@@ -257,15 +250,15 @@
 												 Width="{StaticResource MaterialFabContentWidthOrHeight}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<ContentPresenter Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+											<ContentPresenter Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
 										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{StaticResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -282,7 +275,7 @@
 
 									<Border x:Name="FabFocusBorder" />
 								</Grid>
-							</controls:Ripple>
+							</um:Ripple>
 						</toolkit:ElevatedView>
 
 						<VisualStateManager.VisualStateGroups>
@@ -330,11 +323,11 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	
+
 	<Style x:Key="MaterialSecondaryFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
-		
+
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSecondaryBrush}" />
 		<Setter Property="Foreground"
@@ -344,7 +337,7 @@
 	<Style x:Key="MaterialPrimaryInvertedFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
-		
+
 		<Setter Property="Background"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Foreground"
