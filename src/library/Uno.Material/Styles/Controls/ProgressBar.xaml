@@ -2,15 +2,15 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					mc:Ignorable="d">
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<Style x:Key="MaterialProgressBarStyle"
-		   TargetType="winui:ProgressBar">
+		   TargetType="muxc:ProgressBar">
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"
@@ -20,7 +20,7 @@
 	</Style>
 
 	<Style x:Key="MaterialSecondaryProgressBarStyle"
-		   TargetType="winui:ProgressBar">
+		   TargetType="muxc:ProgressBar">
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSecondaryBrush}" />
 		<Setter Property="Background"

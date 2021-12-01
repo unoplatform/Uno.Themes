@@ -1,35 +1,31 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:converters="using:Uno.Material.Converters"
-					xmlns:extensions="using:Uno.Material.Extensions"
-					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:um="using:Uno.Material"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:uno="using:Uno.UI.Xaml.Controls"
-					xmlns:win="using:Uno.UI.Toolkit"
 					xmlns:xamarin="http://nventive.com/xamarin"
-					mc:Ignorable="not_win xamarin">
+					mc:Ignorable="xamarin">
 
 	<ResourceDictionary.MergedDictionaries>
 		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Converters -->
-	<converters:FromNullToValueConverter x:Key="NullToScaleConverter"
-										 NotNullValue="0.7"
-										 NullValue="1" />
+	<um:FromNullToValueConverter x:Key="NullToScaleConverter"
+								 NotNullValue="0.7"
+								 NullValue="1" />
 
-	<converters:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter"
-										 NotNullValue="-11"
-										 NullValue="0" />
+	<um:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter"
+								 NotNullValue="-11"
+								 NullValue="0" />
 
-	<converters:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
-										 NotNullValue="5"
-										 NullValue="0" />
+	<um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
+								 NotNullValue="5"
+								 NullValue="0" />
 
-	<converters:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
-										 NotNullValue="{StaticResource ComboBoxPlaceholderFocusedThemeBrush}"
-										 NullValue="{StaticResource ComboBoxPlaceholderForegroundThemeBrush}" />
+	<um:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
+								 NotNullValue="{StaticResource ComboBoxPlaceholderFocusedThemeBrush}"
+								 NullValue="{StaticResource ComboBoxPlaceholderForegroundThemeBrush}" />
 
 	<!-- Brushes -->
 	<StaticResource x:Key="ComboBoxBackgroundColorBrush"
@@ -425,9 +421,9 @@
 										<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder"
 															TranslateY="0" />
 
-										<converters:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
-																					NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}"
-																					NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
+										<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
+																			NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}"
+																			NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
 									</Grid.Resources>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
@@ -436,14 +432,14 @@
 
 									<!-- IconPresenter -->
 									<ContentPresenter x:Name="IconPresenter"
-													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 													  MaxHeight="34"
 													  MaxWidth="34"
 													  MinWidth="25"
 													  Margin="0,0,8,0"
 													  HorizontalAlignment="Center"
 													  VerticalAlignment="Center"
-													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<!-- ContentPresenter -->
 									<ContentPresenter x:Name="ContentPresenter"

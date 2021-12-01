@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 #endif
 
-namespace Uno.Material.Helpers
+namespace Uno.Material
 {
 	internal static class ControlHelper
 	{

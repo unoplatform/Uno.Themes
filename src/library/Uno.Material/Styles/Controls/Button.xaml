@@ -3,16 +3,9 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:controls="using:Uno.Material.Controls"
-					xmlns:converters="using:Uno.Material.Converters"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:ios="http://uno.ui/ios"
-					xmlns:android="http://uno.ui/android"
-					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:um="using:Uno.Material"
 					xmlns:not_win="http://uno.ui/not_win"
-					xmlns:extensions="using:Uno.Material.Extensions"
-					mc:Ignorable="d ios android wasm not_win">
+					mc:Ignorable="d not_win">
 
 	<ResourceDictionary.MergedDictionaries>
 		<MaterialFonts xmlns="using:Uno.Material" />
@@ -20,7 +13,7 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Documented variables -->
-	<converters:ToUpperConverter x:Key="ToUpperConverter"/>
+	<um:ToUpperConverter x:Key="ToUpperConverter"/>
 	<Thickness x:Key="MaterialButtonPadding">16,8</Thickness>
 	<CornerRadius x:Key="MaterialButtonCornerRadius">4</CornerRadius>
 	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
@@ -145,7 +138,7 @@
 								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
-						<controls:Ripple x:Name="ContentPresenter"
+						<um:Ripple x:Name="ContentPresenter"
 										 Feedback="{TemplateBinding Foreground}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
@@ -155,7 +148,7 @@
 										 AutomationProperties.AccessibilityView="Raw"
 										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
-							<controls:Ripple.Content>
+							<um:Ripple.Content>
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
@@ -163,7 +156,7 @@
 									</Grid.ColumnDefinitions>
 
 									<ContentPresenter x:Name="IconPresenter"
-													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 													  Margin="0,0,8,0"
 													  MaxHeight="34"
 													  MaxWidth="34"
@@ -171,7 +164,7 @@
 													  HorizontalAlignment="Stretch"
 													  VerticalAlignment="Stretch"
 													  VerticalContentAlignment="Center"
-													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<ContentPresenter Grid.Column="1"
 													  Content="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ToUpperConverter}}"
@@ -183,8 +176,8 @@
 													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
 								</Grid>
-							</controls:Ripple.Content>
-						</controls:Ripple>
+							</um:Ripple.Content>
+						</um:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -319,7 +312,7 @@
 								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
-						<controls:Ripple x:Name="ContentPresenter"
+						<um:Ripple x:Name="ContentPresenter"
 										 Feedback="{TemplateBinding Foreground}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
@@ -329,7 +322,7 @@
 										 AutomationProperties.AccessibilityView="Raw"
 										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
-							<controls:Ripple.Content>
+							<um:Ripple.Content>
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
@@ -337,7 +330,7 @@
 									</Grid.ColumnDefinitions>
 
 									<ContentPresenter x:Name="IconPresenter"
-													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 													  Margin="0,0,8,0"
 													  MaxHeight="34"
 													  MaxWidth="34"
@@ -345,7 +338,7 @@
 													  HorizontalAlignment="Stretch"
 													  VerticalAlignment="Stretch"
 													  VerticalContentAlignment="Center"
-													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<ContentPresenter Grid.Column="1"
 													  Content="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ToUpperConverter}}"
@@ -357,8 +350,8 @@
 													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
 								</Grid>
-							</controls:Ripple.Content>
-						</controls:Ripple>
+							</um:Ripple.Content>
+						</um:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -484,7 +477,7 @@
 								Background="{TemplateBinding Foreground}"
 								Opacity="0" />
 
-						<controls:Ripple x:Name="ContentPresenter"
+						<um:Ripple x:Name="ContentPresenter"
 										 Feedback="{TemplateBinding Foreground}"
 										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
 										 BorderBrush="{TemplateBinding BorderBrush}"
@@ -494,7 +487,7 @@
 										 AutomationProperties.AccessibilityView="Raw"
 										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
-							<controls:Ripple.Content>
+							<um:Ripple.Content>
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
@@ -502,7 +495,7 @@
 									</Grid.ColumnDefinitions>
 
 									<ContentPresenter x:Name="IconPresenter"
-													  Content="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 													  Margin="0,0,8,0"
 													  MaxHeight="34"
 													  MaxWidth="34"
@@ -510,7 +503,7 @@
 													  HorizontalAlignment="Stretch"
 													  VerticalAlignment="Stretch"
 													  VerticalContentAlignment="Center"
-													  Visibility="{Binding Path=(extensions:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<ContentPresenter Grid.Column="1"
 													  Content="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ToUpperConverter}}"
@@ -522,8 +515,8 @@
 													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
 								</Grid>
-							</controls:Ripple.Content>
-						</controls:Ripple>
+							</um:Ripple.Content>
+						</um:Ripple>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

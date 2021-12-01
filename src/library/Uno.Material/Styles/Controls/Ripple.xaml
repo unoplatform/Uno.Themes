@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:controls="using:Uno.Material.Controls"
+					xmlns:um="using:Uno.Material"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="not_win">
@@ -10,10 +10,10 @@
 
 
 	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material"/>
+		<MaterialColors xmlns="using:Uno.Material" />
 	</ResourceDictionary.MergedDictionaries>
 	<!-- Known Issue - Wasm pressed state/ripple effect is only applied on first press -->
-	<Style TargetType="controls:Ripple">
+	<Style TargetType="um:Ripple">
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="VerticalAlignment"
@@ -26,7 +26,7 @@
 				Value="False" />
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="controls:Ripple">
+				<ControlTemplate TargetType="um:Ripple">
 					<Grid Background="Transparent"
 						  Margin="{TemplateBinding Margin}"
 						  CornerRadius="{TemplateBinding CornerRadius}">
@@ -65,7 +65,7 @@
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
 										<win:DoubleAnimationUsingKeyFrames Storyboard.TargetName="ClickEllipse"
-																			Storyboard.TargetProperty="Opacity">
+																		   Storyboard.TargetProperty="Opacity">
 											<EasingDoubleKeyFrame KeyTime="0"
 																  Value="0">
 												<EasingDoubleKeyFrame.EasingFunction>
@@ -139,7 +139,9 @@
 									 Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleY}"
 									 RenderTransformOrigin=".5,.5">
 								<Ellipse.RenderTransform>
-									<ScaleTransform x:Name="ScaleTransform" ScaleX="0" ScaleY="0" />
+									<ScaleTransform x:Name="ScaleTransform"
+													ScaleX="0"
+													ScaleY="0" />
 								</Ellipse.RenderTransform>
 							</Ellipse>
 						</Canvas>

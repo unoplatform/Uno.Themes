@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Uno.Material.Extensions
+namespace Uno.Material
 {
 	internal static class EnumerableExtensions
 	{

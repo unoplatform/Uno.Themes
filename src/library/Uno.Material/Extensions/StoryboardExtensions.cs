@@ -9,7 +9,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Animation;
 #endif
 
-namespace Uno.Material.Extensions
+namespace Uno.Material
 {
 	internal static class StoryboardExtensions
 	{
