@@ -8,7 +8,7 @@ using Microsoft.UI.Xaml.Data;
 using Windows.UI.Xaml.Data;
 #endif
 
-namespace Uno.Cupertino.Converters
+namespace Uno.Cupertino
 {
 	public class StringFormatConverter : IValueConverter
 	{

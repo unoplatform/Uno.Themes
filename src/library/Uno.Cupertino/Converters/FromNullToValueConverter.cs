@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 #endif
 
-namespace Uno.Cupertino.Converters
+namespace Uno.Cupertino
 {
 	public class FromNullToValueConverter : IValueConverter
 	{
