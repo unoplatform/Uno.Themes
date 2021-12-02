@@ -53,6 +53,10 @@
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -220,6 +224,10 @@
 				Value="{StaticResource MaterialButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -389,6 +397,11 @@
 				Value="{ThemeResource MaterialButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">

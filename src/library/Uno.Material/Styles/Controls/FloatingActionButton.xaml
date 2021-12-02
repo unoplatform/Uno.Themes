@@ -75,6 +75,10 @@
 		<Setter Property="Padding"
 				Value="{StaticResource MaterialFabLargePadding}" />
 
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -222,6 +226,10 @@
 				Value="{StaticResource MaterialFabSmallCorderRadius}" />
 		<Setter Property="Padding"
 				Value="{StaticResource MaterialFabSmallPadding}" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>

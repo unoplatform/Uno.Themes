@@ -247,6 +247,10 @@
 		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 						Value="Below" />
 
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
+
 		<Setter Property="ItemsPanel">
 			<Setter.Value>
 				<ItemsPanelTemplate>

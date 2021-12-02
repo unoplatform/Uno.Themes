@@ -84,6 +84,10 @@
 		<Setter Property="MinHeight"
 				Value="50" />
 
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">
@@ -284,6 +288,10 @@
 				Value="12,16" />
 		<Setter Property="MinHeight"
 				Value="50" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon"
+				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
