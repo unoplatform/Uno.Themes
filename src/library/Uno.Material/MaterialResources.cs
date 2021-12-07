@@ -31,6 +31,13 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Application/Converters.xaml");
 			Add("ms-appx:///Uno.Material/Styles/Application/TextBoxVariables.xaml");
 
+			const string MobileSuffix =
+#if __ANDROID__ || __IOS__
+				".Mobile";
+#else
+				"";
+#endif
+
 			// Add all ResourceDictionaries for Controls here in alphabetical order
 			Add("ms-appx:///Uno.Material/Styles/Controls/Button.xaml", "MaterialContainedButtonStyle");
 			Add("ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml", "MaterialCalendarViewStyle");
@@ -43,6 +50,7 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml", "MaterialFlyoutPresenterStyle", "MaterialMenuFlyoutPresenterStyle");
 			Add("ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml", "MaterialHyperlinkButtonStyle");
 			Add("ms-appx:///Uno.Material/Styles/Controls/InfoBar.xaml", "MaterialInfoBarStyle");
+			Add("ms-appx:///Uno.Material/Styles/Controls/ListView.xaml"); // TODO: add implicit styles once tested: MaterialListViewStyle, MaterialListViewItemStyle
 #if !WinUI
 			Add("ms-appx:///Uno.Material/Styles/Controls/NavigationView/WUX/NavigationView.xaml", "MaterialWUXNavigationViewStyle"); // NavigationView merges it's related dictionaries already
 #endif
@@ -60,7 +68,7 @@ namespace Uno.Material
 			Add("ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml", "MaterialBody2");
 			Add("ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml", "MaterialTimePickerStyle");
 			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleButton.xaml", "MaterialTextToggleButtonStyle");
-			Add("ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch.xaml", "MaterialToggleSwitchStyle");
+			Add($"ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch{MobileSuffix}.xaml", "MaterialToggleSwitchStyle");
 
 			return resources;
 
@@ -96,7 +104,7 @@ namespace Uno.Material
 					{
 						throw new InvalidOperationException($"Missing TargetType on style: key={key}");
 					}
-					
+
 					this.Add(style.TargetType, style);
 				}
 			}
