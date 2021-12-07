@@ -13,7 +13,7 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Documented variables -->
-	<um:ToUpperConverter x:Key="ToUpperConverter"/>
+	<um:ToUpperConverter x:Key="ToUpperConverter" />
 	<Thickness x:Key="MaterialButtonPadding">16,8</Thickness>
 	<CornerRadius x:Key="MaterialButtonCornerRadius">4</CornerRadius>
 	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
@@ -143,15 +143,15 @@
 								Opacity="0" />
 
 						<um:Ripple x:Name="ContentPresenter"
-										 Feedback="{TemplateBinding Foreground}"
-										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
-										 BorderBrush="{TemplateBinding BorderBrush}"
-										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{TemplateBinding CornerRadius}"
-										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw"
-										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+								   Feedback="{TemplateBinding Foreground}"
+								   FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
+								   BorderBrush="{TemplateBinding BorderBrush}"
+								   BorderThickness="{TemplateBinding BorderThickness}"
+								   CornerRadius="{TemplateBinding CornerRadius}"
+								   Padding="{TemplateBinding Padding}"
+								   AutomationProperties.AccessibilityView="Raw"
+								   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
 							<um:Ripple.Content>
 								<Grid>
 									<Grid.ColumnDefinitions>
@@ -321,15 +321,15 @@
 								Opacity="0" />
 
 						<um:Ripple x:Name="ContentPresenter"
-										 Feedback="{TemplateBinding Foreground}"
-										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
-										 BorderBrush="{TemplateBinding BorderBrush}"
-										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{TemplateBinding CornerRadius}"
-										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw"
-										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+								   Feedback="{TemplateBinding Foreground}"
+								   FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
+								   BorderBrush="{TemplateBinding BorderBrush}"
+								   BorderThickness="{TemplateBinding BorderThickness}"
+								   CornerRadius="{TemplateBinding CornerRadius}"
+								   Padding="{TemplateBinding Padding}"
+								   AutomationProperties.AccessibilityView="Raw"
+								   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
 							<um:Ripple.Content>
 								<Grid>
 									<Grid.ColumnDefinitions>
@@ -491,15 +491,15 @@
 								Opacity="0" />
 
 						<um:Ripple x:Name="ContentPresenter"
-										 Feedback="{TemplateBinding Foreground}"
-										 FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
-										 BorderBrush="{TemplateBinding BorderBrush}"
-										 BorderThickness="{TemplateBinding BorderThickness}"
-										 CornerRadius="{TemplateBinding CornerRadius}"
-										 Padding="{TemplateBinding Padding}"
-										 AutomationProperties.AccessibilityView="Raw"
-										 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+								   Feedback="{TemplateBinding Foreground}"
+								   FeedbackOpacity="{StaticResource MaterialPressedOpacity}"
+								   BorderBrush="{TemplateBinding BorderBrush}"
+								   BorderThickness="{TemplateBinding BorderThickness}"
+								   CornerRadius="{TemplateBinding CornerRadius}"
+								   Padding="{TemplateBinding Padding}"
+								   AutomationProperties.AccessibilityView="Raw"
+								   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
 							<um:Ripple.Content>
 								<Grid>
 									<Grid.ColumnDefinitions>
@@ -541,6 +541,96 @@
 		   BasedOn="{StaticResource MaterialTextButtonStyle}">
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSecondaryBrush}" />
+	</Style>
+
+	<Style x:Key="MaterialButtonIconStyle"
+		   TargetType="Button">
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="BorderThickness"
+				Value="0" />
+		<Setter Property="MinHeight"
+				Value="40" />
+		<Setter Property="MinWidth"
+				Value="40" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="True" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Ellipse for PointedOver State -->
+						<Ellipse x:Name="HoverOverlay"
+								 HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"
+								 Fill="{StaticResource MaterialPrimaryHoverBrush}"
+								 Opacity="0" />
+
+						<!-- Ellipse for Pressed State -->
+						<Ellipse x:Name="PressedOverlay"
+								 HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"
+								 Fill="{StaticResource MaterialPrimaryPressedBrush}"
+								 Opacity="0" />
+
+						<!-- Ellipse for Focused State -->
+						<Ellipse x:Name="FocusedOverlay"
+								 HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"
+								 Fill="{StaticResource MaterialPrimaryFocusedBrush}"
+								 Opacity="0" />
+
+						<!-- Content -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 	<Style x:Key="SeeStyleFlyoutButtonStyle"

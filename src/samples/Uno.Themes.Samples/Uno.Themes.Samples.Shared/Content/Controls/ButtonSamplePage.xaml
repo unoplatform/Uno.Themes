@@ -48,7 +48,7 @@
 						<!-- Button Text -->
 						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Text"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<Button Content="Test"
+							<Button Content="Text"
 									Style="{StaticResource MaterialTextButtonStyle}" />
 						</smtx:XamlDisplay>
 
@@ -58,6 +58,16 @@
 							<Button Content="TEXT DISABLED"
 									IsEnabled="False"
 									Style="{StaticResource MaterialTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Icon  -->
+						<smtx:XamlDisplay UniqueKey="Material_ButtonSamplePage_Icon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Style="{StaticResource MaterialButtonIconStyle}">
+								<Button.Content>
+									<SymbolIcon Symbol="Favorite" />
+								</Button.Content>
+							</Button>
 						</smtx:XamlDisplay>
 
 						<!-- STRETCHED BUTTONS -->
