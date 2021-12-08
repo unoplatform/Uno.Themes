@@ -195,7 +195,7 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 
 | **Controls** | **StyleNames**                                                                        |
 |----------|-------------------------------------------------------------------------------------------|
-| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle <br> MaterialTextButtonStyle <br> MaterialContainedSecondaryButtonStyle <br> MaterialOutlinedSecondaryButtonStyle<br> MaterialTextSecondaryButtonStyle |
+| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle <br> MaterialTextButtonStyle <br> MaterialButtonIconStyle <br> MaterialContainedSecondaryButtonStyle <br> MaterialOutlinedSecondaryButtonStyle<br> MaterialTextSecondaryButtonStyle |
 | CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         |
 | ComboBox         | MaterialComboBoxStyle                                                             |
 | CommandBar       | MaterialCommandBarStyle                                                           |
@@ -204,7 +204,7 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   |
 | TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline                                 |
 | TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      |
-| ToggleButton     | MaterialTextToggleButtonStyle                                                     |
+| ToggleButton     | MaterialTextToggleButtonStyle <br> MaterialToggleButtonIconStyle                  |
 | ToggleSwitch     | MaterialToggleSwitchStyle                                                         |
 
 ## Controls Setup (Specialized)
