@@ -93,7 +93,7 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 3. Initialize the material resources. The order in which the different resources are loaded is important. Add this to `App.xaml`
 ```xml
 <MaterialColors xmlns="using:Uno.Material"
-				ColorPaletteOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+				OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
 <MaterialResources xmlns="using:Uno.Material" />
 ```
 
@@ -107,7 +107,7 @@ Here is what ColorPaletteOverride.xaml would contain if you want both light and 
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
 
 				<MaterialColors xmlns="using:Uno.Material"
-								ColorPaletteOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+								OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
 				<MaterialResources xmlns="using:Uno.Material" />
 				<!-- Application's custom styles -->
 				<!-- other ResourceDictionaries -->
@@ -199,6 +199,8 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 | CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         |
 | ComboBox         | MaterialComboBoxStyle                                                             |
 | CommandBar       | MaterialCommandBarStyle                                                           |
+| ListView         | MaterialListViewStyle <br> MaterialListViewDetailsStyle                           |
+| ListViewItem     | MaterialListViewItemStyle                                                         |
 | NavigationView (WUX) | MaterialWUXNavigationViewStyle <br> MaterialMUXNoCompactMenuNavigationViewStyle         |
 | PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              |
 | RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   |
@@ -361,6 +363,77 @@ Inside your AppTheme add two item's "datePickerDialogTheme" (the style for your 
 	<color name="MaterialPrimaryColor">#B6A8FB</color>
 </resources>
 ```
+
+## Migration
+
+### 1.0 to 1.1
+
+- Color Palette Override
+
+	Now you have the possibility to override the Material color palette with your own color palette. See the #Getting Started section for more details.
+	```xml
+	<MaterialColors xmlns="using:Uno.Material"
+					OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+	```
+
+- Namespace breaking changes
+
+	BREAKING CHANGE: Everything (controls, extensions, converters, ...), previously under `Uno.Material.*` or `Uno.Cupertino.*`, has now been moved under `Uno.Material` or `Uno.Cupertino`.
+
+	```xml
+	xmlns:um="using:Uno.Material"
+	xmlns:uc="using:Uno.Cupertino"
+	```
+
+- Some controls have been moved to [Uno.Toolkit.UI](https://github.com/unoplatform/uno.toolkit.ui)
+
+	List of the controls and styles that have been moved to [Uno.Toolkit.UI](https://github.com/unoplatform/uno.toolkit.ui):
+
+	| **Controls**              | **StyleNames**                                                                |
+	|---------------------------|-------------------------------------------------------------------------------|
+	| Card                      | MaterialOutlinedCardStyle <br> MaterialElevatedCardStyle <br> MaterialAvatarOutlinedCardStyle <br> MaterialAvatarElevatedCardStyle <br> MaterialSmallMediaOutlinedCardStyle <br> MaterialSmallMediaElevatedCardStyle |
+	| Chip                      | MaterialFilledInputChipStyle<br>MaterialFilledChoiceChipStyle<br>MaterialFilledFilterChipStyle<br>MaterialFilledActionChipStyle<br>MaterialOutlinedInputChipStyle<br>MaterialOutlinedChoiceChipStyle<br>MaterialOutlinedFilterChipStyle<br>MaterialOutlinedActionChipStyle |
+	| ChipGroup                 | MaterialFilledInputChipGroupStyle<br>MaterialFilledChoiceChipGroupStyle<br>MaterialFilledFilterChipGroupStyle<br>MaterialFilledActionChipGroupStyle<br>MaterialOutlinedInputChipGroupStyle<br>MaterialOutlinedChoiceChipGroupStyle<br>MaterialOutlinedFilterChipGroupStyle<br>MaterialOutlinedActionChipGroupStyle |
+	| Divider                   | MaterialDividerStyle |
+
+- Some controls have been removed
+
+	List of the controls and styles that have been removed from Uno.Themes:
+
+	| **Controls**              | **StyleNames**                                                                |
+	|---------------------------|------------------------------------------------------------------------------|
+	| BottomNavigationBar       | MaterialBottomNavigationBarStyle                                              |
+	| ExpandingBottomSheet      | MaterialExpandingBottomSheetStyle                                             |
+	| ModalStandardBottomSheet  | MaterialModalStandardBottomSheetStyle                                         |
+	| StandardBottomSheet       | MaterialStandardBottomSheetStyle                                              |
+	| SnackBar                  | MaterialSnackBarStyle                                                         |
+
+	- BottomNavigationBar was replaced by TabBar in [Uno.Toolkit.UI](https://github.com/unoplatform/uno.toolkit.ui), but it is not an exact 1:1 replacement.
+	In the mean time, if you really need the badge and/or other customizability, two options are available:
+
+		Import locally the old sources (control + style) from Uno.Themes; 
+
+		OR
+
+		Copy the MaterialBottomTabBarItemStyle from [Uno.Toolkit.UI](https://github.com/unoplatform/uno.toolkit.ui), and modify the style to suit your needs.
+		(Note that there are two copies of the style, one for iOS and Android and one for rest of the platforms: UWP, Skia, WASM, etc...);
+
+	- For StandardBottomSheet and ModalStandardBottomSheet
+	It's replaced by using a Flyout and the MaterialFlyoutPresenterStyle that is allowing you to have a bottom sheet.
+
+		For example:
+		```xml
+		<Flyout Placement="Full"
+                LightDismissOverlayMode="On"
+                FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
+			<Grid MaxHeight="370"
+				  VerticalAlignment="Bottom">
+				...Your bottom sheet content...
+			</Grid>
+		</Flyout>
+		```
+
+	- For SnackBar: so far no replacement for SnackBar has been added to [Uno.Toolkit.UI](https://github.com/unoplatform/uno.toolkit.ui), but it's planned to add one in a future version.
 
 ## Changelog
 
