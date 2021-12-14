@@ -193,21 +193,33 @@ For example, if you would like change the `CornerRadius` of all the `Buttons` us
 
 ### Styles for basic controls
 
-| **Controls** | **StyleNames**                                                                        |
-|----------|-------------------------------------------------------------------------------------------|
-| Button   | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle <br> MaterialTextButtonStyle <br> MaterialButtonIconStyle <br> MaterialContainedSecondaryButtonStyle <br> MaterialOutlinedSecondaryButtonStyle<br> MaterialTextSecondaryButtonStyle |
-| CheckBox         | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle                         |
-| ComboBox         | MaterialComboBoxStyle                                                             |
-| CommandBar       | MaterialCommandBarStyle                                                           |
-| ListView         | MaterialListViewStyle <br> MaterialListViewDetailsStyle                           |
-| ListViewItem     | MaterialListViewItemStyle                                                         |
-| NavigationView (WUX) | MaterialWUXNavigationViewStyle <br> MaterialMUXNoCompactMenuNavigationViewStyle         |
-| PasswordBox      | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle              |
-| RadioButton      | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle                   |
-| TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline                                 |
-| TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle                      |
-| ToggleButton     | MaterialTextToggleButtonStyle <br> MaterialToggleButtonIconStyle                  |
-| ToggleSwitch     | MaterialToggleSwitchStyle                                                         |
+| **Controls** | **StyleNames** |
+|-|-|
+| Button | MaterialContainedButtonStyle <br> MaterialOutlinedButtonStyle <br> MaterialTextButtonStyle <br> MaterialButtonIconStyle <br> MaterialContainedSecondaryButtonStyle <br> MaterialOutlinedSecondaryButtonStyle<br> MaterialTextSecondaryButtonStyle <br> MaterialButtonIconStyle |
+| Button (FAB) <br> _Floating Action Button_ | MaterialFabStyle <br> MaterialSmallFabStyle <br> MaterialSecondaryFabStyle <br> MaterialPrimaryInvertedFabStyle <br> MaterialSecondaryInvertedFabStyle |
+| CalendarDatePicker | MaterialCalendarDatePickerStyle |
+| CalendarView | MaterialCalendarViewStyle |
+| CheckBox | MaterialCheckBoxStyle <br> MaterialSecondaryCheckBoxStyle |
+| ComboBox | MaterialComboBoxStyle <br> MaterialComboBoxItemStyle |
+| CommandBar | MaterialCommandBarStyle <br> MaterialAppBarButton |
+| DatePicker | MaterialDatePickerStyle |
+| Flyout | MaterialFlyoutPresenterStyle <br> MaterialContentFlyoutPresenterStyle |
+| MenuFlyout | MaterialMenuFMaterialMUXNoCompactMenuNavigationViewStylelyoutPresenterStyle <br> MaterialMenuFlyoutItemStyle <br> MaterialToggleMenuFlyoutItemStyle <br> MaterialMenuFlyoutSubItemStyle <br> MaterialMenuFlyoutSeparatorStyle |
+| HyperlinkButton | MaterialHyperlinkButtonStyle <br> MaterialSecondaryHyperlinkButtonStyle |
+| muxc:InfoBar | MaterialInfoBarStyle |
+| ListView | MaterialListViewStyle <br> MaterialListViewDetailsStyle <br> MaterialListViewItemStyle |
+| NavigationView | MaterialWUXNavigationViewStyle <br> MaterialWUXNoCompactMenuNavigationViewStyle <br> MaterialWUXNavigationViewItemStyle |
+| muxc:NavigationView | MaterialNavigationViewStyle <br> MaterialNavigationViewItemStyle |
+| PasswordBox | MaterialFilledPasswordBoxStyle <br> MaterialOutlinedPasswordBoxStyle |
+| muxc:ProgressBar | MaterialProgressBarStyle <br> MaterialSecondaryProgressBarStyle |
+| muxc:ProgressRing | MaterialProgressRingStyle <br> MaterialSecondaryProgressRingStyle |
+| RadioButton | MaterialRadioButtonStyle <br> MaterialSecondaryRadioButtonStyle |
+| muxc:RatingControl | MaterialRatingControlStyle <br> MaterialSecondaryRatingControlStyle |
+| muxc:Slider | MaterialSliderStyle <br> MaterialSecondarySliderStyle |
+| TextBlock        | MaterialHeadline1 <br> MaterialHeadline2 <br> MaterialHeadline3 <br> MaterialHeadline4 <br> MaterialHeadline5 <br> MaterialHeadline6 <br> MaterialSubtitle1 <br> MaterialSubtitle2 <br> MaterialBody1 <br> MaterialBody2 <br> MaterialButtonText <br> MaterialCaption <br> MaterialOverline |
+| TextBox          | MaterialFilledTextBoxStyle <br> MaterialOutlinedTextBoxStyle |
+| ToggleButton     | MaterialTextToggleButtonStyle <br> MaterialToggleButtonIconStyle |
+| ToggleSwitch     | MaterialToggleSwitchStyle <br> MaterialSecondaryToggleSwitchStyle |
 
 ## Controls Setup (Specialized)
 
@@ -411,7 +423,7 @@ Inside your AppTheme add two item's "datePickerDialogTheme" (the style for your 
 	- BottomNavigationBar was replaced by TabBar in [Uno.Toolkit.UI](https://github.com/unoplatform/uno.toolkit.ui), but it is not an exact 1:1 replacement.
 	In the mean time, if you really need the badge and/or other customizability, two options are available:
 
-		Import locally the old sources (control + style) from Uno.Themes; 
+		Import locally the old sources (control + style) from Uno.Themes;
 
 		OR
 
