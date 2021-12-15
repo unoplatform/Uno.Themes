@@ -216,6 +216,8 @@
 				Value="{ThemeResource ComboBoxForegroundThemeBrush}" />
 		<Setter Property="Background"
 				Value="{ThemeResource ComboBoxBackgroundColorBrush}" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource ComboBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="Padding"
@@ -382,7 +384,7 @@
 											  HorizontalAlignment="Stretch"
 											  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 											  Elevation="8"
-											  BorderBrush="{StaticResource ComboBoxBorderBrush}"
+											  BorderBrush="{TemplateBinding BorderBrush}"
 											  BorderThickness="{TemplateBinding BorderThickness}">
 
 							<Grid x:Name="ComboBoxContent"
