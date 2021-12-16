@@ -2,13 +2,10 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:IsNotWinUI3="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypeNotPresent(Microsoft.UI.Xaml.FrameworkElement)"
 					mc:Ignorable="d">
 
-	<ResourceDictionary.MergedDictionaries>
-		<MaterialColors xmlns="using:Uno.Material" />
-	</ResourceDictionary.MergedDictionaries>
-
-	<Style TargetType="NavigationViewItemSeparator">
+	<IsNotWinUI3:Style TargetType="NavigationViewItemSeparator">
 		<Setter Property="IsEnabled"
 				Value="False" />
 		<Setter Property="IsTabStop"
@@ -47,6 +44,6 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</IsNotWinUI3:Style>
 
 </ResourceDictionary>

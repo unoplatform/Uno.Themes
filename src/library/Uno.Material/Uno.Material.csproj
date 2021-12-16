@@ -6,22 +6,41 @@
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
+		<NoWarn>$(NoWarn);UNO0001</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.26" PrivateAssets="All" />
+		<PackageReference Include="Uno.XamlMerge.Task" Version="0.1.0-dev.41" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
 	</ItemGroup>
 
+	<Choose>
+		<When Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid10.0' or '$(TargetFramework)'=='monoandroid11.0'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="mobile" />
+				<ExcludeXamlNamespaces Include="not_mobile" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="not_mobile" />
+				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
 	<ItemGroup>
 		<LottieJson Include="Assets\MaterialDeterminate.json" />
 		<LottieJson Include="Assets\MaterialIndeterminate.json" />
 
-		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\NavigationView\WUX\**\*.xaml" />
+		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\NavigationView\WUX\NavigationView.xaml" />
 		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\ProgressRing.xaml" />
+
 	</ItemGroup>
 
 	<Choose>
@@ -65,6 +84,11 @@
 				</Compile>
 			</ItemGroup>
 
+			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+				<IncludeXamlNamespaces Include="lottie_not_win" />
+				<ExcludeXamlNamespaces Include="lottie_win" />
+			</ItemGroup>
+
 		</When>
 		<Otherwise>
 
@@ -102,6 +126,11 @@
 				<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 			</ItemGroup>
 
+			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+				<IncludeXamlNamespaces Include="lottie_not_win" />
+				<ExcludeXamlNamespaces Include="lottie_win" />
+			</ItemGroup>
+
 		</Otherwise>
 	</Choose>
 
@@ -111,10 +140,7 @@
 
 	<ItemGroup>
 	  <None Remove="Styles\Application\Fonts.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Styles\Application\Fonts.xaml" />
+	  <None Remove="Styles\Controls\_Resources.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -140,4 +166,19 @@
 			<Generator>MSBuild:Compile</Generator>
 		</None>
 	</ItemGroup>
+
+	<ItemGroup>
+		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" KeepDuplicates="False" />
+		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
+
+		<XamlMergeInput Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
+		<XamlMergeInput Remove="Styles\Application\MarerialColors.xaml" />
+		
+		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+	</ItemGroup>
+
+	<Import Project="xamlmerge.targets" />
 </Project>

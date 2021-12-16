@@ -10,12 +10,28 @@
 
 	<ItemGroup>
 		<PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.26" PrivateAssets="All" />
+		<PackageReference Include="Uno.XamlMerge.Task" Version="0.1.0-dev.41" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
 	</ItemGroup>
-	
+
+	<Choose>
+		<When Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid10.0' or '$(TargetFramework)'=='monoandroid11.0'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="mobile" />
+				<ExcludeXamlNamespaces Include="not_mobile" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="not_mobile" />
+				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
 	<Choose>
 		<When Condition="'$(UseWinUI)'=='true'">
 
@@ -55,6 +71,11 @@
 				</Compile>
 			</ItemGroup>
 			
+			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+				<IncludeXamlNamespaces Include="lottie_not_win" />
+				<ExcludeXamlNamespaces Include="lottie_win" />
+			</ItemGroup>
+
 		</When>
 		<Otherwise>
 
@@ -88,7 +109,12 @@
 				</Compile>
 				<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
 			</ItemGroup>
-			
+
+			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+				<IncludeXamlNamespaces Include="lottie_not_win" />
+				<ExcludeXamlNamespaces Include="lottie_win" />
+			</ItemGroup>
+
 		</Otherwise>
 	</Choose>
 	
@@ -101,4 +127,18 @@
       <LogicalName>$(AssemblyName).xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
+
+	<ItemGroup>
+		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
+		
+		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
+	</ItemGroup>
+
+	<Import Project="..\Uno.Material\xamlmerge.targets" />
 </Project>

@@ -1,10 +1,12 @@
 ﻿steps:
 - task: gitversion/setup@0
+  retryCountOnTaskFailure: 3
   inputs:
     versionSpec: '5.0.0'
   displayName: 'Install GitVersion'
 
 - task: gitversion/execute@0
+  retryCountOnTaskFailure: 3
   inputs:
     useConfigFile: true
     configFilePath: 'build/gitversion.yml'
@@ -12,12 +14,14 @@
 
 - task: UseDotNet@2
   condition: eq(variables['IsCanaryBranch'], true)
+  retryCountOnTaskFailure: 3
   inputs:
     packageType: runtime
     version: 2.2.x
 
 - task: nventiveCanaryUpdater@5
   condition: eq(variables['IsCanaryBranch'], true)
+  retryCountOnTaskFailure: 3
   inputs:
     solution: Uno.Themes.sln
     useNuGetOrg: true
@@ -29,6 +33,7 @@
 
 - task: MSBuild@1
   displayName: 'Build solution in Release | $(ApplicationPlatform)'
+  retryCountOnTaskFailure: 3
   inputs:
     solution: Uno.Themes.sln
     configuration: Release
