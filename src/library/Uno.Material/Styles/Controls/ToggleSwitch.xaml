@@ -26,6 +26,10 @@
 		<Setter Property="Background"
 				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 
+		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
+		<Setter Property="MinWidth"
+				Value="NaN" />
+
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"

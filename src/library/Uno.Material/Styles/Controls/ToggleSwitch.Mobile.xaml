@@ -28,6 +28,10 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 
+		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
+		<Setter Property="MinWidth"
+				Value="NaN" />
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleSwitch">
@@ -70,8 +74,10 @@
 				Value="Stretch" />
 		<Setter Property="MinHeight"
 				Value="25" />
+
+		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
 		<Setter Property="MinWidth"
-				Value="70" />
+				Value="NaN" />
 
 		<Setter Property="Template">
 			<Setter.Value>
