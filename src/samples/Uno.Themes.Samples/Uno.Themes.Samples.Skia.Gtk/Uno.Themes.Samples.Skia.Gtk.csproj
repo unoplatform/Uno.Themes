@@ -6,6 +6,22 @@
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Fonts\Cupertino\SF-Pro.ttf" />
+    <None Remove="Assets\Fonts\Material\Roboto-Light.ttf" />
+    <None Remove="Assets\Fonts\Material\Roboto-Medium.ttf" />
+    <None Remove="Assets\Fonts\Material\Roboto-Regular.ttf" />
+    <None Remove="Assets\Fonts\uno-fluentui-assets.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Cupertino\SF-Pro.ttf" />
+    <Content Include="Assets\Fonts\Material\Roboto-Light.ttf" />
+    <Content Include="Assets\Fonts\Material\Roboto-Medium.ttf" />
+    <Content Include="Assets\Fonts\Material\Roboto-Regular.ttf" />
+    <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
+  </ItemGroup>
 	
 	<ItemGroup>
 		<!-- Note that for WebAssembly version 1.1.1 of the console logger required -->
