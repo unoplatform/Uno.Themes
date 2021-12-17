@@ -132,6 +132,9 @@ namespace Uno.Themes.Samples
 #else
 				.AddConsole(LogLevel.Information);
 #endif
+#if HAS_UNO
+			Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
+#endif
 		}
 
 		static void ConfigureXamlDisplay()

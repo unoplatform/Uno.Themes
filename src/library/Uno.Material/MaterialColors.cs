@@ -40,6 +40,5 @@ namespace Uno.Material
 
 			InitializeComponent();
 		}
-
 	}
 }

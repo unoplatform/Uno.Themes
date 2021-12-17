@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+
+	<Import Project="$(NuGetPackageRoot)uno.xamlmerge.task\0.1.0-dev.41\build\Uno.XamlMerge.Task.targets"
+					Condition="'$(TargetFramework)' == ''" />
+
+	<Target Name="_GenerateMergedXaml"
+					DependsOnTargets="GenerateMergedXaml"
+					BeforeTargets="DispatchToInnerBuilds"
+					Condition="'$(TargetFramework)' == ''">
+	</Target>
+
+</Project>
