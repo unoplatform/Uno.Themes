@@ -7,9 +7,14 @@
 		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageDescription>A set of Cupertino styles for WinUI Controls to be used in Uno Platform and </PackageDescription>
+		<PackageDescription Condition="'$(UseWinUI)'=='true'">$(PackageDescription) WinAppSDK projects</PackageDescription>
+		<PackageDescription Condition="'$(UseWinUI)'=='false'">$(PackageDescription) UWP projects</PackageDescription>
+	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DotNet.ReproducibleBuilds" Version="0.1.26" PrivateAssets="All" />
 		<PackageReference Include="Uno.XamlMerge.Task" Version="0.1.0-dev.41" />
 	</ItemGroup>
 

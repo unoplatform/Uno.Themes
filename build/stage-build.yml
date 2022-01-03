@@ -31,6 +31,11 @@
     nugetUpdaterVersion: 2.1.1
     packageAuthor: nventive
 
+- bash: |
+    npm install -g conventional-changelog-cli
+    conventional-changelog -p angular -u -r 1 -o "build/CHANGELOG.md"
+  displayName: 'Generate CHANGELOG.MD'
+
 - task: MSBuild@1
   displayName: 'Build solution in Release | $(ApplicationPlatform)'
   retryCountOnTaskFailure: 3
