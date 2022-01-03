@@ -1,0 +1,49 @@
+﻿<Project ToolsVersion="15.0">
+
+	<PropertyGroup>
+    <Authors>unoplatform</Authors>
+    <PackageProjectUrl>https://github.com/unoplatform/uno.themes</PackageProjectUrl>
+    <PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/unoplatform/uno.themes</RepositoryUrl>
+		<RepositoryUrl>$(BUILD_REPOSITORY_URI)</RepositoryUrl>
+		<Copyright>Copyright (C) 2015-$([System.DateTime]::Now.ToString(`yyyy`)) uno platform inc. - all rights reserved</Copyright>
+		<Product>$(AssemblyName) ($(TargetFramework))</Product>
+		<PackageIcon>uno-logo.png</PackageIcon>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes Condition="exists('$(MSBuildThisFileDirectory)\changelog.md')">changelog.md</PackageReleaseNotes>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+		<IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
+		<IsSampleProject>$(MSBuildProjectName.Contains('Sample'))</IsSampleProject>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Include="$(MSBuildThisFileDirectory)build\uno-logo.png" Pack="true" Visible="false" PackagePath="\"/>
+		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="/" />
+		<None Include="$(MSBuildThisFileDirectory)build\changelog.md" Pack="true" PackagePath="/" Condition="exists('$(MSBuildThisFileDirectory)build\changelog.md')" />
+	</ItemGroup>
+	
+	<Choose>
+		<When Condition="'$(IsTestProject)' != 'true' and '$(SourceLinkEnabled)' != 'false' and '$(IsSampleProject)' != 'true'">
+			<PropertyGroup>
+				<!-- Optional: Declare that the Repository URL can be published to NuSpec -->
+				<PublishRepositoryUrl>true</PublishRepositoryUrl>
+				<!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
+				<EmbedUntrackedSources>true</EmbedUntrackedSources>
+				<!-- Optional: Include PDB in the built .nupkg -->
+				<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+			</PropertyGroup>
+			<ItemGroup>
+				<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All" />
+			</ItemGroup>
+		</When>
+	</Choose>
+
+</Project>
