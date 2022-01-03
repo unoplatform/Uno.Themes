@@ -135,14 +135,18 @@
 
 	<ItemGroup>
 		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		<None Remove="Styles\Controls\_Resources.xaml" />
 		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
-		
+		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
 		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+
 		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
+	  <UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
 	</ItemGroup>
 
 	<Import Project="..\Uno.Material\xamlmerge.targets" />
