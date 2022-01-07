@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
 
-	<Import Project="$(NuGetPackageRoot)uno.xamlmerge.task\0.1.0-dev.41\build\Uno.XamlMerge.Task.targets"
-					Condition="'$(TargetFramework)' == ''" />
+	<PropertyGroup>
+		<_Uno_XamlMerge_Task_Version>0.1.0-dev.47</_Uno_XamlMerge_Task_Version>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Uno.XamlMerge.Task" Version="$(_Uno_XamlMerge_Task_Version)" />
+	</ItemGroup>
 
-	<Target Name="_GenerateMergedXaml"
-					DependsOnTargets="GenerateMergedXaml"
-					BeforeTargets="DispatchToInnerBuilds"
-					Condition="'$(TargetFramework)' == ''">
-	</Target>
+	<Import Project="$(NuGetPackageRoot)uno.xamlmerge.task\0.1.0-dev.47\build\Uno.XamlMerge.Task.targets"
+					Condition="'$(TargetFramework)' == '' and exists('$(NuGetPackageRoot)\uno.xamlmerge.task\$(_Uno_XamlMerge_Task_Version)')" />
 
 </Project>

@@ -15,10 +15,6 @@
 		<PackageDescription Condition="'$(UseWinUI)'=='true'">$(PackageDescription) WinAppSDK projects</PackageDescription>
 		<PackageDescription Condition="'$(UseWinUI)'=='false'">$(PackageDescription) UWP projects</PackageDescription>
 	</PropertyGroup>
-	
-	<ItemGroup>
-		<PackageReference Include="Uno.XamlMerge.Task" Version="0.1.0-dev.41" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
