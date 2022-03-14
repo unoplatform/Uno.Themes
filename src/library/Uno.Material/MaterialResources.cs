@@ -78,6 +78,7 @@ namespace Uno.Material
 		{
 			if (!value) return; // we don't support teardown
 
+			var implicitResources = new ResourceDictionary();
 			foreach (var key in GetImplicitStyles())
 			{
 				if (!this.TryGetValue(key, out var resource) || !(resource is Style style))
@@ -94,8 +95,13 @@ namespace Uno.Material
 					throw new InvalidOperationException($"Missing TargetType on style: key={key}");
 				}
 
-				this.Add(style.TargetType, style);
+				implicitResources.Add(style.TargetType, style);
 			}
+
+			// UWP don't allow for res-dict with Source set to contain resource directly:
+			// > Local values are not allowed in resource dictionary with Source set
+			// but, we can add them through merged-dict instead.
+			this.MergedDictionaries.Add(implicitResources);
 		}
 	}
 }
