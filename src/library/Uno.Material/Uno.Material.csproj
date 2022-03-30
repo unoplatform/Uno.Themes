@@ -175,11 +175,17 @@
 
 		<XamlMergeInput Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
-		<XamlMergeInput Remove="Styles\Application\MarerialColors.xaml" />
+		<XamlMergeInput Remove="Styles\Application\MaterialColors.xaml" />
 		
 		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Application\MaterialColors.xaml" />
+	</ItemGroup>
+
+	<Import Project="..\..\..\Uno.Themes.Common\Uno.Themes.Common.projitems" Label="Shared" />
 
 	<Import Project="xamlmerge.targets" />
 </Project>
