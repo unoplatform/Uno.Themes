@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+﻿name: Azure Static Web Apps CI/CD
 
 on:
   push:
@@ -38,14 +38,14 @@ jobs:
           useConfigFile: true
           configFilePath: build/gitversion.yml
           
-      - name: Setup dotnet 5.0.x
+      - name: Setup dotnet 6.0.200
         uses: actions/setup-dotnet@v1.7.2
         with:
-          dotnet-version: '5.0.x'
+          dotnet-version: '6.0.200'
     
       - run: |
           cd src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm
-          dotnet build -c Release "/p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}"
+          dotnet build -c Release "/p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}" /p:DisableNet6MobileTargets=true
 
       - uses: actions/upload-artifact@v2
         with:

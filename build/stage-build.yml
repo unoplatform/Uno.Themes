@@ -31,6 +31,10 @@
     nugetUpdaterVersion: 2.1.1
     packageAuthor: nventive
 
+- template: dotnet-install-windows.yml
+- template: dotnet-install-macos.yml
+- template: jdk-setup.yml
+
 - bash: |
     npm install -g conventional-changelog-cli@2.2.2
     conventional-changelog -p angular -u -r 1 -o "build/CHANGELOG.md"
@@ -44,7 +48,7 @@
     configuration: Release
     platform: $(ApplicationPlatform)
     maximumCpuCount: true
-    msbuildArguments: /ds /m /r /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch) /p:RestoreConfigFile=$(Build.SourcesDirectory)\nuget.config /p:PackageReleaseNotesFile=$(Build.SourcesDirectory)/build/CHANGELOG.md /bl:$(build.artifactstagingdirectory)/build-$(ApplicationPlatform).binlog
+    msbuildArguments: /ds /m /r /p:PackageVersion=$(SemVer) /p:ApplicationPlatform=$(ApplicationPlatform) /p:ApplicationVersion=$(MajorMinorPatch) /p:RestoreConfigFile=$(Build.SourcesDirectory)\nuget.config /p:PackageReleaseNotesFile=$(Build.SourcesDirectory)/build/CHANGELOG.md /bl:$(build.artifactstagingdirectory)/build-$(ApplicationPlatform).binlog
 
 - task: PublishBuildArtifacts@1
   condition: always()

@@ -21,21 +21,23 @@ jobs:
       UWP:
         ApplicationPlatform: UWP_x64
         ArtifactName: UWP
+        DisableNet6MobileTargets: true
       Android:
         ApplicationPlatform: Android
         ArtifactName: Android
+        DisableNet6MobileTargets: true
       Packages:
         ApplicationPlatform: Packages
-        GeneratePackageOnBuild: true
         ArtifactName: Packages
+        GeneratePackageOnBuild: true
       Packages_WinUI:
         ApplicationPlatform: Packages
-        GeneratePackageOnBuild: true
         ArtifactName: Packages
         UseWinUI: true
+        GeneratePackageOnBuild: true
 
   pool:
-    vmImage: windows-2019
+    vmImage: windows-2022
   
   steps:
     - template: build/stage-build.yml
@@ -48,9 +50,11 @@ jobs:
       iOS:
         ApplicationPlatform: iPhone
         ArtifactName: iOS
+        DisableNet6MobileTargets: true
       macOS:
         ApplicationPlatform: macOS
         ArtifactName: macOS
+        DisableNet6MobileTargets: true
   pool:
     vmImage: macOS-10.15
     
