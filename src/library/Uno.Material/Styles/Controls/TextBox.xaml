@@ -279,7 +279,7 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Padding"
-				Value="12,16" />
+				Value="12,4,8,4" />
 		<Setter Property="MinHeight"
 				Value="50" />
 
@@ -385,7 +385,7 @@
 										  MaxWidth="34"
 										  MinWidth="25"
 										  Margin="0,0,8,0"
-										  VerticalAlignment="Bottom"
+										  VerticalAlignment="Center"
 										  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 						<ScrollViewer x:Name="ContentElement"
@@ -398,7 +398,7 @@
 									  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
 									  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 									  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-									  VerticalAlignment="Bottom"
+									  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 									  ZoomMode="Disabled"
 									  AutomationProperties.AccessibilityView="Raw">
 							<ScrollViewer.RenderTransform>
@@ -415,7 +415,7 @@
 								   Text="{TemplateBinding PlaceholderText}"
 								   TextAlignment="{TemplateBinding TextAlignment}"
 								   TextWrapping="{TemplateBinding TextWrapping}"
-								   VerticalAlignment="Top">
+								   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 							<TextBlock.RenderTransform>
 								<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
 							</TextBlock.RenderTransform>
@@ -426,7 +426,7 @@
 								Foreground="{TemplateBinding BorderBrush}"
 								IsTabStop="False"
 								Style="{StaticResource DeleteButtonStyle}"
-								VerticalAlignment="Bottom"
+								VerticalAlignment="Stretch"
 								Visibility="Collapsed"
 								AutomationProperties.AccessibilityView="Raw" />
 					</Grid>

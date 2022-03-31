@@ -6714,7 +6714,7 @@
     <Setter Property="CornerRadius" Value="{StaticResource TextBoxOutlinedCorderRadius}" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="Padding" Value="12,16" />
+    <Setter Property="Padding" Value="12,4,8,4" />
     <Setter Property="MinHeight" Value="50" />
     <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
     <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
@@ -6776,18 +6776,18 @@
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" MaxHeight="34" MaxWidth="34" MinWidth="25" Margin="0,0,8,0" VerticalAlignment="Bottom" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-            <ScrollViewer x:Name="ContentElement" Grid.Column="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalAlignment="Bottom" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
+            <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" MaxHeight="34" MaxWidth="34" MinWidth="25" Margin="0,0,8,0" VerticalAlignment="Center" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+            <ScrollViewer x:Name="ContentElement" Grid.Column="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
               <ScrollViewer.RenderTransform>
                 <CompositeTransform x:Name="ContentElement_CompositeTransform" />
               </ScrollViewer.RenderTransform>
             </ScrollViewer>
-            <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" VerticalAlignment="Top">
+            <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
               <TextBlock.RenderTransform>
                 <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
               </TextBlock.RenderTransform>
             </TextBlock>
-            <Button x:Name="DeleteButton" Grid.Column="2" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource DeleteButtonStyle}" VerticalAlignment="Bottom" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" />
+            <Button x:Name="DeleteButton" Grid.Column="2" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource DeleteButtonStyle}" VerticalAlignment="Stretch" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" />
           </Grid>
         </ControlTemplate>
       </Setter.Value>
