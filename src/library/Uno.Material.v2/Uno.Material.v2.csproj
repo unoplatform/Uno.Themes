@@ -11,12 +11,6 @@
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
 	</PropertyGroup>
 
-	<PropertyGroup>
-		<PackageDescription>A set of Material styles for WinUI Controls to be used in Uno Platform and </PackageDescription>
-		<PackageDescription Condition="'$(UseWinUI)'=='true'">$(PackageDescription) WinAppSDK projects</PackageDescription>
-		<PackageDescription Condition="'$(UseWinUI)'=='false'">$(PackageDescription) UWP projects</PackageDescription>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
 	</ItemGroup>
@@ -51,7 +45,6 @@
 			<PropertyGroup>
 				<DefineConstants>WinUI</DefineConstants>
 				<DefineConstants Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">$(DefineConstants);WinUI_Desktop</DefineConstants>
-				<PackageId>Uno.Material.WinUI</PackageId>
 				<TargetFrameworks>$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
 			</PropertyGroup>
 
@@ -95,7 +88,6 @@
 		<Otherwise>
 
 			<PropertyGroup>
-				<PackageId>Uno.Material</PackageId>
 				<TargetFrameworks Condition="'$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.18362</TargetFrameworks>
 			</PropertyGroup>
 
@@ -125,7 +117,6 @@
 				<Compile Update="**\*.xaml.cs">
 					<DependentUpon>%(Filename)</DependentUpon>
 				</Compile>
-				<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
@@ -141,18 +132,49 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Assets\MaterialDeterminate.json" />
+		<None Remove="Assets\MaterialIndeterminate.json" />
+		<None Remove="Styles\Application\Fonts.xaml" />
+		<None Remove="Styles\Controls\_Resources.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
+		<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
 		<EmbeddedResource Include="LinkerConfig.xml">
 			<LogicalName>$(AssemblyName).xml</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" KeepDuplicates="False" />
+		<None Update="Styles\Controls\Button.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\CheckBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\CommandBar.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\RadioButton.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Styles\Controls\TextBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Uno.Material.v1\Uno.Material.v1.csproj" />
-	  <ProjectReference Include="..\Uno.Material.v2\Uno.Material.v2.csproj" />
+		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" KeepDuplicates="False" />
+		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
+
+		<XamlMergeInput Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
+		<XamlMergeInput Remove="Styles\Application\MarerialColors.xaml" />
+
+		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
 
 	<Import Project="xamlmerge.targets" />

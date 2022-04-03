@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Uno.Material
+namespace Uno.Material.v2
 {
-    public class MaterialResources
+    internal class MaterialResourcesV2
     {
     }
 }
