@@ -37,12 +37,8 @@
 	</Choose>
 
 	<ItemGroup>
-		<LottieJson Include="Assets\MaterialDeterminate.json" />
-		<LottieJson Include="Assets\MaterialIndeterminate.json" />
-
 		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\NavigationView\WUX\NavigationView.xaml" />
 		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\ProgressRing.xaml" />
-
 	</ItemGroup>
 
 	<Choose>
@@ -154,6 +150,4 @@
 	  <ProjectReference Include="..\Uno.Material.v1\Uno.Material.v1.csproj" />
 	  <ProjectReference Include="..\Uno.Material.v2\Uno.Material.v2.csproj" />
 	</ItemGroup>
-
-	<Import Project="xamlmerge.targets" />
 </Project>
