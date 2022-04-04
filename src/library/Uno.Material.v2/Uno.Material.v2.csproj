@@ -134,8 +134,6 @@
 	<ItemGroup>
 		<None Remove="Assets\MaterialDeterminate.json" />
 		<None Remove="Assets\MaterialIndeterminate.json" />
-		<None Remove="Styles\Application\Fonts.xaml" />
-		<None Remove="Styles\Controls\_Resources.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -166,15 +164,11 @@
 
 	<ItemGroup>
 		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" KeepDuplicates="False" />
-		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
-		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
+	</ItemGroup>
 
-		<XamlMergeInput Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
-		<XamlMergeInput Remove="Styles\Application\MarerialColors.xaml" />
-
-		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+	<ItemGroup>
+	  <Folder Include="Styles\Application\" />
+	  <Folder Include="Styles\Controls\" />
 	</ItemGroup>
 
 	<Import Project="xamlmerge.targets" />
