@@ -134,6 +134,7 @@
 	<ItemGroup>
 		<None Remove="Assets\MaterialDeterminate.json" />
 		<None Remove="Assets\MaterialIndeterminate.json" />
+		<None Remove="Styles\Application\MaterialColorsV2.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -167,9 +168,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Styles\Application\" />
+	  <UpToDateCheckInput Remove="Styles\Application\MaterialColorsV2.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <XamlMergeInput Remove="Styles\Application\MaterialColorsV2.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Folder Include="Styles\Controls\" />
 	</ItemGroup>
+
+	<Import Project="..\Uno.Themes.Common\Uno.Themes.Common.projitems" Label="Shared" />
 
 	<Import Project="xamlmerge.targets" />
 </Project>
