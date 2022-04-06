@@ -40,8 +40,8 @@
 		<LottieJson Include="Assets\MaterialDeterminate.json" />
 		<LottieJson Include="Assets\MaterialIndeterminate.json" />
 
-		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\NavigationView\WUX\NavigationView.xaml" />
-		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\ProgressRing.xaml" />
+		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\v1\NavigationView\WUX\NavigationView.xaml" />
+		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\v1\ProgressRing.xaml" />
 
 	</ItemGroup>
 
@@ -142,7 +142,8 @@
 
 	<ItemGroup>
 	  <None Remove="Styles\Application\Fonts.xaml" />
-	  <None Remove="Styles\Controls\_Resources.xaml" />
+	  <None Remove="Styles\Controls\v1\_Resources.xaml" />
+	  <None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -152,35 +153,44 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="Styles\Controls\Button.xaml">
+		<None Update="Styles\Controls\v1\Button.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</None>
-		<None Update="Styles\Controls\CheckBox.xaml">
+		<None Update="Styles\Controls\v1\CheckBox.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</None>
-		<None Update="Styles\Controls\CommandBar.xaml">
+		<None Update="Styles\Controls\v1\CommandBar.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</None>
-		<None Update="Styles\Controls\RadioButton.xaml">
+		<None Update="Styles\Controls\v1\RadioButton.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</None>
-		<None Update="Styles\Controls\TextBox.xaml">
+		<None Update="Styles\Controls\v1\TextBox.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" KeepDuplicates="False" />
+		<XamlMergeOutputFiles Include="Generated\mergedpages.v1.xaml" />
+		<XamlMergeOutputFiles Include="Generated\mergedpages.v2.xaml" />
+
+		<XamlMergeInput Include="Styles\Controls\v1\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
+		<XamlMergeInput Include="Styles\Controls\v2\**\*.xaml" MergeFile="mergedpages.v2.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" MergeFile="mergedpages.v2.xaml" />
+
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
-
-		<XamlMergeInput Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
+		
+		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 		<XamlMergeInput Remove="Styles\Application\MarerialColors.xaml" />
 		
-		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
+
+	<Import Project="..\Uno.Themes.Common\Uno.Themes.Common.projitems" Label="Shared" />
 
 	<Import Project="xamlmerge.targets" />
 </Project>

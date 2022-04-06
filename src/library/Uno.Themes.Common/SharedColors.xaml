@@ -1,0 +1,497 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Primary  -->
+    <SolidColorBrush x:Key="PrimaryBrush"
+                     Color="{ThemeResource PrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryInverseBrush"
+                     Color="{ThemeResource PrimaryInverseColor}" />
+    <SolidColorBrush x:Key="OnPrimaryBrush"
+                     Color="{ThemeResource OnPrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryContainerBrush"
+                     Color="{ThemeResource PrimaryContainerColor}" />
+    <SolidColorBrush x:Key="OnPrimaryContainerBrush"
+                     Color="{ThemeResource OnPrimaryContainerColor}" />
+
+    <!--  Secondary  -->
+    <SolidColorBrush x:Key="SecondaryBrush"
+                     Color="{ThemeResource SecondaryColor}" />
+    <SolidColorBrush x:Key="OnSecondaryBrush"
+                     Color="{ThemeResource OnSecondaryColor}" />
+    <SolidColorBrush x:Key="SecondaryContainerBrush"
+                     Color="{ThemeResource SecondaryContainerColor}" />
+    <SolidColorBrush x:Key="OnSecondaryContainerBrush"
+                     Color="{ThemeResource OnSecondaryContainerColor}" />
+
+    <!--  Tertiary  -->
+    <SolidColorBrush x:Key="TertiaryBrush"
+                     Color="{ThemeResource TertiaryColor}" />
+    <SolidColorBrush x:Key="OnTertiaryBrush"
+                     Color="{ThemeResource OnTertiaryColor}" />
+    <SolidColorBrush x:Key="TertiaryContainerBrush"
+                     Color="{ThemeResource TertiaryContainerColor}" />
+    <SolidColorBrush x:Key="OnTertiaryContainerBrush"
+                     Color="{ThemeResource OnTertiaryContainerColor}" />
+
+    <!--  Error  -->
+    <SolidColorBrush x:Key="ErrorBrush"
+                     Color="{ThemeResource ErrorColor}" />
+    <SolidColorBrush x:Key="OnErrorBrush"
+                     Color="{ThemeResource OnErrorColor}" />
+    <SolidColorBrush x:Key="ErrorContainerBrush"
+                     Color="{ThemeResource ErrorContainerColor}" />
+    <SolidColorBrush x:Key="OnErrorContainerBrush"
+                     Color="{ThemeResource OnErrorContainerColor}" />
+
+    <!--  Background  -->
+    <SolidColorBrush x:Key="BackgroundBrush"
+                     Color="{ThemeResource BackgroundColor}" />
+    <SolidColorBrush x:Key="OnBackgroundBrush"
+                     Color="{ThemeResource OnBackgroundColor}" />
+
+    <!--  Surface  -->
+    <SolidColorBrush x:Key="SurfaceBrush"
+                     Color="{ThemeResource SurfaceColor}" />
+    <SolidColorBrush x:Key="OnSurfaceBrush"
+                     Color="{ThemeResource OnSurfaceColor}" />
+    <SolidColorBrush x:Key="SurfaceInverseBrush"
+                     Color="{ThemeResource SurfaceInverseColor}" />
+    <SolidColorBrush x:Key="OnSurfaceInverseBrush"
+                     Color="{ThemeResource OnSurfaceInverseColor}" />
+
+    <!--  SurfaceVariant  -->
+    <SolidColorBrush x:Key="SurfaceVariantBrush"
+                     Color="{ThemeResource SurfaceVariantColor}" />
+    <SolidColorBrush x:Key="OnSurfaceVariantBrush"
+                     Color="{ThemeResource OnSurfaceVariantColor}" />
+
+    <!--  Outline  -->
+    <SolidColorBrush x:Key="OutlineBrush"
+                     Color="{ThemeResource OutlineColor}" />
+
+    <!--  Primary State Brushes  -->
+    <SolidColorBrush x:Key="PrimaryHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource PrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource PrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource PrimaryColor}" />
+    <SolidColorBrush x:Key="PrimaryDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource PrimaryColor}" />
+    <!--<SolidColorBrush x:Key="PrimarySelectedBrush"
+					 Color="{ThemeResource PrimaryColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  Secondary State Brushes  -->
+    <SolidColorBrush x:Key="SecondaryHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource SecondaryColor}" />
+    <SolidColorBrush x:Key="SecondaryFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource SecondaryColor}" />
+    <SolidColorBrush x:Key="SecondaryPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource SecondaryColor}" />
+    <SolidColorBrush x:Key="SecondaryDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource SecondaryColor}" />
+    <!--<SolidColorBrush x:Key="SecondarySelectedBrush"
+					 Color="{ThemeResource SecondaryColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  Tertiary State Brushes  -->
+    <SolidColorBrush x:Key="TertiaryHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource TertiaryColor}" />
+    <SolidColorBrush x:Key="TertiaryFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource TertiaryColor}" />
+    <SolidColorBrush x:Key="TertiaryPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource TertiaryColor}" />
+    <SolidColorBrush x:Key="TertiaryDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource TertiaryColor}" />
+    <!--<SolidColorBrush x:Key="TertiarySelectedBrush"
+					 Color="{ThemeResource TertiaryColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  Error State Brushes  -->
+    <SolidColorBrush x:Key="ErrorHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource ErrorColor}" />
+    <SolidColorBrush x:Key="ErrorFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource ErrorColor}" />
+    <SolidColorBrush x:Key="ErrorPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource ErrorColor}" />
+    <SolidColorBrush x:Key="ErrorDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource ErrorColor}" />
+    <!--<SolidColorBrush x:Key="ErrorSelectedBrush"
+					 Color="{ThemeResource ErrorColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  Background State Brushes  -->
+    <SolidColorBrush x:Key="BackgroundHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource BackgroundColor}" />
+    <SolidColorBrush x:Key="BackgroundFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource BackgroundColor}" />
+    <SolidColorBrush x:Key="BackgroundPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource BackgroundColor}" />
+    <SolidColorBrush x:Key="BackgroundDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource BackgroundColor}" />
+    <!--<SolidColorBrush x:Key="BackgroundSelectedBrush"
+					 Color="{ThemeResource BackgroundColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  Surface State Brushes  -->
+    <SolidColorBrush x:Key="SurfaceHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource SurfaceColor}" />
+    <SolidColorBrush x:Key="SurfaceFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource SurfaceColor}" />
+    <SolidColorBrush x:Key="SurfacePressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource SurfaceColor}" />
+    <SolidColorBrush x:Key="SurfaceDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource SurfaceColor}" />
+    <!--<SolidColorBrush x:Key="SurfaceSelectedBrush"
+					 Color="{ThemeResource SurfaceColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  SurfaceVariant State Brushes  -->
+    <SolidColorBrush x:Key="SurfaceVariantHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource SurfaceVariantColor}" />
+    <SolidColorBrush x:Key="SurfaceVariantFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource SurfaceVariantColor}" />
+    <SolidColorBrush x:Key="SurfaceVariantPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource SurfaceVariantColor}" />
+    <SolidColorBrush x:Key="SurfaceVariantDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource SurfaceVariantColor}" />
+    <!--<SolidColorBrush x:Key="SurfaceVariantSelectedBrush"
+					 Color="{ThemeResource SurfaceVariantColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  Outline State Brushes  -->
+    <SolidColorBrush x:Key="OutlineHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OutlineColor}" />
+    <SolidColorBrush x:Key="OutlineFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OutlineColor}" />
+    <SolidColorBrush x:Key="OutlinePressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OutlineColor}" />
+    <SolidColorBrush x:Key="OutlineDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OutlineColor}" />
+    <!--<SolidColorBrush x:Key="OutlineSelectedBrush"
+					 Color="{ThemeResource OutlineColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  SurfaceInverse State Brushes  -->
+    <SolidColorBrush x:Key="SurfaceInverseHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource SurfaceInverseColor}" />
+    <SolidColorBrush x:Key="SurfaceInverseFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource SurfaceInverseColor}" />
+    <SolidColorBrush x:Key="SurfaceInversePressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource SurfaceInverseColor}" />
+    <SolidColorBrush x:Key="SurfaceInverseDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource SurfaceInverseColor}" />
+    <!--<SolidColorBrush x:Key="SurfaceInverseSelectedBrush"
+					 Color="{ThemeResource SurfaceInverseColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnPrimary State Brushes  -->
+    <SolidColorBrush x:Key="OnPrimaryHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnPrimaryColor}" />
+    <SolidColorBrush x:Key="OnPrimaryFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnPrimaryColor}" />
+    <SolidColorBrush x:Key="OnPrimaryPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnPrimaryColor}" />
+    <SolidColorBrush x:Key="OnPrimaryDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnPrimaryColor}" />
+    <!--<SolidColorBrush x:Key="OnPrimarySelectedBrush"
+					 Color="{ThemeResource OnPrimaryColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnSecondary State Brushes  -->
+    <SolidColorBrush x:Key="OnSecondaryHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnSecondaryColor}" />
+    <SolidColorBrush x:Key="OnSecondaryFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnSecondaryColor}" />
+    <SolidColorBrush x:Key="OnSecondaryPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnSecondaryColor}" />
+    <SolidColorBrush x:Key="OnSecondaryDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnSecondaryColor}" />
+    <!--<SolidColorBrush x:Key="OnSecondarySelectedBrush"
+					 Color="{ThemeResource OnSecondaryColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnTertiary State Brushes  -->
+    <SolidColorBrush x:Key="OnTertiaryHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnTertiaryColor}" />
+    <SolidColorBrush x:Key="OnTertiaryFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnTertiaryColor}" />
+    <SolidColorBrush x:Key="OnTertiaryPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnTertiaryColor}" />
+    <SolidColorBrush x:Key="OnTertiaryDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnTertiaryColor}" />
+    <!--<SolidColorBrush x:Key="OnTertiarySelectedBrush"
+					 Color="{ThemeResource OnTertiaryColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnError State Brushes  -->
+    <SolidColorBrush x:Key="OnErrorHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnErrorColor}" />
+    <SolidColorBrush x:Key="OnErrorFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnErrorColor}" />
+    <SolidColorBrush x:Key="OnErrorPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnErrorColor}" />
+    <SolidColorBrush x:Key="OnErrorDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnErrorColor}" />
+    <!--<SolidColorBrush x:Key="OnErrorSelectedBrush"
+					 Color="{ThemeResource OnErrorColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnBackground State Brushes  -->
+    <SolidColorBrush x:Key="OnBackgroundHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnBackgroundColor}" />
+    <SolidColorBrush x:Key="OnBackgroundFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnBackgroundColor}" />
+    <SolidColorBrush x:Key="OnBackgroundPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnBackgroundColor}" />
+    <SolidColorBrush x:Key="OnBackgroundDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnBackgroundColor}" />
+    <!--<SolidColorBrush x:Key="OnBackgroundSelectedBrush"
+					 Color="{ThemeResource OnBackgroundColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnSurface State Brushes  -->
+    <SolidColorBrush x:Key="OnSurfaceHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnSurfaceColor}" />
+    <SolidColorBrush x:Key="OnSurfaceFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnSurfaceColor}" />
+    <SolidColorBrush x:Key="OnSurfacePressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnSurfaceColor}" />
+    <SolidColorBrush x:Key="OnSurfaceDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnSurfaceColor}" />
+    <!--<SolidColorBrush x:Key="OnSurfaceSelectedBrush"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnSurfaceVariant State Brushes  -->
+    <SolidColorBrush x:Key="OnSurfaceVariantHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnSurfaceVariantColor}" />
+    <SolidColorBrush x:Key="OnSurfaceVariantFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnSurfaceVariantColor}" />
+    <SolidColorBrush x:Key="OnSurfaceVariantPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnSurfaceVariantColor}" />
+    <SolidColorBrush x:Key="OnSurfaceVariantDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnSurfaceVariantColor}" />
+    <!--<SolidColorBrush x:Key="OnSurfaceVariantSelectedBrush"
+					 Color="{ThemeResource OnSurfaceVariantColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnSurfaceInverse State Brushes  -->
+    <SolidColorBrush x:Key="OnSurfaceInverseHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnSurfaceInverseColor}" />
+    <SolidColorBrush x:Key="OnSurfaceInverseFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnSurfaceInverseColor}" />
+    <SolidColorBrush x:Key="OnSurfaceInversePressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnSurfaceInverseColor}" />
+    <SolidColorBrush x:Key="OnSurfaceInverseDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnSurfaceInverseColor}" />
+    <!--<SolidColorBrush x:Key="OnSurfaceInverseSelectedBrush"
+					 Color="{ThemeResource OnSurfaceInverseColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  PrimaryContainer State Brushes  -->
+    <SolidColorBrush x:Key="PrimaryContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource PrimaryContainerColor}" />
+    <SolidColorBrush x:Key="PrimaryContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource PrimaryContainerColor}" />
+    <SolidColorBrush x:Key="PrimaryContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource PrimaryContainerColor}" />
+    <SolidColorBrush x:Key="PrimaryContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource PrimaryContainerColor}" />
+    <!--<SolidColorBrush x:Key="PrimaryContainerSelectedBrush"
+					 Color="{ThemeResource PrimaryContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  SecondaryContainer State Brushes  -->
+    <SolidColorBrush x:Key="SecondaryContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource SecondaryContainerColor}" />
+    <SolidColorBrush x:Key="SecondaryContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource SecondaryContainerColor}" />
+    <SolidColorBrush x:Key="SecondaryContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource SecondaryContainerColor}" />
+    <SolidColorBrush x:Key="SecondaryContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource SecondaryContainerColor}" />
+    <!--<SolidColorBrush x:Key="SecondaryContainerSelectedBrush"
+					 Color="{ThemeResource SecondaryContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  TertiaryContainer State Brushes  -->
+    <SolidColorBrush x:Key="TertiaryContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource TertiaryContainerColor}" />
+    <SolidColorBrush x:Key="TertiaryContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource TertiaryContainerColor}" />
+    <SolidColorBrush x:Key="TertiaryContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource TertiaryContainerColor}" />
+    <SolidColorBrush x:Key="TertiaryContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource TertiaryContainerColor}" />
+    <!--<SolidColorBrush x:Key="TertiaryContainerSelectedBrush"
+					 Color="{ThemeResource TertiaryContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  ErrorContainer State Brushes  -->
+    <SolidColorBrush x:Key="ErrorContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource ErrorContainerColor}" />
+    <SolidColorBrush x:Key="ErrorContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource ErrorContainerColor}" />
+    <SolidColorBrush x:Key="ErrorContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource ErrorContainerColor}" />
+    <SolidColorBrush x:Key="ErrorContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource ErrorContainerColor}" />
+    <!--<SolidColorBrush x:Key="ErrorContainerSelectedBrush"
+					 Color="{ThemeResource ErrorContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnPrimaryContainer State Brushes  -->
+    <SolidColorBrush x:Key="OnPrimaryContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnPrimaryContainerColor}" />
+    <SolidColorBrush x:Key="OnPrimaryContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnPrimaryContainerColor}" />
+    <SolidColorBrush x:Key="OnPrimaryContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnPrimaryContainerColor}" />
+    <SolidColorBrush x:Key="OnPrimaryContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnPrimaryContainerColor}" />
+    <!--<SolidColorBrush x:Key="OnPrimaryContainerSelectedBrush"
+					 Color="{ThemeResource OnPrimaryContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnSecondaryContainer State Brushes  -->
+    <SolidColorBrush x:Key="OnSecondaryContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnSecondaryContainerColor}" />
+    <SolidColorBrush x:Key="OnSecondaryContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnSecondaryContainerColor}" />
+    <SolidColorBrush x:Key="OnSecondaryContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnSecondaryContainerColor}" />
+    <SolidColorBrush x:Key="OnSecondaryContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnSecondaryContainerColor}" />
+    <!--<SolidColorBrush x:Key="OnSecondaryContainerSelectedBrush"
+					 Color="{ThemeResource OnSecondaryContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnTertiaryContainer State Brushes  -->
+    <SolidColorBrush x:Key="OnTertiaryContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnTertiaryContainerColor}" />
+    <SolidColorBrush x:Key="OnTertiaryContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnTertiaryContainerColor}" />
+    <SolidColorBrush x:Key="OnTertiaryContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnTertiaryContainerColor}" />
+    <SolidColorBrush x:Key="OnTertiaryContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnTertiaryContainerColor}" />
+    <!--<SolidColorBrush x:Key="OnTertiaryContainerSelectedBrush"
+					 Color="{ThemeResource OnTertiaryContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+    <!--  OnErrorContainer State Brushes  -->
+    <SolidColorBrush x:Key="OnErrorContainerHoverBrush"
+                     Opacity="{StaticResource HoverOpacity}"
+                     Color="{ThemeResource OnErrorContainerColor}" />
+    <SolidColorBrush x:Key="OnErrorContainerFocusedBrush"
+                     Opacity="{StaticResource FocusedOpacity}"
+                     Color="{ThemeResource OnErrorContainerColor}" />
+    <SolidColorBrush x:Key="OnErrorContainerPressedBrush"
+                     Opacity="{StaticResource PressedOpacity}"
+                     Color="{ThemeResource OnErrorContainerColor}" />
+    <SolidColorBrush x:Key="OnErrorContainerDraggedBrush"
+                     Opacity="{StaticResource DraggedOpacity}"
+                     Color="{ThemeResource OnErrorContainerColor}" />
+    <!--<SolidColorBrush x:Key="OnErrorContainerSelectedBrush"
+					 Color="{ThemeResource OnErrorContainerColor}"
+					 Opacity="{StaticResource SelectedOpacity}" />-->
+
+</ResourceDictionary>

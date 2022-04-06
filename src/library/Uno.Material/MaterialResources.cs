@@ -17,7 +17,7 @@ namespace Uno.Material
 	{
 		public MaterialResources()
 		{
-			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.xaml");
+			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v1.xaml");
 		}
 
 		public bool WithImplicitStyles { set => ExportImplicitStyles(value); }
