@@ -66,7 +66,7 @@ namespace Uno.Cupertino
 				"CupertinoToggleSwitchStyle",
 			};
 
-			Add("ms-appx:///Uno.Cupertino/Generated/mergedpages.xaml", implicitStyles);
+			Add("ms-appx:///Uno.Cupertino/Generated/mergedpages.v1.xaml", implicitStyles);
 
 			return resources;
 

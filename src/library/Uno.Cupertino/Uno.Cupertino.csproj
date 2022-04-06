@@ -128,10 +128,13 @@
     <EmbeddedResource Include="LinkerConfig.xml">
       <LogicalName>$(AssemblyName).xml</LogicalName>
     </EmbeddedResource>
-  </ItemGroup>
-
+	</ItemGroup>
+	
 	<ItemGroup>
-		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		
+		<XamlMergeOutputFiles Include="Generated\mergedpages.v1.xaml" />
+		<XamlMergeOutputFiles Include="Generated\mergedpages.v2.xaml" />
+		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
 		<None Remove="Styles\Controls\_Resources.xaml" />
 		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
@@ -145,6 +148,6 @@
 	  <UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
 	  <UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
 	</ItemGroup>
-
+	
 	<Import Project="..\Uno.Material\xamlmerge.targets" />
 </Project>
