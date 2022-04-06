@@ -7,8 +7,8 @@
 					xmlns:android="http://uno.ui/android"
 					mc:Ignorable="not_win ios android">
 
-	<x:String x:Key="CheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
-	<x:String x:Key="RightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>
+	<x:String x:Key="FlyoutCheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
+	<x:String x:Key="FlyoutRightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>
 	<x:Double x:Key="FlyoutPresenterMinWidth">112</x:Double>
 	<x:Double x:Key="FlyoutMenuItemHeight">48</x:Double>
 	<GridLength x:Key="FlyoutMenuItemRightMargin">38</GridLength>
@@ -365,7 +365,7 @@
 							</Grid.ColumnDefinitions>
 
 							<Path x:Name="CheckGlyph"
-								  Data="{StaticResource CheckGlyphPathStyle}"
+								  Data="{StaticResource FlyoutCheckGlyphPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  Stretch="Uniform"
@@ -537,7 +537,7 @@
 									   Grid.Column="0" />
 
 							<Path x:Name="SubItemChevron"
-								  Data="{StaticResource RightArrowPathStyle}"
+								  Data="{StaticResource FlyoutRightArrowPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  Stretch="Uniform"
