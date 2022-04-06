@@ -8,7 +8,7 @@ using Windows.UI.Xaml;
 
 namespace Uno.Material
 {
-	public sealed partial class MaterialColors : ResourceDictionary
+	public sealed partial class MaterialColorsV2 : ResourceDictionary
 	{
 		private static string ColorPaletteOverrideSource;
 
@@ -22,7 +22,7 @@ namespace Uno.Material
 			DependencyProperty.Register(
 				nameof(OverrideSource),
 				typeof(string),
-				typeof(MaterialColors),
+				typeof(MaterialColorsV2),
 				new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
 
 		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
@@ -30,15 +30,15 @@ namespace Uno.Material
 			ColorPaletteOverrideSource = args.NewValue as string;
 		}
 
-		public MaterialColors()
+		public MaterialColorsV2()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v1/ColorPalette.xaml") });
+			Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColors.xaml");
+
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColorPalette.xaml") });
 			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
 			{
 				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
 			}
-
-			InitializeComponent();
 		}
 	}
 }

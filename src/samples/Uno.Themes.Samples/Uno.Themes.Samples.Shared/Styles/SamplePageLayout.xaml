@@ -2,8 +2,6 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:local="using:Uno.Themes.Samples">
 
-	<Thickness x:Key="SampleContentPadding">0,0,0,0</Thickness>
-
 	<Thickness x:Key="FirstItemMargin">12,0</Thickness>
 	<Thickness x:Key="ConsecutiveItemMargin">12,12,12,0</Thickness>
 
@@ -158,13 +156,34 @@
 									<Grid>
 
 										<!-- Material Content -->
-										<ContentPresenter x:Name="MaterialContentPresenter"
-														  Content="{TemplateBinding Content}"
-														  ContentTemplate="{TemplateBinding MaterialTemplate}"
-														  VerticalAlignment="Stretch"
-														  HorizontalAlignment="Stretch"
-														  Padding="{StaticResource SampleContentPadding}"
-														  Visibility="Collapsed" />
+										<StackPanel x:Name="MaterialContent"
+													Visibility="Collapsed">
+
+											<ComboBox x:Name="MaterialVersionComboBox"
+													  Header="Material Design Version:"
+													  Margin="0,20,0,0"
+													  SelectedIndex="1"
+													  SelectionChanged="MaterialVersionComboBox_SelectionChanged">
+												<x:String>M2</x:String>
+												<x:String>M3</x:String>
+											</ComboBox>
+
+											<!-- Material M2 Content -->
+											<ContentPresenter x:Name="M2MaterialContentPresenter"
+															  Content="{TemplateBinding Content}"
+															  ContentTemplate="{TemplateBinding MaterialTemplate}"
+															  VerticalAlignment="Stretch"
+															  HorizontalAlignment="Stretch"
+															  Visibility="{Binding SelectedItem, ElementName=MaterialVersionComboBox, Converter={StaticResource SelectedItemToVisible}, ConverterParameter='M2', Mode=OneWay}"/>
+
+											<!-- Material M3 Content -->
+											<ContentPresenter x:Name="M3MaterialContentPresenter"
+															  Content="{TemplateBinding Content}"
+															  ContentTemplate="{TemplateBinding M3MaterialTemplate}"
+															  VerticalAlignment="Stretch"
+															  HorizontalAlignment="Stretch"
+															  Visibility="{Binding SelectedItem, ElementName=MaterialVersionComboBox, Converter={StaticResource SelectedItemToVisible}, ConverterParameter='M3', Mode=OneWay}" />
+										</StackPanel>
 
 										<!-- Cupertino Content -->
 										<ContentPresenter x:Name="CupertinoContentPresenter"
@@ -172,7 +191,6 @@
 														  ContentTemplate="{TemplateBinding CupertinoTemplate}"
 														  VerticalAlignment="Stretch"
 														  HorizontalAlignment="Stretch"
-														  Padding="{StaticResource SampleContentPadding}"
 														  Visibility="Collapsed" />
 									</Grid>
 
@@ -299,7 +317,7 @@
 
 								<VisualState x:Name="Material">
 									<VisualState.Setters>
-										<Setter Target="MaterialContentPresenter.Visibility"
+										<Setter Target="MaterialContent.Visibility"
 												Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>

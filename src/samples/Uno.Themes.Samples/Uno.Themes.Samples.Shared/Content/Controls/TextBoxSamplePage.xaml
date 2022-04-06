@@ -102,6 +102,86 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- TextBox Filled -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_1"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource M3MaterialFilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled With PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_2"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Filled"
+									 Style="{StaticResource M3MaterialFilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Disabled with PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_3"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+									 Text="Filled Disabled"
+									 Style="{StaticResource M3MaterialFilledTextBoxStyle}"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_4"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource M3MaterialOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined with PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_5"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Outlined"
+									 Style="{StaticResource M3MaterialOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined Disabled with PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_6"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+									 Text="Outlined Disabled"
+									 Style="{StaticResource M3MaterialOutlinedTextBoxStyle}"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled MultiLine -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_7"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+									 PlaceholderText="MultiLine Filled"
+									 Style="{StaticResource M3MaterialFilledTextBoxStyle}"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Icon -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_8"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource M3MaterialFilledTextBoxStyle}">
+								<um:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined Icon with PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_9"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Filled with Icon"
+									 Style="{StaticResource M3MaterialOutlinedTextBoxStyle}">
+								<um:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
