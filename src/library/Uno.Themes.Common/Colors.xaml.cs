@@ -1,25 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+
+#if WinUI
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+#endif
 
 namespace Uno.Themes.Common
 {
 	public sealed partial class Colors : ResourceDictionary
 	{
+		private static string ColorPaletteOverrideSource;
+
+		public string OverrideSource
+		{
+			get => (string)GetValue(OverrideSourceProperty);
+			set => SetValue(OverrideSourceProperty, value);
+		}
+
+		public static DependencyProperty OverrideSourceProperty { get; } =
+			DependencyProperty.Register(
+				nameof(OverrideSource),
+				typeof(string),
+				typeof(Colors),
+				new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
+
+		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+		{
+			ColorPaletteOverrideSource = args.NewValue as string;
+		}
+
 		public Colors()
 		{
-			this.InitializeComponent();
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Themes.Common/ColorPalette.xaml") });
+			if (!string.IsNullOrWhiteSpace(OverrideSource))
+			{
+				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(OverrideSource) });
+			}
+
+			InitializeComponent();
 		}
 	}
 }

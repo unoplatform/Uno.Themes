@@ -31,9 +31,6 @@
 	</Choose>
 
 	<ItemGroup>
-		<LottieJson Include="Assets\MaterialDeterminate.json" />
-		<LottieJson Include="Assets\MaterialIndeterminate.json" />
-
 		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\NavigationView\WUX\NavigationView.xaml" />
 		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\ProgressRing.xaml" />
 
@@ -132,14 +129,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Assets\MaterialDeterminate.json" />
-		<None Remove="Assets\MaterialIndeterminate.json" />
-		<None Remove="Styles\Application\MaterialColorsV2.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Assets\MaterialDeterminate.json" />
-		<EmbeddedResource Include="Assets\MaterialIndeterminate.json" />
 		<EmbeddedResource Include="LinkerConfig.xml">
 			<LogicalName>$(AssemblyName).xml</LogicalName>
 		</EmbeddedResource>
@@ -161,25 +150,23 @@
 		<None Update="Styles\Controls\TextBox.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</None>
+		<None Update="Styles\Controls\_Resources.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" KeepDuplicates="False" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Styles\Application\MaterialColorsV2.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <XamlMergeInput Remove="Styles\Application\MaterialColorsV2.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Styles\Controls\" />
+	  <Folder Include="Assets\" />
 	</ItemGroup>
 
 	<Import Project="..\Uno.Themes.Common\Uno.Themes.Common.projitems" Label="Shared" />
+
+	<ItemGroup>
+		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" KeepDuplicates="False" />
+
+		<XamlMergeInput Remove="Styles\Application\MaterialColorsV2.xaml" />
+	</ItemGroup>
+
 
 	<Import Project="xamlmerge.targets" />
 </Project>

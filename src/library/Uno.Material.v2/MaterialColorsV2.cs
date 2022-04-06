@@ -32,12 +32,14 @@ namespace Uno.Material
 
 		public MaterialColorsV2()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/ColorPalette.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Themes.Common/ColorPalette.xaml") });
 			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
 			{
 				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
 			}
 
+
+			MergedDictionaries.Add(new Uno.Themes.Common.Colors());
 			InitializeComponent();
 		}
 	}
