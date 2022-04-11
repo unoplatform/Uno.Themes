@@ -15,9 +15,9 @@ namespace Uno.Cupertino
 	/// <summary>
 	/// Cupertino resources including colors, layout values and styles
 	/// </summary>
-	public sealed class CupertinoResources : ResourceDictionary
+	public sealed class CupertinoResourcesV2 : ResourceDictionary
 	{
-		public CupertinoResources()
+		public CupertinoResourcesV2()
 		{
 			ImportResourceDictionaries();
 		}
@@ -66,7 +66,7 @@ namespace Uno.Cupertino
 				"CupertinoToggleSwitchStyle",
 			};
 
-			Add("ms-appx:///Uno.Cupertino/Generated/mergedpages.v1.xaml", implicitStyles);
+			Add("ms-appx:///Uno.Cupertino/Generated/mergedpages.v2.xaml", implicitStyles);
 
 			return resources;
 

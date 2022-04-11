@@ -1,4 +1,5 @@
-﻿<Page x:Class="Uno.Themes.Samples.Content.OverviewPage"
+﻿
+    <Page x:Class="Uno.Themes.Samples.Content.OverviewPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -20,7 +21,9 @@
 		<sample:SamplePageLayout.MaterialTemplate>
 			<DataTemplate>
 				<StackPanel>
-
+					<Button Content="M3 Red" Style="{StaticResource M3MaterialContainedButtonStyle}"/>
+					<Button Content="Cupertino Green" Style="{StaticResource V2CupertinoButtonStyle}"/>
+					<Button Content="What color am i" Background="{StaticResource PrimaryBrush}"/>
 					<!--  Button  -->
 					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
 						<StackPanel Spacing="8">

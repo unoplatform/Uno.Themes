@@ -129,10 +129,16 @@
       <LogicalName>$(AssemblyName).xml</LogicalName>
     </EmbeddedResource>
 	</ItemGroup>
-	
+
 	<ItemGroup>
-		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-		<None Remove="Styles\Controls\_Resources.xaml" />
+		<XamlMergeOutputFiles Include="Generated\mergedpages.v1.xaml" />
+		<XamlMergeOutputFiles Include="Generated\mergedpages.v2.xaml" />
+		<!--<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />-->
+		<XamlMergeInput Include="Styles\Controls\v1\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
+		<XamlMergeInput Include="Styles\Controls\v2\**\*.xaml" MergeFile="mergedpages.v2.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" MergeFile="mergedpages.v2.xaml" />
+
 		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
@@ -145,6 +151,14 @@
 	  <UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
 	  <UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Styles\Controls\v2\_Resources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	</ItemGroup>
+
+	<Import Project="..\Uno.Themes.Common\Uno.Themes.Common.projitems" Label="Shared" />
 
 	<Import Project="..\Uno.Material\xamlmerge.targets" />
 </Project>

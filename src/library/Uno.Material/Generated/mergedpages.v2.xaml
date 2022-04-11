@@ -1,8 +1,12 @@
-<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d macos not_win" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:macos="http://uno.ui/macos" xmlns:um="using:Uno.Material" xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:not_win="http://uno.ui/not_win" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d not_win macos" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:um="using:Uno.Material" xmlns:not_win="http://uno.ui/not_win" xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:macos="http://uno.ui/macos" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
   <ResourceDictionary.MergedDictionaries>
     <um:MaterialFonts />
     <um:MaterialColorsV2 />
   </ResourceDictionary.MergedDictionaries>
+  <!--origin: Styles\Controls\v2\Button.xaml-->
+  <Style x:Key="M3MaterialContainedButtonStyle" TargetType="Button">
+    <Setter Property="Background" Value="Red" />
+  </Style>
   <!--origin: Styles\Controls\v2\TextBlock.xaml-->
   <Style x:Key="M3MaterialBaseTextBlockStyle" TargetType="TextBlock">
     <Setter Property="TextTrimming" Value="CharacterEllipsis" />

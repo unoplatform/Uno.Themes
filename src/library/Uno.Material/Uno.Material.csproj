@@ -143,6 +143,7 @@
 	<ItemGroup>
 	  <None Remove="Styles\Application\Fonts.xaml" />
 	  <None Remove="Styles\Controls\v1\_Resources.xaml" />
+	  <None Remove="Styles\Controls\v2\Button.xaml" />
 	  <None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
 
@@ -187,8 +188,10 @@
 		<XamlMergeInput Remove="Styles\Application\MarerialColors.xaml" />
 		
 		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		
 		<Page Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
+
 
 	<Import Project="..\Uno.Themes.Common\Uno.Themes.Common.projitems" Label="Shared" />
 
