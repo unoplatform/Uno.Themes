@@ -1109,8 +1109,8 @@
   </Style>
   <Style x:Key="MaterialCalendarViewStyle" TargetType="CalendarView" BasedOn="{StaticResource DefaultMaterialCalendarViewStyle}" />
   <!--origin: Styles\Controls\CheckBox.xaml-->
-  <x:String x:Key="HyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
-  <x:String x:Key="CheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
+  <x:String x:Key="CheckBoxHyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
+  <x:String x:Key="CheckBoxCheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
   <GridLength x:Key="CheckAreaLength">40</GridLength>
   <x:Double x:Key="FocusAreaSize">40</x:Double>
   <x:Double x:Key="CheckAreaSize">18</x:Double>
@@ -1351,8 +1351,8 @@
             <Grid x:Name="CheckBoxContainer" Height="{StaticResource CheckAreaSize}" Width="{StaticResource CheckAreaSize}">
               <Grid x:Name="BackgroundBorder" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" />
               <Grid x:Name="CheckedBackgroundBorder" Background="{TemplateBinding Background}" Opacity="0" CornerRadius="2" />
-              <Path x:Name="HyphenGlyph" Data="{StaticResource HyphenGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="4" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
-              <Path x:Name="CheckGlyph" Data="{StaticResource CheckGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="12" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
+              <Path x:Name="HyphenGlyph" Data="{StaticResource CheckBoxHyphenGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="4" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
+              <Path x:Name="CheckGlyph" Data="{StaticResource CheckBoxCheckGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="12" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
             </Grid>
             <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Foreground="{StaticResource MaterialOnBackgroundBrush}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="1" AutomationProperties.AccessibilityView="Raw" TextWrapping="Wrap" />
           </Grid>
@@ -2031,7 +2031,8 @@
     <Setter Property="Foreground" Value="{StaticResource MaterialSecondaryBrush}" />
   </Style>
   <!--origin: Styles\Controls\Flyout.xaml-->
-  <x:String x:Key="RightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>
+  <x:String x:Key="FlyoutCheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
+  <x:String x:Key="FlyoutRightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>
   <x:Double x:Key="FlyoutPresenterMinWidth">112</x:Double>
   <x:Double x:Key="FlyoutMenuItemHeight">48</x:Double>
   <GridLength x:Key="FlyoutMenuItemRightMargin">38</GridLength>
@@ -2243,7 +2244,7 @@
                 <ColumnDefinition Width="{StaticResource FlyoutMenuItemRightMargin}" />
                 <ColumnDefinition Width="Auto" MinWidth="16" />
               </Grid.ColumnDefinitions>
-              <Path x:Name="CheckGlyph" Data="{StaticResource CheckGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" Stretch="Uniform" Opacity="0" Width="{StaticResource FlyoutMenuToggleCheckGlyphWidth}" Height="{StaticResource FlyoutMenuToggleCheckGlyphHeight}" win:Margin="16,0" not_win:Margin="16,4,16,0" />
+              <Path x:Name="CheckGlyph" Data="{StaticResource FlyoutCheckGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" Stretch="Uniform" Opacity="0" Width="{StaticResource FlyoutMenuToggleCheckGlyphWidth}" Height="{StaticResource FlyoutMenuToggleCheckGlyphHeight}" win:Margin="16,0" not_win:Margin="16,4,16,0" />
               <Viewbox x:Name="IconRoot" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="{StaticResource FlyoutMenuItemIconWidth}" Height="{StaticResource FlyoutMenuItemIconHeight}" Visibility="Collapsed">
                 <ContentPresenter x:Name="IconContent" Content="{TemplateBinding Icon}" />
               </Viewbox>
@@ -2326,7 +2327,7 @@
                 <ContentPresenter x:Name="IconContent" Content="{TemplateBinding Icon}" />
               </Viewbox>
               <TextBlock x:Name="TextBlock" Text="{TemplateBinding Text}" Style="{StaticResource MaterialBody2}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="0" />
-              <Path x:Name="SubItemChevron" Data="{StaticResource RightArrowPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" Stretch="Uniform" Width="6" Height="10" Margin="54,4,16,0" Grid.Column="1" />
+              <Path x:Name="SubItemChevron" Data="{StaticResource FlyoutRightArrowPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" Stretch="Uniform" Width="6" Height="10" Margin="54,4,16,0" Grid.Column="1" />
             </Grid>
             <!-- Overlay -->
             <Border x:Name="CommonStatesOverlay" Background="Transparent" />
@@ -5800,6 +5801,9 @@
   <!--origin: Styles\Controls\PasswordBox.xaml-->
   <x:String x:Key="RevealGlyphPathData">M16,5.5999984C17.699951,5.5999984 19.099976,6.9999918 19.099976,8.6999893 19.099976,10.400001 17.699951,11.799994 16,11.799994 14.299988,11.799994 12.899963,10.400001 12.899963,8.6999893 12.899963,6.9999918 14.299988,5.5999984 16,5.5999984z M16,2.1999893C12.399963,2.1999893 9.5,5.0999984 9.5,8.6999893 9.5,12.299994 12.399963,15.199988 16,15.199988 19.599976,15.199988 22.5,12.299994 22.5,8.6999893 22.5,5.0999984 19.599976,2.1999893 16,2.1999893z M16,0C24.799988,5.2249334E-08 32,8.6999893 32,8.6999893 32,8.6999893 24.799988,17.400001 16,17.400001 7.1999512,17.400001 0,8.6999893 0,8.6999893 0,8.6999893 7.1999512,5.2249334E-08 16,0z</x:String>
   <Style x:Name="RevealButtonStyle" TargetType="Button">
+    <Setter Property="Height" Value="44" />
+    <Setter Property="Width" Value="44" />
+    <Setter Property="CornerRadius" Value="22" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -5808,7 +5812,11 @@
               <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="Normal" />
                 <VisualState x:Name="PointerOver" />
-                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="GlyphElement" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.8" />
+                  </Storyboard>
+                </VisualState>
                 <VisualState x:Name="Disabled">
                   <VisualState.Setters>
                     <Setter Target="ButtonLayoutGrid.Opacity" Value="0" />
@@ -5816,7 +5824,8 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Path x:Name="GlyphElement" Data="{StaticResource RevealGlyphPathData}" Fill="{StaticResource TextBoxIconColorBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="18" AutomationProperties.AccessibilityView="Raw" ios:Margin="0,2,0,0" />
+            <Path x:Name="GlyphElement" Data="{StaticResource RevealGlyphPathData}" Fill="{StaticResource TextBoxIconColorBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="16" Height="16" AutomationProperties.AccessibilityView="Raw" />
+            <um:Ripple Feedback="{StaticResource MaterialPrimaryBrush}" FeedbackOpacity="{StaticResource MaterialPressedOpacity}" CornerRadius="{TemplateBinding CornerRadius}" AutomationProperties.AccessibilityView="Raw" />
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -5829,8 +5838,9 @@
     <Setter Property="BorderBrush" Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="Padding" Value="12,4,8,4" />
-    <Setter Property="MinHeight" Value="50" />
+    <macos:Setter Property="Padding" Value="0,4" />
+    <not_macos:Setter Property="Padding" Value="0,12" />
+    <Setter Property="Height" Value="50" />
     <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
     <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
     <Setter Property="Template">
@@ -5844,101 +5854,10 @@
                 <VisualState x:Name="Pressed" />
                 <VisualState x:Name="Disabled">
                   <VisualState.Setters>
-                    <Setter Target="ContentElement.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-                    <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
-                  </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="Focused">
-                  <VisualState.Setters>
-                    <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource TextBoxLabelFocusColorBrush}" />
-                  </VisualState.Setters>
-                  <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleX" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="1" />
-                  </Storyboard>
-                </VisualState>
-              </VisualStateGroup>
-              <VisualStateGroup x:Name="ButtonStates">
-                <VisualState x:Name="ButtonVisible">
-                  <VisualState.Setters>
-                    <Setter Target="RevealButton.Visibility" Value="Visible" />
-                  </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="ButtonCollapsed" />
-              </VisualStateGroup>
-              <VisualStateGroup x:Name="HeaderStates">
-                <VisualState x:Name="NotEmpty">
-                  <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="Transform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="-11" />
-                    <DoubleAnimation Storyboard.TargetName="ContentTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="5" />
-                    <DoubleAnimation Storyboard.TargetName="Transform" Storyboard.TargetProperty="ScaleX" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
-                    <DoubleAnimation Storyboard.TargetName="Transform" Storyboard.TargetProperty="ScaleY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
-                  </Storyboard>
-                  <VisualState.StateTriggers>
-                    <StateTrigger IsActive="{Binding Password, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
-                  </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="Empty">
-                  <VisualState.StateTriggers>
-                    <StateTrigger IsActive="{Binding Password, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
-                  </VisualState.StateTriggers>
-                </VisualState>
-              </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-            <Grid Margin="{TemplateBinding Padding}">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-              </Grid.ColumnDefinitions>
-              <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="34" MaxWidth="34" MinWidth="25" Margin="0,0,8,0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-              <ScrollViewer x:Name="ContentElement" Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" ZoomMode="Disabled">
-                <ScrollViewer.RenderTransform>
-                  <CompositeTransform x:Name="ContentTransform" />
-                </ScrollViewer.RenderTransform>
-              </ScrollViewer>
-              <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{StaticResource TextBoxLabelDefaultColorBrush}" Text="{TemplateBinding PlaceholderText}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5">
-                <TextBlock.RenderTransform>
-                  <CompositeTransform x:Name="Transform" />
-                </TextBlock.RenderTransform>
-              </TextBlock>
-              <Button x:Name="RevealButton" Grid.Column="2" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" MinHeight="34" MinWidth="34" VerticalAlignment="Stretch" />
-            </Grid>
-            <Rectangle x:Name="NormalBorder" Height="{StaticResource TextBoxOutlinedStrokeWidth}" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" />
-            <Rectangle x:Name="FocusedBorder" Height="{StaticResource TextBoxFocusStrokeWidth}" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}" not_macos:RenderTransformOrigin="0.5,0.5" macos:RenderTransformOrigin="0.0,0.5">
-              <Rectangle.RenderTransform>
-                <ScaleTransform x:Name="Scale" ScaleX="0" />
-              </Rectangle.RenderTransform>
-            </Rectangle>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
-  <Style x:Key="MaterialOutlinedPasswordBoxStyle" TargetType="PasswordBox">
-    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
-    <Setter Property="Background" Value="Transparent" />
-    <Setter Property="Foreground" Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
-    <Setter Property="BorderBrush" Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
-    <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="CornerRadius" Value="4" />
-    <Setter Property="HorizontalContentAlignment" Value="Left" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="Padding" Value="12,4,8,4" />
-    <Setter Property="MinHeight" Value="50" />
-    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="PasswordBox">
-          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
-            <VisualStateManager.VisualStateGroups>
-              <VisualStateGroup x:Name="CommonStates">
-                <VisualState x:Name="Normal" />
-                <VisualState x:Name="PointerOver" />
-                <VisualState x:Name="Pressed" />
-                <VisualState x:Name="Disabled">
-                  <VisualState.Setters>
-                    <Setter Target="ContentElement.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+                    <Setter Target="Root.BorderBrush" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+                    <Setter Target="ContentElement.Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+                    <!-- In this case the opacity is not applied to the brush -->
+                    <Setter Target="ContentElement.Opacity" Value="{StaticResource MaterialLowOpacity}" />
                     <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
                   </VisualState.Setters>
                 </VisualState>
@@ -5952,18 +5871,26 @@
               <VisualStateGroup x:Name="ButtonStates">
                 <VisualState x:Name="ButtonVisible">
                   <VisualState.Setters>
-                    <Setter Target="RevealButton.Visibility" Value="Visible" />
+                    <Setter Target="RevealButton.Opacity" Value="1" />
                   </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="ButtonCollapsed" />
+                <VisualState x:Name="ButtonCollapsed">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RevealButton" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
               </VisualStateGroup>
               <VisualStateGroup x:Name="HeaderStates">
                 <VisualState x:Name="NotEmpty">
                   <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="Transform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="-11" />
-                    <DoubleAnimation Storyboard.TargetName="ContentTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="5" />
-                    <DoubleAnimation Storyboard.TargetName="Transform" Storyboard.TargetProperty="ScaleX" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
-                    <DoubleAnimation Storyboard.TargetName="Transform" Storyboard.TargetProperty="ScaleY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
+                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="-13" />
+                    <!-- ContentElement TranslateY value changing depending if there is a PlaceholderText or not -->
+                    <DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="ScaleX" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
+                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="ScaleY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
                   </Storyboard>
                   <VisualState.StateTriggers>
                     <StateTrigger IsActive="{Binding Password, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -5976,23 +5903,132 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="34" MaxWidth="34" MinWidth="25" Margin="0,0,8,0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-            <ScrollViewer x:Name="ContentElement" Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" ZoomMode="Disabled">
-              <ScrollViewer.RenderTransform>
-                <CompositeTransform x:Name="ContentTransform" />
-              </ScrollViewer.RenderTransform>
-            </ScrollViewer>
-            <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{StaticResource TextBoxLabelDefaultColorBrush}" Text="{TemplateBinding PlaceholderText}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5">
-              <TextBlock.RenderTransform>
-                <CompositeTransform x:Name="Transform" />
-              </TextBlock.RenderTransform>
-            </TextBlock>
-            <Button x:Name="RevealButton" Grid.Column="2" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" MinHeight="34" MinWidth="34" VerticalAlignment="Stretch" />
+            <Grid Margin="12,0,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <Border Margin="{TemplateBinding Padding}">
+                <ContentPresenter x:Name="IconPresenter" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="34" MaxWidth="34" MinWidth="25" HorizontalAlignment="Center" macos:VerticalAlignment="Center" not_macos:VerticalAlignment="Center" Margin="0,0,8,0" />
+              </Border>
+              <ScrollViewer x:Name="ContentElement" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" not_macos:VerticalAlignment="Center" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw" Margin="{TemplateBinding Padding}" Grid.Column="1">
+                <ScrollViewer.RenderTransform>
+                  <CompositeTransform x:Name="ContentElement_CompositeTransform" />
+                </ScrollViewer.RenderTransform>
+              </ScrollViewer>
+              <TextBlock x:Name="PlaceholderElement" Text="{TemplateBinding PlaceholderText}" Foreground="{StaticResource TextBoxLabelDefaultColorBrush}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" not_macos:VerticalAlignment="Center" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" RenderTransformOrigin="0,0.5" IsHitTestVisible="False" Grid.Column="1">
+                <TextBlock.RenderTransform>
+                  <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+                </TextBlock.RenderTransform>
+              </TextBlock>
+              <Button x:Name="RevealButton" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" Grid.Column="2" />
+            </Grid>
+            <Rectangle x:Name="NormalBorder" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" Height="{StaticResource TextBoxOutlinedStrokeWidth}" VerticalAlignment="Bottom" />
+            <Rectangle x:Name="FocusedBorder" Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}" Height="{StaticResource TextBoxFocusStrokeWidth}" VerticalAlignment="Bottom" not_macos:RenderTransformOrigin="0.5,0.5" macos:RenderTransformOrigin="0.0,0.5">
+              <Rectangle.RenderTransform>
+                <ScaleTransform x:Name="FocusedBorder_ScaleTransform" ScaleX="0" />
+              </Rectangle.RenderTransform>
+            </Rectangle>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="MaterialOutlinedPasswordBoxStyle" TargetType="PasswordBox">
+    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource TextBoxLabelDefaultColorBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource TextBoxOutlinedCorderRadius}" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="0,12" />
+    <Setter Property="Height" Value="50" />
+    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="PasswordBox">
+          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.BorderBrush" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+                    <Setter Target="ContentElement.Foreground" Value="{StaticResource MaterialOnSurfaceBrush}" />
+                    <!-- In this case the opacity is not applied to the brush -->
+                    <Setter Target="ContentElement.Opacity" Value="{StaticResource MaterialLowOpacity}" />
+                    <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="Root.BorderBrush" Value="{StaticResource TextBoxFilledFocusIndicatorColorBrush}" />
+                    <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource TextBoxLabelFocusColorBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="ButtonStates">
+                <VisualState x:Name="ButtonVisible">
+                  <VisualState.Setters>
+                    <Setter Target="RevealButton.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ButtonCollapsed">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RevealButton" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HeaderStates">
+                <VisualState x:Name="NotEmpty">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="-11" />
+                    <!-- ContentElement TranslateY value changing depending if there is a PlaceholderText or not -->
+                    <DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="ScaleX" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
+                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="ScaleY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
+                  </Storyboard>
+                  <VisualState.StateTriggers>
+                    <StateTrigger IsActive="{Binding Password, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+                  </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Empty">
+                  <VisualState.StateTriggers>
+                    <StateTrigger IsActive="{Binding Password, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+                  </VisualState.StateTriggers>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid Margin="12,0,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <Border Margin="{TemplateBinding Padding}">
+                <ContentPresenter x:Name="IconPresenter" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="34" MaxWidth="34" MinWidth="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,8,0" />
+              </Border>
+              <ScrollViewer x:Name="ContentElement" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalAlignment="Center" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw" Grid.Column="1" Margin="{TemplateBinding Padding}">
+                <ScrollViewer.RenderTransform>
+                  <CompositeTransform x:Name="ContentElement_CompositeTransform" />
+                </ScrollViewer.RenderTransform>
+              </ScrollViewer>
+              <TextBlock x:Name="PlaceholderElement" Text="{TemplateBinding PlaceholderText}" Foreground="{StaticResource TextBoxLabelDefaultColorBrush}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" not_macos:VerticalAlignment="Center" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" RenderTransformOrigin="0,0.5" IsHitTestVisible="False" Grid.Column="1">
+                <TextBlock.RenderTransform>
+                  <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+                </TextBlock.RenderTransform>
+              </TextBlock>
+              <Button x:Name="RevealButton" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" AutomationProperties.AccessibilityView="Raw" IsTabStop="False" Grid.Column="2" />
+            </Grid>
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -6581,9 +6617,12 @@
     <Setter Property="CharacterSpacing" Value="150" />
   </Style>
   <!--origin: Styles\Controls\TextBox.xaml-->
-  <um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY" NotNullOrEmptyValue="5" NullOrEmptyValue="0" />
+  <um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY" NotNullOrEmptyValue="7" NullOrEmptyValue="0" />
   <x:String x:Key="ClearGlyphPathData">M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z</x:String>
   <Style x:Name="DeleteButtonStyle" TargetType="Button">
+    <Setter Property="Height" Value="44" />
+    <Setter Property="Width" Value="44" />
+    <Setter Property="CornerRadius" Value="22" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -6592,7 +6631,11 @@
               <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="Normal" />
                 <VisualState x:Name="PointerOver" />
-                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="GlyphElement" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.8" />
+                  </Storyboard>
+                </VisualState>
                 <VisualState x:Name="Disabled">
                   <VisualState.Setters>
                     <Setter Target="ButtonLayoutGrid.Opacity" Value="0" />
@@ -6601,6 +6644,7 @@
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
             <Path x:Name="GlyphElement" Data="{StaticResource ClearGlyphPathData}" Fill="{StaticResource TextBoxIconColorBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="16" Height="16" AutomationProperties.AccessibilityView="Raw" />
+            <um:Ripple Feedback="{StaticResource MaterialPrimaryBrush}" FeedbackOpacity="{StaticResource MaterialPressedOpacity}" CornerRadius="{TemplateBinding CornerRadius}" AutomationProperties.AccessibilityView="Raw" />
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -6614,8 +6658,8 @@
     <Setter Property="BorderBrush" Value="{StaticResource TextBoxFilledIndicatorColorBrush}" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
-    <macos:Setter Property="Padding" Value="12,4" />
-    <not_macos:Setter Property="Padding" Value="12,16" />
+    <macos:Setter Property="Padding" Value="0,4" />
+    <not_macos:Setter Property="Padding" Value="0,16" />
     <Setter Property="MinHeight" Value="50" />
     <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
     <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
@@ -6649,15 +6693,22 @@
               <VisualStateGroup x:Name="ButtonStates">
                 <VisualState x:Name="ButtonVisible">
                   <VisualState.Setters>
-                    <Setter Target="DeleteButton.Visibility" Value="Visible" />
+                    <Setter Target="DeleteButton.Opacity" Value="1" />
                   </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="ButtonCollapsed" />
+                <VisualState x:Name="ButtonCollapsed">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DeleteButton" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
               </VisualStateGroup>
               <VisualStateGroup x:Name="HeaderStates">
                 <VisualState x:Name="NotEmpty">
                   <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="-11" />
+                    <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="-13" />
                     <!-- ContentElement TranslateY value changing depending if there is a PlaceholderText or not -->
                     <DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform" Storyboard.TargetProperty="TranslateY" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
                     <DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform" Storyboard.TargetProperty="ScaleX" Duration="{StaticResource MaterialTextBoxAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" To="0.7" />
@@ -6674,24 +6725,26 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid Margin="{TemplateBinding Padding}">
+            <Grid Margin="12,0,0,0">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
               </Grid.ColumnDefinitions>
-              <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" Margin="0,0,8,0" MaxHeight="34" MaxWidth="34" MinWidth="25" not_macos:VerticalAlignment="Top" macos:VerticalAlignment="Center" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-              <ScrollViewer x:Name="ContentElement" Grid.Column="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" not_macos:VerticalAlignment="Bottom" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
+              <Border Margin="{TemplateBinding Padding}">
+                <ContentPresenter x:Name="IconPresenter" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="34" MaxWidth="34" MinWidth="25" HorizontalAlignment="Center" macos:VerticalAlignment="Center" not_macos:VerticalAlignment="Top" Margin="0,0,8,0" />
+              </Border>
+              <ScrollViewer x:Name="ContentElement" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" not_macos:VerticalAlignment="Bottom" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw" Margin="{TemplateBinding Padding}" Grid.Column="1">
                 <ScrollViewer.RenderTransform>
                   <CompositeTransform x:Name="ContentElement_CompositeTransform" />
                 </ScrollViewer.RenderTransform>
               </ScrollViewer>
-              <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" not_macos:VerticalAlignment="Top" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+              <TextBlock x:Name="PlaceholderElement" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" not_macos:VerticalAlignment="Top" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" Grid.Column="1">
                 <TextBlock.RenderTransform>
                   <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
                 </TextBlock.RenderTransform>
               </TextBlock>
-              <Button x:Name="DeleteButton" Grid.Column="2" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource DeleteButtonStyle}" not_macos:VerticalAlignment="Bottom" macos:VerticalAlignment="Stretch" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" />
+              <Button x:Name="DeleteButton" Style="{StaticResource DeleteButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" Grid.Column="2" />
             </Grid>
             <Rectangle x:Name="NormalBorder" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" Height="{StaticResource TextBoxOutlinedStrokeWidth}" VerticalAlignment="Bottom" />
             <Rectangle x:Name="FocusedBorder" Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}" Height="{StaticResource TextBoxFocusStrokeWidth}" VerticalAlignment="Bottom" not_macos:RenderTransformOrigin="0.5,0.5" macos:RenderTransformOrigin="0.0,0.5">
@@ -6714,14 +6767,14 @@
     <Setter Property="CornerRadius" Value="{StaticResource TextBoxOutlinedCorderRadius}" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="Padding" Value="12,4,8,4" />
+    <Setter Property="Padding" Value="0,16" />
     <Setter Property="MinHeight" Value="50" />
     <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
     <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="TextBox">
-          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
             <VisualStateManager.VisualStateGroups>
               <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="Normal" />
@@ -6746,10 +6799,17 @@
               <VisualStateGroup x:Name="ButtonStates">
                 <VisualState x:Name="ButtonVisible">
                   <VisualState.Setters>
-                    <Setter Target="DeleteButton.Visibility" Value="Visible" />
+                    <Setter Target="DeleteButton.Opacity" Value="1" />
                   </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="ButtonCollapsed" />
+                <VisualState x:Name="ButtonCollapsed">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DeleteButton" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
               </VisualStateGroup>
               <VisualStateGroup x:Name="HeaderStates">
                 <VisualState x:Name="NotEmpty">
@@ -6771,23 +6831,27 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" MaxHeight="34" MaxWidth="34" MinWidth="25" Margin="0,0,8,0" VerticalAlignment="Center" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-            <ScrollViewer x:Name="ContentElement" Grid.Column="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
-              <ScrollViewer.RenderTransform>
-                <CompositeTransform x:Name="ContentElement_CompositeTransform" />
-              </ScrollViewer.RenderTransform>
-            </ScrollViewer>
-            <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-              <TextBlock.RenderTransform>
-                <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
-              </TextBlock.RenderTransform>
-            </TextBlock>
-            <Button x:Name="DeleteButton" Grid.Column="2" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource DeleteButtonStyle}" VerticalAlignment="Stretch" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" />
+            <Grid Margin="12,0,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <Border Margin="{TemplateBinding Padding}">
+                <ContentPresenter x:Name="IconPresenter" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MaxHeight="34" MaxWidth="34" MinWidth="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,8,0" />
+              </Border>
+              <ScrollViewer x:Name="ContentElement" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalAlignment="Bottom" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw" Grid.Column="1" Margin="{TemplateBinding Padding}">
+                <ScrollViewer.RenderTransform>
+                  <CompositeTransform x:Name="ContentElement_CompositeTransform" />
+                </ScrollViewer.RenderTransform>
+              </ScrollViewer>
+              <TextBlock x:Name="PlaceholderElement" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" VerticalAlignment="Top" Margin="{TemplateBinding Padding}" Grid.Column="1">
+                <TextBlock.RenderTransform>
+                  <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+                </TextBlock.RenderTransform>
+              </TextBlock>
+              <Button x:Name="DeleteButton" Style="{StaticResource DeleteButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" AutomationProperties.AccessibilityView="Raw" IsTabStop="False" Grid.Column="2" />
+            </Grid>
           </Grid>
         </ControlTemplate>
       </Setter.Value>
