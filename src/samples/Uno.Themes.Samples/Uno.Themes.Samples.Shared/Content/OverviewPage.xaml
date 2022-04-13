@@ -124,6 +124,75 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.MaterialTemplate>
+		<sample:SamplePageLayout.M3MaterialTemplate>
+			<DataTemplate>
+				<StackPanel>
+
+					<!--  TextBox  -->
+					<sample:OverviewSampleView SamplePageType="samples:TextBoxSamplePage">
+						<StackPanel Spacing="8">
+
+							<TextBox AutomationProperties.AutomationId="M3MaterialFilledTextBox"
+									 PlaceholderText="Filled"
+									 Style="{StaticResource M3MaterialFilledTextBoxStyle}" />
+
+							<TextBox AutomationProperties.AutomationId="M3MaterialFilledIconTextBox"
+									 PlaceholderText="Filled with icon"
+									 Style="{StaticResource M3MaterialFilledTextBoxStyle}">
+								<um:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.Icon>
+							</TextBox>
+
+							<TextBox AutomationProperties.AutomationId="M3MaterialOutlinedTextBox"
+									 PlaceholderText="Outlined"
+									 Style="{StaticResource M3MaterialOutlinedTextBoxStyle}" />
+
+							<TextBox AutomationProperties.AutomationId="M3MaterialOutlinedWithIconTextBox"
+									 PlaceholderText="Outlined with icon"
+									 Style="{StaticResource M3MaterialOutlinedTextBoxStyle}">
+								<um:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.Icon>
+							</TextBox>
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  CheckBox  -->
+					<sample:OverviewSampleView SamplePageType="samples:CheckBoxSamplePage">
+						<StackPanel Spacing="8">
+
+							<CheckBox Content="Checked"
+									  IsChecked="True"
+									  Style="{StaticResource M3MaterialCheckBoxStyle}" />
+
+							<CheckBox Content="Unchecked"
+									  IsChecked="False"
+									  Style="{StaticResource M3MaterialCheckBoxStyle}" />
+
+							<CheckBox Content="Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsThreeState="True"
+									  Style="{StaticResource M3MaterialCheckBoxStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  RadioButton  -->
+					<sample:OverviewSampleView SamplePageType="samples:RadioButtonSamplePage">
+						<StackPanel Spacing="8">
+
+							<RadioButton Content="Checked"
+										 IsChecked="True"
+										 Style="{StaticResource M3MaterialRadioButtonStyle}" />
+
+							<RadioButton Content="Unchecked"
+										 Style="{StaticResource M3MaterialRadioButtonStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.M3MaterialTemplate>
 
 		<sample:SamplePageLayout.CupertinoTemplate>
 			<DataTemplate>
