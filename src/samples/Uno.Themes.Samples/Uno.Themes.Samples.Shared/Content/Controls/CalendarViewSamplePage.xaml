@@ -25,6 +25,20 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="M3Material_CalendarView">
+							<CalendarView SelectionMode="Multiple"
+										  Style="{StaticResource M3MaterialCalendarViewStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="M3Material_CalendarDatePicker">
+							<CalendarDatePicker Header="Select"
+												Style="{StaticResource M3MaterialCalendarDatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
