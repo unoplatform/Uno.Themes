@@ -17,7 +17,7 @@ namespace Uno.Material
 	{
 		public MaterialResources()
 		{
-			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.xaml");
+			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v1.xaml");
 		}
 
 		public bool WithImplicitStyles { set => ExportImplicitStyles(value); }
@@ -25,50 +25,50 @@ namespace Uno.Material
 		private string[] GetImplicitStyles()
 		{
 			return new[] {
-				// "ms-appx:///Uno.Material/Styles/Controls/Button.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/Button.xaml",
 				"MaterialContainedButtonStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/CalendarView.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/CalendarView.xaml",
 				"MaterialCalendarViewStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/CalendarDatePicker.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/CalendarDatePicker.xaml",
 				"MaterialCalendarDatePickerStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/CheckBox.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/CheckBox.xaml",
 				"MaterialCheckBoxStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/ComboBox.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/ComboBox.xaml",
 				"MaterialComboBoxStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/CommandBar.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/CommandBar.xaml",
 				"MaterialCommandBarStyle", "MaterialAppBarButton",
-				// "ms-appx:///Uno.Material/Styles/Controls/DatePicker.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/DatePicker.xaml",
 				"MaterialDatePickerStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/FloatingActionButton.xaml", // no implicit style, as the target-type is Button
-				// "ms-appx:///Uno.Material/Styles/Controls/Flyout.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/FloatingActionButton.xaml", // no implicit style, as the target-type is Button
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/Flyout.xaml",
 				"MaterialFlyoutPresenterStyle", "MaterialMenuFlyoutPresenterStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/HyperlinkButton.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/HyperlinkButton.xaml",
 				"MaterialHyperlinkButtonStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/InfoBar.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/InfoBar.xaml",
 				"MaterialInfoBarStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/ListView.xaml", // TODO: add implicit styles once tested: MaterialListViewStyle, MaterialListViewItemStyle
-				// "ms-appx:///Uno.Material/Styles/Controls/NavigationView/NavigationView_MUX.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/ListView.xaml", // TODO: add implicit styles once tested: MaterialListViewStyle, MaterialListViewItemStyle
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/NavigationView/NavigationView_MUX.xaml",
 				"MaterialNavigationViewStyle", "MaterialNavigationViewItemStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/PasswordBox.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/PasswordBox.xaml",
 				"MaterialFilledPasswordBoxStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/ProgressBar.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/ProgressBar.xaml",
 				"MaterialProgressBarStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/RadioButton.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/RadioButton.xaml",
 				"MaterialRadioButtonStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/RatingControl.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/RatingControl.xaml",
 				"MaterialRatingControlStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/Ripple.xaml", // default implicit: (not-keyed)
-				// "ms-appx:///Uno.Material/Styles/Controls/Slider.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/Ripple.xaml", // default implicit: (not-keyed)
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/Slider.xaml",
 				"MaterialSliderStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/TextBox.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/TextBox.xaml",
 				"MaterialFilledTextBoxStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/TextBlock.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/TextBlock.xaml",
 				"MaterialBody2",
-				// "ms-appx:///Uno.Material/Styles/Controls/TimePicker.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/TimePicker.xaml",
 				"MaterialTimePickerStyle",
-				// "ms-appx:///Uno.Material/Styles/Controls/ToggleButton.xaml",
+				// "ms-appx:///Uno.Material/Styles/Controls/v1/ToggleButton.xaml",
 				"MaterialTextToggleButtonStyle",
-				// $"ms-appx:///Uno.Material/Styles/Controls/ToggleSwitch{MobileSuffix}.xaml",
+				// $"ms-appx:///Uno.Material/Styles/Controls/v1/ToggleSwitch{MobileSuffix}.xaml",
 				"MaterialToggleSwitchStyle",
 			};
 		}

@@ -32,7 +32,7 @@ namespace Uno.Material
 
 		public MaterialFonts()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Fonts.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") });
 
 			if (!string.IsNullOrWhiteSpace(FontOverrideSource))
 			{

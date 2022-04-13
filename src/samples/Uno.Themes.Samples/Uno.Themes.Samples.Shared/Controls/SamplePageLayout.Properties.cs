@@ -100,6 +100,22 @@ namespace Uno.Themes.Samples
 
 		#endregion
 
+		#region Property: M3MaterialTemplate
+
+		public static DependencyProperty M3MaterialTemplateProperty { get; } = DependencyProperty.Register(
+			nameof(M3MaterialTemplate),
+			typeof(DataTemplate),
+			typeof(SamplePageLayout),
+			new PropertyMetadata(default));
+
+		public DataTemplate M3MaterialTemplate
+		{
+			get => (DataTemplate)GetValue(M3MaterialTemplateProperty);
+			set => SetValue(M3MaterialTemplateProperty, value);
+		}
+
+		#endregion
+
 		#region Property: HeaderTemplate
 		/// <summary>
 		/// The Header is the part above the design tabs (Material|Fluent|Native).
