@@ -17,19 +17,23 @@
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
 
-	<StaticResource x:Key="MaterialCheckBoxBorderBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
+	<SolidColorBrush x:Key="M3MaterialCheckBoxBorderBrush"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="{StaticResource MediumOpacity}" />
+	<SolidColorBrush x:Key="M3MaterialCheckBoxPressedBrush"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="{StaticResource LowOpacity}" />
 
-	<Style x:Key="MaterialCheckBoxStyle"
+	<Style x:Key="M3MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
+				Value="{StaticResource OnPrimaryBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialCheckBoxBorderBrush}" />
+				Value="{StaticResource M3MaterialCheckBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
 				Value="2" />
 		<Setter Property="Padding"
@@ -72,14 +76,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -92,14 +96,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}" />
+																 From="{StaticResource LowOpacity}" />
 										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
@@ -114,9 +118,9 @@
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -185,9 +189,9 @@
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity"
 												Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity"
@@ -262,9 +266,9 @@
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity"
 												Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity"
@@ -324,14 +328,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -355,14 +359,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -387,14 +391,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -419,14 +423,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -437,7 +441,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
-												Value="{StaticResource MaterialFocusedOpacity}" />
+												Value="{StaticResource FocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -468,7 +472,7 @@
 								 Stretch="Uniform"
 								 Width="{StaticResource FocusAreaSize}"
 								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource MaterialOnSurfaceLowBrush}"
+								 Fill="{StaticResource M3MaterialCheckBoxPressedBrush}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -516,7 +520,7 @@
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
-										  Foreground="{StaticResource MaterialOnBackgroundBrush}"
+										  Foreground="{StaticResource OnBackgroundBrush}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -529,12 +533,12 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialSecondaryCheckBoxStyle"
+	<Style x:Key="M3MaterialSecondaryCheckBoxStyle"
 		   TargetType="CheckBox"
-		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
+		   BasedOn="{StaticResource M3MaterialCheckBoxStyle}">
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSecondaryBrush}" />
+				Value="{StaticResource SecondaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSecondaryBrush}" />
+				Value="{StaticResource OnSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>
