@@ -27,12 +27,22 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
-			<sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<Grid BorderBrush="{StaticResource OnSurfaceBrush}"
+							  BorderThickness="1"
+							  android:Margin="12"
+							  ios:Margin="12"
+							  Padding="12">
+
+							<Button Content="Show Sample"
+									Click="ShowM3SampleInNestedFrame" />
+
+						</Grid>
 					</StackPanel>
 				</DataTemplate>
-			</sample:SamplePageLayout.CupertinoTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
