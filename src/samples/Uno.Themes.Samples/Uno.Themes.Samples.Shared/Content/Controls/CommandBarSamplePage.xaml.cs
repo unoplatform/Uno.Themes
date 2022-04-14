@@ -29,5 +29,10 @@ namespace Uno.Themes.Samples.Content.Controls
 		{
 			Shell.GetForCurrentView()?.ShowNestedSample<CommandBarSample_NestedPage1>(clearStack: true);
 		}
+
+		private void ShowM3SampleInNestedFrame(object sender, RoutedEventArgs e)
+		{
+			Shell.GetForCurrentView()?.ShowNestedSample<M3MaterialCommandBarSample_NestedPage1>(clearStack: true);
+		}
 	}
 }
