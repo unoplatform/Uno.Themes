@@ -127,6 +127,31 @@
 		<sample:SamplePageLayout.M3MaterialTemplate>
 			<DataTemplate>
 				<StackPanel>
+					<!--  Button  -->
+					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
+						<StackPanel Spacing="8">
+
+							<Button AutomationProperties.AutomationId="M3MaterialElevatedButton"
+									Content="Elevated Button"
+									Style="{StaticResource M3MaterialElevatedButtonStyle}" />
+
+							<Button AutomationProperties.AutomationId="M3MaterialFilledButton"
+									Content="Filled Button"
+									Style="{StaticResource M3MaterialFilledButtonStyle}" />
+
+							<Button AutomationProperties.AutomationId="M3MaterialFilledTonalButton"
+									Content="Tonal Button"
+									Style="{StaticResource M3MaterialFilledTonalButtonStyle}" />
+
+							<Button AutomationProperties.AutomationId="M3MaterialOutlinedButton"
+									Content="Outlined Button"
+									Style="{StaticResource M3MaterialOutlinedButtonStyle}" />
+
+							<Button AutomationProperties.AutomationId="M3MaterialTextButton"
+									Content="Text Button"
+									Style="{StaticResource M3MaterialTextButtonStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
 
 					<!--  TextBox  -->
 					<sample:OverviewSampleView SamplePageType="samples:TextBoxSamplePage">

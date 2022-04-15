@@ -1,8 +1,743 @@
-<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="ios macos d not_win android" xmlns:ios="http://uno.ui/ios" xmlns:macos="http://uno.ui/macos" xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:um="using:Uno.Material" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:not_win="http://uno.ui/not_win" xmlns:android="http://uno.ui/android" xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d not_win android ios not_ios wasm xamarin macos" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:um="using:Uno.Material" xmlns:toolkit="using:Uno.UI.Toolkit" xmlns:not_win="http://uno.ui/not_win" xmlns:android="http://uno.ui/android" xmlns:ios="http://uno.ui/ios" xmlns:not_ios="http://uno.ui/not_ios" xmlns:wasm="http://uno.ui/wasm" xmlns:xamarin="http://uno.ui/xamarin" xmlns:macos="http://uno.ui/macos" xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
   <ResourceDictionary.MergedDictionaries>
     <um:MaterialFonts />
     <um:MaterialColorsV2 />
   </ResourceDictionary.MergedDictionaries>
+  <!--origin: Styles\Controls\v2\Button.xaml-->
+  <um:FromNullToValueConverter x:Key="MaterialNullToTextButtonMarginConverter" NotNullValue="0,0,2,0" NullValue="0" />
+  <Thickness x:Key="M3MaterialButtonMinHeight">40</Thickness>
+  <Thickness x:Key="M3MaterialButtonMinWidth">48</Thickness>
+  <Thickness x:Key="M3MaterialButtonPadding">16,0</Thickness>
+  <Thickness x:Key="M3MaterialTextButtonPadding">12,0</Thickness>
+  <CornerRadius x:Key="M3MaterialButtonCornerRadius">20</CornerRadius>
+  <x:Double x:Key="M3MaterialButtonFontSize">14</x:Double>
+  <x:Double x:Key="M3MaterialButtonCharacterSpacing">7.143</x:Double>
+  <Style x:Key="M3MaterialElevatedButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+    <!--Start: Label Large Typo-->
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialButtonFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource M3MaterialButtonCharacterSpacing}" />
+    <!--End: Label Large Typo-->
+    <Setter Property="MinHeight" Value="{StaticResource M3MaterialButtonMinHeight}" />
+    <Setter Property="MinWidth" Value="{StaticResource M3MaterialButtonMinWidth}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialButtonPadding}" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialButtonCornerRadius}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,0,1" Elevation="1" CornerRadius="{TemplateBinding CornerRadius}" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryHoverBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryPressedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                    <Setter Target="ElevatedView.Margin" Value="0" />
+                    <Setter Target="ElevatedView.Elevation" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+              <Border x:Name="StateLayer" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" />
+              <um:Ripple x:Name="Ripple" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}" AutomationProperties.AccessibilityView="Raw" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                <um:Ripple.Content>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MinWidth="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                    <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Margin="8,0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" CharacterSpacing="{TemplateBinding CharacterSpacing}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                  </Grid>
+                </um:Ripple.Content>
+              </um:Ripple>
+            </Grid>
+          </toolkit:ElevatedView>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialFilledButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
+    <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+    <!--Start: Label Large Typo-->
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialButtonFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource M3MaterialButtonCharacterSpacing}" />
+    <!--End: Label Large Typo-->
+    <Setter Property="MinHeight" Value="{StaticResource M3MaterialButtonMinHeight}" />
+    <Setter Property="MinWidth" Value="{StaticResource M3MaterialButtonMinWidth}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialButtonPadding}" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialButtonCornerRadius}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <toolkit:ElevatedView x:Name="ElevatedView" Margin="0" Elevation="0" CornerRadius="{TemplateBinding CornerRadius}" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnPrimaryHoverBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnPrimaryPressedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnPrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnPrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+              <Border x:Name="StateLayer" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" />
+              <um:Ripple x:Name="Ripple" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}" AutomationProperties.AccessibilityView="Raw" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                <um:Ripple.Content>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MinWidth="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                    <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Margin="8,0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" CharacterSpacing="{TemplateBinding CharacterSpacing}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                  </Grid>
+                </um:Ripple.Content>
+              </um:Ripple>
+            </Grid>
+          </toolkit:ElevatedView>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialFilledTonalButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource OnSecondaryContainerBrush}" />
+    <Setter Property="Background" Value="{StaticResource SecondaryContainerBrush}" />
+    <!--Start: Label Large Typo-->
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialButtonFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource M3MaterialButtonCharacterSpacing}" />
+    <!--End: Label Large Typo-->
+    <Setter Property="MinHeight" Value="{StaticResource M3MaterialButtonMinHeight}" />
+    <Setter Property="MinWidth" Value="{StaticResource M3MaterialButtonMinWidth}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialButtonPadding}" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialButtonCornerRadius}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <toolkit:ElevatedView x:Name="ElevatedView" Margin="0" Elevation="0" CornerRadius="{TemplateBinding CornerRadius}" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnSecondaryContainerHoverBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnSecondaryContainerPressedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnSecondaryContainerFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource OnSecondaryContainerFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+              <Border x:Name="StateLayer" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" />
+              <um:Ripple x:Name="Ripple" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}" AutomationProperties.AccessibilityView="Raw" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                <um:Ripple.Content>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MinWidth="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                    <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Margin="8,0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" CharacterSpacing="{TemplateBinding CharacterSpacing}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                  </Grid>
+                </um:Ripple.Content>
+              </um:Ripple>
+            </Grid>
+          </toolkit:ElevatedView>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialOutlinedButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <!--Start: Label Large Typo-->
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialButtonFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource M3MaterialButtonCharacterSpacing}" />
+    <!--End: Label Large Typo-->
+    <Setter Property="MinHeight" Value="{StaticResource M3MaterialButtonMinHeight}" />
+    <Setter Property="MinWidth" Value="{StaticResource M3MaterialButtonMinWidth}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource OutlineBrush}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialButtonPadding}" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialButtonCornerRadius}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryHoverBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryPressedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                    <Setter Target="Root.BorderThickness" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="StateLayer" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" />
+            <um:Ripple x:Name="Ripple" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}" AutomationProperties.AccessibilityView="Raw" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+              <um:Ripple.Content>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MinWidth="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                  <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Margin="8,0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" CharacterSpacing="{TemplateBinding CharacterSpacing}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Grid>
+              </um:Ripple.Content>
+            </um:Ripple>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialTextButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <!--Start: Label Large Typo-->
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialButtonFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource M3MaterialButtonCharacterSpacing}" />
+    <!--End: Label Large Typo-->
+    <Setter Property="MinHeight" Value="{StaticResource M3MaterialButtonMinHeight}" />
+    <Setter Property="MinWidth" Value="{StaticResource M3MaterialButtonMinWidth}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialTextButtonPadding}" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialButtonCornerRadius}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryHoverBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryPressedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnSurfaceDisabledBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused">
+                  <VisualState.Setters>
+                    <Setter Target="StateLayer.Background" Value="{StaticResource PrimaryFocusedBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="StateLayer" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" />
+            <um:Ripple x:Name="Ripple" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}" AutomationProperties.AccessibilityView="Raw" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+              <um:Ripple.Content>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" MinWidth="18" Margin="0,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                  <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Margin="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTextButtonMarginConverter}, FallbackValue=0, TargetNullValue=0}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" CharacterSpacing="{TemplateBinding CharacterSpacing}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Grid>
+              </um:Ripple.Content>
+            </um:Ripple>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\v2\CheckBox.xaml-->
+  <x:String x:Key="CheckBoxHyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
+  <x:String x:Key="CheckBoxCheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+  <GridLength x:Key="CheckAreaLength">40</GridLength>
+  <x:Double x:Key="FocusAreaSize">40</x:Double>
+  <x:Double x:Key="CheckAreaSize">18</x:Double>
+  <CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
+  <SolidColorBrush x:Key="M3MaterialCheckBoxBorderBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+  <SolidColorBrush x:Key="M3MaterialCheckBoxPressedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+  <Style x:Key="M3MaterialCheckBoxStyle" TargetType="CheckBox">
+    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+    <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource M3MaterialCheckBoxBorderBrush}" />
+    <Setter Property="BorderThickness" Value="2" />
+    <Setter Property="Padding" Value="8,0,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="MinHeight" Value="{StaticResource CheckAreaSize}" />
+    <Setter Property="UseSystemFocusVisuals" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CheckBox">
+          <Grid x:Name="Root" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled" />
+                <VisualStateGroup.Transitions>
+                  <VisualTransition From="Normal" To="Pressed">
+                    <Storyboard>
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" To="0" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="PointerOver" To="Pressed">
+                    <Storyboard>
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" />
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="CombinedStates">
+                <VisualState x:Name="UncheckedNormal" />
+                <VisualState x:Name="UncheckedPointerOver" />
+                <VisualState x:Name="UncheckedPressed" />
+                <VisualState x:Name="UncheckedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource MediumOpacity}" />
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource MediumOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedNormal">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPressed">
+                  <!-- https://github.com/unoplatform/uno/issues/5099 -->
+                  <xamarin:VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </xamarin:VisualState.Setters>
+                  <win:Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="BackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" To="0">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </win:Storyboard>
+                </VisualState>
+                <VisualState x:Name="CheckedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource MediumOpacity}" />
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource MediumOpacity}" />
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="IndeterminateNormal">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="IndeterminatePointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="IndeterminatePressed">
+                  <!-- https://github.com/unoplatform/uno/issues/5099 -->
+                  <xamarin:VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </xamarin:VisualState.Setters>
+                  <win:Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="BackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" To="0">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="HyphenGlyph" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </win:Storyboard>
+                </VisualState>
+                <VisualState x:Name="IndeterminateDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource MediumOpacity}" />
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource MediumOpacity}" />
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualStateGroup.Transitions>
+                  <VisualTransition From="UncheckedNormal" To="UncheckedPressed">
+                    <Storyboard>
+                      <not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </not_ios:DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="UncheckedPointerOver" To="UncheckedPressed">
+                    <Storyboard>
+                      <not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </not_ios:DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="CheckedNormal" To="CheckedPressed">
+                    <Storyboard>
+                      <not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </not_ios:DoubleAnimationUsingKeyFrames>
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" To="0" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="CheckedPointerOver" To="CheckedPressed">
+                    <Storyboard>
+                      <not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </not_ios:DoubleAnimationUsingKeyFrames>
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" To="0" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="IndeterminateNormal" To="IndeterminatePressed">
+                    <Storyboard>
+                      <not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </not_ios:DoubleAnimationUsingKeyFrames>
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" To="0" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="IndeterminatePointerOver" To="IndeterminatePressed">
+                    <Storyboard>
+                      <not_ios:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </not_ios:DoubleAnimationUsingKeyFrames>
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" To="0" />
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusRing.Opacity" Value="{StaticResource FocusedOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="{StaticResource CheckAreaLength}" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Ellipse x:Name="FocusRing" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="{StaticResource FocusAreaSize}" Height="{StaticResource FocusAreaSize}" Fill="{TemplateBinding Background}" IsHitTestVisible="False" Opacity="0" />
+            <Ellipse x:Name="PressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="{StaticResource FocusAreaSize}" Height="{StaticResource FocusAreaSize}" Fill="{StaticResource M3MaterialCheckBoxPressedBrush}" IsHitTestVisible="False" Opacity="0" />
+            <Grid x:Name="CheckBoxContainer" Height="{StaticResource CheckAreaSize}" Width="{StaticResource CheckAreaSize}">
+              <Grid x:Name="BackgroundBorder" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" />
+              <Grid x:Name="CheckedBackgroundBorder" Background="{TemplateBinding Background}" Opacity="0" CornerRadius="2" />
+              <Path x:Name="HyphenGlyph" Data="{StaticResource CheckBoxHyphenGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="4" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
+              <Path x:Name="CheckGlyph" Data="{StaticResource CheckBoxCheckGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="12" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
+            </Grid>
+            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Foreground="{StaticResource OnBackgroundBrush}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="1" AutomationProperties.AccessibilityView="Raw" TextWrapping="Wrap" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialSecondaryCheckBoxStyle" TargetType="CheckBox" BasedOn="{StaticResource M3MaterialCheckBoxStyle}">
+    <Setter Property="Background" Value="{StaticResource SecondaryBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource OnSecondaryBrush}" />
+  </Style>
+  <!--origin: Styles\Controls\v2\CommandBar.xaml-->
+  <x:Double x:Key="M3MaterialCommandBarElevation">4</x:Double>
+  <x:Double x:Key="M3MaterialCommandBarHeight">48</x:Double>
+  <Style x:Key="M3MaterialAppBarButton" TargetType="AppBarButton">
+    <Setter Property="Height" Value="{StaticResource M3MaterialCommandBarHeight}" />
+    <Setter Property="Width" Value="{StaticResource M3MaterialCommandBarHeight}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="IsCompact" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="AppBarButton">
+          <um:Ripple Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
+            <Viewbox x:Name="ContentViewbox" Height="{ThemeResource AppBarButtonContentHeight}" Width="{ThemeResource AppBarButtonContentHeight}" Margin="0,12" HorizontalAlignment="Stretch" AutomationProperties.AccessibilityView="Raw">
+              <ContentPresenter x:Name="Content" Content="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}" />
+            </Viewbox>
+          </um:Ripple>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <ios:ControlTemplate x:Key="NativeM3CommandBarTemplate" TargetType="CommandBar">
+    <!-- We use BorderBrush instead of Background to ensure that semi-transparent background of Grid and NativeCommandBarPresenter don't add up -->
+    <Border BorderBrush="{TemplateBinding Background}" BorderThickness="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+      <NativeCommandBarPresenter Height="44" />
+    </Border>
+  </ios:ControlTemplate>
+  <android:ControlTemplate x:Key="NativeM3CommandBarTemplate" TargetType="CommandBar">
+    <NativeCommandBarPresenter />
+  </android:ControlTemplate>
+  <ControlTemplate x:Key="XamlM3MaterialCommandBarTemplate" TargetType="CommandBar">
+    <!-- Simplified CommandBar template that adds support for Uno.UI.CommandBarExtensions.NavigationCommand on Windows. -->
+    <Grid x:Name="LayoutRoot" win:Height="48" Background="{TemplateBinding Background}">
+      <Grid x:Name="ContentRoot" Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}" Opacity="{TemplateBinding Opacity}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <!-- note: NavigationCommand is an AppBarButton, not ICommand -->
+        <ContentControl Content="{Binding (toolkit:CommandBarExtensions.NavigationCommand), RelativeSource={RelativeSource TemplatedParent}}" Foreground="{TemplateBinding Foreground}" Height="{StaticResource M3MaterialCommandBarHeight}" Width="{StaticResource M3MaterialCommandBarHeight}" IsTabStop="False" />
+        <!--
+					Use a ContentControl rather than a ContentPresenter so that IsEnabled can be set to false
+					in the Minimal/HiddenClosed states to remove it from being a tab-stop candidate.
+				-->
+        <ContentControl x:Name="ContentControl" Grid.Column="1" Margin="16,0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" IsTabStop="False" />
+        <ItemsControl x:Name="PrimaryItemsControl" HorizontalAlignment="Right" MinHeight="{ThemeResource AppBarThemeCompactHeight}" IsTabStop="False" Grid.Column="2">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </Grid>
+    </Grid>
+  </ControlTemplate>
+  <Style x:Key="BaseM3MaterialCommandBarStyle" TargetType="CommandBar">
+    <!-- Setting content to empty to avoid getting the datacontext -->
+    <Setter Property="Content" Value="" />
+    <Setter Property="ContentTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <TextBlock Text="{Binding}" Style="{StaticResource M3MaterialTitleLarge}" />
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+    <android:Setter Property="(toolkit:UIElementExtensions.Elevation)" Value="{StaticResource M3MaterialCommandBarElevation}" />
+    <Setter Property="Height" Value="{StaticResource M3MaterialCommandBarHeight}" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="OverflowButtonVisibility" Value="Collapsed" />
+    <Setter Property="IsDynamicOverflowEnabled" Value="False" />
+    <Setter Property="Template" Value="{StaticResource XamlM3MaterialCommandBarTemplate}" />
+  </Style>
+  <Style x:Key="M3MaterialCommandBarStyle" TargetType="CommandBar" BasedOn="{StaticResource BaseM3MaterialCommandBarStyle}">
+    <ios:Setter Property="Height" Value="NaN" />
+    <ios:Setter Property="Template" Value="{StaticResource NativeM3CommandBarTemplate}" />
+    <android:Setter Property="Template" Value="{StaticResource NativeM3CommandBarTemplate}" />
+  </Style>
   <!--origin: Styles\Controls\v2\PasswordBox.xaml-->
   <x:String x:Key="M3MaterialRevealGlyphPathData">M16,5.5999984C17.699951,5.5999984 19.099976,6.9999918 19.099976,8.6999893 19.099976,10.400001 17.699951,11.799994 16,11.799994 14.299988,11.799994 12.899963,10.400001 12.899963,8.6999893 12.899963,6.9999918 14.299988,5.5999984 16,5.5999984z M16,2.1999893C12.399963,2.1999893 9.5,5.0999984 9.5,8.6999893 9.5,12.299994 12.399963,15.199988 16,15.199988 19.599976,15.199988 22.5,12.299994 22.5,8.6999893 22.5,5.0999984 19.599976,2.1999893 16,2.1999893z M16,0C24.799988,5.2249334E-08 32,8.6999893 32,8.6999893 32,8.6999893 24.799988,17.400001 16,17.400001 7.1999512,17.400001 0,8.6999893 0,8.6999893 0,8.6999893 7.1999512,5.2249334E-08 16,0z</x:String>
   <SolidColorBrush x:Key="M3MaterialDisabledOutlinedPasswordBoxBorderBrush" Opacity="0.12" Color="{ThemeResource OnSurfaceColor}" />
@@ -206,6 +941,110 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
+  </Style>
+  <!--origin: Styles\Controls\v2\RadioButton.xaml-->
+  <GridLength x:Key="RadioCheckAreaLength">40</GridLength>
+  <x:Double x:Key="RadioFocusAreaSize">40</x:Double>
+  <x:Double x:Key="RadioCheckAreaSize">18</x:Double>
+  <x:Double x:Key="RadioBorderThickness">2</x:Double>
+  <SolidColorBrush x:Key="M3MaterialRadioButtonBorderBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+  <SolidColorBrush x:Key="M3MaterialRadioButtonPressedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+  <Style x:Key="M3MaterialRadioButtonStyle" TargetType="RadioButton">
+    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+    <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource OnBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource M3MaterialRadioButtonBorderBrush}" />
+    <Setter Property="Padding" Value="8,0,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="MinWidth" Value="120" />
+    <Setter Property="MinHeight" Value="{StaticResource RadioCheckAreaSize}" />
+    <Setter Property="UseSystemFocusVisuals" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RadioButton">
+          <Grid x:Name="RootGrid" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="{StaticResource MediumOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualStateGroup.Transitions>
+                  <VisualTransition From="Normal" To="Pressed">
+                    <Storyboard>
+                      <android:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0.5" To="0" />
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="0:0:0.15" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" To="0" />
+                      <wasm:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </wasm:DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="PointerOver" To="Pressed">
+                    <Storyboard>
+                      <android:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0.5" To="0" />
+                      <!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="0" To="{StaticResource LowOpacity}" />
+                      <ios:DoubleAnimation Storyboard.TargetName="PressRing" Storyboard.TargetProperty="Opacity" BeginTime="{StaticResource MaterialDelayedBeginTime}" Duration="{StaticResource MaterialAnimationDuration}" EasingFunction="{StaticResource MaterialEaseInOutFunction}" From="{StaticResource LowOpacity}" To="0" />
+                      <wasm:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PressRing">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                      </wasm:DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="CheckStates">
+                <VisualState x:Name="Checked">
+                  <VisualState.Setters>
+                    <Setter Target="CheckEllipse.Opacity" Value="1" />
+                    <Setter Target="OuterEllipse_Checked.Opacity" Value="1" />
+                    <Setter Target="OuterEllipse_Unchecked.Opacity" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unchecked" />
+                <VisualState x:Name="Indeterminate" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusRing.Opacity" Value="{StaticResource FocusedOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="{StaticResource RadioCheckAreaLength}" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Ellipse x:Name="FocusRing" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="{StaticResource RadioFocusAreaSize}" Height="{StaticResource RadioFocusAreaSize}" Fill="{TemplateBinding Background}" IsHitTestVisible="False" StrokeThickness="0" Opacity="0" />
+            <Ellipse x:Name="PressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="{StaticResource RadioFocusAreaSize}" Height="{StaticResource RadioFocusAreaSize}" Fill="{StaticResource M3MaterialRadioButtonPressedBrush}" IsHitTestVisible="False" Opacity="0" />
+            <Grid Height="{StaticResource RadioCheckAreaSize}" Width="{StaticResource RadioCheckAreaSize}">
+              <Ellipse x:Name="OuterEllipse_Checked" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" UseLayoutRounding="False" Stroke="{TemplateBinding Background}" StrokeThickness="{StaticResource RadioBorderThickness}" Opacity="0" />
+              <Ellipse x:Name="OuterEllipse_Unchecked" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" UseLayoutRounding="False" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{StaticResource RadioBorderThickness}" />
+              <Ellipse x:Name="CheckEllipse" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" UseLayoutRounding="False" Fill="{TemplateBinding Background}" Opacity="0" StrokeThickness="0" Margin="5" />
+            </Grid>
+            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" TextWrapping="Wrap" Grid.Column="1" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialSecondaryRadioButtonStyle" TargetType="RadioButton" BasedOn="{StaticResource M3MaterialRadioButtonStyle}">
+    <Setter Property="Background" Value="{StaticResource SecondaryBrush}" />
   </Style>
   <!--origin: Styles\Controls\v2\TextBlock.xaml-->
   <Style x:Key="M3MaterialBaseTextBlockStyle" TargetType="TextBlock">
