@@ -6,7 +6,10 @@
 	  xmlns:um="using:Uno.Material"
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:toolkit="using:Uno.UI.Toolkit">
-
+	<Page.Resources>
+		<x:String x:Key="FlyoutCloseGlyphPathData">M1.442037,0L16.002031,14.585751 30.588022,0.025996563 32.001024,1.4409965 17.414783,16.001002 31.97503,30.587006 30.560022,32 15.999268,17.413969 1.4130009,31.973999 0,30.558998 14.586494,15.998742 0.027028472,1.4140019z</x:String>
+	</Page.Resources>
+	
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
@@ -36,7 +39,7 @@
 																  Tag="{Binding ElementName=ShowFullScreenFlyoutButton}"
 																  Style="{StaticResource MaterialAppBarButton}">
 														<AppBarButton.Icon>
-															<PathIcon Data="{StaticResource CloseGlyphPathData}" />
+															<PathIcon Data="{StaticResource FlyoutCloseGlyphPathData}" />
 														</AppBarButton.Icon>
 													</AppBarButton>
 												</toolkit:CommandBarExtensions.NavigationCommand>
@@ -308,6 +311,305 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- FullScreen Flyout -->
+						<TextBlock Text="FullScreen Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="M3Material_FlyoutSamplePage_FullScreenFlyout">
+
+							<Button x:Name="ShowFullScreenFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											FlyoutPresenterStyle="{StaticResource M3MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+											<CommandBar Content="FullScreen Flyout Example"
+														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														Style="{StaticResource MaterialCommandBarStyle}">
+												<toolkit:CommandBarExtensions.NavigationCommand>
+													<AppBarButton Click="CloseFlyout"
+																  Tag="{Binding ElementName=ShowFullScreenFlyoutButton}"
+																  Style="{StaticResource MaterialAppBarButton}">
+														<AppBarButton.Icon>
+															<PathIcon Data="{StaticResource FlyoutCloseGlyphPathData}" />
+														</AppBarButton.Icon>
+													</AppBarButton>
+												</toolkit:CommandBarExtensions.NavigationCommand>
+											</CommandBar>
+
+											<TextBlock Grid.Row="1"
+													   Text="Example of a FullScreen Flyout"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Center"
+													   Style="{StaticResource MaterialBody1}" />
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Modal Centered Flyout -->
+						<TextBlock Text="Modal Centered Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="M3Material_FlyoutSamplePage_ModalCenteredFlyout">
+
+							<Button x:Name="ShowModalCenteredFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											LightDismissOverlayMode="On"
+											FlyoutPresenterStyle="{StaticResource M3MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+											  MaxWidth="300"
+											  MaxHeight="370">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+											<CommandBar Content="Modal Centered Flyout Example"
+														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														Style="{StaticResource MaterialCommandBarStyle}">
+												<toolkit:CommandBarExtensions.NavigationCommand>
+													<AppBarButton Click="CloseFlyout"
+																  Tag="{Binding ElementName=ShowModalCenteredFlyoutButton}"
+																  Style="{StaticResource MaterialAppBarButton}">
+														<AppBarButton.Icon>
+															<PathIcon Data="{StaticResource FlyoutCloseGlyphPathData}" />
+														</AppBarButton.Icon>
+													</AppBarButton>
+												</toolkit:CommandBarExtensions.NavigationCommand>
+											</CommandBar>
+
+											<TextBlock Grid.Row="1"
+													   Text="Example of a Modal Centered Flyout"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Center"
+													   Style="{StaticResource MaterialBody1}" />
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Bottom Flyout -->
+						<TextBlock Text="Modal Bottom Sheet Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="M3Material_FlyoutSamplePage_ModalBottomSheetFlyout">
+
+							<Button x:Name="ShowModalBottomSheetFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											LightDismissOverlayMode="On"
+											FlyoutPresenterStyle="{StaticResource M3MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+											  VerticalAlignment="Bottom"
+											  MaxHeight="370">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<Button Content="Share"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<um:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Share" />
+												</um:ControlExtensions.Icon>
+											</Button>
+
+											<Button Grid.Row="1"
+													Content="Get link"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<um:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Link" />
+												</um:ControlExtensions.Icon>
+											</Button>
+
+											<Button Grid.Row="2"
+													Content="Edit"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<um:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Edit" />
+												</um:ControlExtensions.Icon>
+											</Button>
+
+											<Button Grid.Row="3"
+													Content="Delete"
+													HorizontalAlignment="Stretch"
+													HorizontalContentAlignment="Left"
+													Style="{StaticResource MaterialTextButtonStyle}">
+												<um:ControlExtensions.Icon>
+													<SymbolIcon Symbol="Delete" />
+												</um:ControlExtensions.Icon>
+											</Button>
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Flyout Text -->
+						<TextBlock Text="Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="M3Material_FlyoutSamplePage_Flyout">
+
+							<Button Content="Flyout">
+								<Button.Flyout>
+									<Flyout FlyoutPresenterStyle="{StaticResource M3MaterialContentFlyoutPresenterStyle}">
+										<TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+												   Style="{StaticResource MaterialBody2}" />
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Flyout Text -->
+						<TextBlock Text="MenuFlyout &amp; Icons"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="M3Material_FlyoutSamplePage_Flyout_Icons">
+
+							<Button Content="Open">
+								<Button.Flyout>
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource M3MaterialMenuFlyoutPresenterStyle}">
+
+										<MenuFlyoutItem Text="Like"
+														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}">
+											<MenuFlyoutItem.Icon>
+												<SymbolIcon Symbol="Like" />
+											</MenuFlyoutItem.Icon>
+										</MenuFlyoutItem>
+
+										<MenuFlyoutItem Text="Dislike"
+														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}">
+											<MenuFlyoutItem.Icon>
+												<SymbolIcon Symbol="Dislike" />
+											</MenuFlyoutItem.Icon>
+										</MenuFlyoutItem>
+
+										<MenuFlyoutSeparator Style="{StaticResource M3MaterialMenuFlyoutSeparatorStyle}" />
+
+										<MenuFlyoutItem Text="Calculator"
+														Icon="Calculator"
+														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+										<MenuFlyoutItem Text="Camera"
+														Icon="Camera"
+														KeyboardAcceleratorTextOverride="Ctrl+C"
+														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+										<MenuFlyoutItem Text="Calendar"
+														Icon="Calendar"
+														IsEnabled="False"
+														KeyboardAcceleratorTextOverride="Ctrl+C"
+														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+									</MenuFlyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Flyout Text -->
+						<TextBlock Text="MenuFlyout &amp; Toggles"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="M3Material_FlyoutSamplePage_MenuFlyout_Toggles">
+
+							<Button Content="Options">
+								<Button.Flyout>
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource M3MaterialMenuFlyoutPresenterStyle}">
+
+										<MenuFlyoutItem Text="Clear History"
+														KeyboardAcceleratorTextOverride="Ctrl+Shift+C"
+														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+										<MenuFlyoutSeparator Style="{StaticResource M3MaterialMenuFlyoutSeparatorStyle}" />
+
+										<ToggleMenuFlyoutItem Text="Incognito Mode"
+															  IsChecked="True"
+															  Style="{StaticResource M3MaterialToggleMenuFlyoutItemStyle}" />
+
+										<ToggleMenuFlyoutItem Text="Dark Mode"
+															  IsChecked="True"
+															  KeyboardAcceleratorTextOverride="Ctrl+D"
+															  Style="{StaticResource M3MaterialToggleMenuFlyoutItemStyle}" />
+
+										<ToggleMenuFlyoutItem Text="High Contrast Mode"
+															  IsChecked="True"
+															  IsEnabled="False"
+															  Style="{StaticResource M3MaterialToggleMenuFlyoutItemStyle}" />
+									</MenuFlyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Nested MenuFlyout -->
+						<TextBlock Text="Nested MenuFlyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="M3Material_FlyoutSamplePage_Nested_MenuFlyout">
+
+							<Button Content="Help">
+								<Button.Flyout>
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource M3MaterialMenuFlyoutPresenterStyle}">
+
+										<MenuFlyoutItem Text="View Help"
+														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+										<MenuFlyoutSubItem Text="Disabled"
+														   Style="{StaticResource M3MaterialMenuFlyoutSubItemStyle}"
+														   IsEnabled="False">
+
+											<MenuFlyoutItem Text="Can't be seen"
+															Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+										</MenuFlyoutSubItem>
+
+										<MenuFlyoutSubItem Text="Send Feedback"
+														   Style="{StaticResource M3MaterialMenuFlyoutSubItemStyle}">
+
+											<MenuFlyoutItem Text="Report Problem"
+															Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+											<MenuFlyoutItem Text="Suggest Feature"
+															Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+											<MenuFlyoutSubItem Text="Settings"
+															   Style="{StaticResource M3MaterialMenuFlyoutSubItemStyle}">
+
+												<MenuFlyoutItem Text="Auto Save"
+																Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+												<MenuFlyoutItem Text="Start Up"
+																Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+
+												<MenuFlyoutItem Text="Font and Colors"
+																Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+											</MenuFlyoutSubItem>
+										</MenuFlyoutSubItem>
+									</MenuFlyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
