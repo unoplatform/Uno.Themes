@@ -2,12 +2,12 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:um="using:Uno.Material">
 
-	<um:FromBoolToValueConverter x:Name="MaterialTrueToVisible"
+	<um:FromBoolToValueConverter x:Key="MaterialTrueToVisible"
 								 TrueValue="Visible"
 								 FalseValue="Collapsed"
 								 NullValue="Collapsed" />
 
-	<um:FromBoolToValueConverter x:Name="MaterialTrueToCollapsed"
+	<um:FromBoolToValueConverter x:Key="MaterialTrueToCollapsed"
 								 TrueValue="Collapsed"
 								 FalseValue="Visible"
 								 NullValue="Visible" />
@@ -46,5 +46,5 @@
 
 	<um:StringFormatConverter x:Key="StringFormatConverter" />
 	<um:FirstCharacterConverter x:Key="FirstCharacterConverter" />
-	
+
 </ResourceDictionary>
