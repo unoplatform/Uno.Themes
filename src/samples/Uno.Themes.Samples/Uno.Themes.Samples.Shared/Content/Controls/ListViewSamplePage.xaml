@@ -24,6 +24,17 @@
                     </StackPanel>
                 </DataTemplate>
             </sample:SamplePageLayout.MaterialTemplate>
-        </sample:SamplePageLayout>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+                                          UniqueKey="M#Material_ListViewSamplePage_ListView">
+							<ListView ItemsSource="abcdefghijklmn"
+                                      Style="{StaticResource M3MaterialListViewStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+		</sample:SamplePageLayout>
     </Grid>
 </Page>
