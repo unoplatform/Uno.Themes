@@ -1,0 +1,306 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:um="using:Uno.Material"
+					xmlns:xamarin="http://uno.ui/xamarin"
+					mc:Ignorable="d xamarin">
+
+	<!-- ToggleButton Brushes -->
+	<SolidColorBrush x:Key="M3MaterialToggleButtonTextLabelBrush"
+					 Color="{ThemeResource PrimaryColor}" />
+
+	<StaticResource x:Key="M3MaterialToggleButtonForegroundThemeBrush"
+					ResourceKey="OnSurfaceBrush" />
+
+	<!-- Other ToggleButton Variables -->
+	<CornerRadius x:Key="M3MaterialToggleButtonBorderRadius">4</CornerRadius>
+	<x:Double x:Key="M3MaterialToggleButtonFontSize">14</x:Double>
+	<Thickness x:Key="M3MaterialToggleButtonPadding">16,8</Thickness>
+
+	<Style x:Key="M3MaterialTextToggleButtonStyle"
+		   TargetType="ToggleButton">
+		<Setter Property="Foreground"
+				Value="{StaticResource M3MaterialToggleButtonTextLabelBrush}" />
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="BorderThickness"
+				Value="0" />
+		<Setter Property="Padding"
+				Value="{ThemeResource M3MaterialToggleButtonPadding}" />
+		<Setter Property="CornerRadius"
+				Value="{StaticResource M3MaterialToggleButtonBorderRadius}" />
+		<Setter Property="MinHeight"
+				Value="40" />
+		<Setter Property="FontFamily"
+				Value="{ThemeResource MaterialRegularFontFamily}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource M3MaterialToggleButtonFontSize}" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOver">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 From="0"
+														 To="1">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</VisualState>
+
+								<xamarin:VisualState x:Name="Pressed">
+									<!-- https://github.com/unoplatform/uno/issues/5099 -->
+									<VisualState.Setters>
+										<Setter Target="HoverOverlay.Opacity"
+												Value="0" />
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</xamarin:VisualState>
+								<win:VisualState x:Name="Pressed">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+
+										<DoubleAnimation Storyboard.TargetName="FocusedOverlay"
+														 Storyboard.TargetProperty="Opacity"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 To="0">
+											<DoubleAnimation.EasingFunction>
+												<CubicEase EasingMode="EaseIn" />
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+									</Storyboard>
+								</win:VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource OnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Checked" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="PointerFocused" />
+
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="FocusedOverlay.Opacity"
+												Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Border for PointedOver State -->
+						<Border x:Name="HoverOverlay"
+								Background="{StaticResource OnSurfaceHoverBrush}"
+								Opacity="0" />
+
+						<!-- Border for Focus State -->
+						<Border x:Name="FocusedOverlay"
+								Background="{StaticResource OnSurfaceFocusedBrush}"
+								Opacity="0" />
+
+						<!-- Border for Dragged/Selected State -->
+						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
+						<Border x:Name="SelectedOverlay"
+								Background="{StaticResource OnSurfaceFocusedBrush}"
+								Opacity="0" />
+
+						<!-- Ripple effect -->
+						<um:Ripple x:Name="ContentPresenter"
+								   Feedback="{StaticResource OnSurfaceFocusedBrush}"
+								   BorderBrush="{TemplateBinding BorderBrush}"
+								   BorderThickness="{TemplateBinding BorderThickness}"
+								   Content="{TemplateBinding Content}"
+								   ContentTemplate="{TemplateBinding ContentTemplate}"
+								   ContentTransitions="{TemplateBinding ContentTransitions}"
+								   CornerRadius="{TemplateBinding CornerRadius}"
+								   FontFamily="{TemplateBinding FontFamily}"
+								   FontSize="{TemplateBinding FontSize}"
+								   Padding="{TemplateBinding Padding}"
+								   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+								   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								   AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="M3MaterialIconToggleButtonIconStyle"
+		   TargetType="ToggleButton">
+		<Setter Property="Foreground"
+				Value="{StaticResource M3MaterialToggleButtonForegroundThemeBrush}" />
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="BorderThickness"
+				Value="0" />
+		<Setter Property="MinHeight"
+				Value="40" />
+		<Setter Property="MinWidth"
+				Value="40" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="True" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.AlternateContent"
+				Value="{x:Null}" />
+		
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource OnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="HoverOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="PressedOverlay.Opacity"
+												Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Foreground"
+												Value="{StaticResource OnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Ellipse for PointedOver State -->
+						<Ellipse x:Name="HoverOverlay"
+								 HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"
+								 Fill="{StaticResource PrimaryHoverBrush}"
+								 Opacity="0" />
+
+						<!-- Ellipse for Pressed State -->
+						<Ellipse x:Name="PressedOverlay"
+								 HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"
+								 Fill="{StaticResource PrimaryPressedBrush}"
+								 Opacity="0" />
+
+						<!-- Content -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{TemplateBinding Content}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+						<!-- Alternate Content -->
+						<ContentPresenter x:Name="AlternateContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Visibility="Collapsed" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>
