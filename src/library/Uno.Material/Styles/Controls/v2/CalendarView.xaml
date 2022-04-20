@@ -6,36 +6,36 @@
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					mc:Ignorable="not_win">
 
-	<x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
-	<SolidColorBrush x:Key="MaterialCalendarTodayForeground"
-					 Color="{ThemeResource MaterialOnSurfaceColor}"
+	<x:String x:Key="M3MaterialDownArrowPathData">M0,0L32,0 16,19.745z</x:String>
+	<SolidColorBrush x:Key="M3MaterialCalendarTodayForeground"
+					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.87" />
-	<SolidColorBrush x:Key="MaterialCalendarBlackoutForeground"
-					 Color="{ThemeResource MaterialOnSurfaceColor}"
+	<SolidColorBrush x:Key="M3MaterialCalendarBlackoutForeground"
+					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.38" />
 
-	<Style x:Key="DefaultMaterialCalendarViewStyle"
+	<Style x:Key="DefaultM3MaterialCalendarViewStyle"
 		   TargetType="CalendarView">
 		<Setter Property="FocusBorderBrush"
-				Value="{ThemeResource MaterialPrimaryFocusedBrush}" />
+				Value="{ThemeResource PrimaryFocusedBrush}" />
 		<Setter Property="SelectedHoverBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="SelectedPressedBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="SelectedBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="HoverBorderBrush"
-				Value="{ThemeResource MaterialPrimaryHoverBrush}" />
+				Value="{ThemeResource PrimaryHoverBrush}" />
 		<Setter Property="PressedBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="CalendarItemBorderBrush"
 				Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
 		<Setter Property="TodayForeground"
-				Value="{StaticResource MaterialCalendarTodayForeground}" />
+				Value="{StaticResource M3MaterialCalendarTodayForeground}" />
 		<Setter Property="BlackoutForeground"
-				Value="{ThemeResource MaterialCalendarBlackoutForeground}" />
+				Value="{ThemeResource M3MaterialCalendarBlackoutForeground}" />
 		<Setter Property="SelectedForeground"
-					Value="{ThemeResource MaterialOnPrimaryBrush}" />
+					Value="{ThemeResource OnPrimaryBrush}" />
 		<Setter Property="PressedForeground"
 				Value="{ThemeResource CalendarViewPressedForeground}" />
 		<Setter Property="OutOfScopeForeground"
@@ -47,11 +47,11 @@
 		<Setter Property="CalendarItemBackground"
 				Value="{ThemeResource CalendarViewCalendarItemRevealBackground}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialOnPrimaryBrush}" />
+				Value="{ThemeResource OnPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource MaterialSurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="DayItemFontFamily"
 				Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="DayItemFontSize"
@@ -95,9 +95,9 @@
 		<not_win:Setter Property="CalendarItemCornerRadius"
 						Value="40" />
 		<not_win:Setter Property="SelectedBackground"
-						Value="{ThemeResource MaterialPrimaryBrush}" />
+						Value="{ThemeResource PrimaryBrush}" />
 		<not_win:Setter Property="TodaySelectedBackground"
-						Value="{ThemeResource MaterialPrimaryBrush}" />
+						Value="{ThemeResource PrimaryBrush}" />
 		<not_win:Setter Property="TodayBackground"
 						Value="Transparent" />
 		<Setter Property="Template">
@@ -108,15 +108,15 @@
 							BorderThickness="{TemplateBinding BorderThickness}"
 							CornerRadius="{TemplateBinding CornerRadius}">
 						<Border.Resources>
-							<Style x:Key="WeekDayNameStyle"
-								   BasedOn="{StaticResource CaptionTextBlockStyle}"
+							<Style x:Key="M3MaterialWeekDayNameStyle"
+								   BasedOn="{StaticResource M3MaterialBodySmall}"
 								   TargetType="TextBlock">
 								<Setter Property="HorizontalAlignment"
 										Value="Center" />
 								<Setter Property="VerticalAlignment"
 										Value="Center" />
 							</Style>
-							<Style x:Key="NavigationButtonStyle"
+							<Style x:Key="M3MaterialNavigationButtonStyle"
 								   TargetType="Button">
 								<Setter Property="HorizontalAlignment"
 										Value="Stretch" />
@@ -151,13 +151,13 @@
 																<Setter Target="Text.BorderBrush"
 																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
 																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource MaterialOnPrimaryMediumBrush}" />
+																		Value="{ThemeResource OnPrimaryMediumBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
 																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource MaterialOnPrimaryLowBrush}" />
+																		Value="{ThemeResource OnPrimaryLowBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled" />
@@ -169,8 +169,8 @@
 								</Setter>
 							</Style>
 							<Style TargetType="Button"
-								   x:Key="HeaderButtonStyle"
-								   BasedOn="{StaticResource NavigationButtonStyle}">
+								   x:Key="M3MaterialHeaderButtonStyle"
+								   BasedOn="{StaticResource M3MaterialNavigationButtonStyle}">
 								<Setter Property="Template">
 									<Setter.Value>
 										<ControlTemplate TargetType="Button">
@@ -192,7 +192,7 @@
 																  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 																  AutomationProperties.AccessibilityView="Raw" />
 												<Path x:Name="DownArrowGlyph"
-													  Data="{StaticResource DownArrowPathData}"
+													  Data="{StaticResource M3MaterialDownArrowPathData}"
 													  Fill="{TemplateBinding Foreground}"
 													  Stretch="Uniform"
 													  Height="5"
@@ -209,18 +209,18 @@
 																<Setter Target="Text.BorderBrush"
 																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource MaterialOnPrimaryMediumBrush}" />
+																		Value="{StaticResource OnPrimaryMediumBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource MaterialOnPrimaryMediumBrush}" />
+																		Value="{StaticResource OnPrimaryMediumBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource MaterialOnPrimaryLowBrush}" />
+																		Value="{StaticResource OnPrimaryLowBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource MaterialOnPrimaryLowBrush}" />
+																		Value="{StaticResource OnPrimaryLowBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled">
@@ -237,7 +237,7 @@
 									</Setter.Value>
 								</Setter>
 							</Style>
-							<Style x:Key="ScrollViewerStyle"
+							<Style x:Key="M3MaterialScrollViewerStyle"
 								   TargetType="ScrollViewer">
 								<Setter Property="HorizontalScrollMode"
 										Value="Disabled" />
@@ -276,7 +276,7 @@
 										Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}"
 										Foreground="{TemplateBinding Foreground}"
 										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}"
-										Style="{StaticResource HeaderButtonStyle}" />
+										Style="{StaticResource M3MaterialHeaderButtonStyle}" />
 								<Button x:Name="PreviousButton"
 										Grid.Column="1"
 										Padding="1"
@@ -286,7 +286,7 @@
 										Foreground="{TemplateBinding Foreground}"
 										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentBefore}"
 										IsTabStop="True"
-										Style="{StaticResource NavigationButtonStyle}" />
+										Style="{StaticResource M3MaterialNavigationButtonStyle}" />
 								<Button x:Name="NextButton"
 										Grid.Column="2"
 										Padding="1"
@@ -296,7 +296,7 @@
 										Foreground="{TemplateBinding Foreground}"
 										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentAfter}"
 										IsTabStop="True"
-										Style="{StaticResource NavigationButtonStyle}" />
+										Style="{StaticResource M3MaterialNavigationButtonStyle}" />
 							</Grid>
 							<Grid x:Name="Views"
 								  Grid.Row="1">
@@ -333,37 +333,37 @@
 											<ColumnDefinition Width="*" />
 										</Grid.ColumnDefinitions>
 										<TextBlock x:Name="WeekDay1"
-												   Style="{StaticResource WeekDayNameStyle}"
+												   Style="{StaticResource M3MaterialWeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay1}" />
 										<TextBlock x:Name="WeekDay2"
 												   Grid.Column="1"
-												   Style="{StaticResource WeekDayNameStyle}"
+												   Style="{StaticResource M3MaterialWeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay2}" />
 										<TextBlock x:Name="WeekDay3"
 												   Grid.Column="2"
-												   Style="{StaticResource WeekDayNameStyle}"
+												   Style="{StaticResource M3MaterialWeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay3}" />
 										<TextBlock x:Name="WeekDay4"
 												   Grid.Column="3"
-												   Style="{StaticResource WeekDayNameStyle}"
+												   Style="{StaticResource M3MaterialWeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay4}" />
 										<TextBlock x:Name="WeekDay5"
 												   Grid.Column="4"
-												   Style="{StaticResource WeekDayNameStyle}"
+												   Style="{StaticResource M3MaterialWeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay5}" />
 										<TextBlock x:Name="WeekDay6"
 												   Grid.Column="5"
-												   Style="{StaticResource WeekDayNameStyle}"
+												   Style="{StaticResource M3MaterialWeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay6}" />
 										<TextBlock x:Name="WeekDay7"
 												   Grid.Column="6"
-												   Style="{StaticResource WeekDayNameStyle}"
+												   Style="{StaticResource M3MaterialWeekDayNameStyle}"
 												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay7}" />
 									</Grid>
 									<ScrollViewer x:Name="MonthViewScrollViewer"
 												  Grid.Row="1"
 												  IsFocusEngagementEnabled="True"
-												  Style="{StaticResource ScrollViewerStyle}">
+												  Style="{StaticResource M3MaterialScrollViewerStyle}">
 										<CalendarPanel x:Name="MonthViewPanel" />
 									</ScrollViewer>
 								</Grid>
@@ -371,7 +371,7 @@
 								<ScrollViewer x:Name="YearViewScrollViewer"
 											  IsFocusEngagementEnabled="True"
 											  Opacity="0"
-											  Style="{StaticResource ScrollViewerStyle}"
+											  Style="{StaticResource M3MaterialScrollViewerStyle}"
 											  UseLayoutRounding="False"
 											  Visibility="Collapsed">
 									<ScrollViewer.RenderTransform>
@@ -385,7 +385,7 @@
 								<ScrollViewer x:Name="DecadeViewScrollViewer"
 											  IsFocusEngagementEnabled="True"
 											  Opacity="0"
-											  Style="{StaticResource ScrollViewerStyle}"
+											  Style="{StaticResource M3MaterialScrollViewerStyle}"
 											  UseLayoutRounding="False"
 											  Visibility="Collapsed">
 									<ScrollViewer.RenderTransform>
@@ -704,7 +704,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialCalendarViewStyle"
+	<Style x:Key="M3MaterialCalendarViewStyle"
 		   TargetType="CalendarView"
-		   BasedOn="{StaticResource DefaultMaterialCalendarViewStyle}" />
+		   BasedOn="{StaticResource DefaultM3MaterialCalendarViewStyle}" />
 </ResourceDictionary>
