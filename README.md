@@ -10,7 +10,7 @@ Quickly visualize all the available controls through this [zeplin link](https://
 Platform support:
 - WinUI / UWP
 - iOS
-- MacOS
+- macOS
 - Android
 - WebAssembly
 - Linux (Skia.Gtk)
