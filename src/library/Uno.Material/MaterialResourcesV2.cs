@@ -78,8 +78,8 @@ namespace Uno.Material
 			var result = new List<(string ResourceKey, string SharedKey, bool IsDefaultStyle)>();
 
 			Add("M3MaterialCheckBoxStyle", isImplicit: true);
-			Add("M3MaterialAppBarButtonStyle");
-			Add("M3MaterialCommandBarStyle");
+			Add("M3MaterialAppBarButtonStyle", isImplicit: true);
+			Add("M3MaterialCommandBarStyle", isImplicit: true);
 			Add("M3MaterialRadioButtonStyle", isImplicit: true);
 			Add("M3MaterialDisplayLarge");
 			Add("M3MaterialDisplayMedium");
@@ -106,6 +106,10 @@ namespace Uno.Material
 			Add("M3MaterialOutlinedButtonStyle");
 			Add("M3MaterialTextButtonStyle");
 			Add("M3MaterialIconButtonStyle");
+			Add("M3MaterialCalendarViewStyle", isImplicit: true);
+			Add("M3MaterialCalendarDatePickerStyle", isImplicit: true);
+			Add("M3MaterialFlyoutPresenterStyle", isImplicit: true);
+			Add("M3MaterialMenuFlyoutPresenterStyle", isImplicit: true);
 
 			// ** TODO **
 
