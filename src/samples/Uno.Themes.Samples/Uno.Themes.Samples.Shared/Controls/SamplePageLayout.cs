@@ -24,6 +24,7 @@ namespace Uno.Themes.Samples
 		private const string StickyTabsPartName = "PART_StickyTabs";
 		private const string ScrollViewerPartName = "PART_ScrollViewer";
 		private const string TopPartName = "PART_MobileTopBar";
+		private const string MaterialVersionComboBoxName = "MaterialVersionComboBox";
 
 		private static Design _design = Design.Material;
 
@@ -42,6 +43,7 @@ namespace Uno.Themes.Samples
 		private FrameworkElement _stickyTabs;
 		private FrameworkElement _top;
 		private ScrollViewer _scrollViewer;
+		private ComboBox _materialVersionComboBox;
 
 		private readonly SerialDisposable _subscriptions = new SerialDisposable();
 
@@ -73,6 +75,7 @@ namespace Uno.Themes.Samples
 			_stickyTabs = (FrameworkElement)GetTemplateChild(StickyTabsPartName);
 			_scrollViewer = (ScrollViewer)GetTemplateChild(ScrollViewerPartName);
 			_top = (FrameworkElement)GetTemplateChild(TopPartName);
+			_materialVersionComboBox = (ComboBox)GetTemplateChild(MaterialVersionComboBoxName);
 
 			// ensure previous subscriptions is removed before adding new ones, in case OnApplyTemplate is called multiple times
 			var disposables = new CompositeDisposable();
@@ -98,6 +101,11 @@ namespace Uno.Themes.Samples
 					.DisposeWith(disposables);
 			}
 
+			_materialVersionComboBox.Loaded += OnMaterialVersionComboBoxLoaded;
+			Disposable
+				.Create(() => _materialVersionComboBox.Loaded -= OnMaterialVersionComboBoxLoaded)
+				.DisposeWith(disposables);
+
 			void OnScrolled(object sender, ScrollViewerViewChangedEventArgs e)
 			{
 				var relativeOffset = GetRelativeOffset();
@@ -110,6 +118,11 @@ namespace Uno.Themes.Samples
 					_stickyTabs.Visibility = Visibility.Collapsed;
 				}
 			}
+		}
+
+		private void OnMaterialVersionComboBoxLoaded(object sender, RoutedEventArgs e)
+		{
+			_materialVersionComboBox.SelectedIndex = 1;
 		}
 
 		private void RegisterEvent(RoutedEventHandler click)

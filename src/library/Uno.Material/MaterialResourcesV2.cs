@@ -110,6 +110,8 @@ namespace Uno.Material
 			Add("M3MaterialCalendarDatePickerStyle", isImplicit: true);
 			Add("M3MaterialFlyoutPresenterStyle", isImplicit: true);
 			Add("M3MaterialMenuFlyoutPresenterStyle", isImplicit: true);
+			Add("M3MaterialNavigationViewStyle", isImplicit: true);
+			Add("M3MaterialNavigationViewItemStyle", isImplicit: true);
 
 			// ** TODO **
 
