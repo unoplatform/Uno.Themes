@@ -451,14 +451,14 @@
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="PointerFocused">
+								<VisualState x:Name="PointerFocused" />
+
+								<VisualState x:Name="Unfocused">
 									<VisualState.Setters>
 										<Setter Target="FocusedOverlay.Opacity"
-												Value="{StaticResource MaterialFocusedOpacity}" />
+												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
-
-								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
