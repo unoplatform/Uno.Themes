@@ -112,43 +112,10 @@ namespace Uno.Material
 			Add("M3MaterialMenuFlyoutPresenterStyle", isImplicit: true);
 			Add("M3MaterialNavigationViewStyle", isImplicit: true);
 			Add("M3MaterialNavigationViewItemStyle", isImplicit: true);
-
-			// ** TODO **
-
-			//Add("M3MaterialIconToggleButtonStyle");
-			//Add("M3MaterialToggleButtonStyle");
-			//Add("M3MaterialMediumFabButtonStyle");
-			//Add("M3MaterialLargeFabButtonStyle");
-			//Add("M3MaterialElevatedInputChipStyle");
-			//Add("M3MaterialElevatedAssistChipStyle");
-			//Add("M3MaterialElevatedFilterChipStyle");
-			//Add("M3MaterialElevatedSuggestionChipStyle");
-			//Add("M3MaterialOutlinedInputChipStyle");
-			//Add("M3MaterialOutlinedAssistChipStyle");
-			//Add("M3MaterialOutlinedFilterChipStyle");
-			//Add("M3MaterialOutlinedSuggestionChipStyle");
-			//Add("M3MaterialElevatedInputChipGroupStyle");
-			//Add("M3MaterialElevatedAssistChipGroupStyle");
-			//Add("M3MaterialElevatedFilterChipGroupStyle");
-			//Add("M3MaterialElevatedSuggestionChipGroupStyle");
-			//Add("M3MaterialOutlinedInputChipGroupStyle");
-			//Add("M3MaterialOutlinedAssistChipGroupStyle");
-			//Add("M3MaterialOutlinedFilterChipGroupStyle");
-			//Add("M3MaterialOutlinedSuggestionChipGroupStyle");
-			//Add("M3MaterialSliderStyle");
-			//Add("M3MaterialToggleSwitchStyle");
-			//Add("M3MaterialElevatedCardContentControlStyle");
-			//Add("M3MaterialFilledCardContentControlStyle");
-			//Add("M3MaterialOutlinedCardContentControlStyle");
-			//Add("M3MaterialFlyoutPresenterStyle");
-			//Add("M3MaterialDatePickerStyle");
-			//Add("M3MaterialTimePickerStyle");
-			//Add("M3MaterialCalendarDatePickerStyle");
-			//Add("M3MaterialListViewStyle");
-			//Add("M3MaterialListViewItemStyle");
-			//Add("M3MaterialInfoBarStyle");
-			//Add("M3MaterialProgressRingStyle");
-			//Add("M3MaterialProgressBarStyle");
+			Add("M3MaterialListViewStyle", isImplicit: true);
+			Add("M3MaterialListViewItemStyle", isImplicit: true);
+			Add("M3MaterialTextToggleButtonStyle", isImplicit: true);
+			Add("M3MaterialIconToggleButtonStyle");
 
 			return result;
 
