@@ -116,6 +116,7 @@ namespace Uno.Material
 			Add("M3MaterialListViewItemStyle", isImplicit: true);
 			Add("M3MaterialTextToggleButtonStyle", isImplicit: true);
 			Add("M3MaterialIconToggleButtonStyle");
+			Add("M3MaterialDatePickerStyle", isImplicit: true);
 
 			return result;
 
