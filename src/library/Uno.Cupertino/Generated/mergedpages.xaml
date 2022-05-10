@@ -857,7 +857,7 @@
     <Setter Property="Foreground" Value="{StaticResource CupertinoOnSecondaryBrush}" />
   </Style>
   <!--origin: Styles\Controls\ComboBox.xaml-->
-  <uc:FromNullToValueConverter x:Name="NullToVisible" NotNullValue="Collapsed" NullValue="Visible" />
+  <uc:FromNullToValueConverter x:Key="NullToVisible" NotNullValue="Collapsed" NullValue="Visible" />
   <StaticResource x:Key="ComboBoxBackgroundColorBrush" ResourceKey="CupertinoSystemBackgroundBrush" />
   <StaticResource x:Key="ComboBoxForegroundThemeBrush" ResourceKey="CupertinoLabelBrush" />
   <x:Double x:Key="ComboBoxPopupMaxHeight">300</x:Double>

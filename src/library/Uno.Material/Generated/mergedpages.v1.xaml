@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d not_win android ios not_ios wasm xamarin skia contract4NotPresent contract7NotPresent macos lottie_not_win" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:um="using:Uno.Material" xmlns:not_win="http://uno.ui/not_win" xmlns:android="http://uno.ui/android" xmlns:ios="http://uno.ui/ios" xmlns:not_ios="http://uno.ui/not_ios" xmlns:wasm="http://uno.ui/wasm" xmlns:xamarin="http://uno.ui/xamarin" xmlns:toolkit="using:Uno.UI.Toolkit" xmlns:controls="using:Microsoft.UI.Xaml.Controls" xmlns:media="using:Microsoft.UI.Xaml.Media" xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives" xmlns:skia="http://uno.ui/skia" xmlns:contract4Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:contract4NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,4)" xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:contract7NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,7)" xmlns:IsNotWinUI3="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypeNotPresent(Microsoft.UI.Xaml.FrameworkElement)" xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:macos="http://uno.ui/macos" xmlns:lottie_win="using:Microsoft.Toolkit.Uwp.UI.Lottie" xmlns:lottie_not_win="using:Microsoft.Toolkit.Uwp.UI.Lottie" xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d not_win android ios not_ios wasm xamarin skia contract4NotPresent contract7NotPresent macos lottie_not_win" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:um="using:Uno.Material" xmlns:not_win="http://uno.ui/not_win" xmlns:uno="using:Uno.UI.Xaml.Controls" xmlns:android="http://uno.ui/android" xmlns:ios="http://uno.ui/ios" xmlns:not_ios="http://uno.ui/not_ios" xmlns:wasm="http://uno.ui/wasm" xmlns:xamarin="http://uno.ui/xamarin" xmlns:toolkit="using:Uno.UI.Toolkit" xmlns:controls="using:Microsoft.UI.Xaml.Controls" xmlns:media="using:Microsoft.UI.Xaml.Media" xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives" xmlns:skia="http://uno.ui/skia" xmlns:contract4Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:contract4NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,4)" xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:contract7NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,7)" xmlns:IsNotWinUI3="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypeNotPresent(Microsoft.UI.Xaml.FrameworkElement)" xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:macos="http://uno.ui/macos" xmlns:lottie_win="using:Microsoft.Toolkit.Uwp.UI.Lottie" xmlns:lottie_not_win="using:Microsoft.Toolkit.Uwp.UI.Lottie" xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
   <ResourceDictionary.MergedDictionaries>
     <um:MaterialFonts />
     <um:MaterialColors />
@@ -427,12 +427,12 @@
                     <Setter Target="FocusedOverlay.Opacity" Value="{StaticResource MaterialFocusedOpacity}" />
                   </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="PointerFocused">
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused">
                   <VisualState.Setters>
-                    <Setter Target="FocusedOverlay.Opacity" Value="{StaticResource MaterialFocusedOpacity}" />
+                    <Setter Target="FocusedOverlay.Opacity" Value="0" />
                   </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="Unfocused" />
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
             <Border x:Name="CommonStatesOverlay" Background="{TemplateBinding Foreground}" Opacity="0" />
@@ -675,18 +675,19 @@
   <Style x:Key="MaterialCalendarDatePickerStyle" TargetType="CalendarDatePicker" BasedOn="{StaticResource DefaultMaterialCalendarDatePickerStyle}" />
   <!--origin: Styles\Controls\v1\CalendarView.xaml-->
   <x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
+  <SolidColorBrush x:Key="MaterialCalendarTodayForeground" Color="{ThemeResource MaterialOnSurfaceColor}" Opacity="0.87" />
+  <SolidColorBrush x:Key="MaterialCalendarBlackoutForeground" Color="{ThemeResource MaterialOnSurfaceColor}" Opacity="0.38" />
   <Style x:Key="DefaultMaterialCalendarViewStyle" TargetType="CalendarView">
     <Setter Property="FocusBorderBrush" Value="{ThemeResource MaterialPrimaryFocusedBrush}" />
     <Setter Property="SelectedHoverBorderBrush" Value="{ThemeResource MaterialPrimaryBrush}" />
     <Setter Property="SelectedPressedBorderBrush" Value="{ThemeResource MaterialPrimaryBrush}" />
     <Setter Property="SelectedBorderBrush" Value="{ThemeResource MaterialPrimaryBrush}" />
-    <Setter Property="HoverBorderBrush" Value="{ThemeResource CalendarViewHoverBorderBrush}" />
+    <Setter Property="HoverBorderBrush" Value="{ThemeResource MaterialPrimaryHoverBrush}" />
     <Setter Property="PressedBorderBrush" Value="{ThemeResource MaterialPrimaryBrush}" />
     <Setter Property="CalendarItemBorderBrush" Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
-    <Setter Property="TodayForeground" Value="{ThemeResource CalendarViewForeground}" />
-    <Setter Property="BlackoutForeground" Value="{ThemeResource CalendarViewBlackoutForeground}" />
-    <win:Setter Property="SelectedForeground" Value="{ThemeResource CalendarViewSelectedForeground}" />
-    <not_win:Setter Property="SelectedForeground" Value="{ThemeResource MaterialOnPrimaryBrush}" />
+    <Setter Property="TodayForeground" Value="{StaticResource MaterialCalendarTodayForeground}" />
+    <Setter Property="BlackoutForeground" Value="{ThemeResource MaterialCalendarBlackoutForeground}" />
+    <Setter Property="SelectedForeground" Value="{ThemeResource MaterialOnPrimaryBrush}" />
     <Setter Property="PressedForeground" Value="{ThemeResource CalendarViewPressedForeground}" />
     <Setter Property="OutOfScopeForeground" Value="{ThemeResource CalendarViewOutOfScopeForeground}" />
     <Setter Property="CalendarItemForeground" Value="{ThemeResource CalendarViewCalendarItemForeground}" />
@@ -694,7 +695,7 @@
     <Setter Property="CalendarItemBackground" Value="{ThemeResource CalendarViewCalendarItemRevealBackground}" />
     <Setter Property="Foreground" Value="{ThemeResource MaterialOnPrimaryBrush}" />
     <Setter Property="Background" Value="{ThemeResource MaterialPrimaryBrush}" />
-    <Setter Property="BorderBrush" Value="{ThemeResource CalendarViewBorderBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource MaterialSurfaceBrush}" />
     <Setter Property="DayItemFontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
     <Setter Property="DayItemFontSize" Value="14" />
     <Setter Property="FirstOfMonthLabelFontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
@@ -5212,7 +5213,7 @@
   </IsNotWinUI3:Style>
   <!--origin: Styles\Controls\v1\NavigationView\WUX\NavigationView_PaneToggleButton.xaml-->
   <x:String x:Key="BackArrowPathData">M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z</x:String>
-  <um:FromOpenToCustomValueConverter x:Name="OpenToPaneButtonStyle" ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}" ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
+  <um:FromOpenToCustomValueConverter x:Key="OpenToPaneButtonStyle" ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}" ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
   <IsNotWinUI3:Style x:Key="MaterialPaneToggleButtonStyle" TargetType="Button">
     <Setter Property="FontSize" Value="16" />
     <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
@@ -7540,8 +7541,8 @@
   <Duration x:Key="MaterialTextBoxAnimationDuration">0:0:0.25</Duration>
   <x:String x:Key="MaterialDelayedBeginTime">0:0:0.15</x:String>
   <!--origin: Styles\Application\Common\Converters.xaml-->
-  <um:FromBoolToValueConverter x:Name="MaterialTrueToVisible" TrueValue="Visible" FalseValue="Collapsed" NullValue="Collapsed" />
-  <um:FromBoolToValueConverter x:Name="MaterialTrueToCollapsed" TrueValue="Collapsed" FalseValue="Visible" NullValue="Visible" />
+  <um:FromBoolToValueConverter x:Key="MaterialTrueToVisible" TrueValue="Visible" FalseValue="Collapsed" NullValue="Collapsed" />
+  <um:FromBoolToValueConverter x:Key="MaterialTrueToCollapsed" TrueValue="Collapsed" FalseValue="Visible" NullValue="Visible" />
   <um:FromEmptyStringToValueConverter x:Key="MaterialEmptyToFalse" NotNullOrEmptyValue="True" NullOrEmptyValue="False" />
   <um:FromEmptyStringToValueConverter x:Key="MaterialEmptyToTrue" NotNullOrEmptyValue="False" NullOrEmptyValue="True" />
   <um:FromEmptyStringToValueConverter x:Key="MaterialEmptyToVisible" NotNullOrEmptyValue="Collapsed" NullOrEmptyValue="Visible" />
