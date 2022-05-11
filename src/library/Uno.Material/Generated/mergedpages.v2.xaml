@@ -4279,6 +4279,92 @@
   <Style x:Key="M3MaterialSecondaryRadioButtonStyle" TargetType="RadioButton" BasedOn="{StaticResource M3MaterialRadioButtonStyle}">
     <Setter Property="Background" Value="{StaticResource SecondaryBrush}" />
   </Style>
+  <!--origin: Styles\Controls\v2\Ripple.xaml-->
+  <Style TargetType="um:Ripple">
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Feedback" Value="{StaticResource BackgroundBrush}" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="um:Ripple">
+          <Grid Background="Transparent" Margin="{TemplateBinding Margin}" CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <!--Uncomment for hover effect-->
+                <!--<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ScaleTransform.ScaleX"
+												Value="1" />
+										<Setter Target="ScaleTransform.ScaleY"
+												Value="1" />
+										<Setter Target="ClickEllipse.Opacity"
+												Value="0.75" />
+									</VisualState.Setters>
+								</VisualState>-->
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX" Duration="0:0:0.225" From="0" To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSizeMultiplier}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY" Duration="0:0:0.225" From="0" To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSizeMultiplier}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <win:DoubleAnimationUsingKeyFrames Storyboard.TargetName="ClickEllipse" Storyboard.TargetProperty="Opacity">
+                      <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                          <CubicEase EasingMode="EaseIn" />
+                        </EasingDoubleKeyFrame.EasingFunction>
+                      </EasingDoubleKeyFrame>
+                      <EasingDoubleKeyFrame KeyTime="0:0:0.075" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                          <CubicEase EasingMode="EaseIn" />
+                        </EasingDoubleKeyFrame.EasingFunction>
+                      </EasingDoubleKeyFrame>
+                      <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                          <CubicEase EasingMode="EaseOut" />
+                        </EasingDoubleKeyFrame.EasingFunction>
+                      </EasingDoubleKeyFrame>
+                      <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                          <CubicEase EasingMode="EaseOut" />
+                        </EasingDoubleKeyFrame.EasingFunction>
+                      </EasingDoubleKeyFrame>
+                    </win:DoubleAnimationUsingKeyFrames>
+                    <not_win:DoubleAnimation Storyboard.TargetName="ClickEllipse" Storyboard.TargetProperty="Opacity" Duration="0:0:0.075" From="0" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </not_win:DoubleAnimation>
+                    <not_win:DoubleAnimation Storyboard.TargetName="ClickEllipse" Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" BeginTime="0:0:0.6" From="1" To="0">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                      </DoubleAnimation.EasingFunction>
+                    </not_win:DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="{TemplateBinding FontWeight}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" />
+            <Canvas IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="{TemplateBinding FeedbackOpacity}">
+              <Ellipse x:Name="ClickEllipse" Fill="{TemplateBinding Feedback}" Opacity="0" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSize}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleSize}" Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleX}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleY}" RenderTransformOrigin=".5,.5">
+                <Ellipse.RenderTransform>
+                  <ScaleTransform x:Name="ScaleTransform" ScaleX="0" ScaleY="0" />
+                </Ellipse.RenderTransform>
+              </Ellipse>
+            </Canvas>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
   <!--origin: Styles\Controls\v2\TextBlock.xaml-->
   <Style x:Key="M3MaterialBaseTextBlockStyle" TargetType="TextBlock">
     <Setter Property="TextTrimming" Value="CharacterEllipsis" />
