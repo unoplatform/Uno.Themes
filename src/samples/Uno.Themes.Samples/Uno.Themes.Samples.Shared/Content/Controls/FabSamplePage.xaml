@@ -7,6 +7,9 @@
 	  xmlns:sample="using:Uno.Themes.Samples">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<Grid.Resources>
+			<Thickness x:Key="XamlDisplayMargin">16,10,16,0</Thickness>
+		</Grid.Resources>
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
@@ -36,7 +39,7 @@
 							<!-- Secondary Fab -->
 							<smtx:XamlDisplay UniqueKey="FabSamplePage_IconFab2"
 											  Style="{StaticResource XamlDisplayBelowStyle}"
-											  Margin="16,10,16,0">
+											  Margin="{StaticResource XamlDisplayMargin}">
 								<Button Style="{StaticResource MaterialSecondaryFabStyle}">
 									<um:ControlExtensions.Icon>
 										<SymbolIcon Symbol="Add" />
@@ -60,7 +63,7 @@
 							<!-- Secondary Fab -->
 							<smtx:XamlDisplay UniqueKey="FabSamplePage_TextFab2"
 											  Style="{StaticResource XamlDisplayBelowStyle}"
-											  Margin="16,10,16,0">
+											  Margin="{StaticResource XamlDisplayMargin}">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialSecondaryFabStyle}" />
 							</smtx:XamlDisplay>
@@ -85,7 +88,7 @@
 							<!-- Sedondary Fab -->
 							<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2"
 											  Style="{StaticResource XamlDisplayBelowStyle}"
-											  Margin="16,10,16,0">
+											  Margin="{StaticResource XamlDisplayMargin}">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialSecondaryFabStyle}">
 									<um:ControlExtensions.Icon>
@@ -114,7 +117,7 @@
 							<!-- Sedondary Fab -->
 							<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextInvertedFab2"
 											  Style="{StaticResource XamlDisplayBelowStyle}"
-											  Margin="16,10,16,0">
+											  Margin="{StaticResource XamlDisplayMargin}">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialSecondaryInvertedFabStyle}">
 									<um:ControlExtensions.Icon>
@@ -144,7 +147,7 @@
 							<!-- Sedondary Fab -->
 							<smtx:XamlDisplay UniqueKey="FabSamplePage_IconTextFab2_Disabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}"
-											  Margin="16,10,16,0">
+											  Margin="{StaticResource XamlDisplayMargin}">
 								<Button Content="CREATE"
 										Style="{StaticResource MaterialSecondaryFabStyle}"
 										IsEnabled="False">
@@ -157,12 +160,233 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
-			<sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<TextBlock Text="Default"
+								   Style="{StaticResource HeadlineSmall}"/>
+
+						<StackPanel Orientation="Horizontal">
+
+							<!-- Primary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+
+							<!-- Surface Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Surface"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSurfaceFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Secondary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Secondary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSecondaryFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Tertiary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Tertiary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialTertiaryFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<TextBlock Text="Small"
+								   Style="{StaticResource HeadlineSmall}"/>
+						<StackPanel Orientation="Horizontal">
+
+							<!-- Primary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSmallFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+
+							<!-- Surface Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small_Surface"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSurfaceSmallFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Secondary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small_Secondary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSecondarySmallFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Tertiary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small_Tertiary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialTertiarySmallFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<TextBlock Text="Large"
+								   Style="{StaticResource HeadlineSmall}"/>
+						<StackPanel Orientation="Horizontal">
+
+							<!-- Primary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialLargeFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+
+							<!-- Surface Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large_Surface"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSurfaceLargeFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Secondary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large_Secondary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSecondaryLargeFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Tertiary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large_Tertiary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialTertiaryLargeFabStyle}"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<TextBlock Text="Extended"
+								   Style="{StaticResource HeadlineSmall}"/>
+						<StackPanel Orientation="Horizontal">
+
+							<!-- Primary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Extended"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialExtendedFabStyle}"
+										Content="Extended"
+										HorizontalAlignment="Center">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+
+							<!-- Surface Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Extended_Surface"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSurfaceExtendedFabStyle}"
+										HorizontalAlignment="Center"
+										Content="Extended">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Secondary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Extended_Secondary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialSecondaryExtendedFabStyle}"
+										HorizontalAlignment="Center"
+										Content="Extended">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+
+							<!-- Tertiary Fab -->
+							<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Extended_Tertiary"
+											  Style="{StaticResource XamlDisplayBelowStyle}"
+											  Margin="{StaticResource XamlDisplayMargin}">
+								<Button Style="{StaticResource M3MaterialTertiaryExtendedFabStyle}"
+										HorizontalAlignment="Center"
+										Content="Extended">
+									<um:ControlExtensions.Icon>
+										<SymbolIcon Symbol="Add" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+						</StackPanel>
+
 					</StackPanel>
 				</DataTemplate>
-			</sample:SamplePageLayout.CupertinoTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
