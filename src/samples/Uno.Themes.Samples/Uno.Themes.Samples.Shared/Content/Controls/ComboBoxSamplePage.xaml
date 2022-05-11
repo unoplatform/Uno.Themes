@@ -60,6 +60,54 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<Grid BorderBrush="{StaticResource OnSurfaceBrush}"
+							  BorderThickness="1"
+							  android:Margin="12"
+							  ios:Margin="12"
+							  Padding="12">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<StackPanel Margin="0,0,10,0">
+
+								<!-- Label -->
+								<TextBlock Text="NORMAL"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Normal"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource M3MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="abcdefghijklmn" />
+								</smtx:XamlDisplay>
+
+							</StackPanel>
+
+							<StackPanel Grid.Column="1">
+
+								<!-- Label -->
+								<TextBlock Text="DISABLED"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Disabled"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource M3MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="abcdefghijklmn"
+											  IsEnabled="False" />
+								</smtx:XamlDisplay>
+							</StackPanel>
+						</Grid>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
