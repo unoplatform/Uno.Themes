@@ -25,6 +25,12 @@ Uno.Cupertino.WinUI|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Cupertin
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 
+## Getting Started
+
+See the complete [Getting Started](doc/getting-started.md) guide for starting with this library.
+
+For a larger example and features demo, visit the [Uno Gallery](https://github.com/unoplatform/uno.gallery) repository.
+
 ## Documentation
 
 All documentation for Uno.Themes can be found [here](doc/) or on [Uno Platform documentation](https://platform.uno/docs/articles/intro.html).
