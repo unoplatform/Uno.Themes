@@ -13,7 +13,7 @@ namespace Uno.Material
 	/// <summary>
 	/// Material resources including colors, layout values and styles
 	/// </summary>
-	public sealed class MaterialResourcesV2 : ResourceDictionary
+	public class MaterialResourcesV2 : ResourceDictionary
 	{
 		private const string StylePrefix = "M3Material";
 		private ResourceDictionary _implicitResources = new ResourceDictionary();

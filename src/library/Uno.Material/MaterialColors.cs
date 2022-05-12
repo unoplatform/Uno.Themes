@@ -1,44 +1,13 @@
-﻿using System;
-
-#if WinUI
-using Microsoft.UI.Xaml;
-#else
-using Windows.UI.Xaml;
-#endif
-
-namespace Uno.Material
+﻿namespace Uno.Material
 {
-	public sealed partial class MaterialColors : ResourceDictionary
+	/// <summary>
+	/// Material resources for colors.
+	/// </summary>
+	/// <remarks>
+	/// This class is like an alias for the latest version of MaterialColors,
+	/// which is currently pointing to <see cref="MaterialColorsV2"/>.
+	/// </remarks>
+	public sealed partial class MaterialColors : MaterialColorsV2
 	{
-		private static string ColorPaletteOverrideSource;
-
-		public string OverrideSource
-		{
-			get => (string)GetValue(OverrideSourceProperty);
-			set => SetValue(OverrideSourceProperty, value);
-		}
-
-		public static DependencyProperty OverrideSourceProperty { get; } =
-			DependencyProperty.Register(
-				nameof(OverrideSource),
-				typeof(string),
-				typeof(MaterialColors),
-				new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
-
-		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
-		{
-			ColorPaletteOverrideSource = args.NewValue as string;
-		}
-
-		public MaterialColors()
-		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v1/ColorPalette.xaml") });
-			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
-			{
-				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
-			}
-
-			InitializeComponent();
-		}
 	}
 }
