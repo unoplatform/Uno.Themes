@@ -54,7 +54,7 @@ Be mindful of our [Code of Conduct](CODE_OF_CONDUCT.md).
 - [ShowMeTheXaml](https://github.com/Keboo/ShowMeTheXAML) for code snippets. Through [our Fork](https://github.com/unoplatform/ShowMeTheXAML)
 - [WinUI](https://microsoft.github.io/microsoft-ui-xaml/)
 
-# Contributors
+## Contributors
 Thanks goes to these wonderful people (List made with [contrib.rocks](https://contrib.rocks)):
 
 [![Uno.Themes Contributors](https://contrib.rocks/image?repo=unoplatform/Uno.Themes)](https://github.com/unoplatform/Uno.Themes/graphs/contributors)
