@@ -118,7 +118,22 @@ namespace Uno.Material
 			Add("M3MaterialIconToggleButtonStyle");
 			Add("M3MaterialDatePickerStyle", isImplicit: true);
 			Add("M3MaterialComboBoxStyle", isImplicit: true);
-
+			Add("M3MaterialFabStyle");
+			Add("M3MaterialSurfaceFabStyle");
+			Add("M3MaterialSecondaryFabStyle");
+			Add("M3MaterialTertiaryFabStyle");
+			Add("M3MaterialSmallFabStyle");
+			Add("M3MaterialSurfaceSmallFabStyle");
+			Add("M3MaterialSecondarySmallFabStyle");
+			Add("M3MaterialTertiarySmallFabStyle");
+			Add("M3MaterialLargeFabStyle");
+			Add("M3MaterialSurfaceLargeFabStyle");
+			Add("M3MaterialSecondaryLargeFabStyle");
+			Add("M3MaterialTertiaryLargeFabStyle");
+			Add("M3MaterialExtendedFabStyle");
+			Add("M3MaterialSurfaceExtendedFabStyle");	
+			Add("M3MaterialSecondaryExtendedFabStyle");	
+			Add("M3MaterialTertiaryExtendedFabStyle");
 			return result;
 
 			void Add(string key, string alias = null, bool isImplicit = false) =>

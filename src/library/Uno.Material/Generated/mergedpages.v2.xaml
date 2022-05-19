@@ -1422,6 +1422,250 @@
     <Setter Property="Background" Value="{StaticResource SecondaryBrush}" />
     <Setter Property="Foreground" Value="{StaticResource OnSecondaryBrush}" />
   </Style>
+  <!--origin: Styles\Controls\v2\ComboBox.xaml-->
+  <um:FromNullToValueConverter x:Key="NullToScaleConverter" NotNullValue="0.7" NullValue="1" />
+  <um:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter" NotNullValue="-11" NullValue="0" />
+  <um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter" NotNullValue="5" NullValue="0" />
+  <um:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter" NotNullValue="{StaticResource M3MaterialComboBoxPlaceholderFocusedThemeBrush}" NullValue="{StaticResource M3MaterialComboBoxPlaceholderForegroundThemeBrush}" />
+  <StaticResource x:Key="M3MaterialComboBoxItemForegroundThemeBrush" ResourceKey="OnSurfaceBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxItemSelectedBackgroundThemeBrush" ResourceKey="PrimarySelectedBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush" ResourceKey="OnSurfaceVariantHoverBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxItemPointerOverBackgroundThemeBrush" ResourceKey="OnSurfaceVariantHoverBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxBackgroundColorBrush" ResourceKey="SystemControlTransparentBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxBorderBrush" ResourceKey="OutlineBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxFocusedBorderBrush" ResourceKey="OnBackgroundBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxOpenedBorderBrush" ResourceKey="PrimaryBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxArrowForegroundThemeBrush" ResourceKey="OutlineBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxOpenedArrowForegroundThemeBrush" ResourceKey="PrimaryBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxForegroundThemeBrush" ResourceKey="OnSurfaceBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxPlaceholderFocusedThemeBrush" ResourceKey="PrimaryBrush" />
+  <StaticResource x:Key="M3MaterialComboBoxPlaceholderForegroundThemeBrush" ResourceKey="OutlineBrush" />
+  <CornerRadius x:Key="M3MaterialComboBoxCornerRadius">4</CornerRadius>
+  <x:String x:Key="UpArrowPathData">M15.995972,0L32,21.478999 0,21.478999z</x:String>
+  <x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
+  <Thickness x:Key="M3MaterialComboBoxBorderThickness">1</Thickness>
+  <Thickness x:Key="M3MaterialComboBoxOpenedBorderThickness">2</Thickness>
+  <Style x:Key="M3MaterialComboBoxItemStyle" TargetType="ComboBoxItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource M3MaterialComboBoxItemForegroundThemeBrush}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Height" Value="50" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBoxItem">
+          <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="PressedOverlay.Background" Value="{ThemeResource M3MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
+                  </VisualState.Setters>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" To="1" Duration="{StaticResource MaterialAnimationDuration}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="PressedOverlay.Background" Value="{ThemeResource M3MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
+                  </VisualState.Setters>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" To="1" Duration="{StaticResource MaterialAnimationDuration}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenter.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Selected">
+                  <VisualState.Setters>
+                    <Setter Target="PressedOverlay.Background" Value="{ThemeResource M3MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
+                  </VisualState.Setters>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" To="1" Duration="{StaticResource MaterialAnimationDuration}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SelectedPointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="PressedOverlay.Background" Value="{ThemeResource M3MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush}" />
+                  </VisualState.Setters>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" To="1" Duration="{StaticResource MaterialAnimationDuration}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SelectedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenter.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="SelectedPressed">
+                  <VisualState.Setters>
+                    <Setter Target="PressedOverlay.Background" Value="{ThemeResource M3MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
+                  </VisualState.Setters>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" To="1" Duration="{StaticResource MaterialAnimationDuration}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <!--  Pressed Overlay  -->
+            <Grid x:Name="PressedOverlay" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource M3MaterialComboBoxItemSelectedBackgroundThemeBrush}" IsHitTestVisible="False" Opacity="0" />
+            <!--  ContentPresenter  -->
+            <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}">
+              <ContentPresenter.ContentTemplate>
+                <DataTemplate>
+                  <Grid>
+                    <TextBlock Margin="16,0,0,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Style="{StaticResource LabelLarge}" Text="{Binding}" />
+                  </Grid>
+                </DataTemplate>
+              </ContentPresenter.ContentTemplate>
+            </ContentPresenter>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialComboBoxStyle" TargetType="ComboBox">
+    <Setter Property="Foreground" Value="{ThemeResource M3MaterialComboBoxForegroundThemeBrush}" />
+    <Setter Property="Background" Value="{StaticResource M3MaterialComboBoxBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource M3MaterialComboBoxBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{StaticResource M3MaterialComboBoxBorderThickness}" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinHeight" Value="50" />
+    <Setter Property="TabNavigation" Value="Once" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+    <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True" />
+    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="ItemContainerStyle" Value="{StaticResource M3MaterialComboBoxItemStyle}" />
+    <xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement" Value="Below" />
+    <!--  Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388  -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <CarouselPanel />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBox">
+          <Grid x:Name="RootGrid" HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="DropDownGlyph_Down.Fill" Value="{StaticResource OnSurfaceLowBrush}" />
+                    <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource OnSurfaceLowBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnSurfaceLowBrush}" />
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource OnSurfaceLowBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="DropDownStates">
+                <VisualState x:Name="Opened">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.BorderBrush" Value="{StaticResource M3MaterialComboBoxOpenedBorderBrush}" />
+                    <Setter Target="RootGrid.BorderThickness" Value="{StaticResource M3MaterialComboBoxOpenedBorderThickness}" />
+                    <Setter Target="DropDownGlyph_Up.Fill" Value="{StaticResource M3MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
+                    <Setter Target="DropDownGlyph_Down.Visibility" Value="Collapsed" />
+                    <Setter Target="DropDownGlyph_Up.Visibility" Value="Visible" />
+                  </VisualState.Setters>
+                  <Storyboard>
+                    <SplitOpenThemeAnimation ClosedLength="{Binding TemplateSettings.DropDownClosedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" ClosedTargetName="ContentPresenter" ContentTargetName="ScrollViewer" ContentTranslationOffset="0" OffsetFromCenter="{Binding TemplateSettings.DropDownOffset, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenedLength="{Binding TemplateSettings.DropDownOpenedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenedTargetName="PopupBorder" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Closed">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.BorderBrush" Value="{StaticResource M3MaterialComboBoxBorderBrush}" />
+                    <Setter Target="RootGrid.BorderThickness" Value="{StaticResource M3MaterialComboBoxBorderThickness}" />
+                    <Setter Target="DropDownGlyph_Down.Visibility" Value="Visible" />
+                    <Setter Target="DropDownGlyph_Up.Visibility" Value="Collapsed" />
+                  </VisualState.Setters>
+                  <Storyboard>
+                    <SplitCloseThemeAnimation ClosedLength="{Binding TemplateSettings.DropDownClosedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" ClosedTargetName="ContentPresenter" ContentTargetName="ScrollViewer" ContentTranslationDirection="{Binding TemplateSettings.SelectedItemDirection, RelativeSource={RelativeSource Mode=TemplatedParent}}" ContentTranslationOffset="40" OffsetFromCenter="{Binding TemplateSettings.DropDownOffset, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenedLength="{Binding TemplateSettings.DropDownOpenedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenedTargetName="PopupBorder" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="ComboBoxContent" Background="{TemplateBinding Background}" CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+              </Grid.ColumnDefinitions>
+              <Grid Margin="16,0" CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}">
+                <Grid.Resources>
+                  <!--  Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not  -->
+                  <CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder" TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToContentTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
+                  <CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder" TranslateY="0" />
+                  <um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter" NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}" NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!--  IconPresenter  -->
+                <ContentPresenter x:Name="IconPresenter" MinWidth="25" MaxWidth="34" MaxHeight="34" Margin="0,0,8,0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                <!--  ContentPresenter  -->
+                <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" VerticalAlignment="Center" RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
+                <!--  PlaceholderElement  -->
+                <TextBlock x:Name="PlaceholderElement" Grid.Column="1" VerticalAlignment="Center" Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource M3MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource M3MaterialComboBoxPlaceholderForegroundThemeBrush}}" IsHitTestVisible="False" MaxLines="1" RenderTransformOrigin="0,0.5" Style="{StaticResource LabelMedium}" Text="{TemplateBinding PlaceholderText}">
+                  <TextBlock.RenderTransform>
+                    <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" ScaleX="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" ScaleY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
+                  </TextBlock.RenderTransform>
+                </TextBlock>
+              </Grid>
+              <!--  Down  -->
+              <Path x:Name="DropDownGlyph_Down" Grid.Column="1" Width="10" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center" Data="{StaticResource DownArrowPathData}" Fill="{ThemeResource M3MaterialComboBoxArrowForegroundThemeBrush}" Stretch="Uniform" />
+              <!--  Up  -->
+              <Path x:Name="DropDownGlyph_Up" Grid.Column="1" Width="10" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center" Data="{StaticResource UpArrowPathData}" Fill="{ThemeResource M3MaterialComboBoxArrowForegroundThemeBrush}" Stretch="Uniform" Visibility="Collapsed" />
+              <!--  Popup  -->
+              <Popup x:Name="Popup">
+                <Border x:Name="PopupBorder" CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}" Background="{StaticResource SurfaceBrush}">
+                  <!--  Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
+                  <ScrollViewer x:Name="ScrollViewer" MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalSnapPointsAlignment="Near" VerticalSnapPointsType="OptionalSingle" ZoomMode="Disabled">
+                    <ItemsPresenter />
+                  </ScrollViewer>
+                </Border>
+              </Popup>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
   <!--origin: Styles\Controls\v2\CommandBar.xaml-->
   <x:Double x:Key="M3MaterialCommandBarElevation">4</x:Double>
   <x:Double x:Key="M3MaterialCommandBarHeight">48</x:Double>
@@ -1655,6 +1899,396 @@
       </Setter.Value>
     </Setter>
   </Style>
+  <!--origin: Styles\Controls\v2\FloatingActionButton.xaml-->
+  <StaticResource x:Key="M3MaterialFabForeground" ResourceKey="OnPrimaryContainerBrush" />
+  <StaticResource x:Key="M3MaterialFabBackground" ResourceKey="PrimaryContainerBrush" />
+  <StaticResource x:Key="M3MaterialFabDisabledBackground" ResourceKey="SystemControlTransparentBrush" />
+  <StaticResource x:Key="M3MaterialFabDisabledForeground" ResourceKey="OnSurfaceDisabledBrush" />
+  <StaticResource x:Key="M3MaterialFabPointerOverStateOverlay" ResourceKey="OnPrimaryContainerHoverBrush" />
+  <StaticResource x:Key="M3MaterialFabFocusedStateOverlay" ResourceKey="OnPrimaryContainerFocusedBrush" />
+  <StaticResource x:Key="M3MaterialFabPressedStateOverlay" ResourceKey="OnPrimaryContainerPressedBrush" />
+  <StaticResource x:Key="M3MaterialFabDisabledStateOverlay" ResourceKey="OnSurfaceDisabledLowBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabForeground" ResourceKey="PrimaryBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabBackground" ResourceKey="SurfaceBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabDisabledForeground" ResourceKey="OnSurfaceDisabledBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabPointerOverStateOverlay" ResourceKey="PrimaryHoverBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabFocusedStateOverlay" ResourceKey="PrimaryFocusedBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabPressedStateOverlay" ResourceKey="PrimaryPressedBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabDisabledBackground" ResourceKey="SystemControlTransparentBrush" />
+  <StaticResource x:Key="M3MaterialSurfaceFabDisabledStateOverlay" ResourceKey="OnSurfaceDisabledLowBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabForeground" ResourceKey="OnSecondaryContainerBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabBackground" ResourceKey="SecondaryContainerBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabDisabledBackground" ResourceKey="SystemControlTransparentBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabDisabledForeground" ResourceKey="OnSurfaceDisabledBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabPointerOverStateOverlay" ResourceKey="OnSecondaryContainerHoverBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabFocusedStateOverlay" ResourceKey="OnSecondaryContainerFocusedBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabPressedStateOverlay" ResourceKey="OnSecondaryContainerPressedBrush" />
+  <StaticResource x:Key="M3MaterialSecondaryFabDisabledStateOverlay" ResourceKey="OnSurfaceDisabledLowBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabForeground" ResourceKey="OnTertiaryContainerBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabBackground" ResourceKey="TertiaryContainerBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabDisabledBackground" ResourceKey="SystemControlTransparentBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabDisabledForeground" ResourceKey="OnSurfaceDisabledBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabPointerOverStateOverlay" ResourceKey="OnTertiaryContainerHoverBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabFocusedStateOverlay" ResourceKey="OnTertiaryContainerFocusedBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabPressedStateOverlay" ResourceKey="OnTertiaryContainerFocusedBrush" />
+  <StaticResource x:Key="M3MaterialTertiaryFabDisabledStateOverlay" ResourceKey="OnSurfaceDisabledLowBrush" />
+  <Thickness x:Key="M3MaterialFabPadding">16</Thickness>
+  <x:Double x:Key="M3MaterialFabContentWidthOrHeight">18</x:Double>
+  <CornerRadius x:Key="M3MaterialFabCornerRadius">16</CornerRadius>
+  <Thickness x:Key="M3MaterialSmallFabPadding">8</Thickness>
+  <x:Double x:Key="M3MaterialSmallFabContentWidthOrHeight">18</x:Double>
+  <CornerRadius x:Key="M3MaterialSmallFabCornerRadius">12</CornerRadius>
+  <Thickness x:Key="M3MaterialLargeFabPadding">30</Thickness>
+  <x:Double x:Key="M3MaterialLargeFabContentWidthOrHeight">27</x:Double>
+  <CornerRadius x:Key="M3MaterialLargeFabCornerRadius">28</CornerRadius>
+  <x:Double x:Key="M3MaterialFabFontSize">14</x:Double>
+  <x:Double x:Key="M3MaterialFabIconTextPadding">12</x:Double>
+  <Style x:Key="M3MaterialFabStyle" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource M3MaterialFabBackground}" />
+    <Setter Property="Foreground" Value="{StaticResource M3MaterialFabForeground}" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialFabFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialFabPadding}" />
+    <!--  Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388  -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid>
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+              <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
+                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                  <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
+                    <!--  Icon  -->
+                    <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Viewbox>
+                    <!--  Icon/Content spacing  -->
+                    <Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <Border Width="{StaticResource M3MaterialFabIconTextPadding}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                    </Border>
+                    <!--  Content  -->
+                    <ContentPresenter x:Name="ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" />
+                  </StackPanel>
+                  <Border x:Name="StateOverlay" />
+                </Grid>
+              </um:Ripple>
+            </toolkit:ElevatedView>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialFabPointerOverStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialFabPressedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource M3MaterialFabDisabledForeground}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource M3MaterialFabDisabledForeground}" />
+                    <Setter Target="Root.Background" Value="{StaticResource M3MaterialFabDisabledBackground}" />
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialFabDisabledStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialFabFocusedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialSurfaceFabStyle" BasedOn="{StaticResource M3MaterialFabStyle}" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource M3MaterialSurfaceFabBackground}" />
+    <Setter Property="Foreground" Value="{StaticResource M3MaterialSurfaceFabForeground}" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialFabFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialFabPadding}" />
+    <!--  Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388  -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid>
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+              <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
+                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                  <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
+                    <!--  Icon  -->
+                    <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Viewbox>
+                    <!--  Icon/Content spacing  -->
+                    <Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <Border Width="{StaticResource M3MaterialFabIconTextPadding}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                    </Border>
+                    <!--  Content  -->
+                    <ContentPresenter x:Name="ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" />
+                  </StackPanel>
+                  <Border x:Name="StateOverlay" />
+                </Grid>
+              </um:Ripple>
+            </toolkit:ElevatedView>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSurfaceFabPointerOverStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSurfaceFabPressedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource M3MaterialSurfaceFabDisabledForeground}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource M3MaterialSurfaceFabDisabledForeground}" />
+                    <Setter Target="Root.Background" Value="{StaticResource M3MaterialSurfaceFabDisabledBackground}" />
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSurfaceFabDisabledStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSurfaceFabFocusedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialSecondaryFabStyle" BasedOn="{StaticResource M3MaterialFabStyle}" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource M3MaterialSecondaryFabBackground}" />
+    <Setter Property="Foreground" Value="{StaticResource M3MaterialSecondaryFabForeground}" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialFabFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialFabPadding}" />
+    <!--  Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388  -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid>
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+              <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
+                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                  <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
+                    <!--  Icon  -->
+                    <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Viewbox>
+                    <!--  Icon/Content spacing  -->
+                    <Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <Border Width="{StaticResource M3MaterialFabIconTextPadding}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                    </Border>
+                    <!--  Content  -->
+                    <ContentPresenter x:Name="ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" />
+                  </StackPanel>
+                  <Border x:Name="StateOverlay" />
+                </Grid>
+              </um:Ripple>
+            </toolkit:ElevatedView>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSecondaryFabPointerOverStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSecondaryFabPressedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource M3MaterialSecondaryFabDisabledForeground}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource M3MaterialSecondaryFabDisabledForeground}" />
+                    <Setter Target="Root.Background" Value="{StaticResource M3MaterialSecondaryFabDisabledBackground}" />
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSecondaryFabDisabledStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialSecondaryFabFocusedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialTertiaryFabStyle" BasedOn="{StaticResource M3MaterialFabStyle}" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource M3MaterialTertiaryFabBackground}" />
+    <Setter Property="Foreground" Value="{StaticResource M3MaterialTertiaryFabForeground}" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="FontSize" Value="{StaticResource M3MaterialFabFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialFabPadding}" />
+    <!--  Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388  -->
+    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialFabContentWidthOrHeight}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid>
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+              <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
+                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                  <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
+                    <!--  Icon  -->
+                    <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Viewbox>
+                    <!--  Icon/Content spacing  -->
+                    <Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+                      <Border Width="{StaticResource M3MaterialFabIconTextPadding}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                    </Border>
+                    <!--  Content  -->
+                    <ContentPresenter x:Name="ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" />
+                  </StackPanel>
+                  <Border x:Name="StateOverlay" />
+                </Grid>
+              </um:Ripple>
+            </toolkit:ElevatedView>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialTertiaryFabPointerOverStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialTertiaryFabPressedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="IconPresenter.Foreground" Value="{StaticResource M3MaterialTertiaryFabDisabledForeground}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource M3MaterialTertiaryFabDisabledForeground}" />
+                    <Setter Target="Root.Background" Value="{StaticResource M3MaterialTertiaryFabDisabledBackground}" />
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialTertiaryFabDisabledStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="StateOverlay.Background" Value="{StaticResource M3MaterialTertiaryFabFocusedStateOverlay}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialSmallFabStyle" BasedOn="{StaticResource M3MaterialFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialSmallFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialSmallFabPadding}" />
+  </Style>
+  <Style x:Key="M3MaterialSurfaceSmallFabStyle" BasedOn="{StaticResource M3MaterialSurfaceFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialSmallFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialSmallFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
+  </Style>
+  <Style x:Key="M3MaterialSecondarySmallFabStyle" BasedOn="{StaticResource M3MaterialSecondaryFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialSmallFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialSmallFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
+  </Style>
+  <Style x:Key="M3MaterialTertiarySmallFabStyle" BasedOn="{StaticResource M3MaterialTertiaryFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialSmallFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialSmallFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
+  </Style>
+  <Style x:Key="M3MaterialLargeFabStyle" BasedOn="{StaticResource M3MaterialFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialLargeFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialLargeFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+  </Style>
+  <Style x:Key="M3MaterialSurfaceLargeFabStyle" BasedOn="{StaticResource M3MaterialSurfaceFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialLargeFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialLargeFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+  </Style>
+  <Style x:Key="M3MaterialSecondaryLargeFabStyle" BasedOn="{StaticResource M3MaterialSecondaryFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialLargeFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialLargeFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+  </Style>
+  <Style x:Key="M3MaterialTertiaryLargeFabStyle" BasedOn="{StaticResource M3MaterialTertiaryFabStyle}" TargetType="Button">
+    <Setter Property="CornerRadius" Value="{StaticResource M3MaterialLargeFabCornerRadius}" />
+    <Setter Property="Padding" Value="{StaticResource M3MaterialLargeFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
+  </Style>
+  <Style x:Key="M3MaterialExtendedFabStyle" BasedOn="{StaticResource M3MaterialFabStyle}" TargetType="Button" />
+  <Style x:Key="M3MaterialSurfaceExtendedFabStyle" BasedOn="{StaticResource M3MaterialSurfaceFabStyle}" TargetType="Button" />
+  <Style x:Key="M3MaterialSecondaryExtendedFabStyle" BasedOn="{StaticResource M3MaterialSecondaryFabStyle}" TargetType="Button" />
+  <Style x:Key="M3MaterialTertiaryExtendedFabStyle" BasedOn="{StaticResource M3MaterialTertiaryFabStyle}" TargetType="Button" />
   <!--origin: Styles\Controls\v2\Flyout.xaml-->
   <x:String x:Key="M3MaterialFlyoutCheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
   <x:String x:Key="M3MaterialFlyoutRightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>

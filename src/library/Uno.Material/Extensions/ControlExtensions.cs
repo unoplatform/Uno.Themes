@@ -27,6 +27,28 @@ namespace Uno.Material
 
 		public static IconElement GetIcon(Control obj) => (IconElement)obj.GetValue(IconProperty);
 		public static void SetIcon(Control obj, IconElement value) => obj.SetValue(IconProperty, value);
+#endregion
+
+#region DependencyProperty: IconHeight
+		public static DependencyProperty IconHeightProperty { get; } = DependencyProperty.RegisterAttached(
+			"IconHeight",
+			typeof(double),
+			typeof(ControlExtensions),
+			new PropertyMetadata(Double.NaN));
+
+		public static double GetIconHeight(Control obj) => (double)obj.GetValue(IconHeightProperty);
+		public static void SetIconHeight(Control obj, double value) => obj.SetValue(IconHeightProperty, value);
+#endregion
+
+#region DependencyProperty: IconWidth 
+		public static DependencyProperty IconWidthProperty { get; } = DependencyProperty.RegisterAttached(
+			"IconWidth",
+			typeof(double),
+			typeof(ControlExtensions),
+			new PropertyMetadata(Double.NaN));
+
+		public static double GetIconWidth(Control obj) => (double)obj.GetValue(IconWidthProperty);
+		public static void SetIconWidth(Control obj, double value) => obj.SetValue(IconWidthProperty, value);
 
 #endregion
 
