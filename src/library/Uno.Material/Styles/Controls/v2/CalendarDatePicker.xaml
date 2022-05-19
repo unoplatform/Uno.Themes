@@ -4,6 +4,10 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="not_win">
 	
+	<SolidColorBrush x:Key="M3MaterialCalendarDatePickerBackground"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="0.12" />
+
 	<Style x:Key="DefaultM3MaterialCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
 		<Setter Property="Foreground"
@@ -183,7 +187,7 @@
 						</FlyoutBase.AttachedFlyout>
 
 						<Border x:Name="Background"
-								Background="{StaticResource OnSurfaceBrush}"
+								Background="{StaticResource M3MaterialCalendarDatePickerBackground}"
 								CornerRadius="4,4,0,0"
 								Control.IsTemplateFocusTarget="True"
 								MinHeight="53" />
