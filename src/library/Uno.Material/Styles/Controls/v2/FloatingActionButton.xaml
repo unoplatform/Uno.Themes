@@ -181,7 +181,6 @@
 										                  Content="{TemplateBinding Content}"
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
-										                  CornerRadius="{StaticResource M3MaterialButtonCornerRadius}"
 										                  FontFamily="{TemplateBinding FontFamily}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
@@ -317,7 +316,6 @@
 										                  Content="{TemplateBinding Content}"
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
-										                  CornerRadius="{StaticResource M3MaterialButtonCornerRadius}"
 										                  FontFamily="{TemplateBinding FontFamily}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
@@ -453,7 +451,6 @@
 										                  Content="{TemplateBinding Content}"
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
-										                  CornerRadius="{StaticResource M3MaterialButtonCornerRadius}"
 										                  FontFamily="{TemplateBinding FontFamily}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
@@ -589,7 +586,6 @@
 										                  Content="{TemplateBinding Content}"
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
-										                  CornerRadius="{StaticResource M3MaterialButtonCornerRadius}"
 										                  FontFamily="{TemplateBinding FontFamily}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
@@ -756,5 +752,23 @@
 		<Setter Property="um:ControlExtensions.IconWidth"
 		        Value="{StaticResource M3MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
+	<!--#endregion-->
+
+	<!--#region Extended -->
+	<Style x:Key="M3MaterialExtendedFabStyle"
+	       BasedOn="{StaticResource M3MaterialFabStyle}"
+	       TargetType="Button" />
+
+	<Style x:Key="M3MaterialSurfaceExtendedFabStyle"
+	       BasedOn="{StaticResource M3MaterialSurfaceFabStyle}"
+	       TargetType="Button" />
+	
+	<Style x:Key="M3MaterialSecondaryExtendedFabStyle"
+	       BasedOn="{StaticResource M3MaterialSecondaryFabStyle}"
+	       TargetType="Button" />
+	
+	<Style x:Key="M3MaterialTertiaryExtendedFabStyle"
+	       BasedOn="{StaticResource M3MaterialTertiaryFabStyle}"
+	       TargetType="Button" />
 	<!--#endregion-->
 </ResourceDictionary>
