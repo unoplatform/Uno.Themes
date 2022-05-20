@@ -1,6 +1,16 @@
-﻿![Uno Material](./images/MaterialBanner.png)
+﻿# Uno.Themes
 
-This library is designed to help you use [Material Design 3](https://m3.material.io/). It includes:
+[![Open Uno.Themes in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/unoplatform/uno.themes) 
+[![Azure DevOps](https://uno-platform.visualstudio.com/Uno%20Platform/_apis/build/status/Uno%20Platform/Uno.Themes%20-%20CI?branchName=master)](https://uno-platform.visualstudio.com/Uno%20Platform/_build/latest?definitionId=89&branchName=master)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
+`Uno.Themes` is the repo for add-ons NuGet packages that can be added to any new or existing Uno solution.
+
+It contains two libraries:
+- **`Uno Material`** library is designed to help you use [Material Design 3](https://m3.material.io/)
+- **`Uno Cupertino`** library is designed to help you use [Cupertino - Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines/). 
+
+Both libraries include:
 - Color system for both Light and Dark theme
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
 
@@ -12,9 +22,8 @@ Platform support:
 - WebAssembly
 - Linux (Skia.Gtk)
 
-![Uno Material](./images/UnoMaterial.png)
+## Packages
 
-<!-- TODO : Insert build status -->
 Package|Stable|Preview
 -|-|-
 Uno.Material|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Material?label=stable)](https://www.nuget.org/packages/Uno.Material)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Material?label=preview)](https://www.nuget.org/packages/Uno.Material)
@@ -22,40 +31,42 @@ Uno.Material.WinUI|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Material.
 Uno.Cupertino|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Cupertino?label=stable)](https://www.nuget.org/packages/Uno.Cupertino)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Cupertino?label=preview)](https://www.nuget.org/packages/Uno.Cupertino)
 Uno.Cupertino.WinUI|[![NuGet stable](https://img.shields.io/nuget/v/Uno.Cupertino.WinUI?label=stable)](https://www.nuget.org/packages/Uno.Cupertino.WinUI)|[![NuGet preview](https://img.shields.io/nuget/vpre/Uno.Cupertino.WinUI?label=preview)](https://www.nuget.org/packages/Uno.Cupertino.WinUI)
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-
 
 ## Getting Started
 
-See the complete [Getting Started](doc/getting-started.md) guide for starting with this library.
+See the complete [documentation](#documentation) for starting with this library.
 
 For a larger example and features demo, visit the [Uno Gallery](https://github.com/unoplatform/uno.gallery) repository.
 
 ## Documentation
 
-All documentation for Uno.Themes can be found [here](doc/) or on [Uno Platform documentation](https://platform.uno/docs/articles/intro.html).
+All documentation for `Uno.Themes` can be found on our [website](https://platform.uno).
+
+## Contributing
+
+Please read our [contributing guide](CONTRIBUTING.md) to learn about our development process and how to propose bug fixes and improvements. 
+Come visit us on our [Discord Channel #uno-platform](https://discord.gg/eBHZSKG) for help on how to contribute!
+
+Contribute to Uno in your browser using [GitPod.io](https://gitpod.io), follow [our guide here](https://platform.uno/docs/articles/features/working-with-gitpod.html).
+
+Be also mindful of our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Acknowledgments
+- [Uno Platform](https://platform.uno)
+- [Material Design 3](https://m3.material.io/)
+- [Material Design](https://material.io/design)
+- [Material Design In XAML](https://github.com/MaterialDesignInXAML) as inspiration for UWP ripple effect.
+- [Cupertino - Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
+- [ShowMeTheXaml](https://github.com/Keboo/ShowMeTheXAML) for code snippets. Through [our Fork](https://github.com/unoplatform/ShowMeTheXAML)
+- [WinUI](https://microsoft.github.io/microsoft-ui-xaml/)
 
 ## License
 
 This project is licensed under the Apache 2.0 license - see the
 [LICENSE](LICENSE) file for details.
 
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the process for
-contributing to this project.
-
-Be mindful of our [Code of Conduct](CODE_OF_CONDUCT.md).
-
-## Acknowledgments
-- [Uno Platform](https://platform.uno)
-- [Material Design](https://material.io/design)
-- [Material Design In XAML](https://github.com/MaterialDesignInXAML) as inspiration for UWP ripple effect
-- [ShowMeTheXaml](https://github.com/Keboo/ShowMeTheXAML) for code snippets. Through [our Fork](https://github.com/unoplatform/ShowMeTheXAML)
-- [WinUI](https://microsoft.github.io/microsoft-ui-xaml/)
-
 ## Contributors
-Thanks goes to these wonderful people (List made with [contrib.rocks](https://contrib.rocks)):
+Thanks go to these wonderful people (List made with [contrib.rocks](https://contrib.rocks)):
 
 [![Uno.Themes Contributors](https://contrib.rocks/image?repo=unoplatform/Uno.Themes)](https://github.com/unoplatform/Uno.Themes/graphs/contributors)
 
