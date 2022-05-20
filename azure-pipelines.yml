@@ -1,4 +1,36 @@
-﻿variables:
+﻿trigger:
+  branches:
+    include:
+      - master
+      - stable
+      - release/stable/*
+
+  paths:
+    include:
+    - '/'
+    exclude:
+    - .github/
+    # don't trigger the CI if only docs files are changed
+    - doc/*
+    - '**/*.md'
+
+pr: 
+  branches:
+    include:
+      - master
+      - stable
+      - release/stable/*
+
+  paths:
+    include:
+    - '/'
+    exclude:
+    - .github/
+    # don't trigger the CI if only docs files are changed
+    - doc/*
+    - '**/*.md'
+
+variables:
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
   
