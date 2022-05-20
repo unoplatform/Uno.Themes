@@ -1,4 +1,4 @@
-# Control Styles
+# Material Controls Styles
 Control|Style Key|WithImplicitStyles*|
 -|-|-
 AppBarButton|AppBarButtonStyle|true
