@@ -134,6 +134,7 @@ namespace Uno.Material
 			Add("M3MaterialSurfaceExtendedFabStyle");	
 			Add("M3MaterialSecondaryExtendedFabStyle");	
 			Add("M3MaterialTertiaryExtendedFabStyle");
+			Add("M3MaterialSliderStyle");
 			return result;
 
 			void Add(string key, string alias = null, bool isImplicit = false) =>
