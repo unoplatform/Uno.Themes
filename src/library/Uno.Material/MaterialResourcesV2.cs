@@ -138,6 +138,8 @@ namespace Uno.Material
 			Add("M3MaterialToggleSwitchStyle", isImplicit: true);
 			Add("M3MaterialHyperlinkButtonStyle", isImplicit: true);
 			Add("M3MaterialSecondaryHyperlinkButtonStyle");
+			Add("M3MaterialProgressRingStyle", isImplicit: true);
+			Add("M3MaterialProgressBarStyle", isImplicit: true);
 			return result;
 
 			void Add(string key, string alias = null, bool isImplicit = false) =>
