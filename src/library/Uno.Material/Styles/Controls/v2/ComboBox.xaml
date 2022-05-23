@@ -20,69 +20,69 @@
 	                             NullValue="0" />
 
 	<um:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
-	                             NotNullValue="{StaticResource M3MaterialComboBoxPlaceholderFocusedThemeBrush}"
-	                             NullValue="{StaticResource M3MaterialComboBoxPlaceholderForegroundThemeBrush}" />
+	                             NotNullValue="{StaticResource MaterialComboBoxPlaceholderFocusedThemeBrush}"
+	                             NullValue="{StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}" />
 
 	<!-- ComboBoxItem Brushes -->
-	<StaticResource x:Key="M3MaterialComboBoxItemForegroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxItemForegroundThemeBrush"
 	                ResourceKey="OnSurfaceBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxItemSelectedBackgroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxItemSelectedBackgroundThemeBrush"
 	                ResourceKey="PrimarySelectedBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush"
 	                ResourceKey="OnSurfaceVariantHoverBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxItemPointerOverBackgroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxItemPointerOverBackgroundThemeBrush"
 	                ResourceKey="OnSurfaceVariantHoverBrush" />
 
 
 	<!-- ComboBox Brushes -->
-	<StaticResource x:Key="M3MaterialComboBoxBackgroundColorBrush"
+	<StaticResource x:Key="MaterialComboBoxBackgroundColorBrush"
 	                ResourceKey="SystemControlTransparentBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxBorderBrush"
+	<StaticResource x:Key="MaterialComboBoxBorderBrush"
 	                ResourceKey="OutlineBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxFocusedBorderBrush"
+	<StaticResource x:Key="MaterialComboBoxFocusedBorderBrush"
 	                ResourceKey="OnBackgroundBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxOpenedBorderBrush"
+	<StaticResource x:Key="MaterialComboBoxOpenedBorderBrush"
 	                ResourceKey="PrimaryBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxArrowForegroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxArrowForegroundThemeBrush"
 	                ResourceKey="OutlineBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxOpenedArrowForegroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxOpenedArrowForegroundThemeBrush"
 	                ResourceKey="PrimaryBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxForegroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxForegroundThemeBrush"
 	                ResourceKey="OnSurfaceBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxPlaceholderFocusedThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxPlaceholderFocusedThemeBrush"
 	                ResourceKey="PrimaryBrush" />
 
-	<StaticResource x:Key="M3MaterialComboBoxPlaceholderForegroundThemeBrush"
+	<StaticResource x:Key="MaterialComboBoxPlaceholderForegroundThemeBrush"
 	                ResourceKey="OutlineBrush" />
 
 	<!--  CornerRadius  -->
-	<CornerRadius x:Key="M3MaterialComboBoxCornerRadius">4</CornerRadius>
+	<CornerRadius x:Key="MaterialComboBoxCornerRadius">4</CornerRadius>
 
 	<!--  Path Data  -->
 	<x:String x:Key="UpArrowPathData">M15.995972,0L32,21.478999 0,21.478999z</x:String>
 	<x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
 
-	<Thickness x:Key="M3MaterialComboBoxBorderThickness">1</Thickness>
-	<Thickness x:Key="M3MaterialComboBoxOpenedBorderThickness">2</Thickness>
+	<Thickness x:Key="MaterialComboBoxBorderThickness">1</Thickness>
+	<Thickness x:Key="MaterialComboBoxOpenedBorderThickness">2</Thickness>
 
 	<!--  Style  -->
-	<Style x:Key="M3MaterialComboBoxItemStyle"
+	<Style x:Key="MaterialComboBoxItemStyle"
 	       TargetType="ComboBoxItem">
 
 		<Setter Property="Background"
 		        Value="Transparent" />
 		<Setter Property="Foreground"
-		        Value="{StaticResource M3MaterialComboBoxItemForegroundThemeBrush}" />
+		        Value="{StaticResource MaterialComboBoxItemForegroundThemeBrush}" />
 		<Setter Property="VerticalContentAlignment"
 		        Value="Center" />
 		<Setter Property="HorizontalContentAlignment"
@@ -105,7 +105,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="PressedOverlay.Background"
-										        Value="{ThemeResource M3MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
+										        Value="{ThemeResource MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -122,7 +122,7 @@
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="PressedOverlay.Background"
-										        Value="{ThemeResource M3MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
+										        Value="{ThemeResource MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -146,7 +146,7 @@
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
 										<Setter Target="PressedOverlay.Background"
-										        Value="{ThemeResource M3MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
+										        Value="{ThemeResource MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -163,7 +163,7 @@
 								<VisualState x:Name="SelectedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="PressedOverlay.Background"
-										        Value="{ThemeResource M3MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush}" />
+										        Value="{ThemeResource MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -187,7 +187,7 @@
 								<VisualState x:Name="SelectedPressed">
 									<VisualState.Setters>
 										<Setter Target="PressedOverlay.Background"
-										        Value="{ThemeResource M3MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
+										        Value="{ThemeResource MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -207,7 +207,7 @@
 						<Grid x:Name="PressedOverlay"
 						      HorizontalAlignment="Stretch"
 						      VerticalAlignment="Stretch"
-						      Background="{StaticResource M3MaterialComboBoxItemSelectedBackgroundThemeBrush}"
+						      Background="{StaticResource MaterialComboBoxItemSelectedBackgroundThemeBrush}"
 						      IsHitTestVisible="False"
 						      Opacity="0" />
 
@@ -221,7 +221,7 @@
 										<TextBlock Margin="16,0,0,0"
 										           VerticalAlignment="Center"
 										           Foreground="{TemplateBinding Foreground}"
-										           Style="{StaticResource LabelLarge}"
+										           Style="{StaticResource MaterialLabelLarge}"
 										           Text="{Binding}" />
 									</Grid>
 								</DataTemplate>
@@ -233,17 +233,17 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="M3MaterialComboBoxStyle"
+	<Style x:Key="MaterialComboBoxStyle"
 	       TargetType="ComboBox">
 
 		<Setter Property="Foreground"
-		        Value="{ThemeResource M3MaterialComboBoxForegroundThemeBrush}" />
+		        Value="{ThemeResource MaterialComboBoxForegroundThemeBrush}" />
 		<Setter Property="Background"
-		        Value="{StaticResource M3MaterialComboBoxBackgroundColorBrush}" />
+		        Value="{StaticResource MaterialComboBoxBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
-		        Value="{StaticResource M3MaterialComboBoxBorderBrush}" />
+		        Value="{StaticResource MaterialComboBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
-		        Value="{StaticResource M3MaterialComboBoxBorderThickness}" />
+		        Value="{StaticResource MaterialComboBoxBorderThickness}" />
 		<Setter Property="Padding"
 		        Value="0" />
 		<Setter Property="MinHeight"
@@ -269,7 +269,7 @@
 		<Setter Property="HorizontalAlignment"
 		        Value="Stretch" />
 		<Setter Property="ItemContainerStyle"
-		        Value="{StaticResource M3MaterialComboBoxItemStyle}" />
+		        Value="{StaticResource MaterialComboBoxItemStyle}" />
 		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 		                Value="Below" />
 
@@ -293,7 +293,7 @@
 					      Background="{TemplateBinding Background}"
 					      BorderBrush="{TemplateBinding BorderBrush}"
 					      BorderThickness="{TemplateBinding BorderThickness}"
-					      CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}">
+					      CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -319,11 +319,11 @@
 								<VisualState x:Name="Opened">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush"
-										        Value="{StaticResource M3MaterialComboBoxOpenedBorderBrush}" />
+										        Value="{StaticResource MaterialComboBoxOpenedBorderBrush}" />
 										<Setter Target="RootGrid.BorderThickness"
-										        Value="{StaticResource M3MaterialComboBoxOpenedBorderThickness}" />
+										        Value="{StaticResource MaterialComboBoxOpenedBorderThickness}" />
 										<Setter Target="DropDownGlyph_Up.Fill"
-										        Value="{StaticResource M3MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
+										        Value="{StaticResource MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
 										<Setter Target="DropDownGlyph_Down.Visibility"
 										        Value="Collapsed" />
 										<Setter Target="DropDownGlyph_Up.Visibility"
@@ -344,9 +344,9 @@
 								<VisualState x:Name="Closed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush"
-										        Value="{StaticResource M3MaterialComboBoxBorderBrush}" />
+										        Value="{StaticResource MaterialComboBoxBorderBrush}" />
 										<Setter Target="RootGrid.BorderThickness"
-										        Value="{StaticResource M3MaterialComboBoxBorderThickness}" />
+										        Value="{StaticResource MaterialComboBoxBorderThickness}" />
 										<Setter Target="DropDownGlyph_Down.Visibility"
 										        Value="Visible" />
 										<Setter Target="DropDownGlyph_Up.Visibility"
@@ -367,14 +367,14 @@
 						</VisualStateManager.VisualStateGroups>
 						<Grid x:Name="ComboBoxContent"
 						      Background="{TemplateBinding Background}"
-						      CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}">
+						      CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="40" />
 							</Grid.ColumnDefinitions>
 
 							<Grid Margin="16,0"
-							      CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}">
+							      CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
 								<Grid.Resources>
 									<!--  Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not  -->
 									<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder"
@@ -413,11 +413,11 @@
 								<TextBlock x:Name="PlaceholderElement"
 								           Grid.Column="1"
 								           VerticalAlignment="Center"
-								           Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource M3MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource M3MaterialComboBoxPlaceholderForegroundThemeBrush}}"
+								           Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}"
 								           IsHitTestVisible="False"
 								           MaxLines="1"
 								           RenderTransformOrigin="0,0.5"
-								           Style="{StaticResource LabelMedium}"
+								           Style="{StaticResource MaterialLabelMedium}"
 								           Text="{TemplateBinding PlaceholderText}">
 									<TextBlock.RenderTransform>
 										<CompositeTransform x:Name="PlaceholderElement_CompositeTransform"
@@ -436,7 +436,7 @@
 							      HorizontalAlignment="Center"
 							      VerticalAlignment="Center"
 							      Data="{StaticResource DownArrowPathData}"
-							      Fill="{ThemeResource M3MaterialComboBoxArrowForegroundThemeBrush}"
+							      Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}"
 							      Stretch="Uniform" />
 
 							<!--  Up  -->
@@ -447,14 +447,14 @@
 							      HorizontalAlignment="Center"
 							      VerticalAlignment="Center"
 							      Data="{StaticResource UpArrowPathData}"
-							      Fill="{ThemeResource M3MaterialComboBoxArrowForegroundThemeBrush}"
+							      Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}"
 							      Stretch="Uniform"
 							      Visibility="Collapsed" />
 
 							<!--  Popup  -->
 							<Popup x:Name="Popup">
 								<Border x:Name="PopupBorder"
-										CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}"
+										CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 								        Background="{StaticResource SurfaceBrush}">
 
 									<!--  Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
@@ -462,7 +462,7 @@
 									              MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}"
 									              AutomationProperties.AccessibilityView="Raw"
 									              BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-									              CornerRadius="{StaticResource M3MaterialComboBoxCornerRadius}"
+									              CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
 									              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
 									              HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
 									              IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"

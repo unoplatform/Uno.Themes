@@ -11,48 +11,48 @@
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary  x:Key="Light">
 			<!-- Non-opaque/transparent primary disabled color -->
-			<Color x:Key="M3MaterialPrimaryVariantLowThumbColor">#E9E5FA</Color>
+			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#E9E5FA</Color>
 			<!-- Non-opaque/transparent white color that shows on white surfaces -->
-			<Color x:Key="M3MaterialSurfaceVariantLightColor">#F7F7F7</Color>
+			<Color x:Key="MaterialSurfaceVariantLightColor">#F7F7F7</Color>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Dark">
 			<!-- Non-opaque/transparent primary disabled color -->
-			<Color x:Key="M3MaterialPrimaryVariantLowThumbColor">#57507C</Color>
+			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#57507C</Color>
 			<!-- Non-opaque/transparent white color that shows on white surfaces -->
-			<Color x:Key="M3MaterialSurfaceVariantLightColor">#D7D7D7</Color>
+			<Color x:Key="MaterialSurfaceVariantLightColor">#D7D7D7</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 	
 
 
 	<!--  Toggle On  -->
-	<StaticResource x:Key="M3MaterialToggleSwitchOnButtonBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOnButtonBrush"
 	                ResourceKey="PrimaryBrush" />
-	<StaticResource x:Key="M3MaterialToggleSwitchOnBackgroundBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOnBackgroundBrush"
 	                ResourceKey="PrimaryVariantLightBrush" />
 
 	<!--  Toggle Off  -->
-	<StaticResource x:Key="M3MaterialToggleSwitchOffButtonBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOffButtonBrush"
 	                ResourceKey="OnPrimaryBrush" />
-	<StaticResource x:Key="M3MaterialToggleSwitchOffBackgroundBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOffBackgroundBrush"
 	                ResourceKey="OnSurfaceLowBrush" />
 
 	<!--  Toggle On Disabled  -->
-	<StaticResource x:Key="M3MaterialToggleSwitchOnLowButtonBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOnLowButtonBrush"
 	                ResourceKey="OnSurfaceSelectedBrush" />
-	<StaticResource x:Key="M3MaterialToggleSwitchOnLowBackgroundBrush"
+	<StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush"
 	                ResourceKey="OnSurfaceSelectedBrush" />
 
-	<SolidColorBrush x:Key="M3MaterialPrimaryVariantLowThumbColorBrush" Color="{ThemeResource M3MaterialPrimaryVariantLowThumbColor}"/>
+	<SolidColorBrush x:Key="MaterialPrimaryVariantLowThumbColorBrush" Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}"/>
 
-	<not_mobile:Style x:Key="M3MaterialToggleSwitchStyle"
+	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
 	                  TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
 		        Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Foreground"
-		        Value="{StaticResource M3MaterialToggleSwitchOnButtonBrush}" />
+		        Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
-		        Value="{StaticResource M3MaterialToggleSwitchOnBackgroundBrush}" />
+		        Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 
 		<!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
 		<Setter Property="MinWidth"
@@ -113,36 +113,36 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialToggleSwitchOnLowBackgroundBrush}" />
+											                        Value="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialToggleSwitchOnLowBackgroundBrush}" />
+											                        Value="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialToggleSwitchOffButtonBrush}" />
+											                        Value="{StaticResource MaterialToggleSwitchOffButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialToggleSwitchOffButtonBrush}" />
+											                        Value="{StaticResource MaterialToggleSwitchOffButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOffStateOverlay"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialToggleSwitchOnLowButtonBrush}" />
+											                        Value="{StaticResource MaterialToggleSwitchOnLowButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnStateOverlay"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialToggleSwitchOnLowButtonBrush}" />
+											                        Value="{StaticResource MaterialToggleSwitchOnLowButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -389,7 +389,7 @@
 
 						<TextBlock Grid.ColumnSpan="4"
 						           Foreground="{StaticResource OnBackgroundBrush}"
-						           Style="{StaticResource BodyMedium}"
+						           Style="{StaticResource MaterialBodyMedium}"
 						           Text="{TemplateBinding Header}"
 						           Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" />
 
@@ -418,7 +418,7 @@
 						           Width="34"
 						           Height="14"
 						           Margin="10,0"
-						           Fill="{StaticResource M3MaterialToggleSwitchOffBackgroundBrush}"
+						           Fill="{StaticResource MaterialToggleSwitchOffBackgroundBrush}"
 						           RadiusX="7"
 						           RadiusY="7" />
 
@@ -476,7 +476,7 @@
 									<Ellipse x:Name="SwitchKnobOff"
 									         Width="20"
 									         Height="20"
-									         Fill="{StaticResource M3MaterialToggleSwitchOffButtonBrush}" />
+									         Fill="{StaticResource MaterialToggleSwitchOffButtonBrush}" />
 
 									<Ellipse x:Name="SwitchKnobOffStateOverlay"
 									         Width="20"
@@ -502,7 +502,7 @@
 		</Setter>
 	</not_mobile:Style>
 
-	<ios:Style x:Key="M3MaterialToggleSwitchStyle"
+	<ios:Style x:Key="MaterialToggleSwitchStyle"
 	           TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
 		        Value="{StaticResource MaterialRegularFontFamily}" />
@@ -511,7 +511,7 @@
 		<Setter Property="HorizontalContentAlignment"
 		        Value="Stretch" />
 		<Setter Property="Foreground"
-		        Value="{StaticResource M3MaterialToggleSwitchOnButtonBrush}" />
+		        Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 
 		<!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
 		<Setter Property="MinWidth"
@@ -551,12 +551,12 @@
 		</Setter>
 	</ios:Style>
 
-	<android:Style x:Key="M3MaterialToggleSwitchStyle"
+	<android:Style x:Key="MaterialToggleSwitchStyle"
 	               TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
 		        Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Foreground"
-		        Value="{StaticResource M3MaterialToggleSwitchOnButtonBrush}" />
+		        Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="HorizontalAlignment"
 		        Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -599,7 +599,7 @@
 								<VisualState x:Name="Off">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
-										        Value="{StaticResource M3MaterialToggleSwitchOffBackgroundBrush}" />
+										        Value="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 										        Value="Collapsed" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -610,7 +610,7 @@
 								<VisualState x:Name="On">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
-										        Value="{StaticResource M3MaterialToggleSwitchOnBackgroundBrush}" />
+										        Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 										        Value="Visible" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -640,7 +640,7 @@
 						                  ContentTemplate="{TemplateBinding HeaderTemplate}"
 						                  Foreground="{StaticResource OnBackgroundBrush}" />
 
-						<!--  TODO: fix disabled on thumbtint, using M3MaterialToggleSwitchOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch  -->
+						<!--  TODO: fix disabled on thumbtint, using MaterialToggleSwitchOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch  -->
 						<!--  Grid is used because we can not collapse the visibility of a BindableSwitchCompat  -->
 						<Grid x:Name="OnDisabledGrid"
 						      Grid.Row="1"
@@ -650,8 +650,8 @@
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn,
 							                                                Mode=TwoWay}"
 							                      Enabled="{TemplateBinding IsEnabled}"
-							                      ThumbTint="{ThemeResource M3MaterialPrimaryVariantLowThumbColorBrush}"
-							                      TrackTint="{ThemeResource M3MaterialToggleSwitchOnLowBackgroundBrush}" />
+							                      ThumbTint="{ThemeResource MaterialPrimaryVariantLowThumbColorBrush}"
+							                      TrackTint="{ThemeResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 						</Grid>
 
 						<!--  Grid is used because we can not collapse the visibility of a BindableSwitchCompat  -->
@@ -663,8 +663,8 @@
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn,
 							                                                Mode=TwoWay}"
 							                      Enabled="{TemplateBinding IsEnabled}"
-							                      ThumbTint="{StaticResource M3MaterialPrimaryVariantLowThumbColorBrush}"
-							                      TrackTint="{StaticResource M3MaterialToggleSwitchOnLowBackgroundBrush}" />
+							                      ThumbTint="{StaticResource MaterialPrimaryVariantLowThumbColorBrush}"
+							                      TrackTint="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 						</Grid>
 
 						<!--  Grid is used because we can not collapse the visibility of a BindableSwitchCompat  -->

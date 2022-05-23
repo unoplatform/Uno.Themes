@@ -7,22 +7,22 @@
                     xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     mc:Ignorable="not_win ios android">
 
-	<x:String x:Key="M3MaterialFlyoutCheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
-	<x:String x:Key="M3MaterialFlyoutRightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>
-	<x:Double x:Key="M3MaterialFlyoutPresenterMinWidth">112</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutPresenterMaxWidth">280</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutMenuItemHeight">48</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutMenuItemIconHeight">16</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutMenuItemIconWidth">16</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutMenuToggleCheckGlyphWidth">16</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutMenuToggleCheckGlyphHeight">16</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutMenuSeparatorHeight">1</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutFontSize">14</x:Double>
-	<x:Double x:Key="M3MaterialFlyoutCharacterSpacing">7.143</x:Double>
-	<GridLength x:Key="M3MaterialFlyoutMenuItemRightMargin">38</GridLength>
+	<x:String x:Key="MaterialFlyoutCheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
+	<x:String x:Key="MaterialFlyoutRightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>
+	<x:Double x:Key="MaterialFlyoutPresenterMinWidth">112</x:Double>
+	<x:Double x:Key="MaterialFlyoutPresenterMaxWidth">280</x:Double>
+	<x:Double x:Key="MaterialFlyoutMenuItemHeight">48</x:Double>
+	<x:Double x:Key="MaterialFlyoutMenuItemIconHeight">16</x:Double>
+	<x:Double x:Key="MaterialFlyoutMenuItemIconWidth">16</x:Double>
+	<x:Double x:Key="MaterialFlyoutMenuToggleCheckGlyphWidth">16</x:Double>
+	<x:Double x:Key="MaterialFlyoutMenuToggleCheckGlyphHeight">16</x:Double>
+	<x:Double x:Key="MaterialFlyoutMenuSeparatorHeight">1</x:Double>
+	<x:Double x:Key="MaterialFlyoutFontSize">14</x:Double>
+	<x:Double x:Key="MaterialFlyoutCharacterSpacing">7.143</x:Double>
+	<GridLength x:Key="MaterialFlyoutMenuItemRightMargin">38</GridLength>
 
 	<!--  Material FlyoutPresenter Style  -->
-	<Style x:Key="M3MaterialFlyoutPresenterStyle"
+	<Style x:Key="MaterialFlyoutPresenterStyle"
 	       TargetType="FlyoutPresenter">
 		<Setter Property="HorizontalAlignment"
 		        Value="Stretch" />
@@ -62,7 +62,7 @@
 	</Style>
 
 	<!--  Material Content FlyoutPresenter Style  -->
-	<Style x:Key="M3MaterialContentFlyoutPresenterStyle"
+	<Style x:Key="MaterialContentFlyoutPresenterStyle"
 	       TargetType="FlyoutPresenter">
 
 		<Setter Property="Foreground"
@@ -71,16 +71,16 @@
 		        Value="{StaticResource SurfaceBrush}" />
 		<!--  Start: Label Large Typo  -->
 		<Setter Property="FontSize"
-		        Value="{StaticResource M3MaterialFlyoutFontSize}" />
+		        Value="{StaticResource MaterialFlyoutFontSize}" />
 		<Setter Property="FontWeight"
 		        Value="Medium" />
 		<Setter Property="FontFamily"
 		        Value="{StaticResource MaterialMediumFontFamily}" />
 		<Setter Property="CharacterSpacing"
-		        Value="{StaticResource M3MaterialFlyoutCharacterSpacing}" />
+		        Value="{StaticResource MaterialFlyoutCharacterSpacing}" />
 		<!--  End: Label Large Typo  -->
 		<Setter Property="MinWidth"
-		        Value="{StaticResource M3MaterialFlyoutPresenterMinWidth}" />
+		        Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />
 		<Setter Property="ScrollViewer.HorizontalScrollMode"
 		        Value="Disabled" />
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
@@ -94,7 +94,7 @@
 	</Style>
 
 	<!--  Material MenuFlyoutPresenter Style  -->
-	<Style x:Key="M3MaterialMenuFlyoutPresenterStyle"
+	<Style x:Key="MaterialMenuFlyoutPresenterStyle"
 	       TargetType="MenuFlyoutPresenter">
 
 		<Setter Property="Foreground"
@@ -103,18 +103,18 @@
 		        Value="{StaticResource SurfaceBrush}" />
 		<!--  Start: Label Large Typo  -->
 		<Setter Property="FontSize"
-		        Value="{StaticResource M3MaterialFlyoutFontSize}" />
+		        Value="{StaticResource MaterialFlyoutFontSize}" />
 		<Setter Property="FontWeight"
 		        Value="Medium" />
 		<Setter Property="FontFamily"
 		        Value="{StaticResource MaterialMediumFontFamily}" />
 		<Setter Property="CharacterSpacing"
-		        Value="{StaticResource M3MaterialFlyoutCharacterSpacing}" />
+		        Value="{StaticResource MaterialFlyoutCharacterSpacing}" />
 		<!--  End: Label Large Typo  -->
 		<Setter Property="MinWidth"
-		        Value="{StaticResource M3MaterialFlyoutPresenterMinWidth}" />
+		        Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />
 		<Setter Property="MaxWidth"
-		        Value="{StaticResource M3MaterialFlyoutPresenterMaxWidth}" />
+		        Value="{StaticResource MaterialFlyoutPresenterMaxWidth}" />
 		<Setter Property="CornerRadius"
 		        Value="4" />
 		<Setter Property="Margin"
@@ -122,7 +122,7 @@
 	</Style>
 
 	<!--  Material MenuFlyoutItem Style  -->
-	<Style x:Key="M3MaterialMenuFlyoutItemStyle"
+	<Style x:Key="MaterialMenuFlyoutItemStyle"
 	       TargetType="MenuFlyoutItem">
 
 		<Setter Property="Foreground"
@@ -130,7 +130,7 @@
 		<Setter Property="Background"
 		        Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="Height"
-		        Value="{StaticResource M3MaterialFlyoutMenuItemHeight}" />
+		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
 		<Setter Property="Padding"
 		        Value="0" />
 
@@ -235,14 +235,14 @@
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="{StaticResource M3MaterialFlyoutMenuItemRightMargin}" />
+							<ColumnDefinition Width="{StaticResource MaterialFlyoutMenuItemRightMargin}" />
 							<ColumnDefinition Width="Auto"
 							                  MinWidth="16" />
 							<ColumnDefinition Width="12" />
 						</Grid.ColumnDefinitions>
 
 						<Viewbox x:Name="IconRoot"
-						         Width="{StaticResource M3MaterialFlyoutMenuItemIconWidth}"
+						         Width="{StaticResource MaterialFlyoutMenuItemIconWidth}"
 						         Margin="12,0,0,0"
 						         HorizontalAlignment="Left"
 						         VerticalAlignment="Center"
@@ -257,7 +257,7 @@
 						           Margin="12,0,0,0"
 						           VerticalAlignment="Center"
 						           Foreground="{TemplateBinding Foreground}"
-						           Style="{StaticResource M3MaterialLabelLarge}"
+						           Style="{StaticResource MaterialLabelLarge}"
 						           Text="{TemplateBinding Text}" />
 
 						<!--  Mobile devices do not support keyboard shortcuts  -->
@@ -269,7 +269,7 @@
 							           VerticalAlignment="Center"
 							           AutomationProperties.AccessibilityView="Raw"
 							           Foreground="{StaticResource OnSurfaceVariantBrush}"
-							           Style="{StaticResource M3MaterialLabelLarge}"
+							           Style="{StaticResource MaterialLabelLarge}"
 							           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 							           TextAlignment="Right"
 							           Visibility="Collapsed" />
@@ -287,7 +287,7 @@
 	</Style>
 
 	<!--  Material ToggleMenuFlyoutItem Style  -->
-	<Style x:Key="M3MaterialToggleMenuFlyoutItemStyle"
+	<Style x:Key="MaterialToggleMenuFlyoutItemStyle"
 	       TargetType="ToggleMenuFlyoutItem">
 
 		<Setter Property="Foreground"
@@ -295,7 +295,7 @@
 		<Setter Property="Background"
 		        Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="Height"
-		        Value="{StaticResource M3MaterialFlyoutMenuItemHeight}" />
+		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
 		<Setter Property="Padding"
 		        Value="0" />
 
@@ -413,26 +413,26 @@
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="{StaticResource M3MaterialFlyoutMenuItemRightMargin}" />
+								<ColumnDefinition Width="{StaticResource MaterialFlyoutMenuItemRightMargin}" />
 								<ColumnDefinition Width="Auto"
 								                  MinWidth="16" />
 								<ColumnDefinition Width="12" />
 							</Grid.ColumnDefinitions>
 
 							<Path x:Name="CheckGlyph"
-							      Width="{StaticResource M3MaterialFlyoutMenuToggleCheckGlyphWidth}"
-							      Height="{StaticResource M3MaterialFlyoutMenuToggleCheckGlyphHeight}"
+							      Width="{StaticResource MaterialFlyoutMenuToggleCheckGlyphWidth}"
+							      Height="{StaticResource MaterialFlyoutMenuToggleCheckGlyphHeight}"
 							      VerticalAlignment="Center"
 							      Margin="12,0"
-							      Data="{StaticResource M3MaterialFlyoutCheckGlyphPathStyle}"
+							      Data="{StaticResource MaterialFlyoutCheckGlyphPathStyle}"
 							      Fill="{StaticResource OnSurfaceVariantBrush}"
 							      Opacity="0"
 							      Stretch="Uniform" />
 
 							<Viewbox x:Name="IconRoot"
 							         Grid.Column="1"
-							         Width="{StaticResource M3MaterialFlyoutMenuItemIconWidth}"
-							         Height="{StaticResource M3MaterialFlyoutMenuItemIconHeight}"
+							         Width="{StaticResource MaterialFlyoutMenuItemIconWidth}"
+							         Height="{StaticResource MaterialFlyoutMenuItemIconHeight}"
 							         HorizontalAlignment="Left"
 							         VerticalAlignment="Center"
 							         Visibility="Collapsed">
@@ -446,7 +446,7 @@
 							           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 							           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 							           Foreground="{TemplateBinding Foreground}"
-							           Style="{StaticResource M3MaterialLabelLarge}"
+							           Style="{StaticResource MaterialLabelLarge}"
 							           Text="{TemplateBinding Text}" />
 
 							<!--  Mobile devices do not support keyboard shortcuts  -->
@@ -457,7 +457,7 @@
 								           VerticalAlignment="Center"
 								           AutomationProperties.AccessibilityView="Raw"
 								           Foreground="{StaticResource OnSurfaceVariantBrush}"
-								           Style="{StaticResource M3MaterialLabelLarge}"
+								           Style="{StaticResource MaterialLabelLarge}"
 								           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 								           TextAlignment="Right"
 								           Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
@@ -474,7 +474,7 @@
 	</Style>
 
 	<!--  Material MenuFlyoutSubItem Style  -->
-	<Style x:Key="M3MaterialMenuFlyoutSubItemStyle"
+	<Style x:Key="MaterialMenuFlyoutSubItemStyle"
 	       TargetType="MenuFlyoutSubItem">
 
 		<Setter Property="Foreground"
@@ -482,7 +482,7 @@
 		<Setter Property="Background"
 		        Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="Height"
-		        Value="{StaticResource M3MaterialFlyoutMenuItemHeight}" />
+		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
 		<Setter Property="Padding"
 		        Value="0" />
 
@@ -588,8 +588,8 @@
 
 							<Viewbox x:Name="IconRoot"
 							         Grid.Column="0"
-							         Width="{StaticResource M3MaterialFlyoutMenuItemIconWidth}"
-							         Height="{StaticResource M3MaterialFlyoutMenuItemIconHeight}"
+							         Width="{StaticResource MaterialFlyoutMenuItemIconWidth}"
+							         Height="{StaticResource MaterialFlyoutMenuItemIconHeight}"
 							         HorizontalAlignment="Left"
 							         VerticalAlignment="Center"
 							         Visibility="Collapsed">
@@ -603,7 +603,7 @@
 							           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 							           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 							           Foreground="{TemplateBinding Foreground}"
-							           Style="{StaticResource M3MaterialLabelLarge}"
+							           Style="{StaticResource MaterialLabelLarge}"
 							           Text="{TemplateBinding Text}" />
 
 							<Path x:Name="SubItemChevron"
@@ -612,7 +612,7 @@
 							      Height="10"
 							      Margin="54,4,16,0"
 							      VerticalAlignment="Center"
-							      Data="{StaticResource M3MaterialFlyoutRightArrowPathStyle}"
+							      Data="{StaticResource MaterialFlyoutRightArrowPathStyle}"
 							      Fill="{StaticResource OnSurfaceVariantBrush}"
 							      Stretch="Uniform" />
 						</Grid>
@@ -627,7 +627,7 @@
 	</Style>
 
 	<!--  Material MenuFlyoutItem Style  -->
-	<Style x:Key="M3MaterialMenuFlyoutSeparatorStyle"
+	<Style x:Key="MaterialMenuFlyoutSeparatorStyle"
 	       TargetType="MenuFlyoutSeparator">
 
 		<Setter Property="Background"
@@ -635,7 +635,7 @@
 		<Setter Property="Padding"
 		        Value="0,8" />
 		<Setter Property="Height"
-		        Value="{StaticResource M3MaterialFlyoutMenuSeparatorHeight}" />
+		        Value="{StaticResource MaterialFlyoutMenuSeparatorHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>

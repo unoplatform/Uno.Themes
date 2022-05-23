@@ -18,10 +18,10 @@
 		</Grid.RowDefinitions>
 		<CommandBar Content="Material Page 1"
 					toolkit:VisibleBoundsPadding.PaddingMask="Top"
-					Style="{StaticResource M3MaterialCommandBarStyle}">
+					Style="{StaticResource MaterialCommandBarStyle}">
 			<toolkit:CommandBarExtensions.NavigationCommand>
 				<AppBarButton Click="NavigateBack"
-							  Style="{StaticResource M3MaterialAppBarButtonStyle}">
+							  Style="{StaticResource MaterialAppBarButtonStyle}">
 					<AppBarButton.Icon>
 						<BitmapIcon UriSource="ms-appx:///Assets/BackButton.png" />
 					</AppBarButton.Icon>
@@ -31,7 +31,7 @@
 
 		<StackPanel Grid.Row="1"
 					Margin="16">
-			<TextBlock Style="{StaticResource M3MaterialBodySmall}">
+			<TextBlock Style="{StaticResource BodySmall}">
 				You can use the back button located on the left side of the CommandBar
 				to exit this sample.
 			</TextBlock>
@@ -47,8 +47,8 @@
 					Tag="See code behind"
 					Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
 
-			<TextBlock Style="{StaticResource M3MaterialBodySmall}">
-				note: In order for the `M3MaterialCommandBarStyle` to work properly on iOS and Android,
+			<TextBlock Style="{StaticResource BodySmall}">
+				note: In order for the `MaterialCommandBarStyle` to work properly on iOS and Android,
 				you will need to present them using a `NativeDefaultFrame` in your MainPage/Shell. As shown below:
 			</TextBlock>
 
@@ -58,7 +58,7 @@
 					   xamarin:Style="{StaticResource NativeDefaultFrame}" />
 			</smtx:XamlDisplay>
 
-			<TextBlock Style="{StaticResource M3MaterialBodySmall}">
+			<TextBlock Style="{StaticResource BodySmall}">
 				note: In order to support native back navigations (uwp, browser, android),
 				you will have to handle the SystemNavigationManager.BackRequested event. As shown below:
 			</TextBlock>

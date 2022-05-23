@@ -7,31 +7,31 @@
 	<ResourceDictionary.ThemeDictionaries>
 		<!--  Light Theme  -->
 		<ResourceDictionary x:Key="Light">
-			<Color x:Key="M3MaterialSliderTrackColor">#999999</Color>
+			<Color x:Key="MaterialSliderTrackColor">#999999</Color>
 		</ResourceDictionary>
 
 		<!--  Dark Theme  -->
 		<ResourceDictionary x:Key="Dark">
-			<Color x:Key="M3MaterialSliderTrackColor">#717171</Color>
+			<Color x:Key="MaterialSliderTrackColor">#717171</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<SolidColorBrush x:Key="M3MaterialSliderTrackBrush"
-	                 Color="{ThemeResource M3MaterialSliderTrackColor}" />
+	<SolidColorBrush x:Key="MaterialSliderTrackBrush"
+	                 Color="{ThemeResource MaterialSliderTrackColor}" />
 
-	<StaticResource x:Key="M3MaterialSliderTickBarFill"
+	<StaticResource x:Key="MaterialSliderTickBarFill"
 	                ResourceKey="OnSecondaryLowBrush" />
-	<StaticResource x:Key="M3MaterialSliderTickBarFillDisabled"
+	<StaticResource x:Key="MaterialSliderTickBarFillDisabled"
 	                ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
 
-	<StaticResource x:Key="M3MaterialSliderInlineTickBarFill"
+	<StaticResource x:Key="MaterialSliderInlineTickBarFill"
 	                ResourceKey="SystemControlBackgroundAltHighBrush" />
 
-	<StaticResource x:Key="M3MaterialSliderThumbBackgroundDisabled"
+	<StaticResource x:Key="MaterialSliderThumbBackgroundDisabled"
 	                ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
 
 	<!--  Material Slider Thumb Style  -->
-	<Style x:Key="M3MaterialSliderThumbStyle"
+	<Style x:Key="MaterialSliderThumbStyle"
 	       TargetType="Thumb">
 
 		<Setter Property="BorderThickness"
@@ -49,11 +49,11 @@
 	</Style>
 
 	<!--  Material Slider Style  -->
-	<Style x:Key="M3MaterialSliderStyle"
+	<Style x:Key="MaterialSliderStyle"
 	       TargetType="Slider">
 
 		<Setter Property="Background"
-		        Value="{StaticResource M3MaterialSliderTrackBrush}" />
+		        Value="{StaticResource MaterialSliderTrackBrush}" />
 		<Setter Property="Foreground"
 		        Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="BorderThickness"
@@ -90,45 +90,45 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
 										                               Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
 										                               Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -224,7 +224,7 @@
 								         Height="4"
 								         Margin="0,0,0,4"
 								         VerticalAlignment="Bottom"
-								         Fill="{StaticResource M3MaterialSliderTickBarFill}"
+								         Fill="{StaticResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  HorizontalInlineTickBar  -->
@@ -232,7 +232,7 @@
 								         Grid.Row="1"
 								         Grid.ColumnSpan="3"
 								         Height="2"
-								         Fill="{StaticResource M3MaterialSliderInlineTickBarFill}"
+								         Fill="{StaticResource MaterialSliderInlineTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  BottomTickBar  -->
@@ -242,7 +242,7 @@
 								         Height="4"
 								         Margin="0,4,0,0"
 								         VerticalAlignment="Top"
-								         Fill="{StaticResource M3MaterialSliderTickBarFill}"
+								         Fill="{StaticResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  HorizontalThumb  -->
@@ -256,7 +256,7 @@
 								       Background="{TemplateBinding Foreground}"
 								       DataContext="{TemplateBinding Value}"
 								       FocusVisualMargin="-14,-6,-14,-6"
-								       Style="{StaticResource M3MaterialSliderThumbStyle}" />
+								       Style="{StaticResource MaterialSliderThumbStyle}" />
 							</Grid>
 
 							<!--  VerticalTemplate  -->
@@ -299,7 +299,7 @@
 								         Width="4"
 								         Margin="0,0,4,0"
 								         HorizontalAlignment="Right"
-								         Fill="{StaticResource M3MaterialSliderTickBarFill}"
+								         Fill="{StaticResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  VerticalInlineTickBar  -->
@@ -307,7 +307,7 @@
 								         Grid.RowSpan="3"
 								         Grid.Column="1"
 								         Width="2"
-								         Fill="{StaticResource M3MaterialSliderInlineTickBarFill}"
+								         Fill="{StaticResource MaterialSliderInlineTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  RightTickBar  -->
@@ -317,7 +317,7 @@
 								         Width="4"
 								         Margin="4,0,0,0"
 								         HorizontalAlignment="Left"
-								         Fill="{StaticResource M3MaterialSliderTickBarFill}"
+								         Fill="{StaticResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  VerticalThumb  -->
@@ -331,7 +331,7 @@
 								       Background="{TemplateBinding Foreground}"
 								       DataContext="{TemplateBinding Value}"
 								       FocusVisualMargin="-6,-14,-6,-14"
-								       Style="{StaticResource M3MaterialSliderThumbStyle}" />
+								       Style="{StaticResource MaterialSliderThumbStyle}" />
 							</Grid>
 						</Grid>
 					</Grid>

@@ -17,14 +17,14 @@
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
 
-	<SolidColorBrush x:Key="M3MaterialCheckBoxBorderBrush"
+	<SolidColorBrush x:Key="MaterialCheckBoxBorderBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="M3MaterialCheckBoxPressedBrush"
+	<SolidColorBrush x:Key="MaterialCheckBoxPressedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="{StaticResource LowOpacity}" />
 
-	<Style x:Key="M3MaterialCheckBoxStyle"
+	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialRegularFontFamily}" />
@@ -33,7 +33,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource OnPrimaryBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource M3MaterialCheckBoxBorderBrush}" />
+				Value="{StaticResource MaterialCheckBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
 				Value="2" />
 		<Setter Property="Padding"
@@ -472,7 +472,7 @@
 								 Stretch="Uniform"
 								 Width="{StaticResource FocusAreaSize}"
 								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource M3MaterialCheckBoxPressedBrush}"
+								 Fill="{StaticResource MaterialCheckBoxPressedBrush}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -533,9 +533,9 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="M3MaterialSecondaryCheckBoxStyle"
+	<Style x:Key="MaterialSecondaryCheckBoxStyle"
 		   TargetType="CheckBox"
-		   BasedOn="{StaticResource M3MaterialCheckBoxStyle}">
+		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
 		<Setter Property="Background"
 				Value="{StaticResource SecondaryBrush}" />
 		<Setter Property="Foreground"

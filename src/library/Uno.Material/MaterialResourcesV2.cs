@@ -15,9 +15,7 @@ namespace Uno.Material
 	/// </summary>
 	public class MaterialResourcesV2 : ResourceDictionary
 	{
-		private const string StylePrefix = "M3Material";
-		private ResourceDictionary _implicitResources = new ResourceDictionary();
-
+		private const string StylePrefix = "Material";
 		public MaterialResourcesV2()
 		{
 			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
@@ -25,18 +23,18 @@ namespace Uno.Material
 			MapStyleInfo();
 		}
 
-		public bool WithImplicitStyles { set => ExportImplicitStyles(value); }
-
 		private void MapStyleInfo()
 		{
 			var aliasedResources = new ResourceDictionary();
+			var implicitResources = new ResourceDictionary();
+
 			foreach (var (resKey, sharedKey, isDefaultStyle) in GetStyleInfos())
 			{
 				var style = GetStyle(resKey);
 
 				if (isDefaultStyle)
 				{
-					_implicitResources.Add(style.TargetType, style);
+					implicitResources.Add(style.TargetType, style);
 				}
 
 				aliasedResources.Add(sharedKey, style);
@@ -46,13 +44,7 @@ namespace Uno.Material
 			// > Local values are not allowed in resource dictionary with Source set
 			// but, we can add them through merged-dict instead.
 			this.MergedDictionaries.Add(aliasedResources);
-		}
-
-		private void ExportImplicitStyles(bool value)
-		{
-			if (!value) return; // we don't support teardown
-
-			this.MergedDictionaries.Add(_implicitResources);
+			this.MergedDictionaries.Add(implicitResources);
 		}
 
 		private Style GetStyle(string key)
@@ -77,69 +69,70 @@ namespace Uno.Material
 		{
 			var result = new List<(string ResourceKey, string SharedKey, bool IsDefaultStyle)>();
 
-			Add("M3MaterialCheckBoxStyle", isImplicit: true);
-			Add("M3MaterialAppBarButtonStyle", isImplicit: true);
-			Add("M3MaterialCommandBarStyle", isImplicit: true);
-			Add("M3MaterialRadioButtonStyle", isImplicit: true);
-			Add("M3MaterialDisplayLarge");
-			Add("M3MaterialDisplayMedium");
-			Add("M3MaterialDisplaySmall");
-			Add("M3MaterialHeadlineLarge");
-			Add("M3MaterialHeadlineMedium");
-			Add("M3MaterialHeadlineSmall");
-			Add("M3MaterialTitleLarge");
-			Add("M3MaterialTitleMedium");
-			Add("M3MaterialTitleSmall");
-			Add("M3MaterialLabelLarge");
-			Add("M3MaterialLabelMedium");
-			Add("M3MaterialLabelSmall");
-			Add("M3MaterialBodyLarge");
-			Add("M3MaterialBodyMedium", isImplicit: true);
-			Add("M3MaterialBodySmall");
-			Add("M3MaterialOutlinedTextBoxStyle");
-			Add("M3MaterialFilledTextBoxStyle", isImplicit: true);
-			Add("M3MaterialOutlinedPasswordBoxStyle");
-			Add("M3MaterialFilledPasswordBoxStyle", isImplicit: true);
-			Add("M3MaterialElevatedButtonStyle");
-			Add("M3MaterialFilledButtonStyle", isImplicit: true);
-			Add("M3MaterialFilledTonalButtonStyle");
-			Add("M3MaterialOutlinedButtonStyle");
-			Add("M3MaterialTextButtonStyle");
-			Add("M3MaterialIconButtonStyle");
-			Add("M3MaterialCalendarViewStyle", isImplicit: true);
-			Add("M3MaterialCalendarDatePickerStyle", isImplicit: true);
-			Add("M3MaterialFlyoutPresenterStyle", isImplicit: true);
-			Add("M3MaterialMenuFlyoutPresenterStyle", isImplicit: true);
-			Add("M3MaterialNavigationViewStyle", isImplicit: true);
-			Add("M3MaterialNavigationViewItemStyle", isImplicit: true);
-			Add("M3MaterialListViewStyle", isImplicit: true);
-			Add("M3MaterialListViewItemStyle", isImplicit: true);
-			Add("M3MaterialTextToggleButtonStyle", isImplicit: true);
-			Add("M3MaterialIconToggleButtonStyle");
-			Add("M3MaterialDatePickerStyle", isImplicit: true);
-			Add("M3MaterialComboBoxStyle", isImplicit: true);
-			Add("M3MaterialFabStyle");
-			Add("M3MaterialSurfaceFabStyle");
-			Add("M3MaterialSecondaryFabStyle");
-			Add("M3MaterialTertiaryFabStyle");
-			Add("M3MaterialSmallFabStyle");
-			Add("M3MaterialSurfaceSmallFabStyle");
-			Add("M3MaterialSecondarySmallFabStyle");
-			Add("M3MaterialTertiarySmallFabStyle");
-			Add("M3MaterialLargeFabStyle");
-			Add("M3MaterialSurfaceLargeFabStyle");
-			Add("M3MaterialSecondaryLargeFabStyle");
-			Add("M3MaterialTertiaryLargeFabStyle");
-			Add("M3MaterialExtendedFabStyle");
-			Add("M3MaterialSurfaceExtendedFabStyle");	
-			Add("M3MaterialSecondaryExtendedFabStyle");	
-			Add("M3MaterialTertiaryExtendedFabStyle");
-			Add("M3MaterialSliderStyle");
-			Add("M3MaterialToggleSwitchStyle", isImplicit: true);
-			Add("M3MaterialHyperlinkButtonStyle", isImplicit: true);
-			Add("M3MaterialSecondaryHyperlinkButtonStyle");
-			Add("M3MaterialProgressRingStyle", isImplicit: true);
-			Add("M3MaterialProgressBarStyle", isImplicit: true);
+			Add("MaterialAppBarButtonStyle", isImplicit: true);
+			Add("MaterialBodyLarge");
+			Add("MaterialBodyMedium", isImplicit: true);
+			Add("MaterialBodySmall");
+			Add("MaterialCalendarDatePickerStyle", isImplicit: true);
+			Add("MaterialCalendarViewStyle", isImplicit: true);
+			Add("MaterialCheckBoxStyle", isImplicit: true);
+			Add("MaterialComboBoxStyle", isImplicit: true);
+			Add("MaterialCommandBarStyle", isImplicit: true);
+			Add("MaterialDatePickerStyle", isImplicit: true);
+			Add("MaterialDisplayLarge");
+			Add("MaterialDisplayMedium");
+			Add("MaterialDisplaySmall");
+			Add("MaterialElevatedButtonStyle");
+			Add("MaterialExtendedFabStyle");
+			Add("MaterialFabStyle");
+			Add("MaterialFilledButtonStyle", isImplicit: true);
+			Add("MaterialFilledPasswordBoxStyle", isImplicit: true);
+			Add("MaterialFilledTextBoxStyle", isImplicit: true);
+			Add("MaterialFilledTonalButtonStyle");
+			Add("MaterialFlyoutPresenterStyle", isImplicit: true);
+			Add("MaterialHeadlineLarge");
+			Add("MaterialHeadlineMedium");
+			Add("MaterialHeadlineSmall");
+			Add("MaterialHyperlinkButtonStyle", isImplicit: true);
+			Add("MaterialIconButtonStyle");
+			Add("MaterialIconToggleButtonStyle");
+			Add("MaterialLabelLarge");
+			Add("MaterialLabelMedium");
+			Add("MaterialLabelSmall");
+			Add("MaterialLargeFabStyle");
+			Add("MaterialListViewItemStyle", isImplicit: true);
+			Add("MaterialListViewStyle", isImplicit: true);
+			Add("MaterialMenuFlyoutPresenterStyle", isImplicit: true);
+			Add("MaterialNavigationViewItemStyle", isImplicit: true);
+			Add("MaterialNavigationViewStyle", isImplicit: true);
+			Add("MaterialOutlinedButtonStyle");
+			Add("MaterialOutlinedPasswordBoxStyle");
+			Add("MaterialOutlinedTextBoxStyle");
+			Add("MaterialRadioButtonStyle", isImplicit: true);
+			Add("MaterialSecondaryCheckBoxStyle");
+			Add("MaterialSecondaryExtendedFabStyle");
+			Add("MaterialSecondaryFabStyle");
+			Add("MaterialSecondaryHyperlinkButtonStyle");
+			Add("MaterialSecondaryLargeFabStyle");
+			Add("MaterialSecondaryRadioButtonStyle");
+			Add("MaterialSecondarySmallFabStyle");
+			Add("MaterialSliderStyle", isImplicit: true);
+			Add("MaterialSmallFabStyle");
+			Add("MaterialSurfaceExtendedFabStyle");
+			Add("MaterialSurfaceFabStyle");
+			Add("MaterialSurfaceLargeFabStyle");
+			Add("MaterialSurfaceSmallFabStyle");
+			Add("MaterialTertiaryExtendedFabStyle");
+			Add("MaterialTertiaryFabStyle");
+			Add("MaterialTertiaryLargeFabStyle");
+			Add("MaterialTertiarySmallFabStyle");
+			Add("MaterialTextButtonStyle");
+			Add("MaterialTextToggleButtonStyle", isImplicit: true);
+			Add("MaterialTitleLarge");
+			Add("MaterialTitleMedium");
+			Add("MaterialTitleSmall");
+			Add("MaterialToggleSwitchStyle", isImplicit: true);
+
 			return result;
 
 			void Add(string key, string alias = null, bool isImplicit = false) =>
