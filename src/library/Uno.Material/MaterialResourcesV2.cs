@@ -135,6 +135,7 @@ namespace Uno.Material
 			Add("M3MaterialSecondaryExtendedFabStyle");	
 			Add("M3MaterialTertiaryExtendedFabStyle");
 			Add("M3MaterialSliderStyle");
+			Add("M3MaterialToggleSwitchStyle", isImplicit: true);
 			Add("M3MaterialHyperlinkButtonStyle", isImplicit: true);
 			Add("M3MaterialSecondaryHyperlinkButtonStyle");
 			return result;

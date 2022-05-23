@@ -43,6 +43,7 @@ TextBox|FilledTextBoxStyle|true
 TextBox|OutlinedTextBoxStyle|
 ToggleButton|TextToggleButtonStyle|true
 ToggleButton|IconToggleButtonStyle|
+ToggleSwitch|ToggleSwitchStyle|true
 
 WithImplicitStyles*: Styles in this column will be set as the default implicit styles by setting the `WithImplicitStyles` flag to `True`:
 ```xml
