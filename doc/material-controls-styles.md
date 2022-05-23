@@ -14,6 +14,8 @@ CheckBox|CheckBoxStyle|true
 CommandBar|CommandBarStyle|true
 DatePicker|DatePickerStyle|true
 FlyoutPresenter|FlyoutPresenterStyle|true
+HyperlinkButton|HyperlinkButtonStyle|true
+HyperlinkButton|SecondaryHyperlinkButtonStyle
 ListView|ListViewStyle|true
 ListViewItem|ListViewItemStyle|true
 MenuFlyoutPresenter|MenuFlyoutPresenterStyle|true

@@ -44,6 +44,11 @@
     <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
   </ItemGroup>
   <PropertyGroup>
+		<!-- This is a visual studio 17.2 Preview 3 issue
+	       Tempory workaround here for this issue: https://github.com/unoplatform/uno/discussions/5007#discussioncomment-2583741 -->
+		<SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
+	</PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProjectGuid>{265517E4-AB14-453D-92DA-F32AA1D4007D}</ProjectGuid>
