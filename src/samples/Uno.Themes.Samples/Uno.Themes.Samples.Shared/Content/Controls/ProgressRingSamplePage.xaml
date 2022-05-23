@@ -63,6 +63,42 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Slider Text -->
+						<TextBlock Text="Slider to Set ProgressRing"
+								   Margin="0,10,0,0" />
+
+						<Slider x:Name="progressSlider"
+								Minimum="0"
+								Style="{StaticResource M3MaterialSliderStyle}"
+								Maximum="100"
+								HorizontalAlignment="Left"
+								Width="250"
+								Margin="0,10" />
+
+						<!-- ProgressRing Text -->
+						<TextBlock Text="ProgressRing" />
+
+						<smtx:XamlDisplay UniqueKey="M3_ProgressRingSamplePage_Primary">
+							<muxc:ProgressRing Style="{StaticResource M3MaterialProgressRingStyle}"
+											   IsIndeterminate="False"
+											   Value="{Binding Value, ElementName=progressSlider}"
+											   Minimum="0"
+											   Maximum="100" />
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate ProgressRing Text -->
+						<TextBlock Text="Indeterminate ProgressRing" />
+
+						<smtx:XamlDisplay UniqueKey="M3_ProgressRingSamplePage_PrimaryIndeterminate">
+							<muxc:ProgressRing Style="{StaticResource M3MaterialProgressRingStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>

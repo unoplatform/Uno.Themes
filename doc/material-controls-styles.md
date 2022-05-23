@@ -23,6 +23,8 @@ muxc:NavigationView|NavigationViewStyle|true
 muxc:NavigationViewItem|NavigationViewItemStyle|true
 PasswordBox|FilledPasswordBoxStyle|true
 PasswordBox|OutlinedPasswordBoxStyle|
+ProgressBar|ProgressBarStyle|true
+ProgressRing|ProgressRingStyle|true
 RadioButton|RadioButtonStyle|true
 TextBlock|DisplayLarge|
 TextBlock|DisplayMedium|
