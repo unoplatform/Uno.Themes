@@ -8,13 +8,13 @@
 					xmlns:ios="http://uno.ui/ios"
 					mc:Ignorable="android ios">
 
-	<x:Double x:Key="M3MaterialCommandBarElevation">4</x:Double>
-	<x:Double x:Key="M3MaterialCommandBarHeight">48</x:Double>
+	<x:Double x:Key="MaterialCommandBarElevation">4</x:Double>
+	<x:Double x:Key="MaterialCommandBarHeight">48</x:Double>
 
-	<Style x:Key="M3MaterialAppBarButtonStyle"
+	<Style x:Key="MaterialAppBarButtonStyle"
 		   TargetType="AppBarButton">
-		<Setter Property="Height" Value="{StaticResource M3MaterialCommandBarHeight}" />
-		<Setter Property="Width" Value="{StaticResource M3MaterialCommandBarHeight}" />
+		<Setter Property="Height" Value="{StaticResource MaterialCommandBarHeight}" />
+		<Setter Property="Width" Value="{StaticResource MaterialCommandBarHeight}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
@@ -55,7 +55,7 @@
 		<NativeCommandBarPresenter />
 	</android:ControlTemplate>
 
-	<ControlTemplate x:Key="XamlM3MaterialCommandBarTemplate"
+	<ControlTemplate x:Key="MaterialXamlCommandBarTemplate"
 					 TargetType="CommandBar">
 		<!-- Simplified CommandBar template that adds support for Uno.UI.CommandBarExtensions.NavigationCommand on Windows. -->
 		<Grid x:Name="LayoutRoot"
@@ -76,8 +76,8 @@
 				<!-- note: NavigationCommand is an AppBarButton, not ICommand -->
 				<ContentControl Content="{Binding (toolkit:CommandBarExtensions.NavigationCommand), RelativeSource={RelativeSource TemplatedParent}}"
 								Foreground="{TemplateBinding Foreground}"
-								Height="{StaticResource M3MaterialCommandBarHeight}"
-								Width="{StaticResource M3MaterialCommandBarHeight}"
+								Height="{StaticResource MaterialCommandBarHeight}"
+								Width="{StaticResource MaterialCommandBarHeight}"
 								IsTabStop="False" />
 
 				<!--
@@ -112,7 +112,7 @@
 		</Grid>
 	</ControlTemplate>
 
-	<Style x:Key="BaseM3MaterialCommandBarStyle"
+	<Style x:Key="MaterialBaseCommandBarStyle"
 		   TargetType="CommandBar">
 		<!-- Setting content to empty to avoid getting the datacontext -->
 		<Setter Property="Content" Value="" />
@@ -120,7 +120,7 @@
 			<Setter.Value>
 				<DataTemplate>
 					<TextBlock Text="{Binding}"
-							   Style="{StaticResource M3MaterialTitleLarge}" />
+							   Style="{StaticResource MaterialTitleLarge}" />
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>
@@ -129,8 +129,8 @@
 		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
 
 		<android:Setter Property="(toolkit:UIElementExtensions.Elevation)"
-						Value="{StaticResource M3MaterialCommandBarElevation}" />
-		<Setter Property="Height" Value="{StaticResource M3MaterialCommandBarHeight}" />
+						Value="{StaticResource MaterialCommandBarElevation}" />
+		<Setter Property="Height" Value="{StaticResource MaterialCommandBarHeight}" />
 
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Top" />
@@ -140,11 +140,11 @@
 		<Setter Property="OverflowButtonVisibility" Value="Collapsed" />
 		<Setter Property="IsDynamicOverflowEnabled" Value="False" />
 
-		<Setter Property="Template" Value="{StaticResource XamlM3MaterialCommandBarTemplate}" />
+		<Setter Property="Template" Value="{StaticResource MaterialXamlCommandBarTemplate}" />
 	</Style>
-	<Style x:Key="M3MaterialCommandBarStyle"
+	<Style x:Key="MaterialCommandBarStyle"
 		   TargetType="CommandBar"
-		   BasedOn="{StaticResource BaseM3MaterialCommandBarStyle}">
+		   BasedOn="{StaticResource MaterialBaseCommandBarStyle}">
 		
 		<ios:Setter Property="Height" Value="NaN" />
 		<ios:Setter Property="Template"

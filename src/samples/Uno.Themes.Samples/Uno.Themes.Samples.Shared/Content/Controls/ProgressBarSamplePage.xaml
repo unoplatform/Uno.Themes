@@ -72,7 +72,7 @@
 								   Margin="0,10,0,0" />
 
 						<Slider x:Name="M3Material_ProgressSlider"
-								Style="{StaticResource M3MaterialSliderStyle}"
+								Style="{StaticResource MaterialSliderStyle}"
 								Minimum="0"
 								Maximum="100"
 								HorizontalAlignment="Left"
@@ -83,7 +83,7 @@
 						<TextBlock Text="ProgressBar" />
 
 						<smtx:XamlDisplay UniqueKey="M3_Material_ProgressBarSamplePage_Primary">
-							<muxc:ProgressBar Style="{StaticResource M3MaterialProgressBarStyle}"
+							<muxc:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
 											  Value="{Binding Value, ElementName=M3Material_ProgressSlider}"
 											  Minimum="0"
 											  Maximum="100" />
@@ -93,7 +93,7 @@
 						<TextBlock Text="Indeterminate ProgressBar" />
 
 						<smtx:XamlDisplay UniqueKey="M3_Material_ProgressBarSamplePage_PrimaryIndeterminate">
-							<muxc:ProgressBar Style="{StaticResource M3MaterialProgressBarStyle}"
+							<muxc:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
 											  IsIndeterminate="True" />
 						</smtx:XamlDisplay>
 					</StackPanel>

@@ -1,31 +1,47 @@
 # Material Controls Styles
-Control|Style Key|WithImplicitStyles*|
+Control|Style Key|IsDefaultStyle*|
 -|-|-
-AppBarButton|AppBarButtonStyle|true
+AppBarButton|AppBarButtonStyle|True|
 Button|ElevatedButtonStyle|
-Button|FilledButtonStyle|true
+Button|FilledButtonStyle|True|
 Button|FilledTonalButtonStyle|
 Button|OutlinedButtonStyle|
 Button|TextButtonStyle|
 Button|IconButtonStyle|
-CalendarDatePicker|CalendarDatePickerStyle|true
-CalendarView|CalendarViewStyle|true
-CheckBox|CheckBoxStyle|true
-CommandBar|CommandBarStyle|true
-DatePicker|DatePickerStyle|true
-FlyoutPresenter|FlyoutPresenterStyle|true
-HyperlinkButton|HyperlinkButtonStyle|true
-HyperlinkButton|SecondaryHyperlinkButtonStyle
-ListView|ListViewStyle|true
-ListViewItem|ListViewItemStyle|true
-MenuFlyoutPresenter|MenuFlyoutPresenterStyle|true
-muxc:NavigationView|NavigationViewStyle|true
-muxc:NavigationViewItem|NavigationViewItemStyle|true
-PasswordBox|FilledPasswordBoxStyle|true
+Button|FabStyle|
+Button|SurfaceFabStyle|
+Button|SecondaryFabStyle|
+Button|TertiaryFabStyle|
+Button|SmallFabStyle|
+Button|SurfaceSmallFabStyle|
+Button|SecondarySmallFabStyle|
+Button|TertiarySmallFabStyle|
+Button|LargeFabStyle|
+Button|SurfaceLargeFabStyle|
+Button|SecondaryLargeFabStyle|
+Button|TertiaryLargeFabStyle|
+Button|ExtendedFabStyle|
+Button|SurfaceExtendedFabStyle|
+Button|SecondaryExtendedFabStyle|
+Button|TertiaryExtendedFabStyle|
+CalendarDatePicker|CalendarDatePickerStyle|True|
+CalendarView|CalendarViewStyle|True|
+CheckBox|CheckBoxStyle|True|
+ComboBox|ComboBoxStyle|True|
+CommandBar|CommandBarStyle|True|
+DatePicker|DatePickerStyle|True|
+FlyoutPresenter|FlyoutPresenterStyle|True|
+HyperlinkButton|HyperlinkButtonStyle|True|
+HyperlinkButton|SecondaryHyperlinkButtonStyle|
+ListView|ListViewStyle|True|
+ListViewItem|ListViewItemStyle|True|
+MenuFlyoutPresenter|MenuFlyoutPresenterStyle|True|
+muxc:NavigationView|NavigationViewStyle|True|
+muxc:NavigationViewItem|NavigationViewItemStyle|True|
+PasswordBox|FilledPasswordBoxStyle|True|
 PasswordBox|OutlinedPasswordBoxStyle|
-ProgressBar|ProgressBarStyle|true
-ProgressRing|ProgressRingStyle|true
-RadioButton|RadioButtonStyle|true
+RadioButton|RadioButtonStyle|True|
+Slider|SliderStyle|True|
 TextBlock|DisplayLarge|
 TextBlock|DisplayMedium|
 TextBlock|DisplaySmall|
@@ -39,15 +55,12 @@ TextBlock|LabelLarge|
 TextBlock|LabelMedium|
 TextBlock|LabelSmall|
 TextBlock|BodyLarge|
-TextBlock|BodyMedium|true
+TextBlock|BodyMedium|True|
 TextBlock|BodySmall|
-TextBox|FilledTextBoxStyle|true
+TextBox|FilledTextBoxStyle|True|
 TextBox|OutlinedTextBoxStyle|
-ToggleButton|TextToggleButtonStyle|true
+ToggleButton|TextToggleButtonStyle|True|
 ToggleButton|IconToggleButtonStyle|
-ToggleSwitch|ToggleSwitchStyle|true
+ToggleSwitch|ToggleSwitchStyle|True|
 
-WithImplicitStyles*: Styles in this column will be set as the default implicit styles by setting the `WithImplicitStyles` flag to `True`:
-```xml
-<MaterialResources xmlns="using:Uno.Material" WithImplicitStyles="True" />
-```
+IsDefaultStyle*: Styles in this column will be set as the default implicit style for the matching control

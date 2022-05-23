@@ -11,14 +11,14 @@
 	<x:Double x:Key="RadioCheckAreaSize">18</x:Double>
 	<x:Double x:Key="RadioBorderThickness">2</x:Double>
 
-	<SolidColorBrush x:Key="M3MaterialRadioButtonBorderBrush"
+	<SolidColorBrush x:Key="MaterialRadioButtonBorderBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="M3MaterialRadioButtonPressedBrush"
+	<SolidColorBrush x:Key="MaterialRadioButtonPressedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="{StaticResource LowOpacity}" />
 
-	<Style x:Key="M3MaterialRadioButtonStyle"
+	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">
 		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialRegularFontFamily}" />
@@ -27,7 +27,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource OnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource M3MaterialRadioButtonBorderBrush}" />
+				Value="{StaticResource MaterialRadioButtonBorderBrush}" />
 		<Setter Property="Padding"
 				Value="8,0,0,0" />
 		<Setter Property="HorizontalAlignment"
@@ -203,7 +203,7 @@
 								 Stretch="Uniform"
 								 Width="{StaticResource RadioFocusAreaSize}"
 								 Height="{StaticResource RadioFocusAreaSize}"
-								 Fill="{StaticResource M3MaterialRadioButtonPressedBrush}"
+								 Fill="{StaticResource MaterialRadioButtonPressedBrush}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -254,9 +254,9 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="M3MaterialSecondaryRadioButtonStyle"
+	<Style x:Key="MaterialSecondaryRadioButtonStyle"
 		   TargetType="RadioButton"
-		   BasedOn="{StaticResource M3MaterialRadioButtonStyle}">
+		   BasedOn="{StaticResource MaterialRadioButtonStyle}">
 
 		<Setter Property="Background"
 				Value="{StaticResource SecondaryBrush}" />

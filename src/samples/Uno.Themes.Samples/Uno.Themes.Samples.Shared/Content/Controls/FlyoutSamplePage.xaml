@@ -324,7 +324,7 @@
 									Content="Flyout">
 								<Button.Flyout>
 									<Flyout Placement="Full"
-											FlyoutPresenterStyle="{StaticResource M3MaterialFlyoutPresenterStyle}">
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
 										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 											<Grid.RowDefinitions>
 												<RowDefinition Height="Auto" />
@@ -366,7 +366,7 @@
 								<Button.Flyout>
 									<Flyout Placement="Full"
 											LightDismissOverlayMode="On"
-											FlyoutPresenterStyle="{StaticResource M3MaterialFlyoutPresenterStyle}">
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
 										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
 											  MaxWidth="300"
 											  MaxHeight="370">
@@ -410,7 +410,7 @@
 								<Button.Flyout>
 									<Flyout Placement="Full"
 											LightDismissOverlayMode="On"
-											FlyoutPresenterStyle="{StaticResource M3MaterialFlyoutPresenterStyle}">
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
 										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
 											  VerticalAlignment="Bottom"
 											  MaxHeight="370">
@@ -473,7 +473,7 @@
 
 							<Button Content="Flyout">
 								<Button.Flyout>
-									<Flyout FlyoutPresenterStyle="{StaticResource M3MaterialContentFlyoutPresenterStyle}">
+									<Flyout FlyoutPresenterStyle="{StaticResource MaterialContentFlyoutPresenterStyle}">
 										<TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 												   Style="{StaticResource MaterialBody2}" />
 									</Flyout>
@@ -489,38 +489,38 @@
 
 							<Button Content="Open">
 								<Button.Flyout>
-									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource M3MaterialMenuFlyoutPresenterStyle}">
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MaterialMenuFlyoutPresenterStyle}">
 
 										<MenuFlyoutItem Text="Like"
-														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}">
+														Style="{StaticResource MaterialMenuFlyoutItemStyle}">
 											<MenuFlyoutItem.Icon>
 												<SymbolIcon Symbol="Like" />
 											</MenuFlyoutItem.Icon>
 										</MenuFlyoutItem>
 
 										<MenuFlyoutItem Text="Dislike"
-														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}">
+														Style="{StaticResource MaterialMenuFlyoutItemStyle}">
 											<MenuFlyoutItem.Icon>
 												<SymbolIcon Symbol="Dislike" />
 											</MenuFlyoutItem.Icon>
 										</MenuFlyoutItem>
 
-										<MenuFlyoutSeparator Style="{StaticResource M3MaterialMenuFlyoutSeparatorStyle}" />
+										<MenuFlyoutSeparator Style="{StaticResource MaterialMenuFlyoutSeparatorStyle}" />
 
 										<MenuFlyoutItem Text="Calculator"
 														Icon="Calculator"
-														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+														Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
 										<MenuFlyoutItem Text="Camera"
 														Icon="Camera"
 														KeyboardAcceleratorTextOverride="Ctrl+C"
-														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+														Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
 										<MenuFlyoutItem Text="Calendar"
 														Icon="Calendar"
 														IsEnabled="False"
 														KeyboardAcceleratorTextOverride="Ctrl+C"
-														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+														Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 									</MenuFlyout>
 								</Button.Flyout>
 							</Button>
@@ -534,27 +534,27 @@
 
 							<Button Content="Options">
 								<Button.Flyout>
-									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource M3MaterialMenuFlyoutPresenterStyle}">
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MaterialMenuFlyoutPresenterStyle}">
 
 										<MenuFlyoutItem Text="Clear History"
 														KeyboardAcceleratorTextOverride="Ctrl+Shift+C"
-														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+														Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
-										<MenuFlyoutSeparator Style="{StaticResource M3MaterialMenuFlyoutSeparatorStyle}" />
+										<MenuFlyoutSeparator Style="{StaticResource MaterialMenuFlyoutSeparatorStyle}" />
 
 										<ToggleMenuFlyoutItem Text="Incognito Mode"
 															  IsChecked="True"
-															  Style="{StaticResource M3MaterialToggleMenuFlyoutItemStyle}" />
+															  Style="{StaticResource MaterialToggleMenuFlyoutItemStyle}" />
 
 										<ToggleMenuFlyoutItem Text="Dark Mode"
 															  IsChecked="True"
 															  KeyboardAcceleratorTextOverride="Ctrl+D"
-															  Style="{StaticResource M3MaterialToggleMenuFlyoutItemStyle}" />
+															  Style="{StaticResource MaterialToggleMenuFlyoutItemStyle}" />
 
 										<ToggleMenuFlyoutItem Text="High Contrast Mode"
 															  IsChecked="True"
 															  IsEnabled="False"
-															  Style="{StaticResource M3MaterialToggleMenuFlyoutItemStyle}" />
+															  Style="{StaticResource MaterialToggleMenuFlyoutItemStyle}" />
 									</MenuFlyout>
 								</Button.Flyout>
 							</Button>
@@ -568,39 +568,39 @@
 
 							<Button Content="Help">
 								<Button.Flyout>
-									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource M3MaterialMenuFlyoutPresenterStyle}">
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MaterialMenuFlyoutPresenterStyle}">
 
 										<MenuFlyoutItem Text="View Help"
-														Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+														Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
 										<MenuFlyoutSubItem Text="Disabled"
-														   Style="{StaticResource M3MaterialMenuFlyoutSubItemStyle}"
+														   Style="{StaticResource MaterialMenuFlyoutSubItemStyle}"
 														   IsEnabled="False">
 
 											<MenuFlyoutItem Text="Can't be seen"
-															Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+															Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 										</MenuFlyoutSubItem>
 
 										<MenuFlyoutSubItem Text="Send Feedback"
-														   Style="{StaticResource M3MaterialMenuFlyoutSubItemStyle}">
+														   Style="{StaticResource MaterialMenuFlyoutSubItemStyle}">
 
 											<MenuFlyoutItem Text="Report Problem"
-															Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+															Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
 											<MenuFlyoutItem Text="Suggest Feature"
-															Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+															Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
 											<MenuFlyoutSubItem Text="Settings"
-															   Style="{StaticResource M3MaterialMenuFlyoutSubItemStyle}">
+															   Style="{StaticResource MaterialMenuFlyoutSubItemStyle}">
 
 												<MenuFlyoutItem Text="Auto Save"
-																Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+																Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
 												<MenuFlyoutItem Text="Start Up"
-																Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+																Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 
 												<MenuFlyoutItem Text="Font and Colors"
-																Style="{StaticResource M3MaterialMenuFlyoutItemStyle}" />
+																Style="{StaticResource MaterialMenuFlyoutItemStyle}" />
 											</MenuFlyoutSubItem>
 										</MenuFlyoutSubItem>
 									</MenuFlyout>

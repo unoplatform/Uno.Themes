@@ -4,11 +4,11 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="not_win">
 	
-	<SolidColorBrush x:Key="M3MaterialCalendarDatePickerBackground"
+	<SolidColorBrush x:Key="MaterialCalendarDatePickerBackground"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.12" />
 
-	<Style x:Key="DefaultM3MaterialCalendarDatePickerStyle"
+	<Style x:Key="MaterialDefaultCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
 		<Setter Property="Foreground"
 				Value="{ThemeResource CalendarDatePickerForeground}" />
@@ -19,7 +19,7 @@
 		<Setter Property="BorderThickness"
 				Value="{ThemeResource CalendarDatePickerBorderThemeThickness}" />
 		<Setter Property="CalendarViewStyle"
-				Value="{StaticResource M3MaterialCalendarViewStyle}" />
+				Value="{StaticResource MaterialCalendarViewStyle}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"
@@ -187,7 +187,7 @@
 						</FlyoutBase.AttachedFlyout>
 
 						<Border x:Name="Background"
-								Background="{StaticResource M3MaterialCalendarDatePickerBackground}"
+								Background="{StaticResource MaterialCalendarDatePickerBackground}"
 								CornerRadius="4,4,0,0"
 								Control.IsTemplateFocusTarget="True"
 								MinHeight="53" />
@@ -208,14 +208,14 @@
 							<TextBlock HorizontalAlignment="Stretch"
 									   VerticalAlignment="Top"
 									   Text="{TemplateBinding Header}"
-									   Style="{StaticResource M3MaterialBodySmall}"
+									   Style="{StaticResource MaterialBodySmall}"
 									   Foreground="{StaticResource PrimaryBrush}"
 									   TextWrapping="Wrap" />
 
 							<!-- DateText -->
 							<TextBlock x:Name="DateText"
 									   Grid.Row="1"
-									   Style="{StaticResource M3MaterialBodyMedium}"
+									   Style="{StaticResource MaterialBodyMedium}"
 									   Text="{TemplateBinding PlaceholderText}" />
 						</Grid>
 						<Grid Visibility="Collapsed">
@@ -231,7 +231,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="M3MaterialCalendarDatePickerStyle"
+	<Style x:Key="MaterialCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker"
-		   BasedOn="{StaticResource DefaultM3MaterialCalendarDatePickerStyle}" />
+		   BasedOn="{StaticResource MaterialDefaultCalendarDatePickerStyle}" />
 </ResourceDictionary>
