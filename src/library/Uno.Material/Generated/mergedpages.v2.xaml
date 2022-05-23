@@ -64,6 +64,7 @@
       <StaticResource x:Key="M3MaterialNavigationViewButtonForegroundPointerOver" ResourceKey="SystemControlHighlightAltBaseHighBrush" />
       <StaticResource x:Key="M3MaterialNavigationViewButtonForegroundPressed" ResourceKey="SystemControlHighlightAltBaseHighBrush" />
       <StaticResource x:Key="M3MaterialNavigationViewButtonForegroundDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+      <Color x:Key="M3MaterialSliderTrackColor">#717171</Color>
     </ResourceDictionary>
     <ResourceDictionary x:Key="Light">
       <StaticResource x:Key="M3MaterialNavigationViewDefaultPaneBackground" ResourceKey="SurfaceBrush" />
@@ -125,6 +126,7 @@
       <StaticResource x:Key="M3MaterialNavigationViewButtonForegroundPointerOver" ResourceKey="SystemControlHighlightAltBaseHighBrush" />
       <StaticResource x:Key="M3MaterialNavigationViewButtonForegroundPressed" ResourceKey="SystemControlHighlightAltBaseHighBrush" />
       <StaticResource x:Key="M3MaterialNavigationViewButtonForegroundDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+      <Color x:Key="M3MaterialSliderTrackColor">#999999</Color>
     </ResourceDictionary>
     <ResourceDictionary x:Key="HighContrast">
       <StaticResource x:Key="M3MaterialNavigationViewDefaultPaneBackground" ResourceKey="SurfaceBrush" />
@@ -633,6 +635,7 @@
     </Setter>
   </Style>
   <!--origin: Styles\Controls\v2\CalendarDatePicker.xaml-->
+  <SolidColorBrush x:Key="M3MaterialCalendarDatePickerBackground" Color="{ThemeResource OnSurfaceColor}" Opacity="0.12" />
   <Style x:Key="DefaultM3MaterialCalendarDatePickerStyle" TargetType="CalendarDatePicker">
     <Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}" />
     <Setter Property="Background" Value="{ThemeResource CalendarDatePickerBackground}" />
@@ -736,7 +739,7 @@
                 <CalendarView x:Name="CalendarView" Style="{TemplateBinding CalendarViewStyle}" MinDate="{TemplateBinding MinDate}" MaxDate="{TemplateBinding MaxDate}" IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}" DisplayMode="{TemplateBinding DisplayMode}" FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}" DayOfWeekFormat="{TemplateBinding DayOfWeekFormat}" IsOutOfScopeEnabled="{TemplateBinding IsOutOfScopeEnabled}" IsGroupLabelVisible="{TemplateBinding IsGroupLabelVisible}" CornerRadius="{ThemeResource OverlayCornerRadius}" />
               </Flyout>
             </FlyoutBase.AttachedFlyout>
-            <Border x:Name="Background" Background="{StaticResource OnSurfaceBrush}" CornerRadius="4,4,0,0" Control.IsTemplateFocusTarget="True" MinHeight="53" />
+            <Border x:Name="Background" Background="{StaticResource M3MaterialCalendarDatePickerBackground}" CornerRadius="4,4,0,0" Control.IsTemplateFocusTarget="True" MinHeight="53" />
             <!-- Border -->
             <Rectangle x:Name="BottomBorder" VerticalAlignment="Bottom" Fill="{StaticResource PrimaryBrush}" Height="2" />
             <Grid Margin="10,0,10,0" VerticalAlignment="Center">
@@ -1961,7 +1964,7 @@
       <Setter.Value>
         <ControlTemplate TargetType="Button">
           <Grid>
-            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
                 <Grid x:Name="Root" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
@@ -2035,7 +2038,7 @@
       <Setter.Value>
         <ControlTemplate TargetType="Button">
           <Grid>
-            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
                 <Grid x:Name="Root" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
@@ -2109,7 +2112,7 @@
       <Setter.Value>
         <ControlTemplate TargetType="Button">
           <Grid>
-            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
                 <Grid x:Name="Root" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
@@ -2183,7 +2186,7 @@
       <Setter.Value>
         <ControlTemplate TargetType="Button">
           <Grid>
-            <toolkit:ElevatedView x:Name="ElevatedView" Margin="6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
+            <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
                 <Grid x:Name="Root" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
@@ -2242,6 +2245,8 @@
   <Style x:Key="M3MaterialSmallFabStyle" BasedOn="{StaticResource M3MaterialFabStyle}" TargetType="Button">
     <Setter Property="CornerRadius" Value="{StaticResource M3MaterialSmallFabCornerRadius}" />
     <Setter Property="Padding" Value="{StaticResource M3MaterialSmallFabPadding}" />
+    <Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
+    <Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource M3MaterialSmallFabContentWidthOrHeight}" />
   </Style>
   <Style x:Key="M3MaterialSurfaceSmallFabStyle" BasedOn="{StaticResource M3MaterialSurfaceFabStyle}" TargetType="Button">
     <Setter Property="CornerRadius" Value="{StaticResource M3MaterialSmallFabCornerRadius}" />
@@ -2656,6 +2661,52 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
+  </Style>
+  <!--origin: Styles\Controls\v2\HyperlinkButton.xaml-->
+  <Style x:Key="M3MaterialHyperlinkButtonStyle" TargetType="HyperlinkButton">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="HyperlinkButton">
+          <Grid Background="{TemplateBinding Background}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="Content.Opacity" Value="{StaticResource MediumOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="Content.Opacity" Value="{StaticResource LowOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnSurfaceLowBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused" />
+                <VisualState x:Name="Unfocused" />
+                <VisualState x:Name="PointerFocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="Content" MinHeight="{TemplateBinding MinHeight}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}">
+              <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Top" TextWrapping="Wrap" />
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialSecondaryHyperlinkButtonStyle" TargetType="HyperlinkButton" BasedOn="{StaticResource M3MaterialHyperlinkButtonStyle}">
+    <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}" />
   </Style>
   <!--origin: Styles\Controls\v2\ListView.xaml-->
   <Style x:Key="M3MaterialListViewItemStyle" TargetType="ListViewItem">
@@ -4999,6 +5050,157 @@
       </Setter.Value>
     </Setter>
   </Style>
+  <!--origin: Styles\Controls\v2\Slider.xaml-->
+  <SolidColorBrush x:Key="M3MaterialSliderTrackBrush" Color="{ThemeResource M3MaterialSliderTrackColor}" />
+  <StaticResource x:Key="M3MaterialSliderTickBarFill" ResourceKey="OnSecondaryLowBrush" />
+  <StaticResource x:Key="M3MaterialSliderTickBarFillDisabled" ResourceKey="SystemControlDisabledBaseMediumLowBrush" />
+  <StaticResource x:Key="M3MaterialSliderInlineTickBarFill" ResourceKey="SystemControlBackgroundAltHighBrush" />
+  <StaticResource x:Key="M3MaterialSliderThumbBackgroundDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
+  <Style x:Key="M3MaterialSliderThumbStyle" TargetType="Thumb">
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Thumb">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="M3MaterialSliderStyle" TargetType="Slider">
+    <Setter Property="Background" Value="{StaticResource M3MaterialSliderTrackBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
+    <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}" />
+    <Setter Property="ManipulationMode" Value="None" />
+    <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+    <Setter Property="FocusVisualMargin" Value="-7,0,-7,0" />
+    <Setter Property="IsFocusEngagementEnabled" Value="True" />
+    <not_win:Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Slider">
+          <Grid Margin="{TemplateBinding Padding}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect" Storyboard.TargetProperty="Fill">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect" Storyboard.TargetProperty="Fill">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="Background">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="Background">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderThumbBackgroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar" Storyboard.TargetProperty="Fill">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar" Storyboard.TargetProperty="Fill">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar" Storyboard.TargetProperty="Fill">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar" Storyboard.TargetProperty="Fill">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource M3MaterialSliderTickBarFillDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="PointerOver" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusEngagementStates">
+                <VisualState x:Name="FocusDisengaged" />
+                <VisualState x:Name="FocusEngagedHorizontal">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="FocusEngagedVertical">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--  SliderContainer  -->
+            <Grid x:Name="SliderContainer" Grid.Row="1" Background="Transparent" Control.IsTemplateFocusTarget="True">
+              <!--  HorizontalTemplate  -->
+              <Grid x:Name="HorizontalTemplate" MinHeight="32">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="15" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="15" />
+                </Grid.RowDefinitions>
+                <!--  HorizontalTrackRect  -->
+                <Rectangle x:Name="HorizontalTrackRect" Grid.Row="1" Grid.ColumnSpan="3" Height="2" Fill="{TemplateBinding Background}" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+                <!--  HorizontalDecreaseRect  -->
+                <Rectangle x:Name="HorizontalDecreaseRect" Grid.Row="1" Fill="{TemplateBinding Foreground}" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+                <!--  TopTickBar  -->
+                <TickBar x:Name="TopTickBar" Grid.ColumnSpan="3" Height="4" Margin="0,0,0,4" VerticalAlignment="Bottom" Fill="{StaticResource M3MaterialSliderTickBarFill}" Visibility="Collapsed" />
+                <!--  HorizontalInlineTickBar  -->
+                <TickBar x:Name="HorizontalInlineTickBar" Grid.Row="1" Grid.ColumnSpan="3" Height="2" Fill="{StaticResource M3MaterialSliderInlineTickBarFill}" Visibility="Collapsed" />
+                <!--  BottomTickBar  -->
+                <TickBar x:Name="BottomTickBar" Grid.Row="2" Grid.ColumnSpan="3" Height="4" Margin="0,4,0,0" VerticalAlignment="Top" Fill="{StaticResource M3MaterialSliderTickBarFill}" Visibility="Collapsed" />
+                <!--  HorizontalThumb  -->
+                <Thumb x:Name="HorizontalThumb" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Width="12" Height="12" AutomationProperties.AccessibilityView="Raw" Background="{TemplateBinding Foreground}" DataContext="{TemplateBinding Value}" FocusVisualMargin="-14,-6,-14,-6" Style="{StaticResource M3MaterialSliderThumbStyle}" />
+              </Grid>
+              <!--  VerticalTemplate  -->
+              <Grid x:Name="VerticalTemplate" MinWidth="32" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="15" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="15" />
+                </Grid.ColumnDefinitions>
+                <!--  VerticalTrackRect  -->
+                <Rectangle x:Name="VerticalTrackRect" Grid.RowSpan="3" Grid.Column="1" Width="2" Fill="{TemplateBinding Background}" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+                <!--  VerticalDecreaseRect  -->
+                <Rectangle x:Name="VerticalDecreaseRect" Grid.Row="2" Grid.Column="1" Fill="{TemplateBinding Foreground}" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+                <!--  LeftTickBar  -->
+                <TickBar x:Name="LeftTickBar" Grid.RowSpan="3" Width="4" Margin="0,0,4,0" HorizontalAlignment="Right" Fill="{StaticResource M3MaterialSliderTickBarFill}" Visibility="Collapsed" />
+                <!--  VerticalInlineTickBar  -->
+                <TickBar x:Name="VerticalInlineTickBar" Grid.RowSpan="3" Grid.Column="1" Width="2" Fill="{StaticResource M3MaterialSliderInlineTickBarFill}" Visibility="Collapsed" />
+                <!--  RightTickBar  -->
+                <TickBar x:Name="RightTickBar" Grid.RowSpan="3" Grid.Column="2" Width="4" Margin="4,0,0,0" HorizontalAlignment="Left" Fill="{StaticResource M3MaterialSliderTickBarFill}" Visibility="Collapsed" />
+                <!--  VerticalThumb  -->
+                <Thumb x:Name="VerticalThumb" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Width="12" Height="12" AutomationProperties.AccessibilityView="Raw" Background="{TemplateBinding Foreground}" DataContext="{TemplateBinding Value}" FocusVisualMargin="-6,-14,-6,-14" Style="{StaticResource M3MaterialSliderThumbStyle}" />
+              </Grid>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
   <!--origin: Styles\Controls\v2\TextBlock.xaml-->
   <Style x:Key="M3MaterialBaseTextBlockStyle" TargetType="TextBlock">
     <Setter Property="TextTrimming" Value="CharacterEllipsis" />
@@ -5068,7 +5270,7 @@
   </Style>
   <Style x:Key="M3MaterialLabelSmall" BasedOn="{StaticResource M3MaterialBaseTextBlockStyle}" TargetType="TextBlock">
     <Setter Property="FontSize" Value="11" />
-    <Setter Property="LineHeight" Value="6" />
+    <Setter Property="LineHeight" Value="16" />
     <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
     <!--  Tracking: 0.5 px  -->
