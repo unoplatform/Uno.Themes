@@ -1,10 +1,13 @@
-<p align="center">
+﻿<p align="center">
   <img src="assets/material-design-system.png">
 </p>
 
 # Uno.Material
 The Uno.Material library is available as NuGet packages that can be added to any new or existing Uno solution.
 Uno Material lets you apply [Material Design 3](https://m3.material.io/) styling to your application with a few lines of code. 
+
+> [!WARNING]
+> If you are updating Uno.Material to v2 from an older 1.x version of the package, additional steps will be required. Refer to the [Uno Material Migration Guide](material-migration.md).
 
 ## Getting Started
 1. Open an existing Uno project, or create a new Uno project using the `Uno Platform App` template.
