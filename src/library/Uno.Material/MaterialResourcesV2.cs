@@ -16,38 +16,59 @@ namespace Uno.Material
 	public class MaterialResourcesV2 : ResourceDictionary
 	{
 		private const string StylePrefix = "Material";
-		public MaterialResourcesV2()
-		{
-			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
 
-			MapStyleInfo();
+public bool WithImplicitStyles
+{
+	get => (bool)GetValue(WithImplicitStylesProperty);
+	set => SetValue(WithImplicitStylesProperty, value);
+}
+
+public static DependencyProperty WithImplicitStylesProperty { get; } =
+	DependencyProperty.Register(
+		nameof(WithImplicitStyles),
+		typeof(bool),
+		typeof(MaterialResourcesV2),
+		new PropertyMetadata(true, OnWithImplicitStylesChanged));
+
+		
+private static void OnWithImplicitStylesChanged(DependencyObject owner, DependencyPropertyChangedEventArgs args)
+{
+	MapStyleInfo();
+}
+
+public MaterialResourcesV2()
+{
+	Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
+}
+
+private void MapStyleInfo()
+{
+	var aliasedResources = new ResourceDictionary();
+	var implicitResources = new ResourceDictionary();
+
+	foreach (var (resKey, sharedKey, isDefaultStyle) in GetStyleInfos())
+	{
+		var style = GetStyle(resKey);
+
+		if (isDefaultStyle)
+		{
+			implicitResources.Add(style.TargetType, style);
 		}
 
-		public bool WithImplicitStyles { get; set; } = true;
+		aliasedResources.Add(sharedKey, style);
+	}
 
-		private void MapStyleInfo()
-		{
-			var aliasedResources = new ResourceDictionary();
-			var implicitResources = new ResourceDictionary();
+	// UWP don't allow for res-dict with Source set to contain resource directly:
+	// > Local values are not allowed in resource dictionary with Source set
+	// but, we can add them through merged-dict instead.
+	this.MergedDictionaries.Add(aliasedResources);
 
-			foreach (var (resKey, sharedKey, isDefaultStyle) in GetStyleInfos())
-			{
-				var style = GetStyle(resKey);
+	if (implicitResources.Any())
+	{
+		this.MergedDictionaries.Add(implicitResources);
+	}
+}
 
-				if (isDefaultStyle)
-				{
-					implicitResources.Add(style.TargetType, style);
-				}
-
-				aliasedResources.Add(sharedKey, style);
-			}
-
-			// UWP don't allow for res-dict with Source set to contain resource directly:
-			// > Local values are not allowed in resource dictionary with Source set
-			// but, we can add them through merged-dict instead.
-			this.MergedDictionaries.Add(aliasedResources);
-			this.MergedDictionaries.Add(implicitResources);
-		}
 
 		private Style GetStyle(string key)
 		{
