@@ -23,6 +23,8 @@ namespace Uno.Material
 			MapStyleInfo();
 		}
 
+		public bool WithImplicitStyles { get; set; } = true;
+
 		private void MapStyleInfo()
 		{
 			var aliasedResources = new ResourceDictionary();

@@ -752,7 +752,7 @@
                 <RowDefinition Height="Auto" />
               </Grid.RowDefinitions>
               <!-- Header -->
-              <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{TemplateBinding Header}" Style="{StaticResource BodySmall}" Foreground="{StaticResource PrimaryBrush}" TextWrapping="Wrap" />
+              <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="{TemplateBinding Header}" Style="{StaticResource MaterialBodySmall}" Foreground="{StaticResource PrimaryBrush}" TextWrapping="Wrap" />
               <!-- DateText -->
               <TextBlock x:Name="DateText" Grid.Row="1" Style="{StaticResource MaterialBodyMedium}" Text="{TemplateBinding PlaceholderText}" />
             </Grid>
@@ -819,7 +819,7 @@
         <ControlTemplate TargetType="CalendarView">
           <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
             <Border.Resources>
-              <Style x:Key="MaterialWeekDayNameStyle" BasedOn="{StaticResource BodySmall}" TargetType="TextBlock">
+              <Style x:Key="MaterialWeekDayNameStyle" BasedOn="{StaticResource MaterialBodySmall}" TargetType="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
               </Style>
@@ -1545,7 +1545,7 @@
               <ContentPresenter.ContentTemplate>
                 <DataTemplate>
                   <Grid>
-                    <TextBlock Margin="16,0,0,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Style="{StaticResource LabelLarge}" Text="{Binding}" />
+                    <TextBlock Margin="16,0,0,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Style="{StaticResource MaterialLabelLarge}" Text="{Binding}" />
                   </Grid>
                 </DataTemplate>
               </ContentPresenter.ContentTemplate>
@@ -1648,7 +1648,7 @@
                 <!--  ContentPresenter  -->
                 <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" VerticalAlignment="Center" RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
                 <!--  PlaceholderElement  -->
-                <TextBlock x:Name="PlaceholderElement" Grid.Column="1" VerticalAlignment="Center" Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}" IsHitTestVisible="False" MaxLines="1" RenderTransformOrigin="0,0.5" Style="{StaticResource LabelMedium}" Text="{TemplateBinding PlaceholderText}">
+                <TextBlock x:Name="PlaceholderElement" Grid.Column="1" VerticalAlignment="Center" Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}" IsHitTestVisible="False" MaxLines="1" RenderTransformOrigin="0,0.5" Style="{StaticResource MaterialLabelMedium}" Text="{TemplateBinding PlaceholderText}">
                   <TextBlock.RenderTransform>
                     <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" ScaleX="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" ScaleY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
                   </TextBlock.RenderTransform>
@@ -1737,7 +1737,7 @@
     <Setter Property="ContentTemplate">
       <Setter.Value>
         <DataTemplate>
-          <TextBlock Text="{Binding}" Style="{StaticResource TitleLarge}" />
+          <TextBlock Text="{Binding}" Style="{StaticResource MaterialTitleLarge}" />
         </DataTemplate>
       </Setter.Value>
     </Setter>
@@ -1764,7 +1764,7 @@
   <x:Double x:Key="MaterialDatePickerHeight">53</x:Double>
   <StaticResource x:Key="MaterialDatePickerFlyoutPresenterBackgroundBrush" ResourceKey="SurfaceBrush" />
   <Thickness x:Key="MaterialDatePickerHostPadding">24,24,8,8</Thickness>
-  <StaticResource x:Key="MaterialDatePickerFlyoutPresenterBorderBrush" ResourceKey="MaterialOnSurfaceFocusedBrush" />
+  <StaticResource x:Key="MaterialDatePickerFlyoutPresenterBorderBrush" ResourceKey="OnSurfaceFocusedBrush" />
   <SolidColorBrush x:Key="MaterialDatePickerFlyoutPresenterHighlightFill" Opacity="0.20" Color="{ThemeResource PrimaryColor}" />
   <x:Double x:Key="MaterialDatePickerFlyoutElevation">8</x:Double>
   <StaticResource x:Key="MaterialDatePickerFlyoutPresenterSpacerFill" ResourceKey="OnSurfaceFocusedBrush" />
@@ -1869,12 +1869,12 @@
                 <!--  Border  -->
                 <Rectangle x:Name="BottomBorder" Height="2" VerticalAlignment="Bottom" Fill="{TemplateBinding BorderBrush}" />
                 <!--  Header  -->
-                <TextBlock x:Name="HeaderTextBlock" Margin="10,8,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Foreground="{TemplateBinding Foreground}" Style="{StaticResource BodySmall}" Text="{TemplateBinding Header}" TextWrapping="Wrap" />
+                <TextBlock x:Name="HeaderTextBlock" Margin="10,8,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Foreground="{TemplateBinding Foreground}" Style="{StaticResource MaterialBodySmall}" Text="{TemplateBinding Header}" TextWrapping="Wrap" />
                 <Grid x:Name="FlyoutButtonContentGrid" Height="24" Margin="6,24,10,0" VerticalAlignment="Top">
                   <!--  DateText  -->
-                  <TextBlock x:Name="DateText" Style="{StaticResource BodyMedium}" Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0:d}'}" />
+                  <TextBlock x:Name="DateText" Style="{StaticResource MaterialBodyMedium}" Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0:d}'}" />
                   <!--  PlaceholderText  -->
-                  <TextBlock x:Name="PlaceholderText" Margin="4,0,0,0" Foreground="{StaticResource OnSurfaceLowBrush}" Style="{StaticResource BodyMedium}" Text="{TemplateBinding Header}" Visibility="Collapsed" />
+                  <TextBlock x:Name="PlaceholderText" Margin="4,0,0,0" Foreground="{StaticResource OnSurfaceLowBrush}" Style="{StaticResource MaterialBodyMedium}" Text="{TemplateBinding Header}" Visibility="Collapsed" />
                   <!--  Removing this cause trouble with the DatePicker code  -->
                   <TextBlock x:Name="DayTextBlock" Opacity="0" />
                 </Grid>
@@ -2450,10 +2450,10 @@
             <Viewbox x:Name="IconRoot" Width="{StaticResource MaterialFlyoutMenuItemIconWidth}" Margin="12,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed">
               <ContentPresenter x:Name="IconContent" Content="{TemplateBinding Icon}" Foreground="{StaticResource OnSurfaceVariantBrush}" />
             </Viewbox>
-            <TextBlock x:Name="TextBlock" Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Style="{StaticResource LabelLarge}" Text="{TemplateBinding Text}" />
+            <TextBlock x:Name="TextBlock" Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Style="{StaticResource MaterialLabelLarge}" Text="{TemplateBinding Text}" />
             <!--  Mobile devices do not support keyboard shortcuts  -->
             <Grid Grid.Column="3" android:Visibility="Collapsed" ios:Visibility="Collapsed">
-              <TextBlock x:Name="KeyboardAcceleratorTextBlock" MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KeyboardAcceleratorTextMinWidth}" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw" Foreground="{StaticResource OnSurfaceVariantBrush}" Style="{StaticResource LabelLarge}" Text="{TemplateBinding KeyboardAcceleratorTextOverride}" TextAlignment="Right" Visibility="Collapsed" />
+              <TextBlock x:Name="KeyboardAcceleratorTextBlock" MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KeyboardAcceleratorTextMinWidth}" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw" Foreground="{StaticResource OnSurfaceVariantBrush}" Style="{StaticResource MaterialLabelLarge}" Text="{TemplateBinding KeyboardAcceleratorTextOverride}" TextAlignment="Right" Visibility="Collapsed" />
             </Grid>
             <!--  Overlay  -->
             <Border x:Name="CommonStatesOverlay" Grid.Column="0" Grid.ColumnSpan="5" Background="Transparent" />
@@ -2555,10 +2555,10 @@
               <Viewbox x:Name="IconRoot" Grid.Column="1" Width="{StaticResource MaterialFlyoutMenuItemIconWidth}" Height="{StaticResource MaterialFlyoutMenuItemIconHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed">
                 <ContentPresenter x:Name="IconContent" Content="{TemplateBinding Icon}" Foreground="{StaticResource OnSurfaceVariantBrush}" />
               </Viewbox>
-              <TextBlock x:Name="TextBlock" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="{TemplateBinding Foreground}" Style="{StaticResource LabelLarge}" Text="{TemplateBinding Text}" />
+              <TextBlock x:Name="TextBlock" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="{TemplateBinding Foreground}" Style="{StaticResource MaterialLabelLarge}" Text="{TemplateBinding Text}" />
               <!--  Mobile devices do not support keyboard shortcuts  -->
               <Grid Grid.Column="3" android:Visibility="Collapsed" ios:Visibility="Collapsed">
-                <TextBlock x:Name="KeyboardAcceleratorTextBlock" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw" Foreground="{StaticResource OnSurfaceVariantBrush}" Style="{StaticResource LabelLarge}" Text="{TemplateBinding KeyboardAcceleratorTextOverride}" TextAlignment="Right" Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                <TextBlock x:Name="KeyboardAcceleratorTextBlock" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw" Foreground="{StaticResource OnSurfaceVariantBrush}" Style="{StaticResource MaterialLabelLarge}" Text="{TemplateBinding KeyboardAcceleratorTextOverride}" TextAlignment="Right" Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
               </Grid>
             </Grid>
             <!--  Overlay  -->
@@ -2644,7 +2644,7 @@
               <Viewbox x:Name="IconRoot" Grid.Column="0" Width="{StaticResource MaterialFlyoutMenuItemIconWidth}" Height="{StaticResource MaterialFlyoutMenuItemIconHeight}" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed">
                 <ContentPresenter x:Name="IconContent" Content="{TemplateBinding Icon}" Foreground="{StaticResource OnSurfaceVariantBrush}" />
               </Viewbox>
-              <TextBlock x:Name="TextBlock" Grid.Column="0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="{TemplateBinding Foreground}" Style="{StaticResource LabelLarge}" Text="{TemplateBinding Text}" />
+              <TextBlock x:Name="TextBlock" Grid.Column="0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="{TemplateBinding Foreground}" Style="{StaticResource MaterialLabelLarge}" Text="{TemplateBinding Text}" />
               <Path x:Name="SubItemChevron" Grid.Column="1" Width="6" Height="10" Margin="54,4,16,0" VerticalAlignment="Center" Data="{StaticResource MaterialFlyoutRightArrowPathStyle}" Fill="{StaticResource OnSurfaceVariantBrush}" Stretch="Uniform" />
             </Grid>
             <!--  Overlay  -->
@@ -4865,7 +4865,7 @@
     </Setter>
   </Style>
   <!--origin: Styles\Controls\v2\ProgressBar.xaml-->
-  <Style x:Key="M3MaterialProgressBarStyle" TargetType="controls:ProgressBar">
+  <Style x:Key="MaterialProgressBarStyle" TargetType="controls:ProgressBar">
     <Setter Property="Foreground" Value="{StaticResource PrimaryVariantDarkBrush}" />
     <Setter Property="Background" Value="{StaticResource PrimaryVariantLightBrush}" />
     <Setter Property="Width" Value="250" />
@@ -4875,7 +4875,7 @@
   <lottie_win:LottieVisualSource x:Key="M3MaterialIndeterminateAnimation_Win" UriSource="ms-appx:///Uno.Material/Assets/MaterialIndeterminate.json" />
   <lottie_not_win:LottieVisualSource x:Key="M3MaterialDeterminateAnimation_Uno" UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialDeterminate.json" />
   <lottie_not_win:LottieVisualSource x:Key="M3MaterialIndeterminateAnimation_Uno" UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialIndeterminate.json" />
-  <Style x:Key="M3MaterialProgressRingStyle" TargetType="controls:ProgressRing">
+  <Style x:Key="MaterialProgressRingStyle" TargetType="controls:ProgressRing">
     <win:Setter Property="DeterminateSource" Value="{StaticResource M3MaterialDeterminateAnimation_Win}" />
     <win:Setter Property="IndeterminateSource" Value="{StaticResource M3MaterialIndeterminateAnimation_Win}" />
     <not_win:Setter Property="DeterminateSource" Value="{StaticResource M3MaterialDeterminateAnimation_Uno}" />
@@ -5912,7 +5912,7 @@
               <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.ColumnSpan="4" Foreground="{StaticResource OnBackgroundBrush}" Style="{StaticResource BodyMedium}" Text="{TemplateBinding Header}" Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" />
+            <TextBlock Grid.ColumnSpan="4" Foreground="{StaticResource OnBackgroundBrush}" Style="{StaticResource MaterialBodyMedium}" Text="{TemplateBinding Header}" Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" />
             <ContentPresenter x:Name="OnContentPresenter" Grid.Row="1" Grid.RowSpan="3" Grid.Column="2" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" Foreground="{TemplateBinding Foreground}" IsHitTestVisible="False" Opacity="0" />
             <Grid Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" Control.IsTemplateFocusTarget="True" />
             <!--  Marker element used to compute draggable zone  -->
