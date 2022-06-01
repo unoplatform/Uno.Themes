@@ -1180,12 +1180,19 @@
   <x:Double x:Key="FocusAreaSize">40</x:Double>
   <x:Double x:Key="CheckAreaSize">18</x:Double>
   <CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
+  <x:Double x:Key="MaterialCheckBoxFontSize">12</x:Double>
+  <x:Double x:Key="MaterialCheckBoxCharacterSpacing">33.333</x:Double>
   <SolidColorBrush x:Key="MaterialCheckBoxBorderBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
   <SolidColorBrush x:Key="MaterialCheckBoxPressedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
   <Style x:Key="MaterialCheckBoxStyle" TargetType="CheckBox">
-    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
     <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
     <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
+    <!--Start: Label Body Small Typo-->
+    <Setter Property="FontSize" Value="{StaticResource MaterialCheckBoxFontSize}" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialCheckBoxCharacterSpacing}" />
+    <!--End: Label Body Small Typo-->
     <Setter Property="BorderBrush" Value="{StaticResource MaterialCheckBoxBorderBrush}" />
     <Setter Property="BorderThickness" Value="2" />
     <Setter Property="Padding" Value="8,0,0,0" />
@@ -1420,7 +1427,7 @@
               <Path x:Name="HyphenGlyph" Data="{StaticResource CheckBoxHyphenGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="4" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
               <Path x:Name="CheckGlyph" Data="{StaticResource CheckBoxCheckGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="12" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
             </Grid>
-            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Foreground="{StaticResource OnBackgroundBrush}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="1" AutomationProperties.AccessibilityView="Raw" TextWrapping="Wrap" />
+            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Foreground="{StaticResource OnSurfaceMediumBrush}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="1" AutomationProperties.AccessibilityView="Raw" TextWrapping="Wrap" />
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -5300,6 +5307,12 @@
     <!--  Tracking: 0.5 px  -->
     <Setter Property="CharacterSpacing" Value="45.454" />
   </Style>
+  <Style x:Key="MaterialLabelExtraSmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="LineHeight" Value="16" />
+    <!--  Tracking: 0.1 px  -->
+    <Setter Property="CharacterSpacing" Value="7.143" />
+  </Style>
   <Style x:Key="MaterialBodyLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
     <Setter Property="FontSize" Value="16" />
     <Setter Property="LineHeight" Value="24" />
@@ -5320,6 +5333,30 @@
     <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
     <!--  Tracking: 0.4 px  -->
     <Setter Property="CharacterSpacing" Value="33.333" />
+  </Style>
+  <Style x:Key="MaterialCaptionLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="LineHeight" Value="18" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <!--  Tracking: 0.15 px  -->
+    <Setter Property="CharacterSpacing" Value="9.375" />
+  </Style>
+  <Style x:Key="MaterialCaptionMedium" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LineHeight" Value="16" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <!--  Tracking: 0.4 px  -->
+    <Setter Property="CharacterSpacing" Value="33.333" />
+  </Style>
+  <Style x:Key="MaterialCaptionSmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="LineHeight" Value="13" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <!--  Tracking: 0.1 px  -->
+    <Setter Property="CharacterSpacing" Value="7.143" />
   </Style>
   <!--origin: Styles\Controls\v2\TextBox.xaml-->
   <um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY" NotNullOrEmptyValue="5" NullOrEmptyValue="0" />
