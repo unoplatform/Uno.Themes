@@ -501,8 +501,10 @@
 
 		<Setter Property="Foreground"
 				Value="{StaticResource PrimaryBrush}" />
+		<!-- Following Material M3 Guidelines and Uno Figma file: -->
+		<!-- Background is Optional and Default is Transparent -->
 		<Setter Property="Background"
-				Value="{StaticResource SurfaceBrush}" />
+				Value="Transparent" />
 
 		<!--Start: Label Large Typo-->
 		<Setter Property="FontSize"
@@ -567,14 +569,12 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background"
+										<Setter Target="Root.BorderBrush"
 												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
 												Value="{StaticResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
 												Value="{StaticResource OnSurfaceDisabledBrush}" />
-										<Setter Target="Root.BorderThickness"
-												Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
