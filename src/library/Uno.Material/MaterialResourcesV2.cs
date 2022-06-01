@@ -75,6 +75,9 @@ namespace Uno.Material
 			Add("MaterialBodySmall");
 			Add("MaterialCalendarDatePickerStyle", isImplicit: true);
 			Add("MaterialCalendarViewStyle", isImplicit: true);
+			Add("MaterialCaptionLarge");
+			Add("MaterialCaptionMedium");
+			Add("MaterialCaptionSmall");
 			Add("MaterialCheckBoxStyle", isImplicit: true);
 			Add("MaterialComboBoxStyle", isImplicit: true);
 			Add("MaterialCommandBarStyle", isImplicit: true);
@@ -96,6 +99,7 @@ namespace Uno.Material
 			Add("MaterialHyperlinkButtonStyle", isImplicit: true);
 			Add("MaterialIconButtonStyle");
 			Add("MaterialIconToggleButtonStyle");
+			Add("MaterialLabelExtraSmall");
 			Add("MaterialLabelLarge");
 			Add("MaterialLabelMedium");
 			Add("MaterialLabelSmall");
