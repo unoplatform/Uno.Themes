@@ -188,7 +188,22 @@
                 Value="45.454" />
     </Style>
 
-    <!--  Body Large  -->
+	<!--  Label ExtraSmall  -->
+	 <!-- Added for text style needed for Badges so it will match Uno figma file. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
+	<Style x:Key="MaterialLabelExtraSmall"
+           BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+           TargetType="TextBlock">
+
+		<Setter Property="FontSize"
+                Value="11" />
+		<Setter Property="LineHeight"
+                Value="16" />
+		<!--  Tracking: 0.1 px  -->
+		<Setter Property="CharacterSpacing"
+                Value="7.143" />
+	</Style>
+
+	<!--  Body Large  -->
     <Style x:Key="MaterialBodyLarge"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
@@ -235,4 +250,58 @@
         <Setter Property="CharacterSpacing"
                 Value="33.333" />
     </Style>
+
+	<!--  Caption Large  -->
+	<Style x:Key="MaterialCaptionLarge"
+           BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+           TargetType="TextBlock">
+
+		<Setter Property="FontSize"
+                Value="13" />
+		<Setter Property="LineHeight"
+                Value="18" />
+		<Setter Property="FontWeight"
+                Value="Medium" />
+		<Setter Property="FontFamily"
+                Value="{StaticResource MaterialMediumFontFamily}" />
+		<!--  Tracking: 0.15 px  -->
+		<Setter Property="CharacterSpacing"
+                Value="9.375" />
+	</Style>
+
+	<!--  Caption Medium  -->
+	<Style x:Key="MaterialCaptionMedium"
+           BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+           TargetType="TextBlock">
+
+		<Setter Property="FontSize"
+                Value="12" />
+		<Setter Property="LineHeight"
+                Value="16" />
+		<Setter Property="FontWeight"
+                Value="Medium" />
+		<Setter Property="FontFamily"
+                Value="{StaticResource MaterialMediumFontFamily}" />
+		<!--  Tracking: 0.4 px  -->
+		<Setter Property="CharacterSpacing"
+                Value="33.333" />
+	</Style>
+
+	<!--  Caption Small  -->
+	<Style x:Key="MaterialCaptionSmall"
+           BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+           TargetType="TextBlock">
+
+		<Setter Property="FontSize"
+                Value="11" />
+		<Setter Property="LineHeight"
+                Value="13" />
+		<Setter Property="FontWeight"
+                Value="Medium" />
+		<Setter Property="FontFamily"
+                Value="{StaticResource MaterialMediumFontFamily}" />
+		<!--  Tracking: 0.1 px  -->
+		<Setter Property="CharacterSpacing"
+                Value="7.143" />
+	</Style>
 </ResourceDictionary>
