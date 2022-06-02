@@ -44,7 +44,7 @@ For a larger example and features demo, visit the [Uno Gallery](https://github.c
 
 ## Documentation
 
-All documentation for `Uno.Themes` can be found on our [website](https://platform.uno).
+All documentation for `Uno.Themes` can be found on our [website](https://platform.uno/docs/articles/external/uno.themes/doc/themes-overview.html).
 
 ## Contributing
 
