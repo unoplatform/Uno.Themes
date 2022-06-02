@@ -85,21 +85,21 @@
 	<!--#endregion-->
 
 	<!--#region Default FAB Resources-->
-	<Thickness x:Key="MaterialFabPadding">16</Thickness>
-	<x:Double x:Key="MaterialFabContentWidthOrHeight">18</x:Double>
+	<Thickness x:Key="MaterialFabPadding">20</Thickness>
+	<x:Double x:Key="MaterialFabContentWidthOrHeight">16</x:Double>
 	<CornerRadius x:Key="MaterialFabCornerRadius">16</CornerRadius>
 	<!--#endregion-->
 
 	<!--#region Small FAB Resources-->
-	<Thickness x:Key="MaterialSmallFabPadding">8</Thickness>
-	<x:Double x:Key="MaterialSmallFabContentWidthOrHeight">18</x:Double>
+	<Thickness x:Key="MaterialSmallFabPadding">12</Thickness>
+	<x:Double x:Key="MaterialSmallFabContentWidthOrHeight">16</x:Double>
 	<CornerRadius x:Key="MaterialSmallFabCornerRadius">12</CornerRadius>
 
 	<!--#endregion-->
 
 	<!--#region Large FAB Resources-->
-	<Thickness x:Key="MaterialLargeFabPadding">30</Thickness>
-	<x:Double x:Key="MaterialLargeFabContentWidthOrHeight">27</x:Double>
+	<Thickness x:Key="MaterialLargeFabPadding">36</Thickness>
+	<x:Double x:Key="MaterialLargeFabContentWidthOrHeight">24</x:Double>
 	<CornerRadius x:Key="MaterialLargeFabCornerRadius">28</CornerRadius>
 	<!--#endregion-->
 
@@ -182,6 +182,7 @@
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
 										                  FontFamily="{TemplateBinding FontFamily}"
+										                  FontWeight="{TemplateBinding FontWeight}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
 
@@ -317,6 +318,7 @@
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
 										                  FontFamily="{TemplateBinding FontFamily}"
+														  FontWeight="{TemplateBinding FontWeight}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
 
@@ -452,6 +454,7 @@
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
 										                  FontFamily="{TemplateBinding FontFamily}"
+														  FontWeight="{TemplateBinding FontWeight}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
 
@@ -587,6 +590,7 @@
 										                  ContentTemplate="{TemplateBinding ContentTemplate}"
 										                  ContentTransitions="{TemplateBinding ContentTransitions}"
 										                  FontFamily="{TemplateBinding FontFamily}"
+														  FontWeight="{TemplateBinding FontWeight}"
 										                  FontSize="{TemplateBinding FontSize}" />
 									</StackPanel>
 
@@ -752,23 +756,5 @@
 		<Setter Property="um:ControlExtensions.IconWidth"
 		        Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
-	<!--#endregion-->
-
-	<!--#region Extended -->
-	<Style x:Key="MaterialExtendedFabStyle"
-	       BasedOn="{StaticResource MaterialFabStyle}"
-	       TargetType="Button" />
-
-	<Style x:Key="MaterialSurfaceExtendedFabStyle"
-	       BasedOn="{StaticResource MaterialSurfaceFabStyle}"
-	       TargetType="Button" />
-	
-	<Style x:Key="MaterialSecondaryExtendedFabStyle"
-	       BasedOn="{StaticResource MaterialSecondaryFabStyle}"
-	       TargetType="Button" />
-	
-	<Style x:Key="MaterialTertiaryExtendedFabStyle"
-	       BasedOn="{StaticResource MaterialTertiaryFabStyle}"
-	       TargetType="Button" />
 	<!--#endregion-->
 </ResourceDictionary>
