@@ -20,10 +20,6 @@ Button|LargeFabStyle|
 Button|SurfaceLargeFabStyle|
 Button|SecondaryLargeFabStyle|
 Button|TertiaryLargeFabStyle|
-Button|ExtendedFabStyle|
-Button|SurfaceExtendedFabStyle|
-Button|SecondaryExtendedFabStyle|
-Button|TertiaryExtendedFabStyle|
 CalendarDatePicker|CalendarDatePickerStyle|True|
 CalendarView|CalendarViewStyle|True|
 CheckBox|CheckBoxStyle|True|
