@@ -86,7 +86,6 @@ namespace Uno.Material
 			Add("MaterialDisplayMedium");
 			Add("MaterialDisplaySmall");
 			Add("MaterialElevatedButtonStyle");
-			Add("MaterialExtendedFabStyle");
 			Add("MaterialFabStyle");
 			Add("MaterialFilledButtonStyle", isImplicit: true);
 			Add("MaterialFilledPasswordBoxStyle", isImplicit: true);
@@ -116,7 +115,6 @@ namespace Uno.Material
 			Add("MaterialProgressRingStyle", isImplicit: true);
 			Add("MaterialRadioButtonStyle", isImplicit: true);
 			Add("MaterialSecondaryCheckBoxStyle");
-			Add("MaterialSecondaryExtendedFabStyle");
 			Add("MaterialSecondaryFabStyle");
 			Add("MaterialSecondaryHyperlinkButtonStyle");
 			Add("MaterialSecondaryLargeFabStyle");
@@ -124,11 +122,9 @@ namespace Uno.Material
 			Add("MaterialSecondarySmallFabStyle");
 			Add("MaterialSliderStyle", isImplicit: true);
 			Add("MaterialSmallFabStyle");
-			Add("MaterialSurfaceExtendedFabStyle");
 			Add("MaterialSurfaceFabStyle");
 			Add("MaterialSurfaceLargeFabStyle");
 			Add("MaterialSurfaceSmallFabStyle");
-			Add("MaterialTertiaryExtendedFabStyle");
 			Add("MaterialTertiaryFabStyle");
 			Add("MaterialTertiaryLargeFabStyle");
 			Add("MaterialTertiarySmallFabStyle");
