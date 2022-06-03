@@ -112,7 +112,9 @@ namespace Uno.Material
 			Add("MaterialOutlinedPasswordBoxStyle");
 			Add("MaterialOutlinedTextBoxStyle");
 			Add("MaterialProgressBarStyle", isImplicit: true);
+#if !WinUI
 			Add("MaterialProgressRingStyle", isImplicit: true);
+#endif
 			Add("MaterialRadioButtonStyle", isImplicit: true);
 			Add("MaterialSecondaryCheckBoxStyle");
 			Add("MaterialSecondaryFabStyle");
