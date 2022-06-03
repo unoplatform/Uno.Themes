@@ -5,14 +5,19 @@
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					mc:Ignorable="d">
 
+	<x:Double x:Key="MaterialProgressBarMinWidth">250</x:Double>
+	<x:Double x:Key="MaterialProgressBarHeight">4</x:Double>
+	
 	<Style x:Key="MaterialProgressBarStyle"
 		   TargetType="muxc:ProgressBar">
 		<Setter Property="Foreground"
 				Value="{StaticResource PrimaryVariantDarkBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource PrimaryVariantLightBrush}" />
-		<Setter Property="Width"
-				Value="250" />
+		<Setter Property="MinWidth"
+				Value="{StaticResource MaterialProgressBarMinWidth}" />
+		<Setter Property="Height"
+				Value="{StaticResource MaterialProgressBarHeight}" />
 	</Style>
 
 </ResourceDictionary>
