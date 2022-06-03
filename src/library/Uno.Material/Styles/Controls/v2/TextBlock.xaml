@@ -13,183 +13,185 @@
 		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialRegularFontFamily}" />
 	</Style>
-	
+
 	<!-- IMPORTANT NOTE :
 	CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
 	For example, here with MaterialHeadline1 an additional 96 pixels will be inserted between each character with FontSize="96" and CharacterSpacing="1000".
 	So in order to specify the letter spacing of -1.5px from the Material guidelines, we will need to add CharacterSpacing="-15.625".
 	To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000 -->
 
-	
+
 	<!--  Display Large  -->
-    <Style x:Key="MaterialDisplayLarge"
+	<Style x:Key="MaterialDisplayLarge"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="57" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="64" />
-    </Style>
+		<!--  Tracking: -0.25 px -->
+		<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+		<Setter Property="CharacterSpacing"
+			Value="-17.857" />
+	</Style>
 
-    <!--  Display Medium  -->
-    <Style x:Key="MaterialDisplayMedium"
+	<!--  Display Medium  -->
+	<Style x:Key="MaterialDisplayMedium"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="45" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="52" />
-    </Style>
+	</Style>
 
-    <!--  Display Small  -->
-    <Style x:Key="MaterialDisplaySmall"
+	<!--  Display Small  -->
+	<Style x:Key="MaterialDisplaySmall"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="36" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="44" />
-    </Style>
+	</Style>
 
-    <!--  Headline Large  -->
-    <Style x:Key="MaterialHeadlineLarge"
+	<!--  Headline Large  -->
+	<Style x:Key="MaterialHeadlineLarge"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="32" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="40" />
-    </Style>
+	</Style>
 
-    <!--  Headline Medium  -->
-    <Style x:Key="MaterialHeadlineMedium"
+	<!--  Headline Medium  -->
+	<Style x:Key="MaterialHeadlineMedium"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="28" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="36" />
-    </Style>
+	</Style>
 
-    <!--  Headline Small  -->
-    <Style x:Key="MaterialHeadlineSmall"
+	<!--  Headline Small  -->
+	<Style x:Key="MaterialHeadlineSmall"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="24" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="32" />
-    </Style>
+	</Style>
 
-    <!--  Title Large  -->
-    <Style x:Key="MaterialTitleLarge"
+	<!--  Title Large  -->
+	<Style x:Key="MaterialTitleLarge"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="22" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="28" />
-    </Style>
+	</Style>
 
-    <!--  Title Medium  -->
-    <Style x:Key="MaterialTitleMedium"
+	<!--  Title Medium  -->
+	<Style x:Key="MaterialTitleMedium"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="16" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="24" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-        <!--  Tracking: 0.15 px  -->
-        <Setter Property="CharacterSpacing"
-                Value="9.375" />
-    </Style>
+		<!--  No Tracking / CharacterSpacing  -->
+		<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+	</Style>
 
-    <!--  Title Small  -->
-    <Style x:Key="MaterialTitleSmall"
+	<!--  Title Small  -->
+	<Style x:Key="MaterialTitleSmall"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="14" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="20" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-        <!--  Tracking: 0.1 px  -->
-        <Setter Property="CharacterSpacing"
-                Value="7.143" />
-    </Style>
+		<!--  No Tracking / CharacterSpacing  -->
+		<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+	</Style>
 
-    <!--  Label Large  -->
-    <Style x:Key="MaterialLabelLarge"
+	<!--  Label Large  -->
+	<Style x:Key="MaterialLabelLarge"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="14" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="20" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-        <!--  Tracking: 0.1 px  -->
-        <Setter Property="CharacterSpacing"
+		<!--  Tracking: 0.1 px  -->
+		<Setter Property="CharacterSpacing"
                 Value="7.143" />
-    </Style>
+	</Style>
 
-    <!--  Label Medium  -->
-    <Style x:Key="MaterialLabelMedium"
+	<!--  Label Medium  -->
+	<Style x:Key="MaterialLabelMedium"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="12" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="16" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-        <!--  Tracking: 0.5 px  -->
-        <Setter Property="CharacterSpacing"
+		<!--  Tracking: 0.5 px  -->
+		<Setter Property="CharacterSpacing"
                 Value="41.666" />
-    </Style>
+	</Style>
 
-    <!--  Label Small  -->
-    <Style x:Key="MaterialLabelSmall"
+	<!--  Label Small  -->
+	<Style x:Key="MaterialLabelSmall"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="11" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="16" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-        <!--  Tracking: 0.5 px  -->
-        <Setter Property="CharacterSpacing"
+		<!--  Tracking: 0.5 px  -->
+		<Setter Property="CharacterSpacing"
                 Value="45.454" />
-    </Style>
+	</Style>
 
 	<!--  Label ExtraSmall  -->
-	 <!-- Added for text style needed for Badges so it will match Uno figma file. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
+	<!-- Added for text style needed for Badges so it will match Uno figma file. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
 	<Style x:Key="MaterialLabelExtraSmall"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
@@ -208,60 +210,62 @@
 	</Style>
 
 	<!--  Body Large  -->
-    <Style x:Key="MaterialBodyLarge"
+	<Style x:Key="MaterialBodyLarge"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="16" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="24" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-		<!--  Tracking: 0.5 px  -->
+		<!--  Tracking: 0.15 px  -->
+		<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
 		<Setter Property="CharacterSpacing"
-				Value="45.454" />
+                Value="9.375" />
 	</Style>
 
-    <!--  Body Medium  -->
-    <Style x:Key="MaterialBodyMedium"
+	<!--  Body Medium  -->
+	<Style x:Key="MaterialBodyMedium"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="14" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="20" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-        <!--  Tracking: 0.25 px  -->
+		<!--  Tracking: 0.25 px  -->
 		<Setter Property="CharacterSpacing"
                 Value="17.857" />
 	</Style>
 
-    <!--  Body Small  -->
-    <Style x:Key="MaterialBodySmall"
+	<!--  Body Small  -->
+	<Style x:Key="MaterialBodySmall"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
 
-        <Setter Property="FontSize"
+		<Setter Property="FontSize"
                 Value="12" />
-        <Setter Property="LineHeight"
+		<Setter Property="LineHeight"
                 Value="16" />
-        <Setter Property="FontWeight"
+		<Setter Property="FontWeight"
                 Value="Medium" />
-        <Setter Property="FontFamily"
+		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-        <!--  Tracking: 0.4 px  -->
-        <Setter Property="CharacterSpacing"
+		<!--  Tracking: 0.4 px  -->
+		<Setter Property="CharacterSpacing"
                 Value="33.333" />
-    </Style>
+	</Style>
 
 	<!--  Caption Large  -->
+	<!-- Gap Filler for the other design system - Not part of Material M3 -->
 	<Style x:Key="MaterialCaptionLarge"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
@@ -274,12 +278,13 @@
                 Value="Medium" />
 		<Setter Property="FontFamily"
                 Value="{StaticResource MaterialMediumFontFamily}" />
-		<!--  Tracking: -0.5 px  -->
+		<!--  Tracking: -0.05 px  -->
 		<Setter Property="CharacterSpacing"
-				Value="-45.454" />
+				Value="-3.846" />
 	</Style>
 
 	<!--  Caption Medium  -->
+	<!-- Gap Filler for the other design system - Not part of Material M3 -->
 	<Style x:Key="MaterialCaptionMedium"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
@@ -298,6 +303,7 @@
 	</Style>
 
 	<!--  Caption Small  -->
+	<!-- Gap Filler for the other design system - Not part of Material M3 -->
 	<Style x:Key="MaterialCaptionSmall"
            BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
            TargetType="TextBlock">
