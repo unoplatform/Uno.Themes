@@ -6,30 +6,34 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm">
 
-	<GridLength x:Key="RadioCheckAreaLength">40</GridLength>
-	<x:Double x:Key="RadioFocusAreaSize">40</x:Double>
-	<x:Double x:Key="RadioCheckAreaSize">18</x:Double>
+	<GridLength x:Key="RadioStatesAreaLength">40</GridLength>
+	<x:Double x:Key="RadioStatesAreaSize">40</x:Double>
+	<x:Double x:Key="RadioCheckAreaSize">20</x:Double>
 	<x:Double x:Key="RadioBorderThickness">2</x:Double>
-
-	<SolidColorBrush x:Key="MaterialRadioButtonBorderBrush"
-					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="MaterialRadioButtonPressedBrush"
-					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="{StaticResource LowOpacity}" />
 
 	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Background"
 				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnBackgroundBrush}" />
+				Value="{StaticResource OnSurfaceMediumBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialRadioButtonBorderBrush}" />
+				Value="{StaticResource OnSurfaceMediumBrush}" />
+
+		<!-- Start: Label Body Small  -->
+		<Setter Property="FontSize"
+				Value="12" />
+		<Setter Property="FontWeight"
+				Value="Medium" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialMediumFontFamily}" />
+		<!--  Tracking: 0.4 px  -->
+		<Setter Property="CharacterSpacing"
+				Value="33.333" />
+		<!-- End: Label: End Body Small  -->
+
 		<Setter Property="Padding"
-				Value="8,0,0,0" />
+				Value="4,0,0,0" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"
@@ -39,9 +43,9 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="MinWidth"
-				Value="120" />
+				Value="{StaticResource RadioStatesAreaSize}" />
 		<Setter Property="MinHeight"
-				Value="{StaticResource RadioCheckAreaSize}" />
+				Value="{StaticResource RadioStatesAreaSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="False" />
 
@@ -55,96 +59,34 @@
 								<VisualState x:Name="Normal">
 								</VisualState>
 
-								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverAndPressRing.Opacity"
+												Value="{StaticResource HoverOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
 
-								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HoverAndPressRing.Opacity"
+												Value="{StaticResource PressedOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{StaticResource DisabledOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualStateGroup.Transitions>
-									<VisualTransition From="Normal"
-													  To="Pressed">
-										<Storyboard>
-
-											<android:DoubleAnimation Storyboard.TargetName="PressRing"
-																	 Storyboard.TargetProperty="Opacity"
-																	 Duration="{StaticResource MaterialAnimationDuration}"
-																	 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																	 From="0.5"
-																	 To="0" />
-
-											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
-											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
-																 Storyboard.TargetProperty="Opacity"
-																 Duration="0:0:0.15"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="0"
-																 To="{StaticResource LowOpacity}" />
-
-											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
-																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
-																 To="0" />
-
-											<wasm:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
-																				Storyboard.TargetName="PressRing">
-												<EasingDoubleKeyFrame KeyTime="0"
-																	  Value="0" />
-												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
-																	  Value="0.5" />
-												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
-																	  Value="0" />
-											</wasm:DoubleAnimationUsingKeyFrames>
-
-										</Storyboard>
-									</VisualTransition>
-									<VisualTransition From="PointerOver"
-													  To="Pressed">
-										<Storyboard>
-
-											<android:DoubleAnimation Storyboard.TargetName="PressRing"
-																	 Storyboard.TargetProperty="Opacity"
-																	 Duration="{StaticResource MaterialAnimationDuration}"
-																	 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																	 From="0.5"
-																	 To="0" />
-
-											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
-											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
-																 Storyboard.TargetProperty="Opacity"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="0"
-																 To="{StaticResource LowOpacity}" />
-
-											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
-																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
-																 To="0" />
-
-											<wasm:DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
-																				Storyboard.TargetName="PressRing">
-												<EasingDoubleKeyFrame KeyTime="0"
-																	  Value="0" />
-												<EasingDoubleKeyFrame KeyTime="0:0:0.1"
-																	  Value="0.5" />
-												<EasingDoubleKeyFrame KeyTime="0:0:0.25"
-																	  Value="0" />
-											</wasm:DoubleAnimationUsingKeyFrames>
-
-										</Storyboard>
-									</VisualTransition>
+									<VisualTransition To="PointerOver"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+									<VisualTransition To="Pressed"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
 								</VisualStateGroup.Transitions>
 							</VisualStateGroup>
 
@@ -182,28 +124,25 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{StaticResource RadioCheckAreaLength}" />
+							<ColumnDefinition Width="{StaticResource RadioStatesAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
 						<Ellipse x:Name="FocusRing"
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
-								 Stretch="Uniform"
-								 Width="{StaticResource RadioFocusAreaSize}"
-								 Height="{StaticResource RadioFocusAreaSize}"
+								 Width="{StaticResource RadioStatesAreaSize}"
+								 Height="{StaticResource RadioStatesAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
-								 StrokeThickness="0"
 								 Opacity="0" />
 
-						<Ellipse x:Name="PressRing"
+						<Ellipse x:Name="HoverAndPressRing"
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
-								 Stretch="Uniform"
-								 Width="{StaticResource RadioFocusAreaSize}"
-								 Height="{StaticResource RadioFocusAreaSize}"
-								 Fill="{StaticResource MaterialRadioButtonPressedBrush}"
+								 Width="{StaticResource RadioStatesAreaSize}"
+								 Height="{StaticResource RadioStatesAreaSize}"
+								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -213,7 +152,7 @@
 							<Ellipse x:Name="OuterEllipse_Checked"
 									 HorizontalAlignment="Stretch"
 									 VerticalAlignment="Stretch"
-									 Stretch="Uniform"
+									 Stretch="Fill"
 									 UseLayoutRounding="False"
 									 Stroke="{TemplateBinding Background}"
 									 StrokeThickness="{StaticResource RadioBorderThickness}"
@@ -222,7 +161,7 @@
 							<Ellipse x:Name="OuterEllipse_Unchecked"
 									 HorizontalAlignment="Stretch"
 									 VerticalAlignment="Stretch"
-									 Stretch="Uniform"
+									 Stretch="Fill"
 									 UseLayoutRounding="False"
 									 Stroke="{TemplateBinding BorderBrush}"
 									 StrokeThickness="{StaticResource RadioBorderThickness}" />
@@ -230,11 +169,10 @@
 							<Ellipse x:Name="CheckEllipse"
 									 HorizontalAlignment="Stretch"
 									 VerticalAlignment="Stretch"
-									 Stretch="Uniform"
+									 Stretch="Fill"
 									 UseLayoutRounding="False"
 									 Fill="{TemplateBinding Background}"
 									 Opacity="0"
-									 StrokeThickness="0"
 									 Margin="5" />
 						</Grid>
 
