@@ -1447,22 +1447,32 @@
   <StaticResource x:Key="MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush" ResourceKey="OnSurfaceVariantHoverBrush" />
   <StaticResource x:Key="MaterialComboBoxItemPointerOverBackgroundThemeBrush" ResourceKey="OnSurfaceVariantHoverBrush" />
   <StaticResource x:Key="MaterialComboBoxBackgroundColorBrush" ResourceKey="SystemControlTransparentBrush" />
-  <StaticResource x:Key="MaterialComboBoxBorderBrush" ResourceKey="OutlineBrush" />
+  <StaticResource x:Key="MaterialComboBoxBorderBrush" ResourceKey="OnSurfaceLowBrush" />
   <StaticResource x:Key="MaterialComboBoxFocusedBorderBrush" ResourceKey="OnBackgroundBrush" />
   <StaticResource x:Key="MaterialComboBoxOpenedBorderBrush" ResourceKey="PrimaryBrush" />
-  <StaticResource x:Key="MaterialComboBoxArrowForegroundThemeBrush" ResourceKey="OutlineBrush" />
+  <StaticResource x:Key="MaterialComboBoxLeadingIconForegroundThemeBrush" ResourceKey="OnSurfaceBrush" />
+  <StaticResource x:Key="MaterialComboBoxArrowForegroundThemeBrush" ResourceKey="OnSurfaceBrush" />
   <StaticResource x:Key="MaterialComboBoxOpenedArrowForegroundThemeBrush" ResourceKey="PrimaryBrush" />
   <StaticResource x:Key="MaterialComboBoxForegroundThemeBrush" ResourceKey="OnSurfaceBrush" />
   <StaticResource x:Key="MaterialComboBoxPlaceholderFocusedThemeBrush" ResourceKey="PrimaryBrush" />
-  <StaticResource x:Key="MaterialComboBoxPlaceholderForegroundThemeBrush" ResourceKey="OutlineBrush" />
+  <StaticResource x:Key="MaterialComboBoxPlaceholderForegroundThemeBrush" ResourceKey="OnSurfaceLowBrush" />
   <CornerRadius x:Key="MaterialComboBoxCornerRadius">4</CornerRadius>
-  <x:String x:Key="UpArrowPathData">M15.995972,0L32,21.478999 0,21.478999z</x:String>
-  <x:String x:Key="DownArrowPathData">M0,0L32,0 16,19.745z</x:String>
+  <x:String x:Key="UpArrowPathData">M0 0L-5 -5L-10 0H0Z</x:String>
+  <x:String x:Key="DownArrowPathData">M0 0L5 5L10 0H0Z</x:String>
   <Thickness x:Key="MaterialComboBoxBorderThickness">1</Thickness>
   <Thickness x:Key="MaterialComboBoxOpenedBorderThickness">2</Thickness>
+  <Thickness x:Key="MaterialComboBoxPadding">16,0</Thickness>
   <Style x:Key="MaterialComboBoxItemStyle" TargetType="ComboBoxItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{StaticResource MaterialComboBoxItemForegroundThemeBrush}" />
+    <!-- Start: Label Body Large  -->
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <!--  Tracking: 0.15 px  -->
+    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+    <Setter Property="CharacterSpacing" Value="9.375" />
+    <!-- End: Label: End Body Large  -->
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="Padding" Value="0" />
@@ -1568,8 +1578,16 @@
     <Setter Property="Background" Value="{StaticResource MaterialComboBoxBackgroundColorBrush}" />
     <Setter Property="BorderBrush" Value="{StaticResource MaterialComboBoxBorderBrush}" />
     <Setter Property="BorderThickness" Value="{StaticResource MaterialComboBoxBorderThickness}" />
-    <Setter Property="Padding" Value="0" />
-    <Setter Property="MinHeight" Value="50" />
+    <Setter Property="Padding" Value="{StaticResource MaterialComboBoxPadding}" />
+    <!-- Start: Label Body Large  -->
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <!--  Tracking: 0.15 px  -->
+    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+    <Setter Property="CharacterSpacing" Value="9.375" />
+    <!-- End: Label: End Body Large  -->
+    <Setter Property="MinHeight" Value="56" />
     <Setter Property="TabNavigation" Value="Once" />
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
     <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -1594,7 +1612,7 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="ComboBox">
-          <Grid x:Name="RootGrid" HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
+          <Grid x:Name="RootGrid" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
             <VisualStateManager.VisualStateGroups>
               <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="Normal" />
@@ -1635,47 +1653,42 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid x:Name="ComboBoxContent" Background="{TemplateBinding Background}" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
+            <Grid x:Name="ComboBoxContent" Padding="{TemplateBinding Padding}">
+              <Grid.Resources>
+                <!--  Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not  -->
+                <CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder" TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToContentTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
+                <CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder" TranslateY="0" />
+                <um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter" NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}" NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
+              </Grid.Resources>
               <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="Auto" />
               </Grid.ColumnDefinitions>
-              <Grid Margin="16,0" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
-                <Grid.Resources>
-                  <!--  Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not  -->
-                  <CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder" TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToContentTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
-                  <CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder" TranslateY="0" />
-                  <um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter" NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}" NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
-                </Grid.Resources>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="Auto" />
-                  <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <!--  IconPresenter  -->
-                <ContentPresenter x:Name="IconPresenter" MinWidth="25" MaxWidth="34" MaxHeight="34" Margin="0,0,8,0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-                <!--  ContentPresenter  -->
-                <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" VerticalAlignment="Center" RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
-                <!--  PlaceholderElement  -->
-                <TextBlock x:Name="PlaceholderElement" Grid.Column="1" VerticalAlignment="Center" Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}" IsHitTestVisible="False" MaxLines="1" RenderTransformOrigin="0,0.5" Style="{StaticResource MaterialLabelMedium}" Text="{TemplateBinding PlaceholderText}">
-                  <TextBlock.RenderTransform>
-                    <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" ScaleX="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" ScaleY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
-                  </TextBlock.RenderTransform>
-                </TextBlock>
-              </Grid>
+              <!--  Leading Icon  -->
+              <ContentPresenter x:Name="IconPresenter" Width="20" Margin="2,0,18,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource MaterialComboBoxLeadingIconForegroundThemeBrush}" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+              <!--  ContentPresenter  -->
+              <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" VerticalAlignment="Center" VerticalContentAlignment="Center" RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
+              <!--  PlaceholderElement  -->
+              <TextBlock x:Name="PlaceholderElement" Grid.Column="1" VerticalAlignment="Center" Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}" IsHitTestVisible="False" MaxLines="1" RenderTransformOrigin="0,0.5" Style="{StaticResource BodyLarge}" Text="{TemplateBinding PlaceholderText}">
+                <TextBlock.RenderTransform>
+                  <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" ScaleX="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" ScaleY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}" TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
+                </TextBlock.RenderTransform>
+              </TextBlock>
               <!--  Down  -->
-              <Path x:Name="DropDownGlyph_Down" Grid.Column="1" Width="10" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center" Data="{StaticResource DownArrowPathData}" Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}" Stretch="Uniform" />
+              <Path x:Name="DropDownGlyph_Down" Grid.Column="2" Width="10" Height="5" Margin="7,0" HorizontalAlignment="Center" VerticalAlignment="Center" Data="{StaticResource DownArrowPathData}" Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}" Stretch="Uniform" />
               <!--  Up  -->
-              <Path x:Name="DropDownGlyph_Up" Grid.Column="1" Width="10" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center" Data="{StaticResource UpArrowPathData}" Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}" Stretch="Uniform" Visibility="Collapsed" />
-              <!--  Popup  -->
-              <Popup x:Name="Popup">
-                <Border x:Name="PopupBorder" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}" Background="{StaticResource SurfaceBrush}">
-                  <!--  Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
-                  <ScrollViewer x:Name="ScrollViewer" MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalSnapPointsAlignment="Near" VerticalSnapPointsType="OptionalSingle" ZoomMode="Disabled">
-                    <ItemsPresenter />
-                  </ScrollViewer>
-                </Border>
-              </Popup>
+              <Path x:Name="DropDownGlyph_Up" Grid.Column="2" Width="10" Height="5" Margin="7,0" HorizontalAlignment="Center" VerticalAlignment="Center" Data="{StaticResource UpArrowPathData}" Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}" Stretch="Uniform" Visibility="Collapsed" />
             </Grid>
+            <!--  Popup  -->
+            <Popup x:Name="Popup">
+              <Border x:Name="PopupBorder" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}" Background="{StaticResource SurfaceBrush}">
+                <!--  Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
+                <ScrollViewer x:Name="ScrollViewer" MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" CornerRadius="{StaticResource MaterialComboBoxCornerRadius}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalSnapPointsAlignment="Near" VerticalSnapPointsType="OptionalSingle" ZoomMode="Disabled">
+                  <ItemsPresenter />
+                </ScrollViewer>
+              </Border>
+            </Popup>
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -3765,7 +3778,10 @@
                 <RowDefinition Height="*" />
               </Grid.RowDefinitions>
               <!-- DisplayMode top -->
-              <StackPanel x:Name="TopNavArea" />
+              <StackPanel x:Name="TopNavArea">
+                <!-- As of Microsoft.UI.Xaml 2.6.0-prerelease.210430001, PaneTitleOnTopPane must be present in the template -->
+                <ContentControl x:Name="PaneTitleOnTopPane" Visibility="Collapsed" />
+              </StackPanel>
               <!-- Displaymode (compact/minimal/normal) left -->
               <SplitView x:Name="RootSplitView" Background="{TemplateBinding Background}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}" IsTabStop="False" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource MaterialNavigationViewDefaultPaneBackground}" xamarin:Style="{StaticResource MaterialNavigationViewResetSplitViewStyle}" Grid.Row="1">
                 <SplitView.Pane>
