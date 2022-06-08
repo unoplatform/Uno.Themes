@@ -3765,7 +3765,10 @@
                 <RowDefinition Height="*" />
               </Grid.RowDefinitions>
               <!-- DisplayMode top -->
-              <StackPanel x:Name="TopNavArea" />
+              <StackPanel x:Name="TopNavArea">
+                <!-- As of Microsoft.UI.Xaml 2.6.0-prerelease.210430001, PaneTitleOnTopPane must be present in the template -->
+                <ContentControl x:Name="PaneTitleOnTopPane" Visibility="Collapsed" />
+              </StackPanel>
               <!-- Displaymode (compact/minimal/normal) left -->
               <SplitView x:Name="RootSplitView" Background="{TemplateBinding Background}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}" IsTabStop="False" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource MaterialNavigationViewDefaultPaneBackground}" xamarin:Style="{StaticResource MaterialNavigationViewResetSplitViewStyle}" Grid.Row="1">
                 <SplitView.Pane>
@@ -4911,7 +4914,7 @@
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="MinWidth" Value="40" />
+    <Setter Property="MinWidth" Value="{StaticResource RadioStatesAreaSize}" />
     <Setter Property="MinHeight" Value="{StaticResource RadioStatesAreaSize}" />
     <Setter Property="UseSystemFocusVisuals" Value="False" />
     <Setter Property="Template">
@@ -5750,15 +5753,20 @@
   <StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush" ResourceKey="OnSurfaceSelectedBrush" />
   <SolidColorBrush x:Key="MaterialPrimaryVariantLowThumbColorBrush" Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}" />
   <not_mobile:Style x:Key="MaterialToggleSwitchStyle" TargetType="ToggleSwitch">
-    <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
     <Setter Property="Foreground" Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
     <Setter Property="Background" Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
+    <!-- Start: Label Body Small  -->
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
+    <!--  Tracking: 0.4 px  -->
+    <Setter Property="CharacterSpacing" Value="33.333" />
+    <!-- End: Label: End Body Small  -->
     <!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
-    <Setter Property="MinWidth" Value="70" />
+    <Setter Property="MinWidth" Value="54" />
     <Setter Property="HorizontalAlignment" Value="Left" />
-    <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
-    <Setter Property="FontSize" Value="15" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="ManipulationMode" Value="System,TranslateX" />
     <Setter Property="UseSystemFocusVisuals" Value="True" />
     <Setter Property="Template">
@@ -5888,7 +5896,7 @@
                 </VisualState>
                 <VisualState x:Name="On">
                   <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="KnobTranslateTransform" Storyboard.TargetProperty="X" To="20" Duration="0" />
+                    <DoubleAnimation Storyboard.TargetName="KnobTranslateTransform" Storyboard.TargetProperty="X" To="14" Duration="0" />
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow" Storyboard.TargetProperty="Visibility">
                       <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                     </ObjectAnimationUsingKeyFrames>
@@ -5916,44 +5924,24 @@
                   </Storyboard>
                 </VisualState>
               </VisualStateGroup>
+              <!-- No notion of OnContent and OffContent for Material -->
               <VisualStateGroup x:Name="ContentStates">
-                <VisualState x:Name="OffContent">
-                  <Storyboard />
-                </VisualState>
-                <VisualState x:Name="OnContent">
-                  <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="OnContentPresenter" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OnContentPresenter" Storyboard.TargetProperty="IsHitTestVisible">
-                      <DiscreteObjectKeyFrame KeyTime="0">
-                        <DiscreteObjectKeyFrame.Value>
-                          <x:Boolean>True</x:Boolean>
-                        </DiscreteObjectKeyFrame.Value>
-                      </DiscreteObjectKeyFrame>
-                    </ObjectAnimationUsingKeyFrames>
-                  </Storyboard>
-                </VisualState>
+                <VisualState x:Name="OffContent" />
+                <VisualState x:Name="OnContent" />
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="10" />
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="10" />
-            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="12" MaxWidth="12" />
-              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.ColumnSpan="4" Foreground="{StaticResource OnBackgroundBrush}" Style="{StaticResource MaterialBodyMedium}" Text="{TemplateBinding Header}" Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" />
-            <ContentPresenter x:Name="OnContentPresenter" Grid.Row="1" Grid.RowSpan="3" Grid.Column="2" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" Foreground="{TemplateBinding Foreground}" IsHitTestVisible="False" Opacity="0" />
-            <Grid Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" Control.IsTemplateFocusTarget="True" />
+            <TextBlock Foreground="{StaticResource OnSurfaceMediumBrush}" Style="{StaticResource BodySmall}" Text="{TemplateBinding Header}" Margin="0,0,12,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" />
+            <Grid Grid.ColumnSpan="3" Control.IsTemplateFocusTarget="True" />
             <!--  Marker element used to compute draggable zone  -->
-            <Rectangle x:Name="SwitchKnobBounds" Grid.Row="2" />
-            <Rectangle x:Name="OuterBorder" Grid.Row="2" Width="34" Height="14" Margin="10,0" Fill="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" RadiusX="7" RadiusY="7" />
-            <Rectangle x:Name="HighlightBorder" Grid.Row="2" Width="34" Height="14" Margin="10,0" Fill="{TemplateBinding Background}" Opacity="0" RadiusX="7" RadiusY="7" />
-            <Grid x:Name="SwitchKnob" Grid.Row="2" Width="40" Height="40" HorizontalAlignment="Left">
+            <Rectangle Grid.Column="2" x:Name="SwitchKnobBounds" />
+            <Rectangle x:Name="OuterBorder" Grid.Column="2" Width="34" Height="14" Margin="10,0" Fill="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" RadiusX="7" RadiusY="7" />
+            <Rectangle x:Name="HighlightBorder" Grid.Column="2" Width="34" Height="14" Margin="10,0" Fill="{TemplateBinding Background}" Opacity="0" RadiusX="7" RadiusY="7" />
+            <Grid x:Name="SwitchKnob" Grid.Column="2" Width="40" Height="40" HorizontalAlignment="Left">
               <Grid.RenderTransform>
                 <TranslateTransform x:Name="KnobTranslateTransform" />
               </Grid.RenderTransform>
@@ -5968,7 +5956,7 @@
                 </Grid>
               </toolkit:ElevatedView>
             </Grid>
-            <Thumb x:Name="SwitchThumb" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" AutomationProperties.AccessibilityView="Raw">
+            <Thumb x:Name="SwitchThumb" Grid.Column="2" AutomationProperties.AccessibilityView="Raw">
               <Thumb.Template>
                 <ControlTemplate TargetType="Thumb">
                   <Rectangle Fill="Transparent" />
