@@ -429,28 +429,10 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialBaseListViewStyle"
+	<Style x:Key="MaterialListViewStyle"
 		   TargetType="ListView">
 		<Setter Property="ItemContainerStyle"
 				Value="{StaticResource MaterialListViewItemStyle}"/>
 
-	</Style>
-
-	<Style x:Key="MaterialListViewStyle"
-		   TargetType="ListView"
-		   BasedOn="{StaticResource MaterialBaseListViewStyle}">
-		<Setter Property="SelectionMode"
-				Value="None"/>
-		<Setter Property="IsItemClickEnabled"
-				Value="True"/>
-	</Style>
-
-	<Style x:Key="MaterialListViewDetailsStyle"
-		   TargetType="ListView"
-		   BasedOn="{StaticResource MaterialBaseListViewStyle}">
-		<Setter Property="SelectionMode"
-				Value="Single"/>
-		<Setter Property="IsItemClickEnabled"
-				Value="False"/>
 	</Style>
 </ResourceDictionary>
