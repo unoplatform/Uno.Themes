@@ -5894,7 +5894,7 @@
               </TextBlock>
               <Button x:Name="RevealButton" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" Grid.Column="2" />
             </Grid>
-            <Rectangle x:Name="NormalBorder" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" Height="{StaticResource TextBoxOutlinedStrokeWidth}" VerticalAlignment="Bottom" />
+            <Rectangle x:Name="NormalBorder" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" Height="{StaticResource TextBoxOutlinedStrokeHeight}" VerticalAlignment="Bottom" />
             <Rectangle x:Name="FocusedBorder" Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}" Height="{StaticResource TextBoxFocusStrokeWidth}" VerticalAlignment="Bottom" not_macos:RenderTransformOrigin="0.5,0.5" macos:RenderTransformOrigin="0.0,0.5">
               <Rectangle.RenderTransform>
                 <ScaleTransform x:Name="FocusedBorder_ScaleTransform" ScaleX="0" />
@@ -6716,7 +6716,7 @@
               </TextBlock>
               <Button x:Name="DeleteButton" Style="{StaticResource DeleteButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" Grid.Column="2" />
             </Grid>
-            <Rectangle x:Name="NormalBorder" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" Height="{StaticResource TextBoxOutlinedStrokeWidth}" VerticalAlignment="Bottom" />
+            <Rectangle x:Name="NormalBorder" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" Height="{StaticResource TextBoxOutlinedStrokeHeight}" VerticalAlignment="Bottom" />
             <Rectangle x:Name="FocusedBorder" Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}" Height="{StaticResource TextBoxFocusStrokeWidth}" VerticalAlignment="Bottom" not_macos:RenderTransformOrigin="0.5,0.5" macos:RenderTransformOrigin="0.0,0.5">
               <Rectangle.RenderTransform>
                 <ScaleTransform x:Name="FocusedBorder_ScaleTransform" ScaleX="0" />
@@ -7561,7 +7561,7 @@
   <SolidColorBrush x:Key="TextBoxFilledBackgroundColorBrush" Color="{ThemeResource MaterialOnSurfaceColor}" Opacity="0.12" />
   <StaticResource x:Key="TextBoxFilledIndicatorColorBrush" ResourceKey="MaterialOnSurfaceMediumBrush" />
   <StaticResource x:Key="TextBoxFilledFocusIndicatorColorBrush" ResourceKey="MaterialPrimaryBrush" />
-  <x:Double x:Key="TextBoxOutlinedStrokeWidth">1</x:Double>
+  <x:Double x:Key="TextBoxOutlinedStrokeHeight">1</x:Double>
   <StaticResource x:Key="TextBoxOutlinedStrokeColorBrush" ResourceKey="MaterialOnSurfaceMediumBrush" />
   <StaticResource x:Key="TextBoxOutlinedFocusStrokeColorBrush" ResourceKey="MaterialPrimaryBrush" />
   <x:Double x:Key="TextBoxOutlinedCorderRadius">4</x:Double>
