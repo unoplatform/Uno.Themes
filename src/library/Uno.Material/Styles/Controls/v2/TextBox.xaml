@@ -9,17 +9,19 @@
 
 	<!-- Converters -->
 	<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY"
-										NotNullOrEmptyValue="5"
+										NotNullOrEmptyValue="8"
 										NullOrEmptyValue="0" />
 
 	<!-- Path Data -->
 	<x:String x:Key="M3ClearGlyphPathData">M10 0C4.47 0 0 4.47 0 10C0 15.53 4.47 20 10 20C15.53 20 20 15.53 20 10C20 4.47 15.53 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM10 8.59L13.59 5L15 6.41L11.41 10L15 13.59L13.59 15L10 11.41L6.41 15L5 13.59L8.59 10L5 6.41L6.41 5L10 8.59Z</x:String>
 	<SolidColorBrush x:Key="MaterialDisabledOutlinedTextBoxBorderBrush"
-                     Opacity="0.12"
-                     Color="{ThemeResource OnSurfaceColor}" />
+					 Opacity="0.12"
+					 Color="{ThemeResource OnSurfaceColor}" />
 
 	<Style x:Key="MaterialDeleteButtonStyle"
 		   TargetType="Button">
+		<Setter Property="Foreground"
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -42,12 +44,12 @@
 
 						<Path x:Name="GlyphElement"
 							  Data="{StaticResource M3ClearGlyphPathData}"
-							  Fill="{StaticResource OnSurfaceVariantBrush}"
+							  Fill="{TemplateBinding Foreground}"
 							  VerticalAlignment="Center"
 							  HorizontalAlignment="Center"
 							  Stretch="Uniform"
-							  Width="16"
-							  Height="16"
+							  Width="18"
+							  Height="18"
 							  AutomationProperties.AccessibilityView="Raw" />
 					</Grid>
 				</ControlTemplate>
@@ -57,30 +59,42 @@
 
 	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceVariantBrush}" />
 		<Setter Property="PlaceholderForeground"
 				Value="{StaticResource OnSurfaceVariantBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource SurfaceVariantBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceLowBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Left" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="CornerRadius"
-				Value="4 4 0 0" />
-		<macos:Setter Property="Padding"
-					  Value="12,4" />
+				Value="4,4,0,0" />
 
+		<!-- Start: Label Body Large  -->
+		<Setter Property="FontSize"
+				Value="16" />
+		<Setter Property="FontWeight"
+				Value="Medium" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialMediumFontFamily}" />
+		<!--  Tracking: 0.15 px  -->
+		<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+		<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+		<Setter Property="CharacterSpacing"
+				Value="9.375" />
+		<!-- End: Label: End Body Large  -->
+
+		<macos:Setter Property="Padding"
+					  Value="16,7" />
 		<not_macos:Setter Property="Padding"
-						  Value="12,16" />
+						  Value="16" />
 
 		<Setter Property="MinHeight"
-				Value="50" />
+				Value="58" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.Icon"
@@ -96,30 +110,42 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="NormalBorder.Fill"
+												Value="{StaticResource OnSurfaceBrush}" />
+										<Setter Target="NormalBorder.Height"
+												Value="2" />
+									</VisualState.Setters>
+								</VisualState>
+
 								<VisualState x:Name="Pressed" />
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource OnSurfaceBrush}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{StaticResource OnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Opacity"
+												Value="{StaticResource DisabledOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{StaticResource OnSurfaceLowBrush}" />
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSecondaryContainerHoverBrush}" />
+												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceVariantBrush}" />
+												Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="NormalBorder.Height"
+												Value="2" />
 										<Setter Target="NormalBorder.Fill"
 												Value="{StaticResource PrimaryBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
+
 										<DoubleAnimation Storyboard.TargetName="FocusedBorder_ScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="{StaticResource MaterialAnimationDuration}"
@@ -128,6 +154,7 @@
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
@@ -135,8 +162,10 @@
 												Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
+
 								<VisualState x:Name="ButtonCollapsed" />
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="HeaderStates">
 								<VisualState x:Name="NotEmpty">
 									<Storyboard>
@@ -166,6 +195,7 @@
 										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
+
 								<VisualState x:Name="Empty">
 									<VisualState.StateTriggers>
 										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -174,7 +204,7 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid Margin="{TemplateBinding Padding}">
+						<Grid Padding="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
@@ -189,7 +219,7 @@
 											  MaxWidth="34"
 											  MinWidth="25"
 											  not_macos:VerticalAlignment="Top"
-											  macos:VerticalAlignment="Center"
+											  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 
@@ -202,7 +232,7 @@
 										  IsTabStop="False"
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
 										  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  not_macos:VerticalAlignment="Bottom"
+										  not_macos:VerticalAlignment="Top"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
 										  ZoomMode="Disabled"
@@ -230,18 +260,18 @@
 
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
+									Margin="8,0,0,0"
 									Foreground="{StaticResource OnSurfaceVariantBrush}"
 									IsTabStop="False"
 									Style="{StaticResource MaterialDeleteButtonStyle}"
-									not_macos:VerticalAlignment="Bottom"
-									macos:VerticalAlignment="Stretch"
+									VerticalAlignment="Stretch"
 									Visibility="Collapsed"
 									AutomationProperties.AccessibilityView="Raw" />
 						</Grid>
 
 						<Rectangle x:Name="NormalBorder"
-								   Fill="{StaticResource OnSurfaceBrush}"
-								   Height="{StaticResource TextBoxOutlinedStrokeWidth}"
+								   Fill="{TemplateBinding BorderBrush}"
+								   Height="{StaticResource TextBoxOutlinedStrokeHeight}"
 								   VerticalAlignment="Bottom" />
 
 						<Rectangle x:Name="FocusedBorder"
@@ -264,29 +294,45 @@
 
 	<Style x:Key="MaterialOutlinedTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
 				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource OnSurfaceVariantBrush}" />
+				Value="{StaticResource OnSurfaceLowBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OutlineBrush}" />
+				Value="{StaticResource OnSurfaceLowBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="CornerRadius"
 				Value="4" />
 
+		<!-- Start: Label Body Large  -->
+		<Setter Property="FontSize"
+				Value="16" />
+		<Setter Property="FontWeight"
+				Value="Medium" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialMediumFontFamily}" />
+		<!--  Tracking: 0.15 px  -->
+		<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+		<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+		<Setter Property="CharacterSpacing"
+				Value="9.375" />
+		<!-- End: Label: End Body Large  -->
+
 		<Setter Property="HorizontalContentAlignment"
 				Value="Left" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
-		<Setter Property="Padding"
-				Value="12,4,8,4" />
+
+		<macos:Setter Property="Padding"
+					  Value="16,7,14,7" />
+		<not_macos:Setter Property="Padding"
+						  Value="16,16,14,16" />
+
 		<Setter Property="MinHeight"
-				Value="50" />
+				Value="56" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.Icon"
@@ -305,17 +351,24 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.BorderBrush"
+												Value="{StaticResource OnSurfaceBrush}" />
+										<Setter Target="Root.BorderThickness"
+												Value="2" />
+									</VisualState.Setters>
+								</VisualState>
 								<VisualState x:Name="Pressed" />
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource MaterialDisabledOutlinedTextBoxBorderBrush}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+										<Setter Target="ContentElement.Opacity"
+												Value="{StaticResource DisabledOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{StaticResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -324,7 +377,9 @@
 										<Setter Target="Root.BorderBrush"
 												Value="{StaticResource PrimaryBrush}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceVariantBrush}" />
+												Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="Root.BorderThickness"
+												Value="2" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -383,11 +438,10 @@
 						<ContentPresenter x:Name="IconPresenter"
 										  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 										  HorizontalAlignment="Center"
-										  MaxHeight="34"
-										  MaxWidth="34"
-										  MinWidth="25"
-										  Margin="0,0,8,0"
-										  VerticalAlignment="Center"
+										  Width="20"
+										  Margin="1,0,18,0"
+										  not_macos:VerticalAlignment="Top"
+										  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 						<ScrollViewer x:Name="ContentElement"
@@ -400,7 +454,8 @@
 									  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
 									  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 									  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-									  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									  not_macos:VerticalAlignment="Top"
 									  ZoomMode="Disabled"
 									  AutomationProperties.AccessibilityView="Raw">
 							<ScrollViewer.RenderTransform>
@@ -417,7 +472,8 @@
 								   Text="{TemplateBinding PlaceholderText}"
 								   TextAlignment="{TemplateBinding TextAlignment}"
 								   TextWrapping="{TemplateBinding TextWrapping}"
-								   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+								   not_macos:VerticalAlignment="Top"
+								   macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 							<TextBlock.RenderTransform>
 								<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
 							</TextBlock.RenderTransform>
@@ -425,7 +481,7 @@
 
 						<Button x:Name="DeleteButton"
 								Grid.Column="2"
-								Foreground="{StaticResource OnSurfaceVariantBrush}"
+								Margin="8,0,0,0"
 								IsTabStop="False"
 								Style="{StaticResource MaterialDeleteButtonStyle}"
 								VerticalAlignment="Stretch"
