@@ -196,31 +196,40 @@
   </ResourceDictionary.ThemeDictionaries>
   <!--origin: Styles\Controls\v2\Button.xaml-->
   <um:FromNullToValueConverter x:Key="MaterialNullToTextButtonMarginConverter" NotNullValue="0,0,2,0" NullValue="0" />
+  <StaticResource x:Key="MaterialOutlinedButtonBorderBrush" ResourceKey="OutlineBrush" />
   <x:Double x:Key="MaterialButtonMinHeight">40</x:Double>
-  <x:Double x:Key="MaterialButtonMinWidth">48</x:Double>
+  <x:Double x:Key="MaterialButtonMinWidth">40</x:Double>
   <Thickness x:Key="MaterialButtonPadding">16,0</Thickness>
   <Thickness x:Key="MaterialTextButtonPadding">12,0</Thickness>
+  <Thickness x:Key="MaterialButtonBorderThickness">0</Thickness>
+  <Thickness x:Key="MaterialOutlinedButtonBorderThickness">1</Thickness>
   <CornerRadius x:Key="MaterialButtonCornerRadius">20</CornerRadius>
-  <x:Double x:Key="MaterialButtonFontSize">14</x:Double>
-  <x:Double x:Key="MaterialButtonCharacterSpacing">7.143</x:Double>
-  <Style x:Key="MaterialElevatedButtonStyle" TargetType="Button">
-    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
-    <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+  <x:String x:Key="MaterialButtonVerticalContentAlignment">Center</x:String>
+  <x:String x:Key="MaterialButtonHorizontalContentAlignment">Center</x:String>
+  <StaticResource x:Key="MaterialButtonFontFamily" ResourceKey="MaterialLabelLargeFontFamily" />
+  <StaticResource x:Key="MaterialButtonFontWeight" ResourceKey="MaterialLabelLargeFontWeight" />
+  <StaticResource x:Key="MaterialButtonFontSize" ResourceKey="MaterialLabelLargeFontSize" />
+  <StaticResource x:Key="MaterialButtonCharacterSpacing" ResourceKey="MaterialLabelLargeCharacterSpacing" />
+  <Style x:Key="MaterialBaseButtonStyle" TargetType="Button">
     <!--Start: Label Large Typo-->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialButtonFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialButtonFontWeight}" />
     <Setter Property="FontSize" Value="{StaticResource MaterialButtonFontSize}" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
     <Setter Property="CharacterSpacing" Value="{StaticResource MaterialButtonCharacterSpacing}" />
     <!--End: Label Large Typo-->
     <Setter Property="MinHeight" Value="{StaticResource MaterialButtonMinHeight}" />
     <Setter Property="MinWidth" Value="{StaticResource MaterialButtonMinWidth}" />
-    <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Padding" Value="{StaticResource MaterialButtonPadding}" />
     <Setter Property="CornerRadius" Value="{StaticResource MaterialButtonCornerRadius}" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="BorderThickness" Value="{StaticResource MaterialButtonBorderThickness}" />
+    <Setter Property="VerticalContentAlignment" Value="{StaticResource MaterialButtonVerticalContentAlignment}" />
+    <Setter Property="HorizontalContentAlignment" Value="{StaticResource MaterialButtonHorizontalContentAlignment}" />
     <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
     <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+  </Style>
+  <Style x:Key="MaterialElevatedButtonStyle" BasedOn="{StaticResource MaterialBaseButtonStyle}" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+    <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -282,24 +291,9 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <Style x:Key="MaterialFilledButtonStyle" TargetType="Button">
+  <Style x:Key="MaterialFilledButtonStyle" BasedOn="{StaticResource MaterialBaseButtonStyle}" TargetType="Button">
     <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
     <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
-    <!--Start: Label Large Typo-->
-    <Setter Property="FontSize" Value="{StaticResource MaterialButtonFontSize}" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialButtonCharacterSpacing}" />
-    <!--End: Label Large Typo-->
-    <Setter Property="MinHeight" Value="{StaticResource MaterialButtonMinHeight}" />
-    <Setter Property="MinWidth" Value="{StaticResource MaterialButtonMinWidth}" />
-    <Setter Property="BorderThickness" Value="0" />
-    <Setter Property="Padding" Value="{StaticResource MaterialButtonPadding}" />
-    <Setter Property="CornerRadius" Value="{StaticResource MaterialButtonCornerRadius}" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="UseSystemFocusVisuals" Value="True" />
-    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -359,24 +353,9 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <Style x:Key="MaterialFilledTonalButtonStyle" TargetType="Button">
+  <Style x:Key="MaterialFilledTonalButtonStyle" BasedOn="{StaticResource MaterialBaseButtonStyle}" TargetType="Button">
     <Setter Property="Foreground" Value="{StaticResource OnSecondaryContainerBrush}" />
     <Setter Property="Background" Value="{StaticResource SecondaryContainerBrush}" />
-    <!--Start: Label Large Typo-->
-    <Setter Property="FontSize" Value="{StaticResource MaterialButtonFontSize}" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialButtonCharacterSpacing}" />
-    <!--End: Label Large Typo-->
-    <Setter Property="MinHeight" Value="{StaticResource MaterialButtonMinHeight}" />
-    <Setter Property="MinWidth" Value="{StaticResource MaterialButtonMinWidth}" />
-    <Setter Property="BorderThickness" Value="0" />
-    <Setter Property="Padding" Value="{StaticResource MaterialButtonPadding}" />
-    <Setter Property="CornerRadius" Value="{StaticResource MaterialButtonCornerRadius}" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="UseSystemFocusVisuals" Value="True" />
-    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -436,27 +415,13 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <Style x:Key="MaterialOutlinedButtonStyle" TargetType="Button">
+  <Style x:Key="MaterialOutlinedButtonStyle" BasedOn="{StaticResource MaterialBaseButtonStyle}" TargetType="Button">
     <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
     <!-- Following Material M3 Guidelines and Uno Figma file: -->
     <!-- Background is Optional and Default is Transparent -->
     <Setter Property="Background" Value="Transparent" />
-    <!--Start: Label Large Typo-->
-    <Setter Property="FontSize" Value="{StaticResource MaterialButtonFontSize}" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialButtonCharacterSpacing}" />
-    <!--End: Label Large Typo-->
-    <Setter Property="MinHeight" Value="{StaticResource MaterialButtonMinHeight}" />
-    <Setter Property="MinWidth" Value="{StaticResource MaterialButtonMinWidth}" />
-    <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="BorderBrush" Value="{StaticResource OutlineBrush}" />
-    <Setter Property="Padding" Value="{StaticResource MaterialButtonPadding}" />
-    <Setter Property="CornerRadius" Value="{StaticResource MaterialButtonCornerRadius}" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="UseSystemFocusVisuals" Value="True" />
-    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+    <Setter Property="BorderThickness" Value="{StaticResource MaterialOutlinedButtonBorderThickness}" />
+    <Setter Property="BorderBrush" Value="{StaticResource MaterialOutlinedButtonBorderBrush}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -514,24 +479,10 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <Style x:Key="MaterialTextButtonStyle" TargetType="Button">
+  <Style x:Key="MaterialTextButtonStyle" BasedOn="{StaticResource MaterialBaseButtonStyle}" TargetType="Button">
     <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
     <Setter Property="Background" Value="Transparent" />
-    <!--Start: Label Large Typo-->
-    <Setter Property="FontSize" Value="{StaticResource MaterialButtonFontSize}" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialButtonCharacterSpacing}" />
-    <!--End: Label Large Typo-->
-    <Setter Property="MinHeight" Value="{StaticResource MaterialButtonMinHeight}" />
-    <Setter Property="MinWidth" Value="{StaticResource MaterialButtonMinWidth}" />
-    <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Padding" Value="{StaticResource MaterialTextButtonPadding}" />
-    <Setter Property="CornerRadius" Value="{StaticResource MaterialButtonCornerRadius}" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="UseSystemFocusVisuals" Value="True" />
-    <!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-    <Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -588,15 +539,9 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <Style x:Key="MaterialIconButtonStyle" TargetType="Button">
+  <Style x:Key="MaterialIconButtonStyle" BasedOn="{StaticResource MaterialBaseButtonStyle}" TargetType="Button">
     <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="BorderThickness" Value="0" />
-    <Setter Property="MinHeight" Value="40" />
-    <Setter Property="MinWidth" Value="40" />
-    <Setter Property="UseSystemFocusVisuals" Value="True" />
-    <Setter Property="HorizontalContentAlignment" Value="Center" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Button">
@@ -1180,19 +1125,21 @@
   <x:Double x:Key="FocusAreaSize">40</x:Double>
   <x:Double x:Key="CheckAreaSize">18</x:Double>
   <CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
-  <x:Double x:Key="MaterialCheckBoxFontSize">12</x:Double>
-  <x:Double x:Key="MaterialCheckBoxCharacterSpacing">33.333</x:Double>
   <SolidColorBrush x:Key="MaterialCheckBoxBorderBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
   <SolidColorBrush x:Key="MaterialCheckBoxPressedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+  <StaticResource x:Key="MaterialCheckBoxFontFamily" ResourceKey="MaterialBodySmallFontFamily" />
+  <StaticResource x:Key="MaterialCheckBoxFontWeight" ResourceKey="MaterialBodySmallFontWeight" />
+  <StaticResource x:Key="MaterialCheckBoxFontSize" ResourceKey="MaterialBodySmallFontSize" />
+  <StaticResource x:Key="MaterialCheckBoxCharacterSpacing" ResourceKey="MaterialBodySmallCharacterSpacing" />
   <Style x:Key="MaterialCheckBoxStyle" TargetType="CheckBox">
     <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
     <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
-    <!--Start: Label Body Small Typo-->
+    <!--Start: Body Small Typo-->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialCheckBoxFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialCheckBoxFontWeight}" />
     <Setter Property="FontSize" Value="{StaticResource MaterialCheckBoxFontSize}" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
     <Setter Property="CharacterSpacing" Value="{StaticResource MaterialCheckBoxCharacterSpacing}" />
-    <!--End: Label Body Small Typo-->
+    <!--End: Body Small Typo-->
     <Setter Property="BorderBrush" Value="{StaticResource MaterialCheckBoxBorderBrush}" />
     <Setter Property="BorderThickness" Value="2" />
     <Setter Property="Padding" Value="8,0,0,0" />
@@ -1462,17 +1409,19 @@
   <Thickness x:Key="MaterialComboBoxBorderThickness">1</Thickness>
   <Thickness x:Key="MaterialComboBoxOpenedBorderThickness">2</Thickness>
   <Thickness x:Key="MaterialComboBoxPadding">16,0</Thickness>
+  <StaticResource x:Key="MaterialComboBoxFontFamily" ResourceKey="MaterialBodyLargeFontFamily" />
+  <StaticResource x:Key="MaterialComboBoxFontWeight" ResourceKey="MaterialBodyLargeFontWeight" />
+  <StaticResource x:Key="MaterialComboBoxFontSize" ResourceKey="MaterialBodyLargeFontSize" />
+  <StaticResource x:Key="MaterialComboBoxCharacterSpacing" ResourceKey="MaterialBodyLargeCharacterSpacing" />
   <Style x:Key="MaterialComboBoxItemStyle" TargetType="ComboBoxItem">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="Foreground" Value="{StaticResource MaterialComboBoxItemForegroundThemeBrush}" />
-    <!-- Start: Label Body Large  -->
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.15 px  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="9.375" />
-    <!-- End: Label: End Body Large  -->
+    <!-- Start: Body Large Typo -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialComboBoxFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialComboBoxFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialComboBoxFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+    <!-- End: Body Large Typo -->
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="Padding" Value="0" />
@@ -1579,14 +1528,12 @@
     <Setter Property="BorderBrush" Value="{StaticResource MaterialComboBoxBorderBrush}" />
     <Setter Property="BorderThickness" Value="{StaticResource MaterialComboBoxBorderThickness}" />
     <Setter Property="Padding" Value="{StaticResource MaterialComboBoxPadding}" />
-    <!-- Start: Label Body Large  -->
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.15 px  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="9.375" />
-    <!-- End: Label: End Body Large  -->
+    <!-- Start: Body Large Typo -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialComboBoxFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialComboBoxFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialComboBoxFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+    <!-- End: Body Large Typo -->
     <Setter Property="MinHeight" Value="56" />
     <Setter Property="TabNavigation" Value="Once" />
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
@@ -4675,6 +4622,10 @@
   <!--origin: Styles\Controls\v2\PasswordBox.xaml-->
   <x:String x:Key="MaterialRevealGlyphPathData">M11 0.5C6 0.5 1.73 3.61 0 8C1.73 12.39 6 15.5 11 15.5C16 15.5 20.27 12.39 22 8C20.27 3.61 16 0.5 11 0.5ZM11 13C8.24 13 6 10.76 6 8C6 5.24 8.24 3 11 3C13.76 3 16 5.24 16 8C16 10.76 13.76 13 11 13ZM11 5C9.34 5 8 6.34 8 8C8 9.66 9.34 11 11 11C12.66 11 14 9.66 14 8C14 6.34 12.66 5 11 5Z</x:String>
   <SolidColorBrush x:Key="MaterialDisabledOutlinedPasswordBoxBorderBrush" Opacity="0.12" Color="{ThemeResource OnSurfaceColor}" />
+  <StaticResource x:Key="MaterialPasswordBoxFontFamily" ResourceKey="MaterialBodyLargeFontFamily" />
+  <StaticResource x:Key="MaterialPasswordBoxFontWeight" ResourceKey="MaterialBodyLargeFontWeight" />
+  <StaticResource x:Key="MaterialPasswordBoxFontSize" ResourceKey="MaterialBodyLargeFontSize" />
+  <StaticResource x:Key="MaterialPasswordBoxCharacterSpacing" ResourceKey="MaterialBodyLargeCharacterSpacing" />
   <Style x:Key="MaterialRevealButtonStyle" TargetType="Button">
     <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
     <Setter Property="Template">
@@ -4706,14 +4657,12 @@
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="CornerRadius" Value="4,4,0,0" />
-    <!-- Start: Label Body Large  -->
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.15 px  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="9.375" />
-    <!-- End: Label: End Body Large  -->
+    <!-- Start: Body Large Typo -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialPasswordBoxFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialPasswordBoxFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialPasswordBoxFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialPasswordBoxCharacterSpacing}" />
+    <!-- End: Body Large Typo -->
     <Setter Property="Padding" Value="16,4,8,4" />
     <Setter Property="MinHeight" Value="58" />
     <!--  Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388  -->
@@ -4814,14 +4763,12 @@
     <Setter Property="BorderBrush" Value="{StaticResource OnSurfaceLowBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="4" />
-    <!-- Start: Label Body Large  -->
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.15 px  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="9.375" />
-    <!-- End: Label: End Body Large  -->
+    <!-- Start: Body Large Typo -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialPasswordBoxFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialPasswordBoxFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialPasswordBoxFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialPasswordBoxCharacterSpacing}" />
+    <!-- End: Body Large Typo -->
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="Padding" Value="16,4,8,4" />
@@ -4933,17 +4880,20 @@
   <x:Double x:Key="RadioStatesAreaSize">40</x:Double>
   <x:Double x:Key="RadioCheckAreaSize">20</x:Double>
   <x:Double x:Key="RadioBorderThickness">2</x:Double>
+  <StaticResource x:Key="MaterialRadioButtonFontFamily" ResourceKey="MaterialBodySmallFontFamily" />
+  <StaticResource x:Key="MaterialRadioButtonFontWeight" ResourceKey="MaterialBodySmallFontWeight" />
+  <StaticResource x:Key="MaterialRadioButtonFontSize" ResourceKey="MaterialBodySmallFontSize" />
+  <StaticResource x:Key="MaterialRadioButtonCharacterSpacing" ResourceKey="MaterialBodySmallCharacterSpacing" />
   <Style x:Key="MaterialRadioButtonStyle" TargetType="RadioButton">
     <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
     <Setter Property="Foreground" Value="{StaticResource OnSurfaceMediumBrush}" />
     <Setter Property="BorderBrush" Value="{StaticResource OnSurfaceMediumBrush}" />
-    <!-- Start: Label Body Small  -->
-    <Setter Property="FontSize" Value="12" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.4 px  -->
-    <Setter Property="CharacterSpacing" Value="33.333" />
-    <!-- End: Label: End Body Small  -->
+    <!--Start: Body Small Typo-->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialRadioButtonFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialRadioButtonFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialRadioButtonFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialRadioButtonCharacterSpacing}" />
+    <!--End: Body Small Typo-->
     <Setter Property="Padding" Value="4,0,0,0" />
     <Setter Property="HorizontalAlignment" Value="Left" />
     <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -5265,137 +5215,138 @@
     <Setter Property="FontFamily" Value="{StaticResource MaterialRegularFontFamily}" />
   </Style>
   <Style x:Key="MaterialDisplayLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="57" />
-    <Setter Property="LineHeight" Value="64" />
-    <!--  Tracking: -0.25 px -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="-17.857" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialDisplayLargeFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialDisplayLargeFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialDisplayLargeFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialDisplayLargeLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialDisplayLargeCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialDisplayMedium" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="45" />
-    <Setter Property="LineHeight" Value="52" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialDisplayMediumFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialDisplayMediumFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialDisplayMediumFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialDisplayMediumLineHeight}" />
   </Style>
   <Style x:Key="MaterialDisplaySmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="36" />
-    <Setter Property="LineHeight" Value="44" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialDisplaySmallFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialDisplaySmallFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialDisplaySmallFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialDisplaySmallLineHeight}" />
   </Style>
   <Style x:Key="MaterialHeadlineLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="32" />
-    <Setter Property="LineHeight" Value="40" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialHeadlineLargeFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialHeadlineLargeFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialHeadlineLargeFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialHeadlineLargeLineHeight}" />
   </Style>
   <Style x:Key="MaterialHeadlineMedium" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="28" />
-    <Setter Property="LineHeight" Value="36" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialHeadlineMediumFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialHeadlineMediumFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialHeadlineMediumFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialHeadlineMediumLineHeight}" />
   </Style>
   <Style x:Key="MaterialHeadlineSmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="24" />
-    <Setter Property="LineHeight" Value="32" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialHeadlineSmallFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialHeadlineSmallFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialHeadlineSmallFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialHeadlineSmallLineHeight}" />
   </Style>
   <Style x:Key="MaterialTitleLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="22" />
-    <Setter Property="LineHeight" Value="28" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialTitleLargeFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialTitleLargeFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialTitleLargeFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialTitleLargeLineHeight}" />
   </Style>
   <Style x:Key="MaterialTitleMedium" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="LineHeight" Value="24" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  No Tracking / CharacterSpacing  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialTitleMediumFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialTitleMediumFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialTitleMediumFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialTitleMediumLineHeight}" />
   </Style>
   <Style x:Key="MaterialTitleSmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="14" />
-    <Setter Property="LineHeight" Value="20" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  No Tracking / CharacterSpacing  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialTitleSmallFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialTitleSmallFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialTitleSmallFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialTitleSmallLineHeight}" />
   </Style>
   <Style x:Key="MaterialLabelLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="14" />
-    <Setter Property="LineHeight" Value="20" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.1 px  -->
-    <Setter Property="CharacterSpacing" Value="7.143" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialLabelLargeFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialLabelLargeFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialLabelLargeFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialLabelLargeLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialLabelLargeCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialLabelMedium" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="12" />
-    <Setter Property="LineHeight" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.5 px  -->
-    <Setter Property="CharacterSpacing" Value="41.666" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialLabelMediumFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialLabelMediumFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialLabelMediumFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialLabelMediumLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialLabelMediumCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialLabelSmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="11" />
-    <Setter Property="LineHeight" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.5 px  -->
-    <Setter Property="CharacterSpacing" Value="45.454" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialLabelSmallFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialLabelSmallFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialLabelSmallFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialLabelSmallLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialLabelSmallCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialLabelExtraSmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="11" />
-    <Setter Property="LineHeight" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.1 px  -->
-    <Setter Property="CharacterSpacing" Value="7.143" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialLabelExtraSmallFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialLabelExtraSmallFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialLabelExtraSmallFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialLabelExtraSmallLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialLabelExtraSmallCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialBodyLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="LineHeight" Value="24" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.15 px  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="9.375" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialBodyLargeFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialBodyLargeFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialBodyLargeFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialBodyLargeLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialBodyLargeCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialBodyMedium" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="14" />
-    <Setter Property="LineHeight" Value="20" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.25 px  -->
-    <Setter Property="CharacterSpacing" Value="17.857" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialBodyMediumFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialBodyMediumFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialBodyMediumFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialBodyMediumLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialBodyMediumCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialBodySmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="12" />
-    <Setter Property="LineHeight" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.4 px  -->
-    <Setter Property="CharacterSpacing" Value="33.333" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialBodySmallFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialBodySmallFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialBodySmallFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialBodySmallLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialBodySmallCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialCaptionLarge" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="13" />
-    <Setter Property="LineHeight" Value="18" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: -0.05 px  -->
-    <Setter Property="CharacterSpacing" Value="-3.846" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialCaptionLargeFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialCaptionLargeFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialCaptionLargeFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialCaptionLargeLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialCaptionLargeCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialCaptionMedium" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="12" />
-    <Setter Property="LineHeight" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.4 px  -->
-    <Setter Property="CharacterSpacing" Value="33.333" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialCaptionMediumFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialCaptionMediumFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialCaptionMediumFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialCaptionMediumLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialCaptionMediumCharacterSpacing}" />
   </Style>
   <Style x:Key="MaterialCaptionSmall" BasedOn="{StaticResource MaterialBaseTextBlockStyle}" TargetType="TextBlock">
-    <Setter Property="FontSize" Value="11" />
-    <Setter Property="LineHeight" Value="13" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.1 px  -->
-    <Setter Property="CharacterSpacing" Value="7.143" />
+    <Setter Property="FontFamily" Value="{StaticResource MaterialCaptionSmallFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialCaptionSmallFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialCaptionSmallFontSize}" />
+    <Setter Property="LineHeight" Value="{StaticResource MaterialCaptionSmallLineHeight}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialCaptionSmallCharacterSpacing}" />
   </Style>
   <!--origin: Styles\Controls\v2\TextBox.xaml-->
   <um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY" NotNullOrEmptyValue="8" NullOrEmptyValue="0" />
   <x:String x:Key="M3ClearGlyphPathData">M10 0C4.47 0 0 4.47 0 10C0 15.53 4.47 20 10 20C15.53 20 20 15.53 20 10C20 4.47 15.53 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM10 8.59L13.59 5L15 6.41L11.41 10L15 13.59L13.59 15L10 11.41L6.41 15L5 13.59L8.59 10L5 6.41L6.41 5L10 8.59Z</x:String>
   <SolidColorBrush x:Key="MaterialDisabledOutlinedTextBoxBorderBrush" Opacity="0.12" Color="{ThemeResource OnSurfaceColor}" />
+  <StaticResource x:Key="MaterialTextBoxFontFamily" ResourceKey="MaterialBodyLargeFontFamily" />
+  <StaticResource x:Key="MaterialTextBoxFontWeight" ResourceKey="MaterialBodyLargeFontWeight" />
+  <StaticResource x:Key="MaterialTextBoxFontSize" ResourceKey="MaterialBodyLargeFontSize" />
+  <StaticResource x:Key="MaterialTextBoxCharacterSpacing" ResourceKey="MaterialBodyLargeCharacterSpacing" />
   <Style x:Key="MaterialDeleteButtonStyle" TargetType="Button">
     <Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
     <Setter Property="Template">
@@ -5428,14 +5379,12 @@
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="CornerRadius" Value="4,4,0,0" />
-    <!-- Start: Label Body Large  -->
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.15 px  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="9.375" />
-    <!-- End: Label: End Body Large  -->
+    <!-- Start: Body Large Typo -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialTextBoxFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialTextBoxFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialTextBoxFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialTextBoxCharacterSpacing}" />
+    <!-- End: Body Large Typo -->
     <macos:Setter Property="Padding" Value="16,7" />
     <not_macos:Setter Property="Padding" Value="16" />
     <Setter Property="MinHeight" Value="58" />
@@ -5539,14 +5488,12 @@
     <Setter Property="BorderBrush" Value="{StaticResource OnSurfaceLowBrush}" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="CornerRadius" Value="4" />
-    <!-- Start: Label Body Large  -->
-    <Setter Property="FontSize" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.15 px  -->
-    <!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-    <Setter Property="CharacterSpacing" Value="9.375" />
-    <!-- End: Label: End Body Large  -->
+    <!-- Start: Body Large Typo -->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialTextBoxFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialTextBoxFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialTextBoxFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialTextBoxCharacterSpacing}" />
+    <!-- End: Body Large Typo -->
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <macos:Setter Property="Padding" Value="16,7,14,7" />
@@ -5815,16 +5762,19 @@
   <StaticResource x:Key="MaterialToggleSwitchOnLowButtonBrush" ResourceKey="OnSurfaceSelectedBrush" />
   <StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush" ResourceKey="OnSurfaceSelectedBrush" />
   <SolidColorBrush x:Key="MaterialPrimaryVariantLowThumbColorBrush" Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}" />
+  <StaticResource x:Key="MaterialToggleSwitchFontFamily" ResourceKey="MaterialBodySmallFontFamily" />
+  <StaticResource x:Key="MaterialToggleSwitchFontWeight" ResourceKey="MaterialBodySmallFontWeight" />
+  <StaticResource x:Key="MaterialToggleSwitchFontSize" ResourceKey="MaterialBodySmallFontSize" />
+  <StaticResource x:Key="MaterialToggleSwitchCharacterSpacing" ResourceKey="MaterialBodySmallCharacterSpacing" />
   <not_mobile:Style x:Key="MaterialToggleSwitchStyle" TargetType="ToggleSwitch">
     <Setter Property="Foreground" Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
     <Setter Property="Background" Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
-    <!-- Start: Label Body Small  -->
-    <Setter Property="FontSize" Value="12" />
-    <Setter Property="FontWeight" Value="Medium" />
-    <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <!--  Tracking: 0.4 px  -->
-    <Setter Property="CharacterSpacing" Value="33.333" />
-    <!-- End: Label: End Body Small  -->
+    <!--Start: Body Small Typo-->
+    <Setter Property="FontFamily" Value="{StaticResource MaterialToggleSwitchFontFamily}" />
+    <Setter Property="FontWeight" Value="{StaticResource MaterialToggleSwitchFontWeight}" />
+    <Setter Property="FontSize" Value="{StaticResource MaterialToggleSwitchFontSize}" />
+    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialToggleSwitchCharacterSpacing}" />
+    <!--End: Body Small Typo-->
     <!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
     <Setter Property="MinWidth" Value="54" />
     <Setter Property="HorizontalAlignment" Value="Left" />
@@ -6125,6 +6075,94 @@
     </Setter>
   </android:Style>
   <!--origin: Styles\Controls\v2\_Resources.xaml-->
+  <!--origin: Styles\Application\v2\TextVariables.xaml-->
+  <StaticResource x:Key="MaterialDisplayLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
+  <x:String x:Key="MaterialDisplayLargeFontWeight">Normal</x:String>
+  <x:Double x:Key="MaterialDisplayLargeFontSize">57</x:Double>
+  <x:Double x:Key="MaterialDisplayLargeLineHeight">64</x:Double>
+  <x:Int32 x:Key="MaterialDisplayLargeCharacterSpacing">-17.857</x:Int32>
+  <StaticResource x:Key="MaterialDisplayMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
+  <x:String x:Key="MaterialDisplayMediumFontWeight">Normal</x:String>
+  <x:Double x:Key="MaterialDisplayMediumFontSize">45</x:Double>
+  <x:Double x:Key="MaterialDisplayMediumLineHeight">52</x:Double>
+  <StaticResource x:Key="MaterialDisplaySmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
+  <x:String x:Key="MaterialDisplaySmallFontWeight">Normal</x:String>
+  <x:Double x:Key="MaterialDisplaySmallFontSize">36</x:Double>
+  <x:Double x:Key="MaterialDisplaySmallLineHeight">44</x:Double>
+  <StaticResource x:Key="MaterialHeadlineLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
+  <x:String x:Key="MaterialHeadlineLargeFontWeight">Normal</x:String>
+  <x:Double x:Key="MaterialHeadlineLargeFontSize">32</x:Double>
+  <x:Double x:Key="MaterialHeadlineLargeLineHeight">40</x:Double>
+  <StaticResource x:Key="MaterialHeadlineMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
+  <x:String x:Key="MaterialHeadlineMediumFontWeight">Normal</x:String>
+  <x:Double x:Key="MaterialHeadlineMediumFontSize">28</x:Double>
+  <x:Double x:Key="MaterialHeadlineMediumLineHeight">36</x:Double>
+  <StaticResource x:Key="MaterialHeadlineSmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
+  <x:String x:Key="MaterialHeadlineSmallFontWeight">Normal</x:String>
+  <x:Double x:Key="MaterialHeadlineSmallFontSize">24</x:Double>
+  <x:Double x:Key="MaterialHeadlineSmallLineHeight">32</x:Double>
+  <StaticResource x:Key="MaterialTitleLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
+  <x:String x:Key="MaterialTitleLargeFontWeight">Normal</x:String>
+  <x:Double x:Key="MaterialTitleLargeFontSize">22</x:Double>
+  <x:Double x:Key="MaterialTitleLargeLineHeight">28</x:Double>
+  <StaticResource x:Key="MaterialTitleMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialTitleMediumFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialTitleMediumFontSize">16</x:Double>
+  <x:Double x:Key="MaterialTitleMediumLineHeight">24</x:Double>
+  <StaticResource x:Key="MaterialTitleSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialTitleSmallFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialTitleSmallFontSize">14</x:Double>
+  <x:Double x:Key="MaterialTitleSmallLineHeight">20</x:Double>
+  <StaticResource x:Key="MaterialLabelLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialLabelLargeFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialLabelLargeFontSize">14</x:Double>
+  <x:Double x:Key="MaterialLabelLargeLineHeight">20</x:Double>
+  <x:Int32 x:Key="MaterialLabelLargeCharacterSpacing">7.143</x:Int32>
+  <StaticResource x:Key="MaterialLabelMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialLabelMediumFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialLabelMediumFontSize">12</x:Double>
+  <x:Double x:Key="MaterialLabelMediumLineHeight">16</x:Double>
+  <x:Int32 x:Key="MaterialLabelMediumCharacterSpacing">41.666</x:Int32>
+  <StaticResource x:Key="MaterialLabelSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialLabelSmallFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialLabelSmallFontSize">11</x:Double>
+  <x:Double x:Key="MaterialLabelSmallLineHeight">16</x:Double>
+  <x:Int32 x:Key="MaterialLabelSmallCharacterSpacing">45.454</x:Int32>
+  <StaticResource x:Key="MaterialLabelExtraSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialLabelExtraSmallFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialLabelExtraSmallFontSize">11</x:Double>
+  <x:Double x:Key="MaterialLabelExtraSmallLineHeight">16</x:Double>
+  <x:Int32 x:Key="MaterialLabelExtraSmallCharacterSpacing">7.143</x:Int32>
+  <StaticResource x:Key="MaterialBodyLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialBodyLargeFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialBodyLargeFontSize">16</x:Double>
+  <x:Double x:Key="MaterialBodyLargeLineHeight">24</x:Double>
+  <x:Int32 x:Key="MaterialBodyLargeCharacterSpacing">9.375</x:Int32>
+  <StaticResource x:Key="MaterialBodyMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialBodyMediumFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialBodyMediumFontSize">14</x:Double>
+  <x:Double x:Key="MaterialBodyMediumLineHeight">20</x:Double>
+  <x:Int32 x:Key="MaterialBodyMediumCharacterSpacing">17.857</x:Int32>
+  <StaticResource x:Key="MaterialBodySmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialBodySmallFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialBodySmallFontSize">12</x:Double>
+  <x:Double x:Key="MaterialBodySmallLineHeight">16</x:Double>
+  <x:Int32 x:Key="MaterialBodySmallCharacterSpacing">33.333</x:Int32>
+  <StaticResource x:Key="MaterialCaptionLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialCaptionLargeFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialCaptionLargeFontSize">13</x:Double>
+  <x:Double x:Key="MaterialCaptionLargeLineHeight">18</x:Double>
+  <x:Int32 x:Key="MaterialCaptionLargeCharacterSpacing">-3.846</x:Int32>
+  <StaticResource x:Key="MaterialCaptionMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialCaptionMediumFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialCaptionMediumFontSize">12</x:Double>
+  <x:Double x:Key="MaterialCaptionMediumLineHeight">16</x:Double>
+  <x:Int32 x:Key="MaterialCaptionMediumCharacterSpacing">33.333</x:Int32>
+  <StaticResource x:Key="MaterialCaptionSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
+  <x:String x:Key="MaterialCaptionSmallFontWeight">Medium</x:String>
+  <x:Double x:Key="MaterialCaptionSmallFontSize">11</x:Double>
+  <x:Double x:Key="MaterialCaptionSmallLineHeight">13</x:Double>
+  <x:Int32 x:Key="MaterialCaptionSmallCharacterSpacing">7.143</x:Int32>
   <!--origin: Styles\Application\Common\AnimationConstants.xaml-->
   <CubicEase x:Key="MaterialEaseInOutFunction" EasingMode="EaseInOut" />
   <CubicEase x:Key="MaterialEaseOutFunction" EasingMode="EaseOut" />

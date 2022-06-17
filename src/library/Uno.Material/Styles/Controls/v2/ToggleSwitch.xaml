@@ -44,6 +44,16 @@
 	<SolidColorBrush x:Key="MaterialPrimaryVariantLowThumbColorBrush"
 					 Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}" />
 
+	<!-- ToggleSwitch label based on Body Small Typo -->
+	<StaticResource x:Key="MaterialToggleSwitchFontFamily"
+					ResourceKey="MaterialBodySmallFontFamily" />
+	<StaticResource x:Key="MaterialToggleSwitchFontWeight"
+					ResourceKey="MaterialBodySmallFontWeight" />
+	<StaticResource x:Key="MaterialToggleSwitchFontSize"
+					ResourceKey="MaterialBodySmallFontSize" />
+	<StaticResource x:Key="MaterialToggleSwitchCharacterSpacing"
+					ResourceKey="MaterialBodySmallCharacterSpacing" />
+
 	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
 					  TargetType="ToggleSwitch">
 		<Setter Property="Foreground"
@@ -51,17 +61,16 @@
 		<Setter Property="Background"
 				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 
-		<!-- Start: Label Body Small  -->
-		<Setter Property="FontSize"
-				Value="12" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
+		<!--Start: Body Small Typo-->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<!--  Tracking: 0.4 px  -->
+				Value="{StaticResource MaterialToggleSwitchFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{StaticResource MaterialToggleSwitchFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource MaterialToggleSwitchFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="33.333" />
-		<!-- End: Label: End Body Small  -->
+				Value="{StaticResource MaterialToggleSwitchCharacterSpacing}" />
+		<!--End: Body Small Typo-->
 
 		<!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
 		<Setter Property="MinWidth"

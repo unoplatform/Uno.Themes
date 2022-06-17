@@ -457,7 +457,6 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Elevated Button"
 									HorizontalAlignment="Stretch"
-									HorizontalContentAlignment="Center"
 									Style="{StaticResource MaterialElevatedButtonStyle}" />
 						</smtx:XamlDisplay>
 
@@ -466,7 +465,6 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Filled Button"
 									HorizontalAlignment="Stretch"
-									HorizontalContentAlignment="Center"
 									Style="{StaticResource MaterialFilledButtonStyle}" />
 						</smtx:XamlDisplay>
 
@@ -475,7 +473,6 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Tonal Button"
 									HorizontalAlignment="Stretch"
-									HorizontalContentAlignment="Center"
 									Style="{StaticResource MaterialFilledTonalButtonStyle}" />
 						</smtx:XamlDisplay>
 
@@ -484,7 +481,6 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Outlined Button"
 									HorizontalAlignment="Stretch"
-									HorizontalContentAlignment="Center"
 									Style="{StaticResource MaterialOutlinedButtonStyle}" />
 						</smtx:XamlDisplay>
 
@@ -493,8 +489,69 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Text Button"
 									HorizontalAlignment="Stretch"
-									HorizontalContentAlignment="Center"
 									Style="{StaticResource MaterialTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- STRETCHED BUTTONS WITH ICON -->
+
+						<!-- Stretched Button Elevated With Icon -->
+						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_ElevatedStretched_WithIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Elevated Button"
+									HorizontalAlignment="Stretch"
+									Style="{StaticResource MaterialElevatedButtonStyle}">
+								<um:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</um:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Filled With Icon -->
+						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledStretched_WithIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Filled Button"
+									HorizontalAlignment="Stretch"
+									Style="{StaticResource MaterialFilledButtonStyle}">
+								<um:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</um:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Filled With Icon -->
+						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledTonalStretched_WithIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Tonal Button"
+									HorizontalAlignment="Stretch"
+									Style="{StaticResource MaterialFilledTonalButtonStyle}">
+								<um:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</um:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Outlined With Icon -->
+						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_OutlinedStretched_WithIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Outlined Button"
+									HorizontalAlignment="Stretch"
+									Style="{StaticResource MaterialOutlinedButtonStyle}">
+								<um:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</um:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Stretched Button Text With Icon -->
+						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_TextStretched_WithIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Text Button"
+									HorizontalAlignment="Stretch"
+									Style="{StaticResource MaterialTextButtonStyle}">
+								<um:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</um:ControlExtensions.Icon>
+							</Button>
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
