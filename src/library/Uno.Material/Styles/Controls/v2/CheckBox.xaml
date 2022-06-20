@@ -16,9 +16,6 @@
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
-	<!-- CheckBox label based on Body Small Typo -->
-	<x:Double x:Key="MaterialCheckBoxFontSize">12</x:Double>
-	<x:Double x:Key="MaterialCheckBoxCharacterSpacing">33.333</x:Double>
 
 	<SolidColorBrush x:Key="MaterialCheckBoxBorderBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
@@ -27,6 +24,16 @@
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="{StaticResource LowOpacity}" />
 
+	<!-- CheckBox label based on Body Small Typo -->
+	<StaticResource x:Key="MaterialCheckBoxFontFamily"
+					ResourceKey="MaterialBodySmallFontFamily" />
+	<StaticResource x:Key="MaterialCheckBoxFontWeight"
+					ResourceKey="MaterialBodySmallFontWeight" />
+	<StaticResource x:Key="MaterialCheckBoxFontSize"
+					ResourceKey="MaterialBodySmallFontSize" />
+	<StaticResource x:Key="MaterialCheckBoxCharacterSpacing"
+					ResourceKey="MaterialBodySmallCharacterSpacing" />
+
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="Background"
@@ -34,16 +41,16 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource OnPrimaryBrush}" />
 
-		<!--Start: Label Body Small Typo-->
+		<!--Start: Body Small Typo-->
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialCheckBoxFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{StaticResource MaterialCheckBoxFontWeight}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource MaterialCheckBoxFontSize}" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
 		<Setter Property="CharacterSpacing"
 				Value="{StaticResource MaterialCheckBoxCharacterSpacing}" />
-		<!--End: Label Body Small Typo-->
+		<!--End: Body Small Typo-->
 
 		<Setter Property="BorderBrush"
 				Value="{StaticResource MaterialCheckBoxBorderBrush}" />

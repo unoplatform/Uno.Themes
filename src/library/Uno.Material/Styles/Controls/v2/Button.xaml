@@ -13,32 +13,42 @@
 								 NotNullValue="0,0,2,0"
 								 NullValue="0" />
 
-	<!-- Documented variables -->
+	<!-- Brushes -->
+	<StaticResource x:Key="MaterialOutlinedButtonBorderBrush"
+					ResourceKey="OutlineBrush" />
+
+	<!-- Variables -->
 	<x:Double x:Key="MaterialButtonMinHeight">40</x:Double>
-	<x:Double x:Key="MaterialButtonMinWidth">48</x:Double>
+	<x:Double x:Key="MaterialButtonMinWidth">40</x:Double>
 	<Thickness x:Key="MaterialButtonPadding">16,0</Thickness>
 	<Thickness x:Key="MaterialTextButtonPadding">12,0</Thickness>
+	<Thickness x:Key="MaterialButtonBorderThickness">0</Thickness>
+	<Thickness x:Key="MaterialOutlinedButtonBorderThickness">1</Thickness>
 	<CornerRadius x:Key="MaterialButtonCornerRadius">20</CornerRadius>
-	<!-- Text button label based on Label Large Typo -->
-	<x:Double x:Key="MaterialButtonFontSize">14</x:Double>
-	<x:Double x:Key="MaterialButtonCharacterSpacing">7.143</x:Double>
+	<x:String x:Key="MaterialButtonVerticalContentAlignment">Center</x:String>
+	<x:String x:Key="MaterialButtonHorizontalContentAlignment">Center</x:String>
 
-	<!-- ELEVATED -->
-	<Style x:Key="MaterialElevatedButtonStyle"
+	<!-- Text button label based on Label Large Typo -->
+	<StaticResource x:Key="MaterialButtonFontFamily"
+					ResourceKey="MaterialLabelLargeFontFamily" />
+	<StaticResource x:Key="MaterialButtonFontWeight"
+					ResourceKey="MaterialLabelLargeFontWeight" />
+	<StaticResource x:Key="MaterialButtonFontSize"
+					ResourceKey="MaterialLabelLargeFontSize" />
+	<StaticResource x:Key="MaterialButtonCharacterSpacing"
+					ResourceKey="MaterialLabelLargeCharacterSpacing" />
+
+	<!-- BASE -->
+	<Style x:Key="MaterialBaseButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
-		<Setter Property="Background"
-				Value="{StaticResource SurfaceBrush}" />
-
 		<!--Start: Label Large Typo-->
+		<Setter Property="FontFamily"
+				Value="{StaticResource MaterialButtonFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{StaticResource MaterialButtonFontWeight}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource MaterialButtonFontSize}" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
 		<Setter Property="CharacterSpacing"
 				Value="{StaticResource MaterialButtonCharacterSpacing}" />
 		<!--End: Label Large Typo-->
@@ -47,20 +57,31 @@
 				Value="{StaticResource MaterialButtonMinHeight}" />
 		<Setter Property="MinWidth"
 				Value="{StaticResource MaterialButtonMinWidth}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
 		<Setter Property="Padding"
 				Value="{StaticResource MaterialButtonPadding}" />
 		<Setter Property="CornerRadius"
 				Value="{StaticResource MaterialButtonCornerRadius}" />
+		<Setter Property="BorderThickness"
+				Value="{StaticResource MaterialButtonBorderThickness}" />
 		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
+				Value="{StaticResource MaterialButtonVerticalContentAlignment}" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="{StaticResource MaterialButtonHorizontalContentAlignment}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.Icon"
 				Value="{x:Null}" />
+	</Style>
+
+	<!-- ELEVATED -->
+	<Style x:Key="MaterialElevatedButtonStyle"
+		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
+		   TargetType="Button">
+
+		<Setter Property="Foreground"
+				Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="Background"
+				Value="{StaticResource SurfaceBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -185,42 +206,13 @@
 
 	<!-- FILLED -->
 	<Style x:Key="MaterialFilledButtonStyle"
+		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource OnPrimaryBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource PrimaryBrush}" />
-
-		<!--Start: Label Large Typo-->
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialButtonCharacterSpacing}" />
-		<!--End: Label Large Typo-->
-
-		<Setter Property="MinHeight"
-				Value="{StaticResource MaterialButtonMinHeight}" />
-		<Setter Property="MinWidth"
-				Value="{StaticResource MaterialButtonMinWidth}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialButtonCornerRadius}" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-
-		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -341,42 +333,13 @@
 
 	<!-- FILLED TONAL-->
 	<Style x:Key="MaterialFilledTonalButtonStyle"
+		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource OnSecondaryContainerBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource SecondaryContainerBrush}" />
-
-		<!--Start: Label Large Typo-->
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialButtonCharacterSpacing}" />
-		<!--End: Label Large Typo-->
-
-		<Setter Property="MinHeight"
-				Value="{StaticResource MaterialButtonMinHeight}" />
-		<Setter Property="MinWidth"
-				Value="{StaticResource MaterialButtonMinWidth}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialButtonCornerRadius}" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-
-		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -497,6 +460,7 @@
 
 	<!-- OUTLINED-->
 	<Style x:Key="MaterialOutlinedButtonStyle"
+		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
@@ -505,38 +469,10 @@
 		<!-- Background is Optional and Default is Transparent -->
 		<Setter Property="Background"
 				Value="Transparent" />
-
-		<!--Start: Label Large Typo-->
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialButtonCharacterSpacing}" />
-		<!--End: Label Large Typo-->
-
-		<Setter Property="MinHeight"
-				Value="{StaticResource MaterialButtonMinHeight}" />
-		<Setter Property="MinWidth"
-				Value="{StaticResource MaterialButtonMinWidth}" />
 		<Setter Property="BorderThickness"
-				Value="1" />
+				Value="{StaticResource MaterialOutlinedButtonBorderThickness}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OutlineBrush}" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialButtonCornerRadius}" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-
-		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
+				Value="{StaticResource MaterialOutlinedButtonBorderBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -650,42 +586,15 @@
 
 	<!-- TEXT -->
 	<Style x:Key="MaterialTextButtonStyle"
+		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
 				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
-
-		<!--Start: Label Large Typo-->
-		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialButtonCharacterSpacing}" />
-		<!--End: Label Large Typo-->
-
-		<Setter Property="MinHeight"
-				Value="{StaticResource MaterialButtonMinHeight}" />
-		<Setter Property="MinWidth"
-				Value="{StaticResource MaterialButtonMinWidth}" />
-		<Setter Property="BorderThickness"
-				Value="0" />
 		<Setter Property="Padding"
 				Value="{StaticResource MaterialTextButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialButtonCornerRadius}" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-
-		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -798,23 +707,13 @@
 
 	<!-- ICON BUTTON -->
 	<Style x:Key="MaterialIconButtonStyle"
+		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
+		
 		<Setter Property="Foreground"
 				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
-		<Setter Property="BorderThickness"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="40" />
-		<Setter Property="MinWidth"
-				Value="40" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="True" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
 
 		<Setter Property="Template">
 			<Setter.Value>

@@ -11,6 +11,16 @@
 	<x:Double x:Key="RadioCheckAreaSize">20</x:Double>
 	<x:Double x:Key="RadioBorderThickness">2</x:Double>
 
+	<!-- RadioButton label based on Body Small Typo -->
+	<StaticResource x:Key="MaterialRadioButtonFontFamily"
+					ResourceKey="MaterialBodySmallFontFamily" />
+	<StaticResource x:Key="MaterialRadioButtonFontWeight"
+					ResourceKey="MaterialBodySmallFontWeight" />
+	<StaticResource x:Key="MaterialRadioButtonFontSize"
+					ResourceKey="MaterialBodySmallFontSize" />
+	<StaticResource x:Key="MaterialRadioButtonCharacterSpacing"
+					ResourceKey="MaterialBodySmallCharacterSpacing" />
+
 	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">
 		<Setter Property="Background"
@@ -20,17 +30,16 @@
 		<Setter Property="BorderBrush"
 				Value="{StaticResource OnSurfaceMediumBrush}" />
 
-		<!-- Start: Label Body Small  -->
-		<Setter Property="FontSize"
-				Value="12" />
-		<Setter Property="FontWeight"
-				Value="Medium" />
+		<!--Start: Body Small Typo-->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialMediumFontFamily}" />
-		<!--  Tracking: 0.4 px  -->
+				Value="{StaticResource MaterialRadioButtonFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{StaticResource MaterialRadioButtonFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{StaticResource MaterialRadioButtonFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="33.333" />
-		<!-- End: Label: End Body Small  -->
+				Value="{StaticResource MaterialRadioButtonCharacterSpacing}" />
+		<!--End: Body Small Typo-->
 
 		<Setter Property="Padding"
 				Value="4,0,0,0" />
