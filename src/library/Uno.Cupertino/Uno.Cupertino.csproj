@@ -73,10 +73,17 @@
 					<DependentUpon>%(Filename)</DependentUpon>
 				</Compile>
 			</ItemGroup>
-			
+
 			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
+				<IncludeXamlNamespaces Include="progress_ring_uno" />
+				<ExcludeXamlNamespaces Include="progress_ring_win" />
+			</ItemGroup>
+
+			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+				<IncludeXamlNamespaces Include="progress_ring_win" />
+				<ExcludeXamlNamespaces Include="progress_ring_uno" />
 			</ItemGroup>
 		</When>
 		<Otherwise>
@@ -137,11 +144,8 @@
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
 
-		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'"/>
-		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'"/>
-
-		<Page Remove="Styles\Controls\ProgressRingWinUI.xaml" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'"/>
-		<XamlMergeInput Remove="Styles\Controls\ProgressRingWinUI.xaml" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'"/>
+		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 
 	</ItemGroup>
 

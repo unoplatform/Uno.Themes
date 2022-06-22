@@ -2,7 +2,7 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 	<PropertyGroup>
 		<DisableNet6MobileTargets>true</DisableNet6MobileTargets>
-		<UseWinUI>true</UseWinUI>
+		<!--<UseWinUI>true</UseWinUI>-->
 		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid11.0;xamarinmac20</TargetFrameworks>
 		<TargetFrameworks Condition="'$(DisableNet6MobileTargets)'==''">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -56,11 +56,11 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="4.2.0-dev.515" />
+<PackageReference Include="Uno.WinUI" Version="4.2.0-dev.515" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="4.2.0-dev.515" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+<PackageReference Include="Uno.WinUI.Lottie" Version="4.2.0-dev.515" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
-				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 
 				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
@@ -89,8 +89,15 @@
 			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
+				<IncludeXamlNamespaces Include="progress_ring_uno" />
+				<ExcludeXamlNamespaces Include="progress_ring_win" />
 			</ItemGroup>
-			
+
+			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+				<IncludeXamlNamespaces Include="progress_ring_win" />
+				<ExcludeXamlNamespaces Include="progress_ring_uno" />
+			</ItemGroup>
+		
 		</When>
 		<Otherwise>
 
@@ -128,6 +135,10 @@
 				<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 			</ItemGroup>
 
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="progress_ring_uno" />
+				<ExcludeXamlNamespaces Include="progress_ring_win" />
+			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
@@ -169,26 +180,6 @@
 			<Generator>MSBuild:Compile</Generator>
 		</None>
 	</ItemGroup>
-
-
-	<Choose>
-		<When Condition="'$(UseWinUI)'=='true'">
-			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
-				<Page Remove="Styles\Controls\v1\ProgressRing.xaml" />
-				<Page Remove="Styles\Controls\v2\ProgressRing.xaml"/>
-				<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" MergeFile="mergedpages.v1.xaml"/>
-				<XamlMergeInput Remove="Styles\Controls\v2\ProgressRing.xaml" MergeFile="mergedpages.v2.xaml"/>
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<Page Remove="Styles\Controls\v1\ProgressRingWinUI.xaml"/>
-				<Page Remove="Styles\Controls\v2\ProgressRingWinUI.xaml"/>
-				<XamlMergeInput Remove="Styles\Controls\v1\ProgressRingWinUI.xaml" MergeFile="mergedpages.v1.xaml"/>
-				<XamlMergeInput Remove="Styles\Controls\v2\ProgressRingWinUI.xaml" MergeFile="mergedpages.v2.xaml"/>
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
 	
 	<ItemGroup>
 		<XamlMergeOutputFiles Include="Generated\mergedpages.v1.xaml" />
