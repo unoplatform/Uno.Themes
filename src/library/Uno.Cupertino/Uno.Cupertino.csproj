@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 	<PropertyGroup>
+		<DisableNet6MobileTargets>true</DisableNet6MobileTargets>
 		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid11.0;xamarinmac20</TargetFrameworks>
 		<TargetFrameworks Condition="'$(DisableNet6MobileTargets)'==''">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -77,7 +78,6 @@
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
-
 		</When>
 		<Otherwise>
 
@@ -116,7 +116,7 @@
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
-
+			
 		</Otherwise>
 	</Choose>
 	
@@ -136,9 +136,13 @@
 		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
-		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 
-		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'"/>
+		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'"/>
+
+		<Page Remove="Styles\Controls\ProgressRingWinUI.xaml" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'"/>
+		<XamlMergeInput Remove="Styles\Controls\ProgressRingWinUI.xaml" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'"/>
+
 	</ItemGroup>
 
 	<ItemGroup>

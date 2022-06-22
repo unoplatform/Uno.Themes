@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 	<PropertyGroup>
+		<DisableNet6MobileTargets>true</DisableNet6MobileTargets>
+		<UseWinUI>true</UseWinUI>
 		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid11.0;xamarinmac20</TargetFrameworks>
 		<TargetFrameworks Condition="'$(DisableNet6MobileTargets)'==''">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -41,9 +43,6 @@
 		<LottieJson Include="Assets\MaterialIndeterminate.json" />
 
 		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\v1\NavigationView\WUX\NavigationView.xaml" />
-		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\v1\ProgressRing.xaml" />
-		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\v2\ProgressRing.xaml" />
-
 	</ItemGroup>
 
 	<Choose>
@@ -91,7 +90,7 @@
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
-
+			
 		</When>
 		<Otherwise>
 
@@ -171,6 +170,26 @@
 		</None>
 	</ItemGroup>
 
+
+	<Choose>
+		<When Condition="'$(UseWinUI)'=='true'">
+			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+				<Page Remove="Styles\Controls\v1\ProgressRing.xaml" />
+				<Page Remove="Styles\Controls\v2\ProgressRing.xaml"/>
+				<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" MergeFile="mergedpages.v1.xaml"/>
+				<XamlMergeInput Remove="Styles\Controls\v2\ProgressRing.xaml" MergeFile="mergedpages.v2.xaml"/>
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<Page Remove="Styles\Controls\v1\ProgressRingWinUI.xaml"/>
+				<Page Remove="Styles\Controls\v2\ProgressRingWinUI.xaml"/>
+				<XamlMergeInput Remove="Styles\Controls\v1\ProgressRingWinUI.xaml" MergeFile="mergedpages.v1.xaml"/>
+				<XamlMergeInput Remove="Styles\Controls\v2\ProgressRingWinUI.xaml" MergeFile="mergedpages.v2.xaml"/>
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+	
 	<ItemGroup>
 		<XamlMergeOutputFiles Include="Generated\mergedpages.v1.xaml" />
 		<XamlMergeOutputFiles Include="Generated\mergedpages.v2.xaml" />
@@ -187,16 +206,10 @@
 		<XamlMergeInput Remove="Styles\Application\v2\SharedColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v2\SharedColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
-		
+	
 		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
-
-		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<XamlMergeInput Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-
-		<Page Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
-
+	
 	<Import Project="xamlmerge.targets" />
 </Project>
