@@ -5842,9 +5842,13 @@
                 <VisualState x:Name="ButtonVisible">
                   <VisualState.Setters>
                     <Setter Target="RevealButton.Opacity" Value="1" />
+                    <Setter Target="RevealButton.IsHitTestVisible" Value="True" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ButtonCollapsed">
+                  <VisualState.Setters>
+                    <Setter Target="RevealButton.IsHitTestVisible" Value="False" />
+                  </VisualState.Setters>
                   <Storyboard>
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RevealButton" Storyboard.TargetProperty="Opacity">
                       <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
@@ -5892,7 +5896,7 @@
                   <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
                 </TextBlock.RenderTransform>
               </TextBlock>
-              <Button x:Name="RevealButton" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" Grid.Column="2" />
+              <Button x:Name="RevealButton" IsHitTestVisible="False" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" Grid.Column="2" />
             </Grid>
             <Rectangle x:Name="NormalBorder" Fill="{StaticResource TextBoxOutlinedStrokeColorBrush}" Height="{StaticResource TextBoxOutlinedStrokeHeight}" VerticalAlignment="Bottom" />
             <Rectangle x:Name="FocusedBorder" Fill="{StaticResource TextBoxOutlinedFocusStrokeColorBrush}" Height="{StaticResource TextBoxFocusStrokeWidth}" VerticalAlignment="Bottom" not_macos:RenderTransformOrigin="0.5,0.5" macos:RenderTransformOrigin="0.0,0.5">
@@ -5947,9 +5951,13 @@
                 <VisualState x:Name="ButtonVisible">
                   <VisualState.Setters>
                     <Setter Target="RevealButton.Opacity" Value="1" />
+                    <Setter Target="RevealButton.IsHitTestVisible" Value="True" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ButtonCollapsed">
+                  <VisualState.Setters>
+                    <Setter Target="RevealButton.IsHitTestVisible" Value="False" />
+                  </VisualState.Setters>
                   <Storyboard>
                     <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RevealButton" Storyboard.TargetProperty="Opacity">
                       <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
@@ -5997,7 +6005,7 @@
                   <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
                 </TextBlock.RenderTransform>
               </TextBlock>
-              <Button x:Name="RevealButton" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" AutomationProperties.AccessibilityView="Raw" IsTabStop="False" Grid.Column="2" />
+              <Button x:Name="RevealButton" IsHitTestVisible="False" Style="{StaticResource RevealButtonStyle}" Foreground="{TemplateBinding BorderBrush}" Opacity="0" AutomationProperties.AccessibilityView="Raw" IsTabStop="False" Grid.Column="2" />
             </Grid>
           </Grid>
         </ControlTemplate>

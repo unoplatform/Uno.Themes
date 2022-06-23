@@ -112,10 +112,7 @@ namespace Uno.Material
 			Add("MaterialOutlinedPasswordBoxStyle");
 			Add("MaterialOutlinedTextBoxStyle");
 			Add("MaterialProgressBarStyle", isImplicit: true);
-			//WinUI 3 currently does not support the DeterminateSource and IndeterminateSource properties on Windows 
-#if !WinUI_Desktop
 			Add("MaterialProgressRingStyle", isImplicit: true);
-#endif
 			Add("MaterialRadioButtonStyle", isImplicit: true);
 			Add("MaterialSecondaryCheckBoxStyle");
 			Add("MaterialSecondaryFabStyle");

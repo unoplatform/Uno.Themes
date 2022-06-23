@@ -41,9 +41,6 @@
 		<LottieJson Include="Assets\MaterialIndeterminate.json" />
 
 		<XamlExclusion Condition="'$(UseWinUI)'=='true'" Include="Styles\Controls\v1\NavigationView\WUX\NavigationView.xaml" />
-		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\v1\ProgressRing.xaml" />
-		<XamlExclusion Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" Include="Styles\Controls\v2\ProgressRing.xaml" />
-
 	</ItemGroup>
 
 	<Choose>
@@ -193,9 +190,12 @@
 
 		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 		<XamlMergeInput Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-
 		<Page Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
+		<XamlMergeInput Remove="Styles\Controls\v2\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
+		<Page Remove="Styles\Controls\v1\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
+		<Page Remove="Styles\Controls\v2\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
 	</ItemGroup>
 
 	<Import Project="xamlmerge.targets" />
