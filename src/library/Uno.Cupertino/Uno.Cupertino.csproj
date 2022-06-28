@@ -34,6 +34,10 @@
 		</Otherwise>
 	</Choose>
 
+	<ItemGroup>
+		<LottieJson Include="Assets\CupertinoProgressRing.json" />
+	</ItemGroup>
+
 	<Choose>
 		<When Condition="'$(UseWinUI)'=='true'">
 
@@ -47,7 +51,7 @@
 			<ItemGroup>
 				<PackageReference Include="Uno.WinUI" Version="4.2.0-dev.515" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="4.2.0-dev.515" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362' and !$(TargetFramework.StartsWith('net6.0-'))" />
+				<PackageReference Include="Uno.WinUI.Lottie" Version="4.2.0-dev.515" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
 				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 
@@ -56,14 +60,10 @@
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
-				<Content Include="Assets\CupertinoProgressRing.json" />
+				<Content Include="@(LottieJson)" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
-				<EmbeddedResource Include="Assets\CupertinoProgressRing.json" />
-			</ItemGroup>
-
-			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
-				<Page Remove="Styles\Controls\ProgressRing.xaml" />
+				<EmbeddedResource Include="@(LottieJson)" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
@@ -77,7 +77,6 @@
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
-
 		</When>
 		<Otherwise>
 
@@ -98,10 +97,10 @@
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
-				<Content Include="Assets\CupertinoProgressRing.json" />
+				<Content Include="@(LottieJson)" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-				<EmbeddedResource Include="Assets\CupertinoProgressRing.json" />
+				<EmbeddedResource Include="@(LottieJson)" />
 			</ItemGroup>
 
 			<ItemGroup>
@@ -116,7 +115,6 @@
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
-
 		</Otherwise>
 	</Choose>
 	
@@ -129,16 +127,18 @@
       <LogicalName>$(AssemblyName).xml</LogicalName>
     </EmbeddedResource>
 	</ItemGroup>
-	
+
 	<ItemGroup>
-		<XamlMergeInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		<XamlMergeInput Include="Styles\Controls\**\*.xaml" />
 		<None Remove="Styles\Controls\_Resources.xaml" />
 		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
-		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 
+		<XamlMergeInput Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<XamlMergeInput Remove="Styles\Controls\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
+		<Page Remove="Styles\Controls\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
 	</ItemGroup>
 
 	<ItemGroup>
