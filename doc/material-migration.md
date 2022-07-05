@@ -31,18 +31,35 @@ The v2 styles introduce a new naming system for its resource keys. Refer to the 
 
 Below is a table that is not a strict guideline, but, is provided to you as a suggestion of mapping text styles from v1 to v2:
 
-v1|v2
--|-
-MaterialHeadline1|DisplayLarge
-MaterialHeadline2|DisplayMedium
-MaterialHeadline3|DisplaySmall
-MaterialHeadline4|HeadlineLarge
-MaterialHeadline5|HeadlineMedium
-MaterialHeadline6|TitleLarge
-MaterialSubtitle1|TitleLarge
-MaterialSubtitle2|TitleMedium
-MaterialBody1|BodyMedium
-MaterialBody2|BodySmall
-MaterialButtonText|LabelMedium
-MaterialCaption|BodySmall
-MaterialOverline|BodySmall
+| Previous Style     	| New Style               	|
+|--------------------	|-------------------------	|
+| MaterialHeadline1  	| MaterialDisplaySmall    	|
+| MaterialHeadline2  	| MaterialHeadlineLarge   	|
+| MaterialHeadline3  	| MaterialHeadlineMedium  	|
+| MaterialHeadline4  	| MaterialHeadlineSmall   	|
+| MaterialHeadline5  	| MaterialTitleLarge      	|
+| MaterialSubtitle1  	| MaterialTitleMedium     	|
+| MaterialSubtitle2  	| MaterialTitleSmall      	|
+| MaterialBody1      	| MaterialBodyLarge       	|
+| MaterialBody2      	| MaterialBodyMedium      	|
+| MaterialCaption    	| MaterialBodySmall       	|
+| MaterialButtonText 	| MaterialLabelLarge      	|
+| MaterialOverline   	| MaterialLabelMedium     	|
+| N/A                	| MaterialLabelSmall      	|
+| N/A                	| MaterialLabelExtraSmall 	|
+| N/A                	| MaterialCaptionLarge    	|
+| N/A                	| MaterialCaptionMedium   	|
+| N/A                	| MaterialCaptionSmall    	|
+| N/A                	| MaterialDisplayLarge    	|
+| N/A                	| MaterialDisplayMedium   	|
+
+### Notable Style Key Changes
+
+Control|Previous Style Key|New Style Key|
+-|-|-
+Button|MaterialButtonIconStyle|MaterialIconButtonStyle|
+Button|MaterialContainedButtonStyle|MaterialFilledButtonStyle|
+ToggleButton|MaterialToggleButtonIconStyle|MaterialIconToggleButtonStyle|
+
+
+
