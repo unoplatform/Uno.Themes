@@ -42,18 +42,18 @@
 		<When Condition="'$(UseWinUI)'=='true'">
 
 			<PropertyGroup>
-				<DefineConstants>WinUI</DefineConstants>
+				<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 				<DefineConstants Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">$(DefineConstants);WinUI_Desktop</DefineConstants>
 				<PackageId>Uno.Cupertino.WinUI</PackageId>
 				<TargetFrameworks>$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="4.2.0-dev.515" />
+				<PackageReference Include="Uno.WinUI" Version="4.5.0-dev.645" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="4.2.0-dev.515" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Uno.WinUI.Lottie" Version="4.5.0-dev.645" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
-				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 
 				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
@@ -86,14 +86,14 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="4.2.0-dev.622" />
+				<PackageReference Include="Uno.UI" Version="4.5.0-dev.645" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-				<PackageReference Include="Uno.UI.Lottie" Version="4.2.0-dev.622" />
+				<PackageReference Include="Uno.UI.Lottie" Version="4.5.0-dev.645" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">

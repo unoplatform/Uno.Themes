@@ -1,39 +1,43 @@
 ﻿parameters:
-  DotNetVersion: '6.0.300-preview.22154.4'
-  UnoCheck_Version: '1.1.0-dev.22'
-  UnoCheck_Manifest: 'https://raw.githubusercontent.com/unoplatform/uno.check/d14571a546b55f58e51e392c04cf098168d6fe2d/manifests/uno.ui-preview.manifest.json'
+  DotNetVersion: '6.0.300'
+  UnoCheck_Version: '1.4.1'
+  UnoCheck_Manifest: 'https://raw.githubusercontent.com/unoplatform/uno.check/b58b891361591bc19d856dea0fbe15ff213e5f50/manifests/uno.ui-preview.manifest.json'
 
 steps:
-
-  # Required until .NET 6 installs properly on Windows using UseDotnet
-  # using preview builds
-  - powershell: |
-      $ProgressPreference = 'SilentlyContinue'
-      Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
-      & .\dotnet-install.ps1 -Version ${{ parameters.DotNetVersion }} -InstallDir "$env:ProgramFiles\dotnet\" -Verbose
-      & dotnet --list-sdks
-    displayName: Install .NET ${{ parameters.DotNetVersion }}
-    errorActionPreference: stop
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core SDK ${{ parameters.DotNetVersion }}'
     retryCountOnTaskFailure: 3
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
-  #- task: UseDotNet@2
-  #  displayName: 'Use .NET Core SDK ${{ parameters.DotNetVersion }}'
-  #  retryCountOnTaskFailure: 3
-  #  inputs:
-  #    packageType: sdk
-  #    version: ${{ parameters.DotNetVersion }}
-  #    includePreviewVersions: true
+    inputs:
+      packageType: sdk
+      version: ${{ parameters.DotNetVersion }}
+      includePreviewVersions: true
 
+  - template: jdk-setup.yml
+    
   - powershell: |
       & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
-      & uno-check -v --ci --non-interactive --fix --skip xcode --skip gtk3 --skip vswin --skip androidemulator --skip androidsdk --skip vsmac --manifest ${{ parameters.UnoCheck_Manifest }}
+      & uno-check -v --ci --non-interactive --fix --skip xcode --skip gtk3 --skip vswin --skip vsmac --manifest ${{ parameters.UnoCheck_Manifest }}
     displayName: Install .NET Workloads
     errorActionPreference: continue
     ignoreLASTEXITCODE: true
     retryCountOnTaskFailure: 3
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
 
-  # This SDK version is needed as long as `uap10.0` will be supported in Uno.Core
-  - powershell: .\build\Install-WindowsSdkISO.ps1 18362
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
-    displayName: Install Windows SDK 18362
+  # https://github.com/actions/runner-images/issues/6082#issuecomment-1215100175
+  - powershell: |
+      Set-Location "C:\Program Files (x86)\Microsoft Visual Studio\Installer\"
+      $InstallPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
+      $componentsToAdd = @(
+        "Component.Xamarin"
+      )
+      [string]$workloadArgs = $componentsToAdd | ForEach-Object {" --add " +  $_}
+      $Arguments = ('/c', "vs_installer.exe", 'modify', '--installPath', "`"$InstallPath`"",$workloadArgs, '--quiet', '--norestart', '--nocache')
+      $process = Start-Process -FilePath cmd.exe -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden
+      if ($process.ExitCode -eq 0)
+      {
+          Write-Host "components have been successfully added"
+      }
+      else
+      {
+          Write-Host "components were not installed"
+          exit 1
+      }

@@ -1,62 +1,28 @@
-﻿assembly-versioning-scheme: MajorMinorPatch
-mode: Mainline
+steps:
+  - task: UseDotNet@2
+    displayName: 'Use .Net Core runtime 5.0.3'
+    inputs:
+      packageType: runtime
+      version: 5.0.3
 
-# Don't use next-version with Mainline (changed since 5.3), otherwise the stable
-# branch will not count on commits, only on tags.
-# See https://github.com/GitTools/GitVersion/issues/2461#issuecomment-733658087
-# next-version: 4.0
+  - task: UseDotNet@2
+    displayName: 'Use .Net Core runtime 3.1.0'
+    inputs:
+      packageType: runtime
+      version: 3.1.0
+  # Restore nuget.org to the list of existing sources, .NET 6 Pre 2 may somehow remove it
+  - powershell: |
+      dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org | Out-Null
+      $global:LASTEXITCODE = 0
+    displayName: Adjust nuget.org source 
 
-branches:
-  master:
-    mode: ContinuousDeployment
-    regex: master
-    tag: dev
-    increment: Minor
-    is-source-branch-for: ['beta', 'stable']
+  - task: gitversion/setup@0
+    inputs:
+      versionSpec: '5.6.6'
 
-  pull-request:
-    regex: ^(pull|pull\-requests|pr)[/-]
-    mode: ContinuousDeployment
-    tag: 'PullRequest'
-    tag-number-pattern: '[/-](?<number>\d+)[-/]'
-    increment: Inherit
-
-  beta:
-    mode: ContinuousDeployment
-    regex: ^release/beta/.*
-    tag: beta
-    increment: none
-    source-branches: ['master']
-
-  stable:
-    regex: ^release/stable/.*
-    tag: ''
-    increment: Patch
-    source-branches: ['master','beta']
-    is-mainline: true
-
-  dev:
-    mode: ContinuousDeployment
-    regex: ^dev/.*?/(.*?)
-    tag: dev.{BranchName}
-    source-branches: ['master', 'stable', 'projects', 'feature']
-    increment: none
-
-  projects:
-    tag: proj-{BranchName}
-    regex: ^projects/(.*?)
-    source-branches: ['master']
-    increment: none
-
-  feature:
-    tag: feature.{BranchName}
-    regex: ^feature/(.*?)
-    source-branches: ['master']
-    increment: none
-
-  release:
-    # disable default release branch
-    regex: ignore
-
-ignore:
-  sha: []
+  - task: gitversion/execute@0
+    inputs:
+      updateAssemblyInfo: 'False'
+      useConfigFile: true
+      configFilePath: ./gitversion.yml
+    displayName: Use GitVersion
