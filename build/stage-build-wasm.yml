@@ -1,11 +1,4 @@
 ﻿steps:
-- task: UseGitVersion@5
-  inputs:
-    versionSpec: '5.x'
-    useConfigFile: true
-    configFilePath: 'build/gitversion.yml'
-    updateAssemblyInfo: 'False'
-
 - task: UseDotNet@2
   condition: eq(variables['IsCanaryBranch'], true)
   inputs:

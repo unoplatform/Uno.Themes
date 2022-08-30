@@ -2274,7 +2274,6 @@
   <x:Double x:Key="MaterialFlyoutMenuToggleCheckGlyphHeight">16</x:Double>
   <x:Double x:Key="MaterialFlyoutMenuSeparatorHeight">1</x:Double>
   <x:Double x:Key="MaterialFlyoutFontSize">14</x:Double>
-  <x:Double x:Key="MaterialFlyoutCharacterSpacing">7.143</x:Double>
   <GridLength x:Key="MaterialFlyoutMenuItemRightMargin">38</GridLength>
   <Style x:Key="MaterialFlyoutPresenterStyle" TargetType="FlyoutPresenter">
     <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -2307,7 +2306,6 @@
     <Setter Property="FontSize" Value="{StaticResource MaterialFlyoutFontSize}" />
     <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialFlyoutCharacterSpacing}" />
     <!--  End: Label Large Typo  -->
     <Setter Property="MinWidth" Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />
     <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
@@ -2323,7 +2321,6 @@
     <Setter Property="FontSize" Value="{StaticResource MaterialFlyoutFontSize}" />
     <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="FontFamily" Value="{StaticResource MaterialMediumFontFamily}" />
-    <Setter Property="CharacterSpacing" Value="{StaticResource MaterialFlyoutCharacterSpacing}" />
     <!--  End: Label Large Typo  -->
     <Setter Property="MinWidth" Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />
     <Setter Property="MaxWidth" Value="{StaticResource MaterialFlyoutPresenterMaxWidth}" />
@@ -2348,7 +2345,6 @@
                 </VisualState>
                 <VisualState x:Name="PointerOver">
                   <VisualState.Setters>
-                    <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver" />
                     <Setter Target="CommonStatesOverlay.Background" Value="{StaticResource OnSurfaceHoverBrush}" />
                   </VisualState.Setters>
                   <Storyboard>
@@ -2357,7 +2353,6 @@
                 </VisualState>
                 <VisualState x:Name="Pressed">
                   <VisualState.Setters>
-                    <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed" />
                     <Setter Target="CommonStatesOverlay.Background" Value="{StaticResource OnSurfacePressedBrush}" />
                   </VisualState.Setters>
                   <Storyboard>
@@ -2444,7 +2439,6 @@
                 </VisualState>
                 <VisualState x:Name="PointerOver">
                   <VisualState.Setters>
-                    <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver" />
                     <Setter Target="CommonStatesOverlay.Background" Value="{StaticResource OnSurfaceHoverBrush}" />
                   </VisualState.Setters>
                   <Storyboard>
@@ -2453,7 +2447,6 @@
                 </VisualState>
                 <VisualState x:Name="Pressed">
                   <VisualState.Setters>
-                    <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed" />
                     <Setter Target="CommonStatesOverlay.Background" Value="{StaticResource OnSurfacePressedBrush}" />
                   </VisualState.Setters>
                   <Storyboard>
@@ -2546,19 +2539,16 @@
                 <VisualState x:Name="Normal" />
                 <VisualState x:Name="PointerOver">
                   <VisualState.Setters>
-                    <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver" />
                     <Setter Target="CommonStatesOverlay.Background" Value="{StaticResource OnSurfaceHoverBrush}" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Pressed">
                   <VisualState.Setters>
-                    <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed" />
                     <Setter Target="CommonStatesOverlay.Background" Value="{StaticResource OnSurfacePressedBrush}" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="SubMenuOpened">
                   <VisualState.Setters>
-                    <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed" />
                     <Setter Target="CommonStatesOverlay.Background" Value="{StaticResource OnSurfaceSelectedBrush}" />
                   </VisualState.Setters>
                 </VisualState>

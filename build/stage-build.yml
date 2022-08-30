@@ -1,17 +1,4 @@
 ﻿steps:
-- task: gitversion/setup@0
-  retryCountOnTaskFailure: 3
-  inputs:
-    versionSpec: '5.6.x'
-  displayName: 'Install GitVersion'
-
-- task: gitversion/execute@0
-  retryCountOnTaskFailure: 3
-  inputs:
-    useConfigFile: true
-    configFilePath: 'build/gitversion.yml'
-  displayName: 'Calculate SemVer'
-
 - task: UseDotNet@2
   condition: eq(variables['IsCanaryBranch'], true)
   retryCountOnTaskFailure: 3
@@ -30,11 +17,6 @@
     branchToMerge: master
     nugetUpdaterVersion: 2.1.1
     packageAuthor: nventive
-
-- template: dotnet-install-windows.yml
-- template: dotnet-install-macos.yml
-- template: jdk-setup.yml
-
 - bash: |
     npm install -g conventional-changelog-cli@2.2.2
     conventional-changelog -p angular -u -r 1 -o "build/CHANGELOG.md"
