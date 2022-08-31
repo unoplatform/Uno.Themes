@@ -1938,7 +1938,7 @@
           <Grid>
             <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
-                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                <Grid x:Name="Root" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
                     <!--  Icon  -->
                     <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
@@ -2012,7 +2012,7 @@
           <Grid>
             <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
-                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                <Grid x:Name="Root" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
                     <!--  Icon  -->
                     <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
@@ -2086,7 +2086,7 @@
           <Grid>
             <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
-                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                <Grid x:Name="Root" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
                     <!--  Icon  -->
                     <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
@@ -2160,7 +2160,7 @@
           <Grid>
             <toolkit:ElevatedView x:Name="ElevatedView" Margin="0,0,6,6" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}" Elevation="6">
               <um:Ripple x:Name="Ripple" CornerRadius="{TemplateBinding CornerRadius}" Feedback="{TemplateBinding Foreground}" FeedbackOpacity="{StaticResource PressedOpacity}">
-                <Grid x:Name="Root" Background="{TemplateBinding Background}">
+                <Grid x:Name="Root" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}">
                   <StackPanel x:Name="ContentPanel" Padding="{TemplateBinding Padding}" Orientation="Horizontal">
                     <!--  Icon  -->
                     <Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
@@ -4768,29 +4768,31 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="PasswordBox">
-          <Grid x:Name="Root" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+          <Border x:Name="RootBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="1">
             <VisualStateManager.VisualStateGroups>
               <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="Normal" />
                 <VisualState x:Name="PointerOver">
                   <VisualState.Setters>
-                    <Setter Target="Root.BorderBrush" Value="{StaticResource OnSurfaceBrush}" />
-                    <Setter Target="Root.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.BorderBrush" Value="{StaticResource OnSurfaceBrush}" />
+                    <Setter Target="RootBorder.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.Padding" Value="0" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Pressed" />
                 <VisualState x:Name="Disabled">
                   <VisualState.Setters>
-                    <Setter Target="Root.BorderBrush" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+                    <Setter Target="RootBorder.BorderBrush" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
                     <Setter Target="ContentElement.Opacity" Value="{StaticResource DisabledOpacity}" />
                     <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource OnSurfaceLowBrush}" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Focused">
                   <VisualState.Setters>
-                    <Setter Target="Root.BorderBrush" Value="{StaticResource PrimaryBrush}" />
+                    <Setter Target="RootBorder.BorderBrush" Value="{StaticResource PrimaryBrush}" />
                     <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource PrimaryBrush}" />
-                    <Setter Target="Root.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.Padding" Value="0" />
                   </VisualState.Setters>
                 </VisualState>
               </VisualStateGroup>
@@ -4821,24 +4823,26 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentPresenter x:Name="IconPresenter" MinWidth="25" MaxWidth="34" MaxHeight="34" Margin="0,0,8,0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-            <ScrollViewer x:Name="ContentElement" Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled">
-              <ScrollViewer.RenderTransform>
-                <CompositeTransform x:Name="ContentTransform" />
-              </ScrollViewer.RenderTransform>
-            </ScrollViewer>
-            <TextBlock x:Name="PlaceholderElement" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="{StaticResource OnSurfaceLowBrush}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}">
-              <TextBlock.RenderTransform>
-                <CompositeTransform x:Name="Transform" />
-              </TextBlock.RenderTransform>
-            </TextBlock>
-            <Button x:Name="RevealButton" Grid.Column="2" MinWidth="34" MinHeight="34" VerticalAlignment="Stretch" AutomationProperties.AccessibilityView="Raw" IsTabStop="False" Style="{StaticResource MaterialRevealButtonStyle}" Visibility="Collapsed" />
-          </Grid>
+            <Grid x:Name="Root" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <ContentPresenter x:Name="IconPresenter" MinWidth="25" MaxWidth="34" MaxHeight="34" Margin="0,0,8,0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+              <ScrollViewer x:Name="ContentElement" Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled">
+                <ScrollViewer.RenderTransform>
+                  <CompositeTransform x:Name="ContentTransform" />
+                </ScrollViewer.RenderTransform>
+              </ScrollViewer>
+              <TextBlock x:Name="PlaceholderElement" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="{StaticResource OnSurfaceLowBrush}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}">
+                <TextBlock.RenderTransform>
+                  <CompositeTransform x:Name="Transform" />
+                </TextBlock.RenderTransform>
+              </TextBlock>
+              <Button x:Name="RevealButton" Grid.Column="2" MinWidth="34" MinHeight="34" VerticalAlignment="Stretch" AutomationProperties.AccessibilityView="Raw" IsTabStop="False" Style="{StaticResource MaterialRevealButtonStyle}" Visibility="Collapsed" />
+            </Grid>
+          </Border>
         </ControlTemplate>
       </Setter.Value>
     </Setter>
@@ -5475,29 +5479,31 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="TextBox">
-          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+          <Border x:Name="RootBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="1">
             <VisualStateManager.VisualStateGroups>
               <VisualStateGroup x:Name="CommonStates">
                 <VisualState x:Name="Normal" />
                 <VisualState x:Name="PointerOver">
                   <VisualState.Setters>
-                    <Setter Target="Root.BorderBrush" Value="{StaticResource OnSurfaceBrush}" />
-                    <Setter Target="Root.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.BorderBrush" Value="{StaticResource OnSurfaceBrush}" />
+                    <Setter Target="RootBorder.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.Padding" Value="0" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Pressed" />
                 <VisualState x:Name="Disabled">
                   <VisualState.Setters>
-                    <Setter Target="Root.BorderBrush" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+                    <Setter Target="RootBorder.BorderBrush" Value="{StaticResource OnSurfaceDisabledLowBrush}" />
                     <Setter Target="ContentElement.Opacity" Value="{StaticResource DisabledOpacity}" />
                     <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource OnSurfaceLowBrush}" />
                   </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Focused">
                   <VisualState.Setters>
-                    <Setter Target="Root.BorderBrush" Value="{StaticResource PrimaryBrush}" />
+                    <Setter Target="RootBorder.BorderBrush" Value="{StaticResource PrimaryBrush}" />
                     <Setter Target="PlaceholderElement.Foreground" Value="{StaticResource PrimaryBrush}" />
-                    <Setter Target="Root.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.BorderThickness" Value="2" />
+                    <Setter Target="RootBorder.Padding" Value="0" />
                   </VisualState.Setters>
                 </VisualState>
               </VisualStateGroup>
@@ -5529,24 +5535,26 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" Width="20" Margin="1,0,18,0" not_macos:VerticalAlignment="Top" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-            <ScrollViewer x:Name="ContentElement" Grid.Column="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" not_macos:VerticalAlignment="Top" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
-              <ScrollViewer.RenderTransform>
-                <CompositeTransform x:Name="ContentElement_CompositeTransform" />
-              </ScrollViewer.RenderTransform>
-            </ScrollViewer>
-            <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" not_macos:VerticalAlignment="Top" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-              <TextBlock.RenderTransform>
-                <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
-              </TextBlock.RenderTransform>
-            </TextBlock>
-            <Button x:Name="DeleteButton" Grid.Column="2" Margin="8,0,0,0" IsTabStop="False" Style="{StaticResource MaterialDeleteButtonStyle}" VerticalAlignment="Stretch" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" />
-          </Grid>
+            <Grid x:Name="Root" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <ContentPresenter x:Name="IconPresenter" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Center" Width="20" Margin="1,0,18,0" not_macos:VerticalAlignment="Top" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+              <ScrollViewer x:Name="ContentElement" Grid.Column="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}" not_macos:VerticalAlignment="Top" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
+                <ScrollViewer.RenderTransform>
+                  <CompositeTransform x:Name="ContentElement_CompositeTransform" />
+                </ScrollViewer.RenderTransform>
+              </ScrollViewer>
+              <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" not_macos:VerticalAlignment="Top" macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                <TextBlock.RenderTransform>
+                  <CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+                </TextBlock.RenderTransform>
+              </TextBlock>
+              <Button x:Name="DeleteButton" Grid.Column="2" Margin="8,0,0,0" IsTabStop="False" Style="{StaticResource MaterialDeleteButtonStyle}" VerticalAlignment="Stretch" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" />
+            </Grid>
+          </Border>
         </ControlTemplate>
       </Setter.Value>
     </Setter>
