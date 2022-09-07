@@ -226,8 +226,7 @@
 											  MaxHeight="34"
 											  MaxWidth="34"
 											  MinWidth="25"
-											  not_macos:VerticalAlignment="Top"
-											  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 
@@ -239,8 +238,7 @@
 										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
 										  IsTabStop="False"
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  not_macos:VerticalAlignment="Top"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
 										  ZoomMode="Disabled"
@@ -259,8 +257,7 @@
 									   Text="{TemplateBinding PlaceholderText}"
 									   TextAlignment="{TemplateBinding TextAlignment}"
 									   TextWrapping="{TemplateBinding TextWrapping}"
-									   not_macos:VerticalAlignment="Top"
-									   macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 								<TextBlock.RenderTransform>
 									<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
 								</TextBlock.RenderTransform>
@@ -451,8 +448,7 @@
 											  HorizontalAlignment="Center"
 											  Width="20"
 											  Margin="1,0,18,0"
-											  not_macos:VerticalAlignment="Top"
-											  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 							<ScrollViewer x:Name="ContentElement"
@@ -465,8 +461,7 @@
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-										  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  not_macos:VerticalAlignment="Top"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  ZoomMode="Disabled"
 										  AutomationProperties.AccessibilityView="Raw">
 								<ScrollViewer.RenderTransform>
@@ -483,8 +478,7 @@
 									   Text="{TemplateBinding PlaceholderText}"
 									   TextAlignment="{TemplateBinding TextAlignment}"
 									   TextWrapping="{TemplateBinding TextWrapping}"
-									   not_macos:VerticalAlignment="Top"
-									   macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+									   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 								<TextBlock.RenderTransform>
 									<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
 								</TextBlock.RenderTransform>
