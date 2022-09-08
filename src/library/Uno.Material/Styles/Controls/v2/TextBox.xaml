@@ -219,17 +219,20 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<ContentPresenter x:Name="IconPresenter"
-											  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-											  HorizontalAlignment="Center"
-											  Margin="0,0,8,0"
-											  MaxHeight="34"
-											  MaxWidth="34"
-											  MinWidth="25"
-											  not_macos:VerticalAlignment="Top"
-											  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-
+							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
+							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
+							<Border Height="26"
+									VerticalAlignment="Top"
+									Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+								<ContentPresenter x:Name="IconPresenter"
+												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  HorizontalAlignment="Center"
+												  Margin="0,0,8,0"
+												  MaxHeight="34"
+												  MaxWidth="34"
+												  MinWidth="25"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+							</Border>
 
 							<ScrollViewer x:Name="ContentElement"
 										  Grid.Column="1"
@@ -239,8 +242,7 @@
 										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
 										  IsTabStop="False"
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  not_macos:VerticalAlignment="Top"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
 										  ZoomMode="Disabled"
@@ -250,21 +252,25 @@
 								</ScrollViewer.RenderTransform>
 							</ScrollViewer>
 
-							<TextBlock x:Name="PlaceholderElement"
-									   Grid.Column="1"
-									   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
-									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-									   IsHitTestVisible="False"
-									   RenderTransformOrigin="0,0.5"
-									   Text="{TemplateBinding PlaceholderText}"
-									   TextAlignment="{TemplateBinding TextAlignment}"
-									   TextWrapping="{TemplateBinding TextWrapping}"
-									   not_macos:VerticalAlignment="Top"
-									   macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-								<TextBlock.RenderTransform>
-									<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
-								</TextBlock.RenderTransform>
-							</TextBlock>
+							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
+							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
+							<Border Grid.Column="1"
+									Height="26"
+									VerticalAlignment="Top">
+								<TextBlock x:Name="PlaceholderElement"
+										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										   IsHitTestVisible="False"
+										   RenderTransformOrigin="0,0.5"
+										   Text="{TemplateBinding PlaceholderText}"
+										   TextAlignment="{TemplateBinding TextAlignment}"
+										   TextWrapping="{TemplateBinding TextWrapping}"
+										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+									<TextBlock.RenderTransform>
+										<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+									</TextBlock.RenderTransform>
+								</TextBlock>
+							</Border>
 
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
@@ -436,24 +442,28 @@
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
-						
+
 						<Grid x:Name="Root"
 							  Background="{TemplateBinding Background}"
 							  Padding="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
 
-							<ContentPresenter x:Name="IconPresenter"
-											  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-											  HorizontalAlignment="Center"
-											  Width="20"
-											  Margin="1,0,18,0"
-											  not_macos:VerticalAlignment="Top"
-											  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
+							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
+							<Border Height="20"
+									VerticalAlignment="Top">
+								<ContentPresenter x:Name="IconPresenter"
+												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  HorizontalAlignment="Center"
+												  Width="20"
+												  Margin="1,0,18,0"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+												  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+							</Border>
 
 							<ScrollViewer x:Name="ContentElement"
 										  Grid.Column="1"
@@ -465,8 +475,7 @@
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-										  macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  not_macos:VerticalAlignment="Top"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  ZoomMode="Disabled"
 										  AutomationProperties.AccessibilityView="Raw">
 								<ScrollViewer.RenderTransform>
@@ -474,21 +483,25 @@
 								</ScrollViewer.RenderTransform>
 							</ScrollViewer>
 
-							<TextBlock x:Name="PlaceholderElement"
-									   Grid.Column="1"
-									   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
-									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-									   IsHitTestVisible="False"
-									   RenderTransformOrigin="0,0.5"
-									   Text="{TemplateBinding PlaceholderText}"
-									   TextAlignment="{TemplateBinding TextAlignment}"
-									   TextWrapping="{TemplateBinding TextWrapping}"
-									   not_macos:VerticalAlignment="Top"
-									   macos:VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-								<TextBlock.RenderTransform>
-									<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
-								</TextBlock.RenderTransform>
-							</TextBlock>
+							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
+							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
+							<Border Grid.Column="1"
+									Height="20"
+									VerticalAlignment="Top">
+								<TextBlock x:Name="PlaceholderElement"
+										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										   IsHitTestVisible="False"
+										   RenderTransformOrigin="0,0.5"
+										   Text="{TemplateBinding PlaceholderText}"
+										   TextAlignment="{TemplateBinding TextAlignment}"
+										   TextWrapping="{TemplateBinding TextWrapping}"
+										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+									<TextBlock.RenderTransform>
+										<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+									</TextBlock.RenderTransform>
+								</TextBlock>
+							</Border>
 
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
