@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -63,6 +64,26 @@ namespace Uno.Material
 		public static object GetAlternateContent(Control obj) => (object)obj.GetValue(AlternateContentProperty);
 		public static void SetAlternateContent(Control obj, object value) => obj.SetValue(AlternateContentProperty, value);
 
+#endregion
+
+#region DependencyProperty: Command
+
+/// <summary>
+/// Backing property for the command to execute when <see cref="TextBox"/> Trailing Icon Button is pressed />.
+/// </summary>
+		public static DependencyProperty CommandProperty { get; } = DependencyProperty.RegisterAttached(
+			"Command",
+			typeof(ICommand),
+			typeof(ControlExtensions),
+			new PropertyMetadata(default(ICommand), OnCommandChanged));
+
+		public static ICommand GetCommand(DependencyObject obj) => (ICommand)obj.GetValue(CommandProperty);
+		public static void SetCommand(DependencyObject obj, ICommand value) => obj.SetValue(CommandProperty, value);
+
+		private static void OnCommandChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			//to-do
+		}
 #endregion
 	}
 }

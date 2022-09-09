@@ -218,6 +218,18 @@
 								</um:ControlExtensions.Icon>
 							</TextBox>
 						</smtx:XamlDisplay>
+
+						<!-- Test TextBox Filled with a Trailing Icon -->
+						<TextBlock Text="- TextBox Trailing Icon press:" />
+						<TextBlock Text="{Binding InputDebugText}" />
+
+						<TextBox PlaceholderText="Filled with a Trailing Icon"
+								 um:ControlExtensions.Command="{Binding DebugInputCommand}"
+								 Style="{StaticResource MaterialFilledWithTrailingIconTextBoxStyle}">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Find" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
