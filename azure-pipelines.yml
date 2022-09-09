@@ -95,7 +95,7 @@ jobs:
         ArtifactName: macOS
         DisableNet6MobileTargets: true
   pool:
-    vmImage: macOS-10.15
+    vmImage: macOS-11
     
   variables:
   - name: SkipUnknownFrameworks
@@ -124,9 +124,9 @@ jobs:
 - job: Linux
 
   pool:
-    vmImage: 'ubuntu-18.04'
+    vmImage: 'ubuntu-latest'
 
-  container: unoplatform/wasm-build:2.2
+  container: unoplatform/wasm-build:3.0
 
   variables:
     ArtifactName: WASM
