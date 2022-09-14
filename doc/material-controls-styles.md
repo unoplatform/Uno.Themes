@@ -1,9 +1,9 @@
 # Material Controls Styles
-Control|Style Key|IsDefaultStyle*|
+Control|Style Key|IsDefaultStyle*
 -|-|-
-AppBarButton|AppBarButtonStyle|True|
+AppBarButton|AppBarButtonStyle|True
 Button|ElevatedButtonStyle|
-Button|FilledButtonStyle|True|
+Button|FilledButtonStyle|True
 Button|FilledTonalButtonStyle|
 Button|OutlinedButtonStyle|
 Button|TextButtonStyle|
@@ -20,26 +20,29 @@ Button|LargeFabStyle|
 Button|SurfaceLargeFabStyle|
 Button|SecondaryLargeFabStyle|
 Button|TertiaryLargeFabStyle|
-CalendarDatePicker|CalendarDatePickerStyle|True|
-CalendarView|CalendarViewStyle|True|
-CheckBox|CheckBoxStyle|True|
-ComboBox|ComboBoxStyle|True|
-CommandBar|CommandBarStyle|True|
-DatePicker|DatePickerStyle|True|
-FlyoutPresenter|FlyoutPresenterStyle|True|
-HyperlinkButton|HyperlinkButtonStyle|True|
+CalendarDatePicker|CalendarDatePickerStyle|True
+CalendarView|CalendarViewStyle|True
+CheckBox|CheckBoxStyle|True
+CheckBox|SecondaryCheckBoxStyle|
+ComboBox|ComboBoxStyle|True
+CommandBar|CommandBarStyle|True
+ContentDialog|ContentDialogStyle|True
+DatePicker|DatePickerStyle|True
+FlyoutPresenter|FlyoutPresenterStyle|True
+HyperlinkButton|HyperlinkButtonStyle|True
 HyperlinkButton|SecondaryHyperlinkButtonStyle|
-ListView|ListViewStyle|True|
-ListViewItem|ListViewItemStyle|True|
-MenuFlyoutPresenter|MenuFlyoutPresenterStyle|True|
-muxc:NavigationView|NavigationViewStyle|True|
-muxc:NavigationViewItem|NavigationViewItemStyle|True|
-PasswordBox|FilledPasswordBoxStyle|True|
+ListView|ListViewStyle|True
+ListViewItem|ListViewItemStyle|True
+MenuFlyoutPresenter|MenuFlyoutPresenterStyle|True
+muxc:NavigationView|NavigationViewStyle|True
+muxc:NavigationViewItem|NavigationViewItemStyle|True
+muxc:ProgressBar|ProgressBarStyle|True
+muxc:ProgressRing|ProgressRingStyle|True
+PasswordBox|FilledPasswordBoxStyle|True
 PasswordBox|OutlinedPasswordBoxStyle|
-ProgressBar|ProgressBarStyle|True|
-ProgressRing|ProgressRingStyle|True|
-RadioButton|RadioButtonStyle|True|
-Slider|SliderStyle|True|
+RadioButton|RadioButtonStyle|True
+RadioButton|SecondaryRadioButtonStyle|
+Slider|SliderStyle|True
 TextBlock|DisplayLarge|
 TextBlock|DisplayMedium|
 TextBlock|DisplaySmall|
@@ -52,13 +55,17 @@ TextBlock|TitleSmall|
 TextBlock|LabelLarge|
 TextBlock|LabelMedium|
 TextBlock|LabelSmall|
+TextBlock|LabelExtraSmall|
 TextBlock|BodyLarge|
-TextBlock|BodyMedium|True|
+TextBlock|BodyMedium|True
 TextBlock|BodySmall|
-TextBox|FilledTextBoxStyle|True|
+TextBlock|CaptionLarge|
+TextBlock|CaptionMedium|
+TextBlock|CaptionSmall|
+TextBox|FilledTextBoxStyle|True
 TextBox|OutlinedTextBoxStyle|
-ToggleButton|TextToggleButtonStyle|True|
+ToggleButton|TextToggleButtonStyle|True
 ToggleButton|IconToggleButtonStyle|
-ToggleSwitch|ToggleSwitchStyle|True|
+ToggleSwitch|ToggleSwitchStyle|True
 
 IsDefaultStyle*: Styles in this column will be set as the default implicit style for the matching control
