@@ -23,6 +23,7 @@ Button|TertiaryLargeFabStyle|
 CalendarDatePicker|CalendarDatePickerStyle|True
 CalendarView|CalendarViewStyle|True
 CheckBox|CheckBoxStyle|True
+CheckBox|SecondaryCheckBoxStyle|
 ComboBox|ComboBoxStyle|True
 CommandBar|CommandBarStyle|True
 ContentDialog|ContentDialogStyle|True
@@ -35,11 +36,12 @@ ListViewItem|ListViewItemStyle|True
 MenuFlyoutPresenter|MenuFlyoutPresenterStyle|True
 muxc:NavigationView|NavigationViewStyle|True
 muxc:NavigationViewItem|NavigationViewItemStyle|True
+muxc:ProgressBar|ProgressBarStyle|True
+muxc:ProgressRing|ProgressRingStyle|True
 PasswordBox|FilledPasswordBoxStyle|True
 PasswordBox|OutlinedPasswordBoxStyle|
-ProgressBar|ProgressBarStyle|True
-ProgressRing|ProgressRingStyle|True
 RadioButton|RadioButtonStyle|True
+RadioButton|SecondaryRadioButtonStyle|
 Slider|SliderStyle|True
 TextBlock|DisplayLarge|
 TextBlock|DisplayMedium|
@@ -53,9 +55,13 @@ TextBlock|TitleSmall|
 TextBlock|LabelLarge|
 TextBlock|LabelMedium|
 TextBlock|LabelSmall|
+TextBlock|LabelExtraSmall|
 TextBlock|BodyLarge|
 TextBlock|BodyMedium|True
 TextBlock|BodySmall|
+TextBlock|CaptionLarge|
+TextBlock|CaptionMedium|
+TextBlock|CaptionSmall|
 TextBox|FilledTextBoxStyle|True
 TextBox|OutlinedTextBoxStyle|
 ToggleButton|TextToggleButtonStyle|True
