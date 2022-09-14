@@ -79,6 +79,7 @@ namespace Uno.Material
 			Add("MaterialCaptionMedium");
 			Add("MaterialCaptionSmall");
 			Add("MaterialCheckBoxStyle", isImplicit: true);
+			Add("MaterialContentDialogStyle", isImplicit: true);
 			Add("MaterialComboBoxStyle", isImplicit: true);
 			Add("MaterialCommandBarStyle", isImplicit: true);
 			Add("MaterialDatePickerStyle", isImplicit: true);
