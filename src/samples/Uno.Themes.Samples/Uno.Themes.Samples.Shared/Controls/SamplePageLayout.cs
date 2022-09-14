@@ -30,9 +30,8 @@ namespace Uno.Themes.Samples
 
 		private IReadOnlyCollection<LayoutModeMapping> LayoutModeMappings => new List<LayoutModeMapping>
 		{
-			new LayoutModeMapping(Design.Material, _materialRadioButton, _stickyMaterialRadioButton, VisualStateMaterial, MaterialTemplate),
-			new LayoutModeMapping(Design.Cupertino, _cupertinoRadioButton, _stickyCupertinoRadioButton, VisualStateCupertino, CupertinoTemplate),
-
+			new LayoutModeMapping(Design.Material, _materialRadioButton, _stickyMaterialRadioButton, VisualStateMaterial, /* templates: */ MaterialTemplate, M3MaterialTemplate),
+			new LayoutModeMapping(Design.Cupertino, _cupertinoRadioButton, _stickyCupertinoRadioButton, VisualStateCupertino, /* templates: */ CupertinoTemplate),
 		};
 
 		private RadioButton _materialRadioButton;
@@ -101,9 +100,9 @@ namespace Uno.Themes.Samples
 					.DisposeWith(disposables);
 			}
 
-			_materialVersionComboBox.Loaded += OnMaterialVersionComboBoxLoaded;
+			_materialVersionComboBox.Loaded += UpdateDefaultMaterialVersionChoice;
 			Disposable
-				.Create(() => _materialVersionComboBox.Loaded -= OnMaterialVersionComboBoxLoaded)
+				.Create(() => _materialVersionComboBox.Loaded -= UpdateDefaultMaterialVersionChoice)
 				.DisposeWith(disposables);
 
 			void OnScrolled(object sender, ScrollViewerViewChangedEventArgs e)
@@ -120,14 +119,15 @@ namespace Uno.Themes.Samples
 			}
 		}
 
-		private void OnMaterialVersionComboBoxLoaded(object sender, RoutedEventArgs e)
+		private void UpdateDefaultMaterialVersionChoice(object sender, RoutedEventArgs e)
 		{
-			_materialVersionComboBox.SelectedIndex = 1;
-		}
-
-		private void RegisterEvent(RoutedEventHandler click)
-		{
-			click += OnLayoutRadioButtonChecked;
+			if (LayoutModeMappings.FirstOrDefault(x => x.Design == Design.Material) is LayoutModeMapping materialMapping)
+			{
+				_materialVersionComboBox.SelectedIndex = materialMapping.Templates
+					.Select((x, i) => new { Index = i, Template = x })
+					.LastOrDefault(x => x.Template != null) // only material design has multiple templates, v1+m3, and the latest is favored for default choice.
+					?.Index ?? -1;
+			}
 		}
 
 		private void UpdateLayoutRadioButtons()
@@ -137,17 +137,17 @@ namespace Uno.Themes.Samples
 
 			foreach (var mapping in mappings)
 			{
-				var visibility = mapping.Template != null ? Visibility.Visible : Visibility.Collapsed;
+				var visibility = mapping.HasDefinedTemplate ? Visibility.Visible : Visibility.Collapsed;
 				mapping.RadioButton.Visibility = visibility;
 				mapping.StickyRadioButton.Visibility = visibility;
-				if (mapping.Template != null && mapping.Design == _design)
+				if (mapping.HasDefinedTemplate && mapping.Design == _design)
 				{
 					previouslySelected = mapping;
 				}
 			}
 
-			// selected mode is based on previous selection and availability (whether the template is defined)
-			var selected = previouslySelected ?? mappings.FirstOrDefault(x => x.Template != null);
+			// selected mode is based on previous selection and availability (whether any template belonging to the design is defined)
+			var selected = previouslySelected ?? mappings.FirstOrDefault(x => x.HasDefinedTemplate);
 			if (selected != null)
 			{
 				UpdateLayoutMode(transitionTo: selected.Design);
@@ -212,19 +212,20 @@ namespace Uno.Themes.Samples
 
 		private class LayoutModeMapping
 		{
-			public Design Design { get; set; }
-			public RadioButton RadioButton { get; set; }
-			public RadioButton StickyRadioButton { get; set; }
-			public string VisualStateName { get; set; }
-			public DataTemplate Template { get; set; }
+			public Design Design { get; }
+			public RadioButton RadioButton { get; }
+			public RadioButton StickyRadioButton { get; }
+			public string VisualStateName { get; }
+			public DataTemplate[] Templates { get; }
+			public bool HasDefinedTemplate => Templates.Any(x => x != null);
 
-			public LayoutModeMapping(Design design, RadioButton radioButton, RadioButton stickyRadioButton, string visualStateName, DataTemplate template)
+			public LayoutModeMapping(Design design, RadioButton radioButton, RadioButton stickyRadioButton, string visualStateName, params DataTemplate[] templates)
 			{
 				Design = design;
 				RadioButton = radioButton;
 				StickyRadioButton = stickyRadioButton;
 				VisualStateName = visualStateName;
-				Template = template;
+				Templates = templates;
 			}
 		}
 	}
