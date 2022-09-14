@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;xamarinios10;monoandroid11.0;xamarinmac20</TargetFrameworks>
-		<TargetFrameworks Condition="'$(DisableNet6MobileTargets)'==''">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">netstandard2.0;xamarinios10;monoandroid11.0;xamarinmac20</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(DisableNet6MobileTargets)'!='true'">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
@@ -50,7 +51,7 @@
 				<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 				<DefineConstants Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">$(DefineConstants);WinUI_Desktop</DefineConstants>
 				<PackageId>Uno.Material.WinUI</PackageId>
-				<TargetFrameworks>$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
+				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
 			</PropertyGroup>
 
 			<ItemGroup>
@@ -93,7 +94,7 @@
 		<Otherwise>
 			<PropertyGroup>
 				<PackageId>Uno.Material</PackageId>
-				<TargetFrameworks Condition="'$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.18362</TargetFrameworks>
+				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.18362</TargetFrameworks>
 			</PropertyGroup>
 
 			<ItemGroup>
@@ -138,9 +139,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Styles\Application\Common\Fonts.xaml" />
-	  <None Remove="Styles\Controls\v1\_Resources.xaml" />
-	  <None Remove="Styles\Controls\v2\_Resources.xaml" />
+		<None Remove="Styles\Application\Common\Fonts.xaml" />
+		<None Remove="Styles\Controls\v1\_Resources.xaml" />
+		<None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -183,7 +184,7 @@
 		<XamlMergeInput Remove="Styles\Application\v2\SharedColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v2\SharedColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
-		
+
 		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 

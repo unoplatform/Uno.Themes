@@ -1,0 +1,37 @@
+<Project ToolsVersion="15.0">
+	<PropertyGroup>
+		<!--
+			This property allows the override of the nuget local cache.
+			Set it to the version you want to override, used in another app.
+			You will see the override path in the build output.
+			The packages are located under this directory: "%USERPROFILE%\.nuget\packages".
+		-->
+		<!-- <NugetOverrideVersion>1.0.0-dev.1</NugetOverrideVersion> -->
+
+		<!--
+			This property is used to control the platforms compiled by Visual Studio, and 
+			allows for a faster build when testing for a single platform.
+			
+				Instructions:
+				1) Copy this file and remove the ".sample" name
+				2) Adjust the NugetOverrideVersion property below
+				3) Make sure to do a Rebuild, so that nuget restores the proper packages for the new target
+			
+			Available build targets
+
+				uap10.0.18362 (Windows)
+				net5.0-windows10.0.18362 (WinAppSDK Windows)
+				xamarinios10 (iOS)
+				MonoAndroid11.0 (Android 11.0)
+				netstandard2.0 (WebAssembly, Skia)
+				net6.0-ios (.NET 6 iOS)
+				net6.0-android (.NET 6 Android)
+				net6.0-maccatalyst (.NET 6 macOS Catalyst)
+				net6.0-macos (.NET 6 macOS AppKit)
+				xamarinmac20 (macOS)
+
+			Include netstandard2.0 to make sure all projects build
+		-->
+		<!-- <TargetFrameworkOverride>netstandard2.0;uap10.0.18362</TargetFrameworkOverride> -->
+	</PropertyGroup>
+</Project>

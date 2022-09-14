@@ -1,0 +1,32 @@
+<Project ToolsVersion="15.0">
+	<Import Project="$(SolutionDir)\crosstargeting_override.props" Condition="exists('$(SolutionDir)\crosstargeting_override.props')" />
+
+	<Target Name="_DisplayTargets" BeforeTargets="BeforeBuild">
+		<Message Text="Building target framework: $(TargetFramework)" Importance="high" Condition="'$(TargetFramework)'!=''" />
+	</Target>
+
+	<Target Name="_UnoOverrideNuget" AfterTargets="AfterBuild" DependsOnTargets="BuiltProjectOutputGroup" Condition="'$(NugetOverrideVersion)'!=''">
+
+		<PropertyGroup>
+			<_TargetNugetPackageId Condition="'$(PackageId)'!=''">$(PackageId)</_TargetNugetPackageId>
+			<_TargetNugetPackageId Condition="'$(PackageId)'==''">$(AssemblyName)</_TargetNugetPackageId>
+			<_TargetNugetFolderBase>$(USERPROFILE)\.nuget\packages\$(_TargetNugetPackageId)\$(NugetOverrideVersion)\lib</_TargetNugetFolderBase>
+			<_TargetNugetFolder>$(_TargetNugetFolderBase)\$(TargetFramework)</_TargetNugetFolder>
+		</PropertyGroup>
+		
+		<ItemGroup>
+			<_OutputFiles Include="@(BuiltProjectOutputGroupOutput)" />
+			<_OutputFilesPDB Include="@(_OutputFiles->'%(RootDir)\%(Directory)\%(RecursiveDir)%(Filename).pdb')" Condition="Exists('@(BuiltProjectOutputGroupOutput->'%(RootDir)\%(Directory)\%(RecursiveDir)%(Filename).pdb')')" />
+		</ItemGroup>
+		
+		<MakeDir Directories="$(_TargetNugetFolder)\" />
+
+		<Message Importance="high" Text="OVERRIDING NUGET PACKAGE CACHE: $(_TargetNugetFolder) [and $(TargetPlatformVersion)]" />
+
+		<Copy SourceFiles="@(_OutputFiles)" DestinationFiles="@(_OutputFiles->'$(_TargetNugetFolder)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(_OutputFilesPDB)" DestinationFiles="@(_OutputFilesPDB->'$(_TargetNugetFolder)\%(RecursiveDir)%(Filename).pdb')" />
+		<Copy Condition="'$(TargetPlatformVersion)'!=''" SourceFiles="@(_OutputFiles)" DestinationFiles="@(_OutputFiles->'$(_TargetNugetFolder)$(TargetPlatformVersion)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy Condition="'$(TargetPlatformVersion)'!=''" SourceFiles="@(_OutputFilesPDB)" DestinationFiles="@(_OutputFilesPDB->'$(_TargetNugetFolder)$(TargetPlatformVersion)\%(RecursiveDir)%(Filename).pdb')" />
+	</Target>
+
+</Project>
