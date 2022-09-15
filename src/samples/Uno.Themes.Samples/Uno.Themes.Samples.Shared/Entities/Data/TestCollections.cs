@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -26,6 +27,31 @@ namespace Uno.Themes.Samples.Entities.Data
 					Image = new Uri("ms-appx:///Assets/Avatar.png"),
 				})
 				.ToArray();
+		}
+
+		public ImmutableList<TestData> TestDataSource { get; } = new List<TestData>
+		{
+			new TestData
+			{
+				Display = "Data01",
+				Value = Guid.NewGuid().ToString()
+			},
+			new TestData
+			{
+				Display = "Data02",
+				Value = Guid.NewGuid().ToString()
+			},
+			new TestData
+			{
+				Display = "Data03",
+				Value = Guid.NewGuid().ToString()
+			},
+		}.ToImmutableList();
+
+		public sealed class TestData
+		{
+			public string Display { get; set; }
+			public string Value { get; set; }
 		}
 
 		public class SelectableData : InpcObject

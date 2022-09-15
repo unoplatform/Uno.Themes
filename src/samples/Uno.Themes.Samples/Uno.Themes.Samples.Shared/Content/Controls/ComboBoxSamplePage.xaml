@@ -14,7 +14,7 @@
 	<Page.Resources>
 		<x:String x:Key="Icon_Mail">F1 M 18 0 L 2 0 C 0.8999999761581421 0 0.009999990463256836 0.8999999761581421 0.009999990463256836 2 L 0 14 C 0 15.100000023841858 0.8999999761581421 16 2 16 L 18 16 C 19.100000023841858 16 20 15.100000023841858 20 14 L 20 2 C 20 0.8999999761581421 19.100000023841858 0 18 0 Z M 18 4 L 10 9 L 2 4 L 2 2 L 10 7 L 18 2 L 18 4 Z</x:String>
 	</Page.Resources>
-	
+
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
@@ -74,6 +74,7 @@
 							  ios:Margin="12"
 							  Padding="12">
 							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
@@ -154,6 +155,33 @@
 										<um:ControlExtensions.Icon>
 											<PathIcon Data="{StaticResource Icon_Mail}" />
 										</um:ControlExtensions.Icon>
+									</ComboBox>
+								</smtx:XamlDisplay>
+							</StackPanel>
+
+							<StackPanel Grid.Row="2"
+										Grid.ColumnSpan="2">
+
+								<!-- Label -->
+								<TextBlock Text="Normal with custom ItemTemplate"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Normal_CustomItemTemplate"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox ItemsSource="{Binding Data.TestDataSource, Mode=OneTime}"
+											  PlaceholderText="Placeholder"
+											  Style="{StaticResource MaterialComboBoxStyle}"
+											  VerticalAlignment="Center">
+										<ComboBox.ItemTemplate>
+											<DataTemplate>
+												<TextBlock>
+													<Run Text="{Binding Display}" />
+													<Run Text=":" />
+													<Run Text="{Binding Value}" />
+												</TextBlock>
+											</DataTemplate>
+										</ComboBox.ItemTemplate>
 									</ComboBox>
 								</smtx:XamlDisplay>
 							</StackPanel>

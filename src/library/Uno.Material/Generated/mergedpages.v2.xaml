@@ -1424,7 +1424,7 @@
     <!-- End: Body Large Typo -->
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    <Setter Property="Padding" Value="0" />
+    <Setter Property="Padding" Value="16,0" />
     <Setter Property="Height" Value="50" />
     <Setter Property="Template">
       <Setter.Value>
@@ -1508,15 +1508,7 @@
             <!--  Pressed Overlay  -->
             <Grid x:Name="PressedOverlay" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource MaterialComboBoxItemSelectedBackgroundThemeBrush}" IsHitTestVisible="False" Opacity="0" />
             <!--  ContentPresenter  -->
-            <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}">
-              <ContentPresenter.ContentTemplate>
-                <DataTemplate>
-                  <Grid>
-                    <TextBlock Margin="16,0,0,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Style="{StaticResource MaterialLabelLarge}" Text="{Binding}" />
-                  </Grid>
-                </DataTemplate>
-              </ContentPresenter.ContentTemplate>
-            </ContentPresenter>
+            <ContentPresenter x:Name="ContentPresenter" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -1615,7 +1607,7 @@
               <!--  Leading Icon  -->
               <ContentPresenter x:Name="IconPresenter" Width="20" Margin="2,0,18,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource MaterialComboBoxLeadingIconForegroundThemeBrush}" Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}" Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
               <!--  ContentPresenter  -->
-              <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" VerticalAlignment="Center" RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
+              <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" MaxLines="1" VerticalAlignment="Center" RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
               <!--  PlaceholderElement  -->
               <TextBlock x:Name="PlaceholderElement" Grid.Column="1" VerticalAlignment="Center" Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}" IsHitTestVisible="False" MaxLines="1" RenderTransformOrigin="0,0.5" Style="{StaticResource BodyLarge}" Text="{TemplateBinding PlaceholderText}">
                 <TextBlock.RenderTransform>

@@ -114,7 +114,7 @@
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="Padding"
-				Value="0" />
+				Value="16,0" />
 		<Setter Property="Height"
 				Value="50" />
 
@@ -239,20 +239,12 @@
 
 						<!--  ContentPresenter  -->
 						<ContentPresenter x:Name="ContentPresenter"
+										  Padding="{TemplateBinding Padding}"
 										  Content="{TemplateBinding Content}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}">
-							<ContentPresenter.ContentTemplate>
-								<DataTemplate>
-									<Grid>
-										<TextBlock Margin="16,0,0,0"
-												   VerticalAlignment="Center"
-												   Foreground="{TemplateBinding Foreground}"
-												   Style="{StaticResource MaterialLabelLarge}"
-												   Text="{Binding}" />
-									</Grid>
-								</DataTemplate>
-							</ContentPresenter.ContentTemplate>
-						</ContentPresenter>
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -438,6 +430,7 @@
 							<!--  ContentPresenter  -->
 							<ContentPresenter x:Name="ContentPresenter"
 											  Grid.Column="1"
+											  MaxLines="1"
 											  VerticalAlignment="Center"
 											  RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
 
