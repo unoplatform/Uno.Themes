@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 		<OutputType Condition="'$(Configuration)'=='Reelase'">WinExe</OutputType>
@@ -39,6 +39,8 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="SkiaSharp.Skottie" Version="2.88.1-preview.79" />
+		<PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.79" />
 		<PackageReference Include="Uno.ShowMeTheXAML" Version="1.0.59" />
 		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild" Version="1.0.59" />
 		<PackageReference Include="Uno.UI.Skia.Gtk" Version="4.5.0-dev.645" />
