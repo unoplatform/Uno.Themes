@@ -15,18 +15,15 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-
 		<!-- We set CompactModeThresholdWidth to a very high value so that it never happens. We don't want to use the compact mode. -->
 		<muxc:NavigationView Grid.Row="2"
 							 x:Name="NavigationViewControl"
 							 OpenPaneLength="260"
 							 IsSettingsVisible="False"
-							 IsPaneOpen="True"
-							 IsPaneVisible="True"
-							 IsPaneToggleButtonVisible="False"
+							 IsPaneToggleButtonVisible="True"
 							 IsBackButtonVisible="Collapsed"
-							 SizeChanged="NavigationViewControl_SizeChanged"
-							 PaneDisplayMode="LeftMinimal"
+							 DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
+							 PaneDisplayMode="Auto"
 							 IsBackEnabled="False"
 							 IsTabStop="False"
 							 Style="{StaticResource MaterialNavigationViewStyle}">
@@ -56,12 +53,5 @@
 			   Grid.RowSpan="3"
 			   Visibility="Collapsed"
 			   xamarin:Style="{StaticResource NativeDefaultFrame}" />
-
-		<!-- Custom pane toggle button -->
-		<Button Grid.Row="2"
-				x:Name="NavViewToggleButton"
-				Click="NavViewToggleButton_Click"
-				HorizontalAlignment="Left"
-				Style="{StaticResource PaneToggleButtonStyle}" />
 	</Grid>
 </UserControl>

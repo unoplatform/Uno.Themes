@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using Uno.Themes.Samples.Helpers;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using MUXC = Microsoft.UI.Xaml.Controls;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -110,10 +112,6 @@ namespace Uno.Themes.Samples
 				? Visibility.Visible
 				: Visibility.Collapsed;
 
-			NavViewToggleButton.Visibility = isInsideNestedSample
-				? Visibility.Collapsed
-				: Visibility.Visible;
-
 			// toggle built-in back button for wasm (from browser) and uwp (on title bar)
 			SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = isInsideNestedSample
 				? AppViewBackButtonVisibility.Visible
@@ -157,32 +155,11 @@ namespace Uno.Themes.Samples
 			return true;
 		}
 
-		private void NavViewToggleButton_Click(object sender, RoutedEventArgs e)
+		private void NavigationViewControl_DisplayModeChanged(MUXC.NavigationView sender, MUXC.NavigationViewDisplayModeChangedEventArgs e)
 		{
-			if (NavigationViewControl.PaneDisplayMode == MUXC.NavigationViewPaneDisplayMode.LeftMinimal)
+			if (e.DisplayMode == MUXC.NavigationViewDisplayMode.Expanded)
 			{
-				NavigationViewControl.IsPaneOpen = !NavigationViewControl.IsPaneOpen;
-			}
-			else if (NavigationViewControl.PaneDisplayMode == MUXC.NavigationViewPaneDisplayMode.Left)
-			{
-				NavigationViewControl.IsPaneVisible = !NavigationViewControl.IsPaneVisible;
 				NavigationViewControl.IsPaneOpen = NavigationViewControl.IsPaneVisible;
-			}
-		}
-
-		private void NavigationViewControl_SizeChanged(object sender, SizeChangedEventArgs e)
-		{
-			// This could be done using VisualState with Adaptive triggers, but an issue prevents this currently - https://github.com/unoplatform/uno/issues/5168
-			var desktopWidth = (double)Application.Current.Resources["DesktopAdaptiveThresholdWidth"];
-			if (e.NewSize.Width >= desktopWidth && NavigationViewControl.PaneDisplayMode != MUXC.NavigationViewPaneDisplayMode.Left)
-			{
-				NavigationViewControl.PaneDisplayMode = MUXC.NavigationViewPaneDisplayMode.Left;
-				NavigationViewControl.IsPaneOpen = true;
-			}
-			else if (e.NewSize.Width < desktopWidth && NavigationViewControl.PaneDisplayMode != MUXC.NavigationViewPaneDisplayMode.LeftMinimal)
-			{
-				NavigationViewControl.IsPaneVisible = true;
-				NavigationViewControl.PaneDisplayMode = MUXC.NavigationViewPaneDisplayMode.LeftMinimal;
 			}
 		}
 	}
