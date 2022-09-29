@@ -23,19 +23,21 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!--  Toggle On  -->
+	<Thickness x:Key="MaterialToggleSwitchHeaderMargin">0,0,12,0</Thickness>
+
+	<!-- Toggle On -->
 	<StaticResource x:Key="MaterialToggleSwitchOnButtonBrush"
 					ResourceKey="PrimaryBrush" />
 	<StaticResource x:Key="MaterialToggleSwitchOnBackgroundBrush"
 					ResourceKey="PrimaryVariantLightBrush" />
 
-	<!--  Toggle Off  -->
+	<!-- Toggle Off -->
 	<StaticResource x:Key="MaterialToggleSwitchOffButtonBrush"
 					ResourceKey="OnPrimaryBrush" />
 	<StaticResource x:Key="MaterialToggleSwitchOffBackgroundBrush"
 					ResourceKey="OnSurfaceLowBrush" />
 
-	<!--  Toggle On Disabled  -->
+	<!-- Toggle On Disabled -->
 	<StaticResource x:Key="MaterialToggleSwitchOnLowButtonBrush"
 					ResourceKey="OnSurfaceSelectedBrush" />
 	<StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush"
@@ -61,7 +63,7 @@
 		<Setter Property="Background"
 				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 
-		<!--Start: Body Small Typo-->
+		<!-- Start: Body Small Typo -->
 		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialToggleSwitchFontFamily}" />
 		<Setter Property="FontWeight"
@@ -70,16 +72,16 @@
 				Value="{StaticResource MaterialToggleSwitchFontSize}" />
 		<Setter Property="CharacterSpacing"
 				Value="{StaticResource MaterialToggleSwitchCharacterSpacing}" />
-		<!--End: Body Small Typo-->
+		<!-- End: Body Small Typo -->
 
-		<!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
+		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
 		<Setter Property="MinWidth"
 				Value="54" />
 
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
+				Value="Stretch" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="ManipulationMode"
@@ -362,10 +364,9 @@
 								</VisualState>
 							</VisualStateGroup>
 
-							<!-- No notion of OnContent and OffContent for Material -->
 							<VisualStateGroup x:Name="ContentStates">
+								<!-- No notion of OnContent and OffContent for Material -->
 								<VisualState x:Name="OffContent" />
-
 								<VisualState x:Name="OnContent" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
@@ -376,17 +377,22 @@
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 
-						<TextBlock Foreground="{StaticResource OnSurfaceMediumBrush}"
-								   Style="{StaticResource BodySmall}"
-								   Text="{TemplateBinding Header}"
-								   Margin="0,0,12,0"
-								   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" />
+						<ContentPresenter Grid.Column="0"
+										  x:Name="HeaderContentPresenter"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  Foreground="{StaticResource OnSurfaceMediumBrush}"
+										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
+										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
+										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
 						<Grid Grid.ColumnSpan="3"
 							  Control.IsTemplateFocusTarget="True" />
 
-						<!--  Marker element used to compute draggable zone  -->
+						<!-- Marker element used to compute draggable zone -->
 						<Rectangle Grid.Column="2"
 								   x:Name="SwitchKnobBounds" />
 
@@ -486,12 +492,14 @@
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 
-		<!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
+		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
 		<Setter Property="MinWidth"
-				Value="70" />
+				Value="0" />
 		<Setter Property="Padding"
 				Value="9,0,10,0" />
 
@@ -506,21 +514,22 @@
 								BorderBrush="{TemplateBinding BorderBrush}"
 								BorderThickness="{TemplateBinding BorderThickness}">
 
-						<!--  The margin here is used to properly align the content with the UI switch  -->
-						<ContentPresenter x:Name="ContentPresenter"
-										  Margin="0,8,0,5"
-										  VerticalAlignment="Stretch"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+						<!-- The visibility is managed by the control impl via 'HeaderContentPresenter' marker -->
+						<ContentPresenter x:Name="HeaderContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{StaticResource OnBackgroundBrush}"
-										  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" />
+										  Foreground="{StaticResource OnSurfaceMediumBrush}"
+										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
+										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
+										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
-						<!--  Do not add x:Name to BindableUiSwitch or else page will not load  -->
+						<!-- note: BindableUISwitch is a native control and does not support any attached properties nor common FrameworkElement/UIElement properties -->
 						<BindableUISwitch Background="{TemplateBinding Foreground}"
 										  Enabled="{TemplateBinding IsEnabled}"
-										  IsOn="{TemplateBinding IsOn,
-						                                         Mode=TwoWay}" />
+										  IsOn="{TemplateBinding IsOn, Mode=TwoWay}" />
 					</StackPanel>
 				</ControlTemplate>
 			</Setter.Value>
@@ -537,12 +546,14 @@
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Stretch" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
 		<Setter Property="MinHeight"
 				Value="25" />
 
-		<!--  microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style  -->
+		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
 		<Setter Property="MinWidth"
-				Value="70" />
+				Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -560,7 +571,6 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed" />
-
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="SwitchGrid.Visibility"
@@ -568,7 +578,6 @@
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
-
 							<VisualStateGroup x:Name="ToggleStates">
 								<VisualState x:Name="Dragging" />
 
@@ -596,60 +605,49 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="10" />
+							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 
-						<!--  The margin here is used to properly align the content with the UI switch  -->
-						<ContentPresenter x:Name="ContentPresenter"
-										  Grid.ColumnSpan="3"
-										  VerticalAlignment="Stretch"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+						<!-- The visibility is managed by the control impl via 'HeaderContentPresenter' marker -->
+						<ContentPresenter Grid.Row="0"
+										  x:Name="HeaderContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{StaticResource OnBackgroundBrush}" />
+										  Foreground="{StaticResource OnSurfaceMediumBrush}"
+										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
+										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
+										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
-						<!--  TODO: fix disabled on thumbtint, using MaterialToggleSwitchOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch  -->
-						<!--  Grid is used because we can not collapse the visibility of a BindableSwitchCompat  -->
-						<Grid x:Name="OnDisabledGrid"
-							  Grid.Row="1"
-							  Grid.Column="2">
+						<!-- TODO: fix disabled on thumbtint, using MaterialToggleSwitchOnLowButtonBrush -> OnPrimaryMedium shows a transparent opacity with android native toggleswitch -->
+						<!-- note: BindableSwitchCompat is a native control and does not support any attached properties nor common FrameworkElement/UIElement properties -->
+						<!-- Grid wrappers are used here to alter the Visibility by proxy -->
+						<Grid Grid.Column="1"
+							  x:Name="OnDisabledGrid">
 
-							<!--  Provides a disabled state for an on switch  -->
-							<BindableSwitchCompat Checked="{TemplateBinding IsOn,
-							                                                Mode=TwoWay}"
+							<!-- Provides a disabled state for an on switch -->
+							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
 												  ThumbTint="{ThemeResource MaterialPrimaryVariantLowThumbColorBrush}"
 												  TrackTint="{ThemeResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 						</Grid>
+						<Grid Grid.Column="1"
+							  x:Name="OffDisabledGrid">
 
-						<!--  Grid is used because we can not collapse the visibility of a BindableSwitchCompat  -->
-						<Grid x:Name="OffDisabledGrid"
-							  Grid.Row="1"
-							  Grid.Column="2">
-
-							<!--  Provides a disabled state for an off switch  -->
-							<BindableSwitchCompat Checked="{TemplateBinding IsOn,
-							                                                Mode=TwoWay}"
+							<!-- Provides a disabled state for an off switch -->
+							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
 												  ThumbTint="{StaticResource MaterialPrimaryVariantLowThumbColorBrush}"
 												  TrackTint="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 						</Grid>
-
-						<!--  Grid is used because we can not collapse the visibility of a BindableSwitchCompat  -->
-						<Grid x:Name="SwitchGrid"
-							  Grid.Row="1"
-							  Grid.Column="2">
+						<Grid Grid.Column="1"
+							  x:Name="SwitchGrid">
 							<BindableSwitchCompat x:Name="AndroidSwitch"
-												  Checked="{TemplateBinding IsOn,
-							                                                Mode=TwoWay}"
+												  Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}" />
 						</Grid>
 					</Grid>
