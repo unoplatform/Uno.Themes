@@ -61,5 +61,9 @@ Button|MaterialButtonIconStyle|MaterialIconButtonStyle|
 Button|MaterialContainedButtonStyle|MaterialFilledButtonStyle|
 ToggleButton|MaterialToggleButtonIconStyle|MaterialIconToggleButtonStyle|
 
+### Notable Package Changes
 
-
+Namespace|Previous Package|New Package|
+-|-|-
+ControlExtensions.Icon|Uno.Material.Extensions|Uno.Material|
+Ripple|Uno.Material.Controls|Uno.Material|
