@@ -10,7 +10,7 @@
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios">
 
-	<!-- Material/Cupertino ToggleSwitch styles for WASM are present in the Styles/ToggleSwitch.xaml file of the shared project as a workaround for https://github.com/unoplatform/uno/issues/5372-->
+	<!-- Material/Cupertino ToggleSwitch styles for WASM are present in the Styles/ToggleSwitch.xaml file of the shared project as a workaround for https://github.com/unoplatform/uno/issues/5372 -->
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
@@ -150,6 +150,26 @@
 										  IsEnabled="False"
 										  IsOn="True" />
 						</smtx:XamlDisplay>
+
+						<!-- Primary -->
+						<TextBlock Text="Others"
+								   Style="{StaticResource TitleSmall}"
+								   Margin="12,16,12,8" />
+						<StackPanel>
+							<ToggleSwitch Header="Minimal Height"
+										  Height="20"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+							<ToggleSwitch Header="Height=60"
+										  Height="60"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+
+							<ToggleSwitch Header="HorizontalAlignment=Stretch"
+										  HorizontalAlignment="Stretch"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+							<ToggleSwitch Header="HorizontalAlignment=Stretch"
+										  HorizontalAlignment="Stretch"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+						</StackPanel>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
@@ -161,7 +181,7 @@
 						<TextBlock Text="ToggleSwitch"
 								   Style="{StaticResource CupertinoTertiaryTitle}"
 								   Margin="12,16,12,20" />
-						
+
 						<!-- ToggleSwitch No Label -->
 						<smtx:XamlDisplay UniqueKey="Cupertino_ToggleSwitchSamplePage_NoLabel"
 										  Margin="12,0">
