@@ -188,4 +188,16 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+
+  <!-- This is a workaround for https://github.com/microsoft/microsoft-ui-xaml/issues/3554 -->
+  <Target Name="WorkaroundForIssue3554_1" BeforeTargets="_CopyOutOfDateSourceItemsToOutputDirectory" AfterTargets="GetCopyToOutputDirectoryItems">
+    <ItemGroup>
+      <_SourceItemsToCopyToOutputDirectory Remove="@(_SourceItemsToCopyToOutputDirectory)" Condition="'%(_SourceItemsToCopyToOutputDirectory.TargetPath)'=='Microsoft.UI.Xaml\Assets\NoiseAsset_256X256_PNG.png'" />
+    </ItemGroup>
+  </Target>
+  <Target Name="WorkaroundForIssue3554_2" BeforeTargets="_GenerateAppxPackageRecipeFile">
+    <ItemGroup>
+      <AppxPackagePayload Remove="@(AppxPackagePayload)" Condition="'%(AppxPackagePayload.TargetPath)'=='Microsoft.UI.Xaml\Assets\NoiseAsset_256X256_PNG.png'" />
+    </ItemGroup>
+  </Target>
 </Project>
