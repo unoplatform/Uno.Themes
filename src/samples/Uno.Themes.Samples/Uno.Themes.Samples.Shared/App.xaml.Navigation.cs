@@ -132,7 +132,6 @@ namespace Uno.Themes.Samples
 					{
 						Content = category.Key.GetDescription() ?? category.Key.ToString(),
 						SelectsOnInvoked = false,
-						Style = (Style)Resources[$"T{tier++}NavigationViewItemStyle"]
 					}.Apply(NavViewItemVisualStateFix);
 					AutomationProperties.SetAutomationId(parentItem, "Section_" + parentItem.Content);
 
@@ -145,7 +144,6 @@ namespace Uno.Themes.Samples
 					{
 						Content = sample.Title,
 						DataContext = sample,
-						Style = (Style)Resources[$"T{tier}NavigationViewItemStyle"]
 					}.Apply(NavViewItemVisualStateFix);
 					AutomationProperties.SetAutomationId(item, "Section_" + item.Content);
 

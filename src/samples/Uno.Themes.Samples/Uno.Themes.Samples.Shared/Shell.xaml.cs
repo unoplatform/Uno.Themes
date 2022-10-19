@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Uno.Themes.Samples.Helpers;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -14,10 +15,17 @@ namespace Uno.Themes.Samples
 {
 	public sealed partial class Shell : UserControl
 	{
+		public static Shell GetForCurrentView() => (Shell)Windows.UI.Xaml.Window.Current.Content;
+
+		public MUXC.NavigationView NavigationView => NavigationViewControl;
+
 		public Shell()
 		{
 			this.InitializeComponent();
 
+#if DEBUG
+			this.DebuggingToolPanel.Visibility = Visibility.Visible;
+#endif
 			InitializeSafeArea();
 			this.Loaded += OnLoaded;
 
@@ -25,13 +33,55 @@ namespace Uno.Themes.Samples
 			SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) => e.Handled = BackNavigateFromNestedSample();
 		}
 
-		public static Shell GetForCurrentView() => (Shell)Windows.UI.Xaml.Window.Current.Content;
-
-		public MUXC.NavigationView NavigationView => NavigationViewControl;
-
 		private void OnLoaded(object sender, RoutedEventArgs e)
 		{
 			SetDarkLightToggleInitialState();
+			//MonitorVisualStatesLive(NavigationView);
+		}
+
+		private void MonitorVisualStatesLive(Control control)
+		{
+			control.MonitorVisualStates(includeInitialStates: true, onStatesChanged: summary =>
+			{
+				DebugVisualStatesText.Text = summary;
+				DebugVisualStatesText.Visibility = Visibility.Visible;
+
+#if WINDOWS_UWP
+				var data = new DataPackage();
+				data.SetText(summary);
+				Clipboard.SetContent(data);
+#endif
+			});
+		}
+
+		private void DebugVisualTree(object sender, RoutedEventArgs e)
+		{
+			var tree = this.TreeGraph();
+			
+#if WINDOWS_UWP
+			var data = new DataPackage();
+			data.SetText(string.Join("\n===\n", "visual-tree", tree));
+			Clipboard.SetContent(data);
+#endif
+
+			// uwp: the visual tree should be copied to clipboard
+			// uno: set a breakpoint on the next line and inspect `tree`
+		}
+
+		/// <summary>
+		/// This method handles the top padding for phones like iPhone X.
+		/// </summary>
+		private void InitializeSafeArea()
+		{
+			var full = Windows.UI.Xaml.Window.Current.Bounds;
+			var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+
+			var topPadding = Math.Abs(full.Top - bounds.Top);
+
+			if (topPadding > 0)
+			{
+				TopPaddingRow.Height = new GridLength(topPadding);
+			}
 		}
 
 		private void SetDarkLightToggleInitialState()
@@ -50,22 +100,6 @@ namespace Uno.Themes.Samples
 				case ElementTheme.Dark:
 					DarkLightModeToggle.IsChecked = true;
 					break;
-			}
-		}
-
-		/// <summary>
-		/// This method handles the top padding for phones like iPhone X.
-		/// </summary>
-		private void InitializeSafeArea()
-		{
-			var full = Windows.UI.Xaml.Window.Current.Bounds;
-			var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-
-			var topPadding = Math.Abs(full.Top - bounds.Top);
-
-			if (topPadding > 0)
-			{
-				TopPaddingRow.Height = new GridLength(topPadding);
 			}
 		}
 
