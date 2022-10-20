@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MUXC = Microsoft.UI.Xaml.Controls;
@@ -77,7 +78,6 @@ namespace Uno.Themes.Samples
 			}
 		}
 
-
 		private Shell BuildShell()
 		{
 			_shell = new Shell();
@@ -121,49 +121,70 @@ namespace Uno.Themes.Samples
 				.ThenBy(x => x.Title)
 				.GroupBy(x => x.Category);
 
+			/* the menu items are grouped by their [SamplePage].Category, some items can be "ungrouped" (category=None):
+			 *	- {any item where category=none}...
+			 *	- Category xyz
+			 *		- {any item with category=xyz}... */
+
 			foreach (var category in categories.OrderBy(x => x.Key))
 			{
-				var tier = 1;
-
+				// create parent menu item for this category
 				var parentItem = default(MUXC.NavigationViewItem);
 				if (category.Key != SampleCategory.None)
 				{
 					parentItem = new MUXC.NavigationViewItem
 					{
 						Content = category.Key.GetDescription() ?? category.Key.ToString(),
+						Icon = CreateIconElement(GetCategoryIconSource()),
 						SelectsOnInvoked = false,
-					}.Apply(NavViewItemVisualStateFix);
+					};
 					AutomationProperties.SetAutomationId(parentItem, "Section_" + parentItem.Content);
 
 					nv.MenuItems.Add(parentItem);
+
+					object GetCategoryIconSource()
+					{
+						switch (category.Key)
+						{
+							case SampleCategory.Styles: return Icons.Styles.CategoryHeader;
+							case SampleCategory.Controls: return Icons.Controls.CategoryHeader;
+							case SampleCategory.Helpers: return Icons.Helpers.CategoryHeader;
+
+							default: return Symbol.Placeholder;
+						}
+					}
 				}
 
+				// add items to the parent menu item or directly to the nav-view
 				foreach (var sample in category)
 				{
 					var item = new MUXC.NavigationViewItem
 					{
 						Content = sample.Title,
+						Icon = CreateIconElement(sample.IconSource),
 						DataContext = sample,
-					}.Apply(NavViewItemVisualStateFix);
+					};
 					AutomationProperties.SetAutomationId(item, "Section_" + item.Content);
 
 					(parentItem?.MenuItems ?? nv.MenuItems).Add(item);
 				}
 			}
 
-			void NavViewItemVisualStateFix(MUXC.NavigationViewItem nvi)
+			IconElement CreateIconElement(object source)
 			{
-				// gallery#107: on uwp and uno, deselecting a NVI by selecting another NVI will leave the former in the "Selected" state
-				// to workaround this, we force reset the visual state when IsSelected becomes false
-				nvi.RegisterPropertyChangedCallback(MUXC.NavigationViewItemBase.IsSelectedProperty, (s, e) =>
+				if (source is string path)
 				{
-					if (!nvi.IsSelected)
+					return new PathIcon()
 					{
-						// depending on the DisplayMode, a NVIP may or may not be used.
-						var nvip = VisualTreeHelperEx.GetFirstDescendant<MUXCP.NavigationViewItemPresenter>(nvi, x => x.Name == "NavigationViewItemPresenter");
-						VisualStateManager.GoToState((Control)nvip ?? nvi, "Normal", true);
-					}
-				});
+						Data = (Geometry)XamlBindingHelper.ConvertValue(typeof(Geometry), path)
+					};
+				}
+				if (source is Symbol symbol && symbol != default)
+				{
+					return new SymbolIcon(symbol);
+				}
+
+				return new SymbolIcon(Symbol.Placeholder);
 			}
 		}
 	}

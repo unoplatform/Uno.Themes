@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Windows.UI.Xaml.Controls;
 
 namespace Uno.Themes.Samples.Entities
 {
@@ -18,6 +19,14 @@ namespace Uno.Themes.Samples.Entities
 		/// Sample category with null reserved for Home/Overview.
 		/// </summary>
 		public SampleCategory Category { get; }
+
+		/// <remarks>
+		/// Symbol will take precedence over Path if specified.
+		/// Attribute property can only be primitive value, nullable not included. So 'default' is used in lieu.
+		/// </remarks>
+		public Symbol IconSymbol { get; set; } = default;
+
+		public string IconPath { get; set; }
 
 		public string Title { get; }
 

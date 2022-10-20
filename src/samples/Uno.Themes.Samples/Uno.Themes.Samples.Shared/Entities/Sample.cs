@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Uno.Extensions;
 using Uno.Logging;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
 namespace Uno.Themes.Samples.Entities
@@ -13,6 +14,7 @@ namespace Uno.Themes.Samples.Entities
 		public Sample(SamplePageAttribute attribute, Type viewType)
 		{
 			Category = attribute.Category;
+			IconSource = attribute.IconSymbol == default ? (object)attribute.IconPath : (object)attribute.IconSymbol;
 			Title = attribute.Title;
 			Description = attribute.Description;
 			DocumentationLink = attribute.DocumentationLink;
@@ -38,7 +40,9 @@ namespace Uno.Themes.Samples.Entities
 			}
 		}
 
-		public SampleCategory Category { get; set; }
+		public SampleCategory Category { get; }
+
+		public object IconSource { get; }
 
 		public string Title { get; }
 
