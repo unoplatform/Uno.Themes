@@ -107,9 +107,8 @@ namespace Uno.Material
 			Add("MaterialListViewItemStyle", isImplicit: true);
 			Add("MaterialListViewStyle", isImplicit: true);
 			Add("MaterialMenuFlyoutPresenterStyle", isImplicit: true);
-			Add("MaterialNavigationViewItemStyle", isImplicit: true);
-			Add("MaterialPaddedNavigationViewStyle");
 			Add("MaterialNavigationViewStyle", isImplicit: true);
+			Add("MaterialNavigationViewItemStyle", isImplicit: true);
 			Add("MaterialOutlinedButtonStyle");
 			Add("MaterialOutlinedPasswordBoxStyle");
 			Add("MaterialOutlinedTextBoxStyle");

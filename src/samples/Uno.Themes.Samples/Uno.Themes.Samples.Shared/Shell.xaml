@@ -7,45 +7,33 @@
 			 mc:Ignorable="xamarin">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
 		<Grid.RowDefinitions>
-			<RowDefinition x:Name="TopPaddingRow"
-						   Height="0" />
-			<RowDefinition Height="auto" />
+			<!-- 0: (reserved for visible padding), 1: nav-view -->
+			<!-- 0-1: fullscreen nested frame -->
+			<RowDefinition x:Name="TopPaddingRow" Height="0" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<!-- We set CompactModeThresholdWidth to a very high value so that it never happens. We don't want to use the compact mode. -->
-		<muxc:NavigationView Grid.Row="2"
+		<muxc:NavigationView Grid.Row="1"
 							 x:Name="NavigationViewControl"
-							 OpenPaneLength="260"
-							 IsSettingsVisible="False"
-							 IsPaneToggleButtonVisible="True"
-							 IsBackButtonVisible="Collapsed"
-							 DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
-							 PaneDisplayMode="Auto"
 							 IsBackEnabled="False"
+							 IsBackButtonVisible="Collapsed"
+							 IsPaneToggleButtonVisible="True"
+							 PaneDisplayMode="Auto"
+							 DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
+							 IsSettingsVisible="False"
 							 IsTabStop="False"
 							 Style="{StaticResource MaterialNavigationViewStyle}">
-			<muxc:NavigationView.PaneHeader>
-				<!-- Left padding for overlay toggle button -->
-				<Grid Padding="24,0,0,0">
-					<!-- Image -->
-					<Image Source="ms-appx:///Assets/UnoLogo.png"
-						   Height="101"
-						   Width="75"
-						   HorizontalAlignment="Left"
-						   Margin="16,8,0,12" />
-
-					<ToggleButton x:Name="DarkLightModeToggle"
-								  Content="Light and Dark"
-								  Style="{StaticResource DarkLightToggleTheme}"
-								  Click="ToggleButton_Click"
-								  Margin="0,0,20,16"
-								  HorizontalAlignment="Right"
-								  VerticalAlignment="Bottom" />
-				</Grid>
-			</muxc:NavigationView.PaneHeader>
+			<muxc:NavigationView.PaneTitle>Uno.Themes SampleApp</muxc:NavigationView.PaneTitle>
+			<muxc:NavigationView.PaneCustomContent>
+				<ToggleButton x:Name="DarkLightModeToggle"
+								Content="Light and Dark"
+								Style="{StaticResource DarkLightToggleTheme}"
+								Click="ToggleButton_Click"
+								Margin="0,0,20,16"
+								HorizontalAlignment="Right"
+								VerticalAlignment="Bottom" />
+			</muxc:NavigationView.PaneCustomContent>
 		</muxc:NavigationView>
 
 		<!-- Nested frame for samples that needs to be fullscreen -->
@@ -53,5 +41,16 @@
 			   Grid.RowSpan="3"
 			   Visibility="Collapsed"
 			   xamarin:Style="{StaticResource NativeDefaultFrame}" />
+
+		<StackPanel Grid.Row="2"
+					x:Name="DebuggingToolPanel"
+					Background="Pink"
+					Padding="8,8,8,0"
+					Visibility="Collapsed"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Bottom">
+			<TextBlock x:Name="DebugVisualStatesText" Visibility="Collapsed" />
+			<Button Content="DebugTV" Click="DebugVisualTree" CornerRadius="0" />
+		</StackPanel>
 	</Grid>
 </UserControl>

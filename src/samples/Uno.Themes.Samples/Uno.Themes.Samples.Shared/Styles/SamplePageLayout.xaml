@@ -36,7 +36,6 @@
 
 		<Setter Property="HeaderTemplate"
 				Value="{StaticResource DefaultSamplePageLayoutHeaderTemplate}" />
-
 		<Setter Property="BorderBrush"
 				Value="{StaticResource DividerBrush}" />
 
@@ -61,32 +60,26 @@
 
 						<!-- Top bar with Uno logo (visible on mobile) -->
 						<Grid x:Name="PART_MobileTopBar"
-							  Height="48"
+							  Height="56"
 							  Visibility="Collapsed">
 							<Image Source="ms-appx:///Assets/UnoLogo.png"
 								   Stretch="Uniform"
 								   HorizontalAlignment="Center"
 								   VerticalAlignment="Center"
-								   Height="32" />
+								   Height="24" />
 						</Grid>
 
+						<!-- Content -->
 						<ScrollViewer x:Name="PART_ScrollViewer"
 									  Grid.Row="1">
 							<Grid Margin="0,0,0,24">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="*" />
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
-
-								<!-- Content -->
 								<StackPanel x:Name="ScrollingContent"
 											Grid.Row="0"
-											Margin="48,0">
+											Margin="16,0">
 
 									<!-- Title (visible on mobile) -->
 									<TextBlock x:Name="ScrollingTitle"
-											   Margin="0,32,0,0"
+											   Margin="0,0,0,0"
 											   Text="{TemplateBinding Title}"
 											   MaxLines="1"
 											   TextTrimming="CharacterEllipsis"
@@ -173,7 +166,7 @@
 															  ContentTemplate="{TemplateBinding MaterialTemplate}"
 															  VerticalAlignment="Stretch"
 															  HorizontalAlignment="Stretch"
-															  Visibility="{Binding SelectedItem, ElementName=MaterialVersionComboBox, Converter={StaticResource SelectedItemToVisible}, ConverterParameter='M2', Mode=OneWay}"/>
+															  Visibility="{Binding SelectedItem, ElementName=MaterialVersionComboBox, Converter={StaticResource SelectedItemToVisible}, ConverterParameter='M2', Mode=OneWay}" />
 
 											<!-- Material M3 Content -->
 											<ContentPresenter x:Name="M3MaterialContentPresenter"
@@ -200,11 +193,11 @@
 												   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
 												   Opacity="0.8"
 												   Margin="0,16">
-										<Run Text="For more information refer to the " />
+											<Run Text="For more information refer to the " />
 
-										<Hyperlink NavigateUri="{Binding DocumentationLink}">
-											<Run Text="official documentation." />
-										</Hyperlink>
+											<Hyperlink NavigateUri="{Binding DocumentationLink}">
+												<Run Text="official documentation." />
+											</Hyperlink>
 										</TextBlock>
 									</StackPanel>
 								</StackPanel>
@@ -222,14 +215,14 @@
 
 						<!-- This is the sticky tabs that appear when we scroll enough. -->
 						<StackPanel x:Name="PART_StickyTabs"
+									Grid.Row="1"
 									Background="{ThemeResource MaterialBackgroundBrush}"
-									Margin="48,0"
-									Orientation="Horizontal"
 									BorderBrush="{TemplateBinding BorderBrush}"
 									BorderThickness="0,0,0,1"
-									Grid.Row="1"
-									VerticalAlignment="Top"
+									Orientation="Horizontal"
+									Margin="16,0"
 									HorizontalAlignment="Stretch"
+									VerticalAlignment="Top"
 									Visibility="Collapsed">
 
 							<!-- Material RadioButton -->
@@ -285,8 +278,6 @@
 									<VisualState.StateTriggers>
 										<AdaptiveTrigger MinWindowWidth="{StaticResource DesktopAdaptiveThresholdWidth}" />
 									</VisualState.StateTriggers>
-									<VisualState.Setters>
-									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Mobile">

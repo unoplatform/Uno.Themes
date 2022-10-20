@@ -181,7 +181,7 @@ namespace Uno.Themes.Samples
 		{
 #if NETFX_CORE
 			// On UWP we can count on finding a ScrollContentPresenter. 
-			var scp = VisualTreeHelperEx.GetFirstDescendant<ScrollContentPresenter>(_scrollViewer);
+			var scp = VisualTreeHelperEx.FindFirstDescendant<ScrollContentPresenter>(_scrollViewer);
 			var content = scp?.Content as FrameworkElement;
 			var transform = _scrollingTabs.TransformToVisual(content);
 			return transform.TransformPoint(new Point(0, 0)).Y - _scrollViewer.VerticalOffset;
@@ -207,7 +207,7 @@ namespace Uno.Themes.Samples
 		{
 			var presenter = (ContentPresenter)GetTemplateChild($"{mode}ContentPresenter");
 
-			return VisualTreeHelperEx.GetFirstDescendant<T>(presenter, x => x.Name == name);
+			return VisualTreeHelperEx.FindFirstDescendant<T>(presenter, x => x.Name == name);
 		}
 
 		private class LayoutModeMapping

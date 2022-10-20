@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uno.Themes.Samples.Content
 {
-	[SamplePage(SampleCategory.None, "Overview")]
+	[SamplePage(SampleCategory.None, "Overview", IconPath = Icons.Overview)]
 	public sealed partial class OverviewPage : Page
     {
         public OverviewPage()
