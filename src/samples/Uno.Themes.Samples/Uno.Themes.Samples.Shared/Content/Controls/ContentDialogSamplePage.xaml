@@ -8,21 +8,50 @@
 	  mc:Ignorable="d"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+	<Page.Resources>
+		<Style x:Key="CustomSelectableItemStyle" TargetType="ListViewItem">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ListViewItem">
+						<Grid ColumnSpacing="16" Margin="0,10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<Ellipse Grid.Column="0"
+									 Fill="{StaticResource PrimaryBrush}"
+									 Width="40"
+									 Height="40" />
+							<TextBlock Grid.Column="0"
+									   Text="A"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   Style="{StaticResource MaterialTitleLarge}" />
+							<ContentPresenter Grid.Column="1"
+											  Content="{TemplateBinding Content}"
+											  VerticalAlignment="Center" />
+							<CheckBox Grid.Column="2" IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Page.Resources>
+
 	<sample:SamplePageLayout>
 		<sample:SamplePageLayout.M3MaterialTemplate>
 			<DataTemplate>
-				<ScrollViewer HorizontalScrollMode="Disabled"
-							  HorizontalScrollBarVisibility="Disabled">
+				<ScrollViewer HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
 					<StackPanel Spacing="16">
-						<Button Content="Alert"
+						<Button Content="Basic Content Dialog"
 								Click="ShowContentDialog"
-								Tag="Alert" />
-						<Button Content="Simple"
+								Tag="BuildBasicContentDialog" />
+						<Button Content="Rich Content Dialog"
 								Click="ShowContentDialog"
-								Tag="Simple" />
-						<Button Content="Confirmation"
-								Click="ShowContentDialog"
-								Tag="Confirmation" />
+								Tag="BuildRichContentDialog" />
 					</StackPanel>
 				</ScrollViewer>
 			</DataTemplate>
