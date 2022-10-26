@@ -150,7 +150,7 @@ namespace Uno.Themes.Samples
 							case SampleCategory.Controls: return Icons.Controls.CategoryHeader;
 							case SampleCategory.Helpers: return Icons.Helpers.CategoryHeader;
 
-							default: return Symbol.Placeholder;
+							default: return Icons.Shared.Placeholder;
 						}
 					}
 				}
@@ -184,7 +184,10 @@ namespace Uno.Themes.Samples
 					return new SymbolIcon(symbol);
 				}
 
-				return new SymbolIcon(Symbol.Placeholder);
+				return new PathIcon()
+				{
+					Data = (Geometry)XamlBindingHelper.ConvertValue(typeof(Geometry), Icons.Shared.Placeholder)
+				};
 			}
 		}
 	}
