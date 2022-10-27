@@ -3,7 +3,7 @@ Starting with version 2.0.0 of the [Uno.Material](https://www.nuget.org/packages
 Along with the new Material Design 3 styles, our Uno.Material NuGet packages will continue to support the previous Material Design 2 styles. In order to achieve this backward compatibility, we have had to make some changes to the way Uno.Material is initialized within your `App.xaml`. 
 
 > [!NOTE]
-In order to avoid any confusion going forward in this article, we will be referring to the new collection of Material Design 3 styles as the "v2" styles and the previous collection of Material Design 2 styles will be referred to as the "v1" styles.
+> In order to avoid any confusion going forward in this article, we will be referring to the new collection of Material Design 3 styles as the "v2" styles and the previous collection of Material Design 2 styles will be referred to as the "v1" styles.
 
  There are two available paths once you have updated to the new Uno.Material v2 package: 
 
