@@ -53,18 +53,21 @@ jobs:
       UWP:
         ApplicationPlatform: UWP_x64
         ArtifactName: UWP
+        UseWinUI: false
         DisableNet6MobileTargets: true
       Android:
         ApplicationPlatform: Android
         ArtifactName: Android
+        UseWinUI: false
         DisableNet6MobileTargets: true
-      Packages:
-        ApplicationPlatform: Packages
-        ArtifactName: Packages
+      Packages_UWP:
+        ApplicationPlatform: Packages_UWP
+        ArtifactName: Packages_UWP
+        UseWinUI: false
         GeneratePackageOnBuild: true
       Packages_WinUI:
-        ApplicationPlatform: Packages
-        ArtifactName: Packages
+        ApplicationPlatform: Packages_WinUI
+        ArtifactName: Packages_WinUI
         UseWinUI: true
         GeneratePackageOnBuild: true
 
@@ -90,10 +93,12 @@ jobs:
         ApplicationPlatform: iPhone
         ArtifactName: iOS
         DisableNet6MobileTargets: true
+        UseWinUI: false
       macOS:
         ApplicationPlatform: macOS
         ArtifactName: macOS
         DisableNet6MobileTargets: true
+        UseWinUI: false
   pool:
     vmImage: macOS-11
     
@@ -131,6 +136,7 @@ jobs:
   variables:
     ArtifactName: WASM
     SkipUnknownFrameworks: True
+    UseWinUI: false
 
   steps:
   - template: build/gitversion.yml
