@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Uno.Material.Helpers;
 
 #if WinUI
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 #else
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 #endif
 
 namespace Uno.Material
@@ -28,13 +33,23 @@ namespace Uno.Material
 			var aliasedResources = new ResourceDictionary();
 			var implicitResources = new ResourceDictionary();
 
-			foreach (var (resKey, sharedKey, isDefaultStyle) in GetStyleInfos())
+			foreach (var (resKey, sharedKey, implicitTargetType) in GetStyleInfos())
 			{
-				var style = GetStyle(resKey);
-
-				if (isDefaultStyle)
+				var style = DictionaryHelper.CreateLazyResource(() =>
 				{
-					implicitResources.Add(style.TargetType, style);
+					var s = GetStyle(resKey);
+#if DEBUG
+					if(implicitTargetType != null && s.TargetType != implicitTargetType)
+					{
+						throw new InvalidOperationException($"The target type for {resKey} does not match (Expected {implicitTargetType}, got {s.TargetType})");
+					}
+#endif
+					return s;
+				});
+
+				if (implicitTargetType != null)
+				{
+					implicitResources.Add(implicitTargetType, style);
 				}
 
 				aliasedResources.Add(sharedKey, style);
@@ -65,38 +80,38 @@ namespace Uno.Material
 			return style;
 		}
 
-		private IEnumerable<(string ResourceKey, string SharedKey, bool IsDefaultStyle)> GetStyleInfos()
+		private IEnumerable<(string ResourceKey, string SharedKey, Type ImplicitTargetType)> GetStyleInfos()
 		{
-			var result = new List<(string ResourceKey, string SharedKey, bool IsDefaultStyle)>();
+			var result = new List<(string ResourceKey, string SharedKey, Type ImplicitTargetType)>();
 
-			Add("MaterialAppBarButtonStyle", isImplicit: true);
+			Add("MaterialAppBarButtonStyle", implicitTargetType: typeof(AppBarButton));
 			Add("MaterialBodyLarge");
-			Add("MaterialBodyMedium", isImplicit: true);
+			Add("MaterialBodyMedium", implicitTargetType: typeof(TextBlock));
 			Add("MaterialBodySmall");
-			Add("MaterialCalendarDatePickerStyle", isImplicit: true);
-			Add("MaterialCalendarViewStyle", isImplicit: true);
+			Add("MaterialCalendarDatePickerStyle", implicitTargetType: typeof(CalendarDatePicker));
+			Add("MaterialCalendarViewStyle", implicitTargetType: typeof(CalendarView));
 			Add("MaterialCaptionLarge");
 			Add("MaterialCaptionMedium");
 			Add("MaterialCaptionSmall");
-			Add("MaterialCheckBoxStyle", isImplicit: true);
-			Add("MaterialContentDialogStyle", isImplicit: true);
-			Add("MaterialComboBoxStyle", isImplicit: true);
-			Add("MaterialCommandBarStyle", isImplicit: true);
-			Add("MaterialDatePickerStyle", isImplicit: true);
+			Add("MaterialCheckBoxStyle", implicitTargetType: typeof(CheckBox));
+			Add("MaterialContentDialogStyle", implicitTargetType: typeof(ContentDialog));
+			Add("MaterialComboBoxStyle", implicitTargetType: typeof(ComboBox));
+			Add("MaterialCommandBarStyle", implicitTargetType: typeof(CommandBar));
+			Add("MaterialDatePickerStyle", implicitTargetType: typeof(DatePicker));
 			Add("MaterialDisplayLarge");
 			Add("MaterialDisplayMedium");
 			Add("MaterialDisplaySmall");
 			Add("MaterialElevatedButtonStyle");
 			Add("MaterialFabStyle");
-			Add("MaterialFilledButtonStyle", isImplicit: true);
-			Add("MaterialFilledPasswordBoxStyle", isImplicit: true);
-			Add("MaterialFilledTextBoxStyle", isImplicit: true);
+			Add("MaterialFilledButtonStyle", implicitTargetType: typeof(Button));
+			Add("MaterialFilledPasswordBoxStyle", implicitTargetType: typeof(PasswordBox));
+			Add("MaterialFilledTextBoxStyle", implicitTargetType: typeof(TextBox));
 			Add("MaterialFilledTonalButtonStyle");
-			Add("MaterialFlyoutPresenterStyle", isImplicit: true);
+			Add("MaterialFlyoutPresenterStyle", implicitTargetType: typeof(FlyoutPresenter));
 			Add("MaterialHeadlineLarge");
 			Add("MaterialHeadlineMedium");
 			Add("MaterialHeadlineSmall");
-			Add("MaterialHyperlinkButtonStyle", isImplicit: true);
+			Add("MaterialHyperlinkButtonStyle", implicitTargetType: typeof(HyperlinkButton));
 			Add("MaterialIconButtonStyle");
 			Add("MaterialIconToggleButtonStyle");
 			Add("MaterialLabelExtraSmall");
@@ -104,24 +119,24 @@ namespace Uno.Material
 			Add("MaterialLabelMedium");
 			Add("MaterialLabelSmall");
 			Add("MaterialLargeFabStyle");
-			Add("MaterialListViewItemStyle", isImplicit: true);
-			Add("MaterialListViewStyle", isImplicit: true);
-			Add("MaterialMenuFlyoutPresenterStyle", isImplicit: true);
-			Add("MaterialNavigationViewStyle", isImplicit: true);
-			Add("MaterialNavigationViewItemStyle", isImplicit: true);
+			Add("MaterialListViewItemStyle", implicitTargetType: typeof(ListViewItem));
+			Add("MaterialListViewStyle", implicitTargetType: typeof(ListView));
+			Add("MaterialMenuFlyoutPresenterStyle", implicitTargetType: typeof(MenuFlyoutPresenter));
+			Add("MaterialNavigationViewStyle", implicitTargetType: typeof(Microsoft.UI.Xaml.Controls.NavigationView));
+			Add("MaterialNavigationViewItemStyle", implicitTargetType: typeof(Microsoft.UI.Xaml.Controls.NavigationViewItem));
 			Add("MaterialOutlinedButtonStyle");
 			Add("MaterialOutlinedPasswordBoxStyle");
 			Add("MaterialOutlinedTextBoxStyle");
-			Add("MaterialProgressBarStyle", isImplicit: true);
-			Add("MaterialProgressRingStyle", isImplicit: true);
-			Add("MaterialRadioButtonStyle", isImplicit: true);
+			Add("MaterialProgressBarStyle", implicitTargetType: typeof(Microsoft.UI.Xaml.Controls.ProgressBar));
+			Add("MaterialProgressRingStyle", implicitTargetType: typeof(Microsoft.UI.Xaml.Controls.ProgressRing));
+			Add("MaterialRadioButtonStyle", implicitTargetType: typeof(RadioButton));
 			Add("MaterialSecondaryCheckBoxStyle");
 			Add("MaterialSecondaryFabStyle");
 			Add("MaterialSecondaryHyperlinkButtonStyle");
 			Add("MaterialSecondaryLargeFabStyle");
 			Add("MaterialSecondaryRadioButtonStyle");
 			Add("MaterialSecondarySmallFabStyle");
-			Add("MaterialSliderStyle", isImplicit: true);
+			Add("MaterialSliderStyle", implicitTargetType: typeof(Slider));
 			Add("MaterialSmallFabStyle");
 			Add("MaterialSurfaceFabStyle");
 			Add("MaterialSurfaceLargeFabStyle");
@@ -130,16 +145,16 @@ namespace Uno.Material
 			Add("MaterialTertiaryLargeFabStyle");
 			Add("MaterialTertiarySmallFabStyle");
 			Add("MaterialTextButtonStyle");
-			Add("MaterialTextToggleButtonStyle", isImplicit: true);
+			Add("MaterialTextToggleButtonStyle", implicitTargetType: typeof(ToggleButton));
 			Add("MaterialTitleLarge");
 			Add("MaterialTitleMedium");
 			Add("MaterialTitleSmall");
-			Add("MaterialToggleSwitchStyle", isImplicit: true);
+			Add("MaterialToggleSwitchStyle", implicitTargetType: typeof(ToggleSwitch));
 
 			return result;
 
-			void Add(string key, string alias = null, bool isImplicit = false) =>
-				result.Add((key, alias ?? key.Substring(StylePrefix.Length), isImplicit));
+			void Add(string key, string alias = null, Type implicitTargetType = null) =>
+				result.Add((key, alias ?? key.Substring(StylePrefix.Length), implicitTargetType));
 		}
 	}
 }
