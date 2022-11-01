@@ -8,7 +8,7 @@
 - task: nventiveCanaryUpdater@5
   condition: eq(variables['IsCanaryBranch'], true)
   inputs:
-    solution: Uno.Themes.sln
+    solution: src/Uno.Themes.sln
     useNuGetOrg: true
     usePrivateFeed: false
     mergeBranch: true

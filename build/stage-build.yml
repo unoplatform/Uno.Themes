@@ -10,7 +10,7 @@
   condition: eq(variables['IsCanaryBranch'], true)
   retryCountOnTaskFailure: 3
   inputs:
-    solution: Uno.Themes.sln
+    solution: src/Uno.Themes.sln
     useNuGetOrg: true
     usePrivateFeed: false
     mergeBranch: true
@@ -26,7 +26,7 @@
   displayName: 'Build solution in Release | $(ApplicationPlatform)'
   retryCountOnTaskFailure: 3
   inputs:
-    solution: Uno.Themes.sln
+    solution: src/Uno.Themes.sln
     configuration: Release
     platform: $(ApplicationPlatform)
     maximumCpuCount: true

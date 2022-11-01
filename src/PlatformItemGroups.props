@@ -1,0 +1,69 @@
+<Project ToolsVersion="15.0">
+	<PropertyGroup>
+		<IsMonoAndroid>false</IsMonoAndroid>
+		<IsMonoAndroid Condition="$(TargetFramework.ToLower().StartsWith('monoandroid')) or '$(TargetFramework)'=='net6.0-android'">true</IsMonoAndroid>
+
+		<IsXamarinIOS>false</IsXamarinIOS>
+		<IsXamarinIOS Condition="$(TargetFramework.ToLower().StartsWith('xamarinios')) or '$(TargetFramework)'=='net6.0-ios'">true</IsXamarinIOS>
+
+		<IsXamarinMac>false</IsXamarinMac>
+		<IsXamarinMac Condition="$(TargetFramework.ToLower().StartsWith('xamarinmac')) or '$(TargetFramework)'=='net6.0-macos'">true</IsXamarinMac>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<_IsAndroid>false</_IsAndroid>
+		<_IsAndroid Condition="$(IsMonoAndroid) or '$(TargetFramework)'=='net6.0-android'">true</_IsAndroid>
+
+		<_IsCatalyst>false</_IsCatalyst>
+		<_IsCatalyst Condition="$(_IsCatalyst) or '$(TargetFramework)'=='net6.0-maccatalyst'">true</_IsCatalyst>
+
+		<_IsIOS>false</_IsIOS>
+		<_IsIOS Condition="$(IsXamarinIOS) or '$(TargetFramework)'=='net6.0-ios' or '$(TargetFramework)'=='net6.0-maccatalyst'">true</_IsIOS>
+
+		<_IsMacOS>false</_IsMacOS>
+		<_IsMacOS Condition="'$(TargetFramework)'=='xamarinmac20' or '$(TargetFramework)'=='net6.0-macos'">true</_IsMacOS>
+
+		<_IsNet>false</_IsNet>
+		<_IsNet Condition="'$(TargetFramework)'=='net461'">true</_IsNet>
+
+		<_IsNetCore>false</_IsNetCore>
+		<_IsNetCore Condition="'$(TargetFramework)'=='net5.0' or '$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net7.0'">true</_IsNetCore>
+
+		<_IsNetStd>false</_IsNetStd>
+		<_IsNetStd Condition="'$(TargetFramework)'=='netstandard2.0' or $(_IsNetCore)">true</_IsNetStd>
+
+		<_IsUWP>false</_IsUWP>
+		<_IsUWP Condition="'$(TargetFramework)'=='uap10.0'">true</_IsUWP>
+
+		<_IsWinUI>false</_IsWinUI>
+		<_IsWinUI Condition="$(TargetFramework.Contains('windows10'))">true</_IsWinUI>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(_IsIOS)">
+		<DefineConstants>$(DefineConstants);IOS1_0;XAMARIN;XAMARIN_IOS;XAMARIN_IOS_UNIFIED</DefineConstants>
+		<SupportedOSPlatformVersion>10.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion>10.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(_IsMacOS)">
+		<DefineConstants>$(DefineConstants);XAMARIN</DefineConstants>
+		<SupportedOSPlatformVersion>10.14</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion>10.14</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(_IsCatalyst)">
+		<SupportedOSPlatformVersion>13.1</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion>13.1</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(_IsAndroid)">
+		<DefineConstants>$(DefineConstants);__ANDROID__;XAMARIN;MONOANDROID5_0;XAMARIN_ANDROID</DefineConstants>
+		<SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion>21.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(_IsUWP)">
+		<TargetPlatformVersion>10.0.18362</TargetPlatformVersion>
+	</PropertyGroup>
+
+</Project>

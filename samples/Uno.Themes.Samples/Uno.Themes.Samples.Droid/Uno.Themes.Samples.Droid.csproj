@@ -69,36 +69,31 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="nventive.Nimue.Application.Building.Light">
-      <Version>0.1.0-alpha.58</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="nventive.Nimue.Application.Packaging">
-      <Version>0.1.0-alpha.58</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="nventive.Nimue.Application.Versioning">
-      <Version>0.1.0-alpha.58</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Uno.ShowMeTheXAML">
-      <Version>1.0.59</Version>
     </PackageReference>
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
-      <Version>1.0.59</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="4.5.12" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.5.12" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.1.0.2" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.12" />
-    <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
-    <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
+    <PackageReference Include="Uno.UI" />
+    <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UniversalImageLoader" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
+    <PackageReference Include="Uno.Core.Extensions.Compatibility" />
+    <PackageReference Include="Uno.Core.Extensions.Disposables" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -128,10 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAotProfile Include="custom.aprof" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj" />
-    <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
@@ -205,7 +196,16 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values-night\colors.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Uno.Cupertino\Uno.Cupertino.csproj">
+      <Project>{98c1fdac-c692-4c65-99e7-70fdd53b8f2e}</Project>
+      <Name>Uno.Cupertino</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\Uno.Material\Uno.Material.csproj">
+      <Project>{b5279ee5-e662-45b0-8929-d90d0bde16ab}</Project>
+      <Name>Uno.Material</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

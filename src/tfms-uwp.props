@@ -1,0 +1,15 @@
+<Project>
+	<PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+		<TargetFrameworks>$(TargetFrameworkOverride)</TargetFrameworks>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
+		<TargetFrameworks>$(TargetFrameworks);netstandard2.0;</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_iOS)'=='true'">$(TargetFrameworks);xamarinios10</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_MacOS)'=='true'">$(TargetFrameworks);xamarinmac20</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_Android)'=='true'">$(TargetFrameworks);monoandroid11.0</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_Windows)'=='true'">$(TargetFrameworks);uap10.0.18362</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_iOS)'=='true' and '$(DisableNet6MobileTargets)'==''">$(TargetFrameworks);net6.0-ios</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_MacOS)'=='true' and '$(DisableNet6MobileTargets)'==''">$(TargetFrameworks);net6.0-macos;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_Android)'=='true' and '$(DisableNet6MobileTargets)'==''">$(TargetFrameworks);net6.0-android</TargetFrameworks>
+	</PropertyGroup>
+</Project>

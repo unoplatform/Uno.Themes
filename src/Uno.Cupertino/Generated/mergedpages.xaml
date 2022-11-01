@@ -1,0 +1,1993 @@
+<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d ios android wasm not_win not_ios xamarin lottie_not_win macos" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:android="http://uno.ui/android" xmlns:ios="http://uno.ui/ios" xmlns:not_win="http://uno.ui/not_win" xmlns:toolkit="using:Uno.UI.Toolkit" xmlns:wasm="http://uno.ui/wasm" xmlns:uno="using:Uno.UI.Xaml.Controls" xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:not_ios="http://uno.ui/not_ios" xmlns:xamarin="http://uno.ui/xamarin" xmlns:uc="using:Uno.Cupertino" xmlns:controls="using:Microsoft.UI.Xaml.Controls" xmlns:lottie_win="using:Microsoft.Toolkit.Uwp.UI.Lottie" xmlns:lottie_not_win="using:Microsoft.Toolkit.Uwp.UI.Lottie" xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:macos="http://uno.ui/macos" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <ResourceDictionary.MergedDictionaries>
+    <uc:CupertinoColors />
+    <uc:CupertinoFonts />
+  </ResourceDictionary.MergedDictionaries>
+  <!--origin: Styles\Controls\Button.xaml-->
+  <Thickness x:Key="CupertinoButtonPadding">20</Thickness>
+  <CornerRadius x:Key="CupertinoButtonCornerRadius">8</CornerRadius>
+  <x:Double x:Key="CupertinoButtonFontSize">14</x:Double>
+  <StaticResource x:Key="CupertinoContainedButtonBackgroundBrush" ResourceKey="CupertinoBlueBrush" />
+  <StaticResource x:Key="CupertinoContainedButtonForegroundBrush" ResourceKey="CupertinoWhiteBrush" />
+  <StaticResource x:Key="CupertinoOutlinedButtonBrush" ResourceKey="CupertinoBlueBrush" />
+  <StaticResource x:Key="CupertinoOutlinedButtonForegroundBrush" ResourceKey="CupertinoBlueBrush" />
+  <StaticResource x:Key="CupertinoOutlinedButtonBackgroundBrush" ResourceKey="CupertinoSystemBackgroundBrush" />
+  <StaticResource x:Key="CupertinoDisabledButtonBrush" ResourceKey="CupertinoPrimaryGrayColor" />
+  <Style x:Key="CupertinoButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource CupertinoOutlinedButtonForegroundBrush}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinHeight" Value="40" />
+    <Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+    <Setter Property="FontSize" Value="{ThemeResource CupertinoButtonFontSize}" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                  <VisualState.Setters>
+                    <Setter Target="FocusedOverlay.Opacity" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Opacity" To="{StaticResource CupertinoPressedOpacity}" Duration="{StaticResource CupertinoAnimationDuration}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource CupertinoDisabledButtonBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusedOverlay.Opacity" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="FocusedOverlay" Background="{TemplateBinding Background}" Opacity="0" />
+            <ContentPresenter x:Name="ContentPresenter" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" CornerRadius="{StaticResource CupertinoButtonCornerRadius}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoContainedButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{StaticResource CupertinoContainedButtonForegroundBrush}" />
+    <Setter Property="Background" Value="{StaticResource CupertinoContainedButtonBackgroundBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="{ThemeResource CupertinoButtonPadding}" />
+    <Setter Property="CornerRadius" Value="{StaticResource CupertinoButtonCornerRadius}" />
+    <Setter Property="MinHeight" Value="40" />
+    <Setter Property="FontFamily" Value="{ThemeResource CupertinoFontFamily}" />
+    <Setter Property="FontSize" Value="{ThemeResource CupertinoButtonFontSize}" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                  <VisualState.Setters>
+                    <Setter Target="CommonStatesOverlay.Opacity" Value="0" />
+                    <Setter Target="FocusedOverlay.Opacity" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="CommonStatesOverlay.Opacity" Value="{StaticResource CupertinoHoverOverlayOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="CommonStatesOverlay" Storyboard.TargetProperty="Opacity" To="{StaticResource CupertinoPressedOverlayOpacity}" Duration="{StaticResource CupertinoAnimationDuration}">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Background" Value="{StaticResource CupertinoDisabledButtonBrush}" />
+                    <Setter Target="ContentPresenter.Foreground" Value="{StaticResource CupertinoContainedButtonForegroundBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusedOverlay.Opacity" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="CommonStatesOverlay" Background="{TemplateBinding Foreground}" Opacity="0" />
+            <Border x:Name="FocusedOverlay" Background="{TemplateBinding Foreground}" Opacity="0" />
+            <ContentPresenter x:Name="ContentPresenter" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" CornerRadius="{StaticResource CupertinoButtonCornerRadius}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\CalendarDatePicker.xaml-->
+  <SolidColorBrush x:Key="CupertinoCalendarDatePickerBackground" Color="Transparent" />
+  <SolidColorBrush x:Key="CupertinoCalendarDatePickerBorderBrushPointerOver" Color="{ThemeResource CupertinoPrimaryGrayColor}" Opacity="{StaticResource CupertinoHoverOpacity}" />
+  <SolidColorBrush x:Key="CupertinoCalendarDatePickerBorderBrushPressed" Color="{ThemeResource CupertinoPrimaryGrayColor}" Opacity="{StaticResource CupertinoPressedOpacity}" />
+  <Style x:Key="DefaultCupertinoCalendarDatePickerStyle" TargetType="CalendarDatePicker">
+    <Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}" />
+    <Setter Property="Background" Value="{StaticResource CupertinoCalendarDatePickerBackground}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CupertinoPrimaryGrayBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CalendarViewStyle" Value="{StaticResource CupertinoCalendarViewStyle}" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CalendarDatePicker">
+          <Grid x:Name="Root">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPointerOver}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CupertinoCalendarDatePickerBorderBrushPressed}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerHeaderForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DateText" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerTextForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CalendarGlyph" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerCalendarGlyphForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Unfocused" />
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Focused">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="Background">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBackgroundFocused}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="SelectionStates">
+                <VisualState x:Name="Unselected" />
+                <VisualState x:Name="Selected">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DateText" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerTextForegroundSelected}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HeaderStates">
+                <VisualState x:Name="TopHeader" />
+                <VisualState x:Name="LeftHeader">
+                  <VisualState.Setters>
+                    <Setter Target="HeaderContentPresenter.(Grid.Row)" Value="1" />
+                    <Setter Target="HeaderContentPresenter.(Grid.Column)" Value="0" />
+                    <Setter Target="HeaderContentPresenter.(Grid.ColumnSpan)" Value="1" />
+                    <Setter Target="HeaderContentPresenter.Margin" Value="{StaticResource CalendarDatePickerLeftHeaderMargin}" />
+                    <Setter Target="HeaderContentPresenter.MaxWidth" Value="{StaticResource CalendarDatePickerLeftHeaderMaxWidth}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <FlyoutBase.AttachedFlyout>
+              <Flyout Placement="Bottom" ShouldConstrainToRootBounds="False">
+                <Flyout.FlyoutPresenterStyle>
+                  <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="IsDefaultShadowEnabled" Value="True" />
+                    <Setter Property="Template">
+                      <Setter.Value>
+                        <ControlTemplate TargetType="FlyoutPresenter">
+                          <ContentPresenter Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </ControlTemplate>
+                      </Setter.Value>
+                    </Setter>
+                  </Style>
+                </Flyout.FlyoutPresenterStyle>
+                <CalendarView x:Name="CalendarView" Style="{TemplateBinding CalendarViewStyle}" MinDate="{TemplateBinding MinDate}" MaxDate="{TemplateBinding MaxDate}" IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}" DisplayMode="{TemplateBinding DisplayMode}" FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}" DayOfWeekFormat="{TemplateBinding DayOfWeekFormat}" CalendarIdentifier="{TemplateBinding CalendarIdentifier}" IsOutOfScopeEnabled="{TemplateBinding IsOutOfScopeEnabled}" IsGroupLabelVisible="{TemplateBinding IsGroupLabelVisible}" />
+              </Flyout>
+            </FlyoutBase.AttachedFlyout>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ContentPresenter x:Name="HeaderContentPresenter" x:DeferLoadStrategy="Lazy" Grid.Row="0" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" Margin="{StaticResource CalendarDatePickerTopHeaderMargin}" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="Collapsed" />
+            <Border x:Name="Background" Grid.Row="1" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" Control.IsTemplateFocusTarget="True" MinHeight="32" />
+            <TextBlock x:Name="DateText" Grid.Row="1" HorizontalAlignment="Left" Padding="12,0,12,2" Foreground="{ThemeResource CalendarDatePickerTextForeground}" Text="{TemplateBinding PlaceholderText}" VerticalAlignment="Center" />
+            <ContentPresenter x:Name="DescriptionPresenter" Grid.Row="2" Content="{TemplateBinding Description}" x:Load="False" Foreground="{ThemeResource SystemControlDescriptionTextForegroundBrush}" AutomationProperties.AccessibilityView="Raw" />
+            <Grid Visibility="Collapsed">
+              <FontIcon x:Name="CalendarGlyph" />
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoCalendarDatePickerStyle" TargetType="CalendarDatePicker" BasedOn="{StaticResource DefaultCupertinoCalendarDatePickerStyle}" />
+  <!--origin: Styles\Controls\CalendarView.xaml-->
+  <StaticResource x:Key="CupertinoCalendarViewAccentBrush" ResourceKey="CupertinoBlueBrush" />
+  <SolidColorBrush x:Key="CupertinoCalendarViewSelectedBackground" Color="{ThemeResource CupertinoBlueColor}" Opacity="0.27" />
+  <SolidColorBrush x:Key="TransparentBrush" Color="Transparent" />
+  <Style x:Key="DefaultCupertinoCalendarViewStyle" TargetType="CalendarView">
+    <Setter Property="FocusBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+    <Setter Property="SelectedHoverBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+    <Setter Property="SelectedPressedBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+    <Setter Property="SelectedBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+    <Setter Property="HoverBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+    <Setter Property="PressedBorderBrush" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+    <Setter Property="CalendarItemBorderBrush" Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
+    <Setter Property="TodayForeground" Value="{ThemeResource CalendarViewForeground}" />
+    <Setter Property="BlackoutForeground" Value="{ThemeResource CalendarViewBlackoutForeground}" />
+    <win:Setter Property="SelectedForeground" Value="{ThemeResource CalendarViewSelectedForeground}" />
+    <not_win:Setter Property="SelectedForeground" Value="{ThemeResource CupertinoCalendarViewAccentBrush}" />
+    <Setter Property="PressedForeground" Value="{ThemeResource CalendarViewPressedForeground}" />
+    <Setter Property="OutOfScopeForeground" Value="{ThemeResource CalendarViewOutOfScopeForeground}" />
+    <Setter Property="CalendarItemForeground" Value="{ThemeResource CalendarViewCalendarItemForeground}" />
+    <Setter Property="OutOfScopeBackground" Value="{ThemeResource CalendarViewOutOfScopeBackground}" />
+    <Setter Property="CalendarItemBackground" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
+    <Setter Property="Foreground" Value="{ThemeResource CalendarViewForeground}" />
+    <Setter Property="Background" Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource CalendarViewBorderBrush}" />
+    <Setter Property="DayItemFontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="DayItemFontSize" Value="14" />
+    <Setter Property="FirstOfMonthLabelFontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="FirstOfMonthLabelFontSize" Value="0" />
+    <Setter Property="MonthYearItemFontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="MonthYearItemFontSize" Value="14" />
+    <Setter Property="FirstOfYearDecadeLabelFontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <not_win:Setter Property="CalendarItemBorderThickness" Value="0" />
+    <win:Setter Property="CalendarItemBorderThickness" Value="2" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+    <not_win:Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+    <not_win:Setter Property="DayItemCornerRadius" Value="20" />
+    <not_win:Setter Property="CalendarItemCornerRadius" Value="40" />
+    <not_win:Setter Property="SelectedBackground" Value="{StaticResource CupertinoCalendarViewSelectedBackground}" />
+    <not_win:Setter Property="TodaySelectedBackground" Value="{StaticResource CupertinoCalendarViewSelectedBackground}" />
+    <not_win:Setter Property="TodayBackground" Value="Transparent" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CalendarView">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <Border.Resources>
+              <Style x:Key="WeekDayNameStyle" BasedOn="{StaticResource CaptionTextBlockStyle}" TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+              </Style>
+              <Style x:Key="NavigationButtonStyle" TargetType="Button">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Background" Value="{ThemeResource CalendarViewNavigationButtonBackground}" />
+                <Setter Property="BackgroundSizing" Value="OuterBorderEdge" />
+                <Setter Property="Template">
+                  <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                      <ContentPresenter x:Name="Text" Margin="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" Background="{TemplateBinding Background}" BackgroundSizing="{TemplateBinding BackgroundSizing}" BorderBrush="{ThemeResource CalendarViewNavigationButtonBorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Content="{TemplateBinding Content}">
+                        <VisualStateManager.VisualStateGroups>
+                          <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="PointerOver">
+                              <VisualState.Setters>
+                                <Setter Target="Text.BorderBrush" Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
+                                <Setter Target="Text.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+                              </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                              <VisualState.Setters>
+                                <Setter Target="Text.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
+                              </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled" />
+                          </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                      </ContentPresenter>
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+              <Style TargetType="Button" x:Key="HeaderButtonStyle" BasedOn="{StaticResource NavigationButtonStyle}">
+                <Setter Property="Template">
+                  <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                      <Grid>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto" />
+                          <ColumnDefinition Width="4" />
+                          <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter x:Name="Text" Background="{TemplateBinding Background}" BackgroundSizing="{TemplateBinding BackgroundSizing}" BorderBrush="{ThemeResource CalendarViewNavigationButtonBorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" />
+                        <TextBlock x:Name="HeaderGlyph" Grid.Column="2" Text="&#xE76C;" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{StaticResource CupertinoCalendarViewAccentBrush}" />
+                        <VisualStateManager.VisualStateGroups>
+                          <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="PointerOver">
+                              <VisualState.Setters>
+                                <Setter Target="Text.BorderBrush" Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
+                                <Setter Target="Text.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+                                <Setter Target="HeaderGlyph.Opacity" Value="{StaticResource CupertinoHoverOpacity}" />
+                              </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                              <VisualState.Setters>
+                                <Setter Target="Text.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
+                                <Setter Target="HeaderGlyph.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
+                              </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                              <VisualState.Setters>
+                                <Setter Target="HeaderGlyph.Opacity" Value="0" />
+                              </VisualState.Setters>
+                            </VisualState>
+                          </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                      </Grid>
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+              <Style x:Key="ScrollViewerStyle" TargetType="ScrollViewer">
+                <Setter Property="HorizontalScrollMode" Value="Disabled" />
+                <Setter Property="VerticalScrollMode" Value="Enabled" />
+                <Setter Property="VerticalSnapPointsType" Value="Optional" />
+                <Setter Property="ZoomMode" Value="Disabled" />
+                <Setter Property="TabNavigation" Value="Once" />
+                <Setter Property="BringIntoViewOnFocusChange" Value="False" />
+                <Setter Property="Template" Value="{StaticResource ScrollViewerScrollBarlessTemplate}" />
+                <not_win:Setter Property="(uno:ScrollViewer.ShouldFallBackToNativeScrollBars)" Value="False" />
+              </Style>
+            </Border.Resources>
+            <Grid MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.MinViewWidth}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="5*" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="HeaderButton" Padding="12,0,0,0" HorizontalContentAlignment="Left" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}" Foreground="{TemplateBinding Foreground}" IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}" Style="{StaticResource HeaderButtonStyle}" />
+                <Button x:Name="PreviousButton" Grid.Column="1" Padding="1" HorizontalContentAlignment="Center" Content="&#xE76B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{StaticResource CupertinoCalendarViewAccentBrush}" IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentBefore}" IsTabStop="True" Style="{StaticResource NavigationButtonStyle}" />
+                <Button x:Name="NextButton" Grid.Column="2" Padding="1" HorizontalContentAlignment="Center" Content="&#xE76C;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{StaticResource CupertinoCalendarViewAccentBrush}" IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentAfter}" IsTabStop="True" Style="{StaticResource NavigationButtonStyle}" />
+              </Grid>
+              <Grid x:Name="Views" Grid.Row="1">
+                <!--<Grid.Clip>
+                                    <RectangleGeometry Rect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ClipRect}" />
+                                </Grid.Clip>-->
+                <Border x:Name="BackgroundLayer" Background="{TemplateBinding Background}">
+                  <Border.RenderTransform>
+                    <ScaleTransform x:Name="BackgroundTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+                  </Border.RenderTransform>
+                </Border>
+                <Grid x:Name="MonthView">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <Grid.RenderTransform>
+                    <ScaleTransform x:Name="MonthViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+                  </Grid.RenderTransform>
+                  <Grid x:Name="WeekDayNames" Background="{TemplateBinding Background}">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="WeekDay1" Foreground="{TemplateBinding CalendarItemForeground}" Style="{StaticResource WeekDayNameStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay1}" />
+                    <TextBlock x:Name="WeekDay2" Grid.Column="1" Foreground="{TemplateBinding CalendarItemForeground}" Style="{StaticResource WeekDayNameStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay2}" />
+                    <TextBlock x:Name="WeekDay3" Grid.Column="2" Foreground="{TemplateBinding CalendarItemForeground}" Style="{StaticResource WeekDayNameStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay3}" />
+                    <TextBlock x:Name="WeekDay4" Grid.Column="3" Foreground="{TemplateBinding CalendarItemForeground}" Style="{StaticResource WeekDayNameStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay4}" />
+                    <TextBlock x:Name="WeekDay5" Grid.Column="4" Foreground="{TemplateBinding CalendarItemForeground}" Style="{StaticResource WeekDayNameStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay5}" />
+                    <TextBlock x:Name="WeekDay6" Grid.Column="5" Foreground="{TemplateBinding CalendarItemForeground}" Style="{StaticResource WeekDayNameStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay6}" />
+                    <TextBlock x:Name="WeekDay7" Grid.Column="6" Foreground="{TemplateBinding CalendarItemForeground}" Style="{StaticResource WeekDayNameStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.WeekDay7}" />
+                  </Grid>
+                  <ScrollViewer x:Name="MonthViewScrollViewer" Grid.Row="1" IsFocusEngagementEnabled="True" Style="{StaticResource ScrollViewerStyle}">
+                    <CalendarPanel x:Name="MonthViewPanel" />
+                  </ScrollViewer>
+                </Grid>
+                <!-- Uno only: Opacity set to 0 to avoid flicker when changing display mode -->
+                <ScrollViewer x:Name="YearViewScrollViewer" IsFocusEngagementEnabled="True" Opacity="0" Style="{StaticResource ScrollViewerStyle}" UseLayoutRounding="False" Visibility="Collapsed">
+                  <ScrollViewer.RenderTransform>
+                    <ScaleTransform x:Name="YearViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+                  </ScrollViewer.RenderTransform>
+                  <CalendarPanel x:Name="YearViewPanel" />
+                </ScrollViewer>
+                <!-- Uno only: Opacity set to 0 to avoid flicker when changing display mode -->
+                <ScrollViewer x:Name="DecadeViewScrollViewer" IsFocusEngagementEnabled="True" Opacity="0" Style="{StaticResource ScrollViewerStyle}" UseLayoutRounding="False" Visibility="Collapsed">
+                  <ScrollViewer.RenderTransform>
+                    <ScaleTransform x:Name="DecadeViewTransform" CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}" CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+                  </ScrollViewer.RenderTransform>
+                  <CalendarPanel x:Name="DecadeViewPanel" />
+                </ScrollViewer>
+              </Grid>
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay1" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarViewWeekDayForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay2" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarViewWeekDayForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay3" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarViewWeekDayForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay4" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarViewWeekDayForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay5" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarViewWeekDayForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay6" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarViewWeekDayForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay7" Storyboard.TargetProperty="Foreground">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarViewWeekDayForegroundDisabled}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HeaderButtonStates">
+                <VisualState x:Name="ViewChanged" />
+                <VisualState x:Name="ViewChanging">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="HeaderButton" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.167" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="DisplayModeStates">
+                <VisualState x:Name="Month" />
+                <VisualState x:Name="Year">
+                  <!-- Begin: Uno only -->
+                  <VisualState.Setters>
+                    <Setter Target="YearViewScrollViewer.IsHitTestVisible" Value="True" />
+                  </VisualState.Setters>
+                  <!-- End: Uno only -->
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthViewScrollViewer" Storyboard.TargetProperty="IsEnabled">
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthView" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <!-- Begin: Uno only - We changed the default value to avoid flicker, make sure to set it to 1 even if transitions are disabled -->
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                      <DiscreteDoubleKeyFrame KeyTime="0" Value="1" />
+                    </DoubleAnimationUsingKeyFrames>
+                    <!-- End: Uno only -->
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Decade">
+                  <!-- Begin: Uno only -->
+                  <VisualState.Setters>
+                    <Setter Target="DecadeViewScrollViewer.IsHitTestVisible" Value="True" />
+                  </VisualState.Setters>
+                  <!-- End: Uno only -->
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthViewScrollViewer" Storyboard.TargetProperty="IsEnabled">
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="False" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthView" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                      <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <!-- Begin: Uno only - We changed the default value to avoid flicker, make sure to set it to 1 even if transitions are disabled -->
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                      <DiscreteDoubleKeyFrame KeyTime="0" Value="1" />
+                    </DoubleAnimationUsingKeyFrames>
+                    <!-- End: Uno only -->
+                  </Storyboard>
+                </VisualState>
+                <VisualStateGroup.Transitions>
+                  <VisualTransition From="Month" To="Year">
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView" Storyboard.TargetProperty="Opacity">
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.233" Value="0" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.233" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <!-- Uno only: Make sure to set visibility only AFTER opacity -->
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer" Storyboard.TargetProperty="Opacity">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.000" Value="0" />
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.250" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="Year" To="Month">
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="IsHitTestVisible">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.233" Value="0" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView" Storyboard.TargetProperty="Opacity">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.233" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer" Storyboard.TargetProperty="Opacity">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.000" Value="0" />
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.250" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="Year" To="Decade">
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView" Storyboard.TargetProperty="Opacity">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.233" Value="0" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.233" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <!-- Uno only: Make sure to set visibility only AFTER opacity -->
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer" Storyboard.TargetProperty="Opacity">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.000" Value="0" />
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.250" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="Decade" To="Year">
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView" Storyboard.TargetProperty="Opacity">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer" Storyboard.TargetProperty="IsHitTestVisible">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.233" Value="0" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer" Storyboard.TargetProperty="Opacity">
+                        <DiscreteDoubleKeyFrame KeyTime="0" Value="0" />
+                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.233" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer" Storyboard.TargetProperty="Opacity">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.000" Value="0" />
+                        <LinearDoubleKeyFrame KeyTime="0:0:0.250" Value="0" />
+                        <SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1" KeyTime="0:0:0.733" Value="1" />
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoCalendarViewStyle" TargetType="CalendarView" BasedOn="{StaticResource DefaultCupertinoCalendarViewStyle}" />
+  <!--origin: Styles\Controls\CheckBox.xaml-->
+  <x:String x:Key="HyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
+  <x:String x:Key="CheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+  <GridLength x:Key="CheckAreaLength">40</GridLength>
+  <x:Double x:Key="FocusAreaSize">40</x:Double>
+  <x:Double x:Key="CheckAreaSize">18</x:Double>
+  <CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
+  <StaticResource x:Key="CupertinoCheckBoxBorderBrush" ResourceKey="CupertinoOnSurfaceMediumBrush" />
+  <Style x:Key="CupertinoCheckBoxStyle" TargetType="CheckBox">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="{StaticResource CupertinoBlueBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoWhiteBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CupertinoBlueBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="8,0,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="MinWidth" Value="0" />
+    <Setter Property="MinHeight" Value="{StaticResource CheckAreaSize}" />
+    <Setter Property="UseSystemFocusVisuals" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CheckBox">
+          <Grid x:Name="Root" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="CombinedStates">
+                <VisualState x:Name="UncheckedNormal" />
+                <VisualState x:Name="UncheckedPointerOver" />
+                <VisualState x:Name="UncheckedPressed" />
+                <VisualState x:Name="UncheckedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedNormal">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="CheckedPressed">
+                  <!-- https://github.com/unoplatform/uno/issues/5099 -->
+                  <xamarin:VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </xamarin:VisualState.Setters>
+                  <win:Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="BackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="0">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </win:Storyboard>
+                </VisualState>
+                <VisualState x:Name="CheckedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="CheckGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="IndeterminateNormal">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="IndeterminatePointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="IndeterminatePressed">
+                  <!-- https://github.com/unoplatform/uno/issues/5099 -->
+                  <xamarin:VisualState.Setters>
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </xamarin:VisualState.Setters>
+                  <win:Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="BackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="0">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="HyphenGlyph" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </win:Storyboard>
+                </VisualState>
+                <VisualState x:Name="IndeterminateDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="CheckBoxContainer.Opacity" Value="{StaticResource CupertinoLowOpacity}" />
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoLowOpacity}" />
+                    <Setter Target="BackgroundBorder.Opacity" Value="0" />
+                    <Setter Target="CheckedBackgroundBorder.Opacity" Value="1" />
+                    <Setter Target="HyphenGlyph.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusRing.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="{StaticResource CheckAreaLength}" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Ellipse x:Name="FocusRing" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="{StaticResource FocusAreaSize}" Height="{StaticResource FocusAreaSize}" Fill="{TemplateBinding Background}" IsHitTestVisible="False" Opacity="0" />
+            <Grid x:Name="CheckBoxContainer" Height="{StaticResource CheckAreaSize}" Width="{StaticResource CheckAreaSize}">
+              <Grid x:Name="BackgroundBorder" Background="{ThemeResource CupertinoSystemBackgroundBrush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{StaticResource CheckAreaCornerRadius}" />
+              <Grid x:Name="CheckedBackgroundBorder" Background="{TemplateBinding Background}" Opacity="0" CornerRadius="{StaticResource CheckAreaCornerRadius}" />
+              <Path x:Name="HyphenGlyph" Data="{StaticResource HyphenGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="4" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
+              <Path x:Name="CheckGlyph" Data="{StaticResource CheckGlyphPathStyle}" Fill="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="12" Height="12" Opacity="0" AutomationProperties.AccessibilityView="Raw" xamarin:Margin="0,2,0,0" />
+            </Grid>
+            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Foreground="{StaticResource CupertinoLabelBrush}" FontFamily="{TemplateBinding FontFamily}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="1" AutomationProperties.AccessibilityView="Raw" TextWrapping="WrapWholeWords" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoSecondaryCheckBoxStyle" TargetType="CheckBox" BasedOn="{StaticResource CupertinoCheckBoxStyle}">
+    <Setter Property="Background" Value="{StaticResource CupertinoSecondaryBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoOnSecondaryBrush}" />
+  </Style>
+  <!--origin: Styles\Controls\ComboBox.xaml-->
+  <uc:FromNullToValueConverter x:Key="NullToVisible" NotNullValue="Collapsed" NullValue="Visible" />
+  <StaticResource x:Key="ComboBoxBackgroundColorBrush" ResourceKey="CupertinoSystemBackgroundBrush" />
+  <StaticResource x:Key="ComboBoxForegroundThemeBrush" ResourceKey="CupertinoLabelBrush" />
+  <x:Double x:Key="ComboBoxPopupMaxHeight">300</x:Double>
+  <SolidColorBrush x:Key="CupertinoComboBoxBorderBrush" Color="{ThemeResource LabelColor}" Opacity="0.2" />
+  <CornerRadius x:Key="CupertinoComboBoxCornerRadius">5</CornerRadius>
+  <Style x:Key="CupertinoComboBoxItemStyle" TargetType="ComboBoxItem">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="CornerRadius" Value="5" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Height" Value="43" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBoxItem">
+          <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="0.9">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled" />
+                <VisualState x:Name="Selected">
+                  <VisualState.Setters>
+                    <Setter Target="PressedOverlay.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="SelectedPointerOver">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedOverlay" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SelectedDisabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <!-- Pressed Overlay -->
+            <Grid x:Name="PressedOverlay" Margin="10" Background="{StaticResource CupertinoSecondarySystemFillBrush}" CornerRadius="{TemplateBinding CornerRadius}" IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="0" />
+            <!-- ContentPresenter-->
+            <ContentPresenter x:Name="ContentPresenter" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}">
+              <ContentPresenter.ContentTemplate>
+                <DataTemplate>
+                  <Grid>
+                    <TextBlock Text="{Binding}" Style="{ThemeResource CupertinoFootnote}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                  </Grid>
+                </DataTemplate>
+              </ContentPresenter.ContentTemplate>
+            </ContentPresenter>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoComboBoxStyle" TargetType="ComboBox">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Foreground" Value="{ThemeResource ComboBoxForegroundThemeBrush}" />
+    <Setter Property="Background" Value="{ThemeResource ComboBoxBackgroundColorBrush}" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource CupertinoComboBoxBorderBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource CupertinoComboBoxCornerRadius}" />
+    <Setter Property="MinHeight" Value="43" />
+    <Setter Property="TabNavigation" Value="Once" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+    <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True" />
+    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="ItemContainerStyle" Value="{StaticResource CupertinoComboBoxItemStyle}" />
+    <xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement" Value="Below" />
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <CarouselPanel />
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBox">
+          <Grid x:Name="RootGrid" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PressedBackground" Storyboard.TargetProperty="Opacity" Duration="{StaticResource CupertinoAnimationDuration}" To="1">
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="HighlightBackground.Opacity" Value="1" />
+                    <Setter Target="Highlight.Opacity" Value="1" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="FocusedPressed" />
+                <VisualState x:Name="Unfocused" />
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="FocusedDropDown">
+                  <VisualState.Setters>
+                    <Setter Target="PopupBorder.Visibility" Value="Visible" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="DropDownStates">
+                <VisualState x:Name="Opened">
+                  <Storyboard>
+                    <SplitOpenThemeAnimation ClosedTargetName="ContentPresenter" ContentTranslationOffset="0" ContentTargetName="ScrollViewer" ClosedLength="{Binding TemplateSettings.DropDownClosedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" OffsetFromCenter="{Binding TemplateSettings.DropDownOffset, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenedTargetName="PopupBorder" OpenedLength="{Binding TemplateSettings.DropDownOpenedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Closed">
+                  <Storyboard>
+                    <SplitCloseThemeAnimation ClosedTargetName="ContentPresenter" ContentTranslationOffset="40" ContentTranslationDirection="{Binding TemplateSettings.SelectedItemDirection, RelativeSource={RelativeSource Mode=TemplatedParent}}" ContentTargetName="ScrollViewer" ClosedLength="{Binding TemplateSettings.DropDownClosedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" OffsetFromCenter="{Binding TemplateSettings.DropDownOffset, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenedTargetName="PopupBorder" OpenedLength="{Binding TemplateSettings.DropDownOpenedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="ComboBoxContent">
+              <!-- Drop Down Border -->
+              <Rectangle Fill="{StaticResource ComboBoxBackgroundColorBrush}" Width="1" HorizontalAlignment="Right" />
+              <!-- Pressed Background -->
+              <Rectangle x:Name="PressedBackground" Fill="{ThemeResource ComboBoxBackgroundColorBrush}" Opacity="0" />
+              <!-- Highlight Background -->
+              <Border x:Name="HighlightBackground" Background="{ThemeResource ComboBoxBackgroundColorBrush}" Opacity="0" CornerRadius="4" />
+              <!-- Highlight -->
+              <Rectangle x:Name="Highlight" Fill="{ThemeResource ComboBoxBackgroundColorBrush}" Margin="{TemplateBinding BorderThickness}" Opacity="0" />
+              <Grid Margin="16,0">
+                <!-- ContentPresenter -->
+                <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" VerticalAlignment="Center" Foreground="{ThemeResource CupertinoTertiaryGrayBrush}" />
+                <!-- Selected value -->
+                <TextBlock x:Name="PlaceholderTextBlock" Grid.Column="1" Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}" Text="{TemplateBinding PlaceholderText}" Style="{ThemeResource CupertinoFootnote}" Foreground="{ThemeResource CupertinoTertiaryGrayBrush}" VerticalAlignment="Center" TextWrapping="NoWrap" MaxLines="1" />
+              </Grid>
+              <!-- Popup -->
+              <Popup x:Name="Popup">
+                <Border x:Name="PopupBorder">
+                  <!-- Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
+                  <ScrollViewer x:Name="ScrollViewer" Background="{TemplateBinding Background}" BorderBrush="{StaticResource CupertinoSenaryGrayColor}" BorderThickness="1" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}" VerticalSnapPointsType="OptionalSingle" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalSnapPointsAlignment="Near" ZoomMode="Disabled">
+                    <ItemsPresenter />
+                  </ScrollViewer>
+                </Border>
+              </Popup>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\DatePicker.xaml-->
+  <x:Double x:Key="CupertinoDateTimeFlyoutBorderThickness">1</x:Double>
+  <x:Double x:Key="MaterialDatePickerSpacerThemeWidth">1</x:Double>
+  <Thickness x:Key="MaterialDatePickerHostPadding">24,24,8,8</Thickness>
+  <SolidColorBrush x:Key="CupertinoDatePickerFlyoutPresenterHighlightFill" Color="{ThemeResource CupertinoQuinaryGrayColor}" />
+  <SolidColorBrush x:Key="CupertinoDatePickerBorderBrush" Opacity="0.2" Color="{ThemeResource LabelColor}" />
+  <CornerRadius x:Key="CupertinoDatePickerCornerRadius">5</CornerRadius>
+  <Style x:Key="CupertinoDatePickerFlyoutButtonStyle" TargetType="Button">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+            <!-- Label -->
+            <ContentPresenter x:Name="ContentPresenter" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" AutomationProperties.AccessibilityView="Raw" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" />
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="0.65" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="0.65" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <not_win:Style x:Key="CupertinoDatePickerFlyoutPresenterStyle" TargetType="DatePickerFlyoutPresenter">
+    <Setter Property="Width" Value="296" />
+    <Setter Property="MinWidth" Value="296" />
+    <Setter Property="MaxHeight" Value="398" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+    <Setter Property="Background" Value="{ThemeResource SystemBackgroundColor}" />
+    <Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
+    <Setter Property="BorderThickness" Value="{StaticResource CupertinoDateTimeFlyoutBorderThickness}" />
+    <Setter Property="BorderBrush" Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
+    <Setter Property="CornerRadius" Value="6" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DatePickerFlyoutPresenter">
+          <toolkit:ElevatedView MaxHeight="398" Background="{StaticResource CupertinoQuinaryGrayBrush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Elevation="{StaticResource MaterialDatePickerFlyoutElevation}" ShadowColor="Black">
+            <Border x:Name="Background">
+              <Grid x:Name="ContentPanel">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid x:Name="AcceptDismissHostGrid" Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}" Background="{TemplateBinding Background}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <Rectangle Grid.ColumnSpan="3" Height="{ThemeResource MaterialDatePickerSpacerThemeWidth}" VerticalAlignment="Bottom" Fill="{ThemeResource CupertinoOpaqueSeparatorBrush}" />
+                  <Button x:Name="DismissButton" x:Uid="DatePickerFlyoutDismissButton" Grid.Column="0" Margin="12,0,0,0" Content="Cancel" Style="{StaticResource CupertinoButtonStyle}" />
+                  <TextBlock x:Name="DatePickerFlyoutHeader" Grid.Column="1" x:Uid="DatePickerFlyoutDismissButton" Text="Enter Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Style="{StaticResource BodyTextBlockStyle}" />
+                  <Button x:Name="AcceptButton" x:Uid="DatePickerFlyoutAcceptButton" Grid.Column="2" Margin="0,0,12,0" Content="Done" Style="{StaticResource CupertinoButtonStyle}" />
+                </Grid>
+                <Grid x:Name="PickerHostGrid" Grid.Row="1" Background="{TemplateBinding Background}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="DayColumn" Width="78*" />
+                    <ColumnDefinition x:Name="FirstSpacerColumn" Width="Auto" />
+                    <ColumnDefinition x:Name="MonthColumn" Width="132*" />
+                    <ColumnDefinition x:Name="SecondSpacerColumn" Width="Auto" />
+                    <ColumnDefinition x:Name="YearColumn" Width="78*" />
+                  </Grid.ColumnDefinitions>
+                  <Rectangle x:Name="HighlightRect" Grid.Column="0" Grid.ColumnSpan="5" Height="{ThemeResource DatePickerFlyoutPresenterHighlightHeight}" Margin="6,0,6,0" VerticalAlignment="Center" Fill="{ThemeResource CupertinoDatePickerFlyoutPresenterHighlightFill}" RadiusX="6" RadiusY="6" />
+                  <Rectangle x:Name="FirstPickerSpacing" Grid.Column="1" Width="0" HorizontalAlignment="Center" Fill="{ThemeResource CupertinoOpaqueSeparatorBrush}" />
+                  <Rectangle x:Name="SecondPickerSpacing" Grid.Column="3" Width="0" HorizontalAlignment="Center" Fill="{ThemeResource CupertinoOpaqueSeparatorBrush}" />
+                </Grid>
+              </Grid>
+            </Border>
+          </toolkit:ElevatedView>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </not_win:Style>
+  <Style x:Key="CupertinoDatePickerStyle" TargetType="DatePicker">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoLabelBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CupertinoDatePickerBorderBrush}" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="CornerRadius" Value="{StaticResource CupertinoDatePickerCornerRadius}" />
+    <not_win:Setter Property="FlyoutPresenterStyle" Value="{StaticResource CupertinoDatePickerFlyoutPresenterStyle}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DatePicker">
+          <!-- Root Grid -->
+          <Grid x:Name="LayoutRoot">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Header -->
+            <TextBlock x:Name="HeaderTextBlock" Margin="0,8,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Foreground="{TemplateBinding Foreground}" Style="{StaticResource BodyTextBlockStyle}" Text="{TemplateBinding Header}" TextWrapping="Wrap" />
+            <!-- Flyout Button -->
+            <Button x:Name="FlyoutButton" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}" Style="{StaticResource CupertinoDatePickerFlyoutButtonStyle}" UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}">
+              <Grid x:Name="FlyoutButtonContentGrid" VerticalAlignment="Top" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="{TemplateBinding CornerRadius}">
+                <!-- DateText -->
+                <TextBlock x:Name="DateText" Margin="10,0,0,0" Style="{StaticResource BodyTextBlockStyle}" Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0:d}'}" />
+                <!-- PlaceholderText -->
+                <TextBlock x:Name="PlaceholderText" Margin="10,0,0,0" Foreground="{StaticResource CupertinoPlaceholderTextBrush}" Style="{StaticResource BodyTextBlockStyle}" Text="{TemplateBinding Header}" Visibility="Collapsed" />
+                <!-- Removing this cause trouble with the DatePicker code -->
+                <TextBlock x:Name="DayTextBlock" Opacity="0" />
+              </Grid>
+            </Button>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="DateText.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+                    <Setter Target="HeaderTextBlock.Foreground" Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HasDateStates">
+                <VisualState x:Name="HasDate" />
+                <VisualState x:Name="HasNoDate">
+                  <VisualState.Setters>
+                    <Setter Target="DateText.Visibility" Value="Collapsed" />
+                    <Setter Target="PlaceholderText.Visibility" Value="Visible" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\HyperlinkButton.xaml-->
+  <FontFamily x:Key="CupertinoHyperlinkButtonFontFamily">SF Pro</FontFamily>
+  <x:String x:Key="MinusGlyphPathStyle">M0 1.67236H5.57812V0.327637H0V1.67236Z</x:String>
+  <Style x:Key="CupertinoHyperlinkButtonStyle" TargetType="HyperlinkButton">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoBlueBrush}" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="HyperlinkButton">
+          <Grid Background="{TemplateBinding Background}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver">
+                  <VisualState.Setters>
+                    <Setter Target="Content.Opacity" Value="{StaticResource CupertinoMediumOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                  <VisualState.Setters>
+                    <Setter Target="Content.Opacity" Value="{StaticResource CupertinoPressedOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentPresenter.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused" />
+                <VisualState x:Name="Unfocused" />
+                <VisualState x:Name="PointerFocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="Content" MinHeight="{TemplateBinding MinHeight}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}">
+              <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" VerticalAlignment="Top" TextWrapping="Wrap" />
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\NumberBox.xaml-->
+  <x:String x:Key="PlusGlyphPathStyle">M0.578125 5.67236H4.29688V9.47412H5.6416V5.67236H9.36035V4.32764H5.6416V0.525879H4.29688V4.32764H0.578125V5.67236Z</x:String>
+  <SolidColorBrush x:Key="CupertinoTextBoxBorderBrush" Color="{ThemeResource LabelColor}" Opacity="0.2" />
+  <SolidColorBrush x:Key="CupertinoDetailsLightBrush" Color="{StaticResource CupertinoPrimaryGrayColor}" Opacity="0.3" />
+  <x:Double x:Key="CupertinoHeaderFontSize">8</x:Double>
+  <SolidColorBrush x:Key="CupertinoHeaderForegroundBrush" Color="{ThemeResource LabelColor}" Opacity="0.7" />
+  <CornerRadius x:Key="CupertinoCornerRadius">8</CornerRadius>
+  <Style x:Name="CupertinoNumberBoxStyle" TargetType="controls:NumberBox">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="{StaticResource CupertinoSystemBackgroundBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource CupertinoCornerRadius}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource CupertinoTextBoxBorderBrush}" />
+    <Setter Property="Padding" Value="7" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="controls:NumberBox">
+          <Grid>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="GridRoot.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="SpinButtonStates">
+                <VisualState x:Name="SpinButtonsCollapsed" />
+                <VisualState x:Name="SpinButtonsVisible">
+                  <VisualState.Setters>
+                    <Setter Target="DownSpinButton.Visibility" Value="Visible" />
+                    <Setter Target="UpSpinButton.Visibility" Value="Visible" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="ContentBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" />
+            <Grid x:Name="GridRoot" Margin="{TemplateBinding Padding}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <TextBox x:Name="InputBox" Grid.Column="0" Style="{StaticResource NumberBoxTextBoxStyle}" Text="{TemplateBinding Text}" Header="{TemplateBinding Header}" HeaderTemplate="{TemplateBinding HeaderTemplate}" PlaceholderText="{TemplateBinding PlaceholderText}" />
+              <StackPanel CornerRadius="{TemplateBinding CornerRadius}" Background="{StaticResource CupertinoQuinaryGrayBrush}" Orientation="Horizontal" Grid.Column="1">
+                <RepeatButton x:Name="DownSpinButton" Grid.Column="1" Style="{StaticResource NumberBoxMinusButtonStyle}" />
+                <Rectangle Width="1" Height="12" Fill="{StaticResource CupertinoDetailsLightBrush}" />
+                <RepeatButton x:Name="UpSpinButton" Style="{StaticResource NumberBoxPlusButtonStyle}" />
+              </StackPanel>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="NumberBoxPlusButtonStyle" TargetType="RepeatButton">
+    <Style.Setters>
+      <Setter Property="IsTabStop" Value="False" />
+      <Setter Property="Width" Value="50" />
+      <Setter Property="Height" Value="24" />
+      <Setter Property="FontSize" Value="22" />
+      <Setter Property="Padding" Value="7" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Background" Value="{StaticResource CupertinoQuinaryGrayBrush}" />
+      <Setter Property="Foreground" Value="{StaticResource CupertinoLabelBrush}" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RepeatButton">
+            <Grid x:Name="ButtonLayoutGrid">
+              <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                  <VisualState x:Name="Normal" />
+                  <VisualState x:Name="PointerOver" />
+                  <VisualState x:Name="Pressed">
+                    <VisualState.Setters>
+                      <Setter Target="PressedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
+                    </VisualState.Setters>
+                  </VisualState>
+                  <VisualState x:Name="Disabled" />
+                </VisualStateGroup>
+              </VisualStateManager.VisualStateGroups>
+              <Path x:Name="GlyphElement" Data="{StaticResource PlusGlyphPathStyle}" Fill="{TemplateBinding Foreground}" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="9" AutomationProperties.AccessibilityView="Raw" />
+              <Border x:Name="PressedOverlay" Background="{TemplateBinding Foreground}" Opacity="0" />
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style.Setters>
+  </Style>
+  <Style x:Key="NumberBoxMinusButtonStyle" TargetType="RepeatButton">
+    <Style.Setters>
+      <Setter Property="IsTabStop" Value="False" />
+      <Setter Property="Width" Value="50" />
+      <Setter Property="Height" Value="24" />
+      <Setter Property="FontSize" Value="22" />
+      <Setter Property="Padding" Value="7" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Background" Value="{StaticResource CupertinoQuinaryGrayBrush}" />
+      <Setter Property="Foreground" Value="{StaticResource CupertinoLabelBrush}" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RepeatButton">
+            <Grid x:Name="ButtonLayoutGrid">
+              <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                  <VisualState x:Name="Normal" />
+                  <VisualState x:Name="PointerOver" />
+                  <VisualState x:Name="Pressed">
+                    <VisualState.Setters>
+                      <Setter Target="PressedOverlay.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
+                    </VisualState.Setters>
+                  </VisualState>
+                  <VisualState x:Name="Disabled" />
+                </VisualStateGroup>
+              </VisualStateManager.VisualStateGroups>
+              <Path x:Name="GlyphElement" Data="{StaticResource MinusGlyphPathStyle}" Fill="{TemplateBinding Foreground}" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="10" AutomationProperties.AccessibilityView="Raw" />
+              <Border x:Name="PressedOverlay" Background="{TemplateBinding Foreground}" Opacity="0" />
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style.Setters>
+  </Style>
+  <Style x:Key="NumberBoxTextBoxStyle" TargetType="TextBox">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoLabelBrush}" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="5" />
+    <Setter Property="InputScope" Value="Number" />
+    <Setter Property="PlaceholderForeground" Value="{StaticResource CupertinoPlaceholderTextBrush}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TextBox">
+          <Grid x:Name="Root">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled" />
+                <VisualState x:Name="Focused" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="ButtonStates">
+                <VisualState x:Name="ButtonVisible" />
+                <VisualState x:Name="ButtonCollapsed" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HeaderStates">
+                <VisualState x:Name="NotEmpty" />
+                <VisualState x:Name="Empty">
+                  <VisualState.Setters>
+                    <Setter Target="PlaceholderElement.Opacity" Value="1" />
+                  </VisualState.Setters>
+                  <VisualState.StateTriggers>
+                    <StateTrigger IsActive="{Binding Text, Converter={StaticResource CupertinoEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+                  </VisualState.StateTriggers>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid Margin="{TemplateBinding Padding}">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <ContentPresenter x:Name="HeaderContentPresenter" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" FontSize="{StaticResource CupertinoHeaderFontSize}" Foreground="{ThemeResource CupertinoHeaderForegroundBrush}" TextWrapping="Wrap" VerticalAlignment="Top" />
+              <ScrollViewer x:Name="ContentElement" Grid.Row="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
+                <ScrollViewer.RenderTransform>
+                  <CompositeTransform x:Name="ContentElement_CompositeTransform" />
+                </ScrollViewer.RenderTransform>
+              </ScrollViewer>
+              <TextBlock x:Name="PlaceholderElement" Grid.Row="1" Foreground="{TemplateBinding PlaceholderForeground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0" />
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\PasswordBox.xaml-->
+  <SolidColorBrush x:Key="CupertinoPasswordBoxBorderBrush" Color="{ThemeResource LabelColor}" Opacity="0.2" />
+  <CornerRadius x:Key="CupertinoPasswordBoxCornerRadius">5</CornerRadius>
+  <Style x:Key="CupertinoPasswordBoxStyle" TargetType="PasswordBox">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="Transparent" />
+    <!--  Issue with updating foreground on theme change https://github.com/unoplatform/Uno.Themes/issues/522  -->
+    <Setter Property="Foreground" Value="{StaticResource CupertinoLabelBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource CupertinoPasswordBoxBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="{StaticResource CupertinoPasswordBoxCornerRadius}" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="10" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="PasswordBox">
+          <Grid x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="Root.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Focused" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HeaderStates">
+                <VisualState x:Name="NotEmpty" />
+                <VisualState x:Name="Empty">
+                  <VisualState.Setters>
+                    <Setter Target="PlaceholderElement.Opacity" Value="1" />
+                  </VisualState.Setters>
+                  <VisualState.StateTriggers>
+                    <StateTrigger IsActive="{Binding Password, Converter={StaticResource CupertinoEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+                  </VisualState.StateTriggers>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer x:Name="ContentElement" Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsTabStop="False" AutomationProperties.AccessibilityView="Raw" ZoomMode="Disabled" />
+            <TextBlock x:Name="PlaceholderElement" Grid.Column="1" Opacity="0" Foreground="{StaticResource CupertinoPlaceholderTextBrush}" Text="{TemplateBinding PlaceholderText}" Style="{StaticResource CupertinoBody}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\ProgressBar.xaml-->
+  <Style x:Key="CupertinoProgressBarStyle" TargetType="controls:ProgressBar">
+    <Setter Property="Foreground" Value="{StaticResource CupertinoBlueBrush}" />
+    <Setter Property="Background" Value="{StaticResource CupertinoQuinaryGrayBrush}" />
+    <Setter Property="Width" Value="250" />
+  </Style>
+  <!--origin: Styles\Controls\ProgressRing.xaml-->
+  <lottie_win:LottieVisualSource x:Key="CupertinoDeterminateAnimation_Win" UriSource="ms-appx:///Uno.Cupertino/Assets/CupertinoProgressRing.json" />
+  <lottie_win:LottieVisualSource x:Key="CupertinoIndeterminateAnimation_Win" UriSource="ms-appx:///Uno.Cupertino/Assets/CupertinoProgressRing.json" />
+  <lottie_not_win:LottieVisualSource x:Key="CupertinoDeterminateAnimation_Uno" UriSource="embedded://Uno.Cupertino/Uno.Cupertino.Assets.CupertinoProgressRing.json" />
+  <lottie_not_win:LottieVisualSource x:Key="CupertinoIndeterminateAnimation_Uno" UriSource="embedded://Uno.Cupertino/Uno.Cupertino.Assets.CupertinoProgressRing.json" />
+  <Style x:Key="CupertinoProgressRingStyle" TargetType="controls:ProgressRing">
+    <win:Setter Property="DeterminateSource" Value="{StaticResource CupertinoDeterminateAnimation_Win}" />
+    <win:Setter Property="IndeterminateSource" Value="{StaticResource CupertinoIndeterminateAnimation_Win}" />
+    <not_win:Setter Property="DeterminateSource" Value="{StaticResource CupertinoDeterminateAnimation_Uno}" />
+    <not_win:Setter Property="IndeterminateSource" Value="{StaticResource CupertinoIndeterminateAnimation_Uno}" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoPrimaryGrayBrush}" />
+  </Style>
+  <!--origin: Styles\Controls\RadioButton.xaml-->
+  <GridLength x:Key="RadioCheckAreaLength">22</GridLength>
+  <x:Double x:Key="RadioCheckAreaSize">22</x:Double>
+  <x:Double x:Key="RadioFocusAreaSize">40</x:Double>
+  <x:Double x:Key="RadioBorderThickness">1</x:Double>
+  <x:Double x:Key="RadioBorderCheckedThickness">8</x:Double>
+  <FontFamily x:Key="CupertinoRadioButtonFontFamily">SF Pro</FontFamily>
+  <StaticResource x:Key="CupertinoRadioButtonBorderBrush" ResourceKey="CupertinoPrimaryGrayBrush" />
+  <StaticResource x:Key="CupertinoRadioButtonCheckedBrush" ResourceKey="CupertinoBlueBrush" />
+  <Style x:Key="CupertinoRadioButtonStyle" TargetType="RadioButton">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="{StaticResource CupertinoWhiteBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoLabelBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource RadioButtonBorderBrush}" />
+    <Setter Property="Padding" Value="9,0,0,0" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="MinWidth" Value="120" />
+    <Setter Property="MinHeight" Value="{StaticResource RadioCheckAreaSize}" />
+    <Setter Property="UseSystemFocusVisuals" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RadioButton">
+          <Grid x:Name="RootGrid" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="RootGrid.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="CheckStates">
+                <VisualState x:Name="Checked">
+                  <VisualState.Setters>
+                    <Setter Target="CheckEllipse.Opacity" Value="1" />
+                    <Setter Target="OuterEllipse_Checked.Opacity" Value="1" />
+                    <Setter Target="UncheckEllipse.Opacity" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Unchecked" />
+                <VisualState x:Name="Indeterminate" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <VisualState.Setters>
+                    <Setter Target="FocusRing.Opacity" Value="{StaticResource CupertinoFocusedOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerFocused" />
+                <VisualState x:Name="Unfocused" />
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="{StaticResource RadioCheckAreaLength}" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Ellipse x:Name="FocusRing" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="{StaticResource RadioFocusAreaSize}" Height="{StaticResource RadioFocusAreaSize}" Fill="{TemplateBinding Background}" IsHitTestVisible="False" StrokeThickness="0" Opacity="0" />
+            <Grid Height="{StaticResource RadioCheckAreaSize}" Width="{StaticResource RadioCheckAreaSize}">
+              <Ellipse x:Name="OuterEllipse_Checked" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" UseLayoutRounding="False" Stroke="{StaticResource CupertinoRadioButtonCheckedBrush}" StrokeThickness="{StaticResource RadioBorderCheckedThickness}" Opacity="0" />
+              <Ellipse x:Name="CheckEllipse" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" UseLayoutRounding="False" Fill="{TemplateBinding Background}" Opacity="0" StrokeThickness="0" Margin="6" />
+              <Ellipse x:Name="UncheckEllipse" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Uniform" UseLayoutRounding="False" Fill="{StaticResource RadioButtonBackgroundBrush}" Stroke="{StaticResource CupertinoRadioButtonBorderBrush}" StrokeThickness="{StaticResource RadioBorderThickness}" Margin="1" />
+            </Grid>
+            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" TextWrapping="WrapWholeWords" Grid.Column="1" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\Slider.xaml-->
+  <SolidColorBrush x:Key="CupertinoSliderTrackBrush" Color="{ThemeResource CupertinoPrimaryGrayColor}" />
+  <SolidColorBrush x:Key="CupertinoSliderThumbBrush" Color="{ThemeResource CupertinoWhiteColor}" />
+  <SolidColorBrush x:Key="CupertinoSliderActiveTrackBrush" Color="{ThemeResource CupertinoBlueColor}" />
+  <StaticResource x:Key="CupertinoSliderTickBarFill" ResourceKey="CupertinoPrimaryGrayColor" />
+  <StaticResource x:Key="CupertinoSliderInlineTickBarFill" ResourceKey="CupertinoBlueColor" />
+  <Style x:Key="CupertinoSliderThumbStyle" TargetType="Thumb">
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Thumb">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoSliderStyle" TargetType="Slider">
+    <Setter Property="Background" Value="{StaticResource CupertinoSliderTrackBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoSliderActiveTrackBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}" />
+    <Setter Property="ManipulationMode" Value="None" />
+    <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+    <Setter Property="FocusVisualMargin" Value="-7,0,-7,0" />
+    <Setter Property="IsFocusEngagementEnabled" Value="True" />
+    <not_win:Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Slider">
+          <Grid Margin="{TemplateBinding Padding}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="HorizontalTrackRect.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="HorizontalDecreaseRect.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="TopTickBar.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="HorizontalInlineTickBar.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="BottomTickBar.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="VerticalTrackRect.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="VerticalDecreaseRect.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="LeftTickBar.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="VerticalInlineTickBar.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="RightTickBar.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PointerOver" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusEngagementStates">
+                <VisualState x:Name="FocusDisengaged" />
+                <VisualState x:Name="FocusEngagedHorizontal">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="FocusEngagedVertical">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--  SliderContainer  -->
+            <Grid x:Name="SliderContainer" Background="Transparent" Control.IsTemplateFocusTarget="True" Grid.Row="1">
+              <!--  HorizontalTemplate  -->
+              <Grid x:Name="HorizontalTemplate" MinHeight="34">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="15" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="15" />
+                </Grid.RowDefinitions>
+                <!--  HorizontalTrackRect  -->
+                <Rectangle x:Name="HorizontalTrackRect" Fill="{TemplateBinding Background}" Height="4" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" Grid.Row="1" Grid.ColumnSpan="3" />
+                <!--  HorizontalDecreaseRect  -->
+                <Rectangle x:Name="HorizontalDecreaseRect" Fill="{TemplateBinding Foreground}" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" Grid.Row="1" />
+                <!--  TopTickBar  -->
+                <TickBar x:Name="TopTickBar" Visibility="Collapsed" Fill="{StaticResource CupertinoSliderTickBarFill}" Height="4" VerticalAlignment="Bottom" Margin="0,0,0,4" Grid.ColumnSpan="3" />
+                <!--  HorizontalInlineTickBar  -->
+                <TickBar x:Name="HorizontalInlineTickBar" Visibility="Collapsed" Fill="{StaticResource CupertinoSliderInlineTickBarFill}" Height="4" Grid.Row="1" Grid.ColumnSpan="3" />
+                <!--  BottomTickBar  -->
+                <TickBar x:Name="BottomTickBar" Visibility="Collapsed" Fill="{StaticResource CupertinoSliderTickBarFill}" Height="4" VerticalAlignment="Top" Margin="0,4,0,0" Grid.Row="2" Grid.ColumnSpan="3" />
+                <!--  HorizontalThumb  -->
+                <toolkit:ElevatedView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Width="28" Height="28" Background="Transparent" CornerRadius="14" Elevation="3" ShadowColor="{StaticResource ShadowColor}">
+                  <Thumb x:Name="HorizontalThumb" Style="{StaticResource CupertinoSliderThumbStyle}" Background="{StaticResource CupertinoSliderThumbBrush}" DataContext="{TemplateBinding Value}" Height="28" Width="28" FocusVisualMargin="-14,-6,-14,-6" AutomationProperties.AccessibilityView="Raw" />
+                </toolkit:ElevatedView>
+              </Grid>
+              <!--  VerticalTemplate  -->
+              <Grid x:Name="VerticalTemplate" MinWidth="32" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="15" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="15" />
+                </Grid.ColumnDefinitions>
+                <!--  VerticalTrackRect  -->
+                <Rectangle x:Name="VerticalTrackRect" Fill="{TemplateBinding Background}" Width="4" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" Grid.Column="1" Grid.RowSpan="3" />
+                <!--  VerticalDecreaseRect  -->
+                <Rectangle x:Name="VerticalDecreaseRect" Fill="{TemplateBinding Foreground}" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" Grid.Column="1" Grid.Row="2" />
+                <!--  LeftTickBar  -->
+                <TickBar x:Name="LeftTickBar" Visibility="Collapsed" Fill="{StaticResource CupertinoSliderTickBarFill}" Width="4" HorizontalAlignment="Right" Margin="0,0,4,0" Grid.RowSpan="3" />
+                <!--  VerticalInlineTickBar  -->
+                <TickBar x:Name="VerticalInlineTickBar" Visibility="Collapsed" Fill="{StaticResource CupertinoSliderInlineTickBarFill}" Width="4" Grid.Column="1" Grid.RowSpan="3" />
+                <!--  RightTickBar  -->
+                <TickBar x:Name="RightTickBar" Visibility="Collapsed" Fill="{StaticResource CupertinoSliderTickBarFill}" Width="4" HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Column="2" Grid.RowSpan="3" />
+                <!--  VerticalThumb  -->
+                <toolkit:ElevatedView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Width="28" Height="28" Background="Transparent" CornerRadius="14" Elevation="3" ShadowColor="{StaticResource ShadowColor}">
+                  <Thumb x:Name="VerticalThumb" Style="{StaticResource CupertinoSliderThumbStyle}" Background="{StaticResource CupertinoSliderThumbBrush}" DataContext="{TemplateBinding Value}" Width="28" Height="28" FocusVisualMargin="-6,-14,-6,-14" AutomationProperties.AccessibilityView="Raw" />
+                </toolkit:ElevatedView>
+              </Grid>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoSecondarySliderStyle" BasedOn="{StaticResource CupertinoSliderStyle}" TargetType="Slider">
+    <Setter Property="Foreground" Value="{StaticResource CupertinoSecondaryBrush}" />
+  </Style>
+  <!--origin: Styles\Controls\TextBlock.xaml-->
+  <Style x:Key="CupertinoBaseTextBlockStyle" TargetType="TextBlock">
+    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+  </Style>
+  <Style x:Key="CupertinoLargeTitle" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="34" />
+    <Setter Property="LineHeight" Value="41" />
+  </Style>
+  <Style x:Key="CupertinoPrimaryTitle" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="28" />
+    <Setter Property="LineHeight" Value="34" />
+  </Style>
+  <Style x:Key="CupertinoSecondaryTitle" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="22" />
+    <Setter Property="LineHeight" Value="28" />
+  </Style>
+  <Style x:Key="CupertinoTertiaryTitle" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="20" />
+    <Setter Property="LineHeight" Value="25" />
+  </Style>
+  <Style x:Key="CupertinoHeadline" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="17" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="LineHeight" Value="22" />
+  </Style>
+  <Style x:Key="CupertinoBody" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="17" />
+    <Setter Property="LineHeight" Value="22" />
+  </Style>
+  <Style x:Key="CupertinoCallout" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="LineHeight" Value="21" />
+  </Style>
+  <Style x:Key="CupertinoSubhead" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="LineHeight" Value="20" />
+  </Style>
+  <Style x:Key="CupertinoFootnote" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="LineHeight" Value="18" />
+  </Style>
+  <Style x:Key="CupertinoPrimaryCaption" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="LineHeight" Value="16" />
+  </Style>
+  <Style x:Key="CupertinoSecondaryCaption" TargetType="TextBlock" BasedOn="{StaticResource CupertinoBaseTextBlockStyle}">
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="LineHeight" Value="13" />
+  </Style>
+  <!--origin: Styles\Controls\TextBox.xaml-->
+  <SolidColorBrush x:Key="CupertinoDeleteButtonTextBoxBrush" Color="{ThemeResource LabelColor}" Opacity="0.2" />
+  <CornerRadius x:Key="CupertinoTextBoxCornerRadius">5</CornerRadius>
+  <x:String x:Key="ClearGlyphPathData">M10.661012,7.5689991L7.5990001,10.650999 12.939089,15.997999 7.5990001,21.336999 10.661012,24.405 16.007082,19.065 21.369997,24.405 24.430058,21.336999 24.429081,21.336 19.088991,15.998999 24.429081,10.662001 21.345095,7.5819996 16.007082,12.919001z M15.997072,0C24.828983,0 31.994999,7.1770013 31.994999,15.999998 31.994999,24.826997 24.828007,31.999999 15.997072,31.999999 7.1569835,31.999999 1.5270052E-07,24.826997 0,15.999998 1.5270052E-07,7.1799997 7.1569835,0 15.997072,0z</x:String>
+  <Style x:Key="DeleteButtonStyle" TargetType="Button">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid x:Name="ButtonLayoutGrid" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="ButtonLayoutGrid.Opacity" Value="0" />
+                  </VisualState.Setters>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Path x:Name="GlyphElement" Data="{StaticResource ClearGlyphPathData}" Fill="{StaticResource CupertinoDeleteButtonTextBoxBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" Width="18" Height="18" AutomationProperties.AccessibilityView="Raw" />
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoTextBoxStyle" TargetType="TextBox">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Background" Value="Transparent" />
+    <!--  Issue with updating foreground on theme change https://github.com/unoplatform/Uno.Themes/issues/522  -->
+    <Setter Property="Foreground" Value="{StaticResource CupertinoLabelBrush}" />
+    <Setter Property="PlaceholderForeground" Value="{StaticResource CupertinoPlaceholderTextBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="{StaticResource CupertinoTextBoxBorderBrush}" />
+    <Setter Property="CornerRadius" Value="{StaticResource CupertinoTextBoxCornerRadius}" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="10" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TextBox">
+          <Grid x:Name="Root">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="PointerOver" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <VisualState.Setters>
+                    <Setter Target="ContentBorder.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    <Setter Target="ContentElement.Opacity" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Focused" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="ButtonStates">
+                <VisualState x:Name="ButtonVisible">
+                  <VisualState.Setters>
+                    <Setter Target="DeleteButton.Visibility" Value="Visible" />
+                  </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ButtonCollapsed" />
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="HeaderStates">
+                <VisualState x:Name="NotEmpty" />
+                <VisualState x:Name="Empty">
+                  <VisualState.Setters>
+                    <Setter Target="PlaceholderElement.Opacity" Value="1" />
+                  </VisualState.Setters>
+                  <VisualState.StateTriggers>
+                    <StateTrigger IsActive="{Binding Text, Converter={StaticResource CupertinoEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+                  </VisualState.StateTriggers>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="ContentBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" />
+            <Grid Margin="{TemplateBinding Padding}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <ScrollViewer x:Name="ContentElement" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
+                <ScrollViewer.RenderTransform>
+                  <CompositeTransform x:Name="ContentElement_CompositeTransform" />
+                </ScrollViewer.RenderTransform>
+              </ScrollViewer>
+              <TextBlock x:Name="PlaceholderElement" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" RenderTransformOrigin="0,0.5" Style="{StaticResource CupertinoBody}" Text="{TemplateBinding PlaceholderText}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0" />
+              <Button x:Name="DeleteButton" Grid.Column="1" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource DeleteButtonStyle}" VerticalAlignment="Center" Visibility="Collapsed" AutomationProperties.AccessibilityView="Raw" />
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--origin: Styles\Controls\ToggleSwitch.xaml-->
+  <SolidColorBrush x:Key="CupertinoToggleSwitchOnButtonBrush" Color="{ThemeResource CupertinoWhiteColor}" />
+  <SolidColorBrush x:Key="CupertinoToggleSwitchOnBackgroundBrush" Color="{ThemeResource CupertinoGreenColor}" />
+  <Style x:Key="DefaultCupertinoToggleSwitchStyle" TargetType="ToggleSwitch">
+    <Setter Property="FontFamily" Value="{StaticResource CupertinoFontFamily}" />
+    <Setter Property="Foreground" Value="{StaticResource CupertinoToggleSwitchOnButtonBrush}" />
+    <Setter Property="Background" Value="{StaticResource CupertinoToggleSwitchOnBackgroundBrush}" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Right" />
+    <Setter Property="FontSize" Value="15" />
+    <Setter Property="ManipulationMode" Value="System,TranslateX" />
+    <Setter Property="UseSystemFocusVisuals" Value="True" />
+    <Setter Property="CornerRadius" Value="15.5" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ToggleSwitch">
+          <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Pressed" />
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToggleBackground" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CupertinoDisableStateOpacity}" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="ToggleStates">
+                <VisualStateGroup.Transitions>
+                  <VisualTransition x:Name="DraggingToOnTransition" From="Dragging" To="On" GeneratedDuration="0">
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition x:Name="DraggingToOffTransition" From="Dragging" To="Off" GeneratedDuration="0">
+                    <Storyboard />
+                  </VisualTransition>
+                  <VisualTransition x:Name="OnToOffTransition" From="On" To="Off" GeneratedDuration="0">
+                    <Storyboard />
+                  </VisualTransition>
+                  <VisualTransition x:Name="OffToOnTransition" From="Off" To="On" GeneratedDuration="0">
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Opacity">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Dragging" />
+                <VisualState x:Name="Off" />
+                <VisualState x:Name="On">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="KnobTranslateTransform" Storyboard.TargetProperty="X" To="20" Duration="0" />
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Opacity">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="ContentStates">
+                <VisualState x:Name="OffContent">
+                  <Storyboard />
+                </VisualState>
+                <VisualState x:Name="OnContent">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="OnContentPresenter" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible" Storyboard.TargetName="OnContentPresenter">
+                      <DiscreteObjectKeyFrame KeyTime="0">
+                        <DiscreteObjectKeyFrame.Value>
+                          <x:Boolean>True</x:Boolean>
+                        </DiscreteObjectKeyFrame.Value>
+                      </DiscreteObjectKeyFrame>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="10" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="12" MaxWidth="12" />
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{TemplateBinding Header}" Style="{StaticResource CupertinoBaseTextBlockStyle}" Foreground="{StaticResource CupertinoLabelBrush}" Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}" Grid.ColumnSpan="4" />
+            <ContentPresenter x:Name="OnContentPresenter" Grid.Row="1" Grid.RowSpan="3" Grid.Column="2" Opacity="0" Foreground="{TemplateBinding Foreground}" IsHitTestVisible="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" AutomationProperties.AccessibilityView="Raw" />
+            <Grid Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" Control.IsTemplateFocusTarget="True" />
+            <!-- Marker element used to compute draggable zone -->
+            <Rectangle x:Name="SwitchKnobBounds" Grid.Row="2" />
+            <Grid x:Name="ToggleBackground" Grid.Row="2" VerticalAlignment="Center">
+              <Rectangle x:Name="OuterBorder" Height="31" Width="51" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" Fill="{StaticResource CupertinoSecondarySystemFillBrush}" />
+              <Rectangle x:Name="HighlightBorder" Height="31" Width="51" RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}" RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" Fill="{TemplateBinding Background}" Opacity="0" />
+            </Grid>
+            <Grid x:Name="SwitchKnob" Grid.Row="2" Padding="2,0" HorizontalAlignment="Left" Width="31" Height="27">
+              <Ellipse Fill="{TemplateBinding Foreground}" x:Name="SwitchKnobOn" Opacity="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+              <Ellipse Fill="{TemplateBinding Foreground}" x:Name="SwitchKnobOff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+              <Grid.RenderTransform>
+                <TranslateTransform x:Name="KnobTranslateTransform" />
+              </Grid.RenderTransform>
+            </Grid>
+            <Thumb x:Name="SwitchThumb" AutomationProperties.AccessibilityView="Raw" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3">
+              <Thumb.Template>
+                <ControlTemplate TargetType="Thumb">
+                  <Rectangle Fill="Transparent" />
+                </ControlTemplate>
+              </Thumb.Template>
+            </Thumb>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CupertinoToggleSwitchStyle" TargetType="ToggleSwitch" BasedOn="{StaticResource DefaultCupertinoToggleSwitchStyle}" />
+  <!--origin: Styles\Controls\_Resources.xaml-->
+</ResourceDictionary>

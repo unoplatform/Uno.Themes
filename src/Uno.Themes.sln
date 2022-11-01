@@ -3,37 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31903.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Material", "src\library\Uno.Material\Uno.Material.csproj", "{B5279EE5-E662-45B0-8929-D90D0BDE16AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Material", "Uno.Material\Uno.Material.csproj", "{B5279EE5-E662-45B0-8929-D90D0BDE16AB}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Uno.Themes.Samples.Shared", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Uno.Themes.Samples.Shared", "..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.Droid", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Droid\Uno.Themes.Samples.Droid.csproj", "{46670BA5-CDEC-4187-8D99-74ADDE56E4DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.Droid", "..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Droid\Uno.Themes.Samples.Droid.csproj", "{46670BA5-CDEC-4187-8D99-74ADDE56E4DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.UWP", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.UWP\Uno.Themes.Samples.UWP.csproj", "{265517E4-AB14-453D-92DA-F32AA1D4007D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.UWP", "..\samples\Uno.Themes.Samples\Uno.Themes.Samples.UWP\Uno.Themes.Samples.UWP.csproj", "{265517E4-AB14-453D-92DA-F32AA1D4007D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Wasm", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Wasm\Uno.Themes.Samples.Wasm.csproj", "{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Wasm", "..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Wasm\Uno.Themes.Samples.Wasm.csproj", "{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "library", "library", "{EB41D6CC-AEBE-40A8-B42C-D3F7FBA7001E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.iOS", "..\samples\Uno.Themes.Samples\Uno.Themes.Samples.iOS\Uno.Themes.Samples.iOS.csproj", "{2C13056C-D56D-4302-A983-14AF3FFA565C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.iOS", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.iOS\Uno.Themes.Samples.iOS.csproj", "{2C13056C-D56D-4302-A983-14AF3FFA565C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devops", "Devops", "{464D0819-2E75-4DED-9F70-039580314AFA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{464D0819-2E75-4DED-9F70-039580314AFA}"
 	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
-		build\gitversion.yml = build\gitversion.yml
-		build\stage-build.yml = build\stage-build.yml
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
+		..\build\gitversion.yml = ..\build\gitversion.yml
+		..\build\stage-build-wasm.yml = ..\build\stage-build-wasm.yml
+		..\build\stage-build.yml = ..\build\stage-build.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{1EB1EA7F-DD48-49C2-97B3-ADB8E86EF28D}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\conventional-commits.yml = .github\workflows\conventional-commits.yml
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.macOS", "..\samples\Uno.Themes.Samples\Uno.Themes.Samples.macOS\Uno.Themes.Samples.macOS.csproj", "{E5A33630-47C0-4E0B-8D0A-9D50CCC3498B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.macOS", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.macOS\Uno.Themes.Samples.macOS.csproj", "{E5A33630-47C0-4E0B-8D0A-9D50CCC3498B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Skia.Gtk", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Skia.Gtk\Uno.Themes.Samples.Skia.Gtk.csproj", "{290980EF-0A64-43A5-AEB4-E022D82BBF8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Skia.Gtk", "..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Skia.Gtk\Uno.Themes.Samples.Skia.Gtk.csproj", "{290980EF-0A64-43A5-AEB4-E022D82BBF8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DBF3AF2F-F909-4106-A436-7D76CBFBADCC}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DBF3AF2F-F
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Cupertino", "src\library\Uno.Cupertino\Uno.Cupertino.csproj", "{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Cupertino", "Uno.Cupertino\Uno.Cupertino.csproj", "{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "markup", "markup", "{5A1AA87E-F559-49F0-8D78-2B57E5D92843}"
 EndProject
@@ -52,14 +46,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.WinUI.Markup", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Material.WinUI.Markup", "src\library\Uno.Material.WinUI.Markup\Uno.Material.WinUI.Markup.csproj", "{827BA965-C6B9-4D31-B973-49B885771E79}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{742B3533-50A6-4A1F-A62F-25924F2FA3A6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{AACD36F7-D86E-413A-9F9D-322E4989531A}"
 	ProjectSection(SolutionItems) = preProject
 		crosstargeting_override.props.sample = crosstargeting_override.props.sample
 		Directory.Build.props = Directory.Build.props
+		..\Directory.Build.props = ..\Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
-		global.json = global.json
+		..\global.json = ..\global.json
 		PlatformItemGroups.props = PlatformItemGroups.props
+		tfms-all.props = tfms-all.props
+		tfms-net6-only.props = tfms-net6-only.props
+		tfms-uwp.props = tfms-uwp.props
+		tfms-winui.props = tfms-winui.props
 		Uno.CrossTargeting.props = Uno.CrossTargeting.props
+		xamlmerge.targets = xamlmerge.targets
 	EndProjectSection
 EndProject
 Global
@@ -391,13 +391,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B5279EE5-E662-45B0-8929-D90D0BDE16AB} = {EB41D6CC-AEBE-40A8-B42C-D3F7FBA7001E}
 		{6279C845-92F8-4333-AB99-3D213163593C} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
 		{46670BA5-CDEC-4187-8D99-74ADDE56E4DC} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
 		{265517E4-AB14-453D-92DA-F32AA1D4007D} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
 		{2C13056C-D56D-4302-A983-14AF3FFA565C} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
-		{1EB1EA7F-DD48-49C2-97B3-ADB8E86EF28D} = {464D0819-2E75-4DED-9F70-039580314AFA}
 		{E5A33630-47C0-4E0B-8D0A-9D50CCC3498B} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E} = {EB41D6CC-AEBE-40A8-B42C-D3F7FBA7001E}
@@ -409,12 +407,12 @@ Global
 		SolutionGuid = {66F0EE99-4E63-43F2-9504-0CFC104E7084}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{265517e4-ab14-453d-92da-f32aa1d4007d}*SharedItemsImports = 4
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{290980ef-0a64-43a5-aeb4-e022d82bbf8b}*SharedItemsImports = 5
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{2c13056c-d56d-4302-a983-14af3ffa565c}*SharedItemsImports = 4
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{46670ba5-cdec-4187-8d99-74adde56e4dc}*SharedItemsImports = 4
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5d0f3763-f3bf-4478-b2d3-b47ab74205c9}*SharedItemsImports = 5
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{e5a33630-47c0-4e0b-8d0a-9d50ccc3498b}*SharedItemsImports = 4
+		..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{265517e4-ab14-453d-92da-f32aa1d4007d}*SharedItemsImports = 4
+		..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{290980ef-0a64-43a5-aeb4-e022d82bbf8b}*SharedItemsImports = 5
+		..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{2c13056c-d56d-4302-a983-14af3ffa565c}*SharedItemsImports = 4
+		..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{46670ba5-cdec-4187-8d99-74adde56e4dc}*SharedItemsImports = 4
+		..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5d0f3763-f3bf-4478-b2d3-b47ab74205c9}*SharedItemsImports = 5
+		..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
+		..\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{e5a33630-47c0-4e0b-8d0a-9d50ccc3498b}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

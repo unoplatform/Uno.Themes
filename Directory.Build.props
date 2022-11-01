@@ -1,0 +1,15 @@
+﻿<Project>
+	<PropertyGroup>
+		<Build_Android>true</Build_Android>
+		<Build_iOS>true</Build_iOS>
+		<Build_MacOS>true</Build_MacOS>
+		<Build_Windows>true</Build_Windows>
+	</PropertyGroup>
+
+	<Target Name="Log disabled platforms" BeforeTargets="BeforeBuild">
+		<Message Importance="high" Condition="!$(Build_Android)" Text="Android not included in build" />
+		<Message Importance="high" Condition="!$(Build_iOS)" Text="iOS not included in build" />
+		<Message Importance="high" Condition="!$(Build_MacOS)" Text="MacOS not included in build" />
+		<Message Importance="high" Condition="!$(Build_Windows)" Text="Windows not included in build" />
+	</Target>
+</Project>

@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+	<Import Project="..\tfms-all.props" />
+
 	<PropertyGroup>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">netstandard2.0;xamarinios10;monoandroid11.0;xamarinmac20</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(DisableNet6MobileTargets)'!='true'">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
@@ -50,11 +49,11 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="4.5.12" />
+				<PackageReference Include="Uno.WinUI"  />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="4.5.12" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Uno.WinUI.Lottie" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
-				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Microsoft.WindowsAppSDK" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 
 				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
 				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
@@ -87,14 +86,14 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="4.5.12" />
+				<PackageReference Include="Uno.UI" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
-				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
-				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
+				<PackageReference Include="Microsoft.UI.Xaml" />
+				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
-				<PackageReference Include="Uno.UI.Lottie" Version="4.5.12" />
+				<PackageReference Include="Uno.UI.Lottie" />
 			</ItemGroup>
 
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
@@ -147,5 +146,5 @@
 	  <UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
 	</ItemGroup>
 
-	<Import Project="..\Uno.Material\xamlmerge.targets" />
+	<Import Project="..\xamlmerge.targets" />
 </Project>

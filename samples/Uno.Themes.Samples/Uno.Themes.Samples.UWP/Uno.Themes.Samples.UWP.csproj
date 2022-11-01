@@ -1,205 +1,187 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build"
-	xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-	<ItemGroup>
-		<PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-			<!--
-			If, in the same solution, you are referencing a project that uses https://github.com/onovotny/MSBuildSdkExtras,
-			you need to make sure that the version provided here matches https://github.com/onovotny/MSBuildSdkExtras/blob/master/Source/MSBuild.Sdk.Extras/DefaultItems/ImplicitPackages.targets#L11.
-			This is not an issue when libraries are referenced through nuget packages. See https://github.com/unoplatform/uno/issues/446 for more details.
-			-->
-			<Version>6.2.10</Version>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-		<PackageReference Include="Microsoft.UI.Xaml">
-			<Version>2.6.2</Version>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Building.Light">
-			<Version>0.1.0-alpha.58</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Packaging">
-			<Version>0.1.0-alpha.58</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Versioning">
-			<Version>0.1.0-alpha.58</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="Uno.ShowMeTheXAML">
-			<Version>1.0.59</Version>
-		</PackageReference>
-		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
-			<Version>1.0.59</Version>
-		</PackageReference>
-		<PackageReference Include="Uno.UI">
-			<Version>4.5.12</Version>
-		</PackageReference>
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.12" />
-		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
-		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
-	</ItemGroup>
-	<PropertyGroup>
-		<!-- This is a visual studio 17.2 Preview 3 issue
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" />
+    <PackageReference Include="Microsoft.UI.Xaml" />
+    <PackageReference Include="nventive.Nimue.Application.Building.Light">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Packaging">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Versioning">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Uno.ShowMeTheXAML">
+    </PackageReference>
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
+    </PackageReference>
+    <PackageReference Include="Uno.UI">
+    </PackageReference>
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
+    <PackageReference Include="Uno.Core.Extensions.Compatibility" />
+    <PackageReference Include="Uno.Core.Extensions.Disposables" />
+  </ItemGroup>
+  <PropertyGroup>
+    <!-- This is a visual studio 17.2 Preview 3 issue
 	       Tempory workaround here for this issue: https://github.com/unoplatform/uno/discussions/5007#discussioncomment-2583741 -->
-		<SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
-	</PropertyGroup>
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-		<ProjectGuid>{265517E4-AB14-453D-92DA-F32AA1D4007D}</ProjectGuid>
-		<OutputType>AppContainerExe</OutputType>
-		<AppDesignerFolder>Properties</AppDesignerFolder>
-		<RootNamespace>Uno.Themes.Samples</RootNamespace>
-		<AssemblyName>Uno.Themes.Samples</AssemblyName>
-		<DefaultLanguage>en-US</DefaultLanguage>
-		<TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-		<TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
-		<TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
-		<MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
-		<FileAlignment>512</FileAlignment>
-		<ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-		<UseWinUI>false</UseWinUI>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-		<DebugSymbols>true</DebugSymbols>
-		<OutputPath>bin\x64\Debug\</OutputPath>
-		<DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-		<NoWarn>;2008</NoWarn>
-		<DebugType>full</DebugType>
-		<PlatformTarget>x64</PlatformTarget>
-		<UseVSHostingProcess>false</UseVSHostingProcess>
-		<ErrorReport>prompt</ErrorReport>
-		<Prefer32Bit>true</Prefer32Bit>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-		<OutputPath>bin\x64\Release\</OutputPath>
-		<DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-		<Optimize>true</Optimize>
-		<NoWarn>;2008</NoWarn>
-		<DebugType>pdbonly</DebugType>
-		<PlatformTarget>x64</PlatformTarget>
-		<UseVSHostingProcess>false</UseVSHostingProcess>
-		<ErrorReport>prompt</ErrorReport>
-		<Prefer32Bit>true</Prefer32Bit>
-		<UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
-	</PropertyGroup>
-	<PropertyGroup>
-		<SignAssembly>true</SignAssembly>
-	</PropertyGroup>
-	<ItemGroup>
-		<Compile Include="Properties\AssemblyInfo.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<AppxManifest Include="Package.appxmanifest">
-			<SubType>Designer</SubType>
-		</AppxManifest>
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="Assets\LargeTile.scale-100.png" />
-		<Content Include="Assets\LargeTile.scale-125.png" />
-		<Content Include="Assets\LargeTile.scale-150.png" />
-		<Content Include="Assets\LargeTile.scale-200.png" />
-		<Content Include="Assets\LargeTile.scale-400.png" />
-		<Content Include="Assets\lockscreenlogo.scale-200.png" />
-		<Content Include="Assets\SmallTile.scale-100.png" />
-		<Content Include="Assets\SmallTile.scale-125.png" />
-		<Content Include="Assets\SmallTile.scale-150.png" />
-		<Content Include="Assets\SmallTile.scale-200.png" />
-		<Content Include="Assets\SmallTile.scale-400.png" />
-		<Content Include="Assets\SplashScreen.scale-100.png" />
-		<Content Include="Assets\SplashScreen.scale-125.png" />
-		<Content Include="Assets\SplashScreen.scale-150.png" />
-		<Content Include="Assets\splashscreen.scale-200.png" />
-		<Content Include="Assets\SplashScreen.scale-400.png" />
-		<Content Include="Assets\Square150x150Logo.scale-100.png" />
-		<Content Include="Assets\Square150x150Logo.scale-125.png" />
-		<Content Include="Assets\Square150x150Logo.scale-150.png" />
-		<Content Include="Assets\square150x150logo.scale-200.png" />
-		<Content Include="Assets\Square150x150Logo.scale-400.png" />
-		<Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
-		<Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
-		<Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
-		<Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
-		<Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
-		<Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
-		<Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
-		<Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
-		<Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
-		<Content Include="Assets\Square44x44Logo.scale-100.png" />
-		<Content Include="Assets\Square44x44Logo.scale-125.png" />
-		<Content Include="Assets\Square44x44Logo.scale-150.png" />
-		<Content Include="Assets\square44x44logo.scale-200.png" />
-		<Content Include="Assets\Square44x44Logo.scale-400.png" />
-		<Content Include="Assets\Square44x44Logo.targetsize-16.png" />
-		<Content Include="Assets\Square44x44Logo.targetsize-24.png" />
-		<Content Include="Assets\square44x44logo.targetsize-24_altform-unplated.png" />
-		<Content Include="Assets\Square44x44Logo.targetsize-256.png" />
-		<Content Include="Assets\Square44x44Logo.targetsize-32.png" />
-		<Content Include="Assets\Square44x44Logo.targetsize-48.png" />
-		<Content Include="Assets\StoreLogo.scale-100.png" />
-		<Content Include="Assets\StoreLogo.scale-125.png" />
-		<Content Include="Assets\StoreLogo.scale-150.png" />
-		<Content Include="Assets\StoreLogo.scale-200.png" />
-		<Content Include="Assets\StoreLogo.scale-400.png" />
-		<Content Include="Assets\Wide310x150Logo.scale-100.png" />
-		<Content Include="Assets\Wide310x150Logo.scale-125.png" />
-		<Content Include="Assets\Wide310x150Logo.scale-150.png" />
-		<Content Include="Assets\wide310x150logo.scale-200.png" />
-		<Content Include="Assets\Wide310x150Logo.scale-400.png" />
-		<Content Include="Properties\Default.rd.xml" />
-	</ItemGroup>
-	<ItemGroup>
-		<!-- A reference to the entire .NET Framework and Windows SDK are automatically included -->
-		<ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj">
-			<Project>{98c1fdac-c692-4c65-99e7-70fdd53b8f2e}</Project>
-			<Name>Uno.Cupertino</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj">
-			<Project>{b5279ee5-e662-45b0-8929-d90d0bde16ab}</Project>
-			<Name>Uno.Material</Name>
-		</ProjectReference>
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="Assets\Fonts\Cupertino\SF-Pro.ttf" />
-	</ItemGroup>
-	<ItemGroup />
-	<ItemGroup>
-		<Content Include="Assets\Fonts\Material\Roboto-Light.ttf" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="Assets\Fonts\Material\Roboto-Medium.ttf" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="Assets\Fonts\Material\Roboto-Regular.ttf" />
-	</ItemGroup>
-	<Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
-	<PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
-		<VisualStudioVersion>14.0</VisualStudioVersion>
-	</PropertyGroup>
-	<Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-	<!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+    <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{265517E4-AB14-453D-92DA-F32AA1D4007D}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Uno.Themes.Samples</RootNamespace>
+    <AssemblyName>Uno.Themes.Samples</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\lockscreenlogo.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\splashscreen.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\square150x150logo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\square44x44logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\square44x44logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\wide310x150logo.scale-200.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Properties\Default.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\..\..\src\Uno.Cupertino\Uno.Cupertino.csproj">
+      <Project>{98c1fdac-c692-4c65-99e7-70fdd53b8f2e}</Project>
+      <Name>Uno.Cupertino</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\Uno.Material\Uno.Material.csproj">
+      <Project>{b5279ee5-e662-45b0-8929-d90d0bde16ab}</Project>
+      <Name>Uno.Material</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Cupertino\SF-Pro.ttf" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Material\Roboto-Light.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Material\Roboto-Medium.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Material\Roboto-Regular.ttf" />
+  </ItemGroup>
+  <Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
-
-	<!-- This is a workaround for https://github.com/microsoft/microsoft-ui-xaml/issues/3554 -->
-	<Target Name="WorkaroundForIssue3554_1" BeforeTargets="_CopyOutOfDateSourceItemsToOutputDirectory" AfterTargets="GetCopyToOutputDirectoryItems">
-		<ItemGroup>
-			<_SourceItemsToCopyToOutputDirectory Remove="@(_SourceItemsToCopyToOutputDirectory)" Condition="'%(_SourceItemsToCopyToOutputDirectory.TargetPath)'=='Microsoft.UI.Xaml\Assets\NoiseAsset_256X256_PNG.png'" />
-		</ItemGroup>
-	</Target>
-	<Target Name="WorkaroundForIssue3554_2" BeforeTargets="_GenerateAppxPackageRecipeFile">
-		<ItemGroup>
-			<AppxPackagePayload Remove="@(AppxPackagePayload)" Condition="'%(AppxPackagePayload.TargetPath)'=='Microsoft.UI.Xaml\Assets\NoiseAsset_256X256_PNG.png'" />
-		</ItemGroup>
-	</Target>
+  <!-- This is a workaround for https://github.com/microsoft/microsoft-ui-xaml/issues/3554 -->
+  <Target Name="WorkaroundForIssue3554_1" BeforeTargets="_CopyOutOfDateSourceItemsToOutputDirectory" AfterTargets="GetCopyToOutputDirectoryItems">
+    <ItemGroup>
+      <_SourceItemsToCopyToOutputDirectory Remove="@(_SourceItemsToCopyToOutputDirectory)" Condition="'%(_SourceItemsToCopyToOutputDirectory.TargetPath)'=='Microsoft.UI.Xaml\Assets\NoiseAsset_256X256_PNG.png'" />
+    </ItemGroup>
+  </Target>
+  <Target Name="WorkaroundForIssue3554_2" BeforeTargets="_GenerateAppxPackageRecipeFile">
+    <ItemGroup>
+      <AppxPackagePayload Remove="@(AppxPackagePayload)" Condition="'%(AppxPackagePayload.TargetPath)'=='Microsoft.UI.Xaml\Assets\NoiseAsset_256X256_PNG.png'" />
+    </ItemGroup>
+  </Target>
 </Project>
