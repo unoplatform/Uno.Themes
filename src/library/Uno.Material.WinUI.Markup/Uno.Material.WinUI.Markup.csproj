@@ -24,10 +24,10 @@
 		<PackageReference Include="Uno.WinUI" Version="4.5.12" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(TargetFramework.Contains('windows10'))">
+	<ItemGroup Condition="$(TargetFramework.Contains('-windows10'))">
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
-		<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22621.27" />
-		<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.27" />
+		<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22000.24" />
+		<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22000.24" />
 	</ItemGroup>
 
 	<PropertyGroup>
