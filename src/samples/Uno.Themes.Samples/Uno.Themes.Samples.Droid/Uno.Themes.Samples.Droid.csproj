@@ -17,10 +17,11 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseIntermediateDesignerFile>True</AndroidUseIntermediateDesignerFile>
     <ResourcesDirectory>..\Uno.Themes.Samples.Shared\Strings</ResourcesDirectory>
+    <UseWinUI>false</UseWinUI>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -88,14 +89,14 @@
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
       <Version>1.0.59</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="4.5.0-dev.645" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.5.0-dev.645" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI" Version="4.5.12" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.5.12" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.1.0.2" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.0-dev.645" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.12" />
     <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
     <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
   </ItemGroup>
@@ -129,14 +130,8 @@
     <AndroidAotProfile Include="custom.aprof" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj">
-      <Project>{98c1fdac-c692-4c65-99e7-70fdd53b8f2e}</Project>
-      <Name>Uno.Cupertino</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj">
-      <Project>{b5279ee5-e662-45b0-8929-d90d0bde16ab}</Project>
-      <Name>Uno.Material</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj" />
+    <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
