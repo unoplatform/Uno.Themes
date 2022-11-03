@@ -1,22 +1,7 @@
 ﻿steps:
-- task: UseDotNet@2
-  condition: eq(variables['IsCanaryBranch'], true)
-  retryCountOnTaskFailure: 3
-  inputs:
-    packageType: runtime
-    version: 2.2.x
 
-- task: nventiveCanaryUpdater@5
-  condition: eq(variables['IsCanaryBranch'], true)
-  retryCountOnTaskFailure: 3
-  inputs:
-    solution: Uno.Themes.sln
-    useNuGetOrg: true
-    usePrivateFeed: false
-    mergeBranch: true
-    branchToMerge: master
-    nugetUpdaterVersion: 2.1.1
-    packageAuthor: nventive
+- template: templates/canary-updater.yml
+
 - bash: |
     npm install -g conventional-changelog-cli@2.2.2
     conventional-changelog -p angular -u -r 1 -o "build/CHANGELOG.md"

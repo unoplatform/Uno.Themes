@@ -1,0 +1,31 @@
+steps:
+
+  - task: UseDotNet@2
+    condition: eq(variables['IsCanaryBranch'], true)
+    displayName: 'Use .NET 5.0.406'
+    retryCountOnTaskFailure: 3
+    inputs:
+      packageType: runtime
+      version: 5.0.15
+
+  - task: UseDotNet@2
+    condition: eq(variables['IsCanaryBranch'], true)
+    displayName: 'Use .NET runtime 2.2.x'
+    retryCountOnTaskFailure: 3
+    inputs:
+      packageType: runtime
+      version: 2.2.x
+
+  - task: nventiveCanaryUpdater@5
+    condition: eq(variables['IsCanaryBranch'], true)
+    retryCountOnTaskFailure: 3
+    inputs:
+      solution: Uno.Themes.sln
+      useNuGetOrg: true
+      usePrivateFeed: false
+      mergeBranch: true
+      branchToMerge: master
+      nugetUpdaterVersion: 2.1.1
+      packageAuthor: nventive
+      summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
+      resultFile: '$(Build.ArtifactStagingDirectory)/Results.json'

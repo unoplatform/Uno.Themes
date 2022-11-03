@@ -75,14 +75,14 @@ jobs:
     vmImage: windows-2022
   
   steps:
-    - template: build/gitversion.yml
-    - template: build/dotnet-install-windows.yml
+    - template: build/templates/gitversion.yml
+    - template: build/templates/dotnet-install-windows.yml
 
      # This SDK version is needed as long as `uap10.0` will be supported in Uno.Core
     - powershell: ./build/Install-WindowsSdkISO.ps1 18362
       displayName: Install Windows SDK 18362
 
-    - template: build/stage-build.yml
+    - template: build/templates/stage-build.yml
 
 - job: MacOS # Build iOS/macOS
   timeoutInMinutes: 90
@@ -103,6 +103,10 @@ jobs:
     vmImage: macOS-12
     
   variables:
+  - name: XCODE_ROOT
+    value: '/Applications/Xcode_13.2.1.app'
+  - name: XamarinSDKVersion
+    value: 6_12_12
   - name: SkipUnknownFrameworks
     value: true # Used by TargetFrameworks.Filtering package
   - group: unoplatform.apple.ios.appstore.distribution
@@ -122,9 +126,37 @@ jobs:
       provisioningProfileLocation: 'secureFiles'
       provProfileSecureFile: 'Uno_Themes.mobileprovision'
   
-  - template: build/gitversion.yml
-  - template: build/dotnet-install-macos.yml
-  - template: build/stage-build.yml
+  - template: build/templates/canary-updater.yml
+  - template: build/templates/gitversion.yml
+  - template: build/templates/dotnet-install-macos.yml
+
+  - bash: /bin/bash -c "sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(XamarinSDKVersion)"
+    displayName: Select Xamarin Version
+
+  - bash: |
+      echo 'xCode Root to ${XCODE_ROOT}'
+      echo '##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]'${XCODE_ROOT}
+      sudo xcode-select --switch ${XCODE_ROOT}/Contents/Developer
+
+    displayName: Select Xcode
+
+  - bash: |
+      rm -f ${HOME}/Library/Preferences/Xamarin/Settings.plist
+
+    # https://github.com/actions/virtual-environments/issues/1932
+    displayName: Apply workaround for Azure Devops issue 1932
+
+  - bash: |
+      chmod +x $(build.sourcesdirectory)/build/scripts/macos-build.sh
+      $(build.sourcesdirectory)/build/scripts/macos-build.sh
+    displayName: 'Build solution in Release | $(ApplicationPlatform)'
+    retryCountOnTaskFailure: 3
+    env:
+      BUILD_PLATFORM: "$(ApplicationPlatform)"
+      BUILD_APPLICATIONVERSION: "$(MajorMinorPatch)"
+      BUILD_PACKAGEVERSION: "$(SemVer)"
+      BUILD_SOLUTION: "Uno.Themes.sln"
+      BUILD_BINLOG: "$(build.artifactstagingdirectory)/themes-build-$(ApplicationPlatform).binlog"
 
 - job: Linux
 
@@ -139,5 +171,5 @@ jobs:
     UseWinUI: false
 
   steps:
-  - template: build/gitversion.yml
-  - template: build/stage-build-wasm.yml
+  - template: build/templates/gitversion.yml
+  - template: build/templates/stage-build-wasm.yml
