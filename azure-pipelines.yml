@@ -82,7 +82,7 @@ jobs:
     - powershell: ./build/Install-WindowsSdkISO.ps1 18362
       displayName: Install Windows SDK 18362
 
-    - template: build/templates/stage-build.yml
+    - template: build/stage-build.yml
 
 - job: MacOS # Build iOS/macOS
   timeoutInMinutes: 90
@@ -172,4 +172,4 @@ jobs:
 
   steps:
   - template: build/templates/gitversion.yml
-  - template: build/templates/stage-build-wasm.yml
+  - template: build/stage-build-wasm.yml
