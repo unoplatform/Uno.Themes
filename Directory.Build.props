@@ -1,10 +1,11 @@
 ﻿<Project ToolsVersion="15.0">
 
 	<PropertyGroup>
-    <Authors>Uno Platform</Authors>
-    <PackageProjectUrl>https://github.com/unoplatform/uno.themes</PackageProjectUrl>
-    <PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/unoplatform/uno.themes</RepositoryUrl>
+		<LangVersion>10.0</LangVersion>
+		<Authors>Uno Platform</Authors>
+		<PackageProjectUrl>https://github.com/unoplatform/uno.themes</PackageProjectUrl>
+		<PackageIconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/unoplatform/uno.themes</RepositoryUrl>
 		<RepositoryUrl>$(BUILD_REPOSITORY_URI)</RepositoryUrl>
 		<Copyright>Copyright (C) 2015-$([System.DateTime]::Now.ToString(`yyyy`)) Uno Platform Inc. - all rights reserved</Copyright>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
@@ -13,22 +14,22 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<UseWinUI Condition="'$(UseWinUI)'==''">false</UseWinUI>
 	</PropertyGroup>
-	
+
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
-	
+
 	<PropertyGroup>
 		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
 		<IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
 		<IsSampleProject>$(MSBuildProjectName.Contains('Sample'))</IsSampleProject>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<None Include="$(MSBuildThisFileDirectory)build\uno-logo.png" Pack="true" Visible="false" PackagePath="\"/>
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="/" />
 	</ItemGroup>
-	
+
 	<Choose>
 		<When Condition="'$(IsTestProject)' != 'true' and '$(SourceLinkEnabled)' != 'false' and '$(IsSampleProject)' != 'true'">
 			<PropertyGroup>
