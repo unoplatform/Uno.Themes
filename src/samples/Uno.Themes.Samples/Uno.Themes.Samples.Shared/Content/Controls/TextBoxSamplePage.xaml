@@ -55,7 +55,12 @@
 							<TextBox PlaceholderText="Placeholder"
 									 Text="Outlined Disabled"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-									 IsEnabled="False" />
+									 IsEnabled="False">
+								<TextBox.Resources>
+									<SolidColorBrush x:Key="MaterialDisabledOutlinedTextBoxBorderBrush"
+													Color="Red" />
+								</TextBox.Resources>
+							</TextBox>
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Filled MultiLine -->

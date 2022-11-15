@@ -173,6 +173,7 @@
 	<ItemGroup>
 		<XamlMergeOutputFiles Include="Generated\mergedpages.v1.xaml" />
 		<XamlMergeOutputFiles Include="Generated\mergedpages.v2.xaml" />
+		<XamlMergeOutputFiles Include="Generated\mergedpages.v2.resources.xaml" />
 
 		<XamlMergeInput Include="Styles\Controls\v1\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
 		<XamlMergeInput Include="Styles\Controls\v2\**\*.xaml" MergeFile="mergedpages.v2.xaml" />
@@ -180,6 +181,7 @@
 		<XamlMergeInput Include="Styles\Application\v2\**\*.xaml" MergeFile="mergedpages.v2.xaml" />
 		<XamlMergeInput Include="Styles\Application\Common\**\*.xaml" MergeFile="mergedpages.v1.xaml" />
 		<XamlMergeInput Include="Styles\Application\Common\**\*.xaml" MergeFile="mergedpages.v2.xaml" />
+		<XamlMergeInput Include="Styles\Resources\**\*.xaml" MergeFile="mergedpages.v2.resources.xaml" />
 
 		<XamlMergeInput Remove="Styles\Application\v1\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v1\MaterialColors.xaml" />
