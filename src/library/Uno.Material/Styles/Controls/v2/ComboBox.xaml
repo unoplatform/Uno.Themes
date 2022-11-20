@@ -20,8 +20,8 @@
 								 NullValue="0" />
 
 	<um:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
-								 NotNullValue="{StaticResource MaterialComboBoxPlaceholderFocusedThemeBrush}"
-								 NullValue="{StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}" />
+								 NotNullValue="{ThemeResource MaterialComboBoxPlaceholderFocusedThemeBrush}"
+								 NullValue="{ThemeResource MaterialComboBoxPlaceholderForegroundThemeBrush}" />
 
 	<!-- ComboBoxItem Brushes -->
 	<StaticResource x:Key="MaterialComboBoxItemForegroundThemeBrush"
@@ -96,17 +96,17 @@
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialComboBoxItemForegroundThemeBrush}" />
+				Value="{ThemeResource MaterialComboBoxItemForegroundThemeBrush}" />
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialComboBoxFontFamily}" />
+				Value="{ThemeResource MaterialComboBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialComboBoxFontWeight}" />
+				Value="{ThemeResource MaterialComboBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialComboBoxFontSize}" />
+				Value="{ThemeResource MaterialComboBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+				Value="{ThemeResource MaterialComboBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="VerticalContentAlignment"
@@ -137,7 +137,7 @@
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 To="1"
-														 Duration="{StaticResource MaterialAnimationDuration}">
+														 Duration="{ThemeResource MaterialAnimationDuration}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -154,7 +154,7 @@
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 To="1"
-														 Duration="{StaticResource MaterialAnimationDuration}">
+														 Duration="{ThemeResource MaterialAnimationDuration}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -178,7 +178,7 @@
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 To="1"
-														 Duration="{StaticResource MaterialAnimationDuration}">
+														 Duration="{ThemeResource MaterialAnimationDuration}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -195,7 +195,7 @@
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 To="1"
-														 Duration="{StaticResource MaterialAnimationDuration}">
+														 Duration="{ThemeResource MaterialAnimationDuration}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -219,7 +219,7 @@
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
 														 Storyboard.TargetProperty="Opacity"
 														 To="1"
-														 Duration="{StaticResource MaterialAnimationDuration}">
+														 Duration="{ThemeResource MaterialAnimationDuration}">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
 											</DoubleAnimation.EasingFunction>
@@ -233,7 +233,7 @@
 						<Grid x:Name="PressedOverlay"
 							  HorizontalAlignment="Stretch"
 							  VerticalAlignment="Stretch"
-							  Background="{StaticResource MaterialComboBoxItemSelectedBackgroundThemeBrush}"
+							  Background="{ThemeResource MaterialComboBoxItemSelectedBackgroundThemeBrush}"
 							  IsHitTestVisible="False"
 							  Opacity="0" />
 
@@ -258,23 +258,23 @@
 		<Setter Property="Foreground"
 				Value="{ThemeResource MaterialComboBoxForegroundThemeBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialComboBoxBackgroundColorBrush}" />
+				Value="{ThemeResource MaterialComboBoxBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialComboBoxBorderBrush}" />
+				Value="{ThemeResource MaterialComboBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
-				Value="{StaticResource MaterialComboBoxBorderThickness}" />
+				Value="{ThemeResource MaterialComboBoxBorderThickness}" />
 		<Setter Property="Padding"
-				Value="{StaticResource MaterialComboBoxPadding}" />
+				Value="{ThemeResource MaterialComboBoxPadding}" />
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialComboBoxFontFamily}" />
+				Value="{ThemeResource MaterialComboBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialComboBoxFontWeight}" />
+				Value="{ThemeResource MaterialComboBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialComboBoxFontSize}" />
+				Value="{ThemeResource MaterialComboBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+				Value="{ThemeResource MaterialComboBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="MinHeight"
@@ -300,7 +300,7 @@
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="ItemContainerStyle"
-				Value="{StaticResource MaterialComboBoxItemStyle}" />
+				Value="{ThemeResource MaterialComboBoxItemStyle}" />
 		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 						Value="Below" />
 
@@ -324,7 +324,7 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
+						  CornerRadius="{ThemeResource MaterialComboBoxCornerRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -334,13 +334,13 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="DropDownGlyph_Down.Fill"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -350,11 +350,11 @@
 								<VisualState x:Name="Opened">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialComboBoxOpenedBorderBrush}" />
+												Value="{ThemeResource MaterialComboBoxOpenedBorderBrush}" />
 										<Setter Target="RootGrid.BorderThickness"
-												Value="{StaticResource MaterialComboBoxOpenedBorderThickness}" />
+												Value="{ThemeResource MaterialComboBoxOpenedBorderThickness}" />
 										<Setter Target="DropDownGlyph_Up.Fill"
-												Value="{StaticResource MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
+												Value="{ThemeResource MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
 										<Setter Target="DropDownGlyph_Down.Visibility"
 												Value="Collapsed" />
 										<Setter Target="DropDownGlyph_Up.Visibility"
@@ -375,9 +375,9 @@
 								<VisualState x:Name="Closed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialComboBoxBorderBrush}" />
+												Value="{ThemeResource MaterialComboBoxBorderBrush}" />
 										<Setter Target="RootGrid.BorderThickness"
-												Value="{StaticResource MaterialComboBoxBorderThickness}" />
+												Value="{ThemeResource MaterialComboBoxBorderThickness}" />
 										<Setter Target="DropDownGlyph_Down.Visibility"
 												Value="Visible" />
 										<Setter Target="DropDownGlyph_Up.Visibility"
@@ -408,8 +408,8 @@
 													TranslateY="0" />
 
 								<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
-																	NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}"
-																	NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
+																	NotNullOrEmptyValue="{ThemeResource ContentPresenter_CompositeTransformWithPlaceholder}"
+																	NullOrEmptyValue="{ThemeResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
 							</Grid.Resources>
 
 							<Grid.ColumnDefinitions>
@@ -461,7 +461,7 @@
 								  Margin="7,0"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
-								  Data="{StaticResource DownArrowPathData}"
+								  Data="{ThemeResource DownArrowPathData}"
 								  Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}"
 								  Stretch="Uniform" />
 
@@ -473,7 +473,7 @@
 								  Margin="7,0"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
-								  Data="{StaticResource UpArrowPathData}"
+								  Data="{ThemeResource UpArrowPathData}"
 								  Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}"
 								  Stretch="Uniform"
 								  Visibility="Collapsed" />
@@ -482,15 +482,15 @@
 						<!--  Popup  -->
 						<Popup x:Name="Popup">
 							<Border x:Name="PopupBorder"
-									CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
-									Background="{StaticResource SurfaceBrush}">
+									CornerRadius="{ThemeResource MaterialComboBoxCornerRadius}"
+									Background="{ThemeResource SurfaceBrush}">
 
 								<!--  Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
 								<ScrollViewer x:Name="ScrollViewer"
 											  MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}"
 											  AutomationProperties.AccessibilityView="Raw"
 											  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-											  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
+											  CornerRadius="{ThemeResource MaterialComboBoxCornerRadius}"
 											  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
 											  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
 											  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"

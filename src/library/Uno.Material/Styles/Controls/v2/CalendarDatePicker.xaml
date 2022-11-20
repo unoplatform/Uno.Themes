@@ -8,6 +8,24 @@
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.12" />
 
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<SolidColorBrush x:Key="MaterialCalendarDatePickerBackground"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="0.12" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Light">
+			<SolidColorBrush x:Key="MaterialCalendarDatePickerBackground"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="0.12" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<SolidColorBrush x:Key="MaterialCalendarDatePickerBackground"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="0.12" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+	
 	<Style x:Key="MaterialDefaultCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
 		<Setter Property="Foreground"
@@ -19,7 +37,7 @@
 		<Setter Property="BorderThickness"
 				Value="{ThemeResource CalendarDatePickerBorderThemeThickness}" />
 		<Setter Property="CalendarViewStyle"
-				Value="{StaticResource MaterialCalendarViewStyle}" />
+				Value="{ThemeResource MaterialCalendarViewStyle}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"
@@ -132,9 +150,9 @@
 										<Setter Target="HeaderContentPresenter.(Grid.ColumnSpan)"
 												Value="1" />
 										<Setter Target="HeaderContentPresenter.Margin"
-												Value="{StaticResource CalendarDatePickerLeftHeaderMargin}" />
+												Value="{ThemeResource CalendarDatePickerLeftHeaderMargin}" />
 										<Setter Target="HeaderContentPresenter.MaxWidth"
-												Value="{StaticResource CalendarDatePickerLeftHeaderMaxWidth}" />
+												Value="{ThemeResource CalendarDatePickerLeftHeaderMaxWidth}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -187,7 +205,7 @@
 						</FlyoutBase.AttachedFlyout>
 
 						<Border x:Name="Background"
-								Background="{StaticResource MaterialCalendarDatePickerBackground}"
+								Background="{ThemeResource MaterialCalendarDatePickerBackground}"
 								CornerRadius="4,4,0,0"
 								Control.IsTemplateFocusTarget="True"
 								MinHeight="53" />
@@ -195,7 +213,7 @@
 						<!-- Border -->
 						<Rectangle x:Name="BottomBorder"
 								   VerticalAlignment="Bottom"
-								   Fill="{StaticResource PrimaryBrush}"
+								   Fill="{ThemeResource PrimaryBrush}"
 								   Height="2" />
 
 						<Grid Margin="10,0,10,0"
@@ -209,7 +227,7 @@
 									   VerticalAlignment="Top"
 									   Text="{TemplateBinding Header}"
 									   Style="{StaticResource MaterialBodySmall}"
-									   Foreground="{StaticResource PrimaryBrush}"
+									   Foreground="{ThemeResource PrimaryBrush}"
 									   TextWrapping="Wrap" />
 
 							<!-- DateText -->
@@ -233,5 +251,5 @@
 
 	<Style x:Key="MaterialCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker"
-		   BasedOn="{StaticResource MaterialDefaultCalendarDatePickerStyle}" />
+		   BasedOn="{ThemeResource MaterialDefaultCalendarDatePickerStyle}" />
 </ResourceDictionary>

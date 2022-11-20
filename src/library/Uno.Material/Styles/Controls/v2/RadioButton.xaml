@@ -24,21 +24,21 @@
 	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">
 		<Setter Property="Background"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceMediumBrush}" />
+				Value="{ThemeResource OnSurfaceMediumBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OnSurfaceMediumBrush}" />
+				Value="{ThemeResource OnSurfaceMediumBrush}" />
 
 		<!--Start: Body Small Typo-->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRadioButtonFontFamily}" />
+				Value="{ThemeResource MaterialRadioButtonFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialRadioButtonFontWeight}" />
+				Value="{ThemeResource MaterialRadioButtonFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialRadioButtonFontSize}" />
+				Value="{ThemeResource MaterialRadioButtonFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialRadioButtonCharacterSpacing}" />
+				Value="{ThemeResource MaterialRadioButtonCharacterSpacing}" />
 		<!--End: Body Small Typo-->
 
 		<Setter Property="Padding"
@@ -52,9 +52,9 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="MinWidth"
-				Value="{StaticResource RadioStatesAreaSize}" />
+				Value="{ThemeResource RadioStatesAreaSize}" />
 		<Setter Property="MinHeight"
-				Value="{StaticResource RadioStatesAreaSize}" />
+				Value="{ThemeResource RadioStatesAreaSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="False" />
 
@@ -71,31 +71,31 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="HoverAndPressRing.Opacity"
-												Value="{StaticResource HoverOpacity}" />
+												Value="{ThemeResource HoverOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="HoverAndPressRing.Opacity"
-												Value="{StaticResource PressedOpacity}" />
+												Value="{ThemeResource PressedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Opacity"
-												Value="{StaticResource DisabledOpacity}" />
+												Value="{ThemeResource DisabledOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualStateGroup.Transitions>
 									<VisualTransition To="PointerOver"
-													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
-													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+													  GeneratedDuration="{ThemeResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{ThemeResource MaterialEaseInOutFunction}" />
 									<VisualTransition To="Pressed"
-													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
-													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+													  GeneratedDuration="{ThemeResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{ThemeResource MaterialEaseInOutFunction}" />
 								</VisualStateGroup.Transitions>
 							</VisualStateGroup>
 
@@ -122,7 +122,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
-												Value="{StaticResource FocusedOpacity}" />
+												Value="{ThemeResource FocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -133,15 +133,15 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{StaticResource RadioStatesAreaLength}" />
+							<ColumnDefinition Width="{ThemeResource RadioStatesAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
 						<Ellipse x:Name="FocusRing"
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
-								 Width="{StaticResource RadioStatesAreaSize}"
-								 Height="{StaticResource RadioStatesAreaSize}"
+								 Width="{ThemeResource RadioStatesAreaSize}"
+								 Height="{ThemeResource RadioStatesAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
@@ -149,14 +149,14 @@
 						<Ellipse x:Name="HoverAndPressRing"
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
-								 Width="{StaticResource RadioStatesAreaSize}"
-								 Height="{StaticResource RadioStatesAreaSize}"
+								 Width="{ThemeResource RadioStatesAreaSize}"
+								 Height="{ThemeResource RadioStatesAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
-						<Grid Height="{StaticResource RadioCheckAreaSize}"
-							  Width="{StaticResource RadioCheckAreaSize}">
+						<Grid Height="{ThemeResource RadioCheckAreaSize}"
+							  Width="{ThemeResource RadioCheckAreaSize}">
 
 							<Ellipse x:Name="OuterEllipse_Checked"
 									 HorizontalAlignment="Stretch"
@@ -164,7 +164,7 @@
 									 Stretch="Fill"
 									 UseLayoutRounding="False"
 									 Stroke="{TemplateBinding Background}"
-									 StrokeThickness="{StaticResource RadioBorderThickness}"
+									 StrokeThickness="{ThemeResource RadioBorderThickness}"
 									 Opacity="0" />
 
 							<Ellipse x:Name="OuterEllipse_Unchecked"
@@ -173,7 +173,7 @@
 									 Stretch="Fill"
 									 UseLayoutRounding="False"
 									 Stroke="{TemplateBinding BorderBrush}"
-									 StrokeThickness="{StaticResource RadioBorderThickness}" />
+									 StrokeThickness="{ThemeResource RadioBorderThickness}" />
 
 							<Ellipse x:Name="CheckEllipse"
 									 HorizontalAlignment="Stretch"
@@ -203,10 +203,10 @@
 
 	<Style x:Key="MaterialSecondaryRadioButtonStyle"
 		   TargetType="RadioButton"
-		   BasedOn="{StaticResource MaterialRadioButtonStyle}">
+		   BasedOn="{ThemeResource MaterialRadioButtonStyle}">
 
 		<Setter Property="Background"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{ThemeResource SecondaryBrush}" />
 	</Style>
 
 </ResourceDictionary>

@@ -34,29 +34,29 @@
 	<!-- note: MaterialContentDialogDefaultButtonStyle is the style associated with ContentDialog.DefaultButton (accented or CTA btn) -->
 	<Style x:Key="MaterialContentDialogButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource MaterialTextButtonStyle}">
+		   BasedOn="{ThemeResource MaterialTextButtonStyle}">
 		<Setter Property="HorizontalAlignment" Value="Right" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 	</Style>
 	<Style x:Key="MaterialContentDialogDefaultButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource MaterialFilledButtonStyle}">
+		   BasedOn="{ThemeResource MaterialFilledButtonStyle}">
 		<Setter Property="HorizontalAlignment" Value="Right" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 	</Style>
 
 	<Style x:Key="MaterialContentDialogStyle" TargetType="ContentDialog">
 
-		<Setter Property="Background" Value="{StaticResource MaterialContentDialogBackground}" />
-		<Setter Property="Foreground" Value="{StaticResource MaterialContentDialogContentForeground}" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialContentDialogCornerRadius}" />
+		<Setter Property="Background" Value="{ThemeResource MaterialContentDialogBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource MaterialContentDialogContentForeground}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialContentDialogCornerRadius}" />
 
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 
-		<Setter Property="PrimaryButtonStyle" Value="{StaticResource MaterialContentDialogButtonStyle}" />
-		<Setter Property="SecondaryButtonStyle" Value="{StaticResource MaterialContentDialogButtonStyle}" />
-		<Setter Property="CloseButtonStyle" Value="{StaticResource MaterialContentDialogButtonStyle}" />
+		<Setter Property="PrimaryButtonStyle" Value="{ThemeResource MaterialContentDialogButtonStyle}" />
+		<Setter Property="SecondaryButtonStyle" Value="{ThemeResource MaterialContentDialogButtonStyle}" />
+		<Setter Property="CloseButtonStyle" Value="{ThemeResource MaterialContentDialogButtonStyle}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -150,17 +150,17 @@
 								<VisualState x:Name="NoDefaultButton" />
 								<VisualState x:Name="PrimaryAsDefaultButton">
 									<VisualState.Setters>
-										<Setter Target="PrimaryButton.Style" Value="{StaticResource MaterialContentDialogDefaultButtonStyle}" />
+										<Setter Target="PrimaryButton.Style" Value="{ThemeResource MaterialContentDialogDefaultButtonStyle}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="SecondaryAsDefaultButton">
 									<VisualState.Setters>
-										<Setter Target="SecondaryButton.Style" Value="{StaticResource MaterialContentDialogDefaultButtonStyle}" />
+										<Setter Target="SecondaryButton.Style" Value="{ThemeResource MaterialContentDialogDefaultButtonStyle}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CloseAsDefaultButton">
 									<VisualState.Setters>
-										<Setter Target="CloseButton.Style" Value="{StaticResource MaterialContentDialogDefaultButtonStyle}" />
+										<Setter Target="CloseButton.Style" Value="{ThemeResource MaterialContentDialogDefaultButtonStyle}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -168,7 +168,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="LayoutRoot">
-							<Rectangle x:Name="SmokeLayerBackground" Fill="{StaticResource MaterialContentDialogSmokeLayerBackground}" />
+							<Rectangle x:Name="SmokeLayerBackground" Fill="{ThemeResource MaterialContentDialogSmokeLayerBackground}" />
 
 							<!-- workaround: BackgroundElement is hidden, because it has an undesired shadow that the control impl applies. -->
 							<Border x:Name="BackgroundElement"
@@ -182,9 +182,9 @@
 												  CornerRadius="{TemplateBinding CornerRadius}"
 												  Elevation="3"
 												  FlowDirection="{TemplateBinding FlowDirection}"
-												  MaxWidth="{StaticResource MaterialContentDialogMaxWidth}"
-												  MaxHeight="{StaticResource MaterialContentDialogMaxHeight}"
-												  Margin="{StaticResource MaterialContentDialogEdgeMargin}"
+												  MaxWidth="{ThemeResource MaterialContentDialogMaxWidth}"
+												  MaxHeight="{ThemeResource MaterialContentDialogMaxHeight}"
+												  Margin="{ThemeResource MaterialContentDialogEdgeMargin}"
 												  HorizontalAlignment="Center"
 												  VerticalAlignment="Center">
 								<toolkit:ElevatedView.RenderTransform>
@@ -200,10 +200,10 @@
 										- min-size on DialogSpace will prevent Title from being centered when screen is too small
 									-->
 									<Border x:Name="MinSizeHolder"
-											MinWidth="{StaticResource MaterialContentDialogMinWidth}"
-											MinHeight="{StaticResource MaterialContentDialogMinHeight}" />
+											MinWidth="{ThemeResource MaterialContentDialogMinWidth}"
+											MinHeight="{ThemeResource MaterialContentDialogMinHeight}" />
 									
-									<Grid x:Name="DialogSpace" Margin="{StaticResource MaterialContentDialogPanelPadding}">
+									<Grid x:Name="DialogSpace" Margin="{ThemeResource MaterialContentDialogPanelPadding}">
 										<Grid.RowDefinitions>
 											<!-- 0: Title, 1: Content, 2: CommandSpace -->
 											<RowDefinition Height="Auto" />
@@ -215,11 +215,11 @@
 														x:Name="Title"
 														Content="{TemplateBinding Title}"
 														ContentTemplate="{TemplateBinding TitleTemplate}"
-														Foreground="{StaticResource MaterialContentDialogTitleForeground}"
-														FontFamily="{StaticResource MaterialContentDialogTitleFontFamily}"
-														FontSize="{StaticResource MaterialContentDialogTitleFontSize}"
-														FontWeight="{StaticResource MaterialContentDialogTitleFontWeight}"
-														Margin="{StaticResource MaterialContentDialogTitleToContentMargin}"
+														Foreground="{ThemeResource MaterialContentDialogTitleForeground}"
+														FontFamily="{ThemeResource MaterialContentDialogTitleFontFamily}"
+														FontSize="{ThemeResource MaterialContentDialogTitleFontSize}"
+														FontWeight="{ThemeResource MaterialContentDialogTitleFontWeight}"
+														Margin="{ThemeResource MaterialContentDialogTitleToContentMargin}"
 														HorizontalAlignment="Center"
 														VerticalAlignment="Top"
 														IsTabStop="False">
@@ -246,23 +246,23 @@
 															  Content="{TemplateBinding Content}"
 															  ContentTemplate="{TemplateBinding ContentTemplate}"
 															  Foreground="{TemplateBinding Foreground}"
-															  FontFamily="{StaticResource MaterialContentDialogContentFontFamily}"
-															  FontSize="{StaticResource MaterialContentDialogContentFontSize}"
-															  FontWeight="{StaticResource MaterialContentDialogContentFontWeight}"
+															  FontFamily="{ThemeResource MaterialContentDialogContentFontFamily}"
+															  FontSize="{ThemeResource MaterialContentDialogContentFontSize}"
+															  FontWeight="{ThemeResource MaterialContentDialogContentFontWeight}"
 															  TextWrapping="Wrap" />
 										</ScrollViewer>
 										<Grid x:Name="CommandSpace"
 											  Grid.Row="2"
-											  Margin="{StaticResource MaterialContentDialogCommandSpaceToContentMargin}"
+											  Margin="{ThemeResource MaterialContentDialogCommandSpaceToContentMargin}"
 											  HorizontalAlignment="Right"
 											  VerticalAlignment="Bottom"
 											  XYFocusKeyboardNavigation="Enabled">
 
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition x:Name="CloseColumn" Width="Auto" />
-												<ColumnDefinition x:Name="SecondSpacer" Width="{StaticResource MaterialContentDialogButtonSpacing}" />
+												<ColumnDefinition x:Name="SecondSpacer" Width="{ThemeResource MaterialContentDialogButtonSpacing}" />
 												<ColumnDefinition x:Name="SecondaryColumn" Width="Auto" />
-												<ColumnDefinition x:Name="FirstSpacer" Width="{StaticResource MaterialContentDialogButtonSpacing}" />
+												<ColumnDefinition x:Name="FirstSpacer" Width="{ThemeResource MaterialContentDialogButtonSpacing}" />
 												<ColumnDefinition x:Name="PrimaryColumn" Width="Auto" />
 											</Grid.ColumnDefinitions>
 

@@ -19,10 +19,10 @@
 
 	<SolidColorBrush x:Key="MaterialCheckBoxBorderBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="{StaticResource MediumOpacity}" />
+					 Opacity="{ThemeResource MediumOpacity}" />
 	<SolidColorBrush x:Key="MaterialCheckBoxPressedBrush"
 					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="{StaticResource LowOpacity}" />
+					 Opacity="{ThemeResource LowOpacity}" />
 
 	<!-- CheckBox label based on Body Small Typo -->
 	<StaticResource x:Key="MaterialCheckBoxFontFamily"
@@ -37,23 +37,23 @@
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="Background"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnPrimaryBrush}" />
+				Value="{ThemeResource OnPrimaryBrush}" />
 
 		<!--Start: Body Small Typo-->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialCheckBoxFontFamily}" />
+				Value="{ThemeResource MaterialCheckBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialCheckBoxFontWeight}" />
+				Value="{ThemeResource MaterialCheckBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialCheckBoxFontSize}" />
+				Value="{ThemeResource MaterialCheckBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialCheckBoxCharacterSpacing}" />
+				Value="{ThemeResource MaterialCheckBoxCharacterSpacing}" />
 		<!--End: Body Small Typo-->
 
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialCheckBoxBorderBrush}" />
+				Value="{ThemeResource MaterialCheckBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
 				Value="2" />
 		<Setter Property="Padding"
@@ -69,7 +69,7 @@
 		<Setter Property="MinWidth"
 				Value="0" />
 		<Setter Property="MinHeight"
-				Value="{StaticResource CheckAreaSize}" />
+				Value="{ThemeResource CheckAreaSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="False" />
 
@@ -93,17 +93,17 @@
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 BeginTime="{ThemeResource MaterialDelayedBeginTime}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -113,17 +113,17 @@
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}" />
+																 BeginTime="{ThemeResource MaterialDelayedBeginTime}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
+																 From="{ThemeResource LowOpacity}" />
 										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
@@ -138,9 +138,9 @@
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource MediumOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -179,7 +179,7 @@
 									<win:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
 														 To="0">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -188,7 +188,7 @@
 
 										<DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -197,7 +197,7 @@
 
 										<DoubleAnimation Storyboard.TargetName="CheckGlyph"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -209,9 +209,9 @@
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource MediumOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity"
 												Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity"
@@ -256,7 +256,7 @@
 									<win:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
 														 To="0">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -265,7 +265,7 @@
 
 										<DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -274,7 +274,7 @@
 
 										<DoubleAnimation Storyboard.TargetName="HyphenGlyph"
 														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
 														 To="1">
 											<DoubleAnimation.EasingFunction>
 												<CubicEase EasingMode="EaseIn" />
@@ -286,9 +286,9 @@
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource MediumOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity"
 												Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity"
@@ -345,17 +345,17 @@
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 BeginTime="{ThemeResource MaterialDelayedBeginTime}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -376,17 +376,17 @@
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 BeginTime="{ThemeResource MaterialDelayedBeginTime}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -408,17 +408,17 @@
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 BeginTime="{ThemeResource MaterialDelayedBeginTime}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -440,17 +440,17 @@
 											<!-- iOS workaround #361 DoubleAnimationUsingKeyFrames having a small delay (0.5 seconds) before animating -->
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
-																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
-																 Duration="{StaticResource MaterialAnimationDuration}"
-																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 BeginTime="{ThemeResource MaterialDelayedBeginTime}"
+																 Duration="{ThemeResource MaterialAnimationDuration}"
+																 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -461,7 +461,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
-												Value="{StaticResource FocusedOpacity}" />
+												Value="{ThemeResource FocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -472,7 +472,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{StaticResource CheckAreaLength}" />
+							<ColumnDefinition Width="{ThemeResource CheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
@@ -480,8 +480,8 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
+								 Width="{ThemeResource FocusAreaSize}"
+								 Height="{ThemeResource FocusAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
@@ -490,15 +490,15 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource MaterialCheckBoxPressedBrush}"
+								 Width="{ThemeResource FocusAreaSize}"
+								 Height="{ThemeResource FocusAreaSize}"
+								 Fill="{ThemeResource MaterialCheckBoxPressedBrush}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
 						<Grid x:Name="CheckBoxContainer"
-							  Height="{StaticResource CheckAreaSize}"
-							  Width="{StaticResource CheckAreaSize}">
+							  Height="{ThemeResource CheckAreaSize}"
+							  Width="{ThemeResource CheckAreaSize}">
 
 							<Grid x:Name="BackgroundBorder"
 								  Background="Transparent"
@@ -512,7 +512,7 @@
 								  CornerRadius="2" />
 
 							<Path x:Name="HyphenGlyph"
-								  Data="{StaticResource CheckBoxHyphenGlyphPathStyle}"
+								  Data="{ThemeResource CheckBoxHyphenGlyphPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
@@ -524,7 +524,7 @@
 								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
-								  Data="{StaticResource CheckBoxCheckGlyphPathStyle}"
+								  Data="{ThemeResource CheckBoxCheckGlyphPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
@@ -540,7 +540,7 @@
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
-										  Foreground="{StaticResource OnSurfaceMediumBrush}"
+										  Foreground="{ThemeResource OnSurfaceMediumBrush}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -555,10 +555,10 @@
 
 	<Style x:Key="MaterialSecondaryCheckBoxStyle"
 		   TargetType="CheckBox"
-		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
+		   BasedOn="{ThemeResource MaterialCheckBoxStyle}">
 		<Setter Property="Background"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{ThemeResource SecondaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSecondaryBrush}" />
+				Value="{ThemeResource OnSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

@@ -88,17 +88,17 @@
 		<Setter Property="IsTabStop"
 		        Value="False" />
 		<Setter Property="FontFamily"
-		        Value="{StaticResource MaterialRegularFontFamily}" />
+		        Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FontWeight"
 		        Value="Normal" />
 		<Setter Property="FontSize"
 		        Value="{ThemeResource ControlContentThemeFontSize}" />
 		<Setter Property="Background"
-		        Value="{StaticResource MaterialDatePickerFlyoutPresenterBackgroundBrush}" />
+		        Value="{ThemeResource MaterialDatePickerFlyoutPresenterBackgroundBrush}" />
 		<Setter Property="AutomationProperties.AutomationId"
 		        Value="DatePickerFlyoutPresenter" />
 		<Setter Property="BorderThickness"
-		        Value="{StaticResource MaterialDateTimeFlyoutBorderThickness}" />
+		        Value="{ThemeResource MaterialDateTimeFlyoutBorderThickness}" />
 		<Setter Property="BorderBrush"
 		        Value="{ThemeResource MaterialDatePickerFlyoutPresenterBorderBrush}" />
 		<Setter Property="CornerRadius"
@@ -111,7 +111,7 @@
 					                      BorderBrush="{TemplateBinding BorderBrush}"
 					                      BorderThickness="{TemplateBinding BorderThickness}"
 					                      CornerRadius="{TemplateBinding CornerRadius}"
-					                      Elevation="{StaticResource MaterialDatePickerFlyoutElevation}"
+					                      Elevation="{ThemeResource MaterialDatePickerFlyoutElevation}"
 					                      ShadowColor="Black">
 						<Border x:Name="Background">
 							<Grid x:Name="ContentPanel">
@@ -192,19 +192,19 @@
 	       TargetType="DatePicker">
 
 		<Setter Property="Background"
-		        Value="{StaticResource MaterialDatePickerBackgroundColorBrush}" />
+		        Value="{ThemeResource MaterialDatePickerBackgroundColorBrush}" />
 		<Setter Property="Foreground"
-		        Value="{StaticResource PrimaryBrush}" />
+		        Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="BorderBrush"
-		        Value="{StaticResource PrimaryBrush}" />
+		        Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="HorizontalAlignment"
 		        Value="Stretch" />
 		<Setter Property="Height"
-		        Value="{StaticResource MaterialDatePickerHeight}" />
+		        Value="{ThemeResource MaterialDatePickerHeight}" />
 		<Setter Property="CornerRadius"
 		        Value="4,4,0,0" />
 		<not_win:Setter Property="FlyoutPresenterStyle"
-		                Value="{StaticResource MaterialDatePickerFlyoutPresenterStyle}" />
+		                Value="{ThemeResource MaterialDatePickerFlyoutPresenterStyle}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -253,7 +253,7 @@
 									<!--  PlaceholderText  -->
 									<TextBlock x:Name="PlaceholderText"
 									           Margin="4,0,0,0"
-									           Foreground="{StaticResource OnSurfaceLowBrush}"
+									           Foreground="{ThemeResource OnSurfaceLowBrush}"
 									           Style="{StaticResource MaterialBodyMedium}"
 									           Text="{TemplateBinding Header}"
 									           Visibility="Collapsed" />
@@ -272,11 +272,11 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="DateText.Foreground"
-										        Value="{StaticResource OnSurfaceLowBrush}" />
+										        Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="HeaderTextBlock.Foreground"
-										        Value="{StaticResource OnSurfaceLowBrush}" />
+										        Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="BottomBorder.Fill"
-										        Value="{StaticResource OnSurfaceLowBrush}" />
+										        Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

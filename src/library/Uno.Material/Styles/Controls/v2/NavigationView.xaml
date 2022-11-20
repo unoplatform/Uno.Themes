@@ -489,10 +489,10 @@
 									<VisualTransition From="OpenInlineLeft" To="Closed">
 										<Storyboard>
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="PaneRoot" Storyboard.TargetProperty="Visibility">
-												<DiscreteObjectKeyFrame KeyTime="{StaticResource SplitViewPaneAnimationCloseDuration}" Value="Collapsed" />
+												<DiscreteObjectKeyFrame KeyTime="{ThemeResource SplitViewPaneAnimationCloseDuration}" Value="Collapsed" />
 											</ObjectAnimationUsingKeyFrames>
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HCPaneBorder" Storyboard.TargetProperty="Visibility">
-												<DiscreteObjectKeyFrame KeyTime="{StaticResource SplitViewPaneAnimationCloseDuration}" Value="Collapsed" />
+												<DiscreteObjectKeyFrame KeyTime="{ThemeResource SplitViewPaneAnimationCloseDuration}" Value="Collapsed" />
 											</ObjectAnimationUsingKeyFrames>
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentRoot" Storyboard.TargetProperty="(Grid.ColumnSpan)">
 												<DiscreteObjectKeyFrame KeyTime="0" Value="2" />
@@ -501,22 +501,22 @@
 												<DiscreteObjectKeyFrame KeyTime="0" Value="0" />
 											</ObjectAnimationUsingKeyFrames>
 											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="PaneRoot" Storyboard.TargetProperty="(Grid.ColumnSpan)">
-												<DiscreteObjectKeyFrame KeyTime="{StaticResource SplitViewPaneAnimationCloseDuration}" Value="2" />
+												<DiscreteObjectKeyFrame KeyTime="{ThemeResource SplitViewPaneAnimationCloseDuration}" Value="2" />
 											</ObjectAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="PaneClipRectangleTransform" Storyboard.TargetProperty="TranslateX">
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationCloseDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationCloseDuration}"
 																	  Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLengthMinusCompactLength}" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="PaneTransform" Storyboard.TargetProperty="TranslateX">
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationCloseDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationCloseDuration}"
 																	  Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLength}" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentTransform" Storyboard.TargetProperty="TranslateX">
 												<DiscreteDoubleKeyFrame KeyTime="0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OpenPaneLength}" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationCloseDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationCloseDuration}"
 																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
@@ -541,19 +541,19 @@
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="PaneTransform" Storyboard.TargetProperty="TranslateX">
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLength}" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationOpenDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationOpenDuration}"
 																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames FillBehavior="Stop" Storyboard.TargetName="ContentTransform" Storyboard.TargetProperty="TranslateX">
 												<LinearDoubleKeyFrame KeyTime="0:0:0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLength}" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationOpenPreDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationOpenPreDuration}"
 																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="PaneClipRectangleTransform" Storyboard.TargetProperty="TranslateX">
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLength}" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationOpenDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationOpenDuration}"
 																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
@@ -578,13 +578,13 @@
 											<DoubleAnimationUsingKeyFrames FillBehavior="Stop" Storyboard.TargetName="ContentTransform" Storyboard.TargetProperty="TranslateX">
 												<LinearDoubleKeyFrame KeyTime="0:0:0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLengthMinusCompactLength}" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationOpenPreDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationOpenPreDuration}"
 																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="PaneClipRectangleTransform" Storyboard.TargetProperty="TranslateX">
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLengthMinusCompactLength}" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationOpenDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationOpenDuration}"
 																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
@@ -606,13 +606,13 @@
 											<DoubleAnimationUsingKeyFrames FillBehavior="Stop" Storyboard.TargetName="ContentTransform" Storyboard.TargetProperty="TranslateX">
 												<LinearDoubleKeyFrame KeyTime="0:0:0" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OpenPaneLengthMinusCompactLength}" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationOpenPreDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationOpenPreDuration}"
 																	  Value="0" />
 											</DoubleAnimationUsingKeyFrames>
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="PaneClipRectangleTransform" Storyboard.TargetProperty="TranslateX">
 												<DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
 												<SplineDoubleKeyFrame KeySpline="0.0,0.35 0.15,1.0"
-																	  KeyTime="{StaticResource SplitViewPaneAnimationOpenDuration}"
+																	  KeyTime="{ThemeResource SplitViewPaneAnimationOpenDuration}"
 																	  Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.NegativeOpenPaneLengthMinusCompactLength}" />
 											</DoubleAnimationUsingKeyFrames>
 										</Storyboard>
@@ -829,12 +829,12 @@
 		</Setter>
 	</Style>
 	<Style x:Key="MaterialNavigationViewStyle" TargetType="local:NavigationView">
-		<Setter Property="Background" Value="{StaticResource MaterialNavigationViewBackground}" />
+		<Setter Property="Background" Value="{ThemeResource MaterialNavigationViewBackground}" />
 
 		<Setter Property="OpenPaneLength" Value="360" />
 		<Setter Property="CompactPaneLength" Value="{ThemeResource NavigationViewCompactPaneLength}" />
 
-		<Setter Property="PaneToggleButtonStyle" Value="{StaticResource MaterialNavigationViewIconTextButtonStyle}" />
+		<Setter Property="PaneToggleButtonStyle" Value="{ThemeResource MaterialNavigationViewIconTextButtonStyle}" />
 		<Setter Property="IsTabStop" Value="False" />
 
 		<Setter Property="Template">
@@ -847,14 +847,14 @@
 							<VisualStateGroup x:Name="DisplayModeGroup">
 								<VisualState x:Name="Compact">
 									<VisualState.Setters>
-										<Setter Target="NavigationViewBackButton.Margin" Value="{StaticResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
-										<Setter Target="NavigationViewCloseButton.Margin" Value="{StaticResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
+										<Setter Target="NavigationViewBackButton.Margin" Value="{ThemeResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
+										<Setter Target="NavigationViewCloseButton.Margin" Value="{ThemeResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Expanded">
 									<VisualState.Setters>
-										<Setter Target="NavigationViewBackButton.Margin" Value="{StaticResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
-										<Setter Target="NavigationViewCloseButton.Margin" Value="{StaticResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
+										<Setter Target="NavigationViewBackButton.Margin" Value="{ThemeResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
+										<Setter Target="NavigationViewCloseButton.Margin" Value="{ThemeResource MaterialNavigationViewButtonMarginWhenStackedVertically}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Minimal">
@@ -887,7 +887,7 @@
 									<VisualState.Setters>
 										<!-- Might not need this setter when all the margins/paddings will be adequately set. -->
 										<!-- This MinHeight setter is only here to ensure that AutoSuggestBox doesn't draw over ToggleButton. -->
-										<Setter Target="PaneContentGridToggleButtonRow.MinHeight" Value="{StaticResource NavigationViewPaneHeaderRowMinHeight}" />
+										<Setter Target="PaneContentGridToggleButtonRow.MinHeight" Value="{ThemeResource NavigationViewPaneHeaderRowMinHeight}" />
 										<Setter Target="PaneTitlePresenter.Margin" Value="{ThemeResource NavigationViewItemInnerHeaderMargin}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -1196,9 +1196,9 @@
 							<!-- Displaymode (compact/minimal/normal) left -->
 							<SplitView x:Name="RootSplitView"
 									   Grid.Row="1"
-									   CornerRadius="{StaticResource MaterialNavigationViewSplitViewCornerRadius}"
+									   CornerRadius="{ThemeResource MaterialNavigationViewSplitViewCornerRadius}"
 									   BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
-									   PaneBackground="{StaticResource MaterialNavigationViewPaneBackground}"
+									   PaneBackground="{ThemeResource MaterialNavigationViewPaneBackground}"
 									   CompactPaneLength="{TemplateBinding CompactPaneLength}"
 									   OpenPaneLength="{TemplateBinding OpenPaneLength}"
 									   IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}"
@@ -1262,7 +1262,7 @@
 
 											<Button x:Name="PaneAutoSuggestButton"
 													Visibility="Collapsed"
-													Style="{ThemeResource NavigationViewPaneSearchButtonStyle}"
+													Style="{StaticResource NavigationViewPaneSearchButtonStyle}"
 													Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}">
 												<Button.Resources>
 													<ResourceDictionary>
@@ -1363,10 +1363,10 @@
 
 								<SplitView.Content>
 									<Grid x:Name="ContentGrid"
-										  BorderBrush="{StaticResource MaterialNavigationViewBackground}"
+										  BorderBrush="{ThemeResource MaterialNavigationViewBackground}"
 										  BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}"
 										  Margin="{ThemeResource NavigationViewContentMargin}"
-										  CornerRadius="{StaticResource MaterialNavigationViewContentGridCornerRadius}">
+										  CornerRadius="{ThemeResource MaterialNavigationViewContentGridCornerRadius}">
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
@@ -1387,7 +1387,7 @@
 										<ContentControl x:Name="HeaderContent"
 														Grid.Row="1"
 														Grid.Column="1"
-														MinHeight="{StaticResource PaneToggleButtonHeight}"
+														MinHeight="{ThemeResource PaneToggleButtonHeight}"
 														IsTabStop="False"
 														Content="{TemplateBinding Header}"
 														ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -1481,21 +1481,21 @@
 	</Style>
 
 	<Style x:Key="MaterialNavigationViewIconButtonStyle" TargetType="Button">
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
-		<Setter Property="FontSize" Value="{StaticResource MaterialNavigationViewButtonIconSymbolFontSize}" />
+		<Setter Property="FontSize" Value="{ThemeResource MaterialNavigationViewButtonIconSymbolFontSize}" />
 
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialNavigationViewButtonCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialNavigationViewButtonCornerRadius}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Margin" Value="0" />
 		<Setter Property="Padding" Value="0" />
-		<Setter Property="Height" Value="{StaticResource MaterialNavigationViewButtonWidth}" />
-		<Setter Property="Width" Value="{StaticResource MaterialNavigationViewButtonWidth}" />
+		<Setter Property="Height" Value="{ThemeResource MaterialNavigationViewButtonWidth}" />
+		<Setter Property="Width" Value="{ThemeResource MaterialNavigationViewButtonWidth}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Top" />
 
-		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="UseSystemFocusVisuals" Value="{ThemeResource UseSystemFocusVisuals}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -1511,26 +1511,26 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{StaticResource MaterialNavigationViewButtonBackgroundPointerOver}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialNavigationViewButtonBackgroundPointerOver}" />
 										<todo:Setter Target="Icon.(local:AnimatedIcon.State)" Value="PointerOver" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{StaticResource MaterialNavigationViewButtonBackgroundPressed}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialNavigationViewButtonBackgroundPressed}" />
 										<todo:Setter Target="Icon.(local:AnimatedIcon.State)" Value="Pressed" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Icon.Foreground" Value="{StaticResource MaterialNavigationViewButtonForegroundDisabled}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource MaterialNavigationViewButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<todo:local_AnimatedIcon x:Name="Icon"
-												 Height="{StaticResource MaterialNavigationViewButtonIconLength}"
-												 Width="{StaticResource MaterialNavigationViewButtonIconLength}"
+												 Height="{ThemeResource MaterialNavigationViewButtonIconLength}"
+												 Width="{ThemeResource MaterialNavigationViewButtonIconLength}"
 												 local:AnimatedIcon.State="Normal"
 												 MirroredWhenRightToLeft="True"
 												 HorizontalAlignment="Center"
@@ -1549,38 +1549,38 @@
 							</local:AnimatedIcon.FallbackIconSource>
 						</todo:local_AnimatedIcon>
 						<Viewbox x:Name="IconHost"
-								 Height="{StaticResource MaterialNavigationViewButtonIconLength}"
-								 Width="{StaticResource MaterialNavigationViewButtonIconLength}"
+								 Height="{ThemeResource MaterialNavigationViewButtonIconLength}"
+								 Width="{ThemeResource MaterialNavigationViewButtonIconLength}"
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 AutomationProperties.AccessibilityView="Raw">
 							<ContentPresenter x:Name="Icon"
 											  Content="{TemplateBinding Content}"
 											  Foreground="{TemplateBinding Foreground}"
-											  FontFamily="{StaticResource SymbolThemeFontFamily}"
+											  FontFamily="{ThemeResource SymbolThemeFontFamily}"
 											  FontSize="{TemplateBinding FontSize}"
 											  AutomationProperties.AccessibilityView="Raw" />
 						</Viewbox>
 
-						<um:Ripple Feedback="{StaticResource MaterialNavigationViewButtonRippleFeedback}" />
+						<um:Ripple Feedback="{ThemeResource MaterialNavigationViewButtonRippleFeedback}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
 	<Style x:Key="MaterialNavigationViewIconTextButtonStyle" TargetType="Button">
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
-		<Setter Property="FontSize" Value="{StaticResource MaterialNavigationViewButtonIconSymbolFontSize}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="FontSize" Value="{ThemeResource MaterialNavigationViewButtonIconSymbolFontSize}" />
 
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialNavigationViewButtonCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialNavigationViewButtonCornerRadius}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<!-- note: a computed margin will be injected by the NV implementation for "layout placement". -->
 		<!-- and, because of that, the default margin will be applied through Padding on LayoutRoot.Margin -->
 		<Setter Property="Margin" Value="0" />
 		<Setter Property="Padding" Value="12,0" />
-		<Setter Property="MinHeight" Value="{StaticResource MaterialNavigationViewButtonWidth}" />
-		<Setter Property="MinWidth" Value="{StaticResource MaterialNavigationViewButtonWidth}" />
+		<Setter Property="MinHeight" Value="{ThemeResource MaterialNavigationViewButtonWidth}" />
+		<Setter Property="MinWidth" Value="{ThemeResource MaterialNavigationViewButtonWidth}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Top" />
 
@@ -1606,20 +1606,20 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{StaticResource MaterialNavigationViewButtonBackgroundPointerOver}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialNavigationViewButtonBackgroundPointerOver}" />
 										<todo:Setter Target="Icon.(local:AnimatedIcon.State)" Value="PointerOver" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{StaticResource MaterialNavigationViewButtonBackgroundPressed}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialNavigationViewButtonBackgroundPressed}" />
 										<todo:Setter Target="Icon.(local:AnimatedIcon.State)" Value="Pressed" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Icon.Foreground" Value="{StaticResource MaterialNavigationViewButtonForegroundDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource MaterialNavigationViewButtonForegroundDisabled}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource MaterialNavigationViewButtonForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialNavigationViewButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -1627,8 +1627,8 @@
 
 						<Border Height="{TemplateBinding MinHeight}" Width="{TemplateBinding MinWidth}">
 							<todo:local_AnimatedIcon x:Name="Icon"
-													 Height="{StaticResource MaterialNavigationViewButtonIconLength}"
-													 Width="{StaticResource MaterialNavigationViewButtonIconLength}"
+													 Height="{ThemeResource MaterialNavigationViewButtonIconLength}"
+													 Width="{ThemeResource MaterialNavigationViewButtonIconLength}"
 													 Foreground="{TemplateBinding Foreground}"
 													 HorizontalAlignment="Center"
 													 VerticalAlignment="Center"
@@ -1640,15 +1640,15 @@
 								</local:AnimatedIcon.FallbackIconSource>
 							</todo:local_AnimatedIcon>
 							<Viewbox x:Name="IconHost"
-									 Height="{StaticResource MaterialNavigationViewButtonIconLength}"
-									 Width="{StaticResource MaterialNavigationViewButtonIconLength}"
+									 Height="{ThemeResource MaterialNavigationViewButtonIconLength}"
+									 Width="{ThemeResource MaterialNavigationViewButtonIconLength}"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center"
 									 AutomationProperties.AccessibilityView="Raw">
 								<TextBlock x:Name="Icon"
 										   Text="&#xE700;"
 										   Foreground="{TemplateBinding Foreground}"
-										   FontFamily="{StaticResource SymbolThemeFontFamily}"
+										   FontFamily="{ThemeResource SymbolThemeFontFamily}"
 										   FontSize="{TemplateBinding FontSize}"
 										   AutomationProperties.AccessibilityView="Raw" />
 							</Viewbox>
@@ -1661,7 +1661,7 @@
 										  FontSize="{TemplateBinding FontSize}"
 										  VerticalContentAlignment="Center" />
 
-						<um:Ripple Grid.ColumnSpan="2" Feedback="{StaticResource MaterialNavigationViewButtonRippleFeedback}" />
+						<um:Ripple Grid.ColumnSpan="2" Feedback="{ThemeResource MaterialNavigationViewButtonRippleFeedback}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -1683,9 +1683,9 @@
 		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource TopNavigationViewItemForeground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
-		<Setter Property="Height" Value="{StaticResource TopNavigationViewOverflowButtonHeight}" />
-		<Setter Property="Width" Value="{StaticResource TopNavigationViewOverflowButtonWidth}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource NavigationViewItemBorderThickness}" />
+		<Setter Property="Height" Value="{ThemeResource TopNavigationViewOverflowButtonHeight}" />
+		<Setter Property="Width" Value="{ThemeResource TopNavigationViewOverflowButtonWidth}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
@@ -1742,9 +1742,9 @@
 		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource TopNavigationViewItemForeground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
-		<Setter Property="Height" Value="{StaticResource TopNavigationViewOverflowButtonHeight}" />
-		<Setter Property="Width" Value="{StaticResource TopNavigationViewOverflowButtonWidth}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource NavigationViewItemBorderThickness}" />
+		<Setter Property="Height" Value="{ThemeResource TopNavigationViewOverflowButtonHeight}" />
+		<Setter Property="Width" Value="{ThemeResource TopNavigationViewOverflowButtonWidth}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Top" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
@@ -1797,10 +1797,10 @@
 	</Style>
 
 	<Style x:Key="MaterialNavigationViewItemStyle" TargetType="local:NavigationViewItem">
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource NavigationViewItemBorderThickness}" />
 		<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
@@ -1822,20 +1822,20 @@
 							<VisualStateGroup x:Name="ItemOnNavigationViewListPositionStates">
 								<VisualState x:Name="OnLeftNavigation">
 									<VisualState.Setters>
-										<Setter Target="NavigationViewItemPresenter.Style" Value="{StaticResource MUX_NavigationViewItemPresenterStyleWhenOnLeftPane}" />
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource MUX_NavigationViewItemPresenterStyleWhenOnLeftPane}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="OnTopNavigationPrimary">
 									<VisualState.Setters>
 										<Setter Target="NavigationViewItemPresenter.Margin" Value="{ThemeResource TopNavigationViewItemMargin}" />
-										<Setter Target="NavigationViewItemPresenter.Style" Value="{StaticResource MUX_NavigationViewItemPresenterStyleWhenOnTopPane}" />
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource MUX_NavigationViewItemPresenterStyleWhenOnTopPane}" />
 										<todo:contract7NotPresent_Setter Target="ChildrenFlyout.Placement" Value="Bottom" />
 										<todo:contract7Present_Setter Target="ChildrenFlyout.Placement" Value="BottomEdgeAlignedLeft" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="OnTopNavigationOverflow">
 									<VisualState.Setters>
-										<Setter Target="NavigationViewItemPresenter.Style" Value="{StaticResource MUX_NavigationViewItemPresenterStyleWhenOnTopPaneOverflow}" />
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource MUX_NavigationViewItemPresenterStyleWhenOnTopPaneOverflow}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -1925,7 +1925,7 @@
 		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
 		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource NavigationViewItemBorderThickness}" />
 		<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
@@ -1940,8 +1940,8 @@
 						  contract7Present:CornerRadius="{TemplateBinding CornerRadius}"
 						  contract7NotPresent:CornerRadius="{ThemeResource ControlCornerRadius}"
 						  Margin="{ThemeResource NavigationViewItemButtonMargin}"
-						  Height="{StaticResource TopNavigationViewSettingsButtonHeight}"
-						  Width="{StaticResource TopNavigationViewSettingsButtonHeight}"
+						  Height="{ThemeResource TopNavigationViewSettingsButtonHeight}"
+						  Width="{ThemeResource TopNavigationViewSettingsButtonHeight}"
 						  Control.IsTemplateFocusTarget="True">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="PointerStates">
@@ -2033,10 +2033,10 @@
 
 	<Style TargetType="primitives:NavigationViewItemPresenter" />
 	<Style TargetType="primitives:NavigationViewItemPresenter" x:Key="MUX_NavigationViewItemPresenterStyleWhenOnLeftPane">
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource NavigationViewItemBorderThickness}" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<todo:contract7Present_Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
@@ -2045,10 +2045,10 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="primitives:NavigationViewItemPresenter">
 					<Grid x:Name="LayoutRoot"
-						  CornerRadius="{StaticResource MaterialNavigationViewItemCornerRadius}"
+						  CornerRadius="{ThemeResource MaterialNavigationViewItemCornerRadius}"
 						  Background="{TemplateBinding Background}"
-						  Height="{StaticResource MaterialNavigationItemHeight}"
-						  Margin="{StaticResource MaterialNavigationItemLeftMargin}"
+						  Height="{ThemeResource MaterialNavigationItemHeight}"
+						  Margin="{ThemeResource MaterialNavigationItemLeftMargin}"
 						  Control.IsTemplateFocusTarget="True">
 						<Grid.Resources>
 							<contract7NotPresent:Storyboard x:Name="ExpandCollapseRotateExpandedStoryboard">
@@ -2072,7 +2072,7 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="PresenterContentRootGrid.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundPointerOver}" />
+										<Setter Target="PresenterContentRootGrid.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundPointerOver}" />
 
 										<todo:Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPointerOver}" />
 										<todo:Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
@@ -2082,7 +2082,7 @@
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="PresenterContentRootGrid.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundPressed}" />
+										<Setter Target="PresenterContentRootGrid.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundPressed}" />
 
 										<todo:Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPressed}" />
 										<todo:Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
@@ -2092,7 +2092,7 @@
 								</VisualState>
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
-										<Setter Target="SelectionFill.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundSelected}" />
+										<Setter Target="SelectionFill.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundSelected}" />
 										<todo:Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundSelected}" />
 										<todo:Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
 										<todo:Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
@@ -2100,8 +2100,8 @@
 								</VisualState>
 								<VisualState x:Name="PointerOverSelected">
 									<VisualState.Setters>
-										<Setter Target="PresenterContentRootGrid.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundPointerOver}" />
-										<Setter Target="SelectionFill.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundSelected}" />
+										<Setter Target="PresenterContentRootGrid.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundPointerOver}" />
+										<Setter Target="SelectionFill.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundSelected}" />
 
 										<todo:Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundSelectedPointerOver}" />
 										<todo:Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelectedPointerOver}" />
@@ -2111,8 +2111,8 @@
 								</VisualState>
 								<VisualState x:Name="PressedSelected">
 									<VisualState.Setters>
-										<Setter Target="PresenterContentRootGrid.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundPressed}" />
-										<Setter Target="SelectionFill.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundSelected}" />
+										<Setter Target="PresenterContentRootGrid.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundPressed}" />
+										<Setter Target="SelectionFill.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundSelected}" />
 
 										<todo:Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundSelectedPressed}" />
 										<todo:Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelectedPressed}" />
@@ -2125,7 +2125,7 @@
 								<VisualState x:Name="Enabled" />
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{StaticResource MaterialNavigationViewItemBackgroundDisabled}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialNavigationViewItemBackgroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -2135,7 +2135,7 @@
 									<VisualState.Setters>
 										<Setter Target="IconColumn.Width" Value="0" />
 										<Setter Target="IconBox.Visibility" Value="Collapsed" />
-										<Setter Target="ContentPresenter.Margin" Value="{StaticResource MaterialNavigationItemContentMarginWithoutIcon}" />
+										<Setter Target="ContentPresenter.Margin" Value="{ThemeResource MaterialNavigationItemContentMarginWithoutIcon}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -2224,7 +2224,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<!-- note: PresenterContentRootGrid has a scaling margin-left (other 3 are preserved) based on depth (See: NVI::UpdateItemIndentation) -->
-						<Grid x:Name="PresenterContentRootGrid" CornerRadius="{StaticResource MaterialNavigationViewItemCornerRadiusLeftOnly}">
+						<Grid x:Name="PresenterContentRootGrid" CornerRadius="{ThemeResource MaterialNavigationViewItemCornerRadiusLeftOnly}">
 							<!--
 								Pointer relative visual are composed of 3 stacking layer: // material dont have of composite state brush...
 								- PresenterContentRootGrid.Background: (Pressed) ?? (PointerOver) ?? (*null*) // via VisualState
@@ -2260,8 +2260,8 @@
 									<ColumnDefinition Width="Auto" />
 								</Grid.ColumnDefinitions>
 
-								<Border Height="{StaticResource MaterialNavigationItemIconLength}"
-										Width="{StaticResource MaterialNavigationItemIconLength}"
+								<Border Height="{ThemeResource MaterialNavigationItemIconLength}"
+										Width="{ThemeResource MaterialNavigationItemIconLength}"
 										HorizontalAlignment="Center"
 										VerticalAlignment="Center">
 									<Viewbox x:Name="IconBox"
@@ -2276,7 +2276,7 @@
 
 								<ContentPresenter x:Name="ContentPresenter"
 												  Grid.Column="1"
-												  Margin="{StaticResource MaterialNavigationItemContentMargin}"
+												  Margin="{ThemeResource MaterialNavigationItemContentMargin}"
 												  ContentTransitions="{TemplateBinding ContentTransitions}"
 												  ContentTemplate="{TemplateBinding ContentTemplate}"
 												  Content="{TemplateBinding Content}"
@@ -2308,8 +2308,8 @@
 										<local:AnimatedIcon.FallbackIconSource>
 											<local:FontIconSource Foreground="{ThemeResource NavigationViewItemForeground}"
 																  FontSize="{ThemeResource NavigationViewItemExpandedGlyphFontSize}"
-																  Glyph="{StaticResource NavigationViewItemExpandedGlyph}"
-																  FontFamily="{StaticResource SymbolThemeFontFamily}" />
+																  Glyph="{ThemeResource NavigationViewItemExpandedGlyph}"
+																  FontFamily="{ThemeResource SymbolThemeFontFamily}" />
 										</local:AnimatedIcon.FallbackIconSource>
 										<local:AnimatedIcon.RenderTransform>
 											<contract7NotPresent:RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0" />
@@ -2324,7 +2324,7 @@
 
 							</Grid>
 
-							<um:Ripple Feedback="{StaticResource MaterialNavigationViewItemRippleFeedback}" />
+							<um:Ripple Feedback="{ThemeResource MaterialNavigationViewItemRippleFeedback}" />
 						</Grid>
 					</Grid>
 				</ControlTemplate>
@@ -2332,7 +2332,7 @@
 		</Setter>
 	</Style>
 	<Style TargetType="primitives:NavigationViewItemPresenter" x:Key="MUX_NavigationViewItemPresenterStyleWhenOnTopPane">
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -2557,8 +2557,8 @@
 									<local:AnimatedIcon.FallbackIconSource>
 										<local:FontIconSource Foreground="{ThemeResource NavigationViewItemForeground}"
 															  FontSize="{ThemeResource NavigationViewItemExpandedGlyphFontSize}"
-															  Glyph="{StaticResource NavigationViewItemExpandedGlyph}"
-															  FontFamily="{StaticResource SymbolThemeFontFamily}" />
+															  Glyph="{ThemeResource NavigationViewItemExpandedGlyph}"
+															  FontFamily="{ThemeResource SymbolThemeFontFamily}" />
 									</local:AnimatedIcon.FallbackIconSource>
 									<local:AnimatedIcon.RenderTransform>
 										<contract7NotPresent:RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0" />
@@ -2593,7 +2593,7 @@
 		</Setter>
 	</Style>
 	<Style TargetType="primitives:NavigationViewItemPresenter" x:Key="MUX_NavigationViewItemPresenterStyleWhenOnTopPaneOverflow">
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -2815,8 +2815,8 @@
 										<local:AnimatedIcon.FallbackIconSource>
 											<local:FontIconSource Foreground="{ThemeResource NavigationViewItemForeground}"
 																  FontSize="{ThemeResource NavigationViewItemExpandedGlyphFontSize}"
-																  Glyph="{StaticResource NavigationViewItemExpandedGlyph}"
-																  FontFamily="{StaticResource SymbolThemeFontFamily}" />
+																  Glyph="{ThemeResource NavigationViewItemExpandedGlyph}"
+																  FontFamily="{ThemeResource SymbolThemeFontFamily}" />
 										</local:AnimatedIcon.FallbackIconSource>
 										<local:AnimatedIcon.RenderTransform>
 											<contract7NotPresent:RotateTransform x:Name="ExpandCollapseChevronRotateTransform" Angle="0" />
@@ -2966,7 +2966,7 @@
 
 	<Style x:Key="NavigationViewItemHeaderTextStyle"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource BaseTextBlockStyle}">
+		   BasedOn="{ThemeResource BaseTextBlockStyle}">
 		<Setter Property="FontSize" Value="14" />
 		<Setter Property="FontWeight" Value="SemiBold" />
 		<Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />

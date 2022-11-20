@@ -31,7 +31,7 @@
 		<Setter Property="CalendarItemBorderBrush"
 				Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
 		<Setter Property="TodayForeground"
-				Value="{StaticResource MaterialCalendarTodayForeground}" />
+				Value="{ThemeResource MaterialCalendarTodayForeground}" />
 		<Setter Property="BlackoutForeground"
 				Value="{ThemeResource MaterialCalendarBlackoutForeground}" />
 		<Setter Property="SelectedForeground"
@@ -53,21 +53,21 @@
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="DayItemFontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="DayItemFontSize"
 				Value="14" />
 		<Setter Property="FirstOfMonthLabelFontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FirstOfMonthLabelFontSize"
 				Value="0" />
 		<Setter Property="MonthYearItemFontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="MonthYearItemFontSize"
 				Value="14" />
 		<Setter Property="FirstOfYearDecadeLabelFontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<not_win:Setter Property="CalendarItemBorderThickness"
 						Value="0" />
 		<not_win:Setter Property="BorderThickness"
@@ -87,7 +87,7 @@
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="UseSystemFocusVisuals"
-				Value="{StaticResource UseSystemFocusVisuals}" />
+				Value="{ThemeResource UseSystemFocusVisuals}" />
 		<not_win:Setter Property="CornerRadius"
 						Value="{ThemeResource ControlCornerRadius}" />
 		<not_win:Setter Property="DayItemCornerRadius"
@@ -109,7 +109,7 @@
 							CornerRadius="{TemplateBinding CornerRadius}">
 						<Border.Resources>
 							<Style x:Key="MaterialWeekDayNameStyle"
-								   BasedOn="{StaticResource MaterialBodySmall}"
+								   BasedOn="{ThemeResource MaterialBodySmall}"
 								   TargetType="TextBlock">
 								<Setter Property="HorizontalAlignment"
 										Value="Center" />
@@ -123,7 +123,7 @@
 								<Setter Property="VerticalAlignment"
 										Value="Stretch" />
 								<Setter Property="UseSystemFocusVisuals"
-										Value="{StaticResource UseSystemFocusVisuals}" />
+										Value="{ThemeResource UseSystemFocusVisuals}" />
 								<Setter Property="FontSize"
 										Value="14" />
 								<Setter Property="Background"
@@ -170,7 +170,7 @@
 							</Style>
 							<Style TargetType="Button"
 								   x:Key="MaterialHeaderButtonStyle"
-								   BasedOn="{StaticResource MaterialNavigationButtonStyle}">
+								   BasedOn="{ThemeResource MaterialNavigationButtonStyle}">
 								<Setter Property="Template">
 									<Setter.Value>
 										<ControlTemplate TargetType="Button">
@@ -192,7 +192,7 @@
 																  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 																  AutomationProperties.AccessibilityView="Raw" />
 												<Path x:Name="DownArrowGlyph"
-													  Data="{StaticResource MaterialDownArrowPathData}"
+													  Data="{ThemeResource MaterialDownArrowPathData}"
 													  Fill="{TemplateBinding Foreground}"
 													  Stretch="Uniform"
 													  Height="5"
@@ -209,18 +209,18 @@
 																<Setter Target="Text.BorderBrush"
 																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource OnPrimaryMediumBrush}" />
+																		Value="{ThemeResource OnPrimaryMediumBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource OnPrimaryMediumBrush}" />
+																		Value="{ThemeResource OnPrimaryMediumBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource OnPrimaryLowBrush}" />
+																		Value="{ThemeResource OnPrimaryLowBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource OnPrimaryLowBrush}" />
+																		Value="{ThemeResource OnPrimaryLowBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled">
@@ -252,7 +252,7 @@
 								<Setter Property="BringIntoViewOnFocusChange"
 										Value="False" />
 								<Setter Property="Template"
-										Value="{StaticResource ScrollViewerScrollBarlessTemplate}" />
+										Value="{ThemeResource ScrollViewerScrollBarlessTemplate}" />
 								<not_win:Setter Property="(uno:ScrollViewer.ShouldFallBackToNativeScrollBars)"
 												Value="False" />
 							</Style>
@@ -706,5 +706,5 @@
 
 	<Style x:Key="MaterialCalendarViewStyle"
 		   TargetType="CalendarView"
-		   BasedOn="{StaticResource DefaultMaterialCalendarViewStyle}" />
+		   BasedOn="{ThemeResource DefaultMaterialCalendarViewStyle}" />
 </ResourceDictionary>

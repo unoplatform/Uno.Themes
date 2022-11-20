@@ -53,25 +53,25 @@
 	       TargetType="Slider">
 
 		<Setter Property="Background"
-		        Value="{StaticResource MaterialSliderTrackBrush}" />
+		        Value="{ThemeResource MaterialSliderTrackBrush}" />
 		<Setter Property="Foreground"
-		        Value="{StaticResource PrimaryBrush}" />
+		        Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="BorderThickness"
 		        Value="0" />
 		<Setter Property="FontFamily"
-		        Value="{StaticResource MaterialRegularFontFamily}" />
+		        Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FontSize"
-		        Value="{StaticResource ControlContentThemeFontSize}" />
+		        Value="{ThemeResource ControlContentThemeFontSize}" />
 		<Setter Property="ManipulationMode"
 		        Value="None" />
 		<Setter Property="UseSystemFocusVisuals"
-		        Value="{StaticResource UseSystemFocusVisuals}" />
+		        Value="{ThemeResource UseSystemFocusVisuals}" />
 		<Setter Property="FocusVisualMargin"
 		        Value="-7,0,-7,0" />
 		<Setter Property="IsFocusEngagementEnabled"
 		        Value="True" />
 		<not_win:Setter Property="CornerRadius"
-		                Value="{StaticResource ControlCornerRadius}" />
+		                Value="{ThemeResource ControlCornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -90,45 +90,45 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{ThemeResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{ThemeResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
 										                               Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{ThemeResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
 										                               Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+											                        Value="{ThemeResource MaterialSliderThumbBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+											                        Value="{ThemeResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+											                        Value="{ThemeResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+											                        Value="{ThemeResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar"
 										                               Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-											                        Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+											                        Value="{ThemeResource MaterialSliderTickBarFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -224,7 +224,7 @@
 								         Height="4"
 								         Margin="0,0,0,4"
 								         VerticalAlignment="Bottom"
-								         Fill="{StaticResource MaterialSliderTickBarFill}"
+								         Fill="{ThemeResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  HorizontalInlineTickBar  -->
@@ -232,7 +232,7 @@
 								         Grid.Row="1"
 								         Grid.ColumnSpan="3"
 								         Height="2"
-								         Fill="{StaticResource MaterialSliderInlineTickBarFill}"
+								         Fill="{ThemeResource MaterialSliderInlineTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  BottomTickBar  -->
@@ -242,7 +242,7 @@
 								         Height="4"
 								         Margin="0,4,0,0"
 								         VerticalAlignment="Top"
-								         Fill="{StaticResource MaterialSliderTickBarFill}"
+								         Fill="{ThemeResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  HorizontalThumb  -->
@@ -299,7 +299,7 @@
 								         Width="4"
 								         Margin="0,0,4,0"
 								         HorizontalAlignment="Right"
-								         Fill="{StaticResource MaterialSliderTickBarFill}"
+								         Fill="{ThemeResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  VerticalInlineTickBar  -->
@@ -307,7 +307,7 @@
 								         Grid.RowSpan="3"
 								         Grid.Column="1"
 								         Width="2"
-								         Fill="{StaticResource MaterialSliderInlineTickBarFill}"
+								         Fill="{ThemeResource MaterialSliderInlineTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  RightTickBar  -->
@@ -317,7 +317,7 @@
 								         Width="4"
 								         Margin="4,0,0,0"
 								         HorizontalAlignment="Left"
-								         Fill="{StaticResource MaterialSliderTickBarFill}"
+								         Fill="{ThemeResource MaterialSliderTickBarFill}"
 								         Visibility="Collapsed" />
 
 								<!--  VerticalThumb  -->

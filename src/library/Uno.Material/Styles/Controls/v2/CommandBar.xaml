@@ -13,10 +13,10 @@
 
 	<Style x:Key="MaterialAppBarButtonStyle"
 		   TargetType="AppBarButton">
-		<Setter Property="Height" Value="{StaticResource MaterialCommandBarHeight}" />
-		<Setter Property="Width" Value="{StaticResource MaterialCommandBarHeight}" />
+		<Setter Property="Height" Value="{ThemeResource MaterialCommandBarHeight}" />
+		<Setter Property="Width" Value="{ThemeResource MaterialCommandBarHeight}" />
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="IsCompact" Value="True" />
@@ -24,7 +24,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
 					<um:Ripple Feedback="{TemplateBinding Foreground}"
-									 FeedbackOpacity="{StaticResource PressedOpacity}">
+									 FeedbackOpacity="{ThemeResource PressedOpacity}">
 						<Viewbox x:Name="ContentViewbox"
 								 Height="{ThemeResource AppBarButtonContentHeight}"
 								 Width="{ThemeResource AppBarButtonContentHeight}"
@@ -76,8 +76,8 @@
 				<!-- note: NavigationCommand is an AppBarButton, not ICommand -->
 				<ContentControl Content="{Binding (toolkit:CommandBarExtensions.NavigationCommand), RelativeSource={RelativeSource TemplatedParent}}"
 								Foreground="{TemplateBinding Foreground}"
-								Height="{StaticResource MaterialCommandBarHeight}"
-								Width="{StaticResource MaterialCommandBarHeight}"
+								Height="{ThemeResource MaterialCommandBarHeight}"
+								Width="{ThemeResource MaterialCommandBarHeight}"
 								IsTabStop="False" />
 
 				<!--
@@ -125,12 +125,12 @@
 			</Setter.Value>
 		</Setter>
 
-		<Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 
 		<android:Setter Property="(toolkit:UIElementExtensions.Elevation)"
-						Value="{StaticResource MaterialCommandBarElevation}" />
-		<Setter Property="Height" Value="{StaticResource MaterialCommandBarHeight}" />
+						Value="{ThemeResource MaterialCommandBarElevation}" />
+		<Setter Property="Height" Value="{ThemeResource MaterialCommandBarHeight}" />
 
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Top" />
@@ -140,17 +140,17 @@
 		<Setter Property="OverflowButtonVisibility" Value="Collapsed" />
 		<Setter Property="IsDynamicOverflowEnabled" Value="False" />
 
-		<Setter Property="Template" Value="{StaticResource MaterialXamlCommandBarTemplate}" />
+		<Setter Property="Template" Value="{ThemeResource MaterialXamlCommandBarTemplate}" />
 	</Style>
 	<Style x:Key="MaterialCommandBarStyle"
 		   TargetType="CommandBar"
-		   BasedOn="{StaticResource MaterialBaseCommandBarStyle}">
+		   BasedOn="{ThemeResource MaterialBaseCommandBarStyle}">
 		
 		<ios:Setter Property="Height" Value="NaN" />
 		<ios:Setter Property="Template"
-					Value="{StaticResource NativeM3CommandBarTemplate}" />
+					Value="{ThemeResource NativeM3CommandBarTemplate}" />
 		<android:Setter Property="Template"
-						Value="{StaticResource NativeM3CommandBarTemplate}" />
+						Value="{ThemeResource NativeM3CommandBarTemplate}" />
 	</Style>
 
 </ResourceDictionary>

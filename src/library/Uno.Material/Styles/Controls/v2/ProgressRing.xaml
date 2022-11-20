@@ -23,15 +23,15 @@
 	<Style x:Key="MaterialProgressRingStyle"
 		   TargetType="muxc:ProgressRing">
 		<win:Setter Property="DeterminateSource"
-						   Value="{StaticResource M3MaterialDeterminateAnimation_Win}" />
+						   Value="{ThemeResource M3MaterialDeterminateAnimation_Win}" />
 		<win:Setter Property="IndeterminateSource"
-						   Value="{StaticResource M3MaterialIndeterminateAnimation_Win}" />
+						   Value="{ThemeResource M3MaterialIndeterminateAnimation_Win}" />
 		<not_win:Setter Property="DeterminateSource"
-							   Value="{StaticResource M3MaterialDeterminateAnimation_Uno}" />
+							   Value="{ThemeResource M3MaterialDeterminateAnimation_Uno}" />
 		<not_win:Setter Property="IndeterminateSource"
-							   Value="{StaticResource M3MaterialIndeterminateAnimation_Uno}" />
+							   Value="{ThemeResource M3MaterialIndeterminateAnimation_Uno}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 	</Style>

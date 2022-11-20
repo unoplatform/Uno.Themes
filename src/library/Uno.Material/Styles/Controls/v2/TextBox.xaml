@@ -32,7 +32,7 @@
 	<Style x:Key="MaterialDeleteButtonStyle"
 		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -54,7 +54,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Path x:Name="GlyphElement"
-							  Data="{StaticResource M3ClearGlyphPathData}"
+							  Data="{ThemeResource M3ClearGlyphPathData}"
 							  Fill="{TemplateBinding Foreground}"
 							  VerticalAlignment="Center"
 							  HorizontalAlignment="Center"
@@ -71,13 +71,13 @@
 	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceVariantBrush}" />
+				Value="{ThemeResource OnSurfaceVariantBrush}" />
 		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource OnSurfaceVariantBrush}" />
+				Value="{ThemeResource OnSurfaceVariantBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource SurfaceVariantBrush}" />
+				Value="{ThemeResource SurfaceVariantBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OnSurfaceLowBrush}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Left" />
 		<Setter Property="VerticalContentAlignment"
@@ -87,13 +87,13 @@
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialTextBoxFontFamily}" />
+				Value="{ThemeResource MaterialTextBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialTextBoxFontWeight}" />
+				Value="{ThemeResource MaterialTextBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialTextBoxFontSize}" />
+				Value="{ThemeResource MaterialTextBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialTextBoxCharacterSpacing}" />
+				Value="{ThemeResource MaterialTextBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<macos:Setter Property="Padding"
@@ -122,7 +122,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{ThemeResource OnSurfaceBrush}" />
 										<Setter Target="NormalBorder.Height"
 												Value="2" />
 									</VisualState.Setters>
@@ -133,31 +133,31 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource DisabledOpacity}" />
+												Value="{ThemeResource DisabledOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 										<Setter Target="NormalBorder.Height"
 												Value="2" />
 										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 
 										<DoubleAnimation Storyboard.TargetName="FocusedBorder_ScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="1" />
 									</Storyboard>
 								</VisualState>
@@ -179,24 +179,24 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="-11" />
 										<!-- ContentElement TranslateY value changing depending if there is a PlaceholderText or not -->
 										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
@@ -275,7 +275,7 @@
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
 									Margin="8,0,0,0"
-									Foreground="{StaticResource OnSurfaceVariantBrush}"
+									Foreground="{ThemeResource OnSurfaceVariantBrush}"
 									IsTabStop="False"
 									Style="{StaticResource MaterialDeleteButtonStyle}"
 									VerticalAlignment="Stretch"
@@ -285,12 +285,12 @@
 
 						<Rectangle x:Name="NormalBorder"
 								   Fill="{TemplateBinding BorderBrush}"
-								   Height="{StaticResource TextBoxOutlinedStrokeHeight}"
+								   Height="{ThemeResource TextBoxOutlinedStrokeHeight}"
 								   VerticalAlignment="Bottom" />
 
 						<Rectangle x:Name="FocusedBorder"
-								   Fill="{StaticResource PrimaryBrush}"
-								   Height="{StaticResource TextBoxFocusStrokeWidth}"
+								   Fill="{ThemeResource PrimaryBrush}"
+								   Height="{ThemeResource TextBoxFocusStrokeWidth}"
 								   VerticalAlignment="Bottom"
 								   not_macos:RenderTransformOrigin="0.5,0.5"
 								   macos:RenderTransformOrigin="0.0,0.5">
@@ -311,11 +311,11 @@
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource OnSurfaceLowBrush}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OnSurfaceLowBrush}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="CornerRadius"
@@ -323,13 +323,13 @@
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialTextBoxFontFamily}" />
+				Value="{ThemeResource MaterialTextBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialTextBoxFontWeight}" />
+				Value="{ThemeResource MaterialTextBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialTextBoxFontSize}" />
+				Value="{ThemeResource MaterialTextBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialTextBoxCharacterSpacing}" />
+				Value="{ThemeResource MaterialTextBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="HorizontalContentAlignment"
@@ -364,7 +364,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{ThemeResource OnSurfaceBrush}" />
 										<Setter Target="RootBorder.BorderThickness"
 												Value="2" />
 										<Setter Target="RootBorder.Padding"
@@ -376,20 +376,20 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 										<Setter Target="ContentElement.Opacity"
-												Value="{StaticResource DisabledOpacity}" />
+												Value="{ThemeResource DisabledOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 										<Setter Target="RootBorder.BorderThickness"
 												Value="2" />
 										<Setter Target="RootBorder.Padding"
@@ -411,24 +411,24 @@
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="-11" />
 										<!-- ContentElement TranslateY value changing depending if there is a PlaceholderText or not -->
 										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleX"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 Duration="{ThemeResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{ThemeResource MaterialEaseInOutFunction}"
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>

@@ -8,13 +8,13 @@
 		   TargetType="HyperlinkButton">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="HyperlinkButton">
@@ -28,21 +28,21 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="Content.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource MediumOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="Content.Opacity"
-												Value="{StaticResource LowOpacity}" />
+												Value="{ThemeResource LowOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -77,10 +77,10 @@
 
 	<Style x:Key="MaterialSecondaryHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton"
-		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
+		   BasedOn="{ThemeResource MaterialHyperlinkButtonStyle}">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{ThemeResource SecondaryBrush}" />
 	</Style>
 
 </ResourceDictionary>
