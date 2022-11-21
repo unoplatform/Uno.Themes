@@ -24,7 +24,7 @@
 
 	<!--  Display Large  -->
 	<Style x:Key="MaterialDisplayLarge"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialDisplayLargeFontFamily}" />
@@ -38,7 +38,7 @@
 
 	<!--  Display Medium  -->
 	<Style x:Key="MaterialDisplayMedium"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialDisplayMediumFontFamily}" />
@@ -50,7 +50,7 @@
 
 	<!--  Display Small  -->
 	<Style x:Key="MaterialDisplaySmall"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialDisplaySmallFontFamily}" />
@@ -64,7 +64,7 @@
 
 	<!--  Headline Large  -->
 	<Style x:Key="MaterialHeadlineLarge"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialHeadlineLargeFontFamily}" />
@@ -76,7 +76,7 @@
 
 	<!--  Headline Medium  -->
 	<Style x:Key="MaterialHeadlineMedium"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialHeadlineMediumFontFamily}" />
@@ -88,7 +88,7 @@
 
 	<!--  Headline Small  -->
 	<Style x:Key="MaterialHeadlineSmall"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialHeadlineSmallFontFamily}" />
@@ -102,7 +102,7 @@
 
 	<!--  Title Large  -->
 	<Style x:Key="MaterialTitleLarge"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialTitleLargeFontFamily}" />
@@ -114,7 +114,7 @@
 
 	<!--  Title Medium  -->
 	<Style x:Key="MaterialTitleMedium"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialTitleMediumFontFamily}" />
@@ -126,7 +126,7 @@
 
 	<!--  Title Small  -->
 	<Style x:Key="MaterialTitleSmall"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialTitleSmallFontFamily}" />
@@ -140,7 +140,7 @@
 
 	<!--  Label Large  -->
 	<Style x:Key="MaterialLabelLarge"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialLabelLargeFontFamily}" />
@@ -154,7 +154,7 @@
 
 	<!--  Label Medium  -->
 	<Style x:Key="MaterialLabelMedium"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialLabelMediumFontFamily}" />
@@ -168,7 +168,7 @@
 
 	<!--  Label Small  -->
 	<Style x:Key="MaterialLabelSmall"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialLabelSmallFontFamily}" />
@@ -184,7 +184,7 @@
 	<!-- Text style added for Badges so it will match Uno figma file -->
 	<!-- Not part of Material M3. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
 	<Style x:Key="MaterialLabelExtraSmall"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialLabelExtraSmallFontFamily}" />
@@ -200,7 +200,7 @@
 
 	<!--  Body Large  -->
 	<Style x:Key="MaterialBodyLarge"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialBodyLargeFontFamily}" />
@@ -214,7 +214,7 @@
 
 	<!--  Body Medium  -->
 	<Style x:Key="MaterialBodyMedium"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialBodyMediumFontFamily}" />
@@ -228,7 +228,7 @@
 
 	<!--  Body Small  -->
 	<Style x:Key="MaterialBodySmall"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialBodySmallFontFamily}" />
@@ -245,7 +245,7 @@
 	<!--  Caption Large  -->
 	<!-- Gap Filler for the other design system - Not part of Material M3 -->
 	<Style x:Key="MaterialCaptionLarge"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialCaptionLargeFontFamily}" />
@@ -260,7 +260,7 @@
 	<!--  Caption Medium  -->
 	<!-- Gap Filler for the other design system - Not part of Material M3 -->
 	<Style x:Key="MaterialCaptionMedium"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialCaptionMediumFontFamily}" />
@@ -275,7 +275,7 @@
 	<!--  Caption Small  -->
 	<!-- Gap Filler for the other design system - Not part of Material M3 -->
 	<Style x:Key="MaterialCaptionSmall"
-		   BasedOn="{ThemeResource MaterialBaseTextBlockStyle}"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialCaptionSmallFontFamily}" />

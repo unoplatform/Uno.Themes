@@ -170,7 +170,7 @@
 							</Style>
 							<Style TargetType="Button"
 								   x:Key="MaterialHeaderButtonStyle"
-								   BasedOn="{ThemeResource MaterialNavigationButtonStyle}">
+								   BasedOn="{StaticResource MaterialNavigationButtonStyle}">
 								<Setter Property="Template">
 									<Setter.Value>
 										<ControlTemplate TargetType="Button">
@@ -706,5 +706,5 @@
 
 	<Style x:Key="MaterialCalendarViewStyle"
 		   TargetType="CalendarView"
-		   BasedOn="{ThemeResource DefaultMaterialCalendarViewStyle}" />
+		   BasedOn="{StaticResource DefaultMaterialCalendarViewStyle}" />
 </ResourceDictionary>

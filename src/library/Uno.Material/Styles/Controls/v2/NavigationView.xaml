@@ -834,7 +834,7 @@
 		<Setter Property="OpenPaneLength" Value="360" />
 		<Setter Property="CompactPaneLength" Value="{ThemeResource NavigationViewCompactPaneLength}" />
 
-		<Setter Property="PaneToggleButtonStyle" Value="{ThemeResource MaterialNavigationViewIconTextButtonStyle}" />
+		<Setter Property="PaneToggleButtonStyle" Value="{StaticResource MaterialNavigationViewIconTextButtonStyle}" />
 		<Setter Property="IsTabStop" Value="False" />
 
 		<Setter Property="Template">
@@ -987,7 +987,7 @@
 								<VisualState x:Name="OverflowButtonWithLabel" />
 								<VisualState x:Name="OverflowButtonNoLabel">
 									<VisualState.Setters>
-										<Setter Target="TopNavOverflowButton.Style" Value="{ThemeResource NavigationViewOverflowButtonNoLabelStyleWhenPaneOnTop}" />
+										<Setter Target="TopNavOverflowButton.Style" Value="{StaticResource NavigationViewOverflowButtonNoLabelStyleWhenPaneOnTop}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -1822,20 +1822,20 @@
 							<VisualStateGroup x:Name="ItemOnNavigationViewListPositionStates">
 								<VisualState x:Name="OnLeftNavigation">
 									<VisualState.Setters>
-										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource MUX_NavigationViewItemPresenterStyleWhenOnLeftPane}" />
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{StaticResource MUX_NavigationViewItemPresenterStyleWhenOnLeftPane}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="OnTopNavigationPrimary">
 									<VisualState.Setters>
 										<Setter Target="NavigationViewItemPresenter.Margin" Value="{ThemeResource TopNavigationViewItemMargin}" />
-										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource MUX_NavigationViewItemPresenterStyleWhenOnTopPane}" />
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{StaticResource MUX_NavigationViewItemPresenterStyleWhenOnTopPane}" />
 										<todo:contract7NotPresent_Setter Target="ChildrenFlyout.Placement" Value="Bottom" />
 										<todo:contract7Present_Setter Target="ChildrenFlyout.Placement" Value="BottomEdgeAlignedLeft" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="OnTopNavigationOverflow">
 									<VisualState.Setters>
-										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource MUX_NavigationViewItemPresenterStyleWhenOnTopPaneOverflow}" />
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{StaticResource MUX_NavigationViewItemPresenterStyleWhenOnTopPaneOverflow}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -2966,7 +2966,7 @@
 
 	<Style x:Key="NavigationViewItemHeaderTextStyle"
 		   TargetType="TextBlock"
-		   BasedOn="{ThemeResource BaseTextBlockStyle}">
+		   BasedOn="{StaticResource BaseTextBlockStyle}">
 		<Setter Property="FontSize" Value="14" />
 		<Setter Property="FontWeight" Value="SemiBold" />
 		<Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />

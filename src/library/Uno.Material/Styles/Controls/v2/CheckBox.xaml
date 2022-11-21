@@ -512,7 +512,7 @@
 								  CornerRadius="2" />
 
 							<Path x:Name="HyphenGlyph"
-								  Data="{ThemeResource CheckBoxHyphenGlyphPathStyle}"
+								  Data="{StaticResource CheckBoxHyphenGlyphPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
@@ -524,7 +524,7 @@
 								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
-								  Data="{ThemeResource CheckBoxCheckGlyphPathStyle}"
+								  Data="{StaticResource CheckBoxCheckGlyphPathStyle}"
 								  Fill="{TemplateBinding Foreground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
@@ -555,7 +555,7 @@
 
 	<Style x:Key="MaterialSecondaryCheckBoxStyle"
 		   TargetType="CheckBox"
-		   BasedOn="{ThemeResource MaterialCheckBoxStyle}">
+		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
 		<Setter Property="Background"
 				Value="{ThemeResource SecondaryBrush}" />
 		<Setter Property="Foreground"

@@ -34,13 +34,13 @@
 	<!-- note: MaterialContentDialogDefaultButtonStyle is the style associated with ContentDialog.DefaultButton (accented or CTA btn) -->
 	<Style x:Key="MaterialContentDialogButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{ThemeResource MaterialTextButtonStyle}">
+		   BasedOn="{StaticResource MaterialTextButtonStyle}">
 		<Setter Property="HorizontalAlignment" Value="Right" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 	</Style>
 	<Style x:Key="MaterialContentDialogDefaultButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{ThemeResource MaterialFilledButtonStyle}">
+		   BasedOn="{StaticResource MaterialFilledButtonStyle}">
 		<Setter Property="HorizontalAlignment" Value="Right" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 	</Style>
@@ -54,9 +54,9 @@
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 
-		<Setter Property="PrimaryButtonStyle" Value="{ThemeResource MaterialContentDialogButtonStyle}" />
-		<Setter Property="SecondaryButtonStyle" Value="{ThemeResource MaterialContentDialogButtonStyle}" />
-		<Setter Property="CloseButtonStyle" Value="{ThemeResource MaterialContentDialogButtonStyle}" />
+		<Setter Property="PrimaryButtonStyle" Value="{StaticResource MaterialContentDialogButtonStyle}" />
+		<Setter Property="SecondaryButtonStyle" Value="{StaticResource MaterialContentDialogButtonStyle}" />
+		<Setter Property="CloseButtonStyle" Value="{StaticResource MaterialContentDialogButtonStyle}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -150,17 +150,17 @@
 								<VisualState x:Name="NoDefaultButton" />
 								<VisualState x:Name="PrimaryAsDefaultButton">
 									<VisualState.Setters>
-										<Setter Target="PrimaryButton.Style" Value="{ThemeResource MaterialContentDialogDefaultButtonStyle}" />
+										<Setter Target="PrimaryButton.Style" Value="{StaticResource MaterialContentDialogDefaultButtonStyle}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="SecondaryAsDefaultButton">
 									<VisualState.Setters>
-										<Setter Target="SecondaryButton.Style" Value="{ThemeResource MaterialContentDialogDefaultButtonStyle}" />
+										<Setter Target="SecondaryButton.Style" Value="{StaticResource MaterialContentDialogDefaultButtonStyle}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CloseAsDefaultButton">
 									<VisualState.Setters>
-										<Setter Target="CloseButton.Style" Value="{ThemeResource MaterialContentDialogDefaultButtonStyle}" />
+										<Setter Target="CloseButton.Style" Value="{StaticResource MaterialContentDialogDefaultButtonStyle}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
