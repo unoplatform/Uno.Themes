@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
@@ -10,7 +10,7 @@
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
-		
+
 		<UnoXamlResourcesTrimming>true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
 
@@ -57,7 +57,7 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="4.5.12" />
+				<PackageReference Include="Uno.WinUI" Version="4.5.12" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
 				<PackageReference Include="Uno.WinUI.Lottie" Version="4.5.12" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
@@ -109,7 +109,6 @@
 			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
 				<PackageReference Include="Uno.UI.Lottie" Version="4.5.12" />
 			</ItemGroup>
-
 
 			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
 				<Content Include="@(LottieJson)" />

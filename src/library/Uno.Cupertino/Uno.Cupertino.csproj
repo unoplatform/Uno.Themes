@@ -8,10 +8,10 @@
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
-		
+
 		<UnoXamlResourcesTrimming>true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
-	
+
 	<PropertyGroup>
 		<PackageDescription>A set of Cupertino styles for WinUI Controls to be used in Uno Platform and </PackageDescription>
 		<PackageDescription Condition="'$(UseWinUI)'=='true'">$(PackageDescription) WinAppSDK projects</PackageDescription>
@@ -52,7 +52,7 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="4.5.12" />
+				<PackageReference Include="Uno.WinUI" Version="4.5.12" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
 				<PackageReference Include="Uno.WinUI.Lottie" Version="4.5.12" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
 
@@ -75,7 +75,7 @@
 					<DependentUpon>%(Filename)</DependentUpon>
 				</Compile>
 			</ItemGroup>
-			
+
 			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
@@ -120,11 +120,11 @@
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
-	
+
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
     <EmbeddedResource Include="LinkerConfig.xml">
       <LogicalName>$(AssemblyName).xml</LogicalName>
