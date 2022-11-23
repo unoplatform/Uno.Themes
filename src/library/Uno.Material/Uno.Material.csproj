@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">netstandard2.0;xamarinios10;monoandroid12.0;xamarinmac20</TargetFrameworks>
@@ -11,7 +11,7 @@
 		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
 		
-		<UnoXamlResourcesTrimming>true</UnoXamlResourcesTrimming>
+		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -146,8 +146,8 @@
 		<None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<EmbeddedResource Include="LinkerConfig.xml">
+	<ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid12.0' or '$(TargetFramework)'=='xamarinmac20' ">
+		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
 			<LogicalName>$(AssemblyName).xml</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
