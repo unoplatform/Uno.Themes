@@ -13,6 +13,9 @@
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<UseWinUI Condition="'$(UseWinUI)'==''">false</UseWinUI>
+
+		<!-- Required until xamarin targets are used (defined by MSBuild.SDK.Extras)-->
+		<DisableImplicitFrameworkDefines>false</DisableImplicitFrameworkDefines>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
