@@ -4,6 +4,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:um="using:Uno.Material"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="d not_win">
 
@@ -11,4 +12,103 @@
 		<um:MaterialFonts />
 		<um:MaterialColorsV2 />
 	</ResourceDictionary.MergedDictionaries>
+
+	<!-- Implicit styles -->
+	<Style BasedOn="{StaticResource MaterialAppBarButtonStyle}" TargetType="AppBarButton" />
+	<Style BasedOn="{StaticResource MaterialBodyMedium}" TargetType="TextBlock" />
+	<Style BasedOn="{StaticResource MaterialCalendarDatePickerStyle}" TargetType="CalendarDatePicker" />
+	<Style BasedOn="{StaticResource MaterialCalendarViewStyle}" TargetType="CalendarView" />
+	<Style BasedOn="{StaticResource MaterialCheckBoxStyle}" TargetType="CheckBox" />
+	<Style BasedOn="{StaticResource MaterialContentDialogStyle}" TargetType="ContentDialog" />
+	<Style BasedOn="{StaticResource MaterialComboBoxStyle}" TargetType="ComboBox" />
+	<Style BasedOn="{StaticResource MaterialCommandBarStyle}" TargetType="CommandBar" />
+	<Style BasedOn="{StaticResource MaterialDatePickerStyle}" TargetType="DatePicker" />
+	<Style BasedOn="{StaticResource MaterialFilledButtonStyle}" TargetType="Button" />
+	<Style BasedOn="{StaticResource MaterialFilledPasswordBoxStyle}" TargetType="PasswordBox" />
+	<Style BasedOn="{StaticResource MaterialFilledTextBoxStyle}" TargetType="TextBox" />
+	<Style BasedOn="{StaticResource MaterialFlyoutPresenterStyle}" TargetType="FlyoutPresenter" />
+	<Style BasedOn="{StaticResource MaterialHyperlinkButtonStyle}" TargetType="HyperlinkButton" />
+	<Style BasedOn="{StaticResource MaterialListViewItemStyle}" TargetType="ListViewItem" />
+	<Style BasedOn="{StaticResource MaterialListViewStyle}" TargetType="ListView" />
+	<Style BasedOn="{StaticResource MaterialMenuFlyoutPresenterStyle}" TargetType="MenuFlyoutPresenter" />
+	<Style BasedOn="{StaticResource MaterialNavigationViewStyle}" TargetType="muxc:NavigationView" />
+	<Style BasedOn="{StaticResource MaterialNavigationViewItemStyle}" TargetType="muxc:NavigationViewItem" />
+	<Style BasedOn="{StaticResource MaterialProgressBarStyle}" TargetType="muxc:ProgressBar" />
+	<Style BasedOn="{StaticResource MaterialProgressRingStyle}" TargetType="muxc:ProgressRing" />
+	<Style BasedOn="{StaticResource MaterialRadioButtonStyle}" TargetType="RadioButton" />
+	<Style BasedOn="{StaticResource MaterialSliderStyle}" TargetType="Slider" />
+	<Style BasedOn="{StaticResource MaterialTextToggleButtonStyle}" TargetType="ToggleButton" />
+	<Style BasedOn="{StaticResource MaterialToggleSwitchStyle}" TargetType="ToggleSwitch" />
+
+	<!-- Implicit styles aliases -->
+	<StaticResource x:Key="AppBarButtonStyle"					ResourceKey="MaterialAppBarButtonStyle"			/>
+	<StaticResource x:Key="BodyMedium"							ResourceKey="MaterialBodyMedium"				/>
+	<StaticResource x:Key="CalendarDatePickerStyle"				ResourceKey="MaterialCalendarDatePickerStyle"	/>
+	<StaticResource x:Key="CalendarViewStyle"					ResourceKey="MaterialCalendarViewStyle"			/>
+	<StaticResource x:Key="CheckBoxStyle"						ResourceKey="MaterialCheckBoxStyle"				/>
+	<StaticResource x:Key="ContentDialogStyle"					ResourceKey="MaterialContentDialogStyle"		/>
+	<StaticResource x:Key="ComboBoxStyle"						ResourceKey="MaterialComboBoxStyle"				/>
+	<StaticResource x:Key="CommandBarStyle"						ResourceKey="MaterialCommandBarStyle"			/>
+	<StaticResource x:Key="DatePickerStyle"						ResourceKey="MaterialDatePickerStyle"			/>
+	<StaticResource x:Key="FilledButtonStyle"					ResourceKey="MaterialFilledButtonStyle"			/>
+	<StaticResource x:Key="FilledPasswordBoxStyle"				ResourceKey="MaterialFilledPasswordBoxStyle"	/>
+	<StaticResource x:Key="FilledTextBoxStyle"					ResourceKey="MaterialFilledTextBoxStyle"		/>
+	<StaticResource x:Key="FlyoutPresenterStyle"				ResourceKey="MaterialFlyoutPresenterStyle"		/>
+	<StaticResource x:Key="HyperlinkButtonStyle"				ResourceKey="MaterialHyperlinkButtonStyle"		/>
+	<StaticResource x:Key="ListViewItemStyle"					ResourceKey="MaterialListViewItemStyle"			/>
+	<StaticResource x:Key="ListViewStyle"						ResourceKey="MaterialListViewStyle"				/>
+	<StaticResource x:Key="MenuFlyoutPresenterStyle"			ResourceKey="MaterialMenuFlyoutPresenterStyle"	/>
+	<StaticResource x:Key="NavigationViewStyle"					ResourceKey="MaterialNavigationViewStyle"		/>
+	<StaticResource x:Key="NavigationViewItemStyle"				ResourceKey="MaterialNavigationViewItemStyle"	/>
+	<StaticResource x:Key="ProgressBarStyle"					ResourceKey="MaterialProgressBarStyle"			/>
+	<StaticResource x:Key="ProgressRingStyle"					ResourceKey="MaterialProgressRingStyle"			/>
+	<StaticResource x:Key="RadioButtonStyle"					ResourceKey="MaterialRadioButtonStyle"			/>
+	<StaticResource x:Key="SliderStyle"							ResourceKey="MaterialSliderStyle"				/>
+	<StaticResource x:Key="TextToggleButtonStyle"				ResourceKey="MaterialTextToggleButtonStyle"		/>
+	<StaticResource x:Key="ToggleSwitchStyle"					ResourceKey="MaterialToggleSwitchStyle"			/>
+	
+	<!-- Other resources aliases -->
+	<StaticResource x:Key="DisplayMediumFontFamily"				ResourceKey="MaterialRegularFontFamily"				/>
+	<StaticResource x:Key="BodyLarge"							ResourceKey="MaterialBodyLarge"						/>
+	<StaticResource x:Key="BodySmall"							ResourceKey="MaterialBodySmall"						/>
+	<StaticResource x:Key="CaptionLarge"						ResourceKey="MaterialCaptionLarge"					/>
+	<StaticResource x:Key="CaptionMedium"						ResourceKey="MaterialCaptionMedium"					/>
+	<StaticResource x:Key="CaptionSmall"						ResourceKey="MaterialCaptionSmall"					/>
+	<StaticResource x:Key="DisplayLarge"						ResourceKey="MaterialDisplayLarge"					/>
+	<StaticResource x:Key="DisplayMedium"						ResourceKey="MaterialDisplayMedium"					/>
+	<StaticResource x:Key="DisplaySmall"						ResourceKey="MaterialDisplaySmall"					/>
+	<StaticResource x:Key="ElevatedButtonStyle"					ResourceKey="MaterialElevatedButtonStyle"			/>
+	<StaticResource x:Key="FabStyle"							ResourceKey="MaterialFabStyle"						/>
+	<StaticResource x:Key="FilledTonalButtonStyle"				ResourceKey="MaterialFilledTonalButtonStyle"		/>
+	<StaticResource x:Key="HeadlineLarge"						ResourceKey="MaterialHeadlineLarge"					/>
+	<StaticResource x:Key="HeadlineMedium"						ResourceKey="MaterialHeadlineMedium"				/>
+	<StaticResource x:Key="HeadlineSmall"						ResourceKey="MaterialHeadlineSmall"					/>
+	<StaticResource x:Key="IconButtonStyle"						ResourceKey="MaterialIconButtonStyle"				/>
+	<StaticResource x:Key="IconToggleButtonStyle"				ResourceKey="MaterialIconToggleButtonStyle"			/>
+	<StaticResource x:Key="LabelExtraSmall"						ResourceKey="MaterialLabelExtraSmall"				/>
+	<StaticResource x:Key="LabelLarge"							ResourceKey="MaterialLabelLarge"					/>
+	<StaticResource x:Key="LabelMedium"							ResourceKey="MaterialLabelMedium"					/>
+	<StaticResource x:Key="LabelSmall"							ResourceKey="MaterialLabelSmall"					/>
+	<StaticResource x:Key="LargeFabStyle"						ResourceKey="MaterialLargeFabStyle"					/>
+	<StaticResource x:Key="OutlinedButtonStyle"					ResourceKey="MaterialOutlinedButtonStyle"			/>
+	<StaticResource x:Key="OutlinedPasswordBoxStyle"			ResourceKey="MaterialOutlinedPasswordBoxStyle"		/>
+	<StaticResource x:Key="OutlinedTextBoxStyle"				ResourceKey="MaterialOutlinedTextBoxStyle"			/>
+	<StaticResource x:Key="SecondaryCheckBoxStyle"				ResourceKey="MaterialSecondaryCheckBoxStyle"		/>
+	<StaticResource x:Key="SecondaryFabStyle"					ResourceKey="MaterialSecondaryFabStyle"				/>
+	<StaticResource x:Key="SecondaryHyperlinkButtonStyle"		ResourceKey="MaterialSecondaryHyperlinkButtonStyle"	/>
+	<StaticResource x:Key="SecondaryLargeFabStyle"				ResourceKey="MaterialSecondaryLargeFabStyle"		/>
+	<StaticResource x:Key="SecondaryRadioButtonStyle"			ResourceKey="MaterialSecondaryRadioButtonStyle"		/>
+	<StaticResource x:Key="SecondarySmallFabStyle"				ResourceKey="MaterialSecondarySmallFabStyle"		/>
+	<StaticResource x:Key="SmallFabStyle"						ResourceKey="MaterialSmallFabStyle"					/>
+	<StaticResource x:Key="SurfaceFabStyle"						ResourceKey="MaterialSurfaceFabStyle"				/>
+	<StaticResource x:Key="SurfaceLargeFabStyle"				ResourceKey="MaterialSurfaceLargeFabStyle"			/>
+	<StaticResource x:Key="SurfaceSmallFabStyle"				ResourceKey="MaterialSurfaceSmallFabStyle"			/>
+	<StaticResource x:Key="TertiaryFabStyle"					ResourceKey="MaterialTertiaryFabStyle"				/>
+	<StaticResource x:Key="TertiaryLargeFabStyle"				ResourceKey="MaterialTertiaryLargeFabStyle"			/>
+	<StaticResource x:Key="TertiarySmallFabStyle"				ResourceKey="MaterialTertiarySmallFabStyle"			/>
+	<StaticResource x:Key="TextButtonStyle"						ResourceKey="MaterialTextButtonStyle"				/>
+	<StaticResource x:Key="TitleLarge"							ResourceKey="MaterialTitleLarge"					/>
+	<StaticResource x:Key="TitleMedium"							ResourceKey="MaterialTitleMedium"					/>
+	<StaticResource x:Key="TitleSmall"							ResourceKey="MaterialTitleSmall"					/>
+
 </ResourceDictionary>
