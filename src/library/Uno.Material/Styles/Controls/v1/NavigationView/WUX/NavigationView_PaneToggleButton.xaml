@@ -14,33 +14,21 @@
 									   ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}"
 									   ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
 
-	<!-- PaneToggleButton Style-->
+	<!--  PaneToggleButton Style  -->
 	<IsNotWinUI3:Style x:Key="MaterialPaneToggleButtonStyle"
-		   TargetType="Button">
-		<Setter Property="FontSize"
-				Value="16" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource SymbolThemeFontFamily}" />
-		<Setter Property="MinHeight"
-				Value="{StaticResource PaneToggleButtonHeight}" />
-		<Setter Property="MinWidth"
-				Value="52" />
-		<Setter Property="Padding"
-				Value="2" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Top" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialWUXNavDrawersBackgroundBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialWUXNavDrawersTextBrush}" />
-		<Setter Property="Content"
-				Value="&#xE700;" />
+					   TargetType="Button">
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
+		<Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonHeight}" />
+		<Setter Property="MinWidth" Value="52" />
+		<Setter Property="Padding" Value="2" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Background" Value="{StaticResource MaterialWUXNavDrawersBackgroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialWUXNavDrawersTextBrush}" />
+		<Setter Property="Content" Value="&#xE700;" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -55,7 +43,7 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
-									<!-- Workaround for #92 - Android PointerOver state is being applied and maintained on click -->
+									<!--  Workaround for #92 - Android PointerOver state is being applied and maintained on click  -->
 									<not_android:Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"
 														 Storyboard.TargetProperty="Opacity"
@@ -84,26 +72,20 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundChecked}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundChecked}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundChecked}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="HoverOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -122,8 +104,7 @@
 
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -164,29 +145,18 @@
 	</IsNotWinUI3:Style>
 
 	<IsNotWinUI3:Style x:Key="MaterialPaneBackArrowToggleButtonStyle"
-		   TargetType="Button">
-		<Setter Property="FontSize"
-				Value="16" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource SymbolThemeFontFamily}" />
-		<Setter Property="MinHeight"
-				Value="{StaticResource PaneToggleButtonHeight}" />
-		<Setter Property="MinWidth"
-				Value="52" />
-		<Setter Property="Padding"
-				Value="2" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Top" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Background"
-				Value="{StaticResource MaterialWUXNavDrawersBackgroundBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialWUXNavDrawersTextBrush}" />
+					   TargetType="Button">
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
+		<Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonHeight}" />
+		<Setter Property="MinWidth" Value="52" />
+		<Setter Property="Padding" Value="2" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Background" Value="{StaticResource MaterialWUXNavDrawersBackgroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource MaterialWUXNavDrawersTextBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -202,7 +172,7 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<!-- Workaround for #92 - Android PointerOver state is being applied and maintained on click -->
+										<!--  Workaround for #92 - Android PointerOver state is being applied and maintained on click  -->
 										<not_android:Setter Target="HoverOverlay.Opacity"
 															Value="1" />
 									</VisualState.Setters>
@@ -223,26 +193,20 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundChecked}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundChecked}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundChecked}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="HoverOverlay.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -261,8 +225,7 @@
 
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background"
-												Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource MaterialOnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

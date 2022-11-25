@@ -4,14 +4,14 @@
 	<!--
 		This palette contains the default colors and opacity levels for the different state overlays
 		All of them can be overriden by the application consuming this library
-
+		
 		All variations of this palette are offered as brushes in Colors.xaml.
 	-->
 
-	<!-- Color source https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/ -->
+	<!--  Color source https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/  -->
 	<ResourceDictionary.ThemeDictionaries>
 
-		<!-- Light Theme -->
+		<!--  Light Theme  -->
 		<ResourceDictionary x:Key="Light">
 			<Color x:Key="MaterialPrimaryColor">#5B4CF5</Color>
 			<Color x:Key="MaterialPrimaryVariantDarkColor">#353FE5</Color>
@@ -29,30 +29,30 @@
 			<Color x:Key="MaterialOnSurfaceColor">#000000</Color>
 			<Color x:Key="MaterialOnErrorColor">#000000</Color>
 			<Color x:Key="MaterialOverlayColor">#51000000</Color>
-			
-			<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. -->
-			<!-- Non-opaque/transparent primary disabled color -->
+
+			<!--  Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent.  -->
+			<!--  Non-opaque/transparent primary disabled color  -->
 			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#E9E5FA</Color>
-			<!-- Non-opaque/transparent white color that shows on white surfaces -->
+			<!--  Non-opaque/transparent white color that shows on white surfaces  -->
 			<Color x:Key="MaterialSurfaceVariantLightColor">#F7F7F7</Color>
 
-			<!-- Bottom Bar Navigation -->
+			<!--  Bottom Bar Navigation  -->
 			<Color x:Key="MaterialBottomNavBackgroundColor">#5B4CF5</Color>
 			<Color x:Key="MaterialBottomNavForegroundColor">#FFFFFF</Color>
 
-			<!-- Slider -->
+			<!--  Slider  -->
 			<Color x:Key="MaterialSliderTrackColor">#999999</Color>
-			
+
 			<SolidColorBrush x:Key="MaterialBottomNavPressedBrush"
 							 Color="{ThemeResource MaterialOnPrimaryColor}"
 							 Opacity="0.10" />
-			
+
 			<SolidColorBrush x:Key="MaterialBottomNavUncheckedForegroundBrush"
 							 Color="{ThemeResource MaterialOnPrimaryColor}"
 							 Opacity="0.60" />
 		</ResourceDictionary>
 
-		<!-- Dark Theme -->
+		<!--  Dark Theme  -->
 		<ResourceDictionary x:Key="Dark">
 			<Color x:Key="MaterialPrimaryColor">#B6A8FB</Color>
 			<Color x:Key="MaterialPrimaryVariantDarkColor">#353FE5</Color>
@@ -71,29 +71,29 @@
 			<Color x:Key="MaterialOnErrorColor">#000000</Color>
 			<Color x:Key="MaterialOverlayColor">#51FFFFFF</Color>
 
-			<!-- Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent. -->
-			<!-- Non-opaque/transparent primary medium color -->
+			<!--  Variant Colors: Needed for android thumbtints. If a thumbtint color contains opacity, it will actually turn the thumb transparent.  -->
+			<!--  Non-opaque/transparent primary medium color  -->
 			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#57507C</Color>
 			<Color x:Key="MaterialSurfaceVariantLightColor">#D7D7D7</Color>
 
-			<!-- Bottom Bar Navigation -->
+			<!--  Bottom Bar Navigation  -->
 			<Color x:Key="MaterialBottomNavBackgroundColor">#292929</Color>
 			<Color x:Key="MaterialBottomNavForegroundColor">#B6A8FB</Color>
 
-			<!-- Slider -->
+			<!--  Slider  -->
 			<Color x:Key="MaterialSliderTrackColor">#717171</Color>
-			
+
 			<SolidColorBrush x:Key="MaterialBottomNavPressedBrush"
 							 Color="{StaticResource MaterialOnSurfaceColor}"
 							 Opacity="0.10" />
-			
+
 			<SolidColorBrush x:Key="MaterialBottomNavUncheckedForegroundBrush"
 							 Color="{StaticResource MaterialOnSurfaceColor}"
 							 Opacity="0.60" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!-- Opacity for control state overlays -->
+	<!--  Opacity for control state overlays  -->
 	<x:Double x:Key="MaterialMediumOpacity">0.74</x:Double>
 	<x:Double x:Key="MaterialHoverOpacity">0.04</x:Double>
 	<x:Double x:Key="MaterialLowOpacity">0.38</x:Double>
@@ -101,5 +101,5 @@
 	<x:Double x:Key="MaterialPressedOpacity">0.10</x:Double>
 	<x:Double x:Key="MaterialDraggedOpacity">0.08</x:Double>
 	<x:Double x:Key="MaterialSelectedOpacity">0.08</x:Double>
-	
+
 </ResourceDictionary>

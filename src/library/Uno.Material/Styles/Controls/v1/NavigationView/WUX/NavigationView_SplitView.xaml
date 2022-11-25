@@ -17,16 +17,11 @@
 
 	<ios:Style x:Key="DrawerSplitViewStyle"
 			   TargetType="SplitView">
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="OpenPaneLength"
-				Value="{ThemeResource SplitViewOpenPaneThemeLength}" />
-		<Setter Property="CompactPaneLength"
-				Value="{ThemeResource SplitViewCompactPaneThemeLength}" />
-		<Setter Property="PaneBackground"
-				Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		<Setter Property="OpenPaneLength" Value="{ThemeResource SplitViewOpenPaneThemeLength}" />
+		<Setter Property="CompactPaneLength" Value="{ThemeResource SplitViewCompactPaneThemeLength}" />
+		<Setter Property="PaneBackground" Value="{ThemeResource SystemControlPageBackgroundChromeLowBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 
@@ -574,7 +569,7 @@
 											  Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<!--Content Area-->
+						<!--  Content Area  -->
 						<Grid x:Name="ContentRoot"
 							  Grid.ColumnSpan="2">
 							<Border Child="{TemplateBinding Content}" />
@@ -590,7 +585,7 @@
 							</xamarin:Button>
 						</Grid>
 
-						<!--Pane Content Area-->
+						<!--  Pane Content Area  -->
 						<Grid x:Name="PaneRoot"
 							  Grid.ColumnSpan="2"
 							  HorizontalAlignment="Left"
@@ -616,17 +611,16 @@
 
 	<android:Style x:Key="DrawerSplitViewStyle"
 				   TargetType="SplitView">
-		<Setter Property="OpenPaneLength"
-				Value="{StaticResource NativeDefaultSplitViewOpenPaneLength}" />
-		<Setter Property="PaneBackground"
-				Value="White" />
+		<Setter Property="OpenPaneLength" Value="{StaticResource NativeDefaultSplitViewOpenPaneLength}" />
+		<Setter Property="PaneBackground" Value="White" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="SplitView">
 					<BindableDrawerLayout LeftPaneOpenLength="{TemplateBinding OpenPaneLength}"
 										  LeftPane="{TemplateBinding Pane}"
 										  LeftPaneBackground="{TemplateBinding PaneBackground}"
-										  IsLeftPaneOpen="{TemplateBinding IsPaneOpen, Mode=TwoWay}"
+										  IsLeftPaneOpen="{TemplateBinding IsPaneOpen,
+																		   Mode=TwoWay}"
 										  IsLeftPaneEnabled="{Binding (toolkit:SplitViewExtensions.IsPaneEnabled), RelativeSource={RelativeSource TemplatedParent}}"
 										  Content="{TemplateBinding Content}" />
 				</ControlTemplate>

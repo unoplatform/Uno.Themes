@@ -3,27 +3,18 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="not_win">
-	
+
 	<Style x:Key="DefaultMaterialCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
-		<Setter Property="Foreground"
-				Value="{ThemeResource CalendarDatePickerForeground}" />
-		<Setter Property="Background"
-				Value="{ThemeResource CalendarDatePickerBackground}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource CalendarDatePickerBorderBrush}" />
-		<Setter Property="BorderThickness"
-				Value="{ThemeResource CalendarDatePickerBorderThemeThickness}" />
-		<Setter Property="CalendarViewStyle"
-				Value="{StaticResource MaterialCalendarViewStyle}" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Center" />
-		<Setter Property="Height"
-				Value="53" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
+		<Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}" />
+		<Setter Property="Background" Value="{ThemeResource CalendarDatePickerBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource CalendarDatePickerBorderThemeThickness}" />
+		<Setter Property="CalendarViewStyle" Value="{StaticResource MaterialCalendarViewStyle}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="Height" Value="53" />
+		<Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
 		<not_win:Setter Property="CornerRadius"
 						Value="{ThemeResource ControlCornerRadius}" />
 		<Setter Property="Template">
@@ -121,16 +112,11 @@
 								<VisualState x:Name="TopHeader" />
 								<VisualState x:Name="LeftHeader">
 									<VisualState.Setters>
-										<Setter Target="HeaderContentPresenter.(Grid.Row)"
-												Value="1" />
-										<Setter Target="HeaderContentPresenter.(Grid.Column)"
-												Value="0" />
-										<Setter Target="HeaderContentPresenter.(Grid.ColumnSpan)"
-												Value="1" />
-										<Setter Target="HeaderContentPresenter.Margin"
-												Value="{StaticResource CalendarDatePickerLeftHeaderMargin}" />
-										<Setter Target="HeaderContentPresenter.MaxWidth"
-												Value="{StaticResource CalendarDatePickerLeftHeaderMaxWidth}" />
+										<Setter Target="HeaderContentPresenter.(Grid.Row)" Value="1" />
+										<Setter Target="HeaderContentPresenter.(Grid.Column)" Value="0" />
+										<Setter Target="HeaderContentPresenter.(Grid.ColumnSpan)" Value="1" />
+										<Setter Target="HeaderContentPresenter.Margin" Value="{StaticResource CalendarDatePickerLeftHeaderMargin}" />
+										<Setter Target="HeaderContentPresenter.MaxWidth" Value="{StaticResource CalendarDatePickerLeftHeaderMaxWidth}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -142,14 +128,10 @@
 									ShouldConstrainToRootBounds="False">
 								<Flyout.FlyoutPresenterStyle>
 									<Style TargetType="FlyoutPresenter">
-										<Setter Property="Padding"
-												Value="0" />
-										<Setter Property="BorderThickness"
-												Value="0" />
-										<Setter Property="IsDefaultShadowEnabled"
-												Value="True" />
-										<Setter Property="CornerRadius"
-												Value="{ThemeResource OverlayCornerRadius}" />
+										<Setter Property="Padding" Value="0" />
+										<Setter Property="BorderThickness" Value="0" />
+										<Setter Property="IsDefaultShadowEnabled" Value="True" />
+										<Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
 										<Setter Property="Template">
 											<Setter.Value>
 												<ControlTemplate TargetType="FlyoutPresenter">
@@ -188,7 +170,7 @@
 								Control.IsTemplateFocusTarget="True"
 								MinHeight="53" />
 
-						<!-- Border -->
+						<!--  Border  -->
 						<Rectangle x:Name="BottomBorder"
 								   VerticalAlignment="Bottom"
 								   Fill="{StaticResource MaterialPrimaryBrush}"
@@ -200,7 +182,7 @@
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
-							<!-- Header -->
+							<!--  Header  -->
 							<TextBlock HorizontalAlignment="Stretch"
 									   VerticalAlignment="Top"
 									   Text="{TemplateBinding Header}"
@@ -208,7 +190,7 @@
 									   Foreground="{StaticResource MaterialPrimaryBrush}"
 									   TextWrapping="Wrap" />
 
-							<!-- DateText -->
+							<!--  DateText  -->
 							<TextBlock x:Name="DateText"
 									   Grid.Row="1"
 									   Style="{StaticResource MaterialBody2}"
