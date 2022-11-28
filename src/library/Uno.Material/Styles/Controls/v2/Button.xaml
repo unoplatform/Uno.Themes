@@ -8,6 +8,38 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="d not_win">
 
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="ButtonFontFamily"
+				ResourceKey="LabelLargeFontFamily" />
+			<StaticResource x:Key="ButtonFontWeight"
+				ResourceKey="LabelLargeFontWeight" />
+			<StaticResource x:Key="ButtonFontSize"
+				ResourceKey="LabelLargeFontSize" />
+			<StaticResource x:Key="ButtonCharacterSpacing"
+				ResourceKey="LabelLargeCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="ButtonFontFamily"
+				ResourceKey="LabelLargeFontFamily" />
+				<StaticResource x:Key="ButtonFontWeight"
+				ResourceKey="LabelLargeFontWeight" />
+				<StaticResource x:Key="ButtonFontSize"
+				ResourceKey="LabelLargeFontSize" />
+				<StaticResource x:Key="ButtonCharacterSpacing"
+				ResourceKey="LabelLargeCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="ButtonFontFamily"
+				ResourceKey="LabelLargeFontFamily" />
+			<StaticResource x:Key="ButtonFontWeight"
+				ResourceKey="LabelLargeFontWeight" />
+			<StaticResource x:Key="ButtonFontSize"
+				ResourceKey="LabelLargeFontSize" />
+			<StaticResource x:Key="ButtonCharacterSpacing"
+				ResourceKey="LabelLargeCharacterSpacing" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 	<!-- Converters -->
 	<um:FromNullToValueConverter x:Key="MaterialNullToTextButtonMarginConverter"
 								 NotNullValue="0,0,2,0"
@@ -28,29 +60,19 @@
 	<x:String x:Key="MaterialButtonVerticalContentAlignment">Center</x:String>
 	<x:String x:Key="MaterialButtonHorizontalContentAlignment">Center</x:String>
 
-	<!-- Text button label based on Label Large Typo -->
-	<StaticResource x:Key="MaterialButtonFontFamily"
-					ResourceKey="LabelLargeFontFamily" />
-	<StaticResource x:Key="MaterialButtonFontWeight"
-					ResourceKey="LabelLargeFontWeight" />
-	<StaticResource x:Key="MaterialButtonFontSize"
-					ResourceKey="LabelLargeFontSize" />
-	<StaticResource x:Key="MaterialButtonCharacterSpacing"
-					ResourceKey="LabelLargeCharacterSpacing" />
-
 	<!-- BASE -->
 	<Style x:Key="MaterialBaseButtonStyle"
 		   TargetType="Button">
 
 		<!--Start: Label Large Typo-->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialButtonFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialButtonFontWeight}" />
+				Value="{ThemeResource ButtonFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
+				Value="{ThemeResource ButtonFontSize}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource ButtonFontWeight}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialButtonCharacterSpacing}" />
+				Value="{ThemeResource ButtonCharacterSpacing}" />
 		<!--End: Label Large Typo-->
 
 		<Setter Property="MinHeight"

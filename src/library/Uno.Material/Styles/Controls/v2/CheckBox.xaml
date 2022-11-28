@@ -8,7 +8,39 @@
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="android ios not_ios wasm xamarin">
-
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="CheckBoxFontFamily"
+					ResourceKey="BodySmallFontFamily" />
+			<StaticResource x:Key="CheckBoxFontWeight"
+					ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="CheckBoxFontSize"
+					ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="CheckBoxCharacterSpacing"
+					ResourceKey="BodySmallCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="CheckBoxFontFamily"
+					ResourceKey="BodySmallFontFamily" />
+			<StaticResource x:Key="CheckBoxFontWeight"
+					ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="CheckBoxFontSize"
+					ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="CheckBoxCharacterSpacing"
+					ResourceKey="BodySmallCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="CheckBoxFontFamily"
+					ResourceKey="BodySmallFontFamily" />
+			<StaticResource x:Key="CheckBoxFontWeight"
+					ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="CheckBoxFontSize"
+					ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="CheckBoxCharacterSpacing"
+					ResourceKey="BodySmallCharacterSpacing" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+	
 	<x:String x:Key="CheckBoxHyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
 	<x:String x:Key="CheckBoxCheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 
@@ -24,16 +56,6 @@
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="{StaticResource LowOpacity}" />
 
-	<!-- CheckBox label based on Body Small Typo -->
-	<StaticResource x:Key="MaterialCheckBoxFontFamily"
-					ResourceKey="BodySmallFontFamily" />
-	<StaticResource x:Key="MaterialCheckBoxFontWeight"
-					ResourceKey="BodySmallFontWeight" />
-	<StaticResource x:Key="MaterialCheckBoxFontSize"
-					ResourceKey="BodySmallFontSize" />
-	<StaticResource x:Key="MaterialCheckBoxCharacterSpacing"
-					ResourceKey="BodySmallCharacterSpacing" />
-
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="Background"
@@ -45,11 +67,11 @@
 		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialCheckBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialCheckBoxFontWeight}" />
+				Value="{ThemeResource CheckBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialCheckBoxFontSize}" />
+				Value="{ThemeResource CheckBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialCheckBoxCharacterSpacing}" />
+				Value="{ThemeResource CheckBoxCharacterSpacing}" />
 		<!--End: Body Small Typo-->
 
 		<Setter Property="BorderBrush"

@@ -47,13 +47,13 @@
 					 Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}" />
 
 	<!-- ToggleSwitch label based on Body Small Typo -->
-	<StaticResource x:Key="MaterialToggleSwitchFontFamily"
+	<StaticResource x:Key="ToggleSwitchFontFamily"
 					ResourceKey="BodySmallFontFamily" />
-	<StaticResource x:Key="MaterialToggleSwitchFontWeight"
+	<StaticResource x:Key="ToggleSwitchFontWeight"
 					ResourceKey="BodySmallFontWeight" />
-	<StaticResource x:Key="MaterialToggleSwitchFontSize"
+	<StaticResource x:Key="ToggleSwitchFontSize"
 					ResourceKey="BodySmallFontSize" />
-	<StaticResource x:Key="MaterialToggleSwitchCharacterSpacing"
+	<StaticResource x:Key="ToggleSwitchCharacterSpacing"
 					ResourceKey="BodySmallCharacterSpacing" />
 
 	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
@@ -65,13 +65,13 @@
 
 		<!-- Start: Body Small Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialToggleSwitchFontFamily}" />
+				Value="{ThemeResource ToggleSwitchFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialToggleSwitchFontWeight}" />
+				Value="{ThemeResource ToggleSwitchFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialToggleSwitchFontSize}" />
+				Value="{ThemeResource ToggleSwitchFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialToggleSwitchCharacterSpacing}" />
+				Value="{ThemeResource ToggleSwitchCharacterSpacing}" />
 		<!-- End: Body Small Typo -->
 
 		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
@@ -382,9 +382,9 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
-										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
-										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  FontSize="{ThemeResource BodyMediumFontSize}"
+										  FontWeight="{ThemeResource BodyMediumFontWeight}"
+										  FontFamily="{ThemeResource BodyMediumFontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -487,7 +487,7 @@
 	<ios:Style x:Key="MaterialToggleSwitchStyle"
 			   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource RegularFontFamily}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -519,9 +519,9 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
-										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
-										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  FontSize="{ThemeResource BodyMediumFontSize}"
+										  FontWeight="{ThemeResource BodyMediumFontWeight}"
+										  FontFamily="{ThemeResource BodyMediumFontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -539,7 +539,7 @@
 	<android:Style x:Key="MaterialToggleSwitchStyle"
 				   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource RegularFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="HorizontalAlignment"
@@ -616,9 +616,9 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
-										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
-										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  FontSize="{ThemeResource BodyMediumFontSize}"
+										  FontWeight="{ThemeResource BodyMediumFontWeight}"
+										  FontFamily="{ThemeResource BodyMediumFontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />

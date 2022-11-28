@@ -5,7 +5,39 @@
 					xmlns:um="using:Uno.Material"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="xamarin">
-
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="ComboBoxFontFamily"
+					ResourceKey="BodyLargeFontFamily" />
+			<StaticResource x:Key="ComboBoxFontWeight"
+					ResourceKey="BodyLargeFontWeight" />
+			<StaticResource x:Key="ComboBoxFontSize"
+					ResourceKey="BodyLargeFontSize" />
+			<StaticResource x:Key="ComboBoxCharacterSpacing"
+					ResourceKey="BodyLargeCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="ComboBoxFontFamily"
+					ResourceKey="BodyLargeFontFamily" />
+			<StaticResource x:Key="ComboBoxFontWeight"
+					ResourceKey="BodyLargeFontWeight" />
+			<StaticResource x:Key="ComboBoxFontSize"
+					ResourceKey="BodyLargeFontSize" />
+			<StaticResource x:Key="ComboBoxCharacterSpacing"
+					ResourceKey="BodyLargeCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="ComboBoxFontFamily"
+					ResourceKey="BodyLargeFontFamily" />
+			<StaticResource x:Key="ComboBoxFontWeight"
+					ResourceKey="BodyLargeFontWeight" />
+			<StaticResource x:Key="ComboBoxFontSize"
+					ResourceKey="BodyLargeFontSize" />
+			<StaticResource x:Key="ComboBoxCharacterSpacing"
+					ResourceKey="BodyLargeCharacterSpacing" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+	
 	<!--  Converters  -->
 	<um:FromNullToValueConverter x:Key="NullToScaleConverter"
 								 NotNullValue="0.7"
@@ -79,16 +111,6 @@
 	<Thickness x:Key="MaterialComboBoxOpenedBorderThickness">2</Thickness>
 	<Thickness x:Key="MaterialComboBoxPadding">16,0</Thickness>
 
-	<!-- ComboBox label based on Body Large Typo -->
-	<StaticResource x:Key="MaterialComboBoxFontFamily"
-					ResourceKey="BodyLargeFontFamily" />
-	<StaticResource x:Key="MaterialComboBoxFontWeight"
-					ResourceKey="BodyLargeFontWeight" />
-	<StaticResource x:Key="MaterialComboBoxFontSize"
-					ResourceKey="BodyLargeFontSize" />
-	<StaticResource x:Key="MaterialComboBoxCharacterSpacing"
-					ResourceKey="BodyLargeCharacterSpacing" />
-
 	<!--  Style  -->
 	<Style x:Key="MaterialComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
@@ -100,13 +122,13 @@
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialComboBoxFontFamily}" />
+				Value="{ThemeResource ComboBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialComboBoxFontWeight}" />
+				Value="{ThemeResource ComboBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialComboBoxFontSize}" />
+				Value="{ThemeResource ComboBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+				Value="{ThemeResource ComboBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="VerticalContentAlignment"
@@ -268,13 +290,13 @@
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialComboBoxFontFamily}" />
+				Value="{ThemeResource ComboBoxFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialComboBoxFontWeight}" />
+				Value="{ThemeResource ComboBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialComboBoxFontSize}" />
+				Value="{ThemeResource ComboBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+				Value="{ThemeResource ComboBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="MinHeight"

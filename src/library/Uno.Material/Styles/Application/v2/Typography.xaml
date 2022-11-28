@@ -1,18 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-	<ResourceDictionary.ThemeDictionaries>
-		<ResourceDictionary x:Key="Default">
-			<!--  COMMON TEXT VARIABLES FOR v2  -->
-
-			<!--
+	<!--  COMMON TEXT VARIABLES FOR v2  -->
+	<!--
 				IMPORTANT NOTE :
 				CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
 				For example, here with MaterialLabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
 				So in order to specify the letter spacing of 0.5px from the M3 Material guidelines, we will need to add CharacterSpacing="41.666".
 				To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000
-			-->
-
+	-->
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
 			<!--  DISPLAY  -->
 
 			<!--  Display Large  -->
@@ -179,6 +176,7 @@
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">7.143</x:Int32>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Light">
+			<!--  DISPLAY  -->
 			
 			<!--  Display Large  -->
 			<StaticResource x:Key="DisplayLargeFontFamily"
@@ -344,16 +342,6 @@
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">7.143</x:Int32>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="HighContrast">
-			<!--  COMMON TEXT VARIABLES FOR v2  -->
-
-			<!--
-				IMPORTANT NOTE :
-				CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
-				For example, here with MaterialLabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
-				So in order to specify the letter spacing of 0.5px from the M3 Material guidelines, we will need to add CharacterSpacing="41.666".
-				To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000
-			-->
-
 			<!--  DISPLAY  -->
 
 			<!--  Display Large  -->

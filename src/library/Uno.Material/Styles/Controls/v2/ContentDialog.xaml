@@ -3,7 +3,42 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<!-- === title: OnSurface, Headline\Small -->
+			<StaticResource x:Key="ContentDialogTitleFontFamily" ResourceKey="HeadlineSmallFontFamily" />
+			<StaticResource x:Key="ContentDialogTitleFontSize" ResourceKey="HeadlineSmallFontSize" />
+			<StaticResource x:Key="ContentDialogTitleFontWeight" ResourceKey="HeadlineSmallFontWeight" />
 
+			<!-- === content: OnSurface\Variant, Body\Medium -->
+			<StaticResource x:Key="ContentDialogContentFontFamily" ResourceKey="BodyMediumFontFamily" />
+			<StaticResource x:Key="ContentDialogContentFontSize" ResourceKey="BodyMediumFontSize" />
+			<StaticResource x:Key="ContentDialogContentFontWeight" ResourceKey="BodyMediumFontWeight" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<!-- === title: OnSurface, Headline\Small -->
+			<StaticResource x:Key="ContentDialogTitleFontFamily" ResourceKey="HeadlineSmallFontFamily" />
+			<StaticResource x:Key="ContentDialogTitleFontSize" ResourceKey="HeadlineSmallFontSize" />
+			<StaticResource x:Key="ContentDialogTitleFontWeight" ResourceKey="HeadlineSmallFontWeight" />
+
+			<!-- === content: OnSurface\Variant, Body\Medium -->
+			<StaticResource x:Key="ContentDialogContentFontFamily" ResourceKey="BodyMediumFontFamily" />
+			<StaticResource x:Key="ContentDialogContentFontSize" ResourceKey="BodyMediumFontSize" />
+			<StaticResource x:Key="ContentDialogContentFontWeight" ResourceKey="BodyMediumFontWeight" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<!-- === title: OnSurface, Headline\Small -->
+			<StaticResource x:Key="ContentDialogTitleFontFamily" ResourceKey="HeadlineSmallFontFamily" />
+			<StaticResource x:Key="ContentDialogTitleFontSize" ResourceKey="HeadlineSmallFontSize" />
+			<StaticResource x:Key="ContentDialogTitleFontWeight" ResourceKey="HeadlineSmallFontWeight" />
+
+			<!-- === content: OnSurface\Variant, Body\Medium -->
+			<StaticResource x:Key="ContentDialogContentFontFamily" ResourceKey="BodyMediumFontFamily" />
+			<StaticResource x:Key="ContentDialogContentFontSize" ResourceKey="BodyMediumFontSize" />
+			<StaticResource x:Key="ContentDialogContentFontWeight" ResourceKey="BodyMediumFontWeight" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+	
 	<!-- 28-CornerRadius doesnt match the general 24-Spacing; this is indeed correct. -->
 	<x:Double x:Key="MaterialContentDialogMinWidth">288</x:Double>
 	<x:Double x:Key="MaterialContentDialogMinHeight">132</x:Double>
@@ -18,18 +53,10 @@
 
 	<StaticResource x:Key="MaterialContentDialogBackground" ResourceKey="SurfaceBrush" />
 	<StaticResource x:Key="MaterialContentDialogSmokeLayerBackground" ResourceKey="OnSurfaceLowBrush" />
-
-	<!-- === title: OnSurface, Headline\Small -->
 	<StaticResource x:Key="MaterialContentDialogTitleForeground" ResourceKey="OnSurfaceBrush" />
-	<StaticResource x:Key="MaterialContentDialogTitleFontFamily" ResourceKey="HeadlineSmallFontFamily" />
-	<StaticResource x:Key="MaterialContentDialogTitleFontSize" ResourceKey="HeadlineSmallFontSize" />
-	<StaticResource x:Key="MaterialContentDialogTitleFontWeight" ResourceKey="HeadlineSmallFontWeight" />
-
-	<!-- === content: OnSurface\Variant, Body\Medium -->
 	<StaticResource x:Key="MaterialContentDialogContentForeground" ResourceKey="OnSurfaceVariantBrush" />
-	<StaticResource x:Key="MaterialContentDialogContentFontFamily" ResourceKey="BodyMediumFontFamily" />
-	<StaticResource x:Key="MaterialContentDialogContentFontSize" ResourceKey="BodyMediumFontSize" />
-	<StaticResource x:Key="MaterialContentDialogContentFontWeight" ResourceKey="BodyMediumFontWeight" />
+
+
 
 	<!-- note: MaterialContentDialogDefaultButtonStyle is the style associated with ContentDialog.DefaultButton (accented or CTA btn) -->
 	<Style x:Key="MaterialContentDialogButtonStyle"
@@ -216,9 +243,9 @@
 														Content="{TemplateBinding Title}"
 														ContentTemplate="{TemplateBinding TitleTemplate}"
 														Foreground="{StaticResource MaterialContentDialogTitleForeground}"
-														FontFamily="{StaticResource MaterialContentDialogTitleFontFamily}"
-														FontSize="{StaticResource MaterialContentDialogTitleFontSize}"
-														FontWeight="{StaticResource MaterialContentDialogTitleFontWeight}"
+														FontFamily="{ThemeResource ContentDialogTitleFontFamily}"
+														FontSize="{ThemeResource ContentDialogTitleFontSize}"
+														FontWeight="{ThemeResource ContentDialogTitleFontWeight}"
 														Margin="{StaticResource MaterialContentDialogTitleToContentMargin}"
 														HorizontalAlignment="Center"
 														VerticalAlignment="Top"
@@ -246,9 +273,9 @@
 															  Content="{TemplateBinding Content}"
 															  ContentTemplate="{TemplateBinding ContentTemplate}"
 															  Foreground="{TemplateBinding Foreground}"
-															  FontFamily="{StaticResource MaterialContentDialogContentFontFamily}"
-															  FontSize="{StaticResource MaterialContentDialogContentFontSize}"
-															  FontWeight="{StaticResource MaterialContentDialogContentFontWeight}"
+															  FontFamily="{ThemeResource ContentDialogContentFontFamily}"
+															  FontSize="{ThemeResource ContentDialogContentFontSize}"
+															  FontWeight="{ThemeResource ContentDialogContentFontWeight}"
 															  TextWrapping="Wrap" />
 										</ScrollViewer>
 										<Grid x:Name="CommandSpace"
