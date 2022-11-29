@@ -3,16 +3,27 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:not_win="http://uno.ui/not_win"
                     mc:Ignorable="not_win">
-
 	<ResourceDictionary.ThemeDictionaries>
-		<!--  Light Theme  -->
 		<ResourceDictionary x:Key="Light">
 			<Color x:Key="MaterialSliderTrackColor">#999999</Color>
+			<StaticResource x:Key="SliderFontFamily"
+					ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="SliderFontSize"
+					ResourceKey="14" />
 		</ResourceDictionary>
-
-		<!--  Dark Theme  -->
-		<ResourceDictionary x:Key="Dark">
+		<ResourceDictionary x:Key="Default">
 			<Color x:Key="MaterialSliderTrackColor">#717171</Color>
+			<StaticResource x:Key="SliderFontFamily"
+					ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="SliderFontSize"
+					ResourceKey="14" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<Color x:Key="MaterialSliderTrackColor">#717171</Color>
+			<StaticResource x:Key="SliderFontFamily"
+					ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="SliderFontSize"
+					ResourceKey="14" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
@@ -59,9 +70,9 @@
 		<Setter Property="BorderThickness"
 		        Value="0" />
 		<Setter Property="FontFamily"
-		        Value="{ThemeResource RegularFontFamily}" />
+		        Value="{ThemeResource SliderFontFamily}" />
 		<Setter Property="FontSize"
-		        Value="{StaticResource ControlContentThemeFontSize}" />
+		        Value="{ThemeResource SliderFontSize}" />
 		<Setter Property="ManipulationMode"
 		        Value="None" />
 		<Setter Property="UseSystemFocusVisuals"

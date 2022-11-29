@@ -5,21 +5,43 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="RadioButtonFontFamily"
+					ResourceKey="BodySmallFontFamily" />
+			<StaticResource x:Key="RadioButtonFontWeight"
+					ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="RadioButtonFontSize"
+					ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="RadioButtonCharacterSpacing"
+					ResourceKey="BodySmallCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="RadioButtonFontFamily"
+					ResourceKey="BodySmallFontFamily" />
+			<StaticResource x:Key="RadioButtonFontWeight"
+					ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="RadioButtonFontSize"
+					ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="RadioButtonCharacterSpacing"
+					ResourceKey="BodySmallCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="RadioButtonFontFamily"
+					ResourceKey="BodySmallFontFamily" />
+			<StaticResource x:Key="RadioButtonFontWeight"
+					ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="RadioButtonFontSize"
+					ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="RadioButtonCharacterSpacing"
+					ResourceKey="BodySmallCharacterSpacing" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<GridLength x:Key="RadioStatesAreaLength">40</GridLength>
 	<x:Double x:Key="RadioStatesAreaSize">40</x:Double>
 	<x:Double x:Key="RadioCheckAreaSize">20</x:Double>
 	<x:Double x:Key="RadioBorderThickness">2</x:Double>
-
-	<!-- RadioButton label based on Body Small Typo -->
-	<StaticResource x:Key="RadioButtonFontFamily"
-					ResourceKey="BodySmallFontFamily" />
-	<StaticResource x:Key="RadioButtonFontWeight"
-					ResourceKey="BodySmallFontWeight" />
-	<StaticResource x:Key="RadioButtonFontSize"
-					ResourceKey="BodySmallFontSize" />
-	<StaticResource x:Key="RadioButtonCharacterSpacing"
-					ResourceKey="BodySmallCharacterSpacing" />
 
 	<Style x:Key="MaterialRadioButtonStyle"
 		   TargetType="RadioButton">

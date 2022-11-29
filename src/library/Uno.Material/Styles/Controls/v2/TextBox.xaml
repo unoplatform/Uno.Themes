@@ -6,6 +6,38 @@
 					xmlns:macos="http://uno.ui/macos"
 					xmlns:um="using:Uno.Material"
 					mc:Ignorable="d macos">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="TextBoxFontFamily"
+							ResourceKey="BodyLargeFontFamily" />
+			<StaticResource x:Key="TextBoxFontWeight"
+							ResourceKey="BodyLargeFontWeight" />
+			<StaticResource x:Key="TextBoxFontSize"
+							ResourceKey="BodyLargeFontSize" />
+			<StaticResource x:Key="TextBoxCharacterSpacing"
+							ResourceKey="BodyLargeCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="TextBoxFontFamily"
+							ResourceKey="BodyLargeFontFamily" />
+			<StaticResource x:Key="TextBoxFontWeight"
+							ResourceKey="BodyLargeFontWeight" />
+			<StaticResource x:Key="TextBoxFontSize"
+							ResourceKey="BodyLargeFontSize" />
+			<StaticResource x:Key="TextBoxCharacterSpacing"
+							ResourceKey="BodyLargeCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="TextBoxFontFamily"
+							ResourceKey="BodyLargeFontFamily" />
+			<StaticResource x:Key="TextBoxFontWeight"
+							ResourceKey="BodyLargeFontWeight" />
+			<StaticResource x:Key="TextBoxFontSize"
+							ResourceKey="BodyLargeFontSize" />
+			<StaticResource x:Key="TextBoxCharacterSpacing"
+							ResourceKey="BodyLargeCharacterSpacing" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Converters -->
 	<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY"
@@ -20,14 +52,7 @@
 					 Color="{ThemeResource OnSurfaceColor}" />
 
 	<!-- TextBox text based on Body Large Typo -->
-	<StaticResource x:Key="TextBoxFontFamily"
-					ResourceKey="BodyLargeFontFamily" />
-	<StaticResource x:Key="TextBoxFontWeight"
-					ResourceKey="BodyLargeFontWeight" />
-	<StaticResource x:Key="TextBoxFontSize"
-					ResourceKey="BodyLargeFontSize" />
-	<StaticResource x:Key="TextBoxCharacterSpacing"
-					ResourceKey="BodyLargeCharacterSpacing" />
+
 
 	<Style x:Key="MaterialDeleteButtonStyle"
 		   TargetType="Button">

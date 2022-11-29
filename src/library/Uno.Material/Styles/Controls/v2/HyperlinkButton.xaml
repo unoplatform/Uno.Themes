@@ -3,6 +3,20 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					mc:Ignorable="d">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<x:Double x:Key="HyperlinkButtonFontSize">14</x:Double>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<x:Double x:Key="HyperlinkButtonFontSize">14</x:Double>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<x:Double x:Key="HyperlinkButtonFontSize">14</x:Double>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<Style x:Key="MaterialHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
@@ -12,9 +26,9 @@
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="FontSize"
-				Value="14" />
+				Value="{ThemeResource HyperlinkButtonFontSize}" />
 		<Setter Property="FontFamily"
-				Value="{ThemeResource RegularFontFamily}" />
+				Value="{ThemeResource HyperlinkButtonFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="HyperlinkButton">

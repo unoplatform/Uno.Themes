@@ -5,11 +5,24 @@
 	xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:xamarin="http://uno.ui/xamarin"
 	mc:Ignorable="xamarin">
-
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="ListViewItemFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<x:Double x:Key="ListViewItemFontSize">14</x:Double>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="ListViewItemFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<x:Double x:Key="ListViewItemFontSize">14</x:Double>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="ListViewItemFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<x:Double x:Key="ListViewItemFontSize">14</x:Double>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<Style x:Key="MaterialListViewItemStyle" TargetType="ListViewItem">
-		<Setter Property="FontFamily" Value="{ThemeResource RegularFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+		<Setter Property="FontFamily" Value="{ThemeResource ListViewItemFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource ListViewItemFontSize}" />
 		<Setter Property="Background" Value="{ThemeResource ListViewItemBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource ListViewItemForeground}" />
 		<Setter Property="TabNavigation" Value="Local" />
@@ -414,7 +427,7 @@
 						<TextBlock x:Name="MultiArrangeOverlayText"
 								   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DragItemsCount}"
 								   Foreground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
-								   FontFamily="{ThemeResource RegularFontFamily}"
+								   FontFamily="{ThemeResource ListViewItemFontFamily}"
 								   FontSize="26.667"
 								   IsHitTestVisible="False"
 								   Opacity="0"

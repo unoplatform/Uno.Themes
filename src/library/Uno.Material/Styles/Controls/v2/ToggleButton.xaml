@@ -6,6 +6,26 @@
 					xmlns:um="using:Uno.Material"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="d xamarin">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="ToggleButtonFontFamily"
+							ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="ToggleButtonFontSize"
+							ResourceKey="14" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="ToggleButtonFontFamily"
+							ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="ToggleButtonFontSize"
+							ResourceKey="14" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="ToggleButtonFontFamily"
+							ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="ToggleButtonFontSize"
+							ResourceKey="14" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ToggleButton Brushes -->
 	<SolidColorBrush x:Key="MaterialToggleButtonTextLabelBrush"
@@ -34,9 +54,9 @@
 		<Setter Property="MinHeight"
 				Value="40" />
 		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource ToggleButtonFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{ThemeResource MaterialToggleButtonFontSize}" />
+				Value="{ThemeResource ToggleButtonFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 		<Setter Property="Template">

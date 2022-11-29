@@ -6,6 +6,23 @@
                     xmlns:not_win="http://uno.ui/not_win"
                     xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     mc:Ignorable="not_win ios android">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="FlyoutFontFamily" ResourceKey="MaterialMediumFontFamily" />
+			<x:String x:Key="FlyoutFontWeight">Medium</x:String>
+			<x:Double x:Key="FlyoutFontSize">14</x:Double>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="FlyoutFontFamily" ResourceKey="MaterialMediumFontFamily" />
+			<x:String x:Key="FlyoutFontWeight">Medium</x:String>
+			<x:Double x:Key="FlyoutFontSize">14</x:Double>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<StaticResource x:Key="FlyoutFontFamily" ResourceKey="MaterialMediumFontFamily" />
+			<x:String x:Key="FlyoutFontWeight">Medium</x:String>
+			<x:Double x:Key="FlyoutFontSize">14</x:Double>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<x:String x:Key="MaterialFlyoutCheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
 	<x:String x:Key="MaterialFlyoutRightArrowPathStyle">M0,0L25.194,16 0,32z</x:String>
@@ -72,9 +89,9 @@
 		<Setter Property="FontSize"
 		        Value="{ThemeResource FlyoutFontSize}" />
 		<Setter Property="FontWeight"
-		        Value="Medium" />
+		        Value="{ThemeResource FlyoutFontWeight}" />
 		<Setter Property="FontFamily"
-		        Value="{ThemeResource MediumFontFamily}" />
+		        Value="{ThemeResource FlyoutFontFamily}" />
 		<!--  End: Label Large Typo  -->
 		<Setter Property="MinWidth"
 		        Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />
@@ -102,9 +119,9 @@
 		<Setter Property="FontSize"
 		        Value="{ThemeResource FlyoutFontSize}" />
 		<Setter Property="FontWeight"
-		        Value="Medium" />
+		        Value="{ThemeResource FlyoutFontWeight}" />
 		<Setter Property="FontFamily"
-		        Value="{ThemeResource MediumFontFamily}" />
+		        Value="{ThemeResource FlyoutFontFamily}" />
 		<!--  End: Label Large Typo  -->
 		<Setter Property="MinWidth"
 		        Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />

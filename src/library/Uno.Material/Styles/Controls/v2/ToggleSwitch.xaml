@@ -14,12 +14,42 @@
 			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#E9E5FA</Color>
 			<!-- Non-opaque/transparent white color that shows on white surfaces -->
 			<Color x:Key="MaterialSurfaceVariantLightColor">#F7F7F7</Color>
+			<StaticResource x:Key="ToggleSwitchFontFamily"
+							ResourceKey="BodyMediumFontFamily" />
+			<StaticResource x:Key="ToggleSwitchFontWeight"
+							ResourceKey="BodyMediumFontWeight" />
+			<StaticResource x:Key="ToggleSwitchFontSize"
+							ResourceKey="BodyMediumFontSize" />
+			<StaticResource x:Key="ToggleSwitchCharacterSpacing"
+							ResourceKey="BodyMediumCharacterSpacing" />
 		</ResourceDictionary>
-		<ResourceDictionary x:Key="Dark">
+		<ResourceDictionary x:Key="Default">
 			<!-- Non-opaque/transparent primary disabled color -->
 			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#57507C</Color>
 			<!-- Non-opaque/transparent white color that shows on white surfaces -->
 			<Color x:Key="MaterialSurfaceVariantLightColor">#D7D7D7</Color>
+			<StaticResource x:Key="ToggleSwitchFontFamily"
+							ResourceKey="BodyMediumFontFamily" />
+			<StaticResource x:Key="ToggleSwitchFontWeight"
+							ResourceKey="BodyMediumFontWeight" />
+			<StaticResource x:Key="ToggleSwitchFontSize"
+							ResourceKey="BodyMediumFontSize" />
+			<StaticResource x:Key="ToggleSwitchCharacterSpacing"
+							ResourceKey="BodyMediumCharacterSpacing" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			<!-- Non-opaque/transparent primary disabled color -->
+			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#57507C</Color>
+			<!-- Non-opaque/transparent white color that shows on white surfaces -->
+			<Color x:Key="MaterialSurfaceVariantLightColor">#D7D7D7</Color>
+			<StaticResource x:Key="ToggleSwitchFontFamily"
+							ResourceKey="BodyMediumFontFamily" />
+			<StaticResource x:Key="ToggleSwitchFontWeight"
+							ResourceKey="BodyMediumFontWeight" />
+			<StaticResource x:Key="ToggleSwitchFontSize"
+							ResourceKey="BodyMediumFontSize" />
+			<StaticResource x:Key="ToggleSwitchCharacterSpacing"
+							ResourceKey="BodyMediumCharacterSpacing" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
@@ -46,24 +76,12 @@
 	<SolidColorBrush x:Key="MaterialPrimaryVariantLowThumbColorBrush"
 					 Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}" />
 
-	<!-- ToggleSwitch label based on Body Small Typo -->
-	<StaticResource x:Key="ToggleSwitchFontFamily"
-					ResourceKey="BodySmallFontFamily" />
-	<StaticResource x:Key="ToggleSwitchFontWeight"
-					ResourceKey="BodySmallFontWeight" />
-	<StaticResource x:Key="ToggleSwitchFontSize"
-					ResourceKey="BodySmallFontSize" />
-	<StaticResource x:Key="ToggleSwitchCharacterSpacing"
-					ResourceKey="BodySmallCharacterSpacing" />
-
 	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
 					  TargetType="ToggleSwitch">
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
-
-		<!-- Start: Body Small Typo -->
 		<Setter Property="FontFamily"
 				Value="{ThemeResource ToggleSwitchFontFamily}" />
 		<Setter Property="FontWeight"
@@ -382,9 +400,9 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{ThemeResource BodyMediumFontSize}"
-										  FontWeight="{ThemeResource BodyMediumFontWeight}"
-										  FontFamily="{ThemeResource BodyMediumFontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontWeight="{TemplateBinding FontWeight}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -487,7 +505,7 @@
 	<ios:Style x:Key="MaterialToggleSwitchStyle"
 			   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
-				Value="{ThemeResource RegularFontFamily}" />
+				Value="{ThemeResource ToggleSwitchFontFamily}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -519,9 +537,9 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{ThemeResource BodyMediumFontSize}"
-										  FontWeight="{ThemeResource BodyMediumFontWeight}"
-										  FontFamily="{ThemeResource BodyMediumFontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontWeight="{TemplateBinding FontWeight}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -539,7 +557,7 @@
 	<android:Style x:Key="MaterialToggleSwitchStyle"
 				   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
-				Value="{ThemeResource RegularFontFamily}" />
+				Value="{ThemeResource ToggleSwitchFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="HorizontalAlignment"
@@ -616,9 +634,9 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{ThemeResource BodyMediumFontSize}"
-										  FontWeight="{ThemeResource BodyMediumFontWeight}"
-										  FontFamily="{ThemeResource BodyMediumFontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontWeight="{TemplateBinding FontWeight}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
