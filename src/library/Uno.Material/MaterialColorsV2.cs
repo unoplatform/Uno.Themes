@@ -10,7 +10,7 @@ namespace Uno.Material
 {
 	public partial class MaterialColorsV2 : ResourceDictionary
 	{
-		private static string ColorPaletteOverrideSource;
+		private static ResourceDictionary ColorPaletteOverride;
 
 		public string OverrideSource
 		{
@@ -25,9 +25,33 @@ namespace Uno.Material
 				typeof(MaterialColorsV2),
 				new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
 
+		public ResourceDictionary OverrideDictionary
+		{
+			get => (ResourceDictionary)GetValue(OverrideDictionaryProperty);
+			set => SetValue(OverrideDictionaryProperty, value);
+		}
+
+		public static DependencyProperty OverrideDictionaryProperty { get; } =
+			DependencyProperty.Register(
+				nameof(OverrideDictionary),
+				typeof(ResourceDictionary),
+				typeof(MaterialColorsV2),
+				new PropertyMetadata(null, OnOverrideChanged));
+
 		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
 		{
-			ColorPaletteOverrideSource = args.NewValue as string;
+			if (dependencyObject is MaterialColorsV2 colors && args.NewValue is string sourceUri)
+			{
+				colors.OverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
+			}
+		}
+
+		private static void OnOverrideChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+		{
+			if (dependencyObject is MaterialColorsV2 colors && args.NewValue is ResourceDictionary overrides)
+			{
+				colors.MergedDictionaries.Add(overrides);
+			}
 		}
 
 		public MaterialColorsV2()
@@ -35,10 +59,10 @@ namespace Uno.Material
 			Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColors.xaml");
 
 			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColorPalette.xaml") });
-			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
-			{
-				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
-			}
+			//if (ColorPaletteOverride is { } colorOverride)
+			//{
+			//	MergedDictionaries.Add(colorOverride);
+			//}
 		}
 	}
 }
