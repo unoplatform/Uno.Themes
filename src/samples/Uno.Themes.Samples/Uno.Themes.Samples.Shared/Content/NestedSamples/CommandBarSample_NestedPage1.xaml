@@ -11,22 +11,61 @@
 	  mc:Ignorable="d todo xamarin"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<Page.Resources>
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<CommandBar Content="Material Page 1"
+					toolkit:VisibleBoundsPadding.PaddingMask="Top"
+					Style="{StaticResource MaterialCommandBarStyle}">
+			<toolkit:CommandBarExtensions.NavigationCommand>
+				<AppBarButton Click="NavigateBack"
+							  Style="{StaticResource MaterialAppBarButton}">
+					<AppBarButton.Icon>
+						<BitmapIcon UriSource="ms-appx:///Assets/BackButton.png"
+									ShowAsMonochrome="False" />
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</toolkit:CommandBarExtensions.NavigationCommand>
+		</CommandBar>
 
-		<!--  Override default BodyLargeFontWeight resource  -->
-		<x:Double x:Key="BodyLargeFontSize">32</x:Double>
+		<StackPanel Grid.Row="1"
+					Margin="16">
+			<TextBlock Style="{StaticResource MaterialBody1}">
+				You can use the back button located on the left side of the CommandBar
+				to exit this sample.
+			</TextBlock>
 
-		<!--  Override default BodyLargeFontWeight resource  -->
-		<x:String x:Key="BodyLargeFontWeight">Extra Bold</x:String>
+			<Button Content="Exit sample"
+					Click="NavigateBack" />
+			<Button Content="Navigate to next page"
+					Click="NavigateToNextPage" />
 
-	</Page.Resources>
+			<smtx:XamlPresenter ReferenceKey="CommandBarSample_NestedPage1_CommandBar" />
 
-	<!-- Both TextBlocks below would use the overridden values in the Page.Resource -->
-	<StackPanel>
-		<TextBlock Text="BodyLarge Style with Overridden Values"
-				   Style="{StaticResource BodyLarge}" />
-		<TextBlock Text="Set Overridden Values Locally"
-				   FontSize="{ThemeResource BodyLargeFontSize}"
-				   FontWeight="{ThemeResource BodyLargeFontWeight}" />
-	</StackPanel>
+			<Button x:Name="SeeCodeBehindButton"
+					Tag="See code behind"
+					Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
+
+			<TextBlock Style="{StaticResource MaterialBody1}">
+				note: In order for the `MaterialCommandBarStyle` to work properly on iOS and Android,
+				you will need to present them using a `NativeDefaultFrame` in your MainPage/Shell. As shown below:
+			</TextBlock>
+
+			<smtx:XamlDisplay UniqueKey="CommandBarSample_NestedPage1_Note"
+							  Style="{StaticResource SourceOnlyXamlDisplayStyle}">
+				<Frame x:Name="ContentFrame"
+					   xamarin:Style="{StaticResource NativeDefaultFrame}" />
+			</smtx:XamlDisplay>
+
+			<TextBlock Style="{StaticResource MaterialBody1}">
+				note: In order to support native back navigations (uwp, browser, android),
+				you will have to handle the SystemNavigationManager.BackRequested event. As shown below:
+			</TextBlock>
+			<Button x:Name="SeeAdditionSetupButton"
+					Tag="See additional setup"
+					Style="{StaticResource SeeSourceFlyoutButtonStyle}" />
+		</StackPanel>
+	</Grid>
 </Page>

@@ -1,26 +1,49 @@
 ﻿<Application x:Class="Uno.Themes.Samples.App"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-
-				<!--  Load WinUI resources  -->
+				<!-- Load WinUI resources -->
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
-				<!--  Load Uno.Material resources  -->
-				<MaterialColors xmlns="using:Uno.Material" />
-				<MaterialFonts xmlns="using:Uno.Material" />
-				<MaterialResources xmlns="using:Uno.Material" />
+				<MaterialColorsV1 xmlns="using:Uno.Material"
+								OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+				<MaterialFonts xmlns="using:Uno.Material"
+							   OverrideSource="ms-appx:///MaterialFontsOverride.xaml" />
+				<MaterialResourcesV1 xmlns="using:Uno.Material" />
 
+				<MaterialColorsV2 xmlns="using:Uno.Material" />
+				<MaterialFonts xmlns="using:Uno.Material"
+							   OverrideSource="ms-appx:///MaterialFontsOverride.xaml" />
+				<MaterialResourcesV2 xmlns="using:Uno.Material" />
+
+				<CupertinoColors xmlns="using:Uno.Cupertino" />
+				<CupertinoFonts xmlns="using:Uno.Cupertino"
+								OverrideSource="ms-appx:///CupertinoFontsOverride.xaml" />
+				<CupertinoResources xmlns="using:Uno.Cupertino" />
+
+				<ResourceDictionary Source="Converters.xaml" />
+
+				<!-- Application's custom styles -->
+				<ResourceDictionary Source="ms-appx:///Styles/Application/Colors.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/Button.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/RadioButton.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/ToggleButton.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/XamlDisplay.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/SamplePageLayout.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/TextBlock.xaml" />
+				<ResourceDictionary Source="ms-appx:///Styles/OverviewSampleView.xaml" />
+				<ResourceDictionary>
+					<x:Double x:Key="DesktopAdaptiveThresholdWidth">720</x:Double>
+				</ResourceDictionary>
 			</ResourceDictionary.MergedDictionaries>
 
-			<!--  Override default MaterialBodyLargeFontSize resource  -->
-			<x:Double x:Key="BodyLargeFontSize">32</x:Double>
-
-			<!--  Override default MaterialBodyLargeFontWeight resource  -->
-			<x:String x:Key="BodyLargeFontWeight">Extra Bold</x:String>
-
+			<!-- To override the default FlyoutLightDismissOverlayBackground resource -->
+			<SolidColorBrush x:Key="FlyoutLightDismissOverlayBackground"
+							 Color="{StaticResource MaterialOverlayColor}" />
 		</ResourceDictionary>
 	</Application.Resources>
+
 </Application>
