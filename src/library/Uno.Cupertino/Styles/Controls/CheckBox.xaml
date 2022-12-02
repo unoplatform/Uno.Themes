@@ -22,13 +22,13 @@
 	<Style x:Key="CupertinoCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Background"
-				Value="{StaticResource CupertinoBlueBrush}" />
+				Value="{ThemeResource CupertinoBlueBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoWhiteBrush}" />
+				Value="{ThemeResource CupertinoWhiteBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource CupertinoBlueBrush}" />
+				Value="{ThemeResource CupertinoBlueBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="Padding"
@@ -305,7 +305,7 @@
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
-										  Foreground="{StaticResource CupertinoLabelBrush}"
+										  Foreground="{ThemeResource CupertinoLabelBrush}"
 										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -324,8 +324,8 @@
 		   BasedOn="{StaticResource CupertinoCheckBoxStyle}">
 
 		<Setter Property="Background"
-				Value="{StaticResource CupertinoSecondaryBrush}" />
+				Value="{ThemeResource CupertinoSecondaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoOnSecondaryBrush}" />
+				Value="{ThemeResource CupertinoOnSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

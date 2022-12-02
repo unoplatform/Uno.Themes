@@ -88,13 +88,13 @@
 		<Setter Property="IsTabStop"
 		        Value="False" />
 		<Setter Property="FontFamily"
-		        Value="{StaticResource MaterialRegularFontFamily}" />
+		        Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FontWeight"
 		        Value="Normal" />
 		<Setter Property="FontSize"
 		        Value="{ThemeResource ControlContentThemeFontSize}" />
 		<Setter Property="Background"
-		        Value="{StaticResource MaterialDatePickerFlyoutPresenterBackgroundBrush}" />
+		        Value="{ThemeResource MaterialDatePickerFlyoutPresenterBackgroundBrush}" />
 		<Setter Property="AutomationProperties.AutomationId"
 		        Value="DatePickerFlyoutPresenter" />
 		<Setter Property="BorderThickness"
@@ -192,11 +192,11 @@
 	       TargetType="DatePicker">
 
 		<Setter Property="Background"
-		        Value="{StaticResource MaterialDatePickerBackgroundColorBrush}" />
+		        Value="{ThemeResource MaterialDatePickerBackgroundColorBrush}" />
 		<Setter Property="Foreground"
-		        Value="{StaticResource PrimaryBrush}" />
+		        Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="BorderBrush"
-		        Value="{StaticResource PrimaryBrush}" />
+		        Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="HorizontalAlignment"
 		        Value="Stretch" />
 		<Setter Property="Height"
@@ -253,7 +253,7 @@
 									<!--  PlaceholderText  -->
 									<TextBlock x:Name="PlaceholderText"
 									           Margin="4,0,0,0"
-									           Foreground="{StaticResource OnSurfaceLowBrush}"
+									           Foreground="{ThemeResource OnSurfaceLowBrush}"
 									           Style="{StaticResource MaterialBodyMedium}"
 									           Text="{TemplateBinding Header}"
 									           Visibility="Collapsed" />
@@ -272,11 +272,11 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="DateText.Foreground"
-										        Value="{StaticResource OnSurfaceLowBrush}" />
+										        Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="HeaderTextBlock.Foreground"
-										        Value="{StaticResource OnSurfaceLowBrush}" />
+										        Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="BottomBorder.Fill"
-										        Value="{StaticResource OnSurfaceLowBrush}" />
+										        Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

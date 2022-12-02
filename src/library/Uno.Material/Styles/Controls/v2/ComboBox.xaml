@@ -79,15 +79,6 @@
 	<Thickness x:Key="MaterialComboBoxOpenedBorderThickness">2</Thickness>
 	<Thickness x:Key="MaterialComboBoxPadding">16,0</Thickness>
 
-	<!-- ComboBox label based on Body Large Typo -->
-	<StaticResource x:Key="MaterialComboBoxFontFamily"
-					ResourceKey="MaterialBodyLargeFontFamily" />
-	<StaticResource x:Key="MaterialComboBoxFontWeight"
-					ResourceKey="MaterialBodyLargeFontWeight" />
-	<StaticResource x:Key="MaterialComboBoxFontSize"
-					ResourceKey="MaterialBodyLargeFontSize" />
-	<StaticResource x:Key="MaterialComboBoxCharacterSpacing"
-					ResourceKey="MaterialBodyLargeCharacterSpacing" />
 
 	<!--  Style  -->
 	<Style x:Key="MaterialComboBoxItemStyle"
@@ -96,17 +87,17 @@
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialComboBoxItemForegroundThemeBrush}" />
+				Value="{ThemeResource MaterialComboBoxItemForegroundThemeBrush}" />
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialComboBoxFontFamily}" />
+				Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialComboBoxFontWeight}" />
+				Value="{ThemeResource BodyLargeFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialComboBoxFontSize}" />
+				Value="{ThemeResource BodyLargeFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+				Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="VerticalContentAlignment"
@@ -233,7 +224,7 @@
 						<Grid x:Name="PressedOverlay"
 							  HorizontalAlignment="Stretch"
 							  VerticalAlignment="Stretch"
-							  Background="{StaticResource MaterialComboBoxItemSelectedBackgroundThemeBrush}"
+							  Background="{ThemeResource MaterialComboBoxItemSelectedBackgroundThemeBrush}"
 							  IsHitTestVisible="False"
 							  Opacity="0" />
 
@@ -258,9 +249,9 @@
 		<Setter Property="Foreground"
 				Value="{ThemeResource MaterialComboBoxForegroundThemeBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialComboBoxBackgroundColorBrush}" />
+				Value="{ThemeResource MaterialComboBoxBackgroundColorBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialComboBoxBorderBrush}" />
+				Value="{ThemeResource MaterialComboBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
 				Value="{StaticResource MaterialComboBoxBorderThickness}" />
 		<Setter Property="Padding"
@@ -268,13 +259,13 @@
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialComboBoxFontFamily}" />
+				Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialComboBoxFontWeight}" />
+				Value="{ThemeResource BodyLargeFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialComboBoxFontSize}" />
+				Value="{ThemeResource BodyLargeFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialComboBoxCharacterSpacing}" />
+				Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="MinHeight"
@@ -334,13 +325,13 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="DropDownGlyph_Down.Fill"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -350,11 +341,11 @@
 								<VisualState x:Name="Opened">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialComboBoxOpenedBorderBrush}" />
+												Value="{ThemeResource MaterialComboBoxOpenedBorderBrush}" />
 										<Setter Target="RootGrid.BorderThickness"
 												Value="{StaticResource MaterialComboBoxOpenedBorderThickness}" />
 										<Setter Target="DropDownGlyph_Up.Fill"
-												Value="{StaticResource MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
+												Value="{ThemeResource MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
 										<Setter Target="DropDownGlyph_Down.Visibility"
 												Value="Collapsed" />
 										<Setter Target="DropDownGlyph_Up.Visibility"
@@ -375,7 +366,7 @@
 								<VisualState x:Name="Closed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialComboBoxBorderBrush}" />
+												Value="{ThemeResource MaterialComboBoxBorderBrush}" />
 										<Setter Target="RootGrid.BorderThickness"
 												Value="{StaticResource MaterialComboBoxBorderThickness}" />
 										<Setter Target="DropDownGlyph_Down.Visibility"
@@ -439,7 +430,7 @@
 							<TextBlock x:Name="PlaceholderElement"
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
-									   Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}"
+									   Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={ThemeResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}"
 									   IsHitTestVisible="False"
 									   MaxLines="1"
 									   RenderTransformOrigin="0,0.5"
@@ -483,7 +474,7 @@
 						<Popup x:Name="Popup">
 							<Border x:Name="PopupBorder"
 									CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
-									Background="{StaticResource SurfaceBrush}">
+									Background="{ThemeResource SurfaceBrush}">
 
 								<!--  Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
 								<ScrollViewer x:Name="ScrollViewer"

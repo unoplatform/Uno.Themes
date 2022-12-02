@@ -1,365 +1,1099 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!--#region PrimaryColor -->
-	<SolidColorBrush x:Key="PrimaryBrush" Color="{ThemeResource PrimaryColor}" />
-	<SolidColorBrush x:Key="PrimaryHoverBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="PrimaryFocusedBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryPressedBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryDraggedBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="PrimarySelectedBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryMediumBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="PrimaryLowBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="PrimaryDisabledBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="PrimaryDisabledLowBrush" Color="{ThemeResource PrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion PrimaryColor-->
-	<!--#region PrimaryInverseColor -->
-	<SolidColorBrush x:Key="PrimaryInverseBrush" Color="{ThemeResource PrimaryInverseColor}" />
-	<SolidColorBrush x:Key="PrimaryInverseHoverBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInverseFocusedBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInversePressedBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInverseDraggedBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInverseSelectedBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInverseMediumBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInverseLowBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInverseDisabledBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="PrimaryInverseDisabledLowBrush" Color="{ThemeResource PrimaryInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion PrimaryInverseColor-->
-	<!--#region OnPrimaryColor -->
-	<SolidColorBrush x:Key="OnPrimaryBrush" Color="{ThemeResource OnPrimaryColor}" />
-	<SolidColorBrush x:Key="OnPrimaryHoverBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryFocusedBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryPressedBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryDraggedBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimarySelectedBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryMediumBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryLowBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryDisabledBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryDisabledLowBrush" Color="{ThemeResource OnPrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnPrimaryColor-->
-	<!--#region PrimaryContainerColor -->
-	<SolidColorBrush x:Key="PrimaryContainerBrush" Color="{ThemeResource PrimaryContainerColor}" />
-	<SolidColorBrush x:Key="PrimaryContainerHoverBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerFocusedBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerPressedBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerDraggedBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerSelectedBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerMediumBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerLowBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerDisabledBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="PrimaryContainerDisabledLowBrush" Color="{ThemeResource PrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion PrimaryContainerColor-->
-	<!--#region OnPrimaryContainerColor -->
-	<SolidColorBrush x:Key="OnPrimaryContainerBrush" Color="{ThemeResource OnPrimaryContainerColor}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerHoverBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerFocusedBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerPressedBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerDraggedBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerSelectedBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerMediumBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerLowBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerDisabledBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnPrimaryContainerDisabledLowBrush" Color="{ThemeResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnPrimaryContainerColor-->
-	<!--#region PrimaryVariantLightColor -->
-	<SolidColorBrush x:Key="PrimaryVariantLightBrush" Color="{ThemeResource PrimaryVariantLightColor}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightHoverBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightFocusedBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightPressedBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightDraggedBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightSelectedBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightMediumBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightLowBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightDisabledBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantLightDisabledLowBrush" Color="{ThemeResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion PrimaryVariantLightColor-->
-	<!--#region PrimaryVariantDarkColor -->
-	<SolidColorBrush x:Key="PrimaryVariantDarkBrush" Color="{ThemeResource PrimaryVariantDarkColor}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkHoverBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkFocusedBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkPressedBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkDraggedBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkSelectedBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkMediumBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkLowBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkDisabledBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="PrimaryVariantDarkDisabledLowBrush" Color="{ThemeResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion PrimaryVariantDarkColor-->
-	<!--#region SecondaryColor -->
-	<SolidColorBrush x:Key="SecondaryBrush" Color="{ThemeResource SecondaryColor}" />
-	<SolidColorBrush x:Key="SecondaryHoverBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="SecondaryFocusedBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryPressedBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryDraggedBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="SecondarySelectedBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryMediumBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="SecondaryLowBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="SecondaryDisabledBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="SecondaryDisabledLowBrush" Color="{ThemeResource SecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion SecondaryColor-->
-	<!--#region OnSecondaryColor -->
-	<SolidColorBrush x:Key="OnSecondaryBrush" Color="{ThemeResource OnSecondaryColor}" />
-	<SolidColorBrush x:Key="OnSecondaryHoverBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryFocusedBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryPressedBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryDraggedBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondarySelectedBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryMediumBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryLowBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryDisabledBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryDisabledLowBrush" Color="{ThemeResource OnSecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnSecondaryColor-->
-	<!--#region SecondaryContainerColor -->
-	<SolidColorBrush x:Key="SecondaryContainerBrush" Color="{ThemeResource SecondaryContainerColor}" />
-	<SolidColorBrush x:Key="SecondaryContainerHoverBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerFocusedBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerPressedBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerDraggedBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerSelectedBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerMediumBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerLowBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerDisabledBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="SecondaryContainerDisabledLowBrush" Color="{ThemeResource SecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion SecondaryContainerColor-->
-	<!--#region OnSecondaryContainerColor -->
-	<SolidColorBrush x:Key="OnSecondaryContainerBrush" Color="{ThemeResource OnSecondaryContainerColor}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerHoverBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerFocusedBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerPressedBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerDraggedBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerSelectedBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerMediumBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerLowBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerDisabledBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnSecondaryContainerDisabledLowBrush" Color="{ThemeResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnSecondaryContainerColor-->
-	<!--#region SecondaryVariantLightColor -->
-	<SolidColorBrush x:Key="SecondaryVariantLightBrush" Color="{ThemeResource SecondaryVariantLightColor}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightHoverBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightFocusedBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightPressedBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightDraggedBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightSelectedBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightMediumBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightLowBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightDisabledBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantLightDisabledLowBrush" Color="{ThemeResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion SecondaryVariantLightColor-->
-	<!--#region SecondaryVariantDarkColor -->
-	<SolidColorBrush x:Key="SecondaryVariantDarkBrush" Color="{ThemeResource SecondaryVariantDarkColor}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkHoverBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkFocusedBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkPressedBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkDraggedBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkSelectedBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkMediumBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkLowBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkDisabledBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="SecondaryVariantDarkDisabledLowBrush" Color="{ThemeResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion SecondaryVariantDarkColor-->
-	<!--#region TertiaryColor -->
-	<SolidColorBrush x:Key="TertiaryBrush" Color="{ThemeResource TertiaryColor}" />
-	<SolidColorBrush x:Key="TertiaryHoverBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="TertiaryFocusedBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="TertiaryPressedBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="TertiaryDraggedBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="TertiarySelectedBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="TertiaryMediumBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="TertiaryLowBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="TertiaryDisabledBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="TertiaryDisabledLowBrush" Color="{ThemeResource TertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion TertiaryColor-->
-	<!--#region OnTertiaryColor -->
-	<SolidColorBrush x:Key="OnTertiaryBrush" Color="{ThemeResource OnTertiaryColor}" />
-	<SolidColorBrush x:Key="OnTertiaryHoverBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryFocusedBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryPressedBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryDraggedBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiarySelectedBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryMediumBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryLowBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryDisabledBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryDisabledLowBrush" Color="{ThemeResource OnTertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnTertiaryColor-->
-	<!--#region TertiaryContainerColor -->
-	<SolidColorBrush x:Key="TertiaryContainerBrush" Color="{ThemeResource TertiaryContainerColor}" />
-	<SolidColorBrush x:Key="TertiaryContainerHoverBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerFocusedBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerPressedBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerDraggedBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerSelectedBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerMediumBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerLowBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerDisabledBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="TertiaryContainerDisabledLowBrush" Color="{ThemeResource TertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion TertiaryContainerColor-->
-	<!--#region OnTertiaryContainerColor -->
-	<SolidColorBrush x:Key="OnTertiaryContainerBrush" Color="{ThemeResource OnTertiaryContainerColor}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerHoverBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerFocusedBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerPressedBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerDraggedBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerSelectedBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerMediumBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerLowBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerDisabledBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnTertiaryContainerDisabledLowBrush" Color="{ThemeResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnTertiaryContainerColor-->
-	<!--#region ErrorColor -->
-	<SolidColorBrush x:Key="ErrorBrush" Color="{ThemeResource ErrorColor}" />
-	<SolidColorBrush x:Key="ErrorHoverBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="ErrorFocusedBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="ErrorPressedBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="ErrorDraggedBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="ErrorSelectedBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="ErrorMediumBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="ErrorLowBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="ErrorDisabledBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="ErrorDisabledLowBrush" Color="{ThemeResource ErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion ErrorColor-->
-	<!--#region OnErrorColor -->
-	<SolidColorBrush x:Key="OnErrorBrush" Color="{ThemeResource OnErrorColor}" />
-	<SolidColorBrush x:Key="OnErrorHoverBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnErrorFocusedBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorPressedBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorDraggedBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorSelectedBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorMediumBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnErrorLowBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnErrorDisabledBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnErrorDisabledLowBrush" Color="{ThemeResource OnErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnErrorColor-->
-	<!--#region ErrorContainerColor -->
-	<SolidColorBrush x:Key="ErrorContainerBrush" Color="{ThemeResource ErrorContainerColor}" />
-	<SolidColorBrush x:Key="ErrorContainerHoverBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerFocusedBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerPressedBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerDraggedBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerSelectedBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerMediumBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerLowBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerDisabledBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="ErrorContainerDisabledLowBrush" Color="{ThemeResource ErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion ErrorContainerColor-->
-	<!--#region OnErrorContainerColor -->
-	<SolidColorBrush x:Key="OnErrorContainerBrush" Color="{ThemeResource OnErrorContainerColor}" />
-	<SolidColorBrush x:Key="OnErrorContainerHoverBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerFocusedBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerPressedBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerDraggedBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerSelectedBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerMediumBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerLowBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerDisabledBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnErrorContainerDisabledLowBrush" Color="{ThemeResource OnErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnErrorContainerColor-->
-	<!--#region BackgroundColor -->
-	<SolidColorBrush x:Key="BackgroundBrush" Color="{ThemeResource BackgroundColor}" />
-	<SolidColorBrush x:Key="BackgroundHoverBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="BackgroundFocusedBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="BackgroundPressedBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="BackgroundDraggedBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="BackgroundSelectedBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="BackgroundMediumBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="BackgroundLowBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="BackgroundDisabledBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="BackgroundDisabledLowBrush" Color="{ThemeResource BackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion BackgroundColor-->
-	<!--#region OnBackgroundColor -->
-	<SolidColorBrush x:Key="OnBackgroundBrush" Color="{ThemeResource OnBackgroundColor}" />
-	<SolidColorBrush x:Key="OnBackgroundHoverBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundFocusedBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundPressedBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundDraggedBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundSelectedBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundMediumBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundLowBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundDisabledBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnBackgroundDisabledLowBrush" Color="{ThemeResource OnBackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnBackgroundColor-->
-	<!--#region SurfaceColor -->
-	<SolidColorBrush x:Key="SurfaceBrush" Color="{ThemeResource SurfaceColor}" />
-	<SolidColorBrush x:Key="SurfaceHoverBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="SurfaceFocusedBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="SurfacePressedBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceDraggedBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceSelectedBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceMediumBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="SurfaceLowBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="SurfaceDisabledBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="SurfaceDisabledLowBrush" Color="{ThemeResource SurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion SurfaceColor-->
-	<!--#region OnSurfaceColor -->
-	<SolidColorBrush x:Key="OnSurfaceBrush" Color="{ThemeResource OnSurfaceColor}" />
-	<SolidColorBrush x:Key="OnSurfaceHoverBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceFocusedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfacePressedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceDraggedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceSelectedBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceMediumBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceLowBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceDisabledBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceDisabledLowBrush" Color="{ThemeResource OnSurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnSurfaceColor-->
-	<!--#region SurfaceVariantColor -->
-	<SolidColorBrush x:Key="SurfaceVariantBrush" Color="{ThemeResource SurfaceVariantColor}" />
-	<SolidColorBrush x:Key="SurfaceVariantHoverBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantFocusedBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantPressedBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantDraggedBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantSelectedBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantMediumBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantLowBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantDisabledBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="SurfaceVariantDisabledLowBrush" Color="{ThemeResource SurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion SurfaceVariantColor-->
-	<!--#region OnSurfaceVariantColor -->
-	<SolidColorBrush x:Key="OnSurfaceVariantBrush" Color="{ThemeResource OnSurfaceVariantColor}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantHoverBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantFocusedBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantPressedBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantDraggedBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantSelectedBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantMediumBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantLowBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantDisabledBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceVariantDisabledLowBrush" Color="{ThemeResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnSurfaceVariantColor-->
-	<!--#region SurfaceInverseColor -->
-	<SolidColorBrush x:Key="SurfaceInverseBrush" Color="{ThemeResource SurfaceInverseColor}" />
-	<SolidColorBrush x:Key="SurfaceInverseHoverBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInverseFocusedBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInversePressedBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInverseDraggedBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInverseSelectedBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInverseMediumBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInverseLowBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInverseDisabledBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="SurfaceInverseDisabledLowBrush" Color="{ThemeResource SurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion SurfaceInverseColor-->
-	<!--#region OnSurfaceInverseColor -->
-	<SolidColorBrush x:Key="OnSurfaceInverseBrush" Color="{ThemeResource OnSurfaceInverseColor}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseHoverBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseFocusedBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInversePressedBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseDraggedBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseSelectedBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseMediumBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseLowBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseDisabledBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OnSurfaceInverseDisabledLowBrush" Color="{ThemeResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OnSurfaceInverseColor-->
-	<!--#region OutlineColor -->
-	<SolidColorBrush x:Key="OutlineBrush" Color="{ThemeResource OutlineColor}" />
-	<SolidColorBrush x:Key="OutlineHoverBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource HoverOpacity}" />
-	<SolidColorBrush x:Key="OutlineFocusedBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource FocusedOpacity}" />
-	<SolidColorBrush x:Key="OutlinePressedBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource PressedOpacity}" />
-	<SolidColorBrush x:Key="OutlineDraggedBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource DraggedOpacity}" />
-	<SolidColorBrush x:Key="OutlineSelectedBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource SelectedOpacity}" />
-	<SolidColorBrush x:Key="OutlineMediumBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="OutlineLowBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource LowOpacity}" />
-	<SolidColorBrush x:Key="OutlineDisabledBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource DisabledOpacity}" />
-	<SolidColorBrush x:Key="OutlineDisabledLowBrush" Color="{ThemeResource OutlineColor}" Opacity="{StaticResource DisabledLowOpacity}" />
-	<!--#endregion OutlineColor-->
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+
+			<!--#region PrimaryColor -->
+			<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+			<SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryFocusedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDraggedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimarySelectedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryMediumBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryLowBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDisabledBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDisabledLowBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryColor-->
+			<!--#region PrimaryInverseColor -->
+			<SolidColorBrush x:Key="PrimaryInverseBrush" Color="{StaticResource PrimaryInverseColor}" />
+			<SolidColorBrush x:Key="PrimaryInverseHoverBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseFocusedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInversePressedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDraggedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseSelectedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseMediumBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseLowBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDisabledBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDisabledLowBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryInverseColor-->
+			<!--#region OnPrimaryColor -->
+			<SolidColorBrush x:Key="OnPrimaryBrush" Color="{StaticResource OnPrimaryColor}" />
+			<SolidColorBrush x:Key="OnPrimaryHoverBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryFocusedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryPressedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDraggedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimarySelectedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryMediumBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryLowBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDisabledBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDisabledLowBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnPrimaryColor-->
+			<!--#region PrimaryContainerColor -->
+			<SolidColorBrush x:Key="PrimaryContainerBrush" Color="{StaticResource PrimaryContainerColor}" />
+			<SolidColorBrush x:Key="PrimaryContainerHoverBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerFocusedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerPressedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDraggedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerSelectedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerMediumBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerLowBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDisabledBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDisabledLowBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryContainerColor-->
+			<!--#region OnPrimaryContainerColor -->
+			<SolidColorBrush x:Key="OnPrimaryContainerBrush" Color="{StaticResource OnPrimaryContainerColor}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerHoverBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerFocusedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerPressedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDraggedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerSelectedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerMediumBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerLowBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDisabledBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDisabledLowBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnPrimaryContainerColor-->
+			<!--#region PrimaryVariantLightColor -->
+			<SolidColorBrush x:Key="PrimaryVariantLightBrush" Color="{StaticResource PrimaryVariantLightColor}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightHoverBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightFocusedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightPressedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDraggedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightSelectedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightMediumBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightLowBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDisabledBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDisabledLowBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryVariantLightColor-->
+			<!--#region PrimaryVariantDarkColor -->
+			<SolidColorBrush x:Key="PrimaryVariantDarkBrush" Color="{StaticResource PrimaryVariantDarkColor}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkHoverBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkFocusedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkPressedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDraggedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkSelectedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkMediumBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkLowBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDisabledBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDisabledLowBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryVariantDarkColor-->
+			<!--#region SecondaryColor -->
+			<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
+			<SolidColorBrush x:Key="SecondaryHoverBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryFocusedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryPressedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDraggedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondarySelectedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryMediumBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryLowBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDisabledBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDisabledLowBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryColor-->
+			<!--#region OnSecondaryColor -->
+			<SolidColorBrush x:Key="OnSecondaryBrush" Color="{StaticResource OnSecondaryColor}" />
+			<SolidColorBrush x:Key="OnSecondaryHoverBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryFocusedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryPressedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDraggedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondarySelectedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryMediumBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryLowBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDisabledBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDisabledLowBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSecondaryColor-->
+			<!--#region SecondaryContainerColor -->
+			<SolidColorBrush x:Key="SecondaryContainerBrush" Color="{StaticResource SecondaryContainerColor}" />
+			<SolidColorBrush x:Key="SecondaryContainerHoverBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerFocusedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerPressedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDraggedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerSelectedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerMediumBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerLowBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDisabledBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDisabledLowBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryContainerColor-->
+			<!--#region OnSecondaryContainerColor -->
+			<SolidColorBrush x:Key="OnSecondaryContainerBrush" Color="{StaticResource OnSecondaryContainerColor}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerHoverBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerFocusedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerPressedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDraggedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerSelectedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerMediumBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerLowBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDisabledBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDisabledLowBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSecondaryContainerColor-->
+			<!--#region SecondaryVariantLightColor -->
+			<SolidColorBrush x:Key="SecondaryVariantLightBrush" Color="{StaticResource SecondaryVariantLightColor}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightHoverBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightFocusedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightPressedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDraggedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightSelectedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightMediumBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightLowBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDisabledBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDisabledLowBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryVariantLightColor-->
+			<!--#region SecondaryVariantDarkColor -->
+			<SolidColorBrush x:Key="SecondaryVariantDarkBrush" Color="{StaticResource SecondaryVariantDarkColor}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkHoverBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkFocusedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkPressedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDraggedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkSelectedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkMediumBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkLowBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDisabledBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDisabledLowBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryVariantDarkColor-->
+			<!--#region TertiaryColor -->
+			<SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource TertiaryColor}" />
+			<SolidColorBrush x:Key="TertiaryHoverBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="TertiaryFocusedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryPressedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDraggedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="TertiarySelectedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryMediumBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="TertiaryLowBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDisabledBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDisabledLowBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion TertiaryColor-->
+			<!--#region OnTertiaryColor -->
+			<SolidColorBrush x:Key="OnTertiaryBrush" Color="{StaticResource OnTertiaryColor}" />
+			<SolidColorBrush x:Key="OnTertiaryHoverBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryFocusedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryPressedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDraggedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiarySelectedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryMediumBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryLowBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDisabledBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDisabledLowBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnTertiaryColor-->
+			<!--#region TertiaryContainerColor -->
+			<SolidColorBrush x:Key="TertiaryContainerBrush" Color="{StaticResource TertiaryContainerColor}" />
+			<SolidColorBrush x:Key="TertiaryContainerHoverBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerFocusedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerPressedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDraggedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerSelectedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerMediumBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerLowBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDisabledBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDisabledLowBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion TertiaryContainerColor-->
+			<!--#region OnTertiaryContainerColor -->
+			<SolidColorBrush x:Key="OnTertiaryContainerBrush" Color="{StaticResource OnTertiaryContainerColor}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerHoverBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerFocusedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerPressedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDraggedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerSelectedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerMediumBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerLowBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDisabledBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDisabledLowBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnTertiaryContainerColor-->
+			<!--#region ErrorColor -->
+			<SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
+			<SolidColorBrush x:Key="ErrorHoverBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="ErrorFocusedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="ErrorPressedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="ErrorDraggedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="ErrorSelectedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="ErrorMediumBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="ErrorLowBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="ErrorDisabledBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="ErrorDisabledLowBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion ErrorColor-->
+			<!--#region OnErrorColor -->
+			<SolidColorBrush x:Key="OnErrorBrush" Color="{StaticResource OnErrorColor}" />
+			<SolidColorBrush x:Key="OnErrorHoverBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnErrorFocusedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorPressedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDraggedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorSelectedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorMediumBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnErrorLowBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDisabledBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDisabledLowBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnErrorColor-->
+			<!--#region ErrorContainerColor -->
+			<SolidColorBrush x:Key="ErrorContainerBrush" Color="{StaticResource ErrorContainerColor}" />
+			<SolidColorBrush x:Key="ErrorContainerHoverBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerFocusedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerPressedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDraggedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerSelectedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerMediumBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerLowBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDisabledBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDisabledLowBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion ErrorContainerColor-->
+			<!--#region OnErrorContainerColor -->
+			<SolidColorBrush x:Key="OnErrorContainerBrush" Color="{StaticResource OnErrorContainerColor}" />
+			<SolidColorBrush x:Key="OnErrorContainerHoverBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerFocusedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerPressedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDraggedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerSelectedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerMediumBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerLowBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDisabledBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDisabledLowBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnErrorContainerColor-->
+			<!--#region BackgroundColor -->
+			<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+			<SolidColorBrush x:Key="BackgroundHoverBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="BackgroundFocusedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundPressedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDraggedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundSelectedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundMediumBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="BackgroundLowBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDisabledBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDisabledLowBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion BackgroundColor-->
+			<!--#region OnBackgroundColor -->
+			<SolidColorBrush x:Key="OnBackgroundBrush" Color="{StaticResource OnBackgroundColor}" />
+			<SolidColorBrush x:Key="OnBackgroundHoverBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundFocusedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundPressedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDraggedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundSelectedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundMediumBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundLowBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDisabledBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDisabledLowBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnBackgroundColor-->
+			<!--#region SurfaceColor -->
+			<SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
+			<SolidColorBrush x:Key="SurfaceHoverBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceFocusedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfacePressedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDraggedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceSelectedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceMediumBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceLowBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDisabledBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDisabledLowBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceColor-->
+			<!--#region OnSurfaceColor -->
+			<SolidColorBrush x:Key="OnSurfaceBrush" Color="{StaticResource OnSurfaceColor}" />
+			<SolidColorBrush x:Key="OnSurfaceHoverBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceFocusedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfacePressedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDraggedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceSelectedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceMediumBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceLowBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDisabledBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDisabledLowBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceColor-->
+			<!--#region SurfaceVariantColor -->
+			<SolidColorBrush x:Key="SurfaceVariantBrush" Color="{StaticResource SurfaceVariantColor}" />
+			<SolidColorBrush x:Key="SurfaceVariantHoverBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantFocusedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantPressedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDraggedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantSelectedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantMediumBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantLowBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDisabledBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDisabledLowBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceVariantColor-->
+			<!--#region OnSurfaceVariantColor -->
+			<SolidColorBrush x:Key="OnSurfaceVariantBrush" Color="{StaticResource OnSurfaceVariantColor}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantHoverBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantFocusedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantPressedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDraggedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantSelectedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantMediumBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantLowBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDisabledBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDisabledLowBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceVariantColor-->
+			<!--#region SurfaceInverseColor -->
+			<SolidColorBrush x:Key="SurfaceInverseBrush" Color="{StaticResource SurfaceInverseColor}" />
+			<SolidColorBrush x:Key="SurfaceInverseHoverBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseFocusedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInversePressedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDraggedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseSelectedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseMediumBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseLowBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDisabledBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDisabledLowBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceInverseColor-->
+			<!--#region OnSurfaceInverseColor -->
+			<SolidColorBrush x:Key="OnSurfaceInverseBrush" Color="{StaticResource OnSurfaceInverseColor}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseHoverBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseFocusedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInversePressedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDraggedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseSelectedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseMediumBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseLowBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDisabledBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDisabledLowBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceInverseColor-->
+			<!--#region OutlineColor -->
+			<SolidColorBrush x:Key="OutlineBrush" Color="{StaticResource OutlineColor}" />
+			<SolidColorBrush x:Key="OutlineHoverBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OutlineFocusedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OutlinePressedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OutlineDraggedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OutlineSelectedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OutlineMediumBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OutlineLowBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OutlineDisabledBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OutlineDisabledLowBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OutlineColor-->
+
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Dark">
+
+			<!--#region PrimaryColor -->
+			<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+			<SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryFocusedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDraggedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimarySelectedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryMediumBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryLowBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDisabledBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDisabledLowBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryColor-->
+			<!--#region PrimaryInverseColor -->
+			<SolidColorBrush x:Key="PrimaryInverseBrush" Color="{StaticResource PrimaryInverseColor}" />
+			<SolidColorBrush x:Key="PrimaryInverseHoverBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseFocusedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInversePressedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDraggedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseSelectedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseMediumBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseLowBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDisabledBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDisabledLowBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryInverseColor-->
+			<!--#region OnPrimaryColor -->
+			<SolidColorBrush x:Key="OnPrimaryBrush" Color="{StaticResource OnPrimaryColor}" />
+			<SolidColorBrush x:Key="OnPrimaryHoverBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryFocusedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryPressedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDraggedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimarySelectedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryMediumBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryLowBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDisabledBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDisabledLowBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnPrimaryColor-->
+			<!--#region PrimaryContainerColor -->
+			<SolidColorBrush x:Key="PrimaryContainerBrush" Color="{StaticResource PrimaryContainerColor}" />
+			<SolidColorBrush x:Key="PrimaryContainerHoverBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerFocusedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerPressedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDraggedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerSelectedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerMediumBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerLowBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDisabledBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDisabledLowBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryContainerColor-->
+			<!--#region OnPrimaryContainerColor -->
+			<SolidColorBrush x:Key="OnPrimaryContainerBrush" Color="{StaticResource OnPrimaryContainerColor}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerHoverBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerFocusedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerPressedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDraggedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerSelectedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerMediumBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerLowBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDisabledBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDisabledLowBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnPrimaryContainerColor-->
+			<!--#region PrimaryVariantLightColor -->
+			<SolidColorBrush x:Key="PrimaryVariantLightBrush" Color="{StaticResource PrimaryVariantLightColor}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightHoverBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightFocusedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightPressedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDraggedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightSelectedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightMediumBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightLowBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDisabledBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDisabledLowBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryVariantLightColor-->
+			<!--#region PrimaryVariantDarkColor -->
+			<SolidColorBrush x:Key="PrimaryVariantDarkBrush" Color="{StaticResource PrimaryVariantDarkColor}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkHoverBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkFocusedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkPressedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDraggedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkSelectedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkMediumBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkLowBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDisabledBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDisabledLowBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryVariantDarkColor-->
+			<!--#region SecondaryColor -->
+			<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
+			<SolidColorBrush x:Key="SecondaryHoverBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryFocusedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryPressedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDraggedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondarySelectedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryMediumBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryLowBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDisabledBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDisabledLowBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryColor-->
+			<!--#region OnSecondaryColor -->
+			<SolidColorBrush x:Key="OnSecondaryBrush" Color="{StaticResource OnSecondaryColor}" />
+			<SolidColorBrush x:Key="OnSecondaryHoverBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryFocusedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryPressedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDraggedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondarySelectedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryMediumBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryLowBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDisabledBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDisabledLowBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSecondaryColor-->
+			<!--#region SecondaryContainerColor -->
+			<SolidColorBrush x:Key="SecondaryContainerBrush" Color="{StaticResource SecondaryContainerColor}" />
+			<SolidColorBrush x:Key="SecondaryContainerHoverBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerFocusedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerPressedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDraggedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerSelectedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerMediumBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerLowBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDisabledBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDisabledLowBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryContainerColor-->
+			<!--#region OnSecondaryContainerColor -->
+			<SolidColorBrush x:Key="OnSecondaryContainerBrush" Color="{StaticResource OnSecondaryContainerColor}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerHoverBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerFocusedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerPressedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDraggedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerSelectedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerMediumBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerLowBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDisabledBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDisabledLowBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSecondaryContainerColor-->
+			<!--#region SecondaryVariantLightColor -->
+			<SolidColorBrush x:Key="SecondaryVariantLightBrush" Color="{StaticResource SecondaryVariantLightColor}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightHoverBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightFocusedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightPressedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDraggedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightSelectedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightMediumBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightLowBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDisabledBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDisabledLowBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryVariantLightColor-->
+			<!--#region SecondaryVariantDarkColor -->
+			<SolidColorBrush x:Key="SecondaryVariantDarkBrush" Color="{StaticResource SecondaryVariantDarkColor}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkHoverBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkFocusedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkPressedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDraggedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkSelectedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkMediumBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkLowBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDisabledBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDisabledLowBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryVariantDarkColor-->
+			<!--#region TertiaryColor -->
+			<SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource TertiaryColor}" />
+			<SolidColorBrush x:Key="TertiaryHoverBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="TertiaryFocusedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryPressedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDraggedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="TertiarySelectedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryMediumBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="TertiaryLowBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDisabledBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDisabledLowBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion TertiaryColor-->
+			<!--#region OnTertiaryColor -->
+			<SolidColorBrush x:Key="OnTertiaryBrush" Color="{StaticResource OnTertiaryColor}" />
+			<SolidColorBrush x:Key="OnTertiaryHoverBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryFocusedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryPressedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDraggedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiarySelectedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryMediumBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryLowBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDisabledBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDisabledLowBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnTertiaryColor-->
+			<!--#region TertiaryContainerColor -->
+			<SolidColorBrush x:Key="TertiaryContainerBrush" Color="{StaticResource TertiaryContainerColor}" />
+			<SolidColorBrush x:Key="TertiaryContainerHoverBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerFocusedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerPressedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDraggedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerSelectedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerMediumBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerLowBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDisabledBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDisabledLowBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion TertiaryContainerColor-->
+			<!--#region OnTertiaryContainerColor -->
+			<SolidColorBrush x:Key="OnTertiaryContainerBrush" Color="{StaticResource OnTertiaryContainerColor}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerHoverBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerFocusedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerPressedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDraggedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerSelectedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerMediumBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerLowBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDisabledBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDisabledLowBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnTertiaryContainerColor-->
+			<!--#region ErrorColor -->
+			<SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
+			<SolidColorBrush x:Key="ErrorHoverBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="ErrorFocusedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="ErrorPressedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="ErrorDraggedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="ErrorSelectedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="ErrorMediumBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="ErrorLowBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="ErrorDisabledBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="ErrorDisabledLowBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion ErrorColor-->
+			<!--#region OnErrorColor -->
+			<SolidColorBrush x:Key="OnErrorBrush" Color="{StaticResource OnErrorColor}" />
+			<SolidColorBrush x:Key="OnErrorHoverBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnErrorFocusedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorPressedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDraggedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorSelectedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorMediumBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnErrorLowBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDisabledBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDisabledLowBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnErrorColor-->
+			<!--#region ErrorContainerColor -->
+			<SolidColorBrush x:Key="ErrorContainerBrush" Color="{StaticResource ErrorContainerColor}" />
+			<SolidColorBrush x:Key="ErrorContainerHoverBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerFocusedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerPressedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDraggedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerSelectedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerMediumBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerLowBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDisabledBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDisabledLowBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion ErrorContainerColor-->
+			<!--#region OnErrorContainerColor -->
+			<SolidColorBrush x:Key="OnErrorContainerBrush" Color="{StaticResource OnErrorContainerColor}" />
+			<SolidColorBrush x:Key="OnErrorContainerHoverBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerFocusedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerPressedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDraggedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerSelectedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerMediumBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerLowBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDisabledBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDisabledLowBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnErrorContainerColor-->
+			<!--#region BackgroundColor -->
+			<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+			<SolidColorBrush x:Key="BackgroundHoverBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="BackgroundFocusedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundPressedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDraggedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundSelectedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundMediumBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="BackgroundLowBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDisabledBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDisabledLowBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion BackgroundColor-->
+			<!--#region OnBackgroundColor -->
+			<SolidColorBrush x:Key="OnBackgroundBrush" Color="{StaticResource OnBackgroundColor}" />
+			<SolidColorBrush x:Key="OnBackgroundHoverBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundFocusedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundPressedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDraggedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundSelectedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundMediumBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundLowBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDisabledBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDisabledLowBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnBackgroundColor-->
+			<!--#region SurfaceColor -->
+			<SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
+			<SolidColorBrush x:Key="SurfaceHoverBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceFocusedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfacePressedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDraggedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceSelectedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceMediumBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceLowBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDisabledBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDisabledLowBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceColor-->
+			<!--#region OnSurfaceColor -->
+			<SolidColorBrush x:Key="OnSurfaceBrush" Color="{StaticResource OnSurfaceColor}" />
+			<SolidColorBrush x:Key="OnSurfaceHoverBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceFocusedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfacePressedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDraggedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceSelectedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceMediumBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceLowBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDisabledBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDisabledLowBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceColor-->
+			<!--#region SurfaceVariantColor -->
+			<SolidColorBrush x:Key="SurfaceVariantBrush" Color="{StaticResource SurfaceVariantColor}" />
+			<SolidColorBrush x:Key="SurfaceVariantHoverBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantFocusedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantPressedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDraggedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantSelectedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantMediumBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantLowBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDisabledBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDisabledLowBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceVariantColor-->
+			<!--#region OnSurfaceVariantColor -->
+			<SolidColorBrush x:Key="OnSurfaceVariantBrush" Color="{StaticResource OnSurfaceVariantColor}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantHoverBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantFocusedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantPressedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDraggedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantSelectedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantMediumBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantLowBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDisabledBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDisabledLowBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceVariantColor-->
+			<!--#region SurfaceInverseColor -->
+			<SolidColorBrush x:Key="SurfaceInverseBrush" Color="{StaticResource SurfaceInverseColor}" />
+			<SolidColorBrush x:Key="SurfaceInverseHoverBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseFocusedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInversePressedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDraggedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseSelectedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseMediumBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseLowBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDisabledBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDisabledLowBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceInverseColor-->
+			<!--#region OnSurfaceInverseColor -->
+			<SolidColorBrush x:Key="OnSurfaceInverseBrush" Color="{StaticResource OnSurfaceInverseColor}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseHoverBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseFocusedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInversePressedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDraggedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseSelectedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseMediumBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseLowBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDisabledBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDisabledLowBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceInverseColor-->
+			<!--#region OutlineColor -->
+			<SolidColorBrush x:Key="OutlineBrush" Color="{StaticResource OutlineColor}" />
+			<SolidColorBrush x:Key="OutlineHoverBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OutlineFocusedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OutlinePressedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OutlineDraggedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OutlineSelectedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OutlineMediumBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OutlineLowBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OutlineDisabledBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OutlineDisabledLowBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OutlineColor-->
+
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+
+			<!--#region PrimaryColor -->
+			<SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+			<SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryFocusedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDraggedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimarySelectedBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryMediumBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryLowBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDisabledBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryDisabledLowBrush" Color="{StaticResource PrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryColor-->
+			<!--#region PrimaryInverseColor -->
+			<SolidColorBrush x:Key="PrimaryInverseBrush" Color="{StaticResource PrimaryInverseColor}" />
+			<SolidColorBrush x:Key="PrimaryInverseHoverBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseFocusedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInversePressedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDraggedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseSelectedBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseMediumBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseLowBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDisabledBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryInverseDisabledLowBrush" Color="{StaticResource PrimaryInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryInverseColor-->
+			<!--#region OnPrimaryColor -->
+			<SolidColorBrush x:Key="OnPrimaryBrush" Color="{StaticResource OnPrimaryColor}" />
+			<SolidColorBrush x:Key="OnPrimaryHoverBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryFocusedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryPressedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDraggedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimarySelectedBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryMediumBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryLowBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDisabledBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryDisabledLowBrush" Color="{StaticResource OnPrimaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnPrimaryColor-->
+			<!--#region PrimaryContainerColor -->
+			<SolidColorBrush x:Key="PrimaryContainerBrush" Color="{StaticResource PrimaryContainerColor}" />
+			<SolidColorBrush x:Key="PrimaryContainerHoverBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerFocusedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerPressedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDraggedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerSelectedBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerMediumBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerLowBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDisabledBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryContainerDisabledLowBrush" Color="{StaticResource PrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryContainerColor-->
+			<!--#region OnPrimaryContainerColor -->
+			<SolidColorBrush x:Key="OnPrimaryContainerBrush" Color="{StaticResource OnPrimaryContainerColor}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerHoverBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerFocusedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerPressedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDraggedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerSelectedBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerMediumBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerLowBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDisabledBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnPrimaryContainerDisabledLowBrush" Color="{StaticResource OnPrimaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnPrimaryContainerColor-->
+			<!--#region PrimaryVariantLightColor -->
+			<SolidColorBrush x:Key="PrimaryVariantLightBrush" Color="{StaticResource PrimaryVariantLightColor}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightHoverBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightFocusedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightPressedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDraggedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightSelectedBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightMediumBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightLowBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDisabledBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantLightDisabledLowBrush" Color="{StaticResource PrimaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryVariantLightColor-->
+			<!--#region PrimaryVariantDarkColor -->
+			<SolidColorBrush x:Key="PrimaryVariantDarkBrush" Color="{StaticResource PrimaryVariantDarkColor}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkHoverBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkFocusedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkPressedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDraggedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkSelectedBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkMediumBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkLowBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDisabledBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="PrimaryVariantDarkDisabledLowBrush" Color="{StaticResource PrimaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion PrimaryVariantDarkColor-->
+			<!--#region SecondaryColor -->
+			<SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
+			<SolidColorBrush x:Key="SecondaryHoverBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryFocusedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryPressedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDraggedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondarySelectedBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryMediumBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryLowBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDisabledBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryDisabledLowBrush" Color="{StaticResource SecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryColor-->
+			<!--#region OnSecondaryColor -->
+			<SolidColorBrush x:Key="OnSecondaryBrush" Color="{StaticResource OnSecondaryColor}" />
+			<SolidColorBrush x:Key="OnSecondaryHoverBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryFocusedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryPressedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDraggedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondarySelectedBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryMediumBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryLowBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDisabledBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryDisabledLowBrush" Color="{StaticResource OnSecondaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSecondaryColor-->
+			<!--#region SecondaryContainerColor -->
+			<SolidColorBrush x:Key="SecondaryContainerBrush" Color="{StaticResource SecondaryContainerColor}" />
+			<SolidColorBrush x:Key="SecondaryContainerHoverBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerFocusedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerPressedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDraggedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerSelectedBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerMediumBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerLowBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDisabledBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryContainerDisabledLowBrush" Color="{StaticResource SecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryContainerColor-->
+			<!--#region OnSecondaryContainerColor -->
+			<SolidColorBrush x:Key="OnSecondaryContainerBrush" Color="{StaticResource OnSecondaryContainerColor}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerHoverBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerFocusedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerPressedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDraggedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerSelectedBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerMediumBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerLowBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDisabledBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSecondaryContainerDisabledLowBrush" Color="{StaticResource OnSecondaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSecondaryContainerColor-->
+			<!--#region SecondaryVariantLightColor -->
+			<SolidColorBrush x:Key="SecondaryVariantLightBrush" Color="{StaticResource SecondaryVariantLightColor}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightHoverBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightFocusedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightPressedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDraggedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightSelectedBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightMediumBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightLowBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDisabledBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantLightDisabledLowBrush" Color="{StaticResource SecondaryVariantLightColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryVariantLightColor-->
+			<!--#region SecondaryVariantDarkColor -->
+			<SolidColorBrush x:Key="SecondaryVariantDarkBrush" Color="{StaticResource SecondaryVariantDarkColor}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkHoverBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkFocusedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkPressedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDraggedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkSelectedBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkMediumBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkLowBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDisabledBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SecondaryVariantDarkDisabledLowBrush" Color="{StaticResource SecondaryVariantDarkColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SecondaryVariantDarkColor-->
+			<!--#region TertiaryColor -->
+			<SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource TertiaryColor}" />
+			<SolidColorBrush x:Key="TertiaryHoverBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="TertiaryFocusedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryPressedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDraggedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="TertiarySelectedBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryMediumBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="TertiaryLowBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDisabledBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="TertiaryDisabledLowBrush" Color="{StaticResource TertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion TertiaryColor-->
+			<!--#region OnTertiaryColor -->
+			<SolidColorBrush x:Key="OnTertiaryBrush" Color="{StaticResource OnTertiaryColor}" />
+			<SolidColorBrush x:Key="OnTertiaryHoverBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryFocusedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryPressedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDraggedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiarySelectedBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryMediumBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryLowBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDisabledBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryDisabledLowBrush" Color="{StaticResource OnTertiaryColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnTertiaryColor-->
+			<!--#region TertiaryContainerColor -->
+			<SolidColorBrush x:Key="TertiaryContainerBrush" Color="{StaticResource TertiaryContainerColor}" />
+			<SolidColorBrush x:Key="TertiaryContainerHoverBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerFocusedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerPressedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDraggedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerSelectedBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerMediumBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerLowBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDisabledBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="TertiaryContainerDisabledLowBrush" Color="{StaticResource TertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion TertiaryContainerColor-->
+			<!--#region OnTertiaryContainerColor -->
+			<SolidColorBrush x:Key="OnTertiaryContainerBrush" Color="{StaticResource OnTertiaryContainerColor}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerHoverBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerFocusedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerPressedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDraggedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerSelectedBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerMediumBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerLowBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDisabledBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnTertiaryContainerDisabledLowBrush" Color="{StaticResource OnTertiaryContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnTertiaryContainerColor-->
+			<!--#region ErrorColor -->
+			<SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
+			<SolidColorBrush x:Key="ErrorHoverBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="ErrorFocusedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="ErrorPressedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="ErrorDraggedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="ErrorSelectedBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="ErrorMediumBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="ErrorLowBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="ErrorDisabledBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="ErrorDisabledLowBrush" Color="{StaticResource ErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion ErrorColor-->
+			<!--#region OnErrorColor -->
+			<SolidColorBrush x:Key="OnErrorBrush" Color="{StaticResource OnErrorColor}" />
+			<SolidColorBrush x:Key="OnErrorHoverBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnErrorFocusedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorPressedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDraggedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorSelectedBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorMediumBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnErrorLowBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDisabledBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnErrorDisabledLowBrush" Color="{StaticResource OnErrorColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnErrorColor-->
+			<!--#region ErrorContainerColor -->
+			<SolidColorBrush x:Key="ErrorContainerBrush" Color="{StaticResource ErrorContainerColor}" />
+			<SolidColorBrush x:Key="ErrorContainerHoverBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerFocusedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerPressedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDraggedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerSelectedBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerMediumBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerLowBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDisabledBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="ErrorContainerDisabledLowBrush" Color="{StaticResource ErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion ErrorContainerColor-->
+			<!--#region OnErrorContainerColor -->
+			<SolidColorBrush x:Key="OnErrorContainerBrush" Color="{StaticResource OnErrorContainerColor}" />
+			<SolidColorBrush x:Key="OnErrorContainerHoverBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerFocusedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerPressedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDraggedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerSelectedBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerMediumBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerLowBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDisabledBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnErrorContainerDisabledLowBrush" Color="{StaticResource OnErrorContainerColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnErrorContainerColor-->
+			<!--#region BackgroundColor -->
+			<SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+			<SolidColorBrush x:Key="BackgroundHoverBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="BackgroundFocusedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundPressedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDraggedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundSelectedBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="BackgroundMediumBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="BackgroundLowBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDisabledBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="BackgroundDisabledLowBrush" Color="{StaticResource BackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion BackgroundColor-->
+			<!--#region OnBackgroundColor -->
+			<SolidColorBrush x:Key="OnBackgroundBrush" Color="{StaticResource OnBackgroundColor}" />
+			<SolidColorBrush x:Key="OnBackgroundHoverBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundFocusedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundPressedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDraggedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundSelectedBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundMediumBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundLowBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDisabledBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnBackgroundDisabledLowBrush" Color="{StaticResource OnBackgroundColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnBackgroundColor-->
+			<!--#region SurfaceColor -->
+			<SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
+			<SolidColorBrush x:Key="SurfaceHoverBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceFocusedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfacePressedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDraggedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceSelectedBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceMediumBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceLowBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDisabledBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceDisabledLowBrush" Color="{StaticResource SurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceColor-->
+			<!--#region OnSurfaceColor -->
+			<SolidColorBrush x:Key="OnSurfaceBrush" Color="{StaticResource OnSurfaceColor}" />
+			<SolidColorBrush x:Key="OnSurfaceHoverBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceFocusedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfacePressedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDraggedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceSelectedBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceMediumBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceLowBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDisabledBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceDisabledLowBrush" Color="{StaticResource OnSurfaceColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceColor-->
+			<!--#region SurfaceVariantColor -->
+			<SolidColorBrush x:Key="SurfaceVariantBrush" Color="{StaticResource SurfaceVariantColor}" />
+			<SolidColorBrush x:Key="SurfaceVariantHoverBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantFocusedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantPressedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDraggedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantSelectedBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantMediumBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantLowBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDisabledBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceVariantDisabledLowBrush" Color="{StaticResource SurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceVariantColor-->
+			<!--#region OnSurfaceVariantColor -->
+			<SolidColorBrush x:Key="OnSurfaceVariantBrush" Color="{StaticResource OnSurfaceVariantColor}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantHoverBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantFocusedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantPressedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDraggedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantSelectedBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantMediumBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantLowBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDisabledBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceVariantDisabledLowBrush" Color="{StaticResource OnSurfaceVariantColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceVariantColor-->
+			<!--#region SurfaceInverseColor -->
+			<SolidColorBrush x:Key="SurfaceInverseBrush" Color="{StaticResource SurfaceInverseColor}" />
+			<SolidColorBrush x:Key="SurfaceInverseHoverBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseFocusedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInversePressedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDraggedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseSelectedBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseMediumBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseLowBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDisabledBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="SurfaceInverseDisabledLowBrush" Color="{StaticResource SurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion SurfaceInverseColor-->
+			<!--#region OnSurfaceInverseColor -->
+			<SolidColorBrush x:Key="OnSurfaceInverseBrush" Color="{StaticResource OnSurfaceInverseColor}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseHoverBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseFocusedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInversePressedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDraggedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseSelectedBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseMediumBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseLowBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDisabledBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OnSurfaceInverseDisabledLowBrush" Color="{StaticResource OnSurfaceInverseColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OnSurfaceInverseColor-->
+			<!--#region OutlineColor -->
+			<SolidColorBrush x:Key="OutlineBrush" Color="{StaticResource OutlineColor}" />
+			<SolidColorBrush x:Key="OutlineHoverBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource HoverOpacity}" />
+			<SolidColorBrush x:Key="OutlineFocusedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource FocusedOpacity}" />
+			<SolidColorBrush x:Key="OutlinePressedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource PressedOpacity}" />
+			<SolidColorBrush x:Key="OutlineDraggedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DraggedOpacity}" />
+			<SolidColorBrush x:Key="OutlineSelectedBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource SelectedOpacity}" />
+			<SolidColorBrush x:Key="OutlineMediumBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource MediumOpacity}" />
+			<SolidColorBrush x:Key="OutlineLowBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource LowOpacity}" />
+			<SolidColorBrush x:Key="OutlineDisabledBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DisabledOpacity}" />
+			<SolidColorBrush x:Key="OutlineDisabledLowBrush" Color="{StaticResource OutlineColor}" Opacity="{StaticResource DisabledLowOpacity}" />
+			<!--#endregion OutlineColor-->
+
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 </ResourceDictionary>

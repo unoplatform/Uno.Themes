@@ -16,13 +16,12 @@
 
 	<!-- Other ToggleButton Variables -->
 	<CornerRadius x:Key="MaterialToggleButtonBorderRadius">4</CornerRadius>
-	<x:Double x:Key="MaterialToggleButtonFontSize">14</x:Double>
 	<Thickness x:Key="MaterialToggleButtonPadding">16,8</Thickness>
 
 	<Style x:Key="MaterialTextToggleButtonStyle"
 		   TargetType="ToggleButton">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialToggleButtonTextLabelBrush}" />
+				Value="{ThemeResource MaterialToggleButtonTextLabelBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="BorderThickness"
@@ -36,7 +35,7 @@
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FontSize"
-				Value="{ThemeResource MaterialToggleButtonFontSize}" />
+				Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 		<Setter Property="Template">
@@ -105,7 +104,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Checked" />
@@ -131,23 +130,23 @@
 
 						<!-- Border for PointedOver State -->
 						<Border x:Name="HoverOverlay"
-								Background="{StaticResource OnSurfaceHoverBrush}"
+								Background="{ThemeResource OnSurfaceHoverBrush}"
 								Opacity="0" />
 
 						<!-- Border for Focus State -->
 						<Border x:Name="FocusedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
+								Background="{ThemeResource OnSurfaceFocusedBrush}"
 								Opacity="0" />
 
 						<!-- Border for Dragged/Selected State -->
 						<!-- Todo: Add ElevatedView on Dragged/Selected state of button -->
 						<Border x:Name="SelectedOverlay"
-								Background="{StaticResource OnSurfaceFocusedBrush}"
+								Background="{ThemeResource OnSurfaceFocusedBrush}"
 								Opacity="0" />
 
 						<!-- Ripple effect -->
 						<um:Ripple x:Name="ContentPresenter"
-								   Feedback="{StaticResource OnSurfaceFocusedBrush}"
+								   Feedback="{ThemeResource OnSurfaceFocusedBrush}"
 								   BorderBrush="{TemplateBinding BorderBrush}"
 								   BorderThickness="{TemplateBinding BorderThickness}"
 								   Content="{TemplateBinding Content}"
@@ -169,7 +168,7 @@
 	<Style x:Key="MaterialIconToggleButtonStyle"
 		   TargetType="ToggleButton">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialToggleButtonForegroundThemeBrush}" />
+				Value="{ThemeResource MaterialToggleButtonForegroundThemeBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="BorderThickness"
@@ -227,7 +226,7 @@
 										<Setter Target="AlternateContentPresenter.Visibility"
 												Value="Collapsed" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Checked">
@@ -265,7 +264,7 @@
 										<Setter Target="AlternateContentPresenter.Visibility"
 												Value="Visible" />
 										<Setter Target="AlternateContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -275,14 +274,14 @@
 						<Ellipse x:Name="HoverOverlay"
 								 HorizontalAlignment="Stretch"
 								 VerticalAlignment="Stretch"
-								 Fill="{StaticResource PrimaryHoverBrush}"
+								 Fill="{ThemeResource PrimaryHoverBrush}"
 								 Opacity="0" />
 
 						<!-- Ellipse for Pressed State -->
 						<Ellipse x:Name="PressedOverlay"
 								 HorizontalAlignment="Stretch"
 								 VerticalAlignment="Stretch"
-								 Fill="{StaticResource PrimaryPressedBrush}"
+								 Fill="{ThemeResource PrimaryPressedBrush}"
 								 Opacity="0" />
 
 						<!-- Content -->

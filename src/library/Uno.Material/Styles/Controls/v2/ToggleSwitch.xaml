@@ -46,32 +46,23 @@
 	<SolidColorBrush x:Key="MaterialPrimaryVariantLowThumbColorBrush"
 					 Color="{ThemeResource MaterialPrimaryVariantLowThumbColor}" />
 
-	<!-- ToggleSwitch label based on Body Small Typo -->
-	<StaticResource x:Key="MaterialToggleSwitchFontFamily"
-					ResourceKey="MaterialBodySmallFontFamily" />
-	<StaticResource x:Key="MaterialToggleSwitchFontWeight"
-					ResourceKey="MaterialBodySmallFontWeight" />
-	<StaticResource x:Key="MaterialToggleSwitchFontSize"
-					ResourceKey="MaterialBodySmallFontSize" />
-	<StaticResource x:Key="MaterialToggleSwitchCharacterSpacing"
-					ResourceKey="MaterialBodySmallCharacterSpacing" />
 
 	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
 					  TargetType="ToggleSwitch">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
+				Value="{ThemeResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
+				Value="{ThemeResource MaterialToggleSwitchOnBackgroundBrush}" />
 
 		<!-- Start: Body Small Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialToggleSwitchFontFamily}" />
+				Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialToggleSwitchFontWeight}" />
+				Value="{ThemeResource BodySmallFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialToggleSwitchFontSize}" />
+				Value="{ThemeResource BodySmallFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialToggleSwitchCharacterSpacing}" />
+				Value="{ThemeResource BodySmallCharacterSpacing}" />
 		<!-- End: Body Small Typo -->
 
 		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
@@ -131,36 +122,36 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HighlightBorder"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
+																	Value="{ThemeResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
+																	Value="{ThemeResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource MaterialToggleSwitchOffButtonBrush}" />
+																	Value="{ThemeResource MaterialToggleSwitchOffButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource MaterialToggleSwitchOffButtonBrush}" />
+																	Value="{ThemeResource MaterialToggleSwitchOffButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOffStateOverlay"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource MaterialToggleSwitchOnLowButtonBrush}" />
+																	Value="{ThemeResource MaterialToggleSwitchOnLowButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnStateOverlay"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource MaterialToggleSwitchOnLowButtonBrush}" />
+																	Value="{ThemeResource MaterialToggleSwitchOnLowButtonBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -381,10 +372,10 @@
 										  x:Name="HeaderContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
-										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
-										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  Foreground="{ThemeResource OnSurfaceMediumBrush}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontWeight="{TemplateBinding FontWeight}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -401,7 +392,7 @@
 								   Width="34"
 								   Height="14"
 								   Margin="10,0"
-								   Fill="{StaticResource MaterialToggleSwitchOffBackgroundBrush}"
+								   Fill="{ThemeResource MaterialToggleSwitchOffBackgroundBrush}"
 								   RadiusX="7"
 								   RadiusY="7" />
 
@@ -460,7 +451,7 @@
 									<Ellipse x:Name="SwitchKnobOff"
 											 Width="20"
 											 Height="20"
-											 Fill="{StaticResource MaterialToggleSwitchOffButtonBrush}" />
+											 Fill="{ThemeResource MaterialToggleSwitchOffButtonBrush}" />
 
 									<Ellipse x:Name="SwitchKnobOffStateOverlay"
 											 Width="20"
@@ -487,7 +478,7 @@
 	<ios:Style x:Key="MaterialToggleSwitchStyle"
 			   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -495,7 +486,7 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
+				Value="{ThemeResource MaterialToggleSwitchOnButtonBrush}" />
 
 		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
 		<Setter Property="MinWidth"
@@ -518,10 +509,10 @@
 						<ContentPresenter x:Name="HeaderContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
-										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
-										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  Foreground="{ThemeResource OnSurfaceMediumBrush}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontWeight="{TemplateBinding FontWeight}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -539,9 +530,9 @@
 	<android:Style x:Key="MaterialToggleSwitchStyle"
 				   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialToggleSwitchOnButtonBrush}" />
+				Value="{ThemeResource MaterialToggleSwitchOnButtonBrush}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -584,7 +575,7 @@
 								<VisualState x:Name="Off">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
-												Value="{StaticResource MaterialToggleSwitchOffBackgroundBrush}" />
+												Value="{ThemeResource MaterialToggleSwitchOffBackgroundBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 												Value="Collapsed" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -595,7 +586,7 @@
 								<VisualState x:Name="On">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
-												Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
+												Value="{ThemeResource MaterialToggleSwitchOnBackgroundBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 												Value="Visible" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -615,10 +606,10 @@
 										  x:Name="HeaderContentPresenter"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{StaticResource OnSurfaceMediumBrush}"
-										  FontSize="{StaticResource MaterialBodyMediumFontSize}"
-										  FontWeight="{StaticResource MaterialBodyMediumFontWeight}"
-										  FontFamily="{StaticResource MaterialBodyMediumFontFamily}"
+										  Foreground="{ThemeResource OnSurfaceMediumBrush}"
+										  FontSize="{TemplateBinding FontSize}"
+										  FontWeight="{TemplateBinding FontWeight}"
+										  FontFamily="{TemplateBinding FontFamily}"
 										  Margin="{StaticResource MaterialToggleSwitchHeaderMargin}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -641,8 +632,8 @@
 							<!-- Provides a disabled state for an off switch -->
 							<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
 												  Enabled="{TemplateBinding IsEnabled}"
-												  ThumbTint="{StaticResource MaterialPrimaryVariantLowThumbColorBrush}"
-												  TrackTint="{StaticResource MaterialToggleSwitchOnLowBackgroundBrush}" />
+												  ThumbTint="{ThemeResource MaterialPrimaryVariantLowThumbColorBrush}"
+												  TrackTint="{ThemeResource MaterialToggleSwitchOnLowBackgroundBrush}" />
 						</Grid>
 						<Grid Grid.Column="1"
 							  x:Name="SwitchGrid">

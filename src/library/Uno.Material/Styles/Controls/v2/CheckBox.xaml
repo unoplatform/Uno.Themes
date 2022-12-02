@@ -24,36 +24,27 @@
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="{StaticResource LowOpacity}" />
 
-	<!-- CheckBox label based on Body Small Typo -->
-	<StaticResource x:Key="MaterialCheckBoxFontFamily"
-					ResourceKey="MaterialBodySmallFontFamily" />
-	<StaticResource x:Key="MaterialCheckBoxFontWeight"
-					ResourceKey="MaterialBodySmallFontWeight" />
-	<StaticResource x:Key="MaterialCheckBoxFontSize"
-					ResourceKey="MaterialBodySmallFontSize" />
-	<StaticResource x:Key="MaterialCheckBoxCharacterSpacing"
-					ResourceKey="MaterialBodySmallCharacterSpacing" />
 
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="Background"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnPrimaryBrush}" />
+				Value="{ThemeResource OnPrimaryBrush}" />
 
 		<!--Start: Body Small Typo-->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialCheckBoxFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialCheckBoxFontWeight}" />
+				Value="{ThemeResource BodySmallFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialCheckBoxFontSize}" />
+				Value="{ThemeResource BodySmallFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialCheckBoxCharacterSpacing}" />
+				Value="{ThemeResource BodySmallCharacterSpacing}" />
 		<!--End: Body Small Typo-->
 
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialCheckBoxBorderBrush}" />
+				Value="{ThemeResource MaterialCheckBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
 				Value="2" />
 		<Setter Property="Padding"
@@ -492,7 +483,7 @@
 								 Stretch="Uniform"
 								 Width="{StaticResource FocusAreaSize}"
 								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource MaterialCheckBoxPressedBrush}"
+								 Fill="{ThemeResource MaterialCheckBoxPressedBrush}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -540,7 +531,7 @@
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
-										  Foreground="{StaticResource OnSurfaceMediumBrush}"
+										  Foreground="{ThemeResource OnSurfaceMediumBrush}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -557,8 +548,8 @@
 		   TargetType="CheckBox"
 		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
 		<Setter Property="Background"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{ThemeResource SecondaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSecondaryBrush}" />
+				Value="{ThemeResource OnSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

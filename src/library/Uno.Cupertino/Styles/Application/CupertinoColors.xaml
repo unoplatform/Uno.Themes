@@ -1,90 +1,255 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					x:Class="Uno.Cupertino.CupertinoColors">
-	<!-- 
-	
-	For more information on the color system, consult these pages
-	https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/
-	https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/
-	
+	<!--
+		For more information on the color system, consult these pages
+		https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/
+		https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/dark-mode/
 	-->
-	
-	<!-- Basic colors -->
-	<SolidColorBrush x:Key="CupertinoBlueBrush"
-					 Color="{ThemeResource CupertinoBlueColor}" />
-	<SolidColorBrush x:Key="CupertinoGreenBrush"
-					 Color="{ThemeResource CupertinoGreenColor}" />
-	<SolidColorBrush x:Key="CupertinoIndigoBrush"
-					 Color="{ThemeResource CupertinoIndigoColor}" />
-	<SolidColorBrush x:Key="CupertinoOrangeBrush"
-					 Color="{ThemeResource CupertinoOrangeColor}" />
-	<SolidColorBrush x:Key="CupertinoPinkBrush"
-					 Color="{ThemeResource CupertinoPinkColor}" />
-	<SolidColorBrush x:Key="CupertinoPurpleBrush"
-					 Color="{ThemeResource CupertinoPurpleColor}" />
-	<SolidColorBrush x:Key="CupertinoRedBrush"
-					 Color="{ThemeResource CupertinoRedColor}" />
-	<SolidColorBrush x:Key="CupertinoTealBrush"
-					 Color="{ThemeResource CupertinoTealColor}" />
-	<SolidColorBrush x:Key="CupertinoYellowBrush"
-					 Color="{ThemeResource CupertinoYellowColor}" />
-	<SolidColorBrush x:Key="CupertinoWhiteBrush"
-					 Color="{ThemeResource CupertinoWhiteColor}" />
-	<SolidColorBrush x:Key="CupertinoBlackBrush"
-					 Color="{ThemeResource CupertinoBlackColor}" />
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
 
-	<!-- Types of gray colors -->
-	<SolidColorBrush x:Key="CupertinoPrimaryGrayBrush"
-					 Color="{ThemeResource CupertinoPrimaryGrayColor}" />
-	<SolidColorBrush x:Key="CupertinoSecondaryGrayBrush"
-					 Color="{ThemeResource CupertinoSecondaryGrayColor}" />
-	<SolidColorBrush x:Key="CupertinoTertiaryGrayBrush"
-					 Color="{ThemeResource CupertinoTertiaryGrayColor}" />
-	<SolidColorBrush x:Key="CupertinoQuaternaryGrayBrush"
-					 Color="{ThemeResource CupertinoQuaternaryGrayColor}" />
-	<SolidColorBrush x:Key="CupertinoQuinaryGrayBrush"
-					 Color="{ThemeResource CupertinoQuinaryGrayColor}" />
-	<SolidColorBrush x:Key="CupertinoSenaryGrayBrush"
-					 Color="{ThemeResource CupertinoSenaryGrayColor}" />
+			<!--  Basic colors  -->
+			<SolidColorBrush x:Key="CupertinoBlueBrush"
+							 Color="{StaticResource CupertinoBlueColor}" />
+			<SolidColorBrush x:Key="CupertinoGreenBrush"
+							 Color="{StaticResource CupertinoGreenColor}" />
+			<SolidColorBrush x:Key="CupertinoIndigoBrush"
+							 Color="{StaticResource CupertinoIndigoColor}" />
+			<SolidColorBrush x:Key="CupertinoOrangeBrush"
+							 Color="{StaticResource CupertinoOrangeColor}" />
+			<SolidColorBrush x:Key="CupertinoPinkBrush"
+							 Color="{StaticResource CupertinoPinkColor}" />
+			<SolidColorBrush x:Key="CupertinoPurpleBrush"
+							 Color="{StaticResource CupertinoPurpleColor}" />
+			<SolidColorBrush x:Key="CupertinoRedBrush"
+							 Color="{StaticResource CupertinoRedColor}" />
+			<SolidColorBrush x:Key="CupertinoTealBrush"
+							 Color="{StaticResource CupertinoTealColor}" />
+			<SolidColorBrush x:Key="CupertinoYellowBrush"
+							 Color="{StaticResource CupertinoYellowColor}" />
+			<SolidColorBrush x:Key="CupertinoWhiteBrush"
+							 Color="{StaticResource CupertinoWhiteColor}" />
+			<SolidColorBrush x:Key="CupertinoBlackBrush"
+							 Color="{StaticResource CupertinoBlackColor}" />
 
-	<!-- Controls colors -->
-	<SolidColorBrush x:Key="CupertinoLabelBrush"
-					 Color="{ThemeResource LabelColor}" />
-	<SolidColorBrush x:Key="CupertinoSecondaryLabelBrush"
-					 Color="{ThemeResource SecondaryLabelColor}" />
-	<SolidColorBrush x:Key="CupertinoTertiaryLabelBrush"
-					 Color="{ThemeResource TertiaryLabelColor}" />
-	<SolidColorBrush x:Key="CupertinoQuaternaryLabelBrush"
-					 Color="{ThemeResource QuaternaryLabelColor}" />
-	<SolidColorBrush x:Key="CupertinoSystemFillBrush"
-					 Color="{ThemeResource SystemFillColor}" />
-	<SolidColorBrush x:Key="CupertinoSecondarySystemFillBrush"
-					 Color="{ThemeResource SecondarySystemFillColor}" />
-	<SolidColorBrush x:Key="CupertinoTertiarySystemFillBrush"
-					 Color="{ThemeResource TertiarySystemFillColor}" />
-	<SolidColorBrush x:Key="CupertinoQuaternarySystemFillBrush"
-					 Color="{ThemeResource QuaternarySystemFillColor}" />
-	<SolidColorBrush x:Key="CupertinoPlaceholderTextBrush"
-					 Color="{ThemeResource PlaceholderTextColor}" />
-	<SolidColorBrush x:Key="CupertinoSystemBackgroundBrush"
-					 Color="{ThemeResource SystemBackgroundColor}" />
-	<SolidColorBrush x:Key="CupertinoSecondarySystemBackgroundBrush"
-					 Color="{ThemeResource SecondarySystemBackgroundColor}" />
-	<SolidColorBrush x:Key="CupertinoTertiarySystemBackgroundBrush"
-					 Color="{ThemeResource TertiarySystemBackgroundColor}" />
-	<SolidColorBrush x:Key="CupertinoSystemGroupedBackgroundBrush"
-					 Color="{ThemeResource SystemGroupedBackgroundColor}" />
-	<SolidColorBrush x:Key="CupertinoSecondarySystemGroupedBackgroundBrush"
-					 Color="{ThemeResource SecondarySystemGroupedBackgroundColor}" />
-	<SolidColorBrush x:Key="CupertinoTertiarySystemGroupedBackgroundBrush"
-					 Color="{ThemeResource TertiarySystemGroupedBackgroundColor}" />
-	<SolidColorBrush x:Key="CupertinoSeparatorBrush"
-					 Color="{ThemeResource SeparatorColor}" />
-	<SolidColorBrush x:Key="CupertinoOpaqueSeparatorBrush"
-					 Color="{ThemeResource OpaqueSeparatorColor}" />
-	<SolidColorBrush x:Key="CupertinoLinkBrush"
-					 Color="{ThemeResource LinkColor}" />
-	<SolidColorBrush x:Key="RadioButtonBackgroundBrush"
-					 Color="{ThemeResource RadioButtonBackgroundColor}" />
+			<!--  Types of gray colors  -->
+			<SolidColorBrush x:Key="CupertinoPrimaryGrayBrush"
+							 Color="{StaticResource CupertinoPrimaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondaryGrayBrush"
+							 Color="{StaticResource CupertinoSecondaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiaryGrayBrush"
+							 Color="{StaticResource CupertinoTertiaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternaryGrayBrush"
+							 Color="{StaticResource CupertinoQuaternaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoQuinaryGrayBrush"
+							 Color="{StaticResource CupertinoQuinaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoSenaryGrayBrush"
+							 Color="{StaticResource CupertinoSenaryGrayColor}" />
+
+			<!--  Controls colors  -->
+			<SolidColorBrush x:Key="CupertinoLabelBrush"
+							 Color="{StaticResource LabelColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondaryLabelBrush"
+							 Color="{StaticResource SecondaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiaryLabelBrush"
+							 Color="{StaticResource TertiaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternaryLabelBrush"
+							 Color="{StaticResource QuaternaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemFillBrush"
+							 Color="{StaticResource SystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemFillBrush"
+							 Color="{StaticResource SecondarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemFillBrush"
+							 Color="{StaticResource TertiarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternarySystemFillBrush"
+							 Color="{StaticResource QuaternarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoPlaceholderTextBrush"
+							 Color="{StaticResource PlaceholderTextColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemBackgroundBrush"
+							 Color="{StaticResource SystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemBackgroundBrush"
+							 Color="{StaticResource SecondarySystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemBackgroundBrush"
+							 Color="{StaticResource TertiarySystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemGroupedBackgroundBrush"
+							 Color="{StaticResource SystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemGroupedBackgroundBrush"
+							 Color="{StaticResource SecondarySystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemGroupedBackgroundBrush"
+							 Color="{StaticResource TertiarySystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSeparatorBrush"
+							 Color="{StaticResource SeparatorColor}" />
+			<SolidColorBrush x:Key="CupertinoOpaqueSeparatorBrush"
+							 Color="{StaticResource OpaqueSeparatorColor}" />
+			<SolidColorBrush x:Key="CupertinoLinkBrush"
+							 Color="{StaticResource LinkColor}" />
+			<SolidColorBrush x:Key="RadioButtonBackgroundBrush"
+							 Color="{StaticResource RadioButtonBackgroundColor}" />
+
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Dark">
+			
+			<!--  Basic colors  -->
+			<SolidColorBrush x:Key="CupertinoBlueBrush"
+							 Color="{StaticResource CupertinoBlueColor}" />
+			<SolidColorBrush x:Key="CupertinoGreenBrush"
+							 Color="{StaticResource CupertinoGreenColor}" />
+			<SolidColorBrush x:Key="CupertinoIndigoBrush"
+							 Color="{StaticResource CupertinoIndigoColor}" />
+			<SolidColorBrush x:Key="CupertinoOrangeBrush"
+							 Color="{StaticResource CupertinoOrangeColor}" />
+			<SolidColorBrush x:Key="CupertinoPinkBrush"
+							 Color="{StaticResource CupertinoPinkColor}" />
+			<SolidColorBrush x:Key="CupertinoPurpleBrush"
+							 Color="{StaticResource CupertinoPurpleColor}" />
+			<SolidColorBrush x:Key="CupertinoRedBrush"
+							 Color="{StaticResource CupertinoRedColor}" />
+			<SolidColorBrush x:Key="CupertinoTealBrush"
+							 Color="{StaticResource CupertinoTealColor}" />
+			<SolidColorBrush x:Key="CupertinoYellowBrush"
+							 Color="{StaticResource CupertinoYellowColor}" />
+			<SolidColorBrush x:Key="CupertinoWhiteBrush"
+							 Color="{StaticResource CupertinoWhiteColor}" />
+			<SolidColorBrush x:Key="CupertinoBlackBrush"
+							 Color="{StaticResource CupertinoBlackColor}" />
+
+			<!--  Types of gray colors  -->
+			<SolidColorBrush x:Key="CupertinoPrimaryGrayBrush"
+							 Color="{StaticResource CupertinoPrimaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondaryGrayBrush"
+							 Color="{StaticResource CupertinoSecondaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiaryGrayBrush"
+							 Color="{StaticResource CupertinoTertiaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternaryGrayBrush"
+							 Color="{StaticResource CupertinoQuaternaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoQuinaryGrayBrush"
+							 Color="{StaticResource CupertinoQuinaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoSenaryGrayBrush"
+							 Color="{StaticResource CupertinoSenaryGrayColor}" />
+
+			<!--  Controls colors  -->
+			<SolidColorBrush x:Key="CupertinoLabelBrush"
+							 Color="{StaticResource LabelColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondaryLabelBrush"
+							 Color="{StaticResource SecondaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiaryLabelBrush"
+							 Color="{StaticResource TertiaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternaryLabelBrush"
+							 Color="{StaticResource QuaternaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemFillBrush"
+							 Color="{StaticResource SystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemFillBrush"
+							 Color="{StaticResource SecondarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemFillBrush"
+							 Color="{StaticResource TertiarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternarySystemFillBrush"
+							 Color="{StaticResource QuaternarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoPlaceholderTextBrush"
+							 Color="{StaticResource PlaceholderTextColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemBackgroundBrush"
+							 Color="{StaticResource SystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemBackgroundBrush"
+							 Color="{StaticResource SecondarySystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemBackgroundBrush"
+							 Color="{StaticResource TertiarySystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemGroupedBackgroundBrush"
+							 Color="{StaticResource SystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemGroupedBackgroundBrush"
+							 Color="{StaticResource SecondarySystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemGroupedBackgroundBrush"
+							 Color="{StaticResource TertiarySystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSeparatorBrush"
+							 Color="{StaticResource SeparatorColor}" />
+			<SolidColorBrush x:Key="CupertinoOpaqueSeparatorBrush"
+							 Color="{StaticResource OpaqueSeparatorColor}" />
+			<SolidColorBrush x:Key="CupertinoLinkBrush"
+							 Color="{StaticResource LinkColor}" />
+			<SolidColorBrush x:Key="RadioButtonBackgroundBrush"
+							 Color="{StaticResource RadioButtonBackgroundColor}" />
+
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="HighContrast">
+			
+			<!--  Basic colors  -->
+			<SolidColorBrush x:Key="CupertinoBlueBrush"
+							 Color="{StaticResource CupertinoBlueColor}" />
+			<SolidColorBrush x:Key="CupertinoGreenBrush"
+							 Color="{StaticResource CupertinoGreenColor}" />
+			<SolidColorBrush x:Key="CupertinoIndigoBrush"
+							 Color="{StaticResource CupertinoIndigoColor}" />
+			<SolidColorBrush x:Key="CupertinoOrangeBrush"
+							 Color="{StaticResource CupertinoOrangeColor}" />
+			<SolidColorBrush x:Key="CupertinoPinkBrush"
+							 Color="{StaticResource CupertinoPinkColor}" />
+			<SolidColorBrush x:Key="CupertinoPurpleBrush"
+							 Color="{StaticResource CupertinoPurpleColor}" />
+			<SolidColorBrush x:Key="CupertinoRedBrush"
+							 Color="{StaticResource CupertinoRedColor}" />
+			<SolidColorBrush x:Key="CupertinoTealBrush"
+							 Color="{StaticResource CupertinoTealColor}" />
+			<SolidColorBrush x:Key="CupertinoYellowBrush"
+							 Color="{StaticResource CupertinoYellowColor}" />
+			<SolidColorBrush x:Key="CupertinoWhiteBrush"
+							 Color="{StaticResource CupertinoWhiteColor}" />
+			<SolidColorBrush x:Key="CupertinoBlackBrush"
+							 Color="{StaticResource CupertinoBlackColor}" />
+
+			<!--  Types of gray colors  -->
+			<SolidColorBrush x:Key="CupertinoPrimaryGrayBrush"
+							 Color="{StaticResource CupertinoPrimaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondaryGrayBrush"
+							 Color="{StaticResource CupertinoSecondaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiaryGrayBrush"
+							 Color="{StaticResource CupertinoTertiaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternaryGrayBrush"
+							 Color="{StaticResource CupertinoQuaternaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoQuinaryGrayBrush"
+							 Color="{StaticResource CupertinoQuinaryGrayColor}" />
+			<SolidColorBrush x:Key="CupertinoSenaryGrayBrush"
+							 Color="{StaticResource CupertinoSenaryGrayColor}" />
+
+			<!--  Controls colors  -->
+			<SolidColorBrush x:Key="CupertinoLabelBrush"
+							 Color="{StaticResource LabelColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondaryLabelBrush"
+							 Color="{StaticResource SecondaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiaryLabelBrush"
+							 Color="{StaticResource TertiaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternaryLabelBrush"
+							 Color="{StaticResource QuaternaryLabelColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemFillBrush"
+							 Color="{StaticResource SystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemFillBrush"
+							 Color="{StaticResource SecondarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemFillBrush"
+							 Color="{StaticResource TertiarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoQuaternarySystemFillBrush"
+							 Color="{StaticResource QuaternarySystemFillColor}" />
+			<SolidColorBrush x:Key="CupertinoPlaceholderTextBrush"
+							 Color="{StaticResource PlaceholderTextColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemBackgroundBrush"
+							 Color="{StaticResource SystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemBackgroundBrush"
+							 Color="{StaticResource SecondarySystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemBackgroundBrush"
+							 Color="{StaticResource TertiarySystemBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSystemGroupedBackgroundBrush"
+							 Color="{StaticResource SystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSecondarySystemGroupedBackgroundBrush"
+							 Color="{StaticResource SecondarySystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoTertiarySystemGroupedBackgroundBrush"
+							 Color="{StaticResource TertiarySystemGroupedBackgroundColor}" />
+			<SolidColorBrush x:Key="CupertinoSeparatorBrush"
+							 Color="{StaticResource SeparatorColor}" />
+			<SolidColorBrush x:Key="CupertinoOpaqueSeparatorBrush"
+							 Color="{StaticResource OpaqueSeparatorColor}" />
+			<SolidColorBrush x:Key="CupertinoLinkBrush"
+							 Color="{StaticResource LinkColor}" />
+			<SolidColorBrush x:Key="RadioButtonBackgroundBrush"
+							 Color="{StaticResource RadioButtonBackgroundColor}" />
+
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 </ResourceDictionary>

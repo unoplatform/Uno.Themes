@@ -41,13 +41,13 @@
 		   TargetType="Slider">
 
 		<Setter Property="Background"
-				Value="{StaticResource CupertinoSliderTrackBrush}" />
+				Value="{ThemeResource CupertinoSliderTrackBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoSliderActiveTrackBrush}" />
+				Value="{ThemeResource CupertinoSliderActiveTrackBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource ControlContentThemeFontSize}" />
 		<Setter Property="ManipulationMode"
@@ -222,7 +222,7 @@
 
 									<Thumb x:Name="HorizontalThumb"
 										   Style="{StaticResource CupertinoSliderThumbStyle}"
-										   Background="{StaticResource CupertinoSliderThumbBrush}"
+										   Background="{ThemeResource CupertinoSliderThumbBrush}"
 										   DataContext="{TemplateBinding Value}"
 										   Height="28"
 										   Width="28"
@@ -304,7 +304,7 @@
 													  ShadowColor="{StaticResource ShadowColor}">
 									<Thumb x:Name="VerticalThumb"
 										   Style="{StaticResource CupertinoSliderThumbStyle}"
-										   Background="{StaticResource CupertinoSliderThumbBrush}"
+										   Background="{ThemeResource CupertinoSliderThumbBrush}"
 										   DataContext="{TemplateBinding Value}"
 										   Width="28"
 										   Height="28"
@@ -324,6 +324,6 @@
 		   TargetType="Slider">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoSecondaryBrush}" />
+				Value="{ThemeResource CupertinoSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>
