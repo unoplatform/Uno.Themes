@@ -10,7 +10,7 @@ namespace Uno.Material
 {
 	public sealed partial class MaterialFonts : ResourceDictionary
 	{
-		private static ResourceDictionary FontOverride;
+		internal static string FontOverrideSource;
 
 		public string OverrideSource
 		{
@@ -25,43 +25,20 @@ namespace Uno.Material
 				typeof(MaterialFonts),
 				new PropertyMetadata(null, OnFontOverrideSourcePropertyChanged));
 
-		public ResourceDictionary OverrideDictionary
-		{
-			get => (ResourceDictionary)GetValue(OverrideDictionaryProperty);
-			set => SetValue(OverrideDictionaryProperty, value);
-		}
-
-		public static DependencyProperty OverrideDictionaryProperty { get; } =
-			DependencyProperty.Register(
-				nameof(OverrideDictionary),
-				typeof(ResourceDictionary),
-				typeof(MaterialFonts),
-				new PropertyMetadata(null, OnOverrideChanged));
-
 		private static void OnFontOverrideSourcePropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
 		{
-			if (dependencyObject is MaterialFonts fonts && args.NewValue is string sourceUri)
-			{
-				fonts.OverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
-			}
-		}
-
-		private static void OnOverrideChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
-		{
-			if (dependencyObject is MaterialFonts fonts && args.NewValue is ResourceDictionary overrides)
-			{
-				fonts.MergedDictionaries.Add(overrides);
-			}
+			FontOverrideSource = args.NewValue as string;
 		}
 
 		public MaterialFonts()
 		{
 			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") });
 
-			//if (FontOverride is { } fontOverride)
-			//{
-			//	MergedDictionaries.Add(fontOverride);
-			//}
+			var overrideSource = FontOverrideSource;
+			if (!string.IsNullOrWhiteSpace(overrideSource))
+			{
+				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(overrideSource) });
+			}
 		}
 	}
 }
