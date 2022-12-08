@@ -12,12 +12,6 @@
 	<SolidColorBrush x:Key="CupertinoSliderActiveTrackBrush"
 					 Color="{ThemeResource CupertinoBlueColor}" />
 
-	<StaticResource x:Key="CupertinoSliderTickBarFill"
-					ResourceKey="CupertinoPrimaryGrayColor" />
-
-	<StaticResource x:Key="CupertinoSliderInlineTickBarFill"
-					ResourceKey="CupertinoBlueColor" />
-
 	<!--  Cupertino Slider Thumb Style  -->
 	<Style x:Key="CupertinoSliderThumbStyle"
 		   TargetType="Thumb">
@@ -194,7 +188,7 @@
 								<!--  HorizontalInlineTickBar  -->
 								<TickBar x:Name="HorizontalInlineTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
+										 Fill="{StaticResource CupertinoBlueColor}"
 										 Height="4"
 										 Grid.Row="1"
 										 Grid.ColumnSpan="3" />
@@ -277,7 +271,7 @@
 								<!--  VerticalInlineTickBar  -->
 								<TickBar x:Name="VerticalInlineTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
+										 Fill="{StaticResource CupertinoBlueColor}"
 										 Width="4"
 										 Grid.Column="1"
 										 Grid.RowSpan="3" />

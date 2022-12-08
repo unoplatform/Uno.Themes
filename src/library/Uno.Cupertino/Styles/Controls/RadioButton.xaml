@@ -13,12 +13,6 @@
 	<x:Double x:Key="RadioBorderCheckedThickness">8</x:Double>
 	<FontFamily x:Key="CupertinoRadioButtonFontFamily">SF Pro</FontFamily>
 
-	<StaticResource x:Key="CupertinoRadioButtonBorderBrush"
-					ResourceKey="CupertinoPrimaryGrayBrush" />
-
-	<StaticResource x:Key="CupertinoRadioButtonCheckedBrush"
-					ResourceKey="CupertinoBlueBrush" />
-
 	<Style x:Key="CupertinoRadioButtonStyle"
 		   TargetType="RadioButton">
 		<Setter Property="FontFamily"
@@ -124,7 +118,7 @@
 									 VerticalAlignment="Stretch"
 									 Stretch="Uniform"
 									 UseLayoutRounding="False"
-									 Stroke="{ThemeResource CupertinoRadioButtonCheckedBrush}"
+									 Stroke="{ThemeResource CupertinoBlueBrush}"
 									 StrokeThickness="{StaticResource RadioBorderCheckedThickness}"
 									 Opacity="0" />
 
@@ -144,7 +138,7 @@
 									 Stretch="Uniform"
 									 UseLayoutRounding="False"
 									 Fill="{ThemeResource RadioButtonBackgroundBrush}"
-									 Stroke="{ThemeResource CupertinoRadioButtonBorderBrush}"
+									 Stroke="{ThemeResource CupertinoPrimaryGrayBrush}"
 									 StrokeThickness="{StaticResource RadioBorderThickness}"
 									 Margin="1" />
 						</Grid>

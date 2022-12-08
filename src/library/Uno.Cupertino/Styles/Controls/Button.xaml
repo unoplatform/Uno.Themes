@@ -8,25 +8,13 @@
 	<Thickness x:Key="CupertinoButtonPadding">20</Thickness>
 	<CornerRadius x:Key="CupertinoButtonCornerRadius">8</CornerRadius>
 	<x:Double x:Key="CupertinoButtonFontSize">14</x:Double>
-	<StaticResource x:Key="CupertinoContainedButtonBackgroundBrush"
-					ResourceKey="CupertinoBlueBrush" />
-	<StaticResource x:Key="CupertinoContainedButtonForegroundBrush"
-					ResourceKey="CupertinoWhiteBrush" />
-	<StaticResource x:Key="CupertinoOutlinedButtonBrush"
-					ResourceKey="CupertinoBlueBrush" />
-	<StaticResource x:Key="CupertinoOutlinedButtonForegroundBrush"
-					ResourceKey="CupertinoBlueBrush" />
-	<StaticResource x:Key="CupertinoOutlinedButtonBackgroundBrush"
-					ResourceKey="CupertinoSystemBackgroundBrush" />
-	<StaticResource x:Key="CupertinoDisabledButtonBrush"
-					ResourceKey="CupertinoPrimaryGrayColor" />
 
 	<!--  Styles  -->
 	<Style x:Key="CupertinoButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoOutlinedButtonForegroundBrush}" />
+				Value="{ThemeResource CupertinoBlueBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="BorderThickness"
@@ -85,7 +73,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource CupertinoDisabledButtonBrush}" />
+												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -138,9 +126,9 @@
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{ThemeResource CupertinoContainedButtonForegroundBrush}" />
+				Value="{ThemeResource CupertinoWhiteBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource CupertinoContainedButtonBackgroundBrush}" />
+				Value="{ThemeResource CupertinoBlueBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Padding"
@@ -201,9 +189,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{ThemeResource CupertinoDisabledButtonBrush}" />
+												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource CupertinoContainedButtonForegroundBrush}" />
+												Value="{ThemeResource CupertinoWhiteBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
