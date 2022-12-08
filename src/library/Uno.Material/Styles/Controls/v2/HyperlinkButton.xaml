@@ -8,13 +8,13 @@
 		   TargetType="HyperlinkButton">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="FontSize"
-				Value="14" />
+				Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="HyperlinkButton">
@@ -42,7 +42,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -80,7 +80,7 @@
 		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource SecondaryBrush}" />
+				Value="{ThemeResource SecondaryBrush}" />
 	</Style>
 
 </ResourceDictionary>

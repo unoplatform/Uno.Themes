@@ -19,20 +19,11 @@
 					 Opacity="0.12"
 					 Color="{ThemeResource OnSurfaceColor}" />
 
-	<!-- TextBox text based on Body Large Typo -->
-	<StaticResource x:Key="MaterialTextBoxFontFamily"
-					ResourceKey="MaterialBodyLargeFontFamily" />
-	<StaticResource x:Key="MaterialTextBoxFontWeight"
-					ResourceKey="MaterialBodyLargeFontWeight" />
-	<StaticResource x:Key="MaterialTextBoxFontSize"
-					ResourceKey="MaterialBodyLargeFontSize" />
-	<StaticResource x:Key="MaterialTextBoxCharacterSpacing"
-					ResourceKey="MaterialBodyLargeCharacterSpacing" />
 
 	<Style x:Key="MaterialDeleteButtonStyle"
 		   TargetType="Button">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -71,13 +62,13 @@
 	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceVariantBrush}" />
+				Value="{ThemeResource OnSurfaceVariantBrush}" />
 		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource OnSurfaceVariantBrush}" />
+				Value="{ThemeResource OnSurfaceVariantBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource SurfaceVariantBrush}" />
+				Value="{ThemeResource SurfaceVariantBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OnSurfaceLowBrush}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Left" />
 		<Setter Property="VerticalContentAlignment"
@@ -87,13 +78,13 @@
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialTextBoxFontFamily}" />
+				Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialTextBoxFontWeight}" />
+				Value="{ThemeResource BodyLargeFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialTextBoxFontSize}" />
+				Value="{ThemeResource BodyLargeFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialTextBoxCharacterSpacing}" />
+				Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<macos:Setter Property="Padding"
@@ -122,7 +113,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{ThemeResource OnSurfaceBrush}" />
 										<Setter Target="NormalBorder.Height"
 												Value="2" />
 									</VisualState.Setters>
@@ -133,24 +124,24 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="ContentElement.Opacity"
 												Value="{StaticResource DisabledOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 										<Setter Target="NormalBorder.Height"
 												Value="2" />
 										<Setter Target="NormalBorder.Fill"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 									</VisualState.Setters>
 									<Storyboard>
 
@@ -275,7 +266,7 @@
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
 									Margin="8,0,0,0"
-									Foreground="{StaticResource OnSurfaceVariantBrush}"
+									Foreground="{ThemeResource OnSurfaceVariantBrush}"
 									IsTabStop="False"
 									Style="{StaticResource MaterialDeleteButtonStyle}"
 									VerticalAlignment="Stretch"
@@ -289,7 +280,7 @@
 								   VerticalAlignment="Bottom" />
 
 						<Rectangle x:Name="FocusedBorder"
-								   Fill="{StaticResource PrimaryBrush}"
+								   Fill="{ThemeResource PrimaryBrush}"
 								   Height="{StaticResource TextBoxFocusStrokeWidth}"
 								   VerticalAlignment="Bottom"
 								   not_macos:RenderTransformOrigin="0.5,0.5"
@@ -311,11 +302,11 @@
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource OnSurfaceLowBrush}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OnSurfaceLowBrush}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="CornerRadius"
@@ -323,13 +314,13 @@
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialTextBoxFontFamily}" />
+				Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialTextBoxFontWeight}" />
+				Value="{ThemeResource BodyLargeFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialTextBoxFontSize}" />
+				Value="{ThemeResource BodyLargeFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialTextBoxCharacterSpacing}" />
+				Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<Setter Property="HorizontalContentAlignment"
@@ -364,7 +355,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush"
-												Value="{StaticResource OnSurfaceBrush}" />
+												Value="{ThemeResource OnSurfaceBrush}" />
 										<Setter Target="RootBorder.BorderThickness"
 												Value="2" />
 										<Setter Target="RootBorder.Padding"
@@ -376,20 +367,20 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 										<Setter Target="ContentElement.Opacity"
 												Value="{StaticResource DisabledOpacity}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 										<Setter Target="PlaceholderElement.Foreground"
-												Value="{StaticResource PrimaryBrush}" />
+												Value="{ThemeResource PrimaryBrush}" />
 										<Setter Target="RootBorder.BorderThickness"
 												Value="2" />
 										<Setter Target="RootBorder.Padding"

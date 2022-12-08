@@ -28,15 +28,6 @@
 	<x:String x:Key="MaterialButtonVerticalContentAlignment">Center</x:String>
 	<x:String x:Key="MaterialButtonHorizontalContentAlignment">Center</x:String>
 
-	<!-- Text button label based on Label Large Typo -->
-	<StaticResource x:Key="MaterialButtonFontFamily"
-					ResourceKey="MaterialLabelLargeFontFamily" />
-	<StaticResource x:Key="MaterialButtonFontWeight"
-					ResourceKey="MaterialLabelLargeFontWeight" />
-	<StaticResource x:Key="MaterialButtonFontSize"
-					ResourceKey="MaterialLabelLargeFontSize" />
-	<StaticResource x:Key="MaterialButtonCharacterSpacing"
-					ResourceKey="MaterialLabelLargeCharacterSpacing" />
 
 	<!-- BASE -->
 	<Style x:Key="MaterialBaseButtonStyle"
@@ -44,13 +35,13 @@
 
 		<!--Start: Label Large Typo-->
 		<Setter Property="FontFamily"
-				Value="{StaticResource MaterialButtonFontFamily}" />
+				Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{StaticResource MaterialButtonFontWeight}" />
+				Value="{ThemeResource LabelLargeFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{StaticResource MaterialButtonFontSize}" />
+				Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{StaticResource MaterialButtonCharacterSpacing}" />
+				Value="{ThemeResource LabelLargeCharacterSpacing}" />
 		<!--End: Label Large Typo-->
 
 		<Setter Property="MinHeight"
@@ -79,9 +70,9 @@
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource SurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -101,25 +92,25 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryHoverBrush}" />
+												Value="{ThemeResource PrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryPressedBrush}" />
+												Value="{ThemeResource PrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ElevatedView.Margin"
 												Value="0" />
 										<Setter Target="ElevatedView.Elevation"
@@ -133,14 +124,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryFocusedBrush}" />
+												Value="{ThemeResource PrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryFocusedBrush}" />
+												Value="{ThemeResource PrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -210,9 +201,9 @@
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource OnPrimaryBrush}" />
+				Value="{ThemeResource OnPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -232,25 +223,25 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnPrimaryHoverBrush}" />
+												Value="{ThemeResource OnPrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnPrimaryPressedBrush}" />
+												Value="{ThemeResource OnPrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -260,14 +251,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnPrimaryFocusedBrush}" />
+												Value="{ThemeResource OnPrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnPrimaryFocusedBrush}" />
+												Value="{ThemeResource OnPrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -337,9 +328,9 @@
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSecondaryContainerBrush}" />
+				Value="{ThemeResource OnSecondaryContainerBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource SecondaryContainerBrush}" />
+				Value="{ThemeResource SecondaryContainerBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -359,25 +350,25 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnSecondaryContainerHoverBrush}" />
+												Value="{ThemeResource OnSecondaryContainerHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnSecondaryContainerPressedBrush}" />
+												Value="{ThemeResource OnSecondaryContainerPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.Background"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -387,14 +378,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnSecondaryContainerFocusedBrush}" />
+												Value="{ThemeResource OnSecondaryContainerFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource OnSecondaryContainerFocusedBrush}" />
+												Value="{ThemeResource OnSecondaryContainerFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -464,7 +455,7 @@
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<!-- Following Material M3 Guidelines and Uno Figma file: -->
 		<!-- Background is Optional and Default is Transparent -->
 		<Setter Property="Background"
@@ -472,7 +463,7 @@
 		<Setter Property="BorderThickness"
 				Value="{StaticResource MaterialOutlinedButtonBorderThickness}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialOutlinedButtonBorderBrush}" />
+				Value="{ThemeResource MaterialOutlinedButtonBorderBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -492,25 +483,25 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryHoverBrush}" />
+												Value="{ThemeResource PrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryPressedBrush}" />
+												Value="{ThemeResource PrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="Root.BorderBrush"
-												Value="{StaticResource OnSurfaceDisabledLowBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -520,14 +511,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryFocusedBrush}" />
+												Value="{ThemeResource PrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryFocusedBrush}" />
+												Value="{ThemeResource PrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -590,7 +581,7 @@
 		   TargetType="Button">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Padding"
@@ -614,23 +605,23 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryHoverBrush}" />
+												Value="{ThemeResource PrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryPressedBrush}" />
+												Value="{ThemeResource PrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="IconPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceDisabledBrush}" />
+												Value="{ThemeResource OnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -640,14 +631,14 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryFocusedBrush}" />
+												Value="{ThemeResource PrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
 										<Setter Target="StateLayer.Background"
-												Value="{StaticResource PrimaryFocusedBrush}" />
+												Value="{ThemeResource PrimaryFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -711,7 +702,7 @@
 		   TargetType="Button">
 		
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 
@@ -747,7 +738,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -757,21 +748,21 @@
 						<Ellipse x:Name="HoverOverlay"
 								 HorizontalAlignment="Stretch"
 								 VerticalAlignment="Stretch"
-								 Fill="{StaticResource PrimaryHoverBrush}"
+								 Fill="{ThemeResource PrimaryHoverBrush}"
 								 Opacity="0" />
 
 						<!-- Ellipse for Pressed State -->
 						<Ellipse x:Name="PressedOverlay"
 								 HorizontalAlignment="Stretch"
 								 VerticalAlignment="Stretch"
-								 Fill="{StaticResource PrimaryPressedBrush}"
+								 Fill="{ThemeResource PrimaryPressedBrush}"
 								 Opacity="0" />
 
 						<!-- Ellipse for Focused State -->
 						<Ellipse x:Name="FocusedOverlay"
 								 HorizontalAlignment="Stretch"
 								 VerticalAlignment="Stretch"
-								 Fill="{StaticResource PrimaryFocusedBrush}"
+								 Fill="{ThemeResource PrimaryFocusedBrush}"
 								 Opacity="0" />
 
 						<!-- Content -->

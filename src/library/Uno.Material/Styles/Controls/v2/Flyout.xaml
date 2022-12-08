@@ -17,7 +17,6 @@
 	<x:Double x:Key="MaterialFlyoutMenuToggleCheckGlyphWidth">16</x:Double>
 	<x:Double x:Key="MaterialFlyoutMenuToggleCheckGlyphHeight">16</x:Double>
 	<x:Double x:Key="MaterialFlyoutMenuSeparatorHeight">1</x:Double>
-	<x:Double x:Key="MaterialFlyoutFontSize">14</x:Double>
 	<GridLength x:Key="MaterialFlyoutMenuItemRightMargin">38</GridLength>
 
 	<!--  Material FlyoutPresenter Style  -->
@@ -65,16 +64,16 @@
 	       TargetType="FlyoutPresenter">
 
 		<Setter Property="Foreground"
-		        Value="{StaticResource OnSurfaceBrush}" />
+		        Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
-		        Value="{StaticResource SurfaceBrush}" />
+		        Value="{ThemeResource SurfaceBrush}" />
 		<!--  Start: Label Large Typo  -->
 		<Setter Property="FontSize"
-		        Value="{StaticResource MaterialFlyoutFontSize}" />
+		        Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="FontWeight"
-		        Value="Medium" />
+		        Value="{ThemeResource LabelLargeFontWeight}" />
 		<Setter Property="FontFamily"
-		        Value="{StaticResource MaterialMediumFontFamily}" />
+		        Value="{ThemeResource MaterialMediumFontFamily}" />
 		<!--  End: Label Large Typo  -->
 		<Setter Property="MinWidth"
 		        Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />
@@ -95,16 +94,16 @@
 	       TargetType="MenuFlyoutPresenter">
 
 		<Setter Property="Foreground"
-		        Value="{StaticResource OnSurfaceBrush}" />
+		        Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
-		        Value="{StaticResource SurfaceBrush}" />
+		        Value="{ThemeResource SurfaceBrush}" />
 		<!--  Start: Label Large Typo  -->
 		<Setter Property="FontSize"
-		        Value="{StaticResource MaterialFlyoutFontSize}" />
+		        Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="FontWeight"
-		        Value="Medium" />
+		        Value="{ThemeResource LabelLargeFontWeight}" />
 		<Setter Property="FontFamily"
-		        Value="{StaticResource MaterialMediumFontFamily}" />
+		        Value="{ThemeResource MaterialMediumFontFamily}" />
 		<!--  End: Label Large Typo  -->
 		<Setter Property="MinWidth"
 		        Value="{StaticResource MaterialFlyoutPresenterMinWidth}" />
@@ -121,9 +120,9 @@
 	       TargetType="MenuFlyoutItem">
 
 		<Setter Property="Foreground"
-		        Value="{StaticResource OnSurfaceBrush}" />
+		        Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
-		        Value="{StaticResource SurfaceBrush}" />
+		        Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="Height"
 		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
 		<Setter Property="Padding"
@@ -151,7 +150,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfaceHoverBrush}" />
+										        Value="{ThemeResource OnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -162,7 +161,7 @@
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfacePressedBrush}" />
+										        Value="{ThemeResource OnSurfacePressedBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -185,7 +184,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfaceFocusedBrush}" />
+										        Value="{ThemeResource OnSurfaceFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -240,7 +239,7 @@
 						         Visibility="Collapsed">
 							<ContentPresenter x:Name="IconContent"
 							                  Content="{TemplateBinding Icon}"
-							                  Foreground="{StaticResource OnSurfaceVariantBrush}" />
+							                  Foreground="{ThemeResource OnSurfaceVariantBrush}" />
 						</Viewbox>
 
 						<TextBlock x:Name="TextBlock"
@@ -259,7 +258,7 @@
 							           MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KeyboardAcceleratorTextMinWidth}"
 							           VerticalAlignment="Center"
 							           AutomationProperties.AccessibilityView="Raw"
-							           Foreground="{StaticResource OnSurfaceVariantBrush}"
+							           Foreground="{ThemeResource OnSurfaceVariantBrush}"
 							           Style="{StaticResource MaterialLabelLarge}"
 							           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 							           TextAlignment="Right"
@@ -282,9 +281,9 @@
 	       TargetType="ToggleMenuFlyoutItem">
 
 		<Setter Property="Foreground"
-		        Value="{StaticResource OnSurfaceBrush}" />
+		        Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
-		        Value="{StaticResource SurfaceBrush}" />
+		        Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="Height"
 		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
 		<Setter Property="Padding"
@@ -312,7 +311,7 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfaceHoverBrush}" />
+										        Value="{ThemeResource OnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -323,7 +322,7 @@
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfacePressedBrush}" />
+										        Value="{ThemeResource OnSurfacePressedBrush}" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -379,7 +378,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfaceFocusedBrush}" />
+										        Value="{ThemeResource OnSurfaceFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -412,7 +411,7 @@
 							      VerticalAlignment="Center"
 							      Margin="12,0"
 							      Data="{StaticResource MaterialFlyoutCheckGlyphPathStyle}"
-							      Fill="{StaticResource OnSurfaceVariantBrush}"
+							      Fill="{ThemeResource OnSurfaceVariantBrush}"
 							      Opacity="0"
 							      Stretch="Uniform" />
 
@@ -425,7 +424,7 @@
 							         Visibility="Collapsed">
 								<ContentPresenter x:Name="IconContent"
 								                  Content="{TemplateBinding Icon}"
-								                  Foreground="{StaticResource OnSurfaceVariantBrush}" />
+								                  Foreground="{ThemeResource OnSurfaceVariantBrush}" />
 							</Viewbox>
 
 							<TextBlock x:Name="TextBlock"
@@ -443,7 +442,7 @@
 								<TextBlock x:Name="KeyboardAcceleratorTextBlock"
 								           VerticalAlignment="Center"
 								           AutomationProperties.AccessibilityView="Raw"
-								           Foreground="{StaticResource OnSurfaceVariantBrush}"
+								           Foreground="{ThemeResource OnSurfaceVariantBrush}"
 								           Style="{StaticResource MaterialLabelLarge}"
 								           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 								           TextAlignment="Right"
@@ -465,9 +464,9 @@
 	       TargetType="MenuFlyoutSubItem">
 
 		<Setter Property="Foreground"
-		        Value="{StaticResource OnSurfaceBrush}" />
+		        Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
-		        Value="{StaticResource SurfaceBrush}" />
+		        Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="Height"
 		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
 		<Setter Property="Padding"
@@ -490,21 +489,21 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfaceHoverBrush}" />
+										        Value="{ThemeResource OnSurfaceHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfacePressedBrush}" />
+										        Value="{ThemeResource OnSurfacePressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="SubMenuOpened">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfaceSelectedBrush}" />
+										        Value="{ThemeResource OnSurfaceSelectedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -523,7 +522,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{StaticResource OnSurfaceFocusedBrush}" />
+										        Value="{ThemeResource OnSurfaceFocusedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -576,7 +575,7 @@
 							         Visibility="Collapsed">
 								<ContentPresenter x:Name="IconContent"
 								                  Content="{TemplateBinding Icon}"
-								                  Foreground="{StaticResource OnSurfaceVariantBrush}" />
+								                  Foreground="{ThemeResource OnSurfaceVariantBrush}" />
 							</Viewbox>
 
 							<TextBlock x:Name="TextBlock"
@@ -594,7 +593,7 @@
 							      Margin="54,4,16,0"
 							      VerticalAlignment="Center"
 							      Data="{StaticResource MaterialFlyoutRightArrowPathStyle}"
-							      Fill="{StaticResource OnSurfaceVariantBrush}"
+							      Fill="{ThemeResource OnSurfaceVariantBrush}"
 							      Stretch="Uniform" />
 						</Grid>
 
@@ -612,7 +611,7 @@
 	       TargetType="MenuFlyoutSeparator">
 
 		<Setter Property="Background"
-		        Value="{StaticResource SurfaceVariantBrush}" />
+		        Value="{ThemeResource SurfaceVariantBrush}" />
 		<Setter Property="Padding"
 		        Value="0,8" />
 		<Setter Property="Height"

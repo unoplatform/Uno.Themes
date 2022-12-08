@@ -12,12 +12,6 @@
 								 NullValue="Visible" />
 
 	<!-- Brushes -->
-	<StaticResource x:Key="ComboBoxBackgroundColorBrush"
-					ResourceKey="CupertinoSystemBackgroundBrush" />
-
-	<StaticResource x:Key="ComboBoxForegroundThemeBrush"
-					ResourceKey="CupertinoLabelBrush" />
-
 	<x:Double x:Key="ComboBoxPopupMaxHeight">300</x:Double>
 
 	<SolidColorBrush x:Key="CupertinoComboBoxBorderBrush"
@@ -30,7 +24,7 @@
 	<Style x:Key="CupertinoComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="VerticalContentAlignment"
@@ -114,7 +108,7 @@
 						<!-- Pressed Overlay -->
 						<Grid x:Name="PressedOverlay"
 							  Margin="10"
-							  Background="{StaticResource CupertinoSecondarySystemFillBrush}"
+							  Background="{ThemeResource CupertinoSecondarySystemFillBrush}"
 							  CornerRadius="{TemplateBinding CornerRadius}"
 							  IsHitTestVisible="False"
 							  VerticalAlignment="Stretch"
@@ -145,17 +139,17 @@
 	<Style x:Key="CupertinoComboBoxStyle"
 		   TargetType="ComboBox">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource ComboBoxForegroundThemeBrush}" />
+				Value="{ThemeResource CupertinoLabelBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource ComboBoxBackgroundColorBrush}" />
+				Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource CupertinoComboBoxBorderBrush}" />
+				Value="{ThemeResource CupertinoComboBoxBorderBrush}" />
 		<Setter Property="CornerRadius"
 				Value="{StaticResource CupertinoComboBoxCornerRadius}" />
 		<Setter Property="MinHeight"
@@ -283,24 +277,24 @@
 						<Grid x:Name="ComboBoxContent">
 
 							<!-- Drop Down Border -->
-							<Rectangle Fill="{StaticResource ComboBoxBackgroundColorBrush}"
+							<Rectangle Fill="{ThemeResource CupertinoSystemBackgroundBrush}"
 									   Width="1"
 									   HorizontalAlignment="Right" />
 
 							<!-- Pressed Background -->
 							<Rectangle x:Name="PressedBackground"
-									   Fill="{ThemeResource ComboBoxBackgroundColorBrush}"
+									   Fill="{ThemeResource CupertinoSystemBackgroundBrush}"
 									   Opacity="0" />
 
 							<!-- Highlight Background -->
 							<Border x:Name="HighlightBackground"
-									Background="{ThemeResource ComboBoxBackgroundColorBrush}"
+									Background="{ThemeResource CupertinoSystemBackgroundBrush}"
 									Opacity="0"
 									CornerRadius="4" />
 
 							<!-- Highlight -->
 							<Rectangle x:Name="Highlight"
-									   Fill="{ThemeResource ComboBoxBackgroundColorBrush}"
+									   Fill="{ThemeResource CupertinoSystemBackgroundBrush}"
 									   Margin="{TemplateBinding BorderThickness}"
 									   Opacity="0" />
 

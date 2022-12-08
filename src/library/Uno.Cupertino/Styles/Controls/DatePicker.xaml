@@ -24,7 +24,7 @@
 	<Style x:Key="CupertinoDatePickerFlyoutButtonStyle"
 		   TargetType="Button">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Padding"
@@ -82,7 +82,7 @@
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="FontWeight"
 				Value="Normal" />
 		<Setter Property="FontSize"
@@ -101,7 +101,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
 					<toolkit:ElevatedView MaxHeight="398"
-										  Background="{StaticResource CupertinoQuinaryGrayBrush}"
+										  Background="{ThemeResource CupertinoQuinaryGrayBrush}"
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  BorderThickness="{TemplateBinding BorderThickness}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
@@ -196,13 +196,13 @@
 	<Style x:Key="CupertinoDatePickerStyle"
 		   TargetType="DatePicker">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoLabelBrush}" />
+				Value="{ThemeResource CupertinoLabelBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource CupertinoDatePickerBorderBrush}" />
+				Value="{ThemeResource CupertinoDatePickerBorderBrush}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="CornerRadius"
@@ -254,7 +254,7 @@
 								<!-- PlaceholderText -->
 								<TextBlock x:Name="PlaceholderText"
 										   Margin="10,0,0,0"
-										   Foreground="{StaticResource CupertinoPlaceholderTextBrush}"
+										   Foreground="{ThemeResource CupertinoPlaceholderTextBrush}"
 										   Style="{StaticResource BodyTextBlockStyle}"
 										   Text="{TemplateBinding Header}"
 										   Visibility="Collapsed" />
@@ -272,9 +272,9 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="DateText.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
 										<Setter Target="HeaderTextBlock.Foreground"
-												Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+												Value="{ThemeResource CupertinoPrimaryGrayColor}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

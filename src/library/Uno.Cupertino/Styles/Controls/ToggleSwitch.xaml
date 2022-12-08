@@ -20,11 +20,11 @@
 	<Style x:Key="DefaultCupertinoToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoToggleSwitchOnButtonBrush}" />
+				Value="{ThemeResource CupertinoToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource CupertinoToggleSwitchOnBackgroundBrush}" />
+				Value="{ThemeResource CupertinoToggleSwitchOnBackgroundBrush}" />
 
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
@@ -242,7 +242,7 @@
 
 						<TextBlock Text="{TemplateBinding Header}"
 								   Style="{StaticResource CupertinoBaseTextBlockStyle}"
-								   Foreground="{StaticResource CupertinoLabelBrush}"
+								   Foreground="{ThemeResource CupertinoLabelBrush}"
 								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}"
 								   Grid.ColumnSpan="4" />
 
@@ -274,7 +274,7 @@
 									   Width="51"
 									   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 									   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}"
-									   Fill="{StaticResource CupertinoSecondarySystemFillBrush}" />
+									   Fill="{ThemeResource CupertinoSecondarySystemFillBrush}" />
 
 							<Rectangle x:Name="HighlightBorder"
 									   Height="31"

@@ -19,17 +19,11 @@
 	<StaticResource x:Key="MaterialContentDialogBackground" ResourceKey="SurfaceBrush" />
 	<StaticResource x:Key="MaterialContentDialogSmokeLayerBackground" ResourceKey="OnSurfaceLowBrush" />
 
-	<!-- === title: OnSurface, Headline\Small -->
+	<!-- === title: OnSurface, -->
 	<StaticResource x:Key="MaterialContentDialogTitleForeground" ResourceKey="OnSurfaceBrush" />
-	<StaticResource x:Key="MaterialContentDialogTitleFontFamily" ResourceKey="MaterialHeadlineSmallFontFamily" />
-	<StaticResource x:Key="MaterialContentDialogTitleFontSize" ResourceKey="MaterialHeadlineSmallFontSize" />
-	<StaticResource x:Key="MaterialContentDialogTitleFontWeight" ResourceKey="MaterialHeadlineSmallFontWeight" />
 
-	<!-- === content: OnSurface\Variant, Body\Medium -->
+	<!-- === content: OnSurface\Variant -->
 	<StaticResource x:Key="MaterialContentDialogContentForeground" ResourceKey="OnSurfaceVariantBrush" />
-	<StaticResource x:Key="MaterialContentDialogContentFontFamily" ResourceKey="MaterialBodyMediumFontFamily" />
-	<StaticResource x:Key="MaterialContentDialogContentFontSize" ResourceKey="MaterialBodyMediumFontSize" />
-	<StaticResource x:Key="MaterialContentDialogContentFontWeight" ResourceKey="MaterialBodyMediumFontWeight" />
 
 	<!-- note: MaterialContentDialogDefaultButtonStyle is the style associated with ContentDialog.DefaultButton (accented or CTA btn) -->
 	<Style x:Key="MaterialContentDialogButtonStyle"
@@ -216,9 +210,9 @@
 														Content="{TemplateBinding Title}"
 														ContentTemplate="{TemplateBinding TitleTemplate}"
 														Foreground="{StaticResource MaterialContentDialogTitleForeground}"
-														FontFamily="{StaticResource MaterialContentDialogTitleFontFamily}"
-														FontSize="{StaticResource MaterialContentDialogTitleFontSize}"
-														FontWeight="{StaticResource MaterialContentDialogTitleFontWeight}"
+														FontFamily="{ThemeResource MaterialRegularFontFamily}"
+														FontSize="{StaticResource HeadlineSmallFontSize}"
+														FontWeight="{ThemeResource HeadlineSmallFontWeight}"
 														Margin="{StaticResource MaterialContentDialogTitleToContentMargin}"
 														HorizontalAlignment="Center"
 														VerticalAlignment="Top"
@@ -246,9 +240,9 @@
 															  Content="{TemplateBinding Content}"
 															  ContentTemplate="{TemplateBinding ContentTemplate}"
 															  Foreground="{TemplateBinding Foreground}"
-															  FontFamily="{StaticResource MaterialContentDialogContentFontFamily}"
-															  FontSize="{StaticResource MaterialContentDialogContentFontSize}"
-															  FontWeight="{StaticResource MaterialContentDialogContentFontWeight}"
+															  FontFamily="{ThemeResource MaterialRegularFontFamily}"
+															  FontSize="{ThemeResource BodyMediumFontSize}"
+															  FontWeight="{ThemeResource BodyMediumFontWeight}"
 															  TextWrapping="Wrap" />
 										</ScrollViewer>
 										<Grid x:Name="CommandSpace"

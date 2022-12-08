@@ -12,12 +12,6 @@
 	<SolidColorBrush x:Key="CupertinoSliderActiveTrackBrush"
 					 Color="{ThemeResource CupertinoBlueColor}" />
 
-	<StaticResource x:Key="CupertinoSliderTickBarFill"
-					ResourceKey="CupertinoPrimaryGrayColor" />
-
-	<StaticResource x:Key="CupertinoSliderInlineTickBarFill"
-					ResourceKey="CupertinoBlueColor" />
-
 	<!--  Cupertino Slider Thumb Style  -->
 	<Style x:Key="CupertinoSliderThumbStyle"
 		   TargetType="Thumb">
@@ -41,13 +35,13 @@
 		   TargetType="Slider">
 
 		<Setter Property="Background"
-				Value="{StaticResource CupertinoSliderTrackBrush}" />
+				Value="{ThemeResource CupertinoSliderTrackBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoSliderActiveTrackBrush}" />
+				Value="{ThemeResource CupertinoSliderActiveTrackBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="FontSize"
 				Value="{StaticResource ControlContentThemeFontSize}" />
 		<Setter Property="ManipulationMode"
@@ -194,7 +188,7 @@
 								<!--  HorizontalInlineTickBar  -->
 								<TickBar x:Name="HorizontalInlineTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
+										 Fill="{StaticResource CupertinoBlueColor}"
 										 Height="4"
 										 Grid.Row="1"
 										 Grid.ColumnSpan="3" />
@@ -222,7 +216,7 @@
 
 									<Thumb x:Name="HorizontalThumb"
 										   Style="{StaticResource CupertinoSliderThumbStyle}"
-										   Background="{StaticResource CupertinoSliderThumbBrush}"
+										   Background="{ThemeResource CupertinoSliderThumbBrush}"
 										   DataContext="{TemplateBinding Value}"
 										   Height="28"
 										   Width="28"
@@ -277,7 +271,7 @@
 								<!--  VerticalInlineTickBar  -->
 								<TickBar x:Name="VerticalInlineTickBar"
 										 Visibility="Collapsed"
-										 Fill="{StaticResource CupertinoSliderInlineTickBarFill}"
+										 Fill="{StaticResource CupertinoBlueColor}"
 										 Width="4"
 										 Grid.Column="1"
 										 Grid.RowSpan="3" />
@@ -304,7 +298,7 @@
 													  ShadowColor="{StaticResource ShadowColor}">
 									<Thumb x:Name="VerticalThumb"
 										   Style="{StaticResource CupertinoSliderThumbStyle}"
-										   Background="{StaticResource CupertinoSliderThumbBrush}"
+										   Background="{ThemeResource CupertinoSliderThumbBrush}"
 										   DataContext="{TemplateBinding Value}"
 										   Width="28"
 										   Height="28"
@@ -324,6 +318,6 @@
 		   TargetType="Slider">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoSecondaryBrush}" />
+				Value="{ThemeResource CupertinoSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>

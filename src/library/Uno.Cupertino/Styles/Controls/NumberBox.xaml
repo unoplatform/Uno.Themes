@@ -24,15 +24,15 @@
 	<Style	x:Name="CupertinoNumberBoxStyle"
 			TargetType="muxc:NumberBox">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Background"
-				Value="{StaticResource CupertinoSystemBackgroundBrush}" />
+				Value="{ThemeResource CupertinoSystemBackgroundBrush}" />
 		<Setter Property="CornerRadius"
 				Value="{StaticResource CupertinoCornerRadius}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource CupertinoTextBoxBorderBrush}" />
+				Value="{ThemeResource CupertinoTextBoxBorderBrush}" />
 		<Setter Property="Padding"
 				Value="7" />
 		<Setter Property="Template">
@@ -88,7 +88,7 @@
 									 PlaceholderText="{TemplateBinding PlaceholderText}" />
 
 							<StackPanel CornerRadius="{TemplateBinding CornerRadius}"
-										Background="{StaticResource CupertinoQuinaryGrayBrush}"
+										Background="{ThemeResource CupertinoQuinaryGrayBrush}"
 										Orientation="Horizontal"
 										Grid.Column="1">
 
@@ -97,7 +97,7 @@
 											  Style="{StaticResource NumberBoxMinusButtonStyle}" />
 								<Rectangle Width="1"
 										   Height="12"
-										   Fill="{StaticResource CupertinoDetailsLightBrush}" />
+										   Fill="{ThemeResource CupertinoDetailsLightBrush}" />
 								<RepeatButton x:Name="UpSpinButton"
 											  Style="{StaticResource NumberBoxPlusButtonStyle}" />
 							</StackPanel>
@@ -126,9 +126,9 @@
 			<Setter Property="HorizontalAlignment"
 					Value="Center" />
 			<Setter Property="Background"
-					Value="{StaticResource CupertinoQuinaryGrayBrush}" />
+					Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
 			<Setter Property="Foreground"
-					Value="{StaticResource CupertinoLabelBrush}" />
+					Value="{ThemeResource CupertinoLabelBrush}" />
 			<Setter Property="BorderThickness"
 					Value="0" />
 			<Setter Property="Template">
@@ -187,9 +187,9 @@
 			<Setter Property="HorizontalAlignment"
 					Value="Center" />
 			<Setter Property="Background"
-					Value="{StaticResource CupertinoQuinaryGrayBrush}" />
+					Value="{ThemeResource CupertinoQuinaryGrayBrush}" />
 			<Setter Property="Foreground"
-					Value="{StaticResource CupertinoLabelBrush}" />
+					Value="{ThemeResource CupertinoLabelBrush}" />
 			<Setter Property="BorderThickness"
 					Value="0" />
 			<Setter Property="Template">
@@ -233,11 +233,11 @@
 	<Style x:Key="NumberBoxTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="FontFamily"
-				Value="{StaticResource CupertinoFontFamily}" />
+				Value="{ThemeResource CupertinoFontFamily}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CupertinoLabelBrush}" />
+				Value="{ThemeResource CupertinoLabelBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Left" />
 		<Setter Property="VerticalContentAlignment"
@@ -247,7 +247,7 @@
 		<Setter Property="InputScope"
 				Value="Number" />
 		<Setter Property="PlaceholderForeground"
-				Value="{StaticResource CupertinoPlaceholderTextBrush}" />
+				Value="{ThemeResource CupertinoPlaceholderTextBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
