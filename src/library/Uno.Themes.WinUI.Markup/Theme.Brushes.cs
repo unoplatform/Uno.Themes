@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.MarkupHelpers;
+﻿using Microsoft.UI.Xaml.MarkupHelpers.Internals;
 using Microsoft.UI.Xaml.Media;
 
 namespace Uno.Themes.Markup
@@ -11,422 +9,991 @@ namespace Uno.Themes.Markup
 		{
 			public static class Primary
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("PrimaryBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("PrimaryHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("PrimaryFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("PrimaryPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("PrimaryDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("PrimarySelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("PrimaryMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("PrimaryLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("PrimaryDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("PrimaryDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryBrush")]
+				public static ResourceValue<Brush> Default => new("PrimaryBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("PrimaryHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("PrimaryFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("PrimaryPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("PrimaryDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimarySelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("PrimarySelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("PrimaryMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryLowBrush")]
+				public static ResourceValue<Brush> Low => new("PrimaryLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("PrimaryDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("PrimaryDisabledLowBrush");
 
 				public static class Inverse
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("PrimaryInverseBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("PrimaryInverseHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("PrimaryInverseFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("PrimaryInversePressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("PrimaryInverseDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("PrimaryInverseSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("PrimaryInverseMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("PrimaryInverseLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("PrimaryInverseDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("PrimaryInverseDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseBrush")]
+					public static ResourceValue<Brush> Default => new("PrimaryInverseBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("PrimaryInverseHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("PrimaryInverseFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInversePressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("PrimaryInversePressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("PrimaryInverseDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("PrimaryInverseSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("PrimaryInverseMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseLowBrush")]
+					public static ResourceValue<Brush> Low => new("PrimaryInverseLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("PrimaryInverseDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("PrimaryInverseDisabledLowBrush");
 				}
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("PrimaryContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("PrimaryContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("PrimaryContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("PrimaryContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("PrimaryContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("PrimaryContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("PrimaryContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("PrimaryContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("PrimaryContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("PrimaryContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerBrush")]
+					public static ResourceValue<Brush> Default => new("PrimaryContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("PrimaryContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("PrimaryContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("PrimaryContainerPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("PrimaryContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("PrimaryContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("PrimaryContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("PrimaryContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("PrimaryContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("PrimaryContainerDisabledLowBrush");
 				}
 
 				public static class VariantLight
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("PrimaryVariantLightBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("PrimaryVariantLightHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("PrimaryVariantLightFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("PrimaryVariantLightPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("PrimaryVariantLightDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("PrimaryVariantLightSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("PrimaryVariantLightMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("PrimaryVariantLightLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("PrimaryVariantLightDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("PrimaryVariantLightDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightBrush")]
+					public static ResourceValue<Brush> Default => new("PrimaryVariantLightBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("PrimaryVariantLightHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("PrimaryVariantLightFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("PrimaryVariantLightPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("PrimaryVariantLightDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("PrimaryVariantLightSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("PrimaryVariantLightMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightLowBrush")]
+					public static ResourceValue<Brush> Low => new("PrimaryVariantLightLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("PrimaryVariantLightDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("PrimaryVariantLightDisabledLowBrush");
 				}
 
 				public static class VariantDark
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("PrimaryVariantDarkBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("PrimaryVariantDarkHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("PrimaryVariantDarkFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("PrimaryVariantDarkPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("PrimaryVariantDarkDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("PrimaryVariantDarkSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("PrimaryVariantDarkMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("PrimaryVariantDarkLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("PrimaryVariantDarkDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("PrimaryVariantDarkDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkBrush")]
+					public static ResourceValue<Brush> Default => new("PrimaryVariantDarkBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("PrimaryVariantDarkHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("PrimaryVariantDarkFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("PrimaryVariantDarkPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("PrimaryVariantDarkDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("PrimaryVariantDarkSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("PrimaryVariantDarkMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkLowBrush")]
+					public static ResourceValue<Brush> Low => new("PrimaryVariantDarkLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("PrimaryVariantDarkDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("PrimaryVariantDarkDisabledLowBrush");
 				}
 			}
 
 			public static class OnPrimary
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnPrimaryBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnPrimaryHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnPrimaryFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnPrimaryPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnPrimaryDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnPrimarySelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnPrimaryMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnPrimaryLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnPrimaryDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnPrimaryDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryBrush")]
+				public static ResourceValue<Brush> Default => new("OnPrimaryBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("OnPrimaryHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("OnPrimaryFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("OnPrimaryPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("OnPrimaryDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimarySelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("OnPrimarySelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("OnPrimaryMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryLowBrush")]
+				public static ResourceValue<Brush> Low => new("OnPrimaryLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("OnPrimaryDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("OnPrimaryDisabledLowBrush");
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnPrimaryContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnPrimaryContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnPrimaryContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnPrimaryContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnPrimaryContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnPrimaryContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnPrimaryContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnPrimaryContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnPrimaryContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnPrimaryContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerBrush")]
+					public static ResourceValue<Brush> Default => new("OnPrimaryContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("OnPrimaryContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("OnPrimaryContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("OnPrimaryContainerPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("OnPrimaryContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("OnPrimaryContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("OnPrimaryContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("OnPrimaryContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("OnPrimaryContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("OnPrimaryContainerDisabledLowBrush");
 				}
 			}
 
 			public static class Secondary
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("SecondaryBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("SecondaryHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("SecondaryFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("SecondaryPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("SecondaryDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("SecondarySelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("SecondaryMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("SecondaryLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("SecondaryDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("SecondaryDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryBrush")]
+				public static ResourceValue<Brush> Default => new("SecondaryBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("SecondaryHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("SecondaryFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("SecondaryPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("SecondaryDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondarySelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("SecondarySelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("SecondaryMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryLowBrush")]
+				public static ResourceValue<Brush> Low => new("SecondaryLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("SecondaryDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("SecondaryDisabledLowBrush");
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("SecondaryContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("SecondaryContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("SecondaryContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("SecondaryContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("SecondaryContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("SecondaryContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("SecondaryContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("SecondaryContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("SecondaryContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("SecondaryContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerBrush")]
+					public static ResourceValue<Brush> Default => new("SecondaryContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("SecondaryContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("SecondaryContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("SecondaryContainerPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("SecondaryContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("SecondaryContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("SecondaryContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("SecondaryContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("SecondaryContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("SecondaryContainerDisabledLowBrush");
 				}
 
 				public static class VariantLight
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("SecondaryVariantLightBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("SecondaryVariantLightHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("SecondaryVariantLightFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("SecondaryVariantLightPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("SecondaryVariantLightDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("SecondaryVariantLightSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("SecondaryVariantLightMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("SecondaryVariantLightLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("SecondaryVariantLightDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("SecondaryVariantLightDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightBrush")]
+					public static ResourceValue<Brush> Default => new("SecondaryVariantLightBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("SecondaryVariantLightHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("SecondaryVariantLightFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("SecondaryVariantLightPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("SecondaryVariantLightDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("SecondaryVariantLightSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("SecondaryVariantLightMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightLowBrush")]
+					public static ResourceValue<Brush> Low => new("SecondaryVariantLightLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("SecondaryVariantLightDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("SecondaryVariantLightDisabledLowBrush");
 				}
 
 				public static class VariantDark
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("SecondaryVariantDarkBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("SecondaryVariantDarkHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("SecondaryVariantDarkFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("SecondaryVariantDarkPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("SecondaryVariantDarkDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("SecondaryVariantDarkSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("SecondaryVariantDarkMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("SecondaryVariantDarkLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("SecondaryVariantDarkDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("SecondaryVariantDarkDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkBrush")]
+					public static ResourceValue<Brush> Default => new("SecondaryVariantDarkBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("SecondaryVariantDarkHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("SecondaryVariantDarkFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("SecondaryVariantDarkPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("SecondaryVariantDarkDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("SecondaryVariantDarkSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("SecondaryVariantDarkMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkLowBrush")]
+					public static ResourceValue<Brush> Low => new("SecondaryVariantDarkLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("SecondaryVariantDarkDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("SecondaryVariantDarkDisabledLowBrush");
 				}
 			}
 
 			public static class OnSecondary
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnSecondaryBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnSecondaryHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnSecondaryFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnSecondaryPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnSecondaryDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnSecondarySelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnSecondaryMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnSecondaryLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnSecondaryDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnSecondaryDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryBrush")]
+				public static ResourceValue<Brush> Default => new("OnSecondaryBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("OnSecondaryHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("OnSecondaryFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("OnSecondaryPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("OnSecondaryDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondarySelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("OnSecondarySelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("OnSecondaryMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryLowBrush")]
+				public static ResourceValue<Brush> Low => new("OnSecondaryLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("OnSecondaryDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("OnSecondaryDisabledLowBrush");
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnSecondaryContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnSecondaryContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnSecondaryContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnSecondaryContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnSecondaryContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnSecondaryContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnSecondaryContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnSecondaryContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnSecondaryContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnSecondaryContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerBrush")]
+					public static ResourceValue<Brush> Default => new("OnSecondaryContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("OnSecondaryContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("OnSecondaryContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("OnSecondaryContainerPressedBrush");
+
+					public static ResourceValue<Brush> Dragged => new("OnSecondaryContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("OnSecondaryContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("OnSecondaryContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("OnSecondaryContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("OnSecondaryContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("OnSecondaryContainerDisabledLowBrush");
 				}
 			}
 
 			public static class Tertiary
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("TertiaryBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("TertiaryHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("TertiaryFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("TertiaryPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("TertiaryDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("TertiarySelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("TertiaryMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("TertiaryLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("TertiaryDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("TertiaryDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryBrush")]
+				public static ResourceValue<Brush> Default => new("TertiaryBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("TertiaryHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("TertiaryFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("TertiaryPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("TertiaryDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiarySelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("TertiarySelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("TertiaryMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryLowBrush")]
+				public static ResourceValue<Brush> Low => new("TertiaryLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("TertiaryDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("TertiaryDisabledLowBrush");
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("TertiaryContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("TertiaryContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("TertiaryContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("TertiaryContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("TertiaryContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("TertiaryContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("TertiaryContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("TertiaryContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("TertiaryContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("TertiaryContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerBrush")]
+					public static ResourceValue<Brush> Default => new("TertiaryContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("TertiaryContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("TertiaryContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("TertiaryContainerPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("TertiaryContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("TertiaryContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("TertiaryContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("TertiaryContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("TertiaryContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("TertiaryContainerDisabledLowBrush");
 				}
 			}
 
 			public static class OnTertiary
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnTertiaryBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnTertiaryHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnTertiaryFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnTertiaryPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnTertiaryDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnTertiarySelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnTertiaryMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnTertiaryLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnTertiaryDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnTertiaryDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryBrush")]
+				public static ResourceValue<Brush> Default => new("OnTertiaryBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("OnTertiaryHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("OnTertiaryFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("OnTertiaryPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("OnTertiaryDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiarySelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("OnTertiarySelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("OnTertiaryMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryLowBrush")]
+				public static ResourceValue<Brush> Low => new("OnTertiaryLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("OnTertiaryDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("OnTertiaryDisabledLowBrush");
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnTertiaryContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnTertiaryContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnTertiaryContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnTertiaryContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnTertiaryContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnTertiaryContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnTertiaryContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnTertiaryContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnTertiaryContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnTertiaryContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerBrush")]
+					public static ResourceValue<Brush> Default => new("OnTertiaryContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("OnTertiaryContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("OnTertiaryContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("OnTertiaryContainerPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("OnTertiaryContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("OnTertiaryContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("OnTertiaryContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("OnTertiaryContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("OnTertiaryContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("OnTertiaryContainerDisabledLowBrush");
 				}
 			}
 
 			public static class Error
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("ErrorBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("ErrorHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("ErrorFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("ErrorPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("ErrorDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("ErrorSelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("ErrorMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("ErrorLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("ErrorDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("ErrorDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "ErrorBrush")]
+				public static ResourceValue<Brush> Default => new("ErrorBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("ErrorHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("ErrorFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("ErrorPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("ErrorDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorSelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("ErrorSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("ErrorMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorLowBrush")]
+				public static ResourceValue<Brush> Low => new("ErrorLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("ErrorDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("ErrorDisabledLowBrush");
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("ErrorContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("ErrorContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("ErrorContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("ErrorContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("ErrorContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("ErrorContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("ErrorContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("ErrorContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("ErrorContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("ErrorContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerBrush")]
+					public static ResourceValue<Brush> Default => new("ErrorContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("ErrorContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("ErrorContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("ErrorContainerPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("ErrorContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("ErrorContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("ErrorContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("ErrorContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("ErrorContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("ErrorContainerDisabledLowBrush");
 				}
 			}
 
 			public static class OnError
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnErrorBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnErrorHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnErrorFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnErrorPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnErrorDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnErrorSelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnErrorMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnErrorLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnErrorDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnErrorDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorBrush")]
+				public static ResourceValue<Brush> Default => new("OnErrorBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("OnErrorHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("OnErrorFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("OnErrorPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("OnErrorDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorSelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("OnErrorSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("OnErrorMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorLowBrush")]
+				public static ResourceValue<Brush> Low => new("OnErrorLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("OnErrorDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("OnErrorDisabledLowBrush");
 
 				public static class Container
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnErrorContainerBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnErrorContainerHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnErrorContainerFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnErrorContainerPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnErrorContainerDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnErrorContainerSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnErrorContainerMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnErrorContainerLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnErrorContainerDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnErrorContainerDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerBrush")]
+					public static ResourceValue<Brush> Default => new("OnErrorContainerBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("OnErrorContainerHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("OnErrorContainerFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("OnErrorContainerPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("OnErrorContainerDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("OnErrorContainerSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("OnErrorContainerMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerLowBrush")]
+					public static ResourceValue<Brush> Low => new("OnErrorContainerLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("OnErrorContainerDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("OnErrorContainerDisabledLowBrush");
 				}
 			}
 
 			public static class Background
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("BackgroundBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("BackgroundHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("BackgroundFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("BackgroundPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("BackgroundDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("BackgroundSelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("BackgroundMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("BackgroundLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("BackgroundDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("BackgroundDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundBrush")]
+				public static ResourceValue<Brush> Default => new("BackgroundBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("BackgroundHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("BackgroundFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("BackgroundPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("BackgroundDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundSelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("BackgroundSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("BackgroundMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundLowBrush")]
+				public static ResourceValue<Brush> Low => new("BackgroundLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("BackgroundDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("BackgroundDisabledLowBrush");
 			}
 
 			public static class OnBackground
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnBackgroundBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnBackgroundHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnBackgroundFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnBackgroundPressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnBackgroundDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnBackgroundSelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnBackgroundMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnBackgroundLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnBackgroundDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnBackgroundDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundBrush")]
+				public static ResourceValue<Brush> Default => new("OnBackgroundBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("OnBackgroundHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("OnBackgroundFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundPressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("OnBackgroundPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("OnBackgroundDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundSelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("OnBackgroundSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("OnBackgroundMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundLowBrush")]
+				public static ResourceValue<Brush> Low => new("OnBackgroundLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("OnBackgroundDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("OnBackgroundDisabledLowBrush");
 			}
 
 			public static class Surface
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("SurfaceBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("SurfaceHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("SurfaceFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("SurfacePressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("SurfaceDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("SurfaceSelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("SurfaceMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("SurfaceLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("SurfaceDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("SurfaceDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceBrush")]
+				public static ResourceValue<Brush> Default => new("SurfaceBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("SurfaceHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("SurfaceFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfacePressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("SurfacePressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("SurfaceDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceSelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("SurfaceSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("SurfaceMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceLowBrush")]
+				public static ResourceValue<Brush> Low => new("SurfaceLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("SurfaceDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("SurfaceDisabledLowBrush");
 
 				public static class Variant
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("SurfaceVariantBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("SurfaceVariantHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("SurfaceVariantFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("SurfaceVariantPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("SurfaceVariantDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("SurfaceVariantSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("SurfaceVariantMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("SurfaceVariantLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("SurfaceVariantDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("SurfaceVariantDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantBrush")]
+					public static ResourceValue<Brush> Default => new("SurfaceVariantBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("SurfaceVariantHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("SurfaceVariantFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("SurfaceVariantPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("SurfaceVariantDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("SurfaceVariantSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("SurfaceVariantMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantLowBrush")]
+					public static ResourceValue<Brush> Low => new("SurfaceVariantLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("SurfaceVariantDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("SurfaceVariantDisabledLowBrush");
 				}
 
 				public static class Inverse
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("SurfaceInverseBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("SurfaceInverseHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("SurfaceInverseFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("SurfaceInversePressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("SurfaceInverseDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("SurfaceInverseSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("SurfaceInverseMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("SurfaceInverseLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("SurfaceInverseDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("SurfaceInverseDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseBrush")]
+					public static ResourceValue<Brush> Default => new("SurfaceInverseBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("SurfaceInverseHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("SurfaceInverseFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInversePressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("SurfaceInversePressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("SurfaceInverseDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("SurfaceInverseSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("SurfaceInverseMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseLowBrush")]
+					public static ResourceValue<Brush> Low => new("SurfaceInverseLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("SurfaceInverseDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("SurfaceInverseDisabledLowBrush");
 				}
 			}
 
 			public static class OnSurface
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnSurfaceBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnSurfaceHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnSurfaceFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnSurfacePressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnSurfaceDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnSurfaceSelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnSurfaceMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnSurfaceLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnSurfaceDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnSurfaceDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceBrush")]
+				public static ResourceValue<Brush> Default => new("OnSurfaceBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("OnSurfaceHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("OnSurfaceFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfacePressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("OnSurfacePressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("OnSurfaceDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceSelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("OnSurfaceSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("OnSurfaceMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceLowBrush")]
+				public static ResourceValue<Brush> Low => new("OnSurfaceLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("OnSurfaceDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("OnSurfaceDisabledLowBrush");
 
 				public static class Variant
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnSurfaceVariantBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnSurfaceVariantHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnSurfaceVariantFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnSurfaceVariantPressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnSurfaceVariantDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnSurfaceVariantSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnSurfaceVariantMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnSurfaceVariantLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnSurfaceVariantDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnSurfaceVariantDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantBrush")]
+					public static ResourceValue<Brush> Default => new("OnSurfaceVariantBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("OnSurfaceVariantHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("OnSurfaceVariantFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantPressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("OnSurfaceVariantPressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("OnSurfaceVariantDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("OnSurfaceVariantSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("OnSurfaceVariantMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantLowBrush")]
+					public static ResourceValue<Brush> Low => new("OnSurfaceVariantLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("OnSurfaceVariantDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("OnSurfaceVariantDisabledLowBrush");
 				}
 
 				public static class Inverse
 				{
-					public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OnSurfaceInverseBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OnSurfaceInverseHoverBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OnSurfaceInverseFocusedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OnSurfaceInversePressedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OnSurfaceInverseDraggedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OnSurfaceInverseSelectedBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OnSurfaceInverseMediumBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OnSurfaceInverseLowBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OnSurfaceInverseDisabledBrush");
-					public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OnSurfaceInverseDisabledLowBrush");
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseBrush")]
+					public static ResourceValue<Brush> Default => new("OnSurfaceInverseBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseHoverBrush")]
+					public static ResourceValue<Brush> Hover => new("OnSurfaceInverseHoverBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseFocusedBrush")]
+					public static ResourceValue<Brush> Focused => new("OnSurfaceInverseFocusedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInversePressedBrush")]
+					public static ResourceValue<Brush> Pressed => new("OnSurfaceInversePressedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDraggedBrush")]
+					public static ResourceValue<Brush> Dragged => new("OnSurfaceInverseDraggedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseSelectedBrush")]
+					public static ResourceValue<Brush> Selected => new("OnSurfaceInverseSelectedBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseMediumBrush")]
+					public static ResourceValue<Brush> Medium => new("OnSurfaceInverseMediumBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseLowBrush")]
+					public static ResourceValue<Brush> Low => new("OnSurfaceInverseLowBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledBrush")]
+					public static ResourceValue<Brush> Disabled => new("OnSurfaceInverseDisabledBrush");
+
+					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledLowBrush")]
+					public static ResourceValue<Brush> DisabledLow => new("OnSurfaceInverseDisabledLowBrush");
 				}
 			}
 
 			public static class Outline
 			{
-				public static Action<IDependencyPropertyBuilder<Brush>> Default => StaticResource.Get<Brush>("OutlineBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Hover => StaticResource.Get<Brush>("OutlineHoverBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Focused => StaticResource.Get<Brush>("OutlineFocusedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Pressed => StaticResource.Get<Brush>("OutlinePressedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Dragged => StaticResource.Get<Brush>("OutlineDraggedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Selected => StaticResource.Get<Brush>("OutlineSelectedBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Medium => StaticResource.Get<Brush>("OutlineMediumBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Low => StaticResource.Get<Brush>("OutlineLowBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> Disabled => StaticResource.Get<Brush>("OutlineDisabledBrush");
-				public static Action<IDependencyPropertyBuilder<Brush>> DisabledLow => StaticResource.Get<Brush>("OutlineDisabledLowBrush");
+				[ResourceKeyDefinition(typeof(Brush), "OutlineBrush")]
+				public static ResourceValue<Brush> Default => new("OutlineBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineHoverBrush")]
+				public static ResourceValue<Brush> Hover => new("OutlineHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineFocusedBrush")]
+				public static ResourceValue<Brush> Focused => new("OutlineFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlinePressedBrush")]
+				public static ResourceValue<Brush> Pressed => new("OutlinePressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineDraggedBrush")]
+				public static ResourceValue<Brush> Dragged => new("OutlineDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineSelectedBrush")]
+				public static ResourceValue<Brush> Selected => new("OutlineSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineMediumBrush")]
+				public static ResourceValue<Brush> Medium => new("OutlineMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineLowBrush")]
+				public static ResourceValue<Brush> Low => new("OutlineLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledBrush")]
+				public static ResourceValue<Brush> Disabled => new("OutlineDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledLowBrush")]
+				public static ResourceValue<Brush> DisabledLow => new("OutlineDisabledLowBrush");
 			}
 		}
 	}
