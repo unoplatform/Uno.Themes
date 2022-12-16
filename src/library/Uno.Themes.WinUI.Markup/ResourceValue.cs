@@ -7,7 +7,7 @@ namespace Uno.Themes.Markup
 {
 	public struct ResourceValue<T>
 	{
-		public ResourceValue(string key, bool isThemeResource = true)
+		public ResourceValue(string key, bool isThemeResource = false)
 		{
 			Key = key;
 			IsThemeResource = isThemeResource;
@@ -18,13 +18,8 @@ namespace Uno.Themes.Markup
 		public bool IsThemeResource { get; }
 
 		public static implicit operator Action<IDependencyPropertyBuilder<T>>(ResourceValue<T> resource) =>
-			x => GetResourceBasedOnIsThemeResourceProperty(resource);
-
-		private static Action<IDependencyPropertyBuilder<T>> GetResourceBasedOnIsThemeResourceProperty(ResourceValue<T> resource)
-		{
-			return resource.IsThemeResource ?
+			resource.IsThemeResource ?
 				ThemeResource.Get<T>(resource.Key)
 				: StaticResource.Get<T>(resource.Key);
-		}
 	}
 }
