@@ -487,6 +487,8 @@
 				Value="Center" />
 		<Setter Property="Foreground"
 				Value="{ThemeResource MaterialToggleSwitchOnButtonBrush}" />
+		<Setter Property="Background"
+				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 
 		<!-- microsoft/microsoft-ui-xaml#6157: reset min-width inherited from base style -->
 		<Setter Property="MinWidth"
@@ -533,6 +535,8 @@
 				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="Foreground"
 				Value="{ThemeResource MaterialToggleSwitchOnButtonBrush}" />
+		<Setter Property="Background"
+				Value="{StaticResource MaterialToggleSwitchOnBackgroundBrush}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="HorizontalContentAlignment"
@@ -576,6 +580,8 @@
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
 												Value="{ThemeResource MaterialToggleSwitchOffBackgroundBrush}" />
+										<Setter Target="AndroidSwitch.ThumbTint"
+												Value="{ThemeResource MaterialToggleSwitchOffButtonBrush}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 												Value="Collapsed" />
 										<Setter Target="OffDisabledGrid.Visibility"
@@ -586,7 +592,9 @@
 								<VisualState x:Name="On">
 									<VisualState.Setters>
 										<Setter Target="AndroidSwitch.TrackTint"
-												Value="{ThemeResource MaterialToggleSwitchOnBackgroundBrush}" />
+												Value="{TemplateBinding Background}" />
+										<Setter Target="AndroidSwitch.ThumbTint"
+												Value="{TemplateBinding Foreground}" />
 										<Setter Target="OnDisabledGrid.Visibility"
 												Value="Visible" />
 										<Setter Target="OffDisabledGrid.Visibility"
