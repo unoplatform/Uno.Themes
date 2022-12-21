@@ -151,31 +151,6 @@
 										  IsOn="True" />
 						</smtx:XamlDisplay>
 
-						<!-- ToggleSwitch ON change foreground -->
-						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_OnTestForeground"
-										  Margin="12,0">
-							<ToggleSwitch Header="On change foreground"
-										  Foreground="Green"
-										  IsOn="True" />
-						</smtx:XamlDisplay>
-
-						<!-- ToggleSwitch ON test change background -->
-						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_OnTestBackground"
-										  Margin="12,0">
-							<ToggleSwitch Header="On change Background"
-										  Background="Red"
-										  IsOn="True" />
-						</smtx:XamlDisplay>
-
-						<!-- ToggleSwitch ON test change both -->
-						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_OnTestBoth"
-										  Margin="12,0">
-							<ToggleSwitch Header="Test change background and foreground"
-										  Background="Red"
-										  Foreground="Red"
-										  IsOn="True" />
-						</smtx:XamlDisplay>
-
 						<!-- Primary -->
 						<TextBlock Text="Others"
 								   Style="{StaticResource TitleSmall}"
@@ -194,6 +169,22 @@
 							<ToggleSwitch Header="HorizontalAlignment=Stretch"
 										  HorizontalAlignment="Stretch"
 										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+
+							<!-- ToggleSwitch ON change foreground -->
+							<ToggleSwitch Header="On change foreground"
+										  Foreground="Green"
+										  IsOn="True" />
+
+							<!-- ToggleSwitch ON test change background -->
+							<ToggleSwitch Header="On change Background"
+										  Background="Red"
+										  IsOn="True" />
+
+							<!-- ToggleSwitch ON test change both -->
+							<ToggleSwitch Header="Test change background and foreground"
+										  Background="Red"
+										  Foreground="Red"
+										  IsOn="True" />
 						</StackPanel>
 					</StackPanel>
 				</DataTemplate>
