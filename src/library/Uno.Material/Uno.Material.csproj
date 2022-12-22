@@ -201,4 +201,5 @@
 	</ItemGroup>
 
 	<Import Project="xamlmerge.targets" />
+	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />
 </Project>
