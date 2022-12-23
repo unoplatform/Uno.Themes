@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.MarkupHelpers;
+﻿using Microsoft.UI.Xaml.MarkupHelpers.Internals;
 using Windows.UI;
 
 namespace Uno.Themes.Markup
@@ -11,84 +9,131 @@ namespace Uno.Themes.Markup
 		{
 			public static class Primary
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("PrimaryColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Inverse => ThemeResource.Get<Color>("PrimaryInverseColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("PrimaryContainerColor");
-				public static Action<IDependencyPropertyBuilder<Color>> VariantDark => ThemeResource.Get<Color>("PrimaryVariantDarkColor");
-				public static Action<IDependencyPropertyBuilder<Color>> VariantLight => ThemeResource.Get<Color>("PrimaryVariantLightColor");
+				[ResourceKeyDefinition(typeof(Color), "PrimaryColor")]
+				public static ResourceValue<Color> Default => new("PrimaryColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "PrimaryInverseColor")]
+				public static ResourceValue<Color> Inverse => new("PrimaryInverseColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "PrimaryContainerColor")]
+				public static ResourceValue<Color> Container => new("PrimaryContainerColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "PrimaryVariantDarkColor")]
+				public static ResourceValue<Color> VariantDark => new("PrimaryVariantDarkColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "PrimaryVariantLightColor")]
+				public static ResourceValue<Color> VariantLight => new("PrimaryVariantLightColor", true);
 			}
 
 			public static class OnPrimary
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("OnPrimaryColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("OnPrimaryContainerColor");
+				[ResourceKeyDefinition(typeof(Color), "OnPrimaryColor")]
+				public static ResourceValue<Color> Default => new("OnPrimaryColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "OnPrimaryContainerColor")]
+				public static ResourceValue<Color> Container => new("OnPrimaryContainerColor", true);
 			}
 
 			public static class Secondary
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("SecondaryColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("SecondaryContainerColor");
-				public static Action<IDependencyPropertyBuilder<Color>> VariantDark => ThemeResource.Get<Color>("SecondaryVariantDarkColor");
-				public static Action<IDependencyPropertyBuilder<Color>> VariantLight => ThemeResource.Get<Color>("SecondaryVariantLightColor");
+				[ResourceKeyDefinition(typeof(Color), "SecondaryColor")]
+				public static ResourceValue<Color> Default => new("SecondaryColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "SecondaryContainerColor")]
+				public static ResourceValue<Color> Container => new("SecondaryContainerColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "SecondaryVariantDarkColor")]
+				public static ResourceValue<Color> VariantDark => new("SecondaryVariantDarkColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "SecondaryVariantLightColor")]
+				public static ResourceValue<Color> VariantLight => new("SecondaryVariantLightColor", true);
 			}
 
 			public static class OnSecondary
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("OnSecondaryColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("OnSecondaryContainerColor");
+				[ResourceKeyDefinition(typeof(Color), "OnSecondaryColor")]
+				public static ResourceValue<Color> Default => new("OnSecondaryColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "OnSecondaryContainerColor")]
+				public static ResourceValue<Color> Container => new("OnSecondaryContainerColor", true);
 			}
 
 			public static class Tertiary
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("TertiaryColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("TertiaryContainerColor");
+				[ResourceKeyDefinition(typeof(Color), "TertiaryColor")]
+				public static ResourceValue<Color> Default => new("TertiaryColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "TertiaryContainerColor")]
+				public static ResourceValue<Color> Container => new("TertiaryContainerColor", true);
 			}
 
 			public static class OnTertiary
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("OnTertiaryColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("OnTertiaryContainerColor");
+				[ResourceKeyDefinition(typeof(Color), "OnTertiaryColor")]
+				public static ResourceValue<Color> Default => new("OnTertiaryColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "OnTertiaryContainerColor")]
+				public static ResourceValue<Color> Container => new("OnTertiaryContainerColor", true);
 			}
 
 			public static class Error
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("ErrorColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("ErrorContainerColor");
+				[ResourceKeyDefinition(typeof(Color), "ErrorColor")]
+				public static ResourceValue<Color> Default => new("ErrorColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "ErrorContainerColor")]
+				public static ResourceValue<Color> Container => new("ErrorContainerColor", true);
 			}
 
 			public static class OnError
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("OnErrorColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Container => ThemeResource.Get<Color>("OnErrorContainerColor");
+				[ResourceKeyDefinition(typeof(Color), "OnErrorColor")]
+				public static ResourceValue<Color> Default => new("OnErrorColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "OnErrorContainerColor")]
+				public static ResourceValue<Color> Container => new("OnErrorContainerColor", true);
 			}
 
 			public static class Background
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("BackgroundColor");
+				[ResourceKeyDefinition(typeof(Color), "BackgroundColor")]
+				public static ResourceValue<Color> Default => new("BackgroundColor", true);
 			}
 
 			public static class OnBackground
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("OnBackgroundColor");
+				[ResourceKeyDefinition(typeof(Color), "OnBackgroundColor")]
+				public static ResourceValue<Color> Default => new("OnBackgroundColor", true);
 			}
 
 			public static class Surface
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("SurfaceColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Variant => ThemeResource.Get<Color>("SurfaceVariantColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Inverse => ThemeResource.Get<Color>("SurfaceInverseColor");
+				[ResourceKeyDefinition(typeof(Color), "SurfaceColor")]
+				public static ResourceValue<Color> Default => new("SurfaceColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "SurfaceVariantColor")]
+				public static ResourceValue<Color> Variant => new("SurfaceVariantColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "SurfaceInverseColor")]
+				public static ResourceValue<Color> Inverse => new("SurfaceInverseColor", true);
 			}
 
 			public static class OnSurface
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("OnSurfaceColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Variant => ThemeResource.Get<Color>("OnSurfaceVariantColor");
-				public static Action<IDependencyPropertyBuilder<Color>> Inverse => ThemeResource.Get<Color>("OnSurfaceInverseColor");
+				[ResourceKeyDefinition(typeof(Color), "OnSurfaceColor")]
+				public static ResourceValue<Color> Default => new("OnSurfaceColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "OnSurfaceVariantColor")]
+				public static ResourceValue<Color> Variant => new("OnSurfaceVariantColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "OnSurfaceInverseColor")]
+				public static ResourceValue<Color> Inverse => new("OnSurfaceInverseColor", true);
 			}
 
 			public static class Outline
 			{
-				public static Action<IDependencyPropertyBuilder<Color>> Default => ThemeResource.Get<Color>("OutlineColor");
+				[ResourceKeyDefinition(typeof(Color), "OutlineColor")]
+				public static ResourceValue<Color> Default => new("OutlineColor", true);
 			}
 
 		}
