@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.UI.Xaml;
 using Uno.Extensions.Markup;
 
-namespace Uno.Material.WinUI.Markup
+namespace Uno.Material
 {
 	public static class MarkupInit
 	{
