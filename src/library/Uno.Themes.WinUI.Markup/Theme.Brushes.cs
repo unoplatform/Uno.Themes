@@ -1,5 +1,5 @@
-﻿using Microsoft.UI.Xaml.MarkupHelpers.Internals;
-using Microsoft.UI.Xaml.Media;
+﻿using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
 {

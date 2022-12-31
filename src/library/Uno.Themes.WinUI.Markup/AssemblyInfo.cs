@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Microsoft.UI.Xaml.MarkupHelpers.Internals;
+using Uno.Extensions.Markup.Internals;
 
 [assembly: AssemblyMetadata("IsTrimmable", "True")]
 [assembly: ResourceDefinitionClass(typeof(Uno.Themes.Markup.Theme))]
