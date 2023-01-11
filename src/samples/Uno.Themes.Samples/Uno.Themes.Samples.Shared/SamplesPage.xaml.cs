@@ -114,6 +114,7 @@ namespace Uno.Themes.Samples
 				AddMenuItem<NavigationViewSamplePage_WUX>(icon: "NavigationViewIcon");
 				AddMenuItem<NumberBoxSamplePage>();
 				AddMenuItem<PasswordBoxSamplePage>(icon: "PasswordBoxIcon");
+				AddMenuItem<PipsPagerSamplePage>(icon: "PipsPagerIcon");
 				AddMenuItem<ProgressBarSamplePage>(icon: "ProgressBarIcon");
 				AddMenuItem<ProgressRingSamplePage>(icon: "ProgressBarIcon");
 				AddMenuItem<RadioButtonSamplePage>(icon: "RadioButtonIcon");

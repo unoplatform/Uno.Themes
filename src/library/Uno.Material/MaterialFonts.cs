@@ -10,7 +10,7 @@ namespace Uno.Material
 {
 	public sealed partial class MaterialFonts : ResourceDictionary
 	{
-		private static ResourceDictionary FontOverride;
+		//private static ResourceDictionary FontOverride;
 
 		public string OverrideSource
 		{
@@ -48,17 +48,21 @@ namespace Uno.Material
 
 		private static void OnOverrideChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
 		{
-			FontOverride = args.NewValue as ResourceDictionary;
+			//FontOverride = args.NewValue as ResourceDictionary;
+			if (dependencyObject is MaterialFonts fonts && args.NewValue is ResourceDictionary @override)
+			{
+				fonts.MergedDictionaries.Add(@override);
+			}
 		}
 
 		public MaterialFonts()
 		{
 			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") });
 
-			if (FontOverride is { } fontOverride)
-			{
-				MergedDictionaries.Add(fontOverride);
-			}
+			//if (FontOverride is { } fontOverride)
+			//{
+			//	MergedDictionaries.Add(fontOverride);
+			//}
 		}
 	}
 }
