@@ -169,6 +169,12 @@ namespace Uno.Themes.Markup
 				public static ResourceValue<Style> Outlined => new("OutlinedPasswordBoxStyle");
 			}
 
+			public static class PipsPager
+			{
+				[ResourceKeyDefinition(typeof(Style), "PipsPagerStyle", TargetType = typeof(PipsPager))]
+				public static ResourceValue<Style> Default => new("PipsPagerStyle");
+			}
+
 			public static class ProgressBar
 			{
 				[ResourceKeyDefinition(typeof(Style), "ProgressBarStyle", TargetType = typeof(ProgressBar))]
