@@ -8,20 +8,16 @@
 				<!-- Load WinUI resources -->
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
-				<MaterialColorsV1 xmlns="using:Uno.Material"
-								OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
-				<MaterialFonts xmlns="using:Uno.Material"
-							   OverrideSource="ms-appx:///MaterialFontsOverride.xaml" />
+				<MaterialColorsV1 xmlns="using:Uno.Material" OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+				<MaterialFonts xmlns="using:Uno.Material" OverrideSource="ms-appx:///MaterialFontsOverride.xaml" />
 				<MaterialResourcesV1 xmlns="using:Uno.Material" />
 
-				<MaterialColorsV2 xmlns="using:Uno.Material" />
-				<MaterialFonts xmlns="using:Uno.Material"
-							   OverrideSource="ms-appx:///MaterialFontsOverride.xaml" />
+				<MaterialColorsV2 xmlns="using:Uno.Material" OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+				<MaterialFonts xmlns="using:Uno.Material" OverrideSource="ms-appx:///MaterialFontsOverride.xaml" />
 				<MaterialResourcesV2 xmlns="using:Uno.Material" />
 
-				<CupertinoColors xmlns="using:Uno.Cupertino" />
-				<CupertinoFonts xmlns="using:Uno.Cupertino"
-								OverrideSource="ms-appx:///CupertinoFontsOverride.xaml" />
+				<CupertinoColors xmlns="using:Uno.Cupertino" OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+				<CupertinoFonts xmlns="using:Uno.Cupertino" OverrideSource="ms-appx:///CupertinoFontsOverride.xaml" />
 				<CupertinoResources xmlns="using:Uno.Cupertino" />
 
 				<ResourceDictionary Source="Converters.xaml" />
@@ -41,8 +37,7 @@
 			</ResourceDictionary.MergedDictionaries>
 
 			<!-- To override the default FlyoutLightDismissOverlayBackground resource -->
-			<SolidColorBrush x:Key="FlyoutLightDismissOverlayBackground"
-							 Color="{StaticResource MaterialOverlayColor}" />
+			<SolidColorBrush x:Key="FlyoutLightDismissOverlayBackground" Color="{StaticResource MaterialOverlayColor}" />
 		</ResourceDictionary>
 	</Application.Resources>
 
