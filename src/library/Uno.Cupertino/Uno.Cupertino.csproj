@@ -9,7 +9,7 @@
 		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 
-		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
+		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release' and !('$(MSBuildRuntimeType)'!='Core' and $([MSBuild]::IsOSPlatform('osx')))">true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
 	
 	<PropertyGroup>
