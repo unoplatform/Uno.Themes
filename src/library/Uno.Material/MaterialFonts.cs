@@ -57,7 +57,7 @@ namespace Uno.Material
 
 			if (FontOverride is { } fontOverride)
 			{
-				MergedDictionaries.Add(fontOverride);
+				this.SafeMerge(fontOverride);
 			}
 		}
 	}

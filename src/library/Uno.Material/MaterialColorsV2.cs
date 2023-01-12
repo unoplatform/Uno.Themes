@@ -58,7 +58,7 @@ namespace Uno.Material
 			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColorPalette.xaml") });
 			if (ColorPaletteOverride is { } colorOverride)
 			{
-				MergedDictionaries.Add(colorOverride);
+				this.SafeMerge(colorOverride);
 			}
 		}
 	}
