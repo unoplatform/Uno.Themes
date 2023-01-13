@@ -1,4 +1,4 @@
-# Material Controls Styles
+﻿# Material Controls Styles
 Control|Style Key|IsDefaultStyle*
 -|-|-
 AppBarButton|AppBarButtonStyle|True
@@ -40,6 +40,7 @@ muxc:ProgressBar|ProgressBarStyle|True
 muxc:ProgressRing|ProgressRingStyle|True
 PasswordBox|FilledPasswordBoxStyle|True
 PasswordBox|OutlinedPasswordBoxStyle|
+muxc:PipsPager|PipsPagerStyle|True
 RadioButton|RadioButtonStyle|True
 RadioButton|SecondaryRadioButtonStyle|
 Slider|SliderStyle|True

@@ -67,6 +67,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\PasswordBoxSamplePage.xaml.cs">
       <DependentUpon>PasswordBoxSamplePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\PipsPagerSamplePage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ProgressBarSamplePage.xaml.cs">
       <DependentUpon>ProgressBarSamplePage.xaml</DependentUpon>
     </Compile>
@@ -133,9 +134,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HierarchyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SystemThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VisualTreeHelperEx.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SamplesPage.xaml.cs">
-      <DependentUpon>SamplesPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -203,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\PasswordBoxSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\PipsPagerSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,10 +277,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)CupertinoFontsOverride.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)SamplesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -382,22 +380,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\MaterialIcon_Small.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\MaterialIcon_Small.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\MaterialIcon_Small.scale-400.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\BottomBarIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ButtonIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\CheckboxIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ColorsIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ComboBoxIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\FabIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\NavigationViewIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ProgressBarIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\RadioButtonIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\SliderIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\TextBlockIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\PasswordBoxIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\TextBoxIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\TimePickerIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\ToggleSwitchIcon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\NavigationViewIcons\Placeholder.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\uno-banner-dark.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\uno-banner-dark.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\uno-banner-dark.scale-200.png" />
