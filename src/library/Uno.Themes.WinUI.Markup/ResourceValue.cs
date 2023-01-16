@@ -17,9 +17,9 @@ namespace Uno.Themes.Markup
 
 		public bool IsThemeResource { get; }
 
-		public static implicit operator Action<IDependencyPropertyBuilder<T>>(ResourceValue<T> resource) =>
-			resource.IsThemeResource ?
-				ThemeResource.Get<T>(resource.Key)
-				: StaticResource.Get<T>(resource.Key);
+			public static implicit operator Action<IDependencyPropertyBuilder<T>>(ResourceValue<T> resource) =>
+				resource.IsThemeResource ?
+					ThemeResource.Get<T>(resource.Key)
+					: StaticResource.Get<T>(resource.Key);
 	}
 }

@@ -46,12 +46,7 @@ namespace Uno.Material
 			}
 		}
 
-		private static void OnOverrideChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
-		{
-			ColorPaletteOverride = args.NewValue as ResourceDictionary;
-		}
-
-		public MaterialColorsV2()
+		public void Init()
 		{
 			Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColors.xaml");
 
@@ -60,6 +55,26 @@ namespace Uno.Material
 			{
 				this.SafeMerge(colorOverride);
 			}
+		}
+
+		public void Reset()
+		{
+			//Source = null;
+			Clear();
+			MergedDictionaries.Clear();
+			ThemeDictionaries.Clear();
+
+			Init();
+		}
+
+		private static void OnOverrideChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+		{
+			ColorPaletteOverride = args.NewValue as ResourceDictionary;
+		}
+
+		public MaterialColorsV2()
+		{
+			Init();
 		}
 	}
 }

@@ -20,9 +20,14 @@ namespace Uno.Material
 	/// </summary>
 	public class MaterialResourcesV2 : ResourceDictionary
 	{
+		private static MaterialColorsV2 _colors;
+		public static MaterialColorsV2 Colors => _colors;
+
 		public MaterialResourcesV2()
 		{
 			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
+
+			MergedDictionaries.Add(_colors = new MaterialColorsV2());
 		}
 	}
 }
