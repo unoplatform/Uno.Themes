@@ -11,14 +11,12 @@ namespace Uno.Material
 		public static T UseMaterial<T>(this T app,
 			ResourceDictionary colorOverride = null,
 			ResourceDictionary fontOverride = null) where T : Application
-		{
-			app.Resources(r => r.Merged(
-				colorOverride is { } ? new MaterialColors().OverrideDictionary(colorOverride) : new MaterialColors(),
-				fontOverride is { } ? new MaterialFonts().OverrideDictionary(fontOverride) : new MaterialFonts(),
-				new MaterialResources())
-			);
-
-			return app;
-		}
+			=> app.Resources(
+				r => r.Merged(
+					new MaterialTheme()
+						.ColorOverrideDictionary(colorOverride)
+						.FontOverrideDictionary(fontOverride)
+					)
+				);
 	}
 }

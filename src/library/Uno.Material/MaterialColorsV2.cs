@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.Foundation.Metadata;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -8,6 +9,7 @@ using Windows.UI.Xaml;
 
 namespace Uno.Material
 {
+	[Deprecated("Resource initialization for the Uno.Material theme should now be done using the MaterialTheme class instead.", DeprecationType.Deprecate, 3)]
 	public partial class MaterialColorsV2 : ResourceDictionary
 	{
 		private static ResourceDictionary ColorPaletteOverride;
