@@ -25,6 +25,9 @@ namespace Uno.Material
 	/// </summary>
 	public class MaterialTheme : ResourceDictionary
 	{
+		private bool _isColorOverrideMuted;
+		private bool _isFontOverrideMuted;
+
 		#region FontOverrideSource (DP)
 		/// <summary>
 		/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -99,7 +102,7 @@ namespace Uno.Material
 
 		private static void OnFontOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			if (d is MaterialTheme theme)
+			if (d is MaterialTheme { _isFontOverrideMuted: false } theme)
 			{
 				theme.UpdateSource();
 			}
@@ -126,16 +129,57 @@ namespace Uno.Material
 
 		private static void OnColorOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			if (d is MaterialTheme theme)
+			if (d is MaterialTheme { _isColorOverrideMuted: false } theme)
 			{
 				theme.UpdateSource();
 			}
 		}
 		#endregion
 
-		public MaterialTheme()
+		public MaterialTheme() : this(colorOverride: null, fontOverride: null)
 		{
+			
+		}
+
+		public MaterialTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
+		{
+			if (colorOverride is { })
+			{
+				SetColorOverrideSilently(colorOverride);
+			}
+
+			if (fontOverride is { })
+			{
+				SetFontOverrideSilently(fontOverride);
+			}
+
 			UpdateSource();
+		}
+
+		private void SetColorOverrideSilently(ResourceDictionary colorOverride)
+		{
+			try
+			{
+				_isColorOverrideMuted = true;
+				ColorOverrideDictionary = colorOverride;
+			}
+			finally
+			{
+				_isColorOverrideMuted = false;
+			}
+		}
+
+		private void SetFontOverrideSilently(ResourceDictionary fontOverride)
+		{
+			try
+			{
+				_isFontOverrideMuted = true;
+				FontOverrideDictionary = fontOverride;
+			}
+			finally
+			{
+				_isFontOverrideMuted = false;
+			}
 		}
 
 		private void UpdateSource()
