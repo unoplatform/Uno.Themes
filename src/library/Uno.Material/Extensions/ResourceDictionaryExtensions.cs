@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 
 namespace Uno.Material
 {
-	internal static class ResourceDictionaryExtensions
+	public static class ResourceDictionaryExtensions
 	{
 		/// <summary>
 		/// Used to safely nest a res-dict under another, regardless if it was nested before.
