@@ -21,6 +21,54 @@
 							<muxc:PipsPager Style="{StaticResource MaterialPipsPagerStyle}" />
 						</smtx:XamlDisplay>
 
+						<!-- Horizontal PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Horizontal PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="M3_Material_PipsPagerSamplePage_Horizontal_Navigation_Buttons">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource MaterialPipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Vertical PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Vertical PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="M3_Material_PipsPagerSamplePage_Vertical_Navigation_Buttons">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											Orientation="Vertical"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource MaterialPipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Horizontal Disabled PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Horizontal Disabled PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="M3_Material_PipsPagerSamplePage_Horizontal_Navigation_Buttons_Disabled">
+							<muxc:PipsPager IsEnabled="False"
+											NumberOfPages="5"
+											SelectedPageIndex="2"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource MaterialPipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Vertical Disabled PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Vertical Disabled PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="M3_Material_PipsPagerSamplePage_Vertical_Navigation_Buttons_Disabled">
+							<muxc:PipsPager IsEnabled="False"
+											NumberOfPages="5"
+											SelectedPageIndex="2"
+											Orientation="Vertical"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource MaterialPipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
