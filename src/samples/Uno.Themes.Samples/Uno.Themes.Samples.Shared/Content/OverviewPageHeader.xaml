@@ -8,6 +8,11 @@
              mc:Ignorable="d android">
 
 	<Grid>
+		<Grid.Resources>
+			<!--<FontFamily x:Key="MyFamily">ms-appx:///Assets/Fonts/Itim-Regular.ttf#Itim</FontFamily>-->
+			<FontFamily x:Key="MyFamily">ms-appx:///Uno.Fonts.Roboto/Fonts/Roboto-Light.ttf</FontFamily>
+
+		</Grid.Resources>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
@@ -32,6 +37,7 @@
 
 			<TextBlock Grid.ColumnSpan="2"
 			           Margin="0,24,0,0"
+					   FontFamily="{StaticResource MyFamily}"
 			           Style="{StaticResource MaterialHeadline5}"
 			           Text="Uno Themes is a collection of ready-to-use Material and Cupertino styles to help speed up your multi-platform development."
 			           TextWrapping="Wrap" />
