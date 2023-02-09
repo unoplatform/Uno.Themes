@@ -54,12 +54,12 @@ jobs:
         ApplicationPlatform: UWP_x64
         ArtifactName: UWP
         UseWinUI: false
-        DisableNet6MobileTargets: true
+        UnoThemesDisableNet6: true
       Android:
         ApplicationPlatform: Android
         ArtifactName: Android
         UseWinUI: false
-        DisableNet6MobileTargets: true
+        UnoThemesDisableNet6: true
       Packages_UWP:
         ApplicationPlatform: Packages_UWP
         ArtifactName: Packages_UWP
@@ -92,12 +92,12 @@ jobs:
       iOS:
         ApplicationPlatform: iPhone
         ArtifactName: iOS
-        DisableNet6MobileTargets: true
+        UnoThemesDisableNet6: true
         UseWinUI: false
       macOS:
         ApplicationPlatform: macOS
         ArtifactName: macOS
-        DisableNet6MobileTargets: true
+        UnoThemesDisableNet6: true
         UseWinUI: false
   pool:
     vmImage: macOS-12
