@@ -1,169 +1,165 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0"
-	xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-		<ProjectGuid>{E5A33630-47C0-4E0B-8D0A-9D50CCC3498B}</ProjectGuid>
-		<ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-		<OutputType>Exe</OutputType>
-		<RootNamespace>Uno.Themes.Samples.macOS</RootNamespace>
-		<AssemblyName>Uno.Themes.Samples.macOS</AssemblyName>
-		<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-		<TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
-		<MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
-		<UseWinUI>false</UseWinUI>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug</OutputPath>
-		<DefineConstants>DEBUG</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<EnableCodeSigning>false</EnableCodeSigning>
-		<CodeSigningKey>Mac Developer</CodeSigningKey>
-		<CreatePackage>false</CreatePackage>
-		<EnablePackageSigning>false</EnablePackageSigning>
-		<IncludeMonoRuntime>false</IncludeMonoRuntime>
-		<UseSGen>true</UseSGen>
-		<UseRefCounting>true</UseRefCounting>
-		<Profiling>true</Profiling>
-		<HttpClientHandler>
-		</HttpClientHandler>
-		<LinkMode>
-		</LinkMode>
-		<XamMacArch>
-		</XamMacArch>
-		<NoWarn>
-		</NoWarn>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
-		<DebugSymbols>false</DebugSymbols>
-		<DebugType>pdbonly</DebugType>
-		<Optimize>true</Optimize>
-		<OutputPath>bin\Release</OutputPath>
-		<DefineConstants>
-		</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<EnableCodeSigning>false</EnableCodeSigning>
-		<CreatePackage>true</CreatePackage>
-		<EnablePackageSigning>false</EnablePackageSigning>
-		<IncludeMonoRuntime>true</IncludeMonoRuntime>
-		<UseSGen>true</UseSGen>
-		<UseRefCounting>true</UseRefCounting>
-		<LinkMode>SdkOnly</LinkMode>
-		<HttpClientHandler>
-		</HttpClientHandler>
-		<XamMacArch>
-		</XamMacArch>
-		<NoWarn>
-		</NoWarn>
-	</PropertyGroup>
-	<ItemGroup>
-		<Reference Include="System" />
-		<Reference Include="System.Core" />
-		<Reference Include="Xamarin.Mac" />
-		<Reference Include="System.Numerics" />
-		<Reference Include="System.Numerics.Vectors" />
-		<Reference Include="System.Memory" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="nventive.Nimue.Application.Building.Light">
-			<Version>0.1.0-alpha.58</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Packaging">
-			<Version>0.1.0-alpha.58</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Versioning">
-			<Version>0.1.0-alpha.58</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="Uno.UI.RemoteControl" Version="4.5.12" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-		<PackageReference Include="Uno.UI" Version="4.5.12" />
-		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
-			<Version>1.0.59</Version>
-		</PackageReference>
-		<PackageReference Include="Uno.ShowMeTheXAML">
-			<Version>1.0.59</Version>
-		</PackageReference>
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.12" />
-		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
-		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
-	</ItemGroup>
-	<Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
-	<ItemGroup>
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512.png" />
-		<ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png" />
-		<ImageAsset Include="Assets.xcassets\Contents.json" />
-		<ImageAsset Include="Assets.xcassets\unologo.imageset\Contents.json" />
-		<ImageAsset Include="Assets.xcassets\unologo.imageset\unoplatform.jpg" />
-	</ItemGroup>
-	<ItemGroup />
-	<ItemGroup>
-		<None Include="Info.plist" />
-		<None Include="Entitlements.plist" />
-		<BundleResource Include="Resources\Fonts\uno-fluentui-assets.ttf">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</BundleResource>
-		<BundleResource Include="Resources\Fonts\SF-Pro.ttf" />
-		<BundleResource Include="Resources\Fonts\Roboto-Light.ttf" />
-		<BundleResource Include="Resources\Fonts\Roboto-Medium.ttf" />
-		<BundleResource Include="Resources\Fonts\Roboto-Regular.ttf" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="Main.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj">
-			<Project>{98c1fdac-c692-4c65-99e7-70fdd53b8f2e}</Project>
-			<Name>Uno.Cupertino</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj">
-			<Project>{B5279EE5-E662-45B0-8929-D90D0BDE16AB}</Project>
-			<Name>Uno.Material</Name>
-		</ProjectReference>
-	</ItemGroup>
-	<Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
-	<Target Name="VS16Mac_RemoveSystemMemory" BeforeTargets="ResolveAssemblyReferences">
-		<!--
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{E5A33630-47C0-4E0B-8D0A-9D50CCC3498B}</ProjectGuid>
+    <ProjectTypeGuids>{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Uno.Themes.Samples.macOS</RootNamespace>
+    <AssemblyName>Uno.Themes.Samples.macOS</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
+    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <UseWinUI>false</UseWinUI>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CodeSigningKey>Mac Developer</CodeSigningKey>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>true</UseSGen>
+    <UseRefCounting>true</UseRefCounting>
+    <Profiling>true</Profiling>
+    <HttpClientHandler>
+    </HttpClientHandler>
+    <LinkMode>
+    </LinkMode>
+    <XamMacArch>
+    </XamMacArch>
+    <NoWarn>
+    </NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>true</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>true</IncludeMonoRuntime>
+    <UseSGen>true</UseSGen>
+    <UseRefCounting>true</UseRefCounting>
+    <LinkMode>SdkOnly</LinkMode>
+    <HttpClientHandler>
+    </HttpClientHandler>
+    <XamMacArch>
+    </XamMacArch>
+    <NoWarn>
+    </NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.Mac" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Memory" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="nventive.Nimue.Application.Building.Light">
+      <Version>0.1.0-alpha.58</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Packaging">
+      <Version>0.1.0-alpha.58</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Versioning">
+      <Version>0.1.0-alpha.58</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.7.37" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
+    <PackageReference Include="Uno.UI" Version="4.7.37" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild">
+      <Version>1.0.59</Version>
+    </PackageReference>
+    <PackageReference Include="Uno.ShowMeTheXAML">
+      <Version>1.0.59</Version>
+    </PackageReference>
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.7.37" />
+    <PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
+    <PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
+  </ItemGroup>
+  <Import Project="..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" Condition="Exists('..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems')" />
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\unologo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\unologo.imageset\unoplatform.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <BundleResource Include="Resources\Fonts\uno-fluentui-assets.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\Fonts\SF-Pro.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj">
+      <Project>{98c1fdac-c692-4c65-99e7-70fdd53b8f2e}</Project>
+      <Name>Uno.Cupertino</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj">
+      <Project>{B5279EE5-E662-45B0-8929-D90D0BDE16AB}</Project>
+      <Name>Uno.Material</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
+  <Target Name="VS16Mac_RemoveSystemMemory" BeforeTargets="ResolveAssemblyReferences">
+    <!--
 				VS4Mac seems to process System.Memory differently, and removes
 				the System.Memory local reference if the package is transitively referenced.
 				We remove the Reference added by the nuget targets so that ResolveAssemblyReferences
 				is properly adding the local System.Memory to the Reference item group.
 		-->
-		<ItemGroup>
-			<Reference Remove="@(_ReferenceToRemove)" />
-			<Reference Include="System.Memory" />
-		</ItemGroup>
-	</Target>
-	<Target Name="VS16_RemoveSystemMemory" BeforeTargets="FindReferenceAssembliesForReferences">
-		<ItemGroup>
-			<ReferencePath Remove="@(_ReferencePathToRemove)" />
-		</ItemGroup>
-	</Target>
-	<Target Name="_PackageCopyToOutput" BeforeTargets="Build">
-		<ItemGroup>
-			<_packages Include="$(TargetDir)\*.pkg" />
-		</ItemGroup>
-		<Copy SourceFiles="@(_packages)" DestinationFolder="$(PackageOutputPath)\" />
-	</Target>
+    <ItemGroup>
+      <Reference Remove="@(_ReferenceToRemove)" />
+      <Reference Include="System.Memory" />
+    </ItemGroup>
+  </Target>
+  <Target Name="VS16_RemoveSystemMemory" BeforeTargets="FindReferenceAssembliesForReferences">
+    <ItemGroup>
+      <ReferencePath Remove="@(_ReferencePathToRemove)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="_PackageCopyToOutput" BeforeTargets="Build">
+    <ItemGroup>
+      <_packages Include="$(TargetDir)\*.pkg" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_packages)" DestinationFolder="$(PackageOutputPath)\" />
+  </Target>
 </Project>
