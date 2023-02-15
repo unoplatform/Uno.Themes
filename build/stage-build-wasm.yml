@@ -22,7 +22,7 @@
     packageType: sdk
     version: 6.0.200
 
-- bash: dotnet msbuild -r -p:Configuration=Release -p:DisableNet6MobileTargets=true -p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
+- bash: dotnet msbuild -r -p:Configuration=Release -p:UnoThemesDisableNet6=true -p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
 
 - task: PublishBuildArtifacts@1
   inputs:

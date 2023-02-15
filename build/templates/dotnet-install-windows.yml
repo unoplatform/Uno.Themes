@@ -4,6 +4,14 @@
   UnoCheck_Manifest: 'https://raw.githubusercontent.com/unoplatform/uno.check/34b1a60f5c1c51604b47362781969dde46979fd5/manifests/uno.ui.manifest.json'
 
 steps:
+
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core SDK 5.0.x'
+    retryCountOnTaskFailure: 3
+    inputs:
+      packageType: sdk
+      version: 5.0.x
+
   - task: UseDotNet@2
     displayName: 'Use .NET Core SDK ${{ parameters.DotNetVersion }}'
     retryCountOnTaskFailure: 3

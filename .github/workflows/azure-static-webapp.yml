@@ -45,7 +45,7 @@ jobs:
     
       - run: |
           cd src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm
-          dotnet build -c Release "/p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}" /p:DisableNet6MobileTargets=true
+          dotnet build -c Release "/p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}" /p:UnoThemesDisableNet6=true
 
       - uses: actions/upload-artifact@v2
         with:

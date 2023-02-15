@@ -1,28 +1,30 @@
 <Project ToolsVersion="15.0">
-
 	<PropertyGroup>
 		<IsMonoAndroid>false</IsMonoAndroid>
-		<IsMonoAndroid Condition="$(TargetFramework.ToLower().StartsWith('monoandroid')) or '$(TargetFramework)'=='net6.0-android'">true</IsMonoAndroid>
+		<IsMonoAndroid Condition="$(TargetFramework.ToLower().StartsWith('monoandroid'))">true</IsMonoAndroid>
 
 		<IsXamarinIOS>false</IsXamarinIOS>
-		<IsXamarinIOS Condition="$(TargetFramework.ToLower().StartsWith('xamarinios')) or '$(TargetFramework)'=='net6.0-ios'">true</IsXamarinIOS>
+		<IsXamarinIOS Condition="$(TargetFramework.ToLower().StartsWith('xamarinios'))">true</IsXamarinIOS>
 
 		<IsXamarinMac>false</IsXamarinMac>
-		<IsXamarinMac Condition="$(TargetFramework.ToLower().StartsWith('xamarinmac')) or '$(TargetFramework)'=='net6.0-macos'">true</IsXamarinMac>
+		<IsXamarinMac Condition="$(TargetFramework.ToLower().StartsWith('xamarinmac'))">true</IsXamarinMac>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<_IsAndroid>false</_IsAndroid>
-		<_IsAndroid Condition="$(IsMonoAndroid) or '$(TargetFramework)'=='net6.0-android'">true</_IsAndroid>
+		<_IsAndroid Condition="$(IsMonoAndroid) or $(TargetFramework.ToLower().Contains('-android'))">true</_IsAndroid>
 
 		<_IsCatalyst>false</_IsCatalyst>
-		<_IsCatalyst Condition="$(_IsCatalyst) or '$(TargetFramework)'=='net6.0-maccatalyst'">true</_IsCatalyst>
+		<_IsCatalyst Condition="$(_IsCatalyst) or $(TargetFramework.ToLower().Contains('-maccatalyst'))">true</_IsCatalyst>
 
 		<_IsIOS>false</_IsIOS>
-		<_IsIOS Condition="$(IsXamarinIOS) or '$(TargetFramework)'=='net6.0-ios' or '$(TargetFramework)'=='net6.0-maccatalyst'">true</_IsIOS>
+		<_IsIOS Condition="$(IsXamarinIOS) or $(TargetFramework.ToLower().Contains('-ios'))">true</_IsIOS>
 
 		<_IsMacOS>false</_IsMacOS>
-		<_IsMacOS Condition="'$(TargetFramework)'=='xamarinmac20' or '$(TargetFramework)'=='net6.0-macos'">true</_IsMacOS>
+		<_IsMacOS Condition="$(IsXamarinMac) or $(TargetFramework.ToLower().Contains('-macos'))">true</_IsMacOS>
+
+		<IsIOSOrCatalyst>false</IsIOSOrCatalyst>
+		<IsIOSOrCatalyst Condition="$(_IsIOS) or $(_IsCatalyst)">true</IsIOSOrCatalyst>
 
 		<_IsNet>false</_IsNet>
 		<_IsNet Condition="'$(TargetFramework)'=='net461'">true</_IsNet>
@@ -34,7 +36,10 @@
 		<_IsNetStd Condition="'$(TargetFramework)'=='netstandard2.0' or $(_IsNetCore)">true</_IsNetStd>
 
 		<_IsUWP>false</_IsUWP>
-		<_IsUWP Condition="'$(TargetFramework)'=='uap10.0'">true</_IsUWP>
+		<_IsUWP Condition="$(TargetFramework.ToLower().StartsWith('uap'))">true</_IsUWP>
+
+		<_IsWinUI>false</_IsWinUI>
+		<_IsWinUI Condition="$(TargetFramework.ToLower().Contains('windows10'))">true</_IsWinUI>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(_IsIOS)">

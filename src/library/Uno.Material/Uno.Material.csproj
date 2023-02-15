@@ -3,14 +3,14 @@
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">netstandard2.0;xamarinios10;monoandroid12.0;xamarinmac20</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(DisableNet6MobileTargets)'!='true'">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
-		
+
 		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
 
@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<Choose>
-		<When Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid12.0' or '$(TargetFramework)'=='monoandroid11.0' or $(TargetFramework.StartsWith('net6.0-'))">
+		<When Condition="$(_IsAndroid) or $(IsIOSOrCatalyst)">
 			<ItemGroup>
 				<IncludeXamlNamespaces Include="mobile" />
 				<ExcludeXamlNamespaces Include="not_mobile" />
@@ -51,34 +51,34 @@
 
 			<PropertyGroup>
 				<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
-				<DefineConstants Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">$(DefineConstants);WinUI_Desktop</DefineConstants>
+				<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
 				<PackageId>Uno.Material.WinUI</PackageId>
-				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);net5.0-windows10.0.18362</TargetFrameworks>
+				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net6.0-windows10.0.18362</TargetFrameworks>
 			</PropertyGroup>
 
 			<ItemGroup>
 				<PackageReference Include="Uno.WinUI" Version="4.5.12" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="4.5.12" Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Uno.WinUI.Lottie" Version="4.5.12" Condition="!$(_IsWinUI)" />
 
-				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" Condition="$(_IsWinUI)" />
 
-				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
-				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22000.24" Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'" />
+				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22621.28" Condition="$(_IsWinUI)" />
+				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" Condition="$(_IsWinUI)" />
 			</ItemGroup>
 
-			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+			<ItemGroup Condition="$(_IsWinUI)">
 				<Content Include="@(LottieJson)" />
 			</ItemGroup>
-			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+			<ItemGroup Condition="!$(_IsWinUI)">
 				<EmbeddedResource Include="@(LottieJson)" />
 			</ItemGroup>
 
-			<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows10.0.18362'">
+			<ItemGroup Condition="$(_IsWinUI)">
 				<Page Remove="@(XamlExclusion)" />
 			</ItemGroup>
 
-			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+			<ItemGroup Condition="!$(_IsWinUI)">
 				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 				<Page Remove="@(XamlExclusion)" />
 
@@ -87,7 +87,7 @@
 				</Compile>
 			</ItemGroup>
 
-			<ItemGroup Condition="'$(TargetFramework)'!='net5.0-windows10.0.18362'">
+			<ItemGroup Condition="!$(_IsWinUI)">
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
@@ -102,19 +102,19 @@
 			<ItemGroup>
 				<PackageReference Include="Uno.UI" Version="4.5.12" />
 			</ItemGroup>
-			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+			<ItemGroup Condition="$(_IsUWP)">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
-			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+			<ItemGroup Condition="!$(_IsUWP)">
 				<PackageReference Include="Uno.UI.Lottie" Version="4.5.12" />
 			</ItemGroup>
 
 
-			<ItemGroup Condition="'$(TargetFramework)'=='uap10.0.18362'">
+			<ItemGroup Condition="$(_IsUWP)">
 				<Content Include="@(LottieJson)" />
 			</ItemGroup>
-			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+			<ItemGroup Condition="!$(_IsUWP)">
 				<EmbeddedResource Include="@(LottieJson)" />
 			</ItemGroup>
 
@@ -128,7 +128,7 @@
 				<Content Include="build\Uno.Material.targets" Pack="true" PackagePath="build" />
 			</ItemGroup>
 
-			<ItemGroup Condition="'$(TargetFramework)'!='uap10.0.18362'">
+			<ItemGroup Condition="!$(_IsUWP)">
 				<IncludeXamlNamespaces Include="lottie_not_win" />
 				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
@@ -146,7 +146,7 @@
 		<None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid12.0' or '$(TargetFramework)'=='xamarinmac20' ">
+	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
 		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
 			<LogicalName>$(AssemblyName).xml</LogicalName>
 		</EmbeddedResource>
