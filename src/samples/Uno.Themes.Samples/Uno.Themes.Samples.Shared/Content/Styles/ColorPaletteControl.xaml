@@ -20,7 +20,9 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="ContentControl">
-						<Grid Background="{TemplateBinding Background}">
+						<Grid >
+							<Border Background="{TemplateBinding Background}" />
+							<Border Background="{TemplateBinding BorderBrush}" />
 							<StackPanel Margin="12">
 								<TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" />
 								<TextBlock Text="{TemplateBinding Tag}"
@@ -149,35 +151,40 @@
 						   Height="Auto" />
 		</Grid.RowDefinitions>
 		<ContentControl x:Name="Color1"
-						Content="{x:Bind Color1BrushName, Mode=OneWay}"
-						Tag="{x:Bind Color1Brush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
-						Foreground="{x:Bind Color1Foreground, Mode=OneWay}"
+						Content="{x:Bind Color1Name, Mode=OneWay}"
+						Tag="{x:Bind Color1TagBrush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
+						BorderBrush="{x:Bind Color1State, Mode=OneWay}"
+						Foreground="{x:Bind Color1Content, Mode=OneWay}"
 						Background="{x:Bind Color1Brush, Mode=OneWay}" />
 		<ContentControl x:Name="Color2"
-						Content="{x:Bind Color2BrushName, Mode=OneWay}"
-						Tag="{x:Bind Color2Brush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
-						Foreground="{x:Bind Color2Foreground, Mode=OneWay}"
+						Content="{x:Bind Color2Name, Mode=OneWay}"
+						Tag="{x:Bind Color2TagBrush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
+						BorderBrush="{x:Bind Color2State, Mode=OneWay}"
+						Foreground="{x:Bind Color2Content, Mode=OneWay}"
 						Background="{x:Bind Color2Brush, Mode=OneWay}"
 						Visibility="{x:Bind Color2Brush, Mode=OneWay,Converter={StaticResource NotNullVisibilityConverter}}"
 						Grid.Column="1" />
 		<ContentControl x:Name="Color3"
-						Content="{x:Bind Color3BrushName, Mode=OneWay}"
-						Tag="{x:Bind Color3Brush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
-						Foreground="{x:Bind Color3Foreground, Mode=OneWay}"
+						Content="{x:Bind Color3Name, Mode=OneWay}"
+						Tag="{x:Bind Color3TagBrush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
+						BorderBrush="{x:Bind Color3State, Mode=OneWay}"
+						Foreground="{x:Bind Color3Content, Mode=OneWay}"
 						Background="{x:Bind Color3Brush, Mode=OneWay}"
 						Visibility="{x:Bind Color3Brush, Mode=OneWay,Converter={StaticResource NotNullVisibilityConverter}}"
 						Grid.Column="2" />
 		<ContentControl x:Name="Color4"
-						Content="{x:Bind Color4BrushName, Mode=OneWay}"
-						Tag="{x:Bind Color4Brush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
-						Foreground="{x:Bind Color4Foreground, Mode=OneWay}"
+						Content="{x:Bind Color4Name, Mode=OneWay}"
+						Tag="{x:Bind Color4TagBrush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
+						BorderBrush="{x:Bind Color4State, Mode=OneWay}"
+						Foreground="{x:Bind Color4Content, Mode=OneWay}"
 						Background="{x:Bind Color4Brush, Mode=OneWay}"
 						Visibility="{x:Bind Color4Brush, Mode=OneWay,Converter={StaticResource NotNullVisibilityConverter}}"
 						Grid.Column="3" />
 		<ContentControl x:Name="Color5"
-						Content="{x:Bind Color5BrushName, Mode=OneWay}"
-						Tag="{x:Bind Color5Brush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
-						Foreground="{x:Bind Color5Foreground, Mode=OneWay}"
+						Content="{x:Bind Color5Name, Mode=OneWay}"
+						Tag="{x:Bind Color5TagBrush,Converter={StaticResource BrushToTextConverter}, Mode=OneWay}"
+						BorderBrush="{x:Bind Color5State, Mode=OneWay}"
+						Foreground="{x:Bind Color5Content, Mode=OneWay}"
 						Background="{x:Bind Color5Brush, Mode=OneWay}"
 						Visibility="{x:Bind Color5Brush, Mode=OneWay,Converter={StaticResource NotNullVisibilityConverter}}"
 						Grid.Column="4" />
