@@ -7,6 +7,7 @@
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:styles="using:Uno.Themes.Samples.Content.Styles"
 	  mc:Ignorable="d android ios">
 
 	<Page.Resources>
@@ -35,468 +36,674 @@
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
-					<StackPanel>
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup>
+					<UserControl>
+						<StackPanel>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup>
 
-								<VisualState x:Name="Medium">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="725" />
-									</VisualState.StateTriggers>
-								</VisualState>
+									<VisualState x:Name="Medium">
+										<VisualState.StateTriggers>
+											<AdaptiveTrigger MinWindowWidth="725" />
+										</VisualState.StateTriggers>
+									</VisualState>
 
-								<VisualState x:Name="Narrow">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="0" />
-									</VisualState.StateTriggers>
+									<VisualState x:Name="Narrow">
+										<VisualState.StateTriggers>
+											<AdaptiveTrigger MinWindowWidth="0" />
+										</VisualState.StateTriggers>
 
-									<VisualState.Setters>
+										<VisualState.Setters>
 
-										<Setter Target="Content_1.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_1.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_1.(Grid.Row)"
-												Value="0" />
+											<Setter Target="Content_1.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_1.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_1.(Grid.Row)"
+													Value="0" />
 
-										<Setter Target="Content_2.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_2.(Grid.Row)"
-												Value="1" />
+											<Setter Target="Content_2.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_2.(Grid.Row)"
+													Value="1" />
 
-										<Setter Target="Content_3.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_3.(Grid.Row)"
-												Value="2" />
+											<Setter Target="Content_3.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_3.(Grid.Row)"
+													Value="2" />
 
-										<Setter Target="Column_2.Width"
-												Value="0" />
-										<Setter Target="Column_3.Width"
-												Value="0" />
-										<Setter Target="ColumnSpacer_1.Width"
-												Value="0" />
-										<Setter Target="ColumnSpacer_2.Width"
-												Value="0" />
+											<Setter Target="Column_2.Width"
+													Value="0" />
+											<Setter Target="Column_3.Width"
+													Value="0" />
+											<Setter Target="ColumnSpacer_1.Width"
+													Value="0" />
+											<Setter Target="ColumnSpacer_2.Width"
+													Value="0" />
 
-										<Setter Target="TitleContainer_1.MinHeight"
-												Value="0" />
-										<Setter Target="TitleContainer_2.MinHeight"
-												Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
+											<Setter Target="TitleContainer_1.MinHeight"
+													Value="0" />
+											<Setter Target="TitleContainer_2.MinHeight"
+													Value="0" />
+										</VisualState.Setters>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
 
-						<ScrollViewer VerticalScrollBarVisibility="Auto">
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition x:Name="Column_1"
-													  Width="*" />
-									<ColumnDefinition x:Name="ColumnSpacer_1"
-													  Width="12" />
-									<ColumnDefinition x:Name="Column_2"
-													  Width="*" />
-									<ColumnDefinition x:Name="ColumnSpacer_2"
-													  Width="12" />
-									<ColumnDefinition x:Name="Column_3"
-													  Width="*" />
-								</Grid.ColumnDefinitions>
+							<ScrollViewer VerticalScrollBarVisibility="Auto">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition x:Name="Column_1"
+														  Width="*" />
+										<ColumnDefinition x:Name="ColumnSpacer_1"
+														  Width="12" />
+										<ColumnDefinition x:Name="Column_2"
+														  Width="*" />
+										<ColumnDefinition x:Name="ColumnSpacer_2"
+														  Width="12" />
+										<ColumnDefinition x:Name="Column_3"
+														  Width="*" />
+									</Grid.ColumnDefinitions>
 
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
 
-								<!-- Content 1 -->
-								<StackPanel x:Name="Content_1"
-											Margin="0,0,0,12"
-											Grid.Column="0">
+									<!-- Content 1 -->
+									<StackPanel x:Name="Content_1"
+												Margin="0,0,0,12"
+												Grid.Column="0">
 
-									<!-- Title -->
-									<TextBlock Text="Color Scheme"
-											   Style="{StaticResource MaterialSubtitle1}"
-											   Margin="0,0,0,12" />
-
-									<!-- Brushes -->
-									<ContentControl Content="MaterialPrimaryBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}" />
-									<ContentControl Content="MaterialPrimaryVariantDarkBrush"
-													Background="{StaticResource MaterialPrimaryVariantDarkBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}" />
-									<ContentControl Content="MaterialPrimaryVariantLightBrush"
-													Background="{StaticResource MaterialPrimaryVariantLightBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}" />
-									<ContentControl Content="MaterialSecondaryBrush"
-													Background="{StaticResource MaterialSecondaryBrush}"
-													Foreground="{StaticResource MaterialOnSecondaryBrush}" />
-									<ContentControl Content="MaterialSecondaryVariantDarkBrush"
-													Background="{StaticResource MaterialSecondaryVariantDarkBrush}"
-													Foreground="{StaticResource MaterialOnSecondaryBrush}" />
-									<ContentControl Content="MaterialSecondaryVariantLightBrush"
-													Background="{StaticResource MaterialSecondaryVariantLightBrush}"
-													Foreground="{StaticResource MaterialOnSecondaryBrush}" />
-									<ContentControl Content="MaterialBackgroundBrush"
-													Background="{StaticResource MaterialBackgroundBrush}" />
-									<ContentControl Content="MaterialSurfaceBrush"
-													Background="{StaticResource MaterialSurfaceBrush}" />
-									<ContentControl Content="MaterialErrorBrush"
-													Background="{StaticResource MaterialErrorBrush}"
-													Foreground="{StaticResource MaterialOnSecondaryBrush}" />
-									<ContentControl Content="MaterialOnPrimaryBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimaryBrush}" />
-									<ContentControl Content="MaterialOnPrimaryMediumBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimaryMediumBrush}" />
-									<ContentControl Content="MaterialOnPrimaryLowBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimaryLowBrush}" />
-									<ContentControl Content="MaterialOnSecondaryBrush"
-													Background="{StaticResource MaterialSecondaryBrush}"
-													Foreground="White"
-													Tag="{StaticResource MaterialOnSecondaryBrush}" />
-									<ContentControl Content="MaterialOnSecondaryMediumBrush"
-													Background="{StaticResource MaterialSecondaryBrush}"
-													Foreground="White"
-													Tag="{StaticResource MaterialOnSecondaryMediumBrush}" />
-									<ContentControl Content="MaterialOnSecondaryLowBrush"
-													Background="{StaticResource MaterialSecondaryBrush}"
-													Foreground="White"
-													Tag="{StaticResource MaterialOnSecondaryLowBrush}" />
-								</StackPanel>
-
-								<!-- Content 2 -->
-								<StackPanel x:Name="Content_2"
-											Margin="0,0,0,12"
-											Grid.Column="2">
-
-									<!-- Title -->
-									<TextBlock Text="Color Scheme"
-											   Style="{StaticResource MaterialSubtitle1}"
-											   Margin="0,0,0,12" />
-
-									<!-- Brushes -->
-									<ContentControl Content="MaterialOnErrorBrush"
-													Background="{StaticResource MaterialOnErrorBrush}"
-													Foreground="White" />
-									<ContentControl Content="MaterialOverlayBrush"
-													Background="{StaticResource MaterialOverlayBrush}" />
-
-									<!-- Title -->
-									<!-- Using Grid to manage spacing -->
-									<Grid x:Name="TitleContainer_1"
-										  MinHeight="88">
-										<TextBlock Text="Surface Containers / OnSurface"
+										<!-- Title -->
+										<TextBlock Text="Color Scheme"
 												   Style="{StaticResource MaterialSubtitle1}"
-												   VerticalAlignment="Bottom"
-												   Margin="0,12" />
-									</Grid>
+												   Margin="0,0,0,12" />
 
-									<!-- Brushes -->
-									<ContentControl Content="MaterialOnSurfaceBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}"
-													Tag="{StaticResource MaterialOnSurfaceBrush}" />
-									<ContentControl Content="MaterialOnSurfaceMediumBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}"
-													Tag="{StaticResource MaterialOnSurfaceMediumBrush}" />
-									<ContentControl Content="MaterialOnSurfaceLowBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Tag="{StaticResource MaterialOnSurfaceLowBrush}" />
-									<ContentControl Content="MaterialOnSurfaceHoverBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Tag="{StaticResource MaterialOnSurfaceHoverBrush}" />
-									<ContentControl Content="MaterialOnSurfaceFocusedBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Tag="{StaticResource MaterialOnSurfaceFocusedBrush}" />
-									<ContentControl Content="MaterialOnSurfacePressedBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Tag="{StaticResource MaterialOnSurfacePressedBrush}" />
-									<ContentControl Content="MaterialOnSurfaceDraggedBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Tag="{StaticResource MaterialOnSurfaceDraggedBrush}" />
-									<ContentControl Content="MaterialOnSurfaceSelectedBrush"
-													Background="{StaticResource MaterialSurfaceBrush}"
-													Tag="{StaticResource MaterialOnSurfaceSelectedBrush}" />
+										<!-- Brushes -->
+										<ContentControl Content="MaterialPrimaryBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+										<ContentControl Content="MaterialPrimaryVariantDarkBrush"
+														Background="{StaticResource MaterialPrimaryVariantDarkBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+										<ContentControl Content="MaterialPrimaryVariantLightBrush"
+														Background="{StaticResource MaterialPrimaryVariantLightBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+										<ContentControl Content="MaterialSecondaryBrush"
+														Background="{StaticResource MaterialSecondaryBrush}"
+														Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+										<ContentControl Content="MaterialSecondaryVariantDarkBrush"
+														Background="{StaticResource MaterialSecondaryVariantDarkBrush}"
+														Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+										<ContentControl Content="MaterialSecondaryVariantLightBrush"
+														Background="{StaticResource MaterialSecondaryVariantLightBrush}"
+														Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+										<ContentControl Content="MaterialBackgroundBrush"
+														Background="{StaticResource MaterialBackgroundBrush}" />
+										<ContentControl Content="MaterialSurfaceBrush"
+														Background="{StaticResource MaterialSurfaceBrush}" />
+										<ContentControl Content="MaterialErrorBrush"
+														Background="{StaticResource MaterialErrorBrush}"
+														Foreground="{StaticResource MaterialOnSecondaryBrush}" />
+										<ContentControl Content="MaterialOnPrimaryBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimaryBrush}" />
+										<ContentControl Content="MaterialOnPrimaryMediumBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimaryMediumBrush}" />
+										<ContentControl Content="MaterialOnPrimaryLowBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimaryLowBrush}" />
+										<ContentControl Content="MaterialOnSecondaryBrush"
+														Background="{StaticResource MaterialSecondaryBrush}"
+														Foreground="White"
+														Tag="{StaticResource MaterialOnSecondaryBrush}" />
+										<ContentControl Content="MaterialOnSecondaryMediumBrush"
+														Background="{StaticResource MaterialSecondaryBrush}"
+														Foreground="White"
+														Tag="{StaticResource MaterialOnSecondaryMediumBrush}" />
+										<ContentControl Content="MaterialOnSecondaryLowBrush"
+														Background="{StaticResource MaterialSecondaryBrush}"
+														Foreground="White"
+														Tag="{StaticResource MaterialOnSecondaryLowBrush}" />
+									</StackPanel>
 
-									<!-- Title -->
-									<!-- Using Grid to manage spacing -->
-									<Grid x:Name="TitleContainer_2"
-										  MinHeight="88">
-										<TextBlock Text="Surface Containers / Primary on Surface"
+									<!-- Content 2 -->
+									<StackPanel x:Name="Content_2"
+												Margin="0,0,0,12"
+												Grid.Column="2">
+
+										<!-- Title -->
+										<TextBlock Text="Color Scheme"
 												   Style="{StaticResource MaterialSubtitle1}"
-												   VerticalAlignment="Bottom"
-												   Margin="0,12" />
-									</Grid>
+												   Margin="0,0,0,12" />
 
-									<!-- Brushes -->
-									<ContentControl Content="MaterialPrimaryHoverBrush"
-													Background="{StaticResource MaterialPrimaryHoverBrush}"
-													Foreground="{StaticResource MaterialPrimaryBrush}" />
-									<ContentControl Content="MaterialPrimaryFocusedBrush"
-													Background="{StaticResource MaterialPrimaryFocusedBrush}"
-													Foreground="{StaticResource MaterialPrimaryBrush}" />
-									<ContentControl Content="MaterialPrimaryPressedBrush"
-													Background="{StaticResource MaterialPrimaryPressedBrush}"
-													Foreground="{StaticResource MaterialPrimaryBrush}" />
-									<ContentControl Content="MaterialPrimaryDraggedBrush"
-													Background="{StaticResource MaterialPrimaryDraggedBrush}"
-													Foreground="{StaticResource MaterialPrimaryBrush}" />
-									<ContentControl Content="MaterialPrimarySelectedBrush"
-													Background="{StaticResource MaterialPrimarySelectedBrush}"
-													Foreground="{StaticResource MaterialPrimaryBrush}" />
-								</StackPanel>
+										<!-- Brushes -->
+										<ContentControl Content="MaterialOnErrorBrush"
+														Background="{StaticResource MaterialOnErrorBrush}"
+														Foreground="White" />
+										<ContentControl Content="MaterialOverlayBrush"
+														Background="{StaticResource MaterialOverlayBrush}" />
 
-								<!-- Content 3 -->
-								<StackPanel x:Name="Content_3"
-											Grid.Column="4">
+										<!-- Title -->
+										<!-- Using Grid to manage spacing -->
+										<Grid x:Name="TitleContainer_1"
+											  MinHeight="88">
+											<TextBlock Text="Surface Containers / OnSurface"
+													   Style="{StaticResource MaterialSubtitle1}"
+													   VerticalAlignment="Bottom"
+													   Margin="0,12" />
+										</Grid>
 
-									<!-- Title -->
-									<TextBlock Text="Primary Containers / OnPrimary"
-											   Style="{StaticResource MaterialSubtitle1}"
-											   Margin="0,0,0,12" />
+										<!-- Brushes -->
+										<ContentControl Content="MaterialOnSurfaceBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}"
+														Tag="{StaticResource MaterialOnSurfaceBrush}" />
+										<ContentControl Content="MaterialOnSurfaceMediumBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}"
+														Tag="{StaticResource MaterialOnSurfaceMediumBrush}" />
+										<ContentControl Content="MaterialOnSurfaceLowBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Tag="{StaticResource MaterialOnSurfaceLowBrush}" />
+										<ContentControl Content="MaterialOnSurfaceHoverBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Tag="{StaticResource MaterialOnSurfaceHoverBrush}" />
+										<ContentControl Content="MaterialOnSurfaceFocusedBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Tag="{StaticResource MaterialOnSurfaceFocusedBrush}" />
+										<ContentControl Content="MaterialOnSurfacePressedBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Tag="{StaticResource MaterialOnSurfacePressedBrush}" />
+										<ContentControl Content="MaterialOnSurfaceDraggedBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Tag="{StaticResource MaterialOnSurfaceDraggedBrush}" />
+										<ContentControl Content="MaterialOnSurfaceSelectedBrush"
+														Background="{StaticResource MaterialSurfaceBrush}"
+														Tag="{StaticResource MaterialOnSurfaceSelectedBrush}" />
 
-									<!-- Brushes -->
-									<ContentControl Content="MaterialOnPrimaryHoverBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimaryHoverBrush}" />
-									<ContentControl Content="MaterialOnPrimaryFocusedBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimaryFocusedBrush}" />
-									<ContentControl Content="MaterialOnPrimaryPressedBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimaryPressedBrush}" />
-									<ContentControl Content="MaterialOnPrimaryDraggedBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimaryDraggedBrush}" />
-									<ContentControl Content="MaterialOnPrimarySelectedBrush"
-													Background="{StaticResource MaterialPrimaryBrush}"
-													Foreground="{StaticResource MaterialOnPrimaryBrush}"
-													Tag="{StaticResource MaterialOnPrimarySelectedBrush}" />
-								</StackPanel>
-							</Grid>
-						</ScrollViewer>
-					</StackPanel>
+										<!-- Title -->
+										<!-- Using Grid to manage spacing -->
+										<Grid x:Name="TitleContainer_2"
+											  MinHeight="88">
+											<TextBlock Text="Surface Containers / Primary on Surface"
+													   Style="{StaticResource MaterialSubtitle1}"
+													   VerticalAlignment="Bottom"
+													   Margin="0,12" />
+										</Grid>
+
+										<!-- Brushes -->
+										<ContentControl Content="MaterialPrimaryHoverBrush"
+														Background="{StaticResource MaterialPrimaryHoverBrush}"
+														Foreground="{StaticResource MaterialPrimaryBrush}" />
+										<ContentControl Content="MaterialPrimaryFocusedBrush"
+														Background="{StaticResource MaterialPrimaryFocusedBrush}"
+														Foreground="{StaticResource MaterialPrimaryBrush}" />
+										<ContentControl Content="MaterialPrimaryPressedBrush"
+														Background="{StaticResource MaterialPrimaryPressedBrush}"
+														Foreground="{StaticResource MaterialPrimaryBrush}" />
+										<ContentControl Content="MaterialPrimaryDraggedBrush"
+														Background="{StaticResource MaterialPrimaryDraggedBrush}"
+														Foreground="{StaticResource MaterialPrimaryBrush}" />
+										<ContentControl Content="MaterialPrimarySelectedBrush"
+														Background="{StaticResource MaterialPrimarySelectedBrush}"
+														Foreground="{StaticResource MaterialPrimaryBrush}" />
+									</StackPanel>
+
+									<!-- Content 3 -->
+									<StackPanel x:Name="Content_3"
+												Grid.Column="4">
+
+										<!-- Title -->
+										<TextBlock Text="Primary Containers / OnPrimary"
+												   Style="{StaticResource MaterialSubtitle1}"
+												   Margin="0,0,0,12" />
+
+										<!-- Brushes -->
+										<ContentControl Content="MaterialOnPrimaryHoverBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimaryHoverBrush}" />
+										<ContentControl Content="MaterialOnPrimaryFocusedBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimaryFocusedBrush}" />
+										<ContentControl Content="MaterialOnPrimaryPressedBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimaryPressedBrush}" />
+										<ContentControl Content="MaterialOnPrimaryDraggedBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimaryDraggedBrush}" />
+										<ContentControl Content="MaterialOnPrimarySelectedBrush"
+														Background="{StaticResource MaterialPrimaryBrush}"
+														Foreground="{StaticResource MaterialOnPrimaryBrush}"
+														Tag="{StaticResource MaterialOnPrimarySelectedBrush}" />
+									</StackPanel>
+								</Grid>
+							</ScrollViewer>
+						</StackPanel>
+					</UserControl>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<UserControl>
+						<ScrollViewer VerticalScrollBarVisibility="Auto">
+							<StackPanel HorizontalAlignment="Stretch" Padding="0,6">
+
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource OnPrimaryBrush}"
+															Color1BrushName="PrimaryBrush"
+															Color1Brush="{ThemeResource PrimaryBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="PrimaryHoverBrush"
+															Color1Brush="{ThemeResource PrimaryHoverBrush}"
+															Color1Foreground="{ThemeResource OnPrimaryHoverBrush}"
+															Color2BrushName="PrimaryFocusedBrush"
+															Color2Brush="{ThemeResource PrimaryFocusedBrush}"
+															Color2Foreground="{ThemeResource OnPrimaryFocusedBrush}"
+															Color3BrushName="PrimaryPressedBrush"
+															Color3Brush="{ThemeResource PrimaryPressedBrush}"
+															Color3Foreground="{ThemeResource OnPrimaryPressedBrush}"
+															Color4BrushName="PrimaryDraggedBrush"
+															Color4Brush="{ThemeResource PrimaryDraggedBrush}"
+															Color4Foreground="{ThemeResource OnPrimaryDraggedBrush}"
+															Color5BrushName="PrimarySelectedBrush"
+															Color5Brush="{ThemeResource PrimarySelectedBrush}"
+															Color5Foreground="{ThemeResource OnPrimarySelectedBrush}" />
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource PrimaryBrush}"
+															Color1BrushName="OnPrimaryBrush"
+															Color1Brush="{ThemeResource OnPrimaryBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnPrimaryMediumBrush"
+															Color1Brush="{ThemeResource OnPrimaryMediumBrush}"
+															Color1Foreground="{ThemeResource PrimaryMediumBrush}"
+															Color2BrushName="OnPrimaryLowBrush"
+															Color2Brush="{ThemeResource OnPrimaryLowBrush}"
+															Color2Foreground="{ThemeResource PrimaryLowBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnPrimaryHoverBrush"
+															Color1Brush="{ThemeResource OnPrimaryHoverBrush}"
+															Color1Foreground="{ThemeResource PrimaryHoverBrush}"
+															Color2BrushName="OnPrimaryFocusedBrush"
+															Color2Brush="{ThemeResource OnPrimaryFocusedBrush}"
+															Color2Foreground="{ThemeResource PrimaryFocusedBrush}"
+															Color3BrushName="OnPrimaryPressedBrush"
+															Color3Brush="{ThemeResource OnPrimaryPressedBrush}"
+															Color3Foreground="{ThemeResource PrimaryPressedBrush}"
+															Color4BrushName="OnPrimaryDraggedBrush"
+															Color4Brush="{ThemeResource OnPrimaryDraggedBrush}"
+															Color4Foreground="{ThemeResource PrimaryDraggedBrush}"
+															Color5BrushName="OnPrimarySelectedBrush"
+															Color5Brush="{ThemeResource OnPrimarySelectedBrush}"
+															Color5Foreground="{ThemeResource PrimarySelectedBrush}" />
+
+
+
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource OnSecondaryBrush}"
+															Color1BrushName="SecondaryBrush"
+															Color1Brush="{ThemeResource SecondaryBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="SecondaryHoverBrush"
+															Color1Brush="{ThemeResource SecondaryHoverBrush}"
+															Color1Foreground="{ThemeResource OnSecondaryHoverBrush}"
+															Color2BrushName="SecondaryFocusedBrush"
+															Color2Brush="{ThemeResource SecondaryFocusedBrush}"
+															Color2Foreground="{ThemeResource OnSecondaryFocusedBrush}"
+															Color3BrushName="SecondaryPressedBrush"
+															Color3Brush="{ThemeResource SecondaryPressedBrush}"
+															Color3Foreground="{ThemeResource OnSecondaryPressedBrush}"
+															Color4BrushName="SecondaryDraggedBrush"
+															Color4Brush="{ThemeResource SecondaryDraggedBrush}"
+															Color4Foreground="{ThemeResource OnSecondaryDraggedBrush}"
+															Color5BrushName="SecondarySelectedBrush"
+															Color5Brush="{ThemeResource SecondarySelectedBrush}"
+															Color5Foreground="{ThemeResource OnSecondarySelectedBrush}" />
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource SecondaryBrush}"
+															Color1BrushName="OnSecondaryBrush"
+															Color1Brush="{ThemeResource OnSecondaryBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnSecondaryMediumBrush"
+															Color1Brush="{ThemeResource OnSecondaryMediumBrush}"
+															Color1Foreground="{ThemeResource SecondaryMediumBrush}"
+															Color2BrushName="OnSecondaryLowBrush"
+															Color2Brush="{ThemeResource OnSecondaryLowBrush}"
+															Color2Foreground="{ThemeResource SecondaryLowBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnSecondaryHoverBrush"
+															Color1Brush="{ThemeResource OnSecondaryHoverBrush}"
+															Color1Foreground="{ThemeResource SecondaryHoverBrush}"
+															Color2BrushName="OnSecondaryFocusedBrush"
+															Color2Brush="{ThemeResource OnSecondaryFocusedBrush}"
+															Color2Foreground="{ThemeResource SecondaryFocusedBrush}"
+															Color3BrushName="OnSecondaryPressedBrush"
+															Color3Brush="{ThemeResource OnSecondaryPressedBrush}"
+															Color3Foreground="{ThemeResource SecondaryPressedBrush}"
+															Color4BrushName="OnSecondaryDraggedBrush"
+															Color4Brush="{ThemeResource OnSecondaryDraggedBrush}"
+															Color4Foreground="{ThemeResource SecondaryDraggedBrush}"
+															Color5BrushName="OnSecondarySelectedBrush"
+															Color5Brush="{ThemeResource OnSecondarySelectedBrush}"
+															Color5Foreground="{ThemeResource SecondarySelectedBrush}" />
+
+
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource OnTertiaryBrush}"
+															Color1BrushName="TertiaryBrush"
+															Color1Brush="{ThemeResource TertiaryBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="TertiaryHoverBrush"
+															Color1Brush="{ThemeResource TertiaryHoverBrush}"
+															Color1Foreground="{ThemeResource OnTertiaryHoverBrush}"
+															Color2BrushName="TertiaryFocusedBrush"
+															Color2Brush="{ThemeResource TertiaryFocusedBrush}"
+															Color2Foreground="{ThemeResource OnTertiaryFocusedBrush}"
+															Color3BrushName="TertiaryPressedBrush"
+															Color3Brush="{ThemeResource TertiaryPressedBrush}"
+															Color3Foreground="{ThemeResource OnTertiaryPressedBrush}"
+															Color4BrushName="TertiaryDraggedBrush"
+															Color4Brush="{ThemeResource TertiaryDraggedBrush}"
+															Color4Foreground="{ThemeResource OnTertiaryDraggedBrush}"
+															Color5BrushName="TertiarySelectedBrush"
+															Color5Brush="{ThemeResource TertiarySelectedBrush}"
+															Color5Foreground="{ThemeResource OnTertiarySelectedBrush}" />
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource TertiaryBrush}"
+															Color1BrushName="OnTertiaryBrush"
+															Color1Brush="{ThemeResource OnTertiaryBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnTertiaryMediumBrush"
+															Color1Brush="{ThemeResource OnTertiaryMediumBrush}"
+															Color1Foreground="{ThemeResource TertiaryMediumBrush}"
+															Color2BrushName="OnTertiaryLowBrush"
+															Color2Brush="{ThemeResource OnTertiaryLowBrush}"
+															Color2Foreground="{ThemeResource TertiaryLowBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnTertiaryHoverBrush"
+															Color1Brush="{ThemeResource OnTertiaryHoverBrush}"
+															Color1Foreground="{ThemeResource TertiaryHoverBrush}"
+															Color2BrushName="OnTertiaryFocusedBrush"
+															Color2Brush="{ThemeResource OnTertiaryFocusedBrush}"
+															Color2Foreground="{ThemeResource TertiaryFocusedBrush}"
+															Color3BrushName="OnTertiaryPressedBrush"
+															Color3Brush="{ThemeResource OnTertiaryPressedBrush}"
+															Color3Foreground="{ThemeResource TertiaryPressedBrush}"
+															Color4BrushName="OnTertiaryDraggedBrush"
+															Color4Brush="{ThemeResource OnTertiaryDraggedBrush}"
+															Color4Foreground="{ThemeResource TertiaryDraggedBrush}"
+															Color5BrushName="OnTertiarySelectedBrush"
+															Color5Brush="{ThemeResource OnTertiarySelectedBrush}"
+															Color5Foreground="{ThemeResource TertiarySelectedBrush}" />
+
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource OnSurfaceBrush}"
+															Color1BrushName="SurfaceBrush"
+															Color1Brush="{ThemeResource SurfaceBrush}" />
+								<styles:ColorPaletteControl ColorForeground="{ThemeResource SurfaceBrush}"
+															Color1BrushName="OnSurfaceBrush"
+															Color1Brush="{ThemeResource OnSurfaceBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnSurfaceMediumBrush"
+															Color1Brush="{ThemeResource OnSurfaceMediumBrush}"
+															Color1Foreground="{ThemeResource SurfaceMediumBrush}"
+															Color2BrushName="OnSurfaceLowBrush"
+															Color2Brush="{ThemeResource OnSurfaceLowBrush}"
+															Color2Foreground="{ThemeResource SurfaceLowBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnSurfaceHoverBrush"
+															Color1Brush="{ThemeResource OnSurfaceHoverBrush}"
+															Color1Foreground="{ThemeResource SurfaceHoverBrush}"
+															Color2BrushName="OnSurfaceFocusedBrush"
+															Color2Brush="{ThemeResource OnSurfaceFocusedBrush}"
+															Color2Foreground="{ThemeResource SurfaceFocusedBrush}"
+															Color3BrushName="OnSurfacePressedBrush"
+															Color3Brush="{ThemeResource OnSurfacePressedBrush}"
+															Color3Foreground="{ThemeResource SurfacePressedBrush}"
+															Color4BrushName="OnSurfaceDraggedBrush"
+															Color4Brush="{ThemeResource OnSurfaceDraggedBrush}"
+															Color4Foreground="{ThemeResource SurfaceDraggedBrush}"
+															Color5BrushName="OnSurfaceSelectedBrush"
+															Color5Brush="{ThemeResource OnSurfaceSelectedBrush}"
+															Color5Foreground="{ThemeResource SurfaceSelectedBrush}" />
+
+
+								<styles:ColorPaletteControl Color1BrushName="ErrorBrush"
+															Color1Brush="{ThemeResource ErrorBrush}"
+															Color1Foreground="{ThemeResource OnErrorBrush}"
+															Color2BrushName="OnErrorBrush"
+															Color2Brush="{ThemeResource OnErrorBrush}"
+															Color2Foreground="{ThemeResource ErrorBrush}" />
+
+
+								<!--<styles:ColorPaletteControl ColorForeground="{ThemeResource InverseOnPrimaryBrush}"
+															Color1BrushName="InversePrimaryBrush"
+															Color1Brush="{ThemeResource InversePrimaryBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="InverseSurfaceBrush"
+															Color1Brush="{ThemeResource InverseSurfaceBrush}"
+															Color1Foreground="{ThemeResource InverseOnSurfaceBrush}"
+															Color2BrushName="InverseOnSurfaceBrush"
+															Color2Brush="{ThemeResource InverseOnSurfaceBrush}"
+															Color2Foreground="{ThemeResource InverseSurfaceBrush}" />-->
+
+
+								<!--<styles:ColorPaletteControl ColorForeground="{ThemeResource OnSurfaceVariantBrush}"
+															Color1BrushName="SurfaceVariantBrush"
+															Color1Brush="{ThemeResource SurfaceVariantBrush}" />
+								<styles:ColorPaletteControl Color1BrushName="OnSurfaceVariantBrush"
+															Color1Brush="{ThemeResource OnSurfaceVariantBrush}"
+															Color1Foreground="{ThemeResource SurfaceVariantBrush}"
+															Color2BrushName="OutlineBrush"
+															Color2Brush="{ThemeResource OutlineBrush}" 
+															Color2Foreground="{ThemeResource OnOutlineBrush}" />-->
+
+								<!-- TODO Add Containers and validate other missing brushes that aren't in figma -->
+							</StackPanel>
+						</ScrollViewer>
+					</UserControl>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
-					<StackPanel>
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup>
+					<UserControl>
+						<StackPanel>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup>
 
-								<VisualState x:Name="Medium">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="725" />
-									</VisualState.StateTriggers>
-								</VisualState>
+									<VisualState x:Name="Medium">
+										<VisualState.StateTriggers>
+											<AdaptiveTrigger MinWindowWidth="725" />
+										</VisualState.StateTriggers>
+									</VisualState>
 
-								<VisualState x:Name="Narrow">
-									<VisualState.StateTriggers>
-										<AdaptiveTrigger MinWindowWidth="0" />
-									</VisualState.StateTriggers>
+									<VisualState x:Name="Narrow">
+										<VisualState.StateTriggers>
+											<AdaptiveTrigger MinWindowWidth="0" />
+										</VisualState.StateTriggers>
 
-									<VisualState.Setters>
+										<VisualState.Setters>
 
-										<Setter Target="Content_1.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_1.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_1.(Grid.Row)"
-												Value="0" />
+											<Setter Target="Content_1.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_1.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_1.(Grid.Row)"
+													Value="0" />
 
-										<Setter Target="Content_2.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_2.(Grid.Row)"
-												Value="1" />
+											<Setter Target="Content_2.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_2.(Grid.Row)"
+													Value="1" />
 
-										<Setter Target="Content_3.(Grid.Column)"
-												Value="0" />
-										<Setter Target="Content_3.(Grid.Row)"
-												Value="2" />
+											<Setter Target="Content_3.(Grid.Column)"
+													Value="0" />
+											<Setter Target="Content_3.(Grid.Row)"
+													Value="2" />
 
-										<Setter Target="Column_2.Width"
-												Value="0" />
-										<Setter Target="Column_3.Width"
-												Value="0" />
-										<Setter Target="ColumnSpacer_1.Width"
-												Value="0" />
-										<Setter Target="ColumnSpacer_2.Width"
-												Value="0" />
+											<Setter Target="Column_2.Width"
+													Value="0" />
+											<Setter Target="Column_3.Width"
+													Value="0" />
+											<Setter Target="ColumnSpacer_1.Width"
+													Value="0" />
+											<Setter Target="ColumnSpacer_2.Width"
+													Value="0" />
 
-										<Setter Target="TitleContainer_1.MinHeight"
-												Value="0" />
-										<Setter Target="TitleContainer_2.MinHeight"
-												Value="0" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
+											<Setter Target="TitleContainer_1.MinHeight"
+													Value="0" />
+											<Setter Target="TitleContainer_2.MinHeight"
+													Value="0" />
+										</VisualState.Setters>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
 
-						<ScrollViewer VerticalScrollBarVisibility="Auto">
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition x:Name="Column_1"
-													  Width="*" />
-									<ColumnDefinition x:Name="ColumnSpacer_1"
-													  Width="12" />
-									<ColumnDefinition x:Name="Column_2"
-													  Width="*" />
-									<ColumnDefinition x:Name="ColumnSpacer_2"
-													  Width="12" />
-									<ColumnDefinition x:Name="Column_3"
-													  Width="*" />
-								</Grid.ColumnDefinitions>
+							<ScrollViewer VerticalScrollBarVisibility="Auto">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition x:Name="Column_1"
+														  Width="*" />
+										<ColumnDefinition x:Name="ColumnSpacer_1"
+														  Width="12" />
+										<ColumnDefinition x:Name="Column_2"
+														  Width="*" />
+										<ColumnDefinition x:Name="ColumnSpacer_2"
+														  Width="12" />
+										<ColumnDefinition x:Name="Column_3"
+														  Width="*" />
+									</Grid.ColumnDefinitions>
 
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
 
-								<!-- Content 1 -->
-								<StackPanel x:Name="Content_1"
-											Margin="0,0,0,12"
-											Grid.Column="0">
+									<!-- Content 1 -->
+									<StackPanel x:Name="Content_1"
+												Margin="0,0,0,12"
+												Grid.Column="0">
 
-									<!-- Title -->
-									<TextBlock Text="Color Scheme"
-											   Style="{StaticResource CupertinoSecondaryTitle}"
-											   Margin="0,0,0,12" />
+										<!-- Title -->
+										<TextBlock Text="Color Scheme"
+												   Style="{StaticResource CupertinoSecondaryTitle}"
+												   Margin="0,0,0,12" />
 
-									<!-- Brushes -->
-									<ContentControl Content="CupertinoBlueBrush"
-													Background="{StaticResource CupertinoBlueBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoGreenBrush"
-													Background="{StaticResource CupertinoGreenBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoIndigoBrush"
-													Background="{StaticResource CupertinoIndigoBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoOrangeBrush"
-													Background="{StaticResource CupertinoOrangeBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoPinkBrush"
-													Background="{StaticResource CupertinoPinkBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoPurpleBrush"
-													Background="{StaticResource CupertinoPurpleBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoRedBrush"
-													Background="{StaticResource CupertinoRedBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoTealBrush"
-													Background="{StaticResource CupertinoTealBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoYellowBrush"
-													Background="{StaticResource CupertinoYellowBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-								</StackPanel>
+										<!-- Brushes -->
+										<ContentControl Content="CupertinoBlueBrush"
+														Background="{StaticResource CupertinoBlueBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoGreenBrush"
+														Background="{StaticResource CupertinoGreenBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoIndigoBrush"
+														Background="{StaticResource CupertinoIndigoBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoOrangeBrush"
+														Background="{StaticResource CupertinoOrangeBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoPinkBrush"
+														Background="{StaticResource CupertinoPinkBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoPurpleBrush"
+														Background="{StaticResource CupertinoPurpleBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoRedBrush"
+														Background="{StaticResource CupertinoRedBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoTealBrush"
+														Background="{StaticResource CupertinoTealBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoYellowBrush"
+														Background="{StaticResource CupertinoYellowBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+									</StackPanel>
 
-								<!-- Content 2 -->
-								<StackPanel x:Name="Content_2"
-											Margin="0,0,0,12"
-											Grid.Column="2">
+									<!-- Content 2 -->
+									<StackPanel x:Name="Content_2"
+												Margin="0,0,0,12"
+												Grid.Column="2">
 
-									<!-- Title -->
-									<TextBlock Text="Gray Variation Scheme"
-											   Style="{StaticResource CupertinoSecondaryTitle}"
-											   Margin="0,0,0,12" />
+										<!-- Title -->
+										<TextBlock Text="Gray Variation Scheme"
+												   Style="{StaticResource CupertinoSecondaryTitle}"
+												   Margin="0,0,0,12" />
 
-									<!-- Brushes -->
-									<ContentControl Content="CupertinoPrimaryGrayBrush"
-													Background="{StaticResource CupertinoPrimaryGrayBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoSecondaryGrayBrush"
-													Background="{StaticResource CupertinoSecondaryGrayBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoTertiaryGrayBrush"
-													Background="{StaticResource CupertinoTertiaryGrayBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoQuaternaryGrayBrush"
-													Background="{StaticResource CupertinoQuaternaryGrayBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoQuinaryGrayBrush"
-													Background="{StaticResource CupertinoQuinaryGrayBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoSenaryGrayBrush"
-													Background="{StaticResource CupertinoSenaryGrayBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-								</StackPanel>
+										<!-- Brushes -->
+										<ContentControl Content="CupertinoPrimaryGrayBrush"
+														Background="{StaticResource CupertinoPrimaryGrayBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoSecondaryGrayBrush"
+														Background="{StaticResource CupertinoSecondaryGrayBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoTertiaryGrayBrush"
+														Background="{StaticResource CupertinoTertiaryGrayBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoQuaternaryGrayBrush"
+														Background="{StaticResource CupertinoQuaternaryGrayBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoQuinaryGrayBrush"
+														Background="{StaticResource CupertinoQuinaryGrayBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoSenaryGrayBrush"
+														Background="{StaticResource CupertinoSenaryGrayBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+									</StackPanel>
 
-								<!-- Content 3 -->
-								<StackPanel x:Name="Content_3"
-											Grid.Column="4">
+									<!-- Content 3 -->
+									<StackPanel x:Name="Content_3"
+												Grid.Column="4">
 
-									<!-- Title -->
-									<TextBlock Text="Control colors"
-											   Style="{StaticResource CupertinoSecondaryTitle}"
-											   Margin="0,0,0,12" />
+										<!-- Title -->
+										<TextBlock Text="Control colors"
+												   Style="{StaticResource CupertinoSecondaryTitle}"
+												   Margin="0,0,0,12" />
 
-									<!-- Brushes -->
-									<ContentControl Content="CupertinoLabelBrush"
-													Background="{StaticResource CupertinoLabelBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoSecondaryLabelBrush"
-													Background="{StaticResource CupertinoSecondaryLabelBrush}"
-													Foreground="{StaticResource CupertinoSecondarySystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoTertiaryLabelBrush"
-													Background="{StaticResource CupertinoTertiaryLabelBrush}"
-													Foreground="{StaticResource CupertinoTertiarySystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoQuaternaryLabelBrush"
-													Background="{StaticResource CupertinoQuaternaryLabelBrush}"
-													Foreground="{StaticResource CupertinoTertiarySystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoSystemFillBrush"
-													Background="{StaticResource CupertinoSystemFillBrush}"
-													Foreground="{StaticResource CupertinoLabelBrush}" />
-									<ContentControl Content="CupertinoSecondarySystemFillBrush"
-													Background="{StaticResource CupertinoSecondarySystemFillBrush}"
-													Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
-									<ContentControl Content="CupertinoTertiarySystemFillBrush"
-													Background="{StaticResource CupertinoTertiarySystemFillBrush}"
-													Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
-									<ContentControl Content="CupertinoQuaternarySystemFillBrush"
-													Background="{StaticResource CupertinoQuaternarySystemFillBrush}"
-													Foreground="{StaticResource CupertinoQuaternaryLabelBrush}" />
-									<ContentControl Content="CupertinoSystemBackgroundBrush"
-													Background="{StaticResource CupertinoSystemBackgroundBrush}"
-													Foreground="{StaticResource CupertinoLabelBrush}" />
-									<ContentControl Content="CupertinoSecondarySystemBackgroundBrush"
-													Background="{StaticResource CupertinoSecondarySystemBackgroundBrush}"
-													Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
-									<ContentControl Content="CupertinoTertiarySystemBackgroundBrush"
-													Background="{StaticResource CupertinoTertiarySystemBackgroundBrush}"
-													Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
-									<ContentControl Content="CupertinoSystemGroupedBackgroundBrush"
-													Background="{StaticResource CupertinoSystemGroupedBackgroundBrush}"
-													Foreground="{StaticResource CupertinoLabelBrush}" />
-									<ContentControl Content="CupertinoSecondarySystemGroupedBackgroundBrush"
-													Background="{StaticResource CupertinoSecondarySystemGroupedBackgroundBrush}"
-													Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
-									<ContentControl Content="CupertinoTertiarySystemGroupedBackgroundBrush"
-													Background="{StaticResource CupertinoTertiarySystemGroupedBackgroundBrush}"
-													Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
-									<ContentControl Content="CupertinoSeparatorBrush"
-													Background="{StaticResource CupertinoSeparatorBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoOpaqueSeparatorBrush"
-													Background="{StaticResource CupertinoOpaqueSeparatorBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-									<ContentControl Content="CupertinoLinkBrush"
-													Background="{StaticResource CupertinoLinkBrush}"
-													Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
-								</StackPanel>
-							</Grid>
-						</ScrollViewer>
-					</StackPanel>
+										<!-- Brushes -->
+										<ContentControl Content="CupertinoLabelBrush"
+														Background="{StaticResource CupertinoLabelBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoSecondaryLabelBrush"
+														Background="{StaticResource CupertinoSecondaryLabelBrush}"
+														Foreground="{StaticResource CupertinoSecondarySystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoTertiaryLabelBrush"
+														Background="{StaticResource CupertinoTertiaryLabelBrush}"
+														Foreground="{StaticResource CupertinoTertiarySystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoQuaternaryLabelBrush"
+														Background="{StaticResource CupertinoQuaternaryLabelBrush}"
+														Foreground="{StaticResource CupertinoTertiarySystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoSystemFillBrush"
+														Background="{StaticResource CupertinoSystemFillBrush}"
+														Foreground="{StaticResource CupertinoLabelBrush}" />
+										<ContentControl Content="CupertinoSecondarySystemFillBrush"
+														Background="{StaticResource CupertinoSecondarySystemFillBrush}"
+														Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
+										<ContentControl Content="CupertinoTertiarySystemFillBrush"
+														Background="{StaticResource CupertinoTertiarySystemFillBrush}"
+														Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
+										<ContentControl Content="CupertinoQuaternarySystemFillBrush"
+														Background="{StaticResource CupertinoQuaternarySystemFillBrush}"
+														Foreground="{StaticResource CupertinoQuaternaryLabelBrush}" />
+										<ContentControl Content="CupertinoSystemBackgroundBrush"
+														Background="{StaticResource CupertinoSystemBackgroundBrush}"
+														Foreground="{StaticResource CupertinoLabelBrush}" />
+										<ContentControl Content="CupertinoSecondarySystemBackgroundBrush"
+														Background="{StaticResource CupertinoSecondarySystemBackgroundBrush}"
+														Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
+										<ContentControl Content="CupertinoTertiarySystemBackgroundBrush"
+														Background="{StaticResource CupertinoTertiarySystemBackgroundBrush}"
+														Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
+										<ContentControl Content="CupertinoSystemGroupedBackgroundBrush"
+														Background="{StaticResource CupertinoSystemGroupedBackgroundBrush}"
+														Foreground="{StaticResource CupertinoLabelBrush}" />
+										<ContentControl Content="CupertinoSecondarySystemGroupedBackgroundBrush"
+														Background="{StaticResource CupertinoSecondarySystemGroupedBackgroundBrush}"
+														Foreground="{StaticResource CupertinoSecondaryLabelBrush}" />
+										<ContentControl Content="CupertinoTertiarySystemGroupedBackgroundBrush"
+														Background="{StaticResource CupertinoTertiarySystemGroupedBackgroundBrush}"
+														Foreground="{StaticResource CupertinoTertiaryLabelBrush}" />
+										<ContentControl Content="CupertinoSeparatorBrush"
+														Background="{StaticResource CupertinoSeparatorBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoOpaqueSeparatorBrush"
+														Background="{StaticResource CupertinoOpaqueSeparatorBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+										<ContentControl Content="CupertinoLinkBrush"
+														Background="{StaticResource CupertinoLinkBrush}"
+														Foreground="{StaticResource CupertinoSystemBackgroundBrush}" />
+									</StackPanel>
+								</Grid>
+							</ScrollViewer>
+						</StackPanel>
+					</UserControl>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
 		</sample:SamplePageLayout>
