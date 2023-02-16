@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -156,7 +157,7 @@ public sealed partial class ColorPaletteControl : UserControl
 	}
 
 	public static readonly DependencyProperty Color1NameProperty =
-		DependencyProperty.Register("Color1Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null));
+		DependencyProperty.Register("Color1Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorNameChanged));
 
 	public string Color2Name
 	{
@@ -165,7 +166,7 @@ public sealed partial class ColorPaletteControl : UserControl
 	}
 
 	public static readonly DependencyProperty Color2NameProperty =
-		DependencyProperty.Register("Color2Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null));
+		DependencyProperty.Register("Color2Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorNameChanged));
 
 	public string Color3Name
 	{
@@ -174,7 +175,7 @@ public sealed partial class ColorPaletteControl : UserControl
 	}
 
 	public static readonly DependencyProperty Color3NameProperty =
-		DependencyProperty.Register("Color3Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null));
+		DependencyProperty.Register("Color3Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorNameChanged));
 
 	public string Color4Name
 	{
@@ -183,7 +184,7 @@ public sealed partial class ColorPaletteControl : UserControl
 	}
 
 	public static readonly DependencyProperty Color4NameProperty =
-		DependencyProperty.Register("Color4Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null));
+		DependencyProperty.Register("Color4Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorNameChanged));
 
 	public string Color5Name
 	{
@@ -192,92 +193,92 @@ public sealed partial class ColorPaletteControl : UserControl
 	}
 
 	public static readonly DependencyProperty Color5NameProperty =
-		DependencyProperty.Register("Color5Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null));
+		DependencyProperty.Register("Color5Name", typeof(string), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorNameChanged));
 
 
 
 
-	public Brush ColorBrush
+	public Brush ColorContainer
 	{
-		get { return (Brush)GetValue(ColorBrushProperty); }
-		set { SetValue(ColorBrushProperty, value); }
+		get { return (Brush)GetValue(ColorContainerProperty); }
+		set { SetValue(ColorContainerProperty, value); }
 	}
 
-	public static readonly DependencyProperty ColorBrushProperty =
-		DependencyProperty.Register("ColorBrush", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null, AllColorBrushChanged));
+	public static readonly DependencyProperty ColorContainerProperty =
+		DependencyProperty.Register("ColorContainer", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null, AllColorContainerChanged));
 
-	private static void AllColorBrushChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	private static void AllColorContainerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
 		if (d is ColorPaletteControl palette &&
 			e.NewValue is Brush brush)
 		{
-			palette.Color1Brush = brush;
-			palette.Color2Brush = brush;
-			palette.Color3Brush = brush;
-			palette.Color4Brush = brush;
-			palette.Color5Brush = brush;
+			palette.Color1Container = brush;
+			palette.Color2Container = brush;
+			palette.Color3Container = brush;
+			palette.Color4Container = brush;
+			palette.Color5Container = brush;
 		}
 	}
 
-	public Brush Color1Brush
+	public Brush Color1Container
 	{
-		get { return (Brush)GetValue(Color1BrushProperty); }
-		set { SetValue(Color1BrushProperty, value); }
+		get { return (Brush)GetValue(Color1ContainerProperty); }
+		set { SetValue(Color1ContainerProperty, value); }
 	}
 
-	public static readonly DependencyProperty Color1BrushProperty =
-		DependencyProperty.Register("Color1Brush", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorBrushChanged));
+	public static readonly DependencyProperty Color1ContainerProperty =
+		DependencyProperty.Register("Color1Container", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null));
 
-	public Brush Color2Brush
+	public Brush Color2Container
 	{
-		get { return (Brush)GetValue(Color2BrushProperty); }
-		set { SetValue(Color2BrushProperty, value); }
+		get { return (Brush)GetValue(Color2ContainerProperty); }
+		set { SetValue(Color2ContainerProperty, value); }
 	}
 
-	public static readonly DependencyProperty Color2BrushProperty =
-		DependencyProperty.Register("Color2Brush", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorBrushChanged));
-	public Brush Color3Brush
+	public static readonly DependencyProperty Color2ContainerProperty =
+		DependencyProperty.Register("Color2Container", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null));
+	public Brush Color3Container
 	{
-		get { return (Brush)GetValue(Color3BrushProperty); }
-		set { SetValue(Color3BrushProperty, value); }
+		get { return (Brush)GetValue(Color3ContainerProperty); }
+		set { SetValue(Color3ContainerProperty, value); }
 	}
 
-	public static readonly DependencyProperty Color3BrushProperty =
-		DependencyProperty.Register("Color3Brush", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorBrushChanged));
-	public Brush Color4Brush
+	public static readonly DependencyProperty Color3ContainerProperty =
+		DependencyProperty.Register("Color3Container", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null));
+	public Brush Color4Container
 	{
-		get { return (Brush)GetValue(Color4BrushProperty); }
-		set { SetValue(Color4BrushProperty, value); }
+		get { return (Brush)GetValue(Color4ContainerProperty); }
+		set { SetValue(Color4ContainerProperty, value); }
 	}
 
-	public static readonly DependencyProperty Color4BrushProperty =
-		DependencyProperty.Register("Color4Brush", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorBrushChanged));
-	public Brush Color5Brush
+	public static readonly DependencyProperty Color4ContainerProperty =
+		DependencyProperty.Register("Color4Container", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null));
+	public Brush Color5Container
 	{
-		get { return (Brush)GetValue(Color5BrushProperty); }
-		set { SetValue(Color5BrushProperty, value); }
+		get { return (Brush)GetValue(Color5ContainerProperty); }
+		set { SetValue(Color5ContainerProperty, value); }
 	}
 
-	public static readonly DependencyProperty Color5BrushProperty =
-		DependencyProperty.Register("Color5Brush", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null, ColorBrushChanged));
+	public static readonly DependencyProperty Color5ContainerProperty =
+		DependencyProperty.Register("Color5Container", typeof(Brush), typeof(ColorPaletteControl), new PropertyMetadata(null));
 
-	private static void ColorBrushChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	private static void ColorNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
 		if (d is ColorPaletteControl palette)
 		{
-			if (palette.Color5Brush is not null)
+			if (palette.Color5Name is not null)
 			{
 				VisualStateManager.GoToState(palette, nameof(Has5Color), false);
 			}
-			else if (palette.Color4Brush is not null)
+			else if (palette.Color4Name is not null)
 			{
 				VisualStateManager.GoToState(palette, nameof(Has4Color), false);
 			}
-			else if (palette.Color3Brush is not null)
+			else if (palette.Color3Name is not null)
 			{
 				VisualStateManager.GoToState(palette, nameof(Has3Color), false);
 			}
-			else if (palette.Color2Brush is not null)
+			else if (palette.Color2Name is not null)
 			{
 				VisualStateManager.GoToState(palette, nameof(Has2Color), false);
 			}
@@ -333,11 +334,11 @@ public sealed partial class ColorPaletteControl : UserControl
 	public static readonly DependencyProperty Color5OpacityProperty =
 		DependencyProperty.Register("Color5Opacity", typeof(double), typeof(ColorPaletteControl), new PropertyMetadata(1.0));
 
-	public Brush Color1TagBrush => Color1State ?? Color1Brush;
-	public Brush Color2TagBrush => Color2State ?? Color2Brush;
-	public Brush Color3TagBrush => Color3State ?? Color3Brush;
-	public Brush Color4TagBrush => Color4State ?? Color4Brush;
-	public Brush Color5TagBrush => Color5State ?? Color5Brush;
+	public Brush Color1TagBrush => (Color1State is SolidColorBrush brush && brush.Color != Colors.Transparent)? brush : Color1Container;
+	public Brush Color2TagBrush => (Color2State is SolidColorBrush brush && brush.Color != Colors.Transparent)? brush :  Color2Container;
+	public Brush Color3TagBrush => (Color3State is SolidColorBrush brush && brush.Color != Colors.Transparent)? brush :  Color3Container;
+	public Brush Color4TagBrush => (Color4State is SolidColorBrush brush && brush.Color != Colors.Transparent)? brush :  Color4Container;
+	public Brush Color5TagBrush => (Color5State is SolidColorBrush brush && brush.Color != Colors.Transparent) ? brush : Color5Container;
 
 	public ColorPaletteControl()
 	{

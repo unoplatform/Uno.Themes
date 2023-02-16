@@ -292,214 +292,353 @@
 			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<UserControl>
+						<UserControl.Resources>
+							<Style TargetType="ContentControl">
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="ContentControl">
+											<Grid Background="{TemplateBinding Background}">
+
+												<!-- Overlay -->
+												<Border Background="{TemplateBinding Tag}" />
+
+												<TextBlock Text="{TemplateBinding Content}"
+														   Foreground="{TemplateBinding Foreground}"
+														   Margin="12,24,12,12"
+														   Style="{StaticResource MaterialSubtitle2}" />
+											</Grid>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</UserControl.Resources>
 						<ScrollViewer VerticalScrollBarVisibility="Auto">
-							<StackPanel HorizontalAlignment="Stretch" Padding="0,6">
+							<StackPanel HorizontalAlignment="Stretch">
 
-								<styles:ColorPaletteControl ColorContent="{ThemeResource OnPrimaryBrush}"
-															Color1Name="PrimaryBrush"
-															Color1Brush="{ThemeResource PrimaryBrush}" />
-								<styles:ColorPaletteControl Color1Name="PrimaryHoverBrush"
-															Color1Brush="{ThemeResource PrimaryHoverBrush}"
-															Color1Content="{ThemeResource OnPrimaryHoverBrush}"
+
+								<ContentControl Content="1. Primary" />
+
+								<styles:ColorPaletteControl Color1Name="PrimaryBrush"
+															Color1Container="{ThemeResource PrimaryBrush}"
+															ColorContent="{ThemeResource OnPrimaryBrush}" />
+
+								<styles:ColorPaletteControl ColorState="Transparent"
+															Color1Name="PrimaryHoverBrush"
+															Color1Container="{ThemeResource PrimaryHoverBrush}"
+															Color1Content="{ThemeResource PrimaryBrush}"
 															Color2Name="PrimaryFocusedBrush"
-															Color2Brush="{ThemeResource PrimaryFocusedBrush}"
-															Color2Content="{ThemeResource OnPrimaryFocusedBrush}"
+															Color2Container="{ThemeResource PrimaryFocusedBrush}"
+															Color2Content="{ThemeResource PrimaryBrush}"
 															Color3Name="PrimaryPressedBrush"
-															Color3Brush="{ThemeResource PrimaryPressedBrush}"
-															Color3Content="{ThemeResource OnPrimaryPressedBrush}"
+															Color3Container="{ThemeResource PrimaryPressedBrush}"
+															Color3Content="{ThemeResource PrimaryBrush}"
 															Color4Name="PrimaryDraggedBrush"
-															Color4Brush="{ThemeResource PrimaryDraggedBrush}"
-															Color4Content="{ThemeResource OnPrimaryDraggedBrush}"
+															Color4Container="{ThemeResource PrimaryDraggedBrush}"
+															Color4Content="{ThemeResource PrimaryBrush}"
 															Color5Name="PrimarySelectedBrush"
-															Color5Brush="{ThemeResource PrimarySelectedBrush}"
-															Color5Content="{ThemeResource OnPrimarySelectedBrush}" />
-								<styles:ColorPaletteControl ColorContent="{ThemeResource PrimaryBrush}"
-															Color1Name="OnPrimaryBrush"
-															Color1Brush="{ThemeResource OnPrimaryBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnPrimaryMediumBrush"
-															Color1Brush="{ThemeResource OnPrimaryMediumBrush}"
-															Color1Content="{ThemeResource PrimaryMediumBrush}"
-															Color2Name="OnPrimaryLowBrush"
-															Color2Brush="{ThemeResource OnPrimaryLowBrush}"
-															Color2Content="{ThemeResource PrimaryLowBrush}" />
-								<styles:ColorPaletteControl
-															ColorBrush="{ThemeResource PrimaryBrush}"
+															Color5Container="{ThemeResource PrimarySelectedBrush}"
+															Color5Content="{ThemeResource PrimaryBrush}" />
 
+
+								<ContentControl Content="2. OnPrimary" />
+
+								<styles:ColorPaletteControl Color1Name="OnPrimaryBrush"
+															Color1Container="{ThemeResource OnPrimaryBrush}"
+															ColorContent="{ThemeResource PrimaryBrush}" />
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource PrimaryBrush}"
+															ColorContent="{ThemeResource OnPrimaryBrush}"
+															Color1Name="OnPrimaryMediumBrush"
+															Color1State="{ThemeResource OnPrimaryMediumBrush}"
+															Color2Name="OnPrimaryLowBrush"
+															Color2State="{ThemeResource OnPrimaryLowBrush}" />
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource PrimaryBrush}"
+															ColorContent="{ThemeResource OnPrimaryBrush}"
 															Color1Name="OnPrimaryHoverBrush"
 															Color1State="{ThemeResource OnPrimaryHoverBrush}"
-															Color1Content="{ThemeResource OnPrimaryBrush}"
 															Color2Name="OnPrimaryFocusedBrush"
 															Color2State="{ThemeResource OnPrimaryFocusedBrush}"
-															Color2Content="{ThemeResource OnPrimaryBrush}"
 															Color3Name="OnPrimaryPressedBrush"
 															Color3State="{ThemeResource OnPrimaryPressedBrush}"
-															Color3Content="{ThemeResource OnPrimaryBrush}"
 															Color4Name="OnPrimaryDraggedBrush"
 															Color4State="{ThemeResource OnPrimaryDraggedBrush}"
-															Color4Content="{ThemeResource OnPrimaryBrush}"
 															Color5Name="OnPrimarySelectedBrush"
-															Color5State="{ThemeResource OnPrimarySelectedBrush}"
-															Color5Content="{ThemeResource OnPrimaryBrush}" />
+															Color5State="{ThemeResource OnPrimarySelectedBrush}" />
+
+
+								<ContentControl Content="3. Primary Container" />
+
+								<styles:ColorPaletteControl Color1Name="PrimaryContainerBrush"
+															Color1Container="{ThemeResource PrimaryContainerBrush}"
+															ColorContent="{ThemeResource OnPrimaryContainerBrush}" />
+
+
+								<ContentControl Content="4. On Primary Container" />
+
+								<styles:ColorPaletteControl Color1Name="OnPrimaryContainerBrush"
+															Color1Container="{ThemeResource OnPrimaryContainerBrush}"
+															ColorContent="{ThemeResource PrimaryContainerBrush}" />
 
 
 
-								<styles:ColorPaletteControl ColorContent="{ThemeResource OnSecondaryBrush}"
-															Color1Name="SecondaryBrush"
-															Color1Brush="{ThemeResource SecondaryBrush}" />
-								<styles:ColorPaletteControl Color1Name="SecondaryHoverBrush"
-															Color1Brush="{ThemeResource SecondaryHoverBrush}"
-															Color1Content="{ThemeResource OnSecondaryHoverBrush}"
+								<ContentControl Content="5. Secondary" />
+
+								<styles:ColorPaletteControl Color1Name="SecondaryBrush"
+															Color1Container="{ThemeResource SecondaryBrush}"
+															ColorContent="{ThemeResource OnSecondaryBrush}" />
+
+								<styles:ColorPaletteControl ColorState="Transparent"
+															Color1Name="SecondaryHoverBrush"
+															Color1Container="{ThemeResource SecondaryHoverBrush}"
+															Color1Content="{ThemeResource SecondaryBrush}"
 															Color2Name="SecondaryFocusedBrush"
-															Color2Brush="{ThemeResource SecondaryFocusedBrush}"
-															Color2Content="{ThemeResource OnSecondaryFocusedBrush}"
+															Color2Container="{ThemeResource SecondaryFocusedBrush}"
+															Color2Content="{ThemeResource SecondaryBrush}"
 															Color3Name="SecondaryPressedBrush"
-															Color3Brush="{ThemeResource SecondaryPressedBrush}"
-															Color3Content="{ThemeResource OnSecondaryPressedBrush}"
+															Color3Container="{ThemeResource SecondaryPressedBrush}"
+															Color3Content="{ThemeResource SecondaryBrush}"
 															Color4Name="SecondaryDraggedBrush"
-															Color4Brush="{ThemeResource SecondaryDraggedBrush}"
-															Color4Content="{ThemeResource OnSecondaryDraggedBrush}"
+															Color4Container="{ThemeResource SecondaryDraggedBrush}"
+															Color4Content="{ThemeResource SecondaryBrush}"
 															Color5Name="SecondarySelectedBrush"
-															Color5Brush="{ThemeResource SecondarySelectedBrush}"
-															Color5Content="{ThemeResource OnSecondarySelectedBrush}" />
-								<styles:ColorPaletteControl ColorContent="{ThemeResource SecondaryBrush}"
-															Color1Name="OnSecondaryBrush"
-															Color1Brush="{ThemeResource OnSecondaryBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnSecondaryMediumBrush"
-															Color1Brush="{ThemeResource OnSecondaryMediumBrush}"
-															Color1Content="{ThemeResource SecondaryMediumBrush}"
+															Color5Container="{ThemeResource SecondarySelectedBrush}"
+															Color5Content="{ThemeResource SecondaryBrush}" />
+
+
+								<ContentControl Content="6. OnSecondary" />
+
+								<styles:ColorPaletteControl Color1Name="OnSecondaryBrush"
+															Color1Container="{ThemeResource OnSecondaryBrush}"
+															ColorContent="{ThemeResource SecondaryBrush}" />
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource SecondaryBrush}"
+															ColorContent="{ThemeResource OnSecondaryBrush}"
+															Color1Name="OnSecondaryMediumBrush"
+															Color1State="{ThemeResource OnSecondaryMediumBrush}"
 															Color2Name="OnSecondaryLowBrush"
-															Color2Brush="{ThemeResource OnSecondaryLowBrush}"
-															Color2Content="{ThemeResource SecondaryLowBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnSecondaryHoverBrush"
-															Color1Brush="{ThemeResource OnSecondaryHoverBrush}"
-															Color1Content="{ThemeResource SecondaryHoverBrush}"
+															Color2State="{ThemeResource OnSecondaryLowBrush}" />
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource SecondaryBrush}"
+															ColorContent="{ThemeResource OnSecondaryBrush}"
+															Color1Name="OnSecondaryHoverBrush"
+															Color1State="{ThemeResource OnSecondaryHoverBrush}"
 															Color2Name="OnSecondaryFocusedBrush"
-															Color2Brush="{ThemeResource OnSecondaryFocusedBrush}"
-															Color2Content="{ThemeResource SecondaryFocusedBrush}"
+															Color2State="{ThemeResource OnSecondaryFocusedBrush}"
 															Color3Name="OnSecondaryPressedBrush"
-															Color3Brush="{ThemeResource OnSecondaryPressedBrush}"
-															Color3Content="{ThemeResource SecondaryPressedBrush}"
+															Color3State="{ThemeResource OnSecondaryPressedBrush}"
 															Color4Name="OnSecondaryDraggedBrush"
-															Color4Brush="{ThemeResource OnSecondaryDraggedBrush}"
-															Color4Content="{ThemeResource SecondaryDraggedBrush}"
+															Color4State="{ThemeResource OnSecondaryDraggedBrush}"
 															Color5Name="OnSecondarySelectedBrush"
-															Color5Brush="{ThemeResource OnSecondarySelectedBrush}"
-															Color5Content="{ThemeResource SecondarySelectedBrush}" />
+															Color5State="{ThemeResource OnSecondarySelectedBrush}" />
 
 
-								<styles:ColorPaletteControl ColorContent="{ThemeResource OnTertiaryBrush}"
-															Color1Name="TertiaryBrush"
-															Color1Brush="{ThemeResource TertiaryBrush}" />
-								<styles:ColorPaletteControl Color1Name="TertiaryHoverBrush"
-															Color1Brush="{ThemeResource TertiaryHoverBrush}"
-															Color1Content="{ThemeResource OnTertiaryHoverBrush}"
+								<ContentControl Content="7. Secondary Container" />
+
+								<styles:ColorPaletteControl Color1Name="SecondaryContainerBrush"
+															Color1Container="{ThemeResource SecondaryContainerBrush}"
+															ColorContent="{ThemeResource OnSecondaryContainerBrush}" />
+
+
+								<ContentControl Content="8. On Secondary Container" />
+
+								<styles:ColorPaletteControl Color1Name="OnSecondaryContainerBrush"
+															Color1Container="{ThemeResource OnSecondaryContainerBrush}"
+															ColorContent="{ThemeResource SecondaryContainerBrush}" />
+
+
+
+								<ContentControl Content="9. Tertiary" />
+
+								<styles:ColorPaletteControl Color1Name="TertiaryBrush"
+															Color1Container="{ThemeResource TertiaryBrush}"
+															ColorContent="{ThemeResource OnTertiaryBrush}" />
+
+								<styles:ColorPaletteControl ColorState="Transparent"
+															Color1Name="TertiaryHoverBrush"
+															Color1Container="{ThemeResource TertiaryHoverBrush}"
+															Color1Content="{ThemeResource TertiaryBrush}"
 															Color2Name="TertiaryFocusedBrush"
-															Color2Brush="{ThemeResource TertiaryFocusedBrush}"
-															Color2Content="{ThemeResource OnTertiaryFocusedBrush}"
+															Color2Container="{ThemeResource TertiaryFocusedBrush}"
+															Color2Content="{ThemeResource TertiaryBrush}"
 															Color3Name="TertiaryPressedBrush"
-															Color3Brush="{ThemeResource TertiaryPressedBrush}"
-															Color3Content="{ThemeResource OnTertiaryPressedBrush}"
+															Color3Container="{ThemeResource TertiaryPressedBrush}"
+															Color3Content="{ThemeResource TertiaryBrush}"
 															Color4Name="TertiaryDraggedBrush"
-															Color4Brush="{ThemeResource TertiaryDraggedBrush}"
-															Color4Content="{ThemeResource OnTertiaryDraggedBrush}"
+															Color4Container="{ThemeResource TertiaryDraggedBrush}"
+															Color4Content="{ThemeResource TertiaryBrush}"
 															Color5Name="TertiarySelectedBrush"
-															Color5Brush="{ThemeResource TertiarySelectedBrush}"
-															Color5Content="{ThemeResource OnTertiarySelectedBrush}" />
-								<styles:ColorPaletteControl ColorContent="{ThemeResource TertiaryBrush}"
-															Color1Name="OnTertiaryBrush"
-															Color1Brush="{ThemeResource OnTertiaryBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnTertiaryMediumBrush"
-															Color1Brush="{ThemeResource OnTertiaryMediumBrush}"
-															Color1Content="{ThemeResource TertiaryMediumBrush}"
-															Color2Name="OnTertiaryLowBrush"
-															Color2Brush="{ThemeResource OnTertiaryLowBrush}"
-															Color2Content="{ThemeResource TertiaryLowBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnTertiaryHoverBrush"
-															Color1Brush="{ThemeResource OnTertiaryHoverBrush}"
-															Color1Content="{ThemeResource TertiaryHoverBrush}"
-															Color2Name="OnTertiaryFocusedBrush"
-															Color2Brush="{ThemeResource OnTertiaryFocusedBrush}"
-															Color2Content="{ThemeResource TertiaryFocusedBrush}"
-															Color3Name="OnTertiaryPressedBrush"
-															Color3Brush="{ThemeResource OnTertiaryPressedBrush}"
-															Color3Content="{ThemeResource TertiaryPressedBrush}"
-															Color4Name="OnTertiaryDraggedBrush"
-															Color4Brush="{ThemeResource OnTertiaryDraggedBrush}"
-															Color4Content="{ThemeResource TertiaryDraggedBrush}"
-															Color5Name="OnTertiarySelectedBrush"
-															Color5Brush="{ThemeResource OnTertiarySelectedBrush}"
-															Color5Content="{ThemeResource TertiarySelectedBrush}" />
+															Color5Container="{ThemeResource TertiarySelectedBrush}"
+															Color5Content="{ThemeResource TertiaryBrush}" />
 
-								<styles:ColorPaletteControl ColorContent="{ThemeResource OnSurfaceBrush}"
-															Color1Name="SurfaceBrush"
-															Color1Brush="{ThemeResource SurfaceBrush}" />
-								<styles:ColorPaletteControl ColorContent="{ThemeResource SurfaceBrush}"
-															Color1Name="OnSurfaceBrush"
-															Color1Brush="{ThemeResource OnSurfaceBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnSurfaceMediumBrush"
-															Color1Brush="{ThemeResource OnSurfaceMediumBrush}"
-															Color1Content="{ThemeResource SurfaceMediumBrush}"
+
+								<ContentControl Content="10. OnTertiary" />
+
+								<styles:ColorPaletteControl Color1Name="OnTertiaryBrush"
+															Color1Container="{ThemeResource OnTertiaryBrush}"
+															ColorContent="{ThemeResource TertiaryBrush}" />
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource TertiaryBrush}"
+															ColorContent="{ThemeResource OnTertiaryBrush}"
+															Color1Name="OnTertiaryMediumBrush"
+															Color1State="{ThemeResource OnTertiaryMediumBrush}"
+															Color2Name="OnTertiaryLowBrush"
+															Color2State="{ThemeResource OnTertiaryLowBrush}" />
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource TertiaryBrush}"
+															ColorContent="{ThemeResource OnTertiaryBrush}"
+															Color1Name="OnTertiaryHoverBrush"
+															Color1State="{ThemeResource OnTertiaryHoverBrush}"
+															Color2Name="OnTertiaryFocusedBrush"
+															Color2State="{ThemeResource OnTertiaryFocusedBrush}"
+															Color3Name="OnTertiaryPressedBrush"
+															Color3State="{ThemeResource OnTertiaryPressedBrush}"
+															Color4Name="OnTertiaryDraggedBrush"
+															Color4State="{ThemeResource OnTertiaryDraggedBrush}"
+															Color5Name="OnTertiarySelectedBrush"
+															Color5State="{ThemeResource OnTertiarySelectedBrush}" />
+
+
+								<ContentControl Content="11. Tertiary Container" />
+
+								<styles:ColorPaletteControl Color1Name="TertiaryContainerBrush"
+															Color1Container="{ThemeResource TertiaryContainerBrush}"
+															ColorContent="{ThemeResource OnTertiaryContainerBrush}" />
+
+
+								<ContentControl Content="12. On Tertiary Container" />
+
+								<styles:ColorPaletteControl Color1Name="OnTertiaryContainerBrush"
+															Color1Container="{ThemeResource OnTertiaryContainerBrush}"
+															ColorContent="{ThemeResource TertiaryContainerBrush}" />
+
+
+								<ContentControl Content="13. Background" />
+
+								<styles:ColorPaletteControl Color1Name="BackgroundBrush"
+															Color1Container="{ThemeResource BackgroundBrush}"
+															ColorContent="{ThemeResource OnBackgroundBrush}" />
+
+								<ContentControl Content="14. On Background" />
+
+								<styles:ColorPaletteControl Color1Name="OnBackgroundBrush"
+															Color1Container="{ThemeResource OnBackgroundBrush}"
+															ColorContent="{ThemeResource BackgroundBrush}" />
+
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource BackgroundBrush}"
+															ColorContent="{ThemeResource OnBackgroundBrush}"
+															Color1Name="OnBackgroundMediumBrush"
+															Color1State="{ThemeResource OnBackgroundMediumBrush}"
+															Color2Name="OnBackgroundLowBrush"
+															Color2State="{ThemeResource OnBackgroundLowBrush}" />
+
+
+								<ContentControl Content="15. Surface" />
+
+								<styles:ColorPaletteControl Color1Name="SurfaceBrush"
+															Color1Container="{ThemeResource SurfaceBrush}"
+															ColorContent="{ThemeResource OnSurfaceBrush}" />
+
+
+								<ContentControl Content="16. On Surface" />
+
+								<styles:ColorPaletteControl Color1Name="OnSurfaceBrush"
+															Color1Container="{ThemeResource OnSurfaceBrush}"
+															ColorContent="{ThemeResource SurfaceBrush}" />
+
+								<styles:ColorPaletteControl ColorContainer="{ThemeResource SurfaceBrush}"
+															ColorContent="{ThemeResource OnSurfaceBrush}"
+
+															Color1Name="OnSurfaceMediumBrush"
+															Color1State="{ThemeResource OnSurfaceMediumBrush}"
 															Color2Name="OnSurfaceLowBrush"
-															Color2Brush="{ThemeResource OnSurfaceLowBrush}"
-															Color2Content="{ThemeResource SurfaceLowBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnSurfaceHoverBrush"
-															Color1Brush="{ThemeResource OnSurfaceHoverBrush}"
-															Color1Content="{ThemeResource SurfaceHoverBrush}"
-															Color2Name="OnSurfaceFocusedBrush"
-															Color2Brush="{ThemeResource OnSurfaceFocusedBrush}"
-															Color2Content="{ThemeResource SurfaceFocusedBrush}"
-															Color3Name="OnSurfacePressedBrush"
-															Color3Brush="{ThemeResource OnSurfacePressedBrush}"
-															Color3Content="{ThemeResource SurfacePressedBrush}"
-															Color4Name="OnSurfaceDraggedBrush"
-															Color4Brush="{ThemeResource OnSurfaceDraggedBrush}"
-															Color4Content="{ThemeResource SurfaceDraggedBrush}"
-															Color5Name="OnSurfaceSelectedBrush"
-															Color5Brush="{ThemeResource OnSurfaceSelectedBrush}"
-															Color5Content="{ThemeResource SurfaceSelectedBrush}" />
-								<styles:ColorPaletteControl Color1Name="SurfaceDisabledBrush"
-															Color1Brush="{ThemeResource SurfaceDisabledBrush}"
-															Color1Content="{ThemeResource OnSurfaceDisabledBrush}"
-															Color2Name="OnSurfaceDisabledBrush"
-															Color2Brush="{ThemeResource OnSurfaceDisabledBrush}"
-															Color2Content="{ThemeResource SurfaceDisabledBrush}"
-															Color3Name="SurfaceBrush"
-															Color3Brush="{ThemeResource SurfaceBrush}"
-															Color3Content="{ThemeResource OnSurfaceBrush}" />
-								<!--<ContentControl Content="{ThemeResource OnSurfaceDisabledBrush}"
-												Content="Test surface color"
-												Background="{ThemeResource SurfaceDisabledBrush}" Opacity="0.38" />-->
+															Color2State="{ThemeResource OnSurfaceLowBrush}" />
+
+								<styles:ColorPaletteControl  ColorContainer="{ThemeResource SurfaceBrush}"
+															 ColorContent="{ThemeResource OnSurfaceBrush}"
+															 
+															 Color1Name="OnSurfaceHoverBrush"
+															 Color1State="{ThemeResource OnSurfaceHoverBrush}"
+															 Color2Name="OnSurfaceFocusedBrush"
+															 Color2State="{ThemeResource OnSurfaceFocusedBrush}"
+															 Color3Name="OnSurfacePressedBrush"
+															 Color3State="{ThemeResource OnSurfacePressedBrush}"
+															 Color4Name="OnSurfaceDraggedBrush"
+															 Color4State="{ThemeResource OnSurfaceDraggedBrush}"
+															 Color5Name="OnSurfaceSelectedBrush"
+															 Color5State="{ThemeResource OnSurfaceSelectedBrush}" />
+
+
+								<ContentControl Content="17. Surface Variant" />
+
+								<styles:ColorPaletteControl Color1Name="SurfaceVariantBrush"
+															Color1Container="{ThemeResource SurfaceVariantBrush}"
+															ColorContent="{ThemeResource OnSurfaceVariantBrush}" />
+
+
+								<ContentControl Content="18. On Surface Variant" />
+
+								<styles:ColorPaletteControl Color1Name="OnSurfaceVariantBrush"
+															Color1Container="{ThemeResource OnSurfaceVariantBrush}"
+															ColorContent="{ThemeResource SurfaceVariantBrush}" />
+
+
+								<ContentControl Content="19. Outline" />
+
+								<!-- There's no OnOutlineBrush, so using OnPrimaryBrush for text color -->
+								<styles:ColorPaletteControl Color1Name="OutlineBrush"
+															Color1Container="{ThemeResource OutlineBrush}"
+															ColorContent="{ThemeResource OnPrimaryBrush}" />
+
+
+								<ContentControl Content="20. Inverse Surface - MISSING" />
+
+								<!--<styles:ColorPaletteControl Color1Name="InverseSurfaceBrush"
+															Color1Container="{ThemeResource InverseSurfaceBrush}"
+															ColorContent="{ThemeResource InverseOnSurfaceBrush}" />-->
+
+
+								<ContentControl Content="21. On Inverse Surface - MISSING" />
+
+								<!--<styles:ColorPaletteControl Color1Name="InverseOnSurfaceBrush"
+															Color1Container="{ThemeResource InverseOnSurfaceBrush}"
+															ColorContent="{ThemeResource InverseSurfaceBrush}" />-->
+
+
+								<ContentControl Content="22. Inverse Primary - MISSING" />
+
+								<!--<styles:ColorPaletteControl Color1Name="InversePrimaryBrush"
+															Color1Container="{ThemeResource InversePrimaryBrush}"
+															ColorContent="{ThemeResource InverseOnPrimaryBrush}" />-->
+
+
+								<ContentControl Content="23. Error" />
 
 								<styles:ColorPaletteControl Color1Name="ErrorBrush"
-															Color1Brush="{ThemeResource ErrorBrush}"
-															Color1Content="{ThemeResource OnErrorBrush}"
-															Color2Name="OnErrorBrush"
-															Color2Brush="{ThemeResource OnErrorBrush}"
-															Color2Content="{ThemeResource ErrorBrush}" />
+															Color1Container="{ThemeResource ErrorBrush}"
+															Color1Content="{ThemeResource OnErrorBrush}"/>
 
 
-								<!--<styles:ColorPaletteControl ColorContent="{ThemeResource InverseOnPrimaryBrush}"
-															Color1Name="InversePrimaryBrush"
-															Color1Brush="{ThemeResource InversePrimaryBrush}" />
-								<styles:ColorPaletteControl Color1Name="InverseSurfaceBrush"
-															Color1Brush="{ThemeResource InverseSurfaceBrush}"
-															Color1Content="{ThemeResource InverseOnSurfaceBrush}"
-															Color2Name="InverseOnSurfaceBrush"
-															Color2Brush="{ThemeResource InverseOnSurfaceBrush}"
-															Color2Content="{ThemeResource InverseSurfaceBrush}" />-->
+								<ContentControl Content="24. On Error" />
+
+								<styles:ColorPaletteControl Color1Name="OnErrorBrush"
+															Color1Container="{ThemeResource OnErrorBrush}"
+															Color1Content="{ThemeResource ErrorBrush}" />
 
 
-								<!--<styles:ColorPaletteControl ColorContent="{ThemeResource OnSurfaceVariantBrush}"
-															Color1Name="SurfaceVariantBrush"
-															Color1Brush="{ThemeResource SurfaceVariantBrush}" />
-								<styles:ColorPaletteControl Color1Name="OnSurfaceVariantBrush"
-															Color1Brush="{ThemeResource OnSurfaceVariantBrush}"
-															Color1Content="{ThemeResource SurfaceVariantBrush}"
-															Color2Name="OutlineBrush"
-															Color2Brush="{ThemeResource OutlineBrush}" 
-															Color2Content="{ThemeResource OnOutlineBrush}" />-->
+								<ContentControl Content="25. Error Container" />
 
-								<!-- TODO Add Containers and validate other missing brushes that aren't in figma -->
+								<styles:ColorPaletteControl Color1Name="ErrorContainerBrush"
+															Color1Container="{ThemeResource ErrorContainerBrush}"
+															Color1Content="{ThemeResource OnErrorContainerBrush}" />
+
+
+								<ContentControl Content="26. On Error Container" />
+
+								<styles:ColorPaletteControl Color1Name="OnErrorContainerBrush"
+															Color1Container="{ThemeResource OnErrorContainerBrush}"
+															Color1Content="{ThemeResource ErrorContainerBrush}" />
 							</StackPanel>
 						</ScrollViewer>
 					</UserControl>
