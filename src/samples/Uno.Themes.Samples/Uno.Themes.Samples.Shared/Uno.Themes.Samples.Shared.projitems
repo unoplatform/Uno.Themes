@@ -113,6 +113,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\OverviewPageHeader.xaml.cs">
       <DependentUpon>OverviewPageHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\ColorPaletteControl.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\ColorsSamplePage.xaml.cs">
       <DependentUpon>ColorsSamplePage.xaml</DependentUpon>
     </Compile>
@@ -265,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\OverviewPageHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\ColorPaletteControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
