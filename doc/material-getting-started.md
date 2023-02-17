@@ -12,7 +12,7 @@ Uno Material lets you apply [Material Design 3](https://m3.material.io/) styling
 
 ## Getting Started
 
-Initialization of the Uno.Material  resources is handled by the specialized `MaterialTheme` ResourceDictionary.
+Initialization of the Uno.Material resources is handled by the specialized `MaterialTheme` ResourceDictionary.
 
 ### `MaterialTheme`
 
