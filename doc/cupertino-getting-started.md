@@ -29,7 +29,7 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
     </ResourceDictionary>
     ```
 
-### Installing Uno.Material on previous versions of Uno Platform
+### Installing Uno.Cupertino on previous versions of Uno Platform
 
 If your application is based on the older solution template that includes a shared project (.shproj), follow these steps:
 
