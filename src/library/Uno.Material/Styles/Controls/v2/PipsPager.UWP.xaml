@@ -2,20 +2,26 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-					mc:Ignorable="d">
+					mc:Ignorable="d not_win">
 
 	<Style x:Key="MaterialPipsPagerStyle"
 		   BasedOn="{StaticResource BaseMaterialPipsPagerStyle}"
 		   TargetType="muxc:PipsPager">
 		<!-- Uno already implemented the 2.8.0 MUX version of the control -->
-		<!-- Uno.Themes reference is still on the MUX v2.6.0-prerelease.210113001 version for now -->
+		<!-- Uno.Themes reference is still on the MUX v2.6.0-prerelease.210113001 version for Windows UWP for now -->
 		<!-- Remove this file, PipsPager.Base.xaml and use <Setter Property=NormalPipStyle /> and <Setter Property=SelectedPipStyle /> only, -->
 		<!-- with all the rest in PipsPager.xaml, once we can bump the Microsoft.UI.Xaml version -->
-		<Setter Property="SelectedIndicatorButtonStyle"
+		<win:Setter Property="SelectedIndicatorButtonStyle"
 				Value="{StaticResource MaterialPipsPagerSelectedPipButtonStyle}" />
-		<Setter Property="DefaultIndicatorButtonStyle"
+		<win:Setter Property="DefaultIndicatorButtonStyle"
 				Value="{StaticResource MaterialPipsPagerNormalPipButtonStyle}" />
+		<not_win:Setter Property="SelectedPipStyle"
+						Value="{StaticResource MaterialPipsPagerSelectedPipButtonStyle}" />
+		<not_win:Setter Property="NormalPipStyle"
+						Value="{StaticResource MaterialPipsPagerNormalPipButtonStyle}" />
 	</Style>
 
 </ResourceDictionary>

@@ -382,14 +382,6 @@
 				Value="{StaticResource MaterialPipsPagerPreviousPageButtonStyle}" />
 		<Setter Property="NextButtonStyle"
 				Value="{StaticResource MaterialPipsPagerNextPageButtonStyle}" />
-		<!-- Uno already implemented the 2.8.0 MUX version of the control -->
-		<!-- Uno.Themes reference is still on the MUX v2.6.0-prerelease.210113001 version for now -->
-		<!-- Remove this file, PipsPager.UWP.xaml,and use <Setter Property=NormalPipStyle /> and <Setter Property=SelectedPipStyle /> only in PipsPager.xaml -->
-		<!-- with the rest of the code, once we can bump the Microsoft.UI.Xaml version -->
-		<not_win:Setter Property="SelectedPipStyle"
-						Value="{StaticResource MaterialPipsPagerSelectedPipButtonStyle}" />
-		<not_win:Setter Property="NormalPipStyle"
-						Value="{StaticResource MaterialPipsPagerNormalPipButtonStyle}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="muxc:PipsPager">

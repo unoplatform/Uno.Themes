@@ -16,6 +16,7 @@
 
 		<!-- Required until xamarin targets are used (defined by MSBuild.SDK.Extras)-->
 		<DisableImplicitFrameworkDefines>false</DisableImplicitFrameworkDefines>
+		<ShouldWriteErrorOnInvalidXaml>true</ShouldWriteErrorOnInvalidXaml>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
