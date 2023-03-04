@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics.CodeAnalysis;
+using Windows.UI;
+using Uno.Disposables;
 
 #if WinUI
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
 #else
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 #endif
@@ -31,9 +35,9 @@ namespace Uno.Material
 
 		[DynamicDependency(nameof(GetIcon))]
 		public static void SetIcon(Control obj, IconElement value) => obj.SetValue(IconProperty, value);
-#endregion
+		#endregion
 
-#region DependencyProperty: IconHeight
+		#region DependencyProperty: IconHeight
 		public static DependencyProperty IconHeightProperty { [DynamicDependency(nameof(GetIconHeight))] get; } = DependencyProperty.RegisterAttached(
 			"IconHeight",
 			typeof(double),
@@ -44,10 +48,10 @@ namespace Uno.Material
 		public static double GetIconHeight(Control obj) => (double)obj.GetValue(IconHeightProperty);
 		[DynamicDependency(nameof(GetIconHeight))]
 		public static void SetIconHeight(Control obj, double value) => obj.SetValue(IconHeightProperty, value);
-#endregion
+		#endregion
 
-#region DependencyProperty: IconWidth 
-		public static DependencyProperty IconWidthProperty { [DynamicDependency(nameof(GetIconWidth))]  get; } = DependencyProperty.RegisterAttached(
+		#region DependencyProperty: IconWidth 
+		public static DependencyProperty IconWidthProperty { [DynamicDependency(nameof(GetIconWidth))] get; } = DependencyProperty.RegisterAttached(
 			"IconWidth",
 			typeof(double),
 			typeof(ControlExtensions),
@@ -58,11 +62,11 @@ namespace Uno.Material
 		[DynamicDependency(nameof(GetIconWidth))]
 		public static void SetIconWidth(Control obj, double value) => obj.SetValue(IconWidthProperty, value);
 
-#endregion
+		#endregion
 
-#region DependencyProperty: AlternateContent
+		#region DependencyProperty: AlternateContent
 
-		public static DependencyProperty AlternateContentProperty { [DynamicDependency(nameof(GetAlternateContent))]  get; } = DependencyProperty.RegisterAttached(
+		public static DependencyProperty AlternateContentProperty { [DynamicDependency(nameof(GetAlternateContent))] get; } = DependencyProperty.RegisterAttached(
 			"AlternateContent",
 			typeof(object),
 			typeof(ControlExtensions),
@@ -73,6 +77,63 @@ namespace Uno.Material
 		[DynamicDependency(nameof(GetAlternateContent))]
 		public static void SetAlternateContent(Control obj, object value) => obj.SetValue(AlternateContentProperty, value);
 
-#endregion
+		#endregion
+
+		#region DependencyProperty: Elevation
+
+		/// <summary>
+		/// Gets or sets the level of elevation to depict for the attached view. In Material, elevation can be used to drive both the shadow and the surface tint color (https://m3.material.io/styles/elevation/overview)
+		/// </summary>
+		public static DependencyProperty ElevationProperty { [DynamicDependency(nameof(ElevationProperty))] get; } = DependencyProperty.RegisterAttached(
+			"Elevation",
+			typeof(int),
+			typeof(ControlExtensions),
+			new PropertyMetadata(0, OnElevationChanged));
+
+		[DynamicDependency(nameof(SetElevation))]
+		public static int GetElevation(Control obj) => (int)obj.GetValue(ElevationProperty);
+		[DynamicDependency(nameof(GetElevation))]
+		public static void SetElevation(Control obj, int value) => obj.SetValue(ElevationProperty, value);
+
+		#endregion
+
+		#region DependencyProperty: TintedBackground
+		/// <summary>
+		/// Gets or sets the SolidColorBrush to use when depicting a surface tint on an elevated view.
+		/// </summary>
+		public static DependencyProperty TintedBackgroundProperty { [DynamicDependency(nameof(GetTintedBackground))] get; } = DependencyProperty.RegisterAttached(
+			"TintedBackground",
+			typeof(SolidColorBrush),
+			typeof(ControlExtensions),
+			new PropertyMetadata(default(SolidColorBrush)));
+
+		[DynamicDependency(nameof(SetTintedBackground))]
+		public static SolidColorBrush GetTintedBackground(UIElement obj) => (SolidColorBrush)obj.GetValue(TintedBackgroundProperty);
+		[DynamicDependency(nameof(GetTintedBackground))]
+		public static void SetTintedBackground(UIElement obj, SolidColorBrush value) => obj.SetValue(TintedBackgroundProperty, value);
+
+		#endregion
+		#region DependencyProperty: IsTintEnabled
+		/// <summary>
+		/// Gets or sets whether or not the SurfaceTintColor should be applied for elevated views
+		/// </summary>
+		public static DependencyProperty IsTintEnabledProperty { [DynamicDependency(nameof(GetIsTintEnabled))] get; } = DependencyProperty.RegisterAttached(
+			"IsTintEnabled",
+			typeof(bool),
+			typeof(ControlExtensions),
+			new PropertyMetadata(false, OnIsTintEnabledChanged));
+
+		[DynamicDependency(nameof(SetIsTintEnabled))]
+		public static bool GetIsTintEnabled(UIElement obj) => (bool)obj.GetValue(IsTintEnabledProperty);
+		[DynamicDependency(nameof(GetIsTintEnabled))]
+		internal static void SetIsTintEnabled(UIElement obj, bool value) => obj.SetValue(IsTintEnabledProperty, value);
+
+		#endregion
+
+		private static void OnElevationChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
+			=> SurfaceTintExtensions.OnElevationChanged(element, (int)e.NewValue);
+
+		private static void OnIsTintEnabledChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
+			=> SurfaceTintExtensions.OnIsTintEnabledChanged(element, (bool)e.NewValue);
 	}
 }

@@ -73,6 +73,12 @@
 				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Background"
 				Value="{ThemeResource SurfaceBrush}" />
+		<Setter Property="um:ControlExtensions.Elevation"
+				Value="1" />
+		<Setter Property="um:ControlExtensions.TintedBackground"
+				Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.IsTintEnabled"
+				Value="True" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -80,7 +86,7 @@
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
 										  Margin="0,0,0,1"
-										  Elevation="1"
+										  Elevation="{Binding Path=(um:ControlExtensions.Elevation), RelativeSource={RelativeSource TemplatedParent}}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
 
@@ -140,7 +146,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="Root"
-							  Background="{TemplateBinding Background}"
+							  Background="{Binding Path=(um:ControlExtensions.TintedBackground), RelativeSource={RelativeSource TemplatedParent}}"
 							  BorderBrush="{TemplateBinding BorderBrush}"
 							  BorderThickness="{TemplateBinding BorderThickness}"
 							  CornerRadius="{TemplateBinding CornerRadius}">
@@ -700,7 +706,6 @@
 	<Style x:Key="MaterialIconButtonStyle"
 		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
-		
 		<Setter Property="Foreground"
 				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
