@@ -91,7 +91,7 @@ Within the `ControlTemplate` of the `ElevatedButtonStyle`, instead of performing
 </Grid>
 ```
 
-Applying the surface tint for elevated controls is optional and must be explicitly enabled through the use of the `IsTintEnabled` attached property. Below is an example of how an elevated control may appear based with or without a surface tint:
+Applying the surface tint for elevated controls is optional and must be explicitly enabled through the use of the `IsTintEnabled` attached property. Below is an example of how an elevated control may appear  with or without a surface tint:
 
 ```xml
 <StackPanel Spacing="8">
