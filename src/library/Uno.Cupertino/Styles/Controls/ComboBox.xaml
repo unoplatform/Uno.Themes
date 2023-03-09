@@ -25,6 +25,8 @@
 		   TargetType="ComboBoxItem">
 		<Setter Property="FontFamily"
 				Value="{ThemeResource CupertinoFontFamily}" />
+		<Setter Property="FontSize"
+				Value="13" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="VerticalContentAlignment"
@@ -34,7 +36,7 @@
 		<Setter Property="CornerRadius"
 				Value="5" />
 		<Setter Property="Padding"
-				Value="0" />
+				Value="16, 0" />
 		<Setter Property="Height"
 				Value="43" />
 
@@ -107,7 +109,6 @@
 
 						<!-- Pressed Overlay -->
 						<Grid x:Name="PressedOverlay"
-							  Margin="10"
 							  Background="{ThemeResource CupertinoSecondarySystemFillBrush}"
 							  CornerRadius="{TemplateBinding CornerRadius}"
 							  IsHitTestVisible="False"
@@ -117,19 +118,13 @@
 
 						<!-- ContentPresenter-->
 						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  Content="{TemplateBinding Content}">
-							<ContentPresenter.ContentTemplate>
-								<DataTemplate>
-									<Grid>
-										<TextBlock Text="{Binding}"
-												   Style="{ThemeResource CupertinoFootnote}"
-												   VerticalAlignment="Center"
-												   HorizontalAlignment="Center" />
-									</Grid>
-								</DataTemplate>
-							</ContentPresenter.ContentTemplate>
-						</ContentPresenter>
+										  Padding="{TemplateBinding Padding}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -303,6 +298,7 @@
 								<!-- ContentPresenter -->
 								<ContentPresenter x:Name="ContentPresenter"
 												  Grid.Column="1"
+												  MaxLines="1"
 												  VerticalAlignment="Center"
 												  Foreground="{ThemeResource CupertinoTertiaryGrayBrush}" />
 
