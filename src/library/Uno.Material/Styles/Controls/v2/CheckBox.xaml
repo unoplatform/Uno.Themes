@@ -17,20 +17,12 @@
 	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
 
-	<SolidColorBrush x:Key="MaterialCheckBoxBorderBrush"
-					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="{StaticResource MediumOpacity}" />
-	<SolidColorBrush x:Key="MaterialCheckBoxPressedBrush"
-					 Color="{ThemeResource OnSurfaceColor}"
-					 Opacity="{StaticResource LowOpacity}" />
-
-
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="Background"
 				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource OnPrimaryBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 
 		<!--Start: Body Small Typo-->
 		<Setter Property="FontFamily"
@@ -44,7 +36,7 @@
 		<!--End: Body Small Typo-->
 
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource MaterialCheckBoxBorderBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="BorderThickness"
 				Value="2" />
 		<Setter Property="Padding"
@@ -483,7 +475,7 @@
 								 Stretch="Uniform"
 								 Width="{StaticResource FocusAreaSize}"
 								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{ThemeResource MaterialCheckBoxPressedBrush}"
+								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -504,7 +496,7 @@
 
 							<Path x:Name="HyphenGlyph"
 								  Data="{StaticResource CheckBoxHyphenGlyphPathStyle}"
-								  Fill="{TemplateBinding Foreground}"
+								  Fill="{ThemeResource OnPrimaryBrush}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -516,7 +508,7 @@
 
 							<Path x:Name="CheckGlyph"
 								  Data="{StaticResource CheckBoxCheckGlyphPathStyle}"
-								  Fill="{TemplateBinding Foreground}"
+								  Fill="{ThemeResource OnPrimaryBrush}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -531,7 +523,7 @@
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
-										  Foreground="{ThemeResource OnSurfaceMediumBrush}"
+										  Foreground="{TemplateBinding Foreground}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -549,7 +541,5 @@
 		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
 		<Setter Property="Background"
 				Value="{ThemeResource SecondaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource OnSecondaryBrush}" />
 	</Style>
 </ResourceDictionary>
