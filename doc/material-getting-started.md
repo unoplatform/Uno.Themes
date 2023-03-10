@@ -241,3 +241,10 @@ If you would like Uno.Material to use a different font, you can override the def
     <MaterialTheme xmlns="using:Uno.Material"
                    FontOverrideSource="ms-appx:///PROJECT_NAME/Style/Application/MaterialFontsOverride.xaml" />
     ```
+
+## Additional Resources
+
+- [Uno Platform Material Sample App](https://github.com/unoplatform/Uno.Samples/tree/master/UI/UnoMaterialSample)
+- [Uno Platform Material Figma File](https://www.figma.com/community/file/1110792522046146058)
+- [Official Material Design 3 Guidelines](https://m3.material.io/components)
+- [Official Material Design 3 Theme Builder](https://m3.material.io/theme-builder)
