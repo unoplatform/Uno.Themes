@@ -121,6 +121,12 @@ namespace Uno.Themes.Markup
 				public static ResourceValue<Style> Default => new("FlyoutPresenterStyle");
 			}
 
+			public static class MenuFlyoutItem
+			{
+				[ResourceKeyDefinition(typeof(Style), "MenuFlyoutItemStyle", TargetType = typeof(MenuFlyoutItem))]
+				public static ResourceValue<Style> Default => new("MenuFlyoutItemStyle");
+			}
+
 			public static class MenuFlyoutPresenter
 			{
 				[ResourceKeyDefinition(typeof(Style), "MenuFlyoutPresenterStyle", TargetType = typeof(MenuFlyoutPresenter))]
