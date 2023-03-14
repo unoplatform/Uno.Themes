@@ -33,6 +33,7 @@ HyperlinkButton|HyperlinkButtonStyle|True
 HyperlinkButton|SecondaryHyperlinkButtonStyle|
 ListView|ListViewStyle|True
 ListViewItem|ListViewItemStyle|True
+MenuFlyoutItem|MenuFlyoutItemStyle|True
 MenuFlyoutPresenter|MenuFlyoutPresenterStyle|True
 muxc:NavigationView|NavigationViewStyle|True
 muxc:NavigationViewItem|NavigationViewItemStyle|True
