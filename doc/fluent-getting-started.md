@@ -1,3 +1,7 @@
+---
+uid: uno.themes.fluent.getstarted
+---
+
 <p align="center">
   <img src="assets/fluent-design-system.png">
 </p>
