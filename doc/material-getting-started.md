@@ -1,4 +1,8 @@
-﻿<p align="center">
+﻿---
+uid: uno.themes.material.getstarted
+---
+
+<p align="center">
   <img src="assets/material-design-system.png">
 </p>
 

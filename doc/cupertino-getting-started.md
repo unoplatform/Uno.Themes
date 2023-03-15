@@ -1,3 +1,7 @@
+---
+uid: uno.themes.cupertino.getstarted
+---
+
 <p align="center">
   <img src="assets/cupertino-design-system.png">
 </p>
