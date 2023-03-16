@@ -126,7 +126,7 @@ namespace Uno.Material
 		[DynamicDependency(nameof(SetIsTintEnabled))]
 		public static bool GetIsTintEnabled(UIElement obj) => (bool)obj.GetValue(IsTintEnabledProperty);
 		[DynamicDependency(nameof(GetIsTintEnabled))]
-		internal static void SetIsTintEnabled(UIElement obj, bool value) => obj.SetValue(IsTintEnabledProperty, value);
+		public static void SetIsTintEnabled(UIElement obj, bool value) => obj.SetValue(IsTintEnabledProperty, value);
 
 		#endregion
 
