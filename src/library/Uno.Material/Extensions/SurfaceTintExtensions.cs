@@ -49,36 +49,32 @@ namespace Uno.Material
 
 			if (isEnabled)
 			{
-				var elevation = ControlExtensions.GetElevation(control);
-				if (elevation > 0)
+				if (GetSubscription(control) is null)
 				{
-					OnElevationChanged(control, elevation);
+					var disposable = new CompositeDisposable();
+
+					control.Unloaded += OnControlUnloaded;
+					disposable.Add(Disposable.Create(() => control.Unloaded -= OnControlUnloaded));
+
+					control
+						.RegisterDisposablePropertyChangedCallback(Control.BackgroundProperty, OnBackgroundPropertyChanged)
+						.DisposeWith(disposable);
+
+					SetSubscription(control, disposable);
 				}
+
+				var elevation = ControlExtensions.GetElevation(control);
+				OnElevationChanged(control, elevation);
+			}
+			else
+			{
+				GetSubscription(sender as Control)?.Dispose();
 			}
 		}
 
 		internal static void OnElevationChanged(DependencyObject sender, int elevation)
 		{
-			if (sender is not Control control)
-			{
-				return;
-			}
-
-			if (GetSubscription(control) is null)
-			{
-				var disposable = new CompositeDisposable();
-
-				control.Unloaded += OnControlUnloaded;
-				disposable.Add(Disposable.Create(() => control.Unloaded -= OnControlUnloaded));
-
-				control
-					.RegisterDisposablePropertyChangedCallback(Control.BackgroundProperty, OnBackgroundPropertyChanged)
-					.DisposeWith(disposable);
-
-				SetSubscription(control, disposable);
-			}
-
-			ApplyBackgroundTint(control, elevation);
+			ApplyBackgroundTint(sender, elevation);
 		}
 
 		private static void OnBackgroundPropertyChanged(DependencyObject sender, DependencyProperty dp)
