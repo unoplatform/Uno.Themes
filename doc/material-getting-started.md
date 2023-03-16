@@ -96,7 +96,7 @@ If your application is based on the older solution template that includes a shar
 ### Customize Color Palette
 
 1. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `MaterialColorsOverride.xaml`
-2. Save the new override file within the **App Code Library**, for example, under `Style/Application`.
+2. Save the new override file within the **App Code Library**, for example, under `Styles/Application`.
 3. Replace the content with:
 
     ```xml
@@ -214,7 +214,7 @@ If your application is based on the older solution template that includes a shar
 
     ```xml
     <MaterialTheme xmlns="using:Uno.Material"
-                   ColorOverrideSource="ms-appx:///PROJECT_NAME/Style/Application/MaterialColorsOverride.xaml" />
+                   ColorOverrideSource="ms-appx:///PROJECT_NAME/Styles/Application/MaterialColorsOverride.xaml" />
     ```
 
 ### Change Default Font
@@ -225,7 +225,7 @@ If you would like Uno.Material to use a different font, you can override the def
 
 1. Add the custom font following [this guide](https://platform.uno/docs/articles/features/custom-fonts.html)
 2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `MaterialFontsOverride.xaml`
-3. Save the new override file within the **App Code Library**, for example, under `Style/Application`.
+3. Save the new override file within the **App Code Library**, for example, under `Styles/Application`.
 4. Assuming the font file has been placed in the **App Code Library** within, for example, a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
 
     ```xml
@@ -243,7 +243,7 @@ If you would like Uno.Material to use a different font, you can override the def
 
     ```xml
     <MaterialTheme xmlns="using:Uno.Material"
-                   FontOverrideSource="ms-appx:///PROJECT_NAME/Style/Application/MaterialFontsOverride.xaml" />
+                   FontOverrideSource="ms-appx:///PROJECT_NAME/Styles/Application/MaterialFontsOverride.xaml" />
     ```
 
 ## Additional Resources
