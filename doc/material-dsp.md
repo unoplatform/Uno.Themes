@@ -14,17 +14,17 @@ Is it possible to automate the creation of the Material Design color palette? Ye
 >  <MaterialTheme xmlns="using:Uno.Material"
 >                 ColorOverrideSource="ms-appx:///PROJECT_NAME/Styles/Application/MaterialColorsOverride.xaml" />
 > ```
-> More details [In the _Manual Color Overrides_ section of the Getting Started page](material-getting-started.md)
+> More details [In the _Manual Color Overrides_ section of the Getting Started page](xref:uno.themes.material.getstarted)
 
 ## The Uno.Dsp.Tasks NuGet package
 This package will be automatically present in the project after [creating a new Uno Platform project](https://aka.platform.uno/get-started) specifying the _Material_ theme. It is also possible to add it manually to an existing Uno Platform project by adding the following line to the _PackageReference_ section of the _csproj_ file:
 
-1. Manual installation:
+* Add a nuget package reference:
    ```xml
    <PackageReference Include="Uno.Dsp.Tasks" Version="[latest version]" />
    ```
 
-2. Already present with you select _Material_ theme during project creation:
+* The package is already present when you select _Material_ theme during project creation:
    ![](assets/material-theme-selection-wizard.png)
 
 ## Generating a custom color palette and export as DSP file
