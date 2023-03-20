@@ -100,7 +100,7 @@ The tooling required to generate the _Material Colors Override_ file from a DSP 
 
 ![Wizard - Theme Selection](assets\material-theme-selection-wizard.png)
 
-Follow this link to get [more Information about the DSP tooling](material-dsp.md).
+Follow this link to get [more Information about the DSP tooling](xref:Uno.Material.DSP).
 
 ### Manual Color Overrides
 Use this when you want to specify MANUALLY each colors.
