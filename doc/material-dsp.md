@@ -31,7 +31,7 @@ This package will be automatically present in the project after [creating a new 
 1. Navigate to the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) and select the colors you want to use for your application.
 2. Locate the _Export_ button and pick the _material Tokens (DSP)_ format.
 
-   ![Export Button](assets\material-theme-builder-export1.png) ![DSP Selection](assets\material-theme-builder-export2.png)
+   ![Export Button](assets/material-theme-builder-export1.png) ![DSP Selection](assets/material-theme-builder-export2.png)
 3. Save the zip file to your computer.
 4. Replace the file `ColorPaletteOverride.zip` in the `Styles` folder of your application project with the one you just downloaded.
 5. Build your application. The `ColorPaletterOverride.xaml` file will be automatically updated with the colors present in the DSP zip file.
