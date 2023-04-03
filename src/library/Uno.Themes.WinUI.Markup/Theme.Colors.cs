@@ -116,6 +116,9 @@ namespace Uno.Themes.Markup
 
 				[ResourceKeyDefinition(typeof(Color), "SurfaceInverseColor")]
 				public static ResourceValue<Color> Inverse => new("SurfaceInverseColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "SurfaceTintColor")]
+				public static ResourceValue<Color> Tint => new("SurfaceTintColor", true);
 			}
 
 			public static class OnSurface
@@ -134,6 +137,9 @@ namespace Uno.Themes.Markup
 			{
 				[ResourceKeyDefinition(typeof(Color), "OutlineColor")]
 				public static ResourceValue<Color> Default => new("OutlineColor", true);
+
+				[ResourceKeyDefinition(typeof(Color), "OutlineVariantColor")]
+				public static ResourceValue<Color> Variant => new ("OutlineVariantColor", true);
 			}
 
 		}
