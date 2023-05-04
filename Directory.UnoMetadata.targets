@@ -1,0 +1,28 @@
+<Project>
+	<PropertyGroup>
+		<Authors Condition="'$(Authors)'=='' or '$(Authors)'=='$(PackageId)' or '$(Authors)'=='$(AssemblyName)'">Uno Platform</Authors>
+		<Copyright Condition="'$(Copyright)'==''">Copyright (C) 2015-$([System.DateTime]::Now.ToString(`yyyy`)) Uno Platform inc. - all rights reserved</Copyright>
+		<RepositoryUrl  Condition="'$(RepositoryUrl)'==''">$(BUILD_REPOSITORY_URI)</RepositoryUrl>
+		<Product  Condition="'$(Product)'==''">$(AssemblyName) ($(TargetFramework))</Product>
+		<PackageLicenseExpression  Condition="'$(PackageLicenseExpression)'==''">Apache-2.0</PackageLicenseExpression>
+		<DefaultLanguage Condition="'$(DefaultLanguage)'==''">en-US</DefaultLanguage>
+	</PropertyGroup>
+
+	<Target Name="DownloadAndSetPackageIcon" AfterTargets="Build"  Condition="'$(PackageIcon)'==''">
+		<PropertyGroup>
+			<IconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</IconUrl>
+		</PropertyGroup>
+
+		<DownloadFile SourceUrl="$(IconUrl)" DestinationFolder="$(IntermediateOutputPath)">
+			<Output TaskParameter="DownloadedFile" PropertyName="UnoPackageDownloadedIcon" />
+		</DownloadFile>
+
+		<PropertyGroup>
+			<PackageIcon>$([System.IO.Path]::GetFileName($(UnoPackageDownloadedIcon)))</PackageIcon>
+		</PropertyGroup>
+
+		<ItemGroup>
+			<None Include="$(UnoPackageDownloadedIcon)" Pack="true" PackagePath="\" Visible="false" />
+		</ItemGroup>
+	</Target>
+</Project>
