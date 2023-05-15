@@ -10,7 +10,7 @@
 
 	<Target Name="DownloadAndSetPackageIcon" AfterTargets="Build"  Condition="'$(PackageIcon)'==''">
 		<PropertyGroup>
-			<IconUrl>https://nv-assets.azurewebsites.net/logos/uno.png</IconUrl>
+			<IconUrl>https://uno-assets.platform.uno/logos/uno.png</IconUrl>
 		</PropertyGroup>
 
 		<DownloadFile SourceUrl="$(IconUrl)" DestinationFolder="$(IntermediateOutputPath)">
