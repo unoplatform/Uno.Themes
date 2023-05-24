@@ -6,67 +6,116 @@
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="xamarin">
 
-	<!--  Converters  -->
-	<um:FromNullToValueConverter x:Key="NullToScaleConverter"
-								 NotNullValue="0.7"
-								 NullValue="1" />
-
-	<um:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter"
-								 NotNullValue="-11"
-								 NullValue="0" />
-
+	<!--  Converters  -->	
 	<um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
 								 NotNullValue="5"
 								 NullValue="0" />
 
-	<um:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
-								 NotNullValue="{StaticResource MaterialComboBoxPlaceholderFocusedThemeBrush}"
-								 NullValue="{StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}" />
+	<um:FromNullToValueConverter x:Key="NullToVisible"
+								 NotNullValue="Collapsed"
+								 NullValue="Visible" />
 
-	<!-- ComboBoxItem Brushes -->
-	<StaticResource x:Key="MaterialComboBoxItemForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
+	<um:FromNullToValueConverter x:Key="NullToCollapsed"
+								 NotNullValue="Visible"
+								 NullValue="Collapsed" />
 
-	<StaticResource x:Key="MaterialComboBoxItemSelectedBackgroundThemeBrush"
-					ResourceKey="PrimarySelectedBrush" />
+	<ResourceDictionary.ThemeDictionaries>
 
-	<StaticResource x:Key="MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush"
-					ResourceKey="OnSurfaceVariantHoverBrush" />
+		<ResourceDictionary x:Key="Default">
+			
+			<!-- ComboBoxItem Brushes -->
+			<StaticResource x:Key="MaterialComboBoxItemForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxItemPointerOverBackgroundThemeBrush"
-					ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="MaterialComboBoxItemSelectedBackgroundThemeBrush"
+							ResourceKey="PrimarySelectedBrush" />
 
+			<StaticResource x:Key="MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush"
+							ResourceKey="OnSurfaceVariantHoverBrush" />
 
-	<!-- ComboBox Brushes -->
-	<StaticResource x:Key="MaterialComboBoxBackgroundColorBrush"
-					ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialComboBoxItemPointerOverBackgroundThemeBrush"
+							ResourceKey="OnSurfaceVariantHoverBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxBorderBrush"
-					ResourceKey="OnSurfaceLowBrush" />
+			<!-- ComboBox Brushes -->
+			<StaticResource x:Key="MaterialComboBoxBackgroundColorBrush"
+							ResourceKey="SystemControlTransparentBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxFocusedBorderBrush"
-					ResourceKey="OnBackgroundBrush" />
+			<StaticResource x:Key="MaterialComboBoxBorderBrush"
+							ResourceKey="OnSurfaceLowBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxOpenedBorderBrush"
-					ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialComboBoxFocusedBorderBrush"
+							ResourceKey="OnBackgroundBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxLeadingIconForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialComboBoxOpenedBorderBrush"
+							ResourceKey="PrimaryBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxArrowForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialComboBoxLeadingIconForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxOpenedArrowForegroundThemeBrush"
-					ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialComboBoxArrowForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialComboBoxOpenedArrowForegroundThemeBrush"
+							ResourceKey="PrimaryBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxPlaceholderFocusedThemeBrush"
-					ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialComboBoxForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxPlaceholderForegroundThemeBrush"
-					ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="MaterialComboBoxPlaceholderFocusedThemeBrush"
+							ResourceKey="PrimaryBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxPlaceholderForegroundThemeBrush"
+							ResourceKey="OnSurfaceLowBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			
+			<!-- ComboBoxItem Brushes -->
+			<StaticResource x:Key="MaterialComboBoxItemForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxItemSelectedBackgroundThemeBrush"
+							ResourceKey="PrimarySelectedBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush"
+							ResourceKey="OnSurfaceVariantHoverBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxItemPointerOverBackgroundThemeBrush"
+							ResourceKey="OnSurfaceVariantHoverBrush" />
+
+			<!-- ComboBox Brushes -->
+			<StaticResource x:Key="MaterialComboBoxBackgroundColorBrush"
+							ResourceKey="SystemControlTransparentBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxBorderBrush"
+							ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxFocusedBorderBrush"
+							ResourceKey="OnBackgroundBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxOpenedBorderBrush"
+							ResourceKey="PrimaryBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxLeadingIconForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxArrowForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxOpenedArrowForegroundThemeBrush"
+							ResourceKey="PrimaryBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxForegroundThemeBrush"
+							ResourceKey="OnSurfaceBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxPlaceholderFocusedThemeBrush"
+							ResourceKey="PrimaryBrush" />
+
+			<StaticResource x:Key="MaterialComboBoxPlaceholderForegroundThemeBrush"
+							ResourceKey="OnSurfaceLowBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!--  CornerRadius  -->
 	<CornerRadius x:Key="MaterialComboBoxCornerRadius">4</CornerRadius>
@@ -328,6 +377,8 @@
 												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="PlaceholderElement.Foreground"
 												Value="{ThemeResource OnSurfaceLowBrush}" />
+										<Setter Target="UpperPlaceholderElement.Foreground"
+												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="ContentPresenter.Foreground"
 												Value="{ThemeResource OnSurfaceLowBrush}" />
 										<Setter Target="IconPresenter.Foreground"
@@ -430,18 +481,31 @@
 							<TextBlock x:Name="PlaceholderElement"
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
-									   Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={ThemeResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}"
+									   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+									   Foreground="{ThemeResource MaterialComboBoxPlaceholderForegroundThemeBrush}"
+									   IsHitTestVisible="False"
+									   MaxLines="1"
+									   RenderTransformOrigin="0,0.5"
+									   Style="{StaticResource BodyLarge}"
+									   Text="{TemplateBinding PlaceholderText}">
+							</TextBlock>
+
+							<TextBlock x:Name="UpperPlaceholderElement"
+									   Grid.Column="1"
+									   VerticalAlignment="Center"
+									   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+									   Foreground="{ThemeResource MaterialComboBoxPlaceholderFocusedThemeBrush}"
 									   IsHitTestVisible="False"
 									   MaxLines="1"
 									   RenderTransformOrigin="0,0.5"
 									   Style="{StaticResource BodyLarge}"
 									   Text="{TemplateBinding PlaceholderText}">
 								<TextBlock.RenderTransform>
-									<CompositeTransform x:Name="PlaceholderElement_CompositeTransform"
-														ScaleX="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}"
-														ScaleY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}"
-														TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
-								</TextBlock.RenderTransform>
+									<CompositeTransform x:Name="UpperPlaceholderElement_CompositeTransform"
+														ScaleX="0.7"
+														ScaleY="0.7"
+														TranslateY="-11" />
+									</TextBlock.RenderTransform>
 							</TextBlock>
 
 							<!--  Down  -->
