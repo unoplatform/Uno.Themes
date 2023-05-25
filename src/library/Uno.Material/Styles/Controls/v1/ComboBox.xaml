@@ -246,7 +246,7 @@
 						Value="Below" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
+		<Setter Property="um:ControlExtensions.LeadingIcon"
 				Value="{x:Null}" />
 
 		<Setter Property="ItemsPanel">
@@ -434,14 +434,14 @@
 
 									<!-- IconPresenter -->
 									<ContentPresenter x:Name="IconPresenter"
-													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Content="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
 													  MaxHeight="34"
 													  MaxWidth="34"
 													  MinWidth="25"
 													  Margin="0,0,8,0"
 													  HorizontalAlignment="Center"
 													  VerticalAlignment="Center"
-													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													  Visibility="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 									<!-- ContentPresenter -->
 									<ContentPresenter x:Name="ContentPresenter"
