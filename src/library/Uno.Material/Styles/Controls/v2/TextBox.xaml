@@ -689,7 +689,7 @@
 
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border Height="20"
+							<Border Height="23"
 									VerticalAlignment="Top"
 									Visibility="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 							<Button x:Name="LeadingIconButton"
@@ -724,7 +724,7 @@
 							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Grid.Column="1"
-									Height="20"
+									Height="23"
 									VerticalAlignment="Top">
 								<TextBlock x:Name="PlaceholderElement"
 										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
@@ -742,7 +742,7 @@
 							</Border>
 
 							<Border Grid.Column="2"
-									Height="20"
+									Height="23"
 									VerticalAlignment="Top"
 									Visibility="{Binding Path=(um:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<Button x:Name="TrailingIconButton"
