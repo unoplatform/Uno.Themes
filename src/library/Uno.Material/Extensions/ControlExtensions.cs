@@ -4,17 +4,20 @@ using System.Text;
 using System.Diagnostics.CodeAnalysis;
 using Windows.UI;
 using Uno.Disposables;
+using System.Windows.Input;
 
 #if WinUI
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 #else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 #endif
 
 namespace Uno.Material
@@ -22,19 +25,95 @@ namespace Uno.Material
 	[Bindable]
 	public static class ControlExtensions
 	{
-		#region DependencyProperty: Icon
+		#region DependencyProperty: LeadingIcon
 
-		public static DependencyProperty IconProperty { [DynamicDependency(nameof(GetIcon))] get; } = DependencyProperty.RegisterAttached(
-			"Icon",
+		public static DependencyProperty LeadingIconProperty { [DynamicDependency(nameof(GetLeadingIcon))] get; } = DependencyProperty.RegisterAttached(
+			"LeadingIcon",
 			typeof(IconElement),
 			typeof(ControlExtensions),
 			new PropertyMetadata(default));
 
-		[DynamicDependency(nameof(SetIcon))]
-		public static IconElement GetIcon(Control obj) => (IconElement)obj.GetValue(IconProperty);
+		[DynamicDependency(nameof(SetLeadingIcon))]
+		public static IconElement GetLeadingIcon(Control obj) => (IconElement)obj.GetValue(LeadingIconProperty);
 
-		[DynamicDependency(nameof(GetIcon))]
-		public static void SetIcon(Control obj, IconElement value) => obj.SetValue(IconProperty, value);
+		[DynamicDependency(nameof(GetLeadingIcon))]
+		public static void SetLeadingIcon(Control obj, IconElement value) => obj.SetValue(LeadingIconProperty, value);
+
+		#endregion
+
+		#region DependencyProperty: IsLeadingIconVisible
+
+		public static DependencyProperty IsLeadingIconVisibleProperty { [DynamicDependency(nameof(GetIsLeadingIconVisible))] get; } = DependencyProperty.RegisterAttached(
+			"IsLeadingIconVisible",
+			typeof(bool),
+			typeof(ControlExtensions),
+			new PropertyMetadata(true));
+
+		[DynamicDependency(nameof(SetIsLeadingIconVisible))]
+		public static bool GetIsLeadingIconVisible(Control obj) => (bool)obj.GetValue(IsLeadingIconVisibleProperty);
+
+		[DynamicDependency(nameof(GetIsLeadingIconVisible))]
+		public static void SetIsLeadingIconVisible(Control obj, bool value) => obj.SetValue(IsLeadingIconVisibleProperty, value);
+
+		#endregion
+
+		#region DependencyProperty: LeadingIconCommand
+		public static DependencyProperty LeadingIconCommandProperty { [DynamicDependency(nameof(GetLeadingIconCommand))] get; } = DependencyProperty.RegisterAttached(
+			"LeadingIconCommand",
+			typeof(ICommand),
+			typeof(ControlExtensions),
+			new PropertyMetadata(default));
+
+		[DynamicDependency(nameof(GetLeadingIconCommand))]
+		public static ICommand GetLeadingIconCommand(Control obj) => (ICommand)obj.GetValue(LeadingIconCommandProperty);
+
+		[DynamicDependency(nameof(SetLeadingIconCommand))]
+		public static void SetLeadingIconCommand(Control obj, ICommand value) => obj.SetValue(LeadingIconCommandProperty, value);
+		#endregion
+
+		#region DependencyProperty: TrailingIcon
+
+		public static DependencyProperty TrailingIconProperty { [DynamicDependency(nameof(GetTrailingIcon))] get; } = DependencyProperty.RegisterAttached(
+			"TrailingIcon",
+			typeof(IconElement),
+			typeof(ControlExtensions),
+			new PropertyMetadata(default));
+
+		[DynamicDependency(nameof(SetTrailingIcon))]
+		public static IconElement GetTrailingIcon(Control obj) => (IconElement)obj.GetValue(TrailingIconProperty);
+
+		[DynamicDependency(nameof(GetTrailingIcon))]
+		public static void SetTrailingIcon(Control obj, IconElement value) => obj.SetValue(TrailingIconProperty, value);
+		#endregion
+
+		#region DependencyProperty: IsTrailingIconVisible
+
+		public static DependencyProperty IsTrailingIconVisibleProperty { [DynamicDependency(nameof(GetIsTrailingIconVisible))] get; } = DependencyProperty.RegisterAttached(
+			"IsTrailingIconVisible",
+			typeof(bool),
+			typeof(ControlExtensions),
+			new PropertyMetadata(true));
+
+		[DynamicDependency(nameof(SetIsTrailingIconVisible))]
+		public static bool GetIsTrailingIconVisible(Control obj) => (bool)obj.GetValue(IsTrailingIconVisibleProperty);
+
+		[DynamicDependency(nameof(GetIsTrailingIconVisible))]
+		public static void SetIsTrailingIconVisible(Control obj, bool value) => obj.SetValue(IsTrailingIconVisibleProperty, value);
+
+		#endregion
+
+		#region DependencyProperty: TrailingIconCommand
+		public static DependencyProperty TrailingIconCommandProperty { [DynamicDependency(nameof(GetTrailingIconCommand))] get; } = DependencyProperty.RegisterAttached(
+			"TrailingIconCommand",
+			typeof(ICommand),
+			typeof(ControlExtensions),
+			new PropertyMetadata(default));
+
+		[DynamicDependency(nameof(GetTrailingIconCommand))]
+		public static ICommand GetTrailingIconCommand(Control obj) => (ICommand)obj.GetValue(TrailingIconCommandProperty);
+
+		[DynamicDependency(nameof(SetTrailingIconCommand))]
+		public static void SetTrailingIconCommand(Control obj, ICommand value) => obj.SetValue(TrailingIconCommandProperty, value);
 		#endregion
 
 		#region DependencyProperty: IconHeight
@@ -113,6 +192,7 @@ namespace Uno.Material
 		public static void SetTintedBackground(UIElement obj, SolidColorBrush value) => obj.SetValue(TintedBackgroundProperty, value);
 
 		#endregion
+
 		#region DependencyProperty: IsTintEnabled
 		/// <summary>
 		/// Gets or sets whether or not the SurfaceTintColor should be applied for elevated views

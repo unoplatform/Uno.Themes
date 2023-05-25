@@ -99,7 +99,7 @@
 				Value="50" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
+		<Setter Property="um:ControlExtensions.LeadingIcon"
 				Value="{x:Null}" />
 
 		<Setter Property="Template">
@@ -206,8 +206,8 @@
 
 							<Border Margin="{TemplateBinding Padding}">
 								<ContentPresenter x:Name="IconPresenter"
-												  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  Visibility="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+												  Content="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
 												  MaxHeight="34"
 												  MaxWidth="34"
 												  MinWidth="25"
@@ -313,7 +313,7 @@
 				Value="50" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
+		<Setter Property="um:ControlExtensions.LeadingIcon"
 				Value="{x:Null}" />
 
 		<Setter Property="Template">
@@ -417,8 +417,8 @@
 
 							<Border Margin="{TemplateBinding Padding}">
 								<ContentPresenter x:Name="IconPresenter"
-                                                  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Visibility="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+												  Content="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
 												  MaxHeight="34"
 												  MaxWidth="34"
 												  MinWidth="25"

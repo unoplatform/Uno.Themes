@@ -260,6 +260,56 @@
 		</Setter>
 	</Style>
 
+	<Style x:Key="MaterialIconStyle"
+		   BasedOn="{StaticResource IconButtonStyle}"
+		   TargetType="Button">
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="Background"
+				Value="Transparent" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+
+								</VisualState>
+								<VisualState x:Name="Pressed">
+
+								</VisualState>
+								<VisualState x:Name="Focused">
+
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{ThemeResource OnSurfaceLowBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Content -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Foreground" Value="{ThemeResource FilledTextBoxForeground}" />
@@ -285,7 +335,10 @@
 		<Setter Property="MinHeight" Value="{ThemeResource MaterialFilledTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.LeadingIcon"
+				Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.TrailingIcon"
+				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -396,22 +449,24 @@
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Height="26"
 									VerticalAlignment="Top"
-									Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-								<ContentPresenter x:Name="IconPresenter"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-												  HorizontalAlignment="Center"
-												  Margin="0,0,8,0"
-												  MaxHeight="34"
-												  MaxWidth="34"
-												  MinWidth="25"
-												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
-												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+									Visibility="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+
+								<Button x:Name="LeadingIconButton"
+										Content="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+										Command="{Binding Path=(um:ControlExtensions.LeadingIconCommand), RelativeSource={RelativeSource TemplatedParent}}"
+										IsHitTestVisible="{Binding Path=(um:ControlExtensions.LeadingIconCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalse}, FallbackValue=False, TargetNullValue=False}"
+										Visibility="{Binding Path=(um:ControlExtensions.IsLeadingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
+										Style="{ThemeResource MaterialIconStyle}"
+										HorizontalAlignment="Center"
+										Margin="0,0,8,0"
+										VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
 							</Border>
 
 							<ScrollViewer x:Name="ContentElement"
@@ -452,8 +507,24 @@
 								</TextBlock>
 							</Border>
 
+							<Border Grid.Column="2"
+									Height="26"
+									VerticalAlignment="Top"
+									Visibility="{Binding Path=(um:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+								<Button x:Name="TrailingIconButton"
+										Content="{Binding Path=(um:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+										Command="{Binding Path=(um:ControlExtensions.TrailingIconCommand), RelativeSource={RelativeSource TemplatedParent}}"
+										IsHitTestVisible="{Binding Path=(um:ControlExtensions.TrailingIconCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalse}, FallbackValue=False, TargetNullValue=False}"
+										Visibility="{Binding Path=(um:ControlExtensions.IsTrailingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
+										Style="{ThemeResource MaterialIconStyle}"
+										HorizontalAlignment="Center"
+										Margin="0,0,8,0"
+										VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							</Border>
+
 							<Button x:Name="DeleteButton"
-									Grid.Column="2"
+									Grid.Column="3"
 									Margin="8,0,0,0"
 									Foreground="{ThemeResource FilledTextBoxDeleteButtonForeground}"
 									IsTabStop="False"
@@ -512,7 +583,11 @@
 		<Setter Property="MinHeight" Value="{ThemeResource MaterialOutlinedTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.LeadingIcon"
+				Value="{x:Null}" />
+		
+		<Setter Property="um:ControlExtensions.TrailingIcon"
+				Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -609,20 +684,23 @@
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Height="20"
-									VerticalAlignment="Top">
-								<ContentPresenter x:Name="IconPresenter"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-												  HorizontalAlignment="Center"
-												  Width="20"
-												  Margin="1,0,18,0"
-												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
-												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+									VerticalAlignment="Top"
+									Visibility="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+							<Button x:Name="LeadingIconButton"
+										Content="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+										Command="{Binding Path=(um:ControlExtensions.LeadingIconCommand), RelativeSource={RelativeSource TemplatedParent}}"
+										IsHitTestVisible="{Binding Path=(um:ControlExtensions.LeadingIconCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalse}, FallbackValue=False, TargetNullValue=False}"										
+										Visibility="{Binding Path=(um:ControlExtensions.IsLeadingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
+										Style="{ThemeResource MaterialIconStyle}"
+										HorizontalAlignment="Center"
+										Margin="0,0,8,0"
+										VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 							</Border>
 
 							<ScrollViewer x:Name="ContentElement"
@@ -663,8 +741,23 @@
 								</TextBlock>
 							</Border>
 
+							<Border Grid.Column="2"
+									Height="20"
+									VerticalAlignment="Top"
+									Visibility="{Binding Path=(um:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+								<Button x:Name="TrailingIconButton"
+										Content="{Binding Path=(um:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+										Command="{Binding Path=(um:ControlExtensions.TrailingIconCommand), RelativeSource={RelativeSource TemplatedParent}}"
+										IsHitTestVisible="{Binding Path=(um:ControlExtensions.TrailingIconCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalse}, FallbackValue=False, TargetNullValue=False}"
+										Visibility="{Binding Path=(um:ControlExtensions.IsTrailingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
+										Style="{ThemeResource MaterialIconStyle}"
+										HorizontalAlignment="Center"
+										Margin="1,0,8,0"
+										VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+							</Border>
+
 							<Button x:Name="DeleteButton"
-									Grid.Column="2"
+									Grid.Column="3"
 									Margin="8,0,0,0"
 									IsTabStop="False"
 									Style="{StaticResource MaterialDeleteButtonStyle}"
