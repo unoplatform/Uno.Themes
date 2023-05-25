@@ -9,68 +9,89 @@
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="android ios not_ios wasm xamarin">
 
-	<x:String x:Key="CheckBoxHyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
-	<x:String x:Key="CheckBoxCheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+	<x:String x:Key="MaterialCheckBoxHyphenGlyphData">M0,0L32,0 32,5.3 0,5.3z</x:String>
+	<x:String x:Key="MaterialCheckBoxCheckGlyphData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 
-	<GridLength x:Key="CheckAreaLength">40</GridLength>
 	<x:Double x:Key="FocusAreaSize">40</x:Double>
-	<x:Double x:Key="CheckAreaSize">18</x:Double>
 	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
 
 	<ResourceDictionary.ThemeDictionaries>
 
 		<ResourceDictionary x:Key="Default">
 			<StaticResource x:Key="MaterialCheckBoxBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialSecondaryCheckBoxBackground" ResourceKey="SecondaryBrush" />
 			<StaticResource x:Key="MaterialCheckBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="MaterialCheckBoxFontFamily" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="MaterialCheckBoxFontWeight" ResourceKey="BodySmallFontWeight" />
-			<StaticResource x:Key="MaterialCheckBoxFontSize" ResourceKey="BodySmallFontSize" />
-			<StaticResource x:Key="MaterialCheckBoxCharacterSpacing" ResourceKey="BodySmallCharacterSpacing" />
-			<StaticResource x:Key="MaterialCheckBoxBorderBrush" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="MaterialCheckBoxMinHeight" ResourceKey="CheckAreaSize" />
-			<StaticResource x:Key="MaterialCheckBoxOpacityUncheckedDisabled" ResourceKey="MediumOpacity" />
-			<StaticResource x:Key="MaterialCheckBox" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrush" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="MaterialCheckBoxHyphenFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxCheckFill" ResourceKey="OnPrimaryBrush" />
+			<!--This is using light background in figma, but this brush doesnt seem to exist-->
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedDisabled" ResourceKey="BackgroundLightBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="MaterialCheckBoxBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialSecondaryCheckBoxBackground" ResourceKey="SecondaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrush" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="MaterialCheckBoxHyphenFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxCheckFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceMediumBrush" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
 	<x:Double x:Key="MaterialCheckBoxBorderThickness">2</x:Double>
-	<x:Double x:Key="CheckBoxSize">20</x:Double>
-	<x:Double x:Key="CheckBoxGlyphSize">12</x:Double>
-	<x:Double x:Key="CheckBoxHeight">32</x:Double>
-	<x:Double x:Key="CheckBoxMinWidth">120</x:Double>
-	<Thickness x:Key="CheckBoxPadding">8,5,0,0</Thickness>
-	<Thickness x:Key="CheckBoxFocusVisualMargin">-7,-3,-7,-3</Thickness>
-	<x:String x:Key="CheckBoxCheckedGlyph">&#xE001;</x:String>
-	<x:String x:Key="CheckBoxIndeterminateGlyph">&#xE9AE;</x:String>
+	<Thickness x:Key="MaterialCheckBoxPadding">8,0,0,0</Thickness>
+	<x:Double x:Key="MaterialCheckBoxMinWidth">0</x:Double>
+	<x:Double x:Key="MaterialCheckBoxCornerRadius">2</x:Double>
+	<x:Double x:Key="MaterialCheckBoxHyphenWidth">12</x:Double>
+	<x:Double x:Key="MaterialCheckBoxHyphenHeight">4</x:Double>
+	<x:Double x:Key="MaterialCheckBoxCheckWidth">12</x:Double>
+	<x:Double x:Key="MaterialCheckBoxCheckHeight">12</x:Double>
+	<GridLength x:Key="MaterialCheckBoxCheckAreaLength">40</GridLength>
 
+	<StaticResource x:Key="MaterialCheckBoxFontFamily" ResourceKey="MaterialRegularFontFamily" />
+	<StaticResource x:Key="MaterialCheckBoxCharacterSpacing" ResourceKey="BodySmallCharacterSpacing" />
+	<StaticResource x:Key="MaterialCheckBoxFontSize" ResourceKey="BodySmallFontSize" />
+	<StaticResource x:Key="MaterialCheckBoxFontWeight" ResourceKey="BodySmallFontWeight" />
+
+	<!--Disabled ContentPresenterOpacity-->
+	<StaticResource x:Key="MaterialCheckBoxBackGroundColorUncheckedDisabled" ResourceKey="MediumOpacity" />
+	<StaticResource x:Key="MaterialCheckBoxContentPresenterOpacityCheckedDisabled" ResourceKey="MediumOpacity" />
+	<StaticResource x:Key="MaterialCheckBoxContentPresenterOpacityIndeterminateDisabled" ResourceKey="MediumOpacity" />
 	
+	<x:Double x:Key="CheckAreaSize">18</x:Double>
+	<StaticResource x:Key="MaterialCheckBoxMinHeight" ResourceKey="CheckAreaSize" />
+	<StaticResource x:Key="MaterialCheckBoxFocusRingSize" ResourceKey="FocusAreaSize" />
+	<StaticResource x:Key="MaterialCheckBoxPressRingSize" ResourceKey="FocusAreaSize" />
+	<StaticResource x:Key="MaterialCheckBoxSize" ResourceKey="CheckAreaSize" />
+
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="Background"
-				Value="{ThemeResource PrimaryBrush}" />
+				Value="{ThemeResource MaterialCheckBoxBackground}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource OnSurfaceBrush}" />
+				Value="{ThemeResource MaterialCheckBoxForeground}" />
 
 		<!--Start: Body Small Typo-->
 		<Setter Property="FontFamily"
 				Value="{ThemeResource MaterialRegularFontFamily}" />
 		<Setter Property="FontWeight"
-				Value="{ThemeResource BodySmallFontWeight}" />
+				Value="{ThemeResource MaterialCheckBoxFontWeight}" />
 		<Setter Property="FontSize"
-				Value="{ThemeResource BodySmallFontSize}" />
+				Value="{ThemeResource MaterialCheckBoxFontSize}" />
 		<Setter Property="CharacterSpacing"
-				Value="{ThemeResource BodySmallCharacterSpacing}" />
+				Value="{ThemeResource MaterialCheckBoxCharacterSpacing}" />
 		<!--End: Body Small Typo-->
 
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource OnSurfaceBrush}" />
+				Value="{ThemeResource MaterialCheckBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
-				Value="2" />
+				Value="{StaticResource MaterialCheckBoxBorderThickness}" />
 		<Setter Property="Padding"
-				Value="8,0,0,0" />
+				Value="{StaticResource MaterialCheckBoxPadding}" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"
@@ -80,9 +101,9 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="MinWidth"
-				Value="0" />
+				Value="{StaticResource MaterialCheckBoxMinWidth}" />
 		<Setter Property="MinHeight"
-				Value="{StaticResource CheckAreaSize}" />
+				Value="{StaticResource MaterialCheckBoxMinHeight}" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="False" />
 
@@ -221,7 +242,9 @@
 
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity"
+										<Setter Target="CheckedBackgroundBorder.Opacity"
+												Value="{StaticResource MediumOpacity}" />
+										<Setter Target="HyphenGlyph.Opacity"
 												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
 												Value="{StaticResource MediumOpacity}" />
@@ -485,7 +508,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{StaticResource CheckAreaLength}" />
+							<ColumnDefinition Width="{StaticResource MaterialCheckBoxCheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
@@ -493,8 +516,8 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
+								 Width="{StaticResource MaterialCheckBoxFocusRingSize}"
+								 Height="{StaticResource MaterialCheckBoxFocusRingSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
@@ -503,47 +526,47 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
+								 Width="{StaticResource MaterialCheckBoxPressRingSize}"
+								 Height="{StaticResource MaterialCheckBoxPressRingSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
 						<Grid x:Name="CheckBoxContainer"
-							  Height="{StaticResource CheckAreaSize}"
-							  Width="{StaticResource CheckAreaSize}">
+							  Height="{StaticResource MaterialCheckBoxSize}"
+							  Width="{StaticResource MaterialCheckBoxSize}">
 
 							<Grid x:Name="BackgroundBorder"
 								  Background="Transparent"
 								  BorderBrush="{TemplateBinding BorderBrush}"
 								  BorderThickness="{TemplateBinding BorderThickness}"
-								  CornerRadius="2" />
+								  CornerRadius="{StaticResource MaterialCheckBoxCornerRadius}" />
 
 							<Grid x:Name="CheckedBackgroundBorder"
 								  Background="{TemplateBinding Background}"
 								  Opacity="0"
-								  CornerRadius="2" />
+								  CornerRadius="{StaticResource MaterialCheckBoxCornerRadius}" />
 
 							<Path x:Name="HyphenGlyph"
-								  Data="{StaticResource CheckBoxHyphenGlyphPathStyle}"
-								  Fill="{ThemeResource OnPrimaryBrush}"
+								  Data="{StaticResource MaterialCheckBoxHyphenGlyphData}"
+								  Fill="{ThemeResource MaterialCheckBoxHyphenFill}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
-								  Width="12"
-								  Height="4"
+								  Width="{StaticResource MaterialCheckBoxHyphenWidth}"
+								  Height="{StaticResource MaterialCheckBoxHyphenHeight}"
 								  Opacity="0"
 								  AutomationProperties.AccessibilityView="Raw"
 								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
-								  Data="{StaticResource CheckBoxCheckGlyphPathStyle}"
-								  Fill="{ThemeResource OnPrimaryBrush}"
+								  Data="{StaticResource MaterialCheckBoxCheckGlyphData}"
+								  Fill="{ThemeResource MaterialCheckBoxCheckFill}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
-								  Width="12"
-								  Height="12"
+								  Width="{StaticResource MaterialCheckBoxCheckWidth}"
+								  Height="{StaticResource MaterialCheckBoxCheckHeight}"
 								  Opacity="0"
 								  AutomationProperties.AccessibilityView="Raw"
 								  xamarin:Margin="0,2,0,0" />
@@ -570,6 +593,6 @@
 		   TargetType="CheckBox"
 		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
 		<Setter Property="Background"
-				Value="{ThemeResource SecondaryBrush}" />
+				Value="{ThemeResource MaterialSecondaryCheckBoxBackground}" />
 	</Style>
 </ResourceDictionary>
