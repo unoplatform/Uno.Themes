@@ -9,52 +9,199 @@
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="android ios not_ios wasm xamarin">
 
-	<x:String x:Key="CheckBoxHyphenGlyphPathStyle">M0,0L32,0 32,5.3 0,5.3z</x:String>
-	<x:String x:Key="CheckBoxCheckGlyphPathStyle">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
 
-	<GridLength x:Key="CheckAreaLength">40</GridLength>
-	<x:Double x:Key="FocusAreaSize">40</x:Double>
-	<x:Double x:Key="CheckAreaSize">18</x:Double>
-	<CornerRadius x:Key="CheckAreaCornerRadius">4</CornerRadius>
+			<!--#region Background-->
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUnchecked" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUncheckedDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<!--#endregion-->
+
+			<!--#region Foreground-->
+			<StaticResource x:Key="MaterialCheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<!--#endregion-->
+
+			<!--#region Border Brush-->
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUnchecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUncheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUncheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUncheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<!--#endregion-->
+
+			<!--#region Typo-->
+			<StaticResource x:Key="MaterialCheckBoxFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="MaterialCheckBoxFontWeight" ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="MaterialCheckBoxFontSize" ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="MaterialCheckBoxCharacterSpacing" ResourceKey="BodySmallCharacterSpacing" />
+			<!--#endregion-->
+
+			<!--#region Glyph-->
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUnchecked" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUncheckedDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillChecked" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillCheckedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillCheckedDisabled" ResourceKey="OnPrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminate" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminateDisabled" ResourceKey="OnPrimaryMediumBrush" />
+			<!--#endregion-->
+
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Light">
+
+			<!--#region Background-->
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUnchecked" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundUncheckedDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBackgroundIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<!--#endregion-->
+
+			<!--#region Foreground-->
+			<StaticResource x:Key="MaterialCheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="MaterialCheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<!--#endregion-->
+
+			<!--#region Border Brush-->
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUnchecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUncheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUncheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushUncheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxBorderBrushIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<!--#endregion-->
+
+			<!--#region Typo-->
+			<StaticResource x:Key="MaterialCheckBoxFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="MaterialCheckBoxFontWeight" ResourceKey="BodySmallFontWeight" />
+			<StaticResource x:Key="MaterialCheckBoxFontSize" ResourceKey="BodySmallFontSize" />
+			<StaticResource x:Key="MaterialCheckBoxCharacterSpacing" ResourceKey="BodySmallCharacterSpacing" />
+			<!--#endregion-->
+
+			<!--#region Glyph-->
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUnchecked" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillUncheckedDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillChecked" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillCheckedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillCheckedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillCheckedDisabled" ResourceKey="OnPrimaryMediumBrush" />
+
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminate" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="MaterialCheckBoxGlyphFillIndeterminateDisabled" ResourceKey="OnPrimaryMediumBrush" />
+			<!--#endregion-->
+
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- Glyph -->
+	<x:String x:Key="MaterialCheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
+	<x:String x:Key="MaterialCheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+
+	<!-- Focus Area -->
+	<x:Double x:Key="MaterialCheckBoxFocusAreaSize">40</x:Double>
+
+	<!-- Check Area -->
+	<x:Double x:Key="MaterialCheckBoxCheckAreaSize">18</x:Double>
+	<GridLength x:Key="MaterialCheckBoxCheckAreaLength">40</GridLength>
+	<CornerRadius x:Key="MaterialCheckBoxCheckAreaCornerRadius">4</CornerRadius>
 
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
-		<Setter Property="Background"
-				Value="{ThemeResource PrimaryBrush}" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="Background" Value="{ThemeResource MaterialCheckBoxBackgroundUnchecked}" />
+		<Setter Property="Foreground" Value="{ThemeResource MaterialCheckBoxForegroundUnchecked}" />
 
-		<!--Start: Body Small Typo-->
-		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialRegularFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="{ThemeResource BodySmallFontWeight}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource BodySmallFontSize}" />
-		<Setter Property="CharacterSpacing"
-				Value="{ThemeResource BodySmallCharacterSpacing}" />
-		<!--End: Body Small Typo-->
+		<!-- Start: Body Small Typo -->
+		<Setter Property="FontFamily" Value="{ThemeResource MaterialCheckBoxFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource MaterialCheckBoxFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource MaterialCheckBoxFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource MaterialCheckBoxCharacterSpacing}" />
+		<!-- End: Body Small Typo -->
 
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="BorderThickness"
-				Value="2" />
-		<Setter Property="Padding"
-				Value="8,0,0,0" />
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="MinWidth"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="{StaticResource CheckAreaSize}" />
-		<Setter Property="UseSystemFocusVisuals"
-				Value="False" />
+		<Setter Property="BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushUnchecked}" />
+		<Setter Property="BorderThickness" Value="2" />
+		<Setter Property="Padding" Value="8,0,0,0" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinHeight" Value="{StaticResource MaterialCheckBoxCheckAreaSize}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -114,70 +261,96 @@
 
 							<VisualStateGroup x:Name="CombinedStates">
 
-								<VisualState x:Name="UncheckedNormal" />
-								<VisualState x:Name="UncheckedPointerOver" />
-								<VisualState x:Name="UncheckedPressed" />
+								<VisualState x:Name="UncheckedNormal">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundUnchecked}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushUnchecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundUnchecked}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillUnchecked}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="UncheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundUncheckedPointerOver}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushUncheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundUncheckedPointerOver}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillUncheckedPointerOver}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="UncheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundUncheckedPressed}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushUncheckedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundUncheckedPressed}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillUncheckedPressed}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MediumOpacity}" />
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundUncheckedDisabled}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushUncheckedDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundUncheckedDisabled}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillUncheckedDisabled}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckedNormal">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundChecked}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundChecked}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillChecked}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundCheckedPointerOver}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundCheckedPointerOver}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillCheckedPointerOver}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="CheckedPressed">
 									<!-- https://github.com/unoplatform/uno/issues/5099 -->
 									<xamarin:VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundCheckedPressed}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushCheckedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundCheckedPressed}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillCheckedPressed}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</xamarin:VisualState.Setters>
 									<win:Storyboard>
-										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 To="0">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-
-										<DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 To="1">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxForegroundCheckedPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBorder"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxBackgroundCheckedPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBorder"
+																	   Storyboard.TargetProperty="BorderBrush">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxBorderBrushCheckedPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxGlyphFillCheckedPressed}" />
+										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimation Storyboard.TargetName="CheckGlyph"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="{StaticResource MaterialAnimationDuration}"
@@ -191,70 +364,67 @@
 
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MediumOpacity}" />
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MediumOpacity}" />
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="CheckGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundCheckedDisabled}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushCheckedDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundCheckedDisabled}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillCheckedDisabled}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="IndeterminateNormal">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="HyphenGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundIndeterminate}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushIndeterminate}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundIndeterminate}" />
+										<Setter Target="HyphenGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillIndeterminate}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="IndeterminatePointerOver">
 									<VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="HyphenGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundIndeterminatePointerOver}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushIndeterminatePointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundIndeterminatePointerOver}" />
+										<Setter Target="HyphenGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillIndeterminatePointerOver}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="IndeterminatePressed">
 									<!-- https://github.com/unoplatform/uno/issues/5099 -->
 									<xamarin:VisualState.Setters>
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="HyphenGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundIndeterminatePressed}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushIndeterminatePressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundIndeterminatePressed}" />
+										<Setter Target="HyphenGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillIndeterminatePressed}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
 									</xamarin:VisualState.Setters>
 									<win:Storyboard>
-										<DoubleAnimation Storyboard.TargetName="BackgroundBorder"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 To="0">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-
-										<DoubleAnimation Storyboard.TargetName="CheckedBackgroundBorder"
-														 Storyboard.TargetProperty="Opacity"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 To="1">
-											<DoubleAnimation.EasingFunction>
-												<CubicEase EasingMode="EaseIn" />
-											</DoubleAnimation.EasingFunction>
-										</DoubleAnimation>
-
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxForegroundIndeterminatePressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBorder"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxBackgroundIndeterminatePressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBorder"
+																	   Storyboard.TargetProperty="BorderBrush">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxBorderBrushIndeterminatePressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HyphenGlyph"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialCheckBoxGlyphFillIndeterminatePressed}" />
+										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimation Storyboard.TargetName="HyphenGlyph"
 														 Storyboard.TargetProperty="Opacity"
 														 Duration="{StaticResource MaterialAnimationDuration}"
@@ -268,16 +438,12 @@
 
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MediumOpacity}" />
-										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MediumOpacity}" />
-										<Setter Target="BackgroundBorder.Opacity"
-												Value="0" />
-										<Setter Target="CheckedBackgroundBorder.Opacity"
-												Value="1" />
-										<Setter Target="HyphenGlyph.Opacity"
-												Value="1" />
+										<Setter Target="BackgroundBorder.Background" Value="{ThemeResource MaterialCheckBoxBackgroundIndeterminateDisabled}" />
+										<Setter Target="BackgroundBorder.BorderBrush" Value="{ThemeResource MaterialCheckBoxBorderBrushIndeterminateDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource MaterialCheckBoxForegroundIndeterminateDisabled}" />
+										<Setter Target="HyphenGlyph.Fill" Value="{ThemeResource MaterialCheckBoxGlyphFillIndeterminateDisabled}" />
+										<Setter Target="CheckGlyph.Opacity" Value="0" />
+										<Setter Target="HyphenGlyph.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -443,8 +609,7 @@
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity"
-												Value="{StaticResource FocusedOpacity}" />
+										<Setter Target="FocusRing.Opacity" Value="{StaticResource FocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -455,7 +620,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{StaticResource CheckAreaLength}" />
+							<ColumnDefinition Width="{StaticResource MaterialCheckBoxCheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
@@ -463,8 +628,8 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
+								 Width="{StaticResource MaterialCheckBoxFocusAreaSize}"
+								 Height="{StaticResource MaterialCheckBoxFocusAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
@@ -473,30 +638,25 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource FocusAreaSize}"
-								 Height="{StaticResource FocusAreaSize}"
+								 Width="{StaticResource MaterialCheckBoxFocusAreaSize}"
+								 Height="{StaticResource MaterialCheckBoxFocusAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
 						<Grid x:Name="CheckBoxContainer"
-							  Height="{StaticResource CheckAreaSize}"
-							  Width="{StaticResource CheckAreaSize}">
+							  Height="{StaticResource MaterialCheckBoxCheckAreaSize}"
+							  Width="{StaticResource MaterialCheckBoxCheckAreaSize}">
 
 							<Grid x:Name="BackgroundBorder"
-								  Background="Transparent"
+								  Background="{TemplateBinding Background}"
 								  BorderBrush="{TemplateBinding BorderBrush}"
 								  BorderThickness="{TemplateBinding BorderThickness}"
 								  CornerRadius="2" />
 
-							<Grid x:Name="CheckedBackgroundBorder"
-								  Background="{TemplateBinding Background}"
-								  Opacity="0"
-								  CornerRadius="2" />
-
 							<Path x:Name="HyphenGlyph"
-								  Data="{StaticResource CheckBoxHyphenGlyphPathStyle}"
-								  Fill="{ThemeResource OnPrimaryBrush}"
+								  Data="{StaticResource MaterialCheckBoxHyphenGlyphPathData}"
+								  Fill="{ThemeResource MaterialCheckBoxGlyphFillIndeterminate}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -507,8 +667,8 @@
 								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
-								  Data="{StaticResource CheckBoxCheckGlyphPathStyle}"
-								  Fill="{ThemeResource OnPrimaryBrush}"
+								  Data="{StaticResource MaterialCheckBoxCheckGlyphPathData}"
+								  Fill="{ThemeResource MaterialCheckBoxGlyphFillChecked}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -534,12 +694,5 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
-
-	<Style x:Key="MaterialSecondaryCheckBoxStyle"
-		   TargetType="CheckBox"
-		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
-		<Setter Property="Background"
-				Value="{ThemeResource SecondaryBrush}" />
 	</Style>
 </ResourceDictionary>
