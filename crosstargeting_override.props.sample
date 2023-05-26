@@ -16,16 +16,16 @@
 
 		<!-- Uncomment each line for each platform that you want to build: -->
 
-		<!-- <TargetFrameworkOverride Condition="''!='hint: UWP'">$(TargetFrameworkOverride);uap10.0.18362</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: WinUI'">$(TargetFrameworkOverride);net6.0-windows10.0.18362</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.iOS'">$(TargetFrameworkOverride);xamarinios10</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.Android'">$(TargetFrameworkOverride);MonoAndroid12.0</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.Mac'">$(TargetFrameworkOverride);xamarinmac20</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: WASM, Skia'">$(TargetFrameworkOverride);netstandard2.0</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 iOS'">$(TargetFrameworkOverride);net6.0-ios</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 Android'">$(TargetFrameworkOverride);net6.0-android</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 macOS Catalyst'">$(TargetFrameworkOverride);net6.0-maccatalyst</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 macOS AppKit'">$(TargetFrameworkOverride);net6.0-macos</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: UWP'">uap10.0.18362;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: WinUI'">net6.0-windows10.0.18362;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.iOS'">xamarinios10;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.Android'">MonoAndroid12.0;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.Mac'">xamarinmac20;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: WASM, Skia'">netstandard2.0;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 iOS'">net6.0-ios;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 Android'">net6.0-android;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 macOS Catalyst'">net6.0-maccatalyst;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 macOS AppKit'">net6.0-macos;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
 
 		<!-- DO NOT COMMENT OUT: netstandard2.0 is a required tfm in all cases -->
 		<TargetFrameworkOverride Condition="'$(TargetFrameworkOverride)'!='' AND !$(TargetFrameworkOverride.Contains('netstandard2.0'))">netstandard2.0;$(TargetFrameworkOverride)</TargetFrameworkOverride>
