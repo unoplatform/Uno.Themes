@@ -22,7 +22,7 @@
 
 			<StackPanel Spacing="16">
 
-				<TextBlock Text="ControlExtensions.LeadingIcon"
+				<TextBlock Text="ControlExtensions.Icon"
 						   Style="{StaticResource MaterialHeadline5}" />
 
 				<TextBlock Text="This property support a variety of icon sources:"
@@ -86,10 +86,10 @@
 								  Style="{StaticResource XamlDisplayBelowStyle}">
 					<TextBox PlaceholderText="Filled"
 							 Style="{StaticResource MaterialFilledTextBoxStyle}">
-						<um:ControlExtensions.LeadingIcon>
+						<um:TextBoxExtensions.LeadingIcon>
 							<SymbolIcon Symbol="SolidStar"
 										Foreground="{StaticResource MaterialPrimaryBrush}" />
-						</um:ControlExtensions.LeadingIcon>
+						</um:TextBoxExtensions.LeadingIcon>
 					</TextBox>
 				</smtx:XamlDisplay>
 
@@ -101,10 +101,10 @@
 					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 							  PlaceholderText="Placeholder"
 							  ItemsSource="abcdefg">
-						<um:ControlExtensions.LeadingIcon>
+						<um:TextBoxExtensions.LeadingIcon>
 							<SymbolIcon Symbol="SolidStar"
 										Foreground="{StaticResource MaterialPrimaryBrush}" />
-						</um:ControlExtensions.LeadingIcon>
+						</um:TextBoxExtensions.LeadingIcon>
 					</ComboBox>
 				</smtx:XamlDisplay>
 
