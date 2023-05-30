@@ -71,20 +71,22 @@
 						<!-- TextBox Filled LeadingIcon -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_8"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<um:ControlExtensions.LeadingIcon>
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 um:TextBoxExtensions.LeadingCommand="{Binding MyCommand}">
+								<um:TextBoxExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.LeadingIcon>
+								</um:TextBoxExtensions.LeadingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Filled TrailingIcon -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_11"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<um:ControlExtensions.TrailingIcon>
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 um:TextBoxExtensions.TrailingCommand="{Binding MyCommand}">
+								<um:TextBoxExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.TrailingIcon>
+								</um:TextBoxExtensions.TrailingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -93,9 +95,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled with Icon"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<um:ControlExtensions.LeadingIcon>
+								<um:TextBoxExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.LeadingIcon>
+								</um:TextBoxExtensions.LeadingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -104,9 +106,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with Icon"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-								<um:ControlExtensions.LeadingIcon>
+								<um:TextBoxExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.LeadingIcon>
+								</um:TextBoxExtensions.LeadingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -115,9 +117,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with Trailing Icon"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-								<um:ControlExtensions.TrailingIcon>
+								<um:TextBoxExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.TrailingIcon>
+								</um:TextBoxExtensions.TrailingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 					</StackPanel>
@@ -198,9 +200,9 @@
 									 Style="{StaticResource MaterialFilledTextBoxStyle}"
 									 TextWrapping="Wrap"
 									 AcceptsReturn="True">
-								<um:ControlExtensions.LeadingIcon>
+								<um:TextBoxExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.LeadingIcon>
+								</um:TextBoxExtensions.LeadingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -212,9 +214,9 @@
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 									 TextWrapping="Wrap"
 									 AcceptsReturn="True">
-								<um:ControlExtensions.LeadingIcon>
+								<um:TextBoxExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.LeadingIcon>
+								</um:TextBoxExtensions.LeadingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -223,9 +225,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled with Icon"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<um:ControlExtensions.LeadingIcon>
+								<um:TextBoxExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.LeadingIcon>
+								</um:TextBoxExtensions.LeadingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -234,9 +236,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled with Trailing Icon"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<um:ControlExtensions.TrailingIcon>
+								<um:TextBoxExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.TrailingIcon>
+								</um:TextBoxExtensions.TrailingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -245,9 +247,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with Icon"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-								<um:ControlExtensions.LeadingIcon>
+								<um:TextBoxExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.LeadingIcon>
+								</um:TextBoxExtensions.LeadingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 
@@ -256,9 +258,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with Trailing Icon"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-								<um:ControlExtensions.TrailingIcon>
+								<um:TextBoxExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.TrailingIcon>
+								</um:TextBoxExtensions.TrailingIcon>
 							</TextBox>
 						</smtx:XamlDisplay>
 					</StackPanel>

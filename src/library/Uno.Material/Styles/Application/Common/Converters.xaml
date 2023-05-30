@@ -35,6 +35,10 @@
 	<um:FromNullToValueConverter x:Key="MaterialNullToVisibleConverter"
 								 NotNullValue="Visible"
 								 NullValue="Collapsed" />
+	
+	<um:FromNullToValueConverter x:Key="MaterialNullToFalseConverter"
+								 NotNullValue="True"
+								 NullValue="False" />
 
 	<um:FromNullToValueConverter x:Key="MaterialNullToTransparent"
 								 NotNullValue="1"
@@ -47,10 +51,6 @@
 	<um:FromEmptyStringOrNullObjectToValueConverter x:Key="MaterialEmptyOrNullToCollapsed"
 													NotEmptyOrNullValue="Visible"
 													EmptyOrNullValue="Collapsed" />
-
-	<um:FromNullToFalseConverter x:Key="MaterialNullToFalse"
-								 NotNullValue="True"
-								 NullValue="False" />
 
 	<um:StringFormatConverter x:Key="StringFormatConverter" />
 	<um:FirstCharacterConverter x:Key="FirstCharacterConverter" />
