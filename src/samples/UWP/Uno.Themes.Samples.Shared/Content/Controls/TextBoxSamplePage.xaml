@@ -107,14 +107,28 @@
 			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+
 						<!-- TextBox Filled -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_1"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+						
+						<!-- TextBox Filled with placeholder -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_21"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
 									 PlaceholderText="Placeholder"/>
 						</smtx:XamlDisplay>
 
-						<!-- TextBox Filled With PlaceholderText -->
+						<!-- TextBox Filled with header -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_22"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 Header="Header"/>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled With PlaceholderText and header -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_2"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Placeholder"
