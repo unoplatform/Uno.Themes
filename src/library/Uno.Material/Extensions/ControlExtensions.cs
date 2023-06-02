@@ -4,20 +4,17 @@ using System.Text;
 using System.Diagnostics.CodeAnalysis;
 using Windows.UI;
 using Uno.Disposables;
-using System.Windows.Input;
 
 #if WinUI
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
 #else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 #endif
 
 namespace Uno.Material
@@ -38,7 +35,6 @@ namespace Uno.Material
 
 		[DynamicDependency(nameof(GetIcon))]
 		public static void SetIcon(Control obj, IconElement value) => obj.SetValue(IconProperty, value);
-
 		#endregion
 
 		#region DependencyProperty: IconHeight
@@ -117,7 +113,6 @@ namespace Uno.Material
 		public static void SetTintedBackground(UIElement obj, SolidColorBrush value) => obj.SetValue(TintedBackgroundProperty, value);
 
 		#endregion
-
 		#region DependencyProperty: IsTintEnabled
 		/// <summary>
 		/// Gets or sets whether or not the SurfaceTintColor should be applied for elevated views
