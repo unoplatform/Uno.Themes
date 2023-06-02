@@ -54,6 +54,7 @@ jobs:
 
       - name: Publish to Azure Static WebApps
         if: ${{ github.ref != 'refs/heads/release/prod' }}
+        continue-on-error: true
         id: builddeploy_uno
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
         with:

@@ -15,41 +15,56 @@
 	<!-- Path Data -->
 	<x:String x:Key="MaterialTextBoxClearGlyphData">M14.9482 6.46442L13.534 5.05021L9.99849 8.58574L6.46296 5.05021L5.04874 6.46442L8.58428 9.99995L5.04874 13.5355L6.46296 14.9497L9.99849 11.4142L13.534 14.9497L14.9482 13.5355L11.4127 9.99995L14.9482 6.46442ZM17.0696 2.92889C13.1663 -0.974342 6.83065 -0.974342 2.92742 2.92889C-0.975807 6.83212 -0.975807 13.1678 2.92742 17.071C6.83065 20.9743 13.1663 20.9743 17.0696 17.071C20.9728 13.1678 20.9728 6.83212 17.0696 2.92889ZM4.34164 15.6568C1.22329 12.5385 1.22329 7.46144 4.34164 4.3431C7.45998 1.22476 12.537 1.22476 15.6553 4.3431C18.7737 7.46144 18.7737 12.5385 15.6553 15.6568C12.537 18.7752 7.45998 18.7752 4.34164 15.6568Z</x:String>
 
-	<SolidColorBrush x:Key="MaterialDisabledOutlinedTextBoxBorderBrush"
-					 Opacity="0.12"
-					 Color="{ThemeResource OnSurfaceColor}" />
-
 	<ResourceDictionary.ThemeDictionaries>
 
 		<ResourceDictionary x:Key="Default">
 			<StaticResource x:Key="TextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceVariantBrush" />
 			
-			<!--#region Filled Text Box Style-->
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<!--#region Filled Text Box Brushes-->
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			
 			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			
+			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
-			<!--#region Outlined Text Box Style-->
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<!--#region Outlined Text Box Brushes-->
 			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			
+			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -69,33 +84,52 @@
 
 		<ResourceDictionary x:Key="Light">
 			<StaticResource x:Key="TextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
-
-			<!--#region Filled Text Box Style-->
-			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceVariantBrush" />
+			
+			<!--#region Filled Text Box Brushes-->
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			
 			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
-			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			
+			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
-			<!--#region Outlined Text Box Style-->
-			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<!--#region Outlined Text Box Brushes-->
 			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			
+			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -137,6 +171,10 @@
 	<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
 	<!--#endregion-->
 
+	<SolidColorBrush x:Key="MaterialDisabledOutlinedTextBoxBorderBrush"
+					 Opacity="0.12"
+					 Color="{ThemeResource OnSurfaceColor}" />
+
 	<Style x:Key="MaterialDeleteButtonStyle"
 		   TargetType="Button">
 		<Setter Property="Foreground"
@@ -150,12 +188,22 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="GlyphElement.Fill"
+												Value="{ThemeResource TextBoxDeleteButtonForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="GlyphElement.Fill"
+												Value="{ThemeResource TextBoxDeleteButtonForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ButtonLayoutGrid.Opacity"
-												Value="0" />
+										<Setter Target="GlyphElement.Fill"
+												Value="{ThemeResource TextBoxDeleteButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -233,6 +281,12 @@
 												Value="{ThemeResource FilledTextBoxBorderBrushPointerOver}" />
 										<Setter Target="Root.Background"
 												Value="{ThemeResource FilledTextBoxBackgroundPointerOver}" />
+										<Setter Target="PlaceholderElement.Foreground"
+												Value="{ThemeResource FilledTextBoxPlaceholderForegroundPointerOver}" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
+										<Setter Target="DeleteButton.Foreground"
+												Value="{ThemeResource FilledTextBoxDeleteButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -261,6 +315,12 @@
 												Value="{ThemeResource MaterialFilledTextBoxBorderHeightFocused}" />
 										<Setter Target="NormalBorder.Fill"
 												Value="{ThemeResource FilledTextBoxBorderBrushFocused}" />
+										<Setter Target="Root.Background"
+												Value="{ThemeResource FilledTextBoxBackgroundFocused}" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{ThemeResource FilledTextBoxForegroundFocused}" />
+										<Setter Target="DeleteButton.Foreground"
+												Value="{ThemeResource FilledTextBoxDeleteButtonForegroundFocused}" />
 									</VisualState.Setters>
 									<Storyboard>
 
@@ -385,7 +445,7 @@
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
 									Margin="8,0,0,0"
-									Foreground="{ThemeResource TextBoxDeleteButtonForeground}"
+									Foreground="{ThemeResource FilledTextBoxDeleteButtonForeground}"
 									IsTabStop="False"
 									Style="{StaticResource MaterialDeleteButtonStyle}"
 									VerticalAlignment="Stretch"
@@ -475,6 +535,10 @@
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush"
 												Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
+										<Setter Target="PlaceholderElement.Foreground"
+												Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed" />
@@ -495,6 +559,8 @@
 										<!--ICI-->
 										<Setter Target="RootBorder.BorderBrush"
 												Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
+										<Setter Target="ContentElement.Foreground"
+												Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />
 										<Setter Target="PlaceholderElement.Foreground"
 												Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
 										<Setter Target="RootBorder.BorderThickness"
