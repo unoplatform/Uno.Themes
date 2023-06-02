@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Windows.Input;
 using Uno.Extensions;
 using Uno.Logging;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using static Uno.Themes.Samples.ViewModels.ViewModelBase;
 
 namespace Uno.Themes.Samples.Entities
 {
 	[Bindable]
 	public class Sample
 	{
+		public ICommand MyCommand { get; private set; }
+
 		public Sample(SamplePageAttribute attribute, Type viewType)
 		{
 			Category = attribute.Category;
@@ -23,6 +25,8 @@ namespace Uno.Themes.Samples.Entities
 			SortOrder = attribute.SortOrder;
 
 			ViewType = viewType;
+
+			MyCommand = new Command(ExecuteMyCommand);
 		}
 
 		private object CreateData(Type dataType)
@@ -38,6 +42,23 @@ namespace Uno.Themes.Samples.Entities
 				this.Log().Error($"Failed to initialize data for `{ViewType.Name}`:", e);
 				return null;
 			}
+		}
+
+		private async void ShowWarning()
+		{
+			var messageDialog = new ContentDialog
+			{
+				Title = "Command Dialog",
+				Content = "A command was fired",
+
+				CloseButtonText = "Ok"
+			};
+			await messageDialog.ShowAsync();
+		}
+
+		private void ExecuteMyCommand(object parameter)
+		{
+			ShowWarning();
 		}
 
 		public SampleCategory Category { get; }
