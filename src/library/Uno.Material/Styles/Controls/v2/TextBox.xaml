@@ -486,6 +486,7 @@
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Height="26"
+									Margin="0,6,0,0"
 									VerticalAlignment="Top"
 									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
@@ -787,9 +788,9 @@
 
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border Height="26"
-									VerticalAlignment="Top"
-									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+							<Border Height="23"
+									Margin="0,4,0,0"
+									VerticalAlignment="Top">
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
@@ -822,10 +823,9 @@
 							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Grid.Column="1"
-									Height="26"
-									VerticalAlignment="Top">
-								<TextBlock x:Name="PlaceholderElement"
-											 Style="{StaticResource BodyLarge}"
+									Height="23"
+									VerticalAlignment="Center">
+								<TextBlock x:Name="HeaderElement"
 										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
 										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										   IsHitTestVisible="False"
