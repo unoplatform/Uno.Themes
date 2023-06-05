@@ -1,86 +1,165 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					mc:Ignorable="d">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
 
-	<Style x:Key="MaterialHyperlinkButtonStyle"
-		   TargetType="HyperlinkButton">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <!--#region Base Hyperlink Button style-->
+            <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource PrimaryBrush}" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource LabelLargeFontSize}" />
-		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialRegularFontFamily}" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="HyperlinkButton">
+            <StaticResource x:Key="HyperlinkButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundPointer" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-					<Grid Background="{TemplateBinding Background}">
+            <StaticResource x:Key="HyperlinkButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
+            <StaticResource x:Key="HyperlinkButtonFontSize" ResourceKey="LabelLargeFontSize" />
+            <StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
 
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="Content.Opacity"
-												Value="{StaticResource MediumOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacity" ResourceKey="NormalOpacity" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
+            <!--#endregion-->
 
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="Content.Opacity"
-												Value="{StaticResource LowOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
+            <!--#region Secondary Hyperlink Button style-->
+            <StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SecondaryBrush" />
+            <!--#endregion-->
+        </ResourceDictionary>
 
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceLowBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
+        <ResourceDictionary x:Key="Light">
+            <!--#region Base Hyperlink Button style-->
+            <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
-							<VisualStateGroup x:Name="FocusStates">
-								<VisualState x:Name="Focused" />
-								<VisualState x:Name="Unfocused" />
-								<VisualState x:Name="PointerFocused" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
+            <StaticResource x:Key="HyperlinkButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundPointer" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-						<Grid x:Name="Content"
-							  MinHeight="{TemplateBinding MinHeight}"
-							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-							  Margin="{TemplateBinding Padding}">
+            <StaticResource x:Key="HyperlinkButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-							<ContentPresenter x:Name="ContentPresenter"
-											  AutomationProperties.AccessibilityView="Raw"
-											  ContentTemplate="{TemplateBinding ContentTemplate}"
-											  ContentTransitions="{TemplateBinding ContentTransitions}"
-											  Content="{TemplateBinding Content}"
-											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-											  VerticalAlignment="Top"
-											  TextWrapping="Wrap" />
-						</Grid>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+            <StaticResource x:Key="HyperlinkButtonFontSize" ResourceKey="LabelLargeFontSize" />
+            <StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
 
-	<Style x:Key="MaterialSecondaryHyperlinkButtonStyle"
-		   TargetType="HyperlinkButton"
-		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacity" ResourceKey="NormalOpacity" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
+            <!--#endregion-->
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource SecondaryBrush}" />
-	</Style>
+            <!--#region Secondary Hyperlink Button style-->
+            <StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SecondaryBrush" />
+            <!--#endregion-->
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
+    <x:Double x:Key="NormalOpacity">1</x:Double>
+
+    <Style x:Key="MaterialHyperlinkButtonStyle"
+           TargetType="HyperlinkButton">
+
+        <Setter Property="Foreground" Value="{ThemeResource HyperlinkButtonForeground}" />
+        <Setter Property="Padding" Value="{ThemeResource HyperlinkButtonPadding}" />
+        <Setter Property="FontSize" Value="{ThemeResource HyperlinkButtonFontSize}" />
+        <Setter Property="FontFamily" Value="{ThemeResource HyperlinkButtonFontFamily}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HyperlinkButton">
+
+                    <Grid Background="{TemplateBinding Background}">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource HyperlinkButtonForeground}" />
+                                        <Setter Target="Content.Background" Value="{ThemeResource HyperlinkButtonBackground}" />
+                                        <Setter Target="Content.BorderBrush" Value="{ThemeResource HyperlinkButtonBorderBrush}" />
+                                        <Setter Target="Content.Opacity" Value="{ThemeResource HyperlinkButtonBackgroundOpacity}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource HyperlinkButtonForegroundPointerOver}" />
+                                        <Setter Target="Content.Background" Value="{ThemeResource HyperlinkButtonBackgroundPointerOver}" />
+                                        <Setter Target="Content.BorderBrush" Value="{ThemeResource HyperlinkButtonBorderBrushPointerOver}" />
+                                        <Setter Target="Content.Opacity" Value="{ThemeResource HyperlinkButtonBackgroundOpacityPointerOver}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource HyperlinkButtonForegroundPressed}" />
+                                        <Setter Target="Content.Background" Value="{ThemeResource HyperlinkButtonBackgroundPressed}" />
+                                        <Setter Target="Content.BorderBrush" Value="{ThemeResource HyperlinkButtonBorderBrushPressed}" />
+                                        <Setter Target="Content.Opacity" Value="{ThemeResource HyperlinkButtonBackgroundOpacityPressed}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource HyperlinkButtonForegroundDisabled}" />
+                                        <Setter Target="Content.BorderBrush" Value="{ThemeResource HyperlinkButtonBorderBrushDisabled}" />
+                                        <Setter Target="Content.Background" Value="{ThemeResource HyperlinkButtonBackgroundDisabled}" />
+                                        <Setter Target="Content.Opacity" Value="{ThemeResource HyperlinkButtonBackgroundOpacityDisabled}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused" />
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="PointerFocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid x:Name="Content"
+                              Background="{TemplateBinding Background}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              MinHeight="{TemplateBinding MinHeight}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              Margin="{TemplateBinding Padding}">
+
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              AutomationProperties.AccessibilityView="Raw"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              Content="{TemplateBinding Content}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Top"
+                                              TextWrapping="Wrap" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MaterialSecondaryHyperlinkButtonStyle"
+           TargetType="HyperlinkButton"
+           BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
+
+        <Setter Property="Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForeground}" />
+    </Style>
 
 </ResourceDictionary>
