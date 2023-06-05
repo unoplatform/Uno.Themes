@@ -4,17 +4,65 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					mc:Ignorable="d">
 
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<!--#region Base Hyperlink Button style-->
+			<StaticResource x:Key="HyperlinkButtonForeground"
+							ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonFontSize"
+							ResourceKey="LabelLargeFontSize" />
+			<StaticResource x:Key="HyperlinkButtonFontFamily"
+							ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver"
+							ResourceKey="MediumOpacity" />
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed"
+							ResourceKey="LowOpacity" />
+			<StaticResource x:Key="HyperlinkButtonForegroundDisabled"
+							ResourceKey="OnSurfaceLowBrush" />
+			<!--#endregion-->
+
+			<!--#region Secondary Hyperlink Button style-->
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground"
+							ResourceKey="SecondaryBrush" />
+			<!--#endregion-->
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<!--#region Base Hyperlink Button style-->
+			<StaticResource x:Key="HyperlinkButtonForeground"
+							ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="HyperlinkButtonFontSize"
+							ResourceKey="LabelLargeFontSize" />
+			<StaticResource x:Key="HyperlinkButtonFontFamily"
+							ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver"
+							ResourceKey="MediumOpacity" />
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed"
+							ResourceKey="LowOpacity" />
+			<StaticResource x:Key="HyperlinkButtonForegroundDisabled"
+							ResourceKey="OnSurfaceLowBrush" />
+			<!--#endregion-->
+
+			<!--#region Secondary Hyperlink Button style-->
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground"
+							ResourceKey="SecondaryBrush" />
+			<!--#endregion-->
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
+
 	<Style x:Key="MaterialHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
 
 		<Setter Property="Foreground"
-				Value="{ThemeResource PrimaryBrush}" />
+				Value="{ThemeResource HyperlinkButtonForeground}" />
 		<Setter Property="Padding"
-				Value="0" />
+				Value="{ThemeResource HyperlinkButtonPadding}" />
 		<Setter Property="FontSize"
-				Value="{ThemeResource LabelLargeFontSize}" />
+				Value="{ThemeResource HyperlinkButtonFontSize}" />
 		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialRegularFontFamily}" />
+				Value="{ThemeResource HyperlinkButtonFontFamily}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="HyperlinkButton">
@@ -28,21 +76,21 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="Content.Opacity"
-												Value="{StaticResource MediumOpacity}" />
+												Value="{ThemeResource HyperlinkButtonBackgroundOpacityPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="Content.Opacity"
-												Value="{StaticResource LowOpacity}" />
+												Value="{ThemeResource HyperlinkButtonBackgroundOpacityPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceLowBrush}" />
+												Value="{ThemeResource HyperlinkButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -80,7 +128,7 @@
 		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
 
 		<Setter Property="Foreground"
-				Value="{ThemeResource SecondaryBrush}" />
+				Value="{ThemeResource SecondaryHyperlinkButtonForeground}" />
 	</Style>
 
 </ResourceDictionary>
