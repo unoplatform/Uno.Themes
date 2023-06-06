@@ -7,7 +7,21 @@
 					xmlns:um="using:Uno.Material"
 					mc:Ignorable="d macos">
 
+	<!--Expected TextBox behavior:
+	We are going a different route than the Official Material M2/M3 Google samples & the Material doc regarding the fact that the Placeholder will always be visible.
+	(cf. specs discussions here https://github.com/unoplatform/Uno.Themes/issues/974)
+
+	- Without Header/Placeholder, we will have a simple TextBox (matching Windows behavior)
+
+	- With a Placeholder and no Header, we will have a simple TextBox (matching Windows behavior).
+
+	- If there is a Header:
+		- Without a Placeholder, the Header moves up when focused and it will be empty underneath until some text is entered
+		- With a Placeholder, the Header does not move, it is already at the top and shows also the Placeholder underneath-->
+
 	<!-- Converters -->
+
+	<!-- TO BE REMOVED -->
 	<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY"
 										NotNullOrEmptyValue="8"
 										NullOrEmptyValue="0" />
@@ -23,6 +37,36 @@
 	<um:FromEmptyStringToValueConverter x:Key="EmptyToPlaceholderMargin"
 										NotNullOrEmptyValue="0,13,0,0"
 										NullOrEmptyValue="0,2,0,0" />
+	<!-- END - TO BE REMOVED -->
+
+	<!-- New converters - todo adjust naming -->
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToNotFocusedContentCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="8"
+											   HeaderOnlyValue="0"
+											   HeaderOnlyWithTextValue="8"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToFocusedContentCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="8"
+											   HeaderOnlyValue="8"
+											   HeaderOnlyWithTextValue="8"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToHeaderCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="-11"
+											   HeaderOnlyValue="0"
+											   HeaderOnlyWithTextValue="-11"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToHeaderCompositeTransformScales"
+											   HeaderAndPlaceholderValue="0.7"
+											   HeaderOnlyValue="1"
+											   HeaderOnlyWithTextValue="0.7"
+											   PlaceholderOnlyValue="1"
+											   NoHeaderAndNoPlaceholderValue="1" />
 
 	<!-- Path Data -->
 	<x:String x:Key="MaterialTextBoxClearGlyphData">M14.9482 6.46442L13.534 5.05021L9.99849 8.58574L6.46296 5.05021L5.04874 6.46442L8.58428 9.99995L5.04874 13.5355L6.46296 14.9497L9.99849 11.4142L13.534 14.9497L14.9482 13.5355L11.4127 9.99995L14.9482 6.46442ZM17.0696 2.92889C13.1663 -0.974342 6.83065 -0.974342 2.92742 2.92889C-0.975807 6.83212 -0.975807 13.1678 2.92742 17.071C6.83065 20.9743 13.1663 20.9743 17.0696 17.071C20.9728 13.1678 20.9728 6.83212 17.0696 2.92889ZM4.34164 15.6568C1.22329 12.5385 1.22329 7.46144 4.34164 4.3431C7.45998 1.22476 12.537 1.22476 15.6553 4.3431C18.7737 7.46144 18.7737 12.5385 15.6553 15.6568C12.537 18.7752 7.45998 18.7752 4.34164 15.6568Z</x:String>
@@ -310,17 +354,17 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<!-- If Text or Placeholder Header needs to keep UP-->
-										<!-- Can't check Text and Placeholder -->
 										<Setter Target="HeaderElement_CompositeTransform.TranslateY"
-												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<Setter Target="ContentElement_CompositeTransform.TranslateY"
-												Value="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY"
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<Setter Target="HeaderElement_CompositeTransform.ScaleX"
-												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 										<Setter Target="HeaderElement_CompositeTransform.ScaleY"
-												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
-									</VisualState.Setters> 
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
@@ -345,14 +389,15 @@
 										<!-- If Text Header Placeholder needs to keep UP-->
 										<!-- Can't check Text and Placeholder -->
 										<Setter Target="HeaderElement_CompositeTransform.TranslateY"
-												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<Setter Target="ContentElement_CompositeTransform.TranslateY"
-												Value="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY"
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<Setter Target="HeaderElement_CompositeTransform.ScaleX"
-												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 										<Setter Target="HeaderElement_CompositeTransform.ScaleY"
-												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
-
+												Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -406,12 +451,16 @@
 														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
 														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="-11" />
-										<!--ContentElement TranslateY value changing depending if there is a Header or not-->
 										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="{StaticResource MaterialAnimationDuration}"
 														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
@@ -436,48 +485,9 @@
 								<VisualState x:Name="ButtonCollapsed" />
 							</VisualStateGroup>
 
-							<!--Manage Placeholder State-->
-							<VisualStateGroup x:Name="PlaceholderState">
-								<VisualState x:Name="PlaceholderNotEmpty">
-									<VisualState.Setters>
-										<!--Always keep Header UP when there is Placeholder-->
-										<Setter Target="HeaderElement_CompositeTransform.TranslateY"
-												Value="-11" />
-										<Setter Target="ContentElement_CompositeTransform.TranslateY"
-												Value="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleX"
-												Value="0.7" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleY"
-												Value="0.7" />
-
-									</VisualState.Setters>
-									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding PlaceholderText, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
-									</VisualState.StateTriggers>
-								</VisualState>
-
-								<VisualState x:Name="PlaceholderEmpty">
-									<VisualState.Setters>
-										
-										<!--If NO Placeholder but TEXT keep Header UP -->
-										<Setter Target="HeaderElement_CompositeTransform.TranslateY"
-													Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="ContentElement_CompositeTransform.TranslateY"
-													Value="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleX"
-													Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleY"
-													Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
-									</VisualState.Setters>
-									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding PlaceholderText, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
-									</VisualState.StateTriggers>
-								</VisualState>
-							</VisualStateGroup>
-
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid Padding="{TemplateBinding Padding}">
+						<Grid Margin="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
@@ -486,9 +496,7 @@
 
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border Height="26"
-									Margin="0,6,0,0"
-									VerticalAlignment="Top"
+							<Border VerticalAlignment="Top"
 									Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
@@ -501,6 +509,7 @@
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 							</Border>
 
+							<!--Padding and VerticalAlignement="Top" are here to make sure the ScrollViewer does not move when entering a second line when multiline is enabled-->
 							<ScrollViewer x:Name="ContentElement"
 										  Grid.Column="1"
 										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -509,7 +518,8 @@
 										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
 										  IsTabStop="False"
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Padding="0,10"
+										  VerticalAlignment="Top"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
 										  ZoomMode="Disabled"
@@ -522,38 +532,41 @@
 							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Grid.Column="1"
-									Height="26"
-									VerticalAlignment="Center">
-								<TextBlock x:Name="HeaderElement"
-										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
-										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-										   IsHitTestVisible="False"
-										   RenderTransformOrigin="0,0.5"
-										   Text="{TemplateBinding Header}"
-										   TextAlignment="{TemplateBinding TextAlignment}"
-										   TextWrapping="{TemplateBinding TextWrapping}"
-										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-									<TextBlock.RenderTransform>
-										<CompositeTransform x:Name="HeaderElement_CompositeTransform" />
-									</TextBlock.RenderTransform>
-								</TextBlock>
+									VerticalAlignment="Top">
+								<Border Height="38">
+									<TextBlock x:Name="HeaderElement"
+											   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+											   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											   IsHitTestVisible="False"
+											   RenderTransformOrigin="0,0.5"
+											   Text="{TemplateBinding Header}"
+											   TextAlignment="{TemplateBinding TextAlignment}"
+											   TextWrapping="{TemplateBinding TextWrapping}"
+											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+										<TextBlock.RenderTransform>
+											<CompositeTransform x:Name="HeaderElement_CompositeTransform" />
+										</TextBlock.RenderTransform>
+									</TextBlock>
+								</Border>
 							</Border>
-							<Border Grid.Column="1"
-									Height="26"
-									Margin="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToPlaceholderMargin}}"
-									VerticalAlignment="Center"
-									Visibility="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 
+							<Border Grid.Column="1"
+									Height="38"
+									VerticalAlignment="Center">
 								<TextBlock x:Name="PlaceholderElement"
 										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
 										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										   IsHitTestVisible="False"
+										   RenderTransformOrigin="0,0.5"
 										   Visibility="{Binding Text, Converter={StaticResource MaterialEmptyToVisible}, RelativeSource={RelativeSource TemplatedParent}}"
 										   Text="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
 										   TextAlignment="{TemplateBinding TextAlignment}"
 										   TextWrapping="{TemplateBinding TextWrapping}"
-										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-
+										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+									<TextBlock.RenderTransform>
+										<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+									</TextBlock.RenderTransform>
+								</TextBlock>
 							</Border>
 
 							<Button x:Name="DeleteButton"
@@ -643,7 +656,7 @@
 												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
 										<Setter Target="HeaderElement_CompositeTransform.ScaleY"
 												Value="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderElementCompositeTransformScales}, TargetNullValue=0, FallbackValue=0}" />
-									
+
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOver">
@@ -814,14 +827,14 @@
 								<!--Intermediate Border to manipulate visibility on VisualStates-->
 								<Border x:Name="PlaceholderBorder">
 									<TextBlock x:Name="PlaceholderElement"
-												Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
-												HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-												IsHitTestVisible="False"
-												Visibility="{Binding Text, Converter={StaticResource MaterialEmptyToVisible}, RelativeSource={RelativeSource TemplatedParent}}"
-												Text="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
-												TextAlignment="{TemplateBinding TextAlignment}"
-												TextWrapping="{TemplateBinding TextWrapping}"
-												VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+											   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+											   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											   IsHitTestVisible="False"
+											   Visibility="{Binding Text, Converter={StaticResource MaterialEmptyToVisible}, RelativeSource={RelativeSource TemplatedParent}}"
+											   Text="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
+											   TextAlignment="{TemplateBinding TextAlignment}"
+											   TextWrapping="{TemplateBinding TextWrapping}"
+											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 								</Border>
 							</Border>
 
