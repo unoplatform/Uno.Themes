@@ -252,6 +252,85 @@
 									 IsEnabled="False" />
 						</smtx:XamlDisplay>
 
+
+						<!-- Quick Additional tests for the current changes -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - No Header + No Placeholder - with Icon" />
+						<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header) - with Icon" />
+						<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+								 PlaceholderText="Placeholder">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder) - with Icon" />
+						<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+								 Header="Header">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder - with Icon" />
+						<TextBox PlaceholderText="Placeholder"
+								 Header="Header"
+								 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - No Header + No Placeholder - with Icon + multilines" />
+						<TextBox TextWrapping="Wrap"
+								 AcceptsReturn="True"
+								 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header) - with Icon + multilines" />
+						<TextBox TextWrapping="Wrap"
+								 AcceptsReturn="True"
+								 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+								 PlaceholderText="Placeholder">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder) - with Icon + multilines" />
+						<TextBox TextWrapping="Wrap"
+								 AcceptsReturn="True"
+								 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+								 Header="Header">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder - with Icon + multilines" />
+						<TextBox TextWrapping="Wrap"
+								 AcceptsReturn="True"
+								 PlaceholderText="Placeholder"
+								 Header="Header"
+								 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
+							<um:ControlExtensions.Icon>
+								<SymbolIcon Symbol="Favorite" />
+							</um:ControlExtensions.Icon>
+						</TextBox>
+
+						<TextBlock Text="__ Separation __" />
+
+						<!-- END - Quick Additional tests for the current changes -->
+
 						<!-- TextBox Filled MultiLine -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_7"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
