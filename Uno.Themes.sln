@@ -5,11 +5,11 @@ VisualStudioVersion = 17.1.31903.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Material", "src\library\Uno.Material\Uno.Material.csproj", "{B5279EE5-E662-45B0-8929-D90D0BDE16AB}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Uno.Themes.Samples.Shared", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Uno.Themes.Samples.Shared", "src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.UWP", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.UWP\Uno.Themes.Samples.UWP.csproj", "{265517E4-AB14-453D-92DA-F32AA1D4007D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.UWP", "src\samples\UWP\Uno.Themes.Samples.UWP\Uno.Themes.Samples.UWP.csproj", "{265517E4-AB14-453D-92DA-F32AA1D4007D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Wasm", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Wasm\Uno.Themes.Samples.Wasm.csproj", "{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Wasm", "src\samples\UWP\Uno.Themes.Samples.Wasm\Uno.Themes.Samples.Wasm.csproj", "{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}"
 EndProject
@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\conventional-commits.yml = .github\workflows\conventional-commits.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Skia.Gtk", "src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Skia.Gtk\Uno.Themes.Samples.Skia.Gtk.csproj", "{290980EF-0A64-43A5-AEB4-E022D82BBF8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Skia.Gtk", "src\samples\UWP\Uno.Themes.Samples.Skia.Gtk\Uno.Themes.Samples.Skia.Gtk.csproj", "{290980EF-0A64-43A5-AEB4-E022D82BBF8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DBF3AF2F-F909-4106-A436-7D76CBFBADCC}"
 	ProjectSection(SolutionItems) = preProject
@@ -57,6 +57,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		winappsdk-workaround.targets = winappsdk-workaround.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UWP", "UWP", "{B402BF43-62D6-463C-A71F-941B8EFF463F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Android = Debug|Android
@@ -69,6 +71,7 @@ Global
 		Debug|Tests = Debug|Tests
 		Debug|UWP_x64 = Debug|UWP_x64
 		Debug|WASM = Debug|WASM
+		Debug|x64 = Debug|x64
 		Release|Android = Release|Android
 		Release|Any CPU = Release|Any CPU
 		Release|iPhone = Release|iPhone
@@ -79,6 +82,7 @@ Global
 		Release|Tests = Release|Tests
 		Release|UWP_x64 = Release|UWP_x64
 		Release|WASM = Release|WASM
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Debug|Android.ActiveCfg = Debug|Any CPU
@@ -101,6 +105,8 @@ Global
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Debug|UWP_x64.Build.0 = Debug|Any CPU
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Debug|WASM.ActiveCfg = Debug|Any CPU
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Debug|WASM.Build.0 = Debug|Any CPU
+		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Debug|x64.Build.0 = Debug|Any CPU
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|Android.ActiveCfg = Release|Any CPU
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|Android.Build.0 = Release|Any CPU
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -121,6 +127,8 @@ Global
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|UWP_x64.Build.0 = Release|Any CPU
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|WASM.ActiveCfg = Release|Any CPU
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|WASM.Build.0 = Release|Any CPU
+		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5279EE5-E662-45B0-8929-D90D0BDE16AB}.Release|x64.Build.0 = Release|Any CPU
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|Android.ActiveCfg = Debug|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|Any CPU.Build.0 = Debug|x64
@@ -135,6 +143,9 @@ Global
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|UWP_x64.Build.0 = Debug|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|UWP_x64.Deploy.0 = Debug|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|WASM.ActiveCfg = Debug|x64
+		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|x64.ActiveCfg = Debug|x64
+		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|x64.Build.0 = Debug|x64
+		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Debug|x64.Deploy.0 = Debug|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|Android.ActiveCfg = Release|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|Any CPU.ActiveCfg = Release|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|Any CPU.Build.0 = Release|x64
@@ -149,6 +160,9 @@ Global
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|UWP_x64.Build.0 = Release|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|UWP_x64.Deploy.0 = Release|x64
 		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|WASM.ActiveCfg = Release|x64
+		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|x64.ActiveCfg = Release|x64
+		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|x64.Build.0 = Release|x64
+		{265517E4-AB14-453D-92DA-F32AA1D4007D}.Release|x64.Deploy.0 = Release|x64
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|Android.ActiveCfg = Debug|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -161,6 +175,8 @@ Global
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|UWP_x64.ActiveCfg = Debug|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|WASM.ActiveCfg = Debug|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|WASM.Build.0 = Debug|Any CPU
+		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Debug|x64.Build.0 = Debug|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|Android.ActiveCfg = Release|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -173,6 +189,8 @@ Global
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|UWP_x64.ActiveCfg = Release|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|WASM.ActiveCfg = Release|Any CPU
 		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|WASM.Build.0 = Release|Any CPU
+		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|x64.ActiveCfg = Release|Any CPU
+		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9}.Release|x64.Build.0 = Release|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|Android.ActiveCfg = Debug|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -185,6 +203,8 @@ Global
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|Tests.Build.0 = Debug|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|UWP_x64.ActiveCfg = Debug|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|WASM.ActiveCfg = Debug|Any CPU
+		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Debug|x64.Build.0 = Debug|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|Android.ActiveCfg = Release|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -197,6 +217,8 @@ Global
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|Tests.Build.0 = Release|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|UWP_x64.ActiveCfg = Release|Any CPU
 		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|WASM.ActiveCfg = Release|Any CPU
+		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|x64.ActiveCfg = Release|Any CPU
+		{290980EF-0A64-43A5-AEB4-E022D82BBF8B}.Release|x64.Build.0 = Release|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|Android.ActiveCfg = Debug|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|Android.Build.0 = Debug|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -217,6 +239,8 @@ Global
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|UWP_x64.Build.0 = Debug|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|WASM.ActiveCfg = Debug|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|WASM.Build.0 = Debug|Any CPU
+		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Debug|x64.Build.0 = Debug|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|Android.ActiveCfg = Release|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|Android.Build.0 = Release|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -237,6 +261,8 @@ Global
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|UWP_x64.Build.0 = Release|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|WASM.ActiveCfg = Release|Any CPU
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|WASM.Build.0 = Release|Any CPU
+		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|x64.ActiveCfg = Release|Any CPU
+		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E}.Release|x64.Build.0 = Release|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|Android.ActiveCfg = Debug|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -252,6 +278,8 @@ Global
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|UWP_x64.ActiveCfg = Debug|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|WASM.ActiveCfg = Debug|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|WASM.Build.0 = Debug|Any CPU
+		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{421B820E-7229-482D-9F2C-06A14DFC9811}.Debug|x64.Build.0 = Debug|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|Android.ActiveCfg = Release|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -267,6 +295,8 @@ Global
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|UWP_x64.ActiveCfg = Release|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|WASM.ActiveCfg = Release|Any CPU
 		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|WASM.Build.0 = Release|Any CPU
+		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|x64.ActiveCfg = Release|Any CPU
+		{421B820E-7229-482D-9F2C-06A14DFC9811}.Release|x64.Build.0 = Release|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|Android.ActiveCfg = Debug|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -282,6 +312,8 @@ Global
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|UWP_x64.ActiveCfg = Debug|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|WASM.ActiveCfg = Debug|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|WASM.Build.0 = Debug|Any CPU
+		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{827BA965-C6B9-4D31-B973-49B885771E79}.Debug|x64.Build.0 = Debug|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|Android.ActiveCfg = Release|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -297,6 +329,8 @@ Global
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|UWP_x64.ActiveCfg = Release|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|WASM.ActiveCfg = Release|Any CPU
 		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|WASM.Build.0 = Release|Any CPU
+		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|x64.ActiveCfg = Release|Any CPU
+		{827BA965-C6B9-4D31-B973-49B885771E79}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -304,22 +338,23 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B5279EE5-E662-45B0-8929-D90D0BDE16AB} = {EB41D6CC-AEBE-40A8-B42C-D3F7FBA7001E}
 		{6279C845-92F8-4333-AB99-3D213163593C} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
-		{265517E4-AB14-453D-92DA-F32AA1D4007D} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
-		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
+		{265517E4-AB14-453D-92DA-F32AA1D4007D} = {B402BF43-62D6-463C-A71F-941B8EFF463F}
+		{5D0F3763-F3BF-4478-B2D3-B47AB74205C9} = {B402BF43-62D6-463C-A71F-941B8EFF463F}
 		{1EB1EA7F-DD48-49C2-97B3-ADB8E86EF28D} = {464D0819-2E75-4DED-9F70-039580314AFA}
-		{290980EF-0A64-43A5-AEB4-E022D82BBF8B} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
+		{290980EF-0A64-43A5-AEB4-E022D82BBF8B} = {B402BF43-62D6-463C-A71F-941B8EFF463F}
 		{98C1FDAC-C692-4C65-99E7-70FDD53B8F2E} = {EB41D6CC-AEBE-40A8-B42C-D3F7FBA7001E}
 		{5A1AA87E-F559-49F0-8D78-2B57E5D92843} = {EB41D6CC-AEBE-40A8-B42C-D3F7FBA7001E}
 		{421B820E-7229-482D-9F2C-06A14DFC9811} = {5A1AA87E-F559-49F0-8D78-2B57E5D92843}
 		{827BA965-C6B9-4D31-B973-49B885771E79} = {5A1AA87E-F559-49F0-8D78-2B57E5D92843}
+		{B402BF43-62D6-463C-A71F-941B8EFF463F} = {F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66F0EE99-4E63-43F2-9504-0CFC104E7084}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{265517e4-ab14-453d-92da-f32aa1d4007d}*SharedItemsImports = 4
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{290980ef-0a64-43a5-aeb4-e022d82bbf8b}*SharedItemsImports = 5
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5d0f3763-f3bf-4478-b2d3-b47ab74205c9}*SharedItemsImports = 5
-		src\samples\Uno.Themes.Samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
+		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{265517e4-ab14-453d-92da-f32aa1d4007d}*SharedItemsImports = 4
+		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{290980ef-0a64-43a5-aeb4-e022d82bbf8b}*SharedItemsImports = 5
+		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5d0f3763-f3bf-4478-b2d3-b47ab74205c9}*SharedItemsImports = 5
+		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
