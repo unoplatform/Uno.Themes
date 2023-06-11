@@ -38,14 +38,14 @@ jobs:
           useConfigFile: true
           configFilePath: gitversion.yml
           
-      - name: Setup dotnet 6.0.200
+      - name: Setup dotnet 7.0.302
         uses: actions/setup-dotnet@v1.7.2
         with:
-          dotnet-version: '6.0.200'
+          dotnet-version: '7.0.302'
     
       - run: |
           cd src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm
-          dotnet build -c Release "/p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}" /p:UnoThemesDisableNet6=true
+          dotnet build -c Release "/p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}" /p:TargetFrameworkOverride=net7.0
 
       - uses: actions/upload-artifact@v2
         with:
