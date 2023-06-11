@@ -20,7 +20,7 @@
   displayName: 'Use .NET Core SDK 6.0.200'
   inputs:
     packageType: sdk
-    version: 6.0.200
+    version: 7.0.302
 
 - bash: dotnet msbuild -r -p:Configuration=Release -p:UnoThemesDisableNet6=true -p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/Uno.Themes.Samples/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
 
