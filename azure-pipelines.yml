@@ -54,22 +54,18 @@ jobs:
         ApplicationPlatform: UWP_x64
         ArtifactName: UWP
         UseWinUI: false
-        UnoThemesDisableNet6: true
       Android:
         ApplicationPlatform: Android
         ArtifactName: Android
         UseWinUI: false
-        UnoThemesDisableNet6: true
       Packages_UWP:
         ApplicationPlatform: Packages_UWP
         ArtifactName: Packages_UWP
         UseWinUI: false
-        GeneratePackageOnBuild: true
       Packages_WinUI:
         ApplicationPlatform: Packages_WinUI
         ArtifactName: Packages_WinUI
         UseWinUI: true
-        GeneratePackageOnBuild: true
 
   pool:
     vmImage: windows-2022

@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType Condition="'$(Configuration)'=='Reelase'">WinExe</OutputType>
 		<OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<UseWinUI>false</UseWinUI>
 	</PropertyGroup>
@@ -36,9 +36,9 @@
 		<PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.79" />
 		<PackageReference Include="Uno.ShowMeTheXAML" Version="1.0.59" />
 		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild" Version="1.0.59" />
-		<PackageReference Include="Uno.UI.Skia.Gtk" Version="4.7.37" />
-		<PackageReference Include="Uno.UI.RemoteControl" Version="4.7.37" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.7.37" />
+		<PackageReference Include="Uno.UI.Skia.Gtk" Version="5.0.0-feature.breaking-changes.601" />
+		<PackageReference Include="Uno.UI.RemoteControl" Version="5.0.0-feature.breaking-changes.601" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.0-feature.breaking-changes.601" />
 		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
 		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
 	</ItemGroup>

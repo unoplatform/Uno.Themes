@@ -2,8 +2,7 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">netstandard2.0;xamarinios10;monoandroid12.0;xamarinmac20</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">$(TargetFrameworks);net7.0;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
@@ -53,13 +52,13 @@
 				<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 				<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
 				<PackageId>Uno.Material.WinUI</PackageId>
-				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net6.0-windows10.0.18362</TargetFrameworks>
+				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);net7.0-windows10.0.18362</TargetFrameworks>
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="4.7.37" />
+				<PackageReference Include="Uno.WinUI" Version="5.0.0-feature.breaking-changes.601" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="4.7.37" Condition="!$(_IsWinUI)" />
+				<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.0-feature.breaking-changes.601" Condition="!$(_IsWinUI)" />
 
 				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" Condition="$(_IsWinUI)" />
 				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)"/>
@@ -98,14 +97,14 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="4.7.37" />
+				<PackageReference Include="Uno.UI" Version="5.0.0-feature.breaking-changes.601" />
 			</ItemGroup>
 			<ItemGroup Condition="$(_IsUWP)">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="!$(_IsUWP)">
-				<PackageReference Include="Uno.UI.Lottie" Version="4.7.37" />
+				<PackageReference Include="Uno.UI.Lottie" Version="5.0.0-feature.breaking-changes.601" />
 			</ItemGroup>
 
 
