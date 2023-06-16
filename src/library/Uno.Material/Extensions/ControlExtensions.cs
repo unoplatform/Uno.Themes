@@ -97,6 +97,24 @@ namespace Uno.Material
 
 		#endregion
 
+		#region DependencyProperty: ColorSet
+
+		/// <summary>
+		/// Gets or sets the level of ColorSet to depict for the attached view. In Material, ColorSet can be used to drive both the shadow and the surface tint color (https://m3.material.io/styles/ColorSet/overview)
+		/// </summary>
+		public static DependencyProperty ColorSetProperty { [DynamicDependency(nameof(ColorSetProperty))] get; } = DependencyProperty.RegisterAttached(
+			"ColorSet",
+			typeof(string),
+			typeof(ControlExtensions),
+			new PropertyMetadata(default, OnColorSetChanged));
+
+		[DynamicDependency(nameof(SetColorSet))]
+		public static string GetColorSet(Control obj) => (string)obj.GetValue(ColorSetProperty);
+		[DynamicDependency(nameof(GetColorSet))]
+		public static void SetColorSet(Control obj, string value) => obj.SetValue(ColorSetProperty, value);
+
+		#endregion
+
 		#region DependencyProperty: TintedBackground
 		/// <summary>
 		/// Gets or sets the SolidColorBrush to use when depicting a surface tint on an elevated view.
@@ -135,5 +153,14 @@ namespace Uno.Material
 
 		private static void OnIsTintEnabledChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
 			=> SurfaceTintExtensions.OnIsTintEnabledChanged(element, (bool)e.NewValue);
+
+		private static void OnColorSetChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+		{
+			if (MaterialTheme.TryGetColorSet(args.NewValue as string, out var colorSet)
+				&& dependencyObject is FrameworkElement elt)
+			{
+				elt.Resources.SafeMerge(colorSet);
+			}
+		}
 	}
 }

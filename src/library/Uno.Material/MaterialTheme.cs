@@ -28,6 +28,23 @@ namespace Uno.Material
 		private bool _isColorOverrideMuted;
 		private bool _isFontOverrideMuted;
 
+		private static Lazy<ResourceDictionary> _colorSetDictionaries = new Lazy<ResourceDictionary>(() => new ResourceDictionary());
+
+		public IDictionary<object, object> ColorSetDictionaries => _colorSetDictionaries.Value;
+
+		public static bool TryGetColorSet(string key, out ResourceDictionary colorSet)
+		{
+			colorSet = default;
+
+			if (_colorSetDictionaries.Value.TryGetValue(key, out var val) && val is ResourceDictionary resDict)
+			{
+				colorSet = resDict;
+				return true;
+			}
+
+			return false;
+		}
+
 		#region FontOverrideSource (DP)
 		/// <summary>
 		/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -190,6 +207,8 @@ namespace Uno.Material
 			ThemeDictionaries.Clear();
 			MergedDictionaries.Clear();
 			this.Clear();
+
+			MergedDictionaries.Add(_colorSetDictionaries.Value);
 
 			var colors = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColors.xaml") };
 

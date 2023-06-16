@@ -62,7 +62,7 @@
 				<PackageReference Include="Uno.WinUI.Lottie" Version="4.7.37" Condition="!$(_IsWinUI)" />
 
 				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" Condition="$(_IsWinUI)" />
-				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)"/>
+				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)" />
 			</ItemGroup>
 
 			<ItemGroup Condition="$(_IsWinUI)">
@@ -141,6 +141,7 @@
 	<ItemGroup>
 		<None Remove="Styles\Application\Common\Fonts.xaml" />
 		<None Remove="Styles\Controls\v1\_Resources.xaml" />
+		<None Remove="Styles\Controls\v2\Button.xaml" />
 		<None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
 
