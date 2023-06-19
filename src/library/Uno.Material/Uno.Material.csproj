@@ -62,7 +62,7 @@
 				<PackageReference Include="Uno.WinUI.Lottie" Version="4.7.37" Condition="!$(_IsWinUI)" />
 
 				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" Condition="$(_IsWinUI)" />
-				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)"/>
+				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)" />
 			</ItemGroup>
 
 			<ItemGroup Condition="$(_IsWinUI)">
@@ -140,6 +140,7 @@
 
 	<ItemGroup>
 		<None Remove="Styles\Application\Common\Fonts.xaml" />
+		<None Remove="Styles\Application\v2\SharedColorsTest.xaml" />
 		<None Remove="Styles\Controls\v1\_Resources.xaml" />
 		<None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
@@ -187,9 +188,11 @@
 
 		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
+		<XamlMergeInput Remove="Styles\Application\v2\SharedColorsTest.xaml" />
 
 		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 		<XamlMergeInput Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
+		<XamlMergeInput Remove="Styles\Controls\v2\_ImplicitStyles.xaml" />
 		<Page Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
 		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
@@ -203,6 +206,9 @@
 		<Page Remove="Styles\Controls\v2\PipsPager.UWP.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Application\v2\SharedColorsTest.xaml" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />

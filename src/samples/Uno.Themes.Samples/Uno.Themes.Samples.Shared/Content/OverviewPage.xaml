@@ -16,132 +16,26 @@
 				<local:OverviewPageHeader />
 			</DataTemplate>
 		</sample:SamplePageLayout.HeaderTemplate>
-
-		<sample:SamplePageLayout.MaterialTemplate>
-			<DataTemplate>
-				<StackPanel>
-
-					<!--  Button  -->
-					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
-						<StackPanel Spacing="8">
-
-							<Button AutomationProperties.AutomationId="MaterialContainedButton"
-									Content="CONTAINED"
-									Style="{StaticResource MaterialContainedButtonStyle}" />
-
-							<Button AutomationProperties.AutomationId="MaterialOutlinedButton"
-									Content="OUTLINED"
-									Style="{StaticResource MaterialOutlinedButtonStyle}" />
-
-							<Button AutomationProperties.AutomationId="MaterialTextButton"
-									Content="TEXT"
-									Style="{StaticResource MaterialTextButtonStyle}" />
-
-							<Button AutomationProperties.AutomationId="MaterialButtonIcon"
-									Style="{StaticResource MaterialButtonIconStyle}">
-								<Button.Content>
-									<SymbolIcon Symbol="Favorite" />
-								</Button.Content>
-							</Button>
-						</StackPanel>
-					</sample:OverviewSampleView>
-
-					<!--  TextBox  -->
-					<sample:OverviewSampleView SamplePageType="samples:TextBoxSamplePage">
-						<StackPanel Spacing="8">
-
-							<TextBox AutomationProperties.AutomationId="MaterialFilledTextBox"
-									 PlaceholderText="Filled"
-									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
-
-							<TextBox AutomationProperties.AutomationId="MaterialFilledIconTextBox"
-									 PlaceholderText="Filled with icon"
-									 Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<um:ControlExtensions.Icon>
-									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.Icon>
-							</TextBox>
-
-							<TextBox AutomationProperties.AutomationId="MaterialOutlinedTextBox"
-									 PlaceholderText="Outlined"
-									 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
-
-							<TextBox AutomationProperties.AutomationId="MaterialOutlinedWithIconTextBox"
-									 PlaceholderText="Outlined with icon"
-									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-								<um:ControlExtensions.Icon>
-									<SymbolIcon Symbol="Favorite" />
-								</um:ControlExtensions.Icon>
-							</TextBox>
-						</StackPanel>
-					</sample:OverviewSampleView>
-
-					<!--  CheckBox  -->
-					<sample:OverviewSampleView SamplePageType="samples:CheckBoxSamplePage">
-						<StackPanel Spacing="8">
-
-							<CheckBox Content="Checked"
-									  IsChecked="True"
-									  Style="{StaticResource MaterialCheckBoxStyle}" />
-
-							<CheckBox Content="Unchecked"
-									  IsChecked="False"
-									  Style="{StaticResource MaterialCheckBoxStyle}" />
-
-							<CheckBox Content="Indeterminate"
-									  IsChecked="{x:Null}"
-									  IsThreeState="True"
-									  Style="{StaticResource MaterialCheckBoxStyle}" />
-						</StackPanel>
-					</sample:OverviewSampleView>
-
-					<!--  RadioButton  -->
-					<sample:OverviewSampleView SamplePageType="samples:RadioButtonSamplePage">
-						<StackPanel Spacing="8">
-
-							<RadioButton Content="Checked"
-										 IsChecked="True"
-										 Style="{StaticResource MaterialRadioButtonStyle}" />
-
-							<RadioButton Content="Unchecked"
-										 Style="{StaticResource MaterialRadioButtonStyle}" />
-						</StackPanel>
-					</sample:OverviewSampleView>
-
-					<!--  ToggleSwitch  -->
-					<sample:OverviewSampleView SamplePageType="samples:ToggleSwitchSamplePage">
-						<StackPanel Spacing="8">
-
-							<ToggleSwitch Header="ToggleSwitch"
-										  IsOn="True"
-										  Style="{StaticResource MaterialToggleSwitchStyle}" />
-
-							<ToggleSwitch Header="Disabled"
-										  IsEnabled="False"
-										  Style="{StaticResource MaterialToggleSwitchStyle}" />
-						</StackPanel>
-					</sample:OverviewSampleView>
-				</StackPanel>
-			</DataTemplate>
-		</sample:SamplePageLayout.MaterialTemplate>
 		<sample:SamplePageLayout.M3MaterialTemplate>
 			<DataTemplate>
 				<StackPanel>
 					<!--  Button  -->
 					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
 						<StackPanel Spacing="8">
-
+							<Button Style="{StaticResource MaterialSmallFabStyle}"
+								HorizontalAlignment="Center">
+								<um:ControlExtensions.Icon>
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</um:ControlExtensions.Icon>
+							</Button>
 							<Button AutomationProperties.AutomationId="M3MaterialElevatedButton"
-									Content="Elevated Button"
-									Style="{StaticResource MaterialElevatedButtonStyle}" />
+									Content="Elevated Button" />
 
 							<Button AutomationProperties.AutomationId="M3MaterialFilledButton"
-									Content="Filled Button"
-									Style="{StaticResource MaterialFilledButtonStyle}" />
+									Content="Filled Button"/>
 
 							<Button AutomationProperties.AutomationId="M3MaterialFilledTonalButton"
-									Content="Tonal Button"
-									Style="{StaticResource MaterialFilledTonalButtonStyle}" />
+									Content="Tonal Button" />
 
 							<Button AutomationProperties.AutomationId="M3MaterialOutlinedButton"
 									Content="Outlined Button"

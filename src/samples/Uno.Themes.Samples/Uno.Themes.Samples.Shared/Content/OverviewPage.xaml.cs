@@ -24,6 +24,8 @@ namespace Uno.Themes.Samples.Content
         public OverviewPage()
         {
             this.InitializeComponent();
+	//		App.MyMaterialTheme.UseImplicitStyles = false;
+
         }
     }
 }

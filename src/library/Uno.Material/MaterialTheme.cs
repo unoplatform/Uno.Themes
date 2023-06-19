@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Uno.Material.Helpers;
+using Uno.Material.Styles.Application.v2;
 
 #if WinUI
 using Microsoft.UI;
@@ -25,11 +27,11 @@ namespace Uno.Material
 	/// </summary>
 	public class MaterialTheme : ResourceDictionary
 	{
-		private bool _isColorOverrideMuted;
-		private bool _isFontOverrideMuted;
 		private ResourceDictionary _implicitStyles;
 		private ResourceDictionary _colors;
+		private ResourceDictionary _colorOverride;
 		private ResourceDictionary _fonts;
+		private ResourceDictionary _mergedPages;
 
 		#region FontOverrideSource (DP)
 		/// <summary>
@@ -107,7 +109,14 @@ namespace Uno.Material
 		{
 			if (d is MaterialTheme theme)
 			{
-				theme._fonts.SafeMerge(e.NewValue as ResourceDictionary);
+				var newFontOverride = e.NewValue as ResourceDictionary;
+				var oldFontOverride = e.OldValue as ResourceDictionary;
+
+				oldFontOverride?.Clear();
+				if (newFontOverride != null)
+				{
+					theme._fonts.MergedDictionaries.Add(newFontOverride);
+				}
 			}
 		}
 		#endregion
@@ -134,16 +143,22 @@ namespace Uno.Material
 		{
 			if (d is MaterialTheme theme)
 			{
-				theme._colors.SafeMerge(e.NewValue as ResourceDictionary);
+				var newColorOverride = e.NewValue as ResourceDictionary;
+				var oldColorOverride = e.OldValue as ResourceDictionary;
+
+				theme.MergedDictionaries.Remove(oldColorOverride);
+				if (newColorOverride != null)
+				{
+					theme.MergedDictionaries.Add(newColorOverride);
+				}
 			}
 		}
 		#endregion
 
 		#region UseImplicitStyles (DP)
 		/// <summary>
-		/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
+		/// (Optional) Gets or sets a flag indicating whether or not the Uno.Material styles should be declared as the implicit styles for their respective controls. Defaults to true.
 		/// </summary>
-		/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
 		public bool UseImplicitStyles
 		{
 			get => (bool)GetValue(UseImplicitStylesProperty);
@@ -159,42 +174,43 @@ namespace Uno.Material
 
 		private static void UseImplicitStylesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			if (d is MaterialTheme theme && e.NewValue is bool useImplicit && !useImplicit)
+			if (d is MaterialTheme theme && e.NewValue is bool useImplicit)
 			{
-				theme._implicitStyles?.Clear();
+				if (useImplicit)
+				{
+					theme.AddImplicitStyles();
+				}
+				else
+				{
+					theme.MergedDictionaries.Remove(theme._implicitStyles);
+				}
 			}
 		}
 		#endregion
 
 		public MaterialTheme()
 		{
-			var mergedPages = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml") };
+			_mergedPages = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml") };
 
-			_colors = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColors.xaml") };
-			_colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColorPalette.xaml") });
+			_colors = new SharedColorsTest();
 
 			_fonts = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") };
+			_colorOverride = new MaterialColorPaletteOverride();
 
-			mergedPages.MergedDictionaries.Add(_colors);
-			mergedPages.MergedDictionaries.Add(_fonts);
+			MergedDictionaries.Add(_colors);
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColorPalette.xaml") });
 
-			MergedDictionaries.Add(mergedPages);
+			MergedDictionaries.Add(_fonts);
 
-			_implicitStyles = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/v2/_ImplicitStyles.xaml") };
-			MergedDictionaries.Add(_implicitStyles);
+			MergedDictionaries.Add(_mergedPages);
+
+			AddImplicitStyles();
 		}
 
-		public MaterialTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
+		private void AddImplicitStyles()
 		{
-			if (colorOverride is { })
-			{
-				ColorOverrideDictionary = colorOverride;
-			}
-
-			if (fontOverride is { })
-			{
-				FontOverrideDictionary = fontOverride;
-			}
+			_implicitStyles = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Controls/v2/_ImplicitStyles.xaml") };
+			MergedDictionaries.Add(_implicitStyles);
 		}
 	}
 }

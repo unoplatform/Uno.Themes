@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Uno.Extensions;
+using Uno.Material;
 using Uno.Themes.Samples.Content.Styles;
 using Uno.Themes.Samples.Entities;
 using Uno.Themes.Samples.Helpers;
@@ -35,6 +36,7 @@ namespace Uno.Themes.Samples
 	{
 
 		private Shell _shell;
+		public static MaterialTheme MyMaterialTheme;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -47,6 +49,7 @@ namespace Uno.Themes.Samples
 
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
+
 		}
 
 		/// <summary>
@@ -75,6 +78,9 @@ namespace Uno.Themes.Samples
 
 			// Ensure the current window is active
 			window.Activate();
+
+			
+			MyMaterialTheme = Resources.MergedDictionaries.FirstOrDefault(x => x is MaterialTheme) as MaterialTheme;
 		}
 
 
