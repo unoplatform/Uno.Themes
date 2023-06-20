@@ -678,7 +678,7 @@
 
 	<um:FromNullToValueConverter x:Key="OffContentToContentSize"
 										NullValue="12"
-										NotNullValue="18" />
+										NotNullValue="17" />
 
 	<x:String x:Key="ControlFastOutSlowInKeySpline">0,0,0,1</x:String>
 
@@ -712,7 +712,6 @@
 						<VisualStateManager.VisualStateGroups>
 
 							<VisualStateGroup x:Name="CommonStates">
-
 								<VisualState x:Name="Normal">
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Stroke">
@@ -777,15 +776,16 @@
 
 									<VisualState.Setters>
 										<Setter Target="SwitchKnobOn.HorizontalAlignment" Value="Right" />
-										<Setter Target="SwitchKnobOn.Margin" Value="3,0,0,2" />
+										<Setter Target="SwitchKnobOn.Margin" Value="-2,0,1,0" />
 										<Setter Target="SwitchKnobOff.HorizontalAlignment" Value="Left" />
-										<Setter Target="SwitchKnobOff.Margin" Value="3,0,0,0" />
+										<Setter Target="SwitchKnobOff.Margin" Value="1,0,-2,0" />
 										<Setter Target="SwitchKnobOn.CornerRadius" Value="12" />
 										<Setter Target="SwitchKnobOff.RadiusX" Value="12" />
 										<Setter Target="SwitchKnobOff.RadiusY" Value="12" />
 										<Setter Target="SwitchKnobOnShadow.Visibility" Value="Visible" />
 										<Setter Target="SwitchKnobOffShadow.Visibility" Value="Visible" />
 										<Setter Target="OffIconPresenter.Padding" Value="2,0,0,2" />
+										<win:Setter Target="OnIconPresenter.Padding" Value="0,0,2,4" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -818,8 +818,7 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<not_win:Setter Target="SwitchKnobOn.HorizontalAlignment" Value="Right" />
-										<not_win:Setter Target="SwitchKnobOn.Margin" Value="0,0,5,0" />
-										<win:Setter Target="OffIconPresenter.Padding" Value="2,0,0,4" />
+										<win:Setter Target="OffIconPresenter.Padding" Value="0,0,0,1" />
 										<not_win:Setter Target="OffIconPresenter.Padding" Value="0,0,0,3" />
 									</VisualState.Setters>
 									
@@ -1104,26 +1103,8 @@
                                   Grid.ColumnSpan="3"
                                   Margin="0,5"
                                   Control.IsTemplateFocusTarget="True"
-                                  Background="Transparent"/>
+                                  Background="Transparent" />
 
-							<Ellipse x:Name="SwitchKnobOffShadow"
-										Width="34"
-										Height="34"
-										Grid.Row="1"
-										Margin="0,0,12,0"
-										Opacity="0"
-										Visibility="Collapsed"
-										Fill="{ThemeResource OnSurfaceVariantFocusedBrush}" />
-
-							<Ellipse x:Name="SwitchKnobOnShadow"
-										Width="34"
-										Height="34"
-										Grid.Row="1"
-										Margin="12,0,0,0"
-										Opacity="0"
-										Visibility="Collapsed"
-										Fill="{ThemeResource OnSurfaceVariantFocusedBrush}" />
-							
 							<Rectangle x:Name="OuterBorder"
 									   Grid.Row="1"
 									   Height="24"
@@ -1140,8 +1121,6 @@
 									   Width="40"
 									   RadiusX="12"
 									   RadiusY="12"
-									   win:Margin="4,0"
-									   not_win:Margin="2,0,4,0"
 									   Fill="{ThemeResource PrimaryBrush}"
 									   Stroke="{ThemeResource PrimaryBrush}"
 									   StrokeThickness="1.5"
@@ -1152,13 +1131,27 @@
                                   HorizontalAlignment="Left"
                                   Width="20"
                                   Height="34">
+								
+								<!--Shadow-->
+								<Border x:Name="SwitchKnobOnShadow"
+										Width="32"
+										Height="32"
+										CornerRadius="16"
+										Opacity="0"
+										Margin="-10,0,-6,0"
+										HorizontalAlignment="Center"
+										Visibility="Collapsed"
+										VerticalAlignment="Center"
+										Background="{ThemeResource OnSurfaceVariantFocusedBrush}" />
 
+								<!--On Thumb-->
 								<Border x:Name="SwitchKnobOn"
 										Width="18"
 										Height="18"
 										CornerRadius="11"
 										Opacity="0"
-										not_win:Margin="3,0,0,0"
+										win:Margin="0,0,2,0"
+										not_win:Margin="-1,0,1,0"
 										HorizontalAlignment="Center"
 										RenderTransformOrigin="0.5, 0.5"
 										Background="{ThemeResource OnPrimaryBrush}">
@@ -1166,6 +1159,7 @@
 										<CompositeTransform/>
 									</Border.RenderTransform>
 
+									<!--On Icon-->
 									<ContentPresenter x:Name="OnIconPresenter"
 													  Content="{TemplateBinding OnContent}"
 													  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToVisible}}"
@@ -1179,6 +1173,20 @@
 
 								</Border>
 								<Grid>
+
+									<!--Shadow-->
+									<Border x:Name="SwitchKnobOffShadow"
+										Width="32"
+										Height="32"
+										CornerRadius="16"
+										Opacity="0"
+										Margin="-5,0,-10,0"
+										HorizontalAlignment="Center"
+										Visibility="Collapsed"
+										VerticalAlignment="Center"
+										Background="{ThemeResource OnSurfaceVariantFocusedBrush}" />
+									
+									<!--Off Thumb-->
 									<Rectangle x:Name="SwitchKnobOff"
 											   Fill="{ThemeResource OutlineBrush}"
 											   Height="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OffContentToContentSize}}"
@@ -1186,14 +1194,14 @@
 											   RadiusX="8"
 											   RadiusY="8"
 											   HorizontalAlignment="Center"
-											   win:Margin="6,0,0,0"
-											   not_win:Margin="4,0,0,0"
+											   Margin="3,0,0,0"
 											   RenderTransformOrigin="0.5, 0.5">
 										<Rectangle.RenderTransform>
 											<CompositeTransform/>
 										</Rectangle.RenderTransform>
 									</Rectangle>
 
+									<!--Off Icon-->
 									<ContentPresenter x:Name="OffIconPresenter"
 													  Content="{TemplateBinding OffContent}"
 													  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToCollapsed}}"
@@ -1201,7 +1209,7 @@
 													  Width="18"
 													  VerticalContentAlignment="Center"
 													  HorizontalContentAlignment="Center"
-													  Padding="4,0,0,2"
+													  Padding="1,0,0,2"
 													  Foreground="{ThemeResource SurfaceVariantBrush}"/>
 								</Grid>
 								<Grid.RenderTransform>
