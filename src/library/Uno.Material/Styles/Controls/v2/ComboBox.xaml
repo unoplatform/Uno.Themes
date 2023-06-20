@@ -6,108 +6,230 @@
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="xamarin">
 
-	<!--  Converters  -->
-	<um:FromNullToValueConverter x:Key="NullToScaleConverter"
-								 NotNullValue="0.7"
-								 NullValue="1" />
-
-	<um:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter"
-								 NotNullValue="-11"
-								 NullValue="0" />
-
+	<!-- Converters -->
 	<um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
 								 NotNullValue="5"
 								 NullValue="0" />
 
-	<um:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
-								 NotNullValue="{StaticResource MaterialComboBoxPlaceholderFocusedThemeBrush}"
-								 NullValue="{StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}" />
+	<um:FromNullToValueConverter x:Key="NullToVisible"
+								 NotNullValue="Collapsed"
+								 NullValue="Visible" />
 
-	<!-- ComboBoxItem Brushes -->
-	<StaticResource x:Key="MaterialComboBoxItemForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
+	<um:FromNullToValueConverter x:Key="NullToCollapsed"
+								 NotNullValue="Visible"
+								 NullValue="Collapsed" />
 
-	<StaticResource x:Key="MaterialComboBoxItemSelectedBackgroundThemeBrush"
-					ResourceKey="PrimarySelectedBrush" />
+	<ResourceDictionary.ThemeDictionaries>
 
-	<StaticResource x:Key="MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush"
-					ResourceKey="OnSurfaceVariantHoverBrush" />
+		<ResourceDictionary x:Key="Default">
+			<!-- ComboBoxItem Brushes -->
+			<StaticResource x:Key="ComboBoxItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundDisabled" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelected" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedUnfocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedDisabled" ResourceKey="OnSurfaceBrush" />
+			
+			<StaticResource x:Key="ComboBoxItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPressed" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedUnfocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedDisabled" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxItemBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelected" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedUnfocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-	<StaticResource x:Key="MaterialComboBoxItemPointerOverBackgroundThemeBrush"
-					ResourceKey="OnSurfaceVariantHoverBrush" />
+			<!-- ComboBox Brushes -->
+			<StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPressed" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushOpened" ResourceKey="PrimaryBrush" />
+			
+			<StaticResource x:Key="ComboBoxDropDownGlyphForeground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundFocusedPressed" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxDropDownForeground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundPointerPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundFocusedPressed" ResourceKey="SurfaceBrush" />
+			
+			<StaticResource x:Key="ComboBoxEditableDropDownGlyphForeground" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxItemPillFillBrush" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundUnfocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundFocusedPressed" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPressed" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxForegroundFocusedPressed" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="ComboBoxPlaceHolderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundPressed" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocusedPressed" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="ComboBoxOpenedBorderBrush" ResourceKey="PrimaryBrush" />
+			
+			<StaticResource x:Key="ComboBoxLeadingIconForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="ComboBoxArrowForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxArrowOpenedForeground" ResourceKey="PrimaryBrush" />
+			
+			<StaticResource x:Key="ComboBoxUpperPlaceHolderForeground" ResourceKey="PrimaryBrush" />
+		</ResourceDictionary>
 
+		<ResourceDictionary x:Key="Light">
+			<!-- ComboBoxItem Brushes -->
+			<StaticResource x:Key="ComboBoxItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundDisabled" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelected" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedUnfocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedDisabled" ResourceKey="OnSurfaceBrush" />
+			
+			<StaticResource x:Key="ComboBoxItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPressed" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedUnfocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedDisabled" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxItemBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelected" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedUnfocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxItemBorderBrushSelectedDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-	<!-- ComboBox Brushes -->
-	<StaticResource x:Key="MaterialComboBoxBackgroundColorBrush"
-					ResourceKey="SystemControlTransparentBrush" />
+			<!-- ComboBox Brushes -->
+			<StaticResource x:Key="ComboBoxBorderBrush" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPressed" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushOpened" ResourceKey="PrimaryBrush" />
+			
+			<StaticResource x:Key="ComboBoxDropDownGlyphForeground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundFocusedPressed" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxDropDownForeground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundPointerPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackgroundFocusedPressed" ResourceKey="SurfaceBrush" />
+			
+			<StaticResource x:Key="ComboBoxEditableDropDownGlyphForeground" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxItemPillFillBrush" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundUnfocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundFocusedPressed" ResourceKey="SystemControlTransparentBrush" />
+			
+			<StaticResource x:Key="ComboBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPressed" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxForegroundFocusedPressed" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="ComboBoxPlaceHolderForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundPressed" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocusedPressed" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="ComboBoxOpenedBorderBrush" ResourceKey="PrimaryBrush" />
+			
+			<StaticResource x:Key="ComboBoxLeadingIconForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			
+			<StaticResource x:Key="ComboBoxArrowForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxArrowOpenedForeground" ResourceKey="PrimaryBrush" />
+			
+			<StaticResource x:Key="ComboBoxUpperPlaceHolderForeground" ResourceKey="PrimaryBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
-	<StaticResource x:Key="MaterialComboBoxBorderBrush"
-					ResourceKey="OnSurfaceLowBrush" />
+	<!-- CornerRadius -->
+	<CornerRadius x:Key="ComboBoxCornerRadius">4</CornerRadius>
 
-	<StaticResource x:Key="MaterialComboBoxFocusedBorderBrush"
-					ResourceKey="OnBackgroundBrush" />
+	<!-- Path Data -->
+	<x:String x:Key="ComboBoxUpArrowPathData">M0 0L-5 -5L-10 0H0Z</x:String>
+	<x:String x:Key="ComboBoxDownArrowPathData">M0 0L5 5L10 0H0Z</x:String>
 
-	<StaticResource x:Key="MaterialComboBoxOpenedBorderBrush"
-					ResourceKey="PrimaryBrush" />
+	<Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
+	<Thickness x:Key="ComboBoxOpenedBorderThickness">2</Thickness>
+	<Thickness x:Key="ComboBoxPadding">16,0</Thickness>
 
-	<StaticResource x:Key="MaterialComboBoxLeadingIconForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
-
-	<StaticResource x:Key="MaterialComboBoxArrowForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
-
-	<StaticResource x:Key="MaterialComboBoxOpenedArrowForegroundThemeBrush"
-					ResourceKey="PrimaryBrush" />
-
-	<StaticResource x:Key="MaterialComboBoxForegroundThemeBrush"
-					ResourceKey="OnSurfaceBrush" />
-
-	<StaticResource x:Key="MaterialComboBoxPlaceholderFocusedThemeBrush"
-					ResourceKey="PrimaryBrush" />
-
-	<StaticResource x:Key="MaterialComboBoxPlaceholderForegroundThemeBrush"
-					ResourceKey="OnSurfaceLowBrush" />
-
-	<!--  CornerRadius  -->
-	<CornerRadius x:Key="MaterialComboBoxCornerRadius">4</CornerRadius>
-
-	<!--  Path Data  -->
-	<x:String x:Key="UpArrowPathData">M0 0L-5 -5L-10 0H0Z</x:String>
-	<x:String x:Key="DownArrowPathData">M0 0L5 5L10 0H0Z</x:String>
-
-	<Thickness x:Key="MaterialComboBoxBorderThickness">1</Thickness>
-	<Thickness x:Key="MaterialComboBoxOpenedBorderThickness">2</Thickness>
-	<Thickness x:Key="MaterialComboBoxPadding">16,0</Thickness>
-
-
-	<!--  Style  -->
+	<!-- Style -->
 	<Style x:Key="MaterialComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
-
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialComboBoxItemForegroundThemeBrush}" />
+		<Setter Property="Background" Value="{ThemeResource ComboBoxItemBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource ComboBoxItemForeground}" />
 
 		<!-- Start: Body Large Typo -->
-		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialMediumFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="{ThemeResource BodyLargeFontWeight}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource BodyLargeFontSize}" />
-		<Setter Property="CharacterSpacing"
-				Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="Padding"
-				Value="16,0" />
-		<Setter Property="Height"
-				Value="50" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="Padding" Value="16,0" />
+		<Setter Property="Height" Value="50" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -118,11 +240,11 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
-
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Background"
-												Value="{ThemeResource MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundPointerOver}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPointerOver}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -138,8 +260,10 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Background"
-												Value="{ThemeResource MaterialComboBoxItemPointerOverBackgroundThemeBrush}" />
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundPressed}" />
+										<Setter Target="PressedOverlay.BorderBrush" Value="{ThemeResource ComboBoxItemBorderBrushPressed}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPressed}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -155,15 +279,19 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Opacity"
-												Value="1" />
+										<Setter Target="ContentPresenter.Opacity" Value="1" />
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundDisabled}" />
+										<Setter Target="PressedOverlay.BorderBrush" Value="{ThemeResource ComboBoxItemBorderBrushDisabled}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Background"
-												Value="{ThemeResource MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelected}" />
+										<Setter Target="PressedOverlay.BorderBrush" Value="{ThemeResource ComboBoxItemBorderBrushSelected}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -179,8 +307,9 @@
 
 								<VisualState x:Name="SelectedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Background"
-												Value="{ThemeResource MaterialComboBoxItemSelectedPointerOverBackgroundThemeBrush}" />
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedPointerOver}" />
+										<Setter Target="PressedOverlay.BorderBrush" Value="{ThemeResource ComboBoxItemBorderBrushSelectedPointerOver}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -196,15 +325,18 @@
 
 								<VisualState x:Name="SelectedDisabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Opacity"
-												Value="1" />
+										<Setter Target="ContentPresenter.Opacity" Value="1" />
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedDisabled}" />
+										<Setter Target="PressedOverlay.BorderBrush" Value="{ThemeResource ComboBoxItemBorderBrushSelectedDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="SelectedPressed">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Background"
-												Value="{ThemeResource MaterialComboBoxItemSelectedBackgroundThemeBrush}" />
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedPressed}" />
+										<Setter Target="PressedOverlay.BorderBrush" Value="{ThemeResource ComboBoxItemBorderBrushSelectedPressed}" />
 									</VisualState.Setters>
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="PressedOverlay"
@@ -217,18 +349,26 @@
 										</DoubleAnimation>
 									</Storyboard>
 								</VisualState>
+
+								<VisualState x:Name="SelectedUnfocused">
+									<VisualState.Setters>
+										<Setter Target="PressedOverlay.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedUnfocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedUnfocused}" />
+										<Setter Target="PressedOverlay.BorderBrush" Value="{ThemeResource ComboBoxItemBorderBrushSelectedUnfocused}" />
+									</VisualState.Setters>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!--  Pressed Overlay  -->
+						<!-- Pressed Overlay -->
 						<Grid x:Name="PressedOverlay"
 							  HorizontalAlignment="Stretch"
 							  VerticalAlignment="Stretch"
-							  Background="{ThemeResource MaterialComboBoxItemSelectedBackgroundThemeBrush}"
+							  Background="{ThemeResource ComboBoxItemBackgroundSelected}"
 							  IsHitTestVisible="False"
 							  Opacity="0" />
 
-						<!--  ContentPresenter  -->
+						<!-- ContentPresenter -->
 						<ContentPresenter x:Name="ContentPresenter"
 										  Padding="{TemplateBinding Padding}"
 										  Content="{TemplateBinding Content}"
@@ -245,59 +385,36 @@
 
 	<Style x:Key="MaterialComboBoxStyle"
 		   TargetType="ComboBox">
-
-		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialComboBoxForegroundThemeBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource MaterialComboBoxBackgroundColorBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource MaterialComboBoxBorderBrush}" />
-		<Setter Property="BorderThickness"
-				Value="{StaticResource MaterialComboBoxBorderThickness}" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialComboBoxPadding}" />
+		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ComboBoxBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ComboBoxBorderThickness}" />
+		<Setter Property="Padding" Value="{StaticResource ComboBoxPadding}" />
 
 		<!-- Start: Body Large Typo -->
-		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialMediumFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="{ThemeResource BodyLargeFontWeight}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource BodyLargeFontSize}" />
-		<Setter Property="CharacterSpacing"
-				Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
-		<Setter Property="MinHeight"
-				Value="56" />
-		<Setter Property="TabNavigation"
-				Value="Once" />
-		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-				Value="Auto" />
-		<Setter Property="ScrollViewer.HorizontalScrollMode"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.VerticalScrollMode"
-				Value="Auto" />
-		<Setter Property="ScrollViewer.IsVerticalRailEnabled"
-				Value="True" />
-		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
-				Value="False" />
-		<Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
-				Value="True" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="ItemContainerStyle"
-				Value="{StaticResource MaterialComboBoxItemStyle}" />
+		<Setter Property="MinHeight" Value="56" />
+		<Setter Property="TabNavigation" Value="Once" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+		<Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+		<Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True" />
+		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+		<Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="ItemContainerStyle" Value="{StaticResource MaterialComboBoxItemStyle}" />
 		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 						Value="Below" />
 
-		<!--  Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388  -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="ItemsPanel">
 			<Setter.Value>
@@ -315,41 +432,95 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}">
+						  CornerRadius="{StaticResource ComboBoxCornerRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="DropDownGlyph_Down.Fill"
-												Value="{ThemeResource OnSurfaceLowBrush}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{ThemeResource OnSurfaceLowBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceLowBrush}" />
-										<Setter Target="IconPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceLowBrush}" />
+										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundDisabled}" />
+										<Setter Target="DropDownGlyph_Down.Fill" Value="{ThemeResource OnSurfaceLowBrush}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundDisabled}" />
+										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ComboBoxLeadingIconForegroundDisabled}" />
+										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxBackgroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundPointerOver}" />
+
+										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundPointerOver}" />
+
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPointerOver}" />
+
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundPressed}" />
+
+										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundPressed}" />
+
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPressed}" />
+
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="PointerFocused" />
+								<VisualState x:Name="FocusedDropDown" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundFocused}" />
+
+										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundFocused}" />
+
+										<Setter Target="PopupBorder.Foreground" Value="{ThemeResource ComboBoxForegroundFocused}" />
+
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocused}" />
+
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="FocusedPressed">
+									<VisualState.Setters>
+										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundFocusedPressed}" />
+
+										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundFocusedPressed}" />
+
+										<Setter Target="PopupBorder.Foreground" Value="{ThemeResource ComboBoxForegroundFocusedPressed}" />
+
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocusedPressed}" />
+
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocusedPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundUnfocused}" />
+										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxBackgroundUnfocused}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 
 							<VisualStateGroup x:Name="DropDownStates">
-
 								<VisualState x:Name="Opened">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.BorderBrush"
-												Value="{ThemeResource MaterialComboBoxOpenedBorderBrush}" />
-										<Setter Target="RootGrid.BorderThickness"
-												Value="{StaticResource MaterialComboBoxOpenedBorderThickness}" />
-										<Setter Target="DropDownGlyph_Up.Fill"
-												Value="{ThemeResource MaterialComboBoxOpenedArrowForegroundThemeBrush}" />
-										<Setter Target="DropDownGlyph_Down.Visibility"
-												Value="Collapsed" />
-										<Setter Target="DropDownGlyph_Up.Visibility"
-												Value="Visible" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxOpenedBorderBrush}" />
+										<Setter Target="RootGrid.BorderThickness" Value="{StaticResource ComboBoxOpenedBorderThickness}" />
+										<Setter Target="DropDownGlyph_Up.Fill" Value="{ThemeResource ComboBoxArrowOpenedForeground}" />
+										<Setter Target="DropDownGlyph_Down.Visibility" Value="Collapsed" />
+										<Setter Target="DropDownGlyph_Up.Visibility" Value="Visible" />
 									</VisualState.Setters>
 									<Storyboard>
 
@@ -365,14 +536,10 @@
 
 								<VisualState x:Name="Closed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.BorderBrush"
-												Value="{ThemeResource MaterialComboBoxBorderBrush}" />
-										<Setter Target="RootGrid.BorderThickness"
-												Value="{StaticResource MaterialComboBoxBorderThickness}" />
-										<Setter Target="DropDownGlyph_Down.Visibility"
-												Value="Visible" />
-										<Setter Target="DropDownGlyph_Up.Visibility"
-												Value="Collapsed" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
+										<Setter Target="RootGrid.BorderThickness" Value="{StaticResource ComboBoxBorderThickness}" />
+										<Setter Target="DropDownGlyph_Down.Visibility" Value="Visible" />
+										<Setter Target="DropDownGlyph_Up.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 									<Storyboard>
 										<SplitCloseThemeAnimation ClosedLength="{Binding TemplateSettings.DropDownClosedHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -391,7 +558,7 @@
 						<Grid x:Name="ComboBoxContent"
 							  Padding="{TemplateBinding Padding}">
 							<Grid.Resources>
-								<!--  Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not  -->
+								<!-- Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not -->
 								<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder"
 													TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToContentTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
 
@@ -409,42 +576,54 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<!--  Leading Icon  -->
+							<!-- Leading Icon -->
 							<ContentPresenter x:Name="IconPresenter"
 											  Width="20"
 											  Margin="2,0,18,0"
 											  HorizontalAlignment="Center"
 											  VerticalAlignment="Center"
-											  Foreground="{ThemeResource MaterialComboBoxLeadingIconForegroundThemeBrush}"
+											  Foreground="{ThemeResource ComboBoxLeadingIconForeground}"
 											  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
-							<!--  ContentPresenter  -->
+							<!-- ContentPresenter -->
 							<ContentPresenter x:Name="ContentPresenter"
 											  Grid.Column="1"
 											  MaxLines="1"
 											  VerticalAlignment="Center"
 											  RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
 
-							<!--  PlaceholderElement  -->
+							<!-- PlaceholderElement -->
 							<TextBlock x:Name="PlaceholderElement"
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
-									   Foreground="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={ThemeResource NullToPlaceholderThemeBrushConverter}, TargetNullValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}, FallbackValue={StaticResource MaterialComboBoxPlaceholderForegroundThemeBrush}}"
+									   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+									   Foreground="{ThemeResource ComboBoxPlaceHolderForeground}"
+									   IsHitTestVisible="False"
+									   MaxLines="1"
+									   RenderTransformOrigin="0,0.5"
+									   Style="{StaticResource BodyLarge}"
+									   Text="{TemplateBinding PlaceholderText}" />
+
+							<TextBlock x:Name="UpperPlaceholderElement"
+									   Grid.Column="1"
+									   VerticalAlignment="Center"
+									   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsed}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+									   Foreground="{ThemeResource ComboBoxUpperPlaceHolderForeground}"
 									   IsHitTestVisible="False"
 									   MaxLines="1"
 									   RenderTransformOrigin="0,0.5"
 									   Style="{StaticResource BodyLarge}"
 									   Text="{TemplateBinding PlaceholderText}">
 								<TextBlock.RenderTransform>
-									<CompositeTransform x:Name="PlaceholderElement_CompositeTransform"
-														ScaleX="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}"
-														ScaleY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToScaleConverter}, TargetNullValue=1, FallbackValue=1}"
-														TranslateY="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToPlaceholderTranslateYConverter}, TargetNullValue=0, FallbackValue=0}" />
+									<CompositeTransform x:Name="UpperPlaceholderElement_CompositeTransform"
+														ScaleX="0.7"
+														ScaleY="0.7"
+														TranslateY="-11" />
 								</TextBlock.RenderTransform>
 							</TextBlock>
 
-							<!--  Down  -->
+							<!-- Down -->
 							<Path x:Name="DropDownGlyph_Down"
 								  Grid.Column="2"
 								  Width="10"
@@ -452,11 +631,11 @@
 								  Margin="7,0"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
-								  Data="{StaticResource DownArrowPathData}"
-								  Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}"
+								  Data="{StaticResource ComboBoxDownArrowPathData}"
+								  Fill="{ThemeResource ComboBoxArrowForeground}"
 								  Stretch="Uniform" />
 
-							<!--  Up  -->
+							<!-- Up -->
 							<Path x:Name="DropDownGlyph_Up"
 								  Grid.Column="2"
 								  Width="10"
@@ -464,24 +643,24 @@
 								  Margin="7,0"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
-								  Data="{StaticResource UpArrowPathData}"
-								  Fill="{ThemeResource MaterialComboBoxArrowForegroundThemeBrush}"
+								  Data="{StaticResource ComboBoxUpArrowPathData}"
+								  Fill="{ThemeResource ComboBoxArrowForeground}"
 								  Stretch="Uniform"
 								  Visibility="Collapsed" />
 						</Grid>
 
-						<!--  Popup  -->
+						<!-- Popup -->
 						<Popup x:Name="Popup">
 							<Border x:Name="PopupBorder"
-									CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
-									Background="{ThemeResource SurfaceBrush}">
+									CornerRadius="{StaticResource ComboBoxCornerRadius}"
+									Background="{ThemeResource ComboBoxDropDownBackground}">
 
-								<!--  Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer  -->
+								<!-- Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer -->
 								<ScrollViewer x:Name="ScrollViewer"
 											  MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}"
 											  AutomationProperties.AccessibilityView="Raw"
 											  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-											  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
+											  CornerRadius="{StaticResource ComboBoxCornerRadius}"
 											  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
 											  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
 											  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -491,7 +670,9 @@
 											  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 											  VerticalSnapPointsAlignment="Near"
 											  VerticalSnapPointsType="OptionalSingle"
-											  ZoomMode="Disabled">
+											  ZoomMode="Disabled"
+											  Foreground="{ThemeResource ComboBoxDropDownForeground}"
+											  BorderBrush="{ThemeResource ComboBoxDropDownBorderBrush}">
 									<ItemsPresenter />
 								</ScrollViewer>
 							</Border>

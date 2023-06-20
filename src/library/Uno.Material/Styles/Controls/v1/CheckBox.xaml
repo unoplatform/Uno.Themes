@@ -27,7 +27,7 @@
 		<Setter Property="Background"
 				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
+				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{StaticResource MaterialCheckBoxBorderBrush}" />
 		<Setter Property="BorderThickness"
@@ -489,7 +489,7 @@
 
 							<Path x:Name="HyphenGlyph"
 								  Data="{StaticResource CheckBoxHyphenGlyphPathStyle}"
-								  Fill="{TemplateBinding Foreground}"
+								  Fill="{StaticResource MaterialOnPrimaryBrush}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -501,7 +501,7 @@
 
 							<Path x:Name="CheckGlyph"
 								  Data="{StaticResource CheckBoxCheckGlyphPathStyle}"
-								  Fill="{TemplateBinding Foreground}"
+								  Fill="{StaticResource MaterialOnPrimaryBrush}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -516,7 +516,7 @@
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
-										  Foreground="{StaticResource MaterialOnBackgroundBrush}"
+										  Foreground="{TemplateBinding Foreground}"
 										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
