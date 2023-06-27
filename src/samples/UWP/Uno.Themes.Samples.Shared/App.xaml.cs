@@ -42,7 +42,10 @@ namespace Uno.Themes.Samples
 		/// </summary>
 		public App()
 		{
+#if HAS_UNO
 			ConfigureFilters(global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory);
+#endif
+
 			ConfigureXamlDisplay();
 
 			this.InitializeComponent();
