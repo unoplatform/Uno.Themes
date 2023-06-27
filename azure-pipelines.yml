@@ -54,22 +54,18 @@ jobs:
         ApplicationPlatform: UWP_x64
         ArtifactName: UWP
         UseWinUI: false
-        UnoThemesDisableNet6: true
       Android:
         ApplicationPlatform: Android
         ArtifactName: Android
         UseWinUI: false
-        UnoThemesDisableNet6: true
       Packages_UWP:
         ApplicationPlatform: Packages_UWP
         ArtifactName: Packages_UWP
         UseWinUI: false
-        GeneratePackageOnBuild: true
       Packages_WinUI:
         ApplicationPlatform: Packages_WinUI
         ArtifactName: Packages_WinUI
         UseWinUI: true
-        GeneratePackageOnBuild: true
 
   pool:
     vmImage: windows-2022
@@ -79,84 +75,84 @@ jobs:
     - template: build/templates/dotnet-install-windows.yml
 
      # This SDK version is needed as long as `uap10.0` will be supported in Uno.Core
-    - powershell: ./build/Install-WindowsSdkISO.ps1 18362
-      displayName: Install Windows SDK 18362
+    - powershell: ./build/Install-WindowsSdkISO.ps1 19041
+      displayName: Install Windows SDK 19041
 
     - template: build/stage-build.yml
 
-- job: MacOS # Build iOS/macOS
-  timeoutInMinutes: 90
-  strategy:
-    maxParallel: 2
-    matrix:
-      iOS:
-        ApplicationPlatform: iPhone
-        ArtifactName: iOS
-        UnoThemesDisableNet6: true
-        UseWinUI: false
-      macOS:
-        ApplicationPlatform: macOS
-        ArtifactName: macOS
-        UnoThemesDisableNet6: true
-        UseWinUI: false
-  pool:
-    vmImage: macOS-12
-    
-  variables:
-  - name: XCODE_ROOT
-    value: '/Applications/Xcode_13.2.1.app'
-  - name: XamarinSDKVersion
-    value: 6_12_12
-  - name: SkipUnknownFrameworks
-    value: true # Used by TargetFrameworks.Filtering package
-  - group: unoplatform.apple.ios.appstore.distribution
-
-  steps:
-  - task: InstallAppleCertificate@2
-    displayName: Install Certificate
-    inputs:
-      certSecureFile: UnoPlatform-Apple-Distribution.p12
-      certPwd: $(appleappstorecertificatepassword)
-      keychain: temp
-      deleteCert: true
-      
-  - task: InstallAppleProvisioningProfile@1
-    displayName: 'Install Apple Provisioning Profile'
-    inputs:
-      provisioningProfileLocation: 'secureFiles'
-      provProfileSecureFile: 'Uno_Themes.mobileprovision'
-  
-  - template: build/templates/canary-updater.yml
-  - template: build/templates/gitversion.yml
-  - template: build/templates/dotnet-install-macos.yml
-
-  - bash: /bin/bash -c "sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(XamarinSDKVersion)"
-    displayName: Select Xamarin Version
-
-  - bash: |
-      echo 'xCode Root to ${XCODE_ROOT}'
-      echo '##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]'${XCODE_ROOT}
-      sudo xcode-select --switch ${XCODE_ROOT}/Contents/Developer
-
-    displayName: Select Xcode
-
-  - bash: |
-      rm -f ${HOME}/Library/Preferences/Xamarin/Settings.plist
-
-    # https://github.com/actions/virtual-environments/issues/1932
-    displayName: Apply workaround for Azure Devops issue 1932
-
-  - bash: |
-      chmod +x $(build.sourcesdirectory)/build/scripts/macos-build.sh
-      $(build.sourcesdirectory)/build/scripts/macos-build.sh
-    displayName: 'Build solution in Release | $(ApplicationPlatform)'
-    retryCountOnTaskFailure: 3
-    env:
-      BUILD_PLATFORM: "$(ApplicationPlatform)"
-      BUILD_APPLICATIONVERSION: "$(MajorMinorPatch)"
-      BUILD_PACKAGEVERSION: "$(SemVer)"
-      BUILD_SOLUTION: "Uno.Themes.sln"
-      BUILD_BINLOG: "$(build.artifactstagingdirectory)/themes-build-$(ApplicationPlatform).binlog"
+#- job: MacOS # Build iOS/macOS
+#  timeoutInMinutes: 90
+#  strategy:
+#    maxParallel: 2
+#    matrix:
+#      iOS:
+#        ApplicationPlatform: iPhone
+#        ArtifactName: iOS
+#        UnoThemesDisableNet6: true
+#        UseWinUI: false
+#      macOS:
+#        ApplicationPlatform: macOS
+#        ArtifactName: macOS
+#        UnoThemesDisableNet6: true
+#        UseWinUI: false
+#  pool:
+#    vmImage: macOS-12
+#    
+#  variables:
+#  - name: XCODE_ROOT
+#    value: '/Applications/Xcode_13.2.1.app'
+#  - name: XamarinSDKVersion
+#    value: 6_12_12
+#  - name: SkipUnknownFrameworks
+#    value: true # Used by TargetFrameworks.Filtering package
+#  - group: unoplatform.apple.ios.appstore.distribution
+#
+#  steps:
+#  - task: InstallAppleCertificate@2
+#    displayName: Install Certificate
+#    inputs:
+#      certSecureFile: UnoPlatform-Apple-Distribution.p12
+#      certPwd: $(appleappstorecertificatepassword)
+#      keychain: temp
+#      deleteCert: true
+#      
+#  - task: InstallAppleProvisioningProfile@1
+#    displayName: 'Install Apple Provisioning Profile'
+#    inputs:
+#      provisioningProfileLocation: 'secureFiles'
+#      provProfileSecureFile: 'Uno_Themes.mobileprovision'
+#  
+#  - template: build/templates/canary-updater.yml
+#  - template: build/templates/gitversion.yml
+#  - template: build/templates/dotnet-install-macos.yml
+#
+#  - bash: /bin/bash -c "sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(XamarinSDKVersion)"
+#    displayName: Select Xamarin Version
+#
+#  - bash: |
+#      echo 'xCode Root to ${XCODE_ROOT}'
+#      echo '##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]'${XCODE_ROOT}
+#      sudo xcode-select --switch ${XCODE_ROOT}/Contents/Developer
+#
+#    displayName: Select Xcode
+#
+#  - bash: |
+#      rm -f ${HOME}/Library/Preferences/Xamarin/Settings.plist
+#
+#    # https://github.com/actions/virtual-environments/issues/1932
+#    displayName: Apply workaround for Azure Devops issue 1932
+#
+#  - bash: |
+#      chmod +x $(build.sourcesdirectory)/build/scripts/macos-build.sh
+#      $(build.sourcesdirectory)/build/scripts/macos-build.sh
+#    displayName: 'Build solution in Release | $(ApplicationPlatform)'
+#    retryCountOnTaskFailure: 3
+#    env:
+#      BUILD_PLATFORM: "$(ApplicationPlatform)"
+#      BUILD_APPLICATIONVERSION: "$(MajorMinorPatch)"
+#      BUILD_PACKAGEVERSION: "$(SemVer)"
+#      BUILD_SOLUTION: "Uno.Themes.sln"
+#      BUILD_BINLOG: "$(build.artifactstagingdirectory)/themes-build-$(ApplicationPlatform).binlog"
 
 - job: Linux
 

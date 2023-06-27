@@ -1,4 +1,4 @@
-<Project ToolsVersion="15.0">
+﻿<Project ToolsVersion="15.0">
 	<!--
 		This file is used to control the platforms compiled by visual studio, and
 			allow for a faster build when testing for a single platform.
@@ -16,19 +16,16 @@
 
 		<!-- Uncomment each line for each platform that you want to build: -->
 
-		<!-- <TargetFrameworkOverride Condition="''!='hint: UWP'">uap10.0.18362;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: WinUI'">net6.0-windows10.0.18362;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.iOS'">xamarinios10;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.Android'">MonoAndroid12.0;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: Xamarin.Mac'">xamarinmac20;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: UWP'">uap10.0.19041;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: WinUI'">net7.0-windows10.0.19041;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
 		<!-- <TargetFrameworkOverride Condition="''!='hint: WASM, Skia'">netstandard2.0;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 iOS'">net6.0-ios;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 Android'">net6.0-android;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 macOS Catalyst'">net6.0-maccatalyst;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 6.0 macOS AppKit'">net6.0-macos;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 7.0 iOS'">net7.0-ios;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 7.0 Android'">net7.0-android;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 7.0 macOS Catalyst'">net7.0-maccatalyst;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 7.0 macOS AppKit'">net7.0-macos;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
 
-		<!-- DO NOT COMMENT OUT: netstandard2.0 is a required tfm in all cases -->
-		<TargetFrameworkOverride Condition="'$(TargetFrameworkOverride)'!='' AND !$(TargetFrameworkOverride.Contains('netstandard2.0'))">netstandard2.0;$(TargetFrameworkOverride)</TargetFrameworkOverride>
+		<!-- DO NOT COMMENT OUT: net7.0 is a required tfm in all cases -->
+		<TargetFrameworkOverride Condition="'$(TargetFrameworkOverride)'!='' AND !$(TargetFrameworkOverride.Contains('net7.0'))">net7.0;$(TargetFrameworkOverride)</TargetFrameworkOverride>
 
 		<!--
 

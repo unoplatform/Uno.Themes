@@ -7,6 +7,7 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
 					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:uuc="using:Uno.UI.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="d ios android wasm not_win xamarin">
@@ -623,7 +624,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="SplitView">
-					<BindableDrawerLayout LeftPaneOpenLength="{TemplateBinding OpenPaneLength}"
+					<uuc:BindableDrawerLayout LeftPaneOpenLength="{TemplateBinding OpenPaneLength}"
 										  LeftPane="{TemplateBinding Pane}"
 										  LeftPaneBackground="{TemplateBinding PaneBackground}"
 										  IsLeftPaneOpen="{TemplateBinding IsPaneOpen, Mode=TwoWay}"

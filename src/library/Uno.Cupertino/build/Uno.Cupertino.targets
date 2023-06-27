@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
 	<Target Name="ValidateUWPSDKVersion" BeforeTargets="BeforeBuild">
-		<Error Text="Uno.Cupertino requires your application to set the Minimum SDK version to Windows 1903 SDK (10.0.18362) or later"
-					 Condition="'$(TargetPlatformIdentifier)'=='UAP' and '$(TargetPlatformMinVersion)'&lt;'10.0.18362.0'" />
+		<Error Text="Uno.Cupertino requires your application to set the Minimum SDK version to Windows 1903 SDK (10.0.19041) or later"
+					 Condition="'$(TargetPlatformIdentifier)'=='UAP' and '$(TargetPlatformMinVersion)'&lt;'10.0.19041.0'" />
 	</Target>
 </Project>
