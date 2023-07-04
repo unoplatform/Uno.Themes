@@ -606,7 +606,7 @@
 		</Setter>
 	</Style>
 
-	<!--  Material MenuFlyoutItem Style  -->
+	<!--  Material MenuFlyoutSeparator Style  -->
 	<Style x:Key="MaterialMenuFlyoutSeparatorStyle"
 	       TargetType="MenuFlyoutSeparator">
 
@@ -627,4 +627,28 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialDefaultFlyoutPresenterStyle"
+		   TargetType="FlyoutPresenter"
+		   BasedOn="{StaticResource MaterialFlyoutPresenterStyle}" />
+
+	<Style x:Key="MaterialDefaultMenuFlyoutPresenterStyle"
+		   TargetType="MenuFlyoutPresenter"
+		   BasedOn="{StaticResource MaterialMenuFlyoutPresenterStyle}" />
+
+	<Style x:Key="MaterialDefaultMenuFlyoutItemStyle"
+		   TargetType="MenuFlyoutItem"
+		   BasedOn="{StaticResource MaterialMenuFlyoutItemStyle}" />
+
+	<Style x:Key="MaterialDefaultToggleMenuFlyoutItemStyle"
+		   TargetType="ToggleMenuFlyoutItem"
+		   BasedOn="{StaticResource MaterialToggleMenuFlyoutItemStyle}" />
+
+	<Style x:Key="MaterialDefaultMenuFlyoutSubItemStyle"
+		   TargetType="MenuFlyoutSubItem"
+		   BasedOn="{StaticResource MaterialMenuFlyoutSubItemStyle}" />
+
+	<Style x:Key="MaterialDefaultMenuFlyoutSeparatorStyle"
+		   TargetType="MenuFlyoutSeparator"
+		   BasedOn="{StaticResource MaterialMenuFlyoutSeparatorStyle}" />
 </ResourceDictionary>
