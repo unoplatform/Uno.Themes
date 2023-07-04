@@ -10,7 +10,8 @@
 
 
 	<!-- Known Issue - Wasm pressed state/ripple effect is only applied on first press -->
-	<Style TargetType="um:Ripple">
+	<Style x:Key="MaterialRippleStyle"
+		   TargetType="um:Ripple">
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="VerticalAlignment"
@@ -148,4 +149,8 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialDefaultRippleStyle"
+		   TargetType="um:Ripple"
+		   BasedOn="{StaticResource MaterialRippleStyle}" />
 </ResourceDictionary>
