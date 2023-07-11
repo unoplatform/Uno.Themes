@@ -136,15 +136,6 @@ namespace Uno.Themes.Markup
 				public static ResourceValue<Style> Default => new("ProgressRingStyle");
 			}
 
-			public static class RadioButton
-			{
-				[ResourceKeyDefinition(typeof(Style), "RadioButtonStyle", TargetType = typeof(RadioButton))]
-				public static ResourceValue<Style> Default => new("RadioButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SecondaryRadioButtonStyle", TargetType = typeof(RadioButton))]
-				public static ResourceValue<Style> Secondary => new("SecondaryRadioButtonStyle");
-			}
-
 			public static class Slider
 			{
 				[ResourceKeyDefinition(typeof(Style), "SliderStyle", TargetType = typeof(Slider))]
