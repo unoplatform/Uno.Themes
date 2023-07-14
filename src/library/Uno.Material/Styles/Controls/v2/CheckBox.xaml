@@ -21,46 +21,46 @@
 			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Foreground-->
 			<StaticResource x:Key="CheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceLowrush" />
 
 			<StaticResource x:Key="CheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Border Brush-->
-			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -85,6 +85,21 @@
 			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminateDisabled" ResourceKey="OnPrimaryMediumBrush" />
+
+			<x:String x:Key="CheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
+			<x:String x:Key="CheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+			<!--#endregion-->
+
+			<!--#region Focus Area-->
+			<x:Double x:Key="CheckBoxFocusAreaSize">40</x:Double>
+			<!--#endregion-->
+
+			<!--#region Check Area-->
+			<x:Double x:Key="CheckBoxCheckAreaSize">18</x:Double>
+			<GridLength x:Key="CheckBoxCheckAreaLength">40</GridLength>
+			<CornerRadius x:Key="CheckBoxCheckAreaCornerRadius">2</CornerRadius>
+			<Thickness x:Key="CheckBoxCheckAreaBorderThickness">2</Thickness>
+			<Thickness x:Key="CheckBoxCheckAreaPadding">8,0,0,0</Thickness>
 			<!--#endregion-->
 
 		</ResourceDictionary>
@@ -99,46 +114,46 @@
 			<StaticResource x:Key="CheckBoxBackgroundChecked" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundCheckedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxBackgroundIndeterminate" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBackgroundIndeterminatePressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBackgroundIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Foreground-->
 			<StaticResource x:Key="CheckBoxForegroundUnchecked" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundUncheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="CheckBoxForegroundUncheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxForegroundChecked" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="CheckBoxForegroundCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="CheckBoxForegroundIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Border Brush-->
-			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUnchecked" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushUncheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxBorderBrushChecked" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushCheckedPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushCheckedPressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<StaticResource x:Key="CheckBoxBorderBrushIndeterminate" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="CheckBoxBorderBrushIndeterminatePressed" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="CheckBoxBorderBrushIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -163,22 +178,24 @@
 			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePointerOver" ResourceKey="OnPrimaryBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminatePressed" ResourceKey="OnPrimaryBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundIndeterminateDisabled" ResourceKey="OnPrimaryMediumBrush" />
+
+			<x:String x:Key="CheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
+			<x:String x:Key="CheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 			<!--#endregion-->
 
+			<!--#region Focus Area-->
+			<x:Double x:Key="CheckBoxFocusAreaSize">40</x:Double>
+			<!--#endregion-->
+
+			<!--#region Check Area-->
+			<x:Double x:Key="CheckBoxCheckAreaSize">18</x:Double>
+			<GridLength x:Key="CheckBoxCheckAreaLength">40</GridLength>
+			<CornerRadius x:Key="CheckBoxCheckAreaCornerRadius">2</CornerRadius>
+			<Thickness x:Key="CheckBoxCheckAreaBorderThickness">2</Thickness>
+			<Thickness x:Key="CheckBoxCheckAreaPadding">8,0,0,0</Thickness>
+			<!--#endregion-->
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
-
-	<!-- Glyph -->
-	<x:String x:Key="MaterialCheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
-	<x:String x:Key="MaterialCheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
-
-	<!-- Focus Area -->
-	<x:Double x:Key="MaterialCheckBoxFocusAreaSize">40</x:Double>
-
-	<!-- Check Area -->
-	<x:Double x:Key="MaterialCheckBoxCheckAreaSize">18</x:Double>
-	<GridLength x:Key="MaterialCheckBoxCheckAreaLength">40</GridLength>
-	<CornerRadius x:Key="MaterialCheckBoxCheckAreaCornerRadius">4</CornerRadius>
 
 	<Style x:Key="MaterialCheckBoxStyle"
 		   TargetType="CheckBox">
@@ -193,14 +210,15 @@
 		<!-- End: Body Small Typo -->
 
 		<Setter Property="BorderBrush" Value="{ThemeResource CheckBoxBorderBrushUnchecked}" />
-		<Setter Property="BorderThickness" Value="2" />
-		<Setter Property="Padding" Value="8,0,0,0" />
+		<Setter Property="BorderThickness" Value="{ThemeResource CheckBoxCheckAreaBorderThickness}" />
+		<Setter Property="Padding" Value="{ThemeResource CheckBoxCheckAreaPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource CheckBoxCheckAreaCornerRadius}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="MinWidth" Value="0" />
-		<Setter Property="MinHeight" Value="{StaticResource MaterialCheckBoxCheckAreaSize}" />
+		<Setter Property="MinHeight" Value="{ThemeResource CheckBoxCheckAreaSize}" />
 		<Setter Property="UseSystemFocusVisuals" Value="False" />
 
 		<Setter Property="Template">
@@ -226,14 +244,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -246,14 +264,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}" />
+																 From="{ThemeResource LowOpacity}" />
 										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
@@ -497,14 +515,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -528,14 +546,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -560,14 +578,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -592,14 +610,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource LowOpacity}" />
+																 To="{ThemeResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource LowOpacity}"
+																 From="{ThemeResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -609,7 +627,7 @@
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusRing.Opacity" Value="{StaticResource FocusedOpacity}" />
+										<Setter Target="FocusRing.Opacity" Value="{ThemeResource FocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -620,7 +638,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{StaticResource MaterialCheckBoxCheckAreaLength}" />
+							<ColumnDefinition Width="{ThemeResource CheckBoxCheckAreaLength}" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
@@ -628,8 +646,8 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource MaterialCheckBoxFocusAreaSize}"
-								 Height="{StaticResource MaterialCheckBoxFocusAreaSize}"
+								 Width="{ThemeResource CheckBoxFocusAreaSize}"
+								 Height="{ThemeResource CheckBoxFocusAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
@@ -638,24 +656,24 @@
 								 HorizontalAlignment="Center"
 								 VerticalAlignment="Center"
 								 Stretch="Uniform"
-								 Width="{StaticResource MaterialCheckBoxFocusAreaSize}"
-								 Height="{StaticResource MaterialCheckBoxFocusAreaSize}"
+								 Width="{ThemeResource CheckBoxFocusAreaSize}"
+								 Height="{ThemeResource CheckBoxFocusAreaSize}"
 								 Fill="{TemplateBinding Background}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
 						<Grid x:Name="CheckBoxContainer"
-							  Height="{StaticResource MaterialCheckBoxCheckAreaSize}"
-							  Width="{StaticResource MaterialCheckBoxCheckAreaSize}">
+							  Height="{ThemeResource CheckBoxCheckAreaSize}"
+							  Width="{ThemeResource CheckBoxCheckAreaSize}"
+							  CornerRadius="{TemplateBinding CornerRadius}">
 
 							<Grid x:Name="BackgroundBorder"
 								  Background="{TemplateBinding Background}"
 								  BorderBrush="{TemplateBinding BorderBrush}"
-								  BorderThickness="{TemplateBinding BorderThickness}"
-								  CornerRadius="2" />
+								  BorderThickness="{TemplateBinding BorderThickness}" />
 
 							<Path x:Name="HyphenGlyph"
-								  Data="{StaticResource MaterialCheckBoxHyphenGlyphPathData}"
+								  Data="{ThemeResource CheckBoxHyphenGlyphPathData}"
 								  Fill="{ThemeResource CheckBoxGlyphForegroundIndeterminate}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
@@ -667,7 +685,7 @@
 								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
-								  Data="{StaticResource MaterialCheckBoxCheckGlyphPathData}"
+								  Data="{ThemeResource CheckBoxCheckGlyphPathData}"
 								  Fill="{ThemeResource CheckBoxGlyphForegroundChecked}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
