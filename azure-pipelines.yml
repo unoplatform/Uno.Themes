@@ -79,6 +79,7 @@ jobs:
      # This SDK version is needed as long as `uap10.0` will be supported in Uno.Core
     - powershell: ./build/Install-WindowsSdkISO.ps1 19041
       displayName: Install Windows SDK 19041
+      condition: eq(variables['UseWinUI'], false)
 
     - template: build/stage-build.yml
 
