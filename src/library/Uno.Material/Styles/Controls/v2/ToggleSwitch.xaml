@@ -695,8 +695,8 @@
 	<SolidColorBrush x:Key="ToggleSwitchOffDisabledBorder" Color="{StaticResource OnSurfaceColor}" Opacity="0.12" />
 
 	<!--ON Background/Border-->
-	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushBackground" Color="{StaticResource OnSurfaceDisabledBrush}" Opacity="0.12" />
-	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushStroke" Color="{StaticResource OnSurfaceDisabledBrush}" Opacity="0.01" />
+	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushBackground" Color="{StaticResource OnSurfaceColor}" Opacity="0.12" />
+	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushStroke" Color="{StaticResource OnSurfaceColor}" Opacity="0.01" />
 
 	<Style x:Key="M3MaterialToggleSwitchStyle"
 					  TargetType="ToggleSwitch">
@@ -838,6 +838,7 @@
 										<Setter Target="SwitchKnobOffShadow.Visibility" Value="Visible" />
 										<Setter Target="OffIconPresenter.Padding" Value="2,0,0,2" />
 										<win:Setter Target="OnIconPresenter.Padding" Value="0,0,2,4" />
+										<not_win:Setter Target="OnIconPresenter.Padding" Value="0,0,1,2" />
 									</VisualState.Setters>
 
 									<Storyboard>
@@ -1252,16 +1253,16 @@
 
 									<!--Shadow-->
 									<Border x:Name="SwitchKnobOffShadow"
-										Width="30"
-										Height="30"
-										CornerRadius="15"
-										Opacity="0"
-										Margin="-5,0,-8,0"
-										HorizontalAlignment="Center"
-										Visibility="Collapsed"
-										VerticalAlignment="Center"
-										Background="Transparent" />
-									
+											Width="30"
+											Height="30"
+											CornerRadius="15"
+											Opacity="0"
+											Margin="-5,0,-8,0"
+											HorizontalAlignment="Center"
+											Visibility="Collapsed"
+											VerticalAlignment="Center"
+											Background="Transparent" />
+
 									<!--Off Thumb-->
 									<Rectangle x:Name="SwitchKnobOff"
 											   Fill="{ThemeResource OnSurfaceVariantBrush}"
@@ -1285,7 +1286,8 @@
 													  Width="18"
 													  VerticalContentAlignment="Center"
 													  HorizontalContentAlignment="Center"
-													  Padding="1,0,0,2"
+													  win:Padding="1,0,0,2"
+													  not_win:Padding="2,0,0,2"
 													  Foreground="{ThemeResource SurfaceVariantBrush}"/>
 								</Grid>
 								<Grid.RenderTransform>
