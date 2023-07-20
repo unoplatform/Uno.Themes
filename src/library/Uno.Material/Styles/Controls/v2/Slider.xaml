@@ -11,25 +11,46 @@
 			<Color x:Key="MaterialSliderThumbDisabledColor">#B8B4BC</Color>
 			<SolidColorBrush x:Key="MaterialSliderThumbDisabledBrush"
 							 Color="{ThemeResource MaterialSliderThumbDisabledColor}" />
+			<Thickness x:Key="SliderFocusVisualMargin">-7,0</Thickness>
 
 			<!-- Font resources -->
 			<StaticResource x:Key="SliderFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<StaticResource x:Key="SliderFontSize" ResourceKey="LabelMediumFontSize" />
 
-			<!-- Color of the track -->
-			<StaticResource x:Key="SliderTrackFill" ResourceKey="OnSurfaceSelectedBrush" />
+			<!-- Resources for the track -->
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceSelectedBrush" />
 			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
+			<CornerRadius x:Key="SliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius>
+			<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
+			<x:Double x:Key="SliderTrackThickness">4</x:Double>
+			<x:Double x:Key="SliderFillThickness">6</x:Double>
 
-			<!-- Color for the Slider Ticks. For future uses. -->
+			<!-- Resources for the Slider Ticks, For future uses. -->
 			<StaticResource x:Key="SliderTickBarFill" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="SliderTickBarFillDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
 			<StaticResource x:Key="SliderInlineTickBarFill" ResourceKey="OnSurfaceVariantBrush" />
+			<x:Double x:Key="SliderTopTickBarHeight">4</x:Double>
+			<x:Double x:Key="SliderBottomTickBarHeight">4</x:Double>
+			<x:Double x:Key="SliderHorizontalInlineTickBarHeight">2</x:Double>
+			<x:Double x:Key="SliderLeftTickBarWidth">4</x:Double>
+			<x:Double x:Key="SliderRightTickBarWidth">4</x:Double>
+			<x:Double x:Key="SliderVerticallInlineTickBarWidth">2</x:Double>
+			<Thickness x:Key="SliderTopTickBarMargin">0,0,0,4</Thickness>
+			<Thickness x:Key="SliderBottomTickBarMargin">0,4,0,0</Thickness>
+			<Thickness x:Key="SliderLeftTickBarMargin">0,0,4,0</Thickness>
+			<Thickness x:Key="SliderRightTickBarMargin">4,0,0,0</Thickness>
 
 			<!-- Ressources for the SliderThumb -->
 			<StaticResource x:Key="SliderThumbBackground" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="MaterialSliderThumbDisabledBrush" />
+			<x:Double x:Key="SliderThumbWidth">20</x:Double>
+			<x:Double x:Key="SliderThumbHeight">20</x:Double>
+			<x:Double x:Key="SliderThumbCornerRadius">10</x:Double>
+			<Thickness x:Key="SliderHorizontalFocusVisualMargin">-14,-6,-14,-6</Thickness>
+			<Thickness x:Key="SliderVerticalFocusVisualMargin">-6,-14,-6,-14</Thickness>
+			<StaticResource x:Key="SliderTrackCornerRadius" ResourceKey="ControlCornerRadius" />
 		</ResourceDictionary>
 
 		<!-- Dark Theme -->
@@ -38,35 +59,48 @@
 			<Color x:Key="MaterialSliderThumbDisabledColor">#685C64</Color>
 			<SolidColorBrush x:Key="MaterialSliderThumbDisabledBrush"
 							 Color="{ThemeResource MaterialSliderThumbDisabledColor}" />
+			<Thickness x:Key="SliderFocusVisualMargin">-7,0</Thickness>
 
 			<!-- Font resources -->
 			<StaticResource x:Key="SliderFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<StaticResource x:Key="SliderFontSize" ResourceKey="LabelMediumFontSize" />
 
-			<!-- Color of the track -->
-			<StaticResource x:Key="SliderTrackFill" ResourceKey="OnSurfaceSelectedBrush" />
+			<!-- Resources for the track -->
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceSelectedBrush" />
 			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
+			<CornerRadius x:Key="SliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius>
+			<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
+			<x:Double x:Key="SliderTrackThickness">4</x:Double>
+			<x:Double x:Key="SliderFillThickness">6</x:Double>
 
-			<!-- Color for the Slider Ticks, For future uses. -->
+			<!-- Resources for the Slider Ticks, For future uses. -->
 			<StaticResource x:Key="SliderTickBarFill" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="SliderTickBarFillDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
 			<StaticResource x:Key="SliderInlineTickBarFill" ResourceKey="OnSurfaceVariantBrush" />
+			<x:Double x:Key="SliderTopTickBarHeight">4</x:Double>
+			<x:Double x:Key="SliderBottomTickBarHeight">4</x:Double>
+			<x:Double x:Key="SliderHorizontalInlineTickBarHeight">2</x:Double>
+			<x:Double x:Key="SliderLeftTickBarWidth">4</x:Double>
+			<x:Double x:Key="SliderRightTickBarWidth">4</x:Double>
+			<x:Double x:Key="SliderVerticallInlineTickBarWidth">2</x:Double>
+			<Thickness x:Key="SliderTopTickBarMargin">0,0,0,4</Thickness>
+			<Thickness x:Key="SliderBottomTickBarMargin">0,4,0,0</Thickness>
+			<Thickness x:Key="SliderLeftTickBarMargin">0,0,4,0</Thickness>
+			<Thickness x:Key="SliderRightTickBarMargin">4,0,0,0</Thickness>
 
-			<!-- Resource for the SliderThumb -->
+			<!-- Resources for the SliderThumb -->
 			<StaticResource x:Key="SliderThumbBackground" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="MaterialSliderThumbDisabledBrush" />
+			<x:Double x:Key="SliderThumbWidth">20</x:Double>
+			<x:Double x:Key="SliderThumbHeight">20</x:Double>
+			<x:Double x:Key="SliderThumbCornerRadius">10</x:Double>
+			<StaticResource x:Key="SliderTrackCornerRadius" ResourceKey="ControlCornerRadius" />
+			<Thickness x:Key="SliderHorizontalFocusVisualMargin">-14,-6,-14,-6</Thickness>
+			<Thickness x:Key="SliderVerticalFocusVisualMargin">-6,-14,-6,-14</Thickness>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
-
-	<StaticResource x:Key="SliderTrackCornerRadius" ResourceKey="ControlCornerRadius" />
-
-	<x:Double x:Key="SliderHorizontalThumbWidth">12</x:Double>
-	<x:Double x:Key="SliderHorizontalThumbHeight">12</x:Double>
-	<x:Double x:Key="SliderVerticalThumbWidth">12</x:Double>
-	<x:Double x:Key="SliderVerticalThumbHeight">12</x:Double>
-	<x:Double x:Key="SliderThumbCornerRadius">10</x:Double>
 
 	<!-- Material Slider Thumb Style -->
 	<Style x:Key="MaterialSliderThumbStyle"
@@ -97,10 +131,9 @@
 		<Setter Property="FontSize" Value="{ThemeResource SliderFontSize}" />
 		<Setter Property="ManipulationMode" Value="None" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
-		<Setter Property="FocusVisualMargin" Value="-7,0,-7,0" />
+		<Setter Property="FocusVisualMargin" Value="{ThemeResource SliderFocusVisualMargin}" />
 		<Setter Property="IsFocusEngagementEnabled" Value="True" />
-		<not_win:Setter Property="CornerRadius"
-						Value="{ThemeResource SliderTrackCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SliderTrackCornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -201,23 +234,23 @@
 								<Rectangle x:Name="HorizontalTrackRect"
 										   Grid.Row="1"
 										   Grid.ColumnSpan="3"
-										   Height="2"
+										   Height="{ThemeResource SliderTrackThickness}"
 										   Fill="{TemplateBinding Background}"
 										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
-
 								<!-- HorizontalDecreaseRect -->
-								<Rectangle x:Name="HorizontalDecreaseRect"
-										   Grid.Row="1"
-										   Fill="{TemplateBinding Foreground}"
-										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
-										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+								<Border Grid.Row="1"
+										Height="{ThemeResource SliderFillThickness}"
+										CornerRadius="{ThemeResource SliderHorizontalFillCornerRadius}">
+									<Rectangle x:Name="HorizontalDecreaseRect"
+											   Fill="{TemplateBinding Foreground}" />
+								</Border>
 
 								<!-- TopTickBar -->
 								<TickBar x:Name="TopTickBar"
 										 Grid.ColumnSpan="3"
-										 Height="4"
-										 Margin="0,0,0,4"
+										 Height="{ThemeResource SliderTopTickBarHeight}"
+										 Margin="{ThemeResource SliderTopTickBarMargin}"
 										 VerticalAlignment="Bottom"
 										 Fill="{ThemeResource SliderTickBarFill}"
 										 Visibility="Collapsed" />
@@ -226,7 +259,7 @@
 								<TickBar x:Name="HorizontalInlineTickBar"
 										 Grid.Row="1"
 										 Grid.ColumnSpan="3"
-										 Height="2"
+										 Height="{ThemeResource SliderHorizontalInlineTickBarHeight}"
 										 Fill="{ThemeResource SliderInlineTickBarFill}"
 										 Visibility="Collapsed" />
 
@@ -234,8 +267,8 @@
 								<TickBar x:Name="BottomTickBar"
 										 Grid.Row="2"
 										 Grid.ColumnSpan="3"
-										 Height="4"
-										 Margin="0,4,0,0"
+										 Height="{ThemeResource SliderBottomTickBarHeight}"
+										 Margin="{ThemeResource SliderBottomTickBarMargin}"
 										 VerticalAlignment="Top"
 										 Fill="{ThemeResource SliderTickBarFill}"
 										 Visibility="Collapsed" />
@@ -245,11 +278,11 @@
 									   Grid.Row="0"
 									   Grid.RowSpan="3"
 									   Grid.Column="1"
-									   Width="{ThemeResource SliderHorizontalThumbWidth}"
-									   Height="{ThemeResource SliderHorizontalThumbHeight}"
+									   Width="{ThemeResource SliderThumbWidth}"
+									   Height="{ThemeResource SliderThumbHeight}"
 									   AutomationProperties.AccessibilityView="Raw"
 									   DataContext="{TemplateBinding Value}"
-									   FocusVisualMargin="-14,-6,-14,-6"
+									   FocusVisualMargin="{ThemeResource SliderHorizontalFocusVisualMargin}"
 									   Style="{StaticResource MaterialSliderThumbStyle}" />
 							</Grid>
 
@@ -272,26 +305,27 @@
 
 								<!-- VerticalTrackRect -->
 								<Rectangle x:Name="VerticalTrackRect"
+										   Width="{ThemeResource SliderTrackThickness}"
 										   Grid.RowSpan="3"
 										   Grid.Column="1"
-										   Width="2"
 										   Fill="{TemplateBinding Background}"
 										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
 
 								<!-- VerticalDecreaseRect -->
-								<Rectangle x:Name="VerticalDecreaseRect"
-										   Grid.Row="2"
-										   Grid.Column="1"
-										   Fill="{TemplateBinding Foreground}"
-										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
-										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+								<Border Grid.Row="2"
+										Grid.Column="1"
+										CornerRadius="{ThemeResource SliderVerticalFillCornerRadius}">
+									<Rectangle x:Name="VerticalDecreaseRect"
+											   Width="{ThemeResource SliderFillThickness}"
+											   Fill="{TemplateBinding Foreground}" />
+								</Border>
 
 								<!-- LeftTickBar -->
 								<TickBar x:Name="LeftTickBar"
 										 Grid.RowSpan="3"
-										 Width="4"
-										 Margin="0,0,4,0"
+										 Width="{ThemeResource SliderLeftTickBarWidth}"
+										 Margin="{ThemeResource SliderLeftTickBarMargin}"
 										 HorizontalAlignment="Right"
 										 Fill="{ThemeResource SliderTickBarFill}"
 										 Visibility="Collapsed" />
@@ -300,7 +334,7 @@
 								<TickBar x:Name="VerticalInlineTickBar"
 										 Grid.RowSpan="3"
 										 Grid.Column="1"
-										 Width="2"
+										 Width="{ThemeResource SliderVerticallInlineTickBarWidth}"
 										 Fill="{ThemeResource SliderInlineTickBarFill}"
 										 Visibility="Collapsed" />
 
@@ -308,8 +342,8 @@
 								<TickBar x:Name="RightTickBar"
 										 Grid.RowSpan="3"
 										 Grid.Column="2"
-										 Width="4"
-										 Margin="4,0,0,0"
+										 Width="{ThemeResource SliderRightTickBarWidth}"
+										 Margin="{ThemeResource SliderRightTickBarMargin}"
 										 HorizontalAlignment="Left"
 										 Fill="{ThemeResource SliderTickBarFill}"
 										 Visibility="Collapsed" />
@@ -319,11 +353,11 @@
 									   Grid.Row="1"
 									   Grid.Column="0"
 									   Grid.ColumnSpan="3"
-									   Width="{ThemeResource SliderVerticalThumbWidth}"
-									   Height="{ThemeResource SliderVerticalThumbHeight}"
+									   Width="{ThemeResource SliderThumbWidth}"
+									   Height="{ThemeResource SliderThumbHeight}"
 									   AutomationProperties.AccessibilityView="Raw"
 									   DataContext="{TemplateBinding Value}"
-									   FocusVisualMargin="-6,-14,-6,-14"
+									   FocusVisualMargin="{ThemeResource SliderVerticalFocusVisualMargin}"
 									   Style="{StaticResource MaterialSliderThumbStyle}" />
 							</Grid>
 						</Grid>
