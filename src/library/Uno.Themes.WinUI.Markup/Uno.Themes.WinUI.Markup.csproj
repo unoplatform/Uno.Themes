@@ -6,8 +6,7 @@
 	-->
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">netstandard2.0</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net6.0-windows10.0.18362;net6.0-ios;net6.0-macos;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">net7.0;net7.0-windows10.0.19041;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>

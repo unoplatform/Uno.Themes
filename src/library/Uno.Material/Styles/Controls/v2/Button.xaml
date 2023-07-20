@@ -9,59 +9,338 @@
 					mc:Ignorable="d not_win">
 
 	<!-- Converters -->
-	<um:FromNullToValueConverter x:Key="MaterialNullToTextButtonMarginConverter"
+	<um:FromNullToValueConverter x:Key="NullToTextButtonMarginConverter"
 								 NotNullValue="0,0,2,0"
 								 NullValue="0" />
 
-	<!-- Brushes -->
-	<StaticResource x:Key="MaterialOutlinedButtonBorderBrush"
-					ResourceKey="OutlineBrush" />
-
 	<!-- Variables -->
-	<x:Double x:Key="MaterialButtonMinHeight">40</x:Double>
-	<x:Double x:Key="MaterialButtonMinWidth">40</x:Double>
-	<Thickness x:Key="MaterialButtonPadding">16,0</Thickness>
-	<Thickness x:Key="MaterialTextButtonPadding">12,0</Thickness>
-	<Thickness x:Key="MaterialButtonBorderThickness">0</Thickness>
-	<Thickness x:Key="MaterialOutlinedButtonBorderThickness">1</Thickness>
-	<CornerRadius x:Key="MaterialButtonCornerRadius">20</CornerRadius>
-	<x:String x:Key="MaterialButtonVerticalContentAlignment">Center</x:String>
-	<x:String x:Key="MaterialButtonHorizontalContentAlignment">Center</x:String>
+	<x:Double x:Key="ButtonMinHeight">40</x:Double>
+	<x:Double x:Key="ButtonMinWidth">40</x:Double>
+	<x:Double x:Key="ButtonIconMinWidth">18</x:Double>
+	<x:Double x:Key="ElevatedButtonElevation">1</x:Double>
+	<x:Double x:Key="ElevatedButtonElevationDisabled">0</x:Double>
+	<x:Double x:Key="ButtonElevation">0</x:Double>
+	<x:Double x:Key="IconButtonOpacityVisibleState">1</x:Double>
+	<x:Double x:Key="IconButtonOpacityHiddenState">0</x:Double>
+	<Thickness x:Key="ButtonPadding">16,0</Thickness>
+	<Thickness x:Key="TextButtonPadding">12,0</Thickness>
+	<Thickness x:Key="TextButtonIconMargin">0,0,8,0</Thickness>
+	<Thickness x:Key="ButtonBorderThickness">0</Thickness>
+	<Thickness x:Key="OutlinedButtonBorderThickness">1</Thickness>
+	<Thickness x:Key="ElevatedButtonMargin">0,0,0,1</Thickness>
+	<Thickness x:Key="ElevatedButtonDisabledMargin">0</Thickness>
+	<Thickness x:Key="ButtonContentMargin">8,0</Thickness>
+	<Thickness x:Key="ButtonMargin">0</Thickness>
+	<CornerRadius x:Key="ButtonCornerRadius">20</CornerRadius>
+	<x:String x:Key="ButtonVerticalContentAlignment">Center</x:String>
+	<x:String x:Key="ButtonHorizontalContentAlignment">Center</x:String>
+	<x:String x:Key="ButtonIconHorizontalAlignment">Stretch</x:String>
+	<x:String x:Key="ButtonIconVerticalAlignment">Stretch</x:String>
+	<x:String x:Key="IconButtonEllipseVerticalAlignment">Stretch</x:String>
+	<x:String x:Key="IconButtonEllipseHorizontalAlignment">Stretch</x:String>
+	<x:Boolean x:Key="ElevatedButtonIsTintEnabled">True</x:Boolean>
 
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<!-- MaterialElevatedButtonStyle -->
+			<StaticResource x:Key="ElevatedButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundPointerFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialFilledButtonStyle -->
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonIconForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundPointerFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="OnPrimaryHoverBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="OnPrimaryPressedBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundFocused" ResourceKey="OnPrimaryFocusedBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerFocused" ResourceKey="OnPrimaryFocusedBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialFilledTonalButtonStyle -->
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForeground" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundPointerFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="OnSecondaryContainerHoverBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="OnSecondaryContainerPressedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundFocused" ResourceKey="OnSecondaryContainerFocusedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerFocused" ResourceKey="OnSecondaryContainerFocusedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialOutlinedButtonStyle -->
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushFocused" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerFocused" ResourceKey="OutlineBrush" />
+
+			<!-- MaterialTextButtonStyle -->
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<StaticResource x:Key="TextButtonIconForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="TextButtonBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialIconButtonStyle -->
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="IconButtonEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="IconButtonEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="IconButtonEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<!-- MaterialElevatedButtonStyle -->
+			<StaticResource x:Key="ElevatedButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ElevatedButtonIconForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ElevatedButtonBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="ElevatedButtonBackgroundPointerFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ElevatedButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialFilledButtonStyle -->
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonIconForeground" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonIconForegroundPointerFocused" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="OnPrimaryHoverBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="OnPrimaryPressedBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundFocused" ResourceKey="OnPrimaryFocusedBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerFocused" ResourceKey="OnPrimaryFocusedBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialFilledTonalButtonStyle -->
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForeground" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonIconForegroundPointerFocused" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="OnSecondaryContainerHoverBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="OnSecondaryContainerPressedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundFocused" ResourceKey="OnSecondaryContainerFocusedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerFocused" ResourceKey="OnSecondaryContainerFocusedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialOutlinedButtonStyle -->
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonIconForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushFocused" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerFocused" ResourceKey="OutlineBrush" />
+
+			<!-- MaterialTextButtonStyle -->
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<StaticResource x:Key="TextButtonIconForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonIconForegroundPointerFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="TextButtonBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerFocused" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialIconButtonStyle -->
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="IconButtonEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="IconButtonEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="IconButtonEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- BASE -->
 	<Style x:Key="MaterialBaseButtonStyle"
 		   TargetType="Button">
 
-		<!--Start: Label Large Typo-->
-		<Setter Property="FontFamily"
-				Value="{ThemeResource MaterialMediumFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="{ThemeResource LabelLargeFontWeight}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource LabelLargeFontSize}" />
-		<Setter Property="CharacterSpacing"
-				Value="{ThemeResource LabelLargeCharacterSpacing}" />
-		<!--End: Label Large Typo-->
+		<!-- Start: Label Large Typo -->
+		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelLargeCharacterSpacing}" />
+		<!-- End: Label Large Typo -->
 
-		<Setter Property="MinHeight"
-				Value="{StaticResource MaterialButtonMinHeight}" />
-		<Setter Property="MinWidth"
-				Value="{StaticResource MaterialButtonMinWidth}" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialButtonPadding}" />
-		<Setter Property="CornerRadius"
-				Value="{StaticResource MaterialButtonCornerRadius}" />
-		<Setter Property="BorderThickness"
-				Value="{StaticResource MaterialButtonBorderThickness}" />
-		<Setter Property="VerticalContentAlignment"
-				Value="{StaticResource MaterialButtonVerticalContentAlignment}" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="{StaticResource MaterialButtonHorizontalContentAlignment}" />
+		<Setter Property="MinHeight" Value="{StaticResource ButtonMinHeight}" />
+		<Setter Property="MinWidth" Value="{StaticResource ButtonMinWidth}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="VerticalContentAlignment" Value="{StaticResource ButtonVerticalContentAlignment}" />
+		<Setter Property="HorizontalContentAlignment" Value="{StaticResource ButtonHorizontalContentAlignment}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
 	</Style>
 
 	<!-- ELEVATED -->
@@ -69,23 +348,19 @@
 		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource PrimaryBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource SurfaceBrush}" />
-		<Setter Property="um:ControlExtensions.Elevation"
-				Value="1" />
-		<Setter Property="um:ControlExtensions.TintedBackground"
-				Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IsTintEnabled"
-				Value="True" />
+		<Setter Property="Foreground" Value="{ThemeResource ElevatedButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ElevatedButtonBackground}" />
+		<Setter Property="um:ControlExtensions.Elevation" Value="{StaticResource ElevatedButtonElevation}" />
+		<Setter Property="um:ControlExtensions.TintedBackground" Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.IsTintEnabled" Value="{StaticResource ElevatedButtonIsTintEnabled}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
-										  Margin="0,0,0,1"
+										  Margin="{StaticResource ElevatedButtonMargin}"
 										  Elevation="{Binding Path=(um:ControlExtensions.Elevation), RelativeSource={RelativeSource TemplatedParent}}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
@@ -93,51 +368,58 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ElevatedButtonIconForeground}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryHoverBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ElevatedButtonBackgroundPointerOver}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ElevatedButtonIconForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ElevatedButtonForegroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrushPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryPressedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ElevatedButtonBackgroundPressed}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ElevatedButtonIconForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ElevatedButtonForegroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrushPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background"
-												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
-										<Setter Target="IconPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
-										<Setter Target="ElevatedView.Margin"
-												Value="0" />
-										<Setter Target="ElevatedView.Elevation"
-												Value="0" />
+										<Setter Target="Root.Background" Value="{ThemeResource ElevatedButtonBackgroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ElevatedButtonIconForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ElevatedButtonForegroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrushDisabled}" />
+										<Setter Target="ElevatedView.Margin" Value="{StaticResource ElevatedButtonDisabledMargin}" />
+										<Setter Target="ElevatedView.Elevation" Value="{StaticResource ElevatedButtonElevationDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 
 							<VisualStateGroup x:Name="FocusStates">
-
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ElevatedButtonBackgroundFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ElevatedButtonIconForegroundFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ElevatedButtonForegroundFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrushFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource ElevatedButtonBackgroundPointerFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ElevatedButtonIconForegroundPointerFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ElevatedButtonForegroundPointerFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrushPointerFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -172,16 +454,16 @@
 
 										<ContentPresenter x:Name="IconPresenter"
 														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-														  MinWidth="18"
-														  HorizontalAlignment="Stretch"
-														  VerticalAlignment="Stretch"
+														  MinWidth="{StaticResource ButtonIconMinWidth}"
+														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
+														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 										<ContentPresenter x:Name="ContentPresenter"
 														  Grid.Column="1"
-														  Margin="8,0"
+														  Margin="{StaticResource ButtonContentMargin}"
 														  Content="{TemplateBinding Content}"
 														  ContentTemplate="{TemplateBinding ContentTemplate}"
 														  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -206,48 +488,53 @@
 		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource OnPrimaryBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource PrimaryBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledButtonBorderBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
-										  Margin="0"
-										  Elevation="0"
+										  Margin="{StaticResource ButtonMargin}"
+										  Elevation="{StaticResource ButtonElevation}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForeground}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnPrimaryHoverBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonBackgroundPointerOver}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnPrimaryPressedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonBackgroundPressed}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background"
-												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
-										<Setter Target="IconPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -256,15 +543,19 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnPrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonBackgroundFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnPrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonBackgroundPointerFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPointerFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPointerFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -299,16 +590,16 @@
 
 										<ContentPresenter x:Name="IconPresenter"
 														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-														  MinWidth="18"
-														  HorizontalAlignment="Stretch"
-														  VerticalAlignment="Stretch"
+														  MinWidth="{StaticResource ButtonIconMinWidth}"
+														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
+														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 										<ContentPresenter x:Name="ContentPresenter"
 														  Grid.Column="1"
-														  Margin="8,0"
+														  Margin="{StaticResource ButtonContentMargin}"
 														  Content="{TemplateBinding Content}"
 														  ContentTemplate="{TemplateBinding ContentTemplate}"
 														  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -328,53 +619,58 @@
 		</Setter>
 	</Style>
 
-	<!-- FILLED TONAL-->
+	<!-- FILLED TONAL -->
 	<Style x:Key="MaterialFilledTonalButtonStyle"
 		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource OnSecondaryContainerBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource SecondaryContainerBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledTonalButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
-										  Margin="0"
-										  Elevation="0"
+										  Margin="{StaticResource ButtonMargin}"
+										  Elevation="{StaticResource ButtonElevation}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnSecondaryContainerHoverBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerOver}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnSecondaryContainerPressedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonBackgroundPressed}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background"
-												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
-										<Setter Target="IconPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -383,15 +679,19 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnSecondaryContainerFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonBackgroundFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource OnSecondaryContainerFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundPointerFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -426,16 +726,16 @@
 
 										<ContentPresenter x:Name="IconPresenter"
 														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-														  MinWidth="18"
-														  HorizontalAlignment="Stretch"
-														  VerticalAlignment="Stretch"
+														  MinWidth="{StaticResource ButtonIconMinWidth}"
+														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
+														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 										<ContentPresenter x:Name="ContentPresenter"
 														  Grid.Column="1"
-														  Margin="8,0"
+														  Margin="{StaticResource ButtonContentMargin}"
 														  Content="{TemplateBinding Content}"
 														  ContentTemplate="{TemplateBinding ContentTemplate}"
 														  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -455,21 +755,17 @@
 		</Setter>
 	</Style>
 
-	<!-- OUTLINED-->
+	<!-- OUTLINED -->
 	<Style x:Key="MaterialOutlinedButtonStyle"
 		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource PrimaryBrush}" />
-		<!-- Following Material M3 Guidelines and Uno Figma file: -->
+		<Setter Property="Foreground" Value="{ThemeResource OutlinedButtonForeground}" />
+		<!-- Following  M3 Guidelines and Uno Figma file: -->
 		<!-- Background is Optional and Default is Transparent -->
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderThickness"
-				Value="{StaticResource MaterialOutlinedButtonBorderThickness}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource MaterialOutlinedButtonBorderBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OutlinedButtonBackground}" />
+		<Setter Property="BorderThickness" Value="{StaticResource OutlinedButtonBorderThickness}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -484,30 +780,35 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OutlinedButtonIconForeground}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryHoverBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OutlinedButtonBackgroundPointerOver}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OutlinedButtonIconForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryPressedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OutlinedButtonBackgroundPressed}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OutlinedButtonIconForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush"
-												Value="{ThemeResource OnSurfaceDisabledLowBrush}" />
-										<Setter Target="IconPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBackgroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OutlinedButtonIconForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -516,15 +817,19 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OutlinedButtonBackgroundFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OutlinedButtonIconForegroundFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource OutlinedButtonBackgroundPointerFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OutlinedButtonIconForegroundPointerFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPointerFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushPointerFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -553,16 +858,16 @@
 
 									<ContentPresenter x:Name="IconPresenter"
 													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-													  MinWidth="18"
-													  HorizontalAlignment="Stretch"
-													  VerticalAlignment="Stretch"
+													  MinWidth="{StaticResource ButtonIconMinWidth}"
+													  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
+													  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 									<ContentPresenter x:Name="ContentPresenter"
 													  Grid.Column="1"
-													  Margin="8,0"
+													  Margin="{StaticResource ButtonContentMargin}"
 													  Content="{TemplateBinding Content}"
 													  ContentTemplate="{TemplateBinding ContentTemplate}"
 													  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -586,12 +891,10 @@
 		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
 
-		<Setter Property="Foreground"
-				Value="{ThemeResource PrimaryBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Padding"
-				Value="{StaticResource MaterialTextButtonPadding}" />
+		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource TextButtonBackground}" />
+		<Setter Property="Padding" Value="{StaticResource TextButtonPadding}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource TextButtonBorderBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -606,28 +909,35 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextButtonIconForeground}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryHoverBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource TextButtonBackgroundPointerOver}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextButtonIconForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryPressedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource TextButtonBackgroundPressed}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextButtonIconForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="IconPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextButtonIconForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -636,15 +946,19 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource TextButtonBackgroundFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextButtonIconForegroundFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerFocused">
 									<VisualState.Setters>
-										<Setter Target="StateLayer.Background"
-												Value="{ThemeResource PrimaryFocusedBrush}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource TextButtonBackgroundPointerFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextButtonIconForegroundPointerFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPointerFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushPointerFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -673,17 +987,17 @@
 
 									<ContentPresenter x:Name="IconPresenter"
 													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-													  MinWidth="18"
-													  Margin="0,0,8,0"
-													  HorizontalAlignment="Stretch"
-													  VerticalAlignment="Stretch"
+													  Margin="{StaticResource TextButtonIconMargin}"
+													  MinWidth="{StaticResource ButtonIconMinWidth}"
+													  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
+													  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 									<ContentPresenter x:Name="ContentPresenter"
 													  Grid.Column="1"
-													  Margin="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTextButtonMarginConverter}, FallbackValue=0, TargetNullValue=0}"
+													  Margin="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTextButtonMarginConverter}, FallbackValue=0, TargetNullValue=0}"
 													  Content="{TemplateBinding Content}"
 													  ContentTemplate="{TemplateBinding ContentTemplate}"
 													  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -706,10 +1020,8 @@
 	<Style x:Key="MaterialIconButtonStyle"
 		   BasedOn="{StaticResource MaterialBaseButtonStyle}"
 		   TargetType="Button">
-		<Setter Property="Foreground"
-				Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
+		<Setter Property="Background" Value="Transparent" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -724,51 +1036,47 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity"
-												Value="1" />
+										<Setter Target="HoverOverlay.Opacity" Value="{StaticResource IconButtonOpacityVisibleState}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="PressedOverlay.Opacity" Value="{StaticResource IconButtonOpacityVisibleState}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity"
-												Value="1" />
+										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource IconButtonOpacityVisibleState}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource OnSurfaceLowBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- Ellipse for PointedOver State -->
+						<!-- Ellipse for PointerOver State -->
 						<Ellipse x:Name="HoverOverlay"
-								 HorizontalAlignment="Stretch"
-								 VerticalAlignment="Stretch"
-								 Fill="{ThemeResource PrimaryHoverBrush}"
-								 Opacity="0" />
+								 HorizontalAlignment="{StaticResource IconButtonEllipseHorizontalAlignment}"
+								 VerticalAlignment="{StaticResource IconButtonEllipseVerticalAlignment}"
+								 Fill="{ThemeResource IconButtonEllipseFillPointerOver}"
+								 Opacity="{StaticResource IconButtonOpacityHiddenState}" />
 
 						<!-- Ellipse for Pressed State -->
 						<Ellipse x:Name="PressedOverlay"
-								 HorizontalAlignment="Stretch"
-								 VerticalAlignment="Stretch"
-								 Fill="{ThemeResource PrimaryPressedBrush}"
-								 Opacity="0" />
+								 HorizontalAlignment="{StaticResource IconButtonEllipseHorizontalAlignment}"
+								 VerticalAlignment="{StaticResource IconButtonEllipseVerticalAlignment}"
+								 Fill="{ThemeResource IconButtonEllipseFillPressed}"
+								 Opacity="{StaticResource IconButtonOpacityHiddenState}" />
 
 						<!-- Ellipse for Focused State -->
 						<Ellipse x:Name="FocusedOverlay"
-								 HorizontalAlignment="Stretch"
-								 VerticalAlignment="Stretch"
-								 Fill="{ThemeResource PrimaryFocusedBrush}"
-								 Opacity="0" />
+								 HorizontalAlignment="{StaticResource IconButtonEllipseHorizontalAlignment}"
+								 VerticalAlignment="{StaticResource IconButtonEllipseVerticalAlignment}"
+								 Fill="{ThemeResource IconButtonEllipseFillFocused}"
+								 Opacity="{StaticResource IconButtonOpacityHiddenState}" />
 
 						<!-- Content -->
 						<ContentPresenter x:Name="ContentPresenter"

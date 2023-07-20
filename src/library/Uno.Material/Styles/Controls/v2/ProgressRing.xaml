@@ -10,30 +10,48 @@
 					mc:Ignorable="d not_win lottie_not_win">
 
 	<lottie_win:LottieVisualSource x:Key="M3MaterialDeterminateAnimation_Win"
-								UriSource="ms-appx:///Uno.Material/Assets/MaterialDeterminate.json" />
+								   UriSource="ms-appx:///Uno.Material/Assets/MaterialDeterminate.json" />
 	<lottie_win:LottieVisualSource x:Key="M3MaterialIndeterminateAnimation_Win"
-								UriSource="ms-appx:///Uno.Material/Assets/MaterialIndeterminate.json" />
+								   UriSource="ms-appx:///Uno.Material/Assets/MaterialIndeterminate.json" />
 
 	<lottie_not_win:LottieVisualSource x:Key="M3MaterialDeterminateAnimation_Uno"
 									   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialDeterminate.json" />
 	<lottie_not_win:LottieVisualSource x:Key="M3MaterialIndeterminateAnimation_Uno"
 									   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialIndeterminate.json" />
 
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<!--MaterialProgressRingStyle-->
+			<StaticResource x:Key="ProgressRingForeground"
+							ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground"
+							ResourceKey="SystemControlTransparentBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<!--MaterialProgressRingStyle-->
+			<StaticResource x:Key="ProgressRingForeground"
+							ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground"
+							ResourceKey="SystemControlTransparentBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+	
 	<!-- WinUI 3 currently does not support the DeterminateSource and IndeterminateSource properties on Windows -->
 	<Style x:Key="MaterialProgressRingStyle"
 		   TargetType="muxc:ProgressRing">
 		<win:Setter Property="DeterminateSource"
-						   Value="{StaticResource M3MaterialDeterminateAnimation_Win}" />
+					Value="{StaticResource M3MaterialDeterminateAnimation_Win}" />
 		<win:Setter Property="IndeterminateSource"
-						   Value="{StaticResource M3MaterialIndeterminateAnimation_Win}" />
+					Value="{StaticResource M3MaterialIndeterminateAnimation_Win}" />
 		<not_win:Setter Property="DeterminateSource"
-							   Value="{StaticResource M3MaterialDeterminateAnimation_Uno}" />
+						Value="{StaticResource M3MaterialDeterminateAnimation_Uno}" />
 		<not_win:Setter Property="IndeterminateSource"
-							   Value="{StaticResource M3MaterialIndeterminateAnimation_Uno}" />
+						Value="{StaticResource M3MaterialIndeterminateAnimation_Uno}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource PrimaryBrush}" />
+				Value="{ThemeResource ProgressRingForeground}" />
 		<Setter Property="Background"
-				Value="Transparent" />
+				Value="{ThemeResource ProgressRingBackground}" />
 	</Style>
 
 </ResourceDictionary>

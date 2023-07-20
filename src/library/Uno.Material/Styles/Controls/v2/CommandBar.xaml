@@ -6,6 +6,7 @@
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:android="http://uno.ui/android"
 					xmlns:ios="http://uno.ui/ios"
+					xmlns:uuc="using:Uno.UI.Controls"
 					mc:Ignorable="android ios">
 
 	<x:Double x:Key="MaterialCommandBarElevation">4</x:Double>
@@ -47,12 +48,12 @@
 		<Border BorderBrush="{TemplateBinding Background}"
 				BorderThickness="{TemplateBinding Padding}"
 				Background="{TemplateBinding Background}">
-			<NativeCommandBarPresenter Height="44"/>
+			<uuc:NativeCommandBarPresenter Height="44"/>
 		</Border>
 	</ios:ControlTemplate>
 	<android:ControlTemplate x:Key="NativeM3CommandBarTemplate"
 							 TargetType="CommandBar">
-		<NativeCommandBarPresenter />
+		<uuc:NativeCommandBarPresenter />
 	</android:ControlTemplate>
 
 	<ControlTemplate x:Key="MaterialXamlCommandBarTemplate"
