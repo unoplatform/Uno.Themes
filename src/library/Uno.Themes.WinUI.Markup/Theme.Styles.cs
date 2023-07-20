@@ -7,63 +7,6 @@ namespace Uno.Themes.Markup
 	{
 		public static class Styles
 		{
-			public static class Button
-			{
-				[ResourceKeyDefinition(typeof(Style), "ElevatedButtonStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Elevated => new("ElevatedButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "FilledButtonStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Filled => new("FilledButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "FilledTonalButtonStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> FilledTonal => new("FilledTonalButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "OutlinedButtonStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Outlined => new("OutlinedButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "TextButtonStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Text => new("TextButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "IconButtonStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Icon => new("IconButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "FabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Fab => new("FabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SurfaceFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SurfaceFab => new("SurfaceFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SecondaryFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SecondaryFab => new("SecondaryFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "TertiaryFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> TertiaryFab => new("TertiaryFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SmallFab => new("SmallFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SurfaceSmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SurfaceSmallFab => new("SurfaceSmallFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SecondarySmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SecondarySmallFab => new("SecondarySmallFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "TertiarySmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> TertiarySmallFab => new("TertiarySmallFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "LargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> LargeFab => new("LargeFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SurfaceLargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SurfaceLargeFab => new("SurfaceLargeFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SecondaryLargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SecondaryLargeFab => new("SecondaryLargeFabStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "TertiaryLargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> TertiaryLargeFab => new("TertiaryLargeFabStyle");
-			}
-
 			public static class CalendarDatePicker
 			{
 				[ResourceKeyDefinition(typeof(Style), "CalendarDatePickerStyle", TargetType = typeof(CalendarDatePicker))]
