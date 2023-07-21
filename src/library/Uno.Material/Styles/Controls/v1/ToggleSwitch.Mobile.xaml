@@ -10,6 +10,7 @@
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:macos="http://uno.ui/macos"
 					xmlns:uuc="using:Uno.UI.Controls"
+					xmlns:uuvc="using:Uno.UI.Views.Controls"
 					mc:Ignorable="ios android xamarin wasm macos">
 
 	<ios:Style x:Key="MaterialToggleSwitchStyle"
@@ -51,7 +52,7 @@
 										  Margin="0,8,0,5" />
 
 						<!-- Do not add x:Name to BindableUiSwitch or else page will not load -->
-						<uuc:BindableUISwitch Background="{TemplateBinding Foreground}"
+						<uuvc:BindableUISwitch Background="{TemplateBinding Foreground}"
 										  IsOn="{TemplateBinding IsOn, Mode=TwoWay}"
 										  Enabled="{TemplateBinding IsEnabled}" />
 					</StackPanel>

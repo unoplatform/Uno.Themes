@@ -6,6 +6,7 @@
 					xmlns:not_mobile="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:todo="what should be done"
 					xmlns:uuc="using:Uno.UI.Controls"
+					xmlns:uuvc="using:Uno.UI.Views.Controls"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="ios android todo">
 
@@ -521,7 +522,7 @@
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
 						<!-- note: BindableUISwitch is a native control and does not support any attached properties nor common FrameworkElement/UIElement properties -->
-						<uuc:BindableUISwitch Background="{TemplateBinding Foreground}"
+						<uuvc:BindableUISwitch Background="{TemplateBinding Foreground}"
 										  Enabled="{TemplateBinding IsEnabled}"
 										  IsOn="{TemplateBinding IsOn, Mode=TwoWay}" />
 					</StackPanel>
