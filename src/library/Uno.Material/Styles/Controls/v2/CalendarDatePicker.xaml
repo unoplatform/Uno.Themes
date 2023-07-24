@@ -92,7 +92,7 @@
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
-    <Style x:Key="MaterialDefaultCalendarDatePickerStyle"
+    <Style x:Key="MaterialCalendarDatePickerStyle"
            TargetType="CalendarDatePicker">
         <Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}" />
         <Setter Property="Background" Value="{ThemeResource CalendarDatePickerBackground}" />
@@ -312,7 +312,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MaterialCalendarDatePickerStyle"
+	<Style x:Key="MaterialDefaultCalendarDatePickerStyle"
            TargetType="CalendarDatePicker"
-           BasedOn="{StaticResource MaterialDefaultCalendarDatePickerStyle}" />
+           BasedOn="{StaticResource MaterialCalendarDatePickerStyle}" />
 </ResourceDictionary>
