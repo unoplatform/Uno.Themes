@@ -100,13 +100,11 @@
 			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocusedPressed" ResourceKey="OnSurfaceLowBrush" />
 			
-			<StaticResource x:Key="ComboBoxOpenedBorderBrush" ResourceKey="PrimaryBrush" />
-			
 			<StaticResource x:Key="ComboBoxLeadingIconForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="ComboBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			
 			<StaticResource x:Key="ComboBoxArrowForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="ComboBoxArrowOpenedForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ComboBoxArrowForegroundOpened" ResourceKey="PrimaryBrush" />
 			
 			<StaticResource x:Key="ComboBoxUpperPlaceHolderForeground" ResourceKey="PrimaryBrush" />
 		</ResourceDictionary>
@@ -189,14 +187,12 @@
 			<StaticResource x:Key="ComboBoxPlaceHolderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="ComboBoxPlaceHolderForegroundFocusedPressed" ResourceKey="OnSurfaceLowBrush" />
-			
-			<StaticResource x:Key="ComboBoxOpenedBorderBrush" ResourceKey="PrimaryBrush" />
-			
+
 			<StaticResource x:Key="ComboBoxLeadingIconForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="ComboBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			
 			<StaticResource x:Key="ComboBoxArrowForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="ComboBoxArrowOpenedForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ComboBoxArrowForegroundOpened" ResourceKey="PrimaryBrush" />
 			
 			<StaticResource x:Key="ComboBoxUpperPlaceHolderForeground" ResourceKey="PrimaryBrush" />
 		</ResourceDictionary>
@@ -516,9 +512,9 @@
 							<VisualStateGroup x:Name="DropDownStates">
 								<VisualState x:Name="Opened">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxOpenedBorderBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
 										<Setter Target="RootGrid.BorderThickness" Value="{StaticResource ComboBoxOpenedBorderThickness}" />
-										<Setter Target="DropDownGlyph_Up.Fill" Value="{ThemeResource ComboBoxArrowOpenedForeground}" />
+										<Setter Target="DropDownGlyph_Up.Fill" Value="{ThemeResource ComboBoxArrowForegroundOpened}" />
 										<Setter Target="DropDownGlyph_Down.Visibility" Value="Collapsed" />
 										<Setter Target="DropDownGlyph_Up.Visibility" Value="Visible" />
 									</VisualState.Setters>
