@@ -28,12 +28,6 @@ namespace Uno.Themes.Markup
 				public static ResourceValue<Style> Secondary => new("SecondaryCheckBoxStyle");
 			}
 
-			public static class ComboBox
-			{
-				[ResourceKeyDefinition(typeof(Style), "ComboBoxStyle", TargetType = typeof(ComboBox))]
-				public static ResourceValue<Style> Default => new("ComboBoxStyle");
-			}
-
 			public static class AppBarButton
 			{
 				[ResourceKeyDefinition(typeof(Style), "AppBarButtonStyle", TargetType = typeof(AppBarButton))]
