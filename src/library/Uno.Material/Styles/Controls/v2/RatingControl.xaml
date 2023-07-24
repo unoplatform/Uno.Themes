@@ -1,0 +1,273 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+                    xmlns:not_win="http://uno.ui/not_win"
+                    mc:Ignorable="not_win">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <x:Double x:Key="RatingControlHeight">32</x:Double>
+			<x:Double x:Key="RatingControlCaptionHeight">32</x:Double>
+			<x:Double x:Key="SecondaryRatingControlCaptionHeight">32</x:Double>
+
+			<!-- Default -->
+            <StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
+
+            <StaticResource x:Key="RatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="RatingControlForegroundSelected" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlForegroundPointerOverUnselected" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlForegroundPointerOverSelected" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlForegroundDisabledSelected" ResourceKey="OnSurfaceLowBrush" />
+
+            <!-- Secondary -->
+            <StaticResource x:Key="SecondaryRatingControlForeground" ResourceKey="SecondaryBrush" />
+
+            <StaticResource x:Key="SecondaryRatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundSelected" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="SecondaryRatingControlPlaceholderForegroundPointerOver" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundPointerOverUnselected" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundPointerOverSelected" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundDisabledSelected" ResourceKey="OnSurfaceLowBrush" />
+
+            <!-- Caption and Fonts -->
+            <StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="RatingControlCaptionFontFamily" ResourceKey="MaterialRegularFontFamily" />
+            <StaticResource x:Key="RatingControlCaptionStyle" ResourceKey="CaptionMedium" />
+            <StaticResource x:Key="RatingControlFontFamily" ResourceKey="SymbolThemeFontFamily" />
+
+            <StaticResource x:Key="SecondaryRatingControlCaptionForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="SecondaryRatingControlCaptionFontFamily" ResourceKey="MaterialRegularFontFamily" />
+            <StaticResource x:Key="SecondaryRatingControlCaptionStyle" ResourceKey="CaptionMedium" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <x:Double x:Key="RatingControlHeight">32</x:Double>
+			<x:Double x:Key="RatingControlCaptionHeight">32</x:Double>
+			<x:Double x:Key="SecondaryRatingControlCaptionHeight">32</x:Double>
+
+			<!-- Default -->
+            <StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
+
+            <StaticResource x:Key="RatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="RatingControlForegroundSelected" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlForegroundPointerOverUnselected" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlForegroundPointerOverSelected" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="RatingControlForegroundDisabledSelected" ResourceKey="OnSurfaceLowBrush" />
+
+            <!-- Secondary -->
+            <StaticResource x:Key="SecondaryRatingControlForeground" ResourceKey="SecondaryBrush" />
+
+            <StaticResource x:Key="SecondaryRatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundSelected" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="SecondaryRatingControlPlaceholderForegroundPointerOver" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundPointerOverUnselected" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundPointerOverSelected" ResourceKey="SecondaryBrush" />
+            <StaticResource x:Key="SecondaryRatingControlForegroundDisabledSelected" ResourceKey="OnSurfaceLowBrush" />
+
+            <!-- Caption and Fonts -->
+            <StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="RatingControlCaptionFontFamily" ResourceKey="MaterialRegularFontFamily" />
+            <StaticResource x:Key="RatingControlCaptionStyle" ResourceKey="CaptionMedium" />
+            <StaticResource x:Key="RatingControlFontFamily" ResourceKey="SymbolThemeFontFamily" />
+
+            <StaticResource x:Key="SecondaryRatingControlCaptionForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="SecondaryRatingControlCaptionFontFamily" ResourceKey="MaterialRegularFontFamily" />
+            <StaticResource x:Key="SecondaryRatingControlCaptionStyle" ResourceKey="CaptionMedium" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <Style x:Key="MaterialRatingControlStyle"
+           TargetType="muxc:RatingControl">
+        <Setter Property="Height" Value="{ThemeResource RatingControlHeight}" />
+        <!-- 9794813: retire these two properties as customisation points once all resource keys available -->
+        <Setter Property="Foreground" Value="{ThemeResource RatingControlForeground}" />
+        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+        <Setter Property="FontFamily" Value="{ThemeResource RatingControlFontFamily}" />
+        <not_win:Setter Property="ItemInfo"
+                        Value="{ThemeResource MUX_RatingControlDefaultFontInfo}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="muxc:RatingControl">
+                    <Grid x:Name="LayoutRoot">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundDisabledSelected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Placeholder">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlPlaceholderForeground}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverPlaceholder">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlPlaceholderForegroundPointerOver}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverUnselected">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundPointerOverUnselected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Set">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundSelected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverSet">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundSelected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <StackPanel Grid.Row="0"
+                                    Margin="-20,-20,-20,-20"
+                                    Orientation="Horizontal">
+                            <StackPanel x:Name="RatingBackgroundStackPanel"
+                                        Margin="20,20,0,20"
+                                        Background="Transparent"
+                                        Orientation="Horizontal" />
+                            <TextBlock x:Name="Caption"
+									   Height="{ThemeResource RatingControlCaptionHeight}"
+                                       Margin="4,9,20,0"
+                                       VerticalAlignment="Center"
+                                       AutomationProperties.AccessibilityView="Raw"
+                                       AutomationProperties.Name="RatingCaption"
+                                       Foreground="{ThemeResource RatingControlCaptionForeground}"
+                                       FontFamily="{ThemeResource RatingControlCaptionFontFamily}"
+                                       IsHitTestVisible="False"
+                                       Style="{ThemeResource RatingControlCaptionStyle}"
+                                       FontWeight="Bold"
+                                       Text="{TemplateBinding Caption}"
+                                       TextLineBounds="TrimToBaseline" />
+                            <!-- 4 = 8 item spacing +4 of magic redline spacing -8 to compensate for scale of the last RatingItem -->
+                            <!--
+                                NB: The redlines say 8px, but it's really 12 px because:
+                                Designer note: The value between the last glyph and first text character is 12px.
+                                (There's 4px of whitespace accounted for in the text area in the redline)
+                            -->
+                            <!-- TODO MSFT: 9925444 Fix vertical alignment in all text scenarios -->
+                        </StackPanel>
+
+                        <ContentPresenter x:Name="ForegroundContentPresenter"
+                                          Grid.Row="0"
+                                          IsHitTestVisible="False">
+                            <!-- Margin is on the StackPanel because ContentPresenter clips differently such that moving the reverse margin up won't work -->
+                            <StackPanel Margin="-40,-40,-40,-40"
+                                        Orientation="Horizontal">
+                                <StackPanel x:Name="RatingForegroundStackPanel"
+                                            Margin="40,40,40,40"
+                                            IsHitTestVisible="False"
+                                            Orientation="Horizontal" />
+                            </StackPanel>
+                        </ContentPresenter>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SecondaryRatingControlStyle"
+           TargetType="muxc:RatingControl"
+           BasedOn="{StaticResource MaterialRatingControlStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource SecondaryRatingControlForeground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="muxc:RatingControl">
+                    <Grid x:Name="LayoutRoot">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundDisabledSelected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Placeholder">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlPlaceholderForeground}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverPlaceholder">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlPlaceholderForegroundPointerOver}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverUnselected">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundPointerOverUnselected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Set">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundSelected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverSet">
+                                    <VisualState.Setters>
+                                        <Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundSelected}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <StackPanel Grid.Row="0"
+                                    Margin="-20,-20,-20,-20"
+                                    Orientation="Horizontal">
+                            <StackPanel x:Name="RatingBackgroundStackPanel"
+                                        Margin="20,20,0,20"
+                                        Background="Transparent"
+                                        Orientation="Horizontal" />
+                            <TextBlock x:Name="Caption"
+									   Height="{ThemeResource SecondaryRatingControlCaptionHeight}"
+                                       Margin="4,9,20,0"
+                                       VerticalAlignment="Center"
+                                       AutomationProperties.AccessibilityView="Raw"
+                                       AutomationProperties.Name="RatingCaption"
+                                       Foreground="{ThemeResource SecondaryRatingControlCaptionForeground}"
+                                       FontFamily="{ThemeResource SecondaryRatingControlCaptionFontFamily}"
+                                       IsHitTestVisible="False"
+                                       Style="{ThemeResource SecondaryRatingControlCaptionStyle}"
+                                       FontWeight="Bold"
+                                       Text="{TemplateBinding Caption}"
+                                       TextLineBounds="TrimToBaseline" />
+                            <!-- 4 = 8 item spacing +4 of magic redline spacing -8 to compensate for scale of the last RatingItem -->
+                            <!--
+                                NB: The redlines say 8px, but it's really 12 px because:
+                                Designer note: The value between the last glyph and first text character is 12px.
+                                (There's 4px of whitespace accounted for in the text area in the redline)
+                            -->
+                            <!-- TODO MSFT: 9925444 Fix vertical alignment in all text scenarios -->
+                        </StackPanel>
+
+                        <ContentPresenter x:Name="ForegroundContentPresenter"
+                                          Grid.Row="0"
+                                          IsHitTestVisible="False">
+                            <!-- Margin is on the StackPanel because ContentPresenter clips differently such that moving the reverse margin up won't work -->
+                            <StackPanel Margin="-40,-40,-40,-40"
+                                        Orientation="Horizontal">
+                                <StackPanel x:Name="RatingForegroundStackPanel"
+                                            Margin="40,40,40,40"
+                                            IsHitTestVisible="False"
+                                            Orientation="Horizontal" />
+                            </StackPanel>
+                        </ContentPresenter>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+	<Style x:Key="MaterialDefaultRatingControlStyle"
+		   TargetType="muxc:RatingControl"
+		   BasedOn="{StaticResource MaterialRatingControlStyle}" />
+</ResourceDictionary>
