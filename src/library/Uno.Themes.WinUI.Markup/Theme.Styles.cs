@@ -103,15 +103,6 @@ namespace Uno.Themes.Markup
 				public static ResourceValue<Style> Default => new("NavigationViewItemStyle");
 			}
 
-			public static class PasswordBox
-			{
-				[ResourceKeyDefinition(typeof(Style), "FilledPasswordBoxStyle", TargetType = typeof(PasswordBox))]
-				public static ResourceValue<Style> Filled => new("FilledPasswordBoxStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "OutlinedPasswordBoxStyle", TargetType = typeof(PasswordBox))]
-				public static ResourceValue<Style> Outlined => new("OutlinedPasswordBoxStyle");
-			}
-
 			public static class PipsPager
 			{
 				[ResourceKeyDefinition(typeof(Style), "PipsPagerStyle", TargetType = typeof(PipsPager))]
