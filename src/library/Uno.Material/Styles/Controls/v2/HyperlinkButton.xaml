@@ -6,7 +6,6 @@
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
-            <!--#region Base Hyperlink Button style-->
             <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
@@ -29,15 +28,9 @@
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
-            <!--#endregion-->
-
-            <!--#region Secondary Hyperlink Button style-->
-            <StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SecondaryBrush" />
-            <!--#endregion-->
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
-            <!--#region Base Hyperlink Button style-->
             <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
@@ -60,11 +53,6 @@
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
-            <!--#endregion-->
-
-            <!--#region Secondary Hyperlink Button style-->
-            <StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SecondaryBrush" />
-            <!--#endregion-->
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
@@ -159,7 +147,7 @@
            TargetType="HyperlinkButton"
            BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
 
-        <Setter Property="Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForeground}" />
+        <Setter Property="Foreground" Value="{ThemeResource SecondaryBrush}" />
     </Style>
 
 	<Style x:Key="MaterialDefaultHyperlinkButtonStyle"
