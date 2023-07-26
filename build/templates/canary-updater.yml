@@ -2,19 +2,11 @@
 
   - task: UseDotNet@2
     condition: eq(variables['IsCanaryBranch'], true)
-    displayName: 'Use .NET 5.0.406'
+    displayName: 'Use .NET 6.0.20'
     retryCountOnTaskFailure: 3
     inputs:
       packageType: runtime
-      version: 5.0.15
-
-  - task: UseDotNet@2
-    condition: eq(variables['IsCanaryBranch'], true)
-    displayName: 'Use .NET runtime 2.2.x'
-    retryCountOnTaskFailure: 3
-    inputs:
-      packageType: runtime
-      version: 2.2.x
+      version: 6.0.20
 
   - task: nventiveCanaryUpdater@5
     displayName: 'Canary Update'
