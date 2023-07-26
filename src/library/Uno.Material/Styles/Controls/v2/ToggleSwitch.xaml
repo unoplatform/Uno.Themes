@@ -3,6 +3,7 @@
 					xmlns:android="http://uno.ui/android"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:wasm="http://uno.ui/wasm"
+					xmlns:skia="http://uno.ui/skia"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:not_win="http://uno.ui/not_win"
@@ -11,7 +12,7 @@
 					xmlns:uuvc="using:Uno.UI.Views.Controls"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:um="using:Uno.Material"
-					mc:Ignorable="ios android wasm todo">
+					mc:Ignorable="ios android wasm skia todo">
 
 	<ResourceDictionary.ThemeDictionaries>
 		
@@ -678,8 +679,8 @@
 										FalseValue="1" />
 
 	<um:FromNullToValueConverter x:Key="OffContentToContentSize"
-										NullValue="12"
-										NotNullValue="17" />
+										NullValue="16"
+										NotNullValue="24" />
 
 	<x:String x:Key="ControlFastOutSlowInKeySpline">0.5,0,0.5,1</x:String>
 
@@ -743,10 +744,10 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PrimaryBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Width" EnableDependentAnimation="True" >
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="18" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="24" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Height" EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="18" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="24" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Width" EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OffContentToContentSize}}" />
@@ -828,17 +829,17 @@
 
 									<VisualState.Setters>
 										<Setter Target="SwitchKnobOn.HorizontalAlignment" Value="Right" />
-										<Setter Target="SwitchKnobOn.Margin" Value="-2,0,1,0" />
+										<Setter Target="SwitchKnobOn.Margin" Value="0,0,2,0" />
+										<Setter Target="SwitchKnobOn.CornerRadius" Value="18" />
 										<Setter Target="SwitchKnobOff.HorizontalAlignment" Value="Left" />
-										<Setter Target="SwitchKnobOff.Margin" Value="1,0,-2,0" />
-										<Setter Target="SwitchKnobOn.CornerRadius" Value="12" />
-										<Setter Target="SwitchKnobOff.RadiusX" Value="12" />
-										<Setter Target="SwitchKnobOff.RadiusY" Value="12" />
+										<Setter Target="SwitchKnobOff.Margin" Value="2,0,0,0" />
+										<Setter Target="SwitchKnobOff.RadiusX" Value="18" />
+										<Setter Target="SwitchKnobOff.RadiusY" Value="18" />
 										<Setter Target="SwitchKnobOnShadow.Visibility" Value="Visible" />
 										<Setter Target="SwitchKnobOffShadow.Visibility" Value="Visible" />
-										<Setter Target="OffIconPresenter.Padding" Value="2,0,0,2" />
-										<win:Setter Target="OnIconPresenter.Padding" Value="0,0,2,4" />
-										<not_win:Setter Target="OnIconPresenter.Padding" Value="0,0,1,2" />
+										
+										<win:Setter Target="OnIconPresenter.Padding" Value="1,0,0,1" />
+										
 										<ios:Setter Target="OnIconPresenter.Padding" Value="0,0,0,2" />
 									</VisualState.Setters>
 
@@ -856,18 +857,17 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PrimaryContainerBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Width" EnableDependentAnimation="True" >
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="21" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="28" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Height" EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="21" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="28" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Width" EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="21" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="28" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Height" EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="21" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="28" />
 										</DoubleAnimationUsingKeyFrames>
-
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow" Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PrimaryPressedBrush}" />
 										</ObjectAnimationUsingKeyFrames>
@@ -880,18 +880,15 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<not_win:Setter Target="SwitchKnobOn.HorizontalAlignment" Value="Right" />
-										<not_win:Setter Target="SwitchKnobOn.Margin" Value="-3,0,3,0" />
-										<win:Setter Target="OffIconPresenter.Padding" Value="0,0,0,2" />
-										<not_win:Setter Target="OffIconPresenter.Padding" Value="0,0,0,3" />
+										<not_win:Setter Target="SwitchKnobOn.Margin" Value="0,0,4,0" />
+										<not_win:Setter Target="OffIconPresenter.Margin" Value="0,0,22,0" />
+										<win:Setter Target="OffIconPresenter.Margin" Value="0,0,22,1" />
 									</VisualState.Setters>
 									
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchHeaderForegroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
-
-										<!--MY TESTS-->										
-										<!--ON-->
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds" Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchOnSurfaceDisabledBrushBackground}" />
 										</ObjectAnimationUsingKeyFrames>
@@ -899,16 +896,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds" Storyboard.TargetProperty="Stroke">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchOnSurfaceDisabledBrushStroke}" />
 										</ObjectAnimationUsingKeyFrames>
-
-										<!--OFF-->
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Stroke">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchOffDisabledBorder}" /> 
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ToggleSwitchOffDisabledBackground}" />
 										</ObjectAnimationUsingKeyFrames>
-										<!--END OF TESTS-->
-										
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource OnSurfaceLowBrush}" />
 										</ObjectAnimationUsingKeyFrames>
@@ -916,10 +909,10 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SurfaceBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Width" EnableDependentAnimation="True" >
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlNormalAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="18" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlNormalAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="24" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn" Storyboard.TargetProperty="Height" EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlNormalAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="18" />
+											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlNormalAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="24" />
 										</DoubleAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OnIconPresenter" Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource OnSurfaceLowBrush}" />
@@ -1110,10 +1103,13 @@
 								</VisualState>
 								<VisualState x:Name="On">
 									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
+										<!--This Animation causes the thumb to go beyond bound limits on On state-->
+										
+										<!--<DoubleAnimation Storyboard.TargetName="KnobTranslateTransform"
 														 Storyboard.TargetProperty="X"
 														 To="20"
-														 Duration="0" />
+														 Duration="0" />-->
+										
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds" Storyboard.TargetProperty="Opacity">
 											<LinearDoubleKeyFrame KeyTime="{StaticResource ControlNormalAnimationDuration}" Value="1" />
 										</DoubleAnimationUsingKeyFrames>
@@ -1182,40 +1178,39 @@
 							<!--Off-->
 							<Rectangle x:Name="OuterBorder"
 									   Grid.Row="1"
-									   Height="24"
-									   Width="40"
-									   RadiusX="12"
-									   RadiusY="12"
+									   Width="52"
+									   Height="32"
+									   RadiusX="15"
+									   RadiusY="15"
 									   Fill="{ThemeResource SurfaceVariantBrush}"
 									   Stroke="{ThemeResource OutlineBrush}"
-									   StrokeThickness="1.5" />
+									   StrokeThickness="2" />
 
 							<!--On-->
 							<Rectangle x:Name="SwitchKnobBounds"
 									   Grid.Row="1"
-									   Height="24"
-									   Width="40"
-									   RadiusX="12"
-									   RadiusY="12"
+									   Width="52"
+                                       Height="32"
+									   RadiusX="15"
+									   RadiusY="15"
 									   Fill="{ThemeResource PrimaryBrush}"
 									   Stroke="{ThemeResource PrimaryBrush}"
-									   StrokeThickness="1.5"
+									   StrokeThickness="2"
 									   Opacity="0" />
 
 							<Grid x:Name="SwitchKnob"
                                   Grid.Row="1"
                                   HorizontalAlignment="Left"
-                                  Width="20"
-                                  Height="34">
+                                  Width="52"
+                                  Height="40">
 								
 								<!--Shadow-->
 								<Border x:Name="SwitchKnobOnShadow"
-										Width="30"
-										Height="30"
-										CornerRadius="15"
+										Width="40"
+										Height="40"
+										CornerRadius="18"
 										Opacity="0"
-										win:Margin="-11,0,-6,0"
-										not_win:Margin="-10,0,-8,0"
+										Margin="20,0,0,0"
 										HorizontalAlignment="Center"
 										Visibility="Collapsed"
 										VerticalAlignment="Center"
@@ -1223,12 +1218,11 @@
 
 								<!--On Thumb-->
 								<Border x:Name="SwitchKnobOn"
-										Width="18"
-										Height="18"
-										CornerRadius="11"
+										Width="24"
+										Height="24"
+										CornerRadius="15"
 										Opacity="0"
-										win:Margin="-2,0,3,0"
-										not_win:Margin="-1,0,1,0"
+										Margin="20,0,0,0"
 										HorizontalAlignment="Center"
 										RenderTransformOrigin="0.5, 0.5"
 										Background="{ThemeResource OnPrimaryBrush}">
@@ -1244,7 +1238,7 @@
 													  Width="18"
 													  VerticalContentAlignment="Center"
 													  HorizontalContentAlignment="Center"
-													  win:Padding="0,0,1,2"
+													  win:Padding="0,0,0,2"
 													  wasm:Padding="0,0,1,2"
 													  not_win:Padding="0,0,0,2"
 													  Foreground="{ThemeResource OnPrimaryContainerBrush}"/>
@@ -1254,11 +1248,11 @@
 
 									<!--Shadow-->
 									<Border x:Name="SwitchKnobOffShadow"
-											Width="30"
-											Height="30"
-											CornerRadius="15"
+											Width="40"
+											Height="40"
+											CornerRadius="50"
 											Opacity="0"
-											Margin="-5,0,-8,0"
+											Margin="0,0,20,0"
 											HorizontalAlignment="Center"
 											Visibility="Collapsed"
 											VerticalAlignment="Center"
@@ -1269,10 +1263,10 @@
 											   Fill="{ThemeResource OnSurfaceVariantBrush}"
 											   Height="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OffContentToContentSize}}"
 											   Width="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OffContentToContentSize}}"
-											   RadiusX="11"
-											   RadiusY="11"
+											   RadiusX="15"
+											   RadiusY="15"
+											   Margin="0,0,20,0"
 											   HorizontalAlignment="Center"
-											   Margin="3,0,0,0"
 											   RenderTransformOrigin="0.5, 0.5">
 										<Rectangle.RenderTransform>
 											<CompositeTransform/>
@@ -1285,10 +1279,11 @@
 													  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToCollapsed}}"
 													  Height="18"
 													  Width="18"
+													  skia:Margin="0,0,21,1"
+													  win:Margin="0,0,21,2"
+													  not_win:Margin="0,0,20,1"
 													  VerticalContentAlignment="Center"
 													  HorizontalContentAlignment="Center"
-													  win:Padding="1,0,0,2"
-													  not_win:Padding="2,0,0,2"
 													  Foreground="{ThemeResource SurfaceVariantBrush}"/>
 								</Grid>
 								<Grid.RenderTransform>
