@@ -17,6 +17,7 @@
       version: 2.2.x
 
   - task: nventiveCanaryUpdater@5
+    displayName: 'Canary Update'
     condition: eq(variables['IsCanaryBranch'], true)
     retryCountOnTaskFailure: 3
     inputs:
@@ -25,7 +26,7 @@
       usePrivateFeed: false
       mergeBranch: true
       branchToMerge: legacy/2x
-      nugetUpdaterVersion: 2.1.1
+      nugetUpdaterVersion: 2.3.0-alpha.42
       packageAuthor: 'nventive,Uno Platform'
       nugetVersion: dev
       useVersionOverrides: true
