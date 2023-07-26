@@ -1,4 +1,4 @@
-steps:
+﻿steps:
 
   - task: UseDotNet@2
     condition: eq(variables['IsCanaryBranch'], true)
@@ -24,8 +24,11 @@ steps:
       useNuGetOrg: true
       usePrivateFeed: false
       mergeBranch: true
-      branchToMerge: master
+      branchToMerge: legacy/2x
       nugetUpdaterVersion: 2.1.1
-      packageAuthor: nventive
+      packageAuthor: 'nventive,Uno Platform'
+      nugetVersion: dev
+      useVersionOverrides: true
+      versionOverridesFile: 'build/uno-4x-overrides.json'
       summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
       resultFile: '$(Build.ArtifactStagingDirectory)/Results.json'
