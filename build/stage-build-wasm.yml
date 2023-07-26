@@ -1,20 +1,5 @@
 ﻿steps:
-- task: UseDotNet@2
-  condition: eq(variables['IsCanaryBranch'], true)
-  inputs:
-    packageType: runtime
-    version: 2.2.x
-
-- task: nventiveCanaryUpdater@5
-  condition: eq(variables['IsCanaryBranch'], true)
-  inputs:
-    solution: Uno.Themes.sln
-    useNuGetOrg: true
-    usePrivateFeed: false
-    mergeBranch: true
-    branchToMerge: master
-    nugetUpdaterVersion: 2.1.1
-    packageAuthor: nventive
+- template: templates/canary-updater.yml
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core SDK 6.0.200'
