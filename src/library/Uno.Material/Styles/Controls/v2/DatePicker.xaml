@@ -8,21 +8,6 @@
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm not_win">
 
-	<x:Double x:Key="DateTimeFlyoutBorderThickness">1</x:Double>
-	<x:Double x:Key="DatePickerSpacerThemeWidth">1</x:Double>
-	<x:Double x:Key="DatePickerHeight">53</x:Double>
-	<x:Double x:Key="DatePickerFlyoutElevation">8</x:Double>
-	<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.65</x:Double>
-	<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.65</x:Double>
-	<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
-	<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
-	<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
-	<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">41</x:Double>
-	<x:Double x:Key="DatePickerFlyoutPresenterHighlightHeight">40</x:Double>
-	<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
-	<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
-	<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
-
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
 			<!-- MaterialDatePickerFlyoutButtonStyle -->
@@ -58,6 +43,26 @@
 			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterFontSize" ResourceKey="ControlContentThemeFontSize" />
 			<!--#endregion-->
+
+			<x:Double x:Key="DatePickerFlyoutBorderThickness">1</x:Double>
+			<x:Double x:Key="DatePickerSpacerThemeWidth">1</x:Double>
+			<x:Double x:Key="DatePickerHeight">53</x:Double>
+			<x:Double x:Key="DatePickerFlyoutElevation">8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">41</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterHighlightHeight">40</x:Double>
+			<x:Double x:Key="DatePickerButtonBottomBorderHeight">2</x:Double>
+			<x:Double x:Key="DatePickerButtonContentHeight">24</x:Double>
+			<Thickness x:Key="DatePickerButtonHeaderMargin">10,8,10,0</Thickness>
+			<Thickness x:Key="DatePickerButtonPlaceholderMargin">4,0,0,0</Thickness>
+			<Thickness x:Key="DatePickerButtonContentMargin">6,24,10,0</Thickness>
+			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
+			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
+			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
@@ -94,6 +99,26 @@
 			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<StaticResource x:Key="DatePickerFlyoutPresenterFontSize" ResourceKey="ControlContentThemeFontSize" />
 			<!--#endregion-->
+
+			<x:Double x:Key="DatePickerFlyoutBorderThickness">1</x:Double>
+			<x:Double x:Key="DatePickerSpacerThemeWidth">1</x:Double>
+			<x:Double x:Key="DatePickerHeight">53</x:Double>
+			<x:Double x:Key="DatePickerFlyoutElevation">8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">41</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterHighlightHeight">40</x:Double>
+			<x:Double x:Key="DatePickerButtonBottomBorderHeight">2</x:Double>
+			<x:Double x:Key="DatePickerButtonContentHeight">24</x:Double>
+			<Thickness x:Key="DatePickerButtonHeaderMargin">10,8,10,0</Thickness>
+			<Thickness x:Key="DatePickerButtonPlaceholderMargin">4,0,0,0</Thickness>
+			<Thickness x:Key="DatePickerButtonContentMargin">6,24,10,0</Thickness>
+			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
+			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
+			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
@@ -102,7 +127,7 @@
 		   TargetType="Button">
 
 		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutButtonBackground}" />
-		<Setter Property="Padding" Value="{StaticResource DatePickerFlyoutButtonPadding}" />
+		<Setter Property="Padding" Value="{ThemeResource DatePickerFlyoutButtonPadding}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -126,12 +151,12 @@
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity" Value="{StaticResource DatePickerFlyoutButtonOpacityPressed}" />
+										<Setter Target="RootGrid.Opacity" Value="{ThemeResource DatePickerFlyoutButtonOpacityPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity" Value="{StaticResource DatePickerFlyoutButtonOpacityDisabled}" />
+										<Setter Target="RootGrid.Opacity" Value="{ThemeResource DatePickerFlyoutButtonOpacityDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -144,16 +169,16 @@
 
 	<not_win:Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
 				   TargetType="DatePickerFlyoutPresenter">
-		<Setter Property="Width" Value="{StaticResource DatePickerFlyoutPresenterWidth}" />
-		<Setter Property="MinWidth" Value="{StaticResource DatePickerFlyoutPresenterMinWidth}" />
-		<Setter Property="MaxHeight" Value="{StaticResource DatePickerFlyoutPresenterMaxHeight}" />
+		<Setter Property="Width" Value="{ThemeResource DatePickerFlyoutPresenterWidth}" />
+		<Setter Property="MinWidth" Value="{ThemeResource DatePickerFlyoutPresenterMinWidth}" />
+		<Setter Property="MaxHeight" Value="{ThemeResource DatePickerFlyoutPresenterMaxHeight}" />
 		<Setter Property="IsTabStop" Value="False" />
 		<Setter Property="FontFamily" Value="{ThemeResource DatePickerFlyoutPresenterFontFamily}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="FontSize" Value="{ThemeResource DatePickerFlyoutPresenterFontSize}" />
 		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutPresenterBackground}" />
 		<Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
-		<Setter Property="BorderThickness" Value="{StaticResource DateTimeFlyoutBorderThickness}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource DatePickerFlyoutBorderThickness}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerFlyoutPresenterBorderBrush}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerFlyoutPresenterCornerRadius}" />
 		<Setter Property="Template">
@@ -164,7 +189,7 @@
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  BorderThickness="{TemplateBinding BorderThickness}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
-										  Elevation="{StaticResource DatePickerFlyoutElevation}"
+										  Elevation="{ThemeResource DatePickerFlyoutElevation}"
 										  ShadowColor="Black">
 						<Border x:Name="Background">
 							<Grid x:Name="ContentPanel">
@@ -247,8 +272,8 @@
 		<Setter Property="Foreground" Value="{ThemeResource DatePickerButtonForeground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrush}" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
-		<Setter Property="Height" Value="{StaticResource DatePickerHeight}" />
-		<Setter Property="CornerRadius" Value="{StaticResource DatePickerCornerRadius}" />
+		<Setter Property="Height" Value="{ThemeResource DatePickerHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerCornerRadius}" />
 		<not_win:Setter Property="FlyoutPresenterStyle"
 						Value="{StaticResource MaterialDatePickerFlyoutPresenterStyle}" />
 
@@ -272,13 +297,13 @@
 
 								<!-- Border -->
 								<Rectangle x:Name="BottomBorder"
-										   Height="2"
+										   Height="{ThemeResource DatePickerButtonBottomBorderHeight}"
 										   VerticalAlignment="Bottom"
 										   Fill="{TemplateBinding BorderBrush}" />
 
 								<!-- Header -->
 								<TextBlock x:Name="HeaderTextBlock"
-										   Margin="10,8,10,0"
+										   Margin="{ThemeResource DatePickerButtonHeaderMargin}"
 										   HorizontalAlignment="Stretch"
 										   VerticalAlignment="Top"
 										   Foreground="{TemplateBinding Foreground}"
@@ -287,8 +312,8 @@
 										   TextWrapping="Wrap" />
 
 								<Grid x:Name="FlyoutButtonContentGrid"
-									  Height="24"
-									  Margin="6,24,10,0"
+									  Height="{ThemeResource DatePickerButtonContentHeight}"
+									  Margin="{ThemeResource DatePickerButtonContentMargin}"
 									  VerticalAlignment="Top">
 
 									<!-- DateText -->
@@ -299,7 +324,7 @@
 
 									<!-- PlaceholderText -->
 									<TextBlock x:Name="PlaceholderText"
-											   Margin="4,0,0,0"
+											   Margin="{ThemeResource DatePickerButtonPlaceholderMargin}"
 											   Foreground="{ThemeResource DatePickerPlaceholderTextForeground}"
 											   Style="{StaticResource MaterialBodyMedium}"
 											   Text="{TemplateBinding Header}"
