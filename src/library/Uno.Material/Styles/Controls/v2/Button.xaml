@@ -14,24 +14,6 @@
 								 NullValue="0" />
 
 	<!-- Variables -->
-	<x:Double x:Key="ButtonMinHeight">40</x:Double>
-	<x:Double x:Key="ButtonMinWidth">40</x:Double>
-	<x:Double x:Key="ButtonIconMinWidth">18</x:Double>
-	<x:Double x:Key="ElevatedButtonElevation">1</x:Double>
-	<x:Double x:Key="ElevatedButtonElevationDisabled">0</x:Double>
-	<x:Double x:Key="ButtonElevation">0</x:Double>
-	<x:Double x:Key="IconButtonOpacityVisibleState">1</x:Double>
-	<x:Double x:Key="IconButtonOpacityHiddenState">0</x:Double>
-	<Thickness x:Key="ButtonPadding">16,0</Thickness>
-	<Thickness x:Key="TextButtonPadding">12,0</Thickness>
-	<Thickness x:Key="TextButtonIconMargin">0,0,8,0</Thickness>
-	<Thickness x:Key="ButtonBorderThickness">0</Thickness>
-	<Thickness x:Key="OutlinedButtonBorderThickness">1</Thickness>
-	<Thickness x:Key="ElevatedButtonMargin">0,0,0,1</Thickness>
-	<Thickness x:Key="ElevatedButtonDisabledMargin">0</Thickness>
-	<Thickness x:Key="ButtonContentMargin">8,0</Thickness>
-	<Thickness x:Key="ButtonMargin">0</Thickness>
-	<CornerRadius x:Key="ButtonCornerRadius">20</CornerRadius>
 	<x:String x:Key="ButtonVerticalContentAlignment">Center</x:String>
 	<x:String x:Key="ButtonHorizontalContentAlignment">Center</x:String>
 	<x:String x:Key="ButtonIconHorizontalAlignment">Stretch</x:String>
@@ -178,6 +160,25 @@
 			<StaticResource x:Key="IconButtonEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
 			<StaticResource x:Key="IconButtonEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
 			<StaticResource x:Key="IconButtonEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+
+			<x:Double x:Key="ButtonMinHeight">40</x:Double>
+			<x:Double x:Key="ButtonMinWidth">40</x:Double>
+			<x:Double x:Key="ButtonIconMinWidth">18</x:Double>
+			<x:Double x:Key="ElevatedButtonElevation">1</x:Double>
+			<x:Double x:Key="ElevatedButtonElevationDisabled">0</x:Double>
+			<x:Double x:Key="ButtonElevation">0</x:Double>
+			<x:Double x:Key="IconButtonOpacityVisibleState">1</x:Double>
+			<x:Double x:Key="IconButtonOpacityHiddenState">0</x:Double>
+			<Thickness x:Key="ButtonPadding">16,0</Thickness>
+			<Thickness x:Key="TextButtonPadding">12,0</Thickness>
+			<Thickness x:Key="TextButtonIconMargin">0,0,8,0</Thickness>
+			<Thickness x:Key="ButtonBorderThickness">0</Thickness>
+			<Thickness x:Key="OutlinedButtonBorderThickness">1</Thickness>
+			<Thickness x:Key="ElevatedButtonMargin">0,0,0,1</Thickness>
+			<Thickness x:Key="ElevatedButtonDisabledMargin">0</Thickness>
+			<Thickness x:Key="ButtonContentMargin">8,0</Thickness>
+			<Thickness x:Key="ButtonMargin">0</Thickness>
+			<CornerRadius x:Key="ButtonCornerRadius">20</CornerRadius>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
@@ -317,6 +318,25 @@
 			<StaticResource x:Key="IconButtonEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
 			<StaticResource x:Key="IconButtonEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
 			<StaticResource x:Key="IconButtonEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+
+			<x:Double x:Key="ButtonMinHeight">40</x:Double>
+			<x:Double x:Key="ButtonMinWidth">40</x:Double>
+			<x:Double x:Key="ButtonIconMinWidth">18</x:Double>
+			<x:Double x:Key="ElevatedButtonElevation">1</x:Double>
+			<x:Double x:Key="ElevatedButtonElevationDisabled">0</x:Double>
+			<x:Double x:Key="ButtonElevation">0</x:Double>
+			<x:Double x:Key="IconButtonOpacityVisibleState">1</x:Double>
+			<x:Double x:Key="IconButtonOpacityHiddenState">0</x:Double>
+			<Thickness x:Key="ButtonPadding">16,0</Thickness>
+			<Thickness x:Key="TextButtonPadding">12,0</Thickness>
+			<Thickness x:Key="TextButtonIconMargin">0,0,8,0</Thickness>
+			<Thickness x:Key="ButtonBorderThickness">0</Thickness>
+			<Thickness x:Key="OutlinedButtonBorderThickness">1</Thickness>
+			<Thickness x:Key="ElevatedButtonMargin">0,0,0,1</Thickness>
+			<Thickness x:Key="ElevatedButtonDisabledMargin">0</Thickness>
+			<Thickness x:Key="ButtonContentMargin">8,0</Thickness>
+			<Thickness x:Key="ButtonMargin">0</Thickness>
+			<CornerRadius x:Key="ButtonCornerRadius">20</CornerRadius>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
@@ -331,11 +351,11 @@
 		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelLargeCharacterSpacing}" />
 		<!-- End: Label Large Typo -->
 
-		<Setter Property="MinHeight" Value="{StaticResource ButtonMinHeight}" />
-		<Setter Property="MinWidth" Value="{StaticResource ButtonMinWidth}" />
-		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
-		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
-		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="MinHeight" Value="{ThemeResource ButtonMinHeight}" />
+		<Setter Property="MinWidth" Value="{ThemeResource ButtonMinWidth}" />
+		<Setter Property="Padding" Value="{ThemeResource ButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource ButtonCornerRadius}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThickness}" />
 		<Setter Property="VerticalContentAlignment" Value="{StaticResource ButtonVerticalContentAlignment}" />
 		<Setter Property="HorizontalContentAlignment" Value="{StaticResource ButtonHorizontalContentAlignment}" />
 
@@ -350,7 +370,7 @@
 
 		<Setter Property="Foreground" Value="{ThemeResource ElevatedButtonForeground}" />
 		<Setter Property="Background" Value="{ThemeResource ElevatedButtonBackground}" />
-		<Setter Property="um:ControlExtensions.Elevation" Value="{StaticResource ElevatedButtonElevation}" />
+		<Setter Property="um:ControlExtensions.Elevation" Value="{ThemeResource ElevatedButtonElevation}" />
 		<Setter Property="um:ControlExtensions.TintedBackground" Value="{x:Null}" />
 		<Setter Property="um:ControlExtensions.IsTintEnabled" Value="{StaticResource ElevatedButtonIsTintEnabled}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrush}" />
@@ -360,7 +380,7 @@
 				<ControlTemplate TargetType="Button">
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
-										  Margin="{StaticResource ElevatedButtonMargin}"
+										  Margin="{ThemeResource ElevatedButtonMargin}"
 										  Elevation="{Binding Path=(um:ControlExtensions.Elevation), RelativeSource={RelativeSource TemplatedParent}}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
@@ -398,8 +418,8 @@
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ElevatedButtonIconForegroundDisabled}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ElevatedButtonForegroundDisabled}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrushDisabled}" />
-										<Setter Target="ElevatedView.Margin" Value="{StaticResource ElevatedButtonDisabledMargin}" />
-										<Setter Target="ElevatedView.Elevation" Value="{StaticResource ElevatedButtonElevationDisabled}" />
+										<Setter Target="ElevatedView.Margin" Value="{ThemeResource ElevatedButtonDisabledMargin}" />
+										<Setter Target="ElevatedView.Elevation" Value="{ThemeResource ElevatedButtonElevationDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -454,7 +474,7 @@
 
 										<ContentPresenter x:Name="IconPresenter"
 														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-														  MinWidth="{StaticResource ButtonIconMinWidth}"
+														  MinWidth="{ThemeResource ButtonIconMinWidth}"
 														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
@@ -463,7 +483,7 @@
 
 										<ContentPresenter x:Name="ContentPresenter"
 														  Grid.Column="1"
-														  Margin="{StaticResource ButtonContentMargin}"
+														  Margin="{ThemeResource ButtonContentMargin}"
 														  Content="{TemplateBinding Content}"
 														  ContentTemplate="{TemplateBinding ContentTemplate}"
 														  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -497,8 +517,8 @@
 				<ControlTemplate TargetType="Button">
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
-										  Margin="{StaticResource ButtonMargin}"
-										  Elevation="{StaticResource ButtonElevation}"
+										  Margin="{ThemeResource ButtonMargin}"
+										  Elevation="{ThemeResource ButtonElevation}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
 
@@ -590,7 +610,7 @@
 
 										<ContentPresenter x:Name="IconPresenter"
 														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-														  MinWidth="{StaticResource ButtonIconMinWidth}"
+														  MinWidth="{ThemeResource ButtonIconMinWidth}"
 														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
@@ -599,7 +619,7 @@
 
 										<ContentPresenter x:Name="ContentPresenter"
 														  Grid.Column="1"
-														  Margin="{StaticResource ButtonContentMargin}"
+														  Margin="{ThemeResource ButtonContentMargin}"
 														  Content="{TemplateBinding Content}"
 														  ContentTemplate="{TemplateBinding ContentTemplate}"
 														  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -633,8 +653,8 @@
 				<ControlTemplate TargetType="Button">
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
-										  Margin="{StaticResource ButtonMargin}"
-										  Elevation="{StaticResource ButtonElevation}"
+										  Margin="{ThemeResource ButtonMargin}"
+										  Elevation="{ThemeResource ButtonElevation}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
 
@@ -726,7 +746,7 @@
 
 										<ContentPresenter x:Name="IconPresenter"
 														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-														  MinWidth="{StaticResource ButtonIconMinWidth}"
+														  MinWidth="{ThemeResource ButtonIconMinWidth}"
 														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
@@ -735,7 +755,7 @@
 
 										<ContentPresenter x:Name="ContentPresenter"
 														  Grid.Column="1"
-														  Margin="{StaticResource ButtonContentMargin}"
+														  Margin="{ThemeResource ButtonContentMargin}"
 														  Content="{TemplateBinding Content}"
 														  ContentTemplate="{TemplateBinding ContentTemplate}"
 														  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -764,7 +784,7 @@
 		<!-- Following  M3 Guidelines and Uno Figma file: -->
 		<!-- Background is Optional and Default is Transparent -->
 		<Setter Property="Background" Value="{ThemeResource OutlinedButtonBackground}" />
-		<Setter Property="BorderThickness" Value="{StaticResource OutlinedButtonBorderThickness}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource OutlinedButtonBorderThickness}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrush}" />
 
 		<Setter Property="Template">
@@ -858,7 +878,7 @@
 
 									<ContentPresenter x:Name="IconPresenter"
 													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-													  MinWidth="{StaticResource ButtonIconMinWidth}"
+													  MinWidth="{ThemeResource ButtonIconMinWidth}"
 													  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 													  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
@@ -867,7 +887,7 @@
 
 									<ContentPresenter x:Name="ContentPresenter"
 													  Grid.Column="1"
-													  Margin="{StaticResource ButtonContentMargin}"
+													  Margin="{ThemeResource ButtonContentMargin}"
 													  Content="{TemplateBinding Content}"
 													  ContentTemplate="{TemplateBinding ContentTemplate}"
 													  ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -893,7 +913,7 @@
 
 		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
 		<Setter Property="Background" Value="{ThemeResource TextButtonBackground}" />
-		<Setter Property="Padding" Value="{StaticResource TextButtonPadding}" />
+		<Setter Property="Padding" Value="{ThemeResource TextButtonPadding}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource TextButtonBorderBrush}" />
 
 		<Setter Property="Template">
@@ -987,8 +1007,8 @@
 
 									<ContentPresenter x:Name="IconPresenter"
 													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-													  Margin="{StaticResource TextButtonIconMargin}"
-													  MinWidth="{StaticResource ButtonIconMinWidth}"
+													  Margin="{ThemeResource TextButtonIconMargin}"
+													  MinWidth="{ThemeResource ButtonIconMinWidth}"
 													  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 													  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
 													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
@@ -1036,17 +1056,17 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="HoverOverlay.Opacity" Value="{StaticResource IconButtonOpacityVisibleState}" />
+										<Setter Target="HoverOverlay.Opacity" Value="{ThemeResource IconButtonOpacityVisibleState}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="PressedOverlay.Opacity" Value="{StaticResource IconButtonOpacityVisibleState}" />
+										<Setter Target="PressedOverlay.Opacity" Value="{ThemeResource IconButtonOpacityVisibleState}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusedOverlay.Opacity" Value="{StaticResource IconButtonOpacityVisibleState}" />
+										<Setter Target="FocusedOverlay.Opacity" Value="{ThemeResource IconButtonOpacityVisibleState}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
@@ -1062,21 +1082,21 @@
 								 HorizontalAlignment="{StaticResource IconButtonEllipseHorizontalAlignment}"
 								 VerticalAlignment="{StaticResource IconButtonEllipseVerticalAlignment}"
 								 Fill="{ThemeResource IconButtonEllipseFillPointerOver}"
-								 Opacity="{StaticResource IconButtonOpacityHiddenState}" />
+								 Opacity="{ThemeResource IconButtonOpacityHiddenState}" />
 
 						<!-- Ellipse for Pressed State -->
 						<Ellipse x:Name="PressedOverlay"
 								 HorizontalAlignment="{StaticResource IconButtonEllipseHorizontalAlignment}"
 								 VerticalAlignment="{StaticResource IconButtonEllipseVerticalAlignment}"
 								 Fill="{ThemeResource IconButtonEllipseFillPressed}"
-								 Opacity="{StaticResource IconButtonOpacityHiddenState}" />
+								 Opacity="{ThemeResource IconButtonOpacityHiddenState}" />
 
 						<!-- Ellipse for Focused State -->
 						<Ellipse x:Name="FocusedOverlay"
 								 HorizontalAlignment="{StaticResource IconButtonEllipseHorizontalAlignment}"
 								 VerticalAlignment="{StaticResource IconButtonEllipseVerticalAlignment}"
 								 Fill="{ThemeResource IconButtonEllipseFillFocused}"
-								 Opacity="{StaticResource IconButtonOpacityHiddenState}" />
+								 Opacity="{ThemeResource IconButtonOpacityHiddenState}" />
 
 						<!-- Content -->
 						<ContentPresenter x:Name="ContentPresenter"
