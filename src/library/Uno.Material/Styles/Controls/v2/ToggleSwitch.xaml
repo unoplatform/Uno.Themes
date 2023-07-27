@@ -690,15 +690,23 @@
 	<x:Double x:Key="ToggleSwitchPostContentMargin">10</x:Double>
 	
 	<!--OFF Background/Border-->
-	<SolidColorBrush x:Key="ToggleSwitchOffDisabledBackground" Color="{StaticResource SurfaceVariantColor}" Opacity="0.12" />
-	<SolidColorBrush x:Key="ToggleSwitchOffDisabledBorder" Color="{StaticResource OnSurfaceColor}" Opacity="0.12" />
+	<SolidColorBrush x:Key="ToggleSwitchOffDisabledBackground"
+					 Color="{StaticResource SurfaceVariantColor}"
+					 Opacity="0.12" />
+	<SolidColorBrush x:Key="ToggleSwitchOffDisabledBorder"
+					 Color="{StaticResource OnSurfaceColor}"
+					 Opacity="0.12" />
 
 	<!--ON Background/Border-->
-	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushBackground" Color="{StaticResource OnSurfaceColor}" Opacity="0.12" />
-	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushStroke" Color="{StaticResource OnSurfaceColor}" Opacity="0.01" />
+	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushBackground"
+					 Color="{StaticResource OnSurfaceColor}"
+					 Opacity="0.12" />
+	<SolidColorBrush x:Key="ToggleSwitchOnSurfaceDisabledBrushStroke"
+					 Color="{StaticResource OnSurfaceColor}"
+					 Opacity="0.01" />
 
 	<Style x:Key="M3MaterialToggleSwitchStyle"
-					  TargetType="ToggleSwitch">
+			TargetType="ToggleSwitch">
 
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -780,7 +788,6 @@
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOff" Storyboard.TargetProperty="Height" EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource ControlFasterAnimationDuration}" KeySpline="{StaticResource ControlFastOutSlowInKeySpline}" Value="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OffContentToContentSize}}" />
 										</DoubleAnimationUsingKeyFrames>
-
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow" Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PrimaryHoverBrush}" />
 										</ObjectAnimationUsingKeyFrames>
@@ -827,20 +834,17 @@
 
 									<VisualState.Setters>
 										<Setter Target="SwitchKnobOn.HorizontalAlignment" Value="Right" />
-										<Setter Target="SwitchKnobOn.Margin" Value="0,0,2,0" />
+										<Setter Target="SwitchKnobOn.Margin" Value="0,0,-2,0" />
 										<Setter Target="SwitchKnobOn.CornerRadius" Value="18" />
 										<Setter Target="SwitchKnobOff.HorizontalAlignment" Value="Left" />
-										<Setter Target="SwitchKnobOff.Margin" Value="2,0,0,0" />
+										<Setter Target="SwitchKnobOff.Margin" Value="6,0,0,0" />
 										<Setter Target="SwitchKnobOff.RadiusX" Value="18" />
 										<Setter Target="SwitchKnobOff.RadiusY" Value="18" />
 										<Setter Target="SwitchKnobOnShadow.Visibility" Value="Visible" />
 										<Setter Target="SwitchKnobOffShadow.Visibility" Value="Visible" />
-										
 										<win:Setter Target="OnIconPresenter.Padding" Value="1,0,0,1" />
-										
 										<ios:Setter Target="OnIconPresenter.Padding" Value="0,0,0,2" />
 									</VisualState.Setters>
-
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds" Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PrimaryBrush}" />
@@ -877,10 +881,8 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<not_win:Setter Target="SwitchKnobOn.HorizontalAlignment" Value="Right" />
-										<not_win:Setter Target="SwitchKnobOn.Margin" Value="0,0,4,0" />
-										<not_win:Setter Target="OffIconPresenter.Margin" Value="0,0,22,0" />
-										<win:Setter Target="OffIconPresenter.Margin" Value="0,0,22,1" />
+										<not_win:Setter Target="OffIconPresenter.Margin" Value="0,0,14,0" />
+										<win:Setter Target="OffIconPresenter.Margin" Value="0,0,15,1" />
 									</VisualState.Setters>
 									
 									<Storyboard>
@@ -890,7 +892,6 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds" Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchOnSurfaceDisabledBrushBackground}" />
 										</ObjectAnimationUsingKeyFrames>
-
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds" Storyboard.TargetProperty="Stroke">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleSwitchOnSurfaceDisabledBrushStroke}" />
 										</ObjectAnimationUsingKeyFrames>
@@ -1202,25 +1203,13 @@
                                   Width="52"
                                   Height="40">
 								
-								<!--Shadow-->
-								<Border x:Name="SwitchKnobOnShadow"
-										Width="40"
-										Height="40"
-										CornerRadius="20"
-										Opacity="0"
-										Margin="20,0,0,0"
-										HorizontalAlignment="Center"
-										Visibility="Collapsed"
-										VerticalAlignment="Center"
-										Background="Transparent" />
-
 								<!--On Thumb-->
 								<Border x:Name="SwitchKnobOn"
 										Width="24"
 										Height="24"
 										CornerRadius="15"
 										Opacity="0"
-										Margin="20,0,0,0"
+										Margin="28,0,0,0"
 										HorizontalAlignment="Center"
 										RenderTransformOrigin="0.5, 0.5"
 										Background="{ThemeResource OnPrimaryBrush}">
@@ -1236,25 +1225,11 @@
 													  Width="18"
 													  VerticalContentAlignment="Center"
 													  HorizontalContentAlignment="Center"
-													  win:Padding="0,0,0,2"
-													  wasm:Padding="0,0,1,2"
-													  not_win:Padding="0,0,0,2"
+													  Padding="0,0,0,2"
 													  Foreground="{ThemeResource OnPrimaryContainerBrush}"/>
 
 								</Border>
 								<Grid>
-
-									<!--Shadow-->
-									<Border x:Name="SwitchKnobOffShadow"
-											Width="40"
-											Height="40"
-											CornerRadius="20"
-											Opacity="0"
-											Margin="0,0,20,0"
-											HorizontalAlignment="Center"
-											Visibility="Collapsed"
-											VerticalAlignment="Center"
-											Background="Transparent" />
 
 									<!--Off Thumb-->
 									<Rectangle x:Name="SwitchKnobOff"
@@ -1263,7 +1238,7 @@
 											   Width="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource OffContentToContentSize}}"
 											   RadiusX="15"
 											   RadiusY="15"
-											   Margin="0,0,20,0"
+											   Margin="0,0,13,0"
 											   HorizontalAlignment="Center"
 											   RenderTransformOrigin="0.5, 0.5">
 										<Rectangle.RenderTransform>
@@ -1277,9 +1252,9 @@
 													  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToCollapsed}}"
 													  Height="18"
 													  Width="18"
-													  skia:Margin="0,0,21,1"
-													  win:Margin="0,0,21,2"
-													  not_win:Margin="0,0,20,1"
+													  skia:Margin="0,0,14,1"
+													  win:Margin="0,0,14,2"
+													  not_win:Margin="0,0,13,1"
 													  VerticalContentAlignment="Center"
 													  HorizontalContentAlignment="Center"
 													  Foreground="{ThemeResource SurfaceVariantBrush}"/>
@@ -1288,6 +1263,30 @@
 									<TranslateTransform x:Name="KnobTranslateTransform" />
 								</Grid.RenderTransform>
 							</Grid>
+							<!--On State Layer-->
+							<Border x:Name="SwitchKnobOnShadow"
+									Grid.Row="1"
+									Width="40"
+									Height="40"
+									CornerRadius="20"
+									Opacity="0"
+									Margin="20,0,0,0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									Background="Transparent" />
+
+							<!--Off State Layer-->
+							<Border x:Name="SwitchKnobOffShadow"
+									Grid.Row="1"
+									Width="40"
+									Height="40"
+									CornerRadius="20"
+									Opacity="0"
+									Margin="0,0,20,0"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Center"
+									Background="Transparent" />
+							
 							<Thumb x:Name="SwitchThumb"
                                    AutomationProperties.AccessibilityView="Raw"
                                    Grid.RowSpan="3"
