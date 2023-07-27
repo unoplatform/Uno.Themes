@@ -51,7 +51,16 @@
             <StaticResource x:Key="RadioButtonCharacterSpacing" ResourceKey="BodySmallCharacterSpacing" />
             <!--#endregion-->
 
-        </ResourceDictionary>
+			<GridLength x:Key="RadioButtonGridLength">40</GridLength>
+			<x:Double x:Key="RadioButtonWidth">40</x:Double>
+			<x:Double x:Key="RadioButtonHeight">40</x:Double>
+			<x:Double x:Key="RadioButtonCheckGlyphSize">20</x:Double>
+			<x:Double x:Key="RadioButtonMinHeight">40</x:Double>
+			<x:Double x:Key="RadioButtonMinWidth">40</x:Double>
+			<x:Double x:Key="RadioButtonStrokeThickness">2</x:Double>
+			<Thickness x:Key="RadioButtonPadding">4,0,0,0</Thickness>
+			<Thickness x:Key="RadioButtonCheckEllipsePadding">5</Thickness>
+		</ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
             <!--#region Foreground-->
@@ -97,18 +106,17 @@
             <StaticResource x:Key="RadioButtonCharacterSpacing" ResourceKey="BodySmallCharacterSpacing" />
             <!--#endregion-->
 
-        </ResourceDictionary>
+			<GridLength x:Key="RadioButtonGridLength">40</GridLength>
+			<x:Double x:Key="RadioButtonWidth">40</x:Double>
+			<x:Double x:Key="RadioButtonHeight">40</x:Double>
+			<x:Double x:Key="RadioButtonCheckGlyphSize">20</x:Double>
+			<x:Double x:Key="RadioButtonMinHeight">40</x:Double>
+			<x:Double x:Key="RadioButtonMinWidth">40</x:Double>
+			<x:Double x:Key="RadioButtonStrokeThickness">2</x:Double>
+			<Thickness x:Key="RadioButtonPadding">4,0,0,0</Thickness>
+			<Thickness x:Key="RadioButtonCheckEllipsePadding">5</Thickness>
+		</ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-
-    <!-- RadioButton Area -->
-    <GridLength x:Key="RadioButtonAreaLength">40</GridLength>
-    <x:Double x:Key="RadioButtonAreaSize">40</x:Double>
-
-    <!-- Check Area -->
-    <x:Double x:Key="RadioButtonCheckAreaSize">20</x:Double>
-
-    <!-- Border -->
-    <x:Double x:Key="RadioButtonBorderThemeThickness">2</x:Double>
 
     <Style x:Key="MaterialRadioButtonStyle"
            TargetType="RadioButton">
@@ -122,14 +130,14 @@
         <Setter Property="CharacterSpacing" Value="{ThemeResource RadioButtonCharacterSpacing}" />
         <!-- End: Body Small Typo -->
 
-        <Setter Property="Padding" Value="4,0,0,0" />
+        <Setter Property="Padding" Value="{ThemeResource RadioButtonPadding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="MinWidth" Value="{StaticResource RadioButtonAreaSize}" />
-        <Setter Property="MinHeight" Value="{StaticResource RadioButtonAreaSize}" />
-        <Setter Property="UseSystemFocusVisuals" Value="False" />
+        <Setter Property="MinWidth" Value="{ThemeResource RadioButtonMinWidth}" />
+        <Setter Property="MinHeight" Value="{ThemeResource RadioButtonMinHeight}" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -236,15 +244,15 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{StaticResource RadioButtonAreaLength}" />
+                            <ColumnDefinition Width="{ThemeResource RadioButtonGridLength}" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Ellipse x:Name="FocusAndPressRing"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
-                                 Width="{StaticResource RadioButtonAreaSize}"
-                                 Height="{StaticResource RadioButtonAreaSize}"
+                                 Width="{ThemeResource RadioButtonWidth}"
+                                 Height="{ThemeResource RadioButtonHeight}"
                                  Fill="{ThemeResource MaterialRadioButtonHoverRingFillPressed}"
                                  IsHitTestVisible="False"
                                  Opacity="0" />
@@ -252,14 +260,14 @@
                         <Ellipse x:Name="HoverRing"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
-                                 Width="{StaticResource RadioButtonAreaSize}"
-                                 Height="{StaticResource RadioButtonAreaSize}"
+                                 Width="{ThemeResource RadioButtonWidth}"
+                                 Height="{ThemeResource RadioButtonHeight}"
                                  Fill="{ThemeResource MaterialRadioButtonHoverRingFillPointerOver}"
                                  IsHitTestVisible="False"
                                  Opacity="0" />
 
-                        <Grid Height="{StaticResource RadioButtonCheckAreaSize}"
-                              Width="{StaticResource RadioButtonCheckAreaSize}">
+                        <Grid Height="{ThemeResource RadioButtonCheckGlyphSize}"
+                              Width="{ThemeResource RadioButtonCheckGlyphSize}">
 
                             <Ellipse x:Name="OuterEllipse"
                                      HorizontalAlignment="Stretch"
@@ -267,7 +275,7 @@
                                      Stretch="Fill"
                                      UseLayoutRounding="False"
                                      Stroke="{TemplateBinding Background}"
-                                     StrokeThickness="{StaticResource RadioButtonBorderThemeThickness}" />
+                                     StrokeThickness="{ThemeResource RadioButtonStrokeThickness}" />
 
                             <Ellipse x:Name="OuterEllipse_Checked"
                                      HorizontalAlignment="Stretch"
@@ -275,7 +283,7 @@
                                      Stretch="Fill"
                                      UseLayoutRounding="False"
                                      Stroke="{TemplateBinding Background}"
-                                     StrokeThickness="{StaticResource RadioButtonBorderThemeThickness}"
+                                     StrokeThickness="{ThemeResource RadioButtonStrokeThickness}"
                                      Opacity="0" />
 
                             <Ellipse x:Name="CheckEllipse_Unchecked"
@@ -284,7 +292,7 @@
                                      Stretch="Fill"
                                      UseLayoutRounding="False"
                                      Fill="{TemplateBinding Background}"
-                                     Margin="5" />
+									 Margin="{ThemeResource RadioButtonCheckEllipsePadding}" />
 
                             <Ellipse x:Name="CheckEllipse"
                                      HorizontalAlignment="Stretch"
@@ -293,7 +301,7 @@
                                      UseLayoutRounding="False"
                                      Fill="{TemplateBinding Background}"
                                      Opacity="0"
-                                     Margin="5" />
+                                     Margin="{ThemeResource RadioButtonCheckEllipsePadding}" />
                         </Grid>
 
                         <ContentPresenter x:Name="ContentPresenter"
