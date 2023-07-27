@@ -107,6 +107,21 @@
 			<StaticResource x:Key="ComboBoxArrowForegroundOpened" ResourceKey="PrimaryBrush" />
 			
 			<StaticResource x:Key="ComboBoxUpperPlaceHolderForeground" ResourceKey="PrimaryBrush" />
+
+			<CornerRadius x:Key="ComboBoxCornerRadius">4</CornerRadius>
+			<x:Double x:Key="ComboBoxHeight">50</x:Double>
+			<x:Double x:Key="ComboBoxMinHeight">56</x:Double>
+			<x:Double x:Key="ComboBoxLeadingIconWidth">20</x:Double>
+			<x:Double x:Key="ComboBoxDownGlyphWidth">10</x:Double>
+			<x:Double x:Key="ComboBoxUpGlyphWidth">10</x:Double>
+			<x:Double x:Key="ComboBoxDownGlyphHeight">5</x:Double>
+			<x:Double x:Key="ComboBoxUpGlyphHeight">5</x:Double>
+			<Thickness x:Key="ComboBoxDownGlyphMargin">7,0</Thickness>
+			<Thickness x:Key="ComboBoxUpGlyphMargin">7,0</Thickness>
+			<Thickness x:Key="ComboBoxLeadingIconMargin">2,0,18,0</Thickness>
+			<Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
+			<Thickness x:Key="ComboBoxOpenedBorderThickness">2</Thickness>
+			<Thickness x:Key="ComboBoxPadding">16,0</Thickness>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
@@ -195,19 +210,27 @@
 			<StaticResource x:Key="ComboBoxArrowForegroundOpened" ResourceKey="PrimaryBrush" />
 			
 			<StaticResource x:Key="ComboBoxUpperPlaceHolderForeground" ResourceKey="PrimaryBrush" />
+
+			<CornerRadius x:Key="ComboBoxCornerRadius">4</CornerRadius>
+			<x:Double x:Key="ComboBoxHeight">50</x:Double>
+			<x:Double x:Key="ComboBoxMinHeight">56</x:Double>
+			<x:Double x:Key="ComboBoxLeadingIconWidth">20</x:Double>
+			<x:Double x:Key="ComboBoxDownGlyphWidth">10</x:Double>
+			<x:Double x:Key="ComboBoxUpGlyphWidth">10</x:Double>
+			<x:Double x:Key="ComboBoxDownGlyphHeight">5</x:Double>
+			<x:Double x:Key="ComboBoxUpGlyphHeight">5</x:Double>
+			<Thickness x:Key="ComboBoxDownGlyphMargin">7,0</Thickness>
+			<Thickness x:Key="ComboBoxUpGlyphMargin">7,0</Thickness>
+			<Thickness x:Key="ComboBoxLeadingIconMargin">2,0,18,0</Thickness>
+			<Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
+			<Thickness x:Key="ComboBoxOpenedBorderThickness">2</Thickness>
+			<Thickness x:Key="ComboBoxPadding">16,0</Thickness>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
-
-	<!-- CornerRadius -->
-	<CornerRadius x:Key="ComboBoxCornerRadius">4</CornerRadius>
 
 	<!-- Path Data -->
 	<x:String x:Key="ComboBoxUpArrowPathData">M0 0L-5 -5L-10 0H0Z</x:String>
 	<x:String x:Key="ComboBoxDownArrowPathData">M0 0L5 5L10 0H0Z</x:String>
-
-	<Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
-	<Thickness x:Key="ComboBoxOpenedBorderThickness">2</Thickness>
-	<Thickness x:Key="ComboBoxPadding">16,0</Thickness>
 
 	<!-- Style -->
 	<Style x:Key="MaterialComboBoxItemStyle"
@@ -224,8 +247,8 @@
 
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-		<Setter Property="Padding" Value="16,0" />
-		<Setter Property="Height" Value="50" />
+		<Setter Property="Padding" Value="{ThemeResource ComboBoxPadding}" />
+		<Setter Property="Height" Value="{ThemeResource ComboBoxHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -384,8 +407,8 @@
 		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
 		<Setter Property="Background" Value="{ThemeResource ComboBoxBackground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{StaticResource ComboBoxBorderThickness}" />
-		<Setter Property="Padding" Value="{StaticResource ComboBoxPadding}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThickness}" />
+		<Setter Property="Padding" Value="{ThemeResource ComboBoxPadding}" />
 
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
@@ -394,7 +417,7 @@
 		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
-		<Setter Property="MinHeight" Value="56" />
+		<Setter Property="MinHeight" Value="{ThemeResource ComboBoxMinHeight}" />
 		<Setter Property="TabNavigation" Value="Once" />
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
 		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -428,7 +451,7 @@
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{StaticResource ComboBoxCornerRadius}">
+						  CornerRadius="{ThemeResource ComboBoxCornerRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -513,7 +536,7 @@
 								<VisualState x:Name="Opened">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
-										<Setter Target="RootGrid.BorderThickness" Value="{StaticResource ComboBoxOpenedBorderThickness}" />
+										<Setter Target="RootGrid.BorderThickness" Value="{ThemeResource ComboBoxOpenedBorderThickness}" />
 										<Setter Target="DropDownGlyph_Up.Fill" Value="{ThemeResource ComboBoxArrowForegroundOpened}" />
 										<Setter Target="DropDownGlyph_Down.Visibility" Value="Collapsed" />
 										<Setter Target="DropDownGlyph_Up.Visibility" Value="Visible" />
@@ -533,7 +556,7 @@
 								<VisualState x:Name="Closed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
-										<Setter Target="RootGrid.BorderThickness" Value="{StaticResource ComboBoxBorderThickness}" />
+										<Setter Target="RootGrid.BorderThickness" Value="{ThemeResource ComboBoxBorderThickness}" />
 										<Setter Target="DropDownGlyph_Down.Visibility" Value="Visible" />
 										<Setter Target="DropDownGlyph_Up.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
@@ -574,8 +597,8 @@
 
 							<!-- Leading Icon -->
 							<ContentPresenter x:Name="IconPresenter"
-											  Width="20"
-											  Margin="2,0,18,0"
+											  Width="{ThemeResource ComboBoxLeadingIconWidth}"
+											  Margin="{ThemeResource ComboBoxLeadingIconMargin}"
 											  HorizontalAlignment="Center"
 											  VerticalAlignment="Center"
 											  Foreground="{ThemeResource ComboBoxLeadingIconForeground}"
@@ -622,9 +645,9 @@
 							<!-- Down -->
 							<Path x:Name="DropDownGlyph_Down"
 								  Grid.Column="2"
-								  Width="10"
-								  Height="5"
-								  Margin="7,0"
+								  Width="{ThemeResource ComboBoxDownGlyphWidth}"
+								  Height="{ThemeResource ComboBoxDownGlyphHeight}"
+								  Margin="{ThemeResource ComboBoxDownGlyphMargin}"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
 								  Data="{StaticResource ComboBoxDownArrowPathData}"
@@ -634,9 +657,9 @@
 							<!-- Up -->
 							<Path x:Name="DropDownGlyph_Up"
 								  Grid.Column="2"
-								  Width="10"
-								  Height="5"
-								  Margin="7,0"
+								  Width="{ThemeResource ComboBoxUpGlyphWidth}"
+								  Height="{ThemeResource ComboBoxUpGlyphHeight}"
+								  Margin="{ThemeResource ComboBoxUpGlyphMargin}"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
 								  Data="{StaticResource ComboBoxUpArrowPathData}"
@@ -648,7 +671,7 @@
 						<!-- Popup -->
 						<Popup x:Name="Popup">
 							<Border x:Name="PopupBorder"
-									CornerRadius="{StaticResource ComboBoxCornerRadius}"
+									CornerRadius="{ThemeResource ComboBoxCornerRadius}"
 									Background="{ThemeResource ComboBoxDropDownBackground}">
 
 								<!-- Workaround for Issue #213 where android PopupBorder doesn't get redrawn properly, adds Background, CornerRadius and Border to ScrollViewer -->
@@ -656,7 +679,7 @@
 											  MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}"
 											  AutomationProperties.AccessibilityView="Raw"
 											  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-											  CornerRadius="{StaticResource ComboBoxCornerRadius}"
+											  CornerRadius="{ThemeResource ComboBoxCornerRadius}"
 											  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
 											  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
 											  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
