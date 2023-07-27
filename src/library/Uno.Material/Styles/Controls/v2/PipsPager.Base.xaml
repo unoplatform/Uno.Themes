@@ -1,732 +1,732 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-                    xmlns:not_win="http://uno.ui/not_win"
-                    mc:Ignorable="d not_win">
-
-    <ResourceDictionary.ThemeDictionaries>
-
-        <ResourceDictionary x:Key="Default">
-            <!-- Background -->
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundSelected" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- BorderBrush -->
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushSelected" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- Foreground -->
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForeground" ResourceKey="SurfaceVariantBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPointerOver" ResourceKey="SurfaceBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPressed" ResourceKey="SurfaceBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundFocused" ResourceKey="SurfaceBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundSelected" ResourceKey="PrimaryBrush" />
-
-            <!-- Selection Button Visual States Ellipse -->
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
-
-
-            <!-- Navigation Button Background -->
-            <StaticResource x:Key="PipsPagerNavigationButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- Navigation Button BorderBrush -->
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- Navigation Button Foreground -->
-            <StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="PrimaryBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="PrimaryBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-            <!-- Navigation Button Visual States Ellipse -->
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillUnfocused" ResourceKey="PrimaryUnfocusedBrush" />
-
-            <!-- Material PipsPager Resources -->
-            <x:Double x:Key="PipsPagerHorizontalOrientationButtonWidth">12</x:Double>
-            <x:Double x:Key="PipsPagerHorizontalOrientationButtonHeight">12</x:Double>
-
-            <x:Double x:Key="PipsPagerVerticalOrientationButtonWidth">12</x:Double>
-            <x:Double x:Key="PipsPagerVerticalOrientationButtonHeight">12</x:Double>
-
-            <Thickness x:Key="PipsPagerButtonBorderThickness">0</Thickness>
-            <Thickness x:Key="PipsPagerNavigationButtonBorderThickness">0</Thickness>
-
-            <x:String x:Key="PipsPagerPreviousPageButtonData">M3.33681 0.322148C3.63156 -0.107383 4.36844 -0.107382 4.66319 0.322148L7.89626 5.03356C8.19101 5.46309 7.82257 6 7.23307 6L0.766932 6C0.177427 6 -0.191014 5.46309 0.103739 5.03356L3.33681 0.322148Z</x:String>
-            <x:String x:Key="PipsPagerNextPageButtonData">M4.66319 5.67785C4.36844 6.10738 3.63156 6.10738 3.33681 5.67785L0.103738 0.966444C-0.191015 0.536913 0.177425 6.83871e-07 0.766931 6.32335e-07L7.23307 6.70473e-08C7.82257 1.55111e-08 8.19101 0.536912 7.89626 0.966443L4.66319 5.67785Z</x:String>
-
-            <x:Double x:Key="PipsPagerNavigationButtonHeight">40</x:Double>
-            <x:Double x:Key="PipsPagerNavigationButtonWidth">40</x:Double>
-            <Thickness x:Key="PipsPagerNavigationButtonPadding">4</Thickness>
-
-            <x:Double x:Key="PipsPagerNavigationVisualStatesEllipseWidth">12</x:Double>
-            <x:Double x:Key="PipsPagerNavigationVisualStatesEllipseHeight">12</x:Double>
-
-            <x:Double x:Key="PipsPagerSelectedEllipseSize">8</x:Double>
-            <x:Double x:Key="PipsPagerNormalEllipseSize">8</x:Double>
-        </ResourceDictionary>
-
-        <ResourceDictionary x:Key="Light">
-
-            <!-- Background -->
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundSelected" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- BorderBrush -->
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushSelected" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- Foreground -->
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForeground" ResourceKey="SurfaceVariantBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPointerOver" ResourceKey="SurfaceBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPressed" ResourceKey="SurfaceBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundFocused" ResourceKey="SurfaceBrush" />
-
-            <!-- Foreground Selected -->
-            <StaticResource x:Key="PipsPagerSelectionIndicatorForegroundSelected" ResourceKey="PrimaryBrush" />
-
-            <!-- Selection Button Visual States Ellipse -->
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
-
-
-            <!-- Navigation Button Background -->
-            <StaticResource x:Key="PipsPagerNavigationButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- Navigation Button BorderBrush -->
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
-
-            <!-- Navigation Button Foreground -->
-            <StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="PrimaryBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="PrimaryBrush" />
-            <StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-            <!-- Navigation Button Visual States Ellipse -->
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
-            <StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillUnfocused" ResourceKey="PrimaryUnfocusedBrush" />
-
-            <!-- Material PipsPager Resources -->
-            <x:Double x:Key="PipsPagerHorizontalOrientationButtonWidth">12</x:Double>
-            <x:Double x:Key="PipsPagerHorizontalOrientationButtonHeight">12</x:Double>
-
-            <x:Double x:Key="PipsPagerVerticalOrientationButtonWidth">12</x:Double>
-            <x:Double x:Key="PipsPagerVerticalOrientationButtonHeight">12</x:Double>
-
-            <Thickness x:Key="PipsPagerButtonBorderThickness">0</Thickness>
-            <Thickness x:Key="PipsPagerNavigationButtonBorderThickness">0</Thickness>
-
-            <x:String x:Key="PipsPagerPreviousPageButtonData">M3.33681 0.322148C3.63156 -0.107383 4.36844 -0.107382 4.66319 0.322148L7.89626 5.03356C8.19101 5.46309 7.82257 6 7.23307 6L0.766932 6C0.177427 6 -0.191014 5.46309 0.103739 5.03356L3.33681 0.322148Z</x:String>
-            <x:String x:Key="PipsPagerNextPageButtonData">M4.66319 5.67785C4.36844 6.10738 3.63156 6.10738 3.33681 5.67785L0.103738 0.966444C-0.191015 0.536913 0.177425 6.83871e-07 0.766931 6.32335e-07L7.23307 6.70473e-08C7.82257 1.55111e-08 8.19101 0.536912 7.89626 0.966443L4.66319 5.67785Z</x:String>
-
-            <x:Double x:Key="PipsPagerNavigationButtonHeight">40</x:Double>
-            <x:Double x:Key="PipsPagerNavigationButtonWidth">40</x:Double>
-            <Thickness x:Key="PipsPagerNavigationButtonPadding">4</Thickness>
-
-            <x:Double x:Key="PipsPagerNavigationVisualStatesEllipseWidth">12</x:Double>
-            <x:Double x:Key="PipsPagerNavigationVisualStatesEllipseHeight">12</x:Double>
-
-            <x:Double x:Key="PipsPagerSelectedEllipseSize">8</x:Double>
-            <x:Double x:Key="PipsPagerNormalEllipseSize">8</x:Double>
-        </ResourceDictionary>
-    </ResourceDictionary.ThemeDictionaries>
-
-    <Style x:Key="MaterialPipsPagerNavigationButtonBaseStyle"
-           TargetType="Button">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{ThemeResource PipsPagerNavigationButtonForeground}" />
-        <Setter Property="BorderBrush" Value="{ThemeResource PipsPagerNavigationButtonBorderBrush}" />
-        <Setter Property="BorderThickness" Value="{ThemeResource PipsPagerNavigationButtonBorderThickness}" />
-        <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource UseSystemFocusVisuals}" />
-        <Setter Property="FocusVisualMargin" Value="0" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Width" Value="{ThemeResource PipsPagerNavigationButtonWidth}" />
-        <Setter Property="Height" Value="{ThemeResource PipsPagerNavigationButtonHeight}" />
-        <Setter Property="Padding" Value="{ThemeResource PipsPagerNavigationButtonPadding}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid x:Name="RootGrid"
-                          Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFillPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonForegroundPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonBackgroundPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonBorderBrushPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFillPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonForegroundPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonBackgroundPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonBorderBrushPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonForegroundDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonBackgroundDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerNavigationButtonBorderBrushDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="FocusStates">
-                                <VisualState x:Name="Focused">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFillFocused}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Unfocused" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <Ellipse x:Name="VisualStatesEllipse"
-                                 Height="{ThemeResource PipsPagerNavigationVisualStatesEllipseHeight}"
-                                 Width="{ThemeResource PipsPagerNavigationVisualStatesEllipseWidth}"
-                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                 Fill="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFill}"
-                                 AutomationProperties.AccessibilityView="Raw" />
-
-                        <Border Padding="{TemplateBinding Padding}"
-                                RenderTransformOrigin="0.5, 0.5"
-                                Background="{TemplateBinding Background}">
-                            <Border.RenderTransform>
-                                <ScaleTransform x:Name="ScaleTransform" ScaleY="1" ScaleX="1" />
-                            </Border.RenderTransform>
-                            <PathIcon x:Name="Content"
-                                      Data="{TemplateBinding Content}"
-                                      Foreground="{TemplateBinding Foreground}"
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      AutomationProperties.AccessibilityView="Raw" />
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="MaterialPipsPagerPreviousPageButtonStyle"
-           TargetType="Button"
-           BasedOn="{StaticResource MaterialPipsPagerNavigationButtonBaseStyle}">
-        <Setter Property="Content" Value="{StaticResource PipsPagerPreviousPageButtonData}" />
-        <Setter Property="VerticalContentAlignment" Value="Bottom" />
-    </Style>
-
-    <Style x:Key="MaterialPipsPagerNextPageButtonStyle"
-           TargetType="Button"
-           BasedOn="{StaticResource MaterialPipsPagerNavigationButtonBaseStyle}">
-        <Setter Property="Content" Value="{StaticResource PipsPagerNextPageButtonData}" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
-    </Style>
-
-    <Style x:Key="MaterialPipsPagerButtonBaseStyle"
-           TargetType="Button">
-        <Setter Property="Background" Value="{ThemeResource PipsPagerSelectionIndicatorBackground}" />
-        <Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForeground}" />
-        <Setter Property="BorderBrush" Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrush}" />
-        <Setter Property="BorderThickness" Value="{ThemeResource PipsPagerButtonBorderThickness}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
-        <Setter Property="FocusVisualMargin" Value="0" />
-    </Style>
-
-    <Style x:Key="MaterialPipsPagerSelectedPipButtonStyle"
-           TargetType="Button"
-           BasedOn="{StaticResource MaterialPipsPagerButtonBaseStyle}">
-        <Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForegroundSelected}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid x:Name="RootGrid"
-                          IsHitTestVisible="True"
-                          Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
-                          Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorForegroundDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="FocusStates">
-                                <VisualState x:Name="Focused">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillFocused}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Unfocused" />
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="OrientationStates">
-                                <VisualState x:Name="HorizontalOrientation" />
-                                <VisualState x:Name="VerticalOrientation">
-                                    <VisualState.Setters>
-                                        <Setter Target="RootGrid.Width" Value="{ThemeResource PipsPagerVerticalOrientationButtonWidth}" />
-                                        <Setter Target="RootGrid.Height" Value="{ThemeResource PipsPagerVerticalOrientationButtonHeight}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <Ellipse x:Name="VisualStatesEllipse"
-                                 Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}"
-                                 Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
-                                 Fill="{ThemeResource MaterialPipsPagerVisualStateEllipseFill}"
-                                 AutomationProperties.AccessibilityView="Raw" />
-
-                        <Ellipse x:Name="MainEllipse"
-                                 Height="{ThemeResource PipsPagerSelectedEllipseSize}"
-                                 Width="{ThemeResource PipsPagerSelectedEllipseSize}"
-                                 Fill="{TemplateBinding Foreground}"
-                                 Stroke="{TemplateBinding BorderBrush}"
-                                 StrokeThickness="{TemplateBinding BorderThickness}"
-                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                 AutomationProperties.AccessibilityView="Raw" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="MaterialPipsPagerNormalPipButtonStyle"
-           TargetType="Button"
-           BasedOn="{StaticResource MaterialPipsPagerButtonBaseStyle}">
-        <Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForeground}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid x:Name="RootGrid"
-                          IsHitTestVisible="True"
-                          Background="{TemplateBinding Background}"
-                          Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
-                          Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorForegroundPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <Storyboard>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorForegroundPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorForegroundDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="FocusStates">
-                                <VisualState x:Name="Focused">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorForegroundFocused}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
-                                                                       Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillFocused}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundFocused}" />
-                                        </ObjectAnimationUsingKeyFrames>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
-                                                                       Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushFocused}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Unfocused" />
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="OrientationStates">
-                                <VisualState x:Name="HorizontalOrientation" />
-                                <VisualState x:Name="VerticalOrientation">
-                                    <VisualState.Setters>
-                                        <Setter Target="RootGrid.Width" Value="{ThemeResource PipsPagerVerticalOrientationButtonWidth}" />
-                                        <Setter Target="RootGrid.Height" Value="{ThemeResource PipsPagerVerticalOrientationButtonHeight}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <Ellipse x:Name="MainEllipse"
-                                 Height="{ThemeResource PipsPagerNormalEllipseSize}"
-                                 Width="{ThemeResource PipsPagerNormalEllipseSize}"
-                                 Fill="{TemplateBinding Foreground}"
-                                 Stroke="{TemplateBinding BorderBrush}"
-                                 StrokeThickness="{TemplateBinding BorderThickness}"
-                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                 AutomationProperties.AccessibilityView="Raw" />
-
-                        <Ellipse x:Name="VisualStatesEllipse"
-                                 Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}"
-                                 Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
-                                 Fill="Transparent"
-                                 AutomationProperties.AccessibilityView="Raw" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="BaseMaterialPipsPagerStyle"
-           TargetType="muxc:PipsPager">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="PreviousButtonStyle" Value="{StaticResource MaterialPipsPagerPreviousPageButtonStyle}" />
-        <Setter Property="NextButtonStyle" Value="{StaticResource MaterialPipsPagerNextPageButtonStyle}" />
-        <!-- Uno already implemented the 2.8.0 MUX version of the control -->
-        <!-- Uno.Themes reference is still on the MUX v2.6.0-prerelease.210113001 version for now -->
-        <!-- Remove this file, PipsPager.UWP.xaml,and use <Setter Property=NormalPipStyle /> and <Setter Property=SelectedPipStyle /> only in PipsPager.xaml -->
-        <!-- with the rest of the code, once we can bump the Microsoft.UI.Xaml version -->
-        <not_win:Setter Property="SelectedPipStyle"
-                        Value="{StaticResource MaterialPipsPagerSelectedPipButtonStyle}" />
-        <not_win:Setter Property="NormalPipStyle"
-                        Value="{StaticResource MaterialPipsPagerNormalPipButtonStyle}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="muxc:PipsPager">
-                    <StackPanel x:Name="RootPanel"
-                                Orientation="{TemplateBinding Orientation}"
-                                Background="{TemplateBinding Background}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="PreviousPageButtonVisibilityStates">
-                                <VisualState x:Name="PreviousPageButtonVisible" />
-                                <VisualState x:Name="PreviousPageButtonHidden">
-                                    <VisualState.Setters>
-                                        <Setter Target="PreviousPageButton.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="PreviousPageButtonCollapsed">
-                                    <VisualState.Setters>
-                                        <Setter Target="PreviousPageButton.Visibility" Value="Collapsed" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-
-                            <VisualStateGroup x:Name="PreviousPageButtonIsEnabledStates">
-                                <VisualState x:Name="PreviousPageButtonEnabled" />
-                                <VisualState x:Name="PreviousPageButtonDisabled">
-                                    <VisualState.Setters>
-                                        <Setter Target="PreviousPageButton.IsEnabled" Value="False" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-
-                            <VisualStateGroup x:Name="NextPageButtonVisibilityStates">
-                                <VisualState x:Name="NextPageButtonVisible" />
-                                <VisualState x:Name="NextPageButtonHidden">
-                                    <VisualState.Setters>
-                                        <Setter Target="NextPageButton.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="NextPageButtonCollapsed">
-                                    <VisualState.Setters>
-                                        <Setter Target="NextPageButton.Visibility" Value="Collapsed" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-
-                            <VisualStateGroup x:Name="NextPageButtonIsEnabledStates">
-                                <VisualState x:Name="NextPageButtonEnabled" />
-                                <VisualState x:Name="NextPageButtonDisabled">
-                                    <VisualState.Setters>
-                                        <Setter Target="NextPageButton.IsEnabled" Value="False" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-
-                            <VisualStateGroup x:Name="RootPanelOrientationStates">
-                                <VisualState x:Name="VerticalOrientationView" />
-                                <VisualState x:Name="HorizontalOrientationView">
-                                    <VisualState.Setters>
-                                        <Setter Target="RootPanel.Orientation" Value="Horizontal" />
-                                        <Setter Target="PreviousPageButton.(ToolTipService.Placement)" Value="Left" />
-                                        <Setter Target="PreviousPageButton.RenderTransformOrigin" Value="0.5, 0.5" />
-                                        <Setter Target="PreviousPageButton.RenderTransform">
-                                            <Setter.Value>
-                                                <RotateTransform Angle="-90" />
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Target="NextPageButton.(ToolTipService.Placement)" Value="Right" />
-                                        <Setter Target="NextPageButton.RenderTransformOrigin" Value="0.5, 0.5" />
-                                        <Setter Target="NextPageButton.RenderTransform">
-                                            <Setter.Value>
-                                                <RotateTransform Angle="-90" />
-                                            </Setter.Value>
-                                        </Setter>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <Button x:Name="PreviousPageButton"
-                                ToolTipService.ToolTip="{Binding ElementName=PreviousPageButton, Path=(AutomationProperties.Name)}"
-                                ToolTipService.Placement="Top"
-                                Style="{TemplateBinding PreviousButtonStyle}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center" />
-
-                        <ScrollViewer x:Name="PipsPagerScrollViewer"
-                                      VerticalScrollBarVisibility="Hidden"
-                                      VerticalScrollMode="Disabled"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      HorizontalScrollMode="Disabled"
-                                      IsHorizontalScrollChainingEnabled="False"
-                                      IsVerticalScrollChainingEnabled="False"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center">
-                            <muxc:ItemsRepeater x:Name="PipsPagerItemsRepeater"
-                                                ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PipsPagerItems}">
-                                <muxc:ItemsRepeater.Layout>
-                                    <muxc:StackLayout Orientation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Orientation}" />
-                                </muxc:ItemsRepeater.Layout>
-                                <muxc:ItemsRepeater.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button />
-                                    </DataTemplate>
-                                </muxc:ItemsRepeater.ItemTemplate>
-                            </muxc:ItemsRepeater>
-                        </ScrollViewer>
-
-                        <Button x:Name="NextPageButton"
-                                ToolTipService.ToolTip="{Binding ElementName=NextPageButton, Path=(AutomationProperties.Name)}"
-                                ToolTipService.Placement="Bottom"
-                                Style="{TemplateBinding NextButtonStyle}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center" />
-                    </StackPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<ResourceDictionary x:Key="Default">
+			<!-- Background -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundSelected" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- BorderBrush -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushSelected" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Foreground -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForeground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundSelected" ResourceKey="PrimaryBrush" />
+
+			<!-- Selection Button Visual States Ellipse -->
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+
+
+			<!-- Navigation Button Background -->
+			<StaticResource x:Key="PipsPagerNavigationButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Navigation Button BorderBrush -->
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Navigation Button Foreground -->
+			<StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- Navigation Button Visual States Ellipse -->
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillUnfocused" ResourceKey="PrimaryUnfocusedBrush" />
+
+			<!-- Material PipsPager Resources -->
+			<x:Double x:Key="PipsPagerHorizontalOrientationButtonWidth">12</x:Double>
+			<x:Double x:Key="PipsPagerHorizontalOrientationButtonHeight">12</x:Double>
+
+			<x:Double x:Key="PipsPagerVerticalOrientationButtonWidth">12</x:Double>
+			<x:Double x:Key="PipsPagerVerticalOrientationButtonHeight">12</x:Double>
+
+			<Thickness x:Key="PipsPagerButtonBorderThickness">0</Thickness>
+			<Thickness x:Key="PipsPagerNavigationButtonBorderThickness">0</Thickness>
+
+			<x:String x:Key="PipsPagerPreviousPageButtonData">M3.33681 0.322148C3.63156 -0.107383 4.36844 -0.107382 4.66319 0.322148L7.89626 5.03356C8.19101 5.46309 7.82257 6 7.23307 6L0.766932 6C0.177427 6 -0.191014 5.46309 0.103739 5.03356L3.33681 0.322148Z</x:String>
+			<x:String x:Key="PipsPagerNextPageButtonData">M4.66319 5.67785C4.36844 6.10738 3.63156 6.10738 3.33681 5.67785L0.103738 0.966444C-0.191015 0.536913 0.177425 6.83871e-07 0.766931 6.32335e-07L7.23307 6.70473e-08C7.82257 1.55111e-08 8.19101 0.536912 7.89626 0.966443L4.66319 5.67785Z</x:String>
+
+			<x:Double x:Key="PipsPagerNavigationButtonHeight">40</x:Double>
+			<x:Double x:Key="PipsPagerNavigationButtonWidth">40</x:Double>
+			<Thickness x:Key="PipsPagerNavigationButtonPadding">4</Thickness>
+
+			<x:Double x:Key="PipsPagerNavigationVisualStatesEllipseWidth">12</x:Double>
+			<x:Double x:Key="PipsPagerNavigationVisualStatesEllipseHeight">12</x:Double>
+
+			<x:Double x:Key="PipsPagerSelectedEllipseSize">8</x:Double>
+			<x:Double x:Key="PipsPagerNormalEllipseSize">8</x:Double>
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+
+			<!-- Background -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundSelected" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- BorderBrush -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushSelected" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Foreground -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForeground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundFocused" ResourceKey="SurfaceBrush" />
+
+			<!-- Foreground Selected -->
+			<StaticResource x:Key="PipsPagerSelectionIndicatorForegroundSelected" ResourceKey="PrimaryBrush" />
+
+			<!-- Selection Button Visual States Ellipse -->
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="MaterialPipsPagerVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+
+
+			<!-- Navigation Button Background -->
+			<StaticResource x:Key="PipsPagerNavigationButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Navigation Button BorderBrush -->
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Navigation Button Foreground -->
+			<StaticResource x:Key="PipsPagerNavigationButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="PipsPagerNavigationButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- Navigation Button Visual States Ellipse -->
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="MaterialPipsPagerNavigationButtonVisualStateEllipseFillUnfocused" ResourceKey="PrimaryUnfocusedBrush" />
+
+			<!-- Material PipsPager Resources -->
+			<x:Double x:Key="PipsPagerHorizontalOrientationButtonWidth">12</x:Double>
+			<x:Double x:Key="PipsPagerHorizontalOrientationButtonHeight">12</x:Double>
+
+			<x:Double x:Key="PipsPagerVerticalOrientationButtonWidth">12</x:Double>
+			<x:Double x:Key="PipsPagerVerticalOrientationButtonHeight">12</x:Double>
+
+			<Thickness x:Key="PipsPagerButtonBorderThickness">0</Thickness>
+			<Thickness x:Key="PipsPagerNavigationButtonBorderThickness">0</Thickness>
+
+			<x:String x:Key="PipsPagerPreviousPageButtonData">M3.33681 0.322148C3.63156 -0.107383 4.36844 -0.107382 4.66319 0.322148L7.89626 5.03356C8.19101 5.46309 7.82257 6 7.23307 6L0.766932 6C0.177427 6 -0.191014 5.46309 0.103739 5.03356L3.33681 0.322148Z</x:String>
+			<x:String x:Key="PipsPagerNextPageButtonData">M4.66319 5.67785C4.36844 6.10738 3.63156 6.10738 3.33681 5.67785L0.103738 0.966444C-0.191015 0.536913 0.177425 6.83871e-07 0.766931 6.32335e-07L7.23307 6.70473e-08C7.82257 1.55111e-08 8.19101 0.536912 7.89626 0.966443L4.66319 5.67785Z</x:String>
+
+			<x:Double x:Key="PipsPagerNavigationButtonHeight">40</x:Double>
+			<x:Double x:Key="PipsPagerNavigationButtonWidth">40</x:Double>
+			<Thickness x:Key="PipsPagerNavigationButtonPadding">4</Thickness>
+
+			<x:Double x:Key="PipsPagerNavigationVisualStatesEllipseWidth">12</x:Double>
+			<x:Double x:Key="PipsPagerNavigationVisualStatesEllipseHeight">12</x:Double>
+
+			<x:Double x:Key="PipsPagerSelectedEllipseSize">8</x:Double>
+			<x:Double x:Key="PipsPagerNormalEllipseSize">8</x:Double>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<Style x:Key="MaterialPipsPagerNavigationButtonBaseStyle"
+		   TargetType="Button">
+		<Setter Property="Background" Value="{ThemeResource PipsPagerNavigationButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource PipsPagerNavigationButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource PipsPagerNavigationButtonBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource PipsPagerNavigationButtonBorderThickness}" />
+		<Setter Property="UseSystemFocusVisuals" Value="{ThemeResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="0" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Width" Value="{ThemeResource PipsPagerNavigationButtonWidth}" />
+		<Setter Property="Height" Value="{ThemeResource PipsPagerNavigationButtonHeight}" />
+		<Setter Property="Padding" Value="{ThemeResource PipsPagerNavigationButtonPadding}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFillPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonForegroundPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonBackgroundPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="BorderBrush">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonBorderBrushPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFillPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonForegroundPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonBackgroundPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="BorderBrush">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonBorderBrushPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonBackgroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="BorderBrush">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerNavigationButtonBorderBrushDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFillFocused}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Unfocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Ellipse x:Name="VisualStatesEllipse"
+								 Height="{ThemeResource PipsPagerNavigationVisualStatesEllipseHeight}"
+								 Width="{ThemeResource PipsPagerNavigationVisualStatesEllipseWidth}"
+								 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+								 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+								 Fill="{ThemeResource MaterialPipsPagerNavigationButtonVisualStateEllipseFill}"
+								 AutomationProperties.AccessibilityView="Raw" />
+
+						<Border Padding="{TemplateBinding Padding}"
+								RenderTransformOrigin="0.5, 0.5"
+								Background="{TemplateBinding Background}">
+							<Border.RenderTransform>
+								<ScaleTransform x:Name="ScaleTransform" ScaleY="1" ScaleX="1" />
+							</Border.RenderTransform>
+							<PathIcon x:Name="Content"
+									  Data="{TemplateBinding Content}"
+									  Foreground="{TemplateBinding Foreground}"
+									  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									  AutomationProperties.AccessibilityView="Raw" />
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialPipsPagerPreviousPageButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource MaterialPipsPagerNavigationButtonBaseStyle}">
+		<Setter Property="Content" Value="{StaticResource PipsPagerPreviousPageButtonData}" />
+		<Setter Property="VerticalContentAlignment" Value="Bottom" />
+	</Style>
+
+	<Style x:Key="MaterialPipsPagerNextPageButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource MaterialPipsPagerNavigationButtonBaseStyle}">
+		<Setter Property="Content" Value="{StaticResource PipsPagerNextPageButtonData}" />
+		<Setter Property="VerticalContentAlignment" Value="Top" />
+	</Style>
+
+	<Style x:Key="MaterialPipsPagerButtonBaseStyle"
+		   TargetType="Button">
+		<Setter Property="Background" Value="{ThemeResource PipsPagerSelectionIndicatorBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource PipsPagerButtonBorderThickness}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="0" />
+	</Style>
+
+	<Style x:Key="MaterialPipsPagerSelectedPipButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource MaterialPipsPagerButtonBaseStyle}">
+		<Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForegroundSelected}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  IsHitTestVisible="True"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
+						  Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Stroke">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Stroke">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Stroke">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillFocused}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Unfocused" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="OrientationStates">
+								<VisualState x:Name="HorizontalOrientation" />
+								<VisualState x:Name="VerticalOrientation">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Width" Value="{ThemeResource PipsPagerVerticalOrientationButtonWidth}" />
+										<Setter Target="RootGrid.Height" Value="{ThemeResource PipsPagerVerticalOrientationButtonHeight}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Ellipse x:Name="VisualStatesEllipse"
+								 Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}"
+								 Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
+								 Fill="{ThemeResource MaterialPipsPagerVisualStateEllipseFill}"
+								 AutomationProperties.AccessibilityView="Raw" />
+
+						<Ellipse x:Name="MainEllipse"
+								 Height="{ThemeResource PipsPagerSelectedEllipseSize}"
+								 Width="{ThemeResource PipsPagerSelectedEllipseSize}"
+								 Fill="{TemplateBinding Foreground}"
+								 Stroke="{TemplateBinding BorderBrush}"
+								 StrokeThickness="{TemplateBinding BorderThickness}"
+								 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+								 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+								 AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialPipsPagerNormalPipButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource MaterialPipsPagerButtonBaseStyle}">
+		<Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForeground}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  IsHitTestVisible="True"
+						  Background="{TemplateBinding Background}"
+						  Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
+						  Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorForegroundPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Stroke">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPointerOver}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorForegroundPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Stroke">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushPressed}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorForegroundFocused}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualStatesEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource MaterialPipsPagerVisualStateEllipseFillFocused}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+																	   Storyboard.TargetProperty="Background">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBackgroundFocused}" />
+										</ObjectAnimationUsingKeyFrames>
+
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainEllipse"
+																	   Storyboard.TargetProperty="Stroke">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource PipsPagerSelectionIndicatorBorderBrushFocused}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Unfocused" />
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="OrientationStates">
+								<VisualState x:Name="HorizontalOrientation" />
+								<VisualState x:Name="VerticalOrientation">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Width" Value="{ThemeResource PipsPagerVerticalOrientationButtonWidth}" />
+										<Setter Target="RootGrid.Height" Value="{ThemeResource PipsPagerVerticalOrientationButtonHeight}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Ellipse x:Name="MainEllipse"
+								 Height="{ThemeResource PipsPagerNormalEllipseSize}"
+								 Width="{ThemeResource PipsPagerNormalEllipseSize}"
+								 Fill="{TemplateBinding Foreground}"
+								 Stroke="{TemplateBinding BorderBrush}"
+								 StrokeThickness="{TemplateBinding BorderThickness}"
+								 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+								 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+								 AutomationProperties.AccessibilityView="Raw" />
+
+						<Ellipse x:Name="VisualStatesEllipse"
+								 Height="{ThemeResource PipsPagerHorizontalOrientationButtonHeight}"
+								 Width="{ThemeResource PipsPagerHorizontalOrientationButtonWidth}"
+								 Fill="{ThemeResource MaterialPipsPagerVisualStateEllipseFill}"
+								 AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="BaseMaterialPipsPagerStyle"
+		   TargetType="muxc:PipsPager">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="PreviousButtonStyle" Value="{StaticResource MaterialPipsPagerPreviousPageButtonStyle}" />
+		<Setter Property="NextButtonStyle" Value="{StaticResource MaterialPipsPagerNextPageButtonStyle}" />
+		<!-- Uno already implemented the 2.8.0 MUX version of the control -->
+		<!-- Uno.Themes reference is still on the MUX v2.6.0-prerelease.210113001 version for now -->
+		<!-- Remove this file, PipsPager.UWP.xaml,and use <Setter Property=NormalPipStyle /> and <Setter Property=SelectedPipStyle /> only in PipsPager.xaml -->
+		<!-- with the rest of the code, once we can bump the Microsoft.UI.Xaml version -->
+		<not_win:Setter Property="SelectedPipStyle"
+						Value="{StaticResource MaterialPipsPagerSelectedPipButtonStyle}" />
+		<not_win:Setter Property="NormalPipStyle"
+						Value="{StaticResource MaterialPipsPagerNormalPipButtonStyle}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="muxc:PipsPager">
+					<StackPanel x:Name="RootPanel"
+								Orientation="{TemplateBinding Orientation}"
+								Background="{TemplateBinding Background}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="PreviousPageButtonVisibilityStates">
+								<VisualState x:Name="PreviousPageButtonVisible" />
+								<VisualState x:Name="PreviousPageButtonHidden">
+									<VisualState.Setters>
+										<Setter Target="PreviousPageButton.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PreviousPageButtonCollapsed">
+									<VisualState.Setters>
+										<Setter Target="PreviousPageButton.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PreviousPageButtonIsEnabledStates">
+								<VisualState x:Name="PreviousPageButtonEnabled" />
+								<VisualState x:Name="PreviousPageButtonDisabled">
+									<VisualState.Setters>
+										<Setter Target="PreviousPageButton.IsEnabled" Value="False" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="NextPageButtonVisibilityStates">
+								<VisualState x:Name="NextPageButtonVisible" />
+								<VisualState x:Name="NextPageButtonHidden">
+									<VisualState.Setters>
+										<Setter Target="NextPageButton.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="NextPageButtonCollapsed">
+									<VisualState.Setters>
+										<Setter Target="NextPageButton.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="NextPageButtonIsEnabledStates">
+								<VisualState x:Name="NextPageButtonEnabled" />
+								<VisualState x:Name="NextPageButtonDisabled">
+									<VisualState.Setters>
+										<Setter Target="NextPageButton.IsEnabled" Value="False" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="RootPanelOrientationStates">
+								<VisualState x:Name="VerticalOrientationView" />
+								<VisualState x:Name="HorizontalOrientationView">
+									<VisualState.Setters>
+										<Setter Target="RootPanel.Orientation" Value="Horizontal" />
+										<Setter Target="PreviousPageButton.(ToolTipService.Placement)" Value="Left" />
+										<Setter Target="PreviousPageButton.RenderTransformOrigin" Value="0.5, 0.5" />
+										<Setter Target="PreviousPageButton.RenderTransform">
+											<Setter.Value>
+												<RotateTransform Angle="-90" />
+											</Setter.Value>
+										</Setter>
+										<Setter Target="NextPageButton.(ToolTipService.Placement)" Value="Right" />
+										<Setter Target="NextPageButton.RenderTransformOrigin" Value="0.5, 0.5" />
+										<Setter Target="NextPageButton.RenderTransform">
+											<Setter.Value>
+												<RotateTransform Angle="-90" />
+											</Setter.Value>
+										</Setter>
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Button x:Name="PreviousPageButton"
+								ToolTipService.ToolTip="{Binding ElementName=PreviousPageButton, Path=(AutomationProperties.Name)}"
+								ToolTipService.Placement="Top"
+								Style="{TemplateBinding PreviousButtonStyle}"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Center" />
+
+						<ScrollViewer x:Name="PipsPagerScrollViewer"
+									  VerticalScrollBarVisibility="Hidden"
+									  VerticalScrollMode="Disabled"
+									  HorizontalScrollBarVisibility="Hidden"
+									  HorizontalScrollMode="Disabled"
+									  IsHorizontalScrollChainingEnabled="False"
+									  IsVerticalScrollChainingEnabled="False"
+									  HorizontalAlignment="Center"
+									  VerticalAlignment="Center">
+							<muxc:ItemsRepeater x:Name="PipsPagerItemsRepeater"
+												ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PipsPagerItems}">
+								<muxc:ItemsRepeater.Layout>
+									<muxc:StackLayout Orientation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Orientation}" />
+								</muxc:ItemsRepeater.Layout>
+								<muxc:ItemsRepeater.ItemTemplate>
+									<DataTemplate>
+										<Button />
+									</DataTemplate>
+								</muxc:ItemsRepeater.ItemTemplate>
+							</muxc:ItemsRepeater>
+						</ScrollViewer>
+
+						<Button x:Name="NextPageButton"
+								ToolTipService.ToolTip="{Binding ElementName=NextPageButton, Path=(AutomationProperties.Name)}"
+								ToolTipService.Placement="Bottom"
+								Style="{TemplateBinding NextButtonStyle}"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Center" />
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 </ResourceDictionary>
