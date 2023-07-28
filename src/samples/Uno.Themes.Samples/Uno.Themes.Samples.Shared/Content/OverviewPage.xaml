@@ -219,12 +219,16 @@
 					<sample:OverviewSampleView SamplePageType="samples:ToggleSwitchSamplePage">
 						<StackPanel Spacing="8">
 
-							<ToggleSwitch Header="ToggleSwitch"
-										  IsOn="True"
+							<TextBlock Text="ToggleSwitch"
+									   Style="{StaticResource BodySmall}" />
+							
+							<ToggleSwitch IsOn="True"
 										  Style="{StaticResource MaterialToggleSwitchStyle}" />
 
-							<ToggleSwitch Header="Disabled"
-										  IsEnabled="False"
+							<TextBlock Text="ToggleSwitch Disabled"
+									   Style="{StaticResource BodySmall}" />
+
+							<ToggleSwitch IsEnabled="False"
 										  Style="{StaticResource MaterialToggleSwitchStyle}" />
 						</StackPanel>
 					</sample:OverviewSampleView>
