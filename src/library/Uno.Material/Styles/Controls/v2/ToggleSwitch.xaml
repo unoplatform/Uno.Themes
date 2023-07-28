@@ -12,6 +12,7 @@
 					xmlns:um="using:Uno.Material"
 					mc:Ignorable="ios android wasm skia todo">
 
+<<<<<<< HEAD
 	<ResourceDictionary.ThemeDictionaries>
 
 		<ResourceDictionary x:Key="Light">
@@ -693,6 +694,9 @@
 
 	<!--MATERIAL 3-->
 
+=======
+	<!--Resources-->
+>>>>>>> 00c5dea1 (fix: Remove old Material M3 Style to replace it with the new updapted one)
 	<x:Double x:Key="SwitchKnobWidth">52</x:Double>
 	<x:Double x:Key="SwitchKnobIncludingOffShadowWidth">56</x:Double>
 	<x:Double x:Key="SwitchKnobHeight">32</x:Double>
@@ -713,7 +717,14 @@
 	<Thickness x:Key="SwitchKnobOnShadowMargin">20,0,0,0</Thickness>
 	<Thickness x:Key="SwitchKnobOffShadowMargin">0,0,20,0</Thickness>
 
-	<!-- Converters -->
+	<Thickness x:Key="ToggleSwitchHeaderMargin">0,0,0,4</Thickness>
+
+	<!--Animations-->
+	<x:String x:Key="ControlFastOutSlowInKeySpline">0.5,0,0.5,1</x:String>
+	<x:String x:Key="ControlNormalAnimationDuration">00:00:00.225</x:String>
+	<x:String x:Key="ControlFasterAnimationDuration">00:00:00.180</x:String>
+
+	<!--Converters-->
 	<um:FromBoolToValueConverter x:Key="IsOnToOpacity"
 								 TrueValue="1"
 								 FalseValue="0" />
@@ -730,14 +741,7 @@
 								 NullValue="0,0,6,0"
 								 NotNullValue="0,0,2,0" />
 
-	<x:String x:Key="ControlFastOutSlowInKeySpline">0.5,0,0.5,1</x:String>
-
-	<x:String x:Key="ControlNormalAnimationDuration">00:00:00.225</x:String>
-	<x:String x:Key="ControlFasterAnimationDuration">00:00:00.180</x:String>
-
-	<Thickness x:Key="ToggleSwitchTopHeaderMargin">0,0,0,4</Thickness>
-
-	<Style x:Key="M3MaterialToggleSwitchStyle"
+	<Style x:Key="MaterialToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
 
 		<Setter Property="HorizontalAlignment"
@@ -1381,7 +1385,7 @@
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{ThemeResource OnSurfaceVariantBrush}"
 										  IsHitTestVisible="False"
-										  Margin="{ThemeResource ToggleSwitchTopHeaderMargin}"
+										  Margin="{ThemeResource ToggleSwitchHeaderMargin}"
 										  TextWrapping="Wrap"
 										  VerticalAlignment="Top"
 										  Visibility="Collapsed"
@@ -1524,5 +1528,9 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style x:Key="MaterialDefaultToggleSwitchStyle"
+		   TargetType="ToggleSwitch"
+		   BasedOn="{StaticResource MaterialToggleSwitchStyle}" />
 
 </ResourceDictionary>
