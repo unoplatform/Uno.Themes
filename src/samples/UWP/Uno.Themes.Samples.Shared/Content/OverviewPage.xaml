@@ -214,7 +214,24 @@
 										 Style="{StaticResource MaterialRadioButtonStyle}" />
 						</StackPanel>
 					</sample:OverviewSampleView>
+					
+					<!--  ToggleSwitch  -->
+					<sample:OverviewSampleView SamplePageType="samples:ToggleSwitchSamplePage">
+						<StackPanel Spacing="8">
 
+							<TextBlock Text="ToggleSwitch"
+									   Style="{StaticResource BodySmall}" />
+							
+							<ToggleSwitch IsOn="True"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+
+							<TextBlock Text="ToggleSwitch Disabled"
+									   Style="{StaticResource BodySmall}" />
+
+							<ToggleSwitch IsEnabled="False"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.M3MaterialTemplate>
