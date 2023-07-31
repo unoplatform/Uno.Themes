@@ -27,6 +27,8 @@
 	<x:Double x:Key="MediumThumbSize">24</x:Double>
 	<x:Double x:Key="LargeThumbSize">28</x:Double>
 
+	<CornerRadius x:Key="LargeThumbCornerRadius">14</CornerRadius>
+
 	<x:Double x:Key="KnobIconSize">16</x:Double>
 	<Thickness x:Key="KnobIconPadding">2</Thickness>
 	<Thickness x:Key="KnobOnMargin">2,0,0,0</Thickness>
@@ -725,6 +727,7 @@
 									  Width="{StaticResource LargeThumbSize}"
 									  Height="{StaticResource LargeThumbSize}"
 									  Margin="{StaticResource SwitchKnobOnMargin}"
+									  CornerRadius="{StaticResource LargeThumbCornerRadius}"
 									  HorizontalAlignment="Left">
 
 									<!-- Knob On -->
@@ -761,6 +764,7 @@
 									  Width="{StaticResource LargeThumbSize}"
 									  Height="{StaticResource LargeThumbSize}"
 									  Margin="{StaticResource SwitchKnobOffMargin}"
+									  CornerRadius="{StaticResource LargeThumbCornerRadius}"
 									  HorizontalAlignment="Right">
 									<!--Knob Off-->
 									<Ellipse x:Name="KnobOff"
