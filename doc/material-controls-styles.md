@@ -23,7 +23,6 @@ Button|TertiaryLargeFabStyle|
 CalendarDatePicker|CalendarDatePickerStyle|True
 CalendarView|CalendarViewStyle|True
 CheckBox|CheckBoxStyle|True
-CheckBox|SecondaryCheckBoxStyle|
 ComboBox|ComboBoxStyle|True
 CommandBar|CommandBarStyle|True
 ContentDialog|ContentDialogStyle|True
@@ -39,11 +38,13 @@ muxc:NavigationView|NavigationViewStyle|True
 muxc:NavigationViewItem|NavigationViewItemStyle|True
 muxc:ProgressBar|ProgressBarStyle|True
 muxc:ProgressRing|ProgressRingStyle|True
-PasswordBox|FilledPasswordBoxStyle|True
-PasswordBox|OutlinedPasswordBoxStyle|
+PasswordBox|FilledPasswordBoxStyle|
+PasswordBox|OutlinedPasswordBoxStyle|True
 muxc:PipsPager|PipsPagerStyle|True
 RadioButton|RadioButtonStyle|True
 RadioButton|SecondaryRadioButtonStyle|
+RatingControl|RatingControlStyle|True
+RatingControl|SecondaryRatingControlStyle|
 Slider|SliderStyle|True
 TextBlock|DisplayLarge|
 TextBlock|DisplayMedium|
