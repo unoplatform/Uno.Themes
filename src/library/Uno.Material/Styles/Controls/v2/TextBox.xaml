@@ -16,34 +16,33 @@
 	<x:String x:Key="MaterialTextBoxClearGlyphData">M14.9482 6.46442L13.534 5.05021L9.99849 8.58574L6.46296 5.05021L5.04874 6.46442L8.58428 9.99995L5.04874 13.5355L6.46296 14.9497L9.99849 11.4142L13.534 14.9497L14.9482 13.5355L11.4127 9.99995L14.9482 6.46442ZM17.0696 2.92889C13.1663 -0.974342 6.83065 -0.974342 2.92742 2.92889C-0.975807 6.83212 -0.975807 13.1678 2.92742 17.071C6.83065 20.9743 13.1663 20.9743 17.0696 17.071C20.9728 13.1678 20.9728 6.83212 17.0696 2.92889ZM4.34164 15.6568C1.22329 12.5385 1.22329 7.46144 4.34164 4.3431C7.45998 1.22476 12.537 1.22476 15.6553 4.3431C18.7737 7.46144 18.7737 12.5385 15.6553 15.6568C12.537 18.7752 7.45998 18.7752 4.34164 15.6568Z</x:String>
 
 	<ResourceDictionary.ThemeDictionaries>
-
 		<ResourceDictionary x:Key="Default">
 			<StaticResource x:Key="TextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceVariantBrush" />
-			
+
 			<!--#region Filled Text Box Brushes-->
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
@@ -55,12 +54,12 @@
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			
+
 			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			
+
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
@@ -79,6 +78,29 @@
 			<StaticResource x:Key="FilledTextBoxCharacterSpacing" ResourceKey="BodyLargeCharacterSpacing" />
 			<StaticResource x:Key="FilledTextBoxBorderThicknessNormal" ResourceKey="TextBoxOutlinedStrokeHeight" />
 			<StaticResource x:Key="FilledTextBoxBorderThicknessFocused" ResourceKey="TextBoxFocusStrokeWidth" />
+			<!--#endregion-->
+
+			<!--#region Delete Button Style-->
+			<x:Double x:Key="MaterialTextBoxClearGlyphWidth">20</x:Double>
+			<x:Double x:Key="MaterialTextBoxClearGlyphHeight">20</x:Double>
+			<!--#endregion-->
+
+			<!--#region Filled Text Box Style-->
+			<CornerRadius x:Key="MaterialFilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
+			<macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,7</macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16</not_macos:Thickness>
+			<x:Double x:Key="MaterialFilledTextBoxMinHeight">58</x:Double>
+			<x:Double x:Key="MaterialFilledTextBoxBorderHeightFocused">2</x:Double>
+			<!--#endregion-->
+
+			<!--#region Outlined Text Box Style-->
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
+			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
+			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,16,14,16</not_macos:Thickness>
+			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
+			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
 			<!--#endregion-->
 		</ResourceDictionary>
 
@@ -87,28 +109,28 @@
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceVariantBrush" />
-			
+
 			<!--#region Filled Text Box Brushes-->
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-			
+
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
@@ -120,12 +142,12 @@
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			
+
 			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
-			
+
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
@@ -145,40 +167,35 @@
 			<StaticResource x:Key="FilledTextBoxBorderThicknessNormal" ResourceKey="TextBoxOutlinedStrokeHeight" />
 			<StaticResource x:Key="FilledTextBoxBorderThicknessFocused" ResourceKey="TextBoxFocusStrokeWidth" />
 			<!--#endregion-->
+
+			<!--#region Delete Button Style-->
+			<x:Double x:Key="MaterialTextBoxClearGlyphWidth">20</x:Double>
+			<x:Double x:Key="MaterialTextBoxClearGlyphHeight">20</x:Double>
+			<!--#endregion-->
+
+			<!--#region Filled Text Box Style-->
+			<CornerRadius x:Key="MaterialFilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
+			<macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,7</macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16</not_macos:Thickness>
+			<x:Double x:Key="MaterialFilledTextBoxMinHeight">58</x:Double>
+			<x:Double x:Key="MaterialFilledTextBoxBorderHeightFocused">2</x:Double>
+			<!--#endregion-->
+
+			<!--#region Outlined Text Box Style-->
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
+			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
+			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,16,14,16</not_macos:Thickness>
+			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
+			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
+			<!--#endregion-->
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!--#region Delete Button Style-->
-	<x:Double x:Key="MaterialTextBoxClearGlyphWidth">20</x:Double>
-	<x:Double x:Key="MaterialTextBoxClearGlyphHeight">20</x:Double>
-	<!--#endregion-->
-
-	<!--#region Filled Text Box Style-->
-	<CornerRadius x:Key="MaterialFilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
-	<macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,7</macos:Thickness>
-	<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16</not_macos:Thickness>
-	<x:Double x:Key="MaterialFilledTextBoxMinHeight">58</x:Double>
-	<x:Double x:Key="MaterialFilledTextBoxBorderHeightFocused">2</x:Double>
-	<!--#endregion-->
-
-	<!--#region Outlined Text Box Style-->
-	<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
-	<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
-	<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
-	<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,16,14,16</not_macos:Thickness>
-	<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
-	<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
-	<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
-	<!--#endregion-->
-
-	<SolidColorBrush x:Key="MaterialDisabledOutlinedTextBoxBorderBrush"
-					 Opacity="0.12"
-					 Color="{ThemeResource OnSurfaceColor}" />
-
 	<Style x:Key="MaterialDeleteButtonStyle"
 		   TargetType="Button">
-		<Setter Property="Foreground"
-				Value="{ThemeResource TextBoxDeleteButtonForeground}" />
+		<Setter Property="Foreground" Value="{ThemeResource TextBoxDeleteButtonForeground}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -190,20 +207,17 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="GlyphElement.Fill"
-												Value="{ThemeResource TextBoxDeleteButtonForegroundPointerOver}" />
+										<Setter Target="GlyphElement.Fill" Value="{ThemeResource TextBoxDeleteButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="GlyphElement.Fill"
-												Value="{ThemeResource TextBoxDeleteButtonForegroundPressed}" />
+										<Setter Target="GlyphElement.Fill" Value="{ThemeResource TextBoxDeleteButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="GlyphElement.Fill"
-												Value="{ThemeResource TextBoxDeleteButtonForegroundDisabled}" />
+										<Setter Target="GlyphElement.Fill" Value="{ThemeResource TextBoxDeleteButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -226,30 +240,19 @@
 
 	<Style x:Key="MaterialFilledTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="Foreground"
-				Value="{ThemeResource FilledTextBoxForeground}" />
-		<Setter Property="PlaceholderForeground"
-				Value="{ThemeResource FilledTextBoxPlaceholderForeground}" />
-		<Setter Property="Background"
-				Value="{ThemeResource FilledTextBoxBackground}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource FilledTextBoxBorderBrush}" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="CornerRadius"
-				Value="{ThemeResource MaterialFilledTextBoxCornerRadius}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledTextBoxForeground}" />
+		<Setter Property="PlaceholderForeground" Value="{ThemeResource FilledTextBoxPlaceholderForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledTextBoxBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledTextBoxBorderBrush}" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialFilledTextBoxCornerRadius}" />
 
 		<!-- Start: Body Large Typo -->
-		<Setter Property="FontFamily"
-				Value="{ThemeResource FilledTextBoxFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="{ThemeResource FilledTextBoxFontWeight}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource FilledTextBoxFontSize}" />
-		<Setter Property="CharacterSpacing"
-				Value="{ThemeResource FilledTextBoxCharacterSpacing}" />
+		<Setter Property="FontFamily" Value="{ThemeResource FilledTextBoxFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource FilledTextBoxFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource FilledTextBoxFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource FilledTextBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
 		<macos:Setter Property="Padding"
@@ -257,12 +260,10 @@
 		<not_macos:Setter Property="Padding"
 						  Value="{ThemeResource MaterialFilledTextBoxPadding}" />
 
-		<Setter Property="MinHeight"
-				Value="{ThemeResource MaterialFilledTextBoxMinHeight}" />
+		<Setter Property="MinHeight" Value="{ThemeResource MaterialFilledTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -277,16 +278,11 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="NormalBorder.Fill"
-												Value="{ThemeResource FilledTextBoxBorderBrushPointerOver}" />
-										<Setter Target="Root.Background"
-												Value="{ThemeResource FilledTextBoxBackgroundPointerOver}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{ThemeResource FilledTextBoxPlaceholderForegroundPointerOver}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
-										<Setter Target="DeleteButton.Foreground"
-												Value="{ThemeResource FilledTextBoxDeleteButtonForegroundPointerOver}" />
+										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundPointerOver}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundPointerOver}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
+										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -294,33 +290,22 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="NormalBorder.Fill"
-												Value="{ThemeResource FilledTextBoxBorderBrushDisabled}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{ThemeResource FilledTextBoxForegroundDisabled}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{ThemeResource FilledTextBoxPlaceholderForegroundDisabled}" />
-										<Setter Target="Root.Background"
-												Value="{ThemeResource FilledTextBoxBackgroundDisabled}" />
-										<Setter Target="DeleteButton.Foreground"
-												Value="{ThemeResource FilledTextBoxDeleteButtonForegroundDisabled}" />
+										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushDisabled}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundDisabled}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundDisabled}" />
+										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{ThemeResource FilledTextBoxPlaceholderForegroundFocused}" />
-										<Setter Target="NormalBorder.Height"
-												Value="{ThemeResource MaterialFilledTextBoxBorderHeightFocused}" />
-										<Setter Target="NormalBorder.Fill"
-												Value="{ThemeResource FilledTextBoxBorderBrushFocused}" />
-										<Setter Target="Root.Background"
-												Value="{ThemeResource FilledTextBoxBackgroundFocused}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{ThemeResource FilledTextBoxForegroundFocused}" />
-										<Setter Target="DeleteButton.Foreground"
-												Value="{ThemeResource FilledTextBoxDeleteButtonForegroundFocused}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="NormalBorder.Height" Value="{ThemeResource MaterialFilledTextBoxBorderHeightFocused}" />
+										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushFocused}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundFocused}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundFocused}" />
+										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundFocused}" />
 									</VisualState.Setters>
 									<Storyboard>
 
@@ -336,8 +321,7 @@
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
-										<Setter Target="DeleteButton.Visibility"
-												Value="Visible" />
+										<Setter Target="DeleteButton.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -465,8 +449,7 @@
 								   not_macos:RenderTransformOrigin="0.5,0.5"
 								   macos:RenderTransformOrigin="0.0,0.5">
 							<Rectangle.RenderTransform>
-								<ScaleTransform x:Name="FocusedBorder_ScaleTransform"
-												ScaleX="0" />
+								<ScaleTransform x:Name="FocusedBorder_ScaleTransform" ScaleX="0" />
 							</Rectangle.RenderTransform>
 						</Rectangle>
 					</Grid>
@@ -478,46 +461,32 @@
 
 	<Style x:Key="MaterialOutlinedTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource OutlinedTextBoxForeground}" />
-		<Setter Property="PlaceholderForeground"
-				Value="{ThemeResource OutlinedTextBoxPlaceholderForeground}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource OutlinedTextBoxBorderBrush}" />
-		<Setter Property="BorderThickness"
-				Value="{ThemeResource MaterialOutlinedTextBoxBorderThickness}" />
-		<Setter Property="CornerRadius"
-				Value="{ThemeResource MaterialOutlinedTextBoxCornerRadius}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource OutlinedTextBoxForeground}" />
+		<Setter Property="PlaceholderForeground" Value="{ThemeResource OutlinedTextBoxPlaceholderForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialOutlinedTextBoxCornerRadius}" />
 
 		<!-- Start: Body Large Typo -->
-		<Setter Property="FontFamily"
-				Value="{ThemeResource OutlinedTextBoxFontFamily}" />
-		<Setter Property="FontWeight"
-				Value="{ThemeResource OutlinedTextBoxFontWeight}" />
-		<Setter Property="FontSize"
-				Value="{ThemeResource OutlinedTextBoxFontSize}" />
-		<Setter Property="CharacterSpacing"
-				Value="{ThemeResource OutlinedTextBoxCharacterSpacing}" />
+		<Setter Property="FontFamily" Value="{ThemeResource OutlinedTextBoxFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource OutlinedTextBoxFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource OutlinedTextBoxFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource OutlinedTextBoxCharacterSpacing}" />
 		<!-- End: Body Large Typo -->
 
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
 
 		<macos:Setter Property="Padding"
 					  Value="{ThemeResource MaterialOutlinedTextBoxPadding}" />
 		<not_macos:Setter Property="Padding"
 						  Value="{ThemeResource MaterialOutlinedTextBoxPadding}" />
 
-		<Setter Property="MinHeight"
-				Value="{ThemeResource MaterialOutlinedTextBoxMinHeight}" />
+		<Setter Property="MinHeight" Value="{ThemeResource MaterialOutlinedTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
-				Value="{x:Null}" />
+		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -533,48 +502,36 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="RootBorder.BorderBrush"
-												Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
+										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed" />
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootBorder.BorderBrush"
-												Value="{ThemeResource OutlinedTextBoxBorderBrushDisabled}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{ThemeResource OutlinedTextBoxForegroundDisabled}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushDisabled}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundDisabled}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<!--ICI-->
-										<Setter Target="RootBorder.BorderBrush"
-												Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
-										<Setter Target="ContentElement.Foreground"
-												Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />
-										<Setter Target="PlaceholderElement.Foreground"
-												Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
-										<Setter Target="RootBorder.BorderThickness"
-												Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessFocused}" />
-										<Setter Target="RootBorder.Padding"
-												Value="0" />
+										<!-- ICI -->
+										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="RootBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessFocused}" />
+										<Setter Target="RootBorder.Padding" Value="0" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
-										<Setter Target="DeleteButton.Visibility"
-												Value="Visible" />
+										<Setter Target="DeleteButton.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="ButtonCollapsed" />
