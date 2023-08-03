@@ -24,11 +24,13 @@
             <StaticResource x:Key="HyperlinkButtonFontSize" ResourceKey="LabelLargeFontSize" />
             <StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
 
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacity" ResourceKey="NormalOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
+            <x:Double x:Key="HyperlinkButtonBackgroundOpacity">1</x:Double>
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
-        </ResourceDictionary>
+			<x:Double x:Key="HyperlinkButtonBackgroundOpacityDisabled">1</x:Double>
+
+			<Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
+		</ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
             <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
@@ -49,15 +51,14 @@
             <StaticResource x:Key="HyperlinkButtonFontSize" ResourceKey="LabelLargeFontSize" />
             <StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
 
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacity" ResourceKey="NormalOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
+			<x:Double x:Key="HyperlinkButtonBackgroundOpacity">1</x:Double>
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
-        </ResourceDictionary>
-    </ResourceDictionary.ThemeDictionaries>
+			<x:Double x:Key="HyperlinkButtonBackgroundOpacityDisabled">1</x:Double>
 
-    <Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
-    <x:Double x:Key="NormalOpacity">1</x:Double>
+			<Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
+		</ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
 
     <Style x:Key="MaterialHyperlinkButtonStyle"
            TargetType="HyperlinkButton">
