@@ -3,20 +3,28 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material">
 
-	<!--Resources-->
-	<x:Double x:Key="SwitchKnobWidth">52</x:Double>
-	<x:Double x:Key="SwitchKnobIncludingOffShadowWidth">56</x:Double>
-	<x:Double x:Key="SwitchKnobHeight">32</x:Double>
-	<x:Double x:Key="SwitchKnobRadius">16</x:Double>
-	<x:Double x:Key="SwitchKnobStrokeThickness">2</x:Double>
-	<Thickness x:Key="SwitchKnobOnMargin">26,0,0,0</Thickness>
-	<Thickness x:Key="SwitchKnobOffMargin">0,0,22,0</Thickness>
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<!-- Non-opaque/transparent primary disabled color -->
+			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#E9E5FA</Color>
+			<!-- Non-opaque/transparent white color that shows on white surfaces -->
+			<Color x:Key="MaterialSurfaceVariantLightColor">#F7F7F7</Color>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Dark">
+			<!-- Non-opaque/transparent primary disabled color -->
+			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#57507C</Color>
+			<!-- Non-opaque/transparent white color that shows on white surfaces -->
+			<Color x:Key="MaterialSurfaceVariantLightColor">#D7D7D7</Color>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
-	<x:Double x:Key="SmallThumbSize">16</x:Double>
-	<x:Double x:Key="MediumThumbSize">24</x:Double>
-	<x:Double x:Key="LargeThumbSize">28</x:Double>
+	<Thickness x:Key="MaterialToggleSwitchHeaderMargin">0,0,12,0</Thickness>
 
-	<CornerRadius x:Key="LargeThumbCornerRadius">14</CornerRadius>
+	<!-- Toggle On -->
+	<StaticResource x:Key="MaterialToggleSwitchOnButtonBrush"
+					ResourceKey="PrimaryBrush" />
+	<StaticResource x:Key="MaterialToggleSwitchOnBackgroundBrush"
+					ResourceKey="PrimaryVariantLightBrush" />
 
 	<x:Double x:Key="KnobIconSize">16</x:Double>
 	<Thickness x:Key="KnobIconPadding">2</Thickness>
@@ -31,10 +39,148 @@
 								 TrueValue="1"
 								 FalseValue="0" />
 
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<!-- MaterialToggleSwitchStyle -->
+			<StaticResource x:Key="ToggleSwitchOffOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOffOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillFocused" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillFocused" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillDisabled" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFillFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFillPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFillFocused" ResourceKey="OnSurfaceVariantFocusedBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFillPressed" ResourceKey="OnSurfaceVariantPressedBrush" />
+			<StaticResource x:Key="ToggleSwitchOnSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchOffIconPresenterForeground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOffIconPresenterForegroundDisabled" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOnIconPresenterForeground" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchOnIconPresenterForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ToggleSwitchThumb" ResourceKey="SystemControlTransparentBrush" />
+
+			<x:Double x:Key="SwitchKnobWidth">52</x:Double>
+			<x:Double x:Key="SwitchKnobIncludingOffShadowWidth">56</x:Double>
+			<x:Double x:Key="SwitchKnobHeight">32</x:Double>
+			<x:Double x:Key="SwitchKnobRadius">16</x:Double>
+			<x:Double x:Key="SwitchKnobStrokeThickness">2</x:Double>
+			<x:Double x:Key="SwitchKnobShadowSize">40</x:Double>
+			<x:Double x:Key="SmallThumbSize">16</x:Double>
+			<x:Double x:Key="MediumThumbSize">24</x:Double>
+			<x:Double x:Key="LargeThumbSize">28</x:Double>
+			<x:Double x:Key="KnobIconSize">16</x:Double>
+
+			<CornerRadius x:Key="LargeThumbCornerRadius">14</CornerRadius>
+
+			<Thickness x:Key="KnobIconPadding">2</Thickness>
+			<Thickness x:Key="KnobOnMargin">2,0,0,0</Thickness>
+			<Thickness x:Key="SwitchKnobOnMargin">26,0,0,0</Thickness>
+			<Thickness x:Key="SwitchKnobOffMargin">0,0,22,0</Thickness>
+			<Thickness x:Key="SwitchKnobOnShadowMargin">20,0,0,0</Thickness>
+			<Thickness x:Key="SwitchKnobOffShadowMargin">0,0,20,0</Thickness>
+		</ResourceDictionary>
 	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOffToOpacity"
 								 TrueValue="0"
 								 FalseValue="1" />
 
+		<ResourceDictionary x:Key="Light">
+			<!-- MaterialToggleSwitchStyle -->
+			<StaticResource x:Key="ToggleSwitchOffOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOffOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillFocused" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffFillDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillFocused" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFillDisabled" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFillPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFillFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnShadowFillPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFill" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFillPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFillFocused" ResourceKey="OnSurfaceVariantFocusedBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOffShadowFillPressed" ResourceKey="OnSurfaceVariantPressedBrush" />
+			<StaticResource x:Key="ToggleSwitchOnSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchOffIconPresenterForeground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOffIconPresenterForegroundDisabled" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOnIconPresenterForeground" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchOnIconPresenterForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ToggleSwitchThumb" ResourceKey="SystemControlTransparentBrush" />
+
+			<x:Double x:Key="SwitchKnobWidth">52</x:Double>
+			<x:Double x:Key="SwitchKnobIncludingOffShadowWidth">56</x:Double>
+			<x:Double x:Key="SwitchKnobHeight">32</x:Double>
+			<x:Double x:Key="SwitchKnobRadius">16</x:Double>
+			<x:Double x:Key="SwitchKnobStrokeThickness">2</x:Double>
+			<x:Double x:Key="SwitchKnobShadowSize">40</x:Double>
+			<x:Double x:Key="SmallThumbSize">16</x:Double>
+			<x:Double x:Key="MediumThumbSize">24</x:Double>
+			<x:Double x:Key="LargeThumbSize">28</x:Double>
+			<x:Double x:Key="KnobIconSize">16</x:Double>
+
+			<CornerRadius x:Key="LargeThumbCornerRadius">14</CornerRadius>
+
+			<Thickness x:Key="KnobIconPadding">2</Thickness>
+			<Thickness x:Key="KnobOnMargin">2,0,0,0</Thickness>
+			<Thickness x:Key="SwitchKnobOnMargin">26,0,0,0</Thickness>
+			<Thickness x:Key="SwitchKnobOffMargin">0,0,22,0</Thickness>
+			<Thickness x:Key="SwitchKnobOnShadowMargin">20,0,0,0</Thickness>
+			<Thickness x:Key="SwitchKnobOffShadowMargin">0,0,20,0</Thickness>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!--Resources for the ToggleSwitchOffContentToContentSize converter needed to be extracted, because it was crashing when using ThemeResources-->
+	<x:Double x:Key="SmallThumbOffSize">16</x:Double>
+	<x:Double x:Key="MediumThumbOffSize">24</x:Double>
+	
+	<!-- Converters -->
+	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOnToOpacity"
+								 TrueValue="1"
+								 FalseValue="0" />
+>>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
+
+
+<<<<<<< HEAD
+	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
+					  TargetType="ToggleSwitch">
+		<Setter Property="Foreground"
+				Value="{ThemeResource MaterialToggleSwitchOnButtonBrush}" />
+		<Setter Property="Background"
+				Value="{ThemeResource MaterialToggleSwitchOnBackgroundBrush}" />
+=======
+	<um:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentSize"
+								 NullValue="{StaticResource SmallThumbOffSize}"
+								 NotNullValue="{StaticResource MediumThumbOffSize}" />
+>>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
 	<um:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentSize"
 								 NullValue="{StaticResource SmallThumbSize}"
 								 NotNullValue="{StaticResource MediumThumbSize}" />
@@ -249,11 +395,17 @@
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
 																	Value="{ThemeResource PrimaryFocusedBrush}" />
+=======
+																	Value="{ThemeResource ToggleSwitchKnobOnShadowFillPressed}" />
+>>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOffShadow"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
 																	Value="{ThemeResource OnSurfaceVariantFocusedBrush}" />
+=======
+																	Value="{ThemeResource ToggleSwitchKnobOffShadowFillPressed}" />
+>>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -274,11 +426,17 @@
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
 																	Value="{ThemeResource PrimaryBrush}" />
+=======
+																	Value="{ThemeResource ToggleSwitchKnobBoundsFillDisabled}" />
+>>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
 																	Value="{ThemeResource OnSurfaceVariantBrush}" />
+=======
+																	Value="{ThemeResource ToggleSwitchKnobOffFillDisabled}" />
+>>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Fill">
@@ -322,6 +480,9 @@
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
 																	Value="{ThemeResource OnSurfaceVariantPressedBrush}" />
+=======
+																	Value="{ThemeResource ToggleSwitchOffIconPresenterForegroundDisabled}" />
+>>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
