@@ -605,7 +605,7 @@
 						<!-- Alternate Content -->
 						<ContentPresenter x:Name="AlternateContentPresenter"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}}"
+										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, FallbackValue=' ', TargetNullValue=' '}"
 										  Foreground="{TemplateBinding Foreground}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
