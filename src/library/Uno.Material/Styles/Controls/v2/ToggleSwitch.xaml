@@ -1,43 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:um="using:Uno.Material">
-
-	<ResourceDictionary.ThemeDictionaries>
-		<ResourceDictionary x:Key="Light">
-			<!-- Non-opaque/transparent primary disabled color -->
-			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#E9E5FA</Color>
-			<!-- Non-opaque/transparent white color that shows on white surfaces -->
-			<Color x:Key="MaterialSurfaceVariantLightColor">#F7F7F7</Color>
-		</ResourceDictionary>
-		<ResourceDictionary x:Key="Dark">
-			<!-- Non-opaque/transparent primary disabled color -->
-			<Color x:Key="MaterialPrimaryVariantLowThumbColor">#57507C</Color>
-			<!-- Non-opaque/transparent white color that shows on white surfaces -->
-			<Color x:Key="MaterialSurfaceVariantLightColor">#D7D7D7</Color>
-		</ResourceDictionary>
-	</ResourceDictionary.ThemeDictionaries>
-
-	<Thickness x:Key="MaterialToggleSwitchHeaderMargin">0,0,12,0</Thickness>
-
-	<!-- Toggle On -->
-	<StaticResource x:Key="MaterialToggleSwitchOnButtonBrush"
-					ResourceKey="PrimaryBrush" />
-	<StaticResource x:Key="MaterialToggleSwitchOnBackgroundBrush"
-					ResourceKey="PrimaryVariantLightBrush" />
-
-	<x:Double x:Key="KnobIconSize">16</x:Double>
-	<Thickness x:Key="KnobIconPadding">2</Thickness>
-	<Thickness x:Key="KnobOnMargin">2,0,0,0</Thickness>
-
-	<x:Double x:Key="SwitchKnobShadowSize">40</x:Double>
-	<Thickness x:Key="SwitchKnobOnShadowMargin">20,0,0,0</Thickness>
-	<Thickness x:Key="SwitchKnobOffShadowMargin">0,0,20,0</Thickness>
-
-	<!--Converters-->
-	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOnToOpacity"
-								 TrueValue="1"
-								 FalseValue="0" />
+					xmlns:um="using:Uno.Material"
+					mc:Ignorable="d">
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
@@ -96,9 +62,6 @@
 			<Thickness x:Key="SwitchKnobOnShadowMargin">20,0,0,0</Thickness>
 			<Thickness x:Key="SwitchKnobOffShadowMargin">0,0,20,0</Thickness>
 		</ResourceDictionary>
-	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOffToOpacity"
-								 TrueValue="0"
-								 FalseValue="1" />
 
 		<ResourceDictionary x:Key="Light">
 			<!-- MaterialToggleSwitchStyle -->
@@ -158,32 +121,22 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!--Resources for the ToggleSwitchOffContentToContentSize converter needed to be extracted, because it was crashing when using ThemeResources-->
+	<!-- Resources for the ToggleSwitchOffContentToContentSize converter needed to be extracted, because it was crashing when using ThemeResources -->
 	<x:Double x:Key="SmallThumbOffSize">16</x:Double>
 	<x:Double x:Key="MediumThumbOffSize">24</x:Double>
-	
+
 	<!-- Converters -->
 	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOnToOpacity"
 								 TrueValue="1"
 								 FalseValue="0" />
->>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
 
+	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOffToOpacity"
+								 TrueValue="0"
+								 FalseValue="1" />
 
-<<<<<<< HEAD
-	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
-					  TargetType="ToggleSwitch">
-		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialToggleSwitchOnButtonBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource MaterialToggleSwitchOnBackgroundBrush}" />
-=======
 	<um:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentSize"
 								 NullValue="{StaticResource SmallThumbOffSize}"
 								 NotNullValue="{StaticResource MediumThumbOffSize}" />
->>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
-	<um:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentSize"
-								 NullValue="{StaticResource SmallThumbSize}"
-								 NotNullValue="{StaticResource MediumThumbSize}" />
 
 	<um:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentMargin"
 								 NullValue="0,0,6,0"
@@ -191,22 +144,14 @@
 
 	<Style x:Key="MaterialToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="ManipulationMode" Value="System,TranslateX" />
+		<Setter Property="FocusVisualMargin" Value="0" />
 
-		<Setter Property="HorizontalAlignment"
-				Value="Left" />
-		<Setter Property="VerticalAlignment"
-				Value="Center" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Left" />
-		<Setter Property="ManipulationMode"
-				Value="System,TranslateX" />
-		<Setter Property="FocusVisualMargin"
-				Value="0" />
-
-		<Setter Property="OnContent"
-				Value="{x:Null}" />
-		<Setter Property="OffContent"
-				Value="{x:Null}" />
+		<Setter Property="OnContent" Value="{x:Null}" />
+		<Setter Property="OffContent" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -223,41 +168,41 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
 																	   Storyboard.TargetProperty="Stroke">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OutlineBrush}" />
+																	Value="{ThemeResource ToggleSwitchOuterBorderStroke}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource SurfaceVariantBrush}" />
+																	Value="{ThemeResource ToggleSwitchOuterBorderFill}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceVariantBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOffFill}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnPrimaryBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOnFill}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobBoundsFill}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Width"
@@ -278,40 +223,38 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="SwitchKnobOnShadow.Visibility"
-												Value="Visible" />
-										<Setter Target="SwitchKnobOffShadow.Visibility"
-												Value="Visible" />
+										<Setter Target="SwitchKnobOnShadow.Visibility" Value="Visible" />
+										<Setter Target="SwitchKnobOffShadow.Visibility" Value="Visible" />
 									</VisualState.Setters>
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceVariantBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOffFillPointerOver}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryContainerBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOnFillPointerOver}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobBoundsFillPointerOver}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Width"
@@ -330,52 +273,50 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryHoverBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOnShadowFillPointerOver}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOffShadow"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceVariantHoverBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOffShadowFillPointerOver}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="SwitchKnobOnShadow.Visibility"
-												Value="Visible" />
-										<Setter Target="SwitchKnobOffShadow.Visibility"
-												Value="Visible" />
+										<Setter Target="SwitchKnobOnShadow.Visibility" Value="Visible" />
+										<Setter Target="SwitchKnobOffShadow.Visibility" Value="Visible" />
 									</VisualState.Setters>
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceVariantBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOffFillFocused}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryContainerBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOnFillFocused}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobBoundsFillFocused}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Width"
@@ -394,95 +335,76 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryFocusedBrush}" />
-=======
-																	Value="{ThemeResource ToggleSwitchKnobOnShadowFillPressed}" />
->>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
+																	Value="{ThemeResource ToggleSwitchKnobOnShadowFillFocused}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOffShadow"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceVariantFocusedBrush}" />
-=======
-																	Value="{ThemeResource ToggleSwitchKnobOffShadowFillPressed}" />
->>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
+																	Value="{ThemeResource ToggleSwitchKnobOffShadowFillFocused}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="KnobOn.Margin"
-												Value="0" />
-										<Setter Target="KnobOff.Margin"
-												Value="0" />
-										<Setter Target="SwitchKnobOnShadow.Visibility"
-												Value="Visible" />
-										<Setter Target="SwitchKnobOffShadow.Visibility"
-												Value="Visible" />
+										<Setter Target="KnobOn.Margin" Value="0" />
+										<Setter Target="KnobOff.Margin" Value="0" />
+										<Setter Target="SwitchKnobOnShadow.Visibility" Value="Visible" />
+										<Setter Target="SwitchKnobOffShadow.Visibility" Value="Visible" />
 									</VisualState.Setters>
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryBrush}" />
-=======
-																	Value="{ThemeResource ToggleSwitchKnobBoundsFillDisabled}" />
->>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
+																	Value="{ThemeResource ToggleSwitchKnobBoundsFillPressed}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceVariantBrush}" />
-=======
-																	Value="{ThemeResource ToggleSwitchKnobOffFillDisabled}" />
->>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
+																	Value="{ThemeResource ToggleSwitchKnobOffFillPressed}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryContainerBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOnFillPressed}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource LargeThumbSize}" />
+																  Value="{ThemeResource LargeThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource LargeThumbSize}" />
+																  Value="{ThemeResource LargeThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource LargeThumbSize}" />
+																  Value="{ThemeResource LargeThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchFasterAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource LargeThumbSize}" />
+																  Value="{ThemeResource LargeThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOnShadow"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource PrimaryPressedBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOnShadowFillPressed}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOffShadow"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceVariantPressedBrush}" />
-=======
-																	Value="{ThemeResource ToggleSwitchOffIconPresenterForegroundDisabled}" />
->>>>>>> 8b41c7d8 (refactor: add lightweight styling resources for ToggleSwitch control (#1130))
+																	Value="{ThemeResource ToggleSwitchKnobOffShadowFillPressed}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -492,7 +414,7 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceDisabledBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobBoundsFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
 																	   Storyboard.TargetProperty="Opacity">
@@ -502,36 +424,36 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceLowBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOffFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource SurfaceBrush}" />
+																	Value="{ThemeResource ToggleSwitchKnobOnFillDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchNormalAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
 											<SplineDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchNormalAnimationDuration}"
 																  KeySpline="{StaticResource MaterialToggleSwitchFastOutSlowInKeySpline}"
-																  Value="{StaticResource MediumThumbSize}" />
+																  Value="{ThemeResource MediumThumbSize}" />
 										</DoubleAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OnIconPresenter"
 																	   Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource OnSurfaceLowBrush}" />
+																	Value="{ThemeResource ToggleSwitchOnIconPresenterForegroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OffIconPresenter"
 																	   Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource SurfaceVariantBrush}" />
+																	Value="{ThemeResource ToggleSwitchOffIconPresenterForegroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OffIconPresenter"
 																	   Storyboard.TargetProperty="Opacity">
@@ -671,7 +593,7 @@
 										<Storyboard>
 											<RepositionThemeAnimation TargetName="SwitchKnob"
 																	  FromHorizontalOffset="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.KnobOnToOffOffset}" />
-											<!--#region uno#9507: UNO specific workaround to reset the states -->
+											<!--#region uno#9507: UNO specific workaround to reset the states-->
 											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																		   Storyboard.TargetProperty="Opacity">
 												<LinearDoubleKeyFrame KeyTime="{StaticResource MaterialToggleSwitchNormalAnimationDuration}"
@@ -841,54 +763,54 @@
 							  HorizontalAlignment="Left"
 							  VerticalAlignment="Top">
 
-							<!--Off-->
+							<!-- Off -->
 							<Rectangle x:Name="OuterBorder"
-									   Width="{StaticResource SwitchKnobWidth}"
-									   Height="{StaticResource SwitchKnobHeight}"
-									   RadiusX="{StaticResource SwitchKnobRadius}"
-									   RadiusY="{StaticResource SwitchKnobRadius}"
-									   Fill="{ThemeResource SurfaceVariantBrush}"
-									   Stroke="{ThemeResource OutlineBrush}"
-									   StrokeThickness="{StaticResource SwitchKnobStrokeThickness}"
+									   Width="{ThemeResource SwitchKnobWidth}"
+									   Height="{ThemeResource SwitchKnobHeight}"
+									   RadiusX="{ThemeResource SwitchKnobRadius}"
+									   RadiusY="{ThemeResource SwitchKnobRadius}"
+									   Fill="{ThemeResource ToggleSwitchOffOuterBorderFill}"
+									   Stroke="{ThemeResource ToggleSwitchOffOuterBorderStroke}"
+									   StrokeThickness="{ThemeResource SwitchKnobStrokeThickness}"
 									   HorizontalAlignment="Center" />
 
-							<!--On-->
+							<!-- On -->
 							<Rectangle x:Name="SwitchKnobBounds"
-									   Width="{StaticResource SwitchKnobWidth}"
-									   Height="{StaticResource SwitchKnobHeight}"
-									   RadiusX="{StaticResource SwitchKnobRadius}"
-									   RadiusY="{StaticResource SwitchKnobRadius}"
-									   Fill="{ThemeResource PrimaryBrush}"
+									   Width="{ThemeResource SwitchKnobWidth}"
+									   Height="{ThemeResource SwitchKnobHeight}"
+									   RadiusX="{ThemeResource SwitchKnobRadius}"
+									   RadiusY="{ThemeResource SwitchKnobRadius}"
+									   Fill="{ThemeResource ToggleSwitchOnSwitchKnobBoundsFill}"
 									   HorizontalAlignment="Center"
 									   Opacity="0" />
 
 							<Grid x:Name="SwitchKnob"
 								  HorizontalAlignment="Left"
-								  Width="{StaticResource SwitchKnobIncludingOffShadowWidth}"
-								  Height="{StaticResource SwitchKnobHeight}">
+								  Width="{ThemeResource SwitchKnobIncludingOffShadowWidth}"
+								  Height="{ThemeResource SwitchKnobHeight}">
 
-								<!--Switch Knob - On-->
+								<!-- Switch Knob - On -->
 								<Grid x:Name="SwitchKnobOn"
-									  Width="{StaticResource LargeThumbSize}"
-									  Height="{StaticResource LargeThumbSize}"
-									  Margin="{StaticResource SwitchKnobOnMargin}"
-									  CornerRadius="{StaticResource LargeThumbCornerRadius}"
+									  Width="{ThemeResource LargeThumbSize}"
+									  Height="{ThemeResource LargeThumbSize}"
+									  Margin="{ThemeResource SwitchKnobOnMargin}"
+									  CornerRadius="{ThemeResource LargeThumbCornerRadius}"
 									  HorizontalAlignment="Left">
 
 									<!-- Knob On -->
 									<Ellipse x:Name="KnobOn"
 											 Opacity="0"
-											 Width="{StaticResource MediumThumbSize}"
-											 Height="{StaticResource MediumThumbSize}"
-											 Margin="{StaticResource KnobOnMargin}"
+											 Width="{ThemeResource MediumThumbSize}"
+											 Height="{ThemeResource MediumThumbSize}"
+											 Margin="{ThemeResource KnobOnMargin}"
 											 VerticalAlignment="Center"
 											 HorizontalAlignment="Left"
-											 Fill="{ThemeResource OnPrimaryBrush}" />
+											 Fill="{ThemeResource ToggleSwitchKnobOnFill}" />
 
-									<!--On Icon-->
-									<Border Height="{StaticResource KnobIconSize}"
-											Width="{StaticResource KnobIconSize}"
-											Padding="{StaticResource KnobIconPadding}"
+									<!-- On Icon -->
+									<Border Height="{ThemeResource KnobIconSize}"
+											Width="{ThemeResource KnobIconSize}"
+											Padding="{ThemeResource KnobIconPadding}"
 											VerticalAlignment="Center"
 											HorizontalAlignment="Center">
 										<Viewbox>
@@ -899,31 +821,31 @@
 															  HorizontalAlignment="Center"
 															  VerticalContentAlignment="Center"
 															  HorizontalContentAlignment="Center"
-															  Foreground="{ThemeResource OnPrimaryContainerBrush}" />
+															  Foreground="{ThemeResource ToggleSwitchOnIconPresenterForeground}" />
 										</Viewbox>
 									</Border>
 								</Grid>
 
-								<!--Switch Knob - Off-->
+								<!-- Switch Knob - Off -->
 								<Grid x:Name="SwitchKnobOff"
-									  Width="{StaticResource LargeThumbSize}"
-									  Height="{StaticResource LargeThumbSize}"
-									  Margin="{StaticResource SwitchKnobOffMargin}"
-									  CornerRadius="{StaticResource LargeThumbCornerRadius}"
+									  Width="{ThemeResource LargeThumbSize}"
+									  Height="{ThemeResource LargeThumbSize}"
+									  Margin="{ThemeResource SwitchKnobOffMargin}"
+									  CornerRadius="{ThemeResource LargeThumbCornerRadius}"
 									  HorizontalAlignment="Right">
-									<!--Knob Off-->
+									<!-- Knob Off -->
 									<Ellipse x:Name="KnobOff"
-											 Fill="{ThemeResource OnSurfaceVariantBrush}"
+											 Fill="{ThemeResource ToggleSwitchKnobOffFill}"
 											 Height="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleSwitchOffContentToContentSize}}"
 											 Width="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleSwitchOffContentToContentSize}}"
 											 Margin="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleSwitchOffContentToContentMargin}}"
 											 VerticalAlignment="Center"
 											 HorizontalAlignment="Right" />
 
-									<!--Off Icon-->
-									<Border Height="{StaticResource KnobIconSize}"
-											Width="{StaticResource KnobIconSize}"
-											Padding="{StaticResource KnobIconPadding}"
+									<!-- Off Icon -->
+									<Border Height="{ThemeResource KnobIconSize}"
+											Width="{ThemeResource KnobIconSize}"
+											Padding="{ThemeResource KnobIconPadding}"
 											VerticalAlignment="Center"
 											HorizontalAlignment="Center">
 										<Viewbox>
@@ -934,42 +856,41 @@
 															  HorizontalAlignment="Center"
 															  VerticalContentAlignment="Center"
 															  HorizontalContentAlignment="Center"
-															  Foreground="{ThemeResource SurfaceVariantBrush}" />
+															  Foreground="{ThemeResource ToggleSwitchOffIconPresenterForeground}" />
 										</Viewbox>
 									</Border>
 								</Grid>
 							</Grid>
 
-							<!--On State Layer-->
+							<!-- On State Layer -->
 							<Ellipse x:Name="SwitchKnobOnShadow"
-									 Width="{StaticResource SwitchKnobShadowSize}"
-									 Height="{StaticResource SwitchKnobShadowSize}"
-									 Margin="{StaticResource SwitchKnobOnShadowMargin}"
+									 Width="{ThemeResource SwitchKnobShadowSize}"
+									 Height="{ThemeResource SwitchKnobShadowSize}"
+									 Margin="{ThemeResource SwitchKnobOnShadowMargin}"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center"
-									 Fill="Transparent"
+									 Fill="{ThemeResource ToggleSwitchKnobOnShadowFill}"
 									 Opacity="0" />
 
-							<!--Off State Layer-->
+							<!-- Off State Layer -->
 							<Ellipse x:Name="SwitchKnobOffShadow"
-									 Width="{StaticResource SwitchKnobShadowSize}"
-									 Height="{StaticResource SwitchKnobShadowSize}"
-									 Margin="{StaticResource SwitchKnobOffShadowMargin}"
+									 Width="{ThemeResource SwitchKnobShadowSize}"
+									 Height="{ThemeResource SwitchKnobShadowSize}"
+									 Margin="{ThemeResource SwitchKnobOffShadowMargin}"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center"
-									 Fill="Transparent"
+									 Fill="{ThemeResource ToggleSwitchKnobOffShadowFill}"
 									 Opacity="0" />
 
-							<!--SwitchThumb-->
+							<!-- SwitchThumb -->
 							<Thumb x:Name="SwitchThumb"
 								   AutomationProperties.AccessibilityView="Raw">
 								<Thumb.Template>
 									<ControlTemplate TargetType="Thumb">
-										<Rectangle Fill="Transparent" />
+										<Rectangle Fill="{ThemeResource ToggleSwitchThumb}" />
 									</ControlTemplate>
 								</Thumb.Template>
 							</Thumb>
-
 						</Grid>
 					</Grid>
 				</ControlTemplate>
@@ -980,5 +901,4 @@
 	<Style x:Key="MaterialDefaultToggleSwitchStyle"
 		   TargetType="ToggleSwitch"
 		   BasedOn="{StaticResource MaterialToggleSwitchStyle}" />
-
 </ResourceDictionary>
