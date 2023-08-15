@@ -9,50 +9,42 @@
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					mc:Ignorable="d not_win lottie_not_win">
 
-	<lottie_win:LottieVisualSource x:Key="M3MaterialDeterminateAnimation_Win"
-								   UriSource="ms-appx:///Uno.Material/Assets/MaterialDeterminate.json" />
-	<lottie_win:LottieVisualSource x:Key="M3MaterialIndeterminateAnimation_Win"
-								   UriSource="ms-appx:///Uno.Material/Assets/MaterialIndeterminate.json" />
-
-	<lottie_not_win:LottieVisualSource x:Key="M3MaterialDeterminateAnimation_Uno"
-									   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialDeterminate.json" />
-	<lottie_not_win:LottieVisualSource x:Key="M3MaterialIndeterminateAnimation_Uno"
-									   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialIndeterminate.json" />
+	<ResourceDictionary.MergedDictionaries>
+		<not_win:ResourceDictionary>
+			<lottie_not_win:LottieVisualSource x:Key="MaterialDeterminateAnimation_Uno"
+											   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialDeterminate.json" />
+			<lottie_not_win:LottieVisualSource x:Key="MaterialIndeterminateAnimation_Uno"
+											   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialIndeterminate.json" />
+		</not_win:ResourceDictionary>
+	</ResourceDictionary.MergedDictionaries>
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
-			<!--MaterialProgressRingStyle-->
-			<StaticResource x:Key="ProgressRingForeground"
-							ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="ProgressRingBackground"
-							ResourceKey="SystemControlTransparentBrush" />
+			<!-- MaterialProgressRingStyle -->
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SystemControlTransparentBrush" />
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
-			<!--MaterialProgressRingStyle-->
-			<StaticResource x:Key="ProgressRingForeground"
-							ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="ProgressRingBackground"
-							ResourceKey="SystemControlTransparentBrush" />
+			<!-- MaterialProgressRingStyle -->
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SystemControlTransparentBrush" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!-- WinUI 3 currently does not support the DeterminateSource and IndeterminateSource properties on Windows -->
-	<Style x:Key="MaterialProgressRingStyle"
-		   TargetType="muxc:ProgressRing">
-		<win:Setter Property="DeterminateSource"
-					Value="{StaticResource M3MaterialDeterminateAnimation_Win}" />
-		<win:Setter Property="IndeterminateSource"
-					Value="{StaticResource M3MaterialIndeterminateAnimation_Win}" />
-		<not_win:Setter Property="DeterminateSource"
-						Value="{StaticResource M3MaterialDeterminateAnimation_Uno}" />
-		<not_win:Setter Property="IndeterminateSource"
-						Value="{StaticResource M3MaterialIndeterminateAnimation_Uno}" />
-		<Setter Property="Foreground"
-				Value="{ThemeResource ProgressRingForeground}" />
-		<Setter Property="Background"
-				Value="{ThemeResource ProgressRingBackground}" />
-	</Style>
+	<not_win:Style x:Key="MaterialProgressRingStyle"
+				   TargetType="muxc:ProgressRing">
+		<Setter Property="DeterminateSource" Value="{StaticResource MaterialDeterminateAnimation_Uno}" />
+		<Setter Property="IndeterminateSource" Value="{StaticResource MaterialIndeterminateAnimation_Uno}" />
+		<Setter Property="Foreground" Value="{ThemeResource ProgressRingForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ProgressRingBackground}" />
+	</not_win:Style>
+
+	<win:Style x:Key="MaterialProgressRingStyle"
+			   TargetType="muxc:ProgressRing">
+		<Setter Property="Foreground" Value="{ThemeResource ProgressRingForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ProgressRingBackground}" />
+	</win:Style>
 
 	<Style x:Key="MaterialDefaultProgressRingStyle"
 		   TargetType="muxc:ProgressRing"
