@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
@@ -100,7 +100,7 @@
 				<PackageReference Include="Uno.UI" Version="5.0.0-dev.1634" />
 			</ItemGroup>
 			<ItemGroup Condition="$(_IsUWP)">
-				<PackageReference Include="Microsoft.UI.Xaml" Version="2.6.0-prerelease.210113001" />
+				<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="!$(_IsUWP)">
@@ -186,20 +186,6 @@
 
 		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
 		<Page Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
-
-		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<XamlMergeInput Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\v1\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\v2\ProgressRing.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<XamlMergeInput Remove="Styles\Controls\v1\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
-		<XamlMergeInput Remove="Styles\Controls\v2\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
-		<Page Remove="Styles\Controls\v1\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
-		<Page Remove="Styles\Controls\v2\ProgressRingWinUI.xaml" Condition="'$(UseWinUI)'!='true'" />
-
-		<XamlMergeInput Remove="Styles\Controls\v2\PipsPager.xaml" Condition="'$(UseWinUI)'!='true'" />
-		<Page Remove="Styles\Controls\v2\PipsPager.xaml" Condition="'$(UseWinUI)'!='true'" />
-		<XamlMergeInput Remove="Styles\Controls\v2\PipsPager.UWP.xaml" Condition="'$(UseWinUI)'=='true'" />
-		<Page Remove="Styles\Controls\v2\PipsPager.UWP.xaml" Condition="'$(UseWinUI)'=='true'" />
 	</ItemGroup>
 
 	<ItemGroup>
