@@ -457,9 +457,6 @@
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 
-		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.AlternateContent" Value="{x:Null}" />
-
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleButton">
@@ -473,9 +470,9 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="ContentPresenter.Opacity" Value="1" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPointerOver}" />
-										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="0" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPointerOver}" />
 										<Setter Target="HoverOverlay.Opacity" Value="1" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundPointerOver}" />
@@ -484,9 +481,9 @@
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="ContentPresenter.Opacity" Value="1" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPressed}" />
-										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="0" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPressed}" />
 										<Setter Target="PressedOverlay.Opacity" Value="1" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundPressed}" />
@@ -495,19 +492,21 @@
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="ContentPresenter.Opacity" Value="1" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundDisabled}" />
-										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="0" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundDisabled}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundDisabled}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
+								<!-- For the checked states, we need to also validate if AlternateContent is set first before changing opacity -->
+								<!-- https://github.com/unoplatform/Uno.Themes/issues/1132 -->
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundChecked}" />
-										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundChecked}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundChecked}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushChecked}" />
@@ -515,9 +514,9 @@
 								</VisualState>
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPointerOver}" />
 										<Setter Target="HoverOverlay.Opacity" Value="1" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedPointerOver}" />
@@ -526,9 +525,9 @@
 								</VisualState>
 								<VisualState x:Name="CheckedPressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPressed}" />
-										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPressed}" />
 										<Setter Target="PressedOverlay.Opacity" Value="1" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedPressed}" />
@@ -537,9 +536,9 @@
 								</VisualState>
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedDisabled}" />
-										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedDisabled}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedDisabled}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushCheckedDisabled}" />
@@ -605,11 +604,11 @@
 						<!-- Alternate Content -->
 						<ContentPresenter x:Name="AlternateContentPresenter"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}}"
+										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, FallbackValue=' ', TargetNullValue=' '}"
 										  Foreground="{TemplateBinding Foreground}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Visibility="Collapsed" />
+										  Opacity="0"/>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
