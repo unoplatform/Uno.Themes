@@ -994,39 +994,6 @@ namespace Uno.Themes.Markup
 
 				[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledLowBrush")]
 				public static ResourceValue<Brush> DisabledLow => new("OutlineDisabledLowBrush", true);
-
-				public static class Variant
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantBrush")]
-					public static ResourceValue<Brush> Default => new("OutlineVariantBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("OutlineVariantHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("OutlineVariantFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("OutlineVariantPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("OutlineVariantDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("OutlineVariantSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("OutlineVariantMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantLowBrush")]
-					public static ResourceValue<Brush> Low => new("OutlineVariantLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("OutlineVariantDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("OutlineVariantDisabledLowBrush", true);
-				}
 			}
 		}
 	}
