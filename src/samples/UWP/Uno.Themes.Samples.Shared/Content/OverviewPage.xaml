@@ -199,6 +199,11 @@
 									  IsChecked="{x:Null}"
 									  IsThreeState="True"
 									  Style="{StaticResource MaterialCheckBoxStyle}" />
+
+							<CheckBox Content="Disabled"
+									  IsChecked="True"
+									  IsEnabled="False"
+									  Style="{StaticResource MaterialCheckBoxStyle}" />
 						</StackPanel>
 					</sample:OverviewSampleView>
 
@@ -206,11 +211,18 @@
 					<sample:OverviewSampleView SamplePageType="samples:RadioButtonSamplePage">
 						<StackPanel Spacing="8">
 
-							<RadioButton Content="Checked"
+							<RadioButton GroupName="Material_RadioButton"
+										 Content="Checked"
 										 IsChecked="True"
 										 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-							<RadioButton Content="Unchecked"
+							<RadioButton GroupName="Material_RadioButton"
+										 Content="Unchecked"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+
+							<RadioButton Content="Disabled"
+										 IsChecked="True"
+										 IsEnabled="False"
 										 Style="{StaticResource MaterialRadioButtonStyle}" />
 						</StackPanel>
 					</sample:OverviewSampleView>
@@ -220,12 +232,14 @@
 						<StackPanel Spacing="8">
 
 							<TextBlock Text="ToggleSwitch"
+									   Foreground="{ThemeResource OnSurfaceMediumBrush}"
 									   Style="{StaticResource BodySmall}" />
 							
 							<ToggleSwitch IsOn="True"
 										  Style="{StaticResource MaterialToggleSwitchStyle}" />
 
 							<TextBlock Text="ToggleSwitch Disabled"
+									   Foreground="{ThemeResource OnSurfaceLowBrush}"
 									   Style="{StaticResource BodySmall}" />
 
 							<ToggleSwitch IsEnabled="False"

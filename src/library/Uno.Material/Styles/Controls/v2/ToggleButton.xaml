@@ -89,17 +89,17 @@
 			<!--#endregion-->
 
 			<!--#region Foreground-->
-			<StaticResource x:Key="IconToggleButtonForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconToggleButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="IconToggleButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundChecked" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPressed" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="IconToggleButtonForegroundCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePressed" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="IconToggleButtonForegroundIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
@@ -122,8 +122,13 @@
 			<StaticResource x:Key="IconToggleButtonBorderBrushSelectedOverlay" ResourceKey="OnSurfaceFocusedBrush" />
 			<!--#endregion-->
 
-			<StaticResource x:Key="IconToggleButtonEllipseHoverOverlay" ResourceKey="PrimaryHoverBrush" />
-			<StaticResource x:Key="IconToggleButtonEllipsePressedOverlay" ResourceKey="PrimaryPressedBrush" />
+			<!--#region States-->
+			<StaticResource x:Key="IconToggleButtonStatesCircleFill" ResourceKey="PrimaryBrush" />
+
+			<StaticResource x:Key="IconToggleButtonStatesCircleOpacityPointerOver" ResourceKey="HoverOpacity" />
+			<StaticResource x:Key="IconToggleButtonStatesCircleOpacityPressed" ResourceKey="PressedOpacity" />
+			<StaticResource x:Key="IconToggleButtonStatesCircleOpacityFocused" ResourceKey="FocusedOpacity" />
+			<!--#endregion-->
 
 			<!-- Other ToggleButton Variables -->
 			<Thickness x:Key="IconToggleButtonBorderThickness">0</Thickness>
@@ -209,19 +214,19 @@
 			<StaticResource x:Key="IconToggleButtonBackgroundIndeterminatePressed" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="IconToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SystemControlTransparentBrush" />
 			<!--#endregion-->
-
+			
 			<!--#region Foreground-->
-			<StaticResource x:Key="IconToggleButtonForeground" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconToggleButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="IconToggleButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundChecked" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundCheckedPointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundCheckedPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundChecked" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPressed" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="IconToggleButtonForegroundCheckedDisabled" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundIndeterminate" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePointerOver" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundIndeterminate" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="IconToggleButtonForegroundIndeterminatePressed" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="IconToggleButtonForegroundIndeterminateDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
@@ -244,8 +249,13 @@
 			<StaticResource x:Key="IconToggleButtonBorderBrushSelectedOverlay" ResourceKey="OnSurfaceFocusedBrush" />
 			<!--#endregion-->
 
-			<StaticResource x:Key="IconToggleButtonEllipseHoverOverlay" ResourceKey="PrimaryHoverBrush" />
-			<StaticResource x:Key="IconToggleButtonEllipsePressedOverlay" ResourceKey="PrimaryPressedBrush" />
+			<!--#region States-->
+			<StaticResource x:Key="IconToggleButtonStatesCircleFill" ResourceKey="PrimaryBrush" />
+
+			<StaticResource x:Key="IconToggleButtonStatesCircleOpacityPointerOver" ResourceKey="HoverOpacity" />
+			<StaticResource x:Key="IconToggleButtonStatesCircleOpacityPressed" ResourceKey="PressedOpacity" />
+			<StaticResource x:Key="IconToggleButtonStatesCircleOpacityFocused" ResourceKey="FocusedOpacity" />
+			<!--#endregion-->
 
 			<!-- Other ToggleButton Variables -->
 			<Thickness x:Key="IconToggleButtonBorderThickness">0</Thickness>
@@ -453,7 +463,7 @@
 		<Setter Property="BorderThickness" Value="{ThemeResource IconToggleButtonBorderThickness}" />
 		<Setter Property="MinHeight" Value="{ThemeResource IconToggleButtonMinHeight}" />
 		<Setter Property="MinWidth" Value="{ThemeResource IconToggleButtonMinWidth}" />
-		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 
@@ -477,7 +487,7 @@
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPointerOver}" />
 										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPointerOver}" />
-										<Setter Target="HoverOverlay.Opacity" Value="1" />
+										<Setter Target="HoverAndPressedCircle.Opacity" Value="{ThemeResource IconToggleButtonStatesCircleOpacityPointerOver}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundPointerOver}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushPointerOver}" />
 									</VisualState.Setters>
@@ -488,7 +498,7 @@
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPressed}" />
 										<Setter Target="AlternateContentPresenter.Visibility" Value="Collapsed" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundPressed}" />
-										<Setter Target="PressedOverlay.Opacity" Value="1" />
+										<Setter Target="HoverAndPressedCircle.Opacity" Value="{ThemeResource IconToggleButtonStatesCircleOpacityPressed}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundPressed}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushPressed}" />
 									</VisualState.Setters>
@@ -519,7 +529,7 @@
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPointerOver}" />
 										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="HoverOverlay.Opacity" Value="1" />
+										<Setter Target="HoverAndPressedCircle.Opacity" Value="{ThemeResource IconToggleButtonStatesCircleOpacityPointerOver}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedPointerOver}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushCheckedPointerOver}" />
 									</VisualState.Setters>
@@ -530,7 +540,7 @@
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPressed}" />
 										<Setter Target="AlternateContentPresenter.Visibility" Value="Visible" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPressed}" />
-										<Setter Target="PressedOverlay.Opacity" Value="1" />
+										<Setter Target="HoverAndPressedCircle.Opacity" Value="{ThemeResource IconToggleButtonStatesCircleOpacityPressed}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedPressed}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushCheckedPressed}" />
 									</VisualState.Setters>
@@ -557,6 +567,7 @@
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundIndeterminatePointerOver}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushIndeterminatePointerOver}" />
+										<Setter Target="HoverAndPressedCircle.Opacity" Value="{ThemeResource IconToggleButtonStatesCircleOpacityPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundIndeterminatePointerOver}" />
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushIndeterminatePointerOver}" />
 									</VisualState.Setters>
@@ -565,6 +576,7 @@
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundIndeterminatePressed}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushIndeterminatePressed}" />
+										<Setter Target="HoverAndPressedCircle.Opacity" Value="{ThemeResource IconToggleButtonStatesCircleOpacityPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundIndeterminatePressed}" />
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushIndeterminatePressed}" />
 									</VisualState.Setters>
@@ -577,21 +589,55 @@
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushIndeterminateDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
+
+								<VisualStateGroup.Transitions>
+									<VisualTransition To="PointerOver"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+									<VisualTransition To="Pressed"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+									<VisualTransition To="CheckedPointerOver"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+									<VisualTransition To="CheckedPressed"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+									<VisualTransition To="IndeterminatePointerOver"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+									<VisualTransition To="IndeterminatePressed"
+													  GeneratedDuration="{StaticResource MaterialAnimationDuration}"
+													  GeneratedEasingFunction="{StaticResource MaterialEaseInOutFunction}" />
+								</VisualStateGroup.Transitions>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusCircle.Opacity"
+												Value="{ThemeResource IconToggleButtonStatesCircleOpacityFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerFocused" />
+
+								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<!-- Ellipse for PointedOver State -->
-						<Ellipse x:Name="HoverOverlay"
+						<!-- Ellipse for Focus State -->
+						<Ellipse x:Name="FocusCircle"
 								 HorizontalAlignment="Stretch"
 								 VerticalAlignment="Stretch"
-								 Fill="{ThemeResource IconToggleButtonEllipseHoverOverlay}"
+								 Fill="{ThemeResource IconToggleButtonStatesCircleFill}"
 								 Opacity="0" />
 
-						<!-- Ellipse for Pressed State -->
-						<Ellipse x:Name="PressedOverlay"
+						<!-- Ellipse for Hover and Pressed States -->
+						<Ellipse x:Name="HoverAndPressedCircle"
 								 HorizontalAlignment="Stretch"
 								 VerticalAlignment="Stretch"
-								 Fill="{ThemeResource IconToggleButtonEllipsePressedOverlay}"
+								 Fill="{ThemeResource IconToggleButtonStatesCircleFill}"
 								 Opacity="0" />
 
 						<!-- Content -->
