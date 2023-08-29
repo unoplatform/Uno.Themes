@@ -19,7 +19,7 @@ foreach ($fileToSign in $filesToSign) {
 	
 	if($LASTEXITCODE -ne 0)
 	{
-   		return 1;
+   		exit 1;
  	}
   
     Write-Host "Finished signing $fileToSign"
