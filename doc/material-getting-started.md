@@ -160,6 +160,7 @@ Use this when you want to specify MANUALLY each colors.
                 <Color x:Key="OnSurfaceVariantColor">#A5A0AC</Color>
                 <Color x:Key="SurfaceInverseColor">#313033</Color>
                 <Color x:Key="OnSurfaceInverseColor">#F4EFF4</Color>
+                <Color x:Key="SurfaceTintColor">#5946D2</Color>
 
                 <!-- Outline -->
                 <Color x:Key="OutlineColor">#79747E</Color>
@@ -212,6 +213,7 @@ Use this when you want to specify MANUALLY each colors.
                 <Color x:Key="OnSurfaceVariantColor">#CAC4D0</Color>
                 <Color x:Key="SurfaceInverseColor">#E6E1E5</Color>
                 <Color x:Key="OnSurfaceInverseColor">#313033</Color>
+                <Color x:Key="SurfaceTintColor">#C7BFFF</Color>
 
                 <!-- Outline -->
                 <Color x:Key="OutlineColor">#938F99</Color>
