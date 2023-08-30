@@ -43,6 +43,7 @@ All interactive controls have multiple states, such as **PointerOver** (mouse is
 For more information about the lightweight styling resource keys used in each control, check out the following links:
 
 - [Button](styles/Button.md)
+- [CalendarDatePicker](styles/CalendarDatePicker.md)
 - [CheckBox](styles/CheckBox.md)
 - [ComboBox](styles/ComboBox.md)
 - [DatePicker](styles/DatePicker.md)

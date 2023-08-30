@@ -17,12 +17,19 @@
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
+			<!--#region Fille Delete Button Brushes-->
 			<StaticResource x:Key="TextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<!--#endregion-->
+			
+			<!--#region Leading Icon Brushes-->
+			<StaticResource x:Key="TextBoxLeadingIconForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<!--#endregion-->
 
-			<!--#region Filled Text Box Brushes-->
+			<!--#region Filled TextBox Brushes-->
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
@@ -41,27 +48,31 @@
 			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
 
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
-			<!--#region Outlined Text Box Brushes-->
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OnSurfaceLowBrush" />
+			<!--#region Outlined TextBox Brushes-->
+			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
 
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
@@ -85,7 +96,7 @@
 			<x:Double x:Key="MaterialTextBoxClearGlyphHeight">20</x:Double>
 			<!--#endregion-->
 
-			<!--#region Filled Text Box Style-->
+			<!--#region Filled TextBox Style-->
 			<CornerRadius x:Key="MaterialFilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
 			<macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,7</macos:Thickness>
 			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16</not_macos:Thickness>
@@ -93,7 +104,7 @@
 			<x:Double x:Key="MaterialFilledTextBoxBorderHeightFocused">2</x:Double>
 			<!--#endregion-->
 
-			<!--#region Outlined Text Box Style-->
+			<!--#region Outlined TextBox Style-->
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
 			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
 			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
@@ -105,12 +116,19 @@
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
+			<!--#region Fille Delete Button Brushes-->
 			<StaticResource x:Key="TextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<!--#endregion-->
+			
+			<!--#region Leading Icon Brushes-->
+			<StaticResource x:Key="TextBoxLeadingIconForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TextBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<!--#endregion-->
 
-			<!--#region Filled Text Box Brushes-->
+			<!--#region Filled TextBox Brushes-->
 			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="OnSurfaceVariantHoverBrush" />
 			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
@@ -129,27 +147,31 @@
 			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
 
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
-			<!--#region Outlined Text Box Brushes-->
-			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OnSurfaceLowBrush" />
+			<!--#region Outlined TextBox Brushes-->
+			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+			<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxForegroundOpacityDisabled" ResourceKey="LowOpacity" />
 
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
@@ -173,7 +195,7 @@
 			<x:Double x:Key="MaterialTextBoxClearGlyphHeight">20</x:Double>
 			<!--#endregion-->
 
-			<!--#region Filled Text Box Style-->
+			<!--#region Filled TextBox Style-->
 			<CornerRadius x:Key="MaterialFilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
 			<macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,7</macos:Thickness>
 			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16</not_macos:Thickness>
@@ -181,7 +203,7 @@
 			<x:Double x:Key="MaterialFilledTextBoxBorderHeightFocused">2</x:Double>
 			<!--#endregion-->
 
-			<!--#region Outlined Text Box Style-->
+			<!--#region Outlined TextBox Style-->
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
 			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
 			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
@@ -291,10 +313,13 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushDisabled}" />
+										<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundDisabled}" />
+										<Setter Target="ContentElement.Opacity" Value="{ThemeResource FilledTextBoxForegroundOpacityDisabled}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundDisabled}" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundDisabled}" />
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextBoxLeadingIconForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -385,6 +410,7 @@
 												  MaxHeight="34"
 												  MaxWidth="34"
 												  MinWidth="25"
+												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 							</Border>
 
@@ -512,8 +538,11 @@
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushDisabled}" />
+										<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundDisabled}" />
+										<Setter Target="ContentElement.Opacity" Value="{ThemeResource OutlinedTextBoxForegroundOpacityDisabled}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextBoxLeadingIconForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -591,6 +620,7 @@
 												  HorizontalAlignment="Center"
 												  Width="20"
 												  Margin="1,0,18,0"
+												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 												  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 							</Border>
