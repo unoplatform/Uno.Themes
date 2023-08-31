@@ -67,7 +67,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\PasswordBoxSamplePage.xaml.cs">
       <DependentUpon>PasswordBoxSamplePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\PipsPagerSamplePage.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\PipsPagerSamplePage.xaml.cs">
+      <DependentUpon>PipsPagerSamplePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ProgressBarSamplePage.xaml.cs">
       <DependentUpon>ProgressBarSamplePage.xaml</DependentUpon>
     </Compile>
@@ -91,6 +93,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\TimePickerSamplePage.xaml.cs">
       <DependentUpon>TimePickerSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ToggleButtonSamplePage.xaml.cs">
+      <DependentUpon>ToggleButtonSamplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\ToggleSwitchSamplePage.xaml.cs">
       <DependentUpon>ToggleSwitchSamplePage.xaml</DependentUpon>
@@ -241,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\TimePickerSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ToggleButtonSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

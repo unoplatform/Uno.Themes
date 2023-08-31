@@ -42,7 +42,6 @@ PasswordBox|FilledPasswordBoxStyle|
 PasswordBox|OutlinedPasswordBoxStyle|True
 muxc:PipsPager|PipsPagerStyle|True
 RadioButton|RadioButtonStyle|True
-RadioButton|SecondaryRadioButtonStyle|
 RatingControl|RatingControlStyle|True
 RatingControl|SecondaryRatingControlStyle|
 Slider|SliderStyle|True
