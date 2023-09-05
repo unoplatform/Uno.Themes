@@ -107,6 +107,7 @@ Lightweight Styling allows for fine-grained control over the look of your UI com
 <Button Content="Overridden Button Style"
         Style="{StaticResource FilledButtonStyle}">
     <Button.Resources>
+        <Thickness x:Key="ButtonBorderThickness">2</Thickness>
         <SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
         <SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
         <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
