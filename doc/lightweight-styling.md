@@ -3,47 +3,130 @@ uid: uno.themes.lightweightstyling
 ---
 # Lightweight Styling
 
-[Lightweight styling](https://learn.microsoft.com/windows/apps/design/style/xaml-styles#lightweight-styling) is a way to customize the appearance of XAML controls by **overriding** their default brushes, fonts and numeric properties. Lightweight styles are changed by providing alternate resources with the same key:
+[Lightweight styling](https://learn.microsoft.com/windows/apps/design/style/xaml-styles#lightweight-styling) is a way to customize the appearance of XAML controls by **overriding** their default brushes, fonts, and numeric properties. Lightweight styles are changed by providing alternate resources with the same key. All Uno Material styles support the capability to be customized through resource overrides without the need to redefine the style.
+
+Overriding resources from Uno Material can be done at the App level, Page level, or even at the Control level. The following sections will cover how to override resources at each of these levels.
+
+## App/Page level styling
+
+The most common way to override resources is at the App level. This is done by adding a new `ResourceDictionary` to the `ResourceDictionary.MergedDictionaries` collection in your `AppResources.xaml` file. The following XAML shows how to override the default resources used with the `FilledButtonStyle` from Uno Themes.
 
 ```xml
-<Button Content="Default Button Style" Style="{StaticResource MaterialFilledButtonStyle}" />
+<!-- AppResources.xaml -->
+<ResourceDictionary.MergedDictionaries>
 
-<Button Content="Overridden Button Style" Style="{StaticResource MaterialFilledButtonStyle}" BorderThickness="2">
-	<Button.Resources>
-		<SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
-		<SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
-		<SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
-	</Button.Resources>
+    <!-- Load WinUI resources -->
+    <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+    <!-- Load Uno Material resources -->
+    <MaterialTheme xmlns="using:Uno.Material" />
+
+    <!-- Override resources -->
+    <ResourceDictionary>
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Light">
+                <Thickness x:Key="ButtonBorderThickness">2</Thickness>
+                <SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
+                <SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
+                <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Default">
+                <Thickness x:Key="ButtonBorderThickness">2</Thickness>
+                <SolidColorBrush x:Key="FilledButtonForeground" Color="LightGreen" />
+                <SolidColorBrush x:Key="FilledButtonBackground" Color="DarkGreen" />
+                <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="LightGreen" />
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+    </ResourceDictionary>
+
+</ResourceDictionary.MergedDictionaries>
+```
+
+Notice the `ResourceDictionary.ThemeDictionaries` element. This is where you can override resources for each theme. In the example above, we are overriding the resources for both the Light and Default themes. The Light theme is used when the device is in Light mode, and the Default theme is used when the device is in Dark mode. Below is an example of the same `Button` using the `FilledButtonStyle` from Uno Material, but with the overrides from above applied to both the Light and Dark themes.
+
+![Material - Button lightweight styling themes](assets/lightweight-styling-theme-comparison.png)
+
+Placing these brush overrides at the `AppResources.xaml` level will alter every `Button` that is styled with `FilledButtonStyle` within the entire application. The overrides can be scoped to a specific page by placing them in the `Page.Resources` element of the page’s XAML. The following XAML shows how to override the same resources from above, but scoped to a specific page.
+
+```xml
+<!-- MyPage.xaml -->
+<Page.Resources>
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Light">
+                <Thickness x:Key="ButtonBorderThickness">2</Thickness>
+                <SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
+                <SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
+                <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Default">
+                <Thickness x:Key="ButtonBorderThickness">2</Thickness>
+                <SolidColorBrush x:Key="FilledButtonForeground" Color="LightGreen" />
+                <SolidColorBrush x:Key="FilledButtonBackground" Color="DarkGreen" />
+                <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="LightGreen" />
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
+    </ResourceDictionary>
+</Page.Resources>
+```
+
+## Per-control styling
+
+In other cases, changing a single control on one page only to look a certain way, without altering any other versions of that control, can also be achieved. The provided XAML code and image depict a `Button` using the default `FilledButtonStyle` followed by a second `Button`, also with `FilledButtonStyle` applied, but now with specific resource keys overridden to customize its appearance.
+
+```xml
+<Button Content="Default Button Style" 
+        Style="{StaticResource FilledButtonStyle}" />
+
+<Button Content="Overridden Button Style" 
+        Style="{StaticResource FilledButtonStyle}"
+        BorderThickness="2">
+    <Button.Resources>
+        <SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
+        <SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
+        <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
+    </Button.Resources>
 </Button>
 ```
 
 ![Material - Button lightweight styling](assets/material-lightweight-styling-anatomy.png)
 
-All interactive controls have multiple states, such as **PointerOver** (mouse is hovered over), **Pressed** (control is pressed on), and **Disabled** (control is not interactable). These states are appended onto the endings of the resource keys: ButtonForeground*PointerOver*, ButtonForeground*Pressed*, and ButtonForeground*Disabled*. Combined with these, the CheckBox and RadioButton controls also have **Checked** and **Unchecked** states. [These links](lightweight-styling#resource-keys) list the resource keys for each control.
+Lightweight Styling allows for fine-grained control over the look of your UI components across all visual states. All interactive controls have multiple states, such as **PointerOver** (mouse is hovered over), **Pressed** (control is pressed on), and **Disabled** (control is not interactable). These states are appended onto the endings of the resource keys: ButtonForeground*PointerOver*, ButtonForeground*Pressed*, and ButtonForeground*Disabled*. Combined with these, the CheckBox and RadioButton controls also have **Checked** and **Unchecked** states. This means that it is possible to customize the appearance of your Uno Material-styled controls across any visual state without the need to redefine the style. As an example, the XAML below defines three Buttons, all using FilledButtonStyle from Uno Material:
+
+1. A Default Button with no changes
+2. A Button with several brush resources overridden for the **Normal** visual state
+3. A Button that overrides resources that are used with FilledButtonStyle’s **PointerOver** visual state
 
 ```xml
+<!-- #1 -->
 <Button Content="Default Button Style"
-		Style="{StaticResource FilledButtonStyle}" />
+        Style="{StaticResource FilledButtonStyle}" />
 
+<!-- #2 -->
 <Button Content="Overridden Button Style"
-		Style="{StaticResource FilledButtonStyle}">
-	<Button.Resources>
-		<SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
-		<SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
-		<SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
-	</Button.Resources>
+        Style="{StaticResource FilledButtonStyle}">
+    <Button.Resources>
+        <Thickness x:Key="ButtonBorderThickness">2</Thickness>
+        <SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
+        <SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
+        <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
+    </Button.Resources>
 </Button>
 
+<!-- #3 -->
 <Button Content="Overridden Button Style (PointerOver)"
-		Style="{StaticResource FilledButtonStyle}">
-	<Button.Resources>
-		<Thickness x:Key="ButtonBorderThickness">2</Thickness>
-		<SolidColorBrush x:Key="FilledButtonForegroundPointerOver" Color="DarkRed" />
-		<SolidColorBrush x:Key="FilledButtonBackgroundPointerOver" Color="LightPink" />
-		<SolidColorBrush x:Key="FilledButtonBorderBrushPointerOver" Color="DarkRed" />
-	</Button.Resources>
+        Style="{StaticResource FilledButtonStyle}">
+    <Button.Resources>
+        <Thickness x:Key="ButtonBorderThickness">2</Thickness>
+        <SolidColorBrush x:Key="FilledButtonForegroundPointerOver" Color="DarkRed" />
+        <SolidColorBrush x:Key="FilledButtonBackgroundPointerOver" Color="LightPink" />
+        <SolidColorBrush x:Key="FilledButtonBorderBrushPointerOver" Color="DarkRed" />
+    </Button.Resources>
 </Button>
 ```
+
+With this XAML we are given the following visual result, notice the third Button has a new BorderThickness applied and takes on different colors while in the **PointerOver** state.
 
 ![Material - Button lightweight styling](assets/material-button-pointerover-lightweight-styling.png)
 
@@ -57,7 +140,7 @@ For more information about the lightweight styling resource keys used in each co
 - [ComboBox](styles/ComboBox.md)
 - [DatePicker](styles/DatePicker.md)
 - [FloatingActionButton](styles/FloatingActionButton.md)
-- [HyperlinkButton](styles/HyperlinkButton.md) 
+- [HyperlinkButton](styles/HyperlinkButton.md)
 - [NavigationView](styles/NavigationView.md)
 - [PasswordBox](styles/PasswordBox.md)
 - [PipsPager](styles/PipsPager.md)
@@ -77,4 +160,4 @@ Toolkit also has controls that allow lightweight styling, check out [Lightweight
 
 ### Further Reading
 
-https://learn.microsoft.com/windows/apps/design/style/xaml-styles#lightweight-styling
+[Lightweight Styling (Windows Dev Docs)](https://learn.microsoft.com/windows/apps/design/style/xaml-styles#lightweight-styling)
