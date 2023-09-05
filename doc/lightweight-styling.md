@@ -76,11 +76,13 @@ Placing these brush overrides at the `AppResources.xaml` level will alter every 
 In other cases, changing a single control on one page only to look a certain way, without altering any other versions of that control, can also be achieved. The provided XAML code and image depict a `Button` using the default `FilledButtonStyle` followed by a second `Button`, also with `FilledButtonStyle` applied, but now with specific resource keys overridden to customize its appearance.
 
 ```xml
-<Button Content="Default Button Style" Style="{StaticResource FilledButtonStyle}" />
+<Button Content="Default Button Style" 
+        Style="{StaticResource FilledButtonStyle}" />
 
-<Button Content="Overridden Button Style" Style="{StaticResource FilledButtonStyle}">
+<Button Content="Overridden Button Style" 
+        Style="{StaticResource FilledButtonStyle}"
+        BorderThickness="2">
     <Button.Resources>
-        <Thickness x:Key="ButtonBorderThickness">2</Thickness>
         <SolidColorBrush x:Key="FilledButtonForeground" Color="DarkGreen" />
         <SolidColorBrush x:Key="FilledButtonBackground" Color="LightGreen" />
         <SolidColorBrush x:Key="FilledButtonBorderBrush" Color="DarkGreen" />
