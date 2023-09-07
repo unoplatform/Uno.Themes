@@ -260,9 +260,10 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialIconStyle"
+	<Style x:Key="MaterialLeadingIconStyle"
 		   BasedOn="{StaticResource IconButtonStyle}"
 		   TargetType="Button">
+		
 		<Setter Property="Foreground"
 				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
@@ -302,6 +303,14 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialTrailingIconStyle"
+		   BasedOn="{StaticResource MaterialLeadingIconStyle}"
+		   TargetType="Button">
+
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceVariantBrush}" />
 	</Style>
 
 	<Style x:Key="MaterialFilledTextBoxStyle"
@@ -458,7 +467,7 @@
 										Command="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}}"
 										IsHitTestVisible="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"
 										Visibility="{Binding Path=(um:ControlExtensions.IsLeadingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
-										Style="{ThemeResource MaterialIconStyle}"
+										Style="{ThemeResource MaterialLeadingIconStyle}"
 										HorizontalAlignment="Center"
 										Margin="0,0,16,0"
 										VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -522,7 +531,7 @@
 										Command="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}}"
 										IsHitTestVisible="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"
 										Visibility="{Binding Path=(um:ControlExtensions.IsTrailingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
-										Style="{ThemeResource MaterialIconStyle}"
+										Style="{ThemeResource MaterialTrailingIconStyle}"
 										HorizontalAlignment="Center"
 										Margin="14,0,0,0"
 										VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -694,7 +703,7 @@
 										Command="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}}"
 										IsHitTestVisible="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"										
 										Visibility="{Binding Path=(um:ControlExtensions.IsLeadingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
-										Style="{ThemeResource MaterialIconStyle}"
+										Style="{ThemeResource MaterialLeadingIconStyle}"
 										HorizontalAlignment="Center"
 										Margin="0,0,16,0"
 										VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -757,7 +766,7 @@
 										Command="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}}"
 										IsHitTestVisible="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"
 										Visibility="{Binding Path=(um:ControlExtensions.IsTrailingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
-										Style="{ThemeResource MaterialIconStyle}"
+										Style="{ThemeResource MaterialTrailingIconStyle}"
 										HorizontalAlignment="Center"
 										Margin="14,0,0,0"
 										VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
