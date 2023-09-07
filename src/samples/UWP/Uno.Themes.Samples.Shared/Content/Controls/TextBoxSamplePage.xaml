@@ -73,7 +73,7 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
 									 PlaceholderText="Filled with LeadingIcon and Command"
-									 um:ControlExtensions.LeadingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.LeadingCommand="{Binding Data.MyCommand}">
 								<um:ControlExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.LeadingIcon>
@@ -85,7 +85,7 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
 									 PlaceholderText="Filled with TrailingIcon and Command"
-									 um:ControlExtensions.TrailingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.TrailingCommand="{Binding Data.MyCommand}">
 								<um:ControlExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.TrailingIcon>
@@ -97,7 +97,7 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with LeadingIcon and Command"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-									 um:ControlExtensions.LeadingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.LeadingCommand="{Binding Data.MyCommand}">
 								<um:ControlExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.LeadingIcon>
@@ -109,7 +109,7 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with TrailingIcon and Command"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-									 um:ControlExtensions.TrailingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.TrailingCommand="{Binding Data.MyCommand}">
 								<um:ControlExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.TrailingIcon>
@@ -218,7 +218,7 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled with LeadingIcon and Command"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}"
-									 um:ControlExtensions.LeadingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.LeadingCommand="{Binding Data.MyCommand}">
 								<um:ControlExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.LeadingIcon>
@@ -226,11 +226,30 @@
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Filled TrailingIcon with PlaceholderText -->
-						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_13"
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_12"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Filled with TrailingIcon and Command"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}"
-									 um:ControlExtensions.TrailingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.TrailingCommand="{Binding Data.MyCommand}">
+								<um:ControlExtensions.TrailingIcon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.TrailingIcon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled MultiLine with LeadingIcon and TrailingIcon -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_13"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+									 PlaceholderText="MultiLine Filled"
+									 Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True"
+									 um:ControlExtensions.LeadingCommand="{Binding Data.MyCommand}"
+									 um:ControlExtensions.TrailingCommand="{Binding Data.MyCommand}">
+								<um:ControlExtensions.LeadingIcon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.LeadingIcon>
 								<um:ControlExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.TrailingIcon>
@@ -238,11 +257,11 @@
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined Icon with PlaceholderText -->
-						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_12"
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_14"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with LeadingIcon and Command"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-									 um:ControlExtensions.LeadingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.LeadingCommand="{Binding Data.MyCommand}">
 								<um:ControlExtensions.LeadingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.LeadingIcon>
@@ -250,11 +269,30 @@
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined TrailingIcon with PlaceholderText -->
-						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_14"
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_15"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Outlined with TrailingIcon and Command"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-									 um:ControlExtensions.TrailingCommand="{Binding MyCommand}">
+									 um:ControlExtensions.TrailingCommand="{Binding Data.MyCommand}">
+								<um:ControlExtensions.TrailingIcon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.TrailingIcon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined MultiLine -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_16"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+									 PlaceholderText="MultiLine Outlined"
+									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True"
+									 um:ControlExtensions.LeadingCommand="{Binding Data.MyCommand}"
+									 um:ControlExtensions.TrailingCommand="{Binding Data.MyCommand}">
+								<um:ControlExtensions.LeadingIcon>
+									<SymbolIcon Symbol="Favorite" />
+								</um:ControlExtensions.LeadingIcon>
 								<um:ControlExtensions.TrailingIcon>
 									<SymbolIcon Symbol="Favorite" />
 								</um:ControlExtensions.TrailingIcon>

@@ -131,7 +131,7 @@
 								  Style="{StaticResource XamlDisplayBelowStyle}">
 					<TextBox PlaceholderText="LeadingIcon with Command"
 							 Style="{StaticResource MaterialFilledTextBoxStyle}"
-							 um:ControlExtensions.LeadingCommand="{Binding MyCommand}">
+							 um:ControlExtensions.LeadingCommand="{Binding Data.MyCommand}">
 						<um:ControlExtensions.LeadingIcon>
 							<SymbolIcon Symbol="SolidStar"
 										Foreground="{StaticResource MaterialPrimaryBrush}" />
@@ -150,7 +150,7 @@
 								Style="{StaticResource XamlDisplayBelowStyle}">
 					<TextBox PlaceholderText="TrailingIcon with Command"
 							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-							 um:ControlExtensions.TrailingCommand="{Binding MyCommand}">
+							 um:ControlExtensions.TrailingCommand="{Binding Data.MyCommand}">
 						<um:ControlExtensions.TrailingIcon>
 							<SymbolIcon Symbol="SolidStar"
 										Foreground="{StaticResource MaterialPrimaryBrush}" />
