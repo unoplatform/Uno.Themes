@@ -4,19 +4,26 @@ uid: uno.themes.material.migration
 
 # Updating to Uno.Material v3
 
-Version 3.x of Uno.Material introduces support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. The tables below provide details on the changes that have been made to the resource keys within Uno.Material.
+Uno.Material v3 (not to be confused with [Material Design 3](https://m3.material.io/) from Google) introduces support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. Refer to the document below for the changes that have been made within Uno.Material.
 
 ## Styles
 
 ### Removed
 
 Key|TargetType
--|-|
-DefaultMaterialCalendarViewStyle|CalendarView|
-MaterialSecondaryCheckBoxStyle|CheckBox|
-MaterialSecondaryRadioButtonStyle|RadioButton|
+-|-
+DefaultMaterialCalendarViewStyle|CalendarView
+MaterialSecondaryCheckBoxStyle|CheckBox
+MaterialSecondaryRadioButtonStyle|RadioButton
 
-### Added/Modified
+### Added
+
+Key|Aliased Key|TargetType|Implicit Style
+-|-|-|-
+MaterialRatingControlStyle|RatingControlStyle|muxc:RatingControl|true
+MaterialRippleStyle|RippleStyle|um:Ripple|true
+
+### Modified
 
 Key|Aliased Key|TargetType|Implicit Style
 -|-|-|-
@@ -25,14 +32,19 @@ MaterialMenuFlyoutSubItemStyle|MenuFlyoutSubItemStyle|MenuFlyoutSubItem|false ->
 MaterialMenuFlyoutSeparatorStyle|MenuFlyoutSeparatorStyle|MenuFlyoutSeparator|false -> true
 MaterialFilledPasswordBoxStyle|FilledPasswordBoxStyle|PasswordBox|true -> false
 MaterialOutlinedPasswordBoxStyle|OutlinedPasswordBoxStyle|PasswordBox|false -> true
-MaterialRatingControlStyle|RatingControlStyle|muxc:RatingControl|true
-MaterialRippleStyle|RippleStyle|um:Ripple|true
 MaterialFilledTextBoxStyle|FilledTextBoxStyle|TextBox|true -> false
 MaterialOutlinedTextBoxStyle|OutlinedTextBoxStyle|TextBox|false -> true
 MaterialTextToggleButtonStyle|TextToggleButtonStyle|ToggleButton|true -> false
 MaterialIconToggleButtonStyle|IconToggleButtonStyle|ToggleButton|false -> true
 
 ## Resources
+
+As a result of the Lightweight Styling support, many resource keys have been added as well as renamed. For a list of all the new resource keys, please refer to the [Lightweight Styling documentation](lightweight-styling.md#resource-keys).
+
+Along with the above list of new resource keys, below is a list of the resource keys that have been removed or renamed.
+
+> [!NOTE]
+> Most resources, including those that have been added or renamed, have now been placed inside of a `ThemeDictionary`. This means that the resources should now be referenced using the `ThemeResource` markup extension instead of `StaticResource`. For more information on theme resources, please refer to the [XAML theme resources documentation](https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources).
 
 ### Button
 
