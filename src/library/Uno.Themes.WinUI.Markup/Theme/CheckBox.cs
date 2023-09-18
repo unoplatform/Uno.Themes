@@ -1,11 +1,8 @@
-﻿#if WinUI
-using Microsoft.UI.Text;
-#else
-using Windows.UI.Text;
-#endif
-using Microsoft.UI.Xaml.Media;
+﻿using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup.Internals;
 using Microsoft.UI.Xaml;
+using MUXCornerRadius = Microsoft.UI.Xaml.CornerRadius;
+using Microsoft.UI.Text;
 
 namespace Uno.Themes.Markup
 {
@@ -189,13 +186,10 @@ namespace Uno.Themes.Markup
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "CheckBoxFontFamily")]
 						public static ResourceValue<FontFamily> FontFamily => new("CheckBoxFontFamily", true);
-#if WinUI
+
 						[ResourceKeyDefinition(typeof(FontWeights), "CheckBoxFontWeight")]
 						public static ResourceValue<FontWeights> FontWeight => new("CheckBoxFontWeight", true);
-#else
-						[ResourceKeyDefinition(typeof(FontWeight), "CheckBoxFontWeight")]
-						public static ResourceValue<FontWeight> FontWeight => new("CheckBoxFontWeight", true);
-#endif
+
 						[ResourceKeyDefinition(typeof(double), "CheckBoxFontSize")]
 						public static ResourceValue<double> FontSize => new("CheckBoxFontSize", true);
 
@@ -226,10 +220,10 @@ namespace Uno.Themes.Markup
 							public static ResourceValue<GridLength> Default => new("CheckBoxCheckAreaLength", true);
 						}
 
-						public static class CornerRadiuses
+						public static class CornerRadius
 						{
-							[ResourceKeyDefinition(typeof(CornerRadius), "CheckBoxCheckAreaCornerRadius")]
-							public static ResourceValue<CornerRadius> Default => new("CheckBoxCheckAreaCornerRadius", true);
+							[ResourceKeyDefinition(typeof(MUXCornerRadius), "CheckBoxCheckAreaCornerRadius")]
+							public static ResourceValue<MUXCornerRadius> Default => new("CheckBoxCheckAreaCornerRadius", true);
 						}
 
 						public static class BorderThickness
