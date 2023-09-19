@@ -187,12 +187,6 @@ namespace Uno.Themes.Markup
 				[ResourceKeyDefinition(typeof(Style), "IconToggleButtonStyle", TargetType = typeof(ToggleButton))]
 				public static StaticResourceKey<Style> Icon => new("IconToggleButtonStyle");
 			}
-
-			public static class ToggleSwitch
-			{
-				[ResourceKeyDefinition(typeof(Style), "ToggleSwitchStyle", TargetType = typeof(ToggleSwitch))]
-				public static StaticResourceKey<Style> Default => new("ToggleSwitchStyle");
-			}
 		}
 	}
 }
