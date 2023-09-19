@@ -74,14 +74,8 @@ namespace Uno.Themes.Markup
 
 			public static class Styles
 			{
-				[ResourceKeyDefinition(typeof(Style), "MaterialSliderStyle", TargetType = typeof(Slider))]
-				public static StaticResourceKey<Style> Default => new("MaterialSliderStyle");
-
-				public static class Thumb
-				{
-					[ResourceKeyDefinition(typeof(Style), "MaterialSliderThumbStyle", TargetType = typeof(Microsoft.UI.Xaml.Controls.Primitives.Thumb))]
-					public static ThemeResourceKey<Style> Default => new("MaterialSliderThumbStyle");
-				}
+				[ResourceKeyDefinition(typeof(Style), "SliderStyle", TargetType = typeof(Slider))]
+				public static StaticResourceKey<Style> Default => new("SliderStyle");
 			}
 		}
 	}
