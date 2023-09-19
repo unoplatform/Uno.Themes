@@ -158,15 +158,6 @@ namespace Uno.Themes.Markup
 				public static StaticResourceKey<Style> CaptionSmall => new("CaptionSmall");
 			}
 
-			public static class TextBox
-			{
-				[ResourceKeyDefinition(typeof(Style), "FilledTextBoxStyle", TargetType = typeof(TextBox))]
-				public static StaticResourceKey<Style> Filled => new("FilledTextBoxStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "OutlinedTextBoxStyle", TargetType = typeof(TextBox))]
-				public static StaticResourceKey<Style> Outlined => new("OutlinedTextBoxStyle");
-			}
-
 			public static class ToggleButton
 			{
 				[ResourceKeyDefinition(typeof(Style), "TextToggleButtonStyle", TargetType = typeof(ToggleButton))]
