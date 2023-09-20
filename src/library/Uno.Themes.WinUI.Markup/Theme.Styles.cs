@@ -101,18 +101,6 @@ namespace Uno.Themes.Markup
 				public static StaticResourceKey<Style> Default => new("PipsPagerStyle");
 			}
 
-			public static class ProgressBar
-			{
-				[ResourceKeyDefinition(typeof(Style), "ProgressBarStyle", TargetType = typeof(ProgressBar))]
-				public static StaticResourceKey<Style> Default => new("ProgressBarStyle");
-			}
-
-			public static class ProgressRing
-			{
-				[ResourceKeyDefinition(typeof(Style), "ProgressRingStyle", TargetType = typeof(ProgressRing))]
-				public static StaticResourceKey<Style> Default => new("ProgressRingStyle");
-			}
-
 			public static class Slider
 			{
 				[ResourceKeyDefinition(typeof(Style), "SliderStyle", TargetType = typeof(Slider))]
