@@ -62,15 +62,6 @@ namespace Uno.Themes.Markup
 				public static StaticResourceKey<Style> Default => new("MenuFlyoutPresenterStyle");
 			}
 
-			public static class HyperlinkButton
-			{
-				[ResourceKeyDefinition(typeof(Style), "HyperlinkButtonStyle", TargetType = typeof(HyperlinkButton))]
-				public static StaticResourceKey<Style> Default => new("HyperlinkButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SecondaryHyperlinkButtonStyle", TargetType = typeof(HyperlinkButton))]
-				public static StaticResourceKey<Style> Secondary => new("SecondaryHyperlinkButtonStyle");
-			}
-
 			public static class ListViewItem
 			{
 				[ResourceKeyDefinition(typeof(Style), "ListViewItemStyle", TargetType = typeof(ListViewItem))]
