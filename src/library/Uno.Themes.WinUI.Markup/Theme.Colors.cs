@@ -1,4 +1,5 @@
-﻿using Uno.Extensions.Markup.Internals;
+﻿using Uno.Extensions.Markup;
+using Uno.Extensions.Markup.Internals;
 using Windows.UI;
 
 namespace Uno.Themes.Markup

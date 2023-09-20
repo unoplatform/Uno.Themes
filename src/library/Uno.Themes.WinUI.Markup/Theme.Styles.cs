@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
