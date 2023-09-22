@@ -1,6 +1,42 @@
+# Colors
+| Key                         | LightValue | DarkValue |
+|---|--|--|
+| PrimaryColor                | #C7BFFF    | #C7BFFF   |
+| OnPrimaryColor              | #2A009F    | #2A009F   |
+| PrimaryContainerColor       | #4129BA    | #4129BA   |
+| OnPrimaryContainerColor     | #E4DFFF    | #E4DFFF   |
+| PrimaryInverseColor         | #2A009F    | #2A009F   |
+| PrimaryVariantDarkColor     | #4128BA    | #4128BA   |
+| PrimaryVariantLightColor    | #C8BFFF    | #C8BFFF   |
+| SecondaryColor              | #CDC2DC    | #CDC2DC   |
+| OnSecondaryColor            | #332D41    | #332D41   |
+| SecondaryContainerColor     | #433C52    | #433C52   |
+| OnSecondaryContainerColor   | #EDDFFF    | #EDDFFF   |
+| SecondaryVariantDarkColor   | #441F8A    | #441F8A   |
+| SecondaryVariantLightColor  | #EBE6F1    | #EBE6F1   |
+| TertiaryColor               | #9FCAFF    | #9FCAFF   |
+| OnTertiaryColor             | #003258    | #003258   |
+| TertiaryContainerColor      | #00497D    | #00497D   |
+| OnTertiaryContainerColor    | #D1E4FF    | #D1E4FF   |
+| ErrorColor                  | #FFB4AB    | #FFB4AB   |
+| OnErrorColor                | #690005    | #690005   |
+| ErrorContainerColor          | #93000A    | #93000A   |
+| OnErrorContainerColor        | #FFDAD6    | #FFDAD6   |
+| BackgroundColor             | #1C1B1F    | #1C1B1F   |
+| OnBackgroundColor           | #E5E1E6    | #E5E1E6   |
+| SurfaceColor                | #302D37    | #302D37   |
+| OnSurfaceColor              | #E6E1E5    | #E6E1E5   |
+| SurfaceVariantColor         | #47464F    | #47464F   |
+| OnSurfaceVariantColor       | #C9C5D0    | #C9C5D0   |
+| SurfaceInverseColor         | #E6E1E5    | #E6E1E5   |
+| OnSurfaceInverseColor       | #1C1B1F    | #1C1B1F   |
+| SurfaceTintColor            | #C7BFFF    | #C7BFFF   |
+| OutlineColor                | #928F99    | #928F99   |
+| OutlineVariantColor         | #57545D    | #57545D   |
+
 # Opacities
 | Key                | Value |
-|--------------------|-------|
+|--|--|
 | HoverOpacity       | 0.08  |
 | FocusedOpacity     | 0.12  |
 | PressedOpacity     | 0.12  |
