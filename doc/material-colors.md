@@ -1,5 +1,17 @@
+# Opacities
+| Key                | Value |
+|--------------------|-------|
+| HoverOpacity       | 0.08  |
+| FocusedOpacity     | 0.12  |
+| PressedOpacity     | 0.12  |
+| DraggedOpacity     | 0.16  |
+| SelectedOpacity    | 0.16  |
+| MediumOpacity      | 0.54  |
+| LowOpacity         | 0.32  |
+| DisabledOpacity    | 0.38  |
+| DisabledLowOpacity | 0.12  |
 
-#Brushes
+# Brushes
 | Key                            | Color                   | Opacity          |
 | -| - | - |
 | PrimaryBrush                   | PrimaryColor            | 1                |
