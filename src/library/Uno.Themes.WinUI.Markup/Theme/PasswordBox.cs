@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -20,7 +21,7 @@ namespace Uno.Themes.Markup
 							public static class PathData
 							{
 								[ResourceKeyDefinition(typeof(Geometry), "PasswordBoxRevealGlyphPathData")]
-								public static ResourceValue<Geometry> Default => new("PasswordBoxRevealGlyphPathData", true);
+								public static ThemeResourceKey<Geometry> Default => new("PasswordBoxRevealGlyphPathData");
 							}
 						}
 
@@ -29,7 +30,7 @@ namespace Uno.Themes.Markup
 							public static class Foreground
 							{
 								[ResourceKeyDefinition(typeof(Brush), "PasswordBoxRevealButtonForeground")]
-								public static ResourceValue<Brush> Default => new("PasswordBoxRevealButtonForeground", true);
+								public static ThemeResourceKey<Brush> Default => new("PasswordBoxRevealButtonForeground");
 							}
 						}
 					}
@@ -40,46 +41,46 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBackground")]
-						public static ResourceValue<Brush> Default => new("FilledPasswordBoxBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FilledPasswordBoxBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledPasswordBoxBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBackgroundFocused")]
-						public static ResourceValue<Brush> Focused => new("FilledPasswordBoxBackgroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledPasswordBoxBackgroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FilledPasswordBoxBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledPasswordBoxBackgroundDisabled");
 					}
 
 					public static class BorderBrush
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBorderBrush")]
-						public static ResourceValue<Brush> Default => new("FilledPasswordBoxBorderBrush", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxBorderBrush");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBorderBrushPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FilledPasswordBoxBorderBrushPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledPasswordBoxBorderBrushPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBorderBrushFocused")]
-						public static ResourceValue<Brush> Focused => new("FilledPasswordBoxBorderBrushFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledPasswordBoxBorderBrushFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBorderBrushDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FilledPasswordBoxBorderBrushDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledPasswordBoxBorderBrushDisabled");
 					}
 
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxForeground")]
-						public static ResourceValue<Brush> Default => new("FilledPasswordBoxForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FilledPasswordBoxForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledPasswordBoxForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxForegroundFocused")]
-						public static ResourceValue<Brush> Focused => new("FilledPasswordBoxForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledPasswordBoxForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FilledPasswordBoxForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledPasswordBoxForegroundDisabled");
 					}
 
 					public static class Placeholder
@@ -87,16 +88,16 @@ namespace Uno.Themes.Markup
 						public static class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxPlaceholderForeground")]
-							public static ResourceValue<Brush> Default => new("FilledPasswordBoxPlaceholderForeground", true);
+							public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxPlaceholderForeground");
 
 							[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxPlaceholderForegroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("FilledPasswordBoxPlaceholderForegroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("FilledPasswordBoxPlaceholderForegroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxPlaceholderForegroundFocused")]
-							public static ResourceValue<Brush> Focused => new("FilledPasswordBoxPlaceholderForegroundFocused", true);
+							public static ThemeResourceKey<Brush> Focused => new("FilledPasswordBoxPlaceholderForegroundFocused");
 
 							[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxPlaceholderForegroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("FilledPasswordBoxPlaceholderForegroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("FilledPasswordBoxPlaceholderForegroundDisabled");
 						}
 					}
 
@@ -105,23 +106,23 @@ namespace Uno.Themes.Markup
 						public static class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxRevealButtonForeground")]
-							public static ResourceValue<Brush> Default => new("FilledPasswordBoxRevealButtonForeground", true);
+							public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxRevealButtonForeground");
 						}
 					}
 
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "FilledPasswordBoxFontFamily")]
-						public static ResourceValue<FontFamily> FontFamily => new("FilledPasswordBoxFontFamily", true);
+						public static StaticResourceKey<FontFamily> FontFamily => new("FilledPasswordBoxFontFamily");
 
 						[ResourceKeyDefinition(typeof(FontWeights), "FilledPasswordBoxFontWeight")]
-						public static ResourceValue<FontWeights> FontWeight => new("FilledPasswordBoxFontWeight", true);
+						public static StaticResourceKey<FontWeights> FontWeight => new("FilledPasswordBoxFontWeight");
 
 						[ResourceKeyDefinition(typeof(double), "FilledPasswordBoxFontSize")]
-						public static ResourceValue<double> FontSize => new("FilledPasswordBoxFontSize", true);
+						public static StaticResourceKey<double> FontSize => new("FilledPasswordBoxFontSize");
 
 						[ResourceKeyDefinition(typeof(int), "FilledPasswordBoxCharacterSpacing")]
-						public static ResourceValue<int> CharacterSpacing => new("FilledPasswordBoxCharacterSpacing", true);
+						public static StaticResourceKey<int> CharacterSpacing => new("FilledPasswordBoxCharacterSpacing");
 					}
 				}
 
@@ -130,46 +131,46 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBackground")]
-						public static ResourceValue<Brush> Default => new("OutlinedPasswordBoxBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("OutlinedPasswordBoxBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("OutlinedPasswordBoxBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("OutlinedPasswordBoxBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBackgroundFocused")]
-						public static ResourceValue<Brush> Focused => new("OutlinedPasswordBoxBackgroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("OutlinedPasswordBoxBackgroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("OutlinedPasswordBoxBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("OutlinedPasswordBoxBackgroundDisabled");
 					}
 
 					public static class BorderBrush
 					{
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBorderBrush")]
-						public static ResourceValue<Brush> Default => new("OutlinedPasswordBoxBorderBrush", true);
+						public static ThemeResourceKey<Brush> Default => new("OutlinedPasswordBoxBorderBrush");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBorderBrushPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("OutlinedPasswordBoxBorderBrushPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("OutlinedPasswordBoxBorderBrushPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBorderBrushFocused")]
-						public static ResourceValue<Brush> Focused => new("OutlinedPasswordBoxBorderBrushFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("OutlinedPasswordBoxBorderBrushFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxBorderBrushDisabled")]
-						public static ResourceValue<Brush> Disabled => new("OutlinedPasswordBoxBorderBrushDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("OutlinedPasswordBoxBorderBrushDisabled");
 					}
 
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxForeground")]
-						public static ResourceValue<Brush> Default => new("OutlinedPasswordBoxForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("OutlinedPasswordBoxForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("OutlinedPasswordBoxForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("OutlinedPasswordBoxForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxForegroundFocused")]
-						public static ResourceValue<Brush> Focused => new("OutlinedPasswordBoxForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("OutlinedPasswordBoxForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("OutlinedPasswordBoxForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("OutlinedPasswordBoxForegroundDisabled");
 					}
 
 					public static class Placeholder
@@ -177,32 +178,32 @@ namespace Uno.Themes.Markup
 						public static class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxPlaceholderForeground")]
-							public static ResourceValue<Brush> Default => new("OutlinedPasswordBoxPlaceholderForeground", true);
+							public static ThemeResourceKey<Brush> Default => new("OutlinedPasswordBoxPlaceholderForeground");
 
 							[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxPlaceholderForegroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("OutlinedPasswordBoxPlaceholderForegroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("OutlinedPasswordBoxPlaceholderForegroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxPlaceholderForegroundFocused")]
-							public static ResourceValue<Brush> Focused => new("OutlinedPasswordBoxPlaceholderForegroundFocused", true);
+							public static ThemeResourceKey<Brush> Focused => new("OutlinedPasswordBoxPlaceholderForegroundFocused");
 
 							[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxPlaceholderForegroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("OutlinedPasswordBoxPlaceholderForegroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("OutlinedPasswordBoxPlaceholderForegroundDisabled");
 						}
 					}
 
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "OutlinedPasswordBoxFontFamily")]
-						public static ResourceValue<FontFamily> FontFamily => new("OutlinedPasswordBoxFontFamily", true);
+						public static StaticResourceKey<FontFamily> FontFamily => new("OutlinedPasswordBoxFontFamily");
 
 						[ResourceKeyDefinition(typeof(FontWeights), "OutlinedPasswordBoxFontWeight")]
-						public static ResourceValue<FontWeights> FontWeight => new("OutlinedPasswordBoxFontWeight", true);
+						public static StaticResourceKey<FontWeights> FontWeight => new("OutlinedPasswordBoxFontWeight");
 
 						[ResourceKeyDefinition(typeof(double), "OutlinedPasswordBoxFontSize")]
-						public static ResourceValue<double> FontSize => new("OutlinedPasswordBoxFontSize", true);
+						public static StaticResourceKey<double> FontSize => new("OutlinedPasswordBoxFontSize");
 
 						[ResourceKeyDefinition(typeof(int), "OutlinedPasswordBoxCharacterSpacing")]
-						public static ResourceValue<int> CharacterSpacing => new("OutlinedPasswordBoxCharacterSpacing", true);
+						public static StaticResourceKey<int> CharacterSpacing => new("OutlinedPasswordBoxCharacterSpacing");
 					}
 				}
 			}
@@ -210,10 +211,10 @@ namespace Uno.Themes.Markup
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "FilledPasswordBoxStyle", TargetType = typeof(PasswordBox))]
-				public static ResourceValue<Style> Filled => new("FilledPasswordBoxStyle");
+				public static StaticResourceKey<Style> Filled => new("FilledPasswordBoxStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "OutlinedPasswordBoxStyle", TargetType = typeof(PasswordBox))]
-				public static ResourceValue<Style> Outlined => new("OutlinedPasswordBoxStyle");
+				public static StaticResourceKey<Style> Outlined => new("OutlinedPasswordBoxStyle");
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 using Microsoft.UI.Text;
 
@@ -16,94 +17,94 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonForeground")]
-						public static ResourceValue<Brush> Default => new("RadioButtonForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("RadioButtonForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("RadioButtonForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("RadioButtonForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("RadioButtonForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("RadioButtonForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("RadioButtonForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("RadioButtonForegroundDisabled");
 					}
 
 					public static class Stroke
 					{
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStroke")]
-						public static ResourceValue<Brush> Default => new("RadioButtonOuterEllipseStroke", true);
+						public static ThemeResourceKey<Brush> Default => new("RadioButtonOuterEllipseStroke");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStrokePointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("RadioButtonOuterEllipseStrokePointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("RadioButtonOuterEllipseStrokePointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStrokePressed")]
-						public static ResourceValue<Brush> Pressed => new("RadioButtonOuterEllipseStrokePressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("RadioButtonOuterEllipseStrokePressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStrokeDisabled")]
-						public static ResourceValue<Brush> Disabled => new("RadioButtonOuterEllipseStrokeDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("RadioButtonOuterEllipseStrokeDisabled");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStroke")]
-						public static ResourceValue<Brush> Checked => new("RadioButtonOuterEllipseCheckedStroke", true);
+						public static ThemeResourceKey<Brush> Checked => new("RadioButtonOuterEllipseCheckedStroke");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStrokePointerOver")]
-						public static ResourceValue<Brush> CheckedPointerOver => new("RadioButtonOuterEllipseCheckedStrokePointerOver", true);
+						public static ThemeResourceKey<Brush> CheckedPointerOver => new("RadioButtonOuterEllipseCheckedStrokePointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStrokePressed")]
-						public static ResourceValue<Brush> CheckedPressed => new("RadioButtonOuterEllipseCheckedStrokePressed", true);
+						public static ThemeResourceKey<Brush> CheckedPressed => new("RadioButtonOuterEllipseCheckedStrokePressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStrokeDisabled")]
-						public static ResourceValue<Brush> CheckedDisabled => new("RadioButtonOuterEllipseCheckedStrokeDisabled", true);
+						public static ThemeResourceKey<Brush> CheckedDisabled => new("RadioButtonOuterEllipseCheckedStrokeDisabled");
 					}
 
 					public static class Fill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseFill")]
-						public static ResourceValue<Brush> Default => new("RadioButtonOuterEllipseFill", true);
+						public static ThemeResourceKey<Brush> Default => new("RadioButtonOuterEllipseFill");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseFillPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("RadioButtonOuterEllipseFillPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("RadioButtonOuterEllipseFillPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseFillPressed")]
-						public static ResourceValue<Brush> Pressed => new("RadioButtonOuterEllipseFillPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("RadioButtonOuterEllipseFillPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseFillDisabled")]
-						public static ResourceValue<Brush> Disabled => new("RadioButtonOuterEllipseFillDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("RadioButtonOuterEllipseFillDisabled");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedFill")]
-						public static ResourceValue<Brush> Checked => new("RadioButtonOuterEllipseCheckedFill", true);
+						public static ThemeResourceKey<Brush> Checked => new("RadioButtonOuterEllipseCheckedFill");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedFillPointerOver")]
-						public static ResourceValue<Brush> CheckedPointerOver => new("RadioButtonOuterEllipseCheckedFillPointerOver", true);
+						public static ThemeResourceKey<Brush> CheckedPointerOver => new("RadioButtonOuterEllipseCheckedFillPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedFillPressed")]
-						public static ResourceValue<Brush> CheckedPressed => new("RadioButtonOuterEllipseCheckedFillPressed", true);
+						public static ThemeResourceKey<Brush> CheckedPressed => new("RadioButtonOuterEllipseCheckedFillPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedFillDisabled")]
-						public static ResourceValue<Brush> CheckedDisabled => new("RadioButtonOuterEllipseCheckedFillDisabled", true);
+						public static ThemeResourceKey<Brush> CheckedDisabled => new("RadioButtonOuterEllipseCheckedFillDisabled");
 					}
 
 					public static class HoverRingFill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "MaterialRadioButtonHoverRingFillPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("MaterialRadioButtonHoverRingFillPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("MaterialRadioButtonHoverRingFillPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "MaterialRadioButtonHoverRingFillPressed")]
-						public static ResourceValue<Brush> Pressed => new("MaterialRadioButtonHoverRingFillPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("MaterialRadioButtonHoverRingFillPressed");
 					}
 
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "RadioButtonFontFamily")]
-						public static ResourceValue<FontFamily> FontFamily => new("RadioButtonFontFamily", true);
+						public static StaticResourceKey<FontFamily> FontFamily => new("RadioButtonFontFamily");
 
 						[ResourceKeyDefinition(typeof(FontWeights), "RadioButtonFontWeight")]
-						public static ResourceValue<FontWeights> FontWeight => new("RadioButtonFontWeight", true);
+						public static StaticResourceKey<FontWeights> FontWeight => new("RadioButtonFontWeight");
 
 						[ResourceKeyDefinition(typeof(double), "RadioButtonFontSize")]
-						public static ResourceValue<double> FontSize => new("RadioButtonFontSize", true);
+						public static StaticResourceKey<double> FontSize => new("RadioButtonFontSize");
 
 						[ResourceKeyDefinition(typeof(int), "RadioButtonCharacterSpacing")]
-						public static ResourceValue<int> CharacterSpacing => new("RadioButtonCharacterSpacing", true);
+						public static StaticResourceKey<int> CharacterSpacing => new("RadioButtonCharacterSpacing");
 					}
 				}
 			}
@@ -111,10 +112,10 @@ namespace Uno.Themes.Markup
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "RadioButtonStyle", TargetType = typeof(RadioButton))]
-				public static ResourceValue<Style> Default => new("RadioButtonStyle");
+				public static StaticResourceKey<Style> Default => new("RadioButtonStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "SecondaryRadioButtonStyle", TargetType = typeof(RadioButton))]
-				public static ResourceValue<Style> Secondary => new("SecondaryRadioButtonStyle");
+				public static StaticResourceKey<Style> Secondary => new("SecondaryRadioButtonStyle");
 			}
 		}
 	}
