@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -16,7 +17,7 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutButtonBackground")]
-						public static ResourceValue<Brush> Default => new("DatePickerFlyoutButtonBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutButtonBackground");
 					}
 				}
 
@@ -25,40 +26,40 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBackground")]
-						public static ResourceValue<Brush> Default => new("DatePickerFlyoutPresenterBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterBackground");
 					}
 
 					public static class BorderBrush
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBorderBrush")]
-						public static ResourceValue<Brush> Default => new("DatePickerFlyoutPresenterBorderBrush", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterBorderBrush");
 					}
 
 					public static class SpacerFill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterSpacerFill")]
-						public static ResourceValue<Brush> Default => new("DatePickerFlyoutPresenterSpacerFill", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterSpacerFill");
 					}
 
 					public static class HighlightFill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterHighlightFill")]
-						public static ResourceValue<Brush> Default => new("DatePickerFlyoutPresenterHighlightFill", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterHighlightFill");
 					}
 
 					public static class ContainerCornerRadius
 					{
 						[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerFlyoutPresenterCornerRadius")]
-						public static ResourceValue<CornerRadius> Default => new("DatePickerFlyoutPresenterCornerRadius", true);
+						public static ThemeResourceKey<CornerRadius> Default => new("DatePickerFlyoutPresenterCornerRadius");
 					}
 
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "DatePickerFlyoutPresenterFontFamily")]
-						public static ResourceValue<FontFamily> FontFamily => new("DatePickerFlyoutPresenterFontFamily", true);
+						public static ThemeResourceKey<FontFamily> FontFamily => new("DatePickerFlyoutPresenterFontFamily");
 
 						[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterFontSize")]
-						public static ResourceValue<double> FontSize => new("DatePickerFlyoutPresenterFontSize", true);
+						public static ThemeResourceKey<double> FontSize => new("DatePickerFlyoutPresenterFontSize");
 					}
 				}
 
@@ -67,52 +68,52 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBackground")]
-						public static ResourceValue<Brush> Default => new("DatePickerButtonBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerButtonBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("DatePickerButtonBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("DatePickerButtonBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBackgroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("DatePickerButtonBackgroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("DatePickerButtonBackgroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("DatePickerButtonBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("DatePickerButtonBackgroundDisabled");
 					}
 
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonForeground")]
-						public static ResourceValue<Brush> Default => new("DatePickerButtonForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerButtonForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("DatePickerButtonForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("DatePickerButtonForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("DatePickerButtonForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("DatePickerButtonForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("DatePickerButtonForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("DatePickerButtonForegroundDisabled");
 					}
 
 					public static class BorderBrush
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBorderBrush")]
-						public static ResourceValue<Brush> Default => new("DatePickerButtonBorderBrush", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerButtonBorderBrush");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBorderBrushPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("DatePickerButtonBorderBrushPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("DatePickerButtonBorderBrushPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBorderBrushPressed")]
-						public static ResourceValue<Brush> Pressed => new("DatePickerButtonBorderBrushPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("DatePickerButtonBorderBrushPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonBorderBrushDisabled")]
-						public static ResourceValue<Brush> Disabled => new("DatePickerButtonBorderBrushDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("DatePickerButtonBorderBrushDisabled");
 					}
 
 					public static class ContainerCornerRadius
 					{
 						[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerFlyoutPresenterCornerRadius")]
-						public static ResourceValue<CornerRadius> Default => new("DatePickerFlyoutPresenterCornerRadius", true);
+						public static ThemeResourceKey<CornerRadius> Default => new("DatePickerFlyoutPresenterCornerRadius");
 					}
 				}
 
@@ -121,16 +122,16 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonDateTextForeground")]
-						public static ResourceValue<Brush> Default => new("DatePickerButtonDateTextForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerButtonDateTextForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonDateTextForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("DatePickerButtonDateTextForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("DatePickerButtonDateTextForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonDateTextForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("DatePickerButtonDateTextForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("DatePickerButtonDateTextForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonDateTextForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("DatePickerButtonDateTextForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("DatePickerButtonDateTextForegroundDisabled");
 					}
 				}
 
@@ -139,7 +140,7 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerPlaceholderTextForeground")]
-						public static ResourceValue<Brush> Default => new("DatePickerPlaceholderTextForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("DatePickerPlaceholderTextForeground");
 					}
 				}
 			}
@@ -147,7 +148,7 @@ namespace Uno.Themes.Markup
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "DatePickerStyle", TargetType = typeof(DatePicker))]
-				public static ResourceValue<Style> Default => new("DatePickerStyle");
+				public static StaticResourceKey<Style> Default => new("DatePickerStyle");
 			}
 		}
 	}
