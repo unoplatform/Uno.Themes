@@ -31,40 +31,80 @@ namespace Uno.Themes.Markup
 						public static ThemeResourceKey<Brush> Focused => new("ComboBoxForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxForegroundFocusedPressed")]
-						public static ResourceValue<Brush> FocusedPressed => new("ComboBoxForegroundFocusedPressed", true);
+						public static ThemeResourceKey<Brush> FocusedPressed => new("ComboBoxForegroundFocusedPressed");
+					}
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForeground")]
-						public static ResourceValue<Brush> UpperPlaceHolder => new("ComboBoxUpperPlaceHolderForeground", true);
-
+					public static class PlaceholderForeground
+					{
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxPlaceHolderForeground")]
-						public static ResourceValue<Brush> PlaceHolder => new("ComboBoxPlaceHolderForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("ComboBoxPlaceHolderForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxPlaceHolderForegroundPointerOver")]
-						public static ResourceValue<Brush> PlaceHolderPointerOver => new("ComboBoxPlaceHolderForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxPlaceHolderForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxPlaceHolderForegroundPressed")]
-						public static ResourceValue<Brush> PlaceHolderPressed => new("ComboBoxPlaceHolderForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("ComboBoxPlaceHolderForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxPlaceHolderForegroundDisabled")]
-						public static ResourceValue<Brush> PlaceHolderDisabled => new("ComboBoxPlaceHolderForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("ComboBoxPlaceHolderForegroundDisabled");
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxPlaceHolderForegroundFocused")]
-						public static ResourceValue<Brush> PlaceHolderFocused => new("ComboBoxPlaceHolderForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("ComboBoxPlaceHolderForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxPlaceHolderForegroundFocusedPressed")]
-						public static ResourceValue<Brush> PlaceHolderFocusedPressed => new("ComboBoxPlaceHolderForegroundFocusedPressed", true);
+						public static ThemeResourceKey<Brush> FocusedPressed => new("ComboBoxPlaceHolderForegroundFocusedPressed");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxLeadingIconForeground")]
-						public static ResourceValue<Brush> LeadingIcon => new("ComboBoxLeadingIconForeground", true);
+					}
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxLeadingIconForegroundDisabled")]
-						public static ResourceValue<Brush> LeadingIconDisabled => new("ComboBoxLeadingIconForegroundDisabled", true);
+					public static class UpperPlaceholderForeground
+					{
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForeground")]
+						public static ThemeResourceKey<Brush> Default => new("ComboBoxUpperPlaceHolderForeground");
 
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForegroundPointerOver")]
+						public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxUpperPlaceHolderForegroundPointerOver");
+
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForegroundPressed")]
+						public static ThemeResourceKey<Brush> Pressed => new("ComboBoxUpperPlaceHolderForegroundPressed");
+
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForegroundDisabled")]
+						public static ThemeResourceKey<Brush> Disabled => new("ComboBoxUpperPlaceHolderForegroundDisabled");
+
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForegroundFocused")]
+						public static ThemeResourceKey<Brush> Focused => new("ComboBoxUpperPlaceHolderForegroundFocused");
+
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForegroundFocusedPressed")]
+						public static ThemeResourceKey<Brush> FocusedPressed => new("ComboBoxUpperPlaceHolderForegroundFocusedPressed");
+
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxUpperPlaceHolderForegroundOpened")]
+						public static ThemeResourceKey<Brush> Opened => new("ComboBoxUpperPlaceHolderForegroundOpened");
+					}
+
+					public static class LeadingIcon
+					{
+						public static class Foreground
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxLeadingIconForeground")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxLeadingIconForeground");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxLeadingIconForegroundDisabled")]
+							public static ThemeResourceKey<Brush> Disabled => new("ComboBoxLeadingIconForegroundDisabled");
+						}
+
+						[ResourceKeyDefinition(typeof(double), "ComboBoxLeadingIconWidth")]
+						public static ThemeResourceKey<double> Width => new("ComboBoxLeadingIconWidth");
+
+						[ResourceKeyDefinition(typeof(Thickness), "ComboBoxLeadingIconMargin")]
+						public static ThemeResourceKey<Thickness> Margin => new("ComboBoxLeadingIconMargin");
+					}
+
+					public static class ArrowForeground
+					{
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxArrowForeground")]
-						public static ResourceValue<Brush> Arrow => new("ComboBoxArrowForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("ComboBoxArrowForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxArrowForegroundOpened")]
-						public static ResourceValue<Brush> ArrowOpened => new("ComboBoxArrowForegroundOpened", true);
+						public static ThemeResourceKey<Brush> Opened => new("ComboBoxArrowForegroundOpened");
 					}
 
 					public static class Background
@@ -108,162 +148,197 @@ namespace Uno.Themes.Markup
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxBorderBrushOpened")]
 						public static ThemeResourceKey<Brush> Opened => new("ComboBoxBorderBrushOpened");
 					}
-				}
 
-				public static class ComboBoxItem
-				{
-					public static class Foreground
+					public static class Item
 					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForeground")]
-						public static ThemeResourceKey<Brush> Default => new("ComboBoxItemForeground");
+						public static class Foreground
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForeground")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxItemForeground");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundPressed")]
-						public static ThemeResourceKey<Brush> Pressed => new("ComboBoxItemForegroundPressed");
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundPressed")]
+							public static ThemeResourceKey<Brush> Pressed => new("ComboBoxItemForegroundPressed");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundPointerOver")]
-						public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxItemForegroundPointerOver");
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundPointerOver")]
+							public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxItemForegroundPointerOver");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("ComboBoxItemForegroundDisabled", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundDisabled")]
+							public static ThemeResourceKey<Brush> Disabled => new("ComboBoxItemForegroundDisabled");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelected")]
-						public static ResourceValue<Brush> Selected => new("ComboBoxItemForegroundSelected", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelected")]
+							public static ThemeResourceKey<Brush> Selected => new("ComboBoxItemForegroundSelected");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedUnfocused")]
-						public static ResourceValue<Brush> SelectedUnfocused => new("ComboBoxItemForegroundSelectedUnfocused", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedUnfocused")]
+							public static ThemeResourceKey<Brush> SelectedUnfocused => new("ComboBoxItemForegroundSelectedUnfocused");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedPressed")]
-						public static ResourceValue<Brush> SelectedPressed => new("ComboBoxItemForegroundSelectedPressed", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedPressed")]
+							public static ThemeResourceKey<Brush> SelectedPressed => new("ComboBoxItemForegroundSelectedPressed");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedPointerOver")]
-						public static ResourceValue<Brush> SelectedPointerOver => new("ComboBoxItemForegroundSelectedPointerOver", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedPointerOver")]
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("ComboBoxItemForegroundSelectedPointerOver");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedDisabled")]
-						public static ResourceValue<Brush> SelectedDisabled => new("ComboBoxItemForegroundSelectedDisabled", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemForegroundSelectedDisabled")]
+							public static ThemeResourceKey<Brush> SelectedDisabled => new("ComboBoxItemForegroundSelectedDisabled");
+						}
+
+						public static class Background
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackground")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxItemBackground");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundPressed")]
+							public static ThemeResourceKey<Brush> Pressed => new("ComboBoxItemBackgroundPressed");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundPointerOver")]
+							public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxItemBackgroundPointerOver");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundDisabled")]
+							public static ThemeResourceKey<Brush> Disabled => new("ComboBoxItemBackgroundDisabled");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelected")]
+							public static ThemeResourceKey<Brush> Selected => new("ComboBoxItemBackgroundSelected");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedUnfocused")]
+							public static ThemeResourceKey<Brush> SelectedUnfocused => new("ComboBoxItemBackgroundSelectedUnfocused");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedPressed")]
+							public static ThemeResourceKey<Brush> SelectedPressed => new("ComboBoxItemBackgroundSelectedPressed");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedPointerOver")]
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("ComboBoxItemBackgroundSelectedPointerOver");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedDisabled")]
+							public static ThemeResourceKey<Brush> SelectedDisabled => new("ComboBoxItemBackgroundSelectedDisabled");
+						}
+
+						public static class BorderBrush
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrush")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxItemBorderBrush");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushPressed")]
+							public static ThemeResourceKey<Brush> Pressed => new("ComboBoxItemBorderBrushPressed");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushPointerOver")]
+							public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxItemBorderBrushPointerOver");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushDisabled")]
+							public static ThemeResourceKey<Brush> Disabled => new("ComboBoxItemBorderBrushDisabled");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelected")]
+							public static ThemeResourceKey<Brush> Selected => new("ComboBoxItemBorderBrushSelected");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedUnfocused")]
+							public static ThemeResourceKey<Brush> SelectedUnfocused => new("ComboBoxItemBorderBrushSelectedUnfocused");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedPressed")]
+							public static ThemeResourceKey<Brush> SelectedPressed => new("ComboBoxItemBorderBrushSelectedPressed");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedPointerOver")]
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("ComboBoxItemBorderBrushSelectedPointerOver");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedDisabled")]
+							public static ThemeResourceKey<Brush> SelectedDisabled => new("ComboBoxItemBorderBrushSelectedDisabled");
+						}
+
+						public static class PillFill
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemPillFillBrush")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxItemPillFillBrush");
+						}
 					}
 
-					public static class Background
+					public static class DropDown
 					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackground")]
-						public static ThemeResourceKey<Brush> Default => new("ComboBoxItemBackground");
+						public static class Foreground
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownForeground")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownForeground");
+						}
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundPressed")]
-						public static ThemeResourceKey<Brush> Pressed => new("ComboBoxItemBackgroundPressed");
+						public static class GlyphForeground
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForeground")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownGlyphForeground");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundPointerOver")]
-						public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxItemBackgroundPointerOver");
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForegroundFocusedPressed")]
+							public static ThemeResourceKey<Brush> FocusedPressed => new("ComboBoxDropDownGlyphForegroundFocusedPressed");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("ComboBoxItemBackgroundDisabled", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForegroundFocused")]
+							public static ThemeResourceKey<Brush> Focused => new("ComboBoxDropDownGlyphForegroundFocused");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelected")]
-						public static ResourceValue<Brush> Selected => new("ComboBoxItemBackgroundSelected", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForegroundDisabled")]
+							public static ThemeResourceKey<Brush> Disabled => new("ComboBoxDropDownGlyphForegroundDisabled");
+						}
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedUnfocused")]
-						public static ResourceValue<Brush> SelectedUnfocused => new("ComboBoxItemBackgroundSelectedUnfocused", true);
+						public static class EditableGlyphForeground
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxEditableDropDownGlyphForeground")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxEditableDropDownGlyphForeground");
+						}
+						public static class BorderBrush
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBorderBrush")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownBorderBrush");
+						}
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedPressed")]
-						public static ResourceValue<Brush> SelectedPressed => new("ComboBoxItemBackgroundSelectedPressed", true);
+						public static class Background
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackground")]
+							public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownBackground");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedPointerOver")]
-						public static ResourceValue<Brush> SelectedPointerOver => new("ComboBoxItemBackgroundSelectedPointerOver", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundPointerOver")]
+							public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxDropDownBackgroundPointerOver");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBackgroundSelectedDisabled")]
-						public static ResourceValue<Brush> SelectedDisabled => new("ComboBoxItemBackgroundSelectedDisabled", true);
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundPointerPressed")]
+							public static ThemeResourceKey<Brush> PointerPressed => new("ComboBoxDropDownBackgroundPointerPressed");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundPressed")]
+							public static ThemeResourceKey<Brush> Pressed => new("ComboBoxDropDownBackgroundPressed");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundFocused")]
+							public static ThemeResourceKey<Brush> Focused => new("ComboBoxDropDownBackgroundFocused");
+
+							[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundFocusedPressed")]
+							public static ThemeResourceKey<Brush> FocusedPressed => new("ComboBoxDropDownBackgroundFocusedPressed");
+						}
 					}
 
-					public static class BorderBrush
-					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrush")]
-						public static ThemeResourceKey<Brush> Default => new("ComboBoxItemBorderBrush");
+					[ResourceKeyDefinition(typeof(CornerRadius), "ComboBoxCornerRadius")]
+					public static ThemeResourceKey<CornerRadius> CornerRadius => new("ComboBoxCornerRadius");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushPressed")]
-						public static ThemeResourceKey<Brush> Pressed => new("ComboBoxItemBorderBrushPressed");
+					[ResourceKeyDefinition(typeof(double), "ComboBoxHeight")]
+					public static ThemeResourceKey<double> Height => new("ComboBoxHeight");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushPointerOver")]
-						public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxItemBorderBrushPointerOver");
+					[ResourceKeyDefinition(typeof(double), "ComboBoxMinHeight")]
+					public static ThemeResourceKey<double> MinHeight => new("ComboBoxMinHeight");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushDisabled")]
-						public static ResourceValue<Brush> Disabled => new("ComboBoxItemBorderBrushDisabled", true);
+					[ResourceKeyDefinition(typeof(double), "ComboBoxDownGlyphWidth")]
+					public static ThemeResourceKey<double> DownGlyphWidth => new("ComboBoxDownGlyphWidth");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelected")]
-						public static ResourceValue<Brush> Selected => new("ComboBoxItemBorderBrushSelected", true);
+					[ResourceKeyDefinition(typeof(double), "ComboBoxUpGlyphWidth")]
+					public static ThemeResourceKey<double> UpGlyphWidth => new("ComboBoxUpGlyphWidth");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedUnfocused")]
-						public static ResourceValue<Brush> SelectedUnfocused => new("ComboBoxItemBorderBrushSelectedUnfocused", true);
+					[ResourceKeyDefinition(typeof(double), "ComboBoxDownGlyphHeight")]
+					public static ThemeResourceKey<double> DownGlyphHeight => new("ComboBoxDownGlyphHeight");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedPressed")]
-						public static ResourceValue<Brush> SelectedPressed => new("ComboBoxItemBorderBrushSelectedPressed", true);
+					[ResourceKeyDefinition(typeof(double), "ComboBoxUpGlyphHeight")]
+					public static ThemeResourceKey<double> UpGlyphHeight => new("ComboBoxUpGlyphHeight");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedPointerOver")]
-						public static ResourceValue<Brush> SelectedPointerOver => new("ComboBoxItemBorderBrushSelectedPointerOver", true);
+					[ResourceKeyDefinition(typeof(Thickness), "ComboBoxDownGlyphMargin")]
+					public static ThemeResourceKey<Thickness> DownGlyphMargin => new("ComboBoxDownGlyphMargin");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemBorderBrushSelectedDisabled")]
-						public static ResourceValue<Brush> SelectedDisabled => new("ComboBoxItemBorderBrushSelectedDisabled", true);
-					}
+					[ResourceKeyDefinition(typeof(Thickness), "ComboBoxUpGlyphMargin")]
+					public static ThemeResourceKey<Thickness> UpGlyphMargin => new("ComboBoxUpGlyphMargin");
 
-					public static class PillFill
-					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxItemPillFillBrush")]
-						public static ThemeResourceKey<Brush> Default => new("ComboBoxItemPillFillBrush");
-					}
-				}
+					[ResourceKeyDefinition(typeof(Thickness), "ComboBoxBorderThickness")]
+					public static ThemeResourceKey<Thickness> BorderThickness => new("ComboBoxBorderThickness");
 
-				public static class DropDown
-				{
-					public static class Foreground
-					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownForeground")]
-						public static ResourceValue<Brush> Default => new("ComboBoxDropDownForeground", true);
+					[ResourceKeyDefinition(typeof(Thickness), "ComboBoxOpenedBorderThickness")]
+					public static ThemeResourceKey<Thickness> OpenedBorderThickness => new("ComboBoxOpenedBorderThickness");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForeground")]
-						public static ResourceValue<Brush> Glyph => new("ComboBoxDropDownGlyphForeground", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForegroundFocusedPressed")]
-						public static ResourceValue<Brush> GlyphFocusedPressed => new("ComboBoxDropDownGlyphForegroundFocusedPressed", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForegroundFocused")]
-						public static ResourceValue<Brush> GlyphFocused => new("ComboBoxDropDownGlyphForegroundFocused", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownGlyphForegroundDisabled")]
-						public static ResourceValue<Brush> GlyphDisabled => new("ComboBoxDropDownGlyphForegroundDisabled", true);
-					}
-
-					public static class BorderBrush
-					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBorderBrush")]
-						public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownBorderBrush");
-					}
-
-					public static class Background
-					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackground")]
-						public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownBackground");
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundPointerOver")]
-						public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxDropDownBackgroundPointerOver");
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundPointerPressed")]
-						public static ThemeResourceKey<Brush> PointerPressed => new("ComboBoxDropDownBackgroundPointerPressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundPressed")]
-						public static ThemeResourceKey<Brush> Pressed => new("ComboBoxDropDownBackgroundPressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundFocused")]
-						public static ThemeResourceKey<Brush> Focused => new("ComboBoxDropDownBackgroundFocused");
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundFocusedPressed")]
-						public static ThemeResourceKey<Brush> FocusedPressed => new("ComboBoxDropDownBackgroundFocusedPressed");
-					}
-				}
-
-				public static class EditableDropDown
-				{
-					public static class Foreground
-					{
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxEditableDropDownGlyphForeground")]
-						public static ResourceValue<Brush> Glyph => new("ComboBoxEditableDropDownGlyphForeground", true);
-					}
+					[ResourceKeyDefinition(typeof(Thickness), "ComboBoxPadding")]
+					public static ThemeResourceKey<Thickness> Padding => new("ComboBoxPadding");
 				}
 			}
 
