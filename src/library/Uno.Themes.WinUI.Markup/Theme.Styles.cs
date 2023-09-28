@@ -74,18 +74,6 @@ namespace Uno.Themes.Markup
 				public static StaticResourceKey<Style> Default => new("ListViewStyle");
 			}
 
-			public static class NavigationView
-			{
-				[ResourceKeyDefinition(typeof(Style), "NavigationViewStyle", TargetType = typeof(NavigationView))]
-				public static StaticResourceKey<Style> Default => new("NavigationViewStyle");
-			}
-
-			public static class NavigationViewItem
-			{
-				[ResourceKeyDefinition(typeof(Style), "NavigationViewItemStyle", TargetType = typeof(NavigationViewItem))]
-				public static StaticResourceKey<Style> Default => new("NavigationViewItemStyle");
-			}
-
 			public static class PipsPager
 			{
 				[ResourceKeyDefinition(typeof(Style), "PipsPagerStyle", TargetType = typeof(PipsPager))]
