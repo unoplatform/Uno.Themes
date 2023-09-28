@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -13,10 +14,10 @@ namespace Uno.Themes.Markup
 				public static class Typography
 				{
 					[ResourceKeyDefinition(typeof(FontFamily), "SliderFontFamily")]
-					public static ResourceValue<FontFamily> FontFamily => new("SliderFontFamily", true);
+					public static ThemeResourceKey<FontFamily> FontFamily => new("SliderFontFamily");
 
 					[ResourceKeyDefinition(typeof(double), "SliderFontSize")]
-					public static ResourceValue<double> FontSize => new("SliderFontSize", true);
+					public static ThemeResourceKey<double> FontSize => new("SliderFontSize");
 				}
 
 				public static class Track
@@ -24,23 +25,23 @@ namespace Uno.Themes.Markup
 					public static class Fill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "SliderTrackFill")]
-						public static ResourceValue<Brush> Default => new("SliderTrackFill", true);
+						public static ThemeResourceKey<Brush> Default => new("SliderTrackFill");
 
 						[ResourceKeyDefinition(typeof(Brush), "SliderTrackFillDisabled")]
-						public static ResourceValue<Brush> Disabled => new("SliderTrackFillDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("SliderTrackFillDisabled");
 					}
 
 					public static class ValueFill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "SliderTrackFill")]
-						public static ResourceValue<Brush> Default => new("SliderTrackFill", true);
+						public static ThemeResourceKey<Brush> Default => new("SliderTrackFill");
 
 						[ResourceKeyDefinition(typeof(Brush), "SliderTrackFillDisabled")]
-						public static ResourceValue<Brush> Disabled => new("SliderTrackFillDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("SliderTrackFillDisabled");
 					}
 
 					[ResourceKeyDefinition(typeof(CornerRadius), "SliderTrackCornerRadius")]
-					public static ResourceValue<CornerRadius> CornerRadius => new("SliderTrackCornerRadius", true);
+					public static ThemeResourceKey<CornerRadius> CornerRadius => new("SliderTrackCornerRadius");
 				}
 
 				public static class TickBar
@@ -48,14 +49,14 @@ namespace Uno.Themes.Markup
 					public static class Fill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "SliderTickBarFill")]
-						public static ResourceValue<Brush> Default => new("SliderTickBarFill", true);
+						public static ThemeResourceKey<Brush> Default => new("SliderTickBarFill");
 
 						[ResourceKeyDefinition(typeof(Brush), "SliderTickBarFillDisabled")]
-						public static ResourceValue<Brush> Disabled => new("SliderTickBarFillDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("SliderTickBarFillDisabled");
 					}
 
 					[ResourceKeyDefinition(typeof(Brush), "SliderInlineTickBarFill")]
-					public static ResourceValue<Brush> InlineFill => new("SliderInlineTickBarFill", true);
+					public static ThemeResourceKey<Brush> InlineFill => new("SliderInlineTickBarFill");
 				}
 
 				public static class Thumb
@@ -63,10 +64,10 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "SliderThumbBackground")]
-						public static ResourceValue<Brush> Default => new("SliderThumbBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("SliderThumbBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "SliderThumbBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("SliderThumbBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("SliderThumbBackgroundDisabled");
 					}
 				}
 			}
@@ -74,12 +75,12 @@ namespace Uno.Themes.Markup
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "MaterialSliderStyle", TargetType = typeof(Slider))]
-				public static ResourceValue<Style> Default => new("MaterialSliderStyle");
+				public static StaticResourceKey<Style> Default => new("MaterialSliderStyle");
 
 				public static class Thumb
 				{
 					[ResourceKeyDefinition(typeof(Style), "MaterialSliderThumbStyle", TargetType = typeof(Microsoft.UI.Xaml.Controls.Primitives.Thumb))]
-					public static ResourceValue<Style> Default => new("MaterialSliderThumbStyle");
+					public static ThemeResourceKey<Style> Default => new("MaterialSliderThumbStyle");
 				}
 			}
 		}
