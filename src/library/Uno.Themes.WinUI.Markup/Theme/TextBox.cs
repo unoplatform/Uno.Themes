@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 using Windows.UI.Text;
 
@@ -11,119 +12,119 @@ namespace Uno.Themes.Markup
 		{
 			public static class Resources
 			{
-				public static class DeleteButton
-				{
-					public static class Foreground
-					{
-						[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForeground")]
-						public static ResourceValue<Brush> Default => new("TextBoxDeleteButtonForeground", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("TextBoxDeleteButtonForegroundPointerOver", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("TextBoxDeleteButtonForegroundPressed", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("TextBoxDeleteButtonForegroundDisabled", true);
-					}
-				}
-
 				public static class Filled
 				{
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForeground")]
-						public static ResourceValue<Brush> Default => new("FilledTextBoxForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledTextBoxForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FilledTextBoxForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForegroundFocused")]
-						public static ResourceValue<Brush> Focused => new("FilledTextBoxForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledTextBoxForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FilledTextBoxForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledTextBoxForegroundDisabled");
+					}
 
+					public static class PlaceholderForeground
+					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxPlaceholderForeground")]
-						public static ResourceValue<Brush> Placeholder => new("FilledTextBoxPlaceholderForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledTextBoxPlaceholderForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxPlaceholderForegroundPointerOver")]
-						public static ResourceValue<Brush> PlaceholderPointerOver => new("FilledTextBoxPlaceholderForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxPlaceholderForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxPlaceholderForegroundFocused")]
-						public static ResourceValue<Brush> PlaceholderFocused => new("FilledTextBoxPlaceholderForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledTextBoxPlaceholderForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxPlaceholderForegroundDisabled")]
-						public static ResourceValue<Brush> PlaceholderDisabled => new("FilledTextBoxPlaceholderForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledTextBoxPlaceholderForegroundDisabled");
+					}
 
+					public static class DeleteButtonForeground
+					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxDeleteButtonForeground")]
-						public static ResourceValue<Brush> DeleteButton => new("FilledTextBoxDeleteButtonForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledTextBoxDeleteButtonForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxDeleteButtonForegroundPointerOver")]
-						public static ResourceValue<Brush> DeleteButtonPointerOver => new("FilledTextBoxDeleteButtonForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxDeleteButtonForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxDeleteButtonForegroundFocused")]
-						public static ResourceValue<Brush> DeleteButtonFocused => new("FilledTextBoxDeleteButtonForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledTextBoxDeleteButtonForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxDeleteButtonForegroundDisabled")]
-						public static ResourceValue<Brush> DeleteButtonDisabled => new("FilledTextBoxDeleteButtonForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledTextBoxDeleteButtonForegroundDisabled");
 					}
 
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBackground")]
-						public static ResourceValue<Brush> Default => new("FilledTextBoxBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledTextBoxBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FilledTextBoxBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBackgroundFocused")]
-						public static ResourceValue<Brush> Focused => new("FilledTextBoxBackgroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledTextBoxBackgroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FilledTextBoxBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledTextBoxBackgroundDisabled");
 
 					}
 
 					public static class BorderBrush
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrush")]
-						public static ResourceValue<Brush> Default => new("FilledTextBoxBorderBrush", true);
+						public static ThemeResourceKey<Brush> Default => new("FilledTextBoxBorderBrush");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrushPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FilledTextBoxBorderBrushPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxBorderBrushPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrushFocused")]
-						public static ResourceValue<Brush> Focused => new("FilledTextBoxBorderBrushFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FilledTextBoxBorderBrushFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrushDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FilledTextBoxBorderBrushDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FilledTextBoxBorderBrushDisabled");
 					}
 
 					public static class BorderThickness
 					{
 						[ResourceKeyDefinition(typeof(Thickness), "FilledTextBoxBorderThicknessNormal")]
-						public static ResourceValue<Thickness> Normal => new("FilledTextBoxBorderThicknessNormal", true);
+						public static ThemeResourceKey<Thickness> Default => new("FilledTextBoxBorderThicknessNormal");
 
 						[ResourceKeyDefinition(typeof(Thickness), "FilledTextBoxBorderThicknessFocused")]
-						public static ResourceValue<Thickness> Focused => new("FilledTextBoxBorderThicknessFocused", true);
+						public static ThemeResourceKey<Thickness> Focused => new("FilledTextBoxBorderThicknessFocused");
 					}
 
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "FilledTextBoxFontFamily")]
-						public static ResourceValue<FontFamily> FontFamily => new("FilledTextBoxFontFamily", true);
+						public static ThemeResourceKey<FontFamily> FontFamily => new("FilledTextBoxFontFamily");
 
 						[ResourceKeyDefinition(typeof(double), "FilledTextBoxFontSize")]
-						public static ResourceValue<double> FontSize => new("FilledTextBoxFontSize", true);
+						public static ThemeResourceKey<double> FontSize => new("FilledTextBoxFontSize");
+
+						[ResourceKeyDefinition(typeof(FontWeight), "FilledTextBoxFontWeight")]
+						public static ThemeResourceKey<FontWeight> FontWeight => new("FilledTextBoxFontWeight");
+
+						[ResourceKeyDefinition(typeof(int), "FilledTextBoxCharacterSpacing")]
+						public static ThemeResourceKey<int> CharacterSpacing => new("FilledTextBoxCharacterSpacing");
 					}
 
-					[ResourceKeyDefinition(typeof(FontWeight), "FilledTextBoxFontWeight")]
-					public static ResourceValue<FontWeight> FontWeight => new("FilledTextBoxFontWeight", true);
+					[ResourceKeyDefinition(typeof(Microsoft.UI.Xaml.CornerRadius), "MaterialFilledTextBoxCornerRadius")]
+					public static ThemeResourceKey<Microsoft.UI.Xaml.CornerRadius> CornerRadius => new("MaterialFilledTextBoxCornerRadius");
 
-					[ResourceKeyDefinition(typeof(int), "FilledTextBoxCharacterSpacing")]
-					public static ResourceValue<int> CharacterSpacing => new("FilledTextBoxCharacterSpacing", true);
+					[ResourceKeyDefinition(typeof(Thickness), "MaterialFilledTextBoxPadding")]
+					public static ThemeResourceKey<Thickness> Padding => new("MaterialFilledTextBoxPadding");
+
+					[ResourceKeyDefinition(typeof(double), "MaterialFilledTextBoxMinHeight")]
+					public static ThemeResourceKey<double> MinHeight => new("MaterialFilledTextBoxMinHeight");
+
+					[ResourceKeyDefinition(typeof(double), "MaterialFilledTextBoxBorderHeightFocused")]
+					public static ThemeResourceKey<double> BorderHeightFocused => new("MaterialFilledTextBoxBorderHeightFocused");
 				}
 
 				public static class Outlined
@@ -131,70 +132,120 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxForeground")]
-						public static ResourceValue<Brush> Default => new("OutlinedTextBoxForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("OutlinedTextBoxForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("OutlinedTextBoxForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("OutlinedTextBoxForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxForegroundFocused")]
-						public static ResourceValue<Brush> Focused => new("OutlinedTextBoxForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("OutlinedTextBoxForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("OutlinedTextBoxForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("OutlinedTextBoxForegroundDisabled");
+					}
 
+					public static class PlaceholderForeground
+					{
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxPlaceholderForeground")]
-						public static ResourceValue<Brush> Placeholder => new("OutlinedTextBoxPlaceholderForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("OutlinedTextBoxPlaceholderForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxPlaceholderForegroundPointerOver")]
-						public static ResourceValue<Brush> PlaceholderPointerOver => new("OutlinedTextBoxPlaceholderForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("OutlinedTextBoxPlaceholderForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxPlaceholderForegroundFocused")]
-						public static ResourceValue<Brush> PlaceholderFocused => new("OutlinedTextBoxPlaceholderForegroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("OutlinedTextBoxPlaceholderForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxPlaceholderForegroundDisabled")]
-						public static ResourceValue<Brush> PlaceholderDisabled => new("OutlinedTextBoxPlaceholderForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("OutlinedTextBoxPlaceholderForegroundDisabled");
 					}
 
 					public static class BorderBrush
 					{
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxBorderBrush")]
-						public static ResourceValue<Brush> Default => new("OutlinedTextBoxBorderBrush", true);
+						public static ThemeResourceKey<Brush> Default => new("OutlinedTextBoxBorderBrush");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxBorderBrushPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("OutlinedTextBoxBorderBrushPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("OutlinedTextBoxBorderBrushPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxBorderBrushFocused")]
-						public static ResourceValue<Brush> Focused => new("OutlinedTextBoxBorderBrushFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("OutlinedTextBoxBorderBrushFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxBorderBrushDisabled")]
-						public static ResourceValue<Brush> Disabled => new("OutlinedTextBoxBorderBrushDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("OutlinedTextBoxBorderBrushDisabled");
 					}
 
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "OutlinedTextBoxFontFamily")]
-						public static ResourceValue<FontFamily> FontFamily => new("OutlinedTextBoxFontFamily", true);
-
+						public static ThemeResourceKey<FontFamily> FontFamily => new("OutlinedTextBoxFontFamily");
 
 						[ResourceKeyDefinition(typeof(double), "OutlinedTextBoxFontSize")]
-						public static ResourceValue<double> FontSize => new("OutlinedTextBoxFontSize", true);
+						public static ThemeResourceKey<double> FontSize => new("OutlinedTextBoxFontSize");
+
+						[ResourceKeyDefinition(typeof(FontWeight), "OutlinedTextBoxFontWeight")]
+						public static ThemeResourceKey<FontWeight> FontWeight => new("OutlinedTextBoxFontWeight");
+
+						[ResourceKeyDefinition(typeof(int), "OutlinedTextBoxCharacterSpacing")]
+						public static ThemeResourceKey<int> CharacterSpacing => new("OutlinedTextBoxCharacterSpacing");
 					}
 
-					[ResourceKeyDefinition(typeof(FontWeight), "OutlinedTextBoxFontWeight")]
-					public static ResourceValue<FontWeight> FontWeight => new("OutlinedTextBoxFontWeight", true);
+					[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderThickness")]
+					public static ThemeResourceKey<double> BorderThickness => new("MaterialOutlinedTextBoxBorderThickness");
 
-					[ResourceKeyDefinition(typeof(int), "OutlinedTextBoxCharacterSpacing")]
-					public static ResourceValue<int> CharacterSpacing => new("OutlinedTextBoxCharacterSpacing", true);
+					[ResourceKeyDefinition(typeof(Microsoft.UI.Xaml.CornerRadius), "MaterialOutlinedTextBoxCornerRadius")]
+					public static ThemeResourceKey<Microsoft.UI.Xaml.CornerRadius> CornerRadius => new("MaterialOutlinedTextBoxCornerRadius");
+
+					[ResourceKeyDefinition(typeof(Thickness), "MaterialOutlinedTextBoxPadding")]
+					public static ThemeResourceKey<Thickness> Padding => new("MaterialOutlinedTextBoxPadding");
+
+					[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxMinHeight")]
+					public static ThemeResourceKey<double> MinHeight => new("MaterialOutlinedTextBoxMinHeight");
+
+					[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderPadding")]
+					public static ThemeResourceKey<double> BorderPadding => new("MaterialOutlinedTextBoxBorderPadding");
+
+					[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderThicknessFocused")]
+					public static ThemeResourceKey<double> BorderThicknessFocused => new("MaterialOutlinedTextBoxBorderThicknessFocused");
 				}
+
+				public static class DeleteButtonForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForeground")]
+					public static ThemeResourceKey<Brush> Default => new("TextBoxDeleteButtonForeground");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForegroundPointerOver")]
+					public static ThemeResourceKey<Brush> PointerOver => new("TextBoxDeleteButtonForegroundPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForegroundPressed")]
+					public static ThemeResourceKey<Brush> Pressed => new("TextBoxDeleteButtonForegroundPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxDeleteButtonForegroundDisabled")]
+					public static ThemeResourceKey<Brush> Disabled => new("TextBoxDeleteButtonForegroundDisabled");
+				}
+
+				public static class LeadingIconForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForeground")]
+					public static ThemeResourceKey<Brush> Default => new("TextBoxLeadingIconForeground");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForegroundDisabled")]
+					public static ThemeResourceKey<Brush> Disabled => new("TextBoxLeadingIconForegroundDisabled");
+				}
+
+				[ResourceKeyDefinition(typeof(double), "MaterialTextBoxClearGlyphWidth")]
+				public static ThemeResourceKey<double> ClearGlyphWidth => new("MaterialTextBoxClearGlyphWidth");
+
+				[ResourceKeyDefinition(typeof(double), "MaterialTextBoxClearGlyphHeight")]
+				public static ThemeResourceKey<double> ClearGlyphHeight => new("MaterialTextBoxClearGlyphHeight");
 			}
 
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "FilledTextBoxStyle", TargetType = typeof(TextBox))]
-				public static ResourceValue<Style> Filled => new("FilledTextBoxStyle");
+				public static StaticResourceKey<Style> Filled => new("FilledTextBoxStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "OutlinedTextBoxStyle", TargetType = typeof(TextBox))]
-				public static ResourceValue<Style> Outlined => new("OutlinedTextBoxStyle");
+				public static StaticResourceKey<Style> Outlined => new("OutlinedTextBoxStyle");
 			}
 		}
 	}
