@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -13,80 +14,80 @@ namespace Uno.Themes.Markup
 				public static class Foreground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonForeground")]
-					public static ResourceValue<Brush> Default => new("HyperlinkButtonForeground", true);
+					public static ThemeResourceKey<Brush> Default => new("HyperlinkButtonForeground");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonForegroundPointerOver")]
-					public static ResourceValue<Brush> PointerOver => new("HyperlinkButtonForegroundPointerOver", true);
+					public static ThemeResourceKey<Brush> PointerOver => new("HyperlinkButtonForegroundPointerOver");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonForegroundPressed")]
-					public static ResourceValue<Brush> Pressed => new("HyperlinkButtonForegroundPressed", true);
+					public static ThemeResourceKey<Brush> Pressed => new("HyperlinkButtonForegroundPressed");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonForegroundDisabled")]
-					public static ResourceValue<Brush> Disabled => new("HyperlinkButtonForegroundDisabled", true);
+					public static ThemeResourceKey<Brush> Disabled => new("HyperlinkButtonForegroundDisabled");
 				}
 
 				public static class Background
 				{
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBackground")]
-					public static ResourceValue<Brush> Default => new("HyperlinkButtonBackground", true);
+					public static ThemeResourceKey<Brush> Default => new("HyperlinkButtonBackground");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBackgroundPointerOver")]
-					public static ResourceValue<Brush> PointerOver => new("HyperlinkButtonBackgroundPointerOver", true);
+					public static ThemeResourceKey<Brush> PointerOver => new("HyperlinkButtonBackgroundPointerOver");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBackgroundPressed")]
-					public static ResourceValue<Brush> Pressed => new("HyperlinkButtonBackgroundPressed", true);
+					public static ThemeResourceKey<Brush> Pressed => new("HyperlinkButtonBackgroundPressed");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBackgroundDisabled")]
-					public static ResourceValue<Brush> Disabled => new("HyperlinkButtonBackgroundDisabled", true);
+					public static ThemeResourceKey<Brush> Disabled => new("HyperlinkButtonBackgroundDisabled");
 				}
 
 				public static class BorderBrush
 				{
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBorderBrush")]
-					public static ResourceValue<Brush> Default => new("HyperlinkButtonBorderBrush", true);
+					public static ThemeResourceKey<Brush> Default => new("HyperlinkButtonBorderBrush");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBorderBrushPointerOver")]
-					public static ResourceValue<Brush> PointerOver => new("HyperlinkButtonBorderBrushPointerOver", true);
+					public static ThemeResourceKey<Brush> PointerOver => new("HyperlinkButtonBorderBrushPointerOver");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBorderBrushPressed")]
-					public static ResourceValue<Brush> Pressed => new("HyperlinkButtonBorderBrushPressed", true);
+					public static ThemeResourceKey<Brush> Pressed => new("HyperlinkButtonBorderBrushPressed");
 
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBorderBrushDisabled")]
-					public static ResourceValue<Brush> Disabled => new("HyperlinkButtonBorderBrushDisabled", true);
+					public static ThemeResourceKey<Brush> Disabled => new("HyperlinkButtonBorderBrushDisabled");
 				}
 
 				public static class Typography
 				{
 					[ResourceKeyDefinition(typeof(FontFamily), "HyperlinkButtonFontFamily")]
-					public static ResourceValue<FontFamily> FontFamily => new("HyperlinkButtonFontFamily", true);
+					public static ThemeResourceKey<FontFamily> FontFamily => new("HyperlinkButtonFontFamily");
 
 					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonFontSize")]
-					public static ResourceValue<double> FontSize => new("HyperlinkButtonFontSize", true);
+					public static ThemeResourceKey<double> FontSize => new("HyperlinkButtonFontSize");
 				}
 
 				public static class Opacity
 				{
 					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacity")]
-					public static ResourceValue<double> Default => new("HyperlinkButtonBackgroundOpacity", true);
+					public static ThemeResourceKey<double> Default => new("HyperlinkButtonBackgroundOpacity");
 
 					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityPointerOver")]
-					public static ResourceValue<double> PointerOver => new("HyperlinkButtonBackgroundOpacityPointerOver", true);
+					public static ThemeResourceKey<double> PointerOver => new("HyperlinkButtonBackgroundOpacityPointerOver");
 
 					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityPressed")]
-					public static ResourceValue<double> Pressed => new("HyperlinkButtonBackgroundOpacityPressed", true);
+					public static ThemeResourceKey<double> Pressed => new("HyperlinkButtonBackgroundOpacityPressed");
 
 					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityDisabled")]
-					public static ResourceValue<double> Disabled => new("HyperlinkButtonBackgroundOpacityDisabled", true);
+					public static ThemeResourceKey<double> Disabled => new("HyperlinkButtonBackgroundOpacityDisabled");
 				}
 			}
 
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "HyperlinkButtonStyle", TargetType = typeof(HyperlinkButton))]
-				public static ResourceValue<Style> Default => new("HyperlinkButtonStyle");
+				public static StaticResourceKey<Style> Default => new("HyperlinkButtonStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "SecondaryHyperlinkButtonStyle", TargetType = typeof(HyperlinkButton))]
-				public static ResourceValue<Style> Secondary => new("SecondaryHyperlinkButtonStyle");
+				public static StaticResourceKey<Style> Secondary => new("SecondaryHyperlinkButtonStyle");
 			}
 		}
 	}
