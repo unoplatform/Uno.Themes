@@ -12,16 +12,7 @@ namespace Uno.Themes.Markup
 		{
 			public static class Resources
 			{
-				public static class FlyoutButton
-				{
-					public static class Background
-					{
-						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutButtonBackground")]
-						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutButtonBackground");
-					}
-				}
-
-				public static class FlyoutPresenter
+				public static class Flyout
 				{
 					public static class Background
 					{
@@ -47,12 +38,6 @@ namespace Uno.Themes.Markup
 						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterHighlightFill");
 					}
 
-					public static class ContainerCornerRadius
-					{
-						[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerFlyoutPresenterCornerRadius")]
-						public static ThemeResourceKey<CornerRadius> Default => new("DatePickerFlyoutPresenterCornerRadius");
-					}
-
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "DatePickerFlyoutPresenterFontFamily")]
@@ -61,6 +46,56 @@ namespace Uno.Themes.Markup
 						[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterFontSize")]
 						public static ThemeResourceKey<double> FontSize => new("DatePickerFlyoutPresenterFontSize");
 					}
+
+					public static class Button
+					{
+						public static class Background
+						{
+							[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutButtonBackground")]
+							public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutButtonBackground");
+						}
+
+						public static class Opacity
+						{
+							[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutButtonOpacityPressed")]
+							public static ThemeResourceKey<double> Pressed => new("DatePickerFlyoutButtonOpacityPressed");
+
+							[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutButtonOpacityDisabled")]
+							public static ThemeResourceKey<double> Disabled => new("DatePickerFlyoutButtonOpacityDisabled");
+						}
+
+						[ResourceKeyDefinition(typeof(Thickness), "DatePickerFlyoutButtonPadding")]
+						public static ThemeResourceKey<Thickness> Padding => new("DatePickerFlyoutButtonPadding");
+					}
+
+
+
+
+					[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerFlyoutPresenterCornerRadius")]
+					public static ThemeResourceKey<CornerRadius> CornerRadius => new("DatePickerFlyoutPresenterCornerRadius");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutBorderThickness")]
+					public static ThemeResourceKey<double> BorderThickness => new("DatePickerFlyoutBorderThickness");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutElevation")]
+					public static ThemeResourceKey<double> Elevation => new("DatePickerFlyoutElevation");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterWidth")]
+					public static ThemeResourceKey<double> Width => new("DatePickerFlyoutPresenterWidth");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterMinWidth")]
+					public static ThemeResourceKey<double> MinWidth => new("DatePickerFlyoutPresenterMinWidth");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterMaxHeight")]
+					public static ThemeResourceKey<double> MaxHeight => new("DatePickerFlyoutPresenterMaxHeight");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterAcceptDismissHostGridHeight")]
+					public static ThemeResourceKey<double> AcceptDismissHostGridHeight => new("DatePickerFlyoutPresenterAcceptDismissHostGridHeight");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterHighlightHeight")]
+					public static ThemeResourceKey<double> HighlightHeight => new("DatePickerFlyoutPresenterHighlightHeight");
+
+
 				}
 
 				public static class Button
@@ -110,16 +145,7 @@ namespace Uno.Themes.Markup
 						public static ThemeResourceKey<Brush> Disabled => new("DatePickerButtonBorderBrushDisabled");
 					}
 
-					public static class ContainerCornerRadius
-					{
-						[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerFlyoutPresenterCornerRadius")]
-						public static ThemeResourceKey<CornerRadius> Default => new("DatePickerFlyoutPresenterCornerRadius");
-					}
-				}
-
-				public static class ButtonDateText
-				{
-					public static class Foreground
+					public static class DateTextForeground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonDateTextForeground")]
 						public static ThemeResourceKey<Brush> Default => new("DatePickerButtonDateTextForeground");
@@ -133,16 +159,35 @@ namespace Uno.Themes.Markup
 						[ResourceKeyDefinition(typeof(Brush), "DatePickerButtonDateTextForegroundDisabled")]
 						public static ThemeResourceKey<Brush> Disabled => new("DatePickerButtonDateTextForegroundDisabled");
 					}
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerButtonBottomBorderHeight")]
+					public static ThemeResourceKey<double> BottomBorderHeight => new("DatePickerButtonBottomBorderHeight");
+
+					[ResourceKeyDefinition(typeof(double), "DatePickerButtonContentHeight")]
+					public static ThemeResourceKey<double> ContentHeight => new("DatePickerButtonContentHeight");
+
+					[ResourceKeyDefinition(typeof(Thickness), "DatePickerButtonHeaderMargin")]
+					public static ThemeResourceKey<Thickness> HeaderMargin => new("DatePickerButtonHeaderMargin");
+
+					[ResourceKeyDefinition(typeof(Thickness), "DatePickerButtonPlaceholderMargin")]
+					public static ThemeResourceKey<Thickness> PlaceholderMargin => new("DatePickerButtonPlaceholderMargin");
+
+					[ResourceKeyDefinition(typeof(Thickness), "DatePickerButtonContentMargin")]
+					public static ThemeResourceKey<Thickness> ContentMargin => new("DatePickerButtonContentMargin");
+
 				}
 
-				public static class PlaceholderText
+				public static class PlaceholderForeground
 				{
-					public static class Foreground
-					{
-						[ResourceKeyDefinition(typeof(Brush), "DatePickerPlaceholderTextForeground")]
-						public static ThemeResourceKey<Brush> Default => new("DatePickerPlaceholderTextForeground");
-					}
+					[ResourceKeyDefinition(typeof(Brush), "DatePickerPlaceholderTextForeground")]
+					public static ThemeResourceKey<Brush> Default => new("DatePickerPlaceholderTextForeground");
 				}
+
+				[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerCornerRadius")]
+				public static ThemeResourceKey<CornerRadius> CornerRadius => new("DatePickerCornerRadius");
+
+				[ResourceKeyDefinition(typeof(Thickness), "DatePickerHostPadding")]
+				public static ThemeResourceKey<Thickness> HostPadding => new("DatePickerHostPadding");
 			}
 
 			public static class Styles
