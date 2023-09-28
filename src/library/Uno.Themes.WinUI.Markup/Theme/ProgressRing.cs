@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -13,20 +14,20 @@ namespace Uno.Themes.Markup
 				public static class Foreground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "ProgressRingForeground")]
-					public static ResourceValue<Brush> Default => new("ProgressRingForeground", true);
+					public static ThemeResourceKey<Brush> Default => new("ProgressRingForeground");
 				}
 
 				public static class Background
 				{
 					[ResourceKeyDefinition(typeof(Brush), "ProgressRingBackground")]
-					public static ResourceValue<Brush> Default => new("ProgressRingBackground", true);
+					public static ThemeResourceKey<Brush> Default => new("ProgressRingBackground");
 				}
 			}
 
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "ProgressRingStyle", TargetType = typeof(ProgressRing))]
-				public static ResourceValue<Style> Default => new("ProgressRingStyle");
+				public static StaticResourceKey<Style> Default => new("ProgressRingStyle");
 			}
 		}
 	}
