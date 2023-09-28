@@ -4,6 +4,14 @@ using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
 {
+
+	public class testing
+	{
+		public testing()
+		{
+			ThemeResourceKey<Brush> key = Theme.Button.Resources.Icon.Foreground;
+		}
+	}
 	partial class Theme
 	{
 		public static class Brushes

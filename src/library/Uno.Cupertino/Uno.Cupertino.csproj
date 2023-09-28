@@ -86,14 +86,14 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="5.0.0-dev.1634" />
+				<PackageReference Include="Uno.UI" Version="5.0.0-dev.3265" />
 			</ItemGroup>
 			<ItemGroup Condition="$(_IsUWP)">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="!$(_IsUWP)">
-				<PackageReference Include="Uno.UI.Lottie" Version="5.0.0-dev.1634" />
+				<PackageReference Include="Uno.UI.Lottie" Version="5.0.0-dev.3265" />
 			</ItemGroup>
 
 			<ItemGroup Condition="$(_IsUWP)">
@@ -144,4 +144,7 @@
 
 	<Import Project="..\Uno.Material\xamlmerge.targets" />
 	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />
+	<ItemGroup>
+	  <PackageReference Update="Uno.XamlMerge.Task" Version="1.27.0-dev.44" />
+	</ItemGroup>
 </Project>

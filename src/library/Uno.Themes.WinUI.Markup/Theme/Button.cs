@@ -7,32 +7,26 @@ namespace Uno.Themes.Markup
 {
 	public static partial class Theme
 	{
+		public class BrushResource
+		{
+			private readonly string DefaultKey;
+			public BrushResource(string defaultKey)
+			{
+				DefaultKey = defaultKey;
+			}
+
+			public static implicit operator ThemeResourceKey<Brush>(BrushResource brushResource) => brushResource.Default;
+
+			public ThemeResourceKey<Brush> Default => new(DefaultKey);
+		}
+
 		public static class Button
 		{
 			public static class Resources
 			{
 				public static class Elevated
 				{
-					public static class Foreground
-					{
-						[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForeground")]
-						public static ThemeResourceKey<Brush> Default => new("ElevatedButtonForeground");
-
-						[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForegroundPointerOver")]
-						public static ThemeResourceKey<Brush> PointerOver => new("ElevatedButtonForegroundPointerOver");
-
-						[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForegroundPressed")]
-						public static ThemeResourceKey<Brush> Pressed => new("ElevatedButtonForegroundPressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForegroundFocused")]
-						public static ThemeResourceKey<Brush> Focused => new("ElevatedButtonForegroundFocused");
-
-						[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForegroundPointerFocused")]
-						public static ThemeResourceKey<Brush> PointerFocused => new("ElevatedButtonForegroundPointerFocused");
-
-						[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForegroundDisabled")]
-						public static ThemeResourceKey<Brush> Disabled => new("ElevatedButtonForegroundDisabled");
-					}
+					public static readonly BrushResource Foreground = new("ElevatedButtonForeground");
 
 					public static class IconForeground
 					{
@@ -448,14 +442,8 @@ namespace Uno.Themes.Markup
 
 				public static class Icon
 				{
-					public static class Foreground
-					{
-						[ResourceKeyDefinition(typeof(Brush), "IconButtonForeground")]
-						public static ThemeResourceKey<Brush> Default => new("IconButtonForeground");
-
-						[ResourceKeyDefinition(typeof(Brush), "IconButtonForegroundDisabled")]
-						public static ThemeResourceKey<Brush> Disabled => new("IconButtonForegroundDisabled");
-					}
+					[ResourceKeyDefinition(typeof(Brush), "IconButtonForeground")]
+					public static BrushResource Foreground => new("IconButtonForeground");
 
 					public static class EllipseFill
 					{

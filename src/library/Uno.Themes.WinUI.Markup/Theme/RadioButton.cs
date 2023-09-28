@@ -29,35 +29,27 @@ namespace Uno.Themes.Markup
 						public static ThemeResourceKey<Brush> Disabled => new("RadioButtonForegroundDisabled");
 					}
 
-					public static class Stroke
+					public class Stroke
 					{
+						public static implicit operator ThemeResourceKey<Brush>(Stroke @class) => @class.Default;
+
+						public Stroke()
+						{
+							Theme.RadioButton.Resources.Default.Stroke
+						}
+
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStroke")]
-						public static ThemeResourceKey<Brush> Default => new("RadioButtonOuterEllipseStroke");
+						public ThemeResourceKey<Brush> Default => new("RadioButtonOuterEllipseStroke");
 
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStrokePointerOver")]
-						public static ThemeResourceKey<Brush> PointerOver => new("RadioButtonOuterEllipseStrokePointerOver");
+						public ThemeResourceKey<Brush> PointerOver => new("RadioButtonOuterEllipseStrokePointerOver")
 
-						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStrokePressed")]
-						public static ThemeResourceKey<Brush> Pressed => new("RadioButtonOuterEllipseStrokePressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseStrokeDisabled")]
-						public static ThemeResourceKey<Brush> Disabled => new("RadioButtonOuterEllipseStrokeDisabled");
-
-						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStroke")]
-						public static ThemeResourceKey<Brush> Checked => new("RadioButtonOuterEllipseCheckedStroke");
-
-						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStrokePointerOver")]
-						public static ThemeResourceKey<Brush> CheckedPointerOver => new("RadioButtonOuterEllipseCheckedStrokePointerOver");
-
-						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStrokePressed")]
-						public static ThemeResourceKey<Brush> CheckedPressed => new("RadioButtonOuterEllipseCheckedStrokePressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseCheckedStrokeDisabled")]
-						public static ThemeResourceKey<Brush> CheckedDisabled => new("RadioButtonOuterEllipseCheckedStrokeDisabled");
+						// etc.
 					}
 
 					public static class Fill
 					{
+
 						[ResourceKeyDefinition(typeof(Brush), "RadioButtonOuterEllipseFill")]
 						public static ThemeResourceKey<Brush> Default => new("RadioButtonOuterEllipseFill");
 

@@ -97,14 +97,14 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="5.0.0-dev.1634" />
+				<PackageReference Include="Uno.UI" Version="5.0.0-dev.3265" />
 			</ItemGroup>
 			<ItemGroup Condition="$(_IsUWP)">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="!$(_IsUWP)">
-				<PackageReference Include="Uno.UI.Lottie" Version="5.0.0-dev.1634" />
+				<PackageReference Include="Uno.UI.Lottie" Version="5.0.0-dev.3265" />
 			</ItemGroup>
 
 
@@ -139,6 +139,8 @@
 
 	<ItemGroup>
 		<None Remove="Styles\Application\Common\Fonts.xaml" />
+		<None Remove="Styles\Application\v2\ColorPaletteOverride.xaml" />
+		<None Remove="Styles\Application\v2\ColorPaletteOverride2.xaml" />
 		<None Remove="Styles\Controls\v1\_Resources.xaml" />
 		<None Remove="Styles\Controls\v2\_Resources.xaml" />
 	</ItemGroup>
@@ -180,6 +182,8 @@
 
 		<XamlMergeInput Remove="Styles\Application\v1\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v1\MaterialColors.xaml" />
+		<XamlMergeInput Remove="Styles\Application\v2\ColorPaletteOverride.xaml" />
+		<XamlMergeInput Remove="Styles\Application\v2\ColorPaletteOverride2.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v2\SharedColors.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v2\SharedColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
@@ -189,9 +193,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Application\v2\ColorPaletteOverride.xaml" />
+	  <UpToDateCheckInput Remove="Styles\Application\v2\ColorPaletteOverride2.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
-		<PackageReference Include="Uno.Fonts.Roboto" Version="2.2.2" />
+		<PackageReference Include="Uno.Fonts.Roboto" Version="2.3.0" />
 	</ItemGroup>
 
 	<Import Project="xamlmerge.targets" />
