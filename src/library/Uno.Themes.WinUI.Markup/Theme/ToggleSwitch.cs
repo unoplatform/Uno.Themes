@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -16,190 +17,214 @@ namespace Uno.Themes.Markup
 					public static class Fill
 					{
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOuterBorderFill")]
-						public static ResourceValue<Brush> Default => new("ToggleSwitchOuterBorderFill", true);
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchOuterBorderFill");
+					}
 
+					public static class OffFill
+					{
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOffOuterBorderFill")]
-						public static ResourceValue<Brush> Off => new("ToggleSwitchOffOuterBorderFill", true);
-
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchOffOuterBorderFill");
 					}
 
 					public static class Stroke
 					{
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOuterBorderStroke")]
-						public static ResourceValue<Brush> Default => new("ToggleSwitchOuterBorderStroke", true);
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchOuterBorderStroke");
+					}
 
+					public static class OffStroke
+					{
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOffOuterBorderStroke")]
-						public static ResourceValue<Brush> Off => new("ToggleSwitchOffOuterBorderStroke", true);
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchOffOuterBorderStroke");
 					}
 				}
 
 				public static class Knob
 				{
-					public static class Fill
+					public static class OnFill
 					{
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFill")]
-						public static ResourceValue<Brush> Off => new("ToggleSwitchKnobOffFill", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillPointerOver")]
-						public static ResourceValue<Brush> OffPointerOver => new("ToggleSwitchKnobOffFillPointerOver", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillFocused")]
-						public static ResourceValue<Brush> OffFocused => new("ToggleSwitchKnobOffFillFocused", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillPressed")]
-						public static ResourceValue<Brush> OffPressed => new("ToggleSwitchKnobOffFillPressed", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillDisabled")]
-						public static ResourceValue<Brush> OffDisabled => new("ToggleSwitchKnobOffFillDisabled", true);
-
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnFill")]
-						public static ResourceValue<Brush> On => new("ToggleSwitchKnobOnFill", true);
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchKnobOnFill");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnFillPointerOver")]
-						public static ResourceValue<Brush> OnPointerOver => new("ToggleSwitchKnobOnFillPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("ToggleSwitchKnobOnFillPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnFillFocused")]
-						public static ResourceValue<Brush> OnFocused => new("ToggleSwitchKnobOnFillFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("ToggleSwitchKnobOnFillFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnFillPressed")]
-						public static ResourceValue<Brush> OnPressed => new("ToggleSwitchKnobOnFillPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("ToggleSwitchKnobOnFillPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnFillDisabled")]
-						public static ResourceValue<Brush> OnDisabled => new("ToggleSwitchKnobOnFillDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("ToggleSwitchKnobOnFillDisabled");
+					}
+
+					public static class OffFill
+					{
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFill")]
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchKnobOffFill");
+
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillPointerOver")]
+						public static ThemeResourceKey<Brush> PointerOver => new("ToggleSwitchKnobOffFillPointerOver");
+
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillFocused")]
+						public static ThemeResourceKey<Brush> Focused => new("ToggleSwitchKnobOffFillFocused");
+
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillPressed")]
+						public static ThemeResourceKey<Brush> Pressed => new("ToggleSwitchKnobOffFillPressed");
+
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffFillDisabled")]
+						public static ThemeResourceKey<Brush> Disabled => new("ToggleSwitchKnobOffFillDisabled");
 					}
 
 					public static class Shadow
 					{
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFill")]
-						public static ResourceValue<Brush> On => new("ToggleSwitchKnobOnShadowFill", true);
+						public static class OnFill
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFill")]
+							public static ThemeResourceKey<Brush> Default => new("ToggleSwitchKnobOnShadowFill");
 
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFillPointerOver")]
-						public static ResourceValue<Brush> OnPointerOver => new("ToggleSwitchKnobOnShadowFillPointerOver", true);
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFillPointerOver")]
+							public static ThemeResourceKey<Brush> PointerOver => new("ToggleSwitchKnobOnShadowFillPointerOver");
 
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFillFocused")]
-						public static ResourceValue<Brush> OnFocused => new("ToggleSwitchKnobOnShadowFillFocused", true);
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFillFocused")]
+							public static ThemeResourceKey<Brush> Focused => new("ToggleSwitchKnobOnShadowFillFocused");
 
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFillPressed")]
-						public static ResourceValue<Brush> OnPressed => new("ToggleSwitchKnobOnShadowFillPressed", true);
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOnShadowFillPressed")]
+							public static ThemeResourceKey<Brush> Pressed => new("ToggleSwitchKnobOnShadowFillPressed");
+						}
 
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFill")]
-						public static ResourceValue<Brush> Off => new("ToggleSwitchKnobOffShadowFill", true);
+						public static class OffFill
+						{
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFill")]
+							public static ThemeResourceKey<Brush> Default => new("ToggleSwitchKnobOffShadowFill");
 
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFillPointerOver")]
-						public static ResourceValue<Brush> OffPointerOver => new("ToggleSwitchKnobOffShadowFillPointerOver", true);
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFillPointerOver")]
+							public static ThemeResourceKey<Brush> PointerOver => new("ToggleSwitchKnobOffShadowFillPointerOver");
 
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFillFocused")]
-						public static ResourceValue<Brush> OffFocused => new("ToggleSwitchKnobOffShadowFillFocused", true);
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFillFocused")]
+							public static ThemeResourceKey<Brush> Focused => new("ToggleSwitchKnobOffShadowFillFocused");
 
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFillPressed")]
-						public static ResourceValue<Brush> OffPressed => new("ToggleSwitchKnobOffShadowFillPressed", true);
+							[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobOffShadowFillPressed")]
+							public static ThemeResourceKey<Brush> Pressed => new("ToggleSwitchKnobOffShadowFillPressed");
+						}
+						
 
 						[ResourceKeyDefinition(typeof(double), "SwitchKnobShadowSize")]
-						public static ResourceValue<double> Size => new("SwitchKnobShadowSize", true);
+						public static ThemeResourceKey<double> Size => new("SwitchKnobShadowSize");
 
 						[ResourceKeyDefinition(typeof(Thickness), "SwitchKnobOnShadowMargin")]
-						public static ResourceValue<Thickness> OnMargin => new("SwitchKnobOnShadowMargin", true);
+						public static ThemeResourceKey<Thickness> OnMargin => new("SwitchKnobOnShadowMargin");
 
 						[ResourceKeyDefinition(typeof(Thickness), "SwitchKnobOffShadowMargin")]
-						public static ResourceValue<Thickness> OffMargin => new("SwitchKnobOffShadowMargin", true);
+						public static ThemeResourceKey<Thickness> OffMargin => new("SwitchKnobOffShadowMargin");
 
 						[ResourceKeyDefinition(typeof(double), "SwitchKnobIncludingOffShadowWidth")]
-						public static ResourceValue<double> IncludingOffShadowWidth => new("SwitchKnobIncludingOffShadowWidth", true);
+						public static ThemeResourceKey<double> IncludingOffShadowWidth => new("SwitchKnobIncludingOffShadowWidth");
 					}
+
 
 					public static class BoundsFill
 					{
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOnSwitchKnobBoundsFill")]
-						public static ResourceValue<Brush> OnSwitch => new("ToggleSwitchOnSwitchKnobBoundsFill", true);
-
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobBoundsFill")]
-						public static ResourceValue<Brush> Default => new("ToggleSwitchKnobBoundsFill", true);
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchKnobBoundsFill");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobBoundsFillPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("ToggleSwitchKnobBoundsFillPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("ToggleSwitchKnobBoundsFillPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobBoundsFillFocused")]
-						public static ResourceValue<Brush> Focused => new("ToggleSwitchKnobBoundsFillFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("ToggleSwitchKnobBoundsFillFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobBoundsFillPressed")]
-						public static ResourceValue<Brush> Pressed => new("ToggleSwitchKnobBoundsFillPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("ToggleSwitchKnobBoundsFillPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchKnobBoundsFillDisabled")]
-						public static ResourceValue<Brush> Disabled => new("ToggleSwitchKnobBoundsFillDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("ToggleSwitchKnobBoundsFillDisabled");
+					}
+
+					public static class OnBoundsFill
+					{
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOnSwitchKnobBoundsFill")]
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchOnSwitchKnobBoundsFill");
 					}
 			
 					[ResourceKeyDefinition(typeof(Thickness), "SwitchKnobStrokeThickness")]
-					public static ResourceValue<Thickness> StrokeThickness => new("SwitchKnobStrokeThickness", true);
+					public static ThemeResourceKey<Thickness> StrokeThickness => new("SwitchKnobStrokeThickness");
 
 					[ResourceKeyDefinition(typeof(double), "SwitchKnobWidth")]
-					public static ResourceValue<double> Width => new("SwitchKnobWidth", true);
+					public static ThemeResourceKey<double> Width => new("SwitchKnobWidth");
 					
 					[ResourceKeyDefinition(typeof(double), "KnobIconSize")]
-					public static ResourceValue<double> IconSize => new("KnobIconSize", true);
+					public static ThemeResourceKey<double> IconSize => new("KnobIconSize");
 
 					[ResourceKeyDefinition(typeof(Thickness), "KnobIconPadding")]
-					public static ResourceValue<Thickness> IconPadding => new("KnobIconPadding", true);
+					public static ThemeResourceKey<Thickness> IconPadding => new("KnobIconPadding");
 
 					[ResourceKeyDefinition(typeof(Thickness), "KnobOnMargin")]
-					public static ResourceValue<Thickness> OnMargin => new("KnobOnMargin", true);
+					public static ThemeResourceKey<Thickness> OnMargin => new("KnobOnMargin");
 
 					[ResourceKeyDefinition(typeof(double), "SwitchKnobHeight")]
-					public static ResourceValue<double> Height => new("SwitchKnobHeight", true);
+					public static ThemeResourceKey<double> Height => new("SwitchKnobHeight");
 
 					[ResourceKeyDefinition(typeof(double), "SwitchKnobRadius")]
-					public static ResourceValue<double> Radius => new("SwitchKnobRadius", true);
+					public static ThemeResourceKey<double> Radius => new("SwitchKnobRadius");
 
 					[ResourceKeyDefinition(typeof(Thickness), "SwitchKnobOnMargin")]
-					public static ResourceValue<Thickness> SwitchOnMargin => new("SwitchKnobOnMargin", true);
+					public static ThemeResourceKey<Thickness> SwitchOnMargin => new("SwitchKnobOnMargin");
 
 					[ResourceKeyDefinition(typeof(Thickness), "SwitchKnobOffMargin")]
-					public static ResourceValue<Thickness> SwitchOffMargin => new("SwitchKnobOffMargin", true);
+					public static ThemeResourceKey<Thickness> SwitchOffMargin => new("SwitchKnobOffMargin");
 				}
 
 				public static class IconPresenter
 				{
-					public static class Foreground
+					public static class OnForeground
 					{
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOffIconPresenterForeground")]
-						public static ResourceValue<Brush> Off => new("ToggleSwitchOffIconPresenterForeground", true);
-
-						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOffIconPresenterForegroundDisabled")]
-						public static ResourceValue<Brush> OffDisabled => new("ToggleSwitchOffIconPresenterForegroundDisabled", true);
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOnIconPresenterForeground")]
-						public static ResourceValue<Brush> On => new("ToggleSwitchOnIconPresenterForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchOnIconPresenterForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOnIconPresenterForegroundDisabled")]
-						public static ResourceValue<Brush> OnDisabled => new("ToggleSwitchOnIconPresenterForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("ToggleSwitchOnIconPresenterForegroundDisabled");
+					}
+
+					public static class OffForeground
+					{
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOffIconPresenterForeground")]
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchOffIconPresenterForeground");
+
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchOffIconPresenterForegroundDisabled")]
+						public static ThemeResourceKey<Brush> Disabled => new("ToggleSwitchOffIconPresenterForegroundDisabled");
 					}
 				}
 
 				public static class Thumb
 				{
-					public static class Size
+					
+					[ResourceKeyDefinition(typeof(double), "SmallThumbSize")]
+					public static ThemeResourceKey<double> SmallSize => new("SmallThumbSize");
+
+					[ResourceKeyDefinition(typeof(double), "MediumThumbSize")]
+					public static ThemeResourceKey<double> MediumSize => new("MediumThumbSize");
+
+					[ResourceKeyDefinition(typeof(double), "LargeThumbSize")]
+					public static ThemeResourceKey<double> LargeSize => new("LargeThumbSize");
+
+					public static class Fill
 					{
-						[ResourceKeyDefinition(typeof(double), "SmallThumbSize")]
-						public static ResourceValue<double> Small => new("SmallThumbSize", true);
-
-						[ResourceKeyDefinition(typeof(double), "MediumThumbSize")]
-						public static ResourceValue<double> Medium => new("MediumThumbSize", true);
-
-						[ResourceKeyDefinition(typeof(double), "LargeThumbSize")]
-						public static ResourceValue<double> Large => new("LargeThumbSize", true);
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchThumb")]
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchThumb");
 					}
 
-					[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchThumb")]
-					public static ResourceValue<Brush> Default => new("ToggleSwitchThumb", true);
-
 					[ResourceKeyDefinition(typeof(int), "LargeThumbCornerRadius")]
-					public static ResourceValue<int> LargeCornerRadius => new("LargeThumbCornerRadius", true);
+					public static ThemeResourceKey<int> LargeCornerRadius => new("LargeThumbCornerRadius");
 				}
 			}
 
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "ToggleSwitchStyle", TargetType = typeof(ToggleSwitch))]
-				public static ResourceValue<Style> Default => new("ToggleSwitchStyle");
+				public static StaticResourceKey<Style> Default => new("ToggleSwitchStyle");
 			}
 		}
 	}
