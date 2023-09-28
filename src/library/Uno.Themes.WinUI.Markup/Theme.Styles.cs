@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
@@ -18,15 +18,6 @@ namespace Uno.Themes.Markup
 			{
 				[ResourceKeyDefinition(typeof(Style), "CalendarViewStyle", TargetType = typeof(CalendarView))]
 				public static StaticResourceKey<Style> Default => new("CalendarViewStyle");
-			}
-
-			public static class CheckBox
-			{
-				[ResourceKeyDefinition(typeof(Style), "CheckBoxStyle", TargetType = typeof(CheckBox))]
-				public static StaticResourceKey<Style> Default => new("CheckBoxStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SecondaryCheckBoxStyle", TargetType = typeof(CheckBox))]
-				public static StaticResourceKey<Style> Secondary => new("SecondaryCheckBoxStyle");
 			}
 
 			public static class AppBarButton
