@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -15,31 +16,31 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabForeground")]
-						public static ResourceValue<Brush> Default => new("FabForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabForegroundDisabled");
 					}
 
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabBackground")]
-						public static ResourceValue<Brush> Default => new("FabBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabBackgroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabBackgroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabBackgroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabBackgroundDisabled");
 					}
 
 					public static class StateOverlay
@@ -47,19 +48,19 @@ namespace Uno.Themes.Markup
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "FabStateOverlayBackground")]
-							public static ResourceValue<Brush> Default => new("FabStateOverlayBackground", true);
+							public static ThemeResourceKey<Brush> Default => new("FabStateOverlayBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabStateOverlayBackgroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("FabStateOverlayBackgroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("FabStateOverlayBackgroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabStateOverlayBackgroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("FabStateOverlayBackgroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("FabStateOverlayBackgroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabStateOverlayBackgroundFocused")]
-							public static ResourceValue<Brush> Focused => new("FabStateOverlayBackgroundFocused", true);
+							public static ThemeResourceKey<Brush> Focused => new("FabStateOverlayBackgroundFocused");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabStateOverlayBackgroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("FabStateOverlayBackgroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("FabStateOverlayBackgroundDisabled");
 						}
 					}
 				}
@@ -69,31 +70,31 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceForeground")]
-						public static ResourceValue<Brush> Default => new("FabSurfaceForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabSurfaceForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabSurfaceForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabSurfaceForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabSurfaceForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabSurfaceForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabSurfaceForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabSurfaceForegroundDisabled");
 					}
 
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceBackground")]
-						public static ResourceValue<Brush> Default => new("FabSurfaceBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabSurfaceBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceBackgroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabSurfaceBackgroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabSurfaceBackgroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabSurfaceBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabSurfaceBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabSurfaceBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabSurfaceBackgroundDisabled");
 					}
 				}
 
@@ -102,19 +103,19 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceStateOverlayBackground")]
-						public static ResourceValue<Brush> Default => new("FabSurfaceStateOverlayBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabSurfaceStateOverlayBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceStateOverlayBackgroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabSurfaceStateOverlayBackgroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabSurfaceStateOverlayBackgroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceStateOverlayBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabSurfaceStateOverlayBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabSurfaceStateOverlayBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceStateOverlayBackgroundFocused")]
-						public static ResourceValue<Brush> Focused => new("FabSurfaceStateOverlayBackgroundFocused", true);
+						public static ThemeResourceKey<Brush> Focused => new("FabSurfaceStateOverlayBackgroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSurfaceStateOverlayBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabSurfaceStateOverlayBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabSurfaceStateOverlayBackgroundDisabled");
 					}
 				}
 
@@ -123,31 +124,31 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryForeground")]
-						public static ResourceValue<Brush> Default => new("FabSecondaryForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabSecondaryForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabSecondaryForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabSecondaryForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabSecondaryForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabSecondaryForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabSecondaryForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabSecondaryForegroundDisabled");
 					}
 
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryBackground")]
-						public static ResourceValue<Brush> Default => new("FabSecondaryBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabSecondaryBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryBackgroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabSecondaryBackgroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabSecondaryBackgroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabSecondaryBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabSecondaryBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabSecondaryBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabSecondaryBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabSecondaryBackgroundDisabled");
 					}
 
 					public static class StateOverlay
@@ -155,19 +156,19 @@ namespace Uno.Themes.Markup
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "FabSecondaryStateOverlayBackground")]
-							public static ResourceValue<Brush> Default => new("FabSecondaryStateOverlayBackground", true);
+							public static ThemeResourceKey<Brush> Default => new("FabSecondaryStateOverlayBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabSecondaryStateOverlayBackgroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("FabSecondaryStateOverlayBackgroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("FabSecondaryStateOverlayBackgroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabSecondaryStateOverlayBackgroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("FabSecondaryStateOverlayBackgroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("FabSecondaryStateOverlayBackgroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabSecondaryStateOverlayBackgroundFocused")]
-							public static ResourceValue<Brush> Focused => new("FabSecondaryStateOverlayBackgroundFocused", true);
+							public static ThemeResourceKey<Brush> Focused => new("FabSecondaryStateOverlayBackgroundFocused");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabSecondaryStateOverlayBackgroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("FabSecondaryStateOverlayBackgroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("FabSecondaryStateOverlayBackgroundDisabled");
 						}
 					}
 				}
@@ -177,31 +178,31 @@ namespace Uno.Themes.Markup
 					public static class Foreground
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryForeground")]
-						public static ResourceValue<Brush> Default => new("FabTertiaryForeground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabTertiaryForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryForegroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabTertiaryForegroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabTertiaryForegroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryForegroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabTertiaryForegroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabTertiaryForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryForegroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabTertiaryForegroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabTertiaryForegroundDisabled");
 					}
 
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryBackground")]
-						public static ResourceValue<Brush> Default => new("FabTertiaryBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("FabTertiaryBackground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryBackgroundPressed")]
-						public static ResourceValue<Brush> Pressed => new("FabTertiaryBackgroundPressed", true);
+						public static ThemeResourceKey<Brush> Pressed => new("FabTertiaryBackgroundPressed");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryBackgroundPointerOver")]
-						public static ResourceValue<Brush> PointerOver => new("FabTertiaryBackgroundPointerOver", true);
+						public static ThemeResourceKey<Brush> PointerOver => new("FabTertiaryBackgroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FabTertiaryBackgroundDisabled")]
-						public static ResourceValue<Brush> Disabled => new("FabTertiaryBackgroundDisabled", true);
+						public static ThemeResourceKey<Brush> Disabled => new("FabTertiaryBackgroundDisabled");
 					}
 
 					public static class StateOverlay
@@ -209,19 +210,19 @@ namespace Uno.Themes.Markup
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "FabTertiaryStateOverlayBackground")]
-							public static ResourceValue<Brush> Default => new("FabTertiaryStateOverlayBackground", true);
+							public static ThemeResourceKey<Brush> Default => new("FabTertiaryStateOverlayBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabTertiaryStateOverlayBackgroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("FabTertiaryStateOverlayBackgroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("FabTertiaryStateOverlayBackgroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabTertiaryStateOverlayBackgroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("FabTertiaryStateOverlayBackgroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("FabTertiaryStateOverlayBackgroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabTertiaryStateOverlayBackgroundFocused")]
-							public static ResourceValue<Brush> Focused => new("FabTertiaryStateOverlayBackgroundFocused", true);
+							public static ThemeResourceKey<Brush> Focused => new("FabTertiaryStateOverlayBackgroundFocused");
 
 							[ResourceKeyDefinition(typeof(Brush), "FabTertiaryStateOverlayBackgroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("FabTertiaryStateOverlayBackgroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("FabTertiaryStateOverlayBackgroundDisabled");
 						}
 					}
 				}
@@ -230,40 +231,40 @@ namespace Uno.Themes.Markup
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "MaterialFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Default => new("MaterialFabStyle");
+				public static StaticResourceKey<Style> Default => new("MaterialFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialSurfaceFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Surface => new("MaterialSurfaceFabStyle");
+				public static StaticResourceKey<Style> Surface => new("MaterialSurfaceFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialSecondaryFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Secondary => new("MaterialSecondaryFabStyle");
+				public static StaticResourceKey<Style> Secondary => new("MaterialSecondaryFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialTertiaryFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Tertiary => new("MaterialTertiaryFabStyle");
+				public static StaticResourceKey<Style> Tertiary => new("MaterialTertiaryFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialSmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Small => new("MaterialSmallFabStyle");
+				public static StaticResourceKey<Style> Small => new("MaterialSmallFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialSurfaceSmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SurfaceSmall => new("MaterialSurfaceSmallFabStyle");
+				public static StaticResourceKey<Style> SurfaceSmall => new("MaterialSurfaceSmallFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialSecondarySmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SecondarySmall => new("MaterialSecondarySmallFabStyle");
+				public static StaticResourceKey<Style> SecondarySmall => new("MaterialSecondarySmallFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialTertiarySmallFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> TertiarySmall => new("MaterialTertiarySmallFabStyle");
+				public static StaticResourceKey<Style> TertiarySmall => new("MaterialTertiarySmallFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialLargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> Large => new("MaterialLargeFabStyle");
+				public static StaticResourceKey<Style> Large => new("MaterialLargeFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialSurfaceLargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SurfaceLarge => new("MaterialSurfaceLargeFabStyle");
+				public static StaticResourceKey<Style> SurfaceLarge => new("MaterialSurfaceLargeFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialSecondaryLargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> SecondaryLarge => new("MaterialSecondaryLargeFabStyle");
+				public static StaticResourceKey<Style> SecondaryLarge => new("MaterialSecondaryLargeFabStyle");
 
 				[ResourceKeyDefinition(typeof(Style), "MaterialTertiaryLargeFabStyle", TargetType = typeof(Button))]
-				public static ResourceValue<Style> TertiaryLarge => new("MaterialTertiaryLargeFabStyle");
+				public static StaticResourceKey<Style> TertiaryLarge => new("MaterialTertiaryLargeFabStyle");
 			}
 		}
 	}
