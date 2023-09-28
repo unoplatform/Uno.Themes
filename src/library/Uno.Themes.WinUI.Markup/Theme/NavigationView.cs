@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
 namespace Uno.Themes.Markup
@@ -17,38 +18,38 @@ namespace Uno.Themes.Markup
 						public static class Length
 						{
 							[ResourceKeyDefinition(typeof(double), "SplitViewOpenPaneThemeLength")]
-							public static ResourceValue<double> Open => new("SplitViewOpenPaneThemeLength", true);
+							public static ThemeResourceKey<double> Open => new("SplitViewOpenPaneThemeLength");
 
 							[ResourceKeyDefinition(typeof(double), "SplitViewCompactPaneThemeLength")]
-							public static ResourceValue<double> Compact => new("SplitViewCompactPaneThemeLength", true);
+							public static ThemeResourceKey<double> Compact => new("SplitViewCompactPaneThemeLength");
 						}
 
 						public static class AnimationDuration
 						{
 							[ResourceKeyDefinition(typeof(string), "SplitViewPaneAnimationOpenDuration")]
-							public static ResourceValue<string> Open => new("SplitViewPaneAnimationOpenDuration", true);
+							public static ThemeResourceKey<string> Open => new("SplitViewPaneAnimationOpenDuration");
 
 							[ResourceKeyDefinition(typeof(string), "SplitViewPaneAnimationOpenPreDuration")]
-							public static ResourceValue<string> OpenPre => new("SplitViewPaneAnimationOpenPreDuration", true);
+							public static ThemeResourceKey<string> OpenPre => new("SplitViewPaneAnimationOpenPreDuration");
 
 							[ResourceKeyDefinition(typeof(string), "SplitViewPaneAnimationCloseDuration")]
-							public static ResourceValue<string> Close => new("SplitViewPaneAnimationCloseDuration", true);
+							public static ThemeResourceKey<string> Close => new("SplitViewPaneAnimationCloseDuration");
 						}
 
 						public static class CornerRadiuses
 						{
 							[ResourceKeyDefinition(typeof(CornerRadius), "SplitViewPaneRootCornerRadius")]
-							public static ResourceValue<CornerRadius> Root => new("SplitViewPaneRootCornerRadius", true);
+							public static ThemeResourceKey<CornerRadius> Root => new("SplitViewPaneRootCornerRadius");
 						}
 					}
 
 					public static class BorderThickness
 					{
 						[ResourceKeyDefinition(typeof(Thickness), "SplitViewLeftBorderThemeThickness")]
-						public static ResourceValue<Thickness> Left => new("SplitViewLeftBorderThemeThickness", true);
+						public static ThemeResourceKey<Thickness> Left => new("SplitViewLeftBorderThemeThickness");
 
 						[ResourceKeyDefinition(typeof(Thickness), "SplitViewRightBorderThemeThickness")]
-						public static ResourceValue<Thickness> Right => new("SplitViewRightBorderThemeThickness", true);
+						public static ThemeResourceKey<Thickness> Right => new("SplitViewRightBorderThemeThickness");
 					}
 
 					public static class Overlay
@@ -56,7 +57,7 @@ namespace Uno.Themes.Markup
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewSplitViewLightDismissOverlayBackground")]
-							public static ResourceValue<Brush> LightDismiss => new("NavigationViewSplitViewLightDismissOverlayBackground", true);
+							public static ThemeResourceKey<Brush> LightDismiss => new("NavigationViewSplitViewLightDismissOverlayBackground");
 						}
 					}
 				}
@@ -72,7 +73,7 @@ namespace Uno.Themes.Markup
 					public static class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "NavigationViewBackground")]
-						public static ResourceValue<Brush> Default => new("NavigationViewBackground", true);
+						public static ThemeResourceKey<Brush> Default => new("NavigationViewBackground");
 					}
 
 					public static class Pane
@@ -80,19 +81,19 @@ namespace Uno.Themes.Markup
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewDefaultPaneBackground")]
-							public static ResourceValue<Brush> Default => new("NavigationViewDefaultPaneBackground", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewDefaultPaneBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewPaneBackground")]
-							public static ResourceValue<Brush> Normal => new("NavigationViewPaneBackground", true);
+							public static ThemeResourceKey<Brush> Normal => new("NavigationViewPaneBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewTopPaneBackground")]
-							public static ResourceValue<Brush> Top => new("NavigationViewTopPaneBackground", true);
+							public static ThemeResourceKey<Brush> Top => new("NavigationViewTopPaneBackground");
 						}
 
 						public static class BorderBrush
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewDefaultPaneBorderBrush")]
-							public static ResourceValue<Brush> Default => new("NavigationViewDefaultPaneBorderBrush", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewDefaultPaneBorderBrush");
 						}
 					}
 
@@ -101,37 +102,37 @@ namespace Uno.Themes.Markup
 						public static class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonForeground")]
-							public static ResourceValue<Brush> Default => new("NavigationViewButtonForeground", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewButtonForeground");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonForegroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("NavigationViewButtonForegroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("NavigationViewButtonForegroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonForegroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("NavigationViewButtonForegroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("NavigationViewButtonForegroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonForegroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("NavigationViewButtonForegroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("NavigationViewButtonForegroundDisabled");
 						}
 
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonBackground")]
-							public static ResourceValue<Brush> Default => new("NavigationViewButtonBackground", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewButtonBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonBackgroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("NavigationViewButtonBackgroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("NavigationViewButtonBackgroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonBackgroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("NavigationViewButtonBackgroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("NavigationViewButtonBackgroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonBackgroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("NavigationViewButtonBackgroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("NavigationViewButtonBackgroundDisabled");
 						}
 
 						public static class RippleFeedback
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonRippleFeedback")]
-							public static ResourceValue<Brush> Default => new("NavigationViewButtonRippleFeedback", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewButtonRippleFeedback");
 						}
 					}
 
@@ -140,82 +141,82 @@ namespace Uno.Themes.Markup
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackground")]
-							public static ResourceValue<Brush> Default => new("NavigationViewItemBackground", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewItemBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackgroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("NavigationViewItemBackgroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("NavigationViewItemBackgroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackgroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("NavigationViewItemBackgroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("NavigationViewItemBackgroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackgroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("NavigationViewItemBackgroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("NavigationViewItemBackgroundDisabled");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackgroundSelected")]
-							public static ResourceValue<Brush> Selected => new("NavigationViewItemBackgroundSelected", true);
+							public static ThemeResourceKey<Brush> Selected => new("NavigationViewItemBackgroundSelected");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackgroundSelectedPointerOver")]
-							public static ResourceValue<Brush> SelectedPointerOver => new("NavigationViewItemBackgroundSelectedPointerOver", true);
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("NavigationViewItemBackgroundSelectedPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackgroundSelectedPressed")]
-							public static ResourceValue<Brush> SelectedPressed => new("NavigationViewItemBackgroundSelectedPressed", true);
+							public static ThemeResourceKey<Brush> SelectedPressed => new("NavigationViewItemBackgroundSelectedPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackgroundSelectedDisabled")]
-							public static ResourceValue<Brush> SelectedDisabled => new("NavigationViewItemBackgroundSelectedDisabled", true);
+							public static ThemeResourceKey<Brush> SelectedDisabled => new("NavigationViewItemBackgroundSelectedDisabled");
 						}
 
 						public static class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForeground")]
-							public static ResourceValue<Brush> Default => new("NavigationViewItemForeground", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewItemForeground");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForegroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("NavigationViewItemForegroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("NavigationViewItemForegroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForegroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("NavigationViewItemForegroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("NavigationViewItemForegroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForegroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("NavigationViewItemForegroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("NavigationViewItemForegroundDisabled");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForegroundSelected")]
-							public static ResourceValue<Brush> Selected => new("NavigationViewItemForegroundSelected", true);
+							public static ThemeResourceKey<Brush> Selected => new("NavigationViewItemForegroundSelected");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForegroundSelectedPointerOver")]
-							public static ResourceValue<Brush> SelectedPointerOver => new("NavigationViewItemForegroundSelectedPointerOver", true);
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("NavigationViewItemForegroundSelectedPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForegroundSelectedPressed")]
-							public static ResourceValue<Brush> SelectedPressed => new("NavigationViewItemForegroundSelectedPressed", true);
+							public static ThemeResourceKey<Brush> SelectedPressed => new("NavigationViewItemForegroundSelectedPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForegroundSelectedDisabled")]
-							public static ResourceValue<Brush> SelectedDisabled => new("NavigationViewItemForegroundSelectedDisabled", true);
+							public static ThemeResourceKey<Brush> SelectedDisabled => new("NavigationViewItemForegroundSelectedDisabled");
 						}
 
 						public static class BorderBrush
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrush")]
-							public static ResourceValue<Brush> Default => new("NavigationViewItemBorderBrush", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewItemBorderBrush");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrushPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("NavigationViewItemBorderBrushPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("NavigationViewItemBorderBrushPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrushPressed")]
-							public static ResourceValue<Brush> Pressed => new("NavigationViewItemBorderBrushPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("NavigationViewItemBorderBrushPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrushDisabled")]
-							public static ResourceValue<Brush> Disabled => new("NavigationViewItemBorderBrushDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("NavigationViewItemBorderBrushDisabled");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrushSelected")]
-							public static ResourceValue<Brush> Selected => new("NavigationViewItemBorderBrushSelected", true);
+							public static ThemeResourceKey<Brush> Selected => new("NavigationViewItemBorderBrushSelected");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrushSelectedPointerOver")]
-							public static ResourceValue<Brush> SelectedPointerOver => new("NavigationViewItemBorderBrushSelectedPointerOver", true);
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("NavigationViewItemBorderBrushSelectedPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrushSelectedPressed")]
-							public static ResourceValue<Brush> SelectedPressed => new("NavigationViewItemBorderBrushSelectedPressed", true);
+							public static ThemeResourceKey<Brush> SelectedPressed => new("NavigationViewItemBorderBrushSelectedPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrushSelectedDisabled")]
-							public static ResourceValue<Brush> SelectedDisabled => new("NavigationViewItemBorderBrushSelectedDisabled", true);
+							public static ThemeResourceKey<Brush> SelectedDisabled => new("NavigationViewItemBorderBrushSelectedDisabled");
 						}
 
 						public static class Separator
@@ -223,7 +224,7 @@ namespace Uno.Themes.Markup
 							public static class Foreground
 							{
 								[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemSeparatorForeground")]
-								public static ResourceValue<Brush> Default => new("NavigationViewItemSeparatorForeground", true);
+								public static ThemeResourceKey<Brush> Default => new("NavigationViewItemSeparatorForeground");
 							}
 						}
 
@@ -232,14 +233,14 @@ namespace Uno.Themes.Markup
 							public static class Foreground
 							{
 								[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemHeaderForeground")]
-								public static ResourceValue<Brush> Default => new("NavigationViewItemHeaderForeground", true);
+								public static ThemeResourceKey<Brush> Default => new("NavigationViewItemHeaderForeground");
 							}
 						}
 
 						public static class RippleFeedback
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemRippleFeedback")]
-							public static ResourceValue<Brush> Default => new("NavigationViewItemRippleFeedback", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewItemRippleFeedback");
 						}
 					}
 
@@ -248,7 +249,7 @@ namespace Uno.Themes.Markup
 						public static class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewSelectionIndicatorForeground")]
-							public static ResourceValue<Brush> Default => new("NavigationViewSelectionIndicatorForeground", true);
+							public static ThemeResourceKey<Brush> Default => new("NavigationViewSelectionIndicatorForeground");
 						}
 					}
 				}
@@ -260,52 +261,52 @@ namespace Uno.Themes.Markup
 						public static class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForeground")]
-							public static ResourceValue<Brush> Default => new("TopNavigationViewItemForeground", true);
+							public static ThemeResourceKey<Brush> Default => new("TopNavigationViewItemForeground");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForegroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("TopNavigationViewItemForegroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("TopNavigationViewItemForegroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForegroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("TopNavigationViewItemForegroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("TopNavigationViewItemForegroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForegroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("TopNavigationViewItemForegroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("TopNavigationViewItemForegroundDisabled");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForegroundSelected")]
-							public static ResourceValue<Brush> Selected => new("TopNavigationViewItemForegroundSelected", true);
+							public static ThemeResourceKey<Brush> Selected => new("TopNavigationViewItemForegroundSelected");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForegroundSelectedPointerOver")]
-							public static ResourceValue<Brush> SelectedPointerOver => new("TopNavigationViewItemForegroundSelectedPointerOver", true);
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("TopNavigationViewItemForegroundSelectedPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForegroundSelectedPressed")]
-							public static ResourceValue<Brush> SelectedPressed => new("TopNavigationViewItemForegroundSelectedPressed", true);
+							public static ThemeResourceKey<Brush> SelectedPressed => new("TopNavigationViewItemForegroundSelectedPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForegroundSelectedDisabled")]
-							public static ResourceValue<Brush> SelectedDisabled => new("TopNavigationViewItemForegroundSelectedDisabled", true);
+							public static ThemeResourceKey<Brush> SelectedDisabled => new("TopNavigationViewItemForegroundSelectedDisabled");
 						}
 
 						public static class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackground")]
-							public static ResourceValue<Brush> Default => new("TopNavigationViewItemBackground", true);
+							public static ThemeResourceKey<Brush> Default => new("TopNavigationViewItemBackground");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackgroundPointerOver")]
-							public static ResourceValue<Brush> PointerOver => new("TopNavigationViewItemBackgroundPointerOver", true);
+							public static ThemeResourceKey<Brush> PointerOver => new("TopNavigationViewItemBackgroundPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackgroundPressed")]
-							public static ResourceValue<Brush> Pressed => new("TopNavigationViewItemBackgroundPressed", true);
+							public static ThemeResourceKey<Brush> Pressed => new("TopNavigationViewItemBackgroundPressed");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackgroundDisabled")]
-							public static ResourceValue<Brush> Disabled => new("TopNavigationViewItemBackgroundDisabled", true);
+							public static ThemeResourceKey<Brush> Disabled => new("TopNavigationViewItemBackgroundDisabled");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackgroundSelected")]
-							public static ResourceValue<Brush> Selected => new("TopNavigationViewItemBackgroundSelected", true);
+							public static ThemeResourceKey<Brush> Selected => new("TopNavigationViewItemBackgroundSelected");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackgroundSelectedPointerOver")]
-							public static ResourceValue<Brush> SelectedPointerOver => new("TopNavigationViewItemBackgroundSelectedPointerOver", true);
+							public static ThemeResourceKey<Brush> SelectedPointerOver => new("TopNavigationViewItemBackgroundSelectedPointerOver");
 
 							[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackgroundSelectedPressed")]
-							public static ResourceValue<Brush> SelectedPressed => new("TopNavigationViewItemBackgroundSelectedPressed", true);
+							public static ThemeResourceKey<Brush> SelectedPressed => new("TopNavigationViewItemBackgroundSelectedPressed");
 						}
 
 						public static class Separator
@@ -313,7 +314,7 @@ namespace Uno.Themes.Markup
 							public static class Foreground
 							{
 								[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemSeparatorForeground")]
-								public static ResourceValue<Brush> Default => new("TopNavigationViewItemSeparatorForeground", true);
+								public static ThemeResourceKey<Brush> Default => new("TopNavigationViewItemSeparatorForeground");
 							}
 						}
 					}
@@ -323,12 +324,12 @@ namespace Uno.Themes.Markup
 			public static class Styles
 			{
 				[ResourceKeyDefinition(typeof(Style), "NavigationViewStyle", TargetType = typeof(NavigationView))]
-				public static ResourceValue<Style> Default => new("NavigationViewStyle");
+				public static StaticResourceKey<Style> Default => new("NavigationViewStyle");
 
 				public static class NavigationViewItem
 				{
 					[ResourceKeyDefinition(typeof(Style), "NavigationViewItemStyle", TargetType = typeof(NavigationViewItem))]
-					public static ResourceValue<Style> DefaultItem => new("NavigationViewItemStyle");
+					public static StaticResourceKey<Style> DefaultItem => new("NavigationViewItemStyle");
 				}
 			}
 		}
