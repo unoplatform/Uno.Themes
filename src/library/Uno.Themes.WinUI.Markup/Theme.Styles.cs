@@ -38,12 +38,6 @@ namespace Uno.Themes.Markup
 				public static StaticResourceKey<Style> Default => new("ContentDialogStyle");
 			}
 
-			public static class DatePicker
-			{
-				[ResourceKeyDefinition(typeof(Style), "DatePickerStyle", TargetType = typeof(DatePicker))]
-				public static StaticResourceKey<Style> Default => new("DatePickerStyle");
-			}
-
 			public static class FlyoutPresenter
 			{
 				[ResourceKeyDefinition(typeof(Style), "FlyoutPresenterStyle", TargetType = typeof(FlyoutPresenter))]
