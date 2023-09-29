@@ -1,8 +1,8 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
-using Windows.UI.Text;
 
 namespace Uno.Themes.Markup
 {
@@ -107,8 +107,8 @@ namespace Uno.Themes.Markup
 						[ResourceKeyDefinition(typeof(double), "FilledTextBoxFontSize")]
 						public static ThemeResourceKey<double> FontSize => new("FilledTextBoxFontSize");
 
-						[ResourceKeyDefinition(typeof(FontWeight), "FilledTextBoxFontWeight")]
-						public static ThemeResourceKey<FontWeight> FontWeight => new("FilledTextBoxFontWeight");
+						[ResourceKeyDefinition(typeof(FontWeights), "FilledTextBoxFontWeight")]
+						public static ThemeResourceKey<FontWeights> FontWeight => new("FilledTextBoxFontWeight");
 
 						[ResourceKeyDefinition(typeof(int), "FilledTextBoxCharacterSpacing")]
 						public static ThemeResourceKey<int> CharacterSpacing => new("FilledTextBoxCharacterSpacing");
@@ -182,8 +182,8 @@ namespace Uno.Themes.Markup
 						[ResourceKeyDefinition(typeof(double), "OutlinedTextBoxFontSize")]
 						public static ThemeResourceKey<double> FontSize => new("OutlinedTextBoxFontSize");
 
-						[ResourceKeyDefinition(typeof(FontWeight), "OutlinedTextBoxFontWeight")]
-						public static ThemeResourceKey<FontWeight> FontWeight => new("OutlinedTextBoxFontWeight");
+						[ResourceKeyDefinition(typeof(FontWeights), "OutlinedTextBoxFontWeight")]
+						public static ThemeResourceKey<FontWeights> FontWeight => new("OutlinedTextBoxFontWeight");
 
 						[ResourceKeyDefinition(typeof(int), "OutlinedTextBoxCharacterSpacing")]
 						public static ThemeResourceKey<int> CharacterSpacing => new("OutlinedTextBoxCharacterSpacing");
