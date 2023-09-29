@@ -1,0 +1,55 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.MediaPlayerElementSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Themes.Samples.Content.Controls"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="MediaPlayerElement sample using AutoPlay, TransportControls, and a URL link with mp4 format"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample1"
+								Style="{StaticResource FilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample using PosterSource, TransportControls, and a local file with mp4 format"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample2"
+								Style="{StaticResource FilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample using PosterSource, TransportControls, and a URL link with mp3 format (audio only)"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample3"
+								Style="{StaticResource FilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample with customizable options"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample4"
+								Style="{StaticResource FilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample using a Playlist"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample5"
+								Style="{StaticResource FilledButtonStyle}" />
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

@@ -64,8 +64,8 @@ TextBlock|BodySmall|
 TextBlock|CaptionLarge|
 TextBlock|CaptionMedium|
 TextBlock|CaptionSmall|
-TextBox|FilledTextBoxStyle|True
-TextBox|OutlinedTextBoxStyle|
+TextBox|FilledTextBoxStyle|
+TextBox|OutlinedTextBoxStyle|True
 ToggleButton|TextToggleButtonStyle|True
 ToggleButton|IconToggleButtonStyle|
 ToggleSwitch|ToggleSwitchStyle|True
