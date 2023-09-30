@@ -85,21 +85,6 @@ namespace Uno.Themes.Markup
 				[ResourceKeyDefinition(typeof(Style), "PipsPagerStyle", TargetType = typeof(PipsPager))]
 				public static StaticResourceKey<Style> Default => new("PipsPagerStyle");
 			}
-
-			public static class Slider
-			{
-				[ResourceKeyDefinition(typeof(Style), "SliderStyle", TargetType = typeof(Slider))]
-				public static StaticResourceKey<Style> Default => new("SliderStyle");
-			}
-
-			public static class ToggleButton
-			{
-				[ResourceKeyDefinition(typeof(Style), "TextToggleButtonStyle", TargetType = typeof(ToggleButton))]
-				public static StaticResourceKey<Style> Text => new("TextToggleButtonStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "IconToggleButtonStyle", TargetType = typeof(ToggleButton))]
-				public static StaticResourceKey<Style> Icon => new("IconToggleButtonStyle");
-			}
 		}
 	}
 }
