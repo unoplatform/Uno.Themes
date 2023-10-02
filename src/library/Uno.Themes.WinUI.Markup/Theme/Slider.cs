@@ -33,10 +33,10 @@ namespace Uno.Themes.Markup
 
 					public static class ValueFill
 					{
-						[ResourceKeyDefinition(typeof(Brush), "SliderTrackFill")]
+						[ResourceKeyDefinition(typeof(Brush), "SliderTrackValueFill")]
 						public static ThemeResourceKey<Brush> Default => new("SliderTrackFill");
 
-						[ResourceKeyDefinition(typeof(Brush), "SliderTrackFillDisabled")]
+						[ResourceKeyDefinition(typeof(Brush), "SliderTrackValueFillDisabled")]
 						public static ThemeResourceKey<Brush> Disabled => new("SliderTrackFillDisabled");
 					}
 
