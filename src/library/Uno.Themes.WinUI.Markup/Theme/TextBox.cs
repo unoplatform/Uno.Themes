@@ -14,23 +14,27 @@ namespace Uno.Themes.Markup
 			{
 				public static class Filled
 				{
-					public static class Foreground
+					public class FilledForeground
 					{
+						public static implicit operator ThemeResourceKey<Brush>(FilledForeground @class) => @class.Default;
+
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForeground")]
-						public static ThemeResourceKey<Brush> Default => new("FilledTextBoxForeground");
+						public ThemeResourceKey<Brush> Default => new("FilledTextBoxForeground");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForegroundPointerOver")]
-						public static ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxForegroundPointerOver");
+						public ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxForegroundPointerOver");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForegroundFocused")]
-						public static ThemeResourceKey<Brush> Focused => new("FilledTextBoxForegroundFocused");
+						public ThemeResourceKey<Brush> Focused => new("FilledTextBoxForegroundFocused");
 
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxForegroundDisabled")]
-						public static ThemeResourceKey<Brush> Disabled => new("FilledTextBoxForegroundDisabled");
+						public ThemeResourceKey<Brush> Disabled => new("FilledTextBoxForegroundDisabled");
 					}
+					public static FilledForeground Foreground;
 
 					public static class PlaceholderForeground
 					{
+
 						[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxPlaceholderForeground")]
 						public static ThemeResourceKey<Brush> Default => new("FilledTextBoxPlaceholderForeground");
 
