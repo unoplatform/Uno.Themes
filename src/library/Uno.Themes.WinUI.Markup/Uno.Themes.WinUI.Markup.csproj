@@ -1,4 +1,4 @@
-<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
 	<!--
 	Adding project references to this project requires some manual adjustments.
@@ -22,4 +22,8 @@
 	</PropertyGroup>
 
 	<Import Project="..\..\..\winappsdk-workaround.targets" />
+	<Target Name="_UnoThemesRunGen" BeforeTargets="BeforeCompile">
+		<MSBuild Projects="..\Uno.Themes.WinUI.Markup.Generator\Uno.Themes.WinUI.Markup.Generator.csproj" />
+		<Exec Command='dotnet "..\Uno.Themes.WinUI.Markup.Generator\bin\Debug\net7.0\Uno.Themes.WinUI.Markup.Generator.dll"' />
+	</Target>
 </Project>
