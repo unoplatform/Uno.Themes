@@ -16,6 +16,8 @@
 					 Color="{ThemeResource CupertinoWhiteColor}" />
 	<SolidColorBrush x:Key="CupertinoToggleSwitchOnBackgroundBrush"
 					 Color="{ThemeResource CupertinoGreenColor}" />
+	
+	<x:Double x:Key="ToggleSwitchThemeMinWidth">0</x:Double>
 
 	<Style x:Key="DefaultCupertinoToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
@@ -25,6 +27,8 @@
 				Value="{ThemeResource CupertinoToggleSwitchOnButtonBrush}" />
 		<Setter Property="Background"
 				Value="{ThemeResource CupertinoToggleSwitchOnBackgroundBrush}" />
+		<Setter Property="MinWidth"
+				Value="{ThemeResource ToggleSwitchThemeMinWidth}" />
 
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
