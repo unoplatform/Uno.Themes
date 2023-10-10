@@ -364,6 +364,10 @@ The v2 styles introduce a new naming system for its resource keys. Refer to the 
 ### Color Update
  A new color palette has been created for v2, meaning any color palette overrides ResourceDictionary in your app must be updated with the new resource keys. An example of the new color palette can be seen in the new [Uno.Material default palette](https://github.com/unoplatform/Uno.Themes/blob/master/src/library/Uno.Material/Styles/Application/v2/SharedColorPalette.xaml). For more information on the updated colors, you can refer to the "Colors and Themes" section of the [Material 3 Migration Guide](https://material.io/blog/migrating-material-3).
 
+ > [!NOTE]
+> As of v2, the Brush resources have been relocated to ThemeDictionaries. To reference these Brush resources, use the `ThemeResource` binding.
+> More information on theme resources can be found [here](https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources)
+
  ### Typography Updates
  Text styles have also been modified in v2. There are no 1-to-1 mapping between v1 and v2 text styles in terms of font-sizes and usages. The "Typography" section of the [Material 3 Migration Guide](https://material.io/blog/migrating-material-3) can be helpful for choosing the right style.
 
