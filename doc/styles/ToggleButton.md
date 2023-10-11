@@ -3,8 +3,8 @@
 
 Style Key|IsDefaultStyle*
 -|-
-TextToggleButtonStyle|True
-IconToggleButtonStyle|
+TextToggleButtonStyle|
+IconToggleButtonStyle|True
 
 IsDefaultStyle*: Styles in this column will be set as the default implicit style for the matching control
 
