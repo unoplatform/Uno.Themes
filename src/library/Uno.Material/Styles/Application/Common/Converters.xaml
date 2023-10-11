@@ -2,15 +2,18 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:um="using:Uno.Material">
 
+	<Visibility x:Key="VisibleVal">Visible</Visibility>
+	<Visibility x:Key="CollapsedVal">Collapsed</Visibility>
+	
 	<um:FromBoolToValueConverter x:Key="MaterialTrueToVisible"
-								 TrueValue="Visible"
-								 FalseValue="Collapsed"
-								 NullValue="Collapsed" />
+								 TrueValue="{StaticResource VisibleVal}"
+								 FalseValue="{StaticResource CollapsedVal}"
+								 NullValue="{StaticResource CollapsedVal}" />
 
 	<um:FromBoolToValueConverter x:Key="MaterialTrueToCollapsed"
-								 TrueValue="Collapsed"
-								 FalseValue="Visible"
-								 NullValue="Visible" />
+								 TrueValue="{StaticResource CollapsedVal}"
+								 FalseValue="{StaticResource VisibleVal}"
+								 NullValue="{StaticResource VisibleVal}" />
 
 	<um:FromEmptyStringToValueConverter x:Key="MaterialEmptyToFalse"
 										NotNullOrEmptyValue="True"
@@ -21,32 +24,32 @@
 										NullOrEmptyValue="True" />
 
 	<um:FromEmptyStringToValueConverter x:Key="MaterialEmptyToVisible"
-										NotNullOrEmptyValue="Collapsed"
-										NullOrEmptyValue="Visible" />
+										NotNullOrEmptyValue="{StaticResource CollapsedVal}"
+										NullOrEmptyValue="{StaticResource VisibleVal}" />
 
 	<um:FromEmptyStringToValueConverter x:Key="MaterialEmptyToCollapsed"
-										NotNullOrEmptyValue="Visible"
-										NullOrEmptyValue="Collapsed" />
+										NotNullOrEmptyValue="{StaticResource VisibleVal}"
+										NullOrEmptyValue="{StaticResource CollapsedVal}" />
 
 	<um:FromNullToValueConverter x:Key="MaterialNullToCollapsedConverter"
-								 NotNullValue="Visible"
-								 NullValue="Collapsed" />
+								 NotNullValue="{StaticResource VisibleVal}"
+								 NullValue="{StaticResource CollapsedVal}" />
 
 	<um:FromNullToValueConverter x:Key="MaterialNullToVisibleConverter"
-								 NotNullValue="Visible"
-								 NullValue="Collapsed" />
+								 NotNullValue="{StaticResource VisibleVal}"
+								 NullValue="{StaticResource CollapsedVal}" />
 
 	<um:FromNullToValueConverter x:Key="MaterialNullToTransparent"
 								 NotNullValue="1"
 								 NullValue="0" />
 	
 	<um:FromEmptyStringOrNullObjectToValueConverter x:Key="MaterialEmptyOrNullToVisible"
-													NotEmptyOrNullValue="Collapsed"
-													EmptyOrNullValue="Visible" />
+													NotEmptyOrNullValue="{StaticResource CollapsedVal}"
+													EmptyOrNullValue="{StaticResource VisibleVal}" />
 
 	<um:FromEmptyStringOrNullObjectToValueConverter x:Key="MaterialEmptyOrNullToCollapsed"
-													NotEmptyOrNullValue="Visible"
-													EmptyOrNullValue="Collapsed" />
+													NotEmptyOrNullValue="{StaticResource VisibleVal}"
+													EmptyOrNullValue="{StaticResource CollapsedVal}" />
 
 	<um:StringFormatConverter x:Key="StringFormatConverter" />
 	<um:FirstCharacterConverter x:Key="FirstCharacterConverter" />

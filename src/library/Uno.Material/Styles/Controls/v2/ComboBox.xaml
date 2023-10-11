@@ -5,6 +5,8 @@
 					xmlns:um="using:Uno.Material"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="xamarin">
+	<Visibility x:Key="VisibleVal">Visible</Visibility>
+	<Visibility x:Key="CollapsedVal">Collapsed</Visibility>
 
 	<!-- Converters -->
 	<um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
@@ -12,12 +14,12 @@
 								 NullValue="0" />
 
 	<um:FromNullToValueConverter x:Key="NullToVisible"
-								 NotNullValue="Collapsed"
-								 NullValue="Visible" />
+								 NotNullValue="{StaticResource CollapsedVal}"
+								 NullValue="{StaticResource VisibleVal}" />
 
 	<um:FromNullToValueConverter x:Key="NullToCollapsed"
-								 NotNullValue="Visible"
-								 NullValue="Collapsed" />
+								 NotNullValue="{StaticResource VisibleVal}"
+								 NullValue="{StaticResource CollapsedVal}" />
 
 	<ResourceDictionary.ThemeDictionaries>
 
