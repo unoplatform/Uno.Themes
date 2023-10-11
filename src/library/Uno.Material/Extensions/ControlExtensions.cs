@@ -130,6 +130,35 @@ namespace Uno.Material
 
 		#endregion
 
+		#region DependencyProperty: ResourceOverridePath
+		public static readonly DependencyProperty ResourceOverridePathProperty =
+		DependencyProperty.RegisterAttached(
+			"ResourceOverridePath",
+			typeof(string),
+			typeof(ControlExtensions),
+			new PropertyMetadata(null, OnResourceOverridePathChanged));
+
+		public static void SetResourceOverridePath(FrameworkElement element, string value)
+		{
+			element.SetValue(ResourceOverridePathProperty, value);
+		}
+
+		public static string GetResourceOverridePath(FrameworkElement element)
+		{
+			return (string)element.GetValue(ResourceOverridePathProperty);
+		}
+
+		private static void OnResourceOverridePathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			if (d is FrameworkElement fe)
+			{
+				fe.Resources = e.NewValue is string path
+					? new ResourceDictionary() { Source = new Uri(path, UriKind.RelativeOrAbsolute) }
+					: default;
+			}
+		}
+		#endregion
+
 		private static void OnElevationChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
 			=> SurfaceTintExtensions.OnElevationChanged(element, (int)e.NewValue);
 

@@ -130,6 +130,8 @@ With this XAML we are given the following visual result, notice the third Button
 
 ![Material - Button lightweight styling](assets/material-button-pointerover-lightweight-styling.png)
 
+It's also possible to customize a control using [the ResourcePathOverride extension](material-controls-extensions.md#ResourcePathOverride)
+
 ## Resource Keys
 
 For more information about the lightweight styling resource keys used in each control, check out the following links:

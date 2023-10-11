@@ -131,3 +131,68 @@ The following control styles have support for surface tint:
 | Control | Supporting Styles   |
 |---------|---------------------|
 | Button  | ElevatedButtonStyle |
+
+
+## ResourcePathOverride
+
+This extension allows you to set the path of a dictionary in your project for a specific control. It makes [lightweight styling](lightweight-styling.md) easier by enabling controls, like buttons, to link directly to resource dictionaries instead of requiring each resource to be written on the page. This means you can have multiple buttons with the same style but different colors simply by linking them to different resource dictionaries. It also allows for the reuse of these dictionaries across various controls, making the styling process more efficient and manageable.
+
+Here is an example of how LightWeightStyling could be applied could be used on a checkbox.
+* CheckBox:
+
+    ```xml
+    <CheckBox Content="Overridden checkbox style"
+					  Style="{StaticResource MaterialCheckBoxStyle}"
+					  um:ControlExtensions.ResourceOverridePath="ms-appx:///ControlResourcesOverride/CheckBox.xaml" />
+    ```
+
+* ControlResourcesOverride/CheckBox.xaml content :
+
+    ```xml
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			    		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!-- Checked state -->
+	<SolidColorBrush x:Key="CheckBoxGlyphForegroundChecked"
+					 Color="Red" />
+	<SolidColorBrush x:Key="CheckBoxBorderBrushChecked"
+					 Color="Green" />
+	<SolidColorBrush x:Key="CheckBoxBackgroundChecked"
+					 Color="White" />
+
+	<!-- Checked and pointer over state -->
+	<SolidColorBrush x:Key="CheckBoxGlyphForegroundCheckedPointerOver"
+					 Color="Blue" />
+	<SolidColorBrush x:Key="CheckBoxBorderBrushCheckedPointerOver"
+					 Color="Yellow" />
+	<SolidColorBrush x:Key="CheckBoxBackgroundCheckedPointerOver"
+					 Color="Black" />
+
+	<!-- Checked and pressed state -->
+	<SolidColorBrush x:Key="CheckBoxGlyphForegroundPressed"
+					 Color="Purple" />
+	<SolidColorBrush x:Key="CheckBoxBorderBrushCheckedPressed"
+					 Color="Silver" />
+	<SolidColorBrush x:Key="CheckBoxBackgroundCheckedPressed"
+					 Color="Cyan" />
+
+	<!-- Unchecked state -->
+	<StaticResource x:Key="CheckBoxBorderBrushUnchecked"
+					ResourceKey="SecondaryBrush" />
+	<StaticResource x:Key="CheckBoxBackgroundUnchecked"
+					ResourceKey="PrimaryLowBrush" />
+
+	<!-- Unchecked and pressed state -->
+	<SolidColorBrush x:Key="CheckBoxBorderBrushUncheckedPressed"
+					 Color="Lime" />
+	<SolidColorBrush x:Key="CheckBoxBackgroundUncheckedPressed"
+					 Color="Navy" />
+
+	<!-- Unchecked and pointer over state -->
+	<SolidColorBrush x:Key="CheckBoxBorderBrushUncheckedPointerOver"
+					 Color="Maroon" />
+	<SolidColorBrush x:Key="CheckBoxBackgroundUncheckedPointerOver"
+					 Color="Olive" />
+    </ResourceDictionary>
+    ```
+
