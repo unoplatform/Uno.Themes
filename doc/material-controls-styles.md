@@ -66,8 +66,8 @@ TextBlock|CaptionMedium|
 TextBlock|CaptionSmall|
 TextBox|FilledTextBoxStyle|
 TextBox|OutlinedTextBoxStyle|True
-ToggleButton|TextToggleButtonStyle|True
-ToggleButton|IconToggleButtonStyle|
+ToggleButton|TextToggleButtonStyle|
+ToggleButton|IconToggleButtonStyle|True
 ToggleSwitch|ToggleSwitchStyle|True
 
 IsDefaultStyle*: Styles in this column will be set as the default implicit style for the matching control
