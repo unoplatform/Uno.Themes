@@ -130,31 +130,25 @@ namespace Uno.Material
 
 		#endregion
 
-		#region DependencyProperty: ResourceOverridePath
-		public static readonly DependencyProperty ResourceOverridePathProperty =
-		DependencyProperty.RegisterAttached(
-			"ResourceOverridePath",
-			typeof(string),
-			typeof(ControlExtensions),
-			new PropertyMetadata(null, OnResourceOverridePathChanged));
+		#region DependencyProperty: Ressource
+		public static readonly DependencyProperty ResourcesProperty =
+		DependencyProperty.RegisterAttached("Resources", typeof(ResourceDictionary), typeof(ControlExtensions), new PropertyMetadata(null, OnResourcesChanged));
 
-		public static void SetResourceOverridePath(FrameworkElement element, string value)
+		public static ResourceDictionary GetResources(UIElement element)
 		{
-			element.SetValue(ResourceOverridePathProperty, value);
+			return (ResourceDictionary)element.GetValue(ResourcesProperty);
 		}
 
-		public static string GetResourceOverridePath(FrameworkElement element)
+		public static void SetResources(UIElement element, ResourceDictionary value)
 		{
-			return (string)element.GetValue(ResourceOverridePathProperty);
+			element.SetValue(ResourcesProperty, value);
 		}
 
-		private static void OnResourceOverridePathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		private static void OnResourcesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			if (d is FrameworkElement fe)
+			if (d is Control control && e.NewValue is ResourceDictionary newResources)
 			{
-				fe.Resources = e.NewValue is string path
-					? new ResourceDictionary() { Source = new Uri(path, UriKind.RelativeOrAbsolute) }
-					: default;
+				control.Resources.MergedDictionaries.Add(newResources);
 			}
 		}
 		#endregion

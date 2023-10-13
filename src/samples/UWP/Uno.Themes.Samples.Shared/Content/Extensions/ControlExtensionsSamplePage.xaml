@@ -153,58 +153,56 @@
 								  Content="Hello" />
 				</smtx:XamlDisplay>
 
-				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_MaterialCheckBox"
+			</StackPanel>
+			<StackPanel Spacing="16">
+
+				<TextBlock Text="ControlExtensions.Resource"
+						   Style="{StaticResource MaterialHeadline5}" />
+
+				<TextBlock Text="This property can be used in order to assign a resource dictionary to a style and facilitate lightweight Styling:"
+						   Style="{StaticResource MaterialBody1}" />
+
+				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_OverridenButtonStyle"
 								  Style="{StaticResource XamlDisplayBelowStyle}">
-					<StackPanel Spacing="24">
-						<CheckBox Content="Default checkbox style"
-								  Style="{StaticResource MaterialCheckBoxStyle}" />
-						<CheckBox Content="Overridden checkbox style"
-								  Style="{StaticResource MaterialCheckBoxStyle}"
-								  um:ControlExtensions.ResourceOverridePath="ms-appx:///ControlResourcesOverride/CheckBox.xaml" />
+					<StackPanel Spacing="16">
 
-						 <!--ControlResourcesOverride/CheckBox.xaml content:--> 
+						<Button Style="{StaticResource MaterialFilledButtonStyle}"
+								Content="Default Button" />
+
+						<Button Style="{StaticResource OverridenFilledButtonStyle}"
+								Content="Overriden Button" />
+
+						<!-- How the button was styled in the resource dictionary -->
 						<example:ResourceDictionary>
-							 <!--Checked state--> 
-							<SolidColorBrush x:Key="CheckBoxGlyphForegroundChecked"
-											 Color="Red" />
-							<SolidColorBrush x:Key="CheckBoxBorderBrushChecked"
-											 Color="Green" />
-							<SolidColorBrush x:Key="CheckBoxBackgroundChecked"
-											 Color="White" />
+							<Style x:Key="OverridenFilledButtonStyle"
+								   TargetType="Button"
+								   BasedOn="{StaticResource MaterialFilledButtonStyle}">
+								<Setter Property="um:ControlExtensions.Resources">
+									<Setter.Value>
+										<ResourceDictionary>
+											<SolidColorBrush x:Key="FilledButtonForeground"
+															 Color="DarkGreen" />
+											<SolidColorBrush x:Key="FilledButtonBackground"
+															 Color="LightGreen" />
 
-							 <!--Checked and pointer over state--> 
-							<SolidColorBrush x:Key="CheckBoxGlyphForegroundCheckedPointerOver"
-											 Color="Blue" />
-							<SolidColorBrush x:Key="CheckBoxBorderBrushCheckedPointerOver"
-											 Color="Yellow" />
-							<SolidColorBrush x:Key="CheckBoxBackgroundCheckedPointerOver"
-											 Color="Black" />
+											<SolidColorBrush x:Key="FilledButtonForegroundPointerOver"
+															 Color="DarkRed" />
+											<SolidColorBrush x:Key="FilledButtonBackgroundPointerOver"
+															 Color="LightPink" />
 
-							 <!--Checked and pressed state--> 
-							<SolidColorBrush x:Key="CheckBoxGlyphForegroundPressed"
-											 Color="Purple" />
-							<SolidColorBrush x:Key="CheckBoxBorderBrushCheckedPressed"
-											 Color="Silver" />
-							<SolidColorBrush x:Key="CheckBoxBackgroundCheckedPressed"
-											 Color="Cyan" />
+											<SolidColorBrush x:Key="FilledButtonForegroundPressed"
+															 Color="DarkBlue" />
+											<SolidColorBrush x:Key="FilledButtonBackgroundPressed"
+															 Color="LightSteelBlue" />
 
-							 <!--Unchecked state--> 
-							<StaticResource x:Key="CheckBoxBorderBrushUnchecked"
-											ResourceKey="SecondaryBrush" />
-							<StaticResource x:Key="CheckBoxBackgroundUnchecked"
-											ResourceKey="PrimaryLowBrush" />
-
-							 <!--Unchecked and pressed state--> 
-							<SolidColorBrush x:Key="CheckBoxBorderBrushUncheckedPressed"
-											 Color="Lime" />
-							<SolidColorBrush x:Key="CheckBoxBackgroundUncheckedPressed"
-											 Color="Navy" />
-
-							 <!--Unchecked and pointer over state--> 
-							<SolidColorBrush x:Key="CheckBoxBorderBrushUncheckedPointerOver"
-											 Color="Maroon" />
-							<SolidColorBrush x:Key="CheckBoxBackgroundUncheckedPointerOver"
-											 Color="Olive" />
+											<SolidColorBrush x:Key="FilledButtonForegroundFocused"
+															 Color="AntiqueWhite" />
+											<SolidColorBrush x:Key="FilledButtonBackgroundFocused"
+															 Color="DarkMagenta" />
+										</ResourceDictionary>
+									</Setter.Value>
+								</Setter>
+							</Style>
 						</example:ResourceDictionary>
 					</StackPanel>
 				</smtx:XamlDisplay>

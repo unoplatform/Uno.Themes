@@ -4,10 +4,66 @@
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:xamarin="http://uno.ui/xamarin"
+					xmlns:um="using:Uno.Material"
 					xmlns:android="http://uno.ui/android"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="xamarin android ios wasm not_win">
+
+	<Style x:Key="OverridenFilledButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource MaterialFilledButtonStyle}">
+		<Setter Property="um:ControlExtensions.Resources">
+			<Setter.Value>
+				<ResourceDictionary>
+					<ResourceDictionary.ThemeDictionaries>
+						<ResourceDictionary x:Key="Default">
+							<SolidColorBrush x:Key="FilledButtonForeground"
+											 Color="DarkGreen" />
+							<SolidColorBrush x:Key="FilledButtonBackground"
+											 Color="LightGreen" />
+
+							<SolidColorBrush x:Key="FilledButtonForegroundPointerOver"
+											 Color="DarkRed" />
+							<SolidColorBrush x:Key="FilledButtonBackgroundPointerOver"
+											 Color="LightPink" />
+
+							<SolidColorBrush x:Key="FilledButtonForegroundPressed"
+											 Color="DarkBlue" />
+							<SolidColorBrush x:Key="FilledButtonBackgroundPressed"
+											 Color="LightSteelBlue" />
+
+							<SolidColorBrush x:Key="FilledButtonForegroundFocused"
+											 Color="AntiqueWhite" />
+							<SolidColorBrush x:Key="FilledButtonBackgroundFocused"
+											 Color="DarkMagenta" />
+						</ResourceDictionary>
+						<ResourceDictionary x:Key="Light">
+							<SolidColorBrush x:Key="FilledButtonForeground"
+											 Color="LightGreen" />
+							<SolidColorBrush x:Key="FilledButtonBackground"
+											 Color="DarkGreen" />
+
+							<SolidColorBrush x:Key="FilledButtonForegroundPointerOver"
+											 Color="LightPink" />
+							<SolidColorBrush x:Key="FilledButtonBackgroundPointerOver"
+											 Color="DarkRed" />
+
+							<SolidColorBrush x:Key="FilledButtonForegroundPressed"
+											 Color="LightSteelBlue" />
+							<SolidColorBrush x:Key="FilledButtonBackgroundPressed"
+											 Color="DarkBlue" />
+
+							<SolidColorBrush x:Key="FilledButtonForegroundFocused"
+											 Color="DarkMagenta" />
+							<SolidColorBrush x:Key="FilledButtonBackgroundFocused"
+											 Color="AntiqueWhite" />
+						</ResourceDictionary>
+					</ResourceDictionary.ThemeDictionaries>
+				</ResourceDictionary>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 	<Style x:Key="SeeSourceFlyoutButtonStyle"
 		   TargetType="Button">
