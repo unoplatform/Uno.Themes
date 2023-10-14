@@ -4,7 +4,7 @@ namespace Uno.Markup.Xaml.Helpers;
 
 public static class ValueSimplifier
 {
-	public static string SimplifyMarkup(string value)
+	public static string? SimplifyMarkup(string? value)
 	{
 		if (string.IsNullOrEmpty(value)) return value;
 		if (!ShouldSimplify(value)) return value;
@@ -27,8 +27,9 @@ public static class ValueSimplifier
 
 		return value;
 	}
-	public static string SimplifyTimeSpan(string value)
+	public static string? SimplifyTimeSpan(string? value)
 	{
+		if (value == null) return null;
 		if (!ShouldSimplify(value)) return value;
 
 		return Regex.Replace(value, "^(00?:)+", "");

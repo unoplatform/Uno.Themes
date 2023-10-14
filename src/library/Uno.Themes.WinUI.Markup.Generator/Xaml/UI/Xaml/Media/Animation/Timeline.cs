@@ -58,9 +58,9 @@ public record Timeline(string Type)
 		}
 		string ParseKeyFrame(XElement frame)
 		{
-			string Value(string key = "Value") => SimplifyMarkup(frame.Attribute(key)?.Value ?? frame.GetMember("Value").Value);
-			string KeyTime(string key = "KeyTime") => SimplifyMarkup(SimplifyTimeSpan(frame.Attribute(key)?.Value));
-			string Raw(string key) => frame.Attribute(key)?.Value;
+			string? Value(string key = "Value") => SimplifyMarkup(frame.Attribute(key)?.Value ?? frame.GetMember("Value")?.Value);
+			string? KeyTime(string key = "KeyTime") => SimplifyMarkup(SimplifyTimeSpan(frame.Attribute(key)?.Value));
+			//string? Raw(string key) => frame.Attribute(key)?.Value;
 
 			return frame.Name.LocalName switch
 			{

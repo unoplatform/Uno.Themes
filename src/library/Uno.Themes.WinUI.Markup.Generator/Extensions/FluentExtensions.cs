@@ -3,8 +3,8 @@
 public static class FluentExtensions
 {
 	public static T? As<T>(this object? x) where T : class => x as T;
-	public static TResult? Apply<T, TResult>(this T value, Func<T, TResult> selector)
+	public static TResult Apply<T, TResult>(this T value, Func<T, TResult> selector)
 	{
-		return value != null ? selector(value) : default;
+		return selector(value);
 	}
 }

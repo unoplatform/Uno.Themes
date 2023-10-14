@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -339,11 +340,11 @@ internal static class ScuffedXamlParser
 	}
 	private static object ParseStaticResource(XElement e)
 	{
-		return new StaticResourceRef(e.Attribute("ResourceKey")?.Value);
+		return new StaticResourceRef(e.Attribute("ResourceKey")?.Value ?? throw new ArgumentException("Missing ResourceKey"));
 	}
 	private static object ParseThemeResource(XElement e)
 	{
-		return new ThemeResourceRef(e.Attribute("ResourceKey")?.Value);
+		return new ThemeResourceRef(e.Attribute("ResourceKey")?.Value ?? throw new ArgumentException("Missing ResourceKey"));
 	}
 
 	// we dont actually want to just take Ignorable as is (due to uno specific xmlns), so we will use a custom list here
@@ -359,7 +360,8 @@ internal static class ScuffedXamlParser
 		return IgnoredXmlnsPrefixes.Contains(prefix);
 	}
 
-	private static bool MapDP<T, TProperty>(this T obj, XElement e, Expression<Func<T, TProperty>> memberSelector, out string? value)
+	
+	private static bool MapDP<T, TProperty>(this T obj, XElement e, Expression<Func<T, TProperty>> memberSelector, [NotNullWhen(true)]out string? value)
 		where T : DependencyObject
 	{
 		var property = memberSelector.Body switch

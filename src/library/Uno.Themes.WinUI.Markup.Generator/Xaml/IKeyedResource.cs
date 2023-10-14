@@ -45,7 +45,7 @@ public partial interface IKeyedResource
 		return default;
 	}
 
-	public object GetResourceValue()
+	public object? GetResourceValue()
 	{
 		// favoring Light value when resolving for simplicity
 		return this switch

@@ -54,8 +54,8 @@ public record VisualTreeElement(string Type)
 			.ToArray();
 
 	public string? Name { get; private set; }
-	public Dictionary<string, object> Properties { get; private set; } = new();
-	public Dictionary<string, object> AttachedProperties { get; private set; } = new();
+	public Dictionary<string, object?> Properties { get; private set; } = new();
+	public Dictionary<string, object?> AttachedProperties { get; private set; } = new();
 	public List<VisualTreeElement> Children { get; private set; } = new();
 
 	public static bool TryParse(XElement e, out object? result) // generic parser for all visual tree elements or DependencyObjects
@@ -163,7 +163,7 @@ public record VisualTreeElement(string Type)
 		}
 #endif
 
-		object ParseValue()
+		object? ParseValue()
 		{
 			var elements = child.Elements().ToArray();
 			if (XamlObjectHelper.IsCollectionType(child))

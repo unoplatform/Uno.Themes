@@ -5,9 +5,9 @@ using static Uno.Markup.Xaml.XamlNamespaces;
 
 namespace Uno.Markup.Xaml.UI.Xaml;
 
-public record VisualState(string Name)
+public record VisualState(string? Name)
 {
-	public Storyboard Storyboard { get; private set; }
+	public Storyboard? Storyboard { get; private set; }
 	public List<Setter> Setters { get; private set; } = new();
 
 	public static VisualState Parse(XElement e)
