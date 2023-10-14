@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RootNamespace>Uno.Markup</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- todo: make them configurable
+			#define ENABLE_GENERIC_VALUE_OBJECT_PARSING
+			#define SKIP_ALL_NOTIMPLEMENTED_OBJECT // comment out to throw on missing parser
+			//#define SKIP_ALL_NOTIMPLEMENTED_OBJECT_NO_LOG_WARN // hide "Ignoring '{...}', as there is no parser implemented for it" msg
+			#define REPLACE_UNO_PLATFORM_XMLNS
+			#define ALLOW_DUPLICATED_KEYS // temp workaround for platform specifics
+			#define ALLOW_DUPLICATED_KEYS_WITHOUT_WARNING
+			#define PARSE_VISUALELEMENT_CHILD // comment this out for performance, if we arent working with visual-tree/state
+			#define DUMP_RESOURCEREF_WITH_KEY_INLINE // comment for `{StaticResource KEY}`, vs `StaticResourceRef` commented out
+		-->
+		<CustomConstants>$(CustomConstants);ENABLE_GENERIC_VALUE_OBJECT_PARSING</CustomConstants>
+		<CustomConstants>$(CustomConstants);SKIP_ALL_NOTIMPLEMENTED_OBJECT</CustomConstants>
+		<!--<CustomConstants>$(CustomConstants);SKIP_ALL_NOTIMPLEMENTED_OBJECT_NO_LOG_WARN</CustomConstants>-->
+		<CustomConstants>$(CustomConstants);REPLACE_UNO_PLATFORM_XMLNS</CustomConstants>
+		<CustomConstants>$(CustomConstants);ALLOW_DUPLICATED_KEYS</CustomConstants>
+		<CustomConstants>$(CustomConstants);ALLOW_DUPLICATED_KEYS_WITHOUT_WARNING</CustomConstants>
+		<CustomConstants>$(CustomConstants);PARSE_VISUALELEMENT_CHILD</CustomConstants>
+		<CustomConstants>$(CustomConstants);DUMP_RESOURCEREF_WITH_KEY_INLINE</CustomConstants>
+
+		<DefineConstants>$(DefineConstants);$(CustomConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="D:\code\uno\platform\Uno.Themes\README.md" />
+	</ItemGroup>
+
+</Project>
