@@ -6,8 +6,6 @@ using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
-using ResourceKeyDefinitionAttribute = Uno.Themes.WinUI.Markup.ResourceKeyDefinitionAttribute;
-
 namespace Uno.Themes.Markup
 {
 	public static partial class Theme

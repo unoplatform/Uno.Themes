@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Uno.Markup;
 using Uno.Markup.Xaml.Generators;
 using Uno.Markup.Xaml.Parsers;
@@ -120,8 +120,6 @@ SourceGenOptions GetOptionsFor(string path)
 		"Microsoft.UI.Xaml.Media",
 		"Uno.Extensions.Markup",
 		"Uno.Extensions.Markup.Internals",
-		null,
-		"ResourceKeyDefinitionAttribute = Uno.Themes.WinUI.Markup.ResourceKeyDefinitionAttribute", // fixme: removal pending on unoplatform/uno.csharpmarkup#452
 	};
 	options.Namespace = "Uno.Themes.Markup";
 	options.Production = true;
