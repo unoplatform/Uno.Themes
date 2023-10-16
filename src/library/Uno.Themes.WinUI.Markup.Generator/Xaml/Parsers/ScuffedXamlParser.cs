@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
 using Uno.Markup.Xaml.UI;
 using Uno.Markup.Xaml.UI.Xaml;
 using Uno.Markup.Xaml.UI.Xaml.Controls;
@@ -17,9 +18,12 @@ internal static class ScuffedXamlParser
 	// fixme: make this configurable
 	public static readonly string[] IgnoredXmlnsPrefixes = "todo,void".Split(',');
 
+	private static readonly ILogger _logger = typeof(ResourceDictionary).Log();
+
 	public static object? Load(string path) => Load<object>(path);
 	public static T? Load<T>(string path)
 	{
+		_logger.LogDebug($"parsing: {path}");
 		var document = XDocument.Load(path);
 
 		return Parse<T>(document.Root!);
@@ -61,7 +65,7 @@ internal static class ScuffedXamlParser
 		{
 #if SKIP_ALL_NOTIMPLEMENTED_OBJECT
 #if !SKIP_ALL_NOTIMPLEMENTED_OBJECT_NO_LOG_WARN
-			Console.WriteLine($"Ignoring '{e.Name.LocalName}', as there is no parser implemented for it");
+			_logger.LogWarning($"Ignoring '{e.Name.LocalName}', as there is no parser implemented for it");
 #endif
 			return new NotParsedObject(e.Name.LocalName.ToString());
 #else

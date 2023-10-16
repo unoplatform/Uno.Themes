@@ -91,7 +91,7 @@ foreach (var file in controls)
 
 	if (!options.Skip)
 	{
-		logger.LogWarning($"processing: {file}");
+		logger.LogInformation($"processing: {file}");
 		var source = LightWeightSourceGen.GenerateCsMarkup(file, context, options);
 
 		File.WriteAllText(outputPath, source);

@@ -17,7 +17,7 @@
 		<!-- todo: make them configurable
 			#define ENABLE_GENERIC_VALUE_OBJECT_PARSING
 			#define SKIP_ALL_NOTIMPLEMENTED_OBJECT // comment out to throw on missing parser
-			//#define SKIP_ALL_NOTIMPLEMENTED_OBJECT_NO_LOG_WARN // hide "Ignoring '{...}', as there is no parser implemented for it" msg
+			#define SKIP_ALL_NOTIMPLEMENTED_OBJECT_NO_LOG_WARN // hide "Ignoring '{...}', as there is no parser implemented for it" msg
 			#define REPLACE_UNO_PLATFORM_XMLNS
 			#define ALLOW_DUPLICATED_KEYS // temp workaround for platform specifics
 			#define ALLOW_DUPLICATED_KEYS_WITHOUT_WARNING
@@ -26,7 +26,7 @@
 		-->
 		<CustomConstants>$(CustomConstants);ENABLE_GENERIC_VALUE_OBJECT_PARSING</CustomConstants>
 		<CustomConstants>$(CustomConstants);SKIP_ALL_NOTIMPLEMENTED_OBJECT</CustomConstants>
-		<!--<CustomConstants>$(CustomConstants);SKIP_ALL_NOTIMPLEMENTED_OBJECT_NO_LOG_WARN</CustomConstants>-->
+		<CustomConstants>$(CustomConstants);SKIP_ALL_NOTIMPLEMENTED_OBJECT_NO_LOG_WARN</CustomConstants>
 		<CustomConstants>$(CustomConstants);REPLACE_UNO_PLATFORM_XMLNS</CustomConstants>
 		<CustomConstants>$(CustomConstants);ALLOW_DUPLICATED_KEYS</CustomConstants>
 		<CustomConstants>$(CustomConstants);ALLOW_DUPLICATED_KEYS_WITHOUT_WARNING</CustomConstants>

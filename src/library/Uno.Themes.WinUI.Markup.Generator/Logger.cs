@@ -18,11 +18,8 @@ internal static class Logger
 
 		_factory = LoggerFactory.Create(b => b
 			.Apply(configure)
-			// always output to console, and optionally to console
-			.AddConsole(c =>
-			{
-				c.FormatterName = "Systemd"; // one-liner output
-			})
+			// always output to console, and additional to debug in debug
+			.AddConsole()
 #if DEBUG
 			.AddDebug()
 #endif

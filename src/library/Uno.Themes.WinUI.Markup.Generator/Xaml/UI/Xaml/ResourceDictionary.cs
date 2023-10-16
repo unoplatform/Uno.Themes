@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
 using Uno.Markup.Xaml.Parsers;
 using static Uno.Markup.Xaml.XamlNamespaces;
 
@@ -6,6 +7,8 @@ namespace Uno.Markup.Xaml.UI.Xaml;
 
 public class ResourceDictionary : Dictionary<ResourceKey, IKeyedResource>
 {
+	private static readonly ILogger _logger = typeof(ResourceDictionary).Log();
+
 	public static Dictionary<string, string> ThemeMapping = new()
 	{
 		["Light"] = "Light",
@@ -29,7 +32,7 @@ public class ResourceDictionary : Dictionary<ResourceKey, IKeyedResource>
 #if LINQPAD
 			Util.WithStyle($"Duplicated key: {resource.Key}", "color: orange").Dump();
 #else
-			Console.WriteLine($"Duplicated key: {resource.Key}");
+			_logger.LogWarning($"Duplicated key: {resource.Key}");
 #endif
 #endif
 #else
