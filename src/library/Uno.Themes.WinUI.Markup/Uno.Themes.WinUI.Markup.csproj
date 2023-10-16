@@ -23,7 +23,9 @@
 
 	<Import Project="..\..\..\winappsdk-workaround.targets" />
 	<Target Name="_UnoThemesRunGen" BeforeTargets="BeforeCompile">
-		<MSBuild Projects="..\Uno.Themes.WinUI.Markup.Generator\Uno.Themes.WinUI.Markup.Generator.csproj" />
-		<Exec Command='dotnet "..\Uno.Themes.WinUI.Markup.Generator\bin\$(Configuration)\net7.0\Uno.Themes.WinUI.Markup.Generator.dll"' />
+		<Message Importance="high" Text="Building generator project for $(MSBuildThisFileName) - $(TargetFramework)" />
+		<!-- force generator project to be built with net7.0 instead of the current target-framework, which can be net7.0-something-else -->
+		<MSBuild Projects="..\Uno.Themes.WinUI.Markup.Generator\Uno.Themes.WinUI.Markup.Generator.csproj" Properties="TargetFramework=net7.0" />
+		<Exec Command="dotnet &quot;..\Uno.Themes.WinUI.Markup.Generator\bin\$(Configuration)\net7.0\Uno.Themes.WinUI.Markup.Generator.dll&quot;" />
 	</Target>
 </Project>
