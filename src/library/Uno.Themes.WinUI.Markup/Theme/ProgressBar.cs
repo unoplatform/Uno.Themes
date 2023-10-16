@@ -1,33 +1,41 @@
-﻿using Microsoft.UI.Xaml;
+using System;
+using Windows.UI;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
+
+using ResourceKeyDefinitionAttribute = Uno.Themes.WinUI.Markup.ResourceKeyDefinitionAttribute;
 
 namespace Uno.Themes.Markup
 {
 	public static partial class Theme
 	{
-		public static class ProgressBar
+		public static partial class ProgressBar
 		{
-			public static class Resources
+			public static partial class Resources
 			{
-				[ResourceKeyDefinition(typeof(Brush), "ProgressBarForeground")]
-				public static ThemeResourceKey<Brush> Foreground => new("ProgressBarForeground");
+				public static partial class ProgressBar
+				{
+					[ResourceKeyDefinition(typeof(Brush), "ProgressBarBackground")]
+					public static ThemeResourceKey<Brush> Background => new("ProgressBarBackground");
 
-				[ResourceKeyDefinition(typeof(Brush), "ProgressBarBackground")]
-				public static ThemeResourceKey<Brush> Background => new("ProgressBarBackground");
+					[ResourceKeyDefinition(typeof(Brush), "ProgressBarForeground")]
+					public static ThemeResourceKey<Brush> Foreground => new("ProgressBarForeground");
 
-				[ResourceKeyDefinition(typeof(double), "ProgressBarMinWidth")]
-				public static ThemeResourceKey<double> MinWidth => new("ProgressBarMinWidth");
+					[ResourceKeyDefinition(typeof(double), "ProgressBarHeight")]
+					public static ThemeResourceKey<double> Height => new("ProgressBarHeight");
 
-				[ResourceKeyDefinition(typeof(double), "ProgressBarHeight")]
-				public static ThemeResourceKey<double> Height => new("ProgressBarHeight");
+					[ResourceKeyDefinition(typeof(double), "ProgressBarMinWidth")]
+					public static ThemeResourceKey<double> MinWidth => new("ProgressBarMinWidth");
+				}
 			}
 
-			public static class Styles
+			public static partial class Styles
 			{
-				[ResourceKeyDefinition(typeof(Style), "ProgressBarStyle", TargetType = typeof(ProgressBar))]
-				public static StaticResourceKey<Style> Default => new("ProgressBarStyle");
+				[ResourceKeyDefinition(typeof(Style), "MaterialProgressBarStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.ProgressBar))]
+				public static StaticResourceKey<Style> Default => new("MaterialProgressBarStyle");
 			}
 		}
 	}

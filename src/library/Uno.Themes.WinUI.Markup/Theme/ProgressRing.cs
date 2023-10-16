@@ -1,33 +1,35 @@
-﻿using Microsoft.UI.Xaml;
+using System;
+using Windows.UI;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
+
+using ResourceKeyDefinitionAttribute = Uno.Themes.WinUI.Markup.ResourceKeyDefinitionAttribute;
 
 namespace Uno.Themes.Markup
 {
 	public static partial class Theme
 	{
-		public static class ProgressRing
+		public static partial class ProgressRing
 		{
-			public static class Resources
+			public static partial class Resources
 			{
-				public static class Foreground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "ProgressRingForeground")]
-					public static ThemeResourceKey<Brush> Default => new("ProgressRingForeground");
-				}
-
-				public static class Background
+				public static partial class ProgressRing
 				{
 					[ResourceKeyDefinition(typeof(Brush), "ProgressRingBackground")]
-					public static ThemeResourceKey<Brush> Default => new("ProgressRingBackground");
+					public static ThemeResourceKey<Brush> Background => new("ProgressRingBackground");
+
+					[ResourceKeyDefinition(typeof(Brush), "ProgressRingForeground")]
+					public static ThemeResourceKey<Brush> Foreground => new("ProgressRingForeground");
 				}
 			}
 
-			public static class Styles
+			public static partial class Styles
 			{
-				[ResourceKeyDefinition(typeof(Style), "ProgressRingStyle", TargetType = typeof(ProgressRing))]
-				public static StaticResourceKey<Style> Default => new("ProgressRingStyle");
+				[ResourceKeyDefinition(typeof(Style), "MaterialProgressRingStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.ProgressRing))]
+				public static StaticResourceKey<Style> Default => new("MaterialProgressRingStyle");
 			}
 		}
 	}
