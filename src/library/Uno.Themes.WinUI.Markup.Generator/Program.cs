@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Uno.Markup;
 using Uno.Markup.Xaml.Generators;
 using Uno.Markup.Xaml.Parsers;
@@ -7,7 +7,11 @@ using Uno.Markup.Xaml.UI.Xaml;
 Logger.InitializeFactory(builder => builder
 	.AddFilter("Microsoft", LogLevel.Warning)
 	.AddFilter("System", LogLevel.Warning)
+#if !DEBUG
 	.AddFilter(typeof(Program).Namespace, LogLevel.Information)
+#else
+	.AddFilter(typeof(Program).Namespace, LogLevel.Debug)
+#endif
 );
 var logger = typeof(Program).Log();
 
@@ -19,56 +23,70 @@ if (!cwd.EndsWith(Path.Combine("src", "library", "Uno.Themes.WinUI.Markup")))
 	throw new InvalidOperationException(@"Expecting to be run from: src\library\Uno.Themes.WinUI.Markup");
 }
 
-// todo: parameterize these variables to be injected from Uno.Themes.WinUI.Markup
+var paths = new
+{
+	XamlReference = Path.GetFullPath(Path.Combine(cwd, "..", "xaml-references")),
+	Material = Path.GetFullPath(Path.Combine(cwd, "..", "Uno.Material")),
+	ThemeMarkup = cwd,
+	ThemeMarkupGenerator = Path.GetFullPath(Path.Combine(cwd, "..", "Uno.Themes.WinUI.Markup.Generator")),
+};
+logger.LogDebug($"paths:");
+paths.GetType().GetProperties().ForEach(p =>
+	logger.LogDebug($"- {p.Name}: {p.GetValue(paths)}")
+);
+
+// fixme: to be injected from Uno.Themes.WinUI.Markup when upgrading to msbuild task
 var context = new[]
 {
-	@"D:\code\uno\framework\Uno\src\Uno.UI\UI\Xaml\Style\Generic\SystemResources.xaml",
-	@"D:\code\uno\framework\Uno\src\Uno.UI.FluentTheme.v2\themeresources_v2.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Application\Common\TextBoxVariables.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Application\Common\Fonts.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Application\v2\Typography.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Application\v2\SharedColors.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Application\v2\SharedColorPalette.xaml",
+	// fixme: to be injected from Uno.Themes.WinUI.Markup when upgrading to msbuild task
+	Path.Combine(paths.XamlReference, @"SystemResources.xaml"), // src\Uno.UI\UI\Xaml\Style\Generic\SystemResources.xaml
+	Path.Combine(paths.XamlReference, @"themeresources_v2.xaml"), // src\Uno.UI.FluentTheme.v2\themeresources_v2.xaml
+	Path.Combine(paths.Material, @"Styles\Application\Common\TextBoxVariables.xaml"),
+	Path.Combine(paths.Material, @"Styles\Application\Common\Fonts.xaml"),
+	Path.Combine(paths.Material, @"Styles\Application\v2\Typography.xaml"),
+	Path.Combine(paths.Material, @"Styles\Application\v2\SharedColors.xaml"),
+	Path.Combine(paths.Material, @"Styles\Application\v2\SharedColorPalette.xaml"),
 }.Aggregate(new ResourceDictionary(), (acc, file) => acc.Merge(
 	ScuffedXamlParser.Load<ResourceDictionary>(file) ?? throw new Exception($"Failed to parse: {file}")
 ));
 
 var controls = new[]
 {
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\Button.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\CalendarDatePicker.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\CalendarView.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\CheckBox.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\ComboBox.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\CommandBar.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\ContentDialog.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\DatePicker.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\FloatingActionButton.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\Flyout.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\HyperlinkButton.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\ListView.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\MediaPlayerElement.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\NavigationView.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\PasswordBox.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\PipsPager.Base.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\PipsPager.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\ProgressBar.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\ProgressRing.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\RadioButton.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\RatingControl.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\Ripple.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\Slider.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\TextBlock.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\TextBox.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\ToggleButton.xaml",
-	@"D:\code\uno\platform\Uno.Themes\src\library\Uno.Material\Styles\Controls\v2\ToggleSwitch.xaml",
+	// fixme: to be injected from Uno.Themes.WinUI.Markup when upgrading to msbuild task
+	Path.Combine(paths.Material, @"Styles\Controls\v2\Button.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\CalendarDatePicker.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\CalendarView.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\CheckBox.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\ComboBox.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\CommandBar.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\ContentDialog.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\DatePicker.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\FloatingActionButton.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\Flyout.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\HyperlinkButton.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\ListView.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\MediaPlayerElement.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\NavigationView.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\PasswordBox.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\PipsPager.Base.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\PipsPager.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\ProgressBar.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\ProgressRing.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\RadioButton.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\RatingControl.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\Ripple.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\Slider.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\TextBlock.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\TextBox.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\ToggleButton.xaml"),
+	Path.Combine(paths.Material, @"Styles\Controls\v2\ToggleSwitch.xaml"),
 };
 foreach (var file in controls)
 {
 	var options = GetOptionsFor(file);
 	var extension = false ? ".g.cs" : ".cs";
 	var outputPath = options.Production
-		? Path.Combine(cwd, "Theme", Path.GetFileNameWithoutExtension(file) + extension)
+		? Path.Combine(paths.ThemeMarkup, "Theme", Path.GetFileNameWithoutExtension(file) + extension)
 		: file.RegexReplace(@"\.xaml$", extension);
 
 	if (!options.Skip)
@@ -86,6 +104,7 @@ foreach (var file in controls)
 	}
 }
 
+// fixme: to be injected from Uno.Themes.WinUI.Markup when upgrading to msbuild task
 SourceGenOptions GetOptionsFor(string path)
 {
 	var options = (SourceGenOptions)(Path.GetFileNameWithoutExtension(path) switch
@@ -95,12 +114,12 @@ SourceGenOptions GetOptionsFor(string path)
 		"ToggleSwitch" => new() { ForcedGroupings = "Knob,Thumb".Split(',').ToDictionary(x => x, x => default(string)) },
 		
 		"CommandBar" or
-		"MediaPlayerElement" or // fixme: not being skipped
-		"PipsPager.Base" or // low prio
+		"MediaPlayerElement" or
+		"PipsPager.Base" or // todo
 		"RatingControl" or
-		"Flyout" or // fixme: crash
-		"ListView" or
-		"NavigationView" or // fixme: very very slow
+		"Flyout" or // todo
+		"ListView" or // todo
+		"NavigationView" or // todo
 		"PipsPager" or
 		"PipsPager.Base" or
 		"Ripple"
