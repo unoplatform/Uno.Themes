@@ -178,7 +178,7 @@ internal static class LightWeightSourceGen
 			.Select(x => new
 			{
 				x.Source,
-				//x.Target, 
+				//x.Target,
 				TargetName = x.Target?.Split('.')[0],
 				PropertyName = x.Target?.Split('.', 2)[^1]?.StripPair("()"),
 				x.Value,
@@ -393,7 +393,7 @@ internal static class LightWeightSourceGen
 	}
 	private static void InferRawBagContext(SourceGenOptions options, string? targetType, NamedResourceBag bag)
 	{
-		bag.Name = bag.Name?.RemoveHead(options.TrimControlName ? targetType : null);
+		bag.Name = bag.Name?.RemoveOnce(options.TrimControlName ? targetType : null);
 		bag.RightName = InferVisualStateBagName(bag);
 		bag.LeftName = InferLeftName(bag, bag.RightName);
 

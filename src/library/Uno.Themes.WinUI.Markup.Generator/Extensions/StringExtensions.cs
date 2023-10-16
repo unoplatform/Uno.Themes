@@ -19,13 +19,7 @@ public static class StringExtensions
 	public static string? StripPair(this string value, string pair) => TryStripPair(value, pair, out var result) ? result : value;
 	public static bool TryStripPair(this string value, string pair, out string? result)
 	{
-#if false
 		if (pair is not [var left, var right]) throw new ArgumentException($"invalid pair: {pair}");
-#else
-		if (pair.Length == 2) throw new ArgumentException($"invalid pair: {pair}");
-		var left = pair[0];
-		var right = pair[1];
-#endif
 
 		value = value.Trim();
 		if (value.StartsWith(left) && value.EndsWith(right))

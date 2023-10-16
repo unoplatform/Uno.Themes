@@ -11,7 +11,7 @@ public class SourceGenOptions
 	public Dictionary<string, string?> ForcedGroupings { get; set; } = new();
 
 	// generator options
-	public string[]? NamespaceImports { get; set; }
+	public string?[]? NamespaceImports { get; set; }
 	public string? Namespace { get; set; }
 	public bool UseFileScopedNamespace { get; set; } = false;
 	public Func<string?, string?>? XamlControlTypeResolver { get; set; }

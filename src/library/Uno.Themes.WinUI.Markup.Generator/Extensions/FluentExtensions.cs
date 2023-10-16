@@ -7,4 +7,9 @@ public static class FluentExtensions
 	{
 		return selector(value);
 	}
+	public static T Apply<T>(this T value, Action<T> apply)
+	{
+		apply(value);
+		return value;
+	}
 }

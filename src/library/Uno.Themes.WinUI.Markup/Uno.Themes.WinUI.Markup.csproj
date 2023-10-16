@@ -24,6 +24,6 @@
 	<Import Project="..\..\..\winappsdk-workaround.targets" />
 	<Target Name="_UnoThemesRunGen" BeforeTargets="BeforeCompile">
 		<MSBuild Projects="..\Uno.Themes.WinUI.Markup.Generator\Uno.Themes.WinUI.Markup.Generator.csproj" />
-		<Exec Command='dotnet "..\Uno.Themes.WinUI.Markup.Generator\bin\Debug\net7.0\Uno.Themes.WinUI.Markup.Generator.dll"' />
+		<Exec Command='dotnet "..\Uno.Themes.WinUI.Markup.Generator\bin\$(Configuration)\net7.0\Uno.Themes.WinUI.Markup.Generator.dll"' />
 	</Target>
 </Project>
