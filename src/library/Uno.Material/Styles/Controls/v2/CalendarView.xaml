@@ -7,10 +7,10 @@
 					mc:Ignorable="not_win">
 
 	<x:String x:Key="MaterialDownArrowPathData">M0,0L32,0 16,19.745z</x:String>
-	<SolidColorBrush x:Key="MaterialCalendarTodayForeground"
+	<SolidColorBrush x:Key="MaterialCalendarViewTodayForeground"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.87" />
-	<SolidColorBrush x:Key="MaterialCalendarBlackoutForeground"
+	<SolidColorBrush x:Key="MaterialCalendarViewBlackoutForeground"
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.38" />
 
@@ -31,9 +31,9 @@
 		<Setter Property="CalendarItemBorderBrush"
 				Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
 		<Setter Property="TodayForeground"
-				Value="{StaticResource MaterialCalendarTodayForeground}" />
+				Value="{StaticResource MaterialCalendarViewTodayForeground}" />
 		<Setter Property="BlackoutForeground"
-				Value="{ThemeResource MaterialCalendarBlackoutForeground}" />
+				Value="{StaticResource MaterialCalendarViewBlackoutForeground}" />
 		<Setter Property="SelectedForeground"
 					Value="{ThemeResource OnPrimaryBrush}" />
 		<Setter Property="PressedForeground"

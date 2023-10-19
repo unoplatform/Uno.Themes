@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
@@ -65,6 +65,7 @@
 			<!-- endregion -->
 
 			<!--#region Check Background Stroke-->
+			<StaticResource x:Key="CheckBoxCheckBackgroundStroke" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundStrokeUnchecked" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" ResourceKey="OnSurfaceBrush" />
@@ -82,6 +83,7 @@
 			<!--#endregion-->
 
 			<!--#region Check Background Fill-->
+			<StaticResource x:Key="CheckBoxCheckBackgroundFill" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundFillUnchecked" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundFillUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundFillUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -106,6 +108,7 @@
 			<!--#endregion-->
 
 			<!--#region Glyph-->
+			<StaticResource x:Key="CheckBoxGlyphForeground" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundUnchecked" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -127,7 +130,6 @@
 
 			<!--#region States-->
 			<StaticResource x:Key="CheckBoxStateCircleFillUnchecked" ResourceKey="OnSurfaceBrush" />
-
 			<StaticResource x:Key="CheckBoxStateCircleFillChecked" ResourceKey="PrimaryBrush" />
 
 			<StaticResource x:Key="CheckBoxStateCircleOpacityPointerOver" ResourceKey="HoverOpacity" />
@@ -202,6 +204,7 @@
 			<!-- endregion -->
 
 			<!--#region Check Background Stroke-->
+			<StaticResource x:Key="CheckBoxCheckBackgroundStroke" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundStrokeUnchecked" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" ResourceKey="OnSurfaceBrush" />
@@ -219,6 +222,7 @@
 			<!--#endregion-->
 
 			<!--#region Check Background Fill-->
+			<StaticResource x:Key="CheckBoxCheckBackgroundFill" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundFillUnchecked" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundFillUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxCheckBackgroundFillUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -243,6 +247,8 @@
 			<!--#endregion-->
 
 			<!--#region Glyph-->
+			<StaticResource x:Key="CheckBoxGlyphForeground" ResourceKey="SystemControlTransparentBrush" />
+
 			<StaticResource x:Key="CheckBoxGlyphForegroundUnchecked" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundUncheckedPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="CheckBoxGlyphForegroundUncheckedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -264,7 +270,6 @@
 
 			<!--#region States-->
 			<StaticResource x:Key="CheckBoxStateCircleFillUnchecked" ResourceKey="OnSurfaceBrush" />
-
 			<StaticResource x:Key="CheckBoxStateCircleFillChecked" ResourceKey="PrimaryBrush" />
 
 			<StaticResource x:Key="CheckBoxStateCircleOpacityPointerOver" ResourceKey="HoverOpacity" />
@@ -514,7 +519,9 @@
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
+										<Setter Target="UncheckedFocusStateCircle.Fill" Value="{ThemeResource CheckBoxStateCircleFillUnchecked}" />
 										<Setter Target="UncheckedFocusStateCircle.Opacity" Value="{ThemeResource CheckBoxStateCircleOpacityFocused}" />
+										<Setter Target="CheckedFocusStateCircle.Fill" Value="{ThemeResource CheckBoxStateCircleFillChecked}" />
 										<Setter Target="CheckedFocusStateCircle.Opacity" Value="{ThemeResource CheckBoxStateCircleOpacityFocused}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -536,7 +543,7 @@
 								 Stretch="Uniform"
 								 Width="{ThemeResource CheckBoxFocusAreaSize}"
 								 Height="{ThemeResource CheckBoxFocusAreaSize}"
-								 Fill="{ThemeResource CheckBoxStateCircleFillUnchecked}"
+								 Fill="Transparent"
 								 Visibility="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CheckBoxIsCheckedToFocusStateCircleCollapsed}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
@@ -547,7 +554,7 @@
 								 Stretch="Uniform"
 								 Width="{ThemeResource CheckBoxFocusAreaSize}"
 								 Height="{ThemeResource CheckBoxFocusAreaSize}"
-								 Fill="{ThemeResource CheckBoxStateCircleFillChecked}"
+								 Fill="Transparent"
 								 Visibility="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CheckBoxIsCheckedToFocusStateCircleVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
@@ -558,7 +565,7 @@
 								 Stretch="Uniform"
 								 Width="{ThemeResource CheckBoxFocusAreaSize}"
 								 Height="{ThemeResource CheckBoxFocusAreaSize}"
-								 Fill="{ThemeResource CheckBoxStateCircleFillChecked}"
+								 Fill="Transparent"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -568,13 +575,13 @@
 							  CornerRadius="{TemplateBinding CornerRadius}">
 
 							<Grid x:Name="BackgroundBorder"
-								  Background="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}"
-								  BorderBrush="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}"
+								  Background="{ThemeResource CheckBoxCheckBackgroundFill}"
+								  BorderBrush="{ThemeResource CheckBoxCheckBackgroundStroke}"
 								  BorderThickness="{ThemeResource CheckBoxCheckAreaBorderThickness}" />
 
 							<Path x:Name="HyphenGlyph"
 								  Data="{ThemeResource CheckBoxHyphenGlyphPathData}"
-								  Fill="{ThemeResource CheckBoxGlyphForegroundIndeterminate}"
+								  Fill="{ThemeResource CheckBoxGlyphForeground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -586,7 +593,7 @@
 
 							<Path x:Name="CheckGlyph"
 								  Data="{ThemeResource CheckBoxCheckGlyphPathData}"
-								  Fill="{ThemeResource CheckBoxGlyphForegroundChecked}"
+								  Fill="{ThemeResource CheckBoxGlyphForeground}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
