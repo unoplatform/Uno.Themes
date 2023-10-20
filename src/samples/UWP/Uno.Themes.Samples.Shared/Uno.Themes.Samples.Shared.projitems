@@ -106,6 +106,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Extensions\ControlExtensionsSamplePage.xaml.cs">
       <DependentUpon>ControlExtensionsSamplePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Extensions\ThemeExtensionsSamplePage.xaml.cs">
+      <DependentUpon>ThemeExtensionsSamplePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\NestedSamples\M3MaterialCommandBarSample_NestedPage1.xaml.cs">
       <DependentUpon>M3MaterialCommandBarSample_NestedPage1.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,18 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Extensions\ThemeExtensionsSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SecondaryColorPalette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)PrimaryColorPalette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ButtonSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,0 +1,209 @@
+﻿<Page x:Class="Uno.Themes.Samples.Shared.Content.Extensions.ThemeExtensionsSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:um="using:Uno.Material"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d android ios">
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<StackPanel BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
+					BorderThickness="1"
+					android:Margin="12"
+					ios:Margin="12"
+					Padding="12">
+
+			<StackPanel Spacing="20">
+
+				<TextBlock Text="ThemeExtensions"
+						   Style="{StaticResource MaterialHeadline5}" />
+
+				<StackPanel Orientation="Vertical"
+							Spacing="10">
+
+					<TextBlock Text="ThemeExtensions.ColorPaletteSource"
+							   Style="{StaticResource MaterialBody1}" />
+					<StackPanel Orientation="Horizontal"
+								Spacing="20">
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPaletteSource_Button_1"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<Button Content="Filled"
+										Style="{StaticResource MaterialFilledButtonStyle}"
+										um:ThemeExtensions.ColorPaletteSource="ms-appx:///PrimaryColorPalette.xaml">
+									<um:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPaletteSource_Button_1" />
+						</StackPanel>
+						
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPaletteSource_ToggleSwitch_1"
+									  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<ToggleSwitch IsOn="True"
+											  um:ThemeExtensions.ColorPaletteSource="ms-appx:///PrimaryColorPalette.xaml" />
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPaletteSource_ToggleSwitch_1" />
+						</StackPanel>
+
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPaletteSource_CheckBox_1"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<CheckBox IsChecked="True"
+										  um:ThemeExtensions.ColorPaletteSource="ms-appx:///PrimaryColorPalette.xaml" />
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPaletteSource_CheckBox_1" />
+						</StackPanel>
+					</StackPanel>
+
+					<StackPanel Orientation="Horizontal"
+								Spacing="20">
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPaletteSource_Button_2"
+									  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<Button Content="Filled"
+										Style="{StaticResource MaterialFilledButtonStyle}"
+										um:ThemeExtensions.ColorPaletteSource="ms-appx:///SecondaryColorPalette.xaml">
+									<um:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPaletteSource_Button_2" />
+						</StackPanel>
+						
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPaletteSource_ToggleSwitch_2"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<ToggleSwitch IsOn="True"
+											  um:ThemeExtensions.ColorPaletteSource="ms-appx:///SecondaryColorPalette.xaml" />
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPaletteSource_ToggleSwitch_2" />
+						</StackPanel>
+
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPaletteSource_CheckBox_2"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<CheckBox IsChecked="True"
+										  um:ThemeExtensions.ColorPaletteSource="ms-appx:///SecondaryColorPalette.xaml" />
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPaletteSource_CheckBox_2" />
+						</StackPanel>
+					</StackPanel>
+
+					<TextBlock Text="ThemeExtensions.ColorPalette"
+							   Style="{StaticResource MaterialBody1}" />
+
+					<StackPanel Orientation="Horizontal"
+								Spacing="20">
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPalette_Button_1"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<Button Content="Filled"
+										Style="{StaticResource MaterialFilledButtonStyle}">
+									<um:ThemeExtensions.ColorPalette>
+										<ResourceDictionary>
+											<Color x:Key="PrimaryColor">#67E5AD</Color>
+											<Color x:Key="OnPrimaryColor">#7A67F8</Color>
+										</ResourceDictionary>
+									</um:ThemeExtensions.ColorPalette>
+									<um:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPalette_Button_1" />
+						</StackPanel>
+
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPalette_ToggleSwitch_1"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<ToggleSwitch IsOn="True">
+									<um:ThemeExtensions.ColorPalette>
+										<ResourceDictionary>
+											<Color x:Key="PrimaryColor">#67E5AD</Color>
+											<Color x:Key="OnPrimaryColor">#7A67F8</Color>
+										</ResourceDictionary>
+									</um:ThemeExtensions.ColorPalette>
+								</ToggleSwitch>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPalette_ToggleSwitch_1" />
+						</StackPanel>
+
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPalette_CheckBox_1"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<CheckBox IsChecked="True">
+									<um:ThemeExtensions.ColorPalette>
+										<ResourceDictionary>
+											<Color x:Key="PrimaryColor">#67E5AD</Color>
+											<Color x:Key="OnPrimaryColor">#7A67F8</Color>
+										</ResourceDictionary>
+									</um:ThemeExtensions.ColorPalette>
+								</CheckBox>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPalette_CheckBox_1" />
+						</StackPanel>
+					</StackPanel>
+
+					<StackPanel Orientation="Horizontal"
+								Spacing="20">
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPalette_Button_2"
+											  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<Button Content="Filled"
+										Style="{StaticResource MaterialFilledButtonStyle}">
+									<um:ThemeExtensions.ColorPalette>
+										<ResourceDictionary>
+											<Color x:Key="PrimaryColor">#F85977</Color>
+											<Color x:Key="OnPrimaryColor">#159BFF</Color>
+										</ResourceDictionary>
+									</um:ThemeExtensions.ColorPalette>
+									<um:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</um:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPalette_Button_2" />
+						</StackPanel>
+
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPalette_ToggleSwitch_2"
+									  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<ToggleSwitch IsOn="True">
+									<um:ThemeExtensions.ColorPalette>
+										<ResourceDictionary>
+											<Color x:Key="PrimaryColor">#F85977</Color>
+											<Color x:Key="OnPrimaryColor">#159BFF</Color>
+										</ResourceDictionary>
+									</um:ThemeExtensions.ColorPalette>
+								</ToggleSwitch>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPalette_ToggleSwitch_2" />
+						</StackPanel>
+
+						<StackPanel>
+							<smtx:XamlDisplay UniqueKey="ThemeExtensions_ColorPalette_CheckBox_2"
+								  Style="{StaticResource ContentOnlyXamlDisplayStyle}">
+								<CheckBox IsChecked="True">
+									<um:ThemeExtensions.ColorPalette>
+										<ResourceDictionary>
+											<Color x:Key="PrimaryColor">#F85977</Color>
+											<Color x:Key="OnPrimaryColor">#159BFF</Color>
+										</ResourceDictionary>
+									</um:ThemeExtensions.ColorPalette>
+								</CheckBox>
+							</smtx:XamlDisplay>
+							<smtx:XamlPresenter ReferenceKey="ThemeExtensions_ColorPalette_CheckBox_2" />
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+		</StackPanel>
+	</ScrollViewer>
+</Page>
