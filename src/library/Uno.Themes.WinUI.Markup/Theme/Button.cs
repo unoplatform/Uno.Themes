@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -422,23 +422,23 @@ public static partial class Theme
 
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "MaterialElevatedButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> Elevated => new("MaterialElevatedButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "ElevatedButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Elevated => new("ElevatedButtonStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialFilledButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> Filled => new("MaterialFilledButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "FilledButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Filled => new("FilledButtonStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialFilledTonalButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> FilledTonal => new("MaterialFilledTonalButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "FilledTonalButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> FilledTonal => new("FilledTonalButtonStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialOutlinedButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> Outlined => new("MaterialOutlinedButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "OutlinedButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Outlined => new("OutlinedButtonStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialTextButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> Text => new("MaterialTextButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "TextButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Text => new("TextButtonStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialIconButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> Icon => new("MaterialIconButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "IconButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Icon => new("IconButtonStyle");
 		}
 	}
 }

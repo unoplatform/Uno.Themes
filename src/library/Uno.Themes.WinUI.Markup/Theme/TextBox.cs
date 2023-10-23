@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -33,23 +33,26 @@ public static partial class Theme
 
 				public static partial class BorderBrush
 				{
-					[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrushFocused")]
-					public static ThemeResourceKey<Brush> Default => new("FilledTextBoxBorderBrushFocused");
+					[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrush")]
+					public static ThemeResourceKey<Brush> Default => new("FilledTextBoxBorderBrush");
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrushPointerOver")]
 					public static ThemeResourceKey<Brush> PointerOver => new("FilledTextBoxBorderBrushPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrushFocused")]
+					public static ThemeResourceKey<Brush> Focused => new("FilledTextBoxBorderBrushFocused");
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledTextBoxBorderBrushDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FilledTextBoxBorderBrushDisabled");
 				}
 
-				public static partial class BorderThicknessNormal
+				public static partial class BorderThickness
 				{
 					[ResourceKeyDefinition(typeof(double), "FilledTextBoxBorderThicknessNormal")]
 					public static ThemeResourceKey<double> Default => new("FilledTextBoxBorderThicknessNormal");
 
-					[ResourceKeyDefinition(typeof(double), "MaterialFilledTextBoxBorderHeightFocused")]
-					public static ThemeResourceKey<double> Focused => new("MaterialFilledTextBoxBorderHeightFocused");
+					[ResourceKeyDefinition(typeof(double), "FilledTextBoxBorderThicknessFocused")]
+					public static ThemeResourceKey<double> Focused => new("FilledTextBoxBorderThicknessFocused");
 				}
 
 				public static partial class DeleteButtonForeground
@@ -121,20 +124,8 @@ public static partial class Theme
 					public static ThemeResourceKey<string> FontWeight => new("FilledTextBoxFontWeight");
 				}
 
-				[ResourceKeyDefinition(typeof(double), "FilledTextBoxBorderThicknessFocused")]
-				public static ThemeResourceKey<double> BorderThicknessFocused => new("FilledTextBoxBorderThicknessFocused");
-
-				[ResourceKeyDefinition(typeof(CornerRadius), "MaterialFilledTextBoxCornerRadius")]
-				public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialFilledTextBoxCornerRadius");
-
 				[ResourceKeyDefinition(typeof(double), "FilledTextBoxForegroundOpacityDisabled")]
 				public static ThemeResourceKey<double> ForegroundOpacityDisabled => new("FilledTextBoxForegroundOpacityDisabled");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFilledTextBoxMinHeight")]
-				public static ThemeResourceKey<double> MinHeight => new("MaterialFilledTextBoxMinHeight");
-
-				[ResourceKeyDefinition(typeof(Thickness), "MaterialFilledTextBoxPadding")]
-				public static ThemeResourceKey<Thickness> Padding => new("MaterialFilledTextBoxPadding");
 			}
 
 			public static partial class Outlined
@@ -208,36 +199,18 @@ public static partial class Theme
 					public static ThemeResourceKey<string> FontWeight => new("OutlinedTextBoxFontWeight");
 				}
 
-				[ResourceKeyDefinition(typeof(Thickness), "MaterialOutlinedTextBoxBorderPadding")]
-				public static ThemeResourceKey<Thickness> BorderPadding => new("MaterialOutlinedTextBoxBorderPadding");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderThickness")]
-				public static ThemeResourceKey<double> BorderThickness => new("MaterialOutlinedTextBoxBorderThickness");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderThicknessFocused")]
-				public static ThemeResourceKey<double> BorderThicknessFocused => new("MaterialOutlinedTextBoxBorderThicknessFocused");
-
-				[ResourceKeyDefinition(typeof(CornerRadius), "MaterialOutlinedTextBoxCornerRadius")]
-				public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialOutlinedTextBoxCornerRadius");
-
 				[ResourceKeyDefinition(typeof(double), "OutlinedTextBoxForegroundOpacityDisabled")]
 				public static ThemeResourceKey<double> ForegroundOpacityDisabled => new("OutlinedTextBoxForegroundOpacityDisabled");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxMinHeight")]
-				public static ThemeResourceKey<double> MinHeight => new("MaterialOutlinedTextBoxMinHeight");
-
-				[ResourceKeyDefinition(typeof(Thickness), "MaterialOutlinedTextBoxPadding")]
-				public static ThemeResourceKey<Thickness> Padding => new("MaterialOutlinedTextBoxPadding");
 			}
 		}
 
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "MaterialFilledTextBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.TextBox))]
-			public static StaticResourceKey<Style> Filled => new("MaterialFilledTextBoxStyle");
+			[ResourceKeyDefinition(typeof(Style), "FilledTextBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.TextBox))]
+			public static StaticResourceKey<Style> Filled => new("FilledTextBoxStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialOutlinedTextBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.TextBox))]
-			public static StaticResourceKey<Style> Outlined => new("MaterialOutlinedTextBoxStyle");
+			[ResourceKeyDefinition(typeof(Style), "OutlinedTextBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.TextBox))]
+			public static StaticResourceKey<Style> Outlined => new("OutlinedTextBoxStyle");
 		}
 	}
 }

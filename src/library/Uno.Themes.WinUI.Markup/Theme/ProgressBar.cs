@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -14,7 +14,7 @@ public static partial class Theme
 	{
 		public static partial class Resources
 		{
-			public static partial class ProgressBar
+			public static partial class Default
 			{
 				[ResourceKeyDefinition(typeof(Brush), "ProgressBarBackground")]
 				public static ThemeResourceKey<Brush> Background => new("ProgressBarBackground");
@@ -32,8 +32,8 @@ public static partial class Theme
 
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "MaterialProgressBarStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.ProgressBar))]
-			public static StaticResourceKey<Style> Default => new("MaterialProgressBarStyle");
+			[ResourceKeyDefinition(typeof(Style), "ProgressBarStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.ProgressBar))]
+			public static StaticResourceKey<Style> Default => new("ProgressBarStyle");
 		}
 	}
 }

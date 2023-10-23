@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -10,11 +10,11 @@ namespace Uno.Themes.Markup;
 
 public static partial class Theme
 {
-	public static partial class Button
+	public static partial class FloatingActionButton
 	{
 		public static partial class Resources
 		{
-			public static partial class Fab
+			public static partial class Default
 			{
 				public static partial class Background
 				{
@@ -60,33 +60,9 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(Brush), "FabStateOverlayBackgroundFocused")]
 					public static ThemeResourceKey<Brush> Focused => new("FabStateOverlayBackgroundFocused");
 				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> ContentWidthOrHeight => new("MaterialFabContentWidthOrHeight");
-
-				[ResourceKeyDefinition(typeof(CornerRadius), "MaterialFabCornerRadius")]
-				public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialFabCornerRadius");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabIconTextPadding")]
-				public static ThemeResourceKey<double> IconTextPadding => new("MaterialFabIconTextPadding");
-
-				[ResourceKeyDefinition(typeof(Thickness), "MaterialFabPadding")]
-				public static ThemeResourceKey<Thickness> Padding => new("MaterialFabPadding");
 			}
 
-			public static partial class LargeFab
-			{
-				[ResourceKeyDefinition(typeof(double), "MaterialLargeFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> ContentWidthOrHeight => new("MaterialLargeFabContentWidthOrHeight");
-
-				[ResourceKeyDefinition(typeof(CornerRadius), "MaterialLargeFabCornerRadius")]
-				public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialLargeFabCornerRadius");
-
-				[ResourceKeyDefinition(typeof(Thickness), "MaterialLargeFabPadding")]
-				public static ThemeResourceKey<Thickness> Padding => new("MaterialLargeFabPadding");
-			}
-
-			public static partial class SecondaryFab
+			public static partial class Secondary
 			{
 				public static partial class Background
 				{
@@ -101,15 +77,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FabSecondaryBackgroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FabSecondaryBackgroundDisabled");
-				}
-
-				public static partial class Fab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialFabPadding");
 				}
 
 				public static partial class Foreground
@@ -141,57 +108,9 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(Brush), "FabSecondaryStateOverlayBackgroundFocused")]
 					public static ThemeResourceKey<Brush> Focused => new("FabSecondaryStateOverlayBackgroundFocused");
 				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> FabContentWidthOrHeight => new("MaterialFabContentWidthOrHeight");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabIconTextPadding")]
-				public static ThemeResourceKey<double> FabIconTextPadding => new("MaterialFabIconTextPadding");
 			}
 
-			public static partial class SecondaryLargeFab
-			{
-				public static partial class LargeFab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialLargeFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialLargeFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialLargeFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialLargeFabPadding");
-				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialLargeFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> LargeFabContentWidthOrHeight => new("MaterialLargeFabContentWidthOrHeight");
-			}
-
-			public static partial class SecondarySmallFab
-			{
-				public static partial class SmallFab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialSmallFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialSmallFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialSmallFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialSmallFabPadding");
-				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialSmallFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> SmallFabContentWidthOrHeight => new("MaterialSmallFabContentWidthOrHeight");
-			}
-
-			public static partial class SmallFab
-			{
-				[ResourceKeyDefinition(typeof(double), "MaterialSmallFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> ContentWidthOrHeight => new("MaterialSmallFabContentWidthOrHeight");
-
-				[ResourceKeyDefinition(typeof(CornerRadius), "MaterialSmallFabCornerRadius")]
-				public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialSmallFabCornerRadius");
-
-				[ResourceKeyDefinition(typeof(Thickness), "MaterialSmallFabPadding")]
-				public static ThemeResourceKey<Thickness> Padding => new("MaterialSmallFabPadding");
-			}
-
-			public static partial class SurfaceFab
+			public static partial class Surface
 			{
 				public static partial class Background
 				{
@@ -206,15 +125,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FabSurfaceBackgroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FabSurfaceBackgroundDisabled");
-				}
-
-				public static partial class Fab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialFabPadding");
 				}
 
 				public static partial class Foreground
@@ -246,45 +156,9 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(Brush), "FabSurfaceStateOverlayBackgroundFocused")]
 					public static ThemeResourceKey<Brush> Focused => new("FabSurfaceStateOverlayBackgroundFocused");
 				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> FabContentWidthOrHeight => new("MaterialFabContentWidthOrHeight");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabIconTextPadding")]
-				public static ThemeResourceKey<double> FabIconTextPadding => new("MaterialFabIconTextPadding");
 			}
 
-			public static partial class SurfaceLargeFab
-			{
-				public static partial class LargeFab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialLargeFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialLargeFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialLargeFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialLargeFabPadding");
-				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialLargeFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> LargeFabContentWidthOrHeight => new("MaterialLargeFabContentWidthOrHeight");
-			}
-
-			public static partial class SurfaceSmallFab
-			{
-				public static partial class SmallFab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialSmallFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialSmallFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialSmallFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialSmallFabPadding");
-				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialSmallFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> SmallFabContentWidthOrHeight => new("MaterialSmallFabContentWidthOrHeight");
-			}
-
-			public static partial class TertiaryFab
+			public static partial class Tertiary
 			{
 				public static partial class Background
 				{
@@ -299,15 +173,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FabTertiaryBackgroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FabTertiaryBackgroundDisabled");
-				}
-
-				public static partial class Fab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialFabPadding");
 				}
 
 				public static partial class Foreground
@@ -339,82 +204,46 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(Brush), "FabTertiaryStateOverlayBackgroundFocused")]
 					public static ThemeResourceKey<Brush> Focused => new("FabTertiaryStateOverlayBackgroundFocused");
 				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> FabContentWidthOrHeight => new("MaterialFabContentWidthOrHeight");
-
-				[ResourceKeyDefinition(typeof(double), "MaterialFabIconTextPadding")]
-				public static ThemeResourceKey<double> FabIconTextPadding => new("MaterialFabIconTextPadding");
-			}
-
-			public static partial class TertiaryLargeFab
-			{
-				public static partial class LargeFab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialLargeFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialLargeFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialLargeFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialLargeFabPadding");
-				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialLargeFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> LargeFabContentWidthOrHeight => new("MaterialLargeFabContentWidthOrHeight");
-			}
-
-			public static partial class TertiarySmallFab
-			{
-				public static partial class SmallFab
-				{
-					[ResourceKeyDefinition(typeof(CornerRadius), "MaterialSmallFabCornerRadius")]
-					public static ThemeResourceKey<CornerRadius> CornerRadius => new("MaterialSmallFabCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "MaterialSmallFabPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("MaterialSmallFabPadding");
-				}
-
-				[ResourceKeyDefinition(typeof(double), "MaterialSmallFabContentWidthOrHeight")]
-				public static ThemeResourceKey<double> SmallFabContentWidthOrHeight => new("MaterialSmallFabContentWidthOrHeight");
 			}
 		}
 
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "MaterialFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> Fab => new("MaterialFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "FabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Default => new("FabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialSurfaceFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> SurfaceFab => new("MaterialSurfaceFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "SurfaceFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Surface => new("SurfaceFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialSecondaryFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> SecondaryFab => new("MaterialSecondaryFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "SecondaryFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Secondary => new("SecondaryFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialTertiaryFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> TertiaryFab => new("MaterialTertiaryFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "TertiaryFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Tertiary => new("TertiaryFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialSmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> SmallFab => new("MaterialSmallFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "SmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Small => new("SmallFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialSurfaceSmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> SurfaceSmallFab => new("MaterialSurfaceSmallFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "SurfaceSmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> SurfaceSmall => new("SurfaceSmallFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialSecondarySmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> SecondarySmallFab => new("MaterialSecondarySmallFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "SecondarySmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> SecondarySmall => new("SecondarySmallFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialTertiarySmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> TertiarySmallFab => new("MaterialTertiarySmallFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "TertiarySmallFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> TertiarySmall => new("TertiarySmallFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialLargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> LargeFab => new("MaterialLargeFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "LargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> Large => new("LargeFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialSurfaceLargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> SurfaceLargeFab => new("MaterialSurfaceLargeFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "SurfaceLargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> SurfaceLarge => new("SurfaceLargeFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialSecondaryLargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> SecondaryLargeFab => new("MaterialSecondaryLargeFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "SecondaryLargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> SecondaryLarge => new("SecondaryLargeFabStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialTertiaryLargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
-			public static StaticResourceKey<Style> TertiaryLargeFab => new("MaterialTertiaryLargeFabStyle");
+			[ResourceKeyDefinition(typeof(Style), "TertiaryLargeFabStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Button))]
+			public static StaticResourceKey<Style> TertiaryLarge => new("TertiaryLargeFabStyle");
 		}
 	}
 }

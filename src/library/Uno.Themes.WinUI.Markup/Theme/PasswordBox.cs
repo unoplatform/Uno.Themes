@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -33,8 +33,11 @@ public static partial class Theme
 
 				public static partial class BorderBrush
 				{
+					[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBorderBrush")]
+					public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxBorderBrush");
+
 					[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBorderBrushFocused")]
-					public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxBorderBrushFocused");
+					public static ThemeResourceKey<Brush> Focused => new("FilledPasswordBoxBorderBrushFocused");
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxBorderBrushPointerOver")]
 					public static ThemeResourceKey<Brush> PointerOver => new("FilledPasswordBoxBorderBrushPointerOver");
@@ -67,15 +70,6 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Focused => new("FilledPasswordBoxForegroundFocused");
 				}
 
-				public static partial class LeadingIconForeground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]
-					public static ThemeResourceKey<Brush> Default => new("PasswordBoxLeadingIconForeground");
-
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForegroundDisabled")]
-					public static ThemeResourceKey<Brush> Disabled => new("PasswordBoxLeadingIconForegroundDisabled");
-				}
-
 				public static partial class PlaceholderForeground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxPlaceholderForeground")]
@@ -104,6 +98,15 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(string), "FilledPasswordBoxFontWeight")]
 					public static ThemeResourceKey<string> FontWeight => new("FilledPasswordBoxFontWeight");
+				}
+
+				public static partial class LeadingIconForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]
+					public static ThemeResourceKey<Brush> Default => new("PasswordBoxLeadingIconForeground");
+
+					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForegroundDisabled")]
+					public static ThemeResourceKey<Brush> Disabled => new("PasswordBoxLeadingIconForegroundDisabled");
 				}
 
 				[ResourceKeyDefinition(typeof(CornerRadius), "FilledPasswordBoxCornerRadius")]
@@ -193,15 +196,6 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Focused => new("OutlinedPasswordBoxForegroundFocused");
 				}
 
-				public static partial class LeadingIconForeground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]
-					public static ThemeResourceKey<Brush> Default => new("PasswordBoxLeadingIconForeground");
-
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForegroundDisabled")]
-					public static ThemeResourceKey<Brush> Disabled => new("PasswordBoxLeadingIconForegroundDisabled");
-				}
-
 				public static partial class PlaceholderForeground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "OutlinedPasswordBoxPlaceholderForeground")]
@@ -231,6 +225,15 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(string), "OutlinedPasswordBoxFontWeight")]
 					public static ThemeResourceKey<string> FontWeight => new("OutlinedPasswordBoxFontWeight");
 				}
+		
+				public static partial class LeadingIconForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]
+					public static ThemeResourceKey<Brush> Default => new("PasswordBoxLeadingIconForeground");
+
+					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForegroundDisabled")]
+					public static ThemeResourceKey<Brush> Disabled => new("PasswordBoxLeadingIconForegroundDisabled");
+				}
 
 				[ResourceKeyDefinition(typeof(CornerRadius), "OutlinedPasswordBoxCornerRadius")]
 				public static ThemeResourceKey<CornerRadius> CornerRadius => new("OutlinedPasswordBoxCornerRadius");
@@ -244,15 +247,16 @@ public static partial class Theme
 				[ResourceKeyDefinition(typeof(Thickness), "OutlinedPasswordBoxPadding")]
 				public static ThemeResourceKey<Thickness> Padding => new("OutlinedPasswordBoxPadding");
 			}
+
 		}
 
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "MaterialFilledPasswordBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.PasswordBox))]
-			public static StaticResourceKey<Style> Filled => new("MaterialFilledPasswordBoxStyle");
+			[ResourceKeyDefinition(typeof(Style), "FilledPasswordBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.PasswordBox))]
+			public static StaticResourceKey<Style> Filled => new("FilledPasswordBoxStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialOutlinedPasswordBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.PasswordBox))]
-			public static StaticResourceKey<Style> Outlined => new("MaterialOutlinedPasswordBoxStyle");
+			[ResourceKeyDefinition(typeof(Style), "OutlinedPasswordBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.PasswordBox))]
+			public static StaticResourceKey<Style> Outlined => new("OutlinedPasswordBoxStyle");
 		}
 	}
 }

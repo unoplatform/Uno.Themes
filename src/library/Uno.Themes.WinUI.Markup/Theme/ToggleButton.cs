@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -43,7 +43,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> CheckedDisabled => new("IconToggleButtonBackgroundCheckedDisabled");
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBackgroundIndeterminate")]
-					public static ThemeResourceKey<Brush> IndeterminateNormal => new("IconToggleButtonBackgroundIndeterminate");
+					public static ThemeResourceKey<Brush> Indeterminate => new("IconToggleButtonBackgroundIndeterminate");
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBackgroundIndeterminatePointerOver")]
 					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("IconToggleButtonBackgroundIndeterminatePointerOver");
@@ -82,7 +82,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> CheckedDisabled => new("IconToggleButtonBorderBrushCheckedDisabled");
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBorderBrushIndeterminate")]
-					public static ThemeResourceKey<Brush> IndeterminateNormal => new("IconToggleButtonBorderBrushIndeterminate");
+					public static ThemeResourceKey<Brush> Indeterminate => new("IconToggleButtonBorderBrushIndeterminate");
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBorderBrushIndeterminatePointerOver")]
 					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("IconToggleButtonBorderBrushIndeterminatePointerOver");
@@ -92,6 +92,18 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBorderBrushIndeterminateDisabled")]
 					public static ThemeResourceKey<Brush> IndeterminateDisabled => new("IconToggleButtonBorderBrushIndeterminateDisabled");
+
+					public static partial class Overlay
+					{
+						[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBorderBrushFocusedOverlay")]
+						public static ThemeResourceKey<Brush> Focused => new("IconToggleButtonBorderBrushFocusedOverlay");
+
+						[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBorderBrushHoverOverlay")]
+						public static ThemeResourceKey<Brush> Hover => new("IconToggleButtonBorderBrushHoverOverlay");
+
+						[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonBorderBrushSelectedOverlay")]
+						public static ThemeResourceKey<Brush> Selected => new("IconToggleButtonBorderBrushSelectedOverlay");
+					}
 				}
 
 				public static partial class Foreground
@@ -121,7 +133,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> CheckedDisabled => new("IconToggleButtonForegroundCheckedDisabled");
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonForegroundIndeterminate")]
-					public static ThemeResourceKey<Brush> IndeterminateNormal => new("IconToggleButtonForegroundIndeterminate");
+					public static ThemeResourceKey<Brush> Indeterminate => new("IconToggleButtonForegroundIndeterminate");
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonForegroundIndeterminatePointerOver")]
 					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("IconToggleButtonForegroundIndeterminatePointerOver");
@@ -142,13 +154,13 @@ public static partial class Theme
 
 						[ResourceKeyDefinition(typeof(double), "IconToggleButtonStateCircleOpacityPressed")]
 						public static ThemeResourceKey<double> Pressed => new("IconToggleButtonStateCircleOpacityPressed");
+
+						[ResourceKeyDefinition(typeof(double), "IconToggleButtonStateCircleOpacityFocused")]
+						public static ThemeResourceKey<double> Focused => new("IconToggleButtonStateCircleOpacityFocused");
 					}
 
 					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonStateCircleFill")]
 					public static ThemeResourceKey<Brush> Fill => new("IconToggleButtonStateCircleFill");
-
-					[ResourceKeyDefinition(typeof(double), "IconToggleButtonStateCircleOpacityFocused")]
-					public static ThemeResourceKey<double> OpacityFocused => new("IconToggleButtonStateCircleOpacityFocused");
 				}
 
 				[ResourceKeyDefinition(typeof(Thickness), "IconToggleButtonBorderThickness")]
@@ -180,8 +192,17 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBackgroundChecked")]
 					public static ThemeResourceKey<Brush> Checked => new("TextToggleButtonBackgroundChecked");
 
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBackgroundCheckedPointerOver")]
+					public static ThemeResourceKey<Brush> CheckedPointerOver => new("TextToggleButtonBackgroundCheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBackgroundCheckedPressed")]
+					public static ThemeResourceKey<Brush> CheckedPressed => new("TextToggleButtonBackgroundCheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBackgroundCheckedDisabled")]
+					public static ThemeResourceKey<Brush> CheckedDisabled => new("TextToggleButtonBackgroundCheckedDisabled");
+
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBackgroundIndeterminate")]
-					public static ThemeResourceKey<Brush> IndeterminateNormal => new("TextToggleButtonBackgroundIndeterminate");
+					public static ThemeResourceKey<Brush> Indeterminate => new("TextToggleButtonBackgroundIndeterminate");
 
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBackgroundIndeterminatePointerOver")]
 					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("TextToggleButtonBackgroundIndeterminatePointerOver");
@@ -210,8 +231,17 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushChecked")]
 					public static ThemeResourceKey<Brush> Checked => new("TextToggleButtonBorderBrushChecked");
 
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushCheckedPointerOver")]
+					public static ThemeResourceKey<Brush> CheckedPointerOver => new("TextToggleButtonBorderBrushCheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushCheckedPressed")]
+					public static ThemeResourceKey<Brush> CheckedPressed => new("TextToggleButtonBorderBrushCheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushCheckedDisabled")]
+					public static ThemeResourceKey<Brush> CheckedDisabled => new("TextToggleButtonBorderBrushCheckedDisabled");
+
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushIndeterminate")]
-					public static ThemeResourceKey<Brush> IndeterminateNormal => new("TextToggleButtonBorderBrushIndeterminate");
+					public static ThemeResourceKey<Brush> Indeterminate => new("TextToggleButtonBorderBrushIndeterminate");
 
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushIndeterminatePointerOver")]
 					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("TextToggleButtonBorderBrushIndeterminatePointerOver");
@@ -221,33 +251,54 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushIndeterminateDisabled")]
 					public static ThemeResourceKey<Brush> IndeterminateDisabled => new("TextToggleButtonBorderBrushIndeterminateDisabled");
+
+					public static partial class Overlay
+					{
+						[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushFocusedOverlay")]
+						public static ThemeResourceKey<Brush>Focused => new("TextToggleButtonBorderBrushFocusedOverlay");
+
+						[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushHoverOverlay")]
+						public static ThemeResourceKey<Brush> Hover => new("TextToggleButtonBorderBrushHoverOverlay");
+
+						[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushSelectedOverlay")]
+						public static ThemeResourceKey<Brush> Selected => new("TextToggleButtonBorderBrushSelectedOverlay");
+					}
 				}
 
 				public static partial class Foreground
 				{
-					[ResourceKeyDefinition(typeof(Color), "TextToggleButtonForeground")]
-					public static ThemeResourceKey<Color> Default => new("TextToggleButtonForeground");
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForeground")]
+					public static ThemeResourceKey<Brush> Default => new("TextToggleButtonForeground");
 
-					[ResourceKeyDefinition(typeof(Color), "TextToggleButtonForegroundPointerOver")]
-					public static ThemeResourceKey<Color> PointerOver => new("TextToggleButtonForegroundPointerOver");
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundPointerOver")]
+					public static ThemeResourceKey<Brush> PointerOver => new("TextToggleButtonForegroundPointerOver");
 
-					[ResourceKeyDefinition(typeof(Color), "TextToggleButtonForegroundPressed")]
-					public static ThemeResourceKey<Color> Pressed => new("TextToggleButtonForegroundPressed");
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundPressed")]
+					public static ThemeResourceKey<Brush> Pressed => new("TextToggleButtonForegroundPressed");
 
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("TextToggleButtonForegroundDisabled");
 
-					[ResourceKeyDefinition(typeof(Color), "TextToggleButtonForegroundChecked")]
-					public static ThemeResourceKey<Color> Checked => new("TextToggleButtonForegroundChecked");
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundChecked")]
+					public static ThemeResourceKey<Brush> Checked => new("TextToggleButtonForegroundChecked");
 
-					[ResourceKeyDefinition(typeof(Color), "TextToggleButtonForegroundIndeterminate")]
-					public static ThemeResourceKey<Color> IndeterminateNormal => new("TextToggleButtonForegroundIndeterminate");
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundCheckedPointerOver")]
+					public static ThemeResourceKey<Brush> CheckedPointerOver => new("TextToggleButtonForegroundCheckedPointerOver");
 
-					[ResourceKeyDefinition(typeof(Color), "TextToggleButtonForegroundIndeterminatePointerOver")]
-					public static ThemeResourceKey<Color> IndeterminatePointerOver => new("TextToggleButtonForegroundIndeterminatePointerOver");
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundCheckedPressed")]
+					public static ThemeResourceKey<Brush> CheckedPressed => new("TextToggleButtonForegroundCheckedPressed");
 
-					[ResourceKeyDefinition(typeof(Color), "TextToggleButtonForegroundIndeterminatePressed")]
-					public static ThemeResourceKey<Color> IndeterminatePressed => new("TextToggleButtonForegroundIndeterminatePressed");
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundCheckedDisabled")]
+					public static ThemeResourceKey<Brush> CheckedDisabled => new("TextToggleButtonForegroundCheckedDisabled");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundIndeterminate")]
+					public static ThemeResourceKey<Brush> Indeterminate => new("TextToggleButtonForegroundIndeterminate");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundIndeterminatePointerOver")]
+					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("TextToggleButtonForegroundIndeterminatePointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundIndeterminatePressed")]
+					public static ThemeResourceKey<Brush> IndeterminatePressed => new("TextToggleButtonForegroundIndeterminatePressed");
 
 					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonForegroundIndeterminateDisabled")]
 					public static ThemeResourceKey<Brush> IndeterminateDisabled => new("TextToggleButtonForegroundIndeterminateDisabled");
@@ -261,15 +312,6 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(double), "TextToggleButtonFontSize")]
 					public static ThemeResourceKey<double> FontSize => new("TextToggleButtonFontSize");
 				}
-
-				[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushFocusedOverlay")]
-				public static ThemeResourceKey<Brush> BorderBrushFocusedOverlay => new("TextToggleButtonBorderBrushFocusedOverlay");
-
-				[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushHoverOverlay")]
-				public static ThemeResourceKey<Brush> BorderBrushHoverOverlay => new("TextToggleButtonBorderBrushHoverOverlay");
-
-				[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushSelectedOverlay")]
-				public static ThemeResourceKey<Brush> BorderBrushSelectedOverlay => new("TextToggleButtonBorderBrushSelectedOverlay");
 
 				[ResourceKeyDefinition(typeof(Thickness), "TextToggleButtonBorderThickness")]
 				public static ThemeResourceKey<Thickness> BorderThickness => new("TextToggleButtonBorderThickness");
@@ -290,11 +332,11 @@ public static partial class Theme
 
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "MaterialTextToggleButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Primitives.ToggleButton))]
-			public static StaticResourceKey<Style> Text => new("MaterialTextToggleButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "TextToggleButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Primitives.ToggleButton))]
+			public static StaticResourceKey<Style> Text => new("TextToggleButtonStyle");
 
-			[ResourceKeyDefinition(typeof(Style), "MaterialIconToggleButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Primitives.ToggleButton))]
-			public static StaticResourceKey<Style> Icon => new("MaterialIconToggleButtonStyle");
+			[ResourceKeyDefinition(typeof(Style), "IconToggleButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.Primitives.ToggleButton))]
+			public static StaticResourceKey<Style> Icon => new("IconToggleButtonStyle");
 		}
 	}
 }

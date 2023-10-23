@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.UI;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -14,7 +14,7 @@ public static partial class Theme
 	{
 		public static partial class Resources
 		{
-			public static partial class ProgressRing
+			public static partial class Default
 			{
 				[ResourceKeyDefinition(typeof(Brush), "ProgressRingBackground")]
 				public static ThemeResourceKey<Brush> Background => new("ProgressRingBackground");
@@ -26,8 +26,8 @@ public static partial class Theme
 
 		public static partial class Styles
 		{
-			[ResourceKeyDefinition(typeof(Style), "MaterialProgressRingStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.ProgressRing))]
-			public static StaticResourceKey<Style> Default => new("MaterialProgressRingStyle");
+			[ResourceKeyDefinition(typeof(Style), "ProgressRingStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.ProgressRing))]
+			public static StaticResourceKey<Style> Default => new("ProgressRingStyle");
 		}
 	}
 }

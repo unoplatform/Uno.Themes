@@ -6,12 +6,12 @@ namespace Uno.Themes.Markup
 {
 	public static partial class Theme
 	{
-		public static partial class ContentDialog
+		public static partial class ListView
 		{
 			public static partial class Styles
 			{
-				[ResourceKeyDefinition(typeof(Style), "ContentDialogStyle", TargetType = typeof(ContentDialog))]
-				public static StaticResourceKey<Style> Default => new("ContentDialogStyle");
+				[ResourceKeyDefinition(typeof(Style), "ListViewStyle", TargetType = typeof(ListView))]
+				public static StaticResourceKey<Style> Default => new("ListViewStyle");
 			}
 		}
 	}
