@@ -32,7 +32,7 @@ SliderBottomTickBarHeight|Double|4
 SliderHorizontalInlineTickBarHeight|Double|2
 SliderLeftTickBarWidth|Double|4
 SliderRightTickBarWidth|Double|4
-SliderVerticallInlineTickBarWidth|Double|2
+SliderVerticalInlineTickBarWidth|Double|2
 SliderTopTickBarMargin|Thickness|0,0,0,4
 SliderBottomTickBarMargin|Thickness|0,4,0,0
 SliderLeftTickBarMargin|Thickness|0,0,4,0
