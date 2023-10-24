@@ -8,7 +8,7 @@
 
 	<x:String x:Key="MaterialDownArrowPathData">M0,0L32,0 16,19.745z</x:String>
 	<SolidColorBrush x:Key="MaterialCalendarTodayForeground"
-					 Color="{ThemeResource OnSurfaceColor}"
+					 Color="{ThemeResource OnPrimaryColor}"
 					 Opacity="0.87" />
 	<SolidColorBrush x:Key="MaterialCalendarBlackoutForeground"
 					 Color="{ThemeResource OnSurfaceColor}"
@@ -99,7 +99,7 @@
 		<not_win:Setter Property="TodaySelectedBackground"
 						Value="{ThemeResource PrimaryBrush}" />
 		<not_win:Setter Property="TodayBackground"
-						Value="Transparent" />
+						Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CalendarView">
