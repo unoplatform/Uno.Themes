@@ -17,7 +17,7 @@ uid: uno.themes.material.colors
 | SecondaryColor             | #6B4EA2    | #CDC2DC   |
 | OnSecondaryColor           | #FFFFFF    | #332D41   |
 | SecondaryContainerColor    | #EBDDFF    | #433C52   |
-| OnSecondaryContainerColor  | #1F182B    | #EDDFFF   |
+| OnSecondaryContainerColor  | #220555    | #EDDFFF   |
 | SecondaryVariantDarkColor  | #3B2574    | #441F8A   |
 | SecondaryVariantLightColor | #9B7BD5    | #EBE6F1   |
 | TertiaryColor              | #0061A4    | #9FCAFF   |
