@@ -1,7 +1,4 @@
-﻿using System;
-using Windows.UI;
-using Microsoft.UI.Text;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
@@ -98,16 +95,16 @@ public static partial class Theme
 				{
 					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBackground")]
 					public static ThemeResourceKey<Brush> Background => new("DatePickerFlyoutPresenterBackground");
-					
+
 					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBorderBrush")]
 					public static ThemeResourceKey<Brush> BorderBrush => new("DatePickerFlyoutPresenterBorderBrush");
 
 					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterSpacerFill")]
 					public static ThemeResourceKey<Brush> SpacerFill => new("DatePickerFlyoutPresenterSpacerFill");
-					
+
 					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterHighlightFill")]
 					public static ThemeResourceKey<Brush> HighlightFill => new("DatePickerFlyoutPresenterHighlightFill");
-					
+
 					public static class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "DatePickerFlyoutPresenterFontFamily")]
@@ -131,7 +128,7 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Thickness), "DatePickerFlyoutButtonPadding")]
 					public static ThemeResourceKey<Thickness> ButtonPadding => new("DatePickerFlyoutButtonPadding");
-					
+
 					[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerFlyoutPresenterCornerRadius")]
 					public static ThemeResourceKey<CornerRadius> CornerRadius => new("DatePickerFlyoutPresenterCornerRadius");
 
@@ -155,7 +152,7 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutPresenterHighlightHeight")]
 					public static ThemeResourceKey<double> HighlightHeight => new("DatePickerFlyoutPresenterHighlightHeight");
-				}				
+				}
 
 				[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerCornerRadius")]
 				public static ThemeResourceKey<CornerRadius> CornerRadius => new("DatePickerCornerRadius");

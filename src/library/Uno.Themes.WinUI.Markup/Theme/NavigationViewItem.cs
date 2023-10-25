@@ -2,17 +2,16 @@
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
-namespace Uno.Themes.Markup
+namespace Uno.Themes.Markup;
+
+public static partial class Theme
 {
-	public static partial class Theme
+	public static partial class NavigationViewItem
 	{
-		public static partial class NavigationViewItem
+		public static partial class Styles
 		{
-			public static partial class Styles
-			{
-				[ResourceKeyDefinition(typeof(Style), "NavigationViewItemStyle", TargetType = typeof(NavigationViewItem))]
-				public static StaticResourceKey<Style> Default => new("NavigationViewItemStyle");
-			}
+			[ResourceKeyDefinition(typeof(Style), "NavigationViewItemStyle", TargetType = typeof(NavigationViewItem))]
+			public static StaticResourceKey<Style> Default => new("NavigationViewItemStyle");
 		}
 	}
 }

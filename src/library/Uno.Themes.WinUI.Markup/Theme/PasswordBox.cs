@@ -1,7 +1,4 @@
-﻿using System;
-using Windows.UI;
-using Microsoft.UI.Text;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
@@ -225,7 +222,7 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(string), "OutlinedPasswordBoxFontWeight")]
 					public static ThemeResourceKey<string> FontWeight => new("OutlinedPasswordBoxFontWeight");
 				}
-		
+
 				public static partial class LeadingIconForeground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]

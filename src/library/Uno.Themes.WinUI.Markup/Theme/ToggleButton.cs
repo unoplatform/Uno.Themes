@@ -1,7 +1,4 @@
-﻿using System;
-using Windows.UI;
-using Microsoft.UI.Text;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
@@ -255,7 +252,7 @@ public static partial class Theme
 					public static partial class Overlay
 					{
 						[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushFocusedOverlay")]
-						public static ThemeResourceKey<Brush>Focused => new("TextToggleButtonBorderBrushFocusedOverlay");
+						public static ThemeResourceKey<Brush> Focused => new("TextToggleButtonBorderBrushFocusedOverlay");
 
 						[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonBorderBrushHoverOverlay")]
 						public static ThemeResourceKey<Brush> Hover => new("TextToggleButtonBorderBrushHoverOverlay");

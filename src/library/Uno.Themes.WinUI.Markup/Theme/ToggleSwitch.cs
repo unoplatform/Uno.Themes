@@ -1,11 +1,7 @@
-﻿using System;
-using Windows.UI;
-using Microsoft.UI.Text;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
-using Windows.Media.Streaming.Adaptive;
 
 namespace Uno.Themes.Markup;
 
@@ -113,7 +109,7 @@ public static partial class Theme
 					{
 						[ResourceKeyDefinition(typeof(Thickness), "SwitchKnobOnMargin")]
 						public static ThemeResourceKey<Thickness> On => new("SwitchKnobOnMargin");
-	
+
 						[ResourceKeyDefinition(typeof(Thickness), "SwitchKnobOffMargin")]
 						public static ThemeResourceKey<Thickness> Off => new("SwitchKnobOffMargin");
 					}
