@@ -19,6 +19,7 @@
 		<GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
 		<IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
 		<IsSampleProject>$(MSBuildProjectName.Contains('Sample'))</IsSampleProject>
+		<IsMarkupProject>$(MSBuildProjectName.Contains('Markup'))</IsMarkupProject>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -41,6 +42,10 @@
 			</ItemGroup>
 		</When>
 	</Choose>
+
+	<PropertyGroup Condition="'$(IsMarkupProject)'=='true'">
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
 
 	<!-- Workaround for https://developercommunity.visualstudio.com/t/XamarinMac-binaries-are-missing-in-173/10164443 -->
 	<ItemGroup Condition="$(TargetFramework.ToLower().StartsWith('xamarinmac')) and '$(Configuration)' == 'Release' and '$(OS)'=='Windows_NT'">
