@@ -271,7 +271,7 @@ Then, add the following code to your `AppResources.cs`:
 using Uno.Material.Markup;
 
 this.Build(r => r.UseMaterial(
-    //optional
+     //optional
      new Styles.ColorPaletteOverride(),
      //optional
      new Styles.MaterialFontsOverride()));
