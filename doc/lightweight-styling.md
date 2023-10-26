@@ -180,21 +180,21 @@ For example, the following resource keys are used with `FilledButtonStyle`, `Hyp
 
 ##### Filled Button
 
-`Theme.Button.Resources.Filled.Foreground.Default`
-`Theme.Button.Resources.Filled.Foreground.Pressed`
-`Theme.Button.Resources.Filled.Foreground.PointerOver`
+- `Theme.Button.Resources.Filled.Foreground.Default`
+- `Theme.Button.Resources.Filled.Foreground.Pressed`
+- `Theme.Button.Resources.Filled.Foreground.PointerOver`
 
 ##### HyperlinkButton (Default)
 
-`Theme.HyperlinkButton.Resources.Default.Foreground.Default`
-`Theme.HyperlinkButton.Resources.Default.Foreground.Pressed`
-`Theme.HyperlinkButton.Resources.Default.Foreground.PointerOver`
+- `Theme.HyperlinkButton.Resources.Default.Foreground.Default`
+- `Theme.HyperlinkButton.Resources.Default.Foreground.Pressed`
+- `Theme.HyperlinkButton.Resources.Default.Foreground.PointerOver`
 
 ##### CheckBox (Default)
 
-`Theme.CheckBox.Resources.Default.Foreground.Checked`
-`Theme.CheckBox.Resources.Default.Foreground.CheckedPressed`
-`Theme.CheckBox.Resources.Default.Foreground.CheckedPointerOver`
+- `Theme.CheckBox.Resources.Default.Foreground.Checked`
+- `Theme.CheckBox.Resources.Default.Foreground.CheckedPressed`
+- `Theme.CheckBox.Resources.Default.Foreground.CheckedPointerOver`
 
 All C# Markup-friendly Lightweight Styling resource keys can be found [here](https://github.com/unoplatform/Uno.Themes/tree/master/src/library/Uno.Themes.WinUI.Markup/Theme)
 
