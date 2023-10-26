@@ -135,12 +135,12 @@ With this XAML we are given the following visual result, notice the third Button
 All Lightweight Styling resource keys can also be used in C# Markup through a collection of static helper classes available in the [Uno.Themes.WinUI.Markup](https://www.nuget.org/packages/Uno.Themes.WinUI.Markup/) NuGet package. The following code shows how to override several `FilledButton` resources in C# from the previous XAML example above. Notice that the `Button` is still using the `FilledButtonStyle` from Uno Material, but the resources are being overridden.
 
 ```csharp
-// #1
+// basic filled button
 new Button()
     .Style(Theme.Button.Styles.Filled)
     .Content("Default Button Style"),
 
-//#2
+// filled button with overridden colors
 new Button()
     .Style(Theme.Button.Styles.Filled)
     .Resources(config => config
@@ -151,7 +151,7 @@ new Button()
     )
     .Content("Overridden Button Style"),
 
-//#3
+// filled button with overridden colors for PointerOver state
 new Button()
     .Style(Theme.Button.Styles.Filled)
     .Resources(config => config
