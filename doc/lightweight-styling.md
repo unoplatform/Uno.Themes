@@ -130,6 +130,74 @@ With this XAML we are given the following visual result, notice the third Button
 
 ![Material - Button lightweight styling](assets/material-button-pointerover-lightweight-styling.png)
 
+## C# Markup
+
+All Lightweight Styling resource keys can also be used in C# Markup through a collection of static helper classes available in the [Uno.Themes.WinUI.Markup](https://www.nuget.org/packages/Uno.Themes.WinUI.Markup/) NuGet package. The following code shows how to override several `FilledButton` resources in C# from the previous XAML example above. Notice that the `Button` is still using the `FilledButtonStyle` from Uno Material, but the resources are being overridden.
+
+```csharp
+// basic filled button
+new Button()
+    .Style(Theme.Button.Styles.Filled)
+    .Content("Default Button Style"),
+
+// filled button with overridden colors
+new Button()
+    .Style(Theme.Button.Styles.Filled)
+    .Resources(config => config
+        .Add(Theme.Button.Resources.BorderThickness, 2)
+        .Add(Theme.Button.Resources.Filled.Foreground.Default, new SolidColorBrush(Colors.DarkGreen))
+        .Add(Theme.Button.Resources.Filled.Background.Default, new SolidColorBrush(Colors.LightGreen))
+        .Add(Theme.Button.Resources.Filled.BorderBrush.Default, new SolidColorBrush(Colors.DarkGreen))
+    )
+    .Content("Overridden Button Style"),
+
+// filled button with overridden colors for PointerOver state
+new Button()
+    .Style(Theme.Button.Styles.Filled)
+    .Resources(config => config
+        .Add(Theme.Button.Resources.BorderThickness, 2)
+        .Add(Theme.Button.Resources.Filled.Foreground.PointerOver, new SolidColorBrush(Colors.DarkRed))
+        .Add(Theme.Button.Resources.Filled.Background.PointerOver, new SolidColorBrush(Colors.LightPink))
+        .Add(Theme.Button.Resources.Filled.BorderBrush.PointerOver, new SolidColorBrush(Colors.DarkRed))
+    )
+    .Content("Overridden Button Style (PointerOver)")
+```
+
+### Resource Key Pattern
+
+The general pattern used for mapping the Lightweight Styling resource keys to C# Markup is as follows:
+
+`Theme.{control}.Resources.{?:variant}.{member-path}.{?:visual-state}`
+
+| Name Part | Description |
+| --- | --- |
+| `control` | Name of the control type (Button, TextBox, CheckBox, etc.) |
+| `variant` | **(Optional) Defaults to `Default`** Certain styles have multiple variants. Ex: For Button we have variants such as: Outlined, Text, Filled | 
+| `member-path` | The property or the nested property to assign value to. (Foreground, Background, Placeholder.Foreground, etc.) |
+| `visual-state` | **(Optional) Defaults to `Default`**  Specifies which `VisualState` that this resource will be applied to (PointerOver, Checked, Disabled, etc.)  |
+
+For example, the following resource keys are used with `FilledButtonStyle`, `HyperlinkButtonStyle`, and `CheckBoxStyle` from Uno Material:
+
+##### Filled Button
+
+- `Theme.Button.Resources.Filled.Foreground.Default`
+- `Theme.Button.Resources.Filled.Foreground.Pressed`
+- `Theme.Button.Resources.Filled.Foreground.PointerOver`
+
+##### HyperlinkButton (Default)
+
+- `Theme.HyperlinkButton.Resources.Default.Foreground.Default`
+- `Theme.HyperlinkButton.Resources.Default.Foreground.Pressed`
+- `Theme.HyperlinkButton.Resources.Default.Foreground.PointerOver`
+
+##### CheckBox (Default)
+
+- `Theme.CheckBox.Resources.Default.Foreground.Checked`
+- `Theme.CheckBox.Resources.Default.Foreground.CheckedPressed`
+- `Theme.CheckBox.Resources.Default.Foreground.CheckedPointerOver`
+
+All C# Markup-friendly Lightweight Styling resource keys can be found [here](https://github.com/unoplatform/Uno.Themes/tree/master/src/library/Uno.Themes.WinUI.Markup/Theme)
+
 ## Resource Keys
 
 For more information about the lightweight styling resource keys used in each control, check out the following links:
