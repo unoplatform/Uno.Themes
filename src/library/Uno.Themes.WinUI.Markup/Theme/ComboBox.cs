@@ -111,11 +111,17 @@ public static partial class Theme
 						public static ThemeResourceKey<Brush> Unfocused => new("ComboBoxBackgroundUnfocused");
 					}
 
-					[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBorderBrush")]
-					public static ThemeResourceKey<Brush> BorderBrush => new("ComboBoxDropDownBorderBrush");
+					public static partial class BorderBrush
+					{
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBorderBrush")]
+						public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownBorderBrush");
+					}
 
-					[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownForeground")]
-					public static ThemeResourceKey<Brush> Foreground => new("ComboBoxDropDownForeground");
+					public static partial class Foreground
+					{
+						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownForeground")]
+						public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownForeground");
+					}
 				}
 
 				public static partial class Foreground

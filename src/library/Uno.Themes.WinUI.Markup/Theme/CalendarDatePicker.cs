@@ -48,11 +48,14 @@ public static partial class Theme
 
 				public static partial class Header
 				{
-					[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerHeaderForeground")]
-					public static ThemeResourceKey<Brush> Foreground => new("CalendarDatePickerHeaderForeground");
+					public static partial class Foreground
+					{
+						[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerHeaderForeground")]
+						public static ThemeResourceKey<Brush> Default => new("CalendarDatePickerHeaderForeground");
 
-					[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerHeaderForegroundDisabled")]
-					public static ThemeResourceKey<Brush> ForegroundDisabled => new("CalendarDatePickerHeaderForegroundDisabled");
+						[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerHeaderForegroundDisabled")]
+						public static ThemeResourceKey<Brush> Disabled => new("CalendarDatePickerHeaderForegroundDisabled");
+					}
 				}
 
 				public static partial class TextForeground
@@ -67,6 +70,12 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Selected => new("CalendarDatePickerTextForegroundSelected");
 				}
 
+				public static partial class BottomBorderBrush
+				{
+					[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerBottomBorderBrush")]
+					public static ThemeResourceKey<Brush> Default => new("CalendarDatePickerBottomBorderBrush");
+				}
+
 				[ResourceKeyDefinition(typeof(CornerRadius), "CalendarDatePickerBackgroundCornerRadius")]
 				public static ThemeResourceKey<CornerRadius> BackgroundCornerRadius => new("CalendarDatePickerBackgroundCornerRadius");
 
@@ -76,11 +85,11 @@ public static partial class Theme
 				[ResourceKeyDefinition(typeof(Thickness), "CalendarDatePickerBorderThemeThickness")]
 				public static ThemeResourceKey<Thickness> BorderThemeThickness => new("CalendarDatePickerBorderThemeThickness");
 
-				[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerBottomBorderBrush")]
-				public static ThemeResourceKey<Brush> BottomBorderBrush => new("CalendarDatePickerBottomBorderBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerCalendarGlyphForegroundDisabled")]
-				public static ThemeResourceKey<Brush> CalendarGlyphForegroundDisabled => new("CalendarDatePickerCalendarGlyphForegroundDisabled");
+				public static partial class CalendarGlyphForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerCalendarGlyphForegroundDisabled")]
+					public static ThemeResourceKey<Brush> Disabled => new("CalendarDatePickerCalendarGlyphForegroundDisabled");
+				}
 
 				[ResourceKeyDefinition(typeof(Thickness), "CalendarDatePickerContentMargin")]
 				public static ThemeResourceKey<Thickness> ContentMargin => new("CalendarDatePickerContentMargin");
@@ -88,8 +97,11 @@ public static partial class Theme
 				[ResourceKeyDefinition(typeof(CornerRadius), "CalendarDatePickerCornerRadius")]
 				public static ThemeResourceKey<CornerRadius> CornerRadius => new("CalendarDatePickerCornerRadius");
 
-				[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerForeground")]
-				public static ThemeResourceKey<Brush> Foreground => new("CalendarDatePickerForeground");
+				public static partial class Foreground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "CalendarDatePickerForeground")]
+					public static ThemeResourceKey<Brush> Default => new("CalendarDatePickerForeground");
+				}
 
 				[ResourceKeyDefinition(typeof(double), "CalendarDatePickerHeight")]
 				public static ThemeResourceKey<double> Height => new("CalendarDatePickerHeight");

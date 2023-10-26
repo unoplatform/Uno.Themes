@@ -49,8 +49,11 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(FontFamily), "RatingControlCaptionFontFamily")]
 					public static ThemeResourceKey<FontFamily> FontFamily => new("RatingControlCaptionFontFamily");
 
-					[ResourceKeyDefinition(typeof(Brush), "RatingControlCaptionForeground")]
-					public static ThemeResourceKey<Brush> Foreground => new("RatingControlCaptionForeground");
+					public static partial class Foreground
+					{
+						[ResourceKeyDefinition(typeof(Brush), "RatingControlCaptionForeground")]
+						public static ThemeResourceKey<Brush> Default => new("RatingControlCaptionForeground");
+					}
 
 					[ResourceKeyDefinition(typeof(double), "RatingControlCaptionHeight")]
 					public static ThemeResourceKey<double> Height => new("RatingControlCaptionHeight");
@@ -107,8 +110,11 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(FontFamily), "SecondaryRatingControlCaptionFontFamily")]
 					public static ThemeResourceKey<FontFamily> FontFamily => new("SecondaryRatingControlCaptionFontFamily");
 
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlCaptionForeground")]
-					public static ThemeResourceKey<Brush> Foreground => new("SecondaryRatingControlCaptionForeground");
+					public static partial class Foreground
+					{
+						[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlCaptionForeground")]
+						public static ThemeResourceKey<Brush> Default => new("SecondaryRatingControlCaptionForeground");
+					}
 
 					[ResourceKeyDefinition(typeof(double), "SecondaryRatingControlCaptionHeight")]
 					public static ThemeResourceKey<double> Height => new("SecondaryRatingControlCaptionHeight");

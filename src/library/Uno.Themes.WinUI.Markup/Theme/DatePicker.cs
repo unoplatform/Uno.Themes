@@ -93,19 +93,31 @@ public static partial class Theme
 
 				public static class Flyout
 				{
-					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBackground")]
-					public static ThemeResourceKey<Brush> Background => new("DatePickerFlyoutPresenterBackground");
+					public static partial class Background
+					{
+						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBackground")]
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterBackground");
+					}
 
-					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBorderBrush")]
-					public static ThemeResourceKey<Brush> BorderBrush => new("DatePickerFlyoutPresenterBorderBrush");
+					public static partial class BorderBrush
+					{
+						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterBorderBrush")]
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterBorderBrush");
+					}
 
-					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterSpacerFill")]
-					public static ThemeResourceKey<Brush> SpacerFill => new("DatePickerFlyoutPresenterSpacerFill");
+					public static partial class SpacerFill
+					{
+						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterSpacerFill")]
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterSpacerFill");
+					}
 
-					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterHighlightFill")]
-					public static ThemeResourceKey<Brush> HighlightFill => new("DatePickerFlyoutPresenterHighlightFill");
+					public static partial class HighlightFill
+					{
+						[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutPresenterHighlightFill")]
+						public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutPresenterHighlightFill");
+					}
 
-					public static class Typography
+					public static partial class Typography
 					{
 						[ResourceKeyDefinition(typeof(FontFamily), "DatePickerFlyoutPresenterFontFamily")]
 						public static ThemeResourceKey<FontFamily> FontFamily => new("DatePickerFlyoutPresenterFontFamily");
@@ -114,20 +126,26 @@ public static partial class Theme
 						public static ThemeResourceKey<double> FontSize => new("DatePickerFlyoutPresenterFontSize");
 					}
 
-					[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutButtonBackground")]
-					public static ThemeResourceKey<Brush> ButtonBackground => new("DatePickerFlyoutButtonBackground");
-
-					public static class ButtonOpacity
+					public static partial class Button
 					{
-						[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutButtonOpacityPressed")]
-						public static ThemeResourceKey<double> Pressed => new("DatePickerFlyoutButtonOpacityPressed");
+						public static partial class Background
+						{
+							[ResourceKeyDefinition(typeof(Brush), "DatePickerFlyoutButtonBackground")]
+							public static ThemeResourceKey<Brush> Default => new("DatePickerFlyoutButtonBackground");
+						}
 
-						[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutButtonOpacityDisabled")]
-						public static ThemeResourceKey<double> Disabled => new("DatePickerFlyoutButtonOpacityDisabled");
+						public static class Opacity
+						{
+							[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutButtonOpacityPressed")]
+							public static ThemeResourceKey<double> Pressed => new("DatePickerFlyoutButtonOpacityPressed");
+
+							[ResourceKeyDefinition(typeof(double), "DatePickerFlyoutButtonOpacityDisabled")]
+							public static ThemeResourceKey<double> Disabled => new("DatePickerFlyoutButtonOpacityDisabled");
+						}
+
+						[ResourceKeyDefinition(typeof(Thickness), "DatePickerFlyoutButtonPadding")]
+						public static ThemeResourceKey<Thickness> Padding => new("DatePickerFlyoutButtonPadding");
 					}
-
-					[ResourceKeyDefinition(typeof(Thickness), "DatePickerFlyoutButtonPadding")]
-					public static ThemeResourceKey<Thickness> ButtonPadding => new("DatePickerFlyoutButtonPadding");
 
 					[ResourceKeyDefinition(typeof(CornerRadius), "DatePickerFlyoutPresenterCornerRadius")]
 					public static ThemeResourceKey<CornerRadius> CornerRadius => new("DatePickerFlyoutPresenterCornerRadius");
@@ -160,8 +178,11 @@ public static partial class Theme
 				[ResourceKeyDefinition(typeof(double), "DatePickerHeight")]
 				public static ThemeResourceKey<double> Height => new("DatePickerHeight");
 
-				[ResourceKeyDefinition(typeof(Brush), "DatePickerPlaceholderTextForeground")]
-				public static ThemeResourceKey<Brush> PlaceholderTextForeground => new("DatePickerPlaceholderTextForeground");
+				public static partial class PlaceholderTextForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "DatePickerPlaceholderTextForeground")]
+					public static ThemeResourceKey<Brush> Default => new("DatePickerPlaceholderTextForeground");
+				}
 			}
 		}
 

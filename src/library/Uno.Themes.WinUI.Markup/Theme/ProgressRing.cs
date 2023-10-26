@@ -13,11 +13,17 @@ public static partial class Theme
 		{
 			public static partial class Default
 			{
-				[ResourceKeyDefinition(typeof(Brush), "ProgressRingBackground")]
-				public static ThemeResourceKey<Brush> Background => new("ProgressRingBackground");
+				public static partial class Background
+				{
+					[ResourceKeyDefinition(typeof(Brush), "ProgressRingBackground")]
+					public static ThemeResourceKey<Brush> Default => new("ProgressRingBackground");
+				}
 
-				[ResourceKeyDefinition(typeof(Brush), "ProgressRingForeground")]
-				public static ThemeResourceKey<Brush> Foreground => new("ProgressRingForeground");
+				public static partial class Foreground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "ProgressRingForeground")]
+					public static ThemeResourceKey<Brush> Default => new("ProgressRingForeground");
+				}
 			}
 		}
 

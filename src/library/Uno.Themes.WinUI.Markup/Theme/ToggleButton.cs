@@ -156,8 +156,11 @@ public static partial class Theme
 						public static ThemeResourceKey<double> Focused => new("IconToggleButtonStateCircleOpacityFocused");
 					}
 
-					[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonStateCircleFill")]
-					public static ThemeResourceKey<Brush> Fill => new("IconToggleButtonStateCircleFill");
+					public static partial class Fill
+					{
+						[ResourceKeyDefinition(typeof(Brush), "IconToggleButtonStateCircleFill")]
+						public static ThemeResourceKey<Brush> Default => new("IconToggleButtonStateCircleFill");
+					}
 				}
 
 				[ResourceKeyDefinition(typeof(Thickness), "IconToggleButtonBorderThickness")]
@@ -316,8 +319,11 @@ public static partial class Theme
 				[ResourceKeyDefinition(typeof(CornerRadius), "TextToggleButtonCornerRadius")]
 				public static ThemeResourceKey<CornerRadius> CornerRadius => new("TextToggleButtonCornerRadius");
 
-				[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonFeedbackFocused")]
-				public static ThemeResourceKey<Brush> FeedbackFocused => new("TextToggleButtonFeedbackFocused");
+				public static partial class Feedback
+				{
+					[ResourceKeyDefinition(typeof(Brush), "TextToggleButtonFeedbackFocused")]
+					public static ThemeResourceKey<Brush> Focused => new("TextToggleButtonFeedbackFocused");
+				}
 
 				[ResourceKeyDefinition(typeof(double), "TextToggleButtonMinHeight")]
 				public static ThemeResourceKey<double> MinHeight => new("TextToggleButtonMinHeight");

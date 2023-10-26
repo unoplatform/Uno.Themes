@@ -180,14 +180,17 @@ public static partial class Theme
 
 				public static partial class Thumb
 				{
+					public static partial class Fill
+					{
+						[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchThumb")]
+						public static ThemeResourceKey<Brush> Default => new("ToggleSwitchThumb");
+
+					}
 					[ResourceKeyDefinition(typeof(double), "MediumThumbSize")]
 					public static ThemeResourceKey<double> MediumSize => new("MediumThumbSize");
 
 					[ResourceKeyDefinition(typeof(double), "LargeThumbSize")]
 					public static ThemeResourceKey<double> LargeSize => new("LargeThumbSize");
-
-					[ResourceKeyDefinition(typeof(Brush), "ToggleSwitchThumb")]
-					public static ThemeResourceKey<Brush> Fill => new("ToggleSwitchThumb");
 
 					[ResourceKeyDefinition(typeof(CornerRadius), "LargeThumbCornerRadius")]
 					public static ThemeResourceKey<CornerRadius> LargeCornerRadius => new("LargeThumbCornerRadius");
