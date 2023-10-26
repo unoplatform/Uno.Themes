@@ -75,7 +75,7 @@ public static partial class Theme
 
 				public static partial class StateLayerBackground
 				{
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonStateLayerBackgroundPointerOver")]$1
+					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonStateLayerBackgroundPointerOver")]
 					public static ThemeResourceKey<Brush> PointerOver => new("ElevatedButtonStateLayerBackgroundPointerOver");
 
 					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonStateLayerBackgroundPressed")]
