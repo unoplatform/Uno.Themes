@@ -260,6 +260,23 @@ If you would like Uno.Material to use a different font, you can override the def
                    FontOverrideSource="ms-appx:///PROJECT_NAME/Styles/Application/MaterialFontsOverride.xaml" />
     ```
 
+## Using C# Markup
+
+Uno Material also has support for C# Markup through a [Uno.Material.WinUI.Markup](https://www.nuget.org/packages/Uno.Material.WinUI.Markup) NuGet Package. 
+
+To get started with Uno Material in your C# Markup application, add the `Uno.Material.WinUI.Markup` NuGet package to your **App Code Library** project and your platform heads.
+Then, add the following code to your `AppResources.cs`:
+
+```csharp
+using Uno.Material.Markup;
+
+this.Build(r => r.UseMaterial(
+     //optional
+     new Styles.ColorPaletteOverride(),
+     //optional
+     new Styles.MaterialFontsOverride()));
+```
+
 ## Additional Resources
 
 - [Uno Platform Material Sample App](https://github.com/unoplatform/Uno.Samples/tree/master/UI/UnoMaterialSample)

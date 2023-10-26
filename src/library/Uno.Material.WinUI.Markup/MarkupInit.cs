@@ -1,17 +1,17 @@
 ﻿using Microsoft.UI.Xaml;
+using Uno.Extensions.Markup;
 
 namespace Uno.Material.Markup;
 
 public static class MarkupInit
 {
-	public static T UseMaterial<T>(this T app,
+	public static ResourceDictionaryBuilder UseMaterial(
+		this ResourceDictionaryBuilder builder,
 		ResourceDictionary colorOverride = null,
-		ResourceDictionary fontOverride = null) where T : Application
-		=> app.Resources(
-			r => r.Merged(
-				new MaterialTheme()
-					.ColorOverrideDictionary(colorOverride)
-					.FontOverrideDictionary(fontOverride)
-				)
+		ResourceDictionary fontOverride = null)
+		=> builder.Merged(
+			new MaterialTheme()
+				.ColorOverrideDictionary(colorOverride)
+				.FontOverrideDictionary(fontOverride)
 			);
 }
