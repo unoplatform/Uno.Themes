@@ -13,11 +13,17 @@ public static partial class Theme
 		{
 			public static partial class Default
 			{
-				[ResourceKeyDefinition(typeof(Brush), "ProgressBarBackground")]
-				public static ThemeResourceKey<Brush> Background => new("ProgressBarBackground");
+				public static partial class Background
+				{
+					[ResourceKeyDefinition(typeof(Brush), "ProgressBarBackground")]
+					public static ThemeResourceKey<Brush> Default => new("ProgressBarBackground");
+				}
 
-				[ResourceKeyDefinition(typeof(Brush), "ProgressBarForeground")]
-				public static ThemeResourceKey<Brush> Foreground => new("ProgressBarForeground");
+				public static partial class Foreground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "ProgressBarForeground")]
+					public static ThemeResourceKey<Brush> Default => new("ProgressBarForeground");
+				}
 
 				[ResourceKeyDefinition(typeof(double), "ProgressBarHeight")]
 				public static ThemeResourceKey<double> Height => new("ProgressBarHeight");

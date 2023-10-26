@@ -118,8 +118,11 @@ public static partial class Theme
 				[ResourceKeyDefinition(typeof(Thickness), "FilledPasswordBoxPadding")]
 				public static ThemeResourceKey<Thickness> Padding => new("FilledPasswordBoxPadding");
 
-				[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxRevealButtonForeground")]
-				public static ThemeResourceKey<Brush> RevealButtonForeground => new("FilledPasswordBoxRevealButtonForeground");
+				public static partial class RevealButtonForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "FilledPasswordBoxRevealButtonForeground")]
+					public static ThemeResourceKey<Brush> Default => new("FilledPasswordBoxRevealButtonForeground");
+				}
 			}
 
 			public static partial class Outlined

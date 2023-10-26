@@ -81,14 +81,20 @@ public static partial class Theme
 						public static ThemeResourceKey<Thickness> Margin => new("SliderTopTickBarMargin");
 					}
 
-					[ResourceKeyDefinition(typeof(double), "SliderHorizontalInlineTickBarHeight")]
-					public static ThemeResourceKey<double> HorizontalInlineHeight => new("SliderHorizontalInlineTickBarHeight");
+					public static partial class Inline
+					{
+						public static partial class Fill
+						{
+							[ResourceKeyDefinition(typeof(Brush), "SliderInlineTickBarFill")]
+							public static ThemeResourceKey<Brush> Default => new("SliderInlineTickBarFill");
+						}
 
-					[ResourceKeyDefinition(typeof(Brush), "SliderInlineTickBarFill")]
-					public static ThemeResourceKey<Brush> InlineFill => new("SliderInlineTickBarFill");
+						[ResourceKeyDefinition(typeof(double), "SliderHorizontalInlineTickBarHeight")]
+						public static ThemeResourceKey<double> HorizontalHeight => new("SliderHorizontalInlineTickBarHeight");
 
-					[ResourceKeyDefinition(typeof(double), "SliderVerticalInlineTickBarWidth")]
-					public static ThemeResourceKey<double> VerticalInlineWidth => new("SliderVerticalInlineTickBarWidth");
+						[ResourceKeyDefinition(typeof(double), "SliderVerticalInlineTickBarWidth")]
+						public static ThemeResourceKey<double> VerticalWidth => new("SliderVerticalInlineTickBarWidth");
+					}
 				}
 
 				public static partial class Track
