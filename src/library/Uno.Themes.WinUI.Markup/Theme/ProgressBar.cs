@@ -3,32 +3,34 @@ using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
-namespace Uno.Themes.Markup
-{
-	public static partial class Theme
-	{
-		public static class ProgressBar
-		{
-			public static class Resources
-			{
-				[ResourceKeyDefinition(typeof(Brush), "ProgressBarForeground")]
-				public static ThemeResourceKey<Brush> Foreground => new("ProgressBarForeground");
+namespace Uno.Themes.Markup;
 
+public static partial class Theme
+{
+	public static partial class ProgressBar
+	{
+		public static partial class Resources
+		{
+			public static partial class Default
+			{
 				[ResourceKeyDefinition(typeof(Brush), "ProgressBarBackground")]
 				public static ThemeResourceKey<Brush> Background => new("ProgressBarBackground");
 
-				[ResourceKeyDefinition(typeof(double), "ProgressBarMinWidth")]
-				public static ThemeResourceKey<double> MinWidth => new("ProgressBarMinWidth");
+				[ResourceKeyDefinition(typeof(Brush), "ProgressBarForeground")]
+				public static ThemeResourceKey<Brush> Foreground => new("ProgressBarForeground");
 
 				[ResourceKeyDefinition(typeof(double), "ProgressBarHeight")]
 				public static ThemeResourceKey<double> Height => new("ProgressBarHeight");
-			}
 
-			public static class Styles
-			{
-				[ResourceKeyDefinition(typeof(Style), "ProgressBarStyle", TargetType = typeof(ProgressBar))]
-				public static StaticResourceKey<Style> Default => new("ProgressBarStyle");
+				[ResourceKeyDefinition(typeof(double), "ProgressBarMinWidth")]
+				public static ThemeResourceKey<double> MinWidth => new("ProgressBarMinWidth");
 			}
+		}
+
+		public static partial class Styles
+		{
+			[ResourceKeyDefinition(typeof(Style), "ProgressBarStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.ProgressBar))]
+			public static StaticResourceKey<Style> Default => new("ProgressBarStyle");
 		}
 	}
 }

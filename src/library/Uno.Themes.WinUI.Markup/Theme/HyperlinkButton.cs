@@ -3,15 +3,18 @@ using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
-namespace Uno.Themes.Markup
+namespace Uno.Themes.Markup;
+
+public static partial class Theme
 {
-	public static partial class Theme
+	public static partial class HyperlinkButton
 	{
-		public static class HyperlinkButton
+		public static partial class Resources
 		{
-			public static class Resources
+			public static partial class Default
 			{
-				public static class Foreground
+
+				public static partial class Foreground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonForeground")]
 					public static ThemeResourceKey<Brush> Default => new("HyperlinkButtonForeground");
@@ -26,7 +29,7 @@ namespace Uno.Themes.Markup
 					public static ThemeResourceKey<Brush> Disabled => new("HyperlinkButtonForegroundDisabled");
 				}
 
-				public static class Background
+				public static partial class Background
 				{
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBackground")]
 					public static ThemeResourceKey<Brush> Default => new("HyperlinkButtonBackground");
@@ -41,7 +44,22 @@ namespace Uno.Themes.Markup
 					public static ThemeResourceKey<Brush> Disabled => new("HyperlinkButtonBackgroundDisabled");
 				}
 
-				public static class BorderBrush
+				public static partial class BackgroundOpacity
+				{
+					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacity")]
+					public static ThemeResourceKey<double> Default => new("HyperlinkButtonBackgroundOpacity");
+
+					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityPointerOver")]
+					public static ThemeResourceKey<double> PointerOver => new("HyperlinkButtonBackgroundOpacityPointerOver");
+
+					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityPressed")]
+					public static ThemeResourceKey<double> Pressed => new("HyperlinkButtonBackgroundOpacityPressed");
+
+					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityDisabled")]
+					public static ThemeResourceKey<double> Disabled => new("HyperlinkButtonBackgroundOpacityDisabled");
+				}
+
+				public static partial class BorderBrush
 				{
 					[ResourceKeyDefinition(typeof(Brush), "HyperlinkButtonBorderBrush")]
 					public static ThemeResourceKey<Brush> Default => new("HyperlinkButtonBorderBrush");
@@ -56,7 +74,7 @@ namespace Uno.Themes.Markup
 					public static ThemeResourceKey<Brush> Disabled => new("HyperlinkButtonBorderBrushDisabled");
 				}
 
-				public static class Typography
+				public static partial class Typography
 				{
 					[ResourceKeyDefinition(typeof(FontFamily), "HyperlinkButtonFontFamily")]
 					public static ThemeResourceKey<FontFamily> FontFamily => new("HyperlinkButtonFontFamily");
@@ -65,30 +83,18 @@ namespace Uno.Themes.Markup
 					public static ThemeResourceKey<double> FontSize => new("HyperlinkButtonFontSize");
 				}
 
-				public static class Opacity
-				{
-					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacity")]
-					public static ThemeResourceKey<double> Default => new("HyperlinkButtonBackgroundOpacity");
-
-					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityPointerOver")]
-					public static ThemeResourceKey<double> PointerOver => new("HyperlinkButtonBackgroundOpacityPointerOver");
-
-					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityPressed")]
-					public static ThemeResourceKey<double> Pressed => new("HyperlinkButtonBackgroundOpacityPressed");
-
-					[ResourceKeyDefinition(typeof(double), "HyperlinkButtonBackgroundOpacityDisabled")]
-					public static ThemeResourceKey<double> Disabled => new("HyperlinkButtonBackgroundOpacityDisabled");
-				}
+				[ResourceKeyDefinition(typeof(Thickness), "HyperlinkButtonPadding")]
+				public static ThemeResourceKey<Thickness> Padding => new("HyperlinkButtonPadding");
 			}
+		}
 
-			public static class Styles
-			{
-				[ResourceKeyDefinition(typeof(Style), "HyperlinkButtonStyle", TargetType = typeof(HyperlinkButton))]
-				public static StaticResourceKey<Style> Default => new("HyperlinkButtonStyle");
+		public static partial class Styles
+		{
+			[ResourceKeyDefinition(typeof(Style), "HyperlinkButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.HyperlinkButton))]
+			public static StaticResourceKey<Style> Default => new("HyperlinkButtonStyle");
 
-				[ResourceKeyDefinition(typeof(Style), "SecondaryHyperlinkButtonStyle", TargetType = typeof(HyperlinkButton))]
-				public static StaticResourceKey<Style> Secondary => new("SecondaryHyperlinkButtonStyle");
-			}
+			[ResourceKeyDefinition(typeof(Style), "SecondaryHyperlinkButtonStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.HyperlinkButton))]
+			public static StaticResourceKey<Style> Secondary => new("SecondaryHyperlinkButtonStyle");
 		}
 	}
 }

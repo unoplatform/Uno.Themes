@@ -1,21 +1,33 @@
-﻿using Microsoft.UI.Text;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
-using MUXCornerRadius = Microsoft.UI.Xaml.CornerRadius;
 
-namespace Uno.Themes.Markup
+namespace Uno.Themes.Markup;
+
+public static partial class Theme
 {
-	public static partial class Theme
+	public static partial class CheckBox
 	{
-		public static class CheckBox
+		public static partial class Resources
 		{
-			[ResourceKeyDefinition(typeof(double), "CheckBoxFocusAreaSize")]
-			public static ThemeResourceKey<double> FocusAreaSize => new("CheckBoxFocusAreaSize");
-
-			public static class Resources
+			public static partial class Default
 			{
+				public static partial class CheckArea
+				{
+					[ResourceKeyDefinition(typeof(double), "CheckBoxCheckAreaSize")]
+					public static ThemeResourceKey<double> Size => new("CheckBoxCheckAreaSize");
+
+					[ResourceKeyDefinition(typeof(Thickness), "CheckBoxCheckAreaBorderThickness")]
+					public static ThemeResourceKey<Thickness> BorderThickness => new("CheckBoxCheckAreaBorderThickness");
+
+					[ResourceKeyDefinition(typeof(CornerRadius), "CheckBoxCheckAreaCornerRadius")]
+					public static ThemeResourceKey<CornerRadius> CornerRadius => new("CheckBoxCheckAreaCornerRadius");
+
+					[ResourceKeyDefinition(typeof(Thickness), "CheckBoxCheckAreaPadding")]
+					public static ThemeResourceKey<Thickness> Padding => new("CheckBoxCheckAreaPadding");
+				}
+
 				public static class Background
 				{
 					[ResourceKeyDefinition(typeof(Brush), "CheckBoxBackgroundUnchecked")]
@@ -133,96 +145,187 @@ namespace Uno.Themes.Markup
 					public static ThemeResourceKey<Brush> IndeterminateDisabled => new("CheckBoxBorderBrushIndeterminateDisabled");
 				}
 
-				public static class Glyph
+				public static partial class CheckBackgroundFill
 				{
-					[ResourceKeyDefinition(typeof(string), "CheckBoxHyphenGlyphPathData")]
-					public static ThemeResourceKey<string> HyphenPathData => new("CheckBoxHyphenGlyphPathData");
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFill")]
+					public static ThemeResourceKey<Brush> Default => new("CheckBoxCheckBackgroundFill");
 
-					[ResourceKeyDefinition(typeof(string), "CheckBoxCheckGlyphPathData")]
-					public static ThemeResourceKey<string> CheckPathData => new("CheckBoxCheckGlyphPathData");
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillUnchecked")]
+					public static ThemeResourceKey<Brush> Unchecked => new("CheckBoxCheckBackgroundFillUnchecked");
 
-					public static class Foreground
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillUncheckedPointerOver")]
+					public static ThemeResourceKey<Brush> UncheckedPointerOver => new("CheckBoxCheckBackgroundFillUncheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillUncheckedPressed")]
+					public static ThemeResourceKey<Brush> UncheckedPressed => new("CheckBoxCheckBackgroundFillUncheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillUncheckedDisabled")]
+					public static ThemeResourceKey<Brush> UncheckedDisabled => new("CheckBoxCheckBackgroundFillUncheckedDisabled");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillChecked")]
+					public static ThemeResourceKey<Brush> Checked => new("CheckBoxCheckBackgroundFillChecked");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillCheckedPointerOver")]
+					public static ThemeResourceKey<Brush> CheckedPointerOver => new("CheckBoxCheckBackgroundFillCheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillCheckedPressed")]
+					public static ThemeResourceKey<Brush> CheckedPressed => new("CheckBoxCheckBackgroundFillCheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillCheckedDisabled")]
+					public static ThemeResourceKey<Brush> CheckedDisabled => new("CheckBoxCheckBackgroundFillCheckedDisabled");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillIndeterminate")]
+					public static ThemeResourceKey<Brush> Indeterminate => new("CheckBoxCheckBackgroundFillIndeterminate");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillIndeterminatePointerOver")]
+					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("CheckBoxCheckBackgroundFillIndeterminatePointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillIndeterminatePressed")]
+					public static ThemeResourceKey<Brush> IndeterminatePressed => new("CheckBoxCheckBackgroundFillIndeterminatePressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundFillIndeterminateDisabled")]
+					public static ThemeResourceKey<Brush> IndeterminateDisabled => new("CheckBoxCheckBackgroundFillIndeterminateDisabled");
+				}
+
+				public static partial class CheckBackgroundStroke
+				{
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStroke")]
+					public static ThemeResourceKey<Brush> Default => new("CheckBoxCheckBackgroundStroke");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeUnchecked")]
+					public static ThemeResourceKey<Brush> Unchecked => new("CheckBoxCheckBackgroundStrokeUnchecked");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeUncheckedPointerOver")]
+					public static ThemeResourceKey<Brush> UncheckedPointerOver => new("CheckBoxCheckBackgroundStrokeUncheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeUncheckedPressed")]
+					public static ThemeResourceKey<Brush> UncheckedPressed => new("CheckBoxCheckBackgroundStrokeUncheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeUncheckedDisabled")]
+					public static ThemeResourceKey<Brush> UncheckedDisabled => new("CheckBoxCheckBackgroundStrokeUncheckedDisabled");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeChecked")]
+					public static ThemeResourceKey<Brush> Checked => new("CheckBoxCheckBackgroundStrokeChecked");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeCheckedPointerOver")]
+					public static ThemeResourceKey<Brush> CheckedPointerOver => new("CheckBoxCheckBackgroundStrokeCheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeCheckedPressed")]
+					public static ThemeResourceKey<Brush> CheckedPressed => new("CheckBoxCheckBackgroundStrokeCheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeCheckedDisabled")]
+					public static ThemeResourceKey<Brush> CheckedDisabled => new("CheckBoxCheckBackgroundStrokeCheckedDisabled");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeIndeterminate")]
+					public static ThemeResourceKey<Brush> Indeterminate => new("CheckBoxCheckBackgroundStrokeIndeterminate");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeIndeterminatePointerOver")]
+					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("CheckBoxCheckBackgroundStrokeIndeterminatePointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeIndeterminatePressed")]
+					public static ThemeResourceKey<Brush> IndeterminatePressed => new("CheckBoxCheckBackgroundStrokeIndeterminatePressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxCheckBackgroundStrokeIndeterminateDisabled")]
+					public static ThemeResourceKey<Brush> IndeterminateDisabled => new("CheckBoxCheckBackgroundStrokeIndeterminateDisabled");
+				}
+
+				public static partial class GlyphForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForeground")]
+					public static ThemeResourceKey<Brush> Default => new("CheckBoxGlyphForeground");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminate")]
+					public static ThemeResourceKey<Brush> Indeterminate => new("CheckBoxGlyphForegroundIndeterminate");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminatePointerOver")]
+					public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("CheckBoxGlyphForegroundIndeterminatePointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminatePressed")]
+					public static ThemeResourceKey<Brush> IndeterminatePressed => new("CheckBoxGlyphForegroundIndeterminatePressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminateDisabled")]
+					public static ThemeResourceKey<Brush> IndeterminateDisabled => new("CheckBoxGlyphForegroundIndeterminateDisabled");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUnchecked")]
+					public static ThemeResourceKey<Brush> Unchecked => new("CheckBoxGlyphForegroundUnchecked");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUncheckedPointerOver")]
+					public static ThemeResourceKey<Brush> UncheckedPointerOver => new("CheckBoxGlyphForegroundUncheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUncheckedPressed")]
+					public static ThemeResourceKey<Brush> UncheckedPressed => new("CheckBoxGlyphForegroundUncheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUncheckedDisabled")]
+					public static ThemeResourceKey<Brush> UncheckedDisabled => new("CheckBoxGlyphForegroundUncheckedDisabled");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundChecked")]
+					public static ThemeResourceKey<Brush> Checked => new("CheckBoxGlyphForegroundChecked");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundCheckedPointerOver")]
+					public static ThemeResourceKey<Brush> CheckedPointerOver => new("CheckBoxGlyphForegroundCheckedPointerOver");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundCheckedPressed")]
+					public static ThemeResourceKey<Brush> CheckedPressed => new("CheckBoxGlyphForegroundCheckedPressed");
+
+					[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundCheckedDisabled")]
+					public static ThemeResourceKey<Brush> CheckedDisabled => new("CheckBoxGlyphForegroundCheckedDisabled");
+				}
+
+				public static partial class StateCircle
+				{
+					public static partial class Opacity
 					{
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUnchecked")]
-						public static ThemeResourceKey<Brush> Unchecked => new("CheckBoxGlyphForegroundUnchecked");
+						[ResourceKeyDefinition(typeof(double), "CheckBoxStateCircleOpacityPointerOver")]
+						public static ThemeResourceKey<double> PointerOver => new("CheckBoxStateCircleOpacityPointerOver");
 
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUncheckedPointerOver")]
-						public static ThemeResourceKey<Brush> UncheckedPointerOver => new("CheckBoxGlyphForegroundUncheckedPointerOver");
+						[ResourceKeyDefinition(typeof(double), "CheckBoxStateCircleOpacityPressed")]
+						public static ThemeResourceKey<double> Pressed => new("CheckBoxStateCircleOpacityPressed");
 
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUncheckedPressed")]
-						public static ThemeResourceKey<Brush> UncheckedPressed => new("CheckBoxGlyphForegroundUncheckedPressed");
+						[ResourceKeyDefinition(typeof(double), "CheckBoxStateCircleOpacityFocused")]
+						public static ThemeResourceKey<double> Focused => new("CheckBoxStateCircleOpacityFocused");
+					}
 
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundUncheckedDisabled")]
-						public static ThemeResourceKey<Brush> UncheckedDisabled => new("CheckBoxGlyphForegroundUncheckedDisabled");
+					public static partial class Fill
+					{
 
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundChecked")]
-						public static ThemeResourceKey<Brush> Checked => new("CheckBoxGlyphForegroundChecked");
+						[ResourceKeyDefinition(typeof(Brush), "CheckBoxStateCircleFillChecked")]
+						public static ThemeResourceKey<Brush> Checked => new("CheckBoxStateCircleFillChecked");
 
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundCheckedPointerOver")]
-						public static ThemeResourceKey<Brush> CheckedPointerOver => new("CheckBoxGlyphForegroundCheckedPointerOver");
-
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundCheckedPressed")]
-						public static ThemeResourceKey<Brush> CheckedPressed => new("CheckBoxGlyphForegroundCheckedPressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundCheckedDisabled")]
-						public static ThemeResourceKey<Brush> CheckedDisabled => new("CheckBoxGlyphForegroundCheckedDisabled");
-
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminate")]
-						public static ThemeResourceKey<Brush> Indeterminate => new("CheckBoxGlyphForegroundIndeterminate");
-
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminatePointerOver")]
-						public static ThemeResourceKey<Brush> IndeterminatePointerOver => new("CheckBoxGlyphForegroundIndeterminatePointerOver");
-
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminatePressed")]
-						public static ThemeResourceKey<Brush> IndeterminatePressed => new("CheckBoxGlyphForegroundIndeterminatePressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "CheckBoxGlyphForegroundIndeterminateDisabled")]
-						public static ThemeResourceKey<Brush> IndeterminateDisabled => new("CheckBoxGlyphForegroundIndeterminateDisabled");
+						[ResourceKeyDefinition(typeof(Brush), "CheckBoxStateCircleFillUnchecked")]
+						public static ThemeResourceKey<Brush> Unchecked => new("CheckBoxStateCircleFillUnchecked");
 					}
 				}
 
-				public static class Typography
+				public static partial class Typography
 				{
+					[ResourceKeyDefinition(typeof(int), "CheckBoxCharacterSpacing")]
+					public static ThemeResourceKey<int> CharacterSpacing => new("CheckBoxCharacterSpacing");
+
 					[ResourceKeyDefinition(typeof(FontFamily), "CheckBoxFontFamily")]
 					public static ThemeResourceKey<FontFamily> FontFamily => new("CheckBoxFontFamily");
-
-					[ResourceKeyDefinition(typeof(FontWeights), "CheckBoxFontWeight")]
-					public static ThemeResourceKey<FontWeights> FontWeight => new("CheckBoxFontWeight");
 
 					[ResourceKeyDefinition(typeof(double), "CheckBoxFontSize")]
 					public static ThemeResourceKey<double> FontSize => new("CheckBoxFontSize");
 
-					[ResourceKeyDefinition(typeof(double), "CheckBoxCharacterSpacing")]
-					public static ThemeResourceKey<double> CharacterSpacing => new("CheckBoxCharacterSpacing");
+					[ResourceKeyDefinition(typeof(string), "CheckBoxFontWeight")]
+					public static ThemeResourceKey<string> FontWeight => new("CheckBoxFontWeight");
 				}
 
-				public static class CheckArea
-				{
-					[ResourceKeyDefinition(typeof(double), "CheckBoxCheckAreaSize")]
-					public static ThemeResourceKey<double> Size => new("CheckBoxCheckAreaSize");
+				[ResourceKeyDefinition(typeof(string), "CheckBoxCheckGlyphPathData")]
+				public static ThemeResourceKey<string> CheckGlyphPathData => new("CheckBoxCheckGlyphPathData");
 
-					[ResourceKeyDefinition(typeof(GridLength), "CheckBoxCheckAreaLength")]
-					public static ThemeResourceKey<GridLength> Length => new("CheckBoxCheckAreaLength");
+				[ResourceKeyDefinition(typeof(double), "CheckBoxFocusAreaSize")]
+				public static ThemeResourceKey<double> FocusAreaSize => new("CheckBoxFocusAreaSize");
 
-					[ResourceKeyDefinition(typeof(MUXCornerRadius), "CheckBoxCheckAreaCornerRadius")]
-					public static ThemeResourceKey<MUXCornerRadius> CornerRadius => new("CheckBoxCheckAreaCornerRadius");
-
-					[ResourceKeyDefinition(typeof(Thickness), "CheckBoxCheckAreaBorderThickness")]
-					public static ThemeResourceKey<Thickness> BorderThickness => new("CheckBoxCheckAreaBorderThickness");
-
-					[ResourceKeyDefinition(typeof(Thickness), "CheckBoxCheckAreaPadding")]
-					public static ThemeResourceKey<Thickness> Padding => new("CheckBoxCheckAreaPadding");
-				}
+				[ResourceKeyDefinition(typeof(string), "CheckBoxHyphenGlyphPathData")]
+				public static ThemeResourceKey<string> HyphenGlyphPathData => new("CheckBoxHyphenGlyphPathData");
 			}
+		}
 
-			public static class Styles
-			{
-				[ResourceKeyDefinition(typeof(Style), "CheckBoxStyle", TargetType = typeof(CheckBox))]
-				public static StaticResourceKey<Style> Default => new("CheckBoxStyle");
-
-				[ResourceKeyDefinition(typeof(Style), "SecondaryCheckBoxStyle", TargetType = typeof(CheckBox))]
-				public static StaticResourceKey<Style> Secondary => new("SecondaryCheckBoxStyle");
-			}
+		public static partial class Styles
+		{
+			[ResourceKeyDefinition(typeof(Style), "CheckBoxStyle", TargetType = typeof(global::Microsoft.UI.Xaml.Controls.CheckBox))]
+			public static StaticResourceKey<Style> Default => new("CheckBoxStyle");
 		}
 	}
 }
