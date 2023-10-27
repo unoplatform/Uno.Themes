@@ -9,11 +9,11 @@ public static partial class Theme
 {
 	public static partial class NavigationViewItem
 	{
-		public static class Resources
+		public static partial class Resources
 		{
 			public static partial class Default
 			{
-				public static class Background
+				public static partial class Background
 				{
 					[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBackground")]
 					public static ThemeResourceKey<Brush> Default => new("NavigationViewItemBackground");
@@ -40,7 +40,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> SelectedDisabled => new("NavigationViewItemBackgroundSelectedDisabled");
 				}
 
-				public static class Foreground
+				public static partial class Foreground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemForeground")]
 					public static ThemeResourceKey<Brush> Default => new("NavigationViewItemForeground");
@@ -67,7 +67,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> SelectedDisabled => new("NavigationViewItemForegroundSelectedDisabled");
 				}
 
-				public static class BorderBrush
+				public static partial class BorderBrush
 				{
 					[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemBorderBrush")]
 					public static ThemeResourceKey<Brush> Default => new("NavigationViewItemBorderBrush");
@@ -94,28 +94,28 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> SelectedDisabled => new("NavigationViewItemBorderBrushSelectedDisabled");
 				}
 
-				public static class SeparatorForeground
+				public static partial class SeparatorForeground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemSeparatorForeground")]
 					public static ThemeResourceKey<Brush> Default => new("NavigationViewItemSeparatorForeground");
 				}
 
-				public static class HeaderForeground
+				public static partial class HeaderForeground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemHeaderForeground")]
 					public static ThemeResourceKey<Brush> Default => new("NavigationViewItemHeaderForeground");
 				}
 
-				public static class RippleFeedback
+				public static partial class RippleFeedback
 				{
 					[ResourceKeyDefinition(typeof(Brush), "NavigationViewItemRippleFeedback")]
 					public static ThemeResourceKey<Brush> Default => new("NavigationViewItemRippleFeedback");
 				}
 			}
 
-			public static class Top
+			public static partial class Top
 			{
-				public static class Foreground
+				public static partial class Foreground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemForeground")]
 					public static ThemeResourceKey<Brush> Default => new("TopNavigationViewItemForeground");
@@ -142,7 +142,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> SelectedDisabled => new("TopNavigationViewItemForegroundSelectedDisabled");
 				}
 
-				public static class Background
+				public static partial class Background
 				{
 					[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemBackground")]
 					public static ThemeResourceKey<Brush> Default => new("TopNavigationViewItemBackground");
@@ -166,7 +166,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> SelectedPressed => new("TopNavigationViewItemBackgroundSelectedPressed");
 				}
 
-				public static class SeparatorForeground
+				public static partial class SeparatorForeground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "TopNavigationViewItemSeparatorForeground")]
 					public static ThemeResourceKey<Brush> Default => new("TopNavigationViewItemSeparatorForeground");

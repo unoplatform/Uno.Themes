@@ -9,19 +9,19 @@ public static partial class Theme
 {
 	public static partial class NavigationView
 	{
-		public static class Resources
+		public static partial class Resources
 			{
-				public static class Default
+				public static partial class Default
 				{
-					public static class Background
+					public static partial class Background
 					{
 						[ResourceKeyDefinition(typeof(Brush), "NavigationViewBackground")]
 						public static ThemeResourceKey<Brush> Default => new("NavigationViewBackground");
 					}
 
-					public static class Pane
+					public static partial class Pane
 					{
-						public static class Background
+						public static partial class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewDefaultPaneBackground")]
 							public static ThemeResourceKey<Brush> Default => new("NavigationViewDefaultPaneBackground");
@@ -33,16 +33,16 @@ public static partial class Theme
 							public static ThemeResourceKey<Brush> Top => new("NavigationViewTopPaneBackground");
 						}
 
-						public static class BorderBrush
+						public static partial class BorderBrush
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewDefaultPaneBorderBrush")]
 							public static ThemeResourceKey<Brush> Default => new("NavigationViewDefaultPaneBorderBrush");
 						}
 					}
 
-					public static class Button
+					public static partial class Button
 					{
-						public static class Foreground
+						public static partial class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonForeground")]
 							public static ThemeResourceKey<Brush> Default => new("NavigationViewButtonForeground");
@@ -57,7 +57,7 @@ public static partial class Theme
 							public static ThemeResourceKey<Brush> Disabled => new("NavigationViewButtonForegroundDisabled");
 						}
 
-						public static class Background
+						public static partial class Background
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonBackground")]
 							public static ThemeResourceKey<Brush> Default => new("NavigationViewButtonBackground");
@@ -72,16 +72,16 @@ public static partial class Theme
 							public static ThemeResourceKey<Brush> Disabled => new("NavigationViewButtonBackgroundDisabled");
 						}
 
-						public static class RippleFeedback
+						public static partial class RippleFeedback
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewButtonRippleFeedback")]
 							public static ThemeResourceKey<Brush> Default => new("NavigationViewButtonRippleFeedback");
 						}
 					}
 
-					public static class SelectionIndicator
+					public static partial class SelectionIndicator
 					{
-						public static class Foreground
+						public static partial class Foreground
 						{
 							[ResourceKeyDefinition(typeof(Brush), "NavigationViewSelectionIndicatorForeground")]
 							public static ThemeResourceKey<Brush> Default => new("NavigationViewSelectionIndicatorForeground");
