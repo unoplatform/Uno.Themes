@@ -84,11 +84,9 @@ public static partial class Theme
 
 				public static partial class LeadingIconForeground
 				{
-					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForeground")]
-					public static ThemeResourceKey<Brush> Default => new("TextBoxLeadingIconForeground");
+					public static ThemeResourceKey<Brush> Default => Shared.LeadingIconForeground.Default;
 
-					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForegroundDisabled")]
-					public static ThemeResourceKey<Brush> Disabled => new("TextBoxLeadingIconForegroundDisabled");
+					public static ThemeResourceKey<Brush> Disabled => Shared.LeadingIconForeground.Disabled;
 				}
 
 				public static partial class PlaceholderForeground
@@ -159,11 +157,9 @@ public static partial class Theme
 
 				public static partial class LeadingIconForeground
 				{
-					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForeground")]
-					public static ThemeResourceKey<Brush> Default => new("TextBoxLeadingIconForeground");
+					public static ThemeResourceKey<Brush> Default => Shared.LeadingIconForeground.Default;
 
-					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForegroundDisabled")]
-					public static ThemeResourceKey<Brush> Disabled => new("TextBoxLeadingIconForegroundDisabled");
+					public static ThemeResourceKey<Brush> Disabled => Shared.LeadingIconForeground.Disabled;
 				}
 
 				public static partial class PlaceholderForeground
@@ -198,6 +194,18 @@ public static partial class Theme
 
 				[ResourceKeyDefinition(typeof(double), "OutlinedTextBoxForegroundOpacityDisabled")]
 				public static ThemeResourceKey<double> ForegroundOpacityDisabled => new("OutlinedTextBoxForegroundOpacityDisabled");
+			}
+
+			public static partial class Shared
+			{
+				public static partial class LeadingIconForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForeground")]
+					public static ThemeResourceKey<Brush> Default => new("TextBoxLeadingIconForeground");
+
+					[ResourceKeyDefinition(typeof(Brush), "TextBoxLeadingIconForegroundDisabled")]
+					public static ThemeResourceKey<Brush> Disabled => new("TextBoxLeadingIconForegroundDisabled");
+				}
 			}
 		}
 
