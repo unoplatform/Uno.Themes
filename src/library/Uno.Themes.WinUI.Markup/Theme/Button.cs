@@ -157,8 +157,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> PointerFocused => new("FilledButtonStateLayerBackgroundPointerFocused");
 				}
 
-				[ResourceKeyDefinition(typeof(double), "ButtonElevation")]
-				public static ThemeResourceKey<double> Elevation => new("ButtonElevation");
+				public static ThemeResourceKey<double> Elevation => Shared.Elevation;
 
 				public static partial class Foreground
 				{
@@ -166,8 +165,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Default => new("FilledButtonForeground");
 				}
 
-				[ResourceKeyDefinition(typeof(Thickness), "ButtonMargin")]
-				public static ThemeResourceKey<Thickness> Margin => new("ButtonMargin");
+				public static ThemeResourceKey<Thickness> Margin => Shared.Margin;
 			}
 
 			public static partial class FilledTonal
@@ -229,8 +227,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> PointerFocused => new("FilledTonalButtonStateLayerBackgroundPointerFocused");
 				}
 
-				[ResourceKeyDefinition(typeof(double), "ButtonElevation")]
-				public static ThemeResourceKey<double> Elevation => new("ButtonElevation");
+				public static ThemeResourceKey<double> Elevation => Shared.Elevation;
 
 				public static partial class Foreground
 				{
@@ -238,8 +235,7 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Default => new("FilledTonalButtonForeground");
 				}
 
-				[ResourceKeyDefinition(typeof(Thickness), "ButtonMargin")]
-				public static ThemeResourceKey<Thickness> Margin => new("ButtonMargin");
+				public static ThemeResourceKey<Thickness> Margin => Shared.Margin;
 			}
 
 			public static partial class Icon
@@ -416,26 +412,35 @@ public static partial class Theme
 				public static ThemeResourceKey<Thickness> Padding => new("TextButtonPadding");
 			}
 
-			[ResourceKeyDefinition(typeof(Thickness), "ButtonBorderThickness")]
-			public static ThemeResourceKey<Thickness> BorderThickness => new("ButtonBorderThickness");
+			public static partial class Shared
+			{
+				[ResourceKeyDefinition(typeof(double), "ButtonElevation")]
+				public static ThemeResourceKey<double> Elevation => new("ButtonElevation");
 
-			[ResourceKeyDefinition(typeof(CornerRadius), "ButtonCornerRadius")]
-			public static ThemeResourceKey<CornerRadius> CornerRadius => new("ButtonCornerRadius");
+				[ResourceKeyDefinition(typeof(Thickness), "ButtonMargin")]
+				public static ThemeResourceKey<Thickness> Margin => new("ButtonMargin");
 
-			[ResourceKeyDefinition(typeof(string), "ButtonHorizontalContentAlignment")]
-			public static StaticResourceKey<string> HorizontalContentAlignment => new("ButtonHorizontalContentAlignment");
+				[ResourceKeyDefinition(typeof(Thickness), "ButtonBorderThickness")]
+				public static ThemeResourceKey<Thickness> BorderThickness => new("ButtonBorderThickness");
 
-			[ResourceKeyDefinition(typeof(double), "ButtonMinHeight")]
-			public static ThemeResourceKey<double> MinHeight => new("ButtonMinHeight");
+				[ResourceKeyDefinition(typeof(CornerRadius), "ButtonCornerRadius")]
+				public static ThemeResourceKey<CornerRadius> CornerRadius => new("ButtonCornerRadius");
 
-			[ResourceKeyDefinition(typeof(double), "ButtonMinWidth")]
-			public static ThemeResourceKey<double> MinWidth => new("ButtonMinWidth");
+				[ResourceKeyDefinition(typeof(string), "ButtonHorizontalContentAlignment")]
+				public static StaticResourceKey<string> HorizontalContentAlignment => new("ButtonHorizontalContentAlignment");
 
-			[ResourceKeyDefinition(typeof(Thickness), "ButtonPadding")]
-			public static ThemeResourceKey<Thickness> Padding => new("ButtonPadding");
+				[ResourceKeyDefinition(typeof(double), "ButtonMinHeight")]
+				public static ThemeResourceKey<double> MinHeight => new("ButtonMinHeight");
 
-			[ResourceKeyDefinition(typeof(string), "ButtonVerticalContentAlignment")]
-			public static StaticResourceKey<string> VerticalContentAlignment => new("ButtonVerticalContentAlignment");
+				[ResourceKeyDefinition(typeof(double), "ButtonMinWidth")]
+				public static ThemeResourceKey<double> MinWidth => new("ButtonMinWidth");
+
+				[ResourceKeyDefinition(typeof(Thickness), "ButtonPadding")]
+				public static ThemeResourceKey<Thickness> Padding => new("ButtonPadding");
+
+				[ResourceKeyDefinition(typeof(string), "ButtonVerticalContentAlignment")]
+				public static StaticResourceKey<string> VerticalContentAlignment => new("ButtonVerticalContentAlignment");
+			}
 		}
 
 		public static partial class Styles
