@@ -64,8 +64,7 @@ public static partial class Theme
 
 				public static partial class Typography
 				{
-					[ResourceKeyDefinition(typeof(FontFamily), "RatingControlFontFamily")]
-					public static ThemeResourceKey<FontFamily> FontFamily => new("RatingControlFontFamily");
+					public static ThemeResourceKey<FontFamily> FontFamily => Shared.FontFamily;
 				}
 
 				[ResourceKeyDefinition(typeof(double), "RatingControlHeight")]
@@ -125,9 +124,14 @@ public static partial class Theme
 
 				public static partial class Typography
 				{
-					[ResourceKeyDefinition(typeof(FontFamily), "RatingControlFontFamily")]
-					public static ThemeResourceKey<FontFamily> FontFamily => new("RatingControlFontFamily");
+					public static ThemeResourceKey<FontFamily> FontFamily => Shared.FontFamily;
 				}
+			}
+
+			public static partial class Shared
+			{
+				[ResourceKeyDefinition(typeof(FontFamily), "RatingControlFontFamily")]
+				public static ThemeResourceKey<FontFamily> FontFamily => new("RatingControlFontFamily");
 			}
 		}
 

@@ -99,11 +99,9 @@ public static partial class Theme
 
 				public static partial class LeadingIconForeground
 				{
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]
-					public static ThemeResourceKey<Brush> Default => new("PasswordBoxLeadingIconForeground");
+					public static ThemeResourceKey<Brush> Default => Shared.LeadingIconForeground.Default;
 
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForegroundDisabled")]
-					public static ThemeResourceKey<Brush> Disabled => new("PasswordBoxLeadingIconForegroundDisabled");
+					public static ThemeResourceKey<Brush> Disabled => Shared.LeadingIconForeground.Disabled;
 				}
 
 				[ResourceKeyDefinition(typeof(CornerRadius), "FilledPasswordBoxCornerRadius")]
@@ -228,11 +226,9 @@ public static partial class Theme
 
 				public static partial class LeadingIconForeground
 				{
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]
-					public static ThemeResourceKey<Brush> Default => new("PasswordBoxLeadingIconForeground");
+					public static ThemeResourceKey<Brush> Default => Shared.LeadingIconForeground.Default;
 
-					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForegroundDisabled")]
-					public static ThemeResourceKey<Brush> Disabled => new("PasswordBoxLeadingIconForegroundDisabled");
+					public static ThemeResourceKey<Brush> Disabled => Shared.LeadingIconForeground.Disabled;
 				}
 
 				[ResourceKeyDefinition(typeof(CornerRadius), "OutlinedPasswordBoxCornerRadius")]
@@ -248,6 +244,17 @@ public static partial class Theme
 				public static ThemeResourceKey<Thickness> Padding => new("OutlinedPasswordBoxPadding");
 			}
 
+			public static partial class Shared
+			{
+				public static partial class LeadingIconForeground
+				{
+					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForeground")]
+					public static ThemeResourceKey<Brush> Default => new("PasswordBoxLeadingIconForeground");
+
+					[ResourceKeyDefinition(typeof(Brush), "PasswordBoxLeadingIconForegroundDisabled")]
+					public static ThemeResourceKey<Brush> Disabled => new("PasswordBoxLeadingIconForegroundDisabled");
+				}
+			}
 		}
 
 		public static partial class Styles

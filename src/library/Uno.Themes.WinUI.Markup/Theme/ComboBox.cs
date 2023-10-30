@@ -92,9 +92,6 @@ public static partial class Theme
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackground")]
 						public static ThemeResourceKey<Brush> Default => new("ComboBoxDropDownBackground");
 
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxBackgroundDisabled")]
-						public static ThemeResourceKey<Brush> Disabled => new("ComboBoxBackgroundDisabled");
-
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundPointerOver")]
 						public static ThemeResourceKey<Brush> PointerOver => new("ComboBoxDropDownBackgroundPointerOver");
 
@@ -106,9 +103,6 @@ public static partial class Theme
 
 						[ResourceKeyDefinition(typeof(Brush), "ComboBoxDropDownBackgroundFocusedPressed")]
 						public static ThemeResourceKey<Brush> FocusedPressed => new("ComboBoxDropDownBackgroundFocusedPressed");
-
-						[ResourceKeyDefinition(typeof(Brush), "ComboBoxBackgroundUnfocused")]
-						public static ThemeResourceKey<Brush> Unfocused => new("ComboBoxBackgroundUnfocused");
 					}
 
 					public static partial class BorderBrush
