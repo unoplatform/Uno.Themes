@@ -51,9 +51,9 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="5.0.0-dev.2572" />
+				<PackageReference Include="Uno.WinUI" Version="5.0.19" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.0-dev.2572" Condition="!$(_IsWinUI)" />
+				<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.19" Condition="!$(_IsWinUI)" />
 
 				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" Condition="$(_IsWinUI)" />
 				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)" />
@@ -86,14 +86,14 @@
 			</PropertyGroup>
 
 			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="5.0.0-dev.1634" />
+				<PackageReference Include="Uno.UI" Version="5.0.19" />
 			</ItemGroup>
 			<ItemGroup Condition="$(_IsUWP)">
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
 			<ItemGroup Condition="!$(_IsUWP)">
-				<PackageReference Include="Uno.UI.Lottie" Version="5.0.0-dev.1634" />
+				<PackageReference Include="Uno.UI.Lottie" Version="5.0.19" />
 			</ItemGroup>
 
 			<ItemGroup Condition="$(_IsUWP)">
