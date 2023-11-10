@@ -25,24 +25,116 @@
 					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
 						<StackPanel Spacing="8">
 
-							<Button AutomationProperties.AutomationId="MaterialContainedButton"
-									Content="CONTAINED"
-									Style="{StaticResource MaterialContainedButtonStyle}" />
+							<RadioButton GroupName="RadioButton_Material_A"
+										 Content="Default Radio Button Style - Unchecked"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-							<Button AutomationProperties.AutomationId="MaterialOutlinedButton"
-									Content="OUTLINED"
-									Style="{StaticResource MaterialOutlinedButtonStyle}" />
+							<RadioButton GroupName="RadioButton_Material_A"
+										 IsChecked="True"
+										 Content="Default Radio Button Style - Checked"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-							<Button AutomationProperties.AutomationId="MaterialTextButton"
-									Content="TEXT"
-									Style="{StaticResource MaterialTextButtonStyle}" />
+							<RadioButton GroupName="RadioButton_Material_A"
+										 Content="Default Radio Button Style - Disabled"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-							<Button AutomationProperties.AutomationId="MaterialButtonIcon"
-									Style="{StaticResource MaterialButtonIconStyle}">
-								<Button.Content>
-									<SymbolIcon Symbol="Favorite" />
-								</Button.Content>
-							</Button>
+							<RadioButton GroupName="RadioButton_Material_B"
+										 Content="Overridden Radio Button Style - Unchecked"
+										 Style="{StaticResource MaterialRadioButtonStyle}">
+								<RadioButton.Resources>
+									<SolidColorBrush x:Key="RadioButtonForeground"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseFill"
+													 Color="LightGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFill"
+													 Color="DarkGreen" />
+
+									<SolidColorBrush x:Key="RadioButtonForegroundPointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseStrokePointerOver"
+													 Color="LightPink" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseFillPointerOver"
+													 Color="LightPink" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPointerOver"
+														 Color="DarkRed" />
+
+										<SolidColorBrush x:Key="RadioButtonForegroundPressed"
+														 Color="DarkBlue" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseStrokePressed"
+														 Color="LightSteelBlue" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePressed"
+														 Color="DarkBlue" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseFillPressed"
+														 Color="LightSteelBlue" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPressed"
+														 Color="DarkBlue" />
+								</RadioButton.Resources>
+							</RadioButton>
+
+							<RadioButton GroupName="RadioButton_Material_B"
+										 IsChecked="True"
+										 Content="Overridden Radio Button Style - Checked"
+										 Style="{StaticResource MaterialRadioButtonStyle}">
+								<RadioButton.Resources>
+									<SolidColorBrush x:Key="RadioButtonForeground"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseFill"
+													 Color="LightGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFill"
+													 Color="DarkGreen" />
+
+									<SolidColorBrush x:Key="RadioButtonForegroundPointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseStrokePointerOver"
+													 Color="LightPink" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseFillPointerOver"
+													 Color="LightPink" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPointerOver"
+													 Color="DarkRed" />
+
+									<SolidColorBrush x:Key="RadioButtonForegroundPressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseStrokePressed"
+													 Color="LightSteelBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseFillPressed"
+													 Color="LightSteelBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPressed"
+													 Color="DarkBlue" />
+								</RadioButton.Resources>
+							</RadioButton>
+
+							<RadioButton GroupName="RadioButton_Material_B"
+										 Content="Overridden Radio Button Style - Disabled"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}">
+								<RadioButton.Resources>
+									<SolidColorBrush x:Key="RadioButtonForegroundDisabled"
+													 Color="LightSlateGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseStrokeDisabled"
+													 Color="DarkGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled"
+													 Color="LightSlateGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseFillDisabled"
+													 Color="DarkGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillDisabled"
+													 Color="LightSlateGray" />
+								</RadioButton.Resources>
+							</RadioButton>
 						</StackPanel>
 					</sample:OverviewSampleView>
 
@@ -131,25 +223,152 @@
 					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
 						<StackPanel Spacing="8">
 
-							<Button AutomationProperties.AutomationId="M3MaterialElevatedButton"
-									Content="Elevated Button"
-									Style="{StaticResource MaterialElevatedButtonStyle}" />
 
-							<Button AutomationProperties.AutomationId="M3MaterialFilledButton"
-									Content="Filled Button"
-									Style="{StaticResource MaterialFilledButtonStyle}" />
+								<RadioButton GroupName="RadioButton_Material_A"
+											 Content="Default Radio Button Style - Unchecked"
+											 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-							<Button AutomationProperties.AutomationId="M3MaterialFilledTonalButton"
-									Content="Tonal Button"
-									Style="{StaticResource MaterialFilledTonalButtonStyle}" />
+								<RadioButton GroupName="RadioButton_Material_A"
+											 IsChecked="True"
+											 Content="Default Radio Button Style - Checked"
+											 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-							<Button AutomationProperties.AutomationId="M3MaterialOutlinedButton"
-									Content="Outlined Button"
-									Style="{StaticResource MaterialOutlinedButtonStyle}" />
+								<RadioButton GroupName="RadioButton_Material_A"
+											 Content="Default Radio Button Style - Disabled"
+											 IsEnabled="False"
+											 Style="{StaticResource MaterialRadioButtonStyle}" />
 
-							<Button AutomationProperties.AutomationId="M3MaterialTextButton"
-									Content="Text Button"
-									Style="{StaticResource MaterialTextButtonStyle}" />
+								<RadioButton GroupName="RadioButton_Material_B"
+											 Content="Overridden Radio Button Style - Unchecked"
+											 Style="{StaticResource MaterialRadioButtonStyle}">
+								<RadioButton.Resources>
+									<SolidColorBrush x:Key="RadioButtonForeground"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFill"
+													 Color="LightGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFill"
+													 Color="LightGreen" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFill"
+													 Color="DarkGreen" />
+
+									<SolidColorBrush x:Key="RadioButtonForegroundPointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStrokePointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFillPointerOver"
+													 Color="LightPink" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPointerOver"
+													 Color="LightPink" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFillPointerOver"
+													 Color="DarkRed" />
+
+									<SolidColorBrush x:Key="RadioButtonForegroundPressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStrokePressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFillPressed"
+													 Color="LightSteelBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPressed"
+													 Color="LightSteelBlue" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFillPressed"
+													 Color="DarkBlue" />
+								</RadioButton.Resources>
+							</RadioButton>
+
+								<RadioButton GroupName="RadioButton_Material_B"
+											 IsChecked="True"
+											 Content="Overridden Radio Button Style - Checked"
+											 Style="{StaticResource MaterialRadioButtonStyle}">
+								<RadioButton.Resources>
+									<SolidColorBrush x:Key="RadioButtonForeground"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke"
+													 Color="DarkGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFill"
+													 Color="LightGreen" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFill"
+													 Color="LightGreen" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFill"
+													 Color="DarkGreen" />
+
+									<SolidColorBrush x:Key="RadioButtonForegroundPointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStrokePointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver"
+													 Color="DarkRed" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFillPointerOver"
+													 Color="LightPink" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPointerOver"
+													 Color="LightPink" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFillPointerOver"
+													 Color="DarkRed" />
+
+									<SolidColorBrush x:Key="RadioButtonForegroundPressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStrokePressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePressed"
+													 Color="DarkBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFillPressed"
+													 Color="LightSteelBlue" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPressed"
+													 Color="LightSteelBlue" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFillPressed"
+													 Color="DarkBlue" />
+								</RadioButton.Resources>
+							</RadioButton>
+
+								<RadioButton GroupName="RadioButton_Material_B"
+											 Content="Overridden Radio Button Style - Disabled"
+											 IsEnabled="False"
+											 Style="{StaticResource MaterialRadioButtonStyle}">
+									<RadioButton.Resources>
+										<SolidColorBrush x:Key="RadioButtonForegroundDisabled"
+														 Color="LightSlateGray" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStrokeDisabled"
+													 Color="LightSlateGray" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled"
+														 Color="LightSlateGray" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFillDisabled"
+														 Color="DarkGray" />
+										<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillDisabled"
+													 Color="DarkGray" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFillPressed"
+													 Color="LightSlateGray" />
+								</RadioButton.Resources>
+								</RadioButton>
+
+							<RadioButton GroupName="RadioButton_Material_B"
+										 Content="Overridden Radio Button Style - Disabled - Checked"
+										 IsChecked="True"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}">
+								<RadioButton.Resources>
+									<SolidColorBrush x:Key="RadioButtonForegroundDisabled"
+													 Color="LightSlateGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedStrokeDisabled"
+													 Color="LightSlateGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled"
+													 Color="LightSlateGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseUncheckedFillDisabled"
+													 Color="DarkGray" />
+									<SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillDisabled"
+													 Color="DarkGray" />
+									<SolidColorBrush x:Key="RadioButtonEllipseCheckedFillPressed"
+													 Color="LightSlateGray" />
+								</RadioButton.Resources>
+							</RadioButton>
 						</StackPanel>
 					</sample:OverviewSampleView>
 
@@ -226,7 +445,7 @@
 										 Style="{StaticResource MaterialRadioButtonStyle}" />
 						</StackPanel>
 					</sample:OverviewSampleView>
-					
+
 					<!--  ToggleSwitch  -->
 					<sample:OverviewSampleView SamplePageType="samples:ToggleSwitchSamplePage">
 						<StackPanel Spacing="8">
@@ -234,7 +453,7 @@
 							<TextBlock Text="ToggleSwitch"
 									   Foreground="{ThemeResource OnSurfaceVariantBrush}"
 									   Style="{StaticResource BodySmall}" />
-							
+
 							<ToggleSwitch IsOn="True"
 										  Style="{StaticResource MaterialToggleSwitchStyle}" />
 
