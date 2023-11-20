@@ -23,7 +23,7 @@
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
-			
+
 			<!--#region Leading Icon Brushes-->
 			<StaticResource x:Key="TextBoxLeadingIconForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
@@ -122,7 +122,7 @@
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
-			
+
 			<!--#region Leading Icon Brushes-->
 			<StaticResource x:Key="TextBoxLeadingIconForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TextBoxLeadingIconForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
@@ -263,7 +263,7 @@
 	<Style x:Key="MaterialLeadingIconStyle"
 		   BasedOn="{StaticResource IconButtonStyle}"
 		   TargetType="Button">
-		
+
 		<Setter Property="Foreground"
 				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
@@ -466,7 +466,6 @@
 								<Button x:Name="LeadingIconButton"
 										Content="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
 										Command="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}}"
-										IsHitTestVisible="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"
 										Visibility="{Binding Path=(um:ControlExtensions.IsLeadingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
 										Style="{ThemeResource MaterialLeadingIconStyle}"
 										HorizontalAlignment="Center"
@@ -530,7 +529,6 @@
 								<Button x:Name="TrailingIconButton"
 										Content="{Binding Path=(um:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
 										Command="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}}"
-										IsHitTestVisible="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"
 										Visibility="{Binding Path=(um:ControlExtensions.IsTrailingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
 										Style="{ThemeResource MaterialTrailingIconStyle}"
 										HorizontalAlignment="Center"
@@ -591,7 +589,7 @@
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.LeadingIcon"
 				Value="{x:Null}" />
-		
+
 		<Setter Property="um:ControlExtensions.TrailingIcon"
 				Value="{x:Null}" />
 
@@ -700,10 +698,9 @@
 									Width="38"
 									VerticalAlignment="Top"
 									Visibility="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-							<Button x:Name="LeadingIconButton"
+								<Button x:Name="LeadingIconButton"
 										Content="{Binding Path=(um:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
 										Command="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}}"
-										IsHitTestVisible="{Binding Path=(um:ControlExtensions.LeadingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"										
 										Visibility="{Binding Path=(um:ControlExtensions.IsLeadingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
 										Style="{ThemeResource MaterialLeadingIconStyle}"
 										HorizontalAlignment="Center"
@@ -766,7 +763,6 @@
 								<Button x:Name="TrailingIconButton"
 										Content="{Binding Path=(um:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
 										Command="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}}"
-										IsHitTestVisible="{Binding Path=(um:ControlExtensions.TrailingCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToFalseConverter}, FallbackValue=False, TargetNullValue=False}"
 										Visibility="{Binding Path=(um:ControlExtensions.IsTrailingIconVisible), RelativeSource={RelativeSource TemplatedParent}}"
 										Style="{ThemeResource MaterialTrailingIconStyle}"
 										HorizontalAlignment="Center"
