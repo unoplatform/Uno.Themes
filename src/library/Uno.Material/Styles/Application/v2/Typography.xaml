@@ -6,156 +6,158 @@
 
 			<!-- COMMON TEXT VARIABLES FOR v2 -->
 
-			<!-- IMPORTANT NOTE :
-			CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
-			For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
-			So in order to specify the letter spacing of 0.5px from the M3  guidelines, we will need to add CharacterSpacing="41.666".
-			To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000 -->
+			<!--
+				IMPORTANT NOTE :
+				CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
+				For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
+				So in order to specify the letter spacing of 0.5px from the M3  guidelines, we will need to add CharacterSpacing="41.666".
+				To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000
+			-->
 
 			<!-- DISPLAY -->
 
-			<!--  Display Large  -->
-			<x:String x:Key="DisplayLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Large -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplayLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayLargeFontSize">57</x:Double>
-			<!--  Tracking: -0.25 px -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: -0.25 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="DisplayLargeCharacterSpacing">-17</x:Int32>
 
-			<!--  Display Medium  -->
-			<x:String x:Key="DisplayMediumFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Medium -->
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplayMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayMediumFontSize">45</x:Double>
 
-			<!--  Display Small  -->
-			<x:String x:Key="DisplaySmallFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Small -->
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplaySmallFontSize">36</x:Double>
 
 			<!-- HEADLINE -->
 
-			<!--  Headline Large  -->
-			<x:String x:Key="HeadlineLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Large -->
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
 
-			<!--  Headline Medium  -->
-			<x:String x:Key="HeadlineMediumFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Medium -->
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineMediumFontSize">28</x:Double>
 
-			<!--  Headline Small  -->
-			<x:String x:Key="HeadlineSmallFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Small -->
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineSmallFontSize">24</x:Double>
 
 			<!-- TITLE -->
 
-			<!--  Title Large  -->
-			<x:String x:Key="TitleLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Title Large -->
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="TitleLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="TitleLargeFontSize">22</x:Double>
 
-			<!--  Title Medium  -->
-			<x:String x:Key="TitleMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Title Medium -->
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="TitleMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
-			<!--  No Tracking / CharacterSpacing  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- No Tracking / CharacterSpacing -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 
-			<!--  Title Small  -->
-			<x:String x:Key="TitleSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Title Small -->
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="TitleSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
-			<!--  No Tracking / CharacterSpacing  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- No Tracking / CharacterSpacing -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 
 			<!-- LABEL -->
 
-			<!--  Label Large  -->
-			<x:String x:Key="LabelLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Large -->
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelLargeFontSize">14</x:Double>
-			<!--  Tracking: 0.1 px  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: 0.1 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="LabelLargeCharacterSpacing">7</x:Int32>
 
-			<!--  Label Medium  -->
-			<x:String x:Key="LabelMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Medium -->
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelMediumFontSize">12</x:Double>
-			<!--  Tracking: 0.5 px  -->
+			<!-- Tracking: 0.5 px -->
 			<x:Int32 x:Key="LabelMediumCharacterSpacing">41</x:Int32>
 
-			<!--  Label Small  -->
-			<x:String x:Key="LabelSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Small -->
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.5 px  -->
+			<!-- Tracking: 0.5 px -->
 			<x:Int32 x:Key="LabelSmallCharacterSpacing">45</x:Int32>
 
-			<!--  Label ExtraSmall  -->
+			<!-- Label ExtraSmall -->
 			<!-- Text style added for Badges so it will match Uno figma file -->
 			<!-- Not part of Material M3. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
-			<x:String x:Key="LabelExtraSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.1 px  -->
+			<!-- Tracking: 0.1 px -->
 			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">7</x:Int32>
 
 			<!-- BODY -->
 
-			<!--  Body Large  -->
-			<x:String x:Key="BodyLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Large -->
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodyLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyLargeFontSize">16</x:Double>
-			<!--  Tracking: 0.15 px  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: 0.15 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="BodyLargeCharacterSpacing">9</x:Int32>
 
-			<!--  Body Medium  -->
-			<x:String x:Key="BodyMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Medium -->
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodyMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
-			<!--  Tracking: 0.25 px  -->
+			<!-- Tracking: 0.25 px -->
 			<x:Int32 x:Key="BodyMediumCharacterSpacing">17</x:Int32>
 
-			<!--  Body Small  -->
-			<x:String x:Key="BodySmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Small -->
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodySmallFontWeight">Medium</x:String>
 			<x:Double x:Key="BodySmallFontSize">12</x:Double>
-			<!--  Tracking: 0.4 px  -->
+			<!-- Tracking: 0.4 px -->
 			<x:Int32 x:Key="BodySmallCharacterSpacing">33</x:Int32>
 
 			<!-- CAPTION -->
 
-			<!--  Caption Large  -->
+			<!-- Caption Large -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
-			<!--  Tracking: -0.05 px  -->
+			<!-- Tracking: -0.05 px -->
 			<x:Int32 x:Key="CaptionLargeCharacterSpacing">-3</x:Int32>
 
-			<!--  Caption Medium  -->
+			<!-- Caption Medium -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
-			<!--  Tracking: 0.4 px  -->
+			<!-- Tracking: 0.4 px -->
 			<x:Int32 x:Key="CaptionMediumCharacterSpacing">33</x:Int32>
 
-			<!--  Caption Small  -->
+			<!-- Caption Small -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.1 px  -->
+			<!-- Tracking: 0.1 px -->
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">7</x:Int32>
 
 		</ResourceDictionary>
@@ -163,156 +165,158 @@
 
 			<!-- COMMON TEXT VARIABLES FOR v2 -->
 
-			<!-- IMPORTANT NOTE :
-			CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
-			For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
-			So in order to specify the letter spacing of 0.5px from the M3  guidelines, we will need to add CharacterSpacing="41.666".
-			To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000 -->
+			<!--
+				IMPORTANT NOTE :
+				CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
+				For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
+				So in order to specify the letter spacing of 0.5px from the M3  guidelines, we will need to add CharacterSpacing="41.666".
+				To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000
+			-->
 
 			<!-- DISPLAY -->
 
-			<!--  Display Large  -->
-			<x:String x:Key="DisplayLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Large -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplayLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayLargeFontSize">57</x:Double>
-			<!--  Tracking: -0.25 px -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: -0.25 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="DisplayLargeCharacterSpacing">-17</x:Int32>
 
-			<!--  Display Medium  -->
-			<x:String x:Key="DisplayMediumFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Medium -->
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplayMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayMediumFontSize">45</x:Double>
 
-			<!--  Display Small  -->
-			<x:String x:Key="DisplaySmallFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Small -->
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplaySmallFontSize">36</x:Double>
 
 			<!-- HEADLINE -->
 
-			<!--  Headline Large  -->
-			<x:String x:Key="HeadlineLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Large -->
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
 
-			<!--  Headline Medium  -->
-			<x:String x:Key="HeadlineMediumFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Medium -->
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineMediumFontSize">28</x:Double>
 
-			<!--  Headline Small  -->
-			<x:String x:Key="HeadlineSmallFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Small -->
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineSmallFontSize">24</x:Double>
 
 			<!-- TITLE -->
 
-			<!--  Title Large  -->
-			<x:String x:Key="TitleLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Title Large -->
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="TitleLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="TitleLargeFontSize">22</x:Double>
 
-			<!--  Title Medium  -->
-			<x:String x:Key="TitleMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Title Medium -->
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="TitleMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
-			<!--  No Tracking / CharacterSpacing  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- No Tracking / CharacterSpacing -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 
-			<!--  Title Small  -->
-			<x:String x:Key="TitleSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Title Small -->
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="TitleSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
-			<!--  No Tracking / CharacterSpacing  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- No Tracking / CharacterSpacing -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 
 			<!-- LABEL -->
 
-			<!--  Label Large  -->
-			<x:String x:Key="LabelLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Large -->
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelLargeFontSize">14</x:Double>
-			<!--  Tracking: 0.1 px  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: 0.1 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="LabelLargeCharacterSpacing">7</x:Int32>
 
-			<!--  Label Medium  -->
-			<x:String x:Key="LabelMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Medium -->
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelMediumFontSize">12</x:Double>
-			<!--  Tracking: 0.5 px  -->
+			<!-- Tracking: 0.5 px -->
 			<x:Int32 x:Key="LabelMediumCharacterSpacing">41</x:Int32>
 
-			<!--  Label Small  -->
-			<x:String x:Key="LabelSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Small -->
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.5 px  -->
+			<!-- Tracking: 0.5 px -->
 			<x:Int32 x:Key="LabelSmallCharacterSpacing">45</x:Int32>
 
-			<!--  Label ExtraSmall  -->
+			<!-- Label ExtraSmall -->
 			<!-- Text style added for Badges so it will match Uno figma file -->
 			<!-- Not part of Material M3. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
-			<x:String x:Key="LabelExtraSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelExtraSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.1 px  -->
+			<!-- Tracking: 0.1 px -->
 			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">7</x:Int32>
 
 			<!-- BODY -->
 
-			<!--  Body Large  -->
-			<x:String x:Key="BodyLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Large -->
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodyLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyLargeFontSize">16</x:Double>
-			<!--  Tracking: 0.15 px  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: 0.15 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="BodyLargeCharacterSpacing">9</x:Int32>
 
-			<!--  Body Medium  -->
-			<x:String x:Key="BodyMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Medium -->
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodyMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
-			<!--  Tracking: 0.25 px  -->
+			<!-- Tracking: 0.25 px -->
 			<x:Int32 x:Key="BodyMediumCharacterSpacing">17</x:Int32>
 
-			<!--  Body Small  -->
-			<x:String x:Key="BodySmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Small -->
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodySmallFontWeight">Medium</x:String>
 			<x:Double x:Key="BodySmallFontSize">12</x:Double>
-			<!--  Tracking: 0.4 px  -->
+			<!-- Tracking: 0.4 px -->
 			<x:Int32 x:Key="BodySmallCharacterSpacing">33</x:Int32>
 
 			<!-- CAPTION -->
 
-			<!--  Caption Large  -->
+			<!-- Caption Large -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
-			<!--  Tracking: -0.05 px  -->
+			<!-- Tracking: -0.05 px -->
 			<x:Int32 x:Key="CaptionLargeCharacterSpacing">-3</x:Int32>
 
-			<!--  Caption Medium  -->
+			<!-- Caption Medium -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
-			<!--  Tracking: 0.4 px  -->
+			<!-- Tracking: 0.4 px -->
 			<x:Int32 x:Key="CaptionMediumCharacterSpacing">33</x:Int32>
 
-			<!--  Caption Small  -->
+			<!-- Caption Small -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.1 px  -->
+			<!-- Tracking: 0.1 px -->
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">7</x:Int32>
 
 		</ResourceDictionary>
@@ -320,156 +324,158 @@
 
 			<!-- COMMON TEXT VARIABLES FOR v2 -->
 
-			<!-- IMPORTANT NOTE :
-			CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
-			For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
-			So in order to specify the letter spacing of 0.5px from the M3  guidelines, we will need to add CharacterSpacing="41.666".
-			To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000 -->
+			<!--
+				IMPORTANT NOTE :
+				CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
+				For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
+				So in order to specify the letter spacing of 0.5px from the M3  guidelines, we will need to add CharacterSpacing="41.666".
+				To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000
+			-->
 
 			<!-- DISPLAY -->
 
-			<!--  Display Large  -->
-			<x:String x:Key="DisplayLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Large -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplayLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayLargeFontSize">57</x:Double>
-			<!--  Tracking: -0.25 px -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: -0.25 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="DisplayLargeCharacterSpacing">-17</x:Int32>
 
-			<!--  Display Medium  -->
-			<x:String x:Key="DisplayMediumFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Medium -->
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplayMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplayMediumFontSize">45</x:Double>
 
-			<!--  Display Small  -->
-			<x:String x:Key="DisplaySmallFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Display Small -->
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplaySmallFontSize">36</x:Double>
 
 			<!-- HEADLINE -->
 
-			<!--  Headline Large  -->
-			<x:String x:Key="HeadlineLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Large -->
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
 
-			<!--  Headline Medium  -->
-			<x:String x:Key="HeadlineMediumFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Medium -->
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineMediumFontSize">28</x:Double>
 
-			<!--  Headline Small  -->
-			<x:String x:Key="HeadlineSmallFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Headline Small -->
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineSmallFontSize">24</x:Double>
 
 			<!-- TITLE -->
 
-			<!--  Title Large  -->
-			<x:String x:Key="TitleLargeFontFamily">MaterialRegularFontFamily</x:String>
+			<!-- Title Large -->
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="MaterialRegularFontFamily" />
 			<x:String x:Key="TitleLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="TitleLargeFontSize">22</x:Double>
 
-			<!--  Title Medium  -->
-			<x:String x:Key="TitleMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Title Medium -->
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="TitleMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
-			<!--  No Tracking / CharacterSpacing  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- No Tracking / CharacterSpacing -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 
-			<!--  Title Small  -->
-			<x:String x:Key="TitleSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Title Small -->
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="TitleSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
-			<!--  No Tracking / CharacterSpacing  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- No Tracking / CharacterSpacing -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 
 			<!-- LABEL -->
 
-			<!--  Label Large  -->
-			<x:String x:Key="LabelLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Large -->
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelLargeFontSize">14</x:Double>
-			<!--  Tracking: 0.1 px  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: 0.1 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="LabelLargeCharacterSpacing">7</x:Int32>
 
-			<!--  Label Medium  -->
-			<x:String x:Key="LabelMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Medium -->
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelMediumFontSize">12</x:Double>
-			<!--  Tracking: 0.5 px  -->
+			<!-- Tracking: 0.5 px -->
 			<x:Int32 x:Key="LabelMediumCharacterSpacing">41</x:Int32>
 
-			<!--  Label Small  -->
-			<x:String x:Key="LabelSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Label Small -->
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.5 px  -->
+			<!-- Tracking: 0.5 px -->
 			<x:Int32 x:Key="LabelSmallCharacterSpacing">45</x:Int32>
 
-			<!--  Label ExtraSmall  -->
+			<!-- Label ExtraSmall -->
 			<!-- Text style added for Badges so it will match Uno figma file -->
 			<!-- Not part of Material M3. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
-			<x:String x:Key="LabelExtraSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="LabelExtraSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.1 px  -->
+			<!-- Tracking: 0.1 px -->
 			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">7</x:Int32>
 
 			<!-- BODY -->
 
-			<!--  Body Large  -->
-			<x:String x:Key="BodyLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Large -->
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodyLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyLargeFontSize">16</x:Double>
-			<!--  Tracking: 0.15 px  -->
-			<!--  Diverging from Material M3 guidelines value. Source of truth Uno Figma file  -->
-			<!--  Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles  -->
+			<!-- Tracking: 0.15 px -->
+			<!-- Diverging from Material M3 guidelines value. Source of truth Uno Figma file -->
+			<!-- Compromise between the official M3 and Uno's Figma M3 design to ensure compatibility with all design systems styles -->
 			<x:Int32 x:Key="BodyLargeCharacterSpacing">9</x:Int32>
 
-			<!--  Body Medium  -->
-			<x:String x:Key="BodyMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Medium -->
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodyMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
-			<!--  Tracking: 0.25 px  -->
+			<!-- Tracking: 0.25 px -->
 			<x:Int32 x:Key="BodyMediumCharacterSpacing">17</x:Int32>
 
-			<!--  Body Small  -->
-			<x:String x:Key="BodySmallFontFamily">MaterialMediumFontFamily</x:String>
+			<!-- Body Small -->
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="BodySmallFontWeight">Medium</x:String>
 			<x:Double x:Key="BodySmallFontSize">12</x:Double>
-			<!--  Tracking: 0.4 px  -->
+			<!-- Tracking: 0.4 px -->
 			<x:Int32 x:Key="BodySmallCharacterSpacing">33</x:Int32>
 
 			<!-- CAPTION -->
 
-			<!--  Caption Large  -->
+			<!-- Caption Large -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionLargeFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionLargeFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
-			<!--  Tracking: -0.05 px  -->
+			<!-- Tracking: -0.05 px -->
 			<x:Int32 x:Key="CaptionLargeCharacterSpacing">-3</x:Int32>
 
-			<!--  Caption Medium  -->
+			<!-- Caption Medium -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionMediumFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionMediumFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
-			<!--  Tracking: 0.4 px  -->
+			<!-- Tracking: 0.4 px -->
 			<x:Int32 x:Key="CaptionMediumCharacterSpacing">33</x:Int32>
 
-			<!--  Caption Small  -->
+			<!-- Caption Small -->
 			<!-- Gap Filler for the other design system - Not part of Material M3 -->
-			<x:String x:Key="CaptionSmallFontFamily">MaterialMediumFontFamily</x:String>
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="MaterialMediumFontFamily" />
 			<x:String x:Key="CaptionSmallFontWeight">Medium</x:String>
 			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
-			<!--  Tracking: 0.1 px  -->
+			<!-- Tracking: 0.1 px -->
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">7</x:Int32>
 
 		</ResourceDictionary>
