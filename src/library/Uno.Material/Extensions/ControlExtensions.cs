@@ -29,7 +29,7 @@ namespace Uno.Material
 			"Icon",
 			typeof(IconElement),
 			typeof(ControlExtensions),
-			new PropertyMetadata(default));
+			new PropertyMetadata(default, OnIconChanged));
 
 		[DynamicDependency(nameof(SetIcon))]
 		public static IconElement GetIcon(Control obj) => (IconElement)obj.GetValue(IconProperty);
@@ -221,6 +221,14 @@ namespace Uno.Material
 		public static void SetIsTintEnabled(UIElement obj, bool value) => obj.SetValue(IsTintEnabledProperty, value);
 
 		#endregion
+
+		private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			if (d is TextBox textBox)
+			{
+				textBox.SetValue(LeadingIconProperty, e.NewValue);
+			}
+		}
 
 		private static void OnElevationChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
 			=> SurfaceTintExtensions.OnElevationChanged(element, (int)e.NewValue);
