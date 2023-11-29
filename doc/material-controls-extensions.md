@@ -4,13 +4,14 @@
 
 Below is a summary of the icon support for different controls:
 
-| Control         | Icon | LeadingIcon | TrailingIcon |
-|-----------------|------|-------------|--------------|
-| **Button**      |  ✔️  |     ❌     |      ❌      |
-| **Combobox**    |  ✔️  |     ❌     |      ❌      |
-| **PasswordBox** |  ✔️  |     ❌     |      ❌      |
-| **TextBox**     |  ❌  |     ✔️     |      ✔️      |
+| Control         |  Icon | LeadingIcon | TrailingIcon |
+|-----------------|-------|-------------|--------------|
+| **Button**      |   ✔️  |      ❌    |      ❌      |
+| **Combobox**    |   ✔️  |      ❌    |      ❌      |
+| **PasswordBox** |   ✔️  |      ❌    |      ❌      |
+| **TextBox**     |  ✔️*  |      ✔️    |      ✔️      |
 
+\* Setting the `Icon` for a `TextBox` will simply set the `LeadingIcon`.
 
 This feature allows for the addition of icons on the supported controls. Icons can be added in different positions, such as `Icon`, `LeadingIcon`, and `TrailingIcon`. You can choose from various [`IconElement`](https://docs.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s to represent your icons, including `<BitmapIcon />`, `<FontIcon />`, `<PathIcon />`, or `<SymbolIcon />`.
 
