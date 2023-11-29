@@ -214,7 +214,7 @@
 			<StaticResource x:Key="IconToggleButtonBackgroundIndeterminatePressed" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="IconToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SystemControlTransparentBrush" />
 			<!--#endregion-->
-			
+
 			<!--#region Foreground-->
 			<StaticResource x:Key="IconToggleButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="IconToggleButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
@@ -307,6 +307,8 @@
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundPointerOver}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushPointerOver}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="0" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushPointerOver}" />
 									</VisualState.Setters>
@@ -346,6 +348,8 @@
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundPressed}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushPressed}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="0" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushPressed}" />
 									</VisualState.Setters>
@@ -355,16 +359,51 @@
 									<VisualState.Setters>
 										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundDisabled}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushDisabled}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="0" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundDisabled}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundDisabled}" />
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushChecked}" />
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushChecked}" />
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushChecked}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushCheckedPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPressed}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushCheckedPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Opacity" Value="0" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedDisabled}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToTransparent}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushCheckedDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="IndeterminateNormal">
@@ -449,6 +488,15 @@
 								   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 								   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 								   AutomationProperties.AccessibilityView="Raw" />
+
+						<!-- Alternate Content -->
+						<ContentPresenter x:Name="AlternateContentPresenter"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, FallbackValue=' ', TargetNullValue=' '}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Opacity="0" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -614,8 +662,7 @@
 							<VisualStateGroup x:Name="FocusStates">
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="FocusStateCircle.Opacity"
-												Value="{ThemeResource IconToggleButtonStateCircleOpacityFocused}" />
+										<Setter Target="FocusStateCircle.Opacity" Value="{ThemeResource IconToggleButtonStateCircleOpacityFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -654,7 +701,7 @@
 										  Foreground="{TemplateBinding Foreground}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Opacity="0"/>
+										  Opacity="0" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
