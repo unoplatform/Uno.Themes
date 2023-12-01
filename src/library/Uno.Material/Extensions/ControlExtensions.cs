@@ -4,7 +4,6 @@ using System.Text;
 using System.Diagnostics.CodeAnalysis;
 using Windows.UI;
 using Uno.Disposables;
-using System.Windows.Input;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -63,97 +62,6 @@ namespace Uno.Material
 		[DynamicDependency(nameof(GetIconWidth))]
 		public static void SetIconWidth(Control obj, double value) => obj.SetValue(IconWidthProperty, value);
 
-		#endregion
-
-		#region DependencyProperty: LeadingIcon
-
-		public static DependencyProperty LeadingIconProperty { [DynamicDependency(nameof(GetLeadingIcon))] get; } = DependencyProperty.RegisterAttached(
-			"LeadingIcon",
-			typeof(IconElement),
-			typeof(ControlExtensions),
-			new PropertyMetadata(default));
-
-		[DynamicDependency(nameof(SetLeadingIcon))]
-		public static IconElement GetLeadingIcon(Control obj) => (IconElement)obj.GetValue(LeadingIconProperty);
-
-		[DynamicDependency(nameof(GetLeadingIcon))]
-		public static void SetLeadingIcon(Control obj, IconElement value) => obj.SetValue(LeadingIconProperty, value);
-
-		#endregion
-
-		#region DependencyProperty: IsLeadingIconVisible
-
-		public static DependencyProperty IsLeadingIconVisibleProperty { [DynamicDependency(nameof(GetIsLeadingIconVisible))] get; } = DependencyProperty.RegisterAttached(
-			"IsLeadingIconVisible",
-			typeof(bool),
-			typeof(ControlExtensions),
-			new PropertyMetadata(true));
-
-		[DynamicDependency(nameof(SetIsLeadingIconVisible))]
-		public static bool GetIsLeadingIconVisible(Control obj) => (bool)obj.GetValue(IsLeadingIconVisibleProperty);
-
-		[DynamicDependency(nameof(GetIsLeadingIconVisible))]
-		public static void SetIsLeadingIconVisible(Control obj, bool value) => obj.SetValue(IsLeadingIconVisibleProperty, value);
-
-		#endregion
-
-		#region DependencyProperty: LeadingCommand
-		public static DependencyProperty LeadingCommandProperty { [DynamicDependency(nameof(GetLeadingCommand))] get; } = DependencyProperty.RegisterAttached(
-			"LeadingCommand",
-			typeof(ICommand),
-			typeof(ControlExtensions),
-			new PropertyMetadata(default));
-
-		[DynamicDependency(nameof(GetLeadingCommand))]
-		public static ICommand GetLeadingCommand(Control obj) => (ICommand)obj.GetValue(LeadingCommandProperty);
-
-		[DynamicDependency(nameof(SetLeadingCommand))]
-		public static void SetLeadingCommand(Control obj, ICommand value) => obj.SetValue(LeadingCommandProperty, value);
-		#endregion
-
-		#region DependencyProperty: TrailingIcon
-
-		public static DependencyProperty TrailingIconProperty { [DynamicDependency(nameof(GetTrailingIcon))] get; } = DependencyProperty.RegisterAttached(
-			"TrailingIcon",
-			typeof(IconElement),
-			typeof(ControlExtensions),
-			new PropertyMetadata(default));
-
-		[DynamicDependency(nameof(SetTrailingIcon))]
-		public static IconElement GetTrailingIcon(Control obj) => (IconElement)obj.GetValue(TrailingIconProperty);
-
-		[DynamicDependency(nameof(GetTrailingIcon))]
-		public static void SetTrailingIcon(Control obj, IconElement value) => obj.SetValue(TrailingIconProperty, value);
-		#endregion
-
-		#region DependencyProperty: IsTrailingIconVisible
-
-		public static DependencyProperty IsTrailingIconVisibleProperty { [DynamicDependency(nameof(GetIsTrailingIconVisible))] get; } = DependencyProperty.RegisterAttached(
-			"IsTrailingIconVisible",
-			typeof(bool),
-			typeof(ControlExtensions),
-			new PropertyMetadata(true));
-
-		[DynamicDependency(nameof(SetIsTrailingIconVisible))]
-		public static bool GetIsTrailingIconVisible(Control obj) => (bool)obj.GetValue(IsTrailingIconVisibleProperty);
-
-		[DynamicDependency(nameof(GetIsTrailingIconVisible))]
-		public static void SetIsTrailingIconVisible(Control obj, bool value) => obj.SetValue(IsTrailingIconVisibleProperty, value);
-
-		#endregion
-
-		#region DependencyProperty: TrailingCommand
-		public static DependencyProperty TrailingCommandProperty { [DynamicDependency(nameof(GetTrailingCommand))] get; } = DependencyProperty.RegisterAttached(
-			"TrailingCommand",
-			typeof(ICommand),
-			typeof(ControlExtensions),
-			new PropertyMetadata(default));
-
-		[DynamicDependency(nameof(GetTrailingCommand))]
-		public static ICommand GetTrailingCommand(Control obj) => (ICommand)obj.GetValue(TrailingCommandProperty);
-
-		[DynamicDependency(nameof(SetTrailingCommand))]
-		public static void SetTrailingCommand(Control obj, ICommand value) => obj.SetValue(TrailingCommandProperty, value);
 		#endregion
 
 		#region DependencyProperty: AlternateContent

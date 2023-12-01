@@ -1,55 +1,19 @@
 # Material Control Extensions
 
-## Icons
+## Icon
 
-Below is a summary of the icon support for different controls:
-
-| Control         | Icon | LeadingIcon | TrailingIcon |
-|-----------------|------|-------------|--------------|
-| **Button**      |  ✔️  |     ❌     |      ❌      |
-| **Combobox**    |  ✔️  |     ❌     |      ❌      |
-| **PasswordBox** |  ✔️  |     ❌     |      ❌      |
-| **TextBox**     |  ❌  |     ✔️     |      ✔️      |
-
-
-This feature allows for the addition of icons on the supported controls. Icons can be added in different positions, such as `Icon`, `LeadingIcon`, and `TrailingIcon`. You can choose from various [`IconElement`](https://docs.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s to represent your icons, including `<BitmapIcon />`, `<FontIcon />`, `<PathIcon />`, or `<SymbolIcon />`.
-
-When using `LeadingIcon` and `TrailingIcon`, you have the additional flexibility of binding commands to them. By utilizing `LeadingCommand` and `TrailingCommand`, you can associate specific actions or functionality with these icons, allowing users to interact with them. This feature is particularly useful when you want to provide distinct actions associated with each icon.
-
-Furthermore, `LeadingIcon` and `TrailingIcon` offer additional control over icon visibility. You can use the properties `IsLeadingIconVisible` and `IsTrailingIconVisible` to dynamically control the visibility of these icons based on specific conditions or user interactions.
-
-> [!WARNING]
-> `LeadingIcon` and `TrailingIcon` as well as `LeadingCommand`, `TrailingCommand`, `IsLeadingIconVisible`, `IsTrailingIconVisible` are specifically available for `TextBox` controls. Use `Icon` for other controls such as `PasswordBox`, `ComboBox`, `Button`.
+This feature allows for the addition of icon on the supported controls. Those icons could be any of the [`IconElement`](https://docs.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s: `<BitmapIcon />`, `<FontIcon />`, `<PathIcon />` or `<SymbolIcon />`.
 
 Here are supported control with samples:
 
 * TextBox:
 
     ```xml
-    <TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
-             um:ControlExtensions.LeadingCommand="{Binding MyCommand}">
-        <um:ControlExtensions.LeadingIcon>
-            <SymbolIcon Symbol="SolidStar" />
-        </um:ControlExtensions.LeadingIcon>
-    </TextBox>
-
-    <TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
-             um:ControlExtensions.TrailingCommand="{Binding MyCommand}"
-             um:ControlExtensions.IsTrailingIconVisible="False">
-         <um:ControlExtensions.TrailingIcon>
-            <SymbolIcon Symbol="SolidStar" />
-        </um:ControlExtensions.TrailingIcon>
-    </TextBox>
-    ```
-
-* PasswordBox:
-
-    ```xml
-    <PasswordBox Style="{StaticResource MaterialFilledPasswordBoxStyle}">
+    <TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
         <um:ControlExtensions.Icon>
-            <SymbolIcon Symbol="Favorite" />
+            <SymbolIcon Symbol="SolidStar" />
         </um:ControlExtensions.Icon>
-    </PasswordBox>
+    </ComboBox>
     ```
 
 * ComboBox:
@@ -60,16 +24,6 @@ Here are supported control with samples:
             <SymbolIcon Symbol="SolidStar" />
         </um:ControlExtensions.Icon>
     </ComboBox>
-    ```
-
-* Button:
-
-    ```xml
-    <Button Style="{StaticResource MaterialOutlinedButtonStyle}">
-        <um:ControlExtensions.Icon>
-            <FontIcon Glyph="&#xE946;" />
-        </um:ControlExtensions.Icon>
-    </Button>
     ```
 
 ## Alternate Content
