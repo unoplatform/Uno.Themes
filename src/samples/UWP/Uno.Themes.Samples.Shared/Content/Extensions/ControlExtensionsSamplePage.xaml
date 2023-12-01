@@ -79,6 +79,20 @@
 						   Margin="0,16,0,0"
 						   Style="{StaticResource MaterialHeadline6}" />
 
+				<!-- TextBox -->
+				<TextBlock Text="TextBox"
+						   Style="{StaticResource MaterialSubtitle1}" />
+				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_TextBox"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<TextBox PlaceholderText="Filled"
+							 Style="{StaticResource MaterialFilledTextBoxStyle}">
+						<um:ControlExtensions.Icon>
+							<SymbolIcon Symbol="SolidStar"
+										Foreground="{StaticResource MaterialPrimaryBrush}" />
+						</um:ControlExtensions.Icon>
+					</TextBox>
+				</smtx:XamlDisplay>
+
 				<!-- ComboBox -->
 				<TextBlock Text="ComboBox"
 						   Style="{StaticResource MaterialSubtitle1}" />
@@ -92,70 +106,6 @@
 										Foreground="{StaticResource MaterialPrimaryBrush}" />
 						</um:ControlExtensions.Icon>
 					</ComboBox>
-				</smtx:XamlDisplay>
-
-				<!-- Button -->
-				<TextBlock Text="Button"
-						   Style="{StaticResource MaterialSubtitle1}" />
-				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_Button"
-								  Style="{StaticResource XamlDisplayBelowStyle}">
-					<Button Content="CONTAINED"
-									Style="{StaticResource MaterialContainedButtonStyle}">
-						<um:ControlExtensions.Icon>
-							<FontIcon Glyph="&#xE946;" />
-						</um:ControlExtensions.Icon>
-					</Button>
-				</smtx:XamlDisplay>
-
-				<!-- PasswordBox -->
-				<TextBlock Text="PasswordBox"
-						   Style="{StaticResource MaterialSubtitle1}" />
-				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_PasswordBox"
-								  Style="{StaticResource XamlDisplayBelowStyle}">
-					<PasswordBox Style="{StaticResource MaterialFilledPasswordBoxStyle}"
-								 PlaceholderText="PasswordBox">
-						<um:ControlExtensions.Icon>
-							<SymbolIcon Symbol="Favorite" />
-						</um:ControlExtensions.Icon>
-					</PasswordBox>
-				</smtx:XamlDisplay>
-
-			</StackPanel>
-
-			<StackPanel Spacing="16">
-
-				<TextBlock Text="ControlExtensions.LeadingIcon"
-						   Style="{StaticResource MaterialHeadline5}" />
-
-				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_TextBox_Filled_LeadingIcon"
-								  Style="{StaticResource XamlDisplayBelowStyle}">
-					<TextBox PlaceholderText="LeadingIcon with Command"
-							 Style="{StaticResource MaterialFilledTextBoxStyle}"
-							 um:ControlExtensions.LeadingCommand="{Binding Data.ShowWarning}">
-						<um:ControlExtensions.LeadingIcon>
-							<SymbolIcon Symbol="SolidStar"
-										Foreground="{StaticResource MaterialPrimaryBrush}" />
-						</um:ControlExtensions.LeadingIcon>
-					</TextBox>
-				</smtx:XamlDisplay>
-
-			</StackPanel>
-
-			<StackPanel Spacing="16">
-
-				<TextBlock Text="ControlExtensions.TrailingIcon"
-						Style="{StaticResource MaterialHeadline5}" />
-
-				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_TextBox_Outlined_TrailingIcon"
-								Style="{StaticResource XamlDisplayBelowStyle}">
-					<TextBox PlaceholderText="TrailingIcon with Command"
-							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-							 um:ControlExtensions.TrailingCommand="{Binding Data.ShowWarning}">
-						<um:ControlExtensions.TrailingIcon>
-							<SymbolIcon Symbol="SolidStar"
-										Foreground="{StaticResource MaterialPrimaryBrush}" />
-						</um:ControlExtensions.TrailingIcon>
-					</TextBox>
 				</smtx:XamlDisplay>
 
 			</StackPanel>
