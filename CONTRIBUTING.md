@@ -1,4 +1,4 @@
-# How to Contribute
+﻿# How to Contribute
 
 We'd love to accept your patches, contributions and suggestions to this project.
 Here are a few small guidelines you need to follow.
@@ -38,7 +38,7 @@ detail about your scenario and why the feature or enhancement would be useful.
 This is an open source project and we welcome code and content contributions
 from the community.
 
-**Identifying the scale**
+### Identifying the scale
 
 If you would like to contribute to this project, first identify the scale of
 what you would like to contribute. If it is small (grammar/spelling or a bug
@@ -54,14 +54,14 @@ Ilya Grigorik. Note that all code submissions will be rigorously reviewed and
 tested by the project team, and only those that meet an extremely high bar for
 both quality and design/roadmap appropriateness will be merged into the source.
 
-**Obtaining the source code**
+### Obtaining the source code
 
 If you are an outside contributor, please fork the repository to your account.
 See the GitHub documentation for [forking a
 repo](https://help.github.com/articles/fork-a-repo/) if you have any questions
-about this. 
+about this.
 
-**Submitting a pull request**
+### Submitting a pull request
 
 If you don't know what a pull request is read this article:
 https://help.github.com/articles/using-pull-requests. Make sure the repository
