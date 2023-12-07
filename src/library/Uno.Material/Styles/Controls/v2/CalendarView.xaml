@@ -31,7 +31,7 @@
 		<Setter Property="CalendarItemBorderBrush"
 				Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
 		<Setter Property="TodayForeground"
-				Value="{StaticResource MaterialCalendarViewTodayForeground}" />
+				Value="{ThemeResource OnPrimaryContainerBrush}" />
 		<Setter Property="BlackoutForeground"
 				Value="{StaticResource MaterialCalendarViewBlackoutForeground}" />
 		<Setter Property="SelectedForeground"
@@ -99,7 +99,7 @@
 		<not_win:Setter Property="TodaySelectedBackground"
 						Value="{ThemeResource PrimaryBrush}" />
 		<not_win:Setter Property="TodayBackground"
-						Value="Transparent" />
+						Value="{ThemeResource PrimaryContainerBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CalendarView">
