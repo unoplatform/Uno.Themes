@@ -1,5 +1,6 @@
 ﻿<Application x:Class="Uno.Themes.Samples.App"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:um="using:Uno.Material"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<Application.Resources>
@@ -7,13 +8,11 @@
 			<ResourceDictionary.MergedDictionaries>
 				<!-- Load WinUI resources -->
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-
-				<MaterialColorsV1 xmlns="using:Uno.Material" OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
-				<MaterialFonts xmlns="using:Uno.Material" />
-				<MaterialResourcesV1 xmlns="using:Uno.Material" />
-
-				<MaterialTheme xmlns="using:Uno.Material"
-							   ColorOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+				<um:MaterialTheme>
+					<um:MaterialTheme.Palettes>
+						<ResourceDictionary Source="ms-appx:///ColorPaletteOverride.xaml" />
+					</um:MaterialTheme.Palettes>
+				</um:MaterialTheme>
 
 				<CupertinoColors xmlns="using:Uno.Cupertino"/>
 				<CupertinoFonts xmlns="using:Uno.Cupertino" OverrideSource="ms-appx:///CupertinoFontsOverride.xaml" />
