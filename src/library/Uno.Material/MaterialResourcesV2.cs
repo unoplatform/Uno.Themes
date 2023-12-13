@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Uno.Material.Helpers;
 using Windows.Foundation.Metadata;
 
 #if WinUI
