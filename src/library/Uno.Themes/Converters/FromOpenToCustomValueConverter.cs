@@ -18,12 +18,7 @@ public class FromOpenToCustomValueConverter : IValueConverter
 
 	public object Convert(object value, Type targetType, object parameter, string language)
 	{
-		if ((bool)value)
-		{
-			return ValueIfOpen;
-		}
-
-		return ValueIfClosed;
+		return (bool)value ? ValueIfOpen : ValueIfClosed;
 	}
 
 	public object ConvertBack(object value, Type targetType, object parameter, string language)
