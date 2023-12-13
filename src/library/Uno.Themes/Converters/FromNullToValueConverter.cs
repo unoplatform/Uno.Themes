@@ -20,12 +20,7 @@ public class FromNullToValueConverter : IValueConverter
 
 	public object Convert(object value, Type targetType, object parameter, string language)
 	{
-		if (value == null || value == DependencyProperty.UnsetValue)
-		{
-			return NullValue;
-		}
-
-		return NotNullValue;
+		return value is null || value == DependencyProperty.UnsetValue ? NullValue : NotNullValue;
 	}
 
 	public object ConvertBack(object value, Type targetType, object parameter, string language)
