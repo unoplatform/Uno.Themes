@@ -3,23 +3,24 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:ut="using:Uno.Themes"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="xamarin">
 
 	<!-- Converters -->
-	<um:FromNullToValueConverter x:Key="NullToScaleConverter"
+	<ut:FromNullToValueConverter x:Key="NullToScaleConverter"
 								 NotNullValue="0.7"
 								 NullValue="1" />
 
-	<um:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter"
+	<ut:FromNullToValueConverter x:Key="NullToPlaceholderTranslateYConverter"
 								 NotNullValue="-11"
 								 NullValue="0" />
 
-	<um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
+	<ut:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
 								 NotNullValue="5"
 								 NullValue="0" />
 
-	<um:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
+	<ut:FromNullToValueConverter x:Key="NullToPlaceholderThemeBrushConverter"
 								 NotNullValue="{StaticResource ComboBoxPlaceholderFocusedThemeBrush}"
 								 NullValue="{StaticResource ComboBoxPlaceholderForegroundThemeBrush}" />
 
@@ -423,7 +424,7 @@
 										<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder"
 															TranslateY="0" />
 
-										<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
+										<ut:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
 																			NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}"
 																			NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
 									</Grid.Resources>
