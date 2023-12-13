@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 
 namespace Uno.Themes.Helpers;
 
-internal class DictionaryHelper
+public class DictionaryHelper
 {
 	internal static object CreateLazyResource(Func<Style> styleSelector)
 	{
