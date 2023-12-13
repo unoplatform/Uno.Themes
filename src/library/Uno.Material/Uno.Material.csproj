@@ -194,6 +194,10 @@
 		<PackageReference Include="Uno.Fonts.Roboto" Version="2.2.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj" />
+	</ItemGroup>
+
 	<Import Project="xamlmerge.targets" />
 	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />
 </Project>
