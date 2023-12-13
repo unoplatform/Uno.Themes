@@ -4,13 +4,14 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:IsNotWinUI3="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypeNotPresent(Microsoft.UI.Xaml.FrameworkElement)"
 					xmlns:android="http://uno.ui/android"
+					xmlns:ut="using:Uno.Themes"
 					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:um="using:Uno.Material"
 					mc:Ignorable="d android">
 
 	<x:String x:Key="BackArrowPathData">M8,0 L9.4,1.4 L3.8,7 L16,7 L16,9 L3.8,9 L9.4,14.6 L8,16 L0,8 z</x:String>
 
-	<um:FromOpenToCustomValueConverter x:Key="OpenToPaneButtonStyle"
+	<ut:FromOpenToCustomValueConverter x:Key="OpenToPaneButtonStyle"
 									   ValueIfOpen="{StaticResource MaterialPaneBackArrowToggleButtonStyle}"
 									   ValueIfClosed="{StaticResource MaterialPaneToggleButtonStyle}" />
 

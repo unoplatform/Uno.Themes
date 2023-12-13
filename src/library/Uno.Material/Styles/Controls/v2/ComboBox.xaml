@@ -3,19 +3,20 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:um="using:Uno.Material"
+					xmlns:ut="using:Uno.Themes"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="xamarin">
 
 	<!-- Converters -->
-	<um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
+	<ut:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
 								 NotNullValue="5"
 								 NullValue="0" />
 
-	<um:FromNullToValueConverter x:Key="NullToVisible"
+	<ut:FromNullToValueConverter x:Key="NullToVisible"
 								 NotNullValue="Collapsed"
 								 NullValue="Visible" />
 
-	<um:FromNullToValueConverter x:Key="NullToCollapsed"
+	<ut:FromNullToValueConverter x:Key="NullToCollapsed"
 								 NotNullValue="Visible"
 								 NullValue="Collapsed" />
 
@@ -594,7 +595,7 @@
 								<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder"
 													TranslateY="0" />
 
-								<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
+								<ut:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
 																	NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}"
 																	NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
 							</Grid.Resources>
