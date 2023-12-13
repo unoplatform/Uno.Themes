@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.Slider
+---
+
 # Slider Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

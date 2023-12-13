@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.RatingControl
+---
+
 # RatingControl Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

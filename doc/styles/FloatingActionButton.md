@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.FloatingActionButton
+---
+
 # FloatingActionButton Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

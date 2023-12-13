@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.CalendarDatePicker
+---
+
 # CalendarDatePicker Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

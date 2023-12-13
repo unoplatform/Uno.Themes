@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.ProgressBar
+---
+
 # ProgressBar Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

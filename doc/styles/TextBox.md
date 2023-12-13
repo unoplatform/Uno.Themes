@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.TextBox
+---
+
 # TextBox Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

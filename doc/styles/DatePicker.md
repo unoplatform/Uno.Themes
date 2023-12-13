@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.DatePicker
+---
+
 # DatePicker Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

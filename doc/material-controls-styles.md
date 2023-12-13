@@ -1,4 +1,9 @@
-﻿# Material Controls Styles
+﻿---
+uid: Uno.Themes.Material.Styles
+---
+
+# Material Controls Styles
+
 Control|Style Key|IsDefaultStyle*
 -|-|-
 AppBarButton|AppBarButtonStyle|True

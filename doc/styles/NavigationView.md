@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.NavigationView
+---
+
 # NavigationView Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

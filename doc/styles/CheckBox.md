@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.CheckBox
+---
+
 # CheckBox Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.PipsPager
+---
+
 # PipsPager Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

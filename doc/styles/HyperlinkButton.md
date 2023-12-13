@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.HyperlinkButton
+---
+
 # HyperlinkButton Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

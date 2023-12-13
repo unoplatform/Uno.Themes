@@ -1,6 +1,7 @@
 ---
-uid: uno.themes.lightweightstyling
+uid: Uno.Themes.LightweightStyling
 ---
+
 # Lightweight Styling
 
 [Lightweight styling](https://learn.microsoft.com/windows/apps/design/style/xaml-styles#lightweight-styling) is a way to customize the appearance of XAML controls by **overriding** their default brushes, fonts, and numeric properties. Lightweight styles are changed by providing alternate resources with the same key. All Uno Material styles support the capability to be customized through resource overrides without the need to redefine the style.
@@ -172,25 +173,25 @@ The general pattern used for mapping the Lightweight Styling resource keys to C#
 | Name Part | Description |
 | --- | --- |
 | `control` | Name of the control type (Button, TextBox, CheckBox, etc.) |
-| `variant` | **(Optional) Defaults to `Default`** Certain styles have multiple variants. Ex: For Button we have variants such as: Outlined, Text, Filled | 
+| `variant` | **(Optional) Defaults to `Default`** Certain styles have multiple variants. Ex: For Button we have variants such as: Outlined, Text, Filled |
 | `member-path` | The property or the nested property to assign value to. (Foreground, Background, Placeholder.Foreground, etc.) |
 | `visual-state` | **(Optional) Defaults to `Default`**  Specifies which `VisualState` that this resource will be applied to (PointerOver, Checked, Disabled, etc.)  |
 
 For example, the following resource keys are used with `FilledButtonStyle`, `HyperlinkButtonStyle`, and `CheckBoxStyle` from Uno Material:
 
-##### Filled Button
+#### Filled Button
 
 - `Theme.Button.Resources.Filled.Foreground.Default`
 - `Theme.Button.Resources.Filled.Foreground.Pressed`
 - `Theme.Button.Resources.Filled.Foreground.PointerOver`
 
-##### HyperlinkButton (Default)
+#### HyperlinkButton (Default)
 
 - `Theme.HyperlinkButton.Resources.Default.Foreground.Default`
 - `Theme.HyperlinkButton.Resources.Default.Foreground.Pressed`
 - `Theme.HyperlinkButton.Resources.Default.Foreground.PointerOver`
 
-##### CheckBox (Default)
+#### CheckBox (Default)
 
 - `Theme.CheckBox.Resources.Default.Foreground.Checked`
 - `Theme.CheckBox.Resources.Default.Foreground.CheckedPressed`

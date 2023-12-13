@@ -1,7 +1,7 @@
 ﻿# Uno.Themes
 
 <p align="center">
-  <img src="doc/assets/themes-design-systems.png">
+  <img src="doc/assets/themes-design-systems.png" alt="Themes design systems" />
 </p>
 
 [![Open Uno.Themes in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/unoplatform/uno.themes)
