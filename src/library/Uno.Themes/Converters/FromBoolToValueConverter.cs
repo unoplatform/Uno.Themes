@@ -18,19 +18,19 @@ public class FromBoolToValueConverter : IValueConverter
 
 	public object NullOrFalseValue
 	{
-		get { return FalseValue; }
-		set { FalseValue = NullValue = value; }
+		get => FalseValue;
+		set => FalseValue = NullValue = value;
 	}
 
 	public object NullOrTrueValue
 	{
-		get { return TrueValue; }
-		set { TrueValue = NullValue = value; }
+		get => TrueValue;
+		set => TrueValue = NullValue = value;
 	}
 
 	public object Convert(object value, Type targetType, object parameter, string language)
 	{
-		if (value == null)
+		if (value is null)
 		{
 			return NullValue;
 		}

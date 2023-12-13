@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 #if WinUI
 using Microsoft.UI.Xaml.Data;
@@ -18,12 +16,7 @@ public class FromEmptyStringToValueConverter : IValueConverter
 
 	public object Convert(object value, Type targetType, object parameter, string language)
 	{
-		if (!(value is string str) || string.IsNullOrEmpty(str))
-		{
-			return NullOrEmptyValue;
-		}
-
-		return NotNullOrEmptyValue;
+		return value is not string str || string.IsNullOrEmpty(str) ? NullOrEmptyValue : NotNullOrEmptyValue;
 	}
 
 	public object ConvertBack(object value, Type targetType, object parameter, string language)
