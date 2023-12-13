@@ -1,7 +1,8 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
+					xmlns:ut="using:Uno.Themes"
 					xmlns:android="http://uno.ui/android"
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:not_ios="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -292,12 +293,12 @@
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!--#region Converters-->
-	<um:FromBoolToValueConverter x:Key="CheckBoxIsCheckedToFocusStateCircleVisible"
+	<ut:FromBoolToValueConverter x:Key="CheckBoxIsCheckedToFocusStateCircleVisible"
 								 TrueValue="Visible"
 								 FalseValue="Collapsed"
 								 NullValue="Visible" />
 
-	<um:FromBoolToValueConverter x:Key="CheckBoxIsCheckedToFocusStateCircleCollapsed"
+	<ut:FromBoolToValueConverter x:Key="CheckBoxIsCheckedToFocusStateCircleCollapsed"
 								 TrueValue="Collapsed"
 								 FalseValue="Visible"
 								 NullValue="Collapsed" />
