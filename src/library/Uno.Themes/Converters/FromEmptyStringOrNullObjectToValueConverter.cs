@@ -25,12 +25,7 @@ public class FromEmptyStringOrNullObjectToValueConverter : IValueConverter
 			return EmptyOrNullValue;
 		}
 
-		if (value == null || value == DependencyProperty.UnsetValue)
-		{
-			return EmptyOrNullValue;
-		}
-
-		return NotEmptyOrNullValue;
+		return value is null || value == DependencyProperty.UnsetValue ? EmptyOrNullValue : NotEmptyOrNullValue;
 	}
 
 	public object ConvertBack(object value, Type targetType, object parameter, string language)
