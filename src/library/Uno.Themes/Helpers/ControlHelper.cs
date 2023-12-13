@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Uno.Themes;
 
-internal static class ControlHelper
+public static class ControlHelper
 {
 	public static TControl GetTemplateChild<TControl>(this Control control, Func<string, DependencyObject> getTemplateChildImpl, string childName)
 #if HAS_UNO
