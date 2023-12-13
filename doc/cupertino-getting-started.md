@@ -1,12 +1,12 @@
 ---
-uid: uno.themes.cupertino.getstarted
+uid: Uno.Themes.Cupertino.GetStarted
 ---
 
-<p align="center">
-  <img src="assets/cupertino-design-system.png">
-</p>
-
 # Uno.Cupertino
+
+<p align="center">
+  <img src="assets/cupertino-design-system.png" alt="Cupertino design system" />
+</p>
 
 Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines) to your application with a few lines of code.
 

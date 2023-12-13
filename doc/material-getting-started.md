@@ -1,12 +1,12 @@
 ﻿---
-uid: uno.themes.material.getstarted
+uid: Uno.Themes.Material.GetStarted
 ---
 
-<p align="center">
-  <img src="assets/material-design-system.png">
-</p>
-
 # Uno.Material
+
+<p align="center">
+  <img src="assets/material-design-system.png" alt="Material design system" />
+</p>
 
 The Uno.Material library is available as NuGet packages that can be added to any new or existing Uno solution.
 Uno Material lets you apply [Material Design 3](https://m3.material.io/) styling to your application with just a few lines of code.
@@ -94,6 +94,7 @@ If your application is based on the older solution template that includes a shar
 ## Customization
 
 ### Color Overrides using _Material Theme Builder_ and DSP format
+
 It is possible to use the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) to generate a custom color palette derived from your own basic colors. The generated palette is provided in the [DSP format](https://m3.material.io/styles/color/the-color-system/color-dsp) and can be used to override the default Uno.Material colors.
 
 The tooling required to generate the _Material Colors Override_ file from a DSP package (zip file) will be present by default when creating a _Uno Extensions_ project with support for Uno.Material.
@@ -103,6 +104,7 @@ The tooling required to generate the _Material Colors Override_ file from a DSP 
 Follow this link to get [more Information about the DSP tooling](xref:Uno.Material.DSP).
 
 ### Manual Color Overrides
+
 Use this when you want to specify MANUALLY each colors.
 
 1. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `MaterialColorsOverride.xaml`
@@ -262,7 +264,7 @@ If you would like Uno.Material to use a different font, you can override the def
 
 ## Using C# Markup
 
-Uno Material also has support for C# Markup through a [Uno.Material.WinUI.Markup](https://www.nuget.org/packages/Uno.Material.WinUI.Markup) NuGet Package. 
+Uno Material also has support for C# Markup through a [Uno.Material.WinUI.Markup](https://www.nuget.org/packages/Uno.Material.WinUI.Markup) NuGet Package.
 
 To get started with Uno Material in your C# Markup application, add the `Uno.Material.WinUI.Markup` NuGet package to your **App Code Library** project and your platform heads.
 Then, add the following code to your `AppResources.cs`:

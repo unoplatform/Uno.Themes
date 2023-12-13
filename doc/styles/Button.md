@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.Button
+---
+
 # Button Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

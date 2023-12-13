@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.ProgressRing
+---
+
 # ProgressRing Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

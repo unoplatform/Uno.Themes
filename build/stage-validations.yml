@@ -38,5 +38,5 @@
   - bash: npm install -g markdownlint-cli
     displayName: Install markdownlint-cli
 
-  - bash: markdownlint -c $(Build.SourcesDirectory)/build/.markdownlint.json "*.md"
+  - bash: markdownlint -c $(Build.SourcesDirectory)/build/.markdownlint.json "**/*.md"
     displayName: Run Markdown Linter

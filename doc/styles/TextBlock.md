@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.TextBlock
+---
+
 # TextBlock Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

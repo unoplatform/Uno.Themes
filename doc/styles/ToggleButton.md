@@ -1,4 +1,9 @@
+---
+uid: Uno.Themes.Styles.ToggleButton
+---
+
 # ToggleButton Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*

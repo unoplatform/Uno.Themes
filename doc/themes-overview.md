@@ -1,8 +1,12 @@
-<p align="center">
-  <img src="assets/themes-design-systems.png">
-</p>
+---
+uid: Uno.Themes.Overview
+---
 
 # Themes Overview
+
+<p align="center">
+  <img src="assets/themes-design-systems.png" alt="Themes design systems" />
+</p>
 
 ## Summary
 
@@ -11,12 +15,13 @@
 - [Fluent Overview](fluent-getting-started.md)
 
 ## Uno Themes Styles
+
 [Uno.Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons NuGet packages that can be added to any new or existing Uno solution.
 
 It contains two libraries:
 
 - `Uno.Material` library is designed to help you use [Material Design 3](https://m3.material.io/)
-- `Uno.Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines) 
+- `Uno.Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
 
 Both libraries help you style your application with a few lines of code include and include:
 

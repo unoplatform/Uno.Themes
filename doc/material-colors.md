@@ -1,10 +1,11 @@
 ---
-uid: uno.themes.material.colors
+uid: Uno.Themes.Material.Colors
 ---
 
 # Material Colors and Brushes
 
 ## Colors
+
 | Key                        | LightValue | DarkValue |
 | -------------------------- | ---------- | --------- |
 | PrimaryColor               | #5946D2    | #C7BFFF   |
@@ -41,6 +42,7 @@ uid: uno.themes.material.colors
 | OutlineVariantColor        | #C9C5D0    | #57545D   |
 
 ## Opacities
+
 | Key                | Value |
 | ------------------ | ----- |
 | HoverOpacity       | 0.08  |
@@ -54,6 +56,7 @@ uid: uno.themes.material.colors
 | DisabledLowOpacity | 0.12  |
 
 ## Brushes
+
 | Key                                   | Color                      | Opacity            |
 | ------------------------------------- | -------------------------- | ------------------ |
 | PrimaryBrush                          | PrimaryColor               | 1                  |

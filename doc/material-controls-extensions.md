@@ -1,3 +1,7 @@
+---
+uid: Uno.Themes.Material.Extensions
+---
+
 # Material Control Extensions
 
 ## Icon
@@ -118,11 +122,11 @@ Applying the surface tint for elevated controls is optional and must be explicit
 
 The above XAML will produce the following result:
 
-![](assets/material-elevation-buttons.png)
+![Uno Material Elevation Buttons with Tint Enabled](assets/material-elevation-buttons.png)
 
 If we were to alter the XAML above and set `um:ControlExtensions.IsTintEnabled="False"` on each of the buttons, we would see elevated buttons without tints:
 
-![](assets/material-elevation-buttons-shadow-only.png)
+![Uno Material Elevation Buttons with Tint Disabled](assets/material-elevation-buttons-shadow-only.png)
 
 ### Supported Controls
 

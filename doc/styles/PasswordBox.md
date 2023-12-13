@@ -1,4 +1,9 @@
-﻿# PasswordBox Control
+﻿---
+uid: Uno.Themes.Styles.PasswordBox
+---
+
+# PasswordBox Control
+
 ## Styles
 
 Style Key|IsDefaultStyle*
