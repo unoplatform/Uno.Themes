@@ -189,6 +189,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Include="..\Uno.Themes\Helpers\LinkerAttributes.cs" Link="Helpers\LinkerAttributes.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Uno.Fonts.Roboto" Version="2.2.2" />
@@ -196,6 +200,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Helpers\" />
 	</ItemGroup>
 
 	<Import Project="xamlmerge.targets" />
