@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Windows.Foundation.Metadata;
 
 #if WinUI
@@ -9,8 +7,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 #else
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 #endif
 
 namespace Uno.Material
@@ -23,8 +19,9 @@ namespace Uno.Material
 	{
 		public MaterialResourcesV2()
 		{
-			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
 
+			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Themes/Styles/Application/Common/Converters.xaml") });
 			MergedDictionaries.Add(new MaterialFonts());
 			MergedDictionaries.Add(new MaterialColorsV2());
 		}
