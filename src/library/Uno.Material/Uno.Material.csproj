@@ -202,6 +202,10 @@
 	  <ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Helpers\" />
+	</ItemGroup>
+
 	<Import Project="xamlmerge.targets" />
 	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />
 </Project>
