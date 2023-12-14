@@ -17,6 +17,7 @@ namespace Uno.Material
 	{
 		public MaterialResourcesV1()
 		{
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Themes/Styles/Application/Common/Converters.xaml") });
 			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v1.xaml");
 		}
 
