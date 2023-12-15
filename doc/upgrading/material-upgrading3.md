@@ -1,16 +1,14 @@
 ﻿---
-uid: Uno.Themes.Material.Migration
+uid: Uno.Themes.Material.Upgrading3
 ---
 
-# Updating to Uno.Material
+# Updating to Uno.Material 3.x
 
-## Updating to Uno.Material v3
+The 3.x versions of the [Uno.Material](https://www.nuget.org/packages/Uno.Material/3.0.40) and [Uno.Material.WinUI](https://www.nuget.org/packages/Uno.Material.WinUI/3.0.40) NuGet packages introduce support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. Refer to the tables below for the changes that have been made within Uno Material.
 
-Uno.Material v3 (not to be confused with [Material Design 3](https://m3.material.io/) from Google) introduces support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. Refer to the tables below for the changes that have been made within Uno.Material.
+## Styles
 
-### Styles
-
-#### Removed
+### Removed
 
 Key|TargetType
 -|-
@@ -18,14 +16,14 @@ DefaultMaterialCalendarViewStyle|CalendarView
 MaterialSecondaryCheckBoxStyle|CheckBox
 MaterialSecondaryRadioButtonStyle|RadioButton
 
-#### Added
+### Added
 
 Key|Aliased Key|TargetType|Implicit Style
 -|-|-|-
 MaterialRatingControlStyle|RatingControlStyle|muxc:RatingControl|true
 MaterialRippleStyle|RippleStyle|um:Ripple|true
 
-#### Modified
+### Modified
 
 Key|Aliased Key|TargetType|Implicit Style
 -|-|-|-
@@ -39,16 +37,16 @@ MaterialOutlinedTextBoxStyle|OutlinedTextBoxStyle|TextBox|false -> true
 MaterialTextToggleButtonStyle|TextToggleButtonStyle|ToggleButton|true -> false
 MaterialIconToggleButtonStyle|IconToggleButtonStyle|ToggleButton|false -> true
 
-### Resources
+## Resources
 
-As a result of the Lightweight Styling support, many resource keys have been added as well as renamed. For a list of all the new resource keys, please refer to the [Lightweight Styling documentation](lightweight-styling.md#resource-keys).
+As a result of the Lightweight Styling support, many resource keys have been added as well as renamed. For a list of all the new resource keys, please refer to the [Lightweight Styling documentation](xref:Uno.Themes.LightweightStyling#resource-keys).
 
 Along with the above list of new resource keys, below is a list of the resource keys that have been removed or renamed.
 
 > [!NOTE]
 > Most resources, including those that have been added or renamed, have now been placed inside of a `ThemeDictionary`. This means that the resources should now be referenced using the `ThemeResource` markup extension instead of `StaticResource`. For more information on theme resources, please refer to the [XAML theme resources documentation](https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources).
 
-#### Button
+### Button
 
 Old Key|New Key|Value
 -|-|-
@@ -64,13 +62,13 @@ MaterialButtonMinHeight|**_REMOVED_**|40
 MaterialOutlinedButtonBorderBrush|**_REMOVED_**|OutlineBrush
 MaterialNullToTextButtonMarginConverter|NullToTextButtonMarginConverter|
 
-#### CalendarDatePicker
+### CalendarDatePicker
 
 Old Key|New Key|Value
 -|-|-
 MaterialCalendarDatePickerBackground|**_REMOVED_**|OnSurfaceColor*0.12
 
-#### CheckBox
+### CheckBox
 
 Old Key|New Key|Value
 -|-|-
@@ -81,7 +79,7 @@ CheckAreaLength|**_REMOVED_**|40
 CheckBoxCheckGlyphPathStyle|**_REMOVED_**|M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z
 CheckBoxHyphenGlyphPathStyle|**_REMOVED_**|M0,0L32,0 32,5.3 0,5.3z
 
-#### ComboBox
+### ComboBox
 
 Old Key|New Key|Value
 -|-|-
@@ -92,7 +90,7 @@ DownArrowPathData|ComboBoxDownArrowPathData|M0 0L5 5L10 0H0Z
 UpArrowPathData|ComboBoxUpArrowPathData|M0 0L-5 -5L-10 0H0Z
 MaterialComboBoxCornerRadius|**_REMOVED_**|4
 
-#### DatePicker
+### DatePicker
 
 Old Key|New Key|Value
 -|-|-
@@ -107,7 +105,7 @@ MaterialDatePickerHeight|**_REMOVED_**|53
 MaterialDatePickerSpacerThemeWidth|**_REMOVED_**|1
 MaterialDateTimeFlyoutBorderThickness|**_REMOVED_**|1
 
-#### FloatingActionButton
+### FloatingActionButton
 
 Old Key|New Key|Value
 -|-|-
@@ -154,7 +152,7 @@ MaterialFabDisabledBackground|**_REMOVED_**|SystemControlTransparentBrush
 MaterialFabBackground|**_REMOVED_**|PrimaryContainerBrush
 MaterialFabForeground|**_REMOVED_**|OnPrimaryContainerBrush
 
-#### NavigationView
+### NavigationView
 
 Old Key|New Key|Value
 -|-|-
@@ -250,14 +248,14 @@ MaterialNavigationViewSplitViewCornerRadius|**_REMOVED_**|0,14,14,0
 MaterialNavigationViewPaneBackground|**_REMOVED_**|SurfaceBrush
 MaterialNavigationViewBackground|**_REMOVED_**|SurfaceBrush
 
-#### PasswordBox
+### PasswordBox
 
 Old Key|New Key|Value
 -|-|-
 MaterialDisabledOutlinedPasswordBoxBorderBrush|**_REMOVED_**|OnSurfaceColor*0.12
 MaterialRevealGlyphPathData|**_REMOVED_**|M11 0.5C6 0.5 1.73 3.61 0 8C1.73 12.39 6 15.5 11 15.5C16 15.5 20.27 12.39 22 8C20.27 3.61 16 0.5 11 0.5ZM11 13C8.24 13 6 10.76 6 8C6 5.24 8.24 3 11 3C13.76 3 16 5.24 16 8C16 10.76 13.76 13 11 13ZM11 5C9.34 5 8 6.34 8 8C8 9.66 9.34 11 11 11C12.66 11 14 9.66 14 8C14 6.34 12.66 5 11 5Z
 
-#### PipsPager
+### PipsPager
 
 Old Key|New Key|Value
 -|-|-
@@ -276,14 +274,14 @@ MaterialPipsPagerVerticalOrientationButtonWidth|**_REMOVED_**|12
 MaterialPipsPagerHorizontalOrientationButtonHeight|**_REMOVED_**|12
 MaterialPipsPagerHorizontalOrientationButtonWidth|**_REMOVED_**|12
 
-#### ProgressBar
+### ProgressBar
 
 Old Key|New Key|Value
 -|-|-
 MaterialProgressBarHeight|**_REMOVED_**|4
 MaterialProgressBarMinWidth|**_REMOVED_**|250
 
-#### ProgressRing
+### ProgressRing
 
 Old Key|New Key|Value
 -|-|-
@@ -292,7 +290,7 @@ M3MaterialDeterminateAnimation_Uno|**_REMOVED_**|embedded://Uno.Material/Uno.Mat
 M3MaterialIndeterminateAnimation_Win|**_REMOVED_**|ms-appx:///Uno.Material/Assets/MaterialIndeterminate.json
 M3MaterialDeterminateAnimation_Win|**_REMOVED_**|ms-appx:///Uno.Material/Assets/MaterialDeterminate.json
 
-#### RadioButton
+### RadioButton
 
 Old Key|New Key|Value
 -|-|-
@@ -301,7 +299,7 @@ RadioCheckAreaSize|**_REMOVED_**|20
 RadioStatesAreaSize|**_REMOVED_**|40
 RadioStatesAreaLength|**_REMOVED_**|40
 
-#### Slider
+### Slider
 
 Old Key|New Key|Value
 -|-|-
@@ -311,14 +309,14 @@ MaterialSliderTickBarFillDisabled|**_REMOVED_**|SystemControlDisabledBaseMediumL
 MaterialSliderTickBarFill|**_REMOVED_**|OnSecondaryLowBrush
 MaterialSliderTrackBrush|**_REMOVED_**|MaterialSliderTrackColor
 
-#### TextBox
+### TextBox
 
 Old Key|New Key|Value
 -|-|-
 MaterialDisabledOutlinedTextBoxBorderBrush|**_REMOVED_**|OnSurfaceColor*0.12
 M3ClearGlyphPathData|**_REMOVED_**|M10 0C4.47 0 0 4.47 0 10C0 15.53 4.47 20 10 20C15.53 20 20 15.53 20 10C20 4.47 15.53 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM10 8.59L13.59 5L15 6.41L11.41 10L15 13.59L13.59 15L10 11.41L6.41 15L5 13.59L8.59 10L5 6.41L6.41 5L10 8.59Z
 
-#### ToggleButton
+### ToggleButton
 
 Old Key|New Key|Value
 -|-|-
@@ -327,7 +325,7 @@ MaterialToggleButtonBorderRadius|**_REMOVED_**|4
 MaterialToggleButtonForegroundThemeBrush|**_REMOVED_**|OnSurfaceBrush
 MaterialToggleButtonTextLabelBrush|**_REMOVED_**|PrimaryColor
 
-#### ToggleSwitch
+### ToggleSwitch
 
 Old Key|New Key|Value
 -|-|-
@@ -339,80 +337,3 @@ MaterialToggleSwitchOffButtonBrush|**_REMOVED_**|OnPrimaryBrush
 MaterialToggleSwitchOnBackgroundBrush|**_REMOVED_**|PrimaryVariantLightBrush
 MaterialToggleSwitchOnButtonBrush|**_REMOVED_**|PrimaryBrush
 MaterialToggleSwitchHeaderMargin|**_REMOVED_**|0,0,12,0
-
-## Updating to Uno.Material v2
-
-Starting with version 2.0.0 of the [Uno.Material](https://www.nuget.org/packages/Uno.Material/2.0.0) and [Uno.Material.WinUI](https://www.nuget.org/packages/Uno.Material.WinUI/2.0.0) packages, users can now take advantage of the new [Material Design 3](https://m3.material.io/) design system from Google.
-Along with the new Material Design 3 styles, our Uno.Material NuGet packages will continue to support the previous Material Design 2 styles. In order to achieve this backward compatibility, we have had to make some changes to the way Uno.Material is initialized within your `App.xaml`.
-
-> [!NOTE]
-> In order to avoid any confusion going forward in this article, we will be referring to the new collection of Material Design 3 styles as the "v2" styles and the previous collection of Material Design 2 styles will be referred to as the "v1" styles.
-
- There are two available paths once you have updated to the new Uno.Material v2 package:
-
-- Continue to keep using the v1 styles; or,
-- Migrate app to reference the new v2 styles
-
-### Continue Using v1 Styles
-
-> [!WARNING]
-> In order to continue using the v1 styles, some changes are required in your `App.xaml`.
-
-The Uno.Material v2 NuGet package contains both sets of v1 and v2 styles. Within your `App.xaml`, you will need to replace the references to `MaterialColors` and `MaterialResouces` with `MaterialColorsV1` and `MaterialResourcesV1`. `MaterialFonts` remains unchanged.
-
-### Migrating to v2 Styles
-
-Both `MaterialColors` and `MaterialResources` will now always initialize the latest version of the Material styles. It is also possible to directly reference the `MaterialColorsV2` and `MaterialResourcesV2` ResourceDictionaries if needed.
-
-The v2 styles introduce a new naming system for its resource keys. Refer to the [Material Styles Matrix](material-controls-styles.md) for the updated style keys. In addition to the new style keys, the Uno.Material color palette and text resources have also been updated to align with the [Material Design 3 Color System](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and the [Material Design 3 Typography Guidelines](https://m3.material.io/styles/typography/type-scale-tokens).
-
-#### Color Update
-
- A new color palette has been created for v2, meaning any color palette overrides ResourceDictionary in your app must be updated with the new resource keys. An example of the new color palette can be seen in the new [Uno.Material default palette](https://github.com/unoplatform/Uno.Themes/blob/master/src/library/Uno.Material/Styles/Application/v2/SharedColorPalette.xaml). For more information on the updated colors, you can refer to the "Colors and Themes" section of the [Material 3 Migration Guide](https://material.io/blog/migrating-material-3).
-
- > [!NOTE]
-> As of v2, the Brush resources have been relocated to ThemeDictionaries. To reference these Brush resources, use the `ThemeResource` binding.
-> More information on theme resources can be found [here](https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources)
-
-#### Typography Updates
-
- Text styles have also been modified in v2. There are no 1-to-1 mapping between v1 and v2 text styles in terms of font-sizes and usages. The "Typography" section of the [Material 3 Migration Guide](https://material.io/blog/migrating-material-3) can be helpful for choosing the right style.
-
-Below is a table that is not a strict guideline, but, is provided to you as a suggestion of mapping text styles from v1 to v2:
-
-| Previous Style     | New Style               |
-|--------------------|-------------------------|
-| MaterialHeadline1  | MaterialDisplaySmall    |
-| MaterialHeadline2  | MaterialHeadlineLarge   |
-| MaterialHeadline3  | MaterialHeadlineMedium  |
-| MaterialHeadline4  | MaterialHeadlineSmall   |
-| MaterialHeadline5  | MaterialTitleLarge      |
-| MaterialSubtitle1  | MaterialTitleMedium     |
-| MaterialSubtitle2  | MaterialTitleSmall      |
-| MaterialBody1      | MaterialBodyLarge       |
-| MaterialBody2      | MaterialBodyMedium      |
-| MaterialCaption    | MaterialBodySmall       |
-| MaterialButtonText | MaterialLabelLarge      |
-| MaterialOverline   | MaterialLabelMedium     |
-| N/A                | MaterialLabelSmall      |
-| N/A                | MaterialLabelExtraSmall |
-| N/A                | MaterialCaptionLarge    |
-| N/A                | MaterialCaptionMedium   |
-| N/A                | MaterialCaptionSmall    |
-| N/A                | MaterialDisplayLarge    |
-| N/A                | MaterialDisplayMedium   |
-
-#### Notable Style Key Changes
-
-Control|Previous Style Key|New Style Key|
--|-|-
-Button|MaterialButtonIconStyle|MaterialIconButtonStyle|
-Button|MaterialContainedButtonStyle|MaterialFilledButtonStyle|
-ToggleButton|MaterialToggleButtonIconStyle|MaterialIconToggleButtonStyle|
-
-#### Notable Package Changes
-
-Namespace|Previous Package|New Package|
--|-|-
-ControlExtensions.Icon|Uno.Material.Extensions|Uno.Material|
-Ripple|Uno.Material.Controls|Uno.Material|
