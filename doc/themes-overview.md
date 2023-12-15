@@ -23,7 +23,7 @@ It contains two libraries:
 - `Uno.Material` library is designed to help you use [Material Design 3](https://m3.material.io/)
 - `Uno.Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
 
-Both libraries help you style your application with a few lines of code include and include:
+Both libraries help you style your application with a few lines of code including:
 
 - Color system for both Light and Dark theme
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
