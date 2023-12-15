@@ -82,13 +82,13 @@ namespace Uno.Material
 		#region DependencyProperty: Elevation
 
 		/// <summary>
-		/// Gets or sets the level of elevation to depict for the attached view. In Material, elevation can be used to drive both the shadow and the surface tint color (https://m3.material.io/styles/elevation/overview)
+		/// Gets or sets the level of elevation to depict for the attached view.
 		/// </summary>
 		public static DependencyProperty ElevationProperty { [DynamicDependency(nameof(ElevationProperty))] get; } = DependencyProperty.RegisterAttached(
 			"Elevation",
 			typeof(int),
 			typeof(ControlExtensions),
-			new PropertyMetadata(0, OnElevationChanged));
+			new PropertyMetadata(0));
 
 		[DynamicDependency(nameof(SetElevation))]
 		public static int GetElevation(Control obj) => (int)obj.GetValue(ElevationProperty);
@@ -96,44 +96,5 @@ namespace Uno.Material
 		public static void SetElevation(Control obj, int value) => obj.SetValue(ElevationProperty, value);
 
 		#endregion
-
-		#region DependencyProperty: TintedBackground
-		/// <summary>
-		/// Gets or sets the SolidColorBrush to use when depicting a surface tint on an elevated view.
-		/// </summary>
-		public static DependencyProperty TintedBackgroundProperty { [DynamicDependency(nameof(GetTintedBackground))] get; } = DependencyProperty.RegisterAttached(
-			"TintedBackground",
-			typeof(SolidColorBrush),
-			typeof(ControlExtensions),
-			new PropertyMetadata(default(SolidColorBrush)));
-
-		[DynamicDependency(nameof(SetTintedBackground))]
-		public static SolidColorBrush GetTintedBackground(UIElement obj) => (SolidColorBrush)obj.GetValue(TintedBackgroundProperty);
-		[DynamicDependency(nameof(GetTintedBackground))]
-		public static void SetTintedBackground(UIElement obj, SolidColorBrush value) => obj.SetValue(TintedBackgroundProperty, value);
-
-		#endregion
-		#region DependencyProperty: IsTintEnabled
-		/// <summary>
-		/// Gets or sets whether or not the SurfaceTintColor should be applied for elevated views
-		/// </summary>
-		public static DependencyProperty IsTintEnabledProperty { [DynamicDependency(nameof(GetIsTintEnabled))] get; } = DependencyProperty.RegisterAttached(
-			"IsTintEnabled",
-			typeof(bool),
-			typeof(ControlExtensions),
-			new PropertyMetadata(false, OnIsTintEnabledChanged));
-
-		[DynamicDependency(nameof(SetIsTintEnabled))]
-		public static bool GetIsTintEnabled(UIElement obj) => (bool)obj.GetValue(IsTintEnabledProperty);
-		[DynamicDependency(nameof(GetIsTintEnabled))]
-		public static void SetIsTintEnabled(UIElement obj, bool value) => obj.SetValue(IsTintEnabledProperty, value);
-
-		#endregion
-
-		private static void OnElevationChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
-			=> SurfaceTintExtensions.OnElevationChanged(element, (int)e.NewValue);
-
-		private static void OnIsTintEnabledChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
-			=> SurfaceTintExtensions.OnIsTintEnabledChanged(element, (bool)e.NewValue);
 	}
 }
