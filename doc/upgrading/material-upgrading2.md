@@ -26,7 +26,7 @@ The Uno Material v2 NuGet package contains both sets of v1 and v2 styles. Within
 
 Both `MaterialColors` and `MaterialResources` will now always initialize the latest version of the Material styles. It is also possible to directly reference the `MaterialColorsV2` and `MaterialResourcesV2` ResourceDictionaries if needed.
 
-The v2 styles introduce a new naming system for its resource keys. Refer to the [Material Styles Matrix](material-controls-styles.md) for the updated style keys. In addition to the new style keys, the Uno Material color palette and text resources have also been updated to align with the [Material Design 3 Color System](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and the [Material Design 3 Typography Guidelines](https://m3.material.io/styles/typography/type-scale-tokens).
+The v2 styles introduce a new naming system for its resource keys. Refer to the [Material Styles Matrix](xref:Uno.Themes.Material.Styles) for the updated style keys. In addition to the new style keys, the Uno Material color palette and text resources have also been updated to align with the [Material Design 3 Color System](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and the [Material Design 3 Typography Guidelines](https://m3.material.io/styles/typography/type-scale-tokens).
 
 ### Color Update
 
