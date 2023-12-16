@@ -2,7 +2,7 @@
 uid: Uno.Themes.Cupertino.GetStarted
 ---
 
-# Uno.Cupertino
+# Uno Cupertino
 
 <p align="center">
   <img src="assets/cupertino-design-system.png" alt="Cupertino design system" />
@@ -24,7 +24,7 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
 
-        <!-- Load Uno.Cupertino resources -->
+        <!-- Load Uno Cupertino resources -->
         <CupertinoColors xmlns="using:Uno.Cupertino" />
         <CupertinoFonts xmlns="using:Uno.Cupertino" />
         <CupertinoResources xmlns="using:Uno.Cupertino" />
@@ -33,7 +33,7 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
     </ResourceDictionary>
     ```
 
-### Installing Uno.Cupertino on previous versions of Uno Platform
+### Installing Uno Cupertino on previous versions of Uno Platform
 
 If your application is based on the older solution template that includes a shared project (.shproj), follow these steps:
 
@@ -59,7 +59,7 @@ If your application is based on the older solution template that includes a shar
                     <!-- Load WinUI resources -->
                     <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
-                    <!-- Load Uno.Cupertino resources -->
+                    <!-- Load Uno Cupertino resources -->
                     <CupertinoColors xmlns="using:Uno.Cupertino" />
                     <CupertinoFonts xmlns="using:Uno.Cupertino" />
                     <CupertinoResources xmlns="using:Uno.Cupertino" />
@@ -117,9 +117,9 @@ If your application is based on the older solution template that includes a shar
 
 ### Change Default Font
 
-By default, Uno.Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno.Cupertino package, you will have a `CupertinoFontFamily` resource available.
+By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available.
 
-If you would like Uno.Cupertino to use a different font, you can override the default `FontFamily` following these steps:
+If you would like Uno Cupertino to use a different font, you can override the default `FontFamily` following these steps:
 
 1. Add the custom font following [this guide](https://platform.uno/docs/articles/features/custom-fonts.html)
 2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `CupertinoFontsOverride.xaml`

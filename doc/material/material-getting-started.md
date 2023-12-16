@@ -2,21 +2,21 @@
 uid: Uno.Themes.Material.GetStarted
 ---
 
-# Uno.Material
+# Uno Material
 
 <p align="center">
   <img src="assets/material-design-system.png" alt="Material design system" />
 </p>
 
-The Uno.Material library is available as NuGet packages that can be added to any new or existing Uno solution.
+The Uno Material library is available as NuGet packages that can be added to any new or existing Uno solution.
 Uno Material lets you apply [Material Design 3](https://m3.material.io/) styling to your application with just a few lines of code.
 
 > [!WARNING]
-> If you are updating Uno.Material to v2 from an older 1.x version of the package, additional steps will be required. Refer to the [Uno Material Migration Guide](material-migration.md).
+> If you are updating Uno Material to v2 from an older 1.x version of the package, additional steps will be required. Refer to the [Uno Material Migration Guide](material-migration.md).
 
 ## Getting Started
 
-Initialization of the Uno.Material resources is handled by the specialized `MaterialTheme` ResourceDictionary.
+Initialization of the Uno Material resources is handled by the specialized `MaterialTheme` ResourceDictionary.
 
 ### `MaterialTheme`
 
@@ -31,8 +31,8 @@ Initialization of the Uno.Material resources is handled by the specialized `Mate
 
 | Property                  | Type              | Description                                                                                   |
 |---------------------------|-------------------|-----------------------------------------------------------------------------------------------|
-| ColorOverrideSource             | string            | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a ResourceDictionary containing overrides for the default Uno.Material Color resources                                            |
-| FontOverrideSource     | string      | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a ResourceDictionary containing overrides for the default Uno.Material font resources            |
+| ColorOverrideSource             | string            | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a ResourceDictionary containing overrides for the default Uno Material Color resources                                            |
+| FontOverrideSource     | string      | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a ResourceDictionary containing overrides for the default Uno Material font resources            |
 
 > [!NOTE]
 > As of [Uno Platform 4.7](https://platform.uno/blog/uno-platform-4-7-new-project-template-performance-improvements-and-more/), the solution template of an Uno app has changed. There is no longer a Shared project (.shproj), it has been replaced with a regular cross-platform library containing all user code files, referred to as the **App Code Library** project. This also implies that package references can be included in a single location without the previous need to include those in all project heads.
@@ -46,14 +46,14 @@ Initialization of the Uno.Material resources is handled by the specialized `Mate
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
 
-            <!-- Load Uno.Material resources -->
+            <!-- Load Uno Material resources -->
             <MaterialTheme xmlns="using:Uno.Material" />
 
         </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
     ```
 
-### Installing Uno.Material on previous versions of Uno Platform
+### Installing Uno Material on previous versions of Uno Platform
 
 If your application is based on the older solution template that includes a shared project (.shproj), follow these steps:
 
@@ -79,7 +79,7 @@ If your application is based on the older solution template that includes a shar
                     <!-- Load WinUI resources -->
                     <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
-                    <!-- Load Uno.Material resources -->
+                    <!-- Load Uno Material resources -->
                     <MaterialTheme xmlns="using:Uno.Material" />
 
                     <!-- Load custom application resources -->
@@ -235,9 +235,9 @@ Use this when you want to specify MANUALLY each colors.
 
 ### Change Default Font
 
-By default, Uno.Material comes pre-packaged with the [Roboto](https://fonts.google.com/specimen/Roboto) font families and automatically includes them in your application. Upon installation of the Uno.Material package, you will have the following resources available: `MaterialLightFontFamily`, `MaterialRegularFontFamily`, and `MaterialMediumFontFamily`.
+By default, Uno Material comes pre-packaged with the [Roboto](https://fonts.google.com/specimen/Roboto) font families and automatically includes them in your application. Upon installation of the Uno Material package, you will have the following resources available: `MaterialLightFontFamily`, `MaterialRegularFontFamily`, and `MaterialMediumFontFamily`.
 
-If you would like Uno.Material to use a different font, you can override the default font families following these steps:
+If you would like Uno Material to use a different font, you can override the default font families following these steps:
 
 1. Add the custom font following [this guide](https://platform.uno/docs/articles/features/custom-fonts.html)
 2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `MaterialFontsOverride.xaml`

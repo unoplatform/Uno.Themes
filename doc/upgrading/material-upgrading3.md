@@ -2,7 +2,7 @@
 uid: Uno.Themes.Material.Upgrading3
 ---
 
-# Updating to Uno.Material 3.x
+# Updating to Uno Material 3.x
 
 The 3.x versions of the [Uno.Material](https://www.nuget.org/packages/Uno.Material/3.0.40) and [Uno.Material.WinUI](https://www.nuget.org/packages/Uno.Material.WinUI/3.0.40) NuGet packages introduce support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. Refer to the tables below for the changes that have been made within Uno Material.
 

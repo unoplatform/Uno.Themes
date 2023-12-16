@@ -20,8 +20,8 @@ uid: Uno.Themes.Overview
 
 It contains two libraries:
 
-- The `Uno.Material` library is designed to help you use [Material Design 3](https://m3.material.io/)
-- The `Uno.Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
+- The `Uno Material` library is designed to help you use [Material Design 3](https://m3.material.io/)
+- The `Uno Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
 
 Both libraries help you style your application with a few lines of code including:
 
