@@ -93,15 +93,15 @@ If your application is based on the older solution template that includes a shar
 
 ## Customization
 
-### Color Overrides using _Material Theme Builder_ and DSP format
+### Color Overrides using Google's Material Theme Builder
 
-It is possible to use the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) to generate a custom color palette derived from your own basic colors. The generated palette is provided in the [DSP format](https://m3.material.io/styles/color/the-color-system/color-dsp) and can be used to override the default Uno.Material colors.
+It is possible to use the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) from Google to generate a custom color palette. The generated palette is provided in the [DSP format](https://m3.material.io/styles/color/the-color-system/color-dsp) and can be used to override the default Uno Material colors.
 
-The tooling required to generate the _Material Colors Override_ file from a DSP package (zip file) will be present by default when creating a _Uno Extensions_ project with support for Uno.Material.
+The tooling required to generate the color palette override file from a DSP file will be present by default when creating an Uno Platform application using the Wizard and selecting the Material theme.
 
 ![Wizard - Theme Selection](assets\material-theme-selection-wizard.png)
 
-Follow this link to get [more Information about the DSP tooling](xref:Uno.Material.DSP).
+For more information on importing a custom color palette, see [Using the Material Theme Builder in Uno Material](xref:Uno.Themes.Material.DSP).
 
 ### Manual Color Overrides
 
