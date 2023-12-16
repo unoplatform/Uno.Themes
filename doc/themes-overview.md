@@ -10,23 +10,23 @@ uid: Uno.Themes.Overview
 
 ## Summary
 
-- [Material Overview](material-getting-started.md)
-- [Cupertino Overview](cupertino-getting-started.md)
-- [Fluent Overview](fluent-getting-started.md)
+- [Cupertino Overview](xref:Uno.Themes.Cupertino.GetStarted)
+- [Fluent Overview](xref:Uno.Themes.Fluent.GetStarted)
+- [Material Overview](xref:Uno.Themes.Material.GetStarted)
 
 ## Uno Themes Styles
 
-[Uno.Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons NuGet packages that can be added to any new or existing Uno solution.
+[Uno.Themes](https://github.com/unoplatform/Uno.Themes) is the repository for NuGet packages that can be added to any new or existing Uno Platform solution.
 
 It contains two libraries:
 
-- `Uno.Material` library is designed to help you use [Material Design 3](https://m3.material.io/)
-- `Uno.Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
+- The `Uno.Material` library is designed to help you use [Material Design 3](https://m3.material.io/)
+- The `Uno.Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
 
-Both libraries help you style your application with a few lines of code include and include:
+Both libraries help you style your application with a few lines of code including:
 
-- Color system for both Light and Dark theme
-- Styles for existing WinUI controls like Buttons, TextBox, etc.
+- Color systems for both Light and Dark theme
+- Styles for existing WinUI controls like Button, TextBox, etc.
 
 ## Fluent Controls Styles
 
