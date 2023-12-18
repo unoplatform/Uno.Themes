@@ -337,6 +337,7 @@ If you would like Uno.Material to use a different font, you can override the def
     }
 
 ***
+
 5. In `AppResources` file, update `MaterialTheme` with the override from the previous steps:
 # [**XAML**](#tab/xaml)
 
@@ -349,6 +350,7 @@ If you would like Uno.Material to use a different font, you can override the def
         new MaterialTheme()
             .FontOverrideDictionary(new Styles.MaterialFontsOverride())));
 
+***
 
 ## Additional Resources
 
