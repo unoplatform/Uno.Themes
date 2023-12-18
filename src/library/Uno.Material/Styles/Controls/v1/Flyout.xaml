@@ -393,7 +393,7 @@
 								<TextBlock x:Name="KeyboardAcceleratorTextBlock"
 										   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 										   Style="{StaticResource MaterialBody2}"
-										   Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+										   Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 										   Foreground="{ThemeResource ToggleMenuFlyoutItemKeyboardAcceleratorTextForeground}"
 										   VerticalAlignment="Center"
 										   TextAlignment="Right"
