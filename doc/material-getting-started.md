@@ -46,7 +46,7 @@ Initialization of the Uno.Material resources is handled by the specialized `Mate
 4. Add the following Material resources to `AppResources`:
 
 # [**XAML**](#tab/xaml)
-    ```xml
+
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
 
@@ -55,10 +55,8 @@ Initialization of the Uno.Material resources is handled by the specialized `Mate
 
         </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
-    ```
 
 # [**C#**](#tab/csharp)
-    ```csharp
     using Uno.Material;
 
     public sealed class AppResources : ResourceDictionary
@@ -70,7 +68,6 @@ Initialization of the Uno.Material resources is handled by the specialized `Mate
                 new MaterialTheme()));
         }
     }
-    ```
 
 ***
 
