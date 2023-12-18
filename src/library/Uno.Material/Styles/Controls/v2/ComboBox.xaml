@@ -614,7 +614,7 @@
 											  VerticalAlignment="Center"
 											  Foreground="{ThemeResource ComboBoxLeadingIconForeground}"
 											  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 							<!-- ContentPresenter -->
 							<ContentPresenter x:Name="ContentPresenter"
