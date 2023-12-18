@@ -129,7 +129,7 @@ Use this when you want to specify MANUALLY each colors.
 2. Save the new override file within the **App Code Library**, for example, under `Styles/Application`.
 3. Replace the content with:
 # [**XAML**](#tab/xaml)
-    ```xml
+
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         <ResourceDictionary.ThemeDictionaries>
@@ -242,9 +242,9 @@ Use this when you want to specify MANUALLY each colors.
 
         </ResourceDictionary.ThemeDictionaries>
     </ResourceDictionary>
-    ```
+
 # [**C#**](#tab/csharp)
-    ```csharp
+
     namespace PROJECT_NAME.Styles;
 
     public sealed partial class ColorPaletteOverride : ResourceDictionary
@@ -285,20 +285,20 @@ Use this when you want to specify MANUALLY each colors.
             );
         }
     }
-    ```
+
 ***
 4. In `AppResources` file, update `MaterialTheme` with the override from the previous steps:
 # [**XAML**](#tab/xaml)
-    ```xml
+
     <MaterialTheme xmlns="using:Uno.Material"
                    ColorOverrideSource="ms-appx:///PROJECT_NAME/Styles/Application/MaterialColorsOverride.xaml" />
-    ```
+
 # [**C#**](#tab/csharp)
-    ```csharp
+
     this.Build(r => r.Merged(
 			new MaterialTheme()
 				.ColorOverrideDictionary(new Styles.ColorPaletteOverride())));
-    ```
+
 ***
 ### Change Default Font
 
@@ -311,7 +311,7 @@ If you would like Uno.Material to use a different font, you can override the def
 3. Save the new override file within the **App Code Library**, for example, under `Styles/Application`.
 4. Assuming the font file has been placed in the **App Code Library** within, for example, a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
 # [**XAML**](#tab/xaml)
-    ```xml
+
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
@@ -320,9 +320,9 @@ If you would like Uno.Material to use a different font, you can override the def
         <FontFamily x:Key="MaterialRegularFontFamily">ms-appx:///PROJECT_NAME/Assets/Fonts/MyCustomFont-Regular.ttfMyCustomFont</FontFamily>
 
     </ResourceDictionary>
-    ```
+
 # [**C#**](#tab/csharp)
-    ```csharp
+
     namespace PROJECT_NAME.Styles;
 
     public sealed class MaterialFontsOverride : ResourceDictionary
@@ -335,20 +335,20 @@ If you would like Uno.Material to use a different font, you can override the def
                 .Add<FontFamily>("MaterialRegularFontFamily", "ms-appx:///PROJECT_NAME/Assets/Fonts/MyCustomFont-Regular.ttfMyCustomFont"));
         }
     }
-    ```
+
 ***
 5. In `AppResources` file, update `MaterialTheme` with the override from the previous steps:
 # [**XAML**](#tab/xaml)
-    ```xml
+
     <MaterialTheme xmlns="using:Uno.Material"
                    FontOverrideSource="ms-appx:///PROJECT_NAME/Styles/Application/MaterialFontsOverride.xaml" />
-    ```
+
 # [**C#**](#tab/csharp)
-    ```csharp
+
     this.Build(r => r.Merged(
         new MaterialTheme()
             .FontOverrideDictionary(new Styles.MaterialFontsOverride())));
-    ```
+
 
 ## Additional Resources
 
