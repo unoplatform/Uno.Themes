@@ -77,7 +77,7 @@ If your application is based on the older solution template that includes a shar
 1. Open an existing Uno project
 2. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
      - The [`Uno.Material`](https://www.nuget.org/packages/Uno.Material/) package when targetting Xamarin/UWP
-     - The [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI) package for XAML or [`Uno.Material.WinUI.Markup`](https://www.nuget.org/packages/Uno.Material.WinUI.Markup) for C# Markup, when targetting net6.0+/WinUI
+     - The [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI) package when targetting net6.0+/WinUI
 
 3. Select the following projects for installation:
     - `PROJECT_NAME.Wasm.csproj`
@@ -85,7 +85,7 @@ If your application is based on the older solution template that includes a shar
     - `PROJECT_NAME.Skia.Gtk.csproj`
     - `PROJECT_NAME.Skia.WPF.csproj`
     - `PROJECT_NAME.Windows.csproj` (or `PROJECT_NAME.UWP.csproj` for existing projects)
-4. Add the following resources inside the `App` file:
+4. Add the following resources inside `App.xaml` file:
 
     ```xml
     <Application ...>

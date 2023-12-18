@@ -206,7 +206,7 @@ The above code will produce the following result:
 
 ![Uno Material Elevation Buttons with Tint Enabled](assets/material-elevation-buttons.png)
 
-If we were to alter the code above and set `IsTintEnabled` to `False` (XAML: `um:ControlExtensions.IsTintEnabled="False"` / C#: `ControlExtensions(isTintEnabled: false)`) on each of the buttons, we would see elevated buttons without tints:
+If we were to alter the code above and set `IsTintEnabled` to `False` (XAML: `um:ControlExtensions.IsTintEnabled="False"` or C#: `ControlExtensions(isTintEnabled: false)`) on each of the buttons, we would see elevated buttons without tints:
 
 ![Uno Material Elevation Buttons with Tint Disabled](assets/material-elevation-buttons-shadow-only.png)
 
