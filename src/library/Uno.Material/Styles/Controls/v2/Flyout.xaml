@@ -446,7 +446,7 @@
 								           Style="{StaticResource MaterialLabelLarge}"
 								           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 								           TextAlignment="Right"
-								           Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+								           Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 							</Grid>
 						</Grid>
 

@@ -821,7 +821,7 @@
 										<Viewbox>
 											<ContentPresenter x:Name="OnIconPresenter"
 															  Content="{TemplateBinding OnContent}"
-															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToVisible}}"
+															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TrueToVisibleConverter}}"
 															  VerticalAlignment="Center"
 															  HorizontalAlignment="Center"
 															  VerticalContentAlignment="Center"
@@ -856,7 +856,7 @@
 										<Viewbox>
 											<ContentPresenter x:Name="OffIconPresenter"
 															  Content="{TemplateBinding OffContent}"
-															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToCollapsed}}"
+															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TrueToCollapsedConverter}}"
 															  VerticalAlignment="Center"
 															  HorizontalAlignment="Center"
 															  VerticalContentAlignment="Center"
