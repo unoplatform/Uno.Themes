@@ -44,17 +44,8 @@
 			<ItemGroup>
 				<PackageReference Include="Uno.WinUI" Version="5.0.19" />
 
-				<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.19" Condition="!$(_IsWinUI)" />
-
 				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" Condition="$(_IsWinUI)" />
 				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)" />
-			</ItemGroup>
-
-			<ItemGroup Condition="$(_IsWinUI)">
-				<Content Include="@(LottieJson)" />
-			</ItemGroup>
-			<ItemGroup Condition="!$(_IsWinUI)">
-				<EmbeddedResource Include="@(LottieJson)" />
 			</ItemGroup>
 
 			<ItemGroup Condition="$(_IsWinUI)">
@@ -68,11 +59,6 @@
 				<Compile Update="**\*.xaml.cs">
 					<DependentUpon>%(Filename)</DependentUpon>
 				</Compile>
-			</ItemGroup>
-
-			<ItemGroup Condition="!$(_IsWinUI)">
-				<IncludeXamlNamespaces Include="lottie_not_win" />
-				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
 
 		</When>
@@ -88,17 +74,6 @@
 				<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
 				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
 			</ItemGroup>
-			<ItemGroup Condition="!$(_IsUWP)">
-				<PackageReference Include="Uno.UI.Lottie" Version="5.0.19" />
-			</ItemGroup>
-
-
-			<ItemGroup Condition="$(_IsUWP)">
-				<Content Include="@(LottieJson)" />
-			</ItemGroup>
-			<ItemGroup Condition="!$(_IsUWP)">
-				<EmbeddedResource Include="@(LottieJson)" />
-			</ItemGroup>
 
 			<ItemGroup>
 				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
@@ -107,11 +82,6 @@
 				<Compile Update="**\*.xaml.cs">
 					<DependentUpon>%(Filename)</DependentUpon>
 				</Compile>
-			</ItemGroup>
-
-			<ItemGroup Condition="!$(_IsUWP)">
-				<IncludeXamlNamespaces Include="lottie_not_win" />
-				<ExcludeXamlNamespaces Include="lottie_win" />
 			</ItemGroup>
 
 		</Otherwise>
