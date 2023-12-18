@@ -2,49 +2,49 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ut="using:Uno.Themes">
 
-	<ut:FromBoolToValueConverter x:Key="MaterialTrueToVisible"
+	<ut:FromBoolToValueConverter x:Key="TrueToVisibleConverter"
 								 TrueValue="Visible"
 								 FalseValue="Collapsed"
 								 NullValue="Collapsed" />
 
-	<ut:FromBoolToValueConverter x:Key="MaterialTrueToCollapsed"
+	<ut:FromBoolToValueConverter x:Key="TrueToCollapsedConverter"
 								 TrueValue="Collapsed"
 								 FalseValue="Visible"
 								 NullValue="Visible" />
 
-	<ut:FromEmptyStringToValueConverter x:Key="MaterialEmptyToFalse"
+	<ut:FromEmptyStringToValueConverter x:Key="EmptyToFalseConverter"
 										NotNullOrEmptyValue="True"
 										NullOrEmptyValue="False" />
 
-	<ut:FromEmptyStringToValueConverter x:Key="MaterialEmptyToTrue"
+	<ut:FromEmptyStringToValueConverter x:Key="EmptyToTrueConverter"
 										NotNullOrEmptyValue="False"
 										NullOrEmptyValue="True" />
 
-	<ut:FromEmptyStringToValueConverter x:Key="MaterialEmptyToVisible"
+	<ut:FromEmptyStringToValueConverter x:Key="EmptyToVisibleConverter"
 										NotNullOrEmptyValue="Collapsed"
 										NullOrEmptyValue="Visible" />
 
-	<ut:FromEmptyStringToValueConverter x:Key="MaterialEmptyToCollapsed"
+	<ut:FromEmptyStringToValueConverter x:Key="EmptyToCollapsedConverter"
 										NotNullOrEmptyValue="Visible"
 										NullOrEmptyValue="Collapsed" />
 
-	<ut:FromNullToValueConverter x:Key="MaterialNullToCollapsedConverter"
+	<ut:FromNullToValueConverter x:Key="NullToCollapsedConverter"
 								 NotNullValue="Visible"
 								 NullValue="Collapsed" />
 
-	<ut:FromNullToValueConverter x:Key="MaterialNullToVisibleConverter"
+	<ut:FromNullToValueConverter x:Key="NullToVisibleConverter"
 								 NotNullValue="Visible"
 								 NullValue="Collapsed" />
 
-	<ut:FromNullToValueConverter x:Key="MaterialNullToTransparent"
+	<ut:FromNullToValueConverter x:Key="NullToTransparentConverter"
 								 NotNullValue="1"
 								 NullValue="0" />
-	
-	<ut:FromEmptyStringOrNullObjectToValueConverter x:Key="MaterialEmptyOrNullToVisible"
+
+	<ut:FromEmptyStringOrNullObjectToValueConverter x:Key="EmptyOrNullToVisibleConverter"
 													NotEmptyOrNullValue="Collapsed"
 													EmptyOrNullValue="Visible" />
 
-	<ut:FromEmptyStringOrNullObjectToValueConverter x:Key="MaterialEmptyOrNullToCollapsed"
+	<ut:FromEmptyStringOrNullObjectToValueConverter x:Key="EmptyOrNullToCollapsedConverter"
 													NotEmptyOrNullValue="Visible"
 													EmptyOrNullValue="Collapsed" />
 
