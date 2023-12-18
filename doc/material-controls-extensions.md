@@ -4,14 +4,18 @@ uid: Uno.Themes.Material.Extensions
 
 # Material Control Extensions
 
+> [!NOTE]
+> Uno Material also has support for C# Markup through a [Uno.Material.WinUI.Markup](https://www.nuget.org/packages/Uno.Material.WinUI.Markup) NuGet Package. To get started with Uno Material in your C# Markup application, add the `Uno.Material.WinUI.Markup` NuGet package to your **App Code Library** project and your platform heads.
+
 ## Icon
 
-This feature allows for the addition of icon on the supported controls. Those icons could be any of the [`IconElement`](https://docs.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s: `<BitmapIcon />`, `<FontIcon />`, `<PathIcon />` or `<SymbolIcon />`.
+This feature allows for the addition of icon on the supported controls. Those icons could be any of the [`IconElement`](https://docs.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s: `BitmapIcon`, `FontIcon`, `PathIcon` or `SymbolIcon`.
 
 Here are supported control with samples:
 
 * TextBox:
 
+# [**XAML**](#tab/xaml)
     ```xml
     <TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
         <um:ControlExtensions.Icon>
@@ -20,8 +24,23 @@ Here are supported control with samples:
     </ComboBox>
     ```
 
+# [**C#**](#tab/csharp)
+    ```csharp
+    new TextBox()
+        .Style(Theme.TextBox.Styles.Filled)
+        .ControlExtensions
+        (
+            icon:
+                new SymbolIcon()
+                    .Symbol(Symbol.SolidStar)
+        )
+    ```
+
+***
+
 * ComboBox:
 
+# [**XAML**](#tab/xaml)
     ```xml
     <ComboBox Style="{StaticResource MaterialComboBoxStyle}">
         <um:ControlExtensions.Icon>
@@ -30,6 +49,19 @@ Here are supported control with samples:
     </ComboBox>
     ```
 
+# [**C#**](#tab/csharp)
+    ```csharp
+    new ComboBox()
+        .Style(Theme.ComboBox.Styles.Default)
+        .ControlExtensions
+        (
+            icon:
+                new SymbolIcon()
+                    .Symbol(Symbol.SolidStar)
+        )
+    ```
+***
+
 ## Alternate Content
 
 This feature allows putting different content on a control when the state changes.
@@ -37,17 +69,38 @@ It's control specific and for now, you can only use it with the ToggleButton con
 
 ### Alternate Content on ToggleButton
 
-```xml
-<ToggleButton Style="{StaticResource MaterialToggleButtonIconStyle}">
-    <!-- This is the default content - which is when the control state is UNCHECKED (the default value of a ToggleButton) -->
-    <PathIcon Data="{StaticResource Icon_more_horizontal}" />
+# [**XAML**](#tab/xaml)
+    ```xml
+    <ToggleButton Style="{StaticResource MaterialToggleButtonIconStyle}">
+        <!-- This is the default content - which is when the control state is UNCHECKED (the default value of a ToggleButton) -->
+        <PathIcon Data="{StaticResource Icon_more_horizontal}" />
 
-    <!-- This is the alternate content - which is when the control state is CHECKED -->
-    <um:ControlExtensions.AlternateContent>
-        <PathIcon Data="{StaticResource Icon_more_vertical}" />
-    </um:ControlExtensions.AlternateContent>
-</ToggleButton>
-```
+        <!-- This is the alternate content - which is when the control state is CHECKED -->
+        <um:ControlExtensions.AlternateContent>
+            <PathIcon Data="{StaticResource Icon_more_vertical}" />
+        </um:ControlExtensions.AlternateContent>
+    </ToggleButton>
+    ```
+
+# [**C#**](#tab/csharp)
+    ```csharp
+    new ToggleButton()
+        .Style(Theme.ToggleButton.Styles.Icon)
+        // This is the default content - which is when the control state is UNCHECKED (the default value of a ToggleButton)
+        .Content
+        (
+            new PathIcon()
+                .Data(StaticResource.Get<Geometry>("Icon_more_horizontal"))
+        )
+        // This is the alternate content - which is when the control state is CHECKED
+        .ControlExtensions
+        (
+            alternateContent:
+                new PathIcon()
+                    .Data(StaticResource.Get<Geometry>("Icon_more_vertical"))
+        )
+    ```
+***
 
 ## Elevation
 
@@ -97,6 +150,7 @@ Within the `ControlTemplate` of the `ElevatedButtonStyle`, instead of performing
 
 Applying the surface tint for elevated controls is optional and must be explicitly enabled through the use of the `IsTintEnabled` attached property. Below is an example of how an elevated control may appear  with or without a surface tint:
 
+# [**XAML**](#tab/xaml)
 ```xml
 <StackPanel Spacing="8">
     <Button Content="Elevation 0"
@@ -120,11 +174,45 @@ Applying the surface tint for elevated controls is optional and must be explicit
 </StackPanel> 
 ```
 
-The above XAML will produce the following result:
+# [**C#**](#tab/csharp)
+```csharp
+new StackPanel()
+    .Spacing(8)
+    .Children(
+        new Button()
+            .Content("Elevation 0")
+            .ControlExtensions(elevation: 0)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 1")
+            .ControlExtensions(elevation: 1)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 2")
+            .ControlExtensions(elevation: 2)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 3")
+            .ControlExtensions(elevation: 3)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 4")
+            .ControlExtensions(elevation: 4)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 5")
+            .ControlExtensions(elevation: 5)
+            .Style(Theme.Button.Styles.Elevated)
+    )
+```
+
+***
+
+The above code will produce the following result:
 
 ![Uno Material Elevation Buttons with Tint Enabled](assets/material-elevation-buttons.png)
 
-If we were to alter the XAML above and set `um:ControlExtensions.IsTintEnabled="False"` on each of the buttons, we would see elevated buttons without tints:
+If we were to alter the code above and set `IsTintEnabled` to `False` (XAML: `um:ControlExtensions.IsTintEnabled="False"` / C#: `ControlExtensions(isTintEnabled: false)`) on each of the buttons, we would see elevated buttons without tints:
 
 ![Uno Material Elevation Buttons with Tint Disabled](assets/material-elevation-buttons-shadow-only.png)
 
