@@ -17,23 +17,23 @@ Here are supported control with samples:
 
 # [**XAML**](#tab/xaml)
 
-    <TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
-        <um:ControlExtensions.Icon>
-            <SymbolIcon Symbol="SolidStar" />
-        </um:ControlExtensions.Icon>
-    </ComboBox>
+<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
+    <um:ControlExtensions.Icon>
+        <SymbolIcon Symbol="SolidStar" />
+    </um:ControlExtensions.Icon>
+</ComboBox>
 
 
 # [**C#**](#tab/csharp)
 
-    new TextBox()
-        .Style(Theme.TextBox.Styles.Filled)
-        .ControlExtensions
-        (
-            icon:
-                new SymbolIcon()
-                    .Symbol(Symbol.SolidStar)
-        )
+new TextBox()
+    .Style(Theme.TextBox.Styles.Filled)
+    .ControlExtensions
+    (
+        icon:
+            new SymbolIcon()
+                .Symbol(Symbol.SolidStar)
+    )
 
 ***
 
@@ -41,22 +41,22 @@ Here are supported control with samples:
 
 # [**XAML**](#tab/xaml)
 
-    <ComboBox Style="{StaticResource MaterialComboBoxStyle}">
-        <um:ControlExtensions.Icon>
-            <SymbolIcon Symbol="SolidStar" />
-        </um:ControlExtensions.Icon>
-    </ComboBox>
+<ComboBox Style="{StaticResource MaterialComboBoxStyle}">
+    <um:ControlExtensions.Icon>
+        <SymbolIcon Symbol="SolidStar" />
+    </um:ControlExtensions.Icon>
+</ComboBox>
 
 # [**C#**](#tab/csharp)
 
-    new ComboBox()
-        .Style(Theme.ComboBox.Styles.Default)
-        .ControlExtensions
-        (
-            icon:
-                new SymbolIcon()
-                    .Symbol(Symbol.SolidStar)
-        )
+new ComboBox()
+    .Style(Theme.ComboBox.Styles.Default)
+    .ControlExtensions
+    (
+        icon:
+            new SymbolIcon()
+                .Symbol(Symbol.SolidStar)
+    )
 
 ***
 
@@ -69,33 +69,32 @@ It's control specific and for now, you can only use it with the ToggleButton con
 
 # [**XAML**](#tab/xaml)
 
-    <ToggleButton Style="{StaticResource MaterialToggleButtonIconStyle}">
-        <!-- This is the default content - which is when the control state is UNCHECKED (the default value of a ToggleButton) -->
-        <PathIcon Data="{StaticResource Icon_more_horizontal}" />
-
-        <!-- This is the alternate content - which is when the control state is CHECKED -->
-        <um:ControlExtensions.AlternateContent>
-            <PathIcon Data="{StaticResource Icon_more_vertical}" />
-        </um:ControlExtensions.AlternateContent>
-    </ToggleButton>
+<ToggleButton Style="{StaticResource MaterialToggleButtonIconStyle}">
+    <!-- This is the default content - which is when the control state is UNCHECKED (the default value of a ToggleButton) -->
+    <PathIcon Data="{StaticResource Icon_more_horizontal}" />
+    <!-- This is the alternate content - which is when the control state is CHECKED -->
+    <um:ControlExtensions.AlternateContent>
+        <PathIcon Data="{StaticResource Icon_more_vertical}" />
+    </um:ControlExtensions.AlternateContent>
+</ToggleButton>
 
 # [**C#**](#tab/csharp)
 
-    new ToggleButton()
-        .Style(Theme.ToggleButton.Styles.Icon)
-        // This is the default content - which is when the control state is UNCHECKED (the default value of a ToggleButton)
-        .Content
-        (
+new ToggleButton()
+    .Style(Theme.ToggleButton.Styles.Icon)
+    // This is the default content - which is when the control state is UNCHECKED (the default value of a ToggleButton)
+    .Content
+    (
+        new PathIcon()
+            .Data(StaticResource.Get<Geometry>("Icon_more_horizontal"))
+    )
+    // This is the alternate content - which is when the control state is CHECKED
+    .ControlExtensions
+    (
+        alternateContent:
             new PathIcon()
-                .Data(StaticResource.Get<Geometry>("Icon_more_horizontal"))
-        )
-        // This is the alternate content - which is when the control state is CHECKED
-        .ControlExtensions
-        (
-            alternateContent:
-                new PathIcon()
-                    .Data(StaticResource.Get<Geometry>("Icon_more_vertical"))
-        )
+                .Data(StaticResource.Get<Geometry>("Icon_more_vertical"))
+    )
 
 ***
 
@@ -149,58 +148,58 @@ Applying the surface tint for elevated controls is optional and must be explicit
 
 # [**XAML**](#tab/xaml)
 
-    <StackPanel Spacing="8">
-        <Button Content="Elevation 0"
-                um:ControlExtensions.Elevation="0"
-                Style="{StaticResource MaterialElevatedButtonStyle}" />
-        <Button Content="Elevation 1"
-                um:ControlExtensions.Elevation="1"
-                Style="{StaticResource MaterialElevatedButtonStyle}" />
-        <Button Content="Elevation 2"
-                um:ControlExtensions.Elevation="2"
-                Style="{StaticResource MaterialElevatedButtonStyle}" />
-        <Button Content="Elevation 3"
-                um:ControlExtensions.Elevation="3"
-                Style="{StaticResource MaterialElevatedButtonStyle}" />
-        <Button Content="Elevation 4"
-                um:ControlExtensions.Elevation="4"
-                Style="{StaticResource MaterialElevatedButtonStyle}" />
-        <Button Content="Elevation 5"
-                um:ControlExtensions.Elevation="5"
-                Style="{StaticResource MaterialElevatedButtonStyle}" />
-    </StackPanel> 
+<StackPanel Spacing="8">
+    <Button Content="Elevation 0"
+            um:ControlExtensions.Elevation="0"
+            Style="{StaticResource MaterialElevatedButtonStyle}" />
+    <Button Content="Elevation 1"
+            um:ControlExtensions.Elevation="1"
+            Style="{StaticResource MaterialElevatedButtonStyle}" />
+    <Button Content="Elevation 2"
+            um:ControlExtensions.Elevation="2"
+            Style="{StaticResource MaterialElevatedButtonStyle}" />
+    <Button Content="Elevation 3"
+            um:ControlExtensions.Elevation="3"
+            Style="{StaticResource MaterialElevatedButtonStyle}" />
+    <Button Content="Elevation 4"
+            um:ControlExtensions.Elevation="4"
+            Style="{StaticResource MaterialElevatedButtonStyle}" />
+    <Button Content="Elevation 5"
+            um:ControlExtensions.Elevation="5"
+            Style="{StaticResource MaterialElevatedButtonStyle}" />
+</StackPanel> 
 
 
 # [**C#**](#tab/csharp)
 
-    new StackPanel()
-        .Spacing(8)
-        .Children(
-            new Button()
-                .Content("Elevation 0")
-                .ControlExtensions(elevation: 0)
-                .Style(Theme.Button.Styles.Elevated),
-            new Button()
-                .Content("Elevation 1")
-                .ControlExtensions(elevation: 1)
-                .Style(Theme.Button.Styles.Elevated),
-            new Button()
-                .Content("Elevation 2")
-                .ControlExtensions(elevation: 2)
-                .Style(Theme.Button.Styles.Elevated),
-            new Button()
-                .Content("Elevation 3")
-                .ControlExtensions(elevation: 3)
-                .Style(Theme.Button.Styles.Elevated),
-            new Button()
-                .Content("Elevation 4")
-                .ControlExtensions(elevation: 4)
-                .Style(Theme.Button.Styles.Elevated),
-            new Button()
-                .Content("Elevation 5")
-                .ControlExtensions(elevation: 5)
-                .Style(Theme.Button.Styles.Elevated)
-        )
+new StackPanel()
+    .Spacing(8)
+    .Children(
+        new Button()
+            .Content("Elevation 0")
+            .ControlExtensions(elevation: 0)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 1")
+            .ControlExtensions(elevation: 1)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 2")
+            .ControlExtensions(elevation: 2)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 3")
+            .ControlExtensions(elevation: 3)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 4")
+            .ControlExtensions(elevation: 4)
+            .Style(Theme.Button.Styles.Elevated),
+        new Button()
+            .Content("Elevation 5")
+            .ControlExtensions(elevation: 5)
+            .Style(Theme.Button.Styles.Elevated)
+    )
 
 
 ***
