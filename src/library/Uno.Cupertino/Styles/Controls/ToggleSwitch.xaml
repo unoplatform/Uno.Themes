@@ -247,7 +247,7 @@
 						<TextBlock Text="{TemplateBinding Header}"
 								   Style="{StaticResource CupertinoBaseTextBlockStyle}"
 								   Foreground="{ThemeResource CupertinoLabelBrush}"
-								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, TargetNullValue=Collapsed}"
+								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, TargetNullValue=Collapsed}"
 								   Grid.ColumnSpan="4" />
 
 						<ContentPresenter x:Name="OnContentPresenter"
