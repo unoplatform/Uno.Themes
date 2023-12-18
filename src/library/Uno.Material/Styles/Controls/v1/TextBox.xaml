@@ -187,12 +187,12 @@
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 								<VisualState x:Name="Empty">
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -207,7 +207,7 @@
 
 							<Border Margin="{TemplateBinding Padding}">
 								<ContentPresenter x:Name="IconPresenter"
-												  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+												  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  MaxHeight="34"
 												  MaxWidth="34"
@@ -398,12 +398,12 @@
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 								<VisualState x:Name="Empty">
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -418,7 +418,7 @@
 
 							<Border Margin="{TemplateBinding Padding}">
 								<ContentPresenter x:Name="IconPresenter"
-                                                  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+                                                  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  MaxHeight="34"
 												  MaxWidth="34"
