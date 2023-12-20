@@ -19,7 +19,7 @@ namespace Uno.Cupertino
 	{
 		public CupertinoResources()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Themes/Styles/Applications/Commnon/Converters.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Themes/Styles/Applications/Common/Converters.xaml") });
 			ImportResourceDictionaries();
 		}
 
