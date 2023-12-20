@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -36,7 +32,7 @@ namespace Uno.Cupertino
 
 		public CupertinoColors()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/ColorPalette.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(Themes.Constants.ConverterResourcePath) });
 			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
 			{
 				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
