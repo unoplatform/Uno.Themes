@@ -5,13 +5,14 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:material="using:Uno.Material"
+			 xmlns:ut="using:Uno.Themes"
 			 mc:Ignorable="d"
 			 d:DesignHeight="300"
 			 d:DesignWidth="400">
 	<UserControl.Resources>
 		<Visibility x:Key="StaticVisible">Visible</Visibility>
 		<Visibility x:Key="StaticCollapsed">Collapsed</Visibility>
-		<material:FromNullToValueConverter x:Key="NotNullVisibilityConverter"
+		<ut:FromNullToValueConverter x:Key="NotNullVisibilityConverter"
 										   NullValue="{StaticResource StaticCollapsed}"
 										   NotNullValue="{StaticResource StaticVisible}" />
 		<local:BrushToTextConverter x:Key="BrushToTextConverter" />
