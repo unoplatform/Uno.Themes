@@ -4,10 +4,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <!--
-			If, in the same solution, you are referencing a project that uses https://github.com/onovotny/MSBuildSdkExtras,
-			you need to make sure that the version provided here matches https://github.com/onovotny/MSBuildSdkExtras/blob/master/Source/MSBuild.Sdk.Extras/DefaultItems/ImplicitPackages.targets#L11.
-			This is not an issue when libraries are referenced through nuget packages. See https://github.com/unoplatform/uno/issues/446 for more details.
-			-->
+      If, in the same solution, you are referencing a project that uses https://github.com/onovotny/MSBuildSdkExtras,
+      you need to make sure that the version provided here matches https://github.com/onovotny/MSBuildSdkExtras/blob/master/Source/MSBuild.Sdk.Extras/DefaultItems/ImplicitPackages.targets#L11.
+      This is not an issue when libraries are referenced through nuget packages. See https://github.com/unoplatform/uno/issues/446 for more details.
+      -->
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
@@ -44,7 +44,7 @@
   </ItemGroup>
   <PropertyGroup>
     <!-- This is a visual studio 17.2 Preview 3 issue
-	       Tempory workaround here for this issue: https://github.com/unoplatform/uno/discussions/5007#discussioncomment-2583741 -->
+         Tempory workaround here for this issue: https://github.com/unoplatform/uno/discussions/5007#discussioncomment-2583741 -->
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
   </PropertyGroup>
   <PropertyGroup>
@@ -161,6 +161,9 @@
     <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj">
       <Project>{b5279ee5-e662-45b0-8929-d90d0bde16ab}</Project>
       <Name>Uno.Material</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\library\Uno.Themes\Uno.Themes.csproj">
+      <Name>Uno.Themes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
