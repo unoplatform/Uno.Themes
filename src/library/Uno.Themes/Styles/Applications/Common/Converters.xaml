@@ -12,6 +12,16 @@
 								 FalseValue="Visible"
 								 NullValue="Visible" />
 
+	<ut:FromBoolToValueConverter x:Key="FalseToCollapsedConverter"
+								 TrueValue="Visible"
+								 FalseValue="Collapsed"
+								 NullValue="Visible" />
+
+	<ut:FromBoolToValueConverter x:Key="FalseToVisibleConverter"
+								 TrueValue="Collapsed"
+								 FalseValue="Visible"
+								 NullValue="Collapsed" />
+
 	<ut:FromEmptyStringToValueConverter x:Key="EmptyToFalseConverter"
 										NotNullOrEmptyValue="True"
 										NullOrEmptyValue="False" />
