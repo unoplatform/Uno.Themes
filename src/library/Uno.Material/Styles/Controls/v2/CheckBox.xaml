@@ -292,18 +292,6 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!--#region Converters-->
-	<ut:FromBoolToValueConverter x:Key="CheckBoxIsCheckedToFocusStateCircleVisible"
-								 TrueValue="Visible"
-								 FalseValue="Collapsed"
-								 NullValue="Visible" />
-
-	<ut:FromBoolToValueConverter x:Key="CheckBoxIsCheckedToFocusStateCircleCollapsed"
-								 TrueValue="Collapsed"
-								 FalseValue="Visible"
-								 NullValue="Collapsed" />
-	<!--#endregion-->
-
 	<!-- Ne pas oublier qu'il faudra ajuster la doc pour les themeresources -->
 
 	<Style x:Key="MaterialCheckBoxStyle"
@@ -545,7 +533,7 @@
 								 Width="{ThemeResource CheckBoxFocusAreaSize}"
 								 Height="{ThemeResource CheckBoxFocusAreaSize}"
 								 Fill="Transparent"
-								 Visibility="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CheckBoxIsCheckedToFocusStateCircleCollapsed}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+								 Visibility="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource FalseToVisibleConverter}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -556,7 +544,7 @@
 								 Width="{ThemeResource CheckBoxFocusAreaSize}"
 								 Height="{ThemeResource CheckBoxFocusAreaSize}"
 								 Fill="Transparent"
-								 Visibility="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CheckBoxIsCheckedToFocusStateCircleVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
+								 Visibility="{Binding IsChecked, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource FalseToCollapsedConverter}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
