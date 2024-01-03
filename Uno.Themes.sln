@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.31903.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Material", "src\library\Uno.Material\Uno.Material.csproj", "{B5279EE5-E662-45B0-8929-D90D0BDE16AB}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Uno.Themes.Samples.Shared", "src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Uno.Themes.Samples.Shared", "src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Themes.Samples.UWP", "src\samples\UWP\Uno.Themes.Samples.UWP\Uno.Themes.Samples.UWP.csproj", "{265517E4-AB14-453D-92DA-F32AA1D4007D}"
 EndProject
@@ -14,6 +14,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.Samples.Mobile", "src\samples\UWP\Uno.Themes.Samples.Mobile\Uno.Themes.Samples.Mobile.csproj", "{D45D0327-B421-48F5-98BC-7C9B1D6ABD9E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{F42C65EA-6E6A-43B9-9D9F-D8C6063AD309}"
+	ProjectSection(SolutionItems) = preProject
+		src\samples\Directory.Packages.props = src\samples\Directory.Packages.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "library", "library", "{EB41D6CC-AEBE-40A8-B42C-D3F7FBA7001E}"
 EndProject
@@ -60,8 +63,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UWP", "UWP", "{B402BF43-62D6-463C-A71F-941B8EFF463F}"
+	ProjectSection(SolutionItems) = preProject
+		src\samples\UWP\Directory.Build.props = src\samples\UWP\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinUI", "WinUI", "{3AD4A1E9-3712-451B-ABC8-BF199F0C9F7C}"
+	ProjectSection(SolutionItems) = preProject
+		src\samples\WinUI\Directory.Build.props = src\samples\WinUI\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.WinUI.Samples.Windows", "src\samples\WinUI\Uno.Themes.WinUI.Samples.Windows\Uno.Themes.WinUI.Samples.Windows.csproj", "{5845E40D-630C-493D-AFD6-2C189FB0E78B}"
 EndProject
@@ -70,8 +79,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.WinUI.Samples.Skia.Gtk", "src\samples\WinUI\Uno.Themes.WinUI.Samples.Skia.Gtk\Uno.Themes.WinUI.Samples.Skia.Gtk.csproj", "{A4FA6BB2-011E-40EC-80DC-9CE6D229BF65}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.WinUI.Samples.Mobile", "src\samples\WinUI\Uno.Themes.WinUI.Samples.Mobile\Uno.Themes.WinUI.Samples.Mobile.csproj", "{1C839C7D-A22C-42B8-9D9B-2EE0BA66E9C0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uno.Themes.WinUI.Samples.Base", "src\samples\WinUI\Uno.Themes.WinUI.Samples.Base\Uno.Themes.WinUI.Samples.Base.csproj", "{22F3FD68-F082-479F-BA64-437AF5F52CF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -709,58 +716,6 @@ Global
 		{1C839C7D-A22C-42B8-9D9B-2EE0BA66E9C0}.Release|x64.Build.0 = Release|Any CPU
 		{1C839C7D-A22C-42B8-9D9B-2EE0BA66E9C0}.Release|x86.ActiveCfg = Release|Any CPU
 		{1C839C7D-A22C-42B8-9D9B-2EE0BA66E9C0}.Release|x86.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Android.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Android.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|arm64.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|macOS.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|macOS.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Packages_UWP.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Packages_UWP.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Packages_WinUI.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Packages_WinUI.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Tests.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|Tests.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|UWP_x64.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|UWP_x64.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|WASM.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|WASM.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|x64.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Debug|x86.Build.0 = Debug|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Android.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Android.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|arm64.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|arm64.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|iPhone.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|macOS.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|macOS.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Packages_UWP.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Packages_UWP.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Packages_WinUI.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Packages_WinUI.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Tests.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|Tests.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|UWP_x64.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|UWP_x64.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|WASM.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|WASM.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|x64.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|x64.Build.0 = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|x86.ActiveCfg = Release|Any CPU
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -783,20 +738,19 @@ Global
 		{49EF1281-E135-4CAC-A633-3697636A11FF} = {3AD4A1E9-3712-451B-ABC8-BF199F0C9F7C}
 		{A4FA6BB2-011E-40EC-80DC-9CE6D229BF65} = {3AD4A1E9-3712-451B-ABC8-BF199F0C9F7C}
 		{1C839C7D-A22C-42B8-9D9B-2EE0BA66E9C0} = {3AD4A1E9-3712-451B-ABC8-BF199F0C9F7C}
-		{22F3FD68-F082-479F-BA64-437AF5F52CF9} = {3AD4A1E9-3712-451B-ABC8-BF199F0C9F7C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66F0EE99-4E63-43F2-9504-0CFC104E7084}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{1c839c7d-a22c-42b8-9d9b-2ee0ba66e9c0}*SharedItemsImports = 5
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{265517e4-ab14-453d-92da-f32aa1d4007d}*SharedItemsImports = 4
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{290980ef-0a64-43a5-aeb4-e022d82bbf8b}*SharedItemsImports = 5
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{49ef1281-e135-4cac-a633-3697636a11ff}*SharedItemsImports = 5
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5845e40d-630c-493d-afd6-2c189fb0e78b}*SharedItemsImports = 5
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5d0f3763-f3bf-4478-b2d3-b47ab74205c9}*SharedItemsImports = 5
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{a4fa6bb2-011e-40ec-80dc-9ce6d229bf65}*SharedItemsImports = 5
-		src\samples\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{d45d0327-b421-48f5-98bc-7c9b1d6abd9e}*SharedItemsImports = 5
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{1c839c7d-a22c-42b8-9d9b-2ee0ba66e9c0}*SharedItemsImports = 5
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{265517e4-ab14-453d-92da-f32aa1d4007d}*SharedItemsImports = 4
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{290980ef-0a64-43a5-aeb4-e022d82bbf8b}*SharedItemsImports = 5
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{49ef1281-e135-4cac-a633-3697636a11ff}*SharedItemsImports = 5
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5845e40d-630c-493d-afd6-2c189fb0e78b}*SharedItemsImports = 5
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{5d0f3763-f3bf-4478-b2d3-b47ab74205c9}*SharedItemsImports = 5
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{a4fa6bb2-011e-40ec-80dc-9ce6d229bf65}*SharedItemsImports = 5
+		src\samples\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems*{d45d0327-b421-48f5-98bc-7c9b1d6abd9e}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

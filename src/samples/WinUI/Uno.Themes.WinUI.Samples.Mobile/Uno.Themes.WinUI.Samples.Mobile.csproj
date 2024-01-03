@@ -1,13 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OverrideTargetFrameworks)'!=''">$(OverrideTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
     <SingleProject>true</SingleProject>
     <OutputType>Exe</OutputType>
     <!-- Display name -->
     <ApplicationTitle>Uno.Themes.WinUI.Samples</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.uno-themes-winui-samples</ApplicationId>
+    <ApplicationId>uno.platform.themes.winui</ApplicationId>
     <ApplicationIdGuid>F295B300-6556-4ED1-86D7-0D57A2D0F2C7</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -32,7 +31,7 @@
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
   </ItemGroup>
   <Choose>
-    <When Condition="$(IsAndroid)">
+    <When Condition="$(_IsAndroid)">
       <ItemGroup>
 
         <PackageReference Include="Xamarin.Google.Android.Material" />
@@ -42,7 +41,7 @@
         <AndroidEnvironment Include="Android/environment.conf" />
       </ItemGroup>
     </When>
-    <When Condition="$(IsIOS)">
+    <When Condition="$(_IsIOS)">
       <PropertyGroup>
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
         <!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
@@ -54,7 +53,7 @@
         <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
       </PropertyGroup>
     </When>
-    <When Condition="$(IsMacCatalyst)">
+    <When Condition="$(_IsMacCatalyst)">
       <PropertyGroup>
         <!-- Configure the GC -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
@@ -74,9 +73,5 @@
     <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj" />
     <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
   </ItemGroup>
-  <!--<ItemGroup>
-    <ProjectReference Include="..\Uno.Themes.WinUI.Samples\Uno.Themes.WinUI.Samples.csproj" />
-  </ItemGroup>-->
-  <Import Project="..\..\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
-  <Import Project="..\Uno.Themes.WinUI.Samples.Base\base.props" />
+  <Import Project="..\..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
 </Project>

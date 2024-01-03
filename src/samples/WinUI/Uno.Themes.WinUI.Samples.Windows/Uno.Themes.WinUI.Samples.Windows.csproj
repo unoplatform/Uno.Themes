@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
@@ -12,7 +12,6 @@
 
     <!-- Bundles the WinAppSDK binaries -->
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-
     <!-- <SelfContained>true</SelfContained> -->
   </PropertyGroup>
 
@@ -74,6 +73,5 @@
     <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
-  <Import Project="..\Uno.Themes.WinUI.Samples.Base\base.props" />
+  <Import Project="..\..\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
 </Project>

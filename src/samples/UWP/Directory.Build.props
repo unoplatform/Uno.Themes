@@ -1,0 +1,12 @@
+﻿<Project ToolsVersion="15.0">
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../../../'))" />
+
+	<PropertyGroup>
+		<FrameworkLineage>UWP</FrameworkLineage>
+		<UseWinUI>False</UseWinUI>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageVersion Include="Uno.ShowMeTheXAML" Version="1.0.59" />
+		<PackageVersion Include="Uno.ShowMeTheXAML.MSBuild" Version="1.0.59" />
+	</ItemGroup>
+</Project>
