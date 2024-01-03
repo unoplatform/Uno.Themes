@@ -28,6 +28,8 @@
     <PackageReference Include="Uno.Extensions.Logging.OSLog" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
     <PackageReference Include="Uno.WinUI.DevServer" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.ShowMeTheXAML" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
   </ItemGroup>
   <Choose>
     <When Condition="$(IsAndroid)">
@@ -69,7 +71,12 @@
     </When>
   </Choose>
   <ItemGroup>
-    <ProjectReference Include="..\Uno.Themes.WinUI.Samples\Uno.Themes.WinUI.Samples.csproj" />
+    <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj" />
+    <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
   </ItemGroup>
+  <!--<ItemGroup>
+    <ProjectReference Include="..\Uno.Themes.WinUI.Samples\Uno.Themes.WinUI.Samples.csproj" />
+  </ItemGroup>-->
+  <Import Project="..\..\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
   <Import Project="..\Uno.Themes.WinUI.Samples.Base\base.props" />
 </Project>

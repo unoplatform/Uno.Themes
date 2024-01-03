@@ -57,15 +57,22 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.Compatibility" />
     <PackageReference Include="Uno.Wasm.Bootstrap" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" PrivateAssets="all" />
     <PackageReference Include="Uno.WinUI.WebAssembly" />
     <PackageReference Include="Uno.WinUI.DevServer" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Include="Uno.ShowMeTheXAML" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Uno.Themes.WinUI.Samples\Uno.Themes.WinUI.Samples.csproj" />
+    <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.csproj" />
+    <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.csproj" />
   </ItemGroup>
+  <!--<ItemGroup>
+    <ProjectReference Include="..\Uno.Themes.WinUI.Samples\Uno.Themes.WinUI.Samples.csproj" />
+  </ItemGroup>-->
+  <Import Project="..\..\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
   <Import Project="..\Uno.Themes.WinUI.Samples.Base\base.props" />
 </Project>

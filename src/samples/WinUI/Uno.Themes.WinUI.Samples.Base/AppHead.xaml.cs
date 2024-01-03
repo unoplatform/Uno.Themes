@@ -1,7 +1,8 @@
 using System;
-using Microsoft.Extensions.Logging;
-using Microsoft.UI.Xaml;
-using Uno.Resizetizer;
+//TODO SKIA: FIX or REMOVE?
+//using Microsoft.Extensions.Logging;
+//using Microsoft.UI.Xaml;
+using Uno.Themes.Samples;
 
 namespace Uno.Themes.WinUI.Samples;
 
@@ -20,18 +21,6 @@ public sealed partial class AppHead : App
     }
 
     /// <summary>
-    /// Invoked when the application is launched normally by the end user.  Other entry points
-    /// will be used such as when the application is launched to open a specific file.
-    /// </summary>
-    /// <param name="args">Details about the launch request and process.</param>
-    protected override void OnLaunched(LaunchActivatedEventArgs args)
-    {
-        base.OnLaunched(args);
-
-        MainWindow.SetWindowIcon();
-    }
-
-    /// <summary>
     /// Configures global Uno Platform logging
     /// </summary>
     private static void InitializeLogging()
@@ -44,58 +33,61 @@ public sealed partial class AppHead : App
         //
         // For more performance documentation: https://platform.uno/docs/articles/Uno-UI-Performance.html
 
-        var factory = LoggerFactory.Create(builder =>
-        {
-#if __WASM__
-            builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
-#elif __IOS__ || __MACCATALYST__
-            builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
-#elif NETFX_CORE
-            builder.AddDebug();
-#else
-            builder.AddConsole();
-#endif
+        //TODO FIX or REMOVE?
+//        var factory = LoggerFactory.Create(builder =>
+//        {
+//#if __WASM__
+//            builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
+//#elif __IOS__ || __MACCATALYST__
+//            builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
+//#elif NETFX_CORE
+//            builder.AddDebug();
+//#else
+//            //TODO FIX or REMOVE?
+//            //builder.AddConsole();
+//#endif
 
-            // Exclude logs below this level
-            builder.SetMinimumLevel(LogLevel.Information);
+//            // Exclude logs below this level
+//            builder.SetMinimumLevel(LogLevel.Information);
 
-            // Default filters for Uno Platform namespaces
-            builder.AddFilter("Uno", LogLevel.Warning);
-            builder.AddFilter("Windows", LogLevel.Warning);
-            builder.AddFilter("Microsoft", LogLevel.Warning);
+//            // Default filters for Uno Platform namespaces
+//            builder.AddFilter("Uno", LogLevel.Warning);
+//            builder.AddFilter("Windows", LogLevel.Warning);
+//            builder.AddFilter("Microsoft", LogLevel.Warning);
 
-            // Generic Xaml events
-            // builder.AddFilter("Microsoft.UI.Xaml", LogLevel.Debug );
-            // builder.AddFilter("Microsoft.UI.Xaml.VisualStateGroup", LogLevel.Debug );
-            // builder.AddFilter("Microsoft.UI.Xaml.StateTriggerBase", LogLevel.Debug );
-            // builder.AddFilter("Microsoft.UI.Xaml.UIElement", LogLevel.Debug );
-            // builder.AddFilter("Microsoft.UI.Xaml.FrameworkElement", LogLevel.Trace );
+//            // Generic Xaml events
+//            // builder.AddFilter("Microsoft.UI.Xaml", LogLevel.Debug );
+//            // builder.AddFilter("Microsoft.UI.Xaml.VisualStateGroup", LogLevel.Debug );
+//            // builder.AddFilter("Microsoft.UI.Xaml.StateTriggerBase", LogLevel.Debug );
+//            // builder.AddFilter("Microsoft.UI.Xaml.UIElement", LogLevel.Debug );
+//            // builder.AddFilter("Microsoft.UI.Xaml.FrameworkElement", LogLevel.Trace );
 
-            // Layouter specific messages
-            // builder.AddFilter("Microsoft.UI.Xaml.Controls", LogLevel.Debug );
-            // builder.AddFilter("Microsoft.UI.Xaml.Controls.Layouter", LogLevel.Debug );
-            // builder.AddFilter("Microsoft.UI.Xaml.Controls.Panel", LogLevel.Debug );
+//            // Layouter specific messages
+//            // builder.AddFilter("Microsoft.UI.Xaml.Controls", LogLevel.Debug );
+//            // builder.AddFilter("Microsoft.UI.Xaml.Controls.Layouter", LogLevel.Debug );
+//            // builder.AddFilter("Microsoft.UI.Xaml.Controls.Panel", LogLevel.Debug );
 
-            // builder.AddFilter("Windows.Storage", LogLevel.Debug );
+//            // builder.AddFilter("Windows.Storage", LogLevel.Debug );
 
-            // Binding related messages
-            // builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug );
-            // builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug );
+//            // Binding related messages
+//            // builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug );
+//            // builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug );
 
-            // Binder memory references tracking
-            // builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug );
+//            // Binder memory references tracking
+//            // builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug );
 
-            // DevServer and HotReload related
-            // builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
+//            // DevServer and HotReload related
+//            // builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
 
-            // Debug JS interop
-            // builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug );
-        });
-
-        global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
+//            // Debug JS interop
+//            // builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug );
+//        });
+        //TODO FIX or REMOVE?
+        //global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
 
 #if HAS_UNO
-        global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
+        //TODO FIX or REMOVE?
+        //global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
 #endif
     }

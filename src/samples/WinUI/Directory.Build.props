@@ -13,6 +13,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
+    <FrameworkLineage>WinUI</FrameworkLineage>
+    <DefineConstants>$(DefineConstants);WinUI</DefineConstants>
+    <!-- <DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants> -->
+  
     <DebugType>portable</DebugType>
     <DebugSymbols>True</DebugSymbols>
 
