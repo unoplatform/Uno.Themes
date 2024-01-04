@@ -9,7 +9,11 @@
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<FrameworkLineage>WinUI</FrameworkLineage>
 		<UseWinUI>true</UseWinUI>
-
+		<AssemblyName>Uno.Cupertino.WinUI</AssemblyName>
+		<PackageId>Uno.Cupertino.WinUI</PackageId>
+		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
+		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
 		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release' and !('$(MSBuildRuntimeType)'!='Core' and $([MSBuild]::IsOSPlatform('osx')))">true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
 
@@ -40,13 +44,6 @@
 	<ItemGroup>
 		<LottieJson Include="Assets\CupertinoProgressRing.json" />
 	</ItemGroup>
-
-	<PropertyGroup>
-		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
-		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
-		<PackageId>Uno.Cupertino.WinUI</PackageId>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows')) and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Uno.WinUI" Version="5.0.19" />

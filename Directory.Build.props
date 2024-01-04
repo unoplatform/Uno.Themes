@@ -57,6 +57,16 @@
 		</Reference>
 	</ItemGroup>
 
+	<!--
+  Adjust the output paths for runtime project in order for those
+  projects to stay in the same folder as the original reference one.
+  -->
+	<PropertyGroup>
+		<BaseOutputPath>bin\$(MSBuildProjectName)</BaseOutputPath>
+		<BaseIntermediateOutputPath>obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+		<DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+	</PropertyGroup>
+
 	<Import Project="PlatformItemGroups.props" />
 	<Import Project="Uno.CrossTargeting.props" />
 </Project>

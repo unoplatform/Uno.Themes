@@ -24,7 +24,7 @@ namespace Uno.Material
 	{
 		public MaterialResourcesV2()
 		{
-			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
+			Source = new Uri($"ms-appx:///Uno.Material/Generated/mergedpages.{Constants.FrameworkLineage}.v2.xaml");
 
 			MergedDictionaries.Add(new MaterialFonts());
 			MergedDictionaries.Add(new MaterialColorsV2());

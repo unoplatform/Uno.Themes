@@ -200,7 +200,7 @@ namespace Uno.Material
 				colors.SafeMerge(colorOverride);
 			}
 
-			var mergedPages = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml") };
+			var mergedPages = new ResourceDictionary { Source = new Uri($"ms-appx:///Uno.Material/Generated/mergedpages.{Constants.FrameworkLineage}.v2.xaml") };
 
 			var fonts = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") };
 
