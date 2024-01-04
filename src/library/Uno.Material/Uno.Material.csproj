@@ -3,12 +3,15 @@
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">$(TargetFrameworks);net7.0;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
+		<PackageId>Uno.Material</PackageId>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
+		<FrameworkLineage>UWP</FrameworkLineage>
 		<UseWinUI>false</UseWinUI>
 
 		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
@@ -41,14 +44,7 @@
 	<ItemGroup>
 		<LottieJson Include="Assets\MaterialDeterminate.json" />
 		<LottieJson Include="Assets\MaterialIndeterminate.json" />
-
 	</ItemGroup>
-
-
-	<PropertyGroup>
-		<PackageId>Uno.Material</PackageId>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Uno.UI" Version="5.0.19" />
