@@ -6,7 +6,8 @@
 	  xmlns:local="using:Uno.Themes.Samples.Content.NestedSamples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  mc:Ignorable="d"
+	  xmlns:not_win="http://uno.ui/not_win"
+	  mc:Ignorable="d not_win"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Grid>
@@ -62,8 +63,8 @@
 														IsFastForwardEnabled="{Binding IsChecked, ElementName=IsFastForwardEnabled}"
 														IsFastRewindButtonVisible="{Binding IsChecked, ElementName=IsFastRewindButtonVisible}"
 														IsFastRewindEnabled="{Binding IsChecked, ElementName=IsFastRewindEnabled}"
-														IsFullWindowButtonVisible="{Binding IsChecked, ElementName=IsFullWindowButtonVisible}"
-														IsFullWindowEnabled="{Binding IsChecked, ElementName=IsFullWindowEnabled}"
+														not_win:IsFullWindowButtonVisible="{Binding IsChecked, ElementName=IsFullWindowButtonVisible}"
+														not_win:IsFullWindowEnabled="{Binding IsChecked, ElementName=IsFullWindowEnabled}"
 														IsNextTrackButtonVisible="{Binding IsChecked, ElementName=IsNextTrackButtonVisible}"
 														IsPlaybackRateButtonVisible="{Binding IsChecked, ElementName=IsPlaybackRateButtonVisible}"
 														IsPlaybackRateEnabled="{Binding IsChecked, ElementName=IsPlaybackRateEnabled}"
@@ -82,7 +83,7 @@
 														IsVolumeEnabled="{Binding IsChecked, ElementName=IsVolumeEnabled}"
 														IsZoomButtonVisible="{Binding IsChecked, ElementName=IsZoomButtonVisible}"
 														IsZoomEnabled="{Binding IsChecked, ElementName=IsZoomEnabled}"
-														IsCompactOverlayEnabled="{Binding IsChecked, ElementName=IsCompactOverlayEnabled}" />
+														not_win:IsCompactOverlayEnabled="{Binding IsChecked, ElementName=IsCompactOverlayEnabled}" />
 							</MediaPlayerElement.TransportControls>
 						</MediaPlayerElement>
 					</Border>
@@ -126,11 +127,11 @@
 									  IsChecked="False"
 									  Content="IsFastRewindEnabled" />
 
-							<CheckBox x:Name="IsFullWindowButtonVisible"
+							<not_win:CheckBox x:Name="IsFullWindowButtonVisible"
 									  IsChecked="True"
 									  Content="IsFullWindowButtonVisible" />
 
-							<CheckBox x:Name="IsFullWindowEnabled"
+							<not_win:CheckBox x:Name="IsFullWindowEnabled"
 									  IsChecked="True"
 									  Content="IsFullWindowEnabled" />
 

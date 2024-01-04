@@ -6,8 +6,13 @@ using System.Text;
 using Uno.Disposables;
 using Uno.Themes.Samples.Entities;
 using Uno.Themes.Samples.Helpers;
+#if IS_WINUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+#endif
 
 namespace Uno.Themes.Samples
 {

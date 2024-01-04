@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using Windows.Foundation;
-using Windows.UI.Xaml.Controls;
+#if IS_WINUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Controls;
+#else
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Controls;
+#endif
 
 namespace Uno.Themes.Samples
 {

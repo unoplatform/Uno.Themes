@@ -71,6 +71,7 @@
 
 	<ItemGroup Condition="$(_IsWinUI)">
 		<Page Remove="@(XamlExclusion)" />
+		<Page Remove="Generated\*.xaml" />
 	</ItemGroup>
 
 	<ItemGroup Condition="!$(_IsWinUI)">

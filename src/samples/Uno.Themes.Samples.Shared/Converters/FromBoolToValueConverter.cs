@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#if IS_WINUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Data;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+#endif
 
 namespace Uno.Themes.Samples.Converters
 {

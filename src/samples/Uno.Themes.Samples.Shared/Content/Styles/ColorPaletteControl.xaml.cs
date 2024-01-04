@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+
+#if IS_WINUI
+using Microsoft.UI;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Media;
+#else
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
+#endif
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 

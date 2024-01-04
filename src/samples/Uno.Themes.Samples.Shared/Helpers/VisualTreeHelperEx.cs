@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
+#if IS_WINUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+#endif
 
 #if __IOS__
 using UIKit;
@@ -15,6 +22,8 @@ using AppKit;
 using _View = AppKit.NSView;
 #elif __ANDROID__
 using _View = Android.Views.View;
+#elif IS_WINUI
+using _View = Microsoft.UI.Xaml.DependencyObject;
 #else
 using _View = Windows.UI.Xaml.DependencyObject;
 #endif

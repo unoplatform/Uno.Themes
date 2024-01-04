@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using Uno.Extensions;
 using Uno.Logging;
-using Windows.UI.Xaml.Controls;
+#if IS_WINUI
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Controls;
+#else
 using Windows.UI.Xaml.Data;
-
+using Windows.UI.Xaml.Controls;
+#endif
 namespace Uno.Themes.Samples.Entities
 {
 	[Bindable]
