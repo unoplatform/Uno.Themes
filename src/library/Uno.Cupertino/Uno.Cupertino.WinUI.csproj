@@ -2,20 +2,19 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">$(TargetFrameworks);net7.0;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net7.0;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
-		<UseWinUI>false</UseWinUI>
+		<UseWinUI>true</UseWinUI>
+
 		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release' and !('$(MSBuildRuntimeType)'!='Core' and $([MSBuild]::IsOSPlatform('osx')))">true</UnoXamlResourcesTrimming>
-		<PackageId>Uno.Cupertino</PackageId>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<PackageDescription>A set of Cupertino styles for WinUI Controls to be used in Uno Platform and </PackageDescription>
-		<PackageDescription>$(PackageDescription) UWP projects</PackageDescription>
+		<PackageDescription>$(PackageDescription) WinAppSDK projects</PackageDescription>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -41,36 +40,41 @@
 		<LottieJson Include="Assets\CupertinoProgressRing.json" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
+		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
+		<PackageId>Uno.Cupertino.WinUI</PackageId>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows')) and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<PackageReference Include="Uno.UI" Version="5.0.19" />
-	</ItemGroup>
-	<ItemGroup Condition="$(_IsUWP)">
-		<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
-		<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
-	</ItemGroup>
-	<ItemGroup Condition="!$(_IsUWP)">
-		<PackageReference Include="Uno.UI.Lottie" Version="5.0.19" />
+		<PackageReference Include="Uno.WinUI" Version="5.0.19" />
+
+		<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.19" Condition="!$(_IsWinUI)" />
+
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" Condition="$(_IsWinUI)" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(_IsUWP)">
+	<ItemGroup Condition="$(_IsWinUI)">
 		<Content Include="@(LottieJson)" />
 	</ItemGroup>
-	<ItemGroup Condition="!$(_IsUWP)">
+	<ItemGroup Condition="!$(_IsWinUI)">
 		<EmbeddedResource Include="@(LottieJson)" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="!$(_IsWinUI)">
 		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 		<Compile Update="**\*.xaml.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
 		</Compile>
-		<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
 	</ItemGroup>
 
-	<ItemGroup Condition="!$(_IsUWP)">
+	<ItemGroup Condition="!$(_IsWinUI)">
 		<IncludeXamlNamespaces Include="lottie_not_win" />
 		<ExcludeXamlNamespaces Include="lottie_win" />
 	</ItemGroup>
+
 	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
@@ -87,5 +91,5 @@
 	</ItemGroup>
 
 	<Import Project="xamlmerge-cupertino.props" />
-
+	<Import Project="..\..\..\winappsdk-workaround.targets" />
 </Project>

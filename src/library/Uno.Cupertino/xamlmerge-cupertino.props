@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+	<ItemGroup>
+		<XamlMergeInput Include="Styles\Controls\**\*.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" />
+		<None Remove="Styles\Controls\_Resources.xaml" />
+		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
+		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
+	</ItemGroup>
+	<Import Project="..\xamlmerge.targets" />
+</Project>

@@ -10,6 +10,7 @@ using Uno.Extensions;
 using Uno.Themes.Samples.Content.Styles;
 using Uno.Themes.Samples.Entities;
 using Uno.Themes.Samples.Helpers;
+using Windows.ApplicationModel;
 
 #if IS_WINUI
 using Microsoft.UI.Xaml;
@@ -34,6 +35,7 @@ using Windows.UI.Xaml.Navigation;
 using XamlLaunchActivatedEventArgs = Windows.ApplicationModel.Activation.LaunchActivatedEventArgs;
 using XamlWindow = Windows.UI.Xaml.Window;
 using Page = Windows.UI.Xaml.Controls.Page;
+using Windows.Foundation;
 #endif
 
 namespace Uno.Themes.Samples
@@ -115,8 +117,6 @@ namespace Uno.Themes.Samples
 				builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
 #elif __IOS__
 				builder.AddProvider(new global::Uno.Extensions.Logging.OSLogLoggerProvider());
-#elif NETFX_CORE
-				builder.AddDebug();
 #else
 				builder.AddConsole();
 #endif

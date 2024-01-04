@@ -4,9 +4,31 @@ using Uno.Themes.Samples.Helpers;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
+#if IS_WINUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Markup;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
+using XamlWindow = Microsoft.UI.Xaml.Window;
+
+#else
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+using XamlWindow = Windows.UI.Xaml.Window;
+
+#endif
 using MUXC = Microsoft.UI.Xaml.Controls;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -15,7 +37,7 @@ namespace Uno.Themes.Samples
 {
 	public sealed partial class Shell : UserControl
 	{
-		public static Shell GetForCurrentView() => (Shell)Windows.UI.Xaml.Window.Current.Content;
+		public static Shell GetForCurrentView() => (Shell)XamlWindow.Current.Content;
 
 		public MUXC.NavigationView NavigationView => NavigationViewControl;
 
@@ -73,7 +95,7 @@ namespace Uno.Themes.Samples
 		/// </summary>
 		private void InitializeSafeArea()
 		{
-			var full = Windows.UI.Xaml.Window.Current.Bounds;
+			var full = XamlWindow.Current.Bounds;
 			var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
 
 			var topPadding = Math.Abs(full.Top - bounds.Top);
@@ -87,7 +109,7 @@ namespace Uno.Themes.Samples
 		private void SetDarkLightToggleInitialState()
 		{
 			// Initialize the toggle to the current theme.
-			var root = global::Windows.UI.Xaml.Window.Current.Content as FrameworkElement;
+			var root = XamlWindow.Current.Content as FrameworkElement;
 
 			switch (root.ActualTheme)
 			{
@@ -106,7 +128,7 @@ namespace Uno.Themes.Samples
 		private void ToggleButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Set theme for window root.
-			if (global::Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
+			if (XamlWindow.Current.Content is FrameworkElement root)
 			{
 				switch (root.ActualTheme)
 				{

@@ -48,7 +48,7 @@
 	</PropertyGroup>
 
 	<!-- Workaround for https://developercommunity.visualstudio.com/t/XamarinMac-binaries-are-missing-in-173/10164443 -->
-	<ItemGroup Condition="$(TargetFramework.ToLower().StartsWith('xamarinmac')) and '$(Configuration)' == 'Release' and '$(OS)'=='Windows_NT'">
+	<ItemGroup Condition="$(TargetFramework.ToLower().StartsWith('xamarinmac')) and '$(Configuration)' == 'Release' and $([MSBuild]::IsOSPlatform('windows'))">
 		<Reference Include="Xamarin.Mac">
 			<HintPath Condition="Exists('C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\Extensions\Xamarin.VisualStudio')">C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\Extensions\Xamarin.VisualStudio\Xamarin.Mac.dll</HintPath>
 			<HintPath Condition="Exists('C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\Extensions\Xamarin.VisualStudio')">C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\Extensions\Xamarin.VisualStudio\Xamarin.Mac.dll</HintPath>
