@@ -11,6 +11,7 @@
 		<UseWinUI>true</UseWinUI>
 		<AssemblyName>Uno.Cupertino.WinUI</AssemblyName>
 		<PackageId>Uno.Cupertino.WinUI</PackageId>
+		<RootNamespace>Uno.Cupertino</RootNamespace>
 		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>

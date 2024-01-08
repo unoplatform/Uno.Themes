@@ -191,18 +191,18 @@ namespace Uno.Material
 			MergedDictionaries.Clear();
 			this.Clear();
 
-			var colors = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColors.xaml") };
+			var colors = new ResourceDictionary { Source = new Uri($"ms-appx:///{Constants.PackageName}/Styles/Application/v2/SharedColors.xaml") };
 
-			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColorPalette.xaml") });
+			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"ms-appx:///{Constants.PackageName}/Styles/Application/v2/SharedColorPalette.xaml") });
 
 			if (ColorOverrideDictionary is { } colorOverride)
 			{
 				colors.SafeMerge(colorOverride);
 			}
 
-			var mergedPages = new ResourceDictionary { Source = new Uri($"ms-appx:///Uno.Material/Generated/mergedpages.{Constants.FrameworkLineage}.v2.xaml") };
+			var mergedPages = new ResourceDictionary { Source = new Uri($"ms-appx:///{Constants.PackageName}/Generated/mergedpages.{Constants.FrameworkLineage}.v2.xaml") };
 
-			var fonts = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") };
+			var fonts = new ResourceDictionary { Source = new Uri($"ms-appx:///{Constants.PackageName}/Styles/Application/Common/Fonts.xaml") };
 
 			if (FontOverrideDictionary is { } fontOverride)
 			{

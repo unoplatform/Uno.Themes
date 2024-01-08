@@ -35,7 +35,7 @@ namespace Uno.Cupertino
 
 		public CupertinoFonts()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/Fonts.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"ms-appx:///{Constants.PackageName}/Styles/Application/Fonts.xaml") });
 
 			if (!string.IsNullOrWhiteSpace(FontOverrideSource))
 			{

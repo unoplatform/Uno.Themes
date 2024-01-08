@@ -10,8 +10,10 @@ namespace Uno.Cupertino
 	{
 #if WinUI
 		public const string FrameworkLineage = "WinUI";
+		public const string PackageName = "Uno.Cupertino.WinUI";
 #else
 		public const string FrameworkLineage = "UWP";
+		public const string PackageName = "Uno.Cupertino";
 #endif
 	}
 }

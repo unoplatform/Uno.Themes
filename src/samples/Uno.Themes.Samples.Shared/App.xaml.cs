@@ -59,7 +59,10 @@ namespace Uno.Themes.Samples
 			ConfigureXamlDisplay();
 
 			this.InitializeComponent();
+
+#if HAS_UNO || NETFX_CORE
 			this.Suspending += OnSuspending;
+#endif
 		}
 
 		/// <summary>
@@ -80,7 +83,12 @@ namespace Uno.Themes.Samples
 			ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 568)); // (size of the iPhone SE)
 #endif
 
+#if WINDOWS && !HAS_UNO
+			var window = new XamlWindow();
+#else
 			var window = XamlWindow.Current;
+#endif
+
 			if (!(window.Content is Shell))
 			{
 				window.Content = _shell = BuildShell();
@@ -91,7 +99,7 @@ namespace Uno.Themes.Samples
 		}
 
 
-
+#if HAS_UNO || NETFX_CORE
 		/// <summary>
 		/// Invoked when application execution is being suspended.  Application state is saved
 		/// without knowing whether the application will be terminated or resumed with the contents
@@ -105,6 +113,7 @@ namespace Uno.Themes.Samples
 			//TODO: Save application state and stop any background activity
 			deferral.Complete();
 		}
+#endif
 
 		/// <summary>
 		/// Configures global Uno Platform logging

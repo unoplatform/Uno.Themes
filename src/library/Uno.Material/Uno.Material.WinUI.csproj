@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
 		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">$(TargetFrameworks);net7.0;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>portable</DebugType>
@@ -11,6 +12,11 @@
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
 		<UseWinUI>true</UseWinUI>
 		<FrameworkLineage>WinUI</FrameworkLineage>
+		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
+		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
+		<PackageId>Uno.Material.WinUI</PackageId>
+		<RootNamespace>Uno.Material</RootNamespace>
+		<AssemblyName>Uno.Material.WinUI</AssemblyName>
 		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
 
@@ -44,14 +50,6 @@
 
 		<XamlExclusion Include="Styles\Controls\v1\NavigationView\WUX\NavigationView.xaml" />
 	</ItemGroup>
-
-
-	<PropertyGroup>
-		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
-		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
-		<PackageId>Uno.Material.WinUI</PackageId>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and $([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Uno.WinUI" Version="5.0.19" />

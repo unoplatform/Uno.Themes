@@ -305,7 +305,7 @@ namespace Uno.Themes.Samples.Helpers
 				if (x is FrameworkElement fe)
 				{
 					yield return $"Actual={fe.ActualWidth}x{fe.ActualHeight}";
-					if (fe.TransformToVisual(Window.Current.Content).TransformPoint(default) is var absPos)
+					if (fe.TransformToVisual(fe.XamlRoot.Content).TransformPoint(default) is var absPos)
 					{
 						yield return $"AbsPos={absPos.X},{absPos.Y}";
 					}

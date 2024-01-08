@@ -36,7 +36,7 @@ namespace Uno.Cupertino
 
 		public CupertinoColors()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/ColorPalette.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"ms-appx:///{Constants.PackageName}/Styles/Application/ColorPalette.xaml") });
 			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
 			{
 				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });

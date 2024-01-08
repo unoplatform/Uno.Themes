@@ -48,11 +48,15 @@ namespace Uno.Themes.Samples
 #if DEBUG
 			this.DebuggingToolPanel.Visibility = Visibility.Visible;
 #endif
+
+#if !WINDOWS
 			InitializeSafeArea();
+			SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) => e.Handled = BackNavigateFromNestedSample();
+#endif
+
 			this.Loaded += OnLoaded;
 
 			NestedSampleFrame.RegisterPropertyChangedCallback(ContentControl.ContentProperty, OnNestedSampleFrameChanged);
-			SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) => e.Handled = BackNavigateFromNestedSample();
 		}
 
 		private void OnLoaded(object sender, RoutedEventArgs e)
@@ -90,6 +94,7 @@ namespace Uno.Themes.Samples
 			// uno: set a breakpoint on the next line and inspect `tree`
 		}
 
+#if !WINDOWS
 		/// <summary>
 		/// This method handles the top padding for phones like iPhone X.
 		/// </summary>
@@ -105,11 +110,12 @@ namespace Uno.Themes.Samples
 				TopPaddingRow.Height = new GridLength(topPadding);
 			}
 		}
+#endif
 
 		private void SetDarkLightToggleInitialState()
 		{
 			// Initialize the toggle to the current theme.
-			var root = XamlWindow.Current.Content as FrameworkElement;
+			var root = this.XamlRoot.Content as FrameworkElement;
 
 			switch (root.ActualTheme)
 			{
@@ -128,7 +134,7 @@ namespace Uno.Themes.Samples
 		private void ToggleButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Set theme for window root.
-			if (XamlWindow.Current.Content is FrameworkElement root)
+			if (this.XamlRoot.Content is FrameworkElement root)
 			{
 				switch (root.ActualTheme)
 				{

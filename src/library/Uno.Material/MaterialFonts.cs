@@ -55,7 +55,7 @@ namespace Uno.Material
 
 		public MaterialFonts()
 		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri($"ms-appx:///{Constants.PackageName}/Styles/Application/Common/Fonts.xaml") });
 
 			if (FontOverride is { } fontOverride)
 			{
