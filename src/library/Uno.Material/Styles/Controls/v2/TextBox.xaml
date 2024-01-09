@@ -403,7 +403,7 @@
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Height="26"
 									VerticalAlignment="Top"
-									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
@@ -623,7 +623,7 @@
 												  Margin="1,0,18,0"
 												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+												  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 							</Border>
 
 							<ScrollViewer x:Name="ContentElement"
