@@ -372,7 +372,7 @@
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushChecked}" />
 										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushChecked}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -380,7 +380,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPointerOver}" />
 										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedPointerOver}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushCheckedPointerOver}" />
@@ -390,7 +390,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPressed}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPressed}" />
 										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedPressed}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushCheckedPressed}" />
@@ -400,7 +400,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedDisabled}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedDisabled}" />
 										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedDisabled}" />
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushCheckedDisabled}" />
@@ -492,7 +492,7 @@
 						<!-- Alternate Content -->
 						<ContentPresenter x:Name="AlternateContentPresenter"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, FallbackValue=' ', TargetNullValue=' '}"
+										  Content="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, FallbackValue=' ', TargetNullValue=' '}"
 										  Foreground="{TemplateBinding Foreground}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -564,7 +564,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundChecked}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundChecked}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundChecked}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushChecked}" />
@@ -574,7 +574,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPointerOver}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPointerOver}" />
 										<Setter Target="PointerStateCircle.Opacity" Value="{ThemeResource IconToggleButtonStateCircleOpacityPointerOver}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedPointerOver}" />
@@ -585,7 +585,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPressed}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedPressed}" />
 										<Setter Target="PointerStateCircle.Opacity" Value="{ThemeResource IconToggleButtonStateCircleOpacityPressed}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedPressed}" />
@@ -596,7 +596,7 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Opacity" Value="0" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedDisabled}" />
-										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
+										<Setter Target="AlternateContentPresenter.Opacity" Value="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTransparentConverter}, FallbackValue=1, TargetNullValue=1}" />
 										<Setter Target="AlternateContentPresenter.Foreground" Value="{ThemeResource IconToggleButtonForegroundCheckedDisabled}" />
 										<Setter Target="RootGrid.Background" Value="{ThemeResource IconToggleButtonBackgroundCheckedDisabled}" />
 										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource IconToggleButtonBorderBrushCheckedDisabled}" />
@@ -697,7 +697,7 @@
 						<!-- Alternate Content -->
 						<ContentPresenter x:Name="AlternateContentPresenter"
 										  AutomationProperties.AccessibilityView="Raw"
-										  Content="{Binding Path=(um:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, FallbackValue=' ', TargetNullValue=' '}"
+										  Content="{Binding Path=(ut:ControlExtensions.AlternateContent), RelativeSource={RelativeSource TemplatedParent}, FallbackValue=' ', TargetNullValue=' '}"
 										  Foreground="{TemplateBinding Foreground}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"

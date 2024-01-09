@@ -446,7 +446,7 @@
 						Value="Below" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="ItemsPanel">
 			<Setter.Value>
@@ -613,8 +613,8 @@
 											  HorizontalAlignment="Center"
 											  VerticalAlignment="Center"
 											  Foreground="{ThemeResource ComboBoxLeadingIconForeground}"
-											  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+											  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 							<!-- ContentPresenter -->
 							<ContentPresenter x:Name="ContentPresenter"
