@@ -17,7 +17,7 @@ namespace Uno.Material
 	/// <summary>
 	/// Material Theme resources including colors, fonts, layout values, and styles
 	/// </summary>
-	public class MaterialTheme : BaseUnoTheme
+	public class MaterialTheme : BaseTheme
 	{
 		public MaterialTheme()
 		{ }

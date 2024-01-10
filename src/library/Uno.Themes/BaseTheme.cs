@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Media;
 
 
 namespace Uno.Themes;
-public abstract class BaseUnoTheme : ResourceDictionary
+public abstract class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
@@ -35,12 +35,12 @@ public abstract class BaseUnoTheme : ResourceDictionary
 		DependencyProperty.Register(
 			nameof(FontOverrideSource),
 			typeof(string),
-			typeof(BaseUnoTheme),
+			typeof(BaseTheme),
 			new PropertyMetadata(null, OnFontOverrideSourceChanged));
 
 	private static void OnFontOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is BaseUnoTheme theme && e.NewValue is string sourceUri)
+		if (d is BaseTheme theme && e.NewValue is string sourceUri)
 		{
 			theme.FontOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
 		}
@@ -63,12 +63,12 @@ public abstract class BaseUnoTheme : ResourceDictionary
 		DependencyProperty.Register(
 			nameof(ColorOverrideSource),
 			typeof(string),
-			typeof(BaseUnoTheme),
+			typeof(BaseTheme),
 			new PropertyMetadata(null, OnColorOverrideSourceChanged));
 
 	private static void OnColorOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is BaseUnoTheme theme && e.NewValue is string sourceUri)
+		if (d is BaseTheme theme && e.NewValue is string sourceUri)
 		{
 			theme.ColorOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
 		}
@@ -89,12 +89,12 @@ public abstract class BaseUnoTheme : ResourceDictionary
 		DependencyProperty.Register(
 			nameof(FontOverrideDictionary),
 			typeof(ResourceDictionary),
-			typeof(BaseUnoTheme),
+			typeof(BaseTheme),
 			new PropertyMetadata(null, OnFontOverrideChanged));
 
 	private static void OnFontOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is BaseUnoTheme { _isFontOverrideMuted: false } theme)
+		if (d is BaseTheme { _isFontOverrideMuted: false } theme)
 		{
 			theme.UpdateSource();
 		}
@@ -116,24 +116,24 @@ public abstract class BaseUnoTheme : ResourceDictionary
 		DependencyProperty.Register(
 			nameof(ColorOverrideDictionary),
 			typeof(ResourceDictionary),
-			typeof(BaseUnoTheme),
+			typeof(BaseTheme),
 			new PropertyMetadata(null, OnColorOverrideChanged));
 
 	private static void OnColorOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is BaseUnoTheme { _isColorOverrideMuted: false } theme)
+		if (d is BaseTheme { _isColorOverrideMuted: false } theme)
 		{
 			theme.UpdateSource();
 		}
 	}
 	#endregion
 
-	public BaseUnoTheme() : this(colorOverride: null, fontOverride: null)
+	public BaseTheme() : this(colorOverride: null, fontOverride: null)
 	{
 
 	}
 
-	public BaseUnoTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
+	public BaseTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	{
 		if (colorOverride is { })
 		{
