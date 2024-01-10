@@ -286,7 +286,7 @@
 		<Setter Property="MinHeight" Value="{ThemeResource MaterialFilledTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -403,9 +403,9 @@
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Height="26"
 									VerticalAlignment="Top"
-									Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
 												  Margin="0,0,8,0"
 												  MaxHeight="34"
@@ -513,7 +513,7 @@
 		<Setter Property="MinHeight" Value="{ThemeResource MaterialOutlinedTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -618,7 +618,7 @@
 									VerticalAlignment="Top"
 									Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
 												  MinWidth="25"
 												  MaxWidth="34"

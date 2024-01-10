@@ -398,7 +398,7 @@
 		<Setter Property="HorizontalContentAlignment" Value="{StaticResource ButtonHorizontalContentAlignment}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 	</Style>
 
 	<!-- ELEVATED -->
@@ -408,7 +408,7 @@
 
 		<Setter Property="Foreground" Value="{ThemeResource ElevatedButtonForeground}" />
 		<Setter Property="Background" Value="{ThemeResource ElevatedButtonBackground}" />
-		<Setter Property="um:ControlExtensions.Elevation" Value="{ThemeResource ElevatedButtonElevation}" />
+		<Setter Property="ut:ControlExtensions.Elevation" Value="{ThemeResource ElevatedButtonElevation}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource ElevatedButtonBorderBrush}" />
 
 		<Setter Property="Template">
@@ -417,7 +417,7 @@
 
 					<toolkit:ElevatedView x:Name="ElevatedView"
 										  Margin="{ThemeResource ElevatedButtonMargin}"
-										  Elevation="{Binding Path=(um:ControlExtensions.Elevation), RelativeSource={RelativeSource TemplatedParent}}"
+										  Elevation="{Binding Path=(ut:ControlExtensions.Elevation), RelativeSource={RelativeSource TemplatedParent}}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Background="Transparent">
 
@@ -513,11 +513,11 @@
 										</Grid.ColumnDefinitions>
 
 										<ContentPresenter x:Name="IconPresenter"
-														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+														  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 														  MinWidth="{ThemeResource ButtonIconMinWidth}"
 														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
-														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+														  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
@@ -653,11 +653,11 @@
 										</Grid.ColumnDefinitions>
 
 										<ContentPresenter x:Name="IconPresenter"
-														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+														  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 														  MinWidth="{ThemeResource ButtonIconMinWidth}"
 														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
-														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+														  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
@@ -793,11 +793,11 @@
 										</Grid.ColumnDefinitions>
 
 										<ContentPresenter x:Name="IconPresenter"
-														  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+														  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 														  MinWidth="{ThemeResource ButtonIconMinWidth}"
 														  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 														  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
-														  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+														  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 														  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 														  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
@@ -929,11 +929,11 @@
 									</Grid.ColumnDefinitions>
 
 									<ContentPresenter x:Name="IconPresenter"
-													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 													  MinWidth="{ThemeResource ButtonIconMinWidth}"
 													  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 													  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
-													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+													  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
@@ -1062,18 +1062,18 @@
 									</Grid.ColumnDefinitions>
 
 									<ContentPresenter x:Name="IconPresenter"
-													  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 													  Margin="{ThemeResource TextButtonIconMargin}"
 													  MinWidth="{ThemeResource ButtonIconMinWidth}"
 													  HorizontalAlignment="{StaticResource ButtonIconHorizontalAlignment}"
 													  VerticalAlignment="{StaticResource ButtonIconVerticalAlignment}"
-													  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverterConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+													  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 													  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 													  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 									<ContentPresenter x:Name="ContentPresenter"
 													  Grid.Column="1"
-													  Margin="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTextButtonMarginConverter}, FallbackValue=0, TargetNullValue=0}"
+													  Margin="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToTextButtonMarginConverter}, FallbackValue=0, TargetNullValue=0}"
 													  Content="{TemplateBinding Content}"
 													  ContentTemplate="{TemplateBinding ContentTemplate}"
 													  ContentTransitions="{TemplateBinding ContentTransitions}"
