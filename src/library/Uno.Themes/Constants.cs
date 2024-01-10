@@ -12,4 +12,6 @@ namespace Uno.Themes;
 internal static class Constants
 {
 	public const string ConverterResourcePath = "ms-appx:///Uno.Themes/Styles/Applications/Common/Converters.xaml";
+	public const string SharedColorsResourcePath = "ms-appx:///Uno.Themes/Styles/Applications/Common/SharedColors.xaml";
+	public const string SharedColorPaletteResourcePath = "ms-appx:///Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml";
 }

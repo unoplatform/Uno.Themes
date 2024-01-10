@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Uno.Themes;
 
 
@@ -13,9 +11,6 @@ using Microsoft.UI.Xaml.Media;
 #else
 using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 #endif
 
@@ -139,7 +134,7 @@ namespace Uno.Material
 
 		public MaterialTheme() : this(colorOverride: null, fontOverride: null)
 		{
-			
+
 		}
 
 		public MaterialTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
@@ -192,9 +187,9 @@ namespace Uno.Material
 			MergedDictionaries.Clear();
 			this.Clear();
 
-			var colors = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColors.xaml") };
+			var colors = new ResourceDictionary { Source = new Uri(Constants.SharedColorsResourcePath) };
 
-			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v2/SharedColorPalette.xaml") });
+			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(Constants.SharedColorPaletteResourcePath) });
 
 			if (ColorOverrideDictionary is { } colorOverride)
 			{
