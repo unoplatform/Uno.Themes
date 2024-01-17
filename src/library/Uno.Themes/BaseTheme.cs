@@ -192,17 +192,12 @@ public abstract class BaseTheme : ResourceDictionary
 			colors.SafeMerge(colorOverride);
 		}
 
-		var (mergedPages, resources) = GenerateSpecificResources();
+		var mergedPages = GenerateSpecificResources();
 
 		mergedPages.MergedDictionaries.Add(colors);
-
-		foreach(var resource in resources)
-		{
-			mergedPages.MergedDictionaries.Add(resource);
-		}
 
 		MergedDictionaries.Add(mergedPages);
 	}
 
-	protected abstract (ResourceDictionary mergedPages, ResourceDictionary[] resources) GenerateSpecificResources();
+	protected abstract ResourceDictionary GenerateSpecificResources();
 }

@@ -26,7 +26,7 @@ namespace Uno.Material
 			: base(colorOverride, fontOverride)
 		{ }
 
-		protected override (ResourceDictionary mergedPages, ResourceDictionary[] resources) GenerateSpecificResources()
+		protected override ResourceDictionary GenerateSpecificResources()
 		{
 			var mergedPages = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml") };
 
@@ -37,7 +37,8 @@ namespace Uno.Material
 				fonts.SafeMerge(fontOverride);
 			}
 
-			return (mergedPages, new[] { fonts });
+			mergedPages.MergedDictionaries.Add(fonts);
+			return mergedPages;
 		}
 	}
 }
