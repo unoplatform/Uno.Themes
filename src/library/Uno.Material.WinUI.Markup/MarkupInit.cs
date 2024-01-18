@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Uno.Extensions.Markup;
+using Uno.Themes;
 
 namespace Uno.Material.Markup;
 
