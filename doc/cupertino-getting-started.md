@@ -15,10 +15,25 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
 > [!NOTE]
 > As of [Uno Platform 4.7](https://platform.uno/blog/uno-platform-4-7-new-project-template-performance-improvements-and-more/), the solution template of an Uno app has changed. There is no longer a Shared project (.shproj), it has been replaced with a regular cross-platform library containing all user code files, referred to as the **App Code Library** project. This also implies that package references can be included in a single location without the previous need to include those in all project heads.
 
-1. Create a new Uno project using the `Uno Platform App` template.
-2. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
-3. Install the [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI)
-4. Add the following Cupertino resources `AppResources.xaml`:
+### Creating a new project with Uno.Cupertino installed from command-line
+
+1. Install `dotnet new` templates with:
+
+    ```dotnetcli
+    dotnet new install Uno.Templates
+    ```
+
+2. Create a new application with:
+
+    ```dotnetcli
+    dotnet new unoapp -o AppName -theme cupertino
+    ```
+
+### Installing Uno.Cupertino in existing project that uses class library
+
+1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
+1. Install the [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI)
+1. Add the following Cupertino resources `AppResources.xaml`:
 
     ```xml
     <ResourceDictionary>
@@ -44,7 +59,7 @@ If your application is based on the older solution template that includes a shar
 
 3. Select the following projects for installation:
     - `PROJECT_NAME.Wasm.csproj`
-    - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, `PROJECT_NAME.macOS.csproj` if you have an existing project)
+    - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, and `PROJECT_NAME.macOS.csproj` if you have an existing project)
     - `PROJECT_NAME.Skia.Gtk.csproj`
     - `PROJECT_NAME.Skia.WPF.csproj`
     - `PROJECT_NAME.Windows.csproj` (or `PROJECT_NAME.UWP.csproj` for existing projects)
@@ -121,8 +136,8 @@ By default, Uno.Cupertino comes pre-packaged with the [SF Pro](https://developer
 
 If you would like Uno.Cupertino to use a different font, you can override the default `FontFamily` following these steps:
 
-1. Add the custom font following [this guide](https://platform.uno/docs/articles/features/custom-fonts.html)
-2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `CupertinoFontsOverride.xaml`
+1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html).
+2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `CupertinoFontsOverride.xaml`.
 3. Save the new override file within the **App Code Library**, for example, under `Style/Application`.
 4. Assuming the font file has been placed in the **App Code Library** within, for example, a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
 
@@ -138,7 +153,6 @@ If you would like Uno.Cupertino to use a different font, you can override the de
 5. In `AppResources.xaml`, update `<CupertinoFonts />` with the override from the previous steps:
 
     ```xml
-
     <CupertinoFonts xmlns="using:Uno.Cupertino"
                     OverrideSource="ms-appx:///PROJECT_NAME/Style/Application/CupertinoFontsOverride.xaml" />
     ```

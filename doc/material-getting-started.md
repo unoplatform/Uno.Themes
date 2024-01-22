@@ -22,25 +22,40 @@ Initialization of the Uno.Material resources is handled by the specialized `Mate
 
 #### Constructors
 
-| Constructor    | Description                                           |
-|----------------|-------------------------------------------------------|
-| MaterialTheme()         | Initializes a new instance of the `MaterialTheme` resource dictionary.       |
-| MaterialTheme(ResourceDictionary? colorOverride, ResourceDictionary? fontOverride)         | Initializes a new instance of the `MaterialTheme` resource dictionary and applies the given overrides       |
+| Constructor                                                                          | Description                                                                                           |
+|--------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| `MaterialTheme()`                                                                    | Initializes a new instance of the `MaterialTheme` resource dictionary.                                |
+| `MaterialTheme(ResourceDictionary? colorOverride, ResourceDictionary? fontOverride)` | Initializes a new instance of the `MaterialTheme` resource dictionary and applies the given overrides |
 
 #### Properties
 
-| Property                  | Type              | Description                                                                                   |
-|---------------------------|-------------------|-----------------------------------------------------------------------------------------------|
-| ColorOverrideSource             | string            | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a ResourceDictionary containing overrides for the default Uno.Material Color resources                                            |
-| FontOverrideSource     | string      | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a ResourceDictionary containing overrides for the default Uno.Material font resources            |
+| Property              | Type     | Description                                                                                                                                                                         |
+|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ColorOverrideSource` | `string` | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno.Material Color resources |
+| `FontOverrideSource`  | `string` | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno.Material font resources  |
 
 > [!NOTE]
 > As of [Uno Platform 4.7](https://platform.uno/blog/uno-platform-4-7-new-project-template-performance-improvements-and-more/), the solution template of an Uno app has changed. There is no longer a Shared project (.shproj), it has been replaced with a regular cross-platform library containing all user code files, referred to as the **App Code Library** project. This also implies that package references can be included in a single location without the previous need to include those in all project heads.
 
-1. Create a new Uno project using the `Uno Platform App` template.
-2. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
-3. Install the [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI)
-4. Add the following Material resources to `AppResources.xaml`:
+### Creating a new project with Uno.Material installed from command-line
+
+1. Install `dotnet new` templates with:
+
+    ```dotnetcli
+    dotnet new install Uno.Templates
+    ```
+
+2. Create a new application with:
+
+    ```dotnetcli
+    dotnet new unoapp -o AppName -theme material
+    ```
+
+### Installing Uno.Material in existing project that uses class library
+
+1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
+1. Install the [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI)
+1. Add the following Material resources to `AppResources.xaml`:
 
     ```xml
     <ResourceDictionary>
@@ -64,7 +79,7 @@ If your application is based on the older solution template that includes a shar
 
 3. Select the following projects for installation:
     - `PROJECT_NAME.Wasm.csproj`
-    - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, `PROJECT_NAME.macOS.csproj` if you have an existing project)
+    - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, and `PROJECT_NAME.macOS.csproj` if you have an existing project)
     - `PROJECT_NAME.Skia.Gtk.csproj`
     - `PROJECT_NAME.Skia.WPF.csproj`
     - `PROJECT_NAME.Windows.csproj` (or `PROJECT_NAME.UWP.csproj` for existing projects)
@@ -99,7 +114,7 @@ It is possible to use the [Material Theme Builder](https://m3.material.io/theme-
 
 The tooling required to generate the _Material Colors Override_ file from a DSP package (zip file) will be present by default when creating a _Uno Extensions_ project with support for Uno.Material.
 
-![Wizard - Theme Selection](assets\material-theme-selection-wizard.png)
+![Wizard - Theme Selection](assets/material-theme-selection-wizard.png)
 
 Follow this link to get [more Information about the DSP tooling](xref:Uno.Material.DSP).
 
@@ -239,8 +254,8 @@ By default, Uno.Material comes pre-packaged with the [Roboto](https://fonts.goog
 
 If you would like Uno.Material to use a different font, you can override the default font families following these steps:
 
-1. Add the custom font following [this guide](https://platform.uno/docs/articles/features/custom-fonts.html)
-2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `MaterialFontsOverride.xaml`
+1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html).
+2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `MaterialFontsOverride.xaml`.
 3. Save the new override file within the **App Code Library**, for example, under `Styles/Application`.
 4. Assuming the font file has been placed in the **App Code Library** within, for example, a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
 
