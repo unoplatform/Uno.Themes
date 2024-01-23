@@ -4,7 +4,7 @@ uid: Uno.Themes.BreakingChanges
 
 # Overview
 
-The version 5.0.0 of Uno.Themes, introduced breaking changes on Converters, and Control Extensions. If you use one of those items on your project you will need to do some changes in order to keep using it.
+The version 5.0.0 of Uno.Themes introduced breaking changes on Converters and Control Extensions. If you use one of those items in your project, you will need to do some changes in order to keep using it.
 
 ## Converter
 
@@ -12,7 +12,7 @@ All Converters were moved to Uno.Themes library, and the new `namespace` is `Uno
 
 Before:
 
-```xaml
+```xml
 <Page xmlns:um="using:Uno.Material">
 
     <Page.Resources>
@@ -23,7 +23,7 @@ Before:
 
 After:
 
-```xaml
+```xml
 <Page xmlns:ut="using:Uno.Themes">
 
     <Page.Resources>
@@ -38,7 +38,7 @@ All Controls Extensions were moved to `Uno.Themes` library, and the new `namespa
 
 Before:
 
-```xaml
+```xml
 <Page xmlns:um="using:Uno.Material">
 
     <StackPanel>
@@ -54,7 +54,7 @@ Before:
 
 After:
 
-```xaml
+```xml
 <Page xmlns:ut="using:Uno.Themes">
 
     <StackPanel>
@@ -70,4 +70,4 @@ After:
 
 ## Conclusion
 
-With that you should be able to update and get it working again for you app. If you've any other issue during the migration don't hesitate to open an issue on our [repo](https://github.com/unoplatform/Uno.Themes).
+With that, you should be able to update and get it working again for your application. If you've any other issues during the migration, don't hesitate to open an issue in [Uno.Themes GitHub repository](https://github.com/unoplatform/Uno.Themes).
