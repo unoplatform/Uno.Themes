@@ -40,7 +40,7 @@ This package will be automatically present in the project after [creating a new 
    ![Export Button](assets/material-theme-builder-export1.png) ![DSP Selection](assets/material-theme-builder-export2.png)
 3. Save the zip file to your computer.
 4. Replace the file `ColorPaletteOverride.zip` in the `Styles` folder of your application project with the one you just downloaded.
-5. Build your application. The `ColorPaletterOverride.xaml` file will be automatically updated with the colors present in the DSP zip file.
+5. Build your application. The `ColorPaletteOverride.xaml` file will be automatically updated with the colors present in the DSP zip file.
 
 ## More flexibility
 

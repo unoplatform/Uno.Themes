@@ -8,14 +8,14 @@ uid: Uno.Themes.Fluent.GetStarted
   <img src="assets/fluent-design-system.png" alt="Fluent design system" />
 </p>
 
-Uno Platform 3.0 and above supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent).  
+Uno Platform 3.0 and above supports control styles conforming to the [Fluent design system](https://www.microsoft.com/design/fluent).
 The details below explain how to use them in your app.
 
 ## Upgrading existing Uno apps to use Fluent styles
 
-Overall, the Uno Platform uses the same mechanism as WinUI to enable Fluent styles. After installing the `Uno.UI` Nuget version 3.0 or above, Fluent styles are enabled by specifying the `XamlControlsResources` within the application's resources (inside `App.xaml`).
+Overall, the Uno Platform uses the same mechanism as WinUI to enable Fluent styles. After installing the `Uno.UI` NuGet version 3.0 or above, Fluent styles are enabled by specifying the `XamlControlsResources` within the application's resources (inside `App.xaml`).
 
-For the UWP head, an additional WinUI 2 Nuget package reference must be added. This is following the same process as UWP because, for the UWP head, the Uno Platform is not used.
+For the UWP head, an additional WinUI 2 NuGet package reference must be added. This is following the same process as UWP because, for the UWP head, the Uno Platform is not used.
 
 The step-by-step process to enable Fluent design styles within an existing Uno Platform solution is as follows:
 
@@ -49,4 +49,4 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
         </Application.Resources>
     ```
 
-1. In all platform head projects except UWP the Fluent control styles require the Uno Fluent Assets icon font to display correctly. [Follow the instructions here](https://platform.uno/docs/articles/uno-fluent-assets.html) to upgrade your app to use this font. This step is required because the Uno Platform uses a cross-platform ready default font within its styles different from UWP's *Segoe MDL2 Assets*.
+1. In all platform head projects except UWP, the Fluent control styles require the Uno Fluent Assets icon font to display correctly. Follow [Uno Fluent UI assets documentation](https://platform.uno/docs/articles/uno-fluent-assets.html) to upgrade your app to use this font. This step is required because the Uno Platform uses a cross-platform ready default font within its styles different from UWP's *Segoe MDL2 Assets*.

@@ -77,10 +77,10 @@ Placing these brush overrides at the `AppResources.xaml` level will alter every 
 In other cases, changing a single control on one page only to look a certain way, without altering any other versions of that control, can also be achieved. The provided XAML code and image depict a `Button` using the default `FilledButtonStyle` followed by a second `Button`, also with `FilledButtonStyle` applied, but now with specific resource keys overridden to customize its appearance.
 
 ```xml
-<Button Content="Default Button Style" 
+<Button Content="Default Button Style"
         Style="{StaticResource FilledButtonStyle}" />
 
-<Button Content="Overridden Button Style" 
+<Button Content="Overridden Button Style"
         Style="{StaticResource FilledButtonStyle}"
         BorderThickness="2">
     <Button.Resources>
@@ -93,11 +93,11 @@ In other cases, changing a single control on one page only to look a certain way
 
 ![Material - Button lightweight styling](assets/material-lightweight-styling-anatomy.png)
 
-Lightweight Styling allows for fine-grained control over the look of your UI components across all visual states. All interactive controls have multiple states, such as **PointerOver** (mouse is hovered over), **Pressed** (control is pressed on), and **Disabled** (control is not interactable). These states are appended onto the endings of the resource keys: ButtonForeground*PointerOver*, ButtonForeground*Pressed*, and ButtonForeground*Disabled*. Combined with these, the CheckBox and RadioButton controls also have **Checked** and **Unchecked** states. This means that it is possible to customize the appearance of your Uno Material-styled controls across any visual state without the need to redefine the style. As an example, the XAML below defines three Buttons, all using FilledButtonStyle from Uno Material:
+Lightweight Styling allows for fine-grained control over the look of your UI components across all visual states. All interactive controls have multiple states, such as **PointerOver** (mouse is hovered over), **Pressed** (control is pressed on), and **Disabled** (control is not interactable). These states are appended onto the endings of the resource keys: ButtonForeground*PointerOver*, ButtonForeground*Pressed*, and ButtonForeground*Disabled*. Combined with these, the `CheckBox` and `RadioButton` controls also have **Checked** and **Unchecked** states. This means that it is possible to customize the appearance of your Uno Material-styled controls across any visual state without the need to redefine the style. As an example, the XAML below defines three Buttons, all using FilledButtonStyle from Uno Material:
 
 1. A Default Button with no changes
 2. A Button with several brush resources overridden for the **Normal** visual state
-3. A Button that overrides resources that are used with FilledButtonStyle’s **PointerOver** visual state
+3. A Button that overrides resources that are used with FilledButtonStyle's **PointerOver** visual state
 
 ```xml
 <!-- #1 -->
@@ -127,7 +127,7 @@ Lightweight Styling allows for fine-grained control over the look of your UI com
 </Button>
 ```
 
-With this XAML we are given the following visual result, notice the third Button has a new BorderThickness applied and takes on different colors while in the **PointerOver** state.
+With this XAML, we are given the following visual result, notice the third Button has a new `BorderThickness` applied and takes on different colors while in the **PointerOver** state.
 
 ![Material - Button lightweight styling](assets/material-button-pointerover-lightweight-styling.png)
 
@@ -170,12 +170,12 @@ The general pattern used for mapping the Lightweight Styling resource keys to C#
 
 `Theme.{control}.Resources.{?:variant}.{member-path}.{?:visual-state}`
 
-| Name Part | Description |
-| --- | --- |
-| `control` | Name of the control type (Button, TextBox, CheckBox, etc.) |
-| `variant` | **(Optional) Defaults to `Default`** Certain styles have multiple variants. Ex: For Button we have variants such as: Outlined, Text, Filled |
-| `member-path` | The property or the nested property to assign value to. (Foreground, Background, Placeholder.Foreground, etc.) |
-| `visual-state` | **(Optional) Defaults to `Default`**  Specifies which `VisualState` that this resource will be applied to (PointerOver, Checked, Disabled, etc.)  |
+| Name Part      | Description                                                                                                                                      |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `control`      | Name of the control type (Button, TextBox, CheckBox, etc.)                                                                                       |
+| `variant`      | **(Optional) Defaults to `Default`** Certain styles have multiple variants. Ex: For Button we have variants such as: Outlined, Text, Filled      |
+| `member-path`  | The property or the nested property to assign value to. (Foreground, Background, Placeholder.Foreground, etc.)                                   |
+| `visual-state` | **(Optional) Defaults to `Default`**  Specifies which `VisualState` that this resource will be applied to (PointerOver, Checked, Disabled, etc.) |
 
 For example, the following resource keys are used with `FilledButtonStyle`, `HyperlinkButtonStyle`, and `CheckBoxStyle` from Uno Material:
 
@@ -197,7 +197,7 @@ For example, the following resource keys are used with `FilledButtonStyle`, `Hyp
 - `Theme.CheckBox.Resources.Default.Foreground.CheckedPressed`
 - `Theme.CheckBox.Resources.Default.Foreground.CheckedPointerOver`
 
-All C# Markup-friendly Lightweight Styling resource keys can be found [here](https://github.com/unoplatform/Uno.Themes/tree/master/src/library/Uno.Themes.WinUI.Markup/Theme)
+All C# Markup-friendly Lightweight Styling resource keys can be found in [Uno.Themes GitHub repository](https://github.com/unoplatform/Uno.Themes/tree/master/src/library/Uno.Themes.WinUI.Markup/Theme)
 
 ## Resource Keys
 
