@@ -196,6 +196,7 @@
 
 								<Grid.RowDefinitions>
 									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
 								<Grid x:Name="PickerHostGrid">
 
@@ -229,6 +230,7 @@
 											   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
 								</Grid>
 								<Grid x:Name="AcceptDismissHostGrid"
+									  Grid.Row="1"
 									  Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
 									  VerticalAlignment="Bottom"
 									  Background="{TemplateBinding Background}">
