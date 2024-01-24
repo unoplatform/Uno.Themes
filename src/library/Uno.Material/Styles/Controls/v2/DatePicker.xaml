@@ -167,7 +167,7 @@
 		</Setter>
 	</Style>
 
-	<not_win:Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
+	<Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
 				   TargetType="DatePickerFlyoutPresenter">
 		<Setter Property="Width" Value="{ThemeResource DatePickerFlyoutPresenterWidth}" />
 		<Setter Property="MinWidth" Value="{ThemeResource DatePickerFlyoutPresenterMinWidth}" />
@@ -265,7 +265,7 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</not_win:Style>
+	</Style>
 
 	<Style x:Key="MaterialDatePickerStyle"
 		   TargetType="DatePicker">
@@ -290,6 +290,7 @@
 								HorizontalContentAlignment="Stretch"
 								IsEnabled="{TemplateBinding IsEnabled}"
 								Style="{StaticResource MaterialDatePickerFlyoutButtonStyle}"
+								MinWidth="{ThemeResource DatePickerFlyoutPresenterMinWidth}"
 								UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}">
 
 							<Grid x:Name="ContentButton"
@@ -390,4 +391,8 @@
 	<Style x:Key="MaterialDefaultDatePickerStyle"
 		   TargetType="DatePicker"
 		   BasedOn="{StaticResource MaterialDatePickerStyle}" />
+
+	<Style x:Key="MaterialDefaultDatePickerFlyoutPresenterStyle"
+		   TargetType="DatePickerFlyoutPresenter"
+		   BasedOn="{StaticResource MaterialDatePickerFlyoutPresenterStyle}" />
 </ResourceDictionary>

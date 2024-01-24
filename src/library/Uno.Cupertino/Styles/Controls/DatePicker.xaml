@@ -71,7 +71,7 @@
 		</Setter>
 	</Style>
 
-	<not_win:Style x:Key="CupertinoDatePickerFlyoutPresenterStyle"
+	<Style x:Key="CupertinoDatePickerFlyoutPresenterStyle"
 				   TargetType="DatePickerFlyoutPresenter">
 		<Setter Property="Width"
 				Value="296" />
@@ -191,7 +191,7 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</not_win:Style>
+	</Style>
 
 	<Style x:Key="CupertinoDatePickerStyle"
 		   TargetType="DatePicker">
@@ -236,6 +236,7 @@
 								HorizontalContentAlignment="Stretch"
 								IsEnabled="{TemplateBinding IsEnabled}"
 								Style="{StaticResource CupertinoDatePickerFlyoutButtonStyle}"
+								MinWidth="296"
 								UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}">
 
 							<Grid x:Name="FlyoutButtonContentGrid"
