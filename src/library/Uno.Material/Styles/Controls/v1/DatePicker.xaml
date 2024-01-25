@@ -73,7 +73,7 @@
 		</Setter>
 	</Style>
 
-	<not_win:Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
+	<Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
 				   TargetType="DatePickerFlyoutPresenter">
 		<Setter Property="Width"
 				Value="296" />
@@ -108,12 +108,13 @@
 										  BorderThickness="{TemplateBinding BorderThickness}"
 										  CornerRadius="{TemplateBinding CornerRadius}"
 										  Elevation="{StaticResource MaterialDatePickerFlyoutElevation}"
-										  ShadowColor="Black">
+										  ShadowColor="{StaticResource MaterialShadowColor}">
 						<Border x:Name="Background">
 							<Grid x:Name="ContentPanel">
 
 								<Grid.RowDefinitions>
 									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
 								<Grid x:Name="PickerHostGrid">
 
@@ -147,6 +148,7 @@
 											   Fill="{ThemeResource MaterialDatePickerFlyoutPresenterSpacerFill}" />
 								</Grid>
 								<Grid x:Name="AcceptDismissHostGrid"
+									  Grid.Row="1"
 									  Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
 									  VerticalAlignment="Bottom"
 									  Background="{TemplateBinding Background}">
@@ -182,7 +184,7 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</not_win:Style>
+	</Style>
 
 	<Style x:Key="MaterialDatePickerStyle"
 		   TargetType="DatePicker">

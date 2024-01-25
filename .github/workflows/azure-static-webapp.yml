@@ -5,11 +5,13 @@ on:
     branches:
       - master
       - release/*
+      - feature/*
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - master
       - release/*
+      - feature/*
 
 jobs:
   build_and_deploy_job:
@@ -29,7 +31,7 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.7
         with:
-          versionSpec: '5.x'
+          versionSpec: '5.10.3'
           
       - name: Determine Version
         id: gitversion

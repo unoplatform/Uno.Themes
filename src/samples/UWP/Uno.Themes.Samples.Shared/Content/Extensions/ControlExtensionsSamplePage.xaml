@@ -127,7 +127,7 @@
 
 				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ToggleButtonIcon"
 								  Style="{StaticResource XamlDisplayBelowStyle}">
-					<ToggleButton Style="{StaticResource MaterialToggleButtonIconStyle}">
+					<ToggleButton Style="{StaticResource MaterialIconToggleButtonStyle}">
 						<ToggleButton.Content>
 							<PathIcon Data="{StaticResource Icon_more_horizontal}" />
 						</ToggleButton.Content>
@@ -137,6 +137,20 @@
 					</ToggleButton>
 				</smtx:XamlDisplay>
 
+				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ToggleButtonIconWithSymbolIcon_NoAlternateContent"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<ToggleButton Style="{StaticResource MaterialIconToggleButtonStyle}">
+						<ToggleButton.Content>
+							<SymbolIcon Symbol="Accept" />
+						</ToggleButton.Content>
+					</ToggleButton>
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="ControlExtensionsSamplePage_ToggleButtonIconWithPathIconOnly_NoAlternateContent"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<ToggleButton Style="{StaticResource MaterialIconToggleButtonStyle}"
+								  Content="Hello" />
+				</smtx:XamlDisplay>
 			</StackPanel>
 		</StackPanel>
 	</ScrollViewer>

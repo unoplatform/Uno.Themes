@@ -14,6 +14,14 @@ branches:
     increment: Minor
     is-source-branch-for: ['beta', 'stable']
 
+  legacy:
+    mode: ContinuousDeployment
+    regex: legacy/.*
+    tag: dev
+    increment: Minor
+    source-branches: ['master']
+    is-source-branch-for: ['beta', 'stable']
+
   pull-request:
     regex: ^(pull|pull\-requests|pr)[/-]
     mode: ContinuousDeployment

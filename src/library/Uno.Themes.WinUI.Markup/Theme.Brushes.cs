@@ -1,999 +1,1032 @@
 ﻿using Microsoft.UI.Xaml.Media;
+using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
 
-namespace Uno.Themes.Markup
+namespace Uno.Themes.Markup;
+
+partial class Theme
 {
-	partial class Theme
+	public static class Brushes
 	{
-		public static class Brushes
+		public static class Primary
 		{
-			public static class Primary
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryBrush")]
+			public static ThemeResourceKey<Brush> Default => new("PrimaryBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("PrimaryHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("PrimaryFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("PrimaryPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("PrimaryDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimarySelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("PrimarySelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("PrimaryMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("PrimaryLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("PrimaryDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryDisabledLowBrush");
+
+			public static class Inverse
 			{
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryBrush")]
-				public static ResourceValue<Brush> Default => new("PrimaryBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseBrush")]
+				public static ThemeResourceKey<Brush> Default => new("PrimaryInverseBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("PrimaryHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("PrimaryInverseHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("PrimaryFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("PrimaryInverseFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("PrimaryPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInversePressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("PrimaryInversePressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("PrimaryDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("PrimaryInverseDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimarySelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("PrimarySelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("PrimaryInverseSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("PrimaryMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("PrimaryInverseMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryLowBrush")]
-				public static ResourceValue<Brush> Low => new("PrimaryLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("PrimaryInverseLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("PrimaryDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("PrimaryInverseDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("PrimaryDisabledLowBrush", true);
-
-				public static class Inverse
-				{
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseBrush")]
-					public static ResourceValue<Brush> Default => new("PrimaryInverseBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("PrimaryInverseHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("PrimaryInverseFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInversePressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("PrimaryInversePressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("PrimaryInverseDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("PrimaryInverseSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("PrimaryInverseMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseLowBrush")]
-					public static ResourceValue<Brush> Low => new("PrimaryInverseLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("PrimaryInverseDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("PrimaryInverseDisabledLowBrush", true);
-				}
-
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerBrush")]
-					public static ResourceValue<Brush> Default => new("PrimaryContainerBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("PrimaryContainerHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("PrimaryContainerFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("PrimaryContainerPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("PrimaryContainerDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("PrimaryContainerSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("PrimaryContainerMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("PrimaryContainerLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("PrimaryContainerDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("PrimaryContainerDisabledLowBrush", true);
-				}
-
-				public static class VariantLight
-				{
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightBrush")]
-					public static ResourceValue<Brush> Default => new("PrimaryVariantLightBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("PrimaryVariantLightHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("PrimaryVariantLightFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("PrimaryVariantLightPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("PrimaryVariantLightDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("PrimaryVariantLightSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("PrimaryVariantLightMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightLowBrush")]
-					public static ResourceValue<Brush> Low => new("PrimaryVariantLightLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("PrimaryVariantLightDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("PrimaryVariantLightDisabledLowBrush", true);
-				}
-
-				public static class VariantDark
-				{
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkBrush")]
-					public static ResourceValue<Brush> Default => new("PrimaryVariantDarkBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("PrimaryVariantDarkHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("PrimaryVariantDarkFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("PrimaryVariantDarkPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("PrimaryVariantDarkDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("PrimaryVariantDarkSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("PrimaryVariantDarkMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkLowBrush")]
-					public static ResourceValue<Brush> Low => new("PrimaryVariantDarkLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("PrimaryVariantDarkDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("PrimaryVariantDarkDisabledLowBrush", true);
-				}
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryInverseDisabledLowBrush");
 			}
 
-			public static class OnPrimary
+			public static class Container
 			{
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryBrush")]
-				public static ResourceValue<Brush> Default => new("OnPrimaryBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("PrimaryContainerBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("OnPrimaryHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("PrimaryContainerHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("OnPrimaryFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("PrimaryContainerFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("OnPrimaryPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("PrimaryContainerPressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("OnPrimaryDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("PrimaryContainerDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimarySelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("OnPrimarySelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("PrimaryContainerSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("OnPrimaryMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("PrimaryContainerMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryLowBrush")]
-				public static ResourceValue<Brush> Low => new("OnPrimaryLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("PrimaryContainerLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("OnPrimaryDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("PrimaryContainerDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("OnPrimaryDisabledLowBrush", true);
-
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerBrush")]
-					public static ResourceValue<Brush> Default => new("OnPrimaryContainerBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("OnPrimaryContainerHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("OnPrimaryContainerFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("OnPrimaryContainerPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("OnPrimaryContainerDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("OnPrimaryContainerSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("OnPrimaryContainerMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("OnPrimaryContainerLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("OnPrimaryContainerDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("OnPrimaryContainerDisabledLowBrush", true);
-				}
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryContainerDisabledLowBrush");
 			}
 
-			public static class Secondary
+			public static class VariantLight
 			{
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryBrush")]
-				public static ResourceValue<Brush> Default => new("SecondaryBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightBrush")]
+				public static ThemeResourceKey<Brush> Default => new("PrimaryVariantLightBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("SecondaryHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("PrimaryVariantLightHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("SecondaryFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("PrimaryVariantLightFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("SecondaryPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("PrimaryVariantLightPressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("SecondaryDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("PrimaryVariantLightDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondarySelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("SecondarySelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("PrimaryVariantLightSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("SecondaryMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("PrimaryVariantLightMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryLowBrush")]
-				public static ResourceValue<Brush> Low => new("SecondaryLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("PrimaryVariantLightLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("SecondaryDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("PrimaryVariantLightDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("SecondaryDisabledLowBrush", true);
-
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerBrush")]
-					public static ResourceValue<Brush> Default => new("SecondaryContainerBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("SecondaryContainerHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("SecondaryContainerFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("SecondaryContainerPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("SecondaryContainerDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("SecondaryContainerSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("SecondaryContainerMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("SecondaryContainerLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("SecondaryContainerDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("SecondaryContainerDisabledLowBrush", true);
-				}
-
-				public static class VariantLight
-				{
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightBrush")]
-					public static ResourceValue<Brush> Default => new("SecondaryVariantLightBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("SecondaryVariantLightHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("SecondaryVariantLightFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("SecondaryVariantLightPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("SecondaryVariantLightDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("SecondaryVariantLightSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("SecondaryVariantLightMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightLowBrush")]
-					public static ResourceValue<Brush> Low => new("SecondaryVariantLightLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("SecondaryVariantLightDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("SecondaryVariantLightDisabledLowBrush", true);
-				}
-
-				public static class VariantDark
-				{
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkBrush")]
-					public static ResourceValue<Brush> Default => new("SecondaryVariantDarkBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("SecondaryVariantDarkHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("SecondaryVariantDarkFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("SecondaryVariantDarkPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("SecondaryVariantDarkDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("SecondaryVariantDarkSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("SecondaryVariantDarkMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkLowBrush")]
-					public static ResourceValue<Brush> Low => new("SecondaryVariantDarkLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("SecondaryVariantDarkDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("SecondaryVariantDarkDisabledLowBrush", true);
-				}
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryVariantLightDisabledLowBrush");
 			}
 
-			public static class OnSecondary
+			public static class VariantDark
 			{
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryBrush")]
-				public static ResourceValue<Brush> Default => new("OnSecondaryBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkBrush")]
+				public static ThemeResourceKey<Brush> Default => new("PrimaryVariantDarkBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("OnSecondaryHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("PrimaryVariantDarkHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("OnSecondaryFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("PrimaryVariantDarkFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("OnSecondaryPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("PrimaryVariantDarkPressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("OnSecondaryDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("PrimaryVariantDarkDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondarySelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("OnSecondarySelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("PrimaryVariantDarkSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("OnSecondaryMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("PrimaryVariantDarkMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryLowBrush")]
-				public static ResourceValue<Brush> Low => new("OnSecondaryLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("PrimaryVariantDarkLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("OnSecondaryDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("PrimaryVariantDarkDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("OnSecondaryDisabledLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryVariantDarkDisabledLowBrush");
+			}
+		}
 
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerBrush")]
-					public static ResourceValue<Brush> Default => new("OnSecondaryContainerBrush", true);
+		public static class OnPrimary
+		{
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryBrush")]
+			public static ThemeResourceKey<Brush> Default => new("OnPrimaryBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("OnSecondaryContainerHoverBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("OnPrimaryHoverBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("OnSecondaryContainerFocusedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("OnPrimaryFocusedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("OnSecondaryContainerPressedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("OnPrimaryPressedBrush");
 
-					public static ResourceValue<Brush> Dragged => new("OnSecondaryContainerDraggedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("OnPrimaryDraggedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("OnSecondaryContainerSelectedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimarySelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("OnPrimarySelectedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("OnSecondaryContainerMediumBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("OnPrimaryMediumBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("OnSecondaryContainerLowBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("OnPrimaryLowBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("OnSecondaryContainerDisabledBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("OnPrimaryDisabledBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("OnSecondaryContainerDisabledLowBrush", true);
-				}
+			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("OnPrimaryDisabledLowBrush");
+
+			public static class Container
+			{
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("OnPrimaryContainerBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("OnPrimaryContainerHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("OnPrimaryContainerFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("OnPrimaryContainerPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("OnPrimaryContainerDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("OnPrimaryContainerSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("OnPrimaryContainerMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("OnPrimaryContainerLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("OnPrimaryContainerDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("OnPrimaryContainerDisabledLowBrush");
+			}
+		}
+
+		public static class Secondary
+		{
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryBrush")]
+			public static ThemeResourceKey<Brush> Default => new("SecondaryBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("SecondaryHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("SecondaryFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("SecondaryPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("SecondaryDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondarySelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("SecondarySelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("SecondaryMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("SecondaryLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("SecondaryDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryDisabledLowBrush");
+
+			public static class Container
+			{
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("SecondaryContainerBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("SecondaryContainerHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("SecondaryContainerFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("SecondaryContainerPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("SecondaryContainerDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("SecondaryContainerSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("SecondaryContainerMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("SecondaryContainerLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("SecondaryContainerDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryContainerDisabledLowBrush");
 			}
 
-			public static class Tertiary
+			public static class VariantLight
 			{
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryBrush")]
-				public static ResourceValue<Brush> Default => new("TertiaryBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightBrush")]
+				public static ThemeResourceKey<Brush> Default => new("SecondaryVariantLightBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("TertiaryHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("SecondaryVariantLightHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("TertiaryFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("SecondaryVariantLightFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("TertiaryPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("SecondaryVariantLightPressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("TertiaryDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("SecondaryVariantLightDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiarySelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("TertiarySelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("SecondaryVariantLightSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("TertiaryMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("SecondaryVariantLightMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryLowBrush")]
-				public static ResourceValue<Brush> Low => new("TertiaryLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("SecondaryVariantLightLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("TertiaryDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("SecondaryVariantLightDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("TertiaryDisabledLowBrush", true);
-
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerBrush")]
-					public static ResourceValue<Brush> Default => new("TertiaryContainerBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("TertiaryContainerHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("TertiaryContainerFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("TertiaryContainerPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("TertiaryContainerDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("TertiaryContainerSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("TertiaryContainerMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("TertiaryContainerLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("TertiaryContainerDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("TertiaryContainerDisabledLowBrush", true);
-				}
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryVariantLightDisabledLowBrush");
 			}
 
-			public static class OnTertiary
+			public static class VariantDark
 			{
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryBrush")]
-				public static ResourceValue<Brush> Default => new("OnTertiaryBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkBrush")]
+				public static ThemeResourceKey<Brush> Default => new("SecondaryVariantDarkBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("OnTertiaryHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("SecondaryVariantDarkHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("OnTertiaryFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("SecondaryVariantDarkFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("OnTertiaryPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("SecondaryVariantDarkPressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("OnTertiaryDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("SecondaryVariantDarkDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiarySelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("OnTertiarySelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("SecondaryVariantDarkSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("OnTertiaryMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("SecondaryVariantDarkMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryLowBrush")]
-				public static ResourceValue<Brush> Low => new("OnTertiaryLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("SecondaryVariantDarkLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("OnTertiaryDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("SecondaryVariantDarkDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("OnTertiaryDisabledLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryVariantDarkDisabledLowBrush");
+			}
+		}
 
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerBrush")]
-					public static ResourceValue<Brush> Default => new("OnTertiaryContainerBrush", true);
+		public static class OnSecondary
+		{
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryBrush")]
+			public static ThemeResourceKey<Brush> Default => new("OnSecondaryBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("OnTertiaryContainerHoverBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("OnSecondaryHoverBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("OnTertiaryContainerFocusedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("OnSecondaryFocusedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("OnTertiaryContainerPressedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("OnSecondaryPressedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("OnTertiaryContainerDraggedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("OnSecondaryDraggedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("OnTertiaryContainerSelectedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondarySelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("OnSecondarySelectedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("OnTertiaryContainerMediumBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("OnSecondaryMediumBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("OnTertiaryContainerLowBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("OnSecondaryLowBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("OnTertiaryContainerDisabledBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("OnSecondaryDisabledBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("OnTertiaryContainerDisabledLowBrush", true);
-				}
+			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("OnSecondaryDisabledLowBrush");
+
+			public static class Container
+			{
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("OnSecondaryContainerBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("OnSecondaryContainerHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("OnSecondaryContainerFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("OnSecondaryContainerPressedBrush");
+
+				public static ThemeResourceKey<Brush> Dragged => new("OnSecondaryContainerDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("OnSecondaryContainerSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("OnSecondaryContainerMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("OnSecondaryContainerLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("OnSecondaryContainerDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("OnSecondaryContainerDisabledLowBrush");
+			}
+		}
+
+		public static class Tertiary
+		{
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryBrush")]
+			public static ThemeResourceKey<Brush> Default => new("TertiaryBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("TertiaryHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("TertiaryFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("TertiaryPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("TertiaryDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiarySelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("TertiarySelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("TertiaryMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("TertiaryLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("TertiaryDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("TertiaryDisabledLowBrush");
+
+			public static class Container
+			{
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("TertiaryContainerBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("TertiaryContainerHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("TertiaryContainerFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("TertiaryContainerPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("TertiaryContainerDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("TertiaryContainerSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("TertiaryContainerMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("TertiaryContainerLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("TertiaryContainerDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("TertiaryContainerDisabledLowBrush");
+			}
+		}
+
+		public static class OnTertiary
+		{
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryBrush")]
+			public static ThemeResourceKey<Brush> Default => new("OnTertiaryBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("OnTertiaryHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("OnTertiaryFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("OnTertiaryPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("OnTertiaryDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiarySelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("OnTertiarySelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("OnTertiaryMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("OnTertiaryLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("OnTertiaryDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("OnTertiaryDisabledLowBrush");
+
+			public static class Container
+			{
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("OnTertiaryContainerBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("OnTertiaryContainerHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("OnTertiaryContainerFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("OnTertiaryContainerPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("OnTertiaryContainerDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("OnTertiaryContainerSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("OnTertiaryContainerMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("OnTertiaryContainerLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("OnTertiaryContainerDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("OnTertiaryContainerDisabledLowBrush");
+			}
+		}
+
+		public static class Error
+		{
+			[ResourceKeyDefinition(typeof(Brush), "ErrorBrush")]
+			public static ThemeResourceKey<Brush> Default => new("ErrorBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("ErrorHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("ErrorFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("ErrorPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("ErrorDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorSelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("ErrorSelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("ErrorMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("ErrorLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("ErrorDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("ErrorDisabledLowBrush");
+
+			public static class Container
+			{
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("ErrorContainerBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("ErrorContainerHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("ErrorContainerFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("ErrorContainerPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("ErrorContainerDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("ErrorContainerSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("ErrorContainerMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("ErrorContainerLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("ErrorContainerDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("ErrorContainerDisabledLowBrush");
+			}
+		}
+
+		public static class OnError
+		{
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorBrush")]
+			public static ThemeResourceKey<Brush> Default => new("OnErrorBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("OnErrorHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("OnErrorFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("OnErrorPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("OnErrorDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorSelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("OnErrorSelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("OnErrorMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("OnErrorLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("OnErrorDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("OnErrorDisabledLowBrush");
+
+			public static class Container
+			{
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerBrush")]
+				public static ThemeResourceKey<Brush> Default => new("OnErrorContainerBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("OnErrorContainerHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("OnErrorContainerFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("OnErrorContainerPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("OnErrorContainerDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("OnErrorContainerSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("OnErrorContainerMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("OnErrorContainerLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("OnErrorContainerDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("OnErrorContainerDisabledLowBrush");
+			}
+		}
+
+		public static class Background
+		{
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundBrush")]
+			public static ThemeResourceKey<Brush> Default => new("BackgroundBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("BackgroundHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("BackgroundFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("BackgroundPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("BackgroundDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundSelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("BackgroundSelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("BackgroundMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("BackgroundLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("BackgroundDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("BackgroundDisabledLowBrush");
+		}
+
+		public static class OnBackground
+		{
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundBrush")]
+			public static ThemeResourceKey<Brush> Default => new("OnBackgroundBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("OnBackgroundHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("OnBackgroundFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundPressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("OnBackgroundPressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("OnBackgroundDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundSelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("OnBackgroundSelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("OnBackgroundMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("OnBackgroundLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("OnBackgroundDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("OnBackgroundDisabledLowBrush");
+		}
+
+		public static class Surface
+		{
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceBrush")]
+			public static ThemeResourceKey<Brush> Default => new("SurfaceBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("SurfaceHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("SurfaceFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfacePressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("SurfacePressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("SurfaceDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceSelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("SurfaceSelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("SurfaceMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("SurfaceLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("SurfaceDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("SurfaceDisabledLowBrush");
+
+			public static class Variant
+			{
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantBrush")]
+				public static ThemeResourceKey<Brush> Default => new("SurfaceVariantBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("SurfaceVariantHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("SurfaceVariantFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("SurfaceVariantPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("SurfaceVariantDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("SurfaceVariantSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("SurfaceVariantMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("SurfaceVariantLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("SurfaceVariantDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("SurfaceVariantDisabledLowBrush");
 			}
 
-			public static class Error
+			public static class Inverse
 			{
-				[ResourceKeyDefinition(typeof(Brush), "ErrorBrush")]
-				public static ResourceValue<Brush> Default => new("ErrorBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseBrush")]
+				public static ThemeResourceKey<Brush> Default => new("SurfaceInverseBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("ErrorHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("SurfaceInverseHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("ErrorFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("SurfaceInverseFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("ErrorPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInversePressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("SurfaceInversePressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("ErrorDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("SurfaceInverseDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorSelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("ErrorSelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("SurfaceInverseSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("ErrorMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("SurfaceInverseMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorLowBrush")]
-				public static ResourceValue<Brush> Low => new("ErrorLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("SurfaceInverseLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("ErrorDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("SurfaceInverseDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("ErrorDisabledLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("SurfaceInverseDisabledLowBrush");
+			}
+		}
 
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerBrush")]
-					public static ResourceValue<Brush> Default => new("ErrorContainerBrush", true);
+		public static class OnSurface
+		{
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceBrush")]
+			public static ThemeResourceKey<Brush> Default => new("OnSurfaceBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("ErrorContainerHoverBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("OnSurfaceHoverBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("ErrorContainerFocusedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("OnSurfaceFocusedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("ErrorContainerPressedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfacePressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("OnSurfacePressedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("ErrorContainerDraggedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("OnSurfaceDraggedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("ErrorContainerSelectedBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceSelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("OnSurfaceSelectedBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("ErrorContainerMediumBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("OnSurfaceMediumBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("ErrorContainerLowBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("OnSurfaceLowBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("ErrorContainerDisabledBrush", true);
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("OnSurfaceDisabledBrush");
 
-					[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("ErrorContainerDisabledLowBrush", true);
-				}
+			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("OnSurfaceDisabledLowBrush");
+
+			public static class Variant
+			{
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantBrush")]
+				public static ThemeResourceKey<Brush> Default => new("OnSurfaceVariantBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("OnSurfaceVariantHoverBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("OnSurfaceVariantFocusedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("OnSurfaceVariantPressedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("OnSurfaceVariantDraggedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("OnSurfaceVariantSelectedBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("OnSurfaceVariantMediumBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("OnSurfaceVariantLowBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("OnSurfaceVariantDisabledBrush");
+
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("OnSurfaceVariantDisabledLowBrush");
 			}
 
-			public static class OnError
+			public static class Inverse
 			{
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorBrush")]
-				public static ResourceValue<Brush> Default => new("OnErrorBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseBrush")]
+				public static ThemeResourceKey<Brush> Default => new("OnSurfaceInverseBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("OnErrorHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("OnSurfaceInverseHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("OnErrorFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("OnSurfaceInverseFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("OnErrorPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInversePressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("OnSurfaceInversePressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("OnErrorDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("OnSurfaceInverseDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorSelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("OnErrorSelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("OnSurfaceInverseSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("OnErrorMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("OnSurfaceInverseMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorLowBrush")]
-				public static ResourceValue<Brush> Low => new("OnErrorLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("OnSurfaceInverseLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("OnErrorDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("OnSurfaceInverseDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("OnErrorDisabledLowBrush", true);
-
-				public static class Container
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerBrush")]
-					public static ResourceValue<Brush> Default => new("OnErrorContainerBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("OnErrorContainerHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("OnErrorContainerFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("OnErrorContainerPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("OnErrorContainerDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("OnErrorContainerSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("OnErrorContainerMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerLowBrush")]
-					public static ResourceValue<Brush> Low => new("OnErrorContainerLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("OnErrorContainerDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("OnErrorContainerDisabledLowBrush", true);
-				}
+				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("OnSurfaceInverseDisabledLowBrush");
 			}
+		}
 
-			public static class Background
+		public static class Outline
+		{
+			[ResourceKeyDefinition(typeof(Brush), "OutlineBrush")]
+			public static ThemeResourceKey<Brush> Default => new("OutlineBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineHoverBrush")]
+			public static ThemeResourceKey<Brush> Hover => new("OutlineHoverBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineFocusedBrush")]
+			public static ThemeResourceKey<Brush> Focused => new("OutlineFocusedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlinePressedBrush")]
+			public static ThemeResourceKey<Brush> Pressed => new("OutlinePressedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineDraggedBrush")]
+			public static ThemeResourceKey<Brush> Dragged => new("OutlineDraggedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineSelectedBrush")]
+			public static ThemeResourceKey<Brush> Selected => new("OutlineSelectedBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineMediumBrush")]
+			public static ThemeResourceKey<Brush> Medium => new("OutlineMediumBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineLowBrush")]
+			public static ThemeResourceKey<Brush> Low => new("OutlineLowBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledBrush")]
+			public static ThemeResourceKey<Brush> Disabled => new("OutlineDisabledBrush");
+
+			[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledLowBrush")]
+			public static ThemeResourceKey<Brush> DisabledLow => new("OutlineDisabledLowBrush");
+
+			public static class Variant
 			{
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundBrush")]
-				public static ResourceValue<Brush> Default => new("BackgroundBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantBrush")]
+				public static ThemeResourceKey<Brush> Default => new("OutlineVariantBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("BackgroundHoverBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantHoverBrush")]
+				public static ThemeResourceKey<Brush> Hover => new("OutlineVariantHoverBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("BackgroundFocusedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantFocusedBrush")]
+				public static ThemeResourceKey<Brush> Focused => new("OutlineVariantFocusedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("BackgroundPressedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantPressedBrush")]
+				public static ThemeResourceKey<Brush> Pressed => new("OutlineVariantPressedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("BackgroundDraggedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDraggedBrush")]
+				public static ThemeResourceKey<Brush> Dragged => new("OutlineVariantDraggedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundSelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("BackgroundSelectedBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantSelectedBrush")]
+				public static ThemeResourceKey<Brush> Selected => new("OutlineVariantSelectedBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("BackgroundMediumBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantMediumBrush")]
+				public static ThemeResourceKey<Brush> Medium => new("OutlineVariantMediumBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundLowBrush")]
-				public static ResourceValue<Brush> Low => new("BackgroundLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantLowBrush")]
+				public static ThemeResourceKey<Brush> Low => new("OutlineVariantLowBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("BackgroundDisabledBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDisabledBrush")]
+				public static ThemeResourceKey<Brush> Disabled => new("OutlineVariantDisabledBrush");
 
-				[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("BackgroundDisabledLowBrush", true);
-			}
-
-			public static class OnBackground
-			{
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundBrush")]
-				public static ResourceValue<Brush> Default => new("OnBackgroundBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("OnBackgroundHoverBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("OnBackgroundFocusedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundPressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("OnBackgroundPressedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("OnBackgroundDraggedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundSelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("OnBackgroundSelectedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("OnBackgroundMediumBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundLowBrush")]
-				public static ResourceValue<Brush> Low => new("OnBackgroundLowBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("OnBackgroundDisabledBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("OnBackgroundDisabledLowBrush", true);
-			}
-
-			public static class Surface
-			{
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceBrush")]
-				public static ResourceValue<Brush> Default => new("SurfaceBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("SurfaceHoverBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("SurfaceFocusedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfacePressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("SurfacePressedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("SurfaceDraggedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceSelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("SurfaceSelectedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("SurfaceMediumBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceLowBrush")]
-				public static ResourceValue<Brush> Low => new("SurfaceLowBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("SurfaceDisabledBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("SurfaceDisabledLowBrush", true);
-
-				public static class Variant
-				{
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantBrush")]
-					public static ResourceValue<Brush> Default => new("SurfaceVariantBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("SurfaceVariantHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("SurfaceVariantFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("SurfaceVariantPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("SurfaceVariantDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("SurfaceVariantSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("SurfaceVariantMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantLowBrush")]
-					public static ResourceValue<Brush> Low => new("SurfaceVariantLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("SurfaceVariantDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("SurfaceVariantDisabledLowBrush", true);
-				}
-
-				public static class Inverse
-				{
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseBrush")]
-					public static ResourceValue<Brush> Default => new("SurfaceInverseBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("SurfaceInverseHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("SurfaceInverseFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInversePressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("SurfaceInversePressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("SurfaceInverseDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("SurfaceInverseSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("SurfaceInverseMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseLowBrush")]
-					public static ResourceValue<Brush> Low => new("SurfaceInverseLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("SurfaceInverseDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("SurfaceInverseDisabledLowBrush", true);
-				}
-			}
-
-			public static class OnSurface
-			{
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceBrush")]
-				public static ResourceValue<Brush> Default => new("OnSurfaceBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("OnSurfaceHoverBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("OnSurfaceFocusedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfacePressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("OnSurfacePressedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("OnSurfaceDraggedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceSelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("OnSurfaceSelectedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("OnSurfaceMediumBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceLowBrush")]
-				public static ResourceValue<Brush> Low => new("OnSurfaceLowBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("OnSurfaceDisabledBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("OnSurfaceDisabledLowBrush", true);
-
-				public static class Variant
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantBrush")]
-					public static ResourceValue<Brush> Default => new("OnSurfaceVariantBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("OnSurfaceVariantHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("OnSurfaceVariantFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantPressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("OnSurfaceVariantPressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("OnSurfaceVariantDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("OnSurfaceVariantSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("OnSurfaceVariantMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantLowBrush")]
-					public static ResourceValue<Brush> Low => new("OnSurfaceVariantLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("OnSurfaceVariantDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("OnSurfaceVariantDisabledLowBrush", true);
-				}
-
-				public static class Inverse
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseBrush")]
-					public static ResourceValue<Brush> Default => new("OnSurfaceInverseBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseHoverBrush")]
-					public static ResourceValue<Brush> Hover => new("OnSurfaceInverseHoverBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseFocusedBrush")]
-					public static ResourceValue<Brush> Focused => new("OnSurfaceInverseFocusedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInversePressedBrush")]
-					public static ResourceValue<Brush> Pressed => new("OnSurfaceInversePressedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDraggedBrush")]
-					public static ResourceValue<Brush> Dragged => new("OnSurfaceInverseDraggedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseSelectedBrush")]
-					public static ResourceValue<Brush> Selected => new("OnSurfaceInverseSelectedBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseMediumBrush")]
-					public static ResourceValue<Brush> Medium => new("OnSurfaceInverseMediumBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseLowBrush")]
-					public static ResourceValue<Brush> Low => new("OnSurfaceInverseLowBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledBrush")]
-					public static ResourceValue<Brush> Disabled => new("OnSurfaceInverseDisabledBrush", true);
-
-					[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledLowBrush")]
-					public static ResourceValue<Brush> DisabledLow => new("OnSurfaceInverseDisabledLowBrush", true);
-				}
-			}
-
-			public static class Outline
-			{
-				[ResourceKeyDefinition(typeof(Brush), "OutlineBrush")]
-				public static ResourceValue<Brush> Default => new("OutlineBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineHoverBrush")]
-				public static ResourceValue<Brush> Hover => new("OutlineHoverBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineFocusedBrush")]
-				public static ResourceValue<Brush> Focused => new("OutlineFocusedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlinePressedBrush")]
-				public static ResourceValue<Brush> Pressed => new("OutlinePressedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineDraggedBrush")]
-				public static ResourceValue<Brush> Dragged => new("OutlineDraggedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineSelectedBrush")]
-				public static ResourceValue<Brush> Selected => new("OutlineSelectedBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineMediumBrush")]
-				public static ResourceValue<Brush> Medium => new("OutlineMediumBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineLowBrush")]
-				public static ResourceValue<Brush> Low => new("OutlineLowBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledBrush")]
-				public static ResourceValue<Brush> Disabled => new("OutlineDisabledBrush", true);
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledLowBrush")]
-				public static ResourceValue<Brush> DisabledLow => new("OutlineDisabledLowBrush", true);
+				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDisabledLowBrush")]
+				public static ThemeResourceKey<Brush> DisabledLow => new("OutlineVariantDisabledLowBrush");
 			}
 		}
 	}

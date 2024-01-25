@@ -44,7 +44,7 @@
 			<StaticResource x:Key="FabSecondaryForeground" ResourceKey="OnSecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<StaticResource x:Key="FabSecondaryForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
-			<StaticResource x:Key="FabSecondaryForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />			
+			<StaticResource x:Key="FabSecondaryForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryBackground" ResourceKey="SecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
@@ -64,12 +64,32 @@
 			<StaticResource x:Key="FabTertiaryBackground" ResourceKey="TertiaryContainerBrush" />
 			<StaticResource x:Key="FabTertiaryBackgroundPointerOver" ResourceKey="TertiaryContainerBrush" />
 			<StaticResource x:Key="FabTertiaryBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="FabTertiaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />			
+			<StaticResource x:Key="FabTertiaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundFocused" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
 			<!--#endregion-->
+
+			<!--#region Default FAB Resources-->
+			<Thickness x:Key="MaterialFabPadding">20</Thickness>
+			<x:Double x:Key="MaterialFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="MaterialFabCornerRadius">16</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Small FAB Resources-->
+			<Thickness x:Key="MaterialSmallFabPadding">12</Thickness>
+			<x:Double x:Key="MaterialSmallFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="MaterialSmallFabCornerRadius">12</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Large FAB Resources-->
+			<Thickness x:Key="MaterialLargeFabPadding">36</Thickness>
+			<x:Double x:Key="MaterialLargeFabContentWidthOrHeight">24</x:Double>
+			<CornerRadius x:Key="MaterialLargeFabCornerRadius">28</CornerRadius>
+			<!--#endregion-->
+
+			<x:Double x:Key="MaterialFabIconTextPadding">12</x:Double>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
@@ -109,7 +129,7 @@
 			<StaticResource x:Key="FabSecondaryForeground" ResourceKey="OnSecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<StaticResource x:Key="FabSecondaryForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
-			<StaticResource x:Key="FabSecondaryForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />			
+			<StaticResource x:Key="FabSecondaryForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryBackground" ResourceKey="SecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
 			<StaticResource x:Key="FabSecondaryBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
@@ -129,35 +149,35 @@
 			<StaticResource x:Key="FabTertiaryBackground" ResourceKey="TertiaryContainerBrush" />
 			<StaticResource x:Key="FabTertiaryBackgroundPointerOver" ResourceKey="TertiaryContainerBrush" />
 			<StaticResource x:Key="FabTertiaryBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="FabTertiaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />			
+			<StaticResource x:Key="FabTertiaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundFocused" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
 			<!--#endregion-->
+
+			<!--#region Default FAB Resources-->
+			<Thickness x:Key="MaterialFabPadding">20</Thickness>
+			<x:Double x:Key="MaterialFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="MaterialFabCornerRadius">16</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Small FAB Resources-->
+			<Thickness x:Key="MaterialSmallFabPadding">12</Thickness>
+			<x:Double x:Key="MaterialSmallFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="MaterialSmallFabCornerRadius">12</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Large FAB Resources-->
+			<Thickness x:Key="MaterialLargeFabPadding">36</Thickness>
+			<x:Double x:Key="MaterialLargeFabContentWidthOrHeight">24</x:Double>
+			<CornerRadius x:Key="MaterialLargeFabCornerRadius">28</CornerRadius>
+			<!--#endregion-->
+
+			<x:Double x:Key="MaterialFabIconTextPadding">12</x:Double>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!--#region Default FAB Resources-->
-	<Thickness x:Key="MaterialFabPadding">20</Thickness>
-	<x:Double x:Key="MaterialFabContentWidthOrHeight">16</x:Double>
-	<CornerRadius x:Key="MaterialFabCornerRadius">16</CornerRadius>
-	<!--#endregion-->
-
-	<!--#region Small FAB Resources-->
-	<Thickness x:Key="MaterialSmallFabPadding">12</Thickness>
-	<x:Double x:Key="MaterialSmallFabContentWidthOrHeight">16</x:Double>
-	<CornerRadius x:Key="MaterialSmallFabCornerRadius">12</CornerRadius>
-
-	<!--#endregion-->
-
-	<!--#region Large FAB Resources-->
-	<Thickness x:Key="MaterialLargeFabPadding">36</Thickness>
-	<x:Double x:Key="MaterialLargeFabContentWidthOrHeight">24</x:Double>
-	<CornerRadius x:Key="MaterialLargeFabCornerRadius">28</CornerRadius>
-	<!--#endregion-->
-
-	<x:Double x:Key="MaterialFabIconTextPadding">12</x:Double>
 
 
 	<!--#region Default Color Variants-->
@@ -170,13 +190,13 @@
 		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialFabPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -214,7 +234,7 @@
 
 										<!-- Icon/Content spacing -->
 										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<Border Width="{StaticResource MaterialFabIconTextPadding}"
+											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
 													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
@@ -294,13 +314,13 @@
 		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialFabPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -338,7 +358,7 @@
 
 										<!-- Icon/Content spacing -->
 										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<Border Width="{StaticResource MaterialFabIconTextPadding}"
+											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
 													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
@@ -418,13 +438,13 @@
 		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialFabPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -462,7 +482,7 @@
 
 										<!-- Icon/Content spacing -->
 										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<Border Width="{StaticResource MaterialFabIconTextPadding}"
+											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
 													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
@@ -542,13 +562,13 @@
 		<Setter Property="FontFamily" Value="{ThemeResource MaterialMediumFontFamily}" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialFabPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
 		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -586,7 +606,7 @@
 
 										<!-- Icon/Content spacing -->
 										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<Border Width="{StaticResource MaterialFabIconTextPadding}"
+											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
 													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
@@ -659,41 +679,40 @@
 	<!--#endregion-->
 
 	<!--#region Small Color Variants-->
-
 	<Style x:Key="MaterialSmallFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialSmallFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialSurfaceSmallFabStyle"
 		   BasedOn="{StaticResource MaterialSurfaceFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialSmallFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialSecondarySmallFabStyle"
 		   BasedOn="{StaticResource MaterialSecondaryFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialSmallFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialTertiarySmallFabStyle"
 		   BasedOn="{StaticResource MaterialTertiaryFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialSmallFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 	<!--#endregion-->
 
@@ -701,35 +720,37 @@
 	<Style x:Key="MaterialLargeFabStyle"
 		   BasedOn="{StaticResource MaterialFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialLargeFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialSurfaceLargeFabStyle"
 		   BasedOn="{StaticResource MaterialSurfaceFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialLargeFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
+
 	<Style x:Key="MaterialSecondaryLargeFabStyle"
 		   BasedOn="{StaticResource MaterialSecondaryFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialLargeFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
+
 	<Style x:Key="MaterialTertiaryLargeFabStyle"
 		   BasedOn="{StaticResource MaterialTertiaryFabStyle}"
 		   TargetType="Button">
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialLargeFabCornerRadius}" />
-		<Setter Property="Padding" Value="{StaticResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{StaticResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
+		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
 	<!--#endregion-->
 </ResourceDictionary>

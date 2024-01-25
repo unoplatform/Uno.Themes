@@ -2,6 +2,38 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:smtx="using:ShowMeTheXAML">
 
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<SolidColorBrush x:Key="SampleSecondBackgroundBrush"
+							 Color="{ThemeResource OnTertiaryContainerColor}"
+							 Opacity="0.1" />
+			<SolidColorBrush x:Key="SampleThirdBackgroundBrush"
+							 Color="{ThemeResource OnSurfaceColor}"
+							 Opacity="0.02" />
+			<SolidColorBrush x:Key="SampleFourthBackgroundBrush"
+							 Color="{ThemeResource OutlineColor}"
+							 Opacity="0.5" />
+			<SolidColorBrush x:Key="DividerBrush"
+							 Color="{ThemeResource OnSurfaceColor}"
+							 Opacity="0.13" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<SolidColorBrush x:Key="SampleSecondBackgroundBrush"
+							 Color="{ThemeResource OnTertiaryContainerColor}"
+							 Opacity="0.1" />
+			<SolidColorBrush x:Key="SampleThirdBackgroundBrush"
+							 Color="{ThemeResource OnSurfaceColor}"
+							 Opacity="0.02" />
+			<SolidColorBrush x:Key="SampleFourthBackgroundBrush"
+							 Color="{ThemeResource OutlineColor}"
+							 Opacity="0.5" />
+			<SolidColorBrush x:Key="DividerBrush"
+							 Color="{ThemeResource OnSurfaceColor}"
+							 Opacity="0.13" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
 	<smtx:NiceFormatter x:Key="NiceFormatter" />
 
 	<Style x:Key="BaseXamlDisplayStyle"
@@ -16,6 +48,45 @@
 						<Button Content="{TemplateBinding Xaml}"
 								Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
 					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="ExpandingXamlDisplayStyle"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Margin" Value="0,16,0,0" />
+		<Setter Property="BorderBrush" Value="{ThemeResource DividerBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="Formatter" Value="{x:Null}" />
+		<Setter Property="Background" Value="{ThemeResource SampleSecondBackgroundBrush}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<Grid BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  Margin="0,16,0,0">
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<!-- Content -->
+						<ContentPresenter x:Name="MainContent"
+										  Padding="16"
+										  Content="{TemplateBinding Content}"
+										  Background="{TemplateBinding Background}" />
+
+						<Grid Grid.Row="1"
+							  Padding="16"
+							  Background="{ThemeResource SampleFourthBackgroundBrush}">
+							<Button Content="{TemplateBinding Xaml}"
+									Margin="{TemplateBinding Padding}"
+									Style="{StaticResource SeeXamlFlyoutButtonStyle}" />
+						</Grid>
+					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

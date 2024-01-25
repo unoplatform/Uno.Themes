@@ -1,229 +1,296 @@
-﻿<Page
-    x:Class="Uno.Themes.Samples.Content.Controls.ToggleSwitchSamplePage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:android="http://uno.ui/android"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:ios="http://uno.ui/ios"
-    xmlns:local="using:Uno.Themes.Samples.Shared.Content"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:sample="using:Uno.Themes.Samples"
-    xmlns:smtx="using:ShowMeTheXAML"
-    mc:Ignorable="d android ios">
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.ToggleSwitchSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:local="using:Uno.Themes.Samples.Shared.Content"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d android ios">
 
-    <!--  Material/Cupertino ToggleSwitch styles for WASM are present in the Styles/ToggleSwitch.xaml file of the shared project as a workaround for https://github.com/unoplatform/uno/issues/5372  -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <sample:SamplePageLayout>
-            <sample:SamplePageLayout.MaterialTemplate>
-                <DataTemplate>
-                    <StackPanel>
+	<!--  Material/Cupertino ToggleSwitch styles for WASM are present in the Styles/ToggleSwitch.xaml file of the shared project as a workaround for https://github.com/unoplatform/uno/issues/5372  -->
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
 
-                        <!--  Primary  -->
-                        <TextBlock
-                            Margin="12,16,12,8"
-                            Style="{StaticResource MaterialSubtitle2}"
-                            Text="Primary" />
+						<!--  Primary  -->
+						<TextBlock Margin="12,16,12,8"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Text="Primary" />
 
-                        <!--  ToggleSwitch No Label  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="ToggleSwitchSamplePage_NoLabel">
-                            <ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch No Label  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleSwitchSamplePage_NoLabel">
+							<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch OFF  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="ToggleSwitchSamplePage_Off">
-                            <ToggleSwitch Header="OFF" Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch OFF  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleSwitchSamplePage_Off">
+							<ToggleSwitch Header="OFF"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch ON  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="ToggleSwitchSamplePage_On">
-                            <ToggleSwitch
-                                Header="ON"
-                                IsOn="True"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch ON  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleSwitchSamplePage_On">
+							<ToggleSwitch Header="ON"
+										  IsOn="True"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch OFF Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="ToggleSwitchSamplePage_OffDisabled">
-                            <ToggleSwitch
-                                Header="OFF DISABLED"
-                                IsEnabled="False"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch OFF Disabled  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleSwitchSamplePage_OffDisabled">
+							<ToggleSwitch Header="OFF DISABLED"
+										  IsEnabled="False"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch ON Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="ToggleSwitchSamplePage_OnDisabled">
-                            <ToggleSwitch
-                                Header="ON DISABLED"
-                                IsEnabled="False"
-                                IsOn="True"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch ON Disabled  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleSwitchSamplePage_OnDisabled">
+							<ToggleSwitch Header="ON DISABLED"
+										  IsEnabled="False"
+										  IsOn="True"
+										  Style="{StaticResource MaterialToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  Secondary  -->
-                        <TextBlock
-                            Margin="12,16,12,8"
-                            Style="{StaticResource MaterialSubtitle2}"
-                            Text="Secondary" />
+						<!--  Secondary  -->
+						<TextBlock Margin="12,16,12,8"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Text="Secondary" />
 
-                        <!--  ToggleSwitch No Label  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="SecondaryToggleSwitchSamplePage_NoLabel">
-                            <ToggleSwitch Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch No Label  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="SecondaryToggleSwitchSamplePage_NoLabel">
+							<ToggleSwitch Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch OFF  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="SecondaryToggleSwitchSamplePage_Off">
-                            <ToggleSwitch Header="OFF" Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch OFF  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="SecondaryToggleSwitchSamplePage_Off">
+							<ToggleSwitch Header="OFF"
+										  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch ON  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="SecondaryToggleSwitchSamplePage_On">
-                            <ToggleSwitch
-                                Header="ON"
-                                IsOn="True"
-                                Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch ON  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="SecondaryToggleSwitchSamplePage_On">
+							<ToggleSwitch Header="ON"
+										  IsOn="True"
+										  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch OFF Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="SecondaryToggleSwitchSamplePage_OffDisabled">
-                            <ToggleSwitch
-                                Header="OFF DISABLED"
-                                IsEnabled="False"
-                                Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch OFF Disabled  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="SecondaryToggleSwitchSamplePage_OffDisabled">
+							<ToggleSwitch Header="OFF DISABLED"
+										  IsEnabled="False"
+										  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch ON Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="SecondaryToggleSwitchSamplePage_OnDisabled">
-                            <ToggleSwitch
-                                Header="ON DISABLED"
-                                IsEnabled="False"
-                                IsOn="True"
-                                Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
-                    </StackPanel>
-                </DataTemplate>
-            </sample:SamplePageLayout.MaterialTemplate>
-            <sample:SamplePageLayout.M3MaterialTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <!--  Primary  -->
-                        <TextBlock
-                            Margin="12,16,12,8"
-                            Style="{StaticResource TitleSmall}"
-                            Text="Primary" />
+						<!--  ToggleSwitch ON Disabled  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="SecondaryToggleSwitchSamplePage_OnDisabled">
+							<ToggleSwitch Header="ON DISABLED"
+										  IsEnabled="False"
+										  IsOn="True"
+										  Style="{StaticResource MaterialSecondaryToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel Margin="12,0">
 
-                        <!--  ToggleSwitch No Label  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="M3_Material_ToggleSwitchSamplePage_NoLabel">
-                            <ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch Default (without Icon)  -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage">
+							<StackPanel>
+								<TextBlock Text="Default" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch OFF  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="M3_Material_ToggleSwitchSamplePage_Off">
-                            <ToggleSwitch Header="OFF" Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch with On Icon only -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_OnIconOnly">
+							<StackPanel>
+								<TextBlock Text="On Icon Only" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+									<ToggleSwitch.OnContent>
+										<PathIcon Data="M0.166992 3.99997L1.50033 5.3333C4.81366 2.01997 10.187 2.01997 13.5003 5.3333L14.8337 3.99997C10.787 -0.0467007 4.22033 -0.0467007 0.166992 3.99997ZM5.50033 9.3333L7.50033 11.3333L9.50032 9.3333C8.40033 8.22663 6.60699 8.22663 5.50033 9.3333ZM2.83366 6.66663L4.16699 7.99997C6.00699 6.15997 8.99366 6.15997 10.8337 7.99997L12.167 6.66663C9.59366 4.0933 5.41366 4.0933 2.83366 6.66663Z" />
+									</ToggleSwitch.OnContent>
+								</ToggleSwitch>
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch ON  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="M3_Material_ToggleSwitchSamplePage_On">
-                            <ToggleSwitch
-                                Header="ON"
-                                IsOn="True"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch with Icons using PathIcon -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_PathIcon">
+							<StackPanel>
+								<TextBlock Text="Using PathIcon" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+									<ToggleSwitch.OffContent>
+										<PathIcon Data="M14.827 5.00003C12.267 2.44003 8.70033 1.50669 5.39366 2.18669L7.07366 3.86669C9.38699 3.75336 11.7337 4.56669 13.4937 6.33336L14.827 5.00003V5.00003ZM12.1603 7.66669C11.3003 6.80669 10.267 6.24669 9.16699 5.96003L11.5203 8.31336L12.1603 7.66669V7.66669ZM0.833659 1.03336L2.88033 3.06669C1.90033 3.54669 0.980326 4.18669 0.166992 5.00003L1.49366 6.33336C2.32033 5.50669 3.27366 4.89336 4.29366 4.48669L5.78699 5.98003C4.70699 6.26003 3.68033 6.82003 2.83366 7.66669V7.67336L4.16033 9.00003C5.06699 8.09336 6.25366 7.64003 7.44033 7.62669L12.1537 12.3334L13.0003 11.4934L1.69366 0.193359L0.833659 1.03336ZM5.50033 10.3334L7.50033 12.3334L9.50033 10.3334C8.40033 9.22669 6.60699 9.22669 5.50033 10.3334Z" />
+									</ToggleSwitch.OffContent>
+									<ToggleSwitch.OnContent>
+										<PathIcon Data="M0.166992 3.99997L1.50033 5.3333C4.81366 2.01997 10.187 2.01997 13.5003 5.3333L14.8337 3.99997C10.787 -0.0467007 4.22033 -0.0467007 0.166992 3.99997ZM5.50033 9.3333L7.50033 11.3333L9.50032 9.3333C8.40033 8.22663 6.60699 8.22663 5.50033 9.3333ZM2.83366 6.66663L4.16699 7.99997C6.00699 6.15997 8.99366 6.15997 10.8337 7.99997L12.167 6.66663C9.59366 4.0933 5.41366 4.0933 2.83366 6.66663Z" />
+									</ToggleSwitch.OnContent>
+								</ToggleSwitch>
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch OFF Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="M3_Material_ToggleSwitchSamplePage_OffDisabled">
-                            <ToggleSwitch
-                                Header="OFF DISABLED"
-                                IsEnabled="False"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch with Icons using SymbolIcon -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_SymbolIcon">
+							<StackPanel>
+								<TextBlock Text="Using SymbolIcon" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+									<ToggleSwitch.OffContent>
+										<SymbolIcon Symbol="UnFavorite" />
+									</ToggleSwitch.OffContent>
+									<ToggleSwitch.OnContent>
+										<SymbolIcon Symbol="Favorite" />
+									</ToggleSwitch.OnContent>
+								</ToggleSwitch>
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch ON Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="M3_Material_ToggleSwitchSamplePage_OnDisabled">
-                            <ToggleSwitch
-                                Header="ON DISABLED"
-                                IsEnabled="False"
-                                IsOn="True"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch with Icons using FontIcon -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_FontIcon">
+							<StackPanel>
+								<TextBlock Text="Using FontIcon" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+									<ToggleSwitch.OffContent>
+										<FontIcon Glyph="&#xE1A3;" />
+									</ToggleSwitch.OffContent>
+									<ToggleSwitch.OnContent>
+										<FontIcon Glyph="&#xE12E;" />
+									</ToggleSwitch.OnContent>
+								</ToggleSwitch>
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  Primary  -->
-                        <TextBlock
-                            Margin="12,16,12,8"
-                            Style="{StaticResource TitleSmall}"
-                            Text="Others" />
-                        <StackPanel>
-                            <ToggleSwitch
-                                Height="20"
-                                Header="Minimal Height"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                            <ToggleSwitch
-                                Height="60"
-                                Header="Height=60"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
+						<!--  ToggleSwitch with Icons using BitmapIcon -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_BitmapIcon">
+							<StackPanel>
+								<TextBlock Text="Using BitmapIcon" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+									<ToggleSwitch.OffContent>
+										<BitmapIcon UriSource="ms-appx:///Assets/MaterialIcon_Small.png"
+													ShowAsMonochrome="True" />
+									</ToggleSwitch.OffContent>
+									<ToggleSwitch.OnContent>
+										<BitmapIcon UriSource="ms-appx:///Assets/AppleIcon_Small.png"
+													ShowAsMonochrome="True" />
+									</ToggleSwitch.OnContent>
+								</ToggleSwitch>
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                            <ToggleSwitch
-                                HorizontalAlignment="Stretch"
-                                Header="HorizontalAlignment=Stretch"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                            <ToggleSwitch
-                                HorizontalAlignment="Stretch"
-                                Header="HorizontalAlignment=Stretch"
-                                Style="{StaticResource MaterialToggleSwitchStyle}" />
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </sample:SamplePageLayout.M3MaterialTemplate>
-            <sample:SamplePageLayout.CupertinoTemplate>
-                <DataTemplate>
-                    <StackPanel>
+						<!--  ToggleSwitch Disabled On  -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_Disabled_On">
+							<StackPanel>
+								<TextBlock Text="Disabled On" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
+											  IsEnabled="False"
+											  IsOn="True" />
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  Primary  -->
-                        <TextBlock
-                            Margin="12,16,12,20"
-                            Style="{StaticResource CupertinoTertiaryTitle}"
-                            Text="ToggleSwitch" />
+						<!--  ToggleSwitch Disabled Off  -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_Disabled_Off">
+							<StackPanel>
+								<TextBlock Text="Disabled Off" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
+											  IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch No Label  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="Cupertino_ToggleSwitchSamplePage_NoLabel">
-                            <ToggleSwitch Style="{StaticResource CupertinoToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch Disabled On Icon  -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_Icon_Disabled_On">
+							<StackPanel>
+								<TextBlock Text="Disabled On Icon" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
+											  IsEnabled="False"
+											  IsOn="True">
+									<ToggleSwitch.OnContent>
+										<PathIcon Data="M4.0001 7.7799L1.2201 4.9999L0.273438 5.9399L4.0001 9.66656L12.0001 1.66656L11.0601 0.726562L4.0001 7.7799Z" />
+									</ToggleSwitch.OnContent>
+								</ToggleSwitch>
+							</StackPanel>
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch OFF  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="Cupertino_ToggleSwitchSamplePage_Off">
-                            <ToggleSwitch
-                                Header="OFF"
-                                IsOn="False"
-                                Style="{StaticResource CupertinoToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch Disabled Off Icon  -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_Icon_Disabled_Off">
+							<StackPanel>
+								<TextBlock Text="Disabled Off Icon" />
+								<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
+											  IsEnabled="False"
+											  IsOn="False">
+									<ToggleSwitch.OffContent>
+										<PathIcon Data="M9.66634 1.27325L8.72634 0.333252L4.99967 4.05992L1.27301 0.333252L0.333008 1.27325L4.05967 4.99992L0.333008 8.72659L1.27301 9.66659L4.99967 5.93992L8.72634 9.66659L9.66634 8.72659L5.93967 4.99992L9.66634 1.27325Z" />
+									</ToggleSwitch.OffContent>
+								</ToggleSwitch>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
 
-                        <!--  ToggleSwitch ON  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="Cupertino_ToggleSwitchSamplePage_On">
-                            <ToggleSwitch
-                                Header="ON"
-                                IsOn="True"
-                                Style="{StaticResource CupertinoToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  Primary  -->
+						<TextBlock Margin="12,16,12,20"
+								   Style="{StaticResource CupertinoTertiaryTitle}"
+								   Text="ToggleSwitch" />
 
-                        <!--  ToggleSwitch OFF Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="Cupertino_ToggleSwitchSamplePage_OffDisabled">
-                            <ToggleSwitch
-                                Header="OFF DISABLED"
-                                IsEnabled="False"
-                                IsOn="False"
-                                Style="{StaticResource CupertinoToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
+						<!--  ToggleSwitch No Label  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Cupertino_ToggleSwitchSamplePage_NoLabel">
+							<ToggleSwitch Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
 
-                        <!--  ToggleSwitch ON Disabled  -->
-                        <smtx:XamlDisplay Margin="12,0" UniqueKey="Cupertino_ToggleSwitchSamplePage_OnDisabled">
-                            <ToggleSwitch
-                                Header="ON DISABLED"
-                                IsEnabled="False"
-                                IsOn="True"
-                                Style="{StaticResource CupertinoToggleSwitchStyle}" />
-                        </smtx:XamlDisplay>
-                    </StackPanel>
-                </DataTemplate>
-            </sample:SamplePageLayout.CupertinoTemplate>
-        </sample:SamplePageLayout>
-    </Grid>
+						<!--  ToggleSwitch OFF  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Cupertino_ToggleSwitchSamplePage_Off">
+							<ToggleSwitch Header="OFF"
+										  IsOn="False"
+										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
+
+						<!--  ToggleSwitch ON  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Cupertino_ToggleSwitchSamplePage_On">
+							<ToggleSwitch Header="ON"
+										  IsOn="True"
+										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
+
+						<!--  ToggleSwitch OFF Disabled  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Cupertino_ToggleSwitchSamplePage_OffDisabled">
+							<ToggleSwitch Header="OFF DISABLED"
+										  IsEnabled="False"
+										  IsOn="False"
+										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
+
+						<!--  ToggleSwitch ON Disabled  -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Cupertino_ToggleSwitchSamplePage_OnDisabled">
+							<ToggleSwitch Header="ON DISABLED"
+										  IsEnabled="False"
+										  IsOn="True"
+										  Style="{StaticResource CupertinoToggleSwitchStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
 </Page>

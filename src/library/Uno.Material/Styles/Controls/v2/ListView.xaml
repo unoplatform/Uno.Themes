@@ -14,7 +14,6 @@
 		<Setter Property="Foreground" Value="{ThemeResource ListViewItemForeground}" />
 		<Setter Property="TabNavigation" Value="Local" />
 		<Setter Property="IsHoldingEnabled" Value="True" />
-		<Setter Property="Padding" Value="12,0,12,0" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
@@ -22,6 +21,7 @@
 		<Setter Property="AllowDrop" Value="False" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
 		<Setter Property="FocusVisualMargin" Value="0" />
+		<Setter Property="Padding" Value="0" />
 		<Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource ListViewItemFocusVisualPrimaryBrush}" />
 		<Setter Property="FocusVisualPrimaryThickness" Value="2" />
 		<Setter Property="FocusVisualSecondaryBrush" Value="{ThemeResource ListViewItemFocusVisualSecondaryBrush}" />
@@ -404,8 +404,7 @@
 							</Border.RenderTransform>
 							<FontIcon x:Name="MultiSelectCheck"
 									  FontFamily="{ThemeResource SymbolThemeFontFamily}"
-									  win:Glyph="&#xE73E;"
-									  xamarin:Glyph="&#xE081;"
+									  Glyph="&#xE73E;"
 									  FontSize="16"
 									  Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
 									  Visibility="Collapsed"
@@ -435,4 +434,12 @@
 				Value="{StaticResource MaterialListViewItemStyle}"/>
 
 	</Style>
+
+	<Style x:Key="MaterialDefaultListViewItemStyle"
+		   TargetType="ListViewItem"
+		   BasedOn="{StaticResource MaterialListViewItemStyle}" />
+
+	<Style x:Key="MaterialDefaultListViewStyle"
+		   TargetType="ListView"
+		   BasedOn="{StaticResource MaterialListViewStyle}" />
 </ResourceDictionary>

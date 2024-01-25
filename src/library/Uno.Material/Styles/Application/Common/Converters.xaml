@@ -36,6 +36,10 @@
 								 NotNullValue="Visible"
 								 NullValue="Collapsed" />
 
+	<um:FromNullToValueConverter x:Key="MaterialNullToTransparent"
+								 NotNullValue="1"
+								 NullValue="0" />
+	
 	<um:FromEmptyStringOrNullObjectToValueConverter x:Key="MaterialEmptyOrNullToVisible"
 													NotEmptyOrNullValue="Collapsed"
 													EmptyOrNullValue="Visible" />

@@ -41,7 +41,7 @@ namespace Uno.Cupertino
 				// "ms-appx:///Uno.Cupertino/Styles/Controls/ComboBox.xaml",
 				"CupertinoComboBoxStyle",
 				// "ms-appx:///Uno.Cupertino/Styles/Controls/DatePicker.xaml",
-				"CupertinoDatePickerStyle",
+				"CupertinoDatePickerStyle", "CupertinoDatePickerFlyoutPresenterStyle",
 				// "ms-appx:///Uno.Cupertino/Styles/Controls/HyperlinkButton.xaml",
 				"CupertinoHyperlinkButtonStyle",
 				// "ms-appx:///Uno.Cupertino/Styles/Controls/NumberBox.xaml",

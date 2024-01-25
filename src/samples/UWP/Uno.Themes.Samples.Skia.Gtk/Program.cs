@@ -1,6 +1,7 @@
 ﻿using System;
 using GLib;
 using Uno.UI.Runtime.Skia;
+using Uno.UI.Runtime.Skia.Gtk;
 
 namespace Uno.Themes.Samples.Skia.Gtk
 {
@@ -14,9 +15,7 @@ namespace Uno.Themes.Samples.Skia.Gtk
 				expArgs.ExitApplication = true;
 			};
 
-			Windows.ApplicationModel.Resources.ResourceLoader.GetStringInternal = s => null;
-
-			var host = new GtkHost(() => new App(), args);
+			var host = new GtkHost(() => new App());
 
 			host.Run();
 		}

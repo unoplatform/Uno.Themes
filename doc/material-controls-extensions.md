@@ -1,8 +1,12 @@
+---
+uid: Uno.Themes.Material.Extensions
+---
+
 # Material Control Extensions
 
 ## Icon
 
-This feature allows for the addition of icon on the supported controls. Those icons could be any of the [`IconElement`](https://docs.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s: `<BitmapIcon />`, `<FontIcon />`, `<PathIcon />` or `<SymbolIcon />`.
+This feature allows for the addition of icon on the supported controls. Those icons could be any of the [`IconElement`](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s: `<BitmapIcon />`, `<FontIcon />`, `<PathIcon />`, or `<SymbolIcon />`.
 
 Here are supported control with samples:
 
@@ -29,7 +33,7 @@ Here are supported control with samples:
 ## Alternate Content
 
 This feature allows putting different content on a control when the state changes.
-It's control specific and for now, you can only use it with the ToggleButton control.
+It's control specific and for now, you can only use it with the `ToggleButton` control.
 
 ### Alternate Content on ToggleButton
 
@@ -113,21 +117,21 @@ Applying the surface tint for elevated controls is optional and must be explicit
     <Button Content="Elevation 5"
             um:ControlExtensions.Elevation="5"
             Style="{StaticResource MaterialElevatedButtonStyle}" />
-</StackPanel> 
+</StackPanel>
 ```
 
 The above XAML will produce the following result:
 
-![](assets/material-elevation-buttons.png)
+![Uno Material Elevation Buttons with Tint Enabled](assets/material-elevation-buttons.png)
 
 If we were to alter the XAML above and set `um:ControlExtensions.IsTintEnabled="False"` on each of the buttons, we would see elevated buttons without tints:
 
-![](assets/material-elevation-buttons-shadow-only.png)
+![Uno Material Elevation Buttons with Tint Disabled](assets/material-elevation-buttons-shadow-only.png)
 
 ### Supported Controls
 
 The following control styles have support for surface tint:
 
-| Control | Supporting Styles   |
-|---------|---------------------|
-| Button  | ElevatedButtonStyle |
+| Control  | Supporting Styles     |
+|----------|-----------------------|
+| `Button` | `ElevatedButtonStyle` |

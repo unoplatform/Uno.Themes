@@ -6,14 +6,13 @@
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
-            <!--#region Base Hyperlink Button style-->
             <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
             <StaticResource x:Key="HyperlinkButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundPointer" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="HyperlinkButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="HyperlinkButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 
@@ -25,26 +24,22 @@
             <StaticResource x:Key="HyperlinkButtonFontSize" ResourceKey="LabelLargeFontSize" />
             <StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
 
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacity" ResourceKey="NormalOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
+            <x:Double x:Key="HyperlinkButtonBackgroundOpacity">1</x:Double>
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
-            <!--#endregion-->
+			<x:Double x:Key="HyperlinkButtonBackgroundOpacityDisabled">1</x:Double>
 
-            <!--#region Secondary Hyperlink Button style-->
-            <StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SecondaryBrush" />
-            <!--#endregion-->
-        </ResourceDictionary>
+			<Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
+		</ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
-            <!--#region Base Hyperlink Button style-->
             <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
             <StaticResource x:Key="HyperlinkButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundPointer" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="HyperlinkButtonBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="HyperlinkButtonBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="HyperlinkButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 
@@ -56,20 +51,14 @@
             <StaticResource x:Key="HyperlinkButtonFontSize" ResourceKey="LabelLargeFontSize" />
             <StaticResource x:Key="HyperlinkButtonFontFamily" ResourceKey="MaterialRegularFontFamily" />
 
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacity" ResourceKey="NormalOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
+			<x:Double x:Key="HyperlinkButtonBackgroundOpacity">1</x:Double>
+			<StaticResource x:Key="HyperlinkButtonBackgroundOpacityPointerOver" ResourceKey="MediumOpacity" />
             <StaticResource x:Key="HyperlinkButtonBackgroundOpacityPressed" ResourceKey="LowOpacity" />
-            <StaticResource x:Key="HyperlinkButtonBackgroundOpacityDisabled" ResourceKey="NormalOpacity" />
-            <!--#endregion-->
+			<x:Double x:Key="HyperlinkButtonBackgroundOpacityDisabled">1</x:Double>
 
-            <!--#region Secondary Hyperlink Button style-->
-            <StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SecondaryBrush" />
-            <!--#endregion-->
-        </ResourceDictionary>
+			<Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
+		</ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-
-    <Thickness x:Key="HyperlinkButtonPadding">0</Thickness>
-    <x:Double x:Key="NormalOpacity">1</x:Double>
 
     <Style x:Key="MaterialHyperlinkButtonStyle"
            TargetType="HyperlinkButton">
@@ -159,7 +148,10 @@
            TargetType="HyperlinkButton"
            BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
 
-        <Setter Property="Foreground" Value="{ThemeResource SecondaryHyperlinkButtonForeground}" />
+        <Setter Property="Foreground" Value="{ThemeResource SecondaryBrush}" />
     </Style>
 
+	<Style x:Key="MaterialDefaultHyperlinkButtonStyle"
+		   TargetType="HyperlinkButton"
+		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}" />
 </ResourceDictionary>
