@@ -53,25 +53,13 @@ It's control specific and for now, you can only use it with the `ToggleButton` c
 
 This feature allows to set the level of elevation to depict on the supported control.
 
-Setting the elevation on [supported controls](#supported-controls) can result in changes to both the shadow and the [surface tint](#surface-tint).
+Setting the elevation on [supported controls](#supported-controls) can result in changes to shadow.
 
 [Material Design Elevation Guidance](https://m3.material.io/styles/elevation/overview)
 
-## Surface Tint
-
-The surface tint properties allow for customization of how elevation can be depicted on certain controls. While the Background of a control remains static, the surface color can change based on the level of elevation.
-
-### TintedBackground
-
-This is a readonly property that will provide a SolidColorBrush depicting the control's current background color overlayed with the surface tint color at a certain opacity based on the elevation of the control.
-
-### IsTintEnabled
-
-This feature allows for enabling or disabling the surface tint that may be applied to an elevated control. When `IsTintEnabled` is `false`, the `TintedBackground` property will remain the same value as the control's background color.
-
 ### Example Usage for `Button`
 
-The `ElevatedButtonStyle` in Uno Material supports elevation and surface tints through the use of the `TintedBackground`, `IsTintEnabled`, and `Elevation` attached properties.
+The `ElevatedButtonStyle` in Uno Material supports elevation through the use of the `Elevation` attached property.
 
 `ElevatedButtonStyle` contains the following `Setter`s:
 
@@ -80,22 +68,10 @@ The `ElevatedButtonStyle` in Uno Material supports elevation and surface tints t
 
 <Setter Property="um:ControlExtensions.Elevation"
         Value="1" />
-<Setter Property="um:ControlExtensions.IsTintEnabled"
-        Value="True" />
 ...
 ```
 
-Within the `ControlTemplate` of the `ElevatedButtonStyle`, instead of performing a `TemplateBinding` to the `Background` property of the `Button`, we instead bind to the `TintedBackground` attached property:
-
-```xml
-<Grid x:Name="Root"
-      ...
-      Background="{Binding Path=(um:ControlExtensions.TintedBackground), RelativeSource={RelativeSource TemplatedParent}}">
-      <!-- Remaining content omitted for brevity -->
-</Grid>
-```
-
-Applying the surface tint for elevated controls is optional and must be explicitly enabled through the use of the `IsTintEnabled` attached property. Below is an example of how an elevated control may appear  with or without a surface tint:
+Below is an example of how an elevated control may appear:
 
 ```xml
 <StackPanel Spacing="8">
@@ -122,16 +98,13 @@ Applying the surface tint for elevated controls is optional and must be explicit
 
 The above XAML will produce the following result:
 
-![Uno Material Elevation Buttons with Tint Enabled](assets/material-elevation-buttons.png)
-
-If we were to alter the XAML above and set `um:ControlExtensions.IsTintEnabled="False"` on each of the buttons, we would see elevated buttons without tints:
-
-![Uno Material Elevation Buttons with Tint Disabled](assets/material-elevation-buttons-shadow-only.png)
+![Uno Material Elevation Buttons](assets/material-elevation-buttons-shadow-only.png)
 
 ### Supported Controls
 
-The following control styles have support for surface tint:
+The following control styles have support for elevation:
 
 | Control  | Supporting Styles     |
 |----------|-----------------------|
 | `Button` | `ElevatedButtonStyle` |
+|----------|-----------------------|
