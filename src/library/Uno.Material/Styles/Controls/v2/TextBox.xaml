@@ -5,10 +5,11 @@
 					xmlns:not_macos="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:macos="http://uno.ui/macos"
 					xmlns:um="using:Uno.Material"
+					xmlns:ut="using:Uno.Themes"
 					mc:Ignorable="d macos">
 
 	<!-- Converters -->
-	<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY"
+	<ut:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY"
 										NotNullOrEmptyValue="8"
 										NullOrEmptyValue="0" />
 
@@ -285,7 +286,7 @@
 		<Setter Property="MinHeight" Value="{ThemeResource MaterialFilledTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -379,13 +380,13 @@
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 
 								<VisualState x:Name="Empty">
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -402,9 +403,9 @@
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Height="26"
 									VerticalAlignment="Top"
-									Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
 												  Margin="0,0,8,0"
 												  MaxHeight="34"
@@ -512,7 +513,7 @@
 		<Setter Property="MinHeight" Value="{ThemeResource MaterialOutlinedTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -591,12 +592,12 @@
 														 To="0.7" />
 									</Storyboard>
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToFalse}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 								<VisualState x:Name="Empty">
 									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource MaterialEmptyToTrue}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -615,9 +616,9 @@
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Height="26"
 									VerticalAlignment="Top"
-									Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
-												  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
 												  MinWidth="25"
 												  MaxWidth="34"

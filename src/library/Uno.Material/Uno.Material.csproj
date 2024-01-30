@@ -180,8 +180,6 @@
 
 		<XamlMergeInput Remove="Styles\Application\v1\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v1\MaterialColors.xaml" />
-		<XamlMergeInput Remove="Styles\Application\v2\SharedColors.xaml" />
-		<XamlMergeInput Remove="Styles\Application\v2\SharedColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
 
 		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
@@ -189,9 +187,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Include="..\Uno.Themes\Helpers\LinkerAttributes.cs" Link="Helpers\LinkerAttributes.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Uno.Fonts.Roboto" Version="2.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj" />
 	</ItemGroup>
 
 	<Import Project="xamlmerge.targets" />

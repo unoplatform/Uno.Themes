@@ -123,9 +123,9 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
-    <EmbeddedResource Include="LinkerConfig.xamarin.xml">
-      <LogicalName>$(AssemblyName).xml</LogicalName>
-    </EmbeddedResource>
+		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
+			<LogicalName>$(AssemblyName).xml</LogicalName>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -138,8 +138,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
-	  <UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
+		<UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj" />
 	</ItemGroup>
 
 	<Import Project="..\Uno.Material\xamlmerge.targets" />

@@ -4,6 +4,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:um="using:Uno.Material"
+					xmlns:ut="using:Uno.Themes"
 					mc:Ignorable="d">
 
 	<ResourceDictionary.ThemeDictionaries>
@@ -194,9 +195,9 @@
 		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -222,20 +223,20 @@
 												Orientation="Horizontal">
 
 										<!-- Icon -->
-										<Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
-												 Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+										<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+												 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+												 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<ContentPresenter x:Name="IconPresenter"
-															  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+															  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
-										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -318,9 +319,9 @@
 		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -346,20 +347,20 @@
 												Orientation="Horizontal">
 
 										<!-- Icon -->
-										<Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
-												 Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+										<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+												 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+												 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<ContentPresenter x:Name="IconPresenter"
-															  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+															  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
-										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -442,9 +443,9 @@
 		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -470,20 +471,20 @@
 												Orientation="Horizontal">
 
 										<!-- Icon -->
-										<Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
-												 Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+										<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+												 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+												 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<ContentPresenter x:Name="IconPresenter"
-															  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+															  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
-										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -566,9 +567,9 @@
 		<Setter Property="Padding" Value="{ThemeResource MaterialFabPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialFabContentWidthOrHeight}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -594,20 +595,20 @@
 												Orientation="Horizontal">
 
 										<!-- Icon -->
-										<Viewbox Width="{Binding Path=(um:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
-												 Height="{Binding Path=(um:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+										<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+												 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+												 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<ContentPresenter x:Name="IconPresenter"
-															  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+															  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
-										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{ThemeResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -684,8 +685,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialSurfaceSmallFabStyle"
@@ -693,8 +694,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialSecondarySmallFabStyle"
@@ -702,8 +703,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialTertiarySmallFabStyle"
@@ -711,8 +712,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialSmallFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialSmallFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialSmallFabContentWidthOrHeight}" />
 	</Style>
 	<!--#endregion-->
 
@@ -722,8 +723,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialSurfaceLargeFabStyle"
@@ -731,8 +732,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialSecondaryLargeFabStyle"
@@ -740,8 +741,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
 
 	<Style x:Key="MaterialTertiaryLargeFabStyle"
@@ -749,8 +750,8 @@
 		   TargetType="Button">
 		<Setter Property="CornerRadius" Value="{ThemeResource MaterialLargeFabCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource MaterialLargeFabPadding}" />
-		<Setter Property="um:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
-		<Setter Property="um:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource MaterialLargeFabContentWidthOrHeight}" />
 	</Style>
 	<!--#endregion-->
 </ResourceDictionary>

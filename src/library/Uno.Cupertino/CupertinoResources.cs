@@ -19,6 +19,7 @@ namespace Uno.Cupertino
 	{
 		public CupertinoResources()
 		{
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(Themes.Constants.ConverterResourcePath) });
 			ImportResourceDictionaries();
 		}
 

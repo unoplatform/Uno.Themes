@@ -3,19 +3,20 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:um="using:Uno.Material"
+					xmlns:ut="using:Uno.Themes"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="xamarin">
 
 	<!-- Converters -->
-	<um:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
+	<ut:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
 								 NotNullValue="5"
 								 NullValue="0" />
 
-	<um:FromNullToValueConverter x:Key="NullToVisible"
+	<ut:FromNullToValueConverter x:Key="NullToVisible"
 								 NotNullValue="Collapsed"
 								 NullValue="Visible" />
 
-	<um:FromNullToValueConverter x:Key="NullToCollapsed"
+	<ut:FromNullToValueConverter x:Key="NullToCollapsed"
 								 NotNullValue="Visible"
 								 NullValue="Collapsed" />
 
@@ -445,7 +446,7 @@
 						Value="Below" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
 
 		<Setter Property="ItemsPanel">
 			<Setter.Value>
@@ -594,7 +595,7 @@
 								<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithoutPlaceholder"
 													TranslateY="0" />
 
-								<um:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
+								<ut:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformConverter"
 																	NotNullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithPlaceholder}"
 																	NullOrEmptyValue="{StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}" />
 							</Grid.Resources>
@@ -612,8 +613,8 @@
 											  HorizontalAlignment="Center"
 											  VerticalAlignment="Center"
 											  Foreground="{ThemeResource ComboBoxLeadingIconForeground}"
-											  Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-											  Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+											  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 
 							<!-- ContentPresenter -->
 							<ContentPresenter x:Name="ContentPresenter"

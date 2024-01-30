@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+	<PropertyGroup>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
+		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">$(TargetFrameworks);net7.0;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
+		<NoWarn>$(NoWarn);UNO0001</NoWarn>
+
+		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
+	</ItemGroup>
+
+	<Choose>
+		<When Condition="$(_IsAndroid) or $(IsIOSOrCatalyst)">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="mobile" />
+				<ExcludeXamlNamespaces Include="not_mobile" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="not_mobile" />
+				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<Choose>
+		<When Condition="'$(UseWinUI)'=='true'">
+
+			<PropertyGroup>
+				<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
+				<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
+				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
+			</PropertyGroup>
+
+			<ItemGroup>
+				<PackageReference Include="Uno.WinUI" Version="5.0.19" />
+
+				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" Condition="$(_IsWinUI)" />
+				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)" />
+			</ItemGroup>
+
+			<ItemGroup Condition="$(_IsWinUI)">
+				<Page Remove="@(XamlExclusion)" />
+			</ItemGroup>
+
+			<ItemGroup Condition="!$(_IsWinUI)">
+				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+				<Page Remove="@(XamlExclusion)" />
+
+				<Compile Update="**\*.xaml.cs">
+					<DependentUpon>%(Filename)</DependentUpon>
+				</Compile>
+			</ItemGroup>
+
+		</When>
+		<Otherwise>
+			<PropertyGroup>
+				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
+			</PropertyGroup>
+
+			<ItemGroup>
+				<PackageReference Include="Uno.UI" Version="5.0.19" />
+			</ItemGroup>
+			<ItemGroup Condition="$(_IsUWP)">
+				<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
+				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
+			</ItemGroup>
+
+			<ItemGroup>
+				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+				<Page Remove="@(XamlExclusion)" />
+
+				<Compile Update="**\*.xaml.cs">
+					<DependentUpon>%(Filename)</DependentUpon>
+				</Compile>
+			</ItemGroup>
+
+		</Otherwise>
+	</Choose>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
+		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
+			<LogicalName>$(AssemblyName).xml</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Styles\Applications\Common\SharedColorPalette.xaml" />
+	  <None Remove="Styles\Applications\Common\SharedColors.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Applications\Common\SharedColorPalette.xaml" />
+	  <UpToDateCheckInput Remove="Styles\Applications\Common\SharedColors.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
+		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
+		<PackageReference Include="Uno.Fonts.Roboto" Version="2.2.2" />
+	</ItemGroup>
+
+	<!--<Import Project="xamlmerge.targets" />-->
+	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />
+</Project>
