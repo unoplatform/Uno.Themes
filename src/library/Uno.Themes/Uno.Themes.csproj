@@ -9,9 +9,12 @@
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
-		<IsPackable>False</IsPackable>
 
 		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageDescription>This package provides helpers and base class support for implementations of the Uno Themes Design Language, including Uno Material and Uno Cupertino.</PackageDescription>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -37,6 +40,7 @@
 		<When Condition="'$(UseWinUI)'=='true'">
 
 			<PropertyGroup>
+				<PackageId>Uno.Themes.WinUI</PackageId>
 				<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 				<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
 				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
@@ -65,6 +69,7 @@
 		</When>
 		<Otherwise>
 			<PropertyGroup>
+				<PackageId>Uno.Themes</PackageId>
 				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
 			</PropertyGroup>
 
