@@ -143,8 +143,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj" />
+		<ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj">
+			<Name>Uno.Themes</Name>
+		</ProjectReference>
 	</ItemGroup>
+
+	<!-- Workaround to avoid including Uno.Themes XBFs in the PRI file -->
+	<Target Name="AdjustGetPackagingOutputs" BeforeTargets="GetPackagingOutputs" Condition="'$(UseWinUI)'=='false'">
+		<Message Importance="high" Text="Applying NuGet packaging workaround for dependent PRI files exclusion" />
+		<ItemGroup>
+			<_UnoThemesFiles Include="@(ProjectReferenceWithConfiguration)" Condition="'%(ProjectReferenceWithConfiguration.Name)'=='Uno.Themes'" />
+			<ProjectReferenceWithConfiguration Remove="@(_UnoThemesFiles)" />
+		</ItemGroup>
+	</Target>
 
 	<Import Project="..\Uno.Material\xamlmerge.targets" />
 	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />
