@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics.CodeAnalysis;
-using Windows.UI;
-using Uno.Disposables;
 
 #if WinUI
 using Microsoft.UI.Xaml;

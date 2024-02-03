@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Uno.Disposables;
-using Uno.Extensions;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
 #if WinUI
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Controls;

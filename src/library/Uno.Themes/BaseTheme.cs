@@ -183,10 +183,10 @@ public abstract class BaseTheme : ResourceDictionary
 		MergedDictionaries.Clear();
 		this.Clear();
 
-		var colors = new ResourceDictionary { Source = new Uri(Constants.SharedColorsResourcePath) };
-		var converters = new ResourceDictionary { Source = new Uri(Constants.ConverterResourcePath) };
+		var converters = new ResourceDictionary { Source = new Uri(ThemesConstants.ConverterResourcePath) };
+		var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 
-		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(Constants.SharedColorPaletteResourcePath) });
+		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
 
 		if (ColorOverrideDictionary is { } colorOverride)
 		{

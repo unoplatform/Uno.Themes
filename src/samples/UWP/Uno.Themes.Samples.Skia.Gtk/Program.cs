@@ -1,6 +1,4 @@
-﻿using System;
-using GLib;
-using Uno.UI.Runtime.Skia;
+﻿using GLib;
 using Uno.UI.Runtime.Skia.Gtk;
 
 namespace Uno.Themes.Samples.Skia.Gtk

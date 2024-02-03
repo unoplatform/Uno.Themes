@@ -1,145 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
-	<PropertyGroup>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net7.0;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
-		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>portable</DebugType>
-		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 
-		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release' and !('$(MSBuildRuntimeType)'!='Core' and $([MSBuild]::IsOSPlatform('osx')))">true</UnoXamlResourcesTrimming>
-	</PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\tfm-common-uwp.props" />
 
 	<PropertyGroup>
-		<PackageDescription>A set of Cupertino styles for WinUI Controls to be used in Uno Platform and </PackageDescription>
-		<PackageDescription Condition="'$(UseWinUI)'=='true'">$(PackageDescription) WinAppSDK projects</PackageDescription>
-		<PackageDescription Condition="'$(UseWinUI)'=='false'">$(PackageDescription) UWP projects</PackageDescription>
+		<PackageId>Uno.Cupertino</PackageId>
+		<AssemblyName>Uno.Cupertino</AssemblyName>
+		<FrameworkLineage>UWP</FrameworkLineage>
+		<UseWinUI>false</UseWinUI>
+		<PackageDescription>A set of Cupertino styles for WinUI Controls to be used in Uno Platform and UWP projects</PackageDescription>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
-	</ItemGroup>
-
-	<Choose>
-		<When Condition="$(IsIOSOrCatalyst) or $(_IsAndroid)">
-			<ItemGroup>
-				<IncludeXamlNamespaces Include="mobile" />
-				<ExcludeXamlNamespaces Include="not_mobile" />
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<IncludeXamlNamespaces Include="not_mobile" />
-				<ExcludeXamlNamespaces Include="mobile" />
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
+	<Import Project="cupertino-common.props" />
 
 	<ItemGroup>
-		<LottieJson Include="Assets\CupertinoProgressRing.json" />
-	</ItemGroup>
-
-	<Choose>
-		<When Condition="'$(UseWinUI)'=='true'">
-
-			<PropertyGroup>
-				<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
-				<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
-				<PackageId>Uno.Cupertino.WinUI</PackageId>
-				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT' and '$(UnoThemesDisableNet6)'==''">$(TargetFrameworks);net7.0-windows10.0.19041</TargetFrameworks>
-			</PropertyGroup>
-
-			<ItemGroup>
-				<PackageReference Include="Uno.WinUI" Version="5.0.19" />
-
-				<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.19" Condition="!$(_IsWinUI)" />
-
-				<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" Condition="$(_IsWinUI)" />
-				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" Condition="$(_IsWinUI)" />
-			</ItemGroup>
-
-			<ItemGroup Condition="$(_IsWinUI)">
-				<Content Include="@(LottieJson)" />
-			</ItemGroup>
-			<ItemGroup Condition="!$(_IsWinUI)">
-				<EmbeddedResource Include="@(LottieJson)" />
-			</ItemGroup>
-
-			<ItemGroup Condition="!$(_IsWinUI)">
-				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-				<Compile Update="**\*.xaml.cs">
-					<DependentUpon>%(Filename)</DependentUpon>
-				</Compile>
-			</ItemGroup>
-
-			<ItemGroup Condition="!$(_IsWinUI)">
-				<IncludeXamlNamespaces Include="lottie_not_win" />
-				<ExcludeXamlNamespaces Include="lottie_win" />
-			</ItemGroup>
-		</When>
-		<Otherwise>
-
-			<PropertyGroup>
-				<PackageId>Uno.Cupertino</PackageId>
-				<TargetFrameworks Condition="'$(TargetFrameworkOverride)'=='' and '$(OS)'=='Windows_NT'">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
-			</PropertyGroup>
-
-			<ItemGroup>
-				<PackageReference Include="Uno.UI" Version="5.0.19" />
-			</ItemGroup>
-			<ItemGroup Condition="$(_IsUWP)">
-				<PackageReference Include="Microsoft.UI.Xaml" Version="2.7.1" />
-				<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
-			</ItemGroup>
-			<ItemGroup Condition="!$(_IsUWP)">
-				<PackageReference Include="Uno.UI.Lottie" Version="5.0.19" />
-			</ItemGroup>
-
-			<ItemGroup Condition="$(_IsUWP)">
-				<Content Include="@(LottieJson)" />
-			</ItemGroup>
-			<ItemGroup Condition="!$(_IsUWP)">
-				<EmbeddedResource Include="@(LottieJson)" />
-			</ItemGroup>
-
-			<ItemGroup>
-				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-				<Compile Update="**\*.xaml.cs">
-					<DependentUpon>%(Filename)</DependentUpon>
-				</Compile>
-				<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
-			</ItemGroup>
-
-			<ItemGroup Condition="!$(_IsUWP)">
-				<IncludeXamlNamespaces Include="lottie_not_win" />
-				<ExcludeXamlNamespaces Include="lottie_win" />
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
-
-	<ItemGroup>
-		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-	</ItemGroup>
-
-	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
-		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
-			<LogicalName>$(AssemblyName).xml</LogicalName>
-		</EmbeddedResource>
+		<PackageReference Include="Uno.UI" />
+		<PackageReference Include="Microsoft.UI.Xaml" Condition="$(_IsUWP)" />
+		<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Condition="$(_IsUWP)" />
+		<PackageReference Include="Uno.UI.Lottie" Condition="!$(_IsUWP)" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<XamlMergeInput Include="Styles\Controls\**\*.xaml" />
-		<XamlMergeInput Include="Styles\Application\**\*.xaml" />
-		<None Remove="Styles\Controls\_Resources.xaml" />
-		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
-		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
-		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
-		<UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
+		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		<Compile Update="**\*.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<Content Include="build\Uno.Cupertino.targets" Pack="true" PackagePath="build" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -149,14 +34,11 @@
 	</ItemGroup>
 
 	<!-- Workaround to avoid including Uno.Themes XBFs in the PRI file -->
-	<Target Name="AdjustGetPackagingOutputs" BeforeTargets="GetPackagingOutputs" Condition="'$(UseWinUI)'=='false'">
+	<Target Name="AdjustGetPackagingOutputs" BeforeTargets="GetPackagingOutputs">
 		<Message Importance="high" Text="Applying NuGet packaging workaround for dependent PRI files exclusion" />
 		<ItemGroup>
 			<_UnoThemesFiles Include="@(ProjectReferenceWithConfiguration)" Condition="'%(ProjectReferenceWithConfiguration.Name)'=='Uno.Themes'" />
 			<ProjectReferenceWithConfiguration Remove="@(_UnoThemesFiles)" />
 		</ItemGroup>
 	</Target>
-
-	<Import Project="..\Uno.Material\xamlmerge.targets" />
-	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />
 </Project>

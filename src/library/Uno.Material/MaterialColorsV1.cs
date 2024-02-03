@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -6,39 +6,38 @@ using Microsoft.UI.Xaml;
 using Windows.UI.Xaml;
 #endif
 
-namespace Uno.Material
+namespace Uno.Material;
+
+public partial class MaterialColorsV1 : ResourceDictionary
 {
-	public partial class MaterialColorsV1 : ResourceDictionary
+	private static string ColorPaletteOverrideSource;
+
+	public string OverrideSource
 	{
-		private static string ColorPaletteOverrideSource;
+		get => (string)GetValue(OverrideSourceProperty);
+		set => SetValue(OverrideSourceProperty, value);
+	}
 
-		public string OverrideSource
+	public static DependencyProperty OverrideSourceProperty { get; } =
+		DependencyProperty.Register(
+			nameof(OverrideSource),
+			typeof(string),
+			typeof(MaterialColorsV1),
+			new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
+
+	private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+	{
+		ColorPaletteOverrideSource = args.NewValue as string;
+	}
+
+	public MaterialColorsV1()
+	{
+		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(MaterialConstants.ResourcePaths.Version1.ColorPalette) });
+		if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
 		{
-			get => (string)GetValue(OverrideSourceProperty);
-			set => SetValue(OverrideSourceProperty, value);
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
 		}
 
-		public static DependencyProperty OverrideSourceProperty { get; } =
-			DependencyProperty.Register(
-				nameof(OverrideSource),
-				typeof(string),
-				typeof(MaterialColorsV1),
-				new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
-
-		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
-		{
-			ColorPaletteOverrideSource = args.NewValue as string;
-		}
-
-		public MaterialColorsV1()
-		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/v1/ColorPalette.xaml") });
-			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
-			{
-				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
-			}
-
-			InitializeComponent();
-		}
+		InitializeComponent();
 	}
 }

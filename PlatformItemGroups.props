@@ -1,4 +1,4 @@
-<Project ToolsVersion="15.0">
+﻿<Project>
 	<PropertyGroup>
 		<IsMonoAndroid>false</IsMonoAndroid>
 		<IsMonoAndroid Condition="$(TargetFramework.ToLower().StartsWith('monoandroid'))">true</IsMonoAndroid>
@@ -40,6 +40,9 @@
 
 		<_IsWinUI>false</_IsWinUI>
 		<_IsWinUI Condition="$(TargetFramework.ToLower().Contains('windows10'))">true</_IsWinUI>
+
+		<_IsWindows>false</_IsWindows>
+		<_IsWindows Condition="$(_IsUWP) or $(_IsWinUI)">true</_IsWindows>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(_IsIOS)">

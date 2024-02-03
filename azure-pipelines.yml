@@ -37,16 +37,16 @@ pr:
 variables:
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
-  
+  XCODE_ROOT: '/Applications/Xcode_14.3.1.app'
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
 
   IsCanaryBranch: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/canaries/')]
   IsReleaseBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))]
 
-  ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  # ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  # ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  # AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
 
 stages:
 - stage: Validations
@@ -57,131 +57,13 @@ stages:
 - stage: Packages
   dependsOn: Validations
   jobs:
-  - job: Windows # Build UWP/Android/NuGet
-    timeoutInMinutes: 90
-    strategy:
-      maxParallel: 4
-      matrix:
-        UWP:
-          ApplicationPlatform: UWP_x64
-          ArtifactName: UWP
-          UseWinUI: false
-        Android:
-          ApplicationPlatform: Android
-          ArtifactName: Android
-          UseWinUI: false
-        Packages_UWP:
-          ApplicationPlatform: Packages_UWP
-          ArtifactName: Packages_UWP
-          UseWinUI: false
-        Packages_WinUI:
-          ApplicationPlatform: Packages_WinUI
-          ArtifactName: Packages_WinUI
-          UseWinUI: true
+  - template: build/stage-build-packages.yml
 
-    pool:
-      vmImage: windows-2022
-  
-    steps:
-      - template: build/templates/gitversion.yml
-      - template: build/templates/dotnet-install-windows.yml
-
-       # This SDK version is needed as long as `uap10.0` will be supported in Uno.Core
-      - powershell: ./build/Install-WindowsSdkISO.ps1 19041
-        displayName: Install Windows SDK 19041
-        condition: eq(variables['UseWinUI'], false)
-
-      - template: build/stage-build.yml
-
-#- job: MacOS # Build iOS/macOS
-#  timeoutInMinutes: 90
-#  strategy:
-#    maxParallel: 2
-#    matrix:
-#      iOS:
-#        ApplicationPlatform: iPhone
-#        ArtifactName: iOS
-#        UnoThemesDisableNet6: true
-#        UseWinUI: false
-#      macOS:
-#        ApplicationPlatform: macOS
-#        ArtifactName: macOS
-#        UnoThemesDisableNet6: true
-#        UseWinUI: false
-#  pool:
-#    vmImage: macOS-12
-#    
-#  variables:
-#  - name: XCODE_ROOT
-#    value: '/Applications/Xcode_13.2.1.app'
-#  - name: XamarinSDKVersion
-#    value: 6_12_12
-#  - name: SkipUnknownFrameworks
-#    value: true # Used by TargetFrameworks.Filtering package
-#  - group: unoplatform.apple.ios.appstore.distribution
-#
-#  steps:
-#  - task: InstallAppleCertificate@2
-#    displayName: Install Certificate
-#    inputs:
-#      certSecureFile: UnoPlatform-Apple-Distribution.p12
-#      certPwd: $(appleappstorecertificatepassword)
-#      keychain: temp
-#      deleteCert: true
-#      
-#  - task: InstallAppleProvisioningProfile@1
-#    displayName: 'Install Apple Provisioning Profile'
-#    inputs:
-#      provisioningProfileLocation: 'secureFiles'
-#      provProfileSecureFile: 'Uno_Themes.mobileprovision'
-#  
-#  - template: build/templates/canary-updater.yml
-#  - template: build/templates/gitversion.yml
-#  - template: build/templates/dotnet-install-macos.yml
-#
-#  - bash: /bin/bash -c "sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh $(XamarinSDKVersion)"
-#    displayName: Select Xamarin Version
-#
-#  - bash: |
-#      echo 'xCode Root to ${XCODE_ROOT}'
-#      echo '##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]'${XCODE_ROOT}
-#      sudo xcode-select --switch ${XCODE_ROOT}/Contents/Developer
-#
-#    displayName: Select Xcode
-#
-#  - bash: |
-#      rm -f ${HOME}/Library/Preferences/Xamarin/Settings.plist
-#
-#    # https://github.com/actions/virtual-environments/issues/1932
-#    displayName: Apply workaround for Azure Devops issue 1932
-#
-#  - bash: |
-#      chmod +x $(build.sourcesdirectory)/build/scripts/macos-build.sh
-#      $(build.sourcesdirectory)/build/scripts/macos-build.sh
-#    displayName: 'Build solution in Release | $(ApplicationPlatform)'
-#    retryCountOnTaskFailure: 3
-#    env:
-#      BUILD_PLATFORM: "$(ApplicationPlatform)"
-#      BUILD_APPLICATIONVERSION: "$(MajorMinorPatch)"
-#      BUILD_PACKAGEVERSION: "$(SemVer)"
-#      BUILD_SOLUTION: "Uno.Themes.sln"
-#      BUILD_BINLOG: "$(build.artifactstagingdirectory)/themes-build-$(ApplicationPlatform).binlog"
-
-- stage: Tests
+- stage: Build_Samples
   dependsOn: Validations
   jobs:
-  - job: WebAssembly
-
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    container: unoplatform/wasm-build:3.0
-
-    variables:
-      ArtifactName: WASM
-      SkipUnknownFrameworks: True
-      UseWinUI: false
-
-    steps:
-    - template: build/templates/gitversion.yml
+    - template: build/stage-build-ios.yml
+    - template: build/stage-build-android.yml
     - template: build/stage-build-wasm.yml
+    - template: build/stage-build-windows.yml
+    - template: build/stage-build-skia-gtk.yml

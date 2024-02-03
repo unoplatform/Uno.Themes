@@ -1,7 +1,7 @@
 ﻿using UIKit;
 
-namespace Uno.Themes.Samples.MacCatalyst
-{
+namespace Uno.Themes.Samples.MacCatalyst;
+
     public class EntryPoint
     {
         // This is the main entry point of the application.
@@ -12,4 +12,3 @@ namespace Uno.Themes.Samples.MacCatalyst
             UIApplication.Main(args, null, typeof(App));
         }
     }
-}

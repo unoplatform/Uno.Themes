@@ -1,4 +1,4 @@
-﻿<Project ToolsVersion="15.0">
+﻿<Project>
 	<!--
 		This file is used to control the platforms compiled by visual studio, and
 			allow for a faster build when testing for a single platform.
@@ -13,8 +13,6 @@
 		<!-- Description of the properties can be found below -->
 
 		<!-- <NugetOverrideVersion>2.6.0-dev.34</NugetOverrideVersion> -->
-
-		<!-- <UseWinUI>True</UseWinUI> -->
 
 		<!-- Uncomment each line for each platform that you want to build: -->
 
@@ -37,20 +35,6 @@
 				Set it to the version you want to override, used in another app.
 				You will see the override path in the build output.
 				The packages are located under this directory: "%USERPROFILE%\.nuget\packages".
-
-			### UseWinUI ###
-
-				Determines whether to integrate with WinUI libraries in the project.
-				
-				Setting this to True enables WinUI-specific features and references.
-				This is useful for projects targeting the latest Windows UI framework.
-
-				*** NOTE ***
-				If you enable WinUI, ensure that you've installed the necessary
-				WinUI SDKs and have compatible NuGet packages. Mixing WinUI versions
-				or using it without the proper SDK can lead to build errors or runtime issues.
-				*** NOTE ***
-
 
 			### TargetFrameworkOverride ### 
 

@@ -1,11 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType Condition="'$(Configuration)'=='Reelase'">WinExe</OutputType>
 		<OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
 		<TargetFramework>net7.0</TargetFramework>
-		<IsPackable>false</IsPackable>
-		<UseWinUI>false</UseWinUI>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -18,29 +16,28 @@
 
 	<ItemGroup>
 		<!-- Note that for WebAssembly version 1.1.1 of the console logger required -->
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-		<PackageReference Include="nventive.Nimue.Application.Building.Light" Version="0.1.0-alpha.58">
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" />
+		<PackageReference Include="nventive.Nimue.Application.Building.Light">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Packaging" Version="0.1.0-alpha.58">
+		<PackageReference Include="nventive.Nimue.Application.Packaging">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Versioning" Version="0.1.0-alpha.58">
+		<PackageReference Include="nventive.Nimue.Application.Versioning">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="SkiaSharp.Skottie" Version="2.88.1-preview.79" />
-		<PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.79" />
-		<PackageReference Include="Uno.ShowMeTheXAML" Version="1.0.59" />
-		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild" Version="1.0.59" />
-		<PackageReference Include="Uno.UI.Skia.Gtk" Version="5.0.118" />
-		<PackageReference Include="Uno.UI.RemoteControl" Version="5.0.118" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.118" />
-		<PackageReference Include="Uno.Core.Extensions.Compatibility" Version="4.0.1" />
-		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
+		<PackageReference Include="SkiaSharp.Skottie" />
+		<PackageReference Include="SkiaSharp.Views.Uno" />
+		<PackageReference Include="Uno.ShowMeTheXAML" />
+		<PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
+		<PackageReference Include="Uno.UI.Skia.Gtk" />
+		<PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
+		<PackageReference Include="Uno.Core.Extensions.Compatibility" />
+		<PackageReference Include="Uno.Core.Extensions.Disposables" />
 	</ItemGroup>
 
 	<ItemGroup>
