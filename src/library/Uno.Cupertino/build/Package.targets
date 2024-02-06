@@ -4,4 +4,7 @@
 		<Error Text="Uno.Cupertino requires your application to set the Minimum SDK version to Windows 1903 SDK (10.0.19041) or later"
 					 Condition="'$(TargetPlatformIdentifier)'=='UAP' and '$(TargetPlatformMinVersion)'&lt;'10.0.19041.0'" />
 	</Target>
+	<ItemGroup Condition=" '$(ImplicitUsings)' == 'true' OR '$(ImplicitUsings)' == 'enable' ">
+		<Using Include="Uno.Cupertino" />
+	</ItemGroup>
 </Project>

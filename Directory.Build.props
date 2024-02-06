@@ -59,4 +59,9 @@
 
 	<Import Project="PlatformItemGroups.props" />
 	<Import Project="Uno.CrossTargeting.props" />
+
+	<ItemGroup>
+		<None Include="build\Package.props" Pack="true" PackagePath="buildTransitive\$(PackageId).props" Condition="exists('build\Package.props')"/>
+		<None Include="build\Package.targets" Pack="true" PackagePath="buildTransitive\$(PackageId).targets" Condition="exists('build\Package.targets')"/>
+	</ItemGroup>
 </Project>
