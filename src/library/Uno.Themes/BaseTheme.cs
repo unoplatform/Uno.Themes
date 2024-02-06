@@ -184,6 +184,7 @@ public abstract class BaseTheme : ResourceDictionary
 		this.Clear();
 
 		var colors = new ResourceDictionary { Source = new Uri(Constants.SharedColorsResourcePath) };
+		var converters = new ResourceDictionary { Source = new Uri(Constants.ConverterResourcePath) };
 
 		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(Constants.SharedColorPaletteResourcePath) });
 
@@ -195,6 +196,7 @@ public abstract class BaseTheme : ResourceDictionary
 		var mergedPages = GenerateSpecificResources();
 
 		mergedPages.MergedDictionaries.Add(colors);
+		mergedPages.MergedDictionaries.Add(converters);
 
 		MergedDictionaries.Add(mergedPages);
 	}

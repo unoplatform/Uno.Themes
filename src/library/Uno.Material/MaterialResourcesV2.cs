@@ -21,7 +21,7 @@ namespace Uno.Material
 		{
 
 			Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml");
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Themes/Styles/Application/Common/Converters.xaml") });
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(Themes.Constants.ConverterResourcePath) });
 			MergedDictionaries.Add(new MaterialFonts());
 			MergedDictionaries.Add(new MaterialColorsV2());
 		}
