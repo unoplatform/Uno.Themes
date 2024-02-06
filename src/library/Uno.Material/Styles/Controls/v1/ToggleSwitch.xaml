@@ -311,7 +311,7 @@
 						<TextBlock Text="{TemplateBinding Header}"
 								   Style="{StaticResource MaterialBody2}"
 								   Foreground="{StaticResource MaterialOnBackgroundBrush}"
-								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed},TargetNullValue=Collapsed}"
+								   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter},TargetNullValue=Collapsed}"
 								   Grid.ColumnSpan="4" />
 
 						<ContentPresenter x:Name="OnContentPresenter"

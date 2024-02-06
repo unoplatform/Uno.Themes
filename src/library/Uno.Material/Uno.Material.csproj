@@ -9,7 +9,6 @@
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
 		<NoWarn>$(NoWarn);UNO0001</NoWarn>
-
 		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
 	</PropertyGroup>
 
@@ -180,8 +179,6 @@
 
 		<XamlMergeInput Remove="Styles\Application\v1\ColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\v1\MaterialColors.xaml" />
-		<XamlMergeInput Remove="Styles\Application\v2\SharedColors.xaml" />
-		<XamlMergeInput Remove="Styles\Application\v2\SharedColorPalette.xaml" />
 		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
 
 		<XamlMergeInput Remove="Styles\Controls\v1\NavigationView\WUX\**" Condition="'$(UseWinUI)'=='true'" />
@@ -189,10 +186,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Include="..\Uno.Themes\Helpers\LinkerAttributes.cs" Link="Helpers\LinkerAttributes.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Uno.Fonts.Roboto" Version="2.2.2" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj">
+			<Name>Uno.Themes</Name>
+		</ProjectReference>
+	</ItemGroup>
+
+	<!-- Workaround to avoid including Uno.Themes XBFs in the PRI file -->
+	<Target Name="AdjustGetPackagingOutputs" BeforeTargets="GetPackagingOutputs" Condition="'$(UseWinUI)'=='false'">
+		<Message Importance="high" Text="Applying NuGet packaging workaround for dependent PRI files exclusion" />
+		<ItemGroup>
+			<_UnoThemesFiles Include="@(ProjectReferenceWithConfiguration)" Condition="'%(ProjectReferenceWithConfiguration.Name)'=='Uno.Themes'" />
+			<ProjectReferenceWithConfiguration Remove="@(_UnoThemesFiles)" />
+		</ItemGroup>
+	</Target>
 
 	<Import Project="xamlmerge.targets" />
 	<Import Condition="'$(UseWinUI)'=='true'" Project="..\..\..\winappsdk-workaround.targets" />

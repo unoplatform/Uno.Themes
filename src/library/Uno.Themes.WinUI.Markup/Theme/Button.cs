@@ -93,9 +93,6 @@ public static partial class Theme
 					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForeground")]
 					public static ThemeResourceKey<Brush> Default => new("ElevatedButtonForeground");
 				}
-
-				[ResourceKeyDefinition(typeof(bool), "ElevatedButtonIsTintEnabled")]
-				public static StaticResourceKey<bool> IsTintEnabled => new("ElevatedButtonIsTintEnabled");
 			}
 
 			public static partial class Filled

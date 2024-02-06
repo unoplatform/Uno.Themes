@@ -3,6 +3,7 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
+					xmlns:ut="using:Uno.Themes"
 					mc:Ignorable="d">
 
 	<ResourceDictionary.ThemeDictionaries>
@@ -128,19 +129,19 @@
 	<x:Double x:Key="MediumThumbOffSize">24</x:Double>
 	
 	<!-- Converters -->
-	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOnToOpacity"
+	<ut:FromBoolToValueConverter x:Key="ToggleSwitchIsOnToOpacity"
 								 TrueValue="1"
 								 FalseValue="0" />
 
-	<um:FromBoolToValueConverter x:Key="ToggleSwitchIsOffToOpacity"
+	<ut:FromBoolToValueConverter x:Key="ToggleSwitchIsOffToOpacity"
 								 TrueValue="0"
 								 FalseValue="1" />
 
-	<um:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentSize"
+	<ut:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentSize"
 								 NullValue="{StaticResource SmallThumbOffSize}"
 								 NotNullValue="{StaticResource MediumThumbOffSize}" />
 
-	<um:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentMargin"
+	<ut:FromNullToValueConverter x:Key="ToggleSwitchOffContentToContentMargin"
 								 NullValue="0,0,6,0"
 								 NotNullValue="0,0,2,0" />
 
@@ -820,7 +821,7 @@
 										<Viewbox>
 											<ContentPresenter x:Name="OnIconPresenter"
 															  Content="{TemplateBinding OnContent}"
-															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToVisible}}"
+															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TrueToVisibleConverter}}"
 															  VerticalAlignment="Center"
 															  HorizontalAlignment="Center"
 															  VerticalContentAlignment="Center"
@@ -855,7 +856,7 @@
 										<Viewbox>
 											<ContentPresenter x:Name="OffIconPresenter"
 															  Content="{TemplateBinding OffContent}"
-															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialTrueToCollapsed}}"
+															  Visibility="{Binding IsOn, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TrueToCollapsedConverter}}"
 															  VerticalAlignment="Center"
 															  HorizontalAlignment="Center"
 															  VerticalContentAlignment="Center"

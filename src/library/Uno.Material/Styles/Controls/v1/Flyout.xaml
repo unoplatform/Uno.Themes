@@ -30,13 +30,13 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="MinWidth"
-				Value="NaN" />
+				Value="0" />
 		<Setter Property="MinHeight"
-				Value="NaN" />
+				Value="0" />
 		<Setter Property="MaxWidth"
-				Value="NaN" />
+				Value="PositiveInfinity" />
 		<Setter Property="MaxHeight"
-				Value="NaN" />
+				Value="PositiveInfinity" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="FlyoutPresenter">
@@ -393,7 +393,7 @@
 								<TextBlock x:Name="KeyboardAcceleratorTextBlock"
 										   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
 										   Style="{StaticResource MaterialBody2}"
-										   Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyOrNullToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+										   Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
 										   Foreground="{ThemeResource ToggleMenuFlyoutItemKeyboardAcceleratorTextForeground}"
 										   VerticalAlignment="Center"
 										   TextAlignment="Right"

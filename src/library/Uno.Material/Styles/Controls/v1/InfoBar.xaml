@@ -187,7 +187,7 @@
 										<TextBlock x:Name="Title"
 												   Style="{StaticResource MaterialSubtitle2}"
 												   Text="{TemplateBinding Title}"
-												   Visibility="{Binding Title, Converter={StaticResource MaterialEmptyToVisible}, FallbackValue=Collapsed}"
+												   Visibility="{Binding Title, Converter={StaticResource EmptyToVisibleConverter}, FallbackValue=Collapsed}"
 												   TextWrapping="Wrap" />
 
 										<!--  Message  -->

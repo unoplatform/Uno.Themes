@@ -3,6 +3,7 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
+					xmlns:ut="using:Uno.Themes"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="d">
 
@@ -71,7 +72,7 @@
 				Value="{StaticResource MaterialFabLargePadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
+		<Setter Property="ut:ControlExtensions.Icon"
 				Value="{x:Null}" />
 
 		<Setter Property="Template">
@@ -101,15 +102,15 @@
 												 Width="{StaticResource MaterialFabContentWidthOrHeight}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<ContentPresenter Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+											<ContentPresenter Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
-										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{StaticResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
@@ -218,7 +219,7 @@
 				Value="{StaticResource MaterialFabSmallPadding}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="um:ControlExtensions.Icon"
+		<Setter Property="ut:ControlExtensions.Icon"
 				Value="{x:Null}" />
 
 		<Setter Property="Template">
@@ -248,15 +249,15 @@
 												 Width="{StaticResource MaterialFabContentWidthOrHeight}"
 												 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 												 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												 Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
-											<ContentPresenter Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+											<ContentPresenter Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 															  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
 										</Viewbox>
 
 										<!-- Icon/Content spacing -->
-										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialEmptyToCollapsed}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 											<Border Width="{StaticResource MaterialFabIconTextPadding}"
-													Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+													Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 										</Border>
 
 										<!-- Content -->
