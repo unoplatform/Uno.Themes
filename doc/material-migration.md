@@ -4,6 +4,119 @@ uid: Uno.Themes.Material.Migration
 
 # Updating to Uno.Material
 
+<<<<<<< HEAD
+=======
+## Updating to Uno.Themes v5.0
+
+The version 5.0.0 of Uno.Themes introduced breaking changes on Converters and Control Extensions. If you use one of those items in your project, you will need to do some changes in order to keep using it.
+
+### Converters
+
+All Converters were moved to Uno.Themes library, and the new `namespace` is `Uno.Themes`.
+
+Before:
+
+```xml
+<Page xmlns:um="using:Uno.Material">
+
+    <Page.Resources>
+        <um:FromNullToValueConverter x:Key="NotNullVisibilityConverter">
+    </Page.Resources>
+</Page>
+```
+
+After:
+
+```xml
+<Page xmlns:ut="using:Uno.Themes">
+
+    <Page.Resources>
+        <ut:FromNullToValueConverter x:Key="NotNullVisibilityConverter">
+    </Page.Resources>
+</Page>
+```
+
+Some `Converters` have been renamed, you can find the `Old Name` and `New Name` in the table below:
+
+| Old Name | New Name |
+| ---- | ---- |
+| MaterialTrueToVisible | TrueToVisibleConverter |
+| MaterialTrueToCollapsed | TrueToCollapsedConverter |
+| CheckBoxIsCheckedToFocusStateCircleVisible | FalseToCollapsedConverter |
+| CheckBoxIsCheckedToFocusStateCircleCollapsed | FalseToVisibleConverter |
+| MaterialEmptyToFalse/<br>CupertinoEmptyToFalse | EmptyToFalseConverter |
+| MaterialEmptyToTrue/<br>CupertinoEmptyToTrue | EmptyToTrueConverter |
+| MaterialEmptyToVisible | EmptyToVisibleConverter |
+| MaterialEmptyToCollapsed | EmptyToCollapsedConverter |
+| MaterialNullToCollapsedConverter/<br>CupertinoNullToCollapsedConverter | NullToCollapsedConverter |
+| MaterialNullToVisibleConverter | NullToVisibleConverter |
+| MaterialNullToTransparent | NullToTransparentConverter |
+| MaterialEmptyOrNullToVisible | EmptyOrNullToVisibleConverter |
+| MaterialEmptyOrNullToCollapsed | EmptyOrNullToCollapsedConverter |
+| StringFormatConverter | StringFormatConverter |
+| FirstCharacterConverter | FirstCharacterConverter |
+| ToUpperConverter | ToUpperConverter |
+
+### Control Extensions
+
+All Controls Extensions were moved to `Uno.Themes` library, and the new `namespace` is `Uno.Themes`.
+
+Before:
+
+```xml
+<Page xmlns:um="using:Uno.Material">
+
+    <StackPanel>
+        <Button Content="OUTLINED"
+            Style="{StaticResource MaterialOutlinedButtonStyle}">
+            <um:ControlExtensions.Icon>
+                <FontIcon Glyph="&#xE946;" />
+            </um:ControlExtensions.Icon>
+        </Button>
+    </StackPanel>
+</Page>
+```
+
+After:
+
+```xml
+<Page xmlns:ut="using:Uno.Themes">
+
+    <StackPanel>
+        <Button Content="OUTLINED"
+            Style="{StaticResource MaterialOutlinedButtonStyle}">
+            <ut:ControlExtensions.Icon>
+                <FontIcon Glyph="&#xE946;" />
+            </ut:ControlExtensions.Icon>
+        </Button>
+    </StackPanel>
+</Page>
+```
+
+### Resources
+
+Certain Lightweight Styling resource keys have been edited to align with those coming from `Microsoft.UI.Xaml`.
+
+#### RatingControl
+
+| Old Key                                    | New Key                            |
+|--------------------------------------------|------------------------------------|
+| `RatingControlForegroundUnselected`                     | `RatingControlUnselectedForeground`                     |
+| `RatingControlForegroundSelected`                       | `RatingControlSelectedForeground`                       |
+| `RatingControlForegroundPointerOverUnselected`          | `RatingControlUnselectedForegroundPointerOver`          |
+| `RatingControlForegroundPointerOverSelected`            | `RatingControlSelectedForegroundPointerOver`            |
+| `RatingControlForegroundDisabledSelected`               | `RatingControlSelectedForegroundDisabled`               |
+| `SecondaryRatingControlForegroundUnselected`            | `SecondaryRatingControlUnselectedForeground`            |
+| `SecondaryRatingControlForegroundSelected`              | `SecondaryRatingControlSelectedForeground`              |
+| `SecondaryRatingControlForegroundPointerOverUnselected` | `SecondaryRatingControlUnselectedForegroundPointerOver` |
+| `SecondaryRatingControlForegroundPointerOverSelected`   | `SecondaryRatingControlSelectedForegroundPointerOver`   |
+| `SecondaryRatingControlForegroundDisabledSelected`      | `SecondaryRatingControlSelectedForegroundDisabled`      |
+
+### Conclusion
+
+With that, you should be able to update and get it working again for your application. If you've any other issues during the migration, don't hesitate to open an issue in [Uno.Themes GitHub repository](https://github.com/unoplatform/Uno.Themes).
+
+>>>>>>> 24d80ffc (fix(RatingControl)!: adjust ratingcontrol resource keys (#1350))
 ## Updating to Uno.Material v3
 
 Uno.Material v3 (not to be confused with [Material Design 3](https://m3.material.io/) from Google) introduces support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. Refer to the tables below for the changes that have been made within Uno.Material.
