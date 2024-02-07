@@ -1,8 +1,15 @@
 ---
-uid: Uno.Themes.Material.Extensions
+uid: Uno.Themes.Control.Extensions
 ---
 
-# Material Control Extensions
+# Control Extensions
+
+Starting on version 5.0.0 the `ControlExtensions` are available on the `Uno.Themes` namespace, so to use that in xaml you should add the following xmlns to your project:
+
+`xmlns:ut="using:Uno.Themes"`
+
+> [!INFO]
+> For more information about see our [migration docs](material-migration.md).
 
 ## Icon
 
@@ -14,9 +21,9 @@ Here are supported control with samples:
 
     ```xml
     <TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
-        <um:ControlExtensions.Icon>
+        <ut:ControlExtensions.Icon>
             <SymbolIcon Symbol="SolidStar" />
-        </um:ControlExtensions.Icon>
+        </ut:ControlExtensions.Icon>
     </ComboBox>
     ```
 
@@ -24,9 +31,9 @@ Here are supported control with samples:
 
     ```xml
     <ComboBox Style="{StaticResource MaterialComboBoxStyle}">
-        <um:ControlExtensions.Icon>
+        <ut:ControlExtensions.Icon>
             <SymbolIcon Symbol="SolidStar" />
-        </um:ControlExtensions.Icon>
+        </ut:ControlExtensions.Icon>
     </ComboBox>
     ```
 
@@ -43,9 +50,9 @@ It's control specific and for now, you can only use it with the `ToggleButton` c
     <PathIcon Data="{StaticResource Icon_more_horizontal}" />
 
     <!-- This is the alternate content - which is when the control state is CHECKED -->
-    <um:ControlExtensions.AlternateContent>
+    <ut:ControlExtensions.AlternateContent>
         <PathIcon Data="{StaticResource Icon_more_vertical}" />
-    </um:ControlExtensions.AlternateContent>
+    </ut:ControlExtensions.AlternateContent>
 </ToggleButton>
 ```
 
@@ -66,7 +73,7 @@ The `ElevatedButtonStyle` in Uno Material supports elevation through the use of 
 ```xml
 ...
 
-<Setter Property="um:ControlExtensions.Elevation"
+<Setter Property="ut:ControlExtensions.Elevation"
         Value="1" />
 ...
 ```
@@ -76,22 +83,22 @@ Below is an example of how an elevated control may appear:
 ```xml
 <StackPanel Spacing="8">
     <Button Content="Elevation 0"
-            um:ControlExtensions.Elevation="0"
+            ut:ControlExtensions.Elevation="0"
             Style="{StaticResource MaterialElevatedButtonStyle}" />
     <Button Content="Elevation 1"
-            um:ControlExtensions.Elevation="1"
+            ut:ControlExtensions.Elevation="1"
             Style="{StaticResource MaterialElevatedButtonStyle}" />
     <Button Content="Elevation 2"
-            um:ControlExtensions.Elevation="2"
+            ut:ControlExtensions.Elevation="2"
             Style="{StaticResource MaterialElevatedButtonStyle}" />
     <Button Content="Elevation 3"
-            um:ControlExtensions.Elevation="3"
+            ut:ControlExtensions.Elevation="3"
             Style="{StaticResource MaterialElevatedButtonStyle}" />
     <Button Content="Elevation 4"
-            um:ControlExtensions.Elevation="4"
+            ut:ControlExtensions.Elevation="4"
             Style="{StaticResource MaterialElevatedButtonStyle}" />
     <Button Content="Elevation 5"
-            um:ControlExtensions.Elevation="5"
+            ut:ControlExtensions.Elevation="5"
             Style="{StaticResource MaterialElevatedButtonStyle}" />
 </StackPanel>
 ```
