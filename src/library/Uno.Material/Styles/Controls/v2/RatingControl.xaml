@@ -13,24 +13,24 @@
 
 			<!-- Default -->
 			<StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="RatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="RatingControlForegroundUnselectedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="RatingControlForegroundSelected" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="RatingControlForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="RatingControlForegroundSelectedDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
 
 			<!-- Secondary -->
 			<StaticResource x:Key="SecondaryRatingControlForeground" ResourceKey="SecondaryBrush" />
 
-			<StaticResource x:Key="SecondaryRatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundSelected" ResourceKey="SecondaryBrush" />
+			<StaticResource x:Key="SecondaryRatingControlUnselectedForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="SecondaryRatingControlSelectedForeground" ResourceKey="SecondaryBrush" />
 			<StaticResource x:Key="SecondaryRatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="SecondaryRatingControlPlaceholderForegroundPointerOver" ResourceKey="SecondaryBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundUnselectedPointerOver" ResourceKey="SecondaryBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundSelectedPointerOver" ResourceKey="SecondaryBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundSelectedDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="SecondaryRatingControlUnselectedForegroundPointerOver" ResourceKey="SecondaryBrush" />
+			<StaticResource x:Key="SecondaryRatingControlSelectedForegroundPointerOver" ResourceKey="SecondaryBrush" />
+			<StaticResource x:Key="SecondaryRatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Caption and Fonts -->
 			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceBrush" />
@@ -51,24 +51,24 @@
 			<!-- Default -->
 			<StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
 
-			<StaticResource x:Key="RatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="RatingControlForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="RatingControlForegroundUnselectedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="RatingControlForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="RatingControlForegroundSelectedDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Secondary -->
 			<StaticResource x:Key="SecondaryRatingControlForeground" ResourceKey="SecondaryBrush" />
 
-			<StaticResource x:Key="SecondaryRatingControlForegroundUnselected" ResourceKey="OnSurfaceLowBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundSelected" ResourceKey="SecondaryBrush" />
+			<StaticResource x:Key="SecondaryRatingControlUnselectedForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="SecondaryRatingControlSelectedForeground" ResourceKey="SecondaryBrush" />
 			<StaticResource x:Key="SecondaryRatingControlPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="SecondaryRatingControlPlaceholderForegroundPointerOver" ResourceKey="SecondaryBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundUnselectedPointerOver" ResourceKey="SecondaryBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundSelectedPointerOver" ResourceKey="SecondaryBrush" />
-			<StaticResource x:Key="SecondaryRatingControlForegroundSelectedDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="SecondaryRatingControlUnselectedForegroundPointerOver" ResourceKey="SecondaryBrush" />
+			<StaticResource x:Key="SecondaryRatingControlSelectedForegroundPointerOver" ResourceKey="SecondaryBrush" />
+			<StaticResource x:Key="SecondaryRatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Caption and Fonts -->
 			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceBrush" />
@@ -99,7 +99,7 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundSelectedDisabled}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlSelectedForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Placeholder">
@@ -114,17 +114,17 @@
 								</VisualState>
 								<VisualState x:Name="PointerOverUnselected">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundUnselectedPointerOver}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlUnselectedForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Set">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundSelected}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlSelectedForeground}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOverSet">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlForegroundSelected}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource RatingControlSelectedForeground}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -189,7 +189,7 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundSelectedDisabled}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlSelectedForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Placeholder">
@@ -204,17 +204,17 @@
 								</VisualState>
 								<VisualState x:Name="PointerOverUnselected">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundUnselectedPointerOver}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlUnselectedForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Set">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundSelected}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlSelectedForeground}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="PointerOverSet">
 									<VisualState.Setters>
-										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlForegroundSelected}" />
+										<Setter Target="ForegroundContentPresenter.Foreground" Value="{ThemeResource SecondaryRatingControlSelectedForeground}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

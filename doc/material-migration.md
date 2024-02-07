@@ -8,7 +8,7 @@ uid: Uno.Themes.Material.Migration
 
 The version 5.0.0 of Uno.Themes introduced breaking changes on Converters and Control Extensions. If you use one of those items in your project, you will need to do some changes in order to keep using it.
 
-### Converter
+### Converters
 
 All Converters were moved to Uno.Themes library, and the new `namespace` is `Uno.Themes`.
 
@@ -90,6 +90,25 @@ After:
     </StackPanel>
 </Page>
 ```
+
+### Resources
+
+Certain Lightweight Styling resource keys have been edited to align with those coming from `Microsoft.UI.Xaml`.
+
+#### RatingControl
+
+| Old Key                                    | New Key                            |
+|--------------------------------------------|------------------------------------|
+| `RatingControlForegroundUnselected`                     | `RatingControlUnselectedForeground`                     |
+| `RatingControlForegroundSelected`                       | `RatingControlSelectedForeground`                       |
+| `RatingControlForegroundPointerOverUnselected`          | `RatingControlUnselectedForegroundPointerOver`          |
+| `RatingControlForegroundPointerOverSelected`            | `RatingControlSelectedForegroundPointerOver`            |
+| `RatingControlForegroundDisabledSelected`               | `RatingControlSelectedForegroundDisabled`               |
+| `SecondaryRatingControlForegroundUnselected`            | `SecondaryRatingControlUnselectedForeground`            |
+| `SecondaryRatingControlForegroundSelected`              | `SecondaryRatingControlSelectedForeground`              |
+| `SecondaryRatingControlForegroundPointerOverUnselected` | `SecondaryRatingControlUnselectedForegroundPointerOver` |
+| `SecondaryRatingControlForegroundPointerOverSelected`   | `SecondaryRatingControlSelectedForegroundPointerOver`   |
+| `SecondaryRatingControlForegroundDisabledSelected`      | `SecondaryRatingControlSelectedForegroundDisabled`      |
 
 ### Conclusion
 
