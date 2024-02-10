@@ -1,0 +1,53 @@
+jobs:
+- job: Skia_GTK
+  displayName: 'Skia GTK'
+  container: unoplatform/wasm-build:3.0
+
+  variables:
+    GTK_RUNTIME_URL: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases/download/2020-07-15/gtk3-runtime-3.24.20-2020-07-15-ts-win64.exe
+  strategy:
+    maxParallel: 2
+    matrix:
+      WinUI:
+        ArtifactName: skia-gtk-winui
+        ProjectName: Uno.Themes.WinUI.Samples
+        Lineage: WinUI
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
+      UWP:
+        ArtifactName: skia-gtk-uwp
+        ProjectName: Uno.Themes.Samples
+        Lineage: UWP
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install.yml
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - powershell: dotnet msbuild src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/$(ProjectName).Skia.Gtk.csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=net7.0 /detailedsummary /m /bl:$(build.artifactstagingdirectory)\themes-build-$(ArtifactName).binlog
+    displayName: Build GTK Head
+
+  - task: CopyFiles@2
+    displayName: 'Publish Skia.GTK Binaries'
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/bin/Release/net7.0
+      Contents: '**/*.*'
+      TargetFolder: $(build.artifactstagingdirectory)/skia-gtk-build
+      CleanTargetFolder: false
+      OverWrite: false
+      flattenFolders: false
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+      ArtifactName: $(ArtifactName)

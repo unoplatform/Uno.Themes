@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Uno.Themes;
 
 
@@ -12,33 +12,32 @@ using Microsoft.UI.Xaml.Media;
 using Windows.UI.Xaml;
 #endif
 
-namespace Uno.Material
+namespace Uno.Material;
+
+/// <summary>
+/// Material Theme resources including colors, fonts, layout values, and styles
+/// </summary>
+public class MaterialTheme : BaseTheme
 {
-	/// <summary>
-	/// Material Theme resources including colors, fonts, layout values, and styles
-	/// </summary>
-	public class MaterialTheme : BaseTheme
+	public MaterialTheme()
+	{ }
+
+	public MaterialTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
+		: base(colorOverride, fontOverride)
+	{ }
+
+	protected override ResourceDictionary GenerateSpecificResources()
 	{
-		public MaterialTheme()
-		{ }
+		var mergedPages = new ResourceDictionary { Source = new Uri(MaterialConstants.ResourcePaths.Version2.MergedPages) };
 
-		public MaterialTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
-			: base(colorOverride, fontOverride)
-		{ }
+		var fonts = new ResourceDictionary { Source = new Uri(MaterialConstants.ResourcePaths.Common.Fonts) };
 
-		protected override ResourceDictionary GenerateSpecificResources()
+		if (FontOverrideDictionary is { } fontOverride)
 		{
-			var mergedPages = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Generated/mergedpages.v2.xaml") };
-
-			var fonts = new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Material/Styles/Application/Common/Fonts.xaml") };
-
-			if (FontOverrideDictionary is { } fontOverride)
-			{
-				fonts.SafeMerge(fontOverride);
-			}
-
-			mergedPages.MergedDictionaries.Add(fonts);
-			return mergedPages;
+			fonts.SafeMerge(fontOverride);
 		}
+
+		mergedPages.MergedDictionaries.Add(fonts);
+		return mergedPages;
 	}
 }

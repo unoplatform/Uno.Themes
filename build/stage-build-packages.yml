@@ -1,0 +1,56 @@
+jobs:
+- job: Build_Packages
+  timeoutInMinutes: 90
+  pool:
+    vmImage: windows-2022
+
+  steps:
+    - bash: |
+        npm install -g conventional-changelog-cli@2.2.2
+        conventional-changelog -p angular -u -r 1 -o "build/CHANGELOG.md"
+      displayName: 'Generate CHANGELOG.MD'
+
+    - template: templates/gitversion.yml
+    - template: templates/dotnet-install-windows.yml
+
+
+    - powershell: |
+        dotnet tool update -g dotnet-vs
+        $MSBUILDPATH="$(vs where release --prop=InstallationPath)\MSBuild\Current\Bin"
+        Write-Host "##vso[task.setvariable variable=MSBUILDPATH;]$MSBUILDPATH"
+        echo MSBUILDPATH: $MSBUILDPATH
+      displayName: Setup VS17 Path
+
+    - template: templates/install-windows-sdk.yml
+      parameters:
+        sdkVersion: 19041
+
+    - task: MSBuild@1
+      displayName: 'Build Packages'
+      inputs:
+        solution: Uno.Themes-packages.slnf
+        configuration: Release
+        msbuildLocationMethod: version
+        msbuildVersion: latest
+        maximumCpuCount: true
+        msbuildArguments: /m /v:m /r /p:GeneratePackageOnBuild=true /p:UseDotNetNativeToolchain=false /p:AotAssemblies=false "/p:PackageVersion=$(GitVersion.FullSemVer)" "/p:InformationalVersion=$(GitVersion.InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-packages.binlog
+
+    - task: PowerShell@2
+      displayName: Authenticode Sign Packages
+      inputs:
+        filePath: build/sign-package.ps1
+      env:
+        SignClientUser: $(SignClientUser)
+        SignClientSecret: $(SignClientSecret)
+        SignPackageName: "Uno.Themes"
+        SignPackageDescription: "Uno.Themes"
+        ArtifactDirectory: $(build.artifactstagingdirectory)
+      condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')), not(eq(variables['SignClientSecret'], '')), not(eq(variables['SignClientUser'], '')))
+
+    - task: PublishBuildArtifacts@1
+      condition: always()
+      displayName: 'Publish artifact'
+      inputs:
+        PathtoPublish: $(build.artifactstagingdirectory)
+        ArtifactName: uno-themes-packages
+        ArtifactType: Container

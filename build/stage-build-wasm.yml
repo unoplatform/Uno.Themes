@@ -1,29 +1,52 @@
-﻿steps:
-- task: UseDotNet@2
-  condition: eq(variables['IsCanaryBranch'], true)
-  inputs:
-    packageType: runtime
-    version: 2.2.x
+jobs:
+- job: WebAssembly
+  displayName: 'WebAssembly'
+  container: unoplatform/wasm-build:3.0
 
-- task: nventiveCanaryUpdater@5
-  condition: eq(variables['IsCanaryBranch'], true)
-  inputs:
-    solution: Uno.Themes.sln
-    useNuGetOrg: true
-    usePrivateFeed: false
-    mergeBranch: true
-    branchToMerge: master
-    nugetUpdaterVersion: 2.1.1
-    packageAuthor: nventive
+  strategy:
+    maxParallel: 2
+    matrix:
+      WinUI:
+        ArtifactName: wasm-winui
+        ProjectName: Uno.Themes.WinUI.Samples
+        Lineage: WinUI
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
+      UWP:
+        ArtifactName: wasm-uwp
+        ProjectName: Uno.Themes.Samples
+        Lineage: UWP
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
 
-- task: UseDotNet@2
-  displayName: 'Use .NET Core SDK 7.0.302'
-  inputs:
-    packageType: sdk
-    version: 7.0.302
+  pool:
+    vmImage: 'ubuntu-latest'
 
-- bash: dotnet msbuild -r -p:Configuration=Release -p:TargetFrameworkOverride=net7.0 -p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) src/samples/UWP/Uno.Themes.Samples.Wasm/Uno.Themes.Samples.Wasm.csproj
+  steps:
+  - checkout: self
+    clean: 'true'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    ArtifactName: $(ArtifactName)
+  - template: templates/dotnet-install.yml
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - script: |
+      dotnet build src/samples/$(Lineage)/$(ProjectName).Wasm/$(ProjectName).Wasm.csproj /p:Configuration=Release /p:TargetFrameworkOverride=net7.0 "/p:InformationalVersion=%GITVERSION_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build Wasm Head
+
+  - task: CopyFiles@2
+    displayName: 'Publish Wasm Binaries'
+    inputs:
+      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Wasm/bin/Release/net7.0/dist
+      Contents: '**/*.*'
+      TargetFolder: $(build.artifactstagingdirectory)/Wasm
+      CleanTargetFolder: false
+      OverWrite: false
+      flattenFolders: false
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+        ArtifactName: $(ArtifactName)

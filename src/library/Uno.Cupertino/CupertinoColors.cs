@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -6,39 +6,38 @@ using Microsoft.UI.Xaml;
 using Windows.UI.Xaml;
 #endif
 
-namespace Uno.Cupertino
+namespace Uno.Cupertino;
+
+public sealed partial class CupertinoColors : ResourceDictionary
 {
-	public sealed partial class CupertinoColors : ResourceDictionary
+	private static string ColorPaletteOverrideSource;
+
+	public string OverrideSource
 	{
-		private static string ColorPaletteOverrideSource;
+		get => (string)GetValue(OverrideSourceProperty);
+		set => SetValue(OverrideSourceProperty, value);
+	}
 
-		public string OverrideSource
+	public static DependencyProperty OverrideSourceProperty { get; } =
+		DependencyProperty.Register(
+			nameof(OverrideSource),
+			typeof(string),
+			typeof(CupertinoColors),
+			new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
+
+	private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+	{
+		ColorPaletteOverrideSource = args.NewValue as string;
+	}
+
+	public CupertinoColors()
+	{
+		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(CupertinoConstants.ColorPalette) });
+		if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
 		{
-			get => (string)GetValue(OverrideSourceProperty);
-			set => SetValue(OverrideSourceProperty, value);
+			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
 		}
 
-		public static DependencyProperty OverrideSourceProperty { get; } =
-			DependencyProperty.Register(
-				nameof(OverrideSource),
-				typeof(string),
-				typeof(CupertinoColors),
-				new PropertyMetadata(null, OnColorPaletteOverrideSourceChanged));
-
-		private static void OnColorPaletteOverrideSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
-		{
-			ColorPaletteOverrideSource = args.NewValue as string;
-		}
-
-		public CupertinoColors()
-		{
-			MergedDictionaries.Add(new ResourceDictionary { Source = new Uri("ms-appx:///Uno.Cupertino/Styles/Application/ColorPalette.xaml") });
-			if (!string.IsNullOrWhiteSpace(ColorPaletteOverrideSource))
-			{
-				MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ColorPaletteOverrideSource) });
-			}
-
-			InitializeComponent();
-		}
+		InitializeComponent();
 	}
 }
