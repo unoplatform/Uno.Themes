@@ -730,6 +730,26 @@
 										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundFocused}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonStateLayerBackgroundFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerFocused}" />
+										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledTonalButtonStateLayerBackgroundPointerFocused}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonIconForegroundPointerFocused}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerFocused}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerFocused}" />
+									</VisualState.Setters>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
