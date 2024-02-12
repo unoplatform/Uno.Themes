@@ -27,10 +27,11 @@
 					<um:Ripple Feedback="{TemplateBinding Foreground}"
 									 FeedbackOpacity="{StaticResource PressedOpacity}">
 						<Viewbox x:Name="ContentViewbox"
-								 Height="{ThemeResource AppBarButtonContentHeight}"
-								 Width="{ThemeResource AppBarButtonContentHeight}"
+								 MaxHeight="{ThemeResource AppBarButtonContentHeight}"
+								 MaxWidth="{ThemeResource AppBarButtonContentHeight}"
 								 Margin="0,12"
 								 HorizontalAlignment="Stretch"
+								 StretchDirection="DownOnly"
 								 AutomationProperties.AccessibilityView="Raw">
 							<ContentPresenter x:Name="Content"
 											  Content="{TemplateBinding Icon}"

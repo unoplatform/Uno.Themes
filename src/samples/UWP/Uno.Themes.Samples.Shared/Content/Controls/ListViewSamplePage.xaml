@@ -18,7 +18,7 @@
                     <StackPanel>
                         <smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
                                           UniqueKey="Material_ListViewSamplePage_ListView">
-                            <ListView ItemsSource="abcdefghijklmn"
+														<ListView ItemsSource="{Binding Data.Letters}"
                                       Style="{StaticResource MaterialListViewStyle}" />
                         </smtx:XamlDisplay>
                     </StackPanel>
@@ -29,7 +29,7 @@
 					<StackPanel>
 						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
                                           UniqueKey="M#Material_ListViewSamplePage_ListView">
-							<ListView ItemsSource="abcdefghijklmn"
+							<ListView ItemsSource="{Binding Data.Letters}"
                                       Style="{StaticResource MaterialListViewStyle}" />
 						</smtx:XamlDisplay>
 					</StackPanel>
