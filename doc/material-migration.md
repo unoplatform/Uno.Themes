@@ -4,6 +4,27 @@ uid: Uno.Themes.Material.Migration
 
 # Updating to Uno.Material
 
+## Updating to Uno.Material v4.1
+
+### Resources
+
+Certain Lightweight Styling resource keys have been edited to align with those coming from `Microsoft.UI.Xaml`.
+
+#### RatingControl
+
+| Old Key                                    | New Key                            |
+|--------------------------------------------|------------------------------------|
+| `RatingControlForegroundUnselected`                     | `RatingControlUnselectedForeground`                     |
+| `RatingControlForegroundSelected`                       | `RatingControlSelectedForeground`                       |
+| `RatingControlForegroundPointerOverUnselected`          | `RatingControlUnselectedForegroundPointerOver`          |
+| `RatingControlForegroundPointerOverSelected`            | `RatingControlSelectedForegroundPointerOver`            |
+| `RatingControlForegroundDisabledSelected`               | `RatingControlSelectedForegroundDisabled`               |
+| `SecondaryRatingControlForegroundUnselected`            | `SecondaryRatingControlUnselectedForeground`            |
+| `SecondaryRatingControlForegroundSelected`              | `SecondaryRatingControlSelectedForeground`              |
+| `SecondaryRatingControlForegroundPointerOverUnselected` | `SecondaryRatingControlUnselectedForegroundPointerOver` |
+| `SecondaryRatingControlForegroundPointerOverSelected`   | `SecondaryRatingControlSelectedForegroundPointerOver`   |
+| `SecondaryRatingControlForegroundDisabledSelected`      | `SecondaryRatingControlSelectedForegroundDisabled`      |
+
 ## Updating to Uno.Material v3
 
 Uno.Material v3 (not to be confused with [Material Design 3](https://m3.material.io/) from Google) introduces support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. Refer to the tables below for the changes that have been made within Uno.Material.
