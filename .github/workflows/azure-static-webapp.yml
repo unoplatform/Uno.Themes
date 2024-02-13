@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - master
-      - release/*
+      - release/*/*
       - feature/*
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - master
-      - release/*
+      - release/*/*
       - feature/*
 
 jobs:
