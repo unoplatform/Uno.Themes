@@ -1,0 +1,45 @@
+jobs:
+- job: iOS
+
+  timeoutInMinutes: 90
+  strategy:
+    maxParallel: 2
+    matrix:
+      WinUI:
+        ArtifactName: ios-winui
+        ProjectName: Uno.Themes.WinUI.Samples
+        Lineage: WinUI
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
+      UWP:
+        ArtifactName: ios-uwp
+        ProjectName: Uno.Themes.Samples
+        Lineage: UWP
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
+  pool:
+    vmImage: 'macOS-13'
+
+  steps:
+  - template: templates/dotnet-install-macos.yml
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - bash: |
+      echo 'xCode Root to ${XCODE_ROOT}'
+      echo '##vso[task.setvariable variable=MD_APPLE_SDK_ROOT;]'${XCODE_ROOT}
+      sudo xcode-select --switch ${XCODE_ROOT}/Contents/Developer
+    displayName: Select Xcode ($(XCODE_ROOT))
+
+  - bash: |
+      cd $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Mobile
+      dotnet build -f net7.0-ios -c Release "/p:InformationalVersion=$(GitVersion.InformationalVersion)" "/bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog"
+    displayName: Build project for Release - (net7.0-ios)
+
+  - task: PublishBuildArtifacts@1
+    retryCountOnTaskFailure: 3
+    condition: always()
+    inputs:
+      ArtifactName: $(ArtifactName)

@@ -1,32 +1,33 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\tfm-common-winui.props" />
 
 	<!--
 	Adding project references to this project requires some manual adjustments.
 	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
 	-->
 	<PropertyGroup>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'!=''">$(TargetFrameworkOverride)</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">net7.0</TargetFrameworks>
-		<TargetFrameworks Condition="'$(TargetFrameworkOverride)'==''">$(TargetFrameworks);net7.0-windows10.0.19041;net7.0-ios;net7.0-macos;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<DefineConstants>WINUI</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Uno.Material\Uno.Material.csproj" />
+		<ProjectReference Include="..\Uno.Material\Uno.Material.WinUI.csproj" />
 		<ProjectReference Include="..\Uno.Themes.WinUI.Markup\Uno.Themes.WinUI.Markup.csproj" />
-		<ProjectReference Include="..\Uno.Themes\Uno.Themes.csproj" />
+		<ProjectReference Include="..\Uno.Themes\Uno.Themes.WinUI.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Uno.Extensions.Markup.Generators" PrivateAssets="All" Version="5.0.13" />
+		<PackageReference Include="Uno.Extensions.Markup.Generators" PrivateAssets="All" />
 	</ItemGroup>
 
 	<PropertyGroup>
 		<PackageDescription>A set of C# for Markup helpers for Uno.Material.WinUI</PackageDescription>
 	</PropertyGroup>
 
-	<Import Project="..\..\..\winappsdk-workaround.targets" />
+	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">
+		<Using Include="Uno.Material.Markup" />
+	</ItemGroup>
 
+	<Import Project="..\..\..\winappsdk-workaround.targets" />
 </Project>

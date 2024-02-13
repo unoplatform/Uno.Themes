@@ -1,0 +1,30 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\tfm-common-winui.props" />
+
+	<PropertyGroup>
+		<PackageId>Uno.Themes.WinUI</PackageId>
+		<AssemblyName>Uno.Themes.WinUI</AssemblyName>
+		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
+		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
+		<FrameworkLineage>WinUI</FrameworkLineage>
+		<UseWinUI>true</UseWinUI>
+	</PropertyGroup>
+
+	<Import Project="themes-common.props" />
+
+	<ItemGroup>
+		<PackageReference Include="Uno.WinUI" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Condition="$(_IsWinUI)" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Condition="$(_IsWinUI)" />
+	</ItemGroup>
+
+	<ItemGroup Condition="!$(_IsWinUI)">
+		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+		<Compile Update="**\*.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<Import Project="..\..\..\winappsdk-workaround.targets" />
+</Project>

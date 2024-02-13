@@ -1,0 +1,94 @@
+jobs:
+- job: Windows
+  displayName: 'Windows'
+
+  strategy:
+    maxParallel: 2
+    matrix:
+      WinUI:
+        ArtifactName: win-winui
+        ProjectName: Uno.Themes.WinUI.Samples
+        Lineage: WinUI
+        AppName: Windows
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
+      UWP:
+        ArtifactName: win-uwp
+        ProjectName: Uno.Themes.Samples
+        Lineage: UWP
+        AppName: UWP
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 50
+        CI_Build: true
+
+  pool:
+    vmImage: 'windows-2022'
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - task: UseDotNet@2
+    displayName: 'Use .NET'
+    inputs:
+      packageType: 'sdk'
+      version: '7.0.400'
+
+  - template: templates/install-windows-sdk.yml
+    parameters:
+      sdkVersion: 19041
+
+  - task: MSBuild@1
+    condition: eq(variables['Lineage'], 'UWP')
+    displayName: Build Samples
+    inputs:
+      solution: src/samples/$(Lineage)/$(ProjectName).$(AppName)/$(ProjectName).$(AppName).csproj
+      msbuildArchitecture: x86
+      msbuildArguments: /m /v:m /r /p:Configuration=Release "/p:InformationalVersion=%GITVERSION_InformationalVersion%" /p:TargetFrameworkOverride=uap10.0.19041 /p:GeneratePackageOnBuild=false /p:AotAssemblies=false /p:UseWebAssemblyAOT=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      clean: false
+      maximumCpuCount: true
+      restoreNugetPackages: false
+      logProjectEvents: false
+      createLogFile: false
+
+  - task: MSBuild@1
+    condition: eq(variables['Lineage'], 'WinUI')
+    displayName: Build Samples
+    inputs:
+      solution: src/samples/$(Lineage)/$(ProjectName).$(AppName)/$(ProjectName).$(AppName).csproj
+      msbuildArchitecture: x64
+      msbuildArguments: /m /v:m /r /p:Platform=x64 /p:Configuration=Release /p:TargetFrameworkOverride=net7.0-windows10.0.19041 /p:AppxPackageDir="Packages/" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true "/p:InformationalVersion=$(GitVersion.InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      clean: false
+      maximumCpuCount: true
+      restoreNugetPackages: false
+      logProjectEvents: false
+      createLogFile: false
+
+  - task: CopyFiles@2
+    displayName: Copy Windows output
+    condition: eq(variables['Lineage'], 'WinUI')
+    inputs:
+      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).$(AppName)/Packages
+      Contents: '**/*.*'
+      TargetFolder: $(Build.ArtifactStagingDirectory)/
+
+  - task: PowerShell@2
+    displayName: Authenticode Sign Packages
+    inputs:
+      filePath: build/sign-package.ps1
+    env:
+      SignClientUser: $(SignClientUser)
+      SignClientSecret: $(SignClientSecret)
+      SignPackageName: "Uno.PackageDiff"
+      SignPackageDescription: "Uno.PackageDiff"
+      ArtifactDirectory: $(build.artifactstagingdirectory)
+    condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')), not(eq(variables['SignClientSecret'], '')), not(eq(variables['SignClientUser'], '')))
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+        ArtifactName: $(ArtifactName)

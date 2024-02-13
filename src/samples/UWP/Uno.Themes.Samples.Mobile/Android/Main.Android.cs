@@ -1,19 +1,9 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.Runtime;
 using Com.Nostra13.Universalimageloader.Core;
-using Windows.UI.Xaml.Media;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Uno.Themes.Samples.Droid
-{
-    [global::Android.App.ApplicationAttribute(
+namespace Uno.Themes.Samples.Droid;
+
+[global::Android.App.ApplicationAttribute(
         Label = "@string/ApplicationName",
         LargeHeap = true,
         HardwareAccelerated = true,
@@ -39,4 +29,3 @@ namespace Uno.Themes.Samples.Droid
             ImageSource.DefaultImageLoader = ImageLoader.Instance.LoadImageAsync;
         }
     }
-}

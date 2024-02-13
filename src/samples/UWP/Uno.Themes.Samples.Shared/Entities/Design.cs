@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Uno.Themes.Samples.Entities;
 
-namespace Uno.Themes.Samples.Entities
+public enum Design
 {
-	public enum Design
-	{
-		Material,
-		Cupertino,
-	}
+	Material,
+	Cupertino,
 }

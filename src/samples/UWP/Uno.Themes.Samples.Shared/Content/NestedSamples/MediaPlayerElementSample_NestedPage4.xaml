@@ -62,8 +62,6 @@
 														IsFastForwardEnabled="{Binding IsChecked, ElementName=IsFastForwardEnabled}"
 														IsFastRewindButtonVisible="{Binding IsChecked, ElementName=IsFastRewindButtonVisible}"
 														IsFastRewindEnabled="{Binding IsChecked, ElementName=IsFastRewindEnabled}"
-														IsFullWindowButtonVisible="{Binding IsChecked, ElementName=IsFullWindowButtonVisible}"
-														IsFullWindowEnabled="{Binding IsChecked, ElementName=IsFullWindowEnabled}"
 														IsNextTrackButtonVisible="{Binding IsChecked, ElementName=IsNextTrackButtonVisible}"
 														IsPlaybackRateButtonVisible="{Binding IsChecked, ElementName=IsPlaybackRateButtonVisible}"
 														IsPlaybackRateEnabled="{Binding IsChecked, ElementName=IsPlaybackRateEnabled}"
@@ -81,8 +79,7 @@
 														IsVolumeButtonVisible="{Binding IsChecked, ElementName=IsVolumeButtonVisible}"
 														IsVolumeEnabled="{Binding IsChecked, ElementName=IsVolumeEnabled}"
 														IsZoomButtonVisible="{Binding IsChecked, ElementName=IsZoomButtonVisible}"
-														IsZoomEnabled="{Binding IsChecked, ElementName=IsZoomEnabled}"
-														IsCompactOverlayEnabled="{Binding IsChecked, ElementName=IsCompactOverlayEnabled}" />
+														IsZoomEnabled="{Binding IsChecked, ElementName=IsZoomEnabled}" />
 							</MediaPlayerElement.TransportControls>
 						</MediaPlayerElement>
 					</Border>
@@ -101,10 +98,6 @@
 							<CheckBox x:Name="IsCompact"
 									  IsChecked="False"
 									  Content="IsCompact" />
-
-							<CheckBox x:Name="IsCompactOverlayEnabled"
-									  IsChecked="True"
-									  Content="IsCompactOverlayEnabled" />
 
 							<CheckBox x:Name="ShowAndHideAutomatically"
 									  IsChecked="True"
@@ -125,14 +118,6 @@
 							<CheckBox x:Name="IsFastRewindEnabled"
 									  IsChecked="False"
 									  Content="IsFastRewindEnabled" />
-
-							<CheckBox x:Name="IsFullWindowButtonVisible"
-									  IsChecked="True"
-									  Content="IsFullWindowButtonVisible" />
-
-							<CheckBox x:Name="IsFullWindowEnabled"
-									  IsChecked="True"
-									  Content="IsFullWindowEnabled" />
 
 							<CheckBox x:Name="IsNextTrackButtonVisible"
 									  IsChecked="False"

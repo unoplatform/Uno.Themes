@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace Uno.Themes.Samples.Helpers;
 
-namespace Uno.Themes.Samples.Helpers
+public static class HierarchyHelper
 {
-	public static class HierarchyHelper
+	public static IEnumerable<T> Flatten<T>(T element, Func<T, IEnumerable<T>> childrenSelector)
 	{
-		public static IEnumerable<T> Flatten<T>(T element, Func<T, IEnumerable<T>> childrenSelector)
+		yield return element;
+		foreach (var child in childrenSelector(element) ?? Enumerable.Empty<T>())
 		{
-			yield return element;
-			foreach (var child in childrenSelector(element) ?? Enumerable.Empty<T>())
+			foreach (var item in Flatten(child, childrenSelector))
 			{
-				foreach (var item in Flatten(child, childrenSelector))
-				{
-					yield return item;
-				}
+				yield return item;
 			}
 		}
+	}
 
-		public static IEnumerable<T> Flatten<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenSelector)
-		{
-			return source.SelectMany(x => Flatten(x, childrenSelector));
-		}
+	public static IEnumerable<T> Flatten<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenSelector)
+	{
+		return source.SelectMany(x => Flatten(x, childrenSelector));
 	}
 }

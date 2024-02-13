@@ -1,4 +1,4 @@
-﻿<Project ToolsVersion="15.0">
+<Project>
 
 	<PropertyGroup>
 		<LangVersion>10.0</LangVersion>
@@ -38,13 +38,35 @@
 				<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 			</PropertyGroup>
 			<ItemGroup>
-				<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All" />
+				<PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="All" />
 			</ItemGroup>
 		</When>
 	</Choose>
 
+	<!--
+  Adjust the output paths for runtime project in order for those
+  projects to stay in the same folder as the original reference one.
+  -->
+	<PropertyGroup Condition="'$(IsSampleProject)'!='true'">
+		<BaseOutputPath>bin\$(MSBuildProjectName)</BaseOutputPath>
+		<BaseIntermediateOutputPath>obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+		<DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(IsMarkupProject)'=='true'">
 		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(IsSampleProject)'=='true'">
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Build_Android>true</Build_Android>
+		<Build_iOS>true</Build_iOS>
+		<Build_MacOS>true</Build_MacOS>
+		<Build_Windows Condition="'$(OS)'=='Windows_NT'">true</Build_Windows>
+		<Build_Windows Condition="'$(OS)'!='Windows_NT'">false</Build_Windows>
 	</PropertyGroup>
 
 	<!-- Workaround for https://developercommunity.visualstudio.com/t/XamarinMac-binaries-are-missing-in-173/10164443 -->

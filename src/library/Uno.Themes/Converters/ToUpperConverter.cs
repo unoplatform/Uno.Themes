@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 #if WinUI
 using Microsoft.UI.Xaml.Data;

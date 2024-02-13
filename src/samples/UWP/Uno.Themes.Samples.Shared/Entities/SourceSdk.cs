@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
-namespace Uno.Themes.Samples.Entities
+namespace Uno.Themes.Samples.Entities;
+
+public enum SourceSdk
 {
-	public enum SourceSdk
-	{
-		[Description("WinUI/Uno.UI")]
-		WinUI,
-		[Description("Uno.Material")]
-		UnoMaterial,
-		[Description("Uno.Cupertino")]
-		UnoCupertino,
-	}
+	[Description("WinUI/Uno.UI")]
+	WinUI,
+	[Description("Uno.Material")]
+	UnoMaterial,
+	[Description("Uno.Cupertino")]
+	UnoCupertino,
 }

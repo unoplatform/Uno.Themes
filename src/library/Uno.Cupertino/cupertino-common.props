@@ -1,0 +1,72 @@
+﻿<Project>
+	<PropertyGroup>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release' and !('$(MSBuildRuntimeType)'!='Core' and $([MSBuild]::IsOSPlatform('osx')))">true</UnoXamlResourcesTrimming>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
+	</ItemGroup>
+
+	<Choose>
+		<When Condition="$(IsIOSOrCatalyst) or $(_IsAndroid)">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="mobile" />
+				<ExcludeXamlNamespaces Include="not_mobile" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="not_mobile" />
+				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<ItemGroup>
+		<LottieJson Include="Assets\CupertinoProgressRing.json" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(_IsWindows)">
+		<Content Include="@(LottieJson)" />
+	</ItemGroup>
+
+	<ItemGroup Condition="!$(_IsWindows)">
+		<EmbeddedResource Include="@(LottieJson)" />
+		<IncludeXamlNamespaces Include="lottie_not_win" />
+		<ExcludeXamlNamespaces Include="lottie_win" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
+		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
+			<LogicalName>$(AssemblyName).xml</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<XamlMergeInput Include="Styles\Controls\**\*.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" />
+		<None Remove="Styles\Controls\_Resources.xaml" />
+		<XamlMergeInput Remove="Styles\Application\CupertinoColors.xaml" />
+		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Remove="Styles\Application\CupertinoColors.xaml" />
+		<UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">
+		<Using Include="Uno.Cupertino" />
+	</ItemGroup>
+
+	<Import Project="..\xamlmerge.targets" />
+</Project>

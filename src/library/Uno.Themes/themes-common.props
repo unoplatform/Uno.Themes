@@ -1,0 +1,71 @@
+<Project>
+	<PropertyGroup>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
+		<NoWarn>$(NoWarn);UNO0001</NoWarn>
+		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageDescription>This package provides helpers and base class support for implementations of the Uno Themes Design Language, including Uno Material and Uno Cupertino.</PackageDescription>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Uno.Cupertino" />
+		<InternalsVisibleTo Include="Uno.Cupertino.WinUI" />
+		<InternalsVisibleTo Include="Uno.Material" />
+		<InternalsVisibleTo Include="Uno.Material.WinUI" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
+	</ItemGroup>
+
+	<Choose>
+		<When Condition="$(_IsAndroid) or $(IsIOSOrCatalyst)">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="mobile" />
+				<ExcludeXamlNamespaces Include="not_mobile" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="not_mobile" />
+				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
+		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
+			<LogicalName>$(AssemblyName).xml</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Styles\Applications\Common\SharedColorPalette.xaml" />
+	  <None Remove="Styles\Applications\Common\SharedColors.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Styles\Applications\Common\SharedColorPalette.xaml" />
+	  <UpToDateCheckInput Remove="Styles\Applications\Common\SharedColors.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Uno.Core.Extensions.Disposables" />
+		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
+		<PackageReference Include="Uno.Fonts.Roboto" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">
+		<Using Include="Uno.Themes" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,52 @@
+jobs:
+- job: Android
+
+  strategy:
+    maxParallel: 2
+    matrix:
+      WinUI:
+        ArtifactName: android-winui
+        ProjectName: Uno.Themes.WinUI.Samples
+        Lineage: WinUI
+        GeneratePackageOnBuild: false
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 1
+      UWP:
+        ArtifactName: android-uwp
+        ProjectName: Uno.Themes.Samples
+        Lineage: UWP
+        GeneratePackageOnBuild: false
+        ApplicationBuildNumberOffset: 50
+        VersionCodeOffset: 1
+
+  pool:
+    vmImage: windows-2022
+
+  steps:
+  - template: templates/dotnet-install-windows.yml
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - script: |
+      cd $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Mobile
+      dotnet build -f net7.0-android -c Release "/p:InformationalVersion=%GITVERSION_InformationalVersion%" /p:AndroidKeyStore=false /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build project for Release - (net7.0-android)
+
+  - task: CopyFiles@2
+    displayName: 'Publish Binaries'
+    inputs:
+      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Mobile/bin/Release/
+      Contents:  |
+        **/*.apk
+        **/*.aab
+      TargetFolder: $(build.artifactstagingdirectory)
+      CleanTargetFolder: false
+      OverWrite: false
+      flattenFolders: false
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+      ArtifactName: $(ArtifactName)
+      ArtifactType: Container

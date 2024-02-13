@@ -19,20 +19,20 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Default => new("RatingControlForeground");
 
 
-					[ResourceKeyDefinition(typeof(Brush), "RatingControlForegroundUnselected")]
-					public static ThemeResourceKey<Brush> Unselected => new("RatingControlForegroundUnselected");
+					[ResourceKeyDefinition(typeof(Brush), "RatingControlUnselectedForeground")]
+					public static ThemeResourceKey<Brush> Unselected => new("RatingControlUnselectedForeground");
 
-					[ResourceKeyDefinition(typeof(Brush), "RatingControlForegroundUnselectedPointerOver")]
-					public static ThemeResourceKey<Brush> UnselectedPointerOver => new("RatingControlForegroundUnselectedPointerOver");
+					[ResourceKeyDefinition(typeof(Brush), "RatingControlUnselectedForegroundPointerOver")]
+					public static ThemeResourceKey<Brush> UnselectedPointerOver => new("RatingControlUnselectedForegroundPointerOver");
 
-					[ResourceKeyDefinition(typeof(Brush), "RatingControlForegroundSelected")]
-					public static ThemeResourceKey<Brush> Selected => new("RatingControlForegroundSelected");
+					[ResourceKeyDefinition(typeof(Brush), "RatingControlSelectedForeground")]
+					public static ThemeResourceKey<Brush> Selected => new("RatingControlSelectedForeground");
 
-					[ResourceKeyDefinition(typeof(Brush), "RatingControlForegroundSelectedPointerOver")]
-					public static ThemeResourceKey<Brush> SelectedPointerOver => new("RatingControlForegroundSelectedPointerOver");
+					[ResourceKeyDefinition(typeof(Brush), "RatingControlSelectedForegroundPointerOver")]
+					public static ThemeResourceKey<Brush> SelectedPointerOver => new("RatingControlSelectedForegroundPointerOver");
 
-					[ResourceKeyDefinition(typeof(Brush), "RatingControlForegroundSelectedDisabled")]
-					public static ThemeResourceKey<Brush> SelectedDisabled => new("RatingControlForegroundSelectedDisabled");
+					[ResourceKeyDefinition(typeof(Brush), "RatingControlSelectedForegroundDisabled")]
+					public static ThemeResourceKey<Brush> SelectedDisabled => new("RatingControlSelectedForegroundDisabled");
 				}
 
 				public static partial class PlaceholderForeground
@@ -79,20 +79,20 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Default => new("SecondaryRatingControlForeground");
 
 
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlForegroundUnselected")]
-					public static ThemeResourceKey<Brush> Unselected => new("SecondaryRatingControlForegroundUnselected");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlUnselectedForeground")]
+					public static ThemeResourceKey<Brush> Unselected => new("SecondaryRatingControlUnselectedForeground");
 
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlForegroundUnselectedPointerOver")]
-					public static ThemeResourceKey<Brush> UnselectedPointerOver => new("SecondaryRatingControlForegroundUnselectedPointerOver");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlUnselectedForegroundPointerOver")]
+					public static ThemeResourceKey<Brush> UnselectedPointerOver => new("SecondaryRatingControlUnselectedForegroundPointerOver");
 
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlForegroundSelected")]
-					public static ThemeResourceKey<Brush> Selected => new("SecondaryRatingControlForegroundSelected");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlSelectedForeground")]
+					public static ThemeResourceKey<Brush> Selected => new("SecondaryRatingControlSelectedForeground");
 
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlForegroundSelectedPointerOver")]
-					public static ThemeResourceKey<Brush> SelectedPointerOver => new("SecondaryRatingControlForegroundSelectedPointerOver");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlSelectedForegroundPointerOver")]
+					public static ThemeResourceKey<Brush> SelectedPointerOver => new("SecondaryRatingControlSelectedForegroundPointerOver");
 
-					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlForegroundSelectedDisabled")]
-					public static ThemeResourceKey<Brush> SelectedDisabled => new("SecondaryRatingControlForegroundSelectedDisabled");
+					[ResourceKeyDefinition(typeof(Brush), "SecondaryRatingControlSelectedForegroundDisabled")]
+					public static ThemeResourceKey<Brush> SelectedDisabled => new("SecondaryRatingControlSelectedForegroundDisabled");
 				}
 
 				public static partial class PlaceholderForeground

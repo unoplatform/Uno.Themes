@@ -42,7 +42,7 @@
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcdefghijklmn" />
+											  ItemsSource="{Binding Data.Letters}" />
 								</smtx:XamlDisplay>
 
 							</StackPanel>
@@ -58,7 +58,7 @@
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcdefghijklmn"
+											  ItemsSource="{Binding Data.Letters}"
 											  IsEnabled="False" />
 								</smtx:XamlDisplay>
 							</StackPanel>
@@ -96,7 +96,7 @@
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcdefghijklmn" />
+											  ItemsSource="{Binding Data.Letters}" />
 								</smtx:XamlDisplay>
 
 							</StackPanel>
@@ -112,7 +112,7 @@
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcdefghijklmn"
+											  ItemsSource="{Binding Data.Letters}"
 											  IsEnabled="False" />
 								</smtx:XamlDisplay>
 							</StackPanel>
@@ -130,7 +130,7 @@
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcdefghijklmn">
+											  ItemsSource="{Binding Data.Letters}">
 										<ut:ControlExtensions.Icon>
 											<PathIcon Data="{StaticResource Icon_Mail}" />
 										</ut:ControlExtensions.Icon>
@@ -151,7 +151,7 @@
 												  Style="{StaticResource XamlDisplayBelowStyle}">
 									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
 											  PlaceholderText="Placeholder"
-											  ItemsSource="abcdefghijklmn"
+											  ItemsSource="{Binding Data.Letters}"
 											  IsEnabled="False">
 										<ut:ControlExtensions.Icon>
 											<PathIcon Data="{StaticResource Icon_Mail}" />
@@ -209,7 +209,7 @@
 								<ComboBox Style="{StaticResource CupertinoComboBoxStyle}"
 										  Text="Title"
 										  PlaceholderText="Placeholder"
-										  ItemsSource="abcdefghijklmn" />
+										  ItemsSource="{Binding Data.Letters}" />
 							</smtx:XamlDisplay>
 
 							<!-- Label -->
@@ -223,7 +223,7 @@
 								<ComboBox Style="{StaticResource CupertinoComboBoxStyle}"
 										  Text="Title"
 										  PlaceholderText="Placeholder"
-										  ItemsSource="abcdefghijklmn"
+										  ItemsSource="{Binding Data.Letters}"
 										  IsEnabled="False" />
 							</smtx:XamlDisplay>
 						</StackPanel>
