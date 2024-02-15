@@ -29,15 +29,16 @@ jobs:
   - checkout: self
     clean: 'true'
 
-  - template: templates/dotnet-install.yml
-  - template: templates/canary-updater.yml
-  - template: templates/gitversion.yml
-
   - task: UseDotNet@2
     displayName: 'Use .NET'
     inputs:
       packageType: 'sdk'
       version: '8.0.300'
+
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+
 
   - template: templates/install-windows-sdk.yml
     parameters:
