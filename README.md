@@ -48,7 +48,7 @@ For a larger example and features demo, visit the [Uno Gallery](https://github.c
 
 All documentation for `Uno.Themes` can be found on our [website](https://platform.uno/docs/articles/external/uno.themes/doc/themes-overview.html).
 
-### Where can I get support?
+## Where can I get support?
 
 Support is available through [GitHub Discussions](https://github.com/unoplatform/uno/discussions) or [Discord Server](https://www.platform.uno/discord) - where our engineering team and community will be able to help you.
 
