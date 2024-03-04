@@ -42,7 +42,6 @@ uid: Uno.Themes.Material.Colors
 | `OutlineVariantColor`        | `#C9C5D0`  | `#57545D` |
 
 ## Opacities
-<<<<<<< HEAD
 | Key                | Value |
 | ------------------ | ----- |
 | HoverOpacity       | 0.08  |
@@ -54,20 +53,6 @@ uid: Uno.Themes.Material.Colors
 | LowOpacity         | 0.32  |
 | DisabledOpacity    | 0.12  |
 | DisabledLowOpacity    | 0.12  |
-=======
-
-| Key                  | Value |
-|----------------------|-------|
-| `HoverOpacity`       | 0.08  |
-| `FocusedOpacity`     | 0.12  |
-| `PressedOpacity`     | 0.12  |
-| `DraggedOpacity`     | 0.16  |
-| `SelectedOpacity`    | 0.16  |
-| `MediumOpacity`      | 0.54  |
-| `LowOpacity`         | 0.32  |
-| `DisabledOpacity`    | 0.38  |
-| `DisabledLowOpacity` | 0.12  |
->>>>>>> 223386a16af9178070d85e4702d02d3f3329709c
 
 ## Brushes
 
