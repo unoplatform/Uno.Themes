@@ -296,7 +296,7 @@ this.Build(r => r.UseMaterial(
 
 ## Additional Resources
 
-- [Uno Platform Material Sample App](https://github.com/unoplatform/Uno.Samples/tree/master/UI/UnoMaterialSample)
-- [Uno Platform Material Figma File](https://www.figma.com/community/file/1110792522046146058)
+- [Uno Platform Material Sample App](https://aka.platform.uno/unomaterial-sampleapp)
+- [Uno Platform Material Figma File](https://aka.platform.uno/uno-figma-material-toolkit)
 - [Official Material Design 3 Guidelines](https://m3.material.io/components)
 - [Official Material Design 3 Theme Builder](https://m3.material.io/theme-builder)
