@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
+	<ItemGroup Condition=" '$(ImplicitUsings)' == 'true' OR '$(ImplicitUsings)' == 'enable' ">
+		<Using Include="Uno.Material" />
+	</ItemGroup>
+
 	<Target Name="ValidateUWPSDKVersion" BeforeTargets="BeforeBuild">
 		<Error Text="Uno.Material requires your application to set the Minimum SDK version to Windows 1903 SDK (10.0.19041) or later"
 					 Condition="'$(TargetPlatformIdentifier)'=='UAP' and '$(TargetPlatformMinVersion)'&lt;'10.0.19041.0'" />
