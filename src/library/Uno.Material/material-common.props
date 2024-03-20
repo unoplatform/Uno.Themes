@@ -28,6 +28,27 @@
 		</Otherwise>
 	</Choose>
 
+	<Choose>
+		<When Condition="'$(FrameworkLineage)'=='UWP'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="is_uwp" />
+				<ExcludeXamlNamespaces Include="is_winui" />
+			</ItemGroup>
+		</When>
+		<When Condition="'$(FrameworkLineage)'=='WinUI'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="is_winui" />
+				<ExcludeXamlNamespaces Include="is_uwp" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<ExcludeXamlNamespaces Include="is_winui" />
+				<ExcludeXamlNamespaces Include="is_uwp" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
 	<ItemGroup>
 		<LottieJson Include="Assets\MaterialDeterminate.json" />
 		<LottieJson Include="Assets\MaterialIndeterminate.json" />
