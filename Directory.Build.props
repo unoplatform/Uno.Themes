@@ -27,6 +27,10 @@
 		<None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="/" />
 	</ItemGroup>
 
+	<ItemGroup Condition="$(MSBuildProjectName.Contains('WinUI'))">
+		<None Include="$(MSBuildProjectDirectory)\build\Package.targets" Pack="true" PackagePath="buildTransitive/$(PackageId).targets" />
+	</ItemGroup>
+
 	<Choose>
 		<When Condition="'$(IsTestProject)' != 'true' and '$(SourceLinkEnabled)' != 'false' and '$(IsSampleProject)' != 'true'">
 			<PropertyGroup>
