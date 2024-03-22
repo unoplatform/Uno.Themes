@@ -28,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="$(MSBuildProjectName.Contains('WinUI'))">
-		<Content Include="$(MSBuildProjectDirectory)\build\Package.targets" Pack="true" PackagePath="buildTransitive/$(PackageId).targets" />
+		<None Include="$(MSBuildProjectDirectory)\build\Package.targets" Pack="true" PackagePath="buildTransitive/$(PackageId).targets" />
 	</ItemGroup>
 
 	<Choose>
