@@ -1,5 +1,5 @@
 <Project>
-	<ItemGroup Condition=" '$(ImplicitUsings)' == 'true' OR '$(ImplicitUsings)' == 'enable' ">
+	<ItemGroup Condition=" ('$(ImplicitUsings)' == 'true' OR '$(ImplicitUsings)' == 'enable') AND '$(UnoDisableMaterialMarkupImplicitUsings)' != 'true'  ">
 		<Using Include="Uno.Material.Markup" />
 	</ItemGroup>
 </Project>

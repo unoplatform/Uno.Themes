@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
-	<ItemGroup Condition=" '$(ImplicitUsings)' == 'true' OR '$(ImplicitUsings)' == 'enable' ">
+	<ItemGroup Condition=" ('$(ImplicitUsings)' == 'true' OR '$(ImplicitUsings)' == 'enable') AND '$(UnoDisableCupertinoImplicitUsings)' != 'true' ">
 		<Using Include="Uno.Cupertino" />
 	</ItemGroup>
 
