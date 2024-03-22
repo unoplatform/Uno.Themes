@@ -39,7 +39,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FabStateOverlayBackgroundPointerOver`          | `SolidColorBrush` | `OnPrimaryContainerHoverBrush`     |
 | `FabStateOverlayBackgroundFocused`              | `SolidColorBrush` | `OnPrimaryContainerFocusedBrush`   |
 | `FabStateOverlayBackgroundPressed`              | `SolidColorBrush` | `OnPrimaryContainerPressedBrush`   |
-| `FabStateOverlayBackgroundDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `FabStateOverlayBackgroundDisabled`             | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 | `FabSurfaceForeground`                          | `SolidColorBrush` | `OnPrimaryContainerBrush`          |
 | `FabSurfaceForegroundPressed`                   | `SolidColorBrush` | `OnPrimaryContainerBrush`          |
 | `FabSurfaceForegroundPointerOver`               | `SolidColorBrush` | `OnPrimaryContainerBrush`          |
@@ -52,7 +52,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FabSurfaceStateOverlayBackgroundPointerOver`   | `SolidColorBrush` | `PrimaryHoverBrush`                |
 | `FabSurfaceStateOverlayBackgroundFocused`       | `SolidColorBrush` | `PrimaryFocusedBrush`              |
 | `FabSurfaceStateOverlayBackgroundPressed`       | `SolidColorBrush` | `PrimaryPressedBrush`              |
-| `FabSurfaceStateOverlayBackgroundDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `FabSurfaceStateOverlayBackgroundDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 | `FabSecondaryForeground`                        | `SolidColorBrush` | `OnSecondaryContainerBrush`        |
 | `FabSecondaryForegroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |
 | `FabSecondaryForegroundPointerOver`             | `SolidColorBrush` | `OnSecondaryContainerBrush`        |
@@ -65,7 +65,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FabSecondaryStateOverlayBackgroundPointerOver` | `SolidColorBrush` | `OnSecondaryContainerHoverBrush`   |
 | `FabSecondaryStateOverlayBackgroundFocused`     | `SolidColorBrush` | `OnSecondaryContainerFocusedBrush` |
 | `FabSecondaryStateOverlayBackgroundPressed`     | `SolidColorBrush` | `OnSecondaryContainerPressedBrush` |
-| `FabSecondaryStateOverlayBackgroundDisabled`    | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `FabSecondaryStateOverlayBackgroundDisabled`    | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 | `FabTertiaryForeground`                         | `SolidColorBrush` | `OnTertiaryContainerBrush`         |
 | `FabTertiaryForegroundPointerOver`              | `SolidColorBrush` | `OnTertiaryContainerBrush`         |
 | `FabTertiaryForegroundPressed`                  | `SolidColorBrush` | `OnTertiaryContainerBrush`         |
@@ -77,4 +77,4 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FabTertiaryStateOverlayBackgroundPointerOver`  | `SolidColorBrush` | `SystemControlTransparentBrush`    |
 | `FabTertiaryStateOverlayBackgroundFocused`      | `SolidColorBrush` | `SystemControlTransparentBrush`    |
 | `FabTertiaryStateOverlayBackgroundPressed`      | `SolidColorBrush` | `SystemControlTransparentBrush`    |
-| `FabTertiaryStateOverlayBackgroundDisabled`     | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `FabTertiaryStateOverlayBackgroundDisabled`     | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |

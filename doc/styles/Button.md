@@ -34,7 +34,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `ElevatedButtonIconForegroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |
 | `ElevatedButtonIconForegroundPointerFocused`          | `SolidColorBrush` | `PrimaryBrush`                     |
 | `ElevatedButtonBackground`                            | `SolidColorBrush` | `SurfaceBrush`                     |
-| `ElevatedButtonBackgroundDisabled`                    | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `ElevatedButtonBackgroundDisabled`                    | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 | `ElevatedButtonBackgroundPointerOver`                 | `SolidColorBrush` | `SurfaceBrush`                     |
 | `ElevatedButtonBackgroundPressed`                     | `SolidColorBrush` | `SurfaceBrush`                     |
 | `ElevatedButtonBackgroundFocused`                     | `SolidColorBrush` | `SurfaceBrush`                     |
@@ -64,7 +64,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FilledButtonBackground`                              | `SolidColorBrush` | `PrimaryBrush`                     |
 | `FilledButtonBackgroundPointerOver`                   | `SolidColorBrush` | `PrimaryBrush`                     |
 | `FilledButtonBackgroundPressed`                       | `SolidColorBrush` | `PrimaryBrush`                     |
-| `FilledButtonBackgroundDisabled`                      | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `FilledButtonBackgroundDisabled`                      | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 | `FilledButtonBackgroundFocused`                       | `SolidColorBrush` | `PrimaryBrush`                     |
 | `FilledButtonBackgroundPointerFocused`                | `SolidColorBrush` | `PrimaryBrush`                     |
 | `FilledButtonBorderBrush`                             | `SolidColorBrush` | `SystemControlTransparentBrush`    |
@@ -92,7 +92,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FilledTonalButtonBackground`                         | `SolidColorBrush` | `SecondaryContainerBrush`          |
 | `FilledTonalButtonBackgroundPointerOver`              | `SolidColorBrush` | `SecondaryContainerBrush`          |
 | `FilledTonalButtonBackgroundPressed`                  | `SolidColorBrush` | `SecondaryContainerBrush`          |
-| `FilledTonalButtonBackgroundDisabled`                 | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `FilledTonalButtonBackgroundDisabled`                 | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 | `FilledTonalButtonBackgroundFocused`                  | `SolidColorBrush` | `SecondaryContainerBrush`          |
 | `FilledTonalButtonBackgroundPointerFocused`           | `SolidColorBrush` | `SecondaryContainerBrush`          |
 | `FilledTonalButtonBorderBrush`                        | `SolidColorBrush` | `SystemControlTransparentBrush`    |
@@ -120,7 +120,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `OutlinedButtonBackground`                            | `SolidColorBrush` | `SystemControlTransparentBrush`    |
 | `OutlinedButtonBackgroundPointerOver`                 | `SolidColorBrush` | `SystemControlTransparentBrush`    |
 | `OutlinedButtonBackgroundPressed`                     | `SolidColorBrush` | `SystemControlTransparentBrush`    |
-| `OutlinedButtonBackgroundDisabled`                    | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`        |
+| `OutlinedButtonBackgroundDisabled`                    | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 | `OutlinedButtonBackgroundFocused`                     | `SolidColorBrush` | `SystemControlTransparentBrush`    |
 | `OutlinedButtonBackgroundPointerFocused`              | `SolidColorBrush` | `SystemControlTransparentBrush`    |
 | `OutlinedButtonBorderBrush`                           | `SolidColorBrush` | `OutlineBrush`                     |

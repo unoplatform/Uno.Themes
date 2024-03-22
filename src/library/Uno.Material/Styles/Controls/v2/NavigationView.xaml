@@ -26,7 +26,7 @@
         Important Note: Beside the AnimatedIcon problem that can be bypassed, the prerelease version also introduces another problem with
         the layout of the back/close/toggle/nvi icons which we are unable to fix here (incompatible MinWidth+Margin injected from the control implementation).
         Because of that, the consuming app should be at least on 2.6.0, which shouldn't be a problem as recent unoapp template has been on 2.6.2 for a while.
-        
+
         Important Changes:
         - removed AnimatedIcon due to missing api support from Microsoft.UI.Xaml 2.6.0 (at least stable)
         ____^ we are also version locked to pre-release due to ProgressRing requiring the access to (Ind|D)eterminateSource
@@ -165,7 +165,7 @@
             <StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OnSurfaceBrush" />
             <StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
             <StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
-            <StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
             <StaticResource x:Key="NavigationViewButtonBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
@@ -177,7 +177,7 @@
             <StaticResource x:Key="NavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="NavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="NavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -219,7 +219,7 @@
             <StaticResource x:Key="TopNavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -353,7 +353,7 @@
             <StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OnSurfaceBrush" />
             <StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
             <StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
-            <StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
             <StaticResource x:Key="NavigationViewButtonBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
@@ -365,7 +365,7 @@
             <StaticResource x:Key="NavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="NavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="NavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -407,7 +407,7 @@
             <StaticResource x:Key="TopNavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -541,7 +541,7 @@
             <StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OnSurfaceBrush" />
             <StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
             <StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
-            <StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
             <StaticResource x:Key="NavigationViewButtonBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewButtonBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
@@ -553,7 +553,7 @@
             <StaticResource x:Key="NavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="NavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="NavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />
@@ -595,7 +595,7 @@
             <StaticResource x:Key="TopNavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
-            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledLowBrush" />
+            <StaticResource x:Key="TopNavigationViewItemBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelected" ResourceKey="PrimarySelectedBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlTransparentBrush" />
             <StaticResource x:Key="TopNavigationViewItemBackgroundSelectedPressed" ResourceKey="SystemControlTransparentBrush" />

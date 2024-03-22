@@ -37,9 +37,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("PrimaryDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "PrimaryDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryDisabledLowBrush");
-
 			public static class Inverse
 			{
 				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseBrush")]
@@ -68,9 +65,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("PrimaryInverseDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryInverseDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryInverseDisabledLowBrush");
 			}
 
 			public static class Container
@@ -101,9 +95,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("PrimaryContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryContainerDisabledLowBrush");
 			}
 
 			public static class VariantLight
@@ -134,9 +125,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("PrimaryVariantLightDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantLightDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryVariantLightDisabledLowBrush");
 			}
 
 			public static class VariantDark
@@ -167,9 +155,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("PrimaryVariantDarkDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "PrimaryVariantDarkDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("PrimaryVariantDarkDisabledLowBrush");
 			}
 		}
 
@@ -202,9 +187,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("OnPrimaryDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "OnPrimaryDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("OnPrimaryDisabledLowBrush");
-
 			public static class Container
 			{
 				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerBrush")]
@@ -233,9 +215,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("OnPrimaryContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "OnPrimaryContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("OnPrimaryContainerDisabledLowBrush");
 			}
 		}
 
@@ -268,9 +247,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("SecondaryDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "SecondaryDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryDisabledLowBrush");
-
 			public static class Container
 			{
 				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerBrush")]
@@ -299,9 +275,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("SecondaryContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryContainerDisabledLowBrush");
 			}
 
 			public static class VariantLight
@@ -332,9 +305,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("SecondaryVariantLightDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantLightDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryVariantLightDisabledLowBrush");
 			}
 
 			public static class VariantDark
@@ -365,9 +335,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("SecondaryVariantDarkDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "SecondaryVariantDarkDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("SecondaryVariantDarkDisabledLowBrush");
 			}
 		}
 
@@ -400,9 +367,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("OnSecondaryDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "OnSecondaryDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("OnSecondaryDisabledLowBrush");
-
 			public static class Container
 			{
 				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerBrush")]
@@ -430,9 +394,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("OnSecondaryContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSecondaryContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("OnSecondaryContainerDisabledLowBrush");
 			}
 		}
 
@@ -465,9 +426,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("TertiaryDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "TertiaryDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("TertiaryDisabledLowBrush");
-
 			public static class Container
 			{
 				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerBrush")]
@@ -496,9 +454,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("TertiaryContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "TertiaryContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("TertiaryContainerDisabledLowBrush");
 			}
 		}
 
@@ -531,9 +486,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("OnTertiaryDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "OnTertiaryDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("OnTertiaryDisabledLowBrush");
-
 			public static class Container
 			{
 				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerBrush")]
@@ -562,9 +514,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("OnTertiaryContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "OnTertiaryContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("OnTertiaryContainerDisabledLowBrush");
 			}
 		}
 
@@ -597,9 +546,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("ErrorDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "ErrorDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("ErrorDisabledLowBrush");
-
 			public static class Container
 			{
 				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerBrush")]
@@ -628,9 +574,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("ErrorContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "ErrorContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("ErrorContainerDisabledLowBrush");
 			}
 		}
 
@@ -663,9 +606,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("OnErrorDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "OnErrorDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("OnErrorDisabledLowBrush");
-
 			public static class Container
 			{
 				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerBrush")]
@@ -694,9 +634,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("OnErrorContainerDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "OnErrorContainerDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("OnErrorContainerDisabledLowBrush");
 			}
 		}
 
@@ -728,9 +665,6 @@ partial class Theme
 
 			[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("BackgroundDisabledBrush");
-
-			[ResourceKeyDefinition(typeof(Brush), "BackgroundDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("BackgroundDisabledLowBrush");
 		}
 
 		public static class OnBackground
@@ -761,9 +695,6 @@ partial class Theme
 
 			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("OnBackgroundDisabledBrush");
-
-			[ResourceKeyDefinition(typeof(Brush), "OnBackgroundDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("OnBackgroundDisabledLowBrush");
 		}
 
 		public static class Surface
@@ -795,9 +726,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("SurfaceDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "SurfaceDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("SurfaceDisabledLowBrush");
-
 			public static class Variant
 			{
 				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantBrush")]
@@ -826,9 +754,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("SurfaceVariantDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceVariantDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("SurfaceVariantDisabledLowBrush");
 			}
 
 			public static class Inverse
@@ -859,9 +784,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("SurfaceInverseDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "SurfaceInverseDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("SurfaceInverseDisabledLowBrush");
 			}
 		}
 
@@ -894,9 +816,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("OnSurfaceDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "OnSurfaceDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("OnSurfaceDisabledLowBrush");
-
 			public static class Variant
 			{
 				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantBrush")]
@@ -925,9 +844,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("OnSurfaceVariantDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceVariantDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("OnSurfaceVariantDisabledLowBrush");
 			}
 
 			public static class Inverse
@@ -958,9 +874,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("OnSurfaceInverseDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "OnSurfaceInverseDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("OnSurfaceInverseDisabledLowBrush");
 			}
 		}
 
@@ -993,9 +906,6 @@ partial class Theme
 			[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledBrush")]
 			public static ThemeResourceKey<Brush> Disabled => new("OutlineDisabledBrush");
 
-			[ResourceKeyDefinition(typeof(Brush), "OutlineDisabledLowBrush")]
-			public static ThemeResourceKey<Brush> DisabledLow => new("OutlineDisabledLowBrush");
-
 			public static class Variant
 			{
 				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantBrush")]
@@ -1024,9 +934,6 @@ partial class Theme
 
 				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDisabledBrush")]
 				public static ThemeResourceKey<Brush> Disabled => new("OutlineVariantDisabledBrush");
-
-				[ResourceKeyDefinition(typeof(Brush), "OutlineVariantDisabledLowBrush")]
-				public static ThemeResourceKey<Brush> DisabledLow => new("OutlineVariantDisabledLowBrush");
 			}
 		}
 	}

@@ -114,7 +114,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `NavigationViewButtonForeground`                              | `SolidColorBrush` | `OnSurfaceBrush`                                  |
 | `NavigationViewButtonForegroundPointerOver`                   | `SolidColorBrush` | `OnSurfaceBrush`                                  |
 | `NavigationViewButtonForegroundPressed`                       | `SolidColorBrush` | `OnSurfaceBrush`                                  |
-| `NavigationViewButtonForegroundDisabled`                      | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`                       |
+| `NavigationViewButtonForegroundDisabled`                      | `SolidColorBrush` | `OnSurfaceDisabledBrush`                       |
 | `NavigationViewButtonBackground`                              | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
 | `NavigationViewButtonBackgroundPointerOver`                   | `SolidColorBrush` | `PrimaryHoverBrush`                               |
 | `NavigationViewButtonBackgroundPressed`                       | `SolidColorBrush` | `PrimaryPressedBrush`                             |
@@ -123,7 +123,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `NavigationViewItemBackground`                                | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
 | `NavigationViewItemBackgroundPointerOver`                     | `SolidColorBrush` | `PrimaryHoverBrush`                               |
 | `NavigationViewItemBackgroundPressed`                         | `SolidColorBrush` | `PrimaryPressedBrush`                             |
-| `NavigationViewItemBackgroundDisabled`                        | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`                       |
+| `NavigationViewItemBackgroundDisabled`                        | `SolidColorBrush` | `OnSurfaceDisabledBrush`                       |
 | `NavigationViewItemBackgroundSelected`                        | `SolidColorBrush` | `PrimarySelectedBrush`                            |
 | `NavigationViewItemBackgroundSelectedPointerOver`             | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
 | `NavigationViewItemBackgroundSelectedPressed`                 | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
@@ -158,7 +158,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `TopNavigationViewItemBackground`                             | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
 | `TopNavigationViewItemBackgroundPointerOver`                  | `SolidColorBrush` | `PrimaryHoverBrush`                               |
 | `TopNavigationViewItemBackgroundPressed`                      | `SolidColorBrush` | `PrimaryPressedBrush`                             |
-| `TopNavigationViewItemBackgroundDisabled`                     | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`                       |
+| `TopNavigationViewItemBackgroundDisabled`                     | `SolidColorBrush` | `OnSurfaceDisabledBrush`                       |
 | `TopNavigationViewItemBackgroundSelected`                     | `SolidColorBrush` | `PrimarySelectedBrush`                            |
 | `TopNavigationViewItemBackgroundSelectedPointerOver`          | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
 | `TopNavigationViewItemBackgroundSelectedPressed`              | `SolidColorBrush` | `SystemControlTransparentBrush`                   |

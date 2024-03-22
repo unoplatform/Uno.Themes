@@ -91,6 +91,18 @@ After:
 </Page>
 ```
 
+### Opacity and brushes
+
+The opacity values of certain brushes has been adjusted to better align with the Figma design file:
+
+| Opacity variant | Old Value | New Value |
+|-----------------|-----------|-----------|
+| Medium          | 0.54      | 0.64      |
+| Disabled        | 0.38      | 0.12      |
+| DisabledLow     | 0.12      | *removed* |
+
+Existing explicit references to `-DisabledLow` resources should now be updated to use `-Disabled`.
+
 ### Resources
 
 Certain Lightweight Styling resource keys have been edited to align with those coming from `Microsoft.UI.Xaml`.
