@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
 	<PropertyGroup>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
@@ -26,6 +26,8 @@
 		</Otherwise>
 	</Choose>
 
+	<!-- NOTE: These two conditionals ONLY work under Uno targets and not Windows Desktop so they need to be used within the context of not_win or finer constraints -->
+	<!-- Make sure to add these aliases to the mc:Ignorable when using -->
 	<Choose>
 		<When Condition="'$(FrameworkLineage)'=='UWP'">
 			<ItemGroup>
