@@ -6,14 +6,18 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:uwp="http://uno.ui/uwp"
+					xmlns:winui="http://uno.ui/winui"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					mc:Ignorable="d not_win lottie_not_win">
+					mc:Ignorable="d not_win lottie_not_win uwp winui">
 	<ResourceDictionary.MergedDictionaries>
 		<not_win:ResourceDictionary>
 			<lottie_not_win:LottieVisualSource x:Key="MaterialDeterminateAnimation_Uno"
-											   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialDeterminate.json" />
+											   uwp:UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialDeterminate.json"
+											   winui:UriSource="embedded://Uno.Material.WinUI/Uno.Material.WinUI.Assets.MaterialDeterminate.json" />
 			<lottie_not_win:LottieVisualSource x:Key="MaterialIndeterminateAnimation_Uno"
-											   UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialIndeterminate.json" />
+											   uwp:UriSource="embedded://Uno.Material/Uno.Material.Assets.MaterialIndeterminate.json"
+											   winui:UriSource="embedded://Uno.Material.WinUI/Uno.Material.WinUI.Assets.MaterialIndeterminate.json" />
 		</not_win:ResourceDictionary>
 	</ResourceDictionary.MergedDictionaries>
 

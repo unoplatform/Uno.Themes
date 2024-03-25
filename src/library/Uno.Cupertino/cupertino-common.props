@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
 	<PropertyGroup>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<DebugSymbols>true</DebugSymbols>
@@ -22,6 +22,29 @@
 			<ItemGroup>
 				<IncludeXamlNamespaces Include="not_mobile" />
 				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<!-- NOTE: These two conditionals ONLY work under Uno targets and not Windows Desktop so they need to be used within the context of not_win or finer constraints -->
+	<!-- Make sure to add these aliases to the mc:Ignorable when using -->
+	<Choose>
+		<When Condition="'$(FrameworkLineage)'=='UWP'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="uwp" />
+				<ExcludeXamlNamespaces Include="winui" />
+			</ItemGroup>
+		</When>
+		<When Condition="'$(FrameworkLineage)'=='WinUI'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="winui" />
+				<ExcludeXamlNamespaces Include="uwp" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<ExcludeXamlNamespaces Include="winui" />
+				<ExcludeXamlNamespaces Include="uwp" />
 			</ItemGroup>
 		</Otherwise>
 	</Choose>
