@@ -13,8 +13,8 @@
     exclude:
     - .github/
     # don't trigger the CI if only docs files are changed
-    - doc/*
-    - '**/*.md'
+    #- doc/*
+    #- '**/*.md'
 
 pr: 
   branches:
@@ -31,8 +31,8 @@ pr:
     exclude:
     - .github/
     # don't trigger the CI if only docs files are changed
-    - doc/*
-    - '**/*.md'
+    #- doc/*
+    #- '**/*.md'
 
 variables:
   # Path where packages (nuget or app packages) will be copied to.
@@ -49,6 +49,55 @@ variables:
   # AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
 
 stages:
+- stage: DetermineChanges
+  jobs:
+  - job: EvaluateChanges
+    steps:
+    - checkout: self
+    - script: |
+        echo "Analyzing changes to determine if they are documentation only..."
+        
+        # Determine if this is a PR build or a push build and set the base commit accordingly
+        if [ "$(Build.Reason)" == "PullRequest" ]; then
+          echo "This is a PR build."
+          # Fetch the target branch of the PR
+          git fetch origin $(System.PullRequest.TargetBranch)
+          # Use the merge-base command to find the base commit
+          BASE_COMMIT=$(git merge-base HEAD FETCH_HEAD)
+        elif [ "$(Build.Reason)" == "Manual" ] && [ -n "$(Build.SourceVersion)" ]; then
+          echo "This is a manual build for a specific commit."
+          # Use the specific commit that was manually triggered
+          BASE_COMMIT=$(Build.SourceVersion)^
+        else
+          echo "This is a push build."
+          # For a push, compare to the previous commit
+          BASE_COMMIT=HEAD~
+        fi
+        
+        echo "Base commit for comparison: $BASE_COMMIT"
+        
+        # Initialize DOC_ONLY_CHANGES to true
+        DOC_ONLY_CHANGES=true
+        
+        # Check for non-doc changes
+        CHANGED_FILES=$(git diff --name-only $BASE_COMMIT HEAD)
+        for FILE in $CHANGED_FILES; do
+          if [[ ! "$FILE" == "doc/*" && ! "$FILE" == "*.md" ]]; then
+            DOC_ONLY_CHANGES=false
+            break
+          fi
+        done
+        
+        if $DOC_ONLY_CHANGES; then
+          echo "The changes are doc-only."
+        else
+          echo "The changes include more than just documentation."
+        fi
+        
+        # Set pipeline variable based on whether changes are doc only
+        echo "##vso[task.setvariable variable=docOnlyChanges]$DOC_ONLY_CHANGES"
+      displayName: 'Check for Doc Only Changes'
+
 - stage: Validations
   displayName: Validations
   jobs:
@@ -56,11 +105,15 @@ stages:
 
 - stage: Packages
   dependsOn: Validations
+  # don't trigger the following stage if changes are doc only
+  condition: ne(variables['docOnlyChanges'], 'true')
   jobs:
   - template: build/stage-build-packages.yml
 
 - stage: Build_Samples
   dependsOn: Validations
+  # don't trigger the following stage if changes are doc only
+  condition: ne(variables['docOnlyChanges'], 'true')
   jobs:
     - template: build/stage-build-ios.yml
     - template: build/stage-build-android.yml
