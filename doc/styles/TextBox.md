@@ -57,11 +57,11 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `OutlinedTextBoxPlaceholderForegroundPointerOver` | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
 | `OutlinedTextBoxPlaceholderForegroundFocused`     | `SolidColorBrush` | `PrimaryBrush`                |
 | `OutlinedTextBoxPlaceholderForegroundDisabled`    | `SolidColorBrush` | `OnSurfaceLowBrush`           |
-| `OutlinedTextBoxFontFamily`                       | `FontFamily`      | `MaterialMediumFontFamily`    |
+| `OutlinedTextBoxFontFamily`                       | `FontFamily`      | `BodyLargeFontFamily`         |
 | `OutlinedTextBoxFontWeight`                       | `String`          | `BodyLargeFontWeight`         |
 | `OutlinedTextBoxFontSize`                         | `Double`          | `BodyLargeFontSize`           |
 | `OutlinedTextBoxCharacterSpacing`                 | `Int32`           | `BodyLargeCharacterSpacing`   |
-| `FilledTextBoxFontFamily`                         | `FontFamily`      | `MaterialMediumFontFamily`    |
+| `FilledTextBoxFontFamily`                         | `FontFamily`      | `BodyLargeFontFamily`         |
 | `FilledTextBoxFontWeight`                         | `String`          | `BodyLargeFontWeight`         |
 | `FilledTextBoxFontSize`                           | `Double`          | `BodyLargeFontSize`           |
 | `FilledTextBoxCharacterSpacing`                   | `Int32`           | `BodyLargeCharacterSpacing`   |
