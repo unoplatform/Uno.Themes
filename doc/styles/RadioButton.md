@@ -41,7 +41,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `RadioButtonStateCircleOpacityPointerOver`        | `Double`          | `HoverOpacity`                  |
 | `RadioButtonStateCircleOpacityPressed`            | `Double`          | `PressedOpacity`                |
 | `RadioButtonStateCircleOpacityFocused`            | `Double`          | `FocusedOpacity`                |
-| `RadioButtonFontFamily`                           | `FontFamily`      | `MaterialMediumFontFamily`      |
+| `RadioButtonFontFamily`                           | `FontFamily`      | `BodySmallFontFamily`           |
 | `RadioButtonFontWeight`                           | `String`          | `BodySmallFontWeight`           |
 | `RadioButtonFontSize`                             | `Double`          | `BodySmallFontSize`             |
 | `RadioButtonCharacterSpacing`                     | `Int32`           | `BodySmallCharacterSpacing`     |

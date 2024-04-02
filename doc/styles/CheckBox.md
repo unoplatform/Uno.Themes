@@ -76,7 +76,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `CheckBoxCheckBackgroundFillIndeterminatePointerOver`   | `SolidColorBrush` | `PrimaryBrush`                                                                                       |
 | `CheckBoxCheckBackgroundFillIndeterminatePressed`       | `SolidColorBrush` | `PrimaryBrush`                                                                                       |
 | `CheckBoxCheckBackgroundFillIndeterminateDisabled`      | `SolidColorBrush` | `OnSurfaceLowBrush`                                                                                  |
-| `CheckBoxFontFamily`                                    | `FontFamily`      | `MaterialMediumFontFamily`                                                                           |
+| `CheckBoxFontFamily`                                    | `FontFamily`      | `BodySmallFontFamily`                                                                                |
 | `CheckBoxFontWeight`                                    | `String`          | `BodySmallFontWeight`                                                                                |
 | `CheckBoxFontSize`                                      | `Double`          | `BodySmallFontSize`                                                                                  |
 | `CheckBoxCharacterSpacing`                              | `Int32`           | `BodySmallCharacterSpacing`                                                                          |
