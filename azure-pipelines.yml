@@ -7,13 +7,7 @@
       - legacy/*
       - feature/*
 
-  paths:
-    include:
-    - '/'
-    exclude:
-    - .github/
-
-pr:
+pr: 
   branches:
     include:
       - master
@@ -21,12 +15,6 @@ pr:
       - release/stable/*
       - legacy/*
       - feature/*
-
-  paths:
-    include:
-    - '/'
-    exclude:
-    - .github/
 
 variables:
   # Path where packages (nuget or app packages) will be copied to.
