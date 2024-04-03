@@ -35,7 +35,7 @@ jobs:
       }
 
       foreach ($file in $changedFiles -split "`n") {
-          $isDoc = $file.StartsWith("doc/") -or $file -match "^.*/?[^/]*\.md$" -or $file.StartsWith(".github/")
+          $isDoc = $file.StartsWith("doc/") -or ($file -match "^[^/]+\.md$") -or ($file -match "^\.github/.*\.md$")
           
           if ($isDoc) {
               $docFiles++
