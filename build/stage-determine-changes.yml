@@ -35,6 +35,10 @@ jobs:
       }
 
       foreach ($file in $changedFiles -split "`n") {
+        # Identifying changes as documentation if they occur:
+        # Within the doc folder, or
+        # Are Markdown files at the root level (with no subdirectories involved), or
+        # Are Markdown files within the .github folder (including its subdirectories)
           $isDoc = $file.StartsWith("doc/") -or ($file -match "^[^/]+\.md$") -or ($file -match "^\.github/.*\.md$")
           
           if ($isDoc) {
