@@ -55,12 +55,26 @@ stages:
   - template: build/stage-validations.yml
 
 - stage: Packages
+<<<<<<< HEAD
   dependsOn: Validations
+=======
+  displayName: Packages
+  dependsOn: Determine_Changes
+  # Don't trigger this stage if only docs files are changed
+  condition: ne(dependencies.Determine_Changes.outputs['evaluate_changes.DetermineChanges.docsOnly'], 'true')
+>>>>>>> c52a47ec (ci: Adjustments for non docs only stages)
   jobs:
   - template: build/stage-build-packages.yml
 
 - stage: Build_Samples
+<<<<<<< HEAD
   dependsOn: Validations
+=======
+  displayName: Build Samples
+  dependsOn: Determine_Changes
+  # Don't trigger this stage if only docs files are changed
+  condition: ne(dependencies.Determine_Changes.outputs['evaluate_changes.DetermineChanges.docsOnly'], 'true')
+>>>>>>> c52a47ec (ci: Adjustments for non docs only stages)
   jobs:
     - template: build/stage-build-ios.yml
     - template: build/stage-build-android.yml
