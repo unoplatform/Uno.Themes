@@ -37,6 +37,11 @@ steps:
       version: ${{ parameters.DotNetVersion }}
       includePreviewVersions: true
 
+  - powershell: |
+      dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org | Out-Null
+      $global:LASTEXITCODE = 0
+    displayName: Adjust nuget.org source
+
   - template: jdk-setup.yml
     
   - powershell: |
