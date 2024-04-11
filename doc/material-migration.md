@@ -2,15 +2,15 @@
 uid: Uno.Themes.Material.Migration
 ---
 
-# Updating to Uno.Material
+# Upgrading Uno.Material
 
-## Updating to Uno.Themes v5.0
+## Upgrading to Uno Themes v5.0
 
-The version 5.0.0 of Uno.Themes introduced breaking changes on Converters and Control Extensions. If you use one of those items in your project, you will need to do some changes in order to keep using it.
+Version 5.0.0 of Uno Themes introduces breaking changes to the library. Below are the changes that have been made:
 
 ### Converters
 
-All Converters were moved to Uno.Themes library, and the new `namespace` is `Uno.Themes`.
+All Converters were moved to the `Uno.Themes` library, and the new `namespace` is `Uno.Themes`.
 
 Before:
 
@@ -57,7 +57,7 @@ Some `Converters` have been renamed, you can find the `Old Name` and `New Name` 
 
 ### Control Extensions
 
-All Controls Extensions were moved to `Uno.Themes` library, and the new `namespace` is `Uno.Themes`.
+All Controls Extensions were moved to the `Uno.Themes` library, and the new namespace is `Uno.Themes`.
 
 Before:
 
@@ -122,11 +122,7 @@ Certain Lightweight Styling resource keys have been edited to align with those c
 | `SecondaryRatingControlForegroundPointerOverSelected`   | `SecondaryRatingControlSelectedForegroundPointerOver`   |
 | `SecondaryRatingControlForegroundDisabledSelected`      | `SecondaryRatingControlSelectedForegroundDisabled`      |
 
-### Conclusion
-
-With that, you should be able to update and get it working again for your application. If you've any other issues during the migration, don't hesitate to open an issue in [Uno.Themes GitHub repository](https://github.com/unoplatform/Uno.Themes).
-
-## Updating to Uno.Material v3
+## Upgrading to Uno.Material v3
 
 Uno.Material v3 (not to be confused with [Material Design 3](https://m3.material.io/) from Google) introduces support for [Lightweight Styling](lightweight-styling.md) as well as some breaking changes to the default style keys for some controls. Refer to the tables below for the changes that have been made within Uno.Material.
 
@@ -462,7 +458,7 @@ Along with the above list of new resource keys, below is a list of the resource 
 | `MaterialToggleSwitchOnButtonBrush`        | ***REMOVED*** | `PrimaryBrush`                        |
 | `MaterialToggleSwitchHeaderMargin`         | ***REMOVED*** | 0,0,12,0                              |
 
-## Updating to Uno.Material v2
+## Upgrading to Uno.Material v2
 
 Starting with version 2.0.0 of the [Uno.Material](https://www.nuget.org/packages/Uno.Material/2.0.0) and [Uno.Material.WinUI](https://www.nuget.org/packages/Uno.Material.WinUI/2.0.0) packages, users can now take advantage of the new [Material Design 3](https://m3.material.io/) design system from Google.
 Along with the new Material Design 3 styles, our Uno.Material NuGet packages will continue to support the previous Material Design 2 styles. In order to achieve this backward compatibility, we have had to make some changes to the way Uno.Material is initialized within your `App.xaml`.
