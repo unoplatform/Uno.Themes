@@ -286,7 +286,7 @@ Use this when you want to manually override the default color palette from the U
 
 By default, Uno Material comes pre-packaged with the [Roboto](https://fonts.google.com/specimen/Roboto) font families and automatically includes them in your application. Upon installation of the Uno Material package, you will have the following resources available: `MaterialLightFontFamily`, `MaterialRegularFontFamily`, and `MaterialMediumFontFamily`.
 
-If you would like Uno Material to use a different font, you can override the default font families following these steps:
+If you would like Uno Material to use a different font, you can override the default font families by following these steps:
 
 1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html).
 2. Add a new Resource Dictionary named `MaterialFontsOverride.xaml` to the application project, for example, under `Styles/Application`.

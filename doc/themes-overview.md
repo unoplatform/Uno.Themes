@@ -26,7 +26,7 @@ It contains three libraries:
 
 Both `Material` and `Cupertino` libraries help you style your application with a few lines of code including:
 
-- Color system for both Light and Dark theme
+- Color system for both Light and Dark themes
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
 
 ## Fluent Controls Styles
