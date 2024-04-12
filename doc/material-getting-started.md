@@ -36,6 +36,9 @@ Initialization of the Uno Material resources is handled by the specialized `Mate
 
 ### Creating a new project with Uno Material
 
+> [!NOTE]  
+> Make sure to setup your environment first by [following our instructions](xref:Uno.GetStarted.vs2022).
+
 #### [**Wizard**](#tab/wizard)
 
 1. Follow the steps in the [Getting Started with Visual Studio](xref:Uno.GettingStarted.CreateAnApp.VS2022#create-the-app) instructions to launch the Uno Platform Template Wizard.

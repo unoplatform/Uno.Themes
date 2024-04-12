@@ -12,6 +12,9 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
 
 ## Getting Started
 
+> [!NOTE]
+> Make sure to setup your environment first by [following our instructions](xref:Uno.GetStarted.vs2022).
+
 ### Creating a new project with Uno Cupertino
 
 1. Install the [`dotnet new` CLI templates](xref:Uno.GetStarted.dotnet-new) with:
