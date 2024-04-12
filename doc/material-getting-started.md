@@ -143,6 +143,8 @@ Depending on the type of project template that the Uno Platform application was 
 
 ## Customization
 
+The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
+
 ### Color Overrides using _Material Theme Builder_ and DSP format
 
 It is possible to use the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) to generate a custom color palette derived from your own basic colors. The generated palette is provided in the [DSP format](https://m3.material.io/styles/color/the-color-system/color-dsp) and can be used to override the default Uno Material colors.
