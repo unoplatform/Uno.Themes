@@ -44,7 +44,7 @@ Initialization of the Uno Material resources is handled by the specialized `Mate
 1. Follow the steps in the [Getting Started with Visual Studio](xref:Uno.GettingStarted.CreateAnApp.VS2022#create-the-app) instructions to launch the Uno Platform Template Wizard.
 2. Select `Material` under the `Theme` section.
 
-    ![](assets/material-wizard.png)
+    ![Material selection in Wizard](assets/material-wizard.png)
 
 #### [**CLI**](#tab/cli)
 
