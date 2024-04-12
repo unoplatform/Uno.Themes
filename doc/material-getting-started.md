@@ -36,14 +36,14 @@ Initialization of the Uno Material resources is handled by the specialized `Mate
 
 ### Creating a new project with Uno Material
 
-# [**Wizard**](#tab/wizard)
+#### [**Wizard**](#tab/wizard)
 
 1. Follow the steps in the [Getting Started with Visual Studio](xref:Uno.GettingStarted.CreateAnApp.VS2022#create-the-app) instructions to launch the Uno Platform Template Wizard.
 2. Select `Material` under the `Theme` section.
 
     ![](assets/material-wizard.png)
 
-# [**CLI**](#tab/cli)
+#### [**CLI**](#tab/cli)
 
 1. Install the [`dotnet new` CLI templates](xref:Uno.GetStarted.dotnet-new) with:
 
@@ -63,7 +63,7 @@ dotnet new unoapp -o UnoMaterialApp -theme material
 
 Depending on the type of project template that the Uno Platform application was created with, follow the instructions below to install Uno Material.
 
-# [**Single Project Template**](#tab/singleproj)
+#### [**Single Project Template**](#tab/singleproj)
 
 1. Edit your project file (`PROJECT_NAME.csproj`) and add `Material` to the list of `UnoFeatures`:
 
@@ -86,7 +86,7 @@ Depending on the type of project template that the Uno Platform application was 
     </Application.Resources>
     ```
 
-# [**Multi-Head Project Template**](#tab/multihead)
+#### [**Multi-Head Project Template (Legacy)**](#tab/multihead)
 
 1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
 2. Install the [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI)
@@ -103,7 +103,7 @@ Depending on the type of project template that the Uno Platform application was 
     </ResourceDictionary>
     ```
 
-# [**Shared Project (.shproj) Template**](#tab/shproj)
+#### [**Shared Project (.shproj) Template (Legacy)**](#tab/shproj)
 
 1. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
      - The [`Uno.Material`](https://www.nuget.org/packages/Uno.Material/) package when targetting Xamarin/UWP
@@ -316,7 +316,7 @@ If you would like Uno Material to use a different font, you can override the def
 Uno Material also has support for C# Markup through a [Uno.Material.WinUI.Markup](https://www.nuget.org/packages/Uno.Material.WinUI.Markup) NuGet Package.
 
 To get started with Uno Material in your C# Markup application, add the `Uno.Material.WinUI.Markup` NuGet package to your **App Code Library** project and your platform heads.
-Then, add the following code to your `App.cs`:
+Then, add the following code to your `App.xaml.cs`:
 
 ```csharp
 using Uno.Material.Markup;

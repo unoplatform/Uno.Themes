@@ -30,7 +30,7 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
 
 Depending on the type of project template that the Uno Platform application was created with, follow the instructions below to install Uno Cupertino.
 
-# [**Single Project Template**](#tab/singleproj)
+#### [**Single Project Template**](#tab/singleproj)
 
 1. Edit your project file (`PROJECT_NAME.csproj`) and add `Cupertino` to the list of `UnoFeatures`:
 
@@ -55,7 +55,7 @@ Depending on the type of project template that the Uno Platform application was 
     </Application.Resources>
     ```
 
-# [**Multi-Head Project Template**](#tab/multihead)
+#### [**Multi-Head Project Template (Legacy)**](#tab/multihead)
 
 1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
 1. Install the [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI)
@@ -73,7 +73,7 @@ Depending on the type of project template that the Uno Platform application was 
     </ResourceDictionary>
     ```
 
-# [**Shared Project (.shproj) Template**](#tab/shproj)
+#### [**Shared Project (.shproj) Template (Legacy)**](#tab/shproj)
 
 1. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
     - The [`Uno.Cupertino`](https://www.nuget.org/packages/Uno.Cupertino/) package when targetting Xamarin/UWP
