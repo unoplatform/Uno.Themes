@@ -23,7 +23,7 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
 
 1. In only the `UWP` head project of your solution, if you have one, install the [WinUI 2 NuGet package](https://www.nuget.org/packages/Microsoft.UI.Xaml). This step is the same as required for WinUI 2 UWP apps.
 
-1. Within the shared project used by all platform heads, add the `XamlControlsResources` resource dictionary to your application resources inside `App.xaml`. This step is the same as required for WinUI 2 UWP apps.
+1. Add the `XamlControlsResources` resource dictionary to your application resources inside `App.xaml`. This step is the same as required for WinUI 2 UWP apps.
 
     ```xml
         <Application>
@@ -48,5 +48,3 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
             </ResourceDictionary>
         </Application.Resources>
     ```
-
-1. In all platform head projects except UWP, the Fluent control styles require the Uno Fluent Assets icon font to display correctly. Follow [Uno Fluent UI assets documentation](https://platform.uno/docs/articles/uno-fluent-assets.html) to upgrade your app to use this font. This step is required because the Uno Platform uses a cross-platform ready default font within its styles different from UWP's *Segoe MDL2 Assets*.

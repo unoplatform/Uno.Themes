@@ -2,7 +2,7 @@
 uid: Uno.Themes.Cupertino.GetStarted
 ---
 
-# Uno.Cupertino
+# Uno Cupertino
 
 <p align="center">
   <img src="assets/cupertino-design-system.png" alt="Cupertino design system" />
@@ -13,33 +13,61 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
 ## Getting Started
 
 > [!NOTE]
-> As of [Uno Platform 4.7](https://platform.uno/blog/uno-platform-4-7-new-project-template-performance-improvements-and-more/), the solution template of an Uno app has changed. There is no longer a Shared project (.shproj), it has been replaced with a regular cross-platform library containing all user code files, referred to as the **App Code Library** project. This also implies that package references can be included in a single location without the previous need to include those in all project heads.
+> Make sure to setup your environment first by [following our instructions](xref:Uno.GetStarted.vs2022).
 
-### Creating a new project with Uno.Cupertino installed from command-line
+### Creating a new project with Uno Cupertino
 
-1. Install `dotnet new` templates with:
+1. Install the [`dotnet new` CLI templates](xref:Uno.GetStarted.dotnet-new) with:
 
-    ```dotnetcli
+    ```bash
     dotnet new install Uno.Templates
     ```
 
 2. Create a new application with:
 
-    ```dotnetcli
-    dotnet new unoapp -o AppName -theme cupertino
+    ```bash
+    dotnet new unoapp -o UnoCupertinoApp -theme cupertino
     ```
 
-### Installing Uno.Cupertino in existing project that uses class library
+### Installing Uno Cupertino in an existing project
+
+Depending on the type of project template that the Uno Platform application was created with, follow the instructions below to install Uno Cupertino.
+
+#### [**Single Project Template**](#tab/singleproj)
+
+1. Edit your project file (`PROJECT_NAME.csproj`) and add `Cupertino` to the list of `UnoFeatures`:
+
+    ```xml
+    <UnoFeatures>Cupertino</UnoFeatures>
+    ```
+
+2. Initialize the Cupertino resources in the `App.xaml`:
+
+    ```xml
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- Code ommitted of brevity -->
+
+                <uc:CupertinoColors xmlns="using:Uno.Cupertino" />
+                <uc:CupertinoFonts xmlns="using:Uno.Cupertino" />
+                <uc:CupertinoResources xmlns="using:Uno.Cupertino" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    ```
+
+#### [**Multi-Head Project Template (Legacy)**](#tab/multihead)
 
 1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
 1. Install the [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI)
-1. Add the following Cupertino resources `AppResources.xaml`:
+1. Add the following Cupertino resources to `AppResources.xaml`:
 
     ```xml
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
 
-        <!-- Load Uno.Cupertino resources -->
         <CupertinoColors xmlns="using:Uno.Cupertino" />
         <CupertinoFonts xmlns="using:Uno.Cupertino" />
         <CupertinoResources xmlns="using:Uno.Cupertino" />
@@ -48,25 +76,22 @@ Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interf
     </ResourceDictionary>
     ```
 
-### Installing Uno.Cupertino on previous versions of Uno Platform
+#### [**Shared Project (.shproj) Template (Legacy)**](#tab/shproj)
 
-If your application is based on the older solution template that includes a shared project (.shproj), follow these steps:
-
-1. Open an existing Uno project
-2. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
+1. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
     - The [`Uno.Cupertino`](https://www.nuget.org/packages/Uno.Cupertino/) package when targetting Xamarin/UWP
     - The [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI) package when targetting net6.0+/WinUI
 
-3. Select the following projects for installation:
+2. Select the following projects for installation:
     - `PROJECT_NAME.Wasm.csproj`
     - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, and `PROJECT_NAME.macOS.csproj` if you have an existing project)
     - `PROJECT_NAME.Skia.Gtk.csproj`
     - `PROJECT_NAME.Skia.WPF.csproj`
     - `PROJECT_NAME.Windows.csproj` (or `PROJECT_NAME.UWP.csproj` for existing projects)
-4. Add the following resources inside `App.xaml`:
+3. Add the following resources inside `App.xaml`:
 
     ```xml
-    <Application ...>
+    <Application>
         <Application.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -88,13 +113,16 @@ If your application is based on the older solution template that includes a shar
     </Application>
     ```
 
+---
+
 ## Customization
+
+The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
 
 ### Customize Color Palette
 
-1. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `CupertinoColorsOverride.xaml`
-2. Save the new override file within the **App Code Library**, for example, under `Style/Application`.
-3. Replace the content with:
+1. Add a new Resource Dictionary named `CupertinoColorsOverride.xaml` to the application project, for example, under `Styles/Application`.
+2. Replace the content with:
 
     ```xml
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -123,36 +151,35 @@ If your application is based on the older solution template that includes a shar
     </ResourceDictionary>
     ```
 
-4. In `AppResources.xaml`, update `<CupertinoColors />` with the override from the previous steps:
+3. In `App.xaml`, update `<CupertinoColors />` with the override from the previous steps:
 
     ```xml
     <CupertinoColors xmlns="using:Uno.Cupertino"
-                     OverrideSource="ms-appx:///PROJECT_NAME/Style/Application/CupertinoColorsOverride.xaml" />
+                     OverrideSource="ms-appx:///Styles/Application/CupertinoColorsOverride.xaml" />
     ```
 
 ### Change Default Font
 
-By default, Uno.Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno.Cupertino package, you will have a `CupertinoFontFamily` resource available.
+By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available.
 
-If you would like Uno.Cupertino to use a different font, you can override the default `FontFamily` following these steps:
+If you would like Uno Cupertino to use a different font, you can override the default `FontFamily` by following these steps:
 
 1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html).
-2. In the application's **App Code Library** project (`PROJECT_NAME.csproj`), add a new Resource Dictionary named `CupertinoFontsOverride.xaml`.
-3. Save the new override file within the **App Code Library**, for example, under `Style/Application`.
-4. Assuming the font file has been placed in the **App Code Library** within, for example, a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
+2. Add a new Resource Dictionary named `CupertinoFontsOverride.xaml` to the application project, for example, under `Styles/Application`.
+3. Assuming the font file has been placed in a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
 
     ```xml
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-        <FontFamily x:Key="CupertinoFontFamily">ms-appx:///PROJECT_NAME/Assets/Fonts/MyCustomFont.ttf</FontFamily>
+        <FontFamily x:Key="CupertinoFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf</FontFamily>
 
     </ResourceDictionary>
     ```
 
-5. In `AppResources.xaml`, update `<CupertinoFonts />` with the override from the previous steps:
+4. In the `App.xaml`, update `<CupertinoFonts />` with the override from the previous steps:
 
     ```xml
     <CupertinoFonts xmlns="using:Uno.Cupertino"
-                    OverrideSource="ms-appx:///PROJECT_NAME/Style/Application/CupertinoFontsOverride.xaml" />
+                    OverrideSource="ms-appx:///Styles/Application/CupertinoFontsOverride.xaml" />
     ```
