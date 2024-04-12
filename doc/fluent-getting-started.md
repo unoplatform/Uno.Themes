@@ -48,5 +48,3 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
             </ResourceDictionary>
         </Application.Resources>
     ```
-
-1. In all platform head projects except UWP, the Fluent control styles require the Uno Fluent Assets icon font to display correctly. Follow [Uno Fluent UI assets documentation](https://platform.uno/docs/articles/uno-fluent-assets.html) to upgrade your app to use this font. This step is required because the Uno Platform uses a cross-platform ready default font within its styles different from UWP's *Segoe MDL2 Assets*.
