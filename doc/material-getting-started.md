@@ -50,15 +50,15 @@ Initialization of the Uno Material resources is handled by the specialized `Mate
 
 1. Install the [`dotnet new` CLI templates](xref:Uno.GetStarted.dotnet-new) with:
 
-```bash
-dotnet new install Uno.Templates
-```
+    ```bash
+    dotnet new install Uno.Templates
+    ```
 
 2. Create a new application with:
 
-```bash
-dotnet new unoapp -o UnoMaterialApp -theme material
-```
+    ```bash
+    dotnet new unoapp -o UnoMaterialApp -theme material
+    ```
 
 ---
 
