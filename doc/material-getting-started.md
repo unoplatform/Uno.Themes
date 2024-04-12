@@ -318,7 +318,8 @@ If you would like Uno Material to use a different font, you can override the def
 
 Uno Material also has support for C# Markup through a [Uno.Material.WinUI.Markup](https://www.nuget.org/packages/Uno.Material.WinUI.Markup) NuGet Package.
 
-To get started with Uno Material in your C# Markup application, add the `Uno.Material.WinUI.Markup` NuGet package to your **App Code Library** project and your platform heads.
+To get started with Uno Material in your C# Markup application, add the `Uno.Material.WinUI.Markup` NuGet package to your application project.
+
 Then, add the following code to your `App.xaml.cs`:
 
 ```csharp
