@@ -16,16 +16,17 @@ uid: Uno.Themes.Overview
 
 ## Uno Themes Styles
 
-[Uno.Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons NuGet packages that can be added to any new or existing Uno solution.
+[Uno Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons NuGet packages that can be added to any new or existing Uno solution.
 
-It contains two libraries:
+It contains three libraries:
 
-- `Uno.Material` library is designed to help you use [Material Design 3](https://m3.material.io/)
-- `Uno.Cupertino` library is designed to help you use [Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines)
+- `Uno Themes`: a library that contains the base resources, extensions, and helper classes for the different design system libraries
+- `Uno Material`: a library that contains styles following the [Material 3](https://m3.material.io/) Design System
+- `Uno Cupertino`: a library that contains styles following the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines)
 
-Both libraries help you style your application with a few lines of code including:
+Both `Material` and `Cupertino` libraries help you style your application with a few lines of code including:
 
-- Color system for both Light and Dark theme
+- Color system for both Light and Dark themes
 - Styles for existing WinUI controls like Buttons, TextBox, etc.
 
 ## Fluent Controls Styles
