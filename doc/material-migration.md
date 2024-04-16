@@ -6,7 +6,7 @@ uid: Uno.Themes.Material.Migration
 
 ## Upgrading to Uno Themes v5
 
-The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following change have been made:
+The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following changes have been made:
 
 ### Converters
 
