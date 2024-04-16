@@ -4,13 +4,6 @@ uid: Uno.Themes.Control.Extensions
 
 # Control Extensions
 
-Starting on version 5.0.0 the `ControlExtensions` are available on the `Uno.Themes` namespace, so to use that in xaml you should add the following xmlns to your project:
-
-`xmlns:ut="using:Uno.Themes"`
-
-> [!INFO]
-> For more information about see our [migration docs](material-migration.md).
-
 ## Icon
 
 This feature allows for the addition of icon on the supported controls. Those icons could be any of the [`IconElement`](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.iconelement)s: `<BitmapIcon />`, `<FontIcon />`, `<PathIcon />`, or `<SymbolIcon />`.
@@ -114,4 +107,3 @@ The following control styles have support for elevation:
 | Control  | Supporting Styles     |
 |----------|-----------------------|
 | `Button` | `ElevatedButtonStyle` |
-|----------|-----------------------|

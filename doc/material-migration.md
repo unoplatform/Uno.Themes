@@ -2,21 +2,20 @@
 uid: Uno.Themes.Material.Migration
 ---
 
-# Upgrading Uno.Material
+# Upgrading Uno Material
 
-## Upgrading to Uno Themes v5.0
+## Upgrading to Uno Themes v5
 
-Version 5.0.0 of Uno Themes introduces breaking changes to the library. Below are the changes that have been made:
+The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following changes have been made:
 
 ### Converters
 
-All Converters were moved to the `Uno.Themes` library, and the new `namespace` is `Uno.Themes`.
+All Converters were moved to the base `Uno.Themes` library, and the new `namespace` is `Uno.Themes`.
 
 Before:
 
 ```xml
 <Page xmlns:um="using:Uno.Material">
-
     <Page.Resources>
         <um:FromNullToValueConverter x:Key="NotNullVisibilityConverter">
     </Page.Resources>
@@ -27,7 +26,6 @@ After:
 
 ```xml
 <Page xmlns:ut="using:Uno.Themes">
-
     <Page.Resources>
         <ut:FromNullToValueConverter x:Key="NotNullVisibilityConverter">
     </Page.Resources>
