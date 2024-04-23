@@ -133,7 +133,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `NavigationViewItemBackgroundSelected`                        | `SolidColorBrush` | `SecondaryContainerBrush`                         |
 | `NavigationViewItemBackgroundSelectedPointerOver`             | `SolidColorBrush` | `OnSurfaceHoverBrush`                             |
 | `NavigationViewItemBackgroundSelectedPressed`                 | `SolidColorBrush` | `OnSurfacePressedBrush`                           |
-| `NavigationViewItemBackgroundSelectedDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledLowBrush`                       |
+| `NavigationViewItemBackgroundSelectedDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`                          |
 | `NavigationViewItemForeground`                                | `SolidColorBrush` | `OnSurfaceBrush`                                  |
 | `NavigationViewItemForegroundPointerOver`                     | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
 | `NavigationViewItemForegroundPressed`                         | `SolidColorBrush` | `SystemControlTransparentBrush`                   |
