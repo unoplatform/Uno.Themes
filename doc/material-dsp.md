@@ -39,12 +39,12 @@ This package will be automatically present in the project after [creating a new 
 
    ![Export Button](assets/material-theme-builder-export1.png) ![DSP Selection](assets/material-theme-builder-export2.png)
 3. Save the file to your computer.
-4. Replace the file `material-theme.json` in the `Styles` folder of your application project with the one you just downloaded.
+4. Replace the file `ColorPaletteOverride.json` in the `Styles` folder of your application project with the one you just downloaded.
 5. Build your application. The `ColorPaletteOverride.xaml` file will be automatically updated with the colors present in the JSON file.
 
 ## More flexibility
 
-This will generate the file at each build, potentially overriding any changes you made to the file. If you want to keep it that way, you can simply remove the `material-theme.json` file from the `Styles` folder, the file won't get overwritten anymore.
+This will generate the file at each build, potentially overriding any changes you made to the file. If you want to keep it that way, you can simply remove the `ColorPaletteOverride.json` file from the `Styles` folder, the file won't get overwritten anymore.
 
 Alternatively, you can also use the [Uno.Dsp.Cli](https://nuget.org/packages/Uno.Dsp.Cli) package to generate the file from the command line. This will allow you to generate the file only when you want to, and not at each build.
 
