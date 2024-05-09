@@ -32,6 +32,27 @@ This package will be automatically present in the project after [creating a new 
 * The package is already present when you select _Material_ theme during project creation:
    ![Selection of Material theme when creating a project using the Uno Template Wizard](assets/material-theme-selection-wizard.png)
 
+It is possible to configure the import process. The _UnoDspImportColors_ item found in the _csproj_ file has a number of attributes we can set:
+
+| Attribute        | Description                     | Default Value           |
+|------------------|---------------------------------|-------------------------|
+| `Include`        | Style files to input            |                         |
+| `Generator`*     | Type of generator to use        | `Xaml`                  |
+| `OutputPath`**   | Path to use for the output      | Input file directory    |
+
+\* The possible values for `Generator` are `Xaml` or `Csharp`.
+
+\*\* If `Include` is a glob (eg: \*.json), `OutputPath` should be a directory.
+
+```xml
+<ItemGroup>
+   <UnoDspImportColors Include="Styles\*.json" Generator="Csharp" OutputPath="Styles\Theme\"  />
+</ItemGroup>
+```
+
+> [!NOTE]
+> The Uno.Sdk will automatically include this configuration for you. Creating a new project with the _CSharpMarkup_ feature will automatically set the generator attribute to `Csharp`. It will set the generator to `Xaml` by default.
+
 ## Generating a custom color palette and exporting it as a JSON file
 
 1. Navigate to the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) and select the colors you want to use for your application.
