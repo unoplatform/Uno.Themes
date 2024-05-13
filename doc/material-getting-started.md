@@ -149,9 +149,9 @@ The following guides require the creation of new `ResourceDictionary` files in y
 
 ### Color Overrides using _Material Theme Builder_ and DSP format
 
-It is possible to use the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) to generate a custom color palette derived from your own basic colors. The generated palette is provided in the [DSP format](https://m3.material.io/styles/color/the-color-system/color-dsp) and can be used to override the default Uno Material colors.
+It is possible to use the [Material Theme Builder](https://aka.platform.uno/uno-material-themebuilder) to generate a custom color palette derived from your own basic colors. The generated palette is provided in the [DSP format](https://m3.material.io/styles/color/the-color-system/color-dsp) and can be used to override the default Uno Material colors.
 
-The tooling required to generate the _Material Colors Override_ file from a DSP package (zip file) will be present by default when creating an Uno Platform application with support for Uno Material from the Wizard.
+The tooling required to generate the _Material Colors Override_ file from a theme file (JSON file) will be present by default when creating an Uno Platform application with support for Uno Material from the Wizard.
 
 ![Wizard - Theme Selection](assets/material-theme-selection-wizard.png)
 
