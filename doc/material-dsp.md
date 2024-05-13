@@ -55,7 +55,7 @@ It is possible to configure the import process. The _UnoDspImportColors_ item fo
 
 ## Generating a custom color palette and exporting it as a JSON file
 
-1. Navigate to the [Material Theme Builder](https://m3.material.io/theme-builder#/custom) and select the colors you want to use for your application.
+1. Navigate to the [Material Theme Builder](https://aka.platform.uno/uno-material-themebuilder) and select the colors you want to use for your application.
 2. Locate the _Export_ button and pick the _Material Theme (JSON)_ format.
 
    ![Export Button](assets/material-theme-builder-export1.png) ![DSP Selection](assets/material-theme-builder-export2.png)
