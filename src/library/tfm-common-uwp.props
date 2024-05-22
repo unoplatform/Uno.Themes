@@ -3,10 +3,10 @@
 		<TargetFrameworks >$(TargetFrameworkOverride)</TargetFrameworks>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
-		<TargetFrameworks>$(TargetFrameworks);net7.0;</TargetFrameworks>
-		<TargetFrameworks Condition="'$(Build_iOS)'=='true'">$(TargetFrameworks);net7.0-ios</TargetFrameworks>
-		<TargetFrameworks Condition="'$(Build_MacOS)'=='true'">$(TargetFrameworks);net7.0-macos;net7.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="'$(Build_Android)'=='true'">$(TargetFrameworks);net7.0-android</TargetFrameworks>
+		<TargetFrameworks>$(TargetFrameworks);net8.0;</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_iOS)'=='true'">$(TargetFrameworks);net8.0-ios</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_MacOS)'=='true'">$(TargetFrameworks);net8.0-macos;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(Build_Android)'=='true'">$(TargetFrameworks);net8.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="'$(Build_Windows)'=='true'">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
 	</PropertyGroup>
 </Project>

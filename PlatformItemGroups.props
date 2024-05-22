@@ -30,7 +30,7 @@
 		<_IsNet Condition="'$(TargetFramework)'=='net461'">true</_IsNet>
 
 		<_IsNetCore>false</_IsNetCore>
-		<_IsNetCore Condition="'$(TargetFramework)'=='net5.0' or '$(TargetFramework)'=='net7.0' or '$(TargetFramework)'=='net7.0'">true</_IsNetCore>
+		<_IsNetCore Condition="'$(TargetFramework)'=='net5.0' or '$(TargetFramework)'=='net8.0' or '$(TargetFramework)'=='net8.0'">true</_IsNetCore>
 
 		<_IsNetStd>false</_IsNetStd>
 		<_IsNetStd Condition="'$(TargetFramework)'=='netstandard2.0' or $(_IsNetCore)">true</_IsNetStd>
@@ -47,13 +47,13 @@
 
 	<PropertyGroup Condition="$(_IsIOS)">
 		<DefineConstants>$(DefineConstants);IOS1_0;XAMARIN;XAMARIN_IOS;XAMARIN_IOS_UNIFIED</DefineConstants>
-		<SupportedOSPlatformVersion>10.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
 		<TargetPlatformVersion>15.4</TargetPlatformVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(_IsMacOS)">
 		<DefineConstants>$(DefineConstants);XAMARIN</DefineConstants>
-		<SupportedOSPlatformVersion>10.14</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
 		<TargetPlatformVersion>12.3</TargetPlatformVersion>
 	</PropertyGroup>
 
@@ -65,6 +65,6 @@
 	<PropertyGroup Condition="$(_IsAndroid)">
 		<DefineConstants>$(DefineConstants);__ANDROID__;XAMARIN;MONOANDROID5_0;XAMARIN_ANDROID</DefineConstants>
 		<SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
-		<TargetPlatformVersion>33.0</TargetPlatformVersion>
+		<TargetPlatformVersion>34.0</TargetPlatformVersion>
 	</PropertyGroup>
 </Project>
