@@ -22,29 +22,29 @@
 		- With a Placeholder, the Header does not move, it is already at the top and shows also the Placeholder underneath
 	-->
 
-	<!-- New converters - todo adjust naming -->
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToNotFocusedContentCompositeTransformTranslateY"
+	<!-- Converters -->
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="PlaceholderContentCompositeTransformTranslateY"
 																						 HeaderAndPlaceholderValue="8"
 																						 HeaderOnlyValue="0"
 																						 HeaderOnlyWithTextValue="8"
 																						 PlaceholderOnlyValue="0"
 																						 NoHeaderAndNoPlaceholderValue="0" />
 
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToFocusedContentCompositeTransformTranslateY"
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="FocusedPlaceholderContentCompositeTransformTranslateY"
 																						 HeaderAndPlaceholderValue="8"
 																						 HeaderOnlyValue="8"
 																						 HeaderOnlyWithTextValue="8"
 																						 PlaceholderOnlyValue="0"
 																						 NoHeaderAndNoPlaceholderValue="0" />
 
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToHeaderCompositeTransformTranslateY"
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformTranslateY"
 																						 HeaderAndPlaceholderValue="-11"
 																						 HeaderOnlyValue="0"
 																						 HeaderOnlyWithTextValue="-11"
 																						 PlaceholderOnlyValue="0"
 																						 NoHeaderAndNoPlaceholderValue="0" />
 
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToHeaderCompositeTransformScales"
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformScales"
 																						 HeaderAndPlaceholderValue="0.7"
 																						 HeaderOnlyValue="1"
 																						 HeaderOnlyWithTextValue="0.7"
@@ -357,11 +357,11 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -376,11 +376,11 @@
 										<Setter Target="NormalBorder.Height" Value="2" />
 
 										<!--Header and Placeholder animations-->
-										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -427,12 +427,12 @@
 																		 Storyboard.TargetProperty="TranslateY"
 																		 Duration="{StaticResource MaterialAnimationDuration}"
 																		 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 																		 Storyboard.TargetProperty="TranslateY"
 																		 Duration="{StaticResource MaterialAnimationDuration}"
 																		 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
 																		 Storyboard.TargetProperty="ScaleX"
 																		 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
@@ -617,11 +617,11 @@
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
 
-										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 
 									</VisualState.Setters>
 								</VisualState>
@@ -633,11 +633,11 @@
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundPointerOver}" />
 										<Setter Target="RootBorder.BorderThickness" Value="2" />
 										<Setter Target="RootBorder.Padding" Value="0" />
-										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
-										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed" />
@@ -677,12 +677,12 @@
 																		 Storyboard.TargetProperty="TranslateY"
 																		 Duration="{StaticResource MaterialAnimationDuration}"
 																		 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
 																		 Storyboard.TargetProperty="TranslateY"
 																		 Duration="{StaticResource MaterialAnimationDuration}"
 																		 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+																		 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
 																		 Storyboard.TargetProperty="ScaleX"
 																		 Duration="{StaticResource MaterialTextBoxAnimationDuration}"

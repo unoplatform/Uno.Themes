@@ -110,7 +110,7 @@
 					<StackPanel>
 
 						<!-- TextBox Filled -->
-						<TextBlock Text="MaterialFilledTextBoxStyle - No Header + No Placeholder" />
+						<TextBlock Text="MaterialFilledTextBoxStyle" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_1"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}" />
@@ -141,85 +141,6 @@
 									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- Quick Additional tests for the current changes -->
-						<TextBlock Text="MaterialFilledTextBoxStyle - No Header + No Placeholder - with Icon" />
-						<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialFilledTextBoxStyle - Placeholder only (No header) - with Icon" />
-						<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
-								 PlaceholderText="Placeholder">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialFilledTextBoxStyle - Header only (No Placeholder) - with Icon" />
-						<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
-								 Header="Header">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialFilledTextBoxStyle - Header + Placeholder - with Icon" />
-						<TextBox PlaceholderText="Placeholder"
-								 Header="Header"
-								 Style="{StaticResource MaterialFilledTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-
-						<TextBlock Text="MaterialFilledTextBoxStyle - No Header + No Placeholder - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 Style="{StaticResource MaterialFilledTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialFilledTextBoxStyle - Placeholder only (No header) - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 Style="{StaticResource MaterialFilledTextBoxStyle}"
-								 PlaceholderText="Placeholder">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialFilledTextBoxStyle - Header only (No Placeholder) - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 Style="{StaticResource MaterialFilledTextBoxStyle}"
-								 Header="Header">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialFilledTextBoxStyle - Header + Placeholder - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 PlaceholderText="Placeholder"
-								 Header="Header"
-								 Style="{StaticResource MaterialFilledTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="__ Separation __" />
-
-						<!-- END - Quick Additional tests for the current changes -->
-
-
 						<!-- TextBox Filled Disabled with PlaceholderText -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_3"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
@@ -230,18 +151,35 @@
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_4"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-									 PlaceholderText="Placeholder" />
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined with PlaceholderText -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header)" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_5"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Placeholder"
-									 Header="Header"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined with header -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder)" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_23"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+											 Header="Header" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined With PlaceholderText and header -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_24"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+											 Header="Header"
+											 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined Disabled with PlaceholderText -->
@@ -252,85 +190,6 @@
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 									 IsEnabled="False" />
 						</smtx:XamlDisplay>
-
-
-						<!-- Quick Additional tests for the current changes -->
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - No Header + No Placeholder - with Icon" />
-						<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header) - with Icon" />
-						<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-								 PlaceholderText="Placeholder">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder) - with Icon" />
-						<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-								 Header="Header">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder - with Icon" />
-						<TextBox PlaceholderText="Placeholder"
-								 Header="Header"
-								 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - No Header + No Placeholder - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header) - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-								 PlaceholderText="Placeholder">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder) - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-								 Header="Header">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder - with Icon + multilines" />
-						<TextBox TextWrapping="Wrap"
-								 AcceptsReturn="True"
-								 PlaceholderText="Placeholder"
-								 Header="Header"
-								 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
-							<ut:ControlExtensions.Icon>
-								<SymbolIcon Symbol="Favorite" />
-							</ut:ControlExtensions.Icon>
-						</TextBox>
-
-						<TextBlock Text="__ Separation __" />
-
-						<!-- END - Quick Additional tests for the current changes -->
 
 						<!-- TextBox Filled MultiLine -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_7"
