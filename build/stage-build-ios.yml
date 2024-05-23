@@ -35,8 +35,8 @@ jobs:
 
   - bash: |
       cd $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Mobile
-      dotnet build -f net7.0-ios -c Release "/p:InformationalVersion=$(GitVersion.InformationalVersion)" "/bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog"
-    displayName: Build project for Release - (net7.0-ios)
+      dotnet build -f net8.0-ios -c Release "/p:InformationalVersion=$(GitVersion.InformationalVersion)" "/bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog"
+    displayName: Build project for Release - (net8.0-ios)
 
   - task: PublishBuildArtifacts@1
     retryCountOnTaskFailure: 3

@@ -6,6 +6,7 @@
 		<UseWinUI>true</UseWinUI>
 		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
+		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
 		<PackageId>Uno.Material.WinUI</PackageId>
 		<AssemblyName>Uno.Material.WinUI</AssemblyName>
 		<FrameworkLineage>WinUI</FrameworkLineage>
