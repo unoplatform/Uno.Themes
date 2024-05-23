@@ -22,8 +22,6 @@
 		- With a Placeholder, the Header does not move, it is already at the top and shows also the Placeholder underneath
 	-->
 
-	<!-- Converters -->
-
 	<!-- New converters - todo adjust naming -->
 	<um:FromTextBoxEmptyStringToValueConverter x:Key="EmptyToNotFocusedContentCompositeTransformTranslateY"
 																						 HeaderAndPlaceholderValue="8"
@@ -95,8 +93,13 @@
 
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Outlined TextBox Brushes-->
@@ -114,8 +117,13 @@
 
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -194,8 +202,13 @@
 
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Outlined TextBox Brushes-->
@@ -213,8 +226,13 @@
 
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -302,7 +320,7 @@
 	</Style>
 
 	<Style x:Key="MaterialFilledTextBoxStyle"
-		   TargetType="TextBox">
+				 TargetType="TextBox">
 		<Setter Property="Foreground" Value="{ThemeResource FilledTextBoxForeground}" />
 		<Setter Property="PlaceholderForeground" Value="{ThemeResource FilledTextBoxPlaceholderForeground}" />
 		<Setter Property="Background" Value="{ThemeResource FilledTextBoxBackground}" />
@@ -352,13 +370,12 @@
 										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushPointerOver}" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundPointerOver}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundPointerOver}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundPointerOver}" />
 										<Setter Target="NormalBorder.Height" Value="2" />
-										<!-- Keep the Header upwards -->
 
-										<!-- If Text Header Placeholder needs to keep UP -->
-										<!-- Can't check Text and Placeholder -->
+										<!--Header and Placeholder animations-->
 										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToNotFocusedContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
@@ -375,7 +392,8 @@
 										<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundDisabled}" />
 										<Setter Target="ContentElement.Opacity" Value="{ThemeResource FilledTextBoxForegroundOpacityDisabled}" />
-										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundDisabled}" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundDisabled}" />
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundDisabled}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextBoxLeadingIconForegroundDisabled}" />
@@ -384,7 +402,8 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundFocused}" />
 										<Setter Target="NormalBorder.Height" Value="{ThemeResource MaterialFilledTextBoxBorderHeightFocused}" />
 										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushFocused}" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundFocused}" />
@@ -488,7 +507,7 @@
 											VerticalAlignment="Top">
 								<Border Height="38">
 									<TextBlock x:Name="HeaderElement"
-														 Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+														 Foreground="{ThemeResource FilledTextBoxHeaderForeground}"
 														 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 														 IsHitTestVisible="False"
 														 RenderTransformOrigin="0,0.5"
@@ -611,6 +630,7 @@
 										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundPointerOver}" />
 										<Setter Target="RootBorder.BorderThickness" Value="2" />
 										<Setter Target="RootBorder.Padding" Value="0" />
 										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToHeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
@@ -628,7 +648,8 @@
 										<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundDisabled}" />
 										<Setter Target="ContentElement.Opacity" Value="{ThemeResource OutlinedTextBoxForegroundOpacityDisabled}" />
-										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundDisabled}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextBoxLeadingIconForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -638,7 +659,8 @@
 										<!-- ICI -->
 										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />
-										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundFocused}" />
 										<Setter Target="RootBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessFocused}" />
 										<Setter Target="RootBorder.Padding" Value="0" />
 									</VisualState.Setters>
@@ -734,7 +756,7 @@
 											VerticalAlignment="Top">
 								<Border Height="38">
 									<TextBlock x:Name="HeaderElement"
-														 Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+														 Foreground="{ThemeResource OutlinedTextBoxHeaderForeground}"
 														 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 														 IsHitTestVisible="False"
 														 RenderTransformOrigin="0,0.5"
