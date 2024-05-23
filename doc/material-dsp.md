@@ -50,18 +50,18 @@ It is possible to configure the import process. The _UnoDspImportColors_ item fo
 </ItemGroup>
 ```
 
-> [!NOTE]
-> The Uno.Sdk will automatically include this configuration for you. Creating a new project with the _CSharpMarkup_ feature will automatically set the generator attribute to `Csharp`. It will set the generator to `Xaml` by default.
-
 ## Generating a custom color palette and exporting it as a JSON file
 
 1. Navigate to the [Material Theme Builder](https://aka.platform.uno/uno-material-themebuilder) and select the colors you want to use for your application.
-2. Locate the _Export_ button and pick the _Material Theme (JSON)_ format.
+2. When you are done customizing, open the **Export** section located at the top rightmost of the screen.
 
-   ![Export Button](assets/material-theme-builder-export1.png) ![DSP Selection](assets/material-theme-builder-export2.png)
-3. Save the file to your computer.
-4. Replace the `ColorPaletteOverride.json` file in the `Styles` folder of your application project with the one you just downloaded.
-5. Build your application. The `ColorPaletteOverride.xaml` file will be automatically updated with the colors present in the JSON file.
+   ![material-theme-export-section](assets/material-theme-export-section.png)
+3. In the **Export** section, locate the _Export_ button and pick the _Material Theme (JSON)_ format.
+
+   ![material-theme-export-button](assets/material-theme-export-button.png) ![material-theme-export-json](assets/material-theme-export-json.png)
+4. Save the file to your computer.
+5. Replace the `ColorPaletteOverride.json` file in the `Styles` folder of your application project with the one you just downloaded.
+6. Build your application. The `ColorPaletteOverride.xaml` file will be automatically updated with the colors present in the JSON file.
 
 ## More flexibility
 
@@ -70,6 +70,5 @@ This will generate the file at each build, potentially overriding any changes yo
 Alternatively, you can also use the [Uno.Dsp.Cli](https://nuget.org/packages/Uno.Dsp.Cli) package to generate the file from the command line. This will allow you to generate the file only when you want to, and not at each build.
 
 > [!NOTE]
-> Although the **Material Theme Builder Tool** doesn't export **Material Tokens (DSP)** packages anymore, the Uno Figma Plugin still supports this file format.
-> To be able to import DSP packages just follow the same steps described previously and save the downloaded DSP zip file as `ColorPaletteOverride.zip` in the `Styles` folder of your application project.
+> Although the **Material Theme Builder Tool** doesn't export **Material Tokens (DSP)** packages anymore, to import DSP packages just follow the same steps described previously and save the downloaded DSP zip file as `ColorPaletteOverride.zip` in the `Styles` folder of your application project.
 > In that case, make sure to delete the `material-theme.json` file from `Styles` folder before building your application, to avoid conflicts.
