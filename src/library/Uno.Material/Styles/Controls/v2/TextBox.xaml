@@ -9,17 +9,18 @@
 					mc:Ignorable="d macos">
 
 	<!--
+		NOTE:
 		Expected TextBox behavior:
 		We are going a different route than the Official Material M2/M3 Google samples & the Material doc regarding the fact that the Placeholder will always be visible.
 		(cf. specs discussions here https://github.com/unoplatform/Uno.Themes/issues/974)
 		
-		- Without Header/Placeholder, we will have a simple TextBox (matching Windows behavior)
+		- Without Header/Placeholder: Simple TextBox
 		
-		- With a Placeholder and no Header, we will have a simple TextBox (matching Windows behavior).
-		
-		- If there is a Header:
-		- Without a Placeholder, the Header moves up when focused and it will be empty underneath until some text is entered
-		- With a Placeholder, the Header does not move, it is already at the top and shows also the Placeholder underneath
+		- With placeholder but no header: The placeholder will be displayed where the text is supposed to be until text is inputed
+
+		- With header but no placeholder: The header will be displayed where the text is supposed to be and will move up when focused
+
+		- Whith header and placeholder: The header will be displayed at the top and the placeholder will be displayed where the text is supposed to be until text is inputed
 	-->
 
 	<!-- Converters -->
