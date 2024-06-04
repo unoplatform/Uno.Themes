@@ -8,10 +8,49 @@
 					xmlns:ut="using:Uno.Themes"
 					mc:Ignorable="d macos">
 
+	<!--
+		NOTE:
+		Expected TextBox behavior:
+		We are going a different route than the Official Material M2/M3 Google samples & the Material doc regarding the fact that the Placeholder will always be visible.
+		(cf. specs discussions here https://github.com/unoplatform/Uno.Themes/issues/974)
+
+		- Without Header/Placeholder: Simple TextBox
+
+		- With placeholder but no header: The placeholder will be displayed where the text is supposed to be until text is inputed
+
+		- With header but no placeholder: The header will be displayed where the text is supposed to be and will move up when focused
+
+		- Whith header and placeholder: The header will be displayed at the top and the placeholder will be displayed where the text is supposed to be until text is inputed
+	-->
+
 	<!-- Converters -->
-	<ut:FromEmptyStringToValueConverter x:Key="EmptyToCompositeTransformTranslateY"
-										NotNullOrEmptyValue="8"
-										NullOrEmptyValue="0" />
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="PlaceholderContentCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="8"
+											   HeaderOnlyValue="0"
+											   HeaderOnlyWithTextValue="8"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="FocusedPlaceholderContentCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="8"
+											   HeaderOnlyValue="8"
+											   HeaderOnlyWithTextValue="8"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="-11"
+											   HeaderOnlyValue="0"
+											   HeaderOnlyWithTextValue="-11"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformScales"
+											   HeaderAndPlaceholderValue="0.7"
+											   HeaderOnlyValue="1"
+											   HeaderOnlyWithTextValue="0.7"
+											   PlaceholderOnlyValue="1"
+											   NoHeaderAndNoPlaceholderValue="1" />
 
 	<!-- Path Data -->
 	<x:String x:Key="MaterialTextBoxClearGlyphData">M14.9482 6.46442L13.534 5.05021L9.99849 8.58574L6.46296 5.05021L5.04874 6.46442L8.58428 9.99995L5.04874 13.5355L6.46296 14.9497L9.99849 11.4142L13.534 14.9497L14.9482 13.5355L11.4127 9.99995L14.9482 6.46442ZM17.0696 2.92889C13.1663 -0.974342 6.83065 -0.974342 2.92742 2.92889C-0.975807 6.83212 -0.975807 13.1678 2.92742 17.071C6.83065 20.9743 13.1663 20.9743 17.0696 17.071C20.9728 13.1678 20.9728 6.83212 17.0696 2.92889ZM4.34164 15.6568C1.22329 12.5385 1.22329 7.46144 4.34164 4.3431C7.45998 1.22476 12.537 1.22476 15.6553 4.3431C18.7737 7.46144 18.7737 12.5385 15.6553 15.6568C12.537 18.7752 7.45998 18.7752 4.34164 15.6568Z</x:String>
@@ -55,8 +94,13 @@
 
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Outlined TextBox Brushes-->
@@ -74,8 +118,13 @@
 
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -100,7 +149,7 @@
 			<!--#region Filled TextBox Style-->
 			<CornerRadius x:Key="MaterialFilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
 			<macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,7</macos:Thickness>
-			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16</not_macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,8</not_macos:Thickness>
 			<x:Double x:Key="MaterialFilledTextBoxMinHeight">58</x:Double>
 			<x:Double x:Key="MaterialFilledTextBoxBorderHeightFocused">2</x:Double>
 			<!--#endregion-->
@@ -109,7 +158,7 @@
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
 			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
 			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
-			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,16,14,16</not_macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,8</not_macos:Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
 			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
@@ -154,8 +203,13 @@
 
 			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Outlined TextBox Brushes-->
@@ -173,8 +227,13 @@
 
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 			<!--#endregion-->
 
 			<!--#region Typo-->
@@ -199,7 +258,7 @@
 			<!--#region Filled TextBox Style-->
 			<CornerRadius x:Key="MaterialFilledTextBoxCornerRadius">4,4,0,0</CornerRadius>
 			<macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,7</macos:Thickness>
-			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16</not_macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialFilledTextBoxPadding">16,8</not_macos:Thickness>
 			<x:Double x:Key="MaterialFilledTextBoxMinHeight">58</x:Double>
 			<x:Double x:Key="MaterialFilledTextBoxBorderHeightFocused">2</x:Double>
 			<!--#endregion-->
@@ -208,7 +267,7 @@
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
 			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
 			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
-			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,16,14,16</not_macos:Thickness>
+			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,8</not_macos:Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
 			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
@@ -297,15 +356,32 @@
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushPointerOver}" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundPointerOver}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundPointerOver}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundPointerOver}" />
+										<Setter Target="NormalBorder.Height" Value="2" />
+
+										<!-- Header and Placeholder animations -->
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -318,6 +394,7 @@
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundDisabled}" />
 										<Setter Target="ContentElement.Opacity" Value="{ThemeResource FilledTextBoxForegroundOpacityDisabled}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundDisabled}" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundDisabled}" />
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundDisabled}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextBoxLeadingIconForegroundDisabled}" />
@@ -327,6 +404,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundFocused}" />
 										<Setter Target="NormalBorder.Height" Value="{ThemeResource MaterialFilledTextBoxBorderHeightFocused}" />
 										<Setter Target="NormalBorder.Fill" Value="{ThemeResource FilledTextBoxBorderBrushFocused}" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledTextBoxBackgroundFocused}" />
@@ -334,12 +412,38 @@
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundFocused}" />
 									</VisualState.Setters>
 									<Storyboard>
-
+										<!-- Animate Header Upwards -->
 										<DoubleAnimation Storyboard.TargetName="FocusedBorder_ScaleTransform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="{StaticResource MaterialAnimationDuration}"
 														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 														 To="1" />
+
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="-11" />
+										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
@@ -354,45 +458,9 @@
 								<VisualState x:Name="ButtonCollapsed" />
 							</VisualStateGroup>
 
-							<VisualStateGroup x:Name="HeaderStates">
-								<VisualState x:Name="NotEmpty">
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
-														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="-11" />
-										<!-- ContentElement TranslateY value changing depending if there is a PlaceholderText or not -->
-										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
-														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
-														 Storyboard.TargetProperty="ScaleX"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="0.7" />
-										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
-														 Storyboard.TargetProperty="ScaleY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="0.7" />
-									</Storyboard>
-									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
-									</VisualState.StateTriggers>
-								</VisualState>
-
-								<VisualState x:Name="Empty">
-									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
-									</VisualState.StateTriggers>
-								</VisualState>
-							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid Padding="{TemplateBinding Padding}">
+						<Grid Margin="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
@@ -401,13 +469,12 @@
 
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border Height="26"
-									VerticalAlignment="Top"
+							<Border VerticalAlignment="Top"
 									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
-												  Margin="0,0,8,0"
+												  Margin="0,11,8,0"
 												  MaxHeight="34"
 												  MaxWidth="34"
 												  MinWidth="25"
@@ -415,6 +482,7 @@
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 							</Border>
 
+							<!-- Padding and VerticalAlignement="Top" are here to make sure the ScrollViewer does not move when entering a second line when multiline is enabled -->
 							<ScrollViewer x:Name="ContentElement"
 										  Grid.Column="1"
 										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -423,7 +491,8 @@
 										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
 										  IsTabStop="False"
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Padding="0,10"
+										  VerticalAlignment="Top"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
 										  ZoomMode="Disabled"
@@ -436,15 +505,34 @@
 							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Grid.Column="1"
-									Height="26"
 									VerticalAlignment="Top">
+								<Border Height="38">
+									<TextBlock x:Name="HeaderElement"
+											   Foreground="{ThemeResource FilledTextBoxHeaderForeground}"
+											   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											   IsHitTestVisible="False"
+											   RenderTransformOrigin="0,0.5"
+											   Text="{TemplateBinding Header}"
+											   TextAlignment="{TemplateBinding TextAlignment}"
+											   TextWrapping="{TemplateBinding TextWrapping}"
+											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+										<TextBlock.RenderTransform>
+											<CompositeTransform x:Name="HeaderElement_CompositeTransform" />
+										</TextBlock.RenderTransform>
+									</TextBlock>
+								</Border>
+							</Border>
+
+							<Border Grid.Column="1"
+									Height="38"
+									VerticalAlignment="Center">
 								<TextBlock x:Name="PlaceholderElement"
-											 Style="{StaticResource BodyLarge}"
 										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
 										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										   IsHitTestVisible="False"
 										   RenderTransformOrigin="0,0.5"
-										   Text="{TemplateBinding PlaceholderText}"
+										   Visibility="{Binding Text, Converter={StaticResource EmptyToVisibleConverter}, RelativeSource={RelativeSource TemplatedParent}}"
+										   Text="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
 										   TextAlignment="{TemplateBinding TextAlignment}"
 										   TextWrapping="{TemplateBinding TextWrapping}"
 										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -527,12 +615,30 @@
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Normal">
+									<VisualState.Setters>
+
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+
+									</VisualState.Setters>
+								</VisualState>
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundPointerOver}" />
+										<Setter Target="RootBorder.BorderThickness" Value="2" />
+										<Setter Target="RootBorder.Padding" Value="0" />
+										<Setter Target="HeaderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="ContentElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="PlaceholderElement_CompositeTransform.TranslateY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleX" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
+										<Setter Target="HeaderElement_CompositeTransform.ScaleY" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed" />
@@ -544,6 +650,7 @@
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundDisabled}" />
 										<Setter Target="ContentElement.Opacity" Value="{ThemeResource OutlinedTextBoxForegroundOpacityDisabled}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundDisabled}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextBoxLeadingIconForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -554,11 +661,43 @@
 										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
+										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundFocused}" />
 										<Setter Target="RootBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessFocused}" />
 										<Setter Target="RootBorder.Padding" Value="0" />
 									</VisualState.Setters>
+
+									<Storyboard>
+										<!-- Animate Header Upwards -->
+
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="-11" />
+										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
+									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
+
 							<VisualStateGroup x:Name="ButtonStates">
 								<VisualState x:Name="ButtonVisible">
 									<VisualState.Setters>
@@ -567,46 +706,12 @@
 								</VisualState>
 								<VisualState x:Name="ButtonCollapsed" />
 							</VisualStateGroup>
-							<VisualStateGroup x:Name="HeaderStates">
-								<VisualState x:Name="NotEmpty">
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
-														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="-11" />
-										<!-- ContentElement TranslateY value changing depending if there is a PlaceholderText or not -->
-										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
-														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
-										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
-														 Storyboard.TargetProperty="ScaleX"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="0.7" />
-										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
-														 Storyboard.TargetProperty="ScaleY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="0.7" />
-									</Storyboard>
-									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
-									</VisualState.StateTriggers>
-								</VisualState>
-								<VisualState x:Name="Empty">
-									<VisualState.StateTriggers>
-										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
-									</VisualState.StateTriggers>
-								</VisualState>
-							</VisualStateGroup>
+
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="Root"
 							  Background="{TemplateBinding Background}"
-							  Padding="{TemplateBinding Padding}">
+							  Margin="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
@@ -615,18 +720,16 @@
 
 							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border Height="26"
-									VerticalAlignment="Top"
-									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+							<Border Height="38"
+									VerticalAlignment="Top">
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
-												  MinWidth="25"
-												  MaxWidth="34"
-												  MaxHeight="34"
-												  Margin="0,0,8,0"
+												  Width="20"
+												  Margin="1,2,18,0"
 												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
-												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+												  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 							</Border>
 
 							<ScrollViewer x:Name="ContentElement"
@@ -639,7 +742,8 @@
 										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
 										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
 										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  VerticalAlignment="Top"
+										  Padding="0,10"
 										  ZoomMode="Disabled"
 										  AutomationProperties.AccessibilityView="Raw">
 								<ScrollViewer.RenderTransform>
@@ -650,15 +754,34 @@
 							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
 							<Border Grid.Column="1"
-									Height="26"
 									VerticalAlignment="Top">
+								<Border Height="38">
+									<TextBlock x:Name="HeaderElement"
+											   Foreground="{ThemeResource OutlinedTextBoxHeaderForeground}"
+											   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											   IsHitTestVisible="False"
+											   RenderTransformOrigin="0,0.5"
+											   Text="{TemplateBinding Header}"
+											   TextAlignment="{TemplateBinding TextAlignment}"
+											   TextWrapping="{TemplateBinding TextWrapping}"
+											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+										<TextBlock.RenderTransform>
+											<CompositeTransform x:Name="HeaderElement_CompositeTransform" />
+										</TextBlock.RenderTransform>
+									</TextBlock>
+								</Border>
+							</Border>
+
+							<Border Grid.Column="1"
+									Height="38"
+									VerticalAlignment="Center">
+
 								<TextBlock x:Name="PlaceholderElement"
-											 Style="{StaticResource BodyLarge}"
 										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
 										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										   IsHitTestVisible="False"
-										   RenderTransformOrigin="0,0.5"
-										   Text="{TemplateBinding PlaceholderText}"
+										   Visibility="{Binding Text, Converter={StaticResource EmptyToVisibleConverter}, RelativeSource={RelativeSource TemplatedParent}}"
+										   Text="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
 										   TextAlignment="{TemplateBinding TextAlignment}"
 										   TextWrapping="{TemplateBinding TextWrapping}"
 										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">

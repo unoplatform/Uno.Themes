@@ -18,7 +18,9 @@
 						<!-- TextBox Filled -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_1"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}" />
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 PlaceholderText="MyPlaceholder"
+									 Header="Label" />
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Filled With PlaceholderText -->
@@ -106,16 +108,36 @@
 			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+
 						<!-- TextBox Filled -->
+						<TextBlock Text="MaterialFilledTextBoxStyle" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_1"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- TextBox Filled With PlaceholderText -->
+						<!-- TextBox Filled with placeholder -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Placeholder only (No header)" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_21"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 PlaceholderText="Placeholder" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled with header -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Header only (No Placeholder)" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_22"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 Header="Header" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled With PlaceholderText and header -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Header + Placeholder" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_2"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Filled"
+							<TextBox PlaceholderText="Placeholder"
+									 Header="Header"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
@@ -129,15 +151,34 @@
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_4"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined with PlaceholderText -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header)" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_5"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Outlined"
+							<TextBox PlaceholderText="Placeholder"
+									 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined with header -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder)" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_23"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 Header="Header" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined With PlaceholderText and header -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_24"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+									 Header="Header"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
@@ -184,7 +225,7 @@
 							</TextBox>
 						</smtx:XamlDisplay>
 
-						<!-- TextBox Outlined MultiLine with Icon-->
+						<!-- TextBox Outlined MultiLine with Icon -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_10"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
