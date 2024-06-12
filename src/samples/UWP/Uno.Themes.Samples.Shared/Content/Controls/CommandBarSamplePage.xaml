@@ -6,39 +6,32 @@
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:android="http:/uno.ui/android"
 	  xmlns:ios="http:/uno.ui/ios"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d android ios"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
-			<sample:SamplePageLayout.MaterialTemplate>
-				<DataTemplate>
-					<StackPanel>
-						<Grid BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-							  BorderThickness="1"
-							  android:Margin="12"
-							  ios:Margin="12"
-							  Padding="12">
-
-							<Button Content="Show Sample"
-									Click="ShowSampleInNestedFrame" />
-
-						</Grid>
-					</StackPanel>
-				</DataTemplate>
-			</sample:SamplePageLayout.MaterialTemplate>
 			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
-						<Grid BorderBrush="{StaticResource OnSurfaceBrush}"
-							  BorderThickness="1"
-							  android:Margin="12"
-							  ios:Margin="12"
-							  Padding="12">
-
-							<Button Content="Show Sample"
-									Click="ShowM3SampleInNestedFrame" />
-
+						<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+							<StackPanel>
+								<smtx:XamlDisplay Margin="16"
+												  UniqueKey="CommandBarSamplePage">
+									<CommandBar Content="Command Bar Sample"
+												Style="{StaticResource MaterialCommandBarStyle}">
+										<CommandBar.PrimaryCommands>
+											<AppBarButton Icon="Add"
+														  Label="Add" />
+											<AppBarButton Icon="Edit"
+														  Label="Edit" />
+											<AppBarButton Icon="Delete"
+														  Label="Delete" />
+										</CommandBar.PrimaryCommands>
+									</CommandBar>
+								</smtx:XamlDisplay>
+							</StackPanel>
 						</Grid>
 					</StackPanel>
 				</DataTemplate>
@@ -46,4 +39,3 @@
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
-
