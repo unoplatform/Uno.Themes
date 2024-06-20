@@ -26,25 +26,25 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
 1. Add the `XamlControlsResources` resource dictionary to your application resources inside `App.xaml`. This step is the same as required for WinUI 2 UWP apps.
 
     ```xml
-        <Application>
-            <Application.Resources>
-                <!-- Load WinUI resources -->
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-            </Application.Resources>
-        </Application>
+    <Application>
+        <Application.Resources>
+            <!-- Load WinUI resources -->
+            <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+        </Application.Resources>
+    </Application>
     ```
 
     Or, if you have other existing application-scope resources, add `XamlControlsResources` at the top (before other resources) as a merged dictionary:
 
     ```xml
-        <Application.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <!-- Load WinUI resources -->
-                    <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                    <!-- Other merged dictionaries here -->
-                </ResourceDictionary.MergedDictionaries>
-                <!-- Other app resources here -->
-            </ResourceDictionary>
-        </Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Load WinUI resources -->
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+        </ResourceDictionary>
+    </Application.Resources>
     ```
