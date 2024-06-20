@@ -61,7 +61,6 @@ Before:
 
 ```xml
 <Page xmlns:um="using:Uno.Material">
-
     <StackPanel>
         <Button Content="OUTLINED"
             Style="{StaticResource MaterialOutlinedButtonStyle}">
@@ -77,7 +76,6 @@ After:
 
 ```xml
 <Page xmlns:ut="using:Uno.Themes">
-
     <StackPanel>
         <Button Content="OUTLINED"
             Style="{StaticResource MaterialOutlinedButtonStyle}">
