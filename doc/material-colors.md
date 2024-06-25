@@ -50,7 +50,7 @@ uid: Uno.Themes.Material.Colors
 | FocusedOpacity  | 0.12  |
 | PressedOpacity  | 0.12  |
 | DraggedOpacity  | 0.16  |
-| SelectedOpacity | 0.16  |
+| SelectedOpacity | 0.08  |
 | MediumOpacity   | 0.64  |
 | LowOpacity      | 0.32  |
 | DisabledOpacity | 0.12  |
