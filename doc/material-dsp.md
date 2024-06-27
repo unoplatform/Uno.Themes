@@ -65,10 +65,10 @@ It is possible to configure the import process. The _UnoDspImportColors_ item fo
 
 ## More flexibility
 
-This will generate the file at each build, potentially overriding any changes you made to the file. If you want to keep it that way, you can simply remove the `ColorPaletteOverride.json` file from the `Styles` folder, the file won't get overwritten anymore.
+This will generate the `ColorPaletteOverride.xaml` file at each build, potentially overriding any changes you made to it. If you want to prevent it from being overriden, you can simply remove the `ColorPaletteOverride.json` file from the `Styles` folder.
 
-Alternatively, you can also use the [Uno.Dsp.Cli](https://nuget.org/packages/Uno.Dsp.Cli) package to generate the file from the command line. This will allow you to generate the file only when you want to, and not at each build.
+Alternatively, you can also use the [Uno.Dsp.Cli](https://nuget.org/packages/Uno.Dsp.Cli) package to generate the file from the command line.
 
 > [!NOTE]
-> Although the **Material Theme Builder Tool** doesn't export **Material Tokens (DSP)** packages anymore, to import DSP packages just follow the same steps described previously and save the downloaded DSP zip file as `ColorPaletteOverride.zip` in the `Styles` folder of your application project.
-> In that case, make sure to delete the `material-theme.json` file from `Styles` folder before building your application, to avoid conflicts.
+> Although the **Material Theme Builder Tool** doesn't export **Material Tokens (DSP)** .zip packages anymore, Uno.Dsp.Tasks still supports them for backwards compatibility. To use a DSP .zip package just save it as `ColorPaletteOverride.zip` in the `Styles` folder of your application project.
+> Make sure to delete the `material-theme.json` file from `Styles` folder before building your application, to avoid conflicts.
