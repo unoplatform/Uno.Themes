@@ -8,6 +8,33 @@ uid: Uno.Themes.Material.Migration
 
 The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following changes have been made:
 
+### Upgrading to Uno Themes 5.1
+
+#### TextBox `PlaceholderText` and `Header`
+
+Previously, the `PlaceholderText` property acted as a header, displaying in the normal state and animating upwards when the text is set or being entered. And, the `Header` property did nothing. Now, both `PlaceholderText` and `Header` are supported and their behaviors have changed.
+
+##### New Behavior
+
+- **PlaceholderText**: Displays inside the TextBox when it's empty. Disappears when text is entered.
+- **Header**: Acts as a label. Animates upwards when the TextBox is focused.
+
+##### Example
+
+**Old Usage:**
+
+```xml
+<TextBox PlaceholderText="Enter your name" />
+```
+
+**New Usage:**
+
+```xml
+<TextBox PlaceholderText="Enter your name" Header="Name" />
+```
+
+Update your TextBox elements to use `Header` for labels and `PlaceholderText` for placeholders.
+
 ### Converters
 
 All Converters were moved to the base `Uno.Themes` library, and the new `namespace` is `Uno.Themes`.
