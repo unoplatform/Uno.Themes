@@ -13,37 +13,95 @@
 	<x:Double x:Key="MaterialCommandBarElevation">4</x:Double>
 	<x:Double x:Key="MaterialCommandBarHeight">48</x:Double>
 
-	<!-- Define Material AppBarButton Style -->
 	<Style x:Key="MaterialAppBarButtonStyle"
 		   TargetType="AppBarButton">
-		<Setter Property="Height" Value="{StaticResource MaterialCommandBarHeight}" />
-		<Setter Property="Width" Value="{StaticResource MaterialCommandBarHeight}" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="HorizontalAlignment" Value="Center" />
-		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="IsCompact" Value="True" />
+		<Setter Property="Background" Value="{ThemeResource AppBarButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource AppBarButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource AppBarButtonBorderBrush}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="Width" Value="68" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="AllowFocusOnInteraction" Value="False" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
 					<um:Ripple Feedback="{TemplateBinding Foreground}"
-							   FeedbackOpacity="{StaticResource PressedOpacity}">
-						<Viewbox x:Name="ContentViewbox"
-								 MaxHeight="{ThemeResource AppBarButtonContentHeight}"
-								 MaxWidth="{ThemeResource AppBarButtonContentHeight}"
-								 Margin="0,12"
-								 HorizontalAlignment="Stretch"
-								 StretchDirection="DownOnly"
-								 AutomationProperties.AccessibilityView="Raw">
-							<ContentPresenter x:Name="Content"
-											  Content="{TemplateBinding Icon}"
-											  Foreground="{TemplateBinding Foreground}" />
-						</Viewbox>
+							   FeedbackOpacity="{StaticResource PressedOpacity}"
+							   MinWidth="{TemplateBinding MinWidth}"
+							   MaxWidth="{TemplateBinding MaxWidth}">
+						<Grid x:Name="Root"
+							  Background="Transparent">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+
+									<VisualState x:Name="PointerOver">
+										<VisualState.Setters>
+											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundPointerOver}" />
+											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPointerOver}" />
+											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
+										</VisualState.Setters>
+									</VisualState>
+
+									<VisualState x:Name="Pressed">
+										<VisualState.Setters>
+											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundPressed}" />
+											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPressed}" />
+											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
+										</VisualState.Setters>
+									</VisualState>
+
+									<VisualState x:Name="Disabled">
+										<VisualState.Setters>
+											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundDisabled}" />
+											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushDisabled}" />
+											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
+										</VisualState.Setters>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+							<Border x:Name="AppBarButtonInnerBorder"
+									Margin="{ThemeResource AppBarButtonInnerBorderMargin}"
+									Background="{TemplateBinding Background}"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									Control.IsTemplateFocusTarget="True" />
+
+							<Grid x:Name="ContentRoot"
+								  MinHeight="{ThemeResource AppBarThemeMinHeight}">
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<!-- UNO WORKAROUND: The ViewBox center should be horizontal Stretch but the Grid aligns the content left -->
+								<Viewbox x:Name="ContentViewbox"
+										 Height="{ThemeResource AppBarButtonContentHeight}"
+										 VerticalAlignment="Center"
+										 HorizontalAlignment="Center"
+										 AutomationProperties.AccessibilityView="Raw">
+									<ContentPresenter x:Name="Content"
+													  Content="{TemplateBinding Icon}"
+													  Foreground="{TemplateBinding Foreground}" />
+								</Viewbox>
+							</Grid>
+						</Grid>
 					</um:Ripple>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
+
 	<!-- Define the base style for Material CommandBar -->
 	<Style x:Key="MaterialBaseCommandBarStyle"
 		   TargetType="CommandBar">
