@@ -466,6 +466,49 @@
 								<VisualState x:Name="ButtonCollapsed" />
 							</VisualStateGroup>
 
+							<!-- HeaderStates in place to manage animations when the TextBox is manipulated via code -->
+							<VisualStateGroup x:Name="HeaderStates">
+								<VisualState x:Name="NotEmpty">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="-11" />
+										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
+										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
+									</Storyboard>
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding PlaceholderText, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+								<VisualState x:Name="Empty">
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding PlaceholderText, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+							</VisualStateGroup>
+
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid Padding="{TemplateBinding Padding}">
@@ -720,6 +763,49 @@
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="ButtonCollapsed" />
+							</VisualStateGroup>
+
+							<!-- HeaderStates in place to manage animations when the TextBox is manipulated via code -->
+							<VisualStateGroup x:Name="HeaderStates">
+								<VisualState x:Name="NotEmpty">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="-11" />
+										<DoubleAnimation Storyboard.TargetName="ContentElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleX"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
+										<DoubleAnimation Storyboard.TargetName="PlaceholderElement_CompositeTransform"
+														 Storyboard.TargetProperty="TranslateY"
+														 Duration="{StaticResource MaterialAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
+										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
+														 Storyboard.TargetProperty="ScaleY"
+														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
+														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
+														 To="0.7" />
+									</Storyboard>
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding PlaceholderText, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+								<VisualState x:Name="Empty">
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding PlaceholderText, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
 							</VisualStateGroup>
 
 						</VisualStateManager.VisualStateGroups>
