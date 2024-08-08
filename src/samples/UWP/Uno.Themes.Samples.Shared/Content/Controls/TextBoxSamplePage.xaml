@@ -10,43 +10,7 @@
 	  mc:Ignorable="d">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-
-		<StackPanel Spacing="10"
-					HorizontalAlignment="Center"
-					Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-					Orientation="Vertical">
-			<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
-					 x:Name="txtMyTb"
-					 Width="270" />
-			<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-					 x:Name="txtMyTb1"
-					 Width="270" />
-			<StackPanel HorizontalAlignment="Center"
-						Orientation="Horizontal">
-				<Button Content="Add Header"
-						Click="AddHeader" />
-				<Button Content="Add Placeholder"
-						Click="AddPlaceholder" />
-				<Button Content="Add Text"
-						Click="AddText" />
-			</StackPanel>
-
-			<StackPanel VerticalAlignment="Center"
-						Orientation="Horizontal">
-				<Button Content="Remove Header"
-						Click="RemoveHeader" />
-				<Button Content="Remove Placeholder"
-						Click="RemovePlaceholder" />
-				<Button Content="Remove Text"
-						Click="RemoveText" />
-			</StackPanel>
-
-		</StackPanel>
-		<sample:SamplePageLayout Grid.Row="1">
+		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
