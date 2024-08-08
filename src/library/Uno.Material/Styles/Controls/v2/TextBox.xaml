@@ -488,17 +488,17 @@
 														 Storyboard.TargetProperty="TranslateY"
 														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
 														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="-11" />
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}, TargetNullValue=0, FallbackValue=0}" />
 										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
 														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="0.7" />
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 										<DoubleAnimation Storyboard.TargetName="HeaderElement_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleY"
 														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
 														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="0.7" />
+														 To="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}, TargetNullValue=1, FallbackValue=1}" />
 									</Storyboard>
 									<VisualState.StateTriggers>
 										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
