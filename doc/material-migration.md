@@ -17,7 +17,7 @@ Previously, the `PlaceholderText` property acted as a header, displaying in the 
 ##### New Behavior
 
 - **PlaceholderText**: Displays inside the TextBox when it's empty. Disappears when text is entered.
-- **Header**: Acts as a label. Animates upwards when the TextBox is focused.
+- **Header**: Acts as a label. Animates upwards when text is entered.
 
 ##### Example
 
