@@ -34,7 +34,7 @@ jobs:
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
 
-  - powershell: dotnet msbuild src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/$(ProjectName).Skia.Gtk.csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=net8.0 /detailedsummary /m /bl:$(build.artifactstagingdirectory)\themes-build-$(ArtifactName).binlog
+  - powershell: dotnet msbuild src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/$(ProjectName).Skia.Gtk.csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=net8.0 /detailedsummary /m /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build GTK Head
 
   - task: CopyFiles@2
