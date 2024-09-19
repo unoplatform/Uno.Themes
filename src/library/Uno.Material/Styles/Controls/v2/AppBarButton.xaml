@@ -8,6 +8,17 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:uuc="using:Uno.UI.Controls"
 					mc:Ignorable="android ios">
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
+			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Dark">
+			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
+			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
 	<Style x:Key="MaterialAppBarButtonStyle"
 		   TargetType="AppBarButton">
 		<Setter Property="Background" Value="{ThemeResource AppBarButtonBackground}" />
