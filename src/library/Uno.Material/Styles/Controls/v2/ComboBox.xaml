@@ -5,20 +5,8 @@
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
 					xmlns:xamarin="http://uno.ui/xamarin"
+					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					mc:Ignorable="xamarin">
-
-	<!-- Converters -->
-	<ut:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
-								 NotNullValue="5"
-								 NullValue="0" />
-
-	<ut:FromNullToValueConverter x:Key="NullToVisible"
-								 NotNullValue="Collapsed"
-								 NullValue="Visible" />
-
-	<ut:FromNullToValueConverter x:Key="NullToCollapsed"
-								 NotNullValue="Visible"
-								 NullValue="Collapsed" />
 
 	<ResourceDictionary.ThemeDictionaries>
 
@@ -240,6 +228,19 @@
 			<Thickness x:Key="ComboBoxPadding">16,0</Thickness>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- Converters -->
+	<ut:FromNullToValueConverter x:Key="NullToContentTranslateYConverter"
+								 NotNullValue="5"
+								 NullValue="0" />
+
+	<ut:FromNullToValueConverter x:Key="NullToVisible"
+								 NotNullValue="Collapsed"
+								 NullValue="Visible" />
+
+	<ut:FromNullToValueConverter x:Key="NullToCollapsed"
+								 NotNullValue="Visible"
+								 NullValue="Collapsed" />
 
 	<!-- Path Data -->
 	<x:String x:Key="ComboBoxUpArrowPathData">M0 0L-5 -5L-10 0H0Z</x:String>

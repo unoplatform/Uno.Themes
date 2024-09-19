@@ -9,19 +9,6 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="d not_win">
 
-	<!-- Converters -->
-	<ut:FromNullToValueConverter x:Key="NullToTextButtonMarginConverter"
-								 NotNullValue="0,0,2,0"
-								 NullValue="0" />
-
-	<!-- Variables -->
-	<x:String x:Key="ButtonVerticalContentAlignment">Center</x:String>
-	<x:String x:Key="ButtonHorizontalContentAlignment">Center</x:String>
-	<x:String x:Key="ButtonIconHorizontalAlignment">Stretch</x:String>
-	<x:String x:Key="ButtonIconVerticalAlignment">Stretch</x:String>
-	<x:String x:Key="IconButtonEllipseVerticalAlignment">Stretch</x:String>
-	<x:String x:Key="IconButtonEllipseHorizontalAlignment">Stretch</x:String>
-
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
 			<!-- MaterialElevatedButtonStyle -->
@@ -377,6 +364,19 @@
 			<CornerRadius x:Key="ButtonCornerRadius">20</CornerRadius>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
+	
+	<!-- Converters -->
+	<ut:FromNullToValueConverter x:Key="NullToTextButtonMarginConverter"
+								 NotNullValue="0,0,2,0"
+								 NullValue="0" />
+
+	<!-- Variables -->
+	<x:String x:Key="ButtonVerticalContentAlignment">Center</x:String>
+	<x:String x:Key="ButtonHorizontalContentAlignment">Center</x:String>
+	<x:String x:Key="ButtonIconHorizontalAlignment">Stretch</x:String>
+	<x:String x:Key="ButtonIconVerticalAlignment">Stretch</x:String>
+	<x:String x:Key="IconButtonEllipseVerticalAlignment">Stretch</x:String>
+	<x:String x:Key="IconButtonEllipseHorizontalAlignment">Stretch</x:String>
 
 	<!-- BASE -->
 	<Style x:Key="MaterialBaseButtonStyle"
