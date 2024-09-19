@@ -22,39 +22,6 @@
 
 		- With header and placeholder: The header will be displayed at the top, and the placeholder will be displayed where the text is supposed to be until the text is inputted
 	-->
-
-	<!-- Converters -->
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="PlaceholderContentCompositeTransformTranslateY"
-											   HeaderAndPlaceholderValue="8"
-											   HeaderOnlyValue="0"
-											   HeaderOnlyWithTextValue="8"
-											   PlaceholderOnlyValue="0"
-											   NoHeaderAndNoPlaceholderValue="0" />
-
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="FocusedPlaceholderContentCompositeTransformTranslateY"
-											   HeaderAndPlaceholderValue="8"
-											   HeaderOnlyValue="8"
-											   HeaderOnlyWithTextValue="8"
-											   PlaceholderOnlyValue="0"
-											   NoHeaderAndNoPlaceholderValue="0" />
-
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformTranslateY"
-											   HeaderAndPlaceholderValue="-11"
-											   HeaderOnlyValue="0"
-											   HeaderOnlyWithTextValue="-11"
-											   PlaceholderOnlyValue="0"
-											   NoHeaderAndNoPlaceholderValue="0" />
-
-	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformScales"
-											   HeaderAndPlaceholderValue="0.7"
-											   HeaderOnlyValue="1"
-											   HeaderOnlyWithTextValue="0.7"
-											   PlaceholderOnlyValue="1"
-											   NoHeaderAndNoPlaceholderValue="1" />
-
-	<!-- Path Data -->
-	<x:String x:Key="MaterialTextBoxClearGlyphData">M14.9482 6.46442L13.534 5.05021L9.99849 8.58574L6.46296 5.05021L5.04874 6.46442L8.58428 9.99995L5.04874 13.5355L6.46296 14.9497L9.99849 11.4142L13.534 14.9497L14.9482 13.5355L11.4127 9.99995L14.9482 6.46442ZM17.0696 2.92889C13.1663 -0.974342 6.83065 -0.974342 2.92742 2.92889C-0.975807 6.83212 -0.975807 13.1678 2.92742 17.071C6.83065 20.9743 13.1663 20.9743 17.0696 17.071C20.9728 13.1678 20.9728 6.83212 17.0696 2.92889ZM4.34164 15.6568C1.22329 12.5385 1.22329 7.46144 4.34164 4.3431C7.45998 1.22476 12.537 1.22476 15.6553 4.3431C18.7737 7.46144 18.7737 12.5385 15.6553 15.6568C12.537 18.7752 7.45998 18.7752 4.34164 15.6568Z</x:String>
-
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
 			<!--#region Fille Delete Button Brushes-->
@@ -274,6 +241,39 @@
 			<!--#endregion-->
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- Converters -->
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="PlaceholderContentCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="8"
+											   HeaderOnlyValue="0"
+											   HeaderOnlyWithTextValue="8"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="FocusedPlaceholderContentCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="8"
+											   HeaderOnlyValue="8"
+											   HeaderOnlyWithTextValue="8"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformTranslateY"
+											   HeaderAndPlaceholderValue="-11"
+											   HeaderOnlyValue="0"
+											   HeaderOnlyWithTextValue="-11"
+											   PlaceholderOnlyValue="0"
+											   NoHeaderAndNoPlaceholderValue="0" />
+
+	<um:FromTextBoxEmptyStringToValueConverter x:Key="HeaderCompositeTransformScales"
+											   HeaderAndPlaceholderValue="0.7"
+											   HeaderOnlyValue="1"
+											   HeaderOnlyWithTextValue="0.7"
+											   PlaceholderOnlyValue="1"
+											   NoHeaderAndNoPlaceholderValue="1" />
+
+	<!-- Path Data -->
+	<x:String x:Key="MaterialTextBoxClearGlyphData">M14.9482 6.46442L13.534 5.05021L9.99849 8.58574L6.46296 5.05021L5.04874 6.46442L8.58428 9.99995L5.04874 13.5355L6.46296 14.9497L9.99849 11.4142L13.534 14.9497L14.9482 13.5355L11.4127 9.99995L14.9482 6.46442ZM17.0696 2.92889C13.1663 -0.974342 6.83065 -0.974342 2.92742 2.92889C-0.975807 6.83212 -0.975807 13.1678 2.92742 17.071C6.83065 20.9743 13.1663 20.9743 17.0696 17.071C20.9728 13.1678 20.9728 6.83212 17.0696 2.92889ZM4.34164 15.6568C1.22329 12.5385 1.22329 7.46144 4.34164 4.3431C7.45998 1.22476 12.537 1.22476 15.6553 4.3431C18.7737 7.46144 18.7737 12.5385 15.6553 15.6568C12.537 18.7752 7.45998 18.7752 4.34164 15.6568Z</x:String>
+
 
 	<Style x:Key="MaterialDeleteButtonStyle"
 		   TargetType="Button">
