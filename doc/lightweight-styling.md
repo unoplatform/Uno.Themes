@@ -8,6 +8,8 @@ uid: Uno.Themes.LightweightStyling
 
 Overriding resources from Uno Material can be done at the App level, Page level, or even at the Control level. The following sections will cover how to override resources at each of these levels.
 
+> [!Video https://www.youtube-nocookie.com/embed/5CsJHMTlNAw]
+
 ## App/Page level styling
 
 The most common way to override resources is at the App level. This is done by adding a new `ResourceDictionary` to the `ResourceDictionary.MergedDictionaries` collection in your `AppResources.xaml` file. The following XAML shows how to override the default resources used with the `FilledButtonStyle` from Uno Themes.
