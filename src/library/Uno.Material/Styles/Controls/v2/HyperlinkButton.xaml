@@ -6,7 +6,8 @@
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
-            <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
+	        <x:Boolean x:Key="HyperlinkUnderlineVisible">True</x:Boolean>
+	        <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
@@ -33,6 +34,7 @@
 		</ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
+	        <x:Boolean x:Key="HyperlinkUnderlineVisible">True</x:Boolean>
             <StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
             <StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="PrimaryBrush" />
