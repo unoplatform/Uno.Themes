@@ -75,6 +75,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FilledTextBoxCharacterSpacing`                   | `Int32`           | `BodyLargeCharacterSpacing`   |
 | `FilledTextBoxBorderThicknessNormal`              | `Double`          | `TextBoxOutlinedStrokeHeight` |
 | `FilledTextBoxBorderThicknessFocused`             | `Double`          | `TextBoxFocusStrokeWidth`     |
+| `FilledTextBoxBorderHeightPointerOver`            | `Double`          | 2                             |
 | `MaterialTextBoxClearGlyphWidth`                  | `Double`          | 20                            |
 | `MaterialTextBoxClearGlyphHeight`                 | `Double`          | 20                            |
 | `MaterialFilledTextBoxCornerRadius`               | `CornerRadius`    | 4,4,0,0                       |
@@ -87,3 +88,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `MaterialOutlinedTextBoxMinHeight`                | `Double`          | 56                            |
 | `MaterialOutlinedTextBoxBorderPadding`            | `Thickness`       | 1                             |
 | `MaterialOutlinedTextBoxBorderThicknessFocused`   | `Double`          | 2                             |
+| `MaterialOutlinedTextBoxPaddingFocused`           | `Thickness`       | 0                             |
+| `MaterialOutlinedTextBoxPaddingPointerOver`       | `Thickness`       | 0                             |
+| `MaterialOutlinedTextBoxBorderThicknessPointerOver`| `Double`         | 2                             |
+| `MaterialFilledTextBoxBorderHeightNormal`         | `Double`          | 1                             |

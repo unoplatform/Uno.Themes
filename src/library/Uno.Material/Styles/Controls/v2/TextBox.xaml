@@ -82,6 +82,7 @@
 
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<x:Double x:Key="FilledTextBoxBorderHeightPointerOver">2</x:Double>
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
@@ -194,6 +195,7 @@
 
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<x:Double x:Key="FilledTextBoxBorderHeightPointerOver">2</x:Double>
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
@@ -372,7 +374,7 @@
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundPointerOver}" />
-										<Setter Target="NormalBorder.Height" Value="2" />
+										<Setter Target="NormalBorder.Height" Value="{ThemeResource FilledTextBoxBorderHeightPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
