@@ -49,6 +49,7 @@
 
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<x:Double x:Key="FilledTextBoxBorderHeightPointerOver">2</x:Double>
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
@@ -129,6 +130,9 @@
 			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
 			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
+			<Thickness x:Key="MaterialOutlinedTextBoxPaddingFocused">0</Thickness>
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessPointerOver">2</x:Double>
+			<Thickness x:Key="MaterialOutlinedTextBoxPaddingPointerOver">0</Thickness>
 			<!--#endregion-->
 		</ResourceDictionary>
 
@@ -158,6 +162,7 @@
 
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<x:Double x:Key="FilledTextBoxBorderHeightPointerOver">2</x:Double>
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundFocused" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="FilledTextBoxDeleteButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
 
@@ -238,6 +243,9 @@
 			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
 			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
+			<Thickness x:Key="MaterialOutlinedTextBoxPaddingFocused">0</Thickness>
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessPointerOver">2</x:Double>
+			<Thickness x:Key="MaterialOutlinedTextBoxPaddingPointerOver">0</Thickness>
 			<!--#endregion-->
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
@@ -366,7 +374,7 @@
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
 										<Setter Target="DeleteButton.Foreground" Value="{ThemeResource FilledTextBoxDeleteButtonForegroundPointerOver}" />
-										<Setter Target="NormalBorder.Height" Value="2" />
+										<Setter Target="NormalBorder.Height" Value="{ThemeResource FilledTextBoxBorderHeightPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -682,8 +690,8 @@
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundPointerOver}" />
-										<Setter Target="RootBorder.BorderThickness" Value="2" />
-										<Setter Target="RootBorder.Padding" Value="0" />
+										<Setter Target="RootBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessPointerOver}" />
+										<Setter Target="RootBorder.Padding" Value="{ThemeResource MaterialOutlinedTextBoxPaddingPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed" />
@@ -708,7 +716,7 @@
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundFocused}" />
 										<Setter Target="RootBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessFocused}" />
-										<Setter Target="RootBorder.Padding" Value="0" />
+										<Setter Target="RootBorder.Padding" Value="{ThemeResource MaterialOutlinedTextBoxPaddingFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
