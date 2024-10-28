@@ -841,9 +841,9 @@
 									- SingleLine via Border.MinHeight + SV.HAlign
 									- Multiline via Border.Padding
 									The reason we are using an uneven Border.Padding is because the actual platform-specific text input element
-									have different height on each platform (win=21, skia=20). The 10-top guarantee that the 1st line
+									have different heights on each platform (win=21, skia=20). The 10-top guarantee that the 1st line
 									in multiline mode remains the same as in singleline. The 8-bottom leaves room for growth if needed,
-									so we don't grow pass the MaterialOutlinedTextBoxMinHeight of 56.
+									so we don't grow past the MaterialOutlinedTextBoxMinHeight of 56.
 								-->
 								<Border MinHeight="40"
 										VerticalAlignment="Top"
@@ -916,8 +916,8 @@
 						</Grid>
 
 						<!--
-							In figma design, border thickness doesnt push its inner content like on xaml.
-							So we are putting the border as an overlay here. To keep rest of measurements/values indentical to figma.
+							In Figma design, border thickness doesn't push its inner content like on xaml.
+							So we are putting the border as an overlay here. To keep the rest of the measurements/values identical to Figma.
 						-->
 						<Border x:Name="BorderBorder"
 								BorderBrush="{TemplateBinding BorderBrush}"
