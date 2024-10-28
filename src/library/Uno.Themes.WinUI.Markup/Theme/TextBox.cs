@@ -140,6 +140,18 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Focused => new("OutlinedTextBoxBorderBrushFocused");
 				}
 
+				public static partial class BorderThickness
+				{
+					[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderThickness")]
+					public static ThemeResourceKey<double> Default => new("MaterialOutlinedTextBoxBorderThickness");
+
+					[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderThicknessPointerOver")]
+					public static ThemeResourceKey<double> PointerOver => new("MaterialOutlinedTextBoxBorderThicknessPointerOver");
+
+					[ResourceKeyDefinition(typeof(double), "MaterialOutlinedTextBoxBorderThicknessFocused")]
+					public static ThemeResourceKey<double> Focused => new("MaterialOutlinedTextBoxBorderThicknessFocused");
+				}
+
 				public static partial class Foreground
 				{
 					[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxForeground")]

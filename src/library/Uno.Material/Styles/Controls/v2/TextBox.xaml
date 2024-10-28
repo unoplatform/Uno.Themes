@@ -13,13 +13,13 @@
 		Expected TextBox behavior:
 		We are going a different route than the Official Material M2/M3 Google samples & the Material doc regarding the fact that the Placeholder will always be visible.
 		(cf. specs discussions here https://github.com/unoplatform/Uno.Themes/issues/974)
-
+		
 		- Without Header/Placeholder: Simple TextBox
-
+		
 		- With placeholder but no header: The placeholder will be displayed where the text is supposed to be until the text is inputted
-
+		
 		- With header but no placeholder: The header will be displayed where the text is supposed to be and will move up when text is inputted
-
+		
 		- With header and placeholder: The header will be displayed at the top, and the placeholder will be displayed where the text is supposed to be until the text is inputted
 	-->
 	<ResourceDictionary.ThemeDictionaries>
@@ -124,11 +124,10 @@
 			<!--#region Outlined TextBox Style-->
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
 			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
-			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
-			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,8</not_macos:Thickness>
+			<Thickness x:Key="MaterialOutlinedTextBoxPadding">8</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
-			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessPointerOver">2</x:Double>
 			<!--#endregion-->
 		</ResourceDictionary>
 
@@ -233,11 +232,10 @@
 			<!--#region Outlined TextBox Style-->
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThickness">1</x:Double>
 			<CornerRadius x:Key="MaterialOutlinedTextBoxCornerRadius">4</CornerRadius>
-			<macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,7,14,7</macos:Thickness>
-			<not_macos:Thickness x:Key="MaterialOutlinedTextBoxPadding">16,8</not_macos:Thickness>
+			<Thickness x:Key="MaterialOutlinedTextBoxPadding">8</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxMinHeight">56</x:Double>
-			<Thickness x:Key="MaterialOutlinedTextBoxBorderPadding">1</Thickness>
 			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessFocused">2</x:Double>
+			<x:Double x:Key="MaterialOutlinedTextBoxBorderThicknessPointerOver">2</x:Double>
 			<!--#endregion-->
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
@@ -654,11 +652,7 @@
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 
-		<macos:Setter Property="Padding"
-					  Value="{ThemeResource MaterialOutlinedTextBoxPadding}" />
-		<not_macos:Setter Property="Padding"
-						  Value="{ThemeResource MaterialOutlinedTextBoxPadding}" />
-
+		<Setter Property="Padding" Value="{ThemeResource MaterialOutlinedTextBoxPadding}" />
 		<Setter Property="MinHeight" Value="{ThemeResource MaterialOutlinedTextBoxMinHeight}" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
@@ -667,48 +661,39 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">
-					<Border x:Name="RootBorder"
-							BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							CornerRadius="{TemplateBinding CornerRadius}"
-							Padding="{ThemeResource MaterialOutlinedTextBoxBorderPadding}">
+					<Grid>
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundPointerOver}" />
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundPointerOver}" />
-										<Setter Target="RootBorder.BorderThickness" Value="2" />
-										<Setter Target="RootBorder.Padding" Value="0" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
+										<Setter Target="BorderBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed" />
-
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushDisabled}" />
 										<!-- In this case the opacity is not applied to the brush directly - known issue for ContentElement -->
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundDisabled}" />
 										<Setter Target="ContentElement.Opacity" Value="{ThemeResource OutlinedTextBoxForegroundOpacityDisabled}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundDisabled}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource TextBoxLeadingIconForegroundDisabled}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
-
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<!-- ICI -->
-										<Setter Target="RootBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundFocused}" />
 										<Setter Target="HeaderElement.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundFocused}" />
-										<Setter Target="RootBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessFocused}" />
-										<Setter Target="RootBorder.Padding" Value="0" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
+										<Setter Target="BorderBorder.BorderThickness" Value="{ThemeResource MaterialOutlinedTextBoxBorderThicknessFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -825,7 +810,7 @@
 
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid x:Name="Root"
+						<Grid CornerRadius="{TemplateBinding CornerRadius}"
 							  Background="{TemplateBinding Background}"
 							  Padding="{TemplateBinding Padding}">
 							<Grid.ColumnDefinitions>
@@ -834,89 +819,111 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
-							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border Height="38"
-									VerticalAlignment="Top">
+							<!-- 0: Icon -->
+							<Border Grid.Column="0"
+									Width="40"
+									Height="40"
+									VerticalAlignment="Top"
+									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-												  HorizontalAlignment="Center"
-												  Width="20"
-												  Margin="1,2,18,0"
 												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
-												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-												  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+												  Width="20"
+												  Height="20"
+												  HorizontalAlignment="Center"
+												  VerticalAlignment="Center" />
 							</Border>
 
-							<ScrollViewer x:Name="ContentElement"
-										  Grid.Column="1"
-										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-										  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-										  IsTabStop="False"
-										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-										  VerticalAlignment="Top"
-										  Padding="0,10"
-										  ZoomMode="Disabled"
-										  AutomationProperties.AccessibilityView="Raw">
-								<ScrollViewer.RenderTransform>
-									<CompositeTransform x:Name="ContentElement_CompositeTransform" />
-								</ScrollViewer.RenderTransform>
-							</ScrollViewer>
+							<!-- 1: Text Elements Container -->
+							<Grid Grid.Column="1" Margin="8,0">
+								<!--
+									We need to center this in both Singleline and Multiline mode:
+									- SingleLine via Border.MinHeight + SV.HAlign
+									- Multiline via Border.Padding
+									The reason we are using an uneven Border.Padding is because the actual platform-specific text input element
+									have different heights on each platform (win=21, skia=20). The 10-top guarantee that the 1st line
+									in multiline mode remains the same as in singleline. The 8-bottom leaves room for growth if needed,
+									so we don't grow past the MaterialOutlinedTextBoxMinHeight of 56.
+								-->
+								<Border MinHeight="40"
+										VerticalAlignment="Top"
+										Padding="0,10,0,8">
+									<ScrollViewer x:Name="ContentElement"
+												  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+												  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+												  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+												  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+												  IsTabStop="False"
+												  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+												  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+												  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+												  VerticalAlignment="Center"
+												  ZoomMode="Disabled"
+												  AutomationProperties.AccessibilityView="Raw">
+										<ScrollViewer.RenderTransform>
+											<CompositeTransform x:Name="ContentElement_CompositeTransform" />
+										</ScrollViewer.RenderTransform>
+									</ScrollViewer>
+								</Border>
 
-							<!-- Border in place to properly vertically center the placeholder inside when it's a one-line TextBox -->
-							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border Grid.Column="1"
-									VerticalAlignment="Center">
-								<Border Height="38">
+								<Border Grid.Column="1"
+										Height="40"
+										VerticalAlignment="Top">
 									<TextBlock x:Name="HeaderElement"
-											   Foreground="{ThemeResource OutlinedTextBoxHeaderForeground}"
-											   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-											   IsHitTestVisible="False"
-											   RenderTransformOrigin="0,0.5"
 											   Text="{TemplateBinding Header}"
+											   Foreground="{ThemeResource OutlinedTextBoxHeaderForeground}"
 											   TextAlignment="{TemplateBinding TextAlignment}"
 											   TextWrapping="{TemplateBinding TextWrapping}"
-											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+											   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											   RenderTransformOrigin="0,0.5"
+											   IsHitTestVisible="False">
 										<TextBlock.RenderTransform>
 											<CompositeTransform x:Name="HeaderElement_CompositeTransform" />
 										</TextBlock.RenderTransform>
 									</TextBlock>
 								</Border>
-							</Border>
 
-							<Border Grid.Column="1"
-									Height="38"
-									VerticalAlignment="Center">
+								<Border Grid.Column="1"
+										Height="40"
+										VerticalAlignment="Top">
+									<TextBlock x:Name="PlaceholderElement"
+											   Text="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
+											   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
+											   TextAlignment="{TemplateBinding TextAlignment}"
+											   TextWrapping="{TemplateBinding TextWrapping}"
+											   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											   IsHitTestVisible="False"
+											   Visibility="{Binding Text, Converter={StaticResource EmptyToVisibleConverter}, RelativeSource={RelativeSource TemplatedParent}}">
+										<TextBlock.RenderTransform>
+											<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+										</TextBlock.RenderTransform>
+									</TextBlock>
+								</Border>
+							</Grid>
 
-								<TextBlock x:Name="PlaceholderElement"
-										   Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}}"
-										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-										   IsHitTestVisible="False"
-										   Visibility="{Binding Text, Converter={StaticResource EmptyToVisibleConverter}, RelativeSource={RelativeSource TemplatedParent}}"
-										   Text="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}}"
-										   TextAlignment="{TemplateBinding TextAlignment}"
-										   TextWrapping="{TemplateBinding TextWrapping}"
-										   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-									<TextBlock.RenderTransform>
-										<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
-									</TextBlock.RenderTransform>
-								</TextBlock>
-							</Border>
-
-							<Button x:Name="DeleteButton"
-									Grid.Column="2"
-									Margin="8,0,0,0"
+							<!-- 2: DeleteButton -->
+							<Button Grid.Column="2"
+									x:Name="DeleteButton"
+									Height="40"
+									Width="40"
+									VerticalAlignment="Top"
+									AutomationProperties.AccessibilityView="Raw"
 									IsTabStop="False"
-									Style="{StaticResource MaterialDeleteButtonStyle}"
-									VerticalAlignment="Stretch"
 									Visibility="Collapsed"
-									AutomationProperties.AccessibilityView="Raw" />
+									Style="{StaticResource MaterialDeleteButtonStyle}" />
 						</Grid>
-					</Border>
+
+						<!--
+							In Figma design, border thickness doesn't push its inner content like on xaml.
+							So we are putting the border as an overlay here. To keep the rest of the measurements/values identical to Figma.
+						-->
+						<Border x:Name="BorderBorder"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

@@ -291,10 +291,10 @@ public static partial class VisualTreeHelperEx // debugging
 			if (x is FrameworkElement fe)
 			{
 				yield return $"Actual={fe.ActualWidth}x{fe.ActualHeight}";
-				if (fe.TransformToVisual(Window.Current.Content).TransformPoint(default) is var absPos)
-				{
-					yield return $"AbsPos={absPos.X},{absPos.Y}";
-				}
+				//if (fe.TransformToVisual(Window.Current.Content).TransformPoint(default) is var absPos)
+				//{
+				//	yield return $"AbsPos={absPos.X},{absPos.Y}";
+				//}
 				yield return $"HV={fe.HorizontalAlignment}/{fe.VerticalAlignment}";
 			}
 			if (x is Grid grid)
