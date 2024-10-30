@@ -10,7 +10,7 @@ The Uno Material v5 packages introduce a new dependency on the [Uno Themes](http
 
 ### Upgrading to Uno Themes V-Next
 
-Removal of `Material` Prefix from `TextBox` Styles and Resource Keys: We have standardized the naming of TextBox styles and resource keys by removing the Material prefix. This change aims to simplify resource key usage and align the naming convention across Uno Themes.
+We have standardized the naming of styles and resource keys. This change aims to simplify resource key usage and align the naming convention across Uno Themes.
 
 #### Changes to Resource Keys
 
@@ -28,16 +28,6 @@ Removal of `Material` Prefix from `TextBox` Styles and Resource Keys: We have st
 | MaterialOutlinedTextBoxMinHeight | OutlinedTextBoxMinHeight |
 | MaterialOutlinedTextBoxBorderThicknessFocused | OutlinedTextBoxBorderThicknessFocused |
 | MaterialOutlinedTextBoxBorderThicknessPointerOver | OutlinedTextBoxBorderThicknessPointerOver |
-
-- Replace resource keys that start with `Material` by removing the Material prefix.
-
-    ```xml
-    <!-- Old usage with 'Material' prefix in the resource key -->
-    <Setter Property="Padding" Value="{ThemeResource MaterialFilledTextBoxPadding}" />
-    <!-- New usage after removing the 'Material' prefix -->
-    <Setter Property="Padding" Value="{ThemeResource FilledTextBoxPadding}" />
-
-    ```
 
 ### Upgrading to Uno Themes 5.1
 
