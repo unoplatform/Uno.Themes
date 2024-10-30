@@ -8,6 +8,37 @@ uid: Uno.Themes.Material.Migration
 
 The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following changes have been made:
 
+### Upgrading to Uno Themes V-Next
+
+Removal of `Material` Prefix from `TextBox` Styles and Resource Keys: We have standardized the naming of TextBox styles and resource keys by removing the Material prefix. This change aims to simplify resource key usage and align the naming convention across Uno Themes.
+
+#### Changes to Resource Keys
+
+| Old Resource Key | New Resource Key |
+| ---- | ---- |
+| MaterialTextBoxClearGlyphWidth | TextBoxClearGlyphWidth |
+| MaterialTextBoxClearGlyphHeight | TextBoxClearGlyphHeight |
+| MaterialFilledTextBoxCornerRadius | FilledTextBoxCornerRadius |
+| MaterialFilledTextBoxPadding | FilledTextBoxPadding |
+| MaterialFilledTextBoxMinHeight | FilledTextBoxMinHeight |
+| MaterialFilledTextBoxBorderHeightFocused | FilledTextBoxBorderHeightFocused |
+| MaterialOutlinedTextBoxBorderThickness | OutlinedTextBoxBorderThickness |
+| MaterialOutlinedTextBoxCornerRadius | OutlinedTextBoxCornerRadius |
+| MaterialOutlinedTextBoxPadding | OutlinedTextBoxPadding |
+| MaterialOutlinedTextBoxMinHeight | OutlinedTextBoxMinHeight |
+| MaterialOutlinedTextBoxBorderThicknessFocused | OutlinedTextBoxBorderThicknessFocused |
+| MaterialOutlinedTextBoxBorderThicknessPointerOver | OutlinedTextBoxBorderThicknessPointerOver |
+
+- Replace resource keys that start with `Material` by removing the Material prefix.
+
+    ```xml
+    <!-- Old usage with 'Material' prefix in the resource key -->
+    <Setter Property="Padding" Value="{ThemeResource MaterialFilledTextBoxPadding}" />
+    <!-- New usage after removing the 'Material' prefix -->
+    <Setter Property="Padding" Value="{ThemeResource FilledTextBoxPadding}" />
+
+    ```
+
 ### Upgrading to Uno Themes 5.1
 
 #### TextBox `PlaceholderText` and `Header`
