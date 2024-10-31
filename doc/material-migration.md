@@ -14,31 +14,23 @@ We have standardized the naming of styles and resource keys. This change aims to
 
 #### Changes to Resource Keys
 
-| Old Resource Key | New Resource Key |
-| ---- | ---- |
-| MaterialTextBoxClearGlyphWidth | TextBoxClearGlyphWidth |
-| MaterialTextBoxClearGlyphHeight | TextBoxClearGlyphHeight |
-| MaterialFilledTextBoxCornerRadius | FilledTextBoxCornerRadius |
-| MaterialFilledTextBoxPadding | FilledTextBoxPadding |
-| MaterialFilledTextBoxMinHeight | FilledTextBoxMinHeight |
-| MaterialFilledTextBoxBorderHeightFocused | FilledTextBoxBorderHeightFocused |
-| MaterialOutlinedTextBoxBorderThickness | OutlinedTextBoxBorderThickness |
-| MaterialOutlinedTextBoxCornerRadius | OutlinedTextBoxCornerRadius |
-| MaterialOutlinedTextBoxPadding | OutlinedTextBoxPadding |
-| MaterialOutlinedTextBoxMinHeight | OutlinedTextBoxMinHeight |
-| MaterialOutlinedTextBoxBorderThicknessFocused | OutlinedTextBoxBorderThicknessFocused |
-| MaterialOutlinedTextBoxBorderThicknessPointerOver | OutlinedTextBoxBorderThicknessPointerOver |
-
-#### Removal of PasswordBox Border Padding Resources
-
-The following resource keys related to `PasswordBox` border padding have been removed:
-
-| Old Resource Key | New Resource Key | Value |
-| ---- | ---- |---- |
-| OutlinedPasswordBoxBorderPadding | ***REMOVED*** | 1 |
-| OutlinedPasswordBoxBorderPaddingPointerOver | ***REMOVED*** | 0 |
-| OutlinedPasswordBoxBorderPaddingFocused | ***REMOVED*** | 0 |
-| OutlinedPasswordBoxBorderThicknessPointerOver | OutlinedPasswordBoxBorderThicknessPointerOver | 1 |
+| Old Resource Key                                  | New Resource Key                                |
+|---------------------------------------------------|-------------------------------------------------|
+| MaterialTextBoxClearGlyphWidth                    | TextBoxClearGlyphWidth                          |
+| MaterialTextBoxClearGlyphHeight                   | TextBoxClearGlyphHeight                         |
+| MaterialFilledTextBoxCornerRadius                 | FilledTextBoxCornerRadius                       |
+| MaterialFilledTextBoxPadding                      | FilledTextBoxPadding                            |
+| MaterialFilledTextBoxMinHeight                    | FilledTextBoxMinHeight                          |
+| MaterialFilledTextBoxBorderHeightFocused          | FilledTextBoxBorderHeightFocused                |
+| MaterialOutlinedTextBoxBorderThickness            | OutlinedTextBoxBorderThickness                  |
+| MaterialOutlinedTextBoxCornerRadius               | OutlinedTextBoxCornerRadius                     |
+| MaterialOutlinedTextBoxPadding                    | OutlinedTextBoxPadding                          |
+| MaterialOutlinedTextBoxMinHeight                  | OutlinedTextBoxMinHeight                        |
+| MaterialOutlinedTextBoxBorderThicknessFocused     | OutlinedTextBoxBorderThicknessFocused           |
+| MaterialOutlinedTextBoxBorderThicknessPointerOver | OutlinedTextBoxBorderThicknessPointerOver       |
+| OutlinedPasswordBoxBorderPadding                  | ***REMOVED***                                   |
+| OutlinedPasswordBoxBorderPaddingPointerOver       | ***REMOVED***                                   |
+| OutlinedPasswordBoxBorderPaddingFocused           | ***REMOVED***                                   |
 
 ### Upgrading to Uno Themes 5.1
 
