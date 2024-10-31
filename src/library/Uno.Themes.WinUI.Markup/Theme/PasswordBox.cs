@@ -155,18 +155,6 @@ public static partial class Theme
 					public static ThemeResourceKey<Brush> Focused => new("OutlinedPasswordBoxBorderBrushFocused");
 				}
 
-				public static partial class BorderPadding
-				{
-					[ResourceKeyDefinition(typeof(Thickness), "OutlinedPasswordBoxBorderPadding")]
-					public static ThemeResourceKey<Thickness> Default => new("OutlinedPasswordBoxBorderPadding");
-
-					[ResourceKeyDefinition(typeof(Thickness), "OutlinedPasswordBoxBorderPaddingPointerOver")]
-					public static ThemeResourceKey<Thickness> PointerOver => new("OutlinedPasswordBoxBorderPaddingPointerOver");
-
-					[ResourceKeyDefinition(typeof(Thickness), "OutlinedPasswordBoxBorderPaddingFocused")]
-					public static ThemeResourceKey<Thickness> Focused => new("OutlinedPasswordBoxBorderPaddingFocused");
-				}
-
 				public static partial class BorderThickness
 				{
 					[ResourceKeyDefinition(typeof(Thickness), "OutlinedPasswordBoxBorderThickness")]
