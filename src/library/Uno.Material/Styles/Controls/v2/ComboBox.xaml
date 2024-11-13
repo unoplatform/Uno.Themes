@@ -460,10 +460,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ComboBox">
-					<Grid x:Name="RootGrid"
-						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-						  Background="{TemplateBinding Background}"
-						  CornerRadius="{ThemeResource ComboBoxCornerRadius}">
+					<Grid>
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -585,7 +582,9 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="ComboBoxContent"
-							  Padding="{TemplateBinding Padding}">
+							  Padding="{TemplateBinding Padding}"
+							  Background="{TemplateBinding Background}"
+							  CornerRadius="{ThemeResource ComboBoxCornerRadius}">
 							<Grid.Resources>
 								<!-- Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not -->
 								<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder"
@@ -685,8 +684,7 @@
 						<Border x:Name="BorderBorder"
 								BorderBrush="{TemplateBinding BorderBrush}"
 								BorderThickness="{TemplateBinding BorderThickness}"
-								CornerRadius="{ThemeResource ComboBoxCornerRadius}"
-								Background="Transparent" />
+								CornerRadius="{ThemeResource ComboBoxCornerRadius}" />
 
 						<!-- Popup -->
 						<Popup x:Name="Popup">
