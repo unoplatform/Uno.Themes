@@ -460,12 +460,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ComboBox">
-					<Grid x:Name="RootGrid"
-						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-						  Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  CornerRadius="{ThemeResource ComboBoxCornerRadius}">
+					<Grid>
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
@@ -479,7 +474,7 @@
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundDisabled}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ComboBoxLeadingIconForegroundDisabled}" />
 										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxBackgroundDisabled}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -490,7 +485,7 @@
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPointerOver}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPointerOver}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPointerOver}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -501,7 +496,7 @@
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPressed}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPressed}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPressed}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -517,8 +512,8 @@
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocused}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundFocused}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocused}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
-										<Setter Target="RootGrid.BorderThickness" Value="{ThemeResource ComboBoxOpenedBorderThickness}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
+										<Setter Target="BorderBorder.BorderThickness" Value="{ThemeResource ComboBoxOpenedBorderThickness}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -530,8 +525,8 @@
 										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocusedPressed}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundFocusedPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocusedPressed}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
-										<Setter Target="RootGrid.BorderThickness" Value="{ThemeResource ComboBoxOpenedBorderThickness}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
+										<Setter Target="BorderBorder.BorderThickness" Value="{ThemeResource ComboBoxOpenedBorderThickness}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -546,8 +541,8 @@
 							<VisualStateGroup x:Name="DropDownStates">
 								<VisualState x:Name="Opened">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
-										<Setter Target="RootGrid.BorderThickness" Value="{ThemeResource ComboBoxOpenedBorderThickness}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
+										<Setter Target="BorderBorder.BorderThickness" Value="{ThemeResource ComboBoxOpenedBorderThickness}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundOpened}" />
 										<Setter Target="DropDownGlyph_Up.Fill" Value="{ThemeResource ComboBoxArrowForegroundOpened}" />
 										<Setter Target="DropDownGlyph_Down.Visibility" Value="Collapsed" />
@@ -567,8 +562,8 @@
 
 								<VisualState x:Name="Closed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
-										<Setter Target="RootGrid.BorderThickness" Value="{ThemeResource ComboBoxBorderThickness}" />
+										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
+										<Setter Target="BorderBorder.BorderThickness" Value="{ThemeResource ComboBoxBorderThickness}" />
 										<Setter Target="DropDownGlyph_Down.Visibility" Value="Visible" />
 										<Setter Target="DropDownGlyph_Up.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
@@ -587,7 +582,9 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="ComboBoxContent"
-							  Padding="{TemplateBinding Padding}">
+							  Padding="{TemplateBinding Padding}"
+							  Background="{TemplateBinding Background}"
+							  CornerRadius="{ThemeResource ComboBoxCornerRadius}">
 							<Grid.Resources>
 								<!-- Resources added here in order to manage the ContentPresenter TranslateY depending if there is a PlaceholderText or not -->
 								<CompositeTransform x:Key="ContentPresenter_CompositeTransformWithPlaceholder"
@@ -679,6 +676,15 @@
 								  Stretch="Uniform"
 								  Visibility="Collapsed" />
 						</Grid>
+
+						<!--
+							In Figma design, border thickness doesn't push its inner content like on xaml.
+							So we are putting the border as an overlay here. To keep the rest of the measurements/values identical to Figma.
+						-->
+						<Border x:Name="BorderBorder"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{ThemeResource ComboBoxCornerRadius}" />
 
 						<!-- Popup -->
 						<Popup x:Name="Popup">
