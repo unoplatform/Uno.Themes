@@ -19,6 +19,171 @@
 	<x:Double x:Key="MaterialFlyoutMenuSeparatorHeight">1</x:Double>
 	<GridLength x:Key="MaterialFlyoutMenuItemRightMargin">38</GridLength>
 
+	<ControlTemplate x:Key="ToggleMenuFlyoutItemTemplate"
+					 TargetType="ToggleMenuFlyoutItem">
+		<Grid x:Name="LayoutRoot"
+			  Padding="{TemplateBinding Padding}"
+			  Background="{TemplateBinding Background}"
+			  BorderBrush="{TemplateBinding BorderBrush}"
+			  BorderThickness="{TemplateBinding BorderThickness}"
+			  CornerRadius="{TemplateBinding CornerRadius}">
+
+			<VisualStateManager.VisualStateGroups>
+				<VisualStateGroup x:Name="CommonStates">
+					<VisualState x:Name="Normal">
+						<Storyboard>
+							<PointerUpThemeAnimation Storyboard.TargetName="AnimationRoot" />
+						</Storyboard>
+					</VisualState>
+
+					<VisualState x:Name="PointerOver">
+						<VisualState.Setters>
+							<Setter Target="CommonStatesOverlay.Background"
+										        Value="{ThemeResource OnSurfaceHoverBrush}" />
+						</VisualState.Setters>
+
+						<Storyboard>
+							<PointerUpThemeAnimation Storyboard.TargetName="AnimationRoot" />
+						</Storyboard>
+					</VisualState>
+
+					<VisualState x:Name="Pressed">
+						<VisualState.Setters>
+							<Setter Target="CommonStatesOverlay.Background"
+										        Value="{ThemeResource OnSurfacePressedBrush}" />
+						</VisualState.Setters>
+
+						<Storyboard>
+							<PointerDownThemeAnimation Storyboard.TargetName="AnimationRoot" />
+						</Storyboard>
+					</VisualState>
+
+					<VisualState x:Name="Disabled">
+						<VisualState.Setters>
+							<Setter Target="TextBlock.Opacity"
+										        Value="{StaticResource DisabledOpacity}" />
+							<Setter Target="IconRoot.Opacity"
+										        Value="{StaticResource DisabledOpacity}" />
+							<Setter Target="CheckGlyph.Opacity"
+										        Value="{StaticResource DisabledOpacity}" />
+							<Setter Target="KeyboardAcceleratorTextBlock.Opacity"
+										        Value="{StaticResource DisabledOpacity}" />
+						</VisualState.Setters>
+					</VisualState>
+				</VisualStateGroup>
+
+				<VisualStateGroup x:Name="CheckStates">
+					<VisualState x:Name="Unchecked" />
+
+					<VisualState x:Name="Checked">
+						<VisualState.Setters>
+							<Setter Target="CheckGlyph.Opacity"
+										        Value="1" />
+						</VisualState.Setters>
+					</VisualState>
+
+					<VisualState x:Name="UncheckedWithIcon">
+						<VisualState.Setters>
+							<Setter Target="TextBlock.Margin"
+										        Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+							<Setter Target="IconRoot.Visibility"
+										        Value="Visible" />
+						</VisualState.Setters>
+					</VisualState>
+
+					<VisualState x:Name="CheckedWithIcon">
+						<VisualState.Setters>
+							<Setter Target="TextBlock.Margin"
+										        Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+							<Setter Target="IconRoot.Visibility"
+										        Value="Visible" />
+							<Setter Target="CheckGlyph.Opacity"
+										        Value="1" />
+						</VisualState.Setters>
+					</VisualState>
+				</VisualStateGroup>
+				<VisualStateGroup x:Name="FocusStates">
+					<VisualState x:Name="Focused">
+						<VisualState.Setters>
+							<Setter Target="CommonStatesOverlay.Background"
+										        Value="{ThemeResource OnSurfaceFocusedBrush}" />
+						</VisualState.Setters>
+					</VisualState>
+
+					<VisualState x:Name="PointerFocused" />
+				</VisualStateGroup>
+				<VisualStateGroup x:Name="KeyboardAcceleratorTextVisibility">
+					<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
+					<VisualState x:Name="KeyboardAcceleratorTextVisible">
+						<VisualState.Setters>
+							<Setter Target="KeyboardAcceleratorTextBlock.Visibility"
+										        Value="Visible" />
+						</VisualState.Setters>
+					</VisualState>
+				</VisualStateGroup>
+			</VisualStateManager.VisualStateGroups>
+
+			<Grid x:Name="AnimationRoot">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="{StaticResource MaterialFlyoutMenuItemRightMargin}" />
+					<ColumnDefinition Width="Auto"
+								                  MinWidth="16" />
+					<ColumnDefinition Width="12" />
+				</Grid.ColumnDefinitions>
+
+				<Path x:Name="CheckGlyph"
+							      Width="{StaticResource MaterialFlyoutMenuToggleCheckGlyphWidth}"
+							      Height="{StaticResource MaterialFlyoutMenuToggleCheckGlyphHeight}"
+							      VerticalAlignment="Center"
+							      Margin="12,0"
+							      Data="{StaticResource MaterialFlyoutCheckGlyphPathStyle}"
+							      Fill="{ThemeResource OnSurfaceVariantBrush}"
+							      Opacity="0"
+							      Stretch="Uniform" />
+
+				<Viewbox x:Name="IconRoot"
+							         Grid.Column="1"
+							         Width="{StaticResource MaterialFlyoutMenuItemIconWidth}"
+							         Height="{StaticResource MaterialFlyoutMenuItemIconHeight}"
+							         HorizontalAlignment="Left"
+							         VerticalAlignment="Center"
+							         Visibility="Collapsed">
+					<ContentPresenter x:Name="IconContent"
+								                  Content="{TemplateBinding Icon}"
+								                  Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+				</Viewbox>
+
+				<TextBlock x:Name="TextBlock"
+							           Grid.Column="1"
+							           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							           Foreground="{TemplateBinding Foreground}"
+							           Style="{StaticResource MaterialLabelLarge}"
+							           Text="{TemplateBinding Text}" />
+
+				<!--  Mobile devices do not support keyboard shortcuts  -->
+				<Grid Grid.Column="3"
+							      android:Visibility="Collapsed"
+							      ios:Visibility="Collapsed">
+					<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+								           VerticalAlignment="Center"
+								           AutomationProperties.AccessibilityView="Raw"
+								           Foreground="{ThemeResource OnSurfaceVariantBrush}"
+								           Style="{StaticResource MaterialLabelLarge}"
+								           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+								           TextAlignment="Right"
+								           Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+				</Grid>
+			</Grid>
+
+			<!--  Overlay  -->
+			<Border x:Name="CommonStatesOverlay"
+						        Background="Transparent" />
+		</Grid>
+	</ControlTemplate>
+
 	<!--  Material FlyoutPresenter Style  -->
 	<Style x:Key="MaterialFlyoutPresenterStyle"
 	       TargetType="FlyoutPresenter">
@@ -288,175 +453,22 @@
 		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
 		<Setter Property="Padding"
 		        Value="0" />
+		<Setter Property="Template"
+				Value="{StaticResource ToggleMenuFlyoutItemTemplate}" />
+	</Style>
 
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ToggleMenuFlyoutItem">
-
-					<Grid x:Name="LayoutRoot"
-					      Padding="{TemplateBinding Padding}"
-					      Background="{TemplateBinding Background}"
-					      BorderBrush="{TemplateBinding BorderBrush}"
-					      BorderThickness="{TemplateBinding BorderThickness}"
-					      CornerRadius="{TemplateBinding CornerRadius}">
-
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal">
-									<Storyboard>
-										<PointerUpThemeAnimation Storyboard.TargetName="AnimationRoot" />
-									</Storyboard>
-								</VisualState>
-
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{ThemeResource OnSurfaceHoverBrush}" />
-									</VisualState.Setters>
-
-									<Storyboard>
-										<PointerUpThemeAnimation Storyboard.TargetName="AnimationRoot" />
-									</Storyboard>
-								</VisualState>
-
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{ThemeResource OnSurfacePressedBrush}" />
-									</VisualState.Setters>
-
-									<Storyboard>
-										<PointerDownThemeAnimation Storyboard.TargetName="AnimationRoot" />
-									</Storyboard>
-								</VisualState>
-
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="TextBlock.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
-										<Setter Target="IconRoot.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
-										<Setter Target="CheckGlyph.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
-										<Setter Target="KeyboardAcceleratorTextBlock.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-
-							<VisualStateGroup x:Name="CheckStates">
-								<VisualState x:Name="Unchecked" />
-
-								<VisualState x:Name="Checked">
-									<VisualState.Setters>
-										<Setter Target="CheckGlyph.Opacity"
-										        Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="UncheckedWithIcon">
-									<VisualState.Setters>
-										<Setter Target="TextBlock.Margin"
-										        Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Visibility"
-										        Value="Visible" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="CheckedWithIcon">
-									<VisualState.Setters>
-										<Setter Target="TextBlock.Margin"
-										        Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-										<Setter Target="IconRoot.Visibility"
-										        Value="Visible" />
-										<Setter Target="CheckGlyph.Opacity"
-										        Value="1" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-							<VisualStateGroup x:Name="FocusStates">
-								<VisualState x:Name="Focused">
-									<VisualState.Setters>
-										<Setter Target="CommonStatesOverlay.Background"
-										        Value="{ThemeResource OnSurfaceFocusedBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="PointerFocused" />
-							</VisualStateGroup>
-							<VisualStateGroup x:Name="KeyboardAcceleratorTextVisibility">
-								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
-								<VisualState x:Name="KeyboardAcceleratorTextVisible">
-									<VisualState.Setters>
-										<Setter Target="KeyboardAcceleratorTextBlock.Visibility"
-										        Value="Visible" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Grid x:Name="AnimationRoot">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="{StaticResource MaterialFlyoutMenuItemRightMargin}" />
-								<ColumnDefinition Width="Auto"
-								                  MinWidth="16" />
-								<ColumnDefinition Width="12" />
-							</Grid.ColumnDefinitions>
-
-							<Path x:Name="CheckGlyph"
-							      Width="{StaticResource MaterialFlyoutMenuToggleCheckGlyphWidth}"
-							      Height="{StaticResource MaterialFlyoutMenuToggleCheckGlyphHeight}"
-							      VerticalAlignment="Center"
-							      Margin="12,0"
-							      Data="{StaticResource MaterialFlyoutCheckGlyphPathStyle}"
-							      Fill="{ThemeResource OnSurfaceVariantBrush}"
-							      Opacity="0"
-							      Stretch="Uniform" />
-
-							<Viewbox x:Name="IconRoot"
-							         Grid.Column="1"
-							         Width="{StaticResource MaterialFlyoutMenuItemIconWidth}"
-							         Height="{StaticResource MaterialFlyoutMenuItemIconHeight}"
-							         HorizontalAlignment="Left"
-							         VerticalAlignment="Center"
-							         Visibility="Collapsed">
-								<ContentPresenter x:Name="IconContent"
-								                  Content="{TemplateBinding Icon}"
-								                  Foreground="{ThemeResource OnSurfaceVariantBrush}" />
-							</Viewbox>
-
-							<TextBlock x:Name="TextBlock"
-							           Grid.Column="1"
-							           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-							           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-							           Foreground="{TemplateBinding Foreground}"
-							           Style="{StaticResource MaterialLabelLarge}"
-							           Text="{TemplateBinding Text}" />
-
-							<!--  Mobile devices do not support keyboard shortcuts  -->
-							<Grid Grid.Column="3"
-							      android:Visibility="Collapsed"
-							      ios:Visibility="Collapsed">
-								<TextBlock x:Name="KeyboardAcceleratorTextBlock"
-								           VerticalAlignment="Center"
-								           AutomationProperties.AccessibilityView="Raw"
-								           Foreground="{ThemeResource OnSurfaceVariantBrush}"
-								           Style="{StaticResource MaterialLabelLarge}"
-								           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
-								           TextAlignment="Right"
-								           Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
-							</Grid>
-						</Grid>
-
-						<!--  Overlay  -->
-						<Border x:Name="CommonStatesOverlay"
-						        Background="Transparent" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+	<Style x:Key="MaterialRadioMenuFlyoutItemStyle"
+		   TargetType="RadioMenuFlyoutItem">
+		<Setter Property="Foreground"
+		        Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="Background"
+		        Value="{ThemeResource SurfaceBrush}" />
+		<Setter Property="Height"
+		        Value="{StaticResource MaterialFlyoutMenuItemHeight}" />
+		<Setter Property="Padding"
+		        Value="0" />
+		<Setter Property="Template"
+				Value="{StaticResource ToggleMenuFlyoutItemTemplate}" />
 	</Style>
 
 	<!--  Material MenuFlyoutSubItem Style  -->
@@ -643,6 +655,10 @@
 	<Style x:Key="MaterialDefaultToggleMenuFlyoutItemStyle"
 		   TargetType="ToggleMenuFlyoutItem"
 		   BasedOn="{StaticResource MaterialToggleMenuFlyoutItemStyle}" />
+
+	<Style x:Key="MaterialDefaultRadioMenuFlyoutItemStyle"
+		   TargetType="RadioMenuFlyoutItem"
+		   BasedOn="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
 	<Style x:Key="MaterialDefaultMenuFlyoutSubItemStyle"
 		   TargetType="MenuFlyoutSubItem"
