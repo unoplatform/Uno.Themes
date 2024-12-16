@@ -39,8 +39,7 @@
 
 					<VisualState x:Name="PointerOver">
 						<VisualState.Setters>
-							<Setter Target="CommonStatesOverlay.Background"
-										        Value="{ThemeResource OnSurfaceHoverBrush}" />
+							<Setter Target="CommonStatesOverlay.Background" Value="{ThemeResource OnSurfaceHoverBrush}" />
 						</VisualState.Setters>
 
 						<Storyboard>
@@ -50,8 +49,7 @@
 
 					<VisualState x:Name="Pressed">
 						<VisualState.Setters>
-							<Setter Target="CommonStatesOverlay.Background"
-										        Value="{ThemeResource OnSurfacePressedBrush}" />
+							<Setter Target="CommonStatesOverlay.Background" Value="{ThemeResource OnSurfacePressedBrush}" />
 						</VisualState.Setters>
 
 						<Storyboard>
@@ -61,14 +59,10 @@
 
 					<VisualState x:Name="Disabled">
 						<VisualState.Setters>
-							<Setter Target="TextBlock.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
-							<Setter Target="IconRoot.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
-							<Setter Target="CheckGlyph.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
-							<Setter Target="KeyboardAcceleratorTextBlock.Opacity"
-										        Value="{StaticResource DisabledOpacity}" />
+							<Setter Target="TextBlock.Opacity" Value="{StaticResource DisabledOpacity}" />
+							<Setter Target="IconRoot.Opacity" Value="{StaticResource DisabledOpacity}" />
+							<Setter Target="CheckGlyph.Opacity" Value="{StaticResource DisabledOpacity}" />
+							<Setter Target="KeyboardAcceleratorTextBlock.Opacity" Value="{StaticResource DisabledOpacity}" />
 						</VisualState.Setters>
 					</VisualState>
 				</VisualStateGroup>
@@ -78,36 +72,29 @@
 
 					<VisualState x:Name="Checked">
 						<VisualState.Setters>
-							<Setter Target="CheckGlyph.Opacity"
-										        Value="1" />
+							<Setter Target="CheckGlyph.Opacity" Value="1" />
 						</VisualState.Setters>
 					</VisualState>
 
 					<VisualState x:Name="UncheckedWithIcon">
 						<VisualState.Setters>
-							<Setter Target="TextBlock.Margin"
-										        Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-							<Setter Target="IconRoot.Visibility"
-										        Value="Visible" />
+							<Setter Target="TextBlock.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+							<Setter Target="IconRoot.Visibility" Value="Visible" />
 						</VisualState.Setters>
 					</VisualState>
 
 					<VisualState x:Name="CheckedWithIcon">
 						<VisualState.Setters>
-							<Setter Target="TextBlock.Margin"
-										        Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
-							<Setter Target="IconRoot.Visibility"
-										        Value="Visible" />
-							<Setter Target="CheckGlyph.Opacity"
-										        Value="1" />
+							<Setter Target="TextBlock.Margin" Value="{ThemeResource MenuFlyoutItemPlaceholderThemeThickness}" />
+							<Setter Target="IconRoot.Visibility" Value="Visible" />
+							<Setter Target="CheckGlyph.Opacity" Value="1" />
 						</VisualState.Setters>
 					</VisualState>
 				</VisualStateGroup>
 				<VisualStateGroup x:Name="FocusStates">
 					<VisualState x:Name="Focused">
 						<VisualState.Setters>
-							<Setter Target="CommonStatesOverlay.Background"
-										        Value="{ThemeResource OnSurfaceFocusedBrush}" />
+							<Setter Target="CommonStatesOverlay.Background" Value="{ThemeResource OnSurfaceFocusedBrush}" />
 						</VisualState.Setters>
 					</VisualState>
 
@@ -117,8 +104,7 @@
 					<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
 					<VisualState x:Name="KeyboardAcceleratorTextVisible">
 						<VisualState.Setters>
-							<Setter Target="KeyboardAcceleratorTextBlock.Visibility"
-										        Value="Visible" />
+							<Setter Target="KeyboardAcceleratorTextBlock.Visibility" Value="Visible" />
 						</VisualState.Setters>
 					</VisualState>
 				</VisualStateGroup>
@@ -130,58 +116,58 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="{StaticResource MaterialFlyoutMenuItemRightMargin}" />
 					<ColumnDefinition Width="Auto"
-								                  MinWidth="16" />
+									  MinWidth="16" />
 					<ColumnDefinition Width="12" />
 				</Grid.ColumnDefinitions>
 
 				<Path x:Name="CheckGlyph"
-							      Width="{StaticResource MaterialFlyoutMenuToggleCheckGlyphWidth}"
-							      Height="{StaticResource MaterialFlyoutMenuToggleCheckGlyphHeight}"
-							      VerticalAlignment="Center"
-							      Margin="12,0"
-							      Data="{StaticResource MaterialFlyoutCheckGlyphPathStyle}"
-							      Fill="{ThemeResource OnSurfaceVariantBrush}"
-							      Opacity="0"
-							      Stretch="Uniform" />
+					  Width="{StaticResource MaterialFlyoutMenuToggleCheckGlyphWidth}"
+					  Height="{StaticResource MaterialFlyoutMenuToggleCheckGlyphHeight}"
+					  VerticalAlignment="Center"
+					  Margin="12,0"
+					  Data="{StaticResource MaterialFlyoutCheckGlyphPathStyle}"
+					  Fill="{ThemeResource OnSurfaceVariantBrush}"
+					  Opacity="0"
+					  Stretch="Uniform" />
 
 				<Viewbox x:Name="IconRoot"
-							         Grid.Column="1"
-							         Width="{StaticResource MaterialFlyoutMenuItemIconWidth}"
-							         Height="{StaticResource MaterialFlyoutMenuItemIconHeight}"
-							         HorizontalAlignment="Left"
-							         VerticalAlignment="Center"
-							         Visibility="Collapsed">
+						 Grid.Column="1"
+						 Width="{StaticResource MaterialFlyoutMenuItemIconWidth}"
+						 Height="{StaticResource MaterialFlyoutMenuItemIconHeight}"
+						 HorizontalAlignment="Left"
+						 VerticalAlignment="Center"
+						 Visibility="Collapsed">
 					<ContentPresenter x:Name="IconContent"
-								                  Content="{TemplateBinding Icon}"
-								                  Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+									  Content="{TemplateBinding Icon}"
+									  Foreground="{ThemeResource OnSurfaceVariantBrush}" />
 				</Viewbox>
 
 				<TextBlock x:Name="TextBlock"
-							           Grid.Column="1"
-							           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-							           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-							           Foreground="{TemplateBinding Foreground}"
-							           Style="{StaticResource MaterialLabelLarge}"
-							           Text="{TemplateBinding Text}" />
+						   Grid.Column="1"
+						   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						   Foreground="{TemplateBinding Foreground}"
+						   Style="{StaticResource MaterialLabelLarge}"
+						   Text="{TemplateBinding Text}" />
 
-				<!--  Mobile devices do not support keyboard shortcuts  -->
+				<!-- Mobile devices do not support keyboard shortcuts -->
 				<Grid Grid.Column="3"
-							      android:Visibility="Collapsed"
-							      ios:Visibility="Collapsed">
+					  android:Visibility="Collapsed"
+					  ios:Visibility="Collapsed">
 					<TextBlock x:Name="KeyboardAcceleratorTextBlock"
-								           VerticalAlignment="Center"
-								           AutomationProperties.AccessibilityView="Raw"
-								           Foreground="{ThemeResource OnSurfaceVariantBrush}"
-								           Style="{StaticResource MaterialLabelLarge}"
-								           Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
-								           TextAlignment="Right"
-								           Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+							   VerticalAlignment="Center"
+							   AutomationProperties.AccessibilityView="Raw"
+							   Foreground="{ThemeResource OnSurfaceVariantBrush}"
+							   Style="{StaticResource MaterialLabelLarge}"
+							   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+							   TextAlignment="Right"
+							   Visibility="{Binding KeyboardAcceleratorTextOverride, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 				</Grid>
 			</Grid>
 
-			<!--  Overlay  -->
+			<!-- Overlay -->
 			<Border x:Name="CommonStatesOverlay"
-						        Background="Transparent" />
+					Background="Transparent" />
 		</Grid>
 	</ControlTemplate>
 
