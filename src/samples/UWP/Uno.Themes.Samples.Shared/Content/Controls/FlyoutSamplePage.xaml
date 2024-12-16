@@ -5,6 +5,7 @@
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  xmlns:ut="using:Uno.Themes"
 	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 	  xmlns:toolkit="using:Uno.UI.Toolkit">
 	<Page.Resources>
 		<x:String x:Key="FlyoutCloseGlyphPathData">M1.442037,0L16.002031,14.585751 30.588022,0.025996563 32.001024,1.4409965 17.414783,16.001002 31.97503,30.587006 30.560022,32 15.999268,17.413969 1.4130009,31.973999 0,30.558998 14.586494,15.998742 0.027028472,1.4140019z</x:String>
@@ -569,25 +570,25 @@
 								<Button.Flyout>
 									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MaterialMenuFlyoutPresenterStyle}">
 
-										<RadioMenuFlyoutItem Text="Landscape"
+										<muxc:RadioMenuFlyoutItem Text="Landscape"
 															 GroupName="OrientationGroup"
 															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
-										<RadioMenuFlyoutItem Text="Portrait"
+										<muxc:RadioMenuFlyoutItem Text="Portrait"
 															 GroupName="OrientationGroup"
 															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
 										<MenuFlyoutSeparator Style="{StaticResource MaterialMenuFlyoutSeparatorStyle}" />
 
-										<RadioMenuFlyoutItem Text="Small"
+										<muxc:RadioMenuFlyoutItem Text="Small"
 															 GroupName="SizeGroup"
 															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
-										<RadioMenuFlyoutItem Text="Medium"
+										<muxc:RadioMenuFlyoutItem Text="Medium"
 															 GroupName="SizeGroup"
 															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
-										<RadioMenuFlyoutItem Text="Large"
+										<muxc:RadioMenuFlyoutItem Text="Large"
 															 GroupName="SizeGroup"
 															 Style="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 									</MenuFlyout>

@@ -5,6 +5,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:not_win="http://uno.ui/not_win"
                     xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
                     mc:Ignorable="not_win ios android">
 
 	<x:String x:Key="MaterialFlyoutCheckGlyphPathStyle">M30.561941,0L31.997,1.393004 10.467954,23.597999 0,15.350999 1.2379759,13.780992 10.287961,20.909952z</x:String>
@@ -458,7 +459,7 @@
 	</Style>
 
 	<Style x:Key="MaterialRadioMenuFlyoutItemStyle"
-		   TargetType="RadioMenuFlyoutItem">
+		   TargetType="muxc:RadioMenuFlyoutItem">
 		<Setter Property="Foreground"
 		        Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="Background"
@@ -657,7 +658,7 @@
 		   BasedOn="{StaticResource MaterialToggleMenuFlyoutItemStyle}" />
 
 	<Style x:Key="MaterialDefaultRadioMenuFlyoutItemStyle"
-		   TargetType="RadioMenuFlyoutItem"
+		   TargetType="muxc:RadioMenuFlyoutItem"
 		   BasedOn="{StaticResource MaterialRadioMenuFlyoutItemStyle}" />
 
 	<Style x:Key="MaterialDefaultMenuFlyoutSubItemStyle"
