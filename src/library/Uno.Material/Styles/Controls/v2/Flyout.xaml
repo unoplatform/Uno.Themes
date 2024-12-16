@@ -608,21 +608,15 @@
 
 	<!--  Material MenuFlyoutSeparator Style  -->
 	<Style x:Key="MaterialMenuFlyoutSeparatorStyle"
-	       TargetType="MenuFlyoutSeparator">
-
-		<Setter Property="Background"
-		        Value="{ThemeResource SurfaceVariantBrush}" />
-		<Setter Property="Padding"
-		        Value="0,8" />
-		<Setter Property="Height"
-		        Value="{StaticResource MaterialFlyoutMenuSeparatorHeight}" />
-
+		   TargetType="MenuFlyoutSeparator">
+		<Setter Property="Background" Value="{ThemeResource SurfaceVariantBrush}" />
+		<Setter Property="Padding" Value="0,8" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="MenuFlyoutSeparator">
-					<Rectangle Height="{TemplateBinding Height}"
-					           Margin="{TemplateBinding Padding}"
-					           Fill="{TemplateBinding Background}" />
+					<Rectangle Fill="{TemplateBinding Background}"
+							   Margin="{TemplateBinding Padding}"
+							   Height="{StaticResource MaterialFlyoutMenuSeparatorHeight}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
