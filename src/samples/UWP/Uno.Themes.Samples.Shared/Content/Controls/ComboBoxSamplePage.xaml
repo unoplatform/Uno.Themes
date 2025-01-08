@@ -94,9 +94,21 @@
 								<!-- ComboBox -->
 								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Normal"
 												  Style="{StaticResource XamlDisplayBelowStyle}">
-									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
-											  PlaceholderText="Placeholder"
-											  ItemsSource="{Binding Data.Letters}" />
+									<StackPanel>
+										<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+												  PlaceholderText="Placeholder"
+												  ItemsSource="{Binding Data.Letters}" />
+
+										<!-- WIP - TEMPORARY FOR TESTING PURPOSES -->
+										<ComboBox x:Name="MyComboBox"
+												  Style="{StaticResource MaterialComboBoxStyle}"
+												  IsEditable="True">
+											<ComboBoxItem Content="Item 1" />
+											<ComboBoxItem Content="Item 2" />
+											<ComboBoxItem Content="Item 3" />
+											<ComboBoxItem Content="Item 4" />
+										</ComboBox>
+									</StackPanel>
 								</smtx:XamlDisplay>
 
 							</StackPanel>

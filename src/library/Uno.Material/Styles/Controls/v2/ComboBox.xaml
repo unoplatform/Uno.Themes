@@ -416,6 +416,74 @@
 		</Setter>
 	</Style>
 
+	<Style x:Key="MaterialTextBoxEditableComboBoxStyle"
+		   TargetType="TextBox">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OutlinedTextBoxCornerRadius}" />
+
+		<!-- Start: Body Large Typo -->
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+		<!-- End: Body Large Typo -->
+
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+
+		<Setter Property="Padding" Value="0,5,0,0" />
+		<Setter Property="MinHeight" Value="{ThemeResource OutlinedTextBoxMinHeight}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TextBox">
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed" />
+								<VisualState x:Name="Disabled" />
+								<VisualState x:Name="Focused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid CornerRadius="{TemplateBinding CornerRadius}"
+							  Background="{TemplateBinding Background}"
+							  Padding="{TemplateBinding Padding}">
+
+							<Grid Margin="0">
+								<Border MinHeight="40"
+										VerticalAlignment="Top"
+										Padding="0,10,0,8">
+									<ScrollViewer x:Name="ContentElement"
+												  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+												  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+												  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+												  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+												  IsTabStop="False"
+												  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+												  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+												  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+												  VerticalAlignment="Center"
+												  ZoomMode="Disabled"
+												  AutomationProperties.AccessibilityView="Raw">
+										<ScrollViewer.RenderTransform>
+											<CompositeTransform x:Name="ContentElement_CompositeTransform" />
+										</ScrollViewer.RenderTransform>
+									</ScrollViewer>
+								</Border>
+							</Grid>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<Style x:Key="MaterialComboBoxStyle"
 		   TargetType="ComboBox">
 		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
@@ -613,6 +681,24 @@
 											  Foreground="{ThemeResource ComboBoxLeadingIconForeground}"
 											  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 											  Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+
+							<!-- IsEditable -->
+							<TextBox x:Name="EditableText"
+									 Grid.Column="1"
+									 Style="{StaticResource MaterialTextBoxEditableComboBoxStyle}"
+									 Margin="0,0,0,0"
+									 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									 Visibility="Collapsed"
+									 x:Load="False" />
+							<Border x:Name="DropDownOverlay"
+									Grid.Column="2"
+									Background="Transparent"
+									Margin="4,4,4,4"
+									Visibility="Collapsed"
+									CornerRadius="{StaticResource ComboBoxDropDownButtonBackgroundCornerRadius}"
+									Width="30"
+									HorizontalAlignment="Right"
+									x:Load="False" />
 
 							<!-- ContentPresenter -->
 							<ContentPresenter x:Name="ContentPresenter"
