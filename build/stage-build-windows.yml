@@ -48,7 +48,7 @@ jobs:
     inputs:
       solution: src/samples/$(Lineage)/$(ProjectName).$(AppName)/$(ProjectName).$(AppName).csproj
       msbuildArchitecture: x86
-      msbuildArguments: /m /v:m /r /p:Configuration=Release "/p:InformationalVersion=%GITVERSION_InformationalVersion%" /p:TargetFrameworkOverride=uap10.0.19041 /p:GeneratePackageOnBuild=false /p:AotAssemblies=false /p:UseWebAssemblyAOT=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      msbuildArguments: /m /v:m /r /p:Configuration=Release "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:TargetFrameworkOverride=uap10.0.19041 /p:GeneratePackageOnBuild=false /p:AotAssemblies=false /p:UseWebAssemblyAOT=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
       clean: false
       maximumCpuCount: true
       restoreNugetPackages: false
@@ -61,7 +61,7 @@ jobs:
     inputs:
       solution: src/samples/$(Lineage)/$(ProjectName).$(AppName)/$(ProjectName).$(AppName).csproj
       msbuildArchitecture: x64
-      msbuildArguments: /m /v:m /r /p:Platform=x64 /p:Configuration=Release /p:TargetFrameworkOverride=net8.0-windows10.0.19041 /p:AppxPackageDir="Packages/" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true "/p:InformationalVersion=$(GitVersion.InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      msbuildArguments: /m /v:m /r /p:Platform=x64 /p:Configuration=Release /p:TargetFrameworkOverride=net8.0-windows10.0.19041 /p:AppxPackageDir="Packages/" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
       clean: false
       maximumCpuCount: true
       restoreNugetPackages: false

@@ -1,28 +1,15 @@
 steps:
-  - task: UseDotNet@2
-    displayName: 'Use .Net Core runtime 5.0.3'
-    inputs:
-      packageType: runtime
-      version: 5.0.3
+- pwsh: |
+    dotnet tool uninstall nbgv -g
+    dotnet tool install nbgv -g --version 3.6.139
+    nbgv cloud -a
+  displayName: Version with NBGV
+  name: NBGV
 
-  - task: UseDotNet@2
-    displayName: 'Use .Net Core runtime 3.1.0'
-    inputs:
-      packageType: runtime
-      version: 3.1.0
-  # Restore nuget.org to the list of existing sources, .NET 6 Pre 2 may somehow remove it
-  - powershell: |
-      dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org | Out-Null
-      $global:LASTEXITCODE = 0
-    displayName: Adjust nuget.org source 
-
-  - task: gitversion/setup@0
-    inputs:
-      versionSpec: '5.6.6'
-
-  - task: gitversion/execute@0
-    inputs:
-      updateAssemblyInfo: 'False'
-      useConfigFile: true
-      configFilePath: ./gitversion.yml
-    displayName: Use GitVersion
+- pwsh: |
+    $InformationalVersion="$(NBGV_SemVer2)+$(NBGV_BuildingRef)".Replace("refs/heads/","").Replace("/","-")
+    echo "##vso[task.setvariable variable=NBGV_InformationalVersion;]$InformationalVersion"
+    echo "##vso[task.setvariable variable=NBGV_InformationalVersion;isOutput=true;]$InformationalVersion"
+    echo "Informational Version: $InformationalVersion"
+  displayName: Generate Informational Version
+  name: NBGV_InformationalVersion

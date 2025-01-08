@@ -1,4 +1,4 @@
-﻿name: Azure Static Web Apps CI/CD
+name: Azure Static Web Apps CI/CD
 
 on:
   push:
@@ -27,19 +27,13 @@ jobs:
         with:
           fetch-depth: 0 # Required for gitversion
           submodules: true
-          
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.7
+
+      - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
+        id: nbgv
         with:
-          versionSpec: '5.10.3'
-          
-      - name: Determine Version
-        id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.7
-        with:
-          useConfigFile: true
-          configFilePath: gitversion.yml
-          
+          toolVersion: 3.6.139
+          setAllVars: true
+
       - name: Setup dotnet 8.0.300
         uses: actions/setup-dotnet@v1.7.2
         with:
@@ -47,7 +41,7 @@ jobs:
     
       - run: |
           cd src/samples/UWP/Uno.Themes.Samples.Wasm
-          dotnet build -c Release "/p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}" /p:TargetFrameworkOverride=net8.0
+          dotnet build -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net8.0
 
       - uses: actions/upload-artifact@v4
         with:

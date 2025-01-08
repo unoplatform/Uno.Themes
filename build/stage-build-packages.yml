@@ -33,7 +33,7 @@ jobs:
         msbuildLocationMethod: version
         msbuildVersion: latest
         maximumCpuCount: true
-        msbuildArguments: /m /v:m /r /p:GeneratePackageOnBuild=true /p:UseDotNetNativeToolchain=false /p:AotAssemblies=false "/p:PackageVersion=$(GitVersion.FullSemVer)" "/p:InformationalVersion=$(GitVersion.InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-packages.binlog
+        msbuildArguments: /m /v:m /r /p:GeneratePackageOnBuild=true /p:UseDotNetNativeToolchain=false /p:AotAssemblies=false "/p:PackageVersion=$(NBGV_SemVer2)" "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-packages.binlog
 
     - task: PowerShell@2
       displayName: Authenticode Sign Packages
