@@ -17,7 +17,7 @@ Is it possible to automate the creation of the Material Design color palette? Ye
 >                 ColorOverrideSource="ms-appx:///PROJECT_NAME/Styles/Application/MaterialColorsOverride.xaml" />
 > ```
 >
-> More details [In the _Manual Color Overrides_ section of the Getting Started page](xref:uno.themes.material.getstarted)
+> More details [In the _Manual Color Overrides_ section of the Getting Started page](xref:Uno.Themes.Material.GetStarted)
 
 ## The Uno.Dsp.Tasks NuGet package
 
