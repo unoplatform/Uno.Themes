@@ -416,7 +416,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialTextBoxEditableComboBoxStyle"
+	<Style x:Key="MaterialComboBoxEditableTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
@@ -647,6 +647,27 @@
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
+
+							<!-- TextStates -->
+							<VisualStateGroup x:Name="TextStates">
+
+								<VisualState x:Name="TextNotEmpty">
+									<VisualState.Setters>
+										<Setter Target="PlaceholderElement.Visibility" Value="Collapsed" />
+										<Setter Target="UpperPlaceholderElement.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+
+								<VisualState x:Name="TextEmpty">
+									<VisualState.StateTriggers>
+										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+							</VisualStateGroup>
+
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="ComboBoxContent"
@@ -685,7 +706,7 @@
 							<!-- IsEditable -->
 							<TextBox x:Name="EditableText"
 									 Grid.Column="1"
-									 Style="{StaticResource MaterialTextBoxEditableComboBoxStyle}"
+									 Style="{StaticResource MaterialComboBoxEditableTextBoxStyle}"
 									 Margin="0,0,0,0"
 									 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 									 Visibility="Collapsed"
