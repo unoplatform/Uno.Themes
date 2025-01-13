@@ -117,6 +117,7 @@
 			<Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
 			<Thickness x:Key="ComboBoxOpenedBorderThickness">2</Thickness>
 			<Thickness x:Key="ComboBoxPadding">16,0</Thickness>
+			<Thickness x:Key="ComboBoxEditableTextPadding">0,5,38,6</Thickness>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Light">
@@ -226,6 +227,7 @@
 			<Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
 			<Thickness x:Key="ComboBoxOpenedBorderThickness">2</Thickness>
 			<Thickness x:Key="ComboBoxPadding">16,0</Thickness>
+			<Thickness x:Key="ComboBoxEditableTextPadding">0,5,38,6</Thickness>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
@@ -416,73 +418,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialComboBoxEditableTextBoxStyle"
-		   TargetType="TextBox">
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
-		<Setter Property="BorderBrush" Value="Transparent" />
-		<Setter Property="BorderThickness" Value="0" />
-		<Setter Property="CornerRadius" Value="{ThemeResource OutlinedTextBoxCornerRadius}" />
 
-		<!-- Start: Body Large Typo -->
-		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
-		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
-		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
-		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
-		<!-- End: Body Large Typo -->
-
-		<Setter Property="HorizontalContentAlignment" Value="Left" />
-		<Setter Property="VerticalContentAlignment" Value="Center" />
-
-		<Setter Property="Padding" Value="0,5,0,0" />
-		<Setter Property="MinHeight" Value="{ThemeResource OutlinedTextBoxMinHeight}" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="TextBox">
-					<Grid>
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
-								<VisualState x:Name="Disabled" />
-								<VisualState x:Name="Focused" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Grid CornerRadius="{TemplateBinding CornerRadius}"
-							  Background="{TemplateBinding Background}"
-							  Padding="{TemplateBinding Padding}">
-
-							<Grid Margin="0">
-								<Border MinHeight="40"
-										VerticalAlignment="Top"
-										Padding="0,10,0,8">
-									<ScrollViewer x:Name="ContentElement"
-												  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-												  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-												  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-												  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-												  IsTabStop="False"
-												  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-												  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-												  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-												  VerticalAlignment="Center"
-												  ZoomMode="Disabled"
-												  AutomationProperties.AccessibilityView="Raw">
-										<ScrollViewer.RenderTransform>
-											<CompositeTransform x:Name="ContentElement_CompositeTransform" />
-										</ScrollViewer.RenderTransform>
-									</ScrollViewer>
-								</Border>
-							</Grid>
-						</Grid>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
 
 	<Style x:Key="MaterialComboBoxStyle"
 		   TargetType="ComboBox">
@@ -491,7 +427,7 @@
 		<Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
 		<Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThickness}" />
 		<Setter Property="Padding" Value="{ThemeResource ComboBoxPadding}" />
-
+		<Setter Property="TextBoxStyle" Value="{StaticResource MaterialComboBoxTextBoxStyle}" />
 		<!-- Start: Body Large Typo -->
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
@@ -537,7 +473,7 @@
 									<VisualState.Setters>
 										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundDisabled}" />
 										<Setter Target="DropDownGlyph_Down.Fill" Value="{ThemeResource OnSurfaceLowBrush}" />
-										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundDisabled}" />
+										<Setter Target="PlaceholderTextBlock.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundDisabled}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundDisabled}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundDisabled}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource ComboBoxLeadingIconForegroundDisabled}" />
@@ -550,7 +486,7 @@
 									<VisualState.Setters>
 										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundPointerOver}" />
 										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundPointerOver}" />
-										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPointerOver}" />
+										<Setter Target="PlaceholderTextBlock.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPointerOver}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPointerOver}" />
 										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPointerOver}" />
@@ -561,7 +497,7 @@
 									<VisualState.Setters>
 										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundPressed}" />
 										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundPressed}" />
-										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPressed}" />
+										<Setter Target="PlaceholderTextBlock.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundPressed}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPressed}" />
 										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPressed}" />
@@ -577,7 +513,7 @@
 										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundFocused}" />
 										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundFocused}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocused}" />
-										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocused}" />
+										<Setter Target="PlaceholderTextBlock.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocused}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundFocused}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocused}" />
 										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
@@ -590,7 +526,7 @@
 										<Setter Target="ComboBoxContent.Background" Value="{ThemeResource ComboBoxBackgroundFocusedPressed}" />
 										<Setter Target="PopupBorder.Background" Value="{ThemeResource ComboBoxDropDownBackgroundFocusedPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocusedPressed}" />
-										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocusedPressed}" />
+										<Setter Target="PlaceholderTextBlock.Foreground" Value="{ThemeResource ComboBoxPlaceHolderForegroundFocusedPressed}" />
 										<Setter Target="UpperPlaceholderElement.Foreground" Value="{ThemeResource ComboBoxUpperPlaceHolderForegroundFocusedPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundFocusedPressed}" />
 										<Setter Target="BorderBorder.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushOpened}" />
@@ -647,23 +583,30 @@
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
-
-							<!-- TextStates -->
+							<VisualStateGroup x:Name="EditableModeStates">
+								<VisualState x:Name="TextBoxFocused">
+									<!--<VisualState.Setters>
+										<Setter Target="UpperPlaceholderElement.Opacity" Value="0" />
+										<Setter Target="PlaceholderTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>-->
+								</VisualState>
+								<VisualState x:Name="TextBoxUnfocused" />
+							</VisualStateGroup>
 							<VisualStateGroup x:Name="TextStates">
-
 								<VisualState x:Name="TextNotEmpty">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderElement.Visibility" Value="Collapsed" />
-										<Setter Target="UpperPlaceholderElement.Visibility" Value="Collapsed" />
-									</VisualState.Setters>
+\									</VisualState.Setters>
 									<VisualState.StateTriggers>
 										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding SelectedItem, Converter={StaticResource EmptyOrNullToFalseConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
-
 								<VisualState x:Name="TextEmpty">
+									<VisualState.Setters>
+\									</VisualState.Setters>
 									<VisualState.StateTriggers>
 										<StateTrigger IsActive="{Binding Text, Converter={StaticResource EmptyToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+										<StateTrigger IsActive="{Binding SelectedItem, Converter={StaticResource EmptyOrNullToTrueConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
 									</VisualState.StateTriggers>
 								</VisualState>
 							</VisualStateGroup>
@@ -706,8 +649,10 @@
 							<!-- IsEditable -->
 							<TextBox x:Name="EditableText"
 									 Grid.Column="1"
-									 Style="{StaticResource MaterialComboBoxEditableTextBoxStyle}"
-									 Margin="0,0,0,0"
+									 PlaceholderText="{TemplateBinding PlaceholderText}"
+									 VerticalAlignment="Center"
+									 Padding="{ThemeResource ComboBoxEditableTextPadding}"
+									 Style="{TemplateBinding TextBoxStyle}"
 									 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 									 Visibility="Collapsed"
 									 x:Load="False" />
@@ -729,7 +674,7 @@
 											  RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCompositeTransformConverter}, TargetNullValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}, FallbackValue={StaticResource ContentPresenter_CompositeTransformWithoutPlaceholder}}" />
 
 							<!-- PlaceholderElement -->
-							<TextBlock x:Name="PlaceholderElement"
+							<TextBlock x:Name="PlaceholderTextBlock"
 									   Grid.Column="1"
 									   VerticalAlignment="Center"
 									   Visibility="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToVisible}, TargetNullValue=Collapsed, FallbackValue=Collapsed}"
@@ -821,6 +766,61 @@
 								</ScrollViewer>
 							</Border>
 						</Popup>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialComboBoxTextBoxStyle"
+		   BasedOn="{StaticResource MaterialOutlinedTextBoxStyle}"
+		   TargetType="TextBox">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TextBox">
+					<Grid Background="Red">
+						<Grid.Resources>
+							<CompositeTransform x:Key="WithPlaceholderVerticalOffset"
+												TranslateY="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TextToContentOffsetConverter}, TargetNullValue=0, FallbackValue=0}" />
+
+							<CompositeTransform x:Key="WithoutPlaceholderVerticalOffset"
+												TranslateY="0" />
+
+							<ut:FromEmptyStringToValueConverter x:Key="TextToContentOffsetConverter"
+																NotNullOrEmptyValue="5"
+																NullOrEmptyValue="0" />
+
+							<ut:FromEmptyStringToValueConverter x:Key="HasPlaceholderToContentOffsetConverter"
+																NotNullOrEmptyValue="{StaticResource WithPlaceholderVerticalOffset}"
+																NullOrEmptyValue="{StaticResource WithoutPlaceholderVerticalOffset}" />
+						</Grid.Resources>
+
+						<ScrollViewer x:Name="ContentElement"
+									  Padding="{TemplateBinding Padding}"
+									  VerticalAlignment="Center"
+									  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+									  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+									  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+									  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+									  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+									  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+									  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+									  IsTabStop="False"
+									  ZoomMode="Disabled"
+									  AutomationProperties.AccessibilityView="Raw"
+									  RenderTransform="{Binding PlaceholderText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HasPlaceholderToContentOffsetConverter}, TargetNullValue={StaticResource WithoutPlaceholderVerticalOffset}, FallbackValue={StaticResource WithoutPlaceholderVerticalOffset}}" />
+						<TextBlock x:Name="PlaceholderTextContentPresenter"
+								   Foreground="{TemplateBinding PlaceholderForeground}"
+								   Margin="{TemplateBinding BorderThickness}"
+								   Padding="{TemplateBinding Padding}"
+								   Text="{TemplateBinding PlaceholderText}"
+								   TextAlignment="{TemplateBinding TextAlignment}"
+								   TextWrapping="{TemplateBinding TextWrapping}"
+								   VerticalAlignment="Center"
+								   IsHitTestVisible="False" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
