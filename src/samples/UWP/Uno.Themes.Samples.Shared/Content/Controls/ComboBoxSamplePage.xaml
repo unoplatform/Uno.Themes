@@ -78,6 +78,9 @@
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
@@ -94,9 +97,11 @@
 								<!-- ComboBox -->
 								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Normal"
 												  Style="{StaticResource XamlDisplayBelowStyle}">
-									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
-											  PlaceholderText="Placeholder"
-											  ItemsSource="{Binding Data.Letters}" />
+									<StackPanel>
+										<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+												  PlaceholderText="Placeholder"
+												  ItemsSource="{Binding Data.Letters}" />
+									</StackPanel>
 								</smtx:XamlDisplay>
 
 							</StackPanel>
@@ -160,7 +165,143 @@
 								</smtx:XamlDisplay>
 							</StackPanel>
 
+							<!-- Editable ComboBox -->
+
+							<StackPanel Margin="0,0,10,0"
+										Grid.Row="2">
+
+								<!-- Label -->
+								<TextBlock Text="Editable"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Editable"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  IsEditable="True">
+										<ComboBoxItem Content="Item 1" />
+										<ComboBoxItem Content="Item 2" />
+										<ComboBoxItem Content="Item 3" />
+										<ComboBoxItem Content="Item 4" />
+									</ComboBox>
+								</smtx:XamlDisplay>
+
+							</StackPanel>
+
 							<StackPanel Grid.Row="2"
+										Grid.Column="1">
+
+								<!-- Label -->
+								<TextBlock Text="Editable and Disabled"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Editable_Disabled"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  IsEditable="True"
+											  IsEnabled="False">
+										<ComboBoxItem Content="Item 1" />
+										<ComboBoxItem Content="Item 2" />
+										<ComboBoxItem Content="Item 3" />
+										<ComboBoxItem Content="Item 4" />
+									</ComboBox>
+								</smtx:XamlDisplay>
+							</StackPanel>
+
+							<StackPanel Margin="0,0,10,0"
+										Grid.Row="3">
+
+								<!-- Label -->
+								<TextBlock Text="Editable with Placeholder"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Editable_Placeholder"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  IsEditable="True">
+										<ComboBoxItem Content="Item 1" />
+										<ComboBoxItem Content="Item 2" />
+										<ComboBoxItem Content="Item 3" />
+										<ComboBoxItem Content="Item 4" />
+									</ComboBox>
+								</smtx:XamlDisplay>
+
+							</StackPanel>
+
+							<StackPanel Grid.Row="3"
+										Grid.Column="1">
+
+								<!-- Label -->
+								<TextBlock Text="Editable with Placeholder and Disabled"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Editable_Placeholder_Disabled"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  IsEditable="True"
+											  IsEnabled="False">
+										<ComboBoxItem Content="Item 1" />
+										<ComboBoxItem Content="Item 2" />
+										<ComboBoxItem Content="Item 3" />
+										<ComboBoxItem Content="Item 4" />
+									</ComboBox>
+								</smtx:XamlDisplay>
+							</StackPanel>
+
+							<StackPanel Margin="0,0,10,0"
+										Grid.Row="4">
+
+								<!-- Label -->
+								<TextBlock Text="Editable with Icon"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Editable_WithIcon"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  IsEditable="True">
+										<ComboBoxItem Content="Item 1" />
+										<ComboBoxItem Content="Item 2" />
+										<ComboBoxItem Content="Item 3" />
+										<ComboBoxItem Content="Item 4" />
+										<ut:ControlExtensions.Icon>
+											<PathIcon Data="{StaticResource Icon_Mail}" />
+										</ut:ControlExtensions.Icon>
+									</ComboBox>
+								</smtx:XamlDisplay>
+
+							</StackPanel>
+
+							<StackPanel Grid.Row="4"
+										Grid.Column="1">
+
+								<!-- Label -->
+								<TextBlock Text="Editable with Icon and Disabled"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Editable_WithIcon_Disabled"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  IsEditable="True"
+											  IsEnabled="False">
+										<ComboBoxItem Content="Item 1" />
+										<ComboBoxItem Content="Item 2" />
+										<ComboBoxItem Content="Item 3" />
+										<ComboBoxItem Content="Item 4" />
+										<ut:ControlExtensions.Icon>
+											<PathIcon Data="{StaticResource Icon_Mail}" />
+										</ut:ControlExtensions.Icon>
+									</ComboBox>
+								</smtx:XamlDisplay>
+							</StackPanel>
+
+							<StackPanel Grid.Row="5"
 										Grid.ColumnSpan="2">
 
 								<!-- Label -->
