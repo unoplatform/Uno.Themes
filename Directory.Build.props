@@ -5,10 +5,11 @@
 		<PackageProjectUrl>https://github.com/unoplatform/uno.themes</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<UseWinUI Condition="'$(UseWinUI)'==''">false</UseWinUI>
-
+		<WindowsSdkPackageVersion>10.0.19041.38</WindowsSdkPackageVersion>
 		<!-- Required until xamarin targets are used (defined by MSBuild.SDK.Extras)-->
 		<DisableImplicitFrameworkDefines>false</DisableImplicitFrameworkDefines>
 		<UnoEnableXamlFuzzyMatching>false</UnoEnableXamlFuzzyMatching>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">

@@ -28,10 +28,10 @@ jobs:
           fetch-depth: 0 # Required for gitversion
           submodules: true
 
-      - name: Setup dotnet 8.0.300
+      - name: Setup dotnet 9.0.200
         uses: actions/setup-dotnet@v1.7.2
         with:
-          dotnet-version: '8.0.300'
+          dotnet-version: '9.0.200'
 
       - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
         id: nbgv
