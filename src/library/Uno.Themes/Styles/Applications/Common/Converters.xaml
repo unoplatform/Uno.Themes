@@ -58,6 +58,14 @@
 													NotEmptyOrNullValue="Visible"
 													EmptyOrNullValue="Collapsed" />
 
+	<ut:FromEmptyStringOrNullObjectToValueConverter x:Key="EmptyOrNullToTrueConverter"
+													NotEmptyOrNullValue="False"
+													EmptyOrNullValue="True" />
+
+	<ut:FromEmptyStringOrNullObjectToValueConverter x:Key="EmptyOrNullToFalseConverter"
+													NotEmptyOrNullValue="True"
+													EmptyOrNullValue="False" />
+
 	<ut:StringFormatConverter x:Key="StringFormatConverter" />
 	<ut:FirstCharacterConverter x:Key="FirstCharacterConverter" />
 	<ut:ToUpperConverter x:Key="ToUpperConverter"/>
