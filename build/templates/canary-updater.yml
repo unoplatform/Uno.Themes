@@ -1,4 +1,4 @@
-﻿steps:
+steps:
 
   - task: UseDotNet@2
     condition: eq(variables['IsCanaryBranch'], true)
@@ -16,16 +16,17 @@
       packageType: runtime
       version: 2.2.x
 
-  - task: nventiveCanaryUpdater@5
-    condition: eq(variables['IsCanaryBranch'], true)
+  - task: unoplatformCanaryUpdater@1
+    displayName: 'Canary Update'
     retryCountOnTaskFailure: 3
+    condition: eq(variables['IsCanaryBranch'], true)
     inputs:
-      solution: Uno.Themes.sln
-      useNuGetOrg: true
-      usePrivateFeed: false
-      mergeBranch: true
+      solution: 'Uno.Themes.sln'
       branchToMerge: master
-      nugetUpdaterVersion: 2.3.0-alpha.62
-      packageAuthor: 'nventive,Uno Platform'
       summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
-      resultFile: '$(Build.ArtifactStagingDirectory)/Results.json'
+      resultFile: '$(Build.ArtifactStagingDirectory)/result.json'
+      nugetUpdaterVersion: '1.2.10'
+      useVersionOverrides: true
+      versionOverridesFile: '$(build.sourcesdirectory)/build/templates/versionOverrides.json'
+      packageAuthor: 'Uno Platform,unoplatform'
+      additionalPublicSources: 'https://pkgs.dev.azure.com/uno-platform/1dd81cbd-cb35-41de-a570-b0df3571a196/_packaging/unoplatformdev/nuget/v3/index.json'
