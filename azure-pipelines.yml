@@ -19,7 +19,7 @@ pr:
 variables:
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
-  XCODE_ROOT: '/Applications/Xcode_16.app'
+  XCODE_ROOT: '/Applications/Xcode_16.2.app'
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
 
