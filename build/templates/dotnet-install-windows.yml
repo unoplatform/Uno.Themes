@@ -4,13 +4,31 @@
 
 steps:
 
-  - task: UseDotNet@2
-    displayName: 'Use .NET Core SDK 5.0.x'
-    retryCountOnTaskFailure: 3
-    inputs:
-      packageType: sdk
-      version: 5.0.x
+  # - task: UseDotNet@2
+  #   displayName: 'Use .NET Core SDK 5.0.x'
+  #   retryCountOnTaskFailure: 3
+  #   inputs:
+  #     packageType: sdk
+  #     version: 5.0.x
 
+  # - task: UseDotNet@2
+  #   displayName: 'Use .NET Core SDK 6.0.300'
+  #   retryCountOnTaskFailure: 3
+  #   inputs:
+  #     packageType: sdk
+  #     version: 6.0.300
+  #     includePreviewVersions: true
+
+  # Required until .NET 6 installs properly on Windows using UseDotnet
+  # using preview builds
+  #- powershell: |
+  #    $ProgressPreference = 'SilentlyContinue'
+  #    Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
+  #    & .\dotnet-install.ps1 -Version ${{ parameters.DotNetVersion }} -InstallDir "$env:ProgramFiles\dotnet\" -Verbose
+  #    & dotnet --list-sdks
+  #  displayName: Install .NET ${{ parameters.DotNetVersion }}
+  #  errorActionPreference: stop
+  #  retryCountOnTaskFailure: 3
   - task: UseDotNet@2
     displayName: 'Use .NET Core SDK 6.0.300'
     retryCountOnTaskFailure: 3
