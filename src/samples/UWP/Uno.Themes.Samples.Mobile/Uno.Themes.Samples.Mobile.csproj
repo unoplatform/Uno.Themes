@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-android</TargetFrameworks>
+		<TargetFrameworks>$(DotNetVersion)-android;$(DotNetVersion)-ios;$(DotNetVersion)-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="'$(OverrideTargetFramework)'!=''">$(OverrideTargetFramework)</TargetFrameworks>
 		<SingleProject>true</SingleProject>
 		<OutputType>Exe</OutputType>
 		<!-- Display name -->
@@ -47,8 +48,6 @@
 	<Choose>
 		<When Condition="$(_IsAndroid)">
 			<ItemGroup>
-				<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" />
-				<PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" />
 				<PackageReference Include="Uno.UniversalImageLoader" />
 			</ItemGroup>
 			<ItemGroup>
