@@ -1,4 +1,4 @@
-﻿GitHub Issue: #
+GitHub Issue (If applicable): closes #
 
 ## PR Type
 
