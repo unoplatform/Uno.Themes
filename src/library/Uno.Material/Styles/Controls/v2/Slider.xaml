@@ -27,6 +27,11 @@
 			<x:Double x:Key="SliderTrackThickness">4</x:Double>
 			<x:Double x:Key="SliderFillThickness">6</x:Double>
 
+			<x:Double x:Key="SliderPreContentMargin">14</x:Double>
+			<x:Double x:Key="SliderPostContentMargin">14</x:Double>
+			<x:Double x:Key="SliderHorizontalHeight">32</x:Double>
+			<x:Double x:Key="SliderVerticalWidth">32</x:Double>
+
 			<!-- Resources for the Slider Ticks, For future uses. -->
 			<StaticResource x:Key="SliderTickBarFill" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="SliderTickBarFillDisabled" ResourceKey="SystemControlDisabledChromeDisabledHighBrush" />
@@ -74,6 +79,11 @@
 			<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
 			<x:Double x:Key="SliderTrackThickness">4</x:Double>
 			<x:Double x:Key="SliderFillThickness">6</x:Double>
+
+			<x:Double x:Key="SliderPreContentMargin">14</x:Double>
+			<x:Double x:Key="SliderPostContentMargin">14</x:Double>
+			<x:Double x:Key="SliderHorizontalHeight">32</x:Double>
+			<x:Double x:Key="SliderVerticalWidth">32</x:Double>
 
 			<!-- Resources for the Slider Ticks, For future uses. -->
 			<StaticResource x:Key="SliderTickBarFill" ResourceKey="OnSurfaceVariantBrush" />
@@ -215,7 +225,7 @@
 							  Control.IsTemplateFocusTarget="True">
 
 							<!-- HorizontalTemplate -->
-							<Grid x:Name="HorizontalTemplate">
+							<Grid x:Name="HorizontalTemplate" MinHeight="{ThemeResource SliderHorizontalHeight}">
 
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
@@ -224,9 +234,9 @@
 								</Grid.ColumnDefinitions>
 
 								<Grid.RowDefinitions>
+									<RowDefinition Height="{ThemeResource SliderPreContentMargin}" />
 									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
+									<RowDefinition Height="{ThemeResource SliderPostContentMargin}" />
 								</Grid.RowDefinitions>
 
 								<!-- HorizontalTrackRect -->
@@ -287,6 +297,7 @@
 
 							<!-- VerticalTemplate -->
 							<Grid x:Name="VerticalTemplate"
+								  MinWidth="{ThemeResource SliderVerticalWidth}"
 								  Visibility="Collapsed">
 
 								<Grid.RowDefinitions>
@@ -296,9 +307,9 @@
 								</Grid.RowDefinitions>
 
 								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="{ThemeResource SliderPreContentMargin}" />
 									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="{ThemeResource SliderPostContentMargin}" />
 								</Grid.ColumnDefinitions>
 
 								<!-- VerticalTrackRect -->
