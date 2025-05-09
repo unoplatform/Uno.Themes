@@ -818,7 +818,27 @@
 							</Grid.ColumnDefinitions>
 
 							<!-- 0: Icon -->
-							<Border Grid.Column="0"
+							<StackPanel Orientation="Horizontal"
+										VerticalAlignment="Center">
+								<Border Width="12"
+										Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+
+								<Viewbox Grid.Column="0"
+										 Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+										 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+										 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+									<ContentPresenter x:Name="IconPresenter"
+													  HorizontalAlignment="Center"
+													  VerticalAlignment="Center"
+													  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+													  Foreground="{ThemeResource TextBoxLeadingIconForeground}" />
+								</Viewbox>
+
+								<Border Width="12"
+										Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+							</StackPanel>
+
+							<!--<Border Grid.Column="0"
 									Width="40"
 									Height="40"
 									VerticalAlignment="Top"
@@ -830,7 +850,7 @@
 												  Height="20"
 												  HorizontalAlignment="Center"
 												  VerticalAlignment="Center" />
-							</Border>
+							</Border>-->
 
 							<!-- 1: Text Elements Container -->
 							<Grid Grid.Column="1" Margin="8,0">
