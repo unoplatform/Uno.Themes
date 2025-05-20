@@ -525,20 +525,22 @@
 								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<!-- Border in place to properly vertically center the icon inside when it's a one-line TextBox -->
+							<!-- Container in place to properly vertically center the icon inside when it's a one-line TextBox -->
 							<!-- but keep it in the same place and at the top when it's a multiline TextBox -->
-							<Border VerticalAlignment="Top"
-									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+							<Viewbox Grid.Column="0"
+									 VerticalAlignment="Top"
+									 Margin="0,9,10,0"
+									 Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+									 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+									 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
-												  Margin="0,11,8,0"
-												  MaxHeight="34"
-												  MaxWidth="34"
-												  MinWidth="25"
+												  MaxWidth="30"
+												  MinWidth="30"
 												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-							</Border>
+							</Viewbox>
 
 							<Grid Grid.Column="1">
 								<Border MinHeight="38"
@@ -818,19 +820,20 @@
 							</Grid.ColumnDefinitions>
 
 							<!-- 0: Icon -->
-							<Border Grid.Column="0"
-									Width="40"
-									Height="40"
-									VerticalAlignment="Top"
-									Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+							<Viewbox Grid.Column="0"
+									 VerticalAlignment="Top"
+									 Margin="14,9,4,0"
+									 Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+									 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+									 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 								<ContentPresenter x:Name="IconPresenter"
-												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
-												  Width="20"
-												  Height="20"
 												  HorizontalAlignment="Center"
-												  VerticalAlignment="Center" />
-							</Border>
+												  VerticalAlignment="Center"
+												  MaxWidth="30"
+												  MinWidth="30"
+												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+												  Foreground="{ThemeResource TextBoxLeadingIconForeground}" />
+							</Viewbox>
 
 							<!-- 1: Text Elements Container -->
 							<Grid Grid.Column="1" Margin="8,0">
