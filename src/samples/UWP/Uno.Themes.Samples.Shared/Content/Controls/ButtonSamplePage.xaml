@@ -278,12 +278,9 @@
 							<!-- Icon Button Filled -->
 							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_Filled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Filled Button"
-										Style="{StaticResource MaterialFilledButtonStyle}">
-									<ut:ControlExtensions.Icon>
-										<FontIcon Glyph="&#xE946;" />
-									</ut:ControlExtensions.Icon>
-								</Button>
+								<Button Content="Click to disable"
+										Style="{StaticResource MaterialFilledButtonStyle}"
+										Click="Button_Click" />
 							</smtx:XamlDisplay>
 
 							<!-- Icon Button Filled Disabled -->
