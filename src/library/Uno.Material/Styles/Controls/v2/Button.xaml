@@ -567,12 +567,14 @@
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
+										<Setter Target="(Button.Tag)" Value="Normal" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForeground}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
+										<Setter Target="(Button.Tag)" Value="PointerOver" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPointerOver}" />
 										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonStateLayerBackgroundPointerOver}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPointerOver}" />
@@ -583,6 +585,7 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
+										<Setter Target="(Button.Tag)" Value="Pressed" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPressed}" />
 										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonStateLayerBackgroundPressed}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPressed}" />
@@ -593,10 +596,11 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundDisabled}" />
-										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundDisabled}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushDisabled}" />
+										<Setter Target="(Button.Tag)" Value="Disabled" />
+										<Setter Target="Root.Background" Value="Green" />
+										<Setter Target="Root.BorderBrush" Value="Yellow" />
+										<Setter Target="IconPresenter.Foreground" Value="Gray" />
+										<Setter Target="ContentPresenter.Foreground" Value="Gray" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -624,19 +628,19 @@
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Unfocused">
+									<VisualState.Setters>
+										<Setter Target="Root.BorderBrush" Value="Red" />
+									</VisualState.Setters>
+								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="Root"
 							  Background="{TemplateBinding Background}"
 							  BorderBrush="{TemplateBinding BorderBrush}"
-							  BorderThickness="{TemplateBinding BorderThickness}"
+							  BorderThickness="2"
 							  CornerRadius="{TemplateBinding CornerRadius}">
-
-							<Border x:Name="StateLayer"
-									Background="Transparent"
-									CornerRadius="{TemplateBinding CornerRadius}" />
 
 							<um:Ripple x:Name="Ripple"
 									   Feedback="{TemplateBinding Foreground}"
