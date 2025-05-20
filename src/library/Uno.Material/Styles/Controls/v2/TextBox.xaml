@@ -536,6 +536,8 @@
 								<ContentPresenter x:Name="IconPresenter"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  HorizontalAlignment="Center"
+												  MaxWidth="30"
+												  MinWidth="30"
 												  Foreground="{ThemeResource TextBoxLeadingIconForeground}"
 												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 							</Viewbox>
@@ -827,6 +829,8 @@
 								<ContentPresenter x:Name="IconPresenter"
 												  HorizontalAlignment="Center"
 												  VerticalAlignment="Center"
+												  MaxWidth="30"
+												  MinWidth="30"
 												  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
 												  Foreground="{ThemeResource TextBoxLeadingIconForeground}" />
 							</Viewbox>
