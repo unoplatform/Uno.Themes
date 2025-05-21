@@ -250,7 +250,7 @@
 
 	<um:FromTextBoxEmptyStringToValueConverter x:Key="FocusedPlaceholderContentCompositeTransformTranslateY"
 											   HeaderAndPlaceholderValue="8"
-											   HeaderOnlyValue="8"
+											   HeaderOnlyValue="0"
 											   HeaderOnlyWithTextValue="8"
 											   PlaceholderOnlyValue="0"
 											   NoHeaderAndNoPlaceholderValue="0" />
@@ -560,7 +560,10 @@
 												  ZoomMode="Disabled"
 												  AutomationProperties.AccessibilityView="Raw">
 										<ScrollViewer.RenderTransform>
-											<CompositeTransform x:Name="ContentElement_CompositeTransform" />
+
+											<CompositeTransform x:Name="ContentElement_CompositeTransform"
+																TranslateY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}}" />
+
 										</ScrollViewer.RenderTransform>
 									</ScrollViewer>
 								</Border>
@@ -578,7 +581,8 @@
 											   TextWrapping="{TemplateBinding TextWrapping}"
 											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 										<TextBlock.RenderTransform>
-											<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+											<CompositeTransform x:Name="PlaceholderElement_CompositeTransform"
+																TranslateY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}}" />
 										</TextBlock.RenderTransform>
 									</TextBlock>
 								</Border>
@@ -594,7 +598,10 @@
 											   TextWrapping="{TemplateBinding TextWrapping}"
 											   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 										<TextBlock.RenderTransform>
-											<CompositeTransform x:Name="HeaderElement_CompositeTransform" />
+											<CompositeTransform x:Name="HeaderElement_CompositeTransform"
+																TranslateY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}}"
+																ScaleX="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}}"
+																ScaleY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}}" />
 										</TextBlock.RenderTransform>
 									</TextBlock>
 								</Border>
@@ -862,7 +869,8 @@
 												  ZoomMode="Disabled"
 												  AutomationProperties.AccessibilityView="Raw">
 										<ScrollViewer.RenderTransform>
-											<CompositeTransform x:Name="ContentElement_CompositeTransform" />
+											<CompositeTransform x:Name="ContentElement_CompositeTransform"
+																TranslateY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FocusedPlaceholderContentCompositeTransformTranslateY}}" />
 										</ScrollViewer.RenderTransform>
 									</ScrollViewer>
 								</Border>
@@ -880,7 +888,10 @@
 											   RenderTransformOrigin="0,0.5"
 											   IsHitTestVisible="False">
 										<TextBlock.RenderTransform>
-											<CompositeTransform x:Name="HeaderElement_CompositeTransform" />
+											<CompositeTransform x:Name="HeaderElement_CompositeTransform"
+																TranslateY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformTranslateY}}"
+																ScaleX="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}}"
+																ScaleY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeaderCompositeTransformScales}}" />
 										</TextBlock.RenderTransform>
 									</TextBlock>
 								</Border>
@@ -898,7 +909,8 @@
 											   IsHitTestVisible="False"
 											   Visibility="{Binding Text, Converter={StaticResource EmptyToVisibleConverter}, RelativeSource={RelativeSource TemplatedParent}}">
 										<TextBlock.RenderTransform>
-											<CompositeTransform x:Name="PlaceholderElement_CompositeTransform" />
+											<CompositeTransform x:Name="PlaceholderElement_CompositeTransform"
+																TranslateY="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource PlaceholderContentCompositeTransformTranslateY}}" />
 										</TextBlock.RenderTransform>
 									</TextBlock>
 								</Border>
