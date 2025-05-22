@@ -567,14 +567,12 @@
 
 								<VisualState x:Name="Normal">
 									<VisualState.Setters>
-										<Setter Target="(Button.Tag)" Value="Normal" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForeground}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="(Button.Tag)" Value="PointerOver" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPointerOver}" />
 										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonStateLayerBackgroundPointerOver}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPointerOver}" />
@@ -585,7 +583,6 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="(Button.Tag)" Value="Pressed" />
 										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPressed}" />
 										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonStateLayerBackgroundPressed}" />
 										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPressed}" />
@@ -596,11 +593,10 @@
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="(Button.Tag)" Value="Disabled" />
-										<Setter Target="Root.Background" Value="Green" />
-										<Setter Target="Root.BorderBrush" Value="Yellow" />
-										<Setter Target="IconPresenter.Foreground" Value="Gray" />
-										<Setter Target="ContentPresenter.Foreground" Value="Gray" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundDisabled}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -618,21 +614,8 @@
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="PointerFocused">
-									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPointerFocused}" />
-										<Setter Target="StateLayer.Background" Value="{ThemeResource FilledButtonStateLayerBackgroundPointerFocused}" />
-										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FilledButtonIconForegroundPointerFocused}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerFocused}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPointerFocused}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="Unfocused">
-									<VisualState.Setters>
-										<Setter Target="Root.BorderBrush" Value="Red" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="PointerFocused" />
+								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
@@ -898,16 +881,7 @@
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="PointerFocused">
-									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource OutlinedButtonBackgroundPointerFocused}" />
-										<Setter Target="StateLayer.Background" Value="{ThemeResource OutlinedButtonStateLayerBackgroundPointerFocused}" />
-										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource OutlinedButtonIconForegroundPointerFocused}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OutlinedButtonForegroundPointerFocused}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrushPointerFocused}" />
-									</VisualState.Setters>
-								</VisualState>
-
+								<VisualState x:Name="PointerFocused" />
 								<VisualState x:Name="Unfocused" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
