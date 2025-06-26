@@ -1,0 +1,29 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Themes.Samples</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.companyname.uno-themes-samples</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno.Themes.Samples</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Uno.Themes.Samples powered by Uno Platform.</Description>
+
+    <!--
+      UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+  </PropertyGroup>
+
+</Project>
