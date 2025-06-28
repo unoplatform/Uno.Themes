@@ -10,12 +10,12 @@
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<DefineConstants>WINUI</DefineConstants>
-		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<PackageReference Include="Uno.WinUI.Markup" />
-		<PackageReference Include="Uno.Extensions.Markup.Generators" PrivateAssets="All" />
+	  <PackageReference Include="Uno.Extensions.Markup.Generators">
+	    <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
+	  <PackageReference Include="Uno.WinUI.Markup" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -7,19 +7,11 @@
 		<AssemblyName>Uno.Themes.WinUI</AssemblyName>
 		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
-		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
 		<FrameworkLineage>WinUI</FrameworkLineage>
 		<UseWinUI>true</UseWinUI>
 	</PropertyGroup>
 
 	<Import Project="themes-common.props" />
-
-	<ItemGroup Condition="!$(_IsWinUI)">
-		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-		<Compile Update="**\*.xaml.cs">
-			<DependentUpon>%(Filename)</DependentUpon>
-		</Compile>
-	</ItemGroup>
 
 	<Import Project="..\..\..\winappsdk-workaround.targets" />
 </Project>

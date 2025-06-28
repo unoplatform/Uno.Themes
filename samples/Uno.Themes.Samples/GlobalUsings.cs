@@ -33,7 +33,6 @@ global using System.Reflection;
 global using Uno.Extensions;
 global using Uno.Themes.Samples.Content;
 global using Uno.Themes.Samples.Entities;
-global using Uno.Disposables;
 global using System.Collections.Generic;
 global using Uno.Logging;
 global using Uno.Themes.Samples;
