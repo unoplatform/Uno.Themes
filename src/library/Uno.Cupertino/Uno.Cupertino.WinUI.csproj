@@ -1,5 +1,5 @@
-
-<Project Sdk="Microsoft.NET.Sdk">
+﻿
+<Project Sdk="Uno.Sdk">
 	<Import Project="..\tfm-common-winui.props" />
 
 	<PropertyGroup>
@@ -14,13 +14,6 @@
 	</PropertyGroup>
 
 	<Import Project="cupertino-common.props" />
-
-	<ItemGroup>
-		<PackageReference Include="Uno.WinUI" />
-		<PackageReference Include="Uno.WinUI.Lottie" Condition="!$(_IsWinUI)" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Condition="$(_IsWinUI)" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Condition="$(_IsWinUI)" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Uno.Themes\Uno.Themes.WinUI.csproj">

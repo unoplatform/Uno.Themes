@@ -1,4 +1,6 @@
-﻿namespace Uno.Themes.Samples;
+using Uno.UI.Extensions;
+
+namespace Uno.Themes.Samples;
 
 public partial class SamplePageLayout : ContentControl
 {
@@ -196,7 +198,7 @@ public partial class SamplePageLayout : ContentControl
 	{
 		var presenter = (ContentPresenter)GetTemplateChild($"{mode}ContentPresenter");
 
-		return VisualTreeHelperEx.FindFirstDescendant<T>(presenter, x => x.Name == name);
+		return presenter.FindFirstDescendant<T>(x => x.Name == name);
 	}
 
 	private class LayoutModeMapping

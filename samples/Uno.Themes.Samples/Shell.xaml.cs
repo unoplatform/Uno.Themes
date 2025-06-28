@@ -1,3 +1,5 @@
+using Uno.UI.Extensions;
+
 namespace Uno.Themes.Samples;
 
 public sealed partial class Shell : UserControl
@@ -46,7 +48,7 @@ public sealed partial class Shell : UserControl
 
 	private void DebugVisualTree(object sender, RoutedEventArgs e)
 	{
-		var tree = this.TreeGraph();
+        var tree = this.TreeGraph();
 		
 #if WINDOWS_UWP
 		var data = new DataPackage();
@@ -86,7 +88,7 @@ public sealed partial class Shell : UserControl
 		switch (root.ActualTheme)
 		{
 			case ElementTheme.Default:
-				DarkLightModeToggle.IsChecked = SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark;
+				DarkLightModeToggle.IsChecked = SystemThemeHelper.GetCurrentOsTheme() == ApplicationTheme.Dark;
 				break;
 			case ElementTheme.Light:
 				DarkLightModeToggle.IsChecked = false;
@@ -105,7 +107,7 @@ public sealed partial class Shell : UserControl
 			switch (root.ActualTheme)
 			{
 				case ElementTheme.Default:
-					if (SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark)
+					if (SystemThemeHelper.GetCurrentOsTheme() == ApplicationTheme.Dark)
 					{
 						root.RequestedTheme = ElementTheme.Light;
 					}

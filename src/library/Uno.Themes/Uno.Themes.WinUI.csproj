@@ -1,5 +1,5 @@
-
-<Project Sdk="Microsoft.NET.Sdk">
+﻿
+<Project Sdk="Uno.Sdk">
 	<Import Project="..\tfm-common-winui.props" />
 
 	<PropertyGroup>
@@ -13,12 +13,6 @@
 	</PropertyGroup>
 
 	<Import Project="themes-common.props" />
-
-	<ItemGroup>
-		<PackageReference Include="Uno.WinUI" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Condition="$(_IsWinUI)" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Condition="$(_IsWinUI)" />
-	</ItemGroup>
 
 	<ItemGroup Condition="!$(_IsWinUI)">
 		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />

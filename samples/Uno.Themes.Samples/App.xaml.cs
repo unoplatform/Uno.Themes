@@ -32,7 +32,7 @@ public partial class App : Application
 		if (MainWindow.Content is not Shell shell)
 		{
 			// Create a Frame to act as the navigation context and navigate to the first page
-			MainWindow.Content = _shell = new BuildShell();
+			MainWindow.Content = _shell = BuildShell();
 		}
 
 		MainWindow.SetWindowIcon();

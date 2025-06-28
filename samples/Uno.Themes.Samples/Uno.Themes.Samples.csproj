@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-windows10.0.26100;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
-
+    <DefineConstants>$(DefineConstants);IS_WINUI</DefineConstants>
     <!-- Display name -->
     <ApplicationTitle>Uno.Themes.Samples</ApplicationTitle>
     <!-- App Identifier -->
@@ -25,4 +25,11 @@
       SkiaRenderer;
     </UnoFeatures>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Uno.ShowMeTheXAML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\library\Uno.Cupertino\Uno.Cupertino.WinUI.csproj" />
+    <ProjectReference Include="..\..\src\library\Uno.Material\Uno.Material.WinUI.csproj" />
+  </ItemGroup>
 </Project>
