@@ -120,13 +120,18 @@
 					<Grid x:Name="RootGrid"
 						  Background="Transparent">
 						<Grid.Resources>
+							<StaticResource x:Key="AppBarButtonForeground" ResourceKey="MediaTransportControlsAppBarButtonBrush" />
+							<StaticResource x:Key="AppBarButtonForegroundPointerOver" ResourceKey="MediaTransportControlsAppBarButtonBrush" />
+							<StaticResource x:Key="AppBarButtonForegroundPressed" ResourceKey="MediaTransportControlsAppBarButtonBrush" />
+							<StaticResource x:Key="AppBarToggleButtonForeground" ResourceKey="MediaTransportControlsAppBarButtonBrush" />
+							<StaticResource x:Key="AppBarToggleButtonForegroundPointerOver" ResourceKey="MediaTransportControlsAppBarButtonBrush" />
+							<StaticResource x:Key="AppBarToggleButtonForegroundPressed" ResourceKey="MediaTransportControlsAppBarButtonBrush" />
 							<!-- New AppBar button style 40x40 pixels in size -->
 							<Style x:Key="MediaTransportControlsAppBarButtonStyle"
 								   TargetType="AppBarButton"
 								   BasedOn="{StaticResource DefaultAppBarButtonStyle}">
 								<Setter Property="Height" Value="{ThemeResource MediaTransportControlsAppBarButtonHeight}" />
 								<Setter Property="Width" Value="{ThemeResource MediaTransportControlsAppBarButtonWidth}" />
-								<Setter Property="Foreground" Value="{ThemeResource MediaTransportControlsAppBarButtonBrush}" />
 								<Setter Property="AllowFocusOnInteraction" Value="True" />
 							</Style>
 							<!-- New AppBarToggle button style 40x40 pixels in size -->
@@ -135,7 +140,6 @@
 								   BasedOn="{StaticResource DefaultAppBarToggleButtonStyle}">
 								<Setter Property="Height" Value="{ThemeResource MediaTransportControlsAppBarButtonHeight}" />
 								<Setter Property="Width" Value="{ThemeResource MediaTransportControlsAppBarButtonWidth}" />
-								<Setter Property="Foreground" Value="{ThemeResource MediaTransportControlsAppBarButtonBrush}" />
 								<Setter Property="AllowFocusOnInteraction" Value="True" />
 							</Style>
 							<!-- New CommandBar Style -->
