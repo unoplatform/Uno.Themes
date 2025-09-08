@@ -1903,176 +1903,177 @@
 							<!-- Displaymode (compact/minimal/normal) left -->
 							<SplitView x:Name="RootSplitView"
 									   Grid.Row="1"
-									   CornerRadius="{ThemeResource MaterialNavigationViewSplitViewCornerRadius}"
 									   BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
-									   PaneBackground="{ThemeResource NavigationViewPaneBackground}"
+									   PaneBackground="Transparent"
 									   CompactPaneLength="{TemplateBinding CompactPaneLength}"
 									   OpenPaneLength="{TemplateBinding OpenPaneLength}"
 									   IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}"
 									   DisplayMode="Inline"
 									   IsTabStop="False"
 									   win:Style="{StaticResource ResetDefaultSplitViewStyle}">
-
 								<SplitView.Pane>
-									<Grid x:Name="PaneContentGrid"
-										  BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
-										  Padding="{ThemeResource MaterialNavigationViewSplitViewPadding}"
-										  HorizontalAlignment="Left"
-										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="0" />
-											<!-- above button margin + back button space -->
-											<RowDefinition x:Name="PaneContentGridToggleButtonRow"
-														   Height="Auto" />
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="0" />
-											<!-- above list margin -->
-											<RowDefinition x:Name="ItemsContainerRow"
-														   Height="*" />
-										</Grid.RowDefinitions>
-
-										<Grid x:Name="ContentPaneTopPadding"
-											  Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPadding}" />
-
-										<Grid Grid.Row="2">
+									<Border CornerRadius="{ThemeResource MaterialNavigationViewSplitViewCornerRadius}"
+											Background="{ThemeResource NavigationViewPaneBackground}">
+										<Grid x:Name="PaneContentGrid"
+											  BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
+											  Padding="{ThemeResource MaterialNavigationViewSplitViewPadding}"
+											  HorizontalAlignment="Left"
+											  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
 											<Grid.RowDefinitions>
-												<RowDefinition x:Name="PaneHeaderContentBorderRow" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="0" />
+												<!-- above button margin + back button space -->
+												<RowDefinition x:Name="PaneContentGridToggleButtonRow"
+															   Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="0" />
+												<!-- above list margin -->
+												<RowDefinition x:Name="ItemsContainerRow"
+															   Height="*" />
 											</Grid.RowDefinitions>
 
-											<Grid.ColumnDefinitions>
-												<!--
-													C0 and C1 width is injected from NavView
-													PaneHeaderCloseButtonColumn -> NavigationViewCloseButton.Width
-													PaneHeaderToggleButtonColumn -> res[PaneToggleButtonWidth] ?? 40
-												-->
-												<ColumnDefinition x:Name="PaneHeaderCloseButtonColumn" />
-												<ColumnDefinition x:Name="PaneHeaderToggleButtonColumn" />
-												<ColumnDefinition Width="*" />
-											</Grid.ColumnDefinitions>
+											<Grid x:Name="ContentPaneTopPadding"
+												  Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPadding}" />
 
-											<ContentControl x:Name="PaneHeaderContentBorder"
-															Grid.Column="2"
+											<Grid Grid.Row="2">
+												<Grid.RowDefinitions>
+													<RowDefinition x:Name="PaneHeaderContentBorderRow" />
+												</Grid.RowDefinitions>
+
+												<Grid.ColumnDefinitions>
+													<!--
+														C0 and C1 width is injected from NavView
+														PaneHeaderCloseButtonColumn -> NavigationViewCloseButton.Width
+														PaneHeaderToggleButtonColumn -> res[PaneToggleButtonWidth] ?? 40
+													-->
+													<ColumnDefinition x:Name="PaneHeaderCloseButtonColumn" />
+													<ColumnDefinition x:Name="PaneHeaderToggleButtonColumn" />
+													<ColumnDefinition Width="*" />
+												</Grid.ColumnDefinitions>
+
+												<ContentControl x:Name="PaneHeaderContentBorder"
+																Grid.Column="2"
+																VerticalContentAlignment="Stretch"
+																HorizontalContentAlignment="Stretch"
+																IsTabStop="False" />
+											</Grid>
+
+											<Grid x:Name="AutoSuggestArea"
+												  Grid.Row="3"
+												  Height="{ThemeResource NavigationViewAutoSuggestAreaHeight}"
+												  Margin="0,0,0,8"
+												  VerticalAlignment="Center">
+
+												<ContentControl x:Name="PaneAutoSuggestBoxPresenter"
+																Margin="{ThemeResource NavigationViewAutoSuggestBoxMargin}"
+																IsTabStop="False"
+																HorizontalContentAlignment="Stretch"
+																VerticalContentAlignment="Center" />
+
+												<Button x:Name="PaneAutoSuggestButton"
+														Visibility="Collapsed"
+														Style="{ThemeResource NavigationViewPaneSearchButtonStyle}"
+														Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}">
+													<Button.Resources>
+														<ResourceDictionary>
+															<ResourceDictionary.ThemeDictionaries>
+																<ResourceDictionary x:Key="Default">
+																	<StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="NavigationViewItemBackgroundPointerOver" />
+																	<StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="NavigationViewItemBackgroundPressed" />
+																	<StaticResource x:Key="ButtonBackgroundDisabled" ResourceKey="NavigationViewItemBackgroundDisabled" />
+																	<StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="NavigationViewItemForegroundPointerOver" />
+																	<StaticResource x:Key="ButtonForegroundPressed" ResourceKey="NavigationViewItemForegroundPressed" />
+																	<StaticResource x:Key="ButtonForegroundDisabled" ResourceKey="NavigationViewItemForegroundDisabled" />
+																	<StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="NavigationViewItemBorderBrushPointerOver" />
+																	<StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="NavigationViewItemBorderBrushPressed" />
+																	<StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="NavigationViewItemBorderBrushDisabled" />
+																</ResourceDictionary>
+																<ResourceDictionary x:Key="Light">
+																	<StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="NavigationViewItemBackgroundPointerOver" />
+																	<StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="NavigationViewItemBackgroundPressed" />
+																	<StaticResource x:Key="ButtonBackgroundDisabled" ResourceKey="NavigationViewItemBackgroundDisabled" />
+																	<StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="NavigationViewItemForegroundPointerOver" />
+																	<StaticResource x:Key="ButtonForegroundPressed" ResourceKey="NavigationViewItemForegroundPressed" />
+																	<StaticResource x:Key="ButtonForegroundDisabled" ResourceKey="NavigationViewItemForegroundDisabled" />
+																	<StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="NavigationViewItemBorderBrushPointerOver" />
+																	<StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="NavigationViewItemBorderBrushPressed" />
+																	<StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="NavigationViewItemBorderBrushDisabled" />
+																</ResourceDictionary>
+															</ResourceDictionary.ThemeDictionaries>
+														</ResourceDictionary>
+													</Button.Resources>
+												</Button>
+											</Grid>
+
+											<ContentControl x:Name="PaneCustomContentBorder"
+															IsTabStop="False"
 															VerticalContentAlignment="Stretch"
 															HorizontalContentAlignment="Stretch"
-															IsTabStop="False" />
-										</Grid>
+															Grid.Row="4" />
 
-										<Grid x:Name="AutoSuggestArea"
-											  Grid.Row="3"
-											  Height="{ThemeResource NavigationViewAutoSuggestAreaHeight}"
-											  Margin="0,0,0,8"
-											  VerticalAlignment="Center">
+											<!-- "Non header" content -->
+											<Grid x:Name="ItemsContainerGrid"
+												  Grid.Row="6">
+												<Grid.RowDefinitions>
+													<RowDefinition Height="*" />
+													<!-- MenuItems -->
+													<RowDefinition Height="Auto" />
+													<!-- Separator if overflow -->
+													<RowDefinition Height="Auto" />
+													<!-- PaneFooter -->
+													<RowDefinition Height="Auto" />
+													<!-- FooterItems -->
+												</Grid.RowDefinitions>
 
-											<ContentControl x:Name="PaneAutoSuggestBoxPresenter"
-															Margin="{ThemeResource NavigationViewAutoSuggestBoxMargin}"
-															IsTabStop="False"
-															HorizontalContentAlignment="Stretch"
-															VerticalContentAlignment="Center" />
-
-											<Button x:Name="PaneAutoSuggestButton"
-													Visibility="Collapsed"
-													Style="{ThemeResource NavigationViewPaneSearchButtonStyle}"
-													Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}">
-												<Button.Resources>
-													<ResourceDictionary>
-														<ResourceDictionary.ThemeDictionaries>
-															<ResourceDictionary x:Key="Default">
-																<StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="NavigationViewItemBackgroundPointerOver" />
-																<StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="NavigationViewItemBackgroundPressed" />
-																<StaticResource x:Key="ButtonBackgroundDisabled" ResourceKey="NavigationViewItemBackgroundDisabled" />
-																<StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="NavigationViewItemForegroundPointerOver" />
-																<StaticResource x:Key="ButtonForegroundPressed" ResourceKey="NavigationViewItemForegroundPressed" />
-																<StaticResource x:Key="ButtonForegroundDisabled" ResourceKey="NavigationViewItemForegroundDisabled" />
-																<StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="NavigationViewItemBorderBrushPointerOver" />
-																<StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="NavigationViewItemBorderBrushPressed" />
-																<StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="NavigationViewItemBorderBrushDisabled" />
-															</ResourceDictionary>
-															<ResourceDictionary x:Key="Light">
-																<StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="NavigationViewItemBackgroundPointerOver" />
-																<StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="NavigationViewItemBackgroundPressed" />
-																<StaticResource x:Key="ButtonBackgroundDisabled" ResourceKey="NavigationViewItemBackgroundDisabled" />
-																<StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="NavigationViewItemForegroundPointerOver" />
-																<StaticResource x:Key="ButtonForegroundPressed" ResourceKey="NavigationViewItemForegroundPressed" />
-																<StaticResource x:Key="ButtonForegroundDisabled" ResourceKey="NavigationViewItemForegroundDisabled" />
-																<StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="NavigationViewItemBorderBrushPointerOver" />
-																<StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="NavigationViewItemBorderBrushPressed" />
-																<StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="NavigationViewItemBorderBrushDisabled" />
-															</ResourceDictionary>
-														</ResourceDictionary.ThemeDictionaries>
-													</ResourceDictionary>
-												</Button.Resources>
-											</Button>
-										</Grid>
-
-										<ContentControl x:Name="PaneCustomContentBorder"
-														IsTabStop="False"
-														VerticalContentAlignment="Stretch"
-														HorizontalContentAlignment="Stretch"
-														Grid.Row="4" />
-
-										<!-- "Non header" content -->
-										<Grid x:Name="ItemsContainerGrid"
-											  Grid.Row="6">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="*" />
 												<!-- MenuItems -->
-												<RowDefinition Height="Auto" />
-												<!-- Separator if overflow -->
-												<RowDefinition Height="Auto" />
+												<local:ItemsRepeaterScrollHost HorizontalAlignment="Stretch"
+																			   VerticalAlignment="Stretch">
+													<ScrollViewer x:Name="MenuItemsScrollViewer"
+																  TabNavigation="Local"
+																  VerticalScrollBarVisibility="Auto">
+														<!-- Left nav ItemsRepeater -->
+														<local:ItemsRepeater x:Name="MenuItemsHost"
+																			 AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"
+																			 AutomationProperties.AccessibilityView="Content">
+															<local:ItemsRepeater.Layout>
+																<local:StackLayout />
+															</local:ItemsRepeater.Layout>
+														</local:ItemsRepeater>
+													</ScrollViewer>
+												</local:ItemsRepeaterScrollHost>
+
+												<local:NavigationViewItemSeparator x:Name="VisualItemsSeparator"
+																				   Grid.Row="1"
+																				   Margin="0,0,0,2"
+																				   Visibility="Collapsed"
+																				   VerticalAlignment="Center"
+																				   HorizontalAlignment="Stretch" />
+
 												<!-- PaneFooter -->
-												<RowDefinition Height="Auto" />
+												<ContentControl x:Name="FooterContentBorder"
+																IsTabStop="False"
+																VerticalContentAlignment="Stretch"
+																HorizontalContentAlignment="Stretch"
+																Margin="0,0,0,4"
+																Grid.Row="2" />
+
 												<!-- FooterItems -->
-											</Grid.RowDefinitions>
-
-											<!-- MenuItems -->
-											<local:ItemsRepeaterScrollHost HorizontalAlignment="Stretch"
-																		   VerticalAlignment="Stretch">
-												<ScrollViewer x:Name="MenuItemsScrollViewer"
-															  TabNavigation="Local"
-															  VerticalScrollBarVisibility="Auto">
-													<!-- Left nav ItemsRepeater -->
-													<local:ItemsRepeater x:Name="MenuItemsHost"
-																		 AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"
-																		 AutomationProperties.AccessibilityView="Content">
-														<local:ItemsRepeater.Layout>
-															<local:StackLayout />
-														</local:ItemsRepeater.Layout>
-													</local:ItemsRepeater>
-												</ScrollViewer>
-											</local:ItemsRepeaterScrollHost>
-
-											<local:NavigationViewItemSeparator x:Name="VisualItemsSeparator"
-																			   Grid.Row="1"
-																			   Margin="0,0,0,2"
-																			   Visibility="Collapsed"
-																			   VerticalAlignment="Center"
-																			   HorizontalAlignment="Stretch" />
-
-											<!-- PaneFooter -->
-											<ContentControl x:Name="FooterContentBorder"
-															IsTabStop="False"
-															VerticalContentAlignment="Stretch"
-															HorizontalContentAlignment="Stretch"
-															Margin="0,0,0,4"
-															Grid.Row="2" />
-
-											<!-- FooterItems -->
-											<local:ItemsRepeaterScrollHost Grid.Row="3">
-												<ScrollViewer x:Name="FooterItemsScrollViewer"
-															  VerticalScrollBarVisibility="Auto"
-															  contract7Present:VerticalAnchorRatio="1">
-													<local:ItemsRepeater x:Name="FooterMenuItemsHost"
-																		 AutomationProperties.AccessibilityView="Content">
-														<local:ItemsRepeater.Layout>
-															<local:StackLayout />
-														</local:ItemsRepeater.Layout>
-													</local:ItemsRepeater>
-												</ScrollViewer>
-											</local:ItemsRepeaterScrollHost>
+												<local:ItemsRepeaterScrollHost Grid.Row="3">
+													<ScrollViewer x:Name="FooterItemsScrollViewer"
+																  VerticalScrollBarVisibility="Auto"
+																  contract7Present:VerticalAnchorRatio="1">
+														<local:ItemsRepeater x:Name="FooterMenuItemsHost"
+																			 AutomationProperties.AccessibilityView="Content">
+															<local:ItemsRepeater.Layout>
+																<local:StackLayout />
+															</local:ItemsRepeater.Layout>
+														</local:ItemsRepeater>
+													</ScrollViewer>
+												</local:ItemsRepeaterScrollHost>
+											</Grid>
 										</Grid>
-									</Grid>
+									</Border>
 								</SplitView.Pane>
 
 								<SplitView.Content>
