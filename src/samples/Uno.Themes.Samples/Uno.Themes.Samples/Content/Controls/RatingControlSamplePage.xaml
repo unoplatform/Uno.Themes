@@ -1,0 +1,62 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.RatingControlSamplePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:Uno.Themes.Samples.Content"
+      xmlns:sample="using:Uno.Themes.Samples"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:android="http://uno.ui/android"
+      xmlns:ios="http://uno.ui/ios"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:smtx="using:ShowMeTheXAML"
+      mc:Ignorable="d android ios">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <sample:SamplePageLayout>
+            <sample:SamplePageLayout.MaterialTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <!-- Default style -->
+                        <TextBlock Text="Material RatingControl style with label"
+                                   Style="{StaticResource TitleSmall}"
+                                   Margin="0,0,16,0" />
+                        <smtx:XamlDisplay UniqueKey="Material_DefaultRatingControlSamplePage">
+                            <muxc:RatingControl Style="{StaticResource MaterialRatingControlStyle}"
+                                                Caption="Label" />
+                        </smtx:XamlDisplay>
+
+                        <!-- Secondary style -->
+                        <TextBlock Text="Material Secondary RatingControl style without label"
+                                   Style="{StaticResource TitleSmall}"
+                                   Margin="0,0,16,0" />
+                        <smtx:XamlDisplay UniqueKey="Material_SecondaryRatingControlSamplePage">
+                            <muxc:RatingControl Style="{StaticResource MaterialSecondaryRatingControlStyle}" />
+                        </smtx:XamlDisplay>
+                    </StackPanel>
+                </DataTemplate>
+            </sample:SamplePageLayout.MaterialTemplate>
+            <sample:SamplePageLayout.M3MaterialTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <!-- Default style -->
+                        <TextBlock Text="Default RatingControl style with label"
+                                   Style="{StaticResource TitleSmall}"
+                                   Margin="0,0,16,0" />
+                        <smtx:XamlDisplay UniqueKey="M3_Material_DefaultRatingControlSamplePage">
+                            <muxc:RatingControl Style="{StaticResource MaterialRatingControlStyle}"
+                                                Caption="Label" />
+                        </smtx:XamlDisplay>
+
+                        <!-- Secondary style -->
+                        <TextBlock Text="Secondary RatingControl style without label"
+                                   Style="{StaticResource TitleSmall}"
+                                   Margin="0,0,16,0" />
+                        <smtx:XamlDisplay UniqueKey="M3_Material_SecondaryRatingControlSamplePage">
+                            <muxc:RatingControl Style="{StaticResource SecondaryRatingControlStyle}" />
+                        </smtx:XamlDisplay>
+                    </StackPanel>
+                </DataTemplate>
+            </sample:SamplePageLayout.M3MaterialTemplate>
+        </sample:SamplePageLayout>
+    </Grid>
+</Page>

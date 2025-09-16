@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(DotNetVersion)-android;$(DotNetVersion)-ios;$(DotNetVersion)-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="'$(OverrideTargetFramework)'!=''">$(OverrideTargetFramework)</TargetFrameworks>
@@ -76,11 +76,7 @@
 
   <Import Project="..\Uno.Themes.WinUI.Samples.Shared\base.props" />
 
-  <Import Project="..\..\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
-
   <Target Name="ValidateOverrides" BeforeTargets="Restore;_CheckForUnsupportedTargetFramework" Condition="'$(OverrideTargetFramework)' != ''">
-    <Error
-        Text="OverrideTargetFramework set to '$(OverrideTargetFramework)' is missing valid target. Set OverrideTargetFramework to one of the TargetFrameworks for this project or skip building this project (eg unload the project in Visual Studio)"
-        Condition="$(OverrideTargetFramework.Contains('windows10')) or !$(OverrideTargetFramework.Contains('-'))" />
+    <Error Text="OverrideTargetFramework set to '$(OverrideTargetFramework)' is missing valid target. Set OverrideTargetFramework to one of the TargetFrameworks for this project or skip building this project (eg unload the project in Visual Studio)" Condition="$(OverrideTargetFramework.Contains('windows10')) or !$(OverrideTargetFramework.Contains('-'))" />
   </Target>
 </Project>

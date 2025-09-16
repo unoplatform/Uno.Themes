@@ -71,8 +71,6 @@
     <ProjectReference Include="..\..\..\library\Uno.Cupertino\Uno.Cupertino.WinUI.csproj" />
     <ProjectReference Include="..\..\..\library\Uno.Material\Uno.Material.WinUI.csproj" />
   </ItemGroup>
-
-  <Import Project="..\..\UWP\Uno.Themes.Samples.Shared\Uno.Themes.Samples.Shared.projitems" Label="Shared" />
   <Import Project="..\Uno.Themes.WinUI.Samples.Shared\base.props" />
 
   <Target Name="ValidateOverrides" BeforeTargets="Restore;_CheckForUnsupportedTargetFramework" Condition="'$(OverrideTargetFramework)' != ''">

@@ -29,8 +29,8 @@ jobs:
 
   - script: |
       cd $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Mobile
-      dotnet build -f net8.0-android /p:OverrideTargetFramework=net8.0-android -c Release /p:TargetFrameworkOverride=net8.0-android "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:AndroidKeyStore=false /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
-    displayName: Build project for Release - (net8.0-android)
+      dotnet build -f net9.0-android /p:OverrideTargetFramework=net9.0-android -c Release /p:TargetFrameworkOverride=net9.0-android "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:AndroidKeyStore=false /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build project for Release - (net9.0-android)
 
   - task: CopyFiles@2
     displayName: 'Publish Binaries'
