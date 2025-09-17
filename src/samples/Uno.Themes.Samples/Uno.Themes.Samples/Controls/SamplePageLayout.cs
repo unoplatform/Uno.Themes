@@ -1,4 +1,6 @@
-﻿namespace Uno.Themes.Samples;
+using Uno.UI.Extensions;
+
+namespace Uno.Themes.Samples;
 
 public partial class SamplePageLayout : ContentControl
 {
@@ -94,7 +96,7 @@ public partial class SamplePageLayout : ContentControl
 			.Create(() => _materialVersionComboBox.Loaded -= UpdateDefaultMaterialVersionChoice)
 			.DisposeWith(disposables);
 
-		void OnScrolled(object sender, ScrollViewerViewChangedEventArgs e)
+		void OnScrolled(object? sender, ScrollViewerViewChangedEventArgs e)
 		{
 			var relativeOffset = GetRelativeOffset();
 			if (relativeOffset < 0)
@@ -191,7 +193,7 @@ public partial class SamplePageLayout : ContentControl
 	/// <param name="name">The 'x:Name' of the control</param>
 	/// <returns></returns>
 	/// <remarks>The caller must ensure the control is loaded. This is best done from <see cref="FrameworkElement.Loaded"/> event.</remarks>
-	public T GetSampleChild<T>(Design mode, string name)
+	public T? GetSampleChild<T>(Design mode, string name)
 		where T : FrameworkElement
 	{
 		var presenter = (ContentPresenter)GetTemplateChild($"{mode}ContentPresenter");

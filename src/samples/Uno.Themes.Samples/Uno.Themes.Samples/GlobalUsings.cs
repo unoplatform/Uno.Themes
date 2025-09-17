@@ -9,3 +9,8 @@ global using Uno.Themes.Samples.ViewModels;
 global using Uno.Disposables;
 global using System.Reflection;
 global using Windows.Foundation;
+global using Uno.Logging;
+global using Windows.UI.ViewManagement;
+global using Microsoft.UI.Xaml.Markup;
+global using Uno.UI.Extensions;
+global using System.Text;

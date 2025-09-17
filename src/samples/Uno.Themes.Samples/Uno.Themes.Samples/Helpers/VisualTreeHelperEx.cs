@@ -1,18 +1,4 @@
-using System.Text;
-
-#if __IOS__
-using UIKit;
-using _View = UIKit.UIView;
-#elif __MACOS__
-using AppKit;
-using _View = AppKit.NSView;
-#elif __ANDROID__
-using _View = Android.Views.View;
-#elif IS_WINUI
 using _View = Microsoft.UI.Xaml.DependencyObject;
-#else
-using _View = Windows.UI.Xaml.DependencyObject;
-#endif
 
 namespace Uno.Themes.Samples.Helpers;
 
@@ -95,49 +81,7 @@ public static partial class VisualTreeHelperEx
 			}
 		}
 	}
-	
 
-	// note: methods for retrieving children/ancestors exist with varying signatures.
-	// re-implementing them with unified & more inclusive signature for convenience.
-#if __IOS__ || __MACOS__
-	private static IEnumerable<_View> EnumerateAncestors(this _View o)
-	{
-		if (o is null) yield break;
-		while (o.Superview is _View parent)
-		{
-			yield return o = parent;
-		}
-	}
-
-	private static IEnumerable<_View> EnumerateChildren(this _View o)
-	{
-		if (o is null) return Enumerable.Empty<_View>();
-		return o.Subviews;
-	}
-#elif __ANDROID__
-	private static IEnumerable<_View> EnumerateAncestors(this _View o)
-	{
-		if (o is null) yield break;
-
-		while (o.Parent is _View parent)
-		{
-			yield return o = parent;
-		}
-	}
-
-	private static IEnumerable<_View> EnumerateChildren(this _View reference)
-	{
-		if (reference is Android.Views.ViewGroup vg)
-		{
-			return Enumerable
-				.Range(0, vg.ChildCount)
-				.Select(vg.GetChildAt)
-				.Where(x => x != null).Cast<_View>();
-		}
-
-		return Enumerable.Empty<_View>();
-	}
-#else
 	private static IEnumerable<_View> EnumerateAncestors(this _View o)
 	{
 		if (o is null) yield break;
@@ -153,7 +97,6 @@ public static partial class VisualTreeHelperEx
 			.Range(0, VisualTreeHelper.GetChildrenCount(reference))
 			.Select(x => VisualTreeHelper.GetChild(reference, x));
 	}
-#endif
 
 	public static _View GetTemplateRoot(this Control control)
 	{

@@ -1,4 +1,4 @@
-﻿namespace Uno.Themes.Samples.Content.Controls;
+namespace Uno.Themes.Samples.Content.Controls;
 
 [SamplePage(
 	SampleCategory.Controls,

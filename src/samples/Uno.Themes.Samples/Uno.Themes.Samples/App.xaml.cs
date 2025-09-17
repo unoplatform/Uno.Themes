@@ -82,7 +82,7 @@ sealed partial class App : Application
 	/// <summary>
 	/// Configures global Uno Platform logging
 	/// </summary>
-	private static void InitializeLogging()
+	public static void InitializeLogging()
 	{
 #if DEBUG
 		// Logging is disabled by default for release builds, as it incurs a significant
