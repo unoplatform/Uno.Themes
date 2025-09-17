@@ -16,7 +16,7 @@ on:
 jobs:
   build_and_deploy_job:
     env:
-      DIST_PATH: src/samples/UWP/Uno.Themes.Samples.Wasm/bin/Release/net8.0/dist
+      DIST_PATH: src/samples/UWP/Uno.Themes.Samples.Wasm/bin/Release/net9.0/dist
 
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
     
       - run: |
           cd src/samples/UWP/Uno.Themes.Samples.Wasm
-          dotnet build -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net8.0
+          dotnet build -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net9.0
 
       - uses: actions/upload-artifact@v4
         with:
