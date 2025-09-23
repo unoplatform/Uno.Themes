@@ -16,7 +16,7 @@ on:
 jobs:
   build_and_deploy_job:
     env:
-      DIST_PATH: src/samples/Uno.Themes.WinUI.Samples.Wasm/bin/Release/net9.0/dist
+      DIST_PATH: src/samples/Uno.Themes.WinUI.Samples.Wasm/bin/Release/net9.0/publish
 
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
@@ -42,6 +42,7 @@ jobs:
       - run: |
           cd src/samples/WinUI/Uno.Themes.WinUI.Samples.Wasm
           dotnet publish -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net9.0
+          ls -la bin/Release/net9.0
 
       - uses: actions/upload-artifact@v4
         with:
