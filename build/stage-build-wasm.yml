@@ -33,13 +33,13 @@ jobs:
   - template: templates/gitversion.yml
 
   - script: |
-      dotnet build src/samples/$(Lineage)/$(ProjectName).Wasm/$(ProjectName).Wasm.csproj /p:Configuration=Release /p:TargetFrameworkOverride=net8.0 "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      dotnet publish src/samples/$(Lineage)/$(ProjectName).Wasm/$(ProjectName).Wasm.csproj /p:Configuration=Release /p:TargetFrameworkOverride=net9.0 "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build Wasm Head
 
   - task: CopyFiles@2
     displayName: 'Publish Wasm Binaries'
     inputs:
-      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Wasm/bin/Release/net8.0/dist
+      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Wasm/bin/Release/net9.0/publish/wwwroot
       Contents: '**/*.*'
       TargetFolder: $(build.artifactstagingdirectory)/Wasm
       CleanTargetFolder: false
