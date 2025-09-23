@@ -42,7 +42,8 @@ jobs:
       - run: |
           cd src/samples/WinUI/Uno.Themes.WinUI.Samples.Wasm
           dotnet publish -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net9.0
-
+          ls -la bin/Release
+          ls -la bin/Release/net9.0
       - uses: actions/upload-artifact@v4
         with:
           name: wasm-site
