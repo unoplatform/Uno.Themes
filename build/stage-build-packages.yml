@@ -4,6 +4,9 @@ jobs:
   pool:
     vmImage: windows-2022
 
+  variables:
+    - group: uno-codesign-vault
+
   steps:
     - bash: |
         npm install -g conventional-changelog-cli@2.2.2
@@ -13,18 +16,6 @@ jobs:
     - template: templates/gitversion.yml
     - template: templates/dotnet-install-windows.yml
 
-
-    - powershell: |
-        dotnet tool update -g dotnet-vs
-        $MSBUILDPATH="$(vs where release --prop=InstallationPath)\MSBuild\Current\Bin"
-        Write-Host "##vso[task.setvariable variable=MSBUILDPATH;]$MSBUILDPATH"
-        echo MSBUILDPATH: $MSBUILDPATH
-      displayName: Setup VS17 Path
-
-    - template: templates/install-windows-sdk.yml
-      parameters:
-        sdkVersion: 19041
-
     - task: MSBuild@1
       displayName: 'Build Packages'
       inputs:
@@ -33,24 +24,26 @@ jobs:
         msbuildLocationMethod: version
         msbuildVersion: latest
         maximumCpuCount: true
-        msbuildArguments: /m /v:m /r /p:GeneratePackageOnBuild=true /p:UseDotNetNativeToolchain=false /p:AotAssemblies=false "/p:PackageVersion=$(NBGV_SemVer2)" "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-packages.binlog
+        msbuildArguments: /m /v:m /r /p:GeneratePackageOnBuild=true "/p:PackageOutputPath=$(build.artifactstagingdirectory)" /p:UseDotNetNativeToolchain=false /p:AotAssemblies=false "/p:PackageVersion=$(NBGV_SemVer2)" "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-packages.binlog
 
     - task: PowerShell@2
       displayName: Authenticode Sign Packages
       inputs:
         filePath: build/sign-package.ps1
       env:
-        SignClientUser: $(SignClientUser)
-        SignClientSecret: $(SignClientSecret)
+        VaultSignTenantId: $(VaultSignTenantId)
+        VaultSignClientId: $(VaultSignClientId)
+        VaultSignClientSecret: $(VaultSignClientSecret)
+        VaultSignCertificate: $(VaultSignCertificate)
+        VaultSignUrl: $(VaultSignUrl)
         SignPackageName: "Uno.Themes"
         SignPackageDescription: "Uno.Themes"
         ArtifactDirectory: $(build.artifactstagingdirectory)
-      condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')), not(eq(variables['SignClientSecret'], '')), not(eq(variables['SignClientUser'], '')))
+      condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')), not(eq(variables['VaultSignClientSecret'], '')), not(eq(variables['VaultSignClientId'], '')))
 
     - task: PublishBuildArtifacts@1
       condition: always()
       displayName: 'Publish artifact'
       inputs:
         PathtoPublish: $(build.artifactstagingdirectory)
-        ArtifactName: Packages
-        ArtifactType: Container
+        ArtifactName: NuGet_Packages

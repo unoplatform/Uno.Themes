@@ -18,7 +18,9 @@
 						<!-- TextBox Filled -->
 						<smtx:XamlDisplay UniqueKey="Material_TextBoxSamplePage_1"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}" />
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 PlaceholderText="MyPlaceholder"
+									 Header="Label" />
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Filled With PlaceholderText -->
@@ -106,48 +108,270 @@
 			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+
 						<!-- TextBox Filled -->
+						<TextBlock Text="MaterialFilledTextBoxStyle" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_1"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- TextBox Filled With PlaceholderText -->
+						<!-- TextBox Filled Disabled -->
+						<TextBlock Text="MaterialFilledTextBoxStyle Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_28"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 Text="Disabled"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled with placeholder -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Placeholder only (No header)" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_21"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 PlaceholderText="Placeholder" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled with placeholder disabled -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Placeholder only (No header) Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_25"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 PlaceholderText="Placeholder"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled with header -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Header only (No Placeholder)" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_22"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 Header="Header" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled with header disabled -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Header only (No Placeholder) Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_26"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 Header="Header"
+									 Text="Disabled"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled With PlaceholderText and header -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Header + Placeholder" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_2"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Filled"
+							<TextBox PlaceholderText="Placeholder"
+									 Header="Header"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- TextBox Filled Disabled with PlaceholderText -->
-						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_3"
+						<!-- TextBox Filled With PlaceholderText and header disabled -->
+						<TextBlock Text="MaterialFilledTextBoxStyle - Header + Placeholder Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_27"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Placeholder"
-									 Text="Filled Disabled"
+									 Header="Header"
 									 Style="{StaticResource MaterialFilledTextBoxStyle}"
 									 IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Outlined -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_4"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
+						<!-- TextBox Outlined Disabled -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_30"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 Text="Disabled"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
 						<!-- TextBox Outlined with PlaceholderText -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header)" />
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_5"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Outlined"
+							<TextBox PlaceholderText="Placeholder"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- TextBox Outlined Disabled with PlaceholderText -->
-						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_6"
+						<!-- TextBox Outlined with PlaceholderText Disabled -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Placeholder only (No header) Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_31"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox PlaceholderText="Placeholder"
-									 Text="Outlined Disabled"
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined with header -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder)" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_23"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 Header="Header" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined with header Disabled -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header only (No Placeholder) Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_32"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 Header="Header"
+									 Text="Disabled"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined With PlaceholderText and header -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_24"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+									 Header="Header"
+									 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined With PlaceholderText and header Disabled -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle - Header + Placeholder Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_33"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+									 Header="Header"
+									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Icon -->
+						<TextBlock Text="MaterialFilledTextBoxStyle + Icon" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_11"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialFilledTextBoxStyle}">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Icon Placeholder -->
+						<TextBlock Text="MaterialFilledTextBoxStyle + Icon + PlaceholderText" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_34"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Filled with Icon"
+									 Style="{StaticResource MaterialFilledTextBoxStyle}">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Icon Header -->
+						<TextBlock Text="MaterialFilledTextBoxStyle + Icon + Header" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_35"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Header="Filled with Icon"
+									 Style="{StaticResource MaterialFilledTextBoxStyle}">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Icon Header Placeholder -->
+						<TextBlock Text="MaterialFilledTextBoxStyle + Icon + Header + PlaceholderText" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_36"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Header="Header"
+									 PlaceholderText="Placeholder"
+									 Style="{StaticResource MaterialFilledTextBoxStyle}">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Icon Header Placeholder Disabled -->
+						<TextBlock Text="MaterialFilledTextBoxStyle + Icon + Header + PlaceholderText + Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_37"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Header="Header"
+									 PlaceholderText="Placeholder"
+									 Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 IsEnabled="False">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined Icon -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle + Icon" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_38"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined Icon with PlaceholderText -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle + Icon + PlaceholderText" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_12"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Outlined with Icon"
+									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined Icon with Header -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle + Icon + Header" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_41"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 Header="Outlined with Icon">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined Icon with Header and Placeholder -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle + Icon + Header + Placeholder" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_39"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 Header="Header"
+									 PlaceholderText="Placeholder">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
+						</smtx:XamlDisplay>
+
+
+						<!-- TextBox Outlined Icon with Header and Placeholder disabled -->
+						<TextBlock Text="MaterialOutlinedTextBoxStyle + Icon + Header + Placeholder + Disabled" />
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_40"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 Header="Header"
+									 PlaceholderText="Placeholder"
+									 IsEnabled="False">
+								<ut:ControlExtensions.Icon>
+									<SymbolIcon Symbol="Favorite" />
+								</ut:ControlExtensions.Icon>
+							</TextBox>
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Filled MultiLine -->
@@ -160,6 +384,17 @@
 									 AcceptsReturn="True" />
 						</smtx:XamlDisplay>
 
+						<!-- TextBox Filled MultiLine Disabled -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_42"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+									 Header="Disabled"
+									 Style="{StaticResource MaterialFilledTextBoxStyle}"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
 						<!-- TextBox Outlined MultiLine -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_8"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
@@ -168,6 +403,17 @@
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 									 TextWrapping="Wrap"
 									 AcceptsReturn="True" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined MultiLine Disabled -->
+						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_43"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
+									 Header="Disabled"
+									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True"
+									 IsEnabled="False" />
 						</smtx:XamlDisplay>
 
 						<!-- TextBox Filled MultiLine with Icon -->
@@ -184,7 +430,7 @@
 							</TextBox>
 						</smtx:XamlDisplay>
 
-						<!-- TextBox Outlined MultiLine with Icon-->
+						<!-- TextBox Outlined MultiLine with Icon -->
 						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_10"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque. Auctor erat vestibulum enim sodales sapien nam litora rhoncus condimentum praesent, platea dui odio eros integer id gravida turpis semper nisi maecenas, nascetur dictumst sed arcu aenean varius dis leo habitant."
@@ -192,28 +438,6 @@
 									 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 									 TextWrapping="Wrap"
 									 AcceptsReturn="True">
-								<ut:ControlExtensions.Icon>
-									<SymbolIcon Symbol="Favorite" />
-								</ut:ControlExtensions.Icon>
-							</TextBox>
-						</smtx:XamlDisplay>
-
-						<!-- TextBox Filled Icon with PlaceholderText -->
-						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_11"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Filled with Icon"
-									 Style="{StaticResource MaterialFilledTextBoxStyle}">
-								<ut:ControlExtensions.Icon>
-									<SymbolIcon Symbol="Favorite" />
-								</ut:ControlExtensions.Icon>
-							</TextBox>
-						</smtx:XamlDisplay>
-
-						<!-- TextBox Outlined Icon with PlaceholderText -->
-						<smtx:XamlDisplay UniqueKey="M3Material_TextBoxSamplePage_12"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox PlaceholderText="Outlined with Icon"
-									 Style="{StaticResource MaterialOutlinedTextBoxStyle}">
 								<ut:ControlExtensions.Icon>
 									<SymbolIcon Symbol="Favorite" />
 								</ut:ControlExtensions.Icon>

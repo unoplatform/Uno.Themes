@@ -1,4 +1,4 @@
-﻿using Uno.Themes.Samples.Content.NestedSamples;
+using Uno.Themes.Samples.Content.NestedSamples;
 
 namespace Uno.Themes.Samples.Content.Controls;
 
@@ -9,14 +9,5 @@ public sealed partial class CommandBarSamplePage : Page
 	public CommandBarSamplePage()
 	{
 		this.InitializeComponent();
-	}
-	private void ShowSampleInNestedFrame(object sender, RoutedEventArgs e)
-	{
-		Shell.GetForCurrentView()?.ShowNestedSample<CommandBarSample_NestedPage1>(clearStack: true);
-	}
-
-	private void ShowM3SampleInNestedFrame(object sender, RoutedEventArgs e)
-	{
-		Shell.GetForCurrentView()?.ShowNestedSample<M3MaterialCommandBarSample_NestedPage1>(clearStack: true);
 	}
 }

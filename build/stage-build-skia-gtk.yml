@@ -34,13 +34,13 @@ jobs:
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
 
-  - powershell: dotnet msbuild src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/$(ProjectName).Skia.Gtk.csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=net8.0 /detailedsummary /m /bl:$(build.artifactstagingdirectory)\themes-build-$(ArtifactName).binlog
+  - powershell: dotnet msbuild src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/$(ProjectName).Skia.Gtk.csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=net9.0 /detailedsummary /m /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build GTK Head
 
   - task: CopyFiles@2
     displayName: 'Publish Skia.GTK Binaries'
     inputs:
-      SourceFolder: $(Build.SourcesDirectory)/src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/bin/Release/net8.0
+      SourceFolder: $(Build.SourcesDirectory)/src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/bin/Release/net9.0
       Contents: '**/*.*'
       TargetFolder: $(build.artifactstagingdirectory)/skia-gtk-build
       CleanTargetFolder: false

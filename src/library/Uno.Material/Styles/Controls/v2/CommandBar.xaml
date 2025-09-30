@@ -9,158 +9,21 @@
 					xmlns:uuc="using:Uno.UI.Controls"
 					mc:Ignorable="android ios">
 
-	<x:Double x:Key="MaterialCommandBarElevation">4</x:Double>
-	<x:Double x:Key="MaterialCommandBarHeight">48</x:Double>
-
-	<Style x:Key="MaterialAppBarButtonStyle"
-		   TargetType="AppBarButton">
-		<Setter Property="Height" Value="{StaticResource MaterialCommandBarHeight}" />
-		<Setter Property="Width" Value="{StaticResource MaterialCommandBarHeight}" />
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="HorizontalAlignment" Value="Center" />
-		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="IsCompact" Value="True" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="AppBarButton">
-					<um:Ripple Feedback="{TemplateBinding Foreground}"
-									 FeedbackOpacity="{StaticResource PressedOpacity}">
-						<Viewbox x:Name="ContentViewbox"
-								 MaxHeight="{ThemeResource AppBarButtonContentHeight}"
-								 MaxWidth="{ThemeResource AppBarButtonContentHeight}"
-								 Margin="0,12"
-								 HorizontalAlignment="Stretch"
-								 StretchDirection="DownOnly"
-								 AutomationProperties.AccessibilityView="Raw">
-							<ContentPresenter x:Name="Content"
-											  Content="{TemplateBinding Icon}"
-											  Foreground="{TemplateBinding Foreground}" />
-						</Viewbox>
-					</um:Ripple>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
-	<ios:ControlTemplate x:Key="NativeM3CommandBarTemplate"
-						 TargetType="CommandBar">
-		<!-- We use BorderBrush instead of Background to ensure that semi-transparent background of Grid and NativeCommandBarPresenter don't add up -->
-		<Border BorderBrush="{TemplateBinding Background}"
-				BorderThickness="{TemplateBinding Padding}"
-				Background="{TemplateBinding Background}">
-			<uuc:NativeCommandBarPresenter Height="44"/>
-		</Border>
-	</ios:ControlTemplate>
-	<android:ControlTemplate x:Key="NativeM3CommandBarTemplate"
-							 TargetType="CommandBar">
-		<uuc:NativeCommandBarPresenter />
-	</android:ControlTemplate>
-
-	<ControlTemplate x:Key="MaterialXamlCommandBarTemplate"
-					 TargetType="CommandBar">
-		<!-- Simplified CommandBar template that adds support for Uno.UI.CommandBarExtensions.NavigationCommand on Windows. -->
-		<Grid x:Name="LayoutRoot"
-			  win:Height="48"
-			  Background="{TemplateBinding Background}">
-
-			<Grid x:Name="ContentRoot"
-				  Margin="{TemplateBinding Padding}"
-				  Background="{TemplateBinding Background}"
-				  Opacity="{TemplateBinding Opacity}">
-
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
-
-				<!-- note: NavigationCommand is an AppBarButton, not ICommand -->
-				<ContentControl Content="{Binding (toolkit:CommandBarExtensions.NavigationCommand), RelativeSource={RelativeSource TemplatedParent}}"
-								Foreground="{TemplateBinding Foreground}"
-								Height="{StaticResource MaterialCommandBarHeight}"
-								Width="{StaticResource MaterialCommandBarHeight}"
-								IsTabStop="False" />
-
-				<!--
-					Use a ContentControl rather than a ContentPresenter so that IsEnabled can be set to false
-					in the Minimal/HiddenClosed states to remove it from being a tab-stop candidate.
-				-->
-				<ContentControl x:Name="ContentControl"
-								Grid.Column="1"
-								Margin="16,0"
-								Content="{TemplateBinding Content}"
-								ContentTemplate="{TemplateBinding ContentTemplate}"
-								ContentTransitions="{TemplateBinding ContentTransitions}"
-								Foreground="{TemplateBinding Foreground}"
-								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-								HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-								VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-								IsTabStop="False" />
-
-				<ItemsControl x:Name="PrimaryItemsControl"
-							  HorizontalAlignment="Right"
-							  MinHeight="{ThemeResource AppBarThemeCompactHeight}"
-							  IsTabStop="False"
-							  Grid.Column="2">
-					<ItemsControl.ItemsPanel>
-						<ItemsPanelTemplate>
-							<StackPanel Orientation="Horizontal" />
-						</ItemsPanelTemplate>
-					</ItemsControl.ItemsPanel>
-				</ItemsControl>
-			</Grid>
-		</Grid>
-	</ControlTemplate>
-
+	<!-- Define the base style for Material CommandBar -->
 	<Style x:Key="MaterialBaseCommandBarStyle"
 		   TargetType="CommandBar">
-		<!-- Setting content to empty to avoid getting the datacontext -->
-		<Setter Property="Content" Value="" />
-		<Setter Property="ContentTemplate">
-			<Setter.Value>
-				<DataTemplate>
-					<TextBlock Text="{Binding}"
-							   Style="{StaticResource MaterialTitleLarge}" />
-				</DataTemplate>
-			</Setter.Value>
-		</Setter>
-
 		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-
-		<android:Setter Property="(toolkit:UIElementExtensions.Elevation)"
-						Value="{StaticResource MaterialCommandBarElevation}" />
-		<Setter Property="Height" Value="{StaticResource MaterialCommandBarHeight}" />
-
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Top" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-
-		<Setter Property="OverflowButtonVisibility" Value="Collapsed" />
-		<Setter Property="IsDynamicOverflowEnabled" Value="False" />
-		
-		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
-		<Setter Property="toolkit:CommandBarExtensions.NavigationCommand" Value="{x:Null}" />
-		
-		<Setter Property="Template" Value="{StaticResource MaterialXamlCommandBarTemplate}" />
 	</Style>
+	
+	<!-- Define the main Material CommandBar Style -->
 	<Style x:Key="MaterialCommandBarStyle"
 		   TargetType="CommandBar"
-		   BasedOn="{StaticResource MaterialBaseCommandBarStyle}">
-		
-		<ios:Setter Property="Height" Value="NaN" />
-		<ios:Setter Property="Template"
-					Value="{StaticResource NativeM3CommandBarTemplate}" />
-		<android:Setter Property="Template"
-						Value="{StaticResource NativeM3CommandBarTemplate}" />
-	</Style>
-
-	<Style x:Key="MaterialDefaultAppBarButtonStyle"
-		   TargetType="AppBarButton"
-		   BasedOn="{StaticResource MaterialAppBarButtonStyle}" />
+		   BasedOn="{StaticResource MaterialBaseCommandBarStyle}" />
 
 	<Style x:Key="MaterialDefaultCommandBarStyle"
 		   TargetType="CommandBar"

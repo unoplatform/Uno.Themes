@@ -7,7 +7,7 @@ uid: Uno.Themes.Styles.TextBox
 ## Styles
 
 | Style Key              | IsDefaultStyle\* |
-|------------------------|------------------|
+| ---------------------- | ---------------- |
 | `FilledTextBoxStyle`   |                  |
 | `OutlinedTextBoxStyle` | True             |
 
@@ -16,7 +16,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 ## Lightweight Styling
 
 | Key                                               | Type              | Value                         |
-|---------------------------------------------------|-------------------|-------------------------------|
+| ------------------------------------------------- | ----------------- | ----------------------------- |
 | `TextBoxDeleteButtonForeground`                   | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
 | `TextBoxDeleteButtonForegroundPointerOver`        | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
 | `TextBoxDeleteButtonForegroundPressed`            | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
@@ -42,8 +42,12 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `FilledTextBoxForegroundOpacityDisabled`          | `Double`          | `LowOpacity`                  |
 | `FilledTextBoxPlaceholderForeground`              | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
 | `FilledTextBoxPlaceholderForegroundPointerOver`   | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
-| `FilledTextBoxPlaceholderForegroundFocused`       | `SolidColorBrush` | `PrimaryBrush`                |
+| `FilledTextBoxPlaceholderForegroundFocused`       | `SolidColorBrush` | `OnSurfaceBrush`              |
 | `FilledTextBoxPlaceholderForegroundDisabled`      | `SolidColorBrush` | `OnSurfaceLowBrush`           |
+| `FilledTextBoxHeaderForeground`                   | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
+| `FilledTextBoxHeaderForegroundPointerOver`        | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
+| `FilledTextBoxHeaderForegroundFocused`            | `SolidColorBrush` | `PrimaryBrush`                |
+| `FilledTextBoxHeaderForegroundDisabled`           | `SolidColorBrush` | `OnSurfaceLowBrush`           |
 | `OutlinedTextBoxBorderBrush`                      | `SolidColorBrush` | `OutlineBrush`                |
 | `OutlinedTextBoxBorderBrushPointerOver`           | `SolidColorBrush` | `OnSurfaceBrush`              |
 | `OutlinedTextBoxBorderBrushFocused`               | `SolidColorBrush` | `PrimaryBrush`                |
@@ -55,27 +59,31 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `OutlinedTextBoxForegroundOpacityDisabled`        | `Double`          | `LowOpacity`                  |
 | `OutlinedTextBoxPlaceholderForeground`            | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
 | `OutlinedTextBoxPlaceholderForegroundPointerOver` | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
-| `OutlinedTextBoxPlaceholderForegroundFocused`     | `SolidColorBrush` | `PrimaryBrush`                |
+| `OutlinedTextBoxPlaceholderForegroundFocused`     | `SolidColorBrush` | `OnSurfaceBrush`              |
 | `OutlinedTextBoxPlaceholderForegroundDisabled`    | `SolidColorBrush` | `OnSurfaceLowBrush`           |
-| `OutlinedTextBoxFontFamily`                       | `FontFamily`      | `BodyLargeFontFamily`         |
+| `OutlinedTextBoxHeaderForeground`                 | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
+| `OutlinedTextBoxHeaderForegroundPointerOver`      | `SolidColorBrush` | `OnSurfaceVariantBrush`       |
+| `OutlinedTextBoxHeaderForegroundFocused`          | `SolidColorBrush` | `PrimaryBrush`                |
+| `OutlinedTextBoxHeaderForegroundDisabled`         | `SolidColorBrush` | `OnSurfaceLowBrush`           |
+| `OutlinedTextBoxFontFamily`                       | `FontFamily`      | `MaterialMediumFontFamily`    |
 | `OutlinedTextBoxFontWeight`                       | `String`          | `BodyLargeFontWeight`         |
 | `OutlinedTextBoxFontSize`                         | `Double`          | `BodyLargeFontSize`           |
 | `OutlinedTextBoxCharacterSpacing`                 | `Int32`           | `BodyLargeCharacterSpacing`   |
-| `FilledTextBoxFontFamily`                         | `FontFamily`      | `BodyLargeFontFamily`         |
+| `FilledTextBoxFontFamily`                         | `FontFamily`      | `MaterialMediumFontFamily`    |
 | `FilledTextBoxFontWeight`                         | `String`          | `BodyLargeFontWeight`         |
 | `FilledTextBoxFontSize`                           | `Double`          | `BodyLargeFontSize`           |
 | `FilledTextBoxCharacterSpacing`                   | `Int32`           | `BodyLargeCharacterSpacing`   |
 | `FilledTextBoxBorderThicknessNormal`              | `Double`          | `TextBoxOutlinedStrokeHeight` |
 | `FilledTextBoxBorderThicknessFocused`             | `Double`          | `TextBoxFocusStrokeWidth`     |
-| `MaterialTextBoxClearGlyphWidth`                  | `Double`          | 20                            |
-| `MaterialTextBoxClearGlyphHeight`                 | `Double`          | 20                            |
-| `MaterialFilledTextBoxCornerRadius`               | `CornerRadius`    | 4,4,0,0                       |
-| `MaterialFilledTextBoxPadding`                    | `Thickness`       | 16,7                          |
-| `MaterialFilledTextBoxMinHeight`                  | `Double`          | 58                            |
-| `MaterialFilledTextBoxBorderHeightFocused`        | `Double`          | 2                             |
-| `MaterialOutlinedTextBoxBorderThickness`          | `Double`          | 1                             |
-| `MaterialOutlinedTextBoxCornerRadius`             | `CornerRadius`    | 4                             |
-| `MaterialOutlinedTextBoxPadding`                  | `Thickness`       | 16,7,14,7                     |
-| `MaterialOutlinedTextBoxMinHeight`                | `Double`          | 56                            |
-| `MaterialOutlinedTextBoxBorderPadding`            | `Thickness`       | 1                             |
-| `MaterialOutlinedTextBoxBorderThicknessFocused`   | `Double`          | 2                             |
+| `TextBoxClearGlyphWidth`                          | `Double`          | 20                            |
+| `TextBoxClearGlyphHeight`                         | `Double`          | 20                            |
+| `FilledTextBoxCornerRadius`                       | `CornerRadius`    | 4,4,0,0                       |
+| `FilledTextBoxPadding`                            | `Thickness`       | 16,7                          |
+| `FilledTextBoxMinHeight`                          | `Double`          | 58                            |
+| `FilledTextBoxBorderHeightFocused`                | `Double`          | 2                             |
+| `OutlinedTextBoxBorderThickness`                  | `Double`          | 1                             |
+| `OutlinedTextBoxCornerRadius`                     | `CornerRadius`    | 4                             |
+| `OutlinedTextBoxPadding`                          | `Thickness`       | 8                             |
+| `OutlinedTextBoxMinHeight`                        | `Double`          | 56                            |
+| `OutlinedTextBoxBorderThicknessFocused`           | `Double`          | 2                             |
+| `OutlinedTextBoxBorderThicknessPointerOver`       | `Double`          | 2                             |

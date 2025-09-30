@@ -1,5 +1,5 @@
 ﻿parameters:
-  DotNetVersion: '8.0.408'
+  DotNetVersion: '9.0.200'
   UnoCheck_Version: '1.30.1'
 
 steps:
@@ -30,6 +30,24 @@ steps:
   #  errorActionPreference: stop
   #  retryCountOnTaskFailure: 3
   - task: UseDotNet@2
+    displayName: 'Use .NET Core SDK 6.0.300'
+    retryCountOnTaskFailure: 3
+    inputs:
+      packageType: sdk
+      version: 6.0.300
+      includePreviewVersions: true
+
+  # Required until .NET 6 installs properly on Windows using UseDotnet
+  # using preview builds
+  #- powershell: |
+  #    $ProgressPreference = 'SilentlyContinue'
+  #    Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
+  #    & .\dotnet-install.ps1 -Version ${{ parameters.DotNetVersion }} -InstallDir "$env:ProgramFiles\dotnet\" -Verbose
+  #    & dotnet --list-sdks
+  #  displayName: Install .NET ${{ parameters.DotNetVersion }}
+  #  errorActionPreference: stop
+  #  retryCountOnTaskFailure: 3
+  - task: UseDotNet@2
     displayName: 'Use .NET Core SDK ${{ parameters.DotNetVersion }}'
     retryCountOnTaskFailure: 3
     inputs:
@@ -46,7 +64,7 @@ steps:
     
   - powershell: |
       & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
-      & uno-check -v --ci --non-interactive --fix --skip androidsdk --skip androidemulator --skip xcode --skip gtk3 --skip vswin --skip vsmac
+      & uno-check --verbose --ci --non-interactive --fix --skip androidsdk --skip androidemulator --skip xcode --skip gtk3 --skip vswin --skip vsmac
     displayName: Install .NET Workloads
     errorActionPreference: continue
     ignoreLASTEXITCODE: true

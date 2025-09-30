@@ -8,6 +8,57 @@ uid: Uno.Themes.Material.Migration
 
 The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following changes have been made:
 
+### Upgrading to Uno Themes V-Next
+
+We have standardized the naming of styles and resource keys. This change aims to simplify resource key usage and align the naming convention across Uno Themes.
+
+#### Changes to Resource Keys
+
+| Old Resource Key                                  | New Resource Key                                |
+|---------------------------------------------------|-------------------------------------------------|
+| MaterialTextBoxClearGlyphWidth                    | TextBoxClearGlyphWidth                          |
+| MaterialTextBoxClearGlyphHeight                   | TextBoxClearGlyphHeight                         |
+| MaterialFilledTextBoxCornerRadius                 | FilledTextBoxCornerRadius                       |
+| MaterialFilledTextBoxPadding                      | FilledTextBoxPadding                            |
+| MaterialFilledTextBoxMinHeight                    | FilledTextBoxMinHeight                          |
+| MaterialFilledTextBoxBorderHeightFocused          | FilledTextBoxBorderHeightFocused                |
+| MaterialOutlinedTextBoxBorderThickness            | OutlinedTextBoxBorderThickness                  |
+| MaterialOutlinedTextBoxCornerRadius               | OutlinedTextBoxCornerRadius                     |
+| MaterialOutlinedTextBoxPadding                    | OutlinedTextBoxPadding                          |
+| MaterialOutlinedTextBoxMinHeight                  | OutlinedTextBoxMinHeight                        |
+| MaterialOutlinedTextBoxBorderThicknessFocused     | OutlinedTextBoxBorderThicknessFocused           |
+| MaterialOutlinedTextBoxBorderThicknessPointerOver | OutlinedTextBoxBorderThicknessPointerOver       |
+| OutlinedPasswordBoxBorderPadding                  | ***REMOVED***                                   |
+| OutlinedPasswordBoxBorderPaddingPointerOver       | ***REMOVED***                                   |
+| OutlinedPasswordBoxBorderPaddingFocused           | ***REMOVED***                                   |
+
+### Upgrading to Uno Themes 5.1
+
+#### TextBox `PlaceholderText` and `Header`
+
+Previously, the `PlaceholderText` property acted as a header, displaying in the normal state and animating upwards when the text is set or being entered. And, the `Header` property did nothing. Now, both `PlaceholderText` and `Header` are supported and their behaviors have changed.
+
+##### New Behavior
+
+- **PlaceholderText**: Displays inside the TextBox when it's empty. Disappears when text is entered.
+- **Header**: Acts as a label. Animates upwards when text is entered.
+
+##### Example
+
+**Old Usage:**
+
+```xml
+<TextBox PlaceholderText="Enter your name" />
+```
+
+**New Usage:**
+
+```xml
+<TextBox PlaceholderText="Enter your name" Header="Name" />
+```
+
+Update your TextBox elements to use `Header` for labels and `PlaceholderText` for placeholders.
+
 ### Converters
 
 All Converters were moved to the base `Uno.Themes` library, and the new `namespace` is `Uno.Themes`.
@@ -61,7 +112,6 @@ Before:
 
 ```xml
 <Page xmlns:um="using:Uno.Material">
-
     <StackPanel>
         <Button Content="OUTLINED"
             Style="{StaticResource MaterialOutlinedButtonStyle}">
@@ -77,7 +127,6 @@ After:
 
 ```xml
 <Page xmlns:ut="using:Uno.Themes">
-
     <StackPanel>
         <Button Content="OUTLINED"
             Style="{StaticResource MaterialOutlinedButtonStyle}">
@@ -480,11 +529,11 @@ The Uno.Material v2 NuGet package contains both sets of v1 and v2 styles. Within
 
 Both `MaterialColors` and `MaterialResources` will now always initialize the latest version of the Material styles. It is also possible to directly reference the `MaterialColorsV2` and `MaterialResourcesV2` ResourceDictionaries if needed.
 
-The v2 styles introduce a new naming system for its resource keys. Refer to the [Material Styles Matrix](material-controls-styles.md) for the updated style keys. In addition to the new style keys, the Uno.Material color palette and text resources have also been updated to align with the [Material Design 3 Color System](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and the [Material Design 3 Typography Guidelines](https://m3.material.io/styles/typography/type-scale-tokens).
+The v2 styles introduce a new naming system for its resource keys. Refer to the [Material Styles Matrix](xref:Uno.Themes.Material.Styles) for the updated style keys. In addition to the new style keys, the Uno.Material color palette and text resources have also been updated to align with the [Material Design 3 Color System](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and the [Material Design 3 Typography Guidelines](https://m3.material.io/styles/typography/type-scale-tokens).
 
 #### Color Update
 
-A new color palette has been created for v2, meaning any color palette overrides ResourceDictionary in your app must be updated with the new resource keys. An example of the new color palette can be seen in the new [Uno.Material default palette](https://github.com/unoplatform/Uno.Themes/blob/master/src/library/Uno.Material/Styles/Application/v2/SharedColorPalette.xaml). For more information on the updated colors, you can refer to the "Colors and Themes" section of the [Material 3 Migration Guide](https://material.io/blog/migrating-material-3).
+A new color palette has been created for v2, meaning any color palette overrides ResourceDictionary in your app must be updated with the new resource keys. An example of the new color palette can be seen in the new [Uno.Material default palette](https://github.com/unoplatform/Uno.Themes/blob/master/src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml#L4). For more information on the updated colors, you can refer to the "Colors and Themes" section of the [Material 3 Migration Guide](https://material.io/blog/migrating-material-3).
 
 > [!NOTE]
 > As of v2, the Brush resources have been relocated to `ThemeDictionaries`. To reference these Brush resources, use the `ThemeResource` binding.

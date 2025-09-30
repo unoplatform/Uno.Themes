@@ -19,7 +19,7 @@ pr:
 variables:
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
-  XCODE_ROOT: '/Applications/Xcode_16.2.app'
+  XCODE_ROOT: '/Applications/Xcode_16.4.app'
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
 
@@ -63,3 +63,34 @@ stages:
     - template: build/stage-build-wasm.yml
     - template: build/stage-build-windows.yml
     - template: build/stage-build-skia-gtk.yml
+
+##
+## Publishing
+##
+
+- stage: Publish_Dev
+  displayName: 'Publish - Dev NuGet.org'
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature')), not(eq(variables['build.reason'], 'PullRequest')))
+  dependsOn: Packages
+  jobs:
+  - template: build/publish/publish-nuget-dev.yml
+    parameters:
+      vmImage: 'windows-2022'
+
+- stage: Publish_Prod_Dev
+  displayName: 'Publish - Prod Uno Dev Feed'
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), not(eq(variables['build.reason'], 'PullRequest')))
+  dependsOn: Packages
+  jobs:
+  - template: build/publish/publish-nuget-prod-dev.yml
+    parameters:
+      vmImage: 'windows-2022'
+  
+- stage: Publish_Prod_Public
+  displayName: 'Publish - Prod NuGet.org'
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), not(eq(variables['build.reason'], 'PullRequest')))
+  dependsOn: Publish_Prod_Dev
+  jobs:
+  - template: build/publish/publish-nuget-prod.yml
+    parameters:
+      vmImage: 'windows-2022'

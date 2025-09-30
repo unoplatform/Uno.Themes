@@ -16,7 +16,7 @@ on:
 jobs:
   build_and_deploy_job:
     env:
-      DIST_PATH: src/samples/UWP/Uno.Themes.Samples.Wasm/bin/Release/net8.0/dist
+      DIST_PATH: src/samples/Uno.Themes.WinUI.Samples.Wasm/bin/Release/net9.0/publish
 
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
@@ -28,10 +28,10 @@ jobs:
           fetch-depth: 0 # Required for gitversion
           submodules: true
 
-      - name: Setup dotnet 8.0.408
+      - name: Setup dotnet 9.0.300
         uses: actions/setup-dotnet@v1.7.2
         with:
-          dotnet-version: '8.0.408'
+          dotnet-version: '9.0.300'
 
       - uses: dotnet/nbgv@f088059084cb5d872e9d1a994433ca6440c2bf72 # v0.4.2
         id: nbgv
@@ -40,10 +40,11 @@ jobs:
           setAllVars: true
     
       - run: |
-          cd src/samples/UWP/Uno.Themes.Samples.Wasm
-          dotnet build -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net8.0
+          cd src/samples/WinUI/Uno.Themes.WinUI.Samples.Wasm
+          dotnet publish -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net9.0
+          ls -la bin/Release/net9.0
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: wasm-site
           path: ${{ env.DIST_PATH }}

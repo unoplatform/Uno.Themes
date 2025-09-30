@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
@@ -138,6 +138,18 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "OutlinedTextBoxBorderBrushFocused")]
 					public static ThemeResourceKey<Brush> Focused => new("OutlinedTextBoxBorderBrushFocused");
+				}
+
+				public static partial class BorderThickness
+				{
+					[ResourceKeyDefinition(typeof(double), "OutlinedTextBoxBorderThickness")]
+					public static ThemeResourceKey<double> Default => new("OutlinedTextBoxBorderThickness");
+
+					[ResourceKeyDefinition(typeof(double), "OutlinedTextBoxBorderThicknessPointerOver")]
+					public static ThemeResourceKey<double> PointerOver => new("OutlinedTextBoxBorderThicknessPointerOver");
+
+					[ResourceKeyDefinition(typeof(double), "OutlinedTextBoxBorderThicknessFocused")]
+					public static ThemeResourceKey<double> Focused => new("OutlinedTextBoxBorderThicknessFocused");
 				}
 
 				public static partial class Foreground
