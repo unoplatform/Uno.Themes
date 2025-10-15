@@ -1,4 +1,7 @@
-﻿using Microsoft.UI.Xaml;
+using System;
+using Windows.UI;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Uno.Extensions.Markup;
 using Uno.Extensions.Markup.Internals;
@@ -26,12 +29,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonBackgroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("ElevatedButtonBackgroundDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("ElevatedButtonBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("ElevatedButtonBackgroundPointerFocused");
 				}
 
 				public static partial class BorderBrush
@@ -47,12 +44,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonBorderBrushDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("ElevatedButtonBorderBrushDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonBorderBrushFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("ElevatedButtonBorderBrushFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonBorderBrushPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("ElevatedButtonBorderBrushPointerFocused");
 				}
 
 				public static partial class Elevation
@@ -80,19 +71,10 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonStateLayerBackgroundPressed")]
 					public static ThemeResourceKey<Brush> Pressed => new("ElevatedButtonStateLayerBackgroundPressed");
-
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonStateLayerBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("ElevatedButtonStateLayerBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonStateLayerBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("ElevatedButtonStateLayerBackgroundPointerFocused");
 				}
 
-				public static partial class Foreground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForeground")]
-					public static ThemeResourceKey<Brush> Default => new("ElevatedButtonForeground");
-				}
+				[ResourceKeyDefinition(typeof(Brush), "ElevatedButtonForeground")]
+				public static ThemeResourceKey<Brush> Foreground => new("ElevatedButtonForeground");
 			}
 
 			public static partial class Filled
@@ -110,12 +92,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledButtonBackgroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FilledButtonBackgroundDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledButtonBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("FilledButtonBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledButtonBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("FilledButtonBackgroundPointerFocused");
 				}
 
 				public static partial class BorderBrush
@@ -131,12 +107,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledButtonBorderBrushDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FilledButtonBorderBrushDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledButtonBorderBrushFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("FilledButtonBorderBrushFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledButtonBorderBrushPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("FilledButtonBorderBrushPointerFocused");
 				}
 
 				public static partial class StateLayerBackground
@@ -146,21 +116,12 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledButtonStateLayerBackgroundPressed")]
 					public static ThemeResourceKey<Brush> Pressed => new("FilledButtonStateLayerBackgroundPressed");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledButtonStateLayerBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("FilledButtonStateLayerBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledButtonStateLayerBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("FilledButtonStateLayerBackgroundPointerFocused");
 				}
 
 				public static ThemeResourceKey<double> Elevation => Shared.Elevation;
 
-				public static partial class Foreground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "FilledButtonForeground")]
-					public static ThemeResourceKey<Brush> Default => new("FilledButtonForeground");
-				}
+				[ResourceKeyDefinition(typeof(Brush), "FilledButtonForeground")]
+				public static ThemeResourceKey<Brush> Foreground => new("FilledButtonForeground");
 
 				public static ThemeResourceKey<Thickness> Margin => Shared.Margin;
 			}
@@ -180,12 +141,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonBackgroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FilledTonalButtonBackgroundDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("FilledTonalButtonBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("FilledTonalButtonBackgroundPointerFocused");
 				}
 
 				public static partial class BorderBrush
@@ -201,12 +156,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonBorderBrushDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("FilledTonalButtonBorderBrushDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonBorderBrushFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("FilledTonalButtonBorderBrushFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonBorderBrushPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("FilledTonalButtonBorderBrushPointerFocused");
 				}
 
 				public static partial class StateLayerBackground
@@ -216,22 +165,13 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonStateLayerBackgroundPressed")]
 					public static ThemeResourceKey<Brush> Pressed => new("FilledTonalButtonStateLayerBackgroundPressed");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonStateLayerBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("FilledTonalButtonStateLayerBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonStateLayerBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("FilledTonalButtonStateLayerBackgroundPointerFocused");
 				}
 
 				public static ThemeResourceKey<double> Elevation => Shared.Elevation;
 
-				public static partial class Foreground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonForeground")]
-					public static ThemeResourceKey<Brush> Default => new("FilledTonalButtonForeground");
-				}
-
+				[ResourceKeyDefinition(typeof(Brush), "FilledTonalButtonForeground")]
+				public static ThemeResourceKey<Brush> Foreground => new("FilledTonalButtonForeground");
+				
 				public static ThemeResourceKey<Thickness> Margin => Shared.Margin;
 			}
 
@@ -289,12 +229,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonBackgroundPressed")]
 					public static ThemeResourceKey<Brush> Pressed => new("OutlinedButtonBackgroundPressed");
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("OutlinedButtonBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("OutlinedButtonBackgroundPointerFocused");
 				}
 
 				public static partial class BorderBrush
@@ -310,12 +244,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonBackgroundDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("OutlinedButtonBackgroundDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonBorderBrushFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("OutlinedButtonBorderBrushFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonBorderBrushPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("OutlinedButtonBorderBrushPointerFocused");
 				}
 
 				public static partial class StateLayerBackground
@@ -325,22 +253,13 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonStateLayerBackgroundPressed")]
 					public static ThemeResourceKey<Brush> Pressed => new("OutlinedButtonStateLayerBackgroundPressed");
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonStateLayerBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("OutlinedButtonStateLayerBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonStateLayerBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("OutlinedButtonStateLayerBackgroundPointerFocused");
 				}
 
 				[ResourceKeyDefinition(typeof(Thickness), "OutlinedButtonBorderThickness")]
 				public static ThemeResourceKey<Thickness> BorderThickness => new("OutlinedButtonBorderThickness");
 
-				public static partial class Foreground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonForeground")]
-					public static ThemeResourceKey<Brush> Default => new("OutlinedButtonForeground");
-				}
+				[ResourceKeyDefinition(typeof(Brush), "OutlinedButtonForeground")]
+				public static ThemeResourceKey<Brush> Foreground => new("OutlinedButtonForeground");
 			}
 
 			public static partial class Text
@@ -355,12 +274,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "TextButtonBackgroundPressed")]
 					public static ThemeResourceKey<Brush> Pressed => new("TextButtonBackgroundPressed");
-
-					[ResourceKeyDefinition(typeof(Brush), "TextButtonBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("TextButtonBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "TextButtonBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("TextButtonBackgroundPointerFocused");
 				}
 
 				public static partial class BorderBrush
@@ -376,12 +289,6 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "TextButtonBorderBrushDisabled")]
 					public static ThemeResourceKey<Brush> Disabled => new("TextButtonBorderBrushDisabled");
-
-					[ResourceKeyDefinition(typeof(Brush), "TextButtonBorderBrushFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("TextButtonBorderBrushFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "TextButtonBorderBrushPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("TextButtonBorderBrushPointerFocused");
 				}
 
 				public static partial class StateLayerBackground
@@ -391,19 +298,10 @@ public static partial class Theme
 
 					[ResourceKeyDefinition(typeof(Brush), "TextButtonStateLayerBackgroundPressed")]
 					public static ThemeResourceKey<Brush> Pressed => new("TextButtonStateLayerBackgroundPressed");
-
-					[ResourceKeyDefinition(typeof(Brush), "TextButtonStateLayerBackgroundFocused")]
-					public static ThemeResourceKey<Brush> Focused => new("TextButtonStateLayerBackgroundFocused");
-
-					[ResourceKeyDefinition(typeof(Brush), "TextButtonStateLayerBackgroundPointerFocused")]
-					public static ThemeResourceKey<Brush> PointerFocused => new("TextButtonStateLayerBackgroundPointerFocused");
 				}
 
-				public static partial class Foreground
-				{
-					[ResourceKeyDefinition(typeof(Brush), "TextButtonForeground")]
-					public static ThemeResourceKey<Brush> Default => new("TextButtonForeground");
-				}
+				[ResourceKeyDefinition(typeof(Brush), "TextButtonForeground")]
+				public static ThemeResourceKey<Brush> Foreground => new("TextButtonForeground");
 
 				[ResourceKeyDefinition(typeof(Thickness), "TextButtonPadding")]
 				public static ThemeResourceKey<Thickness> Padding => new("TextButtonPadding");
