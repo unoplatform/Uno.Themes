@@ -1519,6 +1519,13 @@
 		   TargetType="local:NavigationView">
 		<Setter Property="Background" Value="{ThemeResource NavigationViewBackground}" />
 
+		<Setter Property="CornerRadius" Value="0">
+			<!--
+				note: this property is unused, we instead use
+				MaterialNavigationViewSplitViewCornerRadius & NavigationViewContentGridBorderThickness
+				to manipulate corner-radius of the pane and content grids.
+			-->
+		</Setter>
 		<Setter Property="OpenPaneLength" Value="360" />
 		<Setter Property="CompactPaneLength" Value="{ThemeResource NavigationViewCompactPaneLength}" />
 
@@ -1903,19 +1910,21 @@
 							<!-- Displaymode (compact/minimal/normal) left -->
 							<SplitView x:Name="RootSplitView"
 									   Grid.Row="1"
-									   CornerRadius="{ThemeResource MaterialNavigationViewSplitViewCornerRadius}"
 									   BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
-									   PaneBackground="{ThemeResource NavigationViewPaneBackground}"
+									   Background="Transparent"
+									   PaneBackground="Transparent"
 									   CompactPaneLength="{TemplateBinding CompactPaneLength}"
+									   CornerRadius="0"
 									   OpenPaneLength="{TemplateBinding OpenPaneLength}"
 									   IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}"
 									   DisplayMode="Inline"
 									   IsTabStop="False"
 									   win:Style="{StaticResource ResetDefaultSplitViewStyle}">
-
 								<SplitView.Pane>
 									<Grid x:Name="PaneContentGrid"
+										  Background="{ThemeResource NavigationViewPaneBackground}"
 										  BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
+										  CornerRadius="{ThemeResource MaterialNavigationViewSplitViewCornerRadius}"
 										  Padding="{ThemeResource MaterialNavigationViewSplitViewPadding}"
 										  HorizontalAlignment="Left"
 										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
@@ -2079,6 +2088,7 @@
 									<Grid x:Name="ContentGrid"
 										  BorderBrush="{ThemeResource NavigationViewBackground}"
 										  BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}"
+										  Background="{TemplateBinding Background}"
 										  Margin="{ThemeResource NavigationViewContentMargin}"
 										  CornerRadius="{ThemeResource MaterialNavigationViewContentGridCornerRadius}">
 										<Grid.RowDefinitions>
