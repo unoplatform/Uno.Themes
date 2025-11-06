@@ -1,0 +1,41 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.TabViewSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel Spacing="16">
+						<smtx:XamlDisplay UniqueKey="M3_TabView_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TabView Style="{StaticResource MaterialTabViewStyle}"
+									 AddTabButtonClick="AddTabButtonClick"
+									 TabCloseRequested="TabCloseRequested">
+								<TabView.TabItems>
+									<TabViewItem Header="Document 1"
+												 Style="{StaticResource MaterialTabViewItemStyle}">
+										<TextBlock Margin="12"
+												   Text="Document 1 content" />
+									</TabViewItem>
+									<TabViewItem Header="Document 2"
+												 Style="{StaticResource MaterialTabViewItemStyle}">
+										<TextBlock Margin="12"
+												   Text="Document 2 content" />
+									</TabViewItem>
+								</TabView.TabItems>
+							</TabView>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

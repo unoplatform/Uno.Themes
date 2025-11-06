@@ -1,0 +1,95 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="TabViewBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="TabViewForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewBorderBrush" ResourceKey="OutlineBrush" />
+			<x:Double x:Key="TabViewBorderThickness">1</x:Double>
+
+			<StaticResource x:Key="TabViewHeaderBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundSelected" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="TabViewItemHeaderBackgroundSelected" ResourceKey="SurfaceVariantBrush" />
+
+			<SolidColorBrush x:Key="TabViewItemHeaderBackground"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="TabViewItemHeaderBackgroundPointerOver"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="TabViewItemHeaderBackgroundPressed"
+							 Color="Transparent" />
+
+			<StaticResource x:Key="TabViewItemFontFamily" ResourceKey="LabelLargeFontFamily" />
+			<StaticResource x:Key="TabViewItemFontWeight" ResourceKey="LabelLargeFontWeight" />
+			<StaticResource x:Key="TabViewItemFontSize" ResourceKey="LabelLargeFontSize" />
+			<StaticResource x:Key="TabViewItemCharacterSpacing" ResourceKey="LabelLargeCharacterSpacing" />
+			<Thickness x:Key="TabViewItemHeaderPadding">16,8</Thickness>
+
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="TabViewAddButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="TabViewBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="TabViewForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewBorderBrush" ResourceKey="OutlineBrush" />
+			<x:Double x:Key="TabViewBorderThickness">1</x:Double>
+
+			<StaticResource x:Key="TabViewHeaderBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundSelected" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="TabViewItemHeaderBackgroundSelected" ResourceKey="SurfaceVariantBrush" />
+
+
+			<SolidColorBrush x:Key="TabViewItemHeaderBackground"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="TabViewItemHeaderBackgroundPointerOver"
+							 Color="Transparent" />
+			<SolidColorBrush x:Key="TabViewItemHeaderBackgroundPressed"
+							 Color="Transparent" />
+
+			<StaticResource x:Key="TabViewItemFontFamily" ResourceKey="LabelLargeFontFamily" />
+			<StaticResource x:Key="TabViewItemFontWeight" ResourceKey="LabelLargeFontWeight" />
+			<StaticResource x:Key="TabViewItemFontSize" ResourceKey="LabelLargeFontSize" />
+			<StaticResource x:Key="TabViewItemCharacterSpacing" ResourceKey="LabelLargeCharacterSpacing" />
+			<Thickness x:Key="TabViewItemHeaderPadding">16,8</Thickness>
+
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TabViewItemHeaderCloseButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="TabViewAddButtonForeground" ResourceKey="OnSurfaceVariantBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<Style x:Key="MaterialTabViewStyle"
+		   TargetType="TabView">
+		<Setter Property="Background" Value="{ThemeResource TabViewBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource TabViewForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource TabViewBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource TabViewBorderThickness}" />
+	</Style>
+
+	<Style x:Key="MaterialTabViewItemStyle"
+		   TargetType="TabViewItem">
+		<Setter Property="FontFamily" Value="{ThemeResource TabViewItemFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TabViewItemFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TabViewItemFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource TabViewItemCharacterSpacing}" />
+		<Setter Property="Padding" Value="{ThemeResource TabViewItemHeaderPadding}" />
+		<Setter Property="Foreground" Value="{ThemeResource TabViewItemHeaderForeground}" />
+	</Style>
+</ResourceDictionary>
