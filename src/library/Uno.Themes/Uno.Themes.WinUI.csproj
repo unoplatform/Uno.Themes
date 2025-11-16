@@ -16,10 +16,6 @@
 	<Import Project="themes-common.props" />
 
 	<ItemGroup>
-		<PackageReference Include="Uno.WinUI" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 		<Compile Update="**\*.xaml.cs">
 			<DependentUpon>%(Filename)</DependentUpon>
