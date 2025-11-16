@@ -23,21 +23,6 @@ public class TextBoxHeaderStateTrigger : StateTriggerBase
 	}
 
 	#endregion
-	#region DependencyProperty: Password
-
-	public static DependencyProperty PasswordProperty { get; } = DependencyProperty.Register(
-		nameof(Password),
-		typeof(string),
-		typeof(TextBoxHeaderStateTrigger),
-		new PropertyMetadata(string.Empty, OnPasswordChanged));
-
-	public string Password
-	{
-		get => (string)GetValue(PasswordProperty);
-		set => SetValue(PasswordProperty, value);
-	}
-
-	#endregion
 	#region DependencyProperty: HeaderText
 
 	public static DependencyProperty HeaderTextProperty { get; } = DependencyProperty.Register(
@@ -85,7 +70,6 @@ public class TextBoxHeaderStateTrigger : StateTriggerBase
 	#endregion
 
 	private static void OnTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) => (sender as TextBoxHeaderStateTrigger)?.Reevaluate();
-	private static void OnPasswordChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) => (sender as TextBoxHeaderStateTrigger)?.Reevaluate();
 	private static void OnHeaderTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) => (sender as TextBoxHeaderStateTrigger)?.Reevaluate();
 	private static void OnPlaceholderTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) => (sender as TextBoxHeaderStateTrigger)?.Reevaluate();
 	private static void OnFocusStateChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) => (sender as TextBoxHeaderStateTrigger)?.Reevaluate();
@@ -95,7 +79,6 @@ public class TextBoxHeaderStateTrigger : StateTriggerBase
 		var containsHeader = !string.IsNullOrEmpty(HeaderText);
 		var shouldBeDisplaced =
 			!string.IsNullOrEmpty(Text) ||
-			!string.IsNullOrEmpty(Password) ||
 			!string.IsNullOrEmpty(PlaceholderText) ||
 			FocusState is not FocusState.Unfocused;
 
