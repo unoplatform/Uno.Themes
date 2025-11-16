@@ -4,19 +4,12 @@ jobs:
   container: unoplatform/wasm-build:3.0
 
   strategy:
-    maxParallel: 2
+    maxParallel: 1
     matrix:
       WinUI:
         ArtifactName: wasm-winui
         ProjectName: Uno.Themes.WinUI.Samples
         Lineage: WinUI
-        ApplicationBuildNumberOffset: 50
-        VersionCodeOffset: 50
-        CI_Build: true
-      UWP:
-        ArtifactName: wasm-uwp
-        ProjectName: Uno.Themes.Samples
-        Lineage: UWP
         ApplicationBuildNumberOffset: 50
         VersionCodeOffset: 50
         CI_Build: true
