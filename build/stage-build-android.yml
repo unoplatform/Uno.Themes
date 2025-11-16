@@ -2,19 +2,12 @@ jobs:
 - job: Android
 
   strategy:
-    maxParallel: 2
+    maxParallel: 1
     matrix:
       WinUI:
         ArtifactName: android-winui
         ProjectName: Uno.Themes.WinUI.Samples
         Lineage: WinUI
-        GeneratePackageOnBuild: false
-        ApplicationBuildNumberOffset: 50
-        VersionCodeOffset: 1
-      UWP:
-        ArtifactName: android-uwp
-        ProjectName: Uno.Themes.Samples
-        Lineage: UWP
         GeneratePackageOnBuild: false
         ApplicationBuildNumberOffset: 50
         VersionCodeOffset: 1
