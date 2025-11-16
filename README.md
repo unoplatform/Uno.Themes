@@ -22,7 +22,7 @@ Both libraries include:
 
 Platform support:
 
-- WinUI / UWP
+- WinUI / WinAppSDK
 - iOS
 - macOS
 - Android

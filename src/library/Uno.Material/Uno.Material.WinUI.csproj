@@ -1,16 +1,17 @@
 
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Uno.Sdk">
 	<Import Project="..\tfm-common-winui.props" />
 
 	<PropertyGroup>
 		<UseWinUI>true</UseWinUI>
 		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
-		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
-		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
 		<PackageId>Uno.Material.WinUI</PackageId>
 		<AssemblyName>Uno.Material.WinUI</AssemblyName>
 		<FrameworkLineage>WinUI</FrameworkLineage>
 		<PackageDescription>A set of Material styles for WinUI Controls to be used in Uno Platform and WinAppSDK projects</PackageDescription>
+		<UnoSingleProject>true</UnoSingleProject>
+		<OutputType>Library</OutputType>
+		<EnableDefaultPageItems>false</EnableDefaultPageItems>
 	</PropertyGroup>
 
 	<Import Project="material-common.props" />
@@ -21,16 +22,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="Uno.WinUI" />
-		<PackageReference Include="Uno.WinUI.Lottie" Condition="!$(_IsWinUI)" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Condition="$(_IsWinUI)" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Condition="$(_IsWinUI)" />
+		<PackageReference Include="Uno.WinUI.Lottie" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(_IsWinUI)">
-		<Page Remove="@(XamlExclusion)" />
-	</ItemGroup>
-
-	<ItemGroup Condition="!$(_IsWinUI)">
+	<ItemGroup>
 		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 		<Page Remove="@(XamlExclusion)" />
 
@@ -44,6 +39,4 @@
 			<Name>Uno.Themes</Name>
 		</ProjectReference>
 	</ItemGroup>
-
-	<Import Project="..\..\..\winappsdk-workaround.targets" />
 </Project>
