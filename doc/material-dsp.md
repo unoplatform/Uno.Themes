@@ -4,6 +4,8 @@ uid: Uno.Themes.Material.DSP
 
 # Using the DSP Tooling in Uno.Material
 
+> [!IMPORTANT]
+> UnoFeatures: **Material** and **Dsp** — add `<UnoFeatures>Material; Dsp;</UnoFeatures>` to your app's `.csproj` to include Uno Material and Dsp resources.
 ## Introduction
 
 Is it possible to automate the creation of the Material Design color palette? Yes, it is. Uno.Material provides a tooling to generate the color palette from the official Material Design color palette. This tooling is available in the [Uno.Dsp.Cli](https://nuget.org/packages/Uno.Dsp.Cli) and [Uno.Dsp.Tasks](https://nuget.org/packages/Uno.Dsp.Tasks) NuGet packages. The following instructions will cover the Uno.Dsp.Tasks version, which is more automatic.

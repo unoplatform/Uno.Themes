@@ -8,6 +8,9 @@ uid: Uno.Themes.Overview
   <img src="assets/themes-design-systems.png" alt="Themes design systems" />
 </p>
 
+> [!IMPORTANT]
+> UnoFeatures: **Material** or **Cupertino** — enable these themes by adding `<UnoFeatures>Material</UnoFeatures>` or `<UnoFeatures>Cupertino</UnoFeatures>` to your app's `.csproj`.
+
 ## Summary
 
 - [Material Overview](material-getting-started.md)
@@ -16,7 +19,7 @@ uid: Uno.Themes.Overview
 
 ## Uno Themes Styles
 
-[Uno Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons NuGet packages that can be added to any new or existing Uno solution.
+[Uno Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons enabled through UnoFeatures that can be added to any new or existing Uno solution.
 
 It contains three libraries:
 
