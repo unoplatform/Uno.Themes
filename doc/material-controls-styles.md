@@ -4,6 +4,9 @@ uid: Uno.Themes.Material.Styles
 
 # Material Controls Styles
 
+> [!IMPORTANT]
+> UnoFeatures: **Material** — add `<UnoFeatures>Material</UnoFeatures>` to your app's `.csproj` to include Uno Material resources.
+
 | Control                   | Style Key                       | IsDefaultStyle\* |
 |---------------------------|---------------------------------|------------------|
 | `AppBarButton`            | `AppBarButtonStyle`             | True             |

@@ -4,6 +4,9 @@ uid: Uno.Themes.Material.Migration
 
 # Upgrading Uno Material
 
+> [!IMPORTANT]
+> UnoFeatures: **Material** — add `<UnoFeatures>Material</UnoFeatures>` to your app's `.csproj` to include Uno Material resources.
+
 ## Upgrading to Uno Themes v5
 
 The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following changes have been made:

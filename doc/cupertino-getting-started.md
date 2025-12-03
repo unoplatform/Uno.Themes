@@ -8,7 +8,10 @@ uid: Uno.Themes.Cupertino.GetStarted
   <img src="assets/cupertino-design-system.png" alt="Cupertino design system" />
 </p>
 
-Uno Cupertino is an add-on package that lets you apply [Cupertino - Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines) to your application with a few lines of code.
+> [!IMPORTANT]
+> UnoFeatures: **Cupertino** — add `<UnoFeatures>Cupertino</UnoFeatures>` to your app's `.csproj` to enable Uno Cupertino.
+
+Uno Cupertino is enabled through the `Cupertino` UnoFeatures and lets you apply [Cupertino - Human Interface Guideline styling](https://developer.apple.com/design/human-interface-guidelines) to your application with a few lines of code.
 
 ## Getting Started
 
@@ -60,6 +63,9 @@ Depending on the type of project template that the Uno Platform application was 
 
 #### [**Multi-Head Project Template (Legacy)**](#tab/multihead)
 
+> [!NOTE]
+> Use this only when working on older multi-head templates that do not support `UnoFeatures`. Modern templates should use the Single Project instructions above.
+
 1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
 1. Install the [`Uno.Cupertino.WinUI`](https://www.nuget.org/packages/Uno.Cupertino.WinUI)
 1. Add the following Cupertino resources to `AppResources.xaml`:
@@ -77,6 +83,9 @@ Depending on the type of project template that the Uno Platform application was 
     ```
 
 #### [**Shared Project (.shproj) Template (Legacy)**](#tab/shproj)
+
+> [!NOTE]
+> Use this only when working on older `.shproj`-based solutions that do not support `UnoFeatures`. Modern templates should use the Single Project instructions above.
 
 1. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
     - The [`Uno.Cupertino`](https://www.nuget.org/packages/Uno.Cupertino/) package when targetting Xamarin/UWP

@@ -8,7 +8,10 @@ uid: Uno.Themes.Material.GetStarted
   <img src="assets/material-design-system.png" alt="Material design system" />
 </p>
 
-The Uno Material library is available as NuGet packages that can be added to any new or existing Uno Platform solution.
+> [!IMPORTANT]
+> UnoFeatures: **Material** — add `<UnoFeatures>Material</UnoFeatures>` to your app's `.csproj` to add Uno Material.
+
+The Uno Material library is enabled through the `Material` UnoFeatures, which brings in the required packages for new and existing Uno Platform solutions.
 Uno Material lets you apply [Material Design 3](https://m3.material.io/) styling to your application with just a few lines of code.
 
 > [!WARNING]
@@ -91,6 +94,9 @@ Depending on the type of project template that the Uno Platform application was 
 
 #### [**Multi-Head Project Template (Legacy)**](#tab/multihead)
 
+> [!NOTE]
+> Use this only when working on older multi-head templates that do not support `UnoFeatures`. Modern templates should use the Single Project instructions above.
+
 1. In the Solution Explorer panel, right-click on your app's **App Code Library** project (`PROJECT_NAME.csproj`) and select `Manage NuGet Packages...`
 2. Install the [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI)
 3. Add the following Material resources to `AppResources.xaml`:
@@ -108,9 +114,12 @@ Depending on the type of project template that the Uno Platform application was 
 
 #### [**Shared Project (.shproj) Template (Legacy)**](#tab/shproj)
 
+> [!NOTE]
+> Use this only when working on older `.shproj`-based solutions that do not support `UnoFeatures`. Modern templates should use the Single Project instructions above.
+
 1. In the Solution Explorer panel, right-click on your solution name and select `Manage NuGet Packages for Solution ...`. Choose either:
-     - The [`Uno.Material`](https://www.nuget.org/packages/Uno.Material/) package when targetting Xamarin/UWP
-     - The [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI) package when targetting net6.0+/WinUI
+    - The [`Uno.Material`](https://www.nuget.org/packages/Uno.Material/) package when targetting Xamarin/UWP
+    - The [`Uno.Material.WinUI`](https://www.nuget.org/packages/Uno.Material.WinUI) package when targetting net6.0+/WinUI
 
 2. Select the following projects for installation:
     - `PROJECT_NAME.Wasm.csproj`
