@@ -10,6 +10,57 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel Width="300"
+								HorizontalAlignment="Left">
+
+						<!-- NumberBox -->
+						<smtx:XamlDisplay UniqueKey="Simple_NumberBoxSamplePage"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:NumberBox Style="{StaticResource MaterialNumberBoxStyle}"
+											SmallChange="1"
+											Value="0"
+											PlaceholderText="Add"
+											SpinButtonPlacementMode="Inline" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled NumberBox -->
+						<smtx:XamlDisplay UniqueKey="Simple_NumberBoxSamplePage_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:NumberBox Style="{StaticResource MaterialNumberBoxStyle}"
+											SmallChange="1"
+											Value="0"
+											PlaceholderText="Add"
+											IsEnabled="False"
+											SpinButtonPlacementMode="Inline" />
+						</smtx:XamlDisplay>
+
+						<!-- NumberBox with header -->
+						<smtx:XamlDisplay UniqueKey="Simple_NumberBoxSamplePage_Header"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:NumberBox Style="{StaticResource MaterialNumberBoxStyle}"
+											SmallChange="1"
+											Value="0"
+											Header="Value"
+											PlaceholderText="Add"
+											SpinButtonPlacementMode="Inline" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled NumberBox -->
+						<smtx:XamlDisplay UniqueKey="Simple_NumberBoxSamplePage_HeaderDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:NumberBox Style="{StaticResource MaterialNumberBoxStyle}"
+											SmallChange="1"
+											Value="0"
+											Header="Value"
+											PlaceholderText="Add"
+											IsEnabled="False"
+											SpinButtonPlacementMode="Inline" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel Width="300"

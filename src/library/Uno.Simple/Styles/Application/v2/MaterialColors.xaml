@@ -1,0 +1,183 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<!--
+
+	For more information on the color system, consult this page
+	https://material.io/design/color/the-color-system.html#color-theme-creation
+
+	-->
+	<!-- Global brushes -->
+	<SolidColorBrush x:Key="MaterialPrimaryBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}" />
+	<SolidColorBrush x:Key="MaterialPrimaryVariantBrush"
+					 Color="{ThemeResource MaterialPrimaryVariantColor}" />
+	<SolidColorBrush x:Key="MaterialPrimaryVariantDarkBrush"
+					 Color="{ThemeResource MaterialPrimaryVariantDarkColor}" />
+	<SolidColorBrush x:Key="MaterialPrimaryVariantLightBrush"
+					 Color="{ThemeResource MaterialPrimaryVariantLightColor}" />
+	<SolidColorBrush x:Key="MaterialSecondaryBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}" />
+	<SolidColorBrush x:Key="MaterialSecondaryVariantDarkBrush"
+					 Color="{ThemeResource MaterialSecondaryVariantDarkColor}" />
+	<SolidColorBrush x:Key="MaterialSecondaryVariantLightBrush"
+					 Color="{ThemeResource MaterialSecondaryVariantLightColor}" />
+	<SolidColorBrush x:Key="MaterialBackgroundBrush"
+					 Color="{ThemeResource MaterialBackgroundColor}" />
+	<SolidColorBrush x:Key="MaterialSurfaceBrush"
+					 Color="{ThemeResource MaterialSurfaceColor}" />
+	<SolidColorBrush x:Key="MaterialErrorBrush"
+					 Color="{ThemeResource MaterialErrorColor}" />
+	<SolidColorBrush x:Key="MaterialOnErrorBrush"
+					 Color="{ThemeResource MaterialOnErrorColor}" />
+	<SolidColorBrush x:Key="MaterialOnBackgroundBrush"
+					 Color="{ThemeResource MaterialOnBackgroundColor}" />
+	<SolidColorBrush x:Key="MaterialOverlayBrush"
+					 Color="{ThemeResource MaterialOverlayColor}" />
+
+	<!-- Primary Brushes -->
+	<SolidColorBrush x:Key="MaterialPrimaryMediumBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Opacity="{StaticResource MaterialMediumOpacity}" />
+	<SolidColorBrush x:Key="MaterialPrimaryLowBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Opacity="{StaticResource MaterialLowOpacity}" />
+	<SolidColorBrush x:Key="MaterialPrimaryHoverBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Opacity="{StaticResource MaterialHoverOpacity}" />
+	<SolidColorBrush x:Key="MaterialPrimaryFocusedBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Opacity="{StaticResource MaterialFocusedOpacity}" />
+	<SolidColorBrush x:Key="MaterialPrimaryPressedBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Opacity="{StaticResource MaterialPressedOpacity}" />
+	<SolidColorBrush x:Key="MaterialPrimaryDraggedBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Opacity="{StaticResource MaterialDraggedOpacity}" />
+	<SolidColorBrush x:Key="MaterialPrimarySelectedBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Opacity="{StaticResource MaterialSelectedOpacity}" />
+
+	<!-- Secondary Brushes -->
+	<SolidColorBrush x:Key="MaterialSecondaryMediumBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}"
+					 Opacity="{StaticResource MaterialMediumOpacity}" />
+	<SolidColorBrush x:Key="MaterialSecondaryLowBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}"
+					 Opacity="{StaticResource MaterialLowOpacity}" />
+	<SolidColorBrush x:Key="MaterialSecondaryHoverBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}"
+					 Opacity="{StaticResource MaterialHoverOpacity}" />
+	<SolidColorBrush x:Key="MaterialSecondaryFocusedBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}"
+					 Opacity="{StaticResource MaterialFocusedOpacity}" />
+	<SolidColorBrush x:Key="MaterialSecondaryPressedBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}"
+					 Opacity="{StaticResource MaterialPressedOpacity}" />
+	<SolidColorBrush x:Key="MaterialSecondaryDraggedBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}"
+					 Opacity="{StaticResource MaterialDraggedOpacity}" />
+	<SolidColorBrush x:Key="MaterialSecondarySelectedBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}"
+					 Opacity="{StaticResource MaterialSelectedOpacity}" />
+
+	<!-- OnPrimary Brushes -->
+	<!-- Only opacity should differ -->
+	<!-- Issue #41 TODO: SolidColorBrushes set this way do not function with android thumbtints and tracktints -->
+	<SolidColorBrush x:Key="MaterialOnPrimaryBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}" />
+	<SolidColorBrush x:Key="MaterialOnPrimaryMediumBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="{StaticResource MaterialMediumOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnPrimaryLowBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="{StaticResource MaterialLowOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnPrimaryHoverBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="{StaticResource MaterialHoverOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnPrimaryFocusedBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="{StaticResource MaterialFocusedOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnPrimaryPressedBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="{StaticResource MaterialPressedOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnPrimaryDraggedBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="{StaticResource MaterialDraggedOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnPrimarySelectedBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="{StaticResource MaterialSelectedOpacity}" />
+
+	<!-- OnSecondary Brushes -->
+	<!-- Only opacity should differ -->
+	<SolidColorBrush x:Key="MaterialOnSecondaryBrush"
+					 Color="{ThemeResource MaterialOnSecondaryColor}"
+					 Opacity="1.0" />
+	<SolidColorBrush x:Key="MaterialOnSecondaryMediumBrush"
+					 Color="{ThemeResource MaterialOnSecondaryColor}"
+					 Opacity="{StaticResource MaterialMediumOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSecondaryLowBrush"
+					 Color="{ThemeResource MaterialOnSecondaryColor}"
+					 Opacity="{StaticResource MaterialLowOpacity}" />
+
+	<!-- Surface Brushes -->
+	<!-- Only opacity should differ -->
+	<SolidColorBrush x:Key="MaterialSurfaceLowBrush"
+					 Color="{ThemeResource MaterialSurfaceColor}"
+					 Opacity="{StaticResource MaterialLowOpacity}" />
+
+	<!-- MaterialOnSurface Brushes -->
+	<!-- Only opacity should differ -->
+	<SolidColorBrush x:Key="MaterialOnSurfaceBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="1.0" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceMediumBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialMediumOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceLowBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialLowOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceHoverBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialHoverOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceFocusedBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialFocusedOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSurfacePressedBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialPressedOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceDraggedBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialDraggedOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceSelectedBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="{StaticResource MaterialSelectedOpacity}" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceLowVariantBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="0.20" />
+
+	<!-- Navigation Bar-->
+	<StaticResource x:Key="MaterialWUXNavDrawersBackgroundBrush"
+					ResourceKey="MaterialSurfaceBrush" />
+	<StaticResource x:Key="MaterialWUXNavDrawersTextBrush"
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
+	<StaticResource x:Key="MaterialWUXNavDrawersIconBrush"
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
+	<StaticResource x:Key="MaterialWUXNavDrawersSelectedBrush"
+					ResourceKey="MaterialPrimarySelectedBrush" />
+	<StaticResource x:Key="MaterialWUXNavDrawersSelectedTextBrush"
+					ResourceKey="MaterialPrimaryBrush" />
+	<StaticResource x:Key="MaterialWUXNavDrawersSelectedIconBrush"
+					ResourceKey="MaterialPrimaryBrush" />
+
+	<!-- Bottom Bar Navigation -->
+	<SolidColorBrush x:Key="MaterialBottomNavBackgroundBrush"
+					 Color="{ThemeResource MaterialBottomNavBackgroundColor}" />
+	<SolidColorBrush x:Key="MaterialBottomNavForegroundBrush"
+					 Color="{ThemeResource MaterialBottomNavForegroundColor}" />
+
+	<SolidColorBrush x:Key="MaterialBottomNavNotifBackgroundBrush"
+					 Color="#CF6679" />
+	<SolidColorBrush x:Key="MaterialBottomNavNotifLabelBrush"
+					 Color="#000000" />
+
+</ResourceDictionary>

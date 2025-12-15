@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:android="http://uno.ui/android"
+					xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					mc:Ignorable="android">
+
+	<!-- 
+	
+	For more information on the color system, consult this page
+	https://material.io/design/color/the-color-system.html#color-theme-creation 
+	
+	-->
+
+	<!-- Label Resources -->
+	<StaticResource x:Key="TextBoxLabelDefaultColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxLabelFocusColorBrush"
+					ResourceKey="PrimaryBrush" />
+
+	<!-- Icon Resources -->
+	<StaticResource x:Key="TextBoxIconColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+
+	<!-- Filled Resources -->
+	<x:Double x:Key="TextBoxFocusStrokeWidth">2</x:Double>
+	<SolidColorBrush x:Key="TextBoxFilledBackgroundColorBrush"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="0.12" />
+	<StaticResource x:Key="TextBoxFilledIndicatorColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxFilledFocusIndicatorColorBrush"
+					ResourceKey="PrimaryBrush" />
+
+	<!-- Outline Resources -->
+	<x:Double x:Key="TextBoxOutlinedStrokeHeight">1</x:Double>
+	<StaticResource x:Key="TextBoxOutlinedStrokeColorBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="TextBoxOutlinedFocusStrokeColorBrush"
+					ResourceKey="PrimaryBrush" />
+
+	<!-- Corner Radius Resources -->
+	<x:Double x:Key="TextBoxOutlinedCorderRadius">4</x:Double>
+
+</ResourceDictionary>

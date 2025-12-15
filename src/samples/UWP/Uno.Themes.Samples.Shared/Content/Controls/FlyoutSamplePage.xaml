@@ -651,7 +651,97 @@
 					<StackPanel />
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
-		</sample:SamplePageLayout>
+				<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- FullScreen Flyout -->
+						<TextBlock Text="FullScreen Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_FlyoutSamplePage_FullScreenFlyout">
+
+							<Button x:Name="ShowFullScreenFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+											<CommandBar Content="FullScreen Flyout Example"
+														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														Style="{StaticResource MaterialCommandBarStyle}">
+												<toolkit:CommandBarExtensions.NavigationCommand>
+													<AppBarButton Click="CloseFlyout"
+																  Tag="{Binding ElementName=ShowFullScreenFlyoutButton}"
+																  Style="{StaticResource MaterialAppBarButton}">
+														<AppBarButton.Icon>
+															<PathIcon Data="{StaticResource FlyoutCloseGlyphPathData}" />
+														</AppBarButton.Icon>
+													</AppBarButton>
+												</toolkit:CommandBarExtensions.NavigationCommand>
+											</CommandBar>
+
+											<TextBlock Grid.Row="1"
+													   Text="Example of a FullScreen Flyout"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Center"
+													   Style="{StaticResource MaterialBody1}" />
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Modal Centered Flyout -->
+						<TextBlock Text="Modal Centered Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_FlyoutSamplePage_ModalCenteredFlyout">
+
+							<Button x:Name="ShowModalCenteredFlyoutButton"
+									Content="Flyout">
+								<Button.Flyout>
+									<Flyout Placement="Full"
+											LightDismissOverlayMode="On"
+											FlyoutPresenterStyle="{StaticResource MaterialFlyoutPresenterStyle}">
+										<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+											  MaxWidth="300"
+											  MaxHeight="370">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="*" />
+											</Grid.RowDefinitions>
+											<CommandBar Content="Modal Centered Flyout Example"
+														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														Style="{StaticResource MaterialCommandBarStyle}">
+												<toolkit:CommandBarExtensions.NavigationCommand>
+													<AppBarButton Click="CloseFlyout"
+																  Tag="{Binding ElementName=ShowModalCenteredFlyoutButton}"
+																  Style="{StaticResource MaterialAppBarButton}">
+														<AppBarButton.Icon>
+															<PathIcon Data="{StaticResource CloseGlyphPathData}" />
+														</AppBarButton.Icon>
+													</AppBarButton>
+												</toolkit:CommandBarExtensions.NavigationCommand>
+											</CommandBar>
+
+											<TextBlock Grid.Row="1"
+													   Text="Example of a Modal Centered Flyout"
+													   VerticalAlignment="Center"
+													   HorizontalAlignment="Center"
+													   Style="{StaticResource MaterialBody1}" />
+										</Grid>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
+	</sample:SamplePageLayout>
 	</Grid>
 </Page>
 

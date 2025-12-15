@@ -759,6 +759,95 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
-		</sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+			<DataTemplate>
+				<StackPanel>
+
+					<!-- Header -->
+					<TextBlock Text="FLOATING ACTION BUTTONS"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Foreground="{StaticResource MaterialPrimaryBrush}" />
+
+					<!-- Icon Only Text -->
+					<TextBlock Text="Icon only" />
+
+					<StackPanel Orientation="Horizontal">
+
+						<!-- Primary Fab -->
+						<smtx:XamlDisplay UniqueKey="Simple_FabSamplePage_IconFab"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Style="{StaticResource MaterialSmallFabStyle}">
+								<ut:ControlExtensions.Icon>
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</ut:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Secondary Fab -->
+						<smtx:XamlDisplay UniqueKey="Simple_FabSamplePage_IconFab2"
+										  Style="{StaticResource XamlDisplayBelowStyle}"
+										  Margin="{StaticResource XamlDisplayMargin}">
+							<Button Style="{StaticResource MaterialSecondarySmallFabStyle}">
+								<ut:ControlExtensions.Icon>
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</ut:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+
+					<!-- Text Only Text -->
+					<TextBlock Text="Text only" />
+
+					<StackPanel Orientation="Horizontal">
+
+						<!-- Primary Fab -->
+						<smtx:XamlDisplay UniqueKey="Simple_FabSamplePage_TextFab"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="CREATE"
+									Style="{StaticResource MaterialSmallFabStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Secondary Fab -->
+						<smtx:XamlDisplay UniqueKey="Simple_FabSamplePage_TextFab2"
+										  Style="{StaticResource XamlDisplayBelowStyle}"
+										  Margin="{StaticResource XamlDisplayMargin}">
+							<Button Content="CREATE"
+									Style="{StaticResource MaterialSecondarySmallFabStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+
+					<!-- Icon and Text Text -->
+					<TextBlock Text="Icon and text" />
+
+					<StackPanel Orientation="Horizontal">
+
+						<!-- Primary Fab -->
+						<smtx:XamlDisplay UniqueKey="Simple_FabSamplePage_IconTextFab"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="CREATE"
+									Style="{StaticResource MaterialSmallFabStyle}">
+								<ut:ControlExtensions.Icon>
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</ut:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Sedondary Fab -->
+						<smtx:XamlDisplay UniqueKey="Simple_FabSamplePage_IconTextFab2"
+										  Style="{StaticResource XamlDisplayBelowStyle}"
+										  Margin="{StaticResource XamlDisplayMargin}">
+							<Button Content="CREATE"
+									Style="{StaticResource MaterialSecondarySmallFabStyle}">
+								<ut:ControlExtensions.Icon>
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</ut:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.SimpleTemplate>
+	</sample:SamplePageLayout>
 	</Grid>
 </Page>

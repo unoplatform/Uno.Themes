@@ -186,6 +186,66 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Primary -->
+						<TextBlock Text="Primary"
+								   Style="{StaticResource TitleSmall}"
+								   Margin="12,16,12,4" />
+
+						<!-- CheckBox No Content -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_NoContent">
+							<CheckBox Style="{StaticResource MaterialCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- CheckBox OFF -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_Off">
+							<CheckBox Content="Unchecked"
+									  Style="{StaticResource MaterialCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- CheckBox ON -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_On">
+							<CheckBox Content="Checked"
+									  Style="{StaticResource MaterialCheckBoxStyle}"
+									  IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- CheckBox Indeterminate -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_Indeterminate">
+							<CheckBox Content="Indeterminate"
+									  Style="{StaticResource MaterialCheckBoxStyle}"
+									  IsThreeState="True"
+									  IsChecked="{x:Null}" />
+						</smtx:XamlDisplay>
+
+						<!-- CheckBox OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_OffDisabled">
+							<CheckBox Content="Disabled"
+									  Style="{StaticResource MaterialCheckBoxStyle}"
+									  IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- CheckBox ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_OnDisabled">
+							<CheckBox Content="Checked Disabled"
+									  Style="{StaticResource MaterialCheckBoxStyle}"
+									  IsEnabled="False"
+									  IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Checkbox Indeterminate Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_IndeterminateDisabled">
+							<CheckBox Content="Indeterminate Disabled"
+									  Style="{StaticResource MaterialCheckBoxStyle}"
+									  IsEnabled="False"
+									  IsThreeState="True"
+									  IsChecked="{x:Null}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>

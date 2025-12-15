@@ -190,6 +190,130 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<Grid BorderBrush="{StaticResource OnSurfaceBrush}"
+							  BorderThickness="1"
+							  android:Margin="12"
+							  ios:Margin="12"
+							  Padding="12">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<!-- ComboBox without Leading Icon -->
+							<StackPanel Margin="0,0,10,0">
+
+								<!-- Label -->
+								<TextBlock Text="Normal"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Normal"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="{Binding Data.Letters}" />
+								</smtx:XamlDisplay>
+
+							</StackPanel>
+
+							<StackPanel Grid.Column="1">
+
+								<!-- Label -->
+								<TextBlock Text="Disabled"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Disabled"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="{Binding Data.Letters}"
+											  IsEnabled="False" />
+								</smtx:XamlDisplay>
+							</StackPanel>
+
+							<!-- ComboBox with Leading Icon -->
+							<StackPanel Margin="0,0,10,0"
+										Grid.Row="1">
+
+								<!-- Label -->
+								<TextBlock Text="Normal with Leading Icon"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Normal_LeadingIcon"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="{Binding Data.Letters}">
+										<ut:ControlExtensions.Icon>
+											<PathIcon Data="{StaticResource Icon_Mail}" />
+										</ut:ControlExtensions.Icon>
+									</ComboBox>
+								</smtx:XamlDisplay>
+
+							</StackPanel>
+
+							<StackPanel Grid.Row="1"
+										Grid.Column="1">
+
+								<!-- Label -->
+								<TextBlock Text="Disabled with Leading Icon"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Disabled_LeadingIcon"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="{Binding Data.Letters}"
+											  IsEnabled="False">
+										<ut:ControlExtensions.Icon>
+											<PathIcon Data="{StaticResource Icon_Mail}" />
+										</ut:ControlExtensions.Icon>
+									</ComboBox>
+								</smtx:XamlDisplay>
+							</StackPanel>
+
+							<StackPanel Grid.Row="2"
+										Grid.ColumnSpan="2">
+
+								<!-- Label -->
+								<TextBlock Text="Normal with custom ItemTemplate"
+										   Style="{StaticResource TitleMedium}" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Normal_CustomItemTemplate"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox ItemsSource="{Binding Data.TestDataSource, Mode=OneTime}"
+											  PlaceholderText="Placeholder"
+											  Style="{StaticResource MaterialComboBoxStyle}"
+											  VerticalAlignment="Center">
+										<ComboBox.ItemTemplate>
+											<DataTemplate>
+												<TextBlock>
+													<Run Text="{Binding Display}" />
+													<Run Text=":" />
+													<Run Text="{Binding Value}" />
+												</TextBlock>
+											</DataTemplate>
+										</ComboBox.ItemTemplate>
+									</ComboBox>
+								</smtx:XamlDisplay>
+							</StackPanel>
+						</Grid>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>

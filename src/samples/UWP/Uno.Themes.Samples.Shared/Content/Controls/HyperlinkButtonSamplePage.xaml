@@ -66,6 +66,60 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Primary -->
+						<TextBlock Text="Primary"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,16,12,4" />
+
+						<!-- HyperlinkButton -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButtonSamplePage">
+
+							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource MaterialHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
+						
+						<!-- HyperlinkButton Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButtonSamplePage_Disabled">
+
+							<HyperlinkButton Content="Uno Platform"
+											 IsEnabled="False"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource MaterialHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
+
+						<!-- Secondary -->
+						<TextBlock Text="Secondary"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,16,12,4" />
+
+						<!-- HyperlinkButton -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButtonSamplePage_Secondary">
+
+							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource MaterialSecondaryHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
+						
+						<!-- HyperlinkButton Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButtonSamplePage_SecondaryDisabled">
+
+							<HyperlinkButton Content="Uno Platform"
+											 IsEnabled="False"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource MaterialSecondaryHyperlinkButtonStyle}"
+											 Margin="12,0" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>

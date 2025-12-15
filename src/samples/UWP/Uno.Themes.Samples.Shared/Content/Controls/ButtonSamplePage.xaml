@@ -558,6 +558,59 @@
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
 
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- BUTTONS -->
+
+						<!-- Button Contained -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Contained"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Contained"
+									Style="{StaticResource MaterialContainedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Contained Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_ContainedDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Contained Disabled"
+									IsEnabled="False"
+									Style="{StaticResource MaterialContainedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Outlined -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Outline"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Outlined"
+									Style="{StaticResource MaterialOutlinedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Outlined Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_OutlineDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Outlined Disabled"
+									IsEnabled="False"
+									Style="{StaticResource MaterialOutlinedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Text -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Text"
+									Style="{StaticResource MaterialTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Text Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_TextDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="TEXT DISABLED"
+									IsEnabled="False"
+									Style="{StaticResource MaterialTextButtonStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
+
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>

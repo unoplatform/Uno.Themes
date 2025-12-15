@@ -36,6 +36,30 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+							<StackPanel>
+								<smtx:XamlDisplay Margin="16"
+												  UniqueKey="Simple_CommandBarSamplePage">
+									<CommandBar Content="Command Bar Sample"
+												Style="{StaticResource MaterialCommandBarStyle}">
+										<CommandBar.PrimaryCommands>
+											<AppBarButton Icon="Add"
+														  Label="Add" />
+											<AppBarButton Icon="Edit"
+														  Label="Edit" />
+											<AppBarButton Icon="Delete"
+														  Label="Delete" />
+										</CommandBar.PrimaryCommands>
+									</CommandBar>
+								</smtx:XamlDisplay>
+							</StackPanel>
+						</Grid>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

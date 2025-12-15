@@ -24,6 +24,17 @@
                     </StackPanel>
                 </DataTemplate>
             </sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+                                          UniqueKey="Simple_ListViewSamplePage_ListView">
+							<ListView ItemsSource="{Binding Data.Letters}"
+                                      Style="{StaticResource MaterialListViewStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>

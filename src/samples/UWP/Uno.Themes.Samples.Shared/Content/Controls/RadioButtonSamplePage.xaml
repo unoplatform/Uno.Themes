@@ -12,6 +12,86 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Primary -->
+						<TextBlock Text="Primary"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,16,12,4" />
+
+						<!-- RadioButton OFF -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_Unchecked">
+							<RadioButton GroupName="Simple_Primary_a"
+										 Content="UNCHECKED"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_Checked">
+							<RadioButton GroupName="Simple_Primary_a"
+										 Content="CHECKED"
+										 Style="{StaticResource MaterialRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_UncheckedDisabled">
+							<RadioButton GroupName="Simple_Primary_b"
+										 Content="UNCHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_CheckedDisabled">
+							<RadioButton GroupName="Simple_Primary_b"
+										 Content="CHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Secondary -->
+						<TextBlock Text="Secondary"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Margin="12,16,12,4" />
+
+						<!-- RadioButton OFF -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_SecondaryUnchecked">
+							<RadioButton GroupName="Simple_Secondary_a"
+										 Content="UNCHECKED"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_SecondaryChecked">
+							<RadioButton GroupName="Simple_Secondary_a"
+										 Content="CHECKED"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_SecondaryUncheckedDisabled">
+							<RadioButton GroupName="Simple_Secondary_b"
+										 Content="UNCHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_SecondaryCheckedDisabled">
+							<RadioButton GroupName="Simple_Secondary_b"
+										 Content="CHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialSecondaryRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
@@ -135,6 +215,49 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Primary -->
+						<TextBlock Text="Primary"
+								   Style="{StaticResource TitleSmall}"
+								   Margin="12,16,12,4" />
+
+						<!-- RadioButton OFF -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_Unchecked">
+							<RadioButton GroupName="Simple_Primary_a"
+										 Content="Unchecked"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_Checked">
+							<RadioButton GroupName="Simple_Primary_a"
+										 Content="Checked"
+										 Style="{StaticResource MaterialRadioButtonStyle}"
+										 IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton OFF Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_UncheckedDisabled">
+							<RadioButton GroupName="Simple_Primary_b"
+										 Content="Unchecked Disabled"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton ON Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButtonSamplePage_CheckedDisabled">
+							<RadioButton GroupName="Simple_Primary_b"
+										 Content="Checked Disabled"
+										 IsChecked="True"
+										 IsEnabled="False"
+										 Style="{StaticResource MaterialRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>
