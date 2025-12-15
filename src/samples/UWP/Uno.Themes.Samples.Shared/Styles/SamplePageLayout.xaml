@@ -160,12 +160,12 @@
 
 												<!-- Icon -->
 												<!-- TODO: Add Simple Icon -->
-												<!-- <Image Source="ms-appx:///Assets/SimpleIcon_Small.png"
+												 <Image Source="ms-appx:///Assets/UnoLogo.png"
 													   Stretch="UniformToFill"
 													   Height="16"
 													   Width="16"
 													   VerticalAlignment="Center"
-													   Margin="10,0,0,0" /> -->
+													   Margin="10,0,0,0" /> 
 											</StackPanel>
 										</RadioButton>
 									</StackPanel>
@@ -215,7 +215,11 @@
 														  ContentTemplate="{TemplateBinding SimpleTemplate}"
 														  VerticalAlignment="Stretch"
 														  HorizontalAlignment="Stretch"
-														  Visibility="Collapsed" />
+														  Visibility="Collapsed">
+											<ContentPresenter.Resources>
+												<SimpleTheme xmlns="using:Uno.Simple" />
+											</ContentPresenter.Resources>
+										</ContentPresenter>
 									</Grid>
 
 									<!-- Optional link to documentation -->
