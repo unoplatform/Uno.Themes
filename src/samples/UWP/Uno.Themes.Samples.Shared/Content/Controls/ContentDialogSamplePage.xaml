@@ -56,5 +56,19 @@
 				</ScrollViewer>
 			</DataTemplate>
 		</sample:SamplePageLayout.M3MaterialTemplate>
+		<sample:SamplePageLayout.SimpleTemplate>
+			<DataTemplate>
+				<ScrollViewer HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
+					<StackPanel Spacing="16">
+						<Button Content="Basic Content Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildBasicContentDialog" />
+						<Button Content="Rich Content Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildRichContentDialog" />
+					</StackPanel>
+				</ScrollViewer>
+			</DataTemplate>
+		</sample:SamplePageLayout.SimpleTemplate>
 	</sample:SamplePageLayout>
 </Page>

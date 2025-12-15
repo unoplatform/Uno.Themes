@@ -9,6 +9,23 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Simple_NavigationViewSamplePage_WUX_NavigationView"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<sample:ClippedGrid MinHeight="400">
+							<NavigationView IsBackButtonVisible="Collapsed"
+											Style="{StaticResource MaterialWUXNavigationViewStyle}">
+								<NavigationView.MenuItems>
+									<NavigationViewItem Icon="Placeholder" Content="Item 1" Style="{StaticResource MaterialWUXNavigationViewItemStyle}" />
+									<NavigationViewItem Icon="Placeholder" Content="Item 2" Style="{StaticResource MaterialWUXNavigationViewItemStyle}" />
+									<NavigationViewItem Icon="Placeholder" Content="Item 3" Style="{StaticResource MaterialWUXNavigationViewItemStyle}" />
+								</NavigationView.MenuItems>
+							</NavigationView>
+						</sample:ClippedGrid>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<smtx:XamlDisplay UniqueKey="Material_NavigationViewSamplePage_WUX_NavigationView"

@@ -10,6 +10,59 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Slider Text -->
+						<TextBlock Text="Slider to Set ProgressBar"
+								   Margin="0,10,0,0" />
+
+						<Slider x:Name="Simple_ProgressSlider"
+								Minimum="0"
+								Maximum="100"
+								HorizontalAlignment="Left"
+								Width="250"
+								Margin="0,10" />
+
+						<!-- Primary ProgressBar Text -->
+						<TextBlock Text="Primary ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBarSamplePage_Primary">
+							<muxc:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
+											  Value="{Binding Value, ElementName=Simple_ProgressSlider}"
+											  Minimum="0"
+											  Maximum="100" />
+						</smtx:XamlDisplay>
+
+						<!-- Secondary ProgressBar Text -->
+						<TextBlock Text="Secondary ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBarSamplePage_Secondary">
+							<muxc:ProgressBar Style="{StaticResource MaterialSecondaryProgressBarStyle}"
+											  Value="{Binding Value, ElementName=Simple_ProgressSlider}"
+											  Minimum="0"
+											  Maximum="100" />
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate Primary ProgressBar Text -->
+						<TextBlock Text="Indeterminate Primary ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBarSamplePage_PrimaryIndeterminate">
+							<muxc:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
+											  IsIndeterminate="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate Secondary ProgressBar Text -->
+						<TextBlock Text="Indeterminate Secondary ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBarSamplePage_SecondaryIndeterminate">
+							<muxc:ProgressBar Style="{StaticResource MaterialSecondaryProgressBarStyle}"
+											  IsIndeterminate="True" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>

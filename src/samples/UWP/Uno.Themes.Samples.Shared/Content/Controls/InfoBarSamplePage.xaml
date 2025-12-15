@@ -10,6 +10,94 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel Spacing="20"
+								Margin="0,20,0,0">
+						<smtx:XamlDisplay UniqueKey="Simple_InfoBarSamplePage_Error_SingleButton"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:InfoBar x:Name="firstInfo"
+										  Title="Title"
+										  IsOpen="True"
+										  Message="Essential app message for your users to be informed of, acknowledge, or take action on."
+										  IsIconVisible="True"
+										  Severity="Error"
+										  Style="{StaticResource MaterialInfoBarStyle}">
+								<muxc:InfoBar.Content>
+									<Button Style="{StaticResource MaterialTextButtonStyle}"
+											Content="DISMISS" />
+								</muxc:InfoBar.Content>
+								<muxc:InfoBar.IconSource>
+									<muxc:BitmapIconSource UriSource="/Assets/MaterialIcon_Medium.png"
+														   Foreground="{StaticResource MaterialPrimaryBrush}" />
+								</muxc:InfoBar.IconSource>
+							</muxc:InfoBar>
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Simple_InfoBarSamplePage_Warning_DoubleButton"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:InfoBar x:Name="secondInfo"
+										  Title="Title"
+										  IsOpen="True"
+										  Message="Essential app message for your users to be informed of, acknowledge, or take action on."
+										  IsIconVisible="True"
+										  Severity="Warning"
+										  Style="{StaticResource MaterialInfoBarStyle}">
+								<muxc:InfoBar.Content>
+									<StackPanel Orientation="Horizontal"
+												Spacing="8">
+										<Button Style="{StaticResource MaterialTextButtonStyle}"
+												Content="DISMISS" />
+										<Button Style="{StaticResource MaterialTextButtonStyle}"
+												Content="ACTION" />
+									</StackPanel>
+								</muxc:InfoBar.Content>
+								<muxc:InfoBar.IconSource>
+									<muxc:BitmapIconSource UriSource="/Assets/MaterialIcon_Medium.png"
+														   Foreground="{StaticResource MaterialPrimaryBrush}" />
+								</muxc:InfoBar.IconSource>
+							</muxc:InfoBar>
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Simple_InfoBarSamplePage_Success_SingleButton"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:InfoBar x:Name="thirdInfo"
+										  Title="Title"
+										  IsOpen="True"
+										  Message="Essential app message for your users to be informed of, acknowledge, or take action on."
+										  Severity="Success"
+										  IsIconVisible="False"
+										  Style="{StaticResource MaterialInfoBarStyle}">
+								<muxc:InfoBar.Content>
+									<Button Style="{StaticResource MaterialTextButtonStyle}"
+											Content="DISMISS" />
+								</muxc:InfoBar.Content>
+							</muxc:InfoBar>
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Simple_InfoBarSamplePage_Information_SingleButton"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:InfoBar x:Name="fourthInfo"
+										  Title="Title"
+										  IsOpen="True"
+										  Message="Single line essential app message."
+										  Severity="Informational"
+										  MinHeight="54"
+										  IsIconVisible="True"
+										  Style="{StaticResource MaterialInfoBarStyle}">
+								<muxc:InfoBar.ActionButton>
+									<Button Style="{StaticResource MaterialTextButtonStyle}"
+											Content="DISMISS" />
+								</muxc:InfoBar.ActionButton>
+								<muxc:InfoBar.IconSource>
+									<muxc:BitmapIconSource UriSource="/Assets/MaterialIcon_Medium.png"
+														   Foreground="{StaticResource MaterialPrimaryBrush}" />
+								</muxc:InfoBar.IconSource>
+							</muxc:InfoBar>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.MaterialTemplate>
 				<DataTemplate>
 					<StackPanel Spacing="20"

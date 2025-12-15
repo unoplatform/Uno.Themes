@@ -1,0 +1,318 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="not_win">
+
+	<ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <CornerRadius x:Key="CalendarDatePickerBackgroundCornerRadius">4,4,0,0</CornerRadius>
+            <Thickness x:Key="CalendarDatePickerBorderThemeThickness">1</Thickness>
+            <Thickness x:Key="CalendarDatePickerFlyoutPresenterPadding">0</Thickness>
+            <Thickness x:Key="CalendarDatePickerFlyoutPresenterMargin">0</Thickness>
+            <Thickness x:Key="CalendarDatePickerContentMargin">10,0,10,0</Thickness>
+            <x:Double x:Key="CalendarDatePickerHeight">53</x:Double>
+            <x:Double x:Key="CalendarDatePickerBackgroundMinHeight">53</x:Double>
+
+            <StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="ControlCornerRadius" />
+            <StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="OverlayCornerRadius" />
+            <StaticResource x:Key="CalendarDatePickerCalendarViewCornerRadius" ResourceKey="OverlayCornerRadius" />
+
+            <StaticResource x:Key="CalendarDatePickerForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="CalendarDatePickerForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerCalendarGlyphForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="CalendarDatePickerCalendarGlyphForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerTextForeground" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerTextForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+            <StaticResource x:Key="CalendarDatePickerTextForegroundSelected" ResourceKey="OnSurfaceBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerHeaderForeground" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="CalendarDatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerBackground" ResourceKey="SurfaceVariantBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundPressed" ResourceKey="SurfaceVariantBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerBorderBrush" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerBorderBrushPointerOver" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerBorderBrushPressed" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerBottomBorderBrush" ResourceKey="PrimaryBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerHeaderStyle" ResourceKey="MaterialBodySmall" />
+            <StaticResource x:Key="CalendarDatePickerTextStyle" ResourceKey="MaterialBodyMedium" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <CornerRadius x:Key="CalendarDatePickerBackgroundCornerRadius">4,4,0,0</CornerRadius>
+            <Thickness x:Key="CalendarDatePickerBorderThemeThickness">1</Thickness>
+            <Thickness x:Key="CalendarDatePickerFlyoutPresenterPadding">0</Thickness>
+            <Thickness x:Key="CalendarDatePickerFlyoutPresenterMargin">0</Thickness>
+            <Thickness x:Key="CalendarDatePickerContentMargin">10,0,10,0</Thickness>
+            <x:Double x:Key="CalendarDatePickerHeight">53</x:Double>
+            <x:Double x:Key="CalendarDatePickerBackgroundMinHeight">53</x:Double>
+
+            <StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="ControlCornerRadius" />
+            <StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="OverlayCornerRadius" />
+            <StaticResource x:Key="CalendarDatePickerCalendarViewCornerRadius" ResourceKey="OverlayCornerRadius" />
+
+            <StaticResource x:Key="CalendarDatePickerForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="CalendarDatePickerForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerCalendarGlyphForeground" ResourceKey="OnSurfaceBrush" />
+            <StaticResource x:Key="CalendarDatePickerCalendarGlyphForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerTextForeground" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerTextForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+            <StaticResource x:Key="CalendarDatePickerTextForegroundSelected" ResourceKey="OnSurfaceBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerHeaderForeground" ResourceKey="PrimaryBrush" />
+            <StaticResource x:Key="CalendarDatePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceMediumBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerBackground" ResourceKey="SurfaceVariantBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundPressed" ResourceKey="SurfaceVariantBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+            <StaticResource x:Key="CalendarDatePickerBackgroundFocused" ResourceKey="SurfaceVariantBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerBorderBrush" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerBorderBrushPointerOver" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerBorderBrushPressed" ResourceKey="OnSurfaceLowBrush" />
+            <StaticResource x:Key="CalendarDatePickerBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerBottomBorderBrush" ResourceKey="PrimaryBrush" />
+
+            <StaticResource x:Key="CalendarDatePickerHeaderStyle" ResourceKey="MaterialBodySmall" />
+            <StaticResource x:Key="CalendarDatePickerTextStyle" ResourceKey="MaterialBodyMedium" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <Style x:Key="MaterialCalendarDatePickerStyle"
+           TargetType="CalendarDatePicker">
+        <Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}" />
+        <Setter Property="Background" Value="{ThemeResource CalendarDatePickerBackground}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{ThemeResource CalendarDatePickerBorderThemeThickness}" />
+        <Setter Property="CalendarViewStyle" Value="{StaticResource MaterialCalendarViewStyle}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Height" Value="{ThemeResource CalendarDatePickerHeight}" />
+        <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
+        <not_win:Setter Property="CornerRadius"
+                        Value="{ThemeResource CalendarDatePickerCornerRadius}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CalendarDatePicker">
+                    <Grid x:Name="Root"
+                          Height="{TemplateBinding Height}">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerBackgroundPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerBorderBrushPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+
+                                <VisualState x:Name="Pressed">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerBackgroundPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerBorderBrushPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="Disabled">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerBackgroundDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerBorderBrushDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerHeaderForegroundDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DateText"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerTextForegroundDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CalendarGlyph"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerCalendarGlyphForegroundDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="PointerFocused" />
+                                <VisualState x:Name="Focused">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerBackgroundFocused}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+
+                                <VisualState x:Name="Selected">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DateText"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CalendarDatePickerTextForegroundSelected}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="HeaderStates">
+                                <VisualState x:Name="TopHeader" />
+                                <VisualState x:Name="LeftHeader">
+                                    <VisualState.Setters>
+                                        <Setter Target="HeaderContentPresenter.(Grid.Row)" Value="1" />
+                                        <Setter Target="HeaderContentPresenter.(Grid.Column)" Value="0" />
+                                        <Setter Target="HeaderContentPresenter.(Grid.ColumnSpan)" Value="1" />
+                                        <Setter Target="HeaderContentPresenter.Margin" Value="{StaticResource CalendarDatePickerLeftHeaderMargin}" />
+                                        <Setter Target="HeaderContentPresenter.MaxWidth" Value="{StaticResource CalendarDatePickerLeftHeaderMaxWidth}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                            </VisualStateGroup>
+
+                        </VisualStateManager.VisualStateGroups>
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout Placement="Bottom"
+                                    ShouldConstrainToRootBounds="False">
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Padding" Value="{ThemeResource CalendarDatePickerFlyoutPresenterPadding}" />
+                                        <Setter Property="BorderThickness" Value="{ThemeResource CalendarDatePickerFlyoutPresenterMargin}" />
+                                        <Setter Property="IsDefaultShadowEnabled" Value="True" />
+                                        <Setter Property="CornerRadius" Value="{ThemeResource CalendarDatePickerFlyoutPresenterCornerRadius}" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="FlyoutPresenter">
+                                                    <ContentPresenter Background="{TemplateBinding Background}"
+                                                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                                                      Content="{TemplateBinding Content}"
+                                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                      ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                                      Margin="{TemplateBinding Padding}"
+                                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                      CornerRadius="{TemplateBinding CornerRadius}" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <CalendarView x:Name="CalendarView"
+                                              Style="{TemplateBinding CalendarViewStyle}"
+                                              MinDate="{TemplateBinding MinDate}"
+                                              MaxDate="{TemplateBinding MaxDate}"
+                                              IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
+                                              DisplayMode="{TemplateBinding DisplayMode}"
+                                              FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}"
+                                              DayOfWeekFormat="{TemplateBinding DayOfWeekFormat}"
+                                              IsOutOfScopeEnabled="{TemplateBinding IsOutOfScopeEnabled}"
+                                              IsGroupLabelVisible="{TemplateBinding IsGroupLabelVisible}"
+                                              CornerRadius="{ThemeResource CalendarDatePickerCalendarViewCornerRadius}" />
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+
+                        <Border x:Name="Background"
+                                Background="{ThemeResource CalendarDatePickerBackground}"
+                                BorderBrush="{ThemeResource CalendarDatePickerBorderBrush}"
+                                CornerRadius="{ThemeResource CalendarDatePickerBackgroundCornerRadius}"
+                                Control.IsTemplateFocusTarget="True"
+                                MinHeight="{ThemeResource CalendarDatePickerBackgroundMinHeight}" />
+
+                        <!-- Border -->
+                        <Rectangle x:Name="BottomBorder"
+                                   VerticalAlignment="Bottom"
+                                   Fill="{ThemeResource CalendarDatePickerBottomBorderBrush}"
+                                   Height="2" />
+
+                        <Grid Margin="{ThemeResource CalendarDatePickerContentMargin}"
+                              VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- Header -->
+                            <TextBlock HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Top"
+                                       Text="{TemplateBinding Header}"
+                                       Style="{ThemeResource CalendarDatePickerHeaderStyle}"
+                                       Foreground="{ThemeResource CalendarDatePickerHeaderForeground}"
+                                       TextWrapping="Wrap" />
+
+                            <!-- DateText -->
+                            <TextBlock x:Name="DateText"
+                                       Grid.Row="1"
+                                       Text="{TemplateBinding PlaceholderText}"
+                                       Style="{ThemeResource CalendarDatePickerTextStyle}"
+                                       Foreground="{ThemeResource CalendarDatePickerTextForeground}" />
+                        </Grid>
+                        <Grid Visibility="Collapsed">
+                            <FontIcon x:Name="CalendarGlyph" />
+                            <ContentPresenter x:Name="DescriptionPresenter" />
+                            <ContentPresenter x:Name="HeaderContentPresenter" />
+                        </Grid>
+
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+	<Style x:Key="MaterialDefaultCalendarDatePickerStyle"
+           TargetType="CalendarDatePicker"
+           BasedOn="{StaticResource MaterialCalendarDatePickerStyle}" />
+</ResourceDictionary>

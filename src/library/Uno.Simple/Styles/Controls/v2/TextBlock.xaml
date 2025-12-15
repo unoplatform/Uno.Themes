@@ -1,0 +1,293 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style x:Key="MaterialBaseTextBlockStyle"
+		   TargetType="TextBlock">
+
+		<Setter Property="TextTrimming"
+				Value="CharacterEllipsis" />
+		<Setter Property="TextWrapping"
+				Value="Wrap" />
+		<Setter Property="FontWeight"
+				Value="Normal" />
+		<Setter Property="FontFamily"
+				Value="{ThemeResource MaterialRegularFontFamily}" />
+	</Style>
+
+	<!-- IMPORTANT NOTE :
+	CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
+	For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".
+	So in order to specify the letter spacing of 0.5px from the M3  guidelines, we will need to add CharacterSpacing="41.666".
+	To resume: CharacterSpacing = (letter spacing or tracking value / FontSize) * 1000 -->
+
+	<!-- DISPLAY -->
+
+	<!--  Display Large  -->
+	<Style x:Key="MaterialDisplayLarge"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource DisplayLargeFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource DisplayLargeFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource DisplayLargeFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource DisplayLargeCharacterSpacing}" />
+	</Style>
+
+	<!--  Display Medium  -->
+	<Style x:Key="MaterialDisplayMedium"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource DisplayMediumFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource DisplayMediumFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource DisplayMediumFontSize}" />
+	</Style>
+
+	<!--  Display Small  -->
+	<Style x:Key="MaterialDisplaySmall"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource DisplaySmallFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource DisplaySmallFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource DisplaySmallFontSize}" />
+	</Style>
+
+	<!-- HEADLINE -->
+
+	<!--  Headline Large  -->
+	<Style x:Key="MaterialHeadlineLarge"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource HeadlineLargeFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource HeadlineLargeFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource HeadlineLargeFontSize}" />
+	</Style>
+
+	<!--  Headline Medium  -->
+	<Style x:Key="MaterialHeadlineMedium"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource HeadlineMediumFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource HeadlineMediumFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource HeadlineMediumFontSize}" />
+	</Style>
+
+	<!--  Headline Small  -->
+	<Style x:Key="MaterialHeadlineSmall"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource HeadlineSmallFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource HeadlineSmallFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource HeadlineSmallFontSize}" />
+	</Style>
+
+	<!-- TITLE -->
+
+	<!--  Title Large  -->
+	<Style x:Key="MaterialTitleLarge"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource TitleLargeFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource TitleLargeFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource TitleLargeFontSize}" />
+	</Style>
+
+	<!--  Title Medium  -->
+	<Style x:Key="MaterialTitleMedium"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource TitleMediumFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource TitleMediumFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource TitleMediumFontSize}" />
+	</Style>
+
+	<!--  Title Small  -->
+	<Style x:Key="MaterialTitleSmall"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource TitleSmallFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource TitleSmallFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource TitleSmallFontSize}" />
+	</Style>
+
+	<!-- LABEL -->
+
+	<!--  Label Large  -->
+	<Style x:Key="MaterialLabelLarge"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource LabelLargeFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource LabelLargeFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource LabelLargeCharacterSpacing}" />
+	</Style>
+
+	<!--  Label Medium  -->
+	<Style x:Key="MaterialLabelMedium"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource LabelMediumFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource LabelMediumFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource LabelMediumFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource LabelMediumCharacterSpacing}" />
+	</Style>
+
+	<!--  Label Small  -->
+	<Style x:Key="MaterialLabelSmall"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource LabelSmallFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource LabelSmallFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource LabelSmallFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource LabelSmallCharacterSpacing}" />
+	</Style>
+
+	<!--  Label ExtraSmall  -->
+	<!-- Text style added for Badges so it will match Uno figma file -->
+	<!-- Not part of Material M3. See https://github.com/unoplatform/Uno.Figma/issues/628 -->
+	<Style x:Key="MaterialLabelExtraSmall"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource LabelExtraSmallFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource LabelExtraSmallFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource LabelExtraSmallFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource LabelExtraSmallCharacterSpacing}" />
+	</Style>
+
+	<!-- BODY -->
+
+	<!--  Body Large  -->
+	<Style x:Key="MaterialBodyLarge"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource BodyLargeCharacterSpacing}" />
+	</Style>
+
+	<!--  Body Medium  -->
+	<Style x:Key="MaterialBodyMedium"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource BodyMediumFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource BodyMediumFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource BodyMediumCharacterSpacing}" />
+	</Style>
+
+	<!--  Body Small  -->
+	<Style x:Key="MaterialBodySmall"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource BodySmallFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource BodySmallFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource BodySmallFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource BodySmallCharacterSpacing}" />
+	</Style>
+
+	<!-- CAPTION -->
+
+	<!--  Caption Large  -->
+	<!-- Gap Filler for the other design system - Not part of Material M3 -->
+	<Style x:Key="MaterialCaptionLarge"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource CaptionLargeFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource CaptionLargeFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource CaptionLargeFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource CaptionLargeCharacterSpacing}" />
+	</Style>
+
+	<!--  Caption Medium  -->
+	<!-- Gap Filler for the other design system - Not part of Material M3 -->
+	<Style x:Key="MaterialCaptionMedium"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource CaptionMediumFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource CaptionMediumFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource CaptionMediumFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource CaptionMediumCharacterSpacing}" />
+	</Style>
+
+	<!--  Caption Small  -->
+	<!-- Gap Filler for the other design system - Not part of Material M3 -->
+	<Style x:Key="MaterialCaptionSmall"
+		   BasedOn="{StaticResource MaterialBaseTextBlockStyle}"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily"
+				Value="{ThemeResource CaptionSmallFontFamily}" />
+		<Setter Property="FontWeight"
+				Value="{ThemeResource CaptionSmallFontWeight}" />
+		<Setter Property="FontSize"
+				Value="{ThemeResource CaptionSmallFontSize}" />
+		<Setter Property="CharacterSpacing"
+				Value="{ThemeResource CaptionSmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="MaterialDefaultTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource MaterialBodyMedium}" />
+</ResourceDictionary>

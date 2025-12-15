@@ -96,6 +96,43 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!--  Default  -->
+						<TextBlock Margin="12,16,12,4"
+						           Style="{StaticResource TitleSmall}"
+						           Text="Default" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="Simple_DatePickerSamplePage_Material_Default">
+
+							<DatePicker x:Name="myDatePicker"
+							            HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            Style="{StaticResource MaterialDatePickerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!--  Disabled  -->
+						<TextBlock Margin="12,8,12,4"
+						           Style="{StaticResource TitleSmall}"
+						           Text="Disabled" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="Simple_DatePickerSamplePage_Material_Disabled">
+
+							<DatePicker HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            IsEnabled="False"
+							            Style="{StaticResource MaterialDatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 			<sample:SamplePageLayout.CupertinoTemplate>
 				<DataTemplate>
 					<StackPanel>

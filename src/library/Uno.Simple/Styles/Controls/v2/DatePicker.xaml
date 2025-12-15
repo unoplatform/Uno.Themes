@@ -1,0 +1,398 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:android="http://uno.ui/android"
+					xmlns:ios="http://uno.ui/ios"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:wasm="http://uno.ui/wasm"
+					mc:Ignorable="ios android wasm not_win">
+
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<!-- MaterialDatePickerFlyoutButtonStyle -->
+			<StaticResource x:Key="DatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialDatePickerFlyoutPresenterStyle -->
+			<StaticResource x:Key="DatePickerFlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="OnSurfaceFocusedBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill" ResourceKey="OnSurfaceFocusedBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="OverlayCornerRadius" />
+
+			<!-- MaterialDatePickerStyle -->
+			<StaticResource x:Key="DatePickerButtonBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPressed" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundDisabled" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="DatePickerButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<!--#region Typo-->
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontSize" ResourceKey="ControlContentThemeFontSize" />
+			<!--#endregion-->
+
+			<x:Double x:Key="DatePickerFlyoutBorderThickness">1</x:Double>
+			<x:Double x:Key="DatePickerSpacerThemeWidth">1</x:Double>
+			<x:Double x:Key="DatePickerHeight">53</x:Double>
+			<x:Double x:Key="DatePickerFlyoutElevation">8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">41</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterHighlightHeight">40</x:Double>
+			<x:Double x:Key="DatePickerButtonBottomBorderHeight">2</x:Double>
+			<x:Double x:Key="DatePickerButtonContentHeight">24</x:Double>
+			<Thickness x:Key="DatePickerButtonHeaderMargin">10,8,10,0</Thickness>
+			<Thickness x:Key="DatePickerButtonPlaceholderMargin">4,0,0,0</Thickness>
+			<Thickness x:Key="DatePickerButtonContentMargin">6,24,10,0</Thickness>
+			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
+			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
+			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<!-- MaterialDatePickerFlyoutButtonStyle -->
+			<StaticResource x:Key="DatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- MaterialDatePickerFlyoutPresenterStyle -->
+			<StaticResource x:Key="DatePickerFlyoutPresenterBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="OnSurfaceFocusedBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill" ResourceKey="OnSurfaceFocusedBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="PrimarySelectedBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="OverlayCornerRadius" />
+
+			<!-- MaterialDatePickerStyle -->
+			<StaticResource x:Key="DatePickerButtonBackground" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPressed" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundDisabled" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="DatePickerButtonForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForeground" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPointerOver" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPressed" ResourceKey="OnSurfaceVariantBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundDisabled" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrush" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled" ResourceKey="OnSurfaceLowBrush" />
+
+			<!--#region Typo-->
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="MaterialRegularFontFamily" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontSize" ResourceKey="ControlContentThemeFontSize" />
+			<!--#endregion-->
+
+			<x:Double x:Key="DatePickerFlyoutBorderThickness">1</x:Double>
+			<x:Double x:Key="DatePickerSpacerThemeWidth">1</x:Double>
+			<x:Double x:Key="DatePickerHeight">53</x:Double>
+			<x:Double x:Key="DatePickerFlyoutElevation">8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.65</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">41</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterHighlightHeight">40</x:Double>
+			<x:Double x:Key="DatePickerButtonBottomBorderHeight">2</x:Double>
+			<x:Double x:Key="DatePickerButtonContentHeight">24</x:Double>
+			<Thickness x:Key="DatePickerButtonHeaderMargin">10,8,10,0</Thickness>
+			<Thickness x:Key="DatePickerButtonPlaceholderMargin">4,0,0,0</Thickness>
+			<Thickness x:Key="DatePickerButtonContentMargin">6,24,10,0</Thickness>
+			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
+			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
+			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- DatePicker Style -->
+	<Style x:Key="MaterialDatePickerFlyoutButtonStyle"
+		   TargetType="Button">
+
+		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutButtonBackground}" />
+		<Setter Property="Padding" Value="{ThemeResource DatePickerFlyoutButtonPadding}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}">
+						<!-- Label -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  Margin="{TemplateBinding Padding}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}" />
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity" Value="{ThemeResource DatePickerFlyoutButtonOpacityPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity" Value="{ThemeResource DatePickerFlyoutButtonOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialDatePickerFlyoutPresenterStyle"
+				   TargetType="DatePickerFlyoutPresenter">
+		<Setter Property="Width" Value="{ThemeResource DatePickerFlyoutPresenterWidth}" />
+		<Setter Property="MinWidth" Value="{ThemeResource DatePickerFlyoutPresenterMinWidth}" />
+		<Setter Property="MaxHeight" Value="{ThemeResource DatePickerFlyoutPresenterMaxHeight}" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="FontFamily" Value="{ThemeResource DatePickerFlyoutPresenterFontFamily}" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="FontSize" Value="{ThemeResource DatePickerFlyoutPresenterFontSize}" />
+		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutPresenterBackground}" />
+		<Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
+		<Setter Property="BorderThickness" Value="{ThemeResource DatePickerFlyoutBorderThickness}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerFlyoutPresenterBorderBrush}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerFlyoutPresenterCornerRadius}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
+					<toolkit:ElevatedView MaxHeight="{TemplateBinding MaxHeight}"
+										  Background="{TemplateBinding Background}"
+										  BorderBrush="{TemplateBinding BorderBrush}"
+										  BorderThickness="{TemplateBinding BorderThickness}"
+										  CornerRadius="{TemplateBinding CornerRadius}"
+										  Elevation="{ThemeResource DatePickerFlyoutElevation}"
+										  ShadowColor="{StaticResource ShadowColor}">
+						<Border x:Name="Background">
+							<Grid x:Name="ContentPanel">
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid x:Name="PickerHostGrid">
+
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition x:Name="DayColumn"
+														  Width="78*" />
+										<ColumnDefinition x:Name="FirstSpacerColumn"
+														  Width="Auto" />
+										<ColumnDefinition x:Name="MonthColumn"
+														  Width="132*" />
+										<ColumnDefinition x:Name="SecondSpacerColumn"
+														  Width="Auto" />
+										<ColumnDefinition x:Name="YearColumn"
+														  Width="78*" />
+									</Grid.ColumnDefinitions>
+									<Rectangle x:Name="HighlightRect"
+											   Grid.Column="0"
+											   Grid.ColumnSpan="5"
+											   Height="{ThemeResource DatePickerFlyoutPresenterHighlightHeight}"
+											   VerticalAlignment="Center"
+											   Fill="{ThemeResource DatePickerFlyoutPresenterHighlightFill}" />
+									<Rectangle x:Name="FirstPickerSpacing"
+											   Grid.Column="1"
+											   Width="{ThemeResource DatePickerSpacerThemeWidth}"
+											   HorizontalAlignment="Center"
+											   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
+									<Rectangle x:Name="SecondPickerSpacing"
+											   Grid.Column="3"
+											   Width="{ThemeResource DatePickerSpacerThemeWidth}"
+											   HorizontalAlignment="Center"
+											   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
+								</Grid>
+								<Grid x:Name="AcceptDismissHostGrid"
+									  Grid.Row="1"
+									  Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
+									  VerticalAlignment="Bottom"
+									  Background="{TemplateBinding Background}">
+
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<Rectangle Grid.ColumnSpan="3"
+											   Height="{ThemeResource DatePickerSpacerThemeWidth}"
+											   VerticalAlignment="Top"
+											   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
+
+									<Button x:Name="DismissButton"
+											x:Uid="DatePickerFlyoutDismissButton"
+											Grid.Column="1"
+											HorizontalAlignment="Right"
+											Content="CANCEL"
+											Style="{StaticResource MaterialTextButtonStyle}" />
+
+									<Button x:Name="AcceptButton"
+											x:Uid="DatePickerFlyoutAcceptButton"
+											Grid.Column="2"
+											HorizontalAlignment="Right"
+											Content="OK"
+											Style="{StaticResource MaterialTextButtonStyle}" />
+								</Grid>
+							</Grid>
+						</Border>
+					</toolkit:ElevatedView>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialDatePickerStyle"
+		   TargetType="DatePicker">
+
+		<Setter Property="Background" Value="{ThemeResource DatePickerButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource DatePickerButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrush}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="Height" Value="{ThemeResource DatePickerHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerCornerRadius}" />
+		<not_win:Setter Property="FlyoutPresenterStyle"
+						Value="{StaticResource MaterialDatePickerFlyoutPresenterStyle}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="DatePicker">
+					<!-- Root Grid -->
+					<Grid x:Name="LayoutRoot">
+						<!-- Flyout Button -->
+						<Button x:Name="FlyoutButton"
+								HorizontalAlignment="Stretch"
+								HorizontalContentAlignment="Stretch"
+								IsEnabled="{TemplateBinding IsEnabled}"
+								Style="{StaticResource MaterialDatePickerFlyoutButtonStyle}"
+								MinWidth="{ThemeResource DatePickerFlyoutPresenterMinWidth}"
+								UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}">
+
+							<Grid x:Name="ContentButton"
+								  Height="{TemplateBinding Height}"
+								  Background="{TemplateBinding Background}"
+								  CornerRadius="{TemplateBinding CornerRadius}">
+
+								<!-- Border -->
+								<Rectangle x:Name="BottomBorder"
+										   Height="{ThemeResource DatePickerButtonBottomBorderHeight}"
+										   VerticalAlignment="Bottom"
+										   Fill="{TemplateBinding BorderBrush}" />
+
+								<!-- Header -->
+								<TextBlock x:Name="HeaderTextBlock"
+										   Margin="{ThemeResource DatePickerButtonHeaderMargin}"
+										   HorizontalAlignment="Stretch"
+										   VerticalAlignment="Top"
+										   Foreground="{TemplateBinding Foreground}"
+										   Style="{StaticResource MaterialBodySmall}"
+										   Text="{TemplateBinding Header}"
+										   TextWrapping="Wrap" />
+
+								<Grid x:Name="FlyoutButtonContentGrid"
+									  Height="{ThemeResource DatePickerButtonContentHeight}"
+									  Margin="{ThemeResource DatePickerButtonContentMargin}"
+									  VerticalAlignment="Top">
+
+									<!-- DateText -->
+									<TextBlock x:Name="DateText"
+											   Foreground="{ThemeResource DatePickerButtonDateTextForeground}"
+											   Style="{StaticResource MaterialBodyMedium}"
+											   Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter=' {0:d}'}" />
+
+									<!-- PlaceholderText -->
+									<TextBlock x:Name="PlaceholderText"
+											   Margin="{ThemeResource DatePickerButtonPlaceholderMargin}"
+											   Foreground="{ThemeResource DatePickerPlaceholderTextForeground}"
+											   Style="{StaticResource MaterialBodyMedium}"
+											   Text="{TemplateBinding Header}"
+											   Visibility="Collapsed" />
+
+									<!-- Removing this cause trouble with the DatePicker code -->
+									<TextBlock x:Name="DayTextBlock"
+											   Opacity="0" />
+								</Grid>
+							</Grid>
+						</Button>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundPointerOver}" />
+										<Setter Target="HeaderTextBlock.Foreground" Value="{ThemeResource DatePickerButtonForegroundPointerOver}" />
+										<Setter Target="ContentButton.Background" Value="{ThemeResource DatePickerButtonBackgroundPointerOver}" />
+										<Setter Target="BottomBorder.Fill" Value="{ThemeResource DatePickerButtonBorderBrushPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundPressed}" />
+										<Setter Target="HeaderTextBlock.Foreground" Value="{ThemeResource DatePickerButtonForegroundPressed}" />
+										<Setter Target="ContentButton.Background" Value="{ThemeResource DatePickerButtonBackgroundPressed}" />
+										<Setter Target="BottomBorder.Fill" Value="{ThemeResource DatePickerButtonBorderBrushPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundDisabled}" />
+										<Setter Target="HeaderTextBlock.Foreground" Value="{ThemeResource DatePickerButtonForegroundDisabled}" />
+										<Setter Target="ContentButton.Background" Value="{ThemeResource DatePickerButtonBackgroundDisabled}" />
+										<Setter Target="BottomBorder.Fill" Value="{ThemeResource DatePickerButtonBorderBrushDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="HasDateStates">
+								<VisualState x:Name="HasDate" />
+								<VisualState x:Name="HasNoDate">
+									<VisualState.Setters>
+										<Setter Target="DateText.Visibility" Value="Collapsed" />
+										<Setter Target="PlaceholderText.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialDefaultDatePickerStyle"
+		   TargetType="DatePicker"
+		   BasedOn="{StaticResource MaterialDatePickerStyle}" />
+
+	<Style x:Key="MaterialDefaultDatePickerFlyoutPresenterStyle"
+		   TargetType="DatePickerFlyoutPresenter"
+		   BasedOn="{StaticResource MaterialDatePickerFlyoutPresenterStyle}" />
+</ResourceDictionary>
