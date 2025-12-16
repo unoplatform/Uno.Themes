@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:um="using:Uno.Material"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:android="http://uno.ui/android"
@@ -36,12 +35,10 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
-					<um:Ripple Feedback="{TemplateBinding Foreground}"
-							   FeedbackOpacity="{StaticResource PressedOpacity}"
-							   MinWidth="{TemplateBinding MinWidth}"
-							   MaxWidth="{TemplateBinding MaxWidth}">
 						<Grid x:Name="Root"
-							  Background="Transparent">
+							  Background="Transparent"
+							  MinWidth="{TemplateBinding MinWidth}"
+							  MaxWidth="{TemplateBinding MaxWidth}">
 							<VisualStateManager.VisualStateGroups>
 								<VisualStateGroup x:Name="CommonStates">
 									<VisualState x:Name="Normal" />
@@ -95,7 +92,6 @@
 								</Viewbox>
 							</Grid>
 						</Grid>
-					</um:Ripple>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

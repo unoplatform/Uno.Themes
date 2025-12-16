@@ -6,7 +6,6 @@
 					xmlns:media="using:Microsoft.UI.Xaml.Media"
 					xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
-					xmlns:um="using:Uno.Material"
 					xmlns:contract4Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,4)"
 					xmlns:contract4NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,4)"
 					xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,7)"
@@ -34,7 +33,6 @@
 		- general values (color+measurements) changes to fit the design
 	-->
 	<!--
-		note: when debugging with LiveVisualTree, it is suggested to comment out Ripple (it only affect on-hit effect).
 		note: Should 'The parameter is incorrect.' exception ever be thrown, changes to MaterialNavigationViewIconButtonStyle are likely the cause.
 	-->
 
@@ -178,7 +176,6 @@
 			<StaticResource x:Key="NavigationViewButtonBackgroundPressed" ResourceKey="OnSurfacePressedBrush" />
 			<StaticResource x:Key="NavigationViewButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-			<StaticResource x:Key="NavigationViewButtonRippleFeedback" ResourceKey="PrimaryPressedBrush" />
 
 			<StaticResource x:Key="NavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="OnSurfaceHoverBrush" />
@@ -212,7 +209,6 @@
 
 			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="SystemControlTransparentBrush" />
 
-			<StaticResource x:Key="NavigationViewItemRippleFeedback" ResourceKey="PrimaryPressedBrush" />
 
 			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
@@ -372,8 +368,6 @@
 			<StaticResource x:Key="NavigationViewButtonBackgroundPressed" ResourceKey="OnSurfacePressedBrush" />
 			<StaticResource x:Key="NavigationViewButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-			<StaticResource x:Key="NavigationViewButtonRippleFeedback" ResourceKey="PrimaryPressedBrush" />
-
 			<StaticResource x:Key="NavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="OnSurfaceHoverBrush" />
 			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="OnSurfacePressedBrush" />
@@ -405,8 +399,6 @@
 			<StaticResource x:Key="NavigationViewItemHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
 
 			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="SystemControlTransparentBrush" />
-
-			<StaticResource x:Key="NavigationViewItemRippleFeedback" ResourceKey="PrimaryPressedBrush" />
 
 			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
@@ -566,8 +558,6 @@
 			<StaticResource x:Key="NavigationViewButtonBackgroundPressed" ResourceKey="OnSurfacePressedBrush" />
 			<StaticResource x:Key="NavigationViewButtonBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
 
-			<StaticResource x:Key="NavigationViewButtonRippleFeedback" ResourceKey="PrimaryPressedBrush" />
-
 			<StaticResource x:Key="NavigationViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="OnSurfaceHoverBrush" />
 			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="OnSurfacePressedBrush" />
@@ -599,8 +589,6 @@
 			<StaticResource x:Key="NavigationViewItemHeaderForeground" ResourceKey="OnSurfaceVariantBrush" />
 
 			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="SystemControlTransparentBrush" />
-
-			<StaticResource x:Key="NavigationViewItemRippleFeedback" ResourceKey="PrimaryPressedBrush" />
 
 			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
@@ -2296,7 +2284,6 @@
 											  AutomationProperties.AccessibilityView="Raw" />
 						</Viewbox>
 
-						<um:Ripple Feedback="{ThemeResource NavigationViewButtonRippleFeedback}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -2406,8 +2393,6 @@
 										  FontSize="{TemplateBinding FontSize}"
 										  VerticalContentAlignment="Center" />
 
-						<um:Ripple Grid.ColumnSpan="2"
-								   Feedback="{ThemeResource NavigationViewButtonRippleFeedback}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -3048,7 +3033,6 @@
 								Pointer relative visual are composed of 3 stacking layer: // material dont have of composite state brush...
 								- PresenterContentRootGrid.Background: (Pressed) ?? (PointerOver) ?? (*null*) // via VisualState
 								- SelectionFill.Background: (Selected) ?? (*null*) // via VisualState
-								- Ripple: (OnClick) // via Ripple
 							-->
 							<Border x:Name="SelectionFill" />
 
@@ -3153,7 +3137,6 @@
 
 							</Grid>
 
-							<um:Ripple Feedback="{ThemeResource NavigationViewItemRippleFeedback}" />
 						</Grid>
 					</Grid>
 				</ControlTemplate>
