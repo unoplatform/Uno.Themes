@@ -52,21 +52,6 @@
 	</Choose>
 
 	<ItemGroup>
-		<LottieJson Include="Assets\MaterialDeterminate.json" />
-		<LottieJson Include="Assets\MaterialIndeterminate.json" />
-	</ItemGroup>
-
-	<ItemGroup Condition="$(_IsWindows)">
-		<Content Include="@(LottieJson)" />
-	</ItemGroup>
-
-	<ItemGroup Condition="!$(_IsWindows)">
-		<EmbeddedResource Include="@(LottieJson)" />
-		<IncludeXamlNamespaces Include="lottie_not_win" />
-		<ExcludeXamlNamespaces Include="lottie_win" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
 	</ItemGroup>
 
