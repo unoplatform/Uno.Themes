@@ -217,7 +217,12 @@
 														  HorizontalAlignment="Stretch"
 														  Visibility="Collapsed">
 											<ContentPresenter.Resources>
-												<SimpleTheme xmlns="using:Uno.Simple" />
+												<ResourceDictionary>
+													<ResourceDictionary.MergedDictionaries>
+														<SimpleTheme xmlns="using:Uno.Simple" />
+
+													</ResourceDictionary.MergedDictionaries>
+												</ResourceDictionary>
 											</ContentPresenter.Resources>
 										</ContentPresenter>
 									</Grid>
