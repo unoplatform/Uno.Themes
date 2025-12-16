@@ -16,7 +16,7 @@ internal static class SimpleConstants
 			public static string ColorPalette = $"ms-appx:///{PackageName}/Styles/Application/v2/ColorPalette.xaml";
 			public static string MaterialColors = $"ms-appx:///{PackageName}/Styles/Application/v2/MaterialColors.xaml";
 			public static string Typography = $"ms-appx:///{PackageName}/Styles/Application/v2/Typography.xaml";
-			public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.v2.xaml";
+			public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
 		}
 
 		public static class Common
