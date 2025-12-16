@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 
 #if WinUI
@@ -186,16 +186,16 @@ public abstract class BaseTheme : ResourceDictionary
 		var converters = new ResourceDictionary { Source = new Uri(ThemesConstants.ConverterResourcePath) };
 		var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 
-		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+	//	colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
 
-		if (ColorOverrideDictionary is { } colorOverride)
-		{
-			colors.SafeMerge(colorOverride);
-		}
+		//if (ColorOverrideDictionary is { } colorOverride)
+		//{
+		//	colors.SafeMerge(colorOverride);
+		//}
 
 		var mergedPages = GenerateSpecificResources();
 
-		mergedPages.MergedDictionaries.Add(colors);
+//		mergedPages.MergedDictionaries.Add(colors);
 		mergedPages.MergedDictionaries.Add(converters);
 
 		MergedDictionaries.Add(mergedPages);

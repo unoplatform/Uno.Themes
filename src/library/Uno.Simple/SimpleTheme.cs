@@ -31,6 +31,8 @@ public class SimpleTheme : BaseTheme
 		var mergedPages = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Version2.MergedPages) };
 
 		var fonts = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Common.Fonts) };
+		var colors = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Version2.MaterialColors) };
+		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Version2.ColorPalette) });
 
 		if (FontOverrideDictionary is { } fontOverride)
 		{
@@ -38,6 +40,7 @@ public class SimpleTheme : BaseTheme
 		}
 
 		mergedPages.MergedDictionaries.Add(fonts);
+		mergedPages.MergedDictionaries.Add(colors);
 		return mergedPages;
 	}
 }
