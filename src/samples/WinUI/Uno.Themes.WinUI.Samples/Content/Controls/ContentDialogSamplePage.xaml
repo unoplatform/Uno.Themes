@@ -1,0 +1,60 @@
+﻿<Page x:Class="Uno.Themes.WinUI.Samples.Content.Controls.ContentDialogSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Themes.WinUI.Samples.Content.Controls"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:sample="using:Uno.Themes.WinUI.Samples"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Page.Resources>
+		<Style x:Key="CustomSelectableItemStyle" TargetType="ListViewItem">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ListViewItem">
+						<Grid ColumnSpacing="16" Margin="0,10">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<Ellipse Grid.Column="0"
+									 Fill="{StaticResource PrimaryBrush}"
+									 Width="40"
+									 Height="40" />
+							<TextBlock Grid.Column="0"
+									   Text="A"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   Style="{StaticResource MaterialTitleLarge}" />
+							<ContentPresenter Grid.Column="1"
+											  Content="{TemplateBinding Content}"
+											  VerticalAlignment="Center" />
+							<CheckBox Grid.Column="2" IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Page.Resources>
+
+	<sample:SamplePageLayout>
+		<sample:SamplePageLayout.M3MaterialTemplate>
+			<DataTemplate>
+				<ScrollViewer HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
+					<StackPanel Spacing="16">
+						<Button Content="Basic Content Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildBasicContentDialog" />
+						<Button Content="Rich Content Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildRichContentDialog" />
+					</StackPanel>
+				</ScrollViewer>
+			</DataTemplate>
+		</sample:SamplePageLayout.M3MaterialTemplate>
+	</sample:SamplePageLayout>
+</Page>

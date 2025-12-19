@@ -1,0 +1,72 @@
+﻿<Page x:Class="Uno.Themes.WinUI.Samples.Content.Controls.TopNavigationViewSamplePage_MUX"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:sample="using:Uno.Themes.WinUI.Samples"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+	  xmlns:todo="what should be done"
+	  mc:Ignorable="d todo">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Material_TopNavigationViewSamplePage_MUX_NavigationView"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<sample:ClippedGrid MinHeight="400">
+							<muxc:NavigationView OpenPaneLength="260"
+												 IsBackButtonVisible="Collapsed"
+												 PaneDisplayMode="Top"
+												 IsBackEnabled="False"
+												 Style="{StaticResource MaterialNavigationViewStyle}">
+								<muxc:NavigationView.MenuItems>
+									<muxc:NavigationViewItem Icon="Library"
+															 Content="Parent for 1~3"
+															 SelectsOnInvoked="False"
+															 Style="{StaticResource MaterialNavigationViewItemStyle}">
+										<muxc:NavigationViewItem.MenuItems>
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 1" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 2" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 3" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+										</muxc:NavigationViewItem.MenuItems>
+									</muxc:NavigationViewItem>
+									<muxc:NavigationViewItem Icon="Placeholder" Content="Item 4" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+								</muxc:NavigationView.MenuItems>
+							</muxc:NavigationView>
+						</sample:ClippedGrid>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="M3_Material_TopNavigationViewSamplePage_MUX_NavigationView"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<sample:ClippedGrid MinHeight="400">
+							<muxc:NavigationView OpenPaneLength="260"
+												 PaneDisplayMode="Top"
+												 IsBackButtonVisible="Collapsed"
+												 IsBackEnabled="False"
+												 Style="{StaticResource MaterialNavigationViewStyle}">
+								<muxc:NavigationView.MenuItems>
+									<muxc:NavigationViewItem Icon="Library"
+															 Content="Parent for 1~3"
+															 SelectsOnInvoked="False"
+															 Style="{StaticResource MaterialNavigationViewItemStyle}">
+										<muxc:NavigationViewItem.MenuItems>
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 1" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 2" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 3" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+										</muxc:NavigationViewItem.MenuItems>
+									</muxc:NavigationViewItem>
+									<muxc:NavigationViewItem Icon="Placeholder" Content="Item 4" Style="{StaticResource MaterialNavigationViewItemStyle}" />
+								</muxc:NavigationView.MenuItems>
+							</muxc:NavigationView>
+						</sample:ClippedGrid>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

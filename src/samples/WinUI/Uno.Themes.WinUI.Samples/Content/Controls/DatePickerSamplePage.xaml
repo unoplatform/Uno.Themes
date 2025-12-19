@@ -1,0 +1,116 @@
+﻿<Page x:Class="Uno.Themes.WinUI.Samples.Content.Controls.DatePickerSamplePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:android="http://uno.ui/android"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ios="http://uno.ui/ios"
+      xmlns:local="using:Uno.Themes.WinUI.Samples.Shared.Content"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:sample="using:Uno.Themes.WinUI.Samples"
+      xmlns:smtx="using:ShowMeTheXAML"
+      xmlns:xamarin="http://uno.ui/xamarin"
+      mc:Ignorable="d android ios xamarin">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!--  Default  -->
+						<TextBlock Margin="12,16,12,4"
+						           Style="{StaticResource MaterialSubtitle2}"
+						           Text="Default" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="DatePickerSamplePage_Material_Default">
+
+							<DatePicker x:Name="myDatePicker"
+							            HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            Style="{StaticResource MaterialDatePickerStyle}" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="DatePickerSamplePage_Fluent_Default">
+
+							<DatePicker x:Name="myDatePicker1"
+							            HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date" />
+						</smtx:XamlDisplay>
+						
+						<!--  Disbaled  -->
+						<TextBlock Margin="12,8,12,4"
+						           Style="{StaticResource MaterialSubtitle2}"
+						           Text="Disabled" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="DatePickerSamplePage_Material_Disabled">
+							
+							<DatePicker HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            IsEnabled="False"
+							            Style="{StaticResource MaterialDatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!--  Default  -->
+						<TextBlock Margin="12,16,12,4"
+						           Style="{StaticResource TitleSmall}"
+						           Text="Default" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="M3_DatePickerSamplePage_Material_Default">
+
+							<DatePicker x:Name="myDatePicker"
+							            HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            Style="{StaticResource MaterialDatePickerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!--  Disabled  -->
+						<TextBlock Margin="12,8,12,4"
+						           Style="{StaticResource TitleSmall}"
+						           Text="Disabled" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="M3_DatePickerSamplePage_Material_Disabled">
+
+							<DatePicker HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            IsEnabled="False"
+							            Style="{StaticResource MaterialDatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="DatePickerSamplePage_Cupertino_Default">
+
+							<DatePicker x:Name="myDatePicker2"
+							            HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+							            Style="{StaticResource CupertinoDatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>
