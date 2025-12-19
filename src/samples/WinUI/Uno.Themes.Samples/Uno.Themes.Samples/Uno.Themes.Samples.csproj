@@ -1,0 +1,41 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Themes.Samples</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.unoplatform.uno-themes-samples</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Uno.Themes.Samples - Demonstration of Uno.Themes, Uno.Material, and Uno.Cupertino</Description>
+
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Include="Uno.ShowMeTheXAML" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\library\Uno.Themes\Uno.Themes.WinUI.csproj" />
+    <ProjectReference Include="..\..\..\..\library\Uno.Material\Uno.Material.WinUI.csproj" />
+    <ProjectReference Include="..\..\..\..\library\Uno.Cupertino\Uno.Cupertino.WinUI.csproj" />
+  </ItemGroup>
+
+</Project>

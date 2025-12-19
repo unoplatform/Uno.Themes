@@ -7,7 +7,7 @@ jobs:
     matrix:
       WinUI:
         ArtifactName: win-winui
-        ProjectName: Uno.Themes.WinUI.Samples
+        ProjectName: Uno.Themes.Samples
         Lineage: WinUI
         AppName: Windows
         ApplicationBuildNumberOffset: 50
@@ -37,9 +37,9 @@ jobs:
   - task: MSBuild@1
     displayName: Build Samples
     inputs:
-      solution: src/samples/$(Lineage)/$(ProjectName).$(AppName)/$(ProjectName).$(AppName).csproj
+      solution: src/samples/$(Lineage)/$(ProjectName)/$(ProjectName)/$(ProjectName).csproj
       msbuildArchitecture: x64
-      msbuildArguments: /m /v:m /r /p:Platform=x64 /p:Configuration=Release /p:TargetFrameworkOverride=net9.0-windows10.0.19041 /p:AppxPackageDir="Packages/" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      msbuildArguments: /m /v:m /r /p:Platform=x64 /p:Configuration=Release /p:TargetFrameworkOverride=net10.0-windows10.0.19041 /p:AppxPackageDir="Packages/" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
       clean: false
       maximumCpuCount: true
       restoreNugetPackages: false
@@ -49,7 +49,7 @@ jobs:
   - task: CopyFiles@2
     displayName: Copy Windows output
     inputs:
-      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).$(AppName)/Packages
+      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName)/$(ProjectName)/Packages
       Contents: '**/*.*'
       TargetFolder: $(Build.ArtifactStagingDirectory)/
 

@@ -7,7 +7,7 @@ jobs:
     matrix:
       WinUI:
         ArtifactName: ios-winui
-        ProjectName: Uno.Themes.WinUI.Samples
+        ProjectName: Uno.Themes.Samples
         Lineage: WinUI
         ApplicationBuildNumberOffset: 50
         VersionCodeOffset: 50
@@ -27,9 +27,9 @@ jobs:
     displayName: Select Xcode ($(XCODE_ROOT))
 
   - bash: |
-      cd $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Mobile
-      dotnet build -f net9.0-ios /p:OverrideTargetFramework=net9.0-ios -c Release /p:TargetFrameworkOverride=net9.0-ios "/p:InformationalVersion=$(NBGV_InformationalVersion)" "/bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog"
-    displayName: Build project for Release - (net9.0-ios)
+      cd $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName)/$(ProjectName)
+      dotnet build -f net10.0-ios /p:OverrideTargetFramework=net10.0-ios -c Release /p:TargetFrameworkOverride=net10.0-ios "/p:InformationalVersion=$(NBGV_InformationalVersion)" "/bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog"
+    displayName: Build project for Release - (net10.0-ios)
 
   - task: PublishBuildArtifacts@1
     retryCountOnTaskFailure: 3

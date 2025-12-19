@@ -8,7 +8,7 @@ jobs:
     matrix:
       WinUI:
         ArtifactName: wasm-winui
-        ProjectName: Uno.Themes.WinUI.Samples
+        ProjectName: Uno.Themes.Samples
         Lineage: WinUI
         ApplicationBuildNumberOffset: 50
         VersionCodeOffset: 50
@@ -26,13 +26,13 @@ jobs:
   - template: templates/gitversion.yml
 
   - script: |
-      dotnet publish src/samples/$(Lineage)/$(ProjectName).Wasm/$(ProjectName).Wasm.csproj /p:Configuration=Release /p:TargetFrameworkOverride=net9.0 "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      dotnet publish src/samples/$(Lineage)/$(ProjectName)/$(ProjectName)/$(ProjectName).csproj -f net10.0-browserwasm /p:Configuration=Release /p:TargetFrameworkOverride=net10.0-browserwasm "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build Wasm Head
 
   - task: CopyFiles@2
     displayName: 'Publish Wasm Binaries'
     inputs:
-      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Wasm/bin/Release/net9.0/publish/wwwroot
+      SourceFolder: $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName)/$(ProjectName)/bin/Release/net10.0-browserwasm/publish/wwwroot
       Contents: '**/*.*'
       TargetFolder: $(build.artifactstagingdirectory)/Wasm
       CleanTargetFolder: false

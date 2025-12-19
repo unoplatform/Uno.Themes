@@ -1,0 +1,332 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:local="using:Uno.Themes.Samples">
+
+	<Thickness x:Key="FirstItemMargin">12,0</Thickness>
+	<Thickness x:Key="ConsecutiveItemMargin">12,12,12,0</Thickness>
+
+	<DataTemplate x:Key="DefaultSamplePageLayoutHeaderTemplate">
+		<StackPanel>
+			<!-- Description -->
+			<TextBlock Text="{Binding Description}"
+					   FontSize="16"
+					   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
+					   Opacity="0.8"
+					   Visibility="{Binding Description, Converter={StaticResource IsNullOrEmptyToCollapsed}, FallbackValue=Collapsed}"
+					   Margin="0,16,0,0" />
+
+			<!-- Source label -->
+			<TextBlock Text="SOURCE"
+					   FontSize="10"
+					   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
+					   Opacity="0.45"
+					   Margin="0,30,0,0" />
+
+			<!-- Source value -->
+			<TextBlock Text="{Binding Source, Converter={StaticResource EnumToDescription}}"
+					   FontSize="16"
+					   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
+					   Opacity="0.8"
+					   Margin="0,0,0,16" />
+		</StackPanel>
+	</DataTemplate>
+
+	<Style x:Key="DefaultSamplePageLayoutStyle"
+		   TargetType="local:SamplePageLayout">
+
+		<Setter Property="HeaderTemplate"
+				Value="{StaticResource DefaultSamplePageLayoutHeaderTemplate}" />
+		<Setter Property="BorderBrush"
+				Value="{StaticResource DividerBrush}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="local:SamplePageLayout">
+					<Grid>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<!-- Title (visible on desktop) -->
+						<TextBlock x:Name="StickyTitle"
+								   Text="{TemplateBinding Title}"
+								   MaxLines="1"
+								   FontSize="34"
+								   TextTrimming="CharacterEllipsis"
+								   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
+								   Margin="48,0" />
+
+						<!-- Top bar with Uno logo (visible on mobile) -->
+						<Grid x:Name="PART_MobileTopBar"
+							  Height="56"
+							  Visibility="Collapsed">
+							<Image Source="ms-appx:///Assets/UnoLogo.png"
+								   Stretch="Uniform"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"
+								   Height="24" />
+						</Grid>
+
+						<!-- Content -->
+						<ScrollViewer x:Name="PART_ScrollViewer"
+									  Grid.Row="1">
+							<Grid Margin="0,0,0,24">
+								<StackPanel x:Name="ScrollingContent"
+											Grid.Row="0"
+											Margin="16,0">
+
+									<!-- Title (visible on mobile) -->
+									<TextBlock x:Name="ScrollingTitle"
+											   Margin="0,0,0,0"
+											   Text="{TemplateBinding Title}"
+											   MaxLines="1"
+											   TextTrimming="CharacterEllipsis"
+											   FontSize="34"
+											   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
+											   Visibility="Collapsed" />
+
+									<!-- Header (default template contains Description and Source) -->
+									<ContentPresenter Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding HeaderTemplate}"
+													  VerticalAlignment="Top"
+													  HorizontalAlignment="Stretch" />
+
+									<StackPanel x:Name="PART_ScrollingTabs"
+												Orientation="Horizontal"
+												BorderBrush="{TemplateBinding BorderBrush}"
+												BorderThickness="0,0,0,1"
+												HorizontalAlignment="Stretch">
+
+										<!-- Material RadioButton -->
+										<RadioButton x:Name="PART_MaterialRadioButton"
+													 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
+													 Visibility="Collapsed"
+													 Margin="0,0,16,0">
+											<StackPanel Orientation="Horizontal">
+
+												<!-- Label -->
+												<TextBlock Text="Material"
+														   FontSize="20"
+														   FontWeight="Medium"
+														   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
+
+												<!-- Icon -->
+												<Image Source="ms-appx:///Assets/MaterialIcon_Small.png"
+													   Stretch="UniformToFill"
+													   Height="16"
+													   Width="16"
+													   VerticalAlignment="Center"
+													   Margin="10,0,0,0" />
+											</StackPanel>
+										</RadioButton>
+
+										<!-- Cupertino RadioButton -->
+										<RadioButton x:Name="PART_CupertinoRadioButton"
+													 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
+													 Visibility="Collapsed"
+													 Margin="0,0,16,0">
+											<StackPanel Orientation="Horizontal">
+
+												<!-- Label -->
+												<TextBlock Text="Cupertino"
+														   FontSize="20"
+														   FontWeight="Medium"
+														   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
+
+												<!-- Icon -->
+												<Image Source="ms-appx:///Assets/AppleIcon_Small.png"
+													   Stretch="UniformToFill"
+													   Height="16"
+													   Width="16"
+													   VerticalAlignment="Center"
+													   Margin="10,0,0,0" />
+											</StackPanel>
+										</RadioButton>
+									</StackPanel>
+
+									<Grid>
+
+										<!-- Material Content -->
+										<StackPanel x:Name="MaterialContent"
+													Visibility="Collapsed">
+
+											<ComboBox x:Name="MaterialVersionComboBox"
+													  Header="Material Design Version:"
+													  Margin="0,20"
+													  SelectedIndex="1">
+												<x:String>M2</x:String>
+												<x:String>M3</x:String>
+											</ComboBox>
+
+											<!-- Material M2 Content -->
+											<ContentPresenter x:Name="M2MaterialContentPresenter"
+															  Content="{TemplateBinding Content}"
+															  ContentTemplate="{TemplateBinding MaterialTemplate}"
+															  VerticalAlignment="Stretch"
+															  HorizontalAlignment="Stretch"
+															  Visibility="{Binding SelectedItem, ElementName=MaterialVersionComboBox, Converter={StaticResource SelectedItemToVisible}, ConverterParameter='M2', Mode=OneWay}" />
+
+											<!-- Material M3 Content -->
+											<ContentPresenter x:Name="M3MaterialContentPresenter"
+															  Content="{TemplateBinding Content}"
+															  ContentTemplate="{TemplateBinding M3MaterialTemplate}"
+															  VerticalAlignment="Stretch"
+															  HorizontalAlignment="Stretch"
+															  Visibility="{Binding SelectedItem, ElementName=MaterialVersionComboBox, Converter={StaticResource SelectedItemToVisible}, ConverterParameter='M3', Mode=OneWay}" />
+										</StackPanel>
+
+										<!-- Cupertino Content -->
+										<ContentPresenter x:Name="CupertinoContentPresenter"
+														  Content="{TemplateBinding Content}"
+														  ContentTemplate="{TemplateBinding CupertinoTemplate}"
+														  VerticalAlignment="Stretch"
+														  HorizontalAlignment="Stretch"
+														  Visibility="Collapsed" />
+									</Grid>
+
+									<!-- Optional link to documentation -->
+									<StackPanel Visibility="{Binding DocumentationLink, Converter={StaticResource IsNullOrEmptyToCollapsed}}">
+
+										<TextBlock FontSize="16"
+												   Foreground="{ThemeResource MaterialOnBackgroundBrush}"
+												   Opacity="0.8"
+												   Margin="0,16">
+											<Run Text="For more information refer to the " />
+
+											<Hyperlink NavigateUri="{Binding DocumentationLink}">
+												<Run Text="official documentation." />
+											</Hyperlink>
+										</TextBlock>
+									</StackPanel>
+								</StackPanel>
+							</Grid>
+						</ScrollViewer>
+
+						<!-- Separator line that becomes hidden by the sticky tabs when scrolled enough -->
+						<Rectangle x:Name="MobileTopBarSeparator"
+								   Height="1"
+								   Grid.Row="1"
+								   VerticalAlignment="Top"
+								   HorizontalAlignment="Stretch"
+								   Visibility="Collapsed"
+								   Fill="{StaticResource DividerBrush}" />
+
+						<!-- This is the sticky tabs that appear when we scroll enough. -->
+						<StackPanel x:Name="PART_StickyTabs"
+									Grid.Row="1"
+									Background="{ThemeResource MaterialBackgroundBrush}"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="0,0,0,1"
+									Orientation="Horizontal"
+									Margin="16,0"
+									HorizontalAlignment="Stretch"
+									VerticalAlignment="Top"
+									Visibility="Collapsed">
+
+							<!-- Material RadioButton -->
+							<RadioButton x:Name="PART_StickyMaterialRadioButton"
+										 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
+										 Visibility="Collapsed"
+										 Margin="0,0,16,0">
+								<StackPanel Orientation="Horizontal">
+
+									<!-- Label -->
+									<TextBlock Text="Material"
+											   FontSize="20"
+											   FontWeight="Medium"
+											   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
+
+									<!-- Icon -->
+									<Image Source="ms-appx:///Assets/MaterialIcon_Small.png"
+										   Stretch="UniformToFill"
+										   Height="16"
+										   Width="16"
+										   VerticalAlignment="Center"
+										   Margin="10,0,0,0" />
+								</StackPanel>
+							</RadioButton>
+
+							<!-- Cupertino RadioButton -->
+							<RadioButton x:Name="PART_StickyCupertinoRadioButton"
+										 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
+										 Visibility="Collapsed"
+										 Margin="0,0,16,0">
+								<StackPanel Orientation="Horizontal">
+
+									<!-- Label -->
+									<TextBlock Text="Cupertino"
+											   FontSize="20"
+											   FontWeight="Medium"
+											   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
+
+									<!-- Icon -->
+									<Image Source="ms-appx:///Assets/AppleIcon_Small.png"
+										   Stretch="UniformToFill"
+										   Height="16"
+										   Width="16"
+										   VerticalAlignment="Center"
+										   Margin="10,0,0,0" />
+								</StackPanel>
+							</RadioButton>
+						</StackPanel>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="FormFactors">
+								<VisualState x:Name="Desktop">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="{StaticResource DesktopAdaptiveThresholdWidth}" />
+									</VisualState.StateTriggers>
+								</VisualState>
+
+								<VisualState x:Name="Mobile">
+									<VisualState.StateTriggers>
+										<AdaptiveTrigger MinWindowWidth="0" />
+									</VisualState.StateTriggers>
+									<VisualState.Setters>
+										<Setter Target="ScrollingContent.Margin"
+												Value="16,0" />
+										<Setter Target="ScrollingTitle.Visibility"
+												Value="Visible" />
+										<Setter Target="PART_StickyTabs.Padding"
+												Value="16,0" />
+										<Setter Target="PART_StickyTabs.Margin"
+												Value="0" />
+										<Setter Target="StickyTitle.Visibility"
+												Value="Collapsed" />
+										<Setter Target="PART_MobileTopBar.Visibility"
+												Value="Visible" />
+										<Setter Target="MobileTopBarSeparator.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="States">
+
+								<VisualState x:Name="Material">
+									<VisualState.Setters>
+										<Setter Target="MaterialContent.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Cupertino">
+									<VisualState.Setters>
+										<Setter Target="CupertinoContentPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="local:SamplePageLayout"
+		   BasedOn="{StaticResource DefaultSamplePageLayoutStyle}" />
+
+</ResourceDictionary>
