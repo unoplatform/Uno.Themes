@@ -31,7 +31,7 @@ partial class App
 		{
 			var selected = trySynchronizeCurrentItem
 				? HierarchyHelper
-					.Flatten(nv.MenuItems.OfType<MUXC.NavigationViewItem>(), x => x.MenuItems.OfType<MUXC.NavigationViewItem>())
+					.Flatten(nv.MenuItems.OfType<NavigationViewItem>(), x => x.MenuItems.OfType<NavigationViewItem>())
 					.FirstOrDefault(x => (x.DataContext as Sample)?.ViewType == sample.ViewType)
 				: default;
 			if (selected != null)
@@ -70,7 +70,7 @@ partial class App
 		return _shell;
 	}
 
-	private void OnNavigationItemInvoked(MUXC.NavigationView sender, MUXC.NavigationViewItemInvokedEventArgs e)
+	private void OnNavigationItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs e)
 	{
 		if (e.InvokedItemContainer.DataContext is Sample sample)
 		{
@@ -78,7 +78,7 @@ partial class App
 		}
 	}
 
-	private void AddNavigationItems(MUXC.NavigationView nv)
+	private void AddNavigationItems(NavigationView nv)
 	{
 		var categories = Assembly.GetExecutingAssembly().DefinedTypes
 			.Where(x => x.Namespace?.StartsWith("Uno.Themes.WinUI.Samples") == true)
@@ -98,10 +98,10 @@ partial class App
 		foreach (var category in categories.OrderBy(x => x.Key))
 		{
 			// create parent menu item for this category
-			var parentItem = default(MUXC.NavigationViewItem);
+			var parentItem = default(NavigationViewItem);
 			if (category.Key != SampleCategory.None)
 			{
-				parentItem = new MUXC.NavigationViewItem
+				parentItem = new NavigationViewItem
 				{
 					Content = category.Key.GetDescription() ?? category.Key.ToString(),
 					Icon = CreateIconElement(GetCategoryIconSource()),
@@ -127,7 +127,7 @@ partial class App
 			// add items to the parent menu item or directly to the nav-view
 			foreach (var sample in category)
 			{
-				var item = new MUXC.NavigationViewItem
+				var item = new NavigationViewItem
 				{
 					Content = sample.Title,
 					Icon = CreateIconElement(sample.IconSource),
