@@ -97,9 +97,9 @@
 			<StaticResource x:Key="ElevatedButtonBorderBrushDisabled" ResourceKey="OnDisabledBrush" />
 
 			<!-- FilledTonalButton Resources - SDS Neutral Button (muted/tonal variant) -->
-			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SDSNeutralTertiaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="SDSNeutralTertiaryHoverBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="SDSNeutralTertiaryDarkerBrush" />
 			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="DisabledBrush" />
 
 			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
@@ -199,9 +199,9 @@
 			<StaticResource x:Key="ElevatedButtonBorderBrushPressed" ResourceKey="TransparentBrush" />
 			<StaticResource x:Key="ElevatedButtonBorderBrushDisabled" ResourceKey="OnDisabledBrush" />
 
-			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SDSNeutralTertiaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="SDSNeutralTertiaryHoverBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="SDSNeutralTertiaryDarkerBrush" />
 			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="DisabledBrush" />
 
 			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
@@ -308,7 +308,7 @@
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
 		<Setter Property="FocusVisualMargin" Value="-3" />
-		<Setter Property="Translation" Value="0,0,8" />
+		<Setter Property="Translation" Value="0,0,32" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -329,14 +329,14 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource ElevatedButtonBackgroundPointerOver}" />
-										<Setter Target="RootGrid.Translation" Value="0,0,12" />
+										<Setter Target="RootGrid.Translation" Value="0,0,48" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource ElevatedButtonBackgroundPressed}" />
-										<Setter Target="RootGrid.Translation" Value="0,0,4" />
+										<Setter Target="RootGrid.Translation" Value="0,0,16" />
 										<Setter Target="RootGrid.Opacity" Value="0.8" />
 									</VisualState.Setters>
 								</VisualState>
