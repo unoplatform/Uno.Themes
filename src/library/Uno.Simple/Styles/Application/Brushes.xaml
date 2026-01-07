@@ -50,6 +50,8 @@
 					 Color="{StaticResource OnSurfaceMediumColor}" />
 	<SolidColorBrush x:Key="OnSurfaceLowBrush"
 					 Color="{StaticResource OnSurfaceLowColor}" />
+	<SolidColorBrush x:Key="OnSurfaceVariantBrush"
+					 Color="{StaticResource OnSurfaceVariantColor}" />
 
 	<!-- On Background Brushes -->
 	<SolidColorBrush x:Key="OnBackgroundBrush"
@@ -193,7 +195,45 @@
 	<SolidColorBrush x:Key="BrandTertiaryBrush"
 					 Color="{StaticResource PrimaryVariantLightColor}" />
 	<SolidColorBrush x:Key="NeutralTertiaryBrush"
-					 Color="{StaticResource SDSNeutralTertiaryColor}" />
+					 Color="{StaticResource TertiaryColor}" />
+
+	<!-- State Layer Brushes for Hover/Pressed (Material-compatible) -->
+	<!-- These use opacity to create hover/pressed effects without Ripple -->
+	<SolidColorBrush x:Key="PrimaryHoverBrush"
+					 Color="#14000000" />
+	<!-- 8% black overlay -->
+	<SolidColorBrush x:Key="PrimaryPressedBrush"
+					 Color="#1F000000" />
+	<!-- 12% black overlay -->
+	<SolidColorBrush x:Key="PrimaryFocusedBrush"
+					 Color="#1F000000" />
+	<!-- 12% black overlay for focus state -->
+	<SolidColorBrush x:Key="OnPrimaryHoverBrush"
+					 Color="#14FFFFFF" />
+	<!-- 8% white overlay -->
+	<SolidColorBrush x:Key="OnPrimaryPressedBrush"
+					 Color="#1FFFFFFF" />
+	<!-- 12% white overlay -->
+	<SolidColorBrush x:Key="OnSecondaryContainerHoverBrush"
+					 Color="#14000000" />
+	<SolidColorBrush x:Key="OnSecondaryContainerPressedBrush"
+					 Color="#1F000000" />
+
+	<!-- Disabled State Brushes (Material-compatible) -->
+	<SolidColorBrush x:Key="OnSurfaceDisabledBrush"
+					 Color="{StaticResource OnDisabledColor}" />
+	<SolidColorBrush x:Key="OutlineDisabledBrush"
+					 Color="{StaticResource OnDisabledColor}" />
+
+	<!-- Container Brushes for Tonal Buttons (Material-compatible) -->
+	<SolidColorBrush x:Key="SecondaryContainerBrush"
+					 Color="{StaticResource TertiaryColor}" />
+	<SolidColorBrush x:Key="OnSecondaryContainerBrush"
+					 Color="{StaticResource OnTertiaryColor}" />
+
+	<!-- System Transparent Brush (Material-compatible) -->
+	<SolidColorBrush x:Key="SystemControlTransparentBrush"
+					 Color="Transparent" />
 
 	<!-- Uno.Themes.Material API Compatibility Aliases -->
 	<StaticResource x:Key="MaterialPrimaryBrush" ResourceKey="PrimaryBrush" />
