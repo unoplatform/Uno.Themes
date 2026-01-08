@@ -9,7 +9,7 @@
 					mc:Ignorable="android ios">
 
 	<!-- Define the base style for Material CommandBar -->
-	<Style x:Key="MaterialBaseCommandBarStyle"
+	<Style x:Key="SimpleBaseCommandBarStyle"
 		   TargetType="CommandBar">
 		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
@@ -20,11 +20,11 @@
 	</Style>
 	
 	<!-- Define the main Material CommandBar Style -->
-	<Style x:Key="MaterialCommandBarStyle"
+	<Style x:Key="SimpleCommandBarStyle"
 		   TargetType="CommandBar"
 		   BasedOn="{StaticResource MaterialBaseCommandBarStyle}" />
 
-	<Style x:Key="MaterialDefaultCommandBarStyle"
+	<Style x:Key="SimpleDefaultCommandBarStyle"
 		   TargetType="CommandBar"
 		   BasedOn="{StaticResource MaterialCommandBarStyle}" />
 </ResourceDictionary>

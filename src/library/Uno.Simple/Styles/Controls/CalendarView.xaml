@@ -14,7 +14,7 @@
 					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.38" />
 
-	<Style x:Key="MaterialCalendarViewStyle"
+	<Style x:Key="SimpleCalendarViewStyle"
 		   TargetType="CalendarView">
 		<Setter Property="FocusBorderBrush"
 				Value="{ThemeResource PrimaryFocusedBrush}" />
@@ -108,7 +108,7 @@
 							BorderThickness="{TemplateBinding BorderThickness}"
 							CornerRadius="{TemplateBinding CornerRadius}">
 						<Border.Resources>
-							<Style x:Key="MaterialWeekDayNameStyle"
+							<Style x:Key="SimpleWeekDayNameStyle"
 								   BasedOn="{StaticResource MaterialBodySmall}"
 								   TargetType="TextBlock">
 								<Setter Property="HorizontalAlignment"
@@ -116,7 +116,7 @@
 								<Setter Property="VerticalAlignment"
 										Value="Center" />
 							</Style>
-							<Style x:Key="MaterialNavigationButtonStyle"
+							<Style x:Key="SimpleNavigationButtonStyle"
 								   TargetType="Button">
 								<Setter Property="HorizontalAlignment"
 										Value="Stretch" />
@@ -237,7 +237,7 @@
 									</Setter.Value>
 								</Setter>
 							</Style>
-							<Style x:Key="MaterialScrollViewerStyle"
+							<Style x:Key="SimpleScrollViewerStyle"
 								   TargetType="ScrollViewer">
 								<Setter Property="HorizontalScrollMode"
 										Value="Disabled" />
@@ -704,7 +704,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialDefaultCalendarViewStyle"
+	<Style x:Key="SimpleDefaultCalendarViewStyle"
 		   TargetType="CalendarView"
 		   BasedOn="{StaticResource MaterialCalendarViewStyle}" />
 </ResourceDictionary>

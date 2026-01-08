@@ -26,20 +26,20 @@
 	<StaticResource x:Key="MaterialContentDialogContentForeground" ResourceKey="OnSurfaceVariantBrush" />
 
 	<!-- note: MaterialContentDialogDefaultButtonStyle is the style associated with ContentDialog.DefaultButton (accented or CTA btn) -->
-	<Style x:Key="MaterialContentDialogButtonStyle"
+	<Style x:Key="SimpleContentDialogButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialTextButtonStyle}">
 		<Setter Property="HorizontalAlignment" Value="Right" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 	</Style>
-	<Style x:Key="MaterialContentDialogDefaultButtonStyle"
+	<Style x:Key="SimpleContentDialogDefaultButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialFilledButtonStyle}">
 		<Setter Property="HorizontalAlignment" Value="Right" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
 	</Style>
 
-	<Style x:Key="MaterialContentDialogStyle" TargetType="ContentDialog">
+	<Style x:Key="SimpleContentDialogStyle" TargetType="ContentDialog">
 
 		<Setter Property="Background" Value="{StaticResource MaterialContentDialogBackground}" />
 		<Setter Property="Foreground" Value="{StaticResource MaterialContentDialogContentForeground}" />
@@ -292,7 +292,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialDefaultContentDialogStyle"
+	<Style x:Key="SimpleDefaultContentDialogStyle"
 		   TargetType="ContentDialog"
 		   BasedOn="{StaticResource MaterialContentDialogStyle}" />
 </ResourceDictionary>

@@ -170,7 +170,7 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<Style x:Key="MaterialPipsPagerNavigationButtonBaseStyle"
+	<Style x:Key="SimplePipsPagerNavigationButtonBaseStyle"
 		   TargetType="Button">
 		<Setter Property="Background" Value="{ThemeResource PipsPagerNavigationButtonBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource PipsPagerNavigationButtonForeground}" />
@@ -311,21 +311,21 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialPipsPagerPreviousPageButtonStyle"
+	<Style x:Key="SimplePipsPagerPreviousPageButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialPipsPagerNavigationButtonBaseStyle}">
 		<Setter Property="Content" Value="{StaticResource PipsPagerPreviousPageButtonData}" />
 		<Setter Property="VerticalContentAlignment" Value="Bottom" />
 	</Style>
 
-	<Style x:Key="MaterialPipsPagerNextPageButtonStyle"
+	<Style x:Key="SimplePipsPagerNextPageButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialPipsPagerNavigationButtonBaseStyle}">
 		<Setter Property="Content" Value="{StaticResource PipsPagerNextPageButtonData}" />
 		<Setter Property="VerticalContentAlignment" Value="Top" />
 	</Style>
 
-	<Style x:Key="MaterialPipsPagerButtonBaseStyle"
+	<Style x:Key="SimplePipsPagerButtonBaseStyle"
 		   TargetType="Button">
 		<Setter Property="Background" Value="{ThemeResource PipsPagerSelectionIndicatorBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForeground}" />
@@ -337,7 +337,7 @@
 		<Setter Property="FocusVisualMargin" Value="0" />
 	</Style>
 
-	<Style x:Key="MaterialPipsPagerSelectedPipButtonStyle"
+	<Style x:Key="SimplePipsPagerSelectedPipButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialPipsPagerButtonBaseStyle}">
 		<Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForegroundSelected}" />
@@ -456,7 +456,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialPipsPagerNormalPipButtonStyle"
+	<Style x:Key="SimplePipsPagerNormalPipButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource MaterialPipsPagerButtonBaseStyle}">
 		<Setter Property="Foreground" Value="{ThemeResource PipsPagerSelectionIndicatorForeground}" />

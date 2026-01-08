@@ -36,7 +36,7 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<not_win:Style x:Key="MaterialProgressRingStyle"
+	<not_win:Style x:Key="SimpleProgressRingStyle"
 				   TargetType="muxc:ProgressRing">
 		<Setter Property="DeterminateSource" Value="{StaticResource MaterialDeterminateAnimation_Uno}" />
 		<Setter Property="IndeterminateSource" Value="{StaticResource MaterialIndeterminateAnimation_Uno}" />
@@ -44,13 +44,13 @@
 		<Setter Property="Background" Value="{ThemeResource ProgressRingBackground}" />
 	</not_win:Style>
 
-	<win:Style x:Key="MaterialProgressRingStyle"
+	<win:Style x:Key="SimpleProgressRingStyle"
 			   TargetType="muxc:ProgressRing">
 		<Setter Property="Foreground" Value="{ThemeResource ProgressRingForeground}" />
 		<Setter Property="Background" Value="{ThemeResource ProgressRingBackground}" />
 	</win:Style>
 
-	<Style x:Key="MaterialDefaultProgressRingStyle"
+	<Style x:Key="SimpleDefaultProgressRingStyle"
 		   TargetType="muxc:ProgressRing"
 		   BasedOn="{StaticResource MaterialProgressRingStyle}" />
 </ResourceDictionary>

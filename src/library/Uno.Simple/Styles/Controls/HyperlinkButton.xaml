@@ -62,7 +62,7 @@
 		</ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
-    <Style x:Key="MaterialHyperlinkButtonStyle"
+    <Style x:Key="SimpleHyperlinkButtonStyle"
            TargetType="HyperlinkButton">
 
         <Setter Property="Foreground" Value="{ThemeResource HyperlinkButtonForeground}" />
@@ -146,14 +146,14 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MaterialSecondaryHyperlinkButtonStyle"
+    <Style x:Key="SimpleSecondaryHyperlinkButtonStyle"
            TargetType="HyperlinkButton"
            BasedOn="{StaticResource MaterialHyperlinkButtonStyle}">
 
         <Setter Property="Foreground" Value="{ThemeResource SecondaryBrush}" />
     </Style>
 
-	<Style x:Key="MaterialDefaultHyperlinkButtonStyle"
+	<Style x:Key="SimpleDefaultHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton"
 		   BasedOn="{StaticResource MaterialHyperlinkButtonStyle}" />
 </ResourceDictionary>
