@@ -31,7 +31,11 @@ sealed partial class App : Application
 	/// will be used such as when the application is launched to open a specific file.
 	/// </summary>
 	/// <param name="e">Details about the launch request and process.</param>
+#if IS_WINUI_UNO_SDK
+	protected internal override void OnLaunched(LaunchActivatedEventArgs e)
+#else
 	protected override void OnLaunched(LaunchActivatedEventArgs e)
+#endif
 	{
 #if DEBUG
 		if (System.Diagnostics.Debugger.IsAttached)
