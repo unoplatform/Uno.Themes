@@ -32,7 +32,7 @@ sealed partial class App : Application
 	/// </summary>
 	/// <param name="e">Details about the launch request and process.</param>
 #if IS_WINUI
-	protected internal override void OnLaunched(LaunchActivatedEventArgs e)
+	protected override void OnLaunched(LaunchActivatedEventArgs e)
 #else
 	protected override void OnLaunched(LaunchActivatedEventArgs e)
 #endif
