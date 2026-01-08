@@ -8,12 +8,6 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="d not_win">
 
-	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="/Styles/Application/Colors.xaml" />
-		<ResourceDictionary Source="/Styles/Application/Brushes.xaml" />
-		<ResourceDictionary Source="/Styles/Application/Thickness.xaml" />
-	</ResourceDictionary.MergedDictionaries>
-
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
 
@@ -247,7 +241,7 @@
 	<x:String x:Key="IconButtonEllipseHorizontalAlignment">Stretch</x:String>
 
 	<!-- BASE -->
-	<Style x:Key="BaseButtonStyle"
+	<Style x:Key="SimpleBaseButtonStyle"
 		   TargetType="Button">
 
 		<!-- Start: Label Large Typo -->
@@ -270,8 +264,8 @@
 	</Style>
 
 	<!-- ELEVATED -->
-	<Style x:Key="ElevatedButtonStyle"
-		   BasedOn="{StaticResource BaseButtonStyle}"
+	<Style x:Key="SimpleElevatedButtonStyle"
+		   BasedOn="{StaticResource SimpleBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground" Value="{ThemeResource ElevatedButtonForeground}" />
@@ -384,8 +378,8 @@
 	</Style>
 
 	<!-- FILLED -->
-	<Style x:Key="FilledButtonStyle"
-		   BasedOn="{StaticResource BaseButtonStyle}"
+	<Style x:Key="SimpleFilledButtonStyle"
+		   BasedOn="{StaticResource SimpleBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground" Value="{ThemeResource FilledButtonForeground}" />
@@ -493,8 +487,8 @@
 	</Style>
 
 	<!-- FILLED TONAL -->
-	<Style x:Key="FilledTonalButtonStyle"
-		   BasedOn="{StaticResource BaseButtonStyle}"
+	<Style x:Key="SimpleFilledTonalButtonStyle"
+		   BasedOn="{StaticResource SimpleBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
@@ -603,13 +597,11 @@
 	</Style>
 
 	<!-- OUTLINED -->
-	<Style x:Key="OutlinedButtonStyle"
-		   BasedOn="{StaticResource BaseButtonStyle}"
+	<Style x:Key="SimpleOutlinedButtonStyle"
+		   BasedOn="{StaticResource SimpleBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground" Value="{ThemeResource OutlinedButtonForeground}" />
-		<!-- Following  M3 Guidelines and Uno Figma file: -->
-		<!-- Background is Optional and Default is Transparent -->
 		<Setter Property="Background" Value="{ThemeResource OutlinedButtonBackground}" />
 		<Setter Property="BorderThickness" Value="{ThemeResource OutlinedButtonBorderThickness}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrush}" />
@@ -707,8 +699,8 @@
 	</Style>
 
 	<!-- TEXT -->
-	<Style x:Key="TextButtonStyle"
-		   BasedOn="{StaticResource BaseButtonStyle}"
+	<Style x:Key="SimpleTextButtonStyle"
+		   BasedOn="{StaticResource SimpleBaseButtonStyle}"
 		   TargetType="Button">
 
 		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
@@ -809,8 +801,8 @@
 	</Style>
 
 	<!-- ICON BUTTON -->
-	<Style x:Key="IconButtonStyle"
-		   BasedOn="{StaticResource BaseButtonStyle}"
+	<Style x:Key="SimpleIconButtonStyle"
+		   BasedOn="{StaticResource SimpleBaseButtonStyle}"
 		   TargetType="Button">
 		<Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
 		<Setter Property="Background" Value="Transparent" />
@@ -887,7 +879,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="DefaultButtonStyle"
+	<Style x:Key="SimpleDefaultButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource FilledButtonStyle}" />
+		   BasedOn="{StaticResource SimpleFilledButtonStyle}" />
 </ResourceDictionary>
