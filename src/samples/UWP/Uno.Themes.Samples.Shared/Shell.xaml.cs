@@ -86,7 +86,7 @@ public sealed partial class Shell : UserControl
 		switch (root.ActualTheme)
 		{
 			case ElementTheme.Default:
-				DarkLightModeToggle.IsChecked = SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark;
+				DarkLightModeToggle.IsChecked = Helpers.SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark;
 				break;
 			case ElementTheme.Light:
 				DarkLightModeToggle.IsChecked = false;
@@ -105,7 +105,7 @@ public sealed partial class Shell : UserControl
 			switch (root.ActualTheme)
 			{
 				case ElementTheme.Default:
-					if (SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark)
+					if (Helpers.SystemThemeHelper.GetSystemApplicationTheme() == ApplicationTheme.Dark)
 					{
 						root.RequestedTheme = ElementTheme.Light;
 					}

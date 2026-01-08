@@ -1,0 +1,53 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Themes.Samples</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>uno.platform.themes</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Uno.Themes Sample Application powered by Uno Platform.</Description>
+
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+
+    <!-- Required for shared project -->
+    <DefineConstants>$(DefineConstants);IS_WINUI</DefineConstants>
+
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+
+    <!-- Disable default app definition since the shared project provides App.xaml -->
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.ShowMeTheXAML" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
+    <!-- Exclude Uno.Core.Extensions.Disposables to avoid type conflict with Uno.Foundation.SerialDisposable -->
+    <PackageReference Include="Uno.Core.Extensions.Disposables" ExcludeAssets="all" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj" />
+    <ProjectReference Include="../../../library/Uno.Material/Uno.Material.WinUI.csproj" />
+  </ItemGroup>
+
+  <!-- Import shared project items -->
+  <Import Project="../../UWP/Uno.Themes.Samples.Shared/Uno.Themes.Samples.Shared.projitems" Label="Shared" />
+
+</Project>
