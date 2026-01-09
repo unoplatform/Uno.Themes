@@ -590,6 +590,89 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+				<!-- Button Filled -->
+				<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Filled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="Filled"
+							Style="{StaticResource SimpleFilledButtonStyle}" />
+				</smtx:XamlDisplay>
+
+				<!-- Button Filled Disabled -->
+				<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_FilledDisabled"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Content="Filled Disabled"
+							IsEnabled="False"
+							Style="{StaticResource SimpleFilledButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Outlined -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Outlined"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Outlined"
+									Style="{StaticResource SimpleOutlinedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Outlined Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_OutlinedDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Outlined Disabled"
+									IsEnabled="False"
+									Style="{StaticResource SimpleOutlinedButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Text -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Text"
+									Style="{StaticResource SimpleTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Text Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_TextDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Text Disabled"
+									IsEnabled="False"
+									Style="{StaticResource SimpleTextButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Button Icon -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Icon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Style="{StaticResource SimpleButtonIconStyle}">
+								<Button.Content>
+									<SymbolIcon Symbol="Favorite" />
+								</Button.Content>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Icon Button Outlined -->
+						<smtx:XamlDisplay UniqueKey="Simple_IconButtonSamplePage_Outlined"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Outlined"
+									Style="{StaticResource SimpleOutlinedButtonStyle}">
+								<ut:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</ut:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Icon Button Text -->
+						<smtx:XamlDisplay UniqueKey="Simple_IconButtonSamplePage_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Text"
+									Style="{StaticResource SimpleTextButtonStyle}">
+								<ut:ControlExtensions.Icon>
+									<FontIcon Glyph="&#xE946;" />
+								</ut:ControlExtensions.Icon>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

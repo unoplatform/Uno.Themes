@@ -144,6 +144,21 @@
 													   Margin="10,0,0,0" />
 											</StackPanel>
 										</RadioButton>
+
+										<!-- Simple RadioButton -->
+										<RadioButton x:Name="PART_SimpleRadioButton"
+													 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
+													 Visibility="Collapsed"
+													 Margin="0,0,16,0">
+											<StackPanel Orientation="Horizontal">
+
+												<!-- Label -->
+												<TextBlock Text="Simple"
+														   FontSize="20"
+														   FontWeight="Medium"
+														   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
+											</StackPanel>
+										</RadioButton>
 									</StackPanel>
 
 									<Grid>
@@ -181,6 +196,14 @@
 										<ContentPresenter x:Name="CupertinoContentPresenter"
 														  Content="{TemplateBinding Content}"
 														  ContentTemplate="{TemplateBinding CupertinoTemplate}"
+														  VerticalAlignment="Stretch"
+														  HorizontalAlignment="Stretch"
+														  Visibility="Collapsed" />
+
+										<!-- Simple Content -->
+										<ContentPresenter x:Name="SimpleContentPresenter"
+														  Content="{TemplateBinding Content}"
+														  ContentTemplate="{TemplateBinding SimpleTemplate}"
 														  VerticalAlignment="Stretch"
 														  HorizontalAlignment="Stretch"
 														  Visibility="Collapsed" />
@@ -270,6 +293,21 @@
 										   Margin="10,0,0,0" />
 								</StackPanel>
 							</RadioButton>
+
+							<!-- Simple RadioButton -->
+							<RadioButton x:Name="PART_StickySimpleRadioButton"
+										 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
+										 Visibility="Collapsed"
+										 Margin="0,0,16,0">
+								<StackPanel Orientation="Horizontal">
+
+									<!-- Label -->
+									<TextBlock Text="Simple"
+											   FontSize="20"
+											   FontWeight="Medium"
+											   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
+								</StackPanel>
+							</RadioButton>
 						</StackPanel>
 
 						<VisualStateManager.VisualStateGroups>
@@ -315,6 +353,13 @@
 								<VisualState x:Name="Cupertino">
 									<VisualState.Setters>
 										<Setter Target="CupertinoContentPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Simple">
+									<VisualState.Setters>
+										<Setter Target="SimpleContentPresenter.Visibility"
 												Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>

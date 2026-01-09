@@ -4,4 +4,5 @@ public enum Design
 {
 	Material,
 	Cupertino,
+	Simple,
 }

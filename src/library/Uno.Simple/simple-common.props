@@ -1,0 +1,98 @@
+<Project>
+	<PropertyGroup>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<UnoUIUseRoslynSourceGenerators>true</UnoUIUseRoslynSourceGenerators>
+		<NoWarn>$(NoWarn);UNO0001</NoWarn>
+		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release'">true</UnoXamlResourcesTrimming>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
+	</ItemGroup>
+
+	<Choose>
+		<When Condition="$(IsIOSOrCatalyst) or $(_IsAndroid)">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="mobile" />
+				<ExcludeXamlNamespaces Include="not_mobile" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="not_mobile" />
+				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<!-- NOTE: These two conditionals ONLY work under Uno targets and not Windows Desktop so they need to be used within the context of not_win or finer constraints -->
+	<!-- Make sure to add these aliases to the mc:Ignorable when using -->
+	<Choose>
+		<When Condition="'$(FrameworkLineage)'=='UWP'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="uwp" />
+				<ExcludeXamlNamespaces Include="winui" />
+			</ItemGroup>
+		</When>
+		<When Condition="'$(FrameworkLineage)'=='WinUI'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="winui" />
+				<ExcludeXamlNamespaces Include="uwp" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<ExcludeXamlNamespaces Include="winui" />
+				<ExcludeXamlNamespaces Include="uwp" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Styles\Application\ColorPalette.xaml" />
+		<None Remove="Styles\Application\SimpleColors.xaml" />
+		<None Remove="Styles\Application\Thickness.xaml" />
+		<None Remove="Styles\Application\Common\Fonts.xaml" />
+		<None Remove="Styles\Controls\_Resources.xaml" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
+		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
+			<LogicalName>$(AssemblyName).xml</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<XamlMergeOutputFiles Include="Generated\mergedpages.xaml" />
+
+		<XamlMergeInput Include="Styles\Controls\**\*.xaml" MergeFile="mergedpages.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" MergeFile="mergedpages.xaml" />
+
+		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
+		<XamlMergeInput Remove="Styles\Application\SimpleColors.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Thickness.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Common\Fonts.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\Uno.Themes\Helpers\LinkerAttributes.cs" Link="Helpers\LinkerAttributes.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Uno.Core.Extensions.Disposables" />
+		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">
+		<Using Include="Uno.Simple" />
+	</ItemGroup>
+
+	<Import Project="..\xamlmerge.targets" />
+</Project>

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\tfm-common-winui.props" />
+
+	<!--
+	Adding project references to this project requires some manual adjustments.
+	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
+	-->
+	<PropertyGroup>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<DefineConstants>WINUI</DefineConstants>
+		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Uno.Simple\Uno.Simple.WinUI.csproj" />
+		<ProjectReference Include="..\Uno.Themes.WinUI.Markup\Uno.Themes.WinUI.Markup.csproj" />
+		<ProjectReference Include="..\Uno.Themes\Uno.Themes.WinUI.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Uno.Extensions.Markup.Generators" PrivateAssets="All" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<PackageDescription>A set of C# for Markup helpers for Uno.Simple.WinUI</PackageDescription>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">
+		<Using Include="Uno.Simple.Markup" />
+	</ItemGroup>
+
+	<Import Project="..\..\..\winappsdk-workaround.targets" />
+</Project>
