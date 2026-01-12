@@ -166,7 +166,14 @@
 										<!-- Material Content -->
 										<StackPanel x:Name="MaterialContent"
 													Visibility="Collapsed">
-
+											<StackPanel.Resources>
+												<ResourceDictionary>
+													<ResourceDictionary.MergedDictionaries>
+														<MaterialTheme xmlns="using:Uno.Material"
+																	   ColorOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+													</ResourceDictionary.MergedDictionaries>
+												</ResourceDictionary>
+											</StackPanel.Resources>
 											<ComboBox x:Name="MaterialVersionComboBox"
 													  Header="Material Design Version:"
 													  Margin="0,20"
@@ -206,7 +213,15 @@
 														  ContentTemplate="{TemplateBinding SimpleTemplate}"
 														  VerticalAlignment="Stretch"
 														  HorizontalAlignment="Stretch"
-														  Visibility="Collapsed" />
+														  Visibility="Collapsed">
+											<ContentPresenter.Resources>
+												<ResourceDictionary>
+													<ResourceDictionary.MergedDictionaries>
+														<SimpleTheme xmlns="using:Uno.Simple" />
+													</ResourceDictionary.MergedDictionaries>
+												</ResourceDictionary>
+											</ContentPresenter.Resources>
+										</ContentPresenter>
 									</Grid>
 
 									<!-- Optional link to documentation -->

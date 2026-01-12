@@ -8,7 +8,7 @@
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:smtx="using:ShowMeTheXAML"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-	
+
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
 			<sample:SamplePageLayout.MaterialTemplate>
@@ -53,6 +53,20 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="Simple_CalendarView">
+							<CalendarView SelectionMode="Multiple"
+										  Style="{StaticResource SimpleCalendarViewStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_CalendarDatePicker">
+							<CalendarDatePicker Header="Select"
+												Style="{StaticResource SimpleCalendarDatePickerStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
