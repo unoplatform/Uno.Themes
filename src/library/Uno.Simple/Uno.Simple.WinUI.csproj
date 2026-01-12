@@ -1,4 +1,4 @@
-
+﻿
 <Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="..\tfm-common-winui.props" />
 
@@ -14,6 +14,11 @@
 	</PropertyGroup>
 
 	<Import Project="simple-common.props" />
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Assets\SimpleDeterminate.json" />
+	  <EmbeddedResource Include="Assets\SimpleIndeterminate.json" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Uno.WinUI" />
@@ -37,6 +42,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Controls\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Styles\Controls\ComboBox.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 
 	<Import Project="..\..\..\winappsdk-workaround.targets" />

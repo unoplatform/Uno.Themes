@@ -20,20 +20,33 @@ namespace Uno.Simple;
 public class SimpleTheme : BaseTheme
 {
 	public SimpleTheme()
-	{ }
+		: this(colorOverride: null, fontOverride: null)
+	{
+	}
 
 	public SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
-		: base(colorOverride, fontOverride)
-	{ }
+		: base(GetSimpleColorOverride(colorOverride), fontOverride)
+	{
+	}
+
+	private static ResourceDictionary GetSimpleColorOverride(ResourceDictionary colorOverride)
+	{
+		// Create a color override dictionary that loads SimpleColors
+		var simpleColors = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.SimpleColors) };
+		
+		if (colorOverride is { })
+		{
+			simpleColors.SafeMerge(colorOverride);
+		}
+		
+		return simpleColors;
+	}
 
 	protected override ResourceDictionary GenerateSpecificResources()
 	{
 		var mergedPages = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.MergedPages) };
 
 		var fonts = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Common.Fonts) };
-		var colors = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.SimpleColors) };
-		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.ColorPalette) });
-		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Thickness) });
 
 		if (FontOverrideDictionary is { } fontOverride)
 		{
@@ -41,7 +54,6 @@ public class SimpleTheme : BaseTheme
 		}
 
 		mergedPages.MergedDictionaries.Add(fonts);
-		mergedPages.MergedDictionaries.Add(colors);
 		return mergedPages;
 	}
 }

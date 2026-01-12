@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:lottie_win="using:Microsoft.Toolkit.Uwp.UI.Lottie"
+					xmlns:lottie_not_win="#using:Microsoft.Toolkit.Uwp.UI.Lottie;CommunityToolkit.WinUI.Lottie"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:uwp="http://uno.ui/uwp"
+					xmlns:winui="http://uno.ui/winui"
+					xmlns:um="using:Uno.Simple"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					mc:Ignorable="d not_win lottie_not_win uwp winui">
+
+	<ResourceDictionary.MergedDictionaries>
+		<not_win:ResourceDictionary>
+			<lottie_not_win:LottieVisualSource x:Key="SimpleDeterminateAnimation_Uno"
+											   uwp:UriSource="embedded://Uno.Simple/Uno.Simple.Assets.SimpleDeterminate.json"
+											   winui:UriSource="embedded://Uno.Simple.WinUI/Uno.Simple.WinUI.Assets.SimpleDeterminate.json" />
+			<lottie_not_win:LottieVisualSource x:Key="SimpleIndeterminateAnimation_Uno"
+											   uwp:UriSource="embedded://Uno.Simple/Uno.Simple.Assets.SimpleIndeterminate.json"
+											   winui:UriSource="embedded://Uno.Simple.WinUI/Uno.Simple.WinUI.Assets.SimpleIndeterminate.json" />
+		</not_win:ResourceDictionary>
+	</ResourceDictionary.MergedDictionaries>
+
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<!-- SimpleProgressRingStyle -->
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SystemControlTransparentBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<!-- SimpleProgressRingStyle -->
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SystemControlTransparentBrush" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+	<not_win:Style x:Key="SimpleProgressRingStyle"
+				   TargetType="muxc:ProgressRing">
+		<Setter Property="DeterminateSource" Value="{StaticResource SimpleDeterminateAnimation_Uno}" />
+		<Setter Property="IndeterminateSource" Value="{StaticResource SimpleIndeterminateAnimation_Uno}" />
+		<Setter Property="Foreground" Value="{ThemeResource ProgressRingForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ProgressRingBackground}" />
+	</not_win:Style>
+
+	<win:Style x:Key="SimpleProgressRingStyle"
+			   TargetType="muxc:ProgressRing">
+		<Setter Property="Foreground" Value="{ThemeResource ProgressRingForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ProgressRingBackground}" />
+	</win:Style>
+
+	<Style x:Key="SimpleDefaultProgressRingStyle"
+		   TargetType="muxc:ProgressRing"
+		   BasedOn="{StaticResource SimpleProgressRingStyle}" />
+</ResourceDictionary>

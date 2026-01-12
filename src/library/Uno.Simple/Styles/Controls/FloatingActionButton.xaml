@@ -1,0 +1,703 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:um="using:Uno.Simple"
+					xmlns:ut="using:Uno.Themes"
+					mc:Ignorable="d">
+
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<!--#region Default FAB Brushes-->
+			<StaticResource x:Key="FabForeground" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabForegroundPressed" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabForegroundPointerOver" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabBackground" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FabBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FabBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FabBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabStateOverlayBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundPointerOver" ResourceKey="OnPrimaryContainerHoverBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundFocused" ResourceKey="OnPrimaryContainerFocusedBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundPressed" ResourceKey="OnPrimaryContainerPressedBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Surface FAB Brushes-->
+			<StaticResource x:Key="FabSurfaceForeground" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabSurfaceForegroundPressed" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabSurfaceForegroundPointerOver" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabSurfaceForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabSurfaceBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FabSurfaceBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FabSurfaceBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FabSurfaceBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Secondary FAB Brushes-->
+			<StaticResource x:Key="FabSecondaryForeground" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabSecondaryForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundPointerOver" ResourceKey="OnSecondaryContainerHoverBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundFocused" ResourceKey="OnSecondaryContainerFocusedBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundPressed" ResourceKey="OnSecondaryContainerPressedBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Tertiary FAB Brushes-->
+			<StaticResource x:Key="FabTertiaryForeground" ResourceKey="OnTertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryForegroundPointerOver" ResourceKey="OnTertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryForegroundPressed" ResourceKey="OnTertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabTertiaryBackground" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryBackgroundPointerOver" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Default FAB Resources-->
+			<Thickness x:Key="SimpleFabPadding">20</Thickness>
+			<x:Double x:Key="SimpleFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="SimpleFabCornerRadius">16</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Small FAB Resources-->
+			<Thickness x:Key="SimpleSmallFabPadding">12</Thickness>
+			<x:Double x:Key="SimpleSmallFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="SimpleSmallFabCornerRadius">12</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Large FAB Resources-->
+			<Thickness x:Key="SimpleLargeFabPadding">36</Thickness>
+			<x:Double x:Key="SimpleLargeFabContentWidthOrHeight">24</x:Double>
+			<CornerRadius x:Key="SimpleLargeFabCornerRadius">28</CornerRadius>
+			<!--#endregion-->
+
+			<x:Double x:Key="SimpleFabIconTextPadding">12</x:Double>
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Light">
+			<!--#region Default FAB Brushes-->
+			<StaticResource x:Key="FabForeground" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabForegroundPressed" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabForegroundPointerOver" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabBackground" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FabBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FabBackgroundPointerOver" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="FabBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabStateOverlayBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundPointerOver" ResourceKey="OnPrimaryContainerHoverBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundFocused" ResourceKey="OnPrimaryContainerFocusedBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundPressed" ResourceKey="OnPrimaryContainerPressedBrush" />
+			<StaticResource x:Key="FabStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Surface FAB Brushes-->
+			<StaticResource x:Key="FabSurfaceForeground" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabSurfaceForegroundPressed" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabSurfaceForegroundPointerOver" ResourceKey="OnPrimaryContainerBrush" />
+			<StaticResource x:Key="FabSurfaceForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabSurfaceBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FabSurfaceBackgroundPressed" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FabSurfaceBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FabSurfaceBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundPointerOver" ResourceKey="PrimaryHoverBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundFocused" ResourceKey="PrimaryFocusedBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundPressed" ResourceKey="PrimaryPressedBrush" />
+			<StaticResource x:Key="FabSurfaceStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Secondary FAB Brushes-->
+			<StaticResource x:Key="FabSecondaryForeground" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabSecondaryForegroundPointerOver" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryForegroundPressed" ResourceKey="OnSecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackground" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackgroundPointerOver" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackgroundPressed" ResourceKey="SecondaryContainerBrush" />
+			<StaticResource x:Key="FabSecondaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundPointerOver" ResourceKey="OnSecondaryContainerHoverBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundFocused" ResourceKey="OnSecondaryContainerFocusedBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundPressed" ResourceKey="OnSecondaryContainerPressedBrush" />
+			<StaticResource x:Key="FabSecondaryStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Tertiary FAB Brushes-->
+			<StaticResource x:Key="FabTertiaryForeground" ResourceKey="OnTertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryForegroundPointerOver" ResourceKey="OnTertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryForegroundPressed" ResourceKey="OnTertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FabTertiaryBackground" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryBackgroundPointerOver" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryBackgroundPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="FabTertiaryBackgroundDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FabTertiaryStateOverlayBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<!--#endregion-->
+
+			<!--#region Default FAB Resources-->
+			<Thickness x:Key="SimpleFabPadding">20</Thickness>
+			<x:Double x:Key="SimpleFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="SimpleFabCornerRadius">16</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Small FAB Resources-->
+			<Thickness x:Key="SimpleSmallFabPadding">12</Thickness>
+			<x:Double x:Key="SimpleSmallFabContentWidthOrHeight">16</x:Double>
+			<CornerRadius x:Key="SimpleSmallFabCornerRadius">12</CornerRadius>
+			<!--#endregion-->
+
+			<!--#region Large FAB Resources-->
+			<Thickness x:Key="SimpleLargeFabPadding">36</Thickness>
+			<x:Double x:Key="SimpleLargeFabContentWidthOrHeight">24</x:Double>
+			<CornerRadius x:Key="SimpleLargeFabCornerRadius">28</CornerRadius>
+			<!--#endregion-->
+
+			<x:Double x:Key="SimpleFabIconTextPadding">12</x:Double>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+
+
+	<!--#region Default Color Variants-->
+	<Style x:Key="SimpleFabStyle"
+		   TargetType="Button">
+		<Setter Property="Background" Value="{ThemeResource FabBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource FabForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource LabelLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleFabPadding}" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<toolkit:ElevatedView x:Name="ElevatedView"
+											  Margin="0,0,6,6"
+											  Background="Transparent"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  Elevation="6">
+							<Grid x:Name="Root"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  Background="{TemplateBinding Background}">
+								<StackPanel x:Name="ContentPanel"
+											Padding="{TemplateBinding Padding}"
+											Orientation="Horizontal">
+
+									<!-- Icon -->
+									<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+											 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+											 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+														  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+									</Viewbox>
+
+									<!-- Icon/Content spacing -->
+									<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Width="{ThemeResource SimpleFabIconTextPadding}"
+												Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+									</Border>
+
+									<!-- Content -->
+									<ContentPresenter x:Name="ContentPresenter"
+													  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontWeight="{TemplateBinding FontWeight}"
+													  FontSize="{TemplateBinding FontSize}" />
+								</StackPanel>
+
+								<Border x:Name="StateOverlay" />
+							</Grid>
+						</toolkit:ElevatedView>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabStateOverlayBackgroundPointerOver}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabBackgroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabStateOverlayBackgroundPressed}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabBackgroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabBackgroundDisabled}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabStateOverlayBackgroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabStateOverlayBackgroundFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SimpleSurfaceFabStyle"
+		   BasedOn="{StaticResource SimpleFabStyle}"
+		   TargetType="Button">
+
+		<Setter Property="Background" Value="{ThemeResource FabSurfaceBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource FabSurfaceForeground}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleFabPadding}" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<toolkit:ElevatedView x:Name="ElevatedView"
+											  Margin="0,0,6,6"
+											  Background="Transparent"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  Elevation="6">
+							<Grid x:Name="Root"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  Background="{TemplateBinding Background}">
+								<StackPanel x:Name="ContentPanel"
+											Padding="{TemplateBinding Padding}"
+											Orientation="Horizontal">
+
+									<!-- Icon -->
+									<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+											 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+											 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+														  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+									</Viewbox>
+
+									<!-- Icon/Content spacing -->
+									<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Width="{ThemeResource SimpleFabIconTextPadding}"
+												Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+									</Border>
+
+									<!-- Content -->
+									<ContentPresenter x:Name="ContentPresenter"
+													  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontWeight="{TemplateBinding FontWeight}"
+													  FontSize="{TemplateBinding FontSize}" />
+								</StackPanel>
+
+								<Border x:Name="StateOverlay" />
+							</Grid>
+						</toolkit:ElevatedView>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSurfaceStateOverlayBackgroundPointerOver}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabSurfaceForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabSurfaceForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabSurfaceBackgroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSurfaceStateOverlayBackgroundPressed}" />
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabSurfaceForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabSurfaceForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabSurfaceBackgroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabSurfaceForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabSurfaceForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabSurfaceBackgroundDisabled}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSurfaceStateOverlayBackgroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSurfaceStateOverlayBackgroundFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SimpleSecondaryFabStyle"
+		   BasedOn="{StaticResource SimpleFabStyle}"
+		   TargetType="Button">
+
+		<Setter Property="Background" Value="{ThemeResource FabSecondaryBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource FabSecondaryForeground}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleFabPadding}" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<toolkit:ElevatedView x:Name="ElevatedView"
+											  Margin="0,0,6,6"
+											  Background="Transparent"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  Elevation="6">
+
+							<Grid x:Name="Root"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  Background="{TemplateBinding Background}">
+								<StackPanel x:Name="ContentPanel"
+											Padding="{TemplateBinding Padding}"
+											Orientation="Horizontal">
+
+									<!-- Icon -->
+									<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+											 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+											 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+														  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+									</Viewbox>
+
+									<!-- Icon/Content spacing -->
+									<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Width="{ThemeResource SimpleFabIconTextPadding}"
+												Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+									</Border>
+
+									<!-- Content -->
+									<ContentPresenter x:Name="ContentPresenter"
+													  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontWeight="{TemplateBinding FontWeight}"
+													  FontSize="{TemplateBinding FontSize}" />
+								</StackPanel>
+
+								<Border x:Name="StateOverlay" />
+							</Grid>
+						</toolkit:ElevatedView>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabSecondaryForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabSecondaryForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabSecondaryBackgroundPointerOver}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSecondaryStateOverlayBackgroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabSecondaryForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabSecondaryForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabSecondaryBackgroundPressed}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSecondaryStateOverlayBackgroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabSecondaryForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabSecondaryForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabSecondaryBackgroundDisabled}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSecondaryStateOverlayBackgroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabSecondaryStateOverlayBackgroundFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SimpleTertiaryFabStyle"
+		   BasedOn="{StaticResource SimpleFabStyle}"
+		   TargetType="Button">
+
+		<Setter Property="Background" Value="{ThemeResource FabTertiaryBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource FabTertiaryForeground}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleFabPadding}" />
+
+		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
+		<Setter Property="ut:ControlExtensions.Icon" Value="{x:Null}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleFabContentWidthOrHeight}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<toolkit:ElevatedView x:Name="ElevatedView"
+											  Margin="0,0,6,6"
+											  Background="Transparent"
+											  CornerRadius="{TemplateBinding CornerRadius}"
+											  Elevation="6">
+							<Grid x:Name="Root"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}"
+								  CornerRadius="{TemplateBinding CornerRadius}"
+								  Background="{TemplateBinding Background}">
+								<StackPanel x:Name="ContentPanel"
+											Padding="{TemplateBinding Padding}"
+											Orientation="Horizontal">
+
+									<!-- Icon -->
+									<Viewbox Width="{Binding Path=(ut:ControlExtensions.IconWidth), RelativeSource={RelativeSource TemplatedParent}}"
+											 Height="{Binding Path=(ut:ControlExtensions.IconHeight), RelativeSource={RelativeSource TemplatedParent}}"
+											 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											 Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<ContentPresenter x:Name="IconPresenter"
+														  Content="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+														  Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+									</Viewbox>
+
+									<!-- Icon/Content spacing -->
+									<Border Visibility="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
+										<Border Width="{ThemeResource SimpleFabIconTextPadding}"
+												Visibility="{Binding Path=(ut:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+									</Border>
+
+									<!-- Content -->
+									<ContentPresenter x:Name="ContentPresenter"
+													  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+													  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding ContentTemplate}"
+													  ContentTransitions="{TemplateBinding ContentTransitions}"
+													  FontFamily="{TemplateBinding FontFamily}"
+													  FontWeight="{TemplateBinding FontWeight}"
+													  FontSize="{TemplateBinding FontSize}" />
+								</StackPanel>
+
+								<Border x:Name="StateOverlay" />
+							</Grid>
+						</toolkit:ElevatedView>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabTertiaryForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabTertiaryForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabTertiaryBackgroundPointerOver}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabTertiaryStateOverlayBackgroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabTertiaryForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabTertiaryForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabTertiaryBackgroundPressed}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabTertiaryStateOverlayBackgroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="IconPresenter.Foreground" Value="{ThemeResource FabTertiaryForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FabTertiaryForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FabTertiaryBackgroundDisabled}" />
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabTertiaryStateOverlayBackgroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="StateOverlay.Background" Value="{ThemeResource FabTertiaryStateOverlayBackgroundFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!--#endregion-->
+
+	<!--#region Small Color Variants-->
+	<Style x:Key="SimpleSmallFabStyle"
+		   BasedOn="{StaticResource SimpleFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSmallFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+	</Style>
+
+	<Style x:Key="SimpleSurfaceSmallFabStyle"
+		   BasedOn="{StaticResource SimpleSurfaceFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSmallFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+	</Style>
+
+	<Style x:Key="SimpleSecondarySmallFabStyle"
+		   BasedOn="{StaticResource SimpleSecondaryFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSmallFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+	</Style>
+
+	<Style x:Key="SimpleTertiarySmallFabStyle"
+		   BasedOn="{StaticResource SimpleTertiaryFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleSmallFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSmallFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleSmallFabContentWidthOrHeight}" />
+	</Style>
+	<!--#endregion-->
+
+	<!--#region Large Color Variants-->
+	<Style x:Key="SimpleLargeFabStyle"
+		   BasedOn="{StaticResource SimpleFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleLargeFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+	</Style>
+
+	<Style x:Key="SimpleSurfaceLargeFabStyle"
+		   BasedOn="{StaticResource SimpleSurfaceFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleLargeFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+	</Style>
+
+	<Style x:Key="SimpleSecondaryLargeFabStyle"
+		   BasedOn="{StaticResource SimpleSecondaryFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleLargeFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+	</Style>
+
+	<Style x:Key="SimpleTertiaryLargeFabStyle"
+		   BasedOn="{StaticResource SimpleTertiaryFabStyle}"
+		   TargetType="Button">
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleLargeFabCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleLargeFabPadding}" />
+		<Setter Property="ut:ControlExtensions.IconHeight" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+		<Setter Property="ut:ControlExtensions.IconWidth" Value="{ThemeResource SimpleLargeFabContentWidthOrHeight}" />
+	</Style>
+	<!--#endregion-->
+</ResourceDictionary>
