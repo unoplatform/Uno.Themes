@@ -334,6 +334,37 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Heading 1 -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBlockSamplePage_Heading1"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Heading 1" />
+						</smtx:XamlDisplay>
+
+						<!-- Heading 2 -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBlockSamplePage_Heading2"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Heading 2" />
+						</smtx:XamlDisplay>
+
+						<!-- Body -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBlockSamplePage_Body"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Body - Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet. Pharetra semper ullamcorper neque mollis vestibulum luctus gravida facilisi rhoncus, rutrum massa bibendum vitae imperdiet quisque fames dignissim, varius curae erat risus platea orci quis scelerisque." />
+						</smtx:XamlDisplay>
+
+						<!-- Caption -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBlockSamplePage_Caption"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBlock Text="Caption -  Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare" />
+						</smtx:XamlDisplay>
+
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

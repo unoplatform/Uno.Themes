@@ -651,6 +651,105 @@
 					<StackPanel />
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Flyout Text -->
+						<TextBlock Text="Flyout"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_FlyoutSamplePage_Flyout">
+
+							<Button Content="Flyout">
+								<Button.Flyout>
+									<Flyout FlyoutPresenterStyle="{StaticResource SimpleContentFlyoutPresenterStyle}">
+										<TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Flyout Text -->
+						<TextBlock Text="MenuFlyout &amp; Icons"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_FlyoutSamplePage_Flyout_Icons">
+
+							<Button Content="Open">
+								<Button.Flyout>
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource SimpleMenuFlyoutPresenterStyle}">
+
+										<MenuFlyoutItem Text="Like"
+														Style="{StaticResource SimpleMenuFlyoutItemStyle}">
+											<MenuFlyoutItem.Icon>
+												<SymbolIcon Symbol="Like" />
+											</MenuFlyoutItem.Icon>
+										</MenuFlyoutItem>
+
+										<MenuFlyoutItem Text="Dislike"
+														Style="{StaticResource SimpleMenuFlyoutItemStyle}">
+											<MenuFlyoutItem.Icon>
+												<SymbolIcon Symbol="Dislike" />
+											</MenuFlyoutItem.Icon>
+										</MenuFlyoutItem>
+
+										<MenuFlyoutSeparator Style="{StaticResource SimpleMenuFlyoutSeparatorStyle}" />
+
+										<MenuFlyoutItem Text="Calculator"
+														Icon="Calculator"
+														Style="{StaticResource SimpleMenuFlyoutItemStyle}" />
+
+										<MenuFlyoutItem Text="Camera"
+														Icon="Camera"
+														KeyboardAcceleratorTextOverride="Ctrl+C"
+														Style="{StaticResource SimpleMenuFlyoutItemStyle}" />
+
+										<MenuFlyoutItem Text="Calendar"
+														Icon="Calendar"
+														IsEnabled="False"
+														KeyboardAcceleratorTextOverride="Ctrl+C"
+														Style="{StaticResource SimpleMenuFlyoutItemStyle}" />
+									</MenuFlyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Flyout Text -->
+						<TextBlock Text="MenuFlyout &amp; Toggles"
+								   Margin="0,16,0,0" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_FlyoutSamplePage_MenuFlyout_Toggles">
+
+							<Button Content="Options">
+								<Button.Flyout>
+									<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource SimpleMenuFlyoutPresenterStyle}">
+
+										<MenuFlyoutItem Text="Clear History"
+														KeyboardAcceleratorTextOverride="Ctrl+Shift+C"
+														Style="{StaticResource SimpleMenuFlyoutItemStyle}" />
+
+										<MenuFlyoutSeparator Style="{StaticResource SimpleMenuFlyoutSeparatorStyle}" />
+
+										<ToggleMenuFlyoutItem Text="Incognito Mode"
+															  IsChecked="True"
+															  Style="{StaticResource SimpleToggleMenuFlyoutItemStyle}" />
+
+										<ToggleMenuFlyoutItem Text="Dark Mode"
+															  IsChecked="True"
+															  KeyboardAcceleratorTextOverride="Ctrl+D"
+															  Style="{StaticResource SimpleToggleMenuFlyoutItemStyle}" />
+
+										<ToggleMenuFlyoutItem Text="High Contrast Mode"
+															  IsChecked="True"
+															  IsEnabled="False"
+															  Style="{StaticResource SimpleToggleMenuFlyoutItemStyle}" />
+									</MenuFlyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

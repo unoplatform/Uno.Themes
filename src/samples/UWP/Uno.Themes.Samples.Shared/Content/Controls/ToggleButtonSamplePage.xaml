@@ -73,6 +73,67 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel Margin="12,0">
+						<!-- ToggleButton Icon Unchecked -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_ToggleButtonSamplePage_IconUnchecked">
+							<ToggleButton Style="{StaticResource SimpleIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+
+						<!-- ToggleButton Icon Checked -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_ToggleButtonSamplePage_IconChecked">
+							<ToggleButton IsChecked="True"
+										  Style="{StaticResource SimpleIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+
+						<!-- ToggleButton Unchecked Disabled -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_ToggleButtonSamplePage_IconUncheckedDisabled">
+							<ToggleButton IsEnabled="False"
+										  Style="{StaticResource SimpleIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+
+						<!-- ToggleButton Icon Checked Disabled -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_ToggleButtonSamplePage_IconCheckedDisabled">
+							<ToggleButton IsChecked="True"
+										  IsEnabled="False"
+										  Style="{StaticResource SimpleIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

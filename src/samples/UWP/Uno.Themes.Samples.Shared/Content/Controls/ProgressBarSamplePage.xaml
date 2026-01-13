@@ -134,6 +134,42 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Slider Text -->
+						<TextBlock Text="Slider to Set ProgressBar"
+								   Margin="0,10,0,0" />
+
+						<Slider x:Name="Simple_ProgressSlider"
+								Style="{StaticResource SimpleSliderStyle}"
+								Minimum="0"
+								Maximum="100"
+								HorizontalAlignment="Left"
+								Width="250"
+								Margin="0,10" />
+
+						<!-- ProgressBar Text -->
+						<TextBlock Text="ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBarSamplePage">
+							<muxc:ProgressBar Style="{StaticResource SimpleProgressBarStyle}"
+											  Value="{Binding Value, ElementName=Simple_ProgressSlider}"
+											  Minimum="0"
+											  Maximum="100" />
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate ProgressBar Text -->
+						<TextBlock Text="Indeterminate ProgressBar" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBarSamplePage_Indeterminate">
+							<muxc:ProgressBar Style="{StaticResource SimpleProgressBarStyle}"
+											  IsIndeterminate="True" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

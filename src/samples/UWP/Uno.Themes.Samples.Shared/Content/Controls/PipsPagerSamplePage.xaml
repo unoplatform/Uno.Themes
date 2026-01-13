@@ -72,6 +72,68 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- PipsPager Text -->
+						<TextBlock Text="Default PipsPager style" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPagerSamplePage">
+							<muxc:PipsPager Style="{StaticResource SimplePipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Horizontal PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Horizontal PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPagerSamplePage_Horizontal_Navigation_Buttons">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource SimplePipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Vertical PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Vertical PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPagerSamplePage_Vertical_Navigation_Buttons">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											Orientation="Vertical"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource SimplePipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Horizontal Disabled PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Horizontal Disabled PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPagerSamplePage_Horizontal_Navigation_Buttons_Disabled">
+							<muxc:PipsPager IsEnabled="False"
+											NumberOfPages="5"
+											SelectedPageIndex="2"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource SimplePipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Vertical Disabled PipsPager with Navigation Buttons visible -->
+						<TextBlock Text="Vertical Disabled PipsPager with Navigation Buttons visible" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPagerSamplePage_Vertical_Navigation_Buttons_Disabled">
+							<muxc:PipsPager IsEnabled="False"
+											NumberOfPages="5"
+											SelectedPageIndex="2"
+											Orientation="Vertical"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible"
+											Style="{StaticResource SimplePipsPagerStyle}" />
+						</smtx:XamlDisplay>
+
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

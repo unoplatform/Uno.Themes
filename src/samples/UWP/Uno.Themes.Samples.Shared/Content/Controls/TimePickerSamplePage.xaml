@@ -52,6 +52,37 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Default -->
+						<TextBlock Text="Default"
+								   Margin="12,16,12,4" />
+
+						<!-- TimePicker -->
+						<smtx:XamlDisplay UniqueKey="Simple_TimePickerSamplePage_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<TimePicker Header="Select a Time"
+										Style="{StaticResource SimpleTimePickerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<TextBlock Text="Disabled"
+								   Margin="12,8,12,4" />
+
+						<!-- TimePicker -->
+						<smtx:XamlDisplay UniqueKey="Simple_TimePickerSamplePage_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<TimePicker Header="Select a Time"
+										Style="{StaticResource SimpleTimePickerStyle}"
+										IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

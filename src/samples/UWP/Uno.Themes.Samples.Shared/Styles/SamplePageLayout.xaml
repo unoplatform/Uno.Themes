@@ -34,10 +34,8 @@
 	<Style x:Key="DefaultSamplePageLayoutStyle"
 		   TargetType="local:SamplePageLayout">
 
-		<Setter Property="HeaderTemplate"
-				Value="{StaticResource DefaultSamplePageLayoutHeaderTemplate}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource DividerBrush}" />
+		<Setter Property="HeaderTemplate" Value="{StaticResource DefaultSamplePageLayoutHeaderTemplate}" />
+		<Setter Property="BorderBrush" Value="{StaticResource DividerBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -208,20 +206,22 @@
 														  Visibility="Collapsed" />
 
 										<!-- Simple Content -->
-										<ContentPresenter x:Name="SimpleContentPresenter"
-														  Content="{TemplateBinding Content}"
-														  ContentTemplate="{TemplateBinding SimpleTemplate}"
-														  VerticalAlignment="Stretch"
-														  HorizontalAlignment="Stretch"
-														  Visibility="Collapsed">
-											<ContentPresenter.Resources>
+										<Grid x:Name="SimpleContentContainer"
+											  Visibility="Collapsed">
+											<Grid.Resources>
 												<ResourceDictionary>
 													<ResourceDictionary.MergedDictionaries>
 														<SimpleTheme xmlns="using:Uno.Simple" />
 													</ResourceDictionary.MergedDictionaries>
 												</ResourceDictionary>
-											</ContentPresenter.Resources>
-										</ContentPresenter>
+											</Grid.Resources>
+
+											<ContentPresenter x:Name="SimpleContentPresenter"
+															  Content="{TemplateBinding Content}"
+															  ContentTemplate="{TemplateBinding SimpleTemplate}"
+															  VerticalAlignment="Stretch"
+															  HorizontalAlignment="Stretch" />
+										</Grid>
 									</Grid>
 
 									<!-- Optional link to documentation -->
@@ -338,20 +338,13 @@
 										<AdaptiveTrigger MinWindowWidth="0" />
 									</VisualState.StateTriggers>
 									<VisualState.Setters>
-										<Setter Target="ScrollingContent.Margin"
-												Value="16,0" />
-										<Setter Target="ScrollingTitle.Visibility"
-												Value="Visible" />
-										<Setter Target="PART_StickyTabs.Padding"
-												Value="16,0" />
-										<Setter Target="PART_StickyTabs.Margin"
-												Value="0" />
-										<Setter Target="StickyTitle.Visibility"
-												Value="Collapsed" />
-										<Setter Target="PART_MobileTopBar.Visibility"
-												Value="Visible" />
-										<Setter Target="MobileTopBarSeparator.Visibility"
-												Value="Visible" />
+										<Setter Target="ScrollingContent.Margin" Value="16,0" />
+										<Setter Target="ScrollingTitle.Visibility" Value="Visible" />
+										<Setter Target="PART_StickyTabs.Padding" Value="16,0" />
+										<Setter Target="PART_StickyTabs.Margin" Value="0" />
+										<Setter Target="StickyTitle.Visibility" Value="Collapsed" />
+										<Setter Target="PART_MobileTopBar.Visibility" Value="Visible" />
+										<Setter Target="MobileTopBarSeparator.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -360,22 +353,19 @@
 
 								<VisualState x:Name="Material">
 									<VisualState.Setters>
-										<Setter Target="MaterialContent.Visibility"
-												Value="Visible" />
+										<Setter Target="MaterialContent.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Cupertino">
 									<VisualState.Setters>
-										<Setter Target="CupertinoContentPresenter.Visibility"
-												Value="Visible" />
+										<Setter Target="CupertinoContentPresenter.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Simple">
 									<VisualState.Setters>
-										<Setter Target="SimpleContentPresenter.Visibility"
-												Value="Visible" />
+										<Setter Target="SimpleContentContainer.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

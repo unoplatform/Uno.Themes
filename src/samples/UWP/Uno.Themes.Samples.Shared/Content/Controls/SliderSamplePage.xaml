@@ -230,6 +230,57 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!--  Primary  -->
+						<TextBlock Margin="12,16,12,4"
+								   Text="Primary" />
+
+						<!--  Slider Vertical  -->
+						<smtx:XamlDisplay UniqueKey="Simple_SliderSamplePage_Vertical">
+							<StackPanel Orientation="Horizontal"
+										Spacing="5">
+								<Slider Height="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource SimpleSliderStyle}"
+										Value="25" />
+
+								<Slider Height="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource SimpleSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  Slider Horizontal  -->
+						<smtx:XamlDisplay UniqueKey="Simple_SliderSamplePage_Horizontal">
+							<StackPanel Spacing="5">
+								<Slider Width="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource SimpleSliderStyle}"
+										Value="25" />
+
+								<Slider Width="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource SimpleSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

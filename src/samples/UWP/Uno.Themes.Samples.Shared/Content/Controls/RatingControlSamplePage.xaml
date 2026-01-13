@@ -57,6 +57,26 @@
                     </StackPanel>
                 </DataTemplate>
             </sample:SamplePageLayout.M3MaterialTemplate>
-        </sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default style -->
+						<TextBlock Text="Simple RatingControl style with label"
+								   Margin="0,0,16,0" />
+						<smtx:XamlDisplay UniqueKey="Simple_DefaultRatingControlSamplePage">
+							<muxc:RatingControl Style="{StaticResource SimpleRatingControlStyle}"
+												Caption="Label" />
+						</smtx:XamlDisplay>
+
+						<!-- Without label -->
+						<TextBlock Text="Simple RatingControl style without label"
+								   Margin="0,0,16,0" />
+						<smtx:XamlDisplay UniqueKey="Simple_RatingControlSamplePage">
+							<muxc:RatingControl Style="{StaticResource SimpleRatingControlStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
+			</sample:SamplePageLayout>
     </Grid>
 </Page>

@@ -26,6 +26,7 @@ public sealed partial class ContentDialogSamplePage : Page
 		if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
 		{
 			var dialog = builder();
+			dialog.XamlRoot = this.XamlRoot;
 
 			await dialog.ShowAsync();
 		}

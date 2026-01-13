@@ -50,6 +50,41 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="MediaPlayerElement sample using AutoPlay, TransportControls, and a URL link with mp4 format"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample1"
+								Style="{StaticResource SimpleFilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample using PosterSource, TransportControls, and a local file with mp4 format"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample2"
+								Style="{StaticResource SimpleFilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample using PosterSource, TransportControls, and a URL link with mp3 format (audio only)"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample3"
+								Style="{StaticResource SimpleFilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample with customizable options"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample4"
+								Style="{StaticResource SimpleFilledButtonStyle}" />
+
+						<TextBlock Text="MediaPlayerElement sample using a Playlist"
+								   Margin="0,16" />
+						<Button Content="Show sample"
+								Click="LaunchMediaPlayerElementSample5"
+								Style="{StaticResource SimpleFilledButtonStyle}" />
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

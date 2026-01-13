@@ -93,6 +93,61 @@
 					</smtx:XamlDisplay>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Simple_NavigationViewSamplePage_MUX_NavigationView"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<sample:ClippedGrid MinHeight="400">
+							<muxc:NavigationView OpenPaneLength="260"
+												 IsBackButtonVisible="Collapsed"
+												 IsBackEnabled="False"
+												 Style="{StaticResource SimpleNavigationViewStyle}">
+								<muxc:NavigationView.MenuItems>
+									<!-- First Header -->
+									<muxc:NavigationViewItemHeader Content="Main Section" />
+
+									<!-- First Group of Items -->
+									<muxc:NavigationViewItem Icon="Library"
+															 Content="Parent for 1~3"
+															 SelectsOnInvoked="False"
+															 Style="{StaticResource SimpleNavigationViewItemStyle}">
+										<muxc:NavigationViewItem.MenuItems>
+											<muxc:NavigationViewItem Icon="Placeholder"
+																	 Content="Item 1"
+																	 Style="{StaticResource SimpleNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder"
+																	 Content="Item 2"
+																	 Style="{StaticResource SimpleNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder"
+																	 Content="Item 3"
+																	 Style="{StaticResource SimpleNavigationViewItemStyle}" />
+										</muxc:NavigationViewItem.MenuItems>
+									</muxc:NavigationViewItem>
+									<muxc:NavigationViewItem Icon="Placeholder"
+															 Content="Item 4"
+															 Style="{StaticResource SimpleNavigationViewItemStyle}" />
+
+									<!-- Separator -->
+									<muxc:NavigationViewItemSeparator />
+
+									<!-- Second Header -->
+									<muxc:NavigationViewItemHeader Content="Secondary Section" />
+
+									<!-- Second Group of Items -->
+									<muxc:NavigationViewItem Icon="Placeholder"
+															 Content="Item 5"
+															 Style="{StaticResource SimpleNavigationViewItemStyle}" />
+									<muxc:NavigationViewItem Icon="Placeholder"
+															 Content="Item 6 (disabled)"
+															 IsEnabled="False"
+															 Style="{StaticResource SimpleNavigationViewItemStyle}" />
+								</muxc:NavigationView.MenuItems>
+							</muxc:NavigationView>
+
+						</sample:ClippedGrid>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

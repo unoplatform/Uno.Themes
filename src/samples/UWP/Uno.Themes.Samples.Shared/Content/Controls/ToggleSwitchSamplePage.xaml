@@ -291,6 +291,58 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel Margin="12,0">
+
+						<!--  ToggleSwitch Default  -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage">
+							<StackPanel>
+								<TextBlock Text="Default" />
+								<ToggleSwitch Style="{StaticResource SimpleToggleSwitchStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  ToggleSwitch OFF  -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_Off">
+							<StackPanel>
+								<TextBlock Text="Off" />
+								<ToggleSwitch Header="OFF"
+											  Style="{StaticResource SimpleToggleSwitchStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  ToggleSwitch ON  -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_On">
+							<StackPanel>
+								<TextBlock Text="On" />
+								<ToggleSwitch Header="ON"
+											  IsOn="True"
+											  Style="{StaticResource SimpleToggleSwitchStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  ToggleSwitch Disabled On  -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_Disabled_On">
+							<StackPanel>
+								<TextBlock Text="Disabled On" />
+								<ToggleSwitch Style="{StaticResource SimpleToggleSwitchStyle}"
+											  IsEnabled="False"
+											  IsOn="True" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  ToggleSwitch Disabled Off  -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_Disabled_Off">
+							<StackPanel>
+								<TextBlock Text="Disabled Off" />
+								<ToggleSwitch Style="{StaticResource SimpleToggleSwitchStyle}"
+											  IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
