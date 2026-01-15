@@ -230,6 +230,107 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<Grid BorderBrush="{StaticResource OnSurfaceLowBrush}"
+							  BorderThickness="1"
+							  Padding="12"
+							  Margin="12">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<StackPanel Margin="0,0,10,0">
+
+								<!-- Label -->
+								<TextBlock Text="NORMAL"
+										   FontSize="14"
+										   FontFamily="{StaticResource SimpleFontFamily}"
+										   Margin="0,0,0,8" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Normal"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource SimpleComboBoxStyle}"
+											  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="{Binding Data.Letters}" />
+								</smtx:XamlDisplay>
+
+							</StackPanel>
+
+							<StackPanel Grid.Column="1">
+
+								<!-- Label -->
+								<TextBlock Text="DISABLED"
+										   FontSize="14"
+										   FontFamily="{StaticResource SimpleFontFamily}"
+										   Margin="0,0,0,8" />
+
+								<!-- ComboBox -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Disabled"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource SimpleComboBoxStyle}"
+											  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+											  PlaceholderText="Placeholder"
+											  ItemsSource="{Binding Data.Letters}"
+											  IsEnabled="False" />
+								</smtx:XamlDisplay>
+							</StackPanel>
+						</Grid>
+
+						<!-- Error State -->
+						<Grid BorderBrush="{StaticResource OnSurfaceLowBrush}"
+							  BorderThickness="1"
+							  Padding="12"
+							  Margin="12,0,12,12">
+
+							<StackPanel>
+								<!-- Label -->
+								<TextBlock Text="ERROR STATE"
+										   FontSize="14"
+										   FontFamily="{StaticResource SimpleFontFamily}"
+										   Margin="0,0,0,8" />
+
+								<!-- ComboBox with Error Style -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Error"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource SimpleErrorComboBoxStyle}"
+											  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+											  PlaceholderText="Select an option"
+											  ItemsSource="{Binding Data.Letters}" />
+								</smtx:XamlDisplay>
+							</StackPanel>
+						</Grid>
+
+						<!-- With Selected Value -->
+						<Grid BorderBrush="{StaticResource OnSurfaceLowBrush}"
+							  BorderThickness="1"
+							  Padding="12"
+							  Margin="12,0,12,12">
+
+							<StackPanel>
+								<!-- Label -->
+								<TextBlock Text="WITH SELECTED VALUE"
+										   FontSize="14"
+										   FontFamily="{StaticResource SimpleFontFamily}"
+										   Margin="0,0,0,8" />
+
+								<!-- ComboBox with Selected Value -->
+								<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Selected"
+												  Style="{StaticResource XamlDisplayBelowStyle}">
+									<ComboBox Style="{StaticResource SimpleComboBoxStyle}"
+											  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+											  SelectedIndex="2"
+											  ItemsSource="{Binding Data.Letters}" />
+								</smtx:XamlDisplay>
+							</StackPanel>
+						</Grid>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

@@ -4,6 +4,7 @@
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:um="using:Uno.Material"
+	  xmlns:us="using:Uno.Simple"
 	  xmlns:ut="using:Uno.Themes"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
@@ -590,6 +591,76 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Filled Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Filled">
+							<Button Content="FILLED"
+									Style="{StaticResource SimpleFilledButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Filled Button Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_FilledDisabled">
+							<Button Content="DISABLED"
+									IsEnabled="False"
+									Style="{StaticResource SimpleFilledButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Outlined Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Outlined">
+							<Button Content="OUTLINED"
+									Style="{StaticResource SimpleOutlinedButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Outlined Button Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_OutlinedDisabled">
+							<Button Content="DISABLED"
+									IsEnabled="False"
+									Style="{StaticResource SimpleOutlinedButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Text Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Text">
+							<Button Content="TEXT"
+									Style="{StaticResource SimpleTextButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Text Button Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_TextDisabled">
+							<Button Content="DISABLED"
+									IsEnabled="False"
+									Style="{StaticResource SimpleTextButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Error Filled Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_ErrorFilled">
+							<Button Content="ERROR"
+									Style="{StaticResource SimpleFilledErrorButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Error Text Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_ErrorText">
+							<Button Content="ERROR"
+									Style="{StaticResource SimpleTextErrorButtonStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Large Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Large">
+							<Button Content="LARGE BUTTON"
+									Style="{StaticResource SimpleFilledButtonLargeStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+						<!-- Small Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_ButtonSamplePage_Small">
+							<Button Content="SMALL"
+									Style="{StaticResource SimpleFilledButtonSmallStyle}"
+									Margin="5" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

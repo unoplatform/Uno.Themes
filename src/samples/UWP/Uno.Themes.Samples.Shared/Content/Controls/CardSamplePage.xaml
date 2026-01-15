@@ -1,0 +1,140 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.CardSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel Spacing="24">
+
+						<!-- Simple Card (Default) -->
+						<smtx:XamlDisplay UniqueKey="Simple_Card_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Border Style="{StaticResource SimpleCardBorderStyle}">
+								<StackPanel Style="{StaticResource SimpleCardContentStackPanelStyle}">
+									<TextBlock Text="Default Card"
+											   Style="{StaticResource SimpleCardHeadingTextBlockStyle}" />
+									<TextBlock Text="This is a card with default styling. It has a clean surface with padding and rounded corners."
+											   Style="{StaticResource SimpleCardBodyTextBlockStyle}" />
+								</StackPanel>
+							</Border>
+						</smtx:XamlDisplay>
+
+						<!-- Outlined Card -->
+						<smtx:XamlDisplay UniqueKey="Simple_Card_Outlined"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Border Style="{StaticResource SimpleOutlinedCardBorderStyle}">
+								<StackPanel Style="{StaticResource SimpleCardContentStackPanelStyle}">
+									<TextBlock Text="Outlined Card"
+											   Style="{StaticResource SimpleCardHeadingTextBlockStyle}" />
+									<TextBlock Text="This card has a visible border using the outline color for clear separation from the background."
+											   Style="{StaticResource SimpleCardBodyTextBlockStyle}" />
+								</StackPanel>
+							</Border>
+						</smtx:XamlDisplay>
+
+						<!-- Stroke Card (Subtle Border) -->
+						<smtx:XamlDisplay UniqueKey="Simple_Card_Stroke"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Border Style="{StaticResource SimpleStrokeCardBorderStyle}">
+								<StackPanel Style="{StaticResource SimpleCardContentStackPanelStyle}">
+									<TextBlock Text="Stroke Card"
+											   Style="{StaticResource SimpleCardHeadingTextBlockStyle}" />
+									<TextBlock Text="A more subtle variant with a lighter border for gentle visual separation."
+											   Style="{StaticResource SimpleCardBodyTextBlockStyle}" />
+								</StackPanel>
+							</Border>
+						</smtx:XamlDisplay>
+
+						<!-- Elevated Card -->
+						<smtx:XamlDisplay UniqueKey="Simple_Card_Elevated"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Border Style="{StaticResource SimpleElevatedCardBorderStyle}">
+								<StackPanel Style="{StaticResource SimpleCardContentStackPanelStyle}">
+									<TextBlock Text="Elevated Card"
+											   Style="{StaticResource SimpleCardHeadingTextBlockStyle}" />
+									<TextBlock Text="This card appears to float above the surface with a subtle shadow effect."
+											   Style="{StaticResource SimpleCardBodyTextBlockStyle}" />
+								</StackPanel>
+							</Border>
+						</smtx:XamlDisplay>
+
+						<!-- Card with Icon and Image -->
+						<smtx:XamlDisplay UniqueKey="Simple_Card_WithIconAndImage"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Border Style="{StaticResource SimpleOutlinedCardBorderStyle}">
+								<StackPanel Style="{StaticResource SimpleCardContentStackPanelStyle}">
+									<!-- Icon -->
+									<Border Style="{StaticResource SimpleCardIconBorderStyle}"
+											Background="{StaticResource PrimaryBrush}">
+										<FontIcon Glyph="&#xE734;"
+												  FontSize="16"
+												  Foreground="{StaticResource OnPrimaryBrush}"
+												  HorizontalAlignment="Center"
+												  VerticalAlignment="Center" />
+									</Border>
+									
+									<!-- Text Area -->
+									<StackPanel Style="{StaticResource SimpleCardTextAreaStackPanelStyle}">
+										<TextBlock Text="Card with Icon"
+												   Style="{StaticResource SimpleCardHeadingTextBlockStyle}" />
+										<TextBlock Text="Icon in app design"
+												   Style="{StaticResource SimpleCardSubheadingTextBlockStyle}" />
+										<TextBlock Text="Cards can include icons to provide visual context and improve recognition."
+												   Style="{StaticResource SimpleCardBodyTextBlockStyle}" />
+									</StackPanel>
+								</StackPanel>
+							</Border>
+						</smtx:XamlDisplay>
+
+						<!-- Filled Card with Image Placeholder -->
+						<smtx:XamlDisplay UniqueKey="Simple_Card_FilledWithImage"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Border Style="{StaticResource SimpleFilledCardBorderStyle}">
+								<StackPanel Spacing="0">
+									<!-- Image Placeholder -->
+									<Border Style="{StaticResource SimpleCardImageBorderStyle}"
+											Width="NaN"
+											MaxWidth="440"
+											HorizontalAlignment="Stretch"
+											CornerRadius="8,8,0,0">
+										<FontIcon Glyph="&#xEB9F;"
+												  FontSize="48"
+												  Foreground="{StaticResource OnSurfaceLowBrush}" />
+									</Border>
+									
+									<!-- Content with padding -->
+									<StackPanel Padding="24"
+												Spacing="{StaticResource SimpleCardContentSpacing}">
+										<StackPanel Style="{StaticResource SimpleCardTextAreaStackPanelStyle}">
+											<TextBlock Text="Filled Card with Image"
+													   Style="{StaticResource SimpleCardHeadingTextBlockStyle}" />
+											<TextBlock Text="Edge-to-edge media"
+													   Style="{StaticResource SimpleCardSubheadingTextBlockStyle}" />
+											<TextBlock Text="The filled style removes padding for edge-to-edge images at the top, with content below."
+													   Style="{StaticResource SimpleCardBodyTextBlockStyle}" />
+										</StackPanel>
+										
+										<!-- Action buttons -->
+										<StackPanel Orientation="Horizontal" Spacing="8">
+											<Button Content="Learn More"
+													Style="{StaticResource SimpleTextButtonStyle}" />
+											<Button Content="Share"
+													Style="{StaticResource SimpleTextButtonStyle}" />
+										</StackPanel>
+									</StackPanel>
+								</StackPanel>
+							</Border>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>
