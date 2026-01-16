@@ -174,6 +174,77 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- RadioButton No Content -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_RadioButtonSamplePage_NoContent">
+							<RadioButton GroupName="Simple_Group_a"
+										 Style="{StaticResource SimpleRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton Unchecked -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_RadioButtonSamplePage_Unchecked">
+							<RadioButton GroupName="Simple_Group_b"
+										 Content="UNCHECKED"
+										 Style="{StaticResource SimpleRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton Checked -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_RadioButtonSamplePage_Checked">
+							<RadioButton GroupName="Simple_Group_b"
+										 Content="CHECKED"
+										 IsChecked="True"
+										 Style="{StaticResource SimpleRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton Unchecked Disabled -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_RadioButtonSamplePage_UncheckedDisabled">
+							<RadioButton GroupName="Simple_Group_c"
+										 Content="UNCHECKED DISABLED"
+										 IsEnabled="False"
+										 Style="{StaticResource SimpleRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton Checked Disabled -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_RadioButtonSamplePage_CheckedDisabled">
+							<RadioButton GroupName="Simple_Group_c"
+										 Content="CHECKED DISABLED"
+										 IsChecked="True"
+										 IsEnabled="False"
+										 Style="{StaticResource SimpleRadioButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- RadioButton Group -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="Simple_RadioButtonSamplePage_Group">
+							<StackPanel>
+								<TextBlock Text="Select an option:"
+										   FontFamily="{StaticResource SimpleFontFamily}"
+										   FontSize="14"
+										   Margin="0,0,0,8" />
+								<RadioButton GroupName="Simple_Options"
+											 Content="Option 1"
+											 IsChecked="True"
+											 Style="{StaticResource SimpleRadioButtonStyle}" />
+								<RadioButton GroupName="Simple_Options"
+											 Content="Option 2"
+											 Style="{StaticResource SimpleRadioButtonStyle}" />
+								<RadioButton GroupName="Simple_Options"
+											 Content="Option 3"
+											 Style="{StaticResource SimpleRadioButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

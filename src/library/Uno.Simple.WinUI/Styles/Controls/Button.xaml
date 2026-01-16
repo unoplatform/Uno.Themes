@@ -1,0 +1,700 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!-- Button Resources -->
+	<CornerRadius x:Key="ButtonCornerRadius">8</CornerRadius>
+	<Thickness x:Key="ButtonBorderThickness">1</Thickness>
+	<Thickness x:Key="ButtonPadding">12,12,12,12</Thickness>
+	<Thickness x:Key="ButtonPaddingSmall">8,8,8,8</Thickness>
+	<Thickness x:Key="ButtonPaddingLarge">20,16,20,16</Thickness>
+	<x:Double x:Key="ButtonHeight">40</x:Double>
+	<x:Double x:Key="ButtonHeightSmall">32</x:Double>
+	<x:Double x:Key="ButtonHeightLarge">48</x:Double>
+
+	<!-- SimpleFilledButtonStyle - Primary/Filled variant (like SDS Primary) -->
+	<Style x:Key="SimpleFilledButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource PrimaryVariantDarkBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource PrimaryVariantDarkBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource PrimaryVariantDarkBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource PrimaryVariantDarkBrush}" />
+										<Setter Target="RootGrid.Opacity" Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- SimpleLightButtonStyle - For buttons on dark backgrounds -->
+	<Style x:Key="SimpleLightButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource BackgroundTertiaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource OutlineVariantBrush}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SurfaceBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OutlineBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SurfaceBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OutlineBrush}" />
+										<Setter Target="RootGrid.Opacity" Value="0.9" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- SimpleOutlinedButtonStyle - Neutral variant (like SDS Neutral) -->
+	<Style x:Key="SimpleOutlinedButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource BackgroundTertiaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource SDSNeutralTertiaryHoverBrush}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SDSNeutralTertiaryDarkerBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SDSNeutralTertiaryDarkerBrush}" />
+										<Setter Target="RootGrid.Opacity" Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- SimpleTextButtonStyle - Text-only variant (like SDS Subtle) -->
+	<Style x:Key="SimpleTextButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource TransparentBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource SDSTextNeutralBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource TransparentBrush}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OutlineBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OutlineBrush}" />
+										<Setter Target="RootGrid.Opacity" Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Small Size Variants -->
+	<Style x:Key="SimpleFilledButtonSmallStyle" TargetType="Button" BasedOn="{StaticResource SimpleFilledButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingSmall}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightSmall}" />
+	</Style>
+
+	<Style x:Key="SimpleOutlinedButtonSmallStyle" TargetType="Button" BasedOn="{StaticResource SimpleOutlinedButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingSmall}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightSmall}" />
+	</Style>
+
+	<Style x:Key="SimpleTextButtonSmallStyle" TargetType="Button" BasedOn="{StaticResource SimpleTextButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingSmall}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightSmall}" />
+	</Style>
+
+	<!-- Large Size Variants -->
+	<Style x:Key="SimpleFilledButtonLargeStyle" TargetType="Button" BasedOn="{StaticResource SimpleFilledButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingLarge}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightLarge}" />
+	</Style>
+
+	<Style x:Key="SimpleOutlinedButtonLargeStyle" TargetType="Button" BasedOn="{StaticResource SimpleOutlinedButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingLarge}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightLarge}" />
+	</Style>
+
+	<Style x:Key="SimpleTextButtonLargeStyle" TargetType="Button" BasedOn="{StaticResource SimpleTextButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingLarge}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightLarge}" />
+	</Style>
+
+	<!-- Error/Danger Button Styles (SDS error colors) -->
+	<Style x:Key="SimpleFilledErrorButtonStyle" TargetType="Button" BasedOn="{StaticResource SimpleFilledButtonStyle}">
+		<Setter Property="Background" Value="{StaticResource SDSDangerPrimaryBrush}" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="BorderBrush" Value="{StaticResource SDSDangerPrimaryBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SDSDangerPrimaryHoverBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource SDSDangerPrimaryHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SDSDangerPrimaryHoverBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource SDSDangerPrimaryHoverBrush}" />
+										<Setter Target="RootGrid.Opacity" Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SimpleFilledErrorButtonSmallStyle" TargetType="Button" BasedOn="{StaticResource SimpleFilledErrorButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingSmall}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightSmall}" />
+	</Style>
+
+	<Style x:Key="SimpleTextErrorButtonStyle" TargetType="Button" BasedOn="{StaticResource SimpleTextButtonStyle}">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{StaticResource SDSDangerSubtleTextBrush}" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SDSDangerSubtleHoverBackgroundBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource SDSDangerPrimaryBrush}" />
+										<Setter Target="RootGrid.BorderThickness" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource SDSDangerSubtleHoverBackgroundBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource SDSDangerPrimaryBrush}" />
+										<Setter Target="RootGrid.BorderThickness" Value="1" />
+										<Setter Target="RootGrid.Opacity" Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SimpleTextErrorButtonSmallStyle" TargetType="Button" BasedOn="{StaticResource SimpleTextErrorButtonStyle}">
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingSmall}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeightSmall}" />
+	</Style>
+
+	<!-- Pricing Card Button Styles -->
+	<Style x:Key="SimpleLightPricingCardButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource PrimaryVariantLightBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity" Value="0.9" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity" Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  HorizontalContentAlignment="Center"
+										  VerticalContentAlignment="Center"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SimpleBrandedPricingCardButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource OnPrimaryMediumBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource PrimaryVariantDarkBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource OutlineVariantBrush}" />
+		<Setter Property="BorderThickness" Value="{StaticResource ButtonBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPadding}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity" Value="0.9" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Opacity" Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+								
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  HorizontalContentAlignment="Center"
+										  VerticalContentAlignment="Center"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Filter Button Styles -->
+	<Style x:Key="SimpleSelectedFilterButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource PrimaryVariantLightBrush}" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingSmall}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource PrimaryVariantDarkBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource PrimaryVariantDarkBrush}" />
+										<Setter Target="RootGrid.Opacity" Value="0.9" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="SimpleUnselectedFilterButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="{StaticResource PrimaryVariantLightBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource OnSurfaceMediumBrush}" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{StaticResource ButtonPaddingSmall}" />
+		<Setter Property="Height" Value="{StaticResource ButtonHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource BackgroundTertiaryBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource BackgroundTertiaryBrush}" />
+										<Setter Target="RootGrid.Opacity" Value="0.9" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RootGrid.Background" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Default Button Style - Filled style by default -->
+	<Style TargetType="Button" BasedOn="{StaticResource SimpleFilledButtonStyle}" />
+
+</ResourceDictionary>

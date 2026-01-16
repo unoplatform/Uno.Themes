@@ -1,0 +1,213 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!-- CheckBox Resources -->
+	<x:Double x:Key="CheckBoxSize">18</x:Double>
+	<GridLength x:Key="CheckBoxColumnWidth">40</GridLength>
+	<CornerRadius x:Key="CheckBoxCornerRadius">2</CornerRadius>
+	<Thickness x:Key="CheckBoxBorderThickness">2</Thickness>
+	<Thickness x:Key="CheckBoxContentMargin">8,0,0,0</Thickness>
+
+	<!-- Glyph Path Data -->
+	<x:String x:Key="CheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
+	<x:String x:Key="CheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
+
+	<!-- SimpleCheckBoxStyle -->
+	<Style x:Key="SimpleCheckBoxStyle" TargetType="CheckBox">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Top" />
+		<Setter Property="MinWidth" Value="120" />
+		<Setter Property="MinHeight" Value="32" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="CheckBox">
+					<Grid x:Name="RootGrid"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="{StaticResource CheckBoxColumnWidth}" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CombinedStates">
+								<!-- Unchecked States -->
+								<VisualState x:Name="UncheckedNormal">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource OnSurfaceMediumBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="Transparent" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="UncheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource OnSurfaceBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="Transparent" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="UncheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource OnSurfaceBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="Transparent" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="UncheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="Transparent" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Checked States -->
+								<VisualState x:Name="CheckedNormal">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Fill" Value="{StaticResource OnPrimaryBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Fill" Value="{StaticResource OnPrimaryBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Fill" Value="{StaticResource OnPrimaryBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Fill" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Indeterminate States -->
+								<VisualState x:Name="IndeterminateNormal">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{StaticResource OnPrimaryBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="IndeterminatePointerOver">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{StaticResource OnPrimaryBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="IndeterminatePressed">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource PrimaryBrush}" />
+										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{StaticResource OnPrimaryBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="IndeterminateDisabled">
+									<VisualState.Setters>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{StaticResource DisabledBrush}" />
+										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{StaticResource OnDisabledBrush}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{StaticResource OnDisabledBrush}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- CheckBox Visual -->
+						<Grid x:Name="CheckBoxContainer"
+							  Grid.Column="0"
+							  Width="{StaticResource CheckBoxSize}"
+							  Height="{StaticResource CheckBoxSize}"
+							  HorizontalAlignment="Left"
+							  VerticalAlignment="Top">
+
+							<!-- CheckBox Border -->
+							<Rectangle x:Name="CheckBoxBorder"
+									   Fill="Transparent"
+									   Stroke="{StaticResource OnSurfaceMediumBrush}"
+									   StrokeThickness="2"
+									   RadiusX="2"
+									   RadiusY="2" />
+
+							<!-- Checkmark Glyph -->
+							<Path x:Name="CheckGlyph"
+								  Data="{StaticResource CheckBoxCheckGlyphPathData}"
+								  Fill="{StaticResource OnPrimaryBrush}"
+								  Stretch="Uniform"
+								  Width="12"
+								  Height="12"
+								  HorizontalAlignment="Center"
+								  VerticalAlignment="Center"
+								  Opacity="0" />
+
+							<!-- Dash Glyph (Indeterminate) -->
+							<Path x:Name="IndeterminateGlyph"
+								  Data="{StaticResource CheckBoxHyphenGlyphPathData}"
+								  Fill="{StaticResource OnPrimaryBrush}"
+								  Stretch="Uniform"
+								  Width="10"
+								  Height="10"
+								  HorizontalAlignment="Center"
+								  VerticalAlignment="Center"
+								  Opacity="0" />
+						</Grid>
+
+						<!-- Content -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  Grid.Column="1"
+										  Margin="{StaticResource CheckBoxContentMargin}"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  TextWrapping="Wrap" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Default CheckBox Style -->
+	<Style TargetType="CheckBox" BasedOn="{StaticResource SimpleCheckBoxStyle}" />
+
+</ResourceDictionary>
