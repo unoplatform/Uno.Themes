@@ -1,5 +1,6 @@
 jobs:
 - job: evaluate_changes
+  cancelTimeoutInMinutes: 0
   displayName: 'Check for Doc Only Changes'
   pool:
     vmImage: 'ubuntu-latest'

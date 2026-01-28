@@ -1,5 +1,6 @@
 jobs:
 - deployment: 'Nuget_Prod_Nuget_Org'
+  cancelTimeoutInMinutes: 0
   displayName: 'Nuget Publish Prod NuGet.org'
   environment: 'Uno Themes Production'
   pool:
@@ -21,6 +22,7 @@ jobs:
         - template: ../templates/nuget-publish-public.yml
 
 - job: Tag_Release
+  cancelTimeoutInMinutes: 0
   displayName: 'Set git tag'
   dependsOn: 'Nuget_Prod_Nuget_Org'
 
