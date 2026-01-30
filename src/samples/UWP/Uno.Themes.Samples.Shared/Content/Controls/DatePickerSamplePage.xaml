@@ -40,7 +40,7 @@
 							            xamarin:UseNativeStyle="False"
 							            Header="Enter Date" />
 						</smtx:XamlDisplay>
-						
+
 						<!--  Disbaled  -->
 						<TextBlock Margin="12,8,12,4"
 						           Style="{StaticResource MaterialSubtitle2}"
@@ -49,7 +49,7 @@
 						<!--  DatePicker  -->
 						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
 						                  UniqueKey="DatePickerSamplePage_Material_Disabled">
-							
+
 							<DatePicker HorizontalAlignment="Left"
 							            xamarin:UseNativeStyle="False"
 							            Header="Enter Date"
@@ -75,7 +75,7 @@
 							            HorizontalAlignment="Left"
 							            xamarin:UseNativeStyle="False"
 							            Header="Enter Date"
-							            Style="{StaticResource MaterialDatePickerStyle}" />
+							            Style="{StaticResource MaterialFilledDatePickerStyle}" />
 						</smtx:XamlDisplay>
 
 						<!--  Disabled  -->
@@ -91,7 +91,39 @@
 							            xamarin:UseNativeStyle="False"
 							            Header="Enter Date"
 							            IsEnabled="False"
-							            Style="{StaticResource MaterialDatePickerStyle}" />
+							            Style="{StaticResource MaterialFilledDatePickerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Outlined  -->
+						<TextBlock Margin="12,8,12,4"
+						           Style="{StaticResource TitleSmall}"
+						           Text="Outlined" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="M3_DatePickerSamplePage_Material_Outlined">
+
+							<DatePicker HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+													Style="{StaticResource MaterialOutlinedDatePickerStyle}"
+							            IsEnabled="True"/>
+						</smtx:XamlDisplay>
+
+						<!-- Outlined Disabled  -->
+						<TextBlock Margin="12,8,12,4"
+						           Style="{StaticResource TitleSmall}"
+						           Text="Outlined Disabled" />
+
+						<!--  DatePicker  -->
+						<smtx:XamlDisplay Style="{StaticResource XamlDisplayBelowStyle}"
+						                  UniqueKey="M3_DatePickerSamplePage_Material_Outlined_Disabled">
+
+							<DatePicker HorizontalAlignment="Left"
+							            xamarin:UseNativeStyle="False"
+							            Header="Enter Date"
+													Style="{StaticResource MaterialOutlinedDatePickerStyle}"
+							            IsEnabled="False"/>
 						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
