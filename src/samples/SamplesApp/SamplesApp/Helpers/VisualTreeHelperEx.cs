@@ -8,10 +8,8 @@ using AppKit;
 using _View = AppKit.NSView;
 #elif __ANDROID__
 using _View = Android.Views.View;
-#elif IS_WINUI
-using _View = Microsoft.UI.Xaml.DependencyObject;
 #else
-using _View = Windows.UI.Xaml.DependencyObject;
+using _View = Microsoft.UI.Xaml.DependencyObject;
 #endif
 
 namespace Uno.Themes.Samples.Helpers;

@@ -31,11 +31,7 @@ sealed partial class App : Application
 	/// will be used such as when the application is launched to open a specific file.
 	/// </summary>
 	/// <param name="e">Details about the launch request and process.</param>
-#if IS_WINUI_UNO_SDK
 	protected internal override void OnLaunched(LaunchActivatedEventArgs e)
-#else
-	protected override void OnLaunched(LaunchActivatedEventArgs e)
-#endif
 	{
 #if DEBUG
 		if (System.Diagnostics.Debugger.IsAttached)
@@ -44,15 +40,7 @@ sealed partial class App : Application
 		}
 #endif
 
-#if WINDOWS_UWP
-		ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 568)); // (size of the iPhone SE)
-#endif
-
-#if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
-        MainWindow = new Window();
-#else
 		MainWindow = XamlWindow.Current;
-#endif
 
 		if (MainWindow is XamlWindow window)
 		{

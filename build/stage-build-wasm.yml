@@ -20,13 +20,13 @@ jobs:
   - template: templates/gitversion.yml
 
   - script: |
-      dotnet publish $(ProjectPath)/SamplesApp.csproj /p:Configuration=Release /p:TargetFrameworkOverride=net9.0-browserwasm "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      dotnet publish $(ProjectPath)/SamplesApp.csproj /p:Configuration=Release /p:TargetFrameworkOverride=net10.0-browserwasm "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build Wasm Head
 
   - task: CopyFiles@2
     displayName: 'Publish Wasm Binaries'
     inputs:
-      SourceFolder: $(build.sourcesdirectory)/$(ProjectPath)/bin/Release/net9.0-browserwasm/publish/wwwroot
+      SourceFolder: $(build.sourcesdirectory)/$(ProjectPath)/bin/Release/net10.0-browserwasm/publish/wwwroot
       Contents: '**/*.*'
       TargetFolder: $(build.artifactstagingdirectory)/Wasm
       CleanTargetFolder: false

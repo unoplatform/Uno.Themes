@@ -25,14 +25,8 @@
       SkiaRenderer;
     </UnoFeatures>
 
-    <!-- Required for shared project -->
-    <DefineConstants>$(DefineConstants);IS_WINUI;IS_WINUI_UNO_SDK</DefineConstants>
-
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
-
-    <!-- Disable default app definition since the shared project provides App.xaml -->
-    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,8 +40,5 @@
     <ProjectReference Include="../../../library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj" />
     <ProjectReference Include="../../../library/Uno.Material/Uno.Material.WinUI.csproj" />
   </ItemGroup>
-
-  <!-- Import shared project items -->
-  <Import Project="../Uno.Themes.Samples.Shared/Uno.Themes.Samples.Shared.projitems" Label="Shared" />
 
 </Project>
