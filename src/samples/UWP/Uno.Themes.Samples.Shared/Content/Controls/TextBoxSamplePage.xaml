@@ -487,6 +487,81 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- TextBox Filled -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_1"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleFilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled With PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_2"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Filled"
+									 Style="{StaticResource SimpleFilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled With Text -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_3"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Text="Filled with text"
+									 Style="{StaticResource SimpleFilledTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_4"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+									 Text="Filled Disabled"
+									 Style="{StaticResource SimpleFilledTextBoxStyle}"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_5"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined with PlaceholderText -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_6"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Outlined"
+									 Style="{StaticResource SimpleOutlinedTextBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Outlined Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_7"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Placeholder"
+									 Text="Outlined Disabled"
+									 Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+									 IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled Small -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_8"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox PlaceholderText="Small"
+									 Style="{StaticResource SimpleFilledTextBoxSmallStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- TextBox Filled MultiLine -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBoxSamplePage_9"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Text="Lorem ipsum dolor sit amet consectetur adipiscing, elit aliquam ullamcorper commodo primis ornare himenaeos, inceptos tellus accumsan praesent laoreet."
+									 PlaceholderText="MultiLine Filled"
+									 Style="{StaticResource SimpleFilledTextBoxStyle}"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True"
+									 Height="120" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
