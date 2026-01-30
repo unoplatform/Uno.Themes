@@ -1,0 +1,49 @@
+jobs:
+- job: Desktop
+  cancelTimeoutInMinutes: 0
+  displayName: 'Desktop'
+  container: unoplatform/wasm-build:3.0
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  strategy:
+    matrix:
+      Cupertino:
+        SampleAppName: CupertinoSampleApp
+        ProjectPath: src/samples/CupertinoSampleApp
+      Material:
+        SampleAppName: MaterialSampleApp
+        ProjectPath: src/samples/MaterialSampleApp
+
+  variables:
+    GTK_RUNTIME_URL: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases/download/2020-07-15/gtk3-runtime-3.24.20-2020-07-15-ts-win64.exe
+    ArtifactName: desktop-$(SampleAppName)
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-desktop'
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - powershell: dotnet msbuild $(ProjectPath)/$(SampleAppName).csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=desktop /detailedsummary /m /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build Desktop Head - $(SampleAppName)
+
+  - task: CopyFiles@2
+    displayName: 'Publish Desktop Binaries'
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/$(ProjectPath)/bin/Release/net10.0-desktop
+      Contents: '**/*.*'
+      TargetFolder: $(build.artifactstagingdirectory)/desktop-$(SampleAppName)
+      CleanTargetFolder: false
+      OverWrite: false
+      flattenFolders: false
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+      ArtifactName: $(ArtifactName)
