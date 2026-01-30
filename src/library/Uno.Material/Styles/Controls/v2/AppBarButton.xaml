@@ -36,7 +36,8 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
-					<um:Ripple Feedback="{TemplateBinding Foreground}"
+					<um:Ripple CornerRadius="{TemplateBinding CornerRadius}"
+							   Feedback="{TemplateBinding Foreground}"
 							   FeedbackOpacity="{StaticResource PressedOpacity}"
 							   MinWidth="{TemplateBinding MinWidth}"
 							   MaxWidth="{TemplateBinding MaxWidth}">
