@@ -1,0 +1,235 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.SliderSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:ios="http://uno.ui/ios"
+	  xmlns:local="using:Uno.Themes.Samples.Shared.Content"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d android ios"
+	  xmlns:toolkit="using:Uno.UI.Toolkit">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!--  Primary  -->
+						<TextBlock Margin="12,16,12,4"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Text="Primary" />
+
+						<!--  Slider Vertical  -->
+						<smtx:XamlDisplay UniqueKey="Material_SliderSamplePage_Vertical">
+							<StackPanel Orientation="Horizontal">
+
+								<Slider Height="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+
+								<Slider Height="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  Slider Horizontal  -->
+						<smtx:XamlDisplay UniqueKey="Material_SliderSamplePage_Horizontal">
+							<StackPanel>
+
+								<Slider Width="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+
+								<Slider Width="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  Secondary  -->
+						<TextBlock Margin="12,16,12,4"
+								   Style="{StaticResource MaterialSubtitle2}"
+								   Text="Secondary" />
+
+						<!--  Slider Vertical  -->
+						<smtx:XamlDisplay UniqueKey="Material_SliderSamplePage_SecondaryVertical">
+							<StackPanel Orientation="Horizontal">
+
+								<Slider Height="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource MaterialSecondarySliderStyle}"
+										Value="25" />
+
+								<Slider Height="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource MaterialSecondarySliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  Slider Horizontal  -->
+						<smtx:XamlDisplay UniqueKey="Material_SliderSamplePage_SecondaryHorizontal">
+							<StackPanel>
+
+								<Slider Width="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource MaterialSecondarySliderStyle}"
+										Value="25" />
+
+								<Slider Width="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource MaterialSecondarySliderStyle}"
+										Value="25" />
+
+								<toolkit:ElevatedView Width="28"
+													  Height="28"
+													  Background="Transparent"
+													  CornerRadius="14"
+													  Elevation="1"
+													  ShadowColor="#AA000000">
+									<Border Background="White"
+											Width="28"
+											Height="28"
+											CornerRadius="14" />
+								</toolkit:ElevatedView>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.MaterialTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!--  Primary  -->
+						<TextBlock Margin="12,16,12,4"
+								   Style="{StaticResource TitleSmall}"
+								   Text="Primary" />
+
+						<!--  Slider Vertical  -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_SliderSamplePage_Vertical">
+							<StackPanel Orientation="Horizontal"
+										Spacing="5">
+								<Slider Height="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+
+								<Slider Height="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  Slider Horizontal  -->
+						<smtx:XamlDisplay UniqueKey="M3_Material_SliderSamplePage_Horizontal">
+							<StackPanel Spacing="5">
+								<Slider Width="200"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+
+								<Slider Width="200"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource MaterialSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!--  Primary  -->
+						<TextBlock Margin="12,16,12,4"
+								   Style="{StaticResource CupertinoTertiaryTitle}"
+								   Text="Primary" />
+
+						<!--  Slider Vertical  -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_SliderSamplePage_Vertical">
+							<StackPanel Orientation="Horizontal">
+
+								<Slider Height="343"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource CupertinoSliderStyle}"
+										Value="25" />
+
+								<Slider Height="343"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Vertical"
+										Style="{StaticResource CupertinoSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!--  Slider Horizontal  -->
+						<smtx:XamlDisplay UniqueKey="Cupertino_SliderSamplePage_Horizontal">
+							<StackPanel>
+
+								<Slider Width="343"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource CupertinoSliderStyle}"
+										Value="25" />
+
+								<Slider Width="343"
+										IsEnabled="False"
+										Maximum="100"
+										Minimum="0"
+										Orientation="Horizontal"
+										Style="{StaticResource CupertinoSliderStyle}"
+										Value="25" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.CupertinoTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

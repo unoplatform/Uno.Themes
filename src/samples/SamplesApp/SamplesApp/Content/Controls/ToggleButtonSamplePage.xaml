@@ -1,0 +1,78 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.ToggleButtonSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Uno.Themes.Samples.Content.Controls"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:ut="using:Uno.Themes"
+	  xmlns:um="using:Uno.Material"
+	  mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel Margin="12,0">
+						<!-- ToggleButton Icon Unchecked -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleButtonSamplePage_IconUnchecked">
+							<ToggleButton Style="{StaticResource MaterialIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+
+						<!-- ToggleButton Icon Checked -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleButtonSamplePage_IconChecked">
+							<ToggleButton IsChecked="True"
+										  Style="{StaticResource MaterialIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+
+						<!-- ToggleButton Unchecked Disabled -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleButtonSamplePage_IconUncheckedDisabled">
+							<ToggleButton IsEnabled="False"
+										  Style="{StaticResource MaterialIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+
+						<!-- ToggleButton Icon Checked Disabled -->
+						<smtx:XamlDisplay Margin="12,0"
+										  UniqueKey="ToggleButtonSamplePage_IconCheckedDisabled">
+							<ToggleButton IsChecked="True"
+										  IsEnabled="False"
+										  Style="{StaticResource MaterialIconToggleButtonStyle}">
+								<ToggleButton.Content>
+									<FontIcon Glyph="&#xE160;" />
+								</ToggleButton.Content>
+								<ut:ControlExtensions.AlternateContent>
+									<FontIcon Glyph="&#xE132;" />
+								</ut:ControlExtensions.AlternateContent>
+							</ToggleButton>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

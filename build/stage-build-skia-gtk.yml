@@ -4,28 +4,13 @@ jobs:
   displayName: 'Skia GTK'
   container: unoplatform/wasm-build:3.0
 
-  variables:
-    GTK_RUNTIME_URL: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases/download/2020-07-15/gtk3-runtime-3.24.20-2020-07-15-ts-win64.exe
-  strategy:
-    maxParallel: 2
-    matrix:
-      WinUI:
-        ArtifactName: skia-gtk-winui
-        ProjectName: Uno.Themes.WinUI.Samples
-        Lineage: WinUI
-        ApplicationBuildNumberOffset: 50
-        VersionCodeOffset: 50
-        CI_Build: true
-      UWP:
-        ArtifactName: skia-gtk-uwp
-        ProjectName: Uno.Themes.Samples
-        Lineage: UWP
-        ApplicationBuildNumberOffset: 50
-        VersionCodeOffset: 50
-        CI_Build: true
-
   pool:
     vmImage: 'ubuntu-latest'
+
+  variables:
+    GTK_RUNTIME_URL: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases/download/2020-07-15/gtk3-runtime-3.24.20-2020-07-15-ts-win64.exe
+    ArtifactName: skia-gtk
+    ProjectPath: src/samples/SamplesApp/SamplesApp
 
   steps:
   - checkout: self
@@ -35,15 +20,15 @@ jobs:
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
 
-  - powershell: dotnet msbuild src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/$(ProjectName).Skia.Gtk.csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=net9.0 /detailedsummary /m /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
-    displayName: Build GTK Head
+  - powershell: dotnet msbuild $(ProjectPath)/SamplesApp.csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=desktop /detailedsummary /m /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build Desktop Head
 
   - task: CopyFiles@2
-    displayName: 'Publish Skia.GTK Binaries'
+    displayName: 'Publish Skia.Desktop Binaries'
     inputs:
-      SourceFolder: $(Build.SourcesDirectory)/src/samples/$(Lineage)/$(ProjectName).Skia.Gtk/bin/Release/net9.0
+      SourceFolder: $(Build.SourcesDirectory)/$(ProjectPath)/bin/Release/net10.0-desktop
       Contents: '**/*.*'
-      TargetFolder: $(build.artifactstagingdirectory)/skia-gtk-build
+      TargetFolder: $(build.artifactstagingdirectory)/skia-desktop-build
       CleanTargetFolder: false
       OverWrite: false
       flattenFolders: false

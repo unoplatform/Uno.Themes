@@ -1,6 +1,21 @@
 <Project Sdk="Uno.Sdk">
-  <PropertyGroup>
+  <!--
+    Expand platform suffix overrides to versioned TFMs for sample app (net10.0).
+    This allows crosstargeting_override.props to use platform suffixes (e.g., 'ios', 'android')
+    that work for both libraries (net9.0-*) and sample apps (net10.0-*).
+  -->
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('ios'))">$(TargetFrameworks);net10.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('android'))">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('maccatalyst'))">$(TargetFrameworks);net10.0-maccatalyst</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
     <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
@@ -25,14 +40,8 @@
       SkiaRenderer;
     </UnoFeatures>
 
-    <!-- Required for shared project -->
-    <DefineConstants>$(DefineConstants);IS_WINUI;IS_WINUI_UNO_SDK</DefineConstants>
-
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
-
-    <!-- Disable default app definition since the shared project provides App.xaml -->
-    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,8 +55,5 @@
     <ProjectReference Include="../../../library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj" />
     <ProjectReference Include="../../../library/Uno.Material/Uno.Material.WinUI.csproj" />
   </ItemGroup>
-
-  <!-- Import shared project items -->
-  <Import Project="../../UWP/Uno.Themes.Samples.Shared/Uno.Themes.Samples.Shared.projitems" Label="Shared" />
 
 </Project>
