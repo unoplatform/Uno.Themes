@@ -32,7 +32,7 @@ jobs:
     inputs:
       solution: $(ProjectPath)/SamplesApp.csproj
       msbuildArchitecture: x64
-      msbuildArguments: /m /v:m /r /p:Platform=x64 /p:Configuration=Release /p:TargetFrameworkOverride=net10.0-windows10.0.19041 /p:AppxPackageDir="Packages/" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      msbuildArguments: /m /v:m /r /p:Platform=x64 /p:Configuration=Release /p:TargetFrameworkOverride=windows /p:AppxPackageDir="Packages/" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:GenerateAppxPackageOnBuild=true "/p:InformationalVersion=$(NBGV_InformationalVersion)" /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
       clean: false
       maximumCpuCount: true
       restoreNugetPackages: false

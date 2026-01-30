@@ -41,7 +41,7 @@ jobs:
     
       - run: |
           cd src/samples/SamplesApp/SamplesApp
-          dotnet publish -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=net10.0-browserwasm
+          dotnet publish -c Release "/p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}" /p:TargetFrameworkOverride=browserwasm
           ls -la bin/Release/net10.0-browserwasm
 
       - uses: actions/upload-artifact@v4

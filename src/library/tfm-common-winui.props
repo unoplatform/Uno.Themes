@@ -1,11 +1,20 @@
 <Project>
+	<!--
+		Expand platform suffix overrides to versioned TFMs for library projects (net9.0).
+		This allows crosstargeting_override.props to use platform suffixes (e.g., 'ios', 'android')
+		that work for both libraries (net9.0-*) and sample apps (net10.0-*).
+	-->
 	<PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
-		<TargetFrameworks >$(TargetFrameworkOverride)</TargetFrameworks>
+		<!-- Always include net9.0 for library projects -->
+		<TargetFrameworks>net9.0</TargetFrameworks>
+		<TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('ios'))">$(TargetFrameworks);net9.0-ios</TargetFrameworks>
+		<TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('android'))">$(TargetFrameworks);net9.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041</TargetFrameworks>
+		<TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('maccatalyst'))">$(TargetFrameworks);net9.0-maccatalyst</TargetFrameworks>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
 		<TargetFrameworks>$(TargetFrameworks);net9.0;</TargetFrameworks>
 		<TargetFrameworks Condition="'$(Build_iOS)'=='true'">$(TargetFrameworks);net9.0-ios</TargetFrameworks>
-		<TargetFrameworks Condition="'$(Build_MacOS)'=='true'">$(TargetFrameworks);net9.0-macos;net9.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="'$(Build_Android)'=='true'">$(TargetFrameworks);net9.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="'$(Build_Windows)'=='true'">$(TargetFrameworks);net9.0-windows10.0.19041</TargetFrameworks>
 	</PropertyGroup>
