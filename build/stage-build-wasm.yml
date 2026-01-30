@@ -20,7 +20,7 @@ jobs:
   - template: templates/gitversion.yml
 
   - script: |
-      dotnet publish $(ProjectPath)/SamplesApp.csproj /p:Configuration=Release /p:TargetFrameworkOverride=browserwasm "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      dotnet publish $(ProjectPath)/SamplesApp.csproj -f net10.0-browserwasm /p:Configuration=Release /p:TargetFrameworkOverride=browserwasm "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build Wasm Head
 
   - task: CopyFiles@2
