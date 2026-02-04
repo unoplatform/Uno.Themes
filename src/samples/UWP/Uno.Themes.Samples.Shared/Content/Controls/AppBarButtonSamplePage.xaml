@@ -1,0 +1,197 @@
+﻿<Page x:Class="Uno.Themes.Samples.Content.Controls.AppBarButtonSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:um="using:Uno.Material"
+	  xmlns:ut="using:Uno.Themes"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.M3MaterialTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="AppBarButton with Icon Only"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,0,0,12" />
+
+						<!-- AppBarButton with Icon Only - SymbolIcon -->
+						<TextBlock Text="With SymbolIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconOnly"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<SymbolIcon Symbol="Add" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<!-- AppBarButton with Icon Only - FontIcon -->
+						<TextBlock Text="With FontIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconOnlyFontIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<FontIcon Glyph="&#xE8B7;" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<!-- AppBarButton with Icon Only - PathIcon -->
+						<TextBlock Text="With PathIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconOnlyPathIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<PathIcon Data="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="AppBarButton with Content Only"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- AppBarButton with Content Only -->
+						<TextBlock Text="Short Text Content"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_ContentOnly"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Content="Add"
+										  Style="{StaticResource MaterialAppBarButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- AppBarButton with Content Only - Longer Text -->
+						<TextBlock Text="Longer Text Content"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_ContentOnlyLong"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Content="Settings"
+										  Style="{StaticResource MaterialAppBarButtonStyle}" />
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="AppBarButton with Icon and Content"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- AppBarButton with Icon and Content -->
+						<TextBlock Text="Add Action - SymbolIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconAndContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Content="Add"
+										  Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<SymbolIcon Symbol="Add" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<!-- AppBarButton with Icon and Content - Edit -->
+						<TextBlock Text="Edit Action - SymbolIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconAndContentEdit"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Content="Edit"
+										  Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<SymbolIcon Symbol="Edit" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<!-- AppBarButton with Icon and Content - Save -->
+						<TextBlock Text="Save Action - SymbolIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconAndContentSave"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Content="Save"
+										  Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<SymbolIcon Symbol="Save" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<!-- AppBarButton with Icon and Content - FontIcon -->
+						<TextBlock Text="With FontIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconAndContentFontIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Content="Favorite"
+										  Style="{StaticResource MaterialAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<FontIcon Glyph="&#xE734;" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="Multiple AppBarButtons in a Row"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- Multiple AppBarButtons -->
+						<TextBlock Text="Toolbar Scenario"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_MultipleButtons"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Add" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Edit" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Delete" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Save" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

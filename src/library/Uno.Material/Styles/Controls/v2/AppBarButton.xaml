@@ -36,7 +36,8 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="AppBarButton">
-					<um:Ripple Feedback="{TemplateBinding Foreground}"
+					<um:Ripple CornerRadius="{TemplateBinding CornerRadius}"
+							   Feedback="{TemplateBinding Foreground}"
 							   FeedbackOpacity="{StaticResource PressedOpacity}"
 							   MinWidth="{TemplateBinding MinWidth}"
 							   MaxWidth="{TemplateBinding MaxWidth}">
@@ -51,6 +52,7 @@
 											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundPointerOver}" />
 											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPointerOver}" />
 											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
+											<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
 										</VisualState.Setters>
 									</VisualState>
 
@@ -59,6 +61,7 @@
 											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundPressed}" />
 											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPressed}" />
 											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
+											<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
 										</VisualState.Setters>
 									</VisualState>
 
@@ -67,6 +70,7 @@
 											<Setter Target="AppBarButtonInnerBorder.Background" Value="{ThemeResource AppBarButtonBackgroundDisabled}" />
 											<Setter Target="AppBarButtonInnerBorder.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushDisabled}" />
 											<Setter Target="Content.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
+											<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
 										</VisualState.Setters>
 									</VisualState>
 								</VisualStateGroup>
@@ -79,21 +83,31 @@
 									BorderThickness="{TemplateBinding BorderThickness}"
 									Control.IsTemplateFocusTarget="True" />
 
-							<Grid x:Name="ContentRoot"
-								  VerticalAlignment="Center"
-								  HorizontalAlignment="Center">
-								<!-- UNO WORKAROUND: The ViewBox center should be horizontal Stretch but the Grid aligns the content left -->
+							<StackPanel x:Name="ContentRoot"
+										Orientation="Vertical"
+										VerticalAlignment="Center"
+										HorizontalAlignment="Center"
+										Spacing="8">
+								<!-- Icon content wrapped in Viewbox (shown when Icon is set) -->
 								<Viewbox x:Name="ContentViewbox"
 										 MaxHeight="{ThemeResource AppBarButtonContentHeight}"
 										 MaxWidth="{ThemeResource AppBarButtonContentHeight}"
 										 VerticalAlignment="Center"
 										 HorizontalAlignment="Center"
-										 AutomationProperties.AccessibilityView="Raw">
+										 AutomationProperties.AccessibilityView="Raw"
+										 Visibility="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}">
 									<ContentPresenter x:Name="Content"
 													  Content="{TemplateBinding Icon}"
 													  Foreground="{TemplateBinding Foreground}" />
 								</Viewbox>
-							</Grid>
+								<!-- Content (shown when Content is not null/empty) -->
+								<ContentPresenter x:Name="ContentPresenter"
+												  Content="{TemplateBinding Content}"
+												  Foreground="{TemplateBinding Foreground}"
+												  VerticalAlignment="Center"
+												  HorizontalAlignment="Center"
+												  Visibility="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+							</StackPanel>
 						</Grid>
 					</um:Ripple>
 				</ControlTemplate>
