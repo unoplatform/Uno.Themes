@@ -1,0 +1,129 @@
+<Page x:Class="Uno.Themes.Samples.Content.OverviewPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  Background="{ThemeResource BackgroundBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="24">
+
+			<!-- Header -->
+			<StackPanel Spacing="8">
+				<TextBlock Text="Simple Theme"
+						   Style="{StaticResource DisplaySmall}" />
+				<TextBlock Text="A clean, minimalist design system for Uno Platform applications."
+						   Style="{StaticResource BodyLarge}"
+						   Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+			</StackPanel>
+
+			<!-- Quick Links -->
+			<StackPanel Spacing="16">
+				<TextBlock Text="Explore Components"
+						   Style="{StaticResource TitleLarge}" />
+
+				<Grid ColumnSpacing="16"
+					  RowSpacing="16">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+
+					<!-- Buttons Card -->
+					<Border Grid.Row="0"
+							Grid.Column="0"
+							CornerRadius="12"
+							Padding="20"
+							Background="{ThemeResource SurfaceBrush}">
+						<StackPanel Spacing="12">
+							<TextBlock Text="Buttons"
+									   Style="{StaticResource TitleMedium}" />
+							<TextBlock Text="Filled, Outlined, and Text button styles"
+									   Style="{StaticResource BodySmall}"
+									   Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<Button Content="Filled"
+										Style="{StaticResource SimpleFilledButtonStyle}" />
+								<Button Content="Outlined"
+										Style="{StaticResource SimpleOutlinedButtonStyle}" />
+							</StackPanel>
+						</StackPanel>
+					</Border>
+
+					<!-- Text Inputs Card -->
+					<Border Grid.Row="0"
+							Grid.Column="1"
+							CornerRadius="12"
+							Padding="20"
+							Background="{ThemeResource SurfaceBrush}">
+						<StackPanel Spacing="12">
+							<TextBlock Text="Text Inputs"
+									   Style="{StaticResource TitleMedium}" />
+							<TextBlock Text="TextBox and PasswordBox controls"
+									   Style="{StaticResource BodySmall}"
+									   Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+							<TextBox PlaceholderText="Enter text..." />
+						</StackPanel>
+					</Border>
+
+					<!-- Selection Card -->
+					<Border Grid.Row="1"
+							Grid.Column="0"
+							CornerRadius="12"
+							Padding="20"
+							Background="{ThemeResource SurfaceBrush}">
+						<StackPanel Spacing="12">
+							<TextBlock Text="Selection"
+									   Style="{StaticResource TitleMedium}" />
+							<TextBlock Text="CheckBox, RadioButton, ToggleSwitch"
+									   Style="{StaticResource BodySmall}"
+									   Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<CheckBox IsChecked="True" />
+								<ToggleSwitch IsOn="True" />
+							</StackPanel>
+						</StackPanel>
+					</Border>
+
+					<!-- Progress Card -->
+					<Border Grid.Row="1"
+							Grid.Column="1"
+							CornerRadius="12"
+							Padding="20"
+							Background="{ThemeResource SurfaceBrush}">
+						<StackPanel Spacing="12">
+							<TextBlock Text="Progress"
+									   Style="{StaticResource TitleMedium}" />
+							<TextBlock Text="ProgressBar and ProgressRing"
+									   Style="{StaticResource BodySmall}"
+									   Foreground="{ThemeResource OnSurfaceVariantBrush}" />
+							<ProgressBar Value="60"
+										 Maximum="100" />
+						</StackPanel>
+					</Border>
+				</Grid>
+			</StackPanel>
+
+			<!-- Getting Started -->
+			<StackPanel Spacing="12">
+				<TextBlock Text="Getting Started"
+						   Style="{StaticResource TitleLarge}" />
+				<TextBlock Style="{StaticResource BodyMedium}"
+						   TextWrapping="Wrap"
+						   Foreground="{ThemeResource OnSurfaceVariantBrush}">
+					<Run Text="To use Simple Theme in your Uno Platform application, add the" />
+					<Run Text="Uno.Simple.WinUI"
+						 FontWeight="SemiBold" />
+					<Run Text="NuGet package and initialize the theme in your App.xaml." />
+				</TextBlock>
+			</StackPanel>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

@@ -1,0 +1,98 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.ComboBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:ut="using:Uno.Themes"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Page.Resources>
+		<x:String x:Key="Icon_Mail">F1 M 18 0 L 2 0 C 0.8999999761581421 0 0.009999990463256836 0.8999999761581421 0.009999990463256836 2 L 0 14 C 0 15.100000023841858 0.8999999761581421 16 2 16 L 18 16 C 19.100000023841858 16 20 15.100000023841858 20 14 L 20 2 C 20 0.8999999761581421 19.100000023841858 0 18 0 Z M 18 4 L 10 9 L 2 4 L 2 2 L 10 7 L 18 2 L 18 4 Z</x:String>
+	</Page.Resources>
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="ComboBox Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  ComboBox Default  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Normal"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Normal" />
+					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="{Binding Letters}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ComboBox Disabled  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Disabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Disabled" />
+					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="{Binding Letters}"
+							  IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ComboBox with Leading Icon  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Normal_LeadingIcon"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="With Leading Icon" />
+					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="{Binding Letters}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource Icon_Mail}" />
+						</ut:ControlExtensions.Icon>
+					</ComboBox>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ComboBox Disabled with Leading Icon  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Disabled_LeadingIcon"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Disabled with Leading Icon" />
+					<ComboBox Style="{StaticResource MaterialComboBoxStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="{Binding Letters}"
+							  IsEnabled="False">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource Icon_Mail}" />
+						</ut:ControlExtensions.Icon>
+					</ComboBox>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ComboBox with custom ItemTemplate  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ComboBoxSamplePage_Normal_CustomItemTemplate"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="With Custom ItemTemplate" />
+					<ComboBox ItemsSource="{Binding TestDataSource, Mode=OneTime}"
+							  PlaceholderText="Placeholder"
+							  Style="{StaticResource MaterialComboBoxStyle}"
+							  VerticalAlignment="Center">
+						<ComboBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock>
+									<Run Text="{Binding Display}" />
+									<Run Text=":" />
+									<Run Text="{Binding Value}" />
+								</TextBlock>
+							</DataTemplate>
+						</ComboBox.ItemTemplate>
+					</ComboBox>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

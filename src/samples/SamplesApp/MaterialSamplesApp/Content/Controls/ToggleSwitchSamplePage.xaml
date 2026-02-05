@@ -1,0 +1,92 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.ToggleSwitchSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="ToggleSwitch Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  ToggleSwitch Default (without Icon)  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Default" />
+					<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch with On Icon only -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_OnIconOnly"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="On Icon Only" />
+					<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+						<ToggleSwitch.OnContent>
+							<PathIcon Data="M0.166992 3.99997L1.50033 5.3333C4.81366 2.01997 10.187 2.01997 13.5003 5.3333L14.8337 3.99997C10.787 -0.0467007 4.22033 -0.0467007 0.166992 3.99997ZM5.50033 9.3333L7.50033 11.3333L9.50032 9.3333C8.40033 8.22663 6.60699 8.22663 5.50033 9.3333ZM2.83366 6.66663L4.16699 7.99997C6.00699 6.15997 8.99366 6.15997 10.8337 7.99997L12.167 6.66663C9.59366 4.0933 5.41366 4.0933 2.83366 6.66663Z" />
+						</ToggleSwitch.OnContent>
+					</ToggleSwitch>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch with Icons using SymbolIcon -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_SymbolIcon"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Using SymbolIcon" />
+					<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+						<ToggleSwitch.OffContent>
+							<SymbolIcon Symbol="UnFavorite" />
+						</ToggleSwitch.OffContent>
+						<ToggleSwitch.OnContent>
+							<SymbolIcon Symbol="Favorite" />
+						</ToggleSwitch.OnContent>
+					</ToggleSwitch>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch with Icons using FontIcon -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_FontIcon"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Using FontIcon" />
+					<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}">
+						<ToggleSwitch.OffContent>
+							<FontIcon Glyph="&#xE1A3;" />
+						</ToggleSwitch.OffContent>
+						<ToggleSwitch.OnContent>
+							<FontIcon Glyph="&#xE12E;" />
+						</ToggleSwitch.OnContent>
+					</ToggleSwitch>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch Disabled On  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_Disabled_On"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Disabled On" />
+					<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
+								  IsEnabled="False"
+								  IsOn="True" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch Disabled Off  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ToggleSwitchSamplePage_Disabled_Off"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Disabled Off" />
+					<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}"
+								  IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

@@ -1,0 +1,98 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.AppBarButtonSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="AppBarButton Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  Icon Only - SymbolIcon  -->
+			<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconOnly"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Icon Only - SymbolIcon" />
+					<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+						<AppBarButton.Icon>
+							<SymbolIcon Symbol="Add" />
+						</AppBarButton.Icon>
+					</AppBarButton>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Icon Only - FontIcon  -->
+			<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconOnlyFontIcon"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Icon Only - FontIcon" />
+					<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+						<AppBarButton.Icon>
+							<FontIcon Glyph="&#xE8B7;" />
+						</AppBarButton.Icon>
+					</AppBarButton>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Content Only  -->
+			<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_ContentOnly"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Content Only" />
+					<AppBarButton Content="Add"
+								  Style="{StaticResource MaterialAppBarButtonStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Icon and Content  -->
+			<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_IconAndContent"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Icon and Content" />
+					<AppBarButton Content="Add"
+								  Style="{StaticResource MaterialAppBarButtonStyle}">
+						<AppBarButton.Icon>
+							<SymbolIcon Symbol="Add" />
+						</AppBarButton.Icon>
+					</AppBarButton>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Multiple AppBarButtons  -->
+			<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_MultipleButtons"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Multiple Buttons (Toolbar)" />
+					<StackPanel Orientation="Horizontal"
+								Spacing="8">
+						<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+							<AppBarButton.Icon>
+								<SymbolIcon Symbol="Add" />
+							</AppBarButton.Icon>
+						</AppBarButton>
+						<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+							<AppBarButton.Icon>
+								<SymbolIcon Symbol="Edit" />
+							</AppBarButton.Icon>
+						</AppBarButton>
+						<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+							<AppBarButton.Icon>
+								<SymbolIcon Symbol="Delete" />
+							</AppBarButton.Icon>
+						</AppBarButton>
+						<AppBarButton Style="{StaticResource MaterialAppBarButtonStyle}">
+							<AppBarButton.Icon>
+								<SymbolIcon Symbol="Save" />
+							</AppBarButton.Icon>
+						</AppBarButton>
+					</StackPanel>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

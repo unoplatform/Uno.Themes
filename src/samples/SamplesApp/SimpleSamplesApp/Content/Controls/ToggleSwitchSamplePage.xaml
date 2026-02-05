@@ -1,0 +1,58 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.ToggleSwitchSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="ToggleSwitch Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  ToggleSwitch without label  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_NoLabel"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="No label" />
+					<ToggleSwitch Style="{StaticResource SimpleToggleSwitchStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch OFF  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_Off"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="OFF" />
+					<ToggleSwitch OffContent="OFF"
+								  Style="{StaticResource SimpleToggleSwitchStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch ON  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_On"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="ON" />
+					<ToggleSwitch OnContent="ON"
+								  Style="{StaticResource SimpleToggleSwitchStyle}"
+								  IsOn="True" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ToggleSwitch Disabled  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitchSamplePage_Disabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Disabled" />
+					<ToggleSwitch OffContent="OFF"
+								  IsEnabled="False"
+								  Style="{StaticResource SimpleToggleSwitchStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

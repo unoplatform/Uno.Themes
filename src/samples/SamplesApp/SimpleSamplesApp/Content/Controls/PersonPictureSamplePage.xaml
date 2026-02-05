@@ -1,0 +1,111 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.PersonPictureSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="PersonPicture Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  Default / Circle  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Circle"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Circle" />
+					<PersonPicture Width="72"
+								   Height="72"
+								   Style="{StaticResource SimplePersonPictureStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Square  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Square"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Square" />
+					<PersonPicture Width="72"
+								   Height="72"
+								   Style="{StaticResource SimpleSquarePersonPictureStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Small  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Small"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Small" />
+					<PersonPicture Width="36"
+								   Height="36"
+								   Style="{StaticResource SimpleSmallPersonPictureStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Medium  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Medium"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Medium" />
+					<PersonPicture Width="56"
+								   Height="56"
+								   Style="{StaticResource SimpleMediumPersonPictureStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Large  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Large"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Large" />
+					<PersonPicture Width="72"
+								   Height="72"
+								   Style="{StaticResource SimpleLargePersonPictureStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  With Initials  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Initials"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="With Initials" />
+					<PersonPicture Width="72"
+								   Height="72"
+								   Initials="JD"
+								   Style="{StaticResource SimplePersonPictureStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  With Photo  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Photo"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="With Photo" />
+					<PersonPicture Width="72"
+								   Height="72"
+								   Style="{StaticResource SimplePersonPictureStyle}">
+						<PersonPicture.ProfilePicture>
+							<ImageSource>ms-appx:///Assets/Avatar.png</ImageSource>
+						</PersonPicture.ProfilePicture>
+					</PersonPicture>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  With Badge  -->
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPictureSamplePage_Badge"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="With Badge" />
+					<PersonPicture Width="72"
+								   Height="72"
+								   BadgeNumber="5"
+								   Style="{StaticResource SimplePersonPictureStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

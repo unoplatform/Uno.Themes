@@ -1,0 +1,60 @@
+<Page x:Class="Uno.Themes.Samples.Content.OverviewPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:ut="using:Uno.Themes"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16" Spacing="16">
+			<TextBlock Text="Material Design Samples"
+					   Style="{StaticResource MaterialHeadlineMedium}"
+					   Margin="0,0,0,16" />
+
+			<TextBlock Text="Welcome to the Uno.Material sample application. This app demonstrates the Material Design 3 theme components available in Uno Platform."
+					   Style="{StaticResource MaterialBodyLarge}"
+					   TextWrapping="Wrap" />
+
+			<!-- Quick Preview: Buttons -->
+			<TextBlock Text="Buttons"
+					   Style="{StaticResource MaterialTitleLarge}"
+					   Margin="0,24,0,8" />
+			<StackPanel Orientation="Horizontal" Spacing="8">
+				<Button Content="Filled"
+						Style="{StaticResource MaterialFilledButtonStyle}" />
+				<Button Content="Outlined"
+						Style="{StaticResource MaterialOutlinedButtonStyle}" />
+				<Button Content="Text"
+						Style="{StaticResource MaterialTextButtonStyle}" />
+			</StackPanel>
+
+			<!-- Quick Preview: Text Input -->
+			<TextBlock Text="Text Input"
+					   Style="{StaticResource MaterialTitleLarge}"
+					   Margin="0,24,0,8" />
+			<StackPanel Spacing="8" MaxWidth="300" HorizontalAlignment="Left">
+				<TextBox PlaceholderText="Filled TextBox"
+						 Style="{StaticResource MaterialFilledTextBoxStyle}" />
+				<TextBox PlaceholderText="Outlined TextBox"
+						 Style="{StaticResource MaterialOutlinedTextBoxStyle}" />
+			</StackPanel>
+
+			<!-- Quick Preview: Selection -->
+			<TextBlock Text="Selection Controls"
+					   Style="{StaticResource MaterialTitleLarge}"
+					   Margin="0,24,0,8" />
+			<StackPanel Orientation="Horizontal" Spacing="16">
+				<CheckBox Content="CheckBox"
+						  Style="{StaticResource MaterialCheckBoxStyle}" />
+				<RadioButton Content="RadioButton"
+							 Style="{StaticResource MaterialRadioButtonStyle}" />
+				<ToggleSwitch Style="{StaticResource MaterialToggleSwitchStyle}" />
+			</StackPanel>
+
+			<TextBlock Text="Use the navigation menu to explore all available controls and styles."
+					   Style="{StaticResource MaterialBodyMedium}"
+					   TextWrapping="Wrap"
+					   Margin="0,32,0,0"
+					   Opacity="0.7" />
+		</StackPanel>
+	</ScrollViewer>
+</Page>

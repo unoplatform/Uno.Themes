@@ -1,0 +1,36 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.CommandBarSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="CommandBar Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  CommandBar  -->
+			<smtx:XamlDisplay UniqueKey="CommandBarSamplePage"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="CommandBar with PrimaryCommands" />
+					<CommandBar Content="Command Bar Sample"
+								Style="{StaticResource MaterialCommandBarStyle}">
+						<CommandBar.PrimaryCommands>
+							<AppBarButton Icon="Add"
+										  Label="Add" />
+							<AppBarButton Icon="Edit"
+										  Label="Edit" />
+							<AppBarButton Icon="Delete"
+										  Label="Delete" />
+						</CommandBar.PrimaryCommands>
+					</CommandBar>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

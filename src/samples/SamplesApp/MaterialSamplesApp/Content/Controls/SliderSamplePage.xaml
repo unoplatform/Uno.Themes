@@ -1,0 +1,68 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.SliderSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="Slider Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!-- Vertical Sliders -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_SliderSamplePage_Vertical"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Vertical" />
+					<StackPanel Orientation="Horizontal"
+								Spacing="16"
+								Margin="0,8,0,0">
+						<Slider Height="200"
+								Maximum="100"
+								Minimum="0"
+								Orientation="Vertical"
+								Style="{StaticResource MaterialSliderStyle}"
+								Value="25" />
+
+						<Slider Height="200"
+								IsEnabled="False"
+								Maximum="100"
+								Minimum="0"
+								Orientation="Vertical"
+								Style="{StaticResource MaterialSliderStyle}"
+								Value="25" />
+					</StackPanel>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Horizontal Sliders -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_SliderSamplePage_Horizontal"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Horizontal" />
+					<StackPanel Spacing="8"
+								Margin="0,8,0,0">
+						<Slider Width="200"
+								Maximum="100"
+								Minimum="0"
+								Orientation="Horizontal"
+								Style="{StaticResource MaterialSliderStyle}"
+								Value="25" />
+
+						<Slider Width="200"
+								IsEnabled="False"
+								Maximum="100"
+								Minimum="0"
+								Orientation="Horizontal"
+								Style="{StaticResource MaterialSliderStyle}"
+								Value="25" />
+					</StackPanel>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

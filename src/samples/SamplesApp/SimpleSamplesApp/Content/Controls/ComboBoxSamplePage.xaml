@@ -1,0 +1,66 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.ComboBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="ComboBox Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  ComboBox Default  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Normal"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Normal" />
+					<ComboBox Style="{StaticResource SimpleComboBoxStyle}"
+							  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="{Binding Letters}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ComboBox Disabled  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Disabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Disabled" />
+					<ComboBox Style="{StaticResource SimpleComboBoxStyle}"
+							  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+							  PlaceholderText="Placeholder"
+							  ItemsSource="{Binding Letters}"
+							  IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ComboBox Error State  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Error"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Error State" />
+					<ComboBox Style="{StaticResource SimpleErrorComboBoxStyle}"
+							  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+							  PlaceholderText="Select an option"
+							  ItemsSource="{Binding Letters}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  ComboBox with Selected Value  -->
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBoxSamplePage_Selected"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="With Selected Value" />
+					<ComboBox Style="{StaticResource SimpleComboBoxStyle}"
+							  ItemContainerStyle="{StaticResource SimpleComboBoxItemStyle}"
+							  SelectedIndex="2"
+							  ItemsSource="{Binding Letters}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

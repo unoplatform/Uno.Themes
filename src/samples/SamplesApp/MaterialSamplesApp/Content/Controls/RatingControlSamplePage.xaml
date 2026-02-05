@@ -1,0 +1,37 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.RatingControlSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="RatingControl Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  Default RatingControl with label  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_DefaultRatingControlSamplePage"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Default with Label" />
+					<muxc:RatingControl Style="{StaticResource MaterialRatingControlStyle}"
+										Caption="Label" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Secondary RatingControl  -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_SecondaryRatingControlSamplePage"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Secondary without Label" />
+					<muxc:RatingControl Style="{StaticResource SecondaryRatingControlStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

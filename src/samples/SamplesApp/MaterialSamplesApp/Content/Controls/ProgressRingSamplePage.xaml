@@ -1,0 +1,53 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.ProgressRingSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="ProgressRing Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!-- Slider to control ProgressRing -->
+			<TextBlock Text="Slider to Set ProgressRing"
+					   Margin="0,10,0,0" />
+
+			<Slider x:Name="ProgressSlider"
+					Style="{StaticResource MaterialSliderStyle}"
+					Minimum="0"
+					Maximum="100"
+					Value="50"
+					HorizontalAlignment="Left"
+					Width="250"
+					Margin="0,10" />
+
+			<!-- Determinate ProgressRing -->
+			<smtx:XamlDisplay UniqueKey="M3_ProgressRingSamplePage_Primary"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Determinate ProgressRing" />
+					<muxc:ProgressRing Style="{StaticResource MaterialProgressRingStyle}"
+									   IsIndeterminate="False"
+									   Value="{Binding Value, ElementName=ProgressSlider}"
+									   Minimum="0"
+									   Maximum="100" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Indeterminate ProgressRing -->
+			<smtx:XamlDisplay UniqueKey="M3_ProgressRingSamplePage_PrimaryIndeterminate"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Indeterminate ProgressRing" />
+					<muxc:ProgressRing Style="{StaticResource MaterialProgressRingStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

@@ -1,0 +1,30 @@
+<Page x:Class="Uno.Themes.Samples.Shell"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+
+	<Grid>
+		<NavigationView x:Name="NavigationView"
+						PaneDisplayMode="LeftMinimal"
+						IsBackButtonVisible="Visible"
+						IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}"
+						IsPaneToggleButtonVisible="True"
+						BackRequested="OnNavigationViewBackRequested"
+						ItemInvoked="OnNavigationViewItemInvoked"
+						SelectionFollowsFocus="Enabled">
+
+			<NavigationView.PaneFooter>
+				<StackPanel Orientation="Horizontal"
+							Padding="12"
+							Spacing="8">
+					<ToggleButton Content="🌙"
+								  ToolTipService.ToolTip="Toggle Dark Mode"
+								  IsChecked="False"
+								  Click="OnThemeToggleClick" />
+				</StackPanel>
+			</NavigationView.PaneFooter>
+
+			<Frame x:Name="ContentFrame" />
+		</NavigationView>
+	</Grid>
+</Page>

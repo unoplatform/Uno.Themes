@@ -1,0 +1,45 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:smtx="using:ShowMeTheXAML">
+
+	<!-- XamlDisplay Style with flyout below -->
+	<Style x:Key="XamlDisplayBelowStyle"
+		   TargetType="smtx:XamlDisplay">
+		<Setter Property="Margin" Value="0,8" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="smtx:XamlDisplay">
+					<StackPanel Spacing="8">
+						<!-- The actual UI content -->
+						<ContentPresenter Content="{TemplateBinding Content}" />
+
+						<!-- Button to show the XAML code -->
+						<Button Content="View XAML"
+								Style="{StaticResource SeeXamlFlyoutButtonStyle}"
+								HorizontalAlignment="Left">
+							<Button.Flyout>
+								<Flyout>
+									<ScrollViewer MaxWidth="600"
+												  MaxHeight="400"
+												  HorizontalScrollMode="Auto"
+												  HorizontalScrollBarVisibility="Auto">
+										<TextBlock Text="{Binding Xaml, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+												   FontFamily="Consolas, Courier New, monospace"
+												   FontSize="12"
+												   IsTextSelectionEnabled="True"
+												   TextWrapping="NoWrap" />
+									</ScrollViewer>
+								</Flyout>
+							</Button.Flyout>
+						</Button>
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Default XamlDisplay Style -->
+	<Style TargetType="smtx:XamlDisplay"
+		   BasedOn="{StaticResource XamlDisplayBelowStyle}" />
+
+</ResourceDictionary>

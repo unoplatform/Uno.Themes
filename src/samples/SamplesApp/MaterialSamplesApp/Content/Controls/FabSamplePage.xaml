@@ -1,0 +1,202 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.FabSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:ut="using:Uno.Themes"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Page.Resources>
+		<x:String x:Key="PlusIcon">M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z</x:String>
+	</Page.Resources>
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="16">
+
+			<TextBlock Text="FAB Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  Default FAB - Icon Only  -->
+			<TextBlock Text="Default FAB - Icon Only"
+					   Style="{StaticResource TitleMedium}" />
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+
+				<!-- Primary Fab -->
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Icon"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Surface Fab -->
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Icon_Surface"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialSurfaceFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Secondary Fab -->
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Icon_Secondary"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialSecondaryFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Tertiary Fab -->
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Icon_Tertiary"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialTertiaryFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+			</StackPanel>
+
+			<!--  Default FAB - Icon and Label  -->
+			<TextBlock Text="Default FAB - Icon and Label"
+					   Style="{StaticResource TitleMedium}" />
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+
+				<!-- Primary Fab with Label -->
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Icon_Label"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialFabStyle}"
+							Content="Create">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<!-- Surface Fab with Label -->
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Default_Icon_Label_Surface"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialSurfaceFabStyle}"
+							Content="Create">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+			</StackPanel>
+
+			<!--  Small FAB  -->
+			<TextBlock Text="Small FAB"
+					   Style="{StaticResource TitleMedium}" />
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small_Icon"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialSmallFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small_Icon_Surface"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialSmallSurfaceFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small_Icon_Secondary"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialSmallSecondaryFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Small_Icon_Tertiary"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialSmallTertiaryFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+			</StackPanel>
+
+			<!--  Large FAB  -->
+			<TextBlock Text="Large FAB"
+					   Style="{StaticResource TitleMedium}" />
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large_Icon"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialLargeFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large_Icon_Surface"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialLargeSurfaceFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large_Icon_Secondary"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialLargeSecondaryFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+				<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Large_Icon_Tertiary"
+								  Style="{StaticResource XamlDisplayBelowStyle}">
+					<Button Style="{StaticResource MaterialLargeTertiaryFabStyle}">
+						<ut:ControlExtensions.Icon>
+							<PathIcon Data="{StaticResource PlusIcon}" />
+						</ut:ControlExtensions.Icon>
+					</Button>
+				</smtx:XamlDisplay>
+
+			</StackPanel>
+
+			<!--  Disabled FAB  -->
+			<TextBlock Text="Disabled FAB"
+					   Style="{StaticResource TitleMedium}" />
+			<smtx:XamlDisplay UniqueKey="M3_FabSamplePage_Disabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<Button Style="{StaticResource MaterialFabStyle}"
+						IsEnabled="False"
+						Content="Create">
+					<ut:ControlExtensions.Icon>
+						<PathIcon Data="{StaticResource PlusIcon}" />
+					</ut:ControlExtensions.Icon>
+				</Button>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

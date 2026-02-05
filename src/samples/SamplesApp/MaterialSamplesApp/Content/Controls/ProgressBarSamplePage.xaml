@@ -1,0 +1,53 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.ProgressBarSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="ProgressBar Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!-- Slider to control ProgressBar -->
+			<TextBlock Text="Slider to Set ProgressBar"
+					   Margin="0,10,0,0" />
+
+			<Slider x:Name="ProgressSlider"
+					Style="{StaticResource MaterialSliderStyle}"
+					Minimum="0"
+					Maximum="100"
+					Value="50"
+					HorizontalAlignment="Left"
+					Width="250"
+					Margin="0,10" />
+
+			<!-- Determinate ProgressBar -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ProgressBarSamplePage_Primary"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Determinate ProgressBar" />
+					<muxc:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
+									  Value="{Binding Value, ElementName=ProgressSlider}"
+									  Minimum="0"
+									  Maximum="100" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Indeterminate ProgressBar -->
+			<smtx:XamlDisplay UniqueKey="M3_Material_ProgressBarSamplePage_PrimaryIndeterminate"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Indeterminate ProgressBar" />
+					<muxc:ProgressBar Style="{StaticResource MaterialProgressBarStyle}"
+									  IsIndeterminate="True" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

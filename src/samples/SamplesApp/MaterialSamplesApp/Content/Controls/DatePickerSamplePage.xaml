@@ -1,0 +1,40 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.DatePickerSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="16"
+					Spacing="8">
+
+			<TextBlock Text="DatePicker Styles"
+					   Style="{StaticResource TitleLarge}"
+					   Margin="0,0,0,16" />
+
+			<!--  Default DatePicker  -->
+			<smtx:XamlDisplay UniqueKey="M3_DatePickerSamplePage_Material_Default"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Default" />
+					<DatePicker HorizontalAlignment="Left"
+								Header="Enter Date"
+								Style="{StaticResource MaterialDatePickerStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!--  Disabled DatePicker  -->
+			<smtx:XamlDisplay UniqueKey="M3_DatePickerSamplePage_Material_Disabled"
+							  Style="{StaticResource XamlDisplayBelowStyle}">
+				<StackPanel>
+					<TextBlock Text="Disabled" />
+					<DatePicker HorizontalAlignment="Left"
+								Header="Enter Date"
+								IsEnabled="False"
+								Style="{StaticResource MaterialDatePickerStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>
