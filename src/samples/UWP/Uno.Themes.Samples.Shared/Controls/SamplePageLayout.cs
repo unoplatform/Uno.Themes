@@ -4,14 +4,11 @@ public partial class SamplePageLayout : ContentControl
 {
 	private const string VisualStateMaterial = nameof(Design.Material);
 	private const string VisualStateCupertino = nameof(Design.Cupertino);
-	private const string VisualStateSimple = nameof(Design.Simple);
 
 	private const string MaterialRadioButtonPartName = "PART_MaterialRadioButton";
 	private const string CupertinoRadioButtonPartName = "PART_CupertinoRadioButton";
-	private const string SimpleRadioButtonPartName = "PART_SimpleRadioButton";
 	private const string StickyMaterialRadioButtonPartName = "PART_StickyMaterialRadioButton";
 	private const string StickyCupertinoRadioButtonPartName = "PART_StickyCupertinoRadioButton";
-	private const string StickySimpleRadioButtonPartName = "PART_StickySimpleRadioButton";
 	private const string ScrollingTabsPartName = "PART_ScrollingTabs";
 	private const string StickyTabsPartName = "PART_StickyTabs";
 	private const string ScrollViewerPartName = "PART_ScrollViewer";
@@ -24,15 +21,12 @@ public partial class SamplePageLayout : ContentControl
 	{
 		new LayoutModeMapping(Design.Material, _materialRadioButton, _stickyMaterialRadioButton, VisualStateMaterial, /* templates: */ MaterialTemplate, M3MaterialTemplate),
 		new LayoutModeMapping(Design.Cupertino, _cupertinoRadioButton, _stickyCupertinoRadioButton, VisualStateCupertino, /* templates: */ CupertinoTemplate),
-		new LayoutModeMapping(Design.Simple, _simpleRadioButton, _stickySimpleRadioButton, VisualStateSimple, /* templates: */ SimpleTemplate),
 	};
 
 	private RadioButton _materialRadioButton;
 	private RadioButton _cupertinoRadioButton;
-	private RadioButton _simpleRadioButton;
 	private RadioButton _stickyMaterialRadioButton;
 	private RadioButton _stickyCupertinoRadioButton;
-	private RadioButton _stickySimpleRadioButton;
 	private FrameworkElement _scrollingTabs;
 	private FrameworkElement _stickyTabs;
 	private FrameworkElement _top;
@@ -63,10 +57,8 @@ public partial class SamplePageLayout : ContentControl
 
 		_materialRadioButton = (RadioButton)GetTemplateChild(MaterialRadioButtonPartName);
 		_cupertinoRadioButton = (RadioButton)GetTemplateChild(CupertinoRadioButtonPartName);
-		_simpleRadioButton = (RadioButton)GetTemplateChild(SimpleRadioButtonPartName);
 		_stickyMaterialRadioButton = (RadioButton)GetTemplateChild(StickyMaterialRadioButtonPartName);
 		_stickyCupertinoRadioButton = (RadioButton)GetTemplateChild(StickyCupertinoRadioButtonPartName);
-		_stickySimpleRadioButton = (RadioButton)GetTemplateChild(StickySimpleRadioButtonPartName);
 		_scrollingTabs = (FrameworkElement)GetTemplateChild(ScrollingTabsPartName);
 		_stickyTabs = (FrameworkElement)GetTemplateChild(StickyTabsPartName);
 		_scrollViewer = (ScrollViewer)GetTemplateChild(ScrollViewerPartName);
@@ -84,10 +76,8 @@ public partial class SamplePageLayout : ContentControl
 
 		BindOnClick(_materialRadioButton);
 		BindOnClick(_cupertinoRadioButton);
-		BindOnClick(_simpleRadioButton);
 		BindOnClick(_stickyMaterialRadioButton);
 		BindOnClick(_stickyCupertinoRadioButton);
-		BindOnClick(_stickySimpleRadioButton);
 
 		UpdateLayoutRadioButtons();
 

@@ -218,61 +218,6 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
-			<sample:SamplePageLayout.SimpleTemplate>
-				<DataTemplate>
-					<StackPanel>
-						<!-- CheckBox No Content -->
-						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_NoContent">
-							<CheckBox Style="{StaticResource SimpleCheckBoxStyle}" />
-						</smtx:XamlDisplay>
-
-						<!-- CheckBox Unchecked -->
-						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_Unchecked">
-							<CheckBox Content="Unchecked"
-									  Style="{StaticResource SimpleCheckBoxStyle}" />
-						</smtx:XamlDisplay>
-
-						<!-- CheckBox Checked -->
-						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_Checked">
-							<CheckBox Content="Checked"
-									  Style="{StaticResource SimpleCheckBoxStyle}"
-									  IsChecked="True" />
-						</smtx:XamlDisplay>
-
-						<!-- CheckBox Indeterminate -->
-						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_Indeterminate">
-							<CheckBox Content="Indeterminate"
-									  Style="{StaticResource SimpleCheckBoxStyle}"
-									  IsThreeState="True"
-									  IsChecked="{x:Null}" />
-						</smtx:XamlDisplay>
-
-						<!-- CheckBox Unchecked Disabled -->
-						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_UncheckedDisabled">
-							<CheckBox Content="Disabled"
-									  Style="{StaticResource SimpleCheckBoxStyle}"
-									  IsEnabled="False" />
-						</smtx:XamlDisplay>
-
-						<!-- CheckBox Checked Disabled -->
-						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_CheckedDisabled">
-							<CheckBox Content="Checked Disabled"
-									  Style="{StaticResource SimpleCheckBoxStyle}"
-									  IsEnabled="False"
-									  IsChecked="True" />
-						</smtx:XamlDisplay>
-
-						<!-- CheckBox Indeterminate Disabled -->
-						<smtx:XamlDisplay UniqueKey="Simple_CheckBoxSamplePage_IndeterminateDisabled">
-							<CheckBox Content="Indeterminate Disabled"
-									  Style="{StaticResource SimpleCheckBoxStyle}"
-									  IsEnabled="False"
-									  IsThreeState="True"
-									  IsChecked="{x:Null}" />
-						</smtx:XamlDisplay>
-					</StackPanel>
-				</DataTemplate>
-			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

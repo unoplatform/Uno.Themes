@@ -145,22 +145,6 @@
 											</StackPanel>
 										</RadioButton>
 
-										<!-- Simple RadioButton -->
-										<RadioButton x:Name="PART_SimpleRadioButton"
-													 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
-													 Visibility="Collapsed"
-													 Margin="0,0,16,0">
-											<StackPanel Orientation="Horizontal">
-
-												<!-- Label -->
-												<TextBlock Text="Simple"
-														   FontSize="20"
-														   FontWeight="Medium"
-														   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
-											</StackPanel>
-										</RadioButton>
-									</StackPanel>
-
 									<Grid>
 
 										<!-- Material Content -->
@@ -199,24 +183,6 @@
 														  VerticalAlignment="Stretch"
 														  HorizontalAlignment="Stretch"
 														  Visibility="Collapsed" />
-
-										<!-- Simple Content -->
-										<Grid x:Name="SimpleContentContainer"
-											  Visibility="Collapsed">
-											<Grid.Resources>
-												<ResourceDictionary>
-													<ResourceDictionary.MergedDictionaries>
-														<SimpleTheme xmlns="using:Uno.Simple" />
-													</ResourceDictionary.MergedDictionaries>
-												</ResourceDictionary>
-											</Grid.Resources>
-
-											<ContentPresenter x:Name="SimpleContentPresenter"
-															  Content="{TemplateBinding Content}"
-															  ContentTemplate="{TemplateBinding SimpleTemplate}"
-															  VerticalAlignment="Stretch"
-															  HorizontalAlignment="Stretch" />
-										</Grid>
 									</Grid>
 
 									<!-- Optional link to documentation -->
@@ -304,20 +270,6 @@
 								</StackPanel>
 							</RadioButton>
 
-							<!-- Simple RadioButton -->
-							<RadioButton x:Name="PART_StickySimpleRadioButton"
-										 Style="{StaticResource SampleLayoutModeRadioButtonStyle}"
-										 Visibility="Collapsed"
-										 Margin="0,0,16,0">
-								<StackPanel Orientation="Horizontal">
-
-									<!-- Label -->
-									<TextBlock Text="Simple"
-											   FontSize="20"
-											   FontWeight="Medium"
-											   Foreground="{ThemeResource MaterialOnBackgroundBrush}" />
-								</StackPanel>
-							</RadioButton>
 						</StackPanel>
 
 						<VisualStateManager.VisualStateGroups>
