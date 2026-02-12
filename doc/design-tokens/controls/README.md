@@ -171,7 +171,7 @@ When documenting a new control, include:
 
 ## Related Documentation
 
-- [Design Token Matrix](../design-tokens-matrix.md) - Main index
+- [Design Token Matrix](../../design-tokens-matrix.md) - Main index
 - [Colors Reference](../colors.md) - Color token details
 - [Typography Reference](../typography.md) - Typography scales
 - [Opacity & States](../opacity-states.md) - State opacity values

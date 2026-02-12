@@ -358,7 +358,7 @@ Material pairs every background color with a foreground "On" color for guarantee
 **Solution**: Map Fluent secondary colors to Material:
 
 ```xml
-<Color x:Key="SecondaryColor">#SystemAccentColorLight1#</Color>
+<Color x:Key="SecondaryColor">{ThemeResource SystemAccentColorLight1}</Color>
 ```
 
 ### 4. CornerRadius Styles
