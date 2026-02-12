@@ -9,9 +9,9 @@ Material's brush system applies opacity-based state overlays to semantic colors:
 - Each color token (e.g., `PrimaryColor`) generates 9 brush variations
 - States: Default, Hover, Focused, Pressed, Dragged, Selected, Medium, Low, Disabled
 - Opacity values are consistent across all colors for unified interaction behavior
-- Brushes reference colors from [SharedColorPalette.xaml](../src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml)
+- Brushes reference colors from [SharedColorPalette.xaml](../../src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml)
 
-**Source**: [SharedColors.xaml](../src/library/Uno.Themes/Styles/Applications/Common/SharedColors.xaml)
+**Source**: [SharedColors.xaml](../../src/library/Uno.Themes/Styles/Applications/Common/SharedColors.xaml)
 
 ## Brush Naming Convention
 

@@ -12,7 +12,7 @@ Material uses predefined opacity values for:
 
 All opacity values are defined as `x:Double` resources and applied uniformly across all color families.
 
-**Source**: [SharedColorPalette.xaml](../src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml#L140-L147)
+**Source**: [SharedColorPalette.xaml](../../src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml#L126-L134)
 
 ## Opacity Token Reference
 

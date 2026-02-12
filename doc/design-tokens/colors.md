@@ -15,7 +15,7 @@ Material Design 3 implements a comprehensive semantic color system with:
 
 All colors are defined in both Light and Dark themes with full semantic parity.
 
-**Source**: [SharedColorPalette.xaml](../src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml)
+**Source**: [SharedColorPalette.xaml](../../src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml)
 
 ## Primary Colors
 

@@ -12,7 +12,7 @@ Material's animation system provides:
 
 **Philosophy**: Animations should be functional, purposeful, and quick. Material favors 200-300ms for most transitions.
 
-**Source**: [AnimationConstants.xaml](../src/library/Uno.Material/Styles/Application/Common/AnimationConstants.xaml)
+**Source**: [AnimationConstants.xaml](../../src/library/Uno.Material/Styles/Application/Common/AnimationConstants.xaml)
 
 ## Duration Tokens
 
@@ -65,7 +65,7 @@ Material uses cubic easing for smooth, natural acceleration and deceleration.
 - **Purpose**: Stagger multiple element animations
 - **Usage**: TextBox label rising, coordinated transitions
 
-**Example**: TextBox placeho label waits 150ms before starting animation while background animates immediately.
+**Example**: TextBox placeholder label waits 150ms before starting animation while background animates immediately.
 
 ### ToggleSwitch Splines
 

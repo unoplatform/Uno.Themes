@@ -19,7 +19,7 @@ Each style defines:
 - `FontSize` - Size in pixels
 - `CharacterSpacing` - Letter spacing (tracking) in 1/1000 of an "em"
 
-**Source**: [Typography.xaml](../src/library/Uno.Material/Styles/Application/v2/Typography.xaml)
+**Source**: [Typography.xaml](../../src/library/Uno.Material/Styles/Application/v2/Typography.xaml)
 
 ## Character Spacing Calculation
 
@@ -111,7 +111,7 @@ Additional styles bridging gaps between Material and other design systems. **Not
 
 ## Font Families
 
-Material uses two font weights of Roboto, defined in [Fonts.xaml](../src/library/Uno.Material/Styles/Application/Common/Fonts.xaml):
+Material uses two font weights of Roboto, defined in [Fonts.xaml](../../src/library/Uno.Material/Styles/Application/Common/Fonts.xaml):
 
 | Material Resource | Font Weight | File | WinUI/Fluent Equivalent |
 | --- | --- | --- | --- |

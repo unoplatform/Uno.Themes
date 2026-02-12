@@ -4,7 +4,7 @@ This document details all design tokens for Material Button styles and maps them
 
 ## Material Button Styles Overview
 
-Material Design 3 defines 5 button variants, each with distinct visual characteristics:
+Material Design 3 defines 6 button variants, each with distinct visual characteristics:
 
 1. **Filled Button** (Primary action) - `MaterialFilledButtonStyle`
 2. **Filled Tonal Button** (Secondary action) - `MaterialFilledTonalButtonStyle`
@@ -13,7 +13,7 @@ Material Design 3 defines 5 button variants, each with distinct visual character
 5. **Text Button** (Low emphasis) - `MaterialTextButtonStyle`
 6. **Icon Button** (Icon-only) - `MaterialIconButtonStyle`
 
-**Source**: [Button.xaml](../../src/library/Uno.Material/Styles/Controls/v2/Button.xaml)
+**Source**: [Button.xaml](../../../src/library/Uno.Material/Styles/Controls/v2/Button.xaml)
 
 ## Common Dimension Tokens
 
@@ -58,7 +58,7 @@ Primary action button with solid background.
 
 | State | Foreground | Background | State Layer | Border |
 | --- | --- | --- | --- | --- |
-| **Normal** | `PrimaryBrush` | `PrimaryBrush` | None | Transparent |
+| **Normal** | `OnPrimaryBrush` | `PrimaryBrush` | None | Transparent |
 | **Hover** | `OnPrimaryBrush` | `PrimaryBrush` | `OnPrimaryHoverBrush` (8%) | Transparent |
 | **Pressed** | `OnPrimaryBrush` | `PrimaryBrush` | `OnPrimaryPressedBrush` (12%) | Transparent |
 | **Disabled** | `OnSurfaceDisabledBrush` (12%) | `OnSurfaceDisabledBrush` (12%) | None | Transparent |
