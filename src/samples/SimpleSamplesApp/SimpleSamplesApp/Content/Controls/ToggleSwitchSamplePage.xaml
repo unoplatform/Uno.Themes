@@ -1,0 +1,58 @@
+﻿<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.ToggleSwitchSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="ToggleSwitch"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+
+			<!-- Basic ToggleSwitch -->
+			<TextBlock Text="Basic ToggleSwitch"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_Off">
+				<ToggleSwitch Header="Wi-Fi" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_On">
+				<ToggleSwitch Header="Bluetooth"
+							  IsOn="True" />
+			</smtx:XamlDisplay>
+
+			<!-- Without Header -->
+			<TextBlock Text="Without Header"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_NoHeaderOff">
+				<ToggleSwitch />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_NoHeaderOn">
+				<ToggleSwitch IsOn="True" />
+			</smtx:XamlDisplay>
+
+			<!-- Disabled States -->
+			<TextBlock Text="Disabled"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_DisabledOff">
+				<ToggleSwitch Header="Disabled Off"
+							  IsEnabled="False" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_DisabledOn">
+				<ToggleSwitch Header="Disabled On"
+							  IsOn="True"
+							  IsEnabled="False" />
+			</smtx:XamlDisplay>
+
+			<!-- With On/Off Content -->
+			<TextBlock Text="Custom On/Off Content"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_CustomContent">
+				<ToggleSwitch Header="Notifications"
+							  OnContent="Enabled"
+							  OffContent="Disabled" />
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
+</Page>

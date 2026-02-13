@@ -1,0 +1,110 @@
+﻿<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.ButtonSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+            <TextBlock Text="Button"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+
+            <!-- Filled Button -->
+			<TextBlock Text="Filled Button"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Filled">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Filled"
+							Style="{StaticResource FilledButtonStyle}" />
+					<Button Content="Disabled"
+							Style="{StaticResource FilledButtonStyle}"
+							IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Outlined Button -->
+			<TextBlock Text="Outlined Button"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Outlined">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Outlined"
+							Style="{StaticResource OutlinedButtonStyle}" />
+					<Button Content="Disabled"
+							Style="{StaticResource OutlinedButtonStyle}"
+							IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Text Button -->
+			<TextBlock Text="Text Button"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Text">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Text"
+							Style="{StaticResource TextButtonStyle}" />
+					<Button Content="Disabled"
+							Style="{StaticResource TextButtonStyle}"
+							IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Light Button -->
+			<TextBlock Text="Light Button"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Light">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Light"
+							Style="{StaticResource SimpleLightButtonStyle}" />
+					<Button Content="Disabled"
+							Style="{StaticResource SimpleLightButtonStyle}"
+							IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Size Variants -->
+			<TextBlock Text="Size Variants"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_SizeVariants">
+				<StackPanel Spacing="12">
+					<StackPanel Orientation="Horizontal"
+								Spacing="12">
+						<Button Content="Small Filled"
+								Style="{StaticResource SimpleFilledButtonSmallStyle}" />
+						<Button Content="Small Outlined"
+								Style="{StaticResource SimpleOutlinedButtonSmallStyle}" />
+						<Button Content="Small Text"
+								Style="{StaticResource SimpleTextButtonSmallStyle}" />
+					</StackPanel>
+					<StackPanel Orientation="Horizontal"
+								Spacing="12">
+						<Button Content="Large Filled"
+								Style="{StaticResource SimpleFilledButtonLargeStyle}" />
+						<Button Content="Large Outlined"
+								Style="{StaticResource SimpleOutlinedButtonLargeStyle}" />
+						<Button Content="Large Text"
+								Style="{StaticResource SimpleTextButtonLargeStyle}" />
+					</StackPanel>
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Error Buttons -->
+			<TextBlock Text="Error Buttons"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Error">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Filled Error"
+							Style="{StaticResource SimpleFilledErrorButtonStyle}" />
+					<Button Content="Text Error"
+							Style="{StaticResource SimpleTextErrorButtonStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
+</Page>

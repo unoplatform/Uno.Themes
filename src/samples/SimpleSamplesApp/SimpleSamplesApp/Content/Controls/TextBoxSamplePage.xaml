@@ -1,0 +1,55 @@
+﻿<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.TextBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="TextBox"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+			<!-- Filled TextBox -->
+			<TextBlock Text="Filled TextBox"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_Filled">
+				<TextBox Style="{StaticResource FilledTextBoxStyle}"
+						 PlaceholderText="Placeholder"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_FilledWithText">
+				<TextBox Style="{StaticResource FilledTextBoxStyle}"
+						 Text="With text"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_FilledDisabled">
+				<TextBox Style="{StaticResource FilledTextBoxStyle}"
+						 PlaceholderText="Disabled"
+						 IsEnabled="False"
+						 Width="300" />
+			</smtx:XamlDisplay>
+
+			<!-- Outlined TextBox -->
+			<TextBlock Text="Outlined TextBox"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_Outlined">
+				<TextBox Style="{StaticResource OutlinedTextBoxStyle}"
+						 PlaceholderText="Placeholder"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedWithText">
+				<TextBox Style="{StaticResource OutlinedTextBoxStyle}"
+						 Text="With text"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedDisabled">
+				<TextBox Style="{StaticResource OutlinedTextBoxStyle}"
+						 PlaceholderText="Disabled"
+						 IsEnabled="False"
+						 Width="300" />
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

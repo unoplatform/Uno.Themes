@@ -1,329 +1,339 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- PersonPicture Resources -->
-    <!-- Size variants from SDS Avatar: Small (24), Medium (32), Large (40) -->
-    <x:Double x:Key="PersonPictureSmallSize">24</x:Double>
-    <x:Double x:Key="PersonPictureMediumSize">32</x:Double>
-    <x:Double x:Key="PersonPictureLargeSize">40</x:Double>
-    
-    <!-- Circle corner radius (full) -->
-    <CornerRadius x:Key="PersonPictureCircleSmallRadius">12</CornerRadius>
-    <CornerRadius x:Key="PersonPictureCircleMediumRadius">16</CornerRadius>
-    <CornerRadius x:Key="PersonPictureCircleLargeRadius">20</CornerRadius>
-    
-    <!-- Square corner radius -->
-    <CornerRadius x:Key="PersonPictureSquareSmallRadius">4</CornerRadius>
-    <CornerRadius x:Key="PersonPictureSquareMediumRadius">8</CornerRadius>
-    <CornerRadius x:Key="PersonPictureSquareLargeRadius">8</CornerRadius>
-    
-    <!-- Font sizes for initials -->
-    <x:Double x:Key="PersonPictureInitialsSmallFontSize">14</x:Double>
-    <x:Double x:Key="PersonPictureInitialsMediumFontSize">16</x:Double>
-    <x:Double x:Key="PersonPictureInitialsLargeFontSize">20</x:Double>
+	<!-- PersonPicture Resources -->
+	<!-- Size variants from SDS Avatar: Small (24), Medium (32), Large (40) -->
+	<x:Double x:Key="PersonPictureSmallSize">24</x:Double>
+	<x:Double x:Key="PersonPictureMediumSize">32</x:Double>
+	<x:Double x:Key="PersonPictureLargeSize">40</x:Double>
 
-    <!-- Simple PersonPicture Style (Medium Circle - Default) -->
-    <Style x:Key="SimplePersonPictureStyle" TargetType="PersonPicture">
-        <Setter Property="Width" Value="{StaticResource PersonPictureMediumSize}" />
-        <Setter Property="Height" Value="{StaticResource PersonPictureMediumSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
-        <Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsMediumFontSize}" />
-        <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
-        <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="PersonPicture">
-                    <Grid x:Name="RootGrid">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Photo">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureEllipse.Opacity" Value="0" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Initials">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureEllipse.Opacity" Value="1" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="1" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="NoPhotoOrInitials">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureEllipse.Opacity" Value="1" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Group">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureEllipse.Opacity" Value="1" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="BadgeStates">
-                                <VisualState x:Name="NoBadge" />
-                                <VisualState x:Name="BadgeWithoutImageSource">
-                                    <VisualState.Setters>
-                                        <Setter Target="BadgeGrid.Visibility" Value="Visible" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="BadgeWithImageSource">
-                                    <VisualState.Setters>
-                                        <Setter Target="BadgeGrid.Visibility" Value="Visible" />
-                                        <Setter Target="BadgeImage.Visibility" Value="Visible" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+	<!-- Circle corner radius (full) -->
+	<CornerRadius x:Key="PersonPictureCircleSmallRadius">12</CornerRadius>
+	<CornerRadius x:Key="PersonPictureCircleMediumRadius">16</CornerRadius>
+	<CornerRadius x:Key="PersonPictureCircleLargeRadius">20</CornerRadius>
 
-                        <!-- Background Ellipse -->
-                        <Ellipse x:Name="PersonPictureEllipse"
-                                 Fill="{TemplateBinding Background}"
-                                 Width="{TemplateBinding Width}"
-                                 Height="{TemplateBinding Height}" />
+	<!-- Square corner radius -->
+	<CornerRadius x:Key="PersonPictureSquareSmallRadius">4</CornerRadius>
+	<CornerRadius x:Key="PersonPictureSquareMediumRadius">8</CornerRadius>
+	<CornerRadius x:Key="PersonPictureSquareLargeRadius">8</CornerRadius>
 
-                        <!-- Profile Photo -->
-                        <Ellipse x:Name="BadgeClipEllipse"
-                                 Width="{TemplateBinding Width}"
-                                 Height="{TemplateBinding Height}">
-                            <Ellipse.Fill>
-                                <ImageBrush x:Name="PersonPicture"
-                                           ImageSource="{TemplateBinding ProfilePicture}"
-                                           Stretch="UniformToFill" />
-                            </Ellipse.Fill>
-                        </Ellipse>
+	<!-- Font sizes for initials -->
+	<x:Double x:Key="PersonPictureInitialsSmallFontSize">14</x:Double>
+	<x:Double x:Key="PersonPictureInitialsMediumFontSize">16</x:Double>
+	<x:Double x:Key="PersonPictureInitialsLargeFontSize">20</x:Double>
 
-                        <!-- Initials -->
-                        <TextBlock x:Name="InitialsTextBlock"
-                                   AutomationProperties.AccessibilityView="Raw"
-                                   FontFamily="{TemplateBinding FontFamily}"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   FontWeight="Normal"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   TextAlignment="Center"
-                                   IsTextScaleFactorEnabled="False"
-                                   Text="{TemplateBinding Initials}" />
+	<!-- Simple PersonPicture Style (Medium Circle - Default) -->
+	<Style x:Key="SimplePersonPictureStyle"
+		   TargetType="PersonPicture">
+		<Setter Property="Width" Value="{StaticResource PersonPictureMediumSize}" />
+		<Setter Property="Height" Value="{StaticResource PersonPictureMediumSize}" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsMediumFontSize}" />
+		<Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="PersonPicture">
+					<Grid x:Name="RootGrid">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Photo">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureEllipse.Opacity" Value="0" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Initials">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureEllipse.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="NoPhotoOrInitials">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureEllipse.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Group">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureEllipse.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="BadgeStates">
+								<VisualState x:Name="NoBadge" />
+								<VisualState x:Name="BadgeWithoutImageSource">
+									<VisualState.Setters>
+										<Setter Target="BadgeGrid.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="BadgeWithImageSource">
+									<VisualState.Setters>
+										<Setter Target="BadgeGrid.Visibility" Value="Visible" />
+										<Setter Target="BadgeImage.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
 
-                        <!-- Badge (for BadgeText, BadgeNumber, BadgeGlyph) -->
-                        <Grid x:Name="BadgeGrid"
-                              Visibility="Collapsed"
-                              HorizontalAlignment="Right"
-                              VerticalAlignment="Bottom">
-                            <Ellipse x:Name="BadgeBackground"
-                                     Fill="{StaticResource PrimaryBrush}"
-                                     Width="16"
-                                     Height="16" />
-                            <Image x:Name="BadgeImage"
-                                   Visibility="Collapsed"
-                                   Source="{TemplateBinding BadgeImageSource}"
-                                   Width="16"
-                                   Height="16"
-                                   Stretch="UniformToFill" />
-                            <TextBlock x:Name="BadgeNumberTextBlock"
-                                       AutomationProperties.AccessibilityView="Raw"
-                                       FontFamily="{StaticResource SimpleFontFamily}"
-                                       FontSize="10"
-                                       Foreground="{StaticResource OnPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       IsTextScaleFactorEnabled="False"
-                                       Text="{TemplateBinding BadgeNumber}" />
-                            <TextBlock x:Name="BadgeGlyphTextBlock"
-                                       AutomationProperties.AccessibilityView="Raw"
-                                       FontFamily="{StaticResource SimpleFontFamily}"
-                                       FontSize="10"
-                                       Foreground="{StaticResource OnPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       IsTextScaleFactorEnabled="False"
-                                       Text="{TemplateBinding BadgeGlyph}" />
-                            <TextBlock x:Name="BadgeTextTextBlock"
-                                       AutomationProperties.AccessibilityView="Raw"
-                                       FontFamily="{StaticResource SimpleFontFamily}"
-                                       FontSize="10"
-                                       Foreground="{StaticResource OnPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       IsTextScaleFactorEnabled="False"
-                                       Text="{TemplateBinding BadgeText}" />
-                        </Grid>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+						<!-- Background Ellipse -->
+						<Ellipse x:Name="PersonPictureEllipse"
+								 Fill="{TemplateBinding Background}"
+								 Width="{TemplateBinding Width}"
+								 Height="{TemplateBinding Height}" />
 
-    <!-- Small Circle Variant -->
-    <Style x:Key="SimplePersonPictureSmallStyle" TargetType="PersonPicture" BasedOn="{StaticResource SimplePersonPictureStyle}">
-        <Setter Property="Width" Value="{StaticResource PersonPictureSmallSize}" />
-        <Setter Property="Height" Value="{StaticResource PersonPictureSmallSize}" />
-        <Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsSmallFontSize}" />
-    </Style>
+						<!-- Profile Photo -->
+						<Ellipse x:Name="BadgeClipEllipse"
+								 Width="{TemplateBinding Width}"
+								 Height="{TemplateBinding Height}">
+							<Ellipse.Fill>
+								<ImageBrush x:Name="PersonPicture"
+											ImageSource="{TemplateBinding ProfilePicture}"
+											Stretch="UniformToFill" />
+							</Ellipse.Fill>
+						</Ellipse>
 
-    <!-- Large Circle Variant -->
-    <Style x:Key="SimplePersonPictureLargeStyle" TargetType="PersonPicture" BasedOn="{StaticResource SimplePersonPictureStyle}">
-        <Setter Property="Width" Value="{StaticResource PersonPictureLargeSize}" />
-        <Setter Property="Height" Value="{StaticResource PersonPictureLargeSize}" />
-        <Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsLargeFontSize}" />
-    </Style>
+						<!-- Initials -->
+						<TextBlock x:Name="InitialsTextBlock"
+								   AutomationProperties.AccessibilityView="Raw"
+								   FontFamily="{TemplateBinding FontFamily}"
+								   FontSize="{TemplateBinding FontSize}"
+								   FontWeight="Normal"
+								   Foreground="{TemplateBinding Foreground}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"
+								   TextAlignment="Center"
+								   IsTextScaleFactorEnabled="False"
+								   Text="{TemplateBinding Initials}" />
 
-    <!-- Square Variants (using Border-based template for square corners) -->
-    <Style x:Key="SimplePersonPictureSquareStyle" TargetType="PersonPicture">
-        <Setter Property="Width" Value="{StaticResource PersonPictureMediumSize}" />
-        <Setter Property="Height" Value="{StaticResource PersonPictureMediumSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
-        <Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsMediumFontSize}" />
-        <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
-        <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="PersonPicture">
-                    <Grid x:Name="RootGrid">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Photo">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureBorder.Opacity" Value="0" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Initials">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureBorder.Opacity" Value="1" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="1" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="NoPhotoOrInitials">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureBorder.Opacity" Value="1" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Group">
-                                    <VisualState.Setters>
-                                        <Setter Target="PersonPictureBorder.Opacity" Value="1" />
-                                        <Setter Target="InitialsTextBlock.Opacity" Value="0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="BadgeStates">
-                                <VisualState x:Name="NoBadge" />
-                                <VisualState x:Name="BadgeWithoutImageSource">
-                                    <VisualState.Setters>
-                                        <Setter Target="BadgeGrid.Visibility" Value="Visible" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="BadgeWithImageSource">
-                                    <VisualState.Setters>
-                                        <Setter Target="BadgeGrid.Visibility" Value="Visible" />
-                                        <Setter Target="BadgeImage.Visibility" Value="Visible" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+						<!-- Badge (for BadgeText, BadgeNumber, BadgeGlyph) -->
+						<Grid x:Name="BadgeGrid"
+							  Visibility="Collapsed"
+							  HorizontalAlignment="Right"
+							  VerticalAlignment="Bottom">
+							<Ellipse x:Name="BadgeBackground"
+									 Fill="{StaticResource PrimaryBrush}"
+									 Width="16"
+									 Height="16" />
+							<Image x:Name="BadgeImage"
+								   Visibility="Collapsed"
+								   Source="{TemplateBinding BadgeImageSource}"
+								   Width="16"
+								   Height="16"
+								   Stretch="UniformToFill" />
+							<TextBlock x:Name="BadgeNumberTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{StaticResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeNumber}" />
+							<TextBlock x:Name="BadgeGlyphTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{StaticResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeGlyph}" />
+							<TextBlock x:Name="BadgeTextTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{StaticResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeText}" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-                        <!-- Background Border (Square) -->
-                        <Border x:Name="PersonPictureBorder"
-                                Background="{TemplateBinding Background}"
-                                Width="{TemplateBinding Width}"
-                                Height="{TemplateBinding Height}"
-                                CornerRadius="{StaticResource PersonPictureSquareMediumRadius}" />
+	<!-- Small Circle Variant -->
+	<Style x:Key="SimplePersonPictureSmallStyle"
+		   TargetType="PersonPicture"
+		   BasedOn="{StaticResource SimplePersonPictureStyle}">
+		<Setter Property="Width" Value="{StaticResource PersonPictureSmallSize}" />
+		<Setter Property="Height" Value="{StaticResource PersonPictureSmallSize}" />
+		<Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsSmallFontSize}" />
+	</Style>
 
-                        <!-- Profile Photo (Square) -->
-                        <Border x:Name="BadgeClipBorder"
-                                Width="{TemplateBinding Width}"
-                                Height="{TemplateBinding Height}"
-                                CornerRadius="{StaticResource PersonPictureSquareMediumRadius}">
-                            <Border.Background>
-                                <ImageBrush x:Name="PersonPicture"
-                                           ImageSource="{TemplateBinding ProfilePicture}"
-                                           Stretch="UniformToFill" />
-                            </Border.Background>
-                        </Border>
+	<!-- Large Circle Variant -->
+	<Style x:Key="SimplePersonPictureLargeStyle"
+		   TargetType="PersonPicture"
+		   BasedOn="{StaticResource SimplePersonPictureStyle}">
+		<Setter Property="Width" Value="{StaticResource PersonPictureLargeSize}" />
+		<Setter Property="Height" Value="{StaticResource PersonPictureLargeSize}" />
+		<Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsLargeFontSize}" />
+	</Style>
 
-                        <!-- Initials -->
-                        <TextBlock x:Name="InitialsTextBlock"
-                                   AutomationProperties.AccessibilityView="Raw"
-                                   FontFamily="{TemplateBinding FontFamily}"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   FontWeight="Normal"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   TextAlignment="Center"
-                                   IsTextScaleFactorEnabled="False"
-                                   Text="{TemplateBinding Initials}" />
+	<!-- Square Variants (using Border-based template for square corners) -->
+	<Style x:Key="SimplePersonPictureSquareStyle"
+		   TargetType="PersonPicture">
+		<Setter Property="Width" Value="{StaticResource PersonPictureMediumSize}" />
+		<Setter Property="Height" Value="{StaticResource PersonPictureMediumSize}" />
+		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsMediumFontSize}" />
+		<Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="PersonPicture">
+					<Grid x:Name="RootGrid">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Photo">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="0" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Initials">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="NoPhotoOrInitials">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Group">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="BadgeStates">
+								<VisualState x:Name="NoBadge" />
+								<VisualState x:Name="BadgeWithoutImageSource">
+									<VisualState.Setters>
+										<Setter Target="BadgeGrid.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="BadgeWithImageSource">
+									<VisualState.Setters>
+										<Setter Target="BadgeGrid.Visibility" Value="Visible" />
+										<Setter Target="BadgeImage.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
 
-                        <!-- Badge -->
-                        <Grid x:Name="BadgeGrid"
-                              Visibility="Collapsed"
-                              HorizontalAlignment="Right"
-                              VerticalAlignment="Bottom">
-                            <Ellipse x:Name="BadgeBackground"
-                                     Fill="{StaticResource PrimaryBrush}"
-                                     Width="16"
-                                     Height="16" />
-                            <Image x:Name="BadgeImage"
-                                   Visibility="Collapsed"
-                                   Source="{TemplateBinding BadgeImageSource}"
-                                   Width="16"
-                                   Height="16"
-                                   Stretch="UniformToFill" />
-                            <TextBlock x:Name="BadgeNumberTextBlock"
-                                       AutomationProperties.AccessibilityView="Raw"
-                                       FontFamily="{StaticResource SimpleFontFamily}"
-                                       FontSize="10"
-                                       Foreground="{StaticResource OnPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       IsTextScaleFactorEnabled="False"
-                                       Text="{TemplateBinding BadgeNumber}" />
-                            <TextBlock x:Name="BadgeGlyphTextBlock"
-                                       AutomationProperties.AccessibilityView="Raw"
-                                       FontFamily="{StaticResource SimpleFontFamily}"
-                                       FontSize="10"
-                                       Foreground="{StaticResource OnPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       IsTextScaleFactorEnabled="False"
-                                       Text="{TemplateBinding BadgeGlyph}" />
-                            <TextBlock x:Name="BadgeTextTextBlock"
-                                       AutomationProperties.AccessibilityView="Raw"
-                                       FontFamily="{StaticResource SimpleFontFamily}"
-                                       FontSize="10"
-                                       Foreground="{StaticResource OnPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       IsTextScaleFactorEnabled="False"
-                                       Text="{TemplateBinding BadgeText}" />
-                        </Grid>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+						<!-- Background Border (Square) -->
+						<Border x:Name="PersonPictureBorder"
+								Background="{TemplateBinding Background}"
+								Width="{TemplateBinding Width}"
+								Height="{TemplateBinding Height}"
+								CornerRadius="{StaticResource PersonPictureSquareMediumRadius}" />
 
-    <!-- Small Square Variant -->
-    <Style x:Key="SimplePersonPictureSquareSmallStyle" TargetType="PersonPicture" BasedOn="{StaticResource SimplePersonPictureSquareStyle}">
-        <Setter Property="Width" Value="{StaticResource PersonPictureSmallSize}" />
-        <Setter Property="Height" Value="{StaticResource PersonPictureSmallSize}" />
-        <Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsSmallFontSize}" />
-    </Style>
+						<!-- Profile Photo (Square) -->
+						<Border x:Name="BadgeClipBorder"
+								Width="{TemplateBinding Width}"
+								Height="{TemplateBinding Height}"
+								CornerRadius="{StaticResource PersonPictureSquareMediumRadius}">
+							<Border.Background>
+								<ImageBrush x:Name="PersonPicture"
+											ImageSource="{TemplateBinding ProfilePicture}"
+											Stretch="UniformToFill" />
+							</Border.Background>
+						</Border>
 
-    <!-- Large Square Variant -->
-    <Style x:Key="SimplePersonPictureSquareLargeStyle" TargetType="PersonPicture" BasedOn="{StaticResource SimplePersonPictureSquareStyle}">
-        <Setter Property="Width" Value="{StaticResource PersonPictureLargeSize}" />
-        <Setter Property="Height" Value="{StaticResource PersonPictureLargeSize}" />
-        <Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsLargeFontSize}" />
-    </Style>
+						<!-- Initials -->
+						<TextBlock x:Name="InitialsTextBlock"
+								   AutomationProperties.AccessibilityView="Raw"
+								   FontFamily="{TemplateBinding FontFamily}"
+								   FontSize="{TemplateBinding FontSize}"
+								   FontWeight="Normal"
+								   Foreground="{TemplateBinding Foreground}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"
+								   TextAlignment="Center"
+								   IsTextScaleFactorEnabled="False"
+								   Text="{TemplateBinding Initials}" />
+
+						<!-- Badge -->
+						<Grid x:Name="BadgeGrid"
+							  Visibility="Collapsed"
+							  HorizontalAlignment="Right"
+							  VerticalAlignment="Bottom">
+							<Ellipse x:Name="BadgeBackground"
+									 Fill="{StaticResource PrimaryBrush}"
+									 Width="16"
+									 Height="16" />
+							<Image x:Name="BadgeImage"
+								   Visibility="Collapsed"
+								   Source="{TemplateBinding BadgeImageSource}"
+								   Width="16"
+								   Height="16"
+								   Stretch="UniformToFill" />
+							<TextBlock x:Name="BadgeNumberTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{StaticResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeNumber}" />
+							<TextBlock x:Name="BadgeGlyphTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{StaticResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeGlyph}" />
+							<TextBlock x:Name="BadgeTextTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{StaticResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{StaticResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeText}" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Small Square Variant -->
+	<Style x:Key="SimplePersonPictureSquareSmallStyle"
+		   TargetType="PersonPicture"
+		   BasedOn="{StaticResource SimplePersonPictureSquareStyle}">
+		<Setter Property="Width" Value="{StaticResource PersonPictureSmallSize}" />
+		<Setter Property="Height" Value="{StaticResource PersonPictureSmallSize}" />
+		<Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsSmallFontSize}" />
+	</Style>
+
+	<!-- Large Square Variant -->
+	<Style x:Key="SimplePersonPictureSquareLargeStyle"
+		   TargetType="PersonPicture"
+		   BasedOn="{StaticResource SimplePersonPictureSquareStyle}">
+		<Setter Property="Width" Value="{StaticResource PersonPictureLargeSize}" />
+		<Setter Property="Height" Value="{StaticResource PersonPictureLargeSize}" />
+		<Setter Property="FontSize" Value="{StaticResource PersonPictureInitialsLargeFontSize}" />
+	</Style>
 
 </ResourceDictionary>

@@ -1,0 +1,53 @@
+﻿<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.ComboBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="ComboBox"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+
+			<!-- Basic ComboBox -->
+			<TextBlock Text="Basic ComboBox"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Basic">
+				<ComboBox PlaceholderText="Select an option"
+						  Width="300">
+					<ComboBoxItem Content="Option 1" />
+					<ComboBoxItem Content="Option 2" />
+					<ComboBoxItem Content="Option 3" />
+					<ComboBoxItem Content="Option 4" />
+				</ComboBox>
+			</smtx:XamlDisplay>
+
+			<!-- With Pre-selected Item -->
+			<TextBlock Text="Pre-selected Item"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Preselected">
+				<ComboBox SelectedIndex="1"
+						  Width="300">
+					<ComboBoxItem Content="First" />
+					<ComboBoxItem Content="Second (selected)" />
+					<ComboBoxItem Content="Third" />
+				</ComboBox>
+			</smtx:XamlDisplay>
+
+			<!-- Disabled ComboBox -->
+			<TextBlock Text="Disabled"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Disabled">
+				<ComboBox PlaceholderText="Disabled"
+						  IsEnabled="False"
+						  Width="300">
+					<ComboBoxItem Content="Option 1" />
+					<ComboBoxItem Content="Option 2" />
+				</ComboBox>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

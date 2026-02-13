@@ -1,0 +1,40 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Simple Design Samples</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>uno.platform.themes.simple</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Simple Design System Sample Application powered by Uno Platform.</Description>
+
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../library/Uno.Simple.WinUI/Uno.Simple.WinUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.ShowMeTheXAML" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
+  </ItemGroup>
+</Project>
