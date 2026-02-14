@@ -11,44 +11,44 @@
             <TextBlock Text="Button"
 					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
 
-            <!-- Filled Button -->
-			<TextBlock Text="Filled Button"
+            <!-- Primary Button -->
+			<TextBlock Text="Primary Button"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_Filled">
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Primary">
 				<StackPanel Orientation="Horizontal"
 							Spacing="12">
-					<Button Content="Filled"
-							Style="{StaticResource FilledButtonStyle}" />
+					<Button Content="Primary"
+							Style="{StaticResource SimplePrimaryButtonStyle}" />
 					<Button Content="Disabled"
-							Style="{StaticResource FilledButtonStyle}"
+							Style="{StaticResource SimplePrimaryButtonStyle}"
 							IsEnabled="False" />
 				</StackPanel>
 			</smtx:XamlDisplay>
 
-			<!-- Outlined Button -->
-			<TextBlock Text="Outlined Button"
+			<!-- Neutral Button -->
+			<TextBlock Text="Neutral Button"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_Outlined">
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Neutral">
 				<StackPanel Orientation="Horizontal"
 							Spacing="12">
-					<Button Content="Outlined"
-							Style="{StaticResource OutlinedButtonStyle}" />
+					<Button Content="Neutral"
+							Style="{StaticResource SimpleNeutralButtonStyle}" />
 					<Button Content="Disabled"
-							Style="{StaticResource OutlinedButtonStyle}"
+							Style="{StaticResource SimpleNeutralButtonStyle}"
 							IsEnabled="False" />
 				</StackPanel>
 			</smtx:XamlDisplay>
 
-			<!-- Text Button -->
-			<TextBlock Text="Text Button"
+			<!-- Subtle Button -->
+			<TextBlock Text="Subtle Button"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_Text">
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Subtle">
 				<StackPanel Orientation="Horizontal"
 							Spacing="12">
-					<Button Content="Text"
-							Style="{StaticResource TextButtonStyle}" />
+					<Button Content="Subtle"
+							Style="{StaticResource SimpleSubtleButtonStyle}" />
 					<Button Content="Disabled"
-							Style="{StaticResource TextButtonStyle}"
+							Style="{StaticResource SimpleSubtleButtonStyle}"
 							IsEnabled="False" />
 				</StackPanel>
 			</smtx:XamlDisplay>
@@ -74,21 +74,21 @@
 				<StackPanel Spacing="12">
 					<StackPanel Orientation="Horizontal"
 								Spacing="12">
-						<Button Content="Small Filled"
-								Style="{StaticResource SimpleFilledButtonSmallStyle}" />
-						<Button Content="Small Outlined"
-								Style="{StaticResource SimpleOutlinedButtonSmallStyle}" />
-						<Button Content="Small Text"
-								Style="{StaticResource SimpleTextButtonSmallStyle}" />
+					<Button Content="Small Primary"
+							Style="{StaticResource SimplePrimaryButtonSmallStyle}" />
+						<Button Content="Small Neutral"
+							Style="{StaticResource SimpleNeutralButtonSmallStyle}" />
+						<Button Content="Small Subtle"
+							Style="{StaticResource SimpleSubtleButtonSmallStyle}" />
 					</StackPanel>
 					<StackPanel Orientation="Horizontal"
 								Spacing="12">
-						<Button Content="Large Filled"
-								Style="{StaticResource SimpleFilledButtonLargeStyle}" />
-						<Button Content="Large Outlined"
-								Style="{StaticResource SimpleOutlinedButtonLargeStyle}" />
-						<Button Content="Large Text"
-								Style="{StaticResource SimpleTextButtonLargeStyle}" />
+						<Button Content="Large Primary"
+							Style="{StaticResource SimplePrimaryButtonLargeStyle}" />
+						<Button Content="Large Neutral"
+							Style="{StaticResource SimpleNeutralButtonLargeStyle}" />
+						<Button Content="Large Subtle"
+							Style="{StaticResource SimpleSubtleButtonLargeStyle}" />
 					</StackPanel>
 				</StackPanel>
 			</smtx:XamlDisplay>
@@ -99,10 +99,49 @@
 			<smtx:XamlDisplay UniqueKey="Simple_Button_Error">
 				<StackPanel Orientation="Horizontal"
 							Spacing="12">
-					<Button Content="Filled Error"
-							Style="{StaticResource SimpleFilledErrorButtonStyle}" />
-					<Button Content="Text Error"
-							Style="{StaticResource SimpleTextErrorButtonStyle}" />
+					<Button Content="Primary Error"
+							Style="{StaticResource SimplePrimaryErrorButtonStyle}" />
+					<Button Content="Subtle Error"
+							Style="{StaticResource SimpleSubtleErrorButtonStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Error Buttons — Small -->
+			<TextBlock Text="Error Buttons — Small"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_ErrorSmall">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Primary Error Small"
+							Style="{StaticResource SimplePrimaryErrorButtonSmallStyle}" />
+					<Button Content="Subtle Error Small"
+							Style="{StaticResource SimpleSubtleErrorButtonSmallStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Pricing Card Buttons -->
+			<TextBlock Text="Pricing Card Buttons"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_PricingCard">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Light Card"
+							Style="{StaticResource SimpleLightPricingCardButtonStyle}" />
+					<Button Content="Branded Card"
+							Style="{StaticResource SimpleBrandedPricingCardButtonStyle}" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Filter Buttons -->
+			<TextBlock Text="Filter Buttons"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_Filter">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Selected"
+							Style="{StaticResource SimpleSelectedFilterButtonStyle}" />
+					<Button Content="Unselected"
+							Style="{StaticResource SimpleUnselectedFilterButtonStyle}" />
 				</StackPanel>
 			</smtx:XamlDisplay>
 		</StackPanel>

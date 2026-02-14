@@ -8,11 +8,11 @@
 		<StackPanel Padding="24"
 					Spacing="8"
 					MaxWidth="800">
-			<TextBlock Text="ComboBox"
+			<TextBlock Text="Select Field (ComboBox)"
 					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
 
-			<!-- Basic ComboBox -->
-			<TextBlock Text="Basic ComboBox"
+			<!-- Select Field -->
+			<TextBlock Text="Select Field"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
 			<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Basic">
 				<ComboBox PlaceholderText="Select an option"
@@ -42,6 +42,18 @@
 			<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Disabled">
 				<ComboBox PlaceholderText="Disabled"
 						  IsEnabled="False"
+						  Width="300">
+					<ComboBoxItem Content="Option 1" />
+					<ComboBoxItem Content="Option 2" />
+				</ComboBox>
+			</smtx:XamlDisplay>
+
+			<!-- Error Select Field -->
+			<TextBlock Text="Error State"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Error">
+				<ComboBox Style="{StaticResource SelectFieldErrorStyle}"
+						  PlaceholderText="Error state"
 						  Width="300">
 					<ComboBoxItem Content="Option 1" />
 					<ComboBoxItem Content="Option 2" />

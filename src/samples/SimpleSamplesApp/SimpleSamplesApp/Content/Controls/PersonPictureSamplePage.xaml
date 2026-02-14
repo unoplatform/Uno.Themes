@@ -11,52 +11,48 @@
 			<TextBlock Text="PersonPicture"
 					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
 
-			<!-- Default (Circle Medium) -->
-			<TextBlock Text="Default (Circle Medium)"
-					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_DisplayName">
-				<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-							   DisplayName="John Doe" />
-			</smtx:XamlDisplay>
-			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_Initials">
-				<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-							   Initials="AB" />
-			</smtx:XamlDisplay>
-
-			<!-- Circle Sizes -->
+			<!-- Circle — Small, Medium, Large -->
 			<TextBlock Text="Circle — Small, Medium, Large"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_Sizes">
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_CircleSizes">
 				<StackPanel Orientation="Horizontal"
 							Spacing="16"
 							VerticalAlignment="Center">
-					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-								   Initials="S"
-								   Width="{StaticResource PersonPictureSmallSize}"
-								   Height="{StaticResource PersonPictureSmallSize}" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureSmallStyle}"
+								   Initials="S" />
 					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
 								   Initials="M" />
-					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-								   Initials="L"
-								   Width="{StaticResource PersonPictureLargeSize}"
-								   Height="{StaticResource PersonPictureLargeSize}" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureLargeStyle}"
+								   Initials="L" />
 				</StackPanel>
 			</smtx:XamlDisplay>
 
-			<!-- With Initials -->
-			<TextBlock Text="Various Initials"
+			<!-- Square — Small, Medium, Large -->
+			<TextBlock Text="Square — Small, Medium, Large"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_VariousInitials">
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_SquareSizes">
+				<StackPanel Orientation="Horizontal"
+							Spacing="16"
+							VerticalAlignment="Center">
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareSmallStyle}"
+								   Initials="S" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareStyle}"
+								   Initials="M" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareLargeStyle}"
+								   Initials="L" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- With Display Name -->
+			<TextBlock Text="With Display Name"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_DisplayName">
 				<StackPanel Orientation="Horizontal"
 							Spacing="16">
 					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-								   Initials="JD" />
-					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-								   Initials="AK" />
-					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-								   Initials="MR" />
-					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
-								   DisplayName="No Initials Set" />
+								   DisplayName="John Doe" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareStyle}"
+								   DisplayName="Jane Smith" />
 				</StackPanel>
 			</smtx:XamlDisplay>
 		</StackPanel>

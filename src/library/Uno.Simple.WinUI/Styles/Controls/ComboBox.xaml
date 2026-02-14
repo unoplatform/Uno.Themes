@@ -11,8 +11,8 @@
 	<!-- Dropdown arrow icon -->
 	<x:String x:Key="ComboBoxDropDownGlyphIcon">&#xE96E;</x:String>
 
-	<!-- Base Simple ComboBox Style -->
-	<Style x:Key="SimpleComboBoxStyle"
+	<!-- SimpleSelectFieldStyle - Select Field (Figma: Select Field) -->
+	<Style x:Key="SimpleSelectFieldStyle"
 		   TargetType="ComboBox">
 		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
@@ -220,8 +220,8 @@
 		</Setter>
 	</Style>
 
-	<!-- Simple ComboBoxItem Style -->
-	<Style x:Key="SimpleComboBoxItemStyle"
+	<!-- SimpleSelectFieldItemStyle - Select Field dropdown item -->
+	<Style x:Key="SimpleSelectFieldItemStyle"
 		   TargetType="ComboBoxItem">
 		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
@@ -340,10 +340,10 @@
 		</Setter>
 	</Style>
 
-	<!-- Error ComboBox Style -->
-	<Style x:Key="SimpleErrorComboBoxStyle"
+	<!-- SimpleSelectFieldErrorStyle - Error state -->
+	<Style x:Key="SimpleSelectFieldErrorStyle"
 		   TargetType="ComboBox"
-		   BasedOn="{StaticResource SimpleComboBoxStyle}">
+		   BasedOn="{StaticResource SimpleSelectFieldStyle}">
 		<Setter Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
 	</Style>
 

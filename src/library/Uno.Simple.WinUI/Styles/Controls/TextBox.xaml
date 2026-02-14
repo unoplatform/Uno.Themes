@@ -3,21 +3,21 @@
 
 	<!-- TextBox Resources -->
 	<CornerRadius x:Key="TextBoxCornerRadius">8</CornerRadius>
-	<CornerRadius x:Key="FilledTextBoxCornerRadius">8,8,0,0</CornerRadius>
+	<CornerRadius x:Key="InputTextBoxCornerRadius">8,8,0,0</CornerRadius>
 	<Thickness x:Key="TextBoxBorderThickness">1</Thickness>
 	<Thickness x:Key="TextBoxPadding">12</Thickness>
 	<x:Double x:Key="TextBoxHeight">40</x:Double>
 	<x:Double x:Key="TextBoxHeightSmall">32</x:Double>
-	<x:Double x:Key="FilledTextBoxIndicatorHeight">1</x:Double>
-	<x:Double x:Key="FilledTextBoxIndicatorHeightFocused">2</x:Double>
+	<x:Double x:Key="InputTextBoxIndicatorHeight">1</x:Double>
+	<x:Double x:Key="InputTextBoxIndicatorHeightFocused">2</x:Double>
 
-	<Style x:Key="SimpleFilledTextBoxStyle"
+	<Style x:Key="SimpleInputTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Background" Value="{StaticResource SurfaceVariantBrush}" />
 		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="BorderBrush" Value="{StaticResource OutlineBrush}" />
 		<Setter Property="BorderThickness" Value="0" />
-		<Setter Property="CornerRadius" Value="{StaticResource FilledTextBoxCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{StaticResource InputTextBoxCornerRadius}" />
 		<Setter Property="Padding" Value="0" />
 		<Setter Property="MinHeight" Value="{StaticResource TextBoxHeight}" />
 		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
@@ -46,7 +46,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="NormalIndicator.Fill" Value="{StaticResource PrimaryBrush}" />
-										<Setter Target="NormalIndicator.Height" Value="{StaticResource FilledTextBoxIndicatorHeightFocused}" />
+										<Setter Target="NormalIndicator.Height" Value="{StaticResource InputTextBoxIndicatorHeightFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -83,7 +83,7 @@
 
 						<!-- Bottom indicator line -->
 						<Rectangle x:Name="NormalIndicator"
-								   Height="{StaticResource FilledTextBoxIndicatorHeight}"
+								   Height="{StaticResource InputTextBoxIndicatorHeight}"
 								   Fill="{StaticResource OutlineBrush}"
 								   VerticalAlignment="Bottom"
 								   HorizontalAlignment="Stretch" />
@@ -93,7 +93,7 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="SimpleOutlinedTextBoxStyle"
+	<Style x:Key="SimpleOutlinedInputTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
@@ -170,14 +170,14 @@
 	</Style>
 
 	<!-- Small Size Variant -->
-	<Style x:Key="SimpleFilledTextBoxSmallStyle"
+	<Style x:Key="SimpleInputTextBoxSmallStyle"
 		   TargetType="TextBox"
-		   BasedOn="{StaticResource SimpleFilledTextBoxStyle}">
+		   BasedOn="{StaticResource SimpleInputTextBoxStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource TextBoxHeightSmall}" />
 	</Style>
 
 	<!-- Default TextBox Style -->
 	<Style TargetType="TextBox"
-		   BasedOn="{StaticResource SimpleFilledTextBoxStyle}" />
+		   BasedOn="{StaticResource SimpleInputTextBoxStyle}" />
 
 </ResourceDictionary>
