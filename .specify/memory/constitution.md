@@ -103,15 +103,15 @@ a corresponding sample in its theme's sample app. The sample MUST:
 
 ## Theme-Specific Addenda
 
-Each theme has its own addendum document that extends this constitution with
-theme-specific rules:
+Each theme has its own spec-kit feature directory that extends this constitution
+with theme-specific rules, design tokens, style inventories, and coverage gaps:
 
-| Theme | Addendum |
-|-------|----------|
-| Simple (SDS) | [`.specify/specs/simple-theme-spec.md`](../specs/simple-theme-spec.md) |
-| Material | [`.specify/specs/material-theme-spec.md`](../specs/material-theme-spec.md) |
-| Cupertino | [`.specify/specs/cupertino-theme-spec.md`](../specs/cupertino-theme-spec.md) |
-| Simple Toolkit | [`.specify/specs/simple-toolkit-styles/`](../specs/simple-toolkit-styles/) (spec + plan + tasks) |
+| Theme | Spec Directory | Description |
+|-------|---------------|-------------|
+| Simple (SDS) | [`.specify/specs/simple-theme/`](../specs/simple-theme/) | 33 styles, 7 controls, Inter font, light-only palette |
+| Material (M3) | [`.specify/specs/material-theme/`](../specs/material-theme/) | ~128 styles, 29 controls, Roboto, L+D themes, Ripple |
+| Cupertino (HIG) | [`.specify/specs/cupertino-theme/`](../specs/cupertino-theme/) | ~36 styles, 16 controls, SF Pro, L+D themes |
+| Simple Toolkit | [`.specify/specs/simple-toolkit-styles/`](../specs/simple-toolkit-styles/) | ~45 planned styles for Toolkit controls (Card, Chip, TabBar, etc.) |
 
 ## Governance
 
