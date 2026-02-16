@@ -1,0 +1,149 @@
+name: Deploy WebAssembly to Azure Static Web Apps
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+    branches:
+      - master
+      - release/*
+      - feature/*
+
+env:
+  SOLUTION_PATH: src/samples/MaterialSampleApp
+  APP_PROJECT: src/samples/MaterialSampleApp/MaterialSampleApp.csproj
+  WASM_FRAMEWORK: net10.0-browserwasm
+  BUILD_CONFIGURATION: Release
+  WASM_PUBLISH_DIR: src/samples/MaterialSampleApp/bin/Release/net10.0-browserwasm/publish/wwwroot
+  TargetFrameworkOverride: browserwasm
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build:
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action != 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cleanup unused image dependencies
+        shell: bash
+        run: |
+          rm -fR ~/.cargo
+          rm -fR ~/.rustup
+          rm -fR ~/.dotnet
+          sudo rm -fR /usr/share/swift
+          sudo rm -fR /opt/microsoft/msedge
+          sudo rm -fR /usr/local/.ghcup
+          sudo rm -fR /usr/lib/mono
+          sudo snap remove lxd
+          sudo snap remove core20
+          sudo apt remove snapd
+          df -h
+
+      - name: Set EMSDK cache path
+        shell: bash
+        run: echo "WasmCachePath=$HOME/.emscripten-cache" >> $GITHUB_ENV
+
+      - name: Cache EMSDK
+        id: cache-emsdk
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.WasmCachePath }}
+          key: ${{ runner.os }}-emsdk
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Run uno-check (wasm)
+        run: |
+          dotnet tool install --global uno.check
+          uno-check -v --ci --non-interactive --fix \
+            --skip xcode --skip gtk3 --skip vswin --skip vswinworkloads --skip unosdk \
+            --skip dotnetnewunotemplates --skip vsmac --skip androidsdk --skip openjdk --skip androidemulator \
+            --tfm net10.0-browserwasm
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+      - name: Publish WebAssembly app
+        run: >
+          dotnet publish ${{ env.APP_PROJECT }}
+          -c ${{ env.BUILD_CONFIGURATION }}
+          -f ${{ env.WASM_FRAMEWORK }}
+          -p:CompressionEnabled=false
+          -bl:${{ github.workspace }}/binlogs/build-wasm.binlog
+
+      - name: Upload binlog
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: binlogs-wasm
+          path: ${{ github.workspace }}/binlogs
+
+      - name: Upload WASM app
+        uses: actions/upload-artifact@v4
+        with:
+          name: wasm-app
+          path: ${{ env.WASM_PUBLISH_DIR }}
+
+  deploy:
+    needs: build
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action != 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download WASM app
+        uses: actions/download-artifact@v4
+        with:
+          name: wasm-app
+          path: app
+
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_STAGING }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          skip_app_build: true
+          app_location: app
+          api_location: ""
+          output_location: ""
+          production_branch: main
+
+  close-pull-request:
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Close Azure Static Web Apps environment
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_STAGING }}
+          action: close

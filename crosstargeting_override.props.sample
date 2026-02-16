@@ -14,18 +14,19 @@
 
 		<!-- <NugetOverrideVersion>2.6.0-dev.34</NugetOverrideVersion> -->
 
-		<!-- Uncomment each line for each platform that you want to build: -->
+		<!--
+			Uncomment each line for each platform that you want to build.
+			These platform suffixes will be expanded to the appropriate .NET version
+			by each project (e.g., libraries use net9.0-*, SamplesApp uses net10.0-*).
+		-->
 
-		<!-- <TargetFrameworkOverride Condition="''!='hint: UWP'">uap10.0.19041;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: WinUI'">net9.0-windows10.0.19041;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: WASM, Skia'">netstandard2.0;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 9.0 iOS'">net9.0-ios;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 9.0 Android'">net9.0-android;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 9.0 macOS Catalyst'">net9.0-maccatalyst;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-		<!-- <TargetFrameworkOverride Condition="''!='hint: .NET 9.0 macOS AppKit'">net9.0-macos;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
-
-		<!-- DO NOT COMMENT OUT: net9.0 is a required tfm in all cases -->
-		<TargetFrameworkOverride Condition="'$(TargetFrameworkOverride)'!='' AND !$(TargetFrameworkOverride.Contains('net9.0;'))">net9.0;$(TargetFrameworkOverride)</TargetFrameworkOverride>
+		<!-- <TargetFrameworkOverride Condition="''!='hint: WinUI'">windows;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: iOS'">ios;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: Android'">android;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: WASM'">browserwasm;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: Desktop (Skia)'">desktop;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: macOS Catalyst'">maccatalyst;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
+		<!-- <TargetFrameworkOverride Condition="''!='hint: macOS AppKit'">macos;$(TargetFrameworkOverride)</TargetFrameworkOverride> -->
 
 		<!--
 
@@ -38,7 +39,12 @@
 
 			### TargetFrameworkOverride ### 
 
-				Controls the platform built by Visual Studio.
+				Controls the platform built by Visual Studio using platform suffixes.
+				
+				The platform suffixes (ios, android, windows, browserwasm, desktop, etc.)
+				are expanded to versioned TFMs by each project:
+				- Library projects expand to net9.0-* (e.g., ios -> net9.0-ios)
+				- SamplesApp expands to net10.0-* (e.g., ios -> net10.0-ios)
 
 				*** WARNING ***
 				Note that changing this property while the solution is opened leads to
