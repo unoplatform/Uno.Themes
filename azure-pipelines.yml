@@ -19,7 +19,7 @@ pr:
 variables:
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
-  XCODE_ROOT: '/Applications/Xcode_16.4.app'
+  XCODE_ROOT: '/Applications/Xcode_26.1.1.app'
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
 
@@ -61,8 +61,7 @@ stages:
     - template: build/stage-build-ios.yml
     - template: build/stage-build-android.yml
     - template: build/stage-build-wasm.yml
-    - template: build/stage-build-windows.yml
-    - template: build/stage-build-skia-gtk.yml
+    - template: build/stage-build-desktop.yml
 
 ##
 ## Publishing

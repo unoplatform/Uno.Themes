@@ -12,7 +12,7 @@
 					xmlns:macos="http://uno.ui/macos"
 					mc:Ignorable="ios android xamarin wasm macos">
 
-	<not_mobile:Style x:Key="MaterialToggleSwitchStyle"
+	<Style x:Key="MaterialToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily"
 				Value="{StaticResource MaterialRegularFontFamily}" />
@@ -413,9 +413,9 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</not_mobile:Style>
+	</Style>
 
-	<not_mobile:Style x:Key="MaterialSecondaryToggleSwitchStyle"
+	<Style x:Key="MaterialSecondaryToggleSwitchStyle"
 				 TargetType="ToggleSwitch"
 				 BasedOn="{StaticResource MaterialToggleSwitchStyle}">
 
@@ -423,5 +423,5 @@
 				Value="{StaticResource MaterialSecondaryVariantDarkBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSecondaryVariantLightBrush}" />
-	</not_mobile:Style>
+	</Style>
 </ResourceDictionary>

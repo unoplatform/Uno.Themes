@@ -7,7 +7,6 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:android="http://uno.ui/android"
 					xmlns:wasm="http://uno.ui/wasm"
-					xmlns:uuc="using:Uno.UI.Controls"
 					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					mc:Ignorable="d ios android wasm not_win xamarin">
@@ -615,24 +614,5 @@
 		</Setter>
 	</ios:Style>
 
-	<android:Style x:Key="DrawerSplitViewStyle"
-				   TargetType="SplitView">
-		<Setter Property="OpenPaneLength"
-				Value="{StaticResource NativeDefaultSplitViewOpenPaneLength}" />
-		<Setter Property="PaneBackground"
-				Value="White" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="SplitView">
-					<uuc:BindableDrawerLayout LeftPaneOpenLength="{TemplateBinding OpenPaneLength}"
-										  LeftPane="{TemplateBinding Pane}"
-										  LeftPaneBackground="{TemplateBinding PaneBackground}"
-										  IsLeftPaneOpen="{TemplateBinding IsPaneOpen, Mode=TwoWay}"
-										  IsLeftPaneEnabled="{Binding (toolkit:SplitViewExtensions.IsPaneEnabled), RelativeSource={RelativeSource TemplatedParent}}"
-										  Content="{TemplateBinding Content}" />
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</android:Style>
 
 </ResourceDictionary>

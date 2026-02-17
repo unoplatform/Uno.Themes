@@ -3,28 +3,26 @@ jobs:
   cancelTimeoutInMinutes: 0
 
   timeoutInMinutes: 90
-  strategy:
-    maxParallel: 2
-    matrix:
-      WinUI:
-        ArtifactName: ios-winui
-        ProjectName: Uno.Themes.WinUI.Samples
-        Lineage: WinUI
-        ApplicationBuildNumberOffset: 50
-        VersionCodeOffset: 50
-        CI_Build: true
-      UWP:
-        ArtifactName: ios-uwp
-        ProjectName: Uno.Themes.Samples
-        Lineage: UWP
-        ApplicationBuildNumberOffset: 50
-        VersionCodeOffset: 50
-        CI_Build: true
+
   pool:
     vmImage: 'macOS-15'
 
+  strategy:
+    matrix:
+      Cupertino:
+        SampleAppName: CupertinoSampleApp
+        ProjectPath: src/samples/CupertinoSampleApp
+      Material:
+        SampleAppName: MaterialSampleApp
+        ProjectPath: src/samples/MaterialSampleApp
+
+  variables:
+    ArtifactName: ios-$(SampleAppName)
+
   steps:
   - template: templates/dotnet-install-macos.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-ios'
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
 
@@ -35,9 +33,9 @@ jobs:
     displayName: Select Xcode ($(XCODE_ROOT))
 
   - bash: |
-      cd $(build.sourcesdirectory)/src/samples/$(Lineage)/$(ProjectName).Mobile
-      dotnet build -f net9.0-ios /p:OverrideTargetFramework=net9.0-ios -c Release /p:TargetFrameworkOverride=net9.0-ios "/p:InformationalVersion=$(NBGV_InformationalVersion)" "/bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog"
-    displayName: Build project for Release - (net9.0-ios)
+      cd $(build.sourcesdirectory)/$(ProjectPath)
+      dotnet build $(SampleAppName).csproj -f net10.0-ios -c Release /p:TargetFrameworkOverride=ios "/p:InformationalVersion=$(NBGV_InformationalVersion)" "/bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog"
+    displayName: Build $(SampleAppName) for Release - (net10.0-ios)
 
   - task: PublishBuildArtifacts@1
     retryCountOnTaskFailure: 3
