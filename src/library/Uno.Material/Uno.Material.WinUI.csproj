@@ -1,9 +1,8 @@
 
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Uno.Sdk">
 	<Import Project="..\tfm-common-winui.props" />
 
 	<PropertyGroup>
-		<UseWinUI>true</UseWinUI>
 		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
 		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
 		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
@@ -20,23 +19,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Uno.WinUI" />
 		<PackageReference Include="Uno.WinUI.Lottie" Condition="!$(_IsWinUI)" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Condition="$(_IsWinUI)" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Condition="$(_IsWinUI)" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(_IsWinUI)">
+	<ItemGroup>
 		<Page Remove="@(XamlExclusion)" />
-	</ItemGroup>
-
-	<ItemGroup Condition="!$(_IsWinUI)">
-		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-		<Page Remove="@(XamlExclusion)" />
-
-		<Compile Update="**\*.xaml.cs">
-			<DependentUpon>%(Filename)</DependentUpon>
-		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -44,6 +31,4 @@
 			<Name>Uno.Themes</Name>
 		</ProjectReference>
 	</ItemGroup>
-
-	<Import Project="..\..\..\winappsdk-workaround.targets" />
 </Project>
