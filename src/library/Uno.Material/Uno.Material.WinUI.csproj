@@ -15,18 +15,6 @@
 	<Import Project="material-common.props" />
 
 	<ItemGroup>
-		<XamlExclusion Include="Styles\Controls\v1\NavigationView\WUX\NavigationView.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Uno.WinUI.Lottie" Condition="!$(_IsWinUI)" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Page Remove="@(XamlExclusion)" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Uno.Themes\Uno.Themes.WinUI.csproj">
 			<Name>Uno.Themes</Name>
 		</ProjectReference>
