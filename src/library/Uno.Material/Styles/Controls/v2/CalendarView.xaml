@@ -31,7 +31,7 @@
 		<Setter Property="CalendarItemBorderBrush"
 				Value="{ThemeResource CalendarViewCalendarItemRevealBorderBrush}" />
 		<Setter Property="TodayForeground"
-				Value="{StaticResource MaterialCalendarViewTodayForeground}" />
+				Value="{ThemeResource OnPrimaryContainerBrush}" />
 		<Setter Property="BlackoutForeground"
 				Value="{StaticResource MaterialCalendarViewBlackoutForeground}" />
 		<Setter Property="SelectedForeground"
@@ -39,17 +39,17 @@
 		<Setter Property="PressedForeground"
 				Value="{ThemeResource CalendarViewPressedForeground}" />
 		<Setter Property="OutOfScopeForeground"
-				Value="{ThemeResource CalendarViewOutOfScopeForeground}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="CalendarItemForeground"
 				Value="{ThemeResource CalendarViewCalendarItemForeground}" />
 		<Setter Property="OutOfScopeBackground"
-				Value="{ThemeResource CalendarViewOutOfScopeBackground}" />
+				Value="Transparent" />
 		<Setter Property="CalendarItemBackground"
 				Value="{ThemeResource CalendarViewCalendarItemRevealBackground}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource OnPrimaryBrush}" />
+				Value="{ThemeResource OnSurfaceVariantBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource PrimaryBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="DayItemFontFamily"
@@ -99,7 +99,7 @@
 		<not_win:Setter Property="TodaySelectedBackground"
 						Value="{ThemeResource PrimaryBrush}" />
 		<not_win:Setter Property="TodayBackground"
-						Value="Transparent" />
+						Value="{ThemeResource PrimaryContainerBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="CalendarView">
@@ -146,20 +146,8 @@
 												<VisualStateManager.VisualStateGroups>
 													<VisualStateGroup x:Name="CommonStates">
 														<VisualState x:Name="Normal" />
-														<VisualState x:Name="PointerOver">
-															<VisualState.Setters>
-																<Setter Target="Text.BorderBrush"
-																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
-																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource OnPrimaryMediumBrush}" />
-															</VisualState.Setters>
-														</VisualState>
-														<VisualState x:Name="Pressed">
-															<VisualState.Setters>
-																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource OnPrimaryLowBrush}" />
-															</VisualState.Setters>
-														</VisualState>
+														<VisualState x:Name="PointerOver" />
+														<VisualState x:Name="Pressed" />
 														<VisualState x:Name="Disabled" />
 													</VisualStateGroup>
 												</VisualStateManager.VisualStateGroups>
@@ -203,26 +191,8 @@
 												<VisualStateManager.VisualStateGroups>
 													<VisualStateGroup x:Name="CommonStates">
 														<VisualState x:Name="Normal" />
-
-														<VisualState x:Name="PointerOver">
-															<VisualState.Setters>
-																<Setter Target="Text.BorderBrush"
-																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
-																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource OnPrimaryMediumBrush}" />
-																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{ThemeResource OnPrimaryMediumBrush}" />
-															</VisualState.Setters>
-														</VisualState>
-
-														<VisualState x:Name="Pressed">
-															<VisualState.Setters>
-																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource OnPrimaryLowBrush}" />
-																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{ThemeResource OnPrimaryLowBrush}" />
-															</VisualState.Setters>
-														</VisualState>
+														<VisualState x:Name="PointerOver" />
+														<VisualState x:Name="Pressed" />
 														<VisualState x:Name="Disabled">
 															<VisualState.Setters>
 																<Setter Target="DownArrowGlyph.Opacity"
