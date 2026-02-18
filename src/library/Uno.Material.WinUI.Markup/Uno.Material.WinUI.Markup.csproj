@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Uno.Sdk">
 	<Import Project="..\tfm-common-winui.props" />
 
 	<!--
@@ -29,6 +29,4 @@
 	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">
 		<Using Include="Uno.Material.Markup" />
 	</ItemGroup>
-
-	<Import Project="..\..\..\winappsdk-workaround.targets" />
 </Project>
