@@ -27,8 +27,8 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 
 	private static ResourceDictionary GetSimpleColorOverride(ResourceDictionary colorOverride)
 	{
-		// Create a color override dictionary that loads SimpleColors
-		var simpleColors = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.SimpleColors) };
+		// Load the Simple color palette (overrides the default SharedColorPalette values)
+		var simpleColors = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.ColorPalette) };
 
 		if (colorOverride is { })
 		{
