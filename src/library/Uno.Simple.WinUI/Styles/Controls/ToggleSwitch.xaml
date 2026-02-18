@@ -1,36 +1,54 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!-- ToggleSwitch Resources -->
-	<x:Double x:Key="SimpleToggleSwitchKnobWidth">52</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchKnobHeight">32</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchKnobRadius">16</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchKnobStrokeThickness">2</x:Double>
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Default">
+			<x:Double x:Key="SimpleToggleSwitchKnobWidth">52</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobHeight">32</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobRadius">16</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobStrokeThickness">2</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchSmallThumbSize">16</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchMediumThumbSize">24</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchLargeThumbSize">28</x:Double>
+			<CornerRadius x:Key="SimpleToggleSwitchLargeThumbCornerRadius">14</CornerRadius>
+			<x:Double x:Key="SimpleToggleSwitchKnobIncludingOffShadowWidth">52</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobShadowSize">40</x:Double>
+			<Thickness x:Key="SimpleToggleSwitchKnobOnMargin">24,2,0,2</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOffMargin">2,4,0,4</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOnContentMargin">4,0,0,0</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOnShadowMargin">28,0,0,0</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOffShadowMargin">6,0,0,0</Thickness>
+			<x:Double x:Key="SimpleToggleSwitchKnobIconSize">16</x:Double>
+			<Thickness x:Key="SimpleToggleSwitchKnobIconPadding">2</Thickness>
+		</ResourceDictionary>
 
-	<x:Double x:Key="SimpleToggleSwitchSmallThumbSize">16</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchMediumThumbSize">24</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchLargeThumbSize">28</x:Double>
-	<CornerRadius x:Key="SimpleToggleSwitchLargeThumbCornerRadius">14</CornerRadius>
-
-	<x:Double x:Key="SimpleToggleSwitchKnobIncludingOffShadowWidth">52</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchKnobShadowSize">40</x:Double>
-
-	<Thickness x:Key="SimpleToggleSwitchKnobOnMargin">24,2,0,2</Thickness>
-	<Thickness x:Key="SimpleToggleSwitchKnobOffMargin">2,4,0,4</Thickness>
-	<Thickness x:Key="SimpleToggleSwitchKnobOnContentMargin">4,0,0,0</Thickness>
-
-	<Thickness x:Key="SimpleToggleSwitchKnobOnShadowMargin">28,0,0,0</Thickness>
-	<Thickness x:Key="SimpleToggleSwitchKnobOffShadowMargin">6,0,0,0</Thickness>
-
-	<x:Double x:Key="SimpleToggleSwitchKnobIconSize">16</x:Double>
-	<Thickness x:Key="SimpleToggleSwitchKnobIconPadding">2</Thickness>
+		<ResourceDictionary x:Key="Light">
+			<x:Double x:Key="SimpleToggleSwitchKnobWidth">52</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobHeight">32</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobRadius">16</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobStrokeThickness">2</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchSmallThumbSize">16</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchMediumThumbSize">24</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchLargeThumbSize">28</x:Double>
+			<CornerRadius x:Key="SimpleToggleSwitchLargeThumbCornerRadius">14</CornerRadius>
+			<x:Double x:Key="SimpleToggleSwitchKnobIncludingOffShadowWidth">52</x:Double>
+			<x:Double x:Key="SimpleToggleSwitchKnobShadowSize">40</x:Double>
+			<Thickness x:Key="SimpleToggleSwitchKnobOnMargin">24,2,0,2</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOffMargin">2,4,0,4</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOnContentMargin">4,0,0,0</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOnShadowMargin">28,0,0,0</Thickness>
+			<Thickness x:Key="SimpleToggleSwitchKnobOffShadowMargin">6,0,0,0</Thickness>
+			<x:Double x:Key="SimpleToggleSwitchKnobIconSize">16</x:Double>
+			<Thickness x:Key="SimpleToggleSwitchKnobIconPadding">2</Thickness>
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- Simple ToggleSwitch Style -->
 	<Style x:Key="SimpleToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
-		<Setter Property="FontFamily" Value="{StaticResource SimpleFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
-		<Setter Property="Foreground" Value="{StaticResource OnSurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -87,29 +105,29 @@
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource SimpleToggleSwitchPressedAnimationDuration}"
-																  Value="{StaticResource SimpleToggleSwitchLargeThumbSize}"
+											<SplineDoubleKeyFrame KeyTime="{ThemeResource SimpleToggleSwitchPressedAnimationDuration}"
+																  Value="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
 																  KeySpline="0.2,0,0,1" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource SimpleToggleSwitchPressedAnimationDuration}"
-																  Value="{StaticResource SimpleToggleSwitchLargeThumbSize}"
+											<SplineDoubleKeyFrame KeyTime="{ThemeResource SimpleToggleSwitchPressedAnimationDuration}"
+																  Value="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
 																  KeySpline="0.2,0,0,1" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Width"
 																	   EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource SimpleToggleSwitchPressedAnimationDuration}"
-																  Value="{StaticResource SimpleToggleSwitchLargeThumbSize}"
+											<SplineDoubleKeyFrame KeyTime="{ThemeResource SimpleToggleSwitchPressedAnimationDuration}"
+																  Value="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
 																  KeySpline="0.2,0,0,1" />
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Height"
 																	   EnableDependentAnimation="True">
-											<SplineDoubleKeyFrame KeyTime="{StaticResource SimpleToggleSwitchPressedAnimationDuration}"
-																  Value="{StaticResource SimpleToggleSwitchLargeThumbSize}"
+											<SplineDoubleKeyFrame KeyTime="{ThemeResource SimpleToggleSwitchPressedAnimationDuration}"
+																  Value="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
 																  KeySpline="0.2,0,0,1" />
 										</DoubleAnimationUsingKeyFrames>
 									</Storyboard>
@@ -121,37 +139,37 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource DisabledBrush}" />
+																	Value="{ThemeResource DisabledBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterBorder"
 																	   Storyboard.TargetProperty="Stroke">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource DisabledBrush}" />
+																	Value="{ThemeResource DisabledBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource DisabledBrush}" />
+																	Value="{ThemeResource DisabledBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOn"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource OnSurfaceMediumBrush}" />
+																	Value="{ThemeResource OnSurfaceMediumBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="KnobOff"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource OnSurfaceMediumBrush}" />
+																	Value="{ThemeResource OnSurfaceMediumBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
 																	   Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource DisabledBrush}" />
+																	Value="{ThemeResource DisabledBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter"
 																	   Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{StaticResource DisabledBrush}" />
+																	Value="{ThemeResource DisabledBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -228,7 +246,7 @@
 										  Grid.ColumnSpan="3"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{StaticResource OnSurfaceBrush}"
+										  Foreground="{ThemeResource OnSurfaceBrush}"
 										  Margin="0,0,0,4"
 										  VerticalAlignment="Top"
 										  Visibility="Collapsed" />
@@ -241,62 +259,62 @@
 
 							<!-- Off Track -->
 							<Rectangle x:Name="OuterBorder"
-									   Width="{StaticResource SimpleToggleSwitchKnobWidth}"
-									   Height="{StaticResource SimpleToggleSwitchKnobHeight}"
-									   RadiusX="{StaticResource SimpleToggleSwitchKnobRadius}"
-									   RadiusY="{StaticResource SimpleToggleSwitchKnobRadius}"
-									   Fill="{StaticResource SurfaceBrush}"
-									   Stroke="{StaticResource OnSurfaceLowBrush}"
-									   StrokeThickness="{StaticResource SimpleToggleSwitchKnobStrokeThickness}"
+									   Width="{ThemeResource SimpleToggleSwitchKnobWidth}"
+									   Height="{ThemeResource SimpleToggleSwitchKnobHeight}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchKnobRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchKnobRadius}"
+									   Fill="{ThemeResource SurfaceBrush}"
+									   Stroke="{ThemeResource OnSurfaceLowBrush}"
+									   StrokeThickness="{ThemeResource SimpleToggleSwitchKnobStrokeThickness}"
 									   HorizontalAlignment="Center" />
 
 							<!-- On Track -->
 							<Rectangle x:Name="SwitchKnobBounds"
-									   Width="{StaticResource SimpleToggleSwitchKnobWidth}"
-									   Height="{StaticResource SimpleToggleSwitchKnobHeight}"
-									   RadiusX="{StaticResource SimpleToggleSwitchKnobRadius}"
-									   RadiusY="{StaticResource SimpleToggleSwitchKnobRadius}"
-									   Fill="{StaticResource PrimaryBrush}"
+									   Width="{ThemeResource SimpleToggleSwitchKnobWidth}"
+									   Height="{ThemeResource SimpleToggleSwitchKnobHeight}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchKnobRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchKnobRadius}"
+									   Fill="{ThemeResource PrimaryBrush}"
 									   HorizontalAlignment="Center"
 									   Opacity="0" />
 
 							<Grid x:Name="SwitchKnob"
 								  HorizontalAlignment="Left"
-								  Width="{StaticResource SimpleToggleSwitchKnobIncludingOffShadowWidth}"
-								  Height="{StaticResource SimpleToggleSwitchKnobHeight}">
+								  Width="{ThemeResource SimpleToggleSwitchKnobIncludingOffShadowWidth}"
+								  Height="{ThemeResource SimpleToggleSwitchKnobHeight}">
 
 								<!-- Switch Knob - On -->
 								<Grid x:Name="SwitchKnobOn"
-									  Width="{StaticResource SimpleToggleSwitchLargeThumbSize}"
-									  Height="{StaticResource SimpleToggleSwitchLargeThumbSize}"
-									  Margin="{StaticResource SimpleToggleSwitchKnobOnMargin}"
-									  CornerRadius="{StaticResource SimpleToggleSwitchLargeThumbCornerRadius}"
+									  Width="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
+									  Height="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
+									  Margin="{ThemeResource SimpleToggleSwitchKnobOnMargin}"
+									  CornerRadius="{ThemeResource SimpleToggleSwitchLargeThumbCornerRadius}"
 									  HorizontalAlignment="Left">
 
 									<!-- Knob On -->
 									<Ellipse x:Name="KnobOn"
 											 Opacity="0"
-											 Width="{StaticResource SimpleToggleSwitchMediumThumbSize}"
-											 Height="{StaticResource SimpleToggleSwitchMediumThumbSize}"
-											 Margin="{StaticResource SimpleToggleSwitchKnobOnContentMargin}"
+											 Width="{ThemeResource SimpleToggleSwitchMediumThumbSize}"
+											 Height="{ThemeResource SimpleToggleSwitchMediumThumbSize}"
+											 Margin="{ThemeResource SimpleToggleSwitchKnobOnContentMargin}"
 											 VerticalAlignment="Center"
 											 HorizontalAlignment="Left"
-											 Fill="{StaticResource SurfaceBrush}" />
+											 Fill="{ThemeResource SurfaceBrush}" />
 								</Grid>
 
 								<!-- Switch Knob - Off -->
 								<Grid x:Name="SwitchKnobOff"
-									  Width="{StaticResource SimpleToggleSwitchLargeThumbSize}"
-									  Height="{StaticResource SimpleToggleSwitchLargeThumbSize}"
-									  Margin="{StaticResource SimpleToggleSwitchKnobOffMargin}"
-									  CornerRadius="{StaticResource SimpleToggleSwitchLargeThumbCornerRadius}"
+									  Width="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
+									  Height="{ThemeResource SimpleToggleSwitchLargeThumbSize}"
+									  Margin="{ThemeResource SimpleToggleSwitchKnobOffMargin}"
+									  CornerRadius="{ThemeResource SimpleToggleSwitchLargeThumbCornerRadius}"
 									  HorizontalAlignment="Left">
 
 									<!-- Knob Off -->
 									<Ellipse x:Name="KnobOff"
-											 Fill="{StaticResource OnSurfaceLowBrush}"
-											 Height="{StaticResource SimpleToggleSwitchSmallThumbSize}"
-											 Width="{StaticResource SimpleToggleSwitchSmallThumbSize}"
+											 Fill="{ThemeResource OnSurfaceLowBrush}"
+											 Height="{ThemeResource SimpleToggleSwitchSmallThumbSize}"
+											 Width="{ThemeResource SimpleToggleSwitchSmallThumbSize}"
 											 VerticalAlignment="Center"
 											 HorizontalAlignment="Center" />
 								</Grid>
@@ -304,22 +322,22 @@
 
 							<!-- On State Layer (Shadow) -->
 							<Ellipse x:Name="SwitchKnobOnShadow"
-									 Width="{StaticResource SimpleToggleSwitchKnobShadowSize}"
-									 Height="{StaticResource SimpleToggleSwitchKnobShadowSize}"
-									 Margin="{StaticResource SimpleToggleSwitchKnobOnShadowMargin}"
+									 Width="{ThemeResource SimpleToggleSwitchKnobShadowSize}"
+									 Height="{ThemeResource SimpleToggleSwitchKnobShadowSize}"
+									 Margin="{ThemeResource SimpleToggleSwitchKnobOnShadowMargin}"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center"
-									 Fill="{StaticResource PrimaryBrush}"
+									 Fill="{ThemeResource PrimaryBrush}"
 									 Opacity="0" />
 
 							<!-- Off State Layer (Shadow) -->
 							<Ellipse x:Name="SwitchKnobOffShadow"
-									 Width="{StaticResource SimpleToggleSwitchKnobShadowSize}"
-									 Height="{StaticResource SimpleToggleSwitchKnobShadowSize}"
-									 Margin="{StaticResource SimpleToggleSwitchKnobOffShadowMargin}"
+									 Width="{ThemeResource SimpleToggleSwitchKnobShadowSize}"
+									 Height="{ThemeResource SimpleToggleSwitchKnobShadowSize}"
+									 Margin="{ThemeResource SimpleToggleSwitchKnobOffShadowMargin}"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center"
-									 Fill="{StaticResource OnSurfaceBrush}"
+									 Fill="{ThemeResource OnSurfaceBrush}"
 									 Opacity="0" />
 
 							<!-- SwitchThumb for dragging -->
