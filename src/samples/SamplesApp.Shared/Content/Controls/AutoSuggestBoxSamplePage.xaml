@@ -1,0 +1,65 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.AutoSuggestBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic AutoSuggestBox -->
+						<smtx:XamlDisplay UniqueKey="Simple_AutoSuggestBox_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AutoSuggestBox PlaceholderText="Search..."
+											Style="{StaticResource SimpleAutoSuggestBoxStyle}"
+											QueryIcon="Find" />
+						</smtx:XamlDisplay>
+
+						<!-- AutoSuggestBox with Header -->
+						<smtx:XamlDisplay UniqueKey="Simple_AutoSuggestBox_Header"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AutoSuggestBox PlaceholderText="Type to search"
+											Style="{StaticResource SimpleAutoSuggestBoxStyle}"
+											Header="Search"
+											QueryIcon="Find" />
+						</smtx:XamlDisplay>
+
+						<!-- AutoSuggestBox with suggestions (code-behind wired) -->
+						<smtx:XamlDisplay UniqueKey="Simple_AutoSuggestBox_Suggestions"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AutoSuggestBox x:Name="SuggestBox"
+											PlaceholderText="Try typing a fruit..."
+											Style="{StaticResource SimpleAutoSuggestBoxStyle}"
+											QueryIcon="Find"
+											TextChanged="SuggestBox_TextChanged" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled AutoSuggestBox -->
+						<smtx:XamlDisplay UniqueKey="Simple_AutoSuggestBox_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AutoSuggestBox PlaceholderText="Disabled search"
+											Style="{StaticResource SimpleAutoSuggestBoxStyle}"
+											QueryIcon="Find"
+											IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled AutoSuggestBox with text -->
+						<smtx:XamlDisplay UniqueKey="Simple_AutoSuggestBox_DisabledWithText"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AutoSuggestBox Text="Cannot edit"
+											PlaceholderText="Disabled"
+											Style="{StaticResource SimpleAutoSuggestBoxStyle}"
+											QueryIcon="Find"
+											IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

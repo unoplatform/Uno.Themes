@@ -5,7 +5,7 @@
 	nameof(ContentDialog),
 	Description = "Represents a dialog box that can be customized to contain checkboxes, hyperlinks, buttons and any other XAML content.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.ContentDialog",
-	SupportedDesigns = new[] { Design.Material }
+	SupportedDesigns = new[] { Design.Material, Design.Simple }
 )]
 public sealed partial class ContentDialogSamplePage : Page
 {
@@ -22,6 +22,10 @@ public sealed partial class ContentDialogSamplePage : Page
 		{
 			[nameof(BuildBasicContentDialog)] = BuildBasicContentDialog,
 			[nameof(BuildRichContentDialog)] = BuildRichContentDialog,
+			[nameof(BuildSimpleBasicDialog)] = BuildSimpleBasicDialog,
+			[nameof(BuildSimpleConfirmDialog)] = BuildSimpleConfirmDialog,
+			[nameof(BuildSimpleThreeButtonDialog)] = BuildSimpleThreeButtonDialog,
+			[nameof(BuildSimpleCustomContentDialog)] = BuildSimpleCustomContentDialog,
 		};
 
 		if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
@@ -104,5 +108,45 @@ public sealed partial class ContentDialogSamplePage : Page
 		Foreground = (Brush)XamlBindingHelper.ConvertValue(typeof(SolidColorBrush), "#006C47"),
 		Width = 24,
 		Height = 24,
+	};
+
+	private ContentDialog BuildSimpleBasicDialog() => new ContentDialog()
+	{
+		Title = "Basic Dialog",
+		Content = "This is a basic dialog with a close button.",
+		CloseButtonText = "OK",
+	};
+
+	private ContentDialog BuildSimpleConfirmDialog() => new ContentDialog()
+	{
+		Title = "Confirm Action",
+		Content = "Are you sure you want to proceed?",
+		PrimaryButtonText = "Confirm",
+		CloseButtonText = "Cancel",
+	};
+
+	private ContentDialog BuildSimpleThreeButtonDialog() => new ContentDialog()
+	{
+		Title = "Save Changes",
+		Content = "Do you want to save your changes before closing?",
+		PrimaryButtonText = "Save",
+		SecondaryButtonText = "Don't Save",
+		CloseButtonText = "Cancel",
+	};
+
+	private ContentDialog BuildSimpleCustomContentDialog() => new ContentDialog()
+	{
+		Title = "Custom Content",
+		Content = new StackPanel
+		{
+			Spacing = 12,
+			Children =
+			{
+				new TextBlock { Text = "Enter your feedback:", TextWrapping = TextWrapping.Wrap },
+				new TextBox { PlaceholderText = "Type here...", AcceptsReturn = true, Height = 100 },
+			}
+		},
+		PrimaryButtonText = "Submit",
+		CloseButtonText = "Cancel",
 	};
 }

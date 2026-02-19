@@ -2,7 +2,7 @@
 
 namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "CalendarView", Description = "A button is used to interpret a user click or tap interaction. They're often bound to commands.", DocumentationLink = "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons", SupportedDesigns = new[] { Design.Material, Design.Cupertino })]
+[SamplePage(SampleCategory.Controls, "CalendarView", Description = "A button is used to interpret a user click or tap interaction. They're often bound to commands.", DocumentationLink = "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons", SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple })]
 
 public sealed partial class CalendarViewSamplePage : Page
 {

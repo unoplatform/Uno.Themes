@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\tfm-common-winui.props" />
+
+	<PropertyGroup>
+		<UseWinUI>true</UseWinUI>
+		<DefineConstants>$(DefineConstants);WinUI</DefineConstants>
+		<DefineConstants Condition="$(_IsWinUI)">$(DefineConstants);WinUI_Desktop</DefineConstants>
+		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+		<PackageId>Uno.Simple.WinUI</PackageId>
+		<AssemblyName>Uno.Simple.WinUI</AssemblyName>
+		<FrameworkLineage>WinUI</FrameworkLineage>
+		<PackageDescription>A set of Simple styles for WinUI Controls to be used in Uno Platform and WinAppSDK projects</PackageDescription>
+	</PropertyGroup>
+
+	<Import Project="simple-common.props" />
+
+	<ItemGroup>
+	  <Compile Remove="Assets\**" />
+	  <Compile Remove="Controls\**" />
+	  <EmbeddedResource Remove="Assets\**" />
+	  <EmbeddedResource Remove="Controls\**" />
+	  <None Remove="Assets\**" />
+	  <None Remove="Controls\**" />
+	  <UpToDateCheckInput Remove="Assets\**" />
+	  <UpToDateCheckInput Remove="Controls\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Uno.WinUI" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Condition="$(_IsWinUI)" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Condition="$(_IsWinUI)" />
+	</ItemGroup>
+
+	<ItemGroup Condition="!$(_IsWinUI)">
+		<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+
+		<Compile Update="**\*.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Remove="Assets\**" />
+	  <Page Remove="Controls\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Uno.Themes\Uno.Themes.WinUI.csproj">
+			<Name>Uno.Themes</Name>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Page Update="Styles\Controls\ComboBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+	</ItemGroup>
+
+	<Import Project="..\..\..\winappsdk-workaround.targets" />
+</Project>

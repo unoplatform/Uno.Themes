@@ -291,6 +291,47 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic ToggleSwitch -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_Off"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleSwitch Header="Wi-Fi" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_On"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleSwitch Header="Bluetooth" IsOn="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Without Header -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_NoHeaderOff"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleSwitch />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_NoHeaderOn"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleSwitch IsOn="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_DisabledOff"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleSwitch Header="Disabled Off" IsEnabled="False" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_DisabledOn"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleSwitch Header="Disabled On" IsOn="True" IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- Custom On/Off Content -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleSwitch_CustomContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleSwitch Header="Notifications" OnContent="Enabled" OffContent="Disabled" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
