@@ -1,0 +1,60 @@
+﻿<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.PersonPictureSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="PersonPicture"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+
+			<!-- Circle — Small, Medium, Large -->
+			<TextBlock Text="Circle — Small, Medium, Large"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_CircleSizes">
+				<StackPanel Orientation="Horizontal"
+							Spacing="16"
+							VerticalAlignment="Center">
+					<PersonPicture Style="{StaticResource SimplePersonPictureSmallStyle}"
+								   Initials="S" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
+								   Initials="M" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureLargeStyle}"
+								   Initials="L" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Square — Small, Medium, Large -->
+			<TextBlock Text="Square — Small, Medium, Large"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_SquareSizes">
+				<StackPanel Orientation="Horizontal"
+							Spacing="16"
+							VerticalAlignment="Center">
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareSmallStyle}"
+								   Initials="S" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareStyle}"
+								   Initials="M" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareLargeStyle}"
+								   Initials="L" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- With Display Name -->
+			<TextBlock Text="With Display Name"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_PersonPicture_DisplayName">
+				<StackPanel Orientation="Horizontal"
+							Spacing="16">
+					<PersonPicture Style="{StaticResource SimplePersonPictureStyle}"
+								   DisplayName="John Doe" />
+					<PersonPicture Style="{StaticResource SimplePersonPictureSquareStyle}"
+								   DisplayName="Jane Smith" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
+</Page>

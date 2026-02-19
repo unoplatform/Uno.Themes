@@ -1,0 +1,69 @@
+﻿<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.TextBoxSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="TextBox"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+			<!-- Input TextBox (Figma: Input Field) -->
+			<TextBlock Text="Input TextBox"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_Input">
+				<TextBox Style="{StaticResource InputTextBoxStyle}"
+						 PlaceholderText="Placeholder"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputWithText">
+				<TextBox Style="{StaticResource InputTextBoxStyle}"
+						 Text="With text"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputDisabled">
+				<TextBox Style="{StaticResource InputTextBoxStyle}"
+						 PlaceholderText="Disabled"
+						 IsEnabled="False"
+						 Width="300" />
+			</smtx:XamlDisplay>
+
+			<!-- Outlined Input TextBox -->
+			<TextBlock Text="Outlined Input TextBox"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedInput">
+				<TextBox Style="{StaticResource OutlinedInputTextBoxStyle}"
+						 PlaceholderText="Placeholder"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedInputWithText">
+				<TextBox Style="{StaticResource OutlinedInputTextBoxStyle}"
+						 Text="With text"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedInputDisabled">
+				<TextBox Style="{StaticResource OutlinedInputTextBoxStyle}"
+						 PlaceholderText="Disabled"
+						 IsEnabled="False"
+						 Width="300" />
+			</smtx:XamlDisplay>
+
+			<!-- Input TextBox — Small -->
+			<TextBlock Text="Input TextBox — Small"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputSmall">
+				<TextBox Style="{StaticResource SimpleInputTextBoxSmallStyle}"
+						 PlaceholderText="Small input"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputSmallWithText">
+				<TextBox Style="{StaticResource SimpleInputTextBoxSmallStyle}"
+						 Text="Small with text"
+						 Width="300" />
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>
