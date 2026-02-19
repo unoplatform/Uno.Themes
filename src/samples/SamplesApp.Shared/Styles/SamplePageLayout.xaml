@@ -34,10 +34,8 @@
 	<Style x:Key="DefaultSamplePageLayoutStyle"
 		   TargetType="local:SamplePageLayout">
 
-		<Setter Property="HeaderTemplate"
-				Value="{StaticResource DefaultSamplePageLayoutHeaderTemplate}" />
-		<Setter Property="BorderBrush"
-				Value="{StaticResource DividerBrush}" />
+		<Setter Property="HeaderTemplate" Value="{StaticResource DefaultSamplePageLayoutHeaderTemplate}" />
+		<Setter Property="BorderBrush" Value="{StaticResource DividerBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -270,6 +268,7 @@
 										   Margin="10,0,0,0" />
 								</StackPanel>
 							</RadioButton>
+
 						</StackPanel>
 
 						<VisualStateManager.VisualStateGroups>
@@ -285,20 +284,13 @@
 										<AdaptiveTrigger MinWindowWidth="0" />
 									</VisualState.StateTriggers>
 									<VisualState.Setters>
-										<Setter Target="ScrollingContent.Margin"
-												Value="16,0" />
-										<Setter Target="ScrollingTitle.Visibility"
-												Value="Visible" />
-										<Setter Target="PART_StickyTabs.Padding"
-												Value="16,0" />
-										<Setter Target="PART_StickyTabs.Margin"
-												Value="0" />
-										<Setter Target="StickyTitle.Visibility"
-												Value="Collapsed" />
-										<Setter Target="PART_MobileTopBar.Visibility"
-												Value="Visible" />
-										<Setter Target="MobileTopBarSeparator.Visibility"
-												Value="Visible" />
+										<Setter Target="ScrollingContent.Margin" Value="16,0" />
+										<Setter Target="ScrollingTitle.Visibility" Value="Visible" />
+										<Setter Target="PART_StickyTabs.Padding" Value="16,0" />
+										<Setter Target="PART_StickyTabs.Margin" Value="0" />
+										<Setter Target="StickyTitle.Visibility" Value="Collapsed" />
+										<Setter Target="PART_MobileTopBar.Visibility" Value="Visible" />
+										<Setter Target="MobileTopBarSeparator.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -307,15 +299,19 @@
 
 								<VisualState x:Name="Material">
 									<VisualState.Setters>
-										<Setter Target="MaterialContent.Visibility"
-												Value="Visible" />
+										<Setter Target="MaterialContent.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Cupertino">
 									<VisualState.Setters>
-										<Setter Target="CupertinoContentPresenter.Visibility"
-												Value="Visible" />
+										<Setter Target="CupertinoContentPresenter.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Simple">
+									<VisualState.Setters>
+										<Setter Target="SimpleContentContainer.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

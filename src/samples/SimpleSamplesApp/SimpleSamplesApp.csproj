@@ -1,0 +1,61 @@
+<Project Sdk="Uno.Sdk">
+  <!--
+    Expand platform suffix overrides to versioned TFMs for sample app (net10.0).
+    This allows crosstargeting_override.props to use platform suffixes (e.g., 'ios', 'android')
+    that work for both libraries (net9.0-*) and sample apps (net10.0-*).
+  -->
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('ios'))">$(TargetFrameworks);net10.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('android'))">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Root namespace for the Simple Design samples app -->
+    <RootNamespace>Uno.Themes.Simple.Samples</RootNamespace>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Simple.Samples</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>uno.platform.themes.simple</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Uno.Simple Sample Application powered by Uno Platform.</Description>
+
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../library/Uno.Simple.WinUI/Uno.Simple.WinUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.ShowMeTheXAML" />
+    <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UnoIcon Include="Assets/Icons/icon.svg" ForegroundFile="Assets/Icons/icon_foreground.svg" Color="#512BD4" />
+    <UnoSplashScreen Include="Assets/Splash/splash_screen.svg" Color="#512BD4" />
+  </ItemGroup>
+</Project>
