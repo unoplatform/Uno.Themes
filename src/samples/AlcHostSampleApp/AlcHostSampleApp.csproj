@@ -1,0 +1,42 @@
+<Project Sdk="Uno.Sdk.Private">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Themes ALC Host</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>uno.platform.themes.alchost</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>ALC Host sample that loads MaterialSampleApp or CupertinoSampleApp via AssemblyLoadContext.</Description>
+
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+
+    <!-- Enable ALC support for proper resource registration -->
+    <UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>
+
+    <!-- ALC loading requires dynamic assembly loading; disable trimming warnings -->
+    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+    <PublishTrimmed>false</PublishTrimmed>
+
+    <!-- RootNamespace -->
+    <RootNamespace>Uno.Themes.AlcHost</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <UnoIcon Include="../SamplesApp.Shared/Assets/Icons/icon.svg"
+             ForegroundFile="../SamplesApp.Shared/Assets/Icons/icon_foreground.svg"
+             Color="#512BD4" />
+    <UnoSplashScreen Include="../SamplesApp.Shared/Assets/Splash/splash_screen.svg"
+                     Color="#512BD4" />
+  </ItemGroup>
+
+</Project>

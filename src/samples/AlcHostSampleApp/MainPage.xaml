@@ -1,0 +1,71 @@
+<Page x:Class="Uno.Themes.AlcHost.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:Uno.Themes.AlcHost"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header / Controls -->
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Spacing="12"
+                    Padding="16"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+
+            <TextBlock Text="ALC Host"
+                       VerticalAlignment="Center"
+                       FontSize="20"
+                       FontWeight="Bold" />
+
+            <Button x:Name="LoadMaterialButton"
+                    Content="Load Material Sample"
+                    Click="OnLoadMaterialClick" />
+
+            <Button x:Name="LoadCupertinoButton"
+                    Content="Load Cupertino Sample"
+                    Click="OnLoadCupertinoClick" />
+
+            <Button x:Name="UnloadButton"
+                    Content="Unload App"
+                    Click="OnUnloadClick"
+                    IsEnabled="False" />
+
+            <TextBlock x:Name="StatusText"
+                       Text="No app loaded"
+                       VerticalAlignment="Center"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+        </StackPanel>
+
+        <!-- Content host area for the secondary ALC app -->
+        <Grid Grid.Row="1">
+            <!-- Placeholder shown when no app is loaded -->
+            <StackPanel x:Name="PlaceholderPanel"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="16">
+                <TextBlock Text="AssemblyLoadContext Host Sample"
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center" />
+                <TextBlock Text="Select a sample app to load using the buttons above."
+                           FontSize="16"
+                           HorizontalAlignment="Center"
+                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                <TextBlock Text="The selected app will be loaded into a secondary AssemblyLoadContext&#x0a;and its UI content will be hosted in this area."
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" />
+            </StackPanel>
+
+            <!-- The AlcContentHost is created programmatically and added here -->
+            <ContentPresenter x:Name="HostContainer" />
+        </Grid>
+    </Grid>
+
+</Page>
