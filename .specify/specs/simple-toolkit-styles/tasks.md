@@ -10,7 +10,7 @@
 
 ## Path Conventions
 
-- **Toolkit repo**: `D:\source\uno.toolkit.ui`
+- **Toolkit repo**: `[local toolkit repo path]`
 - **New library**: `src/library/Uno.Toolkit.Simple/`
 - **Reference impl**: `src/library/Uno.Toolkit.Material/`
 - **Style files**: `src/library/Uno.Toolkit.Simple/Styles/Controls/`

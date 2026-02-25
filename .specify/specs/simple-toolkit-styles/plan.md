@@ -1,7 +1,7 @@
 # Implementation Plan: Simple Toolkit Styles
 
 **Branch**: `feature/simple-toolkit-styles` | **Date**: 2026-02-16 | **Spec**: [spec.md](spec.md)
-**Input**: Feature specification from `specs/simple-toolkit-styles/spec.md`
+**Input**: Feature specification from `.specify/specs/simple-toolkit-styles/spec.md`
 
 ## Summary
 
