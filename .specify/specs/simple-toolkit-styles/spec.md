@@ -324,7 +324,9 @@ As an app developer, I want to override individual properties via resource keys.
 ## Reference Implementation: How `Uno.Toolkit.Material` Is Built
 
 > **CRITICAL FOR AGENTS**: This section documents the exact patterns that MUST
-> be replicated. Read `D:\source\uno.toolkit.ui\src\library\Uno.Toolkit.Material\`
+> be replicated. Use the `uno.toolkit.ui/src/library/Uno.Toolkit.Material/`
+> folder in this repo (or
+> https://github.com/unoplatform/uno.toolkit.ui/tree/main/src/library/Uno.Toolkit.Material)
 > as the authoritative reference.
 
 ### Repository & File Layout
