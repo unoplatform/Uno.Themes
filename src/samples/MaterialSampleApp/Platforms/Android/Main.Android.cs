@@ -10,7 +10,7 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.UI.Xaml.Media;
 
-namespace Uno.Themes.Samples.Droid;
+namespace MaterialSampleApp.Droid;
 
 [global::Android.App.ApplicationAttribute(
     Label = "@string/ApplicationName",

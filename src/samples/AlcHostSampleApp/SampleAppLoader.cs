@@ -1,6 +1,7 @@
 #if HAS_UNO
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
@@ -17,7 +18,7 @@ namespace Uno.Themes.AlcHost;
 /// <summary>
 /// Loads and manages a secondary Uno Platform sample application via AssemblyLoadContext.
 /// </summary>
-internal sealed class SampleAppLoader : IDisposable
+internal sealed class SampleAppLoader : IAsyncDisposable
 {
     private readonly ILogger? _logger;
     private SampleAppAssemblyLoadContext? _activeContext;
@@ -68,11 +69,17 @@ internal sealed class SampleAppLoader : IDisposable
 
         _logger?.LogInformation("Loading application from: {AssemblyPath}", assemblyPath);
 
+        // Build a content pool from the host's output directory for assembly deduplication.
+        // Assemblies that exist in both host and secondary app will be loaded via
+        // LoadFromAssemblyPath (Tier 2) to share the native image with the host.
+        var hostPool = AlcContentPool.BuildFromDirectory(assemblyDirectory, "SampleAppHost");
+        _logger?.LogInformation("Built host pool '{PoolName}' with {Count} entries", hostPool.Name, hostPool.ListFiles().Count);
+
         SampleAppAssemblyLoadContext? pendingContext = null;
 
         try
         {
-            pendingContext = new SampleAppAssemblyLoadContext(assemblyDirectory, _logger);
+            pendingContext = new SampleAppAssemblyLoadContext(assemblyDirectory, _logger, hostPool);
 
             // Load the main assembly via stream to avoid file locking
             Assembly assembly;
@@ -109,6 +116,11 @@ internal sealed class SampleAppLoader : IDisposable
             }
 
             _logger?.LogInformation("Found App type: {AppType}, Program type: {ProgramType}", appType.FullName, programType.FullName);
+
+            // Clear provider registrations that the host app already made
+            // (e.g., ILottieVisualSourceProvider). The secondary app's initialization
+            // will re-register them, and duplicate Add() calls would throw.
+            ClearConflictingProviderRegistrations();
 
             // Set up the content host override so the secondary app's Window.Content
             // redirects into our host control.
@@ -172,7 +184,10 @@ internal sealed class SampleAppLoader : IDisposable
         finally
         {
             // Dispose pending context if ownership was not transferred
-            pendingContext?.Dispose();
+            if (pendingContext is not null)
+            {
+                await pendingContext.DisposeAsync().ConfigureAwait(false);
+            }
         }
     }
 
@@ -221,7 +236,11 @@ internal sealed class SampleAppLoader : IDisposable
             }
         }
 
-        context?.Dispose();
+        if (context is not null)
+        {
+            await context.DisposeAsync().ConfigureAwait(false);
+        }
+
         cancellation?.Dispose();
 
         // Clear the content host override
@@ -233,7 +252,7 @@ internal sealed class SampleAppLoader : IDisposable
         GC.Collect();
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         if (_disposed)
         {
@@ -242,8 +261,67 @@ internal sealed class SampleAppLoader : IDisposable
 
         _disposed = true;
 
-        // Fire-and-forget cleanup with try/catch inside
-        _ = StopActiveApplicationAsync();
+        await StopActiveApplicationAsync().ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Clears provider registrations (e.g., ILottieVisualSourceProvider) from the shared
+    /// ApiExtensibility dictionary that were registered by the host app's initialization.
+    /// This prevents ArgumentException ("An item with the same key has already been added")
+    /// when the secondary ALC app's UnoPlatformHostBuilder.Build() tries to re-register
+    /// the same providers via the shared Uno.Foundation assembly.
+    /// </summary>
+    [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Reflection required for ALC provider cleanup")]
+    [UnconditionalSuppressMessage("Trimming", "IL2070", Justification = "Reflection required for ALC provider cleanup")]
+    private void ClearConflictingProviderRegistrations()
+    {
+        try
+        {
+            // Find the ApiExtensibility type in Uno.Foundation (shared with host)
+            var apiExtType = AppDomain.CurrentDomain.GetAssemblies()
+                .Select(a => a.GetType("Uno.ApiExtensibility"))
+                .FirstOrDefault(t => t is not null);
+
+            if (apiExtType is null)
+            {
+                _logger?.LogDebug("ApiExtensibility type not found; skipping provider cleanup");
+                return;
+            }
+
+            // Access the internal _registrations dictionary
+            var field = apiExtType.GetField(
+                "_registrations",
+                BindingFlags.Static | BindingFlags.NonPublic);
+
+            if (field?.GetValue(null) is System.Collections.IDictionary dict)
+            {
+                // Find and remove provider entries that will be re-registered
+                // by the secondary app (e.g., ILottieVisualSourceProvider)
+                var keysToRemove = new List<object>();
+                foreach (var key in dict.Keys)
+                {
+                    if (key is Type keyType &&
+                        keyType.Name == "ILottieVisualSourceProvider")
+                    {
+                        keysToRemove.Add(key);
+                    }
+                }
+
+                foreach (var key in keysToRemove)
+                {
+                    dict.Remove(key);
+                    _logger?.LogDebug("Removed conflicting provider registration: {Key}", key);
+                }
+            }
+            else
+            {
+                _logger?.LogDebug("ApiExtensibility._registrations field not accessible");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogWarning(ex, "Failed to clear conflicting provider registrations; secondary app may fail to load");
+        }
     }
 }
 #endif

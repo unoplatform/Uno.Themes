@@ -324,7 +324,7 @@ public class PluginAssemblyLoadContext : AssemblyLoadContext
 The secondary app project should be configured as a class library that can be loaded dynamically:
 
 ```xml
-<Project Sdk="Uno.Sdk">
+<Project Sdk="Uno.Sdk.Private">
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <OutputType>Library</OutputType>

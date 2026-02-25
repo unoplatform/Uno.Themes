@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 
-namespace Uno.Themes.Samples.Droid;
+namespace MaterialSampleApp.Droid;
 
 [Activity(
     MainLauncher = true,

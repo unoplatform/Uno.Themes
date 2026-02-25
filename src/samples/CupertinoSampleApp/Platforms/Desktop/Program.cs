@@ -1,6 +1,6 @@
 using Uno.UI.Hosting;
 
-namespace Uno.Themes.Samples;
+namespace CupertinoSampleApp;
 
 internal class Program
 {

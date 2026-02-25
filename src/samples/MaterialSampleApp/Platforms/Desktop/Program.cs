@@ -1,6 +1,6 @@
 using Uno.UI.Hosting;
 
-namespace Uno.Themes.Samples;
+namespace MaterialSampleApp;
 
 internal class Program
 {

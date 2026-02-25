@@ -1,4 +1,4 @@
-namespace Uno.Themes.Samples;
+namespace MaterialSampleApp;
 
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.
