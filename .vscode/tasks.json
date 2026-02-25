@@ -52,6 +52,32 @@
         "/consoleloggerparameters:NoSummary"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-simple-wasm",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/SimpleSamplesApp/SimpleSamplesApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-browserwasm",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-simple-desktop",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/SimpleSamplesApp/SimpleSamplesApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-desktop",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
     }
   ]
 }

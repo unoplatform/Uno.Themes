@@ -58,14 +58,12 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource PrimaryVariantDarkBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource PrimaryVariantDarkBrush}" />
 										<Setter Target="RootGrid.Opacity" Value="0.8" />
 									</VisualState.Setters>
 								</VisualState>
@@ -166,7 +164,7 @@
 		   TargetType="Button">
 		<Setter Property="Background" Value="{ThemeResource BackgroundTertiaryBrush}" />
 		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SDSNeutralTertiaryHoverBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlineVariantBrush}" />
 		<Setter Property="BorderThickness" Value="{ThemeResource SimpleButtonBorderThickness}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource SimpleButtonCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource SimpleButtonPadding}" />
@@ -195,13 +193,13 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryDarkerBrush}" />
+										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryDarkerBrush}" />
+										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryHoverBrush}" />
 										<Setter Target="RootGrid.Opacity" Value="0.8" />
 									</VisualState.Setters>
 								</VisualState>
