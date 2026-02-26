@@ -5,9 +5,9 @@
 		<ResourceDictionary x:Key="Default">
 			<CornerRadius x:Key="SimpleButtonCornerRadius">8</CornerRadius>
 			<Thickness x:Key="SimpleButtonBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleButtonPadding">12,12,12,12</Thickness>
-			<Thickness x:Key="SimpleButtonPaddingSmall">8,8,8,8</Thickness>
-			<Thickness x:Key="SimpleButtonPaddingLarge">20,16,20,16</Thickness>
+			<Thickness x:Key="SimpleButtonPadding">12,0,12,0</Thickness>
+			<Thickness x:Key="SimpleButtonPaddingSmall">8,0,8,0</Thickness>
+			<Thickness x:Key="SimpleButtonPaddingLarge">20,0,20,0</Thickness>
 			<x:Double x:Key="SimpleButtonHeight">40</x:Double>
 			<x:Double x:Key="SimpleButtonHeightSmall">32</x:Double>
 			<x:Double x:Key="SimpleButtonHeightLarge">48</x:Double>
@@ -15,9 +15,9 @@
 		<ResourceDictionary x:Key="Light">
 			<CornerRadius x:Key="SimpleButtonCornerRadius">8</CornerRadius>
 			<Thickness x:Key="SimpleButtonBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleButtonPadding">12,12,12,12</Thickness>
-			<Thickness x:Key="SimpleButtonPaddingSmall">8,8,8,8</Thickness>
-			<Thickness x:Key="SimpleButtonPaddingLarge">20,16,20,16</Thickness>
+			<Thickness x:Key="SimpleButtonPadding">12,0,12,0</Thickness>
+			<Thickness x:Key="SimpleButtonPaddingSmall">8,0,8,0</Thickness>
+			<Thickness x:Key="SimpleButtonPaddingLarge">20,0,20,0</Thickness>
 			<x:Double x:Key="SimpleButtonHeight">40</x:Double>
 			<x:Double x:Key="SimpleButtonHeightSmall">32</x:Double>
 			<x:Double x:Key="SimpleButtonHeightLarge">48</x:Double>
@@ -58,14 +58,12 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource PrimaryVariantDarkBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background" Value="{ThemeResource PrimaryVariantDarkBrush}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource PrimaryVariantDarkBrush}" />
 										<Setter Target="RootGrid.Opacity" Value="0.8" />
 									</VisualState.Setters>
 								</VisualState>
@@ -166,7 +164,7 @@
 		   TargetType="Button">
 		<Setter Property="Background" Value="{ThemeResource BackgroundTertiaryBrush}" />
 		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SDSNeutralTertiaryHoverBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlineVariantBrush}" />
 		<Setter Property="BorderThickness" Value="{ThemeResource SimpleButtonBorderThickness}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource SimpleButtonCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource SimpleButtonPadding}" />
@@ -195,13 +193,15 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryDarkerBrush}" />
+										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryHoverBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource OutlineVariantBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryDarkerBrush}" />
+										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSNeutralTertiaryHoverBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource OutlineVariantBrush}" />
 										<Setter Target="RootGrid.Opacity" Value="0.8" />
 									</VisualState.Setters>
 								</VisualState>
@@ -343,9 +343,9 @@
 	<Style x:Key="SimplePrimaryErrorButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource SimplePrimaryButtonStyle}">
-		<Setter Property="Background" Value="{ThemeResource SDSDangerPrimaryBrush}" />
-		<Setter Property="Foreground" Value="White" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SDSDangerPrimaryBrush}" />
+		<Setter Property="Background" Value="{ThemeResource SDSDangerFillBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource SDSDangerOnFillBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SDSDangerFillHoverBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -361,15 +361,15 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSDangerPrimaryHoverBrush}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource SDSDangerPrimaryHoverBrush}" />
+										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSDangerFillHoverBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource SDSDangerPrimaryBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSDangerPrimaryHoverBrush}" />
-										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource SDSDangerPrimaryHoverBrush}" />
+										<Setter Target="RootGrid.Background" Value="{ThemeResource SDSDangerFillHoverBrush}" />
+										<Setter Target="RootGrid.BorderBrush" Value="{ThemeResource SDSDangerPrimaryBrush}" />
 										<Setter Target="RootGrid.Opacity" Value="0.8" />
 									</VisualState.Setters>
 								</VisualState>

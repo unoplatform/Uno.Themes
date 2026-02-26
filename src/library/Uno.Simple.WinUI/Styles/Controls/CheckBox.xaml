@@ -3,23 +3,23 @@
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
-			<x:Double x:Key="SimpleCheckBoxSize">18</x:Double>
-			<CornerRadius x:Key="SimpleCheckBoxCornerRadius">2</CornerRadius>
+			<x:Double x:Key="SimpleCheckBoxSize">16</x:Double>
+			<CornerRadius x:Key="SimpleCheckBoxCornerRadius">4</CornerRadius>
 			<Thickness x:Key="SimpleCheckBoxBorderThickness">2</Thickness>
-			<Thickness x:Key="SimpleCheckBoxContentMargin">8,0,0,0</Thickness>
+			<Thickness x:Key="SimpleCheckBoxContentMargin">12,0,0,0</Thickness>
 			<x:String x:Key="SimpleCheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 			<x:String x:Key="SimpleCheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Light">
-			<x:Double x:Key="SimpleCheckBoxSize">18</x:Double>
-			<CornerRadius x:Key="SimpleCheckBoxCornerRadius">2</CornerRadius>
+			<x:Double x:Key="SimpleCheckBoxSize">16</x:Double>
+			<CornerRadius x:Key="SimpleCheckBoxCornerRadius">4</CornerRadius>
 			<Thickness x:Key="SimpleCheckBoxBorderThickness">2</Thickness>
-			<Thickness x:Key="SimpleCheckBoxContentMargin">8,0,0,0</Thickness>
+			<Thickness x:Key="SimpleCheckBoxContentMargin">12,0,0,0</Thickness>
 			<x:String x:Key="SimpleCheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 			<x:String x:Key="SimpleCheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
-	<GridLength x:Key="SimpleCheckBoxColumnWidth">20</GridLength>
+	<GridLength x:Key="SimpleCheckBoxColumnWidth">16</GridLength>
 
 	<!-- SimpleCheckBoxStyle -->
 	<Style x:Key="SimpleCheckBoxStyle"
@@ -29,12 +29,12 @@
 		<Setter Property="BorderBrush" Value="Transparent" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="14" />
+		<Setter Property="FontSize" Value="16" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
-		<Setter Property="VerticalContentAlignment" Value="Top" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="MinWidth" Value="120" />
 		<Setter Property="MinHeight" Value="32" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
@@ -76,11 +76,7 @@
 
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Stroke">
-											<Setter.Value>
-												<SolidColorBrush Color="#B2B2B2" />
-											</Setter.Value>
-										</Setter>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource OnDisabledBrush}" />
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource DisabledBrush}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OnDisabledBrush}" />
 									</VisualState.Setters>
@@ -116,11 +112,7 @@
 
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Stroke">
-											<Setter.Value>
-												<SolidColorBrush Color="#B2B2B2" />
-											</Setter.Value>
-										</Setter>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource OnDisabledBrush}" />
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource DisabledBrush}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
 										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource OnDisabledBrush}" />
@@ -158,11 +150,7 @@
 
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Stroke">
-											<Setter.Value>
-												<SolidColorBrush Color="#B2B2B2" />
-											</Setter.Value>
-										</Setter>
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource OnDisabledBrush}" />
 										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource DisabledBrush}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
 										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource OnDisabledBrush}" />
@@ -178,15 +166,15 @@
 							  Width="{ThemeResource SimpleCheckBoxSize}"
 							  Height="{ThemeResource SimpleCheckBoxSize}"
 							  HorizontalAlignment="Left"
-							  VerticalAlignment="Top">
+							  VerticalAlignment="Center">
 
 							<!-- CheckBox Border -->
 							<Rectangle x:Name="CheckBoxBorder"
 									   Fill="Transparent"
 									   Stroke="{ThemeResource OnSurfaceMediumBrush}"
 									   StrokeThickness="2"
-									   RadiusX="2"
-									   RadiusY="2" />
+									   RadiusX="4"
+									   RadiusY="4" />
 
 							<!-- Checkmark Glyph -->
 							<Path x:Name="CheckGlyph"

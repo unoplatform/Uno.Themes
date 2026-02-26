@@ -32,7 +32,6 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!-- Simple PersonPicture Style (Medium Circle - Default) -->
 	<Style x:Key="SimplePersonPictureStyle"
 		   TargetType="PersonPicture">
 		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureMediumSize}" />
@@ -188,7 +187,7 @@
 		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsLargeFontSize}" />
 	</Style>
 
-	<!-- Square Variants (using Border-based template for square corners) -->
+	<!-- Square Variants -->
 	<Style x:Key="SimplePersonPictureSquareStyle"
 		   TargetType="PersonPicture">
 		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureMediumSize}" />
@@ -335,6 +334,135 @@
 		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureSmallSize}" />
 		<Setter Property="Height" Value="{ThemeResource SimplePersonPictureSmallSize}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsSmallFontSize}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="PersonPicture">
+					<Grid x:Name="RootGrid">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Photo">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="0" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Initials">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="NoPhotoOrInitials">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Group">
+									<VisualState.Setters>
+										<Setter Target="PersonPictureBorder.Opacity" Value="1" />
+										<Setter Target="InitialsTextBlock.Opacity" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="BadgeStates">
+								<VisualState x:Name="NoBadge" />
+								<VisualState x:Name="BadgeWithoutImageSource">
+									<VisualState.Setters>
+										<Setter Target="BadgeGrid.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="BadgeWithImageSource">
+									<VisualState.Setters>
+										<Setter Target="BadgeGrid.Visibility" Value="Visible" />
+										<Setter Target="BadgeImage.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Background Border (Square Small - 4px radius) -->
+						<Border x:Name="PersonPictureBorder"
+								Background="{TemplateBinding Background}"
+								Width="{TemplateBinding Width}"
+								Height="{TemplateBinding Height}"
+								CornerRadius="{ThemeResource SimplePersonPictureSquareSmallRadius}" />
+
+						<!-- Profile Photo (Square Small) -->
+						<Border x:Name="BadgeClipBorder"
+								Width="{TemplateBinding Width}"
+								Height="{TemplateBinding Height}"
+								CornerRadius="{ThemeResource SimplePersonPictureSquareSmallRadius}">
+							<Border.Background>
+								<ImageBrush x:Name="PersonPicture"
+											ImageSource="{TemplateBinding ProfilePicture}"
+											Stretch="UniformToFill" />
+							</Border.Background>
+						</Border>
+
+						<!-- Initials -->
+						<TextBlock x:Name="InitialsTextBlock"
+								   AutomationProperties.AccessibilityView="Raw"
+								   FontFamily="{TemplateBinding FontFamily}"
+								   FontSize="{TemplateBinding FontSize}"
+								   FontWeight="Normal"
+								   Foreground="{TemplateBinding Foreground}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"
+								   TextAlignment="Center"
+								   IsTextScaleFactorEnabled="False"
+								   Text="{TemplateBinding Initials}" />
+
+						<!-- Badge -->
+						<Grid x:Name="BadgeGrid"
+							  Visibility="Collapsed"
+							  HorizontalAlignment="Right"
+							  VerticalAlignment="Bottom">
+							<Ellipse x:Name="BadgeBackground"
+									 Fill="{ThemeResource PrimaryBrush}"
+									 Width="16"
+									 Height="16" />
+							<Image x:Name="BadgeImage"
+								   Visibility="Collapsed"
+								   Source="{TemplateBinding BadgeImageSource}"
+								   Width="16"
+								   Height="16"
+								   Stretch="UniformToFill" />
+							<TextBlock x:Name="BadgeNumberTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeNumber}" />
+							<TextBlock x:Name="BadgeGlyphTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeGlyph}" />
+							<TextBlock x:Name="BadgeTextTextBlock"
+									   AutomationProperties.AccessibilityView="Raw"
+									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontSize="10"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   TextAlignment="Center"
+									   IsTextScaleFactorEnabled="False"
+									   Text="{TemplateBinding BadgeText}" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 	<!-- Large Square Variant -->
