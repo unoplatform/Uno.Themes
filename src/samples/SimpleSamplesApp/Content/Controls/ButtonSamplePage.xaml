@@ -53,82 +53,84 @@
 				</StackPanel>
 			</smtx:XamlDisplay>
 
-			<!-- Light Button -->
-			<TextBlock Text="Light Button"
+			<!-- Danger Primary Button -->
+			<TextBlock Text="Danger Primary Button"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_Light">
+			<smtx:XamlDisplay UniqueKey="Simple_Button_DangerPrimary">
 				<StackPanel Orientation="Horizontal"
 							Spacing="12">
-					<Button Content="Light"
-							Style="{StaticResource SimpleLightButtonStyle}" />
+					<Button Content="Danger Primary"
+							Style="{StaticResource SimpleDangerPrimaryButtonStyle}" />
 					<Button Content="Disabled"
-							Style="{StaticResource SimpleLightButtonStyle}"
+							Style="{StaticResource SimpleDangerPrimaryButtonStyle}"
 							IsEnabled="False" />
 				</StackPanel>
 			</smtx:XamlDisplay>
 
-			<!-- Size Variants -->
-			<TextBlock Text="Size Variants"
+			<!-- Danger Subtle Button -->
+			<TextBlock Text="Danger Subtle Button"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_SizeVariants">
+			<smtx:XamlDisplay UniqueKey="Simple_Button_DangerSubtle">
+				<StackPanel Orientation="Horizontal"
+							Spacing="12">
+					<Button Content="Danger Subtle"
+							Style="{StaticResource SimpleDangerSubtleButtonStyle}" />
+					<Button Content="Disabled"
+							Style="{StaticResource SimpleDangerSubtleButtonStyle}"
+							IsEnabled="False" />
+				</StackPanel>
+			</smtx:XamlDisplay>
+
+			<!-- Small Size Variants -->
+			<TextBlock Text="Small Size Variants"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_SmallVariants">
 				<StackPanel Spacing="12">
 					<StackPanel Orientation="Horizontal"
 								Spacing="12">
 						<Button Content="Small Primary"
-								Style="{StaticResource SimplePrimaryButtonSmallStyle}" />
+								Style="{StaticResource SimpleSmallPrimaryButtonStyle}" />
 						<Button Content="Small Neutral"
-								Style="{StaticResource SimpleNeutralButtonSmallStyle}" />
+								Style="{StaticResource SimpleSmallNeutralButtonStyle}" />
 						<Button Content="Small Subtle"
-								Style="{StaticResource SimpleSubtleButtonSmallStyle}" />
+								Style="{StaticResource SimpleSmallSubtleButtonStyle}" />
 					</StackPanel>
 					<StackPanel Orientation="Horizontal"
 								Spacing="12">
-						<Button Content="Large Primary"
-								Style="{StaticResource SimplePrimaryButtonLargeStyle}" />
-						<Button Content="Large Neutral"
-								Style="{StaticResource SimpleNeutralButtonLargeStyle}" />
-						<Button Content="Large Subtle"
-								Style="{StaticResource SimpleSubtleButtonLargeStyle}" />
+						<Button Content="Small Danger Primary"
+								Style="{StaticResource SimpleSmallDangerPrimaryButtonStyle}" />
+						<Button Content="Small Danger Subtle"
+								Style="{StaticResource SimpleSmallDangerSubtleButtonStyle}" />
 					</StackPanel>
 				</StackPanel>
 			</smtx:XamlDisplay>
 
-			<!-- Error Buttons -->
-			<TextBlock Text="Error Buttons"
+			<!-- Small Size Variants — Disabled -->
+			<TextBlock Text="Small Size Variants — Disabled"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_Error">
-				<StackPanel Orientation="Horizontal"
-							Spacing="12">
-					<Button Content="Primary Error"
-							Style="{StaticResource SimplePrimaryErrorButtonStyle}" />
-					<Button Content="Subtle Error"
-							Style="{StaticResource SimpleSubtleErrorButtonStyle}" />
-				</StackPanel>
-			</smtx:XamlDisplay>
-
-			<!-- Error Buttons — Small -->
-			<TextBlock Text="Error Buttons — Small"
-					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_ErrorSmall">
-				<StackPanel Orientation="Horizontal"
-							Spacing="12">
-					<Button Content="Primary Error Small"
-							Style="{StaticResource SimplePrimaryErrorButtonSmallStyle}" />
-					<Button Content="Subtle Error Small"
-							Style="{StaticResource SimpleSubtleErrorButtonSmallStyle}" />
-				</StackPanel>
-			</smtx:XamlDisplay>
-
-			<!-- Pricing Card Buttons -->
-			<TextBlock Text="Pricing Card Buttons"
-					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Button_PricingCard">
-				<StackPanel Orientation="Horizontal"
-							Spacing="12">
-					<Button Content="Light Card"
-							Style="{StaticResource SimpleLightPricingCardButtonStyle}" />
-					<Button Content="Branded Card"
-							Style="{StaticResource SimpleBrandedPricingCardButtonStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Button_SmallVariants_Disabled">
+				<StackPanel Spacing="12">
+					<StackPanel Orientation="Horizontal"
+								Spacing="12">
+						<Button Content="Small Primary"
+								Style="{StaticResource SimpleSmallPrimaryButtonStyle}"
+								IsEnabled="False" />
+						<Button Content="Small Neutral"
+								Style="{StaticResource SimpleSmallNeutralButtonStyle}"
+								IsEnabled="False" />
+						<Button Content="Small Subtle"
+								Style="{StaticResource SimpleSmallSubtleButtonStyle}"
+								IsEnabled="False" />
+					</StackPanel>
+					<StackPanel Orientation="Horizontal"
+								Spacing="12">
+						<Button Content="Small Danger Primary"
+								Style="{StaticResource SimpleSmallDangerPrimaryButtonStyle}"
+								IsEnabled="False" />
+						<Button Content="Small Danger Subtle"
+								Style="{StaticResource SimpleSmallDangerSubtleButtonStyle}"
+								IsEnabled="False" />
+					</StackPanel>
 				</StackPanel>
 			</smtx:XamlDisplay>
 
