@@ -124,18 +124,20 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterEllipse"
 																	   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource SurfaceVariantBrush}" />
+																	Value="{ThemeResource PrimaryBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterEllipse"
 																	   Storyboard.TargetProperty="Stroke">
 											<DiscreteObjectKeyFrame KeyTime="0"
 																	Value="{ThemeResource PrimaryBrush}" />
 										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckEllipse"
+																	   Storyboard.TargetProperty="Fill">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource OnPrimaryBrush}" />
+										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
-
-								<!-- Indeterminate -->
-								<VisualState x:Name="Indeterminate" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
@@ -164,7 +166,7 @@
 							<Ellipse x:Name="CheckEllipse"
 									 Width="{ThemeResource SimpleRadioButtonCheckSize}"
 									 Height="{ThemeResource SimpleRadioButtonCheckSize}"
-									 Fill="{ThemeResource PrimaryBrush}"
+									 Fill="{ThemeResource OnPrimaryBrush}"
 									 Opacity="0"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center" />
