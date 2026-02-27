@@ -1,6 +1,6 @@
 # Simple Theme Refactoring — Progress Document
 
-> **Last updated:** 2026-02-26
+> **Last updated:** 2025-07-28
 > **Purpose:** Hand-off context for continuing the Simple Design System (SDS) theme migration in `uno.themes` and its sample app.
 
 ---
@@ -62,6 +62,14 @@ All source design tokens live in `x:\src\sds`:
 | `scripts/tokens/tokenVariableSyntaxAndDescriptionSnippet.js` (342 lines) | CSS variable syntax/description mappings |
 | `src/ui/primitives/Button/Button.tsx` | React Button component (variants: primary, neutral, subtle, danger-primary, danger-subtle; sizes: small, medium) |
 | `src/ui/primitives/Button/button.css` | Full CSS for all button variant colors, hover/pressed/disabled states, sizing |
+| `src/ui/primitives/Checkbox/Checkbox.tsx` | React Checkbox component (unchecked/checked/indeterminate, disabled) |
+| `src/ui/primitives/Checkbox/checkbox.css` | CSS for checkbox states, 16×16 box, 4px radius |
+| `src/ui/primitives/Select/Select.tsx` | React Select (ComboBox) component with items, error variant |
+| `src/ui/primitives/Select/select.css` | CSS for select states, popup, item selection, error |
+| `src/ui/primitives/Switch/Switch.tsx` | React Switch (ToggleSwitch) component, off/on/disabled |
+| `src/ui/primitives/Switch/switch.css` | CSS for switch track+thumb states, 40×24 pill shape |
+| `src/ui/primitives/Radio/Radio.tsx` | React Radio component (unchecked/checked, disabled) |
+| `src/ui/primitives/Radio/radio.css` | CSS for radio states, 16×16 circle, 8×8 dot |
 
 ### Material Theme Pattern Reference
 
@@ -149,9 +157,224 @@ Each section uses `smtx:XamlDisplay` with unique keys (`Simple_Button_Primary`, 
 
 **Build validated:** `dotnet build SimpleSamplesApp.csproj -p:TargetFramework=net10.0-desktop` → **Build succeeded, 0 errors**
 
----
+### 7. CheckBox.xaml — FULLY REWRITTEN ✅
 
-## Files NOT Changed
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/CheckBox.xaml`
+
+Contains:
+
+- **36 lightweight styling `<StaticResource>` aliases per theme (72 total)** — 3 check states (Unchecked/Checked/Indeterminate) × 4 interaction states (Normal/PointerOver/Pressed/Disabled) × properties (Background/BorderBrush/GlyphFill) + 4 Foreground keys
+- **`SimpleCheckBoxStyle`** with custom `ControlTemplate` using **CombinedStates** visual state group pattern (same as Material CheckBox)
+- **SDS dimensions:** 16×16 box, 4px corner radius, 1px stroke, 10px glyph
+- **Token mapping:**
+  - Unchecked: `SimpleBackgroundDefaultDefaultBrush` + `SimpleBorderDefaultDefaultBrush`
+  - Checked/Indeterminate: `SimpleBackgroundBrandDefaultBrush` (bg=border in SDS) + `SimpleIconBrandOnBrandBrush` glyph
+  - Disabled unchecked: `SimpleBackgroundDisabledDefaultBrush` + `SimpleBorderDisabledDefaultBrush`
+  - Disabled checked/indeterminate: `SimpleBackgroundDisabledDefaultBrush` + `SimpleIconDisabledOnDisabledBrush` glyph
+  - Label: `SimpleTextDefaultDefaultBrush` / `SimpleTextDisabledDefaultBrush`
+
+### 8. ComboBox.xaml — FULLY REWRITTEN ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/ComboBox.xaml`
+
+Contains:
+
+- **32 lightweight styling `<StaticResource>` aliases per theme (64 total)** — 18 ComboBox keys + 14 ComboBoxItem keys
+- **3 named styles:**
+  - `SimpleSelectFieldStyle` — main ComboBox style with full visual state coverage
+  - `SimpleSelectFieldItemStyle` — ComboBoxItem style with selection highlighting
+  - `SimpleSelectFieldErrorStyle` — error variant with danger border
+- **Visual state groups:** CommonStates, FocusStates, DropDownStates
+- **SDS dimensions:** 8px corner radius, 1px border, padding 16,10,12,10
+- **Token mapping:**
+  - Normal: `SimpleBackgroundDefaultDefaultBrush` bg, `SimpleBorderDefaultDefaultBrush` border, `SimpleTextDefaultDefaultBrush` text
+  - Focus/Pressed: `SimpleBorderBrandSecondaryBrush` border
+  - Error: `SimpleBorderDangerDefaultBrush` border
+  - Disabled: `SimpleBackgroundDisabledDefaultBrush` + `SimpleTextDisabledDefaultBrush`
+  - Items selected: `SimpleBackgroundBrandDefaultBrush` bg + `SimpleTextBrandOnBrandBrush` text
+  - Popup: `SimpleBackgroundDefaultDefaultBrush` bg + `SimpleBorderDefaultDefaultBrush` border
+
+### 9. ToggleSwitch.xaml — FULLY REWRITTEN ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/ToggleSwitch.xaml`
+
+Contains:
+
+- **10 lightweight styling `<StaticResource>` aliases per theme (20 total)** — Off track (bg+border), On track (bg), thumbs (off+on), disabled (track bg+border, thumb), label (normal+disabled)
+- **`SimpleToggleSwitchStyle`** with simplified template using dual visual state groups:
+  - **ToggleStates** (declared first) — controls Off/On visibility via Opacity
+  - **CommonStates** (declared second) — Disabled state overrides all fill colors
+- **SDS dimensions:** 40×24 track, 12px radius (pill shape), 16px thumb, 1px stroke
+- **Token mapping:**
+  - Off: `SimpleBackgroundDefaultSecondaryBrush` track + `SimpleBorderDefaultDefaultBrush` border + `SimpleIconDefaultSecondaryBrush` thumb
+  - On: `SimpleBackgroundBrandDefaultBrush` track + `SimpleIconBrandOnBrandBrush` thumb
+  - Disabled: `SimpleBackgroundDisabledDefaultBrush` track + `SimpleBorderDisabledDefaultBrush` border + `SimpleIconDisabledDefaultBrush` thumb
+  - Label: `SimpleTextDefaultDefaultBrush` / `SimpleTextDisabledDefaultBrush`
+
+### 10. RadioButton.xaml — FULLY REWRITTEN ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/RadioButton.xaml`
+
+Contains:
+
+- **24 lightweight styling `<StaticResource>` aliases per theme (48 total)** — 2 check states (Unchecked/Checked) × 4 interaction states × properties (Background/BorderBrush/DotFill) + 4 Foreground keys + Indeterminate fallback states
+- **`SimpleRadioButtonStyle`** with custom `ControlTemplate` using **CombinedStates** visual state group pattern (same as CheckBox)
+- **SDS dimensions:** 16×16 outer circle, 8×8 inner dot, 1px stroke
+- **Token mapping:**
+  - Unchecked: `SimpleBackgroundDefaultDefaultBrush` + `SimpleBorderDefaultDefaultBrush`
+  - Checked: `SimpleBackgroundBrandDefaultBrush` (bg=border in SDS) + `SimpleIconBrandOnBrandBrush` dot
+  - Disabled unchecked: `SimpleBackgroundDisabledDefaultBrush` + `SimpleBorderDisabledDefaultBrush`
+  - Disabled checked: `SimpleBackgroundDisabledDefaultBrush` + `SimpleIconDisabledOnDisabledBrush` dot
+  - Label: `SimpleTextDefaultDefaultBrush` / `SimpleTextDisabledDefaultBrush`
+
+### 11. _Resources.xaml — VERIFIED ✅
+
+All needed aliases already existed from prior work:
+- `CheckBoxStyle` → `SimpleCheckBoxStyle`
+- `RadioButtonStyle` → `SimpleRadioButtonStyle`
+- `ToggleSwitchStyle` → `SimpleToggleSwitchStyle`
+- `SelectFieldStyle` → `SimpleSelectFieldStyle`
+- `SelectFieldItemStyle` → `SimpleSelectFieldItemStyle`
+- `SelectFieldErrorStyle` → `SimpleSelectFieldErrorStyle`
+- `ComboBoxStyle` → `SimpleSelectFieldStyle`
+
+No changes needed.
+
+### 12. PersonPicture.xaml — REWRITTEN ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/PersonPicture.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with Light + Default themes containing sizing keys and color token aliases
+- **Color mapping:** `SimpleBackgroundBrandDefaultBrush` background, `SimpleTextBrandOnBrandBrush` foreground, existing `PositiveColor`/`OnPositiveColor` for online badge
+- **6 named styles** (3 circle + 3 square for small/medium/large):
+  - `SimplePersonPictureStyle` (48px circle), `SimpleSmallPersonPictureStyle` (32px), `SimpleLargePersonPictureStyle` (80px)
+  - Square variants: `SimpleSquarePersonPictureStyle`, `SimpleSmallSquarePersonPictureStyle`, `SimpleLargeSquarePersonPictureStyle`
+- **Lightweight keys:** `SimplePersonPictureBackground`, `SimplePersonPictureForeground`, `SimplePersonPictureBadgeBackground`, `SimplePersonPictureBadgeForeground`, sizing keys per variant
+- Initials FontWeight changed to SemiBold per SDS Avatar spec
+
+### 13. TextBox.xaml — REWRITTEN ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/TextBox.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with full state tokens (Normal/PointerOver/Focused/Disabled/Error/Header) — ~16 lightweight styling keys per theme
+- **4 named styles:**
+  - `SimpleInputTextBoxStyle` — SDS outlined input with border, placeholder support, header support
+  - `SimpleOutlinedInputTextBoxStyle` — alias (BasedOn SimpleInputTextBoxStyle)
+  - `SimpleInputTextBoxErrorStyle` — danger border override for all states
+  - `SimpleInputTextBoxSmallStyle` — 32px MinHeight, 14px font
+- **SDS dimensions:** 8px corner radius, 1px border, padding 16,10,16,10, 40px min height
+- **Token mapping:**
+  - Normal: `SimpleBackgroundDefaultDefaultBrush` bg + `SimpleBorderDefaultDefaultBrush` border
+  - Focused: `SimpleBorderBrandSecondaryBrush` border
+  - Error: `SimpleBorderDangerDefaultBrush` border
+  - Disabled: `SimpleBackgroundDisabledDefaultBrush` + `SimpleTextDisabledDefaultBrush`
+  - Placeholder: `SimpleTextDefaultTertiaryBrush`
+  - Header: `SimpleTextDefaultSecondaryBrush`
+
+### 14. PasswordBox.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/PasswordBox.xaml`
+
+Contains:
+
+- **Same visual treatment as TextBox** — ThemeDictionaries with same lightweight styling key pattern
+- **`SimplePasswordBoxStyle`** with custom ControlTemplate including:
+  - Header support via ContentPresenter
+  - PlaceholderText support via ContentControl
+  - Reveal button (glyph &#xE052;) with ButtonStates visual state group
+  - Reveal button uses `SimplePasswordBoxRevealForeground` tokens
+- **SDS dimensions:** 8px corner radius, 1px border, padding 16,10,16,10
+- **State coverage:** Normal, PointerOver, Focused, Disabled — all with matching TextBox tokens
+
+### 15. IconButton.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/IconButton.xaml`
+
+Contains:
+
+- **`SimpleBaseIconButtonStyle`** — shared setters (circular shape CornerRadius=9999, square aspect ratio)
+- **5 variant styles** with own ControlTemplate + VSM:
+  - `SimpleIconButtonPrimaryStyle` — reuses `SimplePrimaryButton*` ThemeResource keys
+  - `SimpleIconButtonNeutralStyle` — reuses `SimpleNeutralButton*` keys
+  - `SimpleIconButtonSubtleStyle` — reuses `SimpleSubtleButton*` keys
+  - `SimpleIconButtonDangerPrimaryStyle` — reuses `SimpleDangerPrimaryButton*` keys
+  - `SimpleIconButtonDangerSubtleStyle` — reuses `SimpleDangerSubtleButton*` keys
+- **5 small size variants** — `SimpleSmallIconButton{Variant}Style` (32×32 vs 40×40)
+- **SDS dimensions:** Medium=40×40, Small=32×32, CornerRadius=9999 (fully round)
+
+### 16. Slider.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/Slider.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with thumb + track color tokens for all states (Normal/PointerOver/Pressed/Disabled) — ~12 lightweight keys per theme
+- **`SimpleSliderStyle`** with custom horizontal template:
+  - DecreaseRect (filled region, brand-default)
+  - Ellipse thumb (16px, brand-default)
+  - IncreaseRect (empty region, brand-secondary)
+  - Header support via ContentPresenter
+- **SDS dimensions:** Track height=8px, thumb=16px, track corner radius=9999 (pill)
+- **Token mapping:**
+  - Normal: `SimpleBackgroundBrandDefaultBrush` thumb + filled track, `SimpleBackgroundBrandSecondaryBrush` empty track
+  - Disabled: `SimpleBackgroundDisabledDefaultBrush` thumb + track
+
+### 17. TextBlock.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/TextBlock.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with semantic foreground aliases: `SimpleTextBlockForeground`, `SimpleTextBlockSecondaryForeground`, `SimpleTextBlockTertiaryForeground`, `SimpleTextBlockBrandForeground`, `SimpleTextBlockDangerForeground`, `SimpleTextBlockDisabledForeground`
+- **`SimpleBaseTextBlockStyle`** — default body-base (16px Normal) with `SimpleFontFamily` (Inter)
+- **12 SDS typography styles:**
+  - `SimpleTitleHeroTextBlockStyle` (72px Bold), `SimpleTitlePageTextBlockStyle` (48px Bold)
+  - `SimpleSubtitleTextBlockStyle` (32px Normal), `SimpleHeadingTextBlockStyle` (24px SemiBold)
+  - `SimpleSubheadingTextBlockStyle` (20px Normal)
+  - `SimpleBodyBaseTextBlockStyle` (16px Normal), `SimpleBodyStrongTextBlockStyle` (16px SemiBold)
+  - `SimpleBodyEmphasisTextBlockStyle` (16px Italic)
+  - `SimpleBodySmallTextBlockStyle` (14px Normal), `SimpleBodySmallStrongTextBlockStyle` (14px SemiBold)
+  - `SimpleBodyCodeTextBlockStyle` (16px Roboto Mono)
+  - `SimpleCaptionTextBlockStyle` (12px Normal)
+- **19 Material-compatible aliases** mapping Material type scale names to SDS:
+  - Display: Large→TitleHero, Medium→TitlePage, Small→Subtitle
+  - Headline: Large→Heading, Medium→Subheading, Small→BodyStrong
+  - Title: Large→TitlePage, Medium→Heading, Small→Subheading
+  - Body: Large→Subheading, Medium→BodyBase, Small→BodySmall
+  - Label: Large→BodyStrong, Medium→BodySmallStrong, Small/ExtraSmall→Caption
+  - Caption: Large→BodySmall, Medium/Small→Caption
+
+### 18. ToolTip.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/ToolTip.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with 3 lightweight keys per theme: `SimpleToolTipBackground`, `SimpleToolTipBorderBrush`, `SimpleToolTipForeground`
+- **`SimpleToolTipStyle`** with custom ControlTemplate (Border + ContentPresenter)
+- **SDS dimensions:** Padding 12,8, CornerRadius=8, BorderThickness=1, MaxWidth=320
+- **Token mapping:** `SimpleBackgroundDefaultDefaultBrush` bg, `SimpleBorderDefaultDefaultBrush` border, `SimpleTextDefaultDefaultBrush` text
+- **Font:** 14px (`SimpleFontScale02`)
+
+### 19. _Resources.xaml — UPDATED ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
+
+Updates in this batch:
+- **New implicit styles:** PasswordBox, Slider, ToolTip, TextBlock
+- **New aliases:**
+  - `InputTextBoxErrorStyle` → `SimpleInputTextBoxErrorStyle`
+  - `InputTextBoxSmallStyle` → `SimpleInputTextBoxSmallStyle`
+  - `PasswordBoxStyle` → `SimplePasswordBoxStyle`
+  - 5 IconButton aliases + 5 SmallIconButton aliases
+  - `SliderStyle` → `SimpleSliderStyle`
+  - `ToolTipStyle` → `SimpleToolTipStyle`
+- **Legacy alias:** `FilledPasswordBoxStyle` → `SimplePasswordBoxStyle`
+- **Removed from TODO block:** PasswordBox, Slider, TextBlock entries
 
 | File | Status |
 |---|---|
@@ -167,16 +390,25 @@ Each section uses `smtx:XamlDisplay` with unique keys (`Simple_Button_Primary`, 
 
 ### Controls to Migrate (same lightweight styling pattern as Button)
 
-The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` need to be refactored to use SDS design tokens + lightweight styling:
+The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` still need to be refactored to use SDS design tokens + lightweight styling:
 
-| File | Current State |
-|---|---|
-| `CheckBox.xaml` | Exists — needs SDS token mapping + lightweight styling keys |
-| `ComboBox.xaml` | Exists — needs SDS token mapping + lightweight styling keys |
-| `RadioButton.xaml` | Exists — needs SDS token mapping + lightweight styling keys |
-| `TextBox.xaml` | Exists — needs SDS token mapping + lightweight styling keys |
-| `ToggleSwitch.xaml` | Exists — needs SDS token mapping + lightweight styling keys |
-| `PersonPicture.xaml` | Exists — likely needs token mapping |
+| Control | File | Notes |
+|---|---|---|
+| AppBarButton | Not created | Needs SDS mapping |
+| CalendarDatePicker | Not created | Needs SDS mapping |
+| CalendarView | Not created | Needs SDS mapping |
+| CommandBar | Not created | Needs SDS mapping |
+| ContentDialog | Not created | Needs SDS mapping |
+| DatePicker | Not created | Needs SDS mapping |
+| FlyoutPresenter | Not created | Needs SDS mapping |
+| HyperlinkButton | Not created | Needs SDS mapping |
+| ListView / ListViewItem | Not created | Needs SDS mapping |
+| MenuFlyout items | Not created | Needs SDS mapping |
+| NavigationView | Not created | Needs SDS mapping |
+| PipsPager | Not created | Needs SDS mapping |
+| ProgressBar / ProgressRing | Not created | Needs SDS mapping |
+| RatingControl | Not created | Needs SDS mapping |
+| ToggleButton | Not created | Needs SDS mapping |
 
 For each control:
 1. Study the SDS React component in `x:\src\sds\src\ui\primitives\{Control}\` for variants, states, and CSS token usage
@@ -185,9 +417,10 @@ For each control:
 4. Build the `ControlTemplate` with `{ThemeResource}` visual state setters
 5. Update `_Resources.xaml` if new aliases are needed
 
-### Typography Styles (Not Yet Created)
+### Sample Pages
 
-The `_Resources.xaml` references typography aliases (`SimpleDisplayLarge`, `SimpleBodyMedium`, etc.) that don't have backing `Style` resources yet. These need to be created as `TextBlock` styles using the font family, scale, line height, and weight primitives already defined in `Fonts.xaml`.
+Sample pages need to be created/updated for the newly styled controls:
+- PersonPicture, TextBox, PasswordBox, IconButton, Slider, TextBlock, ToolTip
 
 ### Abstraction Layer (Future Phase)
 

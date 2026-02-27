@@ -11,58 +11,65 @@
 			<TextBlock Text="Slider"
 					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
 
-			<!-- Basic Slider -->
-			<TextBlock Text="Basic Slider"
+			<!-- Default Slider -->
+			<TextBlock Text="Default Slider"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Slider_Basic">
-				<Slider Value="50"
-						Minimum="0"
-						Maximum="100" />
+			<smtx:XamlDisplay UniqueKey="Simple_Slider_Default">
+				<Slider Style="{StaticResource SimpleSliderStyle}"
+						Value="50"
+						Width="300" />
 			</smtx:XamlDisplay>
 
-			<!-- Slider with Header -->
-			<TextBlock Text="Slider with Header"
+			<!-- With Header -->
+			<TextBlock Text="With Header"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
 			<smtx:XamlDisplay UniqueKey="Simple_Slider_WithHeader">
-				<Slider Header="Volume"
+				<Slider Style="{StaticResource SimpleSliderStyle}"
+						Header="Volume"
 						Value="75"
-						Minimum="0"
-						Maximum="100" />
+						Width="300" />
 			</smtx:XamlDisplay>
 
-			<!-- Slider with Steps -->
-			<TextBlock Text="Slider with Steps"
+			<!-- Min and Max Values -->
+			<TextBlock Text="Custom Range (0–1000)"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Slider_Stepped">
-				<Slider Header="Quality"
-						Value="3"
+			<smtx:XamlDisplay UniqueKey="Simple_Slider_CustomRange">
+				<Slider Style="{StaticResource SimpleSliderStyle}"
 						Minimum="0"
-						Maximum="5"
-						StepFrequency="1"
-						TickFrequency="1"
-						TickPlacement="Outside" />
+						Maximum="1000"
+						Value="250"
+						StepFrequency="50"
+						Width="300" />
 			</smtx:XamlDisplay>
 
-			<!-- Range Values -->
-			<TextBlock Text="Range Values"
+			<!-- Min Value (at start) -->
+			<TextBlock Text="At Minimum"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
-			<smtx:XamlDisplay UniqueKey="Simple_Slider_Range">
-				<Slider Header="Temperature (°C)"
-						Value="22"
-						Minimum="-10"
-						Maximum="40" />
+			<smtx:XamlDisplay UniqueKey="Simple_Slider_Minimum">
+				<Slider Style="{StaticResource SimpleSliderStyle}"
+						Value="0"
+						Width="300" />
+			</smtx:XamlDisplay>
+
+			<!-- Max Value (at end) -->
+			<TextBlock Text="At Maximum"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_Slider_Maximum">
+				<Slider Style="{StaticResource SimpleSliderStyle}"
+						Value="100"
+						Width="300" />
 			</smtx:XamlDisplay>
 
 			<!-- Disabled -->
 			<TextBlock Text="Disabled"
 					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
 			<smtx:XamlDisplay UniqueKey="Simple_Slider_Disabled">
-				<Slider Header="Disabled Slider"
-						Value="30"
-						Minimum="0"
-						Maximum="100"
-						IsEnabled="False" />
+				<Slider Style="{StaticResource SimpleSliderStyle}"
+						Value="40"
+						IsEnabled="False"
+						Width="300" />
 			</smtx:XamlDisplay>
+
 		</StackPanel>
 	</ScrollViewer>
 </Page>

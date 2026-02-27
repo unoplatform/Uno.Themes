@@ -1,0 +1,65 @@
+<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.ToolTipSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="ToolTip"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+
+			<!-- ToolTip on Button -->
+			<TextBlock Text="ToolTip on Button"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToolTip_OnButton">
+				<Button Content="Hover over me">
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource SimpleToolTipStyle}"
+								 Content="This is a tooltip" />
+					</ToolTipService.ToolTip>
+				</Button>
+			</smtx:XamlDisplay>
+
+			<!-- ToolTip with Long Text -->
+			<TextBlock Text="ToolTip with Long Text"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToolTip_LongText">
+				<Button Content="Hover for details">
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource SimpleToolTipStyle}"
+								 Content="This is a longer tooltip message that demonstrates how the tooltip wraps text when the content exceeds the maximum width." />
+					</ToolTipService.ToolTip>
+				</Button>
+			</smtx:XamlDisplay>
+
+			<!-- ToolTip on TextBlock -->
+			<TextBlock Text="ToolTip on TextBlock"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToolTip_OnTextBlock">
+				<TextBlock Text="Hover over this text">
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource SimpleToolTipStyle}"
+								 Content="Additional information about this text" />
+					</ToolTipService.ToolTip>
+				</TextBlock>
+			</smtx:XamlDisplay>
+
+			<!-- ToolTip on IconButton -->
+			<TextBlock Text="ToolTip on IconButton"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ToolTip_OnIconButton">
+				<Button Style="{StaticResource SimpleIconButtonSubtleStyle}">
+					<SymbolIcon Symbol="Setting" />
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource SimpleToolTipStyle}"
+								 Content="Settings" />
+					</ToolTipService.ToolTip>
+				</Button>
+			</smtx:XamlDisplay>
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

@@ -64,6 +64,30 @@
 						 Width="300" />
 			</smtx:XamlDisplay>
 
+			<!-- Error TextBox -->
+			<TextBlock Text="Error TextBox"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_Error">
+				<TextBox Style="{StaticResource SimpleInputTextBoxErrorStyle}"
+						 Text="Invalid value"
+						 Width="300" />
+			</smtx:XamlDisplay>
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_ErrorPlaceholder">
+				<TextBox Style="{StaticResource SimpleInputTextBoxErrorStyle}"
+						 PlaceholderText="Required field"
+						 Width="300" />
+			</smtx:XamlDisplay>
+
+			<!-- With Header -->
+			<TextBlock Text="With Header"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_TextBox_WithHeader">
+				<TextBox Style="{StaticResource SimpleInputTextBoxStyle}"
+						 Header="Email address"
+						 PlaceholderText="Enter your email"
+						 Width="300" />
+			</smtx:XamlDisplay>
+
 		</StackPanel>
 	</ScrollViewer>
 </Page>
