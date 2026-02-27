@@ -1,58 +1,75 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!--
-		Color Palette for Simple Design System
-		Overrides the default SharedColorPalette values from Uno.Themes.
-		Must be inside ThemeDictionaries so resources are overridable via lightweight styling.
-	-->
-
 	<ResourceDictionary.ThemeDictionaries>
+		<!-- Dark Theme (x:Key="Default" = dark fallback in WinUI) -->
 		<ResourceDictionary x:Key="Default">
-			<!-- Primary/Brand Colors -->
-			<Color x:Key="PrimaryColor">#2c2c2c</Color>
-			<Color x:Key="PrimaryVariantDarkColor">#1e1e1e</Color>
-			<Color x:Key="PrimaryVariantLightColor">#f5f5f5</Color>
+			<!-- Primary/Brand Colors (inverted for dark mode) -->
+			<!-- SDS dark: background-brand-default = brand-100 -->
+			<Color x:Key="PrimaryColor">#f5f5f5</Color>
+			<!-- SDS dark: background-brand-hover = brand-300 -->
+			<Color x:Key="PrimaryVariantDarkColor">#d9d9d9</Color>
+			<Color x:Key="PrimaryVariantLightColor">#1e1e1e</Color>
 
-			<!-- On Primary -->
-			<Color x:Key="OnPrimaryColor">#f5f5f5</Color>
+			<!-- On Primary (dark text on light primary in dark mode) -->
+			<!-- SDS dark: text-brand-on-brand = brand-900 -->
+			<Color x:Key="OnPrimaryColor">#1e1e1e</Color>
 
 			<!-- Surface -->
-			<Color x:Key="SurfaceColor">#ffffff</Color>
-			<Color x:Key="SurfaceVariantColor">#f5f5f5</Color>
+			<!-- SDS dark: background-default-default = gray-900 -->
+			<Color x:Key="SurfaceColor">#1e1e1e</Color>
+			<!-- SDS dark: background-default-secondary = gray-800 -->
+			<Color x:Key="SurfaceVariantColor">#2c2c2c</Color>
 
 			<!-- Background -->
-			<Color x:Key="BackgroundColor">#f5f5f5</Color>
-			<Color x:Key="BackgroundTertiaryColor">#e3e3e3</Color>
+			<Color x:Key="BackgroundColor">#2c2c2c</Color>
+			<!-- SDS dark: background-default-tertiary = gray-600 -->
+			<Color x:Key="BackgroundTertiaryColor">#444444</Color>
 
-			<!-- On Surface -->
-			<Color x:Key="OnSurfaceColor">#1e1e1e</Color>
+			<!-- On Surface (white text in dark mode) -->
+			<!-- SDS dark: text-default-default = white-1000 -->
+			<Color x:Key="OnSurfaceColor">#ffffff</Color>
 
 			<!-- On Background -->
-			<Color x:Key="OnBackgroundColor">#1e1e1e</Color>
+			<Color x:Key="OnBackgroundColor">#ffffff</Color>
 
 			<!-- Outline -->
-			<Color x:Key="OutlineColor">#d9d9d9</Color>
-			<Color x:Key="OutlineVariantColor">#767676</Color>
+			<!-- SDS dark: border-default-default = gray-600 -->
+			<Color x:Key="OutlineColor">#444444</Color>
+			<!-- SDS dark: border-default-secondary = gray-500 -->
+			<Color x:Key="OutlineVariantColor">#757575</Color>
 
 			<!-- Error -->
-			<Color x:Key="ErrorColor">#900b09</Color>
-			<Color x:Key="OnErrorColor">#ffffff</Color>
+			<!-- SDS dark: background-danger-default = red-600 -->
+			<Color x:Key="ErrorColor">#c00f0c</Color>
+			<Color x:Key="OnErrorColor">#fee9e7</Color>
 
 			<!-- Disabled -->
-			<Color x:Key="DisabledColor">#d9d9d9</Color>
-			<Color x:Key="OnDisabledColor">#b3b3b3</Color>
+			<!-- SDS dark: background-disabled-default = brand-700 -->
+			<Color x:Key="DisabledColor">#383838</Color>
+			<!-- SDS dark: text-disabled-default = brand-500 -->
+			<Color x:Key="OnDisabledColor">#757575</Color>
 
-			<!-- SDS Danger Colors -->
-			<Color x:Key="SDSDangerPrimaryColor">#900b09</Color>
-			<Color x:Key="SDSDangerPrimaryHoverColor">#7a0906</Color>
-			<Color x:Key="SDSDangerSubtleTextColor">#900b09</Color>
-			<Color x:Key="SDSDangerSubtleHoverBackgroundColor">#ffe6e5</Color>
+			<!-- Simple Danger Colors (dark mode) -->
+			<!-- SDS dark: border-danger-default = red-200 -->
+			<Color x:Key="SimpleDangerPrimaryColor">#fdd3d0</Color>
+			<Color x:Key="SimpleDangerPrimaryHoverColor">#f4776a</Color>
+			<!-- SDS dark: text-danger-default = red-200 -->
+			<Color x:Key="SimpleDangerSubtleTextColor">#fdd3d0</Color>
+			<!-- SDS dark: background-danger-tertiary-hover = red-1000 -->
+			<Color x:Key="SimpleDangerSubtleHoverBackgroundColor">#300603</Color>
+			<!-- SDS dark: background-danger-default = red-600 -->
+			<Color x:Key="SimpleDangerFillColor">#c00f0c</Color>
+			<!-- SDS dark: background-danger-hover = red-700 -->
+			<Color x:Key="SimpleDangerFillHoverColor">#900b09</Color>
+			<!-- SDS dark: text-danger-on-danger = red-100 -->
+			<Color x:Key="SimpleDangerOnFillColor">#fee9e7</Color>
 
-			<!-- SDS Neutral Colors -->
-			<Color x:Key="SDSNeutralTertiaryHoverColor">#cdcdcd</Color>
-			<Color x:Key="SDSNeutralTertiaryDarkerColor">#d5d5d5</Color>
-			<Color x:Key="SDSTextNeutralColor">#303030</Color>
+			<!-- Simple Neutral Colors (dark mode) -->
+			<!-- SDS dark: background-default-secondary-hover = gray-900 -->
+			<Color x:Key="SimpleNeutralTertiaryHoverColor">#1e1e1e</Color>
+			<Color x:Key="SimpleNeutralTertiaryDarkerColor">#383838</Color>
+			<Color x:Key="SimpleTextNeutralColor">#f5f5f5</Color>
 
 			<!-- Simple-specific Brushes (not in SharedColors.xaml) -->
 			<SolidColorBrush x:Key="BackgroundTertiaryBrush"
@@ -64,23 +81,30 @@
 			<SolidColorBrush x:Key="TransparentBrush"
 							 Color="Transparent" />
 
-			<!-- SDS Brushes -->
-			<SolidColorBrush x:Key="SDSDangerPrimaryBrush"
-							 Color="{StaticResource SDSDangerPrimaryColor}" />
-			<SolidColorBrush x:Key="SDSDangerPrimaryHoverBrush"
-							 Color="{StaticResource SDSDangerPrimaryHoverColor}" />
-			<SolidColorBrush x:Key="SDSDangerSubtleTextBrush"
-							 Color="{StaticResource SDSDangerSubtleTextColor}" />
-			<SolidColorBrush x:Key="SDSDangerSubtleHoverBackgroundBrush"
-							 Color="{StaticResource SDSDangerSubtleHoverBackgroundColor}" />
-			<SolidColorBrush x:Key="SDSNeutralTertiaryHoverBrush"
-							 Color="{StaticResource SDSNeutralTertiaryHoverColor}" />
-			<SolidColorBrush x:Key="SDSNeutralTertiaryDarkerBrush"
-							 Color="{StaticResource SDSNeutralTertiaryDarkerColor}" />
-			<SolidColorBrush x:Key="SDSTextNeutralBrush"
-							 Color="{StaticResource SDSTextNeutralColor}" />
+			<!-- Simple Brushes -->
+			<SolidColorBrush x:Key="SimpleDangerPrimaryBrush"
+							 Color="{StaticResource SimpleDangerPrimaryColor}" />
+			<SolidColorBrush x:Key="SimpleDangerPrimaryHoverBrush"
+							 Color="{StaticResource SimpleDangerPrimaryHoverColor}" />
+			<SolidColorBrush x:Key="SimpleDangerSubtleTextBrush"
+							 Color="{StaticResource SimpleDangerSubtleTextColor}" />
+			<SolidColorBrush x:Key="SimpleDangerSubtleHoverBackgroundBrush"
+							 Color="{StaticResource SimpleDangerSubtleHoverBackgroundColor}" />
+			<SolidColorBrush x:Key="SimpleDangerFillBrush"
+							 Color="{StaticResource SimpleDangerFillColor}" />
+			<SolidColorBrush x:Key="SimpleDangerFillHoverBrush"
+							 Color="{StaticResource SimpleDangerFillHoverColor}" />
+			<SolidColorBrush x:Key="SimpleDangerOnFillBrush"
+							 Color="{StaticResource SimpleDangerOnFillColor}" />
+			<SolidColorBrush x:Key="SimpleNeutralTertiaryHoverBrush"
+							 Color="{StaticResource SimpleNeutralTertiaryHoverColor}" />
+			<SolidColorBrush x:Key="SimpleNeutralTertiaryDarkerBrush"
+							 Color="{StaticResource SimpleNeutralTertiaryDarkerColor}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralBrush"
+							 Color="{StaticResource SimpleTextNeutralColor}" />
 		</ResourceDictionary>
 
+		<!-- Light Theme -->
 		<ResourceDictionary x:Key="Light">
 			<!-- Primary/Brand Colors -->
 			<Color x:Key="PrimaryColor">#2c2c2c</Color>
@@ -116,16 +140,20 @@
 			<Color x:Key="DisabledColor">#d9d9d9</Color>
 			<Color x:Key="OnDisabledColor">#b3b3b3</Color>
 
-			<!-- SDS Danger Colors -->
-			<Color x:Key="SDSDangerPrimaryColor">#900b09</Color>
-			<Color x:Key="SDSDangerPrimaryHoverColor">#7a0906</Color>
-			<Color x:Key="SDSDangerSubtleTextColor">#900b09</Color>
-			<Color x:Key="SDSDangerSubtleHoverBackgroundColor">#ffe6e5</Color>
+			<!-- Simple Danger Colors -->
+			<Color x:Key="SimpleDangerPrimaryColor">#900b09</Color>
+			<Color x:Key="SimpleDangerPrimaryHoverColor">#7a0906</Color>
+			<Color x:Key="SimpleDangerSubtleTextColor">#900b09</Color>
+			<Color x:Key="SimpleDangerSubtleHoverBackgroundColor">#fdd3d0</Color>
+			<Color x:Key="SimpleDangerFillColor">#ec221f</Color>
+			<Color x:Key="SimpleDangerFillHoverColor">#c00f0c</Color>
+			<Color x:Key="SimpleDangerOnFillColor">#fee9e7</Color>
 
-			<!-- SDS Neutral Colors -->
-			<Color x:Key="SDSNeutralTertiaryHoverColor">#cdcdcd</Color>
-			<Color x:Key="SDSNeutralTertiaryDarkerColor">#d5d5d5</Color>
-			<Color x:Key="SDSTextNeutralColor">#303030</Color>
+			<!-- Simple Neutral Colors -->
+			<!-- SDS light: background-default-secondary-hover = gray-200 -->
+			<Color x:Key="SimpleNeutralTertiaryHoverColor">#e6e6e6</Color>
+			<Color x:Key="SimpleNeutralTertiaryDarkerColor">#d5d5d5</Color>
+			<Color x:Key="SimpleTextNeutralColor">#303030</Color>
 
 			<!-- Simple-specific Brushes (not in SharedColors.xaml) -->
 			<SolidColorBrush x:Key="BackgroundTertiaryBrush"
@@ -137,21 +165,27 @@
 			<SolidColorBrush x:Key="TransparentBrush"
 							 Color="Transparent" />
 
-			<!-- SDS Brushes -->
-			<SolidColorBrush x:Key="SDSDangerPrimaryBrush"
-							 Color="{StaticResource SDSDangerPrimaryColor}" />
-			<SolidColorBrush x:Key="SDSDangerPrimaryHoverBrush"
-							 Color="{StaticResource SDSDangerPrimaryHoverColor}" />
-			<SolidColorBrush x:Key="SDSDangerSubtleTextBrush"
-							 Color="{StaticResource SDSDangerSubtleTextColor}" />
-			<SolidColorBrush x:Key="SDSDangerSubtleHoverBackgroundBrush"
-							 Color="{StaticResource SDSDangerSubtleHoverBackgroundColor}" />
-			<SolidColorBrush x:Key="SDSNeutralTertiaryHoverBrush"
-							 Color="{StaticResource SDSNeutralTertiaryHoverColor}" />
-			<SolidColorBrush x:Key="SDSNeutralTertiaryDarkerBrush"
-							 Color="{StaticResource SDSNeutralTertiaryDarkerColor}" />
-			<SolidColorBrush x:Key="SDSTextNeutralBrush"
-							 Color="{StaticResource SDSTextNeutralColor}" />
+			<!-- Simple Brushes -->
+			<SolidColorBrush x:Key="SimpleDangerPrimaryBrush"
+							 Color="{StaticResource SimpleDangerPrimaryColor}" />
+			<SolidColorBrush x:Key="SimpleDangerPrimaryHoverBrush"
+							 Color="{StaticResource SimpleDangerPrimaryHoverColor}" />
+			<SolidColorBrush x:Key="SimpleDangerSubtleTextBrush"
+							 Color="{StaticResource SimpleDangerSubtleTextColor}" />
+			<SolidColorBrush x:Key="SimpleDangerSubtleHoverBackgroundBrush"
+							 Color="{StaticResource SimpleDangerSubtleHoverBackgroundColor}" />
+			<SolidColorBrush x:Key="SimpleDangerFillBrush"
+							 Color="{StaticResource SimpleDangerFillColor}" />
+			<SolidColorBrush x:Key="SimpleDangerFillHoverBrush"
+							 Color="{StaticResource SimpleDangerFillHoverColor}" />
+			<SolidColorBrush x:Key="SimpleDangerOnFillBrush"
+							 Color="{StaticResource SimpleDangerOnFillColor}" />
+			<SolidColorBrush x:Key="SimpleNeutralTertiaryHoverBrush"
+							 Color="{StaticResource SimpleNeutralTertiaryHoverColor}" />
+			<SolidColorBrush x:Key="SimpleNeutralTertiaryDarkerBrush"
+							 Color="{StaticResource SimpleNeutralTertiaryDarkerColor}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralBrush"
+							 Color="{StaticResource SimpleTextNeutralColor}" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 

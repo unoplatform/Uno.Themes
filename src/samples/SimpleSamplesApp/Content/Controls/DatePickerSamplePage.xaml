@@ -1,0 +1,46 @@
+<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.DatePickerSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="DatePicker"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+
+			<!-- Basic DatePicker -->
+			<TextBlock Text="Basic DatePicker"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_DatePicker_Basic">
+				<DatePicker />
+			</smtx:XamlDisplay>
+
+			<!-- DatePicker with Header -->
+			<TextBlock Text="With Header"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_DatePicker_WithHeader">
+				<DatePicker Header="Date of Birth" />
+			</smtx:XamlDisplay>
+
+			<!-- DatePicker with Year Range -->
+			<TextBlock Text="Year Range"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_DatePicker_YearRange">
+				<DatePicker Header="Select Year"
+							DayVisible="False"
+							MonthVisible="False" />
+			</smtx:XamlDisplay>
+
+			<!-- Disabled -->
+			<TextBlock Text="Disabled"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_DatePicker_Disabled">
+				<DatePicker Header="Disabled"
+							IsEnabled="False" />
+			</smtx:XamlDisplay>
+		</StackPanel>
+	</ScrollViewer>
+</Page>
