@@ -1,0 +1,55 @@
+<Page x:Class="Uno.Themes.Simple.Samples.Content.Controls.ContentDialogSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Padding="24"
+					Spacing="8"
+					MaxWidth="800">
+			<TextBlock Text="ContentDialog"
+					   Style="{StaticResource SamplePageHeaderTextBlockStyle}" />
+
+			<!-- Basic Dialog (OK only) -->
+			<TextBlock Text="Basic Dialog (Close Button)"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_Basic">
+				<Button Content="Show Basic Dialog"
+						Click="ShowBasicDialog_Click" />
+			</smtx:XamlDisplay>
+
+			<!-- Confirmation Dialog (Primary + Close) -->
+			<TextBlock Text="Confirmation Dialog"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_Confirm">
+				<Button Content="Show Confirmation Dialog"
+						Click="ShowConfirmDialog_Click" />
+			</smtx:XamlDisplay>
+
+			<!-- Three-Button Dialog (Primary + Secondary + Close) -->
+			<TextBlock Text="Three-Button Dialog"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_ThreeButton">
+				<Button Content="Show Save Dialog"
+						Click="ShowThreeButtonDialog_Click" />
+			</smtx:XamlDisplay>
+
+			<!-- Dialog with Custom Content -->
+			<TextBlock Text="Dialog with Custom Content"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_CustomContent">
+				<Button Content="Show Custom Content Dialog"
+						Click="ShowCustomContentDialog_Click" />
+			</smtx:XamlDisplay>
+
+			<!-- Result display -->
+			<TextBlock Text="Last Result"
+					   Style="{StaticResource SampleSectionHeaderTextBlockStyle}" />
+			<TextBlock x:Name="DialogResultText"
+					   Text="(no dialog shown yet)"
+					   Opacity="0.6" />
+
+		</StackPanel>
+	</ScrollViewer>
+</Page>

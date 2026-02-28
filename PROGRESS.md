@@ -376,6 +376,61 @@ Updates in this batch:
 - **Legacy alias:** `FilledPasswordBoxStyle` → `SimplePasswordBoxStyle`
 - **Removed from TODO block:** PasswordBox, Slider, TextBlock entries
 
+### 20. ListView.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/ListView.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with 14 lightweight keys per theme covering container bg/border, item Normal/PointerOver/Pressed/Selected/PointerOverSelected/PressedSelected/Disabled states
+- **`SimpleListViewItemStyle`** with CombinedStates visual state group (CommonStates × DisabledStates)
+- **`SimpleListViewStyle`** with ScrollViewer-based template, ItemsStackPanel ItemsPanel
+- **`SimpleDefaultListViewItemStyle`** and **`SimpleDefaultListViewStyle`** aliases
+- **SDS dimensions:** MinHeight=40, Padding=8, CornerRadius=8
+- **Token mapping:** Selected → `SimpleBackgroundBrandDefaultBrush` / `SimpleTextBrandOnBrandBrush`; PointerOver → `SimpleBackgroundDefaultSecondaryBrush`; Disabled → `SimpleTextDisabledDefaultBrush`
+
+### 21. MenuFlyout.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/MenuFlyout.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with 16 lightweight keys per theme
+- **5 styles:** `SimpleMenuFlyoutPresenterStyle`, `SimpleMenuFlyoutItemStyle`, `SimpleToggleMenuFlyoutItemStyle`, `SimpleMenuFlyoutSubItemStyle`, `SimpleMenuFlyoutSeparatorStyle`
+- Each style has full ControlTemplate + VisualStateManager (CommonStates)
+- **SDS dimensions:** MinWidth=112, MaxWidth=320, ItemHeight=40, SeparatorHeight=1, CornerRadius=8, Padding=4
+- **Token mapping:** Hover/Focused → `SimpleBackgroundBrandDefaultBrush` / `SimpleTextBrandOnBrandBrush`; Disabled → `SimpleTextDisabledDefaultBrush` / `SimpleIconDisabledDefaultBrush`; Separator → `SimpleBorderDefaultDefaultBrush`
+
+### 22. ContentDialog.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/ContentDialog.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with 5 lightweight keys per theme (Background, BorderBrush, SmokeLayer, TitleForeground, ContentForeground)
+- **`SimpleContentDialogButtonStyle`** (BasedOn SubtleButtonStyle), **`SimpleContentDialogDefaultButtonStyle`** (BasedOn PrimaryButtonStyle)
+- **`SimpleContentDialogStyle`** with full template: DialogShowingStates, ButtonsVisibilityStates, DefaultButtonStates VSMs
+- **SDS dimensions:** CornerRadius=8, Padding=32, MinWidth=288, MaxWidth=560, ButtonSpacing=8
+- **Title:** FontSize=24, FontWeight=SemiBold, left-aligned
+- **Token mapping:** bg → `SimpleBackgroundDefaultDefaultBrush`, border → `SimpleBorderDefaultDefaultBrush`, scrim → `SimpleBackgroundUtilitiesScrimBrush`, title → `SimpleTextDefaultDefaultBrush`, content → `SimpleTextDefaultSecondaryBrush`
+
+### 23. _Resources.xaml — UPDATED (Batch 2) ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
+
+Updates in this batch:
+- **New implicit styles:** ListView, ListViewItem, ContentDialog, MenuFlyoutPresenter, MenuFlyoutItem, MenuFlyoutSeparator, MenuFlyoutSubItem, ToggleMenuFlyoutItem
+- **New aliases:**
+  - `ListViewStyle` → `SimpleListViewStyle`
+  - `ListViewItemStyle` → `SimpleListViewItemStyle`
+  - `ContentDialogStyle` → `SimpleContentDialogStyle`
+  - `MenuFlyoutPresenterStyle` → `SimpleMenuFlyoutPresenterStyle`
+  - `MenuFlyoutItemStyle` → `SimpleMenuFlyoutItemStyle`
+  - `MenuFlyoutSeparatorStyle` → `SimpleMenuFlyoutSeparatorStyle`
+  - `MenuFlyoutSubItemStyle` → `SimpleMenuFlyoutSubItemStyle`
+  - `ToggleMenuFlyoutItemStyle` → `SimpleToggleMenuFlyoutItemStyle`
+- **Removed from TODO block:** ContentDialog, ListView, ListViewItem, MenuFlyout items, ToggleMenuFlyoutItem
+
 | File | Status |
 |---|---|
 | `SimpleTheme.cs` | No changes needed — resource loading order is correct |
@@ -398,12 +453,9 @@ The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` 
 | CalendarDatePicker | Not created | Needs SDS mapping |
 | CalendarView | Not created | Needs SDS mapping |
 | CommandBar | Not created | Needs SDS mapping |
-| ContentDialog | Not created | Needs SDS mapping |
 | DatePicker | Not created | Needs SDS mapping |
 | FlyoutPresenter | Not created | Needs SDS mapping |
 | HyperlinkButton | Not created | Needs SDS mapping |
-| ListView / ListViewItem | Not created | Needs SDS mapping |
-| MenuFlyout items | Not created | Needs SDS mapping |
 | NavigationView | Not created | Needs SDS mapping |
 | PipsPager | Not created | Needs SDS mapping |
 | ProgressBar / ProgressRing | Not created | Needs SDS mapping |
@@ -419,7 +471,12 @@ For each control:
 
 ### Sample Pages
 
-Sample pages need to be created/updated for the newly styled controls:
+Sample pages created/updated in `src/samples/SimpleSamplesApp/Content/Controls/`:
+- **ListViewSamplePage** — Basic list, single selection, multiple selection, disabled items
+- **MenuFlyoutSamplePage** — Basic menu, icons, separators, toggle items, sub-items, disabled items
+- **ContentDialogSamplePage** — Basic (close-only), confirmation (primary + close), three-button (save dialog), custom content (with TextBox input), result display
+
+Still need sample pages for:
 - PersonPicture, TextBox, PasswordBox, IconButton, Slider, TextBlock, ToolTip
 
 ### Abstraction Layer (Future Phase)
