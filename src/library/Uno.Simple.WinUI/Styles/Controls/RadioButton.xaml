@@ -127,106 +127,51 @@
 						</Grid.ColumnDefinitions>
 
 						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CombinedStates">
 
-								<!-- ──── Unchecked ──── -->
-								<VisualState x:Name="UncheckedNormal">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackground}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrush}" />
-									</VisualState.Setters>
-								</VisualState>
+							<!-- ──── CommonStates ──── -->
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
 
-								<VisualState x:Name="UncheckedPointerOver">
+								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundPointerOver}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushPointerOver}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="UncheckedPressed">
+								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundPressed}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushPressed}" />
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
-								<VisualState x:Name="UncheckedDisabled">
+								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
+										<!-- Unchecked element disabled colors -->
 										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundDisabled}" />
 										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundDisabled}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<!-- ──── Checked ──── -->
-								<VisualState x:Name="CheckedNormal">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonCheckedBackground}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonCheckedBorderBrush}" />
-										<Setter Target="RadioDot.Opacity" Value="1" />
-										<Setter Target="RadioDot.Fill" Value="{ThemeResource SimpleRadioButtonCheckedDotFill}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="CheckedPointerOver">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonCheckedBackgroundPointerOver}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonCheckedBorderBrushPointerOver}" />
-										<Setter Target="RadioDot.Opacity" Value="1" />
-										<Setter Target="RadioDot.Fill" Value="{ThemeResource SimpleRadioButtonCheckedDotFillPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPointerOver}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="CheckedPressed">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonCheckedBackgroundPressed}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonCheckedBorderBrushPressed}" />
-										<Setter Target="RadioDot.Opacity" Value="1" />
-										<Setter Target="RadioDot.Fill" Value="{ThemeResource SimpleRadioButtonCheckedDotFillPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPressed}" />
-									</VisualState.Setters>
-								</VisualState>
-
-								<VisualState x:Name="CheckedDisabled">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonCheckedBackgroundDisabled}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonCheckedBorderBrushDisabled}" />
-										<Setter Target="RadioDot.Opacity" Value="1" />
+										<!-- Checked element disabled colors -->
+										<Setter Target="RadioBorder_Checked.Fill" Value="{ThemeResource SimpleRadioButtonCheckedBackgroundDisabled}" />
+										<Setter Target="RadioBorder_Checked.Stroke" Value="{ThemeResource SimpleRadioButtonCheckedBorderBrushDisabled}" />
 										<Setter Target="RadioDot.Fill" Value="{ThemeResource SimpleRadioButtonCheckedDotFillDisabled}" />
+										<!-- Label -->
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- ──── CheckStates ──── -->
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="RadioBorder_Checked.Opacity" Value="1" />
+										<Setter Target="RadioBorder.Opacity" Value="0" />
+										<Setter Target="RadioDot.Opacity" Value="1" />
 									</VisualState.Setters>
 								</VisualState>
 
-								<!-- ──── Indeterminate (fallback to unchecked) ──── -->
-								<VisualState x:Name="IndeterminateNormal">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackground}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="IndeterminatePointerOver">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundPointerOver}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushPointerOver}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="IndeterminatePressed">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundPressed}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushPressed}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="IndeterminateDisabled">
-									<VisualState.Setters>
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundDisabled}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundDisabled}" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="Unchecked" />
+
+								<VisualState x:Name="Indeterminate" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
@@ -238,6 +183,7 @@
 							  HorizontalAlignment="Center"
 							  VerticalAlignment="Center">
 
+							<!-- Unchecked outer circle -->
 							<Ellipse x:Name="RadioBorder"
 									 Width="{StaticResource SimpleRadioButtonSize}"
 									 Height="{StaticResource SimpleRadioButtonSize}"
@@ -245,6 +191,16 @@
 									 Stroke="{ThemeResource SimpleRadioButtonUncheckedBorderBrush}"
 									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}" />
 
+							<!-- Checked outer circle (hidden by default) -->
+							<Ellipse x:Name="RadioBorder_Checked"
+									 Width="{StaticResource SimpleRadioButtonSize}"
+									 Height="{StaticResource SimpleRadioButtonSize}"
+									 Fill="{ThemeResource SimpleRadioButtonCheckedBackground}"
+									 Stroke="{ThemeResource SimpleRadioButtonCheckedBorderBrush}"
+									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}"
+									 Opacity="0" />
+
+							<!-- Inner dot (hidden by default) -->
 							<Ellipse x:Name="RadioDot"
 									 Width="{StaticResource SimpleRadioButtonDotSize}"
 									 Height="{StaticResource SimpleRadioButtonDotSize}"
