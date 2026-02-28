@@ -10,6 +10,7 @@
 Refactor the entire **Uno Simple Theme** (`Uno.Simple.WinUI`) by mapping design tokens and component styles from the **SDS React/Figma design system** (located in the sibling workspace `x:\src\sds`) into XAML resources, following the **lightweight styling patterns** established by the Material theme in this same repo.
 
 Key constraints from the original request:
+
 - All resources must be **Simple theme specific** (prefixed `Simple*`). Abstraction aliases for a shared design language will come in a later phase.
 - Follow Material theme lightweight styling conventions (per-visual-state `{ThemeResource}` keys exposed as `<StaticResource>` aliases in `ThemeDictionaries`).
 
@@ -45,6 +46,7 @@ Key constraints from the original request:
 6. `Thickness.xaml` — loaded separately
 
 **XamlMerge config** (`simple-common.props`):
+
 - Includes: `Styles\Controls\**\*.xaml`, `Styles\Application\**\*.xaml`
 - Excludes: `ColorPalette.xaml`, `Common\Fonts.xaml`, `Common\Thickness.xaml`
 
@@ -74,6 +76,7 @@ All source design tokens live in `x:\src\sds`:
 ### Material Theme Pattern Reference
 
 The lightweight styling pattern was studied from:
+
 - `src/library/Uno.Material/Styles/Controls/v2/Button.xaml` — canonical example of per-state `{ThemeResource}` keys
 - `src/library/Uno.Themes/Styles/Applications/Common/SharedColorPalette.xaml` — base palette structure
 - `src/library/Uno.Themes/Styles/Applications/Common/SharedColors.xaml` — brush generation with opacity variants
@@ -118,6 +121,7 @@ Contains:
 **Path:** `src/library/Uno.Simple.WinUI/Styles/Application/Common/Fonts.xaml`
 
 Added:
+
 - 4 font families: `SimpleFontFamily`/`SimpleFontFamilySans` (Inter), `SimpleFontFamilySerif` (Noto Serif), `SimpleFontFamilyMono` (Roboto Mono)
 - 10-step typography scale: `SimpleTypographyScale01`(12) through `SimpleTypographyScale10`(72)
 - 10-step line heights: `SimpleLineHeight01`(16) through `SimpleLineHeight10`(80)
@@ -128,6 +132,7 @@ Added:
 **Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
 
 Added aliases:
+
 - `DangerPrimaryButtonStyle` → `SimpleDangerPrimaryButtonStyle`
 - `DangerSubtleButtonStyle` → `SimpleDangerSubtleButtonStyle`
 - 5 small button aliases: `SmallPrimaryButtonStyle`, `SmallNeutralButtonStyle`, `SmallSubtleButtonStyle`, `SmallDangerPrimaryButtonStyle`, `SmallDangerSubtleButtonStyle`
@@ -230,6 +235,7 @@ Contains:
 ### 11. _Resources.xaml — VERIFIED ✅
 
 All needed aliases already existed from prior work:
+
 - `CheckBoxStyle` → `SimpleCheckBoxStyle`
 - `RadioButtonStyle` → `SimpleRadioButtonStyle`
 - `ToggleSwitchStyle` → `SimpleToggleSwitchStyle`
@@ -365,6 +371,7 @@ Contains:
 **Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
 
 Updates in this batch:
+
 - **New implicit styles:** PasswordBox, Slider, ToolTip, TextBlock
 - **New aliases:**
   - `InputTextBoxErrorStyle` → `SimpleInputTextBoxErrorStyle`
@@ -419,6 +426,7 @@ Contains:
 **Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
 
 Updates in this batch:
+
 - **New implicit styles:** ListView, ListViewItem, ContentDialog, MenuFlyoutPresenter, MenuFlyoutItem, MenuFlyoutSeparator, MenuFlyoutSubItem, ToggleMenuFlyoutItem
 - **New aliases:**
   - `ListViewStyle` → `SimpleListViewStyle`
@@ -463,6 +471,7 @@ The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` 
 | ToggleButton | Not created | Needs SDS mapping |
 
 For each control:
+
 1. Study the SDS React component in `x:\src\sds\src\ui\primitives\{Control}\` for variants, states, and CSS token usage
 2. Map CSS color tokens to the semantic brushes already defined in `ColorPalette.xaml`
 3. Create `<StaticResource>` lightweight styling aliases in `ThemeDictionaries` (per variant × per state × per property)
@@ -472,11 +481,13 @@ For each control:
 ### Sample Pages
 
 Sample pages created/updated in `src/samples/SimpleSamplesApp/Content/Controls/`:
+
 - **ListViewSamplePage** — Basic list, single selection, multiple selection, disabled items
 - **MenuFlyoutSamplePage** — Basic menu, icons, separators, toggle items, sub-items, disabled items
 - **ContentDialogSamplePage** — Basic (close-only), confirmation (primary + close), three-button (save dialog), custom content (with TextBox input), result display
 
 Still need sample pages for:
+
 - PersonPicture, TextBox, PasswordBox, IconButton, Slider, TextBlock, ToolTip
 
 ### Abstraction Layer (Future Phase)

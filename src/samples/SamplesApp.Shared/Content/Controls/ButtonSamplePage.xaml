@@ -639,6 +639,73 @@
 							</StackPanel>
 						</smtx:XamlDisplay>
 
+						<!-- Leading Icon -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_LeadingIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Leading Icon" Style="{StaticResource SimplePrimaryButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Add" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+								<Button Content="Leading Icon" Style="{StaticResource SimpleNeutralButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Find" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+								<Button Content="Leading Icon" Style="{StaticResource SimpleSubtleButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Setting" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Trailing Icon -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_TrailingIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Trailing Icon" Style="{StaticResource SimplePrimaryButtonStyle}">
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="Forward" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+								<Button Content="Trailing Icon" Style="{StaticResource SimpleNeutralButtonStyle}">
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="Download" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+								<Button Content="Trailing Icon" Style="{StaticResource SimpleSubtleButtonStyle}">
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="OpenWith" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Leading + Trailing Icons -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_BothIcons"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Both Icons" Style="{StaticResource SimplePrimaryButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Upload" />
+									</ut:ControlExtensions.LeadingIcon>
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="Forward" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+								<Button Content="Both Icons" Style="{StaticResource SimpleNeutralButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Edit" />
+									</ut:ControlExtensions.LeadingIcon>
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="Forward" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
 						<!-- Small Size Variants -->
 						<smtx:XamlDisplay UniqueKey="Simple_Button_SmallVariants"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
