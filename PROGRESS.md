@@ -479,6 +479,88 @@ Updates in this batch:
 | `Thickness.xaml` | Existing spacing/sizing tokens are adequate for now |
 | `AnimationConstants.xaml` | Not touched |
 
+### 26. AppBarButton.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/AppBarButton.xaml`
+
+Mapped from SDS **NavigationButton** component (`src/ui/primitives/Navigation/Navigation.tsx` + `navigation.css`).
+
+Contains:
+
+- **ThemeDictionaries** with 16 lightweight keys per theme: Foreground, IconForeground, Background, BorderBrush × 4 states (Normal/PointerOver/Pressed/Disabled)
+- **Theme-agnostic layout constants:** `SimpleAppBarButtonIconSize` (24), `SimpleAppBarButtonContentSpacing` (8), `SimpleAppBarButtonPadding` (8)
+- **`SimpleAppBarButtonStyle`** with full ControlTemplate + VisualStateManager (CommonStates):
+  - Vertical StackPanel: Viewbox (icon) + ContentPresenter (label), matching NavigationButton column direction
+  - Icon auto-collapsed via `NullToCollapsedConverter` when no Icon set
+  - Label auto-collapsed via `NullToCollapsedConverter` when no Content set
+- **`SimpleDefaultAppBarButtonStyle`** alias (BasedOn)
+- **SDS dimensions:** 64×64 default, padding=8, icon size=24, spacing=8, no border
+- **Font:** `SimpleFontFamily` (Inter), 16px (`SimpleTypographyScale03`), Normal weight
+- **Token mapping:**
+  - Normal: `SimpleTextDefaultSecondaryBrush` text, `SimpleIconDefaultSecondaryBrush` icon, transparent bg
+  - PointerOver/Pressed: `SimpleBackgroundDefaultDefaultHoverBrush` bg, foreground unchanged
+  - Disabled: `SimpleTextDisabledDefaultBrush` text, `SimpleIconDisabledDefaultBrush` icon, transparent bg
+
+### 27. _Resources.xaml — UPDATED (Batch 4) ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
+
+Updates in this batch:
+
+- **New implicit style:** AppBarButton → `SimpleDefaultAppBarButtonStyle`
+- **New alias:** `AppBarButtonStyle` → `SimpleAppBarButtonStyle`
+- **Removed from TODO block:** AppBarButton entry
+
+### 28. CalendarDatePicker.xaml — CREATED ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/CalendarDatePicker.xaml`
+
+New file created with full lightweight styling mapped from SDS DatePicker component.
+
+**SDS DatePicker → XAML CalendarDatePicker token mapping:**
+
+| SDS CSS Token | XAML Resource | Usage |
+|---|---|---|
+| `background-default-default` | `SimpleCalendarDatePickerBackground` | Field background |
+| `border-default-default` | `SimpleCalendarDatePickerBorderBrush` | Field border (normal) |
+| `border-brand-secondary` | `SimpleCalendarDatePickerBorderBrushFocused` | Focus border |
+| `border-disabled-default` | `SimpleCalendarDatePickerBorderBrushDisabled` | Disabled border |
+| `background-disabled-default` | `SimpleCalendarDatePickerBackgroundDisabled` | Disabled background |
+| `text-default-default` | `SimpleCalendarDatePickerForeground` | Selected date text |
+| `text-default-tertiary` | `SimpleCalendarDatePickerTextForeground` | Placeholder text |
+| `text-disabled-default` | `SimpleCalendarDatePickerTextForegroundDisabled` | Disabled text |
+| `icon-default-default` | `SimpleCalendarDatePickerCalendarGlyphForeground` | Calendar icon |
+| `icon-disabled-on-disabled` | `SimpleCalendarDatePickerCalendarGlyphForegroundDisabled` | Disabled icon |
+| `radius-200` (8px) | `SimpleCalendarDatePickerCornerRadius` | Field corner radius |
+| `radius-400` (16px) | `SimpleCalendarDatePickerFlyoutPresenterCornerRadius` | Popup corner radius |
+
+**Lightweight styling keys (22 per theme × 2 themes = 44 total):**
+- `SimpleCalendarDatePickerForeground` / `ForegroundDisabled`
+- `SimpleCalendarDatePickerTextForeground` / `TextForegroundDisabled` / `TextForegroundSelected`
+- `SimpleCalendarDatePickerCalendarGlyphForeground` / `CalendarGlyphForegroundDisabled`
+- `SimpleCalendarDatePickerHeaderForeground` / `HeaderForegroundDisabled`
+- `SimpleCalendarDatePickerBackground` / `BackgroundPointerOver` / `BackgroundPressed` / `BackgroundDisabled` / `BackgroundFocused`
+- `SimpleCalendarDatePickerBorderBrush` / `BorderBrushPointerOver` / `BorderBrushPressed` / `BorderBrushDisabled` / `BorderBrushFocused`
+
+**Template structure:**
+- Background `Border` with corner radius 8px (SDS radius-200)
+- Content grid: Header label + date text/placeholder + calendar glyph icon
+- Flyout with `FlyoutPresenter` (corner radius 16px, shadow enabled)
+- Popup `CalendarView` uses `SimpleCalendarViewStyle` via `CalendarViewStyle` setter
+- Visual states: Normal, PointerOver, Pressed, Disabled, Focused, Unfocused, Selected, Unselected
+
+---
+
+### 29. _Resources.xaml — UPDATED (Batch 5) ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
+
+Updates in this batch:
+
+- **New implicit style:** CalendarDatePicker → `SimpleDefaultCalendarDatePickerStyle`
+- **New alias:** `CalendarDatePickerStyle` → `SimpleCalendarDatePickerStyle`
+- **Removed from TODO block:** CalendarDatePicker entries (both implicit style and alias)
+
 ---
 
 ## Remaining Work (Not Started)
@@ -489,8 +571,6 @@ The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` 
 
 | Control | File | Notes |
 |---|---|---|
-| AppBarButton | Not created | Needs SDS mapping |
-| CalendarDatePicker | Not created | Needs SDS mapping |
 | CalendarView | ✅ Created | Mapped from SDS Calendar component |
 | CommandBar | Not created | Needs SDS mapping |
 | DatePicker | Not created | Needs SDS mapping |
