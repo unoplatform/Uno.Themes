@@ -439,6 +439,38 @@ Updates in this batch:
   - `ToggleMenuFlyoutItemStyle` → `SimpleToggleMenuFlyoutItemStyle`
 - **Removed from TODO block:** ContentDialog, ListView, ListViewItem, MenuFlyout items, ToggleMenuFlyoutItem
 
+### 24. CalendarView.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/CalendarView.xaml`
+
+Contains:
+
+- **ThemeDictionaries** with ~28 lightweight keys per theme covering container, header/navigation, weekday names, day items, hover/pressed, focus, selected, today, blackout/out-of-scope states
+- **`SimpleCalendarViewStyle`** with full ControlTemplate + VisualStateManager:
+  - CommonStates: Normal / Disabled (disabled dims weekday name foregrounds)
+  - HeaderButtonStates: ViewChanged / ViewChanging (header fade animation)
+  - DisplayModeStates: Month / Year / Decade with cross-fade transitions
+- **Inner styles:** `SimpleWeekDayNameStyle` (TextBlock), `SimpleNavigationButtonStyle` (prev/next arrows), `SimpleHeaderButtonStyle` (month/year with dropdown arrow), `SimpleScrollViewerStyle`
+- **`SimpleDefaultCalendarViewStyle`** alias (BasedOn)
+- **SDS dimensions:** Container CornerRadius=16 (radius-400), DayItemCornerRadius=4 (radius-200), CalendarItemCornerRadius=4, DayItemFontSize=16 (body-medium)
+- **Token mapping:**
+  - Container: `SimpleBackgroundDefaultDefaultBrush` bg, `SimpleBorderDefaultDefaultBrush` border
+  - Day text: `SimpleTextDefaultDefaultBrush`; weekday headers: `SimpleTextDefaultSecondaryBrush`
+  - Selected: `SimpleBackgroundBrandDefaultBrush` bg + `SimpleTextBrandOnBrandBrush` text
+  - Today: `SimpleTextBrandDefaultBrush` foreground
+  - Hover: `SimpleBorderDefaultDefaultBrush` border
+  - Blackout/outside-month: `SimpleTextDisabledDefaultBrush`
+
+### 25. _Resources.xaml — UPDATED (Batch 3) ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
+
+Updates in this batch:
+
+- **New implicit style:** CalendarView → `SimpleDefaultCalendarViewStyle`
+- **New alias:** `CalendarViewStyle` → `SimpleCalendarViewStyle`
+- **Removed from TODO block:** CalendarView entries
+
 | File | Status |
 |---|---|
 | `SimpleTheme.cs` | No changes needed — resource loading order is correct |
@@ -459,7 +491,7 @@ The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` 
 |---|---|---|
 | AppBarButton | Not created | Needs SDS mapping |
 | CalendarDatePicker | Not created | Needs SDS mapping |
-| CalendarView | Not created | Needs SDS mapping |
+| CalendarView | ✅ Created | Mapped from SDS Calendar component |
 | CommandBar | Not created | Needs SDS mapping |
 | DatePicker | Not created | Needs SDS mapping |
 | FlyoutPresenter | Not created | Needs SDS mapping |
@@ -488,7 +520,7 @@ Sample pages created/updated in `src/samples/SimpleSamplesApp/Content/Controls/`
 
 Still need sample pages for:
 
-- PersonPicture, TextBox, PasswordBox, IconButton, Slider, TextBlock, ToolTip
+- PersonPicture, TextBox, PasswordBox, IconButton, Slider, TextBlock, ToolTip, CalendarView
 
 ### Abstraction Layer (Future Phase)
 
