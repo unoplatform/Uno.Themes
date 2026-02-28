@@ -230,6 +230,47 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default Slider -->
+						<smtx:XamlDisplay UniqueKey="Simple_Slider_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource SimpleSliderStyle}" Value="50" Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- With Header -->
+						<smtx:XamlDisplay UniqueKey="Simple_Slider_WithHeader"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource SimpleSliderStyle}" Header="Volume" Value="75" Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- Custom Range (0–1000) -->
+						<smtx:XamlDisplay UniqueKey="Simple_Slider_CustomRange"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource SimpleSliderStyle}" Minimum="0" Maximum="1000" Value="250" StepFrequency="50" Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- At Minimum -->
+						<smtx:XamlDisplay UniqueKey="Simple_Slider_Minimum"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource SimpleSliderStyle}" Value="0" Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- At Maximum -->
+						<smtx:XamlDisplay UniqueKey="Simple_Slider_Maximum"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource SimpleSliderStyle}" Value="100" Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_Slider_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource SimpleSliderStyle}" Value="40" IsEnabled="False" Width="300" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

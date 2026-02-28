@@ -332,5 +332,79 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.CupertinoTemplate>
+
+		<sample:SamplePageLayout.SimpleTemplate>
+			<DataTemplate>
+				<StackPanel>
+
+					<!--  Button  -->
+					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
+						<StackPanel Spacing="8">
+
+							<Button Content="Primary"
+									Style="{StaticResource SimplePrimaryButtonStyle}" />
+
+							<Button Content="Neutral"
+									Style="{StaticResource SimpleNeutralButtonStyle}" />
+
+							<Button Content="Subtle"
+									Style="{StaticResource SimpleSubtleButtonStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  TextBox  -->
+					<sample:OverviewSampleView SamplePageType="samples:TextBoxSamplePage">
+						<StackPanel Spacing="8">
+
+							<TextBox PlaceholderText="Input" />
+
+							<TextBox PlaceholderText="Outlined"
+									 Style="{StaticResource SimpleOutlinedTextBoxStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  CheckBox  -->
+					<sample:OverviewSampleView SamplePageType="samples:CheckBoxSamplePage">
+						<StackPanel Spacing="8">
+
+							<CheckBox Content="Checked"
+									  IsChecked="True" />
+
+							<CheckBox Content="Unchecked"
+									  IsChecked="False" />
+
+							<CheckBox Content="Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsThreeState="True" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  RadioButton  -->
+					<sample:OverviewSampleView SamplePageType="samples:RadioButtonSamplePage">
+						<StackPanel Spacing="8">
+
+							<RadioButton Content="Checked"
+										 GroupName="SimpleOverview"
+										 IsChecked="True" />
+
+							<RadioButton Content="Unchecked"
+										 GroupName="SimpleOverview" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  ToggleSwitch  -->
+					<sample:OverviewSampleView SamplePageType="samples:ToggleSwitchSamplePage">
+						<StackPanel Spacing="8">
+
+							<ToggleSwitch Header="ToggleSwitch"
+										  IsOn="True" />
+
+							<ToggleSwitch Header="Disabled"
+										  IsEnabled="False" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.SimpleTemplate>
 	</sample:SamplePageLayout>
 </Page>

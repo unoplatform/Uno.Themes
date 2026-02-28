@@ -3,159 +3,72 @@
   // Use hover for the description of the existing attributes
   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
   "version": "0.2.0",
+  "inputs": [
+    {
+      "id": "sampleApp",
+      "type": "pickString",
+      "description": "Select which sample app to use",
+      "options": [
+        "Material",
+        "Cupertino",
+        "Simple"
+      ],
+      "default": "Material"
+    }
+  ],
   "configurations": [
     {
-      "name": "CupertinoSampleApp WebAssembly Debug (Chrome)",
+      "name": "SampleApp WebAssembly Debug (Chrome)",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:5000",
-      "webRoot": "${workspaceFolder}/src/samples/CupertinoSampleApp",
+      "webRoot": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp",
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
       "timeout": 30000,
-      "preLaunchTask": "build-cupertino-wasm",
+      "preLaunchTask": "build-${input:sampleApp}-wasm",
       "server": {
         "runtimeExecutable": "dotnet",
         "program": "run",
         "args": ["--no-build","-f","net10.0-browserwasm"],
         "outputCapture": "std",
         "timeout": 30000,
-        "cwd": "${workspaceFolder}/src/samples/CupertinoSampleApp"
+        "cwd": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp"
       }
     },
     {
-      "name": "CupertinoSampleApp WebAssembly Debug (Edge)",
+      "name": "SampleApp WebAssembly Debug (Edge)",
       "type": "msedge",
       "request": "launch",
       "url": "http://localhost:5000",
-      "webRoot": "${workspaceFolder}/src/samples/CupertinoSampleApp",
+      "webRoot": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp",
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
       "timeout": 30000,
-      "preLaunchTask": "build-cupertino-wasm",
+      "preLaunchTask": "build-${input:sampleApp}-wasm",
       "server": {
         "runtimeExecutable": "dotnet",
         "program": "run",
         "args": ["--no-build","-f","net10.0-browserwasm"],
         "outputCapture": "std",
         "timeout": 30000,
-        "cwd": "${workspaceFolder}/src/samples/CupertinoSampleApp"
+        "cwd": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp"
       }
     },
     {
-      "name": "CupertinoSampleApp Desktop Debug",
+      "name": "SampleApp Desktop Debug",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build-cupertino-desktop",
-      "program": "${workspaceFolder}/src/samples/CupertinoSampleApp/bin/Debug/net10.0-desktop/CupertinoSampleApp.dll",
+      "preLaunchTask": "build-${input:sampleApp}-desktop",
+      "program": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp/bin/Debug/net10.0-desktop/${input:sampleApp}SampleApp.dll",
       "args": [],
       "env": {
         "DOTNET_MODIFIABLE_ASSEMBLIES": "debug"
       },
-      "cwd": "${workspaceFolder}/src/samples/CupertinoSampleApp",
+      "cwd": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp",
       "console": "internalConsole",
       "stopAtEntry": false
     },
     {
-      "name": "MaterialSampleApp WebAssembly Debug (Chrome)",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:5000",
-      "webRoot": "${workspaceFolder}/src/samples/MaterialSampleApp",
-      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "timeout": 30000,
-      "preLaunchTask": "build-material-wasm",
-      "server": {
-        "runtimeExecutable": "dotnet",
-        "program": "run",
-        "args": ["--no-build","-f","net10.0-browserwasm"],
-        "outputCapture": "std",
-        "timeout": 30000,
-        "cwd": "${workspaceFolder}/src/samples/MaterialSampleApp"
-      }
-    },
-    {
-      "name": "MaterialSampleApp WebAssembly Debug (Edge)",
-      "type": "msedge",
-      "request": "launch",
-      "url": "http://localhost:5000",
-      "webRoot": "${workspaceFolder}/src/samples/MaterialSampleApp",
-      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "timeout": 30000,
-      "preLaunchTask": "build-material-wasm",
-      "server": {
-        "runtimeExecutable": "dotnet",
-        "program": "run",
-        "args": ["--no-build","-f","net10.0-browserwasm"],
-        "outputCapture": "std",
-        "timeout": 30000,
-        "cwd": "${workspaceFolder}/src/samples/MaterialSampleApp"
-      }
-    },
-    {
-      "name": "MaterialSampleApp Desktop Debug",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build-material-desktop",
-      "program": "${workspaceFolder}/src/samples/MaterialSampleApp/bin/Debug/net10.0-desktop/MaterialSampleApp.dll",
-      "args": [],
-      "env": {
-        "DOTNET_MODIFIABLE_ASSEMBLIES": "debug"
-      },
-      "cwd": "${workspaceFolder}/src/samples/MaterialSampleApp",
-      "console": "internalConsole",
-      "stopAtEntry": false
-    },
-    {
-      "name": "SimpleSamplesApp WebAssembly Debug (Chrome)",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:5000",
-      "webRoot": "${workspaceFolder}/src/samples/SimpleSamplesApp",
-      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "timeout": 30000,
-      "preLaunchTask": "build-simple-wasm",
-      "server": {
-        "runtimeExecutable": "dotnet",
-        "program": "run",
-        "args": ["--no-build","-f","net10.0-browserwasm"],
-        "outputCapture": "std",
-        "timeout": 30000,
-        "cwd": "${workspaceFolder}/src/samples/SimpleSamplesApp"
-      }
-    },
-    {
-      "name": "SimpleSamplesApp WebAssembly Debug (Edge)",
-      "type": "msedge",
-      "request": "launch",
-      "url": "http://localhost:5000",
-      "webRoot": "${workspaceFolder}/src/samples/SimpleSamplesApp",
-      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "timeout": 30000,
-      "preLaunchTask": "build-simple-wasm",
-      "server": {
-        "runtimeExecutable": "dotnet",
-        "program": "run",
-        "args": ["--no-build","-f","net10.0-browserwasm"],
-        "outputCapture": "std",
-        "timeout": 30000,
-        "cwd": "${workspaceFolder}/src/samples/SimpleSamplesApp"
-      }
-    },
-    {
-      "name": "SimpleSamplesApp Desktop Debug",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build-simple-desktop",
-      "program": "${workspaceFolder}/src/samples/SimpleSamplesApp/bin/Debug/net10.0-desktop/SimpleSamplesApp.dll",
-      "args": [],
-      "env": {
-        "DOTNET_MODIFIABLE_ASSEMBLIES": "debug"
-      },
-      "cwd": "${workspaceFolder}/src/samples/SimpleSamplesApp",
-      "console": "internalConsole",
-      "stopAtEntry": false
-    },
-    {
-      "name": "Uno Platform Mobile Debug",
+      "name": "SampleApp Mobile Debug",
       "type": "Uno",
       "request": "launch",
       // any Uno* task will do, this is simply to satisfy vscode requirement when a launch.json is present

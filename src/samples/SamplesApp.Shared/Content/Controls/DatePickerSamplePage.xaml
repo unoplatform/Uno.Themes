@@ -111,6 +111,35 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic DatePicker -->
+						<smtx:XamlDisplay UniqueKey="Simple_DatePicker_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker />
+						</smtx:XamlDisplay>
+
+						<!-- With Header -->
+						<smtx:XamlDisplay UniqueKey="Simple_DatePicker_WithHeader"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Date of Birth" />
+						</smtx:XamlDisplay>
+
+						<!-- Year Range -->
+						<smtx:XamlDisplay UniqueKey="Simple_DatePicker_YearRange"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Select Year" DayVisible="False" MonthVisible="False" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_DatePicker_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<DatePicker Header="Disabled" IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

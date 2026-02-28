@@ -2,33 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build-cupertino-wasm",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "build",
-        "${workspaceFolder}/src/samples/CupertinoSampleApp/CupertinoSampleApp.csproj",
-        "/property:GenerateFullPaths=true",
-        "/property:TargetFramework=net10.0-browserwasm",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "build-cupertino-desktop",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "build",
-        "${workspaceFolder}/src/samples/CupertinoSampleApp/CupertinoSampleApp.csproj",
-        "/property:GenerateFullPaths=true",
-        "/property:TargetFramework=net10.0-desktop",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "build-material-wasm",
+      "label": "build-Material-wasm",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -41,7 +15,7 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "build-material-desktop",
+      "label": "build-Material-desktop",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -54,12 +28,12 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "build-simple-wasm",
+      "label": "build-Cupertino-wasm",
       "command": "dotnet",
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/src/samples/SimpleSamplesApp/SimpleSamplesApp.csproj",
+        "${workspaceFolder}/src/samples/CupertinoSampleApp/CupertinoSampleApp.csproj",
         "/property:GenerateFullPaths=true",
         "/property:TargetFramework=net10.0-browserwasm",
         "/consoleloggerparameters:NoSummary"
@@ -67,12 +41,38 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "build-simple-desktop",
+      "label": "build-Cupertino-desktop",
       "command": "dotnet",
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/src/samples/SimpleSamplesApp/SimpleSamplesApp.csproj",
+        "${workspaceFolder}/src/samples/CupertinoSampleApp/CupertinoSampleApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-desktop",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-Simple-wasm",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/SimpleSampleApp/SimpleSampleApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-browserwasm",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-Simple-desktop",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/SimpleSampleApp/SimpleSampleApp.csproj",
         "/property:GenerateFullPaths=true",
         "/property:TargetFramework=net10.0-desktop",
         "/consoleloggerparameters:NoSummary"

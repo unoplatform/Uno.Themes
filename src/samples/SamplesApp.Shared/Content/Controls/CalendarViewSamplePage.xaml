@@ -53,6 +53,29 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic CalendarView -->
+						<smtx:XamlDisplay UniqueKey="Simple_CalendarView_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CalendarView />
+						</smtx:XamlDisplay>
+
+						<!-- Multiple Selection -->
+						<smtx:XamlDisplay UniqueKey="Simple_CalendarView_MultipleSelection"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CalendarView SelectionMode="Multiple" />
+						</smtx:XamlDisplay>
+
+						<!-- Month Display -->
+						<smtx:XamlDisplay UniqueKey="Simple_CalendarView_MonthDisplay"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CalendarView DisplayMode="Month" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

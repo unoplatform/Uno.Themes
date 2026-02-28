@@ -2,7 +2,7 @@
 
 namespace Uno.Themes.Samples.Content;
 
-[SamplePage(SampleCategory.None, "Overview", IconPath = Icons.Overview, SupportedDesigns = new[] { Design.Material, Design.Cupertino })]
+[SamplePage(SampleCategory.None, "Overview", IconPath = Icons.Overview, SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple })]
 public sealed partial class OverviewPage : Page
     {
         public OverviewPage()

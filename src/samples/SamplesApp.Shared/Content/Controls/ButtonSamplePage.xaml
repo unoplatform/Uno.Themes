@@ -591,6 +591,88 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Primary Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_Primary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Primary" Style="{StaticResource SimplePrimaryButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimplePrimaryButtonStyle}" IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Neutral Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_Neutral"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Neutral" Style="{StaticResource SimpleNeutralButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimpleNeutralButtonStyle}" IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Subtle Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_Subtle"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Subtle" Style="{StaticResource SimpleSubtleButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimpleSubtleButtonStyle}" IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Danger Primary Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_DangerPrimary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Danger Primary" Style="{StaticResource SimpleDangerPrimaryButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimpleDangerPrimaryButtonStyle}" IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Danger Subtle Button -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_DangerSubtle"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<Button Content="Danger Subtle" Style="{StaticResource SimpleDangerSubtleButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimpleDangerSubtleButtonStyle}" IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Small Size Variants -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_SmallVariants"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<StackPanel Orientation="Horizontal" Spacing="12">
+									<Button Content="Small Primary" Style="{StaticResource SimpleSmallPrimaryButtonStyle}" />
+									<Button Content="Small Neutral" Style="{StaticResource SimpleSmallNeutralButtonStyle}" />
+									<Button Content="Small Subtle" Style="{StaticResource SimpleSmallSubtleButtonStyle}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="12">
+									<Button Content="Small Danger Primary" Style="{StaticResource SimpleSmallDangerPrimaryButtonStyle}" />
+									<Button Content="Small Danger Subtle" Style="{StaticResource SimpleSmallDangerSubtleButtonStyle}" />
+								</StackPanel>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Small Size Variants — Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_Button_SmallVariants_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<StackPanel Orientation="Horizontal" Spacing="12">
+									<Button Content="Small Primary" Style="{StaticResource SimpleSmallPrimaryButtonStyle}" IsEnabled="False" />
+									<Button Content="Small Neutral" Style="{StaticResource SimpleSmallNeutralButtonStyle}" IsEnabled="False" />
+									<Button Content="Small Subtle" Style="{StaticResource SimpleSmallSubtleButtonStyle}" IsEnabled="False" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="12">
+									<Button Content="Small Danger Primary" Style="{StaticResource SimpleSmallDangerPrimaryButtonStyle}" IsEnabled="False" />
+									<Button Content="Small Danger Subtle" Style="{StaticResource SimpleSmallDangerSubtleButtonStyle}" IsEnabled="False" />
+								</StackPanel>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
