@@ -1,4 +1,3 @@
-using Uno.Themes.Simple.Samples;
 using Uno.UI.Hosting;
 
 namespace SimpleSampleApp;

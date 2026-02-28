@@ -561,6 +561,38 @@ Updates in this batch:
 - **New alias:** `CalendarDatePickerStyle` → `SimpleCalendarDatePickerStyle`
 - **Removed from TODO block:** CalendarDatePicker entries (both implicit style and alias)
 
+### 30. DatePicker.xaml — CREATED ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/DatePicker.xaml`
+
+Contains:
+
+- **3 named styles:**
+  - `SimpleDatePickerFlyoutButtonStyle` — transparent Button wrapper (field visuals live in DatePicker template)
+  - `SimpleDatePickerFlyoutPresenterStyle` — flyout panel with day/month/year columns, highlight, accept/dismiss buttons
+  - `SimpleDatePickerStyle` — main DatePicker with field-like appearance inspired by CalendarDatePicker
+- **~50 lightweight styling `<StaticResource>` aliases per theme (~100 total)** — FlyoutButton bg, FlyoutPresenter (bg/border/spacer/highlight/corner), Button field (bg/fg/border × 4 states), date text (fg × 4 states), placeholder, header (fg × 2 states), dimensions
+- **Default aliases:** `SimpleDefaultDatePickerStyle`, `SimpleDefaultDatePickerFlyoutPresenterStyle`
+- **Local `StringFormatConverter`** — declared in-file for SelectedDate formatting
+- **SDS token mapping:**
+  - Field: `SimpleBackgroundDefaultDefaultBrush` bg, `SimpleBorderDefaultDefaultBrush` border, 8px radius, `SimpleTextDefaultDefaultBrush`
+  - Disabled: `SimpleBackgroundDisabledDefaultBrush`, `SimpleBorderDisabledDefaultBrush`, `SimpleTextDisabledDefaultBrush`
+  - Placeholder: `SimpleTextDefaultTertiaryBrush`
+  - Flyout: `SimpleBackgroundDefaultDefaultBrush` bg, `SimpleBorderDefaultDefaultBrush` border, 16px radius
+  - Highlight: `SimpleBackgroundBrandTertiaryBrush` with 8px rounded corners
+  - Accept/Dismiss: `SimpleSubtleButtonStyle`
+- **Dimensions:** MinHeight 44, ContentMargin 16,10,16,10, FlyoutPresenter 296×398, highlight 40px, AcceptDismiss 52px
+
+### 31. _Resources.xaml — UPDATED (Batch 6) ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
+
+Updates in this batch:
+
+- **New implicit styles:** DatePicker → `SimpleDefaultDatePickerStyle`, DatePickerFlyoutPresenter → `SimpleDefaultDatePickerFlyoutPresenterStyle`
+- **New alias:** `DatePickerStyle` → `SimpleDatePickerStyle`
+- **Removed from TODO blocks:** DatePicker and DatePickerFlyoutPresenter entries (both implicit styles and alias)
+
 ---
 
 ## Remaining Work (Not Started)
@@ -573,7 +605,7 @@ The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` 
 |---|---|---|
 | CalendarView | ✅ Created | Mapped from SDS Calendar component |
 | CommandBar | Not created | Needs SDS mapping |
-| DatePicker | Not created | Needs SDS mapping |
+| DatePicker | ✅ Created | Field inspired by CalendarDatePicker, flyout with Simple theme |
 | FlyoutPresenter | Not created | Needs SDS mapping |
 | HyperlinkButton | Not created | Needs SDS mapping |
 | NavigationView | Not created | Needs SDS mapping |
