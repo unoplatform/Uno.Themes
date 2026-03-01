@@ -1,0 +1,66 @@
+{
+  "name": "Uno Themes — Agent Sandbox",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "TZ": "${localEnv:TZ:America/Los_Angeles}",
+      "CLAUDE_CODE_VERSION": "latest",
+      "GIT_DELTA_VERSION": "0.18.2",
+      "ZSH_IN_DOCKER_VERSION": "1.2.0"
+    }
+  },
+  "runArgs": [
+    "--cap-add=NET_ADMIN",
+    "--cap-add=NET_RAW",
+    "--shm-size=2g"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "unoplatform.vscode",
+        "ms-dotnettools.csdevkit",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.expand": false,
+        "explorer.fileNesting.patterns": {
+          "*.xaml": "$(capture).xaml.cs"
+        },
+        "files.associations": {
+          "global.json": "jsonc"
+        },
+        "unoplatform.ignoreCheck": true,
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          },
+          "zsh": {
+            "path": "zsh"
+          }
+        }
+      }
+    }
+  },
+  "remoteUser": "developer",
+  "mounts": [
+    "source=unothemes-claude-config-${devcontainerId},target=/home/developer/.claude,type=volume",
+    "source=unothemes-commandhistory-${devcontainerId},target=/commandhistory,type=volume",
+    "source=unothemes-nuget-cache-${devcontainerId},target=/home/developer/.nuget,type=volume",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
+  ],
+  "containerEnv": {
+    "DEVCONTAINER": "true",
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
+    "DISPLAY": "${localEnv:DISPLAY::0}",
+    "CLAUDE_CONFIG_DIR": "/home/developer/.claude",
+    "POWERLEVEL9K_DISABLE_GITSTATUS": "true"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/uno-themes,type=bind,consistency=delegated",
+  "workspaceFolder": "/uno-themes",
+  "postStartCommand": "bash /uno-themes/.devcontainer/post-start.sh",
+  "waitFor": "postStartCommand"
+}
