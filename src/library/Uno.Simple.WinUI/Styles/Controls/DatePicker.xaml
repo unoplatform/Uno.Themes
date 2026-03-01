@@ -22,9 +22,6 @@
 		ThemeResource so consumers can override any individual key.
 	-->
 
-	<!-- Local converter for formatting the SelectedDate -->
-	<ut:StringFormatConverter x:Key="SimpleDatePickerStringFormatConverter" />
-
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Lightweight styling ThemeResource aliases                              -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
@@ -157,6 +154,9 @@
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- Local converter for formatting the SelectedDate -->
+	<ut:StringFormatConverter x:Key="SimpleDatePickerStringFormatConverter" />
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- SimpleDatePickerFlyoutButtonStyle                                      -->
@@ -346,11 +346,30 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePicker">
 					<!-- Root Grid -->
-					<Grid x:Name="LayoutRoot"
-						  MinHeight="{TemplateBinding MinHeight}">
+					<Grid x:Name="LayoutRoot">
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<!-- Header (above the field) -->
+						<ContentPresenter x:Name="HeaderContentPresenter"
+										  Grid.Row="0"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  Foreground="{ThemeResource SimpleDatePickerHeaderForeground}"
+										  FontSize="{StaticResource SimpleTypographyScale02}"
+										  FontFamily="{StaticResource SimpleFontFamily}"
+										  FontWeight="SemiBold"
+										  TextWrapping="Wrap"
+										  Margin="0,0,0,4"
+										  Visibility="Collapsed"
+										  AutomationProperties.AccessibilityView="Raw" />
 
 						<!-- Flyout Button -->
 						<Button x:Name="FlyoutButton"
+								Grid.Row="1"
 								HorizontalAlignment="Stretch"
 								HorizontalContentAlignment="Stretch"
 								IsEnabled="{TemplateBinding IsEnabled}"
@@ -364,32 +383,15 @@
 										Background="{TemplateBinding Background}"
 										BorderBrush="{TemplateBinding BorderBrush}"
 										BorderThickness="{TemplateBinding BorderThickness}"
-										CornerRadius="{TemplateBinding CornerRadius}" />
+										CornerRadius="{TemplateBinding CornerRadius}"
+										MinHeight="{TemplateBinding MinHeight}" />
 
 								<!-- Content -->
 								<Grid Margin="{ThemeResource SimpleDatePickerContentMargin}"
 									  VerticalAlignment="Center">
 
-									<Grid.RowDefinitions>
-										<RowDefinition Height="Auto" />
-										<RowDefinition Height="Auto" />
-									</Grid.RowDefinitions>
-
-									<!-- Header -->
-									<ContentPresenter x:Name="HeaderContentPresenter"
-													  Content="{TemplateBinding Header}"
-													  ContentTemplate="{TemplateBinding HeaderTemplate}"
-													  Foreground="{ThemeResource SimpleDatePickerHeaderForeground}"
-													  FontSize="{StaticResource SimpleTypographyScale02}"
-													  FontFamily="{StaticResource SimpleFontFamily}"
-													  TextWrapping="Wrap"
-													  Margin="0,0,0,4"
-													  Visibility="Collapsed"
-													  AutomationProperties.AccessibilityView="Raw" />
-
 									<!-- Date text row -->
 									<Grid x:Name="FlyoutButtonContentGrid"
-										  Grid.Row="1"
 										  VerticalAlignment="Center">
 
 										<!-- Formatted date text -->
