@@ -593,6 +593,54 @@ Updates in this batch:
 - **New alias:** `DatePickerStyle` → `SimpleDatePickerStyle`
 - **Removed from TODO blocks:** DatePicker and DatePickerFlyoutPresenter entries (both implicit styles and alias)
 
+### 32. AutoSuggestBox.xaml — NEW ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/AutoSuggestBox.xaml`
+
+Mapped from SDS **Search** component (`src/ui/primitives/Search/Search.tsx` + `search.css`), inheriting base Input tokens from `input.css`.
+
+Contains:
+
+- **ThemeDictionaries** with ~24 lightweight keys per theme (48 total):
+  - Sizing: `SimpleAutoSuggestBoxCornerRadius` (9999 — pill shape), `SimpleAutoSuggestBoxBorderThickness` (1), `SimpleAutoSuggestBoxFocusedBorderThickness` (2), `SimpleAutoSuggestBoxPadding` (16,10,40,10 — extra right for icon), `SimpleAutoSuggestBoxMinHeight` (40), `SimpleAutoSuggestBoxIconFontSize` (16)
+  - Suggestions popup: `SimpleAutoSuggestBoxSuggestionsCornerRadius` (8), `SimpleAutoSuggestBoxSuggestionsBorderThickness` (1), `SimpleAutoSuggestBoxSuggestionsPadding` (4)
+  - TextBox Normal: `SimpleAutoSuggestBoxForeground`, `Background`, `BorderBrush`, `PlaceholderForeground`
+  - TextBox PointerOver: `*PointerOver` variants
+  - TextBox Focused: `*Focused` variants (brand-secondary border)
+  - TextBox Disabled: `*Disabled` variants
+  - Icon buttons: `SimpleAutoSuggestBoxIconForeground` × 4 states (Normal/PointerOver/Pressed/Disabled)
+  - Header: `SimpleAutoSuggestBoxHeaderForeground` × 2 states (Normal/Disabled)
+  - Suggestions: `SimpleAutoSuggestBoxSuggestionsBackground`, `SuggestionsBorderBrush`
+- **`SimpleAutoSuggestBoxTextBoxStyle`** — inner TextBox with pill-shaped CornerRadius (9999), full ControlTemplate:
+  - `DeleteButtonStyle` (clear "X" glyph &#xE894;) + `QueryButtonStyle` (search icon) inner button styles with CommonStates VSM
+  - Main VSM: CommonStates (Disabled, Normal, PointerOver, Focused) + ButtonStates (ButtonVisible/ButtonCollapsed)
+  - Header support via `HeaderContentPresenter`
+  - Placeholder via `PlaceholderTextContentPresenter`
+  - Text input via `ContentElement` ScrollViewer
+  - Delete + Query buttons in right columns
+- **`SimpleAutoSuggestBoxStyle`** — outer AutoSuggestBox:
+  - Sets `TextBoxStyle` to `SimpleAutoSuggestBoxTextBoxStyle`
+  - Template: TextBox + Popup with suggestions `Border` (8px radius, 1px border) + `ListView`
+  - Orientation VSM (Landscape/Portrait)
+- **`SimpleDefaultAutoSuggestBoxStyle`** — alias (BasedOn)
+- **SDS key differentiator:** pill shape (`border-radius: var(--sds-size-radius-full)`) → `CornerRadius="9999"` (vs 8px for regular Input/TextBox)
+- **Token mapping:**
+  - Normal: `SimpleBackgroundDefaultDefaultBrush` bg, `SimpleBorderDefaultDefaultBrush` border, `SimpleTextDefaultDefaultBrush` text
+  - Focused: `SimpleBorderBrandSecondaryBrush` border (2px thickness)
+  - Disabled: `SimpleBackgroundDisabledDefaultBrush`, `SimpleBorderDisabledDefaultBrush`, `SimpleTextDisabledDefaultBrush`
+  - Placeholder: `SimpleTextDefaultTertiaryBrush`
+  - Icons: `SimpleIconDefaultDefaultBrush` / `SimpleIconDisabledDefaultBrush`
+  - Suggestions popup: `SimpleBackgroundDefaultDefaultBrush` bg, `SimpleBorderDefaultDefaultBrush` border
+
+### 33. _Resources.xaml — UPDATED (Batch 7) ✅
+
+**Path:** `src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`
+
+Updates in this batch:
+
+- **New implicit style:** AutoSuggestBox → `SimpleDefaultAutoSuggestBoxStyle`
+- **New alias:** `AutoSuggestBoxStyle` → `SimpleAutoSuggestBoxStyle`
+
 ---
 
 ## Remaining Work (Not Started)
@@ -603,6 +651,7 @@ The following control styles in `src/library/Uno.Simple.WinUI/Styles/Controls/` 
 
 | Control | File | Notes |
 |---|---|---|
+| AutoSuggestBox | ✅ Created | Mapped from SDS Search component (pill shape) |
 | CalendarView | ✅ Created | Mapped from SDS Calendar component |
 | CommandBar | Not created | Needs SDS mapping |
 | DatePicker | ✅ Created | Field inspired by CalendarDatePicker, flyout with Simple theme |
@@ -632,7 +681,7 @@ Sample pages created/updated in `src/samples/SimpleSamplesApp/Content/Controls/`
 
 Still need sample pages for:
 
-- PersonPicture, TextBox, PasswordBox, IconButton, Slider, TextBlock, ToolTip, CalendarView
+- PersonPicture, TextBox, PasswordBox, IconButton, Slider, TextBlock, ToolTip, CalendarView, AutoSuggestBox
 
 ### Abstraction Layer (Future Phase)
 
