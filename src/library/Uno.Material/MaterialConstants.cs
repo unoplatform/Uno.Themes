@@ -24,6 +24,11 @@ internal static class MaterialConstants
 			public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.v2.xaml";
 		}
 
+		public static class Version3
+		{
+			public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.v3.xaml";
+		}
+
 		public static class Common
 		{
 			public static string AnimationConstants = $"ms-appx:///{PackageName}/Styles/Application/Common/AnimationConstants.xaml";

@@ -41,3 +41,32 @@ public class MaterialTheme : BaseTheme
 		return mergedPages;
 	}
 }
+
+/// <summary>
+/// Material Theme v3 resources with M3-compliant button sizes, shapes, and updated styles.
+/// Use this instead of <see cref="MaterialTheme"/> to opt in to v3 component styles.
+/// </summary>
+public class MaterialThemeV3 : BaseTheme
+{
+	public MaterialThemeV3()
+	{ }
+
+	public MaterialThemeV3(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
+		: base(colorOverride, fontOverride)
+	{ }
+
+	protected override ResourceDictionary GenerateSpecificResources()
+	{
+		var mergedPages = new ResourceDictionary { Source = new Uri(MaterialConstants.ResourcePaths.Version3.MergedPages) };
+
+		var fonts = new ResourceDictionary { Source = new Uri(MaterialConstants.ResourcePaths.Common.Fonts) };
+
+		if (FontOverrideDictionary is { } fontOverride)
+		{
+			fonts.SafeMerge(fontOverride);
+		}
+
+		mergedPages.MergedDictionaries.Add(fonts);
+		return mergedPages;
+	}
+}

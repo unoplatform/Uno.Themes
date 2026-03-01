@@ -216,39 +216,35 @@
 				<DataTemplate>
 					<StackPanel>
 
+						<!-- ============================================================ -->
+						<!-- COLOR VARIANTS (Medium / Square - default)                   -->
+						<!-- ============================================================ -->
+
 						<!-- ELEVATED -->
-						<StackPanel Spacing="6"
-									Orientation="Horizontal">
-							<!-- Button Elevated -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_Elevated"
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_Elevated"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Elevated Button"
+								<Button Content="Elevated"
 										Style="{StaticResource MaterialElevatedButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Button Elevated Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_ElevatedDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Content="Elevated Disabled"
 										IsEnabled="False"
 										Style="{StaticResource MaterialElevatedButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Elevated -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_Elevated"
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedIcon"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Elevated Button"
+								<Button Content="Elevated Icon"
 										Style="{StaticResource MaterialElevatedButtonStyle}">
 									<ut:ControlExtensions.Icon>
 										<FontIcon Glyph="&#xE946;" />
 									</ut:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Elevated Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_ElevatedDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedIconDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Elevated Disabled"
+								<Button Content="Elevated Icon"
 										IsEnabled="False"
 										Style="{StaticResource MaterialElevatedButtonStyle}">
 									<ut:ControlExtensions.Icon>
@@ -259,38 +255,30 @@
 						</StackPanel>
 
 						<!-- FILLED -->
-						<StackPanel Spacing="6"
-									Orientation="Horizontal">
-							<!-- Button Filled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_Filled"
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_Filled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Filled Button"
+								<Button Content="Filled"
 										Style="{StaticResource MaterialFilledButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Button Filled Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Content="Filled Disabled"
 										IsEnabled="False"
 										Style="{StaticResource MaterialFilledButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Filled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_Filled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledIcon"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Filled Button"
+								<Button Content="Filled Icon"
 										Style="{StaticResource MaterialFilledButtonStyle}">
 									<ut:ControlExtensions.Icon>
 										<FontIcon Glyph="&#xE946;" />
 									</ut:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Filled Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_FilledDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledIconDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Filled Disabled"
+								<Button Content="Filled Icon"
 										IsEnabled="False"
 										Style="{StaticResource MaterialFilledButtonStyle}">
 									<ut:ControlExtensions.Icon>
@@ -301,38 +289,30 @@
 						</StackPanel>
 
 						<!-- FILLED TONAL -->
-						<StackPanel Spacing="8"
-									Orientation="Horizontal">
-							<!-- Button Filled Tonal -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledTonal"
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_Tonal"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Tonal Button"
+								<Button Content="Tonal"
 										Style="{StaticResource MaterialFilledTonalButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Button Filled Tonal Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledTonalDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Content="Tonal Disabled"
 										IsEnabled="False"
 										Style="{StaticResource MaterialFilledTonalButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Filled Tonal -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_FilledTonal"
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalIcon"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Tonal Button"
+								<Button Content="Tonal Icon"
 										Style="{StaticResource MaterialFilledTonalButtonStyle}">
 									<ut:ControlExtensions.Icon>
 										<FontIcon Glyph="&#xE946;" />
 									</ut:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Filled Tonal Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_FilledTonalDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalIconDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Tonal Disabled"
+								<Button Content="Tonal Icon"
 										IsEnabled="False"
 										Style="{StaticResource MaterialFilledTonalButtonStyle}">
 									<ut:ControlExtensions.Icon>
@@ -343,38 +323,30 @@
 						</StackPanel>
 
 						<!-- OUTLINED -->
-						<StackPanel Spacing="6"
-									Orientation="Horizontal">
-							<!-- Button Outlined -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_Outlined"
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_Outlined"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Outlined Button"
+								<Button Content="Outlined"
 										Style="{StaticResource MaterialOutlinedButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Button Outlined Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_OutlinedDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Content="Outlined Disabled"
 										IsEnabled="False"
 										Style="{StaticResource MaterialOutlinedButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Outlined -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_Outlined"
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedIcon"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Outlined Button"
+								<Button Content="Outlined Icon"
 										Style="{StaticResource MaterialOutlinedButtonStyle}">
 									<ut:ControlExtensions.Icon>
 										<FontIcon Glyph="&#xE946;" />
 									</ut:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Outlined Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_OutlinedDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedIconDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Outlined Disabled"
+								<Button Content="Outlined Icon"
 										IsEnabled="False"
 										Style="{StaticResource MaterialOutlinedButtonStyle}">
 									<ut:ControlExtensions.Icon>
@@ -385,38 +357,30 @@
 						</StackPanel>
 
 						<!-- TEXT -->
-						<StackPanel Spacing="6"
-									Orientation="Horizontal">
-							<!-- Button Text -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_Text"
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_Text"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Text Button"
+								<Button Content="Text"
 										Style="{StaticResource MaterialTextButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Button Text Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_TextDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Content="Text Disabled"
 										IsEnabled="False"
 										Style="{StaticResource MaterialTextButtonStyle}" />
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Text -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_Text"
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextIcon"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Text Button"
+								<Button Content="Text Icon"
 										Style="{StaticResource MaterialTextButtonStyle}">
 									<ut:ControlExtensions.Icon>
 										<FontIcon Glyph="&#xE946;" />
 									</ut:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
-
-							<!-- Icon Button Text Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_IconButtonSamplePage_TextDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextIconDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button Content="Text Disabled"
+								<Button Content="Text Icon"
 										IsEnabled="False"
 										Style="{StaticResource MaterialTextButtonStyle}">
 									<ut:ControlExtensions.Icon>
@@ -426,78 +390,271 @@
 							</smtx:XamlDisplay>
 						</StackPanel>
 
-						<!-- IconButton-->
-						<StackPanel Spacing="6"
-									Orientation="Horizontal">
-							<!-- Button Text -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_IconEnabled"
+						<!-- ICON BUTTON -->
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_IconButton"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
 								<Button Style="{StaticResource MaterialIconButtonStyle}">
-									<Button.Content>
-										<SymbolIcon Symbol="Favorite" />
-									</Button.Content>
+									<ut:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</ut:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
-
-							<!-- Button Text Disabled -->
-							<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_IconDisabled"
+							<smtx:XamlDisplay UniqueKey="V3_Button_IconButtonDisabled"
 											  Style="{StaticResource XamlDisplayBelowStyle}">
-								<Button IsEnabled="False"
-										Style="{StaticResource MaterialIconButtonStyle}">
-									<Button.Content>
-										<SymbolIcon Symbol="Favorite" />
-									</Button.Content>
+								<Button Style="{StaticResource MaterialIconButtonStyle}"
+										IsEnabled="False">
+									<ut:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</ut:ControlExtensions.Icon>
 								</Button>
 							</smtx:XamlDisplay>
-
 						</StackPanel>
 
-						<!-- STRETCHED BUTTONS -->
+						<!-- ============================================================ -->
+						<!-- SIZE VARIANTS - XSmall                                       -->
+						<!-- ============================================================ -->
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledXSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Filled XSmall"
+										Style="{StaticResource MaterialFilledXSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedXSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Elevated XSmall"
+										Style="{StaticResource MaterialElevatedXSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalXSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Tonal XSmall"
+										Style="{StaticResource MaterialFilledTonalXSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedXSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Outlined XSmall"
+										Style="{StaticResource MaterialOutlinedXSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextXSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Text XSmall"
+										Style="{StaticResource MaterialTextXSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+						</StackPanel>
 
-						<!-- Stretched Button Elevated -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_ElevatedStretched"
+						<!-- ============================================================ -->
+						<!-- SIZE VARIANTS - Small                                        -->
+						<!-- ============================================================ -->
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Filled Small"
+										Style="{StaticResource MaterialFilledSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Elevated Small"
+										Style="{StaticResource MaterialElevatedSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Tonal Small"
+										Style="{StaticResource MaterialFilledTonalSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Outlined Small"
+										Style="{StaticResource MaterialOutlinedSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextSmall"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Text Small"
+										Style="{StaticResource MaterialTextSmallButtonStyle}" />
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<!-- ============================================================ -->
+						<!-- SIZE VARIANTS - Large                                        -->
+						<!-- ============================================================ -->
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Filled Large"
+										Style="{StaticResource MaterialFilledLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Elevated Large"
+										Style="{StaticResource MaterialElevatedLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Tonal Large"
+										Style="{StaticResource MaterialFilledTonalLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Outlined Large"
+										Style="{StaticResource MaterialOutlinedLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Text Large"
+										Style="{StaticResource MaterialTextLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<!-- ============================================================ -->
+						<!-- SIZE VARIANTS - XLarge                                       -->
+						<!-- ============================================================ -->
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledXLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Filled XLarge"
+										Style="{StaticResource MaterialFilledXLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedXLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Elevated XLarge"
+										Style="{StaticResource MaterialElevatedXLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalXLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Tonal XLarge"
+										Style="{StaticResource MaterialFilledTonalXLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedXLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Outlined XLarge"
+										Style="{StaticResource MaterialOutlinedXLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextXLarge"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Text XLarge"
+										Style="{StaticResource MaterialTextXLargeButtonStyle}" />
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<!-- ============================================================ -->
+						<!-- ROUND SHAPE VARIANTS (pill)                                  -->
+						<!-- ============================================================ -->
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledRound"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Filled Round"
+										Style="{StaticResource MaterialFilledRoundButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedRound"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Elevated Round"
+										Style="{StaticResource MaterialElevatedRoundButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalRound"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Tonal Round"
+										Style="{StaticResource MaterialFilledTonalRoundButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedRound"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Outlined Round"
+										Style="{StaticResource MaterialOutlinedRoundButtonStyle}" />
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextRound"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Text Round"
+										Style="{StaticResource MaterialTextRoundButtonStyle}" />
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<!-- ============================================================ -->
+						<!-- ROUND WITH ICONS                                             -->
+						<!-- ============================================================ -->
+						<StackPanel Spacing="6" Orientation="Horizontal">
+							<smtx:XamlDisplay UniqueKey="V3_Button_FilledRoundIcon"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Filled Round"
+										Style="{StaticResource MaterialFilledRoundButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedRoundIcon"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Elevated Round"
+										Style="{StaticResource MaterialElevatedRoundButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TonalRoundIcon"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Tonal Round"
+										Style="{StaticResource MaterialFilledTonalRoundButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedRoundIcon"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Outlined Round"
+										Style="{StaticResource MaterialOutlinedRoundButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+							<smtx:XamlDisplay UniqueKey="V3_Button_TextRoundIcon"
+											  Style="{StaticResource XamlDisplayBelowStyle}">
+								<Button Content="Text Round"
+										Style="{StaticResource MaterialTextRoundButtonStyle}">
+									<ut:ControlExtensions.Icon>
+										<FontIcon Glyph="&#xE946;" />
+									</ut:ControlExtensions.Icon>
+								</Button>
+							</smtx:XamlDisplay>
+						</StackPanel>
+
+						<!-- ============================================================ -->
+						<!-- STRETCHED BUTTONS                                            -->
+						<!-- ============================================================ -->
+
+						<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedStretched"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Elevated Button"
 									HorizontalAlignment="Stretch"
 									Style="{StaticResource MaterialElevatedButtonStyle}" />
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Filled -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledStretched"
+						<smtx:XamlDisplay UniqueKey="V3_Button_FilledStretched"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Filled Button"
 									HorizontalAlignment="Stretch"
 									Style="{StaticResource MaterialFilledButtonStyle}" />
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Filled Tonal -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledTonalStretched"
+						<smtx:XamlDisplay UniqueKey="V3_Button_TonalStretched"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Tonal Button"
 									HorizontalAlignment="Stretch"
 									Style="{StaticResource MaterialFilledTonalButtonStyle}" />
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Outlined -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_OutlinedStretched"
+						<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedStretched"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Outlined Button"
 									HorizontalAlignment="Stretch"
 									Style="{StaticResource MaterialOutlinedButtonStyle}" />
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Text -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_TextStretched"
+						<smtx:XamlDisplay UniqueKey="V3_Button_TextStretched"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Text Button"
 									HorizontalAlignment="Stretch"
 									Style="{StaticResource MaterialTextButtonStyle}" />
 						</smtx:XamlDisplay>
 
-						<!-- STRETCHED BUTTONS WITH ICON -->
+						<!-- STRETCHED WITH ICONS -->
 
-						<!-- Stretched Button Elevated With Icon -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_ElevatedStretched_WithIcon"
+						<smtx:XamlDisplay UniqueKey="V3_Button_ElevatedStretchedIcon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Elevated Button"
 									HorizontalAlignment="Stretch"
@@ -507,9 +664,7 @@
 								</ut:ControlExtensions.Icon>
 							</Button>
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Filled With Icon -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledStretched_WithIcon"
+						<smtx:XamlDisplay UniqueKey="V3_Button_FilledStretchedIcon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Filled Button"
 									HorizontalAlignment="Stretch"
@@ -519,9 +674,7 @@
 								</ut:ControlExtensions.Icon>
 							</Button>
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Filled With Icon -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_FilledTonalStretched_WithIcon"
+						<smtx:XamlDisplay UniqueKey="V3_Button_TonalStretchedIcon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Tonal Button"
 									HorizontalAlignment="Stretch"
@@ -531,9 +684,7 @@
 								</ut:ControlExtensions.Icon>
 							</Button>
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Outlined With Icon -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_OutlinedStretched_WithIcon"
+						<smtx:XamlDisplay UniqueKey="V3_Button_OutlinedStretchedIcon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Outlined Button"
 									HorizontalAlignment="Stretch"
@@ -543,9 +694,7 @@
 								</ut:ControlExtensions.Icon>
 							</Button>
 						</smtx:XamlDisplay>
-
-						<!-- Stretched Button Text With Icon -->
-						<smtx:XamlDisplay UniqueKey="M3Material_ButtonSamplePage_TextStretched_WithIcon"
+						<smtx:XamlDisplay UniqueKey="V3_Button_TextStretchedIcon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<Button Content="Text Button"
 									HorizontalAlignment="Stretch"
