@@ -183,21 +183,21 @@
 
 		<!-- Typography — SDS body-medium (16px Inter Regular) for day items -->
 		<Setter Property="DayItemFontFamily"
-				Value="{StaticResource SimpleFontFamily}" />
+				Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="DayItemFontSize"
-				Value="{StaticResource SimpleTypographyScale03}" />
+				Value="{ThemeResource SimpleTypographyScale03}" />
 		<Setter Property="FirstOfMonthLabelFontFamily"
-				Value="{StaticResource SimpleFontFamily}" />
+				Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FirstOfMonthLabelFontSize"
 				Value="0" />
 		<Setter Property="MonthYearItemFontFamily"
-				Value="{StaticResource SimpleFontFamily}" />
+				Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontFamily"
-				Value="{StaticResource SimpleFontFamily}" />
+				Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="MonthYearItemFontSize"
-				Value="{StaticResource SimpleTypographyScale02}" />
+				Value="{ThemeResource SimpleTypographyScale02}" />
 		<Setter Property="FirstOfYearDecadeLabelFontFamily"
-				Value="{StaticResource SimpleFontFamily}" />
+				Value="{ThemeResource SimpleFontFamily}" />
 
 		<!-- Border thickness -->
 		<not_win:Setter Property="CalendarItemBorderThickness"
@@ -250,11 +250,11 @@
 							<Style x:Key="SimpleWeekDayNameStyle"
 								   TargetType="TextBlock">
 								<Setter Property="FontFamily"
-										Value="{StaticResource SimpleFontFamily}" />
+										Value="{ThemeResource SimpleFontFamily}" />
 								<Setter Property="FontSize"
-										Value="{StaticResource SimpleTypographyScale02}" />
+										Value="{ThemeResource SimpleTypographyScale02}" />
 								<Setter Property="FontWeight"
-										Value="{StaticResource SimpleRegularFontWeight}" />
+										Value="{ThemeResource SimpleRegularFontWeight}" />
 								<Setter Property="Foreground"
 										Value="{ThemeResource SimpleCalendarViewWeekDayForeground}" />
 								<Setter Property="HorizontalAlignment"
@@ -422,8 +422,8 @@
 										HorizontalContentAlignment="Left"
 										Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}"
 										Foreground="{TemplateBinding Foreground}"
-										FontFamily="{StaticResource SimpleFontFamily}"
-										FontWeight="{StaticResource SimpleRegularFontWeight}"
+								FontFamily="{ThemeResource SimpleFontFamily}"
+								FontWeight="{ThemeResource SimpleRegularFontWeight}"
 										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}"
 										Style="{StaticResource SimpleHeaderButtonStyle}" />
 								<Button x:Name="PreviousButton"

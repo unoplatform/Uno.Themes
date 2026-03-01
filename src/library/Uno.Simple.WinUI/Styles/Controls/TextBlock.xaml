@@ -6,18 +6,18 @@
 		Maps SDS typography tokens to WinUI TextBlock styles.
 
 		SDS Typography Scale:
-		  title-hero      72px Bold        (SimpleFontScale10, SimpleFontLineHeight10)
-		  title-page      48px Bold        (SimpleFontScale08, SimpleFontLineHeight08)
-		  subtitle        32px Normal      (SimpleFontScale06, SimpleFontLineHeight06)
-		  heading         24px SemiBold    (SimpleFontScale05, SimpleFontLineHeight05)
-		  subheading      20px Normal      (SimpleFontScale04, SimpleFontLineHeight04)
-		  body-base       16px Normal      (SimpleFontScale03, SimpleFontLineHeight03)
-		  body-strong     16px SemiBold    (SimpleFontScale03, SimpleFontLineHeight03)
-		  body-emphasis   16px Italic      (SimpleFontScale03, SimpleFontLineHeight03)
-		  body-small      14px Normal      (SimpleFontScale02, SimpleFontLineHeight02)
-		  body-small-str  14px SemiBold    (SimpleFontScale02, SimpleFontLineHeight02)
-		  body-code       16px Mono Normal (SimpleFontScale03, SimpleFontLineHeight03)
-		  caption         12px Normal      (SimpleFontScale01, SimpleFontLineHeight01)
+		  title-hero      72px Bold        (SimpleTitleHeroFontSize, SimpleTitleHeroLineHeight)
+		  title-page      48px Bold        (SimpleTitlePageFontSize, SimpleTitlePageLineHeight)
+		  subtitle        32px Normal      (SimpleSubtitleFontSize, SimpleSubtitleLineHeight)
+		  heading         24px SemiBold    (SimpleHeadingFontSize, SimpleHeadingLineHeight)
+		  subheading      20px Normal      (SimpleSubheadingFontSize, SimpleSubheadingLineHeight)
+		  body-base       16px Normal      (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  body-strong     16px SemiBold    (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  body-emphasis   16px Italic      (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  body-small      14px Normal      (SimpleBodySmallFontSize, SimpleBodySmallLineHeight)
+		  body-small-str  14px SemiBold    (SimpleBodySmallFontSize, SimpleBodySmallLineHeight)
+		  body-code       16px Mono Normal (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  caption         12px Normal      (SimpleCaptionFontSize, SimpleCaptionLineHeight)
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
@@ -53,8 +53,8 @@
 	<Style x:Key="SimpleBaseTextBlockStyle"
 		   TargetType="TextBlock">
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale03}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight03}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodyFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleBodyLineHeight}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="Foreground" Value="{ThemeResource SimpleTextBlockForeground}" />
 		<Setter Property="TextWrapping" Value="Wrap" />
@@ -70,8 +70,8 @@
 	<Style x:Key="SimpleTitleHeroTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale10}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight10}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTitleHeroFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleTitleHeroLineHeight}" />
 		<Setter Property="FontWeight" Value="Bold" />
 	</Style>
 
@@ -79,8 +79,8 @@
 	<Style x:Key="SimpleTitlePageTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale08}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight08}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTitlePageFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleTitlePageLineHeight}" />
 		<Setter Property="FontWeight" Value="Bold" />
 	</Style>
 
@@ -88,8 +88,8 @@
 	<Style x:Key="SimpleSubtitleTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale06}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight06}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleSubtitleFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleSubtitleLineHeight}" />
 		<Setter Property="FontWeight" Value="Normal" />
 	</Style>
 
@@ -97,8 +97,8 @@
 	<Style x:Key="SimpleHeadingTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale05}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight05}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleHeadingFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleHeadingLineHeight}" />
 		<Setter Property="FontWeight" Value="SemiBold" />
 	</Style>
 
@@ -106,8 +106,8 @@
 	<Style x:Key="SimpleSubheadingTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale04}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight04}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleSubheadingFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleSubheadingLineHeight}" />
 		<Setter Property="FontWeight" Value="Normal" />
 	</Style>
 
@@ -134,8 +134,8 @@
 	<Style x:Key="SimpleBodySmallTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale02}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight02}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodySmallFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleBodySmallLineHeight}" />
 	</Style>
 
 	<!-- body-small-strong: 14px SemiBold -->
@@ -156,8 +156,8 @@
 	<Style x:Key="SimpleCaptionTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="{ThemeResource SimpleFontScale01}" />
-		<Setter Property="LineHeight" Value="{ThemeResource SimpleFontLineHeight01}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleCaptionFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleCaptionLineHeight}" />
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
