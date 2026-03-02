@@ -5,7 +5,8 @@ sudo /usr/local/bin/init-firewall.sh
 
 dotnet dev-certs https --trust || true
 
-printf 'claude --dangerously-skip-permissions\n' >> "$HOME/.bash_history"
+history_file="${HISTFILE:-$HOME/.bash_history}"
+printf 'claude --dangerously-skip-permissions\n' >> "$history_file"
 
 echo "Registering Claude MCPs for Uno Platform: uno (HTTP docs server)."
 echo "To verify, run: claude mcp list"
