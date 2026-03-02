@@ -174,6 +174,40 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic RadioButtons -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButton_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<RadioButton Content="Option 1" GroupName="SimpleGroup1" IsChecked="True" />
+								<RadioButton Content="Option 2" GroupName="SimpleGroup1" />
+								<RadioButton Content="Option 3" GroupName="SimpleGroup1" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButton_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<RadioButton Content="Disabled Selected" GroupName="SimpleGroup2" IsChecked="True" IsEnabled="False" />
+								<RadioButton Content="Disabled Unselected" GroupName="SimpleGroup2" IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Horizontal Layout -->
+						<smtx:XamlDisplay UniqueKey="Simple_RadioButton_Horizontal"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="16">
+								<RadioButton Content="A" GroupName="SimpleGroup3" IsChecked="True" />
+								<RadioButton Content="B" GroupName="SimpleGroup3" />
+								<RadioButton Content="C" GroupName="SimpleGroup3" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

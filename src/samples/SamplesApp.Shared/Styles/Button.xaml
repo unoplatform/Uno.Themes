@@ -10,6 +10,7 @@
 					mc:Ignorable="xamarin android ios wasm not_win">
 
 	<Style x:Key="SeeSourceFlyoutButtonStyle"
+		   BasedOn="{StaticResource DefaultButtonStyle}"
 		   TargetType="Button">
 		<Setter Property="Tag"
 				Value="See Source" />
@@ -19,6 +20,7 @@
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="Root">
 						<Button Content="{TemplateBinding Tag}"
+								Style="{StaticResource DefaultButtonStyle}"
 								FontSize="10">
 							<Button.Flyout>
 								<Flyout Placement="LeftEdgeAlignedBottom">

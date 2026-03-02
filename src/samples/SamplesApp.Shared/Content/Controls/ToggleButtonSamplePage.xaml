@@ -73,6 +73,53 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic ToggleButton -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleButton_Unchecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleButton Content="Unchecked" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleButton_Checked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleButton Content="Checked" IsChecked="True" />
+						</smtx:XamlDisplay>
+
+						<!-- With Icon Content -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleButton_WithIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<ToggleButton>
+									<SymbolIcon Symbol="Bold" />
+								</ToggleButton>
+								<ToggleButton IsChecked="True">
+									<SymbolIcon Symbol="Italic" />
+								</ToggleButton>
+								<ToggleButton>
+									<SymbolIcon Symbol="Underline" />
+								</ToggleButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Three-State -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleButton_ThreeState"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleButton Content="Three-State" IsThreeState="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleButton_DisabledUnchecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleButton Content="Disabled Unchecked" IsEnabled="False" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleButton_DisabledChecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ToggleButton Content="Disabled Checked" IsChecked="True" IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

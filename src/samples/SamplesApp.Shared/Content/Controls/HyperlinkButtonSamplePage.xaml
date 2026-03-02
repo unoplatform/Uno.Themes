@@ -143,6 +143,40 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic HyperlinkButton -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButton_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Click me" />
+						</smtx:XamlDisplay>
+
+						<!-- With NavigateUri -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButton_NavigateUri"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Visit Uno Platform" NavigateUri="https://platform.uno" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButton_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Disabled Link" IsEnabled="False" />
+						</smtx:XamlDisplay>
+
+						<!-- Custom Content -->
+						<smtx:XamlDisplay UniqueKey="Simple_HyperlinkButton_CustomContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton NavigateUri="https://platform.uno">
+								<StackPanel Orientation="Horizontal" Spacing="8">
+									<SymbolIcon Symbol="Globe" />
+									<TextBlock Text="Uno Platform Website" VerticalAlignment="Center" />
+								</StackPanel>
+							</HyperlinkButton>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

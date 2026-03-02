@@ -1,0 +1,84 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.ExpanderSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<sample:SamplePageLayout>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic Expander (collapsed) -->
+						<smtx:XamlDisplay UniqueKey="Simple_Expander_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Expander Header="Basic Expander" Style="{StaticResource SimpleExpanderStyle}">
+								<TextBlock Text="This is the content of a basic expander."
+										   TextWrapping="Wrap" />
+							</Expander>
+						</smtx:XamlDisplay>
+
+						<!-- Expander (expanded) -->
+						<smtx:XamlDisplay UniqueKey="Simple_Expander_Expanded"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Expander Header="Expanded by Default"
+								Style="{StaticResource SimpleExpanderStyle}"
+									  IsExpanded="True">
+								<TextBlock Text="This expander starts in the expanded state."
+										   TextWrapping="Wrap" />
+							</Expander>
+						</smtx:XamlDisplay>
+
+						<!-- Expander with rich content -->
+						<smtx:XamlDisplay UniqueKey="Simple_Expander_RichContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Expander Header="Rich Content">
+								<StackPanel Spacing="8">
+									<TextBlock Text="Expanders can contain any content, including multiple elements."
+											   TextWrapping="Wrap" />
+									<Button Content="Action" />
+								</StackPanel>
+							</Expander>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled Expander (collapsed) -->
+						<smtx:XamlDisplay UniqueKey="Simple_Expander_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Expander Header="Disabled Expander"
+									  Style="{StaticResource SimpleExpanderStyle}"
+									  IsEnabled="False">
+								<TextBlock Text="This content is not reachable." />
+							</Expander>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled Expander (expanded) -->
+						<smtx:XamlDisplay UniqueKey="Simple_Expander_DisabledExpanded"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Expander Header="Disabled Expanded"
+								Style="{StaticResource SimpleExpanderStyle}"
+									  IsEnabled="False"
+									  IsExpanded="True">
+								<TextBlock Text="This expander is disabled while expanded."
+										   TextWrapping="Wrap" />
+							</Expander>
+						</smtx:XamlDisplay>
+
+						<!-- ExpandDirection Up -->
+						<smtx:XamlDisplay UniqueKey="Simple_Expander_DirectionUp"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Expander Header="Expand Up"
+								Style="{StaticResource SimpleExpanderStyle}"
+									  ExpandDirection="Up">
+								<TextBlock Text="This expander opens upward."
+										   TextWrapping="Wrap" />
+							</Expander>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
+		</sample:SamplePageLayout>
+	</Grid>
+</Page>

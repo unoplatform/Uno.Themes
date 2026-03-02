@@ -5,6 +5,7 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:smtx="using:ShowMeTheXAML"
 	  mc:Ignorable="d"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -56,5 +57,42 @@
 				</ScrollViewer>
 			</DataTemplate>
 		</sample:SamplePageLayout.M3MaterialTemplate>
+		<sample:SamplePageLayout.SimpleTemplate>
+			<DataTemplate>
+				<StackPanel>
+					<!-- Basic Dialog (Close Button) -->
+					<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_Basic"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Basic Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleBasicDialog" />
+					</smtx:XamlDisplay>
+
+					<!-- Confirmation Dialog -->
+					<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_Confirm"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Confirmation Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleConfirmDialog" />
+					</smtx:XamlDisplay>
+
+					<!-- Three-Button Dialog -->
+					<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_ThreeButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Save Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleThreeButtonDialog" />
+					</smtx:XamlDisplay>
+
+					<!-- Dialog with Custom Content -->
+					<smtx:XamlDisplay UniqueKey="Simple_ContentDialog_CustomContent"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Custom Content Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildSimpleCustomContentDialog" />
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.SimpleTemplate>
 	</sample:SamplePageLayout>
 </Page>

@@ -230,6 +230,50 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Select Field -->
+						<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox PlaceholderText="Select an option" Width="300">
+								<ComboBoxItem Content="Option 1" />
+								<ComboBoxItem Content="Option 2" />
+								<ComboBoxItem Content="Option 3" />
+								<ComboBoxItem Content="Option 4" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+
+						<!-- Pre-selected Item -->
+						<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Preselected"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox SelectedIndex="1" Width="300">
+								<ComboBoxItem Content="First" />
+								<ComboBoxItem Content="Second (selected)" />
+								<ComboBoxItem Content="Third" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox PlaceholderText="Disabled" IsEnabled="False" Width="300">
+								<ComboBoxItem Content="Option 1" />
+								<ComboBoxItem Content="Option 2" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+
+						<!-- Error State -->
+						<smtx:XamlDisplay UniqueKey="Simple_ComboBox_Error"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox Style="{StaticResource SelectFieldErrorStyle}" PlaceholderText="Error state" Width="300">
+								<ComboBoxItem Content="Option 1" />
+								<ComboBoxItem Content="Option 2" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

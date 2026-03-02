@@ -134,6 +134,41 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Determinate -->
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBar_Determinate_25"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="25" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBar_Determinate_50"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="50" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBar_Determinate_75"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="75" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBar_Determinate_100"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="100" />
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate -->
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBar_Indeterminate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar IsIndeterminate="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressBar_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="60" IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

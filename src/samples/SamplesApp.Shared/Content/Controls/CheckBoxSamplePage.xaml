@@ -218,6 +218,39 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic CheckBox -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_Unchecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Unchecked" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_Checked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Checked" IsChecked="True" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_Indeterminate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Indeterminate" IsChecked="{x:Null}" IsThreeState="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled States -->
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_DisabledUnchecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Disabled Unchecked" IsEnabled="False" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_DisabledChecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Disabled Checked" IsChecked="True" IsEnabled="False" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_CheckBox_DisabledIndeterminate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Disabled Indeterminate" IsChecked="{x:Null}" IsThreeState="True" IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

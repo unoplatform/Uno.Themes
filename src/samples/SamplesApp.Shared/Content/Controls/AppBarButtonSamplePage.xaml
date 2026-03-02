@@ -192,6 +192,168 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="AppBarButton with Icon Only"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,0,0,12" />
+
+						<!-- Icon Only - SymbolIcon -->
+						<TextBlock Text="With SymbolIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_IconOnly"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<SymbolIcon Symbol="Add" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<!-- Icon Only - FontIcon -->
+						<TextBlock Text="With FontIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_IconOnlyFontIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<FontIcon Glyph="&#xE8B7;" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<!-- Icon Only - PathIcon -->
+						<TextBlock Text="With PathIcon"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_IconOnlyPathIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+								<AppBarButton.Icon>
+									<PathIcon Data="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z" />
+								</AppBarButton.Icon>
+							</AppBarButton>
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="AppBarButton with Content Only"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- Content Only -->
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_ContentOnly"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<AppBarButton Content="Add"
+											  Style="{StaticResource SimpleAppBarButtonStyle}" />
+								<AppBarButton Content="Settings"
+											  Style="{StaticResource SimpleAppBarButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="AppBarButton with Icon and Content"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- Icon + Content -->
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_IconAndContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<AppBarButton Content="Add"
+											  Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Add" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Content="Edit"
+											  Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Edit" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Content="Save"
+											  Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Save" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Content="Favorite"
+											  Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<FontIcon Glyph="&#xE734;" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="Disabled State"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<AppBarButton Content="Disabled"
+											  IsEnabled="False"
+											  Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Add" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton IsEnabled="False"
+											  Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Edit" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="Multiple AppBarButtons in a Row"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- Toolbar Scenario -->
+						<smtx:XamlDisplay UniqueKey="Simple_AppBarButton_Toolbar"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Add" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Edit" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Delete" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+								<AppBarButton Style="{StaticResource SimpleAppBarButtonStyle}">
+									<AppBarButton.Icon>
+										<SymbolIcon Symbol="Save" />
+									</AppBarButton.Icon>
+								</AppBarButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
