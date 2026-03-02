@@ -30,9 +30,10 @@ permissions:
 jobs:
   build:
     if: >
-      github.event_name == 'pull_request' &&
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' &&
       github.event.action != 'closed' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      github.event.pull_request.head.repo.full_name == github.repository)
 
     runs-on: ubuntu-latest
 
@@ -108,9 +109,10 @@ jobs:
   deploy:
     needs: build
     if: >
-      github.event_name == 'pull_request' &&
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' &&
       github.event.action != 'closed' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      github.event.pull_request.head.repo.full_name == github.repository)
 
     runs-on: ubuntu-latest
 
