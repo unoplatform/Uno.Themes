@@ -1,149 +1,251 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+	<!--
+		Simple Design System — TextBlock Typography Styles
+		Maps SDS typography tokens to WinUI TextBlock styles.
+
+		SDS Typography Scale:
+		  title-hero      72px Bold        (SimpleTitleHeroFontSize, SimpleTitleHeroLineHeight)
+		  title-page      48px Bold        (SimpleTitlePageFontSize, SimpleTitlePageLineHeight)
+		  subtitle        32px Normal      (SimpleSubtitleFontSize, SimpleSubtitleLineHeight)
+		  heading         24px SemiBold    (SimpleHeadingFontSize, SimpleHeadingLineHeight)
+		  subheading      20px Normal      (SimpleSubheadingFontSize, SimpleSubheadingLineHeight)
+		  body-base       16px Normal      (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  body-strong     16px SemiBold    (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  body-emphasis   16px Italic      (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  body-small      14px Normal      (SimpleBodySmallFontSize, SimpleBodySmallLineHeight)
+		  body-small-str  14px SemiBold    (SimpleBodySmallFontSize, SimpleBodySmallLineHeight)
+		  body-code       16px Mono Normal (SimpleBodyFontSize, SimpleBodyLineHeight)
+		  caption         12px Normal      (SimpleCaptionFontSize, SimpleCaptionLineHeight)
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light Theme ─── -->
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="SimpleTextBlockForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleTextBlockSecondaryForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleTextBlockTertiaryForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<StaticResource x:Key="SimpleTextBlockBrandForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleTextBlockDangerForeground" ResourceKey="SimpleTextDangerDefaultBrush" />
+			<StaticResource x:Key="SimpleTextBlockDisabledForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
+		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (Default) ─── -->
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="SimpleTextBlockForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleTextBlockSecondaryForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleTextBlockTertiaryForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<StaticResource x:Key="SimpleTextBlockBrandForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleTextBlockDangerForeground" ResourceKey="SimpleTextDangerDefaultBrush" />
+			<StaticResource x:Key="SimpleTextBlockDisabledForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Base TextBlock Style (body-base = default)                            -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleBaseTextBlockStyle"
 		   TargetType="TextBlock">
-		<Setter Property="TextTrimming" Value="CharacterEllipsis" />
-		<Setter Property="TextWrapping" Value="Wrap" />
-		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodyFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleBodyLineHeight}" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleTextBlockForeground}" />
+		<Setter Property="TextWrapping" Value="Wrap" />
+		<Setter Property="TextTrimming" Value="CharacterEllipsis" />
+		<Setter Property="IsTextScaleFactorEnabled" Value="False" />
 	</Style>
 
-	<Style x:Key="SimpleDisplayLarge"
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- SDS Typography Styles (direct mapping from SDS tokens)                -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- title-hero: 72px Bold -->
+	<Style x:Key="SimpleTitleHeroTextBlockStyle"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="72" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTitleHeroFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleTitleHeroLineHeight}" />
 		<Setter Property="FontWeight" Value="Bold" />
 	</Style>
+
+	<!-- title-page: 48px Bold -->
+	<Style x:Key="SimpleTitlePageTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTitlePageFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleTitlePageLineHeight}" />
+		<Setter Property="FontWeight" Value="Bold" />
+	</Style>
+
+	<!-- subtitle: 32px Normal -->
+	<Style x:Key="SimpleSubtitleTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontSize" Value="{ThemeResource SimpleSubtitleFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleSubtitleLineHeight}" />
+		<Setter Property="FontWeight" Value="Normal" />
+	</Style>
+
+	<!-- heading: 24px SemiBold -->
+	<Style x:Key="SimpleHeadingTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontSize" Value="{ThemeResource SimpleHeadingFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleHeadingLineHeight}" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+	</Style>
+
+	<!-- subheading: 20px Normal -->
+	<Style x:Key="SimpleSubheadingTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontSize" Value="{ThemeResource SimpleSubheadingFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleSubheadingLineHeight}" />
+		<Setter Property="FontWeight" Value="Normal" />
+	</Style>
+
+	<!-- body-base: 16px Normal (= SimpleBaseTextBlockStyle) -->
+	<Style x:Key="SimpleBodyBaseTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}" />
+
+	<!-- body-strong: 16px SemiBold -->
+	<Style x:Key="SimpleBodyStrongTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontWeight" Value="SemiBold" />
+	</Style>
+
+	<!-- body-emphasis: 16px Italic -->
+	<Style x:Key="SimpleBodyEmphasisTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontStyle" Value="Italic" />
+	</Style>
+
+	<!-- body-small: 14px Normal -->
+	<Style x:Key="SimpleBodySmallTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodySmallFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleBodySmallLineHeight}" />
+	</Style>
+
+	<!-- body-small-strong: 14px SemiBold -->
+	<Style x:Key="SimpleBodySmallStrongTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBodySmallTextBlockStyle}">
+		<Setter Property="FontWeight" Value="SemiBold" />
+	</Style>
+
+	<!-- body-code: 16px Mono -->
+	<Style x:Key="SimpleBodyCodeTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamilyMono}" />
+	</Style>
+
+	<!-- caption: 12px Normal -->
+	<Style x:Key="SimpleCaptionTextBlockStyle"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
+		<Setter Property="FontSize" Value="{ThemeResource SimpleCaptionFontSize}" />
+		<Setter Property="LineHeight" Value="{ThemeResource SimpleCaptionLineHeight}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Material-compatible Typography Aliases                                -->
+	<!-- These map the Material Design type scale names to SDS styles          -->
+	<!-- and are referenced from _Resources.xaml typography aliases.            -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Display scale (largest) -->
+	<Style x:Key="SimpleDisplayLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource SimpleTitleHeroTextBlockStyle}" />
 
 	<Style x:Key="SimpleDisplayMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="48" />
-		<Setter Property="FontWeight" Value="Bold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleTitlePageTextBlockStyle}" />
 
 	<Style x:Key="SimpleDisplaySmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="40" />
-		<Setter Property="FontWeight" Value="Bold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleSubtitleTextBlockStyle}" />
 
+	<!-- Headline scale -->
 	<Style x:Key="SimpleHeadlineLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="32" />
-		<Setter Property="FontWeight" Value="SemiBold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleHeadingTextBlockStyle}" />
 
 	<Style x:Key="SimpleHeadlineMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="24" />
-		<Setter Property="FontWeight" Value="SemiBold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleSubheadingTextBlockStyle}" />
 
 	<Style x:Key="SimpleHeadlineSmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="20" />
-		<Setter Property="FontWeight" Value="SemiBold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleBodyStrongTextBlockStyle}" />
 
+	<!-- Title scale -->
 	<Style x:Key="SimpleTitleLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="24" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleTitlePageTextBlockStyle}" />
 
 	<Style x:Key="SimpleTitleMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="20" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleHeadingTextBlockStyle}" />
 
 	<Style x:Key="SimpleTitleSmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="16" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleSubheadingTextBlockStyle}" />
 
+	<!-- Body scale -->
 	<Style x:Key="SimpleBodyLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="20" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleSubheadingTextBlockStyle}" />
 
 	<Style x:Key="SimpleBodyMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="16" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleBodyBaseTextBlockStyle}" />
 
 	<Style x:Key="SimpleBodySmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="14" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleBodySmallTextBlockStyle}" />
 
+	<!-- Label scale -->
 	<Style x:Key="SimpleLabelLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="16" />
-		<Setter Property="FontWeight" Value="SemiBold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleBodyStrongTextBlockStyle}" />
 
 	<Style x:Key="SimpleLabelMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="14" />
-		<Setter Property="FontWeight" Value="SemiBold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleBodySmallStrongTextBlockStyle}" />
 
 	<Style x:Key="SimpleLabelSmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="12" />
-		<Setter Property="FontWeight" Value="SemiBold" />
-	</Style>
+		   BasedOn="{StaticResource SimpleCaptionTextBlockStyle}" />
 
 	<Style x:Key="SimpleLabelExtraSmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="12" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleCaptionTextBlockStyle}" />
 
+	<!-- Caption scale -->
 	<Style x:Key="SimpleCaptionLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="14" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleBodySmallTextBlockStyle}" />
 
 	<Style x:Key="SimpleCaptionMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="12" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleCaptionTextBlockStyle}" />
 
 	<Style x:Key="SimpleCaptionSmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBaseTextBlockStyle}">
-		<Setter Property="FontSize" Value="12" />
-		<Setter Property="FontWeight" Value="Normal" />
-	</Style>
+		   BasedOn="{StaticResource SimpleCaptionTextBlockStyle}" />
 
-	<Style x:Key="SimpleDefaultTextBlockStyle"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource SimpleBodyMedium}" />
 </ResourceDictionary>

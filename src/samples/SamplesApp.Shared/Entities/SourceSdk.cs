@@ -10,4 +10,6 @@ public enum SourceSdk
 	UnoMaterial,
 	[Description("Uno.Cupertino")]
 	UnoCupertino,
+	[Description("Uno.Simple")]
+	UnoSimple,
 }

@@ -1,192 +1,592 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+	<!--
+		Simple Design System — Color Palette
+		Maps the SDS Figma design tokens (color primitives + semantic tokens)
+		to WinUI/Uno Color and SolidColorBrush resources.
+
+		Naming convention:
+		  Primitive:  Simple{Palette}{Scale}Color      e.g. SimpleBrand800Color
+		  Semantic:   Simple{Category}{Role}{Variant}Brush  e.g. SimpleBackgroundBrandDefaultBrush
+	-->
+
 	<ResourceDictionary.ThemeDictionaries>
-		<!-- Dark Theme (x:Key="Default" = dark fallback in WinUI) -->
-		<ResourceDictionary x:Key="Default">
-			<!-- Primary/Brand Colors (inverted for dark mode) -->
-			<!-- SDS dark: background-brand-default = brand-100 -->
-			<Color x:Key="PrimaryColor">#f5f5f5</Color>
-			<!-- SDS dark: background-brand-hover = brand-300 -->
-			<Color x:Key="PrimaryVariantDarkColor">#d9d9d9</Color>
-			<Color x:Key="PrimaryVariantLightColor">#1e1e1e</Color>
 
-			<!-- On Primary (dark text on light primary in dark mode) -->
-			<!-- SDS dark: text-brand-on-brand = brand-900 -->
-			<Color x:Key="OnPrimaryColor">#1e1e1e</Color>
-
-			<!-- Surface -->
-			<!-- SDS dark: background-default-default = gray-900 -->
-			<Color x:Key="SurfaceColor">#1e1e1e</Color>
-			<!-- SDS dark: background-default-secondary = gray-800 -->
-			<Color x:Key="SurfaceVariantColor">#2c2c2c</Color>
-
-			<!-- Background -->
-			<Color x:Key="BackgroundColor">#2c2c2c</Color>
-			<!-- SDS dark: background-default-tertiary = gray-600 -->
-			<Color x:Key="BackgroundTertiaryColor">#444444</Color>
-
-			<!-- On Surface (white text in dark mode) -->
-			<!-- SDS dark: text-default-default = white-1000 -->
-			<Color x:Key="OnSurfaceColor">#ffffff</Color>
-
-			<!-- On Background -->
-			<Color x:Key="OnBackgroundColor">#ffffff</Color>
-
-			<!-- Outline -->
-			<!-- SDS dark: border-default-default = gray-600 -->
-			<Color x:Key="OutlineColor">#444444</Color>
-			<!-- SDS dark: border-default-secondary = gray-500 -->
-			<Color x:Key="OutlineVariantColor">#757575</Color>
-
-			<!-- Error -->
-			<!-- SDS dark: background-danger-default = red-600 -->
-			<Color x:Key="ErrorColor">#c00f0c</Color>
-			<Color x:Key="OnErrorColor">#fee9e7</Color>
-
-			<!-- Disabled -->
-			<!-- SDS dark: background-disabled-default = brand-700 -->
-			<Color x:Key="DisabledColor">#383838</Color>
-			<!-- SDS dark: text-disabled-default = brand-500 -->
-			<Color x:Key="OnDisabledColor">#757575</Color>
-
-			<!-- Simple Danger Colors (dark mode) -->
-			<!-- SDS dark: border-danger-default = red-200 -->
-			<Color x:Key="SimpleDangerPrimaryColor">#fdd3d0</Color>
-			<Color x:Key="SimpleDangerPrimaryHoverColor">#f4776a</Color>
-			<!-- SDS dark: text-danger-default = red-200 -->
-			<Color x:Key="SimpleDangerSubtleTextColor">#fdd3d0</Color>
-			<!-- SDS dark: background-danger-tertiary-hover = red-1000 -->
-			<Color x:Key="SimpleDangerSubtleHoverBackgroundColor">#300603</Color>
-			<!-- SDS dark: background-danger-default = red-600 -->
-			<Color x:Key="SimpleDangerFillColor">#c00f0c</Color>
-			<!-- SDS dark: background-danger-hover = red-700 -->
-			<Color x:Key="SimpleDangerFillHoverColor">#900b09</Color>
-			<!-- SDS dark: text-danger-on-danger = red-100 -->
-			<Color x:Key="SimpleDangerOnFillColor">#fee9e7</Color>
-
-			<!-- Simple Neutral Colors (dark mode) -->
-			<!-- SDS dark: background-default-secondary-hover = gray-900 -->
-			<Color x:Key="SimpleNeutralTertiaryHoverColor">#1e1e1e</Color>
-			<Color x:Key="SimpleNeutralTertiaryDarkerColor">#383838</Color>
-			<Color x:Key="SimpleTextNeutralColor">#f5f5f5</Color>
-
-			<!-- Simple-specific Brushes (not in SharedColors.xaml) -->
-			<SolidColorBrush x:Key="BackgroundTertiaryBrush"
-							 Color="{StaticResource BackgroundTertiaryColor}" />
-			<SolidColorBrush x:Key="DisabledBrush"
-							 Color="{StaticResource DisabledColor}" />
-			<SolidColorBrush x:Key="OnDisabledBrush"
-							 Color="{StaticResource OnDisabledColor}" />
-			<SolidColorBrush x:Key="TransparentBrush"
-							 Color="Transparent" />
-
-			<!-- Simple Brushes -->
-			<SolidColorBrush x:Key="SimpleDangerPrimaryBrush"
-							 Color="{StaticResource SimpleDangerPrimaryColor}" />
-			<SolidColorBrush x:Key="SimpleDangerPrimaryHoverBrush"
-							 Color="{StaticResource SimpleDangerPrimaryHoverColor}" />
-			<SolidColorBrush x:Key="SimpleDangerSubtleTextBrush"
-							 Color="{StaticResource SimpleDangerSubtleTextColor}" />
-			<SolidColorBrush x:Key="SimpleDangerSubtleHoverBackgroundBrush"
-							 Color="{StaticResource SimpleDangerSubtleHoverBackgroundColor}" />
-			<SolidColorBrush x:Key="SimpleDangerFillBrush"
-							 Color="{StaticResource SimpleDangerFillColor}" />
-			<SolidColorBrush x:Key="SimpleDangerFillHoverBrush"
-							 Color="{StaticResource SimpleDangerFillHoverColor}" />
-			<SolidColorBrush x:Key="SimpleDangerOnFillBrush"
-							 Color="{StaticResource SimpleDangerOnFillColor}" />
-			<SolidColorBrush x:Key="SimpleNeutralTertiaryHoverBrush"
-							 Color="{StaticResource SimpleNeutralTertiaryHoverColor}" />
-			<SolidColorBrush x:Key="SimpleNeutralTertiaryDarkerBrush"
-							 Color="{StaticResource SimpleNeutralTertiaryDarkerColor}" />
-			<SolidColorBrush x:Key="SimpleTextNeutralBrush"
-							 Color="{StaticResource SimpleTextNeutralColor}" />
-		</ResourceDictionary>
-
-		<!-- Light Theme -->
+		<!-- ═══════════════════════════════════════════════════════════════════ -->
+		<!-- LIGHT THEME                                                       -->
+		<!-- ═══════════════════════════════════════════════════════════════════ -->
 		<ResourceDictionary x:Key="Light">
-			<!-- Primary/Brand Colors -->
-			<Color x:Key="PrimaryColor">#2c2c2c</Color>
-			<Color x:Key="PrimaryVariantDarkColor">#1e1e1e</Color>
-			<Color x:Key="PrimaryVariantLightColor">#f5f5f5</Color>
 
-			<!-- On Primary -->
-			<Color x:Key="OnPrimaryColor">#f5f5f5</Color>
-
-			<!-- Surface -->
-			<Color x:Key="SurfaceColor">#ffffff</Color>
-			<Color x:Key="SurfaceVariantColor">#f5f5f5</Color>
-
-			<!-- Background -->
-			<Color x:Key="BackgroundColor">#f5f5f5</Color>
-			<Color x:Key="BackgroundTertiaryColor">#e3e3e3</Color>
-
-			<!-- On Surface -->
-			<Color x:Key="OnSurfaceColor">#1e1e1e</Color>
-
-			<!-- On Background -->
-			<Color x:Key="OnBackgroundColor">#1e1e1e</Color>
-
-			<!-- Outline -->
-			<Color x:Key="OutlineColor">#d9d9d9</Color>
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SharedColorPalette Overrides (Uno.Themes base compatibility)   -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<Color x:Key="PrimaryColor">#2C2C2C</Color>
+			<Color x:Key="PrimaryVariantDarkColor">#1E1E1E</Color>
+			<Color x:Key="PrimaryVariantLightColor">#F5F5F5</Color>
+			<Color x:Key="OnPrimaryColor">#F5F5F5</Color>
+			<Color x:Key="SurfaceColor">#FFFFFF</Color>
+			<Color x:Key="SurfaceVariantColor">#F5F5F5</Color>
+			<Color x:Key="BackgroundColor">#F5F5F5</Color>
+			<Color x:Key="OnSurfaceColor">#1E1E1E</Color>
+			<Color x:Key="OnBackgroundColor">#1E1E1E</Color>
+			<Color x:Key="OutlineColor">#D9D9D9</Color>
 			<Color x:Key="OutlineVariantColor">#767676</Color>
+			<Color x:Key="ErrorColor">#EC221F</Color>
+			<Color x:Key="OnErrorColor">#FEE9E7</Color>
 
-			<!-- Error -->
-			<Color x:Key="ErrorColor">#900b09</Color>
-			<Color x:Key="OnErrorColor">#ffffff</Color>
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Primitive Color Scales                                     -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
 
-			<!-- Disabled -->
-			<Color x:Key="DisabledColor">#d9d9d9</Color>
-			<Color x:Key="OnDisabledColor">#b3b3b3</Color>
+			<!-- Black (with alpha) -->
+			<Color x:Key="SimpleBlack100Color">#0D0C0C0D</Color>
+			<Color x:Key="SimpleBlack200Color">#1A0C0C0D</Color>
+			<Color x:Key="SimpleBlack300Color">#330C0C0D</Color>
+			<Color x:Key="SimpleBlack400Color">#660C0C0D</Color>
+			<Color x:Key="SimpleBlack500Color">#B20C0C0D</Color>
+			<Color x:Key="SimpleBlack600Color">#CC0C0C0D</Color>
+			<Color x:Key="SimpleBlack700Color">#D90C0C0D</Color>
+			<Color x:Key="SimpleBlack800Color">#E50C0C0D</Color>
+			<Color x:Key="SimpleBlack900Color">#F20C0C0D</Color>
+			<Color x:Key="SimpleBlack1000Color">#FF0C0C0D</Color>
 
-			<!-- Simple Danger Colors -->
-			<Color x:Key="SimpleDangerPrimaryColor">#900b09</Color>
-			<Color x:Key="SimpleDangerPrimaryHoverColor">#7a0906</Color>
-			<Color x:Key="SimpleDangerSubtleTextColor">#900b09</Color>
-			<Color x:Key="SimpleDangerSubtleHoverBackgroundColor">#fdd3d0</Color>
-			<Color x:Key="SimpleDangerFillColor">#ec221f</Color>
-			<Color x:Key="SimpleDangerFillHoverColor">#c00f0c</Color>
-			<Color x:Key="SimpleDangerOnFillColor">#fee9e7</Color>
+			<!-- White (with alpha) -->
+			<Color x:Key="SimpleWhite100Color">#0DFFFFFF</Color>
+			<Color x:Key="SimpleWhite200Color">#1AFFFFFF</Color>
+			<Color x:Key="SimpleWhite300Color">#33FFFFFF</Color>
+			<Color x:Key="SimpleWhite400Color">#66FFFFFF</Color>
+			<Color x:Key="SimpleWhite500Color">#B2FFFFFF</Color>
+			<Color x:Key="SimpleWhite600Color">#CCFFFFFF</Color>
+			<Color x:Key="SimpleWhite700Color">#D9FFFFFF</Color>
+			<Color x:Key="SimpleWhite800Color">#E5FFFFFF</Color>
+			<Color x:Key="SimpleWhite900Color">#F2FFFFFF</Color>
+			<Color x:Key="SimpleWhite1000Color">#FFFFFFFF</Color>
 
-			<!-- Simple Neutral Colors -->
-			<!-- SDS light: background-default-secondary-hover = gray-200 -->
-			<Color x:Key="SimpleNeutralTertiaryHoverColor">#e6e6e6</Color>
-			<Color x:Key="SimpleNeutralTertiaryDarkerColor">#d5d5d5</Color>
-			<Color x:Key="SimpleTextNeutralColor">#303030</Color>
+			<!-- Brand -->
+			<Color x:Key="SimpleBrand100Color">#F5F5F5</Color>
+			<Color x:Key="SimpleBrand200Color">#E6E6E6</Color>
+			<Color x:Key="SimpleBrand300Color">#D9D9D9</Color>
+			<Color x:Key="SimpleBrand400Color">#B3B3B3</Color>
+			<Color x:Key="SimpleBrand500Color">#757575</Color>
+			<Color x:Key="SimpleBrand600Color">#444444</Color>
+			<Color x:Key="SimpleBrand700Color">#383838</Color>
+			<Color x:Key="SimpleBrand800Color">#2C2C2C</Color>
+			<Color x:Key="SimpleBrand900Color">#1E1E1E</Color>
+			<Color x:Key="SimpleBrand1000Color">#111111</Color>
 
-			<!-- Simple-specific Brushes (not in SharedColors.xaml) -->
-			<SolidColorBrush x:Key="BackgroundTertiaryBrush"
-							 Color="{StaticResource BackgroundTertiaryColor}" />
-			<SolidColorBrush x:Key="DisabledBrush"
-							 Color="{StaticResource DisabledColor}" />
-			<SolidColorBrush x:Key="OnDisabledBrush"
-							 Color="{StaticResource OnDisabledColor}" />
-			<SolidColorBrush x:Key="TransparentBrush"
-							 Color="Transparent" />
+			<!-- Gray -->
+			<Color x:Key="SimpleGray100Color">#F5F5F5</Color>
+			<Color x:Key="SimpleGray200Color">#E6E6E6</Color>
+			<Color x:Key="SimpleGray300Color">#D9D9D9</Color>
+			<Color x:Key="SimpleGray400Color">#B3B3B3</Color>
+			<Color x:Key="SimpleGray500Color">#757575</Color>
+			<Color x:Key="SimpleGray600Color">#444444</Color>
+			<Color x:Key="SimpleGray700Color">#383838</Color>
+			<Color x:Key="SimpleGray800Color">#2C2C2C</Color>
+			<Color x:Key="SimpleGray900Color">#1E1E1E</Color>
+			<Color x:Key="SimpleGray1000Color">#111111</Color>
 
-			<!-- Simple Brushes -->
-			<SolidColorBrush x:Key="SimpleDangerPrimaryBrush"
-							 Color="{StaticResource SimpleDangerPrimaryColor}" />
-			<SolidColorBrush x:Key="SimpleDangerPrimaryHoverBrush"
-							 Color="{StaticResource SimpleDangerPrimaryHoverColor}" />
-			<SolidColorBrush x:Key="SimpleDangerSubtleTextBrush"
-							 Color="{StaticResource SimpleDangerSubtleTextColor}" />
-			<SolidColorBrush x:Key="SimpleDangerSubtleHoverBackgroundBrush"
-							 Color="{StaticResource SimpleDangerSubtleHoverBackgroundColor}" />
-			<SolidColorBrush x:Key="SimpleDangerFillBrush"
-							 Color="{StaticResource SimpleDangerFillColor}" />
-			<SolidColorBrush x:Key="SimpleDangerFillHoverBrush"
-							 Color="{StaticResource SimpleDangerFillHoverColor}" />
-			<SolidColorBrush x:Key="SimpleDangerOnFillBrush"
-							 Color="{StaticResource SimpleDangerOnFillColor}" />
-			<SolidColorBrush x:Key="SimpleNeutralTertiaryHoverBrush"
-							 Color="{StaticResource SimpleNeutralTertiaryHoverColor}" />
-			<SolidColorBrush x:Key="SimpleNeutralTertiaryDarkerBrush"
-							 Color="{StaticResource SimpleNeutralTertiaryDarkerColor}" />
-			<SolidColorBrush x:Key="SimpleTextNeutralBrush"
-							 Color="{StaticResource SimpleTextNeutralColor}" />
+			<!-- Slate -->
+			<Color x:Key="SimpleSlate100Color">#F3F3F3</Color>
+			<Color x:Key="SimpleSlate200Color">#E3E3E3</Color>
+			<Color x:Key="SimpleSlate300Color">#CDCDCD</Color>
+			<Color x:Key="SimpleSlate400Color">#B2B2B2</Color>
+			<Color x:Key="SimpleSlate500Color">#949494</Color>
+			<Color x:Key="SimpleSlate600Color">#767676</Color>
+			<Color x:Key="SimpleSlate700Color">#5A5A5A</Color>
+			<Color x:Key="SimpleSlate800Color">#434343</Color>
+			<Color x:Key="SimpleSlate900Color">#303030</Color>
+			<Color x:Key="SimpleSlate1000Color">#242424</Color>
+
+			<!-- Green -->
+			<Color x:Key="SimpleGreen100Color">#EBFFEE</Color>
+			<Color x:Key="SimpleGreen200Color">#CFF7D3</Color>
+			<Color x:Key="SimpleGreen300Color">#AFF4C6</Color>
+			<Color x:Key="SimpleGreen400Color">#85E0A3</Color>
+			<Color x:Key="SimpleGreen500Color">#14AE5C</Color>
+			<Color x:Key="SimpleGreen600Color">#009951</Color>
+			<Color x:Key="SimpleGreen700Color">#008043</Color>
+			<Color x:Key="SimpleGreen800Color">#02542D</Color>
+			<Color x:Key="SimpleGreen900Color">#024023</Color>
+			<Color x:Key="SimpleGreen1000Color">#062D1B</Color>
+
+			<!-- Red -->
+			<Color x:Key="SimpleRed100Color">#FEE9E7</Color>
+			<Color x:Key="SimpleRed200Color">#FDD3D0</Color>
+			<Color x:Key="SimpleRed300Color">#FCB3AD</Color>
+			<Color x:Key="SimpleRed400Color">#F4776A</Color>
+			<Color x:Key="SimpleRed500Color">#EC221F</Color>
+			<Color x:Key="SimpleRed600Color">#C00F0C</Color>
+			<Color x:Key="SimpleRed700Color">#900B09</Color>
+			<Color x:Key="SimpleRed800Color">#690807</Color>
+			<Color x:Key="SimpleRed900Color">#4D0B0A</Color>
+			<Color x:Key="SimpleRed1000Color">#300603</Color>
+
+			<!-- Pink -->
+			<Color x:Key="SimplePink100Color">#FCF1FD</Color>
+			<Color x:Key="SimplePink200Color">#FAE1FA</Color>
+			<Color x:Key="SimplePink300Color">#F5C0EF</Color>
+			<Color x:Key="SimplePink400Color">#F19EDC</Color>
+			<Color x:Key="SimplePink500Color">#EA3FB8</Color>
+			<Color x:Key="SimplePink600Color">#D732A8</Color>
+			<Color x:Key="SimplePink700Color">#BA2A92</Color>
+			<Color x:Key="SimplePink800Color">#8A226F</Color>
+			<Color x:Key="SimplePink900Color">#57184A</Color>
+			<Color x:Key="SimplePink1000Color">#3F1536</Color>
+
+			<!-- Yellow -->
+			<Color x:Key="SimpleYellow100Color">#FFFBEB</Color>
+			<Color x:Key="SimpleYellow200Color">#FFF1C2</Color>
+			<Color x:Key="SimpleYellow300Color">#FFE8A3</Color>
+			<Color x:Key="SimpleYellow400Color">#E8B931</Color>
+			<Color x:Key="SimpleYellow500Color">#E5A000</Color>
+			<Color x:Key="SimpleYellow600Color">#BF6A02</Color>
+			<Color x:Key="SimpleYellow700Color">#975102</Color>
+			<Color x:Key="SimpleYellow800Color">#682D03</Color>
+			<Color x:Key="SimpleYellow900Color">#522504</Color>
+			<Color x:Key="SimpleYellow1000Color">#401B01</Color>
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Background                             -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleBackgroundBrandDefaultBrush" Color="{StaticResource SimpleBrand800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandHoverBrush" Color="{StaticResource SimpleBrand900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandSecondaryBrush" Color="{StaticResource SimpleBrand200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandSecondaryHoverBrush" Color="{StaticResource SimpleBrand300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandTertiaryBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandTertiaryHoverBrush" Color="{StaticResource SimpleBrand200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerDefaultBrush" Color="{StaticResource SimpleRed500Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerHoverBrush" Color="{StaticResource SimpleRed600Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerSecondaryBrush" Color="{StaticResource SimpleRed200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerSecondaryHoverBrush" Color="{StaticResource SimpleRed300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerTertiaryBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerTertiaryHoverBrush" Color="{StaticResource SimpleRed200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultDefaultBrush" Color="{StaticResource SimpleWhite1000Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultDefaultHoverBrush" Color="{StaticResource SimpleGray100Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultSecondaryBrush" Color="{StaticResource SimpleGray100Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultSecondaryHoverBrush" Color="{StaticResource SimpleGray200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultTertiaryBrush" Color="{StaticResource SimpleGray300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultTertiaryHoverBrush" Color="{StaticResource SimpleGray400Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDisabledDefaultBrush" Color="{StaticResource SimpleBrand300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralDefaultBrush" Color="{StaticResource SimpleSlate700Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralHoverBrush" Color="{StaticResource SimpleSlate800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralSecondaryBrush" Color="{StaticResource SimpleSlate300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralSecondaryHoverBrush" Color="{StaticResource SimpleSlate400Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralTertiaryBrush" Color="{StaticResource SimpleSlate200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralTertiaryHoverBrush" Color="{StaticResource SimpleSlate300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveDefaultBrush" Color="{StaticResource SimpleGreen500Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveHoverBrush" Color="{StaticResource SimpleGreen600Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveSecondaryBrush" Color="{StaticResource SimpleGreen200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveSecondaryHoverBrush" Color="{StaticResource SimpleGreen300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveTertiaryBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveTertiaryHoverBrush" Color="{StaticResource SimpleGreen200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush" Color="#B2000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush" Color="#80000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush" Color="#CCFFFFFF" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningDefaultBrush" Color="{StaticResource SimpleYellow400Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningHoverBrush" Color="{StaticResource SimpleYellow500Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningSecondaryBrush" Color="{StaticResource SimpleYellow200Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningSecondaryHoverBrush" Color="{StaticResource SimpleYellow300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningTertiaryBrush" Color="{StaticResource SimpleYellow100Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningTertiaryHoverBrush" Color="{StaticResource SimpleYellow200Color}" />
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Text                                    -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleTextBrandDefaultBrush" Color="{StaticResource SimpleBrand800Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandOnBrandBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandOnBrandSecondaryBrush" Color="{StaticResource SimpleBrand900Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandOnBrandTertiaryBrush" Color="{StaticResource SimpleBrand800Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandSecondaryBrush" Color="{StaticResource SimpleBrand600Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandTertiaryBrush" Color="{StaticResource SimpleBrand500Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerDefaultBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerOnDangerBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerOnDangerSecondaryBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerOnDangerTertiaryBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerSecondaryBrush" Color="{StaticResource SimpleRed600Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerTertiaryBrush" Color="{StaticResource SimpleRed500Color}" />
+			<SolidColorBrush x:Key="SimpleTextDefaultDefaultBrush" Color="{StaticResource SimpleGray900Color}" />
+			<SolidColorBrush x:Key="SimpleTextDefaultSecondaryBrush" Color="{StaticResource SimpleGray500Color}" />
+			<SolidColorBrush x:Key="SimpleTextDefaultTertiaryBrush" Color="{StaticResource SimpleGray400Color}" />
+			<SolidColorBrush x:Key="SimpleTextDisabledDefaultBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleTextDisabledOnDisabledBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralDefaultBrush" Color="{StaticResource SimpleSlate900Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralOnNeutralBrush" Color="{StaticResource SimpleSlate100Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralOnNeutralSecondaryBrush" Color="{StaticResource SimpleSlate900Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralOnNeutralTertiaryBrush" Color="{StaticResource SimpleSlate800Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralSecondaryBrush" Color="{StaticResource SimpleSlate700Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralTertiaryBrush" Color="{StaticResource SimpleSlate600Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveDefaultBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveOnPositiveBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveOnPositiveSecondaryBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveOnPositiveTertiaryBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveSecondaryBrush" Color="{StaticResource SimpleGreen600Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveTertiaryBrush" Color="{StaticResource SimpleGreen500Color}" />
+			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
+			<SolidColorBrush x:Key="SimpleTextUtilitiesOnOverlayBrush" Color="{StaticResource SimpleBlack1000Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningDefaultBrush" Color="{StaticResource SimpleYellow900Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningOnWarningBrush" Color="{StaticResource SimpleYellow1000Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningOnWarningSecondaryBrush" Color="{StaticResource SimpleYellow800Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningOnWarningTertiaryBrush" Color="{StaticResource SimpleYellow900Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningSecondaryBrush" Color="{StaticResource SimpleYellow700Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningTertiaryBrush" Color="{StaticResource SimpleYellow600Color}" />
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Icon                                    -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleIconBrandDefaultBrush" Color="{StaticResource SimpleBrand800Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandOnBrandBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandOnBrandSecondaryBrush" Color="{StaticResource SimpleBrand900Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandOnBrandTertiaryBrush" Color="{StaticResource SimpleBrand800Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandSecondaryBrush" Color="{StaticResource SimpleBrand600Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandTertiaryBrush" Color="{StaticResource SimpleBrand500Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerDefaultBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerOnDangerBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerOnDangerSecondaryBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerOnDangerTertiaryBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerSecondaryBrush" Color="{StaticResource SimpleRed600Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerTertiaryBrush" Color="{StaticResource SimpleRed500Color}" />
+			<SolidColorBrush x:Key="SimpleIconDefaultDefaultBrush" Color="{StaticResource SimpleGray900Color}" />
+			<SolidColorBrush x:Key="SimpleIconDefaultSecondaryBrush" Color="{StaticResource SimpleGray500Color}" />
+			<SolidColorBrush x:Key="SimpleIconDefaultTertiaryBrush" Color="{StaticResource SimpleGray400Color}" />
+			<SolidColorBrush x:Key="SimpleIconDisabledDefaultBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleIconDisabledOnDisabledBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralDefaultBrush" Color="{StaticResource SimpleSlate900Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralOnNeutralBrush" Color="{StaticResource SimpleSlate100Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralOnNeutralSecondaryBrush" Color="{StaticResource SimpleSlate900Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralOnNeutralTertiaryBrush" Color="{StaticResource SimpleSlate800Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralSecondaryBrush" Color="{StaticResource SimpleSlate700Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralTertiaryBrush" Color="{StaticResource SimpleSlate600Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveDefaultBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveOnPositiveBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveOnPositiveSecondaryBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveOnPositiveTertiaryBrush" Color="{StaticResource SimpleGreen900Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveSecondaryBrush" Color="{StaticResource SimpleGreen600Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveTertiaryBrush" Color="{StaticResource SimpleGreen500Color}" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush" Color="{StaticResource SimplePink600Color}" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningDefaultBrush" Color="{StaticResource SimpleYellow900Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningOnWarningBrush" Color="{StaticResource SimpleYellow1000Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningOnWarningSecondaryBrush" Color="{StaticResource SimpleYellow800Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningOnWarningTertiaryBrush" Color="{StaticResource SimpleYellow900Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningSecondaryBrush" Color="{StaticResource SimpleYellow700Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningTertiaryBrush" Color="{StaticResource SimpleYellow600Color}" />
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Border                                  -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleBorderBrandDefaultBrush" Color="{StaticResource SimpleBrand800Color}" />
+			<SolidColorBrush x:Key="SimpleBorderBrandSecondaryBrush" Color="{StaticResource SimpleBrand600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderBrandTertiaryBrush" Color="{StaticResource SimpleBrand500Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDangerDefaultBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDangerSecondaryBrush" Color="{StaticResource SimpleRed600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDangerTertiaryBrush" Color="{StaticResource SimpleRed500Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDefaultDefaultBrush" Color="{StaticResource SimpleGray300Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDefaultSecondaryBrush" Color="{StaticResource SimpleGray500Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDefaultTertiaryBrush" Color="{StaticResource SimpleGray700Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDisabledDefaultBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderNeutralDefaultBrush" Color="{StaticResource SimpleSlate900Color}" />
+			<SolidColorBrush x:Key="SimpleBorderNeutralSecondaryBrush" Color="{StaticResource SimpleSlate600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderNeutralTertiaryBrush" Color="{StaticResource SimpleSlate400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderPositiveDefaultBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleBorderPositiveSecondaryBrush" Color="{StaticResource SimpleGreen600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderPositiveTertiaryBrush" Color="{StaticResource SimpleGreen500Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush" Color="{StaticResource SimplePink400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush" Color="#3D000000" />
+			<SolidColorBrush x:Key="SimpleBorderWarningDefaultBrush" Color="{StaticResource SimpleYellow900Color}" />
+			<SolidColorBrush x:Key="SimpleBorderWarningSecondaryBrush" Color="{StaticResource SimpleYellow700Color}" />
+			<SolidColorBrush x:Key="SimpleBorderWarningTertiaryBrush" Color="{StaticResource SimpleYellow600Color}" />
 		</ResourceDictionary>
+
+		<!-- ═══════════════════════════════════════════════════════════════════ -->
+		<!-- DARK THEME (Default)                                              -->
+		<!-- ═══════════════════════════════════════════════════════════════════ -->
+		<ResourceDictionary x:Key="Default">
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SharedColorPalette Overrides (Uno.Themes base compatibility)   -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<Color x:Key="PrimaryColor">#F5F5F5</Color>
+			<Color x:Key="PrimaryVariantDarkColor">#D9D9D9</Color>
+			<Color x:Key="PrimaryVariantLightColor">#1E1E1E</Color>
+			<Color x:Key="OnPrimaryColor">#1E1E1E</Color>
+			<Color x:Key="SurfaceColor">#1E1E1E</Color>
+			<Color x:Key="SurfaceVariantColor">#2C2C2C</Color>
+			<Color x:Key="BackgroundColor">#1E1E1E</Color>
+			<Color x:Key="OnSurfaceColor">#FFFFFF</Color>
+			<Color x:Key="OnBackgroundColor">#FFFFFF</Color>
+			<Color x:Key="OutlineColor">#444444</Color>
+			<Color x:Key="OutlineVariantColor">#757575</Color>
+			<Color x:Key="ErrorColor">#C00F0C</Color>
+			<Color x:Key="OnErrorColor">#FEE9E7</Color>
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Primitive Color Scales                                     -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+
+			<!-- Black (with alpha) -->
+			<Color x:Key="SimpleBlack100Color">#0D0C0C0D</Color>
+			<Color x:Key="SimpleBlack200Color">#1A0C0C0D</Color>
+			<Color x:Key="SimpleBlack300Color">#330C0C0D</Color>
+			<Color x:Key="SimpleBlack400Color">#660C0C0D</Color>
+			<Color x:Key="SimpleBlack500Color">#B20C0C0D</Color>
+			<Color x:Key="SimpleBlack600Color">#CC0C0C0D</Color>
+			<Color x:Key="SimpleBlack700Color">#D90C0C0D</Color>
+			<Color x:Key="SimpleBlack800Color">#E50C0C0D</Color>
+			<Color x:Key="SimpleBlack900Color">#F20C0C0D</Color>
+			<Color x:Key="SimpleBlack1000Color">#FF0C0C0D</Color>
+
+			<!-- White (with alpha) -->
+			<Color x:Key="SimpleWhite100Color">#0DFFFFFF</Color>
+			<Color x:Key="SimpleWhite200Color">#1AFFFFFF</Color>
+			<Color x:Key="SimpleWhite300Color">#33FFFFFF</Color>
+			<Color x:Key="SimpleWhite400Color">#66FFFFFF</Color>
+			<Color x:Key="SimpleWhite500Color">#B2FFFFFF</Color>
+			<Color x:Key="SimpleWhite600Color">#CCFFFFFF</Color>
+			<Color x:Key="SimpleWhite700Color">#D9FFFFFF</Color>
+			<Color x:Key="SimpleWhite800Color">#E5FFFFFF</Color>
+			<Color x:Key="SimpleWhite900Color">#F2FFFFFF</Color>
+			<Color x:Key="SimpleWhite1000Color">#FFFFFFFF</Color>
+
+			<!-- Brand -->
+			<Color x:Key="SimpleBrand100Color">#F5F5F5</Color>
+			<Color x:Key="SimpleBrand200Color">#E6E6E6</Color>
+			<Color x:Key="SimpleBrand300Color">#D9D9D9</Color>
+			<Color x:Key="SimpleBrand400Color">#B3B3B3</Color>
+			<Color x:Key="SimpleBrand500Color">#757575</Color>
+			<Color x:Key="SimpleBrand600Color">#444444</Color>
+			<Color x:Key="SimpleBrand700Color">#383838</Color>
+			<Color x:Key="SimpleBrand800Color">#2C2C2C</Color>
+			<Color x:Key="SimpleBrand900Color">#1E1E1E</Color>
+			<Color x:Key="SimpleBrand1000Color">#111111</Color>
+
+			<!-- Gray -->
+			<Color x:Key="SimpleGray100Color">#F5F5F5</Color>
+			<Color x:Key="SimpleGray200Color">#E6E6E6</Color>
+			<Color x:Key="SimpleGray300Color">#D9D9D9</Color>
+			<Color x:Key="SimpleGray400Color">#B3B3B3</Color>
+			<Color x:Key="SimpleGray500Color">#757575</Color>
+			<Color x:Key="SimpleGray600Color">#444444</Color>
+			<Color x:Key="SimpleGray700Color">#383838</Color>
+			<Color x:Key="SimpleGray800Color">#2C2C2C</Color>
+			<Color x:Key="SimpleGray900Color">#1E1E1E</Color>
+			<Color x:Key="SimpleGray1000Color">#111111</Color>
+
+			<!-- Slate -->
+			<Color x:Key="SimpleSlate100Color">#F3F3F3</Color>
+			<Color x:Key="SimpleSlate200Color">#E3E3E3</Color>
+			<Color x:Key="SimpleSlate300Color">#CDCDCD</Color>
+			<Color x:Key="SimpleSlate400Color">#B2B2B2</Color>
+			<Color x:Key="SimpleSlate500Color">#949494</Color>
+			<Color x:Key="SimpleSlate600Color">#767676</Color>
+			<Color x:Key="SimpleSlate700Color">#5A5A5A</Color>
+			<Color x:Key="SimpleSlate800Color">#434343</Color>
+			<Color x:Key="SimpleSlate900Color">#303030</Color>
+			<Color x:Key="SimpleSlate1000Color">#242424</Color>
+
+			<!-- Green -->
+			<Color x:Key="SimpleGreen100Color">#EBFFEE</Color>
+			<Color x:Key="SimpleGreen200Color">#CFF7D3</Color>
+			<Color x:Key="SimpleGreen300Color">#AFF4C6</Color>
+			<Color x:Key="SimpleGreen400Color">#85E0A3</Color>
+			<Color x:Key="SimpleGreen500Color">#14AE5C</Color>
+			<Color x:Key="SimpleGreen600Color">#009951</Color>
+			<Color x:Key="SimpleGreen700Color">#008043</Color>
+			<Color x:Key="SimpleGreen800Color">#02542D</Color>
+			<Color x:Key="SimpleGreen900Color">#024023</Color>
+			<Color x:Key="SimpleGreen1000Color">#062D1B</Color>
+
+			<!-- Red -->
+			<Color x:Key="SimpleRed100Color">#FEE9E7</Color>
+			<Color x:Key="SimpleRed200Color">#FDD3D0</Color>
+			<Color x:Key="SimpleRed300Color">#FCB3AD</Color>
+			<Color x:Key="SimpleRed400Color">#F4776A</Color>
+			<Color x:Key="SimpleRed500Color">#EC221F</Color>
+			<Color x:Key="SimpleRed600Color">#C00F0C</Color>
+			<Color x:Key="SimpleRed700Color">#900B09</Color>
+			<Color x:Key="SimpleRed800Color">#690807</Color>
+			<Color x:Key="SimpleRed900Color">#4D0B0A</Color>
+			<Color x:Key="SimpleRed1000Color">#300603</Color>
+
+			<!-- Pink -->
+			<Color x:Key="SimplePink100Color">#FCF1FD</Color>
+			<Color x:Key="SimplePink200Color">#FAE1FA</Color>
+			<Color x:Key="SimplePink300Color">#F5C0EF</Color>
+			<Color x:Key="SimplePink400Color">#F19EDC</Color>
+			<Color x:Key="SimplePink500Color">#EA3FB8</Color>
+			<Color x:Key="SimplePink600Color">#D732A8</Color>
+			<Color x:Key="SimplePink700Color">#BA2A92</Color>
+			<Color x:Key="SimplePink800Color">#8A226F</Color>
+			<Color x:Key="SimplePink900Color">#57184A</Color>
+			<Color x:Key="SimplePink1000Color">#3F1536</Color>
+
+			<!-- Yellow -->
+			<Color x:Key="SimpleYellow100Color">#FFFBEB</Color>
+			<Color x:Key="SimpleYellow200Color">#FFF1C2</Color>
+			<Color x:Key="SimpleYellow300Color">#FFE8A3</Color>
+			<Color x:Key="SimpleYellow400Color">#E8B931</Color>
+			<Color x:Key="SimpleYellow500Color">#E5A000</Color>
+			<Color x:Key="SimpleYellow600Color">#BF6A02</Color>
+			<Color x:Key="SimpleYellow700Color">#975102</Color>
+			<Color x:Key="SimpleYellow800Color">#682D03</Color>
+			<Color x:Key="SimpleYellow900Color">#522504</Color>
+			<Color x:Key="SimpleYellow1000Color">#401B01</Color>
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Background (Dark)                       -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleBackgroundBrandDefaultBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandHoverBrush" Color="{StaticResource SimpleBrand300Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandSecondaryBrush" Color="{StaticResource SimpleBrand600Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandSecondaryHoverBrush" Color="{StaticResource SimpleBrand500Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandTertiaryBrush" Color="{StaticResource SimpleBrand600Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundBrandTertiaryHoverBrush" Color="{StaticResource SimpleBrand800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerDefaultBrush" Color="{StaticResource SimpleRed600Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerHoverBrush" Color="{StaticResource SimpleRed700Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerSecondaryBrush" Color="{StaticResource SimpleRed800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerSecondaryHoverBrush" Color="{StaticResource SimpleRed900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerTertiaryBrush" Color="{StaticResource SimpleRed900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDangerTertiaryHoverBrush" Color="{StaticResource SimpleRed1000Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultDefaultBrush" Color="{StaticResource SimpleGray900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultDefaultHoverBrush" Color="{StaticResource SimpleGray700Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultSecondaryBrush" Color="{StaticResource SimpleGray800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultSecondaryHoverBrush" Color="{StaticResource SimpleGray900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultTertiaryBrush" Color="{StaticResource SimpleGray600Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDefaultTertiaryHoverBrush" Color="{StaticResource SimpleGray700Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundDisabledDefaultBrush" Color="{StaticResource SimpleBrand700Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralDefaultBrush" Color="{StaticResource SimpleSlate400Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralHoverBrush" Color="{StaticResource SimpleSlate500Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralSecondaryBrush" Color="{StaticResource SimpleSlate900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralSecondaryHoverBrush" Color="{StaticResource SimpleSlate1000Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralTertiaryBrush" Color="{StaticResource SimpleSlate900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundNeutralTertiaryHoverBrush" Color="{StaticResource SimpleSlate1000Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveDefaultBrush" Color="{StaticResource SimpleGreen700Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveHoverBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveSecondaryBrush" Color="{StaticResource SimpleGreen800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveSecondaryHoverBrush" Color="{StaticResource SimpleGreen900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveTertiaryBrush" Color="{StaticResource SimpleGreen900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundPositiveTertiaryHoverBrush" Color="{StaticResource SimpleGreen1000Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush" Color="#B2000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush" Color="#80000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush" Color="#CC000000" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningDefaultBrush" Color="{StaticResource SimpleYellow400Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningHoverBrush" Color="{StaticResource SimpleYellow500Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningSecondaryBrush" Color="{StaticResource SimpleYellow800Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningSecondaryHoverBrush" Color="{StaticResource SimpleYellow900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningTertiaryBrush" Color="{StaticResource SimpleYellow900Color}" />
+			<SolidColorBrush x:Key="SimpleBackgroundWarningTertiaryHoverBrush" Color="{StaticResource SimpleYellow1000Color}" />
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Text (Dark)                             -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleTextBrandDefaultBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandOnBrandBrush" Color="{StaticResource SimpleBrand900Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandOnBrandSecondaryBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandOnBrandTertiaryBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandSecondaryBrush" Color="{StaticResource SimpleBrand300Color}" />
+			<SolidColorBrush x:Key="SimpleTextBrandTertiaryBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerDefaultBrush" Color="{StaticResource SimpleRed200Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerOnDangerBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerOnDangerSecondaryBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerOnDangerTertiaryBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerSecondaryBrush" Color="{StaticResource SimpleRed400Color}" />
+			<SolidColorBrush x:Key="SimpleTextDangerTertiaryBrush" Color="{StaticResource SimpleRed500Color}" />
+			<SolidColorBrush x:Key="SimpleTextDefaultDefaultBrush" Color="{StaticResource SimpleWhite1000Color}" />
+			<SolidColorBrush x:Key="SimpleTextDefaultSecondaryBrush" Color="{StaticResource SimpleWhite500Color}" />
+			<SolidColorBrush x:Key="SimpleTextDefaultTertiaryBrush" Color="{StaticResource SimpleWhite400Color}" />
+			<SolidColorBrush x:Key="SimpleTextDisabledDefaultBrush" Color="{StaticResource SimpleBrand500Color}" />
+			<SolidColorBrush x:Key="SimpleTextDisabledOnDisabledBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralDefaultBrush" Color="{StaticResource SimpleSlate200Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralOnNeutralBrush" Color="{StaticResource SimpleSlate1000Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralOnNeutralSecondaryBrush" Color="{StaticResource SimpleSlate100Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralOnNeutralTertiaryBrush" Color="{StaticResource SimpleSlate100Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralSecondaryBrush" Color="{StaticResource SimpleSlate300Color}" />
+			<SolidColorBrush x:Key="SimpleTextNeutralTertiaryBrush" Color="{StaticResource SimpleSlate400Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveDefaultBrush" Color="{StaticResource SimpleGreen200Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveOnPositiveBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveOnPositiveSecondaryBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveOnPositiveTertiaryBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveSecondaryBrush" Color="{StaticResource SimpleGreen400Color}" />
+			<SolidColorBrush x:Key="SimpleTextPositiveTertiaryBrush" Color="{StaticResource SimpleGreen600Color}" />
+			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
+			<SolidColorBrush x:Key="SimpleTextUtilitiesOnOverlayBrush" Color="{StaticResource SimpleWhite1000Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningDefaultBrush" Color="{StaticResource SimpleYellow200Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningOnWarningBrush" Color="{StaticResource SimpleYellow1000Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningOnWarningSecondaryBrush" Color="{StaticResource SimpleYellow100Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningOnWarningTertiaryBrush" Color="{StaticResource SimpleYellow100Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningSecondaryBrush" Color="{StaticResource SimpleYellow400Color}" />
+			<SolidColorBrush x:Key="SimpleTextWarningTertiaryBrush" Color="{StaticResource SimpleYellow600Color}" />
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Icon (Dark)                             -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleIconBrandDefaultBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandOnBrandBrush" Color="{StaticResource SimpleBrand900Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandOnBrandSecondaryBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandOnBrandTertiaryBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandSecondaryBrush" Color="{StaticResource SimpleBrand300Color}" />
+			<SolidColorBrush x:Key="SimpleIconBrandTertiaryBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerDefaultBrush" Color="{StaticResource SimpleRed200Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerOnDangerBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerOnDangerSecondaryBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerOnDangerTertiaryBrush" Color="{StaticResource SimpleRed100Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerSecondaryBrush" Color="{StaticResource SimpleRed400Color}" />
+			<SolidColorBrush x:Key="SimpleIconDangerTertiaryBrush" Color="{StaticResource SimpleRed500Color}" />
+			<SolidColorBrush x:Key="SimpleIconDefaultDefaultBrush" Color="{StaticResource SimpleWhite1000Color}" />
+			<SolidColorBrush x:Key="SimpleIconDefaultSecondaryBrush" Color="{StaticResource SimpleWhite500Color}" />
+			<SolidColorBrush x:Key="SimpleIconDefaultTertiaryBrush" Color="{StaticResource SimpleWhite400Color}" />
+			<SolidColorBrush x:Key="SimpleIconDisabledDefaultBrush" Color="{StaticResource SimpleBrand500Color}" />
+			<SolidColorBrush x:Key="SimpleIconDisabledOnDisabledBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralDefaultBrush" Color="{StaticResource SimpleSlate200Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralOnNeutralBrush" Color="{StaticResource SimpleSlate1000Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralOnNeutralSecondaryBrush" Color="{StaticResource SimpleSlate100Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralOnNeutralTertiaryBrush" Color="{StaticResource SimpleSlate100Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralSecondaryBrush" Color="{StaticResource SimpleSlate300Color}" />
+			<SolidColorBrush x:Key="SimpleIconNeutralTertiaryBrush" Color="{StaticResource SimpleSlate400Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveDefaultBrush" Color="{StaticResource SimpleGreen200Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveOnPositiveBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveOnPositiveSecondaryBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveOnPositiveTertiaryBrush" Color="{StaticResource SimpleGreen100Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveSecondaryBrush" Color="{StaticResource SimpleGreen400Color}" />
+			<SolidColorBrush x:Key="SimpleIconPositiveTertiaryBrush" Color="{StaticResource SimpleGreen600Color}" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush" Color="{StaticResource SimplePink400Color}" />
+			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningDefaultBrush" Color="{StaticResource SimpleYellow200Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningOnWarningBrush" Color="{StaticResource SimpleYellow1000Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningOnWarningSecondaryBrush" Color="{StaticResource SimpleYellow100Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningOnWarningTertiaryBrush" Color="{StaticResource SimpleYellow100Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningSecondaryBrush" Color="{StaticResource SimpleYellow400Color}" />
+			<SolidColorBrush x:Key="SimpleIconWarningTertiaryBrush" Color="{StaticResource SimpleYellow600Color}" />
+
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<!-- SDS Semantic Brushes — Border (Dark)                           -->
+			<!-- ─────────────────────────────────────────────────────────────── -->
+			<SolidColorBrush x:Key="SimpleBorderBrandDefaultBrush" Color="{StaticResource SimpleBrand100Color}" />
+			<SolidColorBrush x:Key="SimpleBorderBrandSecondaryBrush" Color="{StaticResource SimpleBrand300Color}" />
+			<SolidColorBrush x:Key="SimpleBorderBrandTertiaryBrush" Color="{StaticResource SimpleBrand400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDangerDefaultBrush" Color="{StaticResource SimpleRed200Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDangerSecondaryBrush" Color="{StaticResource SimpleRed400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDangerTertiaryBrush" Color="{StaticResource SimpleRed500Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDefaultDefaultBrush" Color="{StaticResource SimpleGray600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDefaultSecondaryBrush" Color="{StaticResource SimpleGray500Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDefaultTertiaryBrush" Color="{StaticResource SimpleGray400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderDisabledDefaultBrush" Color="{StaticResource SimpleBrand600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderNeutralDefaultBrush" Color="{StaticResource SimpleSlate100Color}" />
+			<SolidColorBrush x:Key="SimpleBorderNeutralSecondaryBrush" Color="{StaticResource SimpleSlate500Color}" />
+			<SolidColorBrush x:Key="SimpleBorderNeutralTertiaryBrush" Color="{StaticResource SimpleSlate600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderPositiveDefaultBrush" Color="{StaticResource SimpleGreen200Color}" />
+			<SolidColorBrush x:Key="SimpleBorderPositiveSecondaryBrush" Color="{StaticResource SimpleGreen400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderPositiveTertiaryBrush" Color="{StaticResource SimpleGreen600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush" Color="{StaticResource SimplePink600Color}" />
+			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush" Color="#3DFFFFFF" />
+			<SolidColorBrush x:Key="SimpleBorderWarningDefaultBrush" Color="{StaticResource SimpleYellow200Color}" />
+			<SolidColorBrush x:Key="SimpleBorderWarningSecondaryBrush" Color="{StaticResource SimpleYellow400Color}" />
+			<SolidColorBrush x:Key="SimpleBorderWarningTertiaryBrush" Color="{StaticResource SimpleYellow600Color}" />
+		</ResourceDictionary>
+
 	</ResourceDictionary.ThemeDictionaries>
 
 </ResourceDictionary>

@@ -78,6 +78,21 @@ public partial class SamplePageLayout
 	}
 
 	#endregion
+	#region Property: SimpleTemplate
+
+	public static DependencyProperty SimpleTemplateProperty { get; } = DependencyProperty.Register(
+		nameof(SimpleTemplate),
+		typeof(DataTemplate),
+		typeof(SamplePageLayout),
+		new PropertyMetadata(default));
+
+	public DataTemplate SimpleTemplate
+	{
+		get => (DataTemplate)GetValue(SimpleTemplateProperty);
+		set => SetValue(SimpleTemplateProperty, value);
+	}
+
+	#endregion
 	#region Property: MaterialTemplate
 
 	public static DependencyProperty MaterialTemplateProperty { get; } = DependencyProperty.Register(

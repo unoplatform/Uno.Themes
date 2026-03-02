@@ -1,64 +1,866 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					mc:Ignorable="not_win">
 
+	<!--
+		Simple Design System — CalendarView Style
+		Maps SDS Calendar component tokens to WinUI CalendarView.
+
+		SDS Calendar CSS mapping:
+		  Container: background-default-default bg, border-default-default border, radius-400 (16px)
+		  Grid:      border-collapse, width 100%, padding-top space-400
+		  Day cell:  40×40, radius-200 (4px), text-default-default, flex-centered
+		  Hovered:   background-default-default bg + border-default-default border
+		  Selected:  background-brand-default bg, text-brand-on-brand text
+		  Range:     background-default-secondary bg, text-brand-default text
+		  Disabled/Outside: text-disabled-default
+		  Header:    text-default-default, body-medium font
+		  Weekday:   text-default-secondary, body-small font, space-200 padding (8px)
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light Theme ─── -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- Container -->
+			<StaticResource x:Key="SimpleCalendarViewBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+
+			<!-- Header / Navigation -->
+			<StaticResource x:Key="SimpleCalendarViewHeaderForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonForegroundPressed" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Weekday names -->
+			<StaticResource x:Key="SimpleCalendarViewWeekDayForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleCalendarViewWeekDayForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+
+			<!-- Day item -->
+			<StaticResource x:Key="SimpleCalendarViewCalendarItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewCalendarItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="SimpleCalendarViewCalendarItemBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Hover / Pressed -->
+			<StaticResource x:Key="SimpleCalendarViewHoverBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewPressedBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewPressedForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+
+			<!-- Focus -->
+			<StaticResource x:Key="SimpleCalendarViewFocusBorderBrush" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+
+			<!-- Selected -->
+			<StaticResource x:Key="SimpleCalendarViewSelectedBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedBorderBrush" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedHoverBorderBrush" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedPressedBorderBrush" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+
+			<!-- Today -->
+			<StaticResource x:Key="SimpleCalendarViewTodayForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewTodaySelectedBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+
+			<!-- Blackout / Out of scope -->
+			<StaticResource x:Key="SimpleCalendarViewBlackoutForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewOutOfScopeForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewOutOfScopeBackground" ResourceKey="SystemControlTransparentBrush" />
+
+		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (XAML "Default") ─── -->
+		<ResourceDictionary x:Key="Default">
+
+			<!-- Container -->
+			<StaticResource x:Key="SimpleCalendarViewBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+
+			<!-- Header / Navigation -->
+			<StaticResource x:Key="SimpleCalendarViewHeaderForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonForegroundPressed" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleCalendarViewNavigationButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Weekday names -->
+			<StaticResource x:Key="SimpleCalendarViewWeekDayForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleCalendarViewWeekDayForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+
+			<!-- Day item -->
+			<StaticResource x:Key="SimpleCalendarViewCalendarItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewCalendarItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="SimpleCalendarViewCalendarItemBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Hover / Pressed -->
+			<StaticResource x:Key="SimpleCalendarViewHoverBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewPressedBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewPressedForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+
+			<!-- Focus -->
+			<StaticResource x:Key="SimpleCalendarViewFocusBorderBrush" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+
+			<!-- Selected -->
+			<StaticResource x:Key="SimpleCalendarViewSelectedBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedBorderBrush" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedHoverBorderBrush" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="SimpleCalendarViewSelectedPressedBorderBrush" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+
+			<!-- Today -->
+			<StaticResource x:Key="SimpleCalendarViewTodayForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewTodaySelectedBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+
+			<!-- Blackout / Out of scope -->
+			<StaticResource x:Key="SimpleCalendarViewBlackoutForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewOutOfScopeForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleCalendarViewOutOfScopeBackground" ResourceKey="SystemControlTransparentBrush" />
+
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Arrow glyph path data for header navigation                           -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<x:String x:Key="SimpleDownArrowPathData">M0,0L32,0 16,19.745z</x:String>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- CalendarView Style                                                     -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleCalendarViewStyle"
 		   TargetType="CalendarView">
 
-		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource OutlineBrush}" />
-		<not_win:Setter Property="BorderThickness"
-						Value="0" />
-		<Setter Property="HorizontalAlignment" Value="Left" />
-		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-		<Setter Property="VerticalContentAlignment" Value="Stretch" />
-		<Setter Property="IsTabStop" Value="False" />
-		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<!-- Borders / Focus -->
+		<Setter Property="FocusBorderBrush"
+				Value="{ThemeResource SimpleCalendarViewFocusBorderBrush}" />
+		<Setter Property="SelectedHoverBorderBrush"
+				Value="{ThemeResource SimpleCalendarViewSelectedHoverBorderBrush}" />
+		<Setter Property="SelectedPressedBorderBrush"
+				Value="{ThemeResource SimpleCalendarViewSelectedPressedBorderBrush}" />
+		<Setter Property="SelectedBorderBrush"
+				Value="{ThemeResource SimpleCalendarViewSelectedBorderBrush}" />
+		<Setter Property="HoverBorderBrush"
+				Value="{ThemeResource SimpleCalendarViewHoverBorderBrush}" />
+		<Setter Property="PressedBorderBrush"
+				Value="{ThemeResource SimpleCalendarViewPressedBorderBrush}" />
+		<Setter Property="CalendarItemBorderBrush"
+				Value="{ThemeResource SimpleCalendarViewCalendarItemBorderBrush}" />
 
-		<Setter Property="SelectedBorderBrush" Value="{ThemeResource PrimaryBrush}" />
-		<Setter Property="SelectedForeground" Value="{ThemeResource OnPrimaryBrush}" />
-		<Setter Property="SelectedHoverBorderBrush" Value="{ThemeResource PrimaryBrush}" />
-		<Setter Property="SelectedPressedBorderBrush" Value="{ThemeResource PrimaryBrush}" />
+		<!-- Foreground / color states -->
+		<Setter Property="TodayForeground"
+				Value="{ThemeResource SimpleCalendarViewTodayForeground}" />
+		<Setter Property="BlackoutForeground"
+				Value="{ThemeResource SimpleCalendarViewBlackoutForeground}" />
+		<Setter Property="SelectedForeground"
+				Value="{ThemeResource SimpleCalendarViewSelectedForeground}" />
+		<Setter Property="PressedForeground"
+				Value="{ThemeResource SimpleCalendarViewPressedForeground}" />
+		<Setter Property="OutOfScopeForeground"
+				Value="{ThemeResource SimpleCalendarViewOutOfScopeForeground}" />
+		<Setter Property="CalendarItemForeground"
+				Value="{ThemeResource SimpleCalendarViewCalendarItemForeground}" />
 
-		<Setter Property="TodayForeground" Value="{ThemeResource PrimaryBrush}" />
+		<!-- Backgrounds -->
+		<Setter Property="OutOfScopeBackground"
+				Value="{ThemeResource SimpleCalendarViewOutOfScopeBackground}" />
+		<Setter Property="CalendarItemBackground"
+				Value="{ThemeResource SimpleCalendarViewCalendarItemBackground}" />
+		<Setter Property="Foreground"
+				Value="{ThemeResource SimpleCalendarViewHeaderForeground}" />
+		<Setter Property="Background"
+				Value="{ThemeResource SimpleCalendarViewBackground}" />
+		<Setter Property="BorderBrush"
+				Value="{ThemeResource SimpleCalendarViewBorderBrush}" />
 
-		<Setter Property="HoverBorderBrush" Value="{ThemeResource PrimaryHoverBrush}" />
-		<Setter Property="PressedBorderBrush" Value="{ThemeResource PrimaryBrush}" />
-		<Setter Property="FocusBorderBrush" Value="{ThemeResource PrimaryBrush}" />
+		<!-- Typography — SDS body-medium (16px Inter Regular) for day items -->
+		<Setter Property="DayItemFontFamily"
+				Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="DayItemFontSize"
+				Value="{ThemeResource SimpleTypographyScale03}" />
+		<Setter Property="FirstOfMonthLabelFontFamily"
+				Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="FirstOfMonthLabelFontSize"
+				Value="0" />
+		<Setter Property="MonthYearItemFontFamily"
+				Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="FontFamily"
+				Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="MonthYearItemFontSize"
+				Value="{ThemeResource SimpleTypographyScale02}" />
+		<Setter Property="FirstOfYearDecadeLabelFontFamily"
+				Value="{ThemeResource SimpleFontFamily}" />
 
-		<Setter Property="CalendarItemForeground" Value="{ThemeResource OnSurfaceBrush}" />
-		<Setter Property="CalendarItemBackground" Value="Transparent" />
-		<Setter Property="CalendarItemBorderBrush" Value="Transparent" />
-		<Setter Property="OutOfScopeForeground" Value="{ThemeResource OnSurfaceLowBrush}" />
-		<Setter Property="OutOfScopeBackground" Value="Transparent" />
-		<Setter Property="BlackoutForeground" Value="{ThemeResource OnSurfaceLowBrush}" />
-
-		<!-- Typography -->
-		<Setter Property="DayItemFontSize" Value="14" />
-		<Setter Property="MonthYearItemFontSize" Value="14" />
-		<Setter Property="FirstOfMonthLabelFontSize" Value="0" />
-
-		<not_win:Setter Property="CornerRadius"
-						Value="8" />
-		<not_win:Setter Property="DayItemCornerRadius"
-						Value="20" />
-		<not_win:Setter Property="CalendarItemCornerRadius"
-						Value="40" />
+		<!-- Border thickness -->
 		<not_win:Setter Property="CalendarItemBorderThickness"
 						Value="0" />
+		<not_win:Setter Property="BorderThickness"
+						Value="1" />
+		<win:Setter Property="CalendarItemBorderThickness"
+					Value="2" />
+		<win:Setter Property="BorderThickness"
+					Value="1" />
+
+		<!-- Layout -->
+		<Setter Property="HorizontalAlignment"
+				Value="Left" />
+		<Setter Property="VerticalAlignment"
+				Value="Center" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="IsTabStop"
+				Value="False" />
+		<Setter Property="UseSystemFocusVisuals"
+				Value="{StaticResource UseSystemFocusVisuals}" />
+
+		<!-- SDS dimensions: container radius-400=16, day cell radius-200=4 -->
+		<not_win:Setter Property="CornerRadius"
+						Value="16" />
+		<not_win:Setter Property="DayItemCornerRadius"
+						Value="4" />
+		<not_win:Setter Property="CalendarItemCornerRadius"
+						Value="4" />
 		<not_win:Setter Property="SelectedBackground"
-						Value="{ThemeResource PrimaryBrush}" />
+						Value="{ThemeResource SimpleCalendarViewSelectedBackground}" />
 		<not_win:Setter Property="TodaySelectedBackground"
-						Value="{ThemeResource PrimaryBrush}" />
+						Value="{ThemeResource SimpleCalendarViewTodaySelectedBackground}" />
 		<not_win:Setter Property="TodayBackground"
 						Value="Transparent" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="CalendarView">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="{TemplateBinding CornerRadius}">
+						<Border.Resources>
+
+							<!-- Weekday header text style — SDS body-small (14px), secondary color -->
+							<Style x:Key="SimpleWeekDayNameStyle"
+								   TargetType="TextBlock">
+								<Setter Property="FontFamily"
+										Value="{ThemeResource SimpleFontFamily}" />
+								<Setter Property="FontSize"
+										Value="{ThemeResource SimpleTypographyScale02}" />
+								<Setter Property="FontWeight"
+										Value="{ThemeResource SimpleRegularFontWeight}" />
+								<Setter Property="Foreground"
+										Value="{ThemeResource SimpleCalendarViewWeekDayForeground}" />
+								<Setter Property="HorizontalAlignment"
+										Value="Center" />
+								<Setter Property="VerticalAlignment"
+										Value="Center" />
+							</Style>
+
+							<!-- Navigation button style (prev/next arrows) -->
+							<Style x:Key="SimpleNavigationButtonStyle"
+								   TargetType="Button">
+								<Setter Property="HorizontalAlignment"
+										Value="Stretch" />
+								<Setter Property="VerticalAlignment"
+										Value="Stretch" />
+								<Setter Property="UseSystemFocusVisuals"
+										Value="{StaticResource UseSystemFocusVisuals}" />
+								<Setter Property="FontSize"
+										Value="14" />
+								<Setter Property="Background"
+										Value="{ThemeResource SimpleCalendarViewNavigationButtonBackground}" />
+								<Setter Property="BackgroundSizing"
+										Value="OuterBorderEdge" />
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="Button">
+											<ContentPresenter x:Name="Text"
+															  Margin="{TemplateBinding Padding}"
+															  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+															  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+															  AutomationProperties.AccessibilityView="Raw"
+															  Background="{TemplateBinding Background}"
+															  BackgroundSizing="{TemplateBinding BackgroundSizing}"
+															  BorderBrush="Transparent"
+															  BorderThickness="{TemplateBinding BorderThickness}"
+															  Content="{TemplateBinding Content}">
+												<VisualStateManager.VisualStateGroups>
+													<VisualStateGroup x:Name="CommonStates">
+														<VisualState x:Name="Normal" />
+														<VisualState x:Name="PointerOver">
+															<VisualState.Setters>
+																<Setter Target="Text.Foreground"
+																		Value="{ThemeResource SimpleCalendarViewNavigationButtonForegroundPointerOver}" />
+															</VisualState.Setters>
+														</VisualState>
+														<VisualState x:Name="Pressed">
+															<VisualState.Setters>
+																<Setter Target="Text.Foreground"
+																		Value="{ThemeResource SimpleCalendarViewNavigationButtonForegroundPressed}" />
+															</VisualState.Setters>
+														</VisualState>
+														<VisualState x:Name="Disabled" />
+													</VisualStateGroup>
+												</VisualStateManager.VisualStateGroups>
+											</ContentPresenter>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+
+							<!-- Header button style (month/year display with dropdown arrow) -->
+							<Style x:Key="SimpleHeaderButtonStyle"
+								   TargetType="Button"
+								   BasedOn="{StaticResource SimpleNavigationButtonStyle}">
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="Button">
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto" />
+													<ColumnDefinition Width="4" />
+													<ColumnDefinition Width="Auto" />
+												</Grid.ColumnDefinitions>
+
+												<ContentPresenter x:Name="Text"
+																  Background="{TemplateBinding Background}"
+																  BackgroundSizing="{TemplateBinding BackgroundSizing}"
+																  BorderBrush="Transparent"
+																  BorderThickness="{TemplateBinding BorderThickness}"
+																  Content="{TemplateBinding Content}"
+																  Margin="{TemplateBinding Padding}"
+																  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+																  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+																  AutomationProperties.AccessibilityView="Raw" />
+												<Path x:Name="DownArrowGlyph"
+													  Data="{StaticResource SimpleDownArrowPathData}"
+													  Fill="{TemplateBinding Foreground}"
+													  Stretch="Uniform"
+													  Height="5"
+													  Width="10"
+													  HorizontalAlignment="Center"
+													  VerticalAlignment="Center"
+													  Grid.Column="2" />
+												<VisualStateManager.VisualStateGroups>
+													<VisualStateGroup x:Name="CommonStates">
+														<VisualState x:Name="Normal" />
+														<VisualState x:Name="PointerOver">
+															<VisualState.Setters>
+																<Setter Target="Text.Foreground"
+																		Value="{ThemeResource SimpleCalendarViewNavigationButtonForegroundPointerOver}" />
+																<Setter Target="DownArrowGlyph.Fill"
+																		Value="{ThemeResource SimpleCalendarViewNavigationButtonForegroundPointerOver}" />
+															</VisualState.Setters>
+														</VisualState>
+														<VisualState x:Name="Pressed">
+															<VisualState.Setters>
+																<Setter Target="Text.Foreground"
+																		Value="{ThemeResource SimpleCalendarViewNavigationButtonForegroundPressed}" />
+																<Setter Target="DownArrowGlyph.Fill"
+																		Value="{ThemeResource SimpleCalendarViewNavigationButtonForegroundPressed}" />
+															</VisualState.Setters>
+														</VisualState>
+														<VisualState x:Name="Disabled">
+															<VisualState.Setters>
+																<Setter Target="DownArrowGlyph.Opacity"
+																		Value="0" />
+															</VisualState.Setters>
+														</VisualState>
+													</VisualStateGroup>
+												</VisualStateManager.VisualStateGroups>
+											</Grid>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+
+							<!-- ScrollViewer style for month/year/decade panels -->
+							<Style x:Key="SimpleScrollViewerStyle"
+								   TargetType="ScrollViewer">
+								<Setter Property="HorizontalScrollMode"
+										Value="Disabled" />
+								<Setter Property="VerticalScrollMode"
+										Value="Enabled" />
+								<Setter Property="VerticalSnapPointsType"
+										Value="Optional" />
+								<Setter Property="ZoomMode"
+										Value="Disabled" />
+								<Setter Property="TabNavigation"
+										Value="Once" />
+								<Setter Property="BringIntoViewOnFocusChange"
+										Value="False" />
+								<Setter Property="Template"
+										Value="{StaticResource ScrollViewerScrollBarlessTemplate}" />
+							</Style>
+
+						</Border.Resources>
+
+						<Grid MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.MinViewWidth}"
+							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="40" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+
+							<!-- Header row: [HeaderButton] [PrevButton] [NextButton] -->
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="5*" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+								<Button x:Name="HeaderButton"
+										Padding="12,0,0,0"
+										HorizontalContentAlignment="Left"
+										Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}"
+										Foreground="{TemplateBinding Foreground}"
+								FontFamily="{ThemeResource SimpleFontFamily}"
+								FontWeight="{ThemeResource SimpleRegularFontWeight}"
+										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}"
+										Style="{StaticResource SimpleHeaderButtonStyle}" />
+								<Button x:Name="PreviousButton"
+										Grid.Column="1"
+										Padding="1"
+										HorizontalContentAlignment="Center"
+										Content="&#xE76B;"
+										FontFamily="{ThemeResource SymbolThemeFontFamily}"
+										Foreground="{TemplateBinding Foreground}"
+										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentBefore}"
+										IsTabStop="True"
+										Style="{StaticResource SimpleNavigationButtonStyle}" />
+								<Button x:Name="NextButton"
+										Grid.Column="2"
+										Padding="1"
+										HorizontalContentAlignment="Center"
+										Content="&#xE76C;"
+										FontFamily="{ThemeResource SymbolThemeFontFamily}"
+										Foreground="{TemplateBinding Foreground}"
+										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentAfter}"
+										IsTabStop="True"
+										Style="{StaticResource SimpleNavigationButtonStyle}" />
+							</Grid>
+
+							<!-- Views: Month, Year, Decade -->
+							<Grid x:Name="Views"
+								  Grid.Row="1">
+								<Border x:Name="BackgroundLayer"
+										Background="{TemplateBinding BorderBrush}">
+									<Border.RenderTransform>
+										<ScaleTransform x:Name="BackgroundTransform"
+														CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}"
+														CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</Border.RenderTransform>
+								</Border>
+
+								<!-- Month view with weekday names + day grid -->
+								<Grid x:Name="MonthView">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="32" />
+										<RowDefinition Height="*" />
+									</Grid.RowDefinitions>
+									<Grid.RenderTransform>
+										<ScaleTransform x:Name="MonthViewTransform"
+														CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}"
+														CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</Grid.RenderTransform>
+									<Grid x:Name="WeekDayNames"
+										  Background="{TemplateBinding Background}">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<TextBlock x:Name="WeekDay1"
+												   Style="{StaticResource SimpleWeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay1}" />
+										<TextBlock x:Name="WeekDay2"
+												   Grid.Column="1"
+												   Style="{StaticResource SimpleWeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay2}" />
+										<TextBlock x:Name="WeekDay3"
+												   Grid.Column="2"
+												   Style="{StaticResource SimpleWeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay3}" />
+										<TextBlock x:Name="WeekDay4"
+												   Grid.Column="3"
+												   Style="{StaticResource SimpleWeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay4}" />
+										<TextBlock x:Name="WeekDay5"
+												   Grid.Column="4"
+												   Style="{StaticResource SimpleWeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay5}" />
+										<TextBlock x:Name="WeekDay6"
+												   Grid.Column="5"
+												   Style="{StaticResource SimpleWeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay6}" />
+										<TextBlock x:Name="WeekDay7"
+												   Grid.Column="6"
+												   Style="{StaticResource SimpleWeekDayNameStyle}"
+												   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FirstCharacterConverter}, Path=TemplateSettings.WeekDay7}" />
+									</Grid>
+									<ScrollViewer x:Name="MonthViewScrollViewer"
+												  Grid.Row="1"
+												  IsFocusEngagementEnabled="True"
+												  Style="{StaticResource SimpleScrollViewerStyle}">
+										<CalendarPanel x:Name="MonthViewPanel" />
+									</ScrollViewer>
+								</Grid>
+
+								<!-- Year view -->
+								<!-- Opacity set to 0 initially to avoid flicker when changing display mode -->
+								<ScrollViewer x:Name="YearViewScrollViewer"
+											  IsFocusEngagementEnabled="True"
+											  Opacity="0"
+											  Style="{StaticResource SimpleScrollViewerStyle}"
+											  UseLayoutRounding="False"
+											  Visibility="Collapsed">
+									<ScrollViewer.RenderTransform>
+										<ScaleTransform x:Name="YearViewTransform"
+														CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}"
+														CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</ScrollViewer.RenderTransform>
+									<CalendarPanel x:Name="YearViewPanel" />
+								</ScrollViewer>
+
+								<!-- Decade view -->
+								<!-- Opacity set to 0 initially to avoid flicker when changing display mode -->
+								<ScrollViewer x:Name="DecadeViewScrollViewer"
+											  IsFocusEngagementEnabled="True"
+											  Opacity="0"
+											  Style="{StaticResource SimpleScrollViewerStyle}"
+											  UseLayoutRounding="False"
+											  Visibility="Collapsed">
+									<ScrollViewer.RenderTransform>
+										<ScaleTransform x:Name="DecadeViewTransform"
+														CenterX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterX}"
+														CenterY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.CenterY}" />
+									</ScrollViewer.RenderTransform>
+									<CalendarPanel x:Name="DecadeViewPanel" />
+								</ScrollViewer>
+							</Grid>
+						</Grid>
+
+						<VisualStateManager.VisualStateGroups>
+							<!-- CommonStates: Normal / Disabled -->
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="Disabled">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay1"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource SimpleCalendarViewWeekDayForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay2"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource SimpleCalendarViewWeekDayForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay3"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource SimpleCalendarViewWeekDayForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay4"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource SimpleCalendarViewWeekDayForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay5"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource SimpleCalendarViewWeekDayForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay6"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource SimpleCalendarViewWeekDayForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="WeekDay7"
+																	   Storyboard.TargetProperty="Foreground">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="{ThemeResource SimpleCalendarViewWeekDayForegroundDisabled}" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- HeaderButtonStates: view switching animations -->
+							<VisualStateGroup x:Name="HeaderButtonStates">
+								<VisualState x:Name="ViewChanged" />
+								<VisualState x:Name="ViewChanging">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="HeaderButton"
+														 Storyboard.TargetProperty="Opacity"
+														 From="0"
+														 To="1"
+														 Duration="0:0:0.167" />
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- DisplayModeStates: Month / Year / Decade transitions -->
+							<VisualStateGroup x:Name="DisplayModeStates">
+								<VisualState x:Name="Month" />
+								<VisualState x:Name="Year">
+									<VisualState.Setters>
+										<Setter Target="YearViewScrollViewer.IsHitTestVisible"
+												Value="True" />
+									</VisualState.Setters>
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthViewScrollViewer"
+																	   Storyboard.TargetProperty="IsEnabled">
+											<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																	Value="False" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																	Value="0" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																	   Storyboard.TargetProperty="Visibility">
+											<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																	Value="Visible" />
+										</ObjectAnimationUsingKeyFrames>
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteDoubleKeyFrame KeyTime="0"
+																	Value="1" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Decade">
+									<VisualState.Setters>
+										<Setter Target="DecadeViewScrollViewer.IsHitTestVisible"
+												Value="True" />
+									</VisualState.Setters>
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthViewScrollViewer"
+																	   Storyboard.TargetProperty="IsEnabled">
+											<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																	Value="False" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																	Value="0" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
+																	   Storyboard.TargetProperty="Visibility">
+											<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																	Value="Visible" />
+										</ObjectAnimationUsingKeyFrames>
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
+																	   Storyboard.TargetProperty="Opacity">
+											<DiscreteDoubleKeyFrame KeyTime="0"
+																	Value="1" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+
+								<VisualStateGroup.Transitions>
+									<!-- Month ↔ Year transitions -->
+									<VisualTransition From="Month"
+													  To="Year">
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
+																		   Storyboard.TargetProperty="Opacity">
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Opacity">
+												<DiscreteDoubleKeyFrame KeyTime="0"
+																		Value="0" />
+												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
+																		Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Visibility">
+												<DiscreteObjectKeyFrame KeyTime="0"
+																		Value="Visible" />
+											</ObjectAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
+																		   Storyboard.TargetProperty="Opacity">
+												<LinearDoubleKeyFrame KeyTime="0:0:0.000"
+																	  Value="0" />
+												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
+																	  Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualTransition>
+									<VisualTransition From="Year"
+													  To="Month">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="IsHitTestVisible">
+												<DiscreteObjectKeyFrame KeyTime="0"
+																		Value="False" />
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Visibility">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																		Value="Visible" />
+											</ObjectAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Opacity">
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
+																		   Storyboard.TargetProperty="Opacity">
+												<DiscreteDoubleKeyFrame KeyTime="0"
+																		Value="0" />
+												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
+																		Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
+																		   Storyboard.TargetProperty="Opacity">
+												<LinearDoubleKeyFrame KeyTime="0:0:0.000"
+																	  Value="0" />
+												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
+																	  Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualTransition>
+
+									<!-- Year ↔ Decade transitions -->
+									<VisualTransition From="Year"
+													  To="Decade">
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
+																		   Storyboard.TargetProperty="Opacity">
+												<DiscreteDoubleKeyFrame KeyTime="0"
+																		Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Visibility">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																		Value="Visible" />
+											</ObjectAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Opacity">
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
+																		   Storyboard.TargetProperty="Opacity">
+												<DiscreteDoubleKeyFrame KeyTime="0"
+																		Value="0" />
+												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
+																		Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
+																		   Storyboard.TargetProperty="Visibility">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																		Value="Visible" />
+											</ObjectAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
+																		   Storyboard.TargetProperty="Opacity">
+												<LinearDoubleKeyFrame KeyTime="0:0:0.000"
+																	  Value="0" />
+												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
+																	  Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualTransition>
+									<VisualTransition From="Decade"
+													  To="Year">
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="MonthView"
+																		   Storyboard.TargetProperty="Opacity">
+												<DiscreteDoubleKeyFrame KeyTime="0"
+																		Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Visibility">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																		Value="Visible" />
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
+																		   Storyboard.TargetProperty="Visibility">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0"
+																		Value="Visible" />
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
+																		   Storyboard.TargetProperty="IsHitTestVisible">
+												<DiscreteObjectKeyFrame KeyTime="0"
+																		Value="False" />
+											</ObjectAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="DecadeViewScrollViewer"
+																		   Storyboard.TargetProperty="Opacity">
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.233"
+																	  Value="0" />
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="YearViewScrollViewer"
+																		   Storyboard.TargetProperty="Opacity">
+												<DiscreteDoubleKeyFrame KeyTime="0"
+																		Value="0" />
+												<DiscreteDoubleKeyFrame KeyTime="0:0:0.233"
+																		Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.1,0.9,0.2,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames Storyboard.TargetName="BackgroundLayer"
+																		   Storyboard.TargetProperty="Opacity">
+												<LinearDoubleKeyFrame KeyTime="0:0:0.000"
+																	  Value="0" />
+												<LinearDoubleKeyFrame KeyTime="0:0:0.250"
+																	  Value="0" />
+												<SplineDoubleKeyFrame KeySpline="0.15,0.64,0.25,1"
+																	  KeyTime="0:0:0.733"
+																	  Value="1" />
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualTransition>
+								</VisualStateGroup.Transitions>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
+	<!-- Default alias for implicit style usage -->
 	<Style x:Key="SimpleDefaultCalendarViewStyle"
 		   TargetType="CalendarView"
 		   BasedOn="{StaticResource SimpleCalendarViewStyle}" />
+
 </ResourceDictionary>

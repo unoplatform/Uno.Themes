@@ -134,6 +134,39 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Active (Indeterminate) -->
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressRing_Active"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing IsActive="True" Width="48" Height="48" />
+						</smtx:XamlDisplay>
+
+						<!-- Determinate -->
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressRing_Determinate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing IsIndeterminate="False" Value="65" Width="48" Height="48" />
+						</smtx:XamlDisplay>
+
+						<!-- Sizes -->
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressRing_Sizes"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+								<muxc:ProgressRing IsActive="True" Width="24" Height="24" />
+								<muxc:ProgressRing IsActive="True" Width="48" Height="48" />
+								<muxc:ProgressRing IsActive="True" Width="72" Height="72" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_ProgressRing_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing IsActive="True" Width="48" Height="48" IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

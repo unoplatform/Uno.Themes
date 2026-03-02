@@ -35,6 +35,56 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic ListView -->
+						<smtx:XamlDisplay UniqueKey="Simple_ListView_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView MaxHeight="300">
+								<ListViewItem Content="First Item" />
+								<ListViewItem Content="Second Item" />
+								<ListViewItem Content="Third Item" />
+								<ListViewItem Content="Fourth Item" />
+								<ListViewItem Content="Fifth Item" />
+							</ListView>
+						</smtx:XamlDisplay>
+
+						<!-- Single Selection -->
+						<smtx:XamlDisplay UniqueKey="Simple_ListView_SingleSelection"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView SelectionMode="Single" MaxHeight="300">
+								<ListViewItem Content="Option A" />
+								<ListViewItem Content="Option B" IsSelected="True" />
+								<ListViewItem Content="Option C" />
+								<ListViewItem Content="Option D" />
+							</ListView>
+						</smtx:XamlDisplay>
+
+						<!-- Multiple Selection -->
+						<smtx:XamlDisplay UniqueKey="Simple_ListView_MultiSelection"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView SelectionMode="Multiple" MaxHeight="300">
+								<ListViewItem Content="Apple" />
+								<ListViewItem Content="Banana" />
+								<ListViewItem Content="Cherry" />
+								<ListViewItem Content="Date" />
+								<ListViewItem Content="Elderberry" />
+							</ListView>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled Items -->
+						<smtx:XamlDisplay UniqueKey="Simple_ListView_DisabledItems"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView MaxHeight="300">
+								<ListViewItem Content="Enabled" />
+								<ListViewItem Content="Disabled" IsEnabled="False" />
+								<ListViewItem Content="Enabled" />
+							</ListView>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
     </Grid>
 </Page>
