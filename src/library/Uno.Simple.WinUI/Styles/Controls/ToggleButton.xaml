@@ -1,0 +1,311 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:ut="using:Uno.Themes">
+
+	<!--
+		Simple Design System — ToggleButton Styles
+		Lightweight styling pattern: every visual-state brush is exposed via ThemeResource
+		so consumers can override any individual key.
+
+		Default style: Neutral (unchecked) → Primary (checked)
+		VisualStates: Normal, PointerOver, Pressed, Disabled,
+		              Checked, CheckedPointerOver, CheckedPressed, CheckedDisabled,
+		              Indeterminate*
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light Theme ─── -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- Unchecked -->
+			<StaticResource x:Key="SimpleToggleButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+
+			<!-- Checked -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundChecked" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundChecked" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPressed" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushChecked" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+
+			<!-- Indeterminate (same as Unchecked) -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminate" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminateDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminate" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePressed" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminate" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (Default) ─── -->
+		<ResourceDictionary x:Key="Default">
+
+			<!-- Unchecked -->
+			<StaticResource x:Key="SimpleToggleButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+
+			<!-- Checked -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundChecked" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundChecked" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPressed" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushChecked" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+
+			<!-- Indeterminate (same as Unchecked) -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminate" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminateDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminate" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePressed" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminate" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Layout / sizing resources (theme-agnostic)                            -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<CornerRadius x:Key="SimpleToggleButtonCornerRadius">8</CornerRadius>
+	<Thickness x:Key="SimpleToggleButtonBorderThickness">1</Thickness>
+	<Thickness x:Key="SimpleToggleButtonPadding">12</Thickness>
+	<Thickness x:Key="SimpleToggleButtonSmallPadding">8</Thickness>
+	<x:Double x:Key="SimpleToggleButtonMinHeight">40</x:Double>
+	<x:Double x:Key="SimpleToggleButtonSmallMinHeight">32</x:Double>
+	<x:Double x:Key="SimpleToggleButtonFontSize">16</x:Double>
+	<x:Double x:Key="SimpleToggleButtonSmallFontSize">14</x:Double>
+	<x:Double x:Key="SimpleToggleButtonIconSpacing">8</x:Double>
+	<FontFamily x:Key="SimpleToggleButtonFontFamily">Inter</FontFamily>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Default ToggleButton (Neutral unchecked → Primary checked)            -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleDefaultToggleButtonStyle" TargetType="ToggleButton">
+		<Setter Property="FontFamily" Value="{StaticResource SimpleToggleButtonFontFamily}" />
+		<Setter Property="FontSize" Value="{StaticResource SimpleToggleButtonFontSize}" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="MinHeight" Value="{StaticResource SimpleToggleButtonMinHeight}" />
+		<Setter Property="Padding" Value="{StaticResource SimpleToggleButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SimpleToggleButtonCornerRadius}" />
+		<Setter Property="BorderThickness" Value="{StaticResource SimpleToggleButtonBorderThickness}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleToggleButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleToggleButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}"
+						  Padding="{TemplateBinding Padding}"
+						  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<!-- Unchecked states -->
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Checked states -->
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundChecked}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundChecked}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundChecked}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundChecked}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundCheckedPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundCheckedPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushCheckedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundCheckedDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushCheckedDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Indeterminate states -->
+								<VisualState x:Name="IndeterminateNormal">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminate}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminate}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminate}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminate}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminate}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminatePointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminatePointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminatePointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminatePressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminatePressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminatePressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminateDisabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminateDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminateDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminateDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminateDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminateDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<StackPanel Orientation="Horizontal"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Spacing="{StaticResource SimpleToggleButtonIconSpacing}">
+
+							<ContentPresenter x:Name="LeadingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							<ContentPresenter x:Name="TrailingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Small size variant                                                    -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleSmallToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource SimpleDefaultToggleButtonStyle}">
+		<Setter Property="MinHeight" Value="{StaticResource SimpleToggleButtonSmallMinHeight}" />
+		<Setter Property="Padding" Value="{StaticResource SimpleToggleButtonSmallPadding}" />
+		<Setter Property="FontSize" Value="{StaticResource SimpleToggleButtonSmallFontSize}" />
+	</Style>
+
+</ResourceDictionary>
