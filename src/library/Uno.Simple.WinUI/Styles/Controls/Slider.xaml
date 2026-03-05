@@ -24,6 +24,10 @@
 			<StaticResource x:Key="SimpleSliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
 			<StaticResource x:Key="SimpleSliderTrackFill" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
 
+			<!-- Pressed state -->
+			<StaticResource x:Key="SimpleSliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="SimpleSliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+
 			<!-- Disabled state -->
 			<StaticResource x:Key="SimpleSliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
 			<StaticResource x:Key="SimpleSliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
@@ -35,6 +39,9 @@
 			<StaticResource x:Key="SimpleSliderThumbBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
 			<StaticResource x:Key="SimpleSliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
 			<StaticResource x:Key="SimpleSliderTrackFill" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+
+			<StaticResource x:Key="SimpleSliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="SimpleSliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
 
 			<StaticResource x:Key="SimpleSliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
 			<StaticResource x:Key="SimpleSliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
@@ -104,7 +111,15 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
-								<VisualState x:Name="Pressed" />
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundPressed}" />
+										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundPressed}" />
+										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillPressed}" />
+										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillPressed}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
