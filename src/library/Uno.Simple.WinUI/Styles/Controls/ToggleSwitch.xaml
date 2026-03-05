@@ -26,6 +26,9 @@
 			<!-- Thumb fills -->
 			<StaticResource x:Key="SimpleToggleSwitchThumbOffFill"             ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleToggleSwitchThumbOnFill"              ResourceKey="SimpleIconBrandOnBrandBrush" />
+			<!-- Pressed -->
+			<StaticResource x:Key="SimpleToggleSwitchTrackOffBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundPressed"  ResourceKey="SimpleBackgroundBrandPressedBrush" />
 			<!-- Disabled -->
 			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBackground"  ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
 			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBorderBrush" ResourceKey="SimpleBorderDisabledDefaultBrush" />
@@ -46,6 +49,9 @@
 			<!-- Thumb fills -->
 			<StaticResource x:Key="SimpleToggleSwitchThumbOffFill"             ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleToggleSwitchThumbOnFill"              ResourceKey="SimpleIconBrandOnBrandBrush" />
+			<!-- Pressed -->
+			<StaticResource x:Key="SimpleToggleSwitchTrackOffBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundPressed"  ResourceKey="SimpleBackgroundBrandPressedBrush" />
 			<!-- Disabled -->
 			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBackground"  ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
 			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBorderBrush" ResourceKey="SimpleBorderDisabledDefaultBrush" />
@@ -117,7 +123,13 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="OuterBorder.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOffBackgroundPressed}" />
+										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOnBackgroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
