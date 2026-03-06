@@ -1,0 +1,78 @@
+{
+  // Use IntelliSense to find out which attributes exist for C# debugging
+  // Use hover for the description of the existing attributes
+  // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+  "version": "0.2.0",
+  "inputs": [
+    {
+      "id": "sampleApp",
+      "type": "pickString",
+      "description": "Select which sample app to use",
+      "options": [
+        "Material",
+        "Cupertino",
+        "Simple"
+      ],
+      "default": "Simple"
+    }
+  ],
+  "configurations": [
+    {
+      "name": "SampleApp WebAssembly Debug (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5000",
+      "webRoot": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp",
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "timeout": 30000,
+      "preLaunchTask": "build-${input:sampleApp}-wasm",
+      "server": {
+        "runtimeExecutable": "dotnet",
+        "program": "run",
+        "args": ["--no-build","-f","net10.0-browserwasm"],
+        "outputCapture": "std",
+        "timeout": 30000,
+        "cwd": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp"
+      }
+    },
+    {
+      "name": "SampleApp WebAssembly Debug (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:5000",
+      "webRoot": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp",
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "timeout": 30000,
+      "preLaunchTask": "build-${input:sampleApp}-wasm",
+      "server": {
+        "runtimeExecutable": "dotnet",
+        "program": "run",
+        "args": ["--no-build","-f","net10.0-browserwasm"],
+        "outputCapture": "std",
+        "timeout": 30000,
+        "cwd": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp"
+      }
+    },
+    {
+      "name": "SampleApp Desktop Debug",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-${input:sampleApp}-desktop",
+      "program": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp/bin/Debug/net10.0-desktop/${input:sampleApp}SampleApp.dll",
+      "args": [],
+      "env": {
+        "DOTNET_MODIFIABLE_ASSEMBLIES": "debug"
+      },
+      "cwd": "${workspaceFolder}/src/samples/${input:sampleApp}SampleApp",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
+      "name": "SampleApp Mobile Debug",
+      "type": "Uno",
+      "request": "launch",
+      // any Uno* task will do, this is simply to satisfy vscode requirement when a launch.json is present
+      "preLaunchTask": "Uno: android | Debug | android-x64"
+    },
+  ]
+}

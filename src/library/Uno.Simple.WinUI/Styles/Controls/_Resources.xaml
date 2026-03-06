@@ -1,0 +1,215 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
+
+	<!-- Implicit styles -->
+	<Style BasedOn="{StaticResource SimplePrimaryButtonStyle}"
+		   TargetType="Button" />
+	<Style BasedOn="{StaticResource SimpleCheckBoxStyle}"
+		   TargetType="CheckBox" />
+	<Style BasedOn="{StaticResource SimpleSelectFieldStyle}"
+		   TargetType="ComboBox" />
+	<Style BasedOn="{StaticResource SimpleRadioButtonStyle}"
+		   TargetType="RadioButton" />
+	<Style BasedOn="{StaticResource SimpleInputTextBoxStyle}"
+		   TargetType="TextBox" />
+	<Style BasedOn="{StaticResource SimpleToggleSwitchStyle}"
+		   TargetType="ToggleSwitch" />
+	<Style BasedOn="{StaticResource SimplePasswordBoxStyle}"
+		   TargetType="PasswordBox" />
+	<Style BasedOn="{StaticResource SimpleSliderStyle}"
+		   TargetType="Slider" />
+	<Style BasedOn="{StaticResource SimpleToolTipStyle}"
+		   TargetType="ToolTip" />
+	<Style BasedOn="{StaticResource SimpleBaseTextBlockStyle}"
+		   TargetType="TextBlock" />
+
+	<!-- ListView + ListViewItem -->
+	<Style BasedOn="{StaticResource SimpleDefaultListViewItemStyle}" TargetType="ListViewItem" />
+	<Style BasedOn="{StaticResource SimpleDefaultListViewStyle}" TargetType="ListView" />
+
+	<!-- ContentDialog -->
+	<Style BasedOn="{StaticResource SimpleDefaultContentDialogStyle}" TargetType="ContentDialog" />
+
+	<!-- MenuFlyout items -->
+	<Style BasedOn="{StaticResource SimpleDefaultMenuFlyoutItemStyle}" TargetType="MenuFlyoutItem" />
+	<Style BasedOn="{StaticResource SimpleDefaultMenuFlyoutPresenterStyle}" TargetType="MenuFlyoutPresenter" />
+	<Style BasedOn="{StaticResource SimpleDefaultMenuFlyoutSeparatorStyle}" TargetType="MenuFlyoutSeparator" />
+	<Style BasedOn="{StaticResource SimpleDefaultMenuFlyoutSubItemStyle}" TargetType="MenuFlyoutSubItem" />
+	<Style BasedOn="{StaticResource SimpleDefaultToggleMenuFlyoutItemStyle}" TargetType="ToggleMenuFlyoutItem" />
+
+	<!-- CalendarView -->
+	<Style BasedOn="{StaticResource SimpleDefaultCalendarViewStyle}" TargetType="CalendarView" />
+
+	<!-- AppBarButton -->
+	<Style BasedOn="{StaticResource SimpleDefaultAppBarButtonStyle}" TargetType="AppBarButton" />
+
+	<!-- CalendarDatePicker -->
+	<Style BasedOn="{StaticResource SimpleDefaultCalendarDatePickerStyle}" TargetType="CalendarDatePicker" />
+
+	<!-- DatePicker -->
+	<Style BasedOn="{StaticResource SimpleDefaultDatePickerStyle}" TargetType="DatePicker" />
+	<Style BasedOn="{StaticResource SimpleDefaultDatePickerFlyoutPresenterStyle}" TargetType="DatePickerFlyoutPresenter" />
+
+	<!-- AutoSuggestBox -->
+	<Style BasedOn="{StaticResource SimpleDefaultAutoSuggestBoxStyle}" TargetType="AutoSuggestBox" />
+
+	<!-- Expander -->
+	<Style BasedOn="{StaticResource SimpleDefaultExpanderStyle}" TargetType="Expander" />
+
+	<!-- ToggleButton -->
+	<Style BasedOn="{StaticResource SimpleDefaultToggleButtonStyle}" TargetType="ToggleButton" />
+
+	<!-- TODO: Add implicit styles once these controls have Simple styles implemented
+	<Style BasedOn="{StaticResource SimpleDefaultCommandBarStyle}" TargetType="CommandBar" />
+	<Style BasedOn="{StaticResource SimpleDefaultFlyoutPresenterStyle}" TargetType="FlyoutPresenter" />
+	<Style BasedOn="{StaticResource SimpleDefaultHyperlinkButtonStyle}" TargetType="HyperlinkButton" />
+	<Style BasedOn="{StaticResource SimpleDefaultMediaTransportControlsStyle}" TargetType="MediaTransportControls" />
+	<Style BasedOn="{StaticResource SimpleDefaultNavigationViewStyle}" TargetType="muxc:NavigationView" />
+	<Style BasedOn="{StaticResource SimpleDefaultNavigationViewItemStyle}" TargetType="muxc:NavigationViewItem" />
+	<Style BasedOn="{StaticResource SimpleDefaultPipsPagerStyle}" TargetType="muxc:PipsPager" />
+	<Style BasedOn="{StaticResource SimpleDefaultProgressBarStyle}" TargetType="muxc:ProgressBar" />
+	<Style BasedOn="{StaticResource SimpleDefaultProgressRingStyle}" TargetType="muxc:ProgressRing" />
+	<Style BasedOn="{StaticResource SimpleDefaultRadioMenuFlyoutItemStyle}" TargetType="muxc:RadioMenuFlyoutItem" />
+	<Style BasedOn="{StaticResource SimpleDefaultRatingControlStyle}" TargetType="RatingControl" />
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Theme-agnostic aliases (preferred — matches Figma SDS naming) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Button: Primary / Neutral / Subtle / DangerPrimary / DangerSubtle -->
+	<StaticResource x:Key="PrimaryButtonStyle" ResourceKey="SimplePrimaryButtonStyle" />
+	<StaticResource x:Key="NeutralButtonStyle" ResourceKey="SimpleNeutralButtonStyle" />
+	<StaticResource x:Key="SubtleButtonStyle" ResourceKey="SimpleSubtleButtonStyle" />
+	<StaticResource x:Key="DangerPrimaryButtonStyle" ResourceKey="SimpleDangerPrimaryButtonStyle" />
+	<StaticResource x:Key="DangerSubtleButtonStyle" ResourceKey="SimpleDangerSubtleButtonStyle" />
+
+	<!-- Button: Small size variants -->
+	<StaticResource x:Key="SmallPrimaryButtonStyle" ResourceKey="SimpleSmallPrimaryButtonStyle" />
+	<StaticResource x:Key="SmallNeutralButtonStyle" ResourceKey="SimpleSmallNeutralButtonStyle" />
+	<StaticResource x:Key="SmallSubtleButtonStyle" ResourceKey="SimpleSmallSubtleButtonStyle" />
+	<StaticResource x:Key="SmallDangerPrimaryButtonStyle" ResourceKey="SimpleSmallDangerPrimaryButtonStyle" />
+	<StaticResource x:Key="SmallDangerSubtleButtonStyle" ResourceKey="SimpleSmallDangerSubtleButtonStyle" />
+
+	<!-- TextBox: Input / Outlined Input / Error -->
+	<StaticResource x:Key="InputTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
+	<StaticResource x:Key="OutlinedInputTextBoxStyle" ResourceKey="SimpleOutlinedInputTextBoxStyle" />
+	<StaticResource x:Key="InputTextBoxErrorStyle" ResourceKey="SimpleInputTextBoxErrorStyle" />
+	<StaticResource x:Key="InputTextBoxSmallStyle" ResourceKey="SimpleInputTextBoxSmallStyle" />
+
+	<!-- PasswordBox -->
+	<StaticResource x:Key="PasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />
+
+	<!-- IconButton: Primary / Neutral / Subtle / DangerPrimary / DangerSubtle -->
+	<StaticResource x:Key="IconButtonPrimaryStyle" ResourceKey="SimpleIconButtonPrimaryStyle" />
+	<StaticResource x:Key="IconButtonNeutralStyle" ResourceKey="SimpleIconButtonNeutralStyle" />
+	<StaticResource x:Key="IconButtonSubtleStyle" ResourceKey="SimpleIconButtonSubtleStyle" />
+	<StaticResource x:Key="IconButtonDangerPrimaryStyle" ResourceKey="SimpleIconButtonDangerPrimaryStyle" />
+	<StaticResource x:Key="IconButtonDangerSubtleStyle" ResourceKey="SimpleIconButtonDangerSubtleStyle" />
+
+	<!-- IconButton: Small size variants -->
+	<StaticResource x:Key="SmallIconButtonPrimaryStyle" ResourceKey="SimpleSmallIconButtonPrimaryStyle" />
+	<StaticResource x:Key="SmallIconButtonNeutralStyle" ResourceKey="SimpleSmallIconButtonNeutralStyle" />
+	<StaticResource x:Key="SmallIconButtonSubtleStyle" ResourceKey="SimpleSmallIconButtonSubtleStyle" />
+	<StaticResource x:Key="SmallIconButtonDangerPrimaryStyle" ResourceKey="SimpleSmallIconButtonDangerPrimaryStyle" />
+	<StaticResource x:Key="SmallIconButtonDangerSubtleStyle" ResourceKey="SimpleSmallIconButtonDangerSubtleStyle" />
+
+	<!-- Slider -->
+	<StaticResource x:Key="SliderStyle" ResourceKey="SimpleSliderStyle" />
+
+	<!-- ToolTip -->
+	<StaticResource x:Key="ToolTipStyle" ResourceKey="SimpleToolTipStyle" />
+
+	<!-- ComboBox: Select Field -->
+	<StaticResource x:Key="SelectFieldStyle" ResourceKey="SimpleSelectFieldStyle" />
+	<StaticResource x:Key="SelectFieldItemStyle" ResourceKey="SimpleSelectFieldItemStyle" />
+	<StaticResource x:Key="SelectFieldErrorStyle" ResourceKey="SimpleSelectFieldErrorStyle" />
+
+	<!-- Single-variant controls (Figma names already match) -->
+	<StaticResource x:Key="CheckBoxStyle" ResourceKey="SimpleCheckBoxStyle" />
+	<StaticResource x:Key="RadioButtonStyle" ResourceKey="SimpleRadioButtonStyle" />
+	<StaticResource x:Key="ToggleSwitchStyle" ResourceKey="SimpleToggleSwitchStyle" />
+
+	<!-- ListView -->
+	<StaticResource x:Key="ListViewStyle" ResourceKey="SimpleListViewStyle" />
+	<StaticResource x:Key="ListViewItemStyle" ResourceKey="SimpleListViewItemStyle" />
+
+	<!-- ContentDialog -->
+	<StaticResource x:Key="ContentDialogStyle" ResourceKey="SimpleContentDialogStyle" />
+
+	<!-- MenuFlyout -->
+	<StaticResource x:Key="MenuFlyoutPresenterStyle" ResourceKey="SimpleMenuFlyoutPresenterStyle" />
+	<StaticResource x:Key="MenuFlyoutItemStyle" ResourceKey="SimpleMenuFlyoutItemStyle" />
+	<StaticResource x:Key="MenuFlyoutSeparatorStyle" ResourceKey="SimpleMenuFlyoutSeparatorStyle" />
+	<StaticResource x:Key="MenuFlyoutSubItemStyle" ResourceKey="SimpleMenuFlyoutSubItemStyle" />
+	<StaticResource x:Key="ToggleMenuFlyoutItemStyle" ResourceKey="SimpleToggleMenuFlyoutItemStyle" />
+
+	<!-- CalendarView -->
+	<StaticResource x:Key="CalendarViewStyle" ResourceKey="SimpleCalendarViewStyle" />
+
+	<!-- AppBarButton -->
+	<StaticResource x:Key="AppBarButtonStyle" ResourceKey="SimpleAppBarButtonStyle" />
+
+	<!-- CalendarDatePicker -->
+	<StaticResource x:Key="CalendarDatePickerStyle" ResourceKey="SimpleCalendarDatePickerStyle" />
+
+	<!-- DatePicker -->
+	<StaticResource x:Key="DatePickerStyle" ResourceKey="SimpleDatePickerStyle" />
+
+	<!-- Expander -->
+	<StaticResource x:Key="ExpanderStyle" ResourceKey="SimpleExpanderStyle" />
+
+	<!-- AutoSuggestBox -->
+	<StaticResource x:Key="AutoSuggestBoxStyle" ResourceKey="SimpleAutoSuggestBoxStyle" />
+
+	<!-- ToggleButton -->
+	<StaticResource x:Key="ToggleButtonStyle" ResourceKey="SimpleDefaultToggleButtonStyle" />
+	<StaticResource x:Key="SmallToggleButtonStyle" ResourceKey="SimpleSmallToggleButtonStyle" />
+
+	<!-- TODO: Re-add aliases once these controls have Simple styles implemented
+	<StaticResource x:Key="ProgressBarStyle" ResourceKey="SimpleProgressBarStyle" />
+	<StaticResource x:Key="ProgressRingStyle" ResourceKey="SimpleProgressRingStyle" />
+	<StaticResource x:Key="HyperlinkButtonStyle" ResourceKey="SimpleHyperlinkButtonStyle" />
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Legacy / backwards-compatible aliases -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<StaticResource x:Key="FilledButtonStyle" ResourceKey="SimplePrimaryButtonStyle" />
+	<StaticResource x:Key="OutlinedButtonStyle" ResourceKey="SimpleNeutralButtonStyle" />
+	<StaticResource x:Key="TextButtonStyle" ResourceKey="SimpleSubtleButtonStyle" />
+	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleOutlinedInputTextBoxStyle" />
+	<StaticResource x:Key="ComboBoxStyle" ResourceKey="SimpleSelectFieldStyle" />
+	<StaticResource x:Key="FilledPasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Typography aliases -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<StaticResource x:Key="DisplayLarge" ResourceKey="SimpleDisplayLarge" />
+	<StaticResource x:Key="DisplayMedium" ResourceKey="SimpleDisplayMedium" />
+	<StaticResource x:Key="DisplaySmall" ResourceKey="SimpleDisplaySmall" />
+	<StaticResource x:Key="HeadlineLarge" ResourceKey="SimpleHeadlineLarge" />
+	<StaticResource x:Key="HeadlineMedium" ResourceKey="SimpleHeadlineMedium" />
+	<StaticResource x:Key="HeadlineSmall" ResourceKey="SimpleHeadlineSmall" />
+	<StaticResource x:Key="TitleLarge" ResourceKey="SimpleTitleLarge" />
+	<StaticResource x:Key="TitleMedium" ResourceKey="SimpleTitleMedium" />
+	<StaticResource x:Key="TitleSmall" ResourceKey="SimpleTitleSmall" />
+	<StaticResource x:Key="BodyLarge" ResourceKey="SimpleBodyLarge" />
+	<StaticResource x:Key="BodyMedium" ResourceKey="SimpleBodyMedium" />
+	<StaticResource x:Key="BodySmall" ResourceKey="SimpleBodySmall" />
+	<StaticResource x:Key="LabelLarge" ResourceKey="SimpleLabelLarge" />
+	<StaticResource x:Key="LabelMedium" ResourceKey="SimpleLabelMedium" />
+	<StaticResource x:Key="LabelSmall" ResourceKey="SimpleLabelSmall" />
+	<StaticResource x:Key="LabelExtraSmall" ResourceKey="SimpleLabelExtraSmall" />
+	<StaticResource x:Key="CaptionLarge" ResourceKey="SimpleCaptionLarge" />
+	<StaticResource x:Key="CaptionMedium" ResourceKey="SimpleCaptionMedium" />
+	<StaticResource x:Key="CaptionSmall" ResourceKey="SimpleCaptionSmall" />
+
+</ResourceDictionary>

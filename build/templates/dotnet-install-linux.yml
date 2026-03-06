@@ -1,0 +1,22 @@
+parameters:
+  DotNetVersion: '10.0.102'
+  UnoCheck_Version: '1.34.1'
+  Dotnet_Tools: '~/.dotnet/tools'
+  UnoCheckParameters: ''
+
+steps:
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core SDK ${{ parameters.DotNetVersion }}'
+    retryCountOnTaskFailure: 3
+    inputs:
+      packageType: sdk
+      version: ${{ parameters.DotNetVersion }}
+      includePreviewVersions: true
+
+  - template: jdk-setup.yml
+
+  - bash: |
+      dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
+      uno-check --verbose --ci --non-interactive --fix --skip gtk3 --skip dotnetnewunotemplates --skip unosdk --pre-major ${{ parameters.UnoCheckParameters }}
+    displayName: Install .NET Workloads
+    retryCountOnTaskFailure: 3

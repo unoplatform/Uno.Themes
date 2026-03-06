@@ -4,6 +4,9 @@ uid: Uno.Themes.Material.Colors
 
 # Material Colors and Brushes
 
+> [!IMPORTANT]
+> UnoFeatures: **Material** — add `<UnoFeatures>Material</UnoFeatures>` to your app's `.csproj` to include Uno Material resources.
+
 ## Colors
 
 | Key                          | LightValue | DarkValue |

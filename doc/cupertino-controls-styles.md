@@ -4,6 +4,9 @@ uid: Uno.Themes.Cupertino.Styles
 
 # Cupertino Controls Styles
 
+> [!IMPORTANT]
+> UnoFeatures: **Cupertino** — add `<UnoFeatures>Cupertino</UnoFeatures>` to your app's `.csproj` to include Uno Cupertino resources.
+
 | Control                     | Style Key                                                                                                                                                                                                                                                                                                                      |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Button`                    | `CupertinoButtonStyle`<br/>`CupertinoContainedButtonStyle`<br/>`CupertinoDatePickerFlyoutButtonStyle`                                                                                                                                                                                                                          |

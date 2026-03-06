@@ -56,7 +56,6 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-**/Properties/launchSettings.json
 
 # StyleCop
 StyleCopReport.xml
@@ -334,12 +333,12 @@ ASALocalRun/
 .mfractor/
 
 ## Uno.XamlMerge output
-src/library/Uno.Cupertino/Generated/mergedpages.xaml
-src/library/Uno.Material/Generated/mergedpages.v1.xaml
-src/library/Uno.Material/Generated/mergedpages.v2.xaml
+**/mergedpages*.xaml
 
 crosstargeting_override.props
 
-.vscode/
-
 !build/publish
+
+*.code-workspace
+
+PROGRESS.md

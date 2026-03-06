@@ -1,0 +1,96 @@
+<Page x:Class="Uno.Themes.Samples.Content.Controls.IconButtonSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:smtx="using:ShowMeTheXAML"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<sample:SamplePageLayout>
+		<sample:SamplePageLayout.SimpleTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- Primary IconButton -->
+					<smtx:XamlDisplay UniqueKey="Simple_IconButton_Primary">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Style="{StaticResource SimpleIconButtonPrimaryStyle}">
+								<SymbolIcon Symbol="Add" />
+							</Button>
+							<Button Style="{StaticResource SimpleIconButtonPrimaryStyle}" IsEnabled="False">
+								<SymbolIcon Symbol="Add" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Neutral IconButton -->
+					<smtx:XamlDisplay UniqueKey="Simple_IconButton_Neutral">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Style="{StaticResource SimpleIconButtonNeutralStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource SimpleIconButtonNeutralStyle}" IsEnabled="False">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Subtle IconButton -->
+					<smtx:XamlDisplay UniqueKey="Simple_IconButton_Subtle">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Style="{StaticResource SimpleIconButtonSubtleStyle}">
+								<SymbolIcon Symbol="Setting" />
+							</Button>
+							<Button Style="{StaticResource SimpleIconButtonSubtleStyle}" IsEnabled="False">
+								<SymbolIcon Symbol="Setting" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Danger Primary IconButton -->
+					<smtx:XamlDisplay UniqueKey="Simple_IconButton_DangerPrimary">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Style="{StaticResource SimpleIconButtonDangerPrimaryStyle}">
+								<SymbolIcon Symbol="Delete" />
+							</Button>
+							<Button Style="{StaticResource SimpleIconButtonDangerPrimaryStyle}" IsEnabled="False">
+								<SymbolIcon Symbol="Delete" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Danger Subtle IconButton -->
+					<smtx:XamlDisplay UniqueKey="Simple_IconButton_DangerSubtle">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Style="{StaticResource SimpleIconButtonDangerSubtleStyle}">
+								<SymbolIcon Symbol="Delete" />
+							</Button>
+							<Button Style="{StaticResource SimpleIconButtonDangerSubtleStyle}" IsEnabled="False">
+								<SymbolIcon Symbol="Delete" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Small Size Variants -->
+					<smtx:XamlDisplay UniqueKey="Simple_IconButton_SmallVariants">
+						<StackPanel Orientation="Horizontal" Spacing="12">
+							<Button Style="{StaticResource SimpleSmallIconButtonPrimaryStyle}">
+								<SymbolIcon Symbol="Add" />
+							</Button>
+							<Button Style="{StaticResource SimpleSmallIconButtonNeutralStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource SimpleSmallIconButtonSubtleStyle}">
+								<SymbolIcon Symbol="Setting" />
+							</Button>
+							<Button Style="{StaticResource SimpleSmallIconButtonDangerPrimaryStyle}">
+								<SymbolIcon Symbol="Delete" />
+							</Button>
+							<Button Style="{StaticResource SimpleSmallIconButtonDangerSubtleStyle}">
+								<SymbolIcon Symbol="Delete" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.SimpleTemplate>
+	</sample:SamplePageLayout>
+</Page>
