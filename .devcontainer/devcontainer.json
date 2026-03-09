@@ -1,10 +1,11 @@
 {
-  "name": "Uno Themes — Agent Sandbox",
+  "name": "Uno Themes — ${localWorkspaceFolderBasename}",
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
       "TZ": "${localEnv:TZ:America/Los_Angeles}",
       "CLAUDE_CODE_VERSION": "latest",
+      "COPILOT_CLI_VERSION": "latest",
       "GIT_DELTA_VERSION": "0.18.2",
       "ZSH_IN_DOCKER_VERSION": "1.2.0"
     }
@@ -18,6 +19,8 @@
     "vscode": {
       "extensions": [
         "anthropic.claude-code",
+        "github.copilot",
+        "github.copilot-chat",
         "unoplatform.vscode",
         "ms-dotnettools.csdevkit",
         "eamodio.gitlens"
@@ -40,6 +43,12 @@
           },
           "zsh": {
             "path": "zsh"
+          },
+          "WSL Host": {
+            "path": "/usr/local/bin/ssh-wsl-host.sh",
+            "icon": "vm",
+            "color": "terminal.ansiYellow",
+            "overrideName": true
           }
         }
       }
@@ -48,17 +57,21 @@
   "remoteUser": "developer",
   "mounts": [
     "source=unothemes-claude-config-${devcontainerId},target=/home/developer/.claude,type=volume",
+    "source=unothemes-copilot-config-${devcontainerId},target=/home/developer/.copilot,type=volume",
     "source=unothemes-commandhistory-${devcontainerId},target=/commandhistory,type=volume",
     "source=unothemes-nuget-cache-${devcontainerId},target=/home/developer/.nuget,type=volume",
-    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=${localEnv:HOME}/.local/share/Uno Platform,target=/tmp/uno-platform-host,type=bind,readonly"
   ],
   "containerEnv": {
     "DEVCONTAINER": "true",
     "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
     "DISPLAY": "${localEnv:DISPLAY::0}",
     "CLAUDE_CONFIG_DIR": "/home/developer/.claude",
-    "POWERLEVEL9K_DISABLE_GITSTATUS": "true"
+    "POWERLEVEL9K_DISABLE_GITSTATUS": "true",
+    "WSL_HOST_WORKSPACE": "${localWorkspaceFolder}"
   },
+  "initializeCommand": "mkdir -p \"${HOME}/.local/share/Uno Platform\"",
   "workspaceMount": "source=${localWorkspaceFolder},target=/uno-themes,type=bind,consistency=delegated",
   "workspaceFolder": "/uno-themes",
   "postStartCommand": "bash /uno-themes/.devcontainer/post-start.sh",

@@ -82,9 +82,10 @@ server=/core.windows.net/${UPSTREAM_DNS}
 server=/nuget.org/${UPSTREAM_DNS}
 
 # Anthropic
+server=/claude.ai/${UPSTREAM_DNS}
 server=/claude.com/${UPSTREAM_DNS}
 
-# Azure DevOps (Uno Features feed, unoplatformdev feed)
+# Azure DevOps (Uno Features feed)
 server=/dev.azure.com/${UPSTREAM_DNS}
 
 # Azure CDN (.NET workloads, SDK downloads)
@@ -105,6 +106,10 @@ server=/unoplatform.net/${UPSTREAM_DNS}
 
 # Figma MCP
 server=/figma.com/${UPSTREAM_DNS}
+
+# Playwright
+server=/cdn.playwright.dev/${UPSTREAM_DNS}
+server=/storage.googleapis.com/${UPSTREAM_DNS}
 EOF
 
 # --------------------------------------------------------------------------
