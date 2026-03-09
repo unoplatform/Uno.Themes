@@ -19,6 +19,8 @@ internal static class SimpleConstants
 		{
 			public static readonly string Fonts = $"ms-appx:///{PackageName}/Styles/Application/Common/Fonts.xaml";
 			public static readonly string AnimationConstants = $"ms-appx:///{PackageName}/Styles/Application/Common/AnimationConstants.xaml";
+			public static readonly string SizeSmallDefaults = $"ms-appx:///{PackageName}/Styles/Application/Common/SizeDefaults.Small.xaml";
+			public static readonly string SizeMediumDefaults = $"ms-appx:///{PackageName}/Styles/Application/Common/SizeDefaults.Medium.xaml";
 		}
 	}
 }

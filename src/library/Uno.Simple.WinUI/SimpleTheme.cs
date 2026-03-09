@@ -15,15 +15,50 @@ using Windows.UI.Xaml;
 namespace Uno.Simple;
 
 /// <summary>
-/// Simple Theme resources including colors, fonts, layout values, and styles
+/// Controls the default size variant used by Simple Theme control styles.
+/// </summary>
+public enum SimpleControlSize
+{
+	/// <summary>Compact sizing (32 px height for buttons).</summary>
+	Small,
+
+	/// <summary>Standard sizing (40 px height for buttons).</summary>
+	Medium
+}
+
+/// <summary>
+/// Simple Theme resources including colors, fonts, layout values, and styles.
 /// </summary>
 public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	: BaseTheme(GetSimpleColorOverride(colorOverride), fontOverride)
 {
+	/// <summary>
+	/// Identifies the <see cref="DefaultSize"/> dependency property.
+	/// </summary>
+	public static readonly DependencyProperty DefaultSizeProperty =
+		DependencyProperty.Register(
+			nameof(DefaultSize),
+			typeof(SimpleControlSize),
+			typeof(SimpleTheme),
+			new PropertyMetadata(SimpleControlSize.Small, OnDefaultSizeChanged));
+
+	/// <summary>
+	/// Gets or sets the default size variant for control styles.
+	/// The default is <see cref="SimpleControlSize.Small"/>.
+	/// </summary>
+	public SimpleControlSize DefaultSize
+	{
+		get => (SimpleControlSize)GetValue(DefaultSizeProperty);
+		set => SetValue(DefaultSizeProperty, value);
+	}
+
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)
 	{
 	}
+
+	private static void OnDefaultSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		=> ((SimpleTheme)d).UpdateSource();
 
 	private static ResourceDictionary GetSimpleColorOverride(ResourceDictionary colorOverride)
 	{
@@ -41,6 +76,13 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	protected override ResourceDictionary GenerateSpecificResources()
 	{
 		var mergedPages = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.MergedPages) };
+
+		// Load size defaults based on the DefaultSize configuration
+		var sizeDefaultsPath = DefaultSize == SimpleControlSize.Medium
+			? SimpleConstants.ResourcePaths.Common.SizeMediumDefaults
+			: SimpleConstants.ResourcePaths.Common.SizeSmallDefaults;
+		var sizeDefaults = new ResourceDictionary { Source = new Uri(sizeDefaultsPath) };
+		mergedPages.MergedDictionaries.Add(sizeDefaults);
 
 		var fonts = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Common.Fonts) };
 
