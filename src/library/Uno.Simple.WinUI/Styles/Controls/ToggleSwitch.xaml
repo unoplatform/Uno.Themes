@@ -66,13 +66,14 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic)                            -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<x:Double x:Key="SimpleToggleSwitchTrackWidth">40</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchTrackHeight">24</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchTrackRadius">12</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchStrokeThickness">1</x:Double>
-	<x:Double x:Key="SimpleToggleSwitchThumbSize">16</x:Double>
-	<Thickness x:Key="SimpleToggleSwitchThumbOffMargin">4,0,0,0</Thickness>
-	<Thickness x:Key="SimpleToggleSwitchThumbOnMargin">20,0,0,0</Thickness>
+	<StaticResource x:Key="SimpleToggleSwitchTrackWidth" ResourceKey="SimpleSizeIconLarge" /> <!-- sds-size-icon-large -->
+	<StaticResource x:Key="SimpleToggleSwitchTrackHeight" ResourceKey="SimpleSizeIconSmall" /> <!-- sds-size-icon-small -->
+	<x:Double x:Key="SimpleToggleSwitchTrackRadius">12</x:Double> <!-- no exact SDS token (12) -->
+	<StaticResource x:Key="SimpleToggleSwitchStrokeThickness" ResourceKey="SimpleSizeStrokeBorder" /> <!-- sds-size-stroke-border -->
+	<StaticResource x:Key="SimpleToggleSwitchThumbSize" ResourceKey="SimpleSizeSpace400" /> <!-- sds-size-space-400 -->
+	<Thickness x:Key="SimpleToggleSwitchThumbOffMargin">4,0,0,0</Thickness> <!-- sds-size-space-100,0,0,0 -->
+	<Thickness x:Key="SimpleToggleSwitchThumbOnMargin">20,0,0,0</Thickness> <!-- no exact SDS token for 20 -->
+	<Thickness x:Key="SimpleToggleSwitchHeaderMargin">0,0,0,4</Thickness> <!-- 0,0,0,sds-size-space-100 -->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- SimpleToggleSwitchStyle                                                -->
@@ -80,12 +81,12 @@
 	<Style x:Key="SimpleToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="14" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodySmallFontSize}" />
 		<Setter Property="Foreground" Value="{ThemeResource SimpleToggleSwitchForeground}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
-		<Setter Property="MinWidth" Value="40" />
+		<Setter Property="MinWidth" Value="{StaticResource SimpleSizeIconLarge}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<Setter Property="FocusVisualMargin" Value="-3" />
 		<Setter Property="Template">
@@ -163,7 +164,7 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{ThemeResource SimpleToggleSwitchForeground}"
-										  Margin="0,0,0,4"
+										  Margin="{StaticResource SimpleToggleSwitchHeaderMargin}"
 										  VerticalAlignment="Top"
 										  Visibility="Collapsed" />
 

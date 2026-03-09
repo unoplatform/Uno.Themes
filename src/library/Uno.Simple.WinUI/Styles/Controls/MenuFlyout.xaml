@@ -82,10 +82,15 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Sizing / layout constants                                              -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<x:Double x:Key="SimpleMenuFlyoutPresenterMinWidth">112</x:Double>
-	<x:Double x:Key="SimpleMenuFlyoutPresenterMaxWidth">320</x:Double>
-	<x:Double x:Key="SimpleMenuFlyoutItemHeight">40</x:Double>
-	<x:Double x:Key="SimpleMenuFlyoutSeparatorHeight">1</x:Double>
+	<x:Double x:Key="SimpleMenuFlyoutPresenterMinWidth">112</x:Double> <!-- no exact SDS token (112) -->
+	<x:Double x:Key="SimpleMenuFlyoutPresenterMaxWidth">320</x:Double> <!-- no exact SDS token (320) -->
+	<StaticResource x:Key="SimpleMenuFlyoutItemHeight" ResourceKey="SimpleSizeIconLarge" /> <!-- sds-size-icon-large -->
+	<StaticResource x:Key="SimpleMenuFlyoutSeparatorHeight" ResourceKey="SimpleSizeStrokeBorder" /> <!-- sds-size-stroke-border -->
+	<Thickness x:Key="SimpleMenuFlyoutItemPadding">12,8</Thickness> <!-- H: sds-size-space-300, V: sds-size-space-200 -->
+	<Thickness x:Key="SimpleMenuFlyoutItemIconMargin">0,0,16,0</Thickness> <!-- 0,0,sds-size-space-400,0 -->
+	<Thickness x:Key="SimpleMenuFlyoutItemAcceleratorMargin">16,0,0,0</Thickness> <!-- sds-size-space-400,0,0,0 -->
+	<Thickness x:Key="SimpleMenuFlyoutCheckGlyphMargin">0,0,8,0</Thickness> <!-- 0,0,sds-size-space-200,0 -->
+	<Thickness x:Key="SimpleMenuFlyoutSeparatorPadding">16,4</Thickness> <!-- sds-size-space-400,sds-size-space-100 -->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- MenuFlyoutPresenter Style                                              -->
@@ -95,14 +100,14 @@
 
 		<Setter Property="Background" Value="{ThemeResource SimpleMenuFlyoutPresenterBackground}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource SimpleMenuFlyoutPresenterBorderBrush}" />
-		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="BorderThickness" Value="{StaticResource SimpleSizeStrokeBorderThickness}" />
 		<Setter Property="Foreground" Value="{ThemeResource SimpleMenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodyFontSize}" />
 		<Setter Property="MinWidth" Value="{StaticResource SimpleMenuFlyoutPresenterMinWidth}" />
 		<Setter Property="MaxWidth" Value="{StaticResource SimpleMenuFlyoutPresenterMaxWidth}" />
-		<Setter Property="Padding" Value="8" />
-		<Setter Property="CornerRadius" Value="8" />
+		<Setter Property="Padding" Value="{StaticResource SimpleSizeSpace200Thickness}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SimpleSizeRadius200CornerRadius}" />
 		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
 	</Style>
@@ -116,10 +121,10 @@
 		<Setter Property="Background" Value="{ThemeResource SimpleMenuFlyoutItemBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource SimpleMenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodyFontSize}" />
 		<Setter Property="Height" Value="{StaticResource SimpleMenuFlyoutItemHeight}" />
-		<Setter Property="Padding" Value="12,8" />
-		<Setter Property="CornerRadius" Value="8" />
+		<Setter Property="Padding" Value="{StaticResource SimpleMenuFlyoutItemPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SimpleSizeRadius200CornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -190,9 +195,9 @@
 
 						<Viewbox x:Name="IconRoot"
 								 Grid.Column="0"
-								 Width="16"
-								 Height="16"
-								 Margin="0,0,16,0"
+								 Width="{StaticResource SimpleSizeSpace400}"
+								 Height="{StaticResource SimpleSizeSpace400}"
+								 Margin="{StaticResource SimpleMenuFlyoutItemIconMargin}"
 								 HorizontalAlignment="Left"
 								 VerticalAlignment="Center"
 								 Visibility="Collapsed">
@@ -210,11 +215,11 @@
 
 						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
 								   Grid.Column="2"
-								   Margin="16,0,0,0"
+								   Margin="{StaticResource SimpleMenuFlyoutItemAcceleratorMargin}"
 								   VerticalAlignment="Center"
 								   Foreground="{ThemeResource SimpleMenuFlyoutItemDescriptionForeground}"
 								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
-								   FontSize="14"
+								   FontSize="{ThemeResource SimpleBodySmallFontSize}"
 								   Visibility="Collapsed" />
 					</Grid>
 				</ControlTemplate>
@@ -231,10 +236,10 @@
 		<Setter Property="Background" Value="{ThemeResource SimpleMenuFlyoutItemBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource SimpleMenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodyFontSize}" />
 		<Setter Property="Height" Value="{StaticResource SimpleMenuFlyoutItemHeight}" />
-		<Setter Property="Padding" Value="12,8" />
-		<Setter Property="CornerRadius" Value="8" />
+		<Setter Property="Padding" Value="{StaticResource SimpleMenuFlyoutItemPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SimpleSizeRadius200CornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -304,17 +309,17 @@
 						<FontIcon x:Name="CheckGlyph"
 								  Grid.Column="0"
 								  Glyph="&#xE73E;"
-								  FontSize="12"
+								  FontSize="{ThemeResource SimpleCaptionFontSize}"
 								  Foreground="{ThemeResource SimpleMenuFlyoutItemIconForeground}"
-								  Margin="0,0,8,0"
+								  Margin="{StaticResource SimpleMenuFlyoutCheckGlyphMargin}"
 								  Opacity="0"
 								  VerticalAlignment="Center" />
 
 						<Viewbox x:Name="IconRoot"
 								 Grid.Column="1"
-								 Width="16"
-								 Height="16"
-								 Margin="0,0,16,0"
+								 Width="{StaticResource SimpleSizeSpace400}"
+								 Height="{StaticResource SimpleSizeSpace400}"
+								 Margin="{StaticResource SimpleMenuFlyoutItemIconMargin}"
 								 HorizontalAlignment="Left"
 								 VerticalAlignment="Center"
 								 Visibility="Collapsed">
@@ -332,11 +337,11 @@
 
 						<TextBlock x:Name="KeyboardAcceleratorTextBlock"
 								   Grid.Column="3"
-								   Margin="16,0,0,0"
+								   Margin="{StaticResource SimpleMenuFlyoutItemAcceleratorMargin}"
 								   VerticalAlignment="Center"
 								   Foreground="{ThemeResource SimpleMenuFlyoutItemDescriptionForeground}"
 								   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
-								   FontSize="14"
+								   FontSize="{ThemeResource SimpleBodySmallFontSize}"
 								   Visibility="Collapsed" />
 					</Grid>
 				</ControlTemplate>
@@ -353,10 +358,10 @@
 		<Setter Property="Background" Value="{ThemeResource SimpleMenuFlyoutItemBackground}" />
 		<Setter Property="Foreground" Value="{ThemeResource SimpleMenuFlyoutItemForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleBodyFontSize}" />
 		<Setter Property="Height" Value="{StaticResource SimpleMenuFlyoutItemHeight}" />
-		<Setter Property="Padding" Value="12,8" />
-		<Setter Property="CornerRadius" Value="8" />
+		<Setter Property="Padding" Value="{StaticResource SimpleMenuFlyoutItemPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SimpleSizeRadius200CornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -426,9 +431,9 @@
 
 						<Viewbox x:Name="IconRoot"
 								 Grid.Column="0"
-								 Width="16"
-								 Height="16"
-								 Margin="0,0,16,0"
+								 Width="{StaticResource SimpleSizeSpace400}"
+								 Height="{StaticResource SimpleSizeSpace400}"
+								 Margin="{StaticResource SimpleMenuFlyoutItemIconMargin}"
 								 HorizontalAlignment="Left"
 								 VerticalAlignment="Center"
 								 Visibility="Collapsed">
@@ -448,9 +453,9 @@
 						<FontIcon x:Name="SubItemChevron"
 								  Grid.Column="2"
 								  Glyph="&#xE76C;"
-								  FontSize="12"
+								  FontSize="{ThemeResource SimpleCaptionFontSize}"
 								  Foreground="{ThemeResource SimpleMenuFlyoutItemIconForeground}"
-								  Margin="16,0,0,0"
+								  Margin="{StaticResource SimpleMenuFlyoutItemAcceleratorMargin}"
 								  VerticalAlignment="Center" />
 					</Grid>
 				</ControlTemplate>
@@ -465,7 +470,7 @@
 		   TargetType="MenuFlyoutSeparator">
 
 		<Setter Property="Background" Value="{ThemeResource SimpleMenuFlyoutSeparatorBackground}" />
-		<Setter Property="Padding" Value="16,4" />
+		<Setter Property="Padding" Value="{StaticResource SimpleMenuFlyoutSeparatorPadding}" />
 
 		<Setter Property="Template">
 			<Setter.Value>

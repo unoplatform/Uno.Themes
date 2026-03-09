@@ -32,8 +32,8 @@
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
-			<x:Double x:Key="SimpleAppBarButtonHeight">64</x:Double>
-			<x:Double x:Key="SimpleAppBarButtonWidth">64</x:Double>
+			<StaticResource x:Key="SimpleAppBarButtonHeight" ResourceKey="SimpleSizeSpace1600" /> <!-- sds-size-space-1600 -->
+			<StaticResource x:Key="SimpleAppBarButtonWidth" ResourceKey="SimpleSizeSpace1600" /> <!-- sds-size-space-1600 -->
 
 			<!-- Foreground (label text) -->
 			<StaticResource x:Key="SimpleAppBarButtonForeground"                ResourceKey="SimpleTextDefaultSecondaryBrush" />
@@ -62,8 +62,8 @@
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<x:Double x:Key="SimpleAppBarButtonHeight">64</x:Double>
-			<x:Double x:Key="SimpleAppBarButtonWidth">64</x:Double>
+			<StaticResource x:Key="SimpleAppBarButtonHeight" ResourceKey="SimpleSizeSpace1600" /> <!-- sds-size-space-1600 -->
+			<StaticResource x:Key="SimpleAppBarButtonWidth" ResourceKey="SimpleSizeSpace1600" /> <!-- sds-size-space-1600 -->
 
 			<!-- Foreground (label text) -->
 			<StaticResource x:Key="SimpleAppBarButtonForeground"                ResourceKey="SimpleTextDefaultSecondaryBrush" />
@@ -94,9 +94,9 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Theme-agnostic layout constants                                        -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<x:Double x:Key="SimpleAppBarButtonIconSize">24</x:Double>
-	<x:Double x:Key="SimpleAppBarButtonContentSpacing">8</x:Double>
-	<Thickness x:Key="SimpleAppBarButtonPadding">8</Thickness>
+	<StaticResource x:Key="SimpleAppBarButtonIconSize" ResourceKey="SimpleSizeIconSmall" /> <!-- sds-size-icon-small -->
+	<StaticResource x:Key="SimpleAppBarButtonContentSpacing" ResourceKey="SimpleSizeSpace200" /> <!-- sds-size-space-200 -->
+	<StaticResource x:Key="SimpleAppBarButtonPadding" ResourceKey="SimpleSizeSpace200Thickness" /> <!-- sds-size-space-200 -->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- SimpleAppBarButtonStyle                                                -->
