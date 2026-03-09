@@ -122,15 +122,24 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Sizing / layout constants                                              -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<x:Double x:Key="SimpleExpanderMinHeight">48</x:Double>
-	<CornerRadius x:Key="SimpleExpanderCornerRadius">8</CornerRadius>
+	<!-- sds-size-space-1200 -->
+	<StaticResource x:Key="SimpleExpanderMinHeight" ResourceKey="SimpleSpace1200" />
+	<!-- sds-size-radius-200 -->
+	<StaticResource x:Key="SimpleExpanderCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+	<!-- sds-size-space-400,0,0,0 -->
 	<Thickness x:Key="SimpleExpanderHeaderPadding">16,0,0,0</Thickness>
-	<Thickness x:Key="SimpleExpanderContentPadding">16</Thickness>
-	<Thickness x:Key="SimpleExpanderHeaderBorderThickness">1</Thickness>
+	<!-- sds-size-space-400 -->
+	<StaticResource x:Key="SimpleExpanderContentPadding" ResourceKey="SimpleSpace400Thickness" />
+	<!-- sds-size-stroke-border -->
+	<StaticResource x:Key="SimpleExpanderHeaderBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+	<!-- sds-size-stroke-border,0,sds-size-stroke-border,sds-size-stroke-border -->
 	<Thickness x:Key="SimpleExpanderContentBorderThickness">1,0,1,1</Thickness>
+	<!-- sds-size-stroke-border,sds-size-stroke-border,sds-size-stroke-border,0 -->
 	<Thickness x:Key="SimpleExpanderContentUpBorderThickness">1,1,1,0</Thickness>
+	<!-- sds-size-space-400+sds-size-space-100,0,sds-size-space-200,0 -->
 	<Thickness x:Key="SimpleExpanderChevronMargin">20,0,8,0</Thickness>
-	<x:Double x:Key="SimpleExpanderChevronButtonSize">32</x:Double>
+	<!-- sds-size-icon-medium -->
+	<StaticResource x:Key="SimpleExpanderChevronButtonSize" ResourceKey="SimpleIconMedium" />
 	<x:Double x:Key="SimpleExpanderChevronGlyphSize">12</x:Double>
 	<x:String x:Key="SimpleExpanderChevronDownGlyph">&#xE70D;</x:String>
 

@@ -172,15 +172,15 @@
 	<!-- Generic keys (SimpleButtonMinHeight, etc.) are defined in the          -->
 	<!-- SizeDefaults file loaded by SimpleTheme based on DefaultSize.          -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<CornerRadius x:Key="SimpleButtonCornerRadius">8</CornerRadius>
-	<Thickness x:Key="SimpleButtonBorderThickness">1</Thickness>
-	<Thickness x:Key="SimpleButtonMediumPadding">12</Thickness>
-	<Thickness x:Key="SimpleButtonSmallPadding">8</Thickness>
-	<x:Double x:Key="SimpleButtonMediumMinHeight">40</x:Double>
-	<x:Double x:Key="SimpleButtonSmallMinHeight">32</x:Double>
-	<x:Double x:Key="SimpleButtonMediumFontSize">16</x:Double>
-	<x:Double x:Key="SimpleButtonSmallFontSize">14</x:Double>
-	<x:Double x:Key="SimpleButtonIconSpacing">8</x:Double>
+	<StaticResource x:Key="SimpleButtonCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />          <!-- sds-size-radius-200 = 8 px -->
+	<StaticResource x:Key="SimpleButtonBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />       <!-- sds-size-stroke-border = 1 px -->
+	<StaticResource x:Key="SimpleButtonMediumPadding" ResourceKey="SimpleSpace300Thickness" />             <!-- sds-size-space-300 = 12 px -->
+	<StaticResource x:Key="SimpleButtonSmallPadding" ResourceKey="SimpleSpace200Thickness" />              <!-- sds-size-space-200 = 8 px -->
+	<StaticResource x:Key="SimpleButtonMediumMinHeight" ResourceKey="SimpleIconLarge" />                   <!-- sds-size-icon-large = 40 px -->
+	<StaticResource x:Key="SimpleButtonSmallMinHeight" ResourceKey="SimpleIconMedium" />                   <!-- sds-size-icon-medium = 32 px -->
+	<StaticResource x:Key="SimpleButtonMediumFontSize" ResourceKey="SimpleTypographyScale03" />                <!-- sds-typography-scale-03 = 16 px -->
+	<StaticResource x:Key="SimpleButtonSmallFontSize" ResourceKey="SimpleTypographyScale02" />                 <!-- sds-typography-scale-02 = 14 px -->
+	<StaticResource x:Key="SimpleButtonIconSpacing" ResourceKey="SimpleSpace200" />                        <!-- sds-size-space-200 = 8 px -->
 	<FontFamily x:Key="SimpleButtonFontFamily">Inter</FontFamily>
 	<x:String x:Key="SimpleButtonFontWeight">Normal</x:String>
 
@@ -698,12 +698,12 @@
 	<!-- Size-specific keys use explicit Small/Medium suffixes.                 -->
 	<!-- Generic keys are defined in the SizeDefaults file.                     -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<CornerRadius x:Key="SimpleIconButtonCornerRadius">9999</CornerRadius>
-	<Thickness x:Key="SimpleIconButtonBorderThickness">1</Thickness>
-	<Thickness x:Key="SimpleIconButtonMediumPadding">8</Thickness>
-	<Thickness x:Key="SimpleIconButtonSmallPadding">4</Thickness>
-	<x:Double x:Key="SimpleIconButtonMediumMinSize">40</x:Double>
-	<x:Double x:Key="SimpleIconButtonSmallMinSize">32</x:Double>
+	<StaticResource x:Key="SimpleIconButtonCornerRadius" ResourceKey="SimpleRadiusFullCornerRadius" />      <!-- sds-size-radius-full = pill -->
+	<StaticResource x:Key="SimpleIconButtonBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />   <!-- sds-size-stroke-border = 1 px -->
+	<StaticResource x:Key="SimpleIconButtonMediumPadding" ResourceKey="SimpleSpace200Thickness" />         <!-- sds-size-space-200 = 8 px -->
+	<StaticResource x:Key="SimpleIconButtonSmallPadding" ResourceKey="SimpleSpace100Thickness" />          <!-- sds-size-space-100 = 4 px -->
+	<StaticResource x:Key="SimpleIconButtonMediumMinSize" ResourceKey="SimpleIconLarge" />                 <!-- sds-size-icon-large = 40 px -->
+	<StaticResource x:Key="SimpleIconButtonSmallMinSize" ResourceKey="SimpleIconMedium" />                 <!-- sds-size-icon-medium = 32 px -->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- IconButton base style — shared setters (no template)                  -->
