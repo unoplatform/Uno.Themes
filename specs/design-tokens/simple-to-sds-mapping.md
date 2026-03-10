@@ -27,13 +27,13 @@ to its originating React/CSS component in `ref/sds/src/ui/primitives/`.
 | `PersonPicture.xaml` | **Avatar** | `Avatar/` | Sizes: small(24), medium(32), large(40) |
 | `AppBarButton.xaml` | **Navigation** | `Navigation/` | Mapped from SDS NavigationButton component |
 
-### Files without a direct SDS component mapping
+## Files without a direct SDS component mapping
 
 | XAML File | Purpose |
 |---|---|
 | `_Resources.xaml` | Implicit style assignments (wires default styles to named styles) |
 
-### SDS primitives with no current XAML counterpart
+## SDS primitives with no current XAML counterpart
 
 | SDS Component | Path |
 |---|---|
