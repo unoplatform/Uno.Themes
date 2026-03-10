@@ -1,0 +1,99 @@
+jobs:
+- job: RuntimeTests_Desktop
+  cancelTimeoutInMinutes: 0
+  displayName: 'Runtime Tests - Desktop'
+  container: unoplatform/wasm-build:3.0
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  variables:
+    ProjectPath: src/samples/SimpleSampleApp
+    SampleAppName: SimpleSampleApp
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-desktop'
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - script: |
+      dotnet build $(ProjectPath)/$(SampleAppName).csproj -c Release -f net10.0-desktop /p:TargetFrameworkOverride=desktop /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-runtimetests-desktop.binlog
+    displayName: Build SimpleSampleApp (Desktop)
+
+  - script: |
+      xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' \
+        dotnet $(ProjectPath)/bin/Release/net10.0-desktop/$(SampleAppName).dll
+    displayName: Run Runtime Tests (Desktop)
+    env:
+      UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
+      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-desktop.xml'
+
+  - task: PublishTestResults@2
+    condition: always()
+    inputs:
+      testRunTitle: 'Simple Theme Runtime Tests (Desktop)'
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-desktop.xml'
+      failTaskOnFailedTests: true
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+      ArtifactName: runtime-tests-desktop
+
+- job: RuntimeTests_WASM
+  cancelTimeoutInMinutes: 0
+  displayName: 'Runtime Tests - WASM'
+  container: unoplatform/wasm-build:3.0
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  variables:
+    ProjectPath: src/samples/SimpleSampleApp
+    SampleAppName: SimpleSampleApp
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-browserwasm'
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - script: |
+      dotnet publish $(ProjectPath)/$(SampleAppName).csproj -c Release -f net10.0-browserwasm /p:TargetFrameworkOverride=browserwasm /p:PublishTrimmed=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-runtimetests-wasm.binlog
+    displayName: Publish SimpleSampleApp (WASM)
+
+  - script: dotnet tool install -g Uno.UI.RuntimeTests.Engine.Wasm.Runner
+    displayName: Install WASM Test Runner
+
+  - script: npx playwright install chromium
+    displayName: Install Chromium
+
+  - script: |
+      uno-runtimetests-wasm \
+        --app-path $(ProjectPath)/bin/Release/net10.0-browserwasm/publish/wwwroot \
+        --output $(Common.TestResultsDirectory)/runtime-tests-wasm.xml \
+        --timeout 600
+    displayName: Run Runtime Tests (WASM)
+
+  - task: PublishTestResults@2
+    condition: always()
+    inputs:
+      testRunTitle: 'Simple Theme Runtime Tests (WASM)'
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-wasm.xml'
+      failTaskOnFailedTests: true
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+      ArtifactName: runtime-tests-wasm

@@ -8,7 +8,7 @@ public static class NavigationHelper
 	/// <summary>
 	/// Set by the app-specific App class to provide window access to shared code.
 	/// </summary>
-	public static XamlWindow MainWindow { get; set; }
+	public static Window MainWindow { get; set; }
 
 	/// <summary>
 	/// Callback set by the app to handle shell navigation from shared code (e.g. OverviewSampleView).

@@ -30,4 +30,3 @@ global using ApplicationExecutionState = Windows.ApplicationModel.Activation.App
 global using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 global using MUXC = Microsoft.UI.Xaml.Controls;
 global using XamlBindable = Microsoft.UI.Xaml.Data.BindableAttribute;
-global using XamlWindow = Microsoft.UI.Xaml.Window;

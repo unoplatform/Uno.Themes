@@ -1,0 +1,18 @@
+<Page x:Class="Uno.Themes.Samples.Content.RuntimeTestsPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:runtimetests="using:Uno.UI.RuntimeTests"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<TextBlock Text="Runtime Tests"
+				   MaxLines="1"
+				   FontSize="34"
+				   TextTrimming="CharacterEllipsis"
+				   Margin="48,0,0,0" />
+		<runtimetests:UnitTestsControl Grid.Row="1" />
+	</Grid>
+</Page>
