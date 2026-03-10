@@ -77,6 +77,9 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	{
 		var mergedPages = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.MergedPages) };
 
+		var thickness = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Thickness) };
+		mergedPages.MergedDictionaries.Add(thickness);
+
 		// Load size defaults based on the DefaultSize configuration
 		var sizeDefaultsPath = DefaultSize == SimpleControlSize.Medium
 			? SimpleConstants.ResourcePaths.Common.SizeMediumDefaults
