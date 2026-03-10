@@ -63,6 +63,13 @@ stages:
     - template: build/stage-build-wasm.yml
     - template: build/stage-build-desktop.yml
 
+- stage: Runtime_Tests
+  displayName: Runtime Tests
+  dependsOn: Determine_Changes
+  condition: and(succeeded(), ne(dependencies.Determine_Changes.outputs['evaluate_changes.DetermineChanges.docsOnly'], 'true'))
+  jobs:
+  - template: build/stage-build-runtime-tests.yml
+
 ##
 ## Publishing
 ##

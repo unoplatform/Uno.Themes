@@ -40,6 +40,8 @@
 
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <!-- RuntimeTests.Engine package still references old DOM-based WebAssembly runtime -->
+    <UnoDisableValidateNoUnoWasmDOMRuntimeDependency>true</UnoDisableValidateNoUnoWasmDOMRuntimeDependency>
   </PropertyGroup>
 
 
@@ -52,6 +54,7 @@
   <ItemGroup>
     <PackageReference Include="Uno.ShowMeTheXAML" />
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
+    <PackageReference Include="Uno.UI.RuntimeTests.Engine" />
   </ItemGroup>
 
   <ItemGroup>
