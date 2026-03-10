@@ -21,17 +21,17 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 			<!-- Sizing -->
-			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius>
-			<Thickness x:Key="SimpleAutoSuggestBoxBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleAutoSuggestBoxFocusedBorderThickness">2</Thickness>
-			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness>
-			<x:Double x:Key="SimpleAutoSuggestBoxMinHeight">40</x:Double>
-			<x:Double x:Key="SimpleAutoSuggestBoxIconFontSize">16</x:Double>
+			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius> <!-- pill-ish radius; no exact SDS token (closest sds-size-radius-full = 9999) -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" /> <!-- sds-size-stroke-focus-ring -->
+			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness> <!-- non-uniform: sds-size-space-400, 10, sds-size-icon-large, 10 -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxMinHeight" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxIconFontSize" ResourceKey="SimpleTypographyScale03" /> <!-- sds-typography-scale-03 -->
 
 			<!-- Suggestions popup -->
-			<CornerRadius x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius">8</CornerRadius>
-			<Thickness x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleAutoSuggestBoxSuggestionsPadding">4</Thickness>
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsPadding" ResourceKey="SimpleSpace100Thickness" /> <!-- sds-size-space-100 -->
 
 			<!-- TextBox — Normal state -->
 			<StaticResource x:Key="SimpleAutoSuggestBoxForeground"                    ResourceKey="SimpleTextDefaultDefaultBrush" />
@@ -72,16 +72,16 @@
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius>
-			<Thickness x:Key="SimpleAutoSuggestBoxBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleAutoSuggestBoxFocusedBorderThickness">2</Thickness>
-			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness>
-			<x:Double x:Key="SimpleAutoSuggestBoxMinHeight">40</x:Double>
-			<x:Double x:Key="SimpleAutoSuggestBoxIconFontSize">16</x:Double>
+			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius> <!-- pill-ish radius; no exact SDS token (closest sds-size-radius-full = 9999) -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" /> <!-- sds-size-stroke-focus-ring -->
+			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness> <!-- non-uniform: sds-size-space-400, 10, sds-size-icon-large, 10 -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxMinHeight" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxIconFontSize" ResourceKey="SimpleTypographyScale03" /> <!-- sds-typography-scale-03 -->
 
-			<CornerRadius x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius">8</CornerRadius>
-			<Thickness x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleAutoSuggestBoxSuggestionsPadding">4</Thickness>
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
+			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsPadding" ResourceKey="SimpleSpace100Thickness" /> <!-- sds-size-space-100 -->
 
 			<StaticResource x:Key="SimpleAutoSuggestBoxForeground"                    ResourceKey="SimpleTextDefaultDefaultBrush" />
 			<StaticResource x:Key="SimpleAutoSuggestBoxBackground"                    ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
@@ -129,7 +129,7 @@
 		<Setter Property="CornerRadius" Value="{ThemeResource SimpleAutoSuggestBoxCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource SimpleAutoSuggestBoxPadding}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" /> <!-- sds-typography-scale-03 -->
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -287,7 +287,7 @@
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="4" />
+							<ColumnDefinition Width="4" /> <!-- sds-size-space-100 (GridLength, not aliasable) -->
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
@@ -304,13 +304,14 @@
 								CornerRadius="{TemplateBinding CornerRadius}" />
 
 						<!-- Header -->
+						<!-- FontSize: sds-typography-scale-02, Margin bottom: sds-size-space-100 -->
 						<ContentPresenter x:Name="HeaderContentPresenter"
 										  Grid.Row="0"
 										  Grid.ColumnSpan="4"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  FontFamily="{ThemeResource SimpleFontFamily}"
-										  FontSize="14"
+										  FontSize="{ThemeResource SimpleTypographyScale02}"
 										  FontWeight="SemiBold"
 										  Foreground="{ThemeResource SimpleAutoSuggestBoxHeaderForeground}"
 										  Margin="0,0,0,4"
@@ -350,30 +351,32 @@
 										HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 						<!-- Delete (clear) button -->
+						<!-- Padding: sds-size-space-100, Width: sds-size-icon-medium -->
 						<Button x:Name="DeleteButton"
 								Grid.Row="1"
 								Grid.Column="1"
 								Style="{StaticResource DeleteButtonStyle}"
 								BorderThickness="{TemplateBinding BorderThickness}"
-								Padding="4"
+								Padding="{ThemeResource SimpleSpace100Thickness}"
 								IsTabStop="False"
 								Visibility="Collapsed"
 								FontSize="{TemplateBinding FontSize}"
-								Width="32"
+								Width="{ThemeResource SimpleIconMedium}"
 								VerticalAlignment="Stretch"
 								AutomationProperties.AccessibilityView="Raw" />
 
 						<!-- Query (search icon) button -->
+						<!-- Margin left: sds-size-space-050, Padding: sds-size-space-100, Width: sds-size-icon-medium, Height 28: no exact SDS token -->
 						<Button x:Name="QueryButton"
 								Grid.Row="1"
 								Grid.Column="2"
 								Style="{StaticResource QueryButtonStyle}"
 								BorderThickness="{TemplateBinding BorderThickness}"
 								Margin="2,0,0,0"
-								Padding="4"
+								Padding="{ThemeResource SimpleSpace100Thickness}"
 								IsTabStop="False"
 								FontSize="{TemplateBinding FontSize}"
-								Width="32"
+								Width="{ThemeResource SimpleIconMedium}"
 								Height="28"
 								VerticalAlignment="Stretch"
 								AutomationProperties.AccessibilityView="Raw" />
@@ -397,7 +400,7 @@
 		<Setter Property="BorderBrush" Value="{ThemeResource SimpleAutoSuggestBoxBorderBrush}" />
 		<Setter Property="BorderThickness" Value="{ThemeResource SimpleAutoSuggestBoxBorderThickness}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" /> <!-- sds-typography-scale-03 -->
 		<Setter Property="TextBoxStyle" Value="{StaticResource SimpleAutoSuggestBoxTextBoxStyle}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource SimpleAutoSuggestBoxCornerRadius}" />

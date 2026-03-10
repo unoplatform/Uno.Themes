@@ -115,9 +115,16 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic)                            -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<x:Double x:Key="SimpleCheckBoxSize">16</x:Double>
-	<CornerRadius x:Key="SimpleCheckBoxCornerRadius">4</CornerRadius>
-	<x:Double x:Key="SimpleCheckBoxStrokeThickness">1</x:Double>
+	<!-- sds-size-space-400 = 16 px -->
+	<StaticResource x:Key="SimpleCheckBoxSize" ResourceKey="SimpleSpace400" />
+
+	<!-- sds-size-radius-100 = 4 px -->
+	<StaticResource x:Key="SimpleCheckBoxCornerRadius" ResourceKey="SimpleRadius100CornerRadius" />
+
+	<!-- sds-size-stroke-border = 1 px -->
+	<StaticResource x:Key="SimpleCheckBoxStrokeThickness" ResourceKey="SimpleStrokeBorder" />
+
+	<!-- sds-size-space-400,0,0,0 -->
 	<Thickness x:Key="SimpleCheckBoxContentMargin">16,0,0,0</Thickness>
 	<GridLength x:Key="SimpleCheckBoxColumnWidth">20</GridLength>
 	<x:Double x:Key="SimpleCheckBoxGlyphSize">10</x:Double>
@@ -134,14 +141,16 @@
 		<Setter Property="BorderBrush" Value="Transparent" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<!-- sds-typography-scale-03 = 16 px -->
+		<Setter Property="FontSize" Value="{StaticResource SimpleTypographyScale03}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="MinWidth" Value="0" />
-		<Setter Property="MinHeight" Value="32" />
+		<!-- sds-size-space-800 = 32 px -->
+		<Setter Property="MinHeight" Value="{ThemeResource SimpleSpace800}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<Setter Property="FocusVisualMargin" Value="-3" />
 		<Setter Property="Template">
@@ -273,12 +282,13 @@
 							  HorizontalAlignment="Center"
 							  VerticalAlignment="Center">
 
+							<!-- sds-size-radius-100 = 4 px -->
 							<Rectangle x:Name="CheckBoxBorder"
 									   Fill="{ThemeResource SimpleCheckBoxUncheckedBackground}"
 									   Stroke="{ThemeResource SimpleCheckBoxUncheckedBorderBrush}"
 									   StrokeThickness="{StaticResource SimpleCheckBoxStrokeThickness}"
-									   RadiusX="4"
-									   RadiusY="4" />
+									   RadiusX="{ThemeResource SimpleRadius100}"
+									   RadiusY="{ThemeResource SimpleRadius100}" />
 
 							<!-- Checkmark Glyph -->
 							<Path x:Name="CheckGlyph"

@@ -12,13 +12,15 @@ internal static class SimpleConstants
 	public static class ResourcePaths
 	{
 		public static readonly string ColorPalette = $"ms-appx:///{PackageName}/Styles/Application/ColorPalette.xaml";
-		public static string Thickness = $"ms-appx:///{PackageName}/Styles/Application/Thickness.xaml";
+		public static string Thickness = $"ms-appx:///{PackageName}/Styles/Application/Common/Thickness.xaml";
 		public static readonly string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
 
 		public static class Common
 		{
 			public static readonly string Fonts = $"ms-appx:///{PackageName}/Styles/Application/Common/Fonts.xaml";
 			public static readonly string AnimationConstants = $"ms-appx:///{PackageName}/Styles/Application/Common/AnimationConstants.xaml";
+			public static readonly string SizeSmallDefaults = $"ms-appx:///{PackageName}/Styles/Application/Common/SizeDefaults.Small.xaml";
+			public static readonly string SizeMediumDefaults = $"ms-appx:///{PackageName}/Styles/Application/Common/SizeDefaults.Medium.xaml";
 		}
 	}
 }

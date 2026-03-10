@@ -74,6 +74,10 @@
 			<StaticResource x:Key="SimpleCalendarViewOutOfScopeForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
 			<StaticResource x:Key="SimpleCalendarViewOutOfScopeBackground" ResourceKey="SystemControlTransparentBrush" />
 
+			<!-- Dimensions -->
+			<!-- sds-size-space-300,0,0,0 -->
+			<Thickness x:Key="SimpleCalendarViewHeaderPadding">12,0,0,0</Thickness>
+
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (XAML "Default") ─── -->
@@ -123,6 +127,10 @@
 			<StaticResource x:Key="SimpleCalendarViewBlackoutForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
 			<StaticResource x:Key="SimpleCalendarViewOutOfScopeForeground" ResourceKey="SimpleTextDisabledDefaultBrush" />
 			<StaticResource x:Key="SimpleCalendarViewOutOfScopeBackground" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Dimensions -->
+			<!-- sds-size-space-300,0,0,0 -->
+			<Thickness x:Key="SimpleCalendarViewHeaderPadding">12,0,0,0</Thickness>
 
 		</ResourceDictionary>
 
@@ -202,12 +210,15 @@
 		<!-- Border thickness -->
 		<not_win:Setter Property="CalendarItemBorderThickness"
 						Value="0" />
+		<!-- sds-size-stroke-border -->
 		<not_win:Setter Property="BorderThickness"
-						Value="1" />
+						Value="{ThemeResource SimpleStrokeBorderThickness}" />
+		<!-- sds-size-stroke-focus-ring -->
 		<win:Setter Property="CalendarItemBorderThickness"
-					Value="2" />
+					Value="{ThemeResource SimpleStrokeFocusRingThickness}" />
+		<!-- sds-size-stroke-border -->
 		<win:Setter Property="BorderThickness"
-					Value="1" />
+					Value="{ThemeResource SimpleStrokeBorderThickness}" />
 
 		<!-- Layout -->
 		<Setter Property="HorizontalAlignment"
@@ -224,12 +235,15 @@
 				Value="{StaticResource UseSystemFocusVisuals}" />
 
 		<!-- SDS dimensions: container radius-400=16, day cell radius-200=4 -->
+		<!-- sds-size-radius-400 -->
 		<not_win:Setter Property="CornerRadius"
-						Value="16" />
+						Value="{ThemeResource SimpleRadius400CornerRadius}" />
+		<!-- sds-size-radius-100 -->
 		<not_win:Setter Property="DayItemCornerRadius"
-						Value="4" />
+						Value="{ThemeResource SimpleRadius100CornerRadius}" />
+		<!-- sds-size-radius-100 -->
 		<not_win:Setter Property="CalendarItemCornerRadius"
-						Value="4" />
+						Value="{ThemeResource SimpleRadius100CornerRadius}" />
 		<not_win:Setter Property="SelectedBackground"
 						Value="{ThemeResource SimpleCalendarViewSelectedBackground}" />
 		<not_win:Setter Property="TodaySelectedBackground"
@@ -272,8 +286,9 @@
 										Value="Stretch" />
 								<Setter Property="UseSystemFocusVisuals"
 										Value="{StaticResource UseSystemFocusVisuals}" />
+								<!-- sds-typography-scale-02 -->
 								<Setter Property="FontSize"
-										Value="14" />
+										Value="{ThemeResource SimpleTypographyScale02}" />
 								<Setter Property="Background"
 										Value="{ThemeResource SimpleCalendarViewNavigationButtonBackground}" />
 								<Setter Property="BackgroundSizing"
@@ -339,6 +354,7 @@
 																  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 																  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 																  AutomationProperties.AccessibilityView="Raw" />
+												<!-- sds: no exact token for Height=5, Width=10 -->
 												<Path x:Name="DownArrowGlyph"
 													  Data="{StaticResource SimpleDownArrowPathData}"
 													  Fill="{TemplateBinding Foreground}"
@@ -418,7 +434,7 @@
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 								<Button x:Name="HeaderButton"
-										Padding="12,0,0,0"
+										Padding="{ThemeResource SimpleCalendarViewHeaderPadding}"
 										HorizontalContentAlignment="Left"
 										Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}"
 										Foreground="{TemplateBinding Foreground}"
@@ -426,9 +442,10 @@
 								FontWeight="{ThemeResource SimpleRegularFontWeight}"
 										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}"
 										Style="{StaticResource SimpleHeaderButtonStyle}" />
+								<!-- sds-size-stroke-border -->
 								<Button x:Name="PreviousButton"
 										Grid.Column="1"
-										Padding="1"
+										Padding="{ThemeResource SimpleStrokeBorderThickness}"
 										HorizontalContentAlignment="Center"
 										Content="&#xE76B;"
 										FontFamily="{ThemeResource SymbolThemeFontFamily}"
@@ -436,9 +453,10 @@
 										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreContentBefore}"
 										IsTabStop="True"
 										Style="{StaticResource SimpleNavigationButtonStyle}" />
+								<!-- sds-size-stroke-border -->
 								<Button x:Name="NextButton"
 										Grid.Column="2"
-										Padding="1"
+										Padding="{ThemeResource SimpleStrokeBorderThickness}"
 										HorizontalContentAlignment="Center"
 										Content="&#xE76C;"
 										FontFamily="{ThemeResource SymbolThemeFontFamily}"

@@ -102,11 +102,22 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic)                            -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<CornerRadius x:Key="SimpleComboBoxCornerRadius">8</CornerRadius>
-	<x:Double x:Key="SimpleComboBoxMinHeight">40</x:Double>
-	<Thickness x:Key="SimpleComboBoxBorderThickness">1</Thickness>
-	<Thickness x:Key="SimpleComboBoxFocusedBorderThickness">2</Thickness>
+	<!-- sds-radius: 8 = SimpleRadius200CornerRadius -->
+	<StaticResource x:Key="SimpleComboBoxCornerRadius"              ResourceKey="SimpleRadius200CornerRadius" />
+	<!-- sds-size: 40 = SimpleIconLarge -->
+	<StaticResource x:Key="SimpleComboBoxMinHeight"                 ResourceKey="SimpleIconLarge" />
+	<!-- sds-stroke: 1 = SimpleStrokeBorderThickness -->
+	<StaticResource x:Key="SimpleComboBoxBorderThickness"           ResourceKey="SimpleStrokeBorderThickness" />
+	<!-- sds-stroke: 2 = SimpleStrokeFocusRingThickness -->
+	<StaticResource x:Key="SimpleComboBoxFocusedBorderThickness"    ResourceKey="SimpleStrokeFocusRingThickness" />
+	<!-- sds-spacing: non-uniform (16,10,12,10) — no single SDS token -->
 	<Thickness x:Key="SimpleComboBoxPadding">16,10,12,10</Thickness>
+	<!-- sds-spacing: non-uniform (8,0,12,0) — no single SDS token -->
+	<Thickness x:Key="SimpleComboBoxDropDownGlyphMargin">8,0,12,0</Thickness>
+	<!-- sds-spacing: non-uniform (0,4) — no single SDS token -->
+	<Thickness x:Key="SimpleComboBoxPopupPadding">0,4</Thickness>
+	<!-- sds-size: no direct SDS token for 400 -->
+	<x:Double x:Key="SimpleComboBoxPopupMaxHeight">400</x:Double>
 	<x:String x:Key="SimpleComboBoxDropDownGlyphIcon">&#xE96E;</x:String>
 
 	<!-- SimpleSelectFieldStyle - Select Field (Figma: Select Field) -->
@@ -234,10 +245,10 @@
 										  Grid.Column="1"
 										  Glyph="{StaticResource SimpleComboBoxDropDownGlyphIcon}"
 										  FontFamily="{ThemeResource SymbolThemeFontFamily}"
-										  FontSize="12"
+										  FontSize="{ThemeResource SimpleCaptionFontSize}"
 										  Foreground="{ThemeResource OnSurfaceMediumBrush}"
 										  VerticalAlignment="Center"
-										  Margin="8,0,12,0"
+										  Margin="{StaticResource SimpleComboBoxDropDownGlyphMargin}"
 										  IsHitTestVisible="False"
 										  AutomationProperties.AccessibilityView="Raw" />
 							</Grid>
@@ -250,10 +261,10 @@
 							<Border x:Name="PopupBorder"
 									Background="{ThemeResource SimpleComboBoxPopupBackground}"
 									BorderBrush="{ThemeResource SimpleComboBoxPopupBorderBrush}"
-									BorderThickness="1"
+									BorderThickness="{ThemeResource SimpleStrokeBorderThickness}"
 									CornerRadius="{StaticResource SimpleComboBoxCornerRadius}"
-									Padding="0,4"
-									MaxHeight="400">
+									Padding="{StaticResource SimpleComboBoxPopupPadding}"
+									MaxHeight="{StaticResource SimpleComboBoxPopupMaxHeight}">
 								<Border.Shadow>
 									<ThemeShadow />
 								</Border.Shadow>
@@ -292,7 +303,7 @@
 						  Background="{TemplateBinding Background}"
 						  Padding="{TemplateBinding Padding}"
 						  MinHeight="{TemplateBinding MinHeight}"
-						  CornerRadius="4">
+						  CornerRadius="{ThemeResource SimpleRadius100CornerRadius}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
