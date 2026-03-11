@@ -18,6 +18,8 @@
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 
+	<TextWrapping x:Key="MaterialAppBarButtonTextWrapping">Wrap</TextWrapping>
+
 	<Style x:Key="MaterialAppBarButtonStyle"
 		   TargetType="AppBarButton">
 		<Setter Property="Background" Value="{ThemeResource AppBarButtonBackground}" />
@@ -85,7 +87,7 @@
 							<StackPanel x:Name="ContentRoot"
 										Orientation="Vertical"
 										VerticalAlignment="Center"
-										HorizontalAlignment="Center"
+										HorizontalAlignment="Stretch"
 										Spacing="8">
 								<!-- Icon content wrapped in Viewbox (shown when Icon is set) -->
 								<Viewbox x:Name="ContentViewbox"
@@ -103,8 +105,10 @@
 								<ContentPresenter x:Name="ContentPresenter"
 												  Content="{TemplateBinding Content}"
 												  Foreground="{TemplateBinding Foreground}"
+												  TextWrapping="{ThemeResource MaterialAppBarButtonTextWrapping}"
 												  VerticalAlignment="Center"
-												  HorizontalAlignment="Center"
+												  HorizontalAlignment="Stretch"
+												  TextAlignment="Center"
 												  Visibility="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
 							</StackPanel>
 						</Grid>
