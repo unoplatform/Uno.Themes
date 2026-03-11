@@ -16,6 +16,6 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                                   | Type              | Value                              |
 |-------------------------------------------------------|-------------------|------------------------------------|
-| `MaterialAppBarButtonTextWrapping`                    | `TextWrapping`    | `Wrap`                             |
+| `AppBarButtonTextWrapping`                            | `TextWrapping`    | `Wrap`                             |
 | `AppBarButtonHeight`                                  | `Double`          | `64`                               |
 | `AppBarButtonWidth`                                   | `Double`          | `64`                               |
