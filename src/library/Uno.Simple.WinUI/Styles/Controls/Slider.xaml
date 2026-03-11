@@ -5,6 +5,10 @@
 		Simple Design System — Slider Style
 		Maps SDS Slider component tokens to WinUI Slider.
 
+		Semantic resource layer:
+		  Slider*       = canonical semantic keys (source of truth)
+		  SimpleSlider* = backwards-compat aliases
+
 		SDS Slider:
 		  Thumb: 16px circle, bg = background-brand-default
 		  Track filled: bg = background-brand-default (decrease region), 8px tall
@@ -19,63 +23,107 @@
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
+			<!-- ── Slider — semantic keys (source of truth) ── -->
 			<!-- Normal state -->
-			<StaticResource x:Key="SimpleSliderThumbBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackFill" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="SliderThumbBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
 
-			<!-- Pressed state -->
-			<StaticResource x:Key="SimpleSliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimpleSliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<!-- Pressed state (Simple-only, no Material equivalent) -->
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="SimpleSliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+
+			<!-- Backwards-compat aliases (SimpleSlider* → Slider*) -->
+			<StaticResource x:Key="SimpleSliderThumbBackground" ResourceKey="SliderThumbBackground" />
+			<StaticResource x:Key="SimpleSliderTrackValueFill" ResourceKey="SliderTrackValueFill" />
+			<StaticResource x:Key="SimpleSliderTrackFill" ResourceKey="SliderTrackFill" />
+			<StaticResource x:Key="SimpleSliderThumbBackgroundPressed" ResourceKey="SliderThumbBackgroundPressed" />
+			<StaticResource x:Key="SimpleSliderTrackValueFillPressed" ResourceKey="SliderTrackValueFillPressed" />
+			<StaticResource x:Key="SimpleSliderThumbBackgroundDisabled" ResourceKey="SliderThumbBackgroundDisabled" />
+			<StaticResource x:Key="SimpleSliderTrackValueFillDisabled" ResourceKey="SliderTrackValueFillDisabled" />
+			<StaticResource x:Key="SimpleSliderTrackFillDisabled" ResourceKey="SliderTrackFillDisabled" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="SimpleSliderThumbBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackFill" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<!-- ── Slider — semantic keys (source of truth) ── -->
+			<!-- Normal state -->
+			<StaticResource x:Key="SliderThumbBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
 
-			<StaticResource x:Key="SimpleSliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimpleSliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<!-- Pressed state (Simple-only, no Material equivalent) -->
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
 
-			<StaticResource x:Key="SimpleSliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSliderTrackFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<!-- Disabled state -->
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+
+			<!-- Backwards-compat aliases (SimpleSlider* → Slider*) -->
+			<StaticResource x:Key="SimpleSliderThumbBackground" ResourceKey="SliderThumbBackground" />
+			<StaticResource x:Key="SimpleSliderTrackValueFill" ResourceKey="SliderTrackValueFill" />
+			<StaticResource x:Key="SimpleSliderTrackFill" ResourceKey="SliderTrackFill" />
+			<StaticResource x:Key="SimpleSliderThumbBackgroundPressed" ResourceKey="SliderThumbBackgroundPressed" />
+			<StaticResource x:Key="SimpleSliderTrackValueFillPressed" ResourceKey="SliderTrackValueFillPressed" />
+			<StaticResource x:Key="SimpleSliderThumbBackgroundDisabled" ResourceKey="SliderThumbBackgroundDisabled" />
+			<StaticResource x:Key="SimpleSliderTrackValueFillDisabled" ResourceKey="SliderTrackValueFillDisabled" />
+			<StaticResource x:Key="SimpleSliderTrackFillDisabled" ResourceKey="SliderTrackFillDisabled" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Sizing / layout constants                                              -->
+	<!-- Semantic keys (source of truth) + backwards-compat aliases             -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<StaticResource x:Key="SimpleSliderThumbWidth" ResourceKey="SimpleSpace400" /> <!-- sds-size-space-400 -->
-	<StaticResource x:Key="SimpleSliderThumbHeight" ResourceKey="SimpleSpace400" /> <!-- sds-size-space-400 -->
-	<StaticResource x:Key="SimpleSliderThumbCornerRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
-	<StaticResource x:Key="SimpleSliderTrackThickness" ResourceKey="SimpleSpace100" /> <!-- sds-size-space-100 -->
-	<StaticResource x:Key="SimpleSliderFillThickness" ResourceKey="SimpleSpace200" /> <!-- sds-size-space-200 -->
-	<x:Double x:Key="SimpleSliderPreContentMargin">14</x:Double> <!-- no exact SDS token (14) -->
-	<x:Double x:Key="SimpleSliderPostContentMargin">14</x:Double> <!-- no exact SDS token (14) -->
-	<StaticResource x:Key="SimpleSliderHorizontalHeight" ResourceKey="SimpleIconMedium" /> <!-- sds-size-icon-medium -->
-	<StaticResource x:Key="SimpleSliderVerticalWidth" ResourceKey="SimpleIconMedium" /> <!-- sds-size-icon-medium -->
-	<CornerRadius x:Key="SimpleSliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius> <!-- sds-size-radius-100,0,0,sds-size-radius-100 -->
-	<CornerRadius x:Key="SimpleSliderVerticalFillCornerRadius">0,0,4,4</CornerRadius> <!-- 0,0,sds-size-radius-100,sds-size-radius-100 -->
-	<CornerRadius x:Key="SimpleSliderCornerRadius">2</CornerRadius> <!-- no exact SDS token (2) -->
-	<Thickness x:Key="SimpleSliderFocusVisualMargin">-7,0</Thickness> <!-- no exact SDS token (negative margins) -->
-	<Thickness x:Key="SimpleSliderHorizontalFocusVisualMargin">-14,-6,-14,-6</Thickness> <!-- no exact SDS token (negative margins) -->
-	<Thickness x:Key="SimpleSliderVerticalFocusVisualMargin">-6,-14,-6,-14</Thickness> <!-- no exact SDS token (negative margins) -->
-	<Thickness x:Key="SimpleSliderHeaderMargin">0,0,0,4</Thickness> <!-- 0,0,0,sds-size-space-100 -->
+	<StaticResource x:Key="SliderThumbWidth" ResourceKey="SimpleSpace400" /> <!-- sds-size-space-400 -->
+	<StaticResource x:Key="SliderThumbHeight" ResourceKey="SimpleSpace400" /> <!-- sds-size-space-400 -->
+	<StaticResource x:Key="SliderThumbCornerRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
+	<StaticResource x:Key="SliderTrackThickness" ResourceKey="SimpleSpace100" /> <!-- sds-size-space-100 -->
+	<StaticResource x:Key="SliderFillThickness" ResourceKey="SimpleSpace200" /> <!-- sds-size-space-200 -->
+	<x:Double x:Key="SliderPreContentMargin">14</x:Double> <!-- no exact SDS token (14) -->
+	<x:Double x:Key="SliderPostContentMargin">14</x:Double> <!-- no exact SDS token (14) -->
+	<StaticResource x:Key="SliderHorizontalHeight" ResourceKey="SimpleIconMedium" /> <!-- sds-size-icon-medium -->
+	<StaticResource x:Key="SliderVerticalWidth" ResourceKey="SimpleIconMedium" /> <!-- sds-size-icon-medium -->
+	<CornerRadius x:Key="SliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius> <!-- sds-size-radius-100,0,0,sds-size-radius-100 -->
+	<CornerRadius x:Key="SliderVerticalFillCornerRadius">0,0,4,4</CornerRadius> <!-- 0,0,sds-size-radius-100,sds-size-radius-100 -->
+	<CornerRadius x:Key="SliderCornerRadius">2</CornerRadius> <!-- no exact SDS token (2) -->
+	<Thickness x:Key="SliderFocusVisualMargin">-7,0</Thickness> <!-- no exact SDS token (negative margins) -->
+	<Thickness x:Key="SliderHorizontalFocusVisualMargin">-14,-6,-14,-6</Thickness> <!-- no exact SDS token (negative margins) -->
+	<Thickness x:Key="SliderVerticalFocusVisualMargin">-6,-14,-6,-14</Thickness> <!-- no exact SDS token (negative margins) -->
+	<Thickness x:Key="SliderHeaderMargin">0,0,0,4</Thickness> <!-- 0,0,0,sds-size-space-100 -->
+
+	<!-- Backwards-compat aliases (SimpleSlider* → Slider*) -->
+	<StaticResource x:Key="SimpleSliderThumbWidth" ResourceKey="SliderThumbWidth" />
+	<StaticResource x:Key="SimpleSliderThumbHeight" ResourceKey="SliderThumbHeight" />
+	<StaticResource x:Key="SimpleSliderThumbCornerRadius" ResourceKey="SliderThumbCornerRadius" />
+	<StaticResource x:Key="SimpleSliderTrackThickness" ResourceKey="SliderTrackThickness" />
+	<StaticResource x:Key="SimpleSliderFillThickness" ResourceKey="SliderFillThickness" />
+	<x:Double x:Key="SimpleSliderPreContentMargin">14</x:Double>
+	<x:Double x:Key="SimpleSliderPostContentMargin">14</x:Double>
+	<StaticResource x:Key="SimpleSliderHorizontalHeight" ResourceKey="SliderHorizontalHeight" />
+	<StaticResource x:Key="SimpleSliderVerticalWidth" ResourceKey="SliderVerticalWidth" />
+	<CornerRadius x:Key="SimpleSliderHorizontalFillCornerRadius">4,0,0,4</CornerRadius>
+	<CornerRadius x:Key="SimpleSliderVerticalFillCornerRadius">0,0,4,4</CornerRadius>
+	<CornerRadius x:Key="SimpleSliderCornerRadius">2</CornerRadius>
+	<Thickness x:Key="SimpleSliderFocusVisualMargin">-7,0</Thickness>
+	<Thickness x:Key="SimpleSliderHorizontalFocusVisualMargin">-14,-6,-14,-6</Thickness>
+	<Thickness x:Key="SimpleSliderVerticalFocusVisualMargin">-6,-14,-6,-14</Thickness>
+	<Thickness x:Key="SimpleSliderHeaderMargin">0,0,0,4</Thickness>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Slider Thumb Style                                                     -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleSliderThumbStyle"
 		   TargetType="Thumb">
-		<Setter Property="Background" Value="{ThemeResource SimpleSliderThumbBackground}" />
+		<Setter Property="Background" Value="{ThemeResource SliderThumbBackground}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -83,7 +131,7 @@
 					<Border Background="{TemplateBinding Background}"
 							BorderBrush="{TemplateBinding BorderBrush}"
 							BorderThickness="{TemplateBinding BorderThickness}"
-							CornerRadius="{StaticResource SimpleSliderThumbCornerRadius}" />
+							CornerRadius="{StaticResource SliderThumbCornerRadius}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -94,15 +142,15 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleSliderStyle"
 		   TargetType="Slider">
-		<Setter Property="Background" Value="{ThemeResource SimpleSliderTrackFill}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleSliderTrackValueFill}" />
+		<Setter Property="Background" Value="{ThemeResource SliderTrackFill}" />
+		<Setter Property="Foreground" Value="{ThemeResource SliderTrackValueFill}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="ManipulationMode" Value="None" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
-		<Setter Property="FocusVisualMargin" Value="{StaticResource SimpleSliderFocusVisualMargin}" />
+		<Setter Property="FocusVisualMargin" Value="{StaticResource SliderFocusVisualMargin}" />
 		<Setter Property="IsFocusEngagementEnabled" Value="True" />
-		<Setter Property="CornerRadius" Value="{StaticResource SimpleSliderCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SliderCornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -115,21 +163,21 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundPressed}" />
-										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundPressed}" />
-										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillPressed}" />
-										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillPressed}" />
+										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SliderThumbBackgroundPressed}" />
+										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SliderThumbBackgroundPressed}" />
+										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillPressed}" />
+										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillDisabled}" />
-										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillDisabled}" />
-										<Setter Target="HorizontalTrackRect.Fill" Value="{ThemeResource SimpleSliderTrackFillDisabled}" />
-										<Setter Target="VerticalTrackRect.Fill" Value="{ThemeResource SimpleSliderTrackFillDisabled}" />
-										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundDisabled}" />
-										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundDisabled}" />
+										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillDisabled}" />
+										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillDisabled}" />
+										<Setter Target="HorizontalTrackRect.Fill" Value="{ThemeResource SliderTrackFillDisabled}" />
+										<Setter Target="VerticalTrackRect.Fill" Value="{ThemeResource SliderTrackFillDisabled}" />
+										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
+										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -183,7 +231,7 @@
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  FontFamily="{ThemeResource SimpleFontFamily}"
 										  Foreground="{ThemeResource SimpleTextDefaultDefaultBrush}"
-										  Margin="{StaticResource SimpleSliderHeaderMargin}"
+										  Margin="{StaticResource SliderHeaderMargin}"
 										  TextWrapping="Wrap"
 										  Visibility="Collapsed"
 										  x:DeferLoadStrategy="Lazy" />
@@ -196,7 +244,7 @@
 
 							<!-- ─── HorizontalTemplate ─── -->
 							<Grid x:Name="HorizontalTemplate"
-								  MinHeight="{StaticResource SimpleSliderHorizontalHeight}">
+								  MinHeight="{StaticResource SliderHorizontalHeight}">
 
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
@@ -205,24 +253,24 @@
 								</Grid.ColumnDefinitions>
 
 								<Grid.RowDefinitions>
-									<RowDefinition Height="{StaticResource SimpleSliderPreContentMargin}" />
+									<RowDefinition Height="{StaticResource SliderPreContentMargin}" />
 									<RowDefinition Height="Auto" />
-									<RowDefinition Height="{StaticResource SimpleSliderPostContentMargin}" />
+									<RowDefinition Height="{StaticResource SliderPostContentMargin}" />
 								</Grid.RowDefinitions>
 
 								<!-- Background track -->
 								<Rectangle x:Name="HorizontalTrackRect"
 										   Grid.Row="1"
 										   Grid.ColumnSpan="3"
-										   Height="{StaticResource SimpleSliderTrackThickness}"
+										   Height="{StaticResource SliderTrackThickness}"
 										   Fill="{TemplateBinding Background}"
 										   RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
 										   RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
 
 								<!-- Filled (decrease) track -->
 								<Border Grid.Row="1"
-										Height="{StaticResource SimpleSliderFillThickness}"
-										CornerRadius="{StaticResource SimpleSliderHorizontalFillCornerRadius}">
+										Height="{StaticResource SliderFillThickness}"
+										CornerRadius="{StaticResource SliderHorizontalFillCornerRadius}">
 									<Rectangle x:Name="HorizontalDecreaseRect"
 											   Fill="{TemplateBinding Foreground}" />
 								</Border>
@@ -232,17 +280,17 @@
 									   Grid.Row="0"
 									   Grid.RowSpan="3"
 									   Grid.Column="1"
-									   Width="{StaticResource SimpleSliderThumbWidth}"
-									   Height="{StaticResource SimpleSliderThumbHeight}"
+									   Width="{StaticResource SliderThumbWidth}"
+									   Height="{StaticResource SliderThumbHeight}"
 									   AutomationProperties.AccessibilityView="Raw"
 									   DataContext="{TemplateBinding Value}"
-									   FocusVisualMargin="{StaticResource SimpleSliderHorizontalFocusVisualMargin}"
+									   FocusVisualMargin="{StaticResource SliderHorizontalFocusVisualMargin}"
 									   Style="{StaticResource SimpleSliderThumbStyle}" />
 							</Grid>
 
 							<!-- ─── VerticalTemplate ─── -->
 							<Grid x:Name="VerticalTemplate"
-								  MinWidth="{StaticResource SimpleSliderVerticalWidth}"
+								  MinWidth="{StaticResource SliderVerticalWidth}"
 								  Visibility="Collapsed">
 
 								<Grid.RowDefinitions>
@@ -252,14 +300,14 @@
 								</Grid.RowDefinitions>
 
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="{StaticResource SimpleSliderPreContentMargin}" />
+									<ColumnDefinition Width="{StaticResource SliderPreContentMargin}" />
 									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="{StaticResource SimpleSliderPostContentMargin}" />
+									<ColumnDefinition Width="{StaticResource SliderPostContentMargin}" />
 								</Grid.ColumnDefinitions>
 
 								<!-- Background track -->
 								<Rectangle x:Name="VerticalTrackRect"
-										   Width="{StaticResource SimpleSliderTrackThickness}"
+										   Width="{StaticResource SliderTrackThickness}"
 										   Grid.RowSpan="3"
 										   Grid.Column="1"
 										   Fill="{TemplateBinding Background}"
@@ -269,9 +317,9 @@
 								<!-- Filled (decrease) track -->
 								<Border Grid.Row="2"
 										Grid.Column="1"
-										CornerRadius="{StaticResource SimpleSliderVerticalFillCornerRadius}">
+										CornerRadius="{StaticResource SliderVerticalFillCornerRadius}">
 									<Rectangle x:Name="VerticalDecreaseRect"
-											   Width="{StaticResource SimpleSliderFillThickness}"
+											   Width="{StaticResource SliderFillThickness}"
 											   Fill="{TemplateBinding Foreground}" />
 								</Border>
 
@@ -280,11 +328,11 @@
 									   Grid.Row="1"
 									   Grid.Column="0"
 									   Grid.ColumnSpan="3"
-									   Width="{StaticResource SimpleSliderThumbWidth}"
-									   Height="{StaticResource SimpleSliderThumbHeight}"
+									   Width="{StaticResource SliderThumbWidth}"
+									   Height="{StaticResource SliderThumbHeight}"
 									   AutomationProperties.AccessibilityView="Raw"
 									   DataContext="{TemplateBinding Value}"
-									   FocusVisualMargin="{StaticResource SimpleSliderVerticalFocusVisualMargin}"
+									   FocusVisualMargin="{StaticResource SliderVerticalFocusVisualMargin}"
 									   Style="{StaticResource SimpleSliderThumbStyle}" />
 							</Grid>
 						</Grid>

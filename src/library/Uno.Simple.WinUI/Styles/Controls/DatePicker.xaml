@@ -9,6 +9,10 @@
 		Simple Design System — DatePicker Style
 		Inspired by CalendarDatePicker field appearance with SDS design tokens.
 
+		Semantic resource layer:
+		  DatePicker*        = canonical semantic keys (source of truth)
+		  SimpleDatePicker*  = backwards-compat aliases
+
 		SDS DatePicker CSS mapping:
 		  Field:       background-default-default bg, border-default-default border, radius-200 (8px), text-default-default
 		  Hover:       same as normal (SDS field doesn't change on hover)
@@ -30,156 +34,236 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 
-			<!-- FlyoutButton (transparent wrapper) -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<!-- ── FlyoutButton (transparent wrapper) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<!-- Backwards-compat alias -->
+			<StaticResource x:Key="SimpleDatePickerFlyoutButtonBackground" ResourceKey="DatePickerFlyoutButtonBackground" />
 
-			<!-- FlyoutPresenter -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBackground"  ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterSpacerFill"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightFill" ResourceKey="SimpleBackgroundBrandTertiaryBrush" />
+			<!-- ── FlyoutPresenter — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerFlyoutPresenterBackground"  ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="SimpleBackgroundBrandTertiaryBrush" />
 			<!-- sds-size-radius-400 -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
 			<!-- sds: no exact token (296) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
 			<!-- sds: no exact token (296) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
 			<!-- sds: no exact token (398) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
 			<!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
 			<!-- sds: no exact token (52) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleDatePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
+			<!-- Backwards-compat aliases (SimpleDatePickerFlyoutPresenter* → DatePickerFlyoutPresenter*) -->
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBackground"  ResourceKey="DatePickerFlyoutPresenterBackground" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBorderBrush" ResourceKey="DatePickerFlyoutPresenterBorderBrush" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterSpacerFill"  ResourceKey="DatePickerFlyoutPresenterSpacerFill" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightFill" ResourceKey="DatePickerFlyoutPresenterHighlightFill" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterCornerRadius" ResourceKey="DatePickerFlyoutPresenterCornerRadius" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightHeight" ResourceKey="DatePickerFlyoutPresenterHighlightHeight" />
+			<StaticResource x:Key="SimpleDatePickerSpacerThemeWidth" ResourceKey="DatePickerSpacerThemeWidth" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutBorderThickness" ResourceKey="DatePickerFlyoutBorderThickness" />
 
-			<!-- Typography -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterFontFamily" ResourceKey="SimpleFontFamily" />
+			<!-- Typography — semantic keys (source of truth) -->
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="SimpleFontFamily" />
+			<!-- Backwards-compat alias -->
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterFontFamily" ResourceKey="DatePickerFlyoutPresenterFontFamily" />
 
-			<!-- DatePicker Button (field appearance) -->
-			<StaticResource x:Key="SimpleDatePickerButtonBackground"              ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPointerOver"   ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPressed"       ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBackgroundDisabled"      ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<!-- ── DatePicker Button (field appearance) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerButtonBackground"              ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPointerOver"   ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPressed"       ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundDisabled"      ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
 
-			<StaticResource x:Key="SimpleDatePickerButtonForeground"              ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonForegroundPointerOver"   ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonForegroundPressed"       ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonForegroundDisabled"      ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForeground"              ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPointerOver"   ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPressed"       ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundDisabled"      ResourceKey="SimpleTextDisabledDefaultBrush" />
 
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrush"             ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPointerOver"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPressed"      ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushDisabled"     ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrush"             ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPressed"      ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled"     ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases (SimpleDatePickerButton* → DatePickerButton*) -->
+			<StaticResource x:Key="SimpleDatePickerButtonBackground"              ResourceKey="DatePickerButtonBackground" />
+			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPointerOver"   ResourceKey="DatePickerButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPressed"       ResourceKey="DatePickerButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonBackgroundDisabled"      ResourceKey="DatePickerButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleDatePickerButtonForeground"              ResourceKey="DatePickerButtonForeground" />
+			<StaticResource x:Key="SimpleDatePickerButtonForegroundPointerOver"   ResourceKey="DatePickerButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonForegroundPressed"       ResourceKey="DatePickerButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonForegroundDisabled"      ResourceKey="DatePickerButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrush"             ResourceKey="DatePickerButtonBorderBrush" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPointerOver"  ResourceKey="DatePickerButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPressed"      ResourceKey="DatePickerButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushDisabled"     ResourceKey="DatePickerButtonBorderBrushDisabled" />
 
-			<!-- Date text -->
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForeground"             ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPointerOver"  ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPressed"      ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundDisabled"     ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- ── Date text — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerButtonDateTextForeground"             ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPointerOver"  ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPressed"      ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundDisabled"     ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForeground"             ResourceKey="DatePickerButtonDateTextForeground" />
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPointerOver"  ResourceKey="DatePickerButtonDateTextForegroundPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPressed"      ResourceKey="DatePickerButtonDateTextForegroundPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundDisabled"     ResourceKey="DatePickerButtonDateTextForegroundDisabled" />
 
-			<!-- Placeholder text -->
-			<StaticResource x:Key="SimpleDatePickerPlaceholderTextForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<!-- ── Placeholder text — semantic key (source of truth) ── -->
+			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<!-- Backwards-compat alias -->
+			<StaticResource x:Key="SimpleDatePickerPlaceholderTextForeground" ResourceKey="DatePickerPlaceholderTextForeground" />
 
-			<!-- Header -->
-			<StaticResource x:Key="SimpleDatePickerHeaderForeground"          ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerHeaderForegroundDisabled"  ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- ── Header — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerHeaderForeground"          ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerHeaderForegroundDisabled"  ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleDatePickerHeaderForeground"          ResourceKey="DatePickerHeaderForeground" />
+			<StaticResource x:Key="SimpleDatePickerHeaderForegroundDisabled"  ResourceKey="DatePickerHeaderForegroundDisabled" />
 
-			<!-- Dimensions -->
+			<!-- ── Dimensions — semantic keys (source of truth) ── -->
 			<!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimpleDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="DatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<!-- sds-size-space-400,10,sds-size-space-400,10 -->
-			<Thickness x:Key="SimpleDatePickerContentMargin">16,10,16,10</Thickness>
+			<Thickness x:Key="DatePickerContentMargin">16,10,16,10</Thickness>
 			<!-- sds-size-space-0 -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
+			<StaticResource x:Key="DatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
 			<!-- sds: no exact token (44) -->
-			<x:Double x:Key="SimpleDatePickerMinHeight">44</x:Double>
-			<x:Double x:Key="SimpleDatePickerFlyoutButtonOpacityPressed">0.8</x:Double>
-			<x:Double x:Key="SimpleDatePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
+			<x:Double x:Key="DatePickerMinHeight">44</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
 			<!-- sds: 0,0,0,sds-size-space-100 -->
-			<Thickness x:Key="SimpleDatePickerHeaderMargin">0,0,0,4</Thickness>
+			<Thickness x:Key="DatePickerHeaderMargin">0,0,0,4</Thickness>
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleDatePickerCornerRadius" ResourceKey="DatePickerCornerRadius" />
+			<StaticResource x:Key="SimpleDatePickerBorderThemeThickness" ResourceKey="DatePickerBorderThemeThickness" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutButtonPadding" ResourceKey="DatePickerFlyoutButtonPadding" />
 
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
-			<!-- FlyoutButton (transparent wrapper) -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<!-- ── FlyoutButton (transparent wrapper) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerFlyoutButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<!-- Backwards-compat alias -->
+			<StaticResource x:Key="SimpleDatePickerFlyoutButtonBackground" ResourceKey="DatePickerFlyoutButtonBackground" />
 
-			<!-- FlyoutPresenter -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBackground"  ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterSpacerFill"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightFill" ResourceKey="SimpleBackgroundBrandTertiaryBrush" />
+			<!-- ── FlyoutPresenter — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerFlyoutPresenterBackground"  ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterSpacerFill"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightFill" ResourceKey="SimpleBackgroundBrandTertiaryBrush" />
 			<!-- sds-size-radius-400 -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
 			<!-- sds: no exact token (296) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterWidth">296</x:Double>
 			<!-- sds: no exact token (296) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterMinWidth">296</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMinWidth">296</x:Double>
 			<!-- sds: no exact token (398) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterMaxHeight">398</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterMaxHeight">398</x:Double>
 			<!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
 			<!-- sds: no exact token (52) -->
-			<x:Double x:Key="SimpleDatePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
+			<x:Double x:Key="DatePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleDatePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
+			<StaticResource x:Key="DatePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
+			<!-- Backwards-compat aliases (SimpleDatePickerFlyoutPresenter* → DatePickerFlyoutPresenter*) -->
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBackground"  ResourceKey="DatePickerFlyoutPresenterBackground" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterBorderBrush" ResourceKey="DatePickerFlyoutPresenterBorderBrush" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterSpacerFill"  ResourceKey="DatePickerFlyoutPresenterSpacerFill" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightFill" ResourceKey="DatePickerFlyoutPresenterHighlightFill" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterCornerRadius" ResourceKey="DatePickerFlyoutPresenterCornerRadius" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterHighlightHeight" ResourceKey="DatePickerFlyoutPresenterHighlightHeight" />
+			<StaticResource x:Key="SimpleDatePickerSpacerThemeWidth" ResourceKey="DatePickerSpacerThemeWidth" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutBorderThickness" ResourceKey="DatePickerFlyoutBorderThickness" />
 
-			<!-- Typography -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterFontFamily" ResourceKey="SimpleFontFamily" />
+			<!-- Typography — semantic keys (source of truth) -->
+			<StaticResource x:Key="DatePickerFlyoutPresenterFontFamily" ResourceKey="SimpleFontFamily" />
+			<!-- Backwards-compat alias -->
+			<StaticResource x:Key="SimpleDatePickerFlyoutPresenterFontFamily" ResourceKey="DatePickerFlyoutPresenterFontFamily" />
 
-			<!-- DatePicker Button (field appearance) -->
-			<StaticResource x:Key="SimpleDatePickerButtonBackground"              ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPointerOver"   ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPressed"       ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBackgroundDisabled"      ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<!-- ── DatePicker Button (field appearance) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerButtonBackground"              ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPointerOver"   ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundPressed"       ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBackgroundDisabled"      ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
 
-			<StaticResource x:Key="SimpleDatePickerButtonForeground"              ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonForegroundPointerOver"   ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonForegroundPressed"       ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonForegroundDisabled"      ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForeground"              ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPointerOver"   ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundPressed"       ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonForegroundDisabled"      ResourceKey="SimpleTextDisabledDefaultBrush" />
 
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrush"             ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPointerOver"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPressed"      ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushDisabled"     ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrush"             ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPointerOver"  ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushPressed"      ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonBorderBrushDisabled"     ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases (SimpleDatePickerButton* → DatePickerButton*) -->
+			<StaticResource x:Key="SimpleDatePickerButtonBackground"              ResourceKey="DatePickerButtonBackground" />
+			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPointerOver"   ResourceKey="DatePickerButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonBackgroundPressed"       ResourceKey="DatePickerButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonBackgroundDisabled"      ResourceKey="DatePickerButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleDatePickerButtonForeground"              ResourceKey="DatePickerButtonForeground" />
+			<StaticResource x:Key="SimpleDatePickerButtonForegroundPointerOver"   ResourceKey="DatePickerButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonForegroundPressed"       ResourceKey="DatePickerButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonForegroundDisabled"      ResourceKey="DatePickerButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrush"             ResourceKey="DatePickerButtonBorderBrush" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPointerOver"  ResourceKey="DatePickerButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushPressed"      ResourceKey="DatePickerButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonBorderBrushDisabled"     ResourceKey="DatePickerButtonBorderBrushDisabled" />
 
-			<!-- Date text -->
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForeground"             ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPointerOver"  ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPressed"      ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundDisabled"     ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- ── Date text — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerButtonDateTextForeground"             ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPointerOver"  ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundPressed"      ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerButtonDateTextForegroundDisabled"     ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForeground"             ResourceKey="DatePickerButtonDateTextForeground" />
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPointerOver"  ResourceKey="DatePickerButtonDateTextForegroundPointerOver" />
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundPressed"      ResourceKey="DatePickerButtonDateTextForegroundPressed" />
+			<StaticResource x:Key="SimpleDatePickerButtonDateTextForegroundDisabled"     ResourceKey="DatePickerButtonDateTextForegroundDisabled" />
 
-			<!-- Placeholder text -->
-			<StaticResource x:Key="SimpleDatePickerPlaceholderTextForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<!-- ── Placeholder text — semantic key (source of truth) ── -->
+			<StaticResource x:Key="DatePickerPlaceholderTextForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<!-- Backwards-compat alias -->
+			<StaticResource x:Key="SimpleDatePickerPlaceholderTextForeground" ResourceKey="DatePickerPlaceholderTextForeground" />
 
-			<!-- Header -->
-			<StaticResource x:Key="SimpleDatePickerHeaderForeground"          ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleDatePickerHeaderForegroundDisabled"  ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- ── Header — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="DatePickerHeaderForeground"          ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="DatePickerHeaderForegroundDisabled"  ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleDatePickerHeaderForeground"          ResourceKey="DatePickerHeaderForeground" />
+			<StaticResource x:Key="SimpleDatePickerHeaderForegroundDisabled"  ResourceKey="DatePickerHeaderForegroundDisabled" />
 
-			<!-- Dimensions -->
+			<!-- ── Dimensions — semantic keys (source of truth) ── -->
 			<!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimpleDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="DatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="DatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<!-- sds-size-space-400,10,sds-size-space-400,10 -->
-			<Thickness x:Key="SimpleDatePickerContentMargin">16,10,16,10</Thickness>
+			<Thickness x:Key="DatePickerContentMargin">16,10,16,10</Thickness>
 			<!-- sds-size-space-0 -->
-			<StaticResource x:Key="SimpleDatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
+			<StaticResource x:Key="DatePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
 			<!-- sds: no exact token (44) -->
-			<x:Double x:Key="SimpleDatePickerMinHeight">44</x:Double>
-			<x:Double x:Key="SimpleDatePickerFlyoutButtonOpacityPressed">0.8</x:Double>
-			<x:Double x:Key="SimpleDatePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
+			<x:Double x:Key="DatePickerMinHeight">44</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityPressed">0.8</x:Double>
+			<x:Double x:Key="DatePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
 			<!-- sds: 0,0,0,sds-size-space-100 -->
-			<Thickness x:Key="SimpleDatePickerHeaderMargin">0,0,0,4</Thickness>
+			<Thickness x:Key="DatePickerHeaderMargin">0,0,0,4</Thickness>
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleDatePickerCornerRadius" ResourceKey="DatePickerCornerRadius" />
+			<StaticResource x:Key="SimpleDatePickerBorderThemeThickness" ResourceKey="DatePickerBorderThemeThickness" />
+			<StaticResource x:Key="SimpleDatePickerFlyoutButtonPadding" ResourceKey="DatePickerFlyoutButtonPadding" />
 
 		</ResourceDictionary>
 
@@ -195,8 +279,8 @@
 	<Style x:Key="SimpleDatePickerFlyoutButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Background" Value="{ThemeResource SimpleDatePickerFlyoutButtonBackground}" />
-		<Setter Property="Padding" Value="{ThemeResource SimpleDatePickerFlyoutButtonPadding}" />
+		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutButtonBackground}" />
+		<Setter Property="Padding" Value="{ThemeResource DatePickerFlyoutButtonPadding}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -219,12 +303,12 @@
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity" Value="{ThemeResource SimpleDatePickerFlyoutButtonOpacityPressed}" />
+										<Setter Target="RootGrid.Opacity" Value="{ThemeResource DatePickerFlyoutButtonOpacityPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity" Value="{ThemeResource SimpleDatePickerFlyoutButtonOpacityDisabled}" />
+										<Setter Target="RootGrid.Opacity" Value="{ThemeResource DatePickerFlyoutButtonOpacityDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -242,18 +326,18 @@
 	<Style x:Key="SimpleDatePickerFlyoutPresenterStyle"
 		   TargetType="DatePickerFlyoutPresenter">
 
-		<Setter Property="Width" Value="{ThemeResource SimpleDatePickerFlyoutPresenterWidth}" />
-		<Setter Property="MinWidth" Value="{ThemeResource SimpleDatePickerFlyoutPresenterMinWidth}" />
-		<Setter Property="MaxHeight" Value="{ThemeResource SimpleDatePickerFlyoutPresenterMaxHeight}" />
+		<Setter Property="Width" Value="{ThemeResource DatePickerFlyoutPresenterWidth}" />
+		<Setter Property="MinWidth" Value="{ThemeResource DatePickerFlyoutPresenterMinWidth}" />
+		<Setter Property="MaxHeight" Value="{ThemeResource DatePickerFlyoutPresenterMaxHeight}" />
 		<Setter Property="IsTabStop" Value="False" />
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleDatePickerFlyoutPresenterFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource DatePickerFlyoutPresenterFontFamily}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleDatePickerFlyoutPresenterBackground}" />
+		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutPresenterBackground}" />
 		<Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
-		<Setter Property="BorderThickness" Value="{ThemeResource SimpleDatePickerFlyoutBorderThickness}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleDatePickerFlyoutPresenterBorderBrush}" />
-		<Setter Property="CornerRadius" Value="{ThemeResource SimpleDatePickerFlyoutPresenterCornerRadius}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource DatePickerFlyoutBorderThickness}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerFlyoutPresenterBorderBrush}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerFlyoutPresenterCornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -291,30 +375,30 @@
 								<Rectangle x:Name="HighlightRect"
 										   Grid.Column="0"
 										   Grid.ColumnSpan="5"
-										   Height="{ThemeResource SimpleDatePickerFlyoutPresenterHighlightHeight}"
+										   Height="{ThemeResource DatePickerFlyoutPresenterHighlightHeight}"
 										   VerticalAlignment="Center"
-										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterHighlightFill}"
+										   Fill="{ThemeResource DatePickerFlyoutPresenterHighlightFill}"
 										   RadiusX="8"
 										   RadiusY="8" />
 
 								<!-- Column spacers -->
 								<Rectangle x:Name="FirstPickerSpacing"
 										   Grid.Column="1"
-										   Width="{ThemeResource SimpleDatePickerSpacerThemeWidth}"
+										   Width="{ThemeResource DatePickerSpacerThemeWidth}"
 										   HorizontalAlignment="Center"
-										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterSpacerFill}" />
+										   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
 
 								<Rectangle x:Name="SecondPickerSpacing"
 										   Grid.Column="3"
-										   Width="{ThemeResource SimpleDatePickerSpacerThemeWidth}"
+										   Width="{ThemeResource DatePickerSpacerThemeWidth}"
 										   HorizontalAlignment="Center"
-										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterSpacerFill}" />
+										   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
 							</Grid>
 
 							<!-- Accept / Dismiss buttons -->
 							<Grid x:Name="AcceptDismissHostGrid"
 								  Grid.Row="1"
-								  Height="{ThemeResource SimpleDatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
+								  Height="{ThemeResource DatePickerFlyoutPresenterAcceptDismissHostGridHeight}"
 								  VerticalAlignment="Bottom"
 								  Background="{TemplateBinding Background}">
 
@@ -326,9 +410,9 @@
 
 								<!-- Top separator line -->
 								<Rectangle Grid.ColumnSpan="3"
-										   Height="{ThemeResource SimpleDatePickerSpacerThemeWidth}"
+										   Height="{ThemeResource DatePickerSpacerThemeWidth}"
 										   VerticalAlignment="Top"
-										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterSpacerFill}" />
+										   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
 
 								<Button x:Name="DismissButton"
 										x:Uid="DatePickerFlyoutDismissButton"
@@ -360,13 +444,13 @@
 	<Style x:Key="SimpleDatePickerStyle"
 		   TargetType="DatePicker">
 
-		<Setter Property="Background" Value="{ThemeResource SimpleDatePickerButtonBackground}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleDatePickerButtonForeground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{ThemeResource SimpleDatePickerBorderThemeThickness}" />
+		<Setter Property="Background" Value="{ThemeResource DatePickerButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource DatePickerButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource DatePickerBorderThemeThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
-		<Setter Property="MinHeight" Value="{ThemeResource SimpleDatePickerMinHeight}" />
-		<Setter Property="CornerRadius" Value="{ThemeResource SimpleDatePickerCornerRadius}" />
+		<Setter Property="MinHeight" Value="{ThemeResource DatePickerMinHeight}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerCornerRadius}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
@@ -389,12 +473,12 @@
 										  Grid.Row="0"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{ThemeResource SimpleDatePickerHeaderForeground}"
+										  Foreground="{ThemeResource DatePickerHeaderForeground}"
 										  FontSize="{ThemeResource SimpleTypographyScale02}"
 										  FontFamily="{ThemeResource SimpleFontFamily}"
 										  FontWeight="SemiBold"
 										  TextWrapping="Wrap"
-										  Margin="{ThemeResource SimpleDatePickerHeaderMargin}"
+										  Margin="{ThemeResource DatePickerHeaderMargin}"
 										  Visibility="Collapsed"
 										  AutomationProperties.AccessibilityView="Raw" />
 
@@ -418,7 +502,7 @@
 										MinHeight="{TemplateBinding MinHeight}" />
 
 								<!-- Content -->
-								<Grid Margin="{ThemeResource SimpleDatePickerContentMargin}"
+								<Grid Margin="{ThemeResource DatePickerContentMargin}"
 									  VerticalAlignment="Center">
 
 									<!-- Date text row -->
@@ -427,7 +511,7 @@
 
 										<!-- Formatted date text -->
 										<TextBlock x:Name="DateText"
-												   Foreground="{ThemeResource SimpleDatePickerButtonDateTextForeground}"
+												   Foreground="{ThemeResource DatePickerButtonDateTextForeground}"
 												   FontSize="{TemplateBinding FontSize}"
 												   FontFamily="{TemplateBinding FontFamily}"
 												   VerticalAlignment="Center"
@@ -435,7 +519,7 @@
 
 										<!-- Placeholder text (shown when no date) -->
 										<TextBlock x:Name="PlaceholderText"
-												   Foreground="{ThemeResource SimpleDatePickerPlaceholderTextForeground}"
+												   Foreground="{ThemeResource DatePickerPlaceholderTextForeground}"
 												   FontSize="{TemplateBinding FontSize}"
 												   FontFamily="{TemplateBinding FontFamily}"
 												   VerticalAlignment="Center"
@@ -456,28 +540,28 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource SimpleDatePickerButtonBackgroundPointerOver}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrushPointerOver}" />
-										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleDatePickerButtonDateTextForegroundPointerOver}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleDatePickerButtonForegroundPointerOver}" />
+										<Setter Target="Background.Background" Value="{ThemeResource DatePickerButtonBackgroundPointerOver}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrushPointerOver}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundPointerOver}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource DatePickerButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource SimpleDatePickerButtonBackgroundPressed}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrushPressed}" />
-										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleDatePickerButtonDateTextForegroundPressed}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleDatePickerButtonForegroundPressed}" />
+										<Setter Target="Background.Background" Value="{ThemeResource DatePickerButtonBackgroundPressed}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrushPressed}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundPressed}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource DatePickerButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource SimpleDatePickerButtonBackgroundDisabled}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrushDisabled}" />
-										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleDatePickerButtonDateTextForegroundDisabled}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleDatePickerHeaderForegroundDisabled}" />
+										<Setter Target="Background.Background" Value="{ThemeResource DatePickerButtonBackgroundDisabled}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrushDisabled}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource DatePickerHeaderForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
