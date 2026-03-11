@@ -153,6 +153,50 @@
 							</AppBarButton>
 						</smtx:XamlDisplay>
 
+						<TextBlock Text="Text Wrapping"
+								   FontSize="16"
+								   FontWeight="SemiBold"
+								   Margin="0,24,0,12" />
+
+						<!-- Text wrapping - default Wrap behavior -->
+						<TextBlock Text="Long text wraps by default (AppBarButtonTextWrapping = Wrap)"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_TextWrapping"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<AppBarButton Content="Short"
+											  Style="{StaticResource MaterialAppBarButtonStyle}" />
+								<AppBarButton Content="With Wrapping"
+											  Style="{StaticResource MaterialAppBarButtonStyle}" />
+								<AppBarButton Content="Acknowledgement"
+											  Style="{StaticResource MaterialAppBarButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Text wrapping - overridden to NoWrap -->
+						<TextBlock Text="Override to NoWrap via resource"
+								   FontSize="12"
+								   Opacity="0.7"
+								   Margin="0,8,0,4" />
+						<smtx:XamlDisplay UniqueKey="Material_AppBarButtonSamplePage_TextNoWrap"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="8">
+								<StackPanel.Resources>
+									<TextWrapping x:Key="AppBarButtonTextWrapping">NoWrap</TextWrapping>
+								</StackPanel.Resources>
+								<AppBarButton Content="Short"
+											  Style="{StaticResource MaterialAppBarButtonStyle}" />
+								<AppBarButton Content="With Wrapping"
+											  Style="{StaticResource MaterialAppBarButtonStyle}" />
+								<AppBarButton Content="Acknowledgement"
+											  Style="{StaticResource MaterialAppBarButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
 						<TextBlock Text="Multiple AppBarButtons in a Row"
 								   FontSize="16"
 								   FontWeight="SemiBold"
