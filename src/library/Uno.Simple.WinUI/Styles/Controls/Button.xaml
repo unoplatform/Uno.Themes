@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ut="using:Uno.Themes">
 
@@ -6,6 +6,19 @@
 		Simple Design System — Button Styles
 		Lightweight styling pattern: every visual-state brush is exposed via ThemeResource
 		so consumers can override any individual key.
+
+		Semantic resource layer:
+		  FilledButton*       = Primary variant   (was SimplePrimaryButton*)
+		  FilledTonalButton*  = Neutral variant    (was SimpleNeutralButton*)
+		  OutlinedButton*     = alias for FilledTonalButton*
+		  TextButton*         = Subtle variant     (was SimpleSubtleButton*)
+		  IconButtonForeground / IconButtonForegroundDisabled = icon-button semantic keys
+
+		Backwards-compat aliases are provided for all old Simple-prefixed names.
+
+		Simple-only variants (no semantic rename):
+		  SimpleDangerPrimaryButton* — no Material equivalent
+		  SimpleDangerSubtleButton*  — no Material equivalent
 
 		Variants: Primary, Neutral, Subtle, DangerPrimary, DangerSubtle
 		Sizes:    Small (default), Medium — configurable via SimpleTheme.DefaultSize
@@ -19,49 +32,105 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 
-			<!-- Primary -->
-			<StaticResource x:Key="SimplePrimaryButtonForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonForegroundPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonForegroundPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrush" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- ── FilledButton (Primary) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases (SimplePrimaryButton* → FilledButton*) -->
+			<StaticResource x:Key="SimplePrimaryButtonForeground" ResourceKey="FilledButtonForeground" />
+			<StaticResource x:Key="SimplePrimaryButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimplePrimaryButtonForegroundPressed" ResourceKey="FilledButtonForegroundPressed" />
+			<StaticResource x:Key="SimplePrimaryButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
+			<StaticResource x:Key="SimplePrimaryButtonBackground" ResourceKey="FilledButtonBackground" />
+			<StaticResource x:Key="SimplePrimaryButtonBackgroundPointerOver" ResourceKey="FilledButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimplePrimaryButtonBackgroundPressed" ResourceKey="FilledButtonBackgroundPressed" />
+			<StaticResource x:Key="SimplePrimaryButtonBackgroundDisabled" ResourceKey="FilledButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrush" ResourceKey="FilledButtonBorderBrush" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
 
-			<!-- Neutral -->
-			<StaticResource x:Key="SimpleNeutralButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- ── FilledTonalButton (Neutral) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- OutlinedButton aliases (read parity — point to FilledTonalButton*) -->
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
+			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="FilledTonalButtonBackground" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
+			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
+			<!-- Backwards-compat aliases (SimpleNeutralButton* → FilledTonalButton*) -->
+			<StaticResource x:Key="SimpleNeutralButtonForeground" ResourceKey="FilledTonalButtonForeground" />
+			<StaticResource x:Key="SimpleNeutralButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleNeutralButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleNeutralButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleNeutralButtonBackground" ResourceKey="FilledTonalButtonBackground" />
+			<StaticResource x:Key="SimpleNeutralButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleNeutralButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleNeutralButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
 
-			<!-- Subtle -->
-			<StaticResource x:Key="SimpleSubtleButtonForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonForegroundPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonForegroundPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- ── TextButton (Subtle) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
+			<StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases (SimpleSubtleButton* → TextButton*) -->
+			<StaticResource x:Key="SimpleSubtleButtonForeground" ResourceKey="TextButtonForeground" />
+			<StaticResource x:Key="SimpleSubtleButtonForegroundPointerOver" ResourceKey="TextButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleSubtleButtonForegroundPressed" ResourceKey="TextButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleSubtleButtonForegroundDisabled" ResourceKey="TextButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleSubtleButtonBackground" ResourceKey="TextButtonBackground" />
+			<StaticResource x:Key="SimpleSubtleButtonBackgroundPointerOver" ResourceKey="TextButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleSubtleButtonBackgroundPressed" ResourceKey="TextButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleSubtleButtonBackgroundDisabled" ResourceKey="TextButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrush" ResourceKey="TextButtonBorderBrush" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPointerOver" ResourceKey="TextButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPressed" ResourceKey="TextButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrushDisabled" ResourceKey="TextButtonBorderBrushDisabled" />
 
-			<!-- DangerPrimary -->
+			<!-- ── IconButton — semantic keys ── -->
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
+			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
+
+			<!-- ── DangerPrimary (Simple-only — no semantic rename) ── -->
 			<StaticResource x:Key="SimpleDangerPrimaryButtonForeground" ResourceKey="SimpleTextDangerOnDangerBrush" />
 			<StaticResource x:Key="SimpleDangerPrimaryButtonForegroundPointerOver" ResourceKey="SimpleTextDangerOnDangerBrush" />
 			<StaticResource x:Key="SimpleDangerPrimaryButtonForegroundPressed" ResourceKey="SimpleTextDangerOnDangerBrush" />
@@ -75,7 +144,7 @@
 			<StaticResource x:Key="SimpleDangerPrimaryButtonBorderBrushPressed" ResourceKey="SimpleBorderDangerDefaultBrush" />
 			<StaticResource x:Key="SimpleDangerPrimaryButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
 
-			<!-- DangerSubtle -->
+			<!-- ── DangerSubtle (Simple-only — no semantic rename) ── -->
 			<StaticResource x:Key="SimpleDangerSubtleButtonForeground" ResourceKey="SimpleTextDangerDefaultBrush" />
 			<StaticResource x:Key="SimpleDangerSubtleButtonForegroundPointerOver" ResourceKey="SimpleTextDangerDefaultBrush" />
 			<StaticResource x:Key="SimpleDangerSubtleButtonForegroundPressed" ResourceKey="SimpleTextDangerDefaultBrush" />
@@ -93,49 +162,105 @@
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
-			<!-- Primary -->
-			<StaticResource x:Key="SimplePrimaryButtonForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonForegroundPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonForegroundPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrush" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePrimaryButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- ── FilledButton (Primary) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="FilledButtonForegroundPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="FilledButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="FilledButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases (SimplePrimaryButton* → FilledButton*) -->
+			<StaticResource x:Key="SimplePrimaryButtonForeground" ResourceKey="FilledButtonForeground" />
+			<StaticResource x:Key="SimplePrimaryButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimplePrimaryButtonForegroundPressed" ResourceKey="FilledButtonForegroundPressed" />
+			<StaticResource x:Key="SimplePrimaryButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
+			<StaticResource x:Key="SimplePrimaryButtonBackground" ResourceKey="FilledButtonBackground" />
+			<StaticResource x:Key="SimplePrimaryButtonBackgroundPointerOver" ResourceKey="FilledButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimplePrimaryButtonBackgroundPressed" ResourceKey="FilledButtonBackgroundPressed" />
+			<StaticResource x:Key="SimplePrimaryButtonBackgroundDisabled" ResourceKey="FilledButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrush" ResourceKey="FilledButtonBorderBrush" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimplePrimaryButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
 
-			<!-- Neutral -->
-			<StaticResource x:Key="SimpleNeutralButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleNeutralButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- ── FilledTonalButton (Neutral) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="FilledTonalButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- OutlinedButton aliases (read parity — point to FilledTonalButton*) -->
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="FilledTonalButtonForeground" />
+			<StaticResource x:Key="OutlinedButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
+			<StaticResource x:Key="OutlinedButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="FilledTonalButtonBackground" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
+			<StaticResource x:Key="OutlinedButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
+			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
+			<!-- Backwards-compat aliases (SimpleNeutralButton* → FilledTonalButton*) -->
+			<StaticResource x:Key="SimpleNeutralButtonForeground" ResourceKey="FilledTonalButtonForeground" />
+			<StaticResource x:Key="SimpleNeutralButtonForegroundPointerOver" ResourceKey="FilledTonalButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleNeutralButtonForegroundPressed" ResourceKey="FilledTonalButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleNeutralButtonForegroundDisabled" ResourceKey="FilledTonalButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleNeutralButtonBackground" ResourceKey="FilledTonalButtonBackground" />
+			<StaticResource x:Key="SimpleNeutralButtonBackgroundPointerOver" ResourceKey="FilledTonalButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleNeutralButtonBackgroundPressed" ResourceKey="FilledTonalButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleNeutralButtonBackgroundDisabled" ResourceKey="FilledTonalButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrush" ResourceKey="FilledTonalButtonBorderBrush" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleNeutralButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
 
-			<!-- Subtle -->
-			<StaticResource x:Key="SimpleSubtleButtonForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonForegroundPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonForegroundPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackground" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleSubtleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- ── TextButton (Subtle) — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="TextButtonForegroundPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="TextButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
+			<StaticResource x:Key="TextButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
+			<StaticResource x:Key="TextButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<!-- Backwards-compat aliases (SimpleSubtleButton* → TextButton*) -->
+			<StaticResource x:Key="SimpleSubtleButtonForeground" ResourceKey="TextButtonForeground" />
+			<StaticResource x:Key="SimpleSubtleButtonForegroundPointerOver" ResourceKey="TextButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleSubtleButtonForegroundPressed" ResourceKey="TextButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleSubtleButtonForegroundDisabled" ResourceKey="TextButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleSubtleButtonBackground" ResourceKey="TextButtonBackground" />
+			<StaticResource x:Key="SimpleSubtleButtonBackgroundPointerOver" ResourceKey="TextButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleSubtleButtonBackgroundPressed" ResourceKey="TextButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleSubtleButtonBackgroundDisabled" ResourceKey="TextButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrush" ResourceKey="TextButtonBorderBrush" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPointerOver" ResourceKey="TextButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrushPressed" ResourceKey="TextButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleSubtleButtonBorderBrushDisabled" ResourceKey="TextButtonBorderBrushDisabled" />
 
-			<!-- DangerPrimary -->
+			<!-- ── IconButton — semantic keys ── -->
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
+			<StaticResource x:Key="IconButtonForegroundDisabled" ResourceKey="FilledButtonForegroundDisabled" />
+
+			<!-- ── DangerPrimary (Simple-only — no semantic rename) ── -->
 			<StaticResource x:Key="SimpleDangerPrimaryButtonForeground" ResourceKey="SimpleTextDangerOnDangerBrush" />
 			<StaticResource x:Key="SimpleDangerPrimaryButtonForegroundPointerOver" ResourceKey="SimpleTextDangerOnDangerBrush" />
 			<StaticResource x:Key="SimpleDangerPrimaryButtonForegroundPressed" ResourceKey="SimpleTextDangerOnDangerBrush" />
@@ -149,7 +274,7 @@
 			<StaticResource x:Key="SimpleDangerPrimaryButtonBorderBrushPressed" ResourceKey="SimpleBorderDangerDefaultBrush" />
 			<StaticResource x:Key="SimpleDangerPrimaryButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
 
-			<!-- DangerSubtle -->
+			<!-- ── DangerSubtle (Simple-only — no semantic rename) ── -->
 			<StaticResource x:Key="SimpleDangerSubtleButtonForeground" ResourceKey="SimpleTextDangerDefaultBrush" />
 			<StaticResource x:Key="SimpleDangerSubtleButtonForegroundPointerOver" ResourceKey="SimpleTextDangerDefaultBrush" />
 			<StaticResource x:Key="SimpleDangerSubtleButtonForegroundPressed" ResourceKey="SimpleTextDangerDefaultBrush" />
@@ -207,9 +332,9 @@
 	<!-- Primary Button                                                        -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimplePrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource SimpleBaseButtonStyle}">
-		<Setter Property="Foreground" Value="{ThemeResource SimplePrimaryButtonForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimplePrimaryButtonBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledButtonBorderBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -226,29 +351,29 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimplePrimaryButtonBackgroundPointerOver}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrushPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPointerOver}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPointerOver}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimplePrimaryButtonBackgroundPressed}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrushPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPressed}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPressed}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimplePrimaryButtonBackgroundDisabled}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundDisabled}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundDisabled}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -289,9 +414,9 @@
 	<!-- Neutral Button                                                        -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleNeutralButtonStyle" TargetType="Button" BasedOn="{StaticResource SimpleBaseButtonStyle}">
-		<Setter Property="Foreground" Value="{ThemeResource SimpleNeutralButtonForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleNeutralButtonBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledTonalButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -308,29 +433,29 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimpleNeutralButtonBackgroundPointerOver}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrushPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPointerOver}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPointerOver}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimpleNeutralButtonBackgroundPressed}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrushPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPressed}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPressed}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimpleNeutralButtonBackgroundDisabled}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundDisabled}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundDisabled}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource FilledTonalButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -371,9 +496,9 @@
 	<!-- Subtle Button                                                         -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleSubtleButtonStyle" TargetType="Button" BasedOn="{StaticResource SimpleBaseButtonStyle}">
-		<Setter Property="Foreground" Value="{ThemeResource SimpleSubtleButtonForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleSubtleButtonBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource TextButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource TextButtonBorderBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -390,29 +515,29 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimpleSubtleButtonBackgroundPointerOver}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrushPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPointerOver}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPointerOver}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource TextButtonBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimpleSubtleButtonBackgroundPressed}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrushPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPressed}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPressed}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource TextButtonBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource SimpleSubtleButtonBackgroundDisabled}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundDisabled}" />
-										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundDisabled}" />
-										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource TextButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource TextButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextButtonForegroundDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -730,9 +855,9 @@
 	<!-- Primary IconButton                                                    -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleIconButtonPrimaryStyle" TargetType="Button" BasedOn="{StaticResource SimpleBaseIconButtonStyle}">
-		<Setter Property="Foreground" Value="{ThemeResource SimplePrimaryButtonForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimplePrimaryButtonBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledButtonBorderBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -755,23 +880,23 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimplePrimaryButtonBackgroundPointerOver}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrushPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledButtonBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimplePrimaryButtonBackgroundPressed}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrushPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundPressed}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledButtonBackgroundPressed}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimplePrimaryButtonBackgroundDisabled}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimplePrimaryButtonBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimplePrimaryButtonForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledButtonBackgroundDisabled}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -786,9 +911,9 @@
 	<!-- Neutral IconButton                                                    -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleIconButtonNeutralStyle" TargetType="Button" BasedOn="{StaticResource SimpleBaseIconButtonStyle}">
-		<Setter Property="Foreground" Value="{ThemeResource SimpleNeutralButtonForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleNeutralButtonBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledTonalButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -811,23 +936,23 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleNeutralButtonBackgroundPointerOver}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrushPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledTonalButtonBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleNeutralButtonBackgroundPressed}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrushPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundPressed}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledTonalButtonBackgroundPressed}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleNeutralButtonBackgroundDisabled}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleNeutralButtonBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleNeutralButtonForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource FilledTonalButtonBackgroundDisabled}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource FilledTonalButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -842,9 +967,9 @@
 	<!-- Subtle IconButton                                                     -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleIconButtonSubtleStyle" TargetType="Button" BasedOn="{StaticResource SimpleBaseIconButtonStyle}">
-		<Setter Property="Foreground" Value="{ThemeResource SimpleSubtleButtonForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleSubtleButtonBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource TextButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource TextButtonBorderBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -867,23 +992,23 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleSubtleButtonBackgroundPointerOver}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrushPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource TextButtonBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleSubtleButtonBackgroundPressed}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrushPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundPressed}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource TextButtonBackgroundPressed}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleSubtleButtonBackgroundDisabled}" />
-										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleSubtleButtonBorderBrushDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleSubtleButtonForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource TextButtonBackgroundDisabled}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
