@@ -135,7 +135,7 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundPointerOver}" />
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundPointerOver}" />
 										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleTextBoxBorderBrushPointerOver}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleTextBoxForegroundPointerOver}" />
 									</VisualState.Setters>
@@ -143,20 +143,19 @@
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundFocused}" />
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundFocused}" />
 										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleTextBoxBorderBrushFocused}" />
 										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource SimpleTextBoxFocusedBorderThickness}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleTextBoxForegroundFocused}" />
-										<Setter Target="PlaceholderTextContentPresenter.Visibility" Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundDisabled}" />
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundDisabled}" />
 										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleTextBoxBorderBrushDisabled}" />
 										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleTextBoxForegroundDisabled}" />
-										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource SimpleTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource SimpleTextBoxPlaceholderForegroundDisabled}" />
 										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleTextBoxHeaderForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -178,21 +177,23 @@
 										  x:DeferLoadStrategy="Lazy" />
 
 						<!-- Input field -->
-						<Border x:Name="BorderElement"
-								Grid.Row="1"
-								Background="{TemplateBinding Background}"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								BorderThickness="{TemplateBinding BorderThickness}"
-								CornerRadius="{TemplateBinding CornerRadius}"
-								MinHeight="{TemplateBinding MinHeight}">
+						<Grid Grid.Row="1"
+							  MinHeight="{TemplateBinding MinHeight}">
 
+							<!-- Background fill -->
+							<Border x:Name="BackgroundElement"
+									Background="{TemplateBinding Background}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+
+							<!-- Content -->
 							<Grid VerticalAlignment="Center">
-								<ContentControl x:Name="PlaceholderTextContentPresenter"
+								<ContentControl x:Name="PlaceholderElement"
 												Content="{TemplateBinding PlaceholderText}"
 												Foreground="{ThemeResource SimpleTextBoxPlaceholderForeground}"
 												FontFamily="{TemplateBinding FontFamily}"
 												FontSize="{TemplateBinding FontSize}"
 												Padding="{TemplateBinding Padding}"
+												Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToVisibleConverter}}"
 												IsHitTestVisible="False"
 												IsTabStop="False" />
 
@@ -209,7 +210,17 @@
 											  ZoomMode="Disabled"
 											  AutomationProperties.AccessibilityView="Raw" />
 							</Grid>
-						</Border>
+
+							<!--
+								Border overlay — border thickness changes (e.g. 1 px → 2 px on focus)
+								don't push inner content, preventing the "shrink" effect.
+								Same approach as Material.
+							-->
+							<Border x:Name="BorderElement"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
