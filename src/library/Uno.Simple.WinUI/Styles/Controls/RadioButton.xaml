@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
@@ -6,13 +6,16 @@
 		Lightweight styling: every visual-state brush is exposed via ThemeResource.
 
 		Semantic resource layer:
-		  RadioButtonOuterEllipseFill*          = Unchecked background  (was SimpleRadioButtonUncheckedBackground*)
-		  RadioButtonOuterEllipseStroke*        = Unchecked border      (was SimpleRadioButtonUncheckedBorderBrush*)
-		  RadioButtonOuterEllipseCheckedFill*   = Checked background    (was SimpleRadioButtonCheckedBackground*)
-		  RadioButtonOuterEllipseCheckedStroke* = Checked border        (was SimpleRadioButtonCheckedBorderBrush*)
-		  RadioButtonForeground*                = Label text            (was SimpleRadioButtonForeground*)
+		  RadioButtonOuterEllipseFill*          = Unchecked background  (semantic key)
+		  RadioButtonOuterEllipseStroke*        = Unchecked border      (semantic key)
+		  RadioButtonOuterEllipseCheckedFill*   = Checked background    (semantic key)
+		  RadioButtonOuterEllipseCheckedStroke* = Checked border        (semantic key)
+		  RadioButtonForeground*                = Label text            (semantic key)
 
-		Backwards-compat aliases are provided for all old Simple-prefixed names.
+		Simple-prefixed aliases → semantic keys are provided for all names.
+
+		Templates reference Simple-prefixed keys (SimpleRadioButton*) so that consumers
+		can override EITHER the Simple key or the semantic key.
 
 		Simple-only keys (no semantic rename):
 		  SimpleRadioButtonCheckedDotFill* — no Material equivalent
@@ -178,7 +181,7 @@
 	<Style x:Key="SimpleRadioButtonStyle"
 		   TargetType="RadioButton">
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource RadioButtonForeground}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleRadioButtonForeground}" />
 		<Setter Property="BorderBrush" Value="Transparent" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
@@ -213,27 +216,27 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource RadioButtonForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource RadioButtonForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<!-- Unchecked element disabled colors -->
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource RadioButtonOuterEllipseFillDisabled}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource RadioButtonOuterEllipseStrokeDisabled}" />
+										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundDisabled}" />
+										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushDisabled}" />
 										<!-- Checked element disabled colors -->
-										<Setter Target="RadioBorder_Checked.Fill" Value="{ThemeResource RadioButtonOuterEllipseCheckedFillDisabled}" />
-										<Setter Target="RadioBorder_Checked.Stroke" Value="{ThemeResource RadioButtonOuterEllipseCheckedStrokeDisabled}" />
+										<Setter Target="RadioBorder_Checked.Fill" Value="{ThemeResource SimpleRadioButtonCheckedBackgroundDisabled}" />
+										<Setter Target="RadioBorder_Checked.Stroke" Value="{ThemeResource SimpleRadioButtonCheckedBorderBrushDisabled}" />
 										<Setter Target="RadioDot.Fill" Value="{ThemeResource SimpleRadioButtonCheckedDotFillDisabled}" />
 										<!-- Label -->
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource RadioButtonForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -266,16 +269,16 @@
 							<Ellipse x:Name="RadioBorder"
 									 Width="{StaticResource SimpleRadioButtonSize}"
 									 Height="{StaticResource SimpleRadioButtonSize}"
-									 Fill="{ThemeResource RadioButtonOuterEllipseFill}"
-									 Stroke="{ThemeResource RadioButtonOuterEllipseStroke}"
+									 Fill="{ThemeResource SimpleRadioButtonUncheckedBackground}"
+									 Stroke="{ThemeResource SimpleRadioButtonUncheckedBorderBrush}"
 									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}" />
 
 							<!-- Checked outer circle (hidden by default) -->
 							<Ellipse x:Name="RadioBorder_Checked"
 									 Width="{StaticResource SimpleRadioButtonSize}"
 									 Height="{StaticResource SimpleRadioButtonSize}"
-									 Fill="{ThemeResource RadioButtonOuterEllipseCheckedFill}"
-									 Stroke="{ThemeResource RadioButtonOuterEllipseCheckedStroke}"
+									 Fill="{ThemeResource SimpleRadioButtonCheckedBackground}"
+									 Stroke="{ThemeResource SimpleRadioButtonCheckedBorderBrush}"
 									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}"
 									 Opacity="0" />
 

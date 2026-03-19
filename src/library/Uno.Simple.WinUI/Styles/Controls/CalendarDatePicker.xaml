@@ -21,7 +21,10 @@
 
 		Semantic resource layer:
 		  CalendarDatePicker* = canonical semantic keys (source of truth)
-		  SimpleCalendarDatePicker* = backwards-compat aliases
+		  SimpleCalendarDatePicker* = backwards-compat aliases that point to the semantic keys
+
+		Templates reference Simple-prefixed keys (which alias to semantic keys),
+		so consumers can override EITHER key.
 
 		Lightweight styling pattern: every visual-state brush is exposed via
 		ThemeResource so consumers can override any individual key.
@@ -235,19 +238,19 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleCalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
-		<Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}" />
-		<Setter Property="Background" Value="{ThemeResource CalendarDatePickerBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{ThemeResource CalendarDatePickerBorderThemeThickness}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleCalendarDatePickerForeground}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleCalendarDatePickerBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleCalendarDatePickerBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource SimpleCalendarDatePickerBorderThemeThickness}" />
 		<Setter Property="CalendarViewStyle" Value="{StaticResource SimpleCalendarViewStyle}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
-		<Setter Property="MinHeight" Value="{ThemeResource CalendarDatePickerMinHeight}" />
+		<Setter Property="MinHeight" Value="{ThemeResource SimpleCalendarDatePickerMinHeight}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<not_win:Setter Property="CornerRadius"
-					    Value="{ThemeResource CalendarDatePickerCornerRadius}" />
+					    Value="{ThemeResource SimpleCalendarDatePickerCornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -261,25 +264,25 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource CalendarDatePickerBackgroundPointerOver}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrushPointerOver}" />
+										<Setter Target="Background.Background" Value="{ThemeResource SimpleCalendarDatePickerBackgroundPointerOver}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleCalendarDatePickerBorderBrushPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource CalendarDatePickerBackgroundPressed}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrushPressed}" />
+										<Setter Target="Background.Background" Value="{ThemeResource SimpleCalendarDatePickerBackgroundPressed}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleCalendarDatePickerBorderBrushPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource CalendarDatePickerBackgroundDisabled}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrushDisabled}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource CalendarDatePickerHeaderForegroundDisabled}" />
-										<Setter Target="DateText.Foreground" Value="{ThemeResource CalendarDatePickerTextForegroundDisabled}" />
-										<Setter Target="CalendarGlyph.Foreground" Value="{ThemeResource CalendarDatePickerCalendarGlyphForegroundDisabled}" />
+										<Setter Target="Background.Background" Value="{ThemeResource SimpleCalendarDatePickerBackgroundDisabled}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleCalendarDatePickerBorderBrushDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleCalendarDatePickerHeaderForegroundDisabled}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleCalendarDatePickerTextForegroundDisabled}" />
+										<Setter Target="CalendarGlyph.Foreground" Value="{ThemeResource SimpleCalendarDatePickerCalendarGlyphForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -289,8 +292,8 @@
 								<VisualState x:Name="PointerFocused" />
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource CalendarDatePickerBackgroundFocused}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrushFocused}" />
+										<Setter Target="Background.Background" Value="{ThemeResource SimpleCalendarDatePickerBackgroundFocused}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleCalendarDatePickerBorderBrushFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -299,7 +302,7 @@
 								<VisualState x:Name="Unselected" />
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
-										<Setter Target="DateText.Foreground" Value="{ThemeResource CalendarDatePickerTextForegroundSelected}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleCalendarDatePickerTextForegroundSelected}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -315,10 +318,10 @@
 									ShouldConstrainToRootBounds="False">
 								<Flyout.FlyoutPresenterStyle>
 									<Style TargetType="FlyoutPresenter">
-										<Setter Property="Padding" Value="{ThemeResource CalendarDatePickerFlyoutPresenterPadding}" />
+										<Setter Property="Padding" Value="{ThemeResource SimpleCalendarDatePickerFlyoutPresenterPadding}" />
 										<Setter Property="BorderThickness" Value="0" />
 										<Setter Property="IsDefaultShadowEnabled" Value="True" />
-										<Setter Property="CornerRadius" Value="{ThemeResource CalendarDatePickerFlyoutPresenterCornerRadius}" />
+										<Setter Property="CornerRadius" Value="{ThemeResource SimpleCalendarDatePickerFlyoutPresenterCornerRadius}" />
 										<Setter Property="Template">
 											<Setter.Value>
 												<ControlTemplate TargetType="FlyoutPresenter">
@@ -347,16 +350,16 @@
 											  DayOfWeekFormat="{TemplateBinding DayOfWeekFormat}"
 											  IsOutOfScopeEnabled="{TemplateBinding IsOutOfScopeEnabled}"
 											  IsGroupLabelVisible="{TemplateBinding IsGroupLabelVisible}"
-											  CornerRadius="{ThemeResource CalendarDatePickerFlyoutPresenterCornerRadius}" />
+											  CornerRadius="{ThemeResource SimpleCalendarDatePickerFlyoutPresenterCornerRadius}" />
 							</Flyout>
 						</FlyoutBase.AttachedFlyout>
 
 						<!-- Background field border -->
 						<Border x:Name="Background"
-								Background="{ThemeResource CalendarDatePickerBackground}"
-								BorderBrush="{ThemeResource CalendarDatePickerBorderBrush}"
+								Background="{ThemeResource SimpleCalendarDatePickerBackground}"
+								BorderBrush="{ThemeResource SimpleCalendarDatePickerBorderBrush}"
 								BorderThickness="{TemplateBinding BorderThickness}"
-								CornerRadius="{ThemeResource CalendarDatePickerCornerRadius}"
+								CornerRadius="{ThemeResource SimpleCalendarDatePickerCornerRadius}"
 Control.IsTemplateFocusTarget="True" />
 
 						<!-- Content row: header/date text + calendar icon -->
@@ -376,7 +379,7 @@ Control.IsTemplateFocusTarget="True" />
 											  Grid.ColumnSpan="2"
 											  Content="{TemplateBinding Header}"
 											  ContentTemplate="{TemplateBinding HeaderTemplate}"
-											  Foreground="{ThemeResource CalendarDatePickerHeaderForeground}"
+											  Foreground="{ThemeResource SimpleCalendarDatePickerHeaderForeground}"
 											  FontSize="{ThemeResource SimpleTypographyScale02}"
 											  FontFamily="{ThemeResource SimpleFontFamily}"
 											  TextWrapping="Wrap"
@@ -389,7 +392,7 @@ Control.IsTemplateFocusTarget="True" />
 									   Grid.Row="1"
 									   Grid.Column="0"
 									   Text="{TemplateBinding PlaceholderText}"
-									   Foreground="{ThemeResource CalendarDatePickerTextForeground}"
+									   Foreground="{ThemeResource SimpleCalendarDatePickerTextForeground}"
 									   FontSize="{TemplateBinding FontSize}"
 									   FontFamily="{TemplateBinding FontFamily}"
 									   VerticalAlignment="Center" />
@@ -400,7 +403,7 @@ Control.IsTemplateFocusTarget="True" />
 									  Grid.Column="1"
 									  Glyph="&#xE787;"
 									  FontSize="{ThemeResource SimpleTypographyScale03}"
-									  Foreground="{ThemeResource CalendarDatePickerCalendarGlyphForeground}"
+									  Foreground="{ThemeResource SimpleCalendarDatePickerCalendarGlyphForeground}"
 									  VerticalAlignment="Center"
 									  Margin="{ThemeResource CalendarDatePickerCalendarGlyphMargin}" />
 						</Grid>

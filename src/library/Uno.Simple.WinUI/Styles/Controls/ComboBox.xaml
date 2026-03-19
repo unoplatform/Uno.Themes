@@ -5,9 +5,12 @@
 		Simple Design System — ComboBox (Select) Styles
 		Lightweight styling: every visual-state brush is exposed via ThemeResource.
 
-		Semantic resource layer:
+		Resource layers:
 		  ComboBox*           = semantic keys (source of truth) — matches Material naming
-		  SimpleComboBox*     = backwards-compat aliases → ComboBox*
+		  SimpleComboBox*     = Simple-prefixed aliases → ComboBox*
+
+		Templates reference Simple-prefixed keys (which alias to semantic keys).
+		This allows overriding EITHER the Simple-prefixed key OR the semantic key.
 
 		Simple-only resources (error styles) stay as-is with Simple prefix.
 
@@ -209,17 +212,17 @@
 		   TargetType="ComboBox">
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
-		<Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
-		<Setter Property="Background" Value="{ThemeResource ComboBoxBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThickness}" />
-		<Setter Property="Padding" Value="{ThemeResource ComboBoxPadding}" />
-		<Setter Property="MinHeight" Value="{ThemeResource ComboBoxMinHeight}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleComboBoxForeground}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleComboBoxBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleComboBoxBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource SimpleComboBoxBorderThickness}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleComboBoxPadding}" />
+		<Setter Property="MinHeight" Value="{ThemeResource SimpleComboBoxMinHeight}" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Top" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="CornerRadius" Value="{StaticResource ComboBoxCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SimpleComboBoxCornerRadius}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<Setter Property="FocusVisualMargin" Value="-3" />
 		<Setter Property="ItemContainerStyle" Value="{StaticResource SimpleSelectFieldItemStyle}" />
@@ -233,18 +236,18 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource ComboBoxBackgroundPointerOver}" />
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPointerOver}" />
+										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleComboBoxBackgroundPointerOver}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleComboBoxBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource ComboBoxBackgroundPressed}" />
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource ComboBoxBorderBrushPressed}" />
+										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleComboBoxBackgroundPressed}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleComboBoxBorderBrushPressed}" />
 										<Setter Target="BorderElement.BorderThickness" Value="{StaticResource SimpleComboBoxFocusedBorderThickness}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -253,22 +256,22 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement"
 																	   Storyboard.TargetProperty="Background">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource ComboBoxBackgroundDisabled}" />
+																	Value="{ThemeResource SimpleComboBoxBackgroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement"
 																	   Storyboard.TargetProperty="BorderBrush">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
+																	Value="{ThemeResource SimpleComboBoxBorderBrushDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
 																	   Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource ComboBoxForegroundDisabled}" />
+																	Value="{ThemeResource SimpleComboBoxForegroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="DropDownGlyph"
 																	   Storyboard.TargetProperty="Foreground">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																	Value="{ThemeResource ComboBoxDropDownGlyphForegroundDisabled}" />
+																	Value="{ThemeResource SimpleComboBoxDropDownGlyphForegroundDisabled}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -330,7 +333,7 @@
 										  Glyph="{StaticResource SimpleComboBoxDropDownGlyphIcon}"
 										  FontFamily="{ThemeResource SymbolThemeFontFamily}"
 										  FontSize="{ThemeResource SimpleCaptionFontSize}"
-										  Foreground="{ThemeResource ComboBoxDropDownGlyphForeground}"
+										  Foreground="{ThemeResource SimpleComboBoxDropDownGlyphForeground}"
 										  VerticalAlignment="Center"
 										  Margin="{StaticResource SimpleComboBoxDropDownGlyphMargin}"
 										  IsHitTestVisible="False"
@@ -343,10 +346,10 @@
 							   IsLightDismissEnabled="True"
 							   AllowFocusOnInteraction="True">
 							<Border x:Name="PopupBorder"
-									Background="{ThemeResource ComboBoxDropDownBackground}"
-									BorderBrush="{ThemeResource ComboBoxDropDownBorderBrush}"
+									Background="{ThemeResource SimpleComboBoxPopupBackground}"
+									BorderBrush="{ThemeResource SimpleComboBoxPopupBorderBrush}"
 									BorderThickness="{ThemeResource SimpleStrokeBorderThickness}"
-									CornerRadius="{StaticResource ComboBoxCornerRadius}"
+									CornerRadius="{StaticResource SimpleComboBoxCornerRadius}"
 									Padding="{StaticResource SimpleComboBoxPopupPadding}"
 									MaxHeight="{StaticResource SimpleComboBoxPopupMaxHeight}">
 								<Border.Shadow>
@@ -373,7 +376,7 @@
 		   TargetType="ComboBoxItem">
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
-		<Setter Property="Foreground" Value="{ThemeResource ComboBoxItemForeground}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleComboBoxItemForeground}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Padding" Value="16,12" />
 		<Setter Property="MinHeight" Value="40" />
@@ -394,43 +397,43 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundPointerOver}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleComboBoxItemBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxItemForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundPressed}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleComboBoxItemBackgroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxItemForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundSelected}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelected}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleComboBoxItemBackgroundSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxItemForegroundSelected}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="SelectedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedPointerOver}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleComboBoxItemBackgroundSelectedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxItemForegroundSelectedPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="SelectedPressed">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundSelectedPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundSelectedPressed}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleComboBoxItemBackgroundSelectedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxItemForegroundSelectedPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="LayoutRoot.Background" Value="{ThemeResource ComboBoxItemBackgroundDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ComboBoxItemForegroundDisabled}" />
+										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleComboBoxItemBackgroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleComboBoxItemForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

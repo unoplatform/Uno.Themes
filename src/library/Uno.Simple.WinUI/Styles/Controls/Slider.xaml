@@ -5,9 +5,8 @@
 		Simple Design System — Slider Style
 		Maps SDS Slider component tokens to WinUI Slider.
 
-		Semantic resource layer:
-		  Slider*       = canonical semantic keys (source of truth)
-		  SimpleSlider* = backwards-compat aliases
+		Templates reference Simple-prefixed keys (SimpleSlider*) which alias
+		to the semantic keys (Slider*).  Consumers can override EITHER key.
 
 		SDS Slider:
 		  Thumb: 16px circle, bg = background-brand-default
@@ -123,7 +122,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleSliderThumbStyle"
 		   TargetType="Thumb">
-		<Setter Property="Background" Value="{ThemeResource SliderThumbBackground}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleSliderThumbBackground}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -142,8 +141,8 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleSliderStyle"
 		   TargetType="Slider">
-		<Setter Property="Background" Value="{ThemeResource SliderTrackFill}" />
-		<Setter Property="Foreground" Value="{ThemeResource SliderTrackValueFill}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleSliderTrackFill}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleSliderTrackValueFill}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="ManipulationMode" Value="None" />
@@ -163,21 +162,21 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SliderThumbBackgroundPressed}" />
-										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SliderThumbBackgroundPressed}" />
-										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillPressed}" />
-										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillPressed}" />
+										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundPressed}" />
+										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundPressed}" />
+										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillPressed}" />
+										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillDisabled}" />
-										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SliderTrackValueFillDisabled}" />
-										<Setter Target="HorizontalTrackRect.Fill" Value="{ThemeResource SliderTrackFillDisabled}" />
-										<Setter Target="VerticalTrackRect.Fill" Value="{ThemeResource SliderTrackFillDisabled}" />
-										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
-										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
+										<Setter Target="HorizontalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillDisabled}" />
+										<Setter Target="VerticalDecreaseRect.Fill" Value="{ThemeResource SimpleSliderTrackValueFillDisabled}" />
+										<Setter Target="HorizontalTrackRect.Fill" Value="{ThemeResource SimpleSliderTrackFillDisabled}" />
+										<Setter Target="VerticalTrackRect.Fill" Value="{ThemeResource SimpleSliderTrackFillDisabled}" />
+										<Setter Target="HorizontalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundDisabled}" />
+										<Setter Target="VerticalThumb.Background" Value="{ThemeResource SimpleSliderThumbBackgroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 

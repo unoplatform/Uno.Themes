@@ -5,10 +5,9 @@
 		Simple Design System — ToggleSwitch Style
 		Lightweight styling: every visual-state brush is exposed via ThemeResource.
 
-		Semantic resource layer:
-		  ToggleSwitchOuterBorder*  = Off-track semantic keys  (was SimpleToggleSwitchTrack*)
-		  ToggleSwitchKnobBounds*   = On-track semantic keys   (was SimpleToggleSwitchTrack*)
-		  ToggleSwitchKnob*         = Thumb semantic keys       (was SimpleToggleSwitchThumb*)
+		Templates reference Simple-prefixed keys (SimpleToggleSwitch*) which alias
+		to the semantic keys (ToggleSwitchOuterBorder*, ToggleSwitchKnobBounds*,
+		ToggleSwitchKnob*, ToggleSwitchContent*).  Consumers can override EITHER key.
 
 		Backwards-compat aliases are provided for all old Simple-prefixed names.
 
@@ -45,6 +44,7 @@
 			<!-- Backwards-compat aliases (SimpleToggleSwitchTrackOn* → ToggleSwitchKnobBounds*) -->
 			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackground"         ResourceKey="ToggleSwitchKnobBoundsFill" />
 			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundPressed"   ResourceKey="ToggleSwitchKnobBoundsFillPressed" />
+			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundDisabled"  ResourceKey="ToggleSwitchKnobBoundsFillDisabled" />
 
 			<!-- ── Thumb — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="ToggleSwitchKnobOffFill"                ResourceKey="SimpleIconDefaultSecondaryBrush" />
@@ -86,6 +86,7 @@
 			<!-- Backwards-compat aliases (SimpleToggleSwitchTrackOn* → ToggleSwitchKnobBounds*) -->
 			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackground"         ResourceKey="ToggleSwitchKnobBoundsFill" />
 			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundPressed"   ResourceKey="ToggleSwitchKnobBoundsFillPressed" />
+			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundDisabled"  ResourceKey="ToggleSwitchKnobBoundsFillDisabled" />
 
 			<!-- ── Thumb — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="ToggleSwitchKnobOffFill"                ResourceKey="SimpleIconDefaultSecondaryBrush" />
@@ -125,7 +126,7 @@
 		   TargetType="ToggleSwitch">
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleBodySmallFontSize}" />
-		<Setter Property="Foreground" Value="{ThemeResource ToggleSwitchContentForeground}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleToggleSwitchForeground}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -170,20 +171,20 @@
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="OuterBorder.Fill" Value="{ThemeResource ToggleSwitchOuterBorderFillPressed}" />
-										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource ToggleSwitchKnobBoundsFillPressed}" />
+										<Setter Target="OuterBorder.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOffBackgroundPressed}" />
+										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOnBackgroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="OuterBorder.Fill" Value="{ThemeResource ToggleSwitchOuterBorderFillDisabled}" />
-										<Setter Target="OuterBorder.Stroke" Value="{ThemeResource ToggleSwitchOuterBorderStrokeDisabled}" />
-										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource ToggleSwitchKnobBoundsFillDisabled}" />
-										<Setter Target="KnobOff.Fill" Value="{ThemeResource ToggleSwitchKnobFillDisabled}" />
-										<Setter Target="KnobOn.Fill" Value="{ThemeResource ToggleSwitchKnobFillDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleSwitchContentForegroundDisabled}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource ToggleSwitchContentForegroundDisabled}" />
+										<Setter Target="OuterBorder.Fill" Value="{ThemeResource SimpleToggleSwitchTrackDisabledBackground}" />
+										<Setter Target="OuterBorder.Stroke" Value="{ThemeResource SimpleToggleSwitchTrackDisabledBorderBrush}" />
+										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOnBackgroundDisabled}" />
+										<Setter Target="KnobOff.Fill" Value="{ThemeResource SimpleToggleSwitchThumbDisabledFill}" />
+										<Setter Target="KnobOn.Fill" Value="{ThemeResource SimpleToggleSwitchThumbDisabledFill}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleSwitchForegroundDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleToggleSwitchForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -206,7 +207,7 @@
 										  Grid.Column="0"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{ThemeResource ToggleSwitchContentForeground}"
+										  Foreground="{ThemeResource SimpleToggleSwitchForeground}"
 										  Margin="{StaticResource SimpleToggleSwitchHeaderMargin}"
 										  VerticalAlignment="Top"
 										  Visibility="Collapsed" />
@@ -225,8 +226,8 @@
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
 									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
 									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   Fill="{ThemeResource ToggleSwitchOuterBorderFill}"
-									   Stroke="{ThemeResource ToggleSwitchOuterBorderStroke}"
+									   Fill="{ThemeResource SimpleToggleSwitchTrackOffBackground}"
+									   Stroke="{ThemeResource SimpleToggleSwitchTrackOffBorderBrush}"
 									   StrokeThickness="{StaticResource SimpleToggleSwitchStrokeThickness}"
 									   HorizontalAlignment="Center" />
 
@@ -236,7 +237,7 @@
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
 									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
 									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   Fill="{ThemeResource ToggleSwitchKnobBoundsFill}"
+									   Fill="{ThemeResource SimpleToggleSwitchTrackOnBackground}"
 									   HorizontalAlignment="Center"
 									   Opacity="0" />
 
@@ -251,7 +252,7 @@
 									<Ellipse x:Name="KnobOn"
 											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
 											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Fill="{ThemeResource ToggleSwitchKnobOnFill}"
+											 Fill="{ThemeResource SimpleToggleSwitchThumbOnFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOnMargin}"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Center"
@@ -264,7 +265,7 @@
 									<Ellipse x:Name="KnobOff"
 											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
 											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Fill="{ThemeResource ToggleSwitchKnobOffFill}"
+											 Fill="{ThemeResource SimpleToggleSwitchThumbOffFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOffMargin}"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Center" />

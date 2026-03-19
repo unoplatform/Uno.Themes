@@ -11,7 +11,10 @@
 
 		Semantic resource layer:
 		  DatePicker*        = canonical semantic keys (source of truth)
-		  SimpleDatePicker*  = backwards-compat aliases
+		  SimpleDatePicker*  = backwards-compat aliases that point to the semantic keys
+
+		Templates reference Simple-prefixed keys (which alias to semantic keys),
+		so consumers can override EITHER key.
 
 		SDS DatePicker CSS mapping:
 		  Field:       background-default-default bg, border-default-default border, radius-200 (8px), text-default-default
@@ -279,8 +282,8 @@
 	<Style x:Key="SimpleDatePickerFlyoutButtonStyle"
 		   TargetType="Button">
 
-		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutButtonBackground}" />
-		<Setter Property="Padding" Value="{ThemeResource DatePickerFlyoutButtonPadding}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleDatePickerFlyoutButtonBackground}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleDatePickerFlyoutButtonPadding}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -330,14 +333,14 @@
 		<Setter Property="MinWidth" Value="{ThemeResource DatePickerFlyoutPresenterMinWidth}" />
 		<Setter Property="MaxHeight" Value="{ThemeResource DatePickerFlyoutPresenterMaxHeight}" />
 		<Setter Property="IsTabStop" Value="False" />
-		<Setter Property="FontFamily" Value="{ThemeResource DatePickerFlyoutPresenterFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleDatePickerFlyoutPresenterFontFamily}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
-		<Setter Property="Background" Value="{ThemeResource DatePickerFlyoutPresenterBackground}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleDatePickerFlyoutPresenterBackground}" />
 		<Setter Property="AutomationProperties.AutomationId" Value="DatePickerFlyoutPresenter" />
-		<Setter Property="BorderThickness" Value="{ThemeResource DatePickerFlyoutBorderThickness}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerFlyoutPresenterBorderBrush}" />
-		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerFlyoutPresenterCornerRadius}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource SimpleDatePickerFlyoutBorderThickness}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleDatePickerFlyoutPresenterBorderBrush}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleDatePickerFlyoutPresenterCornerRadius}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -375,24 +378,24 @@
 								<Rectangle x:Name="HighlightRect"
 										   Grid.Column="0"
 										   Grid.ColumnSpan="5"
-										   Height="{ThemeResource DatePickerFlyoutPresenterHighlightHeight}"
+										   Height="{ThemeResource SimpleDatePickerFlyoutPresenterHighlightHeight}"
 										   VerticalAlignment="Center"
-										   Fill="{ThemeResource DatePickerFlyoutPresenterHighlightFill}"
+										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterHighlightFill}"
 										   RadiusX="8"
 										   RadiusY="8" />
 
 								<!-- Column spacers -->
 								<Rectangle x:Name="FirstPickerSpacing"
 										   Grid.Column="1"
-										   Width="{ThemeResource DatePickerSpacerThemeWidth}"
+										   Width="{ThemeResource SimpleDatePickerSpacerThemeWidth}"
 										   HorizontalAlignment="Center"
-										   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
+										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterSpacerFill}" />
 
 								<Rectangle x:Name="SecondPickerSpacing"
 										   Grid.Column="3"
-										   Width="{ThemeResource DatePickerSpacerThemeWidth}"
+										   Width="{ThemeResource SimpleDatePickerSpacerThemeWidth}"
 										   HorizontalAlignment="Center"
-										   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
+										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterSpacerFill}" />
 							</Grid>
 
 							<!-- Accept / Dismiss buttons -->
@@ -410,9 +413,9 @@
 
 								<!-- Top separator line -->
 								<Rectangle Grid.ColumnSpan="3"
-										   Height="{ThemeResource DatePickerSpacerThemeWidth}"
+										   Height="{ThemeResource SimpleDatePickerSpacerThemeWidth}"
 										   VerticalAlignment="Top"
-										   Fill="{ThemeResource DatePickerFlyoutPresenterSpacerFill}" />
+										   Fill="{ThemeResource SimpleDatePickerFlyoutPresenterSpacerFill}" />
 
 								<Button x:Name="DismissButton"
 										x:Uid="DatePickerFlyoutDismissButton"
@@ -444,13 +447,13 @@
 	<Style x:Key="SimpleDatePickerStyle"
 		   TargetType="DatePicker">
 
-		<Setter Property="Background" Value="{ThemeResource DatePickerButtonBackground}" />
-		<Setter Property="Foreground" Value="{ThemeResource DatePickerButtonForeground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{ThemeResource DatePickerBorderThemeThickness}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleDatePickerButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleDatePickerButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource SimpleDatePickerBorderThemeThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="MinHeight" Value="{ThemeResource DatePickerMinHeight}" />
-		<Setter Property="CornerRadius" Value="{ThemeResource DatePickerCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleDatePickerCornerRadius}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
@@ -473,7 +476,7 @@
 										  Grid.Row="0"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{ThemeResource DatePickerHeaderForeground}"
+										  Foreground="{ThemeResource SimpleDatePickerHeaderForeground}"
 										  FontSize="{ThemeResource SimpleTypographyScale02}"
 										  FontFamily="{ThemeResource SimpleFontFamily}"
 										  FontWeight="SemiBold"
@@ -511,7 +514,7 @@
 
 										<!-- Formatted date text -->
 										<TextBlock x:Name="DateText"
-												   Foreground="{ThemeResource DatePickerButtonDateTextForeground}"
+												   Foreground="{ThemeResource SimpleDatePickerButtonDateTextForeground}"
 												   FontSize="{TemplateBinding FontSize}"
 												   FontFamily="{TemplateBinding FontFamily}"
 												   VerticalAlignment="Center"
@@ -519,7 +522,7 @@
 
 										<!-- Placeholder text (shown when no date) -->
 										<TextBlock x:Name="PlaceholderText"
-												   Foreground="{ThemeResource DatePickerPlaceholderTextForeground}"
+												   Foreground="{ThemeResource SimpleDatePickerPlaceholderTextForeground}"
 												   FontSize="{TemplateBinding FontSize}"
 												   FontFamily="{TemplateBinding FontFamily}"
 												   VerticalAlignment="Center"
@@ -540,28 +543,28 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource DatePickerButtonBackgroundPointerOver}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrushPointerOver}" />
-										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundPointerOver}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource DatePickerButtonForegroundPointerOver}" />
+										<Setter Target="Background.Background" Value="{ThemeResource SimpleDatePickerButtonBackgroundPointerOver}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrushPointerOver}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleDatePickerButtonDateTextForegroundPointerOver}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleDatePickerButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource DatePickerButtonBackgroundPressed}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrushPressed}" />
-										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundPressed}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource DatePickerButtonForegroundPressed}" />
+										<Setter Target="Background.Background" Value="{ThemeResource SimpleDatePickerButtonBackgroundPressed}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrushPressed}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleDatePickerButtonDateTextForegroundPressed}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleDatePickerButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Background.Background" Value="{ThemeResource DatePickerButtonBackgroundDisabled}" />
-										<Setter Target="Background.BorderBrush" Value="{ThemeResource DatePickerButtonBorderBrushDisabled}" />
-										<Setter Target="DateText.Foreground" Value="{ThemeResource DatePickerButtonDateTextForegroundDisabled}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource DatePickerHeaderForegroundDisabled}" />
+										<Setter Target="Background.Background" Value="{ThemeResource SimpleDatePickerButtonBackgroundDisabled}" />
+										<Setter Target="Background.BorderBrush" Value="{ThemeResource SimpleDatePickerButtonBorderBrushDisabled}" />
+										<Setter Target="DateText.Foreground" Value="{ThemeResource SimpleDatePickerButtonDateTextForegroundDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleDatePickerHeaderForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

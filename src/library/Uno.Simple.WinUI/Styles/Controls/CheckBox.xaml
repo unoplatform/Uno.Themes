@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
@@ -7,7 +7,10 @@
 
 		Semantic resource layer:
 		  CheckBox{Property}{State}  = semantic keys (Material naming, source of truth)
-		  SimpleCheckBox{State}{Property} = backwards-compat aliases → semantic keys
+		  SimpleCheckBox{State}{Property} = Simple-prefixed keys that alias → semantic keys
+
+		Templates reference Simple-prefixed keys (SimpleCheckBox*) so that consumers
+		can override EITHER the Simple key or the semantic key.
 
 		States: Unchecked/Checked/Indeterminate × Normal/PointerOver/Pressed/Disabled
 		SDS source: Checkbox/checkbox.css
@@ -279,7 +282,7 @@
 	<Style x:Key="SimpleCheckBoxStyle"
 		   TargetType="CheckBox">
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleCheckBoxForeground}" />
 		<Setter Property="BorderBrush" Value="Transparent" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
@@ -313,103 +316,103 @@
 								<!-- ── Unchecked ── -->
 								<VisualState x:Name="UncheckedNormal">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundUnchecked}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushUnchecked}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxUncheckedBackground}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxUncheckedBorderBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="UncheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundUncheckedPointerOver}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushUncheckedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPointerOver}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxUncheckedBackgroundPointerOver}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxUncheckedBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="UncheckedPressed">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundUncheckedPressed}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushUncheckedPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedPressed}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxUncheckedBackgroundPressed}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxUncheckedBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="UncheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundUncheckedDisabled}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushUncheckedDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundUncheckedDisabled}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxUncheckedBackgroundDisabled}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxUncheckedBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<!-- ── Checked ── -->
 								<VisualState x:Name="CheckedNormal">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundChecked}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushChecked}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxCheckedBackground}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxCheckedBorderBrush}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
-										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundChecked}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource SimpleCheckBoxCheckedGlyphFill}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundCheckedPointerOver}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedPointerOver}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxCheckedBackgroundPointerOver}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxCheckedBorderBrushPointerOver}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
-										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundCheckedPointerOver}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource SimpleCheckBoxCheckedGlyphFillPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedPressed">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundCheckedPressed}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedPressed}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxCheckedBackgroundPressed}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxCheckedBorderBrushPressed}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
-										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundCheckedPressed}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource SimpleCheckBoxCheckedGlyphFillPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundCheckedDisabled}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushCheckedDisabled}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxCheckedBackgroundDisabled}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxCheckedBorderBrushDisabled}" />
 										<Setter Target="CheckGlyph.Opacity" Value="1" />
-										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundCheckedDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundCheckedDisabled}" />
+										<Setter Target="CheckGlyph.Fill" Value="{ThemeResource SimpleCheckBoxCheckedGlyphFillDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<!-- ── Indeterminate ── -->
 								<VisualState x:Name="IndeterminateNormal">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundIndeterminate}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminate}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateBackground}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxIndeterminateBorderBrush}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
-										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminate}" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateGlyphFill}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="IndeterminatePointerOver">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundIndeterminatePointerOver}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminatePointerOver}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateBackgroundPointerOver}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxIndeterminateBorderBrushPointerOver}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
-										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminatePointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundIndeterminatePointerOver}" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateGlyphFillPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="IndeterminatePressed">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundIndeterminatePressed}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminatePressed}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateBackgroundPressed}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxIndeterminateBorderBrushPressed}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
-										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminatePressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundIndeterminatePressed}" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateGlyphFillPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
-										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource CheckBoxBackgroundIndeterminateDisabled}" />
-										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource CheckBoxBorderBrushIndeterminateDisabled}" />
+										<Setter Target="CheckBoxBorder.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateBackgroundDisabled}" />
+										<Setter Target="CheckBoxBorder.Stroke" Value="{ThemeResource SimpleCheckBoxIndeterminateBorderBrushDisabled}" />
 										<Setter Target="IndeterminateGlyph.Opacity" Value="1" />
-										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource CheckBoxGlyphForegroundIndeterminateDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource CheckBoxForegroundIndeterminateDisabled}" />
+										<Setter Target="IndeterminateGlyph.Fill" Value="{ThemeResource SimpleCheckBoxIndeterminateGlyphFillDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleCheckBoxForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -426,8 +429,8 @@
 
 							<!-- sds-size-radius-100 = 4 px -->
 							<Rectangle x:Name="CheckBoxBorder"
-									   Fill="{ThemeResource CheckBoxBackgroundUnchecked}"
-									   Stroke="{ThemeResource CheckBoxBorderBrushUnchecked}"
+									   Fill="{ThemeResource SimpleCheckBoxUncheckedBackground}"
+									   Stroke="{ThemeResource SimpleCheckBoxUncheckedBorderBrush}"
 									   StrokeThickness="{StaticResource SimpleCheckBoxStrokeThickness}"
 									   RadiusX="{ThemeResource SimpleRadius100}"
 									   RadiusY="{ThemeResource SimpleRadius100}" />
@@ -435,7 +438,7 @@
 							<!-- Checkmark Glyph -->
 							<Path x:Name="CheckGlyph"
 								  Data="{StaticResource SimpleCheckBoxCheckGlyphPathData}"
-								  Fill="{ThemeResource CheckBoxGlyphForegroundChecked}"
+								  Fill="{ThemeResource SimpleCheckBoxCheckedGlyphFill}"
 								  Stretch="Uniform"
 								  Width="{StaticResource SimpleCheckBoxGlyphSize}"
 								  Height="{StaticResource SimpleCheckBoxGlyphSize}"
@@ -446,7 +449,7 @@
 							<!-- Dash Glyph (Indeterminate) -->
 							<Path x:Name="IndeterminateGlyph"
 								  Data="{StaticResource SimpleCheckBoxHyphenGlyphPathData}"
-								  Fill="{ThemeResource CheckBoxGlyphForegroundIndeterminate}"
+								  Fill="{ThemeResource SimpleCheckBoxIndeterminateGlyphFill}"
 								  Stretch="Uniform"
 								  Width="{StaticResource SimpleCheckBoxGlyphSize}"
 								  Height="{StaticResource SimpleCheckBoxGlyphSize}"

@@ -26,7 +26,10 @@
 
 		Semantic resource layer:
 		  AppBarButton*       = semantic keys (source of truth)
-		  SimpleAppBarButton* = backwards-compat aliases
+		  SimpleAppBarButton* = backwards-compat aliases that point to the semantic keys
+
+		Templates reference Simple-prefixed keys (which alias to semantic keys),
+		so consumers can override EITHER key.
 
 		Simple-only keys (no Material equivalent, no rename):
 		  SimpleAppBarButtonIconForeground*  — separate icon foreground
@@ -150,15 +153,15 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleAppBarButtonStyle"
 		   TargetType="AppBarButton">
-		<Setter Property="Background" Value="{ThemeResource AppBarButtonBackground}" />
-		<Setter Property="Foreground" Value="{ThemeResource AppBarButtonForeground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource AppBarButtonBorderBrush}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleAppBarButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleAppBarButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleAppBarButtonBorderBrush}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Padding" Value="{StaticResource SimpleAppBarButtonPadding}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Top" />
-		<Setter Property="Height" Value="{ThemeResource AppBarButtonHeight}" />
-		<Setter Property="Width" Value="{ThemeResource AppBarButtonWidth}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleAppBarButtonHeight}" />
+		<Setter Property="Width" Value="{ThemeResource SimpleAppBarButtonWidth}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
 		<Setter Property="FontWeight" Value="Normal" />
@@ -182,28 +185,28 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource AppBarButtonBackgroundPointerOver}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleAppBarButtonBackgroundPointerOver}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleAppBarButtonBorderBrushPointerOver}" />
 										<Setter Target="Content.Foreground" Value="{ThemeResource SimpleAppBarButtonIconForegroundPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleAppBarButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource AppBarButtonBackgroundPressed}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleAppBarButtonBackgroundPressed}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleAppBarButtonBorderBrushPressed}" />
 										<Setter Target="Content.Foreground" Value="{ThemeResource SimpleAppBarButtonIconForegroundPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleAppBarButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="Root.Background" Value="{ThemeResource AppBarButtonBackgroundDisabled}" />
-										<Setter Target="Root.BorderBrush" Value="{ThemeResource AppBarButtonBorderBrushDisabled}" />
+										<Setter Target="Root.Background" Value="{ThemeResource SimpleAppBarButtonBackgroundDisabled}" />
+										<Setter Target="Root.BorderBrush" Value="{ThemeResource SimpleAppBarButtonBorderBrushDisabled}" />
 										<Setter Target="Content.Foreground" Value="{ThemeResource SimpleAppBarButtonIconForegroundDisabled}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource AppBarButtonForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleAppBarButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
