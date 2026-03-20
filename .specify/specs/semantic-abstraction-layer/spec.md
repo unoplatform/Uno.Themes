@@ -289,8 +289,8 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleInputTextBoxStyle` | Simple "Input" = filled appearance |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedInputTextBoxStyle` | Direct match |
+| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleInputTextBoxStyle` | Simple "Input" = single SDS Input design |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleInputTextBoxStyle` | SDS has one Input; maps to same style |
 
 ### PasswordBox
 
@@ -534,7 +534,7 @@ Only controls where **both** conditions are met:
 | Control | Simple XAML File | Alias Prefix Mapping | Approx. Aliases |
 |---|---|---|---|
 | Button | `Button.xaml` | `FilledButton*→SimplePrimaryButton*`, `FilledTonalButton*→SimpleNeutralButton*`, `OutlinedButton*→SimpleNeutralButton*`, `TextButton*→SimpleSubtleButton*`, `IconButton*→SimpleIconButtonPrimaryButton*` | ~75/dict |
-| TextBox | `TextBox.xaml` | `FilledTextBox*→SimpleTextBox*`, `OutlinedTextBox*→SimpleTextBox*` | ~45/dict |
+| TextBox | `TextBox.xaml` | `FilledTextBox*→SimpleTextBox*`, `OutlinedTextBox*→FilledTextBox*` (many-to-one) | ~45/dict |
 | PasswordBox | `PasswordBox.xaml` | `FilledPasswordBox*→SimplePasswordBox*` | ~25/dict |
 | ComboBox | `ComboBox.xaml` | `ComboBox*→SimpleComboBox*` | ~40/dict |
 | CheckBox | `CheckBox.xaml` | `CheckBox*→SimpleCheckBox*` (word-order differs) | ~60/dict |

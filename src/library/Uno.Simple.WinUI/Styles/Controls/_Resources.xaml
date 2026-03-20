@@ -104,9 +104,9 @@
 	<StaticResource x:Key="MediumDangerPrimaryButtonStyle" ResourceKey="SimpleMediumDangerPrimaryButtonStyle" />
 	<StaticResource x:Key="MediumDangerSubtleButtonStyle" ResourceKey="SimpleMediumDangerSubtleButtonStyle" />
 
-	<!-- TextBox: Input / Outlined Input / Error -->
+	<!-- TextBox: Input / Error / Small -->
+	<!-- SDS has a single Input design — no Filled/Outlined variants -->
 	<StaticResource x:Key="InputTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
-	<StaticResource x:Key="OutlinedInputTextBoxStyle" ResourceKey="SimpleOutlinedInputTextBoxStyle" />
 	<StaticResource x:Key="InputTextBoxErrorStyle" ResourceKey="SimpleInputTextBoxErrorStyle" />
 	<StaticResource x:Key="InputTextBoxSmallStyle" ResourceKey="SimpleInputTextBoxSmallStyle" />
 
@@ -208,9 +208,9 @@
 	<StaticResource x:Key="TextToggleButtonStyle" ResourceKey="SimpleDefaultToggleButtonStyle" />
 	<!-- IconToggleButtonStyle — GAP: Simple has no icon-only toggle variant -->
 
-	<!-- TextBox -->
+	<!-- TextBox — SDS has a single Input; both semantic variants resolve to it -->
 	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
-	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleOutlinedInputTextBoxStyle" />
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
 
 	<!-- PasswordBox -->
 	<StaticResource x:Key="FilledPasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />

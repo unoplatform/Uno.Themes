@@ -96,7 +96,6 @@ uid: Uno.Themes.Simple.Styles
 | `TextBlock`                 | `SimpleBodyCodeTextBlockStyle`            |                  |
 | `TextBlock`                 | `SimpleCaptionTextBlockStyle`             |                  |
 | `TextBox`                   | `SimpleInputTextBoxStyle`                 | True             |
-| `TextBox`                   | `SimpleOutlinedInputTextBoxStyle`         |                  |
 | `TextBox`                   | `SimpleInputTextBoxErrorStyle`            |                  |
 | `TextBox`                   | `SimpleInputTextBoxSmallStyle`            |                  |
 | `ToggleButton`              | `SimpleDefaultToggleButtonStyle`          | True             |
@@ -147,11 +146,10 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `MediumIconButtonDangerPrimaryStyle`   | `SimpleMediumIconButtonDangerPrimaryStyle` |
 | `MediumIconButtonDangerSubtleStyle`    | `SimpleMediumIconButtonDangerSubtleStyle`  |
 | `InputTextBoxStyle`                    | `SimpleInputTextBoxStyle`                  |
-| `OutlinedInputTextBoxStyle`            | `SimpleOutlinedInputTextBoxStyle`          |
 | `InputTextBoxErrorStyle`               | `SimpleInputTextBoxErrorStyle`             |
 | `InputTextBoxSmallStyle`               | `SimpleInputTextBoxSmallStyle`             |
 | `FilledTextBoxStyle`                   | `SimpleInputTextBoxStyle`                  |
-| `OutlinedTextBoxStyle`                 | `SimpleOutlinedInputTextBoxStyle`          |
+| `OutlinedTextBoxStyle`                 | `SimpleInputTextBoxStyle`                  |
 | `PasswordBoxStyle`                     | `SimplePasswordBoxStyle`                   |
 | `FilledPasswordBoxStyle`               | `SimplePasswordBoxStyle`                   |
 | `ComboBoxStyle`                        | `SimpleSelectFieldStyle`                   |
