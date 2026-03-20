@@ -120,8 +120,8 @@ SDS uses **opacity-based** state overlays (no ripple):
 
 | Style Key | Figma Name | Description |
 |-----------|-----------|-------------|
-| `SimpleInputTextBoxStyle` | Input Field | Default filled input |
-| `SimpleOutlinedInputTextBoxStyle` | Input Field/Outlined | Bordered input |
+| `SimpleInputTextBoxStyle` | Input Field | Default input (single SDS Input design) |
+| `SimpleInputTextBoxErrorStyle` | Input Field/Error | Danger border variant |
 | `SimpleInputTextBoxSmallStyle` | Input Field/Small | Compact input |
 
 ### ComboBox (3 styles) — `ComboBox.xaml`
@@ -181,7 +181,7 @@ These register default styles for controls when no explicit `Style` is set:
 Short names without the `Simple` prefix for consumer convenience:
 
 `PrimaryButtonStyle`, `NeutralButtonStyle`, `SubtleButtonStyle`,
-`InputTextBoxStyle`, `OutlinedInputTextBoxStyle`, `SelectFieldStyle`,
+`InputTextBoxStyle`, `SelectFieldStyle`,
 `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`,
 `PersonPictureStyle`, etc.
 

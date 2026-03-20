@@ -23,6 +23,19 @@
 
 		Lightweight styling pattern: every visual-state brush is exposed via
 		ThemeResource so consumers can override any individual key.
+
+		Semantic resource layer:
+		  AppBarButton*       = semantic keys (source of truth)
+		  SimpleAppBarButton* = backwards-compat aliases that point to the semantic keys
+
+		Templates reference Simple-prefixed keys (which alias to semantic keys),
+		so consumers can override EITHER key.
+
+		Simple-only keys (no Material equivalent, no rename):
+		  SimpleAppBarButtonIconForeground*  — separate icon foreground
+		  SimpleAppBarButtonIconSize         — icon sizing
+		  SimpleAppBarButtonContentSpacing   — gap between icon and label
+		  SimpleAppBarButtonPadding          — control padding
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
@@ -32,62 +45,98 @@
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="SimpleAppBarButtonHeight" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
-			<StaticResource x:Key="SimpleAppBarButtonWidth" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
+
+			<!-- ── AppBarButton — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="AppBarButtonHeight" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
+			<StaticResource x:Key="AppBarButtonWidth" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
 
 			<!-- Foreground (label text) -->
-			<StaticResource x:Key="SimpleAppBarButtonForeground"                ResourceKey="SimpleTextDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonForegroundPointerOver"     ResourceKey="SimpleTextDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonForegroundPressed"         ResourceKey="SimpleTextDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonForegroundDisabled"        ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="AppBarButtonForeground"                ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPointerOver"     ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPressed"         ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundDisabled"        ResourceKey="SimpleTextDisabledDefaultBrush" />
 
-			<!-- Icon foreground -->
+			<!-- Background -->
+			<StaticResource x:Key="AppBarButtonBackground"                ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPointerOver"     ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPressed"         ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundDisabled"        ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- BorderBrush (none by default, but exposed for overriding) -->
+			<StaticResource x:Key="AppBarButtonBorderBrush"               ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPointerOver"    ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPressed"        ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushDisabled"       ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Backwards-compat aliases (SimpleAppBarButton* → AppBarButton*) -->
+			<StaticResource x:Key="SimpleAppBarButtonHeight" ResourceKey="AppBarButtonHeight" />
+			<StaticResource x:Key="SimpleAppBarButtonWidth" ResourceKey="AppBarButtonWidth" />
+			<StaticResource x:Key="SimpleAppBarButtonForeground"                ResourceKey="AppBarButtonForeground" />
+			<StaticResource x:Key="SimpleAppBarButtonForegroundPointerOver"     ResourceKey="AppBarButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleAppBarButtonForegroundPressed"         ResourceKey="AppBarButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleAppBarButtonForegroundDisabled"        ResourceKey="AppBarButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleAppBarButtonBackground"                ResourceKey="AppBarButtonBackground" />
+			<StaticResource x:Key="SimpleAppBarButtonBackgroundPointerOver"     ResourceKey="AppBarButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleAppBarButtonBackgroundPressed"         ResourceKey="AppBarButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleAppBarButtonBackgroundDisabled"        ResourceKey="AppBarButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrush"               ResourceKey="AppBarButtonBorderBrush" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPointerOver"    ResourceKey="AppBarButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPressed"        ResourceKey="AppBarButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrushDisabled"       ResourceKey="AppBarButtonBorderBrushDisabled" />
+
+			<!-- Simple-only keys (no Material equivalent) -->
 			<StaticResource x:Key="SimpleAppBarButtonIconForeground"            ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleAppBarButtonIconForegroundPointerOver" ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleAppBarButtonIconForegroundPressed"     ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleAppBarButtonIconForegroundDisabled"    ResourceKey="SimpleIconDisabledDefaultBrush" />
-
-			<!-- Background -->
-			<StaticResource x:Key="SimpleAppBarButtonBackground"                ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBackgroundPointerOver"     ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBackgroundPressed"         ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBackgroundDisabled"        ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- BorderBrush (none by default, but exposed for overriding) -->
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrush"               ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPointerOver"    ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPressed"        ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrushDisabled"       ResourceKey="SystemControlTransparentBrush" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="SimpleAppBarButtonHeight" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
-			<StaticResource x:Key="SimpleAppBarButtonWidth" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
+
+			<!-- ── AppBarButton — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="AppBarButtonHeight" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
+			<StaticResource x:Key="AppBarButtonWidth" ResourceKey="SimpleSpace1600" /> <!-- sds-size-space-1600 -->
 
 			<!-- Foreground (label text) -->
-			<StaticResource x:Key="SimpleAppBarButtonForeground"                ResourceKey="SimpleTextDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonForegroundPointerOver"     ResourceKey="SimpleTextDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonForegroundPressed"         ResourceKey="SimpleTextDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonForegroundDisabled"        ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="AppBarButtonForeground"                ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPointerOver"     ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundPressed"         ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="AppBarButtonForegroundDisabled"        ResourceKey="SimpleTextDisabledDefaultBrush" />
 
-			<!-- Icon foreground -->
+			<!-- Background -->
+			<StaticResource x:Key="AppBarButtonBackground"                ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPointerOver"     ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundPressed"         ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
+			<StaticResource x:Key="AppBarButtonBackgroundDisabled"        ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- BorderBrush (none by default, but exposed for overriding) -->
+			<StaticResource x:Key="AppBarButtonBorderBrush"               ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPointerOver"    ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushPressed"        ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="AppBarButtonBorderBrushDisabled"       ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- Backwards-compat aliases (SimpleAppBarButton* → AppBarButton*) -->
+			<StaticResource x:Key="SimpleAppBarButtonHeight" ResourceKey="AppBarButtonHeight" />
+			<StaticResource x:Key="SimpleAppBarButtonWidth" ResourceKey="AppBarButtonWidth" />
+			<StaticResource x:Key="SimpleAppBarButtonForeground"                ResourceKey="AppBarButtonForeground" />
+			<StaticResource x:Key="SimpleAppBarButtonForegroundPointerOver"     ResourceKey="AppBarButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleAppBarButtonForegroundPressed"         ResourceKey="AppBarButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleAppBarButtonForegroundDisabled"        ResourceKey="AppBarButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleAppBarButtonBackground"                ResourceKey="AppBarButtonBackground" />
+			<StaticResource x:Key="SimpleAppBarButtonBackgroundPointerOver"     ResourceKey="AppBarButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleAppBarButtonBackgroundPressed"         ResourceKey="AppBarButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleAppBarButtonBackgroundDisabled"        ResourceKey="AppBarButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrush"               ResourceKey="AppBarButtonBorderBrush" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPointerOver"    ResourceKey="AppBarButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPressed"        ResourceKey="AppBarButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleAppBarButtonBorderBrushDisabled"       ResourceKey="AppBarButtonBorderBrushDisabled" />
+
+			<!-- Simple-only keys (no Material equivalent) -->
 			<StaticResource x:Key="SimpleAppBarButtonIconForeground"            ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleAppBarButtonIconForegroundPointerOver" ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleAppBarButtonIconForegroundPressed"     ResourceKey="SimpleIconDefaultSecondaryBrush" />
 			<StaticResource x:Key="SimpleAppBarButtonIconForegroundDisabled"    ResourceKey="SimpleIconDisabledDefaultBrush" />
-
-			<!-- Background -->
-			<StaticResource x:Key="SimpleAppBarButtonBackground"                ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBackgroundPointerOver"     ResourceKey="SimpleBackgroundDefaultDefaultHoverBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBackgroundPressed"         ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBackgroundDisabled"        ResourceKey="SystemControlTransparentBrush" />
-
-			<!-- BorderBrush (none by default, but exposed for overriding) -->
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrush"               ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPointerOver"    ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrushPressed"        ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="SimpleAppBarButtonBorderBrushDisabled"       ResourceKey="SystemControlTransparentBrush" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 

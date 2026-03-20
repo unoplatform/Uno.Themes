@@ -9,7 +9,6 @@ uid: Uno.Themes.Simple.Styles.TextBox
 | Style Key                          | IsDefaultStyle\* |
 |------------------------------------|------------------|
 | `SimpleInputTextBoxStyle`          | True             |
-| `SimpleOutlinedInputTextBoxStyle`  |                  |
 | `SimpleInputTextBoxErrorStyle`     |                  |
 | `SimpleInputTextBoxSmallStyle`     |                  |
 
