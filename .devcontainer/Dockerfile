@@ -99,6 +99,10 @@ RUN mkdir -p /commandhistory && \
 ENV DEVCONTAINER=true
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+# Ensure non-root user owns /usr/local/share for npm global installs
+RUN mkdir -p /usr/local/share/npm-global && \
+  chown -R ${USERNAME}:${USERNAME} /usr/local/share
+
 # Create workspace and config directories
 RUN mkdir -p /uno-themes /home/${USERNAME}/.claude /home/${USERNAME}/.copilot /home/${USERNAME}/.nuget && \
   chown -R ${USERNAME}:${USERNAME} /uno-themes /home/${USERNAME}/.claude /home/${USERNAME}/.copilot /home/${USERNAME}/.nuget
@@ -122,11 +126,14 @@ ENV SHELL=/bin/zsh
 ENV EDITOR=nano
 ENV VISUAL=nano
 
+# npm global prefix — writable by non-root user (matches Anthropic reference)
+ENV NPM_CONFIG_PREFIX=/usr/local/share/npm-global
+ENV PATH=$PATH:/usr/local/share/npm-global/bin
+
 # ---------------------------------------------------------------------------
-# Claude Code CLI (native installer — installs to ~/.local/bin/claude)
+# Claude Code CLI
 # ---------------------------------------------------------------------------
-RUN curl -fsSL https://claude.ai/install.sh | bash -s -- ${CLAUDE_CODE_VERSION}
-ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
+RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
 
 # ---------------------------------------------------------------------------
 # GitHub Copilot CLI (installs to ~/.local/bin/copilot)
@@ -141,9 +148,12 @@ RUN dotnet workload install wasm-tools
 
 # ---------------------------------------------------------------------------
 # uno-check (validate environment, from build/ci/scripts/run-uno-check.sh)
+# Installed as developer so the tool is usable interactively.
 # ---------------------------------------------------------------------------
+USER ${USERNAME}
+ENV PATH="${PATH}:/home/${USERNAME}/.dotnet/tools"
 RUN dotnet tool install --global uno.check
-ENV PATH="${PATH}:/root/.dotnet/tools:/home/${USERNAME}/.dotnet/tools"
+USER root
 RUN uno-check -v --ci --non-interactive --fix \
   --skip xcode --skip gtk3 --skip vswin --skip vswinworkloads --skip unosdk \
   --skip dotnetnewunotemplates --skip vsmac --skip androidsdk --skip openjdk --skip androidemulator \

@@ -1,4 +1,6 @@
 {
+  // Linux / WSL host only — Windows-native Docker hosts are not supported
+  // (mounts rely on $HOME which is unset on Windows).
   "name": "Uno Themes — ${localWorkspaceFolderBasename}",
   "build": {
     "dockerfile": "Dockerfile",
