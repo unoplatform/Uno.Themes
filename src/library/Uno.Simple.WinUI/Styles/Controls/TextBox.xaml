@@ -250,7 +250,7 @@
 	<!-- SDS has a single Input design; both FilledTextBoxStyle and             -->
 	<!-- OutlinedTextBoxStyle resolve to this style.                            -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleInputTextBoxStyle"
+	<Style x:Key="SimpleTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="Foreground" Value="{ThemeResource SimpleTextBoxForeground}" />
 		<Setter Property="Background" Value="{ThemeResource SimpleTextBoxBackground}" />
@@ -378,18 +378,18 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Error variant (danger border) — Simple-only                           -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleInputTextBoxErrorStyle"
+	<Style x:Key="SimpleTextBoxErrorStyle"
 		   TargetType="TextBox"
-		   BasedOn="{StaticResource SimpleInputTextBoxStyle}">
+		   BasedOn="{StaticResource SimpleTextBoxStyle}">
 		<Setter Property="BorderBrush" Value="{ThemeResource SimpleTextBoxErrorBorderBrush}" />
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Small size variant — Simple-only                                      -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleInputTextBoxSmallStyle"
+	<Style x:Key="SimpleTextBoxSmallStyle"
 		   TargetType="TextBox"
-		   BasedOn="{StaticResource SimpleInputTextBoxStyle}">
+		   BasedOn="{StaticResource SimpleTextBoxStyle}">
 		<Setter Property="MinHeight" Value="{ThemeResource SimpleTextBoxSmallMinHeight}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale02}" />
 	</Style>

@@ -8,9 +8,9 @@ uid: Uno.Themes.Simple.Styles.TextBox
 
 | Style Key                          | IsDefaultStyle\* |
 |------------------------------------|------------------|
-| `SimpleInputTextBoxStyle`          | True             |
-| `SimpleInputTextBoxErrorStyle`     |                  |
-| `SimpleInputTextBoxSmallStyle`     |                  |
+| `SimpleTextBoxStyle`          | True             |
+| `SimpleTextBoxErrorStyle`     |                  |
+| `SimpleTextBoxSmallStyle`     |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 

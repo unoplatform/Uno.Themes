@@ -16,7 +16,7 @@
 		   TargetType="ComboBox" />
 	<Style BasedOn="{StaticResource SimpleRadioButtonStyle}"
 		   TargetType="RadioButton" />
-	<Style BasedOn="{StaticResource SimpleInputTextBoxStyle}"
+	<Style BasedOn="{StaticResource SimpleTextBoxStyle}"
 		   TargetType="TextBox" />
 	<Style BasedOn="{StaticResource SimpleToggleSwitchStyle}"
 		   TargetType="ToggleSwitch" />
@@ -106,9 +106,9 @@
 
 	<!-- TextBox: Input / Error / Small -->
 	<!-- SDS has a single Input design — no Filled/Outlined variants -->
-	<StaticResource x:Key="InputTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
-	<StaticResource x:Key="InputTextBoxErrorStyle" ResourceKey="SimpleInputTextBoxErrorStyle" />
-	<StaticResource x:Key="InputTextBoxSmallStyle" ResourceKey="SimpleInputTextBoxSmallStyle" />
+	<StaticResource x:Key="InputTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
+	<StaticResource x:Key="InputTextBoxErrorStyle" ResourceKey="SimpleTextBoxErrorStyle" />
+	<StaticResource x:Key="InputTextBoxSmallStyle" ResourceKey="SimpleTextBoxSmallStyle" />
 
 	<!-- PasswordBox -->
 	<StaticResource x:Key="PasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />
@@ -209,8 +209,8 @@
 	<!-- IconToggleButtonStyle — GAP: Simple has no icon-only toggle variant -->
 
 	<!-- TextBox — SDS has a single Input; both semantic variants resolve to it -->
-	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
-	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
+	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
 
 	<!-- PasswordBox -->
 	<StaticResource x:Key="FilledPasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />

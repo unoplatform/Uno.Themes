@@ -95,9 +95,9 @@ uid: Uno.Themes.Simple.Styles
 | `TextBlock`                 | `SimpleBodySmallStrongTextBlockStyle`     |                  |
 | `TextBlock`                 | `SimpleBodyCodeTextBlockStyle`            |                  |
 | `TextBlock`                 | `SimpleCaptionTextBlockStyle`             |                  |
-| `TextBox`                   | `SimpleInputTextBoxStyle`                 | True             |
-| `TextBox`                   | `SimpleInputTextBoxErrorStyle`            |                  |
-| `TextBox`                   | `SimpleInputTextBoxSmallStyle`            |                  |
+| `TextBox`                   | `SimpleTextBoxStyle`                 | True             |
+| `TextBox`                   | `SimpleTextBoxErrorStyle`            |                  |
+| `TextBox`                   | `SimpleTextBoxSmallStyle`            |                  |
 | `ToggleButton`              | `SimpleDefaultToggleButtonStyle`          | True             |
 | `ToggleButton`              | `SimpleSmallToggleButtonStyle`            |                  |
 | `ToggleButton`              | `SimpleMediumToggleButtonStyle`           |                  |
@@ -145,11 +145,11 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `MediumIconButtonSubtleStyle`          | `SimpleMediumIconButtonSubtleStyle`        |
 | `MediumIconButtonDangerPrimaryStyle`   | `SimpleMediumIconButtonDangerPrimaryStyle` |
 | `MediumIconButtonDangerSubtleStyle`    | `SimpleMediumIconButtonDangerSubtleStyle`  |
-| `InputTextBoxStyle`                    | `SimpleInputTextBoxStyle`                  |
-| `InputTextBoxErrorStyle`               | `SimpleInputTextBoxErrorStyle`             |
-| `InputTextBoxSmallStyle`               | `SimpleInputTextBoxSmallStyle`             |
-| `FilledTextBoxStyle`                   | `SimpleInputTextBoxStyle`                  |
-| `OutlinedTextBoxStyle`                 | `SimpleInputTextBoxStyle`                  |
+| `InputTextBoxStyle`                    | `SimpleTextBoxStyle`                  |
+| `InputTextBoxErrorStyle`               | `SimpleTextBoxErrorStyle`             |
+| `InputTextBoxSmallStyle`               | `SimpleTextBoxSmallStyle`             |
+| `FilledTextBoxStyle`                   | `SimpleTextBoxStyle`                  |
+| `OutlinedTextBoxStyle`                 | `SimpleTextBoxStyle`                  |
 | `PasswordBoxStyle`                     | `SimplePasswordBoxStyle`                   |
 | `FilledPasswordBoxStyle`               | `SimplePasswordBoxStyle`                   |
 | `ComboBoxStyle`                        | `SimpleSelectFieldStyle`                   |

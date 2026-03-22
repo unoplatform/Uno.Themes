@@ -101,7 +101,7 @@ Both themes resolve to the correct variant.
 1. **Given** Material theme, **When** `FilledTextBoxStyle` is applied,
    **Then** renders as `MaterialFilledTextBoxStyle`.
 2. **Given** Simple theme, **When** `FilledTextBoxStyle` is applied,
-   **Then** renders as `SimpleInputTextBoxStyle`.
+   **Then** renders as `SimpleTextBoxStyle`.
 3. Same pattern for PasswordBox: `FilledPasswordBoxStyle`, `OutlinedPasswordBoxStyle`.
 
 ---
@@ -289,8 +289,8 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleInputTextBoxStyle` | Simple "Input" = single SDS Input design |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleInputTextBoxStyle` | SDS has one Input; maps to same style |
+| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleTextBoxStyle` | Simple "Input" = single SDS Input design |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleTextBoxStyle` | SDS has one Input; maps to same style |
 
 ### PasswordBox
 
@@ -596,8 +596,8 @@ already in Simple's `_Resources.xaml`).
 | `SimpleIconButtonDangerPrimaryStyle` | Button | |
 | `SimpleIconButtonDangerSubtleStyle` | Button | |
 | All `SimpleSmall*` / `SimpleMedium*` button variants | Button | Size variants — Material doesn't have explicit size variants |
-| `SimpleInputTextBoxErrorStyle` | TextBox | Dedicated error style |
-| `SimpleInputTextBoxSmallStyle` | TextBox | Size variant |
+| `SimpleTextBoxErrorStyle` | TextBox | Dedicated error style |
+| `SimpleTextBoxSmallStyle` | TextBox | Size variant |
 | `SimpleSelectFieldErrorStyle` | ComboBox | Dedicated error style |
 | `SimplePersonPictureStyle` (6 variants) | PersonPicture | Material has no PersonPicture |
 | `SimpleExpanderStyle` | Expander | Material has no Expander style |
