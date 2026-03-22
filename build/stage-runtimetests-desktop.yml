@@ -1,0 +1,60 @@
+jobs:
+- job: RuntimeTests_Desktop
+  cancelTimeoutInMinutes: 0
+  displayName: 'Runtime Tests - Desktop'
+  container: unoplatform/wasm-build:3.0
+  timeoutInMinutes: 60
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  strategy:
+    matrix:
+      Material:
+        SampleAppName: MaterialSampleApp
+        ProjectPath: src/samples/MaterialSampleApp
+      Simple:
+        SampleAppName: SimpleSampleApp
+        ProjectPath: src/samples/SimpleSampleApp
+
+  variables:
+    ArtifactName: runtimetests-desktop-$(SampleAppName)
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-desktop'
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - powershell: dotnet msbuild $(ProjectPath)/$(SampleAppName).csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=desktop /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build Desktop Head - $(SampleAppName)
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Build Logs
+    condition: always()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      ArtifactName: $(ArtifactName)-buildlog
+      ArtifactType: Container
+
+  - script: |
+      mkdir -p $(Common.TestResultsDirectory)
+      xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' \
+        dotnet $(Build.SourcesDirectory)/$(ProjectPath)/bin/Release/net10.0-desktop/$(SampleAppName).dll
+    displayName: 'Run Runtime Tests - $(SampleAppName)'
+    env:
+      UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
+      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Runtime Tests Results'
+    condition: always()
+    inputs:
+      testRunTitle: 'Runtime Tests - $(SampleAppName)'
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+      failTaskOnFailedTests: true

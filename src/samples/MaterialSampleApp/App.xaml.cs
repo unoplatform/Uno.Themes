@@ -6,7 +6,7 @@ namespace Uno.Themes.Samples;
 sealed partial class App : Application
 {
 	private Shell _shell;
-	public static XamlWindow MainWindow { get; private set; }
+	public static Microsoft.UI.Xaml.Window MainWindow { get; private set; }
 
 	static App() =>
 		InitializeLogging();
@@ -31,10 +31,10 @@ sealed partial class App : Application
 	/// </summary>
 	protected override void OnLaunched(LaunchActivatedEventArgs e)
 	{
-		MainWindow = XamlWindow.Current;
+		MainWindow = Microsoft.UI.Xaml.Window.Current;
 		NavigationHelper.MainWindow = MainWindow;
 
-		if (MainWindow is XamlWindow window)
+		if (MainWindow is Microsoft.UI.Xaml.Window window)
 		{
 			if (!(window.Content is Shell))
 			{

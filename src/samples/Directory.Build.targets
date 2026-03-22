@@ -1,2 +1,10 @@
 ﻿<Project>
+  <!--
+    Exclude HotReloadHelper.DevServer.cs from Uno.UI.RuntimeTests.Engine source package.
+    It references Uno.UI.RemoteControl.HotReload types that may not exist in all Uno SDK versions.
+    The HotReload testing functionality is not needed for theme runtime tests.
+  -->
+  <ItemGroup>
+    <Compile Remove="**/HotReloadHelper.DevServer.cs" />
+  </ItemGroup>
 </Project>

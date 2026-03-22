@@ -1,5 +1,5 @@
 <Project>
-	<Import Project="$(SolutionDir)\crosstargeting_override.props" Condition="exists('$(SolutionDir)\crosstargeting_override.props')" />
+	<Import Project="crosstargeting_override.props" Condition="exists('crosstargeting_override.props')" />
 
 	<Target Name="_DisplayTargets" BeforeTargets="BeforeBuild">
 		<Message Text="Building target framework: $(TargetFramework)" Importance="high" Condition="'$(TargetFramework)'!=''" />
