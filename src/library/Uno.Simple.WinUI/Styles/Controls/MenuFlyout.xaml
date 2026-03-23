@@ -494,7 +494,6 @@
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleMenuFlyoutItemBackgroundPointerOver}" />
 										<Setter Target="TextBlock.Foreground" Value="{ThemeResource SimpleMenuFlyoutItemForegroundPointerOver}" />
-										<Setter Target="CheckGlyph.Foreground" Value="{ThemeResource SimpleMenuFlyoutItemIconForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -502,14 +501,12 @@
 									<VisualState.Setters>
 										<Setter Target="LayoutRoot.Background" Value="{ThemeResource SimpleMenuFlyoutItemBackgroundPressed}" />
 										<Setter Target="TextBlock.Foreground" Value="{ThemeResource SimpleMenuFlyoutItemForegroundPressed}" />
-										<Setter Target="CheckGlyph.Foreground" Value="{ThemeResource SimpleMenuFlyoutItemIconForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="TextBlock.Foreground" Value="{ThemeResource SimpleMenuFlyoutItemForegroundDisabled}" />
-										<Setter Target="CheckGlyph.Foreground" Value="{ThemeResource SimpleMenuFlyoutItemIconForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -518,7 +515,7 @@
 								<VisualState x:Name="Unchecked" />
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
-										<Setter Target="CheckGlyph.Opacity" Value="1" />
+										<Setter Target="RadioDot.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="UncheckedWithIcon">
@@ -529,7 +526,7 @@
 								<VisualState x:Name="CheckedWithIcon">
 									<VisualState.Setters>
 										<Setter Target="IconRoot.Visibility" Value="Visible" />
-										<Setter Target="CheckGlyph.Opacity" Value="1" />
+										<Setter Target="RadioDot.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -542,15 +539,23 @@
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 
-						<!-- Radio bullet indicator -->
-						<FontIcon x:Name="CheckGlyph"
-								  Grid.Column="0"
-								  Glyph="&#xECCB;"
-								  FontSize="{ThemeResource SimpleCaptionFontSize}"
-								  Foreground="{ThemeResource SimpleMenuFlyoutItemIconForeground}"
-								  Margin="{StaticResource SimpleMenuFlyoutCheckGlyphMargin}"
-								  Opacity="0"
-								  VerticalAlignment="Center" />
+						<!-- Radio indicator: outer ring (always visible) + inner dot (checked only) -->
+						<Grid x:Name="CheckGlyph"
+							  Grid.Column="0"
+							  Width="14"
+							  Height="14"
+							  Margin="{StaticResource SimpleMenuFlyoutCheckGlyphMargin}"
+							  VerticalAlignment="Center">
+							<Ellipse Stroke="{ThemeResource SimpleMenuFlyoutItemIconForeground}"
+									 StrokeThickness="1.5"
+									 Width="14"
+									 Height="14" />
+							<Ellipse x:Name="RadioDot"
+									 Fill="{ThemeResource SimpleMenuFlyoutItemIconForeground}"
+									 Width="6"
+									 Height="6"
+									 Visibility="Collapsed" />
+						</Grid>
 
 						<Viewbox x:Name="IconRoot"
 								 Grid.Column="1"
