@@ -8,17 +8,10 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
-  strategy:
-    matrix:
-      Material:
-        SampleAppName: MaterialSampleApp
-        ProjectPath: src/samples/MaterialSampleApp
-      Simple:
-        SampleAppName: SimpleSampleApp
-        ProjectPath: src/samples/SimpleSampleApp
-
   variables:
-    ArtifactName: runtimetests-desktop-$(SampleAppName)
+    SampleAppName: SimpleSampleApp
+    ProjectPath: src/samples/SimpleSampleApp
+    ArtifactName: runtimetests-desktop-SimpleSampleApp
 
   steps:
   - checkout: self
