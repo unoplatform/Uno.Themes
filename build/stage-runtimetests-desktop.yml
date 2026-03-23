@@ -2,7 +2,6 @@ jobs:
 - job: RuntimeTests_Desktop
   cancelTimeoutInMinutes: 0
   displayName: 'Runtime Tests - Desktop'
-  container: unoplatform/wasm-build:3.0
   timeoutInMinutes: 60
 
   pool:
@@ -34,10 +33,9 @@ jobs:
       ArtifactName: $(ArtifactName)-buildlog
       ArtifactType: Container
 
-  - script: |
-      mkdir -p $(Common.TestResultsDirectory)
-      xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' \
-        dotnet $(Build.SourcesDirectory)/$(ProjectPath)/bin/Release/net10.0-desktop/$(SampleAppName).dll
+    - script: |
+        chmod +x build/scripts/linux-skia-desktop-runtime-tests.sh
+        build/scripts/linux-skia-desktop-runtime-tests.sh
     displayName: 'Run Runtime Tests - $(SampleAppName)'
     env:
       UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
