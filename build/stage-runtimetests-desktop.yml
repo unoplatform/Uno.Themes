@@ -33,9 +33,9 @@ jobs:
       ArtifactName: $(ArtifactName)-buildlog
       ArtifactType: Container
 
-    - script: |
-        chmod +x build/scripts/linux-skia-desktop-runtime-tests.sh
-        build/scripts/linux-skia-desktop-runtime-tests.sh
+  - script: |
+      chmod +x build/scripts/linux-skia-desktop-runtime-tests.sh
+      build/scripts/linux-skia-desktop-runtime-tests.sh
     displayName: 'Run Runtime Tests - $(SampleAppName)'
     env:
       UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
