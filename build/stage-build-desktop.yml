@@ -15,6 +15,9 @@ jobs:
       Material:
         SampleAppName: MaterialSampleApp
         ProjectPath: src/samples/MaterialSampleApp
+      Simple:
+        SampleAppName: SimpleSampleApp
+        ProjectPath: src/samples/SimpleSampleApp
 
   variables:
     GTK_RUNTIME_URL: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases/download/2020-07-15/gtk3-runtime-3.24.20-2020-07-15-ts-win64.exe
@@ -30,7 +33,7 @@ jobs:
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
 
-  - powershell: dotnet publish -c Release -p:TargetFrameworkOverride=desktop -bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog $(ProjectPath)/$(SampleAppName).csproj
+  - powershell: dotnet publish -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop -bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog $(ProjectPath)/$(SampleAppName).csproj
     displayName: Build Desktop Head - $(SampleAppName)
 
   - task: CopyFiles@2
