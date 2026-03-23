@@ -36,7 +36,7 @@ The following matrix shows which semantic style keys are supported by each theme
 | Icon | Meaning |
 |------|---------|
 | ✅ | Full support — the theme has a distinct style for this key |
-| ⚠️ | Alias — the semantic key resolves to the theme's default style (no distinct variant) |
+| ⚠️ | Alias — the semantic key resolves to the closest available style (no distinct variant) |
 | ❌ | No support — the theme does not implement this control or variant |
 
 ### Button
