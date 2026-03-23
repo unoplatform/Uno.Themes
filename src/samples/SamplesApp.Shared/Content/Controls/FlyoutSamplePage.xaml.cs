@@ -1,6 +1,6 @@
 ﻿namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "Flyout", Description = "A flyout is a UI container that can be light dismissed. It can contain other flyouts or context menus to create a nested experience.", DocumentationLink = "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/dialogs-and-flyouts/flyouts", SupportedDesigns = new[] { Design.Material, Design.Cupertino })]
+[SamplePage(SampleCategory.Controls, "Flyout", Description = "A flyout is a UI container that can be light dismissed. It can contain other flyouts or context menus to create a nested experience.", DocumentationLink = "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/dialogs-and-flyouts/flyouts", SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple })]
 public sealed partial class FlyoutSamplePage : Page
 {
 	public FlyoutSamplePage()
@@ -10,8 +10,8 @@ public sealed partial class FlyoutSamplePage : Page
 
 	private void CloseFlyout(object sender, RoutedEventArgs e)
 	{
-		var appBarButton = sender as AppBarButton;
-		var button = (Button)appBarButton.Tag;
+		var element = sender as FrameworkElement;
+		var button = (Button)element.Tag;
 		button.Flyout?.Hide();
 	}
 }

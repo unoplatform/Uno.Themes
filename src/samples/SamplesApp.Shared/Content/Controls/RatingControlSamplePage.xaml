@@ -57,6 +57,46 @@
                     </StackPanel>
                 </DataTemplate>
             </sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default RatingControl -->
+						<TextBlock Text="Default RatingControl" />
+						<smtx:XamlDisplay UniqueKey="Simple_RatingControl_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl />
+						</smtx:XamlDisplay>
+
+						<!-- With Initial Value -->
+						<TextBlock Text="RatingControl with value" />
+						<smtx:XamlDisplay UniqueKey="Simple_RatingControl_WithValue"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="3" />
+						</smtx:XamlDisplay>
+
+						<!-- With Caption -->
+						<TextBlock Text="RatingControl with caption" />
+						<smtx:XamlDisplay UniqueKey="Simple_RatingControl_WithCaption"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="4" Caption="4 out of 5" />
+						</smtx:XamlDisplay>
+
+						<!-- Read-Only -->
+						<TextBlock Text="Read-only RatingControl" />
+						<smtx:XamlDisplay UniqueKey="Simple_RatingControl_ReadOnly"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="3.5" IsReadOnly="True" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<TextBlock Text="Disabled RatingControl" />
+						<smtx:XamlDisplay UniqueKey="Simple_RatingControl_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:RatingControl Value="2" IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
         </sample:SamplePageLayout>
     </Grid>
 </Page>

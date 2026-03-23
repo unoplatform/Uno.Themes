@@ -116,6 +116,19 @@
 							</Button.Flyout>
 						</Button>
 					</smtx:XamlDisplay>
+
+					<!-- Radio MenuFlyoutItem -->
+					<smtx:XamlDisplay UniqueKey="Simple_MenuFlyout_RadioItems">
+						<Button Content="Sort Options">
+							<Button.Flyout>
+								<MenuFlyout>
+									<RadioMenuFlyoutItem Text="Sort by Name" GroupName="SortGroup" IsChecked="True" />
+									<RadioMenuFlyoutItem Text="Sort by Date" GroupName="SortGroup" />
+									<RadioMenuFlyoutItem Text="Sort by Size" GroupName="SortGroup" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
