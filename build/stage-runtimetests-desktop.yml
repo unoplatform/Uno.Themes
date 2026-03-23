@@ -22,7 +22,10 @@ jobs:
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
 
-  - powershell: dotnet publish -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop $(ProjectPath)/$(SampleAppName).csproj /r /m /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+  - pwsh: |
+      dotnet publish -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop `
+        $(ProjectPath)/$(SampleAppName).csproj `
+        -bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build Desktop Head - $(SampleAppName)
 
   - task: PublishBuildArtifacts@1
