@@ -65,18 +65,32 @@
 	<!-- ToggleButton -->
 	<Style BasedOn="{StaticResource SimpleDefaultToggleButtonStyle}" TargetType="ToggleButton" />
 
-	<!-- TODO: Add implicit styles once these controls have Simple styles implemented
-	<Style BasedOn="{StaticResource SimpleDefaultCommandBarStyle}" TargetType="CommandBar" />
+	<!-- FlyoutPresenter -->
 	<Style BasedOn="{StaticResource SimpleDefaultFlyoutPresenterStyle}" TargetType="FlyoutPresenter" />
+
+	<!-- HyperlinkButton -->
 	<Style BasedOn="{StaticResource SimpleDefaultHyperlinkButtonStyle}" TargetType="HyperlinkButton" />
-	<Style BasedOn="{StaticResource SimpleDefaultMediaTransportControlsStyle}" TargetType="MediaTransportControls" />
+
+	<!-- NavigationView -->
 	<Style BasedOn="{StaticResource SimpleDefaultNavigationViewStyle}" TargetType="muxc:NavigationView" />
 	<Style BasedOn="{StaticResource SimpleDefaultNavigationViewItemStyle}" TargetType="muxc:NavigationViewItem" />
+
+	<!-- PipsPager -->
 	<Style BasedOn="{StaticResource SimpleDefaultPipsPagerStyle}" TargetType="muxc:PipsPager" />
+
+	<!-- ProgressBar / ProgressRing -->
 	<Style BasedOn="{StaticResource SimpleDefaultProgressBarStyle}" TargetType="muxc:ProgressBar" />
 	<Style BasedOn="{StaticResource SimpleDefaultProgressRingStyle}" TargetType="muxc:ProgressRing" />
+
+	<!-- RadioMenuFlyoutItem -->
 	<Style BasedOn="{StaticResource SimpleDefaultRadioMenuFlyoutItemStyle}" TargetType="muxc:RadioMenuFlyoutItem" />
+
+	<!-- RatingControl -->
 	<Style BasedOn="{StaticResource SimpleDefaultRatingControlStyle}" TargetType="RatingControl" />
+
+	<!-- TODO: Add implicit styles once these controls have Simple styles implemented
+	<Style BasedOn="{StaticResource SimpleDefaultCommandBarStyle}" TargetType="CommandBar" />
+	<Style BasedOn="{StaticResource SimpleDefaultMediaTransportControlsStyle}" TargetType="MediaTransportControls" />
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
@@ -163,6 +177,28 @@
 	<StaticResource x:Key="MenuFlyoutSeparatorStyle" ResourceKey="SimpleMenuFlyoutSeparatorStyle" />
 	<StaticResource x:Key="MenuFlyoutSubItemStyle" ResourceKey="SimpleMenuFlyoutSubItemStyle" />
 	<StaticResource x:Key="ToggleMenuFlyoutItemStyle" ResourceKey="SimpleToggleMenuFlyoutItemStyle" />
+	<StaticResource x:Key="RadioMenuFlyoutItemStyle" ResourceKey="SimpleRadioMenuFlyoutItemStyle" />
+
+	<!-- Flyout -->
+	<StaticResource x:Key="FlyoutPresenterStyle" ResourceKey="SimpleFlyoutPresenterStyle" />
+
+	<!-- HyperlinkButton -->
+	<StaticResource x:Key="HyperlinkButtonStyle" ResourceKey="SimpleHyperlinkButtonStyle" />
+	<StaticResource x:Key="SecondaryHyperlinkButtonStyle" ResourceKey="SimpleSecondaryHyperlinkButtonStyle" />
+
+	<!-- NavigationView -->
+	<StaticResource x:Key="NavigationViewStyle" ResourceKey="SimpleNavigationViewStyle" />
+	<StaticResource x:Key="NavigationViewItemStyle" ResourceKey="SimpleNavigationViewItemStyle" />
+
+	<!-- ProgressBar / ProgressRing -->
+	<StaticResource x:Key="ProgressBarStyle" ResourceKey="SimpleProgressBarStyle" />
+	<StaticResource x:Key="ProgressRingStyle" ResourceKey="SimpleProgressRingStyle" />
+
+	<!-- PipsPager -->
+	<StaticResource x:Key="PipsPagerStyle" ResourceKey="SimplePipsPagerStyle" />
+
+	<!-- RatingControl -->
+	<StaticResource x:Key="RatingControlStyle" ResourceKey="SimpleRatingControlStyle" />
 
 	<!-- CalendarView -->
 	<StaticResource x:Key="CalendarViewStyle" ResourceKey="SimpleCalendarViewStyle" />
@@ -187,8 +223,19 @@
 	<StaticResource x:Key="SmallToggleButtonStyle" ResourceKey="SimpleSmallToggleButtonStyle" />
 	<StaticResource x:Key="MediumToggleButtonStyle" ResourceKey="SimpleMediumToggleButtonStyle" />
 
-	<!-- NOTE: ProgressBarStyle, ProgressRingStyle, HyperlinkButtonStyle are documented
-	     as gaps in the semantic aliases section below. Re-add once Simple styles exist. -->
+	<!-- FAB — alias to existing Simple icon button styles -->
+	<StaticResource x:Key="FabStyle" ResourceKey="SimpleIconButtonPrimaryStyle" />
+	<StaticResource x:Key="SmallFabStyle" ResourceKey="SimpleSmallIconButtonPrimaryStyle" />
+	<StaticResource x:Key="LargeFabStyle" ResourceKey="SimpleIconButtonPrimaryStyle" />
+	<StaticResource x:Key="SecondaryFabStyle" ResourceKey="SimpleIconButtonNeutralStyle" />
+	<StaticResource x:Key="SecondarySmallFabStyle" ResourceKey="SimpleSmallIconButtonNeutralStyle" />
+	<StaticResource x:Key="SecondaryLargeFabStyle" ResourceKey="SimpleIconButtonNeutralStyle" />
+	<StaticResource x:Key="TertiaryFabStyle" ResourceKey="SimpleIconButtonSubtleStyle" />
+	<StaticResource x:Key="TertiarySmallFabStyle" ResourceKey="SimpleSmallIconButtonSubtleStyle" />
+	<StaticResource x:Key="TertiaryLargeFabStyle" ResourceKey="SimpleIconButtonSubtleStyle" />
+	<StaticResource x:Key="SurfaceFabStyle" ResourceKey="SimpleIconButtonNeutralStyle" />
+	<StaticResource x:Key="SurfaceSmallFabStyle" ResourceKey="SimpleSmallIconButtonNeutralStyle" />
+	<StaticResource x:Key="SurfaceLargeFabStyle" ResourceKey="SimpleIconButtonNeutralStyle" />
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Semantic aliases (design-system-agnostic) -->
@@ -206,46 +253,24 @@
 
 	<!-- ToggleButton -->
 	<StaticResource x:Key="TextToggleButtonStyle" ResourceKey="SimpleDefaultToggleButtonStyle" />
-	<!-- IconToggleButtonStyle — GAP: Simple has no icon-only toggle variant -->
+	<StaticResource x:Key="IconToggleButtonStyle" ResourceKey="SimpleIconToggleButtonStyle" />
 
-	<!-- TextBox — SDS has a single Input; both semantic variants resolve to it -->
+	<!-- TextBox — Filled uses default Input; Outlined uses transparent background -->
 	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
-	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleOutlinedTextBoxStyle" />
 
 	<!-- PasswordBox -->
 	<StaticResource x:Key="FilledPasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />
-	<!-- OutlinedPasswordBoxStyle — GAP: Simple has no outlined password variant -->
-
-	<!-- HyperlinkButton -->
-	<!-- HyperlinkButtonStyle — GAP: Simple has no HyperlinkButton style -->
-	<!-- SecondaryHyperlinkButtonStyle — GAP: Simple has no HyperlinkButton style -->
+	<StaticResource x:Key="OutlinedPasswordBoxStyle" ResourceKey="SimpleOutlinedPasswordBoxStyle" />
 
 	<!-- ComboBox -->
 	<StaticResource x:Key="ComboBoxStyle" ResourceKey="SimpleSelectFieldStyle" />
 
-	<!-- ProgressBar / ProgressRing -->
-	<!-- ProgressBarStyle — GAP: Simple has no ProgressBar style -->
-	<!-- ProgressRingStyle — GAP: Simple has no ProgressRing style -->
-
 	<!-- CommandBar -->
 	<!-- CommandBarStyle — GAP: Simple has no CommandBar style -->
 
-	<!-- NavigationView -->
-	<!-- NavigationViewStyle — GAP: Simple has no NavigationView style -->
-	<!-- NavigationViewItemStyle — GAP: Simple has no NavigationView style -->
-
-	<!-- Flyout -->
-	<!-- FlyoutPresenterStyle — GAP: Simple has no FlyoutPresenter style -->
-	<!-- RadioMenuFlyoutItemStyle — GAP: Simple has no RadioMenuFlyoutItem style -->
-
 	<!-- MediaPlayerElement -->
 	<!-- MediaTransportControlsStyle — GAP: Simple has no media style -->
-
-	<!-- PipsPager -->
-	<!-- PipsPagerStyle — GAP: Simple has no PipsPager style -->
-
-	<!-- RatingControl -->
-	<!-- RatingControlStyle — GAP: Simple has no RatingControl style -->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Typography aliases -->

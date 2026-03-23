@@ -411,4 +411,137 @@
 		<Setter Property="FontSize" Value="{StaticResource SimpleToggleButtonMediumFontSize}" />
 	</Style>
 
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Icon-only ToggleButton (compact, circular — mirrors IconButton shape) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleIconToggleButtonStyle" TargetType="ToggleButton">
+		<Setter Property="FontFamily" Value="{StaticResource SimpleToggleButtonFontFamily}" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="MinHeight" Value="{StaticResource SimpleIconButtonMinSize}" />
+		<Setter Property="MinWidth" Value="{StaticResource SimpleIconButtonMinSize}" />
+		<Setter Property="MaxHeight" Value="{StaticResource SimpleIconButtonMinSize}" />
+		<Setter Property="MaxWidth" Value="{StaticResource SimpleIconButtonMinSize}" />
+		<Setter Property="Padding" Value="{StaticResource SimpleIconButtonPadding}" />
+		<Setter Property="CornerRadius" Value="{StaticResource SimpleIconButtonCornerRadius}" />
+		<Setter Property="BorderThickness" Value="{StaticResource SimpleIconButtonBorderThickness}" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Foreground" Value="{ThemeResource SimpleToggleButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource SimpleToggleButtonBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<ContentPresenter x:Name="ContentPresenter"
+									  Background="{TemplateBinding Background}"
+									  BorderBrush="{TemplateBinding BorderBrush}"
+									  BorderThickness="{TemplateBinding BorderThickness}"
+									  CornerRadius="{TemplateBinding CornerRadius}"
+									  Content="{TemplateBinding Content}"
+									  ContentTemplate="{TemplateBinding ContentTemplate}"
+									  ContentTransitions="{TemplateBinding ContentTransitions}"
+									  Foreground="{TemplateBinding Foreground}"
+									  Padding="{TemplateBinding Padding}"
+									  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+									  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<!-- Unchecked states -->
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundPressed}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundDisabled}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Checked states -->
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundChecked}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundCheckedPressed}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushCheckedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundCheckedDisabled}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushCheckedDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundCheckedDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Indeterminate states -->
+								<VisualState x:Name="IndeterminateNormal">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminate}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminate}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminate}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminatePointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminatePointerOver}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminatePointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminatePressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminatePressed}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminatePressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminatePressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminateDisabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Background" Value="{ThemeResource SimpleToggleButtonBackgroundIndeterminateDisabled}" />
+										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource SimpleToggleButtonBorderBrushIndeterminateDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleButtonForegroundIndeterminateDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+					</ContentPresenter>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 </ResourceDictionary>

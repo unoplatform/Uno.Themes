@@ -5,12 +5,14 @@
 		Simple Design System — TextBox Styles
 		Maps SDS Input component tokens to WinUI TextBox.
 
-		SDS has a single Input primitive (no Filled/Outlined variants).
+		Two visual variants:
+		  Filled  — background fill + border (default, SDS Input)
+		  Outlined — transparent background, visible border only
 
 		Resource layers:
-		  FilledTextBox*    = semantic keys (source of truth, canonical)
-		  OutlinedTextBox*  = read-parity aliases → FilledTextBox* (many-to-one)
-		  SimpleTextBox*    = Simple-prefixed aliases → FilledTextBox*
+		  FilledTextBox*      = semantic keys (source of truth, filled variant)
+		  OutlinedTextBox*    = semantic keys (source of truth, outlined variant)
+		  SimpleTextBox*      = Simple-prefixed aliases → FilledTextBox*
 
 		Templates reference Simple-prefixed keys (which alias to semantic keys).
 		This allows overriding EITHER the Simple-prefixed key OR the semantic key.
@@ -98,27 +100,26 @@
 			<StaticResource x:Key="SimpleTextBoxPlaceholderForegroundPointerOver" ResourceKey="FilledTextBoxPlaceholderForegroundPointerOver" />
 			<StaticResource x:Key="SimpleTextBoxPlaceholderForegroundFocused" ResourceKey="FilledTextBoxPlaceholderForegroundFocused" />
 
-			<!-- ── OutlinedTextBox — read-parity aliases → FilledTextBox* (many-to-one) ── -->
-			<!-- SDS has a single Input design; OutlinedTextBox* resolves to the same values -->
+			<!-- ── OutlinedTextBox — semantic keys (outlined variant: transparent bg) ── -->
 			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="FilledTextBoxCornerRadius" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="FilledTextBoxBorderThicknessNormal" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="FilledTextBoxBorderThicknessFocused" />
 			<StaticResource x:Key="OutlinedTextBoxPadding" ResourceKey="FilledTextBoxPadding" />
 			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="FilledTextBoxMinHeight" />
 			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="FilledTextBoxForeground" />
-			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="FilledTextBoxBackground" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackground" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="FilledTextBoxBorderBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="FilledTextBoxPlaceholderForeground" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="FilledTextBoxForegroundPointerOver" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="FilledTextBoxBackgroundPointerOver" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackgroundPointerOver" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="FilledTextBoxBorderBrushPointerOver" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="FilledTextBoxPlaceholderForegroundPointerOver" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="FilledTextBoxForegroundFocused" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="FilledTextBoxBackgroundFocused" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackgroundFocused" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="FilledTextBoxBorderBrushFocused" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="FilledTextBoxPlaceholderForegroundFocused" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="FilledTextBoxForegroundDisabled" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="FilledTextBoxBackgroundDisabled" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackgroundDisabled" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="FilledTextBoxBorderBrushDisabled" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="FilledTextBoxPlaceholderForegroundDisabled" />
 			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="FilledTextBoxHeaderForeground" />
@@ -203,27 +204,26 @@
 			<StaticResource x:Key="SimpleTextBoxPlaceholderForegroundPointerOver" ResourceKey="FilledTextBoxPlaceholderForegroundPointerOver" />
 			<StaticResource x:Key="SimpleTextBoxPlaceholderForegroundFocused" ResourceKey="FilledTextBoxPlaceholderForegroundFocused" />
 
-			<!-- ── OutlinedTextBox — read-parity aliases → FilledTextBox* (many-to-one) ── -->
-			<!-- SDS has a single Input design; OutlinedTextBox* resolves to the same values -->
+			<!-- ── OutlinedTextBox — semantic keys (outlined variant: transparent bg) ── -->
 			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="FilledTextBoxCornerRadius" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="FilledTextBoxBorderThicknessNormal" />
 			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="FilledTextBoxBorderThicknessFocused" />
 			<StaticResource x:Key="OutlinedTextBoxPadding" ResourceKey="FilledTextBoxPadding" />
 			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="FilledTextBoxMinHeight" />
 			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="FilledTextBoxForeground" />
-			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="FilledTextBoxBackground" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackground" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="FilledTextBoxBorderBrush" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="FilledTextBoxPlaceholderForeground" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="FilledTextBoxForegroundPointerOver" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="FilledTextBoxBackgroundPointerOver" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackgroundPointerOver" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="FilledTextBoxBorderBrushPointerOver" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="FilledTextBoxPlaceholderForegroundPointerOver" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="FilledTextBoxForegroundFocused" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="FilledTextBoxBackgroundFocused" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackgroundFocused" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="FilledTextBoxBorderBrushFocused" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="FilledTextBoxPlaceholderForegroundFocused" />
 			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="FilledTextBoxForegroundDisabled" />
-			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="FilledTextBoxBackgroundDisabled" />
+			<SolidColorBrush x:Key="OutlinedTextBoxBackgroundDisabled" Color="Transparent" />
 			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="FilledTextBoxBorderBrushDisabled" />
 			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="FilledTextBoxPlaceholderForegroundDisabled" />
 			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="FilledTextBoxHeaderForeground" />
@@ -392,6 +392,15 @@
 		   BasedOn="{StaticResource SimpleTextBoxStyle}">
 		<Setter Property="MinHeight" Value="{ThemeResource SimpleTextBoxSmallMinHeight}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale02}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Outlined TextBox (transparent background, visible border)              -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleOutlinedTextBoxStyle"
+		   TargetType="TextBox"
+		   BasedOn="{StaticResource SimpleTextBoxStyle}">
+		<Setter Property="Background" Value="{ThemeResource OutlinedTextBoxBackground}" />
 	</Style>
 
 </ResourceDictionary>
