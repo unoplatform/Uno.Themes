@@ -16,7 +16,7 @@
 		   TargetType="ComboBox" />
 	<Style BasedOn="{StaticResource SimpleRadioButtonStyle}"
 		   TargetType="RadioButton" />
-	<Style BasedOn="{StaticResource SimpleInputTextBoxStyle}"
+	<Style BasedOn="{StaticResource SimpleTextBoxStyle}"
 		   TargetType="TextBox" />
 	<Style BasedOn="{StaticResource SimpleToggleSwitchStyle}"
 		   TargetType="ToggleSwitch" />
@@ -104,11 +104,11 @@
 	<StaticResource x:Key="MediumDangerPrimaryButtonStyle" ResourceKey="SimpleMediumDangerPrimaryButtonStyle" />
 	<StaticResource x:Key="MediumDangerSubtleButtonStyle" ResourceKey="SimpleMediumDangerSubtleButtonStyle" />
 
-	<!-- TextBox: Input / Outlined Input / Error -->
-	<StaticResource x:Key="InputTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
-	<StaticResource x:Key="OutlinedInputTextBoxStyle" ResourceKey="SimpleOutlinedInputTextBoxStyle" />
-	<StaticResource x:Key="InputTextBoxErrorStyle" ResourceKey="SimpleInputTextBoxErrorStyle" />
-	<StaticResource x:Key="InputTextBoxSmallStyle" ResourceKey="SimpleInputTextBoxSmallStyle" />
+	<!-- TextBox: Input / Error / Small -->
+	<!-- SDS has a single Input design — no Filled/Outlined variants -->
+	<StaticResource x:Key="InputTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
+	<StaticResource x:Key="InputTextBoxErrorStyle" ResourceKey="SimpleTextBoxErrorStyle" />
+	<StaticResource x:Key="InputTextBoxSmallStyle" ResourceKey="SimpleTextBoxSmallStyle" />
 
 	<!-- PasswordBox -->
 	<StaticResource x:Key="PasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />
@@ -187,22 +187,65 @@
 	<StaticResource x:Key="SmallToggleButtonStyle" ResourceKey="SimpleSmallToggleButtonStyle" />
 	<StaticResource x:Key="MediumToggleButtonStyle" ResourceKey="SimpleMediumToggleButtonStyle" />
 
-	<!-- TODO: Re-add aliases once these controls have Simple styles implemented
-	<StaticResource x:Key="ProgressBarStyle" ResourceKey="SimpleProgressBarStyle" />
-	<StaticResource x:Key="ProgressRingStyle" ResourceKey="SimpleProgressRingStyle" />
-	<StaticResource x:Key="HyperlinkButtonStyle" ResourceKey="SimpleHyperlinkButtonStyle" />
-	-->
+	<!-- NOTE: ProgressBarStyle, ProgressRingStyle, HyperlinkButtonStyle are documented
+	     as gaps in the semantic aliases section below. Re-add once Simple styles exist. -->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Legacy / backwards-compatible aliases -->
+	<!-- Semantic aliases (design-system-agnostic) -->
+	<!-- These map Material-derived semantic names to Simple equivalents. -->
+	<!-- See: .specify/specs/semantic-abstraction-layer/spec.md -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Button -->
 	<StaticResource x:Key="FilledButtonStyle" ResourceKey="SimplePrimaryButtonStyle" />
+	<!-- ElevatedButtonStyle — GAP: Simple has no elevated/shadow button variant -->
+	<StaticResource x:Key="FilledTonalButtonStyle" ResourceKey="SimpleNeutralButtonStyle" />
 	<StaticResource x:Key="OutlinedButtonStyle" ResourceKey="SimpleNeutralButtonStyle" />
 	<StaticResource x:Key="TextButtonStyle" ResourceKey="SimpleSubtleButtonStyle" />
-	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleInputTextBoxStyle" />
-	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleOutlinedInputTextBoxStyle" />
-	<StaticResource x:Key="ComboBoxStyle" ResourceKey="SimpleSelectFieldStyle" />
+	<StaticResource x:Key="IconButtonStyle" ResourceKey="SimpleIconButtonPrimaryStyle" />
+
+	<!-- ToggleButton -->
+	<StaticResource x:Key="TextToggleButtonStyle" ResourceKey="SimpleDefaultToggleButtonStyle" />
+	<!-- IconToggleButtonStyle — GAP: Simple has no icon-only toggle variant -->
+
+	<!-- TextBox — SDS has a single Input; both semantic variants resolve to it -->
+	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
+
+	<!-- PasswordBox -->
 	<StaticResource x:Key="FilledPasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />
+	<!-- OutlinedPasswordBoxStyle — GAP: Simple has no outlined password variant -->
+
+	<!-- HyperlinkButton -->
+	<!-- HyperlinkButtonStyle — GAP: Simple has no HyperlinkButton style -->
+	<!-- SecondaryHyperlinkButtonStyle — GAP: Simple has no HyperlinkButton style -->
+
+	<!-- ComboBox -->
+	<StaticResource x:Key="ComboBoxStyle" ResourceKey="SimpleSelectFieldStyle" />
+
+	<!-- ProgressBar / ProgressRing -->
+	<!-- ProgressBarStyle — GAP: Simple has no ProgressBar style -->
+	<!-- ProgressRingStyle — GAP: Simple has no ProgressRing style -->
+
+	<!-- CommandBar -->
+	<!-- CommandBarStyle — GAP: Simple has no CommandBar style -->
+
+	<!-- NavigationView -->
+	<!-- NavigationViewStyle — GAP: Simple has no NavigationView style -->
+	<!-- NavigationViewItemStyle — GAP: Simple has no NavigationView style -->
+
+	<!-- Flyout -->
+	<!-- FlyoutPresenterStyle — GAP: Simple has no FlyoutPresenter style -->
+	<!-- RadioMenuFlyoutItemStyle — GAP: Simple has no RadioMenuFlyoutItem style -->
+
+	<!-- MediaPlayerElement -->
+	<!-- MediaTransportControlsStyle — GAP: Simple has no media style -->
+
+	<!-- PipsPager -->
+	<!-- PipsPagerStyle — GAP: Simple has no PipsPager style -->
+
+	<!-- RatingControl -->
+	<!-- RatingControlStyle — GAP: Simple has no RatingControl style -->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Typography aliases -->

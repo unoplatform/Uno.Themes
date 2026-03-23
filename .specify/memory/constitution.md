@@ -28,7 +28,7 @@ to cover the same control surface area over time.
 Style key names MUST reflect the **design system's vocabulary**, not WinUI/UWP
 implementation concepts:
 
-- **Simple/SDS**: `SimplePrimaryButtonStyle`, `SimpleInputTextBoxStyle`,
+- **Simple/SDS**: `SimplePrimaryButtonStyle`, `SimpleTextBoxStyle`,
   `SimpleSelectFieldStyle` — names match the Figma component naming
 - **Material**: `MaterialFilledButtonStyle`, `MaterialOutlinedCardStyle` —
   names match Material Design 3 naming

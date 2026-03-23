@@ -14,5 +14,11 @@
       PRI257: Ignore default language (en) not being one of the included resources (eg en-us, en-uk)
     -->
     <NoWarn>$(NoWarn);NU1507;NETSDK1201;PRI257</NoWarn>
+
+    <!-- Runtime Tests Engine: suppress warnings from injected source package -->
+    <NoWarn>$(NoWarn);CS8619;CS8602;Uno0001;IL2026;IL2070;IL2072;IL2075</NoWarn>
+    <DefineConstants>$(DefineConstants);IS_UNO_RUNTIMETEST_PROJECT</DefineConstants>
   </PropertyGroup>
+
+  <Import Project="..\..\Directory.Build.props" />
 </Project>

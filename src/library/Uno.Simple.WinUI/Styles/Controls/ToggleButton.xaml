@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ut="using:Uno.Themes">
 
@@ -6,6 +6,11 @@
 		Simple Design System — ToggleButton Styles
 		Lightweight styling pattern: every visual-state brush is exposed via ThemeResource
 		so consumers can override any individual key.
+
+		Templates reference Simple-prefixed keys (SimpleToggleButton*) which alias
+		to the semantic keys (TextToggleButton*).  Consumers can override EITHER key.
+
+		Backwards-compat aliases are provided for all old Simple-prefixed names.
 
 		Default style: Neutral (unchecked) → Primary (checked)
 		VisualStates: Normal, PointerOver, Pressed, Disabled,
@@ -21,93 +26,179 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 
+			<!-- ── TextToggleButton — semantic keys (source of truth) ── -->
+
 			<!-- Unchecked -->
-			<StaticResource x:Key="SimpleToggleButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
 
 			<!-- Checked -->
-			<StaticResource x:Key="SimpleToggleButtonForegroundChecked" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundChecked" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushChecked" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushChecked" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
 
 			<!-- Indeterminate (same as Unchecked) -->
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminate" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminateDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminate" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminate" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminate" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminateDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminate" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminate" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+
+			<!-- Backwards-compat aliases (SimpleToggleButton* → TextToggleButton*) -->
+			<!-- Unchecked -->
+			<StaticResource x:Key="SimpleToggleButtonForeground" ResourceKey="TextToggleButtonForeground" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPointerOver" ResourceKey="TextToggleButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPressed" ResourceKey="TextToggleButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundDisabled" ResourceKey="TextToggleButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBackground" ResourceKey="TextToggleButtonBackground" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPointerOver" ResourceKey="TextToggleButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPressed" ResourceKey="TextToggleButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundDisabled" ResourceKey="TextToggleButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrush" ResourceKey="TextToggleButtonBorderBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPointerOver" ResourceKey="TextToggleButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPressed" ResourceKey="TextToggleButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushDisabled" ResourceKey="TextToggleButtonBorderBrushDisabled" />
+			<!-- Checked -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundChecked" ResourceKey="TextToggleButtonForegroundChecked" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPointerOver" ResourceKey="TextToggleButtonForegroundCheckedPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPressed" ResourceKey="TextToggleButtonForegroundCheckedPressed" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedDisabled" ResourceKey="TextToggleButtonForegroundCheckedDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundChecked" ResourceKey="TextToggleButtonBackgroundChecked" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPointerOver" ResourceKey="TextToggleButtonBackgroundCheckedPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPressed" ResourceKey="TextToggleButtonBackgroundCheckedPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedDisabled" ResourceKey="TextToggleButtonBackgroundCheckedDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushChecked" ResourceKey="TextToggleButtonBorderBrushChecked" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPointerOver" ResourceKey="TextToggleButtonBorderBrushCheckedPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPressed" ResourceKey="TextToggleButtonBorderBrushCheckedPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedDisabled" ResourceKey="TextToggleButtonBorderBrushCheckedDisabled" />
+			<!-- Indeterminate -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminate" ResourceKey="TextToggleButtonForegroundIndeterminate" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePointerOver" ResourceKey="TextToggleButtonForegroundIndeterminatePointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePressed" ResourceKey="TextToggleButtonForegroundIndeterminatePressed" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminateDisabled" ResourceKey="TextToggleButtonForegroundIndeterminateDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminate" ResourceKey="TextToggleButtonBackgroundIndeterminate" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="TextToggleButtonBackgroundIndeterminatePointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePressed" ResourceKey="TextToggleButtonBackgroundIndeterminatePressed" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminateDisabled" ResourceKey="TextToggleButtonBackgroundIndeterminateDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminate" ResourceKey="TextToggleButtonBorderBrushIndeterminate" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="TextToggleButtonBorderBrushIndeterminatePointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePressed" ResourceKey="TextToggleButtonBorderBrushIndeterminatePressed" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="TextToggleButtonBorderBrushIndeterminateDisabled" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
+			<!-- ── TextToggleButton — semantic keys (source of truth) ── -->
+
 			<!-- Unchecked -->
-			<StaticResource x:Key="SimpleToggleButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushPressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
 
 			<!-- Checked -->
-			<StaticResource x:Key="SimpleToggleButtonForegroundChecked" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundChecked" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushChecked" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushChecked" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPointerOver" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedPressed" ResourceKey="SimpleBorderBrandDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushCheckedDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
 
 			<!-- Indeterminate (same as Unchecked) -->
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminate" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminateDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminate" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminate" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminate" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminatePressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundIndeterminateDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminate" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminatePressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundIndeterminateDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminate" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminatePressed" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="TextToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
+
+			<!-- Backwards-compat aliases (SimpleToggleButton* → TextToggleButton*) -->
+			<!-- Unchecked -->
+			<StaticResource x:Key="SimpleToggleButtonForeground" ResourceKey="TextToggleButtonForeground" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPointerOver" ResourceKey="TextToggleButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundPressed" ResourceKey="TextToggleButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundDisabled" ResourceKey="TextToggleButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBackground" ResourceKey="TextToggleButtonBackground" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPointerOver" ResourceKey="TextToggleButtonBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundPressed" ResourceKey="TextToggleButtonBackgroundPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundDisabled" ResourceKey="TextToggleButtonBackgroundDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrush" ResourceKey="TextToggleButtonBorderBrush" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPointerOver" ResourceKey="TextToggleButtonBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushPressed" ResourceKey="TextToggleButtonBorderBrushPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushDisabled" ResourceKey="TextToggleButtonBorderBrushDisabled" />
+			<!-- Checked -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundChecked" ResourceKey="TextToggleButtonForegroundChecked" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPointerOver" ResourceKey="TextToggleButtonForegroundCheckedPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedPressed" ResourceKey="TextToggleButtonForegroundCheckedPressed" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundCheckedDisabled" ResourceKey="TextToggleButtonForegroundCheckedDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundChecked" ResourceKey="TextToggleButtonBackgroundChecked" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPointerOver" ResourceKey="TextToggleButtonBackgroundCheckedPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedPressed" ResourceKey="TextToggleButtonBackgroundCheckedPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundCheckedDisabled" ResourceKey="TextToggleButtonBackgroundCheckedDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushChecked" ResourceKey="TextToggleButtonBorderBrushChecked" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPointerOver" ResourceKey="TextToggleButtonBorderBrushCheckedPointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedPressed" ResourceKey="TextToggleButtonBorderBrushCheckedPressed" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushCheckedDisabled" ResourceKey="TextToggleButtonBorderBrushCheckedDisabled" />
+			<!-- Indeterminate -->
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminate" ResourceKey="TextToggleButtonForegroundIndeterminate" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePointerOver" ResourceKey="TextToggleButtonForegroundIndeterminatePointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminatePressed" ResourceKey="TextToggleButtonForegroundIndeterminatePressed" />
+			<StaticResource x:Key="SimpleToggleButtonForegroundIndeterminateDisabled" ResourceKey="TextToggleButtonForegroundIndeterminateDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminate" ResourceKey="TextToggleButtonBackgroundIndeterminate" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePointerOver" ResourceKey="TextToggleButtonBackgroundIndeterminatePointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminatePressed" ResourceKey="TextToggleButtonBackgroundIndeterminatePressed" />
+			<StaticResource x:Key="SimpleToggleButtonBackgroundIndeterminateDisabled" ResourceKey="TextToggleButtonBackgroundIndeterminateDisabled" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminate" ResourceKey="TextToggleButtonBorderBrushIndeterminate" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePointerOver" ResourceKey="TextToggleButtonBorderBrushIndeterminatePointerOver" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminatePressed" ResourceKey="TextToggleButtonBorderBrushIndeterminatePressed" />
+			<StaticResource x:Key="SimpleToggleButtonBorderBrushIndeterminateDisabled" ResourceKey="TextToggleButtonBorderBrushIndeterminateDisabled" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>

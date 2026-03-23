@@ -19,6 +19,13 @@
 		  Popover:     background-default-default, border-default-default, radius-400 (16px), shadow-200
 		  CalendarView popup uses SimpleCalendarViewStyle.
 
+		Semantic resource layer:
+		  CalendarDatePicker* = canonical semantic keys (source of truth)
+		  SimpleCalendarDatePicker* = backwards-compat aliases that point to the semantic keys
+
+		Templates reference Simple-prefixed keys (which alias to semantic keys),
+		so consumers can override EITHER key.
+
 		Lightweight styling pattern: every visual-state brush is exposed via
 		ThemeResource so consumers can override any individual key.
 	-->
@@ -31,110 +38,195 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 
+			<!-- ── CalendarDatePicker — semantic keys (source of truth) ── -->
+
 			<!-- Dimensions -->
 			<!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimpleCalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 			<!-- sds-size-radius-400 -->
-			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="CalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<!-- sds-size-space-0 -->
-			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
 			<!-- sds-size-space-300,0,sds-size-space-300,0 -->
-			<Thickness x:Key="SimpleCalendarDatePickerContentMargin">12,0,12,0</Thickness>
+			<Thickness x:Key="CalendarDatePickerContentMargin">12,0,12,0</Thickness>
 			<!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimpleCalendarDatePickerHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="CalendarDatePickerHeight" ResourceKey="SimpleIconLarge" />
 			<!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimpleCalendarDatePickerMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="CalendarDatePickerMinHeight" ResourceKey="SimpleIconLarge" />
 			<!-- sds: 0,0,0,sds-size-space-200 -->
-			<Thickness x:Key="SimpleCalendarDatePickerHeaderMargin">0,0,0,8</Thickness>
+			<Thickness x:Key="CalendarDatePickerHeaderMargin">0,0,0,8</Thickness>
 			<!-- sds-size-space-300,0,0,0 -->
-			<Thickness x:Key="SimpleCalendarDatePickerCalendarGlyphMargin">12,0,0,0</Thickness>
+			<Thickness x:Key="CalendarDatePickerCalendarGlyphMargin">12,0,0,0</Thickness>
 
 			<!-- Foreground (selected date text) -->
-			<StaticResource x:Key="SimpleCalendarDatePickerForeground"                    ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerForegroundDisabled"             ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerForeground"                    ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerForegroundDisabled"             ResourceKey="SimpleTextDisabledDefaultBrush" />
 
 			<!-- Placeholder text -->
-			<StaticResource x:Key="SimpleCalendarDatePickerTextForeground"                 ResourceKey="SimpleTextDefaultTertiaryBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundDisabled"          ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundSelected"          ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForeground"                 ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundDisabled"          ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundSelected"          ResourceKey="SimpleTextDefaultDefaultBrush" />
 
 			<!-- Calendar glyph icon -->
-			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForeground"         ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForegroundDisabled"  ResourceKey="SimpleIconDisabledOnDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForeground"         ResourceKey="SimpleIconDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForegroundDisabled"  ResourceKey="SimpleIconDisabledOnDisabledBrush" />
 
 			<!-- Header -->
-			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForeground"                ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForegroundDisabled"         ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForeground"                ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForegroundDisabled"         ResourceKey="SimpleTextDisabledDefaultBrush" />
 
 			<!-- Background -->
-			<StaticResource x:Key="SimpleCalendarDatePickerBackground"                      ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPointerOver"            ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPressed"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundDisabled"               ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundFocused"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackground"                      ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPointerOver"            ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPressed"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundDisabled"               ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundFocused"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
 
 			<!-- Border -->
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrush"                     ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPointerOver"           ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPressed"               ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushDisabled"              ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushFocused"               ResourceKey="SimpleBorderBrandSecondaryBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrush"                     ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPointerOver"           ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPressed"               ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushDisabled"              ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushFocused"               ResourceKey="SimpleBorderBrandSecondaryBrush" />
+
+			<!-- ── Backwards-compat aliases (SimpleCalendarDatePicker* → CalendarDatePicker*) ── -->
+
+			<!-- Dimensions -->
+			<StaticResource x:Key="SimpleCalendarDatePickerCornerRadius" ResourceKey="CalendarDatePickerCornerRadius" />
+			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="CalendarDatePickerFlyoutPresenterCornerRadius" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderThemeThickness" ResourceKey="CalendarDatePickerBorderThemeThickness" />
+			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterPadding" ResourceKey="CalendarDatePickerFlyoutPresenterPadding" />
+			<StaticResource x:Key="SimpleCalendarDatePickerHeight" ResourceKey="CalendarDatePickerHeight" />
+			<StaticResource x:Key="SimpleCalendarDatePickerMinHeight" ResourceKey="CalendarDatePickerMinHeight" />
+
+			<!-- Foreground -->
+			<StaticResource x:Key="SimpleCalendarDatePickerForeground" ResourceKey="CalendarDatePickerForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerForegroundDisabled" ResourceKey="CalendarDatePickerForegroundDisabled" />
+
+			<!-- Placeholder text -->
+			<StaticResource x:Key="SimpleCalendarDatePickerTextForeground" ResourceKey="CalendarDatePickerTextForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundDisabled" ResourceKey="CalendarDatePickerTextForegroundDisabled" />
+			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundSelected" ResourceKey="CalendarDatePickerTextForegroundSelected" />
+
+			<!-- Calendar glyph icon -->
+			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForeground" ResourceKey="CalendarDatePickerCalendarGlyphForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForegroundDisabled" ResourceKey="CalendarDatePickerCalendarGlyphForegroundDisabled" />
+
+			<!-- Header -->
+			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForeground" ResourceKey="CalendarDatePickerHeaderForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForegroundDisabled" ResourceKey="CalendarDatePickerHeaderForegroundDisabled" />
+
+			<!-- Background -->
+			<StaticResource x:Key="SimpleCalendarDatePickerBackground" ResourceKey="CalendarDatePickerBackground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPointerOver" ResourceKey="CalendarDatePickerBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPressed" ResourceKey="CalendarDatePickerBackgroundPressed" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundDisabled" ResourceKey="CalendarDatePickerBackgroundDisabled" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundFocused" ResourceKey="CalendarDatePickerBackgroundFocused" />
+
+			<!-- Border -->
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrush" ResourceKey="CalendarDatePickerBorderBrush" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPointerOver" ResourceKey="CalendarDatePickerBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPressed" ResourceKey="CalendarDatePickerBorderBrushPressed" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushDisabled" ResourceKey="CalendarDatePickerBorderBrushDisabled" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushFocused" ResourceKey="CalendarDatePickerBorderBrushFocused" />
 
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
+			<!-- ── CalendarDatePicker — semantic keys (source of truth) ── -->
+
 			<!-- Dimensions -->
 			<!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimpleCalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 			<!-- sds-size-radius-400 -->
-			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
 			<!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="CalendarDatePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
 			<!-- sds-size-space-0 -->
-			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
+			<StaticResource x:Key="CalendarDatePickerFlyoutPresenterPadding" ResourceKey="SimpleSpace0Thickness" />
 			<!-- sds-size-space-400,10,sds-size-space-400,10 -->
-			<Thickness x:Key="SimpleCalendarDatePickerContentMargin">16,10,16,10</Thickness>
+			<Thickness x:Key="CalendarDatePickerContentMargin">16,10,16,10</Thickness>
 			<!-- sds: no exact token (44) -->
-			<x:Double x:Key="SimpleCalendarDatePickerMinHeight">44</x:Double>
+			<x:Double x:Key="CalendarDatePickerMinHeight">44</x:Double>
 			<!-- sds: 0,0,0,sds-size-space-200 -->
-			<Thickness x:Key="SimpleCalendarDatePickerHeaderMargin">0,0,0,8</Thickness>
+			<Thickness x:Key="CalendarDatePickerHeaderMargin">0,0,0,8</Thickness>
 			<!-- sds-size-space-300,0,0,0 -->
-			<Thickness x:Key="SimpleCalendarDatePickerCalendarGlyphMargin">12,0,0,0</Thickness>
+			<Thickness x:Key="CalendarDatePickerCalendarGlyphMargin">12,0,0,0</Thickness>
 
 			<!-- Foreground (selected date text) -->
-			<StaticResource x:Key="SimpleCalendarDatePickerForeground"                    ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerForegroundDisabled"             ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerForeground"                    ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerForegroundDisabled"             ResourceKey="SimpleTextDisabledDefaultBrush" />
 
 			<!-- Placeholder text -->
-			<StaticResource x:Key="SimpleCalendarDatePickerTextForeground"                 ResourceKey="SimpleTextDefaultTertiaryBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundDisabled"          ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundSelected"          ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForeground"                 ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundDisabled"          ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerTextForegroundSelected"          ResourceKey="SimpleTextDefaultDefaultBrush" />
 
 			<!-- Calendar glyph icon -->
-			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForeground"         ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForegroundDisabled"  ResourceKey="SimpleIconDisabledOnDisabledBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForeground"         ResourceKey="SimpleIconDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerCalendarGlyphForegroundDisabled"  ResourceKey="SimpleIconDisabledOnDisabledBrush" />
 
 			<!-- Header -->
-			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForeground"                ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForegroundDisabled"         ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForeground"                ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerHeaderForegroundDisabled"         ResourceKey="SimpleTextDisabledDefaultBrush" />
 
 			<!-- Background -->
-			<StaticResource x:Key="SimpleCalendarDatePickerBackground"                      ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPointerOver"            ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPressed"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundDisabled"               ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundFocused"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackground"                      ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPointerOver"            ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundPressed"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundDisabled"               ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBackgroundFocused"                ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
 
 			<!-- Border -->
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrush"                     ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPointerOver"           ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPressed"               ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushDisabled"              ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushFocused"               ResourceKey="SimpleBorderBrandSecondaryBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrush"                     ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPointerOver"           ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushPressed"               ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushDisabled"              ResourceKey="SimpleBorderDisabledDefaultBrush" />
+			<StaticResource x:Key="CalendarDatePickerBorderBrushFocused"               ResourceKey="SimpleBorderBrandSecondaryBrush" />
+
+			<!-- ── Backwards-compat aliases (SimpleCalendarDatePicker* → CalendarDatePicker*) ── -->
+
+			<!-- Dimensions -->
+			<StaticResource x:Key="SimpleCalendarDatePickerCornerRadius" ResourceKey="CalendarDatePickerCornerRadius" />
+			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterCornerRadius" ResourceKey="CalendarDatePickerFlyoutPresenterCornerRadius" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderThemeThickness" ResourceKey="CalendarDatePickerBorderThemeThickness" />
+			<StaticResource x:Key="SimpleCalendarDatePickerFlyoutPresenterPadding" ResourceKey="CalendarDatePickerFlyoutPresenterPadding" />
+			<StaticResource x:Key="SimpleCalendarDatePickerMinHeight" ResourceKey="CalendarDatePickerMinHeight" />
+
+			<!-- Foreground -->
+			<StaticResource x:Key="SimpleCalendarDatePickerForeground" ResourceKey="CalendarDatePickerForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerForegroundDisabled" ResourceKey="CalendarDatePickerForegroundDisabled" />
+
+			<!-- Placeholder text -->
+			<StaticResource x:Key="SimpleCalendarDatePickerTextForeground" ResourceKey="CalendarDatePickerTextForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundDisabled" ResourceKey="CalendarDatePickerTextForegroundDisabled" />
+			<StaticResource x:Key="SimpleCalendarDatePickerTextForegroundSelected" ResourceKey="CalendarDatePickerTextForegroundSelected" />
+
+			<!-- Calendar glyph icon -->
+			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForeground" ResourceKey="CalendarDatePickerCalendarGlyphForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerCalendarGlyphForegroundDisabled" ResourceKey="CalendarDatePickerCalendarGlyphForegroundDisabled" />
+
+			<!-- Header -->
+			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForeground" ResourceKey="CalendarDatePickerHeaderForeground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerHeaderForegroundDisabled" ResourceKey="CalendarDatePickerHeaderForegroundDisabled" />
+
+			<!-- Background -->
+			<StaticResource x:Key="SimpleCalendarDatePickerBackground" ResourceKey="CalendarDatePickerBackground" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPointerOver" ResourceKey="CalendarDatePickerBackgroundPointerOver" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundPressed" ResourceKey="CalendarDatePickerBackgroundPressed" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundDisabled" ResourceKey="CalendarDatePickerBackgroundDisabled" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBackgroundFocused" ResourceKey="CalendarDatePickerBackgroundFocused" />
+
+			<!-- Border -->
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrush" ResourceKey="CalendarDatePickerBorderBrush" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPointerOver" ResourceKey="CalendarDatePickerBorderBrushPointerOver" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushPressed" ResourceKey="CalendarDatePickerBorderBrushPressed" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushDisabled" ResourceKey="CalendarDatePickerBorderBrushDisabled" />
+			<StaticResource x:Key="SimpleCalendarDatePickerBorderBrushFocused" ResourceKey="CalendarDatePickerBorderBrushFocused" />
 
 		</ResourceDictionary>
 
@@ -271,7 +363,7 @@
 Control.IsTemplateFocusTarget="True" />
 
 						<!-- Content row: header/date text + calendar icon -->
-						<Grid Margin="{ThemeResource SimpleCalendarDatePickerContentMargin}"
+						<Grid Margin="{ThemeResource CalendarDatePickerContentMargin}"
 							  VerticalAlignment="Center">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
@@ -291,7 +383,7 @@ Control.IsTemplateFocusTarget="True" />
 											  FontSize="{ThemeResource SimpleTypographyScale02}"
 											  FontFamily="{ThemeResource SimpleFontFamily}"
 											  TextWrapping="Wrap"
-											  Margin="{ThemeResource SimpleCalendarDatePickerHeaderMargin}"
+											  Margin="{ThemeResource CalendarDatePickerHeaderMargin}"
 											  Visibility="Collapsed"
 											  AutomationProperties.AccessibilityView="Raw" />
 
@@ -313,7 +405,7 @@ Control.IsTemplateFocusTarget="True" />
 									  FontSize="{ThemeResource SimpleTypographyScale03}"
 									  Foreground="{ThemeResource SimpleCalendarDatePickerCalendarGlyphForeground}"
 									  VerticalAlignment="Center"
-									  Margin="{ThemeResource SimpleCalendarDatePickerCalendarGlyphMargin}" />
+									  Margin="{ThemeResource CalendarDatePickerCalendarGlyphMargin}" />
 						</Grid>
 
 						<!-- Hidden elements expected by the control -->

@@ -26,15 +26,19 @@ future investigation.
 
 1. **Write once, theme anywhere** — App developers use `Style="{StaticResource FilledButtonStyle}"`
    and the active theme resolves it to the correct design-system-specific style.
-2. **Material-derived naming** — Semantic names mirror Material v2 key names minus the
+2. **Lightweight styling portability** — Semantic lightweight styling resource keys
+   (e.g. `FilledButtonForeground`, `CheckBoxBackgroundChecked`) resolve to the
+   correct theme-specific value under both Material and Simple, giving developers
+   a single set of customization knobs.
+3. **Material-derived naming** — Semantic names mirror Material v2 key names minus the
    `Material` prefix, giving developers a familiar vocabulary.
-3. **Gap visibility** — Clearly surface where Simple lacks an equivalent so those can
+4. **Gap visibility** — Clearly surface where Simple lacks an equivalent so those can
    be prioritized for future work.
-4. **Non-breaking** — This layer is additive. Existing theme-prefixed keys remain valid.
+5. **Non-breaking** — This layer is additive. Existing theme-prefixed keys remain valid.
 
 ### Existing State
 
-Both themes already publish aliases in `_Resources.xaml`:
+**Style aliases** — Both themes already publish aliases in `_Resources.xaml`:
 
 - **Material** (`src/library/Uno.Material/Styles/Controls/v2/_Resources.xaml`):
   Already maps semantic keys like `ElevatedButtonStyle → MaterialElevatedButtonStyle`.
@@ -45,7 +49,19 @@ Both themes already publish aliases in `_Resources.xaml`:
   **plus** a set of "legacy / backwards-compatible aliases" that partially map
   Material names to Simple equivalents (e.g. `FilledButtonStyle → SimplePrimaryButtonStyle`).
 
-This spec formalizes and completes those mappings.
+**Lightweight styling resources** — Both themes define per-control ThemeDictionary
+resources for lightweight styling, but with different naming:
+
+- **Material** (e.g. `src/library/Uno.Material/Styles/Controls/v2/Button.xaml`):
+  Defines resources with **unprefixed** names like `FilledButtonForeground`,
+  `CheckBoxBackgroundChecked`. These are already semantic.
+
+- **Simple** (e.g. `src/library/Uno.Simple.WinUI/Styles/Controls/Button.xaml`):
+  Defines resources with **`Simple`-prefixed** names like `SimplePrimaryButtonForeground`,
+  `SimpleCheckBoxCheckedBackground`. No semantic aliases exist today.
+
+This spec formalizes and completes both the style mappings and the lightweight
+styling resource mappings.
 
 ---
 
@@ -85,7 +101,7 @@ Both themes resolve to the correct variant.
 1. **Given** Material theme, **When** `FilledTextBoxStyle` is applied,
    **Then** renders as `MaterialFilledTextBoxStyle`.
 2. **Given** Simple theme, **When** `FilledTextBoxStyle` is applied,
-   **Then** renders as `SimpleInputTextBoxStyle`.
+   **Then** renders as `SimpleTextBoxStyle`.
 3. Same pattern for PasswordBox: `FilledPasswordBoxStyle`, `OutlinedPasswordBoxStyle`.
 
 ---
@@ -102,7 +118,63 @@ etc.) resolve correctly under both themes with a single semantic key.
 
 ---
 
-### User Story 4 — Gap Awareness (Priority: P2)
+### User Story 4 — Lightweight Styling Resource Portability (Priority: P1)
+
+A developer customizes a control's appearance using semantic lightweight styling
+resource keys. The customization resolves under both themes.
+
+**Why this priority**: Lightweight styling is the primary customization mechanism
+for Uno Themes. Without resource-level portability, style-level portability is
+incomplete — the control looks right by default but can't be customized portably.
+
+**Acceptance Scenarios**:
+
+1. **Given** Simple theme is active, **When** a developer reads
+   `{ThemeResource FilledButtonForeground}`, **Then** it resolves to the same
+   value as `SimplePrimaryButtonForeground`.
+2. **Given** Material theme is active, **When** a developer reads
+   `{ThemeResource FilledButtonForeground}`, **Then** it resolves to the value
+   already defined in Material's ThemeDictionaries (no change needed).
+3. **Given** either theme, **When** `{ThemeResource CheckBoxBackgroundChecked}`
+   is read, **Then** it resolves to the theme's checked checkbox background brush.
+
+**Full Override Parity**:
+
+Both themes support overriding semantic resource keys:
+
+- Under **Material**: Templates already reference unprefixed keys
+  (e.g. `{ThemeResource FilledButtonForeground}`). No change needed.
+- Under **Simple**: Templates reference `Simple`-prefixed keys which alias
+  to the semantic keys (e.g. `{ThemeResource SimplePrimaryButtonForeground}`
+  which aliases to `FilledButtonForeground`). Overriding either key works:
+  - Override `SimplePrimaryButtonForeground` → template picks it up directly.
+  - Override `FilledButtonForeground` → alias propagates the override.
+
+4. **Given** Simple theme is active, **When** a developer overrides
+   `FilledButtonForeground` in their app resources, **Then** the override takes
+   effect — the button renders with the overridden brush.
+
+**Many-to-One Mapping Constraint**:
+
+Where multiple semantic styles map to the same Simple style (e.g.
+`FilledTonalButtonStyle` and `OutlinedButtonStyle` both → `SimpleNeutralButtonStyle`),
+the template can only reference **one** set of semantic resource keys. The
+**first listed** semantic mapping is the canonical one the template references.
+The other semantic key set is aliased to the canonical keys and provides read
+parity but not independent override parity. This is an inherent constraint of
+many-to-one mappings, not a design limitation.
+
+| Simple Style | Canonical Semantic Keys | Aliased Semantic Keys |
+|---|---|---|
+| `SimpleNeutralButtonStyle` | `FilledTonalButton*` | `OutlinedButton*` (aliases → `FilledTonalButton*`) |
+
+To override the Neutral button appearance, developers can use either
+`FilledTonalButton*` keys or `SimpleNeutralButton*` keys (both reference the
+same underlying resource).
+
+---
+
+### User Story 5 — Gap Awareness (Priority: P2)
 
 When a developer uses a semantic key that has no Simple equivalent (e.g.
 `NavigationViewStyle`), the behavior is gracefully handled (control uses WinUI
@@ -119,6 +191,22 @@ default style) and the gap is documented.
 - Simple has styles with no Material equivalent (e.g. `PersonPictureStyle`, `ExpanderStyle`).
   → These remain as Simple-only aliases. They may be promoted to semantic keys if Material
   adds equivalents in the future.
+- What happens when a developer overrides a semantic lightweight styling resource?
+  → Under both themes, the override takes effect. Material templates reference
+  semantic keys directly. Simple templates reference `Simple`-prefixed keys which
+  alias to the semantic keys, so overriding the semantic key propagates through
+  the alias chain. Overriding the `Simple`-prefixed key also works (template
+  picks it up directly).
+- What happens when two semantic style variants map to the same Simple style
+  (e.g. `OutlinedButtonStyle` and `FilledTonalButtonStyle` both → `SimpleNeutralButtonStyle`)?
+  → The template references `SimpleNeutralButton*` keys (which alias to the
+  canonical `FilledTonalButton*` keys). Overriding `SimpleNeutralButtonForeground`
+  or `FilledTonalButtonForeground` both work. The `OutlinedButton*` set is aliased
+  to the canonical keys for read parity but does not independently affect the
+  template. This is an inherent constraint of many-to-one, not a design limitation.
+- What about Material-specific resource concepts (StateLayer, Elevation, Shadow)?
+  → These are Material implementation details with no Simple equivalent. They are
+  excluded from the semantic resource layer and documented as gaps.
 
 ---
 
@@ -135,10 +223,31 @@ default style) and the gap is documented.
 - **FR-004**: Semantic keys for typography MUST follow the existing Material type
   scale names (DisplayLarge, HeadlineMedium, BodySmall, etc.) — both themes already
   implement these.
-- **FR-005**: This layer MUST NOT introduce new control styles — it is purely a
-  naming/aliasing contract over existing styles.
+- **FR-005**: This layer MUST NOT introduce new control styles. It consists of
+  naming/aliasing for styles and resources, plus updating Simple's existing
+  templates to reference semantic resource keys instead of `Simple`-prefixed keys.
 - **FR-006**: Existing theme-prefixed keys (e.g. `MaterialFilledButtonStyle`,
-  `SimplePrimaryButtonStyle`) MUST remain valid and unchanged.
+  `SimplePrimaryButtonStyle`) MUST remain valid and unchanged. `Simple`-prefixed
+  lightweight styling resource keys MUST become backwards-compatible aliases
+  pointing to the corresponding semantic keys.
+- **FR-007**: For every control with a semantic style mapping, Simple's control
+  templates MUST reference `Simple`-prefixed lightweight styling resource keys
+  (which alias to the semantic keys). This ensures overriding either the
+  `Simple`-prefixed key or the semantic key affects the control.
+- **FR-008**: Simple's ThemeDictionaries MUST define the semantic keys as the
+  source of truth (mapping to the SDS foundation tokens), and MUST define the
+  `Simple`-prefixed keys as aliases pointing to the semantic keys. Templates
+  MUST reference the `Simple`-prefixed keys.
+- **FR-009**: Material's control XAML files already define unprefixed lightweight
+  styling resource keys. No changes are needed on the Material side.
+- **FR-010**: Semantic resource keys MUST be limited to resources where a
+  reasonable type-compatible Simple equivalent exists. Material-specific concepts
+  (StateLayer, Elevation, FocusCircle, Shadow) MUST be omitted.
+- **FR-011**: Semantic resource keys MUST be defined in **both** ThemeDictionary
+  entries (`Light` and `Default`) in each Simple control XAML file.
+- **FR-012**: For many-to-one style mappings, the template MUST reference the
+  **canonical** semantic key set (first listed mapping). The other semantic key
+  sets MUST be defined as aliases to the canonical keys.
 
 ---
 
@@ -180,8 +289,8 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleInputTextBoxStyle` | Simple "Input" = filled appearance |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedInputTextBoxStyle` | Direct match |
+| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleTextBoxStyle` | Simple "Input" = single SDS Input design |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleTextBoxStyle` | SDS has one Input; maps to same style |
 
 ### PasswordBox
 
@@ -350,6 +459,128 @@ Both themes already publish identical alias keys for typography. This layer is
 
 ---
 
+## Semantic Lightweight Styling Resource Mappings
+
+Beyond style aliases, each theme exposes **lightweight styling resources** —
+ThemeDictionary entries (brushes, thicknesses, corner radii, etc.) that control
+templates reference via `{ThemeResource}`. These are the knobs developers use to
+customize appearance without re-templating.
+
+**Material** already defines these with **unprefixed** names (e.g.
+`FilledButtonForeground`) — these are the semantic keys.
+
+**Simple** defines them with **`Simple`-prefixed** names (e.g.
+`SimplePrimaryButtonForeground`).
+
+This section specifies the aliases that Simple must add in its per-control XAML
+ThemeDictionaries so that Material's unprefixed keys resolve under Simple.
+
+### Convention
+
+```
+Semantic Resource Key = Material unprefixed ThemeDictionary key
+```
+
+The semantic key becomes the **source of truth** in Simple's ThemeDictionaries,
+and Simple's templates reference the `Simple`-prefixed key (which aliases to the
+semantic key). This allows overriding **either** the `Simple`-prefixed key **or**
+the semantic key:
+
+```xml
+<!-- BEFORE (current Simple Button.xaml): -->
+<!-- ThemeDictionary: -->
+<StaticResource x:Key="SimplePrimaryButtonForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+<!-- Template: -->
+<Setter Property="Foreground" Value="{ThemeResource SimplePrimaryButtonForeground}" />
+
+<!-- AFTER (updated Simple Button.xaml): -->
+<!-- ThemeDictionary — semantic key is source of truth: -->
+<StaticResource x:Key="FilledButtonForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+<!-- ThemeDictionary — Simple-prefixed alias (referenced by template): -->
+<StaticResource x:Key="SimplePrimaryButtonForeground" ResourceKey="FilledButtonForeground" />
+<!-- Template — references Simple-prefixed key: -->
+<Setter Property="Foreground" Value="{ThemeResource SimplePrimaryButtonForeground}" />
+```
+
+This ensures overriding **either** `SimplePrimaryButtonForeground` **or**
+`FilledButtonForeground` takes effect:
+
+- Override `SimplePrimaryButtonForeground` → works (template references it directly)
+- Override `FilledButtonForeground` → works (`SimplePrimaryButtonForeground` aliases
+  to it, so the override propagates through the alias chain)
+
+### Mapping Pattern Per Control
+
+The style-level mapping (e.g. `FilledButtonStyle → SimplePrimaryButtonStyle`) determines
+the resource-level mapping prefix (e.g. `FilledButton* → SimplePrimaryButton*`).
+
+For each mapped style variant, the resource properties follow this pattern:
+
+| Resource Suffix | Example (Button) |
+|---|---|
+| `{Foreground\|Background\|BorderBrush}{State}` | `FilledButtonForeground`, `FilledButtonBackgroundPointerOver` |
+| `Icon{Foreground}{State}` | `FilledButtonIconForegroundPressed` |
+| Non-brush: `CornerRadius`, `MinHeight`, `Padding`, etc. | `FilledTextBoxCornerRadius` |
+
+States: *(none/default)*, `PointerOver`, `Pressed`, `Disabled`, `Focused`,
+`Checked`, `Unchecked`, `Indeterminate` — varies by control.
+
+### Controls Requiring Aliases
+
+Only controls where **both** conditions are met:
+1. A semantic style mapping exists (not a GAP)
+2. Material defines unprefixed lightweight styling resources
+
+| Control | Simple XAML File | Alias Prefix Mapping | Approx. Aliases |
+|---|---|---|---|
+| Button | `Button.xaml` | `FilledButton*→SimplePrimaryButton*`, `FilledTonalButton*→SimpleNeutralButton*`, `OutlinedButton*→SimpleNeutralButton*`, `TextButton*→SimpleSubtleButton*`, `IconButton*→SimpleIconButtonPrimaryButton*` | ~75/dict |
+| TextBox | `TextBox.xaml` | `FilledTextBox*→SimpleTextBox*`, `OutlinedTextBox*→FilledTextBox*` (many-to-one) | ~45/dict |
+| PasswordBox | `PasswordBox.xaml` | `FilledPasswordBox*→SimplePasswordBox*` | ~25/dict |
+| ComboBox | `ComboBox.xaml` | `ComboBox*→SimpleComboBox*` | ~40/dict |
+| CheckBox | `CheckBox.xaml` | `CheckBox*→SimpleCheckBox*` (word-order differs) | ~60/dict |
+| RadioButton | `RadioButton.xaml` | `RadioButton*→SimpleRadioButton*` (naming differs) | ~21/dict |
+| ToggleSwitch | `ToggleSwitch.xaml` | `ToggleSwitch*→SimpleToggleSwitch*` (naming differs significantly) | ~12/dict |
+| Slider | `Slider.xaml` | `Slider*→SimpleSlider*` | ~21/dict |
+| ToggleButton | `ToggleButton.xaml` | `TextToggleButton*→SimpleToggleButton*` | ~39/dict |
+| DatePicker | `DatePicker.xaml` | `DatePicker*→SimpleDatePicker*` | ~35/dict |
+| CalendarDatePicker | `CalendarDatePicker.xaml` | `CalendarDatePicker*→SimpleCalendarDatePicker*` | ~24/dict |
+| AppBarButton | `AppBarButton.xaml` | `AppBarButton*→SimpleAppBarButton*` | ~2/dict |
+
+### Controls NOT Requiring Aliases
+
+- **GAP controls** (no Simple style): HyperlinkButton, ProgressBar, ProgressRing,
+  CommandBar, NavigationView, PipsPager, RatingControl, MediaTransportControls,
+  FlyoutPresenter
+- **Controls where Material uses only `Material`-prefixed resource keys** (no
+  unprefixed keys to alias): ListView, ContentDialog, CalendarView,
+  MenuFlyoutPresenter, MenuFlyoutItem, MenuFlyoutSeparator, MenuFlyoutSubItem,
+  ToggleMenuFlyoutItem
+
+### Naming Challenges
+
+Some controls have **different naming conventions** between themes that require
+careful hand-mapping rather than mechanical prefix substitution:
+
+| Control | Material Pattern | Simple Pattern | Example |
+|---|---|---|---|
+| CheckBox | `CheckBox{Property}{State}` | `SimpleCheckBox{State}{Property}` | `CheckBoxBackgroundChecked` → `SimpleCheckBoxCheckedBackground` |
+| RadioButton | `RadioButton{Part}{State}` | `SimpleRadioButton{State}{Property}` | `RadioButtonOuterEllipseStroke` → `SimpleRadioButtonUncheckedBorderBrush` |
+| ToggleSwitch | `ToggleSwitch{Knob\|KnobBounds\|OuterBorder}*` | `SimpleToggleSwitch{Thumb\|Track}*` | `ToggleSwitchKnobOnFill` → `SimpleToggleSwitchThumbOnFill` |
+
+### Excluded Resource Types
+
+The following Material resource categories are **excluded** from the semantic
+resource layer (no Simple equivalent exists):
+
+- **StateLayer resources** (`*StateLayerBackground*`) — Material-specific overlay pattern
+- **Elevation/Shadow resources** (`*Elevation*`, `*Shadow*`) — Material-specific depth system
+- **FocusCircle/StateCircle resources** — Material-specific focus indicators
+- **Delete/Reveal button resources** — Internal sub-control styling
+- **Opacity resources** (`*OpacityDisabled`) — Material uses opacity; Simple uses distinct brushes
+- **Animation/transition resources** — Theme-specific motion
+
+---
+
 ## Simple-Only Styles (Not in Semantic Layer)
 
 These styles exist in Simple but have no Material equivalent. They remain
@@ -365,8 +596,8 @@ already in Simple's `_Resources.xaml`).
 | `SimpleIconButtonDangerPrimaryStyle` | Button | |
 | `SimpleIconButtonDangerSubtleStyle` | Button | |
 | All `SimpleSmall*` / `SimpleMedium*` button variants | Button | Size variants — Material doesn't have explicit size variants |
-| `SimpleInputTextBoxErrorStyle` | TextBox | Dedicated error style |
-| `SimpleInputTextBoxSmallStyle` | TextBox | Size variant |
+| `SimpleTextBoxErrorStyle` | TextBox | Dedicated error style |
+| `SimpleTextBoxSmallStyle` | TextBox | Size variant |
 | `SimpleSelectFieldErrorStyle` | ComboBox | Dedicated error style |
 | `SimplePersonPictureStyle` (6 variants) | PersonPicture | Material has no PersonPicture |
 | `SimpleExpanderStyle` | Expander | Material has no Expander style |
@@ -443,7 +674,7 @@ contract because they are implementation details or theme-specific controls.
 
 ## Success Criteria
 
-- **SC-001**: Every semantic key defined in this spec resolves correctly when the
+- **SC-001**: Every semantic style key defined in this spec resolves correctly when the
   corresponding theme is active — verified by a test page rendering all styles
   under both Material and Simple.
 - **SC-002**: No existing app using `Material`-prefixed or `Simple`-prefixed keys
@@ -451,7 +682,17 @@ contract because they are implementation details or theme-specific controls.
 - **SC-003**: The gap table is accurate — every ⚠️ GAP entry truly has no
   reasonable Simple equivalent.
 - **SC-004**: Both `_Resources.xaml` files are fully aligned with this spec's
-  mapping tables after implementation.
+  style mapping tables after implementation.
+- **SC-005**: Every semantic lightweight styling resource key defined in this spec
+  resolves to the correct default value under both themes — verified by reading
+  the resource value at runtime under both Material and Simple.
+- **SC-006**: Overriding a semantic resource key (e.g. `FilledButtonForeground`)
+  in app resources takes effect under **both** themes for 1:1 mappings.
+- **SC-007**: Simple's per-control XAML ThemeDictionaries define semantic keys as
+  the source of truth and `Simple`-prefixed keys as backwards-compatible aliases,
+  in both `Light` and `Default` dicts.
+- **SC-008**: Simple's control templates reference `Simple`-prefixed keys
+  (which alias to semantic keys), enabling override at either level.
 
 ---
 
@@ -459,8 +700,10 @@ contract because they are implementation details or theme-specific controls.
 
 ### Mechanism
 
-The semantic layer is implemented purely through `<StaticResource>` aliases in
-each theme's `_Resources.xaml`. No new controls, no new XAML templates, no code changes.
+The semantic layer has two tiers:
+
+**Tier 1 — Style aliases** (in `_Resources.xaml`):
+`<StaticResource>` aliases that map semantic style names to theme-specific styles.
 
 ```xml
 <!-- In Material _Resources.xaml (already exists): -->
@@ -470,19 +713,88 @@ each theme's `_Resources.xaml`. No new controls, no new XAML templates, no code 
 <StaticResource x:Key="FilledButtonStyle" ResourceKey="SimplePrimaryButtonStyle" />
 ```
 
+**Tier 2 — Lightweight styling resources** (in per-control XAML files):
+Simple's templates and ThemeDictionaries are updated so that semantic resource
+keys are the source of truth and templates reference them directly.
+
+```xml
+<!-- In Simple's Button.xaml ThemeDictionaries (Light and Default): -->
+
+<!-- Semantic key — source of truth: -->
+<StaticResource x:Key="FilledButtonForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+<StaticResource x:Key="FilledButtonBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+
+<!-- Simple-prefixed alias — referenced by template: -->
+<StaticResource x:Key="SimplePrimaryButtonForeground" ResourceKey="FilledButtonForeground" />
+<StaticResource x:Key="SimplePrimaryButtonBackground" ResourceKey="FilledButtonBackground" />
+```
+
+```xml
+<!-- In Simple's Button.xaml template — references Simple-prefixed keys: -->
+<Setter Property="Foreground" Value="{ThemeResource SimplePrimaryButtonForeground}" />
+<Setter Property="Background" Value="{ThemeResource SimplePrimaryButtonBackground}" />
+```
+
+Material's control XAML files already define unprefixed resource keys — no
+Material-side changes are needed for Tier 2.
+
+### Resource Chain
+
+For a 1:1 mapping (e.g. `FilledButton → SimplePrimary`):
+
+```
+Template references:     {ThemeResource SimplePrimaryButtonForeground}
+ThemeDictionary defines: FilledButtonForeground → SimpleTextBrandOnBrandBrush   (semantic = source of truth)
+Template-level alias:    SimplePrimaryButtonForeground → FilledButtonForeground  (referenced by template)
+```
+
+- Override `SimplePrimaryButtonForeground` → works (template references it directly)
+- Override `FilledButtonForeground` → works (alias propagates the override)
+
+For a many-to-one mapping (e.g. `FilledTonal + Outlined → SimpleNeutral`):
+
+```
+Template references:     {ThemeResource SimpleNeutralButtonForeground}
+ThemeDictionary defines: FilledTonalButtonForeground → SimpleTextDefaultDefaultBrush  (canonical semantic key)
+Template-level alias:    SimpleNeutralButtonForeground → FilledTonalButtonForeground
+Read-parity alias:       OutlinedButtonForeground → FilledTonalButtonForeground
+```
+
+- Override `SimpleNeutralButtonForeground` → works (template references it directly)
+- Override `FilledTonalButtonForeground` → works (alias propagates the override)
+- Override `OutlinedButtonForeground` → read parity only (does not affect template)
+
 ### What Needs to Change
 
-1. **Audit Material `_Resources.xaml`** — Verify all semantic keys from this spec are present.
-   Material's file is largely complete already.
+1. **Audit Material `_Resources.xaml`** — Verify all semantic style keys from this spec
+   are present. Material's file is largely complete already.
 
-2. **Update Simple `_Resources.xaml`** — Add missing semantic aliases, remove or
+2. **Update Simple `_Resources.xaml`** — Add missing semantic style aliases, remove or
    reorganize the current ad-hoc "legacy / backwards-compatible aliases" section
-   to align with this spec. The existing legacy aliases (`FilledButtonStyle`,
-   `OutlinedButtonStyle`, `TextButtonStyle`, etc.) already partially implement
-   this — they need to be validated against this spec and completed.
+   to align with this spec.
 
-3. **Document gaps** — Add XAML comments in Simple's `_Resources.xaml` for each
+3. **Document style gaps** — Add XAML comments in Simple's `_Resources.xaml` for each
    gap, referencing this spec.
+
+4. **Update Simple's per-control XAML ThemeDictionaries** — For each control listed
+   in the "Controls Requiring Aliases" table:
+   a. Rename `Simple`-prefixed resource keys to their semantic equivalents
+      (the semantic key becomes the source of truth, pointing to the SDS
+      foundation token).
+   b. Add `Simple`-prefixed keys as backwards-compatible aliases pointing to
+      the semantic keys.
+   c. For many-to-one mappings, add the non-canonical semantic keys as aliases
+      pointing to the canonical semantic keys.
+   d. Apply to **both** `Light` and `Default` ThemeDictionaries.
+
+5. **Update Simple's control templates** — Change all `{ThemeResource SemanticKey}`
+   references in template setters and visual states to reference the
+   corresponding `Simple`-prefixed keys instead (which alias to the semantic keys).
+   This ensures overriding either key affects the control.
+
+6. **Document resource gaps** — For Material resource keys with no type-compatible
+   Simple equivalent (StateLayer, Elevation, etc.), add XAML comments noting the
+   gap.
 
 ### Relationship to Simple-Native Aliases
 

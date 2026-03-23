@@ -1,0 +1,56 @@
+jobs:
+- job: RuntimeTests_Desktop
+  cancelTimeoutInMinutes: 0
+  displayName: 'Runtime Tests - Desktop'
+  timeoutInMinutes: 60
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  variables:
+    SampleAppName: SimpleSampleApp
+    ProjectPath: src/samples/SimpleSampleApp
+    ArtifactName: runtimetests-desktop-SimpleSampleApp
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-desktop'
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  - pwsh: |
+      dotnet publish -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop `
+        $(ProjectPath)/$(SampleAppName).csproj `
+        -bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build Desktop Head - $(SampleAppName)
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Build Logs
+    condition: always()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      ArtifactName: $(ArtifactName)-buildlog
+      ArtifactType: Container
+
+  - script: |
+      chmod +x build/scripts/linux-skia-desktop-runtime-tests.sh
+      build/scripts/linux-skia-desktop-runtime-tests.sh
+    displayName: 'Run Runtime Tests - $(SampleAppName)'
+    env:
+      ProjectPath: '$(ProjectPath)'
+      SampleAppName: '$(SampleAppName)'
+      UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
+      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Runtime Tests Results'
+    condition: always()
+    inputs:
+      testRunTitle: 'Runtime Tests - $(SampleAppName)'
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
+      failTaskOnFailedTests: true
