@@ -20,7 +20,7 @@ control styles that implement this system.
 | Typography | `Common/Fonts.xaml` (Inter) | ✅ Complete |
 | Animation Constants | `Common/AnimationConstants.xaml` | ✅ Complete |
 | Thickness Resources | `Common/Thickness.xaml` | ✅ Complete |
-| Control Styles | 7 XAML files (33 styles) | ✅ Complete |
+| Control Styles | 14 XAML files (55+ styles) | ✅ Complete |
 | Implicit Styles & Aliases | `_Resources.xaml` | ✅ Complete |
 | Entry Point | `SimpleTheme.cs` (extends BaseTheme) | ✅ Complete |
 | XamlMerge | `simple-common.props` → `mergedpages.xaml` | ✅ Complete |
@@ -203,10 +203,7 @@ Map design-system-agnostic names to SDS typography:
 
 The following controls are listed as NOT YET implemented:
 
-AppBarButton, CalendarDatePicker, CalendarView, CommandBar, ContentDialog,
-DatePicker, FAB, Flyout/MenuFlyout, HyperlinkButton, InfoBar, ListView,
-MediaPlayerElement, NavigationView, NumberBox, PasswordBox, PipsPager,
-ProgressBar, ProgressRing, RatingControl, Slider, TimePicker, ToggleButton
+CommandBar, MediaPlayerElement
 
 ---
 
@@ -273,9 +270,19 @@ src/library/Uno.Simple.WinUI/
 │       ├── Button.xaml                 ← 18 styles
 │       ├── CheckBox.xaml               ← 1 style
 │       ├── ComboBox.xaml               ← 3 styles
+│       ├── Flyout.xaml                 ← 1 style (FlyoutPresenter)
+│       ├── HyperlinkButton.xaml        ← 3 styles (Primary, Secondary, Default)
+│       ├── MenuFlyout.xaml             ← 7 styles (incl. RadioMenuFlyoutItem)
+│       ├── NavigationView.xaml         ← 4 styles (NavigationView + Item)
+│       ├── PasswordBox.xaml            ← 2 styles (Filled + Outlined)
 │       ├── PersonPicture.xaml          ← 6 styles
+│       ├── PipsPager.xaml              ← 2 styles
+│       ├── ProgressBar.xaml            ← 2 styles
+│       ├── ProgressRing.xaml           ← 2 styles
 │       ├── RadioButton.xaml            ← 1 style
-│       ├── TextBox.xaml                ← 3 styles
+│       ├── RatingControl.xaml          ← 2 styles
+│       ├── TextBox.xaml                ← 4 styles (incl. Outlined)
+│       ├── ToggleButton.xaml           ← 4 styles (incl. IconToggle)
 │       └── ToggleSwitch.xaml           ← 1 style
 └── Generated/
     └── mergedpages.xaml                ← Auto-generated
@@ -305,19 +312,22 @@ These controls have Material styles but NO Simple equivalent:
 | CalendarDatePicker | 2 | Low | — |
 | CalendarView | 2+3 | Low | — |
 | DatePicker | 5 | Low | — |
-| HyperlinkButton | 3 | Medium | Link |
-| PasswordBox | 4 | Medium | Input Field (secure) |
-| ProgressBar | 2 | Medium | Progress |
-| ProgressRing | 2 | Medium | Spinner |
-| Slider | 3 | Medium | Range Slider |
-| AppBarButton | 2 | Low | — |
 | CommandBar | 3 | Low | — |
-| ContentDialog | 2 | Medium | Modal |
-| FAB | 12 | Low | — (no SDS equivalent) |
-| Flyout/MenuFlyout | 14 | Low | — |
-| ListView | 4 | High | List |
 | MediaPlayerElement | 6+ | Low | — |
-| NavigationView | 10+ | Medium | Navigation |
-| PipsPager | 8 | Low | — |
-| RatingControl | 3 | Low | — |
-| ToggleButton | 3 | Low | — |
+
+### Controls Recently Styled (issues #1639–#1650)
+
+| Control | Simple Style(s) | Issue |
+|---------|----------------|-------|
+| HyperlinkButton | `SimpleHyperlinkButtonStyle`, `SimpleSecondaryHyperlinkButtonStyle` | #1643 |
+| PasswordBox (Outlined) | `SimpleOutlinedPasswordBoxStyle` | #1642 |
+| TextBox (Outlined) | `SimpleOutlinedTextBoxStyle` | #1641 |
+| ProgressBar | `SimpleProgressBarStyle` | #1647 |
+| ProgressRing | `SimpleProgressRingStyle` | #1648 |
+| NavigationView | `SimpleNavigationViewStyle`, `SimpleNavigationViewItemStyle` | #1646 |
+| PipsPager | `SimplePipsPagerStyle` | #1649 |
+| RatingControl | `SimpleRatingControlStyle` | #1650 |
+| ToggleButton (Icon) | `SimpleIconToggleButtonStyle` | #1640 |
+| FlyoutPresenter | `SimpleFlyoutPresenterStyle` | #1645 |
+| RadioMenuFlyoutItem | `SimpleRadioMenuFlyoutItemStyle` | #1644 |
+| FAB (aliases) | 12 aliases mapped to existing icon button styles | #1639 |

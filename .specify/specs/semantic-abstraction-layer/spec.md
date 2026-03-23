@@ -283,28 +283,28 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
 | `TextToggleButtonStyle` | `MaterialTextToggleButtonStyle` | `SimpleDefaultToggleButtonStyle` | Simple has one base toggle style |
-| `IconToggleButtonStyle` | `MaterialIconToggleButtonStyle` | ⚠️ **GAP** | Simple has no icon-only toggle variant |
+| `IconToggleButtonStyle` | `MaterialIconToggleButtonStyle` | `SimpleIconToggleButtonStyle` | Compact circular icon-only toggle |
 
 ### TextBox
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
 | `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleTextBoxStyle` | Simple "Input" = single SDS Input design |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleTextBoxStyle` | SDS has one Input; maps to same style |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Transparent background, visible border |
 
 ### PasswordBox
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
 | `FilledPasswordBoxStyle` | `MaterialFilledPasswordBoxStyle` | `SimplePasswordBoxStyle` | Simple has one style (filled) |
-| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | ⚠️ **GAP** | Simple has no outlined password variant |
+| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | Transparent background, visible border |
 
 ### HyperlinkButton
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `HyperlinkButtonStyle` | `MaterialHyperlinkButtonStyle` | ⚠️ **GAP** | Simple has no HyperlinkButton style |
-| `SecondaryHyperlinkButtonStyle` | `MaterialSecondaryHyperlinkButtonStyle` | ⚠️ **GAP** | |
+| `HyperlinkButtonStyle` | `MaterialHyperlinkButtonStyle` | `SimpleHyperlinkButtonStyle` | Primary underlined link |
+| `SecondaryHyperlinkButtonStyle` | `MaterialSecondaryHyperlinkButtonStyle` | `SimpleSecondaryHyperlinkButtonStyle` | Secondary underlined link |
 
 ### ComboBox
 
@@ -340,13 +340,13 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `ProgressBarStyle` | `MaterialProgressBarStyle` | ⚠️ **GAP** | Simple has no ProgressBar style |
+| `ProgressBarStyle` | `MaterialProgressBarStyle` | `SimpleProgressBarStyle` | Horizontal indicator with brand colors |
 
 ### ProgressRing
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `ProgressRingStyle` | `MaterialProgressRingStyle` | ⚠️ **GAP** | Simple has no ProgressRing style |
+| `ProgressRingStyle` | `MaterialProgressRingStyle` | `SimpleProgressRingStyle` | Circular indicator with brand colors |
 
 ### ListView
 
@@ -377,8 +377,8 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `NavigationViewStyle` | `MaterialNavigationViewStyle` | ⚠️ **GAP** | Simple has no NavigationView style |
-| `NavigationViewItemStyle` | `MaterialNavigationViewItemStyle` | ⚠️ **GAP** | |
+| `NavigationViewStyle` | `MaterialNavigationViewStyle` | `SimpleNavigationViewStyle` | Lightweight ThemeResource overrides |
+| `NavigationViewItemStyle` | `MaterialNavigationViewItemStyle` | `SimpleNavigationViewItemStyle` | |
 
 ### CalendarView
 
@@ -408,23 +408,23 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `PipsPagerStyle` | `MaterialPipsPagerStyle` | ⚠️ **GAP** | Simple has no PipsPager style |
+| `PipsPagerStyle` | `MaterialPipsPagerStyle` | `SimplePipsPagerStyle` | Pagination dots with selection states |
 
 ### RatingControl
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `RatingControlStyle` | `MaterialRatingControlStyle` | ⚠️ **GAP** | Simple has no RatingControl style |
+| `RatingControlStyle` | `MaterialRatingControlStyle` | `SimpleRatingControlStyle` | Star rating with brand colors |
 
 ### Flyout / MenuFlyout
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `FlyoutPresenterStyle` | `MaterialFlyoutPresenterStyle` | ⚠️ **GAP** | Simple has no FlyoutPresenter style |
+| `FlyoutPresenterStyle` | `MaterialFlyoutPresenterStyle` | `SimpleFlyoutPresenterStyle` | Surface color, corner radius, border |
 | `MenuFlyoutPresenterStyle` | `MaterialMenuFlyoutPresenterStyle` | `SimpleMenuFlyoutPresenterStyle` | ✅ Direct match |
 | `MenuFlyoutItemStyle` | `MaterialMenuFlyoutItemStyle` | `SimpleMenuFlyoutItemStyle` | ✅ Direct match |
 | `ToggleMenuFlyoutItemStyle` | `MaterialToggleMenuFlyoutItemStyle` | `SimpleToggleMenuFlyoutItemStyle` | ✅ Direct match |
-| `RadioMenuFlyoutItemStyle` | `MaterialRadioMenuFlyoutItemStyle` | ⚠️ **GAP** | Simple has no RadioMenuFlyoutItem |
+| `RadioMenuFlyoutItemStyle` | `MaterialRadioMenuFlyoutItemStyle` | `SimpleRadioMenuFlyoutItemStyle` | Radio bullet indicator |
 | `MenuFlyoutSubItemStyle` | `MaterialMenuFlyoutSubItemStyle` | `SimpleMenuFlyoutSubItemStyle` | ✅ Direct match |
 | `MenuFlyoutSeparatorStyle` | `MaterialMenuFlyoutSeparatorStyle` | `SimpleMenuFlyoutSeparatorStyle` | ✅ Direct match |
 
@@ -548,9 +548,7 @@ Only controls where **both** conditions are met:
 
 ### Controls NOT Requiring Aliases
 
-- **GAP controls** (no Simple style): HyperlinkButton, ProgressBar, ProgressRing,
-  CommandBar, NavigationView, PipsPager, RatingControl, MediaTransportControls,
-  FlyoutPresenter
+- **GAP controls** (no Simple style): CommandBar, MediaTransportControls
 - **Controls where Material uses only `Material`-prefixed resource keys** (no
   unprefixed keys to alias): ListView, ContentDialog, CalendarView,
   MenuFlyoutPresenter, MenuFlyoutItem, MenuFlyoutSeparator, MenuFlyoutSubItem,
