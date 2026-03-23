@@ -8,7 +8,7 @@ export UNO_RUNTIME_TESTS_OUTPUT_PATH="$BUILD_ARTIFACT_ROOT/skia-linux-runtime-te
 # Default: exclude AgentModelRuntimeTests from automatic CI runs (requires license token and incurs API costs).
 # Allow callers to override via UNO_RUNTIME_TESTS_RUN_TESTS env var.
 if [ -z "${UNO_RUNTIME_TESTS_RUN_TESTS:-}" ]; then
-    export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "!AgentModelRuntimeTests"}}'
+    export UNO_RUNTIME_TESTS_RUN_TESTS='{}'
 fi
 export DOTNET_MODIFIABLE_ASSEMBLIES=debug
 
@@ -16,7 +16,7 @@ results_path="$UNO_RUNTIME_TESTS_OUTPUT_PATH"
 
 mkdir -p "$BUILD_ARTIFACT_ROOT"
 
-cd "$ArtifactName"
+cd "$ProjectPath/bin/Release/net10.0-desktop"
 
 xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' bash -c "{ fluxbox & } ; dotnet $SampleAppName.dll --runtime-tests=\"$results_path\"" || true
 

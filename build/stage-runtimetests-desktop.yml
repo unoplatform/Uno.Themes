@@ -22,7 +22,7 @@ jobs:
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
 
-  - powershell: dotnet msbuild $(ProjectPath)/$(SampleAppName).csproj /r /m /p:Configuration=Release /p:TargetFrameworkOverride=desktop /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+  - powershell: dotnet publish -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop $(ProjectPath)/$(SampleAppName).csproj /r /m /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
     displayName: Build Desktop Head - $(SampleAppName)
 
   - task: PublishBuildArtifacts@1
@@ -38,6 +38,8 @@ jobs:
       build/scripts/linux-skia-desktop-runtime-tests.sh
     displayName: 'Run Runtime Tests - $(SampleAppName)'
     env:
+      ProjectPath: '$(ProjectPath)'
+      SampleAppName: '$(SampleAppName)'
       UNO_RUNTIME_TESTS_RUN_TESTS: '{}'
       UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
 
