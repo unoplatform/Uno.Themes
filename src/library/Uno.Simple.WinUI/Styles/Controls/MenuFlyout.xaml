@@ -530,6 +530,15 @@
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="KeyboardAcceleratorTextVisibility">
+								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
+								<VisualState x:Name="KeyboardAcceleratorTextVisible">
+									<VisualState.Setters>
+										<Setter Target="KeyboardAcceleratorTextBlock.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid.ColumnDefinitions>
