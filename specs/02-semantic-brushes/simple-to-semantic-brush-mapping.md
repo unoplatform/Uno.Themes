@@ -4,7 +4,7 @@ This spec proposes refactoring the Simple theme to use **only** the shared seman
 
 ## Status
 
-**Draft** — awaiting review before implementation.
+**Implemented** — migration applied to `ColorPalette.xaml` and verified against both Light and Dark themes.
 
 ## Scope Decisions
 
