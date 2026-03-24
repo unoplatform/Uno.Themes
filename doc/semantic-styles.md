@@ -54,46 +54,46 @@ The following matrix shows which semantic style keys are supported by each theme
 
 | Semantic Style Key          | Material | Simple | Notes |
 |-----------------------------|:--------:|:------:|-------|
-| `FabStyle`                  | ✅ | ❌ | Material-only control |
-| `SmallFabStyle`             | ✅ | ❌ | |
-| `LargeFabStyle`             | ✅ | ❌ | |
-| `SecondaryFabStyle`         | ✅ | ❌ | |
-| `SecondarySmallFabStyle`    | ✅ | ❌ | |
-| `SecondaryLargeFabStyle`    | ✅ | ❌ | |
-| `SurfaceFabStyle`           | ✅ | ❌ | |
-| `SurfaceSmallFabStyle`      | ✅ | ❌ | |
-| `SurfaceLargeFabStyle`      | ✅ | ❌ | |
-| `TertiaryFabStyle`          | ✅ | ❌ | |
-| `TertiarySmallFabStyle`     | ✅ | ❌ | |
-| `TertiaryLargeFabStyle`     | ✅ | ❌ | |
+| `FabStyle`                  | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonPrimaryStyle` |
+| `SmallFabStyle`             | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonPrimaryStyle` |
+| `LargeFabStyle`             | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonPrimaryStyle` |
+| `SecondaryFabStyle`         | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
+| `SecondarySmallFabStyle`    | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonNeutralStyle` |
+| `SecondaryLargeFabStyle`    | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
+| `SurfaceFabStyle`           | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
+| `SurfaceSmallFabStyle`      | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonNeutralStyle` |
+| `SurfaceLargeFabStyle`      | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
+| `TertiaryFabStyle`          | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonSubtleStyle` |
+| `TertiarySmallFabStyle`     | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonSubtleStyle` |
+| `TertiaryLargeFabStyle`     | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonSubtleStyle` |
 
 ### ToggleButton
 
 | Semantic Style Key        | Material | Simple | Notes |
 |---------------------------|:--------:|:------:|-------|
 | `TextToggleButtonStyle`   | ✅ | ⚠️ | Simple: resolves to `SimpleDefaultToggleButtonStyle` |
-| `IconToggleButtonStyle`   | ✅ | ❌ | Simple has no icon-only toggle variant |
+| `IconToggleButtonStyle`   | ✅ | ✅ | Simple: resolves to `SimpleIconToggleButtonStyle` |
 
 ### TextBox
 
 | Semantic Style Key      | Material | Simple | Notes |
 |-------------------------|:--------:|:------:|-------|
 | `FilledTextBoxStyle`    | ✅ | ⚠️ | Simple: resolves to `SimpleTextBoxStyle` (single variant) |
-| `OutlinedTextBoxStyle`  | ✅ | ⚠️ | Simple: resolves to `SimpleTextBoxStyle` (single variant) |
+| `OutlinedTextBoxStyle`  | ✅ | ✅ | Simple: resolves to `SimpleOutlinedTextBoxStyle` (surface background, visible border) |
 
 ### PasswordBox
 
 | Semantic Style Key          | Material | Simple | Notes |
 |-----------------------------|:--------:|:------:|-------|
 | `FilledPasswordBoxStyle`    | ✅ | ⚠️ | Simple: resolves to `SimplePasswordBoxStyle` (single variant) |
-| `OutlinedPasswordBoxStyle`  | ✅ | ❌ | Simple has no outlined password variant |
+| `OutlinedPasswordBoxStyle`  | ✅ | ✅ | Simple: resolves to `SimpleOutlinedPasswordBoxStyle` (surface background, visible border) |
 
 ### HyperlinkButton
 
 | Semantic Style Key              | Material | Simple | Notes |
 |---------------------------------|:--------:|:------:|-------|
-| `HyperlinkButtonStyle`         | ✅ | ❌ | Simple has no HyperlinkButton style |
-| `SecondaryHyperlinkButtonStyle`| ✅ | ❌ | |
+| `HyperlinkButtonStyle`         | ✅ | ✅ | Simple: resolves to `SimpleHyperlinkButtonStyle` |
+| `SecondaryHyperlinkButtonStyle`| ✅ | ✅ | Simple: resolves to `SimpleSecondaryHyperlinkButtonStyle` |
 
 ### ComboBox
 
@@ -171,13 +171,13 @@ The following matrix shows which semantic style keys are supported by each theme
 | `MenuFlyoutSeparatorStyle`    | ✅ | ✅ | |
 | `MenuFlyoutSubItemStyle`      | ✅ | ✅ | |
 | `ToggleMenuFlyoutItemStyle`   | ✅ | ✅ | |
-| `RadioMenuFlyoutItemStyle`    | ✅ | ❌ | Simple has no RadioMenuFlyoutItem style |
+| `RadioMenuFlyoutItemStyle`    | ✅ | ✅ | Simple: resolves to `SimpleRadioMenuFlyoutItemStyle` |
 
 ### FlyoutPresenter
 
 | Semantic Style Key       | Material | Simple | Notes |
 |--------------------------|:--------:|:------:|-------|
-| `FlyoutPresenterStyle`   | ✅ | ❌ | Simple has no FlyoutPresenter style |
+| `FlyoutPresenterStyle`   | ✅ | ✅ | Simple: resolves to `SimpleFlyoutPresenterStyle` |
 
 ### CommandBar
 
@@ -189,32 +189,32 @@ The following matrix shows which semantic style keys are supported by each theme
 
 | Semantic Style Key        | Material | Simple | Notes |
 |---------------------------|:--------:|:------:|-------|
-| `NavigationViewStyle`     | ✅ | ❌ | Simple has no NavigationView style |
-| `NavigationViewItemStyle` | ✅ | ❌ | |
+| `NavigationViewStyle`     | ✅ | ✅ | Simple: resolves to `SimpleNavigationViewStyle` |
+| `NavigationViewItemStyle` | ✅ | ✅ | Simple: resolves to `SimpleNavigationViewItemStyle` |
 
 ### ProgressBar
 
 | Semantic Style Key   | Material | Simple | Notes |
 |----------------------|:--------:|:------:|-------|
-| `ProgressBarStyle`   | ✅ | ❌ | Simple has no ProgressBar style |
+| `ProgressBarStyle`   | ✅ | ✅ | Simple: resolves to `SimpleProgressBarStyle` |
 
 ### ProgressRing
 
 | Semantic Style Key   | Material | Simple | Notes |
 |----------------------|:--------:|:------:|-------|
-| `ProgressRingStyle`  | ✅ | ❌ | Simple has no ProgressRing style |
+| `ProgressRingStyle`  | ✅ | ✅ | Simple: resolves to `SimpleProgressRingStyle` |
 
 ### PipsPager
 
 | Semantic Style Key | Material | Simple | Notes |
 |--------------------|:--------:|:------:|-------|
-| `PipsPagerStyle`   | ✅ | ❌ | Simple has no PipsPager style |
+| `PipsPagerStyle`   | ✅ | ✅ | Simple: resolves to `SimplePipsPagerStyle` |
 
 ### RatingControl
 
 | Semantic Style Key   | Material | Simple | Notes |
 |----------------------|:--------:|:------:|-------|
-| `RatingControlStyle` | ✅ | ❌ | Simple has no RatingControl style |
+| `RatingControlStyle` | ✅ | ✅ | Simple: resolves to `SimpleRatingControlStyle` |
 
 ### MediaTransportControls
 
