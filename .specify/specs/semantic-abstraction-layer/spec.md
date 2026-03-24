@@ -177,7 +177,7 @@ same underlying resource).
 ### User Story 5 — Gap Awareness (Priority: P2)
 
 When a developer uses a semantic key that has no Simple equivalent (e.g.
-`NavigationViewStyle`), the behavior is gracefully handled (control uses WinUI
+`CommandBarStyle`), the behavior is gracefully handled (control uses WinUI
 default style) and the gap is documented.
 
 ---
@@ -272,11 +272,26 @@ Convention: **Semantic Key** = Material v2 key with `Material` prefix removed.
 
 ### Floating Action Button (FAB)
 
-FAB is a **Material-specific concept** and is **excluded from the semantic layer**.
-The 12 FAB styles (`MaterialFabStyle`, `MaterialSmallFabStyle`, `MaterialLargeFabStyle`,
-and their Surface/Secondary/Tertiary variants) remain accessible only via their
-`Material`-prefixed keys and the existing Material-only aliases (`FabStyle`,
-`SmallFabStyle`, etc. in Material's `_Resources.xaml`).
+FAB is a **Material-specific concept** but Simple provides **compatibility aliases**
+that map FAB keys to existing Simple icon button styles. The 12 FAB aliases
+(`FabStyle`, `SmallFabStyle`, `LargeFabStyle`, and their Surface/Secondary/Tertiary
+variants) resolve to Simple icon button styles under Simple theme and Material FAB
+styles under Material theme.
+
+| Semantic Key | Material v2 | Simple | Notes |
+|---|---|---|---|
+| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonPrimaryStyle` | Primary icon button as FAB equivalent |
+| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleSmallIconButtonPrimaryStyle` | Small primary icon button |
+| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonPrimaryStyle` | Same as default (no large variant) |
+| `SecondaryFabStyle` | `MaterialSecondaryFabStyle` | `SimpleIconButtonNeutralStyle` | Neutral icon button |
+| `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
+| `SecondaryLargeFabStyle` | `MaterialSecondaryLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
+| `TertiaryFabStyle` | `MaterialTertiaryFabStyle` | `SimpleIconButtonSubtleStyle` | Subtle icon button |
+| `TertiarySmallFabStyle` | `MaterialTertiarySmallFabStyle` | `SimpleSmallIconButtonSubtleStyle` | |
+| `TertiaryLargeFabStyle` | `MaterialTertiaryLargeFabStyle` | `SimpleIconButtonSubtleStyle` | |
+| `SurfaceFabStyle` | `MaterialSurfaceFabStyle` | `SimpleIconButtonNeutralStyle` | Neutral icon button |
+| `SurfaceSmallFabStyle` | `MaterialSurfaceSmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
+| `SurfaceLargeFabStyle` | `MaterialSurfaceLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
 
 ### ToggleButton
 
@@ -290,14 +305,14 @@ and their Surface/Secondary/Tertiary variants) remain accessible only via their
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
 | `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleTextBoxStyle` | Simple "Input" = single SDS Input design |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Transparent background, visible border |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Surface background, visible border |
 
 ### PasswordBox
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
 | `FilledPasswordBoxStyle` | `MaterialFilledPasswordBoxStyle` | `SimplePasswordBoxStyle` | Simple has one style (filled) |
-| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | Transparent background, visible border |
+| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | Surface background, visible border |
 
 ### HyperlinkButton
 
@@ -640,33 +655,38 @@ contract because they are implementation details or theme-specific controls.
 
 ### Simple Gaps — No Equivalent Style Exists
 
-| Semantic Key | Priority | Recommendation |
+| Semantic Key | Priority | Status |
 |---|---|---|
-| `ElevatedButtonStyle` | 🔴 High | Investigate adding a Simple elevated/shadow button variant |
-| ~~`FilledTonalButtonStyle`~~ | — | **Resolved**: Mapping to NeutralButton is intentional |
-| `IconToggleButtonStyle` | 🟡 Medium | Add icon-only toggle to Simple |
-| `OutlinedPasswordBoxStyle` | 🟡 Medium | Add outlined variant to Simple |
-| `HyperlinkButtonStyle` | 🟡 Medium | Add HyperlinkButton to Simple |
-| `SecondaryHyperlinkButtonStyle` | 🟠 Low | Secondary variant — lower priority |
-| ~~`FabStyle` (all 12 variants)~~ | — | **Resolved**: Excluded from semantic layer |
-| `ProgressBarStyle` | 🔴 High | Common control — should be in Simple |
-| `ProgressRingStyle` | 🔴 High | Common control — should be in Simple |
-| `CommandBarStyle` | 🟡 Medium | Already noted in Simple's `_Resources.xaml` TODO |
-| `NavigationViewStyle` | 🟡 Medium | Already noted in Simple's `_Resources.xaml` TODO |
-| `NavigationViewItemStyle` | 🟡 Medium | Depends on NavigationView |
-| `FlyoutPresenterStyle` | 🟡 Medium | Already noted in Simple's `_Resources.xaml` TODO |
-| `RadioMenuFlyoutItemStyle` | 🟠 Low | Already noted in Simple's `_Resources.xaml` TODO |
-| `MediaTransportControlsStyle` | 🟠 Low | Niche control |
-| `PipsPagerStyle` | 🟠 Low | Already noted in Simple's `_Resources.xaml` TODO |
-| `RatingControlStyle` | 🟠 Low | Already noted in Simple's `_Resources.xaml` TODO |
+| `ElevatedButtonStyle` | 🔴 High | ⚠️ **GAP** — Simple has no elevated/shadow button variant |
+| `CommandBarStyle` | 🟡 Medium | ⚠️ **GAP** — Noted in Simple's `_Resources.xaml` TODO |
+| `MediaTransportControlsStyle` | 🟠 Low | ⚠️ **GAP** — Niche control |
 
-### Ambiguous Mappings — Need Design Decision
+### Resolved Gaps (Issues #1639–#1650)
 
-| Semantic Key | Issue | Recommendation |
+| Semantic Key | Resolution |
+|---|---|
+| `IconToggleButtonStyle` | ✅ `SimpleIconToggleButtonStyle` (#1640) |
+| `OutlinedTextBoxStyle` | ✅ `SimpleOutlinedTextBoxStyle` (#1641) |
+| `OutlinedPasswordBoxStyle` | ✅ `SimpleOutlinedPasswordBoxStyle` (#1642) |
+| `HyperlinkButtonStyle` | ✅ `SimpleHyperlinkButtonStyle` (#1643) |
+| `SecondaryHyperlinkButtonStyle` | ✅ `SimpleSecondaryHyperlinkButtonStyle` (#1643) |
+| `RadioMenuFlyoutItemStyle` | ✅ `SimpleRadioMenuFlyoutItemStyle` (#1644) |
+| `FlyoutPresenterStyle` | ✅ `SimpleFlyoutPresenterStyle` (#1645) |
+| `NavigationViewStyle` | ✅ `SimpleNavigationViewStyle` (#1646) |
+| `NavigationViewItemStyle` | ✅ `SimpleNavigationViewItemStyle` (#1646) |
+| `ProgressBarStyle` | ✅ `SimpleProgressBarStyle` (#1647) |
+| `ProgressRingStyle` | ✅ `SimpleProgressRingStyle` (#1648) |
+| `PipsPagerStyle` | ✅ `SimplePipsPagerStyle` (#1649) |
+| `RatingControlStyle` | ✅ `SimpleRatingControlStyle` (#1650) |
+| FAB aliases (12 variants) | ✅ Mapped to existing Simple icon button styles (#1639) |
+
+### Ambiguous Mappings — Design Decisions
+
+| Semantic Key | Issue | Resolution |
 |---|---|---|
 | `FilledTonalButtonStyle` / `OutlinedButtonStyle` | Both map to `SimpleNeutralButtonStyle` | Intentional — Simple's Neutral covers both; no action needed |
-| `IconButtonStyle` | Material has one icon button; Simple has 5 color variants | Map to `SimpleIconButtonPrimaryStyle` as default; consider if semantic layer needs color sub-variants |
-| ~~FAB styles (all 12)~~ | ~~Material-specific concept~~ | **Resolved**: Excluded from semantic layer — Material-only |
+| `IconButtonStyle` | Material has one icon button; Simple has 5 color variants | Mapped to `SimpleIconButtonPrimaryStyle` as default |
+| FAB styles (all 12) | Material-specific concept | **Resolved**: Simple maps to existing icon button styles (#1639) |
 
 ---
 
