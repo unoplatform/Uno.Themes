@@ -24,7 +24,7 @@ Each theme library registers aliases that map semantic keys to its own native st
 
 When a design system doesn't have a direct equivalent for a semantic key, it either:
 
-- **Aliases** the key to its closest match (e.g., Simple maps both `FilledTextBoxStyle` and `OutlinedTextBoxStyle` to its single `SimpleTextBoxStyle`)
+- **Aliases** the key to its closest match (e.g., Simple maps `FilledTonalButtonStyle` and `OutlinedButtonStyle` to its single `SimpleNeutralButtonStyle`)
 - **Omits** the key entirely if the control isn't supported
 
 ## Style Support Matrix
