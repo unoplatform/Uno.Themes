@@ -43,63 +43,63 @@ The following matrix shows which semantic style keys are supported by each theme
 
 | Semantic Style Key       | Material | Simple | Notes |
 |--------------------------|:--------:|:------:|-------|
-| `FilledButtonStyle`      | ✅ | ✅ | Simple: resolves to `SimplePrimaryButtonStyle` |
-| `FilledTonalButtonStyle` | ✅ | ⚠️ | Simple: resolves to `SimpleNeutralButtonStyle` (shared with Outlined) |
-| `OutlinedButtonStyle`    | ✅ | ⚠️ | Simple: resolves to `SimpleNeutralButtonStyle` (shared with FilledTonal) |
-| `TextButtonStyle`        | ✅ | ✅ | Simple: resolves to `SimpleSubtleButtonStyle` |
+| `FilledButtonStyle`      | ✅ | ✅ | |
+| `FilledTonalButtonStyle` | ✅ | ⚠️ | Simple: aliases to `SimpleNeutralButtonStyle` (shared with Outlined) |
+| `OutlinedButtonStyle`    | ✅ | ⚠️ | Simple: aliases to `SimpleNeutralButtonStyle` (shared with FilledTonal) |
+| `TextButtonStyle`        | ✅ | ✅ | |
 | `ElevatedButtonStyle`    | ✅ | ❌ | Simple has no elevated/shadow variant |
-| `IconButtonStyle`        | ✅ | ✅ | Simple: resolves to `SimpleIconButtonPrimaryStyle` |
+| `IconButtonStyle`        | ✅ | ✅ | |
 
 ### Floating Action Button (FAB)
 
 | Semantic Style Key          | Material | Simple | Notes |
 |-----------------------------|:--------:|:------:|-------|
-| `FabStyle`                  | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonPrimaryStyle` |
-| `SmallFabStyle`             | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonPrimaryStyle` |
-| `LargeFabStyle`             | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonPrimaryStyle` |
-| `SecondaryFabStyle`         | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
-| `SecondarySmallFabStyle`    | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonNeutralStyle` |
-| `SecondaryLargeFabStyle`    | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
-| `SurfaceFabStyle`           | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
-| `SurfaceSmallFabStyle`      | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonNeutralStyle` |
-| `SurfaceLargeFabStyle`      | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonNeutralStyle` |
-| `TertiaryFabStyle`          | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonSubtleStyle` |
-| `TertiarySmallFabStyle`     | ✅ | ⚠️ | Simple: resolves to `SimpleSmallIconButtonSubtleStyle` |
-| `TertiaryLargeFabStyle`     | ✅ | ⚠️ | Simple: resolves to `SimpleIconButtonSubtleStyle` |
+| `FabStyle`                  | ✅ | ⚠️ | Simple: aliases to icon button styles (no dedicated FAB control) |
+| `SmallFabStyle`             | ✅ | ⚠️ | |
+| `LargeFabStyle`             | ✅ | ⚠️ | |
+| `SecondaryFabStyle`         | ✅ | ⚠️ | |
+| `SecondarySmallFabStyle`    | ✅ | ⚠️ | |
+| `SecondaryLargeFabStyle`    | ✅ | ⚠️ | |
+| `SurfaceFabStyle`           | ✅ | ⚠️ | |
+| `SurfaceSmallFabStyle`      | ✅ | ⚠️ | |
+| `SurfaceLargeFabStyle`      | ✅ | ⚠️ | |
+| `TertiaryFabStyle`          | ✅ | ⚠️ | |
+| `TertiarySmallFabStyle`     | ✅ | ⚠️ | |
+| `TertiaryLargeFabStyle`     | ✅ | ⚠️ | |
 
 ### ToggleButton
 
 | Semantic Style Key        | Material | Simple | Notes |
 |---------------------------|:--------:|:------:|-------|
-| `TextToggleButtonStyle`   | ✅ | ⚠️ | Simple: resolves to `SimpleDefaultToggleButtonStyle` |
-| `IconToggleButtonStyle`   | ✅ | ✅ | Simple: resolves to `SimpleIconToggleButtonStyle` |
+| `TextToggleButtonStyle`   | ✅ | ⚠️ | Simple: aliases to `SimpleDefaultToggleButtonStyle` |
+| `IconToggleButtonStyle`   | ✅ | ✅ | |
 
 ### TextBox
 
 | Semantic Style Key      | Material | Simple | Notes |
 |-------------------------|:--------:|:------:|-------|
-| `FilledTextBoxStyle`    | ✅ | ⚠️ | Simple: resolves to `SimpleTextBoxStyle` (single variant) |
-| `OutlinedTextBoxStyle`  | ✅ | ✅ | Simple: resolves to `SimpleOutlinedTextBoxStyle` (surface background, visible border) |
+| `FilledTextBoxStyle`    | ✅ | ⚠️ | Simple: aliases to `SimpleTextBoxStyle` (filled is the default) |
+| `OutlinedTextBoxStyle`  | ✅ | ✅ | |
 
 ### PasswordBox
 
 | Semantic Style Key          | Material | Simple | Notes |
 |-----------------------------|:--------:|:------:|-------|
-| `FilledPasswordBoxStyle`    | ✅ | ⚠️ | Simple: resolves to `SimplePasswordBoxStyle` (single variant) |
-| `OutlinedPasswordBoxStyle`  | ✅ | ✅ | Simple: resolves to `SimpleOutlinedPasswordBoxStyle` (surface background, visible border) |
+| `FilledPasswordBoxStyle`    | ✅ | ⚠️ | Simple: aliases to `SimplePasswordBoxStyle` (filled is the default) |
+| `OutlinedPasswordBoxStyle`  | ✅ | ✅ | |
 
 ### HyperlinkButton
 
 | Semantic Style Key              | Material | Simple | Notes |
 |---------------------------------|:--------:|:------:|-------|
-| `HyperlinkButtonStyle`         | ✅ | ✅ | Simple: resolves to `SimpleHyperlinkButtonStyle` |
-| `SecondaryHyperlinkButtonStyle`| ✅ | ✅ | Simple: resolves to `SimpleSecondaryHyperlinkButtonStyle` |
+| `HyperlinkButtonStyle`         | ✅ | ✅ | |
+| `SecondaryHyperlinkButtonStyle`| ✅ | ✅ | |
 
 ### ComboBox
 
 | Semantic Style Key | Material | Simple | Notes |
 |--------------------|:--------:|:------:|-------|
-| `ComboBoxStyle`    | ✅ | ✅ | Simple: resolves to `SimpleSelectFieldStyle` |
+| `ComboBoxStyle`    | ✅ | ⚠️ | Simple: aliases to `SimpleSelectFieldStyle` |
 
 ### CheckBox
 
@@ -171,13 +171,13 @@ The following matrix shows which semantic style keys are supported by each theme
 | `MenuFlyoutSeparatorStyle`    | ✅ | ✅ | |
 | `MenuFlyoutSubItemStyle`      | ✅ | ✅ | |
 | `ToggleMenuFlyoutItemStyle`   | ✅ | ✅ | |
-| `RadioMenuFlyoutItemStyle`    | ✅ | ✅ | Simple: resolves to `SimpleRadioMenuFlyoutItemStyle` |
+| `RadioMenuFlyoutItemStyle`    | ✅ | ✅ | |
 
 ### FlyoutPresenter
 
 | Semantic Style Key       | Material | Simple | Notes |
 |--------------------------|:--------:|:------:|-------|
-| `FlyoutPresenterStyle`   | ✅ | ✅ | Simple: resolves to `SimpleFlyoutPresenterStyle` |
+| `FlyoutPresenterStyle`   | ✅ | ✅ | |
 
 ### CommandBar
 
@@ -189,32 +189,32 @@ The following matrix shows which semantic style keys are supported by each theme
 
 | Semantic Style Key        | Material | Simple | Notes |
 |---------------------------|:--------:|:------:|-------|
-| `NavigationViewStyle`     | ✅ | ✅ | Simple: resolves to `SimpleNavigationViewStyle` |
-| `NavigationViewItemStyle` | ✅ | ✅ | Simple: resolves to `SimpleNavigationViewItemStyle` |
+| `NavigationViewStyle`     | ✅ | ✅ | |
+| `NavigationViewItemStyle` | ✅ | ✅ | |
 
 ### ProgressBar
 
 | Semantic Style Key   | Material | Simple | Notes |
 |----------------------|:--------:|:------:|-------|
-| `ProgressBarStyle`   | ✅ | ✅ | Simple: resolves to `SimpleProgressBarStyle` |
+| `ProgressBarStyle`   | ✅ | ✅ | |
 
 ### ProgressRing
 
 | Semantic Style Key   | Material | Simple | Notes |
 |----------------------|:--------:|:------:|-------|
-| `ProgressRingStyle`  | ✅ | ✅ | Simple: resolves to `SimpleProgressRingStyle` |
+| `ProgressRingStyle`  | ✅ | ✅ | |
 
 ### PipsPager
 
 | Semantic Style Key | Material | Simple | Notes |
 |--------------------|:--------:|:------:|-------|
-| `PipsPagerStyle`   | ✅ | ✅ | Simple: resolves to `SimplePipsPagerStyle` |
+| `PipsPagerStyle`   | ✅ | ✅ | |
 
 ### RatingControl
 
 | Semantic Style Key   | Material | Simple | Notes |
 |----------------------|:--------:|:------:|-------|
-| `RatingControlStyle` | ✅ | ✅ | Simple: resolves to `SimpleRatingControlStyle` |
+| `RatingControlStyle` | ✅ | ✅ | |
 
 ### MediaTransportControls
 
