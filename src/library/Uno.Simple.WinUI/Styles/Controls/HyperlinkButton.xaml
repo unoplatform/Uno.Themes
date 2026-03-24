@@ -102,34 +102,34 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleHyperlinkButtonForegroundPointerOver}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SimpleHyperlinkButtonForegroundPointerOver}" />
 										<Setter Target="Root.Background" Value="{ThemeResource HyperlinkButtonBackgroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleHyperlinkButtonForegroundPressed}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SimpleHyperlinkButtonForegroundPressed}" />
 										<Setter Target="Root.Background" Value="{ThemeResource HyperlinkButtonBackgroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleHyperlinkButtonForegroundDisabled}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SimpleHyperlinkButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
+						<!-- Default content is underlined text -->
 						<ContentPresenter x:Name="ContentPresenter"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Foreground="{TemplateBinding Foreground}"
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
-							<ContentPresenter.ContentTemplateSelector>
-								<!-- Default content is underlined text -->
-							</ContentPresenter.ContentTemplateSelector>
-						</ContentPresenter>
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
 
 						<!-- Underline -->
 						<Rectangle x:Name="UnderlineRect"
