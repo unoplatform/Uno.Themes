@@ -1,0 +1,162 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Simple Design System — HyperlinkButton Styles
+		Underlined text-only link matching Simple's typography and color tokens.
+
+		Resource layers:
+		  HyperlinkButton*       = semantic keys (source of truth)
+		  SimpleHyperlinkButton* = Simple-prefixed aliases → HyperlinkButton*
+
+		Primary variant: brand color link
+		Secondary variant: muted/secondary color link
+
+		States: Normal, PointerOver, Pressed, Disabled
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light Theme ─── -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- ── HyperlinkButton — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPointerOver" Color="Transparent" />
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPressed" Color="Transparent" />
+
+			<!-- ── SecondaryHyperlinkButton ── -->
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPressed" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleHyperlinkButtonForeground" ResourceKey="HyperlinkButtonForeground" />
+			<StaticResource x:Key="SimpleHyperlinkButtonForegroundPointerOver" ResourceKey="HyperlinkButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleHyperlinkButtonForegroundPressed" ResourceKey="HyperlinkButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleHyperlinkButtonForegroundDisabled" ResourceKey="HyperlinkButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForeground" ResourceKey="SecondaryHyperlinkButtonForeground" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForegroundPointerOver" ResourceKey="SecondaryHyperlinkButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForegroundPressed" ResourceKey="SecondaryHyperlinkButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForegroundDisabled" ResourceKey="SecondaryHyperlinkButtonForegroundDisabled" />
+		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (Default) ─── -->
+		<ResourceDictionary x:Key="Default">
+
+			<StaticResource x:Key="HyperlinkButtonForeground" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
+			<StaticResource x:Key="HyperlinkButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPointerOver" Color="Transparent" />
+			<SolidColorBrush x:Key="HyperlinkButtonBackgroundPressed" Color="Transparent" />
+
+			<StaticResource x:Key="SecondaryHyperlinkButtonForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPointerOver" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundPressed" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="SecondaryHyperlinkButtonForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+
+			<StaticResource x:Key="SimpleHyperlinkButtonForeground" ResourceKey="HyperlinkButtonForeground" />
+			<StaticResource x:Key="SimpleHyperlinkButtonForegroundPointerOver" ResourceKey="HyperlinkButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleHyperlinkButtonForegroundPressed" ResourceKey="HyperlinkButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleHyperlinkButtonForegroundDisabled" ResourceKey="HyperlinkButtonForegroundDisabled" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForeground" ResourceKey="SecondaryHyperlinkButtonForeground" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForegroundPointerOver" ResourceKey="SecondaryHyperlinkButtonForegroundPointerOver" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForegroundPressed" ResourceKey="SecondaryHyperlinkButtonForegroundPressed" />
+			<StaticResource x:Key="SimpleSecondaryHyperlinkButtonForegroundDisabled" ResourceKey="SecondaryHyperlinkButtonForegroundDisabled" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Primary HyperlinkButton Style                                          -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleHyperlinkButtonStyle"
+		   TargetType="HyperlinkButton">
+		<Setter Property="Foreground" Value="{ThemeResource SimpleHyperlinkButtonForeground}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="HyperlinkButton">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  Padding="{TemplateBinding Padding}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleHyperlinkButtonForegroundPointerOver}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SimpleHyperlinkButtonForegroundPointerOver}" />
+										<Setter Target="Root.Background" Value="{ThemeResource HyperlinkButtonBackgroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleHyperlinkButtonForegroundPressed}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SimpleHyperlinkButtonForegroundPressed}" />
+										<Setter Target="Root.Background" Value="{ThemeResource HyperlinkButtonBackgroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleHyperlinkButtonForegroundDisabled}" />
+										<Setter Target="UnderlineRect.Fill" Value="{ThemeResource SimpleHyperlinkButtonForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Default content is underlined text -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+						<!-- Underline -->
+						<Rectangle x:Name="UnderlineRect"
+								   Height="1"
+								   Fill="{TemplateBinding Foreground}"
+								   VerticalAlignment="Bottom"
+								   HorizontalAlignment="Stretch" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Secondary HyperlinkButton Style                                        -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleSecondaryHyperlinkButtonStyle"
+		   TargetType="HyperlinkButton"
+		   BasedOn="{StaticResource SimpleHyperlinkButtonStyle}">
+		<Setter Property="Foreground" Value="{ThemeResource SimpleSecondaryHyperlinkButtonForeground}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Default aliases                                                        -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleDefaultHyperlinkButtonStyle"
+		   TargetType="HyperlinkButton"
+		   BasedOn="{StaticResource SimpleHyperlinkButtonStyle}" />
+
+</ResourceDictionary>

@@ -93,6 +93,38 @@
 					</smtx:XamlDisplay>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Simple_NavigationView_MUX"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<sample:ClippedGrid MinHeight="400">
+							<muxc:NavigationView OpenPaneLength="260"
+												 IsBackButtonVisible="Collapsed"
+												 IsBackEnabled="False">
+								<muxc:NavigationView.MenuItems>
+									<muxc:NavigationViewItemHeader Content="Main Section" />
+									<muxc:NavigationViewItem Icon="Library"
+															 Content="Parent for 1~3"
+															 SelectsOnInvoked="False">
+										<muxc:NavigationViewItem.MenuItems>
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 1" />
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 2" />
+											<muxc:NavigationViewItem Icon="Placeholder" Content="Item 3" />
+										</muxc:NavigationViewItem.MenuItems>
+									</muxc:NavigationViewItem>
+									<muxc:NavigationViewItem Icon="Placeholder" Content="Item 4" />
+									<muxc:NavigationViewItemSeparator />
+									<muxc:NavigationViewItemHeader Content="Secondary Section" />
+									<muxc:NavigationViewItem Icon="Placeholder" Content="Item 5" />
+									<muxc:NavigationViewItem Icon="Placeholder"
+															 Content="Item 6 (disabled)"
+															 IsEnabled="False" />
+								</muxc:NavigationView.MenuItems>
+							</muxc:NavigationView>
+						</sample:ClippedGrid>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

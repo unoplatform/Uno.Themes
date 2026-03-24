@@ -72,6 +72,50 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default PipsPager -->
+						<TextBlock Text="Default PipsPager" />
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPager_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager NumberOfPages="5" />
+						</smtx:XamlDisplay>
+
+						<!-- Horizontal with Navigation Buttons -->
+						<TextBlock Text="Horizontal with Navigation Buttons" />
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPager_Horizontal_NavButtons"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible" />
+						</smtx:XamlDisplay>
+
+						<!-- Vertical with Navigation Buttons -->
+						<TextBlock Text="Vertical with Navigation Buttons" />
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPager_Vertical_NavButtons"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager NumberOfPages="5"
+											SelectedPageIndex="2"
+											Orientation="Vertical"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<TextBlock Text="Disabled PipsPager" />
+						<smtx:XamlDisplay UniqueKey="Simple_PipsPager_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:PipsPager IsEnabled="False"
+											NumberOfPages="5"
+											SelectedPageIndex="2"
+											PreviousButtonVisibility="Visible"
+											NextButtonVisibility="Visible" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

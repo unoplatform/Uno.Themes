@@ -101,8 +101,30 @@ uid: Uno.Themes.Simple.Styles
 | `ToggleButton`              | `SimpleDefaultToggleButtonStyle`          | True             |
 | `ToggleButton`              | `SimpleSmallToggleButtonStyle`            |                  |
 | `ToggleButton`              | `SimpleMediumToggleButtonStyle`           |                  |
+| `ToggleButton`              | `SimpleIconToggleButtonStyle`             |                  |
 | `ToggleSwitch`              | `SimpleToggleSwitchStyle`                 | True             |
 | `ToolTip`                   | `SimpleToolTipStyle`                      | True             |
+| `FlyoutPresenter`           | `SimpleFlyoutPresenterStyle`              |                  |
+| `FlyoutPresenter`           | `SimpleDefaultFlyoutPresenterStyle`       | True             |
+| `HyperlinkButton`           | `SimpleHyperlinkButtonStyle`              |                  |
+| `HyperlinkButton`           | `SimpleSecondaryHyperlinkButtonStyle`     |                  |
+| `HyperlinkButton`           | `SimpleDefaultHyperlinkButtonStyle`       | True             |
+| `muxc:NavigationView`       | `SimpleNavigationViewStyle`               |                  |
+| `muxc:NavigationView`       | `SimpleDefaultNavigationViewStyle`        | True             |
+| `muxc:NavigationViewItem`   | `SimpleNavigationViewItemStyle`           |                  |
+| `muxc:NavigationViewItem`   | `SimpleDefaultNavigationViewItemStyle`    | True             |
+| `muxc:PipsPager`            | `SimplePipsPagerStyle`                    |                  |
+| `muxc:PipsPager`            | `SimpleDefaultPipsPagerStyle`             | True             |
+| `muxc:ProgressBar`          | `SimpleProgressBarStyle`                  |                  |
+| `muxc:ProgressBar`          | `SimpleDefaultProgressBarStyle`           | True             |
+| `muxc:ProgressRing`         | `SimpleProgressRingStyle`                 |                  |
+| `muxc:ProgressRing`         | `SimpleDefaultProgressRingStyle`          | True             |
+| `muxc:RadioMenuFlyoutItem`  | `SimpleRadioMenuFlyoutItemStyle`          |                  |
+| `muxc:RadioMenuFlyoutItem`  | `SimpleDefaultRadioMenuFlyoutItemStyle`   | True             |
+| `RatingControl`             | `SimpleRatingControlStyle`                |                  |
+| `RatingControl`             | `SimpleDefaultRatingControlStyle`         | True             |
+| `TextBox`                   | `SimpleOutlinedTextBoxStyle`              |                  |
+| `PasswordBox`               | `SimpleOutlinedPasswordBoxStyle`          |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
@@ -149,9 +171,10 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `InputTextBoxErrorStyle`               | `SimpleTextBoxErrorStyle`             |
 | `InputTextBoxSmallStyle`               | `SimpleTextBoxSmallStyle`             |
 | `FilledTextBoxStyle`                   | `SimpleTextBoxStyle`                  |
-| `OutlinedTextBoxStyle`                 | `SimpleTextBoxStyle`                  |
+| `OutlinedTextBoxStyle`                 | `SimpleOutlinedTextBoxStyle`          |
 | `PasswordBoxStyle`                     | `SimplePasswordBoxStyle`                   |
 | `FilledPasswordBoxStyle`               | `SimplePasswordBoxStyle`                   |
+| `OutlinedPasswordBoxStyle`             | `SimpleOutlinedPasswordBoxStyle`           |
 | `ComboBoxStyle`                        | `SimpleSelectFieldStyle`                   |
 | `SelectFieldStyle`                     | `SimpleSelectFieldStyle`                   |
 | `SelectFieldItemStyle`                 | `SimpleSelectFieldItemStyle`               |
@@ -170,6 +193,29 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `MenuFlyoutSeparatorStyle`             | `SimpleMenuFlyoutSeparatorStyle`           |
 | `MenuFlyoutSubItemStyle`               | `SimpleMenuFlyoutSubItemStyle`             |
 | `ToggleMenuFlyoutItemStyle`            | `SimpleToggleMenuFlyoutItemStyle`          |
+| `RadioMenuFlyoutItemStyle`             | `SimpleRadioMenuFlyoutItemStyle`           |
+| `FlyoutPresenterStyle`                 | `SimpleFlyoutPresenterStyle`               |
+| `HyperlinkButtonStyle`                 | `SimpleHyperlinkButtonStyle`               |
+| `SecondaryHyperlinkButtonStyle`        | `SimpleSecondaryHyperlinkButtonStyle`      |
+| `NavigationViewStyle`                  | `SimpleNavigationViewStyle`                |
+| `NavigationViewItemStyle`              | `SimpleNavigationViewItemStyle`            |
+| `ProgressBarStyle`                     | `SimpleProgressBarStyle`                   |
+| `ProgressRingStyle`                    | `SimpleProgressRingStyle`                  |
+| `PipsPagerStyle`                       | `SimplePipsPagerStyle`                     |
+| `RatingControlStyle`                   | `SimpleRatingControlStyle`                 |
+| `IconToggleButtonStyle`                | `SimpleIconToggleButtonStyle`              |
+| `FabStyle`                             | `SimpleIconButtonPrimaryStyle`             |
+| `SmallFabStyle`                        | `SimpleSmallIconButtonPrimaryStyle`        |
+| `LargeFabStyle`                        | `SimpleIconButtonPrimaryStyle`             |
+| `SecondaryFabStyle`                    | `SimpleIconButtonNeutralStyle`             |
+| `SecondarySmallFabStyle`               | `SimpleSmallIconButtonNeutralStyle`        |
+| `SecondaryLargeFabStyle`               | `SimpleIconButtonNeutralStyle`             |
+| `TertiaryFabStyle`                     | `SimpleIconButtonSubtleStyle`              |
+| `TertiarySmallFabStyle`               | `SimpleSmallIconButtonSubtleStyle`         |
+| `TertiaryLargeFabStyle`               | `SimpleIconButtonSubtleStyle`              |
+| `SurfaceFabStyle`                      | `SimpleIconButtonNeutralStyle`             |
+| `SurfaceSmallFabStyle`                 | `SimpleSmallIconButtonNeutralStyle`        |
+| `SurfaceLargeFabStyle`                 | `SimpleIconButtonNeutralStyle`             |
 | `CalendarViewStyle`                    | `SimpleCalendarViewStyle`                  |
 | `AppBarButtonStyle`                    | `SimpleAppBarButtonStyle`                  |
 | `CalendarDatePickerStyle`              | `SimpleCalendarDatePickerStyle`            |

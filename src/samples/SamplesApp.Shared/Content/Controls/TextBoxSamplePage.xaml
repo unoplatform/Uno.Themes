@@ -529,6 +529,20 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<TextBox Style="{StaticResource SimpleTextBoxStyle}" Header="Email address" PlaceholderText="Enter your email" Width="300" />
 						</smtx:XamlDisplay>
+
+						<!-- Outlined TextBox -->
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_Outlined"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}" PlaceholderText="Outlined placeholder" Width="300" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedWithText"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}" Text="Outlined with text" Width="300" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}" PlaceholderText="Outlined disabled" IsEnabled="False" Width="300" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>

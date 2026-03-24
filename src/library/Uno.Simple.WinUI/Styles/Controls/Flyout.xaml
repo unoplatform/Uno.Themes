@@ -1,0 +1,68 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Simple Design System — FlyoutPresenter Style
+		Provides Simple's standard surface color, corner radius, and border
+		so that generic flyouts look consistent with the rest of the Simple design language.
+
+		Resource layers:
+		  FlyoutPresenter*       = semantic keys (source of truth)
+		  SimpleFlyoutPresenter* = Simple-prefixed aliases → FlyoutPresenter*
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light Theme ─── -->
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="FlyoutPresenterBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="FlyoutPresenterBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+
+			<!-- Backwards-compat aliases -->
+			<StaticResource x:Key="SimpleFlyoutPresenterBackground" ResourceKey="FlyoutPresenterBackground" />
+			<StaticResource x:Key="SimpleFlyoutPresenterBorderBrush" ResourceKey="FlyoutPresenterBorderBrush" />
+		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (Default) ─── -->
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="FlyoutPresenterBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="FlyoutPresenterBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+
+			<StaticResource x:Key="SimpleFlyoutPresenterBackground" ResourceKey="FlyoutPresenterBackground" />
+			<StaticResource x:Key="SimpleFlyoutPresenterBorderBrush" ResourceKey="FlyoutPresenterBorderBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- FlyoutPresenter Style                                                  -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleFlyoutPresenterStyle"
+		   TargetType="FlyoutPresenter">
+		<Setter Property="Background" Value="{ThemeResource SimpleFlyoutPresenterBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource SimpleFlyoutPresenterBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource SimpleStrokeBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleRadius200CornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSpace300Thickness}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="MaxWidth" Value="PositiveInfinity" />
+		<Setter Property="MaxHeight" Value="PositiveInfinity" />
+		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+		<Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Default alias                                                          -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleDefaultFlyoutPresenterStyle"
+		   TargetType="FlyoutPresenter"
+		   BasedOn="{StaticResource SimpleFlyoutPresenterStyle}" />
+
+</ResourceDictionary>
