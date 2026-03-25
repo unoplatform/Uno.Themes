@@ -21,18 +21,18 @@
 		<ResourceDictionary x:Key="Light">
 
 			<!-- NavigationView pane & content -->
-			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SurfaceBrush" />
 
 			<!-- NavigationView top pane -->
-			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SurfaceBrush" />
 
 			<!-- NavigationView buttons (hamburger, back, etc.) -->
-			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="SimpleIconDisabledDefaultBrush" />
+			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPointerOver"
 							 Color="Transparent" />
 			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPressed"
@@ -41,47 +41,47 @@
 							 Color="Transparent" />
 
 			<!-- Item — Normal -->
-			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
 			<SolidColorBrush x:Key="NavigationViewItemBackground"
 							 Color="Transparent" />
 
 			<!-- Item — PointerOver -->
-			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
 
 			<!-- Item — Pressed -->
-			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
 
 			<!-- Item — Selected -->
-			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimaryContainerBrush" />
 
 			<!-- Item — Selected + PointerOver -->
-			<StaticResource x:Key="NavigationViewItemForegroundSelectedPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="PrimaryContainerBrush" />
 
 			<!-- Item — Selected + Pressed -->
-			<StaticResource x:Key="NavigationViewItemForegroundSelectedPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="PrimaryContainerBrush" />
 
 			<!-- Item — Disabled -->
-			<StaticResource x:Key="NavigationViewItemForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<SolidColorBrush x:Key="NavigationViewItemBackgroundDisabled"
 							 Color="Transparent" />
 
 			<!-- Selection indicator -->
-			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="PrimaryBrush" />
 
 			<!-- Item separator -->
-			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OutlineBrush" />
 
 			<!-- Top navigation item text -->
-			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundSelected" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Backwards-compat aliases -->
 		</ResourceDictionary>
@@ -89,16 +89,16 @@
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
-			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SurfaceBrush" />
 
-			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="SurfaceBrush" />
 
-			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="SimpleIconDisabledDefaultBrush" />
+			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPointerOver"
 							 Color="Transparent" />
 			<SolidColorBrush x:Key="NavigationViewButtonBackgroundPressed"
@@ -106,38 +106,38 @@
 			<SolidColorBrush x:Key="NavigationViewButtonBackgroundDisabled"
 							 Color="Transparent" />
 
-			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
 			<SolidColorBrush x:Key="NavigationViewItemBackground"
 							 Color="Transparent" />
 
-			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryHoverBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
 
-			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundPressed" ResourceKey="PrimaryContainerBrush" />
 
-			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelected" ResourceKey="PrimaryContainerBrush" />
 
-			<StaticResource x:Key="NavigationViewItemForegroundSelectedPointerOver" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPointerOver" ResourceKey="PrimaryContainerBrush" />
 
-			<StaticResource x:Key="NavigationViewItemForegroundSelectedPressed" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelectedPressed" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="NavigationViewItemBackgroundSelectedPressed" ResourceKey="PrimaryContainerBrush" />
 
-			<StaticResource x:Key="NavigationViewItemForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<SolidColorBrush x:Key="NavigationViewItemBackgroundDisabled"
 							 Color="Transparent" />
 
-			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
+			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="PrimaryBrush" />
 
-			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OutlineBrush" />
 
-			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundSelected" ResourceKey="SimpleTextBrandDefaultBrush" />
-			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="TopNavigationViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 		</ResourceDictionary>
 
