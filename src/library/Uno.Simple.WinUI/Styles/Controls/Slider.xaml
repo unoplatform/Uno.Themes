@@ -24,18 +24,18 @@
 		<ResourceDictionary x:Key="Light">
 			<!-- ── Slider — semantic keys (source of truth) ── -->
 			<!-- Normal state -->
-			<StaticResource x:Key="SliderThumbBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SliderTrackFill" ResourceKey="SimpleBackgroundDefaultTertiaryBrush" />
+			<StaticResource x:Key="SliderThumbBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="OutlineBrush" />
 
 			<!-- Pressed state (Simple-only, no Material equivalent) -->
-			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Backwards-compat aliases (SimpleSlider* → Slider*) -->
 			<StaticResource x:Key="SimpleSliderThumbBackground" ResourceKey="SliderThumbBackground" />
@@ -52,18 +52,18 @@
 		<ResourceDictionary x:Key="Default">
 			<!-- ── Slider — semantic keys (source of truth) ── -->
 			<!-- Normal state -->
-			<StaticResource x:Key="SliderThumbBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SliderTrackFill" ResourceKey="SimpleBackgroundBrandSecondaryBrush" />
+			<StaticResource x:Key="SliderThumbBackground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackValueFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="OutlineBrush" />
 
 			<!-- Pressed state (Simple-only, no Material equivalent) -->
-			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="SliderTrackValueFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="SliderTrackFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Backwards-compat aliases (SimpleSlider* → Slider*) -->
 			<StaticResource x:Key="SimpleSliderThumbBackground" ResourceKey="SliderThumbBackground" />
@@ -229,7 +229,7 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  FontFamily="{ThemeResource SimpleFontFamily}"
-										  Foreground="{ThemeResource SimpleTextDefaultDefaultBrush}"
+										  Foreground="{ThemeResource OnSurfaceBrush}"
 										  Margin="{StaticResource SliderHeaderMargin}"
 										  TextWrapping="Wrap"
 										  Visibility="Collapsed"

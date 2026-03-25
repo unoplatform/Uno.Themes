@@ -7,14 +7,11 @@
 		This file provides:
 		  1. SharedColorPalette overrides — Simple's flat grayscale values for all
 		     shared color roles (Primary, Error, Surface, Outline, etc.).
-		  2. SDS alias brushes — backward-compatible Simple*Brush keys that alias
-		     to the shared semantic brushes defined in SharedColors.xaml.
-		  3. Utility-only primitives — Pink scale + hardcoded utility colors that
+		  2. Utility-only primitives — Pink scale + hardcoded utility colors that
 		     have no shared equivalent.
 
-		Primitive color scales (Brand, Gray, Slate, Red, Green, Yellow, Black, White)
-		have been removed. All semantic brushes now derive from SharedColorPalette
-		overrides via SharedColors.xaml.
+		All control styles reference shared semantic brushes directly
+		(from SharedColors.xaml). No SDS alias brushes remain in this file.
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
@@ -84,175 +81,16 @@
 			<Color x:Key="SimplePink800Color">#8A226F</Color>
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Background                                -->
-			<!-- Maps SDS brush keys to shared semantic brushes for backward    -->
-			<!-- compatibility with existing control styles.                    -->
+			<!-- Utility Brushes (Simple-specific, no shared equivalent)        -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandHoverBrush" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandPressedBrush" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandSecondaryBrush" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandSecondaryHoverBrush" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandSecondaryPressedBrush" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandTertiaryBrush" ResourceKey="PrimaryVariantLightBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandTertiaryHoverBrush" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandTertiaryPressedBrush" ResourceKey="TertiaryContainerBrush" />
-
-			<!-- Danger Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerHoverBrush" ResourceKey="ErrorHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerPressedBrush" ResourceKey="ErrorPressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerSecondaryBrush" ResourceKey="ErrorContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerSecondaryHoverBrush" ResourceKey="ErrorContainerHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerSecondaryPressedBrush" ResourceKey="ErrorContainerPressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerTertiaryBrush" ResourceKey="OnErrorBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerTertiaryHoverBrush" ResourceKey="OnErrorHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerTertiaryPressedBrush" ResourceKey="OnErrorPressedBrush" />
-
-			<!-- Default Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundDefaultDefaultBrush" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultDefaultHoverBrush" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultDefaultPressedBrush" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultSecondaryBrush" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultSecondaryHoverBrush" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultSecondaryPressedBrush" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultTertiaryBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultTertiaryHoverBrush" ResourceKey="SecondaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultTertiaryPressedBrush" ResourceKey="OutlineVariantBrush" />
-
-			<!-- Disabled Background -->
-			<StaticResource x:Key="SimpleBackgroundDisabledDefaultBrush" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Neutral Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundNeutralDefaultBrush" ResourceKey="SurfaceInverseBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralHoverBrush" ResourceKey="SurfaceInverseHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralPressedBrush" ResourceKey="SurfaceInversePressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralSecondaryBrush" ResourceKey="OutlineVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralSecondaryHoverBrush" ResourceKey="OutlineVariantHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralSecondaryPressedBrush" ResourceKey="OutlineVariantPressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralTertiaryBrush" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralTertiaryHoverBrush" ResourceKey="SurfaceVariantHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralTertiaryPressedBrush" ResourceKey="SurfaceVariantPressedBrush" />
-
-			<!-- Utility Backgrounds (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush" Color="#B2000000" />
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush" Color="#80000000" />
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush" Color="#CCFFFFFF" />
-
-			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Text                                      -->
-			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Text -->
-			<StaticResource x:Key="SimpleTextBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleTextBrandOnBrandBrush" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="SimpleTextBrandOnBrandSecondaryBrush" ResourceKey="OnPrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleTextBrandOnBrandTertiaryBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleTextBrandSecondaryBrush" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="SimpleTextBrandTertiaryBrush" ResourceKey="PrimaryLowBrush" />
-
-			<!-- Danger Text -->
-			<StaticResource x:Key="SimpleTextDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleTextDangerOnDangerBrush" ResourceKey="OnErrorBrush" />
-			<StaticResource x:Key="SimpleTextDangerOnDangerSecondaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleTextDangerOnDangerTertiaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleTextDangerSecondaryBrush" ResourceKey="ErrorMediumBrush" />
-			<StaticResource x:Key="SimpleTextDangerTertiaryBrush" ResourceKey="ErrorLowBrush" />
-
-			<!-- Default Text -->
-			<StaticResource x:Key="SimpleTextDefaultDefaultBrush" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleTextDefaultSecondaryBrush" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="SimpleTextDefaultTertiaryBrush" ResourceKey="OnSurfaceLowBrush" />
-
-			<!-- Disabled Text -->
-			<StaticResource x:Key="SimpleTextDisabledDefaultBrush" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleTextDisabledOnDisabledBrush" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Neutral Text -->
-			<StaticResource x:Key="SimpleTextNeutralDefaultBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleTextNeutralOnNeutralBrush" ResourceKey="OnSurfaceInverseBrush" />
-			<StaticResource x:Key="SimpleTextNeutralOnNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleTextNeutralOnNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleTextNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantMediumBrush" />
-			<StaticResource x:Key="SimpleTextNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantLowBrush" />
-
-			<!-- Utility Text (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
 			<StaticResource x:Key="SimpleTextUtilitiesOnOverlayBrush" ResourceKey="OnSurfaceInverseBrush" />
-
-			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Icon                                      -->
-			<!-- (Same mapping pattern as Text — SDS keeps Text/Icon identical) -->
-			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Icons -->
-			<StaticResource x:Key="SimpleIconBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleIconBrandOnBrandBrush" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="SimpleIconBrandOnBrandSecondaryBrush" ResourceKey="OnPrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleIconBrandOnBrandTertiaryBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleIconBrandSecondaryBrush" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="SimpleIconBrandTertiaryBrush" ResourceKey="PrimaryLowBrush" />
-
-			<!-- Danger Icons -->
-			<StaticResource x:Key="SimpleIconDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleIconDangerOnDangerBrush" ResourceKey="OnErrorBrush" />
-			<StaticResource x:Key="SimpleIconDangerOnDangerSecondaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleIconDangerOnDangerTertiaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleIconDangerSecondaryBrush" ResourceKey="ErrorMediumBrush" />
-			<StaticResource x:Key="SimpleIconDangerTertiaryBrush" ResourceKey="ErrorLowBrush" />
-
-			<!-- Default Icons -->
-			<StaticResource x:Key="SimpleIconDefaultDefaultBrush" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleIconDefaultSecondaryBrush" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="SimpleIconDefaultTertiaryBrush" ResourceKey="OnSurfaceLowBrush" />
-
-			<!-- Disabled Icons -->
-			<StaticResource x:Key="SimpleIconDisabledDefaultBrush" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleIconDisabledOnDisabledBrush" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Neutral Icons -->
-			<StaticResource x:Key="SimpleIconNeutralDefaultBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleIconNeutralOnNeutralBrush" ResourceKey="OnSurfaceInverseBrush" />
-			<StaticResource x:Key="SimpleIconNeutralOnNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleIconNeutralOnNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleIconNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantMediumBrush" />
-			<StaticResource x:Key="SimpleIconNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantLowBrush" />
-
-			<!-- Utility Icons (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush" Color="{StaticResource SimplePink600Color}" />
 			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
-
-			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Border                                    -->
-			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Borders -->
-			<StaticResource x:Key="SimpleBorderBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleBorderBrandSecondaryBrush" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="SimpleBorderBrandTertiaryBrush" ResourceKey="PrimaryLowBrush" />
-
-			<!-- Danger Borders -->
-			<StaticResource x:Key="SimpleBorderDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleBorderDangerSecondaryBrush" ResourceKey="ErrorMediumBrush" />
-			<StaticResource x:Key="SimpleBorderDangerTertiaryBrush" ResourceKey="ErrorLowBrush" />
-
-			<!-- Default Borders -->
-			<StaticResource x:Key="SimpleBorderDefaultDefaultBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="SimpleBorderDefaultSecondaryBrush" ResourceKey="OutlineVariantBrush" />
-			<StaticResource x:Key="SimpleBorderDefaultTertiaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-
-			<!-- Disabled Border -->
-			<StaticResource x:Key="SimpleBorderDisabledDefaultBrush" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Neutral Borders -->
-			<StaticResource x:Key="SimpleBorderNeutralDefaultBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBorderNeutralSecondaryBrush" ResourceKey="OutlineVariantBrush" />
-			<StaticResource x:Key="SimpleBorderNeutralTertiaryBrush" ResourceKey="OutlineLowBrush" />
-
-			<!-- Utility Borders (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush" Color="{StaticResource SimplePink400Color}" />
 			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush" Color="#3D000000" />
 		</ResourceDictionary>
@@ -322,172 +160,16 @@
 			<Color x:Key="SimplePink800Color">#8A226F</Color>
 
 			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Background (Dark)                         -->
+			<!-- Utility Brushes (Simple-specific, no shared equivalent)        -->
 			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandHoverBrush" ResourceKey="PrimaryVariantDarkBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandPressedBrush" ResourceKey="SurfaceInverseBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandSecondaryBrush" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandSecondaryHoverBrush" ResourceKey="OutlineVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandSecondaryPressedBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandTertiaryBrush" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandTertiaryHoverBrush" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundBrandTertiaryPressedBrush" ResourceKey="SurfaceBrush" />
-
-			<!-- Danger Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerHoverBrush" ResourceKey="ErrorHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerPressedBrush" ResourceKey="ErrorPressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerSecondaryBrush" ResourceKey="ErrorContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerSecondaryHoverBrush" ResourceKey="ErrorContainerHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerSecondaryPressedBrush" ResourceKey="ErrorContainerPressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerTertiaryBrush" ResourceKey="ErrorContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerTertiaryHoverBrush" ResourceKey="ErrorContainerHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundDangerTertiaryPressedBrush" ResourceKey="ErrorContainerPressedBrush" />
-
-			<!-- Default Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundDefaultDefaultBrush" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultDefaultHoverBrush" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultDefaultPressedBrush" ResourceKey="PrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultSecondaryBrush" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultSecondaryHoverBrush" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultSecondaryPressedBrush" ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultTertiaryBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultTertiaryHoverBrush" ResourceKey="TertiaryContainerBrush" />
-			<StaticResource x:Key="SimpleBackgroundDefaultTertiaryPressedBrush" ResourceKey="SurfaceVariantBrush" />
-
-			<!-- Disabled Background -->
-			<StaticResource x:Key="SimpleBackgroundDisabledDefaultBrush" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Neutral Backgrounds -->
-			<StaticResource x:Key="SimpleBackgroundNeutralDefaultBrush" ResourceKey="SurfaceInverseBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralHoverBrush" ResourceKey="SurfaceInverseHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralPressedBrush" ResourceKey="SurfaceInversePressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralSecondaryBrush" ResourceKey="OutlineVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralSecondaryHoverBrush" ResourceKey="OutlineVariantHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralSecondaryPressedBrush" ResourceKey="OutlineVariantPressedBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralTertiaryBrush" ResourceKey="SurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralTertiaryHoverBrush" ResourceKey="SurfaceVariantHoverBrush" />
-			<StaticResource x:Key="SimpleBackgroundNeutralTertiaryPressedBrush" ResourceKey="SurfaceVariantPressedBrush" />
-
-			<!-- Utility Backgrounds (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesBlanketBrush" Color="#B2000000" />
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesMeasurementBrush" Color="{StaticResource SimplePink800Color}" />
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesOverlayBrush" Color="#80000000" />
 			<SolidColorBrush x:Key="SimpleBackgroundUtilitiesScrimBrush" Color="#CC000000" />
-
-			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Text (Dark)                               -->
-			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Text -->
-			<StaticResource x:Key="SimpleTextBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleTextBrandOnBrandBrush" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="SimpleTextBrandOnBrandSecondaryBrush" ResourceKey="OnPrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleTextBrandOnBrandTertiaryBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleTextBrandSecondaryBrush" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="SimpleTextBrandTertiaryBrush" ResourceKey="PrimaryLowBrush" />
-
-			<!-- Danger Text -->
-			<StaticResource x:Key="SimpleTextDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleTextDangerOnDangerBrush" ResourceKey="OnErrorBrush" />
-			<StaticResource x:Key="SimpleTextDangerOnDangerSecondaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleTextDangerOnDangerTertiaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleTextDangerSecondaryBrush" ResourceKey="ErrorMediumBrush" />
-			<StaticResource x:Key="SimpleTextDangerTertiaryBrush" ResourceKey="ErrorLowBrush" />
-
-			<!-- Default Text -->
-			<StaticResource x:Key="SimpleTextDefaultDefaultBrush" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleTextDefaultSecondaryBrush" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="SimpleTextDefaultTertiaryBrush" ResourceKey="OnSurfaceLowBrush" />
-
-			<!-- Disabled Text -->
-			<StaticResource x:Key="SimpleTextDisabledDefaultBrush" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleTextDisabledOnDisabledBrush" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Neutral Text -->
-			<StaticResource x:Key="SimpleTextNeutralDefaultBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleTextNeutralOnNeutralBrush" ResourceKey="OnSurfaceInverseBrush" />
-			<StaticResource x:Key="SimpleTextNeutralOnNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleTextNeutralOnNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleTextNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantMediumBrush" />
-			<StaticResource x:Key="SimpleTextNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantLowBrush" />
-
-			<!-- Utility Text (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleTextUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
 			<StaticResource x:Key="SimpleTextUtilitiesOnOverlayBrush" ResourceKey="OnSurfaceBrush" />
-
-			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Icon (Dark)                               -->
-			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Icons -->
-			<StaticResource x:Key="SimpleIconBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleIconBrandOnBrandBrush" ResourceKey="OnPrimaryBrush" />
-			<StaticResource x:Key="SimpleIconBrandOnBrandSecondaryBrush" ResourceKey="OnPrimaryContainerBrush" />
-			<StaticResource x:Key="SimpleIconBrandOnBrandTertiaryBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleIconBrandSecondaryBrush" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="SimpleIconBrandTertiaryBrush" ResourceKey="PrimaryLowBrush" />
-
-			<!-- Danger Icons -->
-			<StaticResource x:Key="SimpleIconDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleIconDangerOnDangerBrush" ResourceKey="OnErrorBrush" />
-			<StaticResource x:Key="SimpleIconDangerOnDangerSecondaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleIconDangerOnDangerTertiaryBrush" ResourceKey="OnErrorContainerBrush" />
-			<StaticResource x:Key="SimpleIconDangerSecondaryBrush" ResourceKey="ErrorMediumBrush" />
-			<StaticResource x:Key="SimpleIconDangerTertiaryBrush" ResourceKey="ErrorLowBrush" />
-
-			<!-- Default Icons -->
-			<StaticResource x:Key="SimpleIconDefaultDefaultBrush" ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleIconDefaultSecondaryBrush" ResourceKey="OnSurfaceMediumBrush" />
-			<StaticResource x:Key="SimpleIconDefaultTertiaryBrush" ResourceKey="OnSurfaceLowBrush" />
-
-			<!-- Disabled Icons -->
-			<StaticResource x:Key="SimpleIconDisabledDefaultBrush" ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleIconDisabledOnDisabledBrush" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Neutral Icons -->
-			<StaticResource x:Key="SimpleIconNeutralDefaultBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleIconNeutralOnNeutralBrush" ResourceKey="OnSurfaceInverseBrush" />
-			<StaticResource x:Key="SimpleIconNeutralOnNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleIconNeutralOnNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleIconNeutralSecondaryBrush" ResourceKey="OnSurfaceVariantMediumBrush" />
-			<StaticResource x:Key="SimpleIconNeutralTertiaryBrush" ResourceKey="OnSurfaceVariantLowBrush" />
-
-			<!-- Utility Icons (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleIconUtilitiesBrush" Color="{StaticResource SimplePink400Color}" />
 			<SolidColorBrush x:Key="SimpleIconUtilitiesOnMeasurementBrush" Color="{StaticResource SimplePink200Color}" />
-
-			<!-- ─────────────────────────────────────────────────────────────── -->
-			<!-- SDS Alias Brushes — Border (Dark)                             -->
-			<!-- ─────────────────────────────────────────────────────────────── -->
-
-			<!-- Brand Borders -->
-			<StaticResource x:Key="SimpleBorderBrandDefaultBrush" ResourceKey="PrimaryBrush" />
-			<StaticResource x:Key="SimpleBorderBrandSecondaryBrush" ResourceKey="PrimaryMediumBrush" />
-			<StaticResource x:Key="SimpleBorderBrandTertiaryBrush" ResourceKey="PrimaryLowBrush" />
-
-			<!-- Danger Borders -->
-			<StaticResource x:Key="SimpleBorderDangerDefaultBrush" ResourceKey="ErrorBrush" />
-			<StaticResource x:Key="SimpleBorderDangerSecondaryBrush" ResourceKey="ErrorMediumBrush" />
-			<StaticResource x:Key="SimpleBorderDangerTertiaryBrush" ResourceKey="ErrorLowBrush" />
-
-			<!-- Default Borders -->
-			<StaticResource x:Key="SimpleBorderDefaultDefaultBrush" ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="SimpleBorderDefaultSecondaryBrush" ResourceKey="OutlineVariantBrush" />
-			<StaticResource x:Key="SimpleBorderDefaultTertiaryBrush" ResourceKey="OnSurfaceVariantBrush" />
-
-			<!-- Disabled Border -->
-			<StaticResource x:Key="SimpleBorderDisabledDefaultBrush" ResourceKey="OutlineDisabledBrush" />
-
-			<!-- Neutral Borders -->
-			<StaticResource x:Key="SimpleBorderNeutralDefaultBrush" ResourceKey="OnSurfaceVariantBrush" />
-			<StaticResource x:Key="SimpleBorderNeutralSecondaryBrush" ResourceKey="OutlineVariantBrush" />
-			<StaticResource x:Key="SimpleBorderNeutralTertiaryBrush" ResourceKey="OutlineLowBrush" />
-
-			<!-- Utility Borders (Simple-specific) -->
 			<SolidColorBrush x:Key="SimpleBorderUtilitiesMeasurementBrush" Color="{StaticResource SimplePink600Color}" />
 			<SolidColorBrush x:Key="SimpleBorderUtilitiesSwatchBrush" Color="#3DFFFFFF" />
 		</ResourceDictionary>

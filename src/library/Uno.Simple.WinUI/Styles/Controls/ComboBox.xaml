@@ -28,23 +28,23 @@
 		<ResourceDictionary x:Key="Light">
 
 			<!-- ── ComboBox — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ComboBoxBackground"                   ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBackgroundPointerOver"        ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBackgroundPressed"            ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBackgroundDisabled"           ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrush"                  ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrushPointerOver"       ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrushPressed"           ResourceKey="SimpleBorderBrandSecondaryBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrushDisabled"          ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForeground"                   ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForegroundPointerOver"        ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForegroundPressed"            ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForegroundDisabled"           ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="ComboBoxPlaceHolderForeground"        ResourceKey="SimpleTextDefaultTertiaryBrush" />
-			<StaticResource x:Key="ComboBoxDropDownGlyphForeground"      ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="SimpleIconDisabledOnDisabledBrush" />
-			<StaticResource x:Key="ComboBoxDropDownBackground"           ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxDropDownBorderBrush"          ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="ComboBoxBackground"                   ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPointerOver"        ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPressed"            ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundDisabled"           ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrush"                  ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPointerOver"       ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPressed"           ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushDisabled"          ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="ComboBoxForeground"                   ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPointerOver"        ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPressed"            ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundDisabled"           ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForeground"        ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForeground"      ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackground"           ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBorderBrush"          ResourceKey="OutlineBrush" />
 			<!-- Backwards-compat aliases (SimpleComboBox* → ComboBox*) -->
 			<StaticResource x:Key="SimpleComboBoxBackground"             ResourceKey="ComboBoxBackground" />
 			<StaticResource x:Key="SimpleComboBoxBackgroundPointerOver"  ResourceKey="ComboBoxBackgroundPointerOver" />
@@ -65,24 +65,24 @@
 			<StaticResource x:Key="SimpleComboBoxPopupBorderBrush"       ResourceKey="ComboBoxDropDownBorderBrush" />
 
 			<!-- Simple-only (no Material equivalent) -->
-			<StaticResource x:Key="SimpleComboBoxBorderBrushFocused"     ResourceKey="SimpleBorderBrandSecondaryBrush" />
-			<StaticResource x:Key="SimpleComboBoxBorderBrushError"       ResourceKey="SimpleBorderDangerDefaultBrush" />
+			<StaticResource x:Key="SimpleComboBoxBorderBrushFocused"     ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="SimpleComboBoxBorderBrushError"       ResourceKey="ErrorBrush" />
 
 			<!-- ── ComboBoxItem — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="ComboBoxItemBackground"               ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver"    ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundPressed"        ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundSelected"       ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver"    ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPressed"        ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelected"       ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="PrimaryVariantDarkBrush" />
 			<StaticResource x:Key="ComboBoxItemBackgroundDisabled"       ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ComboBoxItemForeground"               ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundPointerOver"    ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundPressed"        ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelected"       ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundDisabled"       ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="ComboBoxItemForeground"               ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPointerOver"    ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPressed"        ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelected"       ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundDisabled"       ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- Backwards-compat aliases (SimpleComboBoxItem* → ComboBoxItem*) -->
 			<StaticResource x:Key="SimpleComboBoxItemBackground"         ResourceKey="ComboBoxItemBackground" />
 			<StaticResource x:Key="SimpleComboBoxItemBackgroundPointerOver" ResourceKey="ComboBoxItemBackgroundPointerOver" />
@@ -104,23 +104,23 @@
 		<ResourceDictionary x:Key="Default">
 
 			<!-- ── ComboBox — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ComboBoxBackground"                   ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBackgroundPointerOver"        ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBackgroundPressed"            ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBackgroundDisabled"           ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrush"                  ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrushPointerOver"       ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrushPressed"           ResourceKey="SimpleBorderBrandSecondaryBrush" />
-			<StaticResource x:Key="ComboBoxBorderBrushDisabled"          ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForeground"                   ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForegroundPointerOver"        ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForegroundPressed"            ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxForegroundDisabled"           ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="ComboBoxPlaceHolderForeground"        ResourceKey="SimpleTextDefaultTertiaryBrush" />
-			<StaticResource x:Key="ComboBoxDropDownGlyphForeground"      ResourceKey="SimpleIconDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="SimpleIconDisabledOnDisabledBrush" />
-			<StaticResource x:Key="ComboBoxDropDownBackground"           ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxDropDownBorderBrush"          ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="ComboBoxBackground"                   ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPointerOver"        ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundPressed"            ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxBackgroundDisabled"           ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrush"                  ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPointerOver"       ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushPressed"           ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="ComboBoxBorderBrushDisabled"          ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="ComboBoxForeground"                   ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPointerOver"        ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundPressed"            ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxForegroundDisabled"           ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxPlaceHolderForeground"        ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForeground"      ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownGlyphForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBackground"           ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ComboBoxDropDownBorderBrush"          ResourceKey="OutlineBrush" />
 			<!-- Backwards-compat aliases (SimpleComboBox* → ComboBox*) -->
 			<StaticResource x:Key="SimpleComboBoxBackground"             ResourceKey="ComboBoxBackground" />
 			<StaticResource x:Key="SimpleComboBoxBackgroundPointerOver"  ResourceKey="ComboBoxBackgroundPointerOver" />
@@ -141,24 +141,24 @@
 			<StaticResource x:Key="SimpleComboBoxPopupBorderBrush"       ResourceKey="ComboBoxDropDownBorderBrush" />
 
 			<!-- Simple-only (no Material equivalent) -->
-			<StaticResource x:Key="SimpleComboBoxBorderBrushFocused"     ResourceKey="SimpleBorderBrandSecondaryBrush" />
-			<StaticResource x:Key="SimpleComboBoxBorderBrushError"       ResourceKey="SimpleBorderDangerDefaultBrush" />
+			<StaticResource x:Key="SimpleComboBoxBorderBrushFocused"     ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="SimpleComboBoxBorderBrushError"       ResourceKey="ErrorBrush" />
 
 			<!-- ── ComboBoxItem — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="ComboBoxItemBackground"               ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver"    ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundPressed"        ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundSelected"       ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPointerOver"    ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundPressed"        ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelected"       ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ComboBoxItemBackgroundSelectedPressed" ResourceKey="PrimaryVariantDarkBrush" />
 			<StaticResource x:Key="ComboBoxItemBackgroundDisabled"       ResourceKey="SystemControlTransparentBrush" />
-			<StaticResource x:Key="ComboBoxItemForeground"               ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundPointerOver"    ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundPressed"        ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelected"       ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="ComboBoxItemForegroundDisabled"       ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="ComboBoxItemForeground"               ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPointerOver"    ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundPressed"        ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelected"       ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPointerOver" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundSelectedPressed" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ComboBoxItemForegroundDisabled"       ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- Backwards-compat aliases (SimpleComboBoxItem* → ComboBoxItem*) -->
 			<StaticResource x:Key="SimpleComboBoxItemBackground"         ResourceKey="ComboBoxItemBackground" />
 			<StaticResource x:Key="SimpleComboBoxItemBackgroundPointerOver" ResourceKey="ComboBoxItemBackgroundPointerOver" />
