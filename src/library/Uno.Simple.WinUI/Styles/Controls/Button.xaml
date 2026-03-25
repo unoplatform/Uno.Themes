@@ -5,15 +5,7 @@
 	<!--
 		Simple Design System — Button Styles
 		Lightweight styling pattern: every visual-state brush is exposed via ThemeResource
-		so consumers can override any individual key.
-		
-		Resource layer:
-		Templates reference Simple-prefixed keys (e.g. SimplePrimaryButtonForeground,
-		SimpleIconButtonNeutralBackground, etc.) which alias to the semantic keys
-		in the ThemeDictionary.  This allows consumers to override at either level:
-		- Override the Simple-prefixed key for a targeted control-level change.
-		- Override the semantic key (FilledButton*, FilledTonalButton*, TextButton*,
-		IconButton*) for a cross-cutting theme-wide change.
+		so consumers can override any individual semantic key.
 		
 		Semantic keys (source of truth in ThemeDictionary):
 		FilledButton*       = Primary variant
@@ -21,14 +13,6 @@
 		OutlinedButton*     = alias for FilledTonalButton*
 		TextButton*         = Subtle variant
 		IconButton*         = Primary icon variant (aliases FilledButton*)
-		
-		Simple-prefixed template keys (used by styles/templates):
-		SimplePrimaryButton*           → aliases FilledButton*
-		SimpleNeutralButton*           → aliases FilledTonalButton*
-		SimpleSubtleButton*            → aliases TextButton*
-		SimpleIconButtonPrimary*       → aliases IconButton*
-		SimpleIconButtonNeutral*       → aliases FilledTonalButton*
-		SimpleIconButtonSubtle*        → aliases TextButton*
 		
 		Simple-only variants (no semantic rename):
 		SimpleDangerPrimaryButton* — no Material equivalent
@@ -40,8 +24,7 @@
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Lightweight styling ThemeResource aliases -->
-	<!-- Semantic keys are the source of truth; Simple-prefixed keys alias -->
-	<!-- them and are what templates/styles actually reference. -->
+	<!-- Semantic keys are the source of truth for all brush overrides. -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
@@ -61,7 +44,6 @@
 			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- Template-level aliases (SimplePrimaryButton* → FilledButton*) -->
 			<!-- ── FilledTonalButton (Neutral) — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
@@ -88,7 +70,6 @@
 			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
 			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
 			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
-			<!-- Template-level aliases (SimpleNeutralButton* → FilledTonalButton*) -->
 			<!-- ── TextButton (Subtle) — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
@@ -102,7 +83,6 @@
 			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- Template-level aliases (SimpleSubtleButton* → TextButton*) -->
 			<!-- ── IconButton — semantic keys ── -->
 			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
 			<StaticResource x:Key="IconButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
@@ -116,9 +96,6 @@
 			<StaticResource x:Key="IconButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
 			<StaticResource x:Key="IconButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
 			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
-			<!-- Template-level aliases (SimpleIconButtonPrimary* → IconButton*) -->
-			<!-- Template-level aliases (SimpleIconButtonNeutral* → FilledTonalButton*) -->
-			<!-- Template-level aliases (SimpleIconButtonSubtle* → TextButton*) -->
 			<!-- ── DangerPrimary (Simple-only — no semantic rename) ── -->
 			<!-- ── DangerSubtle (Simple-only — no semantic rename) ── -->
 		</ResourceDictionary>
@@ -139,7 +116,6 @@
 			<StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledButtonBorderBrushPressed" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="FilledButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- Template-level aliases (SimplePrimaryButton* → FilledButton*) -->
 			<!-- ── FilledTonalButton (Neutral) — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OnSurfaceBrush" />
 			<StaticResource x:Key="FilledTonalButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
@@ -166,7 +142,6 @@
 			<StaticResource x:Key="OutlinedButtonBorderBrushPointerOver" ResourceKey="FilledTonalButtonBorderBrushPointerOver" />
 			<StaticResource x:Key="OutlinedButtonBorderBrushPressed" ResourceKey="FilledTonalButtonBorderBrushPressed" />
 			<StaticResource x:Key="OutlinedButtonBorderBrushDisabled" ResourceKey="FilledTonalButtonBorderBrushDisabled" />
-			<!-- Template-level aliases (SimpleNeutralButton* → FilledTonalButton*) -->
 			<!-- ── TextButton (Subtle) — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="TextButtonForeground" ResourceKey="PrimaryBrush" />
 			<StaticResource x:Key="TextButtonForegroundPointerOver" ResourceKey="PrimaryBrush" />
@@ -180,7 +155,6 @@
 			<StaticResource x:Key="TextButtonBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TextButtonBorderBrushPressed" ResourceKey="SystemControlTransparentBrush" />
 			<StaticResource x:Key="TextButtonBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
-			<!-- Template-level aliases (SimpleSubtleButton* → TextButton*) -->
 			<!-- ── IconButton — semantic keys ── -->
 			<StaticResource x:Key="IconButtonForeground" ResourceKey="FilledButtonForeground" />
 			<StaticResource x:Key="IconButtonForegroundPointerOver" ResourceKey="FilledButtonForegroundPointerOver" />
@@ -194,9 +168,6 @@
 			<StaticResource x:Key="IconButtonBorderBrushPointerOver" ResourceKey="FilledButtonBorderBrushPointerOver" />
 			<StaticResource x:Key="IconButtonBorderBrushPressed" ResourceKey="FilledButtonBorderBrushPressed" />
 			<StaticResource x:Key="IconButtonBorderBrushDisabled" ResourceKey="FilledButtonBorderBrushDisabled" />
-			<!-- Template-level aliases (SimpleIconButtonPrimary* → IconButton*) -->
-			<!-- Template-level aliases (SimpleIconButtonNeutral* → FilledTonalButton*) -->
-			<!-- Template-level aliases (SimpleIconButtonSubtle* → TextButton*) -->
 			<!-- ── DangerPrimary (Simple-only — no semantic rename) ── -->
 			<!-- ── DangerSubtle (Simple-only — no semantic rename) ── -->
 		</ResourceDictionary>

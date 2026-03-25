@@ -7,8 +7,8 @@ namespace Uno.Themes.Samples.RuntimeTests;
 /// <summary>
 /// Verifies the semantic abstraction layer: semantic style/resource keys
 /// (e.g. FilledButtonStyle, FilledButtonBackground) properly map to their
-/// Simple-specific counterparts (e.g. SimplePrimaryButtonStyle, SimplePrimaryButtonBackground)
-/// and that overrides at either level flow through to styled controls.
+/// Simple-specific counterparts (e.g. SimplePrimaryButtonStyle) and that
+/// overrides at the semantic level flow through to styled controls.
 ///
 /// Each test creates a local SimpleTheme scoped to the test container,
 /// so colors are fully controlled and independent of app-level resources.
@@ -133,65 +133,6 @@ public class Given_SemanticStyles
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Overriding Simple-specific resource keys (SimplePrimaryButton*,
-	// SimpleNeutralButton*, SimpleSubtleButton*) flows to buttons using
-	// EITHER style key.
-	// ─────────────────────────────────────────────────────────────────────
-
-	[TestMethod]
-	[RunsOnUIThread]
-	[DataRow("FilledButtonStyle", "SimplePrimaryButtonStyle", "SimplePrimaryButtonBackground", "SimplePrimaryButtonForeground")]
-	[DataRow("FilledTonalButtonStyle", "SimpleNeutralButtonStyle", "SimpleNeutralButtonBackground", "SimpleNeutralButtonForeground")]
-	[DataRow("TextButtonStyle", "SimpleSubtleButtonStyle", "SimpleSubtleButtonBackground", "SimpleSubtleButtonForeground")]
-	public async Task When_SimpleResourceOverridden_BothStylesReflectChange(
-		string semanticStyleKey, string simpleStyleKey,
-		string bgResourceKey, string fgResourceKey)
-	{
-		var expectedBg = Colors.Teal;
-		var expectedFg = Colors.Yellow;
-
-		var container = CreateThemedContainer();
-		container.Resources[bgResourceKey] = new SolidColorBrush(expectedBg);
-		container.Resources[fgResourceKey] = new SolidColorBrush(expectedFg);
-
-		var semanticStyle = container.Resources[semanticStyleKey] as Style;
-		var simpleStyle = container.Resources[simpleStyleKey] as Style;
-		Assert.IsNotNull(semanticStyle, $"{semanticStyleKey} should be available");
-		Assert.IsNotNull(simpleStyle, $"{simpleStyleKey} should be available");
-
-		var semanticButton = new Button { Content = "Semantic", Style = semanticStyle };
-		var simpleButton = new Button { Content = "Simple", Style = simpleStyle };
-
-		var panel = new StackPanel();
-		panel.Children.Add(semanticButton);
-		panel.Children.Add(simpleButton);
-		container.Children.Add(panel);
-
-		UnitTestsUIContentHelper.Content = container;
-		await UnitTestsUIContentHelper.WaitForLoaded(semanticButton);
-		await UnitTestsUIContentHelper.WaitForLoaded(simpleButton);
-		await UnitTestsUIContentHelper.WaitForIdle();
-
-		var semanticBg = semanticButton.Background as SolidColorBrush;
-		var simpleBg = simpleButton.Background as SolidColorBrush;
-		Assert.IsNotNull(semanticBg);
-		Assert.IsNotNull(simpleBg);
-		Assert.AreEqual(expectedBg, semanticBg.Color,
-			$"Overriding {bgResourceKey} should change {semanticStyleKey} button Background");
-		Assert.AreEqual(expectedBg, simpleBg.Color,
-			$"Overriding {bgResourceKey} should also change {simpleStyleKey} button Background");
-
-		var semanticFg = semanticButton.Foreground as SolidColorBrush;
-		var simpleFg = simpleButton.Foreground as SolidColorBrush;
-		Assert.IsNotNull(semanticFg);
-		Assert.IsNotNull(simpleFg);
-		Assert.AreEqual(expectedFg, semanticFg.Color,
-			$"Overriding {fgResourceKey} should change {semanticStyleKey} button Foreground");
-		Assert.AreEqual(expectedFg, simpleFg.Color,
-			$"Overriding {fgResourceKey} should also change {simpleStyleKey} button Foreground");
-	}
-
-	// ─────────────────────────────────────────────────────────────────────
 	// Scope isolation: overrides in one container don't leak to siblings.
 	// ─────────────────────────────────────────────────────────────────────
 
@@ -202,10 +143,10 @@ public class Given_SemanticStyles
 		var overrideColor = Colors.DarkOrchid;
 		var root = new StackPanel();
 
-		// Sibling A: has overridden SimplePrimaryButtonBackground
+		// Sibling A: has overridden FilledButtonBackground
 		var overriddenContainer = new Grid();
 		overriddenContainer.Resources.MergedDictionaries.Add(new SimpleTheme());
-		overriddenContainer.Resources["SimplePrimaryButtonBackground"] = new SolidColorBrush(overrideColor);
+		overriddenContainer.Resources["FilledButtonBackground"] = new SolidColorBrush(overrideColor);
 		var overriddenButton = new Button
 		{
 			Content = "Overridden",
