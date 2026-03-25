@@ -42,6 +42,7 @@ public sealed partial class ContentDialogSamplePage : Page
 
 	private ContentDialog BuildBasicContentDialog() => new ContentDialog()
 	{
+		XamlRoot = this.XamlRoot,
 		Title = new StackPanel
 		{
 			Spacing = 18,
@@ -61,6 +62,7 @@ public sealed partial class ContentDialogSamplePage : Page
 	{
 		var dialog = new ContentDialog()
 		{
+			XamlRoot = this.XamlRoot,
 			Title =  new StackPanel
 			{
 				Spacing = 18,
@@ -112,6 +114,7 @@ public sealed partial class ContentDialogSamplePage : Page
 
 	private ContentDialog BuildSimpleBasicDialog() => new ContentDialog()
 	{
+		XamlRoot = this.XamlRoot,
 		Title = "Basic Dialog",
 		Content = "This is a basic dialog with a close button.",
 		CloseButtonText = "OK",
@@ -119,6 +122,7 @@ public sealed partial class ContentDialogSamplePage : Page
 
 	private ContentDialog BuildSimpleConfirmDialog() => new ContentDialog()
 	{
+		XamlRoot = this.XamlRoot,
 		Title = "Confirm Action",
 		Content = "Are you sure you want to proceed?",
 		PrimaryButtonText = "Confirm",
@@ -127,6 +131,7 @@ public sealed partial class ContentDialogSamplePage : Page
 
 	private ContentDialog BuildSimpleThreeButtonDialog() => new ContentDialog()
 	{
+		XamlRoot = this.XamlRoot,
 		Title = "Save Changes",
 		Content = "Do you want to save your changes before closing?",
 		PrimaryButtonText = "Save",
@@ -136,6 +141,7 @@ public sealed partial class ContentDialogSamplePage : Page
 
 	private ContentDialog BuildSimpleCustomContentDialog() => new ContentDialog()
 	{
+		XamlRoot = this.XamlRoot,
 		Title = "Custom Content",
 		Content = new StackPanel
 		{
