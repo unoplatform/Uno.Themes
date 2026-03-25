@@ -1,135 +1,56 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Simple Design System — AutoSuggestBox (Search) Styles
 		Maps SDS Search component tokens to WinUI AutoSuggestBox.
-
+		
 		SDS Search: pill-shaped input (radius-full) with search/clear icon,
 		inherits Input base tokens (background-default-default, border-default-default, etc.)
 		Popup: ListBox of suggestion items
 		States: Normal, PointerOver, Focused (brand-secondary border), Disabled
-
+		
 		SDS source: Search/Search.tsx + search.css, Input/input.css
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 			<!-- Sizing -->
-			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius> <!-- pill-ish radius; no exact SDS token (closest sds-size-radius-full = 9999) -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" /> <!-- sds-size-stroke-focus-ring -->
-			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness> <!-- non-uniform: sds-size-space-400, 10, sds-size-icon-large, 10 -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxMinHeight" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconFontSize" ResourceKey="SimpleTypographyScale03" /> <!-- sds-typography-scale-03 -->
+			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius>
+			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness>
 
-			<!-- Suggestions popup -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsPadding" ResourceKey="SimpleSpace100Thickness" /> <!-- sds-size-space-100 -->
-
-			<!-- TextBox — Normal state -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxForeground"                    ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackground"                    ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrush"                   ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxPlaceholderForeground"         ResourceKey="OnSurfaceLowBrush" />
-
-			<!-- TextBox — PointerOver state -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxForegroundPointerOver"         ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackgroundPointerOver"         ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrushPointerOver"        ResourceKey="OutlineBrush" />
-
-			<!-- TextBox — Focused state -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxForegroundFocused"             ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackgroundFocused"             ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrushFocused"            ResourceKey="PrimaryMediumBrush" />
-
-			<!-- TextBox — Disabled state -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxForegroundDisabled"            ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackgroundDisabled"            ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrushDisabled"           ResourceKey="OutlineDisabledBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Query / Delete button glyph -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForeground"                ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForegroundPointerOver"     ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForegroundPressed"         ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForegroundDisabled"        ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Header / label -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxHeaderForeground"              ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxHeaderForegroundDisabled"      ResourceKey="OnSurfaceDisabledBrush" />
-
-			<!-- Suggestions list -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBackground"         ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderBrush"        ResourceKey="OutlineBrush" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius> <!-- pill-ish radius; no exact SDS token (closest sds-size-radius-full = 9999) -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" /> <!-- sds-size-stroke-focus-ring -->
-			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness> <!-- non-uniform: sds-size-space-400, 10, sds-size-icon-large, 10 -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxMinHeight" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconFontSize" ResourceKey="SimpleTypographyScale03" /> <!-- sds-typography-scale-03 -->
+			<CornerRadius x:Key="SimpleAutoSuggestBoxCornerRadius">20</CornerRadius>
+			<Thickness x:Key="SimpleAutoSuggestBoxPadding">16,10,40,10</Thickness>
 
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsCornerRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderThickness" ResourceKey="SimpleStrokeBorderThickness" /> <!-- sds-size-stroke-border -->
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsPadding" ResourceKey="SimpleSpace100Thickness" /> <!-- sds-size-space-100 -->
 
-			<StaticResource x:Key="SimpleAutoSuggestBoxForeground"                    ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackground"                    ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrush"                   ResourceKey="OutlineBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxPlaceholderForeground"         ResourceKey="OnSurfaceLowBrush" />
-
-			<StaticResource x:Key="SimpleAutoSuggestBoxForegroundPointerOver"         ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackgroundPointerOver"         ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrushPointerOver"        ResourceKey="OutlineBrush" />
-
-			<StaticResource x:Key="SimpleAutoSuggestBoxForegroundFocused"             ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackgroundFocused"             ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrushFocused"            ResourceKey="PrimaryMediumBrush" />
-
-			<StaticResource x:Key="SimpleAutoSuggestBoxForegroundDisabled"            ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBackgroundDisabled"            ResourceKey="OnSurfaceDisabledBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxBorderBrushDisabled"           ResourceKey="OutlineDisabledBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForeground"                ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForegroundPointerOver"     ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForegroundPressed"         ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxIconForegroundDisabled"        ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="SimpleAutoSuggestBoxHeaderForeground"              ResourceKey="OnSurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxHeaderForegroundDisabled"      ResourceKey="OnSurfaceDisabledBrush" />
-
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBackground"         ResourceKey="SurfaceBrush" />
-			<StaticResource x:Key="SimpleAutoSuggestBoxSuggestionsBorderBrush"        ResourceKey="OutlineBrush" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Inner TextBox style (pill-shaped, search icon area)                   -->
+	<!-- Inner TextBox style (pill-shaped, search icon area) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleAutoSuggestBoxTextBoxStyle"
 		   TargetType="TextBox">
 		<Setter Property="MinWidth" Value="0" />
-		<Setter Property="MinHeight" Value="{ThemeResource SimpleAutoSuggestBoxMinHeight}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleAutoSuggestBoxForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleAutoSuggestBoxBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleAutoSuggestBoxBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{ThemeResource SimpleAutoSuggestBoxBorderThickness}" />
+		<Setter Property="MinHeight" Value="{ThemeResource SimpleIconLarge}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlineBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource SimpleStrokeBorderThickness}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource SimpleAutoSuggestBoxCornerRadius}" />
 		<Setter Property="Padding" Value="{ThemeResource SimpleAutoSuggestBoxPadding}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" /> <!-- sds-typography-scale-03 -->
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -161,12 +82,12 @@
 														<VisualState x:Name="Normal" />
 														<VisualState x:Name="PointerOver">
 															<VisualState.Setters>
-																<Setter Target="GlyphElement.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxIconForegroundPointerOver}" />
+																<Setter Target="GlyphElement.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
-																<Setter Target="GlyphElement.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxIconForegroundPressed}" />
+																<Setter Target="GlyphElement.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled">
@@ -180,11 +101,11 @@
 													</VisualStateGroup>
 												</VisualStateManager.VisualStateGroups>
 												<TextBlock x:Name="GlyphElement"
-														   Foreground="{ThemeResource SimpleAutoSuggestBoxIconForeground}"
+														   Foreground="{ThemeResource OnSurfaceBrush}"
 														   VerticalAlignment="Center"
 														   HorizontalAlignment="Center"
 														   FontStyle="Normal"
-														   FontSize="{ThemeResource SimpleAutoSuggestBoxIconFontSize}"
+														   FontSize="{ThemeResource SimpleTypographyScale03}"
 														   Text="&#xE894;"
 														   FontFamily="{ThemeResource SymbolThemeFontFamily}"
 														   AutomationProperties.AccessibilityView="Raw" />
@@ -206,7 +127,7 @@
 															  Content="{TemplateBinding Content}"
 															  ContentTemplate="{TemplateBinding ContentTemplate}"
 															  ContentTransitions="{TemplateBinding ContentTransitions}"
-															  FontSize="{ThemeResource SimpleAutoSuggestBoxIconFontSize}"
+															  FontSize="{ThemeResource SimpleTypographyScale03}"
 															  Padding="{TemplateBinding Padding}"
 															  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 															  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -216,12 +137,12 @@
 														<VisualState x:Name="Normal" />
 														<VisualState x:Name="PointerOver">
 															<VisualState.Setters>
-																<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxIconForegroundPointerOver}" />
+																<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
-																<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxIconForegroundPressed}" />
+																<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled">
@@ -245,30 +166,30 @@
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxHeaderForegroundDisabled}" />
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleAutoSuggestBoxBackgroundDisabled}" />
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleAutoSuggestBoxBorderBrushDisabled}" />
-										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxForegroundDisabled}" />
-										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="BorderElement.Background" Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource OutlineDisabledBrush}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OnSurfaceDisabledBrush}" />
+										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource OnSurfaceDisabledBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleAutoSuggestBoxBorderBrushPointerOver}" />
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleAutoSuggestBoxBackgroundPointerOver}" />
-										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxPlaceholderForeground}" />
-										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxForegroundPointerOver}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource OutlineBrush}" />
+										<Setter Target="BorderElement.Background" Value="{ThemeResource SurfaceBrush}" />
+										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource OnSurfaceLowBrush}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxPlaceholderForeground}" />
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleAutoSuggestBoxBackgroundFocused}" />
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleAutoSuggestBoxBorderBrushFocused}" />
-										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource SimpleAutoSuggestBoxFocusedBorderThickness}" />
-										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxForegroundFocused}" />
-										<Setter Target="QueryButton.Foreground" Value="{ThemeResource SimpleAutoSuggestBoxIconForeground}" />
+										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource OnSurfaceLowBrush}" />
+										<Setter Target="BorderElement.Background" Value="{ThemeResource SurfaceBrush}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource PrimaryMediumBrush}" />
+										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource SimpleStrokeFocusRingThickness}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+										<Setter Target="QueryButton.Foreground" Value="{ThemeResource OnSurfaceBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -287,7 +208,7 @@
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="4" /> <!-- sds-size-space-100 (GridLength, not aliasable) -->
+							<ColumnDefinition Width="4" />
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
@@ -304,7 +225,6 @@
 								CornerRadius="{TemplateBinding CornerRadius}" />
 
 						<!-- Header -->
-						<!-- FontSize: sds-typography-scale-02, Margin bottom: sds-size-space-100 -->
 						<ContentPresenter x:Name="HeaderContentPresenter"
 										  Grid.Row="0"
 										  Grid.ColumnSpan="4"
@@ -313,7 +233,7 @@
 										  FontFamily="{ThemeResource SimpleFontFamily}"
 										  FontSize="{ThemeResource SimpleTypographyScale02}"
 										  FontWeight="SemiBold"
-										  Foreground="{ThemeResource SimpleAutoSuggestBoxHeaderForeground}"
+										  Foreground="{ThemeResource OnSurfaceBrush}"
 										  Margin="0,0,0,4"
 										  TextWrapping="Wrap"
 										  Visibility="Collapsed"
@@ -341,7 +261,7 @@
 						<ContentControl x:Name="PlaceholderTextContentPresenter"
 										Grid.Row="1"
 										Grid.ColumnSpan="2"
-										Foreground="{ThemeResource SimpleAutoSuggestBoxPlaceholderForeground}"
+										Foreground="{ThemeResource OnSurfaceLowBrush}"
 										Margin="{TemplateBinding BorderThickness}"
 										Padding="{TemplateBinding Padding}"
 										IsTabStop="False"
@@ -351,7 +271,6 @@
 										HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
 						<!-- Delete (clear) button -->
-						<!-- Padding: sds-size-space-100, Width: sds-size-icon-medium -->
 						<Button x:Name="DeleteButton"
 								Grid.Row="1"
 								Grid.Column="1"
@@ -366,7 +285,6 @@
 								AutomationProperties.AccessibilityView="Raw" />
 
 						<!-- Query (search icon) button -->
-						<!-- Margin left: sds-size-space-050, Padding: sds-size-space-100, Width: sds-size-icon-medium, Height 28: no exact SDS token -->
 						<Button x:Name="QueryButton"
 								Grid.Row="1"
 								Grid.Column="2"
@@ -387,7 +305,7 @@
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- AutoSuggestBox outer style                                            -->
+	<!-- AutoSuggestBox outer style -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleAutoSuggestBoxStyle"
 		   TargetType="AutoSuggestBox">
@@ -395,12 +313,12 @@
 		<Setter Property="VerticalContentAlignment" Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="IsTabStop" Value="False" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleAutoSuggestBoxForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleAutoSuggestBoxBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleAutoSuggestBoxBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{ThemeResource SimpleAutoSuggestBoxBorderThickness}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlineBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource SimpleStrokeBorderThickness}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" /> <!-- sds-typography-scale-03 -->
+		<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale03}" />
 		<Setter Property="TextBoxStyle" Value="{StaticResource SimpleAutoSuggestBoxTextBoxStyle}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<Setter Property="CornerRadius" Value="{ThemeResource SimpleAutoSuggestBoxCornerRadius}" />
@@ -448,11 +366,11 @@
 						<Popup x:Name="SuggestionsPopup"
 							   ShouldConstrainToRootBounds="False">
 							<Border x:Name="SuggestionsContainer"
-									Padding="{ThemeResource SimpleAutoSuggestBoxSuggestionsPadding}"
-									BorderThickness="{ThemeResource SimpleAutoSuggestBoxSuggestionsBorderThickness}"
-									BorderBrush="{ThemeResource SimpleAutoSuggestBoxSuggestionsBorderBrush}"
-									Background="{ThemeResource SimpleAutoSuggestBoxSuggestionsBackground}"
-									CornerRadius="{ThemeResource SimpleAutoSuggestBoxSuggestionsCornerRadius}">
+									Padding="{ThemeResource SimpleSpace100Thickness}"
+									BorderThickness="{ThemeResource SimpleStrokeBorderThickness}"
+									BorderBrush="{ThemeResource OutlineBrush}"
+									Background="{ThemeResource SurfaceBrush}"
+									CornerRadius="{ThemeResource SimpleRadius200CornerRadius}">
 								<ListView x:Name="SuggestionsList"
 										  DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
 										  IsItemClickEnabled="True"
@@ -461,8 +379,7 @@
 										  ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
 										  MaxHeight="{ThemeResource AutoSuggestListMaxHeight}"
 										  Margin="{ThemeResource AutoSuggestListPadding}">
-									<ListView.ItemContainerTransitions>
-									</ListView.ItemContainerTransitions>
+									<ListView.ItemContainerTransitions />
 								</ListView>
 							</Border>
 						</Popup>
