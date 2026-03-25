@@ -6,63 +6,47 @@
 	<!--
 		Simple Design System — ContentDialog Style
 		Maps SDS Dialog component tokens to WinUI ContentDialog.
-
+		
 		SDS Dialog (type=card):
-		  bg = background-default-default, border = border-default-default
-		  radius = 8px, padding-y = 32px, padding-x = 32px
-		  title: text-default-default (heading font)
-		  description: text-default-secondary
-		  scrim/overlay: background-utilities-scrim
-		  close button: subtle icon button
-		  buttons: grouped with margin-top 24px (space-600)
+		bg = background-default-default, border = border-default-default
+		radius = 8px, padding-y = 32px, padding-x = 32px
+		title: text-default-default (heading font)
+		description: text-default-secondary
+		scrim/overlay: background-utilities-scrim
+		close button: subtle icon button
+		buttons: grouped with margin-top 24px (space-600)
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
-		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="SimpleContentDialogBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleContentDialogBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleContentDialogSmokeLayerBackground" ResourceKey="SimpleBackgroundUtilitiesScrimBrush" />
-			<StaticResource x:Key="SimpleContentDialogTitleForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleContentDialogContentForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
-		</ResourceDictionary>
+		<ResourceDictionary x:Key="Light" />
 
 		<!-- ─── Dark Theme (Default) ─── -->
-		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="SimpleContentDialogBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleContentDialogBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleContentDialogSmokeLayerBackground" ResourceKey="SimpleBackgroundUtilitiesScrimBrush" />
-			<StaticResource x:Key="SimpleContentDialogTitleForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleContentDialogContentForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
-		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default" />
 
 	</ResourceDictionary.ThemeDictionaries>
 
+	<StaticResource x:Key="SimpleContentDialogPanelPadding" ResourceKey="SimpleSpace800Thickness" />
+	<StaticResource x:Key="SimpleContentDialogCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+
+
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Sizing / layout constants                                              -->
+	<!-- Sizing / layout constants -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<x:Double x:Key="SimpleContentDialogMinWidth">288</x:Double>
 	<x:Double x:Key="SimpleContentDialogMinHeight">132</x:Double>
 	<x:Double x:Key="SimpleContentDialogMaxWidth">560</x:Double>
 	<x:Double x:Key="SimpleContentDialogMaxHeight">560</x:Double>
-	<!-- sds-size-space-800 -->
-	<StaticResource x:Key="SimpleContentDialogEdgeMargin" ResourceKey="SimpleSpace800Thickness" />
-	<!-- sds-size-space-800 -->
-	<StaticResource x:Key="SimpleContentDialogPanelPadding" ResourceKey="SimpleSpace800Thickness" />
-	<!-- sds-size-radius-200 -->
-	<StaticResource x:Key="SimpleContentDialogCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 	<GridLength x:Key="SimpleContentDialogButtonSpacing">8</GridLength>
-	<!-- 0,0,0,sds-size-space-200 -->
 	<Thickness x:Key="SimpleContentDialogTitleToContentMargin">0,0,0,8</Thickness>
-	<!-- 0,sds-size-space-600,0,0 -->
 	<Thickness x:Key="SimpleContentDialogCommandSpaceToContentMargin">0,24,0,0</Thickness>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- ContentDialog button styles                                            -->
+	<!-- ContentDialog button styles -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 
 	<!-- Non-default buttons use the subtle variant -->
@@ -82,14 +66,14 @@
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- ContentDialog Style                                                    -->
+	<!-- ContentDialog Style -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleContentDialogStyle"
 		   TargetType="ContentDialog">
 
-		<Setter Property="Background" Value="{ThemeResource SimpleContentDialogBackground}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleContentDialogContentForeground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleContentDialogBorderBrush}" />
+		<Setter Property="Background" Value="{ThemeResource SurfaceBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceMediumBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlineBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="CornerRadius" Value="{StaticResource SimpleContentDialogCornerRadius}" />
 
@@ -214,7 +198,7 @@
 						<Grid x:Name="LayoutRoot">
 							<!-- Scrim layer -->
 							<Rectangle x:Name="SmokeLayerBackground"
-									   Fill="{ThemeResource SimpleContentDialogSmokeLayerBackground}" />
+									   Fill="{ThemeResource SimpleBackgroundUtilitiesScrimBrush}" />
 
 							<!-- Hidden background element (required by ContentDialog impl) -->
 							<Border x:Name="BackgroundElement"
@@ -250,9 +234,9 @@
 														x:Name="Title"
 														Content="{TemplateBinding Title}"
 														ContentTemplate="{TemplateBinding TitleTemplate}"
-														Foreground="{ThemeResource SimpleContentDialogTitleForeground}"
-														FontFamily="{ThemeResource SimpleFontFamily}"
-														FontSize="{ThemeResource SimpleHeadingFontSize}"
+														Foreground="{ThemeResource OnSurfaceBrush}"
+												FontFamily="{ThemeResource HeadlineSmallFontFamily}"
+												FontSize="{ThemeResource HeadlineSmallFontSize}"
 														FontWeight="SemiBold"
 														Margin="{StaticResource SimpleContentDialogTitleToContentMargin}"
 														HorizontalAlignment="Left"
@@ -283,8 +267,8 @@
 															  Content="{TemplateBinding Content}"
 															  ContentTemplate="{TemplateBinding ContentTemplate}"
 															  Foreground="{TemplateBinding Foreground}"
-															  FontFamily="{ThemeResource SimpleFontFamily}"
-															  FontSize="{ThemeResource SimpleTypographyScale03}"
+													  FontFamily="{ThemeResource BodyLargeFontFamily}"
+													  FontSize="{ThemeResource BodyLargeFontSize}"
 															  TextWrapping="Wrap" />
 										</ScrollViewer>
 
@@ -297,11 +281,16 @@
 											  XYFocusKeyboardNavigation="Enabled">
 
 											<Grid.ColumnDefinitions>
-												<ColumnDefinition x:Name="CloseColumn" Width="Auto" />
-												<ColumnDefinition x:Name="SecondSpacer" Width="{StaticResource SimpleContentDialogButtonSpacing}" />
-												<ColumnDefinition x:Name="SecondaryColumn" Width="Auto" />
-												<ColumnDefinition x:Name="FirstSpacer" Width="{StaticResource SimpleContentDialogButtonSpacing}" />
-												<ColumnDefinition x:Name="PrimaryColumn" Width="Auto" />
+												<ColumnDefinition x:Name="CloseColumn"
+																  Width="Auto" />
+												<ColumnDefinition x:Name="SecondSpacer"
+																  Width="{StaticResource SimpleContentDialogButtonSpacing}" />
+												<ColumnDefinition x:Name="SecondaryColumn"
+																  Width="Auto" />
+												<ColumnDefinition x:Name="FirstSpacer"
+																  Width="{StaticResource SimpleContentDialogButtonSpacing}" />
+												<ColumnDefinition x:Name="PrimaryColumn"
+																  Width="Auto" />
 											</Grid.ColumnDefinitions>
 
 											<Button Grid.Column="0"

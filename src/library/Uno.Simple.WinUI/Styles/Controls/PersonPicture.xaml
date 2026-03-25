@@ -4,68 +4,54 @@
 	<!--
 		Simple Design System — PersonPicture (Avatar) Styles
 		Maps SDS Avatar component tokens to WinUI PersonPicture.
-
+		
 		SDS Avatar: sizes small(24)/medium(32)/large(40),
 		shapes circle(radius-full)/square(radius-200=8px),
 		initials bg = background-brand-default, text = text-brand-on-brand
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 			<!-- Sizing (identical both themes) -->
-			<StaticResource x:Key="SimplePersonPictureSmallSize" ResourceKey="SimpleIconSmall" /> <!-- sds-size-icon-small -->
-			<StaticResource x:Key="SimplePersonPictureMediumSize" ResourceKey="SimpleIconMedium" /> <!-- sds-size-icon-medium -->
-			<StaticResource x:Key="SimplePersonPictureLargeSize" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimplePersonPictureSquareSmallRadius" ResourceKey="SimpleRadius100CornerRadius" /> <!-- sds-size-radius-100 -->
-			<StaticResource x:Key="SimplePersonPictureSquareMediumRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimplePersonPictureSquareLargeRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
-			<x:Double x:Key="SimplePersonPictureInitialsSmallFontSize">10</x:Double> <!-- no exact SDS token (10px) -->
-			<StaticResource x:Key="SimplePersonPictureInitialsMediumFontSize" ResourceKey="SimpleTypographyScale02" /> <!-- sds-typography-scale-02 -->
-			<StaticResource x:Key="SimplePersonPictureInitialsLargeFontSize" ResourceKey="SimpleTypographyScale03" /> <!-- sds-typography-scale-03 -->
+			<x:Double x:Key="SimplePersonPictureInitialsSmallFontSize">10</x:Double>
 
 			<!-- Color tokens -->
-			<StaticResource x:Key="SimplePersonPictureBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePersonPictureForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePersonPictureBadgeBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePersonPictureBadgeForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
+					<StaticResource x:Key="SimplePersonPictureSmallSize" ResourceKey="SimpleIconSmall" /> <!-- sds-size-icon-small -->
+			<StaticResource x:Key="SimplePersonPictureMediumSize" ResourceKey="SimpleIconMedium" /> <!-- sds-size-icon-medium -->
+			<StaticResource x:Key="SimplePersonPictureLargeSize" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
+			<StaticResource x:Key="SimplePersonPictureInitialsMediumFontSize" ResourceKey="SimpleTypographyScale02" /> <!-- sds-typography-scale-02 -->
+			<StaticResource x:Key="SimplePersonPictureInitialsLargeFontSize" ResourceKey="SimpleTypographyScale03" /> <!-- sds-typography-scale-03 -->
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="SimplePersonPictureSmallSize" ResourceKey="SimpleIconSmall" /> <!-- sds-size-icon-small -->
+			<x:Double x:Key="SimplePersonPictureInitialsSmallFontSize">10</x:Double>
+
+					<StaticResource x:Key="SimplePersonPictureSmallSize" ResourceKey="SimpleIconSmall" /> <!-- sds-size-icon-small -->
 			<StaticResource x:Key="SimplePersonPictureMediumSize" ResourceKey="SimpleIconMedium" /> <!-- sds-size-icon-medium -->
 			<StaticResource x:Key="SimplePersonPictureLargeSize" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
-			<StaticResource x:Key="SimplePersonPictureSquareSmallRadius" ResourceKey="SimpleRadius100CornerRadius" /> <!-- sds-size-radius-100 -->
-			<StaticResource x:Key="SimplePersonPictureSquareMediumRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
-			<StaticResource x:Key="SimplePersonPictureSquareLargeRadius" ResourceKey="SimpleRadius200CornerRadius" /> <!-- sds-size-radius-200 -->
-			<x:Double x:Key="SimplePersonPictureInitialsSmallFontSize">10</x:Double> <!-- no exact SDS token (10px) -->
 			<StaticResource x:Key="SimplePersonPictureInitialsMediumFontSize" ResourceKey="SimpleTypographyScale02" /> <!-- sds-typography-scale-02 -->
 			<StaticResource x:Key="SimplePersonPictureInitialsLargeFontSize" ResourceKey="SimpleTypographyScale03" /> <!-- sds-typography-scale-03 -->
-
-			<StaticResource x:Key="SimplePersonPictureBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePersonPictureForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
-			<StaticResource x:Key="SimplePersonPictureBadgeBackground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimplePersonPictureBadgeForeground" ResourceKey="SimpleTextBrandOnBrandBrush" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Circle PersonPicture — Medium (default)                               -->
+	<!-- Circle PersonPicture — Medium (default) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimplePersonPictureStyle"
 		   TargetType="PersonPicture">
-		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureMediumSize}" />
-		<Setter Property="Height" Value="{ThemeResource SimplePersonPictureMediumSize}" />
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsMediumFontSize}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimplePersonPictureForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimplePersonPictureBackground}" />
+		<Setter Property="Width" Value="{ThemeResource SimpleIconMedium}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleIconMedium}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnPrimaryBrush}" />
+		<Setter Property="Background" Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="PersonPicture">
@@ -138,7 +124,7 @@
 							  HorizontalAlignment="Right"
 							  VerticalAlignment="Bottom">
 							<Ellipse x:Name="BadgeBackground"
-									 Fill="{ThemeResource SimplePersonPictureBadgeBackground}"
+									 Fill="{ThemeResource PrimaryBrush}"
 									 Width="{ThemeResource SimpleSpace400}"
 									 Height="{ThemeResource SimpleSpace400}" />
 							<Image x:Name="BadgeImage"
@@ -150,9 +136,9 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeNumberTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
-									   Foreground="{ThemeResource SimplePersonPictureBadgeForeground}"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center"
 									   TextAlignment="Center"
@@ -161,9 +147,9 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeGlyphTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
-									   Foreground="{ThemeResource SimplePersonPictureBadgeForeground}"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center"
 									   TextAlignment="Center"
@@ -172,9 +158,9 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeTextTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
-									   Foreground="{ThemeResource SimplePersonPictureBadgeForeground}"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center"
 									   TextAlignment="Center"
@@ -191,8 +177,8 @@
 	<Style x:Key="SimplePersonPictureSmallStyle"
 		   TargetType="PersonPicture"
 		   BasedOn="{StaticResource SimplePersonPictureStyle}">
-		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureSmallSize}" />
-		<Setter Property="Height" Value="{ThemeResource SimplePersonPictureSmallSize}" />
+		<Setter Property="Width" Value="{ThemeResource SimpleIconSmall}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleIconSmall}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsSmallFontSize}" />
 	</Style>
 
@@ -200,22 +186,22 @@
 	<Style x:Key="SimplePersonPictureLargeStyle"
 		   TargetType="PersonPicture"
 		   BasedOn="{StaticResource SimplePersonPictureStyle}">
-		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureLargeSize}" />
-		<Setter Property="Height" Value="{ThemeResource SimplePersonPictureLargeSize}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsLargeFontSize}" />
+		<Setter Property="Width" Value="{ThemeResource SimpleIconLarge}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleIconLarge}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Square PersonPicture — Medium (default)                               -->
+	<!-- Square PersonPicture — Medium (default) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimplePersonPictureSquareStyle"
 		   TargetType="PersonPicture">
-		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureMediumSize}" />
-		<Setter Property="Height" Value="{ThemeResource SimplePersonPictureMediumSize}" />
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsMediumFontSize}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimplePersonPictureForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimplePersonPictureBackground}" />
+		<Setter Property="Width" Value="{ThemeResource SimpleIconMedium}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleIconMedium}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="Foreground" Value="{ThemeResource OnPrimaryBrush}" />
+		<Setter Property="Background" Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="PersonPicture">
@@ -260,12 +246,12 @@
 								Background="{TemplateBinding Background}"
 								Width="{TemplateBinding Width}"
 								Height="{TemplateBinding Height}"
-								CornerRadius="{ThemeResource SimplePersonPictureSquareMediumRadius}" />
+								CornerRadius="{ThemeResource SimpleRadius200CornerRadius}" />
 
 						<Border x:Name="BadgeClipBorder"
 								Width="{TemplateBinding Width}"
 								Height="{TemplateBinding Height}"
-								CornerRadius="{ThemeResource SimplePersonPictureSquareMediumRadius}">
+								CornerRadius="{ThemeResource SimpleRadius200CornerRadius}">
 							<Border.Background>
 								<ImageBrush x:Name="PersonPicture"
 											ImageSource="{TemplateBinding ProfilePicture}"
@@ -290,7 +276,7 @@
 							  HorizontalAlignment="Right"
 							  VerticalAlignment="Bottom">
 							<Ellipse x:Name="BadgeBackground"
-									 Fill="{ThemeResource SimplePersonPictureBadgeBackground}"
+									 Fill="{ThemeResource PrimaryBrush}"
 									 Width="{ThemeResource SimpleSpace400}"
 									 Height="{ThemeResource SimpleSpace400}" />
 							<Image x:Name="BadgeImage"
@@ -302,9 +288,9 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeNumberTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
-									   Foreground="{ThemeResource SimplePersonPictureBadgeForeground}"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center"
 									   TextAlignment="Center"
@@ -313,9 +299,9 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeGlyphTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
-									   Foreground="{ThemeResource SimplePersonPictureBadgeForeground}"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center"
 									   TextAlignment="Center"
@@ -324,9 +310,9 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeTextTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
-									   Foreground="{ThemeResource SimplePersonPictureBadgeForeground}"
+									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
 									   VerticalAlignment="Center"
 									   TextAlignment="Center"
@@ -343,8 +329,8 @@
 	<Style x:Key="SimplePersonPictureSquareSmallStyle"
 		   TargetType="PersonPicture"
 		   BasedOn="{StaticResource SimplePersonPictureSquareStyle}">
-		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureSmallSize}" />
-		<Setter Property="Height" Value="{ThemeResource SimplePersonPictureSmallSize}" />
+		<Setter Property="Width" Value="{ThemeResource SimpleIconSmall}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleIconSmall}" />
 		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsSmallFontSize}" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -398,13 +384,13 @@
 								Background="{TemplateBinding Background}"
 								Width="{TemplateBinding Width}"
 								Height="{TemplateBinding Height}"
-								CornerRadius="{ThemeResource SimplePersonPictureSquareSmallRadius}" />
+								CornerRadius="{ThemeResource SimpleRadius100CornerRadius}" />
 
 						<!-- Profile Photo (Square Small) -->
 						<Border x:Name="BadgeClipBorder"
 								Width="{TemplateBinding Width}"
 								Height="{TemplateBinding Height}"
-								CornerRadius="{ThemeResource SimplePersonPictureSquareSmallRadius}">
+								CornerRadius="{ThemeResource SimpleRadius100CornerRadius}">
 							<Border.Background>
 								<ImageBrush x:Name="PersonPicture"
 											ImageSource="{TemplateBinding ProfilePicture}"
@@ -443,7 +429,7 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeNumberTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
 									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
@@ -454,7 +440,7 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeGlyphTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
 									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
@@ -465,7 +451,7 @@
 							<!-- no exact SDS token (10px) -->
 							<TextBlock x:Name="BadgeTextTextBlock"
 									   AutomationProperties.AccessibilityView="Raw"
-									   FontFamily="{ThemeResource SimpleFontFamily}"
+									   FontFamily="{ThemeResource BodyLargeFontFamily}"
 									   FontSize="10"
 									   Foreground="{ThemeResource OnPrimaryBrush}"
 									   HorizontalAlignment="Center"
@@ -484,9 +470,9 @@
 	<Style x:Key="SimplePersonPictureSquareLargeStyle"
 		   TargetType="PersonPicture"
 		   BasedOn="{StaticResource SimplePersonPictureSquareStyle}">
-		<Setter Property="Width" Value="{ThemeResource SimplePersonPictureLargeSize}" />
-		<Setter Property="Height" Value="{ThemeResource SimplePersonPictureLargeSize}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimplePersonPictureInitialsLargeFontSize}" />
+		<Setter Property="Width" Value="{ThemeResource SimpleIconLarge}" />
+		<Setter Property="Height" Value="{ThemeResource SimpleIconLarge}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
 	</Style>
 
 </ResourceDictionary>

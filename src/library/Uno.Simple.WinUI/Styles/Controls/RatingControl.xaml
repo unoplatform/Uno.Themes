@@ -1,77 +1,67 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Simple Design System — RatingControl Style
 		Star (or similar) rating icons using Simple's icon and accent color tokens.
 		Supports filled, empty, and placeholder states, plus read-only and interactive modes.
-
+		
 		Resource layers:
-		  RatingControl*       = semantic keys (source of truth)
-		  SimpleRatingControl* = Simple-prefixed aliases → RatingControl*
+		RatingControl*       = semantic keys (source of truth)
+		SimpleRatingControl* = Simple-prefixed aliases → RatingControl*
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="RatingControlForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="SimpleIconDefaultSecondaryBrush" />
-			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="SimpleIconDefaultSecondaryBrush" />
-			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="SimpleIconDefaultTertiaryBrush" />
-			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceMediumBrush" />
 
 			<!-- Backwards-compat aliases -->
-			<StaticResource x:Key="SimpleRatingControlForeground" ResourceKey="RatingControlForeground" />
-			<StaticResource x:Key="SimpleRatingControlSelectedForeground" ResourceKey="RatingControlSelectedForeground" />
-			<StaticResource x:Key="SimpleRatingControlUnselectedForeground" ResourceKey="RatingControlUnselectedForeground" />
-			<StaticResource x:Key="SimpleRatingControlPlaceholderForeground" ResourceKey="RatingControlPlaceholderForeground" />
-			<StaticResource x:Key="SimpleRatingControlCaptionForeground" ResourceKey="RatingControlCaptionForeground" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="RatingControlForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="SimpleIconDefaultSecondaryBrush" />
-			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="SimpleIconDefaultSecondaryBrush" />
-			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="SimpleIconDefaultTertiaryBrush" />
-			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<StaticResource x:Key="RatingControlForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForeground" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="RatingControlPlaceholderForegroundPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundPointerOver" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RatingControlUnselectedForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+			<StaticResource x:Key="RatingControlSelectedForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="RatingControlCaptionForeground" ResourceKey="OnSurfaceMediumBrush" />
 
-			<StaticResource x:Key="SimpleRatingControlForeground" ResourceKey="RatingControlForeground" />
-			<StaticResource x:Key="SimpleRatingControlSelectedForeground" ResourceKey="RatingControlSelectedForeground" />
-			<StaticResource x:Key="SimpleRatingControlUnselectedForeground" ResourceKey="RatingControlUnselectedForeground" />
-			<StaticResource x:Key="SimpleRatingControlPlaceholderForeground" ResourceKey="RatingControlPlaceholderForeground" />
-			<StaticResource x:Key="SimpleRatingControlCaptionForeground" ResourceKey="RatingControlCaptionForeground" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Sizing constants                                                       -->
+	<!-- Sizing constants -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<x:Double x:Key="SimpleRatingControlHeight">32</x:Double>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- RatingControl Style                                                    -->
+	<!-- RatingControl Style -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleRatingControlStyle"
 		   TargetType="RatingControl">
 		<Setter Property="Height" Value="{StaticResource SimpleRatingControlHeight}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleRatingControlForeground}" />
+		<Setter Property="Foreground" Value="{ThemeResource RatingControlForeground}" />
 		<Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Default alias                                                          -->
+	<!-- Default alias -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleDefaultRatingControlStyle"
 		   TargetType="RatingControl"

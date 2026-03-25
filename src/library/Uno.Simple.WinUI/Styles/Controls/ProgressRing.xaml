@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
@@ -6,46 +6,42 @@
 		Simple Design System — ProgressRing Style
 		Circular/ring progress indicator using Simple's brand (accent) and track colors.
 		Supports both determinate and indeterminate states via the built-in ProgressRing control.
-
+		
 		Resource layers:
-		  ProgressRing*       = semantic keys (source of truth)
-		  SimpleProgressRing* = Simple-prefixed aliases → ProgressRing*
+		ProgressRing*       = semantic keys (source of truth)
+		SimpleProgressRing* = Simple-prefixed aliases → ProgressRing*
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
-			<StaticResource x:Key="ProgressRingForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SurfaceVariantBrush" />
 
 			<!-- Backwards-compat aliases -->
-			<StaticResource x:Key="SimpleProgressRingForeground" ResourceKey="ProgressRingForeground" />
-			<StaticResource x:Key="SimpleProgressRingBackground" ResourceKey="ProgressRingBackground" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="ProgressRingForeground" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="ProgressRingBackground" ResourceKey="SimpleBackgroundDefaultTertiaryBrush" />
+			<StaticResource x:Key="ProgressRingForeground" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ProgressRingBackground" ResourceKey="OutlineBrush" />
 
-			<StaticResource x:Key="SimpleProgressRingForeground" ResourceKey="ProgressRingForeground" />
-			<StaticResource x:Key="SimpleProgressRingBackground" ResourceKey="ProgressRingBackground" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- ProgressRing Style                                                     -->
+	<!-- ProgressRing Style -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleProgressRingStyle"
 		   TargetType="muxc:ProgressRing">
-		<Setter Property="Foreground" Value="{ThemeResource SimpleProgressRingForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleProgressRingBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource ProgressRingForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ProgressRingBackground}" />
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Default alias                                                          -->
+	<!-- Default alias -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleDefaultProgressRingStyle"
 		   TargetType="muxc:ProgressRing"

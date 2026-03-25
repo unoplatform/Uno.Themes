@@ -4,28 +4,28 @@
 	<!--
 		Simple Design System — RadioButton Style
 		Lightweight styling: every visual-state brush is exposed via ThemeResource.
-
+		
 		Semantic resource layer:
-		  RadioButtonOuterEllipseFill*          = Unchecked background  (semantic key)
-		  RadioButtonOuterEllipseStroke*        = Unchecked border      (semantic key)
-		  RadioButtonOuterEllipseCheckedFill*   = Checked background    (semantic key)
-		  RadioButtonOuterEllipseCheckedStroke* = Checked border        (semantic key)
-		  RadioButtonForeground*                = Label text            (semantic key)
-
+		RadioButtonOuterEllipseFill*          = Unchecked background  (semantic key)
+		RadioButtonOuterEllipseStroke*        = Unchecked border      (semantic key)
+		RadioButtonOuterEllipseCheckedFill*   = Checked background    (semantic key)
+		RadioButtonOuterEllipseCheckedStroke* = Checked border        (semantic key)
+		RadioButtonForeground*                = Label text            (semantic key)
+		
 		Simple-prefixed aliases → semantic keys are provided for all names.
-
+		
 		Templates reference Simple-prefixed keys (SimpleRadioButton*) so that consumers
 		can override EITHER the Simple key or the semantic key.
-
+		
 		Simple-only keys (no semantic rename):
-		  SimpleRadioButtonCheckedDotFill* — no Material equivalent
-
+		SimpleRadioButtonCheckedDotFill* — no Material equivalent
+		
 		States: Unchecked/Checked × Normal/PointerOver/Pressed/Disabled (CombinedStates)
 		SDS source: Radio/radio.css
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
@@ -33,158 +33,87 @@
 		<ResourceDictionary x:Key="Light">
 
 			<!-- ── Unchecked Background — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseFill"                             ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseFillPointerOver"                  ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseFillPressed"                      ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseFillDisabled"                     ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonUncheckedBackground* → RadioButtonOuterEllipseFill*) -->
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackground"                    ResourceKey="RadioButtonOuterEllipseFill" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackgroundPointerOver"         ResourceKey="RadioButtonOuterEllipseFillPointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackgroundPressed"             ResourceKey="RadioButtonOuterEllipseFillPressed" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackgroundDisabled"            ResourceKey="RadioButtonOuterEllipseFillDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseFill" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Unchecked Border — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseStroke"                           ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseStrokePointerOver"                ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseStrokePressed"                    ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseStrokeDisabled"                   ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonUncheckedBorderBrush* → RadioButtonOuterEllipseStroke*) -->
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrush"                   ResourceKey="RadioButtonOuterEllipseStroke" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrushPointerOver"        ResourceKey="RadioButtonOuterEllipseStrokePointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrushPressed"            ResourceKey="RadioButtonOuterEllipseStrokePressed" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrushDisabled"           ResourceKey="RadioButtonOuterEllipseStrokeDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
 			<!-- ── Checked Background — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFill"                      ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver"           ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed"               ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillDisabled"              ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonCheckedBackground* → RadioButtonOuterEllipseCheckedFill*) -->
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackground"                      ResourceKey="RadioButtonOuterEllipseCheckedFill" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackgroundPointerOver"           ResourceKey="RadioButtonOuterEllipseCheckedFillPointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackgroundPressed"               ResourceKey="RadioButtonOuterEllipseCheckedFillPressed" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackgroundDisabled"              ResourceKey="RadioButtonOuterEllipseCheckedFillDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Checked Border — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStroke"                    ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver"         ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed"             ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled"            ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonCheckedBorderBrush* → RadioButtonOuterEllipseCheckedStroke*) -->
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrush"                     ResourceKey="RadioButtonOuterEllipseCheckedStroke" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrushPointerOver"          ResourceKey="RadioButtonOuterEllipseCheckedStrokePointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrushPressed"              ResourceKey="RadioButtonOuterEllipseCheckedStrokePressed" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrushDisabled"             ResourceKey="RadioButtonOuterEllipseCheckedStrokeDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStroke" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
 			<!-- ── Checked Dot Fill (Simple-only — no semantic rename) ── -->
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFill"                         ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFillPointerOver"              ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFillPressed"                  ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFillDisabled"                 ResourceKey="SimpleIconDisabledOnDisabledBrush" />
-
 			<!-- ── Foreground (label) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonForeground"                                   ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonForegroundPointerOver"                        ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonForegroundPressed"                            ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonForegroundDisabled"                           ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonForeground* → RadioButtonForeground*) -->
-			<StaticResource x:Key="SimpleRadioButtonForeground"                             ResourceKey="RadioButtonForeground" />
-			<StaticResource x:Key="SimpleRadioButtonForegroundPointerOver"                  ResourceKey="RadioButtonForegroundPointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonForegroundPressed"                      ResourceKey="RadioButtonForegroundPressed" />
-			<StaticResource x:Key="SimpleRadioButtonForegroundDisabled"                     ResourceKey="RadioButtonForegroundDisabled" />
+			<StaticResource x:Key="RadioButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
 			<!-- ── Unchecked Background — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseFill"                             ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseFillPointerOver"                  ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseFillPressed"                      ResourceKey="SimpleBackgroundDefaultDefaultPressedBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseFillDisabled"                     ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonUncheckedBackground* → RadioButtonOuterEllipseFill*) -->
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackground"                    ResourceKey="RadioButtonOuterEllipseFill" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackgroundPointerOver"         ResourceKey="RadioButtonOuterEllipseFillPointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackgroundPressed"             ResourceKey="RadioButtonOuterEllipseFillPressed" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBackgroundDisabled"            ResourceKey="RadioButtonOuterEllipseFillDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseFill" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillPressed" ResourceKey="PrimaryContainerBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Unchecked Border — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseStroke"                           ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseStrokePointerOver"                ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseStrokePressed"                    ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseStrokeDisabled"                   ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonUncheckedBorderBrush* → RadioButtonOuterEllipseStroke*) -->
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrush"                   ResourceKey="RadioButtonOuterEllipseStroke" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrushPointerOver"        ResourceKey="RadioButtonOuterEllipseStrokePointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrushPressed"            ResourceKey="RadioButtonOuterEllipseStrokePressed" />
-			<StaticResource x:Key="SimpleRadioButtonUncheckedBorderBrushDisabled"           ResourceKey="RadioButtonOuterEllipseStrokeDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokePressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
 			<!-- ── Checked Background — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFill"                      ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver"           ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed"               ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillDisabled"              ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonCheckedBackground* → RadioButtonOuterEllipseCheckedFill*) -->
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackground"                      ResourceKey="RadioButtonOuterEllipseCheckedFill" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackgroundPointerOver"           ResourceKey="RadioButtonOuterEllipseCheckedFillPointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackgroundPressed"               ResourceKey="RadioButtonOuterEllipseCheckedFillPressed" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBackgroundDisabled"              ResourceKey="RadioButtonOuterEllipseCheckedFillDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Checked Border — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStroke"                    ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver"         ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed"             ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled"            ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonCheckedBorderBrush* → RadioButtonOuterEllipseCheckedStroke*) -->
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrush"                     ResourceKey="RadioButtonOuterEllipseCheckedStroke" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrushPointerOver"          ResourceKey="RadioButtonOuterEllipseCheckedStrokePointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrushPressed"              ResourceKey="RadioButtonOuterEllipseCheckedStrokePressed" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedBorderBrushDisabled"             ResourceKey="RadioButtonOuterEllipseCheckedStrokeDisabled" />
-
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStroke" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
 			<!-- ── Checked Dot Fill (Simple-only — no semantic rename) ── -->
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFill"                         ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFillPointerOver"              ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFillPressed"                  ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="SimpleRadioButtonCheckedDotFillDisabled"                 ResourceKey="SimpleIconDisabledOnDisabledBrush" />
-
 			<!-- ── Foreground (label) — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="RadioButtonForeground"                                   ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonForegroundPointerOver"                        ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonForegroundPressed"                            ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="RadioButtonForegroundDisabled"                           ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleRadioButtonForeground* → RadioButtonForeground*) -->
-			<StaticResource x:Key="SimpleRadioButtonForeground"                             ResourceKey="RadioButtonForeground" />
-			<StaticResource x:Key="SimpleRadioButtonForegroundPointerOver"                  ResourceKey="RadioButtonForegroundPointerOver" />
-			<StaticResource x:Key="SimpleRadioButtonForegroundPressed"                      ResourceKey="RadioButtonForegroundPressed" />
-			<StaticResource x:Key="SimpleRadioButtonForegroundDisabled"                     ResourceKey="RadioButtonForegroundDisabled" />
+			<StaticResource x:Key="RadioButtonForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundPressed" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="RadioButtonForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Layout / sizing resources (theme-agnostic)                            -->
-	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- sds-size-space-400 -->
 	<StaticResource x:Key="SimpleRadioButtonSize" ResourceKey="SimpleSpace400" />
-	<!-- sds-size-space-200 -->
 	<StaticResource x:Key="SimpleRadioButtonDotSize" ResourceKey="SimpleSpace200" />
-	<!-- sds-size-stroke-border -->
 	<StaticResource x:Key="SimpleRadioButtonStrokeThickness" ResourceKey="SimpleStrokeBorder" />
-	<!-- sds-size-space-400,0,0,0 -->
+
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Layout / sizing resources (theme-agnostic) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Thickness x:Key="SimpleRadioButtonContentMargin">16,0,0,0</Thickness>
-	<!-- sds-size-space-400 -->
 	<GridLength x:Key="SimpleRadioButtonColumnWidth">16</GridLength>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- SimpleRadioButtonStyle                                                 -->
+	<!-- SimpleRadioButtonStyle -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleRadioButtonStyle"
 		   TargetType="RadioButton">
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleRadioButtonForeground}" />
+		<Setter Property="Foreground" Value="{ThemeResource RadioButtonForeground}" />
 		<Setter Property="BorderBrush" Value="Transparent" />
 		<Setter Property="BorderThickness" Value="0" />
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
@@ -216,27 +145,27 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource RadioButtonForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource RadioButtonForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
 										<!-- Unchecked element disabled colors -->
-										<Setter Target="RadioBorder.Fill" Value="{ThemeResource SimpleRadioButtonUncheckedBackgroundDisabled}" />
-										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource SimpleRadioButtonUncheckedBorderBrushDisabled}" />
+										<Setter Target="RadioBorder.Fill" Value="{ThemeResource RadioButtonOuterEllipseFillDisabled}" />
+										<Setter Target="RadioBorder.Stroke" Value="{ThemeResource RadioButtonOuterEllipseStrokeDisabled}" />
 										<!-- Checked element disabled colors -->
-										<Setter Target="RadioBorder_Checked.Fill" Value="{ThemeResource SimpleRadioButtonCheckedBackgroundDisabled}" />
-										<Setter Target="RadioBorder_Checked.Stroke" Value="{ThemeResource SimpleRadioButtonCheckedBorderBrushDisabled}" />
-										<Setter Target="RadioDot.Fill" Value="{ThemeResource SimpleRadioButtonCheckedDotFillDisabled}" />
+										<Setter Target="RadioBorder_Checked.Fill" Value="{ThemeResource RadioButtonOuterEllipseCheckedFillDisabled}" />
+										<Setter Target="RadioBorder_Checked.Stroke" Value="{ThemeResource RadioButtonOuterEllipseCheckedStrokeDisabled}" />
+										<Setter Target="RadioDot.Fill" Value="{ThemeResource OnSurfaceDisabledBrush}" />
 										<!-- Label -->
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleRadioButtonForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource RadioButtonForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -269,16 +198,16 @@
 							<Ellipse x:Name="RadioBorder"
 									 Width="{StaticResource SimpleRadioButtonSize}"
 									 Height="{StaticResource SimpleRadioButtonSize}"
-									 Fill="{ThemeResource SimpleRadioButtonUncheckedBackground}"
-									 Stroke="{ThemeResource SimpleRadioButtonUncheckedBorderBrush}"
+									 Fill="{ThemeResource RadioButtonOuterEllipseFill}"
+									 Stroke="{ThemeResource RadioButtonOuterEllipseStroke}"
 									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}" />
 
 							<!-- Checked outer circle (hidden by default) -->
 							<Ellipse x:Name="RadioBorder_Checked"
 									 Width="{StaticResource SimpleRadioButtonSize}"
 									 Height="{StaticResource SimpleRadioButtonSize}"
-									 Fill="{ThemeResource SimpleRadioButtonCheckedBackground}"
-									 Stroke="{ThemeResource SimpleRadioButtonCheckedBorderBrush}"
+									 Fill="{ThemeResource RadioButtonOuterEllipseCheckedFill}"
+									 Stroke="{ThemeResource RadioButtonOuterEllipseCheckedStroke}"
 									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}"
 									 Opacity="0" />
 
@@ -286,7 +215,7 @@
 							<Ellipse x:Name="RadioDot"
 									 Width="{StaticResource SimpleRadioButtonDotSize}"
 									 Height="{StaticResource SimpleRadioButtonDotSize}"
-									 Fill="{ThemeResource SimpleRadioButtonCheckedDotFill}"
+									 Fill="{ThemeResource OnPrimaryBrush}"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center"
 									 Opacity="0" />

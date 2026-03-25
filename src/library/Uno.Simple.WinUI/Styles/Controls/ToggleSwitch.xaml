@@ -1,23 +1,23 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
 		Simple Design System — ToggleSwitch Style
 		Lightweight styling: every visual-state brush is exposed via ThemeResource.
-
+		
 		Templates reference Simple-prefixed keys (SimpleToggleSwitch*) which alias
 		to the semantic keys (ToggleSwitchOuterBorder*, ToggleSwitchKnobBounds*,
 		ToggleSwitchKnob*, ToggleSwitchContent*).  Consumers can override EITHER key.
-
+		
 		Backwards-compat aliases are provided for all old Simple-prefixed names.
-
+		
 		States: CommonStates (Normal/PointerOver/Pressed/Disabled) x
-		        ToggleStates (Off/On/Dragging)
+		ToggleStates (Off/On/Dragging)
 		SDS source: Switch/switch.css
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
@@ -25,108 +25,68 @@
 		<ResourceDictionary x:Key="Light">
 
 			<!-- ── Off-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchOuterBorderFill"             ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStroke"           ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed"      ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled"     ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled"   ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchTrack* → ToggleSwitchOuterBorder*) -->
-			<StaticResource x:Key="SimpleToggleSwitchTrackOffBackground"        ResourceKey="ToggleSwitchOuterBorderFill" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOffBorderBrush"       ResourceKey="ToggleSwitchOuterBorderStroke" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOffBackgroundPressed"  ResourceKey="ToggleSwitchOuterBorderFillPressed" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBackground"   ResourceKey="ToggleSwitchOuterBorderFillDisabled" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBorderBrush"  ResourceKey="ToggleSwitchOuterBorderStrokeDisabled" />
-
+			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
 			<!-- ── On-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFill"             ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed"      ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled"     ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchTrackOn* → ToggleSwitchKnobBounds*) -->
-			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackground"         ResourceKey="ToggleSwitchKnobBoundsFill" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundPressed"   ResourceKey="ToggleSwitchKnobBoundsFillPressed" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundDisabled"  ResourceKey="ToggleSwitchKnobBoundsFillDisabled" />
-
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Thumb — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobOffFill"                ResourceKey="SimpleIconDefaultSecondaryBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobOnFill"                 ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillDisabled"           ResourceKey="SimpleIconDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchThumb* → ToggleSwitchKnob*) -->
-			<StaticResource x:Key="SimpleToggleSwitchThumbOffFill"              ResourceKey="ToggleSwitchKnobOffFill" />
-			<StaticResource x:Key="SimpleToggleSwitchThumbOnFill"               ResourceKey="ToggleSwitchKnobOnFill" />
-			<StaticResource x:Key="SimpleToggleSwitchThumbDisabledFill"         ResourceKey="ToggleSwitchKnobFillDisabled" />
-
+			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Label — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchContentForeground"          ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled"  ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchForeground* → ToggleSwitchContent*) -->
-			<StaticResource x:Key="SimpleToggleSwitchForeground"                ResourceKey="ToggleSwitchContentForeground" />
-			<StaticResource x:Key="SimpleToggleSwitchForegroundDisabled"        ResourceKey="ToggleSwitchContentForegroundDisabled" />
+			<StaticResource x:Key="ToggleSwitchContentForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
 
 			<!-- ── Off-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchOuterBorderFill"             ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStroke"           ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed"      ResourceKey="SimpleBackgroundDefaultSecondaryPressedBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled"     ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled"   ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchTrack* → ToggleSwitchOuterBorder*) -->
-			<StaticResource x:Key="SimpleToggleSwitchTrackOffBackground"        ResourceKey="ToggleSwitchOuterBorderFill" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOffBorderBrush"       ResourceKey="ToggleSwitchOuterBorderStroke" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOffBackgroundPressed"  ResourceKey="ToggleSwitchOuterBorderFillPressed" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBackground"   ResourceKey="ToggleSwitchOuterBorderFillDisabled" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackDisabledBorderBrush"  ResourceKey="ToggleSwitchOuterBorderStrokeDisabled" />
-
+			<StaticResource x:Key="ToggleSwitchOuterBorderFill" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStroke" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillPressed" ResourceKey="TertiaryContainerBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="ToggleSwitchOuterBorderStrokeDisabled" ResourceKey="OutlineDisabledBrush" />
 			<!-- ── On-track — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFill"             ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed"      ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled"     ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchTrackOn* → ToggleSwitchKnobBounds*) -->
-			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackground"         ResourceKey="ToggleSwitchKnobBoundsFill" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundPressed"   ResourceKey="ToggleSwitchKnobBoundsFillPressed" />
-			<StaticResource x:Key="SimpleToggleSwitchTrackOnBackgroundDisabled"  ResourceKey="ToggleSwitchKnobBoundsFillDisabled" />
-
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFill" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillPressed" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobBoundsFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Thumb — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchKnobOffFill"                ResourceKey="SimpleIconDefaultSecondaryBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobOnFill"                 ResourceKey="SimpleIconBrandOnBrandBrush" />
-			<StaticResource x:Key="ToggleSwitchKnobFillDisabled"           ResourceKey="SimpleIconDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchThumb* → ToggleSwitchKnob*) -->
-			<StaticResource x:Key="SimpleToggleSwitchThumbOffFill"              ResourceKey="ToggleSwitchKnobOffFill" />
-			<StaticResource x:Key="SimpleToggleSwitchThumbOnFill"               ResourceKey="ToggleSwitchKnobOnFill" />
-			<StaticResource x:Key="SimpleToggleSwitchThumbDisabledFill"         ResourceKey="ToggleSwitchKnobFillDisabled" />
-
+			<StaticResource x:Key="ToggleSwitchKnobOffFill" ResourceKey="OnSurfaceMediumBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobOnFill" ResourceKey="OnPrimaryBrush" />
+			<StaticResource x:Key="ToggleSwitchKnobFillDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 			<!-- ── Label — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="ToggleSwitchContentForeground"          ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled"  ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<!-- Backwards-compat aliases (SimpleToggleSwitchForeground* → ToggleSwitchContent*) -->
-			<StaticResource x:Key="SimpleToggleSwitchForeground"                ResourceKey="ToggleSwitchContentForeground" />
-			<StaticResource x:Key="SimpleToggleSwitchForegroundDisabled"        ResourceKey="ToggleSwitchContentForegroundDisabled" />
+			<StaticResource x:Key="ToggleSwitchContentForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="ToggleSwitchContentForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
-	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Layout / sizing resources (theme-agnostic)                            -->
-	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<StaticResource x:Key="SimpleToggleSwitchTrackWidth" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
-	<StaticResource x:Key="SimpleToggleSwitchTrackHeight" ResourceKey="SimpleIconSmall" /> <!-- sds-size-icon-small -->
-	<x:Double x:Key="SimpleToggleSwitchTrackRadius">12</x:Double> <!-- no exact SDS token (12) -->
-	<StaticResource x:Key="SimpleToggleSwitchStrokeThickness" ResourceKey="SimpleStrokeBorder" /> <!-- sds-size-stroke-border -->
-	<StaticResource x:Key="SimpleToggleSwitchThumbSize" ResourceKey="SimpleSpace400" /> <!-- sds-size-space-400 -->
-	<Thickness x:Key="SimpleToggleSwitchThumbOffMargin">4,0,0,0</Thickness> <!-- sds-size-space-100,0,0,0 -->
-	<Thickness x:Key="SimpleToggleSwitchThumbOnMargin">20,0,0,0</Thickness> <!-- no exact SDS token for 20 -->
-	<Thickness x:Key="SimpleToggleSwitchHeaderMargin">0,0,0,4</Thickness> <!-- 0,0,0,sds-size-space-100 -->
+	<StaticResource x:Key="SimpleToggleSwitchKnobWidth" ResourceKey="SimpleSpace300" />
+	<StaticResource x:Key="SimpleToggleSwitchKnobHeight" ResourceKey="SimpleSpace300" />
+
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- SimpleToggleSwitchStyle                                                -->
+	<!-- Layout / sizing resources (theme-agnostic) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<x:Double x:Key="SimpleToggleSwitchTrackRadius">12</x:Double>
+	<Thickness x:Key="SimpleToggleSwitchThumbOffMargin">4,0,0,0</Thickness>
+	<Thickness x:Key="SimpleToggleSwitchThumbOnMargin">20,0,0,0</Thickness>
+	<Thickness x:Key="SimpleToggleSwitchHeaderMargin">0,0,0,4</Thickness>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- SimpleToggleSwitchStyle -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleToggleSwitchStyle"
 		   TargetType="ToggleSwitch">
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="{ThemeResource SimpleBodySmallFontSize}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleToggleSwitchForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyMediumFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="Foreground" Value="{ThemeResource ToggleSwitchContentForeground}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -139,8 +99,10 @@
 					<Grid>
 						<VisualStateManager.VisualStateGroups>
 
-							<!-- ToggleStates MUST be declared first so CommonStates (declared second)
-							     can override colors in the Disabled state. -->
+							<!--
+								ToggleStates MUST be declared first so CommonStates (declared second)
+								can override colors in the Disabled state.
+							-->
 							<VisualStateGroup x:Name="ToggleStates">
 								<VisualState x:Name="Dragging" />
 
@@ -163,28 +125,30 @@
 								</VisualState>
 							</VisualStateGroup>
 
-							<!-- CommonStates declared AFTER ToggleStates.
-							     Disabled setters override ToggleStates colors. -->
+							<!--
+								CommonStates declared AFTER ToggleStates.
+								Disabled setters override ToggleStates colors.
+							-->
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver" />
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="OuterBorder.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOffBackgroundPressed}" />
-										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOnBackgroundPressed}" />
+										<Setter Target="OuterBorder.Fill" Value="{ThemeResource ToggleSwitchOuterBorderFillPressed}" />
+										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource ToggleSwitchKnobBoundsFillPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="OuterBorder.Fill" Value="{ThemeResource SimpleToggleSwitchTrackDisabledBackground}" />
-										<Setter Target="OuterBorder.Stroke" Value="{ThemeResource SimpleToggleSwitchTrackDisabledBorderBrush}" />
-										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource SimpleToggleSwitchTrackOnBackgroundDisabled}" />
-										<Setter Target="KnobOff.Fill" Value="{ThemeResource SimpleToggleSwitchThumbDisabledFill}" />
-										<Setter Target="KnobOn.Fill" Value="{ThemeResource SimpleToggleSwitchThumbDisabledFill}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleToggleSwitchForegroundDisabled}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleToggleSwitchForegroundDisabled}" />
+										<Setter Target="OuterBorder.Fill" Value="{ThemeResource ToggleSwitchOuterBorderFillDisabled}" />
+										<Setter Target="OuterBorder.Stroke" Value="{ThemeResource ToggleSwitchOuterBorderStrokeDisabled}" />
+										<Setter Target="SwitchKnobBounds.Fill" Value="{ThemeResource ToggleSwitchKnobBoundsFillDisabled}" />
+										<Setter Target="KnobOff.Fill" Value="{ThemeResource ToggleSwitchKnobFillDisabled}" />
+										<Setter Target="KnobOn.Fill" Value="{ThemeResource ToggleSwitchKnobFillDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ToggleSwitchContentForegroundDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource ToggleSwitchContentForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -207,7 +171,7 @@
 										  Grid.Column="0"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  Foreground="{ThemeResource SimpleToggleSwitchForeground}"
+										  Foreground="{ThemeResource ToggleSwitchContentForeground}"
 										  Margin="{StaticResource SimpleToggleSwitchHeaderMargin}"
 										  VerticalAlignment="Top"
 										  Visibility="Collapsed" />
@@ -226,8 +190,8 @@
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
 									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
 									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   Fill="{ThemeResource SimpleToggleSwitchTrackOffBackground}"
-									   Stroke="{ThemeResource SimpleToggleSwitchTrackOffBorderBrush}"
+									   Fill="{ThemeResource ToggleSwitchOuterBorderFill}"
+									   Stroke="{ThemeResource ToggleSwitchOuterBorderStroke}"
 									   StrokeThickness="{StaticResource SimpleToggleSwitchStrokeThickness}"
 									   HorizontalAlignment="Center" />
 
@@ -237,7 +201,7 @@
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
 									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
 									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   Fill="{ThemeResource SimpleToggleSwitchTrackOnBackground}"
+									   Fill="{ThemeResource ToggleSwitchKnobBoundsFill}"
 									   HorizontalAlignment="Center"
 									   Opacity="0" />
 
@@ -252,7 +216,7 @@
 									<Ellipse x:Name="KnobOn"
 											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
 											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Fill="{ThemeResource SimpleToggleSwitchThumbOnFill}"
+											 Fill="{ThemeResource ToggleSwitchKnobOnFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOnMargin}"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Center"
@@ -265,7 +229,7 @@
 									<Ellipse x:Name="KnobOff"
 											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
 											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Fill="{ThemeResource SimpleToggleSwitchThumbOffFill}"
+											 Fill="{ThemeResource ToggleSwitchKnobOffFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOffMargin}"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Center" />
