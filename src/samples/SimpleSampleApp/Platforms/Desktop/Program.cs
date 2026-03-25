@@ -17,6 +17,6 @@ internal class Program
             .UseWin32()
             .Build();
 
-        host.Run();
+        host.RunAsync();
     }
 }

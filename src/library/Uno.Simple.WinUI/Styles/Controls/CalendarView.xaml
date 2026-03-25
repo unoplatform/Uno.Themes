@@ -98,14 +98,14 @@
 		<Setter Property="BorderBrush" Value="{ThemeResource OutlineBrush}" />
 
 		<!-- Typography — SDS body-medium (16px Inter Regular) for day items -->
-		<Setter Property="DayItemFontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="DayItemFontSize" Value="{ThemeResource SimpleTypographyScale03}" />
-		<Setter Property="FirstOfMonthLabelFontFamily" Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="DayItemFontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="DayItemFontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FirstOfMonthLabelFontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FirstOfMonthLabelFontSize" Value="0" />
-		<Setter Property="MonthYearItemFontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="MonthYearItemFontSize" Value="{ThemeResource SimpleTypographyScale02}" />
-		<Setter Property="FirstOfYearDecadeLabelFontFamily" Value="{ThemeResource SimpleFontFamily}" />
+		<Setter Property="MonthYearItemFontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="MonthYearItemFontSize" Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="FirstOfYearDecadeLabelFontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 
 		<!-- Border thickness -->
 		<not_win:Setter Property="CalendarItemBorderThickness"
@@ -151,8 +151,8 @@
 							<!-- Weekday header text style — SDS body-small (14px), secondary color -->
 							<Style x:Key="SimpleWeekDayNameStyle"
 								   TargetType="TextBlock">
-								<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-								<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale02}" />
+								<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+								<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
 								<Setter Property="FontWeight" Value="{ThemeResource SimpleRegularFontWeight}" />
 								<Setter Property="Foreground" Value="{ThemeResource OnSurfaceMediumBrush}" />
 								<Setter Property="HorizontalAlignment" Value="Center" />
@@ -165,7 +165,7 @@
 								<Setter Property="HorizontalAlignment" Value="Stretch" />
 								<Setter Property="VerticalAlignment" Value="Stretch" />
 								<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
-								<Setter Property="FontSize" Value="{ThemeResource SimpleTypographyScale02}" />
+								<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
 								<Setter Property="Background" Value="{ThemeResource SystemControlTransparentBrush}" />
 								<Setter Property="BackgroundSizing" Value="OuterBorderEdge" />
 								<Setter Property="Template">
@@ -299,7 +299,7 @@
 										HorizontalContentAlignment="Left"
 										Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HeaderText}"
 										Foreground="{TemplateBinding Foreground}"
-										FontFamily="{ThemeResource SimpleFontFamily}"
+										FontFamily="{ThemeResource BodyLargeFontFamily}"
 										FontWeight="{ThemeResource SimpleRegularFontWeight}"
 										IsEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.HasMoreViews}"
 										Style="{StaticResource SimpleHeaderButtonStyle}" />

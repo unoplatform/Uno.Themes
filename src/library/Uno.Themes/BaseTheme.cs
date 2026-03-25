@@ -193,11 +193,14 @@ public abstract class BaseTheme : ResourceDictionary
 			colors.SafeMerge(colorOverride);
 		}
 
+		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
+
 		var mergedPages = GenerateSpecificResources();
 
 		mergedPages.MergedDictionaries.Add(colors);
 		mergedPages.MergedDictionaries.Add(converters);
 
+		MergedDictionaries.Add(typography);
 		MergedDictionaries.Add(mergedPages);
 	}
 
