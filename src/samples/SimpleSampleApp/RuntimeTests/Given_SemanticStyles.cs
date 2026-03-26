@@ -31,11 +31,16 @@ public class Given_SemanticStyles
 
 	[TestMethod]
 	[RunsOnUIThread]
+	// Button variants
 	[DataRow("FilledButtonStyle", "SimplePrimaryButtonStyle")]
 	[DataRow("FilledTonalButtonStyle", "SimpleNeutralButtonStyle")]
 	[DataRow("OutlinedButtonStyle", "SimpleNeutralButtonStyle")]
 	[DataRow("TextButtonStyle", "SimpleSubtleButtonStyle")]
 	[DataRow("IconButtonStyle", "SimpleIconButtonPrimaryStyle")]
+	// SDS aliases → same Simple styles
+	[DataRow("PrimaryButtonStyle", "SimplePrimaryButtonStyle")]
+	[DataRow("NeutralButtonStyle", "SimpleNeutralButtonStyle")]
+	[DataRow("SubtleButtonStyle", "SimpleSubtleButtonStyle")]
 	public async Task When_SemanticAndSimpleStyles_AreApplied_LookIdentical(
 		string semanticStyleKey, string simpleStyleKey)
 	{
@@ -130,6 +135,48 @@ public class Given_SemanticStyles
 			$"Overriding {fgResourceKey} should change {semanticStyleKey} button Foreground");
 		Assert.AreEqual(expectedFg, simpleFg.Color,
 			$"Overriding {fgResourceKey} should also change {simpleStyleKey} button Foreground");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// Style resolution: non-button semantic keys resolve to a valid style.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	// Semantic (Material-derived) aliases
+	[DataRow("FilledTextBoxStyle", "SimpleTextBoxStyle")]
+	[DataRow("OutlinedTextBoxStyle", "SimpleOutlinedTextBoxStyle")]
+	[DataRow("FilledPasswordBoxStyle", "SimplePasswordBoxStyle")]
+	[DataRow("OutlinedPasswordBoxStyle", "SimpleOutlinedPasswordBoxStyle")]
+	[DataRow("CheckBoxStyle", "SimpleCheckBoxStyle")]
+	[DataRow("RadioButtonStyle", "SimpleRadioButtonStyle")]
+	[DataRow("ToggleSwitchStyle", "SimpleToggleSwitchStyle")]
+	[DataRow("SliderStyle", "SimpleSliderStyle")]
+	[DataRow("ComboBoxStyle", "SimpleSelectFieldStyle")]
+	[DataRow("TextToggleButtonStyle", "SimpleDefaultToggleButtonStyle")]
+	[DataRow("IconToggleButtonStyle", "SimpleIconToggleButtonStyle")]
+	[DataRow("HyperlinkButtonStyle", "SimpleHyperlinkButtonStyle")]
+	[DataRow("SecondaryHyperlinkButtonStyle", "SimpleSecondaryHyperlinkButtonStyle")]
+	// SDS aliases
+	[DataRow("TextBoxStyle", "SimpleTextBoxStyle")]
+	[DataRow("PasswordBoxStyle", "SimplePasswordBoxStyle")]
+	[DataRow("SelectFieldStyle", "SimpleSelectFieldStyle")]
+	[DataRow("ToggleButtonStyle", "SimpleDefaultToggleButtonStyle")]
+	[DataRow("IconButtonPrimaryStyle", "SimpleIconButtonPrimaryStyle")]
+	public async Task When_SemanticStyleKeyResolved_MatchesExpectedSimpleStyle(
+		string semanticStyleKey, string simpleStyleKey)
+	{
+		var container = CreateThemedContainer();
+
+		var semanticStyle = container.Resources[semanticStyleKey] as Style;
+		var simpleStyle = container.Resources[simpleStyleKey] as Style;
+
+		Assert.IsNotNull(semanticStyle, $"{semanticStyleKey} should resolve to a style");
+		Assert.IsNotNull(simpleStyle, $"{simpleStyleKey} should resolve to a style");
+
+		// Both keys should resolve to the same underlying style
+		Assert.AreEqual(simpleStyle, semanticStyle,
+			$"{semanticStyleKey} should resolve to {simpleStyleKey}");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────

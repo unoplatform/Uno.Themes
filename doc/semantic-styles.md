@@ -222,6 +222,71 @@ The following matrix shows which semantic style keys are supported by each theme
 |--------------------------------|:--------:|:------:|-------|
 | `MediaTransportControlsStyle`  | ✅ | ❌ | Simple has no media transport style |
 
+## SDS (Simple Design System) Style Keys
+
+In addition to the Material-derived semantic keys above, both themes also support **SDS-naming aliases** — a second set of theme-agnostic keys that use the Simple Design System vocabulary. These resolve to the best-fit style in whichever theme is active.
+
+### Button
+
+| SDS Style Key | Material | Simple | Notes |
+|---|:---:|:---:|---|
+| `PrimaryButtonStyle` | ⚠️ | ✅ | Material: aliases to `MaterialFilledButtonStyle` |
+| `NeutralButtonStyle` | ⚠️ | ✅ | Material: aliases to `MaterialFilledTonalButtonStyle` |
+| `SubtleButtonStyle` | ⚠️ | ✅ | Material: aliases to `MaterialTextButtonStyle` |
+| `DangerPrimaryButtonStyle` | ❌ | ✅ | Material has no danger variant |
+| `DangerSubtleButtonStyle` | ❌ | ✅ | Material has no danger variant |
+
+> [!NOTE]
+> Simple also provides `Small` and `Medium` size variants for each button style (e.g., `SmallPrimaryButtonStyle`, `MediumNeutralButtonStyle`). Material has no size variant system, so these are Simple-only.
+
+### IconButton
+
+| SDS Style Key | Material | Simple | Notes |
+|---|:---:|:---:|---|
+| `IconButtonPrimaryStyle` | ⚠️ | ✅ | Material: aliases to `MaterialIconButtonStyle` |
+| `IconButtonNeutralStyle` | ❌ | ✅ | Material has a single icon button style |
+| `IconButtonSubtleStyle` | ❌ | ✅ | Material has a single icon button style |
+| `IconButtonDangerPrimaryStyle` | ❌ | ✅ | Material has no danger variant |
+| `IconButtonDangerSubtleStyle` | ❌ | ✅ | Material has no danger variant |
+
+### TextBox
+
+| SDS Style Key | Material | Simple | Notes |
+|---|:---:|:---:|---|
+| `TextBoxStyle` | ⚠️ | ✅ | Material: aliases to `MaterialFilledTextBoxStyle` |
+| `TextBoxErrorStyle` | ❌ | ✅ | Material has no dedicated error TextBox style |
+| `TextBoxSmallStyle` | ❌ | ✅ | Material has no small TextBox variant |
+
+### PasswordBox
+
+| SDS Style Key | Material | Simple | Notes |
+|---|:---:|:---:|---|
+| `PasswordBoxStyle` | ⚠️ | ✅ | Material: aliases to `MaterialFilledPasswordBoxStyle` |
+
+### ComboBox (Select Field)
+
+| SDS Style Key | Material | Simple | Notes |
+|---|:---:|:---:|---|
+| `SelectFieldStyle` | ⚠️ | ✅ | Material: aliases to `MaterialComboBoxStyle` |
+| `SelectFieldItemStyle` | ❌ | ✅ | Material has no dedicated ComboBox item style |
+| `SelectFieldErrorStyle` | ❌ | ✅ | Material has no dedicated error ComboBox style |
+
+### ToggleButton
+
+| SDS Style Key | Material | Simple | Notes |
+|---|:---:|:---:|---|
+| `ToggleButtonStyle` | ⚠️ | ✅ | Material: aliases to `MaterialTextToggleButtonStyle` |
+| `SmallToggleButtonStyle` | ❌ | ✅ | Material has no size variants |
+| `MediumToggleButtonStyle` | ❌ | ✅ | Material has no size variants |
+
+### Controls with no Material equivalent
+
+| SDS Style Key | Material | Simple | Notes |
+|---|:---:|:---:|---|
+| `ToolTipStyle` | ❌ | ✅ | Material v2 has no ToolTip style |
+| `ExpanderStyle` | ❌ | ✅ | Material v2 has no Expander style |
+| `AutoSuggestBoxStyle` | ❌ | ✅ | Material v2 has no AutoSuggestBox style |
+
 ## Using Theme-Specific Style Keys Directly
 
 While Semantic Style Keys are the recommended approach, you can reference theme-prefixed style keys directly if needed. For example, if you want to use a Simple-specific style that has no semantic equivalent:
