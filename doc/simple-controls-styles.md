@@ -167,9 +167,9 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `MediumIconButtonSubtleStyle`          | `SimpleMediumIconButtonSubtleStyle`        |
 | `MediumIconButtonDangerPrimaryStyle`   | `SimpleMediumIconButtonDangerPrimaryStyle` |
 | `MediumIconButtonDangerSubtleStyle`    | `SimpleMediumIconButtonDangerSubtleStyle`  |
-| `InputTextBoxStyle`                    | `SimpleTextBoxStyle`                  |
-| `InputTextBoxErrorStyle`               | `SimpleTextBoxErrorStyle`             |
-| `InputTextBoxSmallStyle`               | `SimpleTextBoxSmallStyle`             |
+| `TextBoxStyle`                         | `SimpleTextBoxStyle`                  |
+| `TextBoxErrorStyle`                    | `SimpleTextBoxErrorStyle`             |
+| `TextBoxSmallStyle`                    | `SimpleTextBoxSmallStyle`             |
 | `FilledTextBoxStyle`                   | `SimpleTextBoxStyle`                  |
 | `OutlinedTextBoxStyle`                 | `SimpleOutlinedTextBoxStyle`          |
 | `PasswordBoxStyle`                     | `SimplePasswordBoxStyle`                   |

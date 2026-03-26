@@ -291,7 +291,7 @@ These register default styles for controls when no explicit `Style` is set:
 Short names without the `Simple` prefix for consumer convenience:
 
 `PrimaryButtonStyle`, `NeutralButtonStyle`, `SubtleButtonStyle`,
-`InputTextBoxStyle`, `SelectFieldStyle`,
+`TextBoxStyle`, `SelectFieldStyle`,
 `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`,
 `PersonPictureStyle`, `HyperlinkButtonStyle`, `NavigationViewStyle`,
 `ProgressBarStyle`, `ProgressRingStyle`, `PipsPagerStyle`,
