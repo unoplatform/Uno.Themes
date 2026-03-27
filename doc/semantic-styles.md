@@ -2,240 +2,299 @@
 uid: Uno.Themes.SemanticStyles
 ---
 
-# Uno Themes Semantic Design Language
+# Semantic Styles
 
-## Overview
-
-The **Uno Themes Semantic Design Language** provides a unified, theme-agnostic way to style controls across different design systems. Instead of referencing theme-specific style keys (e.g., `MaterialFilledButtonStyle` or `SimplePrimaryButtonStyle`), you use **Semantic Style Keys** — unprefixed names like `FilledButtonStyle` — that automatically resolve to the correct implementation for whichever theme is active in your application.
-
-This allows you to write your XAML once and seamlessly switch between design systems (Material, Simple, etc.) without changing any style references.
-
-### How It Works
-
-Each theme library registers aliases that map semantic keys to its own native styles. For example:
-
-- With **Material** active, `FilledButtonStyle` resolves to `MaterialFilledButtonStyle`
-- With **Simple** active, `FilledButtonStyle` resolves to `SimplePrimaryButtonStyle`
+Uno Themes provides a **semantic style abstraction layer** that lets you write theme-agnostic XAML. Instead of referencing theme-prefixed style keys (e.g. `MaterialFilledButtonStyle` or `SimplePrimaryButtonStyle`), you use a single **semantic key** like `FilledButtonStyle` and the active theme resolves it to the correct design-system-specific style at runtime.
 
 ```xml
-<!-- Theme-agnostic — works with any active theme -->
-<Button Style="{StaticResource FilledButtonStyle}" Content="Submit" />
+<!-- Works under both Material and Simple themes -->
+<Button Style="{StaticResource FilledButtonStyle}" Content="Save" />
 ```
 
-When a design system doesn't have a direct equivalent for a semantic key, it either:
+## How It Works
 
-- **Aliases** the key to its closest match (e.g., Simple maps `FilledTonalButtonStyle` and `OutlinedButtonStyle` to its single `SimpleNeutralButtonStyle`)
-- **Omits** the key entirely if the control isn't supported
+Each theme's `_Resources.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
 
-## Style Support Matrix
+- **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
+- **Simple**: `FilledButtonStyle` &rarr; `SimplePrimaryButtonStyle`
 
-The following matrix shows which semantic style keys are supported by each theme. Only control **Styles** are listed here (not lightweight styling resources).
+Semantic names are based on **Material v2 naming** (with the `Material` prefix removed), because Material has the richest and most widely recognized vocabulary. Existing theme-prefixed keys remain valid &mdash; the semantic layer is purely additive.
 
-**Legend:**
+## Control Style Mappings
 
-| Icon | Meaning |
-|------|---------|
-| ✅ | Full support — the theme has a distinct style for this key |
-| ⚠️ | Alias — the semantic key resolves to the closest available style (no distinct variant) |
-| ❌ | No support — the theme does not implement this control or variant |
+The following tables show every semantic style key and how it resolves under each theme.
 
 ### Button
 
-| Semantic Style Key       | Material | Simple | Notes |
-|--------------------------|:--------:|:------:|-------|
-| `FilledButtonStyle`      | ✅ | ✅ | |
-| `FilledTonalButtonStyle` | ✅ | ⚠️ | Simple: aliases to `SimpleNeutralButtonStyle` (shared with Outlined) |
-| `OutlinedButtonStyle`    | ✅ | ⚠️ | Simple: aliases to `SimpleNeutralButtonStyle` (shared with FilledTonal) |
-| `TextButtonStyle`        | ✅ | ✅ | |
-| `ElevatedButtonStyle`    | ✅ | ❌ | Simple has no elevated/shadow variant |
-| `IconButtonStyle`        | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `FilledButtonStyle` | `MaterialFilledButtonStyle` | `SimplePrimaryButtonStyle` | Default implicit style for both themes |
+| `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | **GAP** | Simple has no elevated/shadow variant |
+| `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleNeutralButtonStyle` | Simple "Neutral" is closest tonal match |
+| `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleNeutralButtonStyle` | Same Simple target as FilledTonal |
+| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleSubtleButtonStyle` | Text-only appearance |
+| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonPrimaryStyle` | Simple has multiple icon button colors; Primary is default |
 
 ### Floating Action Button (FAB)
 
-| Semantic Style Key          | Material | Simple | Notes |
-|-----------------------------|:--------:|:------:|-------|
-| `FabStyle`                  | ✅ | ⚠️ | Simple: aliases to icon button styles (no dedicated FAB control) |
-| `SmallFabStyle`             | ✅ | ⚠️ | |
-| `LargeFabStyle`             | ✅ | ⚠️ | |
-| `SecondaryFabStyle`         | ✅ | ⚠️ | |
-| `SecondarySmallFabStyle`    | ✅ | ⚠️ | |
-| `SecondaryLargeFabStyle`    | ✅ | ⚠️ | |
-| `SurfaceFabStyle`           | ✅ | ⚠️ | |
-| `SurfaceSmallFabStyle`      | ✅ | ⚠️ | |
-| `SurfaceLargeFabStyle`      | ✅ | ⚠️ | |
-| `TertiaryFabStyle`          | ✅ | ⚠️ | |
-| `TertiarySmallFabStyle`     | ✅ | ⚠️ | |
-| `TertiaryLargeFabStyle`     | ✅ | ⚠️ | |
+FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to existing icon button styles.
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonPrimaryStyle` | Primary icon button as FAB equivalent |
+| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleSmallIconButtonPrimaryStyle` | |
+| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonPrimaryStyle` | No large variant in Simple |
+| `SecondaryFabStyle` | `MaterialSecondaryFabStyle` | `SimpleIconButtonNeutralStyle` | |
+| `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
+| `SecondaryLargeFabStyle` | `MaterialSecondaryLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
+| `TertiaryFabStyle` | `MaterialTertiaryFabStyle` | `SimpleIconButtonSubtleStyle` | |
+| `TertiarySmallFabStyle` | `MaterialTertiarySmallFabStyle` | `SimpleSmallIconButtonSubtleStyle` | |
+| `TertiaryLargeFabStyle` | `MaterialTertiaryLargeFabStyle` | `SimpleIconButtonSubtleStyle` | |
+| `SurfaceFabStyle` | `MaterialSurfaceFabStyle` | `SimpleIconButtonNeutralStyle` | |
+| `SurfaceSmallFabStyle` | `MaterialSurfaceSmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
+| `SurfaceLargeFabStyle` | `MaterialSurfaceLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
 
 ### ToggleButton
 
-| Semantic Style Key        | Material | Simple | Notes |
-|---------------------------|:--------:|:------:|-------|
-| `TextToggleButtonStyle`   | ✅ | ⚠️ | Simple: aliases to `SimpleDefaultToggleButtonStyle` |
-| `IconToggleButtonStyle`   | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `TextToggleButtonStyle` | `MaterialTextToggleButtonStyle` | `SimpleDefaultToggleButtonStyle` | |
+| `IconToggleButtonStyle` | `MaterialIconToggleButtonStyle` | `SimpleIconToggleButtonStyle` | Compact circular icon-only toggle |
 
 ### TextBox
 
-| Semantic Style Key      | Material | Simple | Notes |
-|-------------------------|:--------:|:------:|-------|
-| `FilledTextBoxStyle`    | ✅ | ⚠️ | Simple: aliases to `SimpleTextBoxStyle` (filled is the default) |
-| `OutlinedTextBoxStyle`  | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleTextBoxStyle` | Simple's single Input design |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Surface background with visible border |
 
 ### PasswordBox
 
-| Semantic Style Key          | Material | Simple | Notes |
-|-----------------------------|:--------:|:------:|-------|
-| `FilledPasswordBoxStyle`    | ✅ | ⚠️ | Simple: aliases to `SimplePasswordBoxStyle` (filled is the default) |
-| `OutlinedPasswordBoxStyle`  | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `FilledPasswordBoxStyle` | `MaterialFilledPasswordBoxStyle` | `SimplePasswordBoxStyle` | |
+| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | Surface background with visible border |
 
 ### HyperlinkButton
 
-| Semantic Style Key              | Material | Simple | Notes |
-|---------------------------------|:--------:|:------:|-------|
-| `HyperlinkButtonStyle`         | ✅ | ✅ | |
-| `SecondaryHyperlinkButtonStyle`| ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `HyperlinkButtonStyle` | `MaterialHyperlinkButtonStyle` | `SimpleHyperlinkButtonStyle` | Primary underlined link |
+| `SecondaryHyperlinkButtonStyle` | `MaterialSecondaryHyperlinkButtonStyle` | `SimpleSecondaryHyperlinkButtonStyle` | Secondary underlined link |
 
 ### ComboBox
 
-| Semantic Style Key | Material | Simple | Notes |
-|--------------------|:--------:|:------:|-------|
-| `ComboBoxStyle`    | ✅ | ⚠️ | Simple: aliases to `SimpleSelectFieldStyle` |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleSelectFieldStyle` | Simple names this control "SelectField" |
 
 ### CheckBox
 
-| Semantic Style Key | Material | Simple | Notes |
-|--------------------|:--------:|:------:|-------|
-| `CheckBoxStyle`    | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `CheckBoxStyle` | `MaterialCheckBoxStyle` | `SimpleCheckBoxStyle` | Direct match |
 
 ### RadioButton
 
-| Semantic Style Key  | Material | Simple | Notes |
-|---------------------|:--------:|:------:|-------|
-| `RadioButtonStyle`  | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `RadioButtonStyle` | `MaterialRadioButtonStyle` | `SimpleRadioButtonStyle` | Direct match |
 
 ### ToggleSwitch
 
-| Semantic Style Key   | Material | Simple | Notes |
-|----------------------|:--------:|:------:|-------|
-| `ToggleSwitchStyle`  | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `ToggleSwitchStyle` | `MaterialToggleSwitchStyle` | `SimpleToggleSwitchStyle` | Direct match |
 
 ### Slider
 
-| Semantic Style Key | Material | Simple | Notes |
-|--------------------|:--------:|:------:|-------|
-| `SliderStyle`      | ✅ | ✅ | |
-
-### AppBarButton
-
-| Semantic Style Key    | Material | Simple | Notes |
-|-----------------------|:--------:|:------:|-------|
-| `AppBarButtonStyle`   | ✅ | ✅ | |
-
-### CalendarView
-
-| Semantic Style Key    | Material | Simple | Notes |
-|-----------------------|:--------:|:------:|-------|
-| `CalendarViewStyle`   | ✅ | ✅ | |
-
-### CalendarDatePicker
-
-| Semantic Style Key          | Material | Simple | Notes |
-|-----------------------------|:--------:|:------:|-------|
-| `CalendarDatePickerStyle`   | ✅ | ✅ | |
-
-### DatePicker
-
-| Semantic Style Key | Material | Simple | Notes |
-|--------------------|:--------:|:------:|-------|
-| `DatePickerStyle`  | ✅ | ✅ | |
-
-### ContentDialog
-
-| Semantic Style Key     | Material | Simple | Notes |
-|------------------------|:--------:|:------:|-------|
-| `ContentDialogStyle`   | ✅ | ✅ | |
-
-### ListView
-
-| Semantic Style Key    | Material | Simple | Notes |
-|-----------------------|:--------:|:------:|-------|
-| `ListViewStyle`       | ✅ | ✅ | |
-| `ListViewItemStyle`   | ✅ | ✅ | |
-
-### MenuFlyout
-
-| Semantic Style Key            | Material | Simple | Notes |
-|-------------------------------|:--------:|:------:|-------|
-| `MenuFlyoutPresenterStyle`    | ✅ | ✅ | |
-| `MenuFlyoutItemStyle`         | ✅ | ✅ | |
-| `MenuFlyoutSeparatorStyle`    | ✅ | ✅ | |
-| `MenuFlyoutSubItemStyle`      | ✅ | ✅ | |
-| `ToggleMenuFlyoutItemStyle`   | ✅ | ✅ | |
-| `RadioMenuFlyoutItemStyle`    | ✅ | ✅ | |
-
-### FlyoutPresenter
-
-| Semantic Style Key       | Material | Simple | Notes |
-|--------------------------|:--------:|:------:|-------|
-| `FlyoutPresenterStyle`   | ✅ | ✅ | |
-
-### CommandBar
-
-| Semantic Style Key  | Material | Simple | Notes |
-|---------------------|:--------:|:------:|-------|
-| `CommandBarStyle`   | ✅ | ❌ | Simple has no CommandBar style |
-
-### NavigationView
-
-| Semantic Style Key        | Material | Simple | Notes |
-|---------------------------|:--------:|:------:|-------|
-| `NavigationViewStyle`     | ✅ | ✅ | |
-| `NavigationViewItemStyle` | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `SliderStyle` | `MaterialSliderStyle` | `SimpleSliderStyle` | Direct match |
 
 ### ProgressBar
 
-| Semantic Style Key   | Material | Simple | Notes |
-|----------------------|:--------:|:------:|-------|
-| `ProgressBarStyle`   | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `ProgressBarStyle` | `MaterialProgressBarStyle` | `SimpleProgressBarStyle` | Horizontal indicator |
 
 ### ProgressRing
 
-| Semantic Style Key   | Material | Simple | Notes |
-|----------------------|:--------:|:------:|-------|
-| `ProgressRingStyle`  | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `ProgressRingStyle` | `MaterialProgressRingStyle` | `SimpleProgressRingStyle` | Circular indicator |
+
+### ListView
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `ListViewStyle` | `MaterialListViewStyle` | `SimpleListViewStyle` | Direct match |
+| `ListViewItemStyle` | `MaterialListViewItemStyle` | `SimpleListViewItemStyle` | Direct match |
+
+### ContentDialog
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `ContentDialogStyle` | `MaterialContentDialogStyle` | `SimpleContentDialogStyle` | Direct match |
+
+### CommandBar
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `CommandBarStyle` | `MaterialCommandBarStyle` | **GAP** | Simple has no CommandBar style |
+
+### AppBarButton
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `AppBarButtonStyle` | `MaterialAppBarButtonStyle` | `SimpleAppBarButtonStyle` | Direct match |
+
+### NavigationView
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `NavigationViewStyle` | `MaterialNavigationViewStyle` | `SimpleNavigationViewStyle` | |
+| `NavigationViewItemStyle` | `MaterialNavigationViewItemStyle` | `SimpleNavigationViewItemStyle` | |
+
+### CalendarView
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `CalendarViewStyle` | `MaterialCalendarViewStyle` | `SimpleCalendarViewStyle` | Direct match |
+
+### CalendarDatePicker
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `CalendarDatePickerStyle` | `MaterialCalendarDatePickerStyle` | `SimpleCalendarDatePickerStyle` | Direct match |
+
+### DatePicker
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `DatePickerStyle` | `MaterialDatePickerStyle` | `SimpleDatePickerStyle` | Direct match |
+
+### MediaPlayerElement
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `MediaTransportControlsStyle` | `MaterialMediaTransportControlsStyle` | **GAP** | Simple has no media style |
 
 ### PipsPager
 
-| Semantic Style Key | Material | Simple | Notes |
-|--------------------|:--------:|:------:|-------|
-| `PipsPagerStyle`   | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `PipsPagerStyle` | `MaterialPipsPagerStyle` | `SimplePipsPagerStyle` | Pagination dots |
 
 ### RatingControl
 
-| Semantic Style Key   | Material | Simple | Notes |
-|----------------------|:--------:|:------:|-------|
-| `RatingControlStyle` | ✅ | ✅ | |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `RatingControlStyle` | `MaterialRatingControlStyle` | `SimpleRatingControlStyle` | Star rating with brand colors |
 
-### MediaTransportControls
+### Flyout / MenuFlyout
 
-| Semantic Style Key             | Material | Simple | Notes |
-|--------------------------------|:--------:|:------:|-------|
-| `MediaTransportControlsStyle`  | ✅ | ❌ | Simple has no media transport style |
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `FlyoutPresenterStyle` | `MaterialFlyoutPresenterStyle` | `SimpleFlyoutPresenterStyle` | |
+| `MenuFlyoutPresenterStyle` | `MaterialMenuFlyoutPresenterStyle` | `SimpleMenuFlyoutPresenterStyle` | Direct match |
+| `MenuFlyoutItemStyle` | `MaterialMenuFlyoutItemStyle` | `SimpleMenuFlyoutItemStyle` | Direct match |
+| `MenuFlyoutSeparatorStyle` | `MaterialMenuFlyoutSeparatorStyle` | `SimpleMenuFlyoutSeparatorStyle` | Direct match |
+| `MenuFlyoutSubItemStyle` | `MaterialMenuFlyoutSubItemStyle` | `SimpleMenuFlyoutSubItemStyle` | Direct match |
+| `ToggleMenuFlyoutItemStyle` | `MaterialToggleMenuFlyoutItemStyle` | `SimpleToggleMenuFlyoutItemStyle` | Direct match |
+| `RadioMenuFlyoutItemStyle` | `MaterialRadioMenuFlyoutItemStyle` | `SimpleRadioMenuFlyoutItemStyle` | Radio bullet indicator |
 
-## Using Theme-Specific Style Keys Directly
+## Typography
 
-While Semantic Style Keys are the recommended approach, you can reference theme-prefixed style keys directly if needed. For example, if you want to use a Simple-specific style that has no semantic equivalent:
+Both themes provide identical semantic typography keys based on the Material Design 3 type scale.
+
+| Semantic Key | Material | Simple |
+|---|---|---|
+| `DisplayLarge` | `MaterialDisplayLarge` | `SimpleDisplayLarge` |
+| `DisplayMedium` | `MaterialDisplayMedium` | `SimpleDisplayMedium` |
+| `DisplaySmall` | `MaterialDisplaySmall` | `SimpleDisplaySmall` |
+| `HeadlineLarge` | `MaterialHeadlineLarge` | `SimpleHeadlineLarge` |
+| `HeadlineMedium` | `MaterialHeadlineMedium` | `SimpleHeadlineMedium` |
+| `HeadlineSmall` | `MaterialHeadlineSmall` | `SimpleHeadlineSmall` |
+| `TitleLarge` | `MaterialTitleLarge` | `SimpleTitleLarge` |
+| `TitleMedium` | `MaterialTitleMedium` | `SimpleTitleMedium` |
+| `TitleSmall` | `MaterialTitleSmall` | `SimpleTitleSmall` |
+| `BodyLarge` | `MaterialBodyLarge` | `SimpleBodyLarge` |
+| `BodyMedium` | `MaterialBodyMedium` | `SimpleBodyMedium` |
+| `BodySmall` | `MaterialBodySmall` | `SimpleBodySmall` |
+| `LabelLarge` | `MaterialLabelLarge` | `SimpleLabelLarge` |
+| `LabelMedium` | `MaterialLabelMedium` | `SimpleLabelMedium` |
+| `LabelSmall` | `MaterialLabelSmall` | `SimpleLabelSmall` |
+| `LabelExtraSmall` | `MaterialLabelExtraSmall` | `SimpleLabelExtraSmall` |
+| `CaptionLarge` | `MaterialCaptionLarge` | `SimpleCaptionLarge` |
+| `CaptionMedium` | `MaterialCaptionMedium` | `SimpleCaptionMedium` |
+| `CaptionSmall` | `MaterialCaptionSmall` | `SimpleCaptionSmall` |
+
+## Gaps
+
+The following semantic keys have no Simple theme equivalent. When used under the Simple theme, the control falls back to WinUI default styling.
+
+| Semantic Key | Priority | Reason |
+|---|---|---|
+| `ElevatedButtonStyle` | High | Simple has no elevated/shadow button variant |
+| `CommandBarStyle` | Medium | Simple has no CommandBar style |
+| `MediaTransportControlsStyle` | Low | Niche control |
+
+## Theme-Specific Styles
+
+### Simple-Only Styles
+
+These styles exist only in the Simple theme and have no Material equivalent. They are not part of the semantic layer and must be referenced with their `Simple`-prefixed keys.
+
+| Style Key | Control | Notes |
+|---|---|---|
+| `SimpleDangerPrimaryButtonStyle` | `Button` | Destructive filled action |
+| `SimpleDangerSubtleButtonStyle` | `Button` | Destructive text action |
+| `SimpleIconButtonNeutralStyle` | `Button` | Neutral icon button |
+| `SimpleIconButtonSubtleStyle` | `Button` | Subtle icon button |
+| `SimpleIconButtonDangerPrimaryStyle` | `Button` | Destructive icon button (filled) |
+| `SimpleIconButtonDangerSubtleStyle` | `Button` | Destructive icon button (text) |
+| `SimpleSmall*` / `SimpleMedium*` variants | `Button` | Size variants (Material has no size variants) |
+| `SimpleTextBoxErrorStyle` | `TextBox` | Dedicated error state |
+| `SimpleTextBoxSmallStyle` | `TextBox` | Small size variant |
+| `SimpleSelectFieldErrorStyle` | `ComboBox` | Dedicated error state |
+| `SimplePersonPictureStyle` (6 variants) | `PersonPicture` | Material has no PersonPicture |
+| `SimpleExpanderStyle` | `Expander` | Material has no Expander style |
+| `SimpleAutoSuggestBoxStyle` | `AutoSuggestBox` | Material has no AutoSuggestBox style |
+| `SimpleToolTipStyle` | `ToolTip` | Material has no ToolTip style |
+
+### Material-Only Styles
+
+These are Material-internal styles excluded from the semantic layer.
+
+| Style Key | Reason |
+|---|---|
+| `MaterialRippleStyle` | Ripple is a Material-specific custom control |
+| `MaterialBaseButtonStyle` | Internal base style, not consumer-facing |
+| `MaterialDeleteButtonStyle` | TextBox internal button |
+| `MaterialRevealButtonStyle` | PasswordBox internal button |
+| `MaterialSliderThumbStyle` | Slider internal part |
+| `MaterialContentDialogButtonStyle` | Dialog internal button |
+
+## Lightweight Styling Portability
+
+Semantic style keys also enable portable [lightweight styling](lightweight-styling.md). Both themes expose semantic resource keys for customizing control appearance:
 
 ```xml
-<!-- Simple-specific styles can still be referenced directly -->
-<Button Style="{StaticResource SimpleDangerPrimaryButtonStyle}" Content="Delete" />
-<TextBox Style="{StaticResource SimpleTextBoxErrorStyle}" />
+<!-- This override works under both Material and Simple themes -->
+<SolidColorBrush x:Key="FilledButtonForeground" Color="Red" />
 ```
 
-> [!NOTE]
-> Referencing theme-prefixed keys (e.g., `SimplePrimaryButtonStyle`, `MaterialFilledButtonStyle`) ties your XAML to a specific design system. Prefer Semantic Style Keys for cross-theme compatibility.
+- **Material** templates already reference unprefixed keys like `FilledButtonForeground` directly.
+- **Simple** templates reference `Simple`-prefixed keys (e.g. `SimplePrimaryButtonForeground`) which alias to the semantic keys. Overriding either key works.
 
-For the full list of theme-specific styles, see:
+For more details on per-control lightweight styling resources, see the individual control style pages:
 
-- [Material Control Styles](material-controls-styles.md)
-- [Simple Control Styles](simple-controls-styles.md)
+- [Button](styles/Button.md)
+- [TextBox](styles/TextBox.md)
+- [PasswordBox](styles/PasswordBox.md)
+- [CheckBox](styles/CheckBox.md)
+- [RadioButton](styles/RadioButton.md)
+- [ToggleSwitch](styles/ToggleSwitch.md)
+- [Slider](styles/Slider.md)
+- [ToggleButton](styles/ToggleButton.md)
