@@ -58,22 +58,22 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
-| `TextToggleButtonStyle` | `MaterialTextToggleButtonStyle` | `SimpleDefaultToggleButtonStyle` | |
-| `IconToggleButtonStyle` | `MaterialIconToggleButtonStyle` | `SimpleIconToggleButtonStyle` | Compact circular icon-only toggle |
+| `TextToggleButtonStyle` | `MaterialTextToggleButtonStyle` | `SimpleTextToggleButtonStyle` | Text content toggle |
+| `IconToggleButtonStyle` | `MaterialIconToggleButtonStyle` | `SimpleIconToggleButtonStyle` | Compact icon-only toggle |
 
 ### TextBox
 
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
-| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleFilledTextBoxStyle` | |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Default implicit style for Simple theme |
+| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleFilledTextBoxStyle` | Background fill, no border |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Default implicit style for Simple |
 
 ### PasswordBox
 
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
-| `FilledPasswordBoxStyle` | `MaterialFilledPasswordBoxStyle` | `SimplePasswordBoxStyle` | |
-| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | Surface background with visible border |
+| `FilledPasswordBoxStyle` | `MaterialFilledPasswordBoxStyle` | `SimpleFilledPasswordBoxStyle` | Background fill with border |
+| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | Default implicit style for Simple |
 
 ### HyperlinkButton
 
@@ -86,7 +86,7 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
-| `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleSelectFieldStyle` | Simple names this control "SelectField" |
+| `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleComboBoxStyle` | Direct match |
 
 ### CheckBox
 
@@ -232,13 +232,26 @@ Both themes provide identical semantic typography keys based on the Material Des
 
 ## Gaps
 
-The following semantic keys have no Simple theme equivalent. When used under the Simple theme, the control falls back to WinUI default styling.
+### Simple gaps (no Simple equivalent for these semantic keys)
 
-| Semantic Key | Priority | Reason |
+When used under the Simple theme, these controls fall back to WinUI default styling.
+
+| Semantic Key | Material Style | Reason |
 |---|---|---|
-| `ElevatedButtonStyle` | High | Simple has no elevated/shadow button variant |
-| `CommandBarStyle` | Medium | Simple has no CommandBar style |
-| `MediaTransportControlsStyle` | Low | Niche control |
+| `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | Simple has no elevated/shadow button variant |
+| `CommandBarStyle` | `MaterialCommandBarStyle` | Simple has no CommandBar style |
+| `MediaTransportControlsStyle` | `MaterialMediaTransportControlsStyle` | Niche control |
+
+### Material gaps (no Material equivalent for these Simple styles)
+
+These controls have Simple styles but no Material counterpart, so no semantic alias exists. They must be referenced with their `Simple`-prefixed keys directly.
+
+| Simple Style | Control | Reason |
+|---|---|---|
+| `SimpleExpanderStyle` | `Expander` | Material has no Expander style |
+| `SimpleAutoSuggestBoxStyle` | `AutoSuggestBox` | Material has no AutoSuggestBox style |
+| `SimpleToolTipStyle` | `ToolTip` | Material has no ToolTip style |
+| `SimplePersonPictureStyle` (6 variants) | `PersonPicture` | Material has no PersonPicture style |
 
 ## Theme-Specific Styles
 
@@ -257,11 +270,8 @@ These styles exist only in the Simple theme and have no Material equivalent. The
 | `SimpleSmall*` / `SimpleMedium*` variants | `Button` | Size variants (Material has no size variants) |
 | `SimpleTextBoxErrorStyle` | `TextBox` | Dedicated error state |
 | `SimpleTextBoxSmallStyle` | `TextBox` | Small size variant |
-| `SimpleSelectFieldErrorStyle` | `ComboBox` | Dedicated error state |
-| `SimplePersonPictureStyle` (6 variants) | `PersonPicture` | Material has no PersonPicture |
-| `SimpleExpanderStyle` | `Expander` | Material has no Expander style |
-| `SimpleAutoSuggestBoxStyle` | `AutoSuggestBox` | Material has no AutoSuggestBox style |
-| `SimpleToolTipStyle` | `ToolTip` | Material has no ToolTip style |
+| `SimpleComboBoxErrorStyle` | `ComboBox` | Dedicated error state |
+| `SimpleComboBoxItemStyle` | `ComboBoxItem` | Dropdown item style |
 
 ### Material-Only Styles
 

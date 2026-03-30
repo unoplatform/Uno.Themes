@@ -14,8 +14,8 @@
 		
 		Simple-only resources (error styles) stay as-is with Simple prefix.
 		
-		Styles: SimpleSelectFieldStyle (ComboBox), SimpleSelectFieldItemStyle (ComboBoxItem),
-		SimpleSelectFieldErrorStyle (error variant)
+		Styles: SimpleComboBoxStyle (ComboBox), SimpleComboBoxItemStyle (ComboBoxItem),
+		SimpleComboBoxErrorStyle (error variant)
 		SDS source: Select/select.css
 	-->
 
@@ -127,8 +127,8 @@
 	<x:Double x:Key="SimpleComboBoxPopupMaxHeight">400</x:Double>
 	<x:String x:Key="SimpleComboBoxDropDownGlyphIcon">&#xE96E;</x:String>
 
-	<!-- SimpleSelectFieldStyle - Select Field (Figma: Select Field) -->
-	<Style x:Key="SimpleSelectFieldStyle"
+	<!-- SimpleComboBoxStyle - ComboBox (Figma: Select Field) -->
+	<Style x:Key="SimpleComboBoxStyle"
 		   TargetType="ComboBox">
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
@@ -145,7 +145,7 @@
 		<Setter Property="CornerRadius" Value="{StaticResource SimpleComboBoxCornerRadius}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
 		<Setter Property="FocusVisualMargin" Value="-3" />
-		<Setter Property="ItemContainerStyle" Value="{StaticResource SimpleSelectFieldItemStyle}" />
+		<Setter Property="ItemContainerStyle" Value="{StaticResource SimpleComboBoxItemStyle}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ComboBox">
@@ -291,8 +291,8 @@
 		</Setter>
 	</Style>
 
-	<!-- SimpleSelectFieldItemStyle - Select Field dropdown item -->
-	<Style x:Key="SimpleSelectFieldItemStyle"
+	<!-- SimpleComboBoxItemStyle - ComboBox dropdown item -->
+	<Style x:Key="SimpleComboBoxItemStyle"
 		   TargetType="ComboBoxItem">
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="14" />
@@ -372,10 +372,10 @@
 		</Setter>
 	</Style>
 
-	<!-- SimpleSelectFieldErrorStyle - Error state -->
-	<Style x:Key="SimpleSelectFieldErrorStyle"
+	<!-- SimpleComboBoxErrorStyle - Error state -->
+	<Style x:Key="SimpleComboBoxErrorStyle"
 		   TargetType="ComboBox"
-		   BasedOn="{StaticResource SimpleSelectFieldStyle}">
+		   BasedOn="{StaticResource SimpleComboBoxStyle}">
 		<Setter Property="BorderBrush" Value="{ThemeResource ErrorBrush}" />
 	</Style>
 

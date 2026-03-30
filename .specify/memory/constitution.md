@@ -29,7 +29,7 @@ Style key names MUST reflect the **design system's vocabulary**, not WinUI/UWP
 implementation concepts:
 
 - **Simple/SDS**: `SimplePrimaryButtonStyle`, `SimpleTextBoxStyle`,
-  `SimpleSelectFieldStyle` — names match the Figma component naming
+  `SimpleComboBoxStyle` — names match the WinUI control naming
 - **Material**: `MaterialFilledButtonStyle`, `MaterialOutlinedCardStyle` —
   names match Material Design 3 naming
 - **Cupertino**: `CupertinoDefaultButtonStyle` — names match Apple HIG naming

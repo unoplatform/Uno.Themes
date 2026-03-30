@@ -48,9 +48,9 @@ uid: Uno.Themes.Simple.Styles
 | `CalendarView`              | `SimpleCalendarViewStyle`                 |                  |
 | `CalendarView`              | `SimpleDefaultCalendarViewStyle`          | True             |
 | `CheckBox`                  | `SimpleCheckBoxStyle`                     | True             |
-| `ComboBox`                  | `SimpleSelectFieldStyle`                  | True             |
-| `ComboBox`                  | `SimpleSelectFieldErrorStyle`             |                  |
-| `ComboBoxItem`              | `SimpleSelectFieldItemStyle`              |                  |
+| `ComboBox`                  | `SimpleComboBoxStyle`                     | True             |
+| `ComboBox`                  | `SimpleComboBoxErrorStyle`                |                  |
+| `ComboBoxItem`              | `SimpleComboBoxItemStyle`                 |                  |
 | `ContentDialog`             | `SimpleContentDialogStyle`                |                  |
 | `ContentDialog`             | `SimpleDefaultContentDialogStyle`         | True             |
 | `DatePicker`                | `SimpleDatePickerStyle`                   |                  |
@@ -176,10 +176,9 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `PasswordBoxStyle`                     | `SimplePasswordBoxStyle`                   |
 | `FilledPasswordBoxStyle`               | `SimplePasswordBoxStyle`                   |
 | `OutlinedPasswordBoxStyle`             | `SimpleOutlinedPasswordBoxStyle`           |
-| `ComboBoxStyle`                        | `SimpleSelectFieldStyle`                   |
-| `SelectFieldStyle`                     | `SimpleSelectFieldStyle`                   |
-| `SelectFieldItemStyle`                 | `SimpleSelectFieldItemStyle`               |
-| `SelectFieldErrorStyle`                | `SimpleSelectFieldErrorStyle`              |
+| `ComboBoxStyle`                        | `SimpleComboBoxStyle`                      |
+| `ComboBoxItemStyle`                    | `SimpleComboBoxItemStyle`                  |
+| `ComboBoxErrorStyle`                   | `SimpleComboBoxErrorStyle`                 |
 | `CheckBoxStyle`                        | `SimpleCheckBoxStyle`                      |
 | `RadioButtonStyle`                     | `SimpleRadioButtonStyle`                   |
 | `ToggleSwitchStyle`                    | `SimpleToggleSwitchStyle`                  |

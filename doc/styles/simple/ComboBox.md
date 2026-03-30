@@ -8,9 +8,9 @@ uid: Uno.Themes.Simple.Styles.ComboBox
 
 | Style Key                        | IsDefaultStyle\* |
 |----------------------------------|------------------|
-| `SimpleSelectFieldStyle`         | True             |
-| `SimpleSelectFieldErrorStyle`    |                  |
-| `SimpleSelectFieldItemStyle`     |                  |
+| `SimpleComboBoxStyle`            | True             |
+| `SimpleComboBoxErrorStyle`       |                  |
+| `SimpleComboBoxItemStyle`        |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 

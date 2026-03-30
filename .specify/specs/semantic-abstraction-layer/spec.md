@@ -325,7 +325,7 @@ styles under Material theme.
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleSelectFieldStyle` | Simple names it "SelectField" |
+| `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleComboBoxStyle` | Direct match |
 
 ### CheckBox
 
@@ -611,7 +611,7 @@ already in Simple's `_Resources.xaml`).
 | All `SimpleSmall*` / `SimpleMedium*` button variants | Button | Size variants — Material doesn't have explicit size variants |
 | `SimpleTextBoxErrorStyle` | TextBox | Dedicated error style |
 | `SimpleTextBoxSmallStyle` | TextBox | Size variant |
-| `SimpleSelectFieldErrorStyle` | ComboBox | Dedicated error style |
+| `SimpleComboBoxErrorStyle` | ComboBox | Dedicated error style |
 | `SimplePersonPictureStyle` (6 variants) | PersonPicture | Material has no PersonPicture |
 | `SimpleExpanderStyle` | Expander | Material has no Expander style |
 | `SimpleAutoSuggestBoxStyle` | AutoSuggestBox | Material has no AutoSuggestBox style |

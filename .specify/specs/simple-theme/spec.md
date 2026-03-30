@@ -129,9 +129,9 @@ SDS uses **opacity-based** state overlays (no ripple):
 
 | Style Key | Figma Name | Description |
 |-----------|-----------|-------------|
-| `SimpleSelectFieldStyle` | Select Field | Default dropdown |
-| `SimpleSelectFieldItemStyle` | Select Field/Item | Dropdown item |
-| `SimpleSelectFieldErrorStyle` | Select Field/Error | Error state dropdown |
+| `SimpleComboBoxStyle` | ComboBox | Default dropdown |
+| `SimpleComboBoxItemStyle` | ComboBox/Item | Dropdown item |
+| `SimpleComboBoxErrorStyle` | ComboBox/Error | Error state dropdown |
 
 ### CheckBox (1 style) — `CheckBox.xaml`
 
@@ -252,7 +252,7 @@ These register default styles for controls when no explicit `Style` is set:
 
 - `Button` → `SimplePrimaryButtonStyle`
 - `CheckBox` → `SimpleCheckBoxStyle`
-- `ComboBox` → `SimpleSelectFieldStyle`
+- `ComboBox` → `SimpleComboBoxStyle`
 - `RadioButton` → `SimpleRadioButtonStyle`
 - `TextBox` → `SimpleTextBoxStyle`
 - `ToggleSwitch` → `SimpleToggleSwitchStyle`
@@ -291,7 +291,7 @@ These register default styles for controls when no explicit `Style` is set:
 Short names without the `Simple` prefix for consumer convenience:
 
 `PrimaryButtonStyle`, `NeutralButtonStyle`, `SubtleButtonStyle`,
-`InputTextBoxStyle`, `SelectFieldStyle`,
+`InputTextBoxStyle`, `ComboBoxStyle`,
 `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`,
 `PersonPictureStyle`, `HyperlinkButtonStyle`, `NavigationViewStyle`,
 `ProgressBarStyle`, `ProgressRingStyle`, `PipsPagerStyle`,
@@ -340,7 +340,7 @@ CommandBar, MediaPlayerElement
 1. All style keys use `Simple` prefix: `Simple<Variant><ControlType>Style`
 2. Names follow **Figma component names**, not WinUI control names:
    - Figma "Input Field" → `SimpleTextBoxStyle`
-   - Figma "Select Field" → `SimpleSelectFieldStyle`
+   - Figma "Select Field" → `SimpleComboBoxStyle`
    - Figma "Button/Primary" → `SimplePrimaryButtonStyle`
 3. Size variants append to name: `SimplePrimaryButtonSmallStyle`
 4. Error variants: `SimplePrimaryErrorButtonStyle`
