@@ -26,6 +26,8 @@ jobs:
   - checkout: self
     clean: 'true'
 
+  - template: templates/host-cleanup-linux.yml
+
   - template: templates/dotnet-install-linux.yml
     parameters:
       UnoCheckParameters: '--tfm net10.0-browserwasm'
