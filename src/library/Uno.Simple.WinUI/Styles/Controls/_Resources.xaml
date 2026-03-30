@@ -16,7 +16,7 @@
 		   TargetType="ComboBox" />
 	<Style BasedOn="{StaticResource SimpleRadioButtonStyle}"
 		   TargetType="RadioButton" />
-	<Style BasedOn="{StaticResource SimpleTextBoxStyle}"
+	<Style BasedOn="{StaticResource SimpleOutlinedTextBoxStyle}"
 		   TargetType="TextBox" />
 	<Style BasedOn="{StaticResource SimpleToggleSwitchStyle}"
 		   TargetType="ToggleSwitch" />
@@ -117,12 +117,6 @@
 	<StaticResource x:Key="MediumSubtleButtonStyle" ResourceKey="SimpleMediumSubtleButtonStyle" />
 	<StaticResource x:Key="MediumDangerPrimaryButtonStyle" ResourceKey="SimpleMediumDangerPrimaryButtonStyle" />
 	<StaticResource x:Key="MediumDangerSubtleButtonStyle" ResourceKey="SimpleMediumDangerSubtleButtonStyle" />
-
-	<!-- TextBox: Input / Error / Small -->
-	<!-- SDS has a single Input design — no Filled/Outlined variants -->
-	<StaticResource x:Key="InputTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
-	<StaticResource x:Key="InputTextBoxErrorStyle" ResourceKey="SimpleTextBoxErrorStyle" />
-	<StaticResource x:Key="InputTextBoxSmallStyle" ResourceKey="SimpleTextBoxSmallStyle" />
 
 	<!-- PasswordBox -->
 	<StaticResource x:Key="PasswordBoxStyle" ResourceKey="SimplePasswordBoxStyle" />
@@ -255,8 +249,8 @@
 	<StaticResource x:Key="TextToggleButtonStyle" ResourceKey="SimpleDefaultToggleButtonStyle" />
 	<StaticResource x:Key="IconToggleButtonStyle" ResourceKey="SimpleIconToggleButtonStyle" />
 
-	<!-- TextBox — Filled uses default Input; Outlined uses surface background -->
-	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleTextBoxStyle" />
+	<!-- TextBox — Outlined is default; Filled is an alternate variant -->
+	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="SimpleFilledTextBoxStyle" />
 	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="SimpleOutlinedTextBoxStyle" />
 
 	<!-- PasswordBox -->

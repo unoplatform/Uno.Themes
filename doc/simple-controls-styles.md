@@ -95,7 +95,8 @@ uid: Uno.Themes.Simple.Styles
 | `TextBlock`                 | `SimpleBodySmallStrongTextBlockStyle`     |                  |
 | `TextBlock`                 | `SimpleBodyCodeTextBlockStyle`            |                  |
 | `TextBlock`                 | `SimpleCaptionTextBlockStyle`             |                  |
-| `TextBox`                   | `SimpleTextBoxStyle`                 | True             |
+| `TextBox`                   | `SimpleOutlinedTextBoxStyle`         | True             |
+| `TextBox`                   | `SimpleFilledTextBoxStyle`           |                  |
 | `TextBox`                   | `SimpleTextBoxErrorStyle`            |                  |
 | `TextBox`                   | `SimpleTextBoxSmallStyle`            |                  |
 | `ToggleButton`              | `SimpleDefaultToggleButtonStyle`          | True             |
@@ -167,10 +168,10 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `MediumIconButtonSubtleStyle`          | `SimpleMediumIconButtonSubtleStyle`        |
 | `MediumIconButtonDangerPrimaryStyle`   | `SimpleMediumIconButtonDangerPrimaryStyle` |
 | `MediumIconButtonDangerSubtleStyle`    | `SimpleMediumIconButtonDangerSubtleStyle`  |
-| `InputTextBoxStyle`                    | `SimpleTextBoxStyle`                  |
+| `InputTextBoxStyle`                    | `SimpleOutlinedTextBoxStyle`          |
 | `InputTextBoxErrorStyle`               | `SimpleTextBoxErrorStyle`             |
 | `InputTextBoxSmallStyle`               | `SimpleTextBoxSmallStyle`             |
-| `FilledTextBoxStyle`                   | `SimpleTextBoxStyle`                  |
+| `FilledTextBoxStyle`                   | `SimpleFilledTextBoxStyle`            |
 | `OutlinedTextBoxStyle`                 | `SimpleOutlinedTextBoxStyle`          |
 | `PasswordBoxStyle`                     | `SimplePasswordBoxStyle`                   |
 | `FilledPasswordBoxStyle`               | `SimplePasswordBoxStyle`                   |

@@ -65,8 +65,8 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
-| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleTextBoxStyle` | Simple's single Input design |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Surface background with visible border |
+| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleFilledTextBoxStyle` | |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Default implicit style for Simple theme |
 
 ### PasswordBox
 
@@ -285,8 +285,7 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 <SolidColorBrush x:Key="FilledButtonForeground" Color="Red" />
 ```
 
-- **Material** templates already reference unprefixed keys like `FilledButtonForeground` directly.
-- **Simple** templates reference `Simple`-prefixed keys (e.g. `SimplePrimaryButtonForeground`) which alias to the semantic keys. Overriding either key works.
+Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly.
 
 For more details on per-control lightweight styling resources, see the individual control style pages:
 

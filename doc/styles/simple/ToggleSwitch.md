@@ -14,25 +14,48 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ## Lightweight Styling
 
-| Key                                          | Type              | Value                    |
-|----------------------------------------------|-------------------|--------------------------|
-| `SimpleToggleSwitchTrackWidth`               | `Double`          | `SimpleIconLarge` (40)        |
-| `SimpleToggleSwitchTrackHeight`              | `Double`          | `SimpleIconSmall` (24)        |
-| `SimpleToggleSwitchTrackRadius`              | `Double`          | 12                       |
-| `SimpleToggleSwitchStrokeThickness`          | `Double`          | `SimpleStrokeBorder` (1)     |
-| `SimpleToggleSwitchThumbSize`                | `Double`          | `SimpleSpace400` (16)         |
-| `SimpleToggleSwitchThumbOffMargin`           | `Thickness`       | 4,0,0,0                  |
-| `SimpleToggleSwitchThumbOnMargin`            | `Thickness`       | 20,0,0,0                 |
-| `SimpleToggleSwitchHeaderMargin`             | `Thickness`       | 0,0,0,4                  |
-| `SimpleToggleSwitchTrackOffBackground`                 | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryBrush`    |
-| `SimpleToggleSwitchTrackOffBorderBrush`                | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`          |
-| `SimpleToggleSwitchTrackOnBackground`                  | `SolidColorBrush` | `SimpleBackgroundBrandDefaultBrush`        |
-| `SimpleToggleSwitchThumbOffFill`                       | `SolidColorBrush` | `SimpleIconDefaultSecondaryBrush`          |
-| `SimpleToggleSwitchThumbOnFill`                        | `SolidColorBrush` | `SimpleIconBrandOnBrandBrush`              |
-| `SimpleToggleSwitchTrackOffBackgroundPressed`          | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryPressedBrush` |
-| `SimpleToggleSwitchTrackOnBackgroundPressed`           | `SolidColorBrush` | `SimpleBackgroundBrandPressedBrush`        |
-| `SimpleToggleSwitchTrackDisabledBackground`            | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`     |
-| `SimpleToggleSwitchTrackDisabledBorderBrush`           | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`         |
-| `SimpleToggleSwitchThumbDisabledFill`                  | `SolidColorBrush` | `SimpleIconDisabledDefaultBrush`           |
-| `SimpleToggleSwitchForeground`                         | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`            |
-| `SimpleToggleSwitchForegroundDisabled`                  | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`           |
+### Structural Resources
+
+| Key                                    | Type              | Value                    |
+|----------------------------------------|-------------------|--------------------------|
+| `SimpleToggleSwitchKnobWidth`          | `StaticResource`  | `SimpleSpace300`         |
+| `SimpleToggleSwitchKnobHeight`         | `StaticResource`  | `SimpleSpace300`         |
+| `SimpleToggleSwitchTrackRadius`        | `Double`          | 12                       |
+| `SimpleToggleSwitchThumbOffMargin`     | `Thickness`       | 4,0,0,0                  |
+| `SimpleToggleSwitchThumbOnMargin`      | `Thickness`       | 20,0,0,0                 |
+| `SimpleToggleSwitchHeaderMargin`       | `Thickness`       | 0,0,0,4                  |
+
+### Brush Resources
+
+#### Off-Track
+
+| Key                                          | Type              | Value                      |
+|----------------------------------------------|-------------------|----------------------------|
+| `ToggleSwitchOuterBorderFill`                | `SolidColorBrush` | `SurfaceVariantBrush`      |
+| `ToggleSwitchOuterBorderStroke`              | `SolidColorBrush` | `OutlineBrush`             |
+| `ToggleSwitchOuterBorderFillPressed`         | `SolidColorBrush` | `TertiaryContainerBrush`   |
+| `ToggleSwitchOuterBorderFillDisabled`        | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
+| `ToggleSwitchOuterBorderStrokeDisabled`      | `SolidColorBrush` | `OutlineDisabledBrush`     |
+
+#### On-Track
+
+| Key                                          | Type              | Value                      |
+|----------------------------------------------|-------------------|----------------------------|
+| `ToggleSwitchKnobBoundsFill`                 | `SolidColorBrush` | `PrimaryBrush`             |
+| `ToggleSwitchKnobBoundsFillPressed`          | `SolidColorBrush` | `PrimaryVariantDarkBrush`  |
+| `ToggleSwitchKnobBoundsFillDisabled`         | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
+
+#### Thumb
+
+| Key                                          | Type              | Value                      |
+|----------------------------------------------|-------------------|----------------------------|
+| `ToggleSwitchKnobOffFill`                    | `SolidColorBrush` | `OnSurfaceMediumBrush`     |
+| `ToggleSwitchKnobOnFill`                     | `SolidColorBrush` | `OnPrimaryBrush`           |
+| `ToggleSwitchKnobFillDisabled`               | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |
+
+#### Label
+
+| Key                                          | Type              | Value                      |
+|----------------------------------------------|-------------------|----------------------------|
+| `ToggleSwitchContentForeground`              | `SolidColorBrush` | `OnSurfaceBrush`           |
+| `ToggleSwitchContentForegroundDisabled`      | `SolidColorBrush` | `OnSurfaceDisabledBrush`   |

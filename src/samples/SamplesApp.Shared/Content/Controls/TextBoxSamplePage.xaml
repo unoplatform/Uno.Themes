@@ -489,60 +489,79 @@
 			</sample:SamplePageLayout.CupertinoTemplate>
 			<sample:SamplePageLayout.SimpleTemplate>
 				<DataTemplate>
-					<StackPanel>
-						<!-- Input TextBox -->
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_Input"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource InputTextBoxStyle}" PlaceholderText="Placeholder" Width="300" />
-						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputWithText"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource InputTextBoxStyle}" Text="With text" Width="300" />
-						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputDisabled"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource InputTextBoxStyle}" PlaceholderText="Disabled" IsEnabled="False" Width="300" />
-						</smtx:XamlDisplay>
+					<StackPanel Spacing="16" Margin="16,0">
 
-						<!-- Input TextBox — Small -->
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputSmall"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleTextBoxSmallStyle}" PlaceholderText="Small input" Width="300" />
-						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_InputSmallWithText"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleTextBoxSmallStyle}" Text="Small with text" Width="300" />
-						</smtx:XamlDisplay>
+						<!-- Outlined TextBox (default) -->
+						<TextBlock Text="Outlined (Default)"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16,0,4" />
 
-						<!-- Error TextBox -->
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_Error"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleTextBoxErrorStyle}" Text="Invalid value" Width="300" />
-						</smtx:XamlDisplay>
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_ErrorPlaceholder"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleTextBoxErrorStyle}" PlaceholderText="Required field" Width="300" />
-						</smtx:XamlDisplay>
-
-						<!-- With Header -->
-						<smtx:XamlDisplay UniqueKey="Simple_TextBox_WithHeader"
-										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleTextBoxStyle}" Header="Email address" PlaceholderText="Enter your email" Width="300" />
-						</smtx:XamlDisplay>
-
-						<!-- Outlined TextBox -->
 						<smtx:XamlDisplay UniqueKey="Simple_TextBox_Outlined"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}" PlaceholderText="Outlined placeholder" Width="300" />
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+									 PlaceholderText="Placeholder"
+									 Width="300" />
 						</smtx:XamlDisplay>
+
 						<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedWithText"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}" Text="Outlined with text" Width="300" />
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+									 Text="With text"
+									 Width="300" />
 						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedWithHeader"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+									 Header="Email address"
+									 PlaceholderText="Enter your email"
+									 Width="300" />
+						</smtx:XamlDisplay>
+
 						<smtx:XamlDisplay UniqueKey="Simple_TextBox_OutlinedDisabled"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
-							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}" PlaceholderText="Outlined disabled" IsEnabled="False" Width="300" />
+							<TextBox Style="{StaticResource SimpleOutlinedTextBoxStyle}"
+									 Text="Disabled"
+									 IsEnabled="False"
+									 Width="300" />
 						</smtx:XamlDisplay>
+
+						<!-- Filled TextBox -->
+						<TextBlock Text="Filled"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,32,0,4" />
+
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_Filled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleFilledTextBoxStyle}"
+									 PlaceholderText="Placeholder"
+									 Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_FilledWithText"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleFilledTextBoxStyle}"
+									 Text="With text"
+									 Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_FilledWithHeader"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleFilledTextBoxStyle}"
+									 Header="Email address"
+									 PlaceholderText="Enter your email"
+									 Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Simple_TextBox_FilledDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource SimpleFilledTextBoxStyle}"
+									 Text="Disabled"
+									 IsEnabled="False"
+									 Width="300" />
+						</smtx:XamlDisplay>
+
+						<Border Height="32" />
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>

@@ -16,46 +16,121 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ## Lightweight Styling
 
-| Key                                     | Type              | Value                        |
-|-----------------------------------------|-------------------|------------------------------|
-| `SimpleComboBoxCornerRadius`            | `CornerRadius`    | `SimpleRadius200CornerRadius` (8)|
-| `SimpleComboBoxMinHeight`              | `Double`          | `SimpleIconLarge` (40)            |
-| `SimpleComboBoxBorderThickness`        | `Thickness`       | `SimpleStrokeBorderThickness` (1)|
-| `SimpleComboBoxFocusedBorderThickness` | `Thickness`       | `SimpleStrokeFocusRingThickness` (2) |
-| `SimpleComboBoxPadding`               | `Thickness`       | 16,10,12,10                  |
-| `SimpleComboBoxDropDownGlyphMargin`    | `Thickness`       | 8,0,12,0                     |
-| `SimpleComboBoxPopupPadding`           | `Thickness`       | 0,4                          |
-| `SimpleComboBoxPopupMaxHeight`         | `Double`          | 400                          |
-| `SimpleComboBoxBackground`                             | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`           |
-| `SimpleComboBoxBackgroundPointerOver`                  | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`           |
-| `SimpleComboBoxBackgroundPressed`                      | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`           |
-| `SimpleComboBoxBackgroundDisabled`                     | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`          |
-| `SimpleComboBoxBorderBrush`                            | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`               |
-| `SimpleComboBoxBorderBrushPointerOver`                 | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`               |
-| `SimpleComboBoxBorderBrushPressed`                     | `SolidColorBrush` | `SimpleBorderBrandSecondaryBrush`               |
-| `SimpleComboBoxBorderBrushDisabled`                    | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`              |
-| `SimpleComboBoxBorderBrushFocused`                     | `SolidColorBrush` | `SimpleBorderBrandSecondaryBrush`               |
-| `SimpleComboBoxBorderBrushError`                       | `SolidColorBrush` | `SimpleBorderDangerDefaultBrush`                |
-| `SimpleComboBoxForeground`                             | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                 |
-| `SimpleComboBoxForegroundPointerOver`                  | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                 |
-| `SimpleComboBoxForegroundPressed`                      | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                 |
-| `SimpleComboBoxForegroundDisabled`                     | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`                |
-| `SimpleComboBoxPlaceholderForeground`                  | `SolidColorBrush` | `SimpleTextDefaultTertiaryBrush`                |
-| `SimpleComboBoxDropDownGlyphForeground`                | `SolidColorBrush` | `SimpleIconDefaultDefaultBrush`                 |
-| `SimpleComboBoxDropDownGlyphForegroundDisabled`        | `SolidColorBrush` | `SimpleIconDisabledOnDisabledBrush`             |
-| `SimpleComboBoxPopupBackground`                        | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`           |
-| `SimpleComboBoxPopupBorderBrush`                       | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`               |
-| `SimpleComboBoxItemBackground`                         | `SolidColorBrush` | `SystemControlTransparentBrush`                 |
-| `SimpleComboBoxItemBackgroundPointerOver`              | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryBrush`         |
-| `SimpleComboBoxItemBackgroundPressed`                  | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryPressedBrush`  |
-| `SimpleComboBoxItemBackgroundSelected`                 | `SolidColorBrush` | `SimpleBackgroundBrandDefaultBrush`             |
-| `SimpleComboBoxItemBackgroundSelectedPointerOver`      | `SolidColorBrush` | `SimpleBackgroundBrandHoverBrush`               |
-| `SimpleComboBoxItemBackgroundSelectedPressed`          | `SolidColorBrush` | `SimpleBackgroundBrandPressedBrush`             |
-| `SimpleComboBoxItemBackgroundDisabled`                 | `SolidColorBrush` | `SystemControlTransparentBrush`                 |
-| `SimpleComboBoxItemForeground`                         | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                 |
-| `SimpleComboBoxItemForegroundPointerOver`              | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                 |
-| `SimpleComboBoxItemForegroundPressed`                  | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                 |
-| `SimpleComboBoxItemForegroundSelected`                 | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`                   |
-| `SimpleComboBoxItemForegroundSelectedPointerOver`      | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`                   |
-| `SimpleComboBoxItemForegroundSelectedPressed`          | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`                   |
-| `SimpleComboBoxItemForegroundDisabled`                 | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`                |
+### Structural Resources
+
+| Key                                     | Type              | Value                            |
+|-----------------------------------------|-------------------|----------------------------------|
+| `ComboBoxCornerRadius`                  | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
+| `ComboBoxMinHeight`                     | `Double`          | `SimpleIconLarge`                |
+| `ComboBoxBorderThickness`              | `Thickness`       | `SimpleStrokeBorderThickness`    |
+| `ComboBoxPadding`                       | `Thickness`       | 16,10,12,10                      |
+
+### Simple Aliases
+
+| Key                                     | Type              | Value                            |
+|-----------------------------------------|-------------------|----------------------------------|
+| `SimpleComboBoxCornerRadius`            | `CornerRadius`    | `ComboBoxCornerRadius`           |
+| `SimpleComboBoxMinHeight`              | `Double`          | `ComboBoxMinHeight`              |
+| `SimpleComboBoxBorderThickness`        | `Thickness`       | `ComboBoxBorderThickness`        |
+| `SimpleComboBoxFocusedBorderThickness` | `Thickness`       | `SimpleStrokeFocusRingThickness` |
+| `SimpleComboBoxPadding`               | `Thickness`       | 16,10,12,10                      |
+
+### Simple-Only Layout Resources
+
+| Key                                     | Type              | Value                            |
+|-----------------------------------------|-------------------|----------------------------------|
+| `SimpleComboBoxDropDownGlyphMargin`    | `Thickness`       | 8,0,12,0                         |
+| `SimpleComboBoxPopupPadding`           | `Thickness`       | 0,4                              |
+| `SimpleComboBoxPopupMaxHeight`         | `Double`          | 400                              |
+| `SimpleComboBoxDropDownGlyphIcon`      | `String`          | &#xE96E;                         |
+
+### ComboBox -- Normal State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxBackground`                            | `SolidColorBrush` | `SurfaceBrush`                 |
+| `ComboBoxBorderBrush`                           | `SolidColorBrush` | `OutlineBrush`                 |
+| `ComboBoxForeground`                            | `SolidColorBrush` | `OnSurfaceBrush`               |
+| `ComboBoxPlaceHolderForeground`                 | `SolidColorBrush` | `OnSurfaceLowBrush`            |
+| `ComboBoxDropDownGlyphForeground`               | `SolidColorBrush` | `OnSurfaceBrush`               |
+
+### ComboBox -- PointerOver State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxBackgroundPointerOver`                 | `SolidColorBrush` | `SurfaceBrush`                 |
+| `ComboBoxBorderBrushPointerOver`                | `SolidColorBrush` | `OutlineBrush`                 |
+| `ComboBoxForegroundPointerOver`                 | `SolidColorBrush` | `OnSurfaceBrush`               |
+
+### ComboBox -- Pressed State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxBackgroundPressed`                     | `SolidColorBrush` | `SurfaceBrush`                 |
+| `ComboBoxBorderBrushPressed`                    | `SolidColorBrush` | `PrimaryMediumBrush`           |
+| `ComboBoxForegroundPressed`                     | `SolidColorBrush` | `OnSurfaceBrush`               |
+
+### ComboBox -- Disabled State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxBackgroundDisabled`                    | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
+| `ComboBoxBorderBrushDisabled`                   | `SolidColorBrush` | `OutlineDisabledBrush`         |
+| `ComboBoxForegroundDisabled`                    | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
+| `ComboBoxDropDownGlyphForegroundDisabled`       | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
+
+### ComboBox -- Dropdown
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxDropDownBackground`                    | `SolidColorBrush` | `SurfaceBrush`                 |
+| `ComboBoxDropDownBorderBrush`                   | `SolidColorBrush` | `OutlineBrush`                 |
+
+### ComboBoxItem -- Normal State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxItemBackground`                        | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ComboBoxItemForeground`                        | `SolidColorBrush` | `OnSurfaceBrush`               |
+
+### ComboBoxItem -- PointerOver State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxItemBackgroundPointerOver`             | `SolidColorBrush` | `SurfaceVariantBrush`          |
+| `ComboBoxItemForegroundPointerOver`             | `SolidColorBrush` | `OnSurfaceBrush`               |
+
+### ComboBoxItem -- Pressed State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxItemBackgroundPressed`                 | `SolidColorBrush` | `TertiaryContainerBrush`       |
+| `ComboBoxItemForegroundPressed`                 | `SolidColorBrush` | `OnSurfaceBrush`               |
+
+### ComboBoxItem -- Selected State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxItemBackgroundSelected`                | `SolidColorBrush` | `PrimaryBrush`                 |
+| `ComboBoxItemForegroundSelected`                | `SolidColorBrush` | `OnPrimaryBrush`               |
+
+### ComboBoxItem -- SelectedPointerOver State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxItemBackgroundSelectedPointerOver`     | `SolidColorBrush` | `PrimaryVariantDarkBrush`      |
+| `ComboBoxItemForegroundSelectedPointerOver`     | `SolidColorBrush` | `OnPrimaryBrush`               |
+
+### ComboBoxItem -- SelectedPressed State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxItemBackgroundSelectedPressed`         | `SolidColorBrush` | `PrimaryVariantDarkBrush`      |
+| `ComboBoxItemForegroundSelectedPressed`         | `SolidColorBrush` | `OnPrimaryBrush`               |
+
+### ComboBoxItem -- Disabled State
+
+| Key                                             | Type              | Value                          |
+|-------------------------------------------------|-------------------|--------------------------------|
+| `ComboBoxItemBackgroundDisabled`                | `SolidColorBrush` | `SystemControlTransparentBrush` |
+| `ComboBoxItemForegroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
