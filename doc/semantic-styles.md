@@ -18,8 +18,6 @@ Each theme's `_Resources.xaml` defines `<StaticResource>` aliases that map seman
 - **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
 - **Simple**: `FilledButtonStyle` &rarr; `SimplePrimaryButtonStyle`
 
-Semantic names are based on **Material v2 naming** (with the `Material` prefix removed), because Material has the richest and most widely recognized vocabulary. Existing theme-prefixed keys remain valid &mdash; the semantic layer is purely additive.
-
 ## Control Style Mappings
 
 The following tables show every semantic style key and how it resolves under each theme.
@@ -209,27 +207,29 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 
 Both themes provide identical semantic typography keys based on the Material Design 3 type scale.
 
-| Semantic Key | Material | Simple |
-|---|---|---|
-| `DisplayLarge` | `MaterialDisplayLarge` | `SimpleDisplayLarge` |
-| `DisplayMedium` | `MaterialDisplayMedium` | `SimpleDisplayMedium` |
-| `DisplaySmall` | `MaterialDisplaySmall` | `SimpleDisplaySmall` |
-| `HeadlineLarge` | `MaterialHeadlineLarge` | `SimpleHeadlineLarge` |
-| `HeadlineMedium` | `MaterialHeadlineMedium` | `SimpleHeadlineMedium` |
-| `HeadlineSmall` | `MaterialHeadlineSmall` | `SimpleHeadlineSmall` |
-| `TitleLarge` | `MaterialTitleLarge` | `SimpleTitleLarge` |
-| `TitleMedium` | `MaterialTitleMedium` | `SimpleTitleMedium` |
-| `TitleSmall` | `MaterialTitleSmall` | `SimpleTitleSmall` |
-| `BodyLarge` | `MaterialBodyLarge` | `SimpleBodyLarge` |
-| `BodyMedium` | `MaterialBodyMedium` | `SimpleBodyMedium` |
-| `BodySmall` | `MaterialBodySmall` | `SimpleBodySmall` |
-| `LabelLarge` | `MaterialLabelLarge` | `SimpleLabelLarge` |
-| `LabelMedium` | `MaterialLabelMedium` | `SimpleLabelMedium` |
-| `LabelSmall` | `MaterialLabelSmall` | `SimpleLabelSmall` |
-| `LabelExtraSmall` | `MaterialLabelExtraSmall` | `SimpleLabelExtraSmall` |
-| `CaptionLarge` | `MaterialCaptionLarge` | `SimpleCaptionLarge` |
-| `CaptionMedium` | `MaterialCaptionMedium` | `SimpleCaptionMedium` |
-| `CaptionSmall` | `MaterialCaptionSmall` | `SimpleCaptionSmall` |
+| Semantic Style Key | Font Resource Keys |
+|---|---|
+| `DisplayLarge` | `DisplayLargeFontFamily`, `DisplayLargeFontSize`, `DisplayLargeFontWeight`, `DisplayLargeCharacterSpacing` |
+| `DisplayMedium` | `DisplayMediumFontFamily`, `DisplayMediumFontSize`, `DisplayMediumFontWeight` |
+| `DisplaySmall` | `DisplaySmallFontFamily`, `DisplaySmallFontSize`, `DisplaySmallFontWeight` |
+| `HeadlineLarge` | `HeadlineLargeFontFamily`, `HeadlineLargeFontSize`, `HeadlineLargeFontWeight` |
+| `HeadlineMedium` | `HeadlineMediumFontFamily`, `HeadlineMediumFontSize`, `HeadlineMediumFontWeight` |
+| `HeadlineSmall` | `HeadlineSmallFontFamily`, `HeadlineSmallFontSize`, `HeadlineSmallFontWeight` |
+| `TitleLarge` | `TitleLargeFontFamily`, `TitleLargeFontSize`, `TitleLargeFontWeight` |
+| `TitleMedium` | `TitleMediumFontFamily`, `TitleMediumFontSize`, `TitleMediumFontWeight` |
+| `TitleSmall` | `TitleSmallFontFamily`, `TitleSmallFontSize`, `TitleSmallFontWeight` |
+| `BodyLarge` | `BodyLargeFontFamily`, `BodyLargeFontSize`, `BodyLargeFontWeight`, `BodyLargeCharacterSpacing` |
+| `BodyMedium` | `BodyMediumFontFamily`, `BodyMediumFontSize`, `BodyMediumFontWeight`, `BodyMediumCharacterSpacing` |
+| `BodySmall` | `BodySmallFontFamily`, `BodySmallFontSize`, `BodySmallFontWeight`, `BodySmallCharacterSpacing` |
+| `LabelLarge` | `LabelLargeFontFamily`, `LabelLargeFontSize`, `LabelLargeFontWeight`, `LabelLargeCharacterSpacing` |
+| `LabelMedium` | `LabelMediumFontFamily`, `LabelMediumFontSize`, `LabelMediumFontWeight`, `LabelMediumCharacterSpacing` |
+| `LabelSmall` | `LabelSmallFontFamily`, `LabelSmallFontSize`, `LabelSmallFontWeight`, `LabelSmallCharacterSpacing` |
+| `LabelExtraSmall` | `LabelExtraSmallFontFamily`, `LabelExtraSmallFontSize`, `LabelExtraSmallFontWeight`, `LabelExtraSmallCharacterSpacing` |
+| `CaptionLarge` | `CaptionLargeFontFamily`, `CaptionLargeFontSize`, `CaptionLargeFontWeight`, `CaptionLargeCharacterSpacing` |
+| `CaptionMedium` | `CaptionMediumFontFamily`, `CaptionMediumFontSize`, `CaptionMediumFontWeight`, `CaptionMediumCharacterSpacing` |
+| `CaptionSmall` | `CaptionSmallFontFamily`, `CaptionSmallFontSize`, `CaptionSmallFontWeight`, `CaptionSmallCharacterSpacing` |
+
+Each theme's `Typography.xaml` provides the concrete values for these keys. The font resource keys (e.g. `BodyLargeFontSize`) are the same across themes and can be used directly for lightweight styling overrides.
 
 ## Lightweight Styling Portability
 
