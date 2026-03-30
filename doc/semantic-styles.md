@@ -87,6 +87,7 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
 | `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleComboBoxStyle` | Direct match |
+| `ComboBoxItemStyle` | `MaterialComboBoxItemStyle` | `SimpleComboBoxItemStyle` | Direct match |
 
 ### CheckBox
 
@@ -229,62 +230,6 @@ Both themes provide identical semantic typography keys based on the Material Des
 | `CaptionLarge` | `MaterialCaptionLarge` | `SimpleCaptionLarge` |
 | `CaptionMedium` | `MaterialCaptionMedium` | `SimpleCaptionMedium` |
 | `CaptionSmall` | `MaterialCaptionSmall` | `SimpleCaptionSmall` |
-
-## Gaps
-
-### Simple gaps (no Simple equivalent for these semantic keys)
-
-When used under the Simple theme, these controls fall back to WinUI default styling.
-
-| Semantic Key | Material Style | Reason |
-|---|---|---|
-| `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | Simple has no elevated/shadow button variant |
-| `CommandBarStyle` | `MaterialCommandBarStyle` | Simple has no CommandBar style |
-| `MediaTransportControlsStyle` | `MaterialMediaTransportControlsStyle` | Niche control |
-
-### Material gaps (no Material equivalent for these Simple styles)
-
-These controls have Simple styles but no Material counterpart, so no semantic alias exists. They must be referenced with their `Simple`-prefixed keys directly.
-
-| Simple Style | Control | Reason |
-|---|---|---|
-| `SimpleExpanderStyle` | `Expander` | Material has no Expander style |
-| `SimpleAutoSuggestBoxStyle` | `AutoSuggestBox` | Material has no AutoSuggestBox style |
-| `SimpleToolTipStyle` | `ToolTip` | Material has no ToolTip style |
-| `SimplePersonPictureStyle` (6 variants) | `PersonPicture` | Material has no PersonPicture style |
-
-## Theme-Specific Styles
-
-### Simple-Only Styles
-
-These styles exist only in the Simple theme and have no Material equivalent. They are not part of the semantic layer and must be referenced with their `Simple`-prefixed keys.
-
-| Style Key | Control | Notes |
-|---|---|---|
-| `SimpleDangerPrimaryButtonStyle` | `Button` | Destructive filled action |
-| `SimpleDangerSubtleButtonStyle` | `Button` | Destructive text action |
-| `SimpleIconButtonNeutralStyle` | `Button` | Neutral icon button |
-| `SimpleIconButtonSubtleStyle` | `Button` | Subtle icon button |
-| `SimpleIconButtonDangerPrimaryStyle` | `Button` | Destructive icon button (filled) |
-| `SimpleIconButtonDangerSubtleStyle` | `Button` | Destructive icon button (text) |
-| `SimpleSmall*` / `SimpleMedium*` variants | `Button` | Size variants (Material has no size variants) |
-| `SimpleTextBoxErrorStyle` | `TextBox` | Dedicated error state |
-| `SimpleTextBoxSmallStyle` | `TextBox` | Small size variant |
-| `SimpleComboBoxErrorStyle` | `ComboBox` | Dedicated error state |
-| `SimpleComboBoxItemStyle` | `ComboBoxItem` | Dropdown item style |
-
-### Material-Only Styles
-
-These are Material-internal styles excluded from the semantic layer.
-
-| Style Key | Reason |
-|---|---|
-| `MaterialRippleStyle` | Ripple is a Material-specific custom control |
-| `MaterialBaseButtonStyle` | Internal base style, not consumer-facing |
-| `MaterialDeleteButtonStyle` | TextBox internal button |
-| `MaterialRevealButtonStyle` | PasswordBox internal button |
-| `MaterialSliderThumbStyle` | Slider internal part |
-| `MaterialContentDialogButtonStyle` | Dialog internal button |
 
 ## Lightweight Styling Portability
 
