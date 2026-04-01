@@ -10,6 +10,7 @@ uid: Uno.Themes.Simple.Styles.AutoSuggestBox
 |--------------------------------------|------------------|
 | `SimpleAutoSuggestBoxStyle`          |                  |
 | `SimpleDefaultAutoSuggestBoxStyle`   | True             |
+| `SimpleAutoSuggestBoxTextBoxStyle`   |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
@@ -18,33 +19,14 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | Key                                                           | Type              | Value                                     |
 |---------------------------------------------------------------|-------------------|-------------------------------------------|
 | `SimpleAutoSuggestBoxCornerRadius`                            | `CornerRadius`    | 20                                        |
-| `SimpleAutoSuggestBoxBorderThickness`                         | `Thickness`       | `SimpleStrokeBorderThickness` (1)             |
-| `SimpleAutoSuggestBoxFocusedBorderThickness`                  | `Thickness`       | `SimpleStrokeFocusRingThickness` (2)          |
+| `SimpleAutoSuggestBoxBorderThickness`                         | `StaticResource`  | `SimpleStrokeBorderThickness` (1)         |
+| `SimpleAutoSuggestBoxFocusedBorderThickness`                  | `StaticResource`  | `SimpleStrokeFocusRingThickness` (2)      |
 | `SimpleAutoSuggestBoxPadding`                                 | `Thickness`       | 16,10,40,10                               |
-| `SimpleAutoSuggestBoxMinHeight`                               | `Double`          | `SimpleIconLarge` (40)                         |
-| `SimpleAutoSuggestBoxIconFontSize`                            | `Double`          | `SimpleTypographyScale03` (16)                 |
-| `SimpleAutoSuggestBoxSuggestionsCornerRadius`                 | `CornerRadius`    | `SimpleRadius200CornerRadius` (8)             |
-| `SimpleAutoSuggestBoxSuggestionsBorderThickness`              | `Thickness`       | `SimpleStrokeBorderThickness` (1)             |
-| `SimpleAutoSuggestBoxSuggestionsPadding`                      | `Thickness`       | `SimpleSpace100Thickness` (4)                 |
-| `SimpleAutoSuggestBoxForeground`                              | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`           |
-| `SimpleAutoSuggestBoxBackground`                              | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`     |
-| `SimpleAutoSuggestBoxBorderBrush`                             | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`         |
-| `SimpleAutoSuggestBoxPlaceholderForeground`                   | `SolidColorBrush` | `SimpleTextDefaultTertiaryBrush`          |
-| `SimpleAutoSuggestBoxForegroundPointerOver`                   | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`           |
-| `SimpleAutoSuggestBoxBackgroundPointerOver`                   | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`     |
-| `SimpleAutoSuggestBoxBorderBrushPointerOver`                  | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`         |
-| `SimpleAutoSuggestBoxForegroundFocused`                       | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`           |
-| `SimpleAutoSuggestBoxBackgroundFocused`                       | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`     |
-| `SimpleAutoSuggestBoxBorderBrushFocused`                      | `SolidColorBrush` | `SimpleBorderBrandSecondaryBrush`         |
-| `SimpleAutoSuggestBoxForegroundDisabled`                      | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`          |
-| `SimpleAutoSuggestBoxBackgroundDisabled`                      | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`    |
-| `SimpleAutoSuggestBoxBorderBrushDisabled`                     | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`        |
-| `SimpleAutoSuggestBoxPlaceholderForegroundDisabled`           | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`          |
-| `SimpleAutoSuggestBoxIconForeground`                          | `SolidColorBrush` | `SimpleIconDefaultDefaultBrush`           |
-| `SimpleAutoSuggestBoxIconForegroundPointerOver`               | `SolidColorBrush` | `SimpleIconDefaultDefaultBrush`           |
-| `SimpleAutoSuggestBoxIconForegroundPressed`                   | `SolidColorBrush` | `SimpleIconDefaultDefaultBrush`           |
-| `SimpleAutoSuggestBoxIconForegroundDisabled`                  | `SolidColorBrush` | `SimpleIconDisabledDefaultBrush`          |
-| `SimpleAutoSuggestBoxHeaderForeground`                        | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`           |
-| `SimpleAutoSuggestBoxHeaderForegroundDisabled`                | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`          |
-| `SimpleAutoSuggestBoxSuggestionsBackground`                   | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`     |
-| `SimpleAutoSuggestBoxSuggestionsBorderBrush`                  | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`         |
+| `SimpleAutoSuggestBoxMinHeight`                               | `StaticResource`  | `SimpleIconLarge` (40)                    |
+| `SimpleAutoSuggestBoxIconFontSize`                            | `StaticResource`  | `BodyLargeFontSize` (16)                  |
+| `SimpleAutoSuggestBoxSuggestionsCornerRadius`                 | `StaticResource`  | `SimpleRadius200CornerRadius` (8)         |
+| `SimpleAutoSuggestBoxSuggestionsBorderThickness`              | `StaticResource`  | `SimpleStrokeBorderThickness` (1)         |
+| `SimpleAutoSuggestBoxSuggestionsPadding`                      | `StaticResource`  | `SimpleSpace100Thickness` (4)             |
+
+> [!NOTE]
+> The AutoSuggestBox control does not expose overridable themed brush resource keys. Brushes are applied directly via shared semantic resources (e.g. `OnSurfaceBrush`, `SurfaceBrush`, `OutlineBrush`, `PrimaryMediumBrush`) in the style templates and visual states.

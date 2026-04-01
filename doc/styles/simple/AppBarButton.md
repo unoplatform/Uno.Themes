@@ -17,16 +17,16 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                  | Type              | Value                      |
 |--------------------------------------|-------------------|----------------------------|
-| `SimpleAppBarButtonIconSize`         | `Double`          | `SimpleIconSmall`          |
-| `SimpleAppBarButtonContentSpacing`   | `Double`          | `SimpleSpace200`           |
-| `SimpleAppBarButtonPadding`          | `Thickness`       | `SimpleSpace200Thickness`  |
+| `SimpleAppBarButtonIconSize`         | `StaticResource`  | `SimpleIconSmall`          |
+| `SimpleAppBarButtonContentSpacing`   | `StaticResource`  | `SimpleSpace200`           |
+| `SimpleAppBarButtonPadding`          | `StaticResource`  | `SimpleSpace200Thickness`  |
 
-### Brush Keys
+### Themed Resources
 
 | Key                                          | Type              | Value                              |
 |----------------------------------------------|-------------------|------------------------------------|
-| `AppBarButtonHeight`                         | `Double`          | `SimpleSpace1600`                  |
-| `AppBarButtonWidth`                          | `Double`          | `SimpleSpace1600`                  |
+| `AppBarButtonHeight`                         | `StaticResource`  | `SimpleSpace1600`                  |
+| `AppBarButtonWidth`                          | `StaticResource`  | `SimpleSpace1600`                  |
 | `AppBarButtonForeground`                     | `SolidColorBrush` | `OnSurfaceMediumBrush`             |
 | `AppBarButtonForegroundPointerOver`          | `SolidColorBrush` | `OnSurfaceMediumBrush`             |
 | `AppBarButtonForegroundPressed`              | `SolidColorBrush` | `OnSurfaceMediumBrush`             |

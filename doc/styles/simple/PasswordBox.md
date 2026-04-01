@@ -9,21 +9,12 @@ uid: Uno.Themes.Simple.Styles.PasswordBox
 | Style Key                          | IsDefaultStyle\* |
 |------------------------------------|------------------|
 | `SimplePasswordBoxStyle`           | True             |
+| `SimpleFilledPasswordBoxStyle`     |                  |
 | `SimpleOutlinedPasswordBoxStyle`   |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
 ## Lightweight Styling
-
-### Simple Aliases
-
-| Key                                                    | Type              | Value                                      |
-|--------------------------------------------------------|-------------------|--------------------------------------------|
-| `SimplePasswordBoxCornerRadius`                        | `CornerRadius`    | `FilledPasswordBoxCornerRadius`            |
-| `SimplePasswordBoxBorderThickness`                     | `Thickness`       | `FilledPasswordBoxBorderThickness`         |
-| `SimplePasswordBoxFocusedBorderThickness`              | `Thickness`       | `FilledPasswordBoxFocusedBorderThickness`  |
-| `SimplePasswordBoxPadding`                             | `Thickness`       | `FilledPasswordBoxPadding`                 |
-| `SimplePasswordBoxMinHeight`                           | `Double`          | `FilledPasswordBoxMinHeight`               |
 
 ### Filled Variant -- Sizing
 
@@ -89,58 +80,58 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                                    | Type              | Value                                      |
 |--------------------------------------------------------|-------------------|--------------------------------------------|
-| `OutlinedPasswordBoxCornerRadius`                      | `CornerRadius`    | `FilledPasswordBoxCornerRadius`            |
-| `OutlinedPasswordBoxBorderThickness`                   | `Thickness`       | `FilledPasswordBoxBorderThickness`         |
-| `OutlinedPasswordBoxFocusedBorderThickness`            | `Thickness`       | `FilledPasswordBoxFocusedBorderThickness`  |
-| `OutlinedPasswordBoxPadding`                           | `Thickness`       | `FilledPasswordBoxPadding`                 |
-| `OutlinedPasswordBoxMinHeight`                         | `Double`          | `FilledPasswordBoxMinHeight`               |
-| `OutlinedPasswordBoxHeaderMargin`                      | `Thickness`       | `FilledPasswordBoxHeaderMargin`            |
+| `OutlinedPasswordBoxCornerRadius`                      | `CornerRadius`    | `SimpleRadius200CornerRadius`              |
+| `OutlinedPasswordBoxBorderThickness`                   | `Thickness`       | `SimpleStrokeBorderThickness`              |
+| `OutlinedPasswordBoxFocusedBorderThickness`            | `Thickness`       | `SimpleStrokeFocusRingThickness`           |
+| `OutlinedPasswordBoxPadding`                           | `Thickness`       | 16,10,16,10                                |
+| `OutlinedPasswordBoxMinHeight`                         | `Double`          | `SimpleIconLarge`                          |
+| `OutlinedPasswordBoxHeaderMargin`                      | `Thickness`       | 0,0,0,4                                   |
 
 ### Outlined Variant -- Normal State
 
 | Key                                                    | Type              | Value                                      |
 |--------------------------------------------------------|-------------------|--------------------------------------------|
-| `OutlinedPasswordBoxForeground`                        | `SolidColorBrush` | `FilledPasswordBoxForeground`              |
+| `OutlinedPasswordBoxForeground`                        | `SolidColorBrush` | `OnSurfaceBrush`                           |
 | `OutlinedPasswordBoxBackground`                        | `SolidColorBrush` | `SurfaceBrush`                             |
-| `OutlinedPasswordBoxBorderBrush`                       | `SolidColorBrush` | `FilledPasswordBoxBorderBrush`             |
-| `OutlinedPasswordBoxPlaceholderForeground`             | `SolidColorBrush` | `FilledPasswordBoxPlaceholderForeground`   |
+| `OutlinedPasswordBoxBorderBrush`                       | `SolidColorBrush` | `OutlineBrush`                             |
+| `OutlinedPasswordBoxPlaceholderForeground`             | `SolidColorBrush` | `OnSurfaceLowBrush`                        |
 
 ### Outlined Variant -- PointerOver State
 
 | Key                                                    | Type              | Value                                      |
 |--------------------------------------------------------|-------------------|--------------------------------------------|
-| `OutlinedPasswordBoxForegroundPointerOver`             | `SolidColorBrush` | `FilledPasswordBoxForegroundPointerOver`   |
+| `OutlinedPasswordBoxForegroundPointerOver`             | `SolidColorBrush` | `OnSurfaceBrush`                           |
 | `OutlinedPasswordBoxBackgroundPointerOver`             | `SolidColorBrush` | `SurfaceBrush`                             |
-| `OutlinedPasswordBoxBorderBrushPointerOver`            | `SolidColorBrush` | `FilledPasswordBoxBorderBrushPointerOver`  |
+| `OutlinedPasswordBoxBorderBrushPointerOver`            | `SolidColorBrush` | `OutlineBrush`                             |
 
 ### Outlined Variant -- Focused State
 
 | Key                                                    | Type              | Value                                      |
 |--------------------------------------------------------|-------------------|--------------------------------------------|
-| `OutlinedPasswordBoxForegroundFocused`                 | `SolidColorBrush` | `FilledPasswordBoxForegroundFocused`       |
+| `OutlinedPasswordBoxForegroundFocused`                 | `SolidColorBrush` | `OnSurfaceBrush`                           |
 | `OutlinedPasswordBoxBackgroundFocused`                 | `SolidColorBrush` | `SurfaceBrush`                             |
-| `OutlinedPasswordBoxBorderBrushFocused`                | `SolidColorBrush` | `FilledPasswordBoxBorderBrushFocused`      |
+| `OutlinedPasswordBoxBorderBrushFocused`                | `SolidColorBrush` | `PrimaryMediumBrush`                       |
 
 ### Outlined Variant -- Disabled State
 
 | Key                                                    | Type              | Value                                      |
 |--------------------------------------------------------|-------------------|--------------------------------------------|
-| `OutlinedPasswordBoxForegroundDisabled`                | `SolidColorBrush` | `FilledPasswordBoxForegroundDisabled`      |
+| `OutlinedPasswordBoxForegroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`                   |
 | `OutlinedPasswordBoxBackgroundDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`                   |
-| `OutlinedPasswordBoxBorderBrushDisabled`               | `SolidColorBrush` | `FilledPasswordBoxBorderBrushDisabled`     |
-| `OutlinedPasswordBoxPlaceholderForegroundDisabled`     | `SolidColorBrush` | `FilledPasswordBoxPlaceholderForegroundDisabled` |
+| `OutlinedPasswordBoxBorderBrushDisabled`               | `SolidColorBrush` | `OutlineDisabledBrush`                     |
+| `OutlinedPasswordBoxPlaceholderForegroundDisabled`     | `SolidColorBrush` | `OnSurfaceDisabledBrush`                   |
 
 ### Outlined Variant -- Reveal Button
 
 | Key                                                    | Type              | Value                                      |
 |--------------------------------------------------------|-------------------|--------------------------------------------|
-| `OutlinedPasswordBoxRevealForeground`                  | `SolidColorBrush` | `FilledPasswordBoxRevealForeground`        |
-| `OutlinedPasswordBoxRevealForegroundPointerOver`       | `SolidColorBrush` | `FilledPasswordBoxRevealForegroundPointerOver` |
-| `OutlinedPasswordBoxRevealForegroundPressed`           | `SolidColorBrush` | `FilledPasswordBoxRevealForegroundPressed`  |
+| `OutlinedPasswordBoxRevealForeground`                  | `SolidColorBrush` | `OnSurfaceBrush`                           |
+| `OutlinedPasswordBoxRevealForegroundPointerOver`       | `SolidColorBrush` | `OnSurfaceBrush`                           |
+| `OutlinedPasswordBoxRevealForegroundPressed`           | `SolidColorBrush` | `OnSurfaceBrush`                           |
 
 ### Outlined Variant -- Header
 
 | Key                                                    | Type              | Value                                      |
 |--------------------------------------------------------|-------------------|--------------------------------------------|
-| `OutlinedPasswordBoxHeaderForeground`                  | `SolidColorBrush` | `FilledPasswordBoxHeaderForeground`        |
-| `OutlinedPasswordBoxHeaderForegroundDisabled`          | `SolidColorBrush` | `FilledPasswordBoxHeaderForegroundDisabled` |
+| `OutlinedPasswordBoxHeaderForeground`                  | `SolidColorBrush` | `OnSurfaceBrush`                           |
+| `OutlinedPasswordBoxHeaderForegroundDisabled`          | `SolidColorBrush` | `OnSurfaceDisabledBrush`                   |

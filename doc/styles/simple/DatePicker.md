@@ -12,6 +12,7 @@ uid: Uno.Themes.Simple.Styles.DatePicker
 | `SimpleDefaultDatePickerStyle`                 | True             |
 | `SimpleDatePickerFlyoutPresenterStyle`         |                  |
 | `SimpleDefaultDatePickerFlyoutPresenterStyle`  | True             |
+| `SimpleDatePickerFlyoutButtonStyle`            |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 

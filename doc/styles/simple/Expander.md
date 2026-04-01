@@ -28,34 +28,6 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleExpanderChevronButtonSize`            | `Double`          | `SimpleIconMedium` (32)               |
 | `SimpleExpanderChevronGlyphSize`             | `Double`          | 12                                |
 | `SimpleExpanderChevronDownGlyph`             | `String`          | \uE70D                            |
-| `SimpleExpanderHeaderBackground`                              | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryBrush`            |
-| `SimpleExpanderHeaderBackgroundPointerOver`                   | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryHoverBrush`       |
-| `SimpleExpanderHeaderBackgroundPressed`                       | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryPressedBrush`     |
-| `SimpleExpanderHeaderBackgroundDisabled`                      | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`             |
-| `SimpleExpanderHeaderForeground`                              | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleExpanderHeaderForegroundPointerOver`                   | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleExpanderHeaderForegroundPressed`                       | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleExpanderHeaderForegroundDisabled`                      | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`                   |
-| `SimpleExpanderHeaderBorderBrush`                             | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleExpanderHeaderBorderBrushPointerOver`                  | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleExpanderHeaderBorderBrushPressed`                      | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleExpanderHeaderBorderBrushDisabled`                     | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`                 |
-| `SimpleExpanderHeaderExpandedBackground`                      | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`              |
-| `SimpleExpanderHeaderExpandedBackgroundPointerOver`           | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultHoverBrush`         |
-| `SimpleExpanderHeaderExpandedBackgroundPressed`               | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultPressedBrush`       |
-| `SimpleExpanderHeaderExpandedBackgroundDisabled`              | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`             |
-| `SimpleExpanderHeaderExpandedForeground`                      | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleExpanderHeaderExpandedForegroundPointerOver`           | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleExpanderHeaderExpandedForegroundPressed`               | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleExpanderHeaderExpandedForegroundDisabled`              | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`                   |
-| `SimpleExpanderHeaderExpandedBorderBrush`                     | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleExpanderHeaderExpandedBorderBrushPointerOver`          | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleExpanderHeaderExpandedBorderBrushPressed`              | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleExpanderHeaderExpandedBorderBrushDisabled`             | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`                 |
-| `SimpleExpanderChevronForeground`                             | `SolidColorBrush` | `SimpleIconDefaultDefaultBrush`                    |
-| `SimpleExpanderChevronForegroundPointerOver`                  | `SolidColorBrush` | `SimpleIconDefaultDefaultBrush`                    |
-| `SimpleExpanderChevronForegroundPressed`                      | `SolidColorBrush` | `SimpleIconDefaultDefaultBrush`                    |
-| `SimpleExpanderChevronForegroundDisabled`                     | `SolidColorBrush` | `SimpleIconDisabledDefaultBrush`                   |
-| `SimpleExpanderContentBackground`                             | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`              |
-| `SimpleExpanderContentBorderBrush`                            | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleExpanderContentForeground`                             | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
+
+> [!NOTE]
+> The Expander control does not expose overridable themed brush resource keys. Brushes are applied directly via shared semantic resources (e.g. `SurfaceVariantBrush`, `OnSurfaceBrush`, `OutlineBrush`) in the style setters and visual states.

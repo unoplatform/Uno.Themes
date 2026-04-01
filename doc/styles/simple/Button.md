@@ -53,8 +53,8 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleButtonSmallPadding`           | `Thickness`       | `SimpleSpace200Thickness`        |
 | `SimpleButtonMediumMinHeight`        | `Double`          | `SimpleIconLarge`                |
 | `SimpleButtonSmallMinHeight`         | `Double`          | `SimpleIconMedium`               |
-| `SimpleButtonMediumFontSize`         | `Double`          | `SimpleTypographyScale03`        |
-| `SimpleButtonSmallFontSize`          | `Double`          | `SimpleTypographyScale02`        |
+| `SimpleButtonMediumFontSize`         | `Double`          | `BodyMediumFontSize`             |
+| `SimpleButtonSmallFontSize`          | `Double`          | `BodySmallFontSize`              |
 | `SimpleButtonIconSpacing`            | `Double`          | `SimpleSpace200`                 |
 | `SimpleButtonFontFamily`             | `FontFamily`      | Inter                            |
 | `SimpleButtonFontWeight`             | `String`          | Normal                           |
@@ -137,3 +137,22 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `IconButtonBorderBrushPointerOver`                   | `SolidColorBrush` | `FilledButtonBorderBrushPointerOver`|
 | `IconButtonBorderBrushPressed`                       | `SolidColorBrush` | `FilledButtonBorderBrushPressed`   |
 | `IconButtonBorderBrushDisabled`                      | `SolidColorBrush` | `FilledButtonBorderBrushDisabled`  |
+
+### Outlined Variant (Compatibility Aliases)
+
+These keys alias the Neutral (FilledTonal) variant for cross-design-system compatibility.
+
+| Key                                                  | Type              | Value                                    |
+|------------------------------------------------------|-------------------|------------------------------------------|
+| `OutlinedButtonForeground`                           | `SolidColorBrush` | `FilledTonalButtonForeground`            |
+| `OutlinedButtonForegroundPointerOver`                | `SolidColorBrush` | `FilledTonalButtonForegroundPointerOver` |
+| `OutlinedButtonForegroundPressed`                    | `SolidColorBrush` | `FilledTonalButtonForegroundPressed`     |
+| `OutlinedButtonForegroundDisabled`                   | `SolidColorBrush` | `FilledTonalButtonForegroundDisabled`    |
+| `OutlinedButtonBackground`                           | `SolidColorBrush` | `FilledTonalButtonBackground`            |
+| `OutlinedButtonBackgroundPointerOver`                | `SolidColorBrush` | `FilledTonalButtonBackgroundPointerOver` |
+| `OutlinedButtonBackgroundPressed`                    | `SolidColorBrush` | `FilledTonalButtonBackgroundPressed`     |
+| `OutlinedButtonBackgroundDisabled`                   | `SolidColorBrush` | `FilledTonalButtonBackgroundDisabled`    |
+| `OutlinedButtonBorderBrush`                          | `SolidColorBrush` | `FilledTonalButtonBorderBrush`           |
+| `OutlinedButtonBorderBrushPointerOver`               | `SolidColorBrush` | `FilledTonalButtonBorderBrushPointerOver`|
+| `OutlinedButtonBorderBrushPressed`                   | `SolidColorBrush` | `FilledTonalButtonBorderBrushPressed`    |
+| `OutlinedButtonBorderBrushDisabled`                  | `SolidColorBrush` | `FilledTonalButtonBorderBrushDisabled`   |

@@ -21,16 +21,12 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                              | Type              | Value                                      |
 |--------------------------------------------------|-------------------|--------------------------------------------|
-| `SimplePersonPictureSmallSize`                   | `Double`          | `SimpleIconSmall` (24)                          |
-| `SimplePersonPictureMediumSize`                  | `Double`          | `SimpleIconMedium` (32)                         |
-| `SimplePersonPictureLargeSize`                   | `Double`          | `SimpleIconLarge` (40)                          |
-| `SimplePersonPictureSquareSmallRadius`           | `CornerRadius`    | `SimpleRadius100CornerRadius` (4)              |
-| `SimplePersonPictureSquareMediumRadius`          | `CornerRadius`    | `SimpleRadius200CornerRadius` (8)              |
-| `SimplePersonPictureSquareLargeRadius`           | `CornerRadius`    | `SimpleRadius200CornerRadius` (8)              |
+| `SimplePersonPictureSmallSize`                   | `Double`          | `SimpleIconSmall` (24)                     |
+| `SimplePersonPictureMediumSize`                  | `Double`          | `SimpleIconMedium` (32)                    |
+| `SimplePersonPictureLargeSize`                   | `Double`          | `SimpleIconLarge` (40)                     |
 | `SimplePersonPictureInitialsSmallFontSize`       | `Double`          | 10                                         |
-| `SimplePersonPictureInitialsMediumFontSize`      | `Double`          | `SimpleTypographyScale02` (14)                  |
-| `SimplePersonPictureInitialsLargeFontSize`       | `Double`          | `SimpleTypographyScale03` (16)                  |
-| `SimplePersonPictureBackground`                  | `SolidColorBrush` | `SimpleBackgroundBrandDefaultBrush`        |
-| `SimplePersonPictureForeground`                  | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
-| `SimplePersonPictureBadgeBackground`             | `SolidColorBrush` | `SimpleBackgroundBrandDefaultBrush`        |
-| `SimplePersonPictureBadgeForeground`             | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
+| `SimplePersonPictureInitialsMediumFontSize`      | `Double`          | `BodyMediumFontSize` (14)                  |
+| `SimplePersonPictureInitialsLargeFontSize`       | `Double`          | `BodyLargeFontSize` (16)                   |
+
+> [!NOTE]
+> Corner radii for square variants are applied directly via `SimpleRadius100CornerRadius` and `SimpleRadius200CornerRadius` in the style templates, not through overridable resource keys. Brushes (`PrimaryBrush`, `OnPrimaryBrush`) are also applied directly in style setters and templates.

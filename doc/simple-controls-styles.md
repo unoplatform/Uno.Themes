@@ -13,6 +13,7 @@ uid: Uno.Themes.Simple.Styles
 | `AppBarButton`              | `SimpleDefaultAppBarButtonStyle`          | True             |
 | `AutoSuggestBox`            | `SimpleAutoSuggestBoxStyle`               |                  |
 | `AutoSuggestBox`            | `SimpleDefaultAutoSuggestBoxStyle`        | True             |
+| `AutoSuggestBox`            | `SimpleAutoSuggestBoxTextBoxStyle`        |                  |
 | `Button`                    | `SimpleFilledButtonStyle`                | True             |
 | `Button`                    | `SimpleFilledTonalButtonStyle`                |                  |
 | `Button`                    | `SimpleTextButtonStyle`                 |                  |
@@ -57,6 +58,7 @@ uid: Uno.Themes.Simple.Styles
 | `DatePicker`                | `SimpleDefaultDatePickerStyle`            | True             |
 | `DatePickerFlyoutPresenter` | `SimpleDatePickerFlyoutPresenterStyle`    |                  |
 | `DatePickerFlyoutPresenter` | `SimpleDefaultDatePickerFlyoutPresenterStyle` | True       |
+| `Button`                    | `SimpleDatePickerFlyoutButtonStyle`       |                  |
 | `Expander`                  | `SimpleExpanderStyle`                     |                  |
 | `Expander`                  | `SimpleDefaultExpanderStyle`              | True             |
 | `ListView`                  | `SimpleListViewStyle`                     |                  |
@@ -74,6 +76,7 @@ uid: Uno.Themes.Simple.Styles
 | `ToggleMenuFlyoutItem`      | `SimpleToggleMenuFlyoutItemStyle`         |                  |
 | `ToggleMenuFlyoutItem`      | `SimpleDefaultToggleMenuFlyoutItemStyle`  | True             |
 | `PasswordBox`               | `SimplePasswordBoxStyle`                  | True             |
+| `PasswordBox`               | `SimpleFilledPasswordBoxStyle`            |                  |
 | `PersonPicture`             | `SimplePersonPictureStyle`                |                  |
 | `PersonPicture`             | `SimplePersonPictureSmallStyle`           |                  |
 | `PersonPicture`             | `SimplePersonPictureLargeStyle`           |                  |
@@ -82,24 +85,33 @@ uid: Uno.Themes.Simple.Styles
 | `PersonPicture`             | `SimplePersonPictureSquareLargeStyle`     |                  |
 | `RadioButton`               | `SimpleRadioButtonStyle`                  | True             |
 | `Slider`                    | `SimpleSliderStyle`                       | True             |
+| `Thumb`                     | `SimpleSliderThumbStyle`                  |                  |
 | `TextBlock`                 | `SimpleBaseTextBlockStyle`                | True             |
-| `TextBlock`                 | `SimpleTitleHeroTextBlockStyle`           |                  |
-| `TextBlock`                 | `SimpleTitlePageTextBlockStyle`           |                  |
-| `TextBlock`                 | `SimpleSubtitleTextBlockStyle`            |                  |
-| `TextBlock`                 | `SimpleHeadingTextBlockStyle`             |                  |
-| `TextBlock`                 | `SimpleSubheadingTextBlockStyle`          |                  |
-| `TextBlock`                 | `SimpleBodyBaseTextBlockStyle`            |                  |
-| `TextBlock`                 | `SimpleBodyStrongTextBlockStyle`          |                  |
-| `TextBlock`                 | `SimpleBodyEmphasisTextBlockStyle`        |                  |
-| `TextBlock`                 | `SimpleBodySmallTextBlockStyle`           |                  |
-| `TextBlock`                 | `SimpleBodySmallStrongTextBlockStyle`     |                  |
-| `TextBlock`                 | `SimpleBodyCodeTextBlockStyle`            |                  |
-| `TextBlock`                 | `SimpleCaptionTextBlockStyle`             |                  |
+| `TextBlock`                 | `SimpleDisplayLarge`                      |                  |
+| `TextBlock`                 | `SimpleDisplayMedium`                     |                  |
+| `TextBlock`                 | `SimpleDisplaySmall`                      |                  |
+| `TextBlock`                 | `SimpleHeadlineLarge`                     |                  |
+| `TextBlock`                 | `SimpleHeadlineMedium`                    |                  |
+| `TextBlock`                 | `SimpleHeadlineSmall`                     |                  |
+| `TextBlock`                 | `SimpleTitleLarge`                        |                  |
+| `TextBlock`                 | `SimpleTitleMedium`                       |                  |
+| `TextBlock`                 | `SimpleTitleSmall`                        |                  |
+| `TextBlock`                 | `SimpleBodyLarge`                         |                  |
+| `TextBlock`                 | `SimpleBodyMedium`                        |                  |
+| `TextBlock`                 | `SimpleBodySmall`                         |                  |
+| `TextBlock`                 | `SimpleLabelLarge`                        |                  |
+| `TextBlock`                 | `SimpleLabelMedium`                       |                  |
+| `TextBlock`                 | `SimpleLabelSmall`                        |                  |
+| `TextBlock`                 | `SimpleLabelExtraSmall`                   |                  |
+| `TextBlock`                 | `SimpleCaptionLarge`                      |                  |
+| `TextBlock`                 | `SimpleCaptionMedium`                     |                  |
+| `TextBlock`                 | `SimpleCaptionSmall`                      |                  |
 | `TextBox`                   | `SimpleOutlinedTextBoxStyle`         | True             |
 | `TextBox`                   | `SimpleFilledTextBoxStyle`           |                  |
 | `TextBox`                   | `SimpleTextBoxErrorStyle`            |                  |
 | `TextBox`                   | `SimpleTextBoxSmallStyle`            |                  |
 | `ToggleButton`              | `SimpleDefaultToggleButtonStyle`          | True             |
+| `ToggleButton`              | `SimpleTextToggleButtonStyle`             |                  |
 | `ToggleButton`              | `SimpleSmallToggleButtonStyle`            |                  |
 | `ToggleButton`              | `SimpleMediumToggleButtonStyle`           |                  |
 | `ToggleButton`              | `SimpleIconToggleButtonStyle`             |                  |

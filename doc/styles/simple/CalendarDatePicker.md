@@ -25,9 +25,9 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `CalendarDatePickerFlyoutPresenterCornerRadius`    | `StaticResource`  | `SimpleRadius400CornerRadius`   |
 | `CalendarDatePickerBorderThemeThickness`           | `StaticResource`  | `SimpleStrokeBorderThickness`   |
 | `CalendarDatePickerFlyoutPresenterPadding`         | `StaticResource`  | `SimpleSpace0Thickness`         |
-| `CalendarDatePickerContentMargin`                  | `Thickness`       | 12,0,12,0                       |
-| `CalendarDatePickerHeight`                         | `StaticResource`  | `SimpleIconLarge`               |
-| `CalendarDatePickerMinHeight`                      | `StaticResource`  | `SimpleIconLarge`               |
+| `CalendarDatePickerContentMargin`                  | `Thickness`       | 12,0,12,0 (Light) / 16,10,16,10 (Dark) |
+| `CalendarDatePickerHeight`                         | `StaticResource`  | `SimpleIconLarge` (Light only)  |
+| `CalendarDatePickerMinHeight`                      | `StaticResource`  | `SimpleIconLarge` (Light) / 44 (Dark) |
 | `CalendarDatePickerHeaderMargin`                   | `Thickness`       | 0,0,0,8                         |
 | `CalendarDatePickerCalendarGlyphMargin`            | `Thickness`       | 12,0,0,0                        |
 | `CalendarDatePickerForeground`                     | `SolidColorBrush` | `OnSurfaceBrush`                |

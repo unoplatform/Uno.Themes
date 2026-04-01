@@ -9,6 +9,7 @@ uid: Uno.Themes.Simple.Styles.ToggleButton
 | Style Key                          | IsDefaultStyle\* |
 |------------------------------------|------------------|
 | `SimpleDefaultToggleButtonStyle`   | True             |
+| `SimpleTextToggleButtonStyle`      |                  |
 | `SimpleSmallToggleButtonStyle`     |                  |
 | `SimpleMediumToggleButtonStyle`    |                  |
 | `SimpleIconToggleButtonStyle`      |                  |
@@ -25,8 +26,8 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleToggleButtonSmallPadding`             | `Thickness`       | `SimpleSpace200Thickness`        |
 | `SimpleToggleButtonMediumMinHeight`          | `Double`          | `SimpleIconLarge`                |
 | `SimpleToggleButtonSmallMinHeight`           | `Double`          | `SimpleIconMedium`               |
-| `SimpleToggleButtonMediumFontSize`           | `Double`          | `SimpleTypographyScale03`        |
-| `SimpleToggleButtonSmallFontSize`            | `Double`          | `SimpleTypographyScale02`        |
+| `SimpleToggleButtonMediumFontSize`           | `Double`          | `BodyLargeFontSize`              |
+| `SimpleToggleButtonSmallFontSize`            | `Double`          | `BodyMediumFontSize`             |
 | `SimpleToggleButtonIconSpacing`              | `Double`          | `SimpleSpace200`                 |
 | `SimpleToggleButtonFontFamily`               | `FontFamily`      | Inter                            |
 

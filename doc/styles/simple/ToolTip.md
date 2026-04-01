@@ -19,6 +19,6 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleToolTipPadding`               | `Thickness`       | 12,8,12,8                      |
 | `SimpleToolTipCornerRadius`          | `CornerRadius`    | `SimpleRadius200CornerRadius` (8)  |
 | `SimpleToolTipBorderThickness`       | `Thickness`       | `SimpleStrokeBorderThickness` (1)  |
-| `SimpleToolTipBackground`            | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`      |
-| `SimpleToolTipBorderBrush`           | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`          |
-| `SimpleToolTipForeground`            | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`            |
+
+> [!NOTE]
+> The ToolTip control does not expose overridable themed brush resource keys. Brushes are applied directly via shared semantic resources (`SurfaceBrush`, `OutlineBrush`, `OnSurfaceBrush`) in the style setters.
