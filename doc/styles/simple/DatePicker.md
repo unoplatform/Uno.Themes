@@ -22,13 +22,13 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 #### Semantic Keys (source of truth)
 
-**FlyoutButton**
+##### FlyoutButton
 
 | Key                                            | Type              | Value                           |
 |------------------------------------------------|-------------------|---------------------------------|
 | `DatePickerFlyoutButtonBackground`             | `SolidColorBrush` | `SystemControlTransparentBrush` |
 
-**FlyoutPresenter**
+##### FlyoutPresenter
 
 | Key                                                 | Type              | Value                           |
 |-----------------------------------------------------|-------------------|---------------------------------|
@@ -46,7 +46,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerFlyoutBorderThickness`                   | `StaticResource`  | `SimpleStrokeBorder`            |
 | `DatePickerFlyoutPresenterFontFamily`               | `StaticResource`  | `SimpleFontFamily`              |
 
-**DatePicker Button (field appearance)**
+##### DatePicker Button (field appearance)
 
 | Key                                            | Type              | Value                           |
 |------------------------------------------------|-------------------|---------------------------------|
@@ -63,7 +63,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerButtonBorderBrushPressed`           | `SolidColorBrush` | `OutlineBrush`                  |
 | `DatePickerButtonBorderBrushDisabled`          | `SolidColorBrush` | `OutlineDisabledBrush`          |
 
-**Date Text**
+##### Date Text
 
 | Key                                            | Type              | Value                           |
 |------------------------------------------------|-------------------|---------------------------------|
@@ -72,20 +72,20 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerButtonDateTextForegroundPressed`    | `SolidColorBrush` | `OnSurfaceBrush`                |
 | `DatePickerButtonDateTextForegroundDisabled`   | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 
-**Placeholder Text**
+##### Placeholder Text
 
 | Key                                            | Type              | Value                           |
 |------------------------------------------------|-------------------|---------------------------------|
 | `DatePickerPlaceholderTextForeground`          | `SolidColorBrush` | `OnSurfaceLowBrush`             |
 
-**Header**
+##### Header
 
 | Key                                            | Type              | Value                           |
 |------------------------------------------------|-------------------|---------------------------------|
 | `DatePickerHeaderForeground`                   | `SolidColorBrush` | `OnSurfaceBrush`                |
 | `DatePickerHeaderForegroundDisabled`           | `SolidColorBrush` | `OnSurfaceDisabledBrush`        |
 
-**Dimensions**
+##### Dimensions
 
 | Key                                            | Type              | Value                           |
 |------------------------------------------------|-------------------|---------------------------------|
