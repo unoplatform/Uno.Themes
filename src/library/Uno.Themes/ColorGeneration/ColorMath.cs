@@ -1,3 +1,7 @@
+// Ported from material-color-utilities by Google under the Apache License 2.0.
+// Original source: https://github.com/material-foundation/material-color-utilities
+// SPDX-License-Identifier: Apache-2.0
+
 using System;
 
 namespace Uno.Themes.ColorGeneration;

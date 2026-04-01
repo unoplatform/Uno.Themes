@@ -1,3 +1,8 @@
+// Based on the dynamic color scheme generation from material-color-utilities
+// by Google under the Apache License 2.0.
+// Original source: https://github.com/material-foundation/material-color-utilities
+// SPDX-License-Identifier: Apache-2.0
+
 using System;
 using System.Collections.Generic;
 using Uno.Themes.ColorGeneration.Hct;
