@@ -88,7 +88,10 @@ internal sealed class SeedColorPaletteGenerator
 
 		var neutral = new TonalPalette(hue, Math.Min(chroma / 12.0, 4.0));
 		var neutralVariant = new TonalPalette(hue, Math.Min(chroma / 6.0, 8.0));
-		var error = new TonalPalette(25.0, 84.0);
+
+		// Error palette is intentionally omitted — it uses fixed values (hue=25, chroma=84)
+		// independent of the seed color, matching the Material Theme Builder behavior.
+		// The built-in SharedColorPalette.xaml already defines the correct Error colors.
 
 		// Build the resource dictionary
 		var lightDict = new ResourceDictionary();
@@ -116,12 +119,6 @@ internal sealed class SeedColorPaletteGenerator
 		SetColor(lightDict, darkDict, "OnTertiaryColor", tertiary, 100, 20);
 		SetColor(lightDict, darkDict, "TertiaryContainerColor", tertiary, 90, 30);
 		SetColor(lightDict, darkDict, "OnTertiaryContainerColor", tertiary, 10, 90);
-
-		// Error
-		SetColor(lightDict, darkDict, "ErrorColor", error, 40, 80);
-		SetColor(lightDict, darkDict, "OnErrorColor", error, 100, 20);
-		SetColor(lightDict, darkDict, "ErrorContainerColor", error, 90, 30);
-		SetColor(lightDict, darkDict, "OnErrorContainerColor", error, 10, 90);
 
 		// Background
 		SetColor(lightDict, darkDict, "BackgroundColor", neutral, 99, 10);

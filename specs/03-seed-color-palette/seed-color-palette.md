@@ -106,7 +106,8 @@ From the seed color's HCT values (Hue **H**, Chroma **C**):
 | **Tertiary** | H + 60 | C / 2 | Hue-shifted accent for visual interest |
 | **Neutral** | H | min(C/12, 4) | Near-gray for backgrounds and surfaces |
 | **Neutral Variant** | H | min(C/6, 8) | Slightly tinted for outlines and surface variants |
-| **Error** | 25 | 84 | Fixed red, independent of seed |
+
+Error colors are **not generated** from the seed — they use the fixed values from `SharedColorPalette.xaml`, matching the Material Theme Builder behavior where Error always stays red regardless of seed color.
 
 If `SecondarySeedColor` or `TertiarySeedColor` are provided, those palettes use the provided color's HCT values instead of the auto-derived ones.
 
@@ -133,10 +134,6 @@ Each tonal palette maps to semantic color roles at specific tone levels:
 | OnTertiary | 100 | 20 | Tertiary |
 | TertiaryContainer | 90 | 30 | Tertiary |
 | OnTertiaryContainer | 10 | 90 | Tertiary |
-| Error | 40 | 80 | Error |
-| OnError | 100 | 20 | Error |
-| ErrorContainer | 90 | 30 | Error |
-| OnErrorContainer | 10 | 90 | Error |
 | Background | 99 | 10 | Neutral |
 | OnBackground | 10 | 90 | Neutral |
 | Surface | 99 | 20 | Neutral |
