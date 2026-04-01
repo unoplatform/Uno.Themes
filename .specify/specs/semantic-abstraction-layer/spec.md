@@ -8,7 +8,7 @@
 
 Uno.Themes ships multiple design system implementations (Material, Simple, Cupertino).
 Each theme defines its own style keys prefixed by theme name (e.g. `MaterialFilledButtonStyle`,
-`SimplePrimaryButtonStyle`). Today, both themes already publish a partial set of
+`SimpleFilledButtonStyle`). Today, both themes already publish a partial set of
 **theme-agnostic aliases** in their respective `_Resources.xaml` files — but these
 alias sets are **inconsistent** between themes and were never designed as a formal
 abstraction contract.
@@ -47,7 +47,7 @@ future investigation.
 - **Simple** (`src/library/Uno.Simple.WinUI/Styles/Controls/_Resources.xaml`):
   Publishes SDS-native aliases (e.g. `PrimaryButtonStyle`, `NeutralButtonStyle`)
   **plus** a set of "legacy / backwards-compatible aliases" that partially map
-  Material names to Simple equivalents (e.g. `FilledButtonStyle → SimplePrimaryButtonStyle`).
+  Material names to Simple equivalents (e.g. `FilledButtonStyle → SimpleFilledButtonStyle`).
 
 **Lightweight styling resources** — Both themes define per-control ThemeDictionary
 resources for lightweight styling, but with different naming:
@@ -84,7 +84,7 @@ rendering under both Material and Simple themes.
 1. **Given** Material theme is active, **When** `FilledButtonStyle` is applied,
    **Then** the button renders identically to `MaterialFilledButtonStyle`.
 2. **Given** Simple theme is active, **When** `FilledButtonStyle` is applied,
-   **Then** the button renders identically to `SimplePrimaryButtonStyle`.
+   **Then** the button renders identically to `SimpleFilledButtonStyle`.
 3. **Given** Simple theme is active, **When** `ElevatedButtonStyle` is applied,
    **Then** the button renders using the documented best-fit mapping (or falls back
    gracefully if no mapping exists yet).
@@ -157,7 +157,7 @@ Both themes support overriding semantic resource keys:
 **Many-to-One Mapping Constraint**:
 
 Where multiple semantic styles map to the same Simple style (e.g.
-`FilledTonalButtonStyle` and `OutlinedButtonStyle` both → `SimpleNeutralButtonStyle`),
+`FilledTonalButtonStyle` and `OutlinedButtonStyle` both → `SimpleFilledTonalButtonStyle`),
 the template can only reference **one** set of semantic resource keys. The
 **first listed** semantic mapping is the canonical one the template references.
 The other semantic key set is aliased to the canonical keys and provides read
@@ -166,7 +166,7 @@ many-to-one mappings, not a design limitation.
 
 | Simple Style | Canonical Semantic Keys | Aliased Semantic Keys |
 |---|---|---|
-| `SimpleNeutralButtonStyle` | `FilledTonalButton*` | `OutlinedButton*` (aliases → `FilledTonalButton*`) |
+| `SimpleFilledTonalButtonStyle` | `FilledTonalButton*` | `OutlinedButton*` (aliases → `FilledTonalButton*`) |
 
 To override the Neutral button appearance, developers can use either
 `FilledTonalButton*` keys or `SimpleNeutralButton*` keys (both reference the
@@ -198,7 +198,7 @@ default style) and the gap is documented.
   the alias chain. Overriding the `Simple`-prefixed key also works (template
   picks it up directly).
 - What happens when two semantic style variants map to the same Simple style
-  (e.g. `OutlinedButtonStyle` and `FilledTonalButtonStyle` both → `SimpleNeutralButtonStyle`)?
+  (e.g. `OutlinedButtonStyle` and `FilledTonalButtonStyle` both → `SimpleFilledTonalButtonStyle`)?
   → The template references `SimpleNeutralButton*` keys (which alias to the
   canonical `FilledTonalButton*` keys). Overriding `SimpleNeutralButtonForeground`
   or `FilledTonalButtonForeground` both work. The `OutlinedButton*` set is aliased
@@ -227,7 +227,7 @@ default style) and the gap is documented.
   naming/aliasing for styles and resources, plus updating Simple's existing
   templates to reference semantic resource keys instead of `Simple`-prefixed keys.
 - **FR-006**: Existing theme-prefixed keys (e.g. `MaterialFilledButtonStyle`,
-  `SimplePrimaryButtonStyle`) MUST remain valid and unchanged. `Simple`-prefixed
+  `SimpleFilledButtonStyle`) MUST remain valid and unchanged. `Simple`-prefixed
   lightweight styling resource keys MUST become backwards-compatible aliases
   pointing to the corresponding semantic keys.
 - **FR-007**: For every control with a semantic style mapping, Simple's control
@@ -259,15 +259,15 @@ Convention: **Semantic Key** = Material v2 key with `Material` prefix removed.
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `FilledButtonStyle` | `MaterialFilledButtonStyle` | `SimplePrimaryButtonStyle` | Simple "Primary" = filled appearance |
+| `FilledButtonStyle` | `MaterialFilledButtonStyle` | `SimpleFilledButtonStyle` | Simple "Primary" = filled appearance |
 | `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | ⚠️ **GAP** | Simple has no elevated/shadow variant |
-| `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleNeutralButtonStyle` | Simple "Neutral" is closest tonal match |
-| `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleNeutralButtonStyle` | Simple "Neutral" has outline treatment |
-| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleSubtleButtonStyle` | Simple "Subtle" = text-only appearance |
-| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonPrimaryStyle` | Simple splits icon buttons by color; Primary is default |
+| `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleFilledTonalButtonStyle` | Simple "Neutral" is closest tonal match |
+| `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleFilledTonalButtonStyle` | Simple "Neutral" has outline treatment |
+| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | Simple "Subtle" = text-only appearance |
+| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | Simple splits icon buttons by color; Primary is default |
 
 > **Note — `FilledTonalButtonStyle` and `OutlinedButtonStyle`** both map to
-> `SimpleNeutralButtonStyle`. This is intentional — Simple's "Neutral" concept
+> `SimpleFilledTonalButtonStyle`. This is intentional — Simple's "Neutral" concept
 > covers both tonal and outlined treatments. No disambiguation needed.
 
 ### Floating Action Button (FAB)
@@ -280,9 +280,9 @@ styles under Material theme.
 
 | Semantic Key | Material v2 | Simple | Notes |
 |---|---|---|---|
-| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonPrimaryStyle` | Primary icon button as FAB equivalent |
-| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleSmallIconButtonPrimaryStyle` | Small primary icon button |
-| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonPrimaryStyle` | Same as default (no large variant) |
+| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonStyle` | Primary icon button as FAB equivalent |
+| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleSmallIconButtonStyle` | Small primary icon button |
+| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonStyle` | Same as default (no large variant) |
 | `SecondaryFabStyle` | `MaterialSecondaryFabStyle` | `SimpleIconButtonNeutralStyle` | Neutral icon button |
 | `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
 | `SecondaryLargeFabStyle` | `MaterialSecondaryLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
@@ -526,7 +526,7 @@ This ensures overriding **either** `SimplePrimaryButtonForeground` **or**
 
 ### Mapping Pattern Per Control
 
-The style-level mapping (e.g. `FilledButtonStyle → SimplePrimaryButtonStyle`) determines
+The style-level mapping (e.g. `FilledButtonStyle → SimpleFilledButtonStyle`) determines
 the resource-level mapping prefix (e.g. `FilledButton* → SimplePrimaryButton*`).
 
 For each mapped style variant, the resource properties follow this pattern:
@@ -684,8 +684,8 @@ contract because they are implementation details or theme-specific controls.
 
 | Semantic Key | Issue | Resolution |
 |---|---|---|
-| `FilledTonalButtonStyle` / `OutlinedButtonStyle` | Both map to `SimpleNeutralButtonStyle` | Intentional — Simple's Neutral covers both; no action needed |
-| `IconButtonStyle` | Material has one icon button; Simple has 5 color variants | Mapped to `SimpleIconButtonPrimaryStyle` as default |
+| `FilledTonalButtonStyle` / `OutlinedButtonStyle` | Both map to `SimpleFilledTonalButtonStyle` | Intentional — Simple's Neutral covers both; no action needed |
+| `IconButtonStyle` | Material has one icon button; Simple has 5 color variants | Mapped to `SimpleIconButtonStyle` as default |
 | FAB styles (all 12) | Material-specific concept | **Resolved**: Simple maps to existing icon button styles (#1639) |
 
 ---
@@ -728,7 +728,7 @@ The semantic layer has two tiers:
 <StaticResource x:Key="FilledButtonStyle" ResourceKey="MaterialFilledButtonStyle" />
 
 <!-- In Simple _Resources.xaml (update needed): -->
-<StaticResource x:Key="FilledButtonStyle" ResourceKey="SimplePrimaryButtonStyle" />
+<StaticResource x:Key="FilledButtonStyle" ResourceKey="SimpleFilledButtonStyle" />
 ```
 
 **Tier 2 — Lightweight styling resources** (in per-control XAML files):

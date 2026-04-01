@@ -4,7 +4,7 @@ uid: Uno.Themes.SemanticStyles
 
 # Semantic Styles
 
-Uno Themes provides a **semantic style abstraction layer** that lets you write theme-agnostic XAML. Instead of referencing theme-prefixed style keys (e.g. `MaterialFilledButtonStyle` or `SimplePrimaryButtonStyle`), you use a single **semantic key** like `FilledButtonStyle` and the active theme resolves it to the correct design-system-specific style at runtime.
+Uno Themes provides a **semantic style abstraction layer** that lets you write theme-agnostic XAML. Instead of referencing theme-prefixed style keys (e.g. `MaterialFilledButtonStyle` or `SimpleFilledButtonStyle`), you use a single **semantic key** like `FilledButtonStyle` and the active theme resolves it to the correct design-system-specific style at runtime.
 
 ```xml
 <!-- Works under both Material and Simple themes -->
@@ -16,7 +16,7 @@ Uno Themes provides a **semantic style abstraction layer** that lets you write t
 Each theme's `_Resources.xaml` defines `<StaticResource>` aliases that map semantic keys to theme-specific styles:
 
 - **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
-- **Simple**: `FilledButtonStyle` &rarr; `SimplePrimaryButtonStyle`
+- **Simple**: `FilledButtonStyle` &rarr; `SimpleFilledButtonStyle`
 
 ## Control Style Mappings
 
@@ -26,12 +26,12 @@ The following tables show every semantic style key and how it resolves under eac
 
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
-| `FilledButtonStyle` | `MaterialFilledButtonStyle` | `SimplePrimaryButtonStyle` | Default implicit style for both themes |
+| `FilledButtonStyle` | `MaterialFilledButtonStyle` | `SimpleFilledButtonStyle` | Default implicit style for both themes |
 | `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | **GAP** | Simple has no elevated/shadow variant |
-| `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleNeutralButtonStyle` | Simple "Neutral" is closest tonal match |
-| `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleNeutralButtonStyle` | Same Simple target as FilledTonal |
-| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleSubtleButtonStyle` | Text-only appearance |
-| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonPrimaryStyle` | Simple has multiple icon button colors; Primary is default |
+| `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleFilledTonalButtonStyle` | Simple "Neutral" is closest tonal match |
+| `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleFilledTonalButtonStyle` | Same Simple target as FilledTonal |
+| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | Text-only appearance |
+| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | Simple has multiple icon button colors; Primary is default |
 
 ### Floating Action Button (FAB)
 
@@ -39,9 +39,9 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
-| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonPrimaryStyle` | Primary icon button as FAB equivalent |
-| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleSmallIconButtonPrimaryStyle` | |
-| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonPrimaryStyle` | No large variant in Simple |
+| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonStyle` | Primary icon button as FAB equivalent |
+| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleSmallIconButtonStyle` | |
+| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonStyle` | No large variant in Simple |
 | `SecondaryFabStyle` | `MaterialSecondaryFabStyle` | `SimpleIconButtonNeutralStyle` | |
 | `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
 | `SecondaryLargeFabStyle` | `MaterialSecondaryLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |

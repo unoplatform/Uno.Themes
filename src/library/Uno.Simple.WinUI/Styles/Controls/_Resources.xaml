@@ -8,7 +8,7 @@
 					mc:Ignorable="d not_win">
 
 	<!-- Implicit styles -->
-	<Style BasedOn="{StaticResource SimplePrimaryButtonStyle}"
+	<Style BasedOn="{StaticResource SimpleFilledButtonStyle}"
 		   TargetType="Button" />
 	<Style BasedOn="{StaticResource SimpleCheckBoxStyle}"
 		   TargetType="CheckBox" />
@@ -100,12 +100,12 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 
 	<!-- Button -->
-	<StaticResource x:Key="FilledButtonStyle" ResourceKey="SimplePrimaryButtonStyle" />
+	<StaticResource x:Key="FilledButtonStyle" ResourceKey="SimpleFilledButtonStyle" />
 	<!-- ElevatedButtonStyle — GAP: Simple has no elevated/shadow button variant -->
-	<StaticResource x:Key="FilledTonalButtonStyle" ResourceKey="SimpleNeutralButtonStyle" />
-	<StaticResource x:Key="OutlinedButtonStyle" ResourceKey="SimpleNeutralButtonStyle" />
-	<StaticResource x:Key="TextButtonStyle" ResourceKey="SimpleSubtleButtonStyle" />
-	<StaticResource x:Key="IconButtonStyle" ResourceKey="SimpleIconButtonPrimaryStyle" />
+	<StaticResource x:Key="FilledTonalButtonStyle" ResourceKey="SimpleFilledTonalButtonStyle" />
+	<StaticResource x:Key="OutlinedButtonStyle" ResourceKey="SimpleFilledTonalButtonStyle" />
+	<StaticResource x:Key="TextButtonStyle" ResourceKey="SimpleTextButtonStyle" />
+	<StaticResource x:Key="IconButtonStyle" ResourceKey="SimpleIconButtonStyle" />
 
 	<!-- ToggleButton -->
 	<StaticResource x:Key="TextToggleButtonStyle" ResourceKey="SimpleTextToggleButtonStyle" />
@@ -172,9 +172,9 @@
 	<StaticResource x:Key="RadioMenuFlyoutItemStyle" ResourceKey="SimpleRadioMenuFlyoutItemStyle" />
 
 	<!-- FAB — alias to existing Simple icon button styles -->
-	<StaticResource x:Key="FabStyle" ResourceKey="SimpleIconButtonPrimaryStyle" />
-	<StaticResource x:Key="SmallFabStyle" ResourceKey="SimpleSmallIconButtonPrimaryStyle" />
-	<StaticResource x:Key="LargeFabStyle" ResourceKey="SimpleIconButtonPrimaryStyle" />
+	<StaticResource x:Key="FabStyle" ResourceKey="SimpleIconButtonStyle" />
+	<StaticResource x:Key="SmallFabStyle" ResourceKey="SimpleSmallIconButtonStyle" />
+	<StaticResource x:Key="LargeFabStyle" ResourceKey="SimpleIconButtonStyle" />
 	<StaticResource x:Key="SecondaryFabStyle" ResourceKey="SimpleIconButtonNeutralStyle" />
 	<StaticResource x:Key="SecondarySmallFabStyle" ResourceKey="SimpleSmallIconButtonNeutralStyle" />
 	<StaticResource x:Key="SecondaryLargeFabStyle" ResourceKey="SimpleIconButtonNeutralStyle" />

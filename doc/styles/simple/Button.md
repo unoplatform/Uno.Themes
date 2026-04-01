@@ -8,32 +8,32 @@ uid: Uno.Themes.Simple.Styles.Button
 
 | Style Key                                 | IsDefaultStyle\* |
 |-------------------------------------------|------------------|
-| `SimplePrimaryButtonStyle`                | True             |
-| `SimpleNeutralButtonStyle`                |                  |
-| `SimpleSubtleButtonStyle`                 |                  |
+| `SimpleFilledButtonStyle`                | True             |
+| `SimpleFilledTonalButtonStyle`                |                  |
+| `SimpleTextButtonStyle`                 |                  |
 | `SimpleDangerPrimaryButtonStyle`          |                  |
 | `SimpleDangerSubtleButtonStyle`           |                  |
-| `SimpleSmallPrimaryButtonStyle`           |                  |
-| `SimpleSmallNeutralButtonStyle`           |                  |
-| `SimpleSmallSubtleButtonStyle`            |                  |
+| `SimpleSmallFilledButtonStyle`           |                  |
+| `SimpleSmallFilledTonalButtonStyle`           |                  |
+| `SimpleSmallTextButtonStyle`            |                  |
 | `SimpleSmallDangerPrimaryButtonStyle`     |                  |
 | `SimpleSmallDangerSubtleButtonStyle`      |                  |
-| `SimpleMediumPrimaryButtonStyle`          |                  |
-| `SimpleMediumNeutralButtonStyle`          |                  |
-| `SimpleMediumSubtleButtonStyle`           |                  |
+| `SimpleMediumFilledButtonStyle`          |                  |
+| `SimpleMediumFilledTonalButtonStyle`          |                  |
+| `SimpleMediumTextButtonStyle`           |                  |
 | `SimpleMediumDangerPrimaryButtonStyle`    |                  |
 | `SimpleMediumDangerSubtleButtonStyle`     |                  |
-| `SimpleIconButtonPrimaryStyle`            |                  |
+| `SimpleIconButtonStyle`            |                  |
 | `SimpleIconButtonNeutralStyle`            |                  |
 | `SimpleIconButtonSubtleStyle`             |                  |
 | `SimpleIconButtonDangerPrimaryStyle`      |                  |
 | `SimpleIconButtonDangerSubtleStyle`       |                  |
-| `SimpleSmallIconButtonPrimaryStyle`       |                  |
+| `SimpleSmallIconButtonStyle`       |                  |
 | `SimpleSmallIconButtonNeutralStyle`       |                  |
 | `SimpleSmallIconButtonSubtleStyle`        |                  |
 | `SimpleSmallIconButtonDangerPrimaryStyle` |                  |
 | `SimpleSmallIconButtonDangerSubtleStyle`  |                  |
-| `SimpleMediumIconButtonPrimaryStyle`      |                  |
+| `SimpleMediumIconButtonStyle`      |                  |
 | `SimpleMediumIconButtonNeutralStyle`      |                  |
 | `SimpleMediumIconButtonSubtleStyle`       |                  |
 | `SimpleMediumIconButtonDangerPrimaryStyle`|                  |
