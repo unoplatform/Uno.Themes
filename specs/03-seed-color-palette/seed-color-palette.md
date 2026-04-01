@@ -17,18 +17,28 @@ The implementation follows the [Material Design 3 color system](https://m3.mater
 ```xml
 <!-- Single seed color generates the entire palette -->
 <MaterialTheme xmlns="using:Uno.Material"
-               SeedColor="#6750A4" />
+               PrimarySeedColor="#6750A4" />
 
 <!-- Optional secondary and tertiary seed colors for more control -->
 <MaterialTheme xmlns="using:Uno.Material"
-               SeedColor="#6750A4"
+               PrimarySeedColor="#6750A4"
                SecondarySeedColor="#625B71"
                TertiarySeedColor="#7D5260" />
 
 <!-- Seed color + manual overrides (overrides win) -->
 <MaterialTheme xmlns="using:Uno.Material"
-               SeedColor="#6750A4"
+               PrimarySeedColor="#6750A4"
                ColorOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+
+<!-- Grouped API via ThemeColors (recommended) -->
+<MaterialTheme xmlns="using:Uno.Material">
+    <MaterialTheme.Colors>
+        <ThemeColors PrimarySeedColor="#6750A4"
+                     SecondarySeedColor="#625B71"
+                     TertiarySeedColor="#7D5260"
+                     OverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+    </MaterialTheme.Colors>
+</MaterialTheme>
 ```
 
 ### C#
@@ -36,21 +46,43 @@ The implementation follows the [Material Design 3 color system](https://m3.mater
 ```csharp
 // Set at initialization
 var theme = new MaterialTheme();
-theme.SeedColor = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
+theme.PrimarySeedColor = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
 
-// Change at runtime (triggers full palette regeneration)
-theme.SeedColor = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
+// Change at runtime (triggers palette regeneration + in-place brush updates)
+theme.PrimarySeedColor = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
+
+// Using the grouped API
+var theme = new MaterialTheme
+{
+    Colors = new ThemeColors
+    {
+        PrimarySeedColor = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4),
+    }
+};
+// Runtime change via grouped API
+theme.Colors.PrimarySeedColor = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
 ```
 
-### Properties
+### Properties on `BaseTheme`
 
 | Property | Type | Default | Description |
 |---|---|---|---|
-| `SeedColor` | `Color?` | `null` | Primary seed color. When set, generates all color roles. |
+| `PrimarySeedColor` | `Color?` | `null` | Primary seed color. When set, generates all color roles. |
 | `SecondarySeedColor` | `Color?` | `null` | Optional. Overrides the auto-derived secondary palette. |
 | `TertiarySeedColor` | `Color?` | `null` | Optional. Overrides the auto-derived tertiary palette. |
+| `Colors` | `ThemeColors` | `null` | Grouped color configuration (recommended). Takes precedence over top-level properties. |
 
-All three properties are defined on `BaseTheme`, so they work with `MaterialTheme`, `SimpleTheme`, and any future theme subclass.
+### Properties on `ThemeColors`
+
+| Property | Type | Default | Description |
+|---|---|---|---|
+| `PrimarySeedColor` | `Color?` | `null` | Primary seed color. |
+| `SecondarySeedColor` | `Color?` | `null` | Optional secondary seed color. |
+| `TertiarySeedColor` | `Color?` | `null` | Optional tertiary seed color. |
+| `OverrideSource` | `string` | `null` | URI to a color override ResourceDictionary. |
+| `OverrideDictionary` | `ResourceDictionary` | `null` | Direct color override dictionary. |
+
+All properties are defined on `BaseTheme`, so they work with `MaterialTheme`, `SimpleTheme`, and any future theme subclass. When both the `Colors` grouped property and top-level properties are set, `Colors` takes precedence.
 
 ## How It Works
 
@@ -132,35 +164,39 @@ Colors resolve in this order (last wins):
 ```
 SharedColorPalette.xaml (built-in defaults)
     ↓ overridden by
-Seed-generated palette (if SeedColor is set)
+Seed-generated palette (if PrimarySeedColor is set)
     ↓ overridden by
 ColorOverrideDictionary / ColorOverrideSource (explicit user overrides)
 ```
 
+When using the `Colors` grouped property, `Colors.OverrideDictionary` takes precedence over the top-level `ColorOverrideDictionary`.
+
 This means:
-- Setting `SeedColor` replaces all default palette colors
-- Setting `ColorOverrideDictionary` on top of `SeedColor` lets you fine-tune specific roles
-- Not setting `SeedColor` preserves the existing behavior (no breaking change)
+- Setting `PrimarySeedColor` replaces all default palette colors
+- Setting `ColorOverrideDictionary` on top of `PrimarySeedColor` lets you fine-tune specific roles
+- Not setting `PrimarySeedColor` preserves the existing behavior (no breaking change)
 
 ## Architecture
 
 ### New Files
 
 ```
-src/library/Uno.Themes/ColorGeneration/
-    ColorMath.cs                    # sRGB/Linear/XYZ/L* conversions
-    TonalPalette.cs                 # Hue+chroma → tone-indexed ARGB lookup
-    SeedColorPaletteGenerator.cs    # Orchestrator: seed → ResourceDictionary
-    Hct/
-        Cam16.cs                    # CAM16 color appearance model
-        HctColor.cs                 # Public HCT struct
-        HctSolver.cs               # Bisection solver: HCT → ARGB
-        ViewingConditions.cs        # Standard sRGB viewing conditions
+src/library/Uno.Themes/
+    ThemeColors.cs                  # Grouped color configuration DependencyObject
+    ColorGeneration/
+        ColorMath.cs                # sRGB/Linear/XYZ/L* conversions
+        TonalPalette.cs             # Hue+chroma → tone-indexed ARGB lookup
+        SeedColorPaletteGenerator.cs # Orchestrator: seed → ResourceDictionary (with caching)
+        Hct/
+            Cam16.cs                # CAM16 color appearance model
+            HctColor.cs             # Public HCT struct
+            HctSolver.cs            # Bisection solver: HCT → ARGB
+            ViewingConditions.cs    # Standard sRGB viewing conditions
 ```
 
 ### Modified Files
 
-- `src/library/Uno.Themes/BaseTheme.cs` — Added `SeedColor`, `SecondarySeedColor`, `TertiarySeedColor` dependency properties; updated `UpdateSource()` to generate and merge the seed palette.
+- `src/library/Uno.Themes/BaseTheme.cs` — Added `PrimarySeedColor`, `SecondarySeedColor`, `TertiarySeedColor`, and `Colors` dependency properties; updated `UpdateSource()` to generate and merge the seed palette with runtime brush update support.
 
 ### Sample Page
 
@@ -191,11 +227,21 @@ All other color math internals (`Cam16`, `HctSolver`, `ViewingConditions`, `Colo
 
 ## Performance
 
-Generating the full palette (~78 HCT solves for all tones across 6 palettes) completes in under 1ms on modern hardware. The `TonalPalette` class caches computed tones, so repeated lookups are free.
+Generating the full palette (~78 HCT solves for all tones across 6 palettes) completes in under 1ms on modern hardware. The `TonalPalette` class caches computed tones, so repeated lookups are free. `SeedColorPaletteGenerator` also caches full palette `ResourceDictionary` results by seed color tuple, so regenerating with the same seed colors returns the cached result instantly.
+
+## Runtime Color Updates
+
+When a seed color property is changed at runtime, `BaseTheme` performs the following:
+
+1. **Capture original brushes** — On the first runtime change (after the theme is in the resource tree), all `SolidColorBrush` instances are captured from `Application.Current.Resources`. These references are stored permanently.
+2. **Rebuild palette** — The theme dictionaries are cleared and rebuilt with the new seed-generated colors.
+3. **Patch in-place** — The original brush instances (still held by UI elements via `{ThemeResource}`) have their `Color` property updated to the new values. Since `SolidColorBrush.Color` is a DependencyProperty, the UI updates automatically.
+
+This approach avoids full page re-navigation or theme toggling. The brush capture is deferred until the theme is confirmed to be in the resource tree (via `IsInResourceTree()` walk) to avoid capturing transient brushes created during XAML initialization.
 
 ## Compatibility
 
-- **Non-breaking:** The `SeedColor` property defaults to `null`. Existing themes that don't set it behave identically to before.
+- **Non-breaking:** The `PrimarySeedColor` property defaults to `null`. Existing themes that don't set it behave identically to before.
 - **All theme subclasses:** The properties live on `BaseTheme`, so `MaterialTheme`, `SimpleTheme`, and `CupertinoTheme` all inherit the capability.
 
 ## References

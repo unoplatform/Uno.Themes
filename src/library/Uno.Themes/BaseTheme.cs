@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Uno.Themes.ColorGeneration;
 
 
@@ -21,6 +22,8 @@ public abstract class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
+	private Dictionary<string, SolidColorBrush> _originalBrushes;
+	private bool _isInResourceTree;
 	#region FontOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -129,23 +132,70 @@ public abstract class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
-	#region SeedColor (DP)
+	#region Colors (DP)
 	/// <summary>
-	/// (Optional) Gets or sets a seed <see cref="Color"/> that algorithmically generates
+	/// Gets or sets a <see cref="ThemeColors"/> object that groups all color-related configuration
+	/// including seed colors, overrides, and the palette generation algorithm.
+	/// This is the recommended way to configure theme colors.
+	/// </summary>
+	public ThemeColors Colors
+	{
+		get => (ThemeColors)GetValue(ColorsProperty);
+		set => SetValue(ColorsProperty, value);
+	}
+
+	public static DependencyProperty ColorsProperty { get; } =
+		DependencyProperty.Register(
+			nameof(Colors),
+			typeof(ThemeColors),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnColorsChanged));
+
+	private static void OnColorsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme)
+		{
+			if (e.OldValue is ThemeColors old)
+			{
+				old.SetChangedCallback(null);
+			}
+
+			if (e.NewValue is ThemeColors tc)
+			{
+				tc.SetChangedCallback(() =>
+				{
+					if (!theme._isColorOverrideMuted)
+					{
+						theme.UpdateSource();
+					}
+				});
+			}
+
+			if (!theme._isColorOverrideMuted)
+			{
+				theme.UpdateSource();
+			}
+		}
+	}
+	#endregion
+
+	#region PrimarySeedColor (DP)
+	/// <summary>
+	/// Gets or sets a seed <see cref="Color"/> that algorithmically generates
 	/// the full color palette using the HCT (Hue-Chroma-Tone) color space.
 	/// When set, all semantic color roles (Primary, Secondary, Tertiary, Error, Surface, etc.)
 	/// are derived from this single color for both Light and Dark themes.
 	/// Individual colors can still be overridden via <see cref="ColorOverrideDictionary"/>.
 	/// </summary>
-	public Color? SeedColor
+	public Color? PrimarySeedColor
 	{
-		get => (Color?)GetValue(SeedColorProperty);
-		set => SetValue(SeedColorProperty, value);
+		get => (Color?)GetValue(PrimarySeedColorProperty);
+		set => SetValue(PrimarySeedColorProperty, value);
 	}
 
-	public static DependencyProperty SeedColorProperty { get; } =
+	public static DependencyProperty PrimarySeedColorProperty { get; } =
 		DependencyProperty.Register(
-			nameof(SeedColor),
+			nameof(PrimarySeedColor),
 			typeof(Color?),
 			typeof(BaseTheme),
 			new PropertyMetadata(null, OnSeedColorChanged));
@@ -162,7 +212,7 @@ public abstract class BaseTheme : ResourceDictionary
 	#region SecondarySeedColor (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a seed <see cref="Color"/> for the Secondary color role.
-	/// If not set, the Secondary palette is auto-derived from <see cref="SeedColor"/>.
+	/// If not set, the Secondary palette is auto-derived from <see cref="PrimarySeedColor"/>.
 	/// </summary>
 	public Color? SecondarySeedColor
 	{
@@ -181,7 +231,7 @@ public abstract class BaseTheme : ResourceDictionary
 	#region TertiarySeedColor (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a seed <see cref="Color"/> for the Tertiary color role.
-	/// If not set, the Tertiary palette is auto-derived from <see cref="SeedColor"/>.
+	/// If not set, the Tertiary palette is auto-derived from <see cref="PrimarySeedColor"/>.
 	/// </summary>
 	public Color? TertiarySeedColor
 	{
@@ -245,6 +295,29 @@ public abstract class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
+		// Only capture brush references after this theme has been added to the app's
+		// resource tree. During XAML init, UpdateSource() is called from the constructor
+		// and DP setters before the theme is in the tree — those calls create transient
+		// brush generations that the UI never resolves to. The brushes that matter are
+		// the ones present when the first runtime change occurs (post-init).
+		if (_originalBrushes == null)
+		{
+			if (!_isInResourceTree)
+			{
+				_isInResourceTree = IsInResourceTree();
+			}
+
+			if (_isInResourceTree && Application.Current?.Resources is { } appRes)
+			{
+				var collected = new Dictionary<string, SolidColorBrush>();
+				CollectBrushes(appRes, collected);
+				if (collected.Count > 0)
+				{
+					_originalBrushes = collected;
+				}
+			}
+		}
+
 #if !HAS_UNO
 		Source = null;
 #endif
@@ -257,13 +330,20 @@ public abstract class BaseTheme : ResourceDictionary
 
 		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
 
-		if (SeedColor is { } seed)
+		// Resolve seed colors: Colors property takes precedence over top-level properties
+		var effectivePrimary = Colors?.PrimarySeedColor ?? PrimarySeedColor;
+		var effectiveSecondary = Colors?.SecondarySeedColor ?? SecondarySeedColor;
+		var effectiveTertiary = Colors?.TertiarySeedColor ?? TertiarySeedColor;
+
+		if (effectivePrimary is { } seed)
 		{
-			var seedPalette = SeedColorPaletteGenerator.Generate(seed, SecondarySeedColor, TertiarySeedColor);
+			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary);
 			colors.SafeMerge(seedPalette);
 		}
 
-		if (ColorOverrideDictionary is { } colorOverride)
+		// Resolve color overrides: Colors.OverrideDictionary takes precedence
+		var effectiveColorOverride = Colors?.OverrideDictionary ?? ColorOverrideDictionary;
+		if (effectiveColorOverride is { } colorOverride)
 		{
 			colors.SafeMerge(colorOverride);
 		}
@@ -277,6 +357,163 @@ public abstract class BaseTheme : ResourceDictionary
 
 		MergedDictionaries.Add(typography);
 		MergedDictionaries.Add(mergedPages);
+
+		// Update the original brush instances (held by UI elements) with new color values.
+		if (_originalBrushes is { Count: > 0 })
+		{
+			UpdateOldBrushes(_originalBrushes, colors);
+		}
+	}
+
+	/// <summary>
+	/// Collects all <see cref="SolidColorBrush"/> instances from the resource tree
+	/// before the dictionaries are cleared, so they can be updated in-place afterwards.
+	/// </summary>
+	private static void CollectBrushes(ResourceDictionary dict, Dictionary<string, SolidColorBrush> brushes)
+	{
+		foreach (var themeDict in dict.ThemeDictionaries.Values)
+		{
+			if (themeDict is ResourceDictionary themed)
+			{
+				CollectBrushEntries(themed, brushes);
+			}
+		}
+
+		CollectBrushEntries(dict, brushes);
+
+		foreach (var merged in dict.MergedDictionaries)
+		{
+			CollectBrushes(merged, brushes);
+		}
+	}
+
+	private static void CollectBrushEntries(ResourceDictionary dict, Dictionary<string, SolidColorBrush> brushes)
+	{
+		foreach (var key in dict.Keys)
+		{
+			if (key is string brushKey
+				&& brushKey.EndsWith("Brush")
+				&& dict[brushKey] is SolidColorBrush brush
+				&& TryGetColorKeyForBrush(brushKey, out _))
+			{
+				// Keep the first (outermost) instance — that's what UI elements resolve to
+				brushes.TryAdd(brushKey, brush);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Updates the old brush instances (captured before clearing) with new color values
+	/// from the rebuilt color dictionaries.
+	/// </summary>
+	private static void UpdateOldBrushes(Dictionary<string, SolidColorBrush> oldBrushes, ResourceDictionary newColors)
+	{
+		var colorMap = new Dictionary<string, Color>();
+		CollectColors(newColors, colorMap);
+
+		foreach (var (brushKey, brush) in oldBrushes)
+		{
+			if (TryGetColorKeyForBrush(brushKey, out var colorKey)
+				&& colorMap.TryGetValue(colorKey, out var newColor)
+				&& brush.Color != newColor)
+			{
+				brush.Color = newColor;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Checks whether this theme dictionary is reachable from <see cref="Application.Current.Resources"/>.
+	/// During XAML init the theme is constructed and configured before being added to the tree,
+	/// so this returns false until the XAML parser actually adds it.
+	/// </summary>
+	private bool IsInResourceTree()
+	{
+		if (Application.Current?.Resources is not { } res) return false;
+		return IsReachableFrom(res);
+	}
+
+	private bool IsReachableFrom(ResourceDictionary dict)
+	{
+		if (ReferenceEquals(dict, this)) return true;
+
+		foreach (var merged in dict.MergedDictionaries)
+		{
+			if (IsReachableFrom(merged)) return true;
+		}
+
+		foreach (var themeDict in dict.ThemeDictionaries.Values)
+		{
+			if (themeDict is ResourceDictionary rd && IsReachableFrom(rd)) return true;
+		}
+
+		return false;
+	}
+
+	private static void CollectColors(ResourceDictionary dict, Dictionary<string, Color> colorMap)
+	{
+		// Collect from theme dictionaries
+		foreach (var themeDict in dict.ThemeDictionaries.Values)
+		{
+			if (themeDict is ResourceDictionary themed)
+			{
+				foreach (var key in themed.Keys)
+				{
+					if (key is string k && k.EndsWith("Color") && themed[k] is Color c)
+					{
+						colorMap[k] = c;
+					}
+				}
+			}
+		}
+
+		// Collect from direct entries
+		foreach (var key in dict.Keys)
+		{
+			if (key is string k && k.EndsWith("Color") && dict[k] is Color c)
+			{
+				colorMap[k] = c;
+			}
+		}
+
+		// Recurse into merged dictionaries
+		foreach (var merged in dict.MergedDictionaries)
+		{
+			CollectColors(merged, colorMap);
+		}
+	}
+
+	/// <summary>
+	/// Derives the color resource key from a brush resource key.
+	/// E.g. "PrimaryBrush" → "PrimaryColor", "PrimaryHoverBrush" → "PrimaryColor",
+	/// "OnSurfaceVariantDisabledBrush" → "OnSurfaceVariantColor".
+	/// </summary>
+	private static bool TryGetColorKeyForBrush(string brushKey, out string colorKey)
+	{
+		colorKey = null;
+
+		if (!brushKey.EndsWith("Brush"))
+		{
+			return false;
+		}
+
+		// Strip the "Brush" suffix
+		var baseName = brushKey.Substring(0, brushKey.Length - 5); // "PrimaryHover", "Primary", etc.
+
+		// Known state suffixes in order of longest first
+		string[] stateSuffixes = { "Disabled", "Selected", "Dragged", "Pressed", "Focused", "Medium", "Hover", "Low" };
+
+		foreach (var suffix in stateSuffixes)
+		{
+			if (baseName.EndsWith(suffix))
+			{
+				baseName = baseName.Substring(0, baseName.Length - suffix.Length);
+				break;
+			}
+		}
+
+		colorKey = baseName + "Color";
+		return true;
 	}
 
 	protected abstract ResourceDictionary GenerateSpecificResources();

@@ -179,7 +179,7 @@ public sealed partial class SeedColorSamplePage : Page
 		SetSemanticSwatch(DarkOutlineVariant, neutralVariant, 30);
 
 		// XAML snippet
-		XamlSnippet.Text = $"<MaterialTheme SeedColor=\"{ColorToHex(seed)}\" />";
+		XamlSnippet.Text = $"<MaterialTheme PrimarySeedColor=\"{ColorToHex(seed)}\" />";
 	}
 
 	private void SetSwatch(Border border, TonalPalette palette, int tone)

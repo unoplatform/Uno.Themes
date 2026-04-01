@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Uno.Themes.ColorGeneration.Hct;
 
 #if WinUI
@@ -15,16 +16,41 @@ namespace Uno.Themes.ColorGeneration;
 /// Generates a complete semantic color palette (Light + Dark) from seed color(s),
 /// following the Material Design 3 tonal palette system.
 /// </summary>
-internal static class SeedColorPaletteGenerator
+internal sealed class SeedColorPaletteGenerator
 {
 	/// <summary>
-	/// Generate a ResourceDictionary with Light and Dark theme color entries
-	/// matching the keys in SharedColorPalette.xaml.
+	/// Shared default instance.
 	/// </summary>
-	internal static ResourceDictionary Generate(
-		Color seedColor,
+	internal static SeedColorPaletteGenerator Default { get; } = new();
+
+	private readonly Dictionary<(int primary, int? secondary, int? tertiary), ResourceDictionary> _cache = new();
+
+	internal ResourceDictionary Generate(
+		Color primarySeedColor,
 		Color? secondarySeedColor = null,
 		Color? tertiarySeedColor = null)
+	{
+		var cacheKey = (
+			ColorToArgb(primarySeedColor),
+			secondarySeedColor is { } sec ? (int?)ColorToArgb(sec) : null,
+			tertiarySeedColor is { } ter ? (int?)ColorToArgb(ter) : null);
+
+		if (_cache.TryGetValue(cacheKey, out var cached))
+		{
+			return cached;
+		}
+
+		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor);
+		_cache[cacheKey] = result;
+		return result;
+	}
+
+	internal void ClearCache() => _cache.Clear();
+
+	private static ResourceDictionary GenerateCore(
+		Color seedColor,
+		Color? secondarySeedColor,
+		Color? tertiarySeedColor)
 	{
 		var seedHct = HctColor.FromArgb(ColorToArgb(seedColor));
 		double hue = seedHct.Hue;
