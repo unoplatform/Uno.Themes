@@ -19,58 +19,58 @@ public sealed partial class ThemeColors : DependencyObject
 {
 	private Action _onChanged;
 
-	#region PrimarySeedColor (DP)
+	#region PrimarySeed (DP)
 	/// <summary>
 	/// Gets or sets the primary seed <see cref="Color"/> used to algorithmically generate
 	/// the full color palette. When set, all semantic color roles are derived from this color.
 	/// </summary>
-	public Color? PrimarySeedColor
+	public Color? PrimarySeed
 	{
-		get => (Color?)GetValue(PrimarySeedColorProperty);
-		set => SetValue(PrimarySeedColorProperty, value);
+		get => (Color?)GetValue(PrimarySeedProperty);
+		set => SetValue(PrimarySeedProperty, value);
 	}
 
-	public static DependencyProperty PrimarySeedColorProperty { get; } =
+	public static DependencyProperty PrimarySeedProperty { get; } =
 		DependencyProperty.Register(
-			nameof(PrimarySeedColor),
+			nameof(PrimarySeed),
 			typeof(Color?),
 			typeof(ThemeColors),
 			new PropertyMetadata(null, OnPropertyChanged));
 	#endregion
 
-	#region SecondarySeedColor (DP)
+	#region SecondarySeed (DP)
 	/// <summary>
 	/// Gets or sets the secondary seed <see cref="Color"/>. If not set, the Secondary
-	/// palette is auto-derived from <see cref="PrimarySeedColor"/>.
+	/// palette is auto-derived from <see cref="PrimarySeed"/>.
 	/// </summary>
-	public Color? SecondarySeedColor
+	public Color? SecondarySeed
 	{
-		get => (Color?)GetValue(SecondarySeedColorProperty);
-		set => SetValue(SecondarySeedColorProperty, value);
+		get => (Color?)GetValue(SecondarySeedProperty);
+		set => SetValue(SecondarySeedProperty, value);
 	}
 
-	public static DependencyProperty SecondarySeedColorProperty { get; } =
+	public static DependencyProperty SecondarySeedProperty { get; } =
 		DependencyProperty.Register(
-			nameof(SecondarySeedColor),
+			nameof(SecondarySeed),
 			typeof(Color?),
 			typeof(ThemeColors),
 			new PropertyMetadata(null, OnPropertyChanged));
 	#endregion
 
-	#region TertiarySeedColor (DP)
+	#region TertiarySeed (DP)
 	/// <summary>
 	/// Gets or sets the tertiary seed <see cref="Color"/>. If not set, the Tertiary
-	/// palette is auto-derived from <see cref="PrimarySeedColor"/>.
+	/// palette is auto-derived from <see cref="PrimarySeed"/>.
 	/// </summary>
-	public Color? TertiarySeedColor
+	public Color? TertiarySeed
 	{
-		get => (Color?)GetValue(TertiarySeedColorProperty);
-		set => SetValue(TertiarySeedColorProperty, value);
+		get => (Color?)GetValue(TertiarySeedProperty);
+		set => SetValue(TertiarySeedProperty, value);
 	}
 
-	public static DependencyProperty TertiarySeedColorProperty { get; } =
+	public static DependencyProperty TertiarySeedProperty { get; } =
 		DependencyProperty.Register(
-			nameof(TertiarySeedColor),
+			nameof(TertiarySeed),
 			typeof(Color?),
 			typeof(ThemeColors),
 			new PropertyMetadata(null, OnPropertyChanged));

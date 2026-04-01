@@ -179,74 +179,6 @@ public abstract class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
-	#region PrimarySeedColor (DP)
-	/// <summary>
-	/// Gets or sets a seed <see cref="Color"/> that algorithmically generates
-	/// the full color palette using the HCT (Hue-Chroma-Tone) color space.
-	/// When set, all semantic color roles (Primary, Secondary, Tertiary, Error, Surface, etc.)
-	/// are derived from this single color for both Light and Dark themes.
-	/// Individual colors can still be overridden via <see cref="ColorOverrideDictionary"/>.
-	/// </summary>
-	public Color? PrimarySeedColor
-	{
-		get => (Color?)GetValue(PrimarySeedColorProperty);
-		set => SetValue(PrimarySeedColorProperty, value);
-	}
-
-	public static DependencyProperty PrimarySeedColorProperty { get; } =
-		DependencyProperty.Register(
-			nameof(PrimarySeedColor),
-			typeof(Color?),
-			typeof(BaseTheme),
-			new PropertyMetadata(null, OnSeedColorChanged));
-
-	private static void OnSeedColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-	{
-		if (d is BaseTheme { _isColorOverrideMuted: false } theme)
-		{
-			theme.UpdateSource();
-		}
-	}
-	#endregion
-
-	#region SecondarySeedColor (DP)
-	/// <summary>
-	/// (Optional) Gets or sets a seed <see cref="Color"/> for the Secondary color role.
-	/// If not set, the Secondary palette is auto-derived from <see cref="PrimarySeedColor"/>.
-	/// </summary>
-	public Color? SecondarySeedColor
-	{
-		get => (Color?)GetValue(SecondarySeedColorProperty);
-		set => SetValue(SecondarySeedColorProperty, value);
-	}
-
-	public static DependencyProperty SecondarySeedColorProperty { get; } =
-		DependencyProperty.Register(
-			nameof(SecondarySeedColor),
-			typeof(Color?),
-			typeof(BaseTheme),
-			new PropertyMetadata(null, OnSeedColorChanged));
-	#endregion
-
-	#region TertiarySeedColor (DP)
-	/// <summary>
-	/// (Optional) Gets or sets a seed <see cref="Color"/> for the Tertiary color role.
-	/// If not set, the Tertiary palette is auto-derived from <see cref="PrimarySeedColor"/>.
-	/// </summary>
-	public Color? TertiarySeedColor
-	{
-		get => (Color?)GetValue(TertiarySeedColorProperty);
-		set => SetValue(TertiarySeedColorProperty, value);
-	}
-
-	public static DependencyProperty TertiarySeedColorProperty { get; } =
-		DependencyProperty.Register(
-			nameof(TertiarySeedColor),
-			typeof(Color?),
-			typeof(BaseTheme),
-			new PropertyMetadata(null, OnSeedColorChanged));
-	#endregion
-
 	public BaseTheme() : this(colorOverride: null, fontOverride: null)
 	{
 
@@ -330,10 +262,10 @@ public abstract class BaseTheme : ResourceDictionary
 
 		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
 
-		// Resolve seed colors: Colors property takes precedence over top-level properties
-		var effectivePrimary = Colors?.PrimarySeedColor ?? PrimarySeedColor;
-		var effectiveSecondary = Colors?.SecondarySeedColor ?? SecondarySeedColor;
-		var effectiveTertiary = Colors?.TertiarySeedColor ?? TertiarySeedColor;
+		// Resolve seed colors from Colors property
+		var effectivePrimary = Colors?.PrimarySeed;
+		var effectiveSecondary = Colors?.SecondarySeed;
+		var effectiveTertiary = Colors?.TertiarySeed;
 
 		if (effectivePrimary is { } seed)
 		{

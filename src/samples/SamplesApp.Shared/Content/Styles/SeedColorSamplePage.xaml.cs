@@ -25,6 +25,9 @@ public sealed partial class SeedColorSamplePage : Page
 
 	private void ApplySeedColor(Color seed)
 	{
+		// Update the actual app theme so the entire app re-themes
+		SemanticThemeHelper.PrimarySeed = seed;
+
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
 
 		// Generate palettes
@@ -179,7 +182,7 @@ public sealed partial class SeedColorSamplePage : Page
 		SetSemanticSwatch(DarkOutlineVariant, neutralVariant, 30);
 
 		// XAML snippet
-		XamlSnippet.Text = $"<MaterialTheme PrimarySeedColor=\"{ColorToHex(seed)}\" />";
+		XamlSnippet.Text = $"<MaterialTheme>\n  <MaterialTheme.Colors>\n    <ThemeColors PrimarySeed=\"{ColorToHex(seed)}\" />\n  </MaterialTheme.Colors>\n</MaterialTheme>";
 	}
 
 	private void SetSwatch(Border border, TonalPalette palette, int tone)
