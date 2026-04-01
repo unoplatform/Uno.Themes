@@ -24,7 +24,7 @@
 							   Margin="0,0,0,8"
 							   TextWrapping="Wrap" />
 
-					<!-- FilledButtonStyle → SimplePrimaryButtonStyle -->
+					<!-- FilledButtonStyle → SimpleFilledButtonStyle -->
 					<smtx:XamlDisplay UniqueKey="Simple_Semantic_FilledButton"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal" Spacing="12">
@@ -36,7 +36,7 @@
 						</StackPanel>
 					</smtx:XamlDisplay>
 
-					<!-- FilledTonalButtonStyle → SimpleNeutralButtonStyle -->
+					<!-- FilledTonalButtonStyle → SimpleFilledTonalButtonStyle -->
 					<smtx:XamlDisplay UniqueKey="Simple_Semantic_FilledTonalButton"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal" Spacing="12">
@@ -48,7 +48,7 @@
 						</StackPanel>
 					</smtx:XamlDisplay>
 
-					<!-- OutlinedButtonStyle → SimpleNeutralButtonStyle -->
+					<!-- OutlinedButtonStyle → SimpleFilledTonalButtonStyle -->
 					<smtx:XamlDisplay UniqueKey="Simple_Semantic_OutlinedButton"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal" Spacing="12">
@@ -60,7 +60,7 @@
 						</StackPanel>
 					</smtx:XamlDisplay>
 
-					<!-- TextButtonStyle → SimpleSubtleButtonStyle -->
+					<!-- TextButtonStyle → SimpleTextButtonStyle -->
 					<smtx:XamlDisplay UniqueKey="Simple_Semantic_TextButton"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal" Spacing="12">
@@ -72,7 +72,7 @@
 						</StackPanel>
 					</smtx:XamlDisplay>
 
-					<!-- IconButtonStyle → SimpleIconButtonPrimaryStyle -->
+					<!-- IconButtonStyle → SimpleIconButtonStyle -->
 					<smtx:XamlDisplay UniqueKey="Simple_Semantic_IconButton"
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<StackPanel Orientation="Horizontal" Spacing="12">
@@ -137,130 +137,6 @@
 							</StackPanel.Resources>
 							<Button Content="Semantic: TextButtonForeground"
 									Style="{StaticResource TextButtonStyle}" />
-						</StackPanel>
-					</smtx:XamlDisplay>
-
-					<!-- ═══════════════════════════════════════════════════════════ -->
-					<!-- SECTION 3: Lightweight Styling — Simple Key Override       -->
-					<!-- Override the Simple-prefixed resource key directly.        -->
-					<!-- ═══════════════════════════════════════════════════════════ -->
-					<TextBlock Text="Lightweight Styling: Simple Key Override"
-							   Style="{StaticResource TitleLarge}"
-							   Margin="0,32,0,4" />
-					<TextBlock Text="Overriding the Simple-prefixed key (e.g. SimplePrimaryButtonBackground) directly affects the control because the template references it."
-							   Style="{StaticResource BodyMedium}"
-							   Opacity="0.7"
-							   Margin="0,0,0,8"
-							   TextWrapping="Wrap" />
-
-					<!-- Override SimplePrimaryButtonBackground -->
-					<smtx:XamlDisplay UniqueKey="Simple_Override_SimplePrimaryButtonBackground"
-									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<StackPanel Orientation="Horizontal" Spacing="12">
-							<StackPanel.Resources>
-								<SolidColorBrush x:Key="SimplePrimaryButtonBackground" Color="DarkGreen" />
-								<SolidColorBrush x:Key="SimplePrimaryButtonBackgroundPointerOver" Color="ForestGreen" />
-								<SolidColorBrush x:Key="SimplePrimaryButtonBackgroundPressed" Color="Green" />
-							</StackPanel.Resources>
-							<Button Content="Simple: SimplePrimaryButtonBackground"
-									Style="{StaticResource SimplePrimaryButtonStyle}" />
-						</StackPanel>
-					</smtx:XamlDisplay>
-
-					<!-- Override SimpleNeutralButtonBackground -->
-					<smtx:XamlDisplay UniqueKey="Simple_Override_SimpleNeutralButtonBackground"
-									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<StackPanel Orientation="Horizontal" Spacing="12">
-							<StackPanel.Resources>
-								<SolidColorBrush x:Key="SimpleNeutralButtonBackground" Color="DarkOrange" />
-								<SolidColorBrush x:Key="SimpleNeutralButtonBackgroundPointerOver" Color="Orange" />
-								<SolidColorBrush x:Key="SimpleNeutralButtonBackgroundPressed" Color="OrangeRed" />
-							</StackPanel.Resources>
-							<Button Content="Simple: SimpleNeutralButtonBackground"
-									Style="{StaticResource SimpleNeutralButtonStyle}" />
-						</StackPanel>
-					</smtx:XamlDisplay>
-
-					<!-- Override SimpleSubtleButtonForeground -->
-					<smtx:XamlDisplay UniqueKey="Simple_Override_SimpleSubtleButtonForeground"
-									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<StackPanel Orientation="Horizontal" Spacing="12">
-							<StackPanel.Resources>
-								<SolidColorBrush x:Key="SimpleSubtleButtonForeground" Color="Teal" />
-								<SolidColorBrush x:Key="SimpleSubtleButtonForegroundPointerOver" Color="DarkCyan" />
-								<SolidColorBrush x:Key="SimpleSubtleButtonForegroundPressed" Color="DarkSlateGray" />
-							</StackPanel.Resources>
-							<Button Content="Simple: SimpleSubtleButtonForeground"
-									Style="{StaticResource SimpleSubtleButtonStyle}" />
-						</StackPanel>
-					</smtx:XamlDisplay>
-
-					<!-- ═══════════════════════════════════════════════════════════ -->
-					<!-- SECTION 4: Side-by-Side Comparison                         -->
-					<!-- Same control, both override approaches next to default.    -->
-					<!-- ═══════════════════════════════════════════════════════════ -->
-					<TextBlock Text="Side-by-Side: Default vs Semantic vs Simple Override"
-							   Style="{StaticResource TitleLarge}"
-							   Margin="0,32,0,4" />
-					<TextBlock Text="All three buttons use the same style. The left is unmodified, the center overrides the semantic key, and the right overrides the Simple-prefixed key."
-							   Style="{StaticResource BodyMedium}"
-							   Opacity="0.7"
-							   Margin="0,0,0,8"
-							   TextWrapping="Wrap" />
-
-					<smtx:XamlDisplay UniqueKey="Simple_Semantic_SideBySide_Background"
-									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<StackPanel Orientation="Horizontal" Spacing="12">
-							<!-- Default -->
-							<Button Content="Default"
-									Style="{StaticResource FilledButtonStyle}" />
-
-							<!-- Semantic key override -->
-							<Grid>
-								<Grid.Resources>
-									<SolidColorBrush x:Key="FilledButtonBackground" Color="DarkOrchid" />
-									<SolidColorBrush x:Key="FilledButtonForeground" Color="White" />
-								</Grid.Resources>
-								<Button Content="Semantic Override"
-										Style="{StaticResource FilledButtonStyle}" />
-							</Grid>
-
-							<!-- Simple-prefixed key override -->
-							<Grid>
-								<Grid.Resources>
-									<SolidColorBrush x:Key="SimplePrimaryButtonBackground" Color="DarkGreen" />
-									<SolidColorBrush x:Key="SimplePrimaryButtonForeground" Color="White" />
-								</Grid.Resources>
-								<Button Content="Simple Override"
-										Style="{StaticResource FilledButtonStyle}" />
-							</Grid>
-						</StackPanel>
-					</smtx:XamlDisplay>
-
-					<smtx:XamlDisplay UniqueKey="Simple_Semantic_SideBySide_Foreground"
-									  Style="{StaticResource XamlDisplayBelowStyle}">
-						<StackPanel Orientation="Horizontal" Spacing="12">
-							<!-- Default -->
-							<Button Content="Default"
-									Style="{StaticResource TextButtonStyle}" />
-
-							<!-- Semantic key override -->
-							<Grid>
-								<Grid.Resources>
-									<SolidColorBrush x:Key="TextButtonForeground" Color="Crimson" />
-								</Grid.Resources>
-								<Button Content="Semantic Override"
-										Style="{StaticResource TextButtonStyle}" />
-							</Grid>
-
-							<!-- Simple-prefixed key override -->
-							<Grid>
-								<Grid.Resources>
-									<SolidColorBrush x:Key="SimpleSubtleButtonForeground" Color="Teal" />
-								</Grid.Resources>
-								<Button Content="Simple Override"
-										Style="{StaticResource TextButtonStyle}" />
-							</Grid>
 						</StackPanel>
 					</smtx:XamlDisplay>
 

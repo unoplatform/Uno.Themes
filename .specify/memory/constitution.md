@@ -15,7 +15,7 @@ Each theme (Material, Cupertino, Simple) is a self-contained library that:
 
 - Lives under `src/library/Uno.<ThemeName>.WinUI/`
 - Exposes styles via a `<ThemeName>Theme.cs` entry point extending `BaseTheme`
-- Uses `<ThemeName>`-prefixed style keys (e.g., `SimplePrimaryButtonStyle`,
+- Uses `<ThemeName>`-prefixed style keys (e.g., `SimpleFilledButtonStyle`,
   `MaterialFilledButtonStyle`)
 - Maintains its own `ColorPalette.xaml`, color brushes, and typography resources
 - Can be consumed independently — no cross-theme dependencies
@@ -28,14 +28,14 @@ to cover the same control surface area over time.
 Style key names MUST reflect the **design system's vocabulary**, not WinUI/UWP
 implementation concepts:
 
-- **Simple/SDS**: `SimplePrimaryButtonStyle`, `SimpleTextBoxStyle`,
-  `SimpleSelectFieldStyle` — names match the Figma component naming
+- **Simple/SDS**: `SimpleFilledButtonStyle`, `SimpleTextBoxStyle`,
+  `SimpleComboBoxStyle` — names match the WinUI control naming
 - **Material**: `MaterialFilledButtonStyle`, `MaterialOutlinedCardStyle` —
   names match Material Design 3 naming
 - **Cupertino**: `CupertinoDefaultButtonStyle` — names match Apple HIG naming
 
 When a design system renames a component, styles MUST be renamed to match.
-Legacy aliases (e.g., `FilledButtonStyle` → `SimplePrimaryButtonStyle`) are
+Legacy aliases (e.g., `FilledButtonStyle` → `SimpleFilledButtonStyle`) are
 provided in `_Resources.xaml` for backwards compatibility but the canonical
 key is always the design-system-native name.
 

@@ -180,8 +180,8 @@
 	<StaticResource x:Key="SimpleButtonSmallPadding" ResourceKey="SimpleSpace200Thickness" />
 	<StaticResource x:Key="SimpleButtonMediumMinHeight" ResourceKey="SimpleIconLarge" />
 	<StaticResource x:Key="SimpleButtonSmallMinHeight" ResourceKey="SimpleIconMedium" />
-	<StaticResource x:Key="SimpleButtonMediumFontSize" ResourceKey="SimpleTypographyScale03" />
-	<StaticResource x:Key="SimpleButtonSmallFontSize" ResourceKey="SimpleTypographyScale02" />
+	<StaticResource x:Key="SimpleButtonMediumFontSize" ResourceKey="BodyMediumFontSize" />
+	<StaticResource x:Key="SimpleButtonSmallFontSize" ResourceKey="BodySmallFontSize" />
 	<StaticResource x:Key="SimpleButtonIconSpacing" ResourceKey="SimpleSpace200" />
 	<StaticResource x:Key="SimpleIconButtonCornerRadius" ResourceKey="SimpleRadiusFullCornerRadius" />
 	<StaticResource x:Key="SimpleIconButtonBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
@@ -223,7 +223,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Primary Button -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimplePrimaryButtonStyle"
+	<Style x:Key="SimpleFilledButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource SimpleBaseButtonStyle}">
 		<Setter Property="Foreground" Value="{ThemeResource FilledButtonForeground}" />
@@ -307,7 +307,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Neutral Button -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleNeutralButtonStyle"
+	<Style x:Key="SimpleFilledTonalButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource SimpleBaseButtonStyle}">
 		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
@@ -391,7 +391,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Subtle Button -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleSubtleButtonStyle"
+	<Style x:Key="SimpleTextButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource SimpleBaseButtonStyle}">
 		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
@@ -643,25 +643,25 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Small size variants (BasedOn avoids template duplication) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleSmallPrimaryButtonStyle"
+	<Style x:Key="SimpleSmallFilledButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimplePrimaryButtonStyle}">
+		   BasedOn="{StaticResource SimpleFilledButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleButtonSmallMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleButtonSmallPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleButtonSmallFontSize}" />
 	</Style>
 
-	<Style x:Key="SimpleSmallNeutralButtonStyle"
+	<Style x:Key="SimpleSmallFilledTonalButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimpleNeutralButtonStyle}">
+		   BasedOn="{StaticResource SimpleFilledTonalButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleButtonSmallMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleButtonSmallPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleButtonSmallFontSize}" />
 	</Style>
 
-	<Style x:Key="SimpleSmallSubtleButtonStyle"
+	<Style x:Key="SimpleSmallTextButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimpleSubtleButtonStyle}">
+		   BasedOn="{StaticResource SimpleTextButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleButtonSmallMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleButtonSmallPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleButtonSmallFontSize}" />
@@ -686,25 +686,25 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Medium size variants (BasedOn avoids template duplication) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleMediumPrimaryButtonStyle"
+	<Style x:Key="SimpleMediumFilledButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimplePrimaryButtonStyle}">
+		   BasedOn="{StaticResource SimpleFilledButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleButtonMediumMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleButtonMediumPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleButtonMediumFontSize}" />
 	</Style>
 
-	<Style x:Key="SimpleMediumNeutralButtonStyle"
+	<Style x:Key="SimpleMediumFilledTonalButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimpleNeutralButtonStyle}">
+		   BasedOn="{StaticResource SimpleFilledTonalButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleButtonMediumMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleButtonMediumPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleButtonMediumFontSize}" />
 	</Style>
 
-	<Style x:Key="SimpleMediumSubtleButtonStyle"
+	<Style x:Key="SimpleMediumTextButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimpleSubtleButtonStyle}">
+		   BasedOn="{StaticResource SimpleTextButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleButtonMediumMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleButtonMediumPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleButtonMediumFontSize}" />
@@ -771,7 +771,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Primary IconButton -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleIconButtonPrimaryStyle"
+	<Style x:Key="SimpleIconButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource SimpleBaseIconButtonStyle}">
 		<Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
@@ -1061,9 +1061,9 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- IconButton small size variants -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleSmallIconButtonPrimaryStyle"
+	<Style x:Key="SimpleSmallIconButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimpleIconButtonPrimaryStyle}">
+		   BasedOn="{StaticResource SimpleIconButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleIconButtonSmallMinSize}" />
 		<Setter Property="MinWidth" Value="{StaticResource SimpleIconButtonSmallMinSize}" />
 		<Setter Property="MaxHeight" Value="{StaticResource SimpleIconButtonSmallMinSize}" />
@@ -1114,9 +1114,9 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- IconButton medium size variants -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleMediumIconButtonPrimaryStyle"
+	<Style x:Key="SimpleMediumIconButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource SimpleIconButtonPrimaryStyle}">
+		   BasedOn="{StaticResource SimpleIconButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleIconButtonMediumMinSize}" />
 		<Setter Property="MinWidth" Value="{StaticResource SimpleIconButtonMediumMinSize}" />
 		<Setter Property="MaxHeight" Value="{StaticResource SimpleIconButtonMediumMinSize}" />

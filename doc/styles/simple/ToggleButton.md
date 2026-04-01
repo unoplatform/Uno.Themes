@@ -9,8 +9,10 @@ uid: Uno.Themes.Simple.Styles.ToggleButton
 | Style Key                          | IsDefaultStyle\* |
 |------------------------------------|------------------|
 | `SimpleDefaultToggleButtonStyle`   | True             |
+| `SimpleTextToggleButtonStyle`      |                  |
 | `SimpleSmallToggleButtonStyle`     |                  |
 | `SimpleMediumToggleButtonStyle`    |                  |
+| `SimpleIconToggleButtonStyle`      |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 
@@ -18,64 +20,64 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 | Key                                          | Type              | Value                            |
 |----------------------------------------------|-------------------|----------------------------------|
-| `SimpleToggleButtonCornerRadius`             | `CornerRadius`    | `SimpleRadius200CornerRadius` (8)    |
-| `SimpleToggleButtonBorderThickness`          | `Thickness`       | `SimpleStrokeBorderThickness` (1)    |
-| `SimpleToggleButtonMediumPadding`            | `Thickness`       | `SimpleSpace300Thickness` (12)        |
-| `SimpleToggleButtonSmallPadding`             | `Thickness`       | `SimpleSpace200Thickness` (8)        |
-| `SimpleToggleButtonMediumMinHeight`          | `Double`          | `SimpleIconLarge` (40)                |
-| `SimpleToggleButtonSmallMinHeight`           | `Double`          | `SimpleIconMedium` (32)               |
-| `SimpleToggleButtonMediumFontSize`           | `Double`          | `SimpleTypographyScale03` (16)        |
-| `SimpleToggleButtonSmallFontSize`            | `Double`          | `SimpleTypographyScale02` (14)        |
-| `SimpleToggleButtonIconSpacing`              | `Double`          | `SimpleSpace200` (8)                 |
+| `SimpleToggleButtonCornerRadius`             | `CornerRadius`    | `SimpleRadius200CornerRadius`    |
+| `SimpleToggleButtonBorderThickness`          | `Thickness`       | `SimpleStrokeBorderThickness`    |
+| `SimpleToggleButtonMediumPadding`            | `Thickness`       | `SimpleSpace300Thickness`        |
+| `SimpleToggleButtonSmallPadding`             | `Thickness`       | `SimpleSpace200Thickness`        |
+| `SimpleToggleButtonMediumMinHeight`          | `Double`          | `SimpleIconLarge`                |
+| `SimpleToggleButtonSmallMinHeight`           | `Double`          | `SimpleIconMedium`               |
+| `SimpleToggleButtonMediumFontSize`           | `Double`          | `BodyLargeFontSize`              |
+| `SimpleToggleButtonSmallFontSize`            | `Double`          | `BodyMediumFontSize`             |
+| `SimpleToggleButtonIconSpacing`              | `Double`          | `SimpleSpace200`                 |
 | `SimpleToggleButtonFontFamily`               | `FontFamily`      | Inter                            |
 
 ### Unchecked
 
-| Key                                                        | Type              | Value                                              |
-|------------------------------------------------------------|-------------------|----------------------------------------------------|
-| `SimpleToggleButtonForeground`                             | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleToggleButtonForegroundPointerOver`                  | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleToggleButtonForegroundPressed`                      | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleToggleButtonForegroundDisabled`                     | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`                   |
-| `SimpleToggleButtonBackground`                             | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryBrush`            |
-| `SimpleToggleButtonBackgroundPointerOver`                  | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryHoverBrush`       |
-| `SimpleToggleButtonBackgroundPressed`                      | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryPressedBrush`     |
-| `SimpleToggleButtonBackgroundDisabled`                     | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`             |
-| `SimpleToggleButtonBorderBrush`                            | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleToggleButtonBorderBrushPointerOver`                 | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleToggleButtonBorderBrushPressed`                     | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleToggleButtonBorderBrushDisabled`                    | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`                 |
+| Key                                                        | Type              | Value                        |
+|------------------------------------------------------------|-------------------|------------------------------|
+| `TextToggleButtonForeground`                               | `SolidColorBrush` | `OnSurfaceBrush`             |
+| `TextToggleButtonForegroundPointerOver`                    | `SolidColorBrush` | `OnSurfaceBrush`             |
+| `TextToggleButtonForegroundPressed`                        | `SolidColorBrush` | `OnSurfaceBrush`             |
+| `TextToggleButtonForegroundDisabled`                       | `SolidColorBrush` | `OnSurfaceDisabledBrush`     |
+| `TextToggleButtonBackground`                               | `SolidColorBrush` | `SurfaceVariantBrush`        |
+| `TextToggleButtonBackgroundPointerOver`                    | `SolidColorBrush` | `PrimaryContainerBrush`      |
+| `TextToggleButtonBackgroundPressed`                        | `SolidColorBrush` | `TertiaryContainerBrush`     |
+| `TextToggleButtonBackgroundDisabled`                       | `SolidColorBrush` | `OnSurfaceDisabledBrush`     |
+| `TextToggleButtonBorderBrush`                              | `SolidColorBrush` | `OutlineBrush`               |
+| `TextToggleButtonBorderBrushPointerOver`                   | `SolidColorBrush` | `OutlineBrush`               |
+| `TextToggleButtonBorderBrushPressed`                       | `SolidColorBrush` | `OutlineBrush`               |
+| `TextToggleButtonBorderBrushDisabled`                      | `SolidColorBrush` | `OutlineDisabledBrush`       |
 
 ### Checked
 
-| Key                                                        | Type              | Value                                      |
-|------------------------------------------------------------|-------------------|--------------------------------------------|
-| `SimpleToggleButtonForegroundChecked`                      | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
-| `SimpleToggleButtonForegroundCheckedPointerOver`           | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
-| `SimpleToggleButtonForegroundCheckedPressed`               | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
-| `SimpleToggleButtonForegroundCheckedDisabled`              | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`           |
-| `SimpleToggleButtonBackgroundChecked`                      | `SolidColorBrush` | `SimpleBackgroundBrandDefaultBrush`        |
-| `SimpleToggleButtonBackgroundCheckedPointerOver`           | `SolidColorBrush` | `SimpleBackgroundBrandHoverBrush`          |
-| `SimpleToggleButtonBackgroundCheckedPressed`               | `SolidColorBrush` | `SimpleBackgroundBrandPressedBrush`        |
-| `SimpleToggleButtonBackgroundCheckedDisabled`              | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`     |
-| `SimpleToggleButtonBorderBrushChecked`                     | `SolidColorBrush` | `SimpleBorderBrandDefaultBrush`            |
-| `SimpleToggleButtonBorderBrushCheckedPointerOver`          | `SolidColorBrush` | `SimpleBorderBrandDefaultBrush`            |
-| `SimpleToggleButtonBorderBrushCheckedPressed`              | `SolidColorBrush` | `SimpleBorderBrandDefaultBrush`            |
-| `SimpleToggleButtonBorderBrushCheckedDisabled`             | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`         |
+| Key                                                        | Type              | Value                        |
+|------------------------------------------------------------|-------------------|------------------------------|
+| `TextToggleButtonForegroundChecked`                        | `SolidColorBrush` | `OnPrimaryBrush`             |
+| `TextToggleButtonForegroundCheckedPointerOver`             | `SolidColorBrush` | `OnPrimaryBrush`             |
+| `TextToggleButtonForegroundCheckedPressed`                 | `SolidColorBrush` | `OnPrimaryBrush`             |
+| `TextToggleButtonForegroundCheckedDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`     |
+| `TextToggleButtonBackgroundChecked`                        | `SolidColorBrush` | `PrimaryBrush`               |
+| `TextToggleButtonBackgroundCheckedPointerOver`             | `SolidColorBrush` | `PrimaryVariantDarkBrush`    |
+| `TextToggleButtonBackgroundCheckedPressed`                 | `SolidColorBrush` | `PrimaryVariantDarkBrush`    |
+| `TextToggleButtonBackgroundCheckedDisabled`                | `SolidColorBrush` | `OnSurfaceDisabledBrush`     |
+| `TextToggleButtonBorderBrushChecked`                       | `SolidColorBrush` | `PrimaryBrush`               |
+| `TextToggleButtonBorderBrushCheckedPointerOver`            | `SolidColorBrush` | `PrimaryBrush`               |
+| `TextToggleButtonBorderBrushCheckedPressed`                | `SolidColorBrush` | `PrimaryBrush`               |
+| `TextToggleButtonBorderBrushCheckedDisabled`               | `SolidColorBrush` | `OutlineDisabledBrush`       |
 
 ### Indeterminate
 
-| Key                                                            | Type              | Value                                              |
-|----------------------------------------------------------------|-------------------|----------------------------------------------------|
-| `SimpleToggleButtonForegroundIndeterminate`                    | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleToggleButtonForegroundIndeterminatePointerOver`         | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleToggleButtonForegroundIndeterminatePressed`             | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`                    |
-| `SimpleToggleButtonForegroundIndeterminateDisabled`            | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`                   |
-| `SimpleToggleButtonBackgroundIndeterminate`                    | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryBrush`            |
-| `SimpleToggleButtonBackgroundIndeterminatePointerOver`         | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryHoverBrush`       |
-| `SimpleToggleButtonBackgroundIndeterminatePressed`             | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryPressedBrush`     |
-| `SimpleToggleButtonBackgroundIndeterminateDisabled`            | `SolidColorBrush` | `SimpleBackgroundDisabledDefaultBrush`             |
-| `SimpleToggleButtonBorderBrushIndeterminate`                   | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleToggleButtonBorderBrushIndeterminatePointerOver`        | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleToggleButtonBorderBrushIndeterminatePressed`            | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`                  |
-| `SimpleToggleButtonBorderBrushIndeterminateDisabled`           | `SolidColorBrush` | `SimpleBorderDisabledDefaultBrush`                 |
+| Key                                                            | Type              | Value                        |
+|----------------------------------------------------------------|-------------------|------------------------------|
+| `TextToggleButtonForegroundIndeterminate`                      | `SolidColorBrush` | `OnSurfaceBrush`             |
+| `TextToggleButtonForegroundIndeterminatePointerOver`           | `SolidColorBrush` | `OnSurfaceBrush`             |
+| `TextToggleButtonForegroundIndeterminatePressed`               | `SolidColorBrush` | `OnSurfaceBrush`             |
+| `TextToggleButtonForegroundIndeterminateDisabled`              | `SolidColorBrush` | `OnSurfaceDisabledBrush`     |
+| `TextToggleButtonBackgroundIndeterminate`                      | `SolidColorBrush` | `SurfaceVariantBrush`        |
+| `TextToggleButtonBackgroundIndeterminatePointerOver`           | `SolidColorBrush` | `PrimaryContainerBrush`      |
+| `TextToggleButtonBackgroundIndeterminatePressed`               | `SolidColorBrush` | `TertiaryContainerBrush`     |
+| `TextToggleButtonBackgroundIndeterminateDisabled`              | `SolidColorBrush` | `OnSurfaceDisabledBrush`     |
+| `TextToggleButtonBorderBrushIndeterminate`                     | `SolidColorBrush` | `OutlineBrush`               |
+| `TextToggleButtonBorderBrushIndeterminatePointerOver`          | `SolidColorBrush` | `OutlineBrush`               |
+| `TextToggleButtonBorderBrushIndeterminatePressed`              | `SolidColorBrush` | `OutlineBrush`               |
+| `TextToggleButtonBorderBrushIndeterminateDisabled`             | `SolidColorBrush` | `OutlineDisabledBrush`       |

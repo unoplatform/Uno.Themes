@@ -13,32 +13,33 @@ uid: Uno.Themes.Simple.Styles
 | `AppBarButton`              | `SimpleDefaultAppBarButtonStyle`          | True             |
 | `AutoSuggestBox`            | `SimpleAutoSuggestBoxStyle`               |                  |
 | `AutoSuggestBox`            | `SimpleDefaultAutoSuggestBoxStyle`        | True             |
-| `Button`                    | `SimplePrimaryButtonStyle`                | True             |
-| `Button`                    | `SimpleNeutralButtonStyle`                |                  |
-| `Button`                    | `SimpleSubtleButtonStyle`                 |                  |
+| `AutoSuggestBox`            | `SimpleAutoSuggestBoxTextBoxStyle`        |                  |
+| `Button`                    | `SimpleFilledButtonStyle`                | True             |
+| `Button`                    | `SimpleFilledTonalButtonStyle`                |                  |
+| `Button`                    | `SimpleTextButtonStyle`                 |                  |
 | `Button`                    | `SimpleDangerPrimaryButtonStyle`          |                  |
 | `Button`                    | `SimpleDangerSubtleButtonStyle`           |                  |
-| `Button`                    | `SimpleSmallPrimaryButtonStyle`           |                  |
-| `Button`                    | `SimpleSmallNeutralButtonStyle`           |                  |
-| `Button`                    | `SimpleSmallSubtleButtonStyle`            |                  |
+| `Button`                    | `SimpleSmallFilledButtonStyle`           |                  |
+| `Button`                    | `SimpleSmallFilledTonalButtonStyle`           |                  |
+| `Button`                    | `SimpleSmallTextButtonStyle`            |                  |
 | `Button`                    | `SimpleSmallDangerPrimaryButtonStyle`     |                  |
 | `Button`                    | `SimpleSmallDangerSubtleButtonStyle`      |                  |
-| `Button`                    | `SimpleMediumPrimaryButtonStyle`          |                  |
-| `Button`                    | `SimpleMediumNeutralButtonStyle`          |                  |
-| `Button`                    | `SimpleMediumSubtleButtonStyle`           |                  |
+| `Button`                    | `SimpleMediumFilledButtonStyle`          |                  |
+| `Button`                    | `SimpleMediumFilledTonalButtonStyle`          |                  |
+| `Button`                    | `SimpleMediumTextButtonStyle`           |                  |
 | `Button`                    | `SimpleMediumDangerPrimaryButtonStyle`    |                  |
 | `Button`                    | `SimpleMediumDangerSubtleButtonStyle`     |                  |
-| `Button`                    | `SimpleIconButtonPrimaryStyle`            |                  |
+| `Button`                    | `SimpleIconButtonStyle`            |                  |
 | `Button`                    | `SimpleIconButtonNeutralStyle`            |                  |
 | `Button`                    | `SimpleIconButtonSubtleStyle`             |                  |
 | `Button`                    | `SimpleIconButtonDangerPrimaryStyle`      |                  |
 | `Button`                    | `SimpleIconButtonDangerSubtleStyle`       |                  |
-| `Button`                    | `SimpleSmallIconButtonPrimaryStyle`       |                  |
+| `Button`                    | `SimpleSmallIconButtonStyle`       |                  |
 | `Button`                    | `SimpleSmallIconButtonNeutralStyle`       |                  |
 | `Button`                    | `SimpleSmallIconButtonSubtleStyle`        |                  |
 | `Button`                    | `SimpleSmallIconButtonDangerPrimaryStyle` |                  |
 | `Button`                    | `SimpleSmallIconButtonDangerSubtleStyle`  |                  |
-| `Button`                    | `SimpleMediumIconButtonPrimaryStyle`      |                  |
+| `Button`                    | `SimpleMediumIconButtonStyle`      |                  |
 | `Button`                    | `SimpleMediumIconButtonNeutralStyle`      |                  |
 | `Button`                    | `SimpleMediumIconButtonSubtleStyle`       |                  |
 | `Button`                    | `SimpleMediumIconButtonDangerPrimaryStyle`|                  |
@@ -48,15 +49,16 @@ uid: Uno.Themes.Simple.Styles
 | `CalendarView`              | `SimpleCalendarViewStyle`                 |                  |
 | `CalendarView`              | `SimpleDefaultCalendarViewStyle`          | True             |
 | `CheckBox`                  | `SimpleCheckBoxStyle`                     | True             |
-| `ComboBox`                  | `SimpleSelectFieldStyle`                  | True             |
-| `ComboBox`                  | `SimpleSelectFieldErrorStyle`             |                  |
-| `ComboBoxItem`              | `SimpleSelectFieldItemStyle`              |                  |
+| `ComboBox`                  | `SimpleComboBoxStyle`                     | True             |
+| `ComboBox`                  | `SimpleComboBoxErrorStyle`                |                  |
+| `ComboBoxItem`              | `SimpleComboBoxItemStyle`                 |                  |
 | `ContentDialog`             | `SimpleContentDialogStyle`                |                  |
 | `ContentDialog`             | `SimpleDefaultContentDialogStyle`         | True             |
 | `DatePicker`                | `SimpleDatePickerStyle`                   |                  |
 | `DatePicker`                | `SimpleDefaultDatePickerStyle`            | True             |
 | `DatePickerFlyoutPresenter` | `SimpleDatePickerFlyoutPresenterStyle`    |                  |
 | `DatePickerFlyoutPresenter` | `SimpleDefaultDatePickerFlyoutPresenterStyle` | True       |
+| `Button`                    | `SimpleDatePickerFlyoutButtonStyle`       |                  |
 | `Expander`                  | `SimpleExpanderStyle`                     |                  |
 | `Expander`                  | `SimpleDefaultExpanderStyle`              | True             |
 | `ListView`                  | `SimpleListViewStyle`                     |                  |
@@ -74,6 +76,7 @@ uid: Uno.Themes.Simple.Styles
 | `ToggleMenuFlyoutItem`      | `SimpleToggleMenuFlyoutItemStyle`         |                  |
 | `ToggleMenuFlyoutItem`      | `SimpleDefaultToggleMenuFlyoutItemStyle`  | True             |
 | `PasswordBox`               | `SimplePasswordBoxStyle`                  | True             |
+| `PasswordBox`               | `SimpleFilledPasswordBoxStyle`            |                  |
 | `PersonPicture`             | `SimplePersonPictureStyle`                |                  |
 | `PersonPicture`             | `SimplePersonPictureSmallStyle`           |                  |
 | `PersonPicture`             | `SimplePersonPictureLargeStyle`           |                  |
@@ -82,23 +85,33 @@ uid: Uno.Themes.Simple.Styles
 | `PersonPicture`             | `SimplePersonPictureSquareLargeStyle`     |                  |
 | `RadioButton`               | `SimpleRadioButtonStyle`                  | True             |
 | `Slider`                    | `SimpleSliderStyle`                       | True             |
+| `Thumb`                     | `SimpleSliderThumbStyle`                  |                  |
 | `TextBlock`                 | `SimpleBaseTextBlockStyle`                | True             |
-| `TextBlock`                 | `SimpleTitleHeroTextBlockStyle`           |                  |
-| `TextBlock`                 | `SimpleTitlePageTextBlockStyle`           |                  |
-| `TextBlock`                 | `SimpleSubtitleTextBlockStyle`            |                  |
-| `TextBlock`                 | `SimpleHeadingTextBlockStyle`             |                  |
-| `TextBlock`                 | `SimpleSubheadingTextBlockStyle`          |                  |
-| `TextBlock`                 | `SimpleBodyBaseTextBlockStyle`            |                  |
-| `TextBlock`                 | `SimpleBodyStrongTextBlockStyle`          |                  |
-| `TextBlock`                 | `SimpleBodyEmphasisTextBlockStyle`        |                  |
-| `TextBlock`                 | `SimpleBodySmallTextBlockStyle`           |                  |
-| `TextBlock`                 | `SimpleBodySmallStrongTextBlockStyle`     |                  |
-| `TextBlock`                 | `SimpleBodyCodeTextBlockStyle`            |                  |
-| `TextBlock`                 | `SimpleCaptionTextBlockStyle`             |                  |
-| `TextBox`                   | `SimpleTextBoxStyle`                 | True             |
+| `TextBlock`                 | `SimpleDisplayLarge`                      |                  |
+| `TextBlock`                 | `SimpleDisplayMedium`                     |                  |
+| `TextBlock`                 | `SimpleDisplaySmall`                      |                  |
+| `TextBlock`                 | `SimpleHeadlineLarge`                     |                  |
+| `TextBlock`                 | `SimpleHeadlineMedium`                    |                  |
+| `TextBlock`                 | `SimpleHeadlineSmall`                     |                  |
+| `TextBlock`                 | `SimpleTitleLarge`                        |                  |
+| `TextBlock`                 | `SimpleTitleMedium`                       |                  |
+| `TextBlock`                 | `SimpleTitleSmall`                        |                  |
+| `TextBlock`                 | `SimpleBodyLarge`                         |                  |
+| `TextBlock`                 | `SimpleBodyMedium`                        |                  |
+| `TextBlock`                 | `SimpleBodySmall`                         |                  |
+| `TextBlock`                 | `SimpleLabelLarge`                        |                  |
+| `TextBlock`                 | `SimpleLabelMedium`                       |                  |
+| `TextBlock`                 | `SimpleLabelSmall`                        |                  |
+| `TextBlock`                 | `SimpleLabelExtraSmall`                   |                  |
+| `TextBlock`                 | `SimpleCaptionLarge`                      |                  |
+| `TextBlock`                 | `SimpleCaptionMedium`                     |                  |
+| `TextBlock`                 | `SimpleCaptionSmall`                      |                  |
+| `TextBox`                   | `SimpleOutlinedTextBoxStyle`         | True             |
+| `TextBox`                   | `SimpleFilledTextBoxStyle`           |                  |
 | `TextBox`                   | `SimpleTextBoxErrorStyle`            |                  |
 | `TextBox`                   | `SimpleTextBoxSmallStyle`            |                  |
 | `ToggleButton`              | `SimpleDefaultToggleButtonStyle`          | True             |
+| `ToggleButton`              | `SimpleTextToggleButtonStyle`             |                  |
 | `ToggleButton`              | `SimpleSmallToggleButtonStyle`            |                  |
 | `ToggleButton`              | `SimpleMediumToggleButtonStyle`           |                  |
 | `ToggleButton`              | `SimpleIconToggleButtonStyle`             |                  |
@@ -134,51 +147,50 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 
 | Alias Key                              | Resolves To                                |
 |----------------------------------------|--------------------------------------------|
-| `FilledButtonStyle`                    | `SimplePrimaryButtonStyle`                 |
-| `OutlinedButtonStyle`                  | `SimpleNeutralButtonStyle`                 |
-| `TextButtonStyle`                      | `SimpleSubtleButtonStyle`                  |
-| `PrimaryButtonStyle`                   | `SimplePrimaryButtonStyle`                 |
-| `NeutralButtonStyle`                   | `SimpleNeutralButtonStyle`                 |
-| `SubtleButtonStyle`                    | `SimpleSubtleButtonStyle`                  |
+| `FilledButtonStyle`                    | `SimpleFilledButtonStyle`                 |
+| `OutlinedButtonStyle`                  | `SimpleFilledTonalButtonStyle`                 |
+| `TextButtonStyle`                      | `SimpleTextButtonStyle`                  |
+| `PrimaryButtonStyle`                   | `SimpleFilledButtonStyle`                 |
+| `NeutralButtonStyle`                   | `SimpleFilledTonalButtonStyle`                 |
+| `SubtleButtonStyle`                    | `SimpleTextButtonStyle`                  |
 | `DangerPrimaryButtonStyle`             | `SimpleDangerPrimaryButtonStyle`           |
 | `DangerSubtleButtonStyle`              | `SimpleDangerSubtleButtonStyle`            |
-| `SmallPrimaryButtonStyle`              | `SimpleSmallPrimaryButtonStyle`            |
-| `SmallNeutralButtonStyle`              | `SimpleSmallNeutralButtonStyle`            |
-| `SmallSubtleButtonStyle`               | `SimpleSmallSubtleButtonStyle`             |
+| `SmallPrimaryButtonStyle`              | `SimpleSmallFilledButtonStyle`            |
+| `SmallNeutralButtonStyle`              | `SimpleSmallFilledTonalButtonStyle`            |
+| `SmallSubtleButtonStyle`               | `SimpleSmallTextButtonStyle`             |
 | `SmallDangerPrimaryButtonStyle`        | `SimpleSmallDangerPrimaryButtonStyle`      |
 | `SmallDangerSubtleButtonStyle`         | `SimpleSmallDangerSubtleButtonStyle`       |
-| `MediumPrimaryButtonStyle`             | `SimpleMediumPrimaryButtonStyle`           |
-| `MediumNeutralButtonStyle`             | `SimpleMediumNeutralButtonStyle`           |
-| `MediumSubtleButtonStyle`              | `SimpleMediumSubtleButtonStyle`            |
+| `MediumPrimaryButtonStyle`             | `SimpleMediumFilledButtonStyle`           |
+| `MediumNeutralButtonStyle`             | `SimpleMediumFilledTonalButtonStyle`           |
+| `MediumSubtleButtonStyle`              | `SimpleMediumTextButtonStyle`            |
 | `MediumDangerPrimaryButtonStyle`       | `SimpleMediumDangerPrimaryButtonStyle`     |
 | `MediumDangerSubtleButtonStyle`        | `SimpleMediumDangerSubtleButtonStyle`      |
-| `IconButtonPrimaryStyle`               | `SimpleIconButtonPrimaryStyle`             |
+| `IconButtonPrimaryStyle`               | `SimpleIconButtonStyle`             |
 | `IconButtonNeutralStyle`               | `SimpleIconButtonNeutralStyle`             |
 | `IconButtonSubtleStyle`                | `SimpleIconButtonSubtleStyle`              |
 | `IconButtonDangerPrimaryStyle`         | `SimpleIconButtonDangerPrimaryStyle`       |
 | `IconButtonDangerSubtleStyle`          | `SimpleIconButtonDangerSubtleStyle`        |
-| `SmallIconButtonPrimaryStyle`          | `SimpleSmallIconButtonPrimaryStyle`        |
+| `SmallIconButtonPrimaryStyle`          | `SimpleSmallIconButtonStyle`        |
 | `SmallIconButtonNeutralStyle`          | `SimpleSmallIconButtonNeutralStyle`        |
 | `SmallIconButtonSubtleStyle`           | `SimpleSmallIconButtonSubtleStyle`         |
 | `SmallIconButtonDangerPrimaryStyle`    | `SimpleSmallIconButtonDangerPrimaryStyle`  |
 | `SmallIconButtonDangerSubtleStyle`     | `SimpleSmallIconButtonDangerSubtleStyle`   |
-| `MediumIconButtonPrimaryStyle`         | `SimpleMediumIconButtonPrimaryStyle`       |
+| `MediumIconButtonPrimaryStyle`         | `SimpleMediumIconButtonStyle`       |
 | `MediumIconButtonNeutralStyle`         | `SimpleMediumIconButtonNeutralStyle`       |
 | `MediumIconButtonSubtleStyle`          | `SimpleMediumIconButtonSubtleStyle`        |
 | `MediumIconButtonDangerPrimaryStyle`   | `SimpleMediumIconButtonDangerPrimaryStyle` |
 | `MediumIconButtonDangerSubtleStyle`    | `SimpleMediumIconButtonDangerSubtleStyle`  |
-| `InputTextBoxStyle`                    | `SimpleTextBoxStyle`                  |
+| `InputTextBoxStyle`                    | `SimpleOutlinedTextBoxStyle`          |
 | `InputTextBoxErrorStyle`               | `SimpleTextBoxErrorStyle`             |
 | `InputTextBoxSmallStyle`               | `SimpleTextBoxSmallStyle`             |
-| `FilledTextBoxStyle`                   | `SimpleTextBoxStyle`                  |
+| `FilledTextBoxStyle`                   | `SimpleFilledTextBoxStyle`            |
 | `OutlinedTextBoxStyle`                 | `SimpleOutlinedTextBoxStyle`          |
 | `PasswordBoxStyle`                     | `SimplePasswordBoxStyle`                   |
 | `FilledPasswordBoxStyle`               | `SimplePasswordBoxStyle`                   |
 | `OutlinedPasswordBoxStyle`             | `SimpleOutlinedPasswordBoxStyle`           |
-| `ComboBoxStyle`                        | `SimpleSelectFieldStyle`                   |
-| `SelectFieldStyle`                     | `SimpleSelectFieldStyle`                   |
-| `SelectFieldItemStyle`                 | `SimpleSelectFieldItemStyle`               |
-| `SelectFieldErrorStyle`                | `SimpleSelectFieldErrorStyle`              |
+| `ComboBoxStyle`                        | `SimpleComboBoxStyle`                      |
+| `ComboBoxItemStyle`                    | `SimpleComboBoxItemStyle`                  |
+| `ComboBoxErrorStyle`                   | `SimpleComboBoxErrorStyle`                 |
 | `CheckBoxStyle`                        | `SimpleCheckBoxStyle`                      |
 | `RadioButtonStyle`                     | `SimpleRadioButtonStyle`                   |
 | `ToggleSwitchStyle`                    | `SimpleToggleSwitchStyle`                  |
@@ -204,9 +216,9 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `PipsPagerStyle`                       | `SimplePipsPagerStyle`                     |
 | `RatingControlStyle`                   | `SimpleRatingControlStyle`                 |
 | `IconToggleButtonStyle`                | `SimpleIconToggleButtonStyle`              |
-| `FabStyle`                             | `SimpleIconButtonPrimaryStyle`             |
-| `SmallFabStyle`                        | `SimpleSmallIconButtonPrimaryStyle`        |
-| `LargeFabStyle`                        | `SimpleIconButtonPrimaryStyle`             |
+| `FabStyle`                             | `SimpleIconButtonStyle`             |
+| `SmallFabStyle`                        | `SimpleSmallIconButtonStyle`        |
+| `LargeFabStyle`                        | `SimpleIconButtonStyle`             |
 | `SecondaryFabStyle`                    | `SimpleIconButtonNeutralStyle`             |
 | `SecondarySmallFabStyle`               | `SimpleSmallIconButtonNeutralStyle`        |
 | `SecondaryLargeFabStyle`               | `SimpleIconButtonNeutralStyle`             |

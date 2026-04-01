@@ -97,10 +97,10 @@ SDS uses **opacity-based** state overlays (no ripple):
 
 | Style Key | Figma Name | Description |
 |-----------|-----------|-------------|
-| `SimplePrimaryButtonStyle` | Button/Primary | Filled dark button, main CTA |
+| `SimpleFilledButtonStyle` | Button/Primary | Filled dark button, main CTA |
 | `SimpleLightButtonStyle` | Button/Light | Light-colored filled button |
-| `SimpleNeutralButtonStyle` | Button/Neutral | Outlined border button |
-| `SimpleSubtleButtonStyle` | Button/Subtle | Text-only button |
+| `SimpleFilledTonalButtonStyle` | Button/Neutral | Outlined border button |
+| `SimpleTextButtonStyle` | Button/Subtle | Text-only button |
 | `SimplePrimaryButtonSmallStyle` | Button/Primary/Small | Small primary |
 | `SimpleNeutralButtonSmallStyle` | Button/Neutral/Small | Small neutral |
 | `SimpleSubtleButtonSmallStyle` | Button/Subtle/Small | Small subtle |
@@ -129,9 +129,9 @@ SDS uses **opacity-based** state overlays (no ripple):
 
 | Style Key | Figma Name | Description |
 |-----------|-----------|-------------|
-| `SimpleSelectFieldStyle` | Select Field | Default dropdown |
-| `SimpleSelectFieldItemStyle` | Select Field/Item | Dropdown item |
-| `SimpleSelectFieldErrorStyle` | Select Field/Error | Error state dropdown |
+| `SimpleComboBoxStyle` | ComboBox | Default dropdown |
+| `SimpleComboBoxItemStyle` | ComboBox/Item | Dropdown item |
+| `SimpleComboBoxErrorStyle` | ComboBox/Error | Error state dropdown |
 
 ### CheckBox (1 style) — `CheckBox.xaml`
 
@@ -250,9 +250,9 @@ SDS uses **opacity-based** state overlays (no ripple):
 
 These register default styles for controls when no explicit `Style` is set:
 
-- `Button` → `SimplePrimaryButtonStyle`
+- `Button` → `SimpleFilledButtonStyle`
 - `CheckBox` → `SimpleCheckBoxStyle`
-- `ComboBox` → `SimpleSelectFieldStyle`
+- `ComboBox` → `SimpleComboBoxStyle`
 - `RadioButton` → `SimpleRadioButtonStyle`
 - `TextBox` → `SimpleTextBoxStyle`
 - `ToggleSwitch` → `SimpleToggleSwitchStyle`
@@ -291,7 +291,7 @@ These register default styles for controls when no explicit `Style` is set:
 Short names without the `Simple` prefix for consumer convenience:
 
 `PrimaryButtonStyle`, `NeutralButtonStyle`, `SubtleButtonStyle`,
-`InputTextBoxStyle`, `SelectFieldStyle`,
+`InputTextBoxStyle`, `ComboBoxStyle`,
 `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`,
 `PersonPictureStyle`, `HyperlinkButtonStyle`, `NavigationViewStyle`,
 `ProgressBarStyle`, `ProgressRingStyle`, `PipsPagerStyle`,
@@ -302,9 +302,9 @@ Short names without the `Simple` prefix for consumer convenience:
 
 Map Material naming convention to SDS naming:
 
-`FilledButtonStyle` → `SimplePrimaryButtonStyle`,
-`OutlinedButtonStyle` → `SimpleNeutralButtonStyle`,
-`TextButtonStyle` → `SimpleSubtleButtonStyle`,
+`FilledButtonStyle` → `SimpleFilledButtonStyle`,
+`OutlinedButtonStyle` → `SimpleFilledTonalButtonStyle`,
+`TextButtonStyle` → `SimpleTextButtonStyle`,
 `FilledTextBoxStyle` → `SimpleTextBoxStyle`,
 `OutlinedTextBoxStyle` → `SimpleOutlinedTextBoxStyle`,
 `FilledPasswordBoxStyle` → `SimplePasswordBoxStyle`,
@@ -315,7 +315,7 @@ Map Material naming convention to SDS naming:
 
 Map Material FAB naming to existing Simple icon button styles:
 
-`FabStyle` → `SimpleIconButtonPrimaryStyle`,
+`FabStyle` → `SimpleIconButtonStyle`,
 `SecondaryFabStyle` → `SimpleIconButtonNeutralStyle`,
 `TertiaryFabStyle` → `SimpleIconButtonSubtleStyle`,
 `SurfaceFabStyle` → `SimpleIconButtonNeutralStyle`,
@@ -340,8 +340,8 @@ CommandBar, MediaPlayerElement
 1. All style keys use `Simple` prefix: `Simple<Variant><ControlType>Style`
 2. Names follow **Figma component names**, not WinUI control names:
    - Figma "Input Field" → `SimpleTextBoxStyle`
-   - Figma "Select Field" → `SimpleSelectFieldStyle`
-   - Figma "Button/Primary" → `SimplePrimaryButtonStyle`
+   - Figma "Select Field" → `SimpleComboBoxStyle`
+   - Figma "Button/Primary" → `SimpleFilledButtonStyle`
 3. Size variants append to name: `SimplePrimaryButtonSmallStyle`
 4. Error variants: `SimplePrimaryErrorButtonStyle`
 

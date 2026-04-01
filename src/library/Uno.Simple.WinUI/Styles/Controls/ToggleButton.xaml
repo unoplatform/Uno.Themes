@@ -135,8 +135,8 @@
 	<StaticResource x:Key="SimpleToggleButtonSmallPadding" ResourceKey="SimpleSpace200Thickness" />         <!-- sds-size-space-200 = 8 px -->
 	<StaticResource x:Key="SimpleToggleButtonMediumMinHeight" ResourceKey="SimpleIconLarge" />              <!-- sds-size-icon-large = 40 px -->
 	<StaticResource x:Key="SimpleToggleButtonSmallMinHeight" ResourceKey="SimpleIconMedium" />              <!-- sds-size-icon-medium = 32 px -->
-	<StaticResource x:Key="SimpleToggleButtonMediumFontSize" ResourceKey="SimpleTypographyScale03" />           <!-- sds-typography-scale-03 = 16 px -->
-	<StaticResource x:Key="SimpleToggleButtonSmallFontSize" ResourceKey="SimpleTypographyScale02" />            <!-- sds-typography-scale-02 = 14 px -->
+	<StaticResource x:Key="SimpleToggleButtonMediumFontSize" ResourceKey="BodyLargeFontSize" />
+	<StaticResource x:Key="SimpleToggleButtonSmallFontSize" ResourceKey="BodyMediumFontSize" />
 	<StaticResource x:Key="SimpleToggleButtonIconSpacing" ResourceKey="SimpleSpace200" />                   <!-- sds-size-space-200 = 8 px -->
 
 
@@ -151,7 +151,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Default ToggleButton (Neutral unchecked → Primary checked) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleDefaultToggleButtonStyle"
+	<Style x:Key="SimpleTextToggleButtonStyle"
 		   TargetType="ToggleButton">
 		<Setter Property="FontFamily" Value="{StaticResource SimpleToggleButtonFontFamily}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleToggleButtonFontSize}" />
@@ -327,7 +327,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleSmallToggleButtonStyle"
 		   TargetType="ToggleButton"
-		   BasedOn="{StaticResource SimpleDefaultToggleButtonStyle}">
+		   BasedOn="{StaticResource SimpleTextToggleButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleToggleButtonSmallMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleToggleButtonSmallPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleToggleButtonSmallFontSize}" />
@@ -338,7 +338,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleMediumToggleButtonStyle"
 		   TargetType="ToggleButton"
-		   BasedOn="{StaticResource SimpleDefaultToggleButtonStyle}">
+		   BasedOn="{StaticResource SimpleTextToggleButtonStyle}">
 		<Setter Property="MinHeight" Value="{StaticResource SimpleToggleButtonMediumMinHeight}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleToggleButtonMediumPadding}" />
 		<Setter Property="FontSize" Value="{StaticResource SimpleToggleButtonMediumFontSize}" />
@@ -477,5 +477,12 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Default alias (backward compat) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleDefaultToggleButtonStyle"
+		   TargetType="ToggleButton"
+		   BasedOn="{StaticResource SimpleTextToggleButtonStyle}" />
 
 </ResourceDictionary>

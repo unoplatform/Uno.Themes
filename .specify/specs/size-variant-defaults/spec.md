@@ -97,21 +97,21 @@ After refactoring, each control family exposes three tiers of styles:
 
 | Tier | Example Key | Sizing |
 |------|-------------|--------|
-| **Default** (follows alias) | `SimplePrimaryButtonStyle` | Default (Small unless overridden) |
-| **Explicit Small** | `SimpleSmallPrimaryButtonStyle` | Always Small |
-| **Explicit Medium** (new) | `SimpleMediumPrimaryButtonStyle` | Always Medium |
+| **Default** (follows alias) | `SimpleFilledButtonStyle` | Default (Small unless overridden) |
+| **Explicit Small** | `SimpleSmallFilledButtonStyle` | Always Small |
+| **Explicit Medium** (new) | `SimpleMediumFilledButtonStyle` | Always Medium |
 
 New **Medium** styles to add:
 
 **Button** (5):
-- `SimpleMediumPrimaryButtonStyle`
-- `SimpleMediumNeutralButtonStyle`
-- `SimpleMediumSubtleButtonStyle`
+- `SimpleMediumFilledButtonStyle`
+- `SimpleMediumFilledTonalButtonStyle`
+- `SimpleMediumTextButtonStyle`
 - `SimpleMediumDangerPrimaryButtonStyle`
 - `SimpleMediumDangerSubtleButtonStyle`
 
 **IconButton** (5):
-- `SimpleMediumIconButtonPrimaryStyle`
+- `SimpleMediumIconButtonStyle`
 - `SimpleMediumIconButtonNeutralStyle`
 - `SimpleMediumIconButtonSubtleStyle`
 - `SimpleMediumIconButtonDangerPrimaryStyle`
@@ -126,14 +126,14 @@ New entries to add alongside existing `Small*` aliases:
 
 ```xml
 <!-- Button: Medium size variants -->
-<StaticResource x:Key="MediumPrimaryButtonStyle"       ResourceKey="SimpleMediumPrimaryButtonStyle" />
-<StaticResource x:Key="MediumNeutralButtonStyle"        ResourceKey="SimpleMediumNeutralButtonStyle" />
-<StaticResource x:Key="MediumSubtleButtonStyle"         ResourceKey="SimpleMediumSubtleButtonStyle" />
+<StaticResource x:Key="MediumPrimaryButtonStyle"       ResourceKey="SimpleMediumFilledButtonStyle" />
+<StaticResource x:Key="MediumNeutralButtonStyle"        ResourceKey="SimpleMediumFilledTonalButtonStyle" />
+<StaticResource x:Key="MediumSubtleButtonStyle"         ResourceKey="SimpleMediumTextButtonStyle" />
 <StaticResource x:Key="MediumDangerPrimaryButtonStyle"  ResourceKey="SimpleMediumDangerPrimaryButtonStyle" />
 <StaticResource x:Key="MediumDangerSubtleButtonStyle"   ResourceKey="SimpleMediumDangerSubtleButtonStyle" />
 
 <!-- IconButton: Medium size variants -->
-<StaticResource x:Key="MediumIconButtonPrimaryStyle"       ResourceKey="SimpleMediumIconButtonPrimaryStyle" />
+<StaticResource x:Key="MediumIconButtonPrimaryStyle"       ResourceKey="SimpleMediumIconButtonStyle" />
 <StaticResource x:Key="MediumIconButtonNeutralStyle"        ResourceKey="SimpleMediumIconButtonNeutralStyle" />
 <StaticResource x:Key="MediumIconButtonSubtleStyle"         ResourceKey="SimpleMediumIconButtonSubtleStyle" />
 <StaticResource x:Key="MediumIconButtonDangerPrimaryStyle"  ResourceKey="SimpleMediumIconButtonDangerPrimaryStyle" />
@@ -201,11 +201,11 @@ public class SimpleTheme : BaseTheme
 
 ## Behavioral Notes
 
-- Existing consumers using `SimplePrimaryButtonStyle` will see a visual change
+- Existing consumers using `SimpleFilledButtonStyle` will see a visual change
   from Medium → Small sizing. This is intentional — Small is the new default.
-- Consumers using `SimpleSmallPrimaryButtonStyle` see no change (still Small).
+- Consumers using `SimpleSmallFilledButtonStyle` see no change (still Small).
 - Consumers wanting Medium default set `<SimpleTheme DefaultSize="Medium" />`.
-- The implicit `<Style TargetType="Button" BasedOn="SimplePrimaryButtonStyle"/>`
+- The implicit `<Style TargetType="Button" BasedOn="SimpleFilledButtonStyle"/>`
   in `_Resources.xaml` automatically picks up the configured default sizing.
 - The `DefaultSize` DependencyProperty follows the same change-callback pattern
   as `ColorOverrideSource` and `FontOverrideSource` in BaseTheme — setting it

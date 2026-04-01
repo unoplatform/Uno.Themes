@@ -17,21 +17,57 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 
 ## Lightweight Styling
 
-| Key                                                    | Type              | Value                                      |
-|--------------------------------------------------------|-------------------|--------------------------------------------|
-| `SimpleListViewBackground`                             | `SolidColorBrush` | `SimpleBackgroundDefaultDefaultBrush`      |
-| `SimpleListViewBorderBrush`                            | `SolidColorBrush` | `SimpleBorderDefaultDefaultBrush`          |
-| `SimpleListViewItemBackground`                         | `SolidColorBrush` | Transparent                                |
-| `SimpleListViewItemForeground`                         | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`            |
-| `SimpleListViewItemSecondaryForeground`                | `SolidColorBrush` | `SimpleTextDefaultSecondaryBrush`          |
-| `SimpleListViewItemBackgroundPointerOver`              | `SolidColorBrush` | `SimpleBackgroundDefaultSecondaryBrush`    |
-| `SimpleListViewItemForegroundPointerOver`              | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`            |
-| `SimpleListViewItemBackgroundPressed`                  | `SolidColorBrush` | `SimpleBackgroundDefaultTertiaryBrush`     |
-| `SimpleListViewItemForegroundPressed`                  | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`            |
-| `SimpleListViewItemBackgroundSelected`                 | `SolidColorBrush` | `SimpleBackgroundBrandDefaultBrush`        |
-| `SimpleListViewItemForegroundSelected`                 | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
-| `SimpleListViewItemBackgroundSelectedPointerOver`      | `SolidColorBrush` | `SimpleBackgroundBrandHoverBrush`          |
-| `SimpleListViewItemForegroundSelectedPointerOver`      | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
-| `SimpleListViewItemBackgroundSelectedPressed`          | `SolidColorBrush` | `SimpleBackgroundBrandPressedBrush`        |
-| `SimpleListViewItemForegroundSelectedPressed`          | `SolidColorBrush` | `SimpleTextBrandOnBrandBrush`              |
-| `SimpleListViewItemForegroundDisabled`                 | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`           |
+### ListView Container
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewBackground`                                 | `SolidColorBrush` | `SurfaceBrush`                     |
+| `ListViewBorderBrush`                                | `SolidColorBrush` | `OutlineBrush`                     |
+
+### ListViewItem — Normal
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewItemBackground`                             | `SolidColorBrush` | `SystemControlTransparentBrush`    |
+| `ListViewItemForeground`                             | `SolidColorBrush` | `OnSurfaceBrush`                   |
+
+### ListViewItem — PointerOver
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewItemBackgroundPointerOver`                  | `SolidColorBrush` | `SurfaceVariantBrush`              |
+| `ListViewItemForegroundPointerOver`                  | `SolidColorBrush` | `OnSurfaceBrush`                   |
+
+### ListViewItem — Pressed
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewItemBackgroundPressed`                      | `SolidColorBrush` | `OutlineBrush`                     |
+| `ListViewItemForegroundPressed`                      | `SolidColorBrush` | `OnSurfaceBrush`                   |
+
+### ListViewItem — Selected
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewItemBackgroundSelected`                     | `SolidColorBrush` | `PrimaryBrush`                     |
+| `ListViewItemForegroundSelected`                     | `SolidColorBrush` | `OnPrimaryBrush`                   |
+
+### ListViewItem — PointerOverSelected
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewItemBackgroundPointerOverSelected`          | `SolidColorBrush` | `PrimaryVariantDarkBrush`          |
+| `ListViewItemForegroundPointerOverSelected`          | `SolidColorBrush` | `OnPrimaryBrush`                   |
+
+### ListViewItem — PressedSelected
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewItemBackgroundPressedSelected`              | `SolidColorBrush` | `PrimaryVariantDarkBrush`          |
+| `ListViewItemForegroundPressedSelected`              | `SolidColorBrush` | `OnPrimaryBrush`                   |
+
+### ListViewItem — Disabled
+
+| Key                                                  | Type              | Value                              |
+|------------------------------------------------------|-------------------|------------------------------------|
+| `ListViewItemForegroundDisabled`                     | `SolidColorBrush` | `OnSurfaceDisabledBrush`           |

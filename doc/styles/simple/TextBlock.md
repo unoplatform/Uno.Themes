@@ -6,55 +6,32 @@ uid: Uno.Themes.Simple.Styles.TextBlock
 
 ## Styles
 
-### SDS Typography
+All styles are based on `SimpleBaseTextBlockStyle` and reference shared semantic typography tokens from `Typography.xaml`.
 
-| Style Key                              | Font Specs         |
-|----------------------------------------|--------------------|
-| `SimpleBaseTextBlockStyle`             | 16px Normal        |
-| `SimpleTitleHeroTextBlockStyle`        | 72px Bold          |
-| `SimpleTitlePageTextBlockStyle`        | 48px Bold          |
-| `SimpleSubtitleTextBlockStyle`         | 32px Normal        |
-| `SimpleHeadingTextBlockStyle`          | 24px SemiBold      |
-| `SimpleSubheadingTextBlockStyle`       | 20px Normal        |
-| `SimpleBodyBaseTextBlockStyle`         | 16px Normal        |
-| `SimpleBodyStrongTextBlockStyle`       | 16px SemiBold      |
-| `SimpleBodyEmphasisTextBlockStyle`     | 16px Italic        |
-| `SimpleBodySmallTextBlockStyle`        | 14px Normal        |
-| `SimpleBodySmallStrongTextBlockStyle`  | 14px SemiBold      |
-| `SimpleBodyCodeTextBlockStyle`         | 16px Mono          |
-| `SimpleCaptionTextBlockStyle`          | 12px Normal        |
-
-### Material-Compatible Aliases
-
-| Alias Style Key         | Based On                         |
-|-------------------------|----------------------------------|
-| `SimpleDisplayLarge`    | `SimpleTitleHeroTextBlockStyle`  |
-| `SimpleDisplayMedium`   | `SimpleTitlePageTextBlockStyle`  |
-| `SimpleDisplaySmall`    | `SimpleSubtitleTextBlockStyle`   |
-| `SimpleHeadlineLarge`   | `SimpleHeadingTextBlockStyle`    |
-| `SimpleHeadlineMedium`  | `SimpleSubheadingTextBlockStyle` |
-| `SimpleHeadlineSmall`   | `SimpleBodyStrongTextBlockStyle` |
-| `SimpleTitleLarge`      | `SimpleTitlePageTextBlockStyle`  |
-| `SimpleTitleMedium`     | `SimpleHeadingTextBlockStyle`    |
-| `SimpleTitleSmall`      | `SimpleSubheadingTextBlockStyle` |
-| `SimpleBodyLarge`       | `SimpleSubheadingTextBlockStyle` |
-| `SimpleBodyMedium`      | `SimpleBodyBaseTextBlockStyle`   |
-| `SimpleBodySmall`       | `SimpleBodySmallTextBlockStyle`  |
-| `SimpleLabelLarge`      | `SimpleBodyStrongTextBlockStyle` |
-| `SimpleLabelMedium`     | `SimpleBodySmallStrongTextBlockStyle` |
-| `SimpleLabelSmall`      | `SimpleCaptionTextBlockStyle`    |
-| `SimpleLabelExtraSmall` | `SimpleCaptionTextBlockStyle`    |
-| `SimpleCaptionLarge`    | `SimpleBodySmallTextBlockStyle`  |
-| `SimpleCaptionMedium`   | `SimpleCaptionTextBlockStyle`    |
-| `SimpleCaptionSmall`    | `SimpleCaptionTextBlockStyle`    |
+| Style Key               | Font Specs         | SDS Mapping         |
+|-------------------------|--------------------|---------------------|
+| `SimpleBaseTextBlockStyle` | 16px Normal     | (base)              |
+| `SimpleDisplayLarge`    | 72px Bold          | title-hero          |
+| `SimpleDisplayMedium`   | 48px Bold          | title-page          |
+| `SimpleDisplaySmall`    | 40px Normal        |                     |
+| `SimpleHeadlineLarge`   | 32px Normal        | subtitle            |
+| `SimpleHeadlineMedium`  | 24px SemiBold      | heading             |
+| `SimpleHeadlineSmall`   | 20px Normal        | subheading          |
+| `SimpleTitleLarge`      | 20px SemiBold      |                     |
+| `SimpleTitleMedium`     | 16px SemiBold      | body-strong         |
+| `SimpleTitleSmall`      | 14px SemiBold      | body-small-strong   |
+| `SimpleBodyLarge`       | 16px Normal        | body-base           |
+| `SimpleBodyMedium`      | 14px Normal        | body-small          |
+| `SimpleBodySmall`       | 12px Normal        | caption             |
+| `SimpleLabelLarge`      | 16px SemiBold      | body-strong         |
+| `SimpleLabelMedium`     | 14px SemiBold      | body-small-strong   |
+| `SimpleLabelSmall`      | 12px SemiBold      |                     |
+| `SimpleLabelExtraSmall` | 12px Normal        |                     |
+| `SimpleCaptionLarge`    | 14px Normal        | body-small          |
+| `SimpleCaptionMedium`   | 12px Normal        | caption             |
+| `SimpleCaptionSmall`    | 12px Normal        |                     |
 
 ## Lightweight Styling
 
-| Key                                          | Type              | Value                                   |
-|----------------------------------------------|-------------------|-----------------------------------------|
-| `SimpleTextBlockForeground`                  | `SolidColorBrush` | `SimpleTextDefaultDefaultBrush`         |
-| `SimpleTextBlockSecondaryForeground`         | `SolidColorBrush` | `SimpleTextDefaultSecondaryBrush`       |
-| `SimpleTextBlockTertiaryForeground`          | `SolidColorBrush` | `SimpleTextDefaultTertiaryBrush`        |
-| `SimpleTextBlockBrandForeground`             | `SolidColorBrush` | `SimpleTextBrandDefaultBrush`           |
-| `SimpleTextBlockDangerForeground`            | `SolidColorBrush` | `SimpleTextDangerDefaultBrush`          |
-| `SimpleTextBlockDisabledForeground`          | `SolidColorBrush` | `SimpleTextDisabledDefaultBrush`        |
+> [!NOTE]
+> The TextBlock control does not expose overridable themed brush resource keys. The `Foreground` is set to `OnSurfaceBrush` directly in `SimpleBaseTextBlockStyle`. Font properties are driven by shared semantic typography tokens (e.g. `DisplayLargeFontSize`, `BodyLargeFontWeight`).

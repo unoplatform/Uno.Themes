@@ -7,7 +7,7 @@ namespace Uno.Themes.Samples.RuntimeTests;
 /// <summary>
 /// Verifies the semantic abstraction layer: semantic style/resource keys
 /// (e.g. FilledButtonStyle, FilledButtonBackground) properly map to their
-/// Simple-specific counterparts (e.g. SimplePrimaryButtonStyle) and that
+/// Simple-specific counterparts (e.g. SimpleFilledButtonStyle) and that
 /// overrides at the semantic level flow through to styled controls.
 ///
 /// Each test creates a local SimpleTheme scoped to the test container,
@@ -31,11 +31,11 @@ public class Given_SemanticStyles
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("FilledButtonStyle", "SimplePrimaryButtonStyle")]
-	[DataRow("FilledTonalButtonStyle", "SimpleNeutralButtonStyle")]
-	[DataRow("OutlinedButtonStyle", "SimpleNeutralButtonStyle")]
-	[DataRow("TextButtonStyle", "SimpleSubtleButtonStyle")]
-	[DataRow("IconButtonStyle", "SimpleIconButtonPrimaryStyle")]
+	[DataRow("FilledButtonStyle", "SimpleFilledButtonStyle")]
+	[DataRow("FilledTonalButtonStyle", "SimpleFilledTonalButtonStyle")]
+	[DataRow("OutlinedButtonStyle", "SimpleFilledTonalButtonStyle")]
+	[DataRow("TextButtonStyle", "SimpleTextButtonStyle")]
+	[DataRow("IconButtonStyle", "SimpleIconButtonStyle")]
 	public async Task When_SemanticAndSimpleStyles_AreApplied_LookIdentical(
 		string semanticStyleKey, string simpleStyleKey)
 	{
@@ -81,9 +81,9 @@ public class Given_SemanticStyles
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("FilledButtonStyle", "SimplePrimaryButtonStyle", "FilledButtonBackground", "FilledButtonForeground")]
-	[DataRow("FilledTonalButtonStyle", "SimpleNeutralButtonStyle", "FilledTonalButtonBackground", "FilledTonalButtonForeground")]
-	[DataRow("TextButtonStyle", "SimpleSubtleButtonStyle", "TextButtonBackground", "TextButtonForeground")]
+	[DataRow("FilledButtonStyle", "SimpleFilledButtonStyle", "FilledButtonBackground", "FilledButtonForeground")]
+	[DataRow("FilledTonalButtonStyle", "SimpleFilledTonalButtonStyle", "FilledTonalButtonBackground", "FilledTonalButtonForeground")]
+	[DataRow("TextButtonStyle", "SimpleTextButtonStyle", "TextButtonBackground", "TextButtonForeground")]
 	public async Task When_SemanticResourceOverridden_BothStylesReflectChange(
 		string semanticStyleKey, string simpleStyleKey,
 		string bgResourceKey, string fgResourceKey)
@@ -150,7 +150,7 @@ public class Given_SemanticStyles
 		var overriddenButton = new Button
 		{
 			Content = "Overridden",
-			Style = overriddenContainer.Resources["SimplePrimaryButtonStyle"] as Style
+			Style = overriddenContainer.Resources["SimpleFilledButtonStyle"] as Style
 		};
 		overriddenContainer.Children.Add(overriddenButton);
 
@@ -160,7 +160,7 @@ public class Given_SemanticStyles
 		var defaultButton = new Button
 		{
 			Content = "Default",
-			Style = defaultContainer.Resources["SimplePrimaryButtonStyle"] as Style
+			Style = defaultContainer.Resources["SimpleFilledButtonStyle"] as Style
 		};
 		defaultContainer.Children.Add(defaultButton);
 

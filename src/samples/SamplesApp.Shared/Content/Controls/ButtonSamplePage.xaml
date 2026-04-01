@@ -598,8 +598,8 @@
 						<smtx:XamlDisplay UniqueKey="Simple_Button_Primary"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal" Spacing="12">
-								<Button Content="Primary" Style="{StaticResource SimplePrimaryButtonStyle}" />
-								<Button Content="Disabled" Style="{StaticResource SimplePrimaryButtonStyle}" IsEnabled="False" />
+								<Button Content="Primary" Style="{StaticResource SimpleFilledButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimpleFilledButtonStyle}" IsEnabled="False" />
 							</StackPanel>
 						</smtx:XamlDisplay>
 
@@ -607,8 +607,8 @@
 						<smtx:XamlDisplay UniqueKey="Simple_Button_Neutral"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal" Spacing="12">
-								<Button Content="Neutral" Style="{StaticResource SimpleNeutralButtonStyle}" />
-								<Button Content="Disabled" Style="{StaticResource SimpleNeutralButtonStyle}" IsEnabled="False" />
+								<Button Content="Neutral" Style="{StaticResource SimpleFilledTonalButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimpleFilledTonalButtonStyle}" IsEnabled="False" />
 							</StackPanel>
 						</smtx:XamlDisplay>
 
@@ -616,8 +616,8 @@
 						<smtx:XamlDisplay UniqueKey="Simple_Button_Subtle"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal" Spacing="12">
-								<Button Content="Subtle" Style="{StaticResource SimpleSubtleButtonStyle}" />
-								<Button Content="Disabled" Style="{StaticResource SimpleSubtleButtonStyle}" IsEnabled="False" />
+								<Button Content="Subtle" Style="{StaticResource SimpleTextButtonStyle}" />
+								<Button Content="Disabled" Style="{StaticResource SimpleTextButtonStyle}" IsEnabled="False" />
 							</StackPanel>
 						</smtx:XamlDisplay>
 
@@ -643,17 +643,17 @@
 						<smtx:XamlDisplay UniqueKey="Simple_Button_LeadingIcon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal" Spacing="12">
-								<Button Content="Leading Icon" Style="{StaticResource SimplePrimaryButtonStyle}">
+								<Button Content="Leading Icon" Style="{StaticResource SimpleFilledButtonStyle}">
 									<ut:ControlExtensions.LeadingIcon>
 										<SymbolIcon Symbol="Add" />
 									</ut:ControlExtensions.LeadingIcon>
 								</Button>
-								<Button Content="Leading Icon" Style="{StaticResource SimpleNeutralButtonStyle}">
+								<Button Content="Leading Icon" Style="{StaticResource SimpleFilledTonalButtonStyle}">
 									<ut:ControlExtensions.LeadingIcon>
 										<SymbolIcon Symbol="Find" />
 									</ut:ControlExtensions.LeadingIcon>
 								</Button>
-								<Button Content="Leading Icon" Style="{StaticResource SimpleSubtleButtonStyle}">
+								<Button Content="Leading Icon" Style="{StaticResource SimpleTextButtonStyle}">
 									<ut:ControlExtensions.LeadingIcon>
 										<SymbolIcon Symbol="Setting" />
 									</ut:ControlExtensions.LeadingIcon>
@@ -665,17 +665,17 @@
 						<smtx:XamlDisplay UniqueKey="Simple_Button_TrailingIcon"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal" Spacing="12">
-								<Button Content="Trailing Icon" Style="{StaticResource SimplePrimaryButtonStyle}">
+								<Button Content="Trailing Icon" Style="{StaticResource SimpleFilledButtonStyle}">
 									<ut:ControlExtensions.TrailingIcon>
 										<SymbolIcon Symbol="Forward" />
 									</ut:ControlExtensions.TrailingIcon>
 								</Button>
-								<Button Content="Trailing Icon" Style="{StaticResource SimpleNeutralButtonStyle}">
+								<Button Content="Trailing Icon" Style="{StaticResource SimpleFilledTonalButtonStyle}">
 									<ut:ControlExtensions.TrailingIcon>
 										<SymbolIcon Symbol="Download" />
 									</ut:ControlExtensions.TrailingIcon>
 								</Button>
-								<Button Content="Trailing Icon" Style="{StaticResource SimpleSubtleButtonStyle}">
+								<Button Content="Trailing Icon" Style="{StaticResource SimpleTextButtonStyle}">
 									<ut:ControlExtensions.TrailingIcon>
 										<SymbolIcon Symbol="OpenWith" />
 									</ut:ControlExtensions.TrailingIcon>
@@ -687,7 +687,7 @@
 						<smtx:XamlDisplay UniqueKey="Simple_Button_BothIcons"
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Orientation="Horizontal" Spacing="12">
-								<Button Content="Both Icons" Style="{StaticResource SimplePrimaryButtonStyle}">
+								<Button Content="Both Icons" Style="{StaticResource SimpleFilledButtonStyle}">
 									<ut:ControlExtensions.LeadingIcon>
 										<SymbolIcon Symbol="Upload" />
 									</ut:ControlExtensions.LeadingIcon>
@@ -695,7 +695,7 @@
 										<SymbolIcon Symbol="Forward" />
 									</ut:ControlExtensions.TrailingIcon>
 								</Button>
-								<Button Content="Both Icons" Style="{StaticResource SimpleNeutralButtonStyle}">
+								<Button Content="Both Icons" Style="{StaticResource SimpleFilledTonalButtonStyle}">
 									<ut:ControlExtensions.LeadingIcon>
 										<SymbolIcon Symbol="Edit" />
 									</ut:ControlExtensions.LeadingIcon>
@@ -711,9 +711,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Spacing="12">
 								<StackPanel Orientation="Horizontal" Spacing="12">
-									<Button Content="Small Primary" Style="{StaticResource SimpleSmallPrimaryButtonStyle}" />
-									<Button Content="Small Neutral" Style="{StaticResource SimpleSmallNeutralButtonStyle}" />
-									<Button Content="Small Subtle" Style="{StaticResource SimpleSmallSubtleButtonStyle}" />
+									<Button Content="Small Primary" Style="{StaticResource SimpleSmallFilledButtonStyle}" />
+									<Button Content="Small Neutral" Style="{StaticResource SimpleSmallFilledTonalButtonStyle}" />
+									<Button Content="Small Subtle" Style="{StaticResource SimpleSmallTextButtonStyle}" />
 								</StackPanel>
 								<StackPanel Orientation="Horizontal" Spacing="12">
 									<Button Content="Small Danger Primary" Style="{StaticResource SimpleSmallDangerPrimaryButtonStyle}" />
@@ -727,9 +727,9 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<StackPanel Spacing="12">
 								<StackPanel Orientation="Horizontal" Spacing="12">
-									<Button Content="Small Primary" Style="{StaticResource SimpleSmallPrimaryButtonStyle}" IsEnabled="False" />
-									<Button Content="Small Neutral" Style="{StaticResource SimpleSmallNeutralButtonStyle}" IsEnabled="False" />
-									<Button Content="Small Subtle" Style="{StaticResource SimpleSmallSubtleButtonStyle}" IsEnabled="False" />
+									<Button Content="Small Primary" Style="{StaticResource SimpleSmallFilledButtonStyle}" IsEnabled="False" />
+									<Button Content="Small Neutral" Style="{StaticResource SimpleSmallFilledTonalButtonStyle}" IsEnabled="False" />
+									<Button Content="Small Subtle" Style="{StaticResource SimpleSmallTextButtonStyle}" IsEnabled="False" />
 								</StackPanel>
 								<StackPanel Orientation="Horizontal" Spacing="12">
 									<Button Content="Small Danger Primary" Style="{StaticResource SimpleSmallDangerPrimaryButtonStyle}" IsEnabled="False" />
