@@ -8,7 +8,7 @@
 
 This feature allows users to supply a single **seed color** that algorithmically derives the full semantic color palette (Primary, Secondary, Tertiary, Error, Surface, Outline, etc.) for both Light and Dark themes, without manually defining every color resource.
 
-The implementation follows the [Material Design 3 color system](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and uses the **HCT (Hue-Chroma-Tone)** color space from [Material Color Utilities](https://github.com/nickvdyck/material-color-utilities).
+The implementation follows the [Material Design 3 color system](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and uses the **HCT (Hue-Chroma-Tone)** color space, ported from [material-color-utilities](https://github.com/material-foundation/material-color-utilities) (Apache 2.0).
 
 ## API
 
@@ -61,6 +61,9 @@ var theme = new MaterialTheme
 };
 // Runtime change via grouped API
 theme.Colors.PrimarySeedColor = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
+
+// Simplest runtime usage via static helper
+ThemeHelper.PrimarySeedColor = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
 ```
 
 ### Properties on `BaseTheme`
@@ -83,6 +86,17 @@ theme.Colors.PrimarySeedColor = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
 | `OverrideDictionary` | `ResourceDictionary` | `null` | Direct color override dictionary. |
 
 All properties are defined on `BaseTheme`, so they work with `MaterialTheme`, `SimpleTheme`, and any future theme subclass. When both the `Colors` grouped property and top-level properties are set, `Colors` takes precedence.
+
+### `ThemeHelper` (static convenience API)
+
+| Member | Type | Description |
+|---|---|---|
+| `GetTheme()` | `BaseTheme` | Returns the `BaseTheme` from `Application.Current.Resources`, or `null`. |
+| `PrimarySeedColor` | `Color?` | Gets/sets the primary seed color on the active theme. |
+| `SecondarySeedColor` | `Color?` | Gets/sets the secondary seed color on the active theme. |
+| `TertiarySeedColor` | `Color?` | Gets/sets the tertiary seed color on the active theme. |
+
+Throws `InvalidOperationException` if no `BaseTheme` is found in application resources.
 
 ## How It Works
 
@@ -180,6 +194,7 @@ This means:
 ```
 src/library/Uno.Themes/
     ThemeColors.cs                  # Grouped color configuration DependencyObject
+    Helpers/ThemeHelper.cs          # Static convenience API for runtime seed color changes
     ColorGeneration/
         ColorMath.cs                # sRGB/Linear/XYZ/L* conversions
         TonalPalette.cs             # Hue+chroma → tone-indexed ARGB lookup
