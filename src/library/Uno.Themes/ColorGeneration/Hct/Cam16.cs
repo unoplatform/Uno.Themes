@@ -165,8 +165,15 @@ internal readonly struct Cam16
 	private static double InverseAdapt(double adapted, double fl)
 	{
 		double abs = Math.Abs(adapted);
+		if (abs >= 400.0)
+		{
+			// Clamp to avoid division by zero / NaN
+			abs = 399.999;
+		}
+
 		double base_ = Math.Max(0, 27.13 * abs / (400.0 - abs));
-		return Math.Sign(adapted) * 100.0 / fl * Math.Pow(base_, 1.0 / 0.42);
+		double sign = adapted < 0 ? -1.0 : 1.0;
+		return sign * 100.0 / fl * Math.Pow(base_, 1.0 / 0.42);
 	}
 
 	private static int GrayArgbFromJ(double j, ViewingConditions vc)
