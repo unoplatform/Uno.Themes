@@ -22,7 +22,7 @@ public abstract class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
-	private Dictionary<string, SolidColorBrush> _originalBrushes;
+	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _originalBrushes;
 	private bool _isInResourceTree;
 	#region FontOverrideSource (DP)
 	/// <summary>
@@ -166,7 +166,7 @@ public abstract class BaseTheme : ResourceDictionary
 				{
 					if (!theme._isColorOverrideMuted)
 					{
-						theme.UpdateSource();
+						theme.UpdateSeedColors();
 					}
 				});
 			}
@@ -241,8 +241,8 @@ public abstract class BaseTheme : ResourceDictionary
 
 			if (_isInResourceTree && Application.Current?.Resources is { } appRes)
 			{
-				var collected = new Dictionary<string, SolidColorBrush>();
-				CollectBrushes(appRes, collected);
+				var collected = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
+				CollectBrushes(appRes, null, collected);
 				if (collected.Count > 0)
 				{
 					_originalBrushes = collected;
@@ -262,6 +262,13 @@ public abstract class BaseTheme : ResourceDictionary
 
 		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
 
+		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
+		// before the seed so that seed-generated colors take precedence.
+		if (ColorOverrideDictionary is { } baseColorOverride)
+		{
+			colors.SafeMerge(baseColorOverride);
+		}
+
 		// Resolve seed colors from Colors property
 		var effectivePrimary = Colors?.PrimarySeed;
 		var effectiveSecondary = Colors?.SecondarySeed;
@@ -273,11 +280,10 @@ public abstract class BaseTheme : ResourceDictionary
 			colors.SafeMerge(seedPalette);
 		}
 
-		// Resolve color overrides: Colors.OverrideDictionary takes precedence
-		var effectiveColorOverride = Colors?.OverrideDictionary ?? ColorOverrideDictionary;
-		if (effectiveColorOverride is { } colorOverride)
+		// Explicit user overrides from Colors.OverrideDictionary take highest precedence
+		if (Colors?.OverrideDictionary is { } userOverride)
 		{
-			colors.SafeMerge(colorOverride);
+			colors.SafeMerge(userOverride);
 		}
 
 		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
@@ -290,6 +296,38 @@ public abstract class BaseTheme : ResourceDictionary
 		MergedDictionaries.Add(typography);
 		MergedDictionaries.Add(mergedPages);
 
+		// Track new brush instances created by the rebuild so that UI elements
+		// that resolve {ThemeResource} after this point also get updated.
+		if (_originalBrushes is not null)
+		{
+			var existingBrushes = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
+			var newInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
+			CollectBrushes(this, null, newInstances);
+			foreach (var entry in newInstances)
+			{
+				if (existingBrushes.Add(entry.brush))
+				{
+					_originalBrushes.Add(entry);
+				}
+			}
+		}
+
+		// Also capture from the full app resource tree (catches instances resolved
+		// by UI elements via {ThemeResource} that aren't in the BaseTheme itself).
+		if (_originalBrushes is not null && Application.Current?.Resources is { } appRes2)
+		{
+			var existingBrushes2 = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
+			var appInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
+			CollectBrushes(appRes2, null, appInstances);
+			foreach (var entry in appInstances)
+			{
+				if (existingBrushes2.Add(entry.brush))
+				{
+					_originalBrushes.Add(entry);
+				}
+			}
+		}
+
 		// Update the original brush instances (held by UI elements) with new color values.
 		if (_originalBrushes is { Count: > 0 })
 		{
@@ -298,28 +336,124 @@ public abstract class BaseTheme : ResourceDictionary
 	}
 
 	/// <summary>
-	/// Collects all <see cref="SolidColorBrush"/> instances from the resource tree
-	/// before the dictionaries are cleared, so they can be updated in-place afterwards.
+	/// Fast path for seed color changes: updates existing brush Colors in-place
+	/// without clearing/rebuilding the resource tree. This preserves brush instance
+	/// identity so that UI elements holding references to these brushes see the
+	/// changes immediately.
+	/// Falls back to <see cref="UpdateSource"/> if the tree hasn't been built yet.
 	/// </summary>
-	private static void CollectBrushes(ResourceDictionary dict, Dictionary<string, SolidColorBrush> brushes)
+	private void UpdateSeedColors()
 	{
-		foreach (var themeDict in dict.ThemeDictionaries.Values)
+		// If the tree hasn't been built yet, do a full rebuild
+		if (MergedDictionaries.Count == 0)
 		{
-			if (themeDict is ResourceDictionary themed)
-			{
-				CollectBrushEntries(themed, brushes);
-			}
+			UpdateSource();
+			return;
 		}
 
-		CollectBrushEntries(dict, brushes);
+		var effectivePrimary = Colors?.PrimarySeed;
+		var effectiveSecondary = Colors?.SecondarySeed;
+		var effectiveTertiary = Colors?.TertiarySeed;
 
-		foreach (var merged in dict.MergedDictionaries)
+		if (effectivePrimary is not { } seed)
 		{
-			CollectBrushes(merged, brushes);
+			// Seed was cleared — need a full rebuild to restore defaults
+			UpdateSource();
+			return;
+		}
+
+		// Generate the new seed palette
+		var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary);
+
+		// Build a color map from the seed palette (theme-keyed)
+		var colorsByTheme = new Dictionary<string, Dictionary<string, Color>>();
+		CollectThemedColors(seedPalette, colorsByTheme);
+
+		// Walk all brushes in the current resource tree and update their Colors
+		if (Application.Current?.Resources is { } appRes)
+		{
+			UpdateBrushColorsInPlace(appRes, colorsByTheme);
 		}
 	}
 
-	private static void CollectBrushEntries(ResourceDictionary dict, Dictionary<string, SolidColorBrush> brushes)
+	/// <summary>
+	/// Walks the resource tree and updates SolidColorBrush.Color in-place
+	/// for brushes whose corresponding color key exists in the seed palette.
+	/// </summary>
+	private static void UpdateBrushColorsInPlace(
+		ResourceDictionary dict,
+		Dictionary<string, Dictionary<string, Color>> colorsByTheme)
+	{
+		foreach (var kvp in dict.ThemeDictionaries)
+		{
+			if (kvp.Value is ResourceDictionary themed && kvp.Key is string themeKey
+				&& colorsByTheme.TryGetValue(themeKey, out var themeColorMap))
+			{
+				UpdateBrushEntriesInPlace(themed, themeColorMap);
+			}
+		}
+
+		// Non-themed brushes: use any available color map as fallback
+		if (colorsByTheme.TryGetValue(string.Empty, out var defaultMap) && defaultMap.Count > 0)
+		{
+			UpdateBrushEntriesInPlace(dict, defaultMap);
+		}
+
+		foreach (var merged in dict.MergedDictionaries)
+		{
+			UpdateBrushColorsInPlace(merged, colorsByTheme);
+		}
+	}
+
+	private static void UpdateBrushEntriesInPlace(
+		ResourceDictionary dict,
+		Dictionary<string, Color> colorMap)
+	{
+		foreach (var key in dict.Keys)
+		{
+			if (key is string brushKey
+				&& brushKey.EndsWith("Brush")
+				&& dict[brushKey] is SolidColorBrush brush
+				&& TryGetColorKeyForBrush(brushKey, out var colorKey)
+				&& colorMap.TryGetValue(colorKey, out var newColor)
+				&& brush.Color != newColor)
+			{
+				brush.Color = newColor;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Collects all <see cref="SolidColorBrush"/> instances from the resource tree
+	/// before the dictionaries are cleared, so they can be updated in-place afterwards.
+	/// Each brush is tagged with the ThemeDictionary key it came from (e.g. "Light", "Default")
+	/// so it can be updated with the correct theme's color later.
+	/// </summary>
+	private static void CollectBrushes(
+		ResourceDictionary dict,
+		string currentThemeKey,
+		List<(string themeKey, string brushKey, SolidColorBrush brush)> brushes)
+	{
+		foreach (var kvp in dict.ThemeDictionaries)
+		{
+			if (kvp.Value is ResourceDictionary themed)
+			{
+				CollectBrushEntries(themed, kvp.Key as string, brushes);
+			}
+		}
+
+		CollectBrushEntries(dict, currentThemeKey, brushes);
+
+		foreach (var merged in dict.MergedDictionaries)
+		{
+			CollectBrushes(merged, currentThemeKey, brushes);
+		}
+	}
+
+	private static void CollectBrushEntries(
+		ResourceDictionary dict,
+		string themeKey,
+		List<(string themeKey, string brushKey, SolidColorBrush brush)> brushes)
 	{
 		foreach (var key in dict.Keys)
 		{
@@ -328,28 +462,93 @@ public abstract class BaseTheme : ResourceDictionary
 				&& dict[brushKey] is SolidColorBrush brush
 				&& TryGetColorKeyForBrush(brushKey, out _))
 			{
-				// Keep the first (outermost) instance — that's what UI elements resolve to
-				brushes.TryAdd(brushKey, brush);
+				brushes.Add((themeKey, brushKey, brush));
 			}
 		}
 	}
 
 	/// <summary>
-	/// Updates the old brush instances (captured before clearing) with new color values
-	/// from the rebuilt color dictionaries.
+	/// Updates all old brush instances (captured before clearing) with new color values
+	/// from the rebuilt color dictionaries. Each brush is matched to its theme's colors
+	/// using the theme key captured during collection.
 	/// </summary>
-	private static void UpdateOldBrushes(Dictionary<string, SolidColorBrush> oldBrushes, ResourceDictionary newColors)
+	private static void UpdateOldBrushes(
+		List<(string themeKey, string brushKey, SolidColorBrush brush)> oldBrushes,
+		ResourceDictionary newColors)
 	{
-		var colorMap = new Dictionary<string, Color>();
-		CollectColors(newColors, colorMap);
+		var colorsByTheme = new Dictionary<string, Dictionary<string, Color>>();
+		CollectThemedColors(newColors, colorsByTheme);
 
-		foreach (var (brushKey, brush) in oldBrushes)
+		foreach (var (themeKey, brushKey, brush) in oldBrushes)
 		{
-			if (TryGetColorKeyForBrush(brushKey, out var colorKey)
-				&& colorMap.TryGetValue(colorKey, out var newColor)
-				&& brush.Color != newColor)
+			if (!TryGetColorKeyForBrush(brushKey, out var colorKey))
 			{
-				brush.Color = newColor;
+				continue;
+			}
+
+			// Look up the color from the same theme dict the brush came from
+			if (themeKey is not null
+				&& colorsByTheme.TryGetValue(themeKey, out var themedMap)
+				&& themedMap.TryGetValue(colorKey, out var themedColor))
+			{
+				if (brush.Color != themedColor)
+				{
+					brush.Color = themedColor;
+				}
+			}
+			// Fall back to non-themed colors
+			else if (colorsByTheme.TryGetValue(string.Empty, out var defaultMap)
+				&& defaultMap.TryGetValue(colorKey, out var defaultColor))
+			{
+				if (brush.Color != defaultColor)
+				{
+					brush.Color = defaultColor;
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Collects color values grouped by ThemeDictionary key.
+	/// Non-themed colors use <see cref="string.Empty"/> as the key.
+	/// </summary>
+	private static void CollectThemedColors(ResourceDictionary dict, Dictionary<string, Dictionary<string, Color>> colorsByTheme)
+	{
+		foreach (var kvp in dict.ThemeDictionaries)
+		{
+			if (kvp.Value is ResourceDictionary themed && kvp.Key is string themeKey)
+			{
+				if (!colorsByTheme.TryGetValue(themeKey, out var map))
+				{
+					map = new Dictionary<string, Color>();
+					colorsByTheme[themeKey] = map;
+				}
+
+				CollectColorEntries(themed, map);
+			}
+		}
+
+		if (!colorsByTheme.TryGetValue(string.Empty, out var directMap))
+		{
+			directMap = new Dictionary<string, Color>();
+			colorsByTheme[string.Empty] = directMap;
+		}
+
+		CollectColorEntries(dict, directMap);
+
+		foreach (var merged in dict.MergedDictionaries)
+		{
+			CollectThemedColors(merged, colorsByTheme);
+		}
+	}
+
+	private static void CollectColorEntries(ResourceDictionary dict, Dictionary<string, Color> colorMap)
+	{
+		foreach (var key in dict.Keys)
+		{
+			if (key is string k && k.EndsWith("Color") && dict[k] is Color c)
+			{
+				colorMap[k] = c;
 			}
 		}
 	}
@@ -380,39 +579,6 @@ public abstract class BaseTheme : ResourceDictionary
 		}
 
 		return false;
-	}
-
-	private static void CollectColors(ResourceDictionary dict, Dictionary<string, Color> colorMap)
-	{
-		// Collect from theme dictionaries
-		foreach (var themeDict in dict.ThemeDictionaries.Values)
-		{
-			if (themeDict is ResourceDictionary themed)
-			{
-				foreach (var key in themed.Keys)
-				{
-					if (key is string k && k.EndsWith("Color") && themed[k] is Color c)
-					{
-						colorMap[k] = c;
-					}
-				}
-			}
-		}
-
-		// Collect from direct entries
-		foreach (var key in dict.Keys)
-		{
-			if (key is string k && k.EndsWith("Color") && dict[k] is Color c)
-			{
-				colorMap[k] = c;
-			}
-		}
-
-		// Recurse into merged dictionaries
-		foreach (var merged in dict.MergedDictionaries)
-		{
-			CollectColors(merged, colorMap);
-		}
 	}
 
 	/// <summary>

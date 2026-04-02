@@ -168,16 +168,17 @@ Colors resolve in this order (last wins):
 ```
 SharedColorPalette.xaml (built-in defaults)
     ↓ overridden by
+ColorOverrideDictionary (theme-specific base colors, e.g. SimpleTheme's grayscale palette)
+    ↓ overridden by
 Seed-generated palette (if PrimarySeed is set)
     ↓ overridden by
-ColorOverrideDictionary / ColorOverrideSource (explicit user overrides)
+Colors.OverrideDictionary (explicit user overrides)
 ```
 
-When using the `Colors` grouped property, `Colors.OverrideDictionary` takes precedence over the top-level `ColorOverrideDictionary`.
-
 This means:
-- Setting `PrimarySeed` replaces all default palette colors
-- Setting `OverrideDictionary` on top of `PrimarySeed` lets you fine-tune specific roles
+- Theme-specific base colors (e.g. SimpleTheme's palette) serve as defaults but are overridden by the seed
+- Setting `PrimarySeed` replaces all default and theme-specific palette colors
+- Setting `Colors.OverrideDictionary` on top of `PrimarySeed` lets you fine-tune specific roles
 - Not setting `PrimarySeed` preserves the existing behavior (no breaking change)
 
 ## Architecture
@@ -201,11 +202,11 @@ src/library/Uno.Themes/
 
 ### Modified Files
 
-- `src/library/Uno.Themes/BaseTheme.cs` — Added `Colors` dependency property; updated `UpdateSource()` to generate and merge the seed palette with runtime brush update support.
+- `src/library/Uno.Themes/BaseTheme.cs` — Added `Colors` dependency property; updated `UpdateSource()` to generate and merge the seed palette; added `UpdateSeedColors()` fast path for in-place brush color updates at runtime.
 
 ### Sample Page
 
-- `src/samples/SamplesApp.Shared/Content/Styles/SeedColorSamplePage.xaml(.cs)` — Interactive demo with a `ColorPicker` (spectrum ring + value slider) that live-generates and displays the full tonal palette grid and semantic color role cards (Light + Dark) for any seed color. Accessible in both MaterialSampleApp and SimpleSampleApp under **Styles > Seed Color**.
+- `src/samples/SamplesApp.Shared/Content/Styles/SeedColorSamplePage.xaml(.cs)` — Interactive demo with a `ColorPicker` that live-generates and displays semantic color roles and a controls preview for any seed color. Accessible in both MaterialSampleApp and SimpleSampleApp under **Styles > Seed Color**.
 
 ### Tests
 
@@ -236,13 +237,13 @@ Generating the full palette (~78 HCT solves for all tones across 6 palettes) com
 
 ## Runtime Color Updates
 
-When a seed color property is changed at runtime, `BaseTheme` performs the following:
+When a seed color property is changed at runtime, `BaseTheme` uses a **fast path** (`UpdateSeedColors()`) that updates brush colors in-place without rebuilding the resource tree:
 
-1. **Capture original brushes** — On the first runtime change (after the theme is in the resource tree), all `SolidColorBrush` instances are captured from `Application.Current.Resources`. These references are stored permanently.
-2. **Rebuild palette** — The theme dictionaries are cleared and rebuilt with the new seed-generated colors.
-3. **Patch in-place** — The original brush instances (still held by UI elements via `{ThemeResource}`) have their `Color` property updated to the new values. Since `SolidColorBrush.Color` is a DependencyProperty, the UI updates automatically.
+1. **Generate new palette** — The seed palette is recomputed from the new seed color(s).
+2. **Walk existing tree** — All `SolidColorBrush` instances in the current resource tree (including per-theme dictionaries) are located.
+3. **Patch in-place** — Each brush's `Color` property is updated to the new seed-derived value. Since brush instance identity is preserved, all UI elements holding references via `{ThemeResource}` see the change immediately.
 
-This approach avoids full page re-navigation or theme toggling. The brush capture is deferred until the theme is confirmed to be in the resource tree (via `IsInResourceTree()` walk) to avoid capturing transient brushes created during XAML initialization.
+This fast path avoids clearing and rebuilding the resource tree, which would create new brush instances and break references held by existing UI elements. A full rebuild (`UpdateSource()`) is only performed during initial theme construction or when structural changes are needed (e.g., font overrides, color override dictionaries).
 
 ## Compatibility
 
