@@ -52,9 +52,15 @@ internal readonly struct Cam16
 		double greenL = ColorMath.Linearized(green);
 		double blueL = ColorMath.Linearized(blue);
 
-		double rT = 0.401288 * redL + 0.650173 * greenL - 0.051461 * blueL;
-		double gT = -0.250268 * redL + 1.204414 * greenL + 0.045854 * blueL;
-		double bT = -0.002079 * redL + 0.048952 * greenL + 0.953127 * blueL;
+		// sRGB linear → CIE XYZ (D65)
+		double x = 0.41233895 * redL + 0.35762064 * greenL + 0.18051042 * blueL;
+		double y = 0.2126 * redL + 0.7152 * greenL + 0.0722 * blueL;
+		double z = 0.01932141 * redL + 0.11916382 * greenL + 0.95034478 * blueL;
+
+		// CIE XYZ → CAM16 RGB (M16 transform)
+		double rT = 0.401288 * x + 0.650173 * y - 0.051461 * z;
+		double gT = -0.250268 * x + 1.204414 * y + 0.045854 * z;
+		double bT = -0.002079 * x + 0.048952 * y + 0.953127 * z;
 
 		double rD = vc.RgbD[0] * rT;
 		double gD = vc.RgbD[1] * gT;
@@ -150,10 +156,15 @@ internal readonly struct Cam16
 		double gX = gF / vc.RgbD[1];
 		double bX = bF / vc.RgbD[2];
 
-		// Inverse M16 to get linear RGB
-		double linearR = 1.8620678 * rX - 1.0112547 * gX + 0.14918678 * bX;
-		double linearG = 0.38752654 * rX + 0.62144744 * gX - 0.00897398 * bX;
-		double linearB = -0.01584150 * rX - 0.03412294 * gX + 1.0499644 * bX;
+		// Inverse M16: CAM16 RGB → CIE XYZ
+		double x = 1.8620678 * rX - 1.0112547 * gX + 0.14918678 * bX;
+		double y = 0.38752654 * rX + 0.62144744 * gX - 0.00897398 * bX;
+		double z = -0.01584150 * rX - 0.03412294 * gX + 1.0499644 * bX;
+
+		// CIE XYZ → sRGB linear
+		double linearR = 3.2413774792388685 * x - 1.5376652402851851 * y - 0.49885366846268053 * z;
+		double linearG = -0.9691452513005321 * x + 1.8758853451067872 * y + 0.04156585616912061 * z;
+		double linearB = 0.05562093689691305 * x - 0.20395524564742123 * y + 1.0571799993703593 * z;
 
 		int ri = ColorMath.Delinearized(linearR);
 		int gi = ColorMath.Delinearized(linearG);

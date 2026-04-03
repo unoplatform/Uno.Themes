@@ -100,6 +100,10 @@ HCT (Hue-Chroma-Tone) combines:
 - **Chroma** (0+): How vivid/saturated the color is (from CAM16)
 - **Tone** (0-100): Perceptual lightness (CIE L*)
 
+The CAM16 model operates in CIE XYZ. The conversion pipeline is:
+- **Forward (sRGB → HCT):** sRGB → linearize → XYZ → M16 → CAM16 adapted responses → hue/chroma; XYZ → L* (tone)
+- **Inverse (HCT → sRGB):** hue/chroma/J → CAM16 adapted responses → M16⁻¹ → XYZ → linearize⁻¹ → sRGB
+
 This color space is perceptually uniform — equal steps in tone produce equal steps in perceived lightness — which is critical for generating accessible color palettes.
 
 ### Palette Derivation
