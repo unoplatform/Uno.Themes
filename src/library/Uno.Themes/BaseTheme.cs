@@ -162,9 +162,20 @@ public abstract class BaseTheme : ResourceDictionary
 
 			if (e.NewValue is ThemeColors tc)
 			{
-				tc.SetChangedCallback(() =>
+				tc.SetChangedCallback((isStructural) =>
 				{
-					if (!theme._isColorOverrideMuted)
+					if (theme._isColorOverrideMuted)
+					{
+						return;
+					}
+
+					// Seed color changes use the fast path (in-place brush update).
+					// Structural changes (override dictionaries) need a full rebuild.
+					if (isStructural)
+					{
+						theme.UpdateSource();
+					}
+					else
 					{
 						theme.UpdateSeedColors();
 					}

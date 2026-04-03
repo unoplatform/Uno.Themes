@@ -95,10 +95,4 @@ internal static class HctSolver
 
 		return bestArgb;
 	}
-
-	/// <summary>
-	/// Check if a color produced by CAM16 inverse is within sRGB gamut.
-	/// A color is out of gamut if any channel was clamped during delinearization.
-	/// We verify by round-tripping through linearize→delinearize.
-	/// </summary>
 }

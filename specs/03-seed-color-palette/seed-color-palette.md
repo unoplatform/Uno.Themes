@@ -208,7 +208,7 @@ src/library/Uno.Themes/
 
 ### Modified Files
 
-- `src/library/Uno.Themes/BaseTheme.cs` — Added `Colors` dependency property; updated `UpdateSource()` to generate and merge the seed palette; added `UpdateSeedColors()` fast path for in-place brush color updates at runtime.
+- `src/library/Uno.Themes/BaseTheme.cs` — Added `Colors` dependency property; updated `UpdateSource()` to generate and merge the seed palette with runtime brush tracking; added `UpdateSeedColors()` fast path for in-place brush color updates. Seed vs structural changes are dispatched separately (seed → fast path, override dictionaries → full rebuild).
 
 ### Sample Page
 
@@ -239,17 +239,20 @@ All other color math internals (`Cam16`, `HctSolver`, `ViewingConditions`, `Colo
 
 ## Performance
 
-Generating the full palette (~78 HCT solves for all tones across 6 palettes) completes in under 1ms on modern hardware. The `TonalPalette` class caches computed tones, so repeated lookups are free. `SeedColorPaletteGenerator` also caches full palette `ResourceDictionary` results by seed color tuple, so regenerating with the same seed colors returns the cached result instantly.
+Generating the full palette (~78 HCT solves for all tones across 6 palettes) completes in under 1ms on modern hardware. The `TonalPalette` class caches computed tones, so repeated lookups are free. `SeedColorPaletteGenerator` caches the most recent seed → palette result, so regenerating with the same seed returns instantly without unbounded memory growth during color picker dragging.
 
 ## Runtime Color Updates
 
-When a seed color property is changed at runtime, `BaseTheme` uses a **fast path** (`UpdateSeedColors()`) that updates brush colors in-place without rebuilding the resource tree:
+Runtime seed color changes are dispatched based on the type of change:
 
-1. **Generate new palette** — The seed palette is recomputed from the new seed color(s).
-2. **Walk existing tree** — All `SolidColorBrush` instances in the current resource tree (including per-theme dictionaries) are located.
-3. **Patch in-place** — Each brush's `Color` property is updated to the new seed-derived value. Since brush instance identity is preserved, all UI elements holding references via `{ThemeResource}` see the change immediately.
+- **Seed color changes** (`PrimarySeed`, `SecondarySeed`, `TertiarySeed`) use a **fast path** (`UpdateSeedColors()`) that updates brush colors in-place without rebuilding the resource tree:
+  1. Generate the new seed palette from the seed color(s).
+  2. Walk all `SolidColorBrush` instances in the current resource tree.
+  3. Patch each brush's `Color` property to the new seed-derived value. Since brush instance identity is preserved, UI elements update immediately.
 
-This fast path avoids clearing and rebuilding the resource tree, which would create new brush instances and break references held by existing UI elements. A full rebuild (`UpdateSource()`) is only performed during initial theme construction or when structural changes are needed (e.g., font overrides, color override dictionaries).
+- **Structural changes** (`OverrideDictionary`, `OverrideSource`) trigger a full rebuild (`UpdateSource()`) since override dictionaries need to be re-merged into the resource tree.
+
+The fast path avoids clearing and rebuilding the resource tree, which would create new brush instances and break references held by existing UI elements. `UpdateSource()` also tracks and patches brush instances across both themes after full rebuilds to maintain UI consistency.
 
 ## Compatibility
 

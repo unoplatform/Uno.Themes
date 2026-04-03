@@ -34,8 +34,14 @@ public sealed class TonalPalette
 	}
 
 	/// <summary>Get the ARGB color at the specified tone (0-100).</summary>
+	/// <exception cref="ArgumentOutOfRangeException">Thrown when tone is outside 0-100.</exception>
 	public int GetArgb(int tone)
 	{
+		if (tone < 0 || tone > 100)
+		{
+			throw new ArgumentOutOfRangeException(nameof(tone), tone, "Tone must be between 0 and 100.");
+		}
+
 		if (!_cache.TryGetValue(tone, out int argb))
 		{
 			argb = new HctColor(_hue, _chroma, tone).ToArgb();

@@ -28,29 +28,32 @@ internal sealed class SeedColorPaletteGenerator
 	/// </summary>
 	internal static SeedColorPaletteGenerator Default { get; } = new();
 
-	private readonly Dictionary<(int primary, int? secondary, int? tertiary), ResourceDictionary> _cache = new();
+	// Single-entry cache: stores only the most recent seed → palette result.
+	// Runtime color picking only uses one seed at a time, so this avoids
+	// unbounded growth from dragging a color picker.
+	private (int primary, int? secondary, int? tertiary) _cacheKey;
+	private ResourceDictionary _cacheValue;
 
 	internal ResourceDictionary Generate(
 		Color primarySeedColor,
 		Color? secondarySeedColor = null,
 		Color? tertiarySeedColor = null)
 	{
-		var cacheKey = (
+		var key = (
 			ColorToArgb(primarySeedColor),
 			secondarySeedColor is { } sec ? (int?)ColorToArgb(sec) : null,
 			tertiarySeedColor is { } ter ? (int?)ColorToArgb(ter) : null);
 
-		if (_cache.TryGetValue(cacheKey, out var cached))
+		if (_cacheValue is not null && _cacheKey == key)
 		{
-			return cached;
+			return _cacheValue;
 		}
 
 		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor);
-		_cache[cacheKey] = result;
+		_cacheKey = key;
+		_cacheValue = result;
 		return result;
 	}
-
-	internal void ClearCache() => _cache.Clear();
 
 	private static ResourceDictionary GenerateCore(
 		Color seedColor,

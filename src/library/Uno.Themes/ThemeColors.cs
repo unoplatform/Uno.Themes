@@ -17,7 +17,7 @@ namespace Uno.Themes;
 /// </summary>
 public sealed partial class ThemeColors : DependencyObject
 {
-	private Action _onChanged;
+	private Action<bool> _onChanged;
 
 	#region PrimarySeed (DP)
 	/// <summary>
@@ -95,9 +95,18 @@ public sealed partial class ThemeColors : DependencyObject
 
 	private static void OnOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is ThemeColors tc && e.NewValue is string sourceUri)
+		if (d is not ThemeColors tc)
+		{
+			return;
+		}
+
+		if (e.NewValue is string sourceUri && !string.IsNullOrWhiteSpace(sourceUri))
 		{
 			tc.OverrideDictionary = new ResourceDictionary { Source = new Uri(sourceUri) };
+		}
+		else
+		{
+			tc.OverrideDictionary = null;
 		}
 	}
 	#endregion
@@ -125,12 +134,15 @@ public sealed partial class ThemeColors : DependencyObject
 	{
 		if (d is ThemeColors tc)
 		{
-			tc._onChanged?.Invoke();
+			bool isStructural = e.Property == OverrideDictionaryProperty || e.Property == OverrideSourceProperty;
+			tc._onChanged?.Invoke(isStructural);
 		}
 	}
 
 	/// <summary>
 	/// Registers a callback that is invoked when any color property changes.
+	/// The bool parameter indicates whether this is a structural change (true)
+	/// or a seed color change (false).
 	/// </summary>
-	internal void SetChangedCallback(Action callback) => _onChanged = callback;
+	internal void SetChangedCallback(Action<bool> callback) => _onChanged = callback;
 }
