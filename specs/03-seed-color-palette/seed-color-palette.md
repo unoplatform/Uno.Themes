@@ -108,19 +108,21 @@ This color space is perceptually uniform — equal steps in tone produce equal s
 
 ### Palette Derivation
 
-From the seed color's HCT values (Hue **H**, Chroma **C**):
+From the seed color's HCT Hue (**H**) and Chroma (**C**), using the **TonalSpot** scheme (the standard M3 variant used by Android):
 
 | Tonal Palette | Hue | Chroma | Purpose |
 |---|---|---|---|
 | **Primary** | H | max(C, 48) | Main brand color, boosted for vibrancy |
-| **Secondary** | H | C / 3 | Desaturated complement for supporting roles |
-| **Tertiary** | H + 60 | C / 2 | Hue-shifted accent for visual interest |
-| **Neutral** | H | min(C/12, 4) | Near-gray for backgrounds and surfaces |
-| **Neutral Variant** | H | min(C/6, 8) | Slightly tinted for outlines and surface variants |
+| **Secondary** | H | 16 | Desaturated complement for supporting roles |
+| **Tertiary** | H + 60 | 24 | Hue-shifted accent for visual interest |
+| **Neutral** | H | 4 | Near-gray for backgrounds and surfaces |
+| **Neutral Variant** | H | 8 | Slightly tinted for outlines and surface variants |
+
+Fixed chroma values for Secondary through NeutralVariant (matching M3 TonalSpot) ensure consistent visual separation between color roles across all seed colors.
 
 Error colors are **not generated** from the seed — they use the fixed values from `SharedColorPalette.xaml`, matching the Material Theme Builder behavior where Error always stays red regardless of seed color.
 
-If `SecondarySeedColor` or `TertiarySeedColor` are provided, those palettes use the provided color's HCT values instead of the auto-derived ones.
+If `SecondarySeed` or `TertiarySeed` are provided, those palettes use the provided color's HCT values instead of the fixed defaults.
 
 ### Tone Mapping
 

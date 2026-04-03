@@ -72,7 +72,7 @@ internal sealed class SeedColorPaletteGenerator
 		}
 		else
 		{
-			secondary = new TonalPalette(hue, chroma / 3.0);
+			secondary = new TonalPalette(hue, 16);
 		}
 
 		TonalPalette tertiary;
@@ -83,11 +83,11 @@ internal sealed class SeedColorPaletteGenerator
 		}
 		else
 		{
-			tertiary = new TonalPalette(hue + 60.0, chroma / 2.0);
+			tertiary = new TonalPalette(hue + 60.0, 24);
 		}
 
-		var neutral = new TonalPalette(hue, Math.Min(chroma / 12.0, 4.0));
-		var neutralVariant = new TonalPalette(hue, Math.Min(chroma / 6.0, 8.0));
+		var neutral = new TonalPalette(hue, 4);
+		var neutralVariant = new TonalPalette(hue, 8);
 
 		// Error palette is intentionally omitted — it uses fixed values (hue=25, chroma=84)
 		// independent of the seed color, matching the Material Theme Builder behavior.
