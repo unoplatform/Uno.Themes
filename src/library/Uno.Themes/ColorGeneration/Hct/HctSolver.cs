@@ -38,11 +38,11 @@ internal static class HctSolver
 		double j = JFromTone(tone);
 
 		// Use CAM16 inverse to get the ARGB at the desired hue, chroma, and J
-		int argb = Cam16.ToArgb(hue, chroma, j);
+		int argb = Cam16.ToArgb(hue, chroma, j, out bool inGamut);
 		double actualTone = ColorMath.LstarFromArgb(argb);
 
-		// If the result is close enough in tone, accept it
-		if (Math.Abs(actualTone - tone) <= 1.0)
+		// Accept if close in tone AND within sRGB gamut
+		if (Math.Abs(actualTone - tone) <= 1.0 && inGamut)
 		{
 			return argb;
 		}
@@ -76,13 +76,13 @@ internal static class HctSolver
 		double high = requestedChroma;
 		int bestArgb = GrayFromTone(tone);
 
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 32; i++)
 		{
 			double mid = (low + high) / 2.0;
-			int candidate = Cam16.ToArgb(hue, mid, j);
+			int candidate = Cam16.ToArgb(hue, mid, j, out bool inGamut);
 			double actualTone = ColorMath.LstarFromArgb(candidate);
 
-			if (Math.Abs(actualTone - tone) <= 1.0 && IsInGamut(candidate))
+			if (Math.Abs(actualTone - tone) <= 1.0 && inGamut)
 			{
 				bestArgb = candidate;
 				low = mid;
@@ -101,11 +101,4 @@ internal static class HctSolver
 	/// A color is out of gamut if any channel was clamped during delinearization.
 	/// We verify by round-tripping through linearize→delinearize.
 	/// </summary>
-	private static bool IsInGamut(int argb)
-	{
-		int r = ColorMath.RedFromArgb(argb);
-		int g = ColorMath.GreenFromArgb(argb);
-		int b = ColorMath.BlueFromArgb(argb);
-		return r > 0 && r < 255 && g > 0 && g < 255 && b > 0 && b < 255;
-	}
 }

@@ -27,11 +27,17 @@ internal static class ColorMath
 	/// <summary>Delinearize a 0-100 linear component back to 0-255 sRGB.</summary>
 	internal static int Delinearized(double rgbComponent)
 	{
+		return Clamp8Bit(DelinearizedRaw(rgbComponent));
+	}
+
+	/// <summary>Delinearize without clamping — result may be outside 0-255 for out-of-gamut colors.</summary>
+	internal static int DelinearizedRaw(double rgbComponent)
+	{
 		double normalized = rgbComponent / 100.0;
 		double srgb = normalized <= 0.0031308
 			? normalized * 12.92
 			: 1.055 * Math.Pow(normalized, 1.0 / 2.4) - 0.055;
-		return Clamp8Bit((int)Math.Round(srgb * 255.0));
+		return (int)Math.Round(srgb * 255.0);
 	}
 
 	internal static int Clamp8Bit(int value) => Math.Max(0, Math.Min(255, value));
