@@ -18,6 +18,15 @@ public sealed partial class SeedColorSamplePage : Page
 		this.InitializeComponent();
 		SeedColorPicker.Color = _lastSeed;
 		ApplySeedColor(_lastSeed);
+
+		// UpdateSeedColors() only patches brushes visible in the active theme.
+		// On theme switch, pulse the seed to force a full rebuild so the
+		// now-active theme gets the correct seed-derived colors.
+		this.ActualThemeChanged += (s, e) =>
+		{
+			SemanticThemeHelper.PrimarySeed = null;
+			SemanticThemeHelper.PrimarySeed = _lastSeed;
+		};
 	}
 
 	private void SeedColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
