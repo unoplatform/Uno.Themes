@@ -107,3 +107,7 @@ You can override the default Simple fonts by providing a `ResourceDictionary` wi
     </us:SimpleTheme.FontOverrideDictionary>
 </us:SimpleTheme>
 ```
+
+### Seed Color Palette
+
+Instead of manually defining every color, you can provide a single **seed color** and let the library generate the full Light and Dark palette algorithmically using the Material Design 3 HCT color system. See the [Seed Color Palette documentation](xref:Uno.Themes.SeedColors#getting-started).
