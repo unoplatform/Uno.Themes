@@ -134,7 +134,7 @@ public sealed partial class ThemeColors : DependencyObject
 	{
 		if (d is ThemeColors tc)
 		{
-			bool isStructural = e.Property == OverrideDictionaryProperty || e.Property == OverrideSourceProperty;
+			bool isStructural = e.Property == OverrideDictionaryProperty;
 			tc._onChanged?.Invoke(isStructural);
 		}
 	}
