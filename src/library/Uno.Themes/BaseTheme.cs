@@ -22,6 +22,7 @@ public abstract class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
+	private ResourceDictionary _baseColorOverride;
 	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _originalBrushes;
 	private bool _isInResourceTree;
 	#region FontOverrideSource (DP)
@@ -57,6 +58,7 @@ public abstract class BaseTheme : ResourceDictionary
 	/// of a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
 	/// </summary>
 	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
+	[Obsolete("Use Colors.OverrideSource on ThemeColors instead. This property will be removed in a future version.")]
 	public string ColorOverrideSource
 	{
 		get => (string)GetValue(ColorOverrideSourceProperty);
@@ -74,7 +76,16 @@ public abstract class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme && e.NewValue is string sourceUri)
 		{
-			theme.ColorOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
+			try
+			{
+				theme._isColorOverrideMuted = true;
+				var tc = theme.EnsureColors();
+				tc.OverrideSource = sourceUri;
+			}
+			finally
+			{
+				theme._isColorOverrideMuted = false;
+			}
 		}
 	}
 	#endregion
@@ -110,6 +121,7 @@ public abstract class BaseTheme : ResourceDictionary
 	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
 	/// </summary>
 	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
+	[Obsolete("Use Colors.OverrideDictionary on ThemeColors instead. This property will be removed in a future version.")]
 	public ResourceDictionary ColorOverrideDictionary
 	{
 		get => (ResourceDictionary)GetValue(ColorOverrideDictionaryProperty);
@@ -127,7 +139,30 @@ public abstract class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme { _isColorOverrideMuted: false } theme)
 		{
-			theme.UpdateSource();
+			try
+			{
+				theme._isColorOverrideMuted = true;
+				if (e.NewValue is ResourceDictionary dict)
+				{
+					var tc = theme.EnsureColors();
+					tc.OverrideDictionary = dict;
+				}
+				else
+				{
+					if (theme.Colors is { } tc)
+					{
+						tc.OverrideDictionary = null;
+					}
+					else
+					{
+						theme.UpdateSource();
+					}
+				}
+			}
+			finally
+			{
+				theme._isColorOverrideMuted = false;
+			}
 		}
 	}
 	#endregion
@@ -208,7 +243,7 @@ public abstract class BaseTheme : ResourceDictionary
 	{
 		if (colorOverride is { })
 		{
-			SetColorOverrideSilently(colorOverride);
+			_baseColorOverride = colorOverride;
 		}
 
 		if (fontOverride is { })
@@ -217,19 +252,6 @@ public abstract class BaseTheme : ResourceDictionary
 		}
 
 		UpdateSource();
-	}
-
-	private void SetColorOverrideSilently(ResourceDictionary colorOverride)
-	{
-		try
-		{
-			_isColorOverrideMuted = true;
-			ColorOverrideDictionary = colorOverride;
-		}
-		finally
-		{
-			_isColorOverrideMuted = false;
-		}
 	}
 
 	private void SetFontOverrideSilently(ResourceDictionary fontOverride)
@@ -243,6 +265,17 @@ public abstract class BaseTheme : ResourceDictionary
 		{
 			_isFontOverrideMuted = false;
 		}
+	}
+
+	private ThemeColors EnsureColors()
+	{
+		var colors = Colors;
+		if (colors is null)
+		{
+			colors = new ThemeColors();
+			Colors = colors;
+		}
+		return colors;
 	}
 
 	protected void UpdateSource()
@@ -284,7 +317,7 @@ public abstract class BaseTheme : ResourceDictionary
 
 		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
 		// before the seed so that seed-generated colors take precedence.
-		if (ColorOverrideDictionary is { } baseColorOverride)
+		if (_baseColorOverride is { } baseColorOverride)
 		{
 			colors.SafeMerge(baseColorOverride);
 		}
