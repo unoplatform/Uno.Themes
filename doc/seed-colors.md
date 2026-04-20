@@ -6,7 +6,7 @@ uid: Uno.Themes.SeedColors
 
 Uno Themes supports algorithmic color palette generation using the Material Design 3 [HCT (Hue-Chroma-Tone)](https://material.io/blog/science-of-color-design) color space. Instead of manually defining 30+ color resources for Light and Dark themes, you can provide a single **seed color** and the library will derive the full semantic color palette automatically.
 
-`MaterialTheme` uses seed color generation by default — even without explicit configuration. The built-in default primary seed (`#5946D2`) produces the standard Material color palette. You can override it by setting `PrimarySeed` on a `ThemeColors` object.
+Both `MaterialTheme` and `SimpleTheme` use seed color generation by default — even without explicit configuration. `MaterialTheme` uses `#5946D2` (deep purple) and `SimpleTheme` uses `#808080` (neutral gray) as their built-in default seeds. You can override them by setting `PrimarySeed` on a `ThemeColors` object.
 
 ## Overview
 
@@ -98,6 +98,7 @@ SemanticThemeHelper.SecondarySeed = Colors.Teal;
 SemanticThemeHelper.TertiarySeed = Colors.Orange;
 
 // Clear seed to revert to theme's default seed color
+// (MaterialTheme → #5946D2, SimpleTheme → #808080)
 SemanticThemeHelper.PrimarySeed = null;
 ```
 
@@ -149,7 +150,7 @@ When building the final theme palette, the following precedence order applies (h
 3. **Theme base colors** - e.g., Simple's grayscale palette or Material's built-in defaults
 4. **`SharedColorPalette`** - library defaults
 
-`MaterialTheme` provides a default primary seed (`#5946D2`), so seed generation is always active for Material apps. `SimpleTheme` does not define a default seed — its grayscale palette is not seed-derived.
+Both themes provide default primary seeds (`MaterialTheme` → `#5946D2`, `SimpleTheme` → `#808080`), so seed generation is always active. Setting `PrimarySeed` overrides the default; clearing it (`null`) reverts to the built-in seed.
 
 This means seed colors override the built-in defaults, but any colors you explicitly set in the `OverrideDictionary` will take precedence over the seed-generated values.
 
