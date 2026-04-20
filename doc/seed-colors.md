@@ -6,6 +6,8 @@ uid: Uno.Themes.SeedColors
 
 Uno Themes supports algorithmic color palette generation using the Material Design 3 [HCT (Hue-Chroma-Tone)](https://material.io/blog/science-of-color-design) color space. Instead of manually defining 30+ color resources for Light and Dark themes, you can provide a single **seed color** and the library will derive the full semantic color palette automatically.
 
+`MaterialTheme` uses seed color generation by default — even without explicit configuration. The built-in default primary seed (`#5946D2`) produces the standard Material color palette. You can override it by setting `PrimarySeed` on a `ThemeColors` object.
+
 ## Overview
 
 Setting a `PrimarySeed` color on the `ThemeColors` object will generate:
@@ -95,7 +97,7 @@ SemanticThemeHelper.PrimarySeed = Colors.Green;
 SemanticThemeHelper.SecondarySeed = Colors.Teal;
 SemanticThemeHelper.TertiarySeed = Colors.Orange;
 
-// Clear seed to revert to default theme colors
+// Clear seed to revert to theme's default seed color
 SemanticThemeHelper.PrimarySeed = null;
 ```
 
@@ -143,9 +145,11 @@ Static convenience class for runtime theme configuration.
 When building the final theme palette, the following precedence order applies (highest wins):
 
 1. **`ThemeColors.OverrideDictionary`** (or `OverrideSource`) - explicit user overrides
-2. **Seed-generated palette** - algorithmically derived from `PrimarySeed`
+2. **Seed-generated palette** - algorithmically derived from `PrimarySeed` (or the theme's `DefaultPrimarySeed`)
 3. **Theme base colors** - e.g., Simple's grayscale palette or Material's built-in defaults
 4. **`SharedColorPalette`** - library defaults
+
+`MaterialTheme` provides a default primary seed (`#5946D2`), so seed generation is always active for Material apps. `SimpleTheme` does not define a default seed — its grayscale palette is not seed-derived.
 
 This means seed colors override the built-in defaults, but any colors you explicitly set in the `OverrideDictionary` will take precedence over the seed-generated values.
 

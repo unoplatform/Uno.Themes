@@ -67,6 +67,7 @@ theme.Colors.PrimarySeed = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
 | Property | Type | Default | Description |
 |---|---|---|---|
 | `Colors` | `ThemeColors` | `null` | Grouped color configuration including seed colors and overrides. |
+| `DefaultPrimarySeed` | `Color?` (virtual) | `null` | Theme-specific default primary seed. `MaterialTheme` returns `#5946D2`. When non-null, seed generation is always active even without explicit `ThemeColors`. |
 
 ### Properties on `ThemeColors`
 
@@ -77,6 +78,14 @@ theme.Colors.PrimarySeed = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
 | `TertiarySeed` | `Color?` | `null` | Optional. Overrides the auto-derived tertiary palette. |
 | `OverrideSource` | `string` | `null` | URI to a color override ResourceDictionary. |
 | `OverrideDictionary` | `ResourceDictionary` | `null` | Direct color override dictionary. |
+
+### Default Seed Behavior
+
+`MaterialTheme` provides a default primary seed (`#5946D2`) so that seed color generation is always active — even when no `ThemeColors` is explicitly configured. This means:
+
+- Out of the box, Material apps use algorithmically-derived colors based on the standard primary color.
+- Setting `Colors.PrimarySeed` overrides the default.
+- `SimpleTheme` does not define a default seed (its grayscale palette is not seed-derived).
 
 Seed colors are configured exclusively via `ThemeColors` (the `BaseTheme.Colors` property). This works with `MaterialTheme`, `SimpleTheme`, and any future theme subclass.
 
