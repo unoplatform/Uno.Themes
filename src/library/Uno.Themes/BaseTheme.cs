@@ -190,6 +190,15 @@ public abstract class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
+	/// <summary>
+	/// Gets the default primary seed color for this theme.
+	/// When not <c>null</c>, seed color generation is always active — even
+	/// without an explicit <see cref="ThemeColors.PrimarySeed"/> — so the
+	/// theme uses algorithmically-derived colors by default.
+	/// Override in subclasses to provide a theme-specific default.
+	/// </summary>
+	protected virtual Color? DefaultPrimarySeed => null;
+
 	public BaseTheme() : this(colorOverride: null, fontOverride: null)
 	{
 
@@ -280,8 +289,8 @@ public abstract class BaseTheme : ResourceDictionary
 			colors.SafeMerge(baseColorOverride);
 		}
 
-		// Resolve seed colors from Colors property
-		var effectivePrimary = Colors?.PrimarySeed;
+		// Resolve seed colors from Colors property, falling back to theme default
+		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
 		var effectiveSecondary = Colors?.SecondarySeed;
 		var effectiveTertiary = Colors?.TertiarySeed;
 
@@ -362,13 +371,13 @@ public abstract class BaseTheme : ResourceDictionary
 			return;
 		}
 
-		var effectivePrimary = Colors?.PrimarySeed;
+		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
 		var effectiveSecondary = Colors?.SecondarySeed;
 		var effectiveTertiary = Colors?.TertiarySeed;
 
 		if (effectivePrimary is not { } seed)
 		{
-			// Seed was cleared — need a full rebuild to restore defaults
+			// No seed available (no explicit seed and no theme default) — full rebuild
 			UpdateSource();
 			return;
 		}
