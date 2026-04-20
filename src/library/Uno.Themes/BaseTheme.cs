@@ -22,6 +22,9 @@ public abstract class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
+	private bool _isTypographyOverrideMuted = false;
+	private bool _isSpacingOverrideMuted = false;
+	private bool _isShapeOverrideMuted = false;
 	private ResourceDictionary _baseColorOverride;
 	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _originalBrushes;
 	private bool _isInResourceTree;
@@ -225,6 +228,166 @@ public abstract class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
+	#region TypographyOverrideSource (DP)
+	/// <summary>
+	/// (Optional) Gets or sets a URI that provides the source location of a <see cref="ResourceDictionary"/>
+	/// containing overrides for the default typography resources (font sizes, weights, character spacing).
+	/// </summary>
+	public string TypographyOverrideSource
+	{
+		get => (string)GetValue(TypographyOverrideSourceProperty);
+		set => SetValue(TypographyOverrideSourceProperty, value);
+	}
+
+	public static DependencyProperty TypographyOverrideSourceProperty { get; } =
+		DependencyProperty.Register(
+			nameof(TypographyOverrideSource),
+			typeof(string),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnTypographyOverrideSourceChanged));
+
+	private static void OnTypographyOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme && e.NewValue is string sourceUri)
+		{
+			theme.TypographyOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
+		}
+	}
+	#endregion
+
+	#region TypographyOverrideDictionary (DP)
+	/// <summary>
+	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default typography resources.
+	/// </summary>
+	public ResourceDictionary TypographyOverrideDictionary
+	{
+		get => (ResourceDictionary)GetValue(TypographyOverrideDictionaryProperty);
+		set => SetValue(TypographyOverrideDictionaryProperty, value);
+	}
+
+	public static DependencyProperty TypographyOverrideDictionaryProperty { get; } =
+		DependencyProperty.Register(
+			nameof(TypographyOverrideDictionary),
+			typeof(ResourceDictionary),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnTypographyOverrideChanged));
+
+	private static void OnTypographyOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme { _isTypographyOverrideMuted: false } theme)
+		{
+			theme.UpdateSource();
+		}
+	}
+	#endregion
+
+	#region SpacingOverrideSource (DP)
+	/// <summary>
+	/// (Optional) Gets or sets a URI that provides the source location of a <see cref="ResourceDictionary"/>
+	/// containing overrides for the default spacing resources.
+	/// Can point to a spacing preset (e.g. SpacingCompact.xaml, SpacingComfortable.xaml).
+	/// </summary>
+	public string SpacingOverrideSource
+	{
+		get => (string)GetValue(SpacingOverrideSourceProperty);
+		set => SetValue(SpacingOverrideSourceProperty, value);
+	}
+
+	public static DependencyProperty SpacingOverrideSourceProperty { get; } =
+		DependencyProperty.Register(
+			nameof(SpacingOverrideSource),
+			typeof(string),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnSpacingOverrideSourceChanged));
+
+	private static void OnSpacingOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme && e.NewValue is string sourceUri)
+		{
+			theme.SpacingOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
+		}
+	}
+	#endregion
+
+	#region SpacingOverrideDictionary (DP)
+	/// <summary>
+	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default spacing resources.
+	/// </summary>
+	public ResourceDictionary SpacingOverrideDictionary
+	{
+		get => (ResourceDictionary)GetValue(SpacingOverrideDictionaryProperty);
+		set => SetValue(SpacingOverrideDictionaryProperty, value);
+	}
+
+	public static DependencyProperty SpacingOverrideDictionaryProperty { get; } =
+		DependencyProperty.Register(
+			nameof(SpacingOverrideDictionary),
+			typeof(ResourceDictionary),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnSpacingOverrideChanged));
+
+	private static void OnSpacingOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme { _isSpacingOverrideMuted: false } theme)
+		{
+			theme.UpdateSource();
+		}
+	}
+	#endregion
+
+	#region ShapeOverrideSource (DP)
+	/// <summary>
+	/// (Optional) Gets or sets a URI that provides the source location of a <see cref="ResourceDictionary"/>
+	/// containing overrides for the default shape (corner radius) resources.
+	/// </summary>
+	public string ShapeOverrideSource
+	{
+		get => (string)GetValue(ShapeOverrideSourceProperty);
+		set => SetValue(ShapeOverrideSourceProperty, value);
+	}
+
+	public static DependencyProperty ShapeOverrideSourceProperty { get; } =
+		DependencyProperty.Register(
+			nameof(ShapeOverrideSource),
+			typeof(string),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnShapeOverrideSourceChanged));
+
+	private static void OnShapeOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme && e.NewValue is string sourceUri)
+		{
+			theme.ShapeOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
+		}
+	}
+	#endregion
+
+	#region ShapeOverrideDictionary (DP)
+	/// <summary>
+	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default shape (corner radius) resources.
+	/// </summary>
+	public ResourceDictionary ShapeOverrideDictionary
+	{
+		get => (ResourceDictionary)GetValue(ShapeOverrideDictionaryProperty);
+		set => SetValue(ShapeOverrideDictionaryProperty, value);
+	}
+
+	public static DependencyProperty ShapeOverrideDictionaryProperty { get; } =
+		DependencyProperty.Register(
+			nameof(ShapeOverrideDictionary),
+			typeof(ResourceDictionary),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnShapeOverrideChanged));
+
+	private static void OnShapeOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme { _isShapeOverrideMuted: false } theme)
+		{
+			theme.UpdateSource();
+		}
+	}
+	#endregion
+
 	/// <summary>
 	/// Gets the default primary seed color for this theme.
 	/// When not <c>null</c>, seed color generation is always active — even
@@ -341,12 +504,38 @@ public abstract class BaseTheme : ResourceDictionary
 
 		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
 
+		// Apply typography overrides (font sizes, weights, character spacing)
+		if (TypographyOverrideDictionary is { } typographyOverride)
+		{
+			typography.SafeMerge(typographyOverride);
+		}
+
+		// Load shared spacing tokens and apply overrides
+		var spacing = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedSpacingResourcePath) };
+		if (SpacingOverrideDictionary is { } spacingOverride)
+		{
+			spacing.SafeMerge(spacingOverride);
+		}
+
+		// Load shared shape tokens and apply overrides
+		var shape = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedShapeResourcePath) };
+		if (ShapeOverrideDictionary is { } shapeOverride)
+		{
+			shape.SafeMerge(shapeOverride);
+		}
+
+		// Load shared density tokens
+		var density = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedDensityResourcePath) };
+
 		var mergedPages = GenerateSpecificResources();
 
 		mergedPages.MergedDictionaries.Add(colors);
 		mergedPages.MergedDictionaries.Add(converters);
 
 		MergedDictionaries.Add(typography);
+		MergedDictionaries.Add(spacing);
+		MergedDictionaries.Add(shape);
+		MergedDictionaries.Add(density);
 		MergedDictionaries.Add(mergedPages);
 
 		// Track new brush instances created by the rebuild so that UI elements
