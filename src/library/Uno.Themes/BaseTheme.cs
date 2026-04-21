@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using Uno.Themes.ColorGeneration;
 
 
 #if WinUI
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 #else
 using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 #endif
 
 
@@ -23,7 +17,6 @@ public abstract class BaseTheme : ResourceDictionary
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
-	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _trackedBrushes;
 	#region FontOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -268,20 +261,6 @@ public abstract class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
-		// Before clearing, capture existing brush instances so we can
-		// patch them after the rebuild. UI elements hold references to
-		// these instances via {ThemeResource}; without this step those
-		// references would become stale.
-		if (_trackedBrushes == null && MergedDictionaries.Count > 0)
-		{
-			var collected = new List<(string, string, SolidColorBrush)>();
-			CollectBrushes(this, null, collected);
-			if (collected.Count > 0)
-			{
-				_trackedBrushes = collected;
-			}
-		}
-
 #if !HAS_UNO
 		Source = null;
 #endif
@@ -327,110 +306,6 @@ public abstract class BaseTheme : ResourceDictionary
 
 		MergedDictionaries.Add(typography);
 		MergedDictionaries.Add(mergedPages);
-
-		// Patch tracked brush instances with new color values so that
-		// UI elements holding old references see the updates.
-		SyncTrackedBrushes();
-	}
-
-	/// <summary>
-	/// Updates previously-captured brush instances with the colors from the
-	/// rebuilt dictionaries. Matching is done by resource key — no string
-	/// derivation or suffix stripping needed.
-	/// </summary>
-	private void SyncTrackedBrushes()
-	{
-		if (_trackedBrushes is not { Count: > 0 })
-		{
-			return;
-		}
-
-		// Index new brush instances from the rebuilt dictionary
-		var newBrushes = new Dictionary<(string themeKey, string brushKey), SolidColorBrush>();
-		IndexBrushes(this, null, newBrushes);
-
-		// Update each tracked instance from the corresponding new instance
-		foreach (var (themeKey, brushKey, oldBrush) in _trackedBrushes)
-		{
-			if (newBrushes.TryGetValue((themeKey, brushKey), out var newBrush)
-				&& !ReferenceEquals(oldBrush, newBrush)
-				&& oldBrush.Color != newBrush.Color)
-			{
-				oldBrush.Color = newBrush.Color;
-			}
-		}
-
-		// Track new instances so future syncs also update them
-		var known = new HashSet<SolidColorBrush>(_trackedBrushes.ConvertAll(e => e.brush));
-		foreach (var ((themeKey, brushKey), brush) in newBrushes)
-		{
-			if (known.Add(brush))
-			{
-				_trackedBrushes.Add((themeKey, brushKey, brush));
-			}
-		}
-	}
-
-	/// <summary>
-	/// Builds a dictionary of brush instances keyed by (themeKey, brushKey)
-	/// from the given resource dictionary tree.
-	/// </summary>
-	private static void IndexBrushes(
-		ResourceDictionary dict,
-		string themeKey,
-		Dictionary<(string themeKey, string brushKey), SolidColorBrush> result)
-	{
-		foreach (var kvp in dict.ThemeDictionaries)
-		{
-			if (kvp.Value is ResourceDictionary themed)
-			{
-				IndexBrushes(themed, kvp.Key as string, result);
-			}
-		}
-
-		foreach (var key in dict.Keys)
-		{
-			if (key is string k && dict[k] is SolidColorBrush brush)
-			{
-				result.TryAdd((themeKey, k), brush);
-			}
-		}
-
-		foreach (var merged in dict.MergedDictionaries)
-		{
-			IndexBrushes(merged, themeKey, result);
-		}
-	}
-
-	/// <summary>
-	/// Recursively collects all <see cref="SolidColorBrush"/> instances from the
-	/// resource dictionary tree, tagging each with its ThemeDictionary key.
-	/// </summary>
-	private static void CollectBrushes(
-		ResourceDictionary dict,
-		string themeKey,
-		List<(string themeKey, string brushKey, SolidColorBrush brush)> result)
-	{
-		foreach (var kvp in dict.ThemeDictionaries)
-		{
-			if (kvp.Value is ResourceDictionary themed)
-			{
-				CollectBrushes(themed, kvp.Key as string, result);
-			}
-		}
-
-		foreach (var key in dict.Keys)
-		{
-			if (key is string k && dict[k] is SolidColorBrush brush)
-			{
-				result.Add((themeKey, k, brush));
-			}
-		}
-
-		foreach (var merged in dict.MergedDictionaries)
-		{
-			CollectBrushes(merged, themeKey, result);
-		}
 	}
 
 	protected abstract ResourceDictionary GenerateSpecificResources();
