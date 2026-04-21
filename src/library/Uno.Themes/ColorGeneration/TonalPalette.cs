@@ -24,15 +24,6 @@ public sealed class TonalPalette
 		_chroma = chroma;
 	}
 
-	/// <summary>
-	/// Create a TonalPalette from a seed ARGB color.
-	/// Uses the seed's hue and the specified chroma (or the seed's chroma if not specified).
-	/// </summary>
-	public static TonalPalette FromHct(HctColor hct, double? overrideChroma = null)
-	{
-		return new TonalPalette(hct.Hue, overrideChroma ?? hct.Chroma);
-	}
-
 	/// <summary>Get the ARGB color at the specified tone (0-100).</summary>
 	/// <exception cref="ArgumentOutOfRangeException">Thrown when tone is outside 0-100.</exception>
 	public int GetArgb(int tone)

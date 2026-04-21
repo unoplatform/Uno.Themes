@@ -98,13 +98,4 @@ internal static class ColorMath
 	/// <summary>Pack r, g, b bytes into an ARGB int with alpha = 0xFF.</summary>
 	internal static int ArgbFromRgb(int r, int g, int b) =>
 		(0xFF << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
-
-	/// <summary>Extract red component from ARGB int.</summary>
-	internal static int RedFromArgb(int argb) => (argb >> 16) & 0xFF;
-
-	/// <summary>Extract green component from ARGB int.</summary>
-	internal static int GreenFromArgb(int argb) => (argb >> 8) & 0xFF;
-
-	/// <summary>Extract blue component from ARGB int.</summary>
-	internal static int BlueFromArgb(int argb) => argb & 0xFF;
 }

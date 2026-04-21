@@ -15,25 +15,12 @@ internal readonly struct Cam16
 	internal double Hue { get; }
 	internal double Chroma { get; }
 	internal double J { get; }
-	internal double Q { get; }
-	internal double M { get; }
-	internal double S { get; }
-	internal double JStar { get; }
-	internal double AStar { get; }
-	internal double BStar { get; }
 
-	private Cam16(double hue, double chroma, double j, double q, double m, double s,
-		double jStar, double aStar, double bStar)
+	private Cam16(double hue, double chroma, double j)
 	{
 		Hue = hue;
 		Chroma = chroma;
 		J = j;
-		Q = q;
-		M = m;
-		S = s;
-		JStar = jStar;
-		AStar = aStar;
-		BStar = bStar;
 	}
 
 	/// <summary>Compute CAM16 appearance correlates from an ARGB color.</summary>
@@ -87,8 +74,6 @@ internal readonly struct Cam16
 		double ac = p2 * vc.Nbb;
 		double j = 100.0 * Math.Pow(ac / vc.Aw, vc.C * vc.Z);
 
-		double q = (4.0 / vc.C) * Math.Sqrt(j / 100.0) * (vc.Aw + 4.0) * vc.FlRoot;
-
 		double huePrime = hue < 20.14 ? hue + 360.0 : hue;
 		double eHue = 0.25 * (Math.Cos(huePrime * Math.PI / 180.0 + 2.0) + 3.8);
 		double p1 = 50000.0 / 13.0 * eHue * vc.Nc * vc.Ncb;
@@ -96,15 +81,8 @@ internal readonly struct Cam16
 		double alpha = Math.Pow(t, 0.9) * Math.Pow(1.64 - Math.Pow(0.29, vc.N), 0.73);
 
 		double c16 = alpha * Math.Sqrt(j / 100.0);
-		double m16 = c16 * vc.FlRoot;
-		double s16 = 50.0 * Math.Sqrt(alpha * vc.C / (vc.Aw + 4.0));
 
-		double jStar = (1.0 + 100.0 * 0.007) * j / (1.0 + 0.007 * j);
-		double mStar = 1.0 / 0.0228 * Math.Log(1.0 + 0.0228 * m16);
-		double aStar = mStar * Math.Cos(hue * Math.PI / 180.0);
-		double bStar = mStar * Math.Sin(hue * Math.PI / 180.0);
-
-		return new Cam16(hue, c16, j, q, m16, s16, jStar, aStar, bStar);
+		return new Cam16(hue, c16, j);
 	}
 
 	/// <summary>
