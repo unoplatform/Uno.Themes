@@ -1,16 +1,11 @@
 #if DEBUG // Hot-reload tests only run in Debug — Uno.WinUI.DevServer is excluded from Release builds.
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Uno.UI.RuntimeTests;
-
 namespace Uno.Themes.Samples.RuntimeTests.HotReload;
 
 /// <summary>
 /// Smoke test that proves the hot-reload runtime-test harness is wired end-to-end:
 /// DevServer loads the Roslyn workspace, a source edit is delta-compiled, and the
-/// metadata update reaches the running sample app.
+/// metadata update reaches the running sample app. Runs in every sample app that
+/// ProjectReferences this shared library.
 /// </summary>
 [TestClass]
 [RunsInSecondaryApp(ignoreIfNotSupported: true)]
@@ -31,7 +26,7 @@ public class Given_HotReload
 		Assert.AreEqual("original", HotReloadTarget.GetValue());
 
 		await using var _ = await HotReloadHelper.UpdateSourceFile(
-			"src/samples/SimpleSampleApp/RuntimeTests/HotReload/HotReloadTarget.cs",
+			"src/samples/Uno.Themes.Samples.RuntimeTests/HotReload/HotReloadTarget.cs",
 			"""return "original";""",
 			"""return "updated";""",
 			ct);
