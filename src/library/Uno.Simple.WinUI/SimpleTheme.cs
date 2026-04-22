@@ -8,7 +8,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
+using Windows.UI;
 #else
+using Windows.UI;
 using Windows.UI.Xaml;
 #endif
 
@@ -51,6 +53,13 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 		get => (SimpleControlSize)GetValue(DefaultSizeProperty);
 		set => SetValue(DefaultSizeProperty, value);
 	}
+
+	/// <summary>
+	/// Default seed for Simple's neutral palette (mid-gray).
+	/// The generator enforces minimum chroma, so Primary/Secondary/Tertiary
+	/// will carry a slight tint; Neutral and NeutralVariant stay near-gray.
+	/// </summary>
+	protected override Color? DefaultPrimarySeed { get; } = Color.FromArgb(0xFF, 0x80, 0x80, 0x80);
 
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)

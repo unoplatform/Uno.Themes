@@ -1,16 +1,13 @@
 ﻿using System;
+using Uno.Themes.ColorGeneration;
 
 
 #if WinUI
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media;
+using Windows.UI;
 #else
 using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 #endif
 
 
@@ -19,7 +16,7 @@ public abstract class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
-
+	private ResourceDictionary _baseColorOverride;
 	#region FontOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -53,6 +50,7 @@ public abstract class BaseTheme : ResourceDictionary
 	/// of a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
 	/// </summary>
 	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
+	[Obsolete("Use Colors.OverrideSource on ThemeColors instead. This property will be removed in a future version.")]
 	public string ColorOverrideSource
 	{
 		get => (string)GetValue(ColorOverrideSourceProperty);
@@ -70,7 +68,16 @@ public abstract class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme && e.NewValue is string sourceUri)
 		{
-			theme.ColorOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
+			try
+			{
+				theme._isColorOverrideMuted = true;
+				var tc = theme.EnsureColors();
+				tc.OverrideSource = sourceUri;
+			}
+			finally
+			{
+				theme._isColorOverrideMuted = false;
+			}
 		}
 	}
 	#endregion
@@ -106,6 +113,7 @@ public abstract class BaseTheme : ResourceDictionary
 	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
 	/// </summary>
 	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
+	[Obsolete("Use Colors.OverrideDictionary on ThemeColors instead. This property will be removed in a future version.")]
 	public ResourceDictionary ColorOverrideDictionary
 	{
 		get => (ResourceDictionary)GetValue(ColorOverrideDictionaryProperty);
@@ -123,10 +131,89 @@ public abstract class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme { _isColorOverrideMuted: false } theme)
 		{
-			theme.UpdateSource();
+			try
+			{
+				theme._isColorOverrideMuted = true;
+				if (e.NewValue is ResourceDictionary dict)
+				{
+					var tc = theme.EnsureColors();
+					tc.OverrideDictionary = dict;
+				}
+				else
+				{
+					if (theme.Colors is { } tc)
+					{
+						tc.OverrideDictionary = null;
+					}
+					else
+					{
+						theme.UpdateSource();
+					}
+				}
+			}
+			finally
+			{
+				theme._isColorOverrideMuted = false;
+			}
 		}
 	}
 	#endregion
+
+	#region Colors (DP)
+	/// <summary>
+	/// Gets or sets a <see cref="ThemeColors"/> object that groups all color-related configuration
+	/// including seed colors, overrides, and the palette generation algorithm.
+	/// This is the recommended way to configure theme colors.
+	/// </summary>
+	public ThemeColors Colors
+	{
+		get => (ThemeColors)GetValue(ColorsProperty);
+		set => SetValue(ColorsProperty, value);
+	}
+
+	public static DependencyProperty ColorsProperty { get; } =
+		DependencyProperty.Register(
+			nameof(Colors),
+			typeof(ThemeColors),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnColorsChanged));
+
+	private static void OnColorsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme)
+		{
+			if (e.OldValue is ThemeColors old)
+			{
+				old.SetChangedCallback(null);
+			}
+
+			if (e.NewValue is ThemeColors tc)
+			{
+				tc.SetChangedCallback((_) =>
+				{
+					if (!theme._isColorOverrideMuted)
+					{
+						theme.UpdateSource();
+					}
+				});
+			}
+
+			if (!theme._isColorOverrideMuted)
+			{
+				theme.UpdateSource();
+			}
+		}
+	}
+	#endregion
+
+	/// <summary>
+	/// Gets the default primary seed color for this theme.
+	/// When not <c>null</c>, seed color generation is always active — even
+	/// without an explicit <see cref="ThemeColors.PrimarySeed"/> — so the
+	/// theme uses algorithmically-derived colors by default.
+	/// Override in subclasses to provide a theme-specific default.
+	/// </summary>
+	protected virtual Color? DefaultPrimarySeed => null;
 
 	public BaseTheme() : this(colorOverride: null, fontOverride: null)
 	{
@@ -137,7 +224,7 @@ public abstract class BaseTheme : ResourceDictionary
 	{
 		if (colorOverride is { })
 		{
-			SetColorOverrideSilently(colorOverride);
+			_baseColorOverride = colorOverride;
 		}
 
 		if (fontOverride is { })
@@ -146,19 +233,6 @@ public abstract class BaseTheme : ResourceDictionary
 		}
 
 		UpdateSource();
-	}
-
-	private void SetColorOverrideSilently(ResourceDictionary colorOverride)
-	{
-		try
-		{
-			_isColorOverrideMuted = true;
-			ColorOverrideDictionary = colorOverride;
-		}
-		finally
-		{
-			_isColorOverrideMuted = false;
-		}
 	}
 
 	private void SetFontOverrideSilently(ResourceDictionary fontOverride)
@@ -172,6 +246,17 @@ public abstract class BaseTheme : ResourceDictionary
 		{
 			_isFontOverrideMuted = false;
 		}
+	}
+
+	private ThemeColors EnsureColors()
+	{
+		var colors = Colors;
+		if (colors is null)
+		{
+			colors = new ThemeColors();
+			Colors = colors;
+		}
+		return colors;
 	}
 
 	protected void UpdateSource()
@@ -188,9 +273,28 @@ public abstract class BaseTheme : ResourceDictionary
 
 		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
 
-		if (ColorOverrideDictionary is { } colorOverride)
+		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
+		// before the seed so that seed-generated colors take precedence.
+		if (_baseColorOverride is { } baseColorOverride)
 		{
-			colors.SafeMerge(colorOverride);
+			colors.SafeMerge(baseColorOverride);
+		}
+
+		// Resolve seed colors from Colors property, falling back to theme default
+		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
+		var effectiveSecondary = Colors?.SecondarySeed;
+		var effectiveTertiary = Colors?.TertiarySeed;
+
+		if (effectivePrimary is { } seed)
+		{
+			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary);
+			colors.SafeMerge(seedPalette);
+		}
+
+		// Explicit user overrides from Colors.OverrideDictionary take highest precedence
+		if (Colors?.OverrideDictionary is { } userOverride)
+		{
+			colors.SafeMerge(userOverride);
 		}
 
 		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
