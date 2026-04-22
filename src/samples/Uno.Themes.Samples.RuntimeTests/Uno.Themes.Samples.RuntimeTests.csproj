@@ -1,0 +1,50 @@
+<Project Sdk="Uno.Sdk.Private">
+  <!--
+    Shared runtime-tests library. Each sample app (Simple / Material / Cupertino)
+    ProjectReferences this assembly so Uno.UI.RuntimeTests.Engine discovers its
+    test classes at launch. Design-system libraries are referenced here so tests
+    can exercise any theme without pulling test infrastructure into the samples.
+
+    TFMs mirror the sample apps (net10.0-*). Design-system libraries remain net9.0
+    and are consumed via normal framework fallback.
+  -->
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('ios'))">$(TargetFrameworks);net10.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('android'))">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <UnoSingleProject>true</UnoSingleProject>
+    <OutputType>Library</OutputType>
+    <!-- Ensures .xr.xml files are generated in a proper layout folder (matches the Uno runtime-tests library pattern). -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <!-- RuntimeTests.Engine still references the legacy DOM-based WebAssembly runtime; bypass the SDK check. -->
+    <UnoDisableValidateNoUnoWasmDOMRuntimeDependency>true</UnoDisableValidateNoUnoWasmDOMRuntimeDependency>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.UI.RuntimeTests.Engine" />
+    <!--
+      Required for hot-reload tests ([RunsInSecondaryApp]) — enables HAS_UNO_DEVSERVER
+      in Uno.UI.RuntimeTests.Engine. Debug-only: in Release the DevServer assembly is
+      not published and would otherwise cause a FileNotFoundException at app startup.
+    -->
+    <PackageReference Include="Uno.WinUI.DevServer" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
+    <PackageReference Include="MSTest.TestFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../library/Uno.Themes/Uno.Themes.WinUI.csproj" />
+    <ProjectReference Include="../../library/Uno.Simple.WinUI/Uno.Simple.WinUI.csproj" />
+    <ProjectReference Include="../../library/Uno.Material/Uno.Material.WinUI.csproj" />
+    <ProjectReference Include="../../library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj" />
+  </ItemGroup>
+</Project>
