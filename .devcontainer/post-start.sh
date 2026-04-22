@@ -18,7 +18,7 @@ printf 'copilot --autopilot --allow-all\n' >> "$HOME/.bash_history"
 # Alias so bare `claude` always starts in bypass-permissions mode (safe in devcontainer)
 for rc in "$HOME/.bashrc" "$HOME/.zshrc"; do
   if [ -f "$rc" ] && ! grep -q 'alias claude=' "$rc"; then
-    printf '\nalias claude="claude --dangerously-skip-permissions"\n' >> "$rc"
+    printf '\nalias claude="CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 claude --dangerously-skip-permissions"\n' >> "$rc"
   fi
 done
 

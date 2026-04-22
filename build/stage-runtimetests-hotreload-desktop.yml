@@ -1,0 +1,66 @@
+jobs:
+- job: RuntimeTests_HotReload_Desktop
+  cancelTimeoutInMinutes: 0
+  displayName: 'Runtime Tests - Hot Reload (Debug, Desktop)'
+  # Longer timeout than the regular runtime-tests job: HR tests pay Roslyn workspace
+  # load (up to 180s) and per-test delta-compile costs on top of the normal run.
+  timeoutInMinutes: 90
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  variables:
+    SampleAppName: SimpleSampleApp
+    ProjectPath: src/samples/SimpleSampleApp
+    ArtifactName: runtimetests-hotreload-desktop-SimpleSampleApp
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-desktop'
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  # Debug build is required: the hot-reload tests rely on Uno.WinUI.DevServer (Debug-only
+  # PackageReference) to expose HAS_UNO_DEVSERVER in Uno.UI.RuntimeTests.Engine, which in
+  # turn enables [RunsInSecondaryApp] dispatch. PublishTrimmed is forced off so the
+  # delta-compiler can match symbols at runtime.
+  - pwsh: |
+      dotnet publish -c Debug -f net10.0-desktop -p:TargetFrameworkOverride=desktop `
+        -p:PublishTrimmed=false `
+        $(ProjectPath)/$(SampleAppName).csproj `
+        -bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+    displayName: Build Desktop Head (Debug) - $(SampleAppName)
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Build Logs
+    condition: always()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog
+      ArtifactName: $(ArtifactName)-buildlog
+      ArtifactType: Container
+
+  - script: |
+      chmod +x build/scripts/linux-skia-desktop-runtime-tests.sh
+      build/scripts/linux-skia-desktop-runtime-tests.sh
+    displayName: 'Run Hot-Reload Runtime Tests - $(SampleAppName)'
+    env:
+      ProjectPath: '$(ProjectPath)'
+      SampleAppName: '$(SampleAppName)'
+      BUILD_CONFIG: 'Debug'
+      # Filter restricts the engine to tests whose fully-qualified name contains
+      # "HotReload" — i.e. the Uno.Themes.Samples.RuntimeTests.HotReload namespace.
+      UNO_RUNTIME_TESTS_RUN_TESTS: '{"Filter": {"Value": "HotReload"}}'
+      UNO_RUNTIME_TESTS_OUTPUT_PATH: '$(Common.TestResultsDirectory)/runtime-tests-hotreload-$(SampleAppName).xml'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Hot-Reload Runtime Tests Results'
+    condition: always()
+    inputs:
+      testRunTitle: 'Runtime Tests - Hot Reload - $(SampleAppName)'
+      testResultsFormat: 'NUnit'
+      testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-hotreload-$(SampleAppName).xml'
+      failTaskOnFailedTests: true
