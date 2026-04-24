@@ -40,18 +40,22 @@
 
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+
+    <!-- Uno.UI.RuntimeTests.Engine (pulled in transitively via Uno.Themes.Samples.RuntimeTests)
+         still references the legacy DOM-based WebAssembly runtime; bypass the SDK check. -->
+    <UnoDisableValidateNoUnoWasmDOMRuntimeDependency>true</UnoDisableValidateNoUnoWasmDOMRuntimeDependency>
   </PropertyGroup>
 
 
   <ItemGroup>
     <ProjectReference Include="../../library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj" />
+    <!-- Shared runtime-tests library: hosts all [TestClass] definitions so they run in every sample. -->
+    <ProjectReference Include="../Uno.Themes.Samples.RuntimeTests/Uno.Themes.Samples.RuntimeTests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Uno.ShowMeTheXAML" />
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
-    <PackageReference Include="Uno.UI.RuntimeTests.Engine" />
-    <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
 
   <ItemGroup>
