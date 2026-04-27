@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:local="using:Microsoft.UI.Xaml.Controls"
@@ -49,21 +49,21 @@
 
 			<!-- NavigationView\Buttons -->
 			<x:Double x:Key="MaterialNavigationViewButtonWidth">56</x:Double>
-			<x:Double x:Key="MaterialNavigationViewButtonHeight">32</x:Double>
-			<CornerRadius x:Key="MaterialNavigationViewButtonCornerRadius">16</CornerRadius>
-			<x:Double x:Key="MaterialNavigationViewButtonIconLength">24</x:Double>
-			<x:Double x:Key="MaterialNavigationViewButtonIconSymbolFontSize">24</x:Double>
-			<Thickness x:Key="MaterialNavigationViewButtonMarginWhenStackedVertically">12,0</Thickness>
+			<StaticResource x:Key="MaterialNavigationViewButtonHeight" ResourceKey="ControlHeightSmall" />
+			<StaticResource x:Key="MaterialNavigationViewButtonCornerRadius" ResourceKey="Radius400CornerRadius" />
+			<StaticResource x:Key="MaterialNavigationViewButtonIconLength" ResourceKey="IconSizeMedium" />
+			<StaticResource x:Key="MaterialNavigationViewButtonIconSymbolFontSize" ResourceKey="IconSizeMedium" />
+			<StaticResource x:Key="MaterialNavigationViewButtonMarginWhenStackedVertically" ResourceKey="Space300HorizontalThickness" />
 
 			<!-- NavigationViewItem -->
 			<x:Double x:Key="MaterialNavigationItemHeight">56</x:Double>
-			<x:Double x:Key="MaterialNavigationItemHeightCompact">32</x:Double>
-			<x:Double x:Key="MaterialNavigationItemMarginCompact">12</x:Double>
+			<StaticResource x:Key="MaterialNavigationItemHeightCompact" ResourceKey="ControlHeightSmall" />
+			<StaticResource x:Key="MaterialNavigationItemMarginCompact" ResourceKey="Space300" />
 			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadius">28</CornerRadius>
 			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadiusLeftOnly">28,0,0,28</CornerRadius>
-			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadiusCompact">16</CornerRadius>
-			<Thickness x:Key="MaterialNavigationItemLeftMargin">12,0</Thickness>
-			<x:Double x:Key="MaterialNavigationItemIconLength">24</x:Double>
+			<StaticResource x:Key="MaterialNavigationViewItemCornerRadiusCompact" ResourceKey="Radius400CornerRadius" />
+			<StaticResource x:Key="MaterialNavigationItemLeftMargin" ResourceKey="Space300HorizontalThickness" />
+			<StaticResource x:Key="MaterialNavigationItemIconLength" ResourceKey="IconSizeMedium" />
 			<Thickness x:Key="MaterialNavigationItemContentMargin">12,0,0,0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentMarginWithoutIcon">0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentPaddingCompact">16,4</Thickness>
@@ -71,25 +71,25 @@
 
 			<!--#region Resources Imported from Reference-->
 
-			<Thickness x:Key="NavigationViewAutoSuggestBoxMargin">16,0</Thickness>
-			<Thickness x:Key="TopNavigationViewAutoSuggestBoxMargin">4,0</Thickness>
-			<x:Double x:Key="PaneToggleButtonHeight">32</x:Double>
+			<StaticResource x:Key="NavigationViewAutoSuggestBoxMargin" ResourceKey="Space400HorizontalThickness" />
+			<StaticResource x:Key="TopNavigationViewAutoSuggestBoxMargin" ResourceKey="Space100HorizontalThickness" />
+			<StaticResource x:Key="PaneToggleButtonHeight" ResourceKey="ControlHeightSmall" />
 			<x:Double x:Key="PaneToggleButtonWidth">80</x:Double>
 			<x:Double x:Key="NavigationViewCompactPaneLength">80</x:Double>
-			<x:Double x:Key="NavigationViewIconBoxWidth">40</x:Double>
-			<x:Double x:Key="NavigationViewTopPaneHeight">48</x:Double>
-			<x:Double x:Key="NavigationViewAutoSuggestAreaHeight">40</x:Double>
+			<StaticResource x:Key="NavigationViewIconBoxWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="NavigationViewTopPaneHeight" ResourceKey="ControlHeightLarge" />
+			<StaticResource x:Key="NavigationViewAutoSuggestAreaHeight" ResourceKey="ControlHeightMedium" />
 			<x:Double x:Key="TopNavigationViewPaneCustomContentMinWidth">80</x:Double>
-			<x:Double x:Key="TopNavigationViewOverflowButtonWidth">40</x:Double>
-			<x:Double x:Key="TopNavigationViewOverflowButtonHeight">40</x:Double>
-			<x:Double x:Key="TopNavigationViewSettingsButtonWidth">40</x:Double>
-			<x:Double x:Key="TopNavigationViewSettingsButtonHeight">40</x:Double>
+			<StaticResource x:Key="TopNavigationViewOverflowButtonWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewOverflowButtonHeight" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewSettingsButtonWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewSettingsButtonHeight" ResourceKey="ControlHeightMedium" />
 
 			<x:Double x:Key="NavigationViewItemOnLeftMinHeight">56</x:Double>
 			<x:Double x:Key="NavigationViewPaneHeaderRowMinHeight">56</x:Double>
-			<x:Double x:Key="NavigationViewItemOnLeftIconBoxHeight">24</x:Double>
+			<StaticResource x:Key="NavigationViewItemOnLeftIconBoxHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorWidth">3</x:Double>
-			<x:Double x:Key="NavigationViewSelectionIndicatorHeight">24</x:Double>
+			<StaticResource x:Key="NavigationViewSelectionIndicatorHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorRadius">2</x:Double>
 
 			<x:Double x:Key="NavigationViewItemSeparatorHeight">1</x:Double>
@@ -98,16 +98,16 @@
 			<Thickness x:Key="NavigationViewToggleBorderThickness">0</Thickness>
 			<Thickness x:Key="NavigationViewItemBorderThickness">1</Thickness>
 			<Thickness x:Key="NavigationViewItemOnLeftIconBoxMargin">3</Thickness>
-			<Thickness x:Key="NavigationViewItemButtonMargin">12,0</Thickness>
-			<Thickness x:Key="NavigationViewItemInnerHeaderMargin">16,0</Thickness>
-			<Thickness x:Key="TopNavigationViewItemInnerHeaderMargin">12,0</Thickness>
+			<StaticResource x:Key="NavigationViewItemButtonMargin" ResourceKey="Space300HorizontalThickness" />
+			<StaticResource x:Key="NavigationViewItemInnerHeaderMargin" ResourceKey="Space400HorizontalThickness" />
+			<StaticResource x:Key="TopNavigationViewItemInnerHeaderMargin" ResourceKey="Space300HorizontalThickness" />
 			<Thickness x:Key="NavigationViewMinimalHeaderMargin">-24,44,0,0</Thickness>
 			<Thickness x:Key="NavigationViewButtonHolderGridMargin">0</Thickness>
 			<Thickness x:Key="NavigationViewPaneContentGridMargin">-1,3</Thickness>
 			<Thickness x:Key="NavigationViewContentGridBorderThickness">1,1,0,0</Thickness>
 			<Thickness x:Key="NavigationViewMinimalContentGridBorderThickness">0,1,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewContentGridBorderThickness">0,1,0,0</Thickness>
-			<Thickness x:Key="TopNavigationViewTopNavGridMargin">4,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewTopNavGridMargin" ResourceKey="Space100HorizontalThickness" />
 			<Thickness x:Key="NavigationViewBorderThickness">1</Thickness>
 			<Thickness x:Key="NavigationViewHeaderMargin">56,44,0,0</Thickness>
 			<Thickness x:Key="NavigationViewContentPresenterMargin">0</Thickness>
@@ -124,7 +124,7 @@
 			<Thickness x:Key="NavigationViewItemContentPresenterMargin">4,-1,8,-1</Thickness>
 			<Thickness x:Key="NavigationViewCompactItemContentPresenterMargin">0,0,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemContentPresenterMargin">8,-1,12,-1</Thickness>
-			<Thickness x:Key="TopNavigationViewItemContentOnlyContentPresenterMargin">12,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewItemContentOnlyContentPresenterMargin" ResourceKey="Space300HorizontalThickness" />
 			<Thickness x:Key="NavigationViewItemExpandChevronMargin">0,0,-14,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemExpandChevronMargin">-16,0,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemIconOnlyExpandChevronMargin">0,0,0,0</Thickness>
@@ -132,7 +132,7 @@
 			<Thickness x:Key="TopNavigationViewItemOnOverflowContentPresenterMargin">12,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowNoIconContentPresenterMargin">16,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronMargin">-4,0,-8,0</Thickness>
-			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding">12,0,12,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding" ResourceKey="Space300HorizontalThickness" />
 
 			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
 			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
@@ -151,7 +151,7 @@
 			<!--#endregion-->
 
 			<x:Double x:Key="SplitViewOpenPaneThemeLength">320</x:Double>
-			<x:Double x:Key="SplitViewCompactPaneThemeLength">48</x:Double>
+			<StaticResource x:Key="SplitViewCompactPaneThemeLength" ResourceKey="ControlHeightLarge" />
 			<Thickness x:Key="SplitViewLeftBorderThemeThickness">0,0,1,0</Thickness>
 			<Thickness x:Key="SplitViewRightBorderThemeThickness">1,0,0,0</Thickness>
 			<StaticResource x:Key="NavigationViewSplitViewLightDismissOverlayBackground" ResourceKey="SystemControlPageBackgroundMediumAltMediumBrush" />
@@ -243,21 +243,21 @@
 
 			<!-- NavigationView\Buttons -->
 			<x:Double x:Key="MaterialNavigationViewButtonWidth">56</x:Double>
-			<x:Double x:Key="MaterialNavigationViewButtonHeight">32</x:Double>
-			<CornerRadius x:Key="MaterialNavigationViewButtonCornerRadius">16</CornerRadius>
-			<x:Double x:Key="MaterialNavigationViewButtonIconLength">24</x:Double>
-			<x:Double x:Key="MaterialNavigationViewButtonIconSymbolFontSize">24</x:Double>
-			<Thickness x:Key="MaterialNavigationViewButtonMarginWhenStackedVertically">12,0</Thickness>
+			<StaticResource x:Key="MaterialNavigationViewButtonHeight" ResourceKey="ControlHeightSmall" />
+			<StaticResource x:Key="MaterialNavigationViewButtonCornerRadius" ResourceKey="Radius400CornerRadius" />
+			<StaticResource x:Key="MaterialNavigationViewButtonIconLength" ResourceKey="IconSizeMedium" />
+			<StaticResource x:Key="MaterialNavigationViewButtonIconSymbolFontSize" ResourceKey="IconSizeMedium" />
+			<StaticResource x:Key="MaterialNavigationViewButtonMarginWhenStackedVertically" ResourceKey="Space300HorizontalThickness" />
 
 			<!-- NavigationViewItem -->
 			<x:Double x:Key="MaterialNavigationItemHeight">56</x:Double>
-			<x:Double x:Key="MaterialNavigationItemHeightCompact">32</x:Double>
-			<x:Double x:Key="MaterialNavigationItemMarginCompact">12</x:Double>
+			<StaticResource x:Key="MaterialNavigationItemHeightCompact" ResourceKey="ControlHeightSmall" />
+			<StaticResource x:Key="MaterialNavigationItemMarginCompact" ResourceKey="Space300" />
 			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadius">28</CornerRadius>
 			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadiusLeftOnly">28,0,0,28</CornerRadius>
-			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadiusCompact">16</CornerRadius>
-			<Thickness x:Key="MaterialNavigationItemLeftMargin">12,0</Thickness>
-			<x:Double x:Key="MaterialNavigationItemIconLength">24</x:Double>
+			<StaticResource x:Key="MaterialNavigationViewItemCornerRadiusCompact" ResourceKey="Radius400CornerRadius" />
+			<StaticResource x:Key="MaterialNavigationItemLeftMargin" ResourceKey="Space300HorizontalThickness" />
+			<StaticResource x:Key="MaterialNavigationItemIconLength" ResourceKey="IconSizeMedium" />
 			<Thickness x:Key="MaterialNavigationItemContentMargin">12,0,0,0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentMarginWithoutIcon">0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentPaddingCompact">16,4</Thickness>
@@ -265,25 +265,25 @@
 
 			<!--#region Resources Imported from Reference-->
 
-			<Thickness x:Key="NavigationViewAutoSuggestBoxMargin">16,0</Thickness>
-			<Thickness x:Key="TopNavigationViewAutoSuggestBoxMargin">4,0</Thickness>
-			<x:Double x:Key="PaneToggleButtonHeight">32</x:Double>
+			<StaticResource x:Key="NavigationViewAutoSuggestBoxMargin" ResourceKey="Space400HorizontalThickness" />
+			<StaticResource x:Key="TopNavigationViewAutoSuggestBoxMargin" ResourceKey="Space100HorizontalThickness" />
+			<StaticResource x:Key="PaneToggleButtonHeight" ResourceKey="ControlHeightSmall" />
 			<x:Double x:Key="PaneToggleButtonWidth">80</x:Double>
 			<x:Double x:Key="NavigationViewCompactPaneLength">80</x:Double>
-			<x:Double x:Key="NavigationViewIconBoxWidth">40</x:Double>
-			<x:Double x:Key="NavigationViewTopPaneHeight">48</x:Double>
-			<x:Double x:Key="NavigationViewAutoSuggestAreaHeight">40</x:Double>
+			<StaticResource x:Key="NavigationViewIconBoxWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="NavigationViewTopPaneHeight" ResourceKey="ControlHeightLarge" />
+			<StaticResource x:Key="NavigationViewAutoSuggestAreaHeight" ResourceKey="ControlHeightMedium" />
 			<x:Double x:Key="TopNavigationViewPaneCustomContentMinWidth">80</x:Double>
-			<x:Double x:Key="TopNavigationViewOverflowButtonWidth">40</x:Double>
-			<x:Double x:Key="TopNavigationViewOverflowButtonHeight">40</x:Double>
-			<x:Double x:Key="TopNavigationViewSettingsButtonWidth">40</x:Double>
-			<x:Double x:Key="TopNavigationViewSettingsButtonHeight">40</x:Double>
+			<StaticResource x:Key="TopNavigationViewOverflowButtonWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewOverflowButtonHeight" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewSettingsButtonWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewSettingsButtonHeight" ResourceKey="ControlHeightMedium" />
 
 			<x:Double x:Key="NavigationViewItemOnLeftMinHeight">56</x:Double>
 			<x:Double x:Key="NavigationViewPaneHeaderRowMinHeight">56</x:Double>
-			<x:Double x:Key="NavigationViewItemOnLeftIconBoxHeight">24</x:Double>
+			<StaticResource x:Key="NavigationViewItemOnLeftIconBoxHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorWidth">3</x:Double>
-			<x:Double x:Key="NavigationViewSelectionIndicatorHeight">24</x:Double>
+			<StaticResource x:Key="NavigationViewSelectionIndicatorHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorRadius">2</x:Double>
 
 			<x:Double x:Key="NavigationViewItemSeparatorHeight">1</x:Double>
@@ -292,16 +292,16 @@
 			<Thickness x:Key="NavigationViewToggleBorderThickness">0</Thickness>
 			<Thickness x:Key="NavigationViewItemBorderThickness">1</Thickness>
 			<Thickness x:Key="NavigationViewItemOnLeftIconBoxMargin">3</Thickness>
-			<Thickness x:Key="NavigationViewItemButtonMargin">12,0</Thickness>
-			<Thickness x:Key="NavigationViewItemInnerHeaderMargin">16,0</Thickness>
-			<Thickness x:Key="TopNavigationViewItemInnerHeaderMargin">12,0</Thickness>
+			<StaticResource x:Key="NavigationViewItemButtonMargin" ResourceKey="Space300HorizontalThickness" />
+			<StaticResource x:Key="NavigationViewItemInnerHeaderMargin" ResourceKey="Space400HorizontalThickness" />
+			<StaticResource x:Key="TopNavigationViewItemInnerHeaderMargin" ResourceKey="Space300HorizontalThickness" />
 			<Thickness x:Key="NavigationViewMinimalHeaderMargin">-24,44,0,0</Thickness>
 			<Thickness x:Key="NavigationViewButtonHolderGridMargin">0</Thickness>
 			<Thickness x:Key="NavigationViewPaneContentGridMargin">-1,3</Thickness>
 			<Thickness x:Key="NavigationViewContentGridBorderThickness">1,1,0,0</Thickness>
 			<Thickness x:Key="NavigationViewMinimalContentGridBorderThickness">0,1,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewContentGridBorderThickness">0,1,0,0</Thickness>
-			<Thickness x:Key="TopNavigationViewTopNavGridMargin">4,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewTopNavGridMargin" ResourceKey="Space100HorizontalThickness" />
 			<Thickness x:Key="NavigationViewBorderThickness">1</Thickness>
 			<Thickness x:Key="NavigationViewHeaderMargin">56,44,0,0</Thickness>
 			<Thickness x:Key="NavigationViewContentPresenterMargin">0</Thickness>
@@ -318,7 +318,7 @@
 			<Thickness x:Key="NavigationViewItemContentPresenterMargin">4,-1,8,-1</Thickness>
 			<Thickness x:Key="NavigationViewCompactItemContentPresenterMargin">0,0,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemContentPresenterMargin">8,-1,12,-1</Thickness>
-			<Thickness x:Key="TopNavigationViewItemContentOnlyContentPresenterMargin">12,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewItemContentOnlyContentPresenterMargin" ResourceKey="Space300HorizontalThickness" />
 			<Thickness x:Key="NavigationViewItemExpandChevronMargin">0,0,-14,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemExpandChevronMargin">-16,0,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemIconOnlyExpandChevronMargin">0,0,0,0</Thickness>
@@ -326,7 +326,7 @@
 			<Thickness x:Key="TopNavigationViewItemOnOverflowContentPresenterMargin">12,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowNoIconContentPresenterMargin">16,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronMargin">-4,0,-8,0</Thickness>
-			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding">12,0,12,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding" ResourceKey="Space300HorizontalThickness" />
 
 			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
 			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
@@ -345,7 +345,7 @@
 			<!--#endregion-->
 
 			<x:Double x:Key="SplitViewOpenPaneThemeLength">320</x:Double>
-			<x:Double x:Key="SplitViewCompactPaneThemeLength">48</x:Double>
+			<StaticResource x:Key="SplitViewCompactPaneThemeLength" ResourceKey="ControlHeightLarge" />
 			<Thickness x:Key="SplitViewLeftBorderThemeThickness">0,0,1,0</Thickness>
 			<Thickness x:Key="SplitViewRightBorderThemeThickness">1,0,0,0</Thickness>
 			<StaticResource x:Key="NavigationViewSplitViewLightDismissOverlayBackground" ResourceKey="SystemControlPageBackgroundMediumAltMediumBrush" />
@@ -437,21 +437,21 @@
 
 			<!-- NavigationView\Buttons -->
 			<x:Double x:Key="MaterialNavigationViewButtonWidth">56</x:Double>
-			<x:Double x:Key="MaterialNavigationViewButtonHeight">32</x:Double>
-			<CornerRadius x:Key="MaterialNavigationViewButtonCornerRadius">16</CornerRadius>
-			<x:Double x:Key="MaterialNavigationViewButtonIconLength">24</x:Double>
-			<x:Double x:Key="MaterialNavigationViewButtonIconSymbolFontSize">24</x:Double>
-			<Thickness x:Key="MaterialNavigationViewButtonMarginWhenStackedVertically">12,0</Thickness>
+			<StaticResource x:Key="MaterialNavigationViewButtonHeight" ResourceKey="ControlHeightSmall" />
+			<StaticResource x:Key="MaterialNavigationViewButtonCornerRadius" ResourceKey="Radius400CornerRadius" />
+			<StaticResource x:Key="MaterialNavigationViewButtonIconLength" ResourceKey="IconSizeMedium" />
+			<StaticResource x:Key="MaterialNavigationViewButtonIconSymbolFontSize" ResourceKey="IconSizeMedium" />
+			<StaticResource x:Key="MaterialNavigationViewButtonMarginWhenStackedVertically" ResourceKey="Space300HorizontalThickness" />
 
 			<!-- NavigationViewItem -->
 			<x:Double x:Key="MaterialNavigationItemHeight">56</x:Double>
-			<x:Double x:Key="MaterialNavigationItemHeightCompact">32</x:Double>
-			<x:Double x:Key="MaterialNavigationItemMarginCompact">12</x:Double>
+			<StaticResource x:Key="MaterialNavigationItemHeightCompact" ResourceKey="ControlHeightSmall" />
+			<StaticResource x:Key="MaterialNavigationItemMarginCompact" ResourceKey="Space300" />
 			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadius">28</CornerRadius>
 			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadiusLeftOnly">28,0,0,28</CornerRadius>
-			<CornerRadius x:Key="MaterialNavigationViewItemCornerRadiusCompact">16</CornerRadius>
-			<Thickness x:Key="MaterialNavigationItemLeftMargin">12,0</Thickness>
-			<x:Double x:Key="MaterialNavigationItemIconLength">24</x:Double>
+			<StaticResource x:Key="MaterialNavigationViewItemCornerRadiusCompact" ResourceKey="Radius400CornerRadius" />
+			<StaticResource x:Key="MaterialNavigationItemLeftMargin" ResourceKey="Space300HorizontalThickness" />
+			<StaticResource x:Key="MaterialNavigationItemIconLength" ResourceKey="IconSizeMedium" />
 			<Thickness x:Key="MaterialNavigationItemContentMargin">12,0,0,0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentMarginWithoutIcon">0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentPaddingCompact">16,4</Thickness>
@@ -459,25 +459,25 @@
 
 			<!--#region Resources Imported from Reference-->
 
-			<Thickness x:Key="NavigationViewAutoSuggestBoxMargin">16,0</Thickness>
-			<Thickness x:Key="TopNavigationViewAutoSuggestBoxMargin">4,0</Thickness>
-			<x:Double x:Key="PaneToggleButtonHeight">32</x:Double>
+			<StaticResource x:Key="NavigationViewAutoSuggestBoxMargin" ResourceKey="Space400HorizontalThickness" />
+			<StaticResource x:Key="TopNavigationViewAutoSuggestBoxMargin" ResourceKey="Space100HorizontalThickness" />
+			<StaticResource x:Key="PaneToggleButtonHeight" ResourceKey="ControlHeightSmall" />
 			<x:Double x:Key="PaneToggleButtonWidth">80</x:Double>
 			<x:Double x:Key="NavigationViewCompactPaneLength">80</x:Double>
-			<x:Double x:Key="NavigationViewIconBoxWidth">40</x:Double>
-			<x:Double x:Key="NavigationViewTopPaneHeight">48</x:Double>
-			<x:Double x:Key="NavigationViewAutoSuggestAreaHeight">40</x:Double>
+			<StaticResource x:Key="NavigationViewIconBoxWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="NavigationViewTopPaneHeight" ResourceKey="ControlHeightLarge" />
+			<StaticResource x:Key="NavigationViewAutoSuggestAreaHeight" ResourceKey="ControlHeightMedium" />
 			<x:Double x:Key="TopNavigationViewPaneCustomContentMinWidth">80</x:Double>
-			<x:Double x:Key="TopNavigationViewOverflowButtonWidth">40</x:Double>
-			<x:Double x:Key="TopNavigationViewOverflowButtonHeight">40</x:Double>
-			<x:Double x:Key="TopNavigationViewSettingsButtonWidth">40</x:Double>
-			<x:Double x:Key="TopNavigationViewSettingsButtonHeight">40</x:Double>
+			<StaticResource x:Key="TopNavigationViewOverflowButtonWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewOverflowButtonHeight" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewSettingsButtonWidth" ResourceKey="ControlHeightMedium" />
+			<StaticResource x:Key="TopNavigationViewSettingsButtonHeight" ResourceKey="ControlHeightMedium" />
 
 			<x:Double x:Key="NavigationViewItemOnLeftMinHeight">56</x:Double>
 			<x:Double x:Key="NavigationViewPaneHeaderRowMinHeight">56</x:Double>
-			<x:Double x:Key="NavigationViewItemOnLeftIconBoxHeight">24</x:Double>
+			<StaticResource x:Key="NavigationViewItemOnLeftIconBoxHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorWidth">3</x:Double>
-			<x:Double x:Key="NavigationViewSelectionIndicatorHeight">24</x:Double>
+			<StaticResource x:Key="NavigationViewSelectionIndicatorHeight" ResourceKey="IconSizeMedium" />
 			<x:Double x:Key="NavigationViewSelectionIndicatorRadius">2</x:Double>
 
 			<x:Double x:Key="NavigationViewItemSeparatorHeight">1</x:Double>
@@ -486,16 +486,16 @@
 			<Thickness x:Key="NavigationViewToggleBorderThickness">0</Thickness>
 			<Thickness x:Key="NavigationViewItemBorderThickness">1</Thickness>
 			<Thickness x:Key="NavigationViewItemOnLeftIconBoxMargin">3</Thickness>
-			<Thickness x:Key="NavigationViewItemButtonMargin">12,0</Thickness>
-			<Thickness x:Key="NavigationViewItemInnerHeaderMargin">16,0</Thickness>
-			<Thickness x:Key="TopNavigationViewItemInnerHeaderMargin">12,0</Thickness>
+			<StaticResource x:Key="NavigationViewItemButtonMargin" ResourceKey="Space300HorizontalThickness" />
+			<StaticResource x:Key="NavigationViewItemInnerHeaderMargin" ResourceKey="Space400HorizontalThickness" />
+			<StaticResource x:Key="TopNavigationViewItemInnerHeaderMargin" ResourceKey="Space300HorizontalThickness" />
 			<Thickness x:Key="NavigationViewMinimalHeaderMargin">-24,44,0,0</Thickness>
 			<Thickness x:Key="NavigationViewButtonHolderGridMargin">0</Thickness>
 			<Thickness x:Key="NavigationViewPaneContentGridMargin">-1,3</Thickness>
 			<Thickness x:Key="NavigationViewContentGridBorderThickness">1,1,0,0</Thickness>
 			<Thickness x:Key="NavigationViewMinimalContentGridBorderThickness">0,1,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewContentGridBorderThickness">0,1,0,0</Thickness>
-			<Thickness x:Key="TopNavigationViewTopNavGridMargin">4,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewTopNavGridMargin" ResourceKey="Space100HorizontalThickness" />
 			<Thickness x:Key="NavigationViewBorderThickness">1</Thickness>
 			<Thickness x:Key="NavigationViewHeaderMargin">56,44,0,0</Thickness>
 			<Thickness x:Key="NavigationViewContentPresenterMargin">0</Thickness>
@@ -512,7 +512,7 @@
 			<Thickness x:Key="NavigationViewItemContentPresenterMargin">4,-1,8,-1</Thickness>
 			<Thickness x:Key="NavigationViewCompactItemContentPresenterMargin">0,0,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemContentPresenterMargin">8,-1,12,-1</Thickness>
-			<Thickness x:Key="TopNavigationViewItemContentOnlyContentPresenterMargin">12,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewItemContentOnlyContentPresenterMargin" ResourceKey="Space300HorizontalThickness" />
 			<Thickness x:Key="NavigationViewItemExpandChevronMargin">0,0,-14,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemExpandChevronMargin">-16,0,0,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemIconOnlyExpandChevronMargin">0,0,0,0</Thickness>
@@ -520,7 +520,7 @@
 			<Thickness x:Key="TopNavigationViewItemOnOverflowContentPresenterMargin">12,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowNoIconContentPresenterMargin">16,0,20,0</Thickness>
 			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronMargin">-4,0,-8,0</Thickness>
-			<Thickness x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding">12,0,12,0</Thickness>
+			<StaticResource x:Key="TopNavigationViewItemOnOverflowExpandChevronPadding" ResourceKey="Space300HorizontalThickness" />
 
 			<CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
 			<CornerRadius x:Key="TopNavigationViewContentGridCornerRadius">0</CornerRadius>
@@ -539,7 +539,7 @@
 			<!--#endregion-->
 
 			<x:Double x:Key="SplitViewOpenPaneThemeLength">320</x:Double>
-			<x:Double x:Key="SplitViewCompactPaneThemeLength">48</x:Double>
+			<StaticResource x:Key="SplitViewCompactPaneThemeLength" ResourceKey="ControlHeightLarge" />
 			<Thickness x:Key="SplitViewLeftBorderThemeThickness">0,0,1,0</Thickness>
 			<Thickness x:Key="SplitViewRightBorderThemeThickness">1,0,0,0</Thickness>
 			<StaticResource x:Key="NavigationViewSplitViewLightDismissOverlayBackground" ResourceKey="SystemControlPageBackgroundMediumAltMediumBrush" />

@@ -1,22 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using Uno.Themes.ColorGeneration;
 
 
 #if WinUI
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 #else
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 #endif
 
 
 namespace Uno.Themes;
-public abstract class BaseTheme : ResourceDictionary
+public abstract partial class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
+	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _originalBrushes;
+	private bool _isInResourceTree;
 	#region FontOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -189,11 +197,22 @@ public abstract class BaseTheme : ResourceDictionary
 
 			if (e.NewValue is ThemeColors tc)
 			{
-				tc.SetChangedCallback((_) =>
+				tc.SetChangedCallback((isStructural) =>
 				{
-					if (!theme._isColorOverrideMuted)
+					if (theme._isColorOverrideMuted)
+					{
+						return;
+					}
+
+					// Seed color changes use the fast path (in-place brush update).
+					// Structural changes (override dictionaries) need a full rebuild.
+					if (isStructural)
 					{
 						theme.UpdateSource();
+					}
+					else
+					{
+						theme.UpdateSeedColors();
 					}
 				});
 			}
@@ -202,6 +221,67 @@ public abstract class BaseTheme : ResourceDictionary
 			{
 				theme.UpdateSource();
 			}
+		}
+	}
+	#endregion
+
+	#region DefaultSpacing (DP)
+	/// <summary>
+	/// Gets or sets the base spacing unit (in pixels). Default is 4.
+	/// All spacing scale tokens (Space100, Space200, …) are computed
+	/// as multiples of this value — e.g. <c>DefaultSpacing="10"</c> makes
+	/// Space100=10, Space200=20, Space400=40, etc.
+	/// Individual tokens can still be overridden via lightweight styling.
+	/// </summary>
+	public double DefaultSpacing
+	{
+		get => (double)GetValue(DefaultSpacingProperty);
+		set => SetValue(DefaultSpacingProperty, value);
+	}
+
+	public static DependencyProperty DefaultSpacingProperty { get; } =
+		DependencyProperty.Register(
+			nameof(DefaultSpacing),
+			typeof(double),
+			typeof(BaseTheme),
+			new PropertyMetadata(4.0, OnDefaultSpacingChanged));
+
+	private static void OnDefaultSpacingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme)
+		{
+			theme.UpdateSource();
+		}
+	}
+	#endregion
+
+	#region DefaultCornerRadius (DP)
+	/// <summary>
+	/// Gets or sets the base corner radius unit (in pixels). Default is 4.
+	/// All shape scale tokens (Radius100, Radius200, …) are computed
+	/// as multiples of this value — e.g. <c>DefaultCornerRadius="6"</c> makes
+	/// Radius100=6, Radius200=12, Radius400=24, etc.
+	/// <c>RadiusFull</c> always remains 9999 (pill shape).
+	/// Individual tokens can still be overridden via lightweight styling.
+	/// </summary>
+	public double DefaultCornerRadius
+	{
+		get => (double)GetValue(DefaultCornerRadiusProperty);
+		set => SetValue(DefaultCornerRadiusProperty, value);
+	}
+
+	public static DependencyProperty DefaultCornerRadiusProperty { get; } =
+		DependencyProperty.Register(
+			nameof(DefaultCornerRadius),
+			typeof(double),
+			typeof(BaseTheme),
+			new PropertyMetadata(4.0, OnDefaultCornerRadiusChanged));
+
+	private static void OnDefaultCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme)
+		{
+			theme.UpdateSource();
 		}
 	}
 	#endregion
@@ -261,6 +341,29 @@ public abstract class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
+		// Only capture brush references after this theme has been added to the app's
+		// resource tree. During XAML init, UpdateSource() is called from the constructor
+		// and DP setters before the theme is in the tree — those calls create transient
+		// brush generations that the UI never resolves to. The brushes that matter are
+		// the ones present when the first runtime change occurs (post-init).
+		if (_originalBrushes == null)
+		{
+			if (!_isInResourceTree)
+			{
+				_isInResourceTree = IsInResourceTree();
+			}
+
+			if (_isInResourceTree && Application.Current?.Resources is { } appRes)
+			{
+				var collected = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
+				CollectBrushes(appRes, null, collected);
+				if (collected.Count > 0)
+				{
+					_originalBrushes = collected;
+				}
+			}
+		}
+
 #if !HAS_UNO
 		Source = null;
 #endif
@@ -299,13 +402,59 @@ public abstract class BaseTheme : ResourceDictionary
 
 		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
 
+		// Generate spacing, shape, and density scales from code
+		var spacing = GenerateSpacingScale(DefaultSpacing);
+		var shape = GenerateShapeScale(DefaultCornerRadius);
+		var density = GenerateDensityDefaults();
+
 		var mergedPages = GenerateSpecificResources();
 
 		mergedPages.MergedDictionaries.Add(colors);
 		mergedPages.MergedDictionaries.Add(converters);
 
 		MergedDictionaries.Add(typography);
+		MergedDictionaries.Add(spacing);
+		MergedDictionaries.Add(shape);
+		MergedDictionaries.Add(density);
 		MergedDictionaries.Add(mergedPages);
+
+		// Track new brush instances created by the rebuild so that UI elements
+		// that resolve {ThemeResource} after this point also get updated.
+		if (_originalBrushes is not null)
+		{
+			var existingBrushes = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
+			var newInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
+			CollectBrushes(this, null, newInstances);
+			foreach (var entry in newInstances)
+			{
+				if (existingBrushes.Add(entry.brush))
+				{
+					_originalBrushes.Add(entry);
+				}
+			}
+		}
+
+		// Also capture from the full app resource tree (catches instances resolved
+		// by UI elements via {ThemeResource} that aren't in the BaseTheme itself).
+		if (_originalBrushes is not null && Application.Current?.Resources is { } appRes2)
+		{
+			var existingBrushes2 = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
+			var appInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
+			CollectBrushes(appRes2, null, appInstances);
+			foreach (var entry in appInstances)
+			{
+				if (existingBrushes2.Add(entry.brush))
+				{
+					_originalBrushes.Add(entry);
+				}
+			}
+		}
+
+		// Update the original brush instances (held by UI elements) with new color values.
+		if (_originalBrushes is { Count: > 0 })
+		{
+			UpdateOldBrushes(_originalBrushes, colors);
+		}
 	}
 
 	protected abstract ResourceDictionary GenerateSpecificResources();
