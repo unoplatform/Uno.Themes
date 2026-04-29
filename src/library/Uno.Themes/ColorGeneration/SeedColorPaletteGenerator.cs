@@ -31,25 +31,27 @@ internal sealed class SeedColorPaletteGenerator
 	// Single-entry cache: stores only the most recent seed → palette result.
 	// Runtime color picking only uses one seed at a time, so this avoids
 	// unbounded growth from dragging a color picker.
-	private (int primary, int? secondary, int? tertiary) _cacheKey;
+	private (int primary, int? secondary, int? tertiary, bool highFidelity) _cacheKey;
 	private ResourceDictionary _cacheValue;
 
 	internal ResourceDictionary Generate(
 		Color primarySeedColor,
 		Color? secondarySeedColor = null,
-		Color? tertiarySeedColor = null)
+		Color? tertiarySeedColor = null,
+		bool useHighFidelity = false)
 	{
 		var key = (
 			ColorToArgb(primarySeedColor),
 			secondarySeedColor is { } sec ? (int?)ColorToArgb(sec) : null,
-			tertiarySeedColor is { } ter ? (int?)ColorToArgb(ter) : null);
+			tertiarySeedColor is { } ter ? (int?)ColorToArgb(ter) : null,
+			useHighFidelity);
 
 		if (_cacheValue is not null && _cacheKey == key)
 		{
 			return _cacheValue;
 		}
 
-		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor);
+		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor, useHighFidelity);
 		_cacheKey = key;
 		_cacheValue = result;
 		return result;
@@ -58,14 +60,19 @@ internal sealed class SeedColorPaletteGenerator
 	private static ResourceDictionary GenerateCore(
 		Color seedColor,
 		Color? secondarySeedColor,
-		Color? tertiarySeedColor)
+		Color? tertiarySeedColor,
+		bool useHighFidelity)
 	{
 		var seedHct = HctColor.FromArgb(ColorToArgb(seedColor));
 		double hue = seedHct.Hue;
 		double chroma = seedHct.Chroma;
 
-		// Derive the six tonal palettes
-		var primary = new TonalPalette(hue, Math.Max(chroma, 48));
+		// Derive the six tonal palettes.
+		// Standard M3 (SchemeTonalSpot) enforces a minimum chroma of 48 on Primary
+		// to guarantee vibrant, accessible colors. High-fidelity mode (SchemeContent)
+		// preserves the source chroma, which is needed for neutral/gray seeds.
+		double primaryChroma = useHighFidelity ? chroma : Math.Max(chroma, 48);
+		var primary = new TonalPalette(hue, primaryChroma);
 
 		TonalPalette secondary;
 		if (secondarySeedColor is { } secSeed)

@@ -55,11 +55,14 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	}
 
 	/// <summary>
-	/// Simple uses a hand-crafted grayscale palette defined in ColorPalette.xaml.
-	/// Seed generation is disabled (null) to prevent the generator's minimum
-	/// chroma enforcement from introducing unwanted color tints.
+	/// Simple uses a neutral gray seed color. High-fidelity mode preserves
+	/// the low chroma so the generated palette stays grayscale rather than
+	/// picking up unwanted color tints from the M3 minimum-chroma floor.
 	/// </summary>
-	protected override Color? DefaultPrimarySeed { get; } = null;
+	protected override Color? DefaultPrimarySeed { get; } = Color.FromArgb(0xFF, 0x80, 0x80, 0x80);
+
+	/// <inheritdoc />
+	protected override bool UseHighFidelityColors => true;
 
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)
