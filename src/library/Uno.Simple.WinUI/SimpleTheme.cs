@@ -55,11 +55,15 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	}
 
 	/// <summary>
-	/// Default seed for Simple's neutral palette (mid-gray).
-	/// The generator enforces minimum chroma, so Primary/Secondary/Tertiary
-	/// will carry a slight tint; Neutral and NeutralVariant stay near-gray.
+	/// Simple uses a hand-crafted grayscale palette by default (no seed).
+	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, high-fidelity
+	/// mode preserves the source chroma so low-chroma seeds stay neutral
+	/// instead of being boosted by the M3 minimum-chroma floor.
 	/// </summary>
-	protected override Color? DefaultPrimarySeed { get; } = Color.FromArgb(0xFF, 0x80, 0x80, 0x80);
+	protected override Color? DefaultPrimarySeed => null;
+
+	/// <inheritdoc />
+	protected override bool UseHighFidelityColors => true;
 
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)

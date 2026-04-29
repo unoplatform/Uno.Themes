@@ -53,6 +53,7 @@ public abstract partial class BaseTheme
 		("200", 2.0),
 		("300", 3.0),
 		("400", 4.0),
+		("500", 5.0),
 		("700", 7.0),
 	};
 

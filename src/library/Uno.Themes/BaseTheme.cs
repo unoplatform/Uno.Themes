@@ -295,6 +295,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// </summary>
 	protected virtual Color? DefaultPrimarySeed => null;
 
+	/// <summary>
+	/// When <c>true</c>, seed color generation preserves the source color's
+	/// actual chroma (high-fidelity / "color match" mode). When <c>false</c>
+	/// (default), the standard M3 minimum chroma of 48 is enforced, which
+	/// guarantees vibrant colors but distorts low-chroma seeds like gray.
+	/// </summary>
+	protected virtual bool UseHighFidelityColors => false;
+
 	public BaseTheme() : this(colorOverride: null, fontOverride: null)
 	{
 
@@ -390,7 +398,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 		if (effectivePrimary is { } seed)
 		{
-			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary);
+			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, UseHighFidelityColors);
 			colors.SafeMerge(seedPalette);
 		}
 

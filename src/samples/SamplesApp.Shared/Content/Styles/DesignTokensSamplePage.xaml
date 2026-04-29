@@ -15,10 +15,36 @@
 					<StackPanel Spacing="16"
 								Margin="16,0,16,32">
 
+						<!-- ── Controls Preview ── -->
+						<TextBlock Text="Controls Preview"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16,0,4" />
+						<TextBlock Text="Override DefaultSpacing or DefaultCornerRadius on the theme to see how these controls change globally."
+								   Style="{StaticResource BodySmall}"
+								   TextWrapping="Wrap"
+								   Opacity="0.6" />
+						<StackPanel Spacing="12">
+							<Button Content="Filled Button"
+									Style="{StaticResource MaterialFilledButtonStyle}" />
+							<Button Content="Outlined Button"
+									Style="{StaticResource MaterialOutlinedButtonStyle}" />
+							<TextBox PlaceholderText="TextBox input"
+									 Style="{StaticResource MaterialFilledTextBoxStyle}" />
+							<CheckBox Content="CheckBox option"
+									  IsChecked="True" />
+							<RadioButton Content="RadioButton option"
+										 IsChecked="True" />
+							<ToggleSwitch Header="ToggleSwitch"
+										  IsOn="True" />
+							<Slider Value="50"
+									Minimum="0"
+									Maximum="100" />
+						</StackPanel>
+
 						<!-- ── Typography ── -->
 						<TextBlock Text="Typography Tokens"
 								   Style="{StaticResource TitleLarge}"
-								   Margin="0,16,0,4" />
+								   Margin="0,24,0,4" />
 						<TextBlock Text="TypefacePlain (Display / Headline)"
 								   FontFamily="{ThemeResource TypefacePlain}"
 								   FontSize="20" />
@@ -40,108 +66,119 @@
 						<TextBlock Text="Spacing Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space100}"
-									Height="32" />
-							<TextBlock Text="Space100 (4px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space200}"
-									Height="32" />
-							<TextBlock Text="Space200 (8px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space400}"
-									Height="32" />
-							<TextBlock Text="Space400 (16px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space600}"
-									Height="32" />
-							<TextBlock Text="Space600 (24px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space800}"
-									Height="32" />
-							<TextBlock Text="Space800 (32px)"
-									   VerticalAlignment="Center" />
+						<TextBlock Text="Bars show the actual pixel width of each spacing token."
+								   Style="{StaticResource BodySmall}"
+								   Opacity="0.6" />
+						<StackPanel Spacing="4">
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space050}" Height="20" />
+								<TextBlock Text="Space050" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space100}" Height="20" />
+								<TextBlock Text="Space100" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space200}" Height="20" />
+								<TextBlock Text="Space200" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space300}" Height="20" />
+								<TextBlock Text="Space300" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space400}" Height="20" />
+								<TextBlock Text="Space400" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space600}" Height="20" />
+								<TextBlock Text="Space600" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space800}" Height="20" />
+								<TextBlock Text="Space800" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space1200}" Height="20" />
+								<TextBlock Text="Space1200" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
 						</StackPanel>
 
 						<!-- ── Shape ── -->
 						<TextBlock Text="Shape Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius050CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius200CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius400CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource RadiusFullCornerRadius}" />
+						<StackPanel Orientation="Horizontal" Spacing="8">
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius0CornerRadius}" />
+								<TextBlock Text="R0" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius050CornerRadius}" />
+								<TextBlock Text="R050" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="R100" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius200CornerRadius}" />
+								<TextBlock Text="R200" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius300CornerRadius}" />
+								<TextBlock Text="R300" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius400CornerRadius}" />
+								<TextBlock Text="R400" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource RadiusFullCornerRadius}" />
+								<TextBlock Text="Full" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
 						</StackPanel>
-						<TextBlock Text="Radius050 → Radius100 → Radius200 → Radius400 → RadiusFull"
-								   Style="{StaticResource BodySmall}"
-								   Opacity="0.6" />
 
 						<!-- ── Density ── -->
 						<TextBlock Text="Density Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource SecondaryBrush}"
-									Width="{ThemeResource ControlHeightSmall}"
-									Height="{ThemeResource ControlHeightSmall}"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<TextBlock Text="ControlHeightSmall"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource SecondaryBrush}"
-									Width="{ThemeResource ControlHeightMedium}"
-									Height="{ThemeResource ControlHeightMedium}"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<TextBlock Text="ControlHeightMedium"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource SecondaryBrush}"
-									Width="{ThemeResource ControlHeightLarge}"
-									Height="{ThemeResource ControlHeightLarge}"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<TextBlock Text="ControlHeightLarge"
-									   VerticalAlignment="Center" />
+						<StackPanel Spacing="8">
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightSmall}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightSmall" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightMedium}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightMedium" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightMediumLarge}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightMediumLarge" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightLarge}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightLarge" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
 						</StackPanel>
 
 					</StackPanel>
@@ -150,7 +187,7 @@
 		</sample:SamplePageLayout.M3MaterialTemplate>
 
 		<!-- ═══════════════════════════════════════════════════════════════ -->
-		<!-- Simple Template (reuses same structure) -->
+		<!-- Simple Template -->
 		<!-- ═══════════════════════════════════════════════════════════════ -->
 		<sample:SamplePageLayout.SimpleTemplate>
 			<DataTemplate>
@@ -158,10 +195,36 @@
 					<StackPanel Spacing="16"
 								Margin="16,0,16,32">
 
+						<!-- ── Controls Preview ── -->
+						<TextBlock Text="Controls Preview"
+								   Style="{StaticResource TitleLarge}"
+								   Margin="0,16,0,4" />
+						<TextBlock Text="Override DefaultSpacing or DefaultCornerRadius on the theme to see how these controls change globally."
+								   Style="{StaticResource BodySmall}"
+								   TextWrapping="Wrap"
+								   Opacity="0.6" />
+						<StackPanel Spacing="12">
+							<Button Content="Filled Button"
+									Style="{StaticResource SimpleFilledButtonStyle}" />
+							<Button Content="Outlined Button"
+									Style="{StaticResource SimpleOutlinedButtonStyle}" />
+							<TextBox PlaceholderText="TextBox input"
+									 Style="{StaticResource SimpleFilledTextBoxStyle}" />
+							<CheckBox Content="CheckBox option"
+									  IsChecked="True" />
+							<RadioButton Content="RadioButton option"
+										 IsChecked="True" />
+							<ToggleSwitch Header="ToggleSwitch"
+										  IsOn="True" />
+							<Slider Value="50"
+									Minimum="0"
+									Maximum="100" />
+						</StackPanel>
+
 						<!-- ── Typography ── -->
 						<TextBlock Text="Typography Tokens"
 								   Style="{StaticResource TitleLarge}"
-								   Margin="0,16,0,4" />
+								   Margin="0,24,0,4" />
 						<TextBlock Text="TypefacePlain (Display / Headline)"
 								   FontFamily="{ThemeResource TypefacePlain}"
 								   FontSize="20" />
@@ -183,108 +246,119 @@
 						<TextBlock Text="Spacing Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space100}"
-									Height="32" />
-							<TextBlock Text="Space100 (4px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space200}"
-									Height="32" />
-							<TextBlock Text="Space200 (8px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space400}"
-									Height="32" />
-							<TextBlock Text="Space400 (16px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space600}"
-									Height="32" />
-							<TextBlock Text="Space600 (24px)"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="4">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="{ThemeResource Space800}"
-									Height="32" />
-							<TextBlock Text="Space800 (32px)"
-									   VerticalAlignment="Center" />
+						<TextBlock Text="Bars show the actual pixel width of each spacing token."
+								   Style="{StaticResource BodySmall}"
+								   Opacity="0.6" />
+						<StackPanel Spacing="4">
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space050}" Height="20" />
+								<TextBlock Text="Space050" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space100}" Height="20" />
+								<TextBlock Text="Space100" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space200}" Height="20" />
+								<TextBlock Text="Space200" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space300}" Height="20" />
+								<TextBlock Text="Space300" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space400}" Height="20" />
+								<TextBlock Text="Space400" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space600}" Height="20" />
+								<TextBlock Text="Space600" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space800}" Height="20" />
+								<TextBlock Text="Space800" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space1200}" Height="20" />
+								<TextBlock Text="Space1200" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
 						</StackPanel>
 
 						<!-- ── Shape ── -->
 						<TextBlock Text="Shape Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius050CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius200CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource Radius400CornerRadius}" />
-							<Border Background="{ThemeResource PrimaryBrush}"
-									Width="48"
-									Height="48"
-									CornerRadius="{ThemeResource RadiusFullCornerRadius}" />
+						<StackPanel Orientation="Horizontal" Spacing="8">
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius0CornerRadius}" />
+								<TextBlock Text="R0" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius050CornerRadius}" />
+								<TextBlock Text="R050" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="R100" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius200CornerRadius}" />
+								<TextBlock Text="R200" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius300CornerRadius}" />
+								<TextBlock Text="R300" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource Radius400CornerRadius}" />
+								<TextBlock Text="R400" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Spacing="4" HorizontalAlignment="Center">
+								<Border Background="{ThemeResource PrimaryBrush}" Width="48" Height="48"
+										CornerRadius="{ThemeResource RadiusFullCornerRadius}" />
+								<TextBlock Text="Full" HorizontalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
 						</StackPanel>
-						<TextBlock Text="Radius050 → Radius100 → Radius200 → Radius400 → RadiusFull"
-								   Style="{StaticResource BodySmall}"
-								   Opacity="0.6" />
 
 						<!-- ── Density ── -->
 						<TextBlock Text="Density Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource SecondaryBrush}"
-									Width="{ThemeResource ControlHeightSmall}"
-									Height="{ThemeResource ControlHeightSmall}"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<TextBlock Text="ControlHeightSmall"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource SecondaryBrush}"
-									Width="{ThemeResource ControlHeightMedium}"
-									Height="{ThemeResource ControlHeightMedium}"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<TextBlock Text="ControlHeightMedium"
-									   VerticalAlignment="Center" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal"
-									Spacing="8">
-							<Border Background="{ThemeResource SecondaryBrush}"
-									Width="{ThemeResource ControlHeightLarge}"
-									Height="{ThemeResource ControlHeightLarge}"
-									CornerRadius="{ThemeResource Radius100CornerRadius}" />
-							<TextBlock Text="ControlHeightLarge"
-									   VerticalAlignment="Center" />
+						<StackPanel Spacing="8">
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightSmall}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightSmall" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightMedium}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightMedium" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightMediumLarge}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightMediumLarge" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Spacing="8">
+								<Border Background="{ThemeResource SecondaryBrush}"
+										Width="120"
+										Height="{ThemeResource ControlHeightLarge}"
+										CornerRadius="{ThemeResource Radius100CornerRadius}" />
+								<TextBlock Text="ControlHeightLarge" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+							</StackPanel>
 						</StackPanel>
 
 					</StackPanel>

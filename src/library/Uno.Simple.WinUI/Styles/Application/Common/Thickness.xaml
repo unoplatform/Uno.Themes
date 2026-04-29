@@ -15,6 +15,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleSpace200" ResourceKey="Space200" />
 <StaticResource x:Key="SimpleSpace300" ResourceKey="Space300" />
 <StaticResource x:Key="SimpleSpace400" ResourceKey="Space400" />
+<StaticResource x:Key="SimpleSpace500" ResourceKey="Space500" />
 <StaticResource x:Key="SimpleSpace600" ResourceKey="Space600" />
 <StaticResource x:Key="SimpleSpace800" ResourceKey="Space800" />
 <StaticResource x:Key="SimpleSpace1200" ResourceKey="Space1200" />
@@ -28,6 +29,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleRadius050" ResourceKey="Radius050" />
 <StaticResource x:Key="SimpleRadius100" ResourceKey="Radius100" />
 <StaticResource x:Key="SimpleRadius200" ResourceKey="Radius200" />
+<StaticResource x:Key="SimpleRadius300" ResourceKey="Radius300" />
 <StaticResource x:Key="SimpleRadius400" ResourceKey="Radius400" />
 <StaticResource x:Key="SimpleRadiusFull" ResourceKey="RadiusFull" />
 
@@ -35,15 +37,20 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleRadius050CornerRadius" ResourceKey="Radius050CornerRadius" />
 <StaticResource x:Key="SimpleRadius100CornerRadius" ResourceKey="Radius100CornerRadius" />
 <StaticResource x:Key="SimpleRadius200CornerRadius" ResourceKey="Radius200CornerRadius" />
+<StaticResource x:Key="SimpleRadius300CornerRadius" ResourceKey="Radius300CornerRadius" />
 <StaticResource x:Key="SimpleRadius400CornerRadius" ResourceKey="Radius400CornerRadius" />
 <StaticResource x:Key="SimpleRadiusFullCornerRadius" ResourceKey="RadiusFullCornerRadius" />
 
 <!-- ─────────────────────────────────────────────────────────────── -->
 <!-- SDS Icon Sizing → Shared tokens                                -->
+<!-- SDS uses a different icon scale than Material:                  -->
+<!--   SDS Small (24) = Material Medium                             -->
+<!--   SDS Medium (32) = Material Large                             -->
+<!--   SDS Large (40) = no Material equivalent (hardcoded)          -->
 <!-- ─────────────────────────────────────────────────────────────── -->
-<StaticResource x:Key="SimpleIconSmall" ResourceKey="IconSizeSmall" />
-<StaticResource x:Key="SimpleIconMedium" ResourceKey="IconSizeMedium" />
-<StaticResource x:Key="SimpleIconLarge" ResourceKey="IconSizeLarge" />
+<StaticResource x:Key="SimpleIconSmall" ResourceKey="IconSizeMedium" />
+<StaticResource x:Key="SimpleIconMedium" ResourceKey="IconSizeLarge" />
+<x:Double x:Key="SimpleIconLarge">40</x:Double>
 
 <!-- ─────────────────────────────────────────────────────────────── -->
 <!-- SDS Stroke (Simple-specific, no shared equivalent yet)         -->
@@ -63,8 +70,13 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleSpace200Thickness" ResourceKey="Space200Thickness" />
 <StaticResource x:Key="SimpleSpace300Thickness" ResourceKey="Space300Thickness" />
 <StaticResource x:Key="SimpleSpace400Thickness" ResourceKey="Space400Thickness" />
+<StaticResource x:Key="SimpleSpace500Thickness" ResourceKey="Space500Thickness" />
 <StaticResource x:Key="SimpleSpace600Thickness" ResourceKey="Space600Thickness" />
 <StaticResource x:Key="SimpleSpace800Thickness" ResourceKey="Space800Thickness" />
+
+<!-- Horizontal Thickness companions -->
+<StaticResource x:Key="SimpleSpace200HorizontalThickness" ResourceKey="Space200HorizontalThickness" />
+<StaticResource x:Key="SimpleSpace400HorizontalThickness" ResourceKey="Space400HorizontalThickness" />
 </ResourceDictionary>
 
 <!-- DARK THEME (Default) -->
@@ -79,6 +91,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleSpace200" ResourceKey="Space200" />
 <StaticResource x:Key="SimpleSpace300" ResourceKey="Space300" />
 <StaticResource x:Key="SimpleSpace400" ResourceKey="Space400" />
+<StaticResource x:Key="SimpleSpace500" ResourceKey="Space500" />
 <StaticResource x:Key="SimpleSpace600" ResourceKey="Space600" />
 <StaticResource x:Key="SimpleSpace800" ResourceKey="Space800" />
 <StaticResource x:Key="SimpleSpace1200" ResourceKey="Space1200" />
@@ -92,6 +105,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleRadius050" ResourceKey="Radius050" />
 <StaticResource x:Key="SimpleRadius100" ResourceKey="Radius100" />
 <StaticResource x:Key="SimpleRadius200" ResourceKey="Radius200" />
+<StaticResource x:Key="SimpleRadius300" ResourceKey="Radius300" />
 <StaticResource x:Key="SimpleRadius400" ResourceKey="Radius400" />
 <StaticResource x:Key="SimpleRadiusFull" ResourceKey="RadiusFull" />
 
@@ -99,15 +113,20 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleRadius050CornerRadius" ResourceKey="Radius050CornerRadius" />
 <StaticResource x:Key="SimpleRadius100CornerRadius" ResourceKey="Radius100CornerRadius" />
 <StaticResource x:Key="SimpleRadius200CornerRadius" ResourceKey="Radius200CornerRadius" />
+<StaticResource x:Key="SimpleRadius300CornerRadius" ResourceKey="Radius300CornerRadius" />
 <StaticResource x:Key="SimpleRadius400CornerRadius" ResourceKey="Radius400CornerRadius" />
 <StaticResource x:Key="SimpleRadiusFullCornerRadius" ResourceKey="RadiusFullCornerRadius" />
 
 <!-- ─────────────────────────────────────────────────────────────── -->
 <!-- SDS Icon Sizing → Shared tokens                                -->
+<!-- SDS uses a different icon scale than Material:                  -->
+<!--   SDS Small (24) = Material Medium                             -->
+<!--   SDS Medium (32) = Material Large                             -->
+<!--   SDS Large (40) = no Material equivalent (hardcoded)          -->
 <!-- ─────────────────────────────────────────────────────────────── -->
-<StaticResource x:Key="SimpleIconSmall" ResourceKey="IconSizeSmall" />
-<StaticResource x:Key="SimpleIconMedium" ResourceKey="IconSizeMedium" />
-<StaticResource x:Key="SimpleIconLarge" ResourceKey="IconSizeLarge" />
+<StaticResource x:Key="SimpleIconSmall" ResourceKey="IconSizeMedium" />
+<StaticResource x:Key="SimpleIconMedium" ResourceKey="IconSizeLarge" />
+<x:Double x:Key="SimpleIconLarge">40</x:Double>
 
 <!-- ─────────────────────────────────────────────────────────────── -->
 <!-- SDS Stroke (Simple-specific, no shared equivalent yet)         -->
@@ -127,8 +146,13 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <StaticResource x:Key="SimpleSpace200Thickness" ResourceKey="Space200Thickness" />
 <StaticResource x:Key="SimpleSpace300Thickness" ResourceKey="Space300Thickness" />
 <StaticResource x:Key="SimpleSpace400Thickness" ResourceKey="Space400Thickness" />
+<StaticResource x:Key="SimpleSpace500Thickness" ResourceKey="Space500Thickness" />
 <StaticResource x:Key="SimpleSpace600Thickness" ResourceKey="Space600Thickness" />
 <StaticResource x:Key="SimpleSpace800Thickness" ResourceKey="Space800Thickness" />
+
+<!-- Horizontal Thickness companions -->
+<StaticResource x:Key="SimpleSpace200HorizontalThickness" ResourceKey="Space200HorizontalThickness" />
+<StaticResource x:Key="SimpleSpace400HorizontalThickness" ResourceKey="Space400HorizontalThickness" />
 </ResourceDictionary>
 
 </ResourceDictionary.ThemeDictionaries>
