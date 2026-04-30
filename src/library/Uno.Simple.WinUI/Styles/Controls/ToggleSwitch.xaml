@@ -70,14 +70,14 @@
 	<StaticResource x:Key="SimpleToggleSwitchTrackWidth" ResourceKey="SimpleIconLarge" /> <!-- sds-size-icon-large -->
 	<StaticResource x:Key="SimpleToggleSwitchTrackHeight" ResourceKey="SimpleIconSmall" /> <!-- sds-size-icon-small -->
 	<StaticResource x:Key="SimpleToggleSwitchStrokeThickness" ResourceKey="SimpleStrokeBorder" /> <!-- sds-size-stroke-border -->
-	<StaticResource x:Key="SimpleToggleSwitchThumbSize" ResourceKey="SimpleSpace400" />
+	<x:Double x:Key="SimpleToggleSwitchThumbSize">10</x:Double> <!-- Fixed — must fit inside 16px track -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<StaticResource x:Key="SimpleToggleSwitchTrackRadius" ResourceKey="SimpleRadius300" />
 	<Thickness x:Key="SimpleToggleSwitchThumbOffMargin">4,0,0,0</Thickness>
 	<Thickness x:Key="SimpleToggleSwitchThumbOnMargin">20,0,0,0</Thickness>
-	<Thickness x:Key="SimpleToggleSwitchHeaderMargin">0,0,0,4</Thickness>
+	<StaticResource x:Key="SimpleToggleSwitchHeaderMargin" ResourceKey="Space100BottomThickness" />
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- SimpleToggleSwitchStyle -->

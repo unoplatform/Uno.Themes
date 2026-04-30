@@ -40,16 +40,16 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
 | `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonStyle` | Primary icon button as FAB equivalent |
-| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleSmallIconButtonStyle` | |
+| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleIconButtonStyle` | Same as FabStyle |
 | `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonStyle` | No large variant in Simple |
 | `SecondaryFabStyle` | `MaterialSecondaryFabStyle` | `SimpleIconButtonNeutralStyle` | |
-| `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
+| `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleIconButtonNeutralStyle` | |
 | `SecondaryLargeFabStyle` | `MaterialSecondaryLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
 | `TertiaryFabStyle` | `MaterialTertiaryFabStyle` | `SimpleIconButtonSubtleStyle` | |
-| `TertiarySmallFabStyle` | `MaterialTertiarySmallFabStyle` | `SimpleSmallIconButtonSubtleStyle` | |
+| `TertiarySmallFabStyle` | `MaterialTertiarySmallFabStyle` | `SimpleIconButtonSubtleStyle` | |
 | `TertiaryLargeFabStyle` | `MaterialTertiaryLargeFabStyle` | `SimpleIconButtonSubtleStyle` | |
 | `SurfaceFabStyle` | `MaterialSurfaceFabStyle` | `SimpleIconButtonNeutralStyle` | |
-| `SurfaceSmallFabStyle` | `MaterialSurfaceSmallFabStyle` | `SimpleSmallIconButtonNeutralStyle` | |
+| `SurfaceSmallFabStyle` | `MaterialSurfaceSmallFabStyle` | `SimpleIconButtonNeutralStyle` | |
 | `SurfaceLargeFabStyle` | `MaterialSurfaceLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
 
 ### ToggleButton

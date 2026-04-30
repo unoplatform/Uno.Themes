@@ -179,7 +179,7 @@
 
 	</ResourceDictionary.ThemeDictionaries>
 
-	<StaticResource x:Key="SimpleCheckBoxSize" ResourceKey="SimpleSpace400" />
+	<StaticResource x:Key="SimpleCheckBoxSize" ResourceKey="SimpleIconSmall" /> <!-- Fixed 16px — density scales spacing, not indicator -->
 	<StaticResource x:Key="SimpleCheckBoxCornerRadius" ResourceKey="SimpleRadius100CornerRadius" />
 	<StaticResource x:Key="SimpleCheckBoxStrokeThickness" ResourceKey="SimpleStrokeBorder" />
 
@@ -187,8 +187,8 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Thickness x:Key="SimpleCheckBoxContentMargin">16,0,0,0</Thickness>
-	<GridLength x:Key="SimpleCheckBoxColumnWidth">20</GridLength>
+	<StaticResource x:Key="SimpleCheckBoxContentMargin" ResourceKey="Space400LeftThickness" />
+	<GridLength x:Key="SimpleCheckBoxColumnWidth">Auto</GridLength>
 	<x:Double x:Key="SimpleCheckBoxGlyphSize">10</x:Double>
 	<x:String x:Key="SimpleCheckBoxCheckGlyphPathData">M28.718018,0L32,3.2819897 10.666016,24.616999 0,13.951997 3.2810059,10.670007 10.666016,18.055033z</x:String>
 	<x:String x:Key="SimpleCheckBoxHyphenGlyphPathData">M0,0L32,0 32,5.3 0,5.3z</x:String>
