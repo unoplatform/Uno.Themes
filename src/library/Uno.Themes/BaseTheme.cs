@@ -20,7 +20,7 @@ using Windows.UI.Xaml.Media;
 namespace Uno.Themes;
 public abstract partial class BaseTheme : ResourceDictionary
 {
-	private bool _isColorOverrideMuted;
+	private bool _isUpdatingColorOverrides;
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
 	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _originalBrushes;
@@ -74,17 +74,26 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	private static void OnColorOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is BaseTheme theme && e.NewValue is string sourceUri)
+		if (d is BaseTheme theme)
 		{
 			try
 			{
-				theme._isColorOverrideMuted = true;
-				var tc = theme.EnsureColors();
-				tc.OverrideSource = sourceUri;
+				theme._isUpdatingColorOverrides = true;
+				if (e.NewValue is string sourceUri)
+				{
+					var tc = theme.EnsureColors();
+					tc.OverrideSource = sourceUri;
+				}
+				else if (theme.Colors is { } tc)
+				{
+					tc.OverrideDictionary = null;
+				}
+
+				theme.UpdateSource();
 			}
 			finally
 			{
-				theme._isColorOverrideMuted = false;
+				theme._isUpdatingColorOverrides = false;
 			}
 		}
 	}
@@ -137,11 +146,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	private static void OnColorOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is BaseTheme { _isColorOverrideMuted: false } theme)
+		if (d is BaseTheme { _isUpdatingColorOverrides: false } theme)
 		{
 			try
 			{
-				theme._isColorOverrideMuted = true;
+				theme._isUpdatingColorOverrides = true;
 				if (e.NewValue is ResourceDictionary dict)
 				{
 					var tc = theme.EnsureColors();
@@ -153,15 +162,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 					{
 						tc.OverrideDictionary = null;
 					}
-					else
-					{
-						theme.UpdateSource();
-					}
 				}
+
+				theme.UpdateSource();
 			}
 			finally
 			{
-				theme._isColorOverrideMuted = false;
+				theme._isUpdatingColorOverrides = false;
 			}
 		}
 	}
@@ -199,7 +206,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 			{
 				tc.SetChangedCallback((isStructural) =>
 				{
-					if (theme._isColorOverrideMuted)
+					if (theme._isUpdatingColorOverrides)
 					{
 						return;
 					}
@@ -217,7 +224,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 				});
 			}
 
-			if (!theme._isColorOverrideMuted)
+			if (!theme._isUpdatingColorOverrides)
 			{
 				theme.UpdateSource();
 			}
