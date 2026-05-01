@@ -42,6 +42,14 @@ public abstract partial class BaseTheme
 		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
 
 	/// <summary>
+	/// Suffixes that get full directional Thickness companions:
+	/// VerticalThickness (0,N,0,N), TopThickness (0,N,0,0), BottomThickness (0,0,0,N),
+	/// LeftThickness (N,0,0,0), RightThickness (0,0,N,0).
+	/// </summary>
+	private static readonly HashSet<string> DirectionalThicknessSuffixes =
+		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
+
+	/// <summary>
 	/// Multiplier table for shape (corner radius) tokens.
 	/// RadiusFull is always 9999 and is handled separately.
 	/// </summary>
@@ -79,6 +87,15 @@ public abstract partial class BaseTheme
 				if (HorizontalThicknessSuffixes.Contains(suffix))
 				{
 					themed[$"Space{suffix}HorizontalThickness"] = new Thickness(value, 0, value, 0);
+				}
+
+				if (DirectionalThicknessSuffixes.Contains(suffix))
+				{
+					themed[$"Space{suffix}VerticalThickness"] = new Thickness(0, value, 0, value);
+					themed[$"Space{suffix}TopThickness"] = new Thickness(0, value, 0, 0);
+					themed[$"Space{suffix}BottomThickness"] = new Thickness(0, 0, 0, value);
+					themed[$"Space{suffix}LeftThickness"] = new Thickness(value, 0, 0, 0);
+					themed[$"Space{suffix}RightThickness"] = new Thickness(0, 0, value, 0);
 				}
 			}
 

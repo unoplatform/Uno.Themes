@@ -3,11 +3,7 @@ using Uno.Themes;
 
 
 #if WinUI
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 #else
 using Windows.UI;
@@ -17,43 +13,11 @@ using Windows.UI.Xaml;
 namespace Uno.Simple;
 
 /// <summary>
-/// Controls the default size variant used by Simple Theme control styles.
-/// </summary>
-public enum SimpleControlSize
-{
-	/// <summary>Compact sizing (32 px height for buttons).</summary>
-	Small,
-
-	/// <summary>Standard sizing (40 px height for buttons).</summary>
-	Medium
-}
-
-/// <summary>
 /// Simple Theme resources including colors, fonts, layout values, and styles.
 /// </summary>
 public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	: BaseTheme(GetSimpleColorOverride(colorOverride), fontOverride)
 {
-	/// <summary>
-	/// Identifies the <see cref="DefaultSize"/> dependency property.
-	/// </summary>
-	public static readonly DependencyProperty DefaultSizeProperty =
-		DependencyProperty.Register(
-			nameof(DefaultSize),
-			typeof(SimpleControlSize),
-			typeof(SimpleTheme),
-			new PropertyMetadata(SimpleControlSize.Small, OnDefaultSizeChanged));
-
-	/// <summary>
-	/// Gets or sets the default size variant for control styles.
-	/// The default is <see cref="SimpleControlSize.Small"/>.
-	/// </summary>
-	public SimpleControlSize DefaultSize
-	{
-		get => (SimpleControlSize)GetValue(DefaultSizeProperty);
-		set => SetValue(DefaultSizeProperty, value);
-	}
-
 	/// <summary>
 	/// Simple uses a hand-crafted grayscale palette by default (no seed).
 	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, high-fidelity
@@ -65,13 +29,47 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	/// <inheritdoc />
 	protected override bool UseHighFidelityColors => true;
 
+	#region DefaultDensity (DP)
+	/// <summary>
+	/// Gets or sets the density level for the Simple theme.
+	/// <c>Compact</c> = tighter spacing (3px base),
+	/// <c>Regular</c> = default (4px base),
+	/// <c>Comfy</c> = looser spacing (5px base).
+	/// This sets the underlying <see cref="BaseTheme.DefaultSpacing"/> automatically.
+	/// </summary>
+	public Density DefaultDensity
+	{
+		get => (Density)GetValue(DefaultDensityProperty);
+		set => SetValue(DefaultDensityProperty, value);
+	}
+
+	public static DependencyProperty DefaultDensityProperty { get; } =
+		DependencyProperty.Register(
+			nameof(DefaultDensity),
+			typeof(Density),
+			typeof(SimpleTheme),
+			new PropertyMetadata(Density.Regular, OnDefaultDensityChanged));
+
+	private static void OnDefaultDensityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is SimpleTheme theme)
+		{
+			theme.DefaultSpacing = DensityToSpacing((Density)e.NewValue);
+		}
+	}
+
+	private static double DensityToSpacing(Density density) => density switch
+	{
+		Density.Compact => 3.0,
+		Density.Comfy => 5.0,
+		_ => 4.0,
+	};
+	#endregion
+
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)
 	{
 	}
-
-	private static void OnDefaultSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		=> ((SimpleTheme)d).UpdateSource();
 
 	private static ResourceDictionary GetSimpleColorOverride(ResourceDictionary colorOverride)
 	{
@@ -92,13 +90,6 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 
 		var thickness = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Thickness) };
 		mergedPages.MergedDictionaries.Add(thickness);
-
-		// Load size defaults based on the DefaultSize configuration
-		var sizeDefaultsPath = DefaultSize == SimpleControlSize.Medium
-			? SimpleConstants.ResourcePaths.Common.SizeMediumDefaults
-			: SimpleConstants.ResourcePaths.Common.SizeSmallDefaults;
-		var sizeDefaults = new ResourceDictionary { Source = new Uri(sizeDefaultsPath) };
-		mergedPages.MergedDictionaries.Add(sizeDefaults);
 
 		var fonts = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Common.Fonts) };
 
