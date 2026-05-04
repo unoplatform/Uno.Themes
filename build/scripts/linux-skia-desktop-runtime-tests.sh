@@ -5,9 +5,13 @@ IFS=$'\n\t'
 
 export DOTNET_MODIFIABLE_ASSEMBLIES=debug
 
+# BUILD_CONFIG defaults to Release so the existing Release pipeline keeps working
+# unchanged. The hot-reload stage sets BUILD_CONFIG=Debug (DevServer is Debug-only).
+BUILD_CONFIG="${BUILD_CONFIG:-Release}"
+
 results_path="$UNO_RUNTIME_TESTS_OUTPUT_PATH"
 
-cd "$ProjectPath/bin/Release/net10.0-desktop"
+cd "$ProjectPath/bin/$BUILD_CONFIG/net10.0-desktop"
 
 xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' bash -c "{ fluxbox & } ; dotnet $SampleAppName.dll --runtime-tests=\"$results_path\"" || true
 
