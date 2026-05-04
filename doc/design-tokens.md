@@ -94,19 +94,25 @@ To override individual tokens without changing the whole scale, use standard XAM
 
 These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`).
 
-### Density via DefaultSpacing
+### Density
 
-Control density (heights, padding) is driven by the **spacing scale**. Adjusting `DefaultSpacing` on the theme rescales every `Space*` token, which in turn changes control padding, margins, and layout. Combined with the fixed `ControlHeight*` tokens, this gives you compact-to-comfortable density without a separate preset system.
+`SimpleTheme` exposes a `DefaultDensity` property that sets the spacing scale to a named density level. Under the hood, `DefaultDensity` maps to `DefaultSpacing`, which rescales every `Space*` token and in turn changes control padding, margins, and layout.
 
-| DefaultSpacing | Feel |
-|----------------|------|
-| `3` | Compact — tighter padding for data-dense UIs |
-| `4` | Regular (default) — balanced spacing |
-| `5` | Comfortable — more generous padding |
+| DefaultDensity | DefaultSpacing | Feel |
+|----------------|----------------|------|
+| `Compact` | `3` | Tighter padding for data-dense UIs |
+| `Regular` (default) | `4` | Balanced spacing |
+| `Comfy` | `5` | More generous padding |
 
 ```xml
 <!-- App.xaml — opt into compact density -->
-<SimpleTheme DefaultSpacing="3" />
+<SimpleTheme xmlns="using:Uno.Simple" DefaultDensity="Compact" />
+```
+
+You can also set `DefaultSpacing` directly for finer control:
+
+```xml
+<SimpleTheme xmlns="using:Uno.Simple" DefaultSpacing="3.5" />
 ```
 
 ### Typography Font Swap

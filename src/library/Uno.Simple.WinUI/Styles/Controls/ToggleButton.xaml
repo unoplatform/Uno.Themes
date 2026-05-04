@@ -454,4 +454,7 @@
 		   TargetType="ToggleButton"
 		   BasedOn="{StaticResource SimpleTextToggleButtonStyle}" />
 
-</ResourceDictionary>
+<!-- Backwards-compat aliases for removed Small/Medium size variants -->
+<Style x:Key="SimpleSmallToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource SimpleTextToggleButtonStyle}" />
+<Style x:Key="SimpleMediumToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource SimpleTextToggleButtonStyle}" />
+
