@@ -138,7 +138,12 @@
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  Padding="{TemplateBinding Padding}"
-							  MinHeight="{TemplateBinding MinHeight}"
+						  MinHeight="{TemplateBinding MinHeight}"
+						  MinWidth="{TemplateBinding MinWidth}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
