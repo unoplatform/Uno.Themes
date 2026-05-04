@@ -44,6 +44,10 @@ jobs:
       ArtifactType: Container
 
   - script: |
+      sudo apt-get update && sudo apt-get install -y --no-install-recommends fluxbox
+    displayName: Install fluxbox window manager
+
+  - script: |
       chmod +x build/scripts/linux-skia-desktop-runtime-tests.sh
       build/scripts/linux-skia-desktop-runtime-tests.sh
     displayName: 'Run Hot-Reload Runtime Tests - $(SampleAppName)'
