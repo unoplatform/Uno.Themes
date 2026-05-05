@@ -18,6 +18,23 @@ using Windows.UI.Xaml.Media;
 
 
 namespace Uno.Themes;
+
+/// <summary>
+/// Controls the spacing density applied to all controls.
+/// Drives the base spacing unit used by all Space* tokens.
+/// </summary>
+public enum Density
+{
+	/// <summary>Compact — base spacing unit = 3 px, tighter padding for data-dense UIs.</summary>
+	Compact = 3,
+
+	/// <summary>Regular (default) — base spacing unit = 4 px, balanced spacing.</summary>
+	Regular = 4,
+
+	/// <summary>Comfortable — base spacing unit = 5 px, more generous padding.</summary>
+	Comfy = 5,
+}
+
 public abstract partial class BaseTheme : ResourceDictionary
 {
 	private bool _isColorOverrideMuted;
@@ -225,28 +242,27 @@ public abstract partial class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
-	#region DefaultSpacing (DP)
+	#region DefaultDensity (DP)
 	/// <summary>
-	/// Gets or sets the base spacing unit (in pixels). Default is 4.
-	/// All spacing scale tokens (Space100, Space200, …) are computed
-	/// as multiples of this value — e.g. <c>DefaultSpacing="10"</c> makes
-	/// Space100=10, Space200=20, Space400=40, etc.
-	/// Individual tokens can still be overridden via lightweight styling.
+	/// Gets or sets the density preset for the theme. Default is <see cref="Density.Regular"/>.
+	/// This drives the base spacing unit used by all Space* tokens:
+	/// Compact = 3, Regular = 4, Comfy = 5.
+	/// Control heights and icon sizes remain constant across densities.
 	/// </summary>
-	public double DefaultSpacing
+	public Density DefaultDensity
 	{
-		get => (double)GetValue(DefaultSpacingProperty);
-		set => SetValue(DefaultSpacingProperty, value);
+		get => (Density)GetValue(DefaultDensityProperty);
+		set => SetValue(DefaultDensityProperty, value);
 	}
 
-	public static DependencyProperty DefaultSpacingProperty { get; } =
+	public static DependencyProperty DefaultDensityProperty { get; } =
 		DependencyProperty.Register(
-			nameof(DefaultSpacing),
-			typeof(double),
+			nameof(DefaultDensity),
+			typeof(Density),
 			typeof(BaseTheme),
-			new PropertyMetadata(4.0, OnDefaultSpacingChanged));
+			new PropertyMetadata(Density.Regular, OnDefaultDensityChanged));
 
-	private static void OnDefaultSpacingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	private static void OnDefaultDensityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
 		if (d is BaseTheme theme)
 		{
@@ -411,7 +427,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
 
 		// Generate spacing, shape, and density scales from code
-		var spacing = GenerateSpacingScale(DefaultSpacing);
+		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
+		var spacing = GenerateSpacingScale(baseSpacing);
 		var shape = GenerateShapeScale(DefaultCornerRadius);
 		var density = GenerateDensityDefaults();
 

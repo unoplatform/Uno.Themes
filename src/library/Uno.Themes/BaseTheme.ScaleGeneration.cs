@@ -13,11 +13,16 @@ namespace Uno.Themes;
 public abstract partial class BaseTheme
 {
 	/// <summary>
-	/// Multiplier table for spacing tokens.
-	/// Each entry maps a token suffix to its multiplier relative to the base unit.
-	/// E.g. "200" → 2.0 means Space200 = DefaultSpacing × 2.
+	/// Theme dictionary keys used when generating token ResourceDictionaries.
 	/// </summary>
-	private static readonly (string Suffix, double Multiplier)[] SpacingScaleMultipliers =
+	private static readonly string[] ThemeKeys = { "Default", "Light" };
+
+	/// <summary>
+	/// Multiplier table for spacing tokens.
+	/// Each entry maps a token variant to its multiplier relative to the base unit.
+	/// E.g. "200" → 2.0 means Space200 = DefaultDensity base × 2.
+	/// </summary>
+	private static readonly (string Variant, double Multiplier)[] SpacingScaleMultipliers =
 	{
 		("0",    0.0),
 		("050",  0.5),
@@ -36,24 +41,24 @@ public abstract partial class BaseTheme
 	};
 
 	/// <summary>
-	/// Suffixes that have a HorizontalThickness companion (N,0,N,0).
+	/// Variants that have a HorizontalThickness companion (N,0,N,0).
 	/// </summary>
-	private static readonly HashSet<string> HorizontalThicknessSuffixes =
+	private static readonly HashSet<string> HorizontalThicknessVariants =
 		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
 
 	/// <summary>
-	/// Suffixes that get full directional Thickness companions:
+	/// Variants that get full directional Thickness companions:
 	/// VerticalThickness (0,N,0,N), TopThickness (0,N,0,0), BottomThickness (0,0,0,N),
 	/// LeftThickness (N,0,0,0), RightThickness (0,0,N,0).
 	/// </summary>
-	private static readonly HashSet<string> DirectionalThicknessSuffixes =
+	private static readonly HashSet<string> DirectionalThicknessVariants =
 		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
 
 	/// <summary>
 	/// Multiplier table for shape (corner radius) tokens.
 	/// RadiusFull is always 9999 and is handled separately.
 	/// </summary>
-	private static readonly (string Suffix, double Multiplier)[] ShapeScaleMultipliers =
+	private static readonly (string Variant, double Multiplier)[] ShapeScaleMultipliers =
 	{
 		("0",   0.0),
 		("050", 0.5),
@@ -73,29 +78,29 @@ public abstract partial class BaseTheme
 	{
 		var dict = new ResourceDictionary();
 
-		foreach (var themeKey in new[] { "Default", "Light" })
+		foreach (var themeKey in ThemeKeys)
 		{
 			var themed = new ResourceDictionary();
 
-			foreach (var (suffix, multiplier) in SpacingScaleMultipliers)
+			foreach (var (variant, multiplier) in SpacingScaleMultipliers)
 			{
 				var value = baseValue * multiplier;
 
-				themed[$"Space{suffix}"] = value;
-				themed[$"Space{suffix}Thickness"] = new Thickness(value);
+				themed[$"Space{variant}"] = value;
+				themed[$"Space{variant}Thickness"] = new Thickness(value);
 
-				if (HorizontalThicknessSuffixes.Contains(suffix))
+				if (HorizontalThicknessVariants.Contains(variant))
 				{
-					themed[$"Space{suffix}HorizontalThickness"] = new Thickness(value, 0, value, 0);
+					themed[$"Space{variant}HorizontalThickness"] = new Thickness(value, 0, value, 0);
 				}
 
-				if (DirectionalThicknessSuffixes.Contains(suffix))
+				if (DirectionalThicknessVariants.Contains(variant))
 				{
-					themed[$"Space{suffix}VerticalThickness"] = new Thickness(0, value, 0, value);
-					themed[$"Space{suffix}TopThickness"] = new Thickness(0, value, 0, 0);
-					themed[$"Space{suffix}BottomThickness"] = new Thickness(0, 0, 0, value);
-					themed[$"Space{suffix}LeftThickness"] = new Thickness(value, 0, 0, 0);
-					themed[$"Space{suffix}RightThickness"] = new Thickness(0, 0, value, 0);
+					themed[$"Space{variant}VerticalThickness"] = new Thickness(0, value, 0, value);
+					themed[$"Space{variant}TopThickness"] = new Thickness(0, value, 0, 0);
+					themed[$"Space{variant}BottomThickness"] = new Thickness(0, 0, 0, value);
+					themed[$"Space{variant}LeftThickness"] = new Thickness(value, 0, 0, 0);
+					themed[$"Space{variant}RightThickness"] = new Thickness(0, 0, value, 0);
 				}
 			}
 
@@ -113,16 +118,16 @@ public abstract partial class BaseTheme
 	{
 		var dict = new ResourceDictionary();
 
-		foreach (var themeKey in new[] { "Default", "Light" })
+		foreach (var themeKey in ThemeKeys)
 		{
 			var themed = new ResourceDictionary();
 
-			foreach (var (suffix, multiplier) in ShapeScaleMultipliers)
+			foreach (var (variant, multiplier) in ShapeScaleMultipliers)
 			{
 				var value = baseValue * multiplier;
 
-				themed[$"Radius{suffix}"] = value;
-				themed[$"Radius{suffix}CornerRadius"] = new CornerRadius(value);
+				themed[$"Radius{variant}"] = value;
+				themed[$"Radius{variant}CornerRadius"] = new CornerRadius(value);
 			}
 
 			// RadiusFull is always 9999 (pill shape)
@@ -136,9 +141,10 @@ public abstract partial class BaseTheme
 	}
 
 	/// <summary>
-	/// Default density token values. These are fixed constants, not scale-derived.
+	/// Fixed density token values. These are constants that do not scale with density.
+	/// Includes icon sizes, touch target, and control heights.
 	/// </summary>
-	private static readonly (string Key, double Value)[] DensityDefaults =
+	private static readonly (string Key, double Value)[] FixedDensityDefaults =
 	{
 		("ControlHeightSmall",      32),
 		("ControlHeightMedium",     40),
@@ -152,16 +158,18 @@ public abstract partial class BaseTheme
 
 	/// <summary>
 	/// Generates a ResourceDictionary containing all density tokens.
+	/// All values are fixed constants — they do not scale with density.
+	/// Only spacing (padding, margins) changes across density presets.
 	/// </summary>
 	private static ResourceDictionary GenerateDensityDefaults()
 	{
 		var dict = new ResourceDictionary();
 
-		foreach (var themeKey in new[] { "Default", "Light" })
+		foreach (var themeKey in ThemeKeys)
 		{
 			var themed = new ResourceDictionary();
 
-			foreach (var (key, value) in DensityDefaults)
+			foreach (var (key, value) in FixedDensityDefaults)
 			{
 				themed[key] = value;
 			}

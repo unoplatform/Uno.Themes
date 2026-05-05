@@ -29,43 +29,6 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	/// <inheritdoc />
 	protected override bool UseHighFidelityColors => true;
 
-	#region DefaultDensity (DP)
-	/// <summary>
-	/// Gets or sets the density level for the Simple theme.
-	/// <c>Compact</c> = tighter spacing (3px base),
-	/// <c>Regular</c> = default (4px base),
-	/// <c>Comfy</c> = looser spacing (5px base).
-	/// This sets the underlying <see cref="BaseTheme.DefaultSpacing"/> automatically.
-	/// </summary>
-	public Density DefaultDensity
-	{
-		get => (Density)GetValue(DefaultDensityProperty);
-		set => SetValue(DefaultDensityProperty, value);
-	}
-
-	public static DependencyProperty DefaultDensityProperty { get; } =
-		DependencyProperty.Register(
-			nameof(DefaultDensity),
-			typeof(Density),
-			typeof(SimpleTheme),
-			new PropertyMetadata(Density.Regular, OnDefaultDensityChanged));
-
-	private static void OnDefaultDensityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-	{
-		if (d is SimpleTheme theme)
-		{
-			theme.DefaultSpacing = DensityToSpacing((Density)e.NewValue);
-		}
-	}
-
-	private static double DensityToSpacing(Density density) => density switch
-	{
-		Density.Compact => 3.0,
-		Density.Comfy => 5.0,
-		_ => 4.0,
-	};
-	#endregion
-
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)
 	{
