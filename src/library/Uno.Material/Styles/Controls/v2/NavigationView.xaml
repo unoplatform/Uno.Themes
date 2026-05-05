@@ -45,7 +45,7 @@
 			<!-- NavigationView -->
 			<CornerRadius x:Key="MaterialNavigationViewSplitViewCornerRadius">0</CornerRadius>
 			<CornerRadius x:Key="MaterialNavigationViewContentGridCornerRadius">0</CornerRadius>
-			<Thickness x:Key="MaterialNavigationViewSplitViewPadding">0,12</Thickness>
+			<StaticResource x:Key="MaterialNavigationViewSplitViewPadding" ResourceKey="Space300VerticalThickness" />
 
 			<!-- NavigationView\Buttons -->
 			<x:Double x:Key="MaterialNavigationViewButtonWidth">56</x:Double>
@@ -64,7 +64,7 @@
 			<StaticResource x:Key="MaterialNavigationViewItemCornerRadiusCompact" ResourceKey="Radius400CornerRadius" />
 			<StaticResource x:Key="MaterialNavigationItemLeftMargin" ResourceKey="Space300HorizontalThickness" />
 			<StaticResource x:Key="MaterialNavigationItemIconLength" ResourceKey="IconSizeMedium" />
-			<Thickness x:Key="MaterialNavigationItemContentMargin">12,0,0,0</Thickness>
+			<StaticResource x:Key="MaterialNavigationItemContentMargin" ResourceKey="Space300LeftThickness" />
 			<Thickness x:Key="MaterialNavigationItemContentMarginWithoutIcon">0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentPaddingCompact">16,4</Thickness>
 			<!--#endregion-->
@@ -139,8 +139,8 @@
 			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
 
 			<!-- The two resources below must be defined at the app level in order to take effect. -->
-			<Thickness x:Key="TopNavigationViewOverflowMenuPadding">0,8</Thickness>
-			<Thickness x:Key="NavigationViewItemChildrenMenuFlyoutPadding">0,8</Thickness>
+			<StaticResource x:Key="TopNavigationViewOverflowMenuPadding" ResourceKey="Space200VerticalThickness" />
+			<StaticResource x:Key="NavigationViewItemChildrenMenuFlyoutPadding" ResourceKey="Space200VerticalThickness" />
 
 			<!--
 				The resource below must be defined at the app level in order to affect the expand/collapse chevron font size
@@ -239,7 +239,7 @@
 			<!-- NavigationView -->
 			<CornerRadius x:Key="MaterialNavigationViewSplitViewCornerRadius">0</CornerRadius>
 			<CornerRadius x:Key="MaterialNavigationViewContentGridCornerRadius">0</CornerRadius>
-			<Thickness x:Key="MaterialNavigationViewSplitViewPadding">0,12</Thickness>
+			<StaticResource x:Key="MaterialNavigationViewSplitViewPadding" ResourceKey="Space300VerticalThickness" />
 
 			<!-- NavigationView\Buttons -->
 			<x:Double x:Key="MaterialNavigationViewButtonWidth">56</x:Double>
@@ -258,7 +258,7 @@
 			<StaticResource x:Key="MaterialNavigationViewItemCornerRadiusCompact" ResourceKey="Radius400CornerRadius" />
 			<StaticResource x:Key="MaterialNavigationItemLeftMargin" ResourceKey="Space300HorizontalThickness" />
 			<StaticResource x:Key="MaterialNavigationItemIconLength" ResourceKey="IconSizeMedium" />
-			<Thickness x:Key="MaterialNavigationItemContentMargin">12,0,0,0</Thickness>
+			<StaticResource x:Key="MaterialNavigationItemContentMargin" ResourceKey="Space300LeftThickness" />
 			<Thickness x:Key="MaterialNavigationItemContentMarginWithoutIcon">0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentPaddingCompact">16,4</Thickness>
 			<!--#endregion-->
@@ -333,8 +333,8 @@
 			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
 
 			<!-- The two resources below must be defined at the app level in order to take effect. -->
-			<Thickness x:Key="TopNavigationViewOverflowMenuPadding">0,8</Thickness>
-			<Thickness x:Key="NavigationViewItemChildrenMenuFlyoutPadding">0,8</Thickness>
+			<StaticResource x:Key="TopNavigationViewOverflowMenuPadding" ResourceKey="Space200VerticalThickness" />
+			<StaticResource x:Key="NavigationViewItemChildrenMenuFlyoutPadding" ResourceKey="Space200VerticalThickness" />
 
 			<!--
 				The resource below must be defined at the app level in order to affect the expand/collapse chevron font size
@@ -433,7 +433,7 @@
 			<!-- NavigationView -->
 			<CornerRadius x:Key="MaterialNavigationViewSplitViewCornerRadius">0</CornerRadius>
 			<CornerRadius x:Key="MaterialNavigationViewContentGridCornerRadius">0</CornerRadius>
-			<Thickness x:Key="MaterialNavigationViewSplitViewPadding">0,12</Thickness>
+			<StaticResource x:Key="MaterialNavigationViewSplitViewPadding" ResourceKey="Space300VerticalThickness" />
 
 			<!-- NavigationView\Buttons -->
 			<x:Double x:Key="MaterialNavigationViewButtonWidth">56</x:Double>
@@ -452,7 +452,7 @@
 			<StaticResource x:Key="MaterialNavigationViewItemCornerRadiusCompact" ResourceKey="Radius400CornerRadius" />
 			<StaticResource x:Key="MaterialNavigationItemLeftMargin" ResourceKey="Space300HorizontalThickness" />
 			<StaticResource x:Key="MaterialNavigationItemIconLength" ResourceKey="IconSizeMedium" />
-			<Thickness x:Key="MaterialNavigationItemContentMargin">12,0,0,0</Thickness>
+			<StaticResource x:Key="MaterialNavigationItemContentMargin" ResourceKey="Space300LeftThickness" />
 			<Thickness x:Key="MaterialNavigationItemContentMarginWithoutIcon">0</Thickness>
 			<Thickness x:Key="MaterialNavigationItemContentPaddingCompact">16,4</Thickness>
 			<!--#endregion-->
@@ -527,8 +527,8 @@
 			<CornerRadius x:Key="NavigationViewMinimalContentGridCornerRadius">0</CornerRadius>
 
 			<!-- The two resources below must be defined at the app level in order to take effect. -->
-			<Thickness x:Key="TopNavigationViewOverflowMenuPadding">0,8</Thickness>
-			<Thickness x:Key="NavigationViewItemChildrenMenuFlyoutPadding">0,8</Thickness>
+			<StaticResource x:Key="TopNavigationViewOverflowMenuPadding" ResourceKey="Space200VerticalThickness" />
+			<StaticResource x:Key="NavigationViewItemChildrenMenuFlyoutPadding" ResourceKey="Space200VerticalThickness" />
 
 			<!--
 				The resource below must be defined at the app level in order to affect the expand/collapse chevron font size
@@ -1971,7 +1971,7 @@
 										<Grid x:Name="AutoSuggestArea"
 											  Grid.Row="3"
 											  Height="{ThemeResource NavigationViewAutoSuggestAreaHeight}"
-											  Margin="0,0,0,8"
+											  Margin="{StaticResource Space200BottomThickness}"
 											  VerticalAlignment="Center">
 
 											<ContentControl x:Name="PaneAutoSuggestBoxPresenter"
@@ -3072,7 +3072,7 @@
 							</todo:Grid>
 
 							<Grid x:Name="ContentGrid"
-								  Padding="16">
+								  Padding="{StaticResource Space400Thickness}">
 								<Grid.ColumnDefinitions>
 									<!-- 0: Icon, 1: Content, 2: InfoBadge, 3: Chevron -->
 									<ColumnDefinition x:Name="IconColumn"
@@ -3355,7 +3355,7 @@
 							<Viewbox x:Name="IconBox"
 									 Height="16"
 									 Width="16"
-									 Margin="12,0,0,0"
+									 Margin="{StaticResource Space300LeftThickness}"
 									 VerticalAlignment="Center"
 									 HorizontalAlignment="Center">
 								<ContentPresenter x:Name="Icon"
@@ -3621,7 +3621,7 @@
 								<Viewbox x:Name="IconBox"
 										 Height="16"
 										 Width="16"
-										 Margin="16,0,0,0"
+										 Margin="{StaticResource Space400LeftThickness}"
 										 VerticalAlignment="Center"
 										 HorizontalAlignment="Center">
 									<ContentPresenter x:Name="Icon"
@@ -3774,7 +3774,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Grid x:Name="InnerHeaderGrid"
-							  Padding="16"
+							  Padding="{StaticResource Space400Thickness}"
 							  HorizontalAlignment="Left"
 							  Margin="{ThemeResource NavigationViewItemInnerHeaderMargin}">
 							<TextBlock x:Name="HeaderText"

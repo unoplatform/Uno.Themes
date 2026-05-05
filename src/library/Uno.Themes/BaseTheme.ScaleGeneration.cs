@@ -20,7 +20,7 @@ public abstract partial class BaseTheme
 	/// <summary>
 	/// Multiplier table for spacing tokens.
 	/// Each entry maps a token variant to its multiplier relative to the base unit.
-	/// E.g. "200" → 2.0 means Space200 = DefaultDensity base × 2.
+	/// E.g. "200" → 2.0 means Space200 = DefaultSpacing × 2.
 	/// </summary>
 	private static readonly (string Variant, double Multiplier)[] SpacingScaleMultipliers =
 	{
@@ -47,9 +47,8 @@ public abstract partial class BaseTheme
 		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
 
 	/// <summary>
-	/// Variants that get full directional Thickness companions:
-	/// VerticalThickness (0,N,0,N), TopThickness (0,N,0,0), BottomThickness (0,0,0,N),
-	/// LeftThickness (N,0,0,0), RightThickness (0,0,N,0).
+	/// Variants that have directional Thickness companions
+	/// (VerticalThickness, TopThickness, BottomThickness, LeftThickness, RightThickness).
 	/// </summary>
 	private static readonly HashSet<string> DirectionalThicknessVariants =
 		new() { "0", "050", "100", "150", "200", "300", "400", "500", "600", "800" };
@@ -146,14 +145,14 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private static readonly (string Key, double Value)[] FixedDensityDefaults =
 	{
-		("ControlHeightSmall",      32),
-		("ControlHeightMedium",     40),
-		("ControlHeightMediumLarge", 44),
-		("ControlHeightLarge",      48),
 		("TouchTargetMinSize",      48),
 		("IconSizeSmall",           16),
 		("IconSizeMedium",          24),
 		("IconSizeLarge",           32),
+		("ControlHeightSmall",      32),
+		("ControlHeightMedium",     40),
+		("ControlHeightMediumLarge", 44),
+		("ControlHeightLarge",      48),
 	};
 
 	/// <summary>

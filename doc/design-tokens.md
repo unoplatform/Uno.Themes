@@ -1,6 +1,6 @@
 # Design Tokens & Override Surface
 
-Uno.Themes exposes a set of **shared design tokens** — semantic XAML resources for typography, spacing, shape (corner radius), and density (control height / icon size). These tokens are consumed by all control templates, so overriding a single token key globally affects every control that references it. Control density is driven by the spacing scale (`DefaultSpacing`) rather than a separate preset system.
+Uno.Themes exposes a set of **shared design tokens** — semantic XAML resources for typography, spacing, shape (corner radius), and density (control height / icon size). These tokens are consumed by all control templates, so overriding a single token key globally affects every control that references it.
 
 ## Token Categories
 
@@ -91,28 +91,27 @@ To override individual tokens without changing the whole scale, use standard XAM
 |----------|------|-------------|
 | `DefaultCornerRadius` | `double` | Base corner radius unit; generates the full `Radius*` scale |
 | `DefaultSpacing` | `double` | Base spacing unit; generates the full `Space*` scale |
+| `DefaultDensity` | `Density` | Preset that sets `DefaultSpacing` to a named density level |
 
 These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`).
 
 ### Density
 
-`SimpleTheme` exposes a `DefaultDensity` property that sets the spacing scale to a named density level. Under the hood, `DefaultDensity` maps to `DefaultSpacing`, which rescales every `Space*` token and in turn changes control padding, margins, and layout.
+The `DefaultDensity` property controls the spacing density of all controls.
+It adjusts padding and margins (Space* tokens) while keeping control heights and icon sizes constant:
 
-| DefaultDensity | DefaultSpacing | Feel |
-|----------------|----------------|------|
-| `Compact` | `3` | Tighter padding for data-dense UIs |
-| `Regular` (default) | `4` | Balanced spacing |
-| `Comfy` | `5` | More generous padding |
-
-```xml
-<!-- App.xaml — opt into compact density -->
-<SimpleTheme xmlns="using:Uno.Simple" DefaultDensity="Compact" />
-```
-
-You can also set `DefaultSpacing` directly for finer control:
+| DefaultDensity | Base Spacing | Feel |
+|----------------|:------------:|------|
+| `Compact` | 3 | Tighter padding for data-dense UIs |
+| `Regular` (default) | 4 | Balanced spacing |
+| `Comfy` | 5 | More generous padding |
 
 ```xml
-<SimpleTheme xmlns="using:Uno.Simple" DefaultSpacing="3.5" />
+<!-- App.xaml — Material with compact density -->
+<MaterialTheme xmlns="using:Uno.Material" DefaultDensity="Compact" />
+
+<!-- App.xaml — Simple with comfortable density -->
+<SimpleTheme xmlns="using:Uno.Simple" DefaultDensity="Comfy" />
 ```
 
 ### Typography Font Swap
