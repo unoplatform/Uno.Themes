@@ -13,31 +13,11 @@ uid: Uno.Themes.Simple.Styles.Button
 | `SimpleTextButtonStyle`                 |                  |
 | `SimpleDangerPrimaryButtonStyle`          |                  |
 | `SimpleDangerSubtleButtonStyle`           |                  |
-| `SimpleSmallFilledButtonStyle`           |                  |
-| `SimpleSmallFilledTonalButtonStyle`           |                  |
-| `SimpleSmallTextButtonStyle`            |                  |
-| `SimpleSmallDangerPrimaryButtonStyle`     |                  |
-| `SimpleSmallDangerSubtleButtonStyle`      |                  |
-| `SimpleMediumFilledButtonStyle`          |                  |
-| `SimpleMediumFilledTonalButtonStyle`          |                  |
-| `SimpleMediumTextButtonStyle`           |                  |
-| `SimpleMediumDangerPrimaryButtonStyle`    |                  |
-| `SimpleMediumDangerSubtleButtonStyle`     |                  |
 | `SimpleIconButtonStyle`            |                  |
 | `SimpleIconButtonNeutralStyle`            |                  |
 | `SimpleIconButtonSubtleStyle`             |                  |
 | `SimpleIconButtonDangerPrimaryStyle`      |                  |
 | `SimpleIconButtonDangerSubtleStyle`       |                  |
-| `SimpleSmallIconButtonStyle`       |                  |
-| `SimpleSmallIconButtonNeutralStyle`       |                  |
-| `SimpleSmallIconButtonSubtleStyle`        |                  |
-| `SimpleSmallIconButtonDangerPrimaryStyle` |                  |
-| `SimpleSmallIconButtonDangerSubtleStyle`  |                  |
-| `SimpleMediumIconButtonStyle`      |                  |
-| `SimpleMediumIconButtonNeutralStyle`      |                  |
-| `SimpleMediumIconButtonSubtleStyle`       |                  |
-| `SimpleMediumIconButtonDangerPrimaryStyle`|                  |
-| `SimpleMediumIconButtonDangerSubtleStyle` |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control
 

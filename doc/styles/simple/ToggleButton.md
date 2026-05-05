@@ -10,8 +10,6 @@ uid: Uno.Themes.Simple.Styles.ToggleButton
 |------------------------------------|------------------|
 | `SimpleDefaultToggleButtonStyle`   | True             |
 | `SimpleTextToggleButtonStyle`      |                  |
-| `SimpleSmallToggleButtonStyle`     |                  |
-| `SimpleMediumToggleButtonStyle`    |                  |
 | `SimpleIconToggleButtonStyle`      |                  |
 
 IsDefaultStyle\*: Styles in this column will be set as the default implicit style for the matching control

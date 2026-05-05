@@ -47,8 +47,8 @@
 		<ResourceDictionary x:Key="Light">
 
 			<!-- ── AppBarButton — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="AppBarButtonHeight" ResourceKey="SimpleSpace1600" />
-			<StaticResource x:Key="AppBarButtonWidth" ResourceKey="SimpleSpace1600" />
+			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
+			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
 
 			<!-- Foreground (label text) -->
 			<StaticResource x:Key="AppBarButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
@@ -75,8 +75,8 @@
 		<ResourceDictionary x:Key="Default">
 
 			<!-- ── AppBarButton — semantic keys (source of truth) ── -->
-			<StaticResource x:Key="AppBarButtonHeight" ResourceKey="SimpleSpace1600" />
-			<StaticResource x:Key="AppBarButtonWidth" ResourceKey="SimpleSpace1600" />
+			<x:Double x:Key="AppBarButtonHeight">64</x:Double>
+			<x:Double x:Key="AppBarButtonWidth">64</x:Double>
 
 			<!-- Foreground (label text) -->
 			<StaticResource x:Key="AppBarButtonForeground" ResourceKey="OnSurfaceMediumBrush" />
@@ -122,8 +122,8 @@
 		<Setter Property="Padding" Value="{StaticResource SimpleAppBarButtonPadding}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Top" />
-		<Setter Property="Height" Value="{ThemeResource AppBarButtonHeight}" />
-		<Setter Property="Width" Value="{ThemeResource AppBarButtonWidth}" />
+		<Setter Property="MinHeight" Value="{ThemeResource AppBarButtonHeight}" />
+		<Setter Property="MinWidth" Value="{ThemeResource AppBarButtonWidth}" />
 		<Setter Property="FontFamily" Value="{ThemeResource LabelLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
 		<Setter Property="FontWeight" Value="Normal" />
@@ -138,8 +138,8 @@
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  Padding="{TemplateBinding Padding}"
-						  MinWidth="{TemplateBinding MinWidth}"
-						  MaxWidth="{TemplateBinding MaxWidth}">
+						  MinHeight="{TemplateBinding MinHeight}"
+						  MinWidth="{TemplateBinding MinWidth}">
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
