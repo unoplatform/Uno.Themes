@@ -1,4 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<!--
+	TreatAsLocalProperty (defense-in-depth for the Hot Reload scenario):
+	  The lib <-> head TFM alignment (net10.0-desktop added to libs in Debug) now
+	  lives in tfm-common-winui.props — see the large comment at the top of that
+	  file for the full rationale. This attribute stays on <Project> as a safety
+	  net: the Uno dev-server injects some GLOBAL MSBuild properties
+	  (TargetFramework / TargetFrameworks / RuntimeIdentifier) into the Roslyn
+	  workspace it spins up, and the MSBuild spec forbids a project from
+	  overriding a global property *except* through TreatAsLocalProperty. In
+	  particular, this neutralises any surprising RuntimeIdentifier propagation
+	  that would render TFM resolution inconsistent. The attribute cannot carry
+	  an MSBuild condition; in Release those global properties are never
+	  injected (DevServer.props is only loaded in Debug), so the attribute is
+	  inert outside HR.
+-->
+<!--
+	Sdk="Uno.Sdk":
+	  Aligned with the 3 other WinUI libs (Uno.Themes / Uno.Material / Uno.Cupertino).
+	  Required for the Hot Reload scenario: tfm-common-winui.props adds `net10.0-desktop`
+	  to libs in Debug, and the `desktop` TPI is not recognised by Microsoft.NET.Sdk
+	  on its own (NETSDK1139). Uno.Sdk extends _AdditionalKnownTargetPlatformIdentifiers
+	  to map `desktop` correctly.
+
+	  The NU1605 (Microsoft.Extensions.Logging.Console 10.0.2 implicit via Uno.Sdk vs
+	  10.0.0 via the head's Uno.Sdk.Private) is resolved through the transitive pin in
+	  src/samples/Directory.Packages.props (CentralPackageTransitivePinningEnabled).
+-->
+<Project Sdk="Uno.Sdk" TreatAsLocalProperty="TargetFramework;TargetFrameworks;RuntimeIdentifier">
 	<Import Project="..\tfm-common-winui.props" />
 
 	<PropertyGroup>
@@ -8,6 +35,10 @@
 		<RuntimeIdentifiers Condition="$(_IsWinUI)">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
 		<PackageId>Uno.Simple.WinUI</PackageId>
 		<AssemblyName>Uno.Simple.WinUI</AssemblyName>
+		<!-- Explicit versions avoid design-time/default 0.0.0.0 references during HR workspace compilation. -->
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
 		<FrameworkLineage>WinUI</FrameworkLineage>
 		<PackageDescription>A set of Simple styles for WinUI Controls to be used in Uno Platform and WinAppSDK projects</PackageDescription>
 	</PropertyGroup>

@@ -5,6 +5,10 @@
     See https://aka.platform.uno/using-uno-sdk for more information.
     See https://aka.platform.uno/using-uno-sdk#implicit-packages for more information regarding the Implicit Packages.
   -->
+  <PropertyGroup>
+    <!-- Resolves the NU1605 caused by the implicit-package mismatch between Uno.Sdk (libs) and Uno.Sdk.Private (head). -->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Uno.ShowMeTheXAML" Version="2.0.0-dev0015" />
     <PackageVersion Include="Uno.ShowMeTheXAML.MSBuild" Version="2.0.0-dev0015" />
@@ -12,5 +16,6 @@
     <PackageVersion Include="Uno.UI.RuntimeTests.Engine" Version="2.0.0-dev.60" />
     <PackageVersion Include="Uno.WinUI.DevServer" Version="6.5.153" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.6.4" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.2" />
   </ItemGroup>
 </Project>
