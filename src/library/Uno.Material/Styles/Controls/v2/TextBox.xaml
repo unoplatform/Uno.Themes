@@ -520,7 +520,7 @@
 
 							<Button x:Name="DeleteButton"
 									Grid.Column="2"
-									Margin="8,0,0,0"
+									Margin="{StaticResource Space200LeftThickness}"
 									Foreground="{ThemeResource FilledTextBoxDeleteButtonForeground}"
 									IsTabStop="False"
 									Style="{StaticResource MaterialDeleteButtonStyle}"
@@ -685,7 +685,7 @@
 							</Viewbox>
 
 							<!-- 1: Text Elements Container -->
-							<Grid Grid.Column="1" Margin="8,0">
+							<Grid Grid.Column="1" Margin="{StaticResource Space200HorizontalThickness}">
 								<!--
 									We need to center this in both Singleline and Multiline mode:
 									- SingleLine via Border.MinHeight + SV.HAlign

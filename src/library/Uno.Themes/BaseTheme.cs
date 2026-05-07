@@ -249,35 +249,6 @@ public abstract partial class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
-	#region DefaultDensity (DP)
-	/// <summary>
-	/// Gets or sets the density preset for the theme. Default is <see cref="Density.Regular"/>.
-	/// This drives the base spacing unit used by all Space* tokens:
-	/// Compact = 3, Regular = 4, Comfy = 5.
-	/// Control heights and icon sizes remain constant across densities.
-	/// </summary>
-	public Density DefaultDensity
-	{
-		get => (Density)GetValue(DefaultDensityProperty);
-		set => SetValue(DefaultDensityProperty, value);
-	}
-
-	public static DependencyProperty DefaultDensityProperty { get; } =
-		DependencyProperty.Register(
-			nameof(DefaultDensity),
-			typeof(Density),
-			typeof(BaseTheme),
-			new PropertyMetadata(Density.Regular, OnDefaultDensityChanged));
-
-	private static void OnDefaultDensityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-	{
-		if (d is BaseTheme theme)
-		{
-			theme.UpdateSource();
-		}
-	}
-	#endregion
-
 	#region DefaultCornerRadius (DP)
 	/// <summary>
 	/// Gets or sets the base corner radius unit (in pixels). Default is 4.
@@ -301,6 +272,35 @@ public abstract partial class BaseTheme : ResourceDictionary
 			new PropertyMetadata(4.0, OnDefaultCornerRadiusChanged));
 
 	private static void OnDefaultCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme)
+		{
+			theme.UpdateSource();
+		}
+	}
+	#endregion
+
+	#region DefaultDensity (DP)
+	/// <summary>
+	/// Gets or sets the density preset for the theme. Default is <see cref="Density.Regular"/>.
+	/// This drives the base spacing unit used by all Space* tokens:
+	/// Compact = 3, Regular = 4, Comfy = 5.
+	/// Control heights and icon sizes remain constant across densities.
+	/// </summary>
+	public Density DefaultDensity
+	{
+		get => (Density)GetValue(DefaultDensityProperty);
+		set => SetValue(DefaultDensityProperty, value);
+	}
+
+	public static DependencyProperty DefaultDensityProperty { get; } =
+		DependencyProperty.Register(
+			nameof(DefaultDensity),
+			typeof(Density),
+			typeof(BaseTheme),
+			new PropertyMetadata(Density.Regular, OnDefaultDensityChanged));
+
+	private static void OnDefaultDensityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
 		if (d is BaseTheme theme)
 		{
