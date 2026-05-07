@@ -7,7 +7,7 @@ using Uno.Themes;
 using Uno.UI.RuntimeTests;
 using Windows.UI;
 
-namespace Uno.Themes.Samples.RuntimeTests;
+namespace Uno.Themes.Samples.RuntimeTests.Material;
 
 /// <summary>
 /// Verifies that a default MaterialTheme (no seed configured) resolves the
