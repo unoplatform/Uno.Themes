@@ -57,6 +57,13 @@ sealed partial class App : Application
 	public static void InitializeLogging()
 	{
 #if DEBUG
+		var runtimeTestsConfig = Environment.GetEnvironmentVariable("UNO_RUNTIME_TESTS_RUN_TESTS") ?? string.Empty;
+		var isHotReloadRuntimeTests = runtimeTestsConfig.IndexOf("HotReload", StringComparison.OrdinalIgnoreCase) >= 0;
+		var isSecondaryApp = string.Equals(
+			Environment.GetEnvironmentVariable("UNO_RUNTIME_TESTS_IS_SECONDARY_APP"),
+			"true",
+			StringComparison.OrdinalIgnoreCase);
+
 		var factory = LoggerFactory.Create(builder =>
 		{
 			var UINamespace = typeof(UIElement).Namespace ?? string.Empty;
@@ -72,9 +79,28 @@ sealed partial class App : Application
 			builder.AddFilter("Uno", LogLevel.Warning);
 			builder.AddFilter("Windows", LogLevel.Warning);
 			builder.AddFilter("Microsoft", LogLevel.Warning);
+
+			if (isHotReloadRuntimeTests)
+			{
+				builder.AddFilter("Uno.UI.RuntimeTests", LogLevel.Debug);
+				builder.AddFilter("Uno.UI.RuntimeTests.Internal.Helpers", LogLevel.Trace);
+				builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Debug);
+				builder.AddFilter("Uno.WinUI.DevServer", LogLevel.Debug);
+			}
 		});
 
 		global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
+
+		if (isHotReloadRuntimeTests)
+		{
+			factory.CreateLogger("Uno.Themes.RuntimeTests.HotReload.Boot")
+				.LogInformation(
+					"Hot-reload runtime-tests logging enabled. SecondaryApp={IsSecondaryApp}; DevServer={Host}:{Port}; RuntimeTestsConfig={RuntimeTestsConfig}",
+					isSecondaryApp,
+					Environment.GetEnvironmentVariable("UNO_DEV_SERVER_HOST"),
+					Environment.GetEnvironmentVariable("UNO_DEV_SERVER_PORT"),
+					runtimeTestsConfig);
+		}
 
 #if HAS_UNO
 		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
