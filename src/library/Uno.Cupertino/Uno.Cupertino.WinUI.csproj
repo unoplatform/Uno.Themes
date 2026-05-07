@@ -1,5 +1,20 @@
 
-<Project Sdk="Uno.Sdk">
+<!--
+	TreatAsLocalProperty (defense-in-depth for the Hot Reload scenario):
+	  The lib <-> head TFM alignment (net10.0-desktop added to libs in Debug) now
+	  lives in tfm-common-winui.props — see the large comment at the top of that
+	  file for the full rationale. This attribute stays on <Project> as a safety
+	  net: the Uno dev-server injects some GLOBAL MSBuild properties
+	  (TargetFramework / TargetFrameworks / RuntimeIdentifier) into the Roslyn
+	  workspace it spins up, and the MSBuild spec forbids a project from
+	  overriding a global property *except* through TreatAsLocalProperty. In
+	  particular, this neutralises any surprising RuntimeIdentifier propagation
+	  that would render TFM resolution inconsistent. The attribute cannot carry
+	  an MSBuild condition; in Release those global properties are never
+	  injected (DevServer.props is only loaded in Debug), so the attribute is
+	  inert outside HR.
+-->
+<Project Sdk="Uno.Sdk" TreatAsLocalProperty="TargetFramework;TargetFrameworks;RuntimeIdentifier">
 	<Import Project="..\tfm-common-winui.props" />
 
 	<PropertyGroup>

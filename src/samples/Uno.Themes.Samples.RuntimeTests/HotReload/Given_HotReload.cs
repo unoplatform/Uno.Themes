@@ -26,7 +26,7 @@ public class Given_HotReload
 		Assert.AreEqual("original", HotReloadTarget.GetValue());
 
 		await using var _ = await HotReloadHelper.UpdateSourceFile(
-			"src/samples/Uno.Themes.Samples.RuntimeTests/HotReload/HotReloadTarget.cs",
+			"HotReload/HotReloadTarget.cs",
 			"""return "original";""",
 			"""return "updated";""",
 			ct);
