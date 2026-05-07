@@ -20,7 +20,7 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
 
 - `Uno.Themes.sln` (repo root) — main solution. Includes all libraries, samples, and the runtime tests that live inside the sample apps. Open this for full development.
 - `Uno.Themes-packages.slnf` (repo root) — solution filter limited to the packable libraries; useful for fast restore/build without the sample apps.
-- `src/library/` — all packable libraries. Subfolders match the project list above. Theme XAML lives under each library's `Styles/` folder (e.g. `src/library/Uno.Material/Styles/{Application,Controls}/{v1,v2,Common}/`, `src/library/Uno.Cupertino/Styles/{Application,Controls}/`, `src/library/Uno.Simple.WinUI/Styles/`). The base `src/library/Uno.Themes/Styles/Applications/Common/` holds shared color/typography palettes (`SharedColorPalette.xaml`, `SharedColors.xaml`, `SharedTypography.xaml`, `Converters.xaml`).
+- `src/library/` — all packable libraries. Subdirectories match the project list above. Theme XAML lives under each library's `Styles/` folder (e.g. `src/library/Uno.Material/Styles/{Application,Controls}/{v1,v2,Common}/`, `src/library/Uno.Cupertino/Styles/{Application,Controls}/`, `src/library/Uno.Simple.WinUI/Styles/`). The base `src/library/Uno.Themes/Styles/Applications/Common/` holds shared color/typography palettes (`SharedColorPalette.xaml`, `SharedColors.xaml`, `SharedTypography.xaml`, `Converters.xaml`).
 - `src/library/xamlmerge.targets` — pulls in `Uno.XamlMerge.Task`. Each library's `*-common.props` declares `XamlMergeInput` items; the task merges them into `mergedpages.xaml` (Material splits into `mergedpages.v1.xaml` / `mergedpages.v2.xaml`). **Do not hand-edit anything generated under `obj/` or referenced via the merged dictionary.**
 - `src/samples/` — runnable sample apps and the shared sample project:
   - `src/samples/SamplesApp.Shared/` — shared project (`.shproj` / `.projitems`) holding the sample UI, `Shell.xaml`, content pages, view models, helpers.
@@ -34,6 +34,7 @@ There is **no separate runtime-tests project** — runtime tests live inside the
 ## Target frameworks and platform builds
 
 Target frameworks are managed centrally:
+
 - `src/library/tfm-common-winui.props` expands library projects to `net9.0` plus per-platform suffixes (`net9.0-ios`, `net9.0-android`, `net9.0-windows10.0.19041`, `net9.0-maccatalyst`) based on `TargetFrameworkOverride` and the `Build_iOS` / `Build_Android` / `Build_Windows` switches.
 - Each sample csproj declares its own `net10.0-*` set directly (see `MaterialSampleApp.csproj`, `CupertinoSampleApp.csproj`, `SimpleSampleApp.csproj`). Without an override, samples target `net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop`.
 - The Uno SDK version is pinned in `global.json` at the repo root and in `src/samples/global.json` (`Uno.Sdk` and `Uno.Sdk.Private` — keep these in sync).
@@ -45,18 +46,21 @@ The top-level `Directory.Build.props` exposes `Build_Android`, `Build_iOS`, `Bui
 <flow_orchestration>
 
 ### 1. Plan Node Default
+
 - Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
 - If something goes sideways, STOP and re-plan immediately - don't keep pushing
 - Use plan mode for verification steps, not just building
 - Write detailed specs upfront to reduce ambiguity
 
 ### 2. Subagent Strategy
+
 - Use subagents liberally to keep main context window clean
 - Offload research, exploration, and parallel analysis to subagents
 - For complex problems, throw more compute at it via subagents
 - One tack per subagent for focused execution
 
 ### 3. Self-Improvement Loop
+
 - After ANY correction from the user: update `specs/lessons.md` with the pattern (create the file/folder if it does not yet exist)
 - Write rules for yourself that prevent the same mistake
 - Ruthlessly iterate on these lessons until mistake rate drops
@@ -65,6 +69,7 @@ The top-level `Directory.Build.props` exposes `Build_Android`, `Build_iOS`, `Bui
 #### Where corrections are recorded
 
 User corrections, "do this / never do that" rules, workflow guardrails, and tool-usage policies that should bind **every** agent working on this repo MUST be written to a checked-in, shared file:
+
 - Repo-wide rules → `AGENTS.md` (this file).
 - Skill-specific rules (e.g. how to use a particular tool/MCP) → the relevant `.claude/skills/<skill>/SKILL.md`.
 - Domain lessons / postmortems → `specs/lessons.md`.
@@ -74,6 +79,7 @@ User corrections, "do this / never do that" rules, workflow guardrails, and tool
 When in doubt: if removing the rule would let any other agent on this repo repeat the same mistake, the rule is shared and must be checked in.
 
 ### 4. Verification Before Done
+
 - Never mark a task complete without proving it works
 - Diff behavior between `master` and your changes when relevant
 - Ask yourself: "Would a staff engineer approve this?"
@@ -81,12 +87,14 @@ When in doubt: if removing the rule would let any other agent on this repo repea
 - You MUST assume that for a given branch, the `master` branch is correct and failures are specific to the current branch. You MUST assume that changes in the current branch are the cause of any new failures.
 
 ### 5. Demand Elegance (Balanced)
+
 - For non-trivial changes: pause and ask "is there a more elegant way?"
 - If a fix feels hacky: "Knowing everything I know now, implement the elegant solution"
 - Skip this for simple, obvious fixes - don't over-engineer
 - Challenge your own work before presenting it
 
 ### 6. Autonomous Bug Fixing
+
 - When given a bug report: just fix it. Don't ask for hand-holding
 - Point at logs, errors, failing tests - then resolve them
 - Zero context switching required from the user
@@ -109,7 +117,6 @@ When in doubt: if removing the rule would let any other agent on this repo repea
 
 </flow_orchestration>
 
-
 <coding_directives>
 
 ## 1. Core Engineering Principles
@@ -125,7 +132,7 @@ When in doubt: if removing the rule would let any other agent on this repo repea
 
 ## 2. Performance & Allocations
 
-✅ Minimize allocations in hot paths (theme lookups, brush rebuilds on color override, palette regeneration on seed-color change). Prefer `StringBuilder` for string assembly and avoid LINQ in tight loops where measurement shows it costs.
+✅ Minimize allocations in hot paths (theme lookups, brush rebuilds on color override, palette regeneration on seed-color change). Prefer `StringBuilder` for string assembly and avoid language-integrated queries in tight loops where measurement shows it costs.
 ✅ Use `readonly` on fields and structs where possible.
 ✅ Avoid boxing (watch generics, interpolated logging with value types). The HCT color math under `src/library/Uno.Themes/ColorGeneration/Hct/` runs in tight numeric loops — keep value-type discipline there.
 ✅ Reuse expensive objects (brushes, parsed resources, generated tonal palettes) where the lifecycle allows.
@@ -166,6 +173,7 @@ Formatting and style rules are defined in the repo configuration files below. Tr
 ## 4. Build & Validation
 
 Primary solutions:
+
 - `Uno.Themes.sln` — full development solution (libraries, samples, runtime tests inside samples).
 - `Uno.Themes-packages.slnf` — solution filter for the packable libraries only.
 
@@ -226,7 +234,7 @@ Runtime tests live **inside the Simple sample app** under `src/samples/SimpleSam
 ### Minimum Test Additions Per PR
 
 | Change Type | Required Tests |
-|-------------|----------------|
+| ----------- | -------------- |
 | New theme/palette/converter API | Happy path + 1 edge case (runtime test under `SimpleSampleApp/RuntimeTests/`) |
 | New attached property / extension | Set/clear scenario + a teardown-leak guard if it subscribes to events |
 | Bug fix | Repro test + non‑regression guard |
@@ -414,7 +422,7 @@ Unexplained deviations block merge.
 ## 5. Quick Reference Table
 
 | Area | Rule |
-|------|------|
+| ---- | ---- |
 | Build | No new warnings; suppress with justification only |
 | Tests | New behavior + edge case; runtime tests live in `SimpleSampleApp/RuntimeTests/` |
 | SOLID | All five applied |

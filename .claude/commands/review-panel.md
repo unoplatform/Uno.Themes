@@ -4,6 +4,8 @@ argument-hint: [scope — e.g. HEAD~1, master..HEAD, a PR number, or free-form; 
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git rev-parse:*), Bash(git merge-base:*), Bash(git branch:*), Bash(git ls-files:*), Bash(gh pr view:*), Bash(gh pr diff:*)
 ---
 
+# Review Panel Command
+
 You are orchestrating a three-agent review panel on this repo. Do not do the review yourself — your job is to pin down the scope, dispatch the three reviewer subagents in parallel, then synthesize their findings into one consolidated report.
 
 ## 1. Resolve scope
