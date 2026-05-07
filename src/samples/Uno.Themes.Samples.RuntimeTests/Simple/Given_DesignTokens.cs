@@ -5,7 +5,7 @@ using Uno.Simple;
 using Uno.Themes;
 using Uno.UI.RuntimeTests;
 
-namespace Uno.Themes.Samples.RuntimeTests;
+namespace Uno.Themes.Samples.RuntimeTests.Simple;
 
 /// <summary>
 /// Verifies design token APIs for SimpleTheme: spacing scale, shape scale,

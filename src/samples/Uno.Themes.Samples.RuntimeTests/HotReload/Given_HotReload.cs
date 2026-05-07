@@ -14,10 +14,15 @@ public class Given_HotReload
 	[TestInitialize]
 	public void Setup()
 	{
-		// The themes solution pulls in several design-system libraries; allow a generous
-		// workspace load budget on CI hosts where Roslyn first-load can be slow.
-		HotReloadHelper.DefaultWorkspaceTimeout = TimeSpan.FromSeconds(180);
-		HotReloadHelper.DefaultMetadataUpdateTimeout = TimeSpan.FromSeconds(60);
+		// The dev-server and the secondary app are spawned in parallel by the
+		// runtime-tests engine. On slower CI agents the secondary may attempt its
+		// WebSocket connection before the dev-server has finished binding the port;
+		// that initial failure is not auto-retried by RemoteControlClient, and the
+		// next call times out waiting for the workspace. Lowering the per-call
+		// timeout and retrying inside the test (see below) gives several chances
+		// to win the race within the same overall budget.
+		HotReloadHelper.DefaultWorkspaceTimeout = TimeSpan.FromSeconds(60);
+		HotReloadHelper.DefaultMetadataUpdateTimeout = TimeSpan.FromSeconds(30);
 	}
 
 	[TestMethod]
@@ -25,13 +30,27 @@ public class Given_HotReload
 	{
 		Assert.AreEqual("original", HotReloadTarget.GetValue());
 
-		await using var _ = await HotReloadHelper.UpdateSourceFile(
-			"HotReload/HotReloadTarget.cs",
-			"""return "original";""",
-			"""return "updated";""",
-			ct);
+		const int maxAttempts = 3;
+		for (var attempt = 1; attempt <= maxAttempts; attempt++)
+		{
+			try
+			{
+				await using var _ = await HotReloadHelper.UpdateSourceFile(
+					"HotReload/HotReloadTarget.cs",
+					"""return "original";""",
+					"""return "updated";""",
+					ct);
 
-		Assert.AreEqual("updated", HotReloadTarget.GetValue());
+				Assert.AreEqual("updated", HotReloadTarget.GetValue());
+				return;
+			}
+			catch (TimeoutException) when (attempt < maxAttempts)
+			{
+				// Brief pause then retry — covers the dev-server startup race described
+				// above without leaking into the assertion failure path.
+				await Task.Delay(TimeSpan.FromSeconds(5), ct);
+			}
+		}
 	}
 }
 #endif

@@ -5,7 +5,7 @@ using Uno.Material;
 using Uno.Themes;
 using Uno.UI.RuntimeTests;
 
-namespace Uno.Themes.Samples.RuntimeTests;
+namespace Uno.Themes.Samples.RuntimeTests.Material;
 
 /// <summary>
 /// Verifies design token APIs for MaterialTheme: spacing scale, shape scale,
