@@ -70,6 +70,14 @@
       via [InternalsVisibleTo] (see Uno.Themes.Samples.RuntimeTests.csproj).
     -->
     <PackageReference Include="MSTest.TestFramework" />
+    <!--
+      Uno.Sdk.Private 6.5.153 brings Uno.WinUI.DevServer 6.5.153 as an implicit package.
+      Uno.UI.RuntimeTests.Engine 2.0.0-dev.79 needs >= 6.5.183 for the HR baseline-emit
+      protocol (without it, dev-server returns "Found 0 metadata updates" on every edit).
+      Override to 6.5.229 (latest 6.5 stable) without bumping Uno.Sdk.Private itself.
+      Debug-only: Release builds explicitly exclude DevServer (Optimize=true).
+    -->
+    <PackageReference Include="Uno.WinUI.DevServer" VersionOverride="6.5.229" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
   </ItemGroup>
 
   <ItemGroup>

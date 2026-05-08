@@ -14,7 +14,15 @@
     <PackageVersion Include="Uno.ShowMeTheXAML.MSBuild" Version="2.0.0-dev0015" />
     <PackageVersion Include="Uno.Core.Extensions.Disposables" Version="4.0.1" />
     <PackageVersion Include="Uno.UI.RuntimeTests.Engine" Version="2.0.0-dev.79" />
-    <PackageVersion Include="Uno.WinUI.DevServer" Version="6.5.153" />
+    <!--
+      DevServer pinned ahead of Uno.Sdk.Private's implicit version (6.5.153). The Engine
+      package (2.0.0-dev.79) implements an HR baseline/delta protocol that requires a
+      DevServer >= 6.5.183. With the older 6.5.153 DevServer, the dev-server's Roslyn
+      EnC integration runs but always returns "Found 0 metadata updates" because the
+      baseline-emit step expected by the new Engine isn't implemented. 6.5.229 is the
+      latest 6.5 stable; bumping further would also require Uno.Sdk.Private bump.
+    -->
+    <PackageVersion Include="Uno.WinUI.DevServer" Version="6.5.229" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.6.4" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.2" />
   </ItemGroup>
