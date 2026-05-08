@@ -9,6 +9,17 @@
 		<DisableImplicitFrameworkDefines>false</DisableImplicitFrameworkDefines>
 		<UnoEnableXamlFuzzyMatching>false</UnoEnableXamlFuzzyMatching>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<!--
+		  Disable NuGet vulnerability auditing during MSBuild evaluation.
+		  Uno.WinUI.DevServer's MSBuildWorkspace surfaces NU1903 (transitive vulnerable
+		  package) as a `[Failure]` diagnostic that drops the project from the workspace,
+		  which in turn makes Roslyn EnC unable to compute deltas — the HR runtime test
+		  then sees "Found 0 metadata updates" and times out. The actual vulnerability
+		  is also addressed by overriding the affected package version (see
+		  src/samples/Directory.Packages.props), but disabling the audit defends against
+		  any future transitive that might re-introduce the same MSBuildWorkspace failure.
+		-->
+		<NuGetAudit>false</NuGetAudit>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
