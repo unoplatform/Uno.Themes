@@ -25,5 +25,14 @@
     <PackageVersion Include="Uno.WinUI.DevServer" Version="6.5.229" />
     <PackageVersion Include="MSTest.TestFramework" Version="3.6.4" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="10.0.2" />
+    <!--
+      Override the vulnerable transitive Tmds.DBus.Protocol 0.21.2 (CVE: GHSA-xrw6-gwf8-vvr9)
+      pulled by Uno.WinUI.Runtime.Skia.X11/6.5.153. NuGetAudit reports this as a high-severity
+      warning during normal builds, but Uno.WinUI.DevServer's MSBuildWorkspace (used to host
+      Roslyn EnC for hot-reload) surfaces it as `[Failure]` and the project drops out of the
+      workspace — EnC then has no compilation to compare against and HR returns "Found 0
+      metadata updates" (deterministic on the CI agent's MSBuild evaluator).
+    -->
+    <PackageVersion Include="Tmds.DBus.Protocol" Version="0.92.0" />
   </ItemGroup>
 </Project>
