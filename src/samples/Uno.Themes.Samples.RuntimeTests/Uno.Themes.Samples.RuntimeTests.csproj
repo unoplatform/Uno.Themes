@@ -44,8 +44,16 @@
       Required for hot-reload tests ([RunsInSecondaryApp]) — enables HAS_UNO_DEVSERVER
       in Uno.UI.RuntimeTests.Engine. Debug-only: in Release the DevServer assembly is
       not published and would otherwise cause a FileNotFoundException at app startup.
+
+      VersionOverride is required because Uno.Sdk.Private (6.5.153) ships
+      Uno.WinUI.DevServer 6.5.153 as an implicit package, which is incompatible with
+      the HR baseline-emit protocol expected by Uno.UI.RuntimeTests.Engine 2.0.0-dev.79
+      (manifests as "Found 0 metadata updates" on every edit). 6.5.229 is the latest
+      6.5 stable and matches the Engine's expected protocol surface; CentralPackage
+      pinning alone cannot override an implicit Sdk package, so VersionOverride is
+      needed here.
     -->
-    <PackageReference Include="Uno.WinUI.DevServer" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
+    <PackageReference Include="Uno.WinUI.DevServer" VersionOverride="6.5.229" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
     <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
 
