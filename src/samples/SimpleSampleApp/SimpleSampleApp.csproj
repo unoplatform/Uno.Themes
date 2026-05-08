@@ -58,6 +58,18 @@
   <ItemGroup>
     <PackageReference Include="Uno.ShowMeTheXAML" />
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
+    <!--
+      MSTest.TestFramework is referenced directly so the [TestClass] / [TestMethod]
+      attributes in app-local test files (RuntimeTests/*.cs) resolve at compile time.
+      Uno.UI.RuntimeTests.Engine is intentionally NOT referenced here: it ships as a
+      source-only package (its .targets file <Compile>-includes the .cs sources), so
+      adding it would compile UnitTestsControl & friends into both this assembly AND
+      the central Uno.Themes.Samples.RuntimeTests.dll. The duplicate types collide
+      in BindableTypeProvidersSourceGenerator (CS0152). Instead, the engine sources
+      live only in the central lib, which exposes its internals to this sample app
+      via [InternalsVisibleTo] (see Uno.Themes.Samples.RuntimeTests.csproj).
+    -->
+    <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
 
   <ItemGroup>

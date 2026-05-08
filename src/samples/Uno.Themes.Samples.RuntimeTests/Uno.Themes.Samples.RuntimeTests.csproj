@@ -31,7 +31,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI.RuntimeTests.Engine" />
+    <!--
+      PrivateAssets="all" so Engine sources (this is a source-only package) compile
+      into THIS assembly only and do NOT flow to ProjectReference consumers. Sample
+      apps reference this assembly directly (no Engine PackageReference of their own)
+      so UnitTestsControl & friends exist in exactly one place — preventing the
+      BindableTypeProvidersSourceGenerator from emitting duplicate switch cases for
+      the same type (CS0152).
+    -->
+    <PackageReference Include="Uno.UI.RuntimeTests.Engine" PrivateAssets="all" />
     <!--
       Required for hot-reload tests ([RunsInSecondaryApp]) — enables HAS_UNO_DEVSERVER
       in Uno.UI.RuntimeTests.Engine. Debug-only: in Release the DevServer assembly is
@@ -39,6 +47,18 @@
     -->
     <PackageReference Include="Uno.WinUI.DevServer" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
     <PackageReference Include="MSTest.TestFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Engine sources (UnitTestsControl, UnitTestsUIContentHelper, etc.) are compiled
+      into this assembly. Their `internal` members (e.g. UnitTestsUIContentHelper.Content
+      setter) are needed by app-local tests living in *SampleApp/RuntimeTests/. Expose
+      them through [InternalsVisibleTo].
+    -->
+    <InternalsVisibleTo Include="SimpleSampleApp" />
+    <InternalsVisibleTo Include="MaterialSampleApp" />
+    <InternalsVisibleTo Include="CupertinoSampleApp" />
   </ItemGroup>
 
   <ItemGroup>

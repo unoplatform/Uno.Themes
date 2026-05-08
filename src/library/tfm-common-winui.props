@@ -58,10 +58,15 @@
 	       The HR runtime tests only run on desktop (Linux/Windows headless). No need to
 	       widen to the other flavors and pay the compilation cost.
 
-	     `TreatAsLocalProperty="TargetFramework;TargetFrameworks;RuntimeIdentifier"` stays
-	     on each WinUI lib's <Project> (see csproj) as a belt-and-braces measure: the
-	     attribute lets the lib neutralise any incoherent global property the dev-server
-	     might propagate (RuntimeIdentifier in particular).
+	     We deliberately do NOT use `TreatAsLocalProperty` here: under MSBuildWorkspace
+	     (the dev-server's project loader), `TreatAsLocalProperty="TargetFrameworks"`
+	     makes the lib re-expand to its full multi-TFM set even when the dev-server
+	     pinned a single TFM globally. The workspace then evaluates the same csproj
+	     once per TFM and emits `Found project with the same file path and output path
+	     as another project` warnings — Roslyn ends up with a confused project graph
+	     and `WatchHotReloadService.EmitSolutionUpdateAsync` returns 0 deltas. Letting
+	     the dev-server's global `TargetFrameworks=net10.0-desktop` win means each lib
+	     evaluates as a single TFM in the workspace, which is what EnC needs.
 
 	     This approach replaces the previous "UnoIsHotReloadHost → net9.0" override which
 	     tried to FORCE the lib onto net9.0 against the net10.0 dev-server (the

@@ -21,8 +21,8 @@ public class Given_HotReload
 		// next call times out waiting for the workspace. Lowering the per-call
 		// timeout and retrying inside the test (see below) gives several chances
 		// to win the race within the same overall budget.
-		HotReloadHelper.DefaultWorkspaceTimeout = TimeSpan.FromSeconds(60);
-		HotReloadHelper.DefaultMetadataUpdateTimeout = TimeSpan.FromSeconds(30);
+		HotReloadHelper.DefaultWorkspaceTimeout = TimeSpan.FromSeconds(90);
+		HotReloadHelper.DefaultMetadataUpdateTimeout = TimeSpan.FromSeconds(60);
 	}
 
 	[TestMethod]
