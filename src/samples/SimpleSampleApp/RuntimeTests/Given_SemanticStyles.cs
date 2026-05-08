@@ -19,6 +19,9 @@ public class Given_SemanticStyles
 	private static Grid CreateThemedContainer()
 	{
 		var theme = new SimpleTheme();
+		// Construction-time rebuild is dispatcher-deferred for coalescing; flush it
+		// so the synchronous resource queries below see the fully-populated theme.
+		theme.EnsureInitialized();
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
 		return container;
@@ -145,7 +148,9 @@ public class Given_SemanticStyles
 
 		// Sibling A: has overridden FilledButtonBackground
 		var overriddenContainer = new Grid();
-		overriddenContainer.Resources.MergedDictionaries.Add(new SimpleTheme());
+		var overriddenTheme = new SimpleTheme();
+		overriddenTheme.EnsureInitialized();
+		overriddenContainer.Resources.MergedDictionaries.Add(overriddenTheme);
 		overriddenContainer.Resources["FilledButtonBackground"] = new SolidColorBrush(overrideColor);
 		var overriddenButton = new Button
 		{
@@ -156,7 +161,9 @@ public class Given_SemanticStyles
 
 		// Sibling B: default theme colors (no override)
 		var defaultContainer = new Grid();
-		defaultContainer.Resources.MergedDictionaries.Add(new SimpleTheme());
+		var defaultTheme = new SimpleTheme();
+		defaultTheme.EnsureInitialized();
+		defaultContainer.Resources.MergedDictionaries.Add(defaultTheme);
 		var defaultButton = new Button
 		{
 			Content = "Default",

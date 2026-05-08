@@ -19,13 +19,14 @@ public sealed partial class SeedColorSamplePage : Page
 		SeedColorPicker.Color = _lastSeed;
 		ApplySeedColor(_lastSeed);
 
-		// UpdateSeedColors() only patches brushes visible in the active theme.
-		// On theme switch, pulse the seed to force a full rebuild so the
-		// now-active theme gets the correct seed-derived colors.
+		// Seed changes go through BaseTheme.UpdateSource which rebuilds the full
+		// resource tree, so a single set is enough on theme switch — but pulsing
+		// to null and back is kept as a defensive nudge in case any cached brushes
+		// missed the rebuild on this platform.
 		this.ActualThemeChanged += (s, e) =>
 		{
-			SemanticThemeHelper.PrimarySeed = null;
-			SemanticThemeHelper.PrimarySeed = _lastSeed;
+			SemanticThemeHelper.PrimarySeedColor = null;
+			SemanticThemeHelper.PrimarySeedColor = _lastSeed;
 		};
 	}
 
@@ -37,7 +38,7 @@ public sealed partial class SeedColorSamplePage : Page
 	private void ApplySeedColor(Color seed)
 	{
 		_lastSeed = seed;
-		SemanticThemeHelper.PrimarySeed = seed;
+		SemanticThemeHelper.PrimarySeedColor = seed;
 
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
 
@@ -45,7 +46,7 @@ public sealed partial class SeedColorSamplePage : Page
 		SeedHex.Text = $"#{seed.R:X2}{seed.G:X2}{seed.B:X2}";
 		SeedHctText.Text = $"H:{hct.Hue:F0}  C:{hct.Chroma:F0}  T:{hct.Tone:F0}";
 
-		XamlSnippet.Text = $"<MaterialTheme>\n  <MaterialTheme.Colors>\n    <ThemeColors PrimarySeed=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\" />\n  </MaterialTheme.Colors>\n</MaterialTheme>";
+		XamlSnippet.Text = $"<MaterialTheme PrimarySeedColor=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\" />";
 	}
 
 	private static int ColorToArgb(Color c) => (c.A << 24) | (c.R << 16) | (c.G << 8) | c.B;

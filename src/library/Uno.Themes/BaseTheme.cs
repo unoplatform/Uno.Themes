@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Uno.Themes.ColorGeneration;
-
-
-#if WinUI
-using Microsoft.UI;
+using System;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media;
+using Uno.Themes.ColorGeneration;
 using Windows.UI;
-#else
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
-#endif
 
 
 namespace Uno.Themes;
@@ -37,11 +25,16 @@ public enum Density
 
 public abstract partial class BaseTheme : ResourceDictionary
 {
-	private bool _isUpdatingColorOverrides;
 	private bool _isFontOverrideMuted;
-	private ResourceDictionary _baseColorOverride;
-	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _originalBrushes;
-	private bool _isInResourceTree;
+	private bool _updatePending;
+
+	/// <summary>
+	/// Number of times this theme has rebuilt its resource dictionaries via
+	/// <see cref="UpdateSource"/>. Exposed for diagnostics and tests that
+	/// verify rebuild coalescing during XAML-style initialization.
+	/// </summary>
+	internal int RebuildCount { get; private set; }
+
 	#region FontOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -72,10 +65,9 @@ public abstract partial class BaseTheme : ResourceDictionary
 	#region ColorOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
-	/// of a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
+	/// of a <see cref="ResourceDictionary"/> containing overrides for the default <see cref="Color"/> resources.
 	/// </summary>
-	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
-	[Obsolete("Use Colors.OverrideSource on ThemeColors instead. This property will be removed in a future version.")]
+	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by the theme, not the <see cref="SolidColorBrush"/> resources.</remarks>
 	public string ColorOverrideSource
 	{
 		get => (string)GetValue(ColorOverrideSourceProperty);
@@ -93,24 +85,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
-			try
+			if (e.NewValue is string sourceUri && !string.IsNullOrWhiteSpace(sourceUri))
 			{
-				theme._isUpdatingColorOverrides = true;
-				if (e.NewValue is string sourceUri)
-				{
-					var tc = theme.EnsureColors();
-					tc.OverrideSource = sourceUri;
-				}
-				else if (theme.Colors is { } tc)
-				{
-					tc.OverrideDictionary = null;
-				}
-
-				theme.UpdateSource();
+				theme.ColorOverrideDictionary = new ResourceDictionary { Source = new Uri(sourceUri) };
 			}
-			finally
+			else
 			{
-				theme._isUpdatingColorOverrides = false;
+				theme.ColorOverrideDictionary = null;
 			}
 		}
 	}
@@ -137,17 +118,17 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme { _isFontOverrideMuted: false } theme)
 		{
-			theme.UpdateSource();
+			theme.RebuildIfNotPending();
 		}
 	}
 	#endregion
 
 	#region ColorOverrideDictionary (DP)
 	/// <summary>
-	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing overrides for the default Uno.Material <see cref="Color"/> resources
+	/// (Optional) Gets or sets a <see cref="ResourceDictionary"/> containing direct overrides for the default
+	/// <see cref="Color"/> resources. These take highest precedence, overriding both defaults and seed-generated colors.
 	/// </summary>
-	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by Uno.Material, not the <see cref="SolidColorBrush"/> resources</remarks>
-	[Obsolete("Use Colors.OverrideDictionary on ThemeColors instead. This property will be removed in a future version.")]
+	/// <remarks>The overrides set here should be re-defining the <see cref="Color"/> resources used by the theme, not the <see cref="SolidColorBrush"/> resources.</remarks>
 	public ResourceDictionary ColorOverrideDictionary
 	{
 		get => (ResourceDictionary)GetValue(ColorOverrideDictionaryProperty);
@@ -159,95 +140,73 @@ public abstract partial class BaseTheme : ResourceDictionary
 			nameof(ColorOverrideDictionary),
 			typeof(ResourceDictionary),
 			typeof(BaseTheme),
-			new PropertyMetadata(null, OnColorOverrideChanged));
-
-	private static void OnColorOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-	{
-		if (d is BaseTheme { _isUpdatingColorOverrides: false } theme)
-		{
-			try
-			{
-				theme._isUpdatingColorOverrides = true;
-				if (e.NewValue is ResourceDictionary dict)
-				{
-					var tc = theme.EnsureColors();
-					tc.OverrideDictionary = dict;
-				}
-				else
-				{
-					if (theme.Colors is { } tc)
-					{
-						tc.OverrideDictionary = null;
-					}
-				}
-
-				theme.UpdateSource();
-			}
-			finally
-			{
-				theme._isUpdatingColorOverrides = false;
-			}
-		}
-	}
+			new PropertyMetadata(null, OnSeedOrOverrideChanged));
 	#endregion
 
-	#region Colors (DP)
+	#region PrimarySeedColor (DP)
 	/// <summary>
-	/// Gets or sets a <see cref="ThemeColors"/> object that groups all color-related configuration
-	/// including seed colors, overrides, and the palette generation algorithm.
-	/// This is the recommended way to configure theme colors.
+	/// Gets or sets the primary seed <see cref="Color"/> used to algorithmically generate
+	/// the full color palette. When set, all semantic color roles are derived from this color.
 	/// </summary>
-	public ThemeColors Colors
+	public Color? PrimarySeedColor
 	{
-		get => (ThemeColors)GetValue(ColorsProperty);
-		set => SetValue(ColorsProperty, value);
+		get => (Color?)GetValue(PrimarySeedColorProperty);
+		set => SetValue(PrimarySeedColorProperty, value);
 	}
 
-	public static DependencyProperty ColorsProperty { get; } =
+	public static DependencyProperty PrimarySeedColorProperty { get; } =
 		DependencyProperty.Register(
-			nameof(Colors),
-			typeof(ThemeColors),
+			nameof(PrimarySeedColor),
+			typeof(Color?),
 			typeof(BaseTheme),
-			new PropertyMetadata(null, OnColorsChanged));
+			new PropertyMetadata(null, OnSeedOrOverrideChanged));
+	#endregion
 
-	private static void OnColorsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	#region SecondarySeedColor (DP)
+	/// <summary>
+	/// Gets or sets the secondary seed <see cref="Color"/>. If not set, the Secondary
+	/// palette is auto-derived from <see cref="PrimarySeedColor"/>.
+	/// </summary>
+	public Color? SecondarySeedColor
+	{
+		get => (Color?)GetValue(SecondarySeedColorProperty);
+		set => SetValue(SecondarySeedColorProperty, value);
+	}
+
+	public static DependencyProperty SecondarySeedColorProperty { get; } =
+		DependencyProperty.Register(
+			nameof(SecondarySeedColor),
+			typeof(Color?),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnSeedOrOverrideChanged));
+	#endregion
+
+	#region TertiarySeedColor (DP)
+	/// <summary>
+	/// Gets or sets the tertiary seed <see cref="Color"/>. If not set, the Tertiary
+	/// palette is auto-derived from <see cref="PrimarySeedColor"/>.
+	/// </summary>
+	public Color? TertiarySeedColor
+	{
+		get => (Color?)GetValue(TertiarySeedColorProperty);
+		set => SetValue(TertiarySeedColorProperty, value);
+	}
+
+	public static DependencyProperty TertiarySeedColorProperty { get; } =
+		DependencyProperty.Register(
+			nameof(TertiarySeedColor),
+			typeof(Color?),
+			typeof(BaseTheme),
+			new PropertyMetadata(null, OnSeedOrOverrideChanged));
+	#endregion
+
+	private static void OnSeedOrOverrideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
 		if (d is BaseTheme theme)
 		{
-			if (e.OldValue is ThemeColors old)
-			{
-				old.SetChangedCallback(null);
-			}
-
-			if (e.NewValue is ThemeColors tc)
-			{
-				tc.SetChangedCallback((isStructural) =>
-				{
-					if (theme._isUpdatingColorOverrides)
-					{
-						return;
-					}
-
-					// Seed color changes use the fast path (in-place brush update).
-					// Structural changes (override dictionaries) need a full rebuild.
-					if (isStructural)
-					{
-						theme.UpdateSource();
-					}
-					else
-					{
-						theme.UpdateSeedColors();
-					}
-				});
-			}
-
-			if (!theme._isUpdatingColorOverrides)
-			{
-				theme.UpdateSource();
-			}
+			theme.RebuildIfNotPending();
 		}
 	}
-	#endregion
 
 	#region DefaultCornerRadius (DP)
 	/// <summary>
@@ -275,7 +234,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
-			theme.UpdateSource();
+			theme.RebuildIfNotPending();
 		}
 	}
 	#endregion
@@ -304,7 +263,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
-			theme.UpdateSource();
+			theme.RebuildIfNotPending();
 		}
 	}
 	#endregion
@@ -312,7 +271,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// <summary>
 	/// Gets the default primary seed color for this theme.
 	/// When not <c>null</c>, seed color generation is always active — even
-	/// without an explicit <see cref="ThemeColors.PrimarySeed"/> — so the
+	/// without an explicit <see cref="PrimarySeedColor"/> — so the
 	/// theme uses algorithmically-derived colors by default.
 	/// Override in subclasses to provide a theme-specific default.
 	/// </summary>
@@ -333,16 +292,80 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	public BaseTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	{
+		// Schedule an initial rebuild via the dispatcher. Subsequent DP-changed
+		// callbacks (from XAML property setters or programmatic property
+		// initializers) check the same _updatePending flag and skip — collapsing
+		// the constructor + N property setters into a single UpdateSource() call.
+		ScheduleInitialUpdate();
+
 		if (colorOverride is { })
 		{
-			_baseColorOverride = colorOverride;
+			ColorOverrideDictionary = colorOverride;
 		}
 
 		if (fontOverride is { })
 		{
 			SetFontOverrideSilently(fontOverride);
 		}
+	}
 
+	/// <summary>
+	/// Forces any pending deferred rebuild to run synchronously. Call this when
+	/// you need to access the theme's resources immediately after construction
+	/// or property assignment — for example, in tests that synchronously query
+	/// merged resources right after adding the theme to a parent dictionary.
+	/// No-op if no rebuild is pending.
+	/// </summary>
+	internal void EnsureInitialized()
+	{
+		if (_updatePending)
+		{
+			RunPendingUpdate();
+		}
+	}
+
+	private void ScheduleInitialUpdate()
+	{
+		if (_updatePending)
+		{
+			return;
+		}
+		_updatePending = true;
+
+		// Use High priority so the rebuild fires before any layout/render work
+		// that would query themed resources from the (still empty) dictionary.
+		if (DispatcherQueue is { } dq && dq.TryEnqueue(DispatcherQueuePriority.High, RunPendingUpdate))
+		{
+			return;
+		}
+
+		// No UI dispatcher available (background thread or some test contexts) —
+		// fall back to running synchronously so the dictionaries are populated
+		// before the constructor returns.
+		RunPendingUpdate();
+	}
+
+	private void RunPendingUpdate()
+	{
+		if (!_updatePending)
+		{
+			return;
+		}
+		_updatePending = false;
+		UpdateSource();
+	}
+
+	private void RebuildIfNotPending()
+	{
+		// While an initial rebuild is queued, every subsequent DP-changed callback
+		// is absorbed by the pending rebuild — it will pick up the new property
+		// value. Once the pending rebuild flushes, runtime DP changes rebuild
+		// synchronously so callers see the updated resources without needing to
+		// pump the dispatcher.
+		if (_updatePending)
+		{
+			return;
+		}
 		UpdateSource();
 	}
 
@@ -359,41 +382,9 @@ public abstract partial class BaseTheme : ResourceDictionary
 		}
 	}
 
-	private ThemeColors EnsureColors()
-	{
-		var colors = Colors;
-		if (colors is null)
-		{
-			colors = new ThemeColors();
-			Colors = colors;
-		}
-		return colors;
-	}
-
 	protected void UpdateSource()
 	{
-		// Only capture brush references after this theme has been added to the app's
-		// resource tree. During XAML init, UpdateSource() is called from the constructor
-		// and DP setters before the theme is in the tree — those calls create transient
-		// brush generations that the UI never resolves to. The brushes that matter are
-		// the ones present when the first runtime change occurs (post-init).
-		if (_originalBrushes == null)
-		{
-			if (!_isInResourceTree)
-			{
-				_isInResourceTree = IsInResourceTree();
-			}
-
-			if (_isInResourceTree && Application.Current?.Resources is { } appRes)
-			{
-				var collected = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
-				CollectBrushes(appRes, null, collected);
-				if (collected.Count > 0)
-				{
-					_originalBrushes = collected;
-				}
-			}
-		}
+		RebuildCount++;
 
 #if !HAS_UNO
 		Source = null;
@@ -405,19 +396,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 		var converters = new ResourceDictionary { Source = new Uri(ThemesConstants.ConverterResourcePath) };
 		var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 
-		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+		// Theme-specific default fallback palette (Material's M3 defaults, Simple's
+		// grayscale palette, etc.). Always merged first so that seed-generated and
+		// user-override colors take precedence.
+		colors.MergedDictionaries.Add(GetDefaultColorPalette());
 
-		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
-		// before the seed so that seed-generated colors take precedence.
-		if (_baseColorOverride is { } baseColorOverride)
-		{
-			colors.SafeMerge(baseColorOverride);
-		}
-
-		// Resolve seed colors from Colors property, falling back to theme default
-		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-		var effectiveSecondary = Colors?.SecondarySeed;
-		var effectiveTertiary = Colors?.TertiarySeed;
+		// Resolve seed colors, falling back to theme default for the primary
+		var effectivePrimary = PrimarySeedColor ?? DefaultPrimarySeed;
+		var effectiveSecondary = SecondarySeedColor;
+		var effectiveTertiary = TertiarySeedColor;
 
 		if (effectivePrimary is { } seed)
 		{
@@ -425,10 +412,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 			colors.SafeMerge(seedPalette);
 		}
 
-		// Explicit user overrides from Colors.OverrideDictionary take highest precedence
-		if (Colors?.OverrideDictionary is { } userOverride)
+		// Explicit user overrides from ColorOverrideDictionary take highest precedence
+		if (ColorOverrideDictionary is { } userOverride)
 		{
-			colors.SafeMerge(userOverride);
+			colors.MergedDictionaries.Add(userOverride);
 		}
 
 		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
@@ -449,45 +436,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 		MergedDictionaries.Add(shape);
 		MergedDictionaries.Add(density);
 		MergedDictionaries.Add(mergedPages);
-
-		// Track new brush instances created by the rebuild so that UI elements
-		// that resolve {ThemeResource} after this point also get updated.
-		if (_originalBrushes is not null)
-		{
-			var existingBrushes = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
-			var newInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
-			CollectBrushes(this, null, newInstances);
-			foreach (var entry in newInstances)
-			{
-				if (existingBrushes.Add(entry.brush))
-				{
-					_originalBrushes.Add(entry);
-				}
-			}
-		}
-
-		// Also capture from the full app resource tree (catches instances resolved
-		// by UI elements via {ThemeResource} that aren't in the BaseTheme itself).
-		if (_originalBrushes is not null && Application.Current?.Resources is { } appRes2)
-		{
-			var existingBrushes2 = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
-			var appInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
-			CollectBrushes(appRes2, null, appInstances);
-			foreach (var entry in appInstances)
-			{
-				if (existingBrushes2.Add(entry.brush))
-				{
-					_originalBrushes.Add(entry);
-				}
-			}
-		}
-
-		// Update the original brush instances (held by UI elements) with new color values.
-		if (_originalBrushes is { Count: > 0 })
-		{
-			UpdateOldBrushes(_originalBrushes, colors);
-		}
 	}
 
 	protected abstract ResourceDictionary GenerateSpecificResources();
+
+	/// <summary>
+	/// Provides the theme's fallback <see cref="ResourceDictionary"/> of default
+	/// <see cref="Color"/> resources. This palette is loaded as the baseline before
+	/// seed-generated and user-override colors are merged, so any color role that is
+	/// not produced by seed generation (e.g. <c>ErrorColor</c>) falls back to it.
+	/// </summary>
+	protected abstract ResourceDictionary GetDefaultColorPalette();
 }

@@ -16,7 +16,7 @@ namespace Uno.Themes.Samples.RuntimeTests;
 /// Architecture note: SharedColors.xaml defines brushes via
 ///   <c>&lt;SolidColorBrush Color="{StaticResource PrimaryColor}" /&gt;</c>
 /// which is a one-time resolution. Overriding PrimaryColor in the
-/// OverrideDictionary correctly updates the Color resource, but the
+/// ColorOverrideDictionary correctly updates the Color resource, but the
 /// already-constructed brush retains its original color.
 /// To override the rendered brush, include PrimaryBrush in the override dict.
 /// </summary>
@@ -63,12 +63,12 @@ public class Given_ColorOverridePrecedence
 			overrideDict.ThemeDictionaries[themeKey] = themed;
 		}
 
-		var theme = new SimpleTheme();
-		theme.Colors = new ThemeColors
+		var theme = new SimpleTheme
 		{
-			PrimarySeed = SeedPurple,
-			OverrideDictionary = overrideDict,
+			PrimarySeedColor = SeedPurple,
+			ColorOverrideDictionary = overrideDict,
 		};
+		theme.EnsureInitialized();
 
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
@@ -91,12 +91,12 @@ public class Given_ColorOverridePrecedence
 	{
 		var overrideDict = CreateColorAndBrushOverride("PrimaryColor", "PrimaryBrush", OverrideBlue);
 
-		var theme = new SimpleTheme();
-		theme.Colors = new ThemeColors
+		var theme = new SimpleTheme
 		{
-			PrimarySeed = SeedPurple,
-			OverrideDictionary = overrideDict,
+			PrimarySeedColor = SeedPurple,
+			ColorOverrideDictionary = overrideDict,
 		};
+		theme.EnsureInitialized();
 
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
@@ -117,38 +117,5 @@ public class Given_ColorOverridePrecedence
 		Assert.AreEqual(OverrideBlue, bg.Color,
 			$"Expected override color #{OverrideBlue} but got #{bg.Color}. " +
 			"Seed-generated colors are bleeding through the override.");
-	}
-
-	[TestMethod]
-	[RunsOnUIThread]
-	public async Task When_OverrideSetViaDeprecatedColorOverrideDictionary_Then_OverrideWins()
-	{
-		var overrideDict = CreateColorAndBrushOverride("PrimaryColor", "PrimaryBrush", OverrideBlue);
-
-		var theme = new SimpleTheme();
-		theme.Colors = new ThemeColors { PrimarySeed = SeedPurple };
-#pragma warning disable CS0618 // Testing deprecated API path
-		theme.ColorOverrideDictionary = overrideDict;
-#pragma warning restore CS0618
-
-		var container = new Grid();
-		container.Resources.MergedDictionaries.Add(theme);
-
-		var style = container.Resources["FilledButtonStyle"] as Style;
-		Assert.IsNotNull(style, "FilledButtonStyle should resolve from theme");
-
-		var button = new Button { Content = "Test", Style = style };
-		container.Children.Add(button);
-
-		UnitTestsUIContentHelper.Content = container;
-		await UnitTestsUIContentHelper.WaitForLoaded(button);
-		await UnitTestsUIContentHelper.WaitForIdle();
-
-		var bg = button.Background as SolidColorBrush;
-		Assert.IsNotNull(bg, "Button should have a SolidColorBrush Background");
-
-		Assert.AreEqual(OverrideBlue, bg.Color,
-			$"Expected override color #{OverrideBlue} but got #{bg.Color}. " +
-			"ColorOverrideDictionary path is not taking precedence over seed colors.");
 	}
 }

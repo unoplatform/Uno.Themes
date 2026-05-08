@@ -12,7 +12,7 @@ using Windows.UI.Xaml;
 namespace Uno.Themes;
 
 /// <summary>
-/// Provides static helpers for runtime theme configuration via <see cref="ThemeColors"/>.
+/// Provides static helpers for runtime theme configuration.
 /// </summary>
 public static class SemanticThemeHelper
 {
@@ -28,44 +28,35 @@ public static class SemanticThemeHelper
 	/// Setting this regenerates the full color palette at runtime.
 	/// </summary>
 	/// <exception cref="InvalidOperationException">No <see cref="BaseTheme"/> found in application resources.</exception>
-	public static Color? PrimarySeed
+	public static Color? PrimarySeedColor
 	{
-		get => GetColorsOrThrow().PrimarySeed;
-		set => GetColorsOrThrow().PrimarySeed = value;
+		get => GetThemeOrThrow().PrimarySeedColor;
+		set => GetThemeOrThrow().PrimarySeedColor = value;
 	}
 
 	/// <summary>
 	/// Gets or sets the secondary seed color on the active theme.
-	/// If <c>null</c>, the secondary palette is auto-derived from <see cref="PrimarySeed"/>.
+	/// If <c>null</c>, the secondary palette is auto-derived from <see cref="PrimarySeedColor"/>.
 	/// </summary>
 	/// <exception cref="InvalidOperationException">No <see cref="BaseTheme"/> found in application resources.</exception>
-	public static Color? SecondarySeed
+	public static Color? SecondarySeedColor
 	{
-		get => GetColorsOrThrow().SecondarySeed;
-		set => GetColorsOrThrow().SecondarySeed = value;
+		get => GetThemeOrThrow().SecondarySeedColor;
+		set => GetThemeOrThrow().SecondarySeedColor = value;
 	}
 
 	/// <summary>
 	/// Gets or sets the tertiary seed color on the active theme.
-	/// If <c>null</c>, the tertiary palette is auto-derived from <see cref="PrimarySeed"/>.
+	/// If <c>null</c>, the tertiary palette is auto-derived from <see cref="PrimarySeedColor"/>.
 	/// </summary>
 	/// <exception cref="InvalidOperationException">No <see cref="BaseTheme"/> found in application resources.</exception>
-	public static Color? TertiarySeed
+	public static Color? TertiarySeedColor
 	{
-		get => GetColorsOrThrow().TertiarySeed;
-		set => GetColorsOrThrow().TertiarySeed = value;
+		get => GetThemeOrThrow().TertiarySeedColor;
+		set => GetThemeOrThrow().TertiarySeedColor = value;
 	}
 
-	private static ThemeColors GetColorsOrThrow()
-	{
-		var theme = GetTheme() ?? throw new InvalidOperationException(
+	private static BaseTheme GetThemeOrThrow() =>
+		GetTheme() ?? throw new InvalidOperationException(
 			"No BaseTheme (MaterialTheme, SimpleTheme, etc.) found in Application.Current.Resources.MergedDictionaries.");
-
-		if (theme.Colors is null)
-		{
-			theme.Colors = new ThemeColors();
-		}
-
-		return theme.Colors;
-	}
 }
