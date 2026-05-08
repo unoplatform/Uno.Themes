@@ -20,6 +20,7 @@ internal static class MaterialConstants
 
 		public static class Version2
 		{
+			public static string ColorPalette = $"ms-appx:///{PackageName}/Styles/Application/v2/ColorPalette.xaml";
 			public static string Typography = $"ms-appx:///{PackageName}/Styles/Application/v2/MaterialFonts.xaml";
 			public static string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.v2.xaml";
 		}

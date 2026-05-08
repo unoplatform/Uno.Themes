@@ -15,12 +15,11 @@ namespace Uno.Simple;
 /// <summary>
 /// Simple Theme resources including colors, fonts, layout values, and styles.
 /// </summary>
-public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
-	: BaseTheme(GetSimpleColorOverride(colorOverride), fontOverride)
+public class SimpleTheme : BaseTheme
 {
 	/// <summary>
 	/// Simple uses a hand-crafted grayscale palette by default (no seed).
-	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, high-fidelity
+	/// When a user explicitly sets <see cref="BaseTheme.PrimarySeedColor"/>, high-fidelity
 	/// mode preserves the source chroma so low-chroma seeds stay neutral
 	/// instead of being boosted by the M3 minimum-chroma floor.
 	/// </summary>
@@ -34,18 +33,13 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	{
 	}
 
-	private static ResourceDictionary GetSimpleColorOverride(ResourceDictionary colorOverride)
+	public SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
+		: base(colorOverride, fontOverride)
 	{
-		// Load the Simple color palette (overrides the default SharedColorPalette values)
-		var simpleColors = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.ColorPalette) };
-
-		if (colorOverride is { })
-		{
-			simpleColors.SafeMerge(colorOverride);
-		}
-
-		return simpleColors;
 	}
+
+	protected override ResourceDictionary GetDefaultColorPalette() =>
+		new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.ColorPalette) };
 
 	protected override ResourceDictionary GenerateSpecificResources()
 	{

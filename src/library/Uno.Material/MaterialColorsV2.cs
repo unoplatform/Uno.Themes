@@ -58,7 +58,7 @@ public partial class MaterialColorsV2 : ResourceDictionary
 	{
 		Source = new Uri(ThemesConstants.SharedColorsResourcePath);
 
-		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+		MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(MaterialConstants.ResourcePaths.Version2.ColorPalette) });
 		if (ColorPaletteOverride is { } colorOverride)
 		{
 			this.SafeMerge(colorOverride);
