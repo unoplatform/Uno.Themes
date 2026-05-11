@@ -23,7 +23,7 @@ public class MaterialTheme : BaseTheme
 {
 	/// <summary>
 	/// Default primary seed color that generates the standard Material color palette.
-	/// When no explicit <see cref="ThemeColors.PrimarySeed"/> is set, this seed is
+	/// When no explicit <see cref="BaseTheme.PrimarySeedColor"/> is set, this seed is
 	/// used so that seed color generation is always active.
 	/// </summary>
 	protected override Color? DefaultPrimarySeed { get; } = Color.FromArgb(0xFF, 0x59, 0x46, 0xD2);
@@ -48,4 +48,7 @@ public class MaterialTheme : BaseTheme
 		mergedPages.MergedDictionaries.Add(fonts);
 		return mergedPages;
 	}
+
+	protected override ResourceDictionary GetDefaultColorPalette() =>
+		new ResourceDictionary { Source = new Uri(MaterialConstants.ResourcePaths.Version2.ColorPalette) };
 }
