@@ -25,7 +25,7 @@ Uno Simple is enabled through the `SimpleTheme` UnoFeatures and lets you apply S
 2. Create a new application with:
 
     ```bash
-    dotnet new unoapp -o UnoSimpleApp -theme simpletheme
+    dotnet new unoapp -o UnoSimpleApp -theme simple
     ```
 
 ### Installing Uno Simple in an existing project
