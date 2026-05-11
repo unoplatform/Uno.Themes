@@ -5,6 +5,17 @@ IFS=$'\n\t'
 
 export DOTNET_MODIFIABLE_ASSEMBLIES=debug
 
+# Hot-reload diagnostic logging: lift the default log level to Trace so the
+# DevServer's ServerHotReloadProcessor surfaces "Original content of '...'",
+# "Updated content of '...'" and "Write content of '...'" — we need those to
+# tell whether the workspace's view of HotReloadTarget.cs matches the request
+# the test sends. Investigating "Found 0 metadata updates" reproducing only
+# on the CI agent (cannot be reproduced locally, even on SDK 10.0.102).
+# Bash does NOT pass env-var names with dots through to child processes
+# reliably, so per-category overrides (Logging__LogLevel__Foo.Bar=Trace) are
+# silently dropped; raising Default is the only knob that works on Linux CI.
+export Logging__LogLevel__Default=Trace
+
 # BUILD_CONFIG defaults to Release so the existing Release pipeline keeps working
 # unchanged. The hot-reload stage sets BUILD_CONFIG=Debug (DevServer is Debug-only).
 BUILD_CONFIG="${BUILD_CONFIG:-Release}"
