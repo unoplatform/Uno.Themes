@@ -70,6 +70,7 @@ stages:
   condition: and(succeeded(), ne(dependencies.Determine_Changes.outputs['evaluate_changes.DetermineChanges.docsOnly'], 'true'))
   jobs:
     - template: build/stage-runtimetests-desktop.yml
+    - template: build/stage-runtimetests-hotreload-desktop.yml
 
 ##
 ## Publishing

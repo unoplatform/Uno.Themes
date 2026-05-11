@@ -37,6 +37,10 @@
     <UnoFeatures>
       SkiaRenderer;
     </UnoFeatures>
+
+    <!-- Uno.UI.RuntimeTests.Engine (pulled in transitively via Uno.Themes.Samples.RuntimeTests)
+         still references the legacy DOM-based WebAssembly runtime; bypass the SDK check. -->
+    <UnoDisableValidateNoUnoWasmDOMRuntimeDependency>true</UnoDisableValidateNoUnoWasmDOMRuntimeDependency>
   </PropertyGroup>
 
 
@@ -44,13 +48,33 @@
 
   <ItemGroup>
     <ProjectReference Include="../../library/Uno.Material/Uno.Material.WinUI.csproj" />
+    <!-- Shared runtime-tests library: hosts all [TestClass] definitions so they run in every sample. -->
+    <ProjectReference Include="../Uno.Themes.Samples.RuntimeTests/Uno.Themes.Samples.RuntimeTests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Uno.ShowMeTheXAML" />
     <PackageReference Include="Uno.ShowMeTheXAML.MSBuild" />
-    <PackageReference Include="Uno.UI.RuntimeTests.Engine" />
+    <!--
+      MSTest.TestFramework is referenced directly so the [TestClass] / [TestMethod]
+      attributes in app-local test files (RuntimeTests/*.cs) resolve at compile time.
+      Uno.UI.RuntimeTests.Engine is intentionally NOT referenced here: it ships as a
+      source-only package (its .targets file <Compile>-includes the .cs sources), so
+      adding it would compile UnitTestsControl & friends into both this assembly AND
+      the central Uno.Themes.Samples.RuntimeTests.dll. The duplicate types collide
+      in BindableTypeProvidersSourceGenerator (CS0152). Instead, the engine sources
+      live only in the central lib, which exposes its internals to this sample app
+      via [InternalsVisibleTo] (see Uno.Themes.Samples.RuntimeTests.csproj).
+    -->
     <PackageReference Include="MSTest.TestFramework" />
+    <!--
+      Uno.Sdk.Private 6.5.153 brings Uno.WinUI.DevServer 6.5.153 as an implicit package.
+      Uno.UI.RuntimeTests.Engine 2.0.0-dev.79 needs >= 6.5.183 for the HR baseline-emit
+      protocol (without it, dev-server returns "Found 0 metadata updates" on every edit).
+      Override to 6.5.229 (latest 6.5 stable) without bumping Uno.Sdk.Private itself.
+      Debug-only: Release builds explicitly exclude DevServer (Optimize=true).
+    -->
+    <PackageReference Include="Uno.WinUI.DevServer" VersionOverride="6.5.229" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,8 +1,6 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Simple;
-using Uno.UI.RuntimeTests;
 
-namespace Uno.Themes.Samples.RuntimeTests;
+namespace Uno.Themes.Samples.RuntimeTests.Simple;
 
 /// <summary>
 /// Verifies the semantic abstraction layer: semantic style/resource keys
