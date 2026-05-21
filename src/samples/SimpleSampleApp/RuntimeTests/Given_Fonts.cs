@@ -33,10 +33,10 @@ public class Given_Fonts
 		return null!;
 	}
 
-	// ═══════════════════════════════════════════════════════════════════════
-	// 1. FONT URI — all font family resources must use ms-appx:/// URIs
-	//    pointing to bundled Inter TTF files (not bare "Inter" system name).
-	// ═══════════════════════════════════════════════════════════════════════
+	// ─────────────────────────────────────────────────────────────────────
+	// Font URI: all font family resources must use ms-appx:/// URIs
+	// pointing to bundled Inter TTF files (not bare "Inter" system name).
+	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
@@ -71,7 +71,7 @@ public class Given_Fonts
 		var container = CreateThemedContainer();
 		var fontFamily = GetFontFamily(container, resourceKey);
 
-		// Source should be like "ms-appx:///Uno.Simple.WinUI/Fonts/Inter-*.ttf#Inter"
+		// Source should be like "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-*.ttf#Inter"
 		StringAssert.Contains(
 			fontFamily.Source,
 			"Inter-",
@@ -85,9 +85,9 @@ public class Given_Fonts
 			$"Actual Source: '{fontFamily.Source}'");
 	}
 
-	// ═══════════════════════════════════════════════════════════════════════
-	// 2. WEIGHT MAPPING — each weight slot should use the correct TTF file
-	// ═══════════════════════════════════════════════════════════════════════
+	// ─────────────────────────────────────────────────────────────────────
+	// Weight mapping: each weight slot should use the correct TTF file.
+	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
@@ -108,9 +108,9 @@ public class Given_Fonts
 			$"Actual Source: '{fontFamily.Source}'");
 	}
 
-	// ═══════════════════════════════════════════════════════════════════════
-	// 3. TYPOGRAPHY SCALE — type scale slots must reference bundled fonts
-	// ═══════════════════════════════════════════════════════════════════════
+	// ─────────────────────────────────────────────────────────────────────
+	// Typography scale: type scale slots must reference bundled fonts.
+	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
@@ -138,9 +138,9 @@ public class Given_Fonts
 			$"Actual Source: '{fontFamily.Source}'");
 	}
 
-	// ═══════════════════════════════════════════════════════════════════════
-	// 4. BOLD SLOTS — display/headline bold slots must use Inter-Bold, not Inter-Regular
-	// ═══════════════════════════════════════════════════════════════════════
+	// ─────────────────────────────────────────────────────────────────────
+	// Bold/SemiBold slots: display and headline slots must use the correct weight file.
+	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
