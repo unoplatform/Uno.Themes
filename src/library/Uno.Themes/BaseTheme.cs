@@ -1,5 +1,4 @@
 using System;
-using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Uno.Themes.ColorGeneration;
 using Windows.UI;
@@ -26,12 +25,10 @@ public enum Density
 public abstract partial class BaseTheme : ResourceDictionary
 {
 	private bool _isFontOverrideMuted;
-	private bool _updatePending;
 
 	/// <summary>
 	/// Number of times this theme has rebuilt its resource dictionaries via
-	/// <see cref="UpdateSource"/>. Exposed for diagnostics and tests that
-	/// verify rebuild coalescing during XAML-style initialization.
+	/// <see cref="UpdateSource"/>. Exposed for diagnostics and tests.
 	/// </summary>
 	internal int RebuildCount { get; private set; }
 
@@ -118,7 +115,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme { _isFontOverrideMuted: false } theme)
 		{
-			theme.RebuildIfNotPending();
+			theme.UpdateSource();
 		}
 	}
 	#endregion
@@ -204,7 +201,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
-			theme.RebuildIfNotPending();
+			theme.UpdateSource();
 		}
 	}
 
@@ -234,7 +231,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
-			theme.RebuildIfNotPending();
+			theme.UpdateSource();
 		}
 	}
 	#endregion
@@ -263,7 +260,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
-			theme.RebuildIfNotPending();
+			theme.UpdateSource();
 		}
 	}
 	#endregion
@@ -292,12 +289,6 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	public BaseTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	{
-		// Schedule an initial rebuild via the dispatcher. Subsequent DP-changed
-		// callbacks (from XAML property setters or programmatic property
-		// initializers) check the same _updatePending flag and skip — collapsing
-		// the constructor + N property setters into a single UpdateSource() call.
-		ScheduleInitialUpdate();
-
 		if (colorOverride is { })
 		{
 			ColorOverrideDictionary = colorOverride;
@@ -307,65 +298,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 		{
 			SetFontOverrideSilently(fontOverride);
 		}
-	}
 
-	/// <summary>
-	/// Forces any pending deferred rebuild to run synchronously. Call this when
-	/// you need to access the theme's resources immediately after construction
-	/// or property assignment — for example, in tests that synchronously query
-	/// merged resources right after adding the theme to a parent dictionary.
-	/// No-op if no rebuild is pending.
-	/// </summary>
-	internal void EnsureInitialized()
-	{
-		if (_updatePending)
-		{
-			RunPendingUpdate();
-		}
-	}
-
-	private void ScheduleInitialUpdate()
-	{
-		if (_updatePending)
-		{
-			return;
-		}
-		_updatePending = true;
-
-		// Use High priority so the rebuild fires before any layout/render work
-		// that would query themed resources from the (still empty) dictionary.
-		if (DispatcherQueue is { } dq && dq.TryEnqueue(DispatcherQueuePriority.High, RunPendingUpdate))
-		{
-			return;
-		}
-
-		// No UI dispatcher available (background thread or some test contexts) —
-		// fall back to running synchronously so the dictionaries are populated
-		// before the constructor returns.
-		RunPendingUpdate();
-	}
-
-	private void RunPendingUpdate()
-	{
-		if (!_updatePending)
-		{
-			return;
-		}
-		_updatePending = false;
-		UpdateSource();
-	}
-
-	private void RebuildIfNotPending()
-	{
-		// While an initial rebuild is queued, every subsequent DP-changed callback
-		// is absorbed by the pending rebuild — it will pick up the new property
-		// value. Once the pending rebuild flushes, runtime DP changes rebuild
-		// synchronously so callers see the updated resources without needing to
-		// pump the dispatcher.
-		if (_updatePending)
-		{
-			return;
-		}
+		// Run a synchronous initial rebuild so that {StaticResource …} lookups
+		// against this dictionary resolve correctly from the moment the parser
+		// finishes constructing it. WinUI/Uno's ResourceDictionary does not
+		// expose an IsParsing / EndInit signal we could hook to coalesce the
+		// ctor + N XAML-driven DP setters into one rebuild, so we accept the
+		// cost of rebuilding once per DP set during XAML init.
 		UpdateSource();
 	}
 

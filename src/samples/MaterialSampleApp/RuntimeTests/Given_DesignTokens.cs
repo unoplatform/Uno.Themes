@@ -27,9 +27,6 @@ public class Given_DesignTokens
 			DefaultDensity = density,
 			DefaultCornerRadius = cornerRadius,
 		};
-		// Construction-time rebuild is dispatcher-deferred for coalescing; flush it
-		// so the synchronous resource queries below see the fully-populated theme.
-		theme.EnsureInitialized();
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
 		return (container, theme);
@@ -244,7 +241,6 @@ public class Given_DesignTokens
 	public void When_InvalidDensityEnum_Then_FallsBackToRegular()
 	{
 		var theme = new MaterialTheme { DefaultDensity = (Density)99 };
-		theme.EnsureInitialized();
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
 

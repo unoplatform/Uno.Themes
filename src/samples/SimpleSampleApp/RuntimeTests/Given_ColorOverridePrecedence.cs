@@ -68,7 +68,6 @@ public class Given_ColorOverridePrecedence
 			PrimarySeedColor = SeedPurple,
 			ColorOverrideDictionary = overrideDict,
 		};
-		theme.EnsureInitialized();
 
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
@@ -96,7 +95,6 @@ public class Given_ColorOverridePrecedence
 			PrimarySeedColor = SeedPurple,
 			ColorOverrideDictionary = overrideDict,
 		};
-		theme.EnsureInitialized();
 
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
