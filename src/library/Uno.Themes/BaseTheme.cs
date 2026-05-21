@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+using Uno.Logging;
 using Uno.Themes.ColorGeneration;
 
 
@@ -37,6 +40,14 @@ public enum Density
 
 public abstract partial class BaseTheme : ResourceDictionary
 {
+	// Diagnostic logger for Hot Reload / theme rebuild tracing. All log lines are
+	// prefixed with "[ThemeHR]" so they can be grep'd out of Studio Live feedback
+	// bundles when diagnosing color-override hot reload issues. Cost-gated via
+	// IsEnabled(LogLevel.Information) wherever the structured args do non-trivial work.
+	// Each line includes a GetHashCode() so multiple theme instances (Hot Reload
+	// re-construction) can be disambiguated.
+	private static readonly ILogger _log = typeof(BaseTheme).Log();
+
 	private bool _isUpdatingColorOverrides;
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
@@ -64,6 +75,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme && e.NewValue is string sourceUri)
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation(
+					"[ThemeHR] OnFontOverrideSourceChanged on {ThemeType}#{Hash}: '{OldValue}' -> '{NewValue}'",
+					theme.GetType().Name, theme.GetHashCode(), e.OldValue, sourceUri);
+			}
+
 			theme.FontOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
 		}
 	}
@@ -93,6 +111,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation(
+					"[ThemeHR] OnColorOverrideSourceChanged (deprecated DP) on {ThemeType}#{Hash}: '{OldValue}' -> '{NewValue}'",
+					theme.GetType().Name, theme.GetHashCode(), e.OldValue, e.NewValue);
+			}
+
 			try
 			{
 				theme._isUpdatingColorOverrides = true;
@@ -137,7 +162,23 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme { _isFontOverrideMuted: false } theme)
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation(
+					"[ThemeHR] OnFontOverrideChanged on {ThemeType}#{Hash}: oldCount={OldCount}, newCount={NewCount}",
+					theme.GetType().Name, theme.GetHashCode(),
+					(e.OldValue as ResourceDictionary)?.Count,
+					(e.NewValue as ResourceDictionary)?.Count);
+			}
+
 			theme.UpdateSource();
+		}
+		else if (d is BaseTheme mutedTheme)
+		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation("[ThemeHR] OnFontOverrideChanged on {ThemeType}#{Hash} SUPPRESSED (font-override muted during init)", mutedTheme.GetType().Name, mutedTheme.GetHashCode());
+			}
 		}
 	}
 	#endregion
@@ -165,6 +206,16 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme { _isUpdatingColorOverrides: false } theme)
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation(
+					"[ThemeHR] OnColorOverrideChanged (deprecated DP) on {ThemeType}#{Hash}: oldEntries={OldCount}, newEntries={NewCount}, newThemeDicts={NewThemeDicts}",
+					theme.GetType().Name, theme.GetHashCode(),
+					(e.OldValue as ResourceDictionary)?.Count,
+					(e.NewValue as ResourceDictionary)?.Count,
+					(e.NewValue as ResourceDictionary)?.ThemeDictionaries.Count);
+			}
+
 			try
 			{
 				theme._isUpdatingColorOverrides = true;
@@ -186,6 +237,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 			finally
 			{
 				theme._isUpdatingColorOverrides = false;
+			}
+		}
+		else if (d is BaseTheme mutedTheme)
+		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation("[ThemeHR] OnColorOverrideChanged on {ThemeType}#{Hash} SUPPRESSED (re-entrant via _isUpdatingColorOverrides)", mutedTheme.GetType().Name, mutedTheme.GetHashCode());
 			}
 		}
 	}
@@ -214,6 +272,16 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation(
+					"[ThemeHR] OnColorsChanged on {ThemeType}#{Hash}: oldThemeColors={OldHasValue}, newThemeColors={NewHasValue}, isUpdatingOverrides={IsUpdating}",
+					theme.GetType().Name, theme.GetHashCode(),
+					e.OldValue is ThemeColors,
+					e.NewValue is ThemeColors,
+					theme._isUpdatingColorOverrides);
+			}
+
 			if (e.OldValue is ThemeColors old)
 			{
 				old.SetChangedCallback(null);
@@ -223,6 +291,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 			{
 				tc.SetChangedCallback((isStructural) =>
 				{
+					if (_log.IsEnabled(LogLevel.Information))
+					{
+						_log.LogInformation(
+							"[ThemeHR] ThemeColors callback fired on {ThemeType}#{Hash}: isStructural={IsStructural}, isUpdatingOverrides={IsUpdating}",
+							theme.GetType().Name, theme.GetHashCode(),
+							isStructural,
+							theme._isUpdatingColorOverrides);
+					}
+
 					if (theme._isUpdatingColorOverrides)
 					{
 						return;
@@ -275,6 +352,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation("[ThemeHR] OnDefaultCornerRadiusChanged on {ThemeType}#{Hash}: {OldValue} -> {NewValue}", theme.GetType().Name, theme.GetHashCode(), e.OldValue, e.NewValue);
+			}
+
 			theme.UpdateSource();
 		}
 	}
@@ -304,6 +386,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		if (d is BaseTheme theme)
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation("[ThemeHR] OnDefaultDensityChanged on {ThemeType}#{Hash}: {OldValue} -> {NewValue}", theme.GetType().Name, theme.GetHashCode(), e.OldValue, e.NewValue);
+			}
+
 			theme.UpdateSource();
 		}
 	}
@@ -333,6 +420,17 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	public BaseTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	{
+		if (_log.IsEnabled(LogLevel.Information))
+		{
+			_log.LogInformation(
+				"[ThemeHR] BaseTheme constructed: {ThemeType}#{Hash}, baseColorOverride={HasBaseColorOverride} ({BaseColorEntries} entries), fontOverride={HasFontOverride} ({FontEntries} entries)",
+				GetType().Name, GetHashCode(),
+				colorOverride is not null,
+				colorOverride?.Count,
+				fontOverride is not null,
+				fontOverride?.Count);
+		}
+
 		if (colorOverride is { })
 		{
 			_baseColorOverride = colorOverride;
@@ -372,6 +470,22 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
+		var infoEnabled = _log.IsEnabled(LogLevel.Information);
+		if (infoEnabled)
+		{
+			_log.LogInformation(
+				"[ThemeHR] UpdateSource ENTER on {ThemeType}#{Hash}: isInResourceTree={InTree}, originalBrushes={BrushCount}, baseColorOverride={HasBaseColor}, primarySeed={Seed}, userOverrideEntries={UserOverrideEntries}, userOverrideThemeDicts={UserOverrideThemeDicts}, density={Density}, cornerRadius={Corner}",
+				GetType().Name, GetHashCode(),
+				_isInResourceTree,
+				_originalBrushes?.Count,
+				_baseColorOverride is not null,
+				Colors?.PrimarySeed,
+				Colors?.OverrideDictionary?.Count,
+				Colors?.OverrideDictionary?.ThemeDictionaries.Count,
+				DefaultDensity,
+				DefaultCornerRadius);
+		}
+
 		// Only capture brush references after this theme has been added to the app's
 		// resource tree. During XAML init, UpdateSource() is called from the constructor
 		// and DP setters before the theme is in the tree — those calls create transient
@@ -382,6 +496,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 			if (!_isInResourceTree)
 			{
 				_isInResourceTree = IsInResourceTree();
+				if (infoEnabled)
+				{
+					_log.LogInformation("[ThemeHR] UpdateSource on {ThemeType}#{Hash}: IsInResourceTree probed -> {InTree}", GetType().Name, GetHashCode(), _isInResourceTree);
+				}
 			}
 
 			if (_isInResourceTree && Application.Current?.Resources is { } appRes)
@@ -392,6 +510,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 				{
 					_originalBrushes = collected;
 				}
+
+				if (infoEnabled)
+				{
+					_log.LogInformation("[ThemeHR] UpdateSource on {ThemeType}#{Hash}: initial brush capture from Application.Current.Resources -> {Count}", GetType().Name, GetHashCode(), collected.Count);
+				}
+			}
+			else if (infoEnabled)
+			{
+				_log.LogInformation("[ThemeHR] UpdateSource on {ThemeType}#{Hash}: SKIPPING initial brush capture (inTree={InTree}, hasAppCurrent={HasAppCurrent})", GetType().Name, GetHashCode(), _isInResourceTree, Application.Current is not null);
 			}
 		}
 
@@ -452,6 +579,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 		// Track new brush instances created by the rebuild so that UI elements
 		// that resolve {ThemeResource} after this point also get updated.
+		var addedFromSelf = 0;
 		if (_originalBrushes is not null)
 		{
 			var existingBrushes = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
@@ -462,12 +590,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 				if (existingBrushes.Add(entry.brush))
 				{
 					_originalBrushes.Add(entry);
+					addedFromSelf++;
 				}
 			}
 		}
 
 		// Also capture from the full app resource tree (catches instances resolved
 		// by UI elements via {ThemeResource} that aren't in the BaseTheme itself).
+		var addedFromApp = 0;
 		if (_originalBrushes is not null && Application.Current?.Resources is { } appRes2)
 		{
 			var existingBrushes2 = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
@@ -478,14 +608,38 @@ public abstract partial class BaseTheme : ResourceDictionary
 				if (existingBrushes2.Add(entry.brush))
 				{
 					_originalBrushes.Add(entry);
+					addedFromApp++;
 				}
 			}
+		}
+
+		if (infoEnabled)
+		{
+			_log.LogInformation(
+				"[ThemeHR] UpdateSource on {ThemeType}#{Hash}: post-rebuild brush tracking — added {AddedSelf} from theme tree, {AddedApp} from app resources, total tracked={Total}",
+				GetType().Name, GetHashCode(),
+				addedFromSelf,
+				addedFromApp,
+				_originalBrushes?.Count);
 		}
 
 		// Update the original brush instances (held by UI elements) with new color values.
 		if (_originalBrushes is { Count: > 0 })
 		{
 			UpdateOldBrushes(_originalBrushes, colors);
+			if (infoEnabled)
+			{
+				_log.LogInformation("[ThemeHR] UpdateSource on {ThemeType}#{Hash}: UpdateOldBrushes invoked over {Count} tracked brushes", GetType().Name, GetHashCode(), _originalBrushes.Count);
+			}
+		}
+		else if (infoEnabled)
+		{
+			_log.LogInformation("[ThemeHR] UpdateSource on {ThemeType}#{Hash}: UpdateOldBrushes SKIPPED (no tracked brushes — UI elements will not see color changes)", GetType().Name, GetHashCode());
+		}
+
+		if (infoEnabled)
+		{
+			_log.LogInformation("[ThemeHR] UpdateSource EXIT on {ThemeType}#{Hash}", GetType().Name, GetHashCode());
 		}
 	}
 

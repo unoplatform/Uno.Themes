@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+using Uno.Logging;
 using Uno.Themes.ColorGeneration;
 
 
@@ -30,9 +33,23 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private void UpdateSeedColors()
 	{
+		var infoEnabled = _log.IsEnabled(LogLevel.Information);
+		if (infoEnabled)
+		{
+			_log.LogInformation(
+				"[ThemeHR] UpdateSeedColors ENTER on {ThemeType}#{Hash}: mergedDictCount={MergedCount}, primarySeed={Seed}",
+				GetType().Name, GetHashCode(),
+				MergedDictionaries.Count,
+				Colors?.PrimarySeed);
+		}
+
 		// If the tree hasn't been built yet, do a full rebuild
 		if (MergedDictionaries.Count == 0)
 		{
+			if (infoEnabled)
+			{
+				_log.LogInformation("[ThemeHR] UpdateSeedColors on {ThemeType}#{Hash}: deferring to UpdateSource (tree not built)", GetType().Name, GetHashCode());
+			}
 			UpdateSource();
 			return;
 		}
@@ -44,6 +61,10 @@ public abstract partial class BaseTheme
 		if (effectivePrimary is not { } seed)
 		{
 			// No seed available (no explicit seed and no theme default) — full rebuild
+			if (infoEnabled)
+			{
+				_log.LogInformation("[ThemeHR] UpdateSeedColors on {ThemeType}#{Hash}: no effective seed -> falling back to UpdateSource", GetType().Name, GetHashCode());
+			}
 			UpdateSource();
 			return;
 		}
@@ -59,6 +80,11 @@ public abstract partial class BaseTheme
 		if (Application.Current?.Resources is { } appRes)
 		{
 			UpdateBrushColorsInPlace(appRes, colorsByTheme);
+		}
+
+		if (infoEnabled)
+		{
+			_log.LogInformation("[ThemeHR] UpdateSeedColors EXIT on {ThemeType}#{Hash}", GetType().Name, GetHashCode());
 		}
 	}
 
@@ -95,6 +121,7 @@ public abstract partial class BaseTheme
 		ResourceDictionary dict,
 		Dictionary<string, Color> colorMap)
 	{
+		var updates = 0;
 		foreach (var key in dict.Keys)
 		{
 			if (key is string brushKey
@@ -105,7 +132,13 @@ public abstract partial class BaseTheme
 				&& brush.Color != newColor)
 			{
 				brush.Color = newColor;
+				updates++;
 			}
+		}
+
+		if (updates > 0 && _log.IsEnabled(LogLevel.Information))
+		{
+			_log.LogInformation("[ThemeHR] UpdateBrushEntriesInPlace: patched {Count} brushes (seed fast-path)", updates);
 		}
 	}
 
@@ -165,6 +198,10 @@ public abstract partial class BaseTheme
 		var colorsByTheme = new Dictionary<string, Dictionary<string, Color>>();
 		CollectThemedColors(newColors, colorsByTheme);
 
+		var themedUpdates = 0;
+		var fallbackUpdates = 0;
+		var unresolved = 0;
+
 		foreach (var (themeKey, brushKey, brush) in oldBrushes)
 		{
 			if (!TryGetColorKeyForBrush(brushKey, out var colorKey))
@@ -180,6 +217,7 @@ public abstract partial class BaseTheme
 				if (brush.Color != themedColor)
 				{
 					brush.Color = themedColor;
+					themedUpdates++;
 				}
 			}
 			// Fall back to non-themed colors
@@ -189,8 +227,20 @@ public abstract partial class BaseTheme
 				if (brush.Color != defaultColor)
 				{
 					brush.Color = defaultColor;
+					fallbackUpdates++;
 				}
 			}
+			else
+			{
+				unresolved++;
+			}
+		}
+
+		if (_log.IsEnabled(LogLevel.Information))
+		{
+			_log.LogInformation(
+				"[ThemeHR] UpdateOldBrushes: total={Total}, themedPatches={Themed}, fallbackPatches={Fallback}, unresolved={Unresolved}",
+				oldBrushes.Count, themedUpdates, fallbackUpdates, unresolved);
 		}
 	}
 
@@ -246,8 +296,21 @@ public abstract partial class BaseTheme
 	/// </summary>
 	private bool IsInResourceTree()
 	{
-		if (Application.Current?.Resources is not { } res) return false;
-		return IsReachableFrom(res);
+		if (Application.Current?.Resources is not { } res)
+		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation("[ThemeHR] IsInResourceTree on {ThemeType}#{Hash}: Application.Current.Resources is null -> false", GetType().Name, GetHashCode());
+			}
+			return false;
+		}
+
+		var reachable = IsReachableFrom(res);
+		if (_log.IsEnabled(LogLevel.Information))
+		{
+			_log.LogInformation("[ThemeHR] IsInResourceTree on {ThemeType}#{Hash}: reachable={Reachable}", GetType().Name, GetHashCode(), reachable);
+		}
+		return reachable;
 	}
 
 	private bool IsReachableFrom(ResourceDictionary dict)

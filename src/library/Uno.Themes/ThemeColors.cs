@@ -1,4 +1,7 @@
 using System;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+using Uno.Logging;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -17,6 +20,8 @@ namespace Uno.Themes;
 /// </summary>
 public sealed partial class ThemeColors : DependencyObject
 {
+	private static readonly ILogger _log = typeof(ThemeColors).Log();
+
 	private Action<bool> _onChanged;
 
 	#region PrimarySeed (DP)
@@ -100,6 +105,11 @@ public sealed partial class ThemeColors : DependencyObject
 			return;
 		}
 
+		if (_log.IsEnabled(LogLevel.Information))
+		{
+			_log.LogInformation("[ThemeHR] ThemeColors.OnOverrideSourceChanged on #{Hash}: '{OldValue}' -> '{NewValue}'", tc.GetHashCode(), e.OldValue, e.NewValue);
+		}
+
 		if (e.NewValue is string sourceUri && !string.IsNullOrWhiteSpace(sourceUri))
 		{
 			tc.OverrideDictionary = new ResourceDictionary { Source = new Uri(sourceUri) };
@@ -135,6 +145,25 @@ public sealed partial class ThemeColors : DependencyObject
 		if (d is ThemeColors tc)
 		{
 			bool isStructural = e.Property == OverrideDictionaryProperty;
+
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				// Identify which DP changed so we can tell PrimarySeed / SecondarySeed / OverrideDictionary apart in the logs.
+				string propName;
+				if (e.Property == OverrideDictionaryProperty) propName = nameof(OverrideDictionary);
+				else if (e.Property == PrimarySeedProperty) propName = nameof(PrimarySeed);
+				else if (e.Property == SecondarySeedProperty) propName = nameof(SecondarySeed);
+				else if (e.Property == TertiarySeedProperty) propName = nameof(TertiarySeed);
+				else propName = "Unknown";
+
+				int? newCount = (e.NewValue as ResourceDictionary)?.Count;
+				int? newThemeDicts = (e.NewValue as ResourceDictionary)?.ThemeDictionaries.Count;
+
+				_log.LogInformation(
+					"[ThemeHR] ThemeColors property changed on #{Hash}: {PropertyName}, isStructural={IsStructural}, hasCallback={HasCallback}, newEntries={NewEntries}, newThemeDicts={NewThemeDicts}",
+					tc.GetHashCode(), propName, isStructural, tc._onChanged is not null, newCount, newThemeDicts);
+			}
+
 			tc._onChanged?.Invoke(isStructural);
 		}
 	}

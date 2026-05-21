@@ -1,4 +1,7 @@
 using System;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+using Uno.Logging;
 using Uno.Themes;
 
 
@@ -18,6 +21,8 @@ namespace Uno.Simple;
 public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	: BaseTheme(GetSimpleColorOverride(colorOverride), fontOverride)
 {
+	private static readonly ILogger _log = typeof(SimpleTheme).Log();
+
 	/// <summary>
 	/// Simple uses a hand-crafted grayscale palette by default (no seed).
 	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, high-fidelity
@@ -41,6 +46,10 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 
 		if (colorOverride is { })
 		{
+			if (_log.IsEnabled(LogLevel.Information))
+			{
+				_log.LogInformation("[ThemeHR] SimpleTheme.GetSimpleColorOverride: merging ctor colorOverride ({Count} entries) into Simple palette", colorOverride.Count);
+			}
 			simpleColors.SafeMerge(colorOverride);
 		}
 
@@ -49,6 +58,14 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 
 	protected override ResourceDictionary GenerateSpecificResources()
 	{
+		if (_log.IsEnabled(LogLevel.Information))
+		{
+			_log.LogInformation(
+				"[ThemeHR] SimpleTheme.GenerateSpecificResources on {ThemeType}#{Hash}: fontOverrideEntries={FontOverrideEntries}",
+				GetType().Name, GetHashCode(),
+				FontOverrideDictionary?.Count);
+		}
+
 		var mergedPages = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.MergedPages) };
 
 		var thickness = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Thickness) };
