@@ -344,6 +344,10 @@ public abstract partial class BaseTheme : ResourceDictionary
 		}
 
 		UpdateSource();
+
+#if HAS_UNO
+		BaseThemeHotReloadHandler.Register(this);
+#endif
 	}
 
 	private void SetFontOverrideSilently(ResourceDictionary fontOverride)
