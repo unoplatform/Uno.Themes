@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Uno.Themes.ColorGeneration.Hct;
 
@@ -12,6 +13,7 @@ namespace Uno.Themes.ColorGeneration.Hct;
 /// This combines CAM16 hue and chroma with CIE L* lightness,
 /// matching the Material Color Utilities approach.
 /// </summary>
+[SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "HctColor is a transient computation result; equality is not part of its consumer contract.")]
 public readonly struct HctColor
 {
 	/// <summary>Hue in degrees (0-360).</summary>

@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Static base layer for SimpleTheme. Pulled into mergedpages.xaml by the
+		Uno.XamlMerge task so that a single Source=mergedpages.xaml on BaseTheme
+		brings in every default colour / typography / converter / font / thickness
+		resource the theme needs.
+
+		Order matters: entries listed LATER win at lookup time (MergedDictionaries
+		are searched in reverse). Simple's own palette must appear after the shared
+		palette so its grayscale values override the shared defaults.
+
+		Dynamic and override layers (generated spacing/shape/density scales, the
+		seed palette and consumer-supplied font/colour overrides) are still added
+		programmatically by BaseTheme.UpdateSource so they sit ABOVE this layer.
+	-->
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedColorPalette.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedColors.xaml" />
+
+		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/Common/Fonts.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/Common/Thickness.xaml" />
+
+		<!-- Simple's grayscale palette: listed last so it shadows SharedColorPalette. -->
+		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/ColorPalette.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

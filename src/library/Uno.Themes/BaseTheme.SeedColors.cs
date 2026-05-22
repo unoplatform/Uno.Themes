@@ -110,91 +110,6 @@ public abstract partial class BaseTheme
 	}
 
 	/// <summary>
-	/// Collects all <see cref="SolidColorBrush"/> instances from the resource tree
-	/// before the dictionaries are cleared, so they can be updated in-place afterwards.
-	/// Each brush is tagged with the ThemeDictionary key it came from (e.g. "Light", "Default")
-	/// so it can be updated with the correct theme's color later.
-	/// </summary>
-	private static void CollectBrushes(
-		ResourceDictionary dict,
-		string currentThemeKey,
-		List<(string themeKey, string brushKey, SolidColorBrush brush)> brushes)
-	{
-		foreach (var kvp in dict.ThemeDictionaries)
-		{
-			if (kvp.Value is ResourceDictionary themed)
-			{
-				CollectBrushEntries(themed, kvp.Key as string, brushes);
-			}
-		}
-
-		CollectBrushEntries(dict, currentThemeKey, brushes);
-
-		foreach (var merged in dict.MergedDictionaries)
-		{
-			CollectBrushes(merged, currentThemeKey, brushes);
-		}
-	}
-
-	private static void CollectBrushEntries(
-		ResourceDictionary dict,
-		string themeKey,
-		List<(string themeKey, string brushKey, SolidColorBrush brush)> brushes)
-	{
-		foreach (var key in dict.Keys)
-		{
-			if (key is string brushKey
-				&& brushKey.EndsWith("Brush")
-				&& dict[brushKey] is SolidColorBrush brush
-				&& TryGetColorKeyForBrush(brushKey, out _))
-			{
-				brushes.Add((themeKey, brushKey, brush));
-			}
-		}
-	}
-
-	/// <summary>
-	/// Updates all old brush instances (captured before clearing) with new color values
-	/// from the rebuilt color dictionaries. Each brush is matched to its theme's colors
-	/// using the theme key captured during collection.
-	/// </summary>
-	private static void UpdateOldBrushes(
-		List<(string themeKey, string brushKey, SolidColorBrush brush)> oldBrushes,
-		ResourceDictionary newColors)
-	{
-		var colorsByTheme = new Dictionary<string, Dictionary<string, Color>>();
-		CollectThemedColors(newColors, colorsByTheme);
-
-		foreach (var (themeKey, brushKey, brush) in oldBrushes)
-		{
-			if (!TryGetColorKeyForBrush(brushKey, out var colorKey))
-			{
-				continue;
-			}
-
-			// Look up the color from the same theme dict the brush came from
-			if (themeKey is not null
-				&& colorsByTheme.TryGetValue(themeKey, out var themedMap)
-				&& themedMap.TryGetValue(colorKey, out var themedColor))
-			{
-				if (brush.Color != themedColor)
-				{
-					brush.Color = themedColor;
-				}
-			}
-			// Fall back to non-themed colors
-			else if (colorsByTheme.TryGetValue(string.Empty, out var defaultMap)
-				&& defaultMap.TryGetValue(colorKey, out var defaultColor))
-			{
-				if (brush.Color != defaultColor)
-				{
-					brush.Color = defaultColor;
-				}
-			}
-		}
-	}
-
-	/// <summary>
 	/// Collects color values grouped by ThemeDictionary key.
 	/// Non-themed colors use <see cref="string.Empty"/> as the key.
 	/// </summary>
@@ -237,34 +152,6 @@ public abstract partial class BaseTheme
 				colorMap[k] = c;
 			}
 		}
-	}
-
-	/// <summary>
-	/// Checks whether this theme dictionary is reachable from <see cref="Application.Current.Resources"/>.
-	/// During XAML init the theme is constructed and configured before being added to the tree,
-	/// so this returns false until the XAML parser actually adds it.
-	/// </summary>
-	private bool IsInResourceTree()
-	{
-		if (Application.Current?.Resources is not { } res) return false;
-		return IsReachableFrom(res);
-	}
-
-	private bool IsReachableFrom(ResourceDictionary dict)
-	{
-		if (ReferenceEquals(dict, this)) return true;
-
-		foreach (var merged in dict.MergedDictionaries)
-		{
-			if (IsReachableFrom(merged)) return true;
-		}
-
-		foreach (var themeDict in dict.ThemeDictionaries.Values)
-		{
-			if (themeDict is ResourceDictionary rd && IsReachableFrom(rd)) return true;
-		}
-
-		return false;
 	}
 
 	/// <summary>

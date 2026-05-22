@@ -22,6 +22,33 @@
 
 			<!-- Legacy Simple-specific font family key (points to Regular) -->
 			<FontFamily x:Key="SimpleFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
+
+			<!--
+				Semantic typography slot → weight mapping. Declared here as well as in
+				Typography.xaml because Fonts.xaml is merged after SharedTypography: that ordering
+				makes these win over the shared (Segoe-based) defaults deterministically. The
+				equivalent aliases in Typography.xaml's inline theme dictionaries are resolved
+				against the base layer at parse time and can otherwise fall back to the wrong weight.
+			-->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Default">
 			<!-- Root typeface tokens (cascade to all type scales) -->
@@ -36,6 +63,27 @@
 
 			<!-- Legacy Simple-specific font family key (points to Regular) -->
 			<FontFamily x:Key="SimpleFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
+
+			<!-- See the Light theme block above for why these slot mappings are declared here. -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>

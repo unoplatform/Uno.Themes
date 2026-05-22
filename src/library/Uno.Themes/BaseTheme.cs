@@ -40,8 +40,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 	private bool _isUpdatingColorOverrides;
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
-	private List<(string themeKey, string brushKey, SolidColorBrush brush)> _originalBrushes;
-	private bool _isInResourceTree;
+
+	// Tracks dictionaries appended by UpdateSource() so subsequent rebuilds can remove
+	// just those without touching the URI-backed entries Uno populated via CopyFrom
+	// when Source was set.
+	private readonly List<ResourceDictionary> _dynamicDictionaries = new();
 	#region FontOverrideSource (DP)
 	/// <summary>
 	/// (Optional) Gets or sets a Uniform Resource Identifier (<see cref="Uri"/>) that provides the source location
@@ -333,6 +336,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	public BaseTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	{
+		RegisterInstance(this);
+
 		if (colorOverride is { })
 		{
 			_baseColorOverride = colorOverride;
@@ -343,6 +348,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 			SetFontOverrideSilently(fontOverride);
 		}
 
+		// Set once: triggers CopyFrom to populate MergedDictionaries with the URI-backed
+		// base layer (shared converters/typography/colours plus theme-specific fonts/
+		// thickness/palette). Hot reload of those entries is handled by Uno's own pipeline
+		// — UpdateSource() below only manages the dynamic layers on top.
+		Source = new Uri(DefaultStylesSource);
 		UpdateSource();
 	}
 
@@ -372,122 +382,63 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
-		// Only capture brush references after this theme has been added to the app's
-		// resource tree. During XAML init, UpdateSource() is called from the constructor
-		// and DP setters before the theme is in the tree — those calls create transient
-		// brush generations that the UI never resolves to. The brushes that matter are
-		// the ones present when the first runtime change occurs (post-init).
-		if (_originalBrushes == null)
+		// Remove only the dictionaries we appended in previous calls. The URI-backed
+		// entries Uno populated via CopyFrom when Source was set stay in place; Uno's
+		// own hot-reload pipeline refreshes their content directly.
+		foreach (var d in _dynamicDictionaries)
 		{
-			if (!_isInResourceTree)
-			{
-				_isInResourceTree = IsInResourceTree();
-			}
-
-			if (_isInResourceTree && Application.Current?.Resources is { } appRes)
-			{
-				var collected = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
-				CollectBrushes(appRes, null, collected);
-				if (collected.Count > 0)
-				{
-					_originalBrushes = collected;
-				}
-			}
+			MergedDictionaries.Remove(d);
 		}
+		_dynamicDictionaries.Clear();
 
-#if !HAS_UNO
-		Source = null;
-#endif
-		ThemeDictionaries.Clear();
-		MergedDictionaries.Clear();
-		this.Clear();
+		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
+		AddDynamic(GenerateSpacingScale(baseSpacing));
+		AddDynamic(GenerateShapeScale(DefaultCornerRadius));
+		AddDynamic(GenerateDensityDefaults());
 
-		var converters = new ResourceDictionary { Source = new Uri(ThemesConstants.ConverterResourcePath) };
-		var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
-
-		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
-
-		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
-		// before the seed so that seed-generated colors take precedence.
+		// Constructor-supplied base colour overlay sits above the baked palette but
+		// below the seed and explicit overrides — same precedence the original
+		// _baseColorOverride layer used to occupy.
 		if (_baseColorOverride is { } baseColorOverride)
 		{
-			colors.SafeMerge(baseColorOverride);
+			AddDynamic(baseColorOverride);
 		}
 
-		// Resolve seed colors from Colors property, falling back to theme default
 		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-		var effectiveSecondary = Colors?.SecondarySeed;
-		var effectiveTertiary = Colors?.TertiarySeed;
-
 		if (effectivePrimary is { } seed)
 		{
-			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, UseHighFidelityColors);
-			colors.SafeMerge(seedPalette);
+			AddDynamic(SeedColorPaletteGenerator.Default.Generate(
+				seed, Colors?.SecondarySeed, Colors?.TertiarySeed, UseHighFidelityColors));
 		}
 
-		// Explicit user overrides from Colors.OverrideDictionary take highest precedence
+		// Explicit user overrides take highest precedence. URI-backed override
+		// dictionaries are re-resolved each rebuild so that hot-reload edits to the
+		// underlying XAML file propagate without restart; the in-memory key/value
+		// pairs of the original instance were loaded at init time and would
+		// otherwise be stale.
 		if (Colors?.OverrideDictionary is { } userOverride)
 		{
-			colors.SafeMerge(userOverride);
+			AddDynamic(userOverride.Source is { } src
+				? new ResourceDictionary { Source = src }
+				: userOverride);
 		}
 
-		var typography = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedTypographyResourcePath) };
-
-		// Generate spacing, shape, and density scales from code
-		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
-		var spacing = GenerateSpacingScale(baseSpacing);
-		var shape = GenerateShapeScale(DefaultCornerRadius);
-		var density = GenerateDensityDefaults();
-
-		var mergedPages = GenerateSpecificResources();
-
-		mergedPages.MergedDictionaries.Add(colors);
-		mergedPages.MergedDictionaries.Add(converters);
-
-		MergedDictionaries.Add(typography);
-		MergedDictionaries.Add(spacing);
-		MergedDictionaries.Add(shape);
-		MergedDictionaries.Add(density);
-		MergedDictionaries.Add(mergedPages);
-
-		// Track new brush instances created by the rebuild so that UI elements
-		// that resolve {ThemeResource} after this point also get updated.
-		if (_originalBrushes is not null)
+		if (FontOverrideDictionary is { } fontOverride)
 		{
-			var existingBrushes = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
-			var newInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
-			CollectBrushes(this, null, newInstances);
-			foreach (var entry in newInstances)
-			{
-				if (existingBrushes.Add(entry.brush))
-				{
-					_originalBrushes.Add(entry);
-				}
-			}
-		}
-
-		// Also capture from the full app resource tree (catches instances resolved
-		// by UI elements via {ThemeResource} that aren't in the BaseTheme itself).
-		if (_originalBrushes is not null && Application.Current?.Resources is { } appRes2)
-		{
-			var existingBrushes2 = new HashSet<SolidColorBrush>(_originalBrushes.ConvertAll(e => e.brush));
-			var appInstances = new List<(string themeKey, string brushKey, SolidColorBrush brush)>();
-			CollectBrushes(appRes2, null, appInstances);
-			foreach (var entry in appInstances)
-			{
-				if (existingBrushes2.Add(entry.brush))
-				{
-					_originalBrushes.Add(entry);
-				}
-			}
-		}
-
-		// Update the original brush instances (held by UI elements) with new color values.
-		if (_originalBrushes is { Count: > 0 })
-		{
-			UpdateOldBrushes(_originalBrushes, colors);
+			AddDynamic(fontOverride);
 		}
 	}
 
-	protected abstract ResourceDictionary GenerateSpecificResources();
+	private void AddDynamic(ResourceDictionary dictionary)
+	{
+		MergedDictionaries.Add(dictionary);
+		_dynamicDictionaries.Add(dictionary);
+	}
+
+	/// <summary>
+	/// URI of the merged-pages resource dictionary for this theme. Owns the
+	/// static base layer: control styles plus the design-system's default
+	/// converters, typography, colours, fonts and thickness.
+	/// </summary>
+	protected abstract string DefaultStylesSource { get; }
 }
