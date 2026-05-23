@@ -25,6 +25,7 @@
         "github.copilot-chat",
         "unoplatform.vscode",
         "ms-dotnettools.csdevkit",
+        "ms-dotnettools.vscode-dotnet-runtime",
         "eamodio.gitlens"
       ],
       "settings": {
@@ -61,9 +62,18 @@
     "source=unothemes-claude-config-${devcontainerId},target=/home/developer/.claude,type=volume",
     "source=unothemes-copilot-config-${devcontainerId},target=/home/developer/.copilot,type=volume",
     "source=unothemes-commandhistory-${devcontainerId},target=/commandhistory,type=volume",
-    "source=unothemes-nuget-cache-${devcontainerId},target=/home/developer/.nuget,type=volume",
+    // Shared (not per-devcontainer-id) so rebuilds and multiple checkouts don't
+    // re-download the NuGet cache every time. Targets ~/.nuget/packages specifically
+    // so the rest of ~/.nuget (config / plugins-cache) stays per-container.
+    "source=unothemes-nuget-packages,target=/home/developer/.nuget/packages,type=volume",
     "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
-    "source=${localEnv:HOME}/.local/share/Uno Platform,target=/tmp/uno-platform-host,type=bind,readonly"
+    "source=${localEnv:HOME}/.local/share/Uno Platform,target=/tmp/uno-platform-host,type=bind,readonly",
+    // Dedicated ed25519 keypair for the ssh-wsl-host helper. Mounted at a
+    // non-standard path (NOT ~/.ssh/) so AI agents that naively shell out to
+    // `ssh user@host` won't pick it up — only ssh-wsl-host.sh references it
+    // explicitly via -i. The keypair is provisioned on the WSL host by
+    // initialize-host.sh before the container starts.
+    "source=${localEnv:HOME}/.ssh/unothemes-devcontainer-ed25519,target=/etc/devcontainer-ssh/id_ed25519,type=bind,readonly"
   ],
   "containerEnv": {
     "DEVCONTAINER": "true",
@@ -71,9 +81,11 @@
     "DISPLAY": "${localEnv:DISPLAY::0}",
     "CLAUDE_CONFIG_DIR": "/home/developer/.claude",
     "POWERLEVEL9K_DISABLE_GITSTATUS": "true",
-    "WSL_HOST_WORKSPACE": "${localWorkspaceFolder}"
+    "WSL_HOST_WORKSPACE": "${localWorkspaceFolder}",
+    "WSL_HOST_USER": "${localEnv:USER}",
+    "GH_TOKEN": "${localEnv:GH_TOKEN_READONLY}"
   },
-  "initializeCommand": "mkdir -p \"${HOME}/.local/share/Uno Platform\"",
+  "initializeCommand": "mkdir -p \"${HOME}/.local/share/Uno Platform\" && bash \"${localWorkspaceFolder}/.devcontainer/initialize-host.sh\"",
   "workspaceMount": "source=${localWorkspaceFolder},target=/uno-themes,type=bind,consistency=delegated",
   "workspaceFolder": "/uno-themes",
   "postStartCommand": "bash /uno-themes/.devcontainer/post-start.sh",

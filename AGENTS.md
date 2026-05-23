@@ -71,6 +71,7 @@ The top-level `Directory.Build.props` exposes `Build_Android`, `Build_iOS`, `Bui
 User corrections, "do this / never do that" rules, workflow guardrails, and tool-usage policies that should bind **every** agent working on this repo MUST be written to a checked-in, shared file:
 
 - Repo-wide rules → `AGENTS.md` (this file).
+- Reviewer-agent lenses (what each lane is responsible for, repo-specific findings to flag) → the relevant `.claude/agents/<role>.md` (`architect`, `security`, `skeptic`, `contract`, `quality`, `operability`, `performance`). If a new repo-wide rule lives in `AGENTS.md`, the agent whose lane covers it must also be updated so its review actually enforces the rule.
 - Skill-specific rules (e.g. how to use a particular tool/MCP) → the relevant `.claude/skills/<skill>/SKILL.md`.
 - Domain lessons / postmortems → `specs/lessons.md`.
 
@@ -147,6 +148,7 @@ This repository targets WASM as a first-class platform (sample apps and runtime 
 ✅ **Be allocation-aware in theme code paths.** Rebuilding a tonal palette, regenerating semantic brushes after a color override, or merging style dictionaries can run on every theme change; an extra `ToList()` or repeated string concatenation in a frequently-invoked code path becomes a measurable footprint on WASM.
 ✅ **Release before allocate** when replacing large object graphs (e.g. swapping out a generated palette, replacing a merged resource dictionary). Don't hold the previous instance alongside the replacement longer than necessary.
 ✅ **Watch for leaks via static event subscriptions** on framework elements (color-override listeners, `Application.Resources` change handlers, theme-change subscribers). Unsubscribe in `Unloaded` / disposal paths.
+✅ **Separate stack frames for leak-guard runtime tests.** Local variables prevent GC from collecting the objects they reference. When verifying that a just-released object was actually collected (e.g. an attached-property teardown test), run the GC in a `[MethodImpl(MethodImplOptions.NoInlining)]` method separate from where the strong references were held, and store `WeakReference<T>` trackers as fields, not locals. Otherwise the test silently passes for the wrong reason — or worse, fails intermittently across builds.
 
 ---
 
@@ -307,6 +309,28 @@ The deliverable here is a public NuGet API consumed by external Uno apps. Stabil
 ✅ Prefer returning `Task`/`ValueTask` from async methods so callers can observe exceptions.
 ✅ Fire-and-forget patterns (`_ = SomeAsync()`) **MUST** have a `try/catch` inside the called method.
 
+The framework-handler hot spots in this repo where `async void` is tolerated but must be fully wrapped: `Loaded` / `Unloaded` / `ActualThemeChanged` / `RequestedThemeChanged` / `Application.RequestedThemeChanged` / `DataContextChanged` / `DependencyProperty` property-changed callbacks (PCCs are not strictly event handlers but follow the same crash semantics). PCCs must additionally not throw — exceptions in PCCs corrupt layout state in the consuming app; see §8 on graceful degradation.
+
+---
+
+## 10.bis Events
+
+🚫 **NEVER declare `event Action` or `event Action<T>`**. Always use `EventHandler` or `EventHandler<TEventArgs>`. Raw `Action` / `Func` delegates as event fields bypass the standard `add` / `remove` contract, do not interoperate cleanly across assembly boundaries, and confuse XAML / WinUI tooling and analyzers that expect the canonical event shape. Public events are also part of the API surface — using the non-idiomatic delegate shape locks the contract into a form that is awkward for consumers to handle and harder to evolve.
+
+✅ Correct:
+
+```csharp
+public event EventHandler<MyEventArgs>? SomethingHappened;
+```
+
+🚫 Wrong — every agent must reject this:
+
+```csharp
+public event Action<MyData>? SomethingHappened; // NEVER
+```
+
+If the payload doesn't have a natural args type, declare a small `record` ending in `EventArgs` that derives from `System.EventArgs`.
+
 ---
 
 ## 11. UI / XAML
@@ -432,7 +456,8 @@ Unexplained deviations block merge.
 | API | XML docs on public surface (incl. resource keys); additive change preferred |
 | Constants | Centralize in `*Constants.cs` |
 | Validation | At public entry points; treat consumer overrides as untrusted |
-| Async | Honor cancellation; NEVER produce blocking code |
+| Async | Honor cancellation; NEVER produce blocking code; no `async void` outside framework event handlers (and even then with full-body `try/catch`) |
+| Events | Always `EventHandler<TEventArgs>`; never `event Action` / `event Action<T>` |
 | XAML | Don't edit merged outputs; let `XamlMergeInput` glob pick files up; use `mobile` / `not_mobile` namespaces for platform divergence |
 
 ---

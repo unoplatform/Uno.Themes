@@ -77,4 +77,4 @@ You are not the implementer — don't write the refactor. You are not the skepti
 
 ## Cross-role hand-off
 
-If during review you spot an issue that sits in another reviewer's lane (a specific correctness edge case, a concrete injection sink), don't omit it. Record it briefly as a one-line hand-off at the end of your output under `## Hand-off`, pointing at `file:line` and naming the intended agent (`skeptic` / `security`). Gaps between roles are more dangerous than overlaps.
+If during review you spot an issue that sits in another reviewer's lane (a specific correctness edge case, a concrete injection sink, a contract / resource-key change, a performance hazard, a runtime-resilience gap, a documentation drift), don't omit it. Record it briefly as a one-line hand-off at the end of your output under `## Hand-off`, pointing at `file:line` and naming the intended agent (`skeptic` / `security` / `contract` / `performance` / `operability` / `quality`). Gaps between roles are more dangerous than overlaps.

@@ -23,7 +23,7 @@ DNSMASQ_LISTEN="127.0.0.53"
 if [ -z "${UPSTREAM_DNS:-}" ]; then
   UPSTREAM_DNS=$(grep -m1 '^nameserver' /etc/resolv.conf | awk '{print $2}' || true)
   # Skip loopback (would point back at ourselves after resolv.conf rewrite)
-  if [ -z "$UPSTREAM_DNS" ] || echo "$UPSTREAM_DNS" | grep -qE '^127\.'; then
+  if [ -z "$UPSTREAM_DNS" ] || echo "$UPSTREAM_DNS" | grep -qE '^127\.' || [ "$UPSTREAM_DNS" = "::1" ]; then
     UPSTREAM_DNS="8.8.8.8"
   fi
 fi
@@ -85,8 +85,23 @@ server=/anthropic.com/${UPSTREAM_DNS}
 server=/sentry.io/${UPSTREAM_DNS}
 server=/statsig.com/${UPSTREAM_DNS}
 
-# VS Code (marketplace, extensions, updates)
+# VS Code (marketplace queries, updates)
 server=/visualstudio.com/${UPSTREAM_DNS}
+# VS Code Marketplace extension CDN — VSIX downloads resolve to
+# <publisher>.gallery.vsassets.io and <publisher>.gallerycdn.vsassets.io.
+# Without this, VS Code's first attempt to auto-install devcontainer
+# extensions fails with ENOTFOUND, the recommendation prompt fires for
+# unoplatform.vscode before the retry succeeds.
+server=/vsassets.io/${UPSTREAM_DNS}
+# VS Code Server CDN — used by the remote agent for marketplace queries
+# (main.vscode-cdn.net). Blocked → "getaddrinfo ENOTFOUND" in remoteagent.log
+# during extension manifest fetch.
+server=/vscode-cdn.net/${UPSTREAM_DNS}
+
+# Microsoft connectivity probes used by ms-dotnettools.vscode-dotnet-runtime
+# (the "may be offline (can you connect to www.microsoft.com?)" check) and
+# aka.ms short-URL redirects used by .NET installer scripts.
+server=/www.microsoft.com/${UPSTREAM_DNS}
 
 # Azure Blob Storage — covers ALL *.blob.core.windows.net
 server=/core.windows.net/${UPSTREAM_DNS}
@@ -112,6 +127,11 @@ server=/dotnet.microsoft.com/${UPSTREAM_DNS}
 
 # Microsoft Learn (MCP documentation server)
 server=/learn.microsoft.com/${UPSTREAM_DNS}
+
+# Microsoft package feed (.NET repos — used by apt + dotnet installer scripts)
+# and aka.ms short-URL redirects.
+server=/packages.microsoft.com/${UPSTREAM_DNS}
+server=/aka.ms/${UPSTREAM_DNS}
 
 # Uno domains
 server=/platform.uno/${UPSTREAM_DNS}
@@ -213,6 +233,17 @@ if ! curl --connect-timeout 5 https://default.exp-tas.com >/dev/null 2>&1; then
     exit 1
 else
     echo "  PASS: https://default.exp-tas.com is reachable"
+fi
+
+# VS Code Marketplace extension CDN — required for devcontainer extensions to
+# auto-install on first try (otherwise the recommendation prompt fires).
+# The bare `gallery.vsassets.io` apex has no A record — only publisher-prefixed
+# subdomains do — so probe the actual host VS Code hits for the Uno extension.
+if ! getent hosts unoplatform.gallery.vsassets.io >/dev/null 2>&1; then
+    echo "ERROR: Firewall verification failed — DNS lookup for unoplatform.gallery.vsassets.io failed"
+    exit 1
+else
+    echo "  PASS: unoplatform.gallery.vsassets.io resolves"
 fi
 
 echo ""

@@ -101,7 +101,7 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Ensure non-root user owns /usr/local/share for npm global installs
 RUN mkdir -p /usr/local/share/npm-global && \
-  chown -R ${USERNAME}:${USERNAME} /usr/local/share
+  chown -R ${USERNAME}:${USERNAME} /usr/local/share/npm-global
 
 # Create workspace and config directories
 RUN mkdir -p /uno-themes /home/${USERNAME}/.claude /home/${USERNAME}/.copilot /home/${USERNAME}/.nuget && \
@@ -126,14 +126,15 @@ ENV SHELL=/bin/zsh
 ENV EDITOR=nano
 ENV VISUAL=nano
 
-# npm global prefix — writable by non-root user (matches Anthropic reference)
+# npm global prefix — writable by non-root user
 ENV NPM_CONFIG_PREFIX=/usr/local/share/npm-global
 ENV PATH=$PATH:/usr/local/share/npm-global/bin
 
 # ---------------------------------------------------------------------------
-# Claude Code CLI
+# Claude Code CLI (native installer — installs to ~/.local/bin/claude)
 # ---------------------------------------------------------------------------
-RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
+RUN curl -fsSL https://claude.ai/install.sh | bash -s -- ${CLAUDE_CODE_VERSION}
+ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
 
 # ---------------------------------------------------------------------------
 # GitHub Copilot CLI (installs to ~/.local/bin/copilot)
@@ -178,5 +179,10 @@ COPY ssh-wsl-host.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/init-firewall.sh /usr/local/bin/ssh-wsl-host.sh && \
   echo "${USERNAME} ALL=(root) NOPASSWD: /usr/local/bin/init-firewall.sh" > /etc/sudoers.d/${USERNAME}-firewall && \
   chmod 0440 /etc/sudoers.d/${USERNAME}-firewall
+
+# ---------------------------------------------------------------------------
+# Disable Claude Code adaptive thinking
+# ---------------------------------------------------------------------------
+ENV CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1
 
 USER ${USERNAME}
