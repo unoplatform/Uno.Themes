@@ -224,6 +224,8 @@ Runtime tests live **inside the Simple sample app** under `src/samples/SimpleSam
 - Interactive: launch a sample app (the runtime-test runner UI is available when the test engine is wired up — for the Simple sample, runtime tests are the canonical host).
 - Headless (used in CI): launch the built sample DLL with `--runtime-tests=<results.xml>`. The script `build/scripts/linux-skia-desktop-runtime-tests.sh` does this under `xvfb-run` against `bin/Release/net10.0-desktop`. The CI pipeline lives in `build/stage-runtimetests-desktop.yml`.
 
+For the full command reference (filter syntax, headless vs interactive, adding new tests, red/fix/green, inspecting results), use the `/uno-themes-runtime-tests` skill (`.claude/skills/uno-themes-runtime-tests/SKILL.md`).
+
 ### General testing rules
 
 ✅ Every new public behavior in the theme libraries must include tests under `src/samples/SimpleSampleApp/RuntimeTests/` (or, for Material/Cupertino-only behavior that genuinely cannot be exercised through the Simple host, a clearly-justified placement). Prefer `Given_*` naming.
