@@ -62,10 +62,17 @@ public abstract partial class BaseTheme
 		return type is not null && typeof(ResourceDictionary).IsAssignableFrom(type);
 	}
 
+	private static string HrAlc()
+	{
+		var alc = System.Runtime.Loader.AssemblyLoadContext.GetLoadContext(typeof(BaseTheme).Assembly);
+		return alc == System.Runtime.Loader.AssemblyLoadContext.Default ? "Default" : (alc?.Name ?? "<unnamed>");
+	}
+
 	private static void RegisterInstance(BaseTheme instance)
 	{
 		lock (_liveInstancesLock)
 		{
+			Console.WriteLine($"[STEVE-HR] BaseTheme.RegisterInstance: {instance.GetType().FullName} (BaseTheme ALC={HrAlc()}), liveInstances now ~{_liveInstances.Count + 1}");
 			for (var i = _liveInstances.Count - 1; i >= 0; i--)
 			{
 				if (!_liveInstances[i].TryGetTarget(out _))
@@ -87,6 +94,8 @@ public abstract partial class BaseTheme
 	/// </summary>
 	internal static void UpdateApplication(Type[]? updatedTypes)
 	{
+		Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateApplication CALLED (BaseTheme ALC={HrAlc()}) with {updatedTypes?.Length ?? 0} updatedType(s)");
+
 		if (updatedTypes is null || updatedTypes.Length == 0)
 		{
 			return;
@@ -101,6 +110,8 @@ public abstract partial class BaseTheme
 				break;
 			}
 		}
+
+		Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateApplication: affectsResources={affectsResources}");
 
 		if (!affectsResources)
 		{
@@ -124,15 +135,19 @@ public abstract partial class BaseTheme
 			}
 		}
 
+		Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateApplication: {alive.Count} live theme instance(s) to UpdateSource()");
+
 		foreach (var theme in alive)
 		{
 			var dispatcher = theme._hotReloadDispatcher;
 			if (dispatcher is null || dispatcher.HasThreadAccess)
 			{
+				Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateApplication: UpdateSource() inline on {theme.GetType().FullName}");
 				theme.UpdateSource();
 			}
 			else
 			{
+				Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateApplication: enqueue UpdateSource() on {theme.GetType().FullName} (dispatcher marshalling)");
 				dispatcher.TryEnqueue(theme.UpdateSource);
 			}
 		}

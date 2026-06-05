@@ -35,4 +35,12 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	}
 
 	protected override string DefaultStylesSource => SimpleConstants.ResourcePaths.MergedPages;
+
+	/// <summary>
+	/// Simple ships a hand-crafted grayscale palette (<c>ColorPalette.xaml</c>) rather than deriving
+	/// colours from a seed. It must participate in the dynamic colour layer so that, when a consumer
+	/// applies a colour override, the semantic brushes resolve overridden roles to the override and
+	/// non-overridden roles to Simple's grayscale defaults.
+	/// </summary>
+	protected override string ColorPaletteSource => SimpleConstants.ResourcePaths.ColorPalette;
 }

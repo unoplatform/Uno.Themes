@@ -10,7 +10,7 @@
 		<PropertyGroup>
 			<_TargetNugetPackageId Condition="'$(PackageId)'!=''">$(PackageId)</_TargetNugetPackageId>
 			<_TargetNugetPackageId Condition="'$(PackageId)'==''">$(AssemblyName)</_TargetNugetPackageId>
-			<_TargetNugetFolderBase>$(USERPROFILE)\.nuget\packages\$(_TargetNugetPackageId)\$(NugetOverrideVersion)\lib</_TargetNugetFolderBase>
+			<_TargetNugetFolderBase>$(NuGetPackageRoot)\$(_TargetNugetPackageId)\$(NugetOverrideVersion)\lib</_TargetNugetFolderBase>
 			<_TargetNugetFolder>$(_TargetNugetFolderBase)\$(TargetFramework)</_TargetNugetFolder>
 		</PropertyGroup>
 		

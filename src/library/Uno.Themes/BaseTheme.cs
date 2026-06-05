@@ -382,6 +382,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
+		System.Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateSource() running on {GetType().FullName}; Colors?.OverrideDictionary.Source={Colors?.OverrideDictionary?.Source?.OriginalString ?? "<null>"}, PrimarySeed={Colors?.PrimarySeed?.ToString() ?? "<null>"}");
+
 		// Remove only the dictionaries we appended in previous calls. The URI-backed
 		// entries Uno populated via CopyFrom when Source was set stay in place; Uno's
 		// own hot-reload pipeline refreshes their content directly.
@@ -396,31 +398,68 @@ public abstract partial class BaseTheme : ResourceDictionary
 		AddThemeDictionary(GenerateShapeScale(DefaultCornerRadius));
 		AddThemeDictionary(GenerateDensityDefaults());
 
-		// Constructor-supplied base colour overlay sits above the baked palette but
-		// below the seed and explicit overrides — same precedence the original
-		// _baseColorOverride layer used to occupy.
-		if (_baseColorOverride is { } baseColorOverride)
-		{
-			AddThemeDictionary(baseColorOverride);
-		}
-
+		// --- Colour + brush layer (regression fix for #1679) ---
+		// The semantic brushes in SharedColors.xaml are defined as
+		//   <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+		// — a StaticResource into the colour palette, which is the correct pattern for resources
+		// inside ThemeDictionaries (see WinUI theme-resource guidance). For an override to reach those
+		// brushes, the brushes must resolve their StaticResource in the SAME merged scope that carries
+		// the override colours.
+		//
+		// Before #1679, UpdateSource() built a single `colors` dictionary that owned the brushes and had
+		// the palette + overrides merged into it, so {StaticResource PrimaryColor} resolved to the
+		// override. #1679 moved the palette + brushes into an immutable base layer (Source) and added the
+		// override as a *sibling* dictionary, so the brushes kept resolving to the base palette colours —
+		// overriding a colour no longer changed the rendered brush. We restore the old behaviour by
+		// rebuilding the colour layer (brushes on top of palette + overrides) and layering it above the
+		// immutable base so its brushes shadow the base ones and resolve to the overridden colours.
 		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-		if (effectivePrimary is { } seed)
-		{
-			AddThemeDictionary(SeedColorPaletteGenerator.Default.Generate(
-				seed, Colors?.SecondarySeed, Colors?.TertiarySeed, UseHighFidelityColors));
-		}
+		var seedPalette = effectivePrimary is { } seed
+			? SeedColorPaletteGenerator.Default.Generate(seed, Colors?.SecondarySeed, Colors?.TertiarySeed, UseHighFidelityColors)
+			: null;
+		var userOverride = Colors?.OverrideDictionary;
 
-		// Explicit user overrides take highest precedence. URI-backed override
-		// dictionaries are re-resolved each rebuild so that hot-reload edits to the
-		// underlying XAML file propagate without restart; the in-memory key/value
-		// pairs of the original instance were loaded at init time and would
-		// otherwise be stale.
-		if (Colors?.OverrideDictionary is { } userOverride)
+		if (_baseColorOverride is not null || seedPalette is not null || userOverride is not null)
 		{
-			AddThemeDictionary(userOverride.Source is { } src
-				? new ResourceDictionary { Source = src }
-				: userOverride);
+			// `colors` owns the brushes (SharedColors). Palette + theme palette + overrides are merged
+			// below them; MergedDictionaries are searched in reverse, so precedence is:
+			// userOverride > seed > baseColorOverride > themePalette > sharedPalette.
+			var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
+			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+
+			if (ColorPaletteSource is { } colorPaletteSource)
+			{
+				// Theme-specific base palette (e.g. Simple's grayscale) — keeps non-overridden roles on the
+				// theme's defaults instead of the shared palette.
+				colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(colorPaletteSource) });
+			}
+
+			if (_baseColorOverride is { } baseColorOverride)
+			{
+				colors.SafeMerge(baseColorOverride);
+			}
+
+			if (seedPalette is not null)
+			{
+				colors.SafeMerge(seedPalette);
+			}
+
+			if (userOverride is not null)
+			{
+				// Re-resolve URI-backed overrides each rebuild so hot-reload edits to the underlying XAML
+				// propagate; the in-memory pairs of the original instance were loaded at init time.
+				colors.SafeMerge(userOverride.Source is { } src
+					? new ResourceDictionary { Source = src }
+					: userOverride);
+			}
+
+			AddThemeDictionary(colors);
+
+			System.Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateSource: built dynamic colour layer (baseOverlay={_baseColorOverride is not null}, seed={seedPalette is not null}, userOverride={userOverride is not null}, themePalette={ColorPaletteSource is not null})");
+		}
+		else
+		{
+			System.Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateSource: no colour customization; using immutable base layer.");
 		}
 
 		if (FontOverrideDictionary is { } fontOverride)
@@ -432,6 +471,36 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// (e.g. a toolkit theme stacking additional control styles) on top of the
 		// fully-generated token/palette/override set.
 		AddThemeSpecificResources();
+
+		// [STEVE-HR] Probe what the theme NOW resolves for representative Color vs Brush keys.
+		// If PrimaryColor reflects the override but PrimaryBrush does not, the override only
+		// changed the Color and the StaticResource-bound rendered brushes never updated.
+		HrProbe("PrimaryColor");
+		HrProbe("PrimaryBrush");
+		HrProbe("SurfaceColor");
+		HrProbe("SurfaceBrush");
+		HrProbe("BackgroundColor");
+		HrProbe("BackgroundBrush");
+	}
+
+	// [STEVE-HR] Resolve a key through this theme dictionary (theme-aware) and log its effective value.
+	private void HrProbe(string key)
+	{
+		try
+		{
+			if (TryGetValue(key, out var v))
+			{
+				System.Console.WriteLine($"[STEVE-HR]   theme resolves '{key}' = {v}");
+			}
+			else
+			{
+				System.Console.WriteLine($"[STEVE-HR]   theme resolves '{key}' = <not found>");
+			}
+		}
+		catch (Exception ex)
+		{
+			System.Console.WriteLine($"[STEVE-HR]   theme resolves '{key}' -> error {ex.GetType().Name}: {ex.Message}");
+		}
 	}
 
 	/// <summary>
@@ -468,10 +537,57 @@ public abstract partial class BaseTheme : ResourceDictionary
 		_dynamicDictionaries.Add(dictionary);
 	}
 
+	// [STEVE-HR] Diagnostic: dump the resolved override dictionary's theme-dictionary colors so we can
+	// see whether ms-appx:///ThemeColors.xaml resolved to real values (or empty) at this point.
+	private static void HrDumpOverride(ResourceDictionary dict, string label)
+	{
+		try
+		{
+			foreach (var themeKvp in dict.ThemeDictionaries)
+			{
+				if (themeKvp.Value is ResourceDictionary themeDict)
+				{
+					var c = 0;
+					foreach (var kvp in themeDict)
+					{
+						System.Console.WriteLine($"[STEVE-HR]   override[{label}] theme['{themeKvp.Key}']['{kvp.Key}'] = {kvp.Value}");
+						if (++c >= 6)
+						{
+							System.Console.WriteLine($"[STEVE-HR]   override[{label}] theme['{themeKvp.Key}']: ...({themeDict.Count} total)");
+							break;
+						}
+					}
+					if (c == 0)
+					{
+						System.Console.WriteLine($"[STEVE-HR]   override[{label}] theme['{themeKvp.Key}'] is EMPTY");
+					}
+				}
+			}
+			if (dict.ThemeDictionaries.Count == 0)
+			{
+				System.Console.WriteLine($"[STEVE-HR]   override[{label}] has NO theme dictionaries (top-level keys={dict.Count})");
+			}
+		}
+		catch (Exception ex)
+		{
+			System.Console.WriteLine($"[STEVE-HR]   override[{label}] dump error: {ex.GetType().Name}: {ex.Message}");
+		}
+	}
+
 	/// <summary>
 	/// URI of the merged-pages resource dictionary for this theme. Owns the
 	/// static base layer: control styles plus the design-system's default
 	/// converters, typography, colours, fonts and thickness.
 	/// </summary>
 	protected abstract string DefaultStylesSource { get; }
+
+	/// <summary>
+	/// Optional URI of the theme's own base colour palette (e.g. Simple's grayscale
+	/// <c>ColorPalette.xaml</c>) that shadows the shared palette. When set, it is included in the
+	/// dynamic colour layer built by <see cref="UpdateSource"/> so that — when a colour override or seed
+	/// is active — non-overridden roles keep the theme's default colours while overridden roles still
+	/// flow through to the <c>StaticResource</c>-bound semantic brushes. Return <see langword="null"/>
+	/// for seed-driven themes (e.g. Material) that don't ship a static palette.
+	/// </summary>
+	protected virtual string ColorPaletteSource => null;
 }
