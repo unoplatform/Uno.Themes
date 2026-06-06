@@ -1,6 +1,6 @@
 ---
 name: uno-themes-runtime-tests
-description: Build, run, filter, and add runtime tests for the Uno.Themes design-system libraries. Use when running the SimpleSampleApp runtime tests headlessly under xvfb (CI-parity), launching the sample app interactively to use the in-app test runner UI, filtering tests by class or method name with the UNO_RUNTIME_TESTS_RUN_TESTS filter syntax, adding a new Given_*.cs runtime test under src/samples/SimpleSampleApp/RuntimeTests/, following the red/fix/green pattern for bug fixes, or reproducing the CI desktop runtime-tests pipeline locally.
+description: Build, run, filter, and add runtime tests for the Uno.Themes design-system libraries. Use when running the Uno.Themes.RuntimeTests runtime tests headlessly under xvfb (CI-parity), launching the sample app interactively to use the in-app test runner UI, filtering tests by class or method name with the UNO_RUNTIME_TESTS_RUN_TESTS filter syntax, adding a new Given_*.cs runtime test under src/samples/Uno.Themes.RuntimeTests/, following the red/fix/green pattern for bug fixes, or reproducing the CI desktop runtime-tests pipeline locally.
 metadata:
   author: uno-platform
   version: "1.0"
@@ -9,18 +9,18 @@ metadata:
 
 # Uno.Themes Runtime Tests
 
-There is **no `dotnet test` entry point** in this repo. Runtime tests execute inside the running sample application, driven by `Uno.UI.RuntimeTests.Engine`. They exercise XAML resource resolution, semantic-style mapping, color-override precedence, seed-color palettes, design tokens, fonts, and hot-reload behavior against real `FrameworkElement` instances on the UI thread.
+There is **no `dotnet test` entry point** in this repo. Runtime tests execute inside the running runtime-tests app, driven by `Uno.UI.RuntimeTests.Engine`. They exercise XAML resource resolution, semantic-style mapping, color-override precedence, seed-color palettes, design tokens, and fonts against real `FrameworkElement` instances on the UI thread.
 
 ## Where tests live
 
-- **Canonical host:** `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs`. Per `AGENTS.md` §5, new tests belong here unless the behavior is genuinely Material/Cupertino-specific.
+- **Canonical host:** `src/samples/Uno.Themes.RuntimeTests/Given_*.cs`. Per `AGENTS.md` §5, new tests belong here unless the behavior is genuinely Material/Cupertino-specific.
 - **Other hosts:** `src/samples/MaterialSampleApp/RuntimeTests/` (currently `Given_DesignTokens.cs`); `CupertinoSampleApp` references `Uno.UI.RuntimeTests.Engine` but hosts no tests today.
-- **Naming:** `Given_<Subject>.cs`, e.g. `Given_SeedColorPalette`, `Given_SemanticStyles`, `Given_ColorOverridePrecedence`, `Given_DesignTokens`, `Given_Fonts`, `Given_HotReload`.
+- **Naming:** `Given_<Subject>.cs`, e.g. `Given_SeedColorPalette`, `Given_SemanticStyles`, `Given_ColorOverridePrecedence`, `Given_DesignTokens`, `Given_Fonts`.
 - **Attributes:** MSTest-style — `[TestClass]`, `[TestMethod]`, `[DataRow(...)]`, plus `[RunsOnUIThread]` for any test that touches `FrameworkElement` / `ResourceDictionary` / `Application.Resources`.
 
 ## CI pipeline
 
-- Desktop is the only CI-validated runtime-test target. Pipeline: `build/stage-runtimetests-desktop.yml`. Driver script: `build/scripts/linux-skia-desktop-runtime-tests.sh`. It `dotnet publish`es `SimpleSampleApp` for `net10.0-desktop -c Release`, then runs the resulting `SimpleSampleApp.dll` under `xvfb-run` + `fluxbox`, writes NUnit XML, and post-validates that at least one `<test-case>` was emitted.
+- Desktop is the only CI-validated runtime-test target. Pipeline: `build/stage-runtimetests-desktop.yml`. Driver script: `build/scripts/linux-skia-desktop-runtime-tests.sh`. It `dotnet publish`es `Uno.Themes.RuntimeTests` for `net10.0-desktop -c Release`, then runs the resulting `Uno.Themes.RuntimeTests.dll` under `xvfb-run` + `fluxbox`, writes NUnit XML, and post-validates that at least one `<test-case>` was emitted.
 - WASM / Android / iOS runtime tests are not wired up in CI for this repo. They are technically reachable via `Uno.UI.RuntimeTests.Engine.Wasm.Runner` and per-platform heads, but treat that as out-of-scope here unless explicitly asked.
 
 ---
@@ -32,10 +32,10 @@ The fastest way to match what CI does, locally:
 ```bash
 # From the repo root
 dotnet publish -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop \
-  src/samples/SimpleSampleApp/SimpleSampleApp.csproj
+  src/samples/Uno.Themes.RuntimeTests/Uno.Themes.RuntimeTests.csproj
 
-ProjectPath=src/samples/SimpleSampleApp \
-SampleAppName=SimpleSampleApp \
+ProjectPath=src/samples/Uno.Themes.RuntimeTests \
+SampleAppName=Uno.Themes.RuntimeTests \
 UNO_RUNTIME_TESTS_RUN_TESTS='{}' \
 UNO_RUNTIME_TESTS_OUTPUT_PATH=/tmp/runtime-tests-results.xml \
   bash build/scripts/linux-skia-desktop-runtime-tests.sh
@@ -48,21 +48,18 @@ The script handles `xvfb-run`, fluxbox, and the post-run XML sanity check. Resul
 For day-to-day work, skip publish and run the Debug build directly:
 
 ```bash
-dotnet build src/samples/SimpleSampleApp/SimpleSampleApp.csproj -c Debug -f net10.0-desktop
+dotnet build src/samples/Uno.Themes.RuntimeTests/Uno.Themes.RuntimeTests.csproj -c Debug -f net10.0-desktop -p:TargetFrameworkOverride=desktop
 
-export DOTNET_MODIFIABLE_ASSEMBLIES=debug
 export UNO_RUNTIME_TESTS_OUTPUT_PATH=/tmp/runtime-tests-results.xml
 export UNO_RUNTIME_TESTS_RUN_TESTS='{}'
 
 # Headless on a Linux host with no display: wrap in xvfb-run + fluxbox
 xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' bash -c "
   { fluxbox & } ; \
-  dotnet src/samples/SimpleSampleApp/bin/Debug/net10.0-desktop/SimpleSampleApp.dll \
+  dotnet src/samples/Uno.Themes.RuntimeTests/bin/Debug/net10.0-desktop/Uno.Themes.RuntimeTests.dll \
     --runtime-tests=\"$UNO_RUNTIME_TESTS_OUTPUT_PATH\"
 "
 ```
-
-✅ Always set `DOTNET_MODIFIABLE_ASSEMBLIES=debug` when running runtime tests — hot-reload tests under `Given_HotReload.cs` rely on modifiable assemblies and fail silently without it. The CI script sets this automatically; manual invocations must do it themselves.
 
 ---
 
@@ -71,7 +68,7 @@ xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' bash -c "
 Launch the Simple sample app normally and use the in-app runtime-test runner UI (the `UnitTestsControl` page wired up by `Uno.UI.RuntimeTests.Engine`):
 
 ```bash
-dotnet run --project src/samples/SimpleSampleApp/SimpleSampleApp.csproj -f net10.0-desktop
+dotnet run --project src/samples/Uno.Themes.RuntimeTests/Uno.Themes.RuntimeTests.csproj -f net10.0-desktop
 ```
 
 Navigate to the runtime-tests page in the sample app shell. Use the built-in search box to filter, and click a test or class to run only that subset. Useful when debugging a single failing test or watching a UI assertion fail visually.
@@ -112,8 +109,8 @@ export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "When_OverrideApplied"}
 ### Combine
 
 ```bash
-# Color-override OR seed-color tests, excluding hot-reload
-export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "(Given_ColorOverridePrecedence | Given_SeedColorPalette) & !HotReload"}, "Attempts": 1}'
+# Color-override OR seed-color tests
+export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "Given_ColorOverridePrecedence | Given_SeedColorPalette"}, "Attempts": 1}'
 ```
 
 ### Retry flakes
@@ -121,7 +118,7 @@ export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "(Given_ColorOverridePr
 `Attempts` re-runs failures up to N times before marking the test failed. Default 1; raise only when diagnosing a known flake (don't paper over a real intermittent bug — see `AGENTS.md` §5).
 
 ```bash
-export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "Given_HotReload"}, "Attempts": 3}'
+export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "Given_Fonts"}, "Attempts": 3}'
 ```
 
 ---
@@ -131,7 +128,7 @@ export UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter": {"Value": "Given_HotReload"}, "At
 Follow `AGENTS.md` §5 and the "Adding a new style or theme resource" checklist in §11. Quick form:
 
 1. **Extend, don't duplicate.** If a `Given_*` file already covers the subject (e.g. `Given_ColorOverridePrecedence` for override-precedence work, `Given_SeedColorPalette` for seed-color logic, `Given_SemanticStyles` for semantic-key resolution), add a `[TestMethod]` there. Only create a new `Given_<Subject>.cs` when no existing file fits.
-2. **Place under `src/samples/SimpleSampleApp/RuntimeTests/`.** A test added anywhere else (a fresh top-level test project, a different sample's `RuntimeTests/`) will silently not run under `linux-skia-desktop-runtime-tests.sh`.
+2. **Place under `src/samples/Uno.Themes.RuntimeTests/`.** A test added anywhere else (a fresh top-level test project, a different sample's `RuntimeTests/`) will silently not run under `linux-skia-desktop-runtime-tests.sh`.
 3. **Mark UI-touching tests with `[RunsOnUIThread]`.** Anything that constructs a `FrameworkElement`, merges a `ResourceDictionary`, or reads `Application.Resources` needs it. Tests without the attribute run on a pool thread and will throw at the first DP touch.
 4. **Use `[DataRow]` for matrix tests.** See `Given_SemanticStyles.When_SemanticAndSimpleStyles_AreApplied_LookIdentical` — one `[TestMethod]` with five `[DataRow]`s beats five copy-pasted methods.
 5. **Cover the cleanup path too.** For attached properties and theme-change subscriptions, assert both the apply and the clear/revert path. Leak-guard tests using `WeakReference<T>` must store the tracker as a field, not a local — see `AGENTS.md` §2 "Separate stack frames for leak-guard runtime tests".
@@ -206,8 +203,7 @@ Or open the XML and grep for `result="Failed"`.
 
 ## Common pitfalls
 
-- **`DOTNET_MODIFIABLE_ASSEMBLIES=debug` missing** → `Given_HotReload` tests fail with a metadata-update error. Always export it for headless runs.
-- **Test added outside `src/samples/SimpleSampleApp/RuntimeTests/`** → silently not picked up by CI. The CI script targets `SimpleSampleApp.dll`; anything else is invisible.
+- **Test added outside `src/samples/Uno.Themes.RuntimeTests/`** → silently not picked up by CI. The CI script targets `Uno.Themes.RuntimeTests.dll`; anything else is invisible.
 - **Missing `[RunsOnUIThread]` on a UI-touching test** → first DP access throws `RPC_E_WRONG_THREAD` / `InvalidOperationException` and the test is marked failed for the wrong reason.
 - **Assertions that mutate `Application.Current.Resources`** → leak state into subsequent tests. Scope changes to a local container (`new Grid { Resources = { MergedDictionaries = { new SimpleTheme() } } }`) per `Given_SemanticStyles.CreateThemedContainer`.
 - **`Assert.Inconclusive`** → banned by `AGENTS.md` §5. Gate platform-specific tests with `#if __WASM__` / `#if !__WASM__` or an explicit attribute, not by skipping.
@@ -220,10 +216,9 @@ Or open the XML and grep for `result="Failed"`.
 | Action | Command |
 | --- | --- |
 | Headless full run (CI parity) | `dotnet publish -c Release -f net10.0-desktop … ; bash build/scripts/linux-skia-desktop-runtime-tests.sh` |
-| Headless quick run (Debug) | `dotnet build … -c Debug -f net10.0-desktop ; xvfb-run … dotnet SimpleSampleApp.dll --runtime-tests=<path>` |
-| Interactive runner | `dotnet run --project src/samples/SimpleSampleApp/SimpleSampleApp.csproj -f net10.0-desktop` |
+| Headless quick run (Debug) | `dotnet build … -c Debug -f net10.0-desktop ; xvfb-run … dotnet Uno.Themes.RuntimeTests.dll --runtime-tests=<path>` |
+| Interactive runner | `dotnet run --project src/samples/Uno.Themes.RuntimeTests/Uno.Themes.RuntimeTests.csproj -f net10.0-desktop` |
 | Filter by class | `UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter":{"Value":"Given_SeedColorPalette"}}'` |
 | Filter by method | `UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter":{"Value":"When_OverrideApplied"}}'` |
-| Exclude a class | `UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter":{"Value":"!Given_HotReload"}}'` |
+| Exclude a class | `UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter":{"Value":"!Given_Fonts"}}'` |
 | Retry flakes | `UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter":{"Value":"…"}, "Attempts": 3}'` |
-| Hot-reload tests need | `export DOTNET_MODIFIABLE_ASSEMBLIES=debug` |

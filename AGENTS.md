@@ -18,7 +18,7 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
 
 ## Solution layout
 
-- `Uno.Themes.sln` (repo root) — main solution. Includes all libraries, samples, and the runtime tests that live inside the sample apps. Open this for full development.
+- `Uno.Themes.sln` (repo root) — main solution. Includes all libraries, samples, and the dedicated `Uno.Themes.RuntimeTests` runtime-tests project. Open this for full development.
 - `Uno.Themes-packages.slnf` (repo root) — solution filter limited to the packable libraries; useful for fast restore/build without the sample apps.
 - `src/library/` — all packable libraries. Subdirectories match the project list above. Theme XAML lives under each library's `Styles/` folder (e.g. `src/library/Uno.Material/Styles/{Application,Controls}/{v1,v2,Common}/`, `src/library/Uno.Cupertino/Styles/{Application,Controls}/`, `src/library/Uno.Simple.WinUI/Styles/`). The base `src/library/Uno.Themes/Styles/Applications/Common/` holds shared color/typography palettes (`SharedColorPalette.xaml`, `SharedColors.xaml`, `SharedTypography.xaml`, `Converters.xaml`).
 - `src/library/xamlmerge.targets` — pulls in `Uno.XamlMerge.Task`. Each library's `*-common.props` declares `XamlMergeInput` items; the task merges them into `mergedpages.xaml` (Material splits into `mergedpages.v1.xaml` / `mergedpages.v2.xaml`). **Do not hand-edit anything generated under `obj/` or referenced via the merged dictionary.**
@@ -26,10 +26,11 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
   - `src/samples/SamplesApp.Shared/` — shared project (`.shproj` / `.projitems`) holding the sample UI, `Shell.xaml`, content pages, view models, helpers.
   - `src/samples/MaterialSampleApp/` — Material sample head.
   - `src/samples/CupertinoSampleApp/` — Cupertino sample head.
-  - `src/samples/SimpleSampleApp/` — Simple sample head; **also hosts the runtime tests** under `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs` (e.g. `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`).
+  - `src/samples/SimpleSampleApp/` — Simple sample head.
+  - `src/samples/Uno.Themes.RuntimeTests/` — **dedicated runtime-tests host** (`Given_*.cs` such as `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`, `Given_Fonts.cs`, `Given_DesignTokens.cs`). A minimal app head that references the theme libraries and merges `SimpleTheme` app-wide, without the sample gallery — mirroring uno.extensions' dedicated `Uno.Extensions.RuntimeTests` project.
 - `doc/` — published documentation (see §13).
 
-There is **no separate runtime-tests project** — runtime tests live inside the sample apps and are driven by `Uno.UI.RuntimeTests.Engine` (`PackageReference Include="Uno.UI.RuntimeTests.Engine"` in each sample csproj).
+Runtime tests live in the dedicated **`src/samples/Uno.Themes.RuntimeTests`** project and are driven by `Uno.UI.RuntimeTests.Engine` (`PackageReference Include="Uno.UI.RuntimeTests.Engine"`). There is no `dotnet test` entry point.
 
 ## Target frameworks and platform builds
 
@@ -125,7 +126,7 @@ When in doubt: if removing the rule would let any other agent on this repo repea
 ✅ Apply all SOLID principles (SRP, OCP, LSP, ISP, DIP).  
 ✅ Keep code simple, intention‑revealing; clarity > cleverness.  
 ✅ Minimize use of the null-forgiving operator (`!`); prefer explicit guards or refactors that satisfy the nullable flow. Sample apps enable `Nullable=enable` (`src/samples/Directory.Build.props`); when adding new files to libraries that don't yet enable nullable, prefer adding `#nullable enable` at the file scope rather than relying on `!`.  
-✅ Separate concerns: theme infrastructure (`Uno.Themes`) | design-system styles (`Uno.Material`, `Uno.Cupertino`, `Uno.Simple.WinUI`) | C# markup helpers (`*.Markup`) | sample UI (`SamplesApp.Shared` + heads) | runtime tests (inside the Simple sample app).  
+✅ Separate concerns: theme infrastructure (`Uno.Themes`) | design-system styles (`Uno.Material`, `Uno.Cupertino`, `Uno.Simple.WinUI`) | C# markup helpers (`*.Markup`) | sample UI (`SamplesApp.Shared` + heads) | runtime tests (the dedicated `Uno.Themes.RuntimeTests` project).  
 ✅ Favor composition over inheritance; depend on abstractions where the API surface justifies it.  
 ✅ Optimize only with evidence (profiling/metrics).
 
@@ -205,8 +206,11 @@ dotnet build src/samples/MaterialSampleApp/MaterialSampleApp.csproj -c Debug -f 
 # Cupertino WASM
 dotnet build src/samples/CupertinoSampleApp/CupertinoSampleApp.csproj -c Debug -f net10.0-browserwasm
 
-# Simple desktop (also hosts the runtime tests)
+# Simple desktop
 dotnet build src/samples/SimpleSampleApp/SimpleSampleApp.csproj -c Debug -f net10.0-desktop
+
+# Dedicated runtime-tests host (desktop)
+dotnet build src/samples/Uno.Themes.RuntimeTests/Uno.Themes.RuntimeTests.csproj -c Debug -f net10.0-desktop
 
 # Run the desktop sample app interactively
 dotnet run --project src/samples/MaterialSampleApp/MaterialSampleApp.csproj -f net10.0-desktop
@@ -219,7 +223,7 @@ dotnet run --project src/samples/MaterialSampleApp/MaterialSampleApp.csproj -f n
 
 ## 5. Testing Requirements
 
-Runtime tests live **inside the Simple sample app** under `src/samples/SimpleSampleApp/RuntimeTests/` (e.g. `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`). They are MSTest-style and hosted by `Uno.UI.RuntimeTests.Engine`. There is **no `dotnet test`** entry point.
+Runtime tests live in the dedicated **`Uno.Themes.RuntimeTests`** project under `src/samples/Uno.Themes.RuntimeTests/` (e.g. `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`). They are MSTest-style and hosted by `Uno.UI.RuntimeTests.Engine`. There is **no `dotnet test`** entry point.
 
 - Interactive: launch a sample app (the runtime-test runner UI is available when the test engine is wired up — for the Simple sample, runtime tests are the canonical host).
 - Headless (used in CI): launch the built sample DLL with `--runtime-tests=<results.xml>`. The script `build/scripts/linux-skia-desktop-runtime-tests.sh` does this under `xvfb-run` against `bin/Release/net10.0-desktop`. The CI pipeline lives in `build/stage-runtimetests-desktop.yml`.
@@ -228,7 +232,7 @@ For the full command reference (filter syntax, headless vs interactive, adding n
 
 ### General testing rules
 
-✅ Every new public behavior in the theme libraries must include tests under `src/samples/SimpleSampleApp/RuntimeTests/` (or, for Material/Cupertino-only behavior that genuinely cannot be exercised through the Simple host, a clearly-justified placement). Prefer `Given_*` naming.
+✅ Every new public behavior in the theme libraries must include tests under `src/samples/Uno.Themes.RuntimeTests/` (or, for Material/Cupertino-only behavior that genuinely cannot be exercised through the Simple host, a clearly-justified placement). Prefer `Given_*` naming.
 ✅ AAA pattern (Arrange / Act / Assert).
 ✅ Lack of coverage for new logic blocks merge.
 ✅ **Every bug fix MUST follow red/fix/green**: first add a runtime test that reproduces the bug and fails, then apply the fix, then confirm it passes. The failing test must be committed alongside the fix so the regression is permanently guarded.
@@ -239,7 +243,7 @@ For the full command reference (filter syntax, headless vs interactive, adding n
 
 | Change Type | Required Tests |
 | ----------- | -------------- |
-| New theme/palette/converter API | Happy path + 1 edge case (runtime test under `SimpleSampleApp/RuntimeTests/`) |
+| New theme/palette/converter API | Happy path + 1 edge case (runtime test under `Uno.Themes.RuntimeTests/`) |
 | New attached property / extension | Set/clear scenario + a teardown-leak guard if it subscribes to events |
 | Bug fix | Repro test + non‑regression guard |
 | New / changed style key | Resource-resolution test (e.g. asserting the key resolves under both Light and Dark themes) |
@@ -354,7 +358,7 @@ If the payload doesn't have a natural args type, declare a small `record` ending
    - Simple → `src/library/Uno.Simple.WinUI/Styles/`.
 2. Companion XAML files are picked up automatically by the `XamlMergeInput` glob — do not add an explicit `<Page>` reference.
 3. Add a sample page (or extend an existing one) under `src/samples/SamplesApp.Shared/Content/` so all three sample heads pick it up.
-4. Add a runtime test under `src/samples/SimpleSampleApp/RuntimeTests/` covering resolution under Light and Dark themes (and, where relevant, override precedence).
+4. Add a runtime test under `src/samples/Uno.Themes.RuntimeTests/` covering resolution under Light and Dark themes (and, where relevant, override precedence).
 5. Update the doc:
    - Material → `doc/material-controls-styles.md`, plus `doc/material-colors.md` / `doc/material-dsp.md` / `doc/material-getting-started.md` as relevant.
    - Cupertino → `doc/cupertino-controls-styles.md`, `doc/cupertino-getting-started.md`.
@@ -394,8 +398,8 @@ Beyond the items in `.github/pull_request_template.md`:
 
 - [ ] Related specs and progress.md updated with context and plan (if a plan was used).
 - [ ] Build clean for the platforms the change touches; no new warnings introduced.
-- [ ] Tests added for new/changed logic (list names) under `src/samples/SimpleSampleApp/RuntimeTests/`.
-- [ ] Runtime tests have been run via `SimpleSampleApp` (interactively or via the desktop runtime-tests script) and MUST pass.
+- [ ] Tests added for new/changed logic (list names) under `src/samples/Uno.Themes.RuntimeTests/`.
+- [ ] Runtime tests have been run via the `Uno.Themes.RuntimeTests` desktop head (interactively or via the desktop runtime-tests script) and MUST pass.
 - [ ] No unjustified additions to `<NoWarn>`.
 - [ ] SOLID + separation of concerns respected.
 - [ ] Public API changes (including resource keys) documented with XML docs and reflected in `doc/`.
@@ -419,14 +423,14 @@ Provide explicit constraints to reduce refactor churn:
 5. Indicate error strategy (graceful fallback to a default brush vs. exceptions).
 
 Example:
-> Add a `BorderBrushPressed` lightweight-styling key to the Material `Button` style under `src/library/Uno.Material/Styles/Controls/v2/`. Expose the key in `MaterialConstants.cs`, ensure the `XamlMergeInput` glob picks the file up (no explicit `<Page>` reference), add a runtime test under `src/samples/SimpleSampleApp/RuntimeTests/` asserting the key resolves under both Light and Dark themes, update `doc/material-controls-styles.md` and `doc/lightweight-styling.md`, and add a sample page (or extend the existing Button sample) under `src/samples/SamplesApp.Shared/Content/`.
+> Add a `BorderBrushPressed` lightweight-styling key to the Material `Button` style under `src/library/Uno.Material/Styles/Controls/v2/`. Expose the key in `MaterialConstants.cs`, ensure the `XamlMergeInput` glob picks the file up (no explicit `<Page>` reference), add a runtime test under `src/samples/Uno.Themes.RuntimeTests/` asserting the key resolves under both Light and Dark themes, update `doc/material-controls-styles.md` and `doc/lightweight-styling.md`, and add a sample page (or extend the existing Button sample) under `src/samples/SamplesApp.Shared/Content/`.
 
 ---
 
 ## 3. Definition of Done
 
 1. Build clean on the target platforms; no new warnings.
-2. Tests added & passing (relevant runtime tests run via `SimpleSampleApp`).
+2. Tests added & passing (relevant runtime tests run via the `Uno.Themes.RuntimeTests` desktop head).
 3. Principles & conventions adhered to.
 4. No unjustified performance regressions.
 5. PR template checklist completed.
@@ -450,7 +454,7 @@ Unexplained deviations block merge.
 | Area | Rule |
 | ---- | ---- |
 | Build | No new warnings; suppress with justification only |
-| Tests | New behavior + edge case; runtime tests live in `SimpleSampleApp/RuntimeTests/` |
+| Tests | New behavior + edge case; runtime tests live in `Uno.Themes.RuntimeTests/` |
 | SOLID | All five applied |
 | Allocations | Minimize on theme/palette/brush rebuilds; WASM-aware |
 | Logging | Structured; no PII |

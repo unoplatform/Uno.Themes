@@ -1,0 +1,20 @@
+<Application x:Class="Uno.Themes.RuntimeTests.App"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<!-- Load WinUI resources -->
+				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+				<!-- Load the Simple theme app-wide so theme resource keys (styles, typography,
+				     semantic brushes) resolve for tests that read them through Application.Resources,
+				     matching the sample gallery heads. Tests that need a specific configuration still
+				     construct their own theme in a local container. -->
+				<SimpleTheme xmlns="using:Uno.Simple" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+
+</Application>

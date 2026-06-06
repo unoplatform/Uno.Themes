@@ -1,0 +1,56 @@
+<Project Sdk="Uno.Sdk.Private">
+  <!--
+    Dedicated runtime-tests host. Unlike the sample-gallery heads it does NOT import
+    SamplesApp.Shared, so its hot-reload XAML compile stays clean (the gallery pages use
+    markup the HR compiler rejects). This is the canonical home for Uno.Themes runtime tests,
+    mirroring uno.extensions' dedicated Uno.Extensions.RuntimeTests project.
+  -->
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('ios'))">$(TargetFrameworks);net10.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('android'))">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Themes Runtime Tests</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>uno.platform.themes.runtimetests</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Uno.Themes runtime-tests host powered by Uno Platform.</Description>
+
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../library/Uno.Simple.WinUI/Uno.Simple.WinUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.UI.RuntimeTests.Engine" />
+    <PackageReference Include="MSTest.TestFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UnoIcon Include="../SamplesApp.Shared/Assets/Icons/icon.svg" ForegroundFile="../SamplesApp.Shared/Assets/Icons/icon_foreground.svg" Color="#512BD4" />
+    <UnoSplashScreen Include="../SamplesApp.Shared/Assets/Splash/splash_screen.svg" Color="#512BD4" />
+  </ItemGroup>
+
+</Project>
