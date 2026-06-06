@@ -41,9 +41,9 @@ public abstract partial class BaseTheme : ResourceDictionary
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
 
-	// Tracks dictionaries appended by UpdateSource() so subsequent rebuilds can remove
-	// just those without touching the URI-backed entries Uno populated via CopyFrom
-	// when Source was set.
+	// Tracks the dictionaries this theme appends to its own MergedDictionaries during
+	// UpdateSource() so a subsequent rebuild (theme-property change or hot reload) removes
+	// only those, leaving any other entries in place rather than wiping MergedDictionaries.
 	private readonly List<ResourceDictionary> _dynamicDictionaries = new();
 	#region FontOverrideSource (DP)
 	/// <summary>
@@ -224,23 +224,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 			if (e.NewValue is ThemeColors tc)
 			{
-				tc.SetChangedCallback((isStructural) =>
+				tc.SetChangedCallback((_) =>
 				{
 					if (theme._isUpdatingColorOverrides)
 					{
 						return;
 					}
 
-					// Seed color changes use the fast path (in-place brush update).
-					// Structural changes (override dictionaries) need a full rebuild.
-					if (isStructural)
-					{
-						theme.UpdateSource();
-					}
-					else
-					{
-						theme.UpdateSeedColors();
-					}
+					theme.UpdateSource();
 				});
 			}
 
@@ -336,6 +327,8 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	public BaseTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	{
+		// Opt this instance into hot-reload tracking so BaseTheme.UpdateApplication can
+		// rebuild it when a XAML resource edit is applied (see BaseTheme.HotReload.cs).
 		RegisterInstance(this);
 
 		if (colorOverride is { })
@@ -348,10 +341,9 @@ public abstract partial class BaseTheme : ResourceDictionary
 			SetFontOverrideSilently(fontOverride);
 		}
 
-		// Set once: triggers CopyFrom to populate MergedDictionaries with the URI-backed
-		// base layer (shared converters/typography/colours plus theme-specific fonts/
-		// thickness/palette). Hot reload of those entries is handled by Uno's own pipeline
-		// — UpdateSource() below only manages the dynamic layers on top.
+		// Set once: populates this dictionary with the concrete theme's static base layer
+		// (control styles) from the URI it provides. UpdateSource() appends the dynamic
+		// layers (colors/typography/spacing/…) on top and rebuilds them on every pass.
 		Source = new Uri(DefaultStylesSource);
 		UpdateSource();
 	}
@@ -382,86 +374,78 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
-		// Remove only the dictionaries we appended in previous calls. The URI-backed
-		// entries Uno populated via CopyFrom when Source was set stay in place; Uno's
-		// own hot-reload pipeline refreshes their content directly.
-		foreach (var d in _dynamicDictionaries)
+		// Remove only the dictionaries this theme appended on a previous pass. The URI-backed
+		// base layer populated when Source was set (the concrete theme's control styles) stays
+		// in place so it is not rebuilt on every theme-property change or hot reload.
+		foreach (var dictionary in _dynamicDictionaries)
 		{
-			MergedDictionaries.Remove(d);
+			MergedDictionaries.Remove(dictionary);
 		}
 		_dynamicDictionaries.Clear();
 
-		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
-		AddThemeDictionary(GenerateSpacingScale(baseSpacing));
-		AddThemeDictionary(GenerateShapeScale(DefaultCornerRadius));
-		AddThemeDictionary(GenerateDensityDefaults());
+		// Colour layer (always dynamic so it rebuilds on seed-color / override changes):
+		// SharedColors brushes resolve their {StaticResource *Color} against the shared
+		// palette, the theme's own base palette (e.g. SimpleTheme's grayscale, supplied via
+		// _baseColorOverride), the seed palette and finally the consumer override — each
+		// merged in increasing precedence. This layer is intentionally NOT baked into the
+		// Source bundle (BaseDictionaries.xaml) so colour edits never require reloading the
+		// static base.
+		var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 
-		// Constructor-supplied base colour overlay sits above the baked palette but
-		// below the seed and explicit overrides — same precedence the original
-		// _baseColorOverride layer used to occupy.
+		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+
+		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
+		// before the seed so that seed-generated colors take precedence.
 		if (_baseColorOverride is { } baseColorOverride)
 		{
-			AddThemeDictionary(baseColorOverride);
+			colors.SafeMerge(baseColorOverride);
 		}
 
+		// Resolve seed colors from Colors property, falling back to theme default
 		var effectivePrimary = Colors?.PrimarySeed ?? DefaultPrimarySeed;
+		var effectiveSecondary = Colors?.SecondarySeed;
+		var effectiveTertiary = Colors?.TertiarySeed;
+
 		if (effectivePrimary is { } seed)
 		{
-			AddThemeDictionary(SeedColorPaletteGenerator.Default.Generate(
-				seed, Colors?.SecondarySeed, Colors?.TertiarySeed, UseHighFidelityColors));
+			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, UseHighFidelityColors);
+			colors.SafeMerge(seedPalette);
 		}
 
-		// Explicit user overrides take highest precedence. URI-backed override
-		// dictionaries are re-resolved each rebuild so that hot-reload edits to the
-		// underlying XAML file propagate without restart; the in-memory key/value
-		// pairs of the original instance were loaded at init time and would
-		// otherwise be stale.
+		// Explicit user overrides from Colors.OverrideDictionary take highest precedence.
+		// URI-backed overrides are re-resolved from their Source on each rebuild so that
+		// hot-reload edits to the underlying XAML propagate: the in-memory key/value pairs of
+		// the original instance were loaded at init time and would otherwise be stale.
 		if (Colors?.OverrideDictionary is { } userOverride)
 		{
-			AddThemeDictionary(userOverride.Source is { } src
-				? new ResourceDictionary { Source = src }
+			colors.SafeMerge(userOverride.Source is { } overrideSource
+				? new ResourceDictionary { Source = overrideSource }
 				: userOverride);
 		}
 
-		if (FontOverrideDictionary is { } fontOverride)
-		{
-			AddThemeDictionary(fontOverride);
-		}
+		// Generate spacing, shape, and density scales from code
+		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
+		var spacing = GenerateSpacingScale(baseSpacing);
+		var shape = GenerateShapeScale(DefaultCornerRadius);
+		var density = GenerateDensityDefaults();
 
-		// Final layer: let subclasses append their own resource dictionaries
-		// (e.g. a toolkit theme stacking additional control styles) on top of the
-		// fully-generated token/palette/override set.
+		AddThemeDictionary(spacing);
+		AddThemeDictionary(shape);
+		AddThemeDictionary(density);
+		AddThemeDictionary(colors);
+
+		// Let the concrete theme append its own dynamic dictionaries (e.g. a consumer font
+		// override) on top of the generated layers. The static converter/typography/font/
+		// thickness defaults live in the Source bundle (BaseDictionaries.xaml), below the
+		// theme's own overrides; only resources that must shadow that base belong here.
 		AddThemeSpecificResources();
 	}
 
 	/// <summary>
-	/// Appends design-system- or consumer-specific resource dictionaries on top of the
-	/// theme layers generated by the base implementation (spacing/shape/density scales,
-	/// the seed palette, and user color/font overrides).
+	/// Adds <paramref name="dictionary"/> to this theme's <see cref="ResourceDictionary.MergedDictionaries"/>
+	/// and tracks it so the next <see cref="UpdateSource"/> removes it. Use this instead of adding to
+	/// <c>MergedDictionaries</c> directly so the entry participates in the rebuild lifecycle.
 	/// </summary>
-	/// <remarks>
-	/// Called at the end of every rebuild pass — on construction, on any theme-property
-	/// change, and on hot reload. Override in a subclass and call
-	/// <see cref="AddThemeDictionary(ResourceDictionary)"/> for each dictionary so it
-	/// participates in the dynamic lifecycle (removed and re-added on every rebuild)
-	/// instead of being orphaned after the first pass. Because this runs last, resources
-	/// added here resolve against the fully-overridden token and palette set.
-	/// </remarks>
-	protected virtual void AddThemeSpecificResources()
-	{
-	}
-
-	/// <summary>
-	/// Adds <paramref name="dictionary"/> to the theme's dynamic layer. Tracked so it is
-	/// removed and re-added on the next rebuild; the URI-backed entries Uno populated when
-	/// <c>Source</c> was set are left untouched. Intended for use from
-	/// <see cref="AddThemeSpecificResources"/>.
-	/// </summary>
-	/// <remarks>
-	/// For URI-backed dictionaries, construct a fresh <c>new ResourceDictionary { Source = … }</c>
-	/// on each call so hot-reload edits to the underlying XAML propagate; reusing a cached
-	/// instance would keep the values loaded at first resolution.
-	/// </remarks>
 	protected void AddThemeDictionary(ResourceDictionary dictionary)
 	{
 		MergedDictionaries.Add(dictionary);
@@ -469,9 +453,19 @@ public abstract partial class BaseTheme : ResourceDictionary
 	}
 
 	/// <summary>
-	/// URI of the merged-pages resource dictionary for this theme. Owns the
-	/// static base layer: control styles plus the design-system's default
-	/// converters, typography, colours, fonts and thickness.
+	/// URI of the concrete theme's static base layer (its merged control-style pages).
+	/// Set as this dictionary's <see cref="ResourceDictionary.Source"/> once during construction;
+	/// the dynamic layers generated by <see cref="UpdateSource"/> are appended on top.
 	/// </summary>
 	protected abstract string DefaultStylesSource { get; }
+
+	/// <summary>
+	/// Appends design-system-specific resource dictionaries (fonts, thickness, …) on top of the
+	/// layers generated by <see cref="UpdateSource"/>. Called at the end of every rebuild pass.
+	/// Override in a concrete theme and call <see cref="AddThemeDictionary(ResourceDictionary)"/>
+	/// for each dictionary so it participates in the dynamic rebuild lifecycle.
+	/// </summary>
+	protected virtual void AddThemeSpecificResources()
+	{
+	}
 }

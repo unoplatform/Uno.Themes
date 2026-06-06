@@ -20,9 +20,7 @@ public class MaterialResourcesV1 : ResourceDictionary
 		Source = new Uri(MaterialConstants.ResourcePaths.Version1.MergedPages);
 	}
 
-#pragma warning disable CA1044 // Properties should not be write only
 	public bool WithImplicitStyles { set => ExportImplicitStyles(value); }
-#pragma warning restore CA1044 // Properties should not be write only
 
 	private string[] GetImplicitStyles()
 	{

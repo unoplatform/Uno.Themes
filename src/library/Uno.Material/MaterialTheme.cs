@@ -1,9 +1,13 @@
+using System;
 using Uno.Themes;
 
 
 #if WinUI
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 #else
 using Windows.UI;
@@ -13,7 +17,7 @@ using Windows.UI.Xaml;
 namespace Uno.Material;
 
 /// <summary>
-/// Material Theme resources including colors, fonts, layout values, and styles.
+/// Material Theme resources including colors, fonts, layout values, and styles
 /// </summary>
 public class MaterialTheme : BaseTheme
 {
@@ -23,7 +27,6 @@ public class MaterialTheme : BaseTheme
 	/// used so that seed color generation is always active.
 	/// </summary>
 	protected override Color? DefaultPrimarySeed { get; } = Color.FromArgb(0xFF, 0x59, 0x46, 0xD2);
-
 	public MaterialTheme()
 	{ }
 
@@ -32,4 +35,16 @@ public class MaterialTheme : BaseTheme
 	{ }
 
 	protected override string DefaultStylesSource => MaterialConstants.ResourcePaths.Version2.MergedPages;
+
+	protected override void AddThemeSpecificResources()
+	{
+		base.AddThemeSpecificResources();
+
+		// Base fonts ship in the Source bundle (BaseDictionaries.xaml); only a
+		// consumer-supplied override is layered dynamically on top to shadow them.
+		if (FontOverrideDictionary is { } fontOverride)
+		{
+			AddThemeDictionary(fontOverride);
+		}
+	}
 }

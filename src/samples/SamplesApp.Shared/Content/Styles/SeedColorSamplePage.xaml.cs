@@ -19,8 +19,7 @@ public sealed partial class SeedColorSamplePage : Page
 		SeedColorPicker.Color = _lastSeed;
 		ApplySeedColor(_lastSeed);
 
-		// UpdateSeedColors() only patches brushes visible in the active theme.
-		// On theme switch, pulse the seed to force a full rebuild so the
+		// On theme switch, pulse the seed to force a full theme rebuild so the
 		// now-active theme gets the correct seed-derived colors.
 		this.ActualThemeChanged += (s, e) =>
 		{
