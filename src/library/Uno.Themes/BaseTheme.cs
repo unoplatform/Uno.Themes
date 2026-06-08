@@ -419,18 +419,18 @@ public abstract partial class BaseTheme : ResourceDictionary
 			: null;
 		var userOverride = Colors?.OverrideDictionary;
 
-			var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
-			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+		var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
+		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+
+		if (ColorPaletteSource is { } colorPaletteSource)
+		{
+			// Theme-specific base palette (e.g. Simple's grayscale) — keeps non-overridden roles on the
+			// theme's defaults instead of the shared palette.
+			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(colorPaletteSource) });
+		}
 
 		if (_baseColorOverride is not null || seedPalette is not null || userOverride is not null)
 		{
-			if (ColorPaletteSource is { } colorPaletteSource)
-			{
-				// Theme-specific base palette (e.g. Simple's grayscale) — keeps non-overridden roles on the
-				// theme's defaults instead of the shared palette.
-				colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(colorPaletteSource) });
-			}
-
 			if (_baseColorOverride is { } baseColorOverride)
 			{
 				colors.SafeMerge(baseColorOverride);
