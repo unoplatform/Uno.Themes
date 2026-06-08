@@ -419,14 +419,11 @@ public abstract partial class BaseTheme : ResourceDictionary
 			: null;
 		var userOverride = Colors?.OverrideDictionary;
 
-		if (_baseColorOverride is not null || seedPalette is not null || userOverride is not null)
-		{
-			// `colors` owns the brushes (SharedColors). Palette + theme palette + overrides are merged
-			// below them; MergedDictionaries are searched in reverse, so precedence is:
-			// userOverride > seed > baseColorOverride > themePalette > sharedPalette.
 			var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 			colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
 
+		if (_baseColorOverride is not null || seedPalette is not null || userOverride is not null)
+		{
 			if (ColorPaletteSource is { } colorPaletteSource)
 			{
 				// Theme-specific base palette (e.g. Simple's grayscale) — keeps non-overridden roles on the
@@ -452,15 +449,14 @@ public abstract partial class BaseTheme : ResourceDictionary
 					? new ResourceDictionary { Source = src }
 					: userOverride);
 			}
-
-			AddThemeDictionary(colors);
-
 			System.Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateSource: built dynamic colour layer (baseOverlay={_baseColorOverride is not null}, seed={seedPalette is not null}, userOverride={userOverride is not null}, themePalette={ColorPaletteSource is not null})");
 		}
 		else
 		{
 			System.Console.WriteLine($"[STEVE-HR] BaseTheme.UpdateSource: no colour customization; using immutable base layer.");
 		}
+
+		AddThemeDictionary(colors);
 
 		if (FontOverrideDictionary is { } fontOverride)
 		{
