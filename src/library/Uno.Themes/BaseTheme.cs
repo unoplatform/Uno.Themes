@@ -467,36 +467,6 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// (e.g. a toolkit theme stacking additional control styles) on top of the
 		// fully-generated token/palette/override set.
 		AddThemeSpecificResources();
-
-		// [STEVE-HR] Probe what the theme NOW resolves for representative Color vs Brush keys.
-		// If PrimaryColor reflects the override but PrimaryBrush does not, the override only
-		// changed the Color and the StaticResource-bound rendered brushes never updated.
-		HrProbe("PrimaryColor");
-		HrProbe("PrimaryBrush");
-		HrProbe("SurfaceColor");
-		HrProbe("SurfaceBrush");
-		HrProbe("BackgroundColor");
-		HrProbe("BackgroundBrush");
-	}
-
-	// [STEVE-HR] Resolve a key through this theme dictionary (theme-aware) and log its effective value.
-	private void HrProbe(string key)
-	{
-		try
-		{
-			if (TryGetValue(key, out var v))
-			{
-				System.Console.WriteLine($"[STEVE-HR]   theme resolves '{key}' = {v}");
-			}
-			else
-			{
-				System.Console.WriteLine($"[STEVE-HR]   theme resolves '{key}' = <not found>");
-			}
-		}
-		catch (Exception ex)
-		{
-			System.Console.WriteLine($"[STEVE-HR]   theme resolves '{key}' -> error {ex.GetType().Name}: {ex.Message}");
-		}
 	}
 
 	/// <summary>
@@ -531,43 +501,6 @@ public abstract partial class BaseTheme : ResourceDictionary
 	{
 		MergedDictionaries.Add(dictionary);
 		_dynamicDictionaries.Add(dictionary);
-	}
-
-	// [STEVE-HR] Diagnostic: dump the resolved override dictionary's theme-dictionary colors so we can
-	// see whether ms-appx:///ThemeColors.xaml resolved to real values (or empty) at this point.
-	private static void HrDumpOverride(ResourceDictionary dict, string label)
-	{
-		try
-		{
-			foreach (var themeKvp in dict.ThemeDictionaries)
-			{
-				if (themeKvp.Value is ResourceDictionary themeDict)
-				{
-					var c = 0;
-					foreach (var kvp in themeDict)
-					{
-						System.Console.WriteLine($"[STEVE-HR]   override[{label}] theme['{themeKvp.Key}']['{kvp.Key}'] = {kvp.Value}");
-						if (++c >= 6)
-						{
-							System.Console.WriteLine($"[STEVE-HR]   override[{label}] theme['{themeKvp.Key}']: ...({themeDict.Count} total)");
-							break;
-						}
-					}
-					if (c == 0)
-					{
-						System.Console.WriteLine($"[STEVE-HR]   override[{label}] theme['{themeKvp.Key}'] is EMPTY");
-					}
-				}
-			}
-			if (dict.ThemeDictionaries.Count == 0)
-			{
-				System.Console.WriteLine($"[STEVE-HR]   override[{label}] has NO theme dictionaries (top-level keys={dict.Count})");
-			}
-		}
-		catch (Exception ex)
-		{
-			System.Console.WriteLine($"[STEVE-HR]   override[{label}] dump error: {ex.GetType().Name}: {ex.Message}");
-		}
 	}
 
 	/// <summary>
