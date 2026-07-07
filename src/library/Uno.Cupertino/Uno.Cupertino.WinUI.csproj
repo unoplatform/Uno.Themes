@@ -14,9 +14,9 @@
 
 	<Import Project="cupertino-common.props" />
 
-	<ItemGroup>
-		<PackageReference Include="Uno.WinUI.Lottie" Condition="!$(_IsWinUI)" />
-	</ItemGroup>
+	<PropertyGroup>
+		<UnoFeatures>Lottie;</UnoFeatures>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Uno.Themes\Uno.Themes.WinUI.csproj">
