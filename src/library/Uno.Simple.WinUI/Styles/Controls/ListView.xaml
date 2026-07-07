@@ -8,97 +8,116 @@
 		Simple Design System — ListView / ListViewItem Style
 		Maps SDS ListBox component tokens to WinUI ListView + ListViewItem.
 
+		Lightweight styling pattern: every visual-state brush is exposed via
+		ThemeResource so consumers can override any individual key.
+
+		Semantic resource layer:
+		ListView*       = semantic keys for the container (source of truth)
+		ListViewItem*   = semantic keys for list items (source of truth)
+
 		SDS ListBox:
-		  Container: bg = background-default-default, border = border-default-default, radius = 8px
-		  Item normal: transparent bg, text = text-default-default, description = text-default-secondary
-		  Item focused/selected: bg = background-brand-default, text = text-brand-on-brand
-		  Item disabled: text = text-disabled-default
+		Container: bg = background-default-default, border = border-default-default, radius = 8px
+		Item normal: transparent bg, text = text-default-default, description = text-default-secondary
+		Item focused/selected: bg = background-brand-default, text = text-brand-on-brand
+		Item disabled: text = text-disabled-default
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
-			<!-- ListView container -->
-			<StaticResource x:Key="SimpleListViewBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleListViewBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
 
-			<!-- ListViewItem — Normal -->
-			<SolidColorBrush x:Key="SimpleListViewItemBackground" Color="Transparent" />
-			<StaticResource x:Key="SimpleListViewItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleListViewItemSecondaryForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<!-- ── ListView container — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="ListViewBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ListViewBorderBrush" ResourceKey="OutlineBrush" />
 
-			<!-- ListViewItem — PointerOver -->
-			<StaticResource x:Key="SimpleListViewItemBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<!-- ── ListViewItem — semantic keys (source of truth) ── -->
 
-			<!-- ListViewItem — Pressed -->
-			<StaticResource x:Key="SimpleListViewItemBackgroundPressed" ResourceKey="SimpleBackgroundDefaultTertiaryBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<!-- Normal -->
+			<StaticResource x:Key="ListViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OnSurfaceBrush" />
 
-			<!-- ListViewItem — Selected (maps to SDS focused/selected highlight) -->
-			<StaticResource x:Key="SimpleListViewItemBackgroundSelected" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundSelected" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<!-- PointerOver -->
+			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 
-			<!-- ListViewItem — PointerOverSelected -->
-			<StaticResource x:Key="SimpleListViewItemBackgroundSelectedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundSelectedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<!-- Pressed -->
+			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
 
-			<!-- ListViewItem — PressedSelected -->
-			<StaticResource x:Key="SimpleListViewItemBackgroundSelectedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundSelectedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<!-- Selected -->
+			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ListViewItemForegroundSelected" ResourceKey="OnPrimaryBrush" />
 
-			<!-- ListViewItem — Disabled -->
-			<StaticResource x:Key="SimpleListViewItemForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- PointerOverSelected -->
+			<StaticResource x:Key="ListViewItemBackgroundPointerOverSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOverSelected" ResourceKey="OnPrimaryBrush" />
+
+			<!-- PressedSelected -->
+			<StaticResource x:Key="ListViewItemBackgroundPressedSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressedSelected" ResourceKey="OnPrimaryBrush" />
+
+			<!-- Disabled -->
+			<StaticResource x:Key="ListViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<StaticResource x:Key="SimpleListViewBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleListViewBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
 
-			<SolidColorBrush x:Key="SimpleListViewItemBackground" Color="Transparent" />
-			<StaticResource x:Key="SimpleListViewItemForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleListViewItemSecondaryForeground" ResourceKey="SimpleTextDefaultSecondaryBrush" />
+			<!-- ── ListView container — semantic keys (source of truth) ── -->
+			<StaticResource x:Key="ListViewBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="ListViewBorderBrush" ResourceKey="OutlineBrush" />
 
-			<StaticResource x:Key="SimpleListViewItemBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultSecondaryBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<!-- ── ListViewItem — semantic keys (source of truth) ── -->
 
-			<StaticResource x:Key="SimpleListViewItemBackgroundPressed" ResourceKey="SimpleBackgroundDefaultTertiaryBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundPressed" ResourceKey="SimpleTextDefaultDefaultBrush" />
+			<!-- Normal -->
+			<StaticResource x:Key="ListViewItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="ListViewItemForeground" ResourceKey="OnSurfaceBrush" />
 
-			<StaticResource x:Key="SimpleListViewItemBackgroundSelected" ResourceKey="SimpleBackgroundBrandDefaultBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundSelected" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<!-- PointerOver -->
+			<StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
 
-			<StaticResource x:Key="SimpleListViewItemBackgroundSelectedPointerOver" ResourceKey="SimpleBackgroundBrandHoverBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundSelectedPointerOver" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<!-- Pressed -->
+			<StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressed" ResourceKey="OnSurfaceBrush" />
 
-			<StaticResource x:Key="SimpleListViewItemBackgroundSelectedPressed" ResourceKey="SimpleBackgroundBrandPressedBrush" />
-			<StaticResource x:Key="SimpleListViewItemForegroundSelectedPressed" ResourceKey="SimpleTextBrandOnBrandBrush" />
+			<!-- Selected -->
+			<StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="PrimaryBrush" />
+			<StaticResource x:Key="ListViewItemForegroundSelected" ResourceKey="OnPrimaryBrush" />
 
-			<StaticResource x:Key="SimpleListViewItemForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<!-- PointerOverSelected -->
+			<StaticResource x:Key="ListViewItemBackgroundPointerOverSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPointerOverSelected" ResourceKey="OnPrimaryBrush" />
+
+			<!-- PressedSelected -->
+			<StaticResource x:Key="ListViewItemBackgroundPressedSelected" ResourceKey="PrimaryVariantDarkBrush" />
+			<StaticResource x:Key="ListViewItemForegroundPressedSelected" ResourceKey="OnPrimaryBrush" />
+
+			<!-- Disabled -->
+			<StaticResource x:Key="ListViewItemForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- ListViewItem Style                                                     -->
+	<!-- ListViewItem Style -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleListViewItemStyle"
 		   TargetType="ListViewItem">
 
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
-		<Setter Property="Background" Value="{ThemeResource SimpleListViewItemBackground}" />
-		<Setter Property="Foreground" Value="{ThemeResource SimpleListViewItemForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="Background" Value="{ThemeResource ListViewItemBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource ListViewItemForeground}" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="MinHeight" Value="40" />
-		<Setter Property="Padding" Value="8" />
-		<Setter Property="CornerRadius" Value="8" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMedium}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSpace200Thickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleRadius200CornerRadius}" />
 		<Setter Property="TabNavigation" Value="Local" />
 		<Setter Property="IsHoldingEnabled" Value="True" />
 		<Setter Property="AllowDrop" Value="False" />
@@ -120,36 +139,36 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="ContentBorder.Background" Value="{ThemeResource SimpleListViewItemBackgroundPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleListViewItemForegroundPointerOver}" />
+										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="ContentBorder.Background" Value="{ThemeResource SimpleListViewItemBackgroundPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleListViewItemForegroundPressed}" />
+										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPressed}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Selected">
 									<VisualState.Setters>
-										<Setter Target="ContentBorder.Background" Value="{ThemeResource SimpleListViewItemBackgroundSelected}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleListViewItemForegroundSelected}" />
+										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundSelected}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PointerOverSelected">
 									<VisualState.Setters>
-										<Setter Target="ContentBorder.Background" Value="{ThemeResource SimpleListViewItemBackgroundSelectedPointerOver}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleListViewItemForegroundSelectedPointerOver}" />
+										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPointerOverSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPointerOverSelected}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="PressedSelected">
 									<VisualState.Setters>
-										<Setter Target="ContentBorder.Background" Value="{ThemeResource SimpleListViewItemBackgroundSelectedPressed}" />
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleListViewItemForegroundSelectedPressed}" />
+										<Setter Target="ContentBorder.Background" Value="{ThemeResource ListViewItemBackgroundPressedSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundPressedSelected}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -158,7 +177,7 @@
 								<VisualState x:Name="Enabled" />
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SimpleListViewItemForegroundDisabled}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ListViewItemForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -178,13 +197,13 @@
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- ListView Style                                                        -->
+	<!-- ListView Style -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleListViewStyle"
 		   TargetType="ListView">
 
-		<Setter Property="Background" Value="{ThemeResource SimpleListViewBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleListViewBorderBrush}" />
+		<Setter Property="Background" Value="{ThemeResource ListViewBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="IsTabStop" Value="False" />
 		<Setter Property="TabNavigation" Value="Once" />

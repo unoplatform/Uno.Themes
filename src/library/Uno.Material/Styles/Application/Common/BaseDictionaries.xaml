@@ -1,0 +1,27 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Static base layer for MaterialTheme. Pulled into both mergedpages.v1.xaml and
+		mergedpages.v2.xaml by the Uno.XamlMerge task (via the Styles\Application\Common\
+		glob) so that a single Source=mergedpages.<ver>.xaml on BaseTheme brings in the
+		default converter, typography and font resources the theme needs.
+
+		Order matters: entries listed LATER win at lookup time (MergedDictionaries are
+		searched in reverse).
+
+		Colour resources are intentionally NOT included here: SharedColors and the
+		shared/seed palettes are added (and removed) dynamically by
+		BaseTheme.UpdateSource so they rebuild on seed-color and override changes. The
+		dynamic spacing/shape/density scales and consumer font overrides are likewise
+		added programmatically, sitting ABOVE this layer.
+	-->
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
+
+		<ResourceDictionary Source="ms-appx:///Uno.Material.WinUI/Styles/Application/Common/Fonts.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

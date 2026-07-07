@@ -30,4 +30,6 @@ global using ApplicationExecutionState = Windows.ApplicationModel.Activation.App
 global using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 global using MUXC = Microsoft.UI.Xaml.Controls;
 global using XamlBindable = Microsoft.UI.Xaml.Data.BindableAttribute;
-global using XamlWindow = Microsoft.UI.Xaml.Window;
+// Note: XamlWindow alias moved to per-file usings to avoid conflict with
+// Uno.UI.RuntimeTests.Engine source package which defines the same alias.
+// global using XamlWindow = Microsoft.UI.Xaml.Window;

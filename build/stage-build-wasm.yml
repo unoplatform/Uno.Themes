@@ -15,6 +15,9 @@ jobs:
       Material:
         SampleAppName: MaterialSampleApp
         ProjectPath: src/samples/MaterialSampleApp
+      Simple:
+        SampleAppName: SimpleSampleApp
+        ProjectPath: src/samples/SimpleSampleApp
 
   variables:
     ArtifactName: wasm-$(SampleAppName)
@@ -22,6 +25,8 @@ jobs:
   steps:
   - checkout: self
     clean: 'true'
+
+  - template: templates/host-cleanup-linux.yml
 
   - template: templates/dotnet-install-linux.yml
     parameters:

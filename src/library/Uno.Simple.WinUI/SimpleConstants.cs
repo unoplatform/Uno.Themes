@@ -12,7 +12,7 @@ internal static class SimpleConstants
 	public static class ResourcePaths
 	{
 		public static readonly string ColorPalette = $"ms-appx:///{PackageName}/Styles/Application/ColorPalette.xaml";
-		public static string Thickness = $"ms-appx:///{PackageName}/Styles/Application/Thickness.xaml";
+		public static string Thickness = $"ms-appx:///{PackageName}/Styles/Application/Common/Thickness.xaml";
 		public static readonly string MergedPages = $"ms-appx:///{PackageName}/Generated/mergedpages.xaml";
 
 		public static class Common

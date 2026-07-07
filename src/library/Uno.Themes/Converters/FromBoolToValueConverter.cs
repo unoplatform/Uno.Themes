@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 #if WinUI
 using Microsoft.UI.Xaml.Data;
@@ -35,7 +36,7 @@ public class FromBoolToValueConverter : IValueConverter
 			return NullValue;
 		}
 
-		if (System.Convert.ToBoolean(value))
+		if (System.Convert.ToBoolean(value, CultureInfo.InvariantCulture))
 		{
 			return TrueValue;
 		}

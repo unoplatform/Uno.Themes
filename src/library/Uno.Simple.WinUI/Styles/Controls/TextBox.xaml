@@ -4,110 +4,229 @@
 	<!--
 		Simple Design System — TextBox Styles
 		Maps SDS Input component tokens to WinUI TextBox.
+		
+		Two visual variants:
+		Filled  — background fill + border (default, SDS Input)
+		Outlined — surface background (SurfaceBrush), visible border only
+		
+		Resource layers:
+		FilledTextBox*      = semantic keys (source of truth, filled variant)
+		OutlinedTextBox*    = semantic keys (source of truth, outlined variant)
+		SimpleTextBox*      = Simple-prefixed aliases for backwards compat
 
-		SDS Input: outlined box with 8px radius, 1px border
+		Each variant's keys directly reference semantic brushes — they are
+		independent and do not alias each other.
+		
+		Simple-only variants (no semantic rename):
+		SimpleTextBoxError*  — danger border overrides
+		SimpleTextBoxSmall*  — small size variant
+		
+		SDS Input: box with 8px radius, 1px border, background
 		States: Normal, Hover, Focus (brand-secondary border), Disabled, Error (danger border)
 		Padding: horizontal=16, vertical=10 (space-300 minus stroke-border*2 = 12-2)
 	-->
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Lightweight styling ThemeResource aliases                              -->
+	<!-- Lightweight styling ThemeResource aliases -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
+
+			<!-- ── FilledTextBox — semantic keys (source of truth) ── -->
 			<!-- Sizing -->
-			<CornerRadius x:Key="SimpleTextBoxCornerRadius">8</CornerRadius>
-			<Thickness x:Key="SimpleTextBoxBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleTextBoxFocusedBorderThickness">2</Thickness>
-			<Thickness x:Key="SimpleTextBoxPadding">16,10,16,10</Thickness>
-			<x:Double x:Key="SimpleTextBoxMinHeight">40</x:Double>
-			<x:Double x:Key="SimpleTextBoxSmallMinHeight">32</x:Double>
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
+			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
+			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="FilledTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
 
 			<!-- Normal state -->
-			<StaticResource x:Key="SimpleTextBoxForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxPlaceholderForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
+			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- PointerOver state -->
-			<StaticResource x:Key="SimpleTextBoxForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Focused state -->
-			<StaticResource x:Key="SimpleTextBoxForegroundFocused" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackgroundFocused" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrushFocused" ResourceKey="SimpleBorderBrandSecondaryBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
 
 			<!-- Disabled state -->
-			<StaticResource x:Key="SimpleTextBoxForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxPlaceholderForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-
-			<!-- Error state overrides -->
-			<StaticResource x:Key="SimpleTextBoxErrorBorderBrush" ResourceKey="SimpleBorderDangerDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxErrorBorderBrushPointerOver" ResourceKey="SimpleBorderDangerDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxErrorBorderBrushFocused" ResourceKey="SimpleBorderDangerDefaultBrush" />
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- Header / label -->
-			<StaticResource x:Key="SimpleTextBoxHeaderForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxHeaderForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ── OutlinedTextBox — semantic keys (source of truth, outlined variant) ── -->
+			<!-- Sizing -->
+			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+
+			<!-- Normal state -->
+			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- PointerOver state -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- Focused state -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- Disabled state -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- Header / label -->
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ── Simple-only: Error state overrides (no semantic rename) ── -->
+			<!-- ── Simple-only: Small size variant ── -->
+			<StaticResource x:Key="SimpleTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="SimpleTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="SimpleTextBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="SimpleTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="SimpleTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="SimpleTextBoxSmallMinHeight" ResourceKey="SimpleIconMedium" />
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<CornerRadius x:Key="SimpleTextBoxCornerRadius">8</CornerRadius>
-			<Thickness x:Key="SimpleTextBoxBorderThickness">1</Thickness>
-			<Thickness x:Key="SimpleTextBoxFocusedBorderThickness">2</Thickness>
+
+			<!-- ── FilledTextBox — semantic keys (source of truth) ── -->
+			<!-- Sizing -->
+			<StaticResource x:Key="FilledTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<Thickness x:Key="FilledTextBoxBorderThicknessNormal">0</Thickness>
+			<Thickness x:Key="FilledTextBoxBorderThicknessFocused">0</Thickness>
+			<Thickness x:Key="FilledTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="FilledTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+
+			<!-- Normal state -->
+			<StaticResource x:Key="FilledTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- PointerOver state -->
+			<StaticResource x:Key="FilledTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundPointerOver" ResourceKey="SurfaceVariantBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushPointerOver" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- Focused state -->
+			<StaticResource x:Key="FilledTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushFocused" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- Disabled state -->
+			<StaticResource x:Key="FilledTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="FilledTextBoxBorderBrushDisabled" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="FilledTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- Header / label -->
+			<StaticResource x:Key="FilledTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="FilledTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ── OutlinedTextBox — semantic keys (source of truth, outlined variant) ── -->
+			<!-- Sizing -->
+			<StaticResource x:Key="OutlinedTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="OutlinedTextBoxBorderThicknessFocused" ResourceKey="SimpleStrokeFocusRingThickness" />
+			<Thickness x:Key="OutlinedTextBoxPadding">16,10,16,10</Thickness>
+			<StaticResource x:Key="OutlinedTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+
+			<!-- Normal state -->
+			<StaticResource x:Key="OutlinedTextBoxForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackground" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrush" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForeground" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- PointerOver state -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundPointerOver" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushPointerOver" ResourceKey="OutlineBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundPointerOver" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- Focused state -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundFocused" ResourceKey="SurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushFocused" ResourceKey="PrimaryMediumBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundFocused" ResourceKey="OnSurfaceLowBrush" />
+
+			<!-- Disabled state -->
+			<StaticResource x:Key="OutlinedTextBoxForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBackgroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxBorderBrushDisabled" ResourceKey="OutlineDisabledBrush" />
+			<StaticResource x:Key="OutlinedTextBoxPlaceholderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- Header / label -->
+			<StaticResource x:Key="OutlinedTextBoxHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundPointerOver" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundFocused" ResourceKey="OnSurfaceBrush" />
+			<StaticResource x:Key="OutlinedTextBoxHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
+
+			<!-- ── Simple-only: Error state overrides (no semantic rename) ── -->
+			<!-- ── Simple-only: Small size variant ── -->
+			<StaticResource x:Key="SimpleTextBoxCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
+			<StaticResource x:Key="SimpleTextBoxBorderThickness" ResourceKey="SimpleStrokeBorderThickness" />
+			<StaticResource x:Key="SimpleTextBoxFocusedBorderThickness" ResourceKey="SimpleStrokeFocusRingThickness" />
 			<Thickness x:Key="SimpleTextBoxPadding">16,10,16,10</Thickness>
-			<x:Double x:Key="SimpleTextBoxMinHeight">40</x:Double>
-			<x:Double x:Key="SimpleTextBoxSmallMinHeight">32</x:Double>
-
-			<StaticResource x:Key="SimpleTextBoxForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackground" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrush" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxPlaceholderForeground" ResourceKey="SimpleTextDefaultTertiaryBrush" />
-
-			<StaticResource x:Key="SimpleTextBoxForegroundPointerOver" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackgroundPointerOver" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrushPointerOver" ResourceKey="SimpleBorderDefaultDefaultBrush" />
-
-			<StaticResource x:Key="SimpleTextBoxForegroundFocused" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackgroundFocused" ResourceKey="SimpleBackgroundDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrushFocused" ResourceKey="SimpleBorderBrandSecondaryBrush" />
-
-			<StaticResource x:Key="SimpleTextBoxForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBackgroundDisabled" ResourceKey="SimpleBackgroundDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxBorderBrushDisabled" ResourceKey="SimpleBorderDisabledDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxPlaceholderForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
-
-			<StaticResource x:Key="SimpleTextBoxErrorBorderBrush" ResourceKey="SimpleBorderDangerDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxErrorBorderBrushPointerOver" ResourceKey="SimpleBorderDangerDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxErrorBorderBrushFocused" ResourceKey="SimpleBorderDangerDefaultBrush" />
-
-			<StaticResource x:Key="SimpleTextBoxHeaderForeground" ResourceKey="SimpleTextDefaultDefaultBrush" />
-			<StaticResource x:Key="SimpleTextBoxHeaderForegroundDisabled" ResourceKey="SimpleTextDisabledDefaultBrush" />
+			<StaticResource x:Key="SimpleTextBoxMinHeight" ResourceKey="SimpleIconLarge" />
+			<StaticResource x:Key="SimpleTextBoxSmallMinHeight" ResourceKey="SimpleIconMedium" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
 
+	<StaticResource x:Key="SimpleTextBoxHeaderMargin" ResourceKey="Space100BottomThickness" />
+
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Default Input TextBox (SDS outlined input)                            -->
+	<!-- Filled TextBox (FilledTextBox* semantic keys) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleInputTextBoxStyle"
+	<Style x:Key="SimpleFilledTextBoxStyle"
 		   TargetType="TextBox">
-		<Setter Property="Foreground" Value="{ThemeResource SimpleTextBoxForeground}" />
-		<Setter Property="Background" Value="{ThemeResource SimpleTextBoxBackground}" />
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleTextBoxBorderBrush}" />
-		<Setter Property="BorderThickness" Value="{ThemeResource SimpleTextBoxBorderThickness}" />
-		<Setter Property="CornerRadius" Value="{ThemeResource SimpleTextBoxCornerRadius}" />
-		<Setter Property="Padding" Value="{ThemeResource SimpleTextBoxPadding}" />
-		<Setter Property="MinHeight" Value="{ThemeResource SimpleTextBoxMinHeight}" />
-		<Setter Property="FontFamily" Value="{ThemeResource SimpleFontFamily}" />
-		<Setter Property="FontSize" Value="16" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledTextBoxForeground}" />
+		<Setter Property="Background" Value="{ThemeResource FilledTextBoxBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledTextBoxBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource FilledTextBoxBorderThicknessNormal}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource FilledTextBoxCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource FilledTextBoxPadding}" />
+		<Setter Property="MinHeight" Value="{ThemeResource FilledTextBoxMinHeight}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
 		<Setter Property="FontWeight" Value="Normal" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -130,29 +249,28 @@
 
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundPointerOver}" />
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleTextBoxBorderBrushPointerOver}" />
-										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleTextBoxForegroundPointerOver}" />
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource FilledTextBoxBackgroundPointerOver}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource FilledTextBoxBorderBrushPointerOver}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundPointerOver}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundFocused}" />
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleTextBoxBorderBrushFocused}" />
-										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource SimpleTextBoxFocusedBorderThickness}" />
-										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleTextBoxForegroundFocused}" />
-										<Setter Target="PlaceholderTextContentPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource FilledTextBoxBackgroundFocused}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource FilledTextBoxBorderBrushFocused}" />
+										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource FilledTextBoxBorderThicknessFocused}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundFocused}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
-										<Setter Target="BorderElement.Background" Value="{ThemeResource SimpleTextBoxBackgroundDisabled}" />
-										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource SimpleTextBoxBorderBrushDisabled}" />
-										<Setter Target="ContentElement.Foreground" Value="{ThemeResource SimpleTextBoxForegroundDisabled}" />
-										<Setter Target="PlaceholderTextContentPresenter.Foreground" Value="{ThemeResource SimpleTextBoxPlaceholderForegroundDisabled}" />
-										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource SimpleTextBoxHeaderForegroundDisabled}" />
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource FilledTextBoxBackgroundDisabled}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource FilledTextBoxBorderBrushDisabled}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource FilledTextBoxForegroundDisabled}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource FilledTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource FilledTextBoxHeaderForegroundDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -163,31 +281,33 @@
 										  Grid.Row="0"
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
-										  FontFamily="{ThemeResource SimpleFontFamily}"
-										  FontSize="14"
+										  FontFamily="{ThemeResource BodyLargeFontFamily}"
+										  FontSize="{ThemeResource BodyMediumFontSize}"
 										  FontWeight="SemiBold"
-										  Foreground="{ThemeResource SimpleTextBoxHeaderForeground}"
-										  Margin="0,0,0,4"
+										  Foreground="{ThemeResource FilledTextBoxHeaderForeground}"
+										  Margin="{StaticResource SimpleTextBoxHeaderMargin}"
 										  TextWrapping="Wrap"
 										  Visibility="Collapsed"
 										  x:DeferLoadStrategy="Lazy" />
 
 						<!-- Input field -->
-						<Border x:Name="BorderElement"
-								Grid.Row="1"
-								Background="{TemplateBinding Background}"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								BorderThickness="{TemplateBinding BorderThickness}"
-								CornerRadius="{TemplateBinding CornerRadius}"
-								MinHeight="{TemplateBinding MinHeight}">
+						<Grid Grid.Row="1"
+							  MinHeight="{TemplateBinding MinHeight}">
 
+							<!-- Background fill -->
+							<Border x:Name="BackgroundElement"
+									Background="{TemplateBinding Background}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+
+							<!-- Content -->
 							<Grid VerticalAlignment="Center">
-								<ContentControl x:Name="PlaceholderTextContentPresenter"
+								<ContentControl x:Name="PlaceholderElement"
 												Content="{TemplateBinding PlaceholderText}"
-												Foreground="{ThemeResource SimpleTextBoxPlaceholderForeground}"
+												Foreground="{ThemeResource FilledTextBoxPlaceholderForeground}"
 												FontFamily="{TemplateBinding FontFamily}"
 												FontSize="{TemplateBinding FontSize}"
 												Padding="{TemplateBinding Padding}"
+												Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToVisibleConverter}}"
 												IsHitTestVisible="False"
 												IsTabStop="False" />
 
@@ -204,7 +324,17 @@
 											  ZoomMode="Disabled"
 											  AutomationProperties.AccessibilityView="Raw" />
 							</Grid>
-						</Border>
+
+							<!--
+								Border overlay — border thickness changes (e.g. 1 px → 2 px on focus)
+								don't push inner content, preventing the "shrink" effect.
+								Same approach as Material.
+							-->
+							<Border x:Name="BorderElement"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+						</Grid>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -212,29 +342,146 @@
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Outlined Input (alias — same as default in SDS)                       -->
+	<!-- Error variant (danger border) — Simple-only -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleOutlinedInputTextBoxStyle"
+	<Style x:Key="SimpleTextBoxErrorStyle"
 		   TargetType="TextBox"
-		   BasedOn="{StaticResource SimpleInputTextBoxStyle}" />
-
-	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Error variant (danger border)                                         -->
-	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleInputTextBoxErrorStyle"
-		   TargetType="TextBox"
-		   BasedOn="{StaticResource SimpleInputTextBoxStyle}">
-		<Setter Property="BorderBrush" Value="{ThemeResource SimpleTextBoxErrorBorderBrush}" />
+		   BasedOn="{StaticResource SimpleOutlinedTextBoxStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource ErrorBrush}" />
 	</Style>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<!-- Small size variant                                                    -->
+	<!-- Small size variant — Simple-only -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<Style x:Key="SimpleInputTextBoxSmallStyle"
+	<Style x:Key="SimpleTextBoxSmallStyle"
 		   TargetType="TextBox"
-		   BasedOn="{StaticResource SimpleInputTextBoxStyle}">
-		<Setter Property="MinHeight" Value="{ThemeResource SimpleTextBoxSmallMinHeight}" />
-		<Setter Property="FontSize" Value="14" />
+		   BasedOn="{StaticResource SimpleOutlinedTextBoxStyle}">
+		<Setter Property="MinHeight" Value="{ThemeResource SimpleIconMedium}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Outlined TextBox (OutlinedTextBox* semantic keys) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="SimpleOutlinedTextBoxStyle"
+		   TargetType="TextBox">
+		<Setter Property="Foreground" Value="{ThemeResource OutlinedTextBoxForeground}" />
+		<Setter Property="Background" Value="{ThemeResource OutlinedTextBoxBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource OutlinedTextBoxBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OutlinedTextBoxCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource OutlinedTextBoxPadding}" />
+		<Setter Property="MinHeight" Value="{ThemeResource OutlinedTextBoxMinHeight}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<Setter Property="FocusVisualMargin" Value="-3" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TextBox">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource OutlinedTextBoxBackgroundPointerOver}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushPointerOver}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource OutlinedTextBoxBackgroundFocused}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushFocused}" />
+										<Setter Target="BorderElement.BorderThickness" Value="{ThemeResource OutlinedTextBoxBorderThicknessFocused}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundFocused}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="BackgroundElement.Background" Value="{ThemeResource OutlinedTextBoxBackgroundDisabled}" />
+										<Setter Target="BorderElement.BorderBrush" Value="{ThemeResource OutlinedTextBoxBorderBrushDisabled}" />
+										<Setter Target="ContentElement.Foreground" Value="{ThemeResource OutlinedTextBoxForegroundDisabled}" />
+										<Setter Target="PlaceholderElement.Foreground" Value="{ThemeResource OutlinedTextBoxPlaceholderForegroundDisabled}" />
+										<Setter Target="HeaderContentPresenter.Foreground" Value="{ThemeResource OutlinedTextBoxHeaderForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Header -->
+						<ContentPresenter x:Name="HeaderContentPresenter"
+										  Grid.Row="0"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  FontFamily="{ThemeResource BodyLargeFontFamily}"
+										  FontSize="{ThemeResource BodyMediumFontSize}"
+										  FontWeight="SemiBold"
+										  Foreground="{ThemeResource OutlinedTextBoxHeaderForeground}"
+										  Margin="{StaticResource SimpleTextBoxHeaderMargin}"
+										  TextWrapping="Wrap"
+										  Visibility="Collapsed"
+										  x:DeferLoadStrategy="Lazy" />
+
+						<!-- Input field -->
+						<Grid Grid.Row="1"
+							  MinHeight="{TemplateBinding MinHeight}">
+
+							<!-- Background fill -->
+							<Border x:Name="BackgroundElement"
+									Background="{TemplateBinding Background}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+
+							<!-- Content -->
+							<Grid VerticalAlignment="Center">
+								<ContentControl x:Name="PlaceholderElement"
+												Content="{TemplateBinding PlaceholderText}"
+												Foreground="{ThemeResource OutlinedTextBoxPlaceholderForeground}"
+												FontFamily="{TemplateBinding FontFamily}"
+												FontSize="{TemplateBinding FontSize}"
+												Padding="{TemplateBinding Padding}"
+												Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyToVisibleConverter}}"
+												IsHitTestVisible="False"
+												IsTabStop="False" />
+
+								<ScrollViewer x:Name="ContentElement"
+											  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+											  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+											  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+											  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+											  Padding="{TemplateBinding Padding}"
+											  VerticalAlignment="Center"
+											  IsHorizontalRailEnabled="False"
+											  IsVerticalRailEnabled="False"
+											  IsTabStop="False"
+											  ZoomMode="Disabled"
+											  AutomationProperties.AccessibilityView="Raw" />
+							</Grid>
+
+							<!-- Border overlay -->
+							<Border x:Name="BorderElement"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
 	</Style>
 
 </ResourceDictionary>

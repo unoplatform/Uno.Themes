@@ -10,120 +10,80 @@
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
+			<!-- Root typeface tokens (cascade to all type scales) -->
+			<FontFamily x:Key="TypefacePlain">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
+			<FontFamily x:Key="TypefaceBrand">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
 
-			<!-- SDS Font Families -->
-			<FontFamily x:Key="SimpleFontFamily">Inter</FontFamily>
-			<FontFamily x:Key="SimpleFontFamilySans">Inter</FontFamily>
-			<FontFamily x:Key="SimpleFontFamilySerif">Noto Serif</FontFamily>
-			<FontFamily x:Key="SimpleFontFamilyMono">Roboto Mono</FontFamily>
+			<!-- Per-weight font family resources -->
+			<FontFamily x:Key="SimpleRegularFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
+			<FontFamily x:Key="SimpleMediumFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
+			<FontFamily x:Key="SimpleSemiBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-SemiBold.ttf#Inter</FontFamily>
+			<FontFamily x:Key="SimpleBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Bold.ttf#Inter</FontFamily>
 
-			<!-- SDS Typography Scale (font sizes in px) -->
-			<x:Double x:Key="SimpleTypographyScale01">12</x:Double>
-			<x:Double x:Key="SimpleTypographyScale02">14</x:Double>
-			<x:Double x:Key="SimpleTypographyScale03">16</x:Double>
-			<x:Double x:Key="SimpleTypographyScale04">20</x:Double>
-			<x:Double x:Key="SimpleTypographyScale05">24</x:Double>
-			<x:Double x:Key="SimpleTypographyScale06">32</x:Double>
-			<x:Double x:Key="SimpleTypographyScale07">40</x:Double>
-			<x:Double x:Key="SimpleTypographyScale08">48</x:Double>
-			<x:Double x:Key="SimpleTypographyScale09">56</x:Double>
-			<x:Double x:Key="SimpleTypographyScale10">72</x:Double>
+			<!-- Legacy Simple-specific font family key (points to Regular) -->
+			<FontFamily x:Key="SimpleFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
 
-			<!-- SDS Line Heights (px) -->
-			<x:Double x:Key="SimpleLineHeight01">16</x:Double>
-			<x:Double x:Key="SimpleLineHeight02">20</x:Double>
-			<x:Double x:Key="SimpleLineHeight03">24</x:Double>
-			<x:Double x:Key="SimpleLineHeight04">28</x:Double>
-			<x:Double x:Key="SimpleLineHeight05">32</x:Double>
-			<x:Double x:Key="SimpleLineHeight06">40</x:Double>
-			<x:Double x:Key="SimpleLineHeight07">48</x:Double>
-			<x:Double x:Key="SimpleLineHeight08">56</x:Double>
-			<x:Double x:Key="SimpleLineHeight09">64</x:Double>
-			<x:Double x:Key="SimpleLineHeight10">80</x:Double>
-
-			<!-- Semantic Typography Aliases -->
-			<x:Double x:Key="SimpleTitleHeroFontSize">72</x:Double>
-			<x:Double x:Key="SimpleTitleHeroLineHeight">80</x:Double>
-			<x:Double x:Key="SimpleTitlePageFontSize">48</x:Double>
-			<x:Double x:Key="SimpleTitlePageLineHeight">56</x:Double>
-			<x:Double x:Key="SimpleSubtitleFontSize">32</x:Double>
-			<x:Double x:Key="SimpleSubtitleLineHeight">40</x:Double>
-			<x:Double x:Key="SimpleHeadingFontSize">24</x:Double>
-			<x:Double x:Key="SimpleHeadingLineHeight">32</x:Double>
-			<x:Double x:Key="SimpleSubheadingFontSize">20</x:Double>
-			<x:Double x:Key="SimpleSubheadingLineHeight">28</x:Double>
-			<x:Double x:Key="SimpleBodyFontSize">16</x:Double>
-			<x:Double x:Key="SimpleBodyLineHeight">24</x:Double>
-			<x:Double x:Key="SimpleBodySmallFontSize">14</x:Double>
-			<x:Double x:Key="SimpleBodySmallLineHeight">20</x:Double>
-			<x:Double x:Key="SimpleCaptionFontSize">12</x:Double>
-			<x:Double x:Key="SimpleCaptionLineHeight">16</x:Double>
-
-			<!-- SDS Font Weights -->
-			<FontWeight x:Key="SimpleRegularFontWeight">Normal</FontWeight>
-			<FontWeight x:Key="SimpleMediumFontWeight">Medium</FontWeight>
-			<FontWeight x:Key="SimpleSemiBoldFontWeight">SemiBold</FontWeight>
-			<FontWeight x:Key="SimpleBoldFontWeight">Bold</FontWeight>
-
+			<!--
+				Semantic typography slot → weight mapping. Declared here as well as in
+				Typography.xaml because Fonts.xaml is merged after SharedTypography: that ordering
+				makes these win over the shared (Segoe-based) defaults deterministically. The
+				equivalent aliases in Typography.xaml's inline theme dictionaries are resolved
+				against the base layer at parse time and can otherwise fall back to the wrong weight.
+			-->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
 		</ResourceDictionary>
-
-		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
+			<!-- Root typeface tokens (cascade to all type scales) -->
+			<FontFamily x:Key="TypefacePlain">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
+			<FontFamily x:Key="TypefaceBrand">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
 
-			<!-- SDS Font Families -->
-			<FontFamily x:Key="SimpleFontFamily">Inter</FontFamily>
-			<FontFamily x:Key="SimpleFontFamilySans">Inter</FontFamily>
-			<FontFamily x:Key="SimpleFontFamilySerif">Noto Serif</FontFamily>
-			<FontFamily x:Key="SimpleFontFamilyMono">Roboto Mono</FontFamily>
+			<!-- Per-weight font family resources -->
+			<FontFamily x:Key="SimpleRegularFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
+			<FontFamily x:Key="SimpleMediumFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
+			<FontFamily x:Key="SimpleSemiBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-SemiBold.ttf#Inter</FontFamily>
+			<FontFamily x:Key="SimpleBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Bold.ttf#Inter</FontFamily>
 
-			<!-- SDS Typography Scale (font sizes in px) -->
-			<x:Double x:Key="SimpleTypographyScale01">12</x:Double>
-			<x:Double x:Key="SimpleTypographyScale02">14</x:Double>
-			<x:Double x:Key="SimpleTypographyScale03">16</x:Double>
-			<x:Double x:Key="SimpleTypographyScale04">20</x:Double>
-			<x:Double x:Key="SimpleTypographyScale05">24</x:Double>
-			<x:Double x:Key="SimpleTypographyScale06">32</x:Double>
-			<x:Double x:Key="SimpleTypographyScale07">40</x:Double>
-			<x:Double x:Key="SimpleTypographyScale08">48</x:Double>
-			<x:Double x:Key="SimpleTypographyScale09">56</x:Double>
-			<x:Double x:Key="SimpleTypographyScale10">72</x:Double>
+			<!-- Legacy Simple-specific font family key (points to Regular) -->
+			<FontFamily x:Key="SimpleFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
 
-			<!-- SDS Line Heights (px) -->
-			<x:Double x:Key="SimpleLineHeight01">16</x:Double>
-			<x:Double x:Key="SimpleLineHeight02">20</x:Double>
-			<x:Double x:Key="SimpleLineHeight03">24</x:Double>
-			<x:Double x:Key="SimpleLineHeight04">28</x:Double>
-			<x:Double x:Key="SimpleLineHeight05">32</x:Double>
-			<x:Double x:Key="SimpleLineHeight06">40</x:Double>
-			<x:Double x:Key="SimpleLineHeight07">48</x:Double>
-			<x:Double x:Key="SimpleLineHeight08">56</x:Double>
-			<x:Double x:Key="SimpleLineHeight09">64</x:Double>
-			<x:Double x:Key="SimpleLineHeight10">80</x:Double>
-
-			<!-- Semantic Typography Aliases -->
-			<x:Double x:Key="SimpleTitleHeroFontSize">72</x:Double>
-			<x:Double x:Key="SimpleTitleHeroLineHeight">80</x:Double>
-			<x:Double x:Key="SimpleTitlePageFontSize">48</x:Double>
-			<x:Double x:Key="SimpleTitlePageLineHeight">56</x:Double>
-			<x:Double x:Key="SimpleSubtitleFontSize">32</x:Double>
-			<x:Double x:Key="SimpleSubtitleLineHeight">40</x:Double>
-			<x:Double x:Key="SimpleHeadingFontSize">24</x:Double>
-			<x:Double x:Key="SimpleHeadingLineHeight">32</x:Double>
-			<x:Double x:Key="SimpleSubheadingFontSize">20</x:Double>
-			<x:Double x:Key="SimpleSubheadingLineHeight">28</x:Double>
-			<x:Double x:Key="SimpleBodyFontSize">16</x:Double>
-			<x:Double x:Key="SimpleBodyLineHeight">24</x:Double>
-			<x:Double x:Key="SimpleBodySmallFontSize">14</x:Double>
-			<x:Double x:Key="SimpleBodySmallLineHeight">20</x:Double>
-			<x:Double x:Key="SimpleCaptionFontSize">12</x:Double>
-			<x:Double x:Key="SimpleCaptionLineHeight">16</x:Double>
-
-			<!-- SDS Font Weights -->
-			<FontWeight x:Key="SimpleRegularFontWeight">Normal</FontWeight>
-			<FontWeight x:Key="SimpleMediumFontWeight">Medium</FontWeight>
-			<FontWeight x:Key="SimpleSemiBoldFontWeight">SemiBold</FontWeight>
-			<FontWeight x:Key="SimpleBoldFontWeight">Bold</FontWeight>
-
+			<!-- See the Light theme block above for why these slot mappings are declared here. -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="SimpleBoldFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>

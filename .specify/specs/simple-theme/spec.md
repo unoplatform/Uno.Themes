@@ -20,7 +20,7 @@ control styles that implement this system.
 | Typography | `Common/Fonts.xaml` (Inter) | ✅ Complete |
 | Animation Constants | `Common/AnimationConstants.xaml` | ✅ Complete |
 | Thickness Resources | `Common/Thickness.xaml` | ✅ Complete |
-| Control Styles | 7 XAML files (33 styles) | ✅ Complete |
+| Control Styles | 21 XAML files (75+ styles) | ✅ Complete |
 | Implicit Styles & Aliases | `_Resources.xaml` | ✅ Complete |
 | Entry Point | `SimpleTheme.cs` (extends BaseTheme) | ✅ Complete |
 | XamlMerge | `simple-common.props` → `mergedpages.xaml` | ✅ Complete |
@@ -91,16 +91,16 @@ SDS uses **opacity-based** state overlays (no ripple):
 
 ---
 
-## Control Style Inventory (33 Styles)
+## Control Style Inventory (75+ Styles)
 
 ### Button (18 styles) — `Button.xaml`
 
 | Style Key | Figma Name | Description |
 |-----------|-----------|-------------|
-| `SimplePrimaryButtonStyle` | Button/Primary | Filled dark button, main CTA |
+| `SimpleFilledButtonStyle` | Button/Primary | Filled dark button, main CTA |
 | `SimpleLightButtonStyle` | Button/Light | Light-colored filled button |
-| `SimpleNeutralButtonStyle` | Button/Neutral | Outlined border button |
-| `SimpleSubtleButtonStyle` | Button/Subtle | Text-only button |
+| `SimpleFilledTonalButtonStyle` | Button/Neutral | Outlined border button |
+| `SimpleTextButtonStyle` | Button/Subtle | Text-only button |
 | `SimplePrimaryButtonSmallStyle` | Button/Primary/Small | Small primary |
 | `SimpleNeutralButtonSmallStyle` | Button/Neutral/Small | Small neutral |
 | `SimpleSubtleButtonSmallStyle` | Button/Subtle/Small | Small subtle |
@@ -116,21 +116,22 @@ SDS uses **opacity-based** state overlays (no ripple):
 | `SimpleSelectedFilterButtonStyle` | Button/Filter/Selected | Filter active state |
 | `SimpleUnselectedFilterButtonStyle` | Button/Filter/Unselected | Filter inactive state |
 
-### TextBox (3 styles) — `TextBox.xaml`
+### TextBox (4 styles) — `TextBox.xaml`
 
 | Style Key | Figma Name | Description |
 |-----------|-----------|-------------|
-| `SimpleInputTextBoxStyle` | Input Field | Default filled input |
-| `SimpleOutlinedInputTextBoxStyle` | Input Field/Outlined | Bordered input |
-| `SimpleInputTextBoxSmallStyle` | Input Field/Small | Compact input |
+| `SimpleTextBoxStyle` | Input Field | Default input (single SDS Input design) |
+| `SimpleTextBoxErrorStyle` | Input Field/Error | Danger border variant |
+| `SimpleTextBoxSmallStyle` | Input Field/Small | Compact input |
+| `SimpleOutlinedTextBoxStyle` | Input Field/Outlined | Outlined border, surface background |
 
 ### ComboBox (3 styles) — `ComboBox.xaml`
 
 | Style Key | Figma Name | Description |
 |-----------|-----------|-------------|
-| `SimpleSelectFieldStyle` | Select Field | Default dropdown |
-| `SimpleSelectFieldItemStyle` | Select Field/Item | Dropdown item |
-| `SimpleSelectFieldErrorStyle` | Select Field/Error | Error state dropdown |
+| `SimpleComboBoxStyle` | ComboBox | Default dropdown |
+| `SimpleComboBoxItemStyle` | ComboBox/Item | Dropdown item |
+| `SimpleComboBoxErrorStyle` | ComboBox/Error | Error state dropdown |
 
 ### CheckBox (1 style) — `CheckBox.xaml`
 
@@ -161,37 +162,164 @@ SDS uses **opacity-based** state overlays (no ripple):
 | `SimplePersonPictureSquareSmallStyle` | Avatar/Square/Small | Small square |
 | `SimplePersonPictureSquareLargeStyle` | Avatar/Square/Large | Large square |
 
+### PasswordBox (2 styles) — `PasswordBox.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimplePasswordBoxStyle` | Default filled password input |
+| `SimpleOutlinedPasswordBoxStyle` | Outlined border, surface background |
+
+### ToggleButton (4 styles) — `ToggleButton.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleDefaultToggleButtonStyle` | Default toggle button |
+| `SimpleSmallToggleButtonStyle` | Small size variant |
+| `SimpleMediumToggleButtonStyle` | Medium size variant |
+| `SimpleIconToggleButtonStyle` | Icon-only toggle (glyph content) |
+
+### HyperlinkButton (3 styles) — `HyperlinkButton.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleHyperlinkButtonStyle` | Primary hyperlink |
+| `SimpleSecondaryHyperlinkButtonStyle` | Secondary/muted hyperlink |
+| `SimpleDefaultHyperlinkButtonStyle` | Default implicit style |
+
+### FlyoutPresenter (2 styles) — `Flyout.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleFlyoutPresenterStyle` | Flyout container with rounded corners + shadow |
+| `SimpleDefaultFlyoutPresenterStyle` | Default implicit style |
+
+### MenuFlyout (12 styles) — `MenuFlyout.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleMenuFlyoutPresenterStyle` | Menu container |
+| `SimpleMenuFlyoutItemStyle` | Standard menu item |
+| `SimpleToggleMenuFlyoutItemStyle` | Checkable menu item |
+| `SimpleMenuFlyoutSubItemStyle` | Submenu/cascading item |
+| `SimpleMenuFlyoutSeparatorStyle` | Divider line |
+| `SimpleRadioMenuFlyoutItemStyle` | Radio-select menu item (Ellipse indicator) |
+| + 6 `SimpleDefault*` implicit style aliases | |
+
+### NavigationView (4 styles) — `NavigationView.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleNavigationViewStyle` | NavigationView via lightweight ThemeResource overrides |
+| `SimpleNavigationViewItemStyle` | NavigationViewItem overrides |
+| `SimpleDefaultNavigationViewStyle` | Default implicit style |
+| `SimpleDefaultNavigationViewItemStyle` | Default implicit style |
+
+### ProgressBar (2 styles) — `ProgressBar.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleProgressBarStyle` | Determinate/indeterminate bar with brand color |
+| `SimpleDefaultProgressBarStyle` | Default implicit style |
+
+### ProgressRing (2 styles) — `ProgressRing.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleProgressRingStyle` | Spinning/determinate ring with brand color |
+| `SimpleDefaultProgressRingStyle` | Default implicit style |
+
+### PipsPager (2 styles) — `PipsPager.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimplePipsPagerStyle` | Dot-based page indicator |
+| `SimpleDefaultPipsPagerStyle` | Default implicit style |
+
+### RatingControl (2 styles) — `RatingControl.xaml`
+
+| Style Key | Description |
+|-----------|-------------|
+| `SimpleRatingControlStyle` | Star rating with brand accent |
+| `SimpleDefaultRatingControlStyle` | Default implicit style |
+
 ---
 
 ## _Resources.xaml — Aliases & Implicit Styles
 
-### Implicit Styles (6)
+### Implicit Styles (35)
 
 These register default styles for controls when no explicit `Style` is set:
 
-- `Button` → `SimplePrimaryButtonStyle`
+- `Button` → `SimpleFilledButtonStyle`
 - `CheckBox` → `SimpleCheckBoxStyle`
-- `ComboBox` → `SimpleSelectFieldStyle`
+- `ComboBox` → `SimpleComboBoxStyle`
 - `RadioButton` → `SimpleRadioButtonStyle`
-- `TextBox` → `SimpleInputTextBoxStyle`
+- `TextBox` → `SimpleTextBoxStyle`
 - `ToggleSwitch` → `SimpleToggleSwitchStyle`
+- `PasswordBox` → `SimplePasswordBoxStyle`
+- `Slider` → `SimpleSliderStyle`
+- `ToolTip` → `SimpleToolTipStyle`
+- `TextBlock` → `SimpleBaseTextBlockStyle`
+- `ListViewItem` → `SimpleDefaultListViewItemStyle`
+- `ListView` → `SimpleDefaultListViewStyle`
+- `ContentDialog` → `SimpleDefaultContentDialogStyle`
+- `MenuFlyoutItem` → `SimpleDefaultMenuFlyoutItemStyle`
+- `MenuFlyoutPresenter` → `SimpleDefaultMenuFlyoutPresenterStyle`
+- `MenuFlyoutSeparator` → `SimpleDefaultMenuFlyoutSeparatorStyle`
+- `MenuFlyoutSubItem` → `SimpleDefaultMenuFlyoutSubItemStyle`
+- `ToggleMenuFlyoutItem` → `SimpleDefaultToggleMenuFlyoutItemStyle`
+- `CalendarView` → `SimpleDefaultCalendarViewStyle`
+- `AppBarButton` → `SimpleDefaultAppBarButtonStyle`
+- `CalendarDatePicker` → `SimpleDefaultCalendarDatePickerStyle`
+- `DatePicker` → `SimpleDefaultDatePickerStyle`
+- `DatePickerFlyoutPresenter` → `SimpleDefaultDatePickerFlyoutPresenterStyle`
+- `AutoSuggestBox` → `SimpleDefaultAutoSuggestBoxStyle`
+- `Expander` → `SimpleDefaultExpanderStyle`
+- `ToggleButton` → `SimpleDefaultToggleButtonStyle`
+- `FlyoutPresenter` → `SimpleDefaultFlyoutPresenterStyle`
+- `HyperlinkButton` → `SimpleDefaultHyperlinkButtonStyle`
+- `muxc:NavigationView` → `SimpleDefaultNavigationViewStyle`
+- `muxc:NavigationViewItem` → `SimpleDefaultNavigationViewItemStyle`
+- `muxc:PipsPager` → `SimpleDefaultPipsPagerStyle`
+- `muxc:ProgressBar` → `SimpleDefaultProgressBarStyle`
+- `muxc:ProgressRing` → `SimpleDefaultProgressRingStyle`
+- `muxc:RadioMenuFlyoutItem` → `SimpleDefaultRadioMenuFlyoutItemStyle`
+- `RatingControl` → `SimpleDefaultRatingControlStyle`
 
-### Theme-Agnostic Aliases (~17)
+### Theme-Agnostic Aliases (~65)
 
 Short names without the `Simple` prefix for consumer convenience:
 
 `PrimaryButtonStyle`, `NeutralButtonStyle`, `SubtleButtonStyle`,
-`InputTextBoxStyle`, `OutlinedInputTextBoxStyle`, `SelectFieldStyle`,
+`InputTextBoxStyle`, `ComboBoxStyle`,
 `CheckBoxStyle`, `RadioButtonStyle`, `ToggleSwitchStyle`,
-`PersonPictureStyle`, etc.
+`PersonPictureStyle`, `HyperlinkButtonStyle`, `NavigationViewStyle`,
+`ProgressBarStyle`, `ProgressRingStyle`, `PipsPagerStyle`,
+`RatingControlStyle`, `RadioMenuFlyoutItemStyle`, `FlyoutPresenterStyle`,
+`IconToggleButtonStyle`, etc.
 
-### Legacy Material-Compatibility Aliases (~6)
+### Semantic/Material-Compatibility Aliases (~13)
 
 Map Material naming convention to SDS naming:
 
-`FilledButtonStyle` → `SimplePrimaryButtonStyle`,
-`OutlinedButtonStyle` → `SimpleNeutralButtonStyle`,
-`TextButtonStyle` → `SimpleSubtleButtonStyle`, etc.
+`FilledButtonStyle` → `SimpleFilledButtonStyle`,
+`OutlinedButtonStyle` → `SimpleFilledTonalButtonStyle`,
+`TextButtonStyle` → `SimpleTextButtonStyle`,
+`FilledTextBoxStyle` → `SimpleTextBoxStyle`,
+`OutlinedTextBoxStyle` → `SimpleOutlinedTextBoxStyle`,
+`FilledPasswordBoxStyle` → `SimplePasswordBoxStyle`,
+`OutlinedPasswordBoxStyle` → `SimpleOutlinedPasswordBoxStyle`,
+`IconToggleButtonStyle` → `SimpleIconToggleButtonStyle`, etc.
+
+### FAB Aliases (12)
+
+Map Material FAB naming to existing Simple icon button styles:
+
+`FabStyle` → `SimpleIconButtonStyle`,
+`SecondaryFabStyle` → `SimpleIconButtonNeutralStyle`,
+`TertiaryFabStyle` → `SimpleIconButtonSubtleStyle`,
+`SurfaceFabStyle` → `SimpleIconButtonNeutralStyle`,
++ Small/Large variants for each.
 
 ### Typography Aliases (~19)
 
@@ -203,10 +331,7 @@ Map design-system-agnostic names to SDS typography:
 
 The following controls are listed as NOT YET implemented:
 
-AppBarButton, CalendarDatePicker, CalendarView, CommandBar, ContentDialog,
-DatePicker, FAB, Flyout/MenuFlyout, HyperlinkButton, InfoBar, ListView,
-MediaPlayerElement, NavigationView, NumberBox, PasswordBox, PipsPager,
-ProgressBar, ProgressRing, RatingControl, Slider, TimePicker, ToggleButton
+CommandBar, MediaPlayerElement
 
 ---
 
@@ -214,9 +339,9 @@ ProgressBar, ProgressRing, RatingControl, Slider, TimePicker, ToggleButton
 
 1. All style keys use `Simple` prefix: `Simple<Variant><ControlType>Style`
 2. Names follow **Figma component names**, not WinUI control names:
-   - Figma "Input Field" → `SimpleInputTextBoxStyle`
-   - Figma "Select Field" → `SimpleSelectFieldStyle`
-   - Figma "Button/Primary" → `SimplePrimaryButtonStyle`
+   - Figma "Input Field" → `SimpleTextBoxStyle`
+   - Figma "Select Field" → `SimpleComboBoxStyle`
+   - Figma "Button/Primary" → `SimpleFilledButtonStyle`
 3. Size variants append to name: `SimplePrimaryButtonSmallStyle`
 4. Error variants: `SimplePrimaryErrorButtonStyle`
 
@@ -273,9 +398,19 @@ src/library/Uno.Simple.WinUI/
 │       ├── Button.xaml                 ← 18 styles
 │       ├── CheckBox.xaml               ← 1 style
 │       ├── ComboBox.xaml               ← 3 styles
+│       ├── Flyout.xaml                 ← 1 style (FlyoutPresenter)
+│       ├── HyperlinkButton.xaml        ← 3 styles (Primary, Secondary, Default)
+│       ├── MenuFlyout.xaml             ← 7 styles (incl. RadioMenuFlyoutItem)
+│       ├── NavigationView.xaml         ← 4 styles (NavigationView + Item)
+│       ├── PasswordBox.xaml            ← 2 styles (Filled + Outlined)
 │       ├── PersonPicture.xaml          ← 6 styles
+│       ├── PipsPager.xaml              ← 2 styles
+│       ├── ProgressBar.xaml            ← 2 styles
+│       ├── ProgressRing.xaml           ← 2 styles
 │       ├── RadioButton.xaml            ← 1 style
-│       ├── TextBox.xaml                ← 3 styles
+│       ├── RatingControl.xaml          ← 2 styles
+│       ├── TextBox.xaml                ← 4 styles (incl. Outlined)
+│       ├── ToggleButton.xaml           ← 4 styles (incl. IconToggle)
 │       └── ToggleSwitch.xaml           ← 1 style
 └── Generated/
     └── mergedpages.xaml                ← Auto-generated
@@ -285,14 +420,14 @@ src/library/Uno.Simple.WinUI/
 
 ## Success Criteria
 
-- **SC-001**: All 33 named styles render correctly on desktop, WASM, Android
+- **SC-001**: All 75+ named styles render correctly on desktop, WASM, Android
 - **SC-002**: Implicit styles apply correctly when no explicit Style is set
 - **SC-003**: Theme-agnostic aliases resolve to the correct Simple styles
 - **SC-004**: Legacy Material-compatibility aliases work
 - **SC-005**: Typography aliases resolve correctly
 - **SC-006**: All interaction states (hover, press, focus, disabled) work
 - **SC-007**: `dotnet build` succeeds with zero errors on all TFMs
-- **SC-008**: Sample app demonstrates all 33 styles with `XamlDisplay`
+- **SC-008**: Sample app demonstrates all styles with `XamlDisplay`
 
 ---
 
@@ -302,22 +437,22 @@ These controls have Material styles but NO Simple equivalent:
 
 | Control | Material Styles | Priority | SDS Figma Equivalent |
 |---------|----------------|----------|---------------------|
-| CalendarDatePicker | 2 | Low | — |
-| CalendarView | 2+3 | Low | — |
-| DatePicker | 5 | Low | — |
-| HyperlinkButton | 3 | Medium | Link |
-| PasswordBox | 4 | Medium | Input Field (secure) |
-| ProgressBar | 2 | Medium | Progress |
-| ProgressRing | 2 | Medium | Spinner |
-| Slider | 3 | Medium | Range Slider |
-| AppBarButton | 2 | Low | — |
 | CommandBar | 3 | Low | — |
-| ContentDialog | 2 | Medium | Modal |
-| FAB | 12 | Low | — (no SDS equivalent) |
-| Flyout/MenuFlyout | 14 | Low | — |
-| ListView | 4 | High | List |
 | MediaPlayerElement | 6+ | Low | — |
-| NavigationView | 10+ | Medium | Navigation |
-| PipsPager | 8 | Low | — |
-| RatingControl | 3 | Low | — |
-| ToggleButton | 3 | Low | — |
+
+### Controls Recently Styled (issues #1639–#1650)
+
+| Control | Simple Style(s) | Issue |
+|---------|----------------|-------|
+| HyperlinkButton | `SimpleHyperlinkButtonStyle`, `SimpleSecondaryHyperlinkButtonStyle` | #1643 |
+| PasswordBox (Outlined) | `SimpleOutlinedPasswordBoxStyle` | #1642 |
+| TextBox (Outlined) | `SimpleOutlinedTextBoxStyle` | #1641 |
+| ProgressBar | `SimpleProgressBarStyle` | #1647 |
+| ProgressRing | `SimpleProgressRingStyle` | #1648 |
+| NavigationView | `SimpleNavigationViewStyle`, `SimpleNavigationViewItemStyle` | #1646 |
+| PipsPager | `SimplePipsPagerStyle` | #1649 |
+| RatingControl | `SimpleRatingControlStyle` | #1650 |
+| ToggleButton (Icon) | `SimpleIconToggleButtonStyle` | #1640 |
+| FlyoutPresenter | `SimpleFlyoutPresenterStyle` | #1645 |
+| RadioMenuFlyoutItem | `SimpleRadioMenuFlyoutItemStyle` | #1644 |
+| FAB (aliases) | 12 aliases mapped to existing icon button styles | #1639 |

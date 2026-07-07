@@ -117,6 +117,16 @@
 										  Style="{StaticResource XamlDisplayBelowStyle}">
 							<ToggleButton Content="Disabled Checked" IsChecked="True" IsEnabled="False" />
 						</smtx:XamlDisplay>
+
+						<!-- Icon ToggleButton -->
+						<smtx:XamlDisplay UniqueKey="Simple_ToggleButton_Icon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal" Spacing="12">
+								<ToggleButton Style="{StaticResource SimpleIconToggleButtonStyle}" Content="&#xE734;" />
+								<ToggleButton Style="{StaticResource SimpleIconToggleButtonStyle}" Content="&#xE734;" IsChecked="True" />
+								<ToggleButton Style="{StaticResource SimpleIconToggleButtonStyle}" Content="&#xE734;" IsEnabled="False" />
+							</StackPanel>
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>

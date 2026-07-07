@@ -94,7 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Controls\CheckBoxSamplePage.xaml.cs">
       <DependentUpon>CheckBoxSamplePage.xaml</DependentUpon>
     </Compile>
-        <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ExpanderSamplePage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Controls\ExpanderSamplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -380,6 +380,27 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\ColorsSamplePage.xaml.cs">
       <DependentUpon>ColorsSamplePage.xaml</DependentUpon>
     </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\SemanticStylingSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\SemanticStylingSamplePage.xaml.cs">
+      <DependentUpon>SemanticStylingSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\DesignTokensSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\DesignTokensSamplePage.xaml.cs">
+      <DependentUpon>DesignTokensSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Styles\SeedColorSamplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Styles\SeedColorSamplePage.xaml.cs">
+      <DependentUpon>SeedColorSamplePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Button.xaml">
@@ -418,6 +439,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Content\RuntimeTestRunner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\RuntimeTestRunner.xaml.cs">
+      <DependentUpon>RuntimeTestRunner.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\**\*.*" />

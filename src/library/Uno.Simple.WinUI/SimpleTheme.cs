@@ -3,23 +3,32 @@ using Uno.Themes;
 
 
 #if WinUI
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media;
+using Windows.UI;
 #else
+using Windows.UI;
 using Windows.UI.Xaml;
 #endif
 
 namespace Uno.Simple;
 
 /// <summary>
-/// Simple Theme resources including colors, fonts, layout values, and styles
+/// Simple Theme resources including colors, fonts, layout values, and styles.
 /// </summary>
 public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictionary fontOverride = null)
 	: BaseTheme(GetSimpleColorOverride(colorOverride), fontOverride)
 {
+	/// <summary>
+	/// Simple uses a hand-crafted grayscale palette by default (no seed).
+	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, high-fidelity
+	/// mode preserves the source chroma so low-chroma seeds stay neutral
+	/// instead of being boosted by the M3 minimum-chroma floor.
+	/// </summary>
+	protected override Color? DefaultPrimarySeed => null;
+
+	/// <inheritdoc />
+	protected override bool UseHighFidelityColors => true;
+
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)
 	{
@@ -38,18 +47,17 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 		return simpleColors;
 	}
 
-	protected override ResourceDictionary GenerateSpecificResources()
+	protected override string DefaultStylesSource => SimpleConstants.ResourcePaths.MergedPages;
+
+	protected override void AddThemeSpecificResources()
 	{
-		var mergedPages = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.MergedPages) };
+		base.AddThemeSpecificResources();
 
-		var fonts = new ResourceDictionary { Source = new Uri(SimpleConstants.ResourcePaths.Common.Fonts) };
-
+		// Base fonts and thickness ship in the Source bundle (BaseDictionaries.xaml); only a
+		// consumer-supplied font override is layered dynamically on top to shadow them.
 		if (FontOverrideDictionary is { } fontOverride)
 		{
-			fonts.SafeMerge(fontOverride);
+			AddThemeDictionary(fontOverride);
 		}
-
-		mergedPages.MergedDictionaries.Add(fonts);
-		return mergedPages;
 	}
 }

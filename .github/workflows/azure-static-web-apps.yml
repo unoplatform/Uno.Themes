@@ -43,20 +43,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Cleanup unused image dependencies
-        shell: bash
-        run: |
-          rm -fR ~/.cargo
-          rm -fR ~/.rustup
-          rm -fR ~/.dotnet
-          sudo rm -fR /usr/share/swift
-          sudo rm -fR /opt/microsoft/msedge
-          sudo rm -fR /usr/local/.ghcup
-          sudo rm -fR /usr/lib/mono
-          sudo snap remove lxd
-          sudo snap remove core20
-          sudo apt remove snapd
-          df -h
+      - name: Free disk space (Linux)
+        uses: ./.github/actions/host-cleanup-linux
 
       - name: Set EMSDK cache path
         shell: bash

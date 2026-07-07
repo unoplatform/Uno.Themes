@@ -1,0 +1,155 @@
+<Page x:Class="Uno.Themes.Samples.Content.Styles.SeedColorSamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Spacing="8" Margin="24,0" MaxWidth="1200">
+
+			<!-- Header -->
+			<TextBlock Text="Seed Color Palette Generator"
+					   Style="{StaticResource HeadlineSmall}"
+					   Margin="0,16,0,4" />
+			<TextBlock Text="Pick a color to generate a full Material Design 3 palette using the HCT (Hue-Chroma-Tone) color space."
+					   Style="{StaticResource BodyMedium}"
+					   Opacity="0.7"
+					   TextWrapping="Wrap" />
+
+			<!-- Color Picker + Seed Info -->
+			<StackPanel Orientation="Horizontal" Spacing="24" Margin="0,8,0,0">
+				<ColorPicker x:Name="SeedColorPicker"
+							 Color="#6750A4"
+							 ColorSpectrumShape="Ring"
+							 IsAlphaEnabled="False"
+							 IsAlphaTextInputVisible="False"
+							 IsHexInputVisible="False"
+							 IsColorSliderVisible="True"
+							 IsColorChannelTextInputVisible="False"
+							 IsColorPreviewVisible="False"
+							 IsMoreButtonVisible="False"
+							 ColorChanged="SeedColorPicker_ColorChanged" />
+
+				<!-- Seed Info -->
+				<StackPanel VerticalAlignment="Center" Spacing="8" Width="120">
+					<Border x:Name="SeedSwatch"
+							Width="64" Height="64"
+							CornerRadius="12"
+							HorizontalAlignment="Left" />
+					<TextBlock x:Name="SeedHex"
+							   Style="{StaticResource LabelLarge}" />
+					<TextBlock x:Name="SeedHctText"
+							   Style="{StaticResource BodySmall}"
+							   Opacity="0.6" />
+				</StackPanel>
+			</StackPanel>
+
+			<!-- Semantic Color Roles Section -->
+			<TextBlock Text="Semantic Color Roles"
+					   Style="{StaticResource TitleMedium}"
+					   Margin="0,24,0,4" />
+			<TextBlock Text="Named color roles derived from the tonal palettes. Toggle the app theme to see Light and Dark schemes."
+					   Style="{StaticResource BodySmall}"
+					   Opacity="0.6"
+					   TextWrapping="Wrap"
+					   Margin="0,0,0,8" />
+
+			<Grid ColumnSpacing="2" RowSpacing="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" /><ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" /><ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="56" /><RowDefinition Height="32" />
+					<RowDefinition Height="56" /><RowDefinition Height="32" />
+					<RowDefinition Height="56" /><RowDefinition Height="32" />
+					<RowDefinition Height="56" /><RowDefinition Height="32" />
+				</Grid.RowDefinitions>
+
+				<Border Background="{ThemeResource PrimaryBrush}" Grid.Row="0" Grid.Column="0" CornerRadius="8,0,0,0" Padding="8"><TextBlock Text="Primary" Foreground="{ThemeResource OnPrimaryBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnPrimaryBrush}" Grid.Row="1" Grid.Column="0" Padding="8"><TextBlock Text="On Primary" Foreground="{ThemeResource PrimaryBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+				<Border Background="{ThemeResource SecondaryBrush}" Grid.Row="0" Grid.Column="1" Padding="8"><TextBlock Text="Secondary" Foreground="{ThemeResource OnSecondaryBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnSecondaryBrush}" Grid.Row="1" Grid.Column="1" Padding="8"><TextBlock Text="On Secondary" Foreground="{ThemeResource SecondaryBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+				<Border Background="{ThemeResource TertiaryBrush}" Grid.Row="0" Grid.Column="2" Padding="8"><TextBlock Text="Tertiary" Foreground="{ThemeResource OnTertiaryBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnTertiaryBrush}" Grid.Row="1" Grid.Column="2" Padding="8"><TextBlock Text="On Tertiary" Foreground="{ThemeResource TertiaryBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+				<Border Background="{ThemeResource ErrorBrush}" Grid.Row="0" Grid.Column="3" CornerRadius="0,8,0,0" Padding="8"><TextBlock Text="Error" Foreground="{ThemeResource OnErrorBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnErrorBrush}" Grid.Row="1" Grid.Column="3" Padding="8"><TextBlock Text="On Error" Foreground="{ThemeResource ErrorBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+
+				<Border Background="{ThemeResource PrimaryContainerBrush}" Grid.Row="2" Grid.Column="0" Padding="8"><TextBlock Text="Primary Container" Foreground="{ThemeResource OnPrimaryContainerBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnPrimaryContainerBrush}" Grid.Row="3" Grid.Column="0" Padding="8"><TextBlock Text="On Primary Container" Foreground="{ThemeResource PrimaryContainerBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+				<Border Background="{ThemeResource SecondaryContainerBrush}" Grid.Row="2" Grid.Column="1" Padding="8"><TextBlock Text="Secondary Container" Foreground="{ThemeResource OnSecondaryContainerBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnSecondaryContainerBrush}" Grid.Row="3" Grid.Column="1" Padding="8"><TextBlock Text="On Secondary Container" Foreground="{ThemeResource SecondaryContainerBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+				<Border Background="{ThemeResource TertiaryContainerBrush}" Grid.Row="2" Grid.Column="2" Padding="8"><TextBlock Text="Tertiary Container" Foreground="{ThemeResource OnTertiaryContainerBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnTertiaryContainerBrush}" Grid.Row="3" Grid.Column="2" Padding="8"><TextBlock Text="On Tertiary Container" Foreground="{ThemeResource TertiaryContainerBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+				<Border Background="{ThemeResource ErrorContainerBrush}" Grid.Row="2" Grid.Column="3" Padding="8"><TextBlock Text="Error Container" Foreground="{ThemeResource OnErrorContainerBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnErrorContainerBrush}" Grid.Row="3" Grid.Column="3" Padding="8"><TextBlock Text="On Error Container" Foreground="{ThemeResource ErrorContainerBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+
+				<Border Background="{ThemeResource BackgroundBrush}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Padding="8"><TextBlock Text="Background" Foreground="{ThemeResource OnBackgroundBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource SurfaceBrush}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Padding="8"><TextBlock Text="Surface" Foreground="{ThemeResource OnSurfaceBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OnBackgroundBrush}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Padding="8"><TextBlock Text="On Background" Foreground="{ThemeResource BackgroundBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+				<Border Background="{ThemeResource OnSurfaceBrush}" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Padding="8"><TextBlock Text="On Surface" Foreground="{ThemeResource SurfaceBrush}" VerticalAlignment="Center" FontSize="11"/></Border>
+
+				<Border Background="{ThemeResource OutlineBrush}" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="0,0,0,8" Padding="8"><TextBlock Text="Outline" Foreground="{ThemeResource BackgroundBrush}" VerticalAlignment="Center"/></Border>
+				<Border Background="{ThemeResource OutlineVariantBrush}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" CornerRadius="0,0,8,0" Padding="8"><TextBlock Text="Outline Variant" Foreground="{ThemeResource OnBackgroundBrush}" VerticalAlignment="Center"/></Border>
+			</Grid>
+
+			<!-- Controls Preview -->
+			<TextBlock Text="Controls Preview"
+					   Style="{StaticResource TitleMedium}"
+					   Margin="0,24,0,4" />
+			<TextBlock Text="Standard controls themed by the seed color."
+					   Style="{StaticResource BodySmall}"
+					   Opacity="0.6"
+					   Margin="0,0,0,8" />
+
+			<StackPanel Orientation="Horizontal" Spacing="12">
+				<Button Content="Filled" Style="{StaticResource FilledButtonStyle}" />
+				<Button Content="Outlined" Style="{StaticResource OutlinedButtonStyle}" />
+				<Button Content="Text" Style="{StaticResource TextButtonStyle}" />
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" Spacing="12" Margin="0,8,0,0">
+				<Button Style="{StaticResource FabStyle}">
+					<SymbolIcon Symbol="Add" />
+				</Button>
+				<Button Style="{StaticResource SecondaryFabStyle}">
+					<SymbolIcon Symbol="Edit" />
+				</Button>
+				<Button Style="{StaticResource TertiaryFabStyle}">
+					<SymbolIcon Symbol="Mail" />
+				</Button>
+			</StackPanel>
+
+			<TextBox PlaceholderText="Filled text field" Style="{StaticResource FilledTextBoxStyle}" Margin="0,8,0,0" />
+			<TextBox PlaceholderText="Outlined text field" Style="{StaticResource OutlinedTextBoxStyle}" Margin="0,8,0,0" />
+
+			<StackPanel Spacing="8" Margin="0,8,0,0">
+				<ToggleSwitch Header="Toggle switch" IsOn="True" />
+				<CheckBox Content="Checkbox" IsChecked="True" />
+				<RadioButton Content="Radio A" IsChecked="True" GroupName="SeedDemo" />
+				<RadioButton Content="Radio B" GroupName="SeedDemo" />
+				<Slider Value="60" Minimum="0" Maximum="100" />
+			</StackPanel>
+
+			<ProgressBar IsIndeterminate="True" Margin="0,8,0,0" />
+			<ProgressRing IsActive="True" Width="48" Height="48" HorizontalAlignment="Left" Margin="0,8,0,0" />
+
+			<!-- Usage Snippet -->
+			<TextBlock Text="Usage"
+					   Style="{StaticResource TitleMedium}"
+					   Margin="0,24,0,4" />
+			<Border Background="{ThemeResource SurfaceVariantBrush}"
+					CornerRadius="8"
+					Padding="16">
+				<TextBlock x:Name="XamlSnippet"
+						   FontFamily="Consolas, Courier New, monospace"
+						   Style="{StaticResource BodyMedium}"
+						   IsTextSelectionEnabled="True" />
+			</Border>
+
+			<Border Height="32" />
+		</StackPanel>
+	</ScrollViewer>
+</Page>

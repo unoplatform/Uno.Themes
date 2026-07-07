@@ -1,0 +1,30 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Static base layer for SimpleTheme. Pulled into mergedpages.xaml by the
+		Uno.XamlMerge task (via the Styles\Application\ glob) so that a single
+		Source=mergedpages.xaml on BaseTheme brings in the default converter,
+		typography, font and thickness resources the theme needs.
+
+		Order matters: entries listed LATER win at lookup time (MergedDictionaries
+		are searched in reverse), and within mergedpages this file (BaseDictionaries)
+		is merged before the theme's own Application styles (e.g. Typography.xaml),
+		so the theme's own overrides shadow these shared defaults.
+
+		Colour resources are intentionally NOT included here: SharedColors, the
+		shared/seed palettes and Simple's grayscale palette are added (and removed)
+		dynamically by BaseTheme.UpdateSource so they rebuild on seed-color and
+		override changes. The dynamic spacing/shape/density scales and consumer font
+		overrides are likewise added programmatically, sitting ABOVE this layer.
+	-->
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
+
+		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/Common/Fonts.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/Common/Thickness.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

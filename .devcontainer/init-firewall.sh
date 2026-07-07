@@ -1,9 +1,15 @@
 #!/bin/bash
 # ==========================================================================
-# init-firewall.sh — DNS-based network firewall for the dev container
+# init-firewall.sh — DNS allowlist filter for the dev container
 #
 # Uses dnsmasq as a local DNS proxy that only resolves allowed domain
-# patterns. Unmatched domains get REFUSED — no IP chasing needed.
+# patterns. Unmatched domains get REFUSED.
+#
+# NOTE: This is a DNS-layer filter, not an IP-layer firewall. Direct-IP
+# egress is not blocked. Full iptables egress rules are impractical here
+# because the allowed services (NuGet, Azure CDN, GitHub, etc.) resolve
+# to large, dynamic IP ranges. The DNS allowlist is sufficient to prevent
+# accidental or automated access to unauthorized services.
 # ==========================================================================
 set -euo pipefail
 IFS=$'\n\t'
@@ -12,8 +18,15 @@ DNSMASQ_LISTEN="127.0.0.53"
 
 # --------------------------------------------------------------------------
 # 1. Upstream DNS for allowed domains
+#    Priority: $UPSTREAM_DNS env var > first nameserver in /etc/resolv.conf > 8.8.8.8
 # --------------------------------------------------------------------------
-UPSTREAM_DNS="8.8.8.8"
+if [ -z "${UPSTREAM_DNS:-}" ]; then
+  UPSTREAM_DNS=$(grep -m1 '^nameserver' /etc/resolv.conf | awk '{print $2}' || true)
+  # Skip loopback (would point back at ourselves after resolv.conf rewrite)
+  if [ -z "$UPSTREAM_DNS" ] || echo "$UPSTREAM_DNS" | grep -qE '^127\.' || [ "$UPSTREAM_DNS" = "::1" ]; then
+    UPSTREAM_DNS="8.8.8.8"
+  fi
+fi
 echo "Upstream DNS: ${UPSTREAM_DNS}"
 
 # --------------------------------------------------------------------------
@@ -72,8 +85,23 @@ server=/anthropic.com/${UPSTREAM_DNS}
 server=/sentry.io/${UPSTREAM_DNS}
 server=/statsig.com/${UPSTREAM_DNS}
 
-# VS Code (marketplace, extensions, updates)
+# VS Code (marketplace queries, updates)
 server=/visualstudio.com/${UPSTREAM_DNS}
+# VS Code Marketplace extension CDN — VSIX downloads resolve to
+# <publisher>.gallery.vsassets.io and <publisher>.gallerycdn.vsassets.io.
+# Without this, VS Code's first attempt to auto-install devcontainer
+# extensions fails with ENOTFOUND, the recommendation prompt fires for
+# unoplatform.vscode before the retry succeeds.
+server=/vsassets.io/${UPSTREAM_DNS}
+# VS Code Server CDN — used by the remote agent for marketplace queries
+# (main.vscode-cdn.net). Blocked → "getaddrinfo ENOTFOUND" in remoteagent.log
+# during extension manifest fetch.
+server=/vscode-cdn.net/${UPSTREAM_DNS}
+
+# Microsoft connectivity probes used by ms-dotnettools.vscode-dotnet-runtime
+# (the "may be offline (can you connect to www.microsoft.com?)" check) and
+# aka.ms short-URL redirects used by .NET installer scripts.
+server=/www.microsoft.com/${UPSTREAM_DNS}
 
 # Azure Blob Storage — covers ALL *.blob.core.windows.net
 server=/core.windows.net/${UPSTREAM_DNS}
@@ -82,9 +110,10 @@ server=/core.windows.net/${UPSTREAM_DNS}
 server=/nuget.org/${UPSTREAM_DNS}
 
 # Anthropic
+server=/claude.ai/${UPSTREAM_DNS}
 server=/claude.com/${UPSTREAM_DNS}
 
-# Azure DevOps (Uno Features feed, unoplatformdev feed)
+# Azure DevOps (Uno Features feed)
 server=/dev.azure.com/${UPSTREAM_DNS}
 
 # Azure CDN (.NET workloads, SDK downloads)
@@ -99,12 +128,21 @@ server=/dotnet.microsoft.com/${UPSTREAM_DNS}
 # Microsoft Learn (MCP documentation server)
 server=/learn.microsoft.com/${UPSTREAM_DNS}
 
+# Microsoft package feed (.NET repos — used by apt + dotnet installer scripts)
+# and aka.ms short-URL redirects.
+server=/packages.microsoft.com/${UPSTREAM_DNS}
+server=/aka.ms/${UPSTREAM_DNS}
+
 # Uno domains
 server=/platform.uno/${UPSTREAM_DNS}
 server=/unoplatform.net/${UPSTREAM_DNS}
 
 # Figma MCP
 server=/figma.com/${UPSTREAM_DNS}
+
+# Playwright
+server=/cdn.playwright.dev/${UPSTREAM_DNS}
+server=/storage.googleapis.com/${UPSTREAM_DNS}
 EOF
 
 # --------------------------------------------------------------------------
@@ -126,10 +164,11 @@ fi
 # --------------------------------------------------------------------------
 # 4. Point resolver at dnsmasq
 # --------------------------------------------------------------------------
-# Docker bind-mounts resolv.conf; take control for DNS filtering
+# Docker bind-mounts resolv.conf; back it up, then replace nameserver lines
+# while preserving search/options/sortlist directives.
 cp /etc/resolv.conf /etc/resolv.conf.docker.bak
 umount /etc/resolv.conf 2>/dev/null || true
-echo "nameserver ${DNSMASQ_LISTEN}" > /etc/resolv.conf
+{ grep -v '^nameserver' /etc/resolv.conf.docker.bak || true; echo "nameserver ${DNSMASQ_LISTEN}"; } > /etc/resolv.conf
 
 # Verify resolv.conf was actually changed — fail hard if not
 if grep -q "${DNSMASQ_LISTEN}" /etc/resolv.conf; then
@@ -143,7 +182,7 @@ fi
 
 echo ""
 echo "========================================="
-echo " DNS-based firewall configured"
+echo " DNS allowlist filter configured"
 echo "========================================="
 
 # --------------------------------------------------------------------------
@@ -194,6 +233,17 @@ if ! curl --connect-timeout 5 https://default.exp-tas.com >/dev/null 2>&1; then
     exit 1
 else
     echo "  PASS: https://default.exp-tas.com is reachable"
+fi
+
+# VS Code Marketplace extension CDN — required for devcontainer extensions to
+# auto-install on first try (otherwise the recommendation prompt fires).
+# The bare `gallery.vsassets.io` apex has no A record — only publisher-prefixed
+# subdomains do — so probe the actual host VS Code hits for the Uno extension.
+if ! getent hosts unoplatform.gallery.vsassets.io >/dev/null 2>&1; then
+    echo "ERROR: Firewall verification failed — DNS lookup for unoplatform.gallery.vsassets.io failed"
+    exit 1
+else
+    echo "  PASS: unoplatform.gallery.vsassets.io resolves"
 fi
 
 echo ""
