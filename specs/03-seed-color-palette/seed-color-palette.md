@@ -67,7 +67,7 @@ theme.Colors.PrimarySeed = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
 | Property | Type | Default | Description |
 |---|---|---|---|
 | `Colors` | `ThemeColors` | `null` | Grouped color configuration including seed colors and overrides. |
-| `DefaultPrimarySeed` | `Color?` (virtual) | `null` | Theme-specific default primary seed. `MaterialTheme` returns `#5946D2`; `SimpleTheme` returns `#808080`. When non-null, seed generation is always active even without explicit `ThemeColors`. |
+| `DefaultPrimarySeed` | `Color?` (virtual) | `null` | Theme-specific default primary seed. |
 
 ### Properties on `ThemeColors`
 
@@ -81,12 +81,12 @@ theme.Colors.PrimarySeed = Color.FromArgb(0xFF, 0x00, 0x6A, 0x6A);
 
 ### Default Seed Behavior
 
-Both `MaterialTheme` and `SimpleTheme` provide default primary seeds so that seed color generation is always active — even when no `ThemeColors` is explicitly configured:
+Neither `MaterialTheme` nor `SimpleTheme` provides a default primary seed (`DefaultPrimarySeed` returns `null` in both). Without explicit configuration, each theme uses its built-in default palette:
 
-- **`MaterialTheme`**: Default seed `#5946D2` (deep purple), producing a vibrant Material palette.
-- **`SimpleTheme`**: Default seed `#808080` (neutral gray), producing a near-neutral palette. Primary/Secondary/Tertiary carry a slight tint due to enforced minimum chroma values.
+- **`MaterialTheme`**: the default Material palette from `SharedColorPalette.xaml` (light primary `#5946D2`, dark primary `#C7BFFF`).
+- **`SimpleTheme`**: the grayscale palette from its `ColorPalette.xaml`.
 
-Setting `Colors.PrimarySeed` overrides the default in either theme.
+Seed generation only runs when `Colors.PrimarySeed` is explicitly set.
 
 Seed colors are configured exclusively via `ThemeColors` (the `BaseTheme.Colors` property). This works with `MaterialTheme`, `SimpleTheme`, and any future theme subclass.
 
