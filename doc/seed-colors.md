@@ -6,7 +6,7 @@ uid: Uno.Themes.SeedColors
 
 Uno Themes supports algorithmic color palette generation using the Material Design 3 [HCT (Hue-Chroma-Tone)](https://material.io/blog/science-of-color-design) color space. Instead of manually defining 30+ color resources for Light and Dark themes, you can provide a single **seed color** and the library will derive the full semantic color palette automatically.
 
-Both `MaterialTheme` and `SimpleTheme` use seed color generation by default — even without explicit configuration. `MaterialTheme` uses `#5946D2` (deep purple) and `SimpleTheme` uses `#808080` (neutral gray) as their built-in default seeds. You can override them by setting `PrimarySeed` on a `ThemeColors` object.
+Seed color generation is **opt-in**: by default, `MaterialTheme` and `SimpleTheme` use their built-in palettes. The generator only runs when you explicitly set `PrimarySeed` on a `ThemeColors` object.
 
 ## Overview
 
@@ -97,8 +97,7 @@ SemanticThemeHelper.PrimarySeed = Colors.Green;
 SemanticThemeHelper.SecondarySeed = Colors.Teal;
 SemanticThemeHelper.TertiarySeed = Colors.Orange;
 
-// Clear seed to revert to theme's default seed color
-// (MaterialTheme → #5946D2, SimpleTheme → #808080)
+// Clear seed to revert to the theme's default palette
 SemanticThemeHelper.PrimarySeed = null;
 ```
 
@@ -146,11 +145,11 @@ Static convenience class for runtime theme configuration.
 When building the final theme palette, the following precedence order applies (highest wins):
 
 1. **`ThemeColors.OverrideDictionary`** (or `OverrideSource`) - explicit user overrides
-2. **Seed-generated palette** - algorithmically derived from `PrimarySeed` (or the theme's `DefaultPrimarySeed`)
+2. **Seed-generated palette** - algorithmically derived from `PrimarySeed`, only when one is explicitly set
 3. **Theme base colors** - e.g., Simple's grayscale palette or Material's built-in defaults
 4. **`SharedColorPalette`** - library defaults
 
-Both themes provide default primary seeds (`MaterialTheme` → `#5946D2`, `SimpleTheme` → `#808080`), so seed generation is always active. Setting `PrimarySeed` overrides the default; clearing it (`null`) reverts to the built-in seed.
+Neither theme sets a seed by default, so without explicit configuration the built-in default palettes apply. Setting `PrimarySeed` activates generation; clearing it (`null`) reverts to the default palette.
 
 This means seed colors override the built-in defaults, but any colors you explicitly set in the `OverrideDictionary` will take precedence over the seed-generated values.
 

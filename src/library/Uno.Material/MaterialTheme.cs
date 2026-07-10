@@ -22,11 +22,11 @@ namespace Uno.Material;
 public class MaterialTheme : BaseTheme
 {
 	/// <summary>
-	/// Default primary seed color that generates the standard Material color palette.
-	/// When no explicit <see cref="ThemeColors.PrimarySeed"/> is set, this seed is
-	/// used so that seed color generation is always active.
+	/// Material uses the default Material color palette (SharedColorPalette.xaml)
+	/// when no seed is set. Seed color generation only runs when a user
+	/// explicitly sets <see cref="ThemeColors.PrimarySeed"/>.
 	/// </summary>
-	protected override Color? DefaultPrimarySeed { get; } = Color.FromArgb(0xFF, 0x59, 0x46, 0xD2);
+	protected override Color? DefaultPrimarySeed => null;
 	public MaterialTheme()
 	{ }
 

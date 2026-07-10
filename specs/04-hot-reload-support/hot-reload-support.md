@@ -6,7 +6,7 @@
 
 ## Overview
 
-Edits to a colour / font / control-style XAML file referenced (directly or transitively) from a `BaseTheme`-derived dictionary — e.g. `ThemeColors.xaml` brought in via `Colors.OverrideSource`, or any merged-pages entry baked into `Uno.Material` / `Uno.Cupertino` / `Uno.Simple.WinUI` — now propagate to the running app on .NET hot reload without an app restart.
+Edits to a color / font / control-style XAML file referenced (directly or transitively) from a `BaseTheme`-derived dictionary — e.g. `ThemeColors.xaml` brought in via `Colors.OverrideSource`, or any merged-pages entry baked into `Uno.Material` / `Uno.Cupertino` / `Uno.Simple.WinUI` — now propagate to the running app on .NET hot reload without an app restart.
 
 The pre-fix theme model rebuilt its merged-dictionary tree from scratch each time a DP input changed (`PrimarySeed`, `DefaultDensity`, `DefaultCornerRadius`, override DPs, …). On hot reload there was no rebuild trigger at all, because `BaseTheme` had no opt-in to .NET's `MetadataUpdateHandler` pipeline. The framework's generic `UpdateResourceDictionaries` walk also couldn't help: it refreshes the *content* of a source-backed `ResourceDictionary` in-place, but it cannot regenerate a code-built dictionary (spacing scale, shape scale, density defaults, generated seed palette) or re-apply a precedence stack of merged children that lives in private fields on a typed subclass.
 
@@ -46,7 +46,7 @@ this.Clear();
 // …rebuild everything from scratch (converters / colors / typography / mergedpages / overrides)
 ```
 
-Combined with a brush-tracking pass (`CollectBrushes` / `UpdateOldBrushes`) to keep already-bound `{ThemeResource}` brushes pointing at the freshly-rebuilt colour values across the wipe. On the seed-color-change path the brush tracker compensated for the wipe; on hot reload, however, **there was nothing wiring the rebuild to the runtime's HR pass**, so brushes never got the new colours.
+Combined with a brush-tracking pass (`CollectBrushes` / `UpdateOldBrushes`) to keep already-bound `{ThemeResource}` brushes pointing at the freshly-rebuilt color values across the wipe. On the seed-color-change path the brush tracker compensated for the wipe; on hot reload, however, **there was nothing wiring the rebuild to the runtime's HR pass**, so brushes never got the new colors.
 
 Post-fix `UpdateSource` keeps the URI-backed layer intact and only manages the *dynamic* layers it owns:
 
@@ -86,7 +86,7 @@ Consequence: the brush-tracking pass (`CollectBrushes`, `CollectBrushEntries`, `
 - `GetSimpleColorOverride` merged the consumer `colorOverride` on top of `Uno.Simple.WinUI/Styles/Application/ColorPalette.xaml`.
 - `GenerateSpecificResources` returned a fresh `ResourceDictionary` whose merged graph stitched together `MergedPages`, `Thickness`, and `Fonts` (plus the font override).
 
-Both methods exist *only* because the base class used to require subclasses to materialise their full static layer per rebuild. With the new "set `Source` once" contract the static layer comes from the merged-pages XAML directly, and a new `src/library/Uno.Simple.WinUI/Styles/Application/BaseDictionaries.xaml` file gathers the shared converters / typography / palette / shared-colours plus Simple's own fonts, thickness and grayscale palette in the correct precedence order:
+Both methods exist *only* because the base class used to require subclasses to materialise their full static layer per rebuild. With the new "set `Source` once" contract the static layer comes from the merged-pages XAML directly, and a new `src/library/Uno.Simple.WinUI/Styles/Application/BaseDictionaries.xaml` file gathers the shared converters / typography / palette / shared-colors plus Simple's own fonts, thickness and grayscale palette in the correct precedence order:
 
 ```xml
 <ResourceDictionary.MergedDictionaries>
@@ -182,12 +182,12 @@ These run under the existing `Uno.UI.RuntimeTests.Engine` host inside `SimpleSam
 - `BaseTheme.cs` — Source-once + `_dynamicDictionaries` model. Removed `_originalBrushes` / `_isInResourceTree`. Replaced abstract `GenerateSpecificResources` with abstract `DefaultStylesSource`.
 - `BaseTheme.SeedColors.cs` — removed `CollectBrushes`, `CollectBrushEntries`, `UpdateOldBrushes`, `IsInResourceTree`, `IsReachableFrom` (no longer needed under the non-destructive rebuild).
 - `ColorGeneration/Hct/HctColor.cs` — `[SuppressMessage(CA1815)]` justification for not implementing `Equals` on the value type (transient computation result; equality not part of the consumer contract).
-- `Converters/FromBoolToValueConverter.cs`, `Converters/StringFormatConverter.cs` — `CultureInfo.InvariantCulture` passed explicitly to `Convert.ToBoolean` / `string.Format` to silence the culture analyser without behaviour change.
+- `Converters/FromBoolToValueConverter.cs`, `Converters/StringFormatConverter.cs` — `CultureInfo.InvariantCulture` passed explicitly to `Convert.ToBoolean` / `string.Format` to silence the culture analyzer without behavior change.
 
 ### `src/library/Uno.Simple.WinUI/`
 
 - `SimpleTheme.cs` — collapsed to `DefaultPrimarySeed` / `UseHighFidelityColors` / `DefaultStylesSource`. Removed `GetSimpleColorOverride` and `GenerateSpecificResources`.
-- `Styles/Application/BaseDictionaries.xaml` (new) — static base layer (shared converters/typography/palette/colours + Simple fonts/thickness/grayscale palette), picked up by the existing `XamlMergeInput` glob in `simple-common.props`.
+- `Styles/Application/BaseDictionaries.xaml` (new) — static base layer (shared converters/typography/palette/colors + Simple fonts/thickness/grayscale palette), picked up by the existing `XamlMergeInput` glob in `simple-common.props`.
 
 ### `src/library/Uno.Material/`
 
@@ -248,6 +248,6 @@ The earlier debugging instrumentation (three `Console.WriteLine($"[STEVE] …")`
 ## Related Specs
 
 - `specs/01-design-tokens/` — token model the dynamic spacing/shape/density layers regenerate from.
-- `specs/02-semantic-brushes/` — brush layer that consumes the regenerated colour palette.
+- `specs/02-semantic-brushes/` — brush layer that consumes the regenerated color palette.
 - `specs/03-seed-color-palette/` — seed-driven palette generation; one of the dynamic layers `UpdateSource` rebuilds.
 - `uno-private/specs/043-hotreload-resource-dictionary-refresh/` — framework-side counterpart that makes the source-backed entries inside a `BaseTheme` reachable for the in-place refresh.
