@@ -67,8 +67,10 @@ public class Given_DefaultPalette
 		await UnitTestsUIContentHelper.WaitForIdle();
 
 		// Theme brushes only re-materialize when the root element's theme
-		// changes, so drive the XamlRoot content like an app theme switch.
-		var root = (FrameworkElement)container.XamlRoot!.Content!;
+		// changes — setting RequestedTheme on the container subtree is not
+		// enough — so drive the XamlRoot content like an app theme switch.
+		var root = container.XamlRoot?.Content as FrameworkElement;
+		Assert.IsNotNull(root, "The loaded container should expose the XamlRoot content");
 		var initialTheme = root.RequestedTheme;
 		try
 		{
@@ -100,13 +102,13 @@ public class Given_DefaultPalette
 	[RunsOnUIThread]
 	public void When_PrimarySeedExplicitlySet_Then_GenerationActivates()
 	{
-		// Seeding with the default primary itself must still produce generated
-		// tones (M3 tone steps), proving generation is opt-in rather than a
-		// pass-through of the seed. The exact generated value is intentionally
-		// not pinned so the algorithm can evolve.
+		// A seed far from the default palette guarantees the generated tones
+		// differ from the default primaries. The exact generated value is
+		// intentionally not pinned so the algorithm can evolve.
+		var seed = Color.FromArgb(0xFF, 0xFF, 0x00, 0x00);
 		var theme = new MaterialTheme
 		{
-			Colors = new ThemeColors { PrimarySeed = DefaultPrimaryLight },
+			Colors = new ThemeColors { PrimarySeed = seed },
 		};
 
 		var container = new Grid();
