@@ -169,6 +169,41 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Determinate -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressBar_25"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="25"
+											  Style="{StaticResource ProgressBarStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressBar_50"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="50"
+											  Style="{StaticResource ProgressBarStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressBar_75"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="75"
+											  Style="{StaticResource ProgressBarStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Indeterminate -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressBar_Indeterminate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar IsIndeterminate="True"
+											  Style="{StaticResource ProgressBarStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ProgressBar_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Value="60"
+											  IsEnabled="False"
+											  Style="{StaticResource ProgressBarStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

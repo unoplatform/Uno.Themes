@@ -274,6 +274,58 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox PlaceholderText="Select an option"
+									  Width="300"
+									  Style="{StaticResource ComboBoxStyle}">
+								<ComboBoxItem Content="Option 1" />
+								<ComboBoxItem Content="Option 2" />
+								<ComboBoxItem Content="Option 3" />
+								<ComboBoxItem Content="Option 4" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+						<!-- Pre-selected -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Preselected"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox SelectedIndex="1"
+									  Width="300"
+									  Style="{StaticResource ComboBoxStyle}">
+								<ComboBoxItem Content="First" />
+								<ComboBoxItem Content="Second (selected)" />
+								<ComboBoxItem Content="Third" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+						<!-- Explicit ComboBoxItemStyle -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_ItemStyle"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox PlaceholderText="Styled items"
+									  Width="300"
+									  Style="{StaticResource ComboBoxStyle}">
+								<ComboBoxItem Content="Option 1"
+											  Style="{StaticResource ComboBoxItemStyle}" />
+								<ComboBoxItem Content="Option 2"
+											  Style="{StaticResource ComboBoxItemStyle}" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Fluent_ComboBox_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox PlaceholderText="Disabled"
+									  IsEnabled="False"
+									  Width="300"
+									  Style="{StaticResource ComboBoxStyle}">
+								<ComboBoxItem Content="Option 1" />
+								<ComboBoxItem Content="Option 2" />
+							</ComboBox>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

@@ -132,5 +132,102 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.FluentTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Basic"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Open Menu">
+							<Button.Flyout>
+								<MenuFlyout>
+									<MenuFlyoutItem Text="Cut" />
+									<MenuFlyoutItem Text="Copy" />
+									<MenuFlyoutItem Text="Paste" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_WithIcons"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Edit Menu">
+							<Button.Flyout>
+								<MenuFlyout>
+									<MenuFlyoutItem Text="Cut">
+										<MenuFlyoutItem.Icon>
+											<SymbolIcon Symbol="Cut" />
+										</MenuFlyoutItem.Icon>
+									</MenuFlyoutItem>
+									<MenuFlyoutItem Text="Copy">
+										<MenuFlyoutItem.Icon>
+											<SymbolIcon Symbol="Copy" />
+										</MenuFlyoutItem.Icon>
+									</MenuFlyoutItem>
+									<MenuFlyoutItem Text="Paste">
+										<MenuFlyoutItem.Icon>
+											<SymbolIcon Symbol="Paste" />
+										</MenuFlyoutItem.Icon>
+									</MenuFlyoutItem>
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Separator"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="File Menu">
+							<Button.Flyout>
+								<MenuFlyout>
+									<MenuFlyoutItem Text="New" />
+									<MenuFlyoutItem Text="Open" />
+									<MenuFlyoutSeparator />
+									<MenuFlyoutItem Text="Exit" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Toggle"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="View Options">
+							<Button.Flyout>
+								<MenuFlyout>
+									<ToggleMenuFlyoutItem Text="Show Toolbar"
+														  IsChecked="True" />
+									<ToggleMenuFlyoutItem Text="Show Status Bar" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_SubItem"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Format Menu">
+							<Button.Flyout>
+								<MenuFlyout>
+									<MenuFlyoutItem Text="Bold" />
+									<MenuFlyoutItem Text="Italic" />
+									<MenuFlyoutSubItem Text="Text Color">
+										<MenuFlyoutItem Text="Red" />
+										<MenuFlyoutItem Text="Green" />
+										<MenuFlyoutItem Text="Blue" />
+									</MenuFlyoutSubItem>
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+					<smtx:XamlDisplay UniqueKey="Fluent_MenuFlyout_Radio"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Sort Options">
+							<Button.Flyout>
+								<MenuFlyout>
+									<RadioMenuFlyoutItem Text="Sort by Name"
+														 GroupName="FluentSort"
+														 IsChecked="True" />
+									<RadioMenuFlyoutItem Text="Sort by Date"
+														 GroupName="FluentSort" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.FluentTemplate>
 	</sample:SamplePageLayout>
 </Page>
