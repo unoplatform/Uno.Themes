@@ -48,3 +48,48 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
         </ResourceDictionary>
     </Application.Resources>
     ```
+
+## FluentTheme: the Uno Themes semantic layer with a Fluent look
+
+`XamlControlsResources` alone gives you the Fluent control styles under their WinUI names (`AccentButtonStyle`, `BodyTextBlockStyle`, …). If your app is written against the Uno Themes **semantic abstraction layer** — [semantic style keys](semantic-styles.md) like `FilledButtonStyle`, the semantic color palette (`PrimaryBrush`, `OnSurfaceBrush`, …), the semantic typography slots (`DisplayLarge` … `CaptionSmall`), and the [design tokens](design-tokens.md) — the `Uno.Fluent.WinUI` package maps that whole layer onto the built-in Fluent styles, so the same XAML that renders Material under `MaterialTheme` renders the platform-default Fluent look instead.
+
+`FluentTheme` is an *adapter*, not a style library: it ships **no control templates and no implicit styles**. Fluent is already the implicit default of every WinUI / Uno Platform app; the theme only adds:
+
+- **Semantic style aliases** onto the built-in Fluent styles (`FilledButtonStyle` &rarr; `AccentButtonStyle`, `OutlinedTextBoxStyle` &rarr; `DefaultTextBoxStyle`, …) — see the Fluent column in [Semantic Styles](semantic-styles.md).
+- **Fluent color values** for the semantic color roles: the accent roles track the system accent (`SystemAccentColor` and its shades — on Windows, the user's real accent color), and the neutral/surface/error roles carry the corresponding Fluent design-token values, per Light/Dark theme.
+- **Fluent typography values** for the 19 semantic type slots, using the [Fluent type ramp](https://learn.microsoft.com/en-us/windows/apps/design/style/typography) sizes/weights and the platform-default font (`ContentControlThemeFontFamily`) — no font package is shipped.
+- The shared `BaseTheme` machinery: `Space*`/`Radius*` design tokens, `DefaultDensity`, `DefaultCornerRadius`, [seed colors](seed-colors.md) (opt-in), color overrides, and hot reload.
+
+### Installation
+
+Add a reference to the `Uno.Fluent.WinUI` NuGet package to your application project.
+
+### App.xaml setup
+
+Merge `FluentTheme` **after** `XamlControlsResources`:
+
+```xml
+<Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <!-- Load WinUI resources — MUST come first -->
+            <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+            <!-- Load the Uno Themes semantic layer mapped onto Fluent -->
+            <FluentTheme xmlns="using:Uno.Fluent" />
+
+            <!-- Other merged dictionaries here -->
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</Application.Resources>
+```
+
+> [!IMPORTANT]
+> The ordering requirement is load-bearing: `FluentTheme`'s semantic aliases and color mappings resolve against the resources `XamlControlsResources` provides. When the Fluent tokens are unreachable (for example, the dictionaries are merged in the wrong order), the semantic colors keep the Uno Themes shared defaults and a warning is logged — theme initialization never throws.
+
+### Behavior notes
+
+- **Interaction states**: the semantic layer encodes interaction states as opacity variants of the rest color (`PrimaryHoverBrush` = `PrimaryColor` at hover opacity), while Fluent uses discrete per-state fill colors inside its templates. Under `FluentTheme`, built-in controls keep Fluent's own state behavior (correct by definition); app XAML that uses semantic *state* brushes gets opacity-derived variants of the Fluent rest colors — visually consistent, but not token-identical to Fluent's hover/pressed colors.
+- **Materials**: Mica and Acrylic are not applied by the theme. The semantic surface roles map to Fluent's solid-color fallback tokens (`SolidBackgroundFillColor*`); apps can layer materials themselves where supported.
+- **Seed colors**: like all Uno Themes, setting `Colors.PrimarySeed` generates a semantic palette from your brand color ([seed colors](seed-colors.md)). `FluentTheme` uses high-fidelity generation (the seed's chroma is preserved rather than re-saturated). Without a seed, the palette follows the platform accent and Fluent neutrals.
+- **Lightweight styling**: the semantic [lightweight-styling](lightweight-styling.md) keys are not yet bridged to the built-in Fluent control resources — Fluent-styled controls keep their own resource keys (`AccentButtonBackground`, …) for now.
