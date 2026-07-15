@@ -1,0 +1,108 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Fluent — Font Family Mappings
+
+		Every semantic slot uses the platform-default Fluent font via
+		ContentControlThemeFontFamily (Segoe UI (Variable) on Windows, the
+		platform/Uno default elsewhere — spec 05, D11). No font package ships.
+
+		LOAD-BEARING (specs/lessons.md): this file is merged AFTER
+		SharedTypography.xaml inside BaseDictionaries.xaml so these slot->family
+		mappings deterministically win over the shared Segoe-derived defaults.
+		Typography.xaml declares the same mappings; cross-dictionary
+		<StaticResource> aliases in theme dictionaries resolve eagerly at parse
+		time, and this duplication is what makes resolution deterministic — do
+		not remove either side on a refactor.
+
+		Every alias targets ContentControlThemeFontFamily DIRECTLY (never
+		TypefacePlain/TypefaceBrand): alias chaining does not resolve on Uno
+		(spec 05, D16).
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- DARK THEME (Default) -->
+		<ResourceDictionary x:Key="Default">
+
+			<!-- Root Typeface Tokens -->
+			<StaticResource x:Key="TypefacePlain" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="TypefaceBrand" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- DISPLAY -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- HEADLINE -->
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- TITLE -->
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- BODY -->
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- LABEL -->
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- CAPTION -->
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+		</ResourceDictionary>
+
+		<!-- LIGHT THEME -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- Root Typeface Tokens -->
+			<StaticResource x:Key="TypefacePlain" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="TypefaceBrand" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- DISPLAY -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- HEADLINE -->
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- TITLE -->
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- BODY -->
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- LABEL -->
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+			<!-- CAPTION -->
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

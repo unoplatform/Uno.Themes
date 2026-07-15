@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		The ONLY styles this library authors (spec 05, D10): Fluent has no public
+		keyed "subtle/text button", so two setters-only bridge styles fill the
+		semantic TextButton/IconButton roles. Bridge styles must never set a
+		Template (D1 — templates are owned by WinUI / Uno.UI): the built-in
+		template's VSM still applies ButtonBackgroundPointerOver/Pressed on
+		interaction, which is exactly Fluent's subtle-button hover behavior.
+	-->
+
+	<!-- Fluent "subtle button": transparent at rest -->
+	<Style x:Key="FluentTextButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource DefaultButtonStyle}">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+	</Style>
+
+	<!-- Fluent icon button: square padding, transparent rest -->
+	<Style x:Key="FluentIconButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource DefaultButtonStyle}">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="Padding" Value="8" />
+		<Setter Property="MinWidth" Value="40" />
+		<Setter Property="MinHeight" Value="40" />
+	</Style>
+
+	<!--
+		The semantic aliases (TextButtonStyle / IconButtonStyle) are late-bound
+		in code (FluentTheme): <StaticResource> alias elements resolve at parse
+		time against the app-level scope only — when the theme is instantiated
+		below app scope they cannot see this bundle's own keys, and silently
+		bind to a foreign app-level theme's key of the same name if one exists
+		(see specs/lessons.md).
+	-->
+
+</ResourceDictionary>
