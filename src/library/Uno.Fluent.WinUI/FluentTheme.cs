@@ -172,7 +172,8 @@ public class FluentTheme : BaseTheme
 		// the built-in Fluent controls follow it too. Added on every rebuild
 		// pass so it tracks seed changes and is dropped when the seed clears
 		// (restoring the platform accent). No seed → no entry at all.
-		if ((Colors?.PrimarySeed ?? DefaultPrimarySeed) is { } seed)
+		var effectiveSeed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
+		if (effectiveSeed is { } seed)
 		{
 			if (_accentOverride is not { } cached || cached.Seed != seed)
 			{
@@ -181,6 +182,14 @@ public class FluentTheme : BaseTheme
 
 			AddThemeDictionary(_accentOverride.Value.Dictionary);
 		}
+
+		// Lightweight-styling bridge (spec 05 §10, goal G6): semantic
+		// lightweight keys with Fluent defaults + override-driven re-pointing
+		// of the built-in per-control resources. Rebuilt each pass so it
+		// tracks seed and override changes (the override's contents can
+		// mutate without a reference change, so no cache here — the bridge is
+		// a few dozen brushes and passes only run on theme-property changes).
+		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, Colors?.OverrideDictionary));
 
 		// Base typography ships in the Source bundle (BaseDictionaries.xaml); only a
 		// consumer-supplied font override is layered dynamically on top to shadow it.
