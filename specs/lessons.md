@@ -65,6 +65,20 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## `<StaticResource>` alias limits on Uno: no alias chaining; per-theme-branch aliases resolve the ambient theme
+
+**Context:** Fluent theme Spike S1 (2026-07-14, `specs/05-fluent-theme/`) validated the alias mechanisms the planned `FluentTheme` adapter relies on, in the CI host (SimpleSampleApp, `XamlControlsResources` merged at app scope, Skia desktop). Findings are permanently guarded by `src/samples/SimpleSampleApp/RuntimeTests/Given_FluentAliasResolution.cs`.
+
+**What works:** a `<StaticResource x:Key="A" ResourceKey="XcrKey"/>` alias in a dictionary loaded via `ms-appx` Source, merged as a later sibling of `XamlControlsResources`, resolves to the *same instance* as the XCR resource. `BasedOn="{StaticResource XcrKey}"` setters-only styles and FontFamily aliases work the same way. Alias → concrete style in the same merged bundle also works (Simple's `_Resources.xaml` → `Button.xaml` relies on it).
+
+**What does not work:**
+1. **Alias chaining** — an alias whose `ResourceKey` targets *another alias* in the same dictionary does not resolve (`"Couldn't statically resolve resource"`, lookup yields null). Every alias must target a concrete resource directly.
+2. **Per-theme-branch color aliases** — a `<StaticResource>` alias placed inside `ThemeDictionaries` `Light`/`Default` branches resolves eagerly against the **ambient** theme, so both branches end up with the same value instead of each branch's own. This is the same eager-resolution family as the Fonts.xaml lesson below. Theme-dependent values sourced from another dictionary must be resolved **in code** per branch (see spec 05, decision D6 "mechanism C"), not via per-branch XAML aliases.
+
+**How to apply:** when adding semantic aliases to any `_Resources.xaml`, alias concrete style keys only — never another alias. When mapping theme-varying colors across dictionaries, build the values programmatically per branch. If `Given_FluentAliasResolution.When_AliasOfAlias_DoesNotResolve` or `When_ThemeBranchColorAlias_BranchesResolveAmbientTheme` ever *fail*, the platform constraint has been lifted — revisit spec 05 D6/D16 before assuming either way.
+
+---
+
 ## Typography slot→weight font mappings must be duplicated in Fonts.xaml (not only Typography.xaml)
 
 **Context:** PR #1680 (`dev/sb/themes-revert`) — reworking `BaseTheme` resource management. CI runtime tests failed with 5 `Given_Fonts` cases: Bold display slots (`DisplayLargeFontFamily`, `DisplayMediumFontFamily`) resolved to `Inter-Regular` instead of `Inter-Bold`, and SemiBold slots (`HeadlineMediumFontFamily`, `TitleMediumFontFamily`, `LabelLargeFontFamily`) resolved to `Inter-Regular`/`Inter-Medium` instead of `Inter-SemiBold`.
