@@ -10,12 +10,17 @@
 		interaction, which is exactly Fluent's subtle-button hover behavior.
 	-->
 
-	<!-- Fluent "subtle button": transparent at rest -->
+	<!-- Fluent "subtle button": transparent at rest. The Foreground setter
+	     consumes the semantic lightweight key via ThemeResource — resolved per
+	     ELEMENT scope, so page/subtree-scoped consumer overrides of
+	     TextButtonForeground reach these buttons directly (spec 05 §10;
+	     defaults are provided by FluentLightweightBridge). -->
 	<Style x:Key="FluentTextButtonStyle"
 		   TargetType="Button"
 		   BasedOn="{StaticResource DefaultButtonStyle}">
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
 	</Style>
 
 	<!-- Fluent icon button: square padding, transparent rest -->
@@ -24,6 +29,7 @@
 		   BasedOn="{StaticResource DefaultButtonStyle}">
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
 		<Setter Property="Padding" Value="8" />
 		<Setter Property="MinWidth" Value="40" />
 		<Setter Property="MinHeight" Value="40" />
