@@ -179,9 +179,33 @@ accent-derived closure with values mirroring the platform structure above
 (insurance for Windows), and skips `TextOnAccentFillColor*` / `*Disabled`
 (seed-invariant — refines D12's closure list, recorded in the review log).
 
-**Conclusion (b), partial:** redefining `AccentButtonBackground` in a later
-app-scope sibling did not *break* rendering (C) and a flat (non-theme-branch)
-redefinition also rendered correctly (B2) — but because layer A already
-cascaded, C could not isolate whether the per-control redefinition *itself*
-wins `{ThemeResource}` lookups from inside XCR templates. Re-run the isolation
-(per-control layer only, no shade override) at the start of Phase 3.
+**Conclusion (b), partial (2026-07-15 morning):** redefining
+`AccentButtonBackground` in a later app-scope sibling did not *break* rendering
+(C) and a flat (non-theme-branch) redefinition also rendered correctly (B2) —
+but because layer A already cascaded, C could not isolate whether the
+per-control redefinition *itself* wins `{ThemeResource}` lookups from inside
+XCR templates.
+
+### (b) Isolation run ✅ DONE (2026-07-15, Skia desktop, ambient Light)
+
+Temporary `Given_TempS4bDiag` probe (not committed), **no accent-shade
+overrides anywhere** — pure per-control redefinitions, rendered
+`AccentButtonStyle` + `DefaultButtonStyle` buttons after each step:
+
+| Scenario | Result |
+|---|---|
+| Q1 — app-scope later sibling, per-branch `AccentButtonBackground`/`ButtonBackground` | ✅ both buttons follow the override; clean restore on removal |
+| Q1b — same, flat (no ThemeDictionaries) | ✅ follows |
+| Q2 — redefinition NESTED in an outer app-scope dictionary's MergedDictionaries (the FluentTheme/AddThemeDictionary topology), configured before merge | ✅ follows |
+| Q3 — nested layer swapped while attached, then a NEW control rendered | ✅ new control shows the new value (no app-scope poke needed) |
+| Q4/Q4b — container-scoped redefinition (per-branch and flat) | ✅ contained buttons follow |
+
+**Verdict (b): YES on Uno** — per-control resource redefinitions in a later
+sibling (or nested dynamic layer) win `{ThemeResource}` lookups made inside
+XCR templates, at app and container scope, and `UpdateSource`-style layer
+swaps propagate to controls rendered afterwards. Phase 3's re-pointing design
+is confirmed; implemented override-driven (no re-pointing without an override,
+so stock rendering and Windows live-accent tracking stay untouched).
+Bonus capture: light-branch `ButtonBackground` = `#B3FFFFFF`
+(= `ControlFillColorDefault` light). Windows validation remains pending
+(tracked residual risk).

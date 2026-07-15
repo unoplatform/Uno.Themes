@@ -228,6 +228,30 @@ For more information about the lightweight styling resource keys used in each co
 - [ToggleButton](styles/ToggleButton.md)
 - [ToggleSwitch](styles/ToggleSwitch.md)
 
+## Fluent theme
+
+Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the **built-in WinUI templates**, which reference Fluent's own per-control resources (`AccentButtonBackground`, `ButtonForeground`, …) rather than the semantic keys above. The theme bridges the two worlds per control (currently: **Button**):
+
+- The semantic Button brush keys (`FilledButton*`, `OutlinedButton*`, `TextButtonForeground*`, `IconButtonForeground`) resolve under `FluentTheme` with Fluent default values, so semantic-keyed XAML keeps working.
+- An **app-wide** override goes through the theme's `Colors.OverrideDictionary` — the theme then re-points the corresponding Fluent per-control resource, so Fluent-styled controls reflect it:
+
+```xml
+<FluentTheme xmlns="using:Uno.Fluent">
+    <FluentTheme.Colors>
+        <ut:ThemeColors xmlns:ut="using:Uno.Themes">
+            <ut:ThemeColors.OverrideDictionary>
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="FilledButtonBackground" Color="DarkGreen" />
+                </ResourceDictionary>
+            </ut:ThemeColors.OverrideDictionary>
+        </ut:ThemeColors>
+    </FluentTheme.Colors>
+</FluentTheme>
+```
+
+- A **page/subtree-scoped** override targets the Fluent per-control key directly (`<SolidColorBrush x:Key="AccentButtonBackground" … />` in `Page.Resources`), exactly as in a plain WinUI app. Exception: the keys consumed by the theme's own bridge styles (`TextButtonForeground*`, `IconButtonForeground`) resolve per element scope, so scoped overrides of those semantic keys work directly.
+- **Not bridged**: `FilledTonalButton*`/`ElevatedButton*` (they share the standard Fluent button with `OutlinedButton*` and cannot be distinguished without re-templating), `*IconForeground*` variants, `*StateLayer*`, and `*Elevation*` keys (no Fluent equivalent), and the `Disabled`/hover/pressed keys of the Outlined family have no default values (overrides still re-point).
+
 ## Toolkit
 
 Toolkit also has controls that allow lightweight styling, check out [Lightweight Styling in Uno.Toolkit](xref:Toolkit.LightweightStyling).

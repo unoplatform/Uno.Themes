@@ -50,8 +50,16 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Phase 3 — Lightweight bridge (per control: Button → TextBox → CheckBox → RadioButton → ToggleSwitch → Slider)
 
-- [ ] S4(b) ThemeResource re-pointing validation
-- [ ] Button
+- [x] S4(b) ThemeResource re-pointing validation (2026-07-15 — verdict YES on
+  Uno for app scope, nested dynamic layer, attached layer swaps, and container
+  scope; see `spike-results.md` §S4(b))
+- [x] Button (2026-07-15 — `FluentLightweightBridge`: semantic defaults per
+  branch + override-driven re-pointing via `Colors.OverrideDictionary`;
+  `{ThemeResource}` foreground setters on the shipped bridge styles;
+  `Given_FluentLightweightStyling`; docs. Not bridged (documented):
+  FilledTonal*/Elevated* (share the standard button), IconForeground variants,
+  StateLayer/Elevation keys; Outlined hover/pressed/Disabled are pass-through
+  only)
 - [ ] TextBox
 - [ ] CheckBox
 - [ ] RadioButton
@@ -64,6 +72,28 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-07-15 — **Phase 3, Button increment complete** (S4(b) + bridge).
+  S4(b) isolation verdict: per-control redefinitions win XCR-template
+  `{ThemeResource}` lookups on Uno in every relevant topology, including
+  nested-layer swaps while attached (`spike-results.md` §S4(b)).
+  Design decisions beyond the spec text:
+  1. **Re-pointing is override-driven only** — without a consumer override the
+     bridge writes no per-control keys, so stock Fluent rendering (and live
+     system-accent tracking on Windows) is untouched.
+  2. **Override channel is `Colors.OverrideDictionary`** for app-wide semantic
+     overrides (it triggers the rebuild the bridge hooks); plain app-scope
+     resource definitions after the theme are not visible at rebuild time
+     (documented). Page-scoped overrides use the Fluent per-control keys —
+     except `TextButtonForeground*`/`IconButtonForeground`, which the shipped
+     bridge styles consume via `{ThemeResource}` setters (element-scope, so
+     scoped semantic overrides work directly).
+  3. **Coverage:** Filled* (accent button) and Outlined* rest keys carry
+     verified defaults; Outlined hover/pressed and all Disabled keys are
+     re-point pass-through without defaults (platform values unverified per
+     branch); FilledTonal*/Elevated* not bridged (indistinguishable from the
+     standard button without re-templating — D1).
+  Verification: full CI-parity suite green, 31 new cases (269 total — 268
+  passed / 1 pre-existing skip).
 - 2026-07-15 — **Phase 2 complete.** S4(a) ran on Skia desktop (results in
   `spike-results.md` §S4): on Uno, XCR's accent brushes re-resolve late-bound,
   so overriding the `SystemAccentColor*` shades alone recolors built-in
