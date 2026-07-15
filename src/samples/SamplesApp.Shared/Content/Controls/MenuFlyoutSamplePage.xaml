@@ -139,10 +139,13 @@
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<Button Content="Open Menu">
 							<Button.Flyout>
-								<MenuFlyout>
-									<MenuFlyoutItem Text="Cut" />
-									<MenuFlyoutItem Text="Copy" />
-									<MenuFlyoutItem Text="Paste" />
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="Cut"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Copy"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Paste"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
 								</MenuFlyout>
 							</Button.Flyout>
 						</Button>
@@ -151,18 +154,21 @@
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<Button Content="Edit Menu">
 							<Button.Flyout>
-								<MenuFlyout>
-									<MenuFlyoutItem Text="Cut">
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="Cut"
+													Style="{StaticResource MenuFlyoutItemStyle}">
 										<MenuFlyoutItem.Icon>
 											<SymbolIcon Symbol="Cut" />
 										</MenuFlyoutItem.Icon>
 									</MenuFlyoutItem>
-									<MenuFlyoutItem Text="Copy">
+									<MenuFlyoutItem Text="Copy"
+													Style="{StaticResource MenuFlyoutItemStyle}">
 										<MenuFlyoutItem.Icon>
 											<SymbolIcon Symbol="Copy" />
 										</MenuFlyoutItem.Icon>
 									</MenuFlyoutItem>
-									<MenuFlyoutItem Text="Paste">
+									<MenuFlyoutItem Text="Paste"
+													Style="{StaticResource MenuFlyoutItemStyle}">
 										<MenuFlyoutItem.Icon>
 											<SymbolIcon Symbol="Paste" />
 										</MenuFlyoutItem.Icon>
@@ -175,11 +181,14 @@
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<Button Content="File Menu">
 							<Button.Flyout>
-								<MenuFlyout>
-									<MenuFlyoutItem Text="New" />
-									<MenuFlyoutItem Text="Open" />
-									<MenuFlyoutSeparator />
-									<MenuFlyoutItem Text="Exit" />
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="New"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Open"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
+									<MenuFlyoutSeparator Style="{StaticResource MenuFlyoutSeparatorStyle}" />
+									<MenuFlyoutItem Text="Exit"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
 								</MenuFlyout>
 							</Button.Flyout>
 						</Button>
@@ -188,10 +197,12 @@
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<Button Content="View Options">
 							<Button.Flyout>
-								<MenuFlyout>
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<ToggleMenuFlyoutItem Text="Show Toolbar"
-														  IsChecked="True" />
-									<ToggleMenuFlyoutItem Text="Show Status Bar" />
+														  IsChecked="True"
+														  Style="{StaticResource ToggleMenuFlyoutItemStyle}" />
+									<ToggleMenuFlyoutItem Text="Show Status Bar"
+														  Style="{StaticResource ToggleMenuFlyoutItemStyle}" />
 								</MenuFlyout>
 							</Button.Flyout>
 						</Button>
@@ -200,13 +211,19 @@
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<Button Content="Format Menu">
 							<Button.Flyout>
-								<MenuFlyout>
-									<MenuFlyoutItem Text="Bold" />
-									<MenuFlyoutItem Text="Italic" />
-									<MenuFlyoutSubItem Text="Text Color">
-										<MenuFlyoutItem Text="Red" />
-										<MenuFlyoutItem Text="Green" />
-										<MenuFlyoutItem Text="Blue" />
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="Bold"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Italic"
+													Style="{StaticResource MenuFlyoutItemStyle}" />
+									<MenuFlyoutSubItem Text="Text Color"
+													   Style="{StaticResource MenuFlyoutSubItemStyle}">
+										<MenuFlyoutItem Text="Red"
+														Style="{StaticResource MenuFlyoutItemStyle}" />
+										<MenuFlyoutItem Text="Green"
+														Style="{StaticResource MenuFlyoutItemStyle}" />
+										<MenuFlyoutItem Text="Blue"
+														Style="{StaticResource MenuFlyoutItemStyle}" />
 									</MenuFlyoutSubItem>
 								</MenuFlyout>
 							</Button.Flyout>
@@ -216,12 +233,14 @@
 									  Style="{StaticResource XamlDisplayBelowStyle}">
 						<Button Content="Sort Options">
 							<Button.Flyout>
-								<MenuFlyout>
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle}">
 									<RadioMenuFlyoutItem Text="Sort by Name"
 														 GroupName="FluentSort"
-														 IsChecked="True" />
+														 IsChecked="True"
+														 Style="{StaticResource RadioMenuFlyoutItemStyle}" />
 									<RadioMenuFlyoutItem Text="Sort by Date"
-														 GroupName="FluentSort" />
+														 GroupName="FluentSort"
+														 Style="{StaticResource RadioMenuFlyoutItemStyle}" />
 								</MenuFlyout>
 							</Button.Flyout>
 						</Button>
