@@ -96,6 +96,11 @@ public class FluentTheme : BaseTheme
 	// a branch-correct palette.
 	private readonly ResourceDictionary _palette;
 
+	// Single-entry cache for the reverse accent mapping (spec 05 §9): seed
+	// changes are rare, but UpdateSource runs on every theme-property change —
+	// don't re-solve the tonal palette when the seed hasn't moved.
+	private (Color Seed, ResourceDictionary Dictionary)? _accentOverride;
+
 	/// <summary>
 	/// Initializes the Fluent theme resources with the default palette and typography.
 	/// </summary>
@@ -162,6 +167,20 @@ public class FluentTheme : BaseTheme
 
 		EnsureLateBoundStyleAliases();
 		AddThemeDictionary(_lateBoundStyles);
+
+		// Reverse accent mapping (spec 05 §9, goal G5): when a seed is active,
+		// the built-in Fluent controls follow it too. Added on every rebuild
+		// pass so it tracks seed changes and is dropped when the seed clears
+		// (restoring the platform accent). No seed → no entry at all.
+		if ((Colors?.PrimarySeed ?? DefaultPrimarySeed) is { } seed)
+		{
+			if (_accentOverride is not { } cached || cached.Seed != seed)
+			{
+				_accentOverride = (seed, FluentAccentPalette.Build(seed));
+			}
+
+			AddThemeDictionary(_accentOverride.Value.Dictionary);
+		}
 
 		// Base typography ships in the Source bundle (BaseDictionaries.xaml); only a
 		// consumer-supplied font override is layered dynamically on top to shadow it.
