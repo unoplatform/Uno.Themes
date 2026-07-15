@@ -209,3 +209,19 @@ so stock rendering and Windows live-accent tracking stay untouched).
 Bonus capture: light-branch `ButtonBackground` = `#B3FFFFFF`
 (= `ControlFillColorDefault` light). Windows validation remains pending
 (tracked residual risk).
+
+### Addendum — per-control key-name probe (2026-07-15, fresh XCR instance)
+
+Probed the documented semantic key names and WinUI candidate targets against
+`new XamlControlsResources()` (bypassing the host's app-level SimpleTheme):
+
+| Control | Finding |
+|---|---|
+| TextBox | Full `TextControl*` family present (Background/Foreground/BorderBrush/Placeholder × PointerOver/Focused/Disabled, Header + Disabled, ButtonForeground + PointerOver/Pressed). Border brushes are gradients at rest. Material's `FilledTextBox*`/`OutlinedTextBox*` names absent → **map both families** (single Fluent TextBox; Outlined wins collisions) |
+| CheckBox | All documented names natively present EXCEPT `CheckBoxGlyphForeground*` (WinUI: `CheckBoxCheckGlyphForeground*`) → **glyph family mapped, rest native** |
+| RadioButton | `RadioButtonForeground`, `RadioButtonOuterEllipse{Stroke,Fill,CheckedStroke,CheckedFill}`, `RadioButtonCheckGlyphFill` all native → **nothing to bridge** |
+| ToggleSwitch | WinUI names (`ToggleSwitchFillOff/On`, `StrokeOff/On`, `KnobFillOff/On` + PointerOver/Pressed/Disabled) present; Material's (`ToggleSwitchOffOuterBorderFill`, `ToggleSwitchKnobOffFill`, …) absent → **mapped** |
+| Slider | `SliderTrackFill*`, `SliderTrackValueFill*`, `SliderThumbBackground*` (each + PointerOver/Pressed/Disabled), `SliderTickBarFill`, `SliderInlineTickBarFill` all native → **nothing to bridge** |
+
+Native names are permanently guarded by
+`Given_FluentLightweightStyling.When_NativeSemanticKey_IsProvidedByXcr`.
