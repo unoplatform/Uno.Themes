@@ -60,11 +60,20 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
   FilledTonal*/Elevated* (share the standard button), IconForeground variants,
   StateLayer/Elevation keys; Outlined hover/pressed/Disabled are pass-through
   only)
-- [ ] TextBox
-- [ ] CheckBox
-- [ ] RadioButton
-- [ ] ToggleSwitch
-- [ ] Slider
+- [x] TextBox (2026-07-15 — both semantic families re-pointed onto the single
+  Fluent TextBox's `TextControl*` resources, Outlined wins collisions; rest
+  defaults from verified tokens; rendered E2E test)
+- [x] CheckBox (2026-07-15 — key names are WinUI-native except the glyph
+  family, bridged onto `CheckBoxCheckGlyphForeground*`; native names guarded
+  by an XCR presence probe)
+- [x] RadioButton (2026-07-15 — fully WinUI-native key names, nothing to
+  bridge; presence-guarded. `RadioButtonStateCircleBackground*` not bridged)
+- [x] ToggleSwitch (2026-07-15 — Material names mapped onto WinUI's
+  (`FillOn/Off`, `StrokeOn/Off`, `KnobFillOn/Off*`); ON-family defaults from
+  the accent fill; shadow/bounds/icon/Focused keys not bridged)
+- [x] Slider (2026-07-15 — fully WinUI-native key names (`SliderTrackFill*`,
+  `SliderTrackValueFill*`, `SliderThumbBackground*`, `SliderTickBarFill`),
+  nothing to bridge; presence-guarded)
 
 ## Phase 4 — Samples
 
@@ -72,6 +81,22 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-07-15 — **Phase 3 complete** (TextBox/CheckBox/RadioButton/
+  ToggleSwitch/Slider increments). Key-name probe against a fresh
+  `XamlControlsResources` (recorded in `spike-results.md` §S4 addendum):
+  Material's documented semantic keys for CheckBox (minus glyph family),
+  RadioButton, and Slider ARE WinUI's per-control resource names — those
+  controls need no bridging at all, overrides work natively at any scope
+  (guarded by an XCR presence probe so an Uno.UI rename fails fast).
+  TextBox maps both semantic families onto the single Fluent TextBox
+  (`TextControl*`; Outlined wins collisions — documented); ToggleSwitch maps
+  the divergent Material names onto WinUI's; CheckBox bridges only
+  `CheckBoxGlyphForeground*`. Defaults follow the verified-tokens-only rule;
+  everything else is re-point pass-through. Rendered E2E: TextBox required an
+  explicit `DefaultTextBoxStyle` in the CI host (the app's implicit TextBox
+  style is Simple's — host artifact, noted in the test).
+  Verification: full CI-parity suite green (301 total — 300 passed / 1
+  pre-existing skip); 32 new cases.
 - 2026-07-15 — **Phase 3, Button increment complete** (S4(b) + bridge).
   S4(b) isolation verdict: per-control redefinitions win XCR-template
   `{ThemeResource}` lookups on Uno in every relevant topology, including

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Phases 1–2 **done** (2026-07-15 — library, seed→accent cascade, tests, docs; CI-parity suite green; implementation deltas in `progress.md` review log); Windows/WASM validation pending; Phase 3 next (S4(b) first) |
+| **Status** | Phases 1–3 **done** (2026-07-15 — library, seed→accent cascade, lightweight bridge for all six controls, tests, docs; CI-parity suite green; implementation deltas in `progress.md` review log); Windows/WASM validation pending; Phase 4 (samples/head decision) remains |
 | **Owner** | Steve Bilogan |
 | **Created** | 2026-07-14 |
 | **Related** | `specs/01-design-tokens/`, `specs/02-semantic-brushes/`, `specs/03-seed-color-palette/`, `.specify/specs/semantic-abstraction-layer/spec.md`, `doc/semantic-styles.md`, `doc/fluent-getting-started.md`, `specs/lessons.md` (eager `<StaticResource>` resolution) |
