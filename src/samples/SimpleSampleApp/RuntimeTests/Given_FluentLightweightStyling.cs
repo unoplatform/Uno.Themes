@@ -93,6 +93,18 @@ public class Given_FluentLightweightStyling
 	[DataRow("IconButtonForeground", "TextFillColorSecondary")]
 	[DataRow("OutlinedButtonBorderBrush", "ControlStrongStrokeColorDefault")]
 	[DataRow("OutlinedButtonBackground", "ControlFillColorDefault")]
+	[DataRow("FilledTextBoxBackground", "ControlFillColorDefault")]
+	[DataRow("FilledTextBoxForeground", "TextFillColorPrimary")]
+	[DataRow("FilledTextBoxPlaceholderForeground", "TextFillColorSecondary")]
+	[DataRow("FilledTextBoxHeaderForeground", "TextFillColorPrimary")]
+	[DataRow("FilledTextBoxBorderBrush", "ControlStrongStrokeColorDefault")]
+	[DataRow("OutlinedTextBoxForeground", "TextFillColorPrimary")]
+	[DataRow("OutlinedTextBoxBorderBrush", "ControlStrongStrokeColorDefault")]
+	[DataRow("OutlinedTextBoxPlaceholderForeground", "TextFillColorSecondary")]
+	[DataRow("OutlinedTextBoxHeaderForeground", "TextFillColorPrimary")]
+	[DataRow("TextBoxDeleteButtonForeground", "TextFillColorSecondary")]
+	[DataRow("CheckBoxGlyphForegroundChecked", "TextOnAccentFillColorPrimary")]
+	[DataRow("ToggleSwitchKnobOnFill", "TextOnAccentFillColorPrimary")]
 	public void When_AmbientDefaults_MatchLiveTokens(string key, string token)
 	{
 		var container = CreateThemedContainer();
@@ -240,6 +252,129 @@ public class Given_FluentLightweightStyling
 		{
 			appDictionaries.Remove(theme);
 		}
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// TextBox / CheckBox / ToggleSwitch re-pointing (Fluent has divergent
+	// per-control key names for these); RadioButton and Slider need no
+	// bridging — their semantic key names ARE WinUI's per-control keys.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ToggleSwitchOuterBorderFill_DefaultsToAccentFill()
+	{
+		var container = CreateThemedContainer();
+
+		Assert.AreEqual(AmbientAccentFill, GetBrush(container.Resources, "ToggleSwitchOuterBorderFill").Color,
+			"the semantic ON-track fill must default to the platform accent fill");
+		Assert.AreEqual(AmbientAccentFill, GetBrush(container.Resources, "ToggleSwitchOuterBorderStroke").Color,
+			"the semantic ON-track stroke must default to the platform accent fill");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_FilledTextBoxBackgroundOverridden_FluentTextBoxFollows()
+	{
+		var overrideDict = new ResourceDictionary
+		{
+			["FilledTextBoxBackground"] = new SolidColorBrush(OverrideRed),
+		};
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			// Explicitly Fluent-styled: the host app's implicit TextBox style is
+			// Simple's, whose template does not consume TextControl* resources.
+			var textBox = new TextBox
+			{
+				Text = "styled",
+				Style = (Style)Application.Current.Resources["DefaultTextBoxStyle"],
+			};
+			var host = new Grid();
+			host.Children.Add(textBox);
+
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(textBox);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var background = textBox.Background as SolidColorBrush;
+			Assert.IsNotNull(background, "the text box should have a SolidColorBrush background");
+			Assert.AreEqual(OverrideRed, background.Color,
+				"a FilledTextBoxBackground override must reach the XCR-templated TextBox (G6)");
+		}
+		finally
+		{
+			appDictionaries.Remove(theme);
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_BothTextBoxFamiliesOverridden_OutlinedWins()
+	{
+		var overrideDict = new ResourceDictionary
+		{
+			["FilledTextBoxForeground"] = new SolidColorBrush(SeedPurple),
+			["OutlinedTextBoxForeground"] = new SolidColorBrush(OverrideRed),
+		};
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		var container = CreateThemedContainer(theme);
+
+		Assert.AreEqual(OverrideRed, GetBrush(container.Resources, "TextControlForeground").Color,
+			"Fluent has a single TextBox: when both semantic families are overridden, the Outlined value wins (documented)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("CheckBoxGlyphForegroundChecked", "CheckBoxCheckGlyphForegroundChecked")]
+	[DataRow("ToggleSwitchKnobOnFill", "ToggleSwitchKnobFillOn")]
+	[DataRow("ToggleSwitchOffOuterBorderFill", "ToggleSwitchFillOff")]
+	public void When_DivergentKeyOverridden_FluentPerControlKeyFollows(string semanticKey, string fluentKey)
+	{
+		var overrideDict = new ResourceDictionary
+		{
+			[semanticKey] = new SolidColorBrush(OverrideRed),
+		};
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		var container = CreateThemedContainer(theme);
+
+		Assert.AreEqual(OverrideRed, GetBrush(container.Resources, fluentKey).Color,
+			$"an override of {semanticKey} must be re-pointed onto {fluentKey}");
+	}
+
+	// Permanent guard: these semantic key names must keep existing NATIVELY in
+	// XamlControlsResources (the bridge deliberately ships nothing for them) —
+	// an Uno.UI rename would silently break consumer overrides.
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("RadioButtonForeground")]
+	[DataRow("RadioButtonOuterEllipseStroke")]
+	[DataRow("RadioButtonOuterEllipseCheckedStroke")]
+	[DataRow("RadioButtonOuterEllipseCheckedFill")]
+	[DataRow("SliderTrackFill")]
+	[DataRow("SliderTrackValueFill")]
+	[DataRow("SliderThumbBackground")]
+	[DataRow("SliderTickBarFill")]
+	[DataRow("CheckBoxCheckBackgroundFillChecked")]
+	[DataRow("CheckBoxCheckBackgroundStrokeUnchecked")]
+	[DataRow("ToggleSwitchKnobFillOn")]
+	[DataRow("ToggleSwitchFillOff")]
+	[DataRow("TextControlBackground")]
+	[DataRow("TextControlPlaceholderForeground")]
+	public void When_NativeSemanticKey_IsProvidedByXcr(string key)
+	{
+		var xcr = new Microsoft.UI.Xaml.Controls.XamlControlsResources();
+
+		Assert.IsTrue(xcr.TryGetValue(key, out var value) && value is not null,
+			$"{key} must be provided natively by XamlControlsResources — a rename in Uno.UI breaks consumer overrides");
 	}
 
 	[TestMethod]
