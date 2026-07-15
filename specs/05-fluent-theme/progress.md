@@ -111,6 +111,23 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-07-15 — **Phase 4 §5 samples — review pass.** `quality` → *approve*
+  (no blocker/high/medium; keys design-agnostic, formatting consistent, doc
+  edits accurate); `skeptic` → *ship* (cross-head impact structurally
+  impossible — collapsed content presenters never inflate the non-active
+  template, proven by the Fluent head, which merges no Material resources,
+  inflating all 28 pages without throwing on their Material templates' keys;
+  zero key-resolution gaps). Review-driven follow-ups landed: (1) MenuFlyout
+  now applies the semantic keys (`MenuFlyoutPresenterStyle` + item/toggle/
+  radio/sub/separator) instead of implicit styling, so it actually demonstrates
+  them; (2) the determinate `ProgressRing` gained `IsActive="True"` (it rendered
+  an empty ring, a bug inherited from the Simple sibling); (3)
+  `Given_FluentTypography` alias coverage extended 6 → all 19 slots. Also
+  confirmed `MaterialSampleApp` + `CupertinoSampleApp` desktop builds are clean
+  (shared XAML is head-agnostic). Residual (low, tracked): flyout/dialog
+  *interaction* paths and non-desktop (Android/iOS/WASM) inflation are
+  unexercised here; the pre-existing `async void ShowContentDialog` lacks a
+  full-body try/catch (AGENTS §10) — shared infra, flagged for a separate fix.
 - 2026-07-15 — **Phase 4 §5 sample surface complete.** Extended `Design.Fluent`
   opt-in + semantic-key-only FluentTemplates to 22 more shared sample pages,
   bringing the Fluent head to **28** pages covering the whole §5 alias surface
