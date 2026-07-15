@@ -34,16 +34,25 @@ namespace Uno.Fluent;
 /// the platform's (including live system-accent tracking on Windows).
 /// </para>
 /// <para>
-/// Per-control rollout (spec 05 D13): Button. Bridged families: Filled*
-/// (accent button), Outlined* (standard button), TextButtonForeground /
-/// IconButtonForeground (consumed by the shipped bridge styles via
-/// <c>{ThemeResource}</c> setters — element-scope resolution, so page-scoped
-/// overrides work for those without any re-pointing). FilledTonal*/Elevated*
-/// map to the same standard button as Outlined* and are NOT re-pointed (the
-/// variants are indistinguishable without re-templating — D1); IconForeground
-/// variants, StateLayer and Elevation keys have no Fluent equivalent. Disabled
-/// and Outlined hover/pressed keys are re-point pass-through only (no
-/// defaults): their platform values are not verified on every branch.
+/// Per-control rollout (spec 05 D13) — all six controls covered:
+/// <b>Button</b> — Filled* (accent button), Outlined* (standard button),
+/// TextButtonForeground / IconButtonForeground (consumed by the shipped
+/// bridge styles via <c>{ThemeResource}</c> setters — element-scope
+/// resolution, so page-scoped overrides work for those without re-pointing).
+/// FilledTonal*/Elevated* map to the same standard button as Outlined* and
+/// are NOT re-pointed (indistinguishable without re-templating — D1).
+/// <b>TextBox</b> — both semantic families map onto the single Fluent
+/// TextBox (TextControl*); Outlined* wins when both are overridden.
+/// <b>CheckBox</b> — only the glyph family diverges from WinUI's names;
+/// everything else is native. <b>ToggleSwitch</b> — Material's key names are
+/// mapped onto WinUI's (FillOn/Off, StrokeOn/Off, KnobFillOn/Off*).
+/// <b>RadioButton / Slider</b> — the documented semantic keys ARE WinUI's
+/// per-control keys; overrides work natively, nothing to bridge.
+/// Keys with no Fluent equivalent (IconForeground variants, StateLayer,
+/// Elevation, StateCircle, knob shadow/bounds, icon presenters, Focused knob
+/// states) are not bridged. Disabled and hover/pressed keys outside the
+/// accent families are re-point pass-through only (no defaults): their
+/// platform values are not verified on every branch.
 /// </para>
 /// <para>
 /// Override channels (documented in lightweight-styling.md): app-wide via
@@ -86,6 +95,72 @@ internal static class FluentLightweightBridge
 		("OutlinedButtonBorderBrushPointerOver", "ButtonBorderBrushPointerOver"),
 		("OutlinedButtonBorderBrushPressed", "ButtonBorderBrushPressed"),
 		("OutlinedButtonBorderBrushDisabled", "ButtonBorderBrushDisabled"),
+
+		// TextBox — Fluent has a single TextBox, so BOTH semantic families
+		// map onto the TextControl* resources; Outlined* is listed after
+		// Filled* and wins when both are overridden (documented). The
+		// Filled-only Background family has no Outlined counterpart.
+		("FilledTextBoxBackground", "TextControlBackground"),
+		("FilledTextBoxBackgroundPointerOver", "TextControlBackgroundPointerOver"),
+		("FilledTextBoxBackgroundFocused", "TextControlBackgroundFocused"),
+		("FilledTextBoxBackgroundDisabled", "TextControlBackgroundDisabled"),
+		("FilledTextBoxForeground", "TextControlForeground"),
+		("FilledTextBoxForegroundPointerOver", "TextControlForegroundPointerOver"),
+		("FilledTextBoxForegroundFocused", "TextControlForegroundFocused"),
+		("FilledTextBoxForegroundDisabled", "TextControlForegroundDisabled"),
+		("FilledTextBoxBorderBrush", "TextControlBorderBrush"),
+		("FilledTextBoxBorderBrushPointerOver", "TextControlBorderBrushPointerOver"),
+		("FilledTextBoxBorderBrushFocused", "TextControlBorderBrushFocused"),
+		("FilledTextBoxBorderBrushDisabled", "TextControlBorderBrushDisabled"),
+		("FilledTextBoxPlaceholderForeground", "TextControlPlaceholderForeground"),
+		("FilledTextBoxPlaceholderForegroundPointerOver", "TextControlPlaceholderForegroundPointerOver"),
+		("FilledTextBoxPlaceholderForegroundFocused", "TextControlPlaceholderForegroundFocused"),
+		("FilledTextBoxPlaceholderForegroundDisabled", "TextControlPlaceholderForegroundDisabled"),
+		("FilledTextBoxHeaderForeground", "TextControlHeaderForeground"),
+		("FilledTextBoxHeaderForegroundDisabled", "TextControlHeaderForegroundDisabled"),
+		("OutlinedTextBoxForeground", "TextControlForeground"),
+		("OutlinedTextBoxForegroundPointerOver", "TextControlForegroundPointerOver"),
+		("OutlinedTextBoxForegroundFocused", "TextControlForegroundFocused"),
+		("OutlinedTextBoxForegroundDisabled", "TextControlForegroundDisabled"),
+		("OutlinedTextBoxBorderBrush", "TextControlBorderBrush"),
+		("OutlinedTextBoxBorderBrushPointerOver", "TextControlBorderBrushPointerOver"),
+		("OutlinedTextBoxBorderBrushFocused", "TextControlBorderBrushFocused"),
+		("OutlinedTextBoxBorderBrushDisabled", "TextControlBorderBrushDisabled"),
+		("OutlinedTextBoxPlaceholderForeground", "TextControlPlaceholderForeground"),
+		("OutlinedTextBoxPlaceholderForegroundPointerOver", "TextControlPlaceholderForegroundPointerOver"),
+		("OutlinedTextBoxPlaceholderForegroundFocused", "TextControlPlaceholderForegroundFocused"),
+		("OutlinedTextBoxPlaceholderForegroundDisabled", "TextControlPlaceholderForegroundDisabled"),
+		("OutlinedTextBoxHeaderForeground", "TextControlHeaderForeground"),
+		("OutlinedTextBoxHeaderForegroundDisabled", "TextControlHeaderForegroundDisabled"),
+		("TextBoxDeleteButtonForeground", "TextControlButtonForeground"),
+		("TextBoxDeleteButtonForegroundPointerOver", "TextControlButtonForegroundPointerOver"),
+		("TextBoxDeleteButtonForegroundPressed", "TextControlButtonForegroundPressed"),
+
+		// CheckBox — every other documented CheckBox key name matches WinUI's
+		// natively (no bridging needed); only the glyph family diverges.
+		("CheckBoxGlyphForegroundUnchecked", "CheckBoxCheckGlyphForegroundUnchecked"),
+		("CheckBoxGlyphForegroundChecked", "CheckBoxCheckGlyphForegroundChecked"),
+
+		// ToggleSwitch — Material's key names diverge from WinUI's.
+		// The unprefixed OuterBorder* family is the ON state.
+		("ToggleSwitchOffOuterBorderFill", "ToggleSwitchFillOff"),
+		("ToggleSwitchOffOuterBorderStroke", "ToggleSwitchStrokeOff"),
+		("ToggleSwitchOuterBorderFill", "ToggleSwitchFillOn"),
+		("ToggleSwitchOuterBorderStroke", "ToggleSwitchStrokeOn"),
+		("ToggleSwitchKnobOffFill", "ToggleSwitchKnobFillOff"),
+		("ToggleSwitchKnobOffFillPointerOver", "ToggleSwitchKnobFillOffPointerOver"),
+		("ToggleSwitchKnobOffFillPressed", "ToggleSwitchKnobFillOffPressed"),
+		("ToggleSwitchKnobOffFillDisabled", "ToggleSwitchKnobFillOffDisabled"),
+		("ToggleSwitchKnobOnFill", "ToggleSwitchKnobFillOn"),
+		("ToggleSwitchKnobOnFillPointerOver", "ToggleSwitchKnobFillOnPointerOver"),
+		("ToggleSwitchKnobOnFillPressed", "ToggleSwitchKnobFillOnPressed"),
+		("ToggleSwitchKnobOnFillDisabled", "ToggleSwitchKnobFillOnDisabled"),
+
+		// RadioButton and Slider: the documented semantic key names ARE the
+		// WinUI per-control keys (RadioButtonOuterEllipse*, SliderTrackFill,
+		// SliderTrackValueFill*, SliderThumbBackground*, …) — consumer
+		// overrides reach XCR templates natively, nothing to re-point.
+		// Presence is guarded by Given_FluentLightweightStyling.
 	};
 
 	private readonly record struct BranchValues(Color Light, Color Dark);
@@ -194,6 +269,30 @@ internal static class FluentLightweightBridge
 		branch["TextButtonBackgroundPressed"] = new SolidColorBrush(transparent);
 		branch["TextButtonBorderBrush"] = new SolidColorBrush(transparent);
 		branch["IconButtonForeground"] = new SolidColorBrush(Of(_textSecondary));
+
+		// TextBox (both families — one Fluent TextBox), rest state.
+		branch["FilledTextBoxBackground"] = new SolidColorBrush(Of(_controlFillDefault));
+		branch["FilledTextBoxForeground"] = new SolidColorBrush(Of(_textPrimary));
+		branch["FilledTextBoxPlaceholderForeground"] = new SolidColorBrush(Of(_textSecondary));
+		branch["FilledTextBoxBorderBrush"] = new SolidColorBrush(Of(_strongStroke));
+		branch["FilledTextBoxHeaderForeground"] = new SolidColorBrush(Of(_textPrimary));
+		branch["OutlinedTextBoxForeground"] = new SolidColorBrush(Of(_textPrimary));
+		branch["OutlinedTextBoxPlaceholderForeground"] = new SolidColorBrush(Of(_textSecondary));
+		branch["OutlinedTextBoxBorderBrush"] = new SolidColorBrush(Of(_strongStroke));
+		branch["OutlinedTextBoxHeaderForeground"] = new SolidColorBrush(Of(_textPrimary));
+		branch["TextBoxDeleteButtonForeground"] = new SolidColorBrush(Of(_textSecondary));
+
+		// CheckBox glyph (checked glyph sits on the accent fill).
+		branch["CheckBoxGlyphForegroundChecked"] = new SolidColorBrush(Of(_onAccentPrimary));
+
+		// ToggleSwitch ON family (accent-based; OFF-state neutrals are
+		// re-point pass-through only — unverified per branch).
+		if (accentFill is { } switchFill)
+		{
+			branch["ToggleSwitchOuterBorderFill"] = new SolidColorBrush(switchFill);
+			branch["ToggleSwitchOuterBorderStroke"] = new SolidColorBrush(switchFill);
+		}
+		branch["ToggleSwitchKnobOnFill"] = new SolidColorBrush(Of(_onAccentPrimary));
 
 		return branch;
 	}
