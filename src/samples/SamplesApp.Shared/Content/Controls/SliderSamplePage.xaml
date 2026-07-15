@@ -271,6 +271,35 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="Fluent_Slider_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Maximum="100"
+									Value="40"
+									Style="{StaticResource SliderStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_Slider_Stepped"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Maximum="100"
+									StepFrequency="10"
+									TickFrequency="10"
+									TickPlacement="Outside"
+									Value="60"
+									Style="{StaticResource SliderStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_Slider_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider IsEnabled="False"
+									Maximum="100"
+									Value="30"
+									Style="{StaticResource SliderStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
