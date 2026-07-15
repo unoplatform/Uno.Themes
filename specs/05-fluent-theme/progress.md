@@ -15,13 +15,27 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Phase 1 — Core library (`Uno.Fluent.WinUI`)
 
-- [ ] Project scaffold (csproj, props, constants, `FluentTheme`)
-- [ ] `_Resources.xaml` semantic aliases (post-S3 key set)
-- [ ] `ColorPalette.xaml` (mechanism per S1 outcome)
-- [ ] `Typography.xaml` + `TextBlock.xaml` + bridge Button styles
-- [ ] Packaging: sln/slnf, InternalsVisibleTo, CI package lists
-- [ ] Runtime tests: `Given_FluentSemanticStyles`, `Given_FluentColorPalette`, `Given_FluentTypography`; extend `Given_ColorOverridePrecedence`
-- [ ] Docs: `fluent-getting-started.md`, `semantic-styles.md` Fluent column, `themes-overview.md`
+- [x] Project scaffold (csproj, props, constants, `FluentTheme`) (2026-07-15)
+- [x] `_Resources.xaml` semantic aliases (post-S3 key set); Ⓜ keys + bundle-local
+  aliases (TextButton/IconButton, 19 typography keys) late-bound in code
+  (`FluentTheme._lateBoundStyleAliases` / `._bundleStyleAliases`)
+- [x] Color palette — built in code per D6 mechanism C (`FluentColorPalette.cs`;
+  no `ColorPalette.xaml`): live accent tokens + S2-captured per-branch neutrals,
+  drift-guarded by `Given_FluentColorPalette`
+- [x] `Typography.xaml` + `Fonts.xaml` + `TextBlock.xaml` + bridge Button styles.
+  Typography/Fonts are Source-merged from `BaseDictionaries.xaml`, NOT part of the
+  XamlMerge bundle (Release resolution — see lessons.md entry 2026-07-15)
+- [x] Packaging: sln/slnf, InternalsVisibleTo, sample-app project reference.
+  CI audit result: **no pipeline changes needed** — packages stage builds the
+  slnf with `GeneratePackageOnBuild`, signing/publishing glob over `*.nupkg`,
+  canary targets the sln
+- [x] Runtime tests: `Given_FluentSemanticStyles`, `Given_FluentColorPalette`,
+  `Given_FluentTypography`; `Given_ColorOverridePrecedence` extended with two
+  FluentTheme cases
+- [x] Docs: `fluent-getting-started.md` FluentTheme section, `semantic-styles.md`
+  Fluent column + typography note, `themes-overview.md` roster entry
+- [ ] Windows/WASM validation of the S1/S3 assumptions (deferred residual risk —
+  spec §14.1/§5.3; tracked for the PR's platform-tested checklist)
 
 ## Phase 2 — Seed → accent
 
@@ -45,6 +59,26 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-07-15 — **Phase 1 complete.** Library implemented per spec with three
+  deviations, all recorded in `specs/lessons.md`:
+  1. Semantic keys targeting bundle-local styles (TextButton/IconButton + 19
+     typography aliases) cannot be XAML aliases — a `<StaticResource>` alias only
+     resolves against app-level scope, so a container-scoped theme's aliases
+     miss its own bundle. Resolved late-bound in code (`_bundleStyleAliases`).
+  2. `Typography.xaml`/`Fonts.xaml` are Source-merged from `BaseDictionaries.xaml`
+     instead of flowing into the XamlMerge bundle: bundle-level ThemeDictionaries
+     resolve in Debug but NOT in Release (found by the CI-parity run; trimming
+     ruled out). Follow-up: Simple has the same latent structure, untested.
+  3. The generated semantic brushes (`PrimaryBrush`, …) materialize once against
+     app-level scope; the brush value spot-checks run with FluentTheme merged at
+     app scope (the documented consumer topology) inside try/finally.
+  Ⓜ keys resolve via named key → type-keyed lookup → explicit empty style
+  (keeps the built-in template; D8 nearest-match honored on Uno where neither
+  public key nor type-keyed entry exists).
+  **Verification:** full CI-parity suite (Release, headless script):
+  227 cases — 226 passed / 1 skipped (pre-existing) / 0 failed (baseline was
+  107/1/0). CI package audit: no pipeline changes needed (slnf-driven packaging,
+  glob signing/publish, sln-driven canary).
 - 2026-07-14 — Spec drafted; Spike S1 started (this session).
 - 2026-07-14 — S1 complete, verdict GO: direct style aliases to XCR keys work (same-instance),
   `BasedOn` bridge styles work, FontFamily alias works; alias-of-alias does NOT resolve (→ D16)

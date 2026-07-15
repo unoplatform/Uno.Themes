@@ -65,6 +65,30 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Theme-branch resources inside a XamlMerge bundle don't resolve in Release builds — put them in Source-merged dictionaries
+
+**Context:** Fluent theme Phase 1 (2026-07-15, `specs/05-fluent-theme/`). `Given_FluentTypography` passed in Debug but failed 30/39 in the Release (CI-parity) run: every slot value (`DisplayLargeFontSize` = 68, SemiBold weights, zero character spacing) resolved to the shared (M3) `SharedTypography.xaml` values instead. `UnoXamlResourcesTrimming` was ruled out (`-p:UnoXamlResourcesTrimming=false` still failed).
+
+**Root cause (behavioral):** Fluent's `Typography.xaml` was part of the `XamlMergeInput` glob, so its `ThemeDictionaries` (Light/Default branches carrying the slot values) landed inside `Generated/mergedpages.xaml` — the dictionary set as `BaseTheme.Source`. In Debug, lookups consult those bundle theme branches before the bundle's merged `SharedTypography.xaml`; in Release (compiled XAML codegen), the bundle's own theme branches lose to the merged dictionaries and the shared defaults win. The merged output itself was correct (both branches present) — it is the *resolution* that differs per configuration. Simple has the same structure and is likely affected too, but nothing asserts its absolute slot values, and its load-bearing font mappings were already moved to the Source-merged `Fonts.xaml` for a related reason (see the Fonts.xaml lesson below).
+
+**Fix / how to apply:** theme-branch (Light/Dark-varying) resources that must shadow a shared default belong in a **standalone dictionary loaded via ms-appx Source from `BaseDictionaries.xaml`**, merged after the shared dictionary — never in a page that flows into the XamlMerge bundle. That path is CI-proven (Simple's `Fonts.xaml`, `Given_Fonts`). Fluent's `Typography.xaml` is now excluded from `XamlMergeInput` and Source-merged between `SharedTypography.xaml` and `Fonts.xaml`. Plain (non-theme-branch) resources — style aliases, control styles — resolve fine from the merged bundle in both configurations.
+
+**Verification trap:** Debug runs mask this entirely. Always run typography/theme-branch assertions through the Release CI-parity script (`build/scripts/linux-skia-desktop-runtime-tests.sh`) before declaring green.
+
+---
+
+## Container-scoped themes: intra-bundle aliases and generated brushes resolve against the APP-LEVEL scope
+
+**Context:** Fluent theme Phase 1 (2026-07-15, `specs/05-fluent-theme/`). The runtime tests instantiate `new FluentTheme()` scoped to a test container (spec 05 D14) inside SimpleSampleApp, whose app-level theme is `SimpleTheme`. Two failure modes surfaced that are invisible when the theme under test is the same as the app-level theme:
+
+1. **Intra-bundle `<StaticResource>` aliases don't see their own bundle below app scope.** An alias like `TextButtonStyle` → `FluentTextButtonStyle` (both shipped in the same merged bundle) resolves at parse time against the app-level scope only. At app scope it happens to work (which is why Simple's `_Resources.xaml` → `Button.xaml` aliases pass); scoped lower, the alias yields nothing — or worse, silently binds to a *foreign* app-level theme's key of the same name. Fix: semantic keys targeting styles the library itself ships are resolved late-bound in code (`FluentTheme._bundleStyleAliases`), from the theme's own `Source` bundle.
+
+2. **Generated semantic brushes materialize once, against the app-level scope.** `SharedColors.xaml` defines `<SolidColorBrush Color="{StaticResource PrimaryColor}"/>`; that color reference is a one-time resolution (already documented atop `Given_ColorOverridePrecedence`). Under a container-scoped theme in a host with a different app-level theme, `PrimaryBrush` & co. carry the *app-level* theme's palette, even though the `*Color` keys resolve correctly from the container. This is a pre-existing property of the shared brush layer (Simple/Material behave identically), not a FluentTheme bug.
+
+**How to apply:** when adding semantic aliases whose target ships in the same library, alias them in code, not XAML. When writing runtime tests that assert *generated brush values*, merge the theme into `Application.Current.Resources.MergedDictionaries` (the documented consumer topology) inside try/finally — container-scoped assertions on generated brushes test the wrong scope. Container-scoped assertions on `*Color` keys, styles, and typography values remain fine.
+
+---
+
 ## `<StaticResource>` alias limits on Uno: no alias chaining; per-theme-branch aliases resolve the ambient theme
 
 **Context:** Fluent theme Spike S1 (2026-07-14, `specs/05-fluent-theme/`) validated the alias mechanisms the planned `FluentTheme` adapter relies on, in the CI host (SimpleSampleApp, `XamlControlsResources` merged at app scope, Skia desktop). Findings are permanently guarded by `src/samples/SimpleSampleApp/RuntimeTests/Given_FluentAliasResolution.cs`.
