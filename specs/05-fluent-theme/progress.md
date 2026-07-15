@@ -77,10 +77,36 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Phase 4 — Samples
 
-- [ ] Fluent showcase / head decision
+- [x] Head decision (2026-07-15): **dedicated `FluentSampleApp`** (owner call)
+- [x] `src/samples/FluentSampleApp/` head: XCR→FluentTheme App.xaml topology,
+  shared SamplesApp.Shared import, all four sample TFMs; registered in
+  `Uno.Themes.sln` and the four CI sample-head matrices (android/desktop/
+  ios/wasm)
+- [x] Shared UI: `Design.Fluent` (enum, `SamplePageLayout.FluentTemplate` DP,
+  mapping, visual state + content container). Samples are opt-in per page via
+  `SupportedDesigns` — pages without a FluentTemplate simply don't appear in
+  the Fluent head (no fallback-crash risk)
+- [x] Fluent sample templates (semantic keys only) for the six bridged
+  controls: Button, TextBox, CheckBox, RadioButton, ToggleSwitch, Slider
+- [ ] Fluent templates for the remaining §5 alias surface (ComboBox, pickers,
+  flyouts, progress, NavigationView, …) — incremental follow-up; §15
+  acceptance "renders all §5 aliases" not yet fully met
+- [ ] Screenshot pass vs WinUI Gallery (§15) — needs a windowed environment
 
 ## Review log
 
+- 2026-07-15 — **Phase 4 landed (initial)** — dedicated `FluentSampleApp`
+  head per owner decision. Shared UI gained first-class `Design.Fluent`
+  support; sample pages opt in per page (strict `SupportedDesigns` filter),
+  so only pages with a real FluentTemplate appear — no template-fallback
+  crash risk. Six bridged controls have Fluent templates using semantic keys
+  only. Verification: head builds (desktop) and runs 25s+ under xvfb with no
+  exceptions (the `Material*` resource warnings in the log are pre-existing
+  shared-chrome behavior — the Simple head logs the same 31 occurrences);
+  full CI-parity suite unchanged at 301 (300 passed / 1 pre-existing skip).
+  CI: head added to the four sample-head build matrices. Remaining (tracked
+  above): Fluent templates for the rest of the §5 alias surface; screenshot
+  pass vs WinUI Gallery.
 - 2026-07-15 — **Phase 3 complete** (TextBox/CheckBox/RadioButton/
   ToggleSwitch/Slider increments). Key-name probe against a fresh
   `XamlControlsResources` (recorded in `spike-results.md` §S4 addendum):
