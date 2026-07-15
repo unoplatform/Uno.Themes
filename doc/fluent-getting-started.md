@@ -64,6 +64,8 @@ The step-by-step process to enable Fluent design styles within an existing Uno P
 
 Add a reference to the `Uno.Fluent.WinUI` NuGet package to your application project.
 
+A runnable showcase lives in the repository at `src/samples/FluentSampleApp` — the shared Uno Themes sample gallery rendered through `FluentTheme`, with Fluent-specific sample tabs for the bridged controls.
+
 ### App.xaml setup
 
 Merge `FluentTheme` **after** `XamlControlsResources`:
