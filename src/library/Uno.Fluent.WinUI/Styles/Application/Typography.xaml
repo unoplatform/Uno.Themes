@@ -1,0 +1,296 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Fluent — Semantic Typography Overrides
+
+		Maps the 19 semantic type slots to the Fluent (WinUI) type ramp per the
+		hybrid rule of spec 05, D7: where Fluent has a counterpart slot, adopt its
+		size/weight; where it doesn't, keep the shared (M3) size and apply Fluent
+		weight conventions (SemiBold for Display/Headline/Title/Label emphasis
+		slots, Regular for Body/Caption).
+
+		Fluent ramp anchors:
+		Display     (68, SemiBold) -> DisplayLarge
+		Title Large (40, SemiBold) -> DisplaySmall
+		Title       (28, SemiBold) -> HeadlineMedium
+		Subtitle    (20, SemiBold) -> TitleLarge
+		Body Strong (14, SemiBold) -> TitleSmall / LabelLarge
+		Body Large  (18, Regular)  -> BodyLarge
+		Body        (14, Regular)  -> BodyMedium
+		Caption     (12, Regular)  -> CaptionMedium
+
+		DisplayMedium (54) is interpolated: 68 x (45/57) — no Fluent slot exists
+		between Display (68) and Title Large (40).
+
+		Fluent does not use letter-spacing: CharacterSpacing is 0 for every slot
+		that the shared layer defines a *CharacterSpacing key for.
+
+		Font family: platform default for every slot (ContentControlThemeFontFamily,
+		spec 05 D11) — aliased DIRECTLY (never via TypefacePlain/TypefaceBrand;
+		alias chaining does not resolve on Uno, D16). The same mappings are
+		duplicated in Fonts.xaml, merged after SharedTypography.xaml — that
+		duplication is load-bearing (specs/lessons.md); keep both in sync.
+
+		LOAD PATH (specs/lessons.md): this file is EXCLUDED from the XamlMerge
+		bundle and merged by BaseDictionaries.xaml via its ms-appx Source, after
+		SharedTypography.xaml — theme-branch resources inside the merged bundle
+		do not resolve reliably in Release builds, while Source-merged standalone
+		dictionaries do.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ═══════════════════════════════════════════════════════════════ -->
+		<!-- DARK THEME (Default) -->
+		<!-- ═══════════════════════════════════════════════════════════════ -->
+		<ResourceDictionary x:Key="Default">
+
+			<!-- DISPLAY -->
+
+			<!-- Display Large — Fluent Display (68, SemiBold) -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="DisplayLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="DisplayLargeFontSize">68</x:Double>
+			<x:Int32 x:Key="DisplayLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Display Medium — interpolated 68 x (45/57) ≈ 54; no Fluent slot -->
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="DisplayMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="DisplayMediumFontSize">54</x:Double>
+
+			<!-- Display Small — Fluent Title Large (40, SemiBold) -->
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="DisplaySmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="DisplaySmallFontSize">40</x:Double>
+
+			<!-- HEADLINE -->
+
+			<!-- Headline Large — keep shared size (no Fluent slot between 40 and 28); Fluent title weight -->
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="HeadlineLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
+
+			<!-- Headline Medium — Fluent Title (28, SemiBold) -->
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="HeadlineMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="HeadlineMediumFontSize">28</x:Double>
+
+			<!-- Headline Small — keep shared size; Fluent title weight -->
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="HeadlineSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="HeadlineSmallFontSize">24</x:Double>
+
+			<!-- TITLE -->
+
+			<!-- Title Large — Fluent Subtitle (20, SemiBold) -->
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="TitleLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleLargeFontSize">20</x:Double>
+
+			<!-- Title Medium — keep shared size; Fluent emphasis weight -->
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="TitleMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
+
+			<!-- Title Small — Fluent Body Strong (14, SemiBold) -->
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="TitleSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
+
+			<!-- BODY -->
+
+			<!-- Body Large — Fluent Body Large (18, Regular) -->
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="BodyLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyLargeFontSize">18</x:Double>
+			<x:Int32 x:Key="BodyLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Body Medium — Fluent Body (14, Regular) -->
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="BodyMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
+			<x:Int32 x:Key="BodyMediumCharacterSpacing">0</x:Int32>
+
+			<!-- Body Small — Fluent Caption size in a body role -->
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="BodySmallFontWeight">Normal</x:String>
+			<x:Double x:Key="BodySmallFontSize">12</x:Double>
+			<x:Int32 x:Key="BodySmallCharacterSpacing">0</x:Int32>
+
+			<!-- LABEL -->
+
+			<!-- Label Large — Fluent Body Strong (14, SemiBold; button labels) -->
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="LabelLargeFontSize">14</x:Double>
+			<x:Int32 x:Key="LabelLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Label Medium — Fluent Caption size + emphasis weight -->
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="LabelMediumFontSize">12</x:Double>
+			<x:Int32 x:Key="LabelMediumCharacterSpacing">0</x:Int32>
+
+			<!-- Label Small — keep shared size (below the Fluent ramp) -->
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="LabelSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="LabelSmallCharacterSpacing">0</x:Int32>
+
+			<!-- Label ExtraSmall — keep shared size -->
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">0</x:Int32>
+
+			<!-- CAPTION -->
+
+			<!-- Caption Large — keep shared size; Fluent caption weight -->
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="CaptionLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
+			<x:Int32 x:Key="CaptionLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Caption Medium — Fluent Caption (12, Regular) -->
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="CaptionMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
+			<x:Int32 x:Key="CaptionMediumCharacterSpacing">0</x:Int32>
+
+			<!-- Caption Small — keep shared size -->
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>
+
+		</ResourceDictionary>
+
+		<!-- ═══════════════════════════════════════════════════════════════ -->
+		<!-- LIGHT THEME -->
+		<!-- ═══════════════════════════════════════════════════════════════ -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- DISPLAY -->
+
+			<!-- Display Large — Fluent Display (68, SemiBold) -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="DisplayLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="DisplayLargeFontSize">68</x:Double>
+			<x:Int32 x:Key="DisplayLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Display Medium — interpolated 68 x (45/57) ≈ 54; no Fluent slot -->
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="DisplayMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="DisplayMediumFontSize">54</x:Double>
+
+			<!-- Display Small — Fluent Title Large (40, SemiBold) -->
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="DisplaySmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="DisplaySmallFontSize">40</x:Double>
+
+			<!-- HEADLINE -->
+
+			<!-- Headline Large — keep shared size (no Fluent slot between 40 and 28); Fluent title weight -->
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="HeadlineLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
+
+			<!-- Headline Medium — Fluent Title (28, SemiBold) -->
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="HeadlineMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="HeadlineMediumFontSize">28</x:Double>
+
+			<!-- Headline Small — keep shared size; Fluent title weight -->
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="HeadlineSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="HeadlineSmallFontSize">24</x:Double>
+
+			<!-- TITLE -->
+
+			<!-- Title Large — Fluent Subtitle (20, SemiBold) -->
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="TitleLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleLargeFontSize">20</x:Double>
+
+			<!-- Title Medium — keep shared size; Fluent emphasis weight -->
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="TitleMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
+
+			<!-- Title Small — Fluent Body Strong (14, SemiBold) -->
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="TitleSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
+
+			<!-- BODY -->
+
+			<!-- Body Large — Fluent Body Large (18, Regular) -->
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="BodyLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyLargeFontSize">18</x:Double>
+			<x:Int32 x:Key="BodyLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Body Medium — Fluent Body (14, Regular) -->
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="BodyMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
+			<x:Int32 x:Key="BodyMediumCharacterSpacing">0</x:Int32>
+
+			<!-- Body Small — Fluent Caption size in a body role -->
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="BodySmallFontWeight">Normal</x:String>
+			<x:Double x:Key="BodySmallFontSize">12</x:Double>
+			<x:Int32 x:Key="BodySmallCharacterSpacing">0</x:Int32>
+
+			<!-- LABEL -->
+
+			<!-- Label Large — Fluent Body Strong (14, SemiBold; button labels) -->
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelLargeFontWeight">SemiBold</x:String>
+			<x:Double x:Key="LabelLargeFontSize">14</x:Double>
+			<x:Int32 x:Key="LabelLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Label Medium — Fluent Caption size + emphasis weight -->
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelMediumFontWeight">SemiBold</x:String>
+			<x:Double x:Key="LabelMediumFontSize">12</x:Double>
+			<x:Int32 x:Key="LabelMediumCharacterSpacing">0</x:Int32>
+
+			<!-- Label Small — keep shared size (below the Fluent ramp) -->
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelSmallFontWeight">SemiBold</x:String>
+			<x:Double x:Key="LabelSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="LabelSmallCharacterSpacing">0</x:Int32>
+
+			<!-- Label ExtraSmall — keep shared size -->
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">0</x:Int32>
+
+			<!-- CAPTION -->
+
+			<!-- Caption Large — keep shared size; Fluent caption weight -->
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="CaptionLargeFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionLargeFontSize">13</x:Double>
+			<x:Int32 x:Key="CaptionLargeCharacterSpacing">0</x:Int32>
+
+			<!-- Caption Medium — Fluent Caption (12, Regular) -->
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="CaptionMediumFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
+			<x:Int32 x:Key="CaptionMediumCharacterSpacing">0</x:Int32>
+
+			<!-- Caption Small — keep shared size -->
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+			<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
+			<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
+			<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>
+
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>
