@@ -39,9 +39,14 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Phase 2 — Seed → accent
 
-- [ ] S4(a) accent closure enumeration
-- [ ] Closure override implementation + `Given_FluentSeedAccent`
-- [ ] `doc/seed-colors.md`
+- [x] S4(a) accent closure enumeration (2026-07-15, Skia desktop — see
+  `spike-results.md` §S4: on Uno, `SystemAccentColor*` alone cascades fully;
+  the closure is written anyway as the Windows insurance per D12, with
+  seed-invariant tokens — `TextOnAccentFillColor*`, `*Disabled` — excluded)
+- [x] Closure override implementation (`FluentAccentPalette` + FluentTheme
+  rebuild hook, single-entry cache keyed by seed) + `Given_FluentSeedAccent`
+- [x] `doc/seed-colors.md` (Fluent tab + "Seed → Accent Cascade" section,
+  including the in-place-clear cache caveat)
 
 ## Phase 3 — Lightweight bridge (per control: Button → TextBox → CheckBox → RadioButton → ToggleSwitch → Slider)
 
@@ -59,6 +64,24 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-07-15 — **Phase 2 complete.** S4(a) ran on Skia desktop (results in
+  `spike-results.md` §S4): on Uno, XCR's accent brushes re-resolve late-bound,
+  so overriding the `SystemAccentColor*` shades alone recolors built-in
+  controls — the D12 eager-resolution concern is Windows-only. Implementation
+  (`FluentAccentPalette`, hooked into `AddThemeSpecificResources`) writes the
+  shade set (flat, theme-invariant) plus the accent-derived closure per branch
+  (fill = Dark1/Light2 at 1/0.9/0.8 brush opacity, accent text = Dark2/Dark3/
+  Dark1 vs Light3/Light3/Light2, selected-text bg = base accent, legacy
+  `SystemControl*Accent*` brushes) as the Windows insurance. **D12 refinement:**
+  `TextOnAccentFillColor*` and `*Disabled` are excluded — their values are
+  seed-invariant (S4 evidence). Single-entry cache keyed by seed avoids
+  re-solving HCT on unrelated rebuilds. **Known platform caveat** (documented
+  in `doc/seed-colors.md`): after an in-place seed CLEAR, XCR's already-
+  materialized accent brushes can keep the last value until the next app-scope
+  resource change; unmerging the theme restores fully (guarded by
+  `Given_FluentSeedAccent.When_SeedCleared_PlatformAccentRestored`).
+  S4(b) — whether a per-control resource redefinition alone wins
+  `{ThemeResource}` lookups inside XCR templates — remains open for Phase 3.
 - 2026-07-15 — **Phase 1 complete.** Library implemented per spec with three
   deviations, all recorded in `specs/lessons.md`:
   1. Semantic keys targeting bundle-local styles (TextButton/IconButton + 19

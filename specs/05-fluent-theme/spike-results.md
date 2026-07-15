@@ -130,6 +130,58 @@ Follow-up for Phase 1: verify whether the M-CODE fallback
 implicit style for each of these on Uno, and probe the same key list on
 Windows + WASM.
 
-## S4 — Accent/lightweight override cascade
+## S4 — Accent/lightweight override cascade — (a) ✅ DONE (Skia desktop); (b) partially answered
 
-Not started (scheduled before Phase 2/3 — see spec §14.4).
+**Run:** 2026-07-15, Linux, SimpleSampleApp (CI host), Debug `net10.0-desktop`,
+headless, ambient theme **Light**, via a temporary `Given_TempS4Diag` probe
+(not committed). Probed the accent key space at app scope and layered override
+dictionaries as later siblings of XCR (FluentTheme's position), rendering an
+`AccentButtonStyle` button after each layer.
+
+### (a) Closure enumeration — Light branch (values relative to the shade set)
+
+| Key | Light value | Relationship |
+|---|---|---|
+| `AccentFillColorDefaultBrush` | `#FF005A9E` @1 | = `SystemAccentColorDark1` |
+| `AccentFillColorSecondaryBrush` | `#FF005A9E` @0.9 | = Dark1, **brush** opacity 0.9 |
+| `AccentFillColorTertiaryBrush` | `#FF005A9E` @0.8 | = Dark1, brush opacity 0.8 |
+| `AccentFillColorSelectedTextBackgroundBrush` | `#FF0078D7` | = `SystemAccentColor` |
+| `AccentTextFillColorPrimaryBrush` | `#FF004275` | = `SystemAccentColorDark2` |
+| `AccentTextFillColorSecondaryBrush` | `#FF002642` | = `SystemAccentColorDark3` |
+| `AccentTextFillColorTertiaryBrush` | `#FF005A9E` | = `SystemAccentColorDark1` |
+| `TextOnAccentFillColorPrimary/…` | white family | **seed-invariant** (not accent-derived) |
+| `AccentFillColorDisabled(Brush)` | `#37000000` | seed-invariant neutral |
+| `SystemControl*Accent*` + `SystemColorControlAccentBrush` + `SystemControlHyperlinkTextBrush` | `#FF0078D7` | = `SystemAccentColor` (legacy UWP-era set, present on Uno) |
+| `AccentButtonBackground(+PointerOver/Pressed)` | Dark1 @1/0.9/0.8 | per-control copies of the fill set |
+| `AccentFillColorDefault/Secondary/Tertiary` **colors** | MISSING on Uno Skia | only the brushes exist (colors exist on Windows) |
+| `AccentTextFillColorPrimary/Secondary/Tertiary` **colors** | MISSING on Uno Skia | matches the S2 finding |
+
+Dark-branch relationships (from S2 + WinUI structure): fill = `Light2`,
+accent text = `Light3`/`Light3`/`Light2`. Windows capture still pending
+(tracked residual risk).
+
+### Cascade experiment (the load-bearing result)
+
+| Layer merged (later sibling of XCR, per theme branch) | Rendered accent button |
+|---|---|
+| baseline | `#FF005A9E` (= Dark1) |
+| **A: `SystemAccentColor*` shades only** | **`#FFB00020` (the override) — FULL CASCADE** |
+| B: + `AccentFillColor*`/TextOnAccent colors+brushes | `#FFB00020` |
+| C: + `AccentButtonBackground/Foreground` | `#FFB00020` |
+| removed | `#FF005A9E` — clean restore |
+
+**Conclusion (a):** on Uno, XCR's accent brushes re-resolve **late-bound**
+against the ambient scope — overriding the `SystemAccentColor*` shades alone
+recolors built-in controls; `AccentFillColorDefaultBrush` itself re-resolved to
+the override. The D12 eager-resolution concern is a **Windows-only** problem.
+Phase 2 therefore writes the shades (sufficient on Uno) **plus** the
+accent-derived closure with values mirroring the platform structure above
+(insurance for Windows), and skips `TextOnAccentFillColor*` / `*Disabled`
+(seed-invariant — refines D12's closure list, recorded in the review log).
+
+**Conclusion (b), partial:** redefining `AccentButtonBackground` in a later
+app-scope sibling did not *break* rendering (C) and a flat (non-theme-branch)
+redefinition also rendered correctly (B2) — but because layer A already
+cascaded, C could not isolate whether the per-control redefinition *itself*
+wins `{ThemeResource}` lookups from inside XCR templates. Re-run the isolation
+(per-control layer only, no shade override) at the start of Phase 3.
