@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Uno.Fluent;
 using Uno.Simple;
 using Uno.UI.RuntimeTests;
 using Windows.UI;
@@ -150,5 +151,92 @@ public class Given_ColorOverridePrecedence
 		Assert.AreEqual(OverrideBlue, bg.Color,
 			$"Expected override color #{OverrideBlue} but got #{bg.Color}. " +
 			"ColorOverrideDictionary path is not taking precedence over seed colors.");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// 3. FluentTheme: the same precedence contract holds for the code-built
+	//    Fluent palette (specs/05-fluent-theme §6.1) — base palette < seed
+	//    < consumer override.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_FluentThemeSeedSet_Then_SeedWinsOverFluentPalette()
+	{
+		var seeded = new FluentTheme();
+		seeded.Colors = new ThemeColors { PrimarySeed = SeedPurple };
+		var seededContainer = new Grid();
+		seededContainer.Resources.MergedDictionaries.Add(seeded);
+
+		var unseededContainer = new Grid();
+		unseededContainer.Resources.MergedDictionaries.Add(new FluentTheme());
+
+		Assert.IsTrue(
+			seededContainer.Resources.TryGetValue("PrimaryColor", out var seededValue) && seededValue is Color,
+			"PrimaryColor should resolve from the seeded FluentTheme");
+		Assert.IsTrue(
+			unseededContainer.Resources.TryGetValue("PrimaryColor", out var unseededValue) && unseededValue is Color,
+			"PrimaryColor should resolve from the unseeded FluentTheme");
+
+		Assert.AreNotEqual((Color)unseededValue, (Color)seededValue,
+			"a seed must take precedence over the code-built Fluent palette");
+
+		// Fluent and Simple share the seed pipeline (high-fidelity generation, no
+		// default seed) — the same seed must produce the same PrimaryColor.
+		var simpleSeeded = new SimpleTheme();
+		simpleSeeded.Colors = new ThemeColors { PrimarySeed = SeedPurple };
+		var simpleContainer = new Grid();
+		simpleContainer.Resources.MergedDictionaries.Add(simpleSeeded);
+
+		Assert.IsTrue(
+			simpleContainer.Resources.TryGetValue("PrimaryColor", out var simpleValue) && simpleValue is Color,
+			"PrimaryColor should resolve from the seeded SimpleTheme");
+		Assert.AreEqual((Color)simpleValue, (Color)seededValue,
+			"the same seed must generate the same PrimaryColor under FluentTheme and SimpleTheme");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_FluentThemeSeedAndOverrideBothSet_Then_OverrideWins()
+	{
+		var overrideDict = CreateColorAndBrushOverride("PrimaryColor", "PrimaryBrush", OverrideBlue);
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors
+		{
+			PrimarySeed = SeedPurple,
+			OverrideDictionary = overrideDict,
+		};
+
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var style = container.Resources["FilledButtonStyle"] as Style;
+		Assert.IsNotNull(style, "FilledButtonStyle should resolve from FluentTheme");
+
+		// The semantic brush must carry the override; the button itself keeps
+		// Fluent's own accent fill because FilledButtonStyle IS the untouched
+		// XCR AccentButtonStyle (adapter architecture — reverse accent mapping
+		// is Phase 2, specs/05-fluent-theme §9).
+		Assert.IsTrue(
+			container.Resources.TryGetValue("PrimaryColor", out var colorValue) && colorValue is Color,
+			"PrimaryColor should resolve from FluentTheme");
+		Assert.AreEqual(OverrideBlue, (Color)colorValue,
+			"the consumer override must win over both the seed palette and the Fluent palette");
+
+		Assert.IsTrue(
+			container.Resources.TryGetValue("PrimaryBrush", out var brushValue) && brushValue is SolidColorBrush,
+			"PrimaryBrush should resolve from FluentTheme");
+		Assert.AreEqual(OverrideBlue, ((SolidColorBrush)brushValue).Color,
+			"the overridden PrimaryBrush must carry the override color");
+
+		var button = new Button { Content = "Test", Style = style };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		Assert.IsTrue(button.IsLoaded, "the styled button should load under an overridden FluentTheme");
 	}
 }
