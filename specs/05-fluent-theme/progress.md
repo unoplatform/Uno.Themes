@@ -88,13 +88,52 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
   the Fluent head (no fallback-crash risk)
 - [x] Fluent sample templates (semantic keys only) for the six bridged
   controls: Button, TextBox, CheckBox, RadioButton, ToggleSwitch, Slider
-- [ ] Fluent templates for the remaining §5 alias surface (ComboBox, pickers,
-  flyouts, progress, NavigationView, …) — incremental follow-up; §15
-  acceptance "renders all §5 aliases" not yet fully met
+- [x] Fluent templates for the remaining §5 alias surface (2026-07-15) — 22
+  more pages opt into `Design.Fluent` with semantic-key-only FluentTemplates:
+  AppBarButton, Fab, IconButton, ToggleButton, HyperlinkButton, PasswordBox,
+  ComboBox (+`ComboBoxItemStyle`), ListView (+`ListViewItemStyle`), TextBlock
+  (19 typography slots), MenuFlyout (item/toggle/radio/sub/separator), Flyout
+  (+`FlyoutPresenterStyle`), ContentDialog, CommandBar, ProgressBar,
+  ProgressRing, CalendarView, CalendarDatePicker, DatePicker, PipsPager,
+  RatingControl, NavigationView (MUX), Top NavigationView (MUX). §15
+  acceptance "renders all §5 aliases" now met **except** MediaTransportControls
+  (see deferral below). Verified: `FluentSampleApp` navigates all **28** Fluent
+  pages under xvfb with `ok=28/28`, zero exceptions, and no unresolved semantic
+  key (only the pre-existing design-independent `Material*`/`Cupertino*`
+  shared-chrome `warn:` lines from the other designs' templates in each shared
+  page).
+- [ ] **MediaTransportControls** (`MediaTransportControlsStyle`) sample —
+  deferred. The key resolves and is guarded by `Given_FluentSemanticStyles`,
+  but `MediaPlayerElementSamplePage` is Material-only, launches nested pages,
+  and hosts live media playback (fragile headless); spec §5.2 itself flags
+  MediaTransportControls availability as platform-varying (D8 GAP exception).
 - [ ] Screenshot pass vs WinUI Gallery (§15) — needs a windowed environment
 
 ## Review log
 
+- 2026-07-15 — **Phase 4 §5 sample surface complete.** Extended `Design.Fluent`
+  opt-in + semantic-key-only FluentTemplates to 22 more shared sample pages,
+  bringing the Fluent head to **28** pages covering the whole §5 alias surface
+  (all button/toggle/input/collection/overlay/progress/picker/pager/nav
+  controls) — only MediaTransportControls deferred (Material-only, nested-page
+  media host; key resolves + is test-guarded). Templates reference only the
+  semantic keys proven by `Given_FluentSemanticStyles`, including the
+  late-bound Ⓜ keys (`NavigationViewStyle`/`NavigationViewItemStyle`,
+  `CommandBarStyle`, `ProgressRingStyle`, `PipsPagerStyle`,
+  `RatingControlStyle`, `CalendarDatePickerStyle`, `ListViewStyle`) whose
+  empty-style fallback keeps the built-in Fluent default template.
+  ContentDialog reuses the shared theme-agnostic dialog builders (they inherit
+  Fluent's implicit ContentDialog style). **Verification:** temporary
+  navigation sweep in `FluentSampleApp` under xvfb visited all 28 Fluent pages
+  → `ok=28/28`, zero exceptions/unhandled, and no unresolved *semantic* key
+  (only the pre-existing design-independent `Material*`/`Cupertino*`
+  shared-chrome `warn:` lines from the other designs' templates in each shared
+  page — same class the Simple head logs). CI-parity runtime suite unchanged:
+  301 total / 300 passed / 1 pre-existing skip. Debug build clean (0 errors, no
+  new warnings); SimpleSampleApp Release publish clean. No library/API/resource-
+  key change — samples only, purely additive (`SupportedDesigns` only ever
+  gained `Design.Fluent`, so the Material/Cupertino/Simple head rosters are
+  unchanged).
 - 2026-07-15 — **Phase 4 landed (initial)** — dedicated `FluentSampleApp`
   head per owner decision. Shared UI gained first-class `Design.Fluent`
   support; sample pages opt in per page (strict `SupportedDesigns` filter),

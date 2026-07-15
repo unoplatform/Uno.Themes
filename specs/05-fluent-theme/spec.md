@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Phases 1–3 **done**; Phase 4 **landed (initial)** — dedicated `FluentSampleApp` head + `Design.Fluent` shared-UI support + Fluent templates for the six bridged controls (2026-07-15; deltas in `progress.md` review log). Remaining: Fluent templates for the full §5 alias surface, screenshot pass, Windows/WASM validation |
+| **Status** | Phases 1–3 **done**; Phase 4 **done (samples)** — dedicated `FluentSampleApp` head + `Design.Fluent` shared-UI support + Fluent templates across the full §5 alias surface (28 Fluent pages; only MediaTransportControls deferred). Verified: `ok=28/28` navigation sweep, CI-parity runtime suite unchanged at 300/1 (2026-07-15; deltas in `progress.md` review log). Remaining: MediaTransportControls sample, screenshot pass vs WinUI Gallery, Windows/WASM validation |
 | **Owner** | Steve Bilogan |
 | **Created** | 2026-07-14 |
 | **Related** | `specs/01-design-tokens/`, `specs/02-semantic-brushes/`, `specs/03-seed-color-palette/`, `.specify/specs/semantic-abstraction-layer/spec.md`, `doc/semantic-styles.md`, `doc/fluent-getting-started.md`, `specs/lessons.md` (eager `<StaticResource>` resolution) |
