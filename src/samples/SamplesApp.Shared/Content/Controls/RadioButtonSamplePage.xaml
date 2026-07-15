@@ -208,6 +208,31 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="Fluent_RadioButton_Group"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel>
+								<RadioButton Content="Option 1"
+											 GroupName="FluentRadio"
+											 IsChecked="True"
+											 Style="{StaticResource RadioButtonStyle}" />
+								<RadioButton Content="Option 2"
+											 GroupName="FluentRadio"
+											 Style="{StaticResource RadioButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Fluent_RadioButton_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<RadioButton Content="Disabled"
+										 IsEnabled="False"
+										 Style="{StaticResource RadioButtonStyle}" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
