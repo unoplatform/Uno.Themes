@@ -65,6 +65,7 @@ namespace Uno.Fluent;
 internal static class FluentLightweightBridge
 {
 	private const string LightBranchKey = "Light";
+	private const string DarkBranchKey = "Dark";
 	private const string DefaultBranchKey = "Default";
 
 	// Semantic key -> built-in Fluent per-control resource, re-pointed when a
@@ -183,10 +184,12 @@ internal static class FluentLightweightBridge
 	/// entries for every semantic key found in <paramref name="consumerOverride"/>.
 	/// </summary>
 	/// <param name="seed">The effective primary seed, when one is active — the accent-fill defaults follow it (tones 30/70, matching FluentAccentPalette).</param>
+	/// <param name="lightAccentBasis">The light-branch PrimaryColor override, when set — becomes the accent fill verbatim, taking precedence over the seed (matching FluentAccentPalette).</param>
+	/// <param name="darkAccentBasis">The dark-branch PrimaryColor override, when set.</param>
 	/// <param name="consumerOverride">The consumer's <c>Colors.OverrideDictionary</c>, when set.</param>
-	internal static ResourceDictionary Build(Color? seed, ResourceDictionary? consumerOverride)
+	internal static ResourceDictionary Build(Color? seed, Color? lightAccentBasis, Color? darkAccentBasis, ResourceDictionary? consumerOverride)
 	{
-		var (lightFill, darkFill) = ResolveAccentFill(seed);
+		var (lightFill, darkFill) = ResolveAccentFill(seed, lightAccentBasis, darkAccentBasis);
 
 		var light = BuildBranchDefaults(isLight: true, lightFill);
 		var dark = BuildBranchDefaults(isLight: false, darkFill);
@@ -203,29 +206,40 @@ internal static class FluentLightweightBridge
 	}
 
 	/// <summary>
-	/// The accent-button fill per branch: seed tones 30/70 when a seed is
-	/// active (agreeing with FluentAccentPalette), else the live platform
-	/// shades (light fill = Dark1, dark fill = Light2 — spike S4). Null when
-	/// the platform shades are unreachable (no XCR): the Filled background
-	/// defaults are then skipped, graceful degradation.
+	/// The accent-button fill per branch: an explicit PrimaryColor override
+	/// basis verbatim when present (agreeing with FluentAccentPalette's
+	/// override-driven mode), else seed tones 30/70 when a seed is active,
+	/// else the live platform shades (light fill = Dark1, dark fill = Light2 —
+	/// spike S4). Null when the platform shades are unreachable (no XCR): the
+	/// Filled background defaults are then skipped, graceful degradation.
 	/// </summary>
-	private static (Color? Light, Color? Dark) ResolveAccentFill(Color? seed)
+	private static (Color? Light, Color? Dark) ResolveAccentFill(Color? seed, Color? lightBasis, Color? darkBasis)
 	{
-		if (seed is { } s)
+		Color? seedLight = null;
+		Color? seedDark = null;
+		if (seed is { } s && (lightBasis is null || darkBasis is null))
 		{
 			var hct = HctColor.FromArgb((s.A << 24) | (s.R << 16) | (s.G << 8) | s.B);
 			var palette = new TonalPalette(hct.Hue, hct.Chroma);
-			return (FromArgb(palette.GetArgb(30)), FromArgb(palette.GetArgb(70)));
+			seedLight = FromArgb(palette.GetArgb(30));
+			seedDark = FromArgb(palette.GetArgb(70));
+		}
+
+		var light = lightBasis ?? seedLight;
+		var dark = darkBasis ?? seedDark;
+		if (light is { } && dark is { })
+		{
+			return (light, dark);
 		}
 
 		if (Application.Current?.Resources is { } resources
-			&& resources.TryGetValue("SystemAccentColorDark1", out var dark1) && dark1 is Color lightFill
-			&& resources.TryGetValue("SystemAccentColorLight2", out var light2) && light2 is Color darkFill)
+			&& resources.TryGetValue("SystemAccentColorDark1", out var dark1) && dark1 is Color platformLight
+			&& resources.TryGetValue("SystemAccentColorLight2", out var light2) && light2 is Color platformDark)
 		{
-			return (lightFill, darkFill);
+			return (light ?? platformLight, dark ?? platformDark);
 		}
 
-		return (null, null);
+		return (light, dark);
 	}
 
 	private static ResourceDictionary BuildBranchDefaults(bool isLight, Color? accentFill)
@@ -300,20 +314,18 @@ internal static class FluentLightweightBridge
 	/// <summary>
 	/// Mirrors every semantic key found in the consumer override onto its
 	/// Fluent per-control resource (spec 05 §10 steps 2–3): flat entries reach
-	/// both branches, theme-branch entries only theirs. Values are written
-	/// verbatim.
+	/// both branches; theme-branch entries follow the native ThemeDictionaries
+	/// semantics — the exact branch key first ("Light" / "Dark"), then the
+	/// universal "Default" fallback. Values are written verbatim.
 	/// </summary>
 	private static void ApplyRepointing(ResourceDictionary light, ResourceDictionary dark, ResourceDictionary consumerOverride)
 	{
 		// Enumeration reads OWN entries only — TryGetValue would also search
 		// the ambient theme branch and break branch fidelity.
 		var flat = ToOwnEntries(consumerOverride);
-		var lightOverrides = consumerOverride.ThemeDictionaries.TryGetValue(LightBranchKey, out var lo) && lo is ResourceDictionary lod
-			? ToOwnEntries(lod)
-			: null;
-		var darkOverrides = consumerOverride.ThemeDictionaries.TryGetValue(DefaultBranchKey, out var dv) && dv is ResourceDictionary dod
-			? ToOwnEntries(dod)
-			: null;
+		var lightOverrides = BranchEntries(consumerOverride, LightBranchKey);
+		var darkOverrides = BranchEntries(consumerOverride, DarkBranchKey);
+		var fallbackOverrides = BranchEntries(consumerOverride, DefaultBranchKey);
 
 		foreach (var (semantic, fluent) in _repointMap)
 		{
@@ -323,17 +335,27 @@ internal static class FluentLightweightBridge
 				dark[fluent] = flatValue;
 			}
 
-			if (lightOverrides is { } && lightOverrides.TryGetValue(semantic, out var lightValue))
+			var lightValue = OwnValue(lightOverrides, semantic) ?? OwnValue(fallbackOverrides, semantic);
+			if (lightValue is { })
 			{
 				light[fluent] = lightValue;
 			}
 
-			if (darkOverrides is { } && darkOverrides.TryGetValue(semantic, out var darkValue))
+			var darkValue = OwnValue(darkOverrides, semantic) ?? OwnValue(fallbackOverrides, semantic);
+			if (darkValue is { })
 			{
 				dark[fluent] = darkValue;
 			}
 		}
 	}
+
+	private static Dictionary<string, object>? BranchEntries(ResourceDictionary dictionary, string branchKey)
+		=> dictionary.ThemeDictionaries.TryGetValue(branchKey, out var value) && value is ResourceDictionary branch
+			? ToOwnEntries(branch)
+			: null;
+
+	private static object? OwnValue(Dictionary<string, object>? entries, string key)
+		=> entries is { } && entries.TryGetValue(key, out var value) ? value : null;
 
 	private static Dictionary<string, object> ToOwnEntries(ResourceDictionary dictionary)
 	{
