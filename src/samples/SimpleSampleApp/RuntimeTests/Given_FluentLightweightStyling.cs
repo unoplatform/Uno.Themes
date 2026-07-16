@@ -377,6 +377,118 @@ public class Given_FluentLightweightStyling
 			$"{key} must be provided natively by XamlControlsResources — a rename in Uno.UI breaks consumer overrides");
 	}
 
+	// ─────────────────────────────────────────────────────────────────────
+	// Branch-key fidelity: consumer overrides use the "Dark" branch key (the
+	// documented ColorPaletteOverride.xaml shape) and rely on "Default" as the
+	// universal fallback — the re-pointing must honor the native
+	// ThemeDictionaries semantics (exact branch first, then "Default").
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_OverrideUsesDarkBranchKey_DarkBranchIsRepointed()
+	{
+		var overrideDict = new ResourceDictionary();
+		var darkBranch = new ResourceDictionary();
+		darkBranch["FilledButtonBackground"] = new SolidColorBrush(OverrideRed);
+		overrideDict.ThemeDictionaries["Dark"] = darkBranch;
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		// The rendered re-point pipeline is covered by the flat and
+		// 'Default'-branch tests; what needs guarding here is branch fidelity
+		// for the "Dark" consumer key, which the CI host cannot render (the
+		// ambient theme is fixed and element-theme flips do not re-branch
+		// app-scope template resources on this target). Assert the produced
+		// resource graph instead: the theme IS a ResourceDictionary — its
+		// dark branch must now carry the re-pointed per-control resource, and
+		// its light branch must not.
+		var (light, dark) = FindBridgeBranches(theme, "AccentButtonBackground");
+
+		Assert.IsNotNull(dark, "a 'Dark'-branch override must re-point AccentButtonBackground in the theme's dark branch");
+		Assert.AreEqual(OverrideRed, ((SolidColorBrush)dark!).Color,
+			"the dark branch must carry the override value verbatim (the documented consumer branch key)");
+		Assert.IsNull(light, "a 'Dark'-branch override must not leak into the light branch");
+	}
+
+	/// <summary>
+	/// Finds <paramref name="key"/> in the Light / Default branches across the
+	/// theme's merged dynamic layers (own entries only, later layers win) —
+	/// i.e. what theme-aware resolution would see per branch.
+	/// </summary>
+	private static (object? Light, object? Dark) FindBridgeBranches(FluentTheme theme, string key)
+	{
+		object? light = null;
+		object? dark = null;
+		foreach (var merged in theme.MergedDictionaries)
+		{
+			if (merged.ThemeDictionaries.TryGetValue("Light", out var lb) && lb is ResourceDictionary lightBranch)
+			{
+				foreach (var pair in lightBranch)
+				{
+					if (pair.Key as string == key)
+					{
+						light = pair.Value;
+					}
+				}
+			}
+
+			if (merged.ThemeDictionaries.TryGetValue("Default", out var db) && db is ResourceDictionary darkBranch)
+			{
+				foreach (var pair in darkBranch)
+				{
+					if (pair.Key as string == key)
+					{
+						dark = pair.Value;
+					}
+				}
+			}
+		}
+
+		return (light, dark);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_OverrideUsesDefaultBranchOnly_LightThemedButtonFollows()
+	{
+		var overrideDict = new ResourceDictionary();
+		var defaultBranch = new ResourceDictionary();
+		defaultBranch["FilledButtonBackground"] = new SolidColorBrush(OverrideRed);
+		overrideDict.ThemeDictionaries["Default"] = defaultBranch;
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var lightButton = new Button
+			{
+				Content = "light",
+				RequestedTheme = ElementTheme.Light,
+				Style = (Style)Application.Current.Resources["FilledButtonStyle"],
+			};
+			var host = new Grid();
+			host.Children.Add(lightButton);
+
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(lightButton);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var background = lightButton.Background as SolidColorBrush;
+			Assert.IsNotNull(background, "the light-themed button should have a SolidColorBrush background");
+			Assert.AreEqual(OverrideRed, background.Color,
+				"a 'Default'-branch-only override is the universal fallback and must reach the light branch too");
+		}
+		finally
+		{
+			appDictionaries.Remove(theme);
+		}
+	}
+
 	[TestMethod]
 	[RunsOnUIThread]
 	public async Task When_NoOverride_StockAccentButtonIsUntouched()
