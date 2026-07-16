@@ -159,7 +159,23 @@ Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than ge
 - The accent-derived design tokens (`AccentFillColor*`, `AccentTextFillColor*` colors and brushes) are overridden per Light/Dark theme following Fluent's own structure — for example, the light-theme accent fill is the `Dark1` shade and the dark-theme fill is `Light2`, exactly as with the platform accent.
 - `FluentTheme` uses **high-fidelity** generation: the seed's chroma is preserved rather than boosted to the Material minimum, so muted corporate colors keep their character.
 
-Without a seed, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
+### PrimaryColor overrides drive the accent too
+
+The cascade is not limited to seeds. An explicit **`PrimaryColor` override** — through any channel (`Colors.OverrideDictionary`, `Colors.OverrideSource`, or the legacy `ColorOverrideDictionary` / `ColorOverrideSource` theme properties) — also recolors the built-in Fluent controls, matching how a `PrimaryColor` override visibly recolors controls under Material and Simple:
+
+- Unlike a seed (a *generator input*, mapped through tonal-palette tones), an override is the highest-precedence statement of what Primary **is** — it becomes the accent fill **verbatim** for its theme branch, with the surrounding `SystemAccentColor*` shades and accent-text tones derived from it.
+- Branch-aware: a value in the `Light` / `Dark` (or `Default`) theme dictionary drives that branch; a flat value drives both. A branch with no effective value keeps the seed mapping (when a seed is set) or the platform accent.
+- When both a seed and a `PrimaryColor` override are set, the **override wins** — the same precedence as in the semantic palette.
+- Any accent-family key you override **explicitly** (`SystemAccentColor*`, `AccentFillColor*`, `AccentTextFillColor*`) always wins over the derived values.
+
+```xml
+<uf:FluentTheme xmlns:uf="using:Uno.Fluent"
+                ColorOverrideSource="ms-appx:///ColorPaletteOverride.xaml" />
+```
+
+With `ColorPaletteOverride.xaml` defining `PrimaryColor` per theme branch, both semantic-keyed XAML **and** the stock Fluent controls follow it.
+
+Without a seed or a `PrimaryColor` override, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
 
 > [!NOTE]
 > Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the semantic palette and the `SystemAccentColor*` values. Built-in controls that already materialized their accent brushes may keep the last seeded color until the next app-scope resource change or theme switch — a platform resource-cache behavior. Unmerging the theme always restores the platform accent completely.

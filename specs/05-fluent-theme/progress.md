@@ -111,6 +111,35 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-07-16 — **Override-driven accent cascade (owner report).** FluentTheme
+  handled only `Colors.PrimarySeed` in its Fluent-specific layers: a
+  `PrimaryColor` override — via `Colors.OverrideDictionary`/`OverrideSource`
+  or the obsolete `ColorOverrideDictionary`/`ColorOverrideSource` BaseTheme
+  properties — changed the semantic palette but left every visible built-in
+  Fluent control untouched (no parity with Material/Simple, whose templates
+  consume the semantic brushes directly). Fix: the accent cascade
+  (`FluentAccentPalette`) and the lightweight bridge's accent fill now derive
+  from the **effective primary** — per-branch `PrimaryColor` override
+  (verbatim, shades derived tonally from it) > seed (tonal mapping,
+  unchanged) > platform accent. Consumer-explicit accent-family keys
+  (`SystemAccentColor*`, `AccentFillColor*`, …) always win over derived
+  values. Also fixed: manual `ThemeDictionaries` reads (bridge re-pointing +
+  basis resolution) now honor the consumer's `Dark` branch key with `Default`
+  as the universal fallback (consumers never write `Default` — see
+  `ColorPaletteOverride.xaml` in the sample heads); URI-backed overrides are
+  re-resolved per rebuild for the accent/bridge layers (hot-reload parity
+  with the base colors layer); the pure-seed accent dictionary stays cached,
+  override-driven passes rebuild (override contents can mutate without a
+  reference change). Red/fix/green: 8 new runtime tests
+  (`Given_FluentSeedAccent` override region ×6 incl. both obsolete channels
+  and the URI channel via `RuntimeTests/FluentColorOverride.xaml`;
+  `Given_FluentLightweightStyling` branch-key tests ×2) — all red before,
+  green after. Full CI-parity Release suite: 322 total — 321 passed / 1
+  pre-existing skip (baseline 313/1, +8 new). Docs: `seed-colors.md`
+  ("PrimaryColor overrides drive the accent too"), `lightweight-styling.md`
+  (theme-branched override note); new `specs/lessons.md` entry (Dark branch
+  key + dark-branch testability).
+
 - 2026-07-15 — **Phase 4 §5 samples — review pass.** `quality` → *approve*
   (no blocker/high/medium; keys design-agnostic, formatting consistent, doc
   edits accurate); `skeptic` → *ship* (cross-head impact structurally

@@ -251,6 +251,7 @@ Under [`FluentTheme`](fluent-getting-started.md), controls are rendered by the *
 </FluentTheme>
 ```
 
+- The override dictionary can be **theme-branched**: values under the `Light` / `Dark` theme dictionary keys re-point their branch only (with `Default` as the universal fallback, per the native `ThemeDictionaries` semantics); flat values reach both branches.
 - A **page/subtree-scoped** override targets the Fluent per-control key directly (`<SolidColorBrush x:Key="AccentButtonBackground" … />` in `Page.Resources`), exactly as in a plain WinUI app. Exception: the keys consumed by the theme's own bridge styles (`TextButtonForeground*`, `IconButtonForeground`) resolve per element scope, so scoped overrides of those semantic keys work directly.
 - **Not bridged** (no Fluent equivalent, or indistinguishable without re-templating): `FilledTonalButton*`/`ElevatedButton*` (they share the standard Fluent button with `OutlinedButton*`), `*IconForeground*` variants, `*StateLayer*`/`*StateCircle*`, `*Elevation*`, ToggleSwitch knob shadow/bounds and icon-presenter keys, and `Focused` knob states. `Disabled` and hover/pressed keys outside the accent families re-point overrides but carry no default values.
 

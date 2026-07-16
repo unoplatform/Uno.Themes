@@ -65,6 +65,18 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Manual ThemeDictionaries reads must honor "Dark" (consumers never write "Default"); dark-branch rendering is not testable in the CI host
+
+**Context:** Fluent override-driven accent cascade (2026-07-16, `specs/05-fluent-theme/`). Two related traps:
+
+1. **Branch keys.** Code that reads a consumer override's `ThemeDictionaries` by hand (FluentLightweightBridge re-pointing, FluentAccentPalette basis resolution) originally read only the `Light`/`Default` keys — the keys *we* write. Consumers write **`Dark`** (see every sample head's `ColorPaletteOverride.xaml`); `Default` is the universal fallback for either theme. Manual reads must mirror the native semantics: exact branch key first (`Light`/`Dark`), then `Default`, then flat — and read OWN entries only (`TryGetValue` searches the ambient theme branch and breaks branch fidelity).
+
+2. **Verification.** There is no way to *render* the dark branch in the CI host: the ambient app theme is fixed at launch, and setting `RequestedTheme` on an element (before load or flipped after load) does **not** re-branch `{ThemeResource}` lookups made inside XCR templates against app-scope dictionaries on this target — the control keeps the ambient branch's values. Guard dark-branch behavior at the produced resource-graph level (the theme IS a `ResourceDictionary`; assert its branch contents) and keep rendered assertions for the ambient branch. See `Given_FluentLightweightStyling.When_OverrideUsesDarkBranchKey_DarkBranchIsRepointed`.
+
+**How to apply:** any new code path that inspects consumer-supplied `ThemeDictionaries` must handle `Light`/`Dark`/`Default` with the fallback above, and its dark-branch tests must assert dictionary structure, not rendered brushes.
+
+---
+
 ## Theme-branch resources inside a XamlMerge bundle don't resolve in Release builds — put them in Source-merged dictionaries
 
 **Context:** Fluent theme Phase 1 (2026-07-15, `specs/05-fluent-theme/`). `Given_FluentTypography` passed in Debug but failed 30/39 in the Release (CI-parity) run: every slot value (`DisplayLargeFontSize` = 68, SemiBold weights, zero character spacing) resolved to the shared (M3) `SharedTypography.xaml` values instead. `UnoXamlResourcesTrimming` was ruled out (`-p:UnoXamlResourcesTrimming=false` still failed).
