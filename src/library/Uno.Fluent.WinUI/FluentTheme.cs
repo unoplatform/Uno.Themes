@@ -168,19 +168,48 @@ public class FluentTheme : BaseTheme
 		EnsureLateBoundStyleAliases();
 		AddThemeDictionary(_lateBoundStyles);
 
-		// Reverse accent mapping (spec 05 §9, goal G5): when a seed is active,
-		// the built-in Fluent controls follow it too. Added on every rebuild
-		// pass so it tracks seed changes and is dropped when the seed clears
-		// (restoring the platform accent). No seed → no entry at all.
 		var effectiveSeed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
-		if (effectiveSeed is { } seed)
-		{
-			if (_accentOverride is not { } cached || cached.Seed != seed)
-			{
-				_accentOverride = (seed, FluentAccentPalette.Build(seed));
-			}
 
-			AddThemeDictionary(_accentOverride.Value.Dictionary);
+		// The consumer color override, whatever channel supplied it —
+		// Colors.OverrideDictionary / Colors.OverrideSource and the obsolete
+		// BaseTheme ColorOverride* properties all funnel into
+		// Colors.OverrideDictionary. URI-backed overrides are re-resolved from
+		// their Source on each rebuild (mirroring BaseTheme.UpdateSource) so
+		// hot-reload edits propagate to the accent/bridge layers too.
+		var consumerOverride = Colors?.OverrideDictionary is { } overrideDictionary
+			? overrideDictionary.Source is { } overrideSource
+				? new ResourceDictionary { Source = overrideSource }
+				: overrideDictionary
+			: null;
+
+		// An explicit PrimaryColor override is the highest-precedence statement
+		// of what "Primary" is — per branch, it drives the accent verbatim,
+		// above the seed (parity with Material/Simple, where a PrimaryColor
+		// override visibly recolors the theme's controls).
+		var (lightAccentBasis, darkAccentBasis) = FluentAccentPalette.ResolveAccentBasis(consumerOverride);
+
+		// Reverse accent mapping (spec 05 §9, goal G5): when an effective
+		// primary is active — seed or PrimaryColor override — the built-in
+		// Fluent controls follow it too. Added on every rebuild pass so it
+		// tracks changes and is dropped when the drivers clear (restoring the
+		// platform accent). No driver → no entry at all.
+		if (effectiveSeed is { } || lightAccentBasis is { } || darkAccentBasis is { })
+		{
+			// Only the pure-seed result is cached: override contents can mutate
+			// without a reference change, so override-driven passes rebuild.
+			if (consumerOverride is null && effectiveSeed is { } seed)
+			{
+				if (_accentOverride is not { } cached || cached.Seed != seed)
+				{
+					_accentOverride = (seed, FluentAccentPalette.Build(seed, lightBasis: null, darkBasis: null, consumerOverride: null));
+				}
+
+				AddThemeDictionary(_accentOverride.Value.Dictionary);
+			}
+			else
+			{
+				AddThemeDictionary(FluentAccentPalette.Build(effectiveSeed, lightAccentBasis, darkAccentBasis, consumerOverride));
+			}
 		}
 
 		// Lightweight-styling bridge (spec 05 §10, goal G6): semantic
@@ -189,7 +218,7 @@ public class FluentTheme : BaseTheme
 		// tracks seed and override changes (the override's contents can
 		// mutate without a reference change, so no cache here — the bridge is
 		// a few dozen brushes and passes only run on theme-property changes).
-		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, Colors?.OverrideDictionary));
+		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, lightAccentBasis, darkAccentBasis, consumerOverride));
 
 		// Base typography ships in the Source bundle (BaseDictionaries.xaml); only a
 		// consumer-supplied font override is layered dynamically on top to shadow it.
