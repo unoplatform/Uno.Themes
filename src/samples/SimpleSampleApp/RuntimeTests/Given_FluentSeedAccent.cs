@@ -12,13 +12,22 @@ namespace Uno.Themes.Samples.RuntimeTests;
 /// goal G5): an active seed color overrides the SystemAccentColor* shades and
 /// the accent-derived token closure with tones from the seed's tonal palette,
 /// so the BUILT-IN Fluent controls follow the seed too; clearing the seed
-/// restores the platform accent.
+/// restores the platform accent. An explicit PrimaryColor override — via any
+/// channel (Colors.OverrideDictionary / Colors.OverrideSource or the obsolete
+/// BaseTheme ColorOverride* properties) — drives the same cascade with the
+/// override value verbatim, taking precedence over the seed.
 /// </summary>
 [TestClass]
 public class Given_FluentSeedAccent
 {
 	// A distinctive red that is clearly not any platform accent shade.
 	private static readonly Color SeedRed = Color.FromArgb(0xFF, 0xB0, 0x00, 0x20);
+
+	// Distinctive override colors, matching RuntimeTests/FluentColorOverride.xaml.
+	private static readonly Color OverrideBlue = Color.FromArgb(0xFF, 0x21, 0x96, 0xF3);
+	private static readonly Color OverrideGreen = Color.FromArgb(0xFF, 0x66, 0xBB, 0x6A);
+
+	private const string ConsumerOverrideSource = "ms-appx:///RuntimeTests/FluentColorOverride.xaml";
 
 	private static bool IsAmbientDark =>
 		Application.Current.RequestedTheme == ApplicationTheme.Dark;
@@ -242,5 +251,182 @@ public class Given_FluentSeedAccent
 			GetColor(container.Resources, expectedAccentKey),
 			GetColor(container.Resources, "PrimaryColor"),
 			$"the seeded semantic PrimaryColor and the reverse-mapped {expectedAccentKey} must agree (§9.3)");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// Override-driven accent: an explicit PrimaryColor override recolors the
+	// built-in Fluent controls too — parity with Material/Simple, where a
+	// PrimaryColor override visibly recolors the theme's controls. Unlike the
+	// seed (a generator input, mapped through tones), the override value is
+	// the accent VERBATIM per branch.
+	// ─────────────────────────────────────────────────────────────────────
+
+	private static ResourceDictionary CreateBranchedPrimaryOverride(Color light, Color dark)
+	{
+		var overrideDict = new ResourceDictionary();
+		var lightBranch = new ResourceDictionary();
+		lightBranch["PrimaryColor"] = light;
+		var darkBranch = new ResourceDictionary();
+		darkBranch["PrimaryColor"] = dark;
+		overrideDict.ThemeDictionaries["Light"] = lightBranch;
+		// "Dark" — the branch key consumers use (see ColorPaletteOverride.xaml
+		// in the sample heads) — must be honored alongside "Default".
+		overrideDict.ThemeDictionaries["Dark"] = darkBranch;
+		return overrideDict;
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_PrimaryColorOverridden_AccentCascadeFollows()
+	{
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors
+		{
+			OverrideDictionary = CreateBranchedPrimaryOverride(OverrideBlue, OverrideGreen),
+		};
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var expected = IsAmbientDark ? OverrideGreen : OverrideBlue;
+
+		Assert.AreEqual(expected, GetColor(container.Resources, "SystemAccentColor"),
+			"a PrimaryColor override must drive SystemAccentColor with the branch's value verbatim");
+
+		Assert.IsTrue(
+			container.Resources.TryGetValue("AccentFillColorDefaultBrush", out var fillValue)
+				&& fillValue is SolidColorBrush,
+			"AccentFillColorDefaultBrush should resolve under an overridden FluentTheme");
+		Assert.AreEqual(expected, ((SolidColorBrush)fillValue).Color,
+			"the accent fill must carry the override value verbatim (not a derived tone)");
+
+		// Forward/reverse agreement (§9.3) holds under overrides too.
+		Assert.AreEqual(expected, GetColor(container.Resources, "PrimaryColor"),
+			"the semantic PrimaryColor and the override-driven accent must agree");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_PrimaryColorOverridden_RenderedAccentButtonFollows()
+	{
+		// Flat (theme-invariant) override: both branches carry the same value,
+		// so the expectation is deterministic regardless of the ambient theme.
+		var overrideDict = new ResourceDictionary();
+		overrideDict["PrimaryColor"] = OverrideBlue;
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var button = new Button
+			{
+				Content = "overridden",
+				Style = (Style)Application.Current.Resources["AccentButtonStyle"],
+			};
+			var host = new Grid();
+			host.Children.Add(button);
+
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var background = button.Background as SolidColorBrush;
+			Assert.IsNotNull(background, "the accent button should have a SolidColorBrush background");
+			Assert.AreEqual(OverrideBlue, background.Color,
+				"the built-in accent button must render with the overridden PrimaryColor (G5 parity with Material/Simple)");
+		}
+		finally
+		{
+			appDictionaries.Remove(theme);
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SeedAndPrimaryColorOverrideBothSet_OverrideDrivesAccent()
+	{
+		var overrideDict = new ResourceDictionary();
+		overrideDict["PrimaryColor"] = OverrideBlue;
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors
+		{
+			PrimarySeed = SeedRed,
+			OverrideDictionary = overrideDict,
+		};
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(OverrideBlue, GetColor(container.Resources, "SystemAccentColor"),
+			"an explicit PrimaryColor override must drive the accent, taking precedence over the seed");
+
+		Assert.IsTrue(
+			container.Resources.TryGetValue("AccentFillColorDefaultBrush", out var fillValue)
+				&& fillValue is SolidColorBrush,
+			"AccentFillColorDefaultBrush should resolve under an overridden FluentTheme");
+		Assert.AreEqual(OverrideBlue, ((SolidColorBrush)fillValue).Color,
+			"the accent fill must carry the override, not the seed's branch-mapped tone");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_ExplicitAccentShadeOverridden_ExplicitWins()
+	{
+		// The consumer override has the highest precedence for EVERY key it
+		// defines — including the accent-family keys the reverse mapping would
+		// otherwise derive (Given_ColorOverridePrecedence contract).
+		var overrideDict = new ResourceDictionary();
+		overrideDict["SystemAccentColorLight2"] = OverrideGreen;
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors
+		{
+			PrimarySeed = SeedRed,
+			OverrideDictionary = overrideDict,
+		};
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(OverrideGreen, GetColor(container.Resources, "SystemAccentColorLight2"),
+			"an explicit accent-shade override must win over the seed-derived shade");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_PrimaryColorOverriddenViaDeprecatedDictionary_AccentFollows()
+	{
+		var overrideDict = new ResourceDictionary();
+		overrideDict["PrimaryColor"] = OverrideBlue;
+
+		var theme = new FluentTheme();
+#pragma warning disable CS0618 // Testing the deprecated BaseTheme channel
+		theme.ColorOverrideDictionary = overrideDict;
+#pragma warning restore CS0618
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(OverrideBlue, GetColor(container.Resources, "SystemAccentColor"),
+			"the obsolete ColorOverrideDictionary channel must drive the accent cascade like Colors.OverrideDictionary");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_PrimaryColorOverriddenViaDeprecatedSource_AccentFollows()
+	{
+		var theme = new FluentTheme();
+#pragma warning disable CS0618 // Testing the deprecated BaseTheme channel
+		theme.ColorOverrideSource = ConsumerOverrideSource;
+#pragma warning restore CS0618
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var expected = IsAmbientDark ? OverrideGreen : OverrideBlue;
+
+		Assert.AreEqual(expected, GetColor(container.Resources, "PrimaryColor"),
+			"the obsolete ColorOverrideSource channel must reach the semantic palette under FluentTheme");
+		Assert.AreEqual(expected, GetColor(container.Resources, "SystemAccentColor"),
+			"the obsolete ColorOverrideSource channel must drive the accent cascade (branch-correct, incl. the 'Dark' key)");
 	}
 }
