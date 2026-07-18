@@ -1,0 +1,13 @@
+<Project>
+
+	<!--
+		Intentionally empty. Shields the AppHost from the repo-root Directory.Build.targets,
+		which sets NuGet package metadata and, via Directory.UnoMetadata.targets, runs an
+		AfterTargets="Build" network download of the Uno package icon on every build. That is
+		packaging machinery for the shipped libraries and is irrelevant to this non-packable
+		dev-tooling executable — inheriting it would add a per-build network call and pollute
+		obj/. See the sibling Directory.Build.props for the full rationale on not inheriting the
+		root build files.
+	-->
+
+</Project>

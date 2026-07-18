@@ -4,6 +4,18 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Launching a sample head via `dotnet run` requires `-p:TargetFrameworkOverride=<platform>`, not just `-f`
+
+**Context:** Spec 05 (Aspire AppHost, `dev/sb/aspire`). The AppHost launches sample heads as `dotnet run --project <sample>.csproj -f net10.0-desktop`. That failed with `NETSDK1147: the following workloads must be installed: wasm-tools-net9 / android` — even for a *desktop* run.
+
+**Root cause:** The sample csprojs and the library projects they reference (`Uno.Simple.WinUI`, `Uno.Themes.WinUI`, …) are multi-targeted. `-f net10.0-desktop` selects the TFM for the sample's own *run*, but it does **not** cascade to restrict the referenced projects' TFM set — `dotnet run` implicitly builds the whole graph, so MSBuild still evaluates `net9.0-ios` / `net9.0-android` / `net10.0-android` on the dependencies and demands their workloads. The repo's single-platform switch is `TargetFrameworkOverride`: each sample csproj (and `src/library/tfm-common-winui.props`) only collapses to one platform's TFM when `TargetFrameworkOverride` is set (see the `Condition="'$(TargetFrameworkOverride)'!=''"` block in every sample csproj). AGENTS.md §4 documents `dotnet build … -p:TargetFrameworkOverride=desktop` for exactly this reason.
+
+**How to apply:**
+- Any tooling that shells out to `dotnet build`/`run` on a sample (or on `Uno.Themes.sln`) for a single platform **must** pass `-p:TargetFrameworkOverride=<platform>` (`desktop`, `browserwasm`, `android`, `ios`, …). `-f` alone is insufficient and will demand every platform's workload.
+- Passing it as a **command-line** `-p:` property is also a robustness win: a command-line global property wins over the in-project reassignment done by a developer's `crosstargeting_override.props`, so the tool builds the platform it intends regardless of the dev's local override file. The AppHost resources rely on this.
+
+---
+
 ## Typography slot→weight font mappings must be duplicated in Fonts.xaml (not only Typography.xaml)
 
 **Context:** PR #1680 (`dev/sb/themes-revert`) — reworking `BaseTheme` resource management. CI runtime tests failed with 5 `Given_Fonts` cases: Bold display slots (`DisplayLargeFontFamily`, `DisplayMediumFontFamily`) resolved to `Inter-Regular` instead of `Inter-Bold`, and SemiBold slots (`HeadlineMediumFontFamily`, `TitleMediumFontFamily`, `LabelLargeFontFamily`) resolved to `Inter-Regular`/`Inter-Medium` instead of `Inter-SemiBold`.

@@ -27,6 +27,7 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
   - `src/samples/MaterialSampleApp/` — Material sample head.
   - `src/samples/CupertinoSampleApp/` — Cupertino sample head.
   - `src/samples/SimpleSampleApp/` — Simple sample head; **also hosts the runtime tests** under `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs` (e.g. `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`).
+- `src/AppHost/Uno.Themes.AppHost/` — **dev-only** .NET Aspire orchestrator that launches the sample heads (Material/Cupertino/Simple × desktop/WASM), the Simple Android dev loop, and the runtime-test runner from one dashboard (`dotnet run --project src/AppHost/Uno.Themes.AppHost`). Not packable, not built by CI, no Docker dependency. It deliberately does not inherit the repo-root `Directory.Build.props`/`.targets` (see the shield files there). See the `uno-themes-apphost` skill and `src/AppHost/README.md`.
 - `doc/` — published documentation (see §13).
 
 There is **no separate runtime-tests project** — runtime tests live inside the sample apps and are driven by `Uno.UI.RuntimeTests.Engine` (`PackageReference Include="Uno.UI.RuntimeTests.Engine"` in each sample csproj).

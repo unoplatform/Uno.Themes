@@ -80,6 +80,12 @@ The Material and Cupertino sample heads also build and run interactively, but th
 
 ---
 
+## Run the tests — from the Aspire AppHost (`simple-runtime-tests`)
+
+The Aspire AppHost (`src/AppHost/Uno.Themes.AppHost`) exposes a `simple-runtime-tests` resource that wraps the same headless flow described above — click Start in the dashboard, watch output stream, and the tile turns red on failure. Set `UNO_RUNTIME_TESTS_RUN_TESTS` (filter), `CONFIG` (Debug/Release), or `UNO_RUNTIME_TESTS_OUTPUT_PATH` in the launching shell or override them on the resource. This is a convenience launcher for local dev; **the CI entry point remains `build/scripts/linux-skia-desktop-runtime-tests.sh`** and this section's headless/CI-parity commands stay authoritative. See the `uno-themes-apphost` skill.
+
+---
+
 ## Filter syntax
 
 `UNO_RUNTIME_TESTS_RUN_TESTS` is JSON. Filter values are **text-contains** matches against the full test name (`Namespace.Class.Method`), composable with these operators:

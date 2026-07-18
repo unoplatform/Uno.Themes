@@ -1,0 +1,25 @@
+<Project>
+
+	<!--
+		Deliberately does NOT import the repo-root Directory.Build.props.
+
+		The Aspire AppHost is a standalone net10.0 dev-tooling executable — it ships in no
+		NuGet package and is not part of the theme libraries. The root Directory.Build.props is
+		written for the packable libraries: it injects a *versionless* DotNet.ReproducibleBuilds
+		PackageReference (whose version is supplied by src/library/Directory.Packages.props via
+		Central Package Management), turns on GeneratePackageOnBuild in Release, remaps obj/bin,
+		and imports the Uno cross-targeting machinery. None of that applies here, and the
+		versionless reference would break `dotnet restore` (NU1604) because nothing under
+		src/AppHost/ provides a Directory.Packages.props.
+
+		Keeping this file minimal and self-contained gives the AppHost a clean, standard-SDK
+		build environment. Aspire package versions are pinned directly in the .csproj (see the
+		note there — the SDK element and the Hosting package must stay in lockstep).
+	-->
+
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+</Project>

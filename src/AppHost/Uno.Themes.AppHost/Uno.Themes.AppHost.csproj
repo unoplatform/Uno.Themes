@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<!--
+		Aspire package versions are pinned here directly (this repo uses Central Package
+		Management only under src/library and src/samples, not for the AppHost — see the
+		sibling Directory.Build.props). When bumping Aspire, update BOTH the SDK element
+		below AND the Aspire.Hosting.AppHost PackageReference — MSBuild project SDKs are not
+		governed by PackageReference versions, so they can drift out of sync silently.
+	-->
+	<Sdk Name="Aspire.AppHost.Sdk" Version="13.2.4" />
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>Uno.Themes.AppHost</RootNamespace>
+		<AssemblyName>Uno.Themes.AppHost</AssemblyName>
+		<IsAspireHost>true</IsAspireHost>
+		<UserSecretsId>uno-themes-apphost-6f3a1c2e-8b47-4d59-a1e2-9c7f0b3d5e84</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.AppHost" Version="13.2.4" />
+		<!-- Direct pin to the patched MessagePack: it arrives transitively via the Aspire host's
+		     StreamJsonRpc dependency at the vulnerable 2.5.192 (NU1903 high / GHSA-hv8m-jj95-wg3x
+		     and friends). A direct reference wins over the transitive one and clears the advisory. -->
+		<PackageReference Include="MessagePack" Version="2.5.301" />
+	</ItemGroup>
+
+</Project>
