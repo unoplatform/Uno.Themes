@@ -53,17 +53,18 @@ We add **one wrapper head, `src/samples/ThemesSampleApp/`**, that hosts all thre
 - [x] All three heads' `App.xaml.cs` `OnLaunched`: `MainWindow = Microsoft.UI.Xaml.Window.Current;` → `MainWindow = new Microsoft.UI.Xaml.Window();` (same pattern as the reference guest `AlcApp/App.cs`; rationale comment left in code).
 - [x] Re-run Phase 1 validation: 3 heads publish clean; Material 35/35, Simple 93/94 (same pre-existing skip, incl. `Given_Fonts`); Cupertino standalone smoke renders identically under the `new Window()` path (screenshot-compared).
 
-### Phase 3 — Wrapper head skeleton
+### Phase 3 — Wrapper head skeleton ✅ 2026-07-18
 
-- [ ] `src/samples/Directory.Packages.props`: add `<PackageVersion Include="Uno.Fonts.Roboto" Version="2.2.2" />` and `<PackageVersion Include="Uno.Fonts.Inter" Version="2.9.0-dev.12" />` (mirror `src/library/Directory.Packages.props:17-18`).
-- [ ] `src/samples/ThemesSampleApp/ThemesSampleApp.csproj`:
+- [x] `src/samples/Directory.Packages.props`: add `<PackageVersion Include="Uno.Fonts.Roboto" Version="2.2.2" />` and `<PackageVersion Include="Uno.Fonts.Inter" Version="2.9.0-dev.12" />` (mirror `src/library/Directory.Packages.props:17-18`).
+- [x] `src/samples/ThemesSampleApp/ThemesSampleApp.csproj`:
   - `Sdk="Uno.Sdk.Private"`, `OutputType=Exe`, `UnoSingleProject=true`, `UnoFeatures>SkiaRenderer;`.
-  - TFMs `net10.0-browserwasm;net10.0-desktop` + the heads' `TargetFrameworkOverride` suffix-expansion block (desktop/browserwasm rows only).
+  - TFMs `net10.0-browserwasm;net10.0-desktop` + the heads' `TargetFrameworkOverride` suffix-expansion block (desktop/browserwasm rows only, plus a `net10.0-desktop` fallback row so an unsupported override — e.g. repo-wide `ios` — never leaves the project TFM-less).
   - `<RootNamespace>Uno.Themes.WrapperApp</RootNamespace>` — samples `Directory.Build.props` otherwise forces the guests' `Uno.Themes.Samples` namespace; wrapper types (incl. its `App`) must not collide with guest type names.
   - PackageReferences: `Uno.Fonts.Roboto`, `Uno.Fonts.Inter` (asset-only, so guest theme fonts resolve; Cupertino uses system fonts). **No** `SamplesApp.Shared` import, theme refs, ShowMeTheXAML, RuntimeTests.Engine, or MSTest.
-- [ ] `App.xaml` (theme-free: `XamlControlsResources` only) + `App.xaml.cs` (`MainWindow = new Window()`, content = `MainPage`, DEBUG logging copied from heads).
-- [ ] `Platforms/Desktop/Program.cs`, `Platforms/WebAssembly/Program.cs` (+ `LinkerConfig.xml`), `Properties/launchSettings.json` — copied from `SimpleSampleApp`, wrapper namespace.
-- [ ] Builds and shows an empty shell on desktop.
+  - **Deviation from original plan (deliberate):** the wrapper also sets `<UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>`. The 6.7 Uno linker substitutions (`LinkerSubstitution.{Skia,Wasm}.xml`, embedded for Release trimming via `Uno.UI.Tasks.targets:280-291`) stub `Application.get_HasSecondaryApps()` to constant `false` when that linker feature is off — which would disable per-ALC resource resolution in a **trimmed WASM Release publish** of the wrapper regardless of the runtime auto-latch; `TrimmerRootAssembly` cannot prevent body substitution. Harmless otherwise (wrapper has no theme XAML).
+- [x] `App.xaml` (theme-free: `XamlControlsResources` only) + `App.xaml.cs` (`MainWindow = new Window()`, content = `MainPage`, DEBUG logging copied from heads, explicit `Window.Title`).
+- [x] `Platforms/Desktop/Program.cs`, `Platforms/WebAssembly/Program.cs` (+ `LinkerConfig.xml`, `manifest.webmanifest`, **`WasmScripts/AppManifest.js`** — required: `Uno.Resizetizer`'s `GenerateWasmSplashAssets` fails with MSB4181 without it), `Properties/launchSettings.json`, `app.manifest` — copied from `SimpleSampleApp`, wrapper namespace.
+- [x] Builds: desktop 0 warnings; browserwasm green with only the same transitive `NU1903` advisories (`System.Security.Cryptography.Xml 10.0.5`) every head's wasm build emits under this .NET SDK. Desktop empty shell renders (screenshot-verified under Xvfb).
 
 ### Phase 4 — Guest hosting (desktop path)
 

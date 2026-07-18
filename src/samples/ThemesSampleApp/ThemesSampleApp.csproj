@@ -1,0 +1,71 @@
+<Project Sdk="Uno.Sdk.Private">
+  <!--
+    Expand platform suffix overrides to versioned TFMs (see crosstargeting_override.props.sample).
+    This wrapper head only supports desktop and browserwasm; other overrides (ios, android, ...)
+    fall back to net10.0-desktop so a repo-wide override never leaves this project without a TFM.
+  -->
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+    <TargetFrameworks Condition="'$(TargetFrameworks)'==''">net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
+    <TargetFrameworks>net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!--
+      Keep wrapper types (including its App) out of the guests' Uno.Themes.Samples namespace:
+      samples Directory.Build.props sets that RootNamespace for every project in this tree, and
+      the guest heads' types must stay distinguishable from the wrapper's at runtime.
+    -->
+    <RootNamespace>Uno.Themes.WrapperApp</RootNamespace>
+
+    <!--
+      Required on the host too, not only on the guests: the Uno linker substitutions stub
+      Application.HasSecondaryApps to constant false in trimmed Release publishes when this
+      feature is off, which would silently disable per-ALC resource isolation in the published
+      WASM wrapper. TrimmerRootAssembly does not prevent body substitution. Harmless otherwise.
+    -->
+    <UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>
+
+    <!-- Display name -->
+    <ApplicationTitle>Uno.Themes.Samples</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>uno.platform.themes.samples</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>Uno Platform</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>Uno.Themes sample-app host: runs the Material, Cupertino and Simple sample apps in-process via secondary AssemblyLoadContexts.</Description>
+
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
+  </PropertyGroup>
+
+  <!--
+    Asset-only font packages so hosted guests' theme fonts resolve from the wrapper's package
+    root (Material uses Roboto, Themes/Simple use Inter, Cupertino uses system fonts). The
+    wrapper deliberately references no theme library and does not import SamplesApp.Shared.
+  -->
+  <ItemGroup>
+    <PackageReference Include="Uno.Fonts.Roboto" />
+    <PackageReference Include="Uno.Fonts.Inter" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UnoIcon Include="../SamplesApp.Shared/Assets/Icons/icon.svg" ForegroundFile="../SamplesApp.Shared/Assets/Icons/icon_foreground.svg" Color="#512BD4" />
+    <UnoSplashScreen Include="../SamplesApp.Shared/Assets/Splash/splash_screen.svg" Color="#512BD4" />
+  </ItemGroup>
+
+</Project>
