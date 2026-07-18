@@ -1,6 +1,6 @@
 # 05 — ThemesSampleApp: ALC wrapper head hosting the theme sample apps
 
-Status: **plan under review** (no implementation started)
+Status: **in progress** — Phase 1 started 2026-07-18 (reference checkouts restored: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0`)
 Branch: `dev/sb/alc-wrapper-app`
 
 ## Context
@@ -40,12 +40,12 @@ We add **one wrapper head, `src/samples/ThemesSampleApp/`**, that hosts all thre
 
 ## Plan
 
-### Phase 1 — SDK bump (gate: validate before any new code)
+### Phase 1 — SDK bump (gate: validate before any new code) ✅ 2026-07-18
 
-- [ ] `global.json` + `src/samples/global.json`: `Uno.Sdk.Private` `6.5.153` → `6.7.0-dev.815` (keep the two files in sync; leave `Uno.Sdk 6.4.53` — the seven shipping library packages are untouched).
-- [ ] Build each head: `dotnet build src/samples/<Head>/<Head>.csproj -f net10.0-desktop` (×3).
-- [ ] Launch one head standalone on desktop; smoke shell navigation + a couple of sample pages.
-- [ ] Runtime tests for **Material** and **Simple** via `build/scripts/linux-skia-desktop-runtime-tests.sh` (CI parity; or the `/uno-themes-runtime-tests` skill) — green.
+- [x] `global.json` + `src/samples/global.json`: `Uno.Sdk.Private` `6.5.153` → `6.7.0-dev.815` (keep the two files in sync; leave `Uno.Sdk 6.4.53` — the seven shipping library packages are untouched).
+- [x] Build each head: `dotnet publish -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop` (×3, CI parity) — green. **Warning parity proven**: warning-set diff vs a `6.5.153` baseline build shows zero new warnings (only delta was pre-existing `BaseTheme.cs` CS0618s that the baseline's incremental build skipped re-emitting).
+- [x] Launch one head standalone on desktop: Cupertino under Xvfb — shell (nav menu, theme toggle) + Overview page with styled sample cards render correctly (screenshot-verified; click-through navigation not exercised headlessly — runtime tests cover resource/style behavior).
+- [x] Runtime tests via `build/scripts/linux-skia-desktop-runtime-tests.sh`: **Material 35/35 passed**, **Simple 93 passed / 1 skipped (pre-existing `[Ignore]` leak-guard in `Given_HotReload.cs`) / 0 failed**. The `Given_Fonts` weight-mapping tests (the `specs/lessons.md` trap) are green under 6.7.
 
 ### Phase 2 — Make the theme heads hostable (still fully standalone)
 
