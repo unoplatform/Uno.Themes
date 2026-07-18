@@ -47,11 +47,11 @@ We add **one wrapper head, `src/samples/ThemesSampleApp/`**, that hosts all thre
 - [x] Launch one head standalone on desktop: Cupertino under Xvfb — shell (nav menu, theme toggle) + Overview page with styled sample cards render correctly (screenshot-verified; click-through navigation not exercised headlessly — runtime tests cover resource/style behavior).
 - [x] Runtime tests via `build/scripts/linux-skia-desktop-runtime-tests.sh`: **Material 35/35 passed**, **Simple 93 passed / 1 skipped (pre-existing `[Ignore]` leak-guard in `Given_HotReload.cs`) / 0 failed**. The `Given_Fonts` weight-mapping tests (the `specs/lessons.md` trap) are green under 6.7.
 
-### Phase 2 — Make the theme heads hostable (still fully standalone)
+### Phase 2 — Make the theme heads hostable (still fully standalone) ✅ 2026-07-18
 
-- [ ] `MaterialSampleApp.csproj`, `CupertinoSampleApp.csproj`, `SimpleSampleApp.csproj`: add `<UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>` to the main `PropertyGroup` (per-head, **not** `Directory.Build.props`, so the wrapper doesn't get guest codegen).
-- [ ] All three heads' `App.xaml.cs` `OnLaunched`: `MainWindow = Microsoft.UI.Xaml.Window.Current;` → `MainWindow = new Microsoft.UI.Xaml.Window();`.
-- [ ] Re-run Phase 1 validation (standalone smoke + runtime tests).
+- [x] `MaterialSampleApp.csproj`, `CupertinoSampleApp.csproj`, `SimpleSampleApp.csproj`: add `<UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>` to the main `PropertyGroup` (per-head, **not** `Directory.Build.props`, so the wrapper doesn't get guest codegen). Verified the property is a `CompilerVisibleProperty` in `Uno.WinUI 6.7.0-dev.815`'s `Uno.UI.SourceGenerators.props`.
+- [x] All three heads' `App.xaml.cs` `OnLaunched`: `MainWindow = Microsoft.UI.Xaml.Window.Current;` → `MainWindow = new Microsoft.UI.Xaml.Window();` (same pattern as the reference guest `AlcApp/App.cs`; rationale comment left in code).
+- [x] Re-run Phase 1 validation: 3 heads publish clean; Material 35/35, Simple 93/94 (same pre-existing skip, incl. `Given_Fonts`); Cupertino standalone smoke renders identically under the `new Window()` path (screenshot-compared).
 
 ### Phase 3 — Wrapper head skeleton
 
