@@ -1,6 +1,6 @@
 # 05 — ThemesSampleApp: ALC wrapper head hosting the theme sample apps
 
-Status: **in progress** — Phase 1 started 2026-07-18 (reference checkouts restored: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0`)
+Status: **complete** — all seven phases delivered 2026-07-18; see Review at the bottom. (Reference checkouts: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0` — gitignored, re-clone if absent.)
 Branch: `dev/sb/alc-wrapper-app`
 
 ## Context
@@ -118,12 +118,12 @@ Implemented as planned (`GuestAppCatalog` / `GuestAssemblyLoadContext` / `GuestA
 - [x] `TrimmerRootAssembly`: `Uno.UI` **+ `Uno` + `Uno.Foundation`** (the loader's reflection targets and guests' shared framework surface live across all three).
 - [x] Verified: browserwasm build green; payload present under `wwwroot/package_<hash>/GuestApps/<App>/` (the package `index.html` references) with gzip precompression; manifest + head dll + theme dll all fetch **HTTP 200** through a static server. CI-parity trimmed publish validated. **In-browser guest boot not verified locally** (no browser available headlessly) — covered by the CI wasm leg artifact + manual verification; the desktop path proves the loader logic itself.
 
-### Phase 7 — Repo wiring
+### Phase 7 — Repo wiring ✅ 2026-07-18
 
-- [ ] `dotnet sln Uno.Themes.sln add src/samples/ThemesSampleApp/ThemesSampleApp.csproj --solution-folder samples` (no `SharedMSBuildProjectFiles` line — no shared-project import).
-- [ ] CI: add matrix leg `{ SampleAppName: ThemesSampleApp, ProjectPath: src/samples/ThemesSampleApp }` to `build/stage-build-desktop.yml` and `build/stage-build-wasm.yml` only. No ios/android legs (no mobile TFMs); `build/stage-runtimetests-desktop.yml` unchanged; `.github/workflows/azure-static-web-apps.yml` (deploys SimpleSampleApp) unchanged — switching the public demo to the wrapper is a follow-up.
-- [ ] `AGENTS.md`: short orientation note about the wrapper head in the samples section.
-- [ ] Conventional commits per group: `chore: bump Uno.Sdk.Private to 6.7.0-dev.815` · `feat(samples): make theme sample heads ALC-hostable` · `feat(samples): add ThemesSampleApp ALC wrapper head` · `ci: build ThemesSampleApp for desktop and wasm`.
+- [x] Added to `Uno.Themes.sln` under the `samples` solution folder, **plus solution-level `ProjectDependencies` on the three heads** so IDE/solution builds order the guests before the wrapper (the csproj P2P only covers override-driven CLI builds).
+- [x] CI: `Themes` matrix leg added to `build/stage-build-desktop.yml` (P2P builds the guests) and `build/stage-build-wasm.yml` (explicit guest-head build step gated by a `BuildGuestHeads` matrix variable, since wasm carries no P2P). No ios/android legs; `build/stage-runtimetests-desktop.yml` unchanged; `azure-static-web-apps.yml` unchanged — switching the public demo to the wrapper is a follow-up.
+- [x] `AGENTS.md`: orientation note in the samples section (wrapper design, no-bleed rule, build-the-heads-first workflow, spec pointer).
+- [x] Conventional commits per group (finer-grained than planned): `chore:` SDK bump · `feat(samples):` heads ALC-hostable · `feat(samples):` wrapper skeleton · `feat(samples):` guest hosting · `feat(samples):` ordering P2P · `feat(samples):` wasm payload · `ci:` + `chore(samples):` wiring.
 
 ---
 
@@ -146,4 +146,20 @@ Implemented as planned (`GuestAppCatalog` / `GuestAssemblyLoadContext` / `GuestA
 
 ## Review
 
-_(to be completed after implementation)_
+**Delivered 2026-07-18** on `dev/sb/alc-wrapper-app`, seven phases, all verification gates run (desktop e2e exercised under Xvfb with synthetic X11 input; wasm verified to CI-parity publish + HTTP payload fetch — in-browser boot is the one item deferred to CI/manual verification since the dev environment has no browser).
+
+**What shipped**
+- `Uno.Sdk.Private 6.7.0-dev.815` across both `global.json`s; heads' standalone behavior proven unchanged (zero new build warnings vs 6.5.153 baseline; Material 35/35 + Simple 93/94 runtime tests at every gate incl. branch tip; Cupertino pixel-compared smoke).
+- Heads made hostable with exactly two accommodations: `UnoEnableAlcAppSupport` (verified in generated code: per-ALC parse-context stamp + scoped `ms-appx` registration) and `new Window()` instead of `Window.Current`.
+- `ThemesSampleApp` wrapper head (desktop+wasm, theme-free, no shared-project import) hosting all three heads in-process: picker UI, InfoBar status/error surfacing, load/switch/unload/reload all verified, friendly errors for missing/stale guest builds.
+- Full ALC reclamation on desktop: 15/15 collected across a 16-cycle soak, managed heap flat (~32 MB), with per-cycle collection telemetry built into the loader.
+
+**Deviations from plan** (each documented in-phase): wrapper also sets `UnoEnableAlcAppSupport` (trimmed-publish linker substitution would hard-code `HasSecondaryApps=false`); `WasmScripts/AppManifest.js` required by Resizetizer; wasm P2P replaced by build-time warning + explicit CI guest builds (StaticWebAssets collision); three reflection-based teardown sweeps compensating Uno 6.7-dev per-ALC cleanup gaps; sln-level ProjectDependencies added.
+
+**Upstream issues to file against unoplatform/uno (6.7-dev ALC support)**
+1. `NameToPropertyDictionary.RemoveNonDefaultAlcEntries` misses cross-ALC entries (default-ALC key type, guest-ALC DP value) — pins guest ALCs via `_getPropertyCache`.
+2. ALC teardown does not prune `SystemNavigationManager` event subscriptions — a guest Shell's `BackRequested` handler roots its whole visual tree.
+3. Guest finalizers during unload re-populate property-system caches after `ExitAlcApplication`'s sweep.
+4. Native X11 window/GL context (+ render threads) leak per ALC-guest window create/close cycle (~12-15 MB native/cycle; managed side fully reclaimed). Reproduces with and without an explicit pre-Exit `Window.Close()`.
+
+**Accepted v1 limitations**: the native leak above (bounded by switch count in a dev tool); guest `Assets/**`/satellites not carried (some guest images may 404 — fonts covered by wrapper font packages); desktop wrapper output not self-contained (probes sibling bins; `GuestApps/` probe is the packaged-layout seam); single guest at a time by design.
