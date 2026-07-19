@@ -66,7 +66,7 @@ We add **one wrapper head, `src/samples/ThemesSampleApp/`**, that hosts all thre
 - [x] `Platforms/Desktop/Program.cs`, `Platforms/WebAssembly/Program.cs` (+ `LinkerConfig.xml`, `manifest.webmanifest`, **`WasmScripts/AppManifest.js`** — required: `Uno.Resizetizer`'s `GenerateWasmSplashAssets` fails with MSB4181 without it), `Properties/launchSettings.json`, `app.manifest` — copied from `SimpleSampleApp`, wrapper namespace.
 - [x] Builds: desktop 0 warnings; browserwasm green with only the same transitive `NU1903` advisories (`System.Security.Cryptography.Xml 10.0.5`) every head's wasm build emits under this .NET SDK. Desktop empty shell renders (screenshot-verified under Xvfb).
 
-### Phase 4 — Guest hosting (desktop path)
+### Phase 4 — Guest hosting (desktop path) ✅ 2026-07-18 (see Findings below)
 
 - [ ] `GuestHosting/GuestAppCatalog.cs`: `record GuestAppInfo(string DisplayName, string ProjectFolderName, string AssemblyName)` + static list (Material / Cupertino / Simple). Catalog-driven assembly names — no runtimeconfig heuristics needed.
 - [ ] `GuestHosting/GuestAssemblyLoadContext.cs` — collectible (`isCollectible: true`, name `GuestALC-<App>-<Guid>`); `Load(AssemblyName)`:
@@ -89,6 +89,21 @@ We add **one wrapper head, `src/samples/ThemesSampleApp/`**, that hosts all thre
   - Repo rules: `async void` only on XAML event handlers with full-body `try/catch`; `EventHandler<TEventArgs>` for any events; nullable-clean; structured logging.
 - [ ] `MainPage.xaml(.cs)`: app-picker buttons from the catalog + `Unload`/`Reload`, `InfoBar` status/error surface, `Border` guest region; create the `AlcContentHost` **once**, set `WindowHelper.ContentHostOverride`, reassert before each load.
 - [ ] Desktop end-to-end passes (see Verification 3–4).
+
+#### Phase 4 findings (deviations + leak investigation)
+
+Implemented as planned (`GuestAppCatalog` / `GuestAssemblyLoadContext` / `GuestAppLoader` / `MainPage` picker), with these deviations and additions, all verified end-to-end under Xvfb (screenshots + heap dumps in session scratchpad):
+
+- **Boot**: `Expression.Lambda<Func<Application>>` factory (non-generic — a `Func<TApp>` shared-generic dictionary entry would pin the collectible ALC), wait for first **non-null** `AlcContentHost.ContentChanged` with a fail-fast race against the run-loop task. `WaitForSecondaryWindowAsync`-style 30 s budget.
+- **Teardown order** (differs from plan): clear content → stop run loop (5 s wait, then `Thread.Interrupt` + 2 s/3 s joins; skip unload if stuck) → `guestApp.Exit()` on host UI thread (no reflection fallback needed — public `Exit()` routes to `ExitAlcApplication` on Skia) → restore `BindableMetadata.Provider` (guests null the process-wide provider; same hygiene as Uno's own runtime tests) → `alc.Unload()` → finalizer drain → **post-unload sweeps** → `GC.Collect`.
+- **ALC reclamation required three wrapper-side mitigations for Uno 6.7-dev sweep gaps** (each found via `dotnet-dump` `gcroot` census, each verified by before/after soak):
+  1. `DependencyProperty._getPropertyCache` memoizes `(targetType, "ns:Owner.Property")` → DP; a guest style targeting an attached property on a framework element caches a **default-ALC key with a guest-ALC value**, which `RemoveNonDefaultAlcEntries` (key-ALC check only) can never remove. Wrapper clears this pure cache via reflection post-unload. **Upstream fix needed** (check value ALC too).
+  2. `SystemNavigationManager._backRequested`/`InternalBackRequested`: the samples' `Shell` subscribes and nothing unsubscribes on ALC teardown (`PruneCollectibleAlcEventSubscriptions` does not cover this singleton), rooting the whole guest visual tree. Wrapper prunes guest-ALC handlers via reflection. **Upstream fix needed.**
+  3. Re-running `Application.CleanupNonDefaultAlcCaches` after finalizers drain (guest `DependencyObject` finalizers can re-populate swept caches during unload).
+- **Loader diagnostics are Release-visible by design** (wrapper logging is not `#if DEBUG` like the heads): teardown branch logging + a `WeakReference` check that logs "Previous guest ALC was fully collected" / "still alive" on each load. The Release/Debug JIT-timing difference masked the leak in Debug builds — only the weak-ref telemetry makes regressions visible.
+- **Verified**: 16-cycle Release soak — previous ALC collected **15/15**, managed heap flat at ~32 MB (`eeheap`).
+- **Known limitation (upstream)**: each guest window create/close leaks its **native** X11 GL context (~12-15 MB native + 7 llvmpipe threads per cycle; llvmpipe group count grows 1:1 with cycles). Reproduces with and without an explicit `Window.Close()` before `Exit()` — the leak is in Uno's ALC guest-window native teardown, not reachable from the wrapper. Managed side is fully reclaimed. **Upstream issue to file.**
+- The stale-guest-build failure mode (`ReflectionTypeLoadException` from mixed-version theme dlls in a head's bin) is wrapped with an actionable "rebuild the head" message.
 
 ### Phase 5 — Build ordering
 

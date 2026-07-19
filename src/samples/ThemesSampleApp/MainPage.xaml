@@ -1,13 +1,50 @@
-<Page x:Class="Uno.Themes.WrapperApp.MainPage"
-	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<Page x:Class="Uno.Themes.WrapperApp.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<Grid>
-		<TextBlock HorizontalAlignment="Center"
-				   VerticalAlignment="Center"
-				   FontSize="18"
-				   Text="ThemesSampleApp — guest app hosting arrives with the app picker" />
-	</Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Padding="12,8"
+                    Spacing="8">
+            <TextBlock Margin="0,0,8,0"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Text="Uno.Themes Samples" />
+
+            <!-- One button per catalog entry, created in code-behind -->
+            <StackPanel x:Name="AppButtonsPanel"
+                        Orientation="Horizontal"
+                        Spacing="8" />
+
+            <Button x:Name="UnloadButton"
+                    Click="OnUnloadClick"
+                    Content="Unload" />
+            <Button x:Name="ReloadButton"
+                    Click="OnReloadClick"
+                    Content="Reload" />
+        </StackPanel>
+
+        <InfoBar x:Name="StatusBar"
+                 Grid.Row="1"
+                 Margin="12,0"
+                 IsClosable="True" />
+
+        <!-- The guest apps' windows are redirected into this region -->
+        <Border x:Name="GuestRegion"
+                Grid.Row="2"
+                Margin="12"
+                BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                BorderThickness="1"
+                CornerRadius="4" />
+    </Grid>
 
 </Page>

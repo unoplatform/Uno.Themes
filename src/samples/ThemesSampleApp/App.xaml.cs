@@ -40,11 +40,12 @@ public sealed partial class App : Application
 	}
 
 	/// <summary>
-	/// Configures global Uno Platform logging.
+	/// Configures global Uno Platform logging. Unlike the sample heads this is not DEBUG-only:
+	/// the wrapper's whole purpose is hosting guest apps, and its hosting diagnostics
+	/// (teardown failures, ALC collection status) must stay visible in Release builds.
 	/// </summary>
 	public static void InitializeLogging()
 	{
-#if DEBUG
 		var factory = LoggerFactory.Create(builder =>
 		{
 #if __WASM__
@@ -57,13 +58,16 @@ public sealed partial class App : Application
 			builder.AddFilter("Uno", LogLevel.Warning);
 			builder.AddFilter("Windows", LogLevel.Warning);
 			builder.AddFilter("Microsoft", LogLevel.Warning);
+
+			// Guest-hosting diagnostics stay at Information even though "Uno" is capped at
+			// Warning above (longest-matching filter prefix wins).
+			builder.AddFilter("Uno.Themes.WrapperApp", LogLevel.Information);
 		});
 
 		global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
 
 #if HAS_UNO
 		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
-#endif
 #endif
 	}
 }
