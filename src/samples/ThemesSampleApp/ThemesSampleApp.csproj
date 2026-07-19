@@ -68,4 +68,22 @@
     <UnoSplashScreen Include="../SamplesApp.Shared/Assets/Splash/splash_screen.svg" Color="#512BD4" />
   </ItemGroup>
 
+  <!--
+    Build ordering only (desktop): the guest heads must be built before the wrapper so their
+    bins exist to host, but nothing of theirs may flow into the wrapper's output (no-bleed:
+    hosting isolation depends on the wrapper not carrying theme assemblies).
+    - Only active when a desktop TargetFrameworkOverride is set (the repo's documented
+      local/CI workflow): without an override, referencing the guests drags their full
+      android/ios restore into any wrapper build, which requires mobile workloads.
+    - Not used for browserwasm: the StaticWebAssets SDK merges referenced projects' web
+      assets regardless of ReferenceOutputAssembly=false, and the heads' identical
+      WasmCSS/Fonts.css collide. The wasm guest payload target warns when guest bins are
+      missing instead, and CI builds the heads before the wrapper's wasm leg.
+  -->
+  <ItemGroup Condition="'$(TargetFrameworkOverride)'!='' and $(TargetFrameworkOverride.Contains('desktop'))">
+    <ProjectReference Include="../MaterialSampleApp/MaterialSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
+    <ProjectReference Include="../CupertinoSampleApp/CupertinoSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
+    <ProjectReference Include="../SimpleSampleApp/SimpleSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
+  </ItemGroup>
+
 </Project>

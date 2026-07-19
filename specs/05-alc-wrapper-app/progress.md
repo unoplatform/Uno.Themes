@@ -105,11 +105,11 @@ Implemented as planned (`GuestAppCatalog` / `GuestAssemblyLoadContext` / `GuestA
 - **Known limitation (upstream)**: each guest window create/close leaks its **native** X11 GL context (~12-15 MB native + 7 llvmpipe threads per cycle; llvmpipe group count grows 1:1 with cycles). Reproduces with and without an explicit `Window.Close()` before `Exit()` — the leak is in Uno's ALC guest-window native teardown, not reachable from the wrapper. Managed side is fully reclaimed. **Upstream issue to file.**
 - The stale-guest-build failure mode (`ReflectionTypeLoadException` from mixed-version theme dlls in a head's bin) is wrapped with an actionable "rebuild the head" message.
 
-### Phase 5 — Build ordering
+### Phase 5 — Build ordering ✅ 2026-07-18 (desktop only — wasm fell back, see below)
 
-- [ ] Wrapper csproj `ProjectReference` to all three heads with `ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)"` — guests build (matching TFM) before the wrapper, nothing flows into the wrapper's output.
-- [ ] Verify a clean-clone `dotnet build ThemesSampleApp.csproj -f net10.0-desktop` builds the guests; assert **no theme dll** (`Uno.Material.WinUI.dll` etc.) lands in the wrapper's `bin` (no-bleed check).
-- [ ] Fallback if Uno.Sdk single-project P2P negotiation misbehaves (dual-TFM builds enter each guest twice; XamlMerge/Resizetizer races possible): drop the `ProjectReference`s, rely on solution/CI build order, document "build guests first" for local use.
+- [x] Wrapper csproj `ProjectReference` to all three heads with `ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)"` — guests build (matching TFM) before the wrapper, nothing flows into the wrapper's output. **Gated on a desktop `TargetFrameworkOverride`**: with no override, referencing the guests drags their full android/ios restore into the wrapper build (NETSDK1147 without mobile workloads) — same constraint as the rest of the repo's local workflow.
+- [x] Clean-wipe `dotnet build ThemesSampleApp.csproj -f net10.0-desktop -p:TargetFrameworkOverride=desktop` builds all three guests via P2P; **no theme/ShowMeTheXAML/MSTest dll** lands in the wrapper's `bin` (no-bleed check green); warning set identical to the heads' own pre-existing warnings.
+- [x] **Fallback exercised for browserwasm**: the StaticWebAssets SDK merges referenced projects' web assets regardless of `ReferenceOutputAssembly=false`, and the heads' identical `WasmCSS/Fonts.css` collide ("Conflicting assets with the same target path"). The wasm leg therefore carries **no** P2P refs — the guest-payload target warns when guest wasm bins are missing, and the CI wasm leg builds the three heads before the wrapper (Phase 7).
 
 ### Phase 6 — WASM
 
