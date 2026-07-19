@@ -114,7 +114,7 @@ internal sealed class GuestAppLoader
 			await RunOnUIThreadAsync(() => WindowHelper.ContentHostOverride = _contentHost).ConfigureAwait(false);
 
 			progress?.Report($"Locating {info.DisplayName} binaries…");
-			var guestDirectory = await Task.Run(() => LocateGuestDirectory(info), cancellationToken).ConfigureAwait(false);
+			var guestDirectory = await LocateGuestDirectoryAsync(info, cancellationToken).ConfigureAwait(false);
 
 			if (_logger.IsEnabled(LogLevel.Information))
 			{
@@ -619,10 +619,65 @@ internal sealed class GuestAppLoader
 	}
 
 #if __WASM__
-	private static string LocateGuestDirectory(GuestAppInfo info) =>
-		// The browser path (fetch manifest + assemblies into MEMFS) lands with the WASM phase.
-		throw new GuestAppLoadException("Guest hosting on WebAssembly is not available yet in this build.");
+	// Payloads fetched once per session are kept in MEMFS and reused on reload.
+	private const string _guestPayloadRoot = "/guest-apps";
+
+	private static async Task<string> LocateGuestDirectoryAsync(GuestAppInfo info, CancellationToken cancellationToken)
+	{
+		var targetDirectory = $"{_guestPayloadRoot}/{info.ProjectFolderName}";
+		if (File.Exists(Path.Combine(targetDirectory, info.AssemblyName + ".dll")))
+		{
+			return targetDirectory;
+		}
+
+		try
+		{
+			var packageBase = $"ms-appx:///GuestApps/{info.ProjectFolderName}";
+			var manifestFile = await global::Windows.Storage.StorageFile
+				.GetFileFromApplicationUriAsync(new Uri($"{packageBase}/manifest.txt"))
+				.AsTask(cancellationToken)
+				.ConfigureAwait(false);
+			var names = await global::Windows.Storage.FileIO.ReadLinesAsync(manifestFile)
+				.AsTask(cancellationToken)
+				.ConfigureAwait(false);
+
+			Directory.CreateDirectory(targetDirectory);
+			foreach (var name in names)
+			{
+				if (string.IsNullOrWhiteSpace(name))
+				{
+					continue;
+				}
+
+				cancellationToken.ThrowIfCancellationRequested();
+				var payload = await global::Windows.Storage.StorageFile
+					.GetFileFromApplicationUriAsync(new Uri($"{packageBase}/{name}.bin"))
+					.AsTask(cancellationToken)
+					.ConfigureAwait(false);
+				var buffer = await global::Windows.Storage.FileIO.ReadBufferAsync(payload)
+					.AsTask(cancellationToken)
+					.ConfigureAwait(false);
+				File.WriteAllBytes(
+					Path.Combine(targetDirectory, name),
+					global::System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeBufferExtensions.ToArray(buffer));
+			}
+		}
+		catch (OperationCanceledException)
+		{
+			throw;
+		}
+		catch (Exception ex)
+		{
+			throw new GuestAppLoadException(
+				$"The {info.DisplayName} guest payload is missing from this build. Build {info.ProjectFolderName} for net10.0-browserwasm before building the wrapper, then rebuild.", ex);
+		}
+
+		return targetDirectory;
+	}
 #else
+	private static Task<string> LocateGuestDirectoryAsync(GuestAppInfo info, CancellationToken cancellationToken) =>
+		Task.Run(() => LocateGuestDirectory(info), cancellationToken);
+
 	// Guests are hosted from their own head's build output; the wrapper stays desktop-TFM-aligned.
 	private const string _guestTargetFramework = "net10.0-desktop";
 
