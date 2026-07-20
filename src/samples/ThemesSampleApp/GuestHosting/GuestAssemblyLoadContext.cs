@@ -17,6 +17,11 @@ namespace Uno.Themes.WrapperApp.GuestHosting;
 /// </remarks>
 internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposable
 {
+	// KEEP IN SYNC with the _GuestWasmExcluded filter in ThemesSampleApp.csproj: every name
+	// excluded from the wasm guest payload MUST be resolvable through these share tiers
+	// (tier 2 against the wrapper's own closure or the shared framework), or wasm guests
+	// fail to bind it at runtime.
+
 	// Assemblies shared with the default ALC when the simple name matches exactly.
 	private static readonly string[] _sharedEquals =
 	[
@@ -33,19 +38,26 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 
 	// Assemblies shared with the default ALC when the simple name starts with the prefix.
 	// "Uno.UI.Runtime." keeps its trailing dot so "Uno.UI.RuntimeTests*" stays per-ALC.
+	// "Microsoft.Win32"/"Microsoft.VisualBasic" are shared-framework facades resolvable from
+	// the default ALC even when the wrapper never loaded them; "Uno.UI.Adapter." ships in the
+	// wrapper's own closure.
 	private static readonly string[] _sharedStartsWith =
 	[
 		"Uno.UI.Runtime.",
 		"Uno.UI.FluentTheme",
+		"Uno.UI.Adapter.",
 		"SkiaSharp",
 		"HarfBuzzSharp",
 		"System",
 		"Microsoft.Extensions.",
+		"Microsoft.Win32",
+		"Microsoft.VisualBasic",
 		"netstandard",
 		"mscorlib",
 	];
 
 	private readonly string _guestDirectory;
+	private Dictionary<string, Assembly>? _defaultAssembliesByName;
 	private volatile bool _disposed;
 
 	/// <summary>
@@ -57,7 +69,12 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 		: base(name: $"GuestALC-{guestAppName}-{Guid.NewGuid():N}", isCollectible: true)
 	{
 		_guestDirectory = guestDirectory;
+		AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoaded;
 	}
+
+	// Any newly loaded assembly (any context) invalidates the tier-1 snapshot below.
+	private void OnAssemblyLoaded(object? sender, AssemblyLoadEventArgs args) =>
+		Volatile.Write(ref _defaultAssembliesByName, null);
 
 	/// <summary>
 	/// Gets the directory the guest's isolated assemblies are loaded from.
@@ -76,12 +93,12 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 		{
 			// Tier 1: anything already loaded in the default ALC is shared by simple name.
 			// Covers the BCL, Microsoft.Extensions.*, and Uno framework assemblies once warm.
-			foreach (var loaded in Default.Assemblies)
+			// Snapshot rebuilt lazily after any assembly load — a per-probe scan would be
+			// O(loaded × binds) with an AssemblyName allocation per step.
+			var defaultAssemblies = Volatile.Read(ref _defaultAssembliesByName) ?? BuildDefaultAssemblyMap();
+			if (defaultAssemblies.TryGetValue(name, out var loaded))
 			{
-				if (string.Equals(loaded.GetName().Name, name, StringComparison.Ordinal))
-				{
-					return loaded;
-				}
+				return loaded;
 			}
 
 			// Tier 2: explicit share list — resolve through the default ALC so host and guest
@@ -121,6 +138,21 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 		return null;
 	}
 
+	private Dictionary<string, Assembly> BuildDefaultAssemblyMap()
+	{
+		var map = new Dictionary<string, Assembly>(StringComparer.Ordinal);
+		foreach (var assembly in Default.Assemblies)
+		{
+			if (assembly.GetName().Name is { } simpleName)
+			{
+				map[simpleName] = assembly;
+			}
+		}
+
+		Volatile.Write(ref _defaultAssembliesByName, map);
+		return map;
+	}
+
 	private static bool ShouldShareWithHost(string simpleName)
 	{
 		foreach (var shared in _sharedEquals)
@@ -153,6 +185,7 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 		}
 
 		_disposed = true;
+		AppDomain.CurrentDomain.AssemblyLoad -= OnAssemblyLoaded;
 		Unload();
 	}
 }

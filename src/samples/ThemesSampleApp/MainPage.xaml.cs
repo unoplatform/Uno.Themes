@@ -57,10 +57,10 @@ public sealed partial class MainPage : Page
 		{
 			if ((sender as FrameworkElement)?.Tag is GuestAppInfo info)
 			{
-				_lastRequestedApp = info;
 				await RunLoaderOperationAsync(
 					$"Loading {info.DisplayName}…",
-					(progress, ct) => _loader.LoadAsync(info, progress, ct));
+					(progress, ct) => _loader.LoadAsync(info, progress, ct),
+					requestedApp: info);
 			}
 		}
 		catch (Exception ex)
@@ -96,7 +96,8 @@ public sealed partial class MainPage : Page
 
 			await RunLoaderOperationAsync(
 				$"Reloading {info.DisplayName}…",
-				(progress, ct) => _loader.LoadAsync(info, progress, ct));
+				(progress, ct) => _loader.LoadAsync(info, progress, ct),
+				requestedApp: info);
 		}
 		catch (Exception ex)
 		{
@@ -104,11 +105,21 @@ public sealed partial class MainPage : Page
 		}
 	}
 
-	private async Task RunLoaderOperationAsync(string initialStatus, Func<IProgress<string>, CancellationToken, Task> operation)
+	private async Task RunLoaderOperationAsync(
+		string initialStatus,
+		Func<IProgress<string>, CancellationToken, Task> operation,
+		GuestAppInfo? requestedApp = null)
 	{
 		if (_operationInProgress)
 		{
 			return;
+		}
+
+		// Only an accepted request becomes the Reload target; a click rejected by the guard
+		// above must not redirect a later Reload.
+		if (requestedApp is not null)
+		{
+			_lastRequestedApp = requestedApp;
 		}
 
 		_operationInProgress = true;

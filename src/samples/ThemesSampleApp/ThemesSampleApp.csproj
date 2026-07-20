@@ -126,24 +126,33 @@
     <Warning Condition="!Exists('%(_GuestWasmApp.BinDir)/%(_GuestWasmApp.Identity).dll')"
              Text="ThemesSampleApp: no WASM binaries found for guest %(_GuestWasmApp.Identity); it will not be hostable in this build. Build it first: dotnet build src/samples/%(_GuestWasmApp.Identity)/%(_GuestWasmApp.Identity).csproj -c $(Configuration) -f net10.0-browserwasm -p:TargetFrameworkOverride=browserwasm" />
 
+    <!--
+      KEEP IN SYNC with the share tiers in GuestHosting/GuestAssemblyLoadContext.cs: every
+      name excluded here MUST be resolvable from the wrapper's default ALC at runtime, or
+      wasm guests fail to bind it (e.g. Uno.UI.Lottie is NOT in the wrapper's closure, so it
+      ships in the payload even though it is Uno.UI-prefixed).
+    -->
     <ItemGroup>
       <_GuestWasmCandidate Include="%(_GuestWasmApp.BinDir)/*.dll" AppName="%(_GuestWasmApp.Identity)" />
       <_GuestWasmExcluded Include="@(_GuestWasmCandidate)"
-                          Condition="$([System.String]::Copy('%(Filename)').StartsWith('Uno.UI'))
+                          Condition="'%(Filename)'=='Uno.UI'
                                      or '%(Filename)'=='Uno'
+                                     or '%(Filename)'=='Uno.UI.Composition'
+                                     or '%(Filename)'=='Uno.UI.Dispatching'
                                      or '%(Filename)'=='Uno.WinUI.Graphics2DSK'
                                      or '%(Filename)'=='Microsoft.CSharp'
+                                     or $([System.String]::Copy('%(Filename)').StartsWith('Uno.UI.Runtime.'))
+                                     or $([System.String]::Copy('%(Filename)').StartsWith('Uno.UI.FluentTheme'))
+                                     or $([System.String]::Copy('%(Filename)').StartsWith('Uno.UI.Adapter.'))
                                      or $([System.String]::Copy('%(Filename)').StartsWith('Uno.Foundation'))
                                      or $([System.String]::Copy('%(Filename)').StartsWith('SkiaSharp'))
                                      or $([System.String]::Copy('%(Filename)').StartsWith('HarfBuzzSharp'))
                                      or $([System.String]::Copy('%(Filename)').StartsWith('System'))
                                      or $([System.String]::Copy('%(Filename)').StartsWith('Microsoft.Extensions.'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Microsoft.UI.'))
                                      or $([System.String]::Copy('%(Filename)').StartsWith('Microsoft.Win32'))
                                      or $([System.String]::Copy('%(Filename)').StartsWith('Microsoft.VisualBasic'))
                                      or '%(Filename)'=='netstandard'
-                                     or '%(Filename)'=='mscorlib'
-                                     or '%(Filename)'=='WindowsBase'" />
+                                     or '%(Filename)'=='mscorlib'" />
       <_GuestWasmCandidate Remove="@(_GuestWasmExcluded)" />
       <!-- Metadata refs stay list-qualified: with an empty candidate list an unqualified
            %(AppName) would batch over the whole Content list and fail (MSB4096). -->

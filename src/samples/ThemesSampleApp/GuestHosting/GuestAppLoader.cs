@@ -28,7 +28,8 @@ internal sealed class GuestAppLoadException : Exception
 /// <summary>
 /// Owns at most one hosted guest app: locates its binaries, boots it in a collectible
 /// AssemblyLoadContext through a second <see cref="UnoPlatformHostBuilder"/>, and tears it
-/// down in the order proven by studio.live (clear content → stop run loop → Exit → unload → GC).
+/// down in the order proven by studio.live (clear content → restore binding provider →
+/// stop run loop → Exit → clear late content → unload → sweep + GC).
 /// </summary>
 internal sealed class GuestAppLoader
 {
@@ -40,9 +41,11 @@ internal sealed class GuestAppLoader
 	// before the dedicated thread is interrupted (desktop only).
 	private static readonly TimeSpan _executionStopTimeout = TimeSpan.FromSeconds(5);
 
+#if !__WASM__
 	// First and second Thread.Join windows around Thread.Interrupt during teardown.
 	private static readonly TimeSpan _threadJoinInitialTimeout = TimeSpan.FromSeconds(2);
 	private static readonly TimeSpan _threadJoinExtendedTimeout = TimeSpan.FromSeconds(3);
+#endif
 
 	// Budget for UI-thread dispatches during teardown (content clear, Application.Exit).
 	private static readonly TimeSpan _uiDispatchTimeout = TimeSpan.FromSeconds(10);
@@ -54,6 +57,11 @@ internal sealed class GuestAppLoader
 	private readonly DispatcherQueue _dispatcherQueue;
 	private readonly SemaphoreSlim _gate = new(1, 1);
 	private Session? _session;
+
+	// Latched when a guest's run loop refused to stop: its code may still execute against the
+	// shared content host, where it could satisfy a later load's content wait or re-project
+	// resources. Hosting anything else in this process would be built on sand.
+	private bool _faulted;
 
 	// The host's original binding-metadata provider: a hosted guest overwrites the process-wide
 	// provider with its own, and ALC teardown then nulls it (it belongs to a dying ALC). Nothing
@@ -105,6 +113,13 @@ internal sealed class GuestAppLoader
 		await _gate.WaitAsync(cancellationToken).ConfigureAwait(false);
 		try
 		{
+			ThrowIfFaulted();
+
+			// Locate before tearing anything down: a click on a guest whose binaries are
+			// missing must not destroy the session that is currently running.
+			progress?.Report($"Locating {info.DisplayName} binaries…");
+			var guestDirectory = await LocateGuestDirectoryAsync(info, cancellationToken).ConfigureAwait(false);
+
 			await UnloadCoreAsync(progress).ConfigureAwait(false);
 
 			cancellationToken.ThrowIfCancellationRequested();
@@ -112,9 +127,6 @@ internal sealed class GuestAppLoader
 			// The override can drift if anything else touched it; the guest's Window ctor
 			// reads it, so it must point at our host before the guest boots.
 			await RunOnUIThreadAsync(() => WindowHelper.ContentHostOverride = _contentHost).ConfigureAwait(false);
-
-			progress?.Report($"Locating {info.DisplayName} binaries…");
-			var guestDirectory = await LocateGuestDirectoryAsync(info, cancellationToken).ConfigureAwait(false);
 
 			if (_logger.IsEnabled(LogLevel.Information))
 			{
@@ -152,7 +164,11 @@ internal sealed class GuestAppLoader
 			}
 			catch
 			{
-				await TeardownCoreAsync(session, progress).ConfigureAwait(false);
+				if (!await TeardownCoreAsync(session, progress).ConfigureAwait(false))
+				{
+					_faulted = true;
+				}
+
 				throw;
 			}
 			finally
@@ -200,7 +216,20 @@ internal sealed class GuestAppLoader
 		}
 
 		_session = null;
-		await TeardownCoreAsync(session, progress).ConfigureAwait(false);
+		if (!await TeardownCoreAsync(session, progress).ConfigureAwait(false))
+		{
+			_faulted = true;
+			throw new GuestAppLoadException(
+				$"{session.Info.DisplayName} did not stop cleanly; its resources stay resident and guest hosting is disabled until the app restarts.");
+		}
+	}
+
+	private void ThrowIfFaulted()
+	{
+		if (_faulted)
+		{
+			throw new GuestAppLoadException("A previous guest did not stop cleanly; restart the app to host guests again.");
+		}
 	}
 
 	private void BootGuest(Session session)
@@ -322,7 +351,7 @@ internal sealed class GuestAppLoader
 			$"{session.Info.DisplayName} did not present content within {_contentReadyTimeout.TotalSeconds:N0}s.");
 	}
 
-	private async Task TeardownCoreAsync(Session session, IProgress<string>? progress)
+	private async Task<bool> TeardownCoreAsync(Session session, IProgress<string>? progress)
 	{
 		progress?.Report($"Stopping {session.Info.DisplayName}…");
 
@@ -333,15 +362,20 @@ internal sealed class GuestAppLoader
 			_logger.LogWarning("Could not clear the guest content region within the teardown budget.");
 		}
 
+		// 2. Put the host's binding-metadata provider back (the guest overwrote the process-wide
+		//    provider and its teardown nulls it; same hygiene as the Uno runtime tests). Done
+		//    before any early-out so a stuck guest can't leave the host on a dying provider.
+		global::Uno.UI.DataBinding.BindableMetadata.Provider = _hostBindableMetadataProvider;
+
 		// 3. Stop the guest's run loop.
 		var stopped = await StopExecutionAsync(session).ConfigureAwait(false);
 		if (!stopped)
 		{
-			// Never unload an ALC whose code may still be running: leak it, surface it, and let
-			// the next load start from a fresh context.
+			// Never unload an ALC whose code may still be running: leak it and surface it —
+			// the caller latches the loader so nothing else is hosted in this process.
 			_logger.LogError("Guest {App} run loop did not stop; skipping ALC unload this cycle.", session.Info.AssemblyName);
 			progress?.Report($"{session.Info.DisplayName} did not stop cleanly; its resources stay resident until the app restarts.");
-			return;
+			return false;
 		}
 
 		// 4. Application.Exit() routes to ExitAlcApplication for ALC-hosted apps: closes ALC
@@ -372,11 +406,31 @@ internal sealed class GuestAppLoader
 			_logger.LogWarning("Guest {App} produced no Application instance; Exit()/cache sweep skipped.", session.Info.AssemblyName);
 		}
 
-		// 5. The guest overwrote the process-wide binding-metadata provider and its teardown
-		//    nulled it; put the host's provider back (same hygiene as the Uno runtime tests).
-		global::Uno.UI.DataBinding.BindableMetadata.Provider = _hostBindableMetadataProvider;
+#if __WASM__
+		// 5. (WASM) The single-threaded run loop can only complete once Exit() has run, so it
+		//    is observed here — a pre-Exit wait would burn its full timeout on every unload.
+		if (session.ExecutionTask is { } executionAfterExit)
+		{
+			await ObserveAsync(executionAfterExit).ConfigureAwait(false);
+		}
+#endif
 
-		// 6. Drop every session reference before unloading so the collectible ALC can go.
+		// 6. A guest that presented content after the load timed out — or a dispatch queued
+		//    behind Exit() — can have re-filled the host region; anything still referencing
+		//    guest types at unload would pin the dying ALC.
+		if (!await RunOnUIThreadAsync(() =>
+			{
+				if (_contentHost.Content is not null)
+				{
+					_logger.LogWarning("Guest {App} content re-appeared during teardown; clearing it before unload.", session.Info.AssemblyName);
+					_contentHost.Content = null;
+				}
+			}).ConfigureAwait(false))
+		{
+			_logger.LogWarning("Could not verify the guest content region was clear before unload.");
+		}
+
+		// 7. Drop every session reference before unloading so the collectible ALC can go.
 		var alc = session.Alc;
 		session.GuestApp = null;
 		session.ExecutionTask = null;
@@ -392,20 +446,30 @@ internal sealed class GuestAppLoader
 		// (Release-before-allocate: WASM memory growth is irreversible.)
 		GC.Collect();
 		GC.WaitForPendingFinalizers();
-		await RunOnUIThreadAsync(SweepNonDefaultAlcCaches).ConfigureAwait(false);
+		if (!await RunOnUIThreadAsync(SweepNonDefaultAlcCaches).ConfigureAwait(false))
+		{
+			_logger.LogWarning("Post-unload ALC cache sweep could not run on the UI thread; guest ALC memory may stay resident until the next guest exits.");
+		}
+
 		GC.Collect();
 
 		if (_logger.IsEnabled(LogLevel.Information))
 		{
 			_logger.LogInformation("Guest {App} torn down; ALC unload initiated.", session.Info.AssemblyName);
 		}
+
+		return true;
 	}
 
+	// The three sweeps below compensate verified Uno 6.7-dev per-ALC cleanup gaps, tracked in
+	// specs/05-alc-wrapper-app/progress.md → Review → "Upstream issues to file"; replace this
+	// pointer with the issue URLs once filed, and delete each sweep when its fix ships.
+	// Internal API by necessity; every step degrades to a logged warning (memory stays
+	// resident until the next guest exits), never an exception.
+
 	// Same sweep ExitAlcApplication runs, needed a second time after guest finalizers finish.
-	// Internal API by necessity; on failure the wrapper degrades to pre-sweep behavior (the
-	// guest ALC's memory stays resident until the next guest exits).
-	private static readonly System.Reflection.MethodInfo? _cleanupNonDefaultAlcCaches =
-		typeof(Application).GetMethod("CleanupNonDefaultAlcCaches", BindingFlags.Static | BindingFlags.NonPublic);
+	private static readonly MethodInfo? _cleanupNonDefaultAlcCaches =
+		SafeGetMethod(typeof(Application), "CleanupNonDefaultAlcCaches", BindingFlags.Static | BindingFlags.NonPublic);
 
 	// DependencyProperty._getPropertyCache memoizes (targetType, "ns:Owner.Property") -> DP
 	// lookups from style/VSM target paths. A guest style targeting an attached property on a
@@ -413,13 +477,42 @@ internal sealed class GuestAppLoader
 	// Uno's per-key ALC sweep can never remove — pinning the whole guest ALC (verified via
 	// heap dump). It is a pure cache over DependencyPropertyRegistry, so clearing it wholesale
 	// is safe; it repopulates on demand.
-	private static readonly System.Reflection.FieldInfo? _getPropertyCacheField =
-		typeof(DependencyProperty).GetField("_getPropertyCache", BindingFlags.Static | BindingFlags.NonPublic);
-	private static readonly System.Reflection.MethodInfo? _getPropertyCacheClear =
-		_getPropertyCacheField?.FieldType.GetMethod("Clear", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+	private static readonly FieldInfo? _getPropertyCacheField =
+		SafeGetField(typeof(DependencyProperty), "_getPropertyCache", BindingFlags.Static | BindingFlags.NonPublic);
+	private static readonly MethodInfo? _getPropertyCacheClear =
+		_getPropertyCacheField is { } cacheField
+			? SafeGetMethod(cacheField.FieldType, "Clear", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+			: null;
+
+	// Lookup failures surface at the sweep call sites (which log); throwing here would turn a
+	// future Uno rename into a TypeInitializationException at app launch.
+	private static MethodInfo? SafeGetMethod(Type type, string name, BindingFlags flags)
+	{
+		try
+		{
+			return type.GetMethod(name, flags);
+		}
+		catch (Exception)
+		{
+			return null;
+		}
+	}
+
+	private static FieldInfo? SafeGetField(Type type, string name, BindingFlags flags)
+	{
+		try
+		{
+			return type.GetField(name, flags);
+		}
+		catch (Exception)
+		{
+			return null;
+		}
+	}
 
 	private void SweepNonDefaultAlcCaches()
 	{
+		// Each mitigation is independent: one failing must not skip the others.
 		try
 		{
 			if (_cleanupNonDefaultAlcCaches is { } cleanup)
@@ -430,7 +523,14 @@ internal sealed class GuestAppLoader
 			{
 				_logger.LogWarning("Application.CleanupNonDefaultAlcCaches was not found; guest ALC memory may stay resident until the next guest exits.");
 			}
+		}
+		catch (Exception ex)
+		{
+			_logger.LogWarning(ex, "Application.CleanupNonDefaultAlcCaches failed; guest ALC memory may stay resident.");
+		}
 
+		try
+		{
 			if (_getPropertyCacheField?.GetValue(null) is { } propertyCache && _getPropertyCacheClear is { } clear)
 			{
 				clear.Invoke(propertyCache, null);
@@ -439,13 +539,13 @@ internal sealed class GuestAppLoader
 			{
 				_logger.LogWarning("DependencyProperty._getPropertyCache was not reachable; cross-ALC cache entries may pin the guest ALC.");
 			}
-
-			PruneGuestNavigationHandlers();
 		}
 		catch (Exception ex)
 		{
-			_logger.LogWarning(ex, "Post-unload ALC cache sweep failed; guest ALC memory may stay resident.");
+			_logger.LogWarning(ex, "Clearing DependencyProperty._getPropertyCache failed; cross-ALC cache entries may pin the guest ALC.");
 		}
+
+		PruneGuestNavigationHandlers();
 	}
 
 	// The samples' Shell subscribes to the process-wide SystemNavigationManager.BackRequested
@@ -459,11 +559,18 @@ internal sealed class GuestAppLoader
 		try
 		{
 			var manager = global::Windows.UI.Core.SystemNavigationManager.GetForCurrentView();
+			var anyFieldFound = false;
 			foreach (var fieldName in _navigationManagerEventFields)
 			{
 				var field = typeof(global::Windows.UI.Core.SystemNavigationManager)
 					.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
-				if (field?.GetValue(manager) is not MulticastDelegate handlers)
+				if (field is null)
+				{
+					continue;
+				}
+
+				anyFieldFound = true;
+				if (field.GetValue(manager) is not MulticastDelegate handlers)
 				{
 					continue;
 				}
@@ -484,6 +591,13 @@ internal sealed class GuestAppLoader
 				{
 					field.SetValue(manager, pruned);
 				}
+			}
+
+			// Mirror the sibling sweeps: a silent no-op after an Uno rename would let the guest
+			// visual tree stay rooted with nothing in the logs to say why.
+			if (!anyFieldFound && _logger.IsEnabled(LogLevel.Warning))
+			{
+				_logger.LogWarning("SystemNavigationManager event fields were not found; guest navigation handlers may keep the guest visual tree rooted.");
 			}
 		}
 		catch (Exception ex)
@@ -510,6 +624,12 @@ internal sealed class GuestAppLoader
 		}
 	}
 
+#if __WASM__
+	// Single-threaded browser: the run loop only completes after Application.Exit(), so there
+	// is no pre-Exit wait (it would burn its full timeout on every unload) and no thread to
+	// interrupt. TeardownCoreAsync observes the loop right after Exit() instead.
+	private Task<bool> StopExecutionAsync(Session session) => Task.FromResult(true);
+#else
 	private async Task<bool> StopExecutionAsync(Session session)
 	{
 		if (session.ExecutionTask is not { } execution)
@@ -517,13 +637,6 @@ internal sealed class GuestAppLoader
 			return true;
 		}
 
-#if __WASM__
-		// Single-threaded browser: the run loop only completes after Application.Exit(), so
-		// there is no pre-Exit wait nor a thread to interrupt. Residual WASM roots after unload
-		// are a known, functionally harmless limitation.
-		await ObserveAsync(execution).ConfigureAwait(false);
-		return true;
-#else
 		var finished = await Task.WhenAny(execution, Task.Delay(_executionStopTimeout)).ConfigureAwait(false) == execution;
 
 		var thread = session.ExecutionThread;
@@ -546,8 +659,8 @@ internal sealed class GuestAppLoader
 
 		await ObserveAsync(execution).ConfigureAwait(false);
 		return true;
-#endif
 	}
+#endif
 
 	private async Task ObserveAsync(Task execution)
 	{
@@ -569,9 +682,18 @@ internal sealed class GuestAppLoader
 
 	private async Task<bool> RunOnUIThreadAsync(Action action)
 	{
+		var abandoned = false;
 		var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
 		var enqueued = _dispatcherQueue.TryEnqueue(() =>
 		{
+			// A dispatch that outlived its timeout must not run late against state teardown
+			// has already moved past (e.g. an Exit() landing on an unloading ALC).
+			if (Volatile.Read(ref abandoned))
+			{
+				completion.TrySetResult();
+				return;
+			}
+
 			try
 			{
 				action();
@@ -591,6 +713,9 @@ internal sealed class GuestAppLoader
 		var completed = await Task.WhenAny(completion.Task, Task.Delay(_uiDispatchTimeout)).ConfigureAwait(false);
 		if (completed != completion.Task)
 		{
+			Volatile.Write(ref abandoned, true);
+			// A fault that raced the flag must not surface as an unobserved task exception.
+			_ = completion.Task.ContinueWith(static t => _ = t.Exception, TaskContinuationOptions.OnlyOnFaulted);
 			return false;
 		}
 
@@ -619,8 +744,10 @@ internal sealed class GuestAppLoader
 	}
 
 #if __WASM__
-	// Payloads fetched once per session are kept in MEMFS and reused on reload.
-	private const string _guestPayloadRoot = "/guest-apps";
+	// Payloads fetched once per session are kept in MEMFS and reused on reload. Downloads land
+	// in a .partial sibling that is renamed into place only when complete, so a mid-fetch
+	// failure can never leave a directory that passes the cache probe.
+	private const string _guestPayloadRoot = "/GuestApps";
 
 	private static async Task<string> LocateGuestDirectoryAsync(GuestAppInfo info, CancellationToken cancellationToken)
 	{
@@ -630,6 +757,7 @@ internal sealed class GuestAppLoader
 			return targetDirectory;
 		}
 
+		var partialDirectory = targetDirectory + ".partial";
 		try
 		{
 			var packageBase = $"ms-appx:///GuestApps/{info.ProjectFolderName}";
@@ -641,12 +769,24 @@ internal sealed class GuestAppLoader
 				.AsTask(cancellationToken)
 				.ConfigureAwait(false);
 
-			Directory.CreateDirectory(targetDirectory);
+			if (Directory.Exists(partialDirectory))
+			{
+				Directory.Delete(partialDirectory, recursive: true);
+			}
+
+			Directory.CreateDirectory(partialDirectory);
 			foreach (var name in names)
 			{
 				if (string.IsNullOrWhiteSpace(name))
 				{
 					continue;
+				}
+
+				// Manifest lines are build-generated file names; a separator would escape the
+				// payload directory.
+				if (name.IndexOfAny(['/', '\\']) >= 0 || name.Contains(".."))
+				{
+					throw new GuestAppLoadException($"The {info.DisplayName} guest manifest contains an invalid entry.");
 				}
 
 				cancellationToken.ThrowIfCancellationRequested();
@@ -657,22 +797,49 @@ internal sealed class GuestAppLoader
 				var buffer = await global::Windows.Storage.FileIO.ReadBufferAsync(payload)
 					.AsTask(cancellationToken)
 					.ConfigureAwait(false);
-				File.WriteAllBytes(
-					Path.Combine(targetDirectory, name),
-					global::System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeBufferExtensions.ToArray(buffer));
+
+				// Stream the IBuffer out instead of materializing a second byte[] copy: peak
+				// managed footprint permanently raises HEAPU8's high-water mark in the browser.
+				using var source = global::System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeBufferExtensions.AsStream(buffer);
+				using var destination = File.Create(Path.Combine(partialDirectory, name));
+				await source.CopyToAsync(destination, cancellationToken).ConfigureAwait(false);
 			}
+
+			Directory.Move(partialDirectory, targetDirectory);
 		}
 		catch (OperationCanceledException)
 		{
+			TryDeleteDirectory(partialDirectory);
+			throw;
+		}
+		catch (GuestAppLoadException)
+		{
+			TryDeleteDirectory(partialDirectory);
 			throw;
 		}
 		catch (Exception ex)
 		{
+			TryDeleteDirectory(partialDirectory);
 			throw new GuestAppLoadException(
 				$"The {info.DisplayName} guest payload is missing from this build. Build {info.ProjectFolderName} for net10.0-browserwasm before building the wrapper, then rebuild.", ex);
 		}
 
 		return targetDirectory;
+	}
+
+	private static void TryDeleteDirectory(string directory)
+	{
+		try
+		{
+			if (Directory.Exists(directory))
+			{
+				Directory.Delete(directory, recursive: true);
+			}
+		}
+		catch (IOException)
+		{
+			// Best effort: the .partial suffix alone keeps leftovers out of the cache probe.
+		}
 	}
 #else
 	private static Task<string> LocateGuestDirectoryAsync(GuestAppInfo info, CancellationToken cancellationToken) =>
@@ -693,7 +860,11 @@ internal sealed class GuestAppLoader
 		}
 
 		// 2. Developer layout: sibling head outputs under src/samples/<Head>/bin/<Config>/<tfm>/.
-		if (FindAncestorDirectory(baseDirectory, "samples") is { } samplesDirectory)
+		//    Anchored on the shared sample project: this probe executes whatever it finds, so a
+		//    directory merely named "samples" (a relocated wrapper under some other tree) must
+		//    not be trusted.
+		if (FindAncestorDirectory(baseDirectory, "samples") is { } samplesDirectory
+			&& Directory.Exists(Path.Combine(samplesDirectory, "SamplesApp.Shared")))
 		{
 			var configurations = new List<string>(3);
 			if (GetOwnConfiguration(baseDirectory) is { } ownConfiguration)
