@@ -94,8 +94,6 @@ Depending on the type of project template that the Uno Platform application was 
 2. Select the following projects for installation:
     - `PROJECT_NAME.Wasm.csproj`
     - `PROJECT_NAME.Mobile.csproj` (or `PROJECT_NAME.iOS.csproj`, `PROJECT_NAME.Droid.csproj`, and `PROJECT_NAME.macOS.csproj` if you have an existing project)
-    - `PROJECT_NAME.Skia.Gtk.csproj`
-    - `PROJECT_NAME.Skia.WPF.csproj`
     - `PROJECT_NAME.Windows.csproj` (or `PROJECT_NAME.UWP.csproj` for existing projects)
 3. Add the following resources inside `App.xaml`:
 
