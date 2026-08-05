@@ -7,6 +7,102 @@ uid: Uno.Themes.Material.Migration
 > [!IMPORTANT]
 > UnoFeatures: **Material** — add `<UnoFeatures>Material</UnoFeatures>` to your app's `.csproj` to include Uno Material resources.
 
+## Upgrading to Uno Themes v7
+
+Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic Design Language, design tokens, and opt-in seed color generation. Visual defaults are unchanged — no semantic color or brush resource key was renamed or removed, and seed generation is off unless you enable it — so most apps upgrade without code changes. The sections below cover the changes that may require action.
+
+### What's new in v7
+
+- **Simple theme**: new `Uno.Simple.WinUI` and `Uno.Simple.WinUI.Markup` packages providing a minimal, density-driven design system. See [Simple - Getting Started](simple-getting-started.md).
+- **Semantic Design Language**: design-system-agnostic style aliases (`FilledButtonStyle`, `OutlinedTextBoxStyle`, …) shared by Material and Simple, so apps can switch design systems without changing style keys. See [Semantic Design Language](semantic-styles.md).
+- **Design tokens**: spacing (`Space*`), shape (`Radius*`), and density (`ControlHeight*`, `IconSize*`) tokens, driven globally by the new `DefaultDensity` and `DefaultCornerRadius` theme properties. See [Design Tokens](design-tokens.md).
+- **Seed color generation** (opt-in): generate a full palette from one or more seed colors via the new `Colors` property (`ThemeColors`) and `SemanticThemeHelper`. See [Seed Color Palette](seed-colors.md).
+- **Control extensions**: new `ControlExtensions.LeadingIcon` and `ControlExtensions.TrailingIcon` attached properties; `ControlExtensions.Icon` keeps working and now forwards its value to `LeadingIcon`. See [Control Extensions](themes-control-extensions.md).
+- **XAML Hot Reload**: theme resources now participate in Hot Reload.
+
+Cupertino styles are unchanged in v7.
+
+### Packages and dependencies
+
+Uno Themes 7.0 requires Uno.WinUI 6.4.229 or later. If your app uses the Uno SDK with `UnoFeatures` (for example `<UnoFeatures>Material</UnoFeatures>`), package versions are managed automatically and no action is needed; apps pinning package versions manually should update `Uno.WinUI` accordingly.
+
+The packages no longer include macOS and Mac Catalyst (`net9.0-macos` / `net9.0-maccatalyst`) binaries. Move these heads to the Skia Desktop target (`net9.0-desktop`) instead.
+
+### BaseTheme API changes
+
+This only affects code that subclasses `BaseTheme` to build a custom design system — apps consuming `MaterialTheme`, `CupertinoTheme`, or `SimpleTheme` from XAML are unaffected. `GenerateSpecificResources()` has been removed: provide the static styles URI through the new `DefaultStylesSource` property, and append dynamic resource dictionaries with `AddThemeDictionary()` from an `AddThemeSpecificResources()` override.
+
+### `ColorOverrideSource` and `ColorOverrideDictionary` deprecated
+
+Color configuration is now grouped on the new `Colors` property, a `ThemeColors` object that also hosts the seed color properties. The legacy properties are deprecated but still work — they write through to the corresponding `Colors` members internally:
+
+| Deprecated member                    | Replacement                                  |
+| ------------------------------------ | -------------------------------------------- |
+| `BaseTheme.ColorOverrideSource`      | `OverrideSource` on `Colors` (`ThemeColors`) |
+| `BaseTheme.ColorOverrideDictionary`  | `OverrideDictionary` on `Colors` (`ThemeColors`) |
+
+Before:
+
+```xml
+<MaterialTheme xmlns="using:Uno.Material"
+               ColorOverrideSource="ms-appx:///Styles/ColorPaletteOverride.xaml" />
+```
+
+After:
+
+```xml
+<MaterialTheme xmlns="using:Uno.Material">
+    <MaterialTheme.Colors>
+        <ut:ThemeColors xmlns:ut="using:Uno.Themes"
+                        OverrideSource="ms-appx:///Styles/ColorPaletteOverride.xaml" />
+    </MaterialTheme.Colors>
+</MaterialTheme>
+```
+
+`FontOverrideSource` and `FontOverrideDictionary` are not deprecated and keep working unchanged.
+
+> [!IMPORTANT]
+> Seed generation is opt-in and no theme sets a default seed, so an upgraded app renders with exactly the same colors as 6.1, and explicit color overrides keep winning over everything else — including seed-generated palettes. For the full precedence order, see [Color Precedence](seed-colors.md#color-precedence).
+
+### Typography and font overrides
+
+Existing Material font overrides (`MaterialRegularFontFamily` / `MaterialMediumFontFamily`) continue to work. For overrides meant to apply across design systems, prefer the new root typeface tokens, which cascade through the whole type scale — see [Typography](semantic-styles.md#typography):
+
+| Legacy key (Material-specific) | Portable token  | Cascades to                 |
+| ------------------------------ | --------------- | --------------------------- |
+| `MaterialRegularFontFamily`    | `TypefacePlain` | Display, Headline           |
+| `MaterialMediumFontFamily`     | `TypefaceBrand` | Title, Label, Body, Caption |
+
+### Material style changes
+
+#### Native mobile styles removed
+
+On iOS and Android, the Material v1 `ToggleSwitch` styles and `MaterialCommandBarStyle` no longer render the native platform controls — they now use the same XAML templates as all other platforms, which are close to, but not pixel-identical to, the native look. The `NativeCommandBarTemplate` resource key has been removed.
+
+#### `AppBarButton` layout and text wrapping
+
+The Material `AppBarButton` content now stretches horizontally and its label wraps by default (long labels previously stayed on a single centered line), and the ripple effect now honors the control's `CornerRadius`. To restore the previous single-line behavior, override the new `AppBarButtonTextWrapping` resource via [Lightweight Styling](lightweight-styling.md):
+
+```xml
+<TextWrapping x:Key="AppBarButtonTextWrapping">NoWrap</TextWrapping>
+```
+
+#### Sizing resources are now design-token aliases
+
+Material v2 sizing, spacing, and corner-radius resources are no longer hard-coded literals — they alias the new global design tokens. All values are numerically identical to 6.1 at the default settings, and per-key [Lightweight Styling](lightweight-styling.md) overrides keep working. Representative examples:
+
+| Resource Key         | 6.1 value | Now aliases                   | Default value |
+| -------------------- | --------- | ----------------------------- | ------------- |
+| `ButtonMinHeight`    | `40`      | `ControlHeightMedium`         | `40`          |
+| `ButtonPadding`      | `16,0`    | `Space400HorizontalThickness` | `16,0`        |
+| `ButtonCornerRadius` | `20`      | `Radius500CornerRadius`       | `20`          |
+
+Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultDensity` (`Compact` / `Regular` / `Comfy`) and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
+
+### `StringFormatConverter` is now culture-aware
+
+`StringFormatConverter` now formats using the binding's `ConverterLanguage` (a BCP-47 tag), falling back to `CultureInfo.CurrentCulture` — previously it used the invariant culture. Culture-sensitive formats such as `{0:d}` now render localized; set `ConverterLanguage` on the binding to pin a specific culture.
+
 ## Upgrading to Uno Themes v5
 
 The Uno Material v5 packages introduce a new dependency on the [Uno Themes](https://www.nuget.org/packages/Uno.Themes.WinUI) package. Uno Themes is the base library for all design system implementations going forward. As a result, the following changes have been made:
