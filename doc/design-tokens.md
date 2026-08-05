@@ -1,3 +1,7 @@
+---
+uid: Uno.Themes.DesignTokens
+---
+
 # Design Tokens & Override Surface
 
 Uno.Themes exposes a set of **shared design tokens** — semantic XAML resources for typography, spacing, shape (corner radius), and density (control height / icon size). These tokens are consumed by all control templates, so overriding a single token key globally affects every control that references it.
