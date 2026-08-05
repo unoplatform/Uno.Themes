@@ -59,8 +59,7 @@ After:
 </MaterialTheme>
 ```
 
-> [!NOTE]
-> `FontOverrideSource` and `FontOverrideDictionary` are not deprecated and keep working unchanged.
+`FontOverrideSource` and `FontOverrideDictionary` are not deprecated and keep working unchanged.
 
 > [!IMPORTANT]
 > Seed generation is opt-in and no theme sets a default seed, so an upgraded app renders with exactly the same colors as 6.1, and explicit color overrides keep winning over everything else — including seed-generated palettes. For the full precedence order, see [Color Precedence](seed-colors.md#color-precedence).
@@ -78,7 +77,7 @@ Existing Material font overrides (`MaterialRegularFontFamily` / `MaterialMediumF
 
 #### Native mobile styles removed
 
-On iOS and Android, the Material v1 `ToggleSwitch` styles and `MaterialCommandBarStyle` no longer render the native platform controls — they now use the same XAML templates as all other platforms, which are close to, but not pixel-identical with, the native look. The `NativeCommandBarTemplate` resource key has been removed.
+On iOS and Android, the Material v1 `ToggleSwitch` styles and `MaterialCommandBarStyle` no longer render the native platform controls — they now use the same XAML templates as all other platforms, which are close to, but not pixel-identical to, the native look. The `NativeCommandBarTemplate` resource key has been removed.
 
 #### `AppBarButton` layout and text wrapping
 
