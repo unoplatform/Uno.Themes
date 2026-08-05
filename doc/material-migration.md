@@ -26,44 +26,11 @@ Cupertino styles are unchanged in v7.
 
 Uno Themes 7.0 requires Uno.WinUI 6.4.229 or later. If your app uses the Uno SDK with `UnoFeatures` (for example `<UnoFeatures>Material</UnoFeatures>`), package versions are managed automatically and no action is needed; apps pinning package versions manually should update `Uno.WinUI` accordingly.
 
-#### macOS and Mac Catalyst targets removed
-
-The 6.1 packages shipped `net9.0-macos` and `net9.0-maccatalyst` binaries; 7.0 does not. Apps with macOS or Mac Catalyst heads will now resolve the plain `net9.0` assets. Move these heads to the Skia Desktop target (`net9.0-desktop`) instead.
+The packages no longer include macOS and Mac Catalyst (`net9.0-macos` / `net9.0-maccatalyst`) binaries. Move these heads to the Skia Desktop target (`net9.0-desktop`) instead.
 
 ### BaseTheme API changes
 
-> [!IMPORTANT]
-> This section only affects code that subclasses `BaseTheme` to build a custom design system (for example, toolkit themes). Apps consuming `MaterialTheme`, `CupertinoTheme`, or `SimpleTheme` from XAML are not affected.
-
-`GenerateSpecificResources()` has been removed. Static control styles are now loaded once from the URI provided by `DefaultStylesSource`, and dynamic resource layers are appended via `AddThemeDictionary` inside `AddThemeSpecificResources()`, which is called at the end of every rebuild pass (theme property change or Hot Reload).
-
-Before:
-
-```csharp
-protected override ResourceDictionary GenerateSpecificResources()
-{
-    return new ResourceDictionary
-    {
-        Source = new Uri("ms-appx:///MyTheme/Generated/mergedpages.xaml")
-    };
-}
-```
-
-After:
-
-```csharp
-protected override string DefaultStylesSource =>
-    "ms-appx:///MyTheme/Generated/mergedpages.xaml";
-
-protected override void AddThemeSpecificResources()
-{
-    base.AddThemeSpecificResources();
-
-    // Only dictionaries that must shadow the static base layer belong here,
-    // e.g. a consumer-supplied font override.
-    AddThemeDictionary(myOverrides);
-}
-```
+This only affects code that subclasses `BaseTheme` to build a custom design system — apps consuming `MaterialTheme`, `CupertinoTheme`, or `SimpleTheme` from XAML are unaffected. `GenerateSpecificResources()` has been removed: provide the static styles URI through the new `DefaultStylesSource` property, and append dynamic resource dictionaries with `AddThemeDictionary()` from an `AddThemeSpecificResources()` override.
 
 ### `ColorOverrideSource` and `ColorOverrideDictionary` deprecated
 
@@ -93,7 +60,7 @@ After:
 ```
 
 > [!NOTE]
-> `FontOverrideSource` and `FontOverrideDictionary` are not deprecated and keep working unchanged. Avoid mixing the legacy color properties with `Colors` on the same theme instance — they share the same underlying override slots and the last one set wins.
+> `FontOverrideSource` and `FontOverrideDictionary` are not deprecated and keep working unchanged.
 
 > [!IMPORTANT]
 > Seed generation is opt-in and no theme sets a default seed, so an upgraded app renders with exactly the same colors as 6.1, and explicit color overrides keep winning over everything else — including seed-generated palettes. For the full precedence order, see [Color Precedence](seed-colors.md#color-precedence).
@@ -111,16 +78,7 @@ Existing Material font overrides (`MaterialRegularFontFamily` / `MaterialMediumF
 
 #### Native mobile styles removed
 
-The Material v1 styles no longer template to native platform controls on iOS and Android:
-
-- `MaterialToggleSwitchStyle` and `MaterialSecondaryToggleSwitchStyle` (v1) previously rendered the native platform switch on iOS and Android; they now use the same XAML template on all platforms.
-- `MaterialCommandBarStyle` (v1) no longer templates to the native navigation bar on iOS and Android; command bars now render the XAML template on all platforms.
-
-| Removed Resource Key     |
-| ------------------------ |
-| NativeCommandBarTemplate |
-
-The XAML templates replace the native controls; their appearance and behavior are close to, but not pixel-identical with, the removed native representations.
+On iOS and Android, the Material v1 `ToggleSwitch` styles and `MaterialCommandBarStyle` no longer render the native platform controls — they now use the same XAML templates as all other platforms, which are close to, but not pixel-identical with, the native look. The `NativeCommandBarTemplate` resource key has been removed.
 
 #### `AppBarButton` layout and text wrapping
 
