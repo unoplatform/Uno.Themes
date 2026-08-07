@@ -1,0 +1,78 @@
+<Project Sdk="Uno.Sdk.Private">
+  <!--
+    Shared runtime-tests library. Each sample app (Simple / Material / Cupertino)
+    ProjectReferences this assembly so Uno.UI.RuntimeTests.Engine discovers its
+    test classes at launch. Design-system libraries are referenced here so tests
+    can exercise any theme without pulling test infrastructure into the samples.
+
+    TFMs mirror the sample apps (net10.0-*). Design-system libraries remain net9.0
+    and are consumed via normal framework fallback.
+  -->
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'!=''">
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('ios'))">$(TargetFrameworks);net10.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('android'))">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('browserwasm'))">$(TargetFrameworks);net10.0-browserwasm</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFrameworkOverride.Contains('desktop'))">$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFrameworkOverride)'==''">
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-browserwasm;net10.0-desktop</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <UnoSingleProject>true</UnoSingleProject>
+    <OutputType>Library</OutputType>
+    <!-- Ensures .xr.xml files are generated in a proper layout folder (matches the Uno runtime-tests library pattern). -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <!-- RuntimeTests.Engine still references the legacy DOM-based WebAssembly runtime; bypass the SDK check. -->
+    <UnoDisableValidateNoUnoWasmDOMRuntimeDependency>true</UnoDisableValidateNoUnoWasmDOMRuntimeDependency>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      PrivateAssets="all" so Engine sources (this is a source-only package) compile
+      into THIS assembly only and do NOT flow to ProjectReference consumers. Sample
+      apps reference this assembly directly (no Engine PackageReference of their own)
+      so UnitTestsControl & friends exist in exactly one place — preventing the
+      BindableTypeProvidersSourceGenerator from emitting duplicate switch cases for
+      the same type (CS0152).
+    -->
+    <PackageReference Include="Uno.UI.RuntimeTests.Engine" PrivateAssets="all" />
+    <!--
+      Required for hot-reload tests ([RunsInSecondaryApp]) — enables HAS_UNO_DEVSERVER
+      in Uno.UI.RuntimeTests.Engine. Debug-only: in Release the DevServer assembly is
+      not published and would otherwise cause a FileNotFoundException at app startup.
+
+      VersionOverride is required because Uno.Sdk.Private (6.5.153) ships
+      Uno.WinUI.DevServer 6.5.153 as an implicit package, which is incompatible with
+      the HR baseline-emit protocol expected by Uno.UI.RuntimeTests.Engine 2.0.0-dev.79
+      (manifests as "Found 0 metadata updates" on every edit). 6.5.229 is the latest
+      6.5 stable and matches the Engine's expected protocol surface; CentralPackage
+      pinning alone cannot override an implicit Sdk package, so VersionOverride is
+      needed here.
+    -->
+    <PackageReference Include="Uno.WinUI.DevServer" VersionOverride="6.5.229" PrivateAssets="all" Condition="'$(Configuration)' == 'Debug'" />
+    <PackageReference Include="MSTest.TestFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Engine sources (UnitTestsControl, UnitTestsUIContentHelper, etc.) are compiled
+      into this assembly. Their `internal` members (e.g. UnitTestsUIContentHelper.Content
+      setter) are needed by app-local tests living in *SampleApp/RuntimeTests/. Expose
+      them through [InternalsVisibleTo].
+    -->
+    <InternalsVisibleTo Include="SimpleSampleApp" />
+    <InternalsVisibleTo Include="MaterialSampleApp" />
+    <InternalsVisibleTo Include="CupertinoSampleApp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../library/Uno.Themes/Uno.Themes.WinUI.csproj" />
+    <ProjectReference Include="../../library/Uno.Simple.WinUI/Uno.Simple.WinUI.csproj" />
+    <ProjectReference Include="../../library/Uno.Material/Uno.Material.WinUI.csproj" />
+    <ProjectReference Include="../../library/Uno.Cupertino/Uno.Cupertino.WinUI.csproj" />
+  </ItemGroup>
+</Project>

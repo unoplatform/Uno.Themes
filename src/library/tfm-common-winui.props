@@ -18,4 +18,71 @@
 		<TargetFrameworks Condition="'$(Build_Android)'=='true'">$(TargetFrameworks);net9.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="'$(Build_Windows)'=='true'">$(TargetFrameworks);net9.0-windows10.0.19041</TargetFrameworks>
 	</PropertyGroup>
+
+	<!-- ============================================================================================
+	     Hot Reload — lib <-> head TFM alignment (Debug only).
+	     ============================================================================================
+	     Why we add net10.0-desktop HERE, and only in Debug:
+
+	     The sample apps (SimpleSampleApp / MaterialSampleApp / CupertinoSampleApp and the
+	     Uno.Themes.Samples.RuntimeTests lib) target `net10.0-desktop`. To service hot
+	     reload, the dev-server (Uno.UI.RemoteControl.Server.Processors,
+	     ServerHotReloadProcessor.CreateCompilation) loads a Roslyn workspace and
+	     propagates `TargetFrameworks=net10.0-desktop` as a GLOBAL MSBuild property to
+	     every transitive ProjectReference — including these libs which, in production,
+	     only ship `net9.0` (and `net9.0-*` per platform).
+
+	     If the lib does not expose `net10.0-desktop` in its TFMs, MSBuildWorkspace still
+	     evaluates the lib but finds no matching `bin/.../net10.0-desktop/` output.
+	     Roslyn logs `Emitting update of <Project>: project not built` on the EnC side,
+	     the baseline is not recorded, the IL delta never gets applied, and the HR test
+	     gets past the MSBuild cascade but silently fails the assertion (the method body
+	     stays on the original literal). This is exactly the behaviour observed in CI run
+	     `runId=3706004`.
+
+	     Reference — Uno.Extensions has an identical HR setup on the test side, but ALL
+	     of its projects (libs + tests + sample apps) target `net9.0-*`. So when the
+	     dev-server propagates `net9.0-desktop`, the libs already support that TFM and HR
+	     works without any workaround. See `artifacts/uno.extensions/src/tfms-ui-winui.props`.
+
+	     To keep the samples on `net10.0-desktop` (aligned with the other mobile/wasm/
+	     release pipelines that are already on net10.0) without breaking HR, we widen
+	     the lib's TFMs HERE to include `net10.0-desktop` ONLY in Debug. Concretely:
+	       - Release: the lib ships `net9.0` (+ flavors), NuGet packages untouched.
+	       - Debug: the lib exposes `net9.0` (+ flavors) AND `net10.0-desktop` → when the
+	         dev-server propagates `TargetFrameworks=net10.0-desktop`, the lib has a
+	         valid output to point at, EnC records a baseline, the IL delta lands, and
+	         the HR assertion observes the new value.
+
+	     Why only `net10.0-desktop` (not mobile/wasm):
+	       The HR runtime tests only run on desktop (Linux/Windows headless). No need to
+	       widen to the other flavors and pay the compilation cost.
+
+	     We deliberately do NOT use `TreatAsLocalProperty` here: under MSBuildWorkspace
+	     (the dev-server's project loader), `TreatAsLocalProperty="TargetFrameworks"`
+	     makes the lib re-expand to its full multi-TFM set even when the dev-server
+	     pinned a single TFM globally. The workspace then evaluates the same csproj
+	     once per TFM and emits `Found project with the same file path and output path
+	     as another project` warnings — Roslyn ends up with a confused project graph
+	     and `WatchHotReloadService.EmitSolutionUpdateAsync` returns 0 deltas. Letting
+	     the dev-server's global `TargetFrameworks=net10.0-desktop` win means each lib
+	     evaluates as a single TFM in the workspace, which is what EnC needs.
+
+	     This approach replaces the previous "UnoIsHotReloadHost → net9.0" override which
+	     tried to FORCE the lib onto net9.0 against the net10.0 dev-server (the
+	     CS0234/CS0246/UXAML0001 cascade documented in
+	     specs/037-hotreload-local-repro/progress.md). It is simpler, more local, and
+	     does not require an upstream patch to `Uno.UI.RemoteControl`.
+	     ============================================================================================ -->
+	<!--
+	     Per-project opt-out: `_UnoOptOutHotReloadTfmExpansion=true` lets a lib NOT
+	     receive the net10.0-desktop expansion. Useful for libs that don't need to be
+	     HR-tested (so the lib's code is never mutated by the test) and where adding
+	     net10.0-desktop would trigger side-effects (e.g. `Microsoft.NET.Sdk` not
+	     recognising the `desktop` TPI, or an implicit-package mismatch between
+	     Uno.Sdk and Uno.Sdk.Private). See Uno.Simple.WinUI.
+	-->
+	<PropertyGroup Condition="'$(Configuration)'=='Debug' and '$(_UnoOptOutHotReloadTfmExpansion)'!='true'">
+		<TargetFrameworks>$(TargetFrameworks);net10.0-desktop</TargetFrameworks>
+	</PropertyGroup>
 </Project>
