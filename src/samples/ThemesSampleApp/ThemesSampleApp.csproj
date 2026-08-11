@@ -32,6 +32,16 @@
     -->
     <UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>
 
+    <!--
+      Keep the Uno SDK's Debug-only Hot Design tooling out of this host: Uno.UI.HotDesign
+      depends on the *published* Uno.Themes.WinUI package, which would land in this bin and
+      get eagerly loaded into the default ALC by the dev-server client — violating the
+      no-bleed rule above and (before GuestAssemblyLoadContext grew its isolation list)
+      binding repo-built guests against a mismatched theme base library. Release builds never
+      carry Hot Design (IncludeAssets=None when optimized), so this only affects Debug runs.
+    -->
+    <UnoDisableHotDesign>true</UnoDisableHotDesign>
+
     <!-- Display name -->
     <ApplicationTitle>Uno.Themes.Samples</ApplicationTitle>
     <!-- App Identifier -->

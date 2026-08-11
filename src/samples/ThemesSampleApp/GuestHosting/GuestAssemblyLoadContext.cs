@@ -22,6 +22,20 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 	// (tier 2 against the wrapper's own closure or the shared framework), or wasm guests
 	// fail to bind it at runtime.
 
+	// Repo-built theme libraries must always load per-ALC from the guest directory, even when
+	// the host already has a same-named assembly loaded: the Uno SDK's Debug-only Hot Design
+	// tooling (Uno.UI.HotDesign) depends on the *published* Uno.Themes.WinUI package, and the
+	// dev-server client eagerly loads it into the default ALC at startup. Sharing that copy
+	// would bind a repo-built guest against a mismatched theme base library (TypeLoadException
+	// at guest boot). StartsWith so the *.Markup satellites stay isolated too.
+	private static readonly string[] _isolatedStartsWith =
+	[
+		"Uno.Themes.WinUI",
+		"Uno.Material.WinUI",
+		"Uno.Cupertino.WinUI",
+		"Uno.Simple.WinUI",
+	];
+
 	// Assemblies shared with the default ALC when the simple name matches exactly.
 	private static readonly string[] _sharedEquals =
 	[
@@ -91,27 +105,32 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 
 		try
 		{
-			// Tier 1: anything already loaded in the default ALC is shared by simple name.
-			// Covers the BCL, Microsoft.Extensions.*, and Uno framework assemblies once warm.
-			// Snapshot rebuilt lazily after any assembly load — a per-probe scan would be
-			// O(loaded × binds) with an AssemblyName allocation per step.
-			var defaultAssemblies = Volatile.Read(ref _defaultAssembliesByName) ?? BuildDefaultAssemblyMap();
-			if (defaultAssemblies.TryGetValue(name, out var loaded))
+			// The theme libraries under test never resolve through the share tiers (see
+			// _isolatedStartsWith): the guest directory below is their only valid source.
+			if (!IsIsolatedFromHost(name))
 			{
-				return loaded;
-			}
-
-			// Tier 2: explicit share list — resolve through the default ALC so host and guest
-			// agree on type identity. Fall through on failure (e.g. the wrapper doesn't carry it).
-			if (ShouldShareWithHost(name))
-			{
-				try
+				// Tier 1: anything already loaded in the default ALC is shared by simple name.
+				// Covers the BCL, Microsoft.Extensions.*, and Uno framework assemblies once warm.
+				// Snapshot rebuilt lazily after any assembly load — a per-probe scan would be
+				// O(loaded × binds) with an AssemblyName allocation per step.
+				var defaultAssemblies = Volatile.Read(ref _defaultAssembliesByName) ?? BuildDefaultAssemblyMap();
+				if (defaultAssemblies.TryGetValue(name, out var loaded))
 				{
-					return Default.LoadFromAssemblyName(assemblyName);
+					return loaded;
 				}
-				catch (Exception ex) when (ex is FileNotFoundException or FileLoadException or BadImageFormatException)
+
+				// Tier 2: explicit share list — resolve through the default ALC so host and guest
+				// agree on type identity. Fall through on failure (e.g. the wrapper doesn't carry it).
+				if (ShouldShareWithHost(name))
 				{
-					// Not available host-side; the guest directory may still satisfy it below.
+					try
+					{
+						return Default.LoadFromAssemblyName(assemblyName);
+					}
+					catch (Exception ex) when (ex is FileNotFoundException or FileLoadException or BadImageFormatException)
+					{
+						// Not available host-side; the guest directory may still satisfy it below.
+					}
 				}
 			}
 
@@ -151,6 +170,19 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 
 		Volatile.Write(ref _defaultAssembliesByName, map);
 		return map;
+	}
+
+	private static bool IsIsolatedFromHost(string simpleName)
+	{
+		foreach (var prefix in _isolatedStartsWith)
+		{
+			if (simpleName.StartsWith(prefix, StringComparison.Ordinal))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static bool ShouldShareWithHost(string simpleName)
