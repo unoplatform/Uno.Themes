@@ -74,6 +74,8 @@ uid: Uno.Themes.Material.Styles
 | `TextBlock`               | `CaptionSmall`                  |                  |
 | `TextBox`                 | `FilledTextBoxStyle`            |                  |
 | `TextBox`                 | `OutlinedTextBoxStyle`          | True             |
+| `TimePicker`              | `TimePickerStyle`               | True             |
+| `TimePickerFlyoutPresenter` | `TimePickerFlyoutPresenterStyle` | True          |
 | `ToggleButton`            | `TextToggleButtonStyle`         |                  |
 | `ToggleButton`            | `IconToggleButtonStyle`         | True             |
 | `ToggleSwitch`            | `ToggleSwitchStyle`             | True             |

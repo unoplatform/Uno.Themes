@@ -173,6 +173,13 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 |---|---|---|---|
 | `DatePickerStyle` | `MaterialDatePickerStyle` | `SimpleDatePickerStyle` | Direct match |
 
+### TimePicker
+
+| Semantic Key | Material | Simple | Notes |
+|---|---|---|---|
+| `TimePickerStyle` | `MaterialTimePickerStyle` | `SimpleTimePickerStyle` | Direct match |
+| `TimePickerFlyoutPresenterStyle` | `MaterialTimePickerFlyoutPresenterStyle` | `SimpleTimePickerFlyoutPresenterStyle` | Direct match |
+
 ### MediaPlayerElement
 
 | Semantic Key | Material | Simple | Notes |

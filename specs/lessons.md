@@ -70,6 +70,31 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## XamlStyler reformats whole files to spaces — re-tabify, and never run it repo-wide for a small change
+
+**Context:** TimePicker style work. Running the documented command (`dotnet dnx XamlStyler.Console -c Settings.XamlStyler -f <files>`) on three XAML files reindented every line with **4 spaces**, turning a 2-line change to `Uno.Simple.WinUI/Styles/Controls/DatePicker.xaml` into a 992-line diff.
+
+**Root cause:** `Settings.XamlStyler` at the repo root does not set `IndentWithTabs`, so XamlStyler defaults to spaces — but `.editorconfig` and every checked-in `.xaml` use **tabs**. The formatter and the repo convention disagree.
+
+**How to apply:**
+- After running XamlStyler on any file, re-tabify before committing: `sed -E -i ':a; s/^(\t*)    /\1\t/; ta' <file>`, then confirm with `grep -nE '^\t* {2,}<' <file>` (must be empty).
+- Never run it with `-r -d "."` to tidy a handful of files — it rewrites the whole tree.
+- If a tracked file gets mangled, `git checkout -- <file>` and re-apply the real edit rather than trying to hand-fix the reformat.
+- Root fix, if approved: add `"IndentWithTabs": true` to `Settings.XamlStyler` so the documented command matches `.editorconfig`.
+
+---
+
+## A theme brush that equals the surface it sits on is invisible — assert contrast, not resolution
+
+**Context:** The Simple `TimePicker`/`DatePicker` flyout selection band used `PrimaryVariantLightBrush`, which is `#F5F5F5` in Light but **`#1E1E1E` in Dark — exactly `SurfaceColor`**. The selected row was completely invisible in Dark; every existing test passed because they only asserted that the key *resolved*.
+
+**How to apply:**
+- For any brush painted directly on another themed brush (selection bands, highlights, dividers, scrims), add a runtime assertion that the two resolve to **different colors**, not merely that both resolve.
+- When picking a highlight in the Simple palette, prefer `SurfaceVariantBrush` (`#F5F5F5` Light / `#2C2C2C` Dark) over any `Primary*` key — Simple's primary collapses onto the surface in one theme by design (it is a grayscale palette).
+- Gotcha when writing such tests: `container.Resources["Key"]` resolves `ThemeDictionaries` against the **application** theme and ignores `RequestedTheme` on the container, so `[DataRow(ElementTheme.Light)]` on a dictionary-indexer lookup does **not** test the Light palette. Only values resolved through an applied template honor the element theme.
+
+---
+
 ## An app that loads assemblies by reflection cannot be trimmed — ILLink strips facade type-forwarders, and rooting is a treadmill
 
 **Context:** ThemesSampleApp ALC wrapper (spec 05). In the browser, every guest died at `Assembly.GetTypes()` with `TypeLoadException: Could not resolve type with token 010003c9 from typeref (expected class 'System.IO.StringWriter' in assembly 'System.Runtime')`. An earlier investigation had noted that pre-loading `System.Runtime` merely advanced the failure to the next typeref (`System.IAsyncDisposable`) and concluded "rooting types one at a time is a treadmill" without identifying why.
