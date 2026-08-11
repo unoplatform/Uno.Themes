@@ -55,8 +55,22 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerButtonBottomBorderHeight`                   | `Double`          | 2                               |
 | `DatePickerButtonContentHeight`                        | `Double`          | 24                              |
 | `DatePickerButtonHeaderMargin`                         | `Thickness`       | 10,8,10,0                       |
-| `DatePickerButtonPlaceholderMargin`                    | `Thickness`       | 4,0,0,0                         |
+| `DatePickerHeaderFloatTranslateY`                      | `Double`          | `-11`                           |
+| `DatePickerHeaderFloatScale`                           | `Double`          | `0.7`                           |
+| `DatePickerButtonPlaceholderMargin`                    | `Thickness`       | 10,0,10,0                         |
 | `DatePickerButtonContentMargin`                        | `Thickness`       | 6,24,10,0                       |
 | `DatePickerHostPadding`                                | `Thickness`       | 24,24,8,8                       |
 | `DatePickerFlyoutButtonPadding`                        | `Thickness`       | 0                               |
 | `DatePickerCornerRadius`                               | `CornerRadius`    | 4,4,0,0                         |
+
+> [!NOTE]
+> The field sizes to content and is left-aligned, like the Fluent `DatePicker`, with
+> `DatePickerFlyoutPresenterMinWidth` as its floor. This also governs the flyout: `DatePickerFlyout` sizes the
+> presenter to the target's `ActualWidth` on opening, so a stretched field produces a stretched flyout. Set
+> `HorizontalAlignment="Stretch"` on the control to fill its container instead.
+
+> [!NOTE]
+> `Header` is a floating label, as in the Material `TextBox`: it rests at the value's position and reads as the
+> placeholder while no date is set, then animates up and shrinks once one is picked. It is the only element
+> rendering the header — there is no separate header-bound placeholder. Tune the motion with
+> `DatePickerHeaderFloatTranslateY` / `DatePickerHeaderFloatScale`.

@@ -35,7 +35,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerFlyoutPresenterBackground`               | `SolidColorBrush` | `SurfaceBrush`                  |
 | `DatePickerFlyoutPresenterBorderBrush`              | `SolidColorBrush` | `OutlineBrush`                  |
 | `DatePickerFlyoutPresenterSpacerFill`               | `SolidColorBrush` | `OutlineBrush`                  |
-| `DatePickerFlyoutPresenterHighlightFill`            | `SolidColorBrush` | `PrimaryVariantLightBrush`      |
+| `DatePickerFlyoutPresenterHighlightFill`            | `SolidColorBrush` | `SurfaceVariantBrush`           |
 | `DatePickerFlyoutPresenterCornerRadius`             | `StaticResource`  | `SimpleRadius400CornerRadius`   |
 | `DatePickerFlyoutPresenterWidth`                    | `Double`          | 296                             |
 | `DatePickerFlyoutPresenterMinWidth`                 | `Double`          | 296                             |
@@ -107,3 +107,15 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `SimpleDatePickerCornerRadius`                      | `StaticResource` | `DatePickerCornerRadius`                 |
 | `SimpleDatePickerBorderThemeThickness`              | `StaticResource` | `DatePickerBorderThemeThickness`         |
 | `SimpleDatePickerFlyoutButtonPadding`               | `StaticResource` | `DatePickerFlyoutButtonPadding`          |
+
+> [!NOTE]
+> The field sizes to content and is left-aligned, like the Fluent `DatePicker`, with
+> `DatePickerFlyoutPresenterMinWidth` as its floor. This also governs the flyout: `DatePickerFlyout` sizes the
+> presenter to the target's `ActualWidth` on opening, so a stretched field produces a stretched flyout. Set
+> `HorizontalAlignment="Stretch"` on the control to fill its container instead.
+
+> [!NOTE]
+> `Header` renders **only** as the in-field placeholder, the way the Simple `TextBox` shows `PlaceholderText` —
+> there is no separate header line above the field. `DatePickerHeaderForeground` therefore applies to the value,
+> and `DatePickerPlaceholderTextForeground` to the header while no date is set. `DatePickerHeaderMargin` is kept
+> for back-compat but is no longer used by the default template.
