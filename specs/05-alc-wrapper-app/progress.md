@@ -2,7 +2,8 @@
 
 Status: **desktop complete, WASM broken** — seven phases delivered 2026-07-18, but the deferred in-browser
 verification was run on 2026-08-10 and guest boot fails in the browser (Phase 6 correction). Desktop hosting
-is unaffected. See Review at the bottom. (Reference checkouts: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0` — gitignored, re-clone if absent.)
+works; a Debug-only guest-boot regression caused by the SDK's Hot Design tooling was found and fixed
+2026-08-10 (see Desktop correction after Phase 6). See Review at the bottom. (Reference checkouts: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0` — gitignored, re-clone if absent.)
 Branch: `dev/sb/alc-wrapper-app`
 
 ## Context
@@ -144,6 +145,40 @@ resolves framework assemblies off disk. Any future WASM claim needs an actual bo
 
 This is the same gap as the still-open follow-up "add a scripted desktop hosting smoke to CI (the legs only
 build/publish today)" — the wasm leg likewise only builds and publishes.
+
+#### Desktop correction (2026-08-10) — Hot Design's theme dependency broke Debug guest boot (fixed)
+
+A fresh Debug desktop run (`--app=material`) crashed the whole wrapper with an unhandled
+`TypeLoadException` on the guest UI thread: *"Method 'GenerateSpecificResources' in type
+'Uno.Material.MaterialTheme' … does not have an implementation"* — the repo-built
+`Uno.Material.WinUI` had been paired with a **wrong-version `Uno.Themes.WinUI`**.
+
+- **Chain**: the Uno SDK's Debug-only Hot Design tooling (`Uno.UI.HotDesign 1.18.66`, pinned in
+  `Uno.Sdk.Private 6.7.0-dev.815`, referenced for every `Exe` unless `UnoDisableHotDesign`)
+  depends on the **published `Uno.Themes.WinUI 6.1.1`** (+ `CommunityToolkit.Mvvm`), which lands
+  in the wrapper's Debug bin — silently breaking the Phase 5 no-bleed invariant. The dev-server
+  client eagerly loads the whole Hot Design suite *and its theme dependency* into the default ALC
+  at startup, even headless with no IDE attached (verified via `/proc/<pid>/maps`). The loader's
+  tier 1 ("already loaded in default ALC → share by simple name") then handed 6.1.1 to the guest;
+  6.1.1's theme base class still declares abstract `GenerateSpecificResources`, which no longer
+  exists in the repo's source. Release builds are immune (`IncludeAssets=None` when `Optimize=true`)
+  — which is why the July verification (Release soaks/e2e) never hit it.
+- **Fix 1 (structural)**: `GuestAssemblyLoadContext` gained an `_isolatedStartsWith` list
+  (`Uno.Themes.WinUI` / `Uno.Material.WinUI` / `Uno.Cupertino.WinUI` / `Uno.Simple.WinUI`, prefix
+  match so `*.Markup` is covered) checked **before** the share tiers: the libraries under test
+  only ever resolve from the guest directory, regardless of what the host happens to have loaded.
+- **Fix 2 (belt-and-braces)**: the wrapper csproj sets `UnoDisableHotDesign=true`, keeping the
+  published theme package (and the rest of the Hot Design suite) out of the host bin entirely and
+  restoring the no-bleed invariant in Debug. Guests keep Hot Design — only the host opts out.
+  (`Uno.Toolkit.WinUI`/`Uno.UI.Toolkit` in guest bins are Hot Design's own dependency at identical
+  versions, not referenced by the heads — sharing those is harmless, so they are not isolated.)
+- **Re-verified** (Debug desktop under WSLg, both before and after Fix 2): `--app=material` boots
+  and renders, picker switch Material → Simple → Material (per-ALC re-registration, correct theme
+  each time), Unload empties the region, no unhandled exceptions. The per-cycle ALC weak-ref
+  telemetry reports "still alive" in these **Debug** runs — consistent with the documented
+  Debug JIT/interpreter root retention; the Release soak result (15/15 collected) stands.
+- **Lesson recorded** in `specs/lessons.md`: "share if already loaded" is version-unsafe for any
+  assembly the guest ships; assemblies under test need deterministic isolation.
 
 ### Phase 7 — Repo wiring ✅ 2026-07-18
 

@@ -4,6 +4,20 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Never share "whatever the host already loaded" with an ALC guest — the Uno SDK's Debug tooling loads the *published* Uno.Themes.WinUI into the host
+
+**Context:** ThemesSampleApp ALC wrapper (spec 05). First Debug desktop run of the wrapper after the July delivery crashed the whole process at guest boot: `TypeLoadException: Method 'GenerateSpecificResources' in type 'Uno.Material.MaterialTheme' … does not have an implementation` — repo-built `Uno.Material.WinUI` paired with a wrong-version `Uno.Themes.WinUI`.
+
+**Root cause chain:** the Uno SDK implicitly references `Uno.UI.HotDesign` for every `Exe` in Debug (`Optimize != true`; opt-out: `UnoDisableHotDesign`), and Hot Design depends on the **published `Uno.Themes.WinUI` NuGet package**, which therefore lands in every Debug app bin — including hosts that deliberately reference no theme library. The dev-server client eagerly loads the Hot Design suite *and its theme dependency* into the default ALC at startup, headless, with no IDE attached (provable via `/proc/<pid>/maps` — package-loaded assemblies are file-mapped). The guest loader's tier 1 ("already loaded in the default ALC → share by simple name") then bound the guest's repo-built theme libraries against the published package version: the stale base class still declared an abstract member the repo has since removed → unhandled `TypeLoadException` on the guest's UI thread → SIGABRT of the host. Release never hits this (`IncludeAssets=None` when optimized), so Release-based soaks and CI stayed green while every Debug/IDE run was broken.
+
+**How to apply:**
+- "Share if already loaded" is inherently **version-unsafe** for any assembly the guest ships: whether the host has a same-named assembly loaded depends on tooling and timing, not on design. Assemblies under test (the repo's own theme libraries) must resolve **deterministically from the guest directory** — `GuestAssemblyLoadContext` now has an `_isolatedStartsWith` list checked before the share tiers. Keep it in sync if the repo grows a new packable library family.
+- A host that must stay theme-free should also set `UnoDisableHotDesign=true` — Hot Design is the one SDK-implicit package that transitively carries a theme library into the bin (no-bleed checks that only run in Release will miss it).
+- When an unexpected assembly appears in a bin, don't assume staleness from file dates (NuGet preserves package timestamps): clean-rebuild, then trace provenance through `obj/project.assets.json` dependency edges.
+- Cross-version `TypeLoadException` at ALC guest boot ("method … does not have an implementation") is the signature of a mixed-version pairing between a guest assembly and a host-shared dependency; check which context supplied the base assembly before suspecting the build.
+
+---
+
 ## Collectible-ALC guests: sweep-proof roots pin the ALC; verify reclamation with weak-ref telemetry, not RSS eyeballing
 
 **Context:** ThemesSampleApp ALC wrapper (spec 05, Uno 6.7-dev). Load/unload soak leaked every guest ALC (~50 MB/cycle RSS growth); Debug builds of the wrapper collected fine, Release never did, with identical teardown logs.
