@@ -49,6 +49,31 @@ public sealed partial class MainPage : Page
 			button.Click += OnGuestAppClick;
 			AppButtonsPanel.Children.Add(button);
 		}
+
+		Loaded += OnFirstLoaded;
+	}
+
+	private async void OnFirstLoaded(object sender, RoutedEventArgs e)
+	{
+		Loaded -= OnFirstLoaded;
+
+		try
+		{
+			// A launch selector (?app=material / --app=material) loads that guest unattended;
+			// without one the picker just waits for a click.
+			if (GuestAppDeepLink.Resolve() is { } info)
+			{
+				await RunLoaderOperationAsync(
+					$"Loading {info.DisplayName}…",
+					(progress, ct) => _loader.LoadAsync(info, progress, ct),
+					requestedApp: info);
+			}
+		}
+		catch (Exception ex)
+		{
+			// async void handler: nothing may escape.
+			ReportUnexpected(ex);
+		}
 	}
 
 	private async void OnGuestAppClick(object sender, RoutedEventArgs e)
