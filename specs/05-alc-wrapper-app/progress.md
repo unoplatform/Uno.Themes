@@ -1,6 +1,8 @@
 # 05 — ThemesSampleApp: ALC wrapper head hosting the theme sample apps
 
-Status: **complete** — all seven phases delivered 2026-07-18; see Review at the bottom. (Reference checkouts: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0` — gitignored, re-clone if absent.)
+Status: **desktop complete, WASM broken** — seven phases delivered 2026-07-18, but the deferred in-browser
+verification was run on 2026-08-10 and guest boot fails in the browser (Phase 6 correction). Desktop hosting
+is unaffected. See Review at the bottom. (Reference checkouts: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0` — gitignored, re-clone if absent.)
 Branch: `dev/sb/alc-wrapper-app`
 
 ## Context
@@ -111,12 +113,37 @@ Implemented as planned (`GuestAppCatalog` / `GuestAssemblyLoadContext` / `GuestA
 - [x] Clean-wipe `dotnet build ThemesSampleApp.csproj -f net10.0-desktop -p:TargetFrameworkOverride=desktop` builds all three guests via P2P; **no theme/ShowMeTheXAML/MSTest dll** lands in the wrapper's `bin` (no-bleed check green); warning set identical to the heads' own pre-existing warnings.
 - [x] **Fallback exercised for browserwasm**: the StaticWebAssets SDK merges referenced projects' web assets regardless of `ReferenceOutputAssembly=false`, and the heads' identical `WasmCSS/Fonts.css` collide ("Conflicting assets with the same target path"). The wasm leg therefore carries **no** P2P refs — the guest-payload target warns when guest wasm bins are missing, and the CI wasm leg builds the three heads before the wrapper (Phase 7).
 
-### Phase 6 — WASM ✅ 2026-07-18 (browser boot verification deferred to CI/user — no browser in the dev environment)
+### Phase 6 — WASM ⚠️ 2026-07-18 — **guest boot is BROKEN in the browser** (see Phase 6 correction below)
 
 - [x] csproj target `_IncludeGuestWasmAssemblies` (browserwasm only; `AfterTargets="ResolveProjectReferences"`, `BeforeTargets="AssignTargetPaths"`): per guest, glob **top-level** `*.dll` from the head's wasm bin (RID dir probed first; actual 6.7 layout has **no** `browser-wasm` RID segment). Exclusions extended beyond plan (`Microsoft.Win32*`, `Microsoft.VisualBasic*` — runtime-pack facades that tier-1 sharing covers), trimming payload from ~44 to 16-17 dlls (~10 MB/guest). `MSTest*`/`Microsoft.VisualStudio.TestPlatform.*` kept. Manifest emitted per app via `WriteLinesToFile` + explicit per-app `Content Link` (`%(RecursiveDir)` capture produced colliding links — Uno.Wasm.Bootstrap "incompatible asset kinds" error). Emits a **build warning** naming the exact command when a guest's wasm bins are missing (replaces the dropped wasm P2P ordering).
 - [x] `GuestAppLoader` browser path: fetch `ms-appx:///GuestApps/<AppName>/manifest.txt` + each `.bin` via `StorageFile.GetFileFromApplicationUriAsync`, write to MEMFS `/guest-apps/<AppName>/`, reuse cached payload on reload; friendly `GuestAppLoadException` when the payload is absent from the build.
 - [x] `TrimmerRootAssembly`: `Uno.UI` **+ `Uno` + `Uno.Foundation`** (the loader's reflection targets and guests' shared framework surface live across all three).
 - [x] Verified: browserwasm build green; payload present under `wwwroot/package_<hash>/GuestApps/<App>/` (the package `index.html` references) with gzip precompression; manifest + head dll + theme dll all fetch **HTTP 200** through a static server. CI-parity trimmed publish validated. **In-browser guest boot not verified locally** (no browser available headlessly) — covered by the CI wasm leg artifact + manual verification; the desktop path proves the loader logic itself.
+
+#### Phase 6 correction (2026-08-10) — guest boot fails in the browser
+
+The deferred in-browser verification was run (headless Chrome, `?app=material`, clean single-fingerprint
+publish, fresh profile, service worker bypassed). **The wrapper shell boots and renders; the guest does not.**
+
+- `GuestAppLoader.FindApplicationType` → `Assembly.GetTypes()` throws `TypeLoadException` resolving guest
+  typerefs into `System.Runtime` (first `System.IO.StringWriter`, token `010003c9`).
+- **Not caused by trimming as such.** Pre-loading `System.Runtime` on the host *advances* the failure to the
+  next typeref (`System.IAsyncDisposable`, token `010003ee`) rather than fixing it — guest type resolution
+  depends on what the host has already materialised, so rooting types one at a time is a treadmill.
+- `System.Runtime` ships in `_framework`, is not preloaded, and *does* resolve on demand
+  (`Default.LoadFromAssemblyName` succeeds). `System.Private.CoreLib` / `System.Collections` / `System.Linq`
+  are preloaded and resolve.
+- **`netstandard` is absent from `_framework` entirely** yet is in the loader's tier-2 share prefixes, so it
+  fails with `FileNotFoundException`. Several shipped guest payload assemblies are netstandard-era
+  (`WindowsBase`, `CommonServiceLocator`, `Uno.Core.Extensions.*`, `Uno.Xaml`). Not confirmed which of them
+  actually reference it — the payload is webcil-encoded, so a byte scan proves nothing either way.
+
+**Why the original evidence missed it:** "manifest + head dll + theme dll all fetch HTTP 200" measures that
+the payload *downloads*, which cannot detect a failure to *execute*. Desktop cannot surface it either — it
+resolves framework assemblies off disk. Any future WASM claim needs an actual boot assertion.
+
+This is the same gap as the still-open follow-up "add a scripted desktop hosting smoke to CI (the legs only
+build/publish today)" — the wasm leg likewise only builds and publishes.
 
 ### Phase 7 — Repo wiring ✅ 2026-07-18
 
