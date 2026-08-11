@@ -16,11 +16,15 @@ on:
       - feature/*
 
 env:
-  SOLUTION_PATH: src/samples/SimpleSampleApp
-  APP_PROJECT: src/samples/SimpleSampleApp/SimpleSampleApp.csproj
+  # ThemesSampleApp hosts all three theme sample heads in-process (secondary ALCs), so one
+  # staging site covers Material, Cupertino and Simple. Its guests are loaded from a payload
+  # built from the heads' own WASM output — they must be built before the wrapper is published
+  # (the wasm leg carries no ProjectReference; see specs/05-alc-wrapper-app/progress.md).
+  SOLUTION_PATH: src/samples/ThemesSampleApp
+  APP_PROJECT: src/samples/ThemesSampleApp/ThemesSampleApp.csproj
   WASM_FRAMEWORK: net10.0-browserwasm
   BUILD_CONFIGURATION: Release
-  WASM_PUBLISH_DIR: src/samples/SimpleSampleApp/bin/Release/net10.0-browserwasm/publish/wwwroot
+  WASM_PUBLISH_DIR: src/samples/ThemesSampleApp/bin/Release/net10.0-browserwasm/publish/wwwroot
   TargetFrameworkOverride: browserwasm
 
 permissions:
@@ -72,6 +76,18 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+      # The wrapper packages each head's WASM build output as its guest payload. No P2P does
+      # this for us on wasm (the StaticWebAssets SDK collides the heads' identical
+      # WasmCSS/Fonts.css), so the heads are built explicitly, first.
+      - name: Build guest sample heads (WebAssembly)
+        run: |
+          for head in MaterialSampleApp CupertinoSampleApp SimpleSampleApp; do
+            dotnet build src/samples/$head/$head.csproj \
+              -c ${{ env.BUILD_CONFIGURATION }} \
+              -f ${{ env.WASM_FRAMEWORK }} \
+              -p:CompressionEnabled=false
+          done
 
       - name: Publish WebAssembly app
         run: >
