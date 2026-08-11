@@ -19,6 +19,7 @@ public sealed partial class MainPage : Page
 	private readonly GuestAppLoader _loader;
 	private GuestAppInfo? _lastRequestedApp;
 	private bool _operationInProgress;
+	private CancellationTokenSource? _operationCts;
 
 	public MainPage()
 	{
@@ -55,10 +56,29 @@ public sealed partial class MainPage : Page
 
 	private async void OnFirstLoaded(object sender, RoutedEventArgs e)
 	{
-		Loaded -= OnFirstLoaded;
-
 		try
 		{
+			Loaded -= OnFirstLoaded;
+
+			// The hosting smoke (--smoke / ?smoke) drives the full load/switch/unload cycle
+			// unattended and reports a machine-readable verdict — see GuestHostingSmoke.
+			if (GuestHostingSmoke.IsRequested)
+			{
+				SetPickerEnabled(false);
+				CancelButton.IsEnabled = false;
+				ShowStatus(InfoBarSeverity.Informational, "Hosting smoke test running…");
+
+				var passed = await GuestHostingSmoke.RunAsync(_loader);
+
+				ShowStatus(
+					passed ? InfoBarSeverity.Success : InfoBarSeverity.Error,
+					passed ? "Hosting smoke test passed." : "Hosting smoke test FAILED — see logs.");
+				SetPickerEnabled(true);
+				CancelButton.IsEnabled = false;
+				GuestHostingSmoke.Exit(passed);
+				return;
+			}
+
 			// A launch selector (?app=material / --app=material) loads that guest unattended;
 			// without one the picker just waits for a click.
 			if (GuestAppDeepLink.Resolve() is { } info)
@@ -74,6 +94,13 @@ public sealed partial class MainPage : Page
 			// async void handler: nothing may escape.
 			ReportUnexpected(ex);
 		}
+	}
+
+	private void OnCancelClick(object sender, RoutedEventArgs e)
+	{
+		// Cancels the in-flight load; teardown deliberately ignores cancellation (a half-torn
+		// guest is worse than a slow one), so Unload runs to completion regardless.
+		_operationCts?.Cancel();
 	}
 
 	private async void OnGuestAppClick(object sender, RoutedEventArgs e)
@@ -148,16 +175,23 @@ public sealed partial class MainPage : Page
 		}
 
 		_operationInProgress = true;
+		using var cts = new CancellationTokenSource();
+		_operationCts = cts;
 		SetPickerEnabled(false);
 		ShowStatus(InfoBarSeverity.Informational, initialStatus);
 		try
 		{
 			var progress = new Progress<string>(message => ShowStatus(InfoBarSeverity.Informational, message));
-			await operation(progress, CancellationToken.None);
+			await operation(progress, cts.Token);
 
 			ShowStatus(
 				InfoBarSeverity.Success,
 				_loader.CurrentApp is { } current ? $"{current.DisplayName} is running." : "No guest app is loaded.");
+		}
+		catch (OperationCanceledException)
+		{
+			_logger.LogInformation("Guest hosting operation canceled by the user.");
+			ShowStatus(InfoBarSeverity.Informational, "Operation canceled.");
 		}
 		catch (GuestAppLoadException ex)
 		{
@@ -172,6 +206,7 @@ public sealed partial class MainPage : Page
 		}
 		finally
 		{
+			_operationCts = null;
 			_operationInProgress = false;
 			SetPickerEnabled(true);
 		}
@@ -189,6 +224,9 @@ public sealed partial class MainPage : Page
 
 		UnloadButton.IsEnabled = isEnabled;
 		ReloadButton.IsEnabled = isEnabled;
+
+		// Cancel is the inverse: only meaningful while an operation is in flight.
+		CancelButton.IsEnabled = !isEnabled;
 	}
 
 	private void ShowStatus(InfoBarSeverity severity, string message)

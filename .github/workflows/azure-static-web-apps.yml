@@ -79,15 +79,12 @@ jobs:
 
       # The wrapper packages each head's WASM build output as its guest payload. No P2P does
       # this for us on wasm (the StaticWebAssets SDK collides the heads' identical
-      # WasmCSS/Fonts.css), so the heads are built explicitly, first.
+      # WasmCSS/Fonts.css), so the heads are built explicitly, first. Shared with
+      # build/stage-build-wasm.yml.
       - name: Build guest sample heads (WebAssembly)
         run: |
-          for head in MaterialSampleApp CupertinoSampleApp SimpleSampleApp; do
-            dotnet build src/samples/$head/$head.csproj \
-              -c ${{ env.BUILD_CONFIGURATION }} \
-              -f ${{ env.WASM_FRAMEWORK }} \
-              -p:CompressionEnabled=false
-          done
+          chmod +x build/scripts/build-wasm-guest-heads.sh
+          build/scripts/build-wasm-guest-heads.sh ${{ env.BUILD_CONFIGURATION }} -p:CompressionEnabled=false
 
       - name: Publish WebAssembly app
         run: >

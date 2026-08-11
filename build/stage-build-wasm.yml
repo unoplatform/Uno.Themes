@@ -40,11 +40,10 @@ jobs:
 
   # ThemesSampleApp hosts the other heads in-process: their wasm build outputs are packaged
   # as its guest payload, so they must be built first (no P2P — StaticWebAssets conflicts).
+  # Shared with .github/workflows/azure-static-web-apps.yml.
   - script: |
-      set -e
-      dotnet build src/samples/MaterialSampleApp/MaterialSampleApp.csproj -c Release -f net10.0-browserwasm -p:TargetFrameworkOverride=browserwasm
-      dotnet build src/samples/CupertinoSampleApp/CupertinoSampleApp.csproj -c Release -f net10.0-browserwasm -p:TargetFrameworkOverride=browserwasm
-      dotnet build src/samples/SimpleSampleApp/SimpleSampleApp.csproj -c Release -f net10.0-browserwasm -p:TargetFrameworkOverride=browserwasm
+      chmod +x build/scripts/build-wasm-guest-heads.sh
+      build/scripts/build-wasm-guest-heads.sh Release
     displayName: Build Guest Heads (hostable payload)
     condition: and(succeeded(), eq(variables['BuildGuestHeads'], 'true'))
 

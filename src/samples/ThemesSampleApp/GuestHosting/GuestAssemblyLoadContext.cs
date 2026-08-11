@@ -13,62 +13,65 @@ namespace Uno.Themes.WrapperApp.GuestHosting;
 /// (<c>Uno.Themes.WinUI</c>, <c>Uno.Material.WinUI</c>, ...), ShowMeTheXAML, MSTest and the
 /// guest head itself — loads per-ALC from the guest directory so each guest gets isolated
 /// statics and resource registrations. Never blanket-share <c>Uno.*</c>: that would wrongly
-/// try to share the theme libraries the wrapper deliberately does not carry.
+/// try to share the theme libraries the wrapper deliberately does not carry. The concrete
+/// rules are data, not code: <c>GuestSharedAssemblies.txt</c> (embedded here, also consumed
+/// by the wasm payload filter in the csproj) is the single source of truth.
 /// </remarks>
 internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposable
 {
-	// KEEP IN SYNC with the _GuestWasmExcluded filter in ThemesSampleApp.csproj: every name
-	// excluded from the wasm guest payload MUST be resolvable through these share tiers
-	// (tier 2 against the wrapper's own closure or the shared framework), or wasm guests
-	// fail to bind it at runtime.
+	// The share-vs-isolate rules live in ONE place — GuestSharedAssemblies.txt, embedded in
+	// this assembly and read at build time by the _IncludeGuestWasmAssemblies payload filter
+	// in ThemesSampleApp.csproj. See the file's header for format and invariants.
+	private const string _rulesResourceName = "GuestSharedAssemblies.txt";
 
-	// Repo-built theme libraries must always load per-ALC from the guest directory, even when
-	// the host already has a same-named assembly loaded: the Uno SDK's Debug-only Hot Design
-	// tooling (Uno.UI.HotDesign) depends on the *published* Uno.Themes.WinUI package, and the
-	// dev-server client eagerly loads it into the default ALC at startup. Sharing that copy
-	// would bind a repo-built guest against a mismatched theme base library (TypeLoadException
-	// at guest boot). StartsWith so the *.Markup satellites stay isolated too.
-	private static readonly string[] _isolatedStartsWith =
-	[
-		"Uno.Themes.WinUI",
-		"Uno.Material.WinUI",
-		"Uno.Cupertino.WinUI",
-		"Uno.Simple.WinUI",
-	];
+	// Repo-built theme libraries must always load per-ALC from the guest directory ('!' rules),
+	// even when the host already has a same-named assembly loaded — see the rules file.
+	private static readonly string[] _isolatedStartsWith;
 
-	// Assemblies shared with the default ALC when the simple name matches exactly.
-	private static readonly string[] _sharedEquals =
-	[
-		"Uno.UI",
-		"Uno",
-		"Uno.UI.Composition",
-		"Uno.Foundation",
-		"Uno.Foundation.Logging",
-		"Uno.UI.Dispatching",
-		"Uno.WinUI.Graphics2DSK",
-		"Uno.UI.Lottie",
-		"Microsoft.CSharp",
-	];
+	// Assemblies shared with the default ALC on exact simple-name match ('=' and '~' rules).
+	private static readonly string[] _sharedEquals;
 
-	// Assemblies shared with the default ALC when the simple name starts with the prefix.
-	// "Uno.UI.Runtime." keeps its trailing dot so "Uno.UI.RuntimeTests*" stays per-ALC.
-	// "Microsoft.Win32"/"Microsoft.VisualBasic" are shared-framework facades resolvable from
-	// the default ALC even when the wrapper never loaded them; "Uno.UI.Adapter." ships in the
-	// wrapper's own closure.
-	private static readonly string[] _sharedStartsWith =
-	[
-		"Uno.UI.Runtime.",
-		"Uno.UI.FluentTheme",
-		"Uno.UI.Adapter.",
-		"SkiaSharp",
-		"HarfBuzzSharp",
-		"System",
-		"Microsoft.Extensions.",
-		"Microsoft.Win32",
-		"Microsoft.VisualBasic",
-		"netstandard",
-		"mscorlib",
-	];
+	// Assemblies shared with the default ALC on prefix match ('^' rules).
+	private static readonly string[] _sharedStartsWith;
+
+	static GuestAssemblyLoadContext()
+	{
+		var isolated = new List<string>();
+		var exact = new List<string>();
+		var prefixes = new List<string>();
+
+		using var stream = typeof(GuestAssemblyLoadContext).Assembly.GetManifestResourceStream(_rulesResourceName)
+			?? throw new InvalidOperationException(
+				$"Embedded resource '{_rulesResourceName}' is missing; guest assembly resolution rules are unavailable.");
+		using var reader = new StreamReader(stream);
+		while (reader.ReadLine() is { } line)
+		{
+			line = line.Trim();
+			if (line.Length < 2 || line[0] == '#')
+			{
+				continue;
+			}
+
+			var name = line[1..].Trim();
+			switch (line[0])
+			{
+				case '!':
+					isolated.Add(name);
+					break;
+				case '=':
+				case '~':
+					exact.Add(name);
+					break;
+				case '^':
+					prefixes.Add(name);
+					break;
+			}
+		}
+
+		_isolatedStartsWith = [.. isolated];
+		_sharedEquals = [.. exact];
+		_sharedStartsWith = [.. prefixes];
+	}
 
 	private readonly string _guestDirectory;
 	private Dictionary<string, Assembly>? _defaultAssembliesByName;
@@ -86,9 +89,16 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 		AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoaded;
 	}
 
-	// Any newly loaded assembly (any context) invalidates the tier-1 snapshot below.
-	private void OnAssemblyLoaded(object? sender, AssemblyLoadEventArgs args) =>
-		Volatile.Write(ref _defaultAssembliesByName, null);
+	// Only a load into the DEFAULT context changes tier-1 resolution. Guest loads (this very
+	// ALC) fire this event once per assembly during boot — invalidating on those would rebuild
+	// the snapshot O(loaded × binds), the exact cost the snapshot exists to avoid.
+	private void OnAssemblyLoaded(object? sender, AssemblyLoadEventArgs args)
+	{
+		if (GetLoadContext(args.LoadedAssembly) == Default)
+		{
+			Volatile.Write(ref _defaultAssembliesByName, null);
+		}
+	}
 
 	/// <summary>
 	/// Gets the directory the guest's isolated assemblies are loaded from.
@@ -207,6 +217,19 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 	}
 
 	/// <summary>
+	/// Detaches the process-wide <see cref="AppDomain.AssemblyLoad"/> diagnostics handler
+	/// without initiating unload. Called when the context must be deliberately leaked (its
+	/// code may still be running): the handler would otherwise keep this instance rooted and
+	/// fire on every future assembly load for the process lifetime.
+	/// </summary>
+	/// <remarks>
+	/// The tier-1 snapshot can go stale from here on — acceptable for a condemned context
+	/// whose loader has latched itself faulted.
+	/// </remarks>
+	public void DetachDiagnostics() =>
+		AppDomain.CurrentDomain.AssemblyLoad -= OnAssemblyLoaded;
+
+	/// <summary>
 	/// Marks the context as disposed and initiates unload. Safe to call once only.
 	/// </summary>
 	public void Dispose()
@@ -217,7 +240,7 @@ internal sealed class GuestAssemblyLoadContext : AssemblyLoadContext, IDisposabl
 		}
 
 		_disposed = true;
-		AppDomain.CurrentDomain.AssemblyLoad -= OnAssemblyLoaded;
+		DetachDiagnostics();
 		Unload();
 	}
 }

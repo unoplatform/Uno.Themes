@@ -10,18 +10,18 @@ using System.Runtime.Versioning;
 namespace Uno.Themes.WrapperApp.GuestHosting;
 
 /// <summary>
-/// Resolves the guest app requested at launch — from the page URL in the browser
-/// (<c>?app=material</c>) or from the command line on desktop (<c>--app=material</c>).
+/// Resolves launch selectors — from the page URL in the browser (<c>?app=material</c>) or
+/// from the command line on desktop (<c>--app=material</c>).
 /// </summary>
 /// <remarks>
-/// Only the <c>app</c> selector belongs to the host. A guest hosted in the browser shares the
-/// host's document, so it can read any further selectors (for example <c>sample</c>) straight
-/// off the same URL — no host-to-guest plumbing across the ALC boundary is needed.
+/// Only the <c>app</c> and <c>smoke</c> selectors belong to the host. A guest hosted in the
+/// browser shares the host's document, so it can read any further selectors (for example
+/// <c>sample</c>) straight off the same URL — no host-to-guest plumbing across the ALC
+/// boundary is needed.
 /// </remarks>
 internal static class GuestAppDeepLink
 {
 	private const string AppParameterName = "app";
-	private const string CommandLinePrefix = "--" + AppParameterName + "=";
 
 	/// <summary>
 	/// Gets the catalog entry named by the launch selector, or <see langword="null"/> when no
@@ -29,7 +29,7 @@ internal static class GuestAppDeepLink
 	/// </summary>
 	public static GuestAppInfo? Resolve()
 	{
-		if (GetRequestedAppName() is not { Length: > 0 } requested)
+		if (GetLaunchParameter(AppParameterName) is not { Length: > 0 } requested)
 		{
 			return null;
 		}
@@ -39,17 +39,44 @@ internal static class GuestAppDeepLink
 			string.Equals(app.ProjectFolderName, requested, StringComparison.OrdinalIgnoreCase));
 	}
 
-	private static string? GetRequestedAppName()
+	/// <summary>
+	/// Gets a launch selector by name — <c>?name=value</c> in the browser, <c>--name=value</c>
+	/// on the command line — or <see langword="null"/> when absent. A bare flag
+	/// (<c>?name</c> / <c>--name</c>) yields an empty string.
+	/// </summary>
+	public static string? GetLaunchParameter(string name)
 	{
 #if __WASM__
-		return GetQueryParameterFromLocation(AppParameterName);
+		return GetQueryParameterFromLocation(name);
 #else
-		var value = Environment.GetCommandLineArgs()
-			.FirstOrDefault(arg => arg.StartsWith(CommandLinePrefix, StringComparison.OrdinalIgnoreCase));
+		var prefix = "--" + name;
+		foreach (var arg in Environment.GetCommandLineArgs())
+		{
+			if (string.Equals(arg, prefix, StringComparison.OrdinalIgnoreCase))
+			{
+				return string.Empty;
+			}
 
-		return value?[CommandLinePrefix.Length..];
+			if (arg.Length > prefix.Length
+				&& arg[prefix.Length] == '='
+				&& arg.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+			{
+				return arg[(prefix.Length + 1)..];
+			}
+		}
+
+		return null;
 #endif
 	}
+
+	/// <summary>
+	/// Gets whether a boolean launch flag is set: present (bare or with a value) and not
+	/// explicitly <c>0</c>/<c>false</c>.
+	/// </summary>
+	public static bool GetLaunchFlag(string name) =>
+		GetLaunchParameter(name) is { } value
+			&& !string.Equals(value, "0", StringComparison.OrdinalIgnoreCase)
+			&& !string.Equals(value, "false", StringComparison.OrdinalIgnoreCase);
 
 #if __WASM__
 	[SupportedOSPlatform("browser")]
@@ -69,10 +96,12 @@ internal static class GuestAppDeepLink
 		foreach (var pair in query.TrimStart('?').Split('&', StringSplitOptions.RemoveEmptyEntries))
 		{
 			var separator = pair.IndexOf('=');
-			if (separator > 0 &&
-				pair.AsSpan(0, separator).Equals(name.AsSpan(), StringComparison.OrdinalIgnoreCase))
+			var key = separator >= 0 ? pair.AsSpan(0, separator) : pair.AsSpan();
+			if (key.Equals(name.AsSpan(), StringComparison.OrdinalIgnoreCase))
 			{
-				return Uri.UnescapeDataString(pair[(separator + 1)..]);
+				return separator >= 0
+					? Uri.UnescapeDataString(pair[(separator + 1)..])
+					: string.Empty;
 			}
 		}
 

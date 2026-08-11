@@ -128,12 +128,107 @@
   </PropertyGroup>
 
   <!--
+    The guest ALC's share-vs-isolate rules are data in GuestHosting/GuestSharedAssemblies.txt,
+    embedded for GuestAssemblyLoadContext and read below by the wasm payload filter — one
+    source of truth (a hand-mirrored list is exactly how Uno.UI.Lottie was once stranded,
+    excluded-but-unresolvable).
+  -->
+  <ItemGroup>
+    <Content Remove="GuestHosting/GuestSharedAssemblies.txt" />
+    <None Remove="GuestHosting/GuestSharedAssemblies.txt" />
+    <EmbeddedResource Include="GuestHosting/GuestSharedAssemblies.txt" LogicalName="GuestSharedAssemblies.txt" />
+  </ItemGroup>
+
+  <!--
+    Applies the GuestSharedAssemblies.txt rules to a guest's dll list: '='/'^' names resolve
+    from the wrapper's default ALC at runtime and are excluded from the payload; '!' (isolated
+    theme libraries) and '~' (shared-if-present, e.g. Uno.UI.Lottie) always ship.
+  -->
+  <UsingTask TaskName="FilterGuestWasmPayload"
+             TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Candidates ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <Rules ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <Payload ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.Collections.Generic" />
+      <Using Namespace="System.IO" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+var isolatedPrefixes = new List<string>();
+var sharedEquals = new HashSet<string>(StringComparer.Ordinal);
+var sharedPrefixes = new List<string>();
+foreach (var rule in Rules)
+{
+	var line = rule.ItemSpec.Trim();
+	if (line.Length < 2 || line[0] == '#')
+	{
+		continue;
+	}
+
+	var name = line.Substring(1).Trim();
+	switch (line[0])
+	{
+		case '!': isolatedPrefixes.Add(name); break;
+		case '=': sharedEquals.Add(name); break;
+		case '^': sharedPrefixes.Add(name); break;
+		// '~': shared when present host-side, but always shipped — nothing to record.
+	}
+}
+
+var payload = new List<Microsoft.Build.Framework.ITaskItem>();
+foreach (var candidate in Candidates)
+{
+	var name = Path.GetFileNameWithoutExtension(candidate.ItemSpec);
+
+	// Isolation wins over sharing, mirroring GuestAssemblyLoadContext's tier order.
+	var isolated = false;
+	foreach (var prefix in isolatedPrefixes)
+	{
+		if (name.StartsWith(prefix, StringComparison.Ordinal))
+		{
+			isolated = true;
+			break;
+		}
+	}
+
+	var shared = false;
+	if (!isolated)
+	{
+		shared = sharedEquals.Contains(name);
+		if (!shared)
+		{
+			foreach (var prefix in sharedPrefixes)
+			{
+				if (name.StartsWith(prefix, StringComparison.Ordinal))
+				{
+					shared = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if (!shared)
+	{
+		payload.Add(candidate);
+	}
+}
+
+Payload = payload.ToArray();
+]]></Code>
+    </Task>
+  </UsingTask>
+
+  <!--
     Carry the guest heads' WASM assemblies (built separately — see the P2P note above) into
     the app package: top-level IL dlls only, never wwwroot/_framework (WebCIL, not
-    ALC-loadable). Shared framework assemblies are excluded — the guest ALC resolves those
-    from the host for type identity; theme libraries, ShowMeTheXAML and MSTest stay in.
-    Files ship as .dll.bin so static hosts don't block them; a per-app manifest.txt lists
-    the original file names for the runtime fetch.
+    ALC-loadable). Assemblies the shared rules mark host-resolvable are excluded (see
+    FilterGuestWasmPayload above); theme libraries, ShowMeTheXAML and MSTest stay in. Files
+    ship as .dll.bin so static hosts don't block them; a per-app manifest.txt lists the
+    original file names for the runtime fetch.
   -->
   <Target Name="_IncludeGuestWasmAssemblies"
           Condition="'$(TargetFramework)'=='net10.0-browserwasm'"
@@ -155,43 +250,33 @@
     <Warning Condition="!Exists('%(_GuestWasmApp.BinDir)/%(_GuestWasmApp.Identity).dll')"
              Text="ThemesSampleApp: no WASM binaries found for guest %(_GuestWasmApp.Identity); it will not be hostable in this build. Build it first: dotnet build src/samples/%(_GuestWasmApp.Identity)/%(_GuestWasmApp.Identity).csproj -c $(Configuration) -f net10.0-browserwasm -p:TargetFrameworkOverride=browserwasm" />
 
-    <!--
-      KEEP IN SYNC with the share tiers in GuestHosting/GuestAssemblyLoadContext.cs: every
-      name excluded here MUST be resolvable from the wrapper's default ALC at runtime, or
-      wasm guests fail to bind it (e.g. Uno.UI.Lottie is NOT in the wrapper's closure, so it
-      ships in the payload even though it is Uno.UI-prefixed).
-    -->
     <ItemGroup>
       <_GuestWasmCandidate Include="%(_GuestWasmApp.BinDir)/*.dll" AppName="%(_GuestWasmApp.Identity)" />
-      <_GuestWasmExcluded Include="@(_GuestWasmCandidate)"
-                          Condition="'%(Filename)'=='Uno.UI'
-                                     or '%(Filename)'=='Uno'
-                                     or '%(Filename)'=='Uno.UI.Composition'
-                                     or '%(Filename)'=='Uno.UI.Dispatching'
-                                     or '%(Filename)'=='Uno.WinUI.Graphics2DSK'
-                                     or '%(Filename)'=='Microsoft.CSharp'
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Uno.UI.Runtime.'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Uno.UI.FluentTheme'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Uno.UI.Adapter.'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Uno.Foundation'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('SkiaSharp'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('HarfBuzzSharp'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('System'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Microsoft.Extensions.'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Microsoft.Win32'))
-                                     or $([System.String]::Copy('%(Filename)').StartsWith('Microsoft.VisualBasic'))
-                                     or '%(Filename)'=='netstandard'
-                                     or '%(Filename)'=='mscorlib'" />
-      <_GuestWasmCandidate Remove="@(_GuestWasmExcluded)" />
-      <!-- Metadata refs stay list-qualified: with an empty candidate list an unqualified
+    </ItemGroup>
+
+    <ReadLinesFromFile File="$(MSBuildProjectDirectory)/GuestHosting/GuestSharedAssemblies.txt">
+      <Output TaskParameter="Lines" ItemName="_GuestShareRule" />
+    </ReadLinesFromFile>
+
+    <Error Condition="'@(_GuestShareRule)'==''"
+           Text="ThemesSampleApp: GuestHosting/GuestSharedAssemblies.txt is missing or empty; the guest payload cannot be filtered." />
+
+    <FilterGuestWasmPayload Candidates="@(_GuestWasmCandidate)"
+                            Rules="@(_GuestShareRule)"
+                            Condition="'@(_GuestWasmCandidate)'!=''">
+      <Output TaskParameter="Payload" ItemName="_GuestWasmPayload" />
+    </FilterGuestWasmPayload>
+
+    <ItemGroup>
+      <!-- Metadata refs stay list-qualified: with an empty payload list an unqualified
            %(AppName) would batch over the whole Content list and fail (MSB4096). -->
-      <Content Include="@(_GuestWasmCandidate)"
-               Link="GuestApps/%(_GuestWasmCandidate.AppName)/%(_GuestWasmCandidate.Filename)%(_GuestWasmCandidate.Extension).bin"
+      <Content Include="@(_GuestWasmPayload)"
+               Link="GuestApps/%(_GuestWasmPayload.AppName)/%(_GuestWasmPayload.Filename)%(_GuestWasmPayload.Extension).bin"
                CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
-    <WriteLinesToFile File="$(IntermediateOutputPath)GuestApps/%(_GuestWasmCandidate.AppName)/manifest.txt"
-                      Lines="@(_GuestWasmCandidate->'%(Filename)%(Extension)')"
+    <WriteLinesToFile File="$(IntermediateOutputPath)GuestApps/%(_GuestWasmPayload.AppName)/manifest.txt"
+                      Lines="@(_GuestWasmPayload->'%(Filename)%(Extension)')"
                       Overwrite="true"
                       WriteOnlyWhenDifferent="true" />
 

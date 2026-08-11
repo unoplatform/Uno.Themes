@@ -61,3 +61,46 @@ jobs:
       testResultsFormat: 'NUnit'
       testResultsFiles: '$(Common.TestResultsDirectory)/runtime-tests-$(SampleAppName).xml'
       failTaskOnFailedTests: true
+
+# ThemesSampleApp hosts the three theme heads in secondary ALCs; building alone cannot catch a
+# hosting regression (this repo's history: a wasm payload that fetched HTTP 200 but failed to
+# boot, and a Win32 run-loop bug X11 verification missed). This job actually loads every guest,
+# unloads, and asserts per-cycle ALC reclamation via the wrapper's --smoke mode.
+- job: HostingSmoke_Desktop
+  cancelTimeoutInMinutes: 0
+  displayName: 'Hosting Smoke - ThemesSampleApp Desktop'
+  timeoutInMinutes: 30
+
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - checkout: self
+    clean: 'true'
+
+  - template: templates/dotnet-install-linux.yml
+    parameters:
+      UnoCheckParameters: '--tfm net10.0-desktop'
+  - template: templates/canary-updater.yml
+  - template: templates/gitversion.yml
+
+  # TargetFrameworkOverride activates the wrapper's ordering ProjectReferences, building the
+  # three guest heads first so their sibling bins exist for the runtime probe.
+  - pwsh: |
+      dotnet build -c Release -f net10.0-desktop -p:TargetFrameworkOverride=desktop `
+        src/samples/ThemesSampleApp/ThemesSampleApp.csproj `
+        -bl:$(build.artifactstagingdirectory)/themes-build-hosting-smoke.binlog
+    displayName: Build ThemesSampleApp + guest heads
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Build Logs
+    condition: always()
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)/themes-build-hosting-smoke.binlog
+      ArtifactName: hosting-smoke-buildlog
+      ArtifactType: Container
+
+  - script: |
+      chmod +x build/scripts/linux-skia-desktop-hosting-smoke.sh
+      build/scripts/linux-skia-desktop-hosting-smoke.sh
+    displayName: 'Run Hosting Smoke - ThemesSampleApp'
