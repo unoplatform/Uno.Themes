@@ -18,7 +18,10 @@
   - bash: npm install -g cspell
     displayName: Install cSpell
 
-  - bash: cspell --config $(Build.SourcesDirectory)/build/cspell.json "**/*.md" "**/toc.yml" --no-progress
+  # Same exclusions as the markdown linter below: specs/ and .specify/ are internal working
+  # notes (design specs, postmortems), not published documentation, and they carry runtime and
+  # tooling jargon that does not belong in the shared dictionary.
+  - bash: cspell --config $(Build.SourcesDirectory)/build/cspell.json --exclude "specs/**" --exclude ".specify/**" "**/*.md" "**/toc.yml" --no-progress
     displayName: Run Spell Checking
 
 - job: markdown_link

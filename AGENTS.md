@@ -385,6 +385,12 @@ The PR template (`.github/pull_request_template.md`) explicitly calls out `doc/m
 ✅ Cross-link relevant pages (e.g. between `lightweight-styling.md` and a per-design-system controls-styles page).
 ✅ Sample pages: add a page under `src/samples/SamplesApp.Shared/Content/` so all sample heads pick it up.
 
+### Docs validations (`build/stage-docs-validations.yml`)
+
+Both the cSpell and markdownlint jobs run over `**/*.md` with **`specs/**` and `.specify/**` excluded** — those are internal working notes (design specs, postmortems), not published documentation.
+
+🚫 **Never add spec/postmortem jargon to `build/cspell.json`.** That dictionary guards the published `doc/` pages; widening it to accommodate runtime and tooling vocabulary (`typeref`, `webcil`, `finalizers`, `llvmpipe`, …) weakens spell checking where it actually matters. If a spelling job starts failing on a file under `specs/`, the exclusion has regressed — restore it rather than adding words.
+
 </coding_directives>
 
 <review_directives>
