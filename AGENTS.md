@@ -27,6 +27,7 @@ Despite the legacy folder name `src/library/Uno.Themes`, the assembly is `Uno.Th
   - `src/samples/MaterialSampleApp/` — Material sample head.
   - `src/samples/CupertinoSampleApp/` — Cupertino sample head.
   - `src/samples/SimpleSampleApp/` — Simple sample head; **also hosts the runtime tests** under `src/samples/SimpleSampleApp/RuntimeTests/Given_*.cs` (e.g. `Given_SeedColorPalette.cs`, `Given_SemanticStyles.cs`, `Given_ColorOverridePrecedence.cs`).
+  - `src/samples/ThemesSampleApp/` — wrapper head (desktop + browserwasm only) that hosts the three theme sample heads **in-process** via collectible secondary AssemblyLoadContexts (Uno's `AlcContentHost`/`WindowHelper.ContentHostOverride`): launch one app, pick the theme sample to test. Deliberately references **no** theme library and does not import `SamplesApp.Shared`; hosting/loader code lives under `GuestHosting/`. The heads stay fully standalone (`UnoEnableAlcAppSupport` + `new Window()` are the only head-side accommodations). Guests are hosted from their own build output (desktop: sibling `bin` probing; wasm: `GuestApps/` payload packaged at build) — build the heads for the matching TFM first. A scripted hosting smoke (`--smoke` on desktop, `?smoke` in the browser) cycles every guest and verifies ALC reclamation; CI gates it via the `HostingSmoke_Desktop` job (`build/scripts/linux-skia-desktop-hosting-smoke.sh`). See `specs/05-alc-wrapper-app/progress.md` for design, verified behavior, and known upstream limitations.
 - `doc/` — published documentation (see §13).
 
 There is **no separate runtime-tests project** — runtime tests live inside the sample apps and are driven by `Uno.UI.RuntimeTests.Engine` (`PackageReference Include="Uno.UI.RuntimeTests.Engine"` in each sample csproj).
@@ -383,6 +384,12 @@ The PR template (`.github/pull_request_template.md`) explicitly calls out `doc/m
 ✅ Prefer updating an existing page over adding a new one.
 ✅ Cross-link relevant pages (e.g. between `lightweight-styling.md` and a per-design-system controls-styles page).
 ✅ Sample pages: add a page under `src/samples/SamplesApp.Shared/Content/` so all sample heads pick it up.
+
+### Docs validations (`build/stage-docs-validations.yml`)
+
+Both the cSpell and markdownlint jobs run over `**/*.md` with **`specs/**` and `.specify/**` excluded** — those are internal working notes (design specs, postmortems), not published documentation.
+
+🚫 **Never add spec/postmortem jargon to `build/cspell.json`.** That dictionary guards the published `doc/` pages; widening it to accommodate runtime and tooling vocabulary (`typeref`, `webcil`, `finalizers`, `llvmpipe`, …) weakens spell checking where it actually matters. If a spelling job starts failing on a file under `specs/`, the exclusion has regressed — restore it rather than adding words.
 
 </coding_directives>
 

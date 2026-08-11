@@ -149,6 +149,36 @@
       }
     },
     {
+      "name": "Themes - Desktop",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-Themes-desktop",
+      "program": "${workspaceFolder}/src/samples/ThemesSampleApp/bin/Debug/net10.0-desktop/ThemesSampleApp.dll",
+      "args": [],
+      "env": { "DOTNET_MODIFIABLE_ASSEMBLIES": "debug" },
+      "cwd": "${workspaceFolder}/src/samples/ThemesSampleApp",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Themes - WASM (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5003",
+      "webRoot": "${workspaceFolder}/src/samples/ThemesSampleApp",
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "timeout": 30000,
+      "preLaunchTask": "build-Themes-wasm",
+      "server": {
+        "runtimeExecutable": "dotnet",
+        "program": "run",
+        "args": ["--no-build", "-f", "net10.0-browserwasm"],
+        "outputCapture": "std",
+        "timeout": 30000,
+        "cwd": "${workspaceFolder}/src/samples/ThemesSampleApp"
+      }
+    },
+    {
       "name": "Mobile (Uno)",
       "type": "Uno",
       "request": "launch",

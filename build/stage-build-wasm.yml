@@ -18,6 +18,10 @@ jobs:
       Simple:
         SampleAppName: SimpleSampleApp
         ProjectPath: src/samples/SimpleSampleApp
+      Themes:
+        SampleAppName: ThemesSampleApp
+        ProjectPath: src/samples/ThemesSampleApp
+        BuildGuestHeads: 'true'
 
   variables:
     ArtifactName: wasm-$(SampleAppName)
@@ -33,6 +37,15 @@ jobs:
       UnoCheckParameters: '--tfm net10.0-browserwasm'
   - template: templates/canary-updater.yml
   - template: templates/gitversion.yml
+
+  # ThemesSampleApp hosts the other heads in-process: their wasm build outputs are packaged
+  # as its guest payload, so they must be built first (no P2P — StaticWebAssets conflicts).
+  # Shared with .github/workflows/azure-static-web-apps.yml.
+  - script: |
+      chmod +x build/scripts/build-wasm-guest-heads.sh
+      build/scripts/build-wasm-guest-heads.sh Release
+    displayName: Build Guest Heads (hostable payload)
+    condition: and(succeeded(), eq(variables['BuildGuestHeads'], 'true'))
 
   - script: |
       dotnet publish $(ProjectPath)/$(SampleAppName).csproj -f net10.0-browserwasm /p:Configuration=Release /p:TargetFrameworkOverride=browserwasm "/p:InformationalVersion=%NBGV_InformationalVersion%" /p:GeneratePackageOnBuild=false /detailedsummary /bl:$(build.artifactstagingdirectory)/themes-build-$(ArtifactName).binlog

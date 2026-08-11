@@ -31,7 +31,11 @@ sealed partial class App : Application
 	/// </summary>
 	protected override void OnLaunched(LaunchActivatedEventArgs e)
 	{
-		MainWindow = Microsoft.UI.Xaml.Window.Current;
+		// Do not use Window.Current here: it is a process-wide static in the shared Uno.UI, so when
+		// this app is hosted in a secondary ALC (ThemesSampleApp) it would grab the host's window.
+		// The first new Window() maps to the main window on single-window platforms, so this stays
+		// correct standalone too.
+		MainWindow = new Microsoft.UI.Xaml.Window();
 		NavigationHelper.MainWindow = MainWindow;
 
 		if (MainWindow is Microsoft.UI.Xaml.Window window)
