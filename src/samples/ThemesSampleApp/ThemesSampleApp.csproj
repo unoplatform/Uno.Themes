@@ -29,6 +29,8 @@
       Application.HasSecondaryApps to constant false in trimmed Release publishes when this
       feature is off, which would silently disable per-ALC resource isolation in the published
       WASM wrapper. TrimmerRootAssembly does not prevent body substitution. Harmless otherwise.
+      The WASM publish is untrimmed today (see PublishTrimmed below), so no substitution runs —
+      this stays as the guard that keeps that from mattering if trimming is ever re-enabled.
     -->
     <UnoEnableAlcAppSupport>true</UnoEnableAlcAppSupport>
 
@@ -73,6 +75,17 @@
     <PackageReference Include="Uno.Fonts.Inter" />
   </ItemGroup>
 
+  <!--
+    Same reason as the font packages above, for the fonts that live in the repo rather than in a
+    package: a hosted guest resolves ms-appx:/// against the *host's* package root, and the wasm
+    guest payload carries assemblies only. Without these, Cupertino falls back to a default
+    typeface in the browser (SF-Pro fails to load). Fonts only — the wrapper deliberately does
+    not import SamplesApp.Shared.
+  -->
+  <ItemGroup>
+    <Content Include="../SamplesApp.Shared/Assets/Fonts/**/*.ttf" Link="Assets/Fonts/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
   <ItemGroup>
     <UnoIcon Include="../SamplesApp.Shared/Assets/Icons/icon.svg" ForegroundFile="../SamplesApp.Shared/Assets/Icons/icon_foreground.svg" Color="#512BD4" />
     <UnoSplashScreen Include="../SamplesApp.Shared/Assets/Splash/splash_screen.svg" Color="#512BD4" />
@@ -97,16 +110,22 @@
   </ItemGroup>
 
   <!--
-    The trimmed WASM publish must keep the shared framework surface guests bind to at runtime
-    (the wrapper itself references only a fraction of it), plus the members the loader
-    reaches via reflection (Application.CleanupNonDefaultAlcCaches,
-    DependencyProperty._getPropertyCache, SystemNavigationManager's event fields).
+    Trimming is incompatible with this host: guests are loaded by reflection at runtime, so
+    ILLink cannot see anything they bind to. It is not only unused code that goes — ILLink also
+    drops type-forwarders from the framework facades, so a trimmed publish ships a
+    System.Runtime with no forward for e.g. System.IO.StringWriter and every guest dies at
+    Assembly.GetTypes() with "TypeLoadException: Could not resolve type with token ... from
+    typeref". Measured 2026-08-11: trimmed System.Runtime is 15 KB vs the runtime pack's 45 KB,
+    with the StringWriter/IAsyncDisposable forwarders gone.
+
+    TrimmerRootAssembly cannot fix this — rooting one assembly only moves the failure to the
+    next missing forwarder — so the publish is untrimmed (~116 MB uncompressed; the static
+    host compresses on the fly). Only this hosting head pays it: the theme sample heads still
+    publish trimmed.
   -->
-  <ItemGroup Condition="'$(TargetFramework)'=='net10.0-browserwasm'">
-    <TrimmerRootAssembly Include="Uno.UI" />
-    <TrimmerRootAssembly Include="Uno" />
-    <TrimmerRootAssembly Include="Uno.Foundation" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-browserwasm'">
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
 
   <!--
     Carry the guest heads' WASM assemblies (built separately — see the P2P note above) into

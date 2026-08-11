@@ -1,9 +1,10 @@
 # 05 — ThemesSampleApp: ALC wrapper head hosting the theme sample apps
 
-Status: **desktop complete, WASM broken** — seven phases delivered 2026-07-18, but the deferred in-browser
-verification was run on 2026-08-10 and guest boot fails in the browser (Phase 6 correction). Desktop hosting
-works; a Debug-only guest-boot regression caused by the SDK's Hot Design tooling was found and fixed
-2026-08-10 (see Desktop correction after Phase 6). See Review at the bottom. (Reference checkouts: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0` — gitignored, re-clone if absent.)
+Status: **complete on desktop and WASM** — seven phases delivered 2026-07-18; three follow-up corrections
+since (all after Phase 6 below): the SDK's Hot Design tooling breaking Debug guest boot (2026-08-10), Win32
+tearing guests down mid-boot (2026-08-11), and WASM guest boot failing under trimming (2026-08-11). The
+wrapper is now what the Azure Static Web Apps staging sites deploy, replacing the Simple-only demo.
+See Review at the bottom. (Reference checkouts: `artifacts/uno` @ `21bf1ad6` = exact `6.7.0-dev.815` commit, `artifacts/studio.live` @ `49c33a0` — gitignored, re-clone if absent.)
 Branch: `dev/sb/alc-wrapper-app`
 
 ## Context
@@ -145,6 +146,33 @@ resolves framework assemblies off disk. Any future WASM claim needs an actual bo
 
 This is the same gap as the still-open follow-up "add a scripted desktop hosting smoke to CI (the legs only
 build/publish today)" — the wasm leg likewise only builds and publishes.
+
+#### WASM correction (2026-08-11) — trimming strips the facade type-forwarders guests need (fixed)
+
+The Phase 6 failure above was **caused by trimming**, and it is not fixable by rooting assemblies.
+
+- ILLink removes **type-forwarders** from the framework facades, not just unused code. Guests are loaded
+  by reflection at runtime, so the trimmer cannot see anything they bind to. Measured on the trimmed
+  publish: `obj/.../linked/System.Runtime.dll` is **15 KB vs the runtime pack's 45 KB**, with the
+  `System.IO.StringWriter` and `System.IAsyncDisposable` forwarders gone — exactly the two typerefs the
+  Phase 6 investigation hit. That is also why rooting types "advanced the failure to the next typeref":
+  each root restores one forwarder and the guest immediately needs the next.
+- The absence of `netstandard` from `_framework` has the same cause (facade nothing in the host references).
+- **Fix**: `PublishTrimmed=false` for the wrapper's `net10.0-browserwasm` publish (replaces the three
+  `TrimmerRootAssembly` entries, which were treating the symptom). Only this hosting head pays it — the
+  three theme heads still publish trimmed. Cost: **116 MB** uncompressed / 465 files (`_framework` 74 MB,
+  guest payloads 33 MB); the static host compresses on the fly.
+- **Also fixed**: the wrapper now carries `SamplesApp.Shared/Assets/Fonts/**/*.ttf` as its own content. A
+  hosted guest resolves `ms-appx:///` against the *host's* package root and the wasm payload carries
+  assemblies only, so Cupertino's `SF-Pro.ttf` failed to load and fell back to a default typeface. (This
+  narrows the "guest `Assets/**` are not carried on WASM" v1 limitation to non-font assets.)
+- **Verified in-browser** (headless Chrome over CDP against the clean Release publish, screenshots in the
+  session scratchpad): `?app=material`, `?app=cupertino` and `?app=simple` each boot and render their
+  theme correctly, with no `TypeLoadException`.
+- **Verification note**: publishing over a previous publish with different trim settings yields a mono
+  "runtime and class libraries are out of sync" / `function signature mismatch` failure from mixed
+  fingerprinted output — always wipe `bin`/`obj` for the TFM between configurations.
+- **Lesson recorded** in `specs/lessons.md`.
 
 #### Desktop correction (2026-08-10) — Hot Design's theme dependency broke Debug guest boot (fixed)
 

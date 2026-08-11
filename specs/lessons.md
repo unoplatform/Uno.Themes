@@ -4,6 +4,21 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## An app that loads assemblies by reflection cannot be trimmed — ILLink strips facade type-forwarders, and rooting is a treadmill
+
+**Context:** ThemesSampleApp ALC wrapper (spec 05). In the browser, every guest died at `Assembly.GetTypes()` with `TypeLoadException: Could not resolve type with token 010003c9 from typeref (expected class 'System.IO.StringWriter' in assembly 'System.Runtime')`. An earlier investigation had noted that pre-loading `System.Runtime` merely advanced the failure to the next typeref (`System.IAsyncDisposable`) and concluded "rooting types one at a time is a treadmill" without identifying why.
+
+**Root cause:** ILLink does not only drop unused *code* — it drops **type-forwarders from the framework facades**. The host's trimmed `System.Runtime` was 15 KB against the runtime pack's 45 KB, with the `StringWriter` and `IAsyncDisposable` forwarders removed (`grep -ac` on `obj/<cfg>/<tfm>/linked/System.Runtime.dll` vs the runtime pack copy proves it in one command). Guest assemblies are loaded by reflection at runtime, so the trimmer sees nothing they reference; every forwarder the *host* happens not to use is gone, and the guest hits them one at a time. The same mechanism explains a facade being absent from `_framework` entirely (`netstandard`).
+
+**How to apply:**
+- Any app whose job is loading assemblies the build cannot see — plugin hosts, ALC guest hosts, script runners — must publish **untrimmed** (`PublishTrimmed=false`). `TrimmerRootAssembly` treats the symptom: it restores one forwarder and the next missing one surfaces immediately. Scope it to the hosting head so ordinary heads keep trimming.
+- Diagnose facade trimming by **diffing the ILLink output against the runtime pack**, not by reading `_framework` (webcil-encoded, so byte scans there prove nothing): `obj/Release/<tfm>/linked/<Assembly>.dll` is plain IL.
+- `TypeLoadException ... from typeref (expected class X in assembly Y)` where Y is a facade means a **missing type-forward**, not a missing assembly. Check the forwarder before suspecting probing or ALC policy.
+- **Never publish over a previous publish with different trim/AOT settings.** Mixed fingerprinted output produces mono's "Your mono runtime and class libraries are out of sync" + `RuntimeError: function signature mismatch`, which looks like a runtime bug and is not one. Wipe `bin`/`obj` for the TFM between configurations.
+- A hosted guest resolves `ms-appx:///` against the **host's** package root. Assets a guest expects (fonts especially) must be carried by the host, or the guest silently degrades — Cupertino fell back to a default typeface with only a `FontDetailsCache` error in the console.
+
+---
+
 ## A nested Uno host's `Run()` returning is not a lifetime signal — and desktop backends differ
 
 **Context:** ThemesSampleApp ALC wrapper (spec 05). Every guest load failed ~1 s in on **Windows/Win32**, while the same code had been verified end-to-end on X11 (Xvfb/WSLg). The guest visibly booted — runtime-tests module init, ALC window mode, theme XAML parsed — and was then torn down by the host.
