@@ -180,6 +180,31 @@ A fresh Debug desktop run (`--app=material`) crashed the whole wrapper with an u
 - **Lesson recorded** in `specs/lessons.md`: "share if already loaded" is version-unsafe for any
   assembly the guest ships; assemblies under test need deterministic isolation.
 
+#### Desktop correction (2026-08-11) — Win32: a nested host's `Run()` returns immediately (fixed)
+
+First run of the wrapper on **Windows/Win32** (all prior desktop verification was X11 under Xvfb/WSLg)
+failed every guest load ~1 s in: the guest booted (runtime-tests module init, ALC window mode, theme XAML
+parsed) and was then immediately torn down.
+
+- **Cause**: `Win32Host.RunLoop()` guards the message pump with a **static** `_isRunning`. The host owns the
+  process's only Win32 loop, so a hosted guest's `RunLoop()` merely *schedules* its `Application.Start` on
+  that shared loop and returns `Task.CompletedTask` at once. `X11ApplicationHost.RunLoop()` instead blocks
+  in a keep-alive loop for the guest's lifetime — which is why X11 never showed this.
+- `GuestAppLoader.WaitForFirstContentAsync` raced `contentReady` against the run-loop task and treated *any*
+  completion of the latter as "the guest exited before presenting content", so on Win32 it aborted the load
+  while the guest was still booting and tore the ALC down.
+- **Fix**: only a **faulted** run loop is a boot failure. A clean completion is no longer a lifetime signal —
+  the content wait continues against the remaining timeout. Backend-agnostic; X11 behavior is unchanged
+  except that a guest that really does exit without content now reports the 30 s timeout instead of a
+  dedicated message.
+- **Also fixed**: `MainPage.RunLoaderOperationAsync` surfaced `GuestAppLoadException` only in the `InfoBar`,
+  never in the log — the reason this failure produced no diagnosable output. It is now logged.
+- **Verified** (Debug, Win32, screenshots in session scratchpad): `--app=material` boots and renders the
+  Material Overview page in the guest region ("Material is running."); picker switch Material → Simple →
+  Material renders each theme correctly with clean teardown between. ALC weak-ref telemetry reports "still
+  alive" — the documented Debug JIT retention; the Release soak result (15/15 collected) stands.
+- **Lesson recorded** in `specs/lessons.md`.
+
 ### Phase 7 — Repo wiring ✅ 2026-07-18
 
 - [x] Added to `Uno.Themes.sln` under the `samples` solution folder, **plus solution-level `ProjectDependencies` on the three heads** so IDE/solution builds order the guests before the wrapper (the csproj P2P only covers override-driven CLI builds).

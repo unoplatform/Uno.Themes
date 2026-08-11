@@ -329,9 +329,18 @@ internal sealed class GuestAppLoader
 	private async Task WaitForFirstContentAsync(Session session, Task contentReady, CancellationToken cancellationToken)
 	{
 		var execution = session.ExecutionTask ?? Task.CompletedTask;
-		var completed = await Task
-			.WhenAny(contentReady, execution, Task.Delay(_contentReadyTimeout, cancellationToken))
-			.ConfigureAwait(false);
+		var timeout = Task.Delay(_contentReadyTimeout, cancellationToken);
+		var completed = await Task.WhenAny(contentReady, execution, timeout).ConfigureAwait(false);
+
+		if (completed == execution && !execution.IsFaulted)
+		{
+			// A run loop that returns is not a lifetime signal on every backend. Win32 keeps one
+			// process-wide message loop (Win32Host._isRunning is static), so a hosted guest's
+			// RunLoop only *schedules* its Application.Start on the host's loop and returns
+			// immediately — X11 instead blocks in a keep-alive loop for the guest's lifetime.
+			// Only a faulted run loop is a boot failure; keep waiting for content otherwise.
+			completed = await Task.WhenAny(contentReady, timeout).ConfigureAwait(false);
+		}
 
 		if (completed == contentReady)
 		{
@@ -340,10 +349,8 @@ internal sealed class GuestAppLoader
 
 		if (completed == execution)
 		{
-			// Propagates the run loop's own failure when it faulted; otherwise it exited cleanly
-			// without ever presenting content.
+			// Faulted by construction here: propagate the run loop's own failure.
 			await execution.ConfigureAwait(false);
-			throw new GuestAppLoadException($"{session.Info.DisplayName} exited before presenting content.");
 		}
 
 		cancellationToken.ThrowIfCancellationRequested();

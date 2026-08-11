@@ -161,6 +161,8 @@ public sealed partial class MainPage : Page
 		}
 		catch (GuestAppLoadException ex)
 		{
+			// The InfoBar alone is not enough: headless and CI runs only have the log.
+			_logger.LogError(ex, "Guest hosting operation failed.");
 			ShowStatus(InfoBarSeverity.Error, ex.Message);
 		}
 		catch (Exception ex)

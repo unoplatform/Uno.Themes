@@ -4,6 +4,20 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A nested Uno host's `Run()` returning is not a lifetime signal — and desktop backends differ
+
+**Context:** ThemesSampleApp ALC wrapper (spec 05). Every guest load failed ~1 s in on **Windows/Win32**, while the same code had been verified end-to-end on X11 (Xvfb/WSLg). The guest visibly booted — runtime-tests module init, ALC window mode, theme XAML parsed — and was then torn down by the host.
+
+**Root cause:** `Win32Host.RunLoop()` gates the message pump on a **static** `_isRunning` field. The host app owns the process's only Win32 loop, so a hosted guest's `RunLoop()` only *schedules* its `Application.Start` onto that shared loop and returns `Task.CompletedTask` immediately — the guest then runs on the **host's** UI thread. `X11ApplicationHost.RunLoop()` does the opposite: it schedules `StartApp` and then blocks in a `while (!ShouldExit()) Thread.Sleep(100)` keep-alive for the guest's lifetime. The loader raced the run-loop task against "first content" and treated any completion as "guest exited before presenting content", so on Win32 it aborted mid-boot.
+
+**How to apply:**
+- When hosting a guest through `UnoPlatformHostBuilder`, **only a faulted run-loop task means failure**. A completed one carries no information — never use it as a proxy for "the guest died". Wait for a real readiness signal (`AlcContentHost.ContentChanged`) against a timeout instead.
+- `SkiaHost.RunLoop` semantics are **per backend**, and a `.UseX11().UseLinuxFrameBuffer().UseMacOS().UseWin32()` builder picks one at runtime. Verifying ALC hosting on one desktop backend proves nothing about the others; Win32 vs X11 is the pair that bites, because the wrapper's dedicated `GuestApp-*` thread is load-bearing on X11 and vestigial on Win32.
+- When a hosting failure has to be diagnosed from logs, the failure's *message* must be in the logs. Surfacing a user-presentable exception only in an `InfoBar` makes headless, CI, and screenshot-based runs undiagnosable — log it as well as showing it.
+- Decompiling the pinned Uno runtime (`ilspycmd -t <Type> <Assembly>.dll` against the app's own `bin`) is the fastest way to settle "what does the host actually do here" when no reference checkout is present; the answer was a single static field.
+
+---
+
 ## Never share "whatever the host already loaded" with an ALC guest — the Uno SDK's Debug tooling loads the *published* Uno.Themes.WinUI into the host
 
 **Context:** ThemesSampleApp ALC wrapper (spec 05). First Debug desktop run of the wrapper after the July delivery crashed the whole process at guest boot: `TypeLoadException: Method 'GenerateSpecificResources' in type 'Uno.Material.MaterialTheme' … does not have an implementation` — repo-built `Uno.Material.WinUI` paired with a wrong-version `Uno.Themes.WinUI`.
