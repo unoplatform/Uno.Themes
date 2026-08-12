@@ -166,6 +166,21 @@ internal static class FluentLightweightBridge
 		// Presence is guarded by Given_FluentLightweightStyling.
 	};
 
+	// Semantic keys with defaults but no per-control Fluent resource to
+	// re-point (consumed by the shipped bridge styles via {ThemeResource}
+	// setters): overrides are mirrored onto the semantic key only.
+	private static readonly string[] _bridgeStyleKeys =
+	{
+		"TextButtonForeground",
+		"TextButtonForegroundPointerOver",
+		"TextButtonForegroundPressed",
+		"TextButtonBackground",
+		"TextButtonBackgroundPointerOver",
+		"TextButtonBackgroundPressed",
+		"TextButtonBorderBrush",
+		"IconButtonForeground",
+	};
+
 	/// <summary>
 	/// Builds the bridge dictionary: the accent-derived semantic key defaults
 	/// per theme branch (the static neutral defaults ship declaratively in
@@ -257,7 +272,14 @@ internal static class FluentLightweightBridge
 	/// Fluent per-control resource (spec 05 §10 steps 2–3): flat entries reach
 	/// both branches; theme-branch entries follow the native ThemeDictionaries
 	/// semantics — the exact branch key first ("Light" / "Dark"), then the
-	/// universal "Default" fallback. Values are written verbatim.
+	/// universal "Default" fallback. Values are written verbatim, onto the
+	/// Fluent key AND back onto the semantic key itself: this layer is merged
+	/// above both the colors layer (where the override lives) and the
+	/// declarative defaults, so without the semantic-key mirror a defaulted
+	/// key would shadow the consumer's value on direct lookups — Material and
+	/// Simple, whose defaults sit below the colors layer, let overrides win
+	/// both ways (guarded by
+	/// Given_FluentLightweightStyling.When_DefaultedSemanticKeyOverridden_DirectLookupSeesOverride).
 	/// </summary>
 	private static void ApplyRepointing(ResourceDictionary light, ResourceDictionary dark, ResourceDictionary consumerOverride)
 	{
@@ -270,22 +292,42 @@ internal static class FluentLightweightBridge
 
 		foreach (var (semantic, fluent) in _repointMap)
 		{
+			Apply(semantic, fluent);
+		}
+
+		foreach (var semantic in _bridgeStyleKeys)
+		{
+			Apply(semantic, fluent: null);
+		}
+
+		void Apply(string semantic, string? fluent)
+		{
 			if (flat.TryGetValue(semantic, out var flatValue))
 			{
-				light[fluent] = flatValue;
-				dark[fluent] = flatValue;
+				Write(light, flatValue);
+				Write(dark, flatValue);
 			}
 
 			var lightValue = OwnValue(lightOverrides, semantic) ?? OwnValue(fallbackOverrides, semantic);
 			if (lightValue is { })
 			{
-				light[fluent] = lightValue;
+				Write(light, lightValue);
 			}
 
 			var darkValue = OwnValue(darkOverrides, semantic) ?? OwnValue(fallbackOverrides, semantic);
 			if (darkValue is { })
 			{
-				dark[fluent] = darkValue;
+				Write(dark, darkValue);
+			}
+
+			void Write(ResourceDictionary branch, object value)
+			{
+				if (fluent is { })
+				{
+					branch[fluent] = value;
+				}
+
+				branch[semantic] = value;
 			}
 		}
 	}
