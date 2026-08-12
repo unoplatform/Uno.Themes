@@ -57,14 +57,17 @@
 			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightHeight" ResourceKey="ControlHeightMedium" />
 			<x:Double x:Key="DatePickerButtonBottomBorderHeight">2</x:Double>
 			<StaticResource x:Key="DatePickerButtonContentHeight" ResourceKey="IconSizeMedium" />
+			<!--
+				Deprecated: the header no longer renders as a separate line above the field, so
+				nothing reads this. Kept because it is published API (Uno.Themes.WinUI.Markup
+				exposes it as DatePicker.Button.HeaderMargin). Use DatePickerButtonPlaceholderMargin
+				to inset the header instead.
+			-->
 			<Thickness x:Key="DatePickerButtonHeaderMargin">10,8,10,0</Thickness>
-			<!-- Floating label: distance and scale from the value position up to the header position -->
-			<x:Double x:Key="DatePickerHeaderFloatTranslateY">-11</x:Double>
-			<x:Double x:Key="DatePickerHeaderFloatScale">0.7</x:Double>
-			<!-- Resting (placeholder) position of the floating header — centered, inset like the header -->
+			<!-- Inset of the header row; also the resting position of the floating label -->
 			<Thickness x:Key="DatePickerButtonPlaceholderMargin">10,0,10,0</Thickness>
-			<!-- Left inset matches DatePickerButtonHeaderMargin so the value lines up under the header -->
-			<Thickness x:Key="DatePickerButtonContentMargin">10,24,10,0</Thickness>
+			<!-- Inset of the value row, which sits under the header row -->
+			<Thickness x:Key="DatePickerButtonContentMargin">10,0,10,0</Thickness>
 			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
 			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
 			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
@@ -118,19 +121,32 @@
 			<StaticResource x:Key="DatePickerFlyoutPresenterHighlightHeight" ResourceKey="ControlHeightMedium" />
 			<x:Double x:Key="DatePickerButtonBottomBorderHeight">2</x:Double>
 			<StaticResource x:Key="DatePickerButtonContentHeight" ResourceKey="IconSizeMedium" />
+			<!--
+				Deprecated: the header no longer renders as a separate line above the field, so
+				nothing reads this. Kept because it is published API (Uno.Themes.WinUI.Markup
+				exposes it as DatePicker.Button.HeaderMargin). Use DatePickerButtonPlaceholderMargin
+				to inset the header instead.
+			-->
 			<Thickness x:Key="DatePickerButtonHeaderMargin">10,8,10,0</Thickness>
-			<!-- Floating label: distance and scale from the value position up to the header position -->
-			<x:Double x:Key="DatePickerHeaderFloatTranslateY">-11</x:Double>
-			<x:Double x:Key="DatePickerHeaderFloatScale">0.7</x:Double>
-			<!-- Resting (placeholder) position of the floating header — centered, inset like the header -->
+			<!-- Inset of the header row; also the resting position of the floating label -->
 			<Thickness x:Key="DatePickerButtonPlaceholderMargin">10,0,10,0</Thickness>
-			<!-- Left inset matches DatePickerButtonHeaderMargin so the value lines up under the header -->
-			<Thickness x:Key="DatePickerButtonContentMargin">10,24,10,0</Thickness>
+			<!-- Inset of the value row, which sits under the header row -->
+			<Thickness x:Key="DatePickerButtonContentMargin">10,0,10,0</Thickness>
 			<Thickness x:Key="DatePickerHostPadding">24,24,8,8</Thickness>
 			<Thickness x:Key="DatePickerFlyoutButtonPadding">0</Thickness>
 			<CornerRadius x:Key="DatePickerCornerRadius">4,4,0,0</CornerRadius>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
+
+	<!--
+		Theme-invariant: declared at dictionary scope so the Storyboard below can read it.
+		Storyboard/Setter values resolve through StaticResource, which does not re-resolve
+		per ThemeDictionary — a key defined only inside ThemeDictionaries is not reliably
+		overridable from there. Consumers still override it from their own App resources.
+		The header's vertical movement is layout-driven (two Auto rows), so only the scale
+		is animated and there is no translate constant tied to the field height.
+	-->
+	<x:Double x:Key="DatePickerHeaderFloatScale">0.7</x:Double>
 
 	<!-- DatePicker Style -->
 	<Style x:Key="MaterialDatePickerFlyoutButtonStyle"
@@ -317,40 +333,59 @@
 										   Fill="{TemplateBinding BorderBrush}" />
 
 								<!--
-									Floating label, as in the Material TextBox: the header rests where the value
-									sits and reads as the placeholder while there is no date, then animates up and
-									shrinks once a date is picked (HasDate). It is the only element rendering the
-									header — a separate header line plus a header-bound placeholder showed the same
-									text twice.
+									Header and value stack in two Auto rows, centered as a block. The rows are what
+									moves the header, not a magic offset: with no Header the presenter collapses,
+									row 0 takes no height and the value centers in the field; with a Header and no
+									date the value row is empty and the header centers, reading as the placeholder;
+									with both, they stack and the header sits above the value. HasDate only scales
+									the header down, so there is no translate constant to keep in sync with the
+									field height.
 								-->
-								<TextBlock x:Name="HeaderTextBlock"
-										   Margin="{ThemeResource DatePickerButtonPlaceholderMargin}"
-										   HorizontalAlignment="Stretch"
-										   VerticalAlignment="Center"
-										   Foreground="{ThemeResource DatePickerPlaceholderTextForeground}"
-										   RenderTransformOrigin="0,0.5"
-										   Style="{StaticResource MaterialBodyLarge}"
-										   Text="{TemplateBinding Header}"
-										   TextWrapping="Wrap">
-									<TextBlock.RenderTransform>
-										<CompositeTransform x:Name="HeaderTextBlock_CompositeTransform" />
-									</TextBlock.RenderTransform>
-								</TextBlock>
+								<Grid VerticalAlignment="Center">
 
-								<Grid x:Name="FlyoutButtonContentGrid"
-									  Height="{ThemeResource DatePickerButtonContentHeight}"
-									  Margin="{ThemeResource DatePickerButtonContentMargin}"
-									  VerticalAlignment="Top">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
 
-									<!-- DateText -->
-									<TextBlock x:Name="DateText"
-											   Foreground="{ThemeResource DatePickerButtonDateTextForeground}"
-											   Style="{StaticResource MaterialBodyLarge}"
-											   Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:d}'}" />
+									<!--
+										ContentPresenter rather than a TextBlock so a non-string Header and
+										HeaderTemplate both render (Header is typed object).
+									-->
+									<ContentPresenter x:Name="HeaderTextBlock"
+													  Grid.Row="0"
+													  Margin="{ThemeResource DatePickerButtonPlaceholderMargin}"
+													  HorizontalAlignment="Stretch"
+													  CharacterSpacing="{ThemeResource BodyLargeCharacterSpacing}"
+													  Content="{TemplateBinding Header}"
+													  ContentTemplate="{TemplateBinding HeaderTemplate}"
+													  FontFamily="{ThemeResource BodyLargeFontFamily}"
+													  FontSize="{ThemeResource BodyLargeFontSize}"
+													  FontWeight="{ThemeResource BodyLargeFontWeight}"
+													  Foreground="{ThemeResource DatePickerPlaceholderTextForeground}"
+													  RenderTransformOrigin="0,0.5"
+													  TextWrapping="Wrap"
+													  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}">
+										<ContentPresenter.RenderTransform>
+											<CompositeTransform x:Name="HeaderTextBlock_CompositeTransform" />
+										</ContentPresenter.RenderTransform>
+									</ContentPresenter>
 
-									<!-- Removing this cause trouble with the DatePicker code -->
-									<TextBlock x:Name="DayTextBlock"
-											   Opacity="0" />
+									<Grid x:Name="FlyoutButtonContentGrid"
+										  Grid.Row="1"
+										  Height="{ThemeResource DatePickerButtonContentHeight}"
+										  Margin="{ThemeResource DatePickerButtonContentMargin}">
+
+										<!-- DateText -->
+										<TextBlock x:Name="DateText"
+												   Foreground="{ThemeResource DatePickerButtonDateTextForeground}"
+												   Style="{StaticResource MaterialBodyLarge}"
+												   Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:d}'}" />
+
+										<!-- Removing this cause trouble with the DatePicker code -->
+										<TextBlock x:Name="DayTextBlock"
+												   Opacity="0" />
+									</Grid>
 								</Grid>
 							</Grid>
 						</Button>
@@ -389,19 +424,15 @@
 
 							<VisualStateGroup x:Name="HasDateStates">
 								<!--
-									With a date picked the header floats above the value; without one it stays at
-									the value's position and reads as the placeholder.
+									With a date picked the value row fills, so the header is pushed to the row above
+									and shrinks; with no date the value row is empty and the header sits centred,
+									reading as the placeholder.
 								-->
 								<VisualState x:Name="HasDate">
 									<VisualState.Setters>
 										<Setter Target="HeaderTextBlock.Foreground" Value="{ThemeResource DatePickerButtonForeground}" />
 									</VisualState.Setters>
 									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="HeaderTextBlock_CompositeTransform"
-														 Storyboard.TargetProperty="TranslateY"
-														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"
-														 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-														 To="{StaticResource DatePickerHeaderFloatTranslateY}" />
 										<DoubleAnimation Storyboard.TargetName="HeaderTextBlock_CompositeTransform"
 														 Storyboard.TargetProperty="ScaleX"
 														 Duration="{StaticResource MaterialTextBoxAnimationDuration}"

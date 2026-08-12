@@ -66,11 +66,13 @@ the column they separate.
 keys would be dead API. Pressed/disabled feedback comes from the flyout-button opacity keys, matching
 how `DatePicker`'s flyout button already works in both themes.
 
-**No `FlyoutPresenterStyle` setter.** `DatePicker` sets `not_win:FlyoutPresenterStyle`, but
-`TimePicker` has no such property (`TimePicker.Properties.cs` declares only `ClockIdentifier`,
-`Header`, `HeaderTemplate`, `LightDismissOverlayMode`, `MinuteIncrement`, `SelectedTime`, `Time`).
-The presenter is styled through the implicit `TimePickerFlyoutPresenter` style in `_Resources.xaml`
-instead — the same mechanism that already covers `DatePickerFlyoutPresenter`.
+**`FlyoutPresenterStyle` setter — required after all.** An earlier revision of this spec claimed
+`TimePicker` had no such property, having looked only at `TimePicker.Properties.cs`. It is declared in
+`TimePicker.Flyout.cs:56` as an Uno-only DP, exactly mirroring `DatePicker.FlyoutPresenterStyle`, and
+`TimePicker.Flyout.cs:97` forwards it to `TimePickerFlyout.TimePickerFlyoutPresenterStyle`. Without the
+setter an explicitly-styled `TimePicker` on non-Windows targets falls back to the Fluent presenter and
+the entire `TimePickerFlyoutPresenter*` key family is dead. Both new styles now carry
+`not_win:Setter Property="FlyoutPresenterStyle"`, matching their `DatePicker` siblings.
 
 **`TitlePresenter` included.** The repo's `DatePickerFlyoutPresenter` styles omit it; including it
 here costs six lines and makes `TimePickerFlyout.Title` actually render. Uno null-guards the lookup,
@@ -136,21 +138,58 @@ Changes made after the first visual review of the sample apps:
    `PrimaryVariantLightBrush`, which is `#1E1E1E` in Dark — identical to `SurfaceColor`, i.e. the band
    painted itself onto the flyout background. Both `TimePicker` and `DatePicker` now use
    `SurfaceVariantBrush` (`#F5F5F5` Light, unchanged appearance / `#2C2C2C` Dark).
-2. **Field reads as a single value.** The hour / minute / period run is laid out with `Auto` columns in
-   a left-aligned grid, and `First|SecondColumnDivider` (typed `UIElement` in the control contract)
-   carry the `:` separator instead of a vertical rule. The parts stay owned by the control, so culture
-   ordering, `MinuteIncrement` and 24-hour `ClockIdentifier` still apply.
+2. **Field columns follow the control, not the template.** An intermediate revision drifted from the
+   "Rectangle dividers" decision above and shipped a literal `:` in `FirstColumnDivider` plus `Auto`
+   column widths. Review caught both:
+   - `UpdateOrderAndLayout` only toggles divider *visibility*; it never repositions them. With
+     `periodOrder == 0` (ko-KR / zh-CN / ja-JP) the period occupies `FirstPickerHost`, so the colon
+     rendered between period and hour and the hour/minute pair had none.
+   - The same method assigns `1*` to every populated `*TextBlockColumn` on each pass, so the `Auto`
+     widths — and the "single compact value" behaviour attributed to them — never existed at runtime.
+
+   Restored to the original decision: neutral `Rectangle` dividers and `*` columns, matching Fluent.
+   The parts stay owned by the control, so culture ordering, `MinuteIncrement` and 24-hour
+   `ClockIdentifier` still apply.
 3. **Pickers size to content.** `HorizontalAlignment` `Stretch` → `Left` on all four picker styles, with
    `*FlyoutPresenterMinWidth` as the floor. This also fixes the full-width flyout:
    `TimePickerFlyout` / `DatePickerFlyout` assign `presenter.Width = target.ActualWidth` on opening.
 4. **Header no longer rendered twice.** Material: the header is a floating label (Material TextBox
-   behaviour) — resting at body size, centered in the field, animating up and scaling to 0.7 once a
-   value is set; the separate header-bound placeholder is gone. Simple: the header renders only as the
+   behaviour); the separate header-bound placeholder is gone. Simple: the header renders only as the
    in-field placeholder, as `SimpleTextBox` does with `PlaceholderText`; with no header, the control's
-   own `hour : minute AM` run remains as the fallback placeholder.
+   own hour / minute / period run remains as the fallback placeholder. Both themes render the header
+   through a `ContentPresenter`, so a non-string `Header` and `HeaderTemplate` are honoured rather than
+   silently `ToString()`-ed and dropped.
 
-Runtime tests: `Given_TimePickerStyles` and `Given_PickerFieldLayout` (sizing + header-renders-once,
-both pickers). Full `SimpleSampleApp` suite: 121 passed / 0 failed.
+5. **Header float is layout-driven, not a magic offset.** The first attempt translated the label by a
+   hand-computed `-11` derived from the 53px field height, which was never pixel-verified and broke the
+   header-less case: with `ContentMargin` `10,24,10,0` and `VerticalAlignment="Top"`, a bare
+   `<TimePicker />` rendered its value against the bottom edge. Header and value now occupy two `Auto`
+   rows centred in the field, so all three combinations fall out of layout — no header (label collapses,
+   value centres), header without value (label centres as the placeholder), and both (they stack).
+   `*HeaderFloatTranslateY` is gone; only `*HeaderFloatScale` remains, and it lives at dictionary scope
+   because the Storyboard reads it through `StaticResource`, which does not re-resolve per
+   `ThemeDictionary`.
 
-Not verified by tests: the Material floating-label geometry (`*HeaderFloatTranslateY` = -11,
-`*HeaderFloatScale` = 0.7) is computed from the 53px field metrics and needs a visual check.
+## Declined findings
+
+**Deduplicating the four flyout-button / flyout-presenter styles.** Review flagged
+`Material|Simple {Date,Time}PickerFlyoutButtonStyle` as near-identical copies differing only by key
+prefix. They must stay separate: each reads its own `{Date,Time}PickerFlyoutButton*` key family, and a
+shared `BasedOn` base would have to pick one family, silently breaking per-control lightweight styling —
+the documented contract in `doc/lightweight-styling.md`. The duplication is the contract, not an
+accident. The same applies to the two float Storyboards, which read `{Date,Time}PickerHeaderFloatScale`.
+
+## Verification
+
+Runtime tests: `Given_TimePickerStyles` and `Given_PickerFieldLayout` (SimpleSampleApp), and
+`Given_MaterialPickerStyles` (MaterialSampleApp) — the Material templates previously had no coverage at
+all. New guards worth calling out:
+
+- Selection-band contrast is now asserted under Light **and** Dark by resolving the brushes through a
+  themed, loaded element. The previous version used the `ResourceDictionary` indexer, which resolves
+  ThemeDictionaries against the *application* theme — both `DataRow`s asserted the same value, and
+  because Light already contrasted (`#F5F5F5` vs `#FFFFFF`) the test passed on `master` and never
+  reproduced the Dark bug it was written for.
+- Divider type (`not a TextBlock`) and control-assigned `1*` column widths, pinning the two behaviours
+  that the culture and layout defects above turned on.
+- Header-less vertical centring, the case the float offset broke.

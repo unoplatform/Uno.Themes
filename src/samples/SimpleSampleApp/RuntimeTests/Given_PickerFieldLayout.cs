@@ -30,25 +30,40 @@ public class Given_PickerFieldLayout
 		return container;
 	}
 
-	private static FrameworkElement CreatePicker(string styleKey, Grid container, string? header = null)
+	/// <summary>
+	/// Builds the picker named by <paramref name="pickerType"/>. The type is passed explicitly
+	/// rather than sniffed out of the style key — a key that merely happens to contain "Time"
+	/// would silently produce the wrong control and still pass.
+	/// </summary>
+	private static FrameworkElement CreatePicker(Type pickerType, string styleKey, Grid container, string? header = null)
 	{
-		FrameworkElement picker = styleKey.Contains("Time")
-			? new TimePicker { Header = header }
-			: new DatePicker { Header = header };
+		var picker = (FrameworkElement)Activator.CreateInstance(pickerType)!;
+		switch (picker)
+		{
+			case TimePicker timePicker:
+				timePicker.Header = header;
+				break;
+			case DatePicker datePicker:
+				datePicker.Header = header;
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(pickerType), pickerType, "Unsupported picker type");
+		}
+
 		picker.Style = container.Resources[styleKey] as Style;
 		return picker;
 	}
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("SimpleTimePickerStyle", "TimePickerFlyoutPresenterMinWidth")]
-	[DataRow("SimpleDatePickerStyle", "DatePickerFlyoutPresenterMinWidth")]
-	public async Task When_PlacedInAWideContainer_ThenTheFieldSizesToContent(string styleKey, string minWidthKey)
+	[DataRow(typeof(TimePicker), "SimpleTimePickerStyle", "TimePickerFlyoutPresenterMinWidth")]
+	[DataRow(typeof(DatePicker), "SimpleDatePickerStyle", "DatePickerFlyoutPresenterMinWidth")]
+	public async Task When_PlacedInAWideContainer_ThenTheFieldSizesToContent(Type pickerType, string styleKey, string minWidthKey)
 	{
 		var container = CreateThemedContainer();
 		container.Width = 900;
 
-		var picker = CreatePicker(styleKey, container);
+		var picker = CreatePicker(pickerType, styleKey, container);
 		container.Children.Add(picker);
 
 		UnitTestsUIContentHelper.Content = container;
@@ -67,16 +82,16 @@ public class Given_PickerFieldLayout
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("SimpleTimePickerStyle")]
-	[DataRow("SimpleDatePickerStyle")]
-	public async Task When_HeaderIsSet_ThenItRendersOnce(string styleKey)
+	[DataRow(typeof(TimePicker), "SimpleTimePickerStyle")]
+	[DataRow(typeof(DatePicker), "SimpleDatePickerStyle")]
+	public async Task When_HeaderIsSet_ThenItRendersOnce(Type pickerType, string styleKey)
 	{
 		// The header used to render twice — as a label above the field and again as the
 		// header-bound placeholder inside it.
 		const string header = "Date of Birth";
 
 		var container = CreateThemedContainer();
-		var picker = CreatePicker(styleKey, container, header);
+		var picker = CreatePicker(pickerType, styleKey, container, header);
 		container.Children.Add(picker);
 
 		UnitTestsUIContentHelper.Content = container;

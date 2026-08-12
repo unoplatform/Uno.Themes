@@ -168,3 +168,33 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+---
+
+## Named columns and dividers belong to the control, not the template — the picker templates cannot own ordering
+
+**Context:** PR #1692 (`dev/sb/time-picker`), new Material v2 / Simple `TimePicker` styles. A revision rendered the field as `9:41 AM` by putting a literal `:` in `FirstColumnDivider` and declaring the `*TextBlockColumn` widths as `Auto`. Review (and Uno's source) showed both were wrong, and the runtime test that "proved" the layout was green for an unrelated reason.
+
+**Root causes, both in `TimePicker.UpdateOrderAndLayout` (`TimePicker.partial.mux.cs`):**
+1. The method reparents the hour / minute / period `TextBlock`s between `First|Second|ThirdPickerHost` to reorder per culture, but it only toggles the **visibility** of `First|SecondColumnDivider` — it never moves them. `GetOrder` has a `periodOrder == 0` branch, so in `ko-KR` / `zh-CN` / `ja-JP` the period occupies `FirstPickerHost` and a fixed colon lands between the period and the hour, leaving hour and minute unseparated. Fluent's neutral `Rectangle` divider is immune by construction.
+2. The same pass assigns `1*` to every populated `*TextBlockColumn` and `0` to the rest, overwriting whatever width the template declared. An `Auto` width in the template is dead markup, so any layout behaviour attributed to it does not exist at runtime.
+
+**How to apply:**
+- In a picker template, treat every part the control looks up by name as **the control's**, not the template's. Before attaching meaning to one (a glyph, a width, an alignment), read what the control does to it in `OnApplyTemplate` and its layout pass. "The part is typed `UIElement`, so I can put anything in it" is a type-safety argument, not a behavioural one.
+- Never encode reading order in a fixed template position. If a separator's correctness depends on which value sits beside it, it is wrong in some culture — use a neutral rule, or derive the whole string from the culture.
+- Match the framework's own template shape (`*` columns, `Rectangle` dividers) unless there is a specific reason to diverge; divergence here bought nothing and cost correctness.
+
+**Verification trap:** the compactness test passed because the assertion (`content.ActualWidth < picker.ActualWidth / 2`) happened to hold for a reason the author had not identified, and the divider assertion only checked the en-US ordering. A test can be green, deterministic, and still prove nothing about the mechanism it claims to guard. When a test protects a layout mechanism, assert the mechanism (the column widths the control assigned; the divider's *type*), not a rendering that one locale produces.
+
+---
+
+## `RequestedTheme` on a container does not change what the `ResourceDictionary` indexer returns
+
+**Context:** Same PR. `Given_TimePickerStyles` was parameterized `[DataRow(ElementTheme.Light)] [DataRow(ElementTheme.Dark)]` over lookups of the form `container.Resources[key]`, where `container` was a `Grid { RequestedTheme = theme }`. The selection-band contrast fix (`PrimaryVariantLightBrush` → `SurfaceVariantBrush`, invisible in Dark) was guarded this way.
+
+**Root cause:** the `ResourceDictionary` indexer resolves `ThemeDictionaries` against the **application** theme and ignores `FrameworkElement.RequestedTheme`. Both rows therefore asserted the same value. Because the Light palette already contrasted (`#F5F5F5` vs `#FFFFFF`), the test **passed on `master`** — it never reproduced the Dark bug it was written for, so the fix shipped with no red/fix/green evidence at all.
+
+**How to apply:**
+- A Light/Dark `[DataRow]` pair over an indexer lookup is a coverage illusion. To resolve a key as an element under a given theme would see it, bind it through a **loaded element** in a container with that `RequestedTheme` (e.g. a `Border` whose `Background` is `{ThemeResource Key}`, built with `XamlReader.Load`) and read the resolved value back.
+- When adding a theme-parameterized test, sanity-check it against `master` first: if it passes there, it is not guarding the bug. This is the cheapest possible red/fix/green check and it catches exactly this class of fake coverage.
+- Note also that `ColumnDefinition` is not a visual-tree child — a `VisualTreeHelper` walk cannot find `x:Name`d columns. Assert them through the owning `Grid.ColumnDefinitions` (or, better, through the widths the control assigned).

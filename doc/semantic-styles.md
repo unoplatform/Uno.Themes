@@ -172,6 +172,7 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 | Semantic Key | Material | Simple | Notes |
 |---|---|---|---|
 | `DatePickerStyle` | `MaterialDatePickerStyle` | `SimpleDatePickerStyle` | Direct match |
+| `DatePickerFlyoutPresenterStyle` | `MaterialDatePickerFlyoutPresenterStyle` | `SimpleDatePickerFlyoutPresenterStyle` | Direct match |
 
 ### TimePicker
 

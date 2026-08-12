@@ -51,11 +51,10 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `TimePickerFlyoutPresenterHighlightHeight`            | `Double`          | `ControlHeightMedium`           |
 | `TimePickerButtonBottomBorderHeight`                  | `Double`          | `2`                             |
 | `TimePickerButtonContentHeight`                       | `Double`          | `IconSizeMedium`                |
-| `TimePickerButtonHeaderMargin`                        | `Thickness`       | `10,8,10,0`                     |
 | `TimePickerButtonPlaceholderMargin`                   | `Thickness`       | `10,0,10,0`                     |
-| `TimePickerHeaderFloatTranslateY`                     | `Double`          | `-11`                           |
 | `TimePickerHeaderFloatScale`                          | `Double`          | `0.7`                           |
-| `TimePickerButtonContentMargin`                       | `Thickness`       | `10,24,10,0`                    |
+| `TimePickerButtonContentMargin`                       | `Thickness`       | `10,0,10,0`                     |
+| `TimePickerFlyoutPresenterMaxWidth`                   | `Double`          | `456`                           |
 | `TimePickerColumnDividerMargin`                       | `Thickness`       | `2,0,2,0`                       |
 | `TimePickerFlyoutPresenterTitleMargin`                | `Thickness`       | `16,12,16,4`                    |
 | `TimePickerFlyoutButtonPadding`                       | `Thickness`       | `0`                             |
@@ -66,24 +65,24 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 > `TimePickerFlyoutPresenterMinWidth` as its floor. This also governs the flyout: `TimePickerFlyout` sizes the
 > presenter to the target's `ActualWidth` on opening, so a stretched field produces a stretched flyout. Set
 > `HorizontalAlignment="Stretch"` on the control to fill its container instead.
-
-> [!NOTE]
-> The field renders the selected time as a single left-aligned value (`9:41 AM`), like the `DatePicker` field.
-> The hour / minute / period text remains owned by the control, so culture ordering, `MinuteIncrement` and a
-> 24-hour `ClockIdentifier` all still apply; `TimePickerColumnDividerMargin` spaces the `:` separator and the
-> period, and `TimePickerSpacerFill` colors the separator. `TimePickerColumnDividerWidth` is kept for
-> back-compat but is no longer used by the default template (the separator is text, not a rule).
-
-> [!NOTE]
+>
+> The hour / minute / period text stays owned by the control, so culture ordering, `MinuteIncrement` and a
+> 24-hour `ClockIdentifier` all still apply. The columns are separated by neutral rules styled with
+> `TimePickerColumnDividerWidth`, `TimePickerColumnDividerMargin` and `TimePickerSpacerFill`. They are rules
+> rather than a `:` glyph on purpose: the control reorders the hour / minute / period hosts per culture but
+> never moves the dividers, so a literal separator is correct only while the hour happens to come first — in a
+> period-first culture such as `ko-KR` it would land between the period and the hour.
+>
 > `TimePicker` only reports the `Normal` / `Disabled` and `HasTime` / `HasNoTime` visual states — it has no
 > `PointerOver` or `Pressed` state of its own (unlike `DatePicker`). Pressed and disabled feedback comes from the
 > `TimePickerFlyoutButtonOpacity*` keys applied to the flyout button that wraps the field.
-
-> [!NOTE]
-> `Header` is a floating label, as in the Material `TextBox`: it rests at the value's position and reads as the
-> placeholder while no time is set, then animates up and shrinks once one is picked. It is the only element
-> rendering the header — there is no separate header-bound placeholder. Tune the motion with
-> `TimePickerHeaderFloatTranslateY` / `TimePickerHeaderFloatScale`.
+>
+> `Header` is a floating label, as in the Material `TextBox`. It and the value occupy two `Auto` rows centred in
+> the field: with no `Header` the label collapses and the value centres, with a `Header` but no time the label
+> centres and reads as the placeholder, and with both they stack. It is the only element rendering the header —
+> there is no separate header-bound placeholder. `HeaderTemplate` is honoured. `TimePickerHeaderFloatScale` sets
+> how far the label shrinks once it floats; the vertical movement is layout-driven, so there is no offset key to
+> keep in sync with the field height.
 
 ## See also
 

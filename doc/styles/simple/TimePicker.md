@@ -19,7 +19,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 ## Lightweight Styling
 
 Every visual-state brush and dimension is exposed as a semantic `TimePicker*` key in the style's
-`ThemeDictionaries`, so an app can override any single key without retemplating.
+`ThemeDictionaries`, so an app can override any single key without replacing the template.
 
 ### FlyoutButton
 
@@ -70,9 +70,8 @@ Every visual-state brush and dimension is exposed as a semantic `TimePicker*` ke
 | `TimePickerButtonTimeTextForeground`         | `SolidColorBrush` | `OnSurfaceBrush`               |
 | `TimePickerButtonTimeTextForegroundDisabled` | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
 | `TimePickerPlaceholderTextForeground`        | `SolidColorBrush` | `OnSurfaceLowBrush`            |
-| `TimePickerHeaderForeground`                 | `SolidColorBrush` | `OnSurfaceBrush`               |
+| `TimePickerHeaderForeground`                 | `SolidColorBrush` | `OnSurfaceLowBrush`            |
 | `TimePickerHeaderForegroundDisabled`         | `SolidColorBrush` | `OnSurfaceDisabledBrush`       |
-| `TimePickerHeaderMargin`                     | `Thickness`       | `Space100BottomThickness`      |
 | `TimePickerSpacerFill`                       | `SolidColorBrush` | `OnSurfaceVariantBrush`        |
 | `TimePickerSpacerFillDisabled`               | `SolidColorBrush` | `OutlineDisabledBrush`         |
 | `TimePickerColumnDividerWidth`               | `Double`          | `SimpleStrokeBorder`           |
@@ -83,25 +82,23 @@ Every visual-state brush and dimension is exposed as a semantic `TimePicker*` ke
 > `TimePickerFlyoutPresenterMinWidth` as its floor. This also governs the flyout: `TimePickerFlyout` sizes the
 > presenter to the target's `ActualWidth` on opening, so a stretched field produces a stretched flyout. Set
 > `HorizontalAlignment="Stretch"` on the control to fill its container instead.
-
-> [!NOTE]
-> The field renders the selected time as a single left-aligned value (`9:41 AM`), like the `DatePicker`
-> field. The hour / minute / period text remains owned by the control, so culture ordering, `MinuteIncrement`
-> and a 24-hour `ClockIdentifier` all still apply; `TimePickerColumnDividerMargin` spaces the `:` separator
-> and the period, and `TimePickerSpacerFill` colors the separator. `TimePickerColumnDividerWidth` is kept for
-> back-compat but is no longer used by the default template (the separator is text, not a rule).
-
-> [!NOTE]
+>
+> The hour / minute / period text stays owned by the control, so culture ordering, `MinuteIncrement` and a
+> 24-hour `ClockIdentifier` all still apply. The columns are separated by neutral rules styled with
+> `TimePickerColumnDividerWidth`, `TimePickerColumnDividerMargin` and `TimePickerSpacerFill`. They are rules
+> rather than a `:` glyph on purpose: the control reorders the hour / minute / period hosts per culture but
+> never moves the dividers, so a literal separator is correct only while the hour happens to come first — in a
+> period-first culture such as `ko-KR` it would land between the period and the hour.
+>
 > `TimePicker` only reports the `Normal` / `Disabled` and `HasTime` / `HasNoTime` visual states — it has no
 > `PointerOver` or `Pressed` state of its own (unlike `DatePicker`), so there are no `*PointerOver` / `*Pressed`
 > brush keys. Pressed and disabled feedback comes from the `TimePickerFlyoutButtonOpacity*` keys.
-
-> [!NOTE]
+>
 > `Header` renders **only** as the in-field placeholder, the way the Simple `TextBox` shows `PlaceholderText` —
-> there is no separate header line above the field. `TimePickerHeaderForeground` therefore applies to the value,
-> and `TimePickerPlaceholderTextForeground` to the header while no time is set. `TimePickerHeaderMargin` is kept
-> for back-compat but is no longer used by the default template. With no `Header`, the control's own
-> `hour : minute AM` run stays visible as the placeholder instead.
+> there is no separate header line above the field, and `HeaderTemplate` is honoured. The placeholder is
+> coloured by `TimePickerHeaderForeground`, and by `TimePickerHeaderForegroundDisabled` when the control is
+> disabled; `TimePickerPlaceholderTextForeground` dims the control's own hour / minute / period run. With no
+> `Header`, that run stays visible as the placeholder instead.
 
 ## Example
 

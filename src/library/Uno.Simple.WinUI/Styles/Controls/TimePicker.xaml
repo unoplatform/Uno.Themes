@@ -12,10 +12,12 @@
 		TimePicker* = canonical semantic keys (source of truth)
 
 		Template part names follow the WinUI TimePicker contract
-		(LayoutRoot / FlyoutButton / FlyoutButtonContentGrid /
-		First|Second|ThirdPickerHost / First|Second|ThirdTextBlockColumn /
+		(LayoutRoot / FlyoutButton / First|Second|ThirdPickerHost /
+		First|Second|ThirdTextBlockColumn / Hour|Minute|PeriodTextBlock /
 		First|SecondColumnDivider) so the control can reorder hour / minute / period
 		per culture and collapse the period column for a 24-hour ClockIdentifier.
+		FlyoutButtonContentGrid and PlaceholderText are this template's own names,
+		not part of that contract.
 
 		SDS TimePicker CSS mapping:
 		Field:       background-default-default bg, border-default-default border, radius-200 (8px), text-default-default
@@ -47,11 +49,7 @@
 			<!-- Selection band: must contrast with TimePickerFlyoutPresenterBackground (SurfaceBrush) in both themes -->
 			<StaticResource x:Key="TimePickerFlyoutPresenterHighlightFill" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="TimePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
-			<x:Double x:Key="TimePickerFlyoutPresenterWidth">242</x:Double>
-			<x:Double x:Key="TimePickerFlyoutPresenterMinWidth">242</x:Double>
-			<x:Double x:Key="TimePickerFlyoutPresenterMaxHeight">398</x:Double>
 			<StaticResource x:Key="TimePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
-			<x:Double x:Key="TimePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
 			<StaticResource x:Key="TimePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
 			<StaticResource x:Key="TimePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
 			<StaticResource x:Key="TimePickerFlyoutPresenterFontFamily" ResourceKey="SimpleFontFamily" />
@@ -74,24 +72,16 @@
 			<StaticResource x:Key="TimePickerSpacerFill" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TimePickerSpacerFillDisabled" ResourceKey="OutlineDisabledBrush" />
 
-			<!-- ── Header ── -->
-			<StaticResource x:Key="TimePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<!-- ── Header (rendered as the in-field placeholder) ── -->
+			<StaticResource x:Key="TimePickerHeaderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="TimePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- ── Dimensions ── -->
 			<StaticResource x:Key="TimePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 			<StaticResource x:Key="TimePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
-			<Thickness x:Key="TimePickerContentMargin">16,10,16,10</Thickness>
 			<StaticResource x:Key="TimePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
 			<StaticResource x:Key="TimePickerMinHeight" ResourceKey="ControlHeightMediumLarge" />
-			<x:Double x:Key="TimePickerFlyoutButtonOpacityPressed">0.8</x:Double>
-			<x:Double x:Key="TimePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
-			<!-- Kept for back-compat: the header now renders as the in-field placeholder -->
-			<StaticResource x:Key="TimePickerHeaderMargin" ResourceKey="Space100BottomThickness" />
-			<!-- Kept for back-compat: the column separator is text, not a rule -->
 			<StaticResource x:Key="TimePickerColumnDividerWidth" ResourceKey="SimpleStrokeBorder" />
-			<Thickness x:Key="TimePickerColumnDividerMargin">2,0,2,0</Thickness>
-			<Thickness x:Key="TimePickerFlyoutPresenterTitleMargin">16,12,16,4</Thickness>
 		</ResourceDictionary>
 
 		<!-- ─── Dark Theme (Default) ─── -->
@@ -108,11 +98,7 @@
 			<!-- Selection band: must contrast with TimePickerFlyoutPresenterBackground (SurfaceBrush) in both themes -->
 			<StaticResource x:Key="TimePickerFlyoutPresenterHighlightFill" ResourceKey="SurfaceVariantBrush" />
 			<StaticResource x:Key="TimePickerFlyoutPresenterCornerRadius" ResourceKey="SimpleRadius400CornerRadius" />
-			<x:Double x:Key="TimePickerFlyoutPresenterWidth">242</x:Double>
-			<x:Double x:Key="TimePickerFlyoutPresenterMinWidth">242</x:Double>
-			<x:Double x:Key="TimePickerFlyoutPresenterMaxHeight">398</x:Double>
 			<StaticResource x:Key="TimePickerFlyoutPresenterHighlightHeight" ResourceKey="SimpleIconLarge" />
-			<x:Double x:Key="TimePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
 			<StaticResource x:Key="TimePickerSpacerThemeWidth" ResourceKey="SimpleStrokeBorder" />
 			<StaticResource x:Key="TimePickerFlyoutBorderThickness" ResourceKey="SimpleStrokeBorder" />
 			<StaticResource x:Key="TimePickerFlyoutPresenterFontFamily" ResourceKey="SimpleFontFamily" />
@@ -135,27 +121,40 @@
 			<StaticResource x:Key="TimePickerSpacerFill" ResourceKey="OnSurfaceVariantBrush" />
 			<StaticResource x:Key="TimePickerSpacerFillDisabled" ResourceKey="OutlineDisabledBrush" />
 
-			<!-- ── Header ── -->
-			<StaticResource x:Key="TimePickerHeaderForeground" ResourceKey="OnSurfaceBrush" />
+			<!-- ── Header (rendered as the in-field placeholder) ── -->
+			<StaticResource x:Key="TimePickerHeaderForeground" ResourceKey="OnSurfaceLowBrush" />
 			<StaticResource x:Key="TimePickerHeaderForegroundDisabled" ResourceKey="OnSurfaceDisabledBrush" />
 
 			<!-- ── Dimensions ── -->
 			<StaticResource x:Key="TimePickerCornerRadius" ResourceKey="SimpleRadius200CornerRadius" />
 			<StaticResource x:Key="TimePickerBorderThemeThickness" ResourceKey="SimpleStrokeBorderThickness" />
-			<Thickness x:Key="TimePickerContentMargin">16,10,16,10</Thickness>
 			<StaticResource x:Key="TimePickerFlyoutButtonPadding" ResourceKey="SimpleSpace0Thickness" />
 			<StaticResource x:Key="TimePickerMinHeight" ResourceKey="ControlHeightMediumLarge" />
-			<x:Double x:Key="TimePickerFlyoutButtonOpacityPressed">0.8</x:Double>
-			<x:Double x:Key="TimePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
-			<!-- Kept for back-compat: the header now renders as the in-field placeholder -->
-			<StaticResource x:Key="TimePickerHeaderMargin" ResourceKey="Space100BottomThickness" />
-			<!-- Kept for back-compat: the column separator is text, not a rule -->
 			<StaticResource x:Key="TimePickerColumnDividerWidth" ResourceKey="SimpleStrokeBorder" />
-			<Thickness x:Key="TimePickerColumnDividerMargin">2,0,2,0</Thickness>
-			<Thickness x:Key="TimePickerFlyoutPresenterTitleMargin">16,12,16,4</Thickness>
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Theme-invariant dimensions -->
+	<!--
+		Declared at dictionary scope rather than duplicated into every theme branch:
+		the values are identical in Light and Dark, and a single declaration keeps
+		them resolvable from Storyboard/Setter values, which read through
+		StaticResource and do not re-resolve per ThemeDictionary.
+		Consumers still override them from their own App resources.
+	-->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<x:Double x:Key="TimePickerFlyoutPresenterWidth">242</x:Double>
+	<x:Double x:Key="TimePickerFlyoutPresenterMinWidth">242</x:Double>
+	<x:Double x:Key="TimePickerFlyoutPresenterMaxWidth">456</x:Double>
+	<x:Double x:Key="TimePickerFlyoutPresenterMaxHeight">398</x:Double>
+	<x:Double x:Key="TimePickerFlyoutPresenterAcceptDismissHostGridHeight">52</x:Double>
+	<x:Double x:Key="TimePickerFlyoutButtonOpacityPressed">0.8</x:Double>
+	<x:Double x:Key="TimePickerFlyoutButtonOpacityDisabled">0.5</x:Double>
+	<Thickness x:Key="TimePickerContentMargin">16,10,16,10</Thickness>
+	<Thickness x:Key="TimePickerColumnDividerMargin">2,0,2,0</Thickness>
+	<Thickness x:Key="TimePickerFlyoutPresenterTitleMargin">16,12,16,4</Thickness>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- SimpleTimePickerFlyoutButtonStyle -->
@@ -358,6 +357,8 @@
 		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
 		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
 		<Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+		<not_win:Setter Property="FlyoutPresenterStyle"
+						Value="{StaticResource SimpleTimePickerFlyoutPresenterStyle}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -372,6 +373,7 @@
 						<!-- Flyout Button -->
 						<Button x:Name="FlyoutButton"
 								MinWidth="{ThemeResource TimePickerFlyoutPresenterMinWidth}"
+								MaxWidth="{ThemeResource TimePickerFlyoutPresenterMaxWidth}"
 								HorizontalAlignment="Stretch"
 								HorizontalContentAlignment="Stretch"
 								IsEnabled="{TemplateBinding IsEnabled}"
@@ -388,48 +390,60 @@
 										BorderThickness="{TemplateBinding BorderThickness}"
 										CornerRadius="{TemplateBinding CornerRadius}" />
 
-								<!-- Placeholder — the header, shown while no time is picked -->
-								<TextBlock x:Name="PlaceholderText"
-										   Margin="{ThemeResource TimePickerContentMargin}"
-										   VerticalAlignment="Center"
-										   AutomationProperties.AccessibilityView="Raw"
-										   FontFamily="{TemplateBinding FontFamily}"
-										   FontSize="{TemplateBinding FontSize}"
-										   Foreground="{ThemeResource TimePickerPlaceholderTextForeground}"
-										   Text="{TemplateBinding Header}"
-										   TextWrapping="Wrap"
-										   Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
+								<!--
+									Placeholder — the header, shown while no time is picked. A ContentPresenter
+									rather than a TextBlock so a non-string Header and HeaderTemplate both render
+									(Header is typed object; Text="{TemplateBinding Header}" would ToString it and
+									drop HeaderTemplate entirely).
+								-->
+								<ContentPresenter x:Name="PlaceholderText"
+												  Margin="{ThemeResource TimePickerContentMargin}"
+												  VerticalAlignment="Center"
+												  AutomationProperties.AccessibilityView="Raw"
+												  Content="{TemplateBinding Header}"
+												  ContentTemplate="{TemplateBinding HeaderTemplate}"
+												  FontFamily="{TemplateBinding FontFamily}"
+												  FontSize="{TemplateBinding FontSize}"
+												  Foreground="{ThemeResource TimePickerHeaderForeground}"
+												  TextWrapping="Wrap"
+												  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToCollapsedConverter}}" />
 
 								<!--
-									Content — the hour / minute / period parts stay under the control's ownership
-									(it fills them, reorders the hosts per culture and collapses the period column
-									for a 24-hour ClockIdentifier). Auto columns and a left-aligned grid render them
-									as a single value ("9:41 AM") instead of three full-width cells, so the field
-									reads like the DatePicker / TextBox field. First|SecondColumnDivider are typed
-									UIElement in the control contract, so they carry the time separator rather than
-									a vertical rule.
+									Content — the hour / minute / period parts stay under the control's ownership:
+									it fills the TextBlocks, reparents them between First|Second|ThirdPickerHost to
+									reorder per culture, and collapses the period host for a 24-hour ClockIdentifier.
+
+									The dividers are neutral rules, not glyphs. UpdateOrderAndLayout only toggles
+									divider *visibility* — it never moves them — so a literal ":" in FirstColumnDivider
+									is only correct while the hour happens to come first. Under a period-first culture
+									(ko-KR / zh-CN / ja-JP put the period in FirstPickerHost) it would render
+									"오전 : 9  41", with the colon between period and hour and none between hour and
+									minute. A rule carries no ordering assumption, so it is correct in every culture.
+
+									The star column widths match the control: UpdateOrderAndLayout assigns 1* to every
+									populated column and 0 to the rest, overwriting whatever the template declares.
 								-->
 								<Grid x:Name="FlyoutButtonContentGrid"
 									  Margin="{ThemeResource TimePickerContentMargin}"
-									  HorizontalAlignment="Left"
 									  VerticalAlignment="Center"
 									  Visibility="{Binding Header, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource EmptyOrNullToVisibleConverter}}">
 
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition x:Name="FirstTextBlockColumn"
-														  Width="Auto" />
+														  Width="*" />
 										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition x:Name="SecondTextBlockColumn"
-														  Width="Auto" />
+														  Width="*" />
 										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition x:Name="ThirdTextBlockColumn"
-														  Width="Auto" />
+														  Width="*" />
 									</Grid.ColumnDefinitions>
 
 									<!-- Hours -->
 									<Border x:Name="FirstPickerHost"
 											Grid.Column="0">
 										<TextBlock x:Name="HourTextBlock"
+												   HorizontalAlignment="Center"
 												   VerticalAlignment="Center"
 												   AutomationProperties.AccessibilityView="Raw"
 												   FontFamily="{TemplateBinding FontFamily}"
@@ -437,21 +451,18 @@
 												   Foreground="{ThemeResource TimePickerButtonTimeTextForeground}" />
 									</Border>
 
-									<!-- Time separator -->
-									<TextBlock x:Name="FirstColumnDivider"
+									<Rectangle x:Name="FirstColumnDivider"
 											   Grid.Column="1"
+											   Width="{ThemeResource TimePickerColumnDividerWidth}"
 											   Margin="{ThemeResource TimePickerColumnDividerMargin}"
-											   VerticalAlignment="Center"
-											   AutomationProperties.AccessibilityView="Raw"
-											   FontFamily="{TemplateBinding FontFamily}"
-											   FontSize="{TemplateBinding FontSize}"
-											   Foreground="{ThemeResource TimePickerSpacerFill}"
-											   Text=":" />
+											   HorizontalAlignment="Center"
+											   Fill="{ThemeResource TimePickerSpacerFill}" />
 
 									<!-- Minutes -->
 									<Border x:Name="SecondPickerHost"
 											Grid.Column="2">
 										<TextBlock x:Name="MinuteTextBlock"
+												   HorizontalAlignment="Center"
 												   VerticalAlignment="Center"
 												   AutomationProperties.AccessibilityView="Raw"
 												   FontFamily="{TemplateBinding FontFamily}"
@@ -459,19 +470,19 @@
 												   Foreground="{ThemeResource TimePickerButtonTimeTextForeground}" />
 									</Border>
 
-									<!-- Period spacing — collapsed by the control for a 24-hour clock -->
-									<TextBlock x:Name="SecondColumnDivider"
+									<!-- Collapsed by the control for a 24-hour clock -->
+									<Rectangle x:Name="SecondColumnDivider"
 											   Grid.Column="3"
+											   Width="{ThemeResource TimePickerColumnDividerWidth}"
 											   Margin="{ThemeResource TimePickerColumnDividerMargin}"
-											   VerticalAlignment="Center"
-											   AutomationProperties.AccessibilityView="Raw"
-											   FontFamily="{TemplateBinding FontFamily}"
-											   FontSize="{TemplateBinding FontSize}" />
+											   HorizontalAlignment="Center"
+											   Fill="{ThemeResource TimePickerSpacerFill}" />
 
 									<!-- AM/PM -->
 									<Border x:Name="ThirdPickerHost"
 											Grid.Column="4">
 										<TextBlock x:Name="PeriodTextBlock"
+												   HorizontalAlignment="Center"
 												   VerticalAlignment="Center"
 												   AutomationProperties.AccessibilityView="Raw"
 												   FontFamily="{TemplateBinding FontFamily}"
@@ -494,7 +505,8 @@
 										<Setter Target="HourTextBlock.Foreground" Value="{ThemeResource TimePickerButtonTimeTextForegroundDisabled}" />
 										<Setter Target="MinuteTextBlock.Foreground" Value="{ThemeResource TimePickerButtonTimeTextForegroundDisabled}" />
 										<Setter Target="PeriodTextBlock.Foreground" Value="{ThemeResource TimePickerButtonTimeTextForegroundDisabled}" />
-										<Setter Target="FirstColumnDivider.Foreground" Value="{ThemeResource TimePickerSpacerFillDisabled}" />
+										<Setter Target="FirstColumnDivider.Fill" Value="{ThemeResource TimePickerSpacerFillDisabled}" />
+										<Setter Target="SecondColumnDivider.Fill" Value="{ThemeResource TimePickerSpacerFillDisabled}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
