@@ -109,6 +109,59 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
   MediaTransportControls availability as platform-varying (D8 GAP exception).
 - [ ] Screenshot pass vs WinUI Gallery (§15) — needs a windowed environment
 
+## Phase 5 — ThemesSampleApp wrapper hosting
+
+`ThemesSampleApp` (the ALC wrapper head, `specs/05-alc-wrapper-app/`) landed on
+`master` while this branch was in flight. Rebased onto it and registered
+`FluentSampleApp` as its fourth hostable guest.
+
+- [x] Head-side accommodations (the only two the wrapper asks of a guest, same as
+  the other three heads): `UnoEnableAlcAppSupport=true` in `FluentSampleApp.csproj`,
+  and `MainWindow = new Microsoft.UI.Xaml.Window()` in place of `Window.Current`
+  (a process-wide static in the *shared* `Uno.UI` — hosted, the guest would grab
+  the wrapper's window). Both stay correct standalone.
+- [x] All six wrapper declaration sites, per the list in `GuestAppCatalog`'s own
+  docstring:
+  1. `GuestAppCatalog.Apps` — `("Fluent", "FluentSampleApp", "FluentSampleApp")`,
+     last in picker order
+  2. `ThemesSampleApp.csproj` — `_GuestWasmApp` payload list + the desktop
+     build-ordering `ProjectReference`
+  3. `Uno.Themes.sln` — wrapper's `ProjectDependencies` (IDE/solution build order;
+     the csproj P2P only covers override-driven CLI builds)
+  4. `build/scripts/build-wasm-guest-heads.sh` — the wasm guest-head loop
+  5. `GuestHosting/GuestSharedAssemblies.txt` — `!Uno.Fluent.WinUI`
+  6. `.vscode/tasks.json` — `build-Fluent-wasm` in `build-Themes-wasm`'s `dependsOn`
+- [x] **`!Uno.Fluent.WinUI` (isolate), not shared.** Same reasoning as the other
+  repo-built theme libraries (lessons.md, 2026-08): "share if already loaded" is
+  version-unsafe for any assembly the guest ships, and the Debug-only Hot Design
+  tooling drags the *published* `Uno.Themes.WinUI` into a host bin. Note the rule
+  does not collide with the pre-existing shared `^Uno.UI.FluentTheme` prefix —
+  different assembly (`XamlControlsResources`' home, which guests legitimately
+  share with the host for type identity).
+- [x] **No font package needed for the Fluent guest.** A hosted guest resolves
+  `ms-appx:///` against the *host's* package root, which is why the wrapper carries
+  Roboto/Inter for Material/Simple. Fluent uses the platform default via
+  `ContentControlThemeFontFamily` (D11) so it adds nothing — recorded in the
+  wrapper csproj's font comment so the omission reads as deliberate.
+- [x] **Verified** (2026-08-11, Release desktop, WSLg):
+  - `dotnet build ThemesSampleApp.csproj -c Release -f net10.0-desktop
+    -p:TargetFrameworkOverride=desktop` — 0 errors, warning set unchanged
+    (the pre-existing `SamplesApp.Shared` nullable set, shared by every head);
+    no-bleed still green (no theme / ShowMeTheXAML / MSTest dll in the wrapper bin).
+  - Hosting smoke `--smoke`: **RESULT: PASS** (exit 0) — all four guests load,
+    present content and are hosted in turn, and every unloaded guest ALC is
+    reclaimed, Fluent included.
+  - Share/isolate invariant re-checked mechanically against the built bins: the
+    Fluent guest carries 2 isolated theme libraries and 36 host-shared
+    assemblies, with **no** assembly marked `=`/`^` that is absent from the
+    wrapper's closure (that invariant is what strands a wasm guest).
+  - Full runtime-test suite (CI-parity host): **323 cases — 322 passed, 1
+    skipped** (`When_BaseThemeIsCollected_Then_HotReloadHandlerDoesNotResurrectIt`,
+    the pre-existing skip). `Given_Fluent*` alone: 227/227.
+  - Not run locally: the wasm leg (guest payload packaging + browser `?smoke`).
+    CI covers it via `build/stage-build-wasm.yml`; the payload list and the
+    guest-head build script are the two Fluent-specific inputs there.
+
 ## Follow-ups
 
 - [ ] **Windows-TFM drop (announced 2026-08-11, timing TBD):** when the
