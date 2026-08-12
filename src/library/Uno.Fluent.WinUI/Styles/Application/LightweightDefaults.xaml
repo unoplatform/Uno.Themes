@@ -1,0 +1,159 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Fluent — Lightweight-styling semantic key defaults (static neutrals)
+
+		The NEUTRAL per-branch defaults for the documented semantic
+		lightweight-styling keys (spec 05 §10 step 1). Each value is annotated with
+		its normative Fluent token (spike S2/S4 captures);
+		Given_FluentLightweightStyling.When_AmbientDefaults_MatchLiveTokens
+		drift-guards the ambient branch against the live platform values on every
+		run — re-capture here when an Uno.UI update changes a token.
+
+		NOT here (code-built in FluentLightweightBridge, layered above this
+		dictionary): the ACCENT-derived defaults (FilledButtonBackground and its
+		hover/pressed opacity variants, the ToggleSwitch ON-track fill/stroke) —
+		they follow the effective primary (PrimaryColor override > seed > live
+		platform accent) and cannot be expressed declaratively — and the
+		override-driven re-pointing of the built-in Fluent per-control resources.
+		Keys with no Fluent equivalent, and hover/pressed/Disabled keys outside the
+		accent families, are deliberately absent: re-point pass-through only, no
+		defaults (their platform values are not verified on every branch).
+
+		FluentTheme merges this dictionary once per instance, below the code-built
+		bridge layer. It is excluded from the merged pages (fluent-common.props):
+		theme-branch resources inside the merged bundle do not resolve reliably in
+		Release builds — see specs/lessons.md.
+
+		The TextFillColor* / TextOnAccentFillColor* / ControlStrongStrokeColor
+		captures also appear (as colors) in ColorPalette.xaml — the two files
+		serve different layers; keep both in sync on re-capture.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+		<ResourceDictionary x:Key="Light">
+			<!-- Filled (accent button). Backgrounds are code-built (accent-derived);
+				 the stock accent-button border is an elevation gradient that cannot
+				 be expressed as a semantic default — transparent is the documented
+				 nearest value (rest/hover/pressed/disabled are all near-invisible). -->
+			<!-- TextOnAccentFillColorPrimary -->
+			<SolidColorBrush x:Key="FilledButtonForeground" Color="#FFFFFFFF" />
+			<SolidColorBrush x:Key="FilledButtonForegroundPointerOver" Color="#FFFFFFFF" />
+			<!-- TextOnAccentFillColorSecondary -->
+			<SolidColorBrush x:Key="FilledButtonForegroundPressed" Color="#B3FFFFFF" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrush" Color="Transparent" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrushPointerOver" Color="Transparent" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrushPressed" Color="Transparent" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrushDisabled" Color="Transparent" />
+
+			<!-- Outlined (standard button), rest state. -->
+			<!-- ControlFillColorDefault -->
+			<SolidColorBrush x:Key="OutlinedButtonBackground" Color="#B3FFFFFF" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="OutlinedButtonForeground" Color="#E4000000" />
+			<!-- ControlStrongStrokeColorDefault -->
+			<SolidColorBrush x:Key="OutlinedButtonBorderBrush" Color="#72000000" />
+
+			<!-- Text / Icon (consumed by the shipped bridge styles via
+				 {ThemeResource} setters). Fluent's subtle button uses neutral text. -->
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="TextButtonForeground" Color="#E4000000" />
+			<SolidColorBrush x:Key="TextButtonForegroundPointerOver" Color="#E4000000" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="TextButtonForegroundPressed" Color="#9E000000" />
+			<SolidColorBrush x:Key="TextButtonBackground" Color="Transparent" />
+			<SolidColorBrush x:Key="TextButtonBackgroundPointerOver" Color="Transparent" />
+			<SolidColorBrush x:Key="TextButtonBackgroundPressed" Color="Transparent" />
+			<SolidColorBrush x:Key="TextButtonBorderBrush" Color="Transparent" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="IconButtonForeground" Color="#9E000000" />
+
+			<!-- TextBox (both semantic families — one Fluent TextBox), rest state. -->
+			<!-- ControlFillColorDefault -->
+			<SolidColorBrush x:Key="FilledTextBoxBackground" Color="#B3FFFFFF" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="FilledTextBoxForeground" Color="#E4000000" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="FilledTextBoxPlaceholderForeground" Color="#9E000000" />
+			<!-- ControlStrongStrokeColorDefault -->
+			<SolidColorBrush x:Key="FilledTextBoxBorderBrush" Color="#72000000" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="FilledTextBoxHeaderForeground" Color="#E4000000" />
+			<SolidColorBrush x:Key="OutlinedTextBoxForeground" Color="#E4000000" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="OutlinedTextBoxPlaceholderForeground" Color="#9E000000" />
+			<!-- ControlStrongStrokeColorDefault -->
+			<SolidColorBrush x:Key="OutlinedTextBoxBorderBrush" Color="#72000000" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="OutlinedTextBoxHeaderForeground" Color="#E4000000" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="TextBoxDeleteButtonForeground" Color="#9E000000" />
+
+			<!-- CheckBox glyph (the checked glyph sits on the accent fill). -->
+			<!-- TextOnAccentFillColorPrimary -->
+			<SolidColorBrush x:Key="CheckBoxGlyphForegroundChecked" Color="#FFFFFFFF" />
+
+			<!-- ToggleSwitch ON knob (the ON-track fill/stroke are code-built, accent-derived). -->
+			<!-- TextOnAccentFillColorPrimary -->
+			<SolidColorBrush x:Key="ToggleSwitchKnobOnFill" Color="#FFFFFFFF" />
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Default">
+			<!-- TextOnAccentFillColorPrimary -->
+			<SolidColorBrush x:Key="FilledButtonForeground" Color="#FF000000" />
+			<SolidColorBrush x:Key="FilledButtonForegroundPointerOver" Color="#FF000000" />
+			<!-- TextOnAccentFillColorSecondary -->
+			<SolidColorBrush x:Key="FilledButtonForegroundPressed" Color="#80000000" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrush" Color="Transparent" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrushPointerOver" Color="Transparent" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrushPressed" Color="Transparent" />
+			<SolidColorBrush x:Key="FilledButtonBorderBrushDisabled" Color="Transparent" />
+
+			<!-- ControlFillColorDefault -->
+			<SolidColorBrush x:Key="OutlinedButtonBackground" Color="#0FFFFFFF" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="OutlinedButtonForeground" Color="#FFFFFFFF" />
+			<!-- ControlStrongStrokeColorDefault -->
+			<SolidColorBrush x:Key="OutlinedButtonBorderBrush" Color="#8BFFFFFF" />
+
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="TextButtonForeground" Color="#FFFFFFFF" />
+			<SolidColorBrush x:Key="TextButtonForegroundPointerOver" Color="#FFFFFFFF" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="TextButtonForegroundPressed" Color="#C5FFFFFF" />
+			<SolidColorBrush x:Key="TextButtonBackground" Color="Transparent" />
+			<SolidColorBrush x:Key="TextButtonBackgroundPointerOver" Color="Transparent" />
+			<SolidColorBrush x:Key="TextButtonBackgroundPressed" Color="Transparent" />
+			<SolidColorBrush x:Key="TextButtonBorderBrush" Color="Transparent" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="IconButtonForeground" Color="#C5FFFFFF" />
+
+			<!-- ControlFillColorDefault -->
+			<SolidColorBrush x:Key="FilledTextBoxBackground" Color="#0FFFFFFF" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="FilledTextBoxForeground" Color="#FFFFFFFF" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="FilledTextBoxPlaceholderForeground" Color="#C5FFFFFF" />
+			<!-- ControlStrongStrokeColorDefault -->
+			<SolidColorBrush x:Key="FilledTextBoxBorderBrush" Color="#8BFFFFFF" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="FilledTextBoxHeaderForeground" Color="#FFFFFFFF" />
+			<SolidColorBrush x:Key="OutlinedTextBoxForeground" Color="#FFFFFFFF" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="OutlinedTextBoxPlaceholderForeground" Color="#C5FFFFFF" />
+			<!-- ControlStrongStrokeColorDefault -->
+			<SolidColorBrush x:Key="OutlinedTextBoxBorderBrush" Color="#8BFFFFFF" />
+			<!-- TextFillColorPrimary -->
+			<SolidColorBrush x:Key="OutlinedTextBoxHeaderForeground" Color="#FFFFFFFF" />
+			<!-- TextFillColorSecondary -->
+			<SolidColorBrush x:Key="TextBoxDeleteButtonForeground" Color="#C5FFFFFF" />
+
+			<!-- TextOnAccentFillColorPrimary -->
+			<SolidColorBrush x:Key="CheckBoxGlyphForegroundChecked" Color="#FF000000" />
+
+			<!-- TextOnAccentFillColorPrimary -->
+			<SolidColorBrush x:Key="ToggleSwitchKnobOnFill" Color="#FF000000" />
+		</ResourceDictionary>
+	</ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

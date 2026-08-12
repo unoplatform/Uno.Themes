@@ -17,11 +17,13 @@ using Windows.UI.Xaml.Media;
 namespace Uno.Fluent;
 
 /// <summary>
-/// Builds the lightweight-styling bridge (spec 05 §10, goal G6): defines the
-/// documented semantic lightweight keys with Fluent default values, and — when
-/// a consumer override supplies a semantic key — re-points the corresponding
+/// Builds the code-built half of the lightweight-styling bridge (spec 05 §10,
+/// goal G6): the accent-derived semantic key defaults, and — when a consumer
+/// override supplies a semantic key — the re-pointing of the corresponding
 /// built-in Fluent per-control resource at the override's value so
-/// Fluent-styled controls reflect it.
+/// Fluent-styled controls reflect it. The static neutral key defaults ship
+/// declaratively in <c>Styles/Application/LightweightDefaults.xaml</c>, merged
+/// by <see cref="FluentTheme"/> below this layer.
 /// </summary>
 /// <remarks>
 /// <para>
@@ -164,24 +166,11 @@ internal static class FluentLightweightBridge
 		// Presence is guarded by Given_FluentLightweightStyling.
 	};
 
-	private readonly record struct BranchValues(Color Light, Color Dark);
-
-	// Per-branch Fluent neutrals used by the semantic defaults. Values are
-	// platform captures (spike S2 dark / S4 light), drift-guarded by
-	// Given_FluentLightweightStyling.When_AmbientDefaults_MatchLiveTokens.
-	// TextFillColor* intentionally mirrors FluentColorPalette's capture —
-	// the two tables serve different layers; keep both in sync on re-capture.
-	private static readonly BranchValues _textPrimary = new(Rgba(0xE4000000), Rgba(0xFFFFFFFF));
-	private static readonly BranchValues _textSecondary = new(Rgba(0x9E000000), Rgba(0xC5FFFFFF));
-	private static readonly BranchValues _onAccentPrimary = new(Rgba(0xFFFFFFFF), Rgba(0xFF000000));
-	private static readonly BranchValues _onAccentSecondary = new(Rgba(0xB3FFFFFF), Rgba(0x80000000));
-	private static readonly BranchValues _controlFillDefault = new(Rgba(0xB3FFFFFF), Rgba(0x0FFFFFFF));
-	private static readonly BranchValues _strongStroke = new(Rgba(0x72000000), Rgba(0x8BFFFFFF));
-
 	/// <summary>
-	/// Builds the bridge dictionary: semantic Button lightweight keys with
-	/// Fluent default values per theme branch, plus per-control re-pointing
-	/// entries for every semantic key found in <paramref name="consumerOverride"/>.
+	/// Builds the bridge dictionary: the accent-derived semantic key defaults
+	/// per theme branch (the static neutral defaults ship declaratively in
+	/// LightweightDefaults.xaml), plus per-control re-pointing entries for every
+	/// semantic key found in <paramref name="consumerOverride"/>.
 	/// </summary>
 	/// <param name="seed">The effective primary seed, when one is active — the accent-fill defaults follow it (tones 30/70, matching FluentAccentPalette).</param>
 	/// <param name="lightAccentBasis">The light-branch PrimaryColor override, when set — becomes the accent fill verbatim, taking precedence over the seed (matching FluentAccentPalette).</param>
@@ -191,8 +180,8 @@ internal static class FluentLightweightBridge
 	{
 		var (lightFill, darkFill) = ResolveAccentFill(seed, lightAccentBasis, darkAccentBasis);
 
-		var light = BuildBranchDefaults(isLight: true, lightFill);
-		var dark = BuildBranchDefaults(isLight: false, darkFill);
+		var light = BuildAccentDefaults(lightFill);
+		var dark = BuildAccentDefaults(darkFill);
 
 		if (consumerOverride is { })
 		{
@@ -242,71 +231,23 @@ internal static class FluentLightweightBridge
 		return (light, dark);
 	}
 
-	private static ResourceDictionary BuildBranchDefaults(bool isLight, Color? accentFill)
+	private static ResourceDictionary BuildAccentDefaults(Color? accentFill)
 	{
 		var branch = new ResourceDictionary();
 
-		Color Of(BranchValues values) => isLight ? values.Light : values.Dark;
-		var transparent = Color.FromArgb(0, 0xFF, 0xFF, 0xFF);
-
-		// Filled (accent button). Hover/pressed are the fill at 0.9/0.8 BRUSH
-		// opacity — XCR's own structure (spike S4).
 		if (accentFill is { } fill)
 		{
+			// Filled (accent button). Hover/pressed are the fill at 0.9/0.8 BRUSH
+			// opacity — XCR's own structure (spike S4).
 			branch["FilledButtonBackground"] = new SolidColorBrush(fill);
 			branch["FilledButtonBackgroundPointerOver"] = new SolidColorBrush(fill) { Opacity = 0.9 };
 			branch["FilledButtonBackgroundPressed"] = new SolidColorBrush(fill) { Opacity = 0.8 };
+
+			// ToggleSwitch ON track (OFF-state neutrals are re-point
+			// pass-through only — unverified per branch).
+			branch["ToggleSwitchOuterBorderFill"] = new SolidColorBrush(fill);
+			branch["ToggleSwitchOuterBorderStroke"] = new SolidColorBrush(fill);
 		}
-		branch["FilledButtonForeground"] = new SolidColorBrush(Of(_onAccentPrimary));
-		branch["FilledButtonForegroundPointerOver"] = new SolidColorBrush(Of(_onAccentPrimary));
-		branch["FilledButtonForegroundPressed"] = new SolidColorBrush(Of(_onAccentSecondary));
-		// The stock accent-button border is an elevation gradient that cannot
-		// be expressed as a semantic default; transparent is the documented
-		// nearest value (rest/hover/pressed/disabled are all near-invisible).
-		branch["FilledButtonBorderBrush"] = new SolidColorBrush(transparent);
-		branch["FilledButtonBorderBrushPointerOver"] = new SolidColorBrush(transparent);
-		branch["FilledButtonBorderBrushPressed"] = new SolidColorBrush(transparent);
-		branch["FilledButtonBorderBrushDisabled"] = new SolidColorBrush(transparent);
-
-		// Outlined (standard button), rest state.
-		branch["OutlinedButtonBackground"] = new SolidColorBrush(Of(_controlFillDefault));
-		branch["OutlinedButtonForeground"] = new SolidColorBrush(Of(_textPrimary));
-		branch["OutlinedButtonBorderBrush"] = new SolidColorBrush(Of(_strongStroke));
-
-		// Text / Icon (consumed by the shipped bridge styles via
-		// {ThemeResource} setters). Fluent's subtle button uses neutral text.
-		branch["TextButtonForeground"] = new SolidColorBrush(Of(_textPrimary));
-		branch["TextButtonForegroundPointerOver"] = new SolidColorBrush(Of(_textPrimary));
-		branch["TextButtonForegroundPressed"] = new SolidColorBrush(Of(_textSecondary));
-		branch["TextButtonBackground"] = new SolidColorBrush(transparent);
-		branch["TextButtonBackgroundPointerOver"] = new SolidColorBrush(transparent);
-		branch["TextButtonBackgroundPressed"] = new SolidColorBrush(transparent);
-		branch["TextButtonBorderBrush"] = new SolidColorBrush(transparent);
-		branch["IconButtonForeground"] = new SolidColorBrush(Of(_textSecondary));
-
-		// TextBox (both families — one Fluent TextBox), rest state.
-		branch["FilledTextBoxBackground"] = new SolidColorBrush(Of(_controlFillDefault));
-		branch["FilledTextBoxForeground"] = new SolidColorBrush(Of(_textPrimary));
-		branch["FilledTextBoxPlaceholderForeground"] = new SolidColorBrush(Of(_textSecondary));
-		branch["FilledTextBoxBorderBrush"] = new SolidColorBrush(Of(_strongStroke));
-		branch["FilledTextBoxHeaderForeground"] = new SolidColorBrush(Of(_textPrimary));
-		branch["OutlinedTextBoxForeground"] = new SolidColorBrush(Of(_textPrimary));
-		branch["OutlinedTextBoxPlaceholderForeground"] = new SolidColorBrush(Of(_textSecondary));
-		branch["OutlinedTextBoxBorderBrush"] = new SolidColorBrush(Of(_strongStroke));
-		branch["OutlinedTextBoxHeaderForeground"] = new SolidColorBrush(Of(_textPrimary));
-		branch["TextBoxDeleteButtonForeground"] = new SolidColorBrush(Of(_textSecondary));
-
-		// CheckBox glyph (checked glyph sits on the accent fill).
-		branch["CheckBoxGlyphForegroundChecked"] = new SolidColorBrush(Of(_onAccentPrimary));
-
-		// ToggleSwitch ON family (accent-based; OFF-state neutrals are
-		// re-point pass-through only — unverified per branch).
-		if (accentFill is { } switchFill)
-		{
-			branch["ToggleSwitchOuterBorderFill"] = new SolidColorBrush(switchFill);
-			branch["ToggleSwitchOuterBorderStroke"] = new SolidColorBrush(switchFill);
-		}
-		branch["ToggleSwitchKnobOnFill"] = new SolidColorBrush(Of(_onAccentPrimary));
 
 		return branch;
 	}
@@ -369,13 +310,6 @@ internal static class FluentLightweightBridge
 		}
 		return entries;
 	}
-
-	private static Color Rgba(uint argb) =>
-		Color.FromArgb(
-			(byte)((argb >> 24) & 0xFF),
-			(byte)((argb >> 16) & 0xFF),
-			(byte)((argb >> 8) & 0xFF),
-			(byte)(argb & 0xFF));
 
 	private static Color FromArgb(int argb) =>
 		Color.FromArgb(
