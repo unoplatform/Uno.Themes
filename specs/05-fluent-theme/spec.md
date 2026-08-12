@@ -104,14 +104,19 @@ the library carries near-zero maintenance drift risk against WinUI.
 ### 3.2 Library layout
 
 New project `src/library/Uno.Fluent.WinUI/`, cloned structurally from
-`Uno.Simple.WinUI` (the newest, smallest theme):
+`Uno.Simple.WinUI` (the newest, smallest theme). As-built layout
+(updated 2026-08-11 — declarative-first pass, see the review log):
 
 ```
 src/library/Uno.Fluent.WinUI/
 ├── Uno.Fluent.WinUI.csproj          # clone of Uno.Simple.WinUI.csproj (PackageId/AssemblyName=Uno.Fluent.WinUI)
 ├── fluent-common.props              # clone of simple-common.props (XamlMergeInput globs, mobile/not_mobile ns, imports ..\xamlmerge.targets)
-├── FluentTheme.cs                   # : BaseTheme (see §3.3)
+├── FluentTheme.cs                   # : BaseTheme (see §3.3); bundle-alias late-binding; layer assembly
 ├── FluentConstants.cs               # internal resource-path constants (mirrors SimpleConstants)
+├── FluentColorPalette.cs            # accent-derived roles per branch (mechanism C, D6); copies ColorPalette.xaml neutrals
+├── FluentAccentPalette.cs           # Phase 2 reverse mapping: effective primary → SystemAccentColor* + closure (§9)
+├── FluentLightweightBridge.cs       # Phase 3 code half: accent-derived defaults + override-driven re-pointing (§10)
+├── FluentDiagnostics.cs             # warning-log helper for the graceful-degradation paths
 ├── AssemblyInfo.cs
 ├── LinkerConfig.xamarin.xml
 ├── build/
@@ -119,11 +124,13 @@ src/library/Uno.Fluent.WinUI/
 │   └── Package.targets
 └── Styles/
     ├── Application/
-    │   ├── BaseDictionaries.xaml    # merges shared Converters + SharedTypography + Fluent Typography.xaml
-    │   ├── ColorPalette.xaml        # semantic role → Fluent values (EXCLUDED from XamlMergeInput; loaded via ctor colorOverride path)
-    │   └── Typography.xaml          # Fluent type-ramp values for the 19 semantic slots
+    │   ├── BaseDictionaries.xaml    # merges shared Converters + SharedTypography + Fluent Typography.xaml + Fonts.xaml
+    │   ├── ColorPalette.xaml        # NEUTRAL semantic role values per branch (EXCLUDED from XamlMergeInput; copied in by FluentColorPalette)
+    │   ├── LightweightDefaults.xaml # NEUTRAL lightweight-styling key defaults per branch (EXCLUDED from XamlMergeInput; merged by FluentTheme)
+    │   ├── Fonts.xaml               # FontFamily slot aliases → ContentControlThemeFontFamily (Source-merged, lessons.md)
+    │   └── Typography.xaml          # Fluent type-ramp values for the 19 semantic slots (Source-merged, lessons.md)
     └── Controls/
-        ├── _Resources.xaml          # semantic alias table (§5) — the heart of the library
+        ├── _Resources.xaml          # semantic alias table (§5) + declarative empty styles for the Ⓜ gap keys
         ├── Button.xaml              # FluentTextButtonStyle / FluentIconButtonStyle bridge styles only (§5.4)
         └── TextBlock.xaml           # semantic TextBlock styles DisplayLarge…CaptionSmall (§7.3)
 ```
@@ -227,7 +234,7 @@ reload and readability; M-CODE is the insurance policy.
 | **D3** | `FluentTheme : BaseTheme`, layered exactly like `SimpleTheme` (palette via ctor `colorOverride`, styles via `DefaultStylesSource`). | Gets seed colors, tokens, hot reload, precedence for free; keeps one theme lifecycle to maintain. |
 | **D4** | `DefaultPrimarySeed => null` (no seed by default); `UseHighFidelityColors => true`. | Fluent's default colors are the platform's. Seed stays opt-in (consistent with 09187371). High fidelity because Windows accent/corporate colors must keep their chroma. |
 | **D5** | Color mapping is **role → Fluent token name** (normative), with concrete hexes captured from the running platform (Spike S2), not hand-transcribed. | Token names are the stable contract; hexes vary by WinUI version and are easy to get subtly wrong. |
-| **D6** | **DECIDED by S1 (2026-07-14): mechanism C** — the color palette is built in code (per-theme-branch token values resolved from `Application.Current.Resources` during `UpdateSource()`), never via per-branch XAML aliases. Mechanism A remains in use for *style* aliases only. | S1 case 4 reproduced the `specs/lessons.md` failure mode: per-branch `<StaticResource>` color aliases resolve eagerly against the **ambient** theme, so both branches carry the same value. C is late-bound, branch-correct, and on Windows can read the live system accent. See `spike-results.md` §S1. |
+| **D6** | **DECIDED by S1 (2026-07-14): mechanism C** — the color palette is built in code (per-theme-branch token values resolved from `Application.Current.Resources` during `UpdateSource()`), never via per-branch XAML aliases. Mechanism A remains in use for *style* aliases only. **Narrowed 2026-08-11 (declarative-first):** mechanism C now covers only the *accent-derived* roles; the static per-branch neutrals are declarative (`ColorPalette.xaml`, transport-copied into the branches so accent + neutral roles share one branch dictionary). | S1 case 4 reproduced the `specs/lessons.md` failure mode: per-branch `<StaticResource>` color aliases resolve eagerly against the **ambient** theme, so both branches carry the same value. C is late-bound, branch-correct, and on Windows can read the live system accent. See `spike-results.md` §S1. |
 | **D7** | Typography rule: **where Fluent's type ramp has a counterpart slot, adopt its size/weight; where it doesn't, keep the shared (M3) size and apply Fluent weight conventions** (SemiBold for Display/Headline/Title/Label emphasis slots, Regular for Body/Caption). `CharacterSpacing = 0` everywhere. FontFamily = platform default via `ContentControlThemeFontFamily`. | Fluent's ramp has 8 slots, semantic has 19 — a pure projection would collapse slots into duplicates and destroy the app's visual hierarchy. Hybrid preserves progression while looking Fluent. |
 | **D8** | **Nearest-match over GAP**: every semantic style key resolves under FluentTheme, even where Fluent has no concept (FAB, Elevated). Divergence from Simple (which left `ElevatedButtonStyle`/`CommandBarStyle` as GAPs) is deliberate. | The point of a Fluent theme is portability: an app authored under Material must not crash when switched to Fluent. Fluent *always* has a functional neighbor (worst case `DefaultButtonStyle`). Exceptions: a key is left GAP only if the control itself doesn't exist on the platform. |
 | **D9** | No implicit styles in `_Resources.xaml`. | Fluent already *is* the implicit default; re-declaring implicit styles would be a no-op at best and an override-ordering hazard at worst. |
@@ -257,9 +264,10 @@ styles (D9):
 Skia desktop run 2026-07-14 — see `spike-results.md`; Windows/WASM probe
 still pending):
 - ✅ = verified present on Uno Skia (S3 probe).
-- Ⓜ = **absent on Uno Skia** → implement via mechanism M-CODE (§3.4)
-  type-keyed implicit-style lookup; re-check availability on Windows/WASM
-  during Phase 1.
+- Ⓜ = **absent on Uno Skia** → shipped as a **declarative empty style** in
+  `_Resources.xaml` (keeps the control's built-in default template — D8;
+  since 2026-08-11, previously late-bound in code). Re-check availability on
+  Windows/WASM (residual, §14.1).
 
 ### 5.2 Full mapping table
 
@@ -691,6 +699,10 @@ own** per-control resources. Bridge mechanism, per control:
 
 1. FluentTheme defines each documented semantic key, defaulting to the Fluent
    value: `FilledButtonBackground` ← `AccentFillColorDefaultBrush`, etc.
+   *(As-built 2026-08-11: the static neutral defaults ship declaratively in
+   `LightweightDefaults.xaml`; only the accent-derived defaults — the Filled
+   background family and the ToggleSwitch ON track, which follow the effective
+   primary — are code-built in `FluentLightweightBridge`.)*
 2. FluentTheme redefines the Fluent per-control resource to consume it:
    `AccentButtonBackground` ← `{ThemeResource FilledButtonBackground}`.
 3. A consumer override of `FilledButtonBackground` then reaches Fluent-styled

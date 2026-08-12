@@ -65,6 +65,21 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Declarative-first for theme resources: build ResourceDictionaries in C# only when XAML provably cannot express them
+
+**Context:** Fluent theme (2026-08-11, `specs/05-fluent-theme/`) — owner correction: "we shouldn't be doing any runtime C# changes to resource dictionaries and resources". The first implementation built three resource sets in code that are all expressible as plain XAML: the neutral semantic palette values (literal per-branch colors — Simple's `ColorPalette.xaml` is the shipped precedent), the lightweight-styling neutral brush defaults, and the Ⓜ gap-key styles (whose code path always landed on an empty style on Uno anyway). Code construction also duplicated the captured platform values across two C# tables with a "keep in sync" comment, and rebuilt ~70 brushes on every rebuild pass (a WASM memory-growth hazard, AGENTS §2).
+
+**The rule:** in a theme library, a resource belongs in XAML unless one of two justifications holds:
+
+1. **The value is computed from runtime input** — a seed color's tonal palette, an override-driven re-pointing, a live platform token that must be read at runtime (e.g. the Windows system accent, which also varies per user).
+2. **The XAML mechanism is proven broken on Uno** for that shape — per-theme-branch `<StaticResource>` aliases (S1 case 4), intra-bundle aliases under container scope, theme-branch resources inside the XamlMerge bundle in Release (each documented in this file).
+
+Everything else — literal per-branch colors/brushes, empty styles, setters-only styles, aliases to app-scope keys — is declarative. When code *transports* declarative values (e.g. `FluentColorPalette` copying `ColorPalette.xaml` branches so accent + neutral roles share one branch dictionary), the XAML file is the single source of truth and the code contains no values.
+
+**How to apply:** before writing `dictionary[key] = ...` in a theme library, write the resource in XAML first and justify any remaining code path against the two criteria above (in the PR and in a comment at the code site). Load declarative theme-branch dictionaries once (static or per-instance cache), not per rebuild pass.
+
+---
+
 ## Manual ThemeDictionaries reads must honor "Dark" (consumers never write "Default"); dark-branch rendering is not testable in the CI host
 
 **Context:** Fluent override-driven accent cascade (2026-07-16, `specs/05-fluent-theme/`). Two related traps:

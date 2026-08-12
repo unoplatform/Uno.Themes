@@ -111,6 +111,47 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-08-11 — **Declarative-first pass (owner correction: no runtime C#
+  resource construction unless XAML provably cannot express it —
+  `specs/lessons.md` entry of the same date).** Three code-built resource sets
+  moved to declarative XAML, values unchanged:
+  1. **Neutral palette** → new `Styles/Application/ColorPalette.xaml` (17
+     roles × Light/Default, token-annotated). `FluentColorPalette` now builds
+     only the 15 accent-derived roles per branch (mechanism C, justified: live
+     tokens + branch fidelity) and transport-copies the XAML neutrals into the
+     same branch dictionary, preserving the exact palette shape the
+     SafeMerge/override-precedence contract is proven against; the
+     all-or-nothing gate and the ctor-failure self-heal are unchanged.
+  2. **Lightweight neutral defaults** → new
+     `Styles/Application/LightweightDefaults.xaml` (30 brushes × branch),
+     loaded once per theme instance and merged below the code bridge layer.
+     `FluentLightweightBridge` keeps only the accent-derived defaults
+     (Filled background family @1/0.9/0.8, ToggleSwitch ON track) and the
+     override-driven re-pointing — the per-rebuild allocation drops from ~70
+     brushes to ≤10 (WASM §2 concern resolved); the two duplicated
+     "keep in sync" C# capture tables are deleted.
+  3. **Ⓜ gap keys** → nine declarative empty styles in `_Resources.xaml`
+     (`FluentTheme._lateBoundStyleAliases` + `ResolveBuiltInStyle` deleted).
+     On Uno the code path always produced the empty style anyway; an empty
+     style keeps the built-in default template, so Windows renders identically
+     through the pure default-style path. Behavior note: an app-defined
+     *implicit* style for one of these controls is no longer picked up by the
+     semantic key — the key now always means "the Fluent default", which is
+     the D8 promise.
+  Both new XAML files are `XamlMergeInput`-excluded (theme-branch resources in
+  the merge bundle break in Release — existing lesson) and load through
+  guarded paths that log-and-degrade instead of throwing. Stays code-built
+  (justified per the lesson): `FluentAccentPalette` + re-pointing
+  (runtime-input-driven, owner-approved "for now"), the accent-derived
+  palette/bridge values (live tokens, branch fidelity), and the bundle-local
+  style aliases (`_bundleStyleAliases` — a XAML alias below app scope binds a
+  foreign app-level key or nothing; container-scope correctness is
+  test-guarded). Verification: Fluent-filtered Debug run 228/228; full
+  CI-parity Release suite **322 — 321 passed / 1 pre-existing skip / 0
+  failed** (identical to baseline); library build clean (no new warnings).
+  Tests changed only in comments/messages + two method renames
+  (`When_LateBoundAlias_*` → `When_GapKey_*`); zero assertion changes.
+
 - 2026-07-16 — **Override-driven accent cascade (owner report).** FluentTheme
   handled only `Colors.PrimarySeed` in its Fluent-specific layers: a
   `PrimaryColor` override — via `Colors.OverrideDictionary`/`OverrideSource`
