@@ -8,7 +8,8 @@ namespace Uno.Themes.Samples.RuntimeTests;
 /// Verifies the FluentTheme semantic style layer (specs/05-fluent-theme, §5):
 /// every semantic style key resolves under FluentTheme — XAML aliases resolve to
 /// the very XamlControlsResources instances, bridge styles derive from them, and
-/// the late-bound keys (no public XCR key on Uno) resolve to a usable style.
+/// the gap keys (no public XCR key on Uno) ship as declarative empty styles that
+/// keep the built-in default appearance.
 ///
 /// Each test creates a local FluentTheme scoped to the test container (spec D14),
 /// with XamlControlsResources merged at app scope by the sample host.
@@ -137,10 +138,10 @@ public class Given_FluentSemanticStyles
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Late-bound keys (spec §5.2 Ⓜ set): no public XCR key on Uno — resolved in
-	// code, falling back to an empty style that keeps the control's built-in
-	// default appearance (D8: nearest-match over GAP; the key must resolve on
-	// every platform where the control exists).
+	// Gap keys (spec §5.2 Ⓜ set): no public XCR key on Uno — shipped as
+	// declarative empty styles (_Resources.xaml) that keep the control's
+	// built-in default appearance (D8: nearest-match over GAP; the key must
+	// resolve on every platform where the control exists).
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
@@ -154,7 +155,7 @@ public class Given_FluentSemanticStyles
 	[DataRow("MenuFlyoutSeparatorStyle", typeof(MenuFlyoutSeparator))]
 	[DataRow("NavigationViewStyle", typeof(MUXC.NavigationView))]
 	[DataRow("NavigationViewItemStyle", typeof(MUXC.NavigationViewItem))]
-	public void When_LateBoundAlias_ResolvesToStyleOfExpectedTargetType(string semanticKey, Type targetType)
+	public void When_GapKey_ResolvesToStyleOfExpectedTargetType(string semanticKey, Type targetType)
 	{
 		var container = CreateThemedContainer();
 
@@ -169,11 +170,11 @@ public class Given_FluentSemanticStyles
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public async Task When_LateBoundStyleApplied_ControlRendersWithDefaultTemplate()
+	public async Task When_GapKeyStyleApplied_ControlRendersWithDefaultTemplate()
 	{
 		var container = CreateThemedContainer();
 
-		// The empty-style fallback must keep the built-in default template: an
+		// The empty style must keep the built-in default template: an
 		// explicitly styled ProgressRing should still load and realize a template.
 		var ring = new MUXC.ProgressRing
 		{

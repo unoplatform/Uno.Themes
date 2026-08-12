@@ -55,7 +55,7 @@ public class Given_FluentLightweightStyling
 	// ─────────────────────────────────────────────────────────────────────
 	// Semantic key defaults: every bridged Button key resolves, and the
 	// value-bearing ones carry the live Fluent token values (drift guard for
-	// the captured neutral constants in FluentLightweightBridge).
+	// the captured neutral values declared in LightweightDefaults.xaml).
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
@@ -110,8 +110,8 @@ public class Given_FluentLightweightStyling
 		var container = CreateThemedContainer();
 
 		Assert.AreEqual(GetAmbientColor(token), GetBrush(container.Resources, key).Color,
-			$"{key} (baked capture in FluentLightweightBridge) must match the live {token} value — " +
-			"an Uno.UI update likely changed the token; re-capture the constants");
+			$"{key} (baked capture in LightweightDefaults.xaml) must match the live {token} value — " +
+			"an Uno.UI update likely changed the token; re-capture the values");
 	}
 
 	[TestMethod]

@@ -13,11 +13,14 @@
 		  bridge style shipped in this bundle) — alias chaining does not resolve.
 		- D8: nearest-match over GAP — keys for Material-only concepts (FAB,
 		  Elevated) map to the closest functional Fluent neighbor.
-		- Keys whose Fluent style has no public XCR key on every platform
-		  (ProgressRingStyle, ListViewStyle, CommandBarStyle,
-		  CalendarDatePickerStyle, PipsPagerStyle, RatingControlStyle,
-		  MenuFlyoutSeparatorStyle, NavigationViewStyle, NavigationViewItemStyle)
-		  are resolved late-bound in code — see FluentTheme._lateBoundStyleAliases.
+		- Keys whose Fluent style has no public XCR key on Uno ship as explicit
+		  EMPTY styles (see the "gap keys" section at the end of this file): an
+		  empty style keeps the control's built-in default template and appearance
+		  (default-style resolution via DefaultStyleKey is independent of
+		  element.Style), so the key always resolves and renders the Fluent
+		  default. A <StaticResource> alias to a missing key cannot be expressed
+		  conditionally in XAML, and aliasing is not needed — the empty style IS
+		  the Fluent default.
 		- This page may ONLY alias app-scope (XamlControlsResources) keys:
 		  <StaticResource> aliases resolve eagerly at parse time against the
 		  app-level scope and cannot see keys of this bundle when the theme is
@@ -76,32 +79,51 @@
 	<StaticResource x:Key="HyperlinkButtonStyle" ResourceKey="DefaultHyperlinkButtonStyle" />
 	<StaticResource x:Key="SecondaryHyperlinkButtonStyle" ResourceKey="DefaultHyperlinkButtonStyle" />
 
-	<!-- ListView (ListViewStyle is late-bound in code) -->
+	<!-- ListView (ListViewStyle: gap key, see below) -->
 	<StaticResource x:Key="ListViewItemStyle" ResourceKey="DefaultListViewItemStyle" />
 
 	<!-- ContentDialog -->
 	<StaticResource x:Key="ContentDialogStyle" ResourceKey="DefaultContentDialogStyle" />
 
-	<!-- AppBarButton (CommandBarStyle is late-bound in code) -->
+	<!-- AppBarButton (CommandBarStyle: gap key, see below) -->
 	<StaticResource x:Key="AppBarButtonStyle" ResourceKey="DefaultAppBarButtonStyle" />
 
-	<!-- CalendarView / DatePicker (CalendarDatePickerStyle is late-bound in code) -->
+	<!-- CalendarView / DatePicker (CalendarDatePickerStyle: gap key, see below) -->
 	<StaticResource x:Key="CalendarViewStyle" ResourceKey="DefaultCalendarViewStyle" />
 	<StaticResource x:Key="DatePickerStyle" ResourceKey="DefaultDatePickerStyle" />
 
-	<!-- ProgressBar (ProgressRingStyle is late-bound in code) -->
+	<!-- ProgressBar (ProgressRingStyle: gap key, see below) -->
 	<StaticResource x:Key="ProgressBarStyle" ResourceKey="DefaultProgressBarStyle" />
 
 	<!-- MediaTransportControls -->
 	<StaticResource x:Key="MediaTransportControlsStyle" ResourceKey="DefaultMediaTransportControlsStyle" />
 
-	<!-- Flyout / MenuFlyout (MenuFlyoutSeparatorStyle is late-bound in code) -->
+	<!-- Flyout / MenuFlyout (MenuFlyoutSeparatorStyle: gap key, see below) -->
 	<StaticResource x:Key="FlyoutPresenterStyle" ResourceKey="DefaultFlyoutPresenterStyle" />
 	<StaticResource x:Key="MenuFlyoutPresenterStyle" ResourceKey="DefaultMenuFlyoutPresenterStyle" />
 	<StaticResource x:Key="MenuFlyoutItemStyle" ResourceKey="DefaultMenuFlyoutItemStyle" />
 	<StaticResource x:Key="MenuFlyoutSubItemStyle" ResourceKey="DefaultMenuFlyoutSubItemStyle" />
 	<StaticResource x:Key="ToggleMenuFlyoutItemStyle" ResourceKey="DefaultToggleMenuFlyoutItemStyle" />
 	<StaticResource x:Key="RadioMenuFlyoutItemStyle" ResourceKey="DefaultRadioMenuFlyoutItemStyle" />
+
+	<!--
+		Gap keys (spec 05 §5.2 Ⓜ set): semantic keys whose Fluent style has no
+		public XCR key on Uno (S3 probe; its default styles live in an internal
+		registry, published neither under the WinUI Default*Style names nor as
+		type-keyed app resources). Shipped as explicit EMPTY styles — the
+		control's built-in default template and appearance still apply, so the
+		key always resolves and renders the Fluent default (D8: nearest-match
+		over GAP). Guarded by Given_FluentSemanticStyles.
+	-->
+	<Style x:Key="ProgressRingStyle" TargetType="ProgressRing" />
+	<Style x:Key="ListViewStyle" TargetType="ListView" />
+	<Style x:Key="CommandBarStyle" TargetType="CommandBar" />
+	<Style x:Key="CalendarDatePickerStyle" TargetType="CalendarDatePicker" />
+	<Style x:Key="PipsPagerStyle" TargetType="PipsPager" />
+	<Style x:Key="RatingControlStyle" TargetType="RatingControl" />
+	<Style x:Key="MenuFlyoutSeparatorStyle" TargetType="MenuFlyoutSeparator" />
+	<Style x:Key="NavigationViewStyle" TargetType="NavigationView" />
+	<Style x:Key="NavigationViewItemStyle" TargetType="NavigationViewItem" />
 
 	<!--
 		Typography aliases (DisplayLarge, BodyMedium, ...) are late-bound in
