@@ -683,6 +683,15 @@ absent on Skia (only `TextOnAccentFillColor*` exists there), so the closure
 must be built per-platform from what actually resolves. Implementation is code-level (mechanism C) inside the dynamic colors
 layer so it rebuilds on every seed change and participates in hot reload.
 
+**Planned obsolescence (noted 2026-08-11):** the WinAppSDK (`net*-windows`)
+TFM is planned to be dropped soon — Windows will be served by the Skia
+`net10.0-desktop` target, where Uno.UI is the XCR implementation. S4(a)
+proved that on Uno the eager-resolution problem above does not exist
+(overriding the `SystemAccentColor*` shades alone cascades fully), so once the
+TFM drop lands the closure is dead insurance and should be stripped
+(see `progress.md` follow-ups). Do **not** strip earlier: packages still
+shipping the windows TFM would silently lose G5 for WinAppSDK consumers.
+
 ### 9.3 Interaction with the forward mapping
 
 When a seed is active, `BaseTheme.UpdateSource()` already merges the seed

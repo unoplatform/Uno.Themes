@@ -109,6 +109,25 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
   MediaTransportControls availability as platform-varying (D8 GAP exception).
 - [ ] Screenshot pass vs WinUI Gallery (§15) — needs a windowed environment
 
+## Follow-ups
+
+- [ ] **Windows-TFM drop (announced 2026-08-11, timing TBD):** when the
+  WinAppSDK (`net*-windows`) TFM is dropped (Windows served by Skia
+  `net10.0-desktop`), strip the D12 accent closure from `FluentAccentPalette`
+  (`_closureKeys`, `WriteClosure`, `BuildSeedClosure`, the closure halves of
+  `BuildBranchFor`) — it exists solely as Windows eager-resolution insurance
+  (S4(a): on Uno the shades alone cascade). Retire D12 and the Windows-side
+  residual items in spec §14/§5.3 in the same change. Do NOT strip while
+  packages still ship the windows TFM (silently breaks G5 for WinAppSDK
+  consumers).
+- [ ] **Windows-Skia accent probe:** on a Windows machine, change the OS
+  accent color and dump `SystemAccentColor` in FluentSampleApp on
+  `net10.0-desktop` — does Uno wire the OS accent through? Determines whether
+  the "live accent tracking" rationale survives the TFM drop (and how the
+  FluentColorPalette / seed-colors doc comments should be worded after the
+  closure strip). S2/S4 captures on macOS/Linux showed Uno's baked default
+  (`#FF0078D7`), not an OS value.
+
 ## Review log
 
 - 2026-08-11 — **Declarative-first pass (owner correction: no runtime C#
