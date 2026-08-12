@@ -5,12 +5,10 @@ using Uno.Themes;
 
 #if WinUI
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Windows.UI;
 #else
 using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 #endif
 
 namespace Uno.Fluent;
@@ -29,29 +27,10 @@ namespace Uno.Fluent;
 /// </remarks>
 public class FluentTheme : BaseTheme
 {
-	// Semantic keys whose Fluent style has no public XCR key on every platform
-	// (spec 05 §5.2 Ⓜ set): resolved late-bound on each rebuild pass because a
-	// XAML <StaticResource> alias to a missing key fails the whole dictionary at
-	// parse time. Resolution order per key: the named XCR key where the platform
-	// publishes one (Windows), the type-keyed implicit style, and finally an
-	// EMPTY style — an explicit empty style keeps the control's built-in default
-	// template and appearance (default-style resolution via DefaultStyleKey is
-	// independent of element.Style), so the key always resolves and renders the
-	// Fluent default (D8: nearest-match over GAP). Uno publishes neither the
-	// named keys nor type-keyed app resources for these controls (its default
-	// styles live in an internal registry), so the empty style is the Uno path.
-	private static readonly (string SemanticKey, string XcrKey, Type ControlType)[] _lateBoundStyleAliases =
-	{
-		("ProgressRingStyle", "DefaultProgressRingStyle", typeof(ProgressRing)),
-		("ListViewStyle", "DefaultListViewStyle", typeof(ListView)),
-		("CommandBarStyle", "DefaultCommandBarStyle", typeof(CommandBar)),
-		("CalendarDatePickerStyle", "DefaultCalendarDatePickerStyle", typeof(CalendarDatePicker)),
-		("PipsPagerStyle", "DefaultPipsPagerStyle", typeof(PipsPager)),
-		("RatingControlStyle", "DefaultRatingControlStyle", typeof(RatingControl)),
-		("MenuFlyoutSeparatorStyle", "DefaultMenuFlyoutSeparatorStyle", typeof(MenuFlyoutSeparator)),
-		("NavigationViewStyle", "DefaultNavigationViewStyle", typeof(NavigationView)),
-		("NavigationViewItemStyle", "DefaultNavigationViewItemStyle", typeof(NavigationViewItem)),
-	};
+	// The spec 05 §5.2 Ⓜ gap keys (ProgressRingStyle, NavigationViewStyle, …)
+	// ship as declarative empty styles in _Resources.xaml — an empty style keeps
+	// the control's built-in default template and appearance, so the key always
+	// resolves and renders the Fluent default (D8: nearest-match over GAP).
 
 	// Semantic keys whose target style ships IN THIS BUNDLE (bridge and typography
 	// styles): also resolved late-bound, from the theme's own Source bundle. A XAML
@@ -84,10 +63,16 @@ public class FluentTheme : BaseTheme
 		return aliases;
 	}
 
-	// Field initializers run before the base constructor, so this dictionary is
-	// usable from AddThemeSpecificResources during the base ctor's first
+	// Field initializers run before the base constructor, so these dictionaries
+	// are usable from AddThemeSpecificResources during the base ctor's first
 	// UpdateSource pass; _palette (assigned in the ctor body) is not — see below.
-	private readonly ResourceDictionary _lateBoundStyles = new();
+	private readonly ResourceDictionary _bundleAliasStyles = new();
+
+	// Declarative per-branch defaults for the semantic lightweight-styling keys
+	// (spec 05 §10 step 1), loaded once per theme instance and re-attached on
+	// every rebuild pass. Only the accent-derived defaults and the
+	// override-driven re-pointing remain code-built (FluentLightweightBridge).
+	private readonly ResourceDictionary _lightweightDefaults = LoadLightweightDefaults();
 
 	// The palette container passed to BaseTheme as its base color override,
 	// populated in code from the live XamlControlsResources token values
@@ -149,6 +134,23 @@ public class FluentTheme : BaseTheme
 		return palette;
 	}
 
+	private static ResourceDictionary LoadLightweightDefaults()
+	{
+		try
+		{
+			return new ResourceDictionary { Source = new Uri(FluentConstants.ResourcePaths.LightweightDefaults) };
+		}
+		catch (Exception e)
+		{
+			// The packaged dictionary failed to load — the semantic lightweight
+			// keys then carry no neutral defaults (overrides still re-point);
+			// never throw from theme initialization.
+			FluentDiagnostics.LogWarning(
+				$"FluentTheme could not load its lightweight-styling defaults (LightweightDefaults.xaml). {e.Message}");
+			return new ResourceDictionary();
+		}
+	}
+
 	/// <inheritdoc />
 	protected override void AddThemeSpecificResources()
 	{
@@ -165,8 +167,8 @@ public class FluentTheme : BaseTheme
 			FluentColorPalette.TryPopulate(palette);
 		}
 
-		EnsureLateBoundStyleAliases();
-		AddThemeDictionary(_lateBoundStyles);
+		EnsureBundleStyleAliases();
+		AddThemeDictionary(_bundleAliasStyles);
 
 		var effectiveSeed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
 
@@ -212,12 +214,15 @@ public class FluentTheme : BaseTheme
 			}
 		}
 
-		// Lightweight-styling bridge (spec 05 §10, goal G6): semantic
-		// lightweight keys with Fluent defaults + override-driven re-pointing
-		// of the built-in per-control resources. Rebuilt each pass so it
-		// tracks seed and override changes (the override's contents can
-		// mutate without a reference change, so no cache here — the bridge is
-		// a few dozen brushes and passes only run on theme-property changes).
+		// Lightweight-styling bridge (spec 05 §10, goal G6). The static neutral
+		// key defaults ship declaratively (LightweightDefaults.xaml, loaded once
+		// per instance); the code layer above them carries only the
+		// accent-derived defaults and the override-driven re-pointing of the
+		// built-in per-control resources. The code layer is rebuilt each pass so
+		// it tracks seed and override changes (the override's contents can
+		// mutate without a reference change, so no cache here — it is a handful
+		// of brushes and passes only run on theme-property changes).
+		AddThemeDictionary(_lightweightDefaults);
 		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, lightAccentBasis, darkAccentBasis, consumerOverride));
 
 		// Base typography ships in the Source bundle (BaseDictionaries.xaml); only a
@@ -228,21 +233,11 @@ public class FluentTheme : BaseTheme
 		}
 	}
 
-	private void EnsureLateBoundStyleAliases()
+	private void EnsureBundleStyleAliases()
 	{
-		foreach (var (semanticKey, xcrKey, controlType) in _lateBoundStyleAliases)
-		{
-			if (_lateBoundStyles.TryGetValue(semanticKey, out _))
-			{
-				continue;
-			}
-
-			_lateBoundStyles[semanticKey] = ResolveBuiltInStyle(xcrKey, controlType);
-		}
-
 		foreach (var (semanticKey, bundleKey) in _bundleStyleAliases)
 		{
-			if (_lateBoundStyles.TryGetValue(semanticKey, out _))
+			if (_bundleAliasStyles.TryGetValue(semanticKey, out _))
 			{
 				continue;
 			}
@@ -252,26 +247,8 @@ public class FluentTheme : BaseTheme
 			// A miss is left unaliased rather than aliased to a wrong style.
 			if (TryGetValue(bundleKey, out var bundleValue) && bundleValue is Style bundleStyle)
 			{
-				_lateBoundStyles[semanticKey] = bundleStyle;
+				_bundleAliasStyles[semanticKey] = bundleStyle;
 			}
 		}
-	}
-
-	private static Style ResolveBuiltInStyle(string xcrKey, Type controlType)
-	{
-		if (Application.Current?.Resources is { } resources)
-		{
-			if (resources.TryGetValue(xcrKey, out var named) && named is Style namedStyle)
-			{
-				return namedStyle;
-			}
-
-			if (resources.TryGetValue(controlType, out var implicitEntry) && implicitEntry is Style implicitStyle)
-			{
-				return implicitStyle;
-			}
-		}
-
-		return new Style(controlType);
 	}
 }

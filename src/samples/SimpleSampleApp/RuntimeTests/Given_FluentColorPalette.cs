@@ -7,9 +7,11 @@ namespace Uno.Themes.Samples.RuntimeTests;
 
 /// <summary>
 /// Verifies the FluentTheme semantic color palette (specs/05-fluent-theme, §6):
-/// built in code per theme branch ("mechanism C", D6) from the live
-/// XamlControlsResources token values — per-branch XAML aliases are broken on
-/// Uno (see Given_FluentAliasResolution.When_ThemeBranchColorAlias_*).
+/// the accent-derived roles are built in code per theme branch ("mechanism C",
+/// D6) from the live XamlControlsResources token values — per-branch XAML
+/// aliases are broken on Uno (see
+/// Given_FluentAliasResolution.When_ThemeBranchColorAlias_*) — and the static
+/// neutral roles are copied from the declarative ColorPalette.xaml.
 ///
 /// Expected values are read from the live XCR resources (never baked hexes) so
 /// the tests keep passing across Uno.UI accent/token value changes while still
@@ -152,10 +154,11 @@ public class Given_FluentColorPalette
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Drift guard: the neutral role values are S2-captured constants (Uno
-	// exposes no per-branch token API — see FluentColorPalette). The ambient
-	// branch is asserted against the LIVE platform values on every run, so an
-	// Uno.UI update that changes a Fluent token fails fast here.
+	// Drift guard: the neutral role values are S2-captured literals declared in
+	// ColorPalette.xaml (Uno exposes no per-branch token API — see
+	// FluentColorPalette). The ambient branch is asserted against the LIVE
+	// platform values on every run, so an Uno.UI update that changes a Fluent
+	// token fails fast here.
 	// ─────────────────────────────────────────────────────────────────────
 
 	private static bool IsAmbientDark =>
@@ -183,7 +186,7 @@ public class Given_FluentColorPalette
 
 		Assert.AreEqual(GetAmbientColor(token), (Color)branch[role],
 			$"{role} (baked S2 capture) must match the live {token} value — an Uno.UI update likely " +
-			"changed the token; re-capture the constants in FluentColorPalette");
+			"changed the token; re-capture the values in ColorPalette.xaml");
 	}
 
 	[TestMethod]
