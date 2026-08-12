@@ -130,6 +130,22 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
 
 ## Review log
 
+- 2026-08-11 — **Direct semantic-key lookups now honor lightweight overrides
+  (red/fix/green).** Found during the declarative-pass audit: the bridge's
+  default layers (LightweightDefaults.xaml + code accent defaults) are merged
+  *above* the colors layer carrying `Colors.OverrideDictionary`, so an
+  override of a defaulted lightweight key (e.g. `FilledButtonBackground`)
+  rendered correctly via re-pointing but a **direct**
+  `{ThemeResource <semantic key>}` lookup still saw the default — diverging
+  from Material/Simple, whose defaults sit below the colors layer. Fix:
+  `ApplyRepointing` mirrors each override value onto the semantic key itself
+  (alongside the Fluent per-control key), with the bridge-style-only keys
+  (`TextButton*`/`IconButtonForeground`) covered via a mirror-only list.
+  Red/fix/green:
+  `When_DefaultedSemanticKeyOverridden_DirectLookupSeesOverride` (red on both
+  the accent-derived and neutral variants, green after). Full CI-parity
+  Release suite: 323 — 322 passed / 1 pre-existing skip.
+
 - 2026-08-11 — **Declarative-first pass (owner correction: no runtime C#
   resource construction unless XAML provably cannot express it —
   `specs/lessons.md` entry of the same date).** Three code-built resource sets

@@ -254,6 +254,36 @@ public class Given_FluentLightweightStyling
 		}
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultedSemanticKeyOverridden_DirectLookupSeesOverride()
+	{
+		// The bridge's default layers (LightweightDefaults.xaml + the code
+		// accent defaults) are merged ABOVE the colors layer that carries
+		// Colors.OverrideDictionary. Without mirroring the override onto the
+		// semantic key, a defaulted key would render correctly (via the
+		// re-pointed per-control resource) while a DIRECT
+		// {ThemeResource <semantic key>} lookup in app XAML still saw the
+		// default — diverging from Material/Simple, whose defaults sit below
+		// the colors layer so overrides win both ways.
+		var overrideDict = new ResourceDictionary
+		{
+			// Accent-derived default (code bridge layer).
+			["FilledButtonBackground"] = new SolidColorBrush(OverrideRed),
+			// Neutral default (LightweightDefaults.xaml layer).
+			["TextButtonForeground"] = new SolidColorBrush(OverrideRed),
+		};
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		var container = CreateThemedContainer(theme);
+
+		Assert.AreEqual(OverrideRed, GetBrush(container.Resources, "FilledButtonBackground").Color,
+			"a direct lookup of an overridden accent-derived semantic key must see the override, not the bridge default");
+		Assert.AreEqual(OverrideRed, GetBrush(container.Resources, "TextButtonForeground").Color,
+			"a direct lookup of an overridden neutral semantic key must see the override, not the declarative default");
+	}
+
 	// ─────────────────────────────────────────────────────────────────────
 	// TextBox / CheckBox / ToggleSwitch re-pointing (Fluent has divergent
 	// per-control key names for these); RadioButton and Slider need no
