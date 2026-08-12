@@ -4,6 +4,20 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A tolerance-based test whose inputs all sit outside the failure region is not coverage — it is a green light on a broken algorithm
+
+**Context:** Seed color generation (spec 06). `Given_SeedColorPalette.When_RoundTripping_Argb_Through_Hct_Then_ColorIsPreserved` had been passing since the feature shipped in 7.0.3, with a ±20 per-channel tolerance and a comment explaining that the "simplified bisection solver" loses precision "at sRGB gamut boundaries". The solver was in fact clamping chroma to ~27-43 whenever more than ~36 was requested — pure red round-tripped to `#AA6D63` (off by 109), pure green to `#BBECAA` (off by 187), and M3's own error color `#B3261E` came back as `#7E4F48`. None of it was caught.
+
+**Root cause:** the five `DataRow`s were black, white, mid-gray, `#6750A4` and `#386A20`. The first three have chroma ~0 and are *mathematically incapable* of failing a chroma-precision test. `#6750A4` measured 17 against a tolerance of 20. The test therefore asserted nothing about the property it claimed to cover, and the tolerance had been sized to whatever the implementation happened to produce rather than to what correctness required. The prose comment about "extreme gamut boundaries" made the gap look like a known, bounded limitation instead of an untested region.
+
+**How to apply:**
+- When a test takes a **tolerance**, ask what value the current implementation actually produces before accepting the threshold. A tolerance chosen to make today's code pass encodes the bug as the specification. Record the measured margin in the assertion message so later drift is visible.
+- Choose `DataRow` inputs by where the algorithm is **most likely to break**, not by what is convenient or realistic-looking. For color math that means maximum chroma and gamut corners; the neutral cases are free but prove nothing.
+- Treat "simplified", "approximate", or "good enough for realistic inputs" in a comment as a **claim requiring a test that pins the actual error bound** — otherwise it is an unfalsifiable excuse that survives every future review.
+- Porting a reference algorithm (here material-color-utilities) and simplifying one step is fine; validating it only against inputs the simplification handles well is not. Diff against the reference implementation's own published values — M3's baseline palettes are the oracle and cost nothing to check.
+
+---
+
 ## An app that loads assemblies by reflection cannot be trimmed — ILLink strips facade type-forwarders, and rooting is a treadmill
 
 **Context:** ThemesSampleApp ALC wrapper (spec 05). In the browser, every guest died at `Assembly.GetTypes()` with `TypeLoadException: Could not resolve type with token 010003c9 from typeref (expected class 'System.IO.StringWriter' in assembly 'System.Runtime')`. An earlier investigation had noted that pre-loading `System.Runtime` merely advanced the failure to the next typeref (`System.IAsyncDisposable`) and concluded "rooting types one at a time is a treadmill" without identifying why.

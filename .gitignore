@@ -342,3 +342,6 @@ crosstargeting_override.props
 *.code-workspace
 
 PROGRESS.md
+# core.ignorecase is true on macOS/Windows, so the rule above also swallows the
+# per-spec progress.md files that AGENTS.md requires under specs/<topic>/.
+!specs/**/progress.md
