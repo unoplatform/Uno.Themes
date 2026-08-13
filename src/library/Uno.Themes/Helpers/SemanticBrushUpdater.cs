@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -50,7 +51,7 @@ internal static class SemanticBrushUpdater
 
 	// Opacity token per interaction state, parallel to ThemesConstants.BrushStateSuffixes.
 	// null for the state-less base brush.
-	private static readonly string[] _opacityKeys = BuildOpacityKeys();
+	private static readonly string?[] _opacityKeys = BuildOpacityKeys();
 
 	private static string[][] BuildBrushKeys()
 	{
@@ -71,10 +72,10 @@ internal static class SemanticBrushUpdater
 		return keys;
 	}
 
-	private static string[] BuildOpacityKeys()
+	private static string?[] BuildOpacityKeys()
 	{
 		var states = ThemesConstants.BrushStateSuffixes;
-		var keys = new string[states.Length];
+		var keys = new string?[states.Length];
 
 		for (int i = 0; i < states.Length; i++)
 		{
@@ -99,9 +100,9 @@ internal static class SemanticBrushUpdater
 		var states = ThemesConstants.BrushStateSuffixes;
 		Span<double> opacities = stackalloc double[states.Length];
 
-		foreach (var themeKey in ThemesConstants.ThemeDictionaryKeys)
+		foreach (var (brushTheme, colorTheme) in ThemesConstants.BrushThemeSources)
 		{
-			if (!TryGetThemeDictionary(brushes, themeKey, out var themedBrushes))
+			if (!TryGetThemeDictionary(brushes, brushTheme, out var themedBrushes))
 			{
 				continue;
 			}
@@ -109,14 +110,14 @@ internal static class SemanticBrushUpdater
 			for (int j = 0; j < states.Length; j++)
 			{
 				opacities[j] = _opacityKeys[j] is { } opacityKey
-					&& TryResolve<double>(colorLayers, themeKey, opacityKey, out var opacity)
+					&& TryResolve<double>(colorLayers, colorTheme, opacityKey, out var opacity)
 						? opacity
 						: OpaqueOpacity;
 			}
 
 			for (int i = 0; i < colorKeys.Length; i++)
 			{
-				if (!TryResolve<Color>(colorLayers, themeKey, colorKeys[i], out var color))
+				if (!TryResolve<Color>(colorLayers, colorTheme, colorKeys[i], out var color))
 				{
 					continue;
 				}
@@ -154,6 +155,7 @@ internal static class SemanticBrushUpdater
 	/// </summary>
 	private static bool TryResolve<T>(
 		IReadOnlyList<ResourceDictionary> colorLayers, string themeKey, string key, out T resolved)
+		where T : struct
 	{
 		for (int i = colorLayers.Count - 1; i >= 0; i--)
 		{
@@ -182,7 +184,7 @@ internal static class SemanticBrushUpdater
 	/// Gets a theme dictionary by key. Reading it through <c>TryGetValue</c> also materializes
 	/// Uno's lazy initializer for XAML-backed dictionaries, which the indexer does not.
 	/// </summary>
-	private static bool TryGetThemeDictionary(ResourceDictionary dictionary, string themeKey, out ResourceDictionary themed)
+	private static bool TryGetThemeDictionary(ResourceDictionary dictionary, string themeKey, [NotNullWhen(true)] out ResourceDictionary? themed)
 	{
 		if (dictionary.ThemeDictionaries.TryGetValue(themeKey, out var value) && value is ResourceDictionary result)
 		{
@@ -190,7 +192,7 @@ internal static class SemanticBrushUpdater
 			return true;
 		}
 
-		themed = null!;
+		themed = null;
 		return false;
 	}
 }

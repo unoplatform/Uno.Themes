@@ -72,9 +72,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	private static void OnFontOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if (d is BaseTheme theme && e.NewValue is string sourceUri)
+		// Guarded for the same reason as ThemeColors.OnOverrideSourceChanged: a property-changed
+		// callback must not throw on a malformed consumer-supplied URI.
+		if (d is BaseTheme theme
+			&& e.NewValue is string sourceUri
+			&& Uri.TryCreate(sourceUri, UriKind.Absolute, out var source))
 		{
-			theme.FontOverrideDictionary = new ResourceDictionary() { Source = new Uri(sourceUri) };
+			theme.FontOverrideDictionary = new ResourceDictionary() { Source = source };
 		}
 	}
 	#endregion
@@ -398,6 +402,20 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	protected void UpdateSource()
 	{
+		// Build every dynamic layer BEFORE touching MergedDictionaries. Parsing a consumer-supplied
+		// override, generating the seed palette and sweeping the brushes can all throw, and this runs
+		// from property-changed callbacks and the hot-reload handler. Committing only once the new
+		// layers exist means a failure leaves the theme on its last good palette, instead of stripping
+		// every colour, spacing and shape key out of the consuming app permanently.
+		var colors = BuildColorLayer(out var resolvedOverride);
+
+		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
+		var spacing = GenerateSpacingScale(baseSpacing);
+		var shape = GenerateShapeScale(DefaultCornerRadius);
+		var density = GenerateDensityDefaults();
+
+		// ── Commit. Nothing below parses XAML or runs consumer-supplied code. ──
+
 		// Remove only the dictionaries this theme appended on a previous pass. The URI-backed
 		// base layer populated when Source was set (the concrete theme's control styles) stays
 		// in place so it is not rebuilt on every theme-property change or hot reload.
@@ -407,8 +425,41 @@ public abstract partial class BaseTheme : ResourceDictionary
 		}
 		_dynamicDictionaries.Clear();
 
-		// Colour layer (always dynamic so it rebuilds on seed-color / override changes). The
-		// value dictionaries — shared palette, the theme's own base palette (e.g. SimpleTheme's
+		// Detach from the previous pass's layer before re-parenting: a ResourceDictionary may
+		// not be nested under two parents at once.
+		_previousColorsLayer?.MergedDictionaries.Remove(_semanticBrushes);
+		colors.MergedDictionaries.Add(_semanticBrushes);
+		_previousColorsLayer = colors;
+
+		// Merged last so a consumer override wins for both *Color and *Brush keys.
+		if (resolvedOverride is { })
+		{
+			colors.SafeMerge(resolvedOverride);
+		}
+
+		AddThemeDictionary(spacing);
+		AddThemeDictionary(shape);
+		AddThemeDictionary(density);
+		AddThemeDictionary(colors);
+
+		// Let the concrete theme append its own dynamic dictionaries (e.g. a consumer font
+		// override) on top of the generated layers. The static converter/typography/font/
+		// thickness defaults live in the Source bundle (BaseDictionaries.xaml), below the
+		// theme's own overrides; only resources that must shadow that base belong here.
+		AddThemeSpecificResources();
+	}
+
+	/// <summary>
+	/// Assembles the colour layer and rewrites the semantic brushes from it, without mutating this
+	/// dictionary's <see cref="ResourceDictionary.MergedDictionaries"/>. The caller commits the result.
+	/// </summary>
+	/// <param name="resolvedOverride">
+	/// The consumer override to merge last, or <c>null</c>. Returned separately because it has to be
+	/// merged after the brush dictionary so a consumer-defined <c>*Brush</c> key still wins.
+	/// </param>
+	private ResourceDictionary BuildColorLayer(out ResourceDictionary resolvedOverride)
+	{
+		// The value dictionaries — shared palette, the theme's own base palette (e.g. SimpleTheme's
 		// grayscale, supplied via _baseColorOverride), the seed palette and finally the consumer
 		// override — are merged in increasing precedence, and tracked in that same order so the
 		// brushes can be resolved against them below. This layer is intentionally NOT baked into
@@ -453,7 +504,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// URI-backed overrides are re-resolved from their Source on each rebuild so that
 		// hot-reload edits to the underlying XAML propagate: the in-memory key/value pairs of
 		// the original instance were loaded at init time and would otherwise be stale.
-		ResourceDictionary resolvedOverride = null;
+		resolvedOverride = null;
 		if (Colors?.OverrideDictionary is { } userOverride)
 		{
 			resolvedOverride = userOverride.Source is { } overrideSource
@@ -472,34 +523,7 @@ public abstract partial class BaseTheme : ResourceDictionary
 		_semanticBrushes ??= new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
 		SemanticBrushUpdater.Apply(_semanticBrushes, colorLayers);
 
-		// Detach from the previous pass's layer before re-parenting: a ResourceDictionary may
-		// not be nested under two parents at once.
-		_previousColorsLayer?.MergedDictionaries.Remove(_semanticBrushes);
-		colors.MergedDictionaries.Add(_semanticBrushes);
-		_previousColorsLayer = colors;
-
-		// Merged last so a consumer override wins for both *Color and *Brush keys.
-		if (resolvedOverride is { })
-		{
-			colors.SafeMerge(resolvedOverride);
-		}
-
-		// Generate spacing, shape, and density scales from code
-		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
-		var spacing = GenerateSpacingScale(baseSpacing);
-		var shape = GenerateShapeScale(DefaultCornerRadius);
-		var density = GenerateDensityDefaults();
-
-		AddThemeDictionary(spacing);
-		AddThemeDictionary(shape);
-		AddThemeDictionary(density);
-		AddThemeDictionary(colors);
-
-		// Let the concrete theme append its own dynamic dictionaries (e.g. a consumer font
-		// override) on top of the generated layers. The static converter/typography/font/
-		// thickness defaults live in the Source bundle (BaseDictionaries.xaml), below the
-		// theme's own overrides; only resources that must shadow that base belong here.
-		AddThemeSpecificResources();
+		return colors;
 	}
 
 	/// <summary>

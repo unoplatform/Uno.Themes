@@ -135,9 +135,13 @@ public sealed partial class ThemeColors : DependencyObject
 			return;
 		}
 
-		if (e.NewValue is string sourceUri && !string.IsNullOrWhiteSpace(sourceUri))
+		// A malformed URI must not throw: this is a property-changed callback, and an exception here
+		// takes down the consuming app (on WASM, the runtime). Fall back to no override instead.
+		if (e.NewValue is string sourceUri
+			&& !string.IsNullOrWhiteSpace(sourceUri)
+			&& Uri.TryCreate(sourceUri, UriKind.Absolute, out var source))
 		{
-			tc.OverrideDictionary = new ResourceDictionary { Source = new Uri(sourceUri) };
+			tc.OverrideDictionary = new ResourceDictionary { Source = source };
 		}
 		else
 		{

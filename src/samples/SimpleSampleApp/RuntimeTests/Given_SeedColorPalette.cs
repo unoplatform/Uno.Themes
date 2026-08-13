@@ -180,7 +180,7 @@ public class Given_SeedColorPalette
 		foreach (int tone in tones)
 		{
 			int argb = palette.GetArgb(tone);
-			double lstar = ColorMathAccessor.LstarFromArgb(argb);
+			double lstar = HctColor.FromArgb(argb).Tone;
 			Assert.IsTrue(lstar >= prevLstar,
 				$"L* should increase: tone {tone} has L*={lstar:F1} but previous was {prevLstar:F1}");
 			prevLstar = lstar;
@@ -196,7 +196,7 @@ public class Given_SeedColorPalette
 		foreach (int tone in tones)
 		{
 			int argb = palette.GetArgb(tone);
-			double lstar = ColorMathAccessor.LstarFromArgb(argb);
+			double lstar = HctColor.FromArgb(argb).Tone;
 			Assert.IsTrue(Math.Abs(lstar - tone) <= 2.0,
 				$"Tone {tone}: expected L*≈{tone}, got L*={lstar:F1}");
 		}
@@ -221,19 +221,10 @@ public class Given_SeedColorPalette
 		int bgArgb = palette.GetArgb(bgTone);
 		int fgArgb = palette.GetArgb(fgTone);
 
-		double bgLstar = ColorMathAccessor.LstarFromArgb(bgArgb);
-		double fgLstar = ColorMathAccessor.LstarFromArgb(fgArgb);
+		double contrast = ColorMathAccessor.ContrastRatio(bgArgb, fgArgb);
 
-		// Approximate contrast ratio from L* values
-		// Using relative luminance: Y = YFromLstar(L*)
-		double bgY = ColorMathAccessor.YFromLstar(bgLstar) / 100.0;
-		double fgY = ColorMathAccessor.YFromLstar(fgLstar) / 100.0;
-		double lighter = Math.Max(bgY, fgY);
-		double darker = Math.Min(bgY, fgY);
-		double contrast = (lighter + 0.05) / (darker + 0.05);
-
-		Assert.IsTrue(contrast >= 4.5,
-			$"{pairName} (tones {bgTone}/{fgTone}): contrast ratio {contrast:F1}:1 is below WCAG AA (4.5:1)");
+		Assert.IsTrue(contrast >= WcagAaContrast,
+			$"{pairName} (tones {bgTone}/{fgTone}): contrast ratio {contrast:F1}:1 is below WCAG AA ({WcagAaContrast}:1)");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
@@ -273,7 +264,7 @@ public class Given_SeedColorPalette
 
 		Assert.AreNotEqual(seed, primary, $"{name}: dark PrimaryColor must not be pinned to the seed.");
 
-		double tone = ColorMathAccessor.LstarFromArgb(ToArgb(primary));
+		double tone = HctColor.FromArgb(ToArgb(primary)).Tone;
 		Assert.IsTrue(Math.Abs(tone - 80) <= 2.0,
 			$"{name}: dark PrimaryColor should sit at tone 80, got {tone:F1}.");
 	}
@@ -405,8 +396,13 @@ public class Given_SeedColorPalette
 	public void When_ThemeIsBuilt_Then_StateBrushesCarryTheirStateOpacity(string brushKey, double expectedOpacity)
 	{
 		// A state brush at full opacity is not a subtle regression: an 8% hover overlay rendered
-		// opaque covers the control's own content. The value must come from the theme's own layers
-		// and not from whatever happens to be ambient when the dictionary is materialized.
+		// opaque covers the control's own content.
+		//
+		// NOTE: this pins the default values but does NOT guard the regression it looks like it
+		// guards. The runtime-test host already has a SimpleTheme merged app-wide, so the ambient
+		// scope resolves HoverOpacity even if the updater never wrote it — this passes with the
+		// opacity sweep removed. When_OverriddenOpacityTokens_Then_EveryStateBrushUsesThem is the
+		// test that actually discriminates; keep both.
 		var container = CreateThemedContainer(out _);
 
 		var brush = GetBrush(container, brushKey);
@@ -435,19 +431,97 @@ public class Given_SeedColorPalette
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public void When_OpacityTokenIsOverridden_Then_StateBrushesUseIt()
+	public void When_OverriddenOpacityTokens_Then_EveryStateBrushUsesThem()
 	{
-		// Guards the root cause of the opacity regression: the value has to be resolved from the
-		// theme's own color layers. Reading it from the ambient scope happens to produce the right
-		// number in a running app and 1.0 when the theme is built before it is reachable.
-		var overrides = new ResourceDictionary { ["HoverOpacity"] = 0.5 };
+		// The discriminating guard for the opacity regression: each token gets a distinct value that
+		// exists nowhere in the ambient scope, so a brush can only carry it if the updater resolved it
+		// from the theme's own color layers. Covers all eight states, not just Hover — the sweep is
+		// per-state and a partial implementation would otherwise pass.
+		var expected = new (string Token, string Brush, double Value)[]
+		{
+			("HoverOpacity", "PrimaryHoverBrush", 0.51),
+			("FocusedOpacity", "PrimaryFocusedBrush", 0.52),
+			("PressedOpacity", "PrimaryPressedBrush", 0.53),
+			("DraggedOpacity", "PrimaryDraggedBrush", 0.54),
+			("SelectedOpacity", "PrimarySelectedBrush", 0.55),
+			("MediumOpacity", "PrimaryMediumBrush", 0.56),
+			("LowOpacity", "PrimaryLowBrush", 0.57),
+			("DisabledOpacity", "PrimaryDisabledBrush", 0.58),
+		};
+
+		var overrides = new ResourceDictionary();
+		foreach (var (token, _, value) in expected)
+		{
+			overrides[token] = value;
+		}
 
 		var theme = new SimpleTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
 
-		Assert.AreEqual(0.5, GetBrush(container, "PrimaryHoverBrush").Opacity, 0.0001,
-			"An overridden opacity token should reach the state brushes.");
+		foreach (var (token, brushKey, value) in expected)
+		{
+			Assert.AreEqual(value, GetBrush(container, brushKey).Opacity, 0.0001,
+				$"An overridden {token} should reach {brushKey}.");
+		}
+
+		// The state-less base brush has no token and must stay opaque.
+		Assert.AreEqual(1.0, GetBrush(container, "PrimaryBrush").Opacity, 0.0001,
+			"The base brush declares no Opacity in XAML and must remain fully opaque.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SeedIsSet_Then_EverySemanticRoleBrushFollowsItsColor()
+	{
+		// ThemesConstants.SemanticColorKeys is a hand-maintained mirror of the roles declared in
+		// SharedColorPalette.xaml / SharedColors.xaml, and a role missing from it fails silently — the
+		// brush just keeps its parse-time color. Sweep every role so drift fails the build instead.
+		var container = CreateThemedContainer(out var theme);
+		theme.Colors = new ThemeColors { PrimarySeed = ToColor(unchecked((int)0xFF006495)) };
+
+		foreach (var colorKey in SemanticColorKeys)
+		{
+			var brushKey = colorKey.Substring(0, colorKey.Length - "Color".Length) + "Brush";
+
+			Assert.IsTrue(container.Resources.TryGetValue(brushKey, out var brushValue),
+				$"{brushKey} should resolve from the theme");
+			Assert.IsTrue(container.Resources.TryGetValue(colorKey, out var colorValue),
+				$"{colorKey} should resolve from the theme");
+
+			Assert.AreEqual((Color)colorValue, ((SolidColorBrush)brushValue).Color,
+				$"{brushKey} does not match {colorKey} — the role is likely missing from " +
+				"ThemesConstants.SemanticColorKeys, so the brush kept its parse-time color.");
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SeedIsSet_Then_HighContrastBrushesAreSweptToo()
+	{
+		// SharedColors.xaml declares a third theme dictionary, HighContrast, carrying its own copy of
+		// every brush. No color layer defines HighContrast values, so those brushes reference the same
+		// roles as the others and must be swept as well — otherwise a high-contrast user gets brushes
+		// frozen at whatever the ambient scope held when the dictionary was parsed.
+		var seed = ToColor(unchecked((int)0xFF006495));
+		var theme = new SimpleTheme { Colors = new ThemeColors { PrimarySeed = seed } };
+
+		var brushes = FindSemanticBrushes(theme);
+		Assert.IsNotNull(brushes, "The SharedColors brush dictionary should be reachable from the theme");
+
+		Assert.IsTrue(brushes.ThemeDictionaries.TryGetValue("HighContrast", out var highContrast)
+			&& highContrast is ResourceDictionary highContrastBrushes,
+			"SharedColors.xaml should still declare a HighContrast theme dictionary");
+
+		Assert.IsTrue(((ResourceDictionary)highContrast).TryGetValue("PrimaryBrush", out var primary),
+			"HighContrast PrimaryBrush should resolve");
+
+		var expected = GetGeneratedColor(seed, "Default", "PrimaryColor");
+		Assert.AreEqual(expected, ((SolidColorBrush)primary).Color,
+			"HighContrast brushes are swept from the Default color theme and must follow the seed.");
+
+		Assert.AreEqual(0.08, ((SolidColorBrush)((ResourceDictionary)highContrast)["PrimaryHoverBrush"]).Opacity, 0.0001,
+			"HighContrast state brushes must carry their state opacity too.");
 	}
 
 	[TestMethod]
@@ -554,6 +628,47 @@ public class Given_SeedColorPalette
 	// Helpers
 	// ─────────────────────────────────────────────────────────────────────
 
+	/// <summary>
+	/// The semantic color roles declared in <c>SharedColorPalette.xaml</c>, listed here independently
+	/// of <c>ThemesConstants.SemanticColorKeys</c> so this acts as an oracle for that list rather than
+	/// a copy of it. Add a role here when one is added to the XAML.
+	/// </summary>
+	private static readonly string[] SemanticColorKeys =
+	{
+		"PrimaryColor", "OnPrimaryColor", "PrimaryContainerColor", "OnPrimaryContainerColor",
+		"PrimaryInverseColor", "PrimaryVariantDarkColor", "PrimaryVariantLightColor",
+		"SecondaryColor", "OnSecondaryColor", "SecondaryContainerColor", "OnSecondaryContainerColor",
+		"SecondaryVariantDarkColor", "SecondaryVariantLightColor",
+		"TertiaryColor", "OnTertiaryColor", "TertiaryContainerColor", "OnTertiaryContainerColor",
+		"ErrorColor", "OnErrorColor", "ErrorContainerColor", "OnErrorContainerColor",
+		"BackgroundColor", "OnBackgroundColor",
+		"SurfaceColor", "OnSurfaceColor", "SurfaceVariantColor", "OnSurfaceVariantColor",
+		"SurfaceInverseColor", "OnSurfaceInverseColor", "SurfaceTintColor",
+		"OutlineColor", "OutlineVariantColor",
+	};
+
+	/// <summary>
+	/// Finds the <c>SharedColors.xaml</c> brush dictionary in the theme's merge tree. It is the only
+	/// dictionary carrying a <c>HighContrast</c> theme dictionary, which makes that a reliable marker.
+	/// </summary>
+	private static ResourceDictionary FindSemanticBrushes(ResourceDictionary dictionary)
+	{
+		if (dictionary.ThemeDictionaries.TryGetValue("HighContrast", out _))
+		{
+			return dictionary;
+		}
+
+		foreach (var merged in dictionary.MergedDictionaries)
+		{
+			if (FindSemanticBrushes(merged) is { } found)
+			{
+				return found;
+			}
+		}
+
+		return null;
+	}
+
 	/// <summary>The theme dictionary key matching the application's current theme.</summary>
 	private static string ActiveThemeKey =>
 		Application.Current.RequestedTheme == ApplicationTheme.Light ? "Light" : "Default";
@@ -633,8 +748,15 @@ public class Given_SeedColorPalette
 	private static int ToArgb(Color color) => (color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;
 
 	/// <summary>
-	/// Accessor for internal ColorMath methods used by tests.
+	/// An <b>independent</b> WCAG contrast implementation — deliberately not a call into
+	/// <c>ColorMath.ContrastRatio</c>. The contrast assertions exist to check the product's colour
+	/// choices; routing them through the product's own arithmetic would make them self-referential and
+	/// unable to fail. Do not "de-duplicate" this against <c>ColorMath</c>.
 	/// </summary>
+	/// <remarks>
+	/// Tone is read via the public <c>HctColor.FromArgb(argb).Tone</c> instead, so only the contrast
+	/// formula is restated here.
+	/// </remarks>
 	private static class ColorMathAccessor
 	{
 		public static double ContrastRatio(int argb1, int argb2)
@@ -648,22 +770,6 @@ public class Given_SeedColorPalette
 			0.2126 * Linearized((argb >> 16) & 0xFF)
 			+ 0.7152 * Linearized((argb >> 8) & 0xFF)
 			+ 0.0722 * Linearized(argb & 0xFF);
-
-		public static double LstarFromArgb(int argb)
-		{
-			double yNorm = YFromArgb(argb) / 100.0;
-			double e = 216.0 / 24389.0;
-			double k = 24389.0 / 27.0;
-			return yNorm <= e ? k * yNorm : 116.0 * Math.Pow(yNorm, 1.0 / 3.0) - 16.0;
-		}
-
-		public static double YFromLstar(double lstar)
-		{
-			if (lstar <= 8.0)
-				return lstar / (24389.0 / 27.0) * 100.0;
-			double cubeRoot = (lstar + 16.0) / 116.0;
-			return cubeRoot * cubeRoot * cubeRoot * 100.0;
-		}
 
 		private static double Linearized(int component)
 		{

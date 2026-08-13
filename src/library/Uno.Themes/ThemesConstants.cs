@@ -20,6 +20,25 @@ internal static class ThemesConstants
 	public static readonly string[] ThemeDictionaryKeys = { "Light", "Default" };
 
 	/// <summary>
+	/// Every theme dictionary declared by <c>SharedColors.xaml</c>, paired with the color theme its
+	/// brushes are resolved from.
+	/// </summary>
+	/// <remarks>
+	/// This is deliberately wider than <see cref="ThemeDictionaryKeys"/>: the brush dictionary carries a
+	/// third, <c>HighContrast</c> block, but no color layer anywhere in the libraries defines HighContrast
+	/// values — those brushes reference the same <c>*Color</c> role keys as the others. Sweeping them
+	/// against "Default" therefore preserves the palette sharing the XAML already encodes, and keeps them
+	/// following seed and override changes instead of being frozen at whatever the ambient scope held when
+	/// the dictionary was parsed.
+	/// </remarks>
+	public static readonly (string BrushTheme, string ColorTheme)[] BrushThemeSources =
+	{
+		("Light", "Light"),
+		("Default", "Default"),
+		("HighContrast", "Default"),
+	};
+
+	/// <summary>
 	/// Every semantic color role declared in <c>SharedColorPalette.xaml</c> and consumed by the
 	/// brushes in <c>SharedColors.xaml</c>. Order is irrelevant; completeness is not — a role
 	/// missing here keeps its parse-time brush color when a seed or override changes it.

@@ -220,6 +220,12 @@ Work in this order. Items 1 and 2 are prerequisites for 3 — do not reorder.
 - [x] `OnPrimaryColor` (light) picks tone 100 or tone 10 by contrast against the pinned seed (D2). Reuse the
       L*-based contrast math already present in the test file's `ColorMathAccessor` — but move it into
       `ColorMath` as a proper internal API rather than duplicating it (AGENTS.md §1, no duplication).
+      **Partially done, deliberately.** `ColorMath.ContrastRatio` exists and the product uses it, and the
+      test's duplicated L*/Y math is gone (it now reads tone through the public `HctColor.FromArgb().Tone`).
+      The contrast formula itself is still restated in the test: the sample app has no `InternalsVisibleTo`,
+      and — more importantly — asserting the product's colour choices with the product's own arithmetic
+      would make those assertions self-referential and unable to fail. It is an oracle, not a duplicate,
+      and is commented as such.
 - [x] Pinning only makes sense with the seed's own chroma preserved, so this implies fidelity mode. Decide and
       document: does pinning force `UseHighFidelityColors`, or is `max(chroma, 48)` still applied to the rest
       of the ramp while Primary alone is exact? **Recommend forcing fidelity** — a chroma-48 ramp around a
@@ -325,7 +331,9 @@ so `When_GeneratingM3ErrorPalette_Then_ToneMatchesReferenceImplementation` pins 
 D2 specified a flip between tone 100 and tone 10. Measured, that pairing **cannot** reach WCAG AA for seeds
 around L* 49-55: at L* 50 the better of the two is 4.48:1 (white) against 3.84:1 (tone 10). Adding tone 0 as a
 third candidate closes the gap — a sweep over every hue x tone x chroma combination puts the worst case at
-**4.617:1** (hue 111, tone 49, `#797900`). A knowingly sub-AA default pairing is not acceptable, so `PickOnColor`
+**4.617:1** (hue 111, tone 49, `#797900`) — the true analytic bound is **4.5826:1**, at the black/white
+crossover where Y = 0.17913; the sweep's figure was an artefact of its grid step. Either way it clears AA.
+A knowingly sub-AA default pairing is not acceptable, so `PickOnColor`
 takes the best of {tone 100, tone 10, tone 0}. For ordinary seeds this is indistinguishable from D2 — a T40 seed
 still gets tone 100, a T80 seed still gets tone 10.
 
@@ -413,6 +421,40 @@ Consequences worth noting:
 brushes follow the role and keep their opacity; clearing the seed reverts; `Error*` brushes never follow the
 seed; a rendered control paints with the generated colour; and an **already-rendered** control repaints when
 the seed changes — the color-picker scenario, which is the one the previous behaviour failed.
+
+### Review-panel follow-ups applied
+
+A seven-lens review panel ran against the branch. Fixed here:
+
+- **HighContrast was never swept.** `SharedColors.xaml` declares a third theme dictionary carrying its own
+  copy of all 280 brushes, and the sweep only visited Light and Default — so a high-contrast user got brushes
+  frozen at parse time, following neither the seed nor an override. No color layer anywhere defines
+  HighContrast values (the HC brushes reference the same `*Color` roles), so `ThemesConstants.BrushThemeSources`
+  now maps each brush theme to the color theme it resolves from, with HighContrast reading Default. Verified
+  red: without the mapping the new test reads `#F5F5F5` (base) instead of the seed-derived `#8FCDFF`.
+- **`UpdateSource` could strip the theme permanently.** It cleared every dynamic layer *before* rebuilding,
+  with no boundary, and runs from seven property-changed callbacks plus the hot-reload handler — so any throw
+  left the consuming app with no colour, spacing or shape dictionaries at all. Split into `BuildColorLayer`
+  plus a commit phase that touches `MergedDictionaries` only once the new layers exist. Deliberately **not**
+  a `try/catch`: the exception still propagates exactly as before (AGENTS.md §8 forbids swallowing), but the
+  theme now keeps its last good palette.
+- **Unguarded `new Uri` in two property-changed callbacks** (`ThemeColors.OverrideSource`,
+  `BaseTheme.FontOverrideSource`) — a typo'd URI threw `UriFormatException` out of a PCC. Now `Uri.TryCreate`
+  with a fall back to no override.
+- **The opacity DataRows were a false guard.** They construct a theme inside a host that already has one
+  merged app-wide, so ambient resolution supplies the tokens whether or not the sweep runs — verified: they
+  stay green with the opacity write deleted. Kept (they pin the default values) but labelled, and joined by
+  `When_OverriddenOpacityTokens_Then_EveryStateBrushUsesThem`, which overrides all eight tokens to values that
+  exist nowhere in the ambient scope and does fail without the sweep.
+- **`SemanticColorKeys` drift was unguarded** — only Primary and Error were asserted out of 32 roles.
+  `When_SeedIsSet_Then_EverySemanticRoleBrushFollowsItsColor` now sweeps every role against an independent
+  list held in the test.
+
+Left open from the panel (not in this pass): the missing 7.x→8.0 migration section, `PreserveSeedColor` absent
+from the `SemanticThemeHelper` doc table, seed alpha not masked, `SemanticThemeHelper` throwing from a getter,
+thread-affinity of the brush mutation, no logging, the sample page's unsubscribed `ActualThemeChanged`, the
+per-key themed-dictionary re-resolution and the re-parsed `SharedColorPalette.xaml` (both per-frame during a
+picker drag), and `SetChangedCallback` being a single-slot `Action<bool>`.
 
 ### Before / after
 
