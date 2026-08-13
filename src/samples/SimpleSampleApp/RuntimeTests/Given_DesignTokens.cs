@@ -175,7 +175,17 @@ public class Given_DesignTokens
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════
-	// 5. RUNTIME SWITCHING
+	// 5. RUNTIME SWITCHING — of the *token resources* only.
+	//
+	// These assert that assigning DefaultDensity / DefaultCornerRadius regenerates the Space* and
+	// Radius* resources. They deliberately do NOT assert anything about rendered controls, because
+	// controls do not restyle: the per-control keys that consume these tokens (ButtonCornerRadius,
+	// ButtonPadding, …) are resolved once when the theme's control-style dictionaries are parsed,
+	// and CornerRadius/Thickness are values with no live instance to update. Both properties are
+	// documented as construction-time settings (see BaseTheme and doc/design-tokens.md); to change
+	// them at runtime an app must recreate its root content.
+	//
+	// Do not "extend" these into control-level assertions expecting them to pass.
 	// ═══════════════════════════════════════════════════════════════════════
 
 	[TestMethod]

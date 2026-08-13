@@ -259,6 +259,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// <c>RadiusFull</c> always remains 9999 (pill shape).
 	/// Individual tokens can still be overridden via lightweight styling.
 	/// </summary>
+	/// <remarks>
+	/// This is a <b>construction-time</b> setting: assign it where the theme is declared
+	/// (normally <c>App.xaml</c>). Assigning it later regenerates the <c>Radius*</c> token
+	/// resources but does not restyle controls — not the ones already rendered, and not ones
+	/// created afterwards. The per-control keys that consume these tokens (<c>ButtonCornerRadius</c>
+	/// and friends) are resolved once when the theme's control-style dictionaries are parsed, and
+	/// a <see cref="CornerRadius"/> is a value with no live instance to update. To offer shape as
+	/// a user setting, change the property and then recreate the root content.
+	/// </remarks>
 	public double DefaultCornerRadius
 	{
 		get => (double)GetValue(DefaultCornerRadiusProperty);
@@ -288,6 +297,13 @@ public abstract partial class BaseTheme : ResourceDictionary
 	/// Compact = 3, Regular = 4, Comfy = 5.
 	/// Control heights and icon sizes remain constant across densities.
 	/// </summary>
+	/// <remarks>
+	/// This is a <b>construction-time</b> setting, for the same reason as
+	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
+	/// resources but does not restyle controls, because the per-control padding and margin keys
+	/// hold resolved <see cref="Thickness"/> values. To offer density as a user setting, change the
+	/// property and then recreate the root content.
+	/// </remarks>
 	public Density DefaultDensity
 	{
 		get => (Density)GetValue(DefaultDensityProperty);
