@@ -12,11 +12,13 @@ namespace Uno.Themes.Samples.Content.Styles;
 public sealed partial class SeedColorSamplePage : Page
 {
 	private static Color _lastSeed = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
+	private static bool _lastPreserveSeedColor = true;
 
 	public SeedColorSamplePage()
 	{
 		this.InitializeComponent();
 		SeedColorPicker.Color = _lastSeed;
+		PreserveSeedColorToggle.IsOn = _lastPreserveSeedColor;
 		ApplySeedColor(_lastSeed);
 
 		// On theme switch, pulse the seed to force a full theme rebuild so the
@@ -33,9 +35,16 @@ public sealed partial class SeedColorSamplePage : Page
 		ApplySeedColor(args.NewColor);
 	}
 
+	private void PreserveSeedColorToggle_Toggled(object sender, RoutedEventArgs e)
+	{
+		_lastPreserveSeedColor = PreserveSeedColorToggle.IsOn;
+		ApplySeedColor(_lastSeed);
+	}
+
 	private void ApplySeedColor(Color seed)
 	{
 		_lastSeed = seed;
+		SemanticThemeHelper.PreserveSeedColor = _lastPreserveSeedColor;
 		SemanticThemeHelper.PrimarySeed = seed;
 
 		var hct = HctColor.FromArgb(ColorToArgb(seed));
@@ -44,7 +53,8 @@ public sealed partial class SeedColorSamplePage : Page
 		SeedHex.Text = $"#{seed.R:X2}{seed.G:X2}{seed.B:X2}";
 		SeedHctText.Text = $"H:{hct.Hue:F0}  C:{hct.Chroma:F0}  T:{hct.Tone:F0}";
 
-		XamlSnippet.Text = $"<MaterialTheme>\n  <MaterialTheme.Colors>\n    <ThemeColors PrimarySeed=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\" />\n  </MaterialTheme.Colors>\n</MaterialTheme>";
+		var preserveAttribute = _lastPreserveSeedColor ? string.Empty : "\n                 PreserveSeedColor=\"False\"";
+		XamlSnippet.Text = $"<MaterialTheme>\n  <MaterialTheme.Colors>\n    <ThemeColors PrimarySeed=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\"{preserveAttribute} />\n  </MaterialTheme.Colors>\n</MaterialTheme>";
 	}
 
 	private static int ColorToArgb(Color c) => (c.A << 24) | (c.R << 16) | (c.G << 8) | c.B;

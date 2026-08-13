@@ -20,14 +20,11 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 {
 	/// <summary>
 	/// Simple uses a hand-crafted grayscale palette by default (no seed).
-	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, high-fidelity
-	/// mode preserves the source chroma so low-chroma seeds stay neutral
-	/// instead of being boosted by the M3 minimum-chroma floor.
+	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, the default
+	/// <see cref="ThemeColors.PreserveSeedColor"/> behavior keeps the generated
+	/// palette faithful to that seed.
 	/// </summary>
 	protected override Color? DefaultPrimarySeed => null;
-
-	/// <inheritdoc />
-	protected override bool UseHighFidelityColors => true;
 
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)

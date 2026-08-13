@@ -6,7 +6,7 @@
 
 ## Overview
 
-This feature allows users to supply a single **seed color** that algorithmically derives the full semantic color palette (Primary, Secondary, Tertiary, Error, Surface, Outline, etc.) for both Light and Dark themes, without manually defining every color resource.
+This feature allows users to supply a single **seed color** that algorithmically derives the full semantic color palette (Primary, Secondary, Tertiary, Surface, Outline, etc.) for both Light and Dark themes, without manually defining every color resource. Error is deliberately excluded — see below.
 
 The implementation follows the [Material Design 3 color system](https://m3.material.io/styles/color/the-color-system/key-colors-tones) and uses the **HCT (Hue-Chroma-Tone)** color space, ported from [material-color-utilities](https://github.com/material-foundation/material-color-utilities) (Apache 2.0).
 
@@ -227,7 +227,7 @@ src/library/Uno.Themes/
 ### Tests
 
 - `src/samples/SimpleSampleApp/RuntimeTests/Given_SeedColorPalette.cs` — MSTest runtime tests covering:
-  - **HCT round-trip fidelity**: ARGB → HCT → ARGB preserves color within ±20 per channel for realistic seed colors (the simplified bisection solver has larger errors at extreme gamut boundaries)
+  - **HCT round-trip fidelity**: ARGB → HCT → ARGB preserves color within ±2 per channel, including fully saturated colors. (Before spec 06 this was ±20 and the solver clamped chroma to ~27–43 for any request above ~36; the tolerance and the "extreme gamut boundaries" wording concealed it. See [specs/06-seed-color-fidelity](../06-seed-color-fidelity/progress.md).)
   - **HCT value correctness**: Known colors produce expected hue/chroma/tone ranges
   - **Tonal palette monotonicity**: L* increases with tone; tone 0 = black, tone 100 = white
   - **Tone accuracy**: Generated colors match their target L* within ±2

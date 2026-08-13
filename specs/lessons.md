@@ -4,6 +4,38 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Pick the oracle the reference *implementation* emits, not the value the spec *publishes* — and never assume a numeric fallback is doing the job its name claims
+
+**Context:** Seed color fidelity (spec 06). Two distinct traps hit while correcting `HctSolver`.
+
+**Trap 1 — the wrong oracle.** The plan asserted `new TonalPalette(25, 84).GetArgb(40)` "must be `#B3261E`", M3's published error swatch. It must not: `#B3261E` is HCT(26.0, **76.3**, 39.7), not the tone-40 entry of a chroma-84 palette. The corrected solver emits `#BA1A1A` — which is exactly what material-color-utilities' own `SchemeTest` asserts (`0xffba1a1a`), along with `#410002`, `#FFB4AB` and `#FFDAD6` for the other tones. Had the test been written to the plan's number, a correct solver would have been "fixed" back into a wrong one.
+
+**Trap 2 — the fallback that was doing all the work.** `SolveToArgb` derived CAM16 `J` from a *gray* at the target tone, then rejected any candidate whose L\* missed by more than 1.0. Since the `J` producing a given L\* depends on chroma, every saturated request failed that check immediately and fell through to `BisectChroma`, which cut chroma until the tone error closed — i.e. until the color was nearly gray. The code, its comments, the test's tolerance and the spec all described this as a *gamut* limitation. It was not; the gamut was never reached. The fix was to solve for `J` (Newton, per MCU's `findResultByJ`) rather than assume it, which reduced the bisection to the genuine out-of-gamut fallback it had always been named for.
+
+**How to apply:**
+- When porting from a reference implementation, the oracle is **what that implementation outputs**, taken from its own test suite — not the design spec's published swatches. Specs publish hand-picked values; generators emit computed ones, and they differ. Pin a **whole ramp** (six tones here), never a single value: one match can be coincidence, six cannot.
+- If a numeric routine has a "fallback" path, measure how often the primary path actually succeeds before trusting any description of the fallback. A fallback that runs on *every* saturated input is not a fallback, it is the algorithm — and its comment will be describing a scenario that never occurs.
+- When a comment, a test tolerance, and a spec all agree on a cause, that is not corroboration if all three were written by the same person from the same assumption. Reproduce the failure standalone (`ColorGeneration` compiles with no WinUI dependency — a 6-file console project prints the whole palette in one command) and check the claimed cause is present at all.
+- Contrast targets must be **swept, not spot-checked**. D2's "flip between tone 100 and tone 10" reads as obviously sufficient and provably is not — it tops out at 4.48:1 for backgrounds near L\* 50. A brute-force sweep over hue x tone x chroma found the true worst case in seconds and justified adding tone 0 as a third candidate (worst case 4.617:1).
+
+---
+
+## `StaticResource` in a `Source`-loaded ResourceDictionary resolves against the *application* scope — the only way to update those resources later is to mutate the instances
+
+**Context:** Seed color fidelity (spec 06). A seeded theme updated every `*Color` resource correctly while every `*Brush` resource — and therefore every rendered control and the sample page's live color picker — kept painting the previous palette.
+
+**Root cause:** `SharedColors.xaml` declares ~840 brushes as `<SolidColorBrush Color="{StaticResource PrimaryColor}" />`. `BaseTheme.UpdateSource` built that dictionary with `new ResourceDictionary { Source = ... }` and merged the palette/seed/override dictionaries into it *afterwards*. `StaticResource` resolves eagerly at parse time, and — measured, not assumed — it resolves against `Application.Current.Resources`, not against the dictionary's own merge tree. Four arrangements were probed (`Source` first, `Source` last on the same dictionary, brushes merged last under a parent, and app scope primed before the parse); **only** the primed-app-scope one worked. No merge ordering fixes it.
+
+**How to apply:**
+- A resource declared as `<SolidColorBrush Color="{StaticResource X}" />` is a **snapshot taken against the ambient application scope**, not a binding and not a lookup against its siblings. Redefining `X` in a dictionary merged later changes nothing. Verify by probing arrangements before designing a fix around merge order — the intuitive "merge the values first" does not work.
+- `{ThemeResource SomeBrush}` resolves to a brush **instance** and re-evaluates only on a theme change. So replacing a dictionary can never update anything already rendered. If a resource must change without re-navigation, keep one instance and mutate it (`brush.Color = …` does repaint loaded elements). Keeping the instance stable across rebuilds is part of the contract, not an optimization.
+- Under Uno, `ResourceDictionary.ThemeDictionaries.Keys` and enumerating a XAML-backed `ResourceDictionary` both throw `NotSupportedException`; only keyed `TryGetValue` works — and `ThemeDictionaries.TryGetValue` also materializes the lazy initializer where the indexer returns a raw `LazyInitializer`. Any code that must sweep XAML-declared resources needs an explicit key list, so validate the naming convention against the XAML first (all 840 brushes matched `<role><state>Brush` → `<role>Color` with zero violations, which is what made a generated key list safe).
+- `ResourceDictionary.TryGetValue` resolves `ThemeDictionaries` against the **application** theme, ignoring any `FrameworkElement.RequestedTheme`. A test that needs Light and Dark independently cannot use it, and the app theme in the runtime-test host is not guaranteed to be Light.
+
+**Verification trap:** the first version of these tests asserted on a rendered `Button.Background` and every case returned the same wrong color, which reads as "the generator is broken". The generator was correct; the brush layer was. When an end-to-end assertion fails, confirm which layer actually moved (here: `*Color` updated, `*Brush` did not) before touching the algorithm.
+
+---
+
 ## A tolerance-based test whose inputs all sit outside the failure region is not coverage — it is a green light on a broken algorithm
 
 **Context:** Seed color generation (spec 06). `Given_SeedColorPalette.When_RoundTripping_Argb_Through_Hct_Then_ColorIsPreserved` had been passing since the feature shipped in 7.0.3, with a ±20 per-channel tolerance and a comment explaining that the "simplified bisection solver" loses precision "at sRGB gamut boundaries". The solver was in fact clamping chroma to ~27-43 whenever more than ~36 was requested — pure red round-tripped to `#AA6D63` (off by 109), pure green to `#BBECAA` (off by 187), and M3's own error color `#B3261E` came back as `#7E4F48`. None of it was caught.

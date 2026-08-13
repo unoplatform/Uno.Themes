@@ -76,6 +76,41 @@ public sealed partial class ThemeColors : DependencyObject
 			new PropertyMetadata(null, OnPropertyChanged));
 	#endregion
 
+	#region PreserveSeedColor (DP)
+	/// <summary>
+	/// Gets or sets whether generated palettes stay faithful to <see cref="PrimarySeed"/>.
+	/// Default is <c>true</c>.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// When <c>true</c>, the light <c>PrimaryColor</c> resource is the seed color verbatim and
+	/// every derived palette is scaled from the seed's own chroma, so a low-chroma seed such as
+	/// gray produces a neutral palette. The light <c>OnPrimaryColor</c> is picked for contrast
+	/// against the pinned seed rather than being fixed at tone 100.
+	/// </para>
+	/// <para>
+	/// When <c>false</c>, the Material Design 3 "tonal spot" behavior applies instead: a minimum
+	/// chroma of 48 is enforced on Primary and the supporting palettes use fixed chromas. This
+	/// guarantees vibrant output but does not reproduce the seed color exactly. This was the
+	/// behavior before version 8.0.
+	/// </para>
+	/// <para>The dark <c>PrimaryColor</c> is always derived (tone 80) so it stays legible on a dark surface.</para>
+	/// </remarks>
+	public bool PreserveSeedColor
+	{
+		get => (bool)GetValue(PreserveSeedColorProperty);
+		set => SetValue(PreserveSeedColorProperty, value);
+	}
+
+	/// <summary>Identifies the <see cref="PreserveSeedColor"/> dependency property.</summary>
+	public static DependencyProperty PreserveSeedColorProperty { get; } =
+		DependencyProperty.Register(
+			nameof(PreserveSeedColor),
+			typeof(bool),
+			typeof(ThemeColors),
+			new PropertyMetadata(true, OnPropertyChanged));
+	#endregion
+
 	#region OverrideSource (DP)
 	/// <summary>
 	/// Gets or sets a URI to a <see cref="ResourceDictionary"/> containing color overrides.
@@ -138,6 +173,14 @@ public sealed partial class ThemeColors : DependencyObject
 			tc._onChanged?.Invoke(isStructural);
 		}
 	}
+
+	/// <summary>
+	/// <c>true</c> when a consumer explicitly assigned <see cref="PreserveSeedColor"/>. Lets
+	/// <see cref="BaseTheme"/> keep honoring the obsolete <c>UseHighFidelityColors</c> override
+	/// of an existing subclass while an explicit assignment here still wins.
+	/// </summary>
+	internal bool HasExplicitPreserveSeedColor =>
+		ReadLocalValue(PreserveSeedColorProperty) != DependencyProperty.UnsetValue;
 
 	/// <summary>
 	/// Registers a callback that is invoked when any color property changes.

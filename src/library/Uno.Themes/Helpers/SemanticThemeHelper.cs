@@ -56,6 +56,17 @@ public static class SemanticThemeHelper
 		set => GetColorsOrThrow().TertiarySeed = value;
 	}
 
+	/// <summary>
+	/// Gets or sets whether generated palettes stay faithful to <see cref="PrimarySeed"/>
+	/// on the active theme. See <see cref="ThemeColors.PreserveSeedColor"/>.
+	/// </summary>
+	/// <exception cref="InvalidOperationException">No <see cref="BaseTheme"/> found in application resources.</exception>
+	public static bool PreserveSeedColor
+	{
+		get => GetColorsOrThrow().PreserveSeedColor;
+		set => GetColorsOrThrow().PreserveSeedColor = value;
+	}
+
 	private static ThemeColors GetColorsOrThrow()
 	{
 		var theme = GetTheme() ?? throw new InvalidOperationException(

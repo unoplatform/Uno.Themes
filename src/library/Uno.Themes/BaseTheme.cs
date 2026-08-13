@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Uno.Themes.ColorGeneration;
+using Uno.Themes.Helpers;
 
 
 #if WinUI
@@ -40,6 +41,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 	private bool _isUpdatingColorOverrides;
 	private bool _isFontOverrideMuted;
 	private ResourceDictionary _baseColorOverride;
+
+	// SharedColors.xaml, created on the first UpdateSource and kept for the theme's lifetime so
+	// consumers keep resolving to the same SolidColorBrush instances across rebuilds; only their
+	// Color is rewritten. _previousColorsLayer is the parent it is currently nested under.
+	private ResourceDictionary _semanticBrushes;
+	private ResourceDictionary _previousColorsLayer;
 
 	// Tracks the dictionaries this theme appends to its own MergedDictionaries during
 	// UpdateSource() so a subsequent rebuild (theme-property change or hot reload) removes
@@ -314,11 +321,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	/// <summary>
 	/// When <c>true</c>, seed color generation preserves the source color's
-	/// actual chroma (high-fidelity / "color match" mode). When <c>false</c>
-	/// (default), the standard M3 minimum chroma of 48 is enforced, which
+	/// actual chroma (high-fidelity / "color match" mode). When <c>false</c>,
+	/// the standard M3 minimum chroma of 48 is enforced, which
 	/// guarantees vibrant colors but distorts low-chroma seeds like gray.
 	/// </summary>
-	protected virtual bool UseHighFidelityColors => false;
+	[Obsolete("Use ThemeColors.PreserveSeedColor instead. This property will be removed in a future version.")]
+	protected virtual bool UseHighFidelityColors => true;
 
 	public BaseTheme() : this(colorOverride: null, fontOverride: null)
 	{
@@ -383,22 +391,26 @@ public abstract partial class BaseTheme : ResourceDictionary
 		}
 		_dynamicDictionaries.Clear();
 
-		// Colour layer (always dynamic so it rebuilds on seed-color / override changes):
-		// SharedColors brushes resolve their {StaticResource *Color} against the shared
-		// palette, the theme's own base palette (e.g. SimpleTheme's grayscale, supplied via
-		// _baseColorOverride), the seed palette and finally the consumer override — each
-		// merged in increasing precedence. This layer is intentionally NOT baked into the
-		// Source bundle (BaseDictionaries.xaml) so colour edits never require reloading the
+		// Colour layer (always dynamic so it rebuilds on seed-color / override changes). The
+		// value dictionaries — shared palette, the theme's own base palette (e.g. SimpleTheme's
+		// grayscale, supplied via _baseColorOverride), the seed palette and finally the consumer
+		// override — are merged in increasing precedence, and tracked in that same order so the
+		// brushes can be resolved against them below. This layer is intentionally NOT baked into
+		// the Source bundle (BaseDictionaries.xaml) so colour edits never require reloading the
 		// static base.
-		var colors = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
+		var colors = new ResourceDictionary();
+		var colorLayers = new List<ResourceDictionary>(4);
 
-		colors.MergedDictionaries.Add(new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) });
+		var sharedPalette = new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorPaletteResourcePath) };
+		colors.MergedDictionaries.Add(sharedPalette);
+		colorLayers.Add(sharedPalette);
 
 		// Theme-specific base colors (e.g. SimpleTheme's grayscale palette) are merged
 		// before the seed so that seed-generated colors take precedence.
 		if (_baseColorOverride is { } baseColorOverride)
 		{
 			colors.SafeMerge(baseColorOverride);
+			colorLayers.Add(baseColorOverride);
 		}
 
 		// Resolve seed colors from Colors property, falling back to theme default
@@ -408,19 +420,52 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 		if (effectivePrimary is { } seed)
 		{
-			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, UseHighFidelityColors);
+			// An explicit Colors.PreserveSeedColor wins; otherwise fall back to the obsolete
+			// virtual so a subclass that overrode it before 8.0 keeps its behavior.
+#pragma warning disable CS0618 // Type or member is obsolete
+			var preserveSeedColor = Colors is { HasExplicitPreserveSeedColor: true } explicitColors
+				? explicitColors.PreserveSeedColor
+				: UseHighFidelityColors;
+#pragma warning restore CS0618
+
+			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, preserveSeedColor);
 			colors.SafeMerge(seedPalette);
+			colorLayers.Add(seedPalette);
 		}
 
 		// Explicit user overrides from Colors.OverrideDictionary take highest precedence.
 		// URI-backed overrides are re-resolved from their Source on each rebuild so that
 		// hot-reload edits to the underlying XAML propagate: the in-memory key/value pairs of
 		// the original instance were loaded at init time and would otherwise be stale.
+		ResourceDictionary resolvedOverride = null;
 		if (Colors?.OverrideDictionary is { } userOverride)
 		{
-			colors.SafeMerge(userOverride.Source is { } overrideSource
+			resolvedOverride = userOverride.Source is { } overrideSource
 				? new ResourceDictionary { Source = overrideSource }
-				: userOverride);
+				: userOverride;
+
+			colorLayers.Add(resolvedOverride);
+		}
+
+		// The brush dictionary is created once and reused for the lifetime of the theme; the
+		// colours resolved above are written into its existing SolidColorBrush instances.
+		// Rebuilding it would neither pick up the seed (its {StaticResource *Color} bindings
+		// resolve eagerly at parse time, against the ambient scope) nor reach anything already
+		// rendered (consumers bind {ThemeResource *Brush}, which re-evaluates only on a theme
+		// change). See SemanticBrushUpdater.
+		_semanticBrushes ??= new ResourceDictionary { Source = new Uri(ThemesConstants.SharedColorsResourcePath) };
+		SemanticBrushUpdater.Apply(_semanticBrushes, colorLayers);
+
+		// Detach from the previous pass's layer before re-parenting: a ResourceDictionary may
+		// not be nested under two parents at once.
+		_previousColorsLayer?.MergedDictionaries.Remove(_semanticBrushes);
+		colors.MergedDictionaries.Add(_semanticBrushes);
+		_previousColorsLayer = colors;
+
+		// Merged last so a consumer override wins for both *Color and *Brush keys.
+		if (resolvedOverride is { })
+		{
+			colors.SafeMerge(resolvedOverride);
 		}
 
 		// Generate spacing, shape, and density scales from code

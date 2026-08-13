@@ -31,27 +31,27 @@ internal sealed class SeedColorPaletteGenerator
 	// Single-entry cache: stores only the most recent seed → palette result.
 	// Runtime color picking only uses one seed at a time, so this avoids
 	// unbounded growth from dragging a color picker.
-	private (int primary, int? secondary, int? tertiary, bool highFidelity) _cacheKey;
+	private (int primary, int? secondary, int? tertiary, bool preserveSeedColor) _cacheKey;
 	private ResourceDictionary _cacheValue;
 
 	internal ResourceDictionary Generate(
 		Color primarySeedColor,
 		Color? secondarySeedColor = null,
 		Color? tertiarySeedColor = null,
-		bool useHighFidelity = false)
+		bool preserveSeedColor = true)
 	{
 		var key = (
 			ColorToArgb(primarySeedColor),
 			secondarySeedColor is { } sec ? (int?)ColorToArgb(sec) : null,
 			tertiarySeedColor is { } ter ? (int?)ColorToArgb(ter) : null,
-			useHighFidelity);
+			preserveSeedColor);
 
 		if (_cacheValue is not null && _cacheKey == key)
 		{
 			return _cacheValue;
 		}
 
-		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor, useHighFidelity);
+		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor, preserveSeedColor);
 		_cacheKey = key;
 		_cacheValue = result;
 		return result;
@@ -61,28 +61,34 @@ internal sealed class SeedColorPaletteGenerator
 		Color seedColor,
 		Color? secondarySeedColor,
 		Color? tertiarySeedColor,
-		bool useHighFidelity)
+		bool preserveSeedColor)
 	{
-		var seedHct = HctColor.FromArgb(ColorToArgb(seedColor));
+		int seedArgb = ColorToArgb(seedColor);
+		var seedHct = HctColor.FromArgb(seedArgb);
 		double hue = seedHct.Hue;
 		double chroma = seedHct.Chroma;
 
-		// Derive the six tonal palettes.
-		// Standard M3 (SchemeTonalSpot) enforces a minimum chroma of 48 on Primary
-		// to guarantee vibrant, accessible colors. High-fidelity mode (SchemeContent)
-		// preserves the source chroma, which is needed for neutral/gray seeds.
-		double primaryChroma = useHighFidelity ? chroma : Math.Max(chroma, 48);
+		// Derive the six tonal palettes. Two variants, matching material-color-utilities'
+		// CorePalette.of(argb, isContent:):
+		//  - preserveSeedColor (default, "content"): every palette is scaled from the seed's
+		//    own chroma, so the generated ramp stays faithful to the seed — a gray seed
+		//    produces a gray palette rather than a colored one.
+		//  - !preserveSeedColor ("tonal spot", the pre-8.0 behavior): a minimum chroma of 48
+		//    on Primary and fixed chromas on the supporting palettes, which guarantees vibrant
+		//    output at the cost of distorting the seed.
+		double primaryChroma = preserveSeedColor ? chroma : Math.Max(chroma, 48);
 		var primary = new TonalPalette(hue, primaryChroma);
 
 		TonalPalette secondary;
 		if (secondarySeedColor is { } secSeed)
 		{
+			// An explicit seed always uses its own hue and chroma verbatim, in either variant.
 			var secHct = HctColor.FromArgb(ColorToArgb(secSeed));
 			secondary = new TonalPalette(secHct.Hue, secHct.Chroma);
 		}
 		else
 		{
-			secondary = new TonalPalette(hue, 16);
+			secondary = new TonalPalette(hue, preserveSeedColor ? chroma / 3.0 : 16);
 		}
 
 		TonalPalette tertiary;
@@ -93,11 +99,11 @@ internal sealed class SeedColorPaletteGenerator
 		}
 		else
 		{
-			tertiary = new TonalPalette(hue + 60.0, 24);
+			tertiary = new TonalPalette(hue + 60.0, preserveSeedColor ? chroma / 2.0 : 24);
 		}
 
-		var neutral = new TonalPalette(hue, 4);
-		var neutralVariant = new TonalPalette(hue, 8);
+		var neutral = new TonalPalette(hue, preserveSeedColor ? Math.Min(chroma / 12.0, 4.0) : 4);
+		var neutralVariant = new TonalPalette(hue, preserveSeedColor ? Math.Min(chroma / 6.0, 8.0) : 8);
 
 		// Error palette is intentionally omitted — it uses fixed values (hue=25, chroma=84)
 		// independent of the seed color, matching the Material Theme Builder behavior.
@@ -107,9 +113,17 @@ internal sealed class SeedColorPaletteGenerator
 		var lightDict = new ResourceDictionary();
 		var darkDict = new ResourceDictionary();
 
-		// Primary
-		SetColor(lightDict, darkDict, "PrimaryColor", primary, 40, 80);
-		SetColor(lightDict, darkDict, "OnPrimaryColor", primary, 100, 20);
+		// Primary. In preserve-seed mode the light role *is* the seed, verbatim — the promise
+		// being that PrimaryColor renders the exact hex the consumer supplied. Dark stays
+		// derived at tone 80: a dark brand color pinned onto a dark surface is unreadable.
+		int lightPrimary = preserveSeedColor ? seedArgb : primary.GetArgb(40);
+		lightDict["PrimaryColor"] = ArgbToColor(lightPrimary);
+		darkDict["PrimaryColor"] = ArgbToColor(primary.GetArgb(80));
+
+		lightDict["OnPrimaryColor"] = ArgbToColor(
+			preserveSeedColor ? PickOnColor(lightPrimary, primary) : primary.GetArgb(100));
+		darkDict["OnPrimaryColor"] = ArgbToColor(primary.GetArgb(20));
+
 		SetColor(lightDict, darkDict, "PrimaryContainerColor", primary, 90, 30);
 		SetColor(lightDict, darkDict, "OnPrimaryContainerColor", primary, 10, 90);
 		SetColor(lightDict, darkDict, "PrimaryInverseColor", primary, 80, 40);
@@ -141,7 +155,9 @@ internal sealed class SeedColorPaletteGenerator
 		SetColor(lightDict, darkDict, "OnSurfaceVariantColor", neutralVariant, 30, 80);
 		SetColor(lightDict, darkDict, "SurfaceInverseColor", neutral, 20, 90);
 		SetColor(lightDict, darkDict, "OnSurfaceInverseColor", neutral, 95, 20);
-		SetColor(lightDict, darkDict, "SurfaceTintColor", primary, 40, 80);
+		// SurfaceTint is M3's alias of Primary, so it follows the pinned value.
+		lightDict["SurfaceTintColor"] = ArgbToColor(lightPrimary);
+		darkDict["SurfaceTintColor"] = ArgbToColor(primary.GetArgb(80));
 
 		// Outline
 		SetColor(lightDict, darkDict, "OutlineColor", neutralVariant, 50, 60);
@@ -156,6 +172,31 @@ internal sealed class SeedColorPaletteGenerator
 		result.ThemeDictionaries["Light"] = lightDict;
 		result.ThemeDictionaries["Default"] = darkDict;
 		return result;
+	}
+
+	/// <summary>
+	/// Choose the foreground for a pinned Primary. Because the seed's tone is whatever the
+	/// consumer supplied, M3's fixed tone-100 foreground is not always legible on it; pick
+	/// whichever palette extreme contrasts best. Tone 0 is included because tone 10 tops out
+	/// near 3.8:1 against a mid-tone (~L*50) background, which would leave the default pairing
+	/// below WCAG AA — white/black always reaches at least 4.58:1.
+	/// </summary>
+	private static int PickOnColor(int backgroundArgb, TonalPalette palette)
+	{
+		int onLight = palette.GetArgb(100);
+		int onDark = palette.GetArgb(10);
+		int black = palette.GetArgb(0);
+
+		double lightContrast = ColorMath.ContrastRatio(backgroundArgb, onLight);
+		double darkContrast = ColorMath.ContrastRatio(backgroundArgb, onDark);
+		double blackContrast = ColorMath.ContrastRatio(backgroundArgb, black);
+
+		if (lightContrast >= darkContrast && lightContrast >= blackContrast)
+		{
+			return onLight;
+		}
+
+		return darkContrast >= blackContrast ? onDark : black;
 	}
 
 	private static void SetColor(
