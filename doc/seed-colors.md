@@ -107,7 +107,7 @@ The override `ResourceDictionary` follows the same format as the existing [manua
 
 Seed colors can be changed at runtime. The library rewrites the `Color` of the existing `SolidColorBrush` instances behind the semantic `*Brush` resources, so already-rendered elements repaint immediately — no page re-navigation and no theme toggle required.
 
-This matters because `{ThemeResource PrimaryBrush}` resolves to a brush *instance* and re-evaluates only on a theme change. Replacing the brush would leave everything already on screen painting with the previous one, so the instance is kept and recoloured instead. Each brush's per-state `Opacity` (`PrimaryHoverBrush`, `PrimaryDisabledBrush`, …) is defined in XAML and is preserved.
+This matters because `{ThemeResource PrimaryBrush}` resolves to a brush *instance* and re-evaluates only on a theme change. Replacing the brush would leave everything already on screen painting with the previous one, so the instance is kept and recoloured instead. The per-state `Opacity` of the overlay brushes (`PrimaryHoverBrush`, `PrimaryDisabledBrush`, …) is resolved from the same layers, so overriding a token such as `HoverOpacity` in your override dictionary now reaches those brushes.
 
 > [!NOTE]
 > Roles that are not generated from the seed — the four `Error*` keys — keep their base-palette values, and a `*Brush` key you define yourself in an override dictionary still wins over the generated one.

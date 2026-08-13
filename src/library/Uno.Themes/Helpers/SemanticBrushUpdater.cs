@@ -38,11 +38,19 @@ internal static class SemanticBrushUpdater
 {
 	private const string ColorSuffix = "Color";
 	private const string BrushSuffix = "Brush";
+	private const string OpacitySuffix = "Opacity";
+
+	// The base (state-less) brush declares no Opacity in XAML, so it keeps the default.
+	private const double OpaqueOpacity = 1.0;
 
 	// role index -> brush keys for that role, one per interaction state. Precomputed because
 	// Apply runs on every theme rebuild — including once per frame while a color picker is
 	// dragged — and building ~288 key strings each pass would be pure garbage on WASM.
 	private static readonly string[][] _brushKeys = BuildBrushKeys();
+
+	// Opacity token per interaction state, parallel to ThemesConstants.BrushStateSuffixes.
+	// null for the state-less base brush.
+	private static readonly string[] _opacityKeys = BuildOpacityKeys();
 
 	private static string[][] BuildBrushKeys()
 	{
@@ -63,6 +71,19 @@ internal static class SemanticBrushUpdater
 		return keys;
 	}
 
+	private static string[] BuildOpacityKeys()
+	{
+		var states = ThemesConstants.BrushStateSuffixes;
+		var keys = new string[states.Length];
+
+		for (int i = 0; i < states.Length; i++)
+		{
+			keys[i] = states[i].Length == 0 ? null : states[i] + OpacitySuffix;
+		}
+
+		return keys;
+	}
+
 	/// <summary>
 	/// Resolves every semantic color role from <paramref name="colorLayers"/> and applies it to the
 	/// matching brushes in <paramref name="brushes"/>.
@@ -75,6 +96,8 @@ internal static class SemanticBrushUpdater
 	internal static void Apply(ResourceDictionary brushes, IReadOnlyList<ResourceDictionary> colorLayers)
 	{
 		var colorKeys = ThemesConstants.SemanticColorKeys;
+		var states = ThemesConstants.BrushStateSuffixes;
+		Span<double> opacities = stackalloc double[states.Length];
 
 		foreach (var themeKey in ThemesConstants.ThemeDictionaryKeys)
 		{
@@ -83,21 +106,41 @@ internal static class SemanticBrushUpdater
 				continue;
 			}
 
+			for (int j = 0; j < states.Length; j++)
+			{
+				opacities[j] = _opacityKeys[j] is { } opacityKey
+					&& TryResolve<double>(colorLayers, themeKey, opacityKey, out var opacity)
+						? opacity
+						: OpaqueOpacity;
+			}
+
 			for (int i = 0; i < colorKeys.Length; i++)
 			{
-				if (!TryResolveColor(colorLayers, themeKey, colorKeys[i], out var color))
+				if (!TryResolve<Color>(colorLayers, themeKey, colorKeys[i], out var color))
 				{
 					continue;
 				}
 
-				foreach (var brushKey in _brushKeys[i])
+				var roleBrushKeys = _brushKeys[i];
+				for (int j = 0; j < roleBrushKeys.Length; j++)
 				{
-					// Opacity is set per state in XAML and must survive; only the Color is rewritten.
-					if (themedBrushes.TryGetValue(brushKey, out var value)
-						&& value is SolidColorBrush brush
-						&& !brush.Color.Equals(color))
+					if (!themedBrushes.TryGetValue(roleBrushKeys[j], out var value) || value is not SolidColorBrush brush)
+					{
+						continue;
+					}
+
+					if (!brush.Color.Equals(color))
 					{
 						brush.Color = color;
+					}
+
+					// Opacity is written too, not just Color: the XAML sets it with
+					// {StaticResource HoverOpacity}, which — like the Color binding — resolves
+					// eagerly against the ambient scope and silently yields 1.0 when the theme is
+					// built before it is reachable from Application.Current.Resources.
+					if (brush.Opacity != opacities[j])
+					{
+						brush.Opacity = opacities[j];
 					}
 				}
 			}
@@ -106,32 +149,32 @@ internal static class SemanticBrushUpdater
 
 	/// <summary>
 	/// Walks <paramref name="colorLayers"/> from the highest precedence down and returns the first
-	/// definition of <paramref name="colorKey"/> for the requested theme.
+	/// definition of <paramref name="key"/> for the requested theme. Theme-specific entries win over
+	/// theme-agnostic ones within the same layer; the opacity tokens are declared theme-agnostically.
 	/// </summary>
-	private static bool TryResolveColor(
-		IReadOnlyList<ResourceDictionary> colorLayers, string themeKey, string colorKey, out Color color)
+	private static bool TryResolve<T>(
+		IReadOnlyList<ResourceDictionary> colorLayers, string themeKey, string key, out T resolved)
 	{
 		for (int i = colorLayers.Count - 1; i >= 0; i--)
 		{
 			var layer = colorLayers[i];
 
 			if (TryGetThemeDictionary(layer, themeKey, out var themed)
-				&& themed.TryGetValue(colorKey, out var themedValue)
-				&& themedValue is Color themedColor)
+				&& themed.TryGetValue(key, out var themedValue)
+				&& themedValue is T themedResult)
 			{
-				color = themedColor;
+				resolved = themedResult;
 				return true;
 			}
 
-			// A layer may define colors outside ThemeDictionaries (theme-agnostic overrides).
-			if (layer.TryGetValue(colorKey, out var value) && value is Color plainColor)
+			if (layer.TryGetValue(key, out var value) && value is T result)
 			{
-				color = plainColor;
+				resolved = result;
 				return true;
 			}
 		}
 
-		color = default;
+		resolved = default;
 		return false;
 	}
 

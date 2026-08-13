@@ -393,20 +393,61 @@ public class Given_SeedColorPalette
 
 	[TestMethod]
 	[RunsOnUIThread]
+	[DataRow("PrimaryBrush", 1.0)]
+	[DataRow("PrimaryHoverBrush", 0.08)]
+	[DataRow("PrimaryFocusedBrush", 0.12)]
+	[DataRow("PrimaryPressedBrush", 0.12)]
+	[DataRow("PrimaryDraggedBrush", 0.16)]
+	[DataRow("PrimarySelectedBrush", 0.08)]
+	[DataRow("PrimaryMediumBrush", 0.64)]
+	[DataRow("PrimaryLowBrush", 0.32)]
+	[DataRow("PrimaryDisabledBrush", 0.12)]
+	public void When_ThemeIsBuilt_Then_StateBrushesCarryTheirStateOpacity(string brushKey, double expectedOpacity)
+	{
+		// A state brush at full opacity is not a subtle regression: an 8% hover overlay rendered
+		// opaque covers the control's own content. The value must come from the theme's own layers
+		// and not from whatever happens to be ambient when the dictionary is materialized.
+		var container = CreateThemedContainer(out _);
+
+		var brush = GetBrush(container, brushKey);
+		Assert.IsNotNull(brush, $"{brushKey} should resolve from the theme");
+
+		Assert.AreEqual(expectedOpacity, brush.Opacity, 0.0001,
+			$"{brushKey} should carry its state opacity.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
 	public void When_SeedChanges_Then_StateBrushesFollowAndKeepTheirOpacity()
 	{
 		var container = CreateThemedContainer(out var theme);
 
 		var hover = GetBrush(container, "PrimaryHoverBrush");
 		Assert.IsNotNull(hover, "PrimaryHoverBrush should resolve from the theme");
-		var originalOpacity = hover.Opacity;
 
 		theme.Colors = new ThemeColors { PrimarySeed = ToColor(unchecked((int)0xFFFF0000)) };
 
 		Assert.AreEqual(GetColor(container, "PrimaryColor"), hover.Color,
 			"State brushes are tinted from the same color role and must follow it.");
-		Assert.AreEqual(originalOpacity, hover.Opacity, 0.0001,
-			"The per-state Opacity comes from XAML and must survive recoloring.");
+		Assert.AreEqual(0.08, hover.Opacity, 0.0001,
+			"Recoloring must not disturb the state opacity.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_OpacityTokenIsOverridden_Then_StateBrushesUseIt()
+	{
+		// Guards the root cause of the opacity regression: the value has to be resolved from the
+		// theme's own color layers. Reading it from the ambient scope happens to produce the right
+		// number in a running app and 1.0 when the theme is built before it is reachable.
+		var overrides = new ResourceDictionary { ["HoverOpacity"] = 0.5 };
+
+		var theme = new SimpleTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(0.5, GetBrush(container, "PrimaryHoverBrush").Opacity, 0.0001,
+			"An overridden opacity token should reach the state brushes.");
 	}
 
 	[TestMethod]

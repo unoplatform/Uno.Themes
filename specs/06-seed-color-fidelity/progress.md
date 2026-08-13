@@ -394,7 +394,16 @@ Consequences worth noting:
 
 - A role missing from `SemanticColorKeys` silently keeps its parse-time colour. The list is the contract; it is
   the same set `doc/material-colors.md` publishes.
-- Only `Color` is rewritten, so each brush's per-state `Opacity` from XAML survives.
+- **`Opacity` has to be rewritten too, not just `Color`.** Forcing the brush dictionary to materialize
+  inside `UpdateSource` moved it *earlier* than Uno's lazy initializer would have — to construction time,
+  before the theme is reachable from `Application.Current.Resources`. `Opacity="{StaticResource HoverOpacity}"`
+  then resolved to nothing and every overlay brush silently became fully opaque, which rendered the
+  NavigationView hover pill as a solid block that hid its own label. Instrumenting the real Material sample
+  startup showed `ambientHoverOpacity=<unresolvable>` with `Opacity=1` and even `Color=#00FFFFFF` on the first
+  materialization. Resolving both `Color` and `Opacity` from the theme's own layers makes the brush dictionary
+  independent of ambient scope and of when it is materialized — verified against the XAML first: the only
+  non-`*Color` `StaticResource` references in all 840 brushes are the 8 `<state>Opacity` tokens, and every
+  brush's opacity token matches its own state suffix with zero violations.
 - The consumer override dictionary is merged **after** the brush dictionary, so an explicitly-defined `*Brush`
   key still wins — `Given_ColorOverridePrecedence` continues to pass unchanged.
 - Clearing the seed reverts the brushes to the base palette (covered by a test); the previous behaviour would
@@ -422,7 +431,7 @@ of `#4B6367` / `#525D7D`.
 
 ### Verification performed
 
-- Full runtime suite on desktop: **134 passed, 0 failed, 1 skipped**
+- Full runtime suite on desktop: **144 passed, 0 failed, 1 skipped**
   (`When_BaseThemeIsCollected_Then_HotReloadHandlerDoesNotResurrectIt`, already `[Ignore]`d on `master`,
   unrelated). Run via `SimpleSampleApp.dll --runtime-tests=...` on Windows/Win32;
   `build/scripts/linux-skia-desktop-runtime-tests.sh` needs a Linux host and was not run locally — CI covers it.
