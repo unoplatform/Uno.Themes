@@ -8,15 +8,22 @@ namespace Uno.Themes.WrapperApp.GuestHosting;
 /// The reflection-based sweeps compensating verified Uno 6.7-dev per-ALC cleanup gaps.
 /// </summary>
 /// <remarks>
-/// Each gap is documented in specs/05-alc-wrapper-app/progress.md → Review → "Upstream issues
-/// to file", with ready-to-file drafts in specs/05-alc-wrapper-app/upstream-issues.md; replace
-/// this pointer with the issue URLs once filed, and delete each sweep when its fix ships.
+/// Each gap is filed upstream with a repro and a suggested fix; delete each sweep when its
+/// fix ships:
+/// <list type="bullet">
+/// <item>unoplatform/uno#24075 — guest finalizers re-populate swept per-ALC caches during unload.</item>
+/// <item>unoplatform/uno#24073 — RemoveNonDefaultAlcEntries misses cross-ALC _getPropertyCache entries.</item>
+/// <item>unoplatform/uno#24074 — ALC teardown does not prune SystemNavigationManager subscriptions.</item>
+/// </list>
+/// unoplatform/uno#24076 (native X11 window/GL context leak) has no host-side sweep.
+/// Full write-ups in specs/05-alc-wrapper-app/upstream-issues.md.
 /// Internal API by necessity; every step degrades to a logged warning (memory stays resident
 /// until the next guest exits), never an exception.
 /// </remarks>
 internal sealed partial class GuestAppLoader
 {
 	// Same sweep ExitAlcApplication runs, needed a second time after guest finalizers finish.
+	// Upstream: unoplatform/uno#24075.
 	private static readonly MethodInfo? _cleanupNonDefaultAlcCaches =
 		SafeGetMethod(typeof(Application), "CleanupNonDefaultAlcCaches", BindingFlags.Static | BindingFlags.NonPublic);
 
@@ -25,7 +32,7 @@ internal sealed partial class GuestAppLoader
 	// framework element caches a DEFAULT-ALC key (e.g. Button) with a GUEST-ALC value, which
 	// Uno's per-key ALC sweep can never remove — pinning the whole guest ALC (verified via
 	// heap dump). It is a pure cache over DependencyPropertyRegistry, so clearing it wholesale
-	// is safe; it repopulates on demand.
+	// is safe; it repopulates on demand. Upstream: unoplatform/uno#24073.
 	private static readonly FieldInfo? _getPropertyCacheField =
 		SafeGetField(typeof(DependencyProperty), "_getPropertyCache", BindingFlags.Static | BindingFlags.NonPublic);
 	private static readonly MethodInfo? _getPropertyCacheClear =
@@ -101,6 +108,7 @@ internal sealed partial class GuestAppLoader
 	// and nothing unsubscribes it when a hosted guest is torn down (Uno's per-ALC sweep does
 	// not cover this singleton's event fields), so the whole guest visual tree stays rooted —
 	// verified via heap dump. Remove any handler whose origin lives in a collectible ALC.
+	// Upstream: unoplatform/uno#24074.
 	private static readonly string[] _navigationManagerEventFields = ["_backRequested", "InternalBackRequested"];
 
 	private void PruneGuestNavigationHandlers()
