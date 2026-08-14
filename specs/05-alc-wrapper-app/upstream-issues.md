@@ -1,11 +1,19 @@
-# Upstream issue drafts — unoplatform/uno (6.7-dev secondary-ALC app support)
+# Upstream issues — unoplatform/uno (6.7-dev secondary-ALC app support)
 
-Ready-to-file drafts for the four gaps found while building `ThemesSampleApp` (see
-`progress.md` → Phase 4 findings and Review). All were reproduced against
-`Uno.Sdk.Private 6.7.0-dev.815` (`artifacts/uno` @ `21bf1ad6`) hosting the three theme sample
-heads through `AlcContentHost` / `WindowHelper.ContentHostOverride`. Once filed, replace the
-spec-pointer comment in `src/samples/ThemesSampleApp/GuestHosting/GuestAppLoader.Sweeps.cs`
-with the issue URLs, and delete each wrapper-side sweep when its fix ships.
+The four gaps found while building `ThemesSampleApp` (see `progress.md` → Phase 4 findings and
+Review). All were reproduced against `Uno.Sdk.Private 6.7.0-dev.815` (`artifacts/uno` @
+`21bf1ad6`) hosting the three theme sample heads through `AlcContentHost` /
+`WindowHelper.ContentHostOverride`.
+
+All four are now filed. Delete each wrapper-side sweep in
+`src/samples/ThemesSampleApp/GuestHosting/GuestAppLoader.Sweeps.cs` when its fix ships.
+
+| # | Issue | Wrapper-side sweep |
+| --- | --- | --- |
+| 1 | [unoplatform/uno#24073](https://github.com/unoplatform/uno/issues/24073) | clears `DependencyProperty._getPropertyCache` |
+| 2 | [unoplatform/uno#24074](https://github.com/unoplatform/uno/issues/24074) | prunes `SystemNavigationManager` handlers |
+| 3 | [unoplatform/uno#24075](https://github.com/unoplatform/uno/issues/24075) | re-invokes `Application.CleanupNonDefaultAlcCaches` |
+| 4 | [unoplatform/uno#24076](https://github.com/unoplatform/uno/issues/24076) | none, not reachable host-side |
 
 ---
 

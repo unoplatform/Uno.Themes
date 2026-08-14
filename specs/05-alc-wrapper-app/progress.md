@@ -108,7 +108,7 @@ Implemented as planned (`GuestAppCatalog` / `GuestAssemblyLoadContext` / `GuestA
   3. Re-running `Application.CleanupNonDefaultAlcCaches` after finalizers drain (guest `DependencyObject` finalizers can re-populate swept caches during unload).
 - **Loader diagnostics are Release-visible by design** (wrapper logging is not `#if DEBUG` like the heads): teardown branch logging + a `WeakReference` check that logs "Previous guest ALC was fully collected" / "still alive" on each load. The Release/Debug JIT-timing difference masked the leak in Debug builds — only the weak-ref telemetry makes regressions visible.
 - **Verified**: 16-cycle Release soak — previous ALC collected **15/15**, managed heap flat at ~32 MB (`eeheap`).
-- **Known limitation (upstream)**: each guest window create/close leaks its **native** X11 GL context (~12-15 MB native + 7 llvmpipe threads per cycle; llvmpipe group count grows 1:1 with cycles). Reproduces with and without an explicit `Window.Close()` before `Exit()` — the leak is in Uno's ALC guest-window native teardown, not reachable from the wrapper. Managed side is fully reclaimed. **Upstream issue to file.**
+- **Known limitation (upstream)**: each guest window create/close leaks its **native** X11 GL context (~12-15 MB native + 7 llvmpipe threads per cycle; llvmpipe group count grows 1:1 with cycles). Reproduces with and without an explicit `Window.Close()` before `Exit()` — the leak is in Uno's ALC guest-window native teardown, not reachable from the wrapper. Managed side is fully reclaimed. **Upstream: [uno#24076](https://github.com/unoplatform/uno/issues/24076).**
 - The stale-guest-build failure mode (`ReflectionTypeLoadException` from mixed-version theme dlls in a head's bin) is wrapped with an actionable "rebuild the head" message.
 
 ### Phase 5 — Build ordering ✅ 2026-07-18 (desktop only — wasm fell back, see below)
@@ -273,11 +273,11 @@ parsed) and was then immediately torn down.
 
 **Deviations from plan** (each documented in-phase): wrapper also sets `UnoEnableAlcAppSupport` (trimmed-publish linker substitution would hard-code `HasSecondaryApps=false`); `WasmScripts/AppManifest.js` required by Resizetizer; wasm P2P replaced by build-time warning + explicit CI guest builds (StaticWebAssets collision); three reflection-based teardown sweeps compensating Uno 6.7-dev per-ALC cleanup gaps; sln-level ProjectDependencies added.
 
-**Upstream issues to file against unoplatform/uno (6.7-dev ALC support)**
-1. `NameToPropertyDictionary.RemoveNonDefaultAlcEntries` misses cross-ALC entries (default-ALC key type, guest-ALC DP value) — pins guest ALCs via `_getPropertyCache`.
-2. ALC teardown does not prune `SystemNavigationManager` event subscriptions — a guest Shell's `BackRequested` handler roots its whole visual tree.
-3. Guest finalizers during unload re-populate property-system caches after `ExitAlcApplication`'s sweep.
-4. Native X11 window/GL context (+ render threads) leak per ALC-guest window create/close cycle (~12-15 MB native/cycle; managed side fully reclaimed). Reproduces with and without an explicit pre-Exit `Window.Close()`.
+**Upstream issues filed against unoplatform/uno (6.7-dev ALC support)** — full write-ups in `upstream-issues.md`
+1. [uno#24073](https://github.com/unoplatform/uno/issues/24073) — `NameToPropertyDictionary.RemoveNonDefaultAlcEntries` misses cross-ALC entries (default-ALC key type, guest-ALC DP value) — pins guest ALCs via `_getPropertyCache`.
+2. [uno#24074](https://github.com/unoplatform/uno/issues/24074) — ALC teardown does not prune `SystemNavigationManager` event subscriptions — a guest Shell's `BackRequested` handler roots its whole visual tree.
+3. [uno#24075](https://github.com/unoplatform/uno/issues/24075) — Guest finalizers during unload re-populate property-system caches after `ExitAlcApplication`'s sweep.
+4. [uno#24076](https://github.com/unoplatform/uno/issues/24076) — Native X11 window/GL context (+ render threads) leak per ALC-guest window create/close cycle (~12-15 MB native/cycle; managed side fully reclaimed). Reproduces with and without an explicit pre-Exit `Window.Close()`.
 
 **Accepted v1 limitations**: the native leak above (bounded by switch count in a dev tool); guest `Assets/**`/satellites not carried (some guest images may 404 — fonts covered by wrapper font packages); desktop wrapper output not self-contained (probes sibling bins; `GuestApps/` probe is the packaged-layout seam); single guest at a time by design.
 
