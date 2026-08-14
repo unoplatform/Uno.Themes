@@ -1,0 +1,197 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Fluent — TextBlock Typography Styles
+
+		The 19 semantic TextBlock styles, carrying the Fluent type-ramp values
+		from Typography.xaml. Each style sets only FontFamily / FontWeight /
+		FontSize (and CharacterSpacing where the shared layer defines a key) —
+		no Foreground, no implicit style (spec 05, D9): Fluent's own text
+		defaults stay in charge.
+
+		The unprefixed semantic keys (DisplayLarge, BodyMedium, ...) are resolved
+		late-bound in code (FluentTheme._bundleStyleAliases) — a XAML alias cannot
+		see this bundle's own keys when the theme sits below app scope. XCR's own
+		ramp styles (BodyTextBlockStyle, ...) remain untouched and usable
+		side-by-side.
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- DISPLAY -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<Style x:Key="FluentDisplayLarge"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplayLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplayLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplayLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplayLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentDisplayMedium"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplayMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplayMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplayMediumFontSize}" />
+	</Style>
+
+	<Style x:Key="FluentDisplaySmall"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplaySmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplaySmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplaySmallFontSize}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- HEADLINE -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<Style x:Key="FluentHeadlineLarge"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineLargeFontSize}" />
+	</Style>
+
+	<Style x:Key="FluentHeadlineMedium"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineMediumFontSize}" />
+	</Style>
+
+	<Style x:Key="FluentHeadlineSmall"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineSmallFontSize}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- TITLE -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<Style x:Key="FluentTitleLarge"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleLargeFontSize}" />
+	</Style>
+
+	<Style x:Key="FluentTitleMedium"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleMediumFontSize}" />
+	</Style>
+
+	<Style x:Key="FluentTitleSmall"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleSmallFontSize}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- BODY -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<Style x:Key="FluentBodyLarge"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentBodyMedium"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentBodySmall"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource BodySmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodySmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodySmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodySmallCharacterSpacing}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- LABEL -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<Style x:Key="FluentLabelLarge"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentLabelMedium"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentLabelSmall"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelSmallCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentLabelExtraSmall"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelExtraSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelExtraSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelExtraSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelExtraSmallCharacterSpacing}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- CAPTION -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<Style x:Key="FluentCaptionLarge"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionLargeCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentCaptionMedium"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionMediumCharacterSpacing}" />
+	</Style>
+
+	<Style x:Key="FluentCaptionSmall"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionSmallCharacterSpacing}" />
+	</Style>
+
+	<!--
+		The unprefixed semantic aliases (DisplayLarge, BodyMedium, ...) are
+		late-bound in code (FluentTheme): <StaticResource> alias elements
+		resolve at parse time against the app-level scope only — when the theme
+		is instantiated below app scope they cannot see this bundle's own keys,
+		and silently bind to a foreign app-level theme's key of the same name
+		if one exists (see specs/lessons.md).
+	-->
+
+</ResourceDictionary>

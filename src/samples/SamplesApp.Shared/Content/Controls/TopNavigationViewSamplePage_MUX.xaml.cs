@@ -5,7 +5,7 @@ namespace Uno.Themes.Samples.Content.Controls;
 	"Top Navigation View (MUX)",
 	Description = "This control is used for application navigation from a menu.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/navigationview",
-	SupportedDesigns = new[] { Design.Material })]
+	SupportedDesigns = new[] { Design.Material, Design.Fluent })]
 public sealed partial class TopNavigationViewSamplePage_MUX : Page
 {
 	public TopNavigationViewSamplePage_MUX()

@@ -72,5 +72,41 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.FluentTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- Default -->
+					<smtx:XamlDisplay UniqueKey="Fluent_IconButton_Default"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Add" />
+							</Button>
+							<Button IsEnabled="False"
+									Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Add" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+					<!-- Various icons -->
+					<smtx:XamlDisplay UniqueKey="Fluent_IconButton_Icons"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Setting" />
+							</Button>
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Delete" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.FluentTemplate>
 	</sample:SamplePageLayout>
 </Page>

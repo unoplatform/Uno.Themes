@@ -177,6 +177,47 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Primary -->
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_Primary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource HyperlinkButtonStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Primary Disabled -->
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_PrimaryDisabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Disabled"
+											 IsEnabled="False"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource HyperlinkButtonStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Secondary -->
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_Secondary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton Content="Uno Platform"
+											 NavigateUri="https://platform.uno/"
+											 Style="{StaticResource SecondaryHyperlinkButtonStyle}" />
+						</smtx:XamlDisplay>
+						<!-- Custom content -->
+						<smtx:XamlDisplay UniqueKey="Fluent_HyperlinkButton_CustomContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton NavigateUri="https://platform.uno/"
+											 Style="{StaticResource HyperlinkButtonStyle}">
+								<StackPanel Orientation="Horizontal"
+											Spacing="8">
+									<SymbolIcon Symbol="Globe" />
+									<TextBlock Text="Uno Platform Website"
+											   VerticalAlignment="Center" />
+								</StackPanel>
+							</HyperlinkButton>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

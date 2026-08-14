@@ -36,6 +36,26 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<smtx:XamlDisplay UniqueKey="Fluent_CommandBar"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CommandBar Content="Command Bar Sample"
+										Style="{StaticResource CommandBarStyle}">
+								<CommandBar.PrimaryCommands>
+									<AppBarButton Icon="Add"
+												  Label="Add" />
+									<AppBarButton Icon="Edit"
+												  Label="Edit" />
+									<AppBarButton Icon="Delete"
+												  Label="Delete" />
+								</CommandBar.PrimaryCommands>
+							</CommandBar>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

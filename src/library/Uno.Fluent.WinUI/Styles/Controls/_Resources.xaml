@@ -1,0 +1,133 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Semantic aliases (design-system-agnostic) -> built-in Fluent styles.
+		See specs/05-fluent-theme/spec.md §5 and .specify/specs/semantic-abstraction-layer/spec.md.
+
+		Rules (spec 05):
+		- D9: NO implicit styles here — Fluent already IS the implicit default of
+		  every WinUI / Uno app; re-declaring implicit styles would be a no-op at
+		  best and an override-ordering hazard at worst.
+		- D16: every alias targets a CONCRETE key directly (an XCR style or a
+		  bridge style shipped in this bundle) — alias chaining does not resolve.
+		- D8: nearest-match over GAP — keys for Material-only concepts (FAB,
+		  Elevated) map to the closest functional Fluent neighbor.
+		- Keys whose Fluent style has no public XCR key on Uno ship as explicit
+		  EMPTY styles (see the "gap keys" section at the end of this file): an
+		  empty style keeps the control's built-in default template and appearance
+		  (default-style resolution via DefaultStyleKey is independent of
+		  element.Style), so the key always resolves and renders the Fluent
+		  default. A <StaticResource> alias to a missing key cannot be expressed
+		  conditionally in XAML, and aliasing is not needed — the empty style IS
+		  the Fluent default.
+		- This page may ONLY alias app-scope (XamlControlsResources) keys:
+		  <StaticResource> aliases resolve eagerly at parse time against the
+		  app-level scope and cannot see keys of this bundle when the theme is
+		  instantiated below app scope (see specs/lessons.md). Semantic keys
+		  targeting styles this library ships (TextButtonStyle / IconButtonStyle
+		  and the typography aliases) are therefore resolved late-bound in code —
+		  see FluentTheme._bundleStyleAliases.
+	-->
+
+	<!-- Button -->
+	<StaticResource x:Key="FilledButtonStyle" ResourceKey="AccentButtonStyle" />
+	<!-- Fluent has no elevation; the standard button is the functional neighbor (D8) -->
+	<StaticResource x:Key="ElevatedButtonStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="FilledTonalButtonStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="OutlinedButtonStyle" ResourceKey="DefaultButtonStyle" />
+	<!-- TextButtonStyle / IconButtonStyle are late-bound in code (FluentTheme._bundleStyleAliases) -->
+
+
+	<!-- FAB (Material-only concept; no size differentiation — Fluent buttons size to content) -->
+	<StaticResource x:Key="FabStyle" ResourceKey="AccentButtonStyle" />
+	<StaticResource x:Key="SmallFabStyle" ResourceKey="AccentButtonStyle" />
+	<StaticResource x:Key="LargeFabStyle" ResourceKey="AccentButtonStyle" />
+	<StaticResource x:Key="SecondaryFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="SecondarySmallFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="SecondaryLargeFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="TertiaryFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="TertiarySmallFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="TertiaryLargeFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="SurfaceFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="SurfaceSmallFabStyle" ResourceKey="DefaultButtonStyle" />
+	<StaticResource x:Key="SurfaceLargeFabStyle" ResourceKey="DefaultButtonStyle" />
+
+	<!-- ToggleButton -->
+	<StaticResource x:Key="TextToggleButtonStyle" ResourceKey="DefaultToggleButtonStyle" />
+	<StaticResource x:Key="IconToggleButtonStyle" ResourceKey="DefaultToggleButtonStyle" />
+
+	<!-- TextBox (the Fluent TextBox — fill + underline — serves both variants) -->
+	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="DefaultTextBoxStyle" />
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="DefaultTextBoxStyle" />
+
+	<!-- PasswordBox -->
+	<StaticResource x:Key="FilledPasswordBoxStyle" ResourceKey="DefaultPasswordBoxStyle" />
+	<StaticResource x:Key="OutlinedPasswordBoxStyle" ResourceKey="DefaultPasswordBoxStyle" />
+
+	<!-- ComboBox -->
+	<StaticResource x:Key="ComboBoxStyle" ResourceKey="DefaultComboBoxStyle" />
+	<StaticResource x:Key="ComboBoxItemStyle" ResourceKey="DefaultComboBoxItemStyle" />
+
+	<!-- CheckBox / RadioButton / ToggleSwitch / Slider -->
+	<StaticResource x:Key="CheckBoxStyle" ResourceKey="DefaultCheckBoxStyle" />
+	<StaticResource x:Key="RadioButtonStyle" ResourceKey="DefaultRadioButtonStyle" />
+	<StaticResource x:Key="ToggleSwitchStyle" ResourceKey="DefaultToggleSwitchStyle" />
+	<StaticResource x:Key="SliderStyle" ResourceKey="DefaultSliderStyle" />
+
+	<!-- HyperlinkButton -->
+	<StaticResource x:Key="HyperlinkButtonStyle" ResourceKey="DefaultHyperlinkButtonStyle" />
+	<StaticResource x:Key="SecondaryHyperlinkButtonStyle" ResourceKey="DefaultHyperlinkButtonStyle" />
+
+	<!-- ListView (ListViewStyle: gap key, see below) -->
+	<StaticResource x:Key="ListViewItemStyle" ResourceKey="DefaultListViewItemStyle" />
+
+	<!-- ContentDialog -->
+	<StaticResource x:Key="ContentDialogStyle" ResourceKey="DefaultContentDialogStyle" />
+
+	<!-- AppBarButton (CommandBarStyle: gap key, see below) -->
+	<StaticResource x:Key="AppBarButtonStyle" ResourceKey="DefaultAppBarButtonStyle" />
+
+	<!-- CalendarView / DatePicker (CalendarDatePickerStyle: gap key, see below) -->
+	<StaticResource x:Key="CalendarViewStyle" ResourceKey="DefaultCalendarViewStyle" />
+	<StaticResource x:Key="DatePickerStyle" ResourceKey="DefaultDatePickerStyle" />
+
+	<!-- ProgressBar (ProgressRingStyle: gap key, see below) -->
+	<StaticResource x:Key="ProgressBarStyle" ResourceKey="DefaultProgressBarStyle" />
+
+	<!-- MediaTransportControls -->
+	<StaticResource x:Key="MediaTransportControlsStyle" ResourceKey="DefaultMediaTransportControlsStyle" />
+
+	<!-- Flyout / MenuFlyout (MenuFlyoutSeparatorStyle: gap key, see below) -->
+	<StaticResource x:Key="FlyoutPresenterStyle" ResourceKey="DefaultFlyoutPresenterStyle" />
+	<StaticResource x:Key="MenuFlyoutPresenterStyle" ResourceKey="DefaultMenuFlyoutPresenterStyle" />
+	<StaticResource x:Key="MenuFlyoutItemStyle" ResourceKey="DefaultMenuFlyoutItemStyle" />
+	<StaticResource x:Key="MenuFlyoutSubItemStyle" ResourceKey="DefaultMenuFlyoutSubItemStyle" />
+	<StaticResource x:Key="ToggleMenuFlyoutItemStyle" ResourceKey="DefaultToggleMenuFlyoutItemStyle" />
+	<StaticResource x:Key="RadioMenuFlyoutItemStyle" ResourceKey="DefaultRadioMenuFlyoutItemStyle" />
+
+	<!--
+		Gap keys (spec 05 §5.2 Ⓜ set): semantic keys whose Fluent style has no
+		public XCR key on Uno (S3 probe; its default styles live in an internal
+		registry, published neither under the WinUI Default*Style names nor as
+		type-keyed app resources). Shipped as explicit EMPTY styles — the
+		control's built-in default template and appearance still apply, so the
+		key always resolves and renders the Fluent default (D8: nearest-match
+		over GAP). Guarded by Given_FluentSemanticStyles.
+	-->
+	<Style x:Key="ProgressRingStyle" TargetType="ProgressRing" />
+	<Style x:Key="ListViewStyle" TargetType="ListView" />
+	<Style x:Key="CommandBarStyle" TargetType="CommandBar" />
+	<Style x:Key="CalendarDatePickerStyle" TargetType="CalendarDatePicker" />
+	<Style x:Key="PipsPagerStyle" TargetType="PipsPager" />
+	<Style x:Key="RatingControlStyle" TargetType="RatingControl" />
+	<Style x:Key="MenuFlyoutSeparatorStyle" TargetType="MenuFlyoutSeparator" />
+	<Style x:Key="NavigationViewStyle" TargetType="NavigationView" />
+	<Style x:Key="NavigationViewItemStyle" TargetType="NavigationViewItem" />
+
+	<!--
+		Typography aliases (DisplayLarge, BodyMedium, ...) are late-bound in
+		code (FluentTheme._bundleStyleAliases) — see the header note.
+	-->
+
+</ResourceDictionary>

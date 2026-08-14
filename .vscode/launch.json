@@ -149,6 +149,54 @@
       }
     },
     {
+      "name": "Fluent - Desktop",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-Fluent-desktop",
+      "program": "${workspaceFolder}/src/samples/FluentSampleApp/bin/Debug/net10.0-desktop/FluentSampleApp.dll",
+      "args": [],
+      "env": { "DOTNET_MODIFIABLE_ASSEMBLIES": "debug" },
+      "cwd": "${workspaceFolder}/src/samples/FluentSampleApp",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Fluent - WASM (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5000",
+      "webRoot": "${workspaceFolder}/src/samples/FluentSampleApp",
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "timeout": 30000,
+      "preLaunchTask": "build-Fluent-wasm",
+      "server": {
+        "runtimeExecutable": "dotnet",
+        "program": "run",
+        "args": ["--no-build", "-f", "net10.0-browserwasm"],
+        "outputCapture": "std",
+        "timeout": 30000,
+        "cwd": "${workspaceFolder}/src/samples/FluentSampleApp"
+      }
+    },
+    {
+      "name": "Fluent - WASM (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:5000",
+      "webRoot": "${workspaceFolder}/src/samples/FluentSampleApp",
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "timeout": 30000,
+      "preLaunchTask": "build-Fluent-wasm",
+      "server": {
+        "runtimeExecutable": "dotnet",
+        "program": "run",
+        "args": ["--no-build", "-f", "net10.0-browserwasm"],
+        "outputCapture": "std",
+        "timeout": 30000,
+        "cwd": "${workspaceFolder}/src/samples/FluentSampleApp"
+      }
+    },
+    {
       "name": "Themes - Desktop",
       "type": "coreclr",
       "request": "launch",

@@ -1,0 +1,89 @@
+<Project>
+	<PropertyGroup>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+		<UnoXamlResourcesTrimming Condition="'$(Configuration)'=='Release' and !('$(MSBuildRuntimeType)'!='Core' and $([MSBuild]::IsOSPlatform('osx')))">true</UnoXamlResourcesTrimming>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<UnoSourceGeneratorAdditionalProperty Include="UseWinUI" />
+	</ItemGroup>
+
+	<Choose>
+		<When Condition="$(IsIOSOrCatalyst) or $(_IsAndroid)">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="mobile" />
+				<ExcludeXamlNamespaces Include="not_mobile" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="not_mobile" />
+				<ExcludeXamlNamespaces Include="mobile" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<!-- NOTE: These two conditionals ONLY work under Uno targets and not Windows Desktop so they need to be used within the context of not_win or finer constraints -->
+	<!-- Make sure to add these aliases to the mc:Ignorable when using -->
+	<Choose>
+		<When Condition="'$(FrameworkLineage)'=='WinUI'">
+			<ItemGroup>
+				<IncludeXamlNamespaces Include="winui" />
+				<ExcludeXamlNamespaces Include="uwp" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<ExcludeXamlNamespaces Include="winui" />
+				<ExcludeXamlNamespaces Include="uwp" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+	</ItemGroup>
+
+	<!--
+		No font PackageReference: FluentTheme uses the platform-default font via
+		ContentControlThemeFontFamily (spec 05, D11).
+	-->
+
+	<ItemGroup>
+		<XamlMergeInput Include="Styles\Controls\**\*.xaml" />
+		<XamlMergeInput Include="Styles\Application\**\*.xaml" />
+		<None Remove="Styles\Controls\_Resources.xaml" />
+		<!-- Fonts.xaml and Typography.xaml are merged by BaseDictionaries.xaml via their
+		     ms-appx Source (after SharedTypography.xaml, so the Fluent slot values win
+		     deterministically), not through the merged pages: theme-branch resources
+		     inside the merged bundle do not resolve reliably in Release builds — see
+		     specs/lessons.md. -->
+		<XamlMergeInput Remove="Styles\Application\Fonts.xaml" />
+		<XamlMergeInput Remove="Styles\Application\Typography.xaml" />
+		<!-- ColorPalette.xaml and LightweightDefaults.xaml are theme-branch
+		     dictionaries loaded standalone via their ms-appx Source (the palette
+		     values by FluentColorPalette, the lightweight defaults by FluentTheme)
+		     for the same Release-resolution reason. -->
+		<XamlMergeInput Remove="Styles\Application\ColorPalette.xaml" />
+		<XamlMergeInput Remove="Styles\Application\LightweightDefaults.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Remove="Styles\Controls\_Resources.xaml" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(IsXamarinIOS) or $(IsMonoAndroid) or $(IsXamarinMac)">
+		<EmbeddedResource Include="LinkerConfig.xamarin.xml">
+			<LogicalName>$(AssemblyName).xml</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(ImplicitUsings)'=='true' OR '$(ImplicitUsings)'=='enable'">
+		<Using Include="Uno.Fluent" />
+	</ItemGroup>
+
+	<Import Project="..\xamlmerge.targets" />
+</Project>

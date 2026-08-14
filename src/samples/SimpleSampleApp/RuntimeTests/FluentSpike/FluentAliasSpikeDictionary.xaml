@@ -1,0 +1,62 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Spike S1 dictionary for specs/05-fluent-theme (see spec.md §14.1).
+
+		Reproduces the exact topology the future FluentTheme will use: a
+		compiled ResourceDictionary loaded via an ms-appx Source URI whose
+		<StaticResource> aliases target keys provided by XamlControlsResources,
+		which is merged as an app-scope SIBLING (see SimpleSampleApp App.xaml).
+
+		specs/lessons.md documents that <StaticResource> aliases resolve
+		eagerly at parse time and that cross-dictionary resolution has failed
+		on Uno before — Given_FluentAliasResolution asserts each mechanism.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!--
+			S1 case 4: per-theme-branch color aliases. Spike finding
+			(2026-07-14): both branches resolve eagerly against the AMBIENT
+			theme, not their own branch — which is why FluentTheme builds its
+			palette in code (spec D6, mechanism C). Kept as a mechanism guard.
+		-->
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="SpikeOnSurfaceColor" ResourceKey="TextFillColorPrimary" />
+			<StaticResource x:Key="SpikeAccentColor" ResourceKey="SystemAccentColor" />
+			<SolidColorBrush x:Key="SpikeOnSurfaceBrush" Color="{StaticResource SpikeOnSurfaceColor}" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="SpikeOnSurfaceColor" ResourceKey="TextFillColorPrimary" />
+			<StaticResource x:Key="SpikeAccentColor" ResourceKey="SystemAccentColor" />
+			<SolidColorBrush x:Key="SpikeOnSurfaceBrush" Color="{StaticResource SpikeOnSurfaceColor}" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- S1 case 1: style alias to XamlControlsResources keys -->
+	<StaticResource x:Key="SpikeFilledButtonStyle" ResourceKey="AccentButtonStyle" />
+	<StaticResource x:Key="SpikeOutlinedButtonStyle" ResourceKey="DefaultButtonStyle" />
+
+	<!--
+		S1 case 2: alias of an alias. Spike finding (2026-07-14): does NOT
+		resolve on Uno ("Couldn't statically resolve resource") — semantic
+		aliases must target concrete keys directly (spec D16). Kept as a
+		mechanism guard.
+	-->
+	<StaticResource x:Key="SpikeAliasOfAlias" ResourceKey="SpikeFilledButtonStyle" />
+
+	<!-- S1 case 3: setters-only bridge style BasedOn an XCR style (no template) -->
+	<Style x:Key="SpikeTextButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource DefaultButtonStyle}">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+	</Style>
+
+	<!-- S1 case 5: FontFamily alias to the platform-default Fluent font -->
+	<StaticResource x:Key="SpikeBodyFontFamily" ResourceKey="ContentControlThemeFontFamily" />
+
+</ResourceDictionary>

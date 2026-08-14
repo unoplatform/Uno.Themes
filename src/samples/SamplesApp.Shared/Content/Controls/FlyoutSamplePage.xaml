@@ -697,6 +697,42 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.FluentTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Basic flyout (light-dismiss) with FlyoutPresenterStyle -->
+						<smtx:XamlDisplay UniqueKey="Fluent_Flyout_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button Content="Show Flyout">
+								<Button.Flyout>
+									<Flyout FlyoutPresenterStyle="{StaticResource FlyoutPresenterStyle}">
+										<StackPanel Spacing="8">
+											<TextBlock Text="This is a Fluent flyout. Click outside to dismiss." />
+										</StackPanel>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+						<!-- Flyout with a close button -->
+						<smtx:XamlDisplay UniqueKey="Fluent_Flyout_WithContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button x:Name="ShowFluentConfirmFlyoutButton"
+									Content="Confirm Action">
+								<Button.Flyout>
+									<Flyout FlyoutPresenterStyle="{StaticResource FlyoutPresenterStyle}">
+										<StackPanel Spacing="12">
+											<TextBlock Text="Are you sure you want to proceed?" />
+											<Button Content="Yes"
+													Click="CloseFlyout"
+													Tag="{Binding ElementName=ShowFluentConfirmFlyoutButton}" />
+										</StackPanel>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.FluentTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
