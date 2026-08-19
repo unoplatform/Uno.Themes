@@ -275,7 +275,9 @@ Work in this order. Items 1 and 2 are prerequisites for 3 — do not reorder.
 - [x] `version.json` moved from `7.2-dev.{height}` to `8.0-dev.{height}` on this branch.
 - [ ] Confirm the manual bump with whoever owns the release process before merging — it is normally automated
       after a release-branch cut (`aa91e6f3`, `157ff71f`).
-- [ ] Mark the solver and Primary-pinning commits `feat!:` / `fix!:` or add a `BREAKING CHANGE:` footer.
+- [x] Mark the solver and Primary-pinning commits `feat!:` / `fix!:` or add a `BREAKING CHANGE:` footer.
+      Done: the solver/pinning commit carries `feat!:` plus a `BREAKING CHANGE:` footer, and the
+      HighContrast-sweep and SeedColorMode commits carry `fix!:` / `feat!:` respectively.
 - [ ] Release note with a before/after color table for at least one saturated seed, so consumers can see what
       changed in their app before they upgrade. The harness below generates it in one command.
 
@@ -502,8 +504,8 @@ of `#4B6367` / `#525D7D`.
 ### Remaining
 
 - [ ] `/review-panel` before opening the PR (`contract` and `quality` are the load-bearing lenses).
-- [ ] Item 7 in full: confirm the `version.json` bump with the release owner, add `feat!:` / `fix!:` commit
-      markers, and write the release note.
+- [ ] Item 7 in full: confirm the `version.json` bump with the release owner and write the release note
+      (the breaking commit markers are done).
 
 ---
 
