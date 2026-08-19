@@ -20,20 +20,27 @@
 
 			<!-- Color Picker + Seed Info -->
 			<StackPanel Orientation="Horizontal" Spacing="24" Margin="0,8,0,0">
-				<ColorPicker x:Name="SeedColorPicker"
-							 Color="#6750A4"
-							 ColorSpectrumShape="Ring"
-							 IsAlphaEnabled="False"
-							 IsAlphaTextInputVisible="False"
-							 IsHexInputVisible="False"
-							 IsColorSliderVisible="True"
-							 IsColorChannelTextInputVisible="False"
-							 IsColorPreviewVisible="False"
-							 IsMoreButtonVisible="False"
-							 ColorChanged="SeedColorPicker_ColorChanged" />
+				<StackPanel Spacing="4">
+					<ColorPicker x:Name="SeedColorPicker"
+								 Color="#6750A4"
+								 ColorSpectrumShape="Ring"
+								 IsAlphaEnabled="False"
+								 IsAlphaTextInputVisible="False"
+								 IsHexInputVisible="False"
+								 IsColorSliderVisible="True"
+								 IsColorChannelTextInputVisible="False"
+								 IsColorPreviewVisible="False"
+								 IsMoreButtonVisible="False"
+								 ColorChanged="SeedColorPicker_ColorChanged" />
+					<TextBlock Text="Seed color — ring: hue and saturation, slider: brightness"
+							   Style="{StaticResource BodySmall}"
+							   Opacity="0.6"
+							   HorizontalAlignment="Center"
+							   TextWrapping="Wrap" />
+				</StackPanel>
 
 				<!-- Seed Info -->
-				<StackPanel VerticalAlignment="Center" Spacing="8" Width="120">
+				<StackPanel VerticalAlignment="Center" Spacing="8" Width="200">
 					<Border x:Name="SeedSwatch"
 							Width="64" Height="64"
 							CornerRadius="12"
@@ -43,11 +50,14 @@
 					<TextBlock x:Name="SeedHctText"
 							   Style="{StaticResource BodySmall}"
 							   Opacity="0.6" />
-					<ToggleSwitch x:Name="SeedColorModeToggle"
-								  Header="Preserve seed color"
-								  IsOn="True"
-								  Toggled="SeedColorModeToggle_Toggled" />
-					<TextBlock Text="Off selects the M3 tonal-spot mode: minimum chroma instead of pinning Primary to the seed."
+					<ComboBox x:Name="SeedColorModeCombo"
+							  Header="Seed color mode"
+							  HorizontalAlignment="Stretch"
+							  SelectionChanged="SeedColorModeCombo_SelectionChanged">
+						<ComboBoxItem Content="Fidelity (default)" />
+						<ComboBoxItem Content="Tonal spot" />
+					</ComboBox>
+					<TextBlock x:Name="SeedColorModeDescription"
 							   Style="{StaticResource BodySmall}"
 							   Opacity="0.6"
 							   TextWrapping="Wrap" />

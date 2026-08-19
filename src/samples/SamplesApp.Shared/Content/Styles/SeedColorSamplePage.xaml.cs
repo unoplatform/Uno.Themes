@@ -18,7 +18,7 @@ public sealed partial class SeedColorSamplePage : Page
 	{
 		this.InitializeComponent();
 		SeedColorPicker.Color = _lastSeed;
-		SeedColorModeToggle.IsOn = _lastSeedColorMode == SeedColorMode.Fidelity;
+		SeedColorModeCombo.SelectedIndex = _lastSeedColorMode == SeedColorMode.Fidelity ? 0 : 1;
 		ApplySeedColor(_lastSeed);
 
 		// On theme switch, pulse the seed to force a full theme rebuild so the
@@ -35,9 +35,9 @@ public sealed partial class SeedColorSamplePage : Page
 		ApplySeedColor(args.NewColor);
 	}
 
-	private void SeedColorModeToggle_Toggled(object sender, RoutedEventArgs e)
+	private void SeedColorModeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		_lastSeedColorMode = SeedColorModeToggle.IsOn ? SeedColorMode.Fidelity : SeedColorMode.TonalSpot;
+		_lastSeedColorMode = SeedColorModeCombo.SelectedIndex == 1 ? SeedColorMode.TonalSpot : SeedColorMode.Fidelity;
 		ApplySeedColor(_lastSeed);
 	}
 
@@ -52,6 +52,9 @@ public sealed partial class SeedColorSamplePage : Page
 		SeedSwatch.Background = new SolidColorBrush(seed);
 		SeedHex.Text = $"#{seed.R:X2}{seed.G:X2}{seed.B:X2}";
 		SeedHctText.Text = $"H:{hct.Hue:F0}  C:{hct.Chroma:F0}  T:{hct.Tone:F0}";
+		SeedColorModeDescription.Text = _lastSeedColorMode == SeedColorMode.Fidelity
+			? "Fidelity (default): the palette keeps the seed's own saturation and the light Primary is the seed hex verbatim."
+			: "Tonal spot: Material's standard vibrant recipe — a minimum saturation is enforced, so the exact seed color is not reproduced.";
 
 		var modeAttribute = _lastSeedColorMode == SeedColorMode.Fidelity ? string.Empty : "\n                 SeedColorMode=\"TonalSpot\"";
 		XamlSnippet.Text = $"<MaterialTheme>\n  <MaterialTheme.Colors>\n    <ThemeColors PrimarySeed=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\"{modeAttribute} />\n  </MaterialTheme.Colors>\n</MaterialTheme>";
