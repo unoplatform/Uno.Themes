@@ -20,14 +20,6 @@ public sealed partial class SeedColorSamplePage : Page
 		SeedColorPicker.Color = _lastSeed;
 		SeedColorModeCombo.SelectedIndex = _lastSeedColorMode == SeedColorMode.Fidelity ? 0 : 1;
 		ApplySeedColor(_lastSeed);
-
-		// On theme switch, pulse the seed to force a full theme rebuild so the
-		// now-active theme gets the correct seed-derived colors.
-		this.ActualThemeChanged += (s, e) =>
-		{
-			SemanticThemeHelper.PrimarySeed = null;
-			SemanticThemeHelper.PrimarySeed = _lastSeed;
-		};
 	}
 
 	private void SeedColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)

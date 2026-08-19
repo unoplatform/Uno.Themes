@@ -72,13 +72,29 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	private static void OnFontOverrideSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
+		if (d is not BaseTheme theme)
+		{
+			return;
+		}
+
 		// Guarded for the same reason as ThemeColors.OnOverrideSourceChanged: a property-changed
-		// callback must not throw on a malformed consumer-supplied URI.
-		if (d is BaseTheme theme
-			&& e.NewValue is string sourceUri
+		// callback must not throw on a malformed or unresolvable consumer-supplied URI.
+		if (e.NewValue is string sourceUri
+			&& !string.IsNullOrWhiteSpace(sourceUri)
 			&& Uri.TryCreate(sourceUri, UriKind.Absolute, out var source))
 		{
-			theme.FontOverrideDictionary = new ResourceDictionary() { Source = source };
+			try
+			{
+				theme.FontOverrideDictionary = new ResourceDictionary() { Source = source };
+			}
+			catch (Exception)
+			{
+				theme.FontOverrideDictionary = null;
+			}
+		}
+		else
+		{
+			theme.FontOverrideDictionary = null;
 		}
 	}
 	#endregion
@@ -508,9 +524,24 @@ public abstract partial class BaseTheme : ResourceDictionary
 		resolvedOverride = null;
 		if (Colors?.OverrideDictionary is { } userOverride)
 		{
-			resolvedOverride = userOverride.Source is { } overrideSource
-				? new ResourceDictionary { Source = overrideSource }
-				: userOverride;
+			if (userOverride.Source is { } overrideSource)
+			{
+				try
+				{
+					resolvedOverride = new ResourceDictionary { Source = overrideSource };
+				}
+				catch (Exception)
+				{
+					// The source loaded once (the override instance exists) but no longer does —
+					// e.g. a hot-reload edit broke the XAML. A stale override beats losing it, and
+					// throwing here would propagate out of a property-changed callback.
+					resolvedOverride = userOverride;
+				}
+			}
+			else
+			{
+				resolvedOverride = userOverride;
+			}
 
 			colorLayers.Add(resolvedOverride);
 		}

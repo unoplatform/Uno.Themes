@@ -624,6 +624,149 @@ public class Given_SeedColorPalette
 			"An already-rendered control must repaint when the seed changes.");
 	}
 
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_OverrideUsesDarkKey_Then_DarkBrushesFollowIt()
+	{
+		// The documented override format keys the dark values "Dark" (the framework aliases it to
+		// "Default" when resolving *Color resources), so the brush sweep must honor it too — and
+		// the "Dark" entry must not leak into the Light brushes.
+		var lightOverride = ToColor(unchecked((int)0xFF111111));
+		var darkOverride = ToColor(unchecked((int)0xFF222222));
+
+		var overrides = new ResourceDictionary();
+		overrides.ThemeDictionaries["Light"] = new ResourceDictionary { ["PrimaryColor"] = lightOverride };
+		overrides.ThemeDictionaries["Dark"] = new ResourceDictionary { ["PrimaryColor"] = darkOverride };
+
+		var theme = new SimpleTheme
+		{
+			Colors = new ThemeColors
+			{
+				PrimarySeed = ToColor(unchecked((int)0xFF006495)),
+				OverrideDictionary = overrides,
+			},
+		};
+
+		var brushes = FindSemanticBrushes(theme);
+		Assert.IsNotNull(brushes, "The SharedColors brush dictionary should be reachable from the theme");
+
+		Assert.AreEqual(lightOverride, GetThemedBrush(brushes, "Light", "PrimaryBrush").Color,
+			"The Light brush should carry the Light override.");
+		Assert.AreEqual(darkOverride, GetThemedBrush(brushes, "Default", "PrimaryBrush").Color,
+			"A dark override keyed \"Dark\" — the documented format — must reach the dark brushes.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_OverrideIsThemeScoped_Then_OtherThemesBrushesKeepGeneratedColors()
+	{
+		// A partial override scoped to one theme must not bleed into the other theme's brushes.
+		// A plain ResourceDictionary.TryGetValue resolves themed entries against the *application*
+		// theme, so an unguarded fallback writes whichever value matches the host's active theme
+		// into every brush theme. Both directions are covered so the guard trips regardless of
+		// the theme the test host happens to run in.
+		var seed = ToColor(unchecked((int)0xFF006495));
+		var lightOverride = ToColor(unchecked((int)0xFF111111));
+		var darkOverride = ToColor(unchecked((int)0xFF222222));
+
+		var lightOnly = new ResourceDictionary();
+		lightOnly.ThemeDictionaries["Light"] = new ResourceDictionary { ["PrimaryColor"] = lightOverride };
+		var lightScoped = new SimpleTheme
+		{
+			Colors = new ThemeColors { PrimarySeed = seed, OverrideDictionary = lightOnly },
+		};
+
+		var lightScopedBrushes = FindSemanticBrushes(lightScoped);
+		Assert.IsNotNull(lightScopedBrushes, "The SharedColors brush dictionary should be reachable from the theme");
+		Assert.AreEqual(lightOverride, GetThemedBrush(lightScopedBrushes, "Light", "PrimaryBrush").Color,
+			"The Light brush should carry the Light override.");
+		Assert.AreEqual(GetGeneratedColor(seed, "Default", "PrimaryColor"),
+			GetThemedBrush(lightScopedBrushes, "Default", "PrimaryBrush").Color,
+			"A Light-only override must leave the dark brushes on the generated dark value.");
+
+		var darkOnly = new ResourceDictionary();
+		darkOnly.ThemeDictionaries["Dark"] = new ResourceDictionary { ["PrimaryColor"] = darkOverride };
+		var darkScoped = new SimpleTheme
+		{
+			Colors = new ThemeColors { PrimarySeed = seed, OverrideDictionary = darkOnly },
+		};
+
+		var darkScopedBrushes = FindSemanticBrushes(darkScoped);
+		Assert.IsNotNull(darkScopedBrushes, "The SharedColors brush dictionary should be reachable from the theme");
+		Assert.AreEqual(darkOverride, GetThemedBrush(darkScopedBrushes, "Default", "PrimaryBrush").Color,
+			"The dark brush should carry the \"Dark\" override.");
+		Assert.AreEqual(GetGeneratedColor(seed, "Light", "PrimaryColor"),
+			GetThemedBrush(darkScopedBrushes, "Light", "PrimaryBrush").Color,
+			"A Dark-only override must leave the Light brushes on the generated light value.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SeedHasAlpha_Then_GeneratedColorsAreOpaque()
+	{
+		// A translucent seed is one XAML string away (PrimarySeed="#80FF0000"). It must not
+		// produce translucent Primary/SurfaceTint brushes or void the OnPrimary contrast
+		// guarantee: the alpha channel is ignored and the palette is generated fully opaque.
+		var translucent = ToColor(unchecked((int)0x80FF0000));
+		var opaque = ToColor(unchecked((int)0xFFFF0000));
+
+		Assert.AreEqual(opaque, GetGeneratedColor(translucent, "Light", "PrimaryColor"),
+			"The pinned light Primary must be the seed with alpha forced opaque.");
+		Assert.AreEqual(opaque, GetGeneratedColor(translucent, "Light", "SurfaceTintColor"),
+			"SurfaceTint follows the pinned Primary and must be opaque too.");
+		Assert.AreEqual(0xFF, GetGeneratedColor(translucent, "Light", "OnPrimaryColor").A,
+			"OnPrimary must be opaque.");
+		Assert.AreEqual(
+			GetGeneratedColor(opaque, "Default", "PrimaryColor"),
+			GetGeneratedColor(translucent, "Default", "PrimaryColor"),
+			"Seeds differing only in alpha must generate the same palette.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ThemeChangesAfterSeed_Then_ControlsPaintTheOtherThemesColors()
+	{
+		// A seed change writes the Light and Default brush dictionaries in the same pass, so a
+		// theme switch afterwards must paint the other theme's generated colors without any
+		// re-pulse of the seed.
+		var seed = ToColor(unchecked((int)0xFF006495));
+		var theme = new SimpleTheme { Colors = new ThemeColors { PrimarySeed = seed } };
+
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var style = container.Resources["FilledButtonStyle"] as Style;
+		Assert.IsNotNull(style, "FilledButtonStyle should resolve from the theme");
+
+		var button = new Button { Content = "Test", Style = style };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		try
+		{
+			container.RequestedTheme = ElementTheme.Dark;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(GetGeneratedColor(seed, "Default", "PrimaryColor"),
+				(button.Background as SolidColorBrush)?.Color,
+				"After switching to Dark, the control must paint the generated dark Primary.");
+
+			container.RequestedTheme = ElementTheme.Light;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(GetGeneratedColor(seed, "Light", "PrimaryColor"),
+				(button.Background as SolidColorBrush)?.Color,
+				"Switching back to Light must restore the generated light Primary.");
+		}
+		finally
+		{
+			container.RequestedTheme = ElementTheme.Default;
+		}
+	}
+
 	// ─────────────────────────────────────────────────────────────────────
 	// Helpers
 	// ─────────────────────────────────────────────────────────────────────
@@ -691,6 +834,16 @@ public class Given_SeedColorPalette
 	{
 		Assert.IsTrue(container.Resources.TryGetValue(key, out var value), $"{key} should resolve from the theme");
 		return (Color)value;
+	}
+
+	/// <summary>Reads one brush from a specific theme dictionary of the SharedColors brush dictionary.</summary>
+	private static SolidColorBrush GetThemedBrush(ResourceDictionary brushes, string themeKey, string brushKey)
+	{
+		Assert.IsTrue(brushes.ThemeDictionaries.TryGetValue(themeKey, out var value) && value is ResourceDictionary,
+			$"SharedColors.xaml should declare a {themeKey} theme dictionary");
+		Assert.IsTrue(((ResourceDictionary)value).TryGetValue(brushKey, out var brush),
+			$"{themeKey} {brushKey} should resolve");
+		return (SolidColorBrush)brush;
 	}
 
 	/// <summary>

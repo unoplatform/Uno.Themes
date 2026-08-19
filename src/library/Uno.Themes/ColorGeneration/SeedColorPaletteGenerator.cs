@@ -40,6 +40,19 @@ internal sealed class SeedColorPaletteGenerator
 		Color? tertiarySeedColor = null,
 		SeedColorMode mode = SeedColorMode.Fidelity)
 	{
+		// Seeds are treated as fully opaque, matching material-color-utilities. Fidelity mode pins
+		// the seed verbatim, so a translucent seed would otherwise produce translucent Primary and
+		// SurfaceTint brushes and void the OnPrimary contrast guarantee (ContrastRatio ignores alpha).
+		primarySeedColor = WithOpaqueAlpha(primarySeedColor);
+		if (secondarySeedColor is { } sec2)
+		{
+			secondarySeedColor = WithOpaqueAlpha(sec2);
+		}
+		if (tertiarySeedColor is { } ter2)
+		{
+			tertiarySeedColor = WithOpaqueAlpha(ter2);
+		}
+
 		var key = (
 			ColorToArgb(primarySeedColor),
 			secondarySeedColor is { } sec ? (int?)ColorToArgb(sec) : null,
@@ -210,6 +223,9 @@ internal sealed class SeedColorPaletteGenerator
 		lightDict[key] = ArgbToColor(palette.GetArgb(lightTone));
 		darkDict[key] = ArgbToColor(palette.GetArgb(darkTone));
 	}
+
+	private static Color WithOpaqueAlpha(Color color) =>
+		color.A == 0xFF ? color : Color.FromArgb(0xFF, color.R, color.G, color.B);
 
 	private static int ColorToArgb(Color color) =>
 		(color.A << 24) | (color.R << 16) | (color.G << 8) | color.B;

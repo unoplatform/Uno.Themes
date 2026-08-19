@@ -34,7 +34,7 @@ The `SeedColorMode` property on `ThemeColors` picks the recipe. There are two mo
 
 Since version 8.0, the default mode keeps the generated theme true to the color you picked:
 
-- In Light mode, `PrimaryColor` is your seed color **verbatim** — the hex you supply is the hex your buttons render.
+- In Light mode, `PrimaryColor` is your seed color **verbatim** — the hex you supply is the hex your buttons render. (The alpha channel is ignored: seeds are treated as fully opaque.)
 - The color used on top of it (`OnPrimaryColor`, for button text and icons) is chosen automatically so it always stays readable: a pale seed gets dark text, a dark seed gets light text. The pairing always meets the WCAG AA contrast standard (4.5:1).
 - Every supporting palette follows the character of your seed: a muted seed gives a muted theme, and a gray seed gives a fully neutral theme.
 - In Dark mode, `PrimaryColor` is a lighter derivative of your seed — a dark brand color painted onto a dark background would be unreadable, so Dark mode always brightens it.

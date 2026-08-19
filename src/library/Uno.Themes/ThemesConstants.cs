@@ -20,22 +20,30 @@ internal static class ThemesConstants
 	public static readonly string[] ThemeDictionaryKeys = { "Light", "Default" };
 
 	/// <summary>
-	/// Every theme dictionary declared by <c>SharedColors.xaml</c>, paired with the color theme its
-	/// brushes are resolved from.
+	/// Every theme dictionary declared by <c>SharedColors.xaml</c>, paired with the color theme keys
+	/// its brushes are resolved from, in decreasing precedence.
 	/// </summary>
 	/// <remarks>
+	/// <para>
+	/// The candidate chains mirror the framework's own theme-dictionary resolution: the dark theme
+	/// tries <c>Dark</c> before <c>Default</c> — consumer overrides are documented with
+	/// <c>x:Key="Dark"</c> while the library's own layers use <c>Default</c> — and every theme falls
+	/// back to <c>Default</c>.
+	/// </para>
+	/// <para>
 	/// This is deliberately wider than <see cref="ThemeDictionaryKeys"/>: the brush dictionary carries a
-	/// third, <c>HighContrast</c> block, but no color layer anywhere in the libraries defines HighContrast
-	/// values — those brushes reference the same <c>*Color</c> role keys as the others. Sweeping them
-	/// against "Default" therefore preserves the palette sharing the XAML already encodes, and keeps them
-	/// following seed and override changes instead of being frozen at whatever the ambient scope held when
-	/// the dictionary was parsed.
+	/// third, <c>HighContrast</c> block, but no color layer in the libraries defines HighContrast
+	/// values — those brushes reference the same <c>*Color</c> role keys as the others. Its chain
+	/// honors an explicit consumer <c>HighContrast</c> block first, then follows the dark palette,
+	/// which keeps those brushes tracking seed and override changes instead of being frozen at
+	/// whatever the ambient scope held when the dictionary was parsed.
+	/// </para>
 	/// </remarks>
-	public static readonly (string BrushTheme, string ColorTheme)[] BrushThemeSources =
+	public static readonly (string BrushTheme, string[] ColorThemes)[] BrushThemeSources =
 	{
-		("Light", "Light"),
-		("Default", "Default"),
-		("HighContrast", "Default"),
+		("Light", new[] { "Light", "Default" }),
+		("Default", new[] { "Dark", "Default" }),
+		("HighContrast", new[] { "HighContrast", "Dark", "Default" }),
 	};
 
 	/// <summary>

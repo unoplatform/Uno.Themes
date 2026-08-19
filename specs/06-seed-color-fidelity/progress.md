@@ -452,10 +452,55 @@ A seven-lens review panel ran against the branch. Fixed here:
   `When_SeedIsSet_Then_EverySemanticRoleBrushFollowsItsColor` now sweeps every role against an independent
   list held in the test.
 
-Left open from the panel (not in this pass): seed alpha not masked, `SemanticThemeHelper` throwing from a getter,
-thread-affinity of the brush mutation, no logging, the sample page's unsubscribed `ActualThemeChanged`, the
-per-key themed-dictionary re-resolution and the re-parsed `SharedColorPalette.xaml` (both per-frame during a
-picker drag), and `SetChangedCallback` being a single-slot `Action<bool>`.
+Left open from the panel (not in this pass): `SemanticThemeHelper` throwing from a getter (now documented in
+`doc/seed-colors.md`), thread-affinity of the brush mutation, no logging, the per-key themed-dictionary
+re-resolution and the re-parsed `SharedColorPalette.xaml` (both per-frame during a picker drag), and
+`SetChangedCallback` being a single-slot `Action<bool>`. Seed alpha and the sample page's
+`ActualThemeChanged` pulse were closed by the second panel (below).
+
+### Second review panel (pre-PR) and fixes applied
+
+A full seven-lens panel ran against `d20cd743..HEAD` after the SeedColorMode rename and docs sweep.
+Unified verdict was fix-first; the fix-first set was applied, red/fix/green:
+
+- **Unresolvable override URIs no longer throw from PCCs** (security/operability). `Uri.TryCreate` only
+  caught malformed strings; a well-formed URI naming a missing dictionary threw
+  `InvalidOperationException` out of the callback (verified red). `ThemeColors.OnOverrideSourceChanged`
+  and `BaseTheme.OnFontOverrideSourceChanged` now guard the dictionary load and fall back to no
+  override (the font path also resets to null on a null/whitespace source, fixing the asymmetry
+  security flagged); `BuildColorLayer` falls back to the stale in-memory override instance if a
+  hot-reload edit breaks the source. Tests: `When_OverrideSourceDoesNotResolve_Then_ThemeKeepsWorking`,
+  `When_FontOverrideSourceDoesNotResolve_Then_ThemeKeepsWorking`.
+- **The brush sweep honors the documented "Dark" override key and no longer bleeds across themes**
+  (quality/skeptic). `TryResolve` read themed values only under the exact color-theme key, and its
+  theme-agnostic fallback resolved against the *application* theme — a Dark-only override wrote the
+  dark value into the Light brushes on a dark host (verified red, host-theme dependent in direction).
+  `BrushThemeSources` now maps each brush theme to a candidate chain mirroring framework resolution
+  (Light→[Light, Default], Default→[Dark, Default], HighContrast→[HighContrast, Dark, Default]), and
+  the agnostic fallback is skipped when the key is theme-scoped anywhere in the layer. Tests:
+  `When_OverrideUsesDarkKey_Then_DarkBrushesFollowIt`,
+  `When_OverrideIsThemeScoped_Then_OtherThemesBrushesKeepGeneratedColors` (covers both partial-override
+  directions so it trips regardless of host theme).
+- **Seed alpha is masked** (skeptic/security/quality). `Generate` forces all three seeds opaque before
+  the cache key and generation, matching material-color-utilities — a translucent seed no longer pins
+  translucent Primary/SurfaceTint or voids the OnPrimary AA guarantee (verified red). Test:
+  `When_SeedHasAlpha_Then_GeneratedColorsAreOpaque`. Doc note added.
+- **The sample page's `ActualThemeChanged` seed pulse was dead and is removed** (skeptic). The new
+  `When_ThemeChangesAfterSeed_Then_ControlsPaintTheOtherThemesColors` test passes without it — the
+  sweep writes both theme dictionaries in one pass, so a theme switch needs no re-pulse.
+- **`SeedColorMode.TonalSpot` XML doc no longer claims 7.x output parity** (skeptic/contract): it names
+  the recipe as pre-8.0 while noting output differs due to the solver fix. The v8 migration notes also
+  gained the shared-brush-instances bullet (contract).
+
+Full suite after fixes: **153 cases, 152 passed, 1 pre-existing skip.** Remaining panel findings were
+judged non-blocking and stay recorded here: reverse drift guard for the brush-key lists (architect,
+medium — a regex-over-XAML test is the suggested shape), HighContrast-shows-dark-palette verification
+on a Windows HC head (skeptic, medium), the two per-drag-tick costs (performance, medium — gated on a
+WASM drag profile), the stale `PreserveSeedColor` reference in commit 122e423f's footer (contract, low
+— supersede in the PR description or reword during the pre-PR rebase), brushes mutated before the
+commit phase (low), subclass `MergedDictionaries` leak guard (low), getter side effects on
+`SemanticThemeHelper` (low), dead `ColorMath` helpers `WhitePointD65`/`ArgbToXyz`/`XyzToArgb` (info),
+and the sample page setting an app-global seed on navigation (info, sample-only).
 
 ### Docs sweep (post-review)
 

@@ -38,6 +38,8 @@ This only affects code that subclasses `BaseTheme`. The protected `UseHighFideli
 
 Changing a seed color at runtime now recolors everything already on screen — including the HighContrast theme — with no page re-navigation or theme toggle needed. If your app worked around the 7.x behavior by recreating its root content after a seed change, that workaround can be removed. See [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes).
 
+To make this possible, the semantic `*Brush` resources are now shared, long-lived instances whose `Color` and `Opacity` are rewritten in place when a seed or override changes. If your code caches a `brush.Color` snapshot or expects a fresh brush instance per theme rebuild, hold on to the resource key instead.
+
 ## Upgrading to Uno Themes v7
 
 Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic Design Language, design tokens, and opt-in seed color generation. Visual defaults are unchanged — no semantic color or brush resource key was renamed or removed, and seed generation is off unless you enable it — so most apps upgrade without code changes. The sections below cover the changes that may require action.

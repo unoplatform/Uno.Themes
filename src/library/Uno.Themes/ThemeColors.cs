@@ -27,7 +27,8 @@ public enum SeedColorMode
 	Fidelity = 0,
 
 	/// <summary>
-	/// Material Design 3's standard "tonal spot" recipe — the behavior before version 8.0.
+	/// Material Design 3's standard "tonal spot" recipe — the same recipe as before version 8.0,
+	/// though its output differs from 7.x because the HCT color solver was also corrected in 8.0.
 	/// A minimum chroma of 48 is enforced on Primary and the supporting palettes use fixed
 	/// chromas, which guarantees vibrant output but does not reproduce the seed color exactly.
 	/// </summary>
@@ -148,13 +149,23 @@ public sealed partial class ThemeColors : DependencyObject
 			return;
 		}
 
-		// A malformed URI must not throw: this is a property-changed callback, and an exception here
-		// takes down the consuming app (on WASM, the runtime). Fall back to no override instead.
+		// A malformed or unresolvable URI must not throw: this is a property-changed callback, and an
+		// exception here takes down the consuming app (on WASM, the runtime). Fall back to no
+		// override instead.
 		if (e.NewValue is string sourceUri
 			&& !string.IsNullOrWhiteSpace(sourceUri)
 			&& Uri.TryCreate(sourceUri, UriKind.Absolute, out var source))
 		{
-			tc.OverrideDictionary = new ResourceDictionary { Source = source };
+			try
+			{
+				tc.OverrideDictionary = new ResourceDictionary { Source = source };
+			}
+			catch (Exception)
+			{
+				// Well-formed but not loadable (missing resource, parse failure — the exception
+				// type varies by platform). Same contract as a malformed URI: no override.
+				tc.OverrideDictionary = null;
+			}
 		}
 		else
 		{
