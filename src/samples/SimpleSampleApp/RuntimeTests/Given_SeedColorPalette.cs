@@ -292,15 +292,15 @@ public class Given_SeedColorPalette
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Preserve-seed (content) mode scales every supporting palette from the seed's
-	// own chroma; the pre-8.0 tonal-spot behavior remains available as an opt-out.
+	// Fidelity (content) mode scales every supporting palette from the seed's
+	// own chroma; the pre-8.0 TonalSpot behavior remains available as an opt-out.
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow("Light")]
 	[DataRow("Default")]
-	public void When_GraySeedAndPreserveSeedColor_Then_SupportingPalettesStayNeutral(string themeKey)
+	public void When_GraySeedInFidelityMode_Then_SupportingPalettesStayNeutral(string themeKey)
 	{
 		// Regression guard: with the fixed tonal-spot chromas a gray seed produced a teal
 		// Secondary (#4B6367) and a blue Tertiary (#525D7D).
@@ -318,23 +318,23 @@ public class Given_SeedColorPalette
 
 	[TestMethod]
 	[RunsOnUIThread]
-	public void When_PreserveSeedColorIsFalse_Then_TonalSpotBehaviorApplies()
+	public void When_SeedColorModeIsTonalSpot_Then_TonalSpotBehaviorApplies()
 	{
 		// The pre-8.0 path: Primary is derived at tone 40 with a chroma floor of 48, so a
 		// gray seed is deliberately boosted into a vivid color rather than reproduced.
 		var seed = ToColor(unchecked((int)0xFF808080));
 
-		var primary = GetGeneratedColor(seed, "Light", "PrimaryColor", preserveSeedColor: false);
+		var primary = GetGeneratedColor(seed, "Light", "PrimaryColor", seedColorMode: SeedColorMode.TonalSpot);
 
-		Assert.AreNotEqual(seed, primary, "PreserveSeedColor=false must not pin Primary to the seed.");
+		Assert.AreNotEqual(seed, primary, "TonalSpot mode must not pin Primary to the seed.");
 
 		// The chroma-48 floor is requested but capped by the sRGB gamut at this hue (~35 here),
 		// so assert against the seed's own chroma of ~1.9 rather than the requested figure.
 		var hct = HctColor.FromArgb(ToArgb(primary));
 		Assert.IsTrue(hct.Chroma > 20,
-			$"PreserveSeedColor=false should apply the M3 minimum chroma to a near-gray seed, got {hct.Chroma:F1}.");
+			$"TonalSpot mode should apply the M3 minimum chroma to a near-gray seed, got {hct.Chroma:F1}.");
 		Assert.IsTrue(Math.Abs(hct.Tone - 40) <= 2.0,
-			$"PreserveSeedColor=false should derive Primary at tone 40, got {hct.Tone:F1}.");
+			$"TonalSpot mode should derive Primary at tone 40, got {hct.Tone:F1}.");
 	}
 
 	[TestMethod]
@@ -708,13 +708,13 @@ public class Given_SeedColorPalette
 		Color seed,
 		string themeKey,
 		string colorKey,
-		bool? preserveSeedColor = null,
+		SeedColorMode? seedColorMode = null,
 		Action<ThemeColors>? configure = null)
 	{
 		var colors = new ThemeColors { PrimarySeed = seed };
-		if (preserveSeedColor is { } preserve)
+		if (seedColorMode is { } mode)
 		{
-			colors.PreserveSeedColor = preserve;
+			colors.SeedColorMode = mode;
 		}
 		configure?.Invoke(colors);
 

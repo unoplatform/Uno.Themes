@@ -11,6 +11,30 @@ using Windows.UI.Xaml;
 namespace Uno.Themes;
 
 /// <summary>
+/// Selects the recipe used to derive the generated tonal palettes from
+/// <see cref="ThemeColors.PrimarySeed"/>.
+/// </summary>
+public enum SeedColorMode
+{
+	/// <summary>
+	/// The generated scheme stays true to the seed (default). Every derived palette is scaled
+	/// from the seed's own chroma — a muted seed yields a muted scheme, so a gray seed produces
+	/// a neutral palette — and the light <c>PrimaryColor</c> is the seed verbatim, with
+	/// <c>OnPrimaryColor</c> picked for contrast against it. The dark <c>PrimaryColor</c> is
+	/// always derived (tone 80) so it stays legible on a dark surface.
+	/// Matches Material Design 3's "content" chroma recipe, plus the exact-seed Primary.
+	/// </summary>
+	Fidelity = 0,
+
+	/// <summary>
+	/// Material Design 3's standard "tonal spot" recipe — the behavior before version 8.0.
+	/// A minimum chroma of 48 is enforced on Primary and the supporting palettes use fixed
+	/// chromas, which guarantees vibrant output but does not reproduce the seed color exactly.
+	/// </summary>
+	TonalSpot = 1,
+}
+
+/// <summary>
 /// Groups all color-related configuration for a theme: seed colors
 /// and override dictionaries.
 /// Used as the value for <see cref="BaseTheme.Colors"/>.
@@ -76,39 +100,28 @@ public sealed partial class ThemeColors : DependencyObject
 			new PropertyMetadata(null, OnPropertyChanged));
 	#endregion
 
-	#region PreserveSeedColor (DP)
+	#region SeedColorMode (DP)
 	/// <summary>
-	/// Gets or sets whether generated palettes stay faithful to <see cref="PrimarySeed"/>.
-	/// Default is <c>true</c>.
+	/// Gets or sets the recipe used to derive the generated palettes from <see cref="PrimarySeed"/>.
+	/// Default is <see cref="SeedColorMode.Fidelity"/>: the generated scheme stays true to the
+	/// seed, and the light <c>PrimaryColor</c> is the seed verbatim. Select
+	/// <see cref="SeedColorMode.TonalSpot"/> for Material Design 3's standard vibrant recipe,
+	/// which does not reproduce the seed color exactly. See <see cref="Uno.Themes.SeedColorMode"/>
+	/// for the full description of each mode.
 	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// When <c>true</c>, the light <c>PrimaryColor</c> resource is the seed color verbatim and
-	/// every derived palette is scaled from the seed's own chroma, so a low-chroma seed such as
-	/// gray produces a neutral palette. The light <c>OnPrimaryColor</c> is picked for contrast
-	/// against the pinned seed rather than being fixed at tone 100.
-	/// </para>
-	/// <para>
-	/// When <c>false</c>, the Material Design 3 "tonal spot" behavior applies instead: a minimum
-	/// chroma of 48 is enforced on Primary and the supporting palettes use fixed chromas. This
-	/// guarantees vibrant output but does not reproduce the seed color exactly. This was the
-	/// behavior before version 8.0.
-	/// </para>
-	/// <para>The dark <c>PrimaryColor</c> is always derived (tone 80) so it stays legible on a dark surface.</para>
-	/// </remarks>
-	public bool PreserveSeedColor
+	public SeedColorMode SeedColorMode
 	{
-		get => (bool)GetValue(PreserveSeedColorProperty);
-		set => SetValue(PreserveSeedColorProperty, value);
+		get => (SeedColorMode)GetValue(SeedColorModeProperty);
+		set => SetValue(SeedColorModeProperty, value);
 	}
 
-	/// <summary>Identifies the <see cref="PreserveSeedColor"/> dependency property.</summary>
-	public static DependencyProperty PreserveSeedColorProperty { get; } =
+	/// <summary>Identifies the <see cref="SeedColorMode"/> dependency property.</summary>
+	public static DependencyProperty SeedColorModeProperty { get; } =
 		DependencyProperty.Register(
-			nameof(PreserveSeedColor),
-			typeof(bool),
+			nameof(SeedColorMode),
+			typeof(SeedColorMode),
 			typeof(ThemeColors),
-			new PropertyMetadata(true, OnPropertyChanged));
+			new PropertyMetadata(SeedColorMode.Fidelity, OnPropertyChanged));
 	#endregion
 
 	#region OverrideSource (DP)
@@ -179,12 +192,12 @@ public sealed partial class ThemeColors : DependencyObject
 	}
 
 	/// <summary>
-	/// <c>true</c> when a consumer explicitly assigned <see cref="PreserveSeedColor"/>. Lets
+	/// <c>true</c> when a consumer explicitly assigned <see cref="SeedColorMode"/>. Lets
 	/// <see cref="BaseTheme"/> keep honoring the obsolete <c>UseHighFidelityColors</c> override
 	/// of an existing subclass while an explicit assignment here still wins.
 	/// </summary>
-	internal bool HasExplicitPreserveSeedColor =>
-		ReadLocalValue(PreserveSeedColorProperty) != DependencyProperty.UnsetValue;
+	internal bool HasExplicitSeedColorMode =>
+		ReadLocalValue(SeedColorModeProperty) != DependencyProperty.UnsetValue;
 
 	/// <summary>
 	/// Registers a callback that is invoked when any color property changes.

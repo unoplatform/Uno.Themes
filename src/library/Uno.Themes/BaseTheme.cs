@@ -341,11 +341,12 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 	/// <summary>
 	/// When <c>true</c>, seed color generation preserves the source color's
-	/// actual chroma (high-fidelity / "color match" mode). When <c>false</c>,
-	/// the standard M3 minimum chroma of 48 is enforced, which
+	/// actual chroma (<see cref="SeedColorMode.Fidelity"/>). When <c>false</c>,
+	/// the standard M3 minimum chroma of 48 is enforced
+	/// (<see cref="SeedColorMode.TonalSpot"/>), which
 	/// guarantees vibrant colors but distorts low-chroma seeds like gray.
 	/// </summary>
-	[Obsolete("Use ThemeColors.PreserveSeedColor instead. This property will be removed in a future version.")]
+	[Obsolete("Use ThemeColors.SeedColorMode instead. This property will be removed in a future version.")]
 	protected virtual bool UseHighFidelityColors => true;
 
 	public BaseTheme() : this(colorOverride: null, fontOverride: null)
@@ -487,15 +488,15 @@ public abstract partial class BaseTheme : ResourceDictionary
 
 		if (effectivePrimary is { } seed)
 		{
-			// An explicit Colors.PreserveSeedColor wins; otherwise fall back to the obsolete
+			// An explicit Colors.SeedColorMode wins; otherwise fall back to the obsolete
 			// virtual so a subclass that overrode it before 8.0 keeps its behavior.
 #pragma warning disable CS0618 // Type or member is obsolete
-			var preserveSeedColor = Colors is { HasExplicitPreserveSeedColor: true } explicitColors
-				? explicitColors.PreserveSeedColor
-				: UseHighFidelityColors;
+			var seedColorMode = Colors is { HasExplicitSeedColorMode: true } explicitColors
+				? explicitColors.SeedColorMode
+				: UseHighFidelityColors ? SeedColorMode.Fidelity : SeedColorMode.TonalSpot;
 #pragma warning restore CS0618
 
-			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, preserveSeedColor);
+			var seedPalette = SeedColorPaletteGenerator.Default.Generate(seed, effectiveSecondary, effectiveTertiary, seedColorMode);
 			colors.SafeMerge(seedPalette);
 			colorLayers.Add(seedPalette);
 		}

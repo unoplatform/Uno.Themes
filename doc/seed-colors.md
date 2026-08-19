@@ -27,20 +27,20 @@ Since version 8.0, the light `PrimaryColor` resource is the seed color **verbati
 - Light `OnPrimaryColor` is chosen for contrast against the pinned seed rather than being fixed at tone 100, so a pale seed gets a dark foreground and a dark seed gets a light one. The pairing always clears WCAG AA (4.5:1).
 - The Secondary, Tertiary, Neutral and NeutralVariant palettes are scaled from the seed's own chroma, so a low-chroma seed such as gray produces a neutral palette instead of a colored one.
 
-Set `PreserveSeedColor="False"` to get the Material Design 3 "tonal spot" behavior instead — Primary derived at tone 40 with a minimum chroma of 48, and fixed chromas on the supporting palettes. That is more vibrant for muted seeds, but does not reproduce the seed color:
+This is the `SeedColorMode.Fidelity` mode, the default. Set `SeedColorMode="TonalSpot"` to get the Material Design 3 "tonal spot" behavior instead — Primary derived at tone 40 with a minimum chroma of 48, and fixed chromas on the supporting palettes. That is more vibrant for muted seeds, but does not reproduce the seed color:
 
 ```xml
 <MaterialTheme xmlns="using:Uno.Material">
     <MaterialTheme.Colors>
         <ut:ThemeColors xmlns:ut="using:Uno.Themes"
                         PrimarySeed="#6750A4"
-                        PreserveSeedColor="False" />
+                        SeedColorMode="TonalSpot" />
     </MaterialTheme.Colors>
 </MaterialTheme>
 ```
 
 > [!NOTE]
-> `PreserveSeedColor="False"` reproduces the pre-8.0 generation behavior, but not its output: the HCT gamut solver was corrected in 8.0, so saturated seeds now produce noticeably more vivid palettes in both modes.
+> `SeedColorMode="TonalSpot"` reproduces the pre-8.0 generation behavior, but not its output: the HCT gamut solver was corrected in 8.0, so saturated seeds now produce noticeably more vivid palettes in both modes.
 
 ## Getting Started
 
@@ -156,7 +156,7 @@ Used as the value for `BaseTheme.Colors` (i.e., `MaterialTheme.Colors` or `Simpl
 | `PrimarySeed`        | `Color?`             | The primary seed color. When set, derives the full semantic palette algorithmically.                                                                                |
 | `SecondarySeed`      | `Color?`             | Optional secondary seed. If `null`, auto-derived from `PrimarySeed`.                                                                                                |
 | `TertiarySeed`       | `Color?`             | Optional tertiary seed. If `null`, auto-derived from `PrimarySeed`.                                                                                                 |
-| `PreserveSeedColor`  | `bool`               | Default `true`. Pins the light `PrimaryColor` to `PrimarySeed` and scales the derived palettes from its chroma. `False` selects the M3 tonal-spot behavior instead. |
+| `SeedColorMode`      | `SeedColorMode`      | Default `Fidelity`: pins the light `PrimaryColor` to `PrimarySeed` and scales the derived palettes from its chroma. `TonalSpot` selects the M3 tonal-spot behavior instead. |
 | `OverrideSource`     | `string`             | URI to a `ResourceDictionary` with color overrides. These override both defaults and seed-generated colors.                                                         |
 | `OverrideDictionary` | `ResourceDictionary` | Direct `ResourceDictionary` with color overrides. Highest precedence.                                                                                               |
 
@@ -170,6 +170,7 @@ Static convenience class for runtime theme configuration.
 | `PrimarySeed`   | Property | Gets or sets the primary seed color on the active theme. Setting regenerates the full palette.     |
 | `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                         |
 | `TertiarySeed`  | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                          |
+| `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.         |
 
 ## Color Precedence
 

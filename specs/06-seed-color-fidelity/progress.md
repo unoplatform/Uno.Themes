@@ -450,11 +450,25 @@ A seven-lens review panel ran against the branch. Fixed here:
   `When_SeedIsSet_Then_EverySemanticRoleBrushFollowsItsColor` now sweeps every role against an independent
   list held in the test.
 
-Left open from the panel (not in this pass): the missing 7.x→8.0 migration section, `PreserveSeedColor` absent
-from the `SemanticThemeHelper` doc table, seed alpha not masked, `SemanticThemeHelper` throwing from a getter,
+Left open from the panel (not in this pass): the missing 7.x→8.0 migration section, seed alpha not masked, `SemanticThemeHelper` throwing from a getter,
 thread-affinity of the brush mutation, no logging, the sample page's unsubscribed `ActualThemeChanged`, the
 per-key themed-dictionary re-resolution and the re-parsed `SharedColorPalette.xaml` (both per-frame during a
 picker drag), and `SetChangedCallback` being a single-slot `Action<bool>`.
+
+### D6 (post-review): `PreserveSeedColor` bool → `SeedColorMode` enum
+
+The unshipped `PreserveSeedColor` DP was replaced by a public `SeedColorMode` enum
+(`Fidelity` = 0, default; `TonalSpot` = 1), property `ThemeColors.SeedColorMode`, mirrored on
+`SemanticThemeHelper`. Rationale: the values are exact material-color-utilities /
+`DynamicSchemeVariant` vocabulary (googleable, self-documenting), and the enum is extensible to
+further M3 variants (Vibrant, Expressive, …) without another breaking change — a bool→enum
+conversion after 8.0 ships would itself be breaking, while pre-release it is a rename sweep.
+Notes: our `Fidelity` does more than M3's content variant (it also pins light Primary to the exact
+seed hex — the XML docs own that deviation); an out-of-range cast degrades to `Fidelity` in the
+generator rather than throwing (PCC path); the `[Obsolete] UseHighFidelityColors` bridge is
+unchanged — `true` maps to `Fidelity`, `false` to `TonalSpot`, and an explicit `SeedColorMode`
+assignment still wins via `HasExplicitSeedColorMode`. Everything in this document above this
+section predates the rename and reads `PreserveSeedColor` — left intact as history.
 
 ### Before / after
 

@@ -21,7 +21,7 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 	/// <summary>
 	/// Simple uses a hand-crafted grayscale palette by default (no seed).
 	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, the default
-	/// <see cref="ThemeColors.PreserveSeedColor"/> behavior keeps the generated
+	/// <see cref="SeedColorMode.Fidelity"/> mode keeps the generated
 	/// palette faithful to that seed.
 	/// </summary>
 	protected override Color? DefaultPrimarySeed => null;

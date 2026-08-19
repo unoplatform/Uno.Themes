@@ -31,27 +31,27 @@ internal sealed class SeedColorPaletteGenerator
 	// Single-entry cache: stores only the most recent seed → palette result.
 	// Runtime color picking only uses one seed at a time, so this avoids
 	// unbounded growth from dragging a color picker.
-	private (int primary, int? secondary, int? tertiary, bool preserveSeedColor) _cacheKey;
+	private (int primary, int? secondary, int? tertiary, SeedColorMode mode) _cacheKey;
 	private ResourceDictionary _cacheValue;
 
 	internal ResourceDictionary Generate(
 		Color primarySeedColor,
 		Color? secondarySeedColor = null,
 		Color? tertiarySeedColor = null,
-		bool preserveSeedColor = true)
+		SeedColorMode mode = SeedColorMode.Fidelity)
 	{
 		var key = (
 			ColorToArgb(primarySeedColor),
 			secondarySeedColor is { } sec ? (int?)ColorToArgb(sec) : null,
 			tertiarySeedColor is { } ter ? (int?)ColorToArgb(ter) : null,
-			preserveSeedColor);
+			mode);
 
 		if (_cacheValue is not null && _cacheKey == key)
 		{
 			return _cacheValue;
 		}
 
-		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor, preserveSeedColor);
+		var result = GenerateCore(primarySeedColor, secondarySeedColor, tertiarySeedColor, mode);
 		_cacheKey = key;
 		_cacheValue = result;
 		return result;
@@ -61,8 +61,12 @@ internal sealed class SeedColorPaletteGenerator
 		Color seedColor,
 		Color? secondarySeedColor,
 		Color? tertiarySeedColor,
-		bool preserveSeedColor)
+		SeedColorMode mode)
 	{
+		// An out-of-range value (a consumer cast) degrades to the Fidelity default rather than
+		// throwing — this runs inside property-changed callbacks.
+		bool preserveSeedColor = mode != SeedColorMode.TonalSpot;
+
 		int seedArgb = ColorToArgb(seedColor);
 		var seedHct = HctColor.FromArgb(seedArgb);
 		double hue = seedHct.Hue;
@@ -70,10 +74,10 @@ internal sealed class SeedColorPaletteGenerator
 
 		// Derive the six tonal palettes. Two variants, matching material-color-utilities'
 		// CorePalette.of(argb, isContent:):
-		//  - preserveSeedColor (default, "content"): every palette is scaled from the seed's
-		//    own chroma, so the generated ramp stays faithful to the seed — a gray seed
+		//  - SeedColorMode.Fidelity (default, M3 "content"): every palette is scaled from the
+		//    seed's own chroma, so the generated ramp stays faithful to the seed — a gray seed
 		//    produces a gray palette rather than a colored one.
-		//  - !preserveSeedColor ("tonal spot", the pre-8.0 behavior): a minimum chroma of 48
+		//  - SeedColorMode.TonalSpot (the pre-8.0 behavior): a minimum chroma of 48
 		//    on Primary and fixed chromas on the supporting palettes, which guarantees vibrant
 		//    output at the cost of distorting the seed.
 		double primaryChroma = preserveSeedColor ? chroma : Math.Max(chroma, 48);
@@ -113,7 +117,7 @@ internal sealed class SeedColorPaletteGenerator
 		var lightDict = new ResourceDictionary();
 		var darkDict = new ResourceDictionary();
 
-		// Primary. In preserve-seed mode the light role *is* the seed, verbatim — the promise
+		// Primary. In Fidelity mode the light role *is* the seed, verbatim — the promise
 		// being that PrimaryColor renders the exact hex the consumer supplied. Dark stays
 		// derived at tone 80: a dark brand color pinned onto a dark surface is unreadable.
 		int lightPrimary = preserveSeedColor ? seedArgb : primary.GetArgb(40);

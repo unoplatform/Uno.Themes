@@ -57,14 +57,14 @@ public static class SemanticThemeHelper
 	}
 
 	/// <summary>
-	/// Gets or sets whether generated palettes stay faithful to <see cref="PrimarySeed"/>
-	/// on the active theme. See <see cref="ThemeColors.PreserveSeedColor"/>.
+	/// Gets or sets the recipe used to derive the generated palettes from <see cref="PrimarySeed"/>
+	/// on the active theme. See <see cref="Uno.Themes.SeedColorMode"/>.
 	/// </summary>
 	/// <exception cref="InvalidOperationException">No <see cref="BaseTheme"/> found in application resources.</exception>
-	public static bool PreserveSeedColor
+	public static SeedColorMode SeedColorMode
 	{
-		get => GetColorsOrThrow().PreserveSeedColor;
-		set => GetColorsOrThrow().PreserveSeedColor = value;
+		get => GetColorsOrThrow().SeedColorMode;
+		set => GetColorsOrThrow().SeedColorMode = value;
 	}
 
 	private static ThemeColors GetColorsOrThrow()
