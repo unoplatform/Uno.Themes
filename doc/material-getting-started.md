@@ -32,10 +32,13 @@ Initialization of the Uno Material resources is handled by the specialized `Mate
 
 #### Properties
 
-| Property              | Type     | Description                                                                                                                                                                         |
-|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ColorOverrideSource` | `string` | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno Material Color resources |
-| `FontOverrideSource`  | `string` | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno Material font resources  |
+| Property              | Type          | Description                                                                                                                                                                                  |
+|-----------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Colors`              | `ThemeColors` | (Optional) Groups all color configuration: seed colors (`PrimarySeed`, …), the generation mode (`SeedColorMode`), and color overrides. See [Seed Color Palette](xref:Uno.Themes.SeedColors). |
+| `FontOverrideSource`  | `string`      | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno Material font resources           |
+| `DefaultCornerRadius` | `double`      | (Optional) Base corner-radius unit driving the shape design tokens. See [Design Tokens](design-tokens.md).                                                                                   |
+| `DefaultDensity`      | `Density`     | (Optional) Spacing density preset (`Compact` / `Regular` / `Comfy`) driving the spacing design tokens. See [Design Tokens](design-tokens.md).                                                |
+| `ColorOverrideSource` | `string`      | (Deprecated) Use `OverrideSource` on `Colors` instead — see the [migration notes](xref:Uno.Themes.Material.Migration).                                                                       |
 
 ### Creating a new project with Uno Material
 
@@ -154,7 +157,11 @@ Depending on the type of project template that the Uno Platform application was 
 
 ## Customization
 
-The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
+### Seed Color Palette
+
+The fastest way to a custom color theme: provide a single **seed color** — typically your brand color — and the library generates the complete Light and Dark palette from it, with readable text contrast built in. No resource dictionaries to write, and the seed can even be changed at runtime. See the [Seed Color Palette documentation](xref:Uno.Themes.SeedColors).
+
+The guides below give you full manual control instead. They require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
 
 ### Color Overrides using _Material Theme Builder_ and DSP format
 
@@ -340,10 +347,6 @@ this.Build(r => r.UseMaterial(
      //optional
      new Styles.MaterialFontsOverride()));
 ```
-
-### Seed Color Palette
-
-Instead of manually defining every color, you can provide a single **seed color** and let the library generate the full Light and Dark palette algorithmically using the Material Design 3 HCT color system. See the [Seed Color Palette documentation](xref:Uno.Themes.SeedColors#getting-started).
 
 ## Additional Resources
 

@@ -56,6 +56,17 @@ public static class SemanticThemeHelper
 		set => GetColorsOrThrow().TertiarySeed = value;
 	}
 
+	/// <summary>
+	/// Gets or sets the recipe used to derive the generated palettes from <see cref="PrimarySeed"/>
+	/// on the active theme. See <see cref="Uno.Themes.SeedColorMode"/>.
+	/// </summary>
+	/// <exception cref="InvalidOperationException">No <see cref="BaseTheme"/> found in application resources.</exception>
+	public static SeedColorMode SeedColorMode
+	{
+		get => GetColorsOrThrow().SeedColorMode;
+		set => GetColorsOrThrow().SeedColorMode = value;
+	}
+
 	private static ThemeColors GetColorsOrThrow()
 	{
 		var theme = GetTheme() ?? throw new InvalidOperationException(

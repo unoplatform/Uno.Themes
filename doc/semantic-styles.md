@@ -242,6 +242,8 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 
 Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly.
 
+The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
+
 For more details on per-control lightweight styling resources, see the individual control style pages:
 
 - [Button](styles/Button.md)

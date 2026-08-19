@@ -42,6 +42,10 @@ internal static class ColorMath
 
 	internal static int Clamp8Bit(int value) => Math.Max(0, Math.Min(255, value));
 
+	/// <summary>Pack linear RGB components (0-100 scale) into an ARGB int with alpha = 0xFF.</summary>
+	internal static int ArgbFromLinrgb(double linearR, double linearG, double linearB) =>
+		ArgbFromRgb(Delinearized(linearR), Delinearized(linearG), Delinearized(linearB));
+
 	/// <summary>Convert an ARGB int to CIE XYZ (D65).</summary>
 	internal static double[] ArgbToXyz(int argb)
 	{
@@ -88,11 +92,24 @@ internal static class ColorMath
 		return cubeRoot * cubeRoot * cubeRoot * 100.0;
 	}
 
+	/// <summary>CIE Y (relative luminance, 0-100) from an ARGB int.</summary>
+	internal static double YFromArgb(int argb) =>
+		0.2126 * Linearized((argb >> 16) & 0xFF)
+		+ 0.7152 * Linearized((argb >> 8) & 0xFF)
+		+ 0.0722 * Linearized(argb & 0xFF);
+
 	/// <summary>CIE L* from an ARGB int.</summary>
-	internal static double LstarFromArgb(int argb)
+	internal static double LstarFromArgb(int argb) => LstarFromY(YFromArgb(argb));
+
+	/// <summary>
+	/// WCAG contrast ratio between two ARGB colors, from 1.0 (identical) to 21.0
+	/// (black on white). WCAG AA for normal text requires 4.5.
+	/// </summary>
+	internal static double ContrastRatio(int argb1, int argb2)
 	{
-		double y = ArgbToXyz(argb)[1];
-		return LstarFromY(y);
+		double y1 = YFromArgb(argb1) / 100.0;
+		double y2 = YFromArgb(argb2) / 100.0;
+		return (Math.Max(y1, y2) + 0.05) / (Math.Min(y1, y2) + 0.05);
 	}
 
 	/// <summary>Pack r, g, b bytes into an ARGB int with alpha = 0xFF.</summary>
