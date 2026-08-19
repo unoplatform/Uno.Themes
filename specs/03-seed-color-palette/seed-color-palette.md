@@ -101,6 +101,12 @@ Seed colors are configured exclusively via `ThemeColors` (the `BaseTheme.Colors`
 
 Creates a `ThemeColors` instance automatically if the theme doesn't have one yet. Throws `InvalidOperationException` if no `BaseTheme` is found in application resources.
 
+### `ApplicationExtensions` (instance-based theme lookup)
+
+`Extensions/ApplicationExtensions.cs` exposes `GetTheme(this Application)`: the same first-level `MergedDictionaries` scan as `SemanticThemeHelper.GetTheme()`, but against the resources of the `Application` instance the caller holds. `SemanticThemeHelper.GetTheme()` is a pure delegation to it on `Application.Current`. The extension is null-tolerant (a `null` application yields `null`).
+
+Motivation: hosts that run several applications (e.g. Hot Design's ALC-hosted guest apps, the ALC wrapper sample in `specs/05-alc-wrapper-app/`) cannot reach a guest's theme through `Application.Current`, which is the host application. A caller that resolves the guest's `Application` instance can now fetch its theme directly. Because `Uno.Themes.WinUI` resolves from the default load context in those hosting setups, `BaseTheme` type identity is shared and the plain `OfType<BaseTheme>` match works across the ALC boundary — no reflection needed. Runtime coverage: `Given_ApplicationExtensions` in `src/samples/SimpleSampleApp/RuntimeTests/`.
+
 ## How It Works
 
 ### Color Space: HCT
@@ -205,6 +211,7 @@ This means:
 src/library/Uno.Themes/
     ThemeColors.cs                  # Grouped color configuration DependencyObject
     Helpers/SemanticThemeHelper.cs  # Static convenience API for runtime seed color changes
+    Extensions/ApplicationExtensions.cs # Instance-based GetTheme(this Application)
     ColorGeneration/
         ColorMath.cs                # sRGB/Linear/XYZ/L* conversions
         TonalPalette.cs             # Hue+chroma → tone-indexed ARGB lookup
