@@ -143,9 +143,15 @@ SemanticThemeHelper.PrimarySeed = Colors.Green;
 SemanticThemeHelper.SecondarySeed = Colors.Teal;
 SemanticThemeHelper.TertiarySeed = Colors.Orange;
 
+// Switch the generation mode (default is Fidelity)
+SemanticThemeHelper.SeedColorMode = SeedColorMode.TonalSpot;
+
 // Clear seed to revert to the theme's default palette
 SemanticThemeHelper.PrimarySeed = null;
 ```
+
+> [!NOTE]
+> The helper works on the theme merged into `Application.Current.Resources`. Its properties throw an `InvalidOperationException` if no `MaterialTheme`/`SimpleTheme` is merged yet — set up the theme in `App.xaml` first. `GetTheme()` is the non-throwing alternative: it returns `null` when no theme is found.
 
 ### Direct Access via `ThemeColors`
 
