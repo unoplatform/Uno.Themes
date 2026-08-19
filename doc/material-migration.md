@@ -7,6 +7,37 @@ uid: Uno.Themes.Material.Migration
 > [!IMPORTANT]
 > UnoFeatures: **Material** — add `<UnoFeatures>Material</UnoFeatures>` to your app's `.csproj` to include Uno Material resources.
 
+## Upgrading to Uno Themes v8
+
+Uno Themes 8.0 reworks seed color generation so the palette faithfully reproduces the seed color you provide. **If your app never sets `PrimarySeed`, nothing changes** — the built-in palettes, style keys, and brush resources are untouched, and you can upgrade without code changes. If your app does use a seed, the generated colors will look different after the upgrade — the sections below explain how and why.
+
+### Seed-generated palettes look different
+
+Two changes affect every app that sets `PrimarySeed`:
+
+- **A color-math fix.** 7.x silently washed out saturated seeds — a vivid brand color generated a muted palette. 8.0 corrects this, so generated palettes are more vivid in every mode. This part of the change has no opt-out.
+- **A new default generation mode.** The default is now `SeedColorMode="Fidelity"`: the light `PrimaryColor` is your seed color verbatim, the color rendered on top of it (`OnPrimaryColor`) is picked automatically for readable contrast, and the supporting palettes follow the seed's saturation — a muted seed now produces a muted palette. To keep the previous always-vibrant recipe, set `SeedColorMode="TonalSpot"`:
+
+```xml
+<MaterialTheme xmlns="using:Uno.Material">
+    <MaterialTheme.Colors>
+        <ut:ThemeColors xmlns:ut="using:Uno.Themes"
+                        PrimarySeed="#6750A4"
+                        SeedColorMode="TonalSpot" />
+    </MaterialTheme.Colors>
+</MaterialTheme>
+```
+
+See [Two generation modes](seed-colors.md#two-generation-modes) for the full description of both modes and guidance on which to choose.
+
+### `UseHighFidelityColors` is now obsolete
+
+This only affects code that subclasses `BaseTheme`. The protected `UseHighFidelityColors` property is `[Obsolete]`, replaced by the public `SeedColorMode` property on `ThemeColors` (also available at runtime via `SemanticThemeHelper.SeedColorMode`). An existing override keeps working — `true` maps to `Fidelity` and `false` to `TonalSpot` — but an explicit `SeedColorMode` assignment on `Colors` wins over the override.
+
+### Runtime seed changes repaint immediately
+
+Changing a seed color at runtime now recolors everything already on screen — including the HighContrast theme — with no page re-navigation or theme toggle needed. If your app worked around the 7.x behavior by recreating its root content after a seed change, that workaround can be removed. See [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes).
+
 ## Upgrading to Uno Themes v7
 
 Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic Design Language, design tokens, and opt-in seed color generation. Visual defaults are unchanged — no semantic color or brush resource key was renamed or removed, and seed generation is off unless you enable it — so most apps upgrade without code changes. The sections below cover the changes that may require action.
@@ -36,10 +67,10 @@ This only affects code that subclasses `BaseTheme` to build a custom design syst
 
 Color configuration is now grouped on the new `Colors` property, a `ThemeColors` object that also hosts the seed color properties. The legacy properties are deprecated but still work — they write through to the corresponding `Colors` members internally:
 
-| Deprecated member                    | Replacement                                  |
-| ------------------------------------ | -------------------------------------------- |
-| `BaseTheme.ColorOverrideSource`      | `OverrideSource` on `Colors` (`ThemeColors`) |
-| `BaseTheme.ColorOverrideDictionary`  | `OverrideDictionary` on `Colors` (`ThemeColors`) |
+| Deprecated member                   | Replacement                                      |
+|-------------------------------------|--------------------------------------------------|
+| `BaseTheme.ColorOverrideSource`     | `OverrideSource` on `Colors` (`ThemeColors`)     |
+| `BaseTheme.ColorOverrideDictionary` | `OverrideDictionary` on `Colors` (`ThemeColors`) |
 
 Before:
 

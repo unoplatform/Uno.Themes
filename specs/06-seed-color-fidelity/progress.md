@@ -452,10 +452,25 @@ A seven-lens review panel ran against the branch. Fixed here:
   `When_SeedIsSet_Then_EverySemanticRoleBrushFollowsItsColor` now sweeps every role against an independent
   list held in the test.
 
-Left open from the panel (not in this pass): the missing 7.x→8.0 migration section, seed alpha not masked, `SemanticThemeHelper` throwing from a getter,
+Left open from the panel (not in this pass): seed alpha not masked, `SemanticThemeHelper` throwing from a getter,
 thread-affinity of the brush mutation, no logging, the sample page's unsubscribed `ActualThemeChanged`, the
 per-key themed-dictionary re-resolution and the re-parsed `SharedColorPalette.xaml` (both per-frame during a
 picker drag), and `SetChangedCallback` being a single-slot `Action<bool>`.
+
+### Docs sweep (post-review)
+
+A full pass over `doc/` for the 8.0 rework, aimed at newcomers: `seed-colors.md` rewritten in plain
+language (prerequisites tip, "How it works" without HCT jargon, Fidelity/TonalSpot presented as a
+choice with guidance, simplified runtime section, sample-page pointer, new "Upgrading from 7.x"
+section); `material-migration.md` gained the missing "Upgrading to Uno Themes v8" section
+(palette-output change, `UseHighFidelityColors` obsoletion, live repaint); the Material/Simple
+getting-started pages now lead Customization with the seed option and their `MaterialTheme`
+properties table documents `Colors`/`DefaultCornerRadius`/`DefaultDensity` instead of only the
+deprecated `ColorOverrideSource`; Simple's color-override sample migrated to `Colors.OverrideDictionary`;
+reciprocal seed links added to `themes-overview.md`, `material-colors.md`, `design-tokens.md`,
+`semantic-styles.md`, `lightweight-styling.md`, `material-dsp.md`; Cupertino's page now states seeds
+are Material/Simple-only. cSpell and markdownlint pass on every touched file (the MD060 errors in
+`semantic-styles.md` / `simple-controls-styles.md` pre-exist on `master` — new lint rule, untouched files).
 
 ### D6 (post-review): `PreserveSeedColor` bool → `SeedColorMode` enum
 
