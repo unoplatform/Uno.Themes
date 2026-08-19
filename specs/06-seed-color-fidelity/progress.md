@@ -4,7 +4,7 @@ Status: **implemented.** Items 1-5 are done and verified; item 6 is done except 
 item 7 (release) is the only open work — see [Review](#review). This document keeps the original
 investigation intact so the reasoning behind each decision stays available.
 All five decisions (D1–D5) are settled. **Ships as 8.0** — see [Release mechanics](#release-mechanics-for-d5).
-Branch: `dev/sb/seed-color-fidelity`.
+Branch: `dev/sb/seed-color-fidelity`. Tracking issue: [unoplatform/Uno.Themes#1700](https://github.com/unoplatform/Uno.Themes/issues/1700).
 Supersedes nothing; extends [`specs/03-seed-color-palette/seed-color-palette.md`](../03-seed-color-palette/seed-color-palette.md) (the original feature, shipped in 7.0.3).
 
 ## Why this exists
