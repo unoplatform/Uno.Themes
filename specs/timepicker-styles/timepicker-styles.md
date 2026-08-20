@@ -193,3 +193,40 @@ all. New guards worth calling out:
 - Divider type (`not a TextBlock`) and control-assigned `1*` column widths, pinning the two behaviours
   that the culture and layout defects above turned on.
 - Header-less vertical centring, the case the float offset broke.
+
+## Rebase onto master, and the semantic-alias assertion that was wrong
+
+Rebased onto `master` past `DefaultSpacing`/`Density` (#1701) and seed-color fidelity (#1697). The only
+conflict was `specs/lessons.md`, where both sides had appended independent entries — kept both. The
+picker styles use no density or spacing tokens, so the `Density` breaking change does not interact.
+
+Three CI jobs were red, and only one cause was in this branch's product code — none, in fact:
+
+- **`Validate Conventional Commits`.** commitsar 0.11.2 requires a `!`-marked commit's body to *start*
+  with `BREAKING CHANGE:`; ours carried it as the last paragraph. Body reordered, content unchanged.
+- **`deploy`.** Azure Static Web Apps rejected the upload: *"This Static Web App already has the maximum
+  number of staging environments."* Infrastructure quota, not a code failure — needs stale staging
+  environments pruned. The same workflow is green on `master`.
+- **Both runtime-test jobs.** `Given_TimePickerStyles` and `Given_MaterialPickerStyles` asserted the
+  semantic aliases with `Assert.AreSame`. Measured: a `<StaticResource>` alias resolves to an
+  independent **copy** of the referenced style — different `Style`, different `ControlTemplate`,
+  identical setters — and the long-shipped `DatePickerStyle` alias behaves exactly the same. The
+  aliases were correct; the assertion was testing Uno's resource-lookup internals. Now compared by
+  `TargetType` plus setter property/value pairs, which still fails if an alias points at the wrong
+  style or is missing. See `specs/lessons.md`.
+
+`TimePickerFlyoutPresenter` has no public parameterless constructor, so the presenter alias cannot be
+verified by applying the style to an instance the way `Given_SemanticStyles` does for buttons — hence
+the style-level comparison, which covers the control style and the presenter style uniformly.
+
+### Results after the rebase (net10.0-desktop, Release)
+
+- `Uno.Themes-packages.slnf` — **build succeeded**, no new warnings.
+- `SimpleSampleApp` — **203 passed, 0 failed, 1 skipped** (the pre-existing `[Ignore]` on
+  `Given_HotReload.When_BaseThemeIsCollected_Then_HotReloadHandlerDoesNotResurrectIt`).
+- `MaterialSampleApp` — **58 passed, 0 failed**.
+
+Local note: these samples do not restore on a machine with the `maui` workload installed —
+`Microsoft.NETCore.App.Runtime.Mono.win-x64` 10.0.1 has no 10.x release on nuget.org, so restore fails
+with NU1102. It reproduces on a clean `master` worktree, i.e. it is environmental. `-p:UseMonoRuntime=false`
+works around it without touching the workload install.

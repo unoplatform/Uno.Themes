@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
@@ -149,21 +150,74 @@ public class Given_MaterialPickerStyles
 		Assert.IsInstanceOfType(resource, typeof(Style), $"{styleKey} should be a Style");
 	}
 
+	/// <summary>
+	/// A <c>&lt;StaticResource&gt;</c> alias hands back an independent *copy* of the style it points at —
+	/// measured, and true of the long-shipped <c>DatePickerStyle</c> alias as well. So neither the
+	/// <see cref="Style"/> nor its <see cref="ControlTemplate"/> is reference-equal to the theme-specific
+	/// key's, and <c>Assert.AreSame</c> on either only tests Uno's resource-lookup internals.
+	///
+	/// The contract the docs actually publish ("Direct match" in <c>doc/semantic-styles.md</c>) is that
+	/// the semantic key styles the control the same way, so this compares what the two styles actually
+	/// set — every setter's property and value. An alias resolving to the wrong style, or missing
+	/// entirely (leaving the Fluent default in place), still fails.
+	///
+	/// Compared at the style level rather than by applying both to controls, as
+	/// <c>Given_SemanticStyles</c> does for the button aliases, because
+	/// <see cref="TimePickerFlyoutPresenter"/> has no public parameterless constructor and so cannot be
+	/// instantiated by a test.
+	/// </summary>
 	[TestMethod]
 	[RunsOnUIThread]
-	public void When_SemanticMaterialTimePickerKeys_Requested_ThenTheyAliasTheMaterialStyles()
+	[DataRow("TimePickerStyle", "MaterialTimePickerStyle")]
+	[DataRow("TimePickerFlyoutPresenterStyle", "MaterialTimePickerFlyoutPresenterStyle")]
+	public void When_SemanticMaterialTimePickerKeys_Requested_ThenTheyMatchTheMaterialStyles(
+		string semanticKey,
+		string materialKey)
 	{
 		var container = CreateThemedContainer();
 
-		Assert.AreSame(
-			container.Resources["MaterialTimePickerStyle"],
-			container.Resources["TimePickerStyle"],
-			"TimePickerStyle should alias MaterialTimePickerStyle");
-		Assert.AreSame(
-			container.Resources["MaterialTimePickerFlyoutPresenterStyle"],
-			container.Resources["TimePickerFlyoutPresenterStyle"],
-			"TimePickerFlyoutPresenterStyle should alias MaterialTimePickerFlyoutPresenterStyle");
+		AssertStylesMatch(
+			container.Resources[materialKey] as Style,
+			container.Resources[semanticKey] as Style,
+			$"{semanticKey} vs {materialKey}");
 	}
+
+	/// <summary>
+	/// Compares two styles by target type and by the values their setters carry, rather than by
+	/// reference. <c>Template</c> and <see cref="Style"/>-valued setters are skipped — those are the
+	/// copied object references, not observable styling.
+	/// </summary>
+	private static void AssertStylesMatch(Style? expected, Style? actual, string context)
+	{
+		Assert.IsNotNull(expected, $"{context}: the theme-specific key should resolve to a Style");
+		Assert.IsNotNull(actual, $"{context}: the semantic key should resolve to a Style");
+		Assert.AreEqual(expected!.TargetType, actual!.TargetType, $"{context}: TargetType should match");
+
+		var expectedSetters = DescribeSetters(expected);
+		var actualSetters = DescribeSetters(actual);
+
+		Assert.IsTrue(
+			expectedSetters.Count >= 5,
+			$"{context}: only {expectedSetters.Count} setters were comparable — the sweep is no longer meaningful");
+		CollectionAssert.AreEquivalent(
+			expectedSetters,
+			actualSetters,
+			$"{context}: the two styles should set the same properties to the same values");
+	}
+
+	/// <summary>
+	/// Renders a style's setters as <c>property=value</c> strings. Values are stringified rather than
+	/// compared by reference: brushes, <c>FontFamily</c> and friends have no cross-instance equality
+	/// guarantee, and the alias hands back copies of all of them.
+	/// </summary>
+	private static List<string> DescribeSetters(Style style) => style.Setters
+		.OfType<Setter>()
+		.Where(setter => setter.Property is not null && setter.Property != Control.TemplateProperty)
+		.Where(setter => setter.Value is not (Style or ControlTemplate))
+		.Select(setter => setter.Value is SolidColorBrush brush
+			? $"{setter.Property}={brush.Color}"
+			: $"{setter.Property}={setter.Value}")
+		.ToList();
 
 	[TestMethod]
 	[RunsOnUIThread]

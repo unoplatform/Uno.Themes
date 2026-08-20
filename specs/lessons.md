@@ -4,6 +4,41 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A `<StaticResource>` alias hands back a *copy* — asserting `AreSame` on a semantic style key tests the resource system, not the alias
+
+**Context:** TimePicker styles. `Given_TimePickerStyles` and `Given_MaterialPickerStyles` asserted the
+semantic aliases with `Assert.AreSame(Resources["SimpleTimePickerStyle"], Resources["TimePickerStyle"])`.
+Both went red in CI (3 of the 4 failing jobs on the PR) while the aliases were, in fact, correct.
+
+**Root cause:** `<StaticResource x:Key="TimePickerStyle" ResourceKey="SimpleTimePickerStyle" />` resolves
+to an **independent copy** of the referenced `Style` — a different `Style` instance carrying a different
+`ControlTemplate` instance, though with an identical setter list. Measured directly: two lookups of the
+*same* key return the same instance (`sameKeyTwice=True`), but the alias key never matches the key it
+points at (`semanticVsSimple=False`) — and that is equally true of the long-shipped `DatePickerStyle`
+alias, which no test had ever asserted this way. The assertion encoded a guarantee Uno does not make.
+
+**How to apply:**
+- Never assert reference identity across two resource **keys**. Identity holds for repeated lookups of
+  one key; it does not survive a `<StaticResource>` alias. This also rules out comparing the styles'
+  `ControlTemplate` values, which are copied along with the style.
+- Assert what the styles **set**, not what they *are*: compare `TargetType` plus every setter's property
+  and value. That is the contract `doc/semantic-styles.md` publishes ("Direct match"), and it still fails
+  if an alias points at the wrong style or is missing entirely (leaving the Fluent default in place).
+  `Given_SemanticStyles` does the stronger version for buttons — apply both styles to real controls and
+  compare rendered values — but that is not available for every key: `TimePickerFlyoutPresenter` (like
+  the other flyout presenters) has **no public parameterless constructor**, so a test cannot instantiate
+  one. Style-level comparison is the form that covers both a control style and a presenter style.
+- When comparing values, stringify rather than compare references: `FontFamily` and friends are reference
+  types with no cross-instance equality guarantee. Compare `SolidColorBrush` by `Color`, and skip
+  `Template` / `Style`-valued setters — those are the copied references, not observable styling.
+- **Before rewriting an assertion that fails, measure which half is wrong.** Two rounds were burned here
+  guessing at a stronger identity check; one throwaway test that printed the four reference-equality
+  facts (and compared against the shipped `DatePicker` alias as a control) settled it in a single run.
+  When a new test fails, check the equivalent shipped feature first — if it behaves identically, the test
+  is wrong, not the feature.
+
+---
+
 ## A design-token "mode" (density) must be a factor over the scale's base unit, never a competing source of the base value
 
 **Context:** Spec 07 (`DefaultSpacing`, issue #1688). The first implementation gave `Density` enum members base-unit pixel values (`Compact = 3`, `Regular = 4`, `Comfy = 5`) and made `DefaultSpacing` an *override* that beat the preset ("override-beats-preset, like the color stack"). The user rejected this: density is a **mode** the consumer picks (Compact / Regular / Comfy), not an alternate spelling of a pixel value.
