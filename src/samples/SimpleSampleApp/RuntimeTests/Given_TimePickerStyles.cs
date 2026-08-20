@@ -449,9 +449,16 @@ public class Given_TimePickerStyles
 			3,
 			populated.Count,
 			"The control should have starred the three populated hour/minute/period columns");
-		Assert.IsTrue(
-			populated.All(c => c.Width.Value == 1.0),
-			"Every populated column should carry the control's 1* width");
+		foreach (var column in populated)
+		{
+			// Delta rather than == : GridLength.Value is a double, and the control computes it
+			// rather than echoing the literal the template declared.
+			Assert.AreEqual(
+				1.0,
+				column.Width.Value,
+				0.0001,
+				"Every populated column should carry the control's 1* width");
+		}
 	}
 
 	[TestMethod]
