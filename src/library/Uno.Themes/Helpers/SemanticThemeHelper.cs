@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -20,8 +19,7 @@ public static class SemanticThemeHelper
 	/// Gets the <see cref="BaseTheme"/> instance from <see cref="Application.Current.Resources"/>.
 	/// Returns <c>null</c> if no <see cref="BaseTheme"/> is found.
 	/// </summary>
-	public static BaseTheme GetTheme() =>
-		Application.Current?.Resources?.MergedDictionaries.OfType<BaseTheme>().FirstOrDefault();
+	public static BaseTheme GetTheme() => Application.Current.GetTheme();
 
 	/// <summary>
 	/// Gets or sets the primary seed color on the active theme.

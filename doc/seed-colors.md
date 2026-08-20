@@ -167,6 +167,22 @@ if (theme?.Colors is { } colors)
 }
 ```
 
+### Instance-Based Access via `ApplicationExtensions`
+
+`SemanticThemeHelper.GetTheme()` always reads from `Application.Current`. When you hold a specific `Application` instance — for example in multi-app or hosted scenarios where `Application.Current` is not the application whose theme you want — use the `application.GetTheme()` extension method instead:
+
+```csharp
+using Uno.Themes;
+
+var theme = someApplication.GetTheme();
+if (theme?.Colors is { } colors)
+{
+    colors.PrimarySeed = myColor;
+}
+```
+
+`SemanticThemeHelper.GetTheme()` is equivalent to `Application.Current.GetTheme()`.
+
 > [!TIP]
 > The Material and Simple sample apps in this repository include a **Seed Color** page (under *Styles*) with a live color picker — drag it and watch the entire app re-theme in real time, and switch between the two generation modes to compare them.
 
@@ -205,6 +221,14 @@ Static convenience class for runtime theme configuration.
 | `SecondarySeed` | Property | Gets or sets the secondary seed color. `null` to auto-derive from primary.                         |
 | `TertiarySeed`  | Property | Gets or sets the tertiary seed color. `null` to auto-derive from primary.                          |
 | `SeedColorMode` | Property | Gets or sets the generation mode on the active theme: `Fidelity` (default) or `TonalSpot`.         |
+
+### `ApplicationExtensions`
+
+Extension methods on `Application` for theme access.
+
+| Member                       | Type             | Description                                                                                          |
+|------------------------------|------------------|------------------------------------------------------------------------------------------------------|
+| `GetTheme(this Application)` | Extension method | Returns the `BaseTheme` instance from the given application's resources, or `null` if none is found. |
 
 ## Color Precedence
 
