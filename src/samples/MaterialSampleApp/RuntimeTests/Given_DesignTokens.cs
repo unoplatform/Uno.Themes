@@ -20,10 +20,12 @@ public class Given_DesignTokens
 
 	private static (Grid container, MaterialTheme theme) CreateThemedContainer(
 		Density density = Density.Regular,
-		double cornerRadius = 4.0)
+		double cornerRadius = 4.0,
+		double spacing = 4.0)
 	{
 		var theme = new MaterialTheme
 		{
+			DefaultSpacing = spacing,
 			DefaultDensity = density,
 			DefaultCornerRadius = cornerRadius,
 		};
@@ -328,6 +330,167 @@ public class Given_DesignTokens
 		// ButtonCornerRadius = Radius500CornerRadius = CornerRadius(6×5=30)
 		Assert.AreEqual(new CornerRadius(30), button.CornerRadius,
 			"FilledButton CornerRadius should be 30 at base=6 (Radius500 = 6×5)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_FilledButton_WithCustomSpacingAndCompactDensity_Then_PaddingComposes()
+	{
+		var (container, _) = CreateThemedContainer(Density.Compact, spacing: 6.0);
+
+		var style = container.Resources["FilledButtonStyle"] as Style;
+		Assert.IsNotNull(style, "FilledButtonStyle should exist");
+
+		var button = new Button { Content = "Composed", Style = style };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// ButtonPadding = Space400HorizontalThickness = (6 × 0.75) × 4 = 18
+		Assert.AreEqual(new Thickness(18, 0, 18, 0), button.Padding,
+			"FilledButton Padding should compose DefaultSpacing × Compact factor (6 × 0.75 × 4 = 18)");
+	}
+
+	// ═══════════════════════════════════════════════════════════════════════
+	// 8.bis LIVE RESTYLE — an already-rendered control picks up a new spacing
+	//        scale after the theme is refreshed and a theme-change pass forces
+	//        ThemeResource bindings to re-resolve
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ThemeSwappedAndThemeFlipped_Then_RenderedButtonRestyles()
+	{
+		var (container, _) = CreateThemedContainer();
+
+		var style = container.Resources["FilledButtonStyle"] as Style;
+		Assert.IsNotNull(style, "FilledButtonStyle should exist");
+
+		var button = new Button { Content = "Live", Style = style };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.AreEqual(new Thickness(16, 0, 16, 0), button.Padding,
+			"Sanity: Regular density padding before the swap");
+
+		// Swap in a fresh theme carrying the new scale, then force a theme-change pass so the
+		// already-applied style's ThemeResource setters re-resolve against it.
+		var dense = new MaterialTheme
+		{
+			DefaultSpacing = 8.0,
+			DefaultDensity = Density.Compact,
+		};
+		container.Resources.MergedDictionaries.Clear();
+		container.Resources.MergedDictionaries.Add(dense);
+
+		FlipRequestedTheme(container);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// ButtonPadding = Space400HorizontalThickness = (8 × 0.75) × 4 = 24
+		Assert.AreEqual(new Thickness(24, 0, 24, 0), button.Padding,
+			"The rendered button should restyle to the swapped theme's composed padding (8 × 0.75 × 4 = 24)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SourceReloadedAfterSpacingChangeAndThemeFlipped_Then_RenderedButtonRestyles()
+	{
+		var (container, theme) = CreateThemedContainer();
+
+		var style = container.Resources["FilledButtonStyle"] as Style;
+		Assert.IsNotNull(style, "FilledButtonStyle should exist");
+
+		var button = new Button { Content = "Live", Style = style };
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.AreEqual(new Thickness(16, 0, 16, 0), button.Padding,
+			"Sanity: Regular density padding before the change");
+
+		// Reload the static control-style layer in place so its per-control alias keys
+		// (ButtonPadding → Space400HorizontalThickness) re-materialize, set the new scale
+		// (the property-changed callbacks rebuild the dynamic token layers), then force a
+		// theme-change pass so live ThemeResource bindings re-resolve.
+		theme.Source = new Uri(theme.Source.OriginalString);
+		theme.DefaultSpacing = 8.0;
+		theme.DefaultDensity = Density.Compact;
+
+		FlipRequestedTheme(container);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		// ButtonPadding = Space400HorizontalThickness = (8 × 0.75) × 4 = 24
+		Assert.AreEqual(new Thickness(24, 0, 24, 0), button.Padding,
+			"The rendered button should restyle to the reloaded theme's composed padding (8 × 0.75 × 4 = 24)");
+	}
+
+	private static void FlipRequestedTheme(FrameworkElement root)
+	{
+		var original = root.RequestedTheme;
+		root.RequestedTheme = root.ActualTheme == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;
+		root.RequestedTheme = original;
+	}
+
+	// ═══════════════════════════════════════════════════════════════════════
+	// 9. SAMPLE-PAGE INTEGRATION — the spacing & density page applies the knob
+	//    values to the RUNNING app theme and restyles the live tree
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_SpacingDensitySamplePage_KnobsChanged_Then_AppThemeRestylesLive()
+	{
+		var theme = SemanticThemeHelper.GetTheme();
+		Assert.IsNotNull(theme, "The sample app should carry a BaseTheme in Application.Resources");
+
+		var originalSpacing = theme.DefaultSpacing;
+		var originalDensity = theme.DefaultDensity;
+		var page = new Samples.Content.Styles.SpacingDensitySamplePage();
+		try
+		{
+			UnitTestsUIContentHelper.Content = page;
+			await UnitTestsUIContentHelper.WaitForLoaded(page);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var slider = page.FindName("SpacingSlider") as Slider;
+			var combo = page.FindName("DensityCombo") as ComboBox;
+			var button = page.FindName("PreviewFilledButton") as Button;
+			Assert.IsNotNull(slider, "SpacingSlider should exist");
+			Assert.IsNotNull(combo, "DensityCombo should exist");
+			Assert.IsNotNull(button, "PreviewFilledButton should exist");
+
+			slider.Value = 8;
+			combo.SelectedIndex = 0; // Compact
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			// The page writes through to the running app theme…
+			Assert.AreEqual(8.0, theme.DefaultSpacing, 0.001, "The page should apply DefaultSpacing to the app theme");
+			Assert.AreEqual(Density.Compact, theme.DefaultDensity, "The page should apply DefaultDensity to the app theme");
+
+			// …and the already-rendered preview button restyles live:
+			// ButtonPadding = Space400HorizontalThickness = (8 × 0.75) × 4 = 24
+			Assert.AreEqual(new Thickness(24, 0, 24, 0), button.Padding,
+				"The rendered preview Button should restyle live to the composed padding (8 × 0.75 × 4 = 24)");
+		}
+		finally
+		{
+			// Restore the global theme for subsequent tests, using the same recipe as the page.
+			if (theme.DefaultSpacing != originalSpacing || theme.DefaultDensity != originalDensity)
+			{
+				theme.Source = new Uri(theme.Source.OriginalString);
+				theme.DefaultSpacing = originalSpacing;
+				theme.DefaultDensity = originalDensity;
+				if (page.XamlRoot?.Content is FrameworkElement root)
+				{
+					FlipRequestedTheme(root);
+				}
+			}
+		}
 	}
 
 }

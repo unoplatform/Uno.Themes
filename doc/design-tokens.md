@@ -84,7 +84,7 @@ For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with
 >
 > Assigning them later does regenerate the `Radius*` and `Space*` token resources, but it does **not** restyle controls: neither the ones already on screen nor ones created afterwards. Unlike colors — which *can* change live, see [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes) — these tokens are `CornerRadius` / `Thickness` / `double` **values**, and the per-control keys that consume them (`ButtonCornerRadius`, `ButtonPadding`, …) are resolved once when the theme's control-style dictionaries are first parsed. There is no live instance to update, so the new value never reaches the control templates.
 >
-> If you need to offer density or shape as a user setting, change the property and then recreate the root content (or re-navigate) so the styles are applied fresh.
+> If you need to offer density or shape as a user setting, change the property and then recreate the root content (or re-navigate) so the styles are applied fresh. The **Spacing & Density** sample page (`SpacingDensitySamplePage` in the sample apps) demonstrates a live variant of this recipe: as you drag the spacing slider or switch density modes it reloads the running theme's style layer, applies the new values, and forces a theme-change pass so the whole app restyles in place.
 
 ### Via Lightweight Styling
 
