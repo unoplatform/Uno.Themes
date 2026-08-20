@@ -68,17 +68,19 @@ Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSiz
 
 ### Via Scalar Properties
 
-Set `DefaultCornerRadius` (shape) or `DefaultDensity` (spacing) on the theme to generate an entire scale from a single base value:
+Set `DefaultCornerRadius` (shape) or `DefaultSpacing` (spacing) on the theme to generate an entire scale from a single base value:
 
 ```xml
 <!-- App.xaml -->
-<MaterialTheme DefaultCornerRadius="4" DefaultDensity="Comfy" />
+<MaterialTheme DefaultCornerRadius="4" DefaultSpacing="6" />
 ```
 
 This generates all `Radius*` / `Space*` tokens as multiples of the base value. The same properties are available on `SimpleTheme`.
 
+For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5.
+
 > [!IMPORTANT]
-> `DefaultCornerRadius` and `DefaultDensity` are **construction-time settings**. Set them where the theme is declared — normally `App.xaml` — and treat them as fixed for the lifetime of the theme.
+> `DefaultCornerRadius`, `DefaultSpacing`, and `DefaultDensity` are **construction-time settings**. Set them where the theme is declared — normally `App.xaml` — and treat them as fixed for the lifetime of the theme.
 >
 > Assigning them later does regenerate the `Radius*` and `Space*` token resources, but it does **not** restyle controls: neither the ones already on screen nor ones created afterwards. Unlike colors — which *can* change live, see [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes) — these tokens are `CornerRadius` / `Thickness` / `double` **values**, and the per-control keys that consume them (`ButtonCornerRadius`, `ButtonPadding`, …) are resolved once when the theme's control-style dictionaries are first parsed. There is no live instance to update, so the new value never reaches the control templates.
 >
@@ -98,32 +100,31 @@ To override individual tokens without changing the whole scale, use standard XAM
 
 ### Properties Reference
 
-| Property              | Type      | Description                                                                                   |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------|
-| `DefaultCornerRadius` | `double`  | Base corner radius unit; generates the full `Radius*` scale. Construction-time.               |
-| `DefaultDensity`      | `Density` | Preset that sets the base spacing unit; generates the full `Space*` scale. Construction-time. |
+| Property              | Type      | Description                                                                                                                             |
+|-----------------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| `DefaultCornerRadius` | `double`  | Base corner radius unit; generates the full `Radius*` scale. Construction-time.                                                         |
+| `DefaultSpacing`      | `double`  | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Construction-time.               |
+| `DefaultDensity`      | `Density` | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Construction-time.                       |
 
-These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). Both are construction-time settings — see the note above. Color configuration lives on the separate `Colors` property (`ThemeColors`), which *does* support runtime changes — see [Seed Color Palette](seed-colors.md).
+These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All are construction-time settings — see the note above. Color configuration lives on the separate `Colors` property (`ThemeColors`), which *does* support runtime changes — see [Seed Color Palette](seed-colors.md).
 
-There is no separate `DefaultSpacing` property; the base spacing unit is selected through `DefaultDensity`.
-
-### Density
+### Density Modes
 
 The `DefaultDensity` property controls the spacing density of all controls.
-It adjusts padding and margins (Space* tokens) while keeping control heights and icon sizes constant:
+It is a *mode*, not a value: it scales the `DefaultSpacing` base unit (effective base = `DefaultSpacing × factor`), adjusting padding and margins (Space* tokens) while keeping control heights and icon sizes constant. The two axes are orthogonal — a branded base unit and a density mode compose freely. The fixed tokens (`ControlHeight*`, `IconSize*`, `TouchTargetMinSize`) never change across density modes.
 
-| DefaultDensity      | Base Spacing | Feel                               |
-|---------------------|:------------:|------------------------------------|
-| `Compact`           |      3       | Tighter padding for data-dense UIs |
-| `Regular` (default) |      4       | Balanced spacing                   |
-| `Comfy`             |      5       | More generous padding              |
+| DefaultDensity      | Factor | Base at default spacing (4) | Feel                               |
+|---------------------|:------:|:---------------------------:|------------------------------------|
+| `Compact`           | ×0.75  |              3              | Tighter padding for data-dense UIs |
+| `Regular` (default) |   ×1   |              4              | Balanced spacing                   |
+| `Comfy`             | ×1.25  |              5              | More generous padding              |
 
 ```xml
 <!-- App.xaml — Material with compact density -->
 <MaterialTheme xmlns="using:Uno.Material" DefaultDensity="Compact" />
 
-<!-- App.xaml — Simple with comfortable density -->
-<SimpleTheme xmlns="using:Uno.Simple" DefaultDensity="Comfy" />
+<!-- App.xaml — Simple: branded 6px base unit in comfortable mode (effective base 7.5) -->
+<SimpleTheme xmlns="using:Uno.Simple" DefaultSpacing="6" DefaultDensity="Comfy" />
 ```
 
 Pick the density where the theme is declared. Switching it at runtime does not restyle existing or newly-created controls — see [Via Scalar Properties](#via-scalar-properties).

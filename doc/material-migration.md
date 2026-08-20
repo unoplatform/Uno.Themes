@@ -48,7 +48,7 @@ Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic 
 
 - **Simple theme**: new `Uno.Simple.WinUI` and `Uno.Simple.WinUI.Markup` packages providing a minimal, density-driven design system. See [Simple - Getting Started](simple-getting-started.md).
 - **Semantic Design Language**: design-system-agnostic style aliases (`FilledButtonStyle`, `OutlinedTextBoxStyle`, …) shared by Material and Simple, so apps can switch design systems without changing style keys. See [Semantic Design Language](semantic-styles.md).
-- **Design tokens**: spacing (`Space*`), shape (`Radius*`), and density (`ControlHeight*`, `IconSize*`) tokens, driven globally by the new `DefaultDensity` and `DefaultCornerRadius` theme properties. See [Design Tokens](design-tokens.md).
+- **Design tokens**: spacing (`Space*`), shape (`Radius*`), and density (`ControlHeight*`, `IconSize*`) tokens, driven globally by the new `DefaultSpacing`, `DefaultDensity`, and `DefaultCornerRadius` theme properties. See [Design Tokens](design-tokens.md).
 - **Seed color generation** (opt-in): generate a full palette from one or more seed colors via the new `Colors` property (`ThemeColors`) and `SemanticThemeHelper`. See [Seed Color Palette](seed-colors.md).
 - **Control extensions**: new `ControlExtensions.LeadingIcon` and `ControlExtensions.TrailingIcon` attached properties; `ControlExtensions.Icon` keeps working and now forwards its value to `LeadingIcon`. See [Control Extensions](themes-control-extensions.md).
 - **XAML Hot Reload**: theme resources now participate in Hot Reload.
@@ -130,7 +130,7 @@ Material v2 sizing, spacing, and corner-radius resources are no longer hard-code
 | `ButtonPadding`      | `16,0`    | `Space400HorizontalThickness` | `16,0`        |
 | `ButtonCornerRadius` | `20`      | `Radius500CornerRadius`       | `20`          |
 
-Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultDensity` (`Compact` / `Regular` / `Comfy`) and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
+Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultSpacing`, `DefaultDensity` (`Compact` / `Regular` / `Comfy`), and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
 
 ### `StringFormatConverter` is now culture-aware
 

@@ -37,7 +37,8 @@ Initialization of the Uno Material resources is handled by the specialized `Mate
 | `Colors`              | `ThemeColors` | (Optional) Groups all color configuration: seed colors (`PrimarySeed`, …), the generation mode (`SeedColorMode`), and color overrides. See [Seed Color Palette](xref:Uno.Themes.SeedColors). |
 | `FontOverrideSource`  | `string`      | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno Material font resources           |
 | `DefaultCornerRadius` | `double`      | (Optional) Base corner-radius unit driving the shape design tokens. See [Design Tokens](design-tokens.md).                                                                                   |
-| `DefaultDensity`      | `Density`     | (Optional) Spacing density preset (`Compact` / `Regular` / `Comfy`) driving the spacing design tokens. See [Design Tokens](design-tokens.md).                                                |
+| `DefaultSpacing`      | `double`      | (Optional) Base spacing unit (default 4) driving the spacing design tokens; scaled by the `DefaultDensity` mode. See [Design Tokens](design-tokens.md).                                      |
+| `DefaultDensity`      | `Density`     | (Optional) Density mode (`Compact` / `Regular` / `Comfy`) scaling the spacing base unit by ×0.75 / ×1 / ×1.25. See [Design Tokens](design-tokens.md).                                        |
 | `ColorOverrideSource` | `string`      | (Deprecated) Use `OverrideSource` on `Colors` instead — see the [migration notes](xref:Uno.Themes.Material.Migration).                                                                       |
 
 ### Creating a new project with Uno Material

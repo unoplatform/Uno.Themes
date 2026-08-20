@@ -22,18 +22,19 @@ namespace Uno.Themes;
 
 /// <summary>
 /// Controls the spacing density applied to all controls.
-/// Drives the base spacing unit used by all Space* tokens.
+/// A density is a <em>mode</em>: it scales the base spacing unit
+/// (<see cref="BaseTheme.DefaultSpacing"/>) without defining it.
 /// </summary>
 public enum Density
 {
-	/// <summary>Compact — base spacing unit = 3 px, tighter padding for data-dense UIs.</summary>
-	Compact = 3,
+	/// <summary>Compact — spacing scaled to 0.75× the base unit; tighter padding for data-dense UIs.</summary>
+	Compact,
 
-	/// <summary>Regular (default) — base spacing unit = 4 px, balanced spacing.</summary>
-	Regular = 4,
+	/// <summary>Regular (default) — spacing at 1× the base unit; balanced spacing.</summary>
+	Regular,
 
-	/// <summary>Comfortable — base spacing unit = 5 px, more generous padding.</summary>
-	Comfy = 5,
+	/// <summary>Comfortable — spacing scaled to 1.25× the base unit; more generous padding.</summary>
+	Comfy,
 }
 
 public abstract partial class BaseTheme : ResourceDictionary
@@ -310,11 +311,58 @@ public abstract partial class BaseTheme : ResourceDictionary
 	}
 	#endregion
 
+	#region DefaultSpacing (DP)
+	/// <summary>
+	/// The default base spacing unit (px) when <see cref="DefaultSpacing"/> is not set
+	/// or holds an invalid (non-finite or negative) value.
+	/// </summary>
+	private const double DefaultBaseSpacing = 4.0;
+
+	/// <summary>
+	/// Gets or sets the base spacing unit (in pixels). Default is 4.
+	/// All spacing scale tokens (Space0, Space050, Space100, …) and their
+	/// <see cref="Thickness"/> companions are computed as multiples of this value,
+	/// scaled by the <see cref="DefaultDensity"/> mode —
+	/// e.g. <c>DefaultSpacing="6"</c> at <see cref="Density.Regular"/> makes
+	/// Space100=6, Space200=12, Space400=24; at <see cref="Density.Compact"/> Space100=4.5.
+	/// Individual tokens can still be overridden via lightweight styling.
+	/// </summary>
+	/// <remarks>
+	/// This is a <b>construction-time</b> setting, for the same reason as
+	/// <see cref="DefaultCornerRadius"/>: assigning it later regenerates the <c>Space*</c> token
+	/// resources but does not restyle controls, because the per-control padding and margin keys
+	/// hold resolved <see cref="Thickness"/> values. To offer spacing as a user setting, change the
+	/// property and then recreate the root content.
+	/// Non-finite or negative values are treated as unset and fall back to the default of 4.
+	/// </remarks>
+	public double DefaultSpacing
+	{
+		get => (double)GetValue(DefaultSpacingProperty);
+		set => SetValue(DefaultSpacingProperty, value);
+	}
+
+	public static DependencyProperty DefaultSpacingProperty { get; } =
+		DependencyProperty.Register(
+			nameof(DefaultSpacing),
+			typeof(double),
+			typeof(BaseTheme),
+			new PropertyMetadata(DefaultBaseSpacing, OnDefaultSpacingChanged));
+
+	private static void OnDefaultSpacingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+	{
+		if (d is BaseTheme theme)
+		{
+			theme.UpdateSource();
+		}
+	}
+	#endregion
+
 	#region DefaultDensity (DP)
 	/// <summary>
-	/// Gets or sets the density preset for the theme. Default is <see cref="Density.Regular"/>.
-	/// This drives the base spacing unit used by all Space* tokens:
-	/// Compact = 3, Regular = 4, Comfy = 5.
+	/// Gets or sets the density mode for the theme. Default is <see cref="Density.Regular"/>.
+	/// The mode scales the <see cref="DefaultSpacing"/> base unit used by all Space* tokens
+	/// (Compact = ×0.75, Regular = ×1, Comfy = ×1.25), so density and spacing compose:
+	/// the effective base unit is <c>DefaultSpacing × density factor</c>.
 	/// Control heights and icon sizes remain constant across densities.
 	/// </summary>
 	/// <remarks>
@@ -426,8 +474,22 @@ public abstract partial class BaseTheme : ResourceDictionary
 		// every colour, spacing and shape key out of the consuming app permanently.
 		var colors = BuildColorLayer(out var resolvedOverride);
 
-		var baseSpacing = Enum.IsDefined(DefaultDensity) ? (double)DefaultDensity : 4.0;
-		var spacing = GenerateSpacingScale(baseSpacing);
+		// Spacing and density are orthogonal: DefaultSpacing supplies the base unit, the density
+		// mode scales it. Non-finite or negative consumer values degrade to the default base (4)
+		// instead of poisoning every Space* token — this runs from property-changed callbacks and
+		// must not misbehave on untrusted input.
+		var requestedSpacing = DefaultSpacing;
+		var baseSpacing = double.IsFinite(requestedSpacing) && requestedSpacing >= 0
+			? requestedSpacing
+			: DefaultBaseSpacing;
+		// Factors chosen so the default base of 4 yields the historical presets: 3 / 4 / 5.
+		var densityFactor = DefaultDensity switch
+		{
+			Density.Compact => 0.75,
+			Density.Comfy => 1.25,
+			_ => 1.0, // Regular, and graceful fallback for undefined enum values
+		};
+		var spacing = GenerateSpacingScale(baseSpacing * densityFactor);
 		var shape = GenerateShapeScale(DefaultCornerRadius);
 		var density = GenerateDensityDefaults();
 
