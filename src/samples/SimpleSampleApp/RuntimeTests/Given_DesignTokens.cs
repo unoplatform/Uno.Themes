@@ -20,12 +20,14 @@ public class Given_DesignTokens
 
 	private static (Grid container, SimpleTheme theme) CreateThemedContainer(
 		Density density = Density.Regular,
-		double cornerRadius = 4.0)
+		double cornerRadius = 4.0,
+		double spacing = double.NaN)
 	{
 		var theme = new SimpleTheme
 		{
 			DefaultDensity = density,
 			DefaultCornerRadius = cornerRadius,
+			DefaultSpacing = spacing,
 		};
 		var container = new Grid();
 		container.Resources.MergedDictionaries.Add(theme);
@@ -270,7 +272,107 @@ public class Given_DesignTokens
 	}
 
 	// ═══════════════════════════════════════════════════════════════════════
-	// 8. VISUAL INTEGRATION — render actual controls, verify layout values
+	// 8. DEFAULT SPACING — base unit; the density mode scales it (×0.75/×1/×1.25)
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(6.0, "Space0", 0.0)]     // zero is always zero
+	[DataRow(6.0, "Space050", 3.0)]   // base=6 × 0.5
+	[DataRow(6.0, "Space100", 6.0)]   // base=6 × 1
+	[DataRow(6.0, "Space400", 24.0)]  // base=6 × 4
+	[DataRow(2.5, "Space200", 5.0)]   // fractional base
+	[DataRow(0.0, "Space100", 0.0)]   // zero is a valid base
+	public void When_DefaultSpacingSet_Then_SpaceTokenHasCorrectValue(
+		double spacing, string tokenKey, double expected)
+	{
+		var (container, _) = CreateThemedContainer(Density.Regular, spacing: spacing);
+		var actual = GetResource<double>(container, tokenKey);
+		Assert.AreEqual(expected, actual, 0.001,
+			$"{tokenKey} at DefaultSpacing={spacing}: expected {expected}, got {actual}");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(Density.Compact, 6.0, 4.5)]  // 6 × 0.75
+	[DataRow(Density.Regular, 6.0, 6.0)]  // 6 × 1
+	[DataRow(Density.Comfy, 6.0, 7.5)]    // 6 × 1.25
+	[DataRow(Density.Compact, 8.0, 6.0)]  // 8 × 0.75
+	public void When_DefaultSpacingAndDensitySet_Then_TheyCompose(
+		Density density, double spacing, double expectedBase)
+	{
+		// Density is a mode over the spacing base unit, not a competing setting:
+		// effective base = DefaultSpacing × density factor.
+		var (container, _) = CreateThemedContainer(density, spacing: spacing);
+		Assert.AreEqual(expectedBase, GetResource<double>(container, "Space100"), 0.001);
+		Assert.AreEqual(expectedBase * 2, GetResource<double>(container, "Space200"), 0.001);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingSet_Then_ThicknessCompanionsDeriveFromIt()
+	{
+		var (container, _) = CreateThemedContainer(Density.Regular, spacing: 6.0);
+
+		Assert.AreEqual(new Thickness(12), GetResource<Thickness>(container, "Space200Thickness"));
+		Assert.AreEqual(new Thickness(6, 0, 6, 0), GetResource<Thickness>(container, "Space100HorizontalThickness"));
+		Assert.AreEqual(new Thickness(0, 6, 0, 0), GetResource<Thickness>(container, "Space100TopThickness"));
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingChangedAtRuntime_Then_DensityModeStillApplies()
+	{
+		var (container, theme) = CreateThemedContainer(Density.Comfy);
+		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
+			"Default base (4) × Comfy (1.25) should be 5");
+
+		theme.DefaultSpacing = 6.0;
+		Assert.AreEqual(7.5, GetResource<double>(container, "Space100"), 0.001,
+			"New base (6) × Comfy (1.25) should be 7.5");
+
+		theme.DefaultSpacing = double.NaN;
+		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
+			"An invalid base (NaN) should restore the default base (4) × Comfy (1.25)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(double.NaN)]
+	[DataRow(-1.0)]
+	[DataRow(double.PositiveInfinity)]
+	[DataRow(double.NegativeInfinity)]
+	public void When_DefaultSpacingInvalid_Then_FallsBackToDefaultBase(double invalid)
+	{
+		var (container, _) = CreateThemedContainer(Density.Comfy, spacing: invalid);
+		Assert.AreEqual(5.0, GetResource<double>(container, "Space100"), 0.001,
+			$"DefaultSpacing={invalid} should fall back to the default base (4) × Comfy (1.25)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingChanges_Then_ShapeTokensAreUnaffected()
+	{
+		var (container, theme) = CreateThemedContainer(spacing: 6.0, cornerRadius: 4.0);
+		Assert.AreEqual(8.0, GetResource<double>(container, "Radius200"), 0.001);
+
+		theme.DefaultSpacing = 10.0;
+		Assert.AreEqual(8.0, GetResource<double>(container, "Radius200"), 0.001);
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DefaultSpacingSet_Then_FixedTokensAreConstant()
+	{
+		var (container, _) = CreateThemedContainer(spacing: 10.0);
+
+		Assert.AreEqual(40.0, GetResource<double>(container, "ControlHeightMedium"), 0.001);
+		Assert.AreEqual(24.0, GetResource<double>(container, "IconSizeMedium"), 0.001);
+		Assert.AreEqual(48.0, GetResource<double>(container, "TouchTargetMinSize"), 0.001);
+	}
+
+	// ═══════════════════════════════════════════════════════════════════════
+	// 9. VISUAL INTEGRATION — render actual controls, verify layout values
 	// ═══════════════════════════════════════════════════════════════════════
 
 	[TestMethod]

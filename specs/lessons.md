@@ -4,6 +4,19 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A design-token "mode" (density) must be a factor over the scale's base unit, never a competing source of the base value
+
+**Context:** Spec 07 (`DefaultSpacing`, issue #1688). The first implementation gave `Density` enum members base-unit pixel values (`Compact = 3`, `Regular = 4`, `Comfy = 5`) and made `DefaultSpacing` an *override* that beat the preset ("override-beats-preset, like the color stack"). The user rejected this: density is a **mode** the consumer picks (Compact / Regular / Comfy), not an alternate spelling of a pixel value.
+
+**Root cause:** two orthogonal design axes were collapsed into one knob. Spacing (the scale's base unit — a brand/identity decision) and density (a contextual mode over that scale — a usability decision) both fed the same variable, making them mutually exclusive: setting a branded base unit silently discarded the density axis, and `DefaultSpacing="6"` + `Compact` was inexpressible. Encoding the magnitudes as the enum's underlying values (`Compact = 3`) hard-coupled the presets to the default base and leaked implementation into the public API surface.
+
+**How to apply:**
+- When a token system exposes both a scale and a mode, make them **compose**: `effective = base × modeFactor` (here Compact ×0.75, Regular ×1, Comfy ×1.25 — chosen so the default base of 4 reproduces the historical 3/4/5). "Override beats preset" is the right pattern for two sources of the *same* value (color overrides); it is the wrong pattern for two *different* axes.
+- Enum underlying values are API surface. If a preset's magnitude is meaningful, map it in code (a `switch` near its single consumer); never make the enum value *be* the magnitude — it can't survive a base-unit change and it invites `(double)enum` casts.
+- Fixed tokens (`ControlHeight*`, `IconSize*`, `TouchTargetMinSize`) stay invariant across **both** axes — density and spacing scale breathing room, never structure or touch targets.
+
+---
+
 ## Pick the oracle the reference *implementation* emits, not the value the spec *publishes* — and never assume a numeric fallback is doing the job its name claims
 
 **Context:** Seed color fidelity (spec 06). Two distinct traps hit while correcting `HctSolver`.
