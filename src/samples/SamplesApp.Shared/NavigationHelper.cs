@@ -11,6 +11,19 @@ public static class NavigationHelper
 	public static Microsoft.UI.Xaml.Window MainWindow { get; set; }
 
 	/// <summary>
+	/// Set by the app-specific App class to provide access to *this* application's resources
+	/// (and therefore its theme) from shared code.
+	/// </summary>
+	/// <remarks>
+	/// Do not use <c>Application.Current</c> for that: it is a process-wide static in the shared
+	/// Uno.UI, and it is never assigned for a secondary ALC, so when this app is hosted in one
+	/// (ThemesSampleApp) it returns the host's deliberately theme-free application. Shared sample
+	/// code is compiled into each head, so this static is per-head — and therefore per-ALC —
+	/// exactly like <see cref="MainWindow"/>.
+	/// </remarks>
+	public static Microsoft.UI.Xaml.Application CurrentApplication { get; set; }
+
+	/// <summary>
 	/// Callback set by the app to handle shell navigation from shared code (e.g. OverviewSampleView).
 	/// </summary>
 	public static Action<Sample> ShellNavigateToHandler { get; set; }
