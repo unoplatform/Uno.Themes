@@ -21,7 +21,7 @@ public static class NavigationHelper
 	/// code is compiled into each head, so this static is per-head — and therefore per-ALC —
 	/// exactly like <see cref="MainWindow"/>.
 	/// </remarks>
-	public static Microsoft.UI.Xaml.Application CurrentApplication { get; set; }
+	public static Microsoft.UI.Xaml.Application? CurrentApplication { get; set; }
 
 	/// <summary>
 	/// Callback set by the app to handle shell navigation from shared code (e.g. OverviewSampleView).

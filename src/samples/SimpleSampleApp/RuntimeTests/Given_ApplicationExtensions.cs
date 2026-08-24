@@ -58,11 +58,15 @@ public class Given_ApplicationExtensions
 	[RunsOnUIThread]
 	public void When_RunningStandalone_Then_CurrentApplicationIsPublishedAndResolvesSameTheme()
 	{
-		Assert.IsNotNull(NavigationHelper.CurrentApplication,
+		// Captured into a local so the null check below informs the compiler's nullable flow —
+		// Assert.IsNotNull does not, and CurrentApplication is legitimately nullable.
+		var published = NavigationHelper.CurrentApplication;
+
+		Assert.IsNotNull(published,
 			"The App class must publish itself on NavigationHelper.CurrentApplication");
-		Assert.AreSame(Application.Current, NavigationHelper.CurrentApplication,
+		Assert.AreSame(Application.Current, published,
 			"Standalone there is a single application, so the published one is Application.Current");
-		Assert.AreSame(Application.Current.GetTheme(), NavigationHelper.CurrentApplication.GetTheme(),
+		Assert.AreSame(Application.Current.GetTheme(), published.GetTheme(),
 			"Both paths must resolve the same BaseTheme instance when standalone");
 	}
 }
