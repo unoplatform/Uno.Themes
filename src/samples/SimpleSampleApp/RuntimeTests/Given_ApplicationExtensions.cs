@@ -137,6 +137,22 @@ public class Given_ApplicationExtensions
 
 	[TestMethod]
 	[RunsOnUIThread]
+	[DataRow(31, true, DisplayName = "at the deepest level the walk descends to")]
+	[DataRow(32, false, DisplayName = "one level beyond the walk's bound")]
+	public void When_ThemeIsNestedAtTheDepthBound_Then_TheBoundHolds(int depth, bool expectFound)
+	{
+		using var _ = NestApplicationTheme(depth);
+
+		var theme = Application.Current.GetTheme();
+
+		Assert.AreEqual(expectFound, theme is not null,
+			$"A theme {depth} dictionaries below the application sits at level {depth + 1}; the walk " +
+			"descends 32 levels, and the bound is a guard against a pathological graph rather than a " +
+			"limit any real application meets.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
 	public void When_ThemeIsNestedInASourceLoadedDictionary_Then_ThemeIsStillFound()
 	{
 		var appResources = Application.Current.Resources;
