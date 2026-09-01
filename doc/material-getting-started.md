@@ -305,31 +305,22 @@ Use this when you want to manually override the default color palette from the U
 
 ### Change Default Font
 
-By default, Uno Material comes pre-packaged with the [Roboto](https://fonts.google.com/specimen/Roboto) font families and automatically includes them in your application. Upon installation of the Uno Material package, you will have the following resources available: `MaterialLightFontFamily`, `MaterialRegularFontFamily`, and `MaterialMediumFontFamily`.
+By default, Uno Material comes pre-packaged with the [Roboto](https://fonts.google.com/specimen/Roboto) font family and automatically includes it in your application. Every type scale derives from the single `DefaultFontFamily` root token; per-scale weight nuance comes from the `*FontWeight` tokens, resolved from that one family reference.
 
-If you would like Uno Material to use a different font, you can override the default font families by following these steps:
+If you would like Uno Material to use a different font:
 
-1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html).
-2. Add a new Resource Dictionary named `MaterialFontsOverride.xaml` to the application project, for example, under `Styles/Application`.
-3. Assuming the font file has been placed in a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
-
-    ```xml
-    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-        <FontFamily x:Key="MaterialLightFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont</FontFamily>
-        <FontFamily x:Key="MaterialMediumFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont</FontFamily>
-        <FontFamily x:Key="MaterialRegularFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttfMyCustomFont</FontFamily>
-
-    </ResourceDictionary>
-    ```
-
-4. In the `App.xaml`, update `<MaterialTheme />` with the override from the previous steps:
+1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html). Prefer a family that resolves multiple weights (a variable font, or a font shipping a [font manifest](https://platform.uno/docs/articles/features/custom-fonts.html#variable-fonts-and-font-manifest)) so the `*FontWeight` tokens render as designed.
+2. Set the root typeface on the theme in `App.xaml`:
 
     ```xml
     <MaterialTheme xmlns="using:Uno.Material"
-                   FontOverrideSource="ms-appx:///Styles/Application/MaterialFontsOverride.xaml" />
+                   DefaultFontFamily="ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont" />
     ```
+
+To change only some appearances or some scales instead, redefine the token(s) in a Resource Dictionary referenced as `FontOverrideSource` — see [Typography Font Swap](design-tokens.md#typography-font-swap).
+
+> [!IMPORTANT]
+> Overriding the legacy `MaterialLightFontFamily` / `MaterialMediumFontFamily` / `MaterialRegularFontFamily` keys no longer changes the type scales — see the [migration notes](material-migration.md#typography-and-font-overrides).
 
 ## Using C# Markup
 

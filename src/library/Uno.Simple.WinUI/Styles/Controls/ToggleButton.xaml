@@ -136,7 +136,8 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<StaticResource x:Key="SimpleToggleButtonFontFamily" ResourceKey="TypefaceBrand" />
+	<StaticResource x:Key="SimpleToggleButtonFontFamily" ResourceKey="DefaultFontFamily" />
+	<x:String x:Key="SimpleToggleButtonFontWeight">Medium</x:String>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Default ToggleButton (Neutral unchecked → Primary checked) -->
@@ -145,7 +146,7 @@
 		   TargetType="ToggleButton">
 		<Setter Property="FontFamily" Value="{StaticResource SimpleToggleButtonFontFamily}" />
 		<Setter Property="FontSize" Value="{StaticResource LabelLargeFontSize}" />
-		<Setter Property="FontWeight" Value="Normal" />
+		<Setter Property="FontWeight" Value="{StaticResource SimpleToggleButtonFontWeight}" />
 		<Setter Property="MinHeight" Value="{StaticResource ControlHeightMedium}" />
 		<Setter Property="Padding" Value="{StaticResource SimpleSpace300Thickness}" />
 		<Setter Property="CornerRadius" Value="{StaticResource SimpleToggleButtonCornerRadius}" />

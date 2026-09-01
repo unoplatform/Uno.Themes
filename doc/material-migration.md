@@ -99,12 +99,12 @@ After:
 
 ### Typography and font overrides
 
-Existing Material font overrides (`MaterialRegularFontFamily` / `MaterialMediumFontFamily`) continue to work. For overrides meant to apply across design systems, prefer the new root typeface tokens, which cascade through the whole type scale — see [Typography](semantic-styles.md#typography):
+The Material-specific font family keys (`MaterialRegularFontFamily` / `MaterialMediumFontFamily` / `MaterialLightFontFamily`) still resolve, but the semantic type scales no longer derive from them: every `*FontFamily` scale key now derives from the single `DefaultFontFamily` root token — see [Typography](semantic-styles.md#typography). An override meant to change the app's typography should target the root (the per-scale weight nuance is carried by the `*FontWeight` tokens):
 
-| Legacy key (Material-specific) | Portable token  | Cascades to                 |
-| ------------------------------ | --------------- | --------------------------- |
-| `MaterialRegularFontFamily`    | `TypefacePlain` | Display, Headline           |
-| `MaterialMediumFontFamily`     | `TypefaceBrand` | Title, Label, Body, Caption |
+| Legacy key (Material-specific) | Portable token      | Cascades to      |
+| ------------------------------ | ------------------- | ---------------- |
+| `MaterialRegularFontFamily`    | `DefaultFontFamily` | Every type scale |
+| `MaterialMediumFontFamily`     | `DefaultFontFamily` | Every type scale |
 
 ### Material style changes
 

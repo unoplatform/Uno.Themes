@@ -8,12 +8,16 @@ namespace Uno.Themes.Samples.RuntimeTests;
 
 /// <summary>
 /// Regression tests for font bundling in Uno.Simple.
-/// Verifies that Inter font files are properly bundled and referenced via ms-appx URIs
-/// rather than relying on a system-installed "Inter" font 
+/// Verifies the single-typeface contract: every font family resource resolves to the bundled
+/// Inter variable-font entry point (<c>Inter.ttf</c>, whose weights resolve via the font manifest
+/// on static-font platforms), and the per-scale weight nuance lives in the <c>*FontWeight</c>
+/// tokens rather than in weight-specific font files.
 /// </summary>
 [TestClass]
 public class Given_Fonts
 {
+	private const string InterEntryPoint = "ms-appx:///Uno.Fonts.Inter/Fonts/Inter.ttf#Inter";
+
 	private static Grid CreateThemedContainer()
 	{
 		var theme = new SimpleTheme();
@@ -33,145 +37,183 @@ public class Given_Fonts
 		return null!;
 	}
 
+	private static string GetString(Grid container, string key)
+	{
+		if (container.Resources.TryGetValue(key, out var value) && value is string s)
+		{
+			return s;
+		}
+
+		Assert.Fail($"Resource '{key}' not found or not of type string");
+		return null!;
+	}
+
 	// ─────────────────────────────────────────────────────────────────────
-	// Font URI: all font family resources must use ms-appx:/// URIs
-	// pointing to bundled Inter TTF files (not bare "Inter" system name).
+	// Font URI: the root token and the legacy key must use the ms-appx:/// URI of the
+	// bundled Inter entry point (not a bare "Inter" system name, and not a weight-baked file).
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
+	[DataRow("DefaultFontFamily")]
 	[DataRow("SimpleFontFamily")]
-	[DataRow("SimpleRegularFontFamily")]
-	[DataRow("SimpleMediumFontFamily")]
-	[DataRow("SimpleSemiBoldFontFamily")]
-	[DataRow("SimpleBoldFontFamily")]
-	[DataRow("TypefacePlain")]
-	[DataRow("TypefaceBrand")]
-	public void When_SimpleThemeLoaded_Then_FontFamilyUsesAppxUri(string resourceKey)
+	public void When_SimpleThemeLoaded_Then_FontFamilyUsesInterEntryPoint(string resourceKey)
 	{
 		var container = CreateThemedContainer();
 		var fontFamily = GetFontFamily(container, resourceKey);
 
-		StringAssert.StartsWith(
+		Assert.AreEqual(
+			InterEntryPoint,
 			fontFamily.Source,
-			"ms-appx:///Uno.Fonts.Inter/",
-			$"Font resource '{resourceKey}' must use a ms-appx:///Uno.Fonts.Inter/ URI to a bundled font file, " +
-			$"not a bare system font name. Actual Source: '{fontFamily.Source}'");
-	}
-
-	[TestMethod]
-	[RunsOnUIThread]
-	[DataRow("SimpleFontFamily")]
-	[DataRow("SimpleRegularFontFamily")]
-	[DataRow("SimpleMediumFontFamily")]
-	[DataRow("SimpleSemiBoldFontFamily")]
-	[DataRow("SimpleBoldFontFamily")]
-	public void When_SimpleThemeLoaded_Then_FontFamilyReferencesInterFile(string resourceKey)
-	{
-		var container = CreateThemedContainer();
-		var fontFamily = GetFontFamily(container, resourceKey);
-
-		// Source should be like "ms-appx:///Uno.Fonts.Inter/Fonts/Inter-*.ttf#Inter"
-		StringAssert.Contains(
-			fontFamily.Source,
-			"Inter-",
-			$"Font resource '{resourceKey}' should reference an Inter TTF file. " +
-			$"Actual Source: '{fontFamily.Source}'");
-
-		StringAssert.EndsWith(
-			fontFamily.Source,
-			"#Inter",
-			$"Font resource '{resourceKey}' should specify the Inter face name. " +
-			$"Actual Source: '{fontFamily.Source}'");
+			$"Font resource '{resourceKey}' must reference the bundled Inter entry point, " +
+			$"so its weights resolve from the single family. Actual Source: '{fontFamily.Source}'");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Weight mapping: each weight slot should use the correct TTF file.
-	// ─────────────────────────────────────────────────────────────────────
-
-	[TestMethod]
-	[RunsOnUIThread]
-	[DataRow("SimpleRegularFontFamily", "Inter-Regular.ttf")]
-	[DataRow("SimpleMediumFontFamily", "Inter-Medium.ttf")]
-	[DataRow("SimpleSemiBoldFontFamily", "Inter-SemiBold.ttf")]
-	[DataRow("SimpleBoldFontFamily", "Inter-Bold.ttf")]
-	public void When_SimpleThemeLoaded_Then_WeightSpecificFontFamilyMapsToCorrectFile(
-		string resourceKey, string expectedFileName)
-	{
-		var container = CreateThemedContainer();
-		var fontFamily = GetFontFamily(container, resourceKey);
-
-		StringAssert.Contains(
-			fontFamily.Source,
-			expectedFileName,
-			$"'{resourceKey}' should map to '{expectedFileName}'. " +
-			$"Actual Source: '{fontFamily.Source}'");
-	}
-
-	// ─────────────────────────────────────────────────────────────────────
-	// Typography scale: type scale slots must reference bundled fonts.
-	// ─────────────────────────────────────────────────────────────────────
-
-	[TestMethod]
-	[RunsOnUIThread]
-	[DataRow("DisplayLargeFontFamily")]
-	[DataRow("HeadlineMediumFontFamily")]
-	[DataRow("TitleMediumFontFamily")]
-	[DataRow("BodyLargeFontFamily")]
-	[DataRow("LabelMediumFontFamily")]
-	[DataRow("CaptionMediumFontFamily")]
-	public void When_SimpleThemeLoaded_Then_TypographyScaleFontFamilyUsesAppxUri(string resourceKey)
-	{
-		var container = CreateThemedContainer();
-		var fontFamily = GetFontFamily(container, resourceKey);
-
-		StringAssert.StartsWith(
-			fontFamily.Source,
-			"ms-appx:///Uno.Fonts.Inter/",
-			$"Typography resource '{resourceKey}' must use a ms-appx:///Uno.Fonts.Inter/ URI. " +
-			$"Actual Source: '{fontFamily.Source}'");
-
-		StringAssert.Contains(
-			fontFamily.Source,
-			"Inter-",
-			$"Typography resource '{resourceKey}' should reference a bundled Inter font file. " +
-			$"Actual Source: '{fontFamily.Source}'");
-	}
-
-	// ─────────────────────────────────────────────────────────────────────
-	// Bold/SemiBold slots: display and headline slots must use the correct weight file.
+	// Typography scale: every type-scale slot derives from the single root.
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
 	[DataRow("DisplayLargeFontFamily")]
 	[DataRow("DisplayMediumFontFamily")]
-	public void When_SimpleThemeLoaded_Then_BoldDisplaySlotsUseBoldFontFile(string resourceKey)
+	[DataRow("DisplaySmallFontFamily")]
+	[DataRow("HeadlineLargeFontFamily")]
+	[DataRow("HeadlineMediumFontFamily")]
+	[DataRow("HeadlineSmallFontFamily")]
+	[DataRow("TitleLargeFontFamily")]
+	[DataRow("TitleMediumFontFamily")]
+	[DataRow("TitleSmallFontFamily")]
+	[DataRow("LabelLargeFontFamily")]
+	[DataRow("LabelMediumFontFamily")]
+	[DataRow("LabelSmallFontFamily")]
+	[DataRow("LabelExtraSmallFontFamily")]
+	[DataRow("BodyLargeFontFamily")]
+	[DataRow("BodyMediumFontFamily")]
+	[DataRow("BodySmallFontFamily")]
+	[DataRow("CaptionLargeFontFamily")]
+	[DataRow("CaptionMediumFontFamily")]
+	[DataRow("CaptionSmallFontFamily")]
+	public void When_SimpleThemeLoaded_Then_TypographyScaleDerivesFromRoot(string resourceKey)
 	{
 		var container = CreateThemedContainer();
 		var fontFamily = GetFontFamily(container, resourceKey);
 
-		StringAssert.Contains(
+		Assert.AreEqual(
+			InterEntryPoint,
 			fontFamily.Source,
-			"Inter-Bold.ttf",
-			$"'{resourceKey}' is a Bold display slot and must reference 'Inter-Bold.ttf'. " +
+			$"Typography resource '{resourceKey}' must derive from the single DefaultFontFamily root. " +
 			$"Actual Source: '{fontFamily.Source}'");
 	}
 
+	// ─────────────────────────────────────────────────────────────────────
+	// Weight tokens: Simple's per-scale weight nuance (Bold display, SemiBold titles)
+	// is carried by the *FontWeight tokens, resolved from the single family.
+	// ─────────────────────────────────────────────────────────────────────
+
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("HeadlineMediumFontFamily")]
-	[DataRow("TitleMediumFontFamily")]
-	[DataRow("LabelLargeFontFamily")]
-	public void When_SimpleThemeLoaded_Then_SemiBoldSlotUseSemiBoldFontFile(string resourceKey)
+	[DataRow("DisplayLargeFontWeight", "Bold")]
+	[DataRow("DisplayMediumFontWeight", "Bold")]
+	[DataRow("DisplaySmallFontWeight", "Normal")]
+	[DataRow("HeadlineMediumFontWeight", "SemiBold")]
+	[DataRow("TitleLargeFontWeight", "SemiBold")]
+	[DataRow("TitleMediumFontWeight", "SemiBold")]
+	[DataRow("LabelLargeFontWeight", "SemiBold")]
+	[DataRow("BodyLargeFontWeight", "Normal")]
+	[DataRow("CaptionMediumFontWeight", "Normal")]
+	// Control-level weight tokens: buttons kept the Medium the old Inter-Medium-baked family
+	// carried, and the named weights consumed by Expander/CalendarView are now actually defined.
+	[DataRow("SimpleButtonFontWeight", "Medium")]
+	[DataRow("SimpleToggleButtonFontWeight", "Medium")]
+	[DataRow("SimpleRegularFontWeight", "Normal")]
+	[DataRow("SimpleSemiBoldFontWeight", "SemiBold")]
+	public void When_SimpleThemeLoaded_Then_WeightTokenCarriesTheScaleNuance(
+		string resourceKey, string expectedWeight)
 	{
 		var container = CreateThemedContainer();
-		var fontFamily = GetFontFamily(container, resourceKey);
 
-		StringAssert.Contains(
-			fontFamily.Source,
-			"Inter-SemiBold.ttf",
-			$"'{resourceKey}' is a SemiBold slot and must reference 'Inter-SemiBold.ttf'. " +
-			$"Actual Source: '{fontFamily.Source}'");
+		Assert.AreEqual(
+			expectedWeight,
+			GetString(container, resourceKey),
+			$"'{resourceKey}' must carry Simple's per-scale weight nuance now that the family is shared.");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// Light and Dark both declare the root: a dropped theme-dictionary entry
+	// must not pass green just because the ambient theme still has one.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ThemeChanges_Then_RootResolvesUnderBothAppearances()
+	{
+		var container = CreateThemedContainer();
+		var text = new TextBlock
+		{
+			Text = "probe",
+			Style = (Style)container.Resources["BodyMedium"],
+		};
+		container.Children.Add(text);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(text);
+
+		try
+		{
+			container.RequestedTheme = ElementTheme.Dark;
+			await UnitTestsUIContentHelper.WaitForIdle();
+			Assert.AreEqual(InterEntryPoint, text.FontFamily?.Source,
+				"The Default (dark) theme dictionary must declare the Inter root.");
+
+			container.RequestedTheme = ElementTheme.Light;
+			await UnitTestsUIContentHelper.WaitForIdle();
+			Assert.AreEqual(InterEntryPoint, text.FontFamily?.Source,
+				"The Light theme dictionary must declare the Inter root.");
+		}
+		finally
+		{
+			container.RequestedTheme = ElementTheme.Default;
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// Rendered-weight guard: the whole single-family design hangs on FontWeight
+	// resolving a real weight from the one entry point (variable font, or its
+	// font manifest on static-font platforms). Every other test asserts resource
+	// strings; this one asserts glyphs. It fails when the referenced Uno.Fonts
+	// packages do not carry the entry point + manifest — which is the merge gate
+	// on unoplatform/uno.fonts#75 made visible.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_WeightsDiffer_Then_RenderedWidthsDiffer()
+	{
+		var family = new FontFamily(InterEntryPoint);
+		const string probe = "Weight probe 0123456789";
+
+		var normal = new TextBlock { Text = probe, FontFamily = family, FontSize = 24, FontWeight = Microsoft.UI.Text.FontWeights.Normal };
+		var bold = new TextBlock { Text = probe, FontFamily = family, FontSize = 24, FontWeight = Microsoft.UI.Text.FontWeights.Bold };
+
+		var container = CreateThemedContainer();
+		container.Children.Add(new StackPanel { Children = { normal, bold } });
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(bold);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		try
+		{
+			Assert.AreNotEqual(normal.ActualWidth, bold.ActualWidth,
+				"Bold and Normal must select different faces from the single Inter reference. " +
+				"Equal widths mean FontWeight is being ignored — the referenced Uno.Fonts.Inter " +
+				"package is missing the Inter.ttf entry point or its font manifest.");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
 	}
 }
