@@ -207,7 +207,7 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 
 Both themes provide identical semantic typography keys based on the Material Design 3 type scale.
 
-Every `*FontFamily` key derives from the single `DefaultFontFamily` root token, so overriding that one key (or setting the `DefaultFontFamily` property on the theme) swaps the typeface across the whole type scale; per-scale weight nuance is carried by the `*FontWeight` tokens. See [Design Tokens - Typography](design-tokens.md#typography).
+Every `*FontFamily` key derives from the single `DefaultFontFamily` root token, so overriding that one key swaps the typeface across the whole type scale; per-scale weight nuance is carried by the `*FontWeight` tokens. See [Design Tokens - Typography](design-tokens.md#typography).
 
 | Semantic Style Key | Font Resource Keys |
 |---|---|

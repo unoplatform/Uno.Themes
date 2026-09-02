@@ -172,7 +172,7 @@ The following guides require the creation of new `ResourceDictionary` files in y
 
 ### Change Default Font
 
-By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available.
+By default, Uno Cupertino comes pre-packaged with the [SF Pro](https://developer.apple.com/fonts/) `FontFamily` and automatically includes them in your application. Upon installation of the Uno Cupertino package, you will have a `CupertinoFontFamily` resource available. It is an alias of the shared `DefaultFontFamily` root token (see [Design Tokens](design-tokens.md#typography)); Cupertino has no semantic type scale, so `CupertinoFontFamily` stays the key to override.
 
 If you would like Uno Cupertino to use a different font, you can override the default `FontFamily` by following these steps:
 

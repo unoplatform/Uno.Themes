@@ -310,14 +310,25 @@ By default, Uno Material comes pre-packaged with the [Roboto](https://fonts.goog
 If you would like Uno Material to use a different font:
 
 1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html). Prefer a family that resolves multiple weights (a variable font, or a font shipping a [font manifest](https://platform.uno/docs/articles/features/custom-fonts.html#variable-fonts-and-font-manifest)) so the `*FontWeight` tokens render as designed.
-2. Set the root typeface on the theme in `App.xaml`:
+2. Add a Resource Dictionary named `MaterialFontsOverride.xaml` to the application project, for example under `Styles/Application`, and redefine the root token in it:
+
+    ```xml
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+        <FontFamily x:Key="DefaultFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont</FontFamily>
+
+    </ResourceDictionary>
+    ```
+
+3. In `App.xaml`, reference it from the theme:
 
     ```xml
     <MaterialTheme xmlns="using:Uno.Material"
-                   DefaultFontFamily="ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont" />
+                   FontOverrideSource="ms-appx:///Styles/Application/MaterialFontsOverride.xaml" />
     ```
 
-To change only some appearances or some scales instead, redefine the token(s) in a Resource Dictionary referenced as `FontOverrideSource` — see [Typography Font Swap](design-tokens.md#typography-font-swap).
+To change only some appearances or some scales instead, redefine the individual `*FontFamily` token(s) in the same file — see [Typography Font Swap](design-tokens.md#typography-font-swap).
 
 > [!IMPORTANT]
 > Overriding the legacy `MaterialLightFontFamily` / `MaterialMediumFontFamily` / `MaterialRegularFontFamily` keys no longer changes the type scales — see the [migration notes](material-migration.md#typography-and-font-overrides).

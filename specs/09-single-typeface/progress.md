@@ -73,15 +73,64 @@ but silently do nothing, worse than a clean break):
 - Tests: Light+Dark appearance guard, and a rendered-weight guard (Bold vs Normal widths must
   differ from the single Inter reference) that turns the uno.fonts#75 merge gate into a red test.
 
+### Round 2 (seven-lens panel on PR #1710 alone)
+
+- Docs no longer describe the `DefaultFontFamily` *property* (that is #1707): the Material
+  getting-started font section and `semantic-styles.md` show the `FontOverrideSource` path only;
+  `design-tokens.md` says how to wire the override file and scopes the Cupertino claim
+  (Cupertino has no semantic type scale; `CupertinoFontFamily` aliases the root and stays the key
+  to override, also noted in `cupertino-getting-started.md`).
+- `material-migration.md`: the typography break moved from the v7 section to a v8 section that
+  names the removed 7.1.1 tokens and Simple's per-weight keys, lists the re-pointed v2 per-control
+  keys, scopes the Material legacy-key note to v2 (v1 unchanged), and records
+  `SimpleButtonFontWeight` Normal→Medium plus the new `SimpleToggleButtonFontWeight`.
+- `doc/styles/*`: the five re-pointed v2 control rows now read `DefaultFontFamily`; Simple
+  `Button.md` weight corrected, `ToggleButton.md` gained the new weight row; `TextBlock.md`
+  table re-aligned (the collapse commit had broken `MD060`; `semantic-styles.md` and
+  `simple/Button.md` fail `MD060` on master already, untouched).
+- `Given_Fonts`: cascade test added at **application** scope
+  (`When_RootOverriddenOnApplicationTheme_Then_ScaleFollowsAndClears`: override on
+  `Application.Current.GetTheme()` reaches `BodyMediumFontFamily` and a rendered BodyMedium
+  TextBlock under Dark and Light, and clears back to Inter). A container-scoped variant was
+  written first and **failed**: the slot alias resolves its target against the application
+  scope, so a scoped theme's override never reaches it. Recorded in `specs/lessons.md`; #1707's
+  generator (concrete `*FontFamily` values, no alias) is the answer for scoped themes.
+- `Given_Fonts` width gate made fallback-aware: it now measures the Inter entry point against a
+  family known not to exist and fails with "entry point did not load" when both fall back, then
+  checks Bold vs Normal. Content assignment moved inside `try`; the appearance-guard comment
+  corrected (a dropped entry falls through to the Segoe UI baseline, not to app scope).
+- XAML comments: Simple `TextBlock.xaml` header no longer points at the deleted `Fonts.xaml`
+  slot block; Simple/Material v2 `Typography.xaml` and `SharedTypography.xaml` say why the slot
+  aliases are repeated per theme (self-contained appearance blocks, incl. Material's
+  HighContrast); the "previously never defined" history comment dropped.
+- `specs/lessons.md` typography entry rewritten for the single-root model (the old text mandated
+  the Simple `Fonts.xaml` duplicates this layer deletes).
+- `MaterialSampleApp/MaterialFontsOverride.xaml` deleted: unreferenced, pointed at assets the
+  sample does not ship, and overrode only legacy keys that no longer reach the scales.
+
 ## Verification
 
-Simple host, `net10.0-desktop` Debug, headless `--runtime-tests`, against local `99.0.0-local.1`
-font packages: full suite green as part of the stacked verification (209 passed / 1 pre-existing
-skip across both layers; this layer's `Given_Fonts` is 30 cases). Libraries build with zero
-errors and no warnings in changed files.
+Simple host, `net10.0-desktop` Debug, headless `--runtime-tests`, filter `Given_Fonts`, run at
+this layer alone (`dev/sb/1705-1-single-typeface`, no #1707 on top):
+
+| Font packages                              | Result                                                    |
+| ------------------------------------------ | --------------------------------------------------------- |
+| local `99.0.0-local.1` (uno.fonts#75 bits) | 37 / 37 passed                                            |
+| published pins (`Directory.Packages.props`) | 36 / 37; only `When_WeightsDiffer_Then_RenderedWidthsDiffer` fails, on "the Inter entry point did not load" |
+
+`Uno.Material.WinUI` and `SimpleSampleApp` build with zero errors and no warnings in changed
+files (desktop TFM). `markdownlint` + `cspell` (CI config) clean on every changed doc page except
+the pre-existing `MD060` hits in `semantic-styles.md` / `simple/Button.md`.
 
 ## Open items
 
 - [ ] unoplatform/uno.fonts#75 merged + packages published; `Directory.Packages.props` re-pinned
-      (blocks merge)
-- [ ] Stacked PR #1707 (`DefaultFontFamily` property seam) adapted on top of this layer
+      (blocks merge; the width gate is red on CI until then)
+- [ ] Squash note: the BREAKING CHANGE footer should also list `SimpleButtonFontWeight`
+      Normal→Medium, the new `SimpleToggleButtonFontWeight` / `SimpleRegularFontWeight` /
+      `SimpleSemiBoldFontWeight` keys, and the six re-pointed Material v2 per-control keys.
+- [ ] Skia + Roboto manifest (300/400/500 only): `FontWeight="Bold"` in Material
+      (`RatingControl.xaml:150,240`) maps to the closest static (Medium) on desktop while
+      wght-axis platforms render true Bold. Verify once the packages publish; decide whether the
+      manifest needs a 700 entry.
+- [ ] Stacked PR #1707 (`DefaultFontFamily` property seam) rebased on top of this layer

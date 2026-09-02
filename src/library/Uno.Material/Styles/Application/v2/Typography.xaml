@@ -7,6 +7,14 @@
 			<!-- COMMON TEXT VARIABLES FOR v2 -->
 
 			<!--
+				Every slot's FontFamily aliases the DefaultFontFamily root (Roboto, declared in
+				Fonts.xaml, which is merged after SharedTypography.xaml so it wins over the Segoe
+				UI baseline). The slot aliases repeat SharedTypography.xaml on purpose: each
+				appearance block here is self-contained, including HighContrast, which
+				SharedTypography.xaml does not declare. See specs/lessons.md before removing them.
+			-->
+
+			<!--
 				IMPORTANT NOTE :
 				CharacterSpacing is measured in 1/1000 of an "em". One "em" is equivalent to the current font size of the control.
 				For example, here with LabelMedium an additional 12 pixels will be inserted between each character with FontSize="12" and CharacterSpacing="1000".

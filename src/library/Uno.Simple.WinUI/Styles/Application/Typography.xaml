@@ -25,7 +25,11 @@
 		SDS does not define letter-spacing, so CharacterSpacing is set to 0
 		for all slots (overriding the Material-derived shared defaults).
 
-		Font family: Inter for all slots (SDS sans = "inter", sans-serif).
+		Font family: every slot aliases the DefaultFontFamily root (Inter, declared in
+		Fonts.xaml, which is merged after SharedTypography.xaml so it wins over the Segoe
+		UI baseline). The 19 slot aliases repeat SharedTypography.xaml on purpose: each
+		appearance block here is the complete SDS type scale, and Given_Fonts pins all 19
+		slots to the root. See specs/lessons.md before removing them.
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
@@ -35,8 +39,7 @@
 		<!-- ═══════════════════════════════════════════════════════════════ -->
 		<ResourceDictionary x:Key="Default">
 
-			<!-- Named weight tokens consumed by control templates (Expander, CalendarView).
-			     Previously referenced but never defined - ThemeResource lookups fell through. -->
+			<!-- Named weight tokens consumed by control templates (Expander, CalendarView). -->
 			<x:String x:Key="SimpleRegularFontWeight">Normal</x:String>
 			<x:String x:Key="SimpleSemiBoldFontWeight">SemiBold</x:String>
 
@@ -165,8 +168,7 @@
 		<!-- ═══════════════════════════════════════════════════════════════ -->
 		<ResourceDictionary x:Key="Light">
 
-			<!-- Named weight tokens consumed by control templates (Expander, CalendarView).
-			     Previously referenced but never defined - ThemeResource lookups fell through. -->
+			<!-- Named weight tokens consumed by control templates (Expander, CalendarView). -->
 			<x:String x:Key="SimpleRegularFontWeight">Normal</x:String>
 			<x:String x:Key="SimpleSemiBoldFontWeight">SemiBold</x:String>
 

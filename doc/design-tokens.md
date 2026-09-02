@@ -21,6 +21,8 @@ families: the root points at a single family whose weights resolve from one refe
 font, or a font with a [font manifest](https://platform.uno/docs/articles/features/custom-fonts.html#variable-fonts-and-font-manifest)
 on platforms without variable-font support).
 
+Cupertino has no semantic type scale: its control styles consume `CupertinoFontFamily`, an alias of the root, and that remains the key to override there — see [Change Default Font](cupertino-getting-started.md#change-default-font).
+
 > [!IMPORTANT]
 > **Breaking change**: the former `TypefacePlain` / `TypefaceBrand` token pair (and Simple's
 > per-weight `SimpleRegular/Medium/SemiBold/BoldFontFamily` keys) have been removed. Override
@@ -150,4 +152,4 @@ To change the font for an entire app, override the root typeface token:
 </ResourceDictionary>
 ```
 
-This cascades to all type-scale `FontFamily` keys (`DisplayLargeFontFamily`, `BodyMediumFontFamily`, etc.) without needing to override each one individually. Point it at a family that resolves multiple weights — a variable font, or a font shipping a font manifest — so the per-scale `*FontWeight` tokens (`DisplayLargeFontWeight`, …) render as designed.
+Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`). This cascades to all type-scale `FontFamily` keys (`DisplayLargeFontFamily`, `BodyMediumFontFamily`, etc.) without needing to override each one individually. Point it at a family that resolves multiple weights — a variable font, or a font shipping a font manifest — so the per-scale `*FontWeight` tokens (`DisplayLargeFontWeight`, …) render as designed.
