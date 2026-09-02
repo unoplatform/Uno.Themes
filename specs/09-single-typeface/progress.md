@@ -144,15 +144,36 @@ this layer alone (`dev/sb/1705-1-single-typeface`, no #1707 on top):
 files (desktop TFM). `markdownlint` + `cspell` (CI config) clean on every changed doc page except
 the pre-existing `MD060` hits in `semantic-styles.md` / `simple/Button.md`.
 
+### Round 4 (2026-09-02): validated against the uno.fonts#76 CI artifacts
+
+unoplatform/uno.fonts#75 merged on 2026-09-01; its review follow-up **#76** ("trim variable font on
+Skia, ship every static weight, pack OFL") is what actually ships the `Inter.ttf` / `Roboto.ttf`
+entry points, their `.ttf.manifest` files and all nine static weights (Thin → Black). Its CI
+artifacts (`2.10.0-dev.9.g9872bd79f2`, downloaded, served from a scratch folder through
+`RestoreAdditionalProjectSources`, pins edited locally and reverted) were used to validate both
+heads at the seam tip (`dev/dr/1705-root-typeface-seam` = base + #1707):
+
+| Head (net10.0-desktop Debug, headless)                  | Result                                                       |
+| ------------------------------------------------------- | ------------------------------------------------------------ |
+| Simple, `Given_Fonts` + `Given_DefaultFontFamily` + `Given_FontFamilyTuner` | 78 / 78 passed, width gate included               |
+| Material, new `Given_Fonts` (root + 25 keys + Roboto width gate) | 27 / 27 passed; on the public pins 26 / 27, only the width gate red |
+
+`FontDetailsCache` reported no load failure for any bundled file; the only failing URIs were the
+three deliberately nonexistent test fonts. Both manifests map weights 100–900 to the statics, which
+closes the "Roboto Bold on Skia" question: `FontWeight="Bold"` now selects `Roboto-Bold.ttf`.
+
+Added `src/samples/MaterialSampleApp/RuntimeTests/Given_Fonts.cs`: the Simple host cannot reference
+`Uno.Fonts.Roboto`, so the Material head carries the Roboto entry-point pin, the 19-slot + six
+re-pointed per-control key guard, and the rendered-weight gate (AGENTS.md §5 placement exception).
+
 ## Open items
 
-- [ ] unoplatform/uno.fonts#75 merged + packages published; `Directory.Packages.props` re-pinned
-      (blocks merge; the width gate is red on CI until then)
+- [ ] unoplatform/uno.fonts#76 merged + packages published; `Directory.Packages.props` (library
+      and samples) re-pinned to that version (blocks merge; both width gates are red on CI until
+      then)
 - [ ] Squash note: the BREAKING CHANGE footer should also list `SimpleButtonFontWeight`
       Normal→Medium, the new `SimpleToggleButtonFontWeight` / `SimpleRegularFontWeight` /
-      `SimpleSemiBoldFontWeight` keys, and the six re-pointed Material v2 per-control keys.
-- [ ] Skia + Roboto manifest (300/400/500 only): `FontWeight="Bold"` in Material
-      (`RatingControl.xaml:150,240`) maps to the closest static (Medium) on desktop while
-      wght-axis platforms render true Bold. Verify once the packages publish; decide whether the
-      manifest needs a 700 entry.
-- [ ] Stacked PR #1707 (`DefaultFontFamily` property seam) rebased on top of this layer
+      `SimpleSemiBoldFontWeight` keys, `SimpleFontFamily`, and the six re-pointed Material v2
+      per-control keys
+- [x] Skia + Roboto Bold: resolved by #76's manifest (700 → `Roboto-Bold.ttf`)
+- [x] Stacked PR #1707 (`DefaultFontFamily` property seam) rebased on top of this layer
