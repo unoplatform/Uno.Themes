@@ -21,9 +21,8 @@
 		
 		Each theme (Material, Simple, Cupertino) overrides this root token in its
 		own Fonts file. The value here serves as a baseline fallback using Segoe UI.
-		The Material and Simple Typography files repeat the slot aliases below so
-		each of their appearance blocks is self-contained; keep them in step
-		(specs/lessons.md).
+		This is the only place the *FontFamily slot keys are declared; the per-theme
+		Typography files override size, weight and character spacing only.
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>

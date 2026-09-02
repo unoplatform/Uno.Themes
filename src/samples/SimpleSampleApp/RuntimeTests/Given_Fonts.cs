@@ -97,23 +97,21 @@ public class Given_Fonts
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Font URI: the root token and the legacy key must use the ms-appx:/// URI of the
-	// bundled Inter entry point (not a bare "Inter" system name, and not a weight-baked file).
+	// Font URI: the root token must use the ms-appx:/// URI of the bundled Inter entry
+	// point (not a bare "Inter" system name, and not a weight-baked file).
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("DefaultFontFamily")]
-	[DataRow("SimpleFontFamily")]
-	public void When_SimpleThemeLoaded_Then_FontFamilyUsesInterEntryPoint(string resourceKey)
+	public void When_SimpleThemeLoaded_Then_RootUsesInterEntryPoint()
 	{
 		var container = CreateThemedContainer();
-		var fontFamily = GetFontFamily(container, resourceKey);
+		var fontFamily = GetFontFamily(container, "DefaultFontFamily");
 
 		Assert.AreEqual(
 			InterEntryPoint,
 			fontFamily.Source,
-			$"Font resource '{resourceKey}' must reference the bundled Inter entry point, " +
+			"DefaultFontFamily must reference the bundled Inter entry point, " +
 			$"so its weights resolve from the single family. Actual Source: '{fontFamily.Source}'");
 	}
 

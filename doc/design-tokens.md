@@ -25,7 +25,7 @@ Cupertino has no semantic type scale: its control styles consume `CupertinoFontF
 
 > [!IMPORTANT]
 > **Breaking change**: the former `TypefacePlain` / `TypefaceBrand` token pair (and Simple's
-> per-weight `SimpleRegular/Medium/SemiBold/BoldFontFamily` keys) have been removed. Override
+> `SimpleFontFamily` and per-weight `SimpleRegular/Medium/SemiBold/BoldFontFamily` keys) have been removed. Override
 > `DefaultFontFamily` instead; per-scale weight nuance is carried by the `*FontWeight` tokens.
 
 Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSize`, `{Role}{Size}FontWeight`, `{Role}{Size}CharacterSpacing` — for example `DisplayLargeFontFamily`, `BodyMediumFontSize`.

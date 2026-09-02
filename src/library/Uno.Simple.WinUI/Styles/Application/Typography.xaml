@@ -25,11 +25,10 @@
 		SDS does not define letter-spacing, so CharacterSpacing is set to 0
 		for all slots (overriding the Material-derived shared defaults).
 
-		Font family: every slot aliases the DefaultFontFamily root (Inter, declared in
-		Fonts.xaml, which is merged after SharedTypography.xaml so it wins over the Segoe
-		UI baseline). The 19 slot aliases repeat SharedTypography.xaml on purpose: each
-		appearance block here is the complete SDS type scale, and Given_Fonts pins all 19
-		slots to the root. See specs/lessons.md before removing them.
+		Font family: the *FontFamily slot keys are declared once, in SharedTypography.xaml,
+		as aliases of the DefaultFontFamily root; Fonts.xaml sets that root to Inter and is
+		merged after SharedTypography.xaml so it wins over the Segoe UI baseline. This file
+		overrides only size, weight and character spacing.
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
@@ -46,77 +45,64 @@
 			<!-- DISPLAY -->
 
 			<!-- Display Large — SDS title-hero (72px, Bold) -->
-			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayLargeFontWeight">Bold</x:String>
 			<x:Double x:Key="DisplayLargeFontSize">72</x:Double>
 			<x:Int32 x:Key="DisplayLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Display Medium — SDS title-page (48px, Bold) -->
-			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayMediumFontWeight">Bold</x:String>
 			<x:Double x:Key="DisplayMediumFontSize">48</x:Double>
 
 			<!-- Display Small — Best guess: SDS scale07 (40px), Normal weight -->
-			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplaySmallFontSize">40</x:Double>
 
 			<!-- HEADLINE -->
 
 			<!-- Headline Large — SDS subtitle (32px, Normal) -->
-			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
 
 			<!-- Headline Medium — SDS heading (24px, SemiBold) -->
-			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineMediumFontWeight">SemiBold</x:String>
 			<x:Double x:Key="HeadlineMediumFontSize">24</x:Double>
 
 			<!-- Headline Small — SDS subheading (20px, Normal) -->
-			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineSmallFontSize">20</x:Double>
 
 			<!-- TITLE -->
 
 			<!-- Title Large — Best guess: SDS subheading size (20px) with SemiBold for title emphasis -->
-			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleLargeFontWeight">SemiBold</x:String>
 			<x:Double x:Key="TitleLargeFontSize">20</x:Double>
 
 			<!-- Title Medium — SDS body-strong (16px, SemiBold) -->
-			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleMediumFontWeight">SemiBold</x:String>
 			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
 
 			<!-- Title Small — SDS body-small-strong (14px, SemiBold) -->
-			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleSmallFontWeight">SemiBold</x:String>
 			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
 
 			<!-- LABEL -->
 
 			<!-- Label Large — SDS body-strong (16px, SemiBold) -->
-			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelLargeFontWeight">SemiBold</x:String>
 			<x:Double x:Key="LabelLargeFontSize">16</x:Double>
 			<x:Int32 x:Key="LabelLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Label Medium — SDS body-small-strong weight (14px, SemiBold) -->
-			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelMediumFontWeight">SemiBold</x:String>
 			<x:Double x:Key="LabelMediumFontSize">14</x:Double>
 			<x:Int32 x:Key="LabelMediumCharacterSpacing">0</x:Int32>
 
 			<!-- Label Small — Best guess: SDS caption size (12px) with SemiBold -->
-			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelSmallFontWeight">SemiBold</x:String>
 			<x:Double x:Key="LabelSmallFontSize">12</x:Double>
 			<x:Int32 x:Key="LabelSmallCharacterSpacing">0</x:Int32>
 
 			<!-- Label ExtraSmall — Best guess: SDS minimum size (12px), Normal weight -->
-			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="LabelExtraSmallFontSize">12</x:Double>
 			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">0</x:Int32>
@@ -124,19 +110,16 @@
 			<!-- BODY -->
 
 			<!-- Body Large — SDS body-base (16px, Normal) -->
-			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="BodyLargeFontSize">16</x:Double>
 			<x:Int32 x:Key="BodyLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Body Medium — SDS body-small (14px, Normal) -->
-			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
 			<x:Int32 x:Key="BodyMediumCharacterSpacing">0</x:Int32>
 
 			<!-- Body Small — SDS caption (12px, Normal) -->
-			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="BodySmallFontSize">12</x:Double>
 			<x:Int32 x:Key="BodySmallCharacterSpacing">0</x:Int32>
@@ -144,19 +127,16 @@
 			<!-- CAPTION -->
 
 			<!-- Caption Large — Best guess: SDS body-small size (14px), Normal weight -->
-			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="CaptionLargeFontSize">14</x:Double>
 			<x:Int32 x:Key="CaptionLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Caption Medium — SDS caption (12px, Normal) -->
-			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
 			<x:Int32 x:Key="CaptionMediumCharacterSpacing">0</x:Int32>
 
 			<!-- Caption Small — Best guess: SDS minimum size (12px), Normal weight -->
-			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="CaptionSmallFontSize">12</x:Double>
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>
@@ -175,77 +155,64 @@
 			<!-- DISPLAY -->
 
 			<!-- Display Large — SDS title-hero (72px, Bold) -->
-			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayLargeFontWeight">Bold</x:String>
 			<x:Double x:Key="DisplayLargeFontSize">72</x:Double>
 			<x:Int32 x:Key="DisplayLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Display Medium — SDS title-page (48px, Bold) -->
-			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplayMediumFontWeight">Bold</x:String>
 			<x:Double x:Key="DisplayMediumFontSize">48</x:Double>
 
 			<!-- Display Small — Best guess: SDS scale07 (40px), Normal weight -->
-			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="DisplaySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="DisplaySmallFontSize">40</x:Double>
 
 			<!-- HEADLINE -->
 
 			<!-- Headline Large — SDS subtitle (32px, Normal) -->
-			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineLargeFontSize">32</x:Double>
 
 			<!-- Headline Medium — SDS heading (24px, SemiBold) -->
-			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineMediumFontWeight">SemiBold</x:String>
 			<x:Double x:Key="HeadlineMediumFontSize">24</x:Double>
 
 			<!-- Headline Small — SDS subheading (20px, Normal) -->
-			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="HeadlineSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="HeadlineSmallFontSize">20</x:Double>
 
 			<!-- TITLE -->
 
 			<!-- Title Large — Best guess: SDS subheading size (20px) with SemiBold for title emphasis -->
-			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleLargeFontWeight">SemiBold</x:String>
 			<x:Double x:Key="TitleLargeFontSize">20</x:Double>
 
 			<!-- Title Medium — SDS body-strong (16px, SemiBold) -->
-			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleMediumFontWeight">SemiBold</x:String>
 			<x:Double x:Key="TitleMediumFontSize">16</x:Double>
 
 			<!-- Title Small — SDS body-small-strong (14px, SemiBold) -->
-			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="TitleSmallFontWeight">SemiBold</x:String>
 			<x:Double x:Key="TitleSmallFontSize">14</x:Double>
 
 			<!-- LABEL -->
 
 			<!-- Label Large — SDS body-strong (16px, SemiBold) -->
-			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelLargeFontWeight">SemiBold</x:String>
 			<x:Double x:Key="LabelLargeFontSize">16</x:Double>
 			<x:Int32 x:Key="LabelLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Label Medium — SDS body-small-strong weight (14px, SemiBold) -->
-			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelMediumFontWeight">SemiBold</x:String>
 			<x:Double x:Key="LabelMediumFontSize">14</x:Double>
 			<x:Int32 x:Key="LabelMediumCharacterSpacing">0</x:Int32>
 
 			<!-- Label Small — Best guess: SDS caption size (12px) with SemiBold -->
-			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelSmallFontWeight">SemiBold</x:String>
 			<x:Double x:Key="LabelSmallFontSize">12</x:Double>
 			<x:Int32 x:Key="LabelSmallCharacterSpacing">0</x:Int32>
 
 			<!-- Label ExtraSmall — Best guess: SDS minimum size (12px), Normal weight -->
-			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="LabelExtraSmallFontSize">12</x:Double>
 			<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">0</x:Int32>
@@ -253,19 +220,16 @@
 			<!-- BODY -->
 
 			<!-- Body Large — SDS body-base (16px, Normal) -->
-			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="BodyLargeFontSize">16</x:Double>
 			<x:Int32 x:Key="BodyLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Body Medium — SDS body-small (14px, Normal) -->
-			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodyMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="BodyMediumFontSize">14</x:Double>
 			<x:Int32 x:Key="BodyMediumCharacterSpacing">0</x:Int32>
 
 			<!-- Body Small — SDS caption (12px, Normal) -->
-			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="BodySmallFontWeight">Normal</x:String>
 			<x:Double x:Key="BodySmallFontSize">12</x:Double>
 			<x:Int32 x:Key="BodySmallCharacterSpacing">0</x:Int32>
@@ -273,19 +237,16 @@
 			<!-- CAPTION -->
 
 			<!-- Caption Large — Best guess: SDS body-small size (14px), Normal weight -->
-			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionLargeFontWeight">Normal</x:String>
 			<x:Double x:Key="CaptionLargeFontSize">14</x:Double>
 			<x:Int32 x:Key="CaptionLargeCharacterSpacing">0</x:Int32>
 
 			<!-- Caption Medium — SDS caption (12px, Normal) -->
-			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionMediumFontWeight">Normal</x:String>
 			<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
 			<x:Int32 x:Key="CaptionMediumCharacterSpacing">0</x:Int32>
 
 			<!-- Caption Small — Best guess: SDS minimum size (12px), Normal weight -->
-			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="DefaultFontFamily" />
 			<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
 			<x:Double x:Key="CaptionSmallFontSize">12</x:Double>
 			<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>

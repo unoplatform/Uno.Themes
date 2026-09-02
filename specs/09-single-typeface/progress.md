@@ -38,8 +38,11 @@ but silently do nothing, worse than a clean break):
 - Tokens `TypefacePlain`, `TypefaceBrand` → replaced by `DefaultFontFamily`.
 - Simple's per-weight `SimpleRegular/Medium/SemiBold/BoldFontFamily` keys → per-scale weight lives
   in the `*FontWeight` tokens; families all derive from the root.
-- Legacy keys kept: `MaterialLight/Medium/RegularFontFamily` (still point at statics),
-  `SimpleFontFamily`, `CupertinoFontFamily` (now aliases of `DefaultFontFamily`).
+- `SimpleFontFamily` → removed as well (round 3): it was a pure alias of the root whose only
+  consumer was Simple's `DatePicker.xaml`, now re-pointed at `DefaultFontFamily`.
+- Legacy keys kept: `MaterialLight/Medium/RegularFontFamily` (still point at statics, consumed by
+  the v1 styles), `CupertinoFontFamily` (alias of `DefaultFontFamily`; Cupertino's controls
+  consume it and Cupertino has no semantic type scale).
 - Consequence recorded in `doc/material-migration.md`: overriding `MaterialRegular/MediumFontFamily`
   no longer reaches the type scales.
 
@@ -47,11 +50,13 @@ but silently do nothing, worse than a clean break):
 
 - `SharedTypography.xaml`: single `DefaultFontFamily` root token (Segoe UI baseline); all 19
   `*FontFamily` slot aliases re-pointed at it; per-slot weight/size/spacing tokens unchanged.
+  It is the **only** declaration of the slot keys (round 3).
 - Material `Fonts.xaml` → `Roboto.ttf#Roboto` entry point; v2 `Typography.xaml` slot aliases
-  re-pointed. Simple `Fonts.xaml` collapsed to the root + legacy alias (per-weight keys and the
-  19 slot re-declarations deleted); `Typography.xaml` aliases re-pointed — its weight tokens
-  already carried the Bold/SemiBold/Normal nuance. Simple `Button`/`ToggleButton` lightweight keys
-  re-pointed. Cupertino gains the root token, `CupertinoFontFamily` kept as alias.
+  deleted (round 3; it overrides size/weight/spacing only). Simple `Fonts.xaml` collapsed to the
+  root (per-weight keys, `SimpleFontFamily` and the 19 slot re-declarations deleted);
+  `Typography.xaml` slot aliases deleted — its weight tokens already carried the
+  Bold/SemiBold/Normal nuance. Simple `Button`/`ToggleButton`/`DatePicker` lightweight keys
+  re-pointed at the root. Cupertino gains the root token, `CupertinoFontFamily` kept as alias.
 - `DesignTokensSamplePage`: the two token showcase TextBlocks become one.
 - `Given_Fonts` rewritten to pin the new contract: root + legacy key + all 19 slots resolve to the
   Inter entry point, and the weight tokens carry the per-scale nuance. Its 19-slot assertion is
@@ -108,15 +113,32 @@ but silently do nothing, worse than a clean break):
 - `MaterialSampleApp/MaterialFontsOverride.xaml` deleted: unreferenced, pointed at assets the
   sample does not ship, and overrode only legacy keys that no longer reach the scales.
 
+### Round 3 (2026-09-02, "shouldn't SharedTypography drive all of this?")
+
+- The 19 slot aliases re-declared in Material v2 `Typography.xaml` (×3 appearance blocks) and
+  Simple `Typography.xaml` (×2) were pure duplication once every alias targeted the same key:
+  the alias target resolves at lookup time against application scope, and a HighContrast miss
+  falls through to the next dictionary's `Default` block, so `SharedTypography.xaml`'s aliases
+  serve every appearance. Deleted; the per-theme files now override size/weight/spacing only,
+  and the round-2 header comments that defended the duplication are retracted.
+- `SimpleFontFamily` removed: a design-system-specific key for the root is a dead alias (it
+  resolves, overriding it reaches nothing), and its only consumer was `DatePicker.xaml`'s
+  `DatePickerFlyoutPresenterFontFamily`, now re-pointed at `DefaultFontFamily`. Test row, docs
+  (`design-tokens.md`, `material-migration.md`, `doc/styles/simple/DatePicker.md`) updated.
+- Not done here: Cupertino's 21 control sites still consume `CupertinoFontFamily` (the alias),
+  and the two hard-coded `SF Pro` keys in `HyperlinkButton.xaml` / `RadioButton.xaml` bypass
+  even that. Flipping the controls to `DefaultFontFamily` changes what a `CupertinoFonts`
+  `OverrideSource` file must redefine, so it needs its own migration note; separate change.
+
 ## Verification
 
 Simple host, `net10.0-desktop` Debug, headless `--runtime-tests`, filter `Given_Fonts`, run at
 this layer alone (`dev/sb/1705-1-single-typeface`, no #1707 on top):
 
-| Font packages                              | Result                                                    |
+| Font packages                              | Result (round 2 → round 3)                                |
 | ------------------------------------------ | --------------------------------------------------------- |
-| local `99.0.0-local.1` (uno.fonts#75 bits) | 37 / 37 passed                                            |
-| published pins (`Directory.Packages.props`) | 36 / 37; only `When_WeightsDiffer_Then_RenderedWidthsDiffer` fails, on "the Inter entry point did not load" |
+| local `99.0.0-local.1` (uno.fonts#75 bits) | 37 / 37 → 36 / 36 passed (the `SimpleFontFamily` row is gone) |
+| published pins (`Directory.Packages.props`) | 36 / 37 → 35 / 36; only `When_WeightsDiffer_Then_RenderedWidthsDiffer` fails, on "the Inter entry point did not load" |
 
 `Uno.Material.WinUI` and `SimpleSampleApp` build with zero errors and no warnings in changed
 files (desktop TFM). `markdownlint` + `cspell` (CI config) clean on every changed doc page except

@@ -45,13 +45,14 @@ To make this possible, the semantic `*Brush` resources are now shared, long-live
 The semantic type scales now derive from one root token, `DefaultFontFamily`, and per-scale weight nuance is carried by the `*FontWeight` tokens, resolved from that single family (a variable font, or a font shipping a font manifest) — see [Typography](semantic-styles.md#typography). The font override surface changes accordingly:
 
 - The `TypefacePlain` / `TypefaceBrand` token pair introduced in 7.1.1 is removed. An override file that still defines them is silently ignored; redefine `DefaultFontFamily` instead.
-- Simple's per-weight `SimpleRegularFontFamily` / `SimpleMediumFontFamily` / `SimpleSemiBoldFontFamily` / `SimpleBoldFontFamily` keys are removed. `SimpleFontFamily` remains as an alias of the root; a slot that needs a different weight overrides its `*FontWeight` token.
+- Simple's `SimpleFontFamily` and per-weight `SimpleRegularFontFamily` / `SimpleMediumFontFamily` / `SimpleSemiBoldFontFamily` / `SimpleBoldFontFamily` keys are removed; a slot that needs a different weight overrides its `*FontWeight` token.
 - The Material v2 type scales and per-control `*FontFamily` keys (`HyperlinkButtonFontFamily`, `SliderFontFamily`, `TextToggleButtonFontFamily`, `DatePickerFlyoutPresenterFontFamily`, `RatingControlCaptionFontFamily`, `SecondaryRatingControlCaptionFontFamily`) no longer derive from `MaterialRegularFontFamily` / `MaterialMediumFontFamily` / `MaterialLightFontFamily`. Those keys still resolve, to the weight-specific Roboto files, and the v1 styles are unchanged, but overriding them no longer changes v2 typography.
 - `SimpleButtonFontWeight` is now `Medium` (it was `Normal`, with the weight baked into the old Inter-Medium button family) and `SimpleToggleButtonFontWeight` is new. An app that overrides `SimpleButtonFontFamily` with its own font gets Medium buttons unless it also overrides the weight key.
 
 | Legacy key                                                 | Portable token                      | Cascades to         |
 | ---------------------------------------------------------- | ----------------------------------- | ------------------- |
 | `TypefacePlain`, `TypefaceBrand`                           | `DefaultFontFamily`                 | Every type scale    |
+| `SimpleFontFamily`                                         | `DefaultFontFamily`                 | Every type scale    |
 | `SimpleRegular` / `Medium` / `SemiBold` / `BoldFontFamily` | `DefaultFontFamily` + `*FontWeight` | Every type scale    |
 | `MaterialRegularFontFamily`, `MaterialMediumFontFamily`    | `DefaultFontFamily`                 | Every v2 type scale |
 
