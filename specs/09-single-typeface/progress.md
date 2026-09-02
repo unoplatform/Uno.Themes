@@ -26,9 +26,11 @@ already apply (`Uno.Simple.WinUI/Styles/Controls/TextBlock.xaml`,
   **unoplatform/uno.fonts#75** adds the variable `Inter.ttf` / `Roboto.ttf` entry points (family
   names verified as "Inter"/"Roboto", full 100–900 `wght` axes) plus manifests mapping
   400/500/600/700 (Inter) and 300/400/500 (Roboto) to the existing statics — the
-  `Uno.Fonts.OpenSans` model. **This layer depends on that publish**; until then a local feed
-  override in `NuGet.Config` + `Directory.Packages.props` (version `99.0.0-local.1`, uncommitted)
-  stands in, and merge is gated on re-pinning to the published versions.
+  `Uno.Fonts.OpenSans` model. #75 merged on 2026-09-01; its follow-up **#76** ships every static
+  weight (Thin → Black) with manifests mapping 100–900 for both fonts, published to nuget.org as
+  `Uno.Fonts.Inter` / `Uno.Fonts.Roboto` **2.10.0-dev.9**. Both `Directory.Packages.props`
+  (library and samples) are pinned to it (round 5); the `99.0.0-local.1` local-feed stand-in used
+  during development is retired.
 
 ## Breaking change (deliberate, `feat!`)
 
@@ -166,11 +168,24 @@ Added `src/samples/MaterialSampleApp/RuntimeTests/Given_Fonts.cs`: the Simple ho
 `Uno.Fonts.Roboto`, so the Material head carries the Roboto entry-point pin, the 19-slot + six
 re-pointed per-control key guard, and the rendered-weight gate (AGENTS.md §5 placement exception).
 
+### Round 5 (2026-09-02): re-pinned to the published packages
+
+`Uno.Fonts.Inter` / `Uno.Fonts.Roboto` `2.10.0-dev.9` (nuget.org) replace `2.9.0-dev.12` /
+`2.2.2` in both `Directory.Packages.props`. Full runtime-test suites on the pins, base branch,
+`net10.0-desktop` Debug, headless:
+
+| Head     | Result                                                   |
+| -------- | -------------------------------------------------------- |
+| Simple   | 182 / 182 passed, 1 pre-existing skip, 0 failed          |
+| Material | 62 / 62 passed                                           |
+
+`FontDetailsCache` load failures: only the deliberately nonexistent test fonts. The merge gate is
+lifted.
+
 ## Open items
 
-- [ ] unoplatform/uno.fonts#76 merged + packages published; `Directory.Packages.props` (library
-      and samples) re-pinned to that version (blocks merge; both width gates are red on CI until
-      then)
+- [x] unoplatform/uno.fonts#76 published as `2.10.0-dev.9`; `Directory.Packages.props` (library
+      and samples) re-pinned (round 5). The width gates are green on the published packages.
 - [ ] Squash note: the BREAKING CHANGE footer should also list `SimpleButtonFontWeight`
       Normal→Medium, the new `SimpleToggleButtonFontWeight` / `SimpleRegularFontWeight` /
       `SimpleSemiBoldFontWeight` keys, `SimpleFontFamily`, and the six re-pointed Material v2
