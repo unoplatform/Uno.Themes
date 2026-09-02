@@ -1,0 +1,75 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Omarchy — ToolTip
+		Reproduces flutter_omarchy widgets/tooltip.dart (OmarchyTooltip).
+
+		Background normal.black, body text in bright.white, no border, sharp corners. The
+		source delegates to Flutter's Tooltip, whose desktop default padding is 16,8.
+
+		Deviations:
+		- MaxWidth 320: Flutter wraps at the screen width; a cap keeps long messages readable.
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Lightweight styling ThemeResource aliases -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light (one palette, both dictionaries) ─── -->
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="ToolTipBackground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="ToolTipForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+		</ResourceDictionary>
+
+		<!-- ─── Default ─── -->
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="ToolTipBackground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="ToolTipForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Sizing / Geometry constants -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Flutter desktop Tooltip default: 16 horizontal (Space400), 8 vertical (Space200); no combined token -->
+	<Thickness x:Key="OmarchyToolTipPadding">16,8,16,8</Thickness>
+	<x:Double x:Key="OmarchyToolTipMaxWidth">320</x:Double>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- ToolTip Style (OmarchyTooltip) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyToolTipStyle"
+		   TargetType="ToolTip">
+
+		<Setter Property="Background" Value="{ThemeResource ToolTipBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource ToolTipForeground}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource OmarchyToolTipPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="MaxWidth" Value="{ThemeResource OmarchyToolTipMaxWidth}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToolTip">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="{TemplateBinding CornerRadius}"
+							Padding="{TemplateBinding Padding}">
+						<ContentPresenter Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  TextWrapping="Wrap"
+										  MaxWidth="{TemplateBinding MaxWidth}" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

@@ -208,6 +208,89 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Neutral radio (the implicit style) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_RadioButton_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<RadioButton Content="Option 1"
+											 GroupName="OmarchyGroup1"
+											 IsChecked="True"
+											 Style="{StaticResource OmarchyRadioButtonStyle}" />
+								<RadioButton Content="Option 2"
+											 GroupName="OmarchyGroup1"
+											 Style="{StaticResource OmarchyRadioButtonStyle}" />
+								<RadioButton Content="Option 3"
+											 GroupName="OmarchyGroup1"
+											 Style="{StaticResource OmarchyRadioButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_RadioButton_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<RadioButton Content="Disabled Selected"
+											 GroupName="OmarchyGroup2"
+											 IsChecked="True"
+											 IsEnabled="False"
+											 Style="{StaticResource OmarchyRadioButtonStyle}" />
+								<RadioButton Content="Disabled Unselected"
+											 GroupName="OmarchyGroup2"
+											 IsEnabled="False"
+											 Style="{StaticResource OmarchyRadioButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- ANSI accent variants (one group each so every color shows its selected state) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_RadioButton_Ansi"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<StackPanel Orientation="Horizontal"
+											Spacing="16">
+									<RadioButton Content="Black"
+												 GroupName="OmarchyAnsiBlack"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonBlackStyle}" />
+									<RadioButton Content="White"
+												 GroupName="OmarchyAnsiWhite"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonWhiteStyle}" />
+									<RadioButton Content="Red"
+												 GroupName="OmarchyAnsiRed"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonRedStyle}" />
+									<RadioButton Content="Green"
+												 GroupName="OmarchyAnsiGreen"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonGreenStyle}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal"
+											Spacing="16">
+									<RadioButton Content="Yellow"
+												 GroupName="OmarchyAnsiYellow"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonYellowStyle}" />
+									<RadioButton Content="Blue"
+												 GroupName="OmarchyAnsiBlue"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonBlueStyle}" />
+									<RadioButton Content="Magenta"
+												 GroupName="OmarchyAnsiMagenta"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonMagentaStyle}" />
+									<RadioButton Content="Cyan"
+												 GroupName="OmarchyAnsiCyan"
+												 IsChecked="True"
+												 Style="{StaticResource OmarchyRadioButtonCyanStyle}" />
+								</StackPanel>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

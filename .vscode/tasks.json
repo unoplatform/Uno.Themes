@@ -80,6 +80,32 @@
       "problemMatcher": "$msCompile"
     },
     {
+      "label": "build-Omarchy-wasm",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/OmarchySampleApp/OmarchySampleApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-browserwasm",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-Omarchy-desktop",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/samples/OmarchySampleApp/OmarchySampleApp.csproj",
+        "/property:GenerateFullPaths=true",
+        "/property:TargetFramework=net10.0-desktop",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
       // TargetFrameworkOverride activates the wrapper's ordering ProjectReferences so the
       // guest heads it hosts are built first.
       "label": "build-Themes-desktop",
@@ -105,7 +131,8 @@
       "dependsOn": [
         "build-Material-wasm",
         "build-Cupertino-wasm",
-        "build-Simple-wasm"
+        "build-Simple-wasm",
+        "build-Omarchy-wasm"
       ],
       "args": [
         "build",

@@ -565,6 +565,93 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="Outlined (OmarchyInputContainer)"
+						           Style="{StaticResource TitleSmall}"
+						           Margin="0,16,0,4" />
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_Outlined"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyOutlinedTextBoxStyle}"
+							         PlaceholderText="Placeholder"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_OutlinedWithText"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyOutlinedTextBoxStyle}"
+							         Text="With text"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_OutlinedWithHeader"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyOutlinedTextBoxStyle}"
+							         Header="Email address"
+							         PlaceholderText="Enter your email"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_OutlinedMultiline"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyOutlinedTextBoxStyle}"
+							         PlaceholderText="Multiline"
+							         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pretium augue ut lectus consequat lobortis."
+							         AcceptsReturn="True"
+							         TextWrapping="Wrap"
+							         MinHeight="96"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_OutlinedDisabled"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyOutlinedTextBoxStyle}"
+							         Text="Disabled"
+							         IsEnabled="False"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<TextBlock Text="Filled (OmarchyTextInput)"
+						           Style="{StaticResource TitleSmall}"
+						           Margin="0,16,0,4" />
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_Filled"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyFilledTextBoxStyle}"
+							         PlaceholderText="Placeholder"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_FilledWithText"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyFilledTextBoxStyle}"
+							         Text="With text"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_FilledMultiline"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyFilledTextBoxStyle}"
+							         PlaceholderText="Multiline"
+							         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pretium augue ut lectus consequat lobortis."
+							         AcceptsReturn="True"
+							         TextWrapping="Wrap"
+							         MinHeight="96"
+							         Width="300" />
+						</smtx:XamlDisplay>
+
+						<smtx:XamlDisplay UniqueKey="Omarchy_TextBox_FilledDisabled"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TextBox Style="{StaticResource OmarchyFilledTextBoxStyle}"
+							         Text="Disabled"
+							         IsEnabled="False"
+							         Width="300" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

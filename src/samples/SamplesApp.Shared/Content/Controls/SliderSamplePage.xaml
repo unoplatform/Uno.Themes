@@ -271,6 +271,56 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Slider_Default"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource OmarchySliderStyle}"
+							        Value="50"
+							        Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- With Header -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Slider_WithHeader"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource OmarchySliderStyle}"
+							        Header="Volume"
+							        Value="75"
+							        Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- Green, 10 divisions (StepFrequency) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Slider_GreenStepped"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource OmarchySliderGreenStyle}"
+							        Minimum="0"
+							        Maximum="100"
+							        StepFrequency="10"
+							        Value="30"
+							        Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- Red -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Slider_Red"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource OmarchySliderRedStyle}"
+							        Value="60"
+							        Width="300" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Slider_Disabled"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Slider Style="{StaticResource OmarchySliderStyle}"
+							        Value="40"
+							        IsEnabled="False"
+							        Width="300" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

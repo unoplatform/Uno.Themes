@@ -1,0 +1,77 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Omarchy typography: CaskaydiaMono Nerd Font Mono, the face flutter_omarchy bundles
+		(Regular / Bold / Italic). The font files ship with this library.
+
+		Semantic slot -> face mapping is declared here (merged after SharedTypography.xaml) so
+		it deterministically wins over the shared Segoe-based defaults; see the Simple theme's
+		Fonts.xaml and specs/lessons.md for why Typography.xaml alone is not enough.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<ResourceDictionary x:Key="Light">
+			<FontFamily x:Key="OmarchyRegularFontFamily">ms-appx:///Uno.Omarchy.WinUI/Assets/Fonts/CaskaydiaMonoNerdFontMono-Regular.ttf#CaskaydiaMono Nerd Font Mono</FontFamily>
+			<FontFamily x:Key="OmarchyBoldFontFamily">ms-appx:///Uno.Omarchy.WinUI/Assets/Fonts/CaskaydiaMonoNerdFontMono-Bold.ttf#CaskaydiaMono Nerd Font Mono</FontFamily>
+			<FontFamily x:Key="OmarchyItalicFontFamily">ms-appx:///Uno.Omarchy.WinUI/Assets/Fonts/CaskaydiaMonoNerdFontMono-Italic.ttf#CaskaydiaMono Nerd Font Mono</FontFamily>
+
+			<!-- Root typeface tokens: Omarchy has a single face; both roots are the regular cut -->
+			<StaticResource x:Key="TypefacePlain" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="TypefaceBrand" ResourceKey="OmarchyRegularFontFamily" />
+
+			<!-- Titles are theme.text.bold, descriptions and hints theme.text.italic, everything else theme.text.normal -->
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="OmarchyItalicFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="OmarchyItalicFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="OmarchyItalicFontFamily" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Default">
+			<FontFamily x:Key="OmarchyRegularFontFamily">ms-appx:///Uno.Omarchy.WinUI/Assets/Fonts/CaskaydiaMonoNerdFontMono-Regular.ttf#CaskaydiaMono Nerd Font Mono</FontFamily>
+			<FontFamily x:Key="OmarchyBoldFontFamily">ms-appx:///Uno.Omarchy.WinUI/Assets/Fonts/CaskaydiaMonoNerdFontMono-Bold.ttf#CaskaydiaMono Nerd Font Mono</FontFamily>
+			<FontFamily x:Key="OmarchyItalicFontFamily">ms-appx:///Uno.Omarchy.WinUI/Assets/Fonts/CaskaydiaMonoNerdFontMono-Italic.ttf#CaskaydiaMono Nerd Font Mono</FontFamily>
+
+			<StaticResource x:Key="TypefacePlain" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="TypefaceBrand" ResourceKey="OmarchyRegularFontFamily" />
+
+			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="OmarchyBoldFontFamily" />
+			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="OmarchyRegularFontFamily" />
+			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="OmarchyItalicFontFamily" />
+			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="OmarchyItalicFontFamily" />
+			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="OmarchyItalicFontFamily" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>

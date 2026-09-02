@@ -93,6 +93,21 @@ public partial class SamplePageLayout
 	}
 
 	#endregion
+	#region Property: OmarchyTemplate
+
+	public static DependencyProperty OmarchyTemplateProperty { get; } = DependencyProperty.Register(
+		nameof(OmarchyTemplate),
+		typeof(DataTemplate),
+		typeof(SamplePageLayout),
+		new PropertyMetadata(default));
+
+	public DataTemplate OmarchyTemplate
+	{
+		get => (DataTemplate)GetValue(OmarchyTemplateProperty);
+		set => SetValue(OmarchyTemplateProperty, value);
+	}
+
+	#endregion
 	#region Property: MaterialTemplate
 
 	public static DependencyProperty MaterialTemplateProperty { get; } = DependencyProperty.Register(

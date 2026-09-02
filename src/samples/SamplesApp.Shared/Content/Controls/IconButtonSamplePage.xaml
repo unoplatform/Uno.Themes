@@ -72,5 +72,57 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.OmarchyTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- outline(white) around an icon: the default IconButton -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_IconButton_Default"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Style="{StaticResource OmarchyIconButtonStyle}">
+								<SymbolIcon Symbol="Add" />
+							</Button>
+							<Button IsEnabled="False"
+									Style="{StaticResource OmarchyIconButtonStyle}">
+								<SymbolIcon Symbol="Add" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- ANSI variants -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_IconButton_Ansi"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Style="{StaticResource OmarchyIconButtonBlackStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource OmarchyIconButtonWhiteStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource OmarchyIconButtonRedStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource OmarchyIconButtonGreenStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource OmarchyIconButtonYellowStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource OmarchyIconButtonBlueStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource OmarchyIconButtonMagentaStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+							<Button Style="{StaticResource OmarchyIconButtonCyanStyle}">
+								<SymbolIcon Symbol="Edit" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.OmarchyTemplate>
 	</sample:SamplePageLayout>
 </Page>

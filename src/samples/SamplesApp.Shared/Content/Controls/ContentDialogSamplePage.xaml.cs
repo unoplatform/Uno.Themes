@@ -5,7 +5,7 @@
 	nameof(ContentDialog),
 	Description = "Represents a dialog box that can be customized to contain checkboxes, hyperlinks, buttons and any other XAML content.",
 	DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.ContentDialog",
-	SupportedDesigns = new[] { Design.Material, Design.Simple }
+	SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Omarchy }
 )]
 public sealed partial class ContentDialogSamplePage : Page
 {
@@ -26,6 +26,8 @@ public sealed partial class ContentDialogSamplePage : Page
 			[nameof(BuildSimpleConfirmDialog)] = BuildSimpleConfirmDialog,
 			[nameof(BuildSimpleThreeButtonDialog)] = BuildSimpleThreeButtonDialog,
 			[nameof(BuildSimpleCustomContentDialog)] = BuildSimpleCustomContentDialog,
+			[nameof(BuildOmarchyConfirmDialog)] = BuildOmarchyConfirmDialog,
+			[nameof(BuildOmarchyCustomContentDialog)] = BuildOmarchyCustomContentDialog,
 		};
 
 		if ((sender as Button)?.Tag is string context && mappings.TryGetValue(context, out var builder))
@@ -147,6 +149,30 @@ public sealed partial class ContentDialogSamplePage : Page
 			}
 		},
 		PrimaryButtonText = "Submit",
+		CloseButtonText = "Cancel",
+	};
+
+	private ContentDialog BuildOmarchyConfirmDialog() => new ContentDialog()
+	{
+		Title = "Remove theme?",
+		Content = "Tokyo Night will be removed from ~/.config/omarchy/themes. This cannot be undone.",
+		PrimaryButtonText = "Remove",
+		SecondaryButtonText = "Cancel",
+	};
+
+	private ContentDialog BuildOmarchyCustomContentDialog() => new ContentDialog()
+	{
+		Title = "Rename theme",
+		Content = new StackPanel
+		{
+			Spacing = 12,
+			Children =
+			{
+				new TextBlock { Text = "Enter a new name for Tokyo Night:", TextWrapping = TextWrapping.Wrap },
+				new TextBox { PlaceholderText = "Theme name" },
+			}
+		},
+		PrimaryButtonText = "Rename",
 		CloseButtonText = "Cancel",
 	};
 }

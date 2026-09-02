@@ -759,6 +759,69 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock FontSize="14"
+								   Margin="0,8,0,0"
+								   Text="Omarchy has no floating action button: the outline icon button is the closest widget (Secondary = Magenta, Tertiary = Cyan)" />
+
+						<!-- Icon only -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Fab_Icon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Style="{StaticResource OmarchyIconButtonStyle}">
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</Button>
+								<Button Style="{StaticResource OmarchyIconButtonMagentaStyle}">
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</Button>
+								<Button Style="{StaticResource OmarchyIconButtonCyanStyle}">
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</Button>
+								<Button IsEnabled="False"
+										Style="{StaticResource OmarchyIconButtonStyle}">
+									<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Icon and text -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Fab_IconText"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Content="Create"
+										Style="{StaticResource OmarchyOutlinedButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+								<Button Content="Create"
+										Style="{StaticResource OmarchyOutlinedButtonMagentaStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+								<Button Content="Create"
+										Style="{StaticResource OmarchyOutlinedButtonCyanStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+								<Button Content="Create"
+										IsEnabled="False"
+										Style="{StaticResource OmarchyOutlinedButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<PathIcon Data="M16 9.14286H9.14286V16H6.85714V9.14286H0V6.85714H6.85714V0H9.14286V6.85714H16V9.14286Z" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

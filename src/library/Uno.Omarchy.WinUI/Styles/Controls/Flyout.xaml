@@ -1,0 +1,65 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Omarchy — FlyoutPresenter
+		Reproduces flutter_omarchy widgets/pop_over.dart (OmarchyPopOverContainer).
+
+		Pop-over container: an opaque background surface with a 2 px border in
+		theme.colors.border (= accent), sharp corners.
+
+		Deviations:
+		- Padding 16 (Space400): the source container has none (each pop-over lays out its own
+		  content), but WinUI flyout content expects the presenter to pad it.
+		- No fade / slide entrance (120 ms in the source): the theme omits generated durations.
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Lightweight styling ThemeResource aliases -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light (one palette, both dictionaries) ─── -->
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="FlyoutPresenterBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<!-- theme.colors.border -->
+			<StaticResource x:Key="FlyoutPresenterBorderBrush" ResourceKey="OmarchyAccentBrush" />
+		</ResourceDictionary>
+
+		<!-- ─── Default ─── -->
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="FlyoutPresenterBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="FlyoutPresenterBorderBrush" ResourceKey="OmarchyAccentBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<StaticResource x:Key="FlyoutPresenterBorderThickness" ResourceKey="OmarchyBorderThickness" />
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- FlyoutPresenter Style (OmarchyPopOverContainer) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyFlyoutPresenterStyle"
+		   TargetType="FlyoutPresenter">
+
+		<Setter Property="Background" Value="{ThemeResource FlyoutPresenterBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FlyoutPresenterBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource FlyoutPresenterBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<!-- The source container has no padding; WinUI flyout content expects some -->
+		<Setter Property="Padding" Value="{ThemeResource Space400Thickness}" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="MaxWidth" Value="PositiveInfinity" />
+		<Setter Property="MaxHeight" Value="PositiveInfinity" />
+		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+		<Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+	</Style>
+
+</ResourceDictionary>

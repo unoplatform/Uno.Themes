@@ -1,6 +1,6 @@
 ﻿namespace Uno.Themes.Samples.Content.Controls;
 
-[SamplePage(SampleCategory.Controls, "ToggleSwitch", Description = "This control allows users to switch between only two values, on or off.", DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.toggleswitch", SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple })]
+[SamplePage(SampleCategory.Controls, "ToggleSwitch", Description = "This control allows users to switch between only two values, on or off.", DocumentationLink = "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.toggleswitch", SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple, Design.Omarchy })]
 public sealed partial class ToggleSwitchSamplePage : Page
 {
 	public ToggleSwitchSamplePage()

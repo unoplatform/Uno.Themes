@@ -1,7 +1,7 @@
 namespace Uno.Themes.Samples.Content;
 
 [SamplePage(SampleCategory.None, "Runtime Tests", IconSymbol = Symbol.Repair,
-	SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple })]
+	SupportedDesigns = new[] { Design.Material, Design.Cupertino, Design.Simple, Design.Omarchy })]
 public sealed partial class RuntimeTestRunner : Page
 {
 	public RuntimeTestRunner()

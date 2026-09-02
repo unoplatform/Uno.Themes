@@ -16,6 +16,7 @@ uid: Uno.Themes.Overview
 - [Material Overview](material-getting-started.md)
 - [Cupertino Overview](cupertino-getting-started.md)
 - [Simple Overview](simple-getting-started.md)
+- [Omarchy Overview](omarchy-getting-started.md)
 - [Fluent Overview](fluent-getting-started.md)
 
 Cross-cutting guides shared by the theme libraries:
@@ -29,14 +30,15 @@ Cross-cutting guides shared by the theme libraries:
 
 [Uno Themes](https://github.com/unoplatform/Uno.Themes) is the repository for add-ons enabled through UnoFeatures that can be added to any new or existing Uno solution.
 
-It contains four libraries:
+It contains five libraries:
 
 - `Uno Themes`: a library that contains the base resources, extensions, and helper classes for the different design system libraries
 - `Uno Material`: a library that contains styles following the [Material 3](https://m3.material.io/) Design System
 - `Uno Cupertino`: a library that contains styles following the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines)
 - `Uno Simple`: a library that contains styles following the [Figma Simple Design System](https://www.figma.com/community/file/1380235722331273046)
+- `Uno Omarchy`: a library that contains terminal-inspired styles following the [Omarchy](https://omarchy.org) design system (a port of [flutter_omarchy](https://github.com/aloisdeniel/flutter_omarchy)), with its 22 stock palettes
 
-`Material`, `Cupertino`, and `Simple` libraries help you style your application with a few lines of code including:
+`Material`, `Cupertino`, `Simple`, and `Omarchy` libraries help you style your application with a few lines of code including:
 
 - Color system for both Light and Dark themes — customizable wholesale from a single [seed color](seed-colors.md), or key-by-key via overrides, with helper classes such as `SemanticThemeHelper` for changing colors at runtime
 - Styles for existing WinUI controls like Buttons, TextBox, etc.

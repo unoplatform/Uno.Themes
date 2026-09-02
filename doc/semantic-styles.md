@@ -17,6 +17,7 @@ Each theme's `_Resources.xaml` defines `<StaticResource>` aliases that map seman
 
 - **Material**: `FilledButtonStyle` &rarr; `MaterialFilledButtonStyle`
 - **Simple**: `FilledButtonStyle` &rarr; `SimpleFilledButtonStyle`
+- **Omarchy**: `FilledButtonStyle` &rarr; `OmarchyFilledButtonStyle`
 
 ## Control Style Mappings
 
@@ -24,188 +25,188 @@ The following tables show every semantic style key and how it resolves under eac
 
 ### Button
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `FilledButtonStyle` | `MaterialFilledButtonStyle` | `SimpleFilledButtonStyle` | Default implicit style for both themes |
-| `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | **GAP** | Simple has no elevated/shadow variant |
-| `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleFilledTonalButtonStyle` | Simple "Neutral" is closest tonal match |
-| `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleFilledTonalButtonStyle` | Same Simple target as FilledTonal |
-| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | Text-only appearance |
-| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | Simple has multiple icon button colors; Primary is default |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `FilledButtonStyle` | `MaterialFilledButtonStyle` | `SimpleFilledButtonStyle` | `OmarchyFilledButtonStyle` | Default implicit style for Material and Simple; Omarchy's implicit `Button` is `OmarchyOutlinedButtonStyle` (the `outline(white)` widget default) |
+| `ElevatedButtonStyle` | `MaterialElevatedButtonStyle` | **GAP** | **GAP** | Simple has no elevated/shadow variant |
+| `FilledTonalButtonStyle` | `MaterialFilledTonalButtonStyle` | `SimpleFilledTonalButtonStyle` | `OmarchyFilledButtonWhiteStyle` | Simple "Neutral" is closest tonal match |
+| `OutlinedButtonStyle` | `MaterialOutlinedButtonStyle` | `SimpleFilledTonalButtonStyle` | `OmarchyOutlinedButtonStyle` | Same Simple target as FilledTonal |
+| `TextButtonStyle` | `MaterialTextButtonStyle` | `SimpleTextButtonStyle` | `OmarchyTextButtonStyle` | Text-only appearance |
+| `IconButtonStyle` | `MaterialIconButtonStyle` | `SimpleIconButtonStyle` | `OmarchyIconButtonStyle` | Simple has multiple icon button colors; Primary is default |
 
 ### Floating Action Button (FAB)
 
-FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to existing icon button styles.
+FAB is a Material-specific concept. Under the Simple and Omarchy themes, FAB keys resolve to existing icon button styles.
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonStyle` | Primary icon button as FAB equivalent |
-| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleIconButtonStyle` | Same as FabStyle |
-| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonStyle` | No large variant in Simple |
-| `SecondaryFabStyle` | `MaterialSecondaryFabStyle` | `SimpleIconButtonNeutralStyle` | |
-| `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleIconButtonNeutralStyle` | |
-| `SecondaryLargeFabStyle` | `MaterialSecondaryLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
-| `TertiaryFabStyle` | `MaterialTertiaryFabStyle` | `SimpleIconButtonSubtleStyle` | |
-| `TertiarySmallFabStyle` | `MaterialTertiarySmallFabStyle` | `SimpleIconButtonSubtleStyle` | |
-| `TertiaryLargeFabStyle` | `MaterialTertiaryLargeFabStyle` | `SimpleIconButtonSubtleStyle` | |
-| `SurfaceFabStyle` | `MaterialSurfaceFabStyle` | `SimpleIconButtonNeutralStyle` | |
-| `SurfaceSmallFabStyle` | `MaterialSurfaceSmallFabStyle` | `SimpleIconButtonNeutralStyle` | |
-| `SurfaceLargeFabStyle` | `MaterialSurfaceLargeFabStyle` | `SimpleIconButtonNeutralStyle` | |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `FabStyle` | `MaterialFabStyle` | `SimpleIconButtonStyle` | `OmarchyIconButtonStyle` | Primary icon button as FAB equivalent |
+| `SmallFabStyle` | `MaterialSmallFabStyle` | `SimpleIconButtonStyle` | `OmarchyIconButtonStyle` | Same as FabStyle |
+| `LargeFabStyle` | `MaterialLargeFabStyle` | `SimpleIconButtonStyle` | `OmarchyIconButtonStyle` | No large variant in Simple |
+| `SecondaryFabStyle` | `MaterialSecondaryFabStyle` | `SimpleIconButtonNeutralStyle` | `OmarchyIconButtonMagentaStyle` | |
+| `SecondarySmallFabStyle` | `MaterialSecondarySmallFabStyle` | `SimpleIconButtonNeutralStyle` | `OmarchyIconButtonMagentaStyle` | |
+| `SecondaryLargeFabStyle` | `MaterialSecondaryLargeFabStyle` | `SimpleIconButtonNeutralStyle` | `OmarchyIconButtonMagentaStyle` | |
+| `TertiaryFabStyle` | `MaterialTertiaryFabStyle` | `SimpleIconButtonSubtleStyle` | `OmarchyIconButtonCyanStyle` | |
+| `TertiarySmallFabStyle` | `MaterialTertiarySmallFabStyle` | `SimpleIconButtonSubtleStyle` | `OmarchyIconButtonCyanStyle` | |
+| `TertiaryLargeFabStyle` | `MaterialTertiaryLargeFabStyle` | `SimpleIconButtonSubtleStyle` | `OmarchyIconButtonCyanStyle` | |
+| `SurfaceFabStyle` | `MaterialSurfaceFabStyle` | `SimpleIconButtonNeutralStyle` | `OmarchyIconButtonStyle` | |
+| `SurfaceSmallFabStyle` | `MaterialSurfaceSmallFabStyle` | `SimpleIconButtonNeutralStyle` | `OmarchyIconButtonStyle` | |
+| `SurfaceLargeFabStyle` | `MaterialSurfaceLargeFabStyle` | `SimpleIconButtonNeutralStyle` | `OmarchyIconButtonStyle` | |
 
 ### ToggleButton
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `TextToggleButtonStyle` | `MaterialTextToggleButtonStyle` | `SimpleTextToggleButtonStyle` | Text content toggle |
-| `IconToggleButtonStyle` | `MaterialIconToggleButtonStyle` | `SimpleIconToggleButtonStyle` | Compact icon-only toggle |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `TextToggleButtonStyle` | `MaterialTextToggleButtonStyle` | `SimpleTextToggleButtonStyle` | `OmarchyTextToggleButtonStyle` | Text content toggle |
+| `IconToggleButtonStyle` | `MaterialIconToggleButtonStyle` | `SimpleIconToggleButtonStyle` | `OmarchyIconToggleButtonStyle` | Compact icon-only toggle |
 
 ### TextBox
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleFilledTextBoxStyle` | Background fill, no border |
-| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | Default implicit style for Simple |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `FilledTextBoxStyle` | `MaterialFilledTextBoxStyle` | `SimpleFilledTextBoxStyle` | `OmarchyFilledTextBoxStyle` | Background fill, no border |
+| `OutlinedTextBoxStyle` | `MaterialOutlinedTextBoxStyle` | `SimpleOutlinedTextBoxStyle` | `OmarchyOutlinedTextBoxStyle` | Default implicit style for Simple |
 
 ### PasswordBox
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `FilledPasswordBoxStyle` | `MaterialFilledPasswordBoxStyle` | `SimpleFilledPasswordBoxStyle` | Background fill with border |
-| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | Default implicit style for Simple |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `FilledPasswordBoxStyle` | `MaterialFilledPasswordBoxStyle` | `SimpleFilledPasswordBoxStyle` | `OmarchyFilledPasswordBoxStyle` | Background fill with border |
+| `OutlinedPasswordBoxStyle` | `MaterialOutlinedPasswordBoxStyle` | `SimpleOutlinedPasswordBoxStyle` | `OmarchyOutlinedPasswordBoxStyle` | Default implicit style for Simple |
 
 ### HyperlinkButton
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `HyperlinkButtonStyle` | `MaterialHyperlinkButtonStyle` | `SimpleHyperlinkButtonStyle` | Primary underlined link |
-| `SecondaryHyperlinkButtonStyle` | `MaterialSecondaryHyperlinkButtonStyle` | `SimpleSecondaryHyperlinkButtonStyle` | Secondary underlined link |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `HyperlinkButtonStyle` | `MaterialHyperlinkButtonStyle` | `SimpleHyperlinkButtonStyle` | `OmarchyHyperlinkButtonStyle` | Primary underlined link |
+| `SecondaryHyperlinkButtonStyle` | `MaterialSecondaryHyperlinkButtonStyle` | `SimpleSecondaryHyperlinkButtonStyle` | `OmarchySecondaryHyperlinkButtonStyle` | Secondary underlined link |
 
 ### ComboBox
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleComboBoxStyle` | Direct match |
-| `ComboBoxItemStyle` | `MaterialComboBoxItemStyle` | `SimpleComboBoxItemStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `ComboBoxStyle` | `MaterialComboBoxStyle` | `SimpleComboBoxStyle` | `OmarchyComboBoxStyle` | Direct match |
+| `ComboBoxItemStyle` | `MaterialComboBoxItemStyle` | `SimpleComboBoxItemStyle` | `OmarchyComboBoxItemStyle` | Direct match |
 
 ### CheckBox
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `CheckBoxStyle` | `MaterialCheckBoxStyle` | `SimpleCheckBoxStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `CheckBoxStyle` | `MaterialCheckBoxStyle` | `SimpleCheckBoxStyle` | `OmarchyCheckBoxStyle` | Direct match |
 
 ### RadioButton
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `RadioButtonStyle` | `MaterialRadioButtonStyle` | `SimpleRadioButtonStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `RadioButtonStyle` | `MaterialRadioButtonStyle` | `SimpleRadioButtonStyle` | `OmarchyRadioButtonStyle` | Direct match |
 
 ### ToggleSwitch
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `ToggleSwitchStyle` | `MaterialToggleSwitchStyle` | `SimpleToggleSwitchStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `ToggleSwitchStyle` | `MaterialToggleSwitchStyle` | `SimpleToggleSwitchStyle` | `OmarchyToggleSwitchStyle` | Direct match |
 
 ### Slider
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `SliderStyle` | `MaterialSliderStyle` | `SimpleSliderStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `SliderStyle` | `MaterialSliderStyle` | `SimpleSliderStyle` | `OmarchySliderStyle` | Direct match |
 
 ### ProgressBar
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `ProgressBarStyle` | `MaterialProgressBarStyle` | `SimpleProgressBarStyle` | Horizontal indicator |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `ProgressBarStyle` | `MaterialProgressBarStyle` | `SimpleProgressBarStyle` | `OmarchyProgressBarStyle` | Horizontal indicator |
 
 ### ProgressRing
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `ProgressRingStyle` | `MaterialProgressRingStyle` | `SimpleProgressRingStyle` | Circular indicator |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `ProgressRingStyle` | `MaterialProgressRingStyle` | `SimpleProgressRingStyle` | `OmarchyProgressRingStyle` | Circular indicator |
 
 ### ListView
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `ListViewStyle` | `MaterialListViewStyle` | `SimpleListViewStyle` | Direct match |
-| `ListViewItemStyle` | `MaterialListViewItemStyle` | `SimpleListViewItemStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `ListViewStyle` | `MaterialListViewStyle` | `SimpleListViewStyle` | `OmarchyListViewStyle` | Direct match |
+| `ListViewItemStyle` | `MaterialListViewItemStyle` | `SimpleListViewItemStyle` | `OmarchyListViewItemStyle` | Direct match |
 
 ### ContentDialog
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `ContentDialogStyle` | `MaterialContentDialogStyle` | `SimpleContentDialogStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `ContentDialogStyle` | `MaterialContentDialogStyle` | `SimpleContentDialogStyle` | `OmarchyContentDialogStyle` | Direct match |
 
 ### CommandBar
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `CommandBarStyle` | `MaterialCommandBarStyle` | **GAP** | Simple has no CommandBar style |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `CommandBarStyle` | `MaterialCommandBarStyle` | **GAP** | **GAP** | Simple has no CommandBar style |
 
 ### AppBarButton
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `AppBarButtonStyle` | `MaterialAppBarButtonStyle` | `SimpleAppBarButtonStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `AppBarButtonStyle` | `MaterialAppBarButtonStyle` | `SimpleAppBarButtonStyle` | **GAP** | Direct match |
 
 ### NavigationView
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `NavigationViewStyle` | `MaterialNavigationViewStyle` | `SimpleNavigationViewStyle` | |
-| `NavigationViewItemStyle` | `MaterialNavigationViewItemStyle` | `SimpleNavigationViewItemStyle` | |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `NavigationViewStyle` | `MaterialNavigationViewStyle` | `SimpleNavigationViewStyle` | `OmarchyNavigationViewStyle` | |
+| `NavigationViewItemStyle` | `MaterialNavigationViewItemStyle` | `SimpleNavigationViewItemStyle` | `OmarchyNavigationViewItemStyle` | |
 
 ### CalendarView
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `CalendarViewStyle` | `MaterialCalendarViewStyle` | `SimpleCalendarViewStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `CalendarViewStyle` | `MaterialCalendarViewStyle` | `SimpleCalendarViewStyle` | **GAP** | Direct match |
 
 ### CalendarDatePicker
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `CalendarDatePickerStyle` | `MaterialCalendarDatePickerStyle` | `SimpleCalendarDatePickerStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `CalendarDatePickerStyle` | `MaterialCalendarDatePickerStyle` | `SimpleCalendarDatePickerStyle` | **GAP** | Direct match |
 
 ### DatePicker
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `DatePickerStyle` | `MaterialDatePickerStyle` | `SimpleDatePickerStyle` | Direct match |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `DatePickerStyle` | `MaterialDatePickerStyle` | `SimpleDatePickerStyle` | **GAP** | Direct match |
 
 ### MediaPlayerElement
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `MediaTransportControlsStyle` | `MaterialMediaTransportControlsStyle` | **GAP** | Simple has no media style |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `MediaTransportControlsStyle` | `MaterialMediaTransportControlsStyle` | **GAP** | **GAP** | Simple has no media style |
 
 ### PipsPager
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `PipsPagerStyle` | `MaterialPipsPagerStyle` | `SimplePipsPagerStyle` | Pagination dots |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `PipsPagerStyle` | `MaterialPipsPagerStyle` | `SimplePipsPagerStyle` | **GAP** | Pagination dots |
 
 ### RatingControl
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `RatingControlStyle` | `MaterialRatingControlStyle` | `SimpleRatingControlStyle` | Star rating with brand colors |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `RatingControlStyle` | `MaterialRatingControlStyle` | `SimpleRatingControlStyle` | **GAP** | Star rating with brand colors |
 
 ### Flyout / MenuFlyout
 
-| Semantic Key | Material | Simple | Notes |
-|---|---|---|---|
-| `FlyoutPresenterStyle` | `MaterialFlyoutPresenterStyle` | `SimpleFlyoutPresenterStyle` | |
-| `MenuFlyoutPresenterStyle` | `MaterialMenuFlyoutPresenterStyle` | `SimpleMenuFlyoutPresenterStyle` | Direct match |
-| `MenuFlyoutItemStyle` | `MaterialMenuFlyoutItemStyle` | `SimpleMenuFlyoutItemStyle` | Direct match |
-| `MenuFlyoutSeparatorStyle` | `MaterialMenuFlyoutSeparatorStyle` | `SimpleMenuFlyoutSeparatorStyle` | Direct match |
-| `MenuFlyoutSubItemStyle` | `MaterialMenuFlyoutSubItemStyle` | `SimpleMenuFlyoutSubItemStyle` | Direct match |
-| `ToggleMenuFlyoutItemStyle` | `MaterialToggleMenuFlyoutItemStyle` | `SimpleToggleMenuFlyoutItemStyle` | Direct match |
-| `RadioMenuFlyoutItemStyle` | `MaterialRadioMenuFlyoutItemStyle` | `SimpleRadioMenuFlyoutItemStyle` | Radio bullet indicator |
+| Semantic Key | Material | Simple | Omarchy | Notes |
+|---|---|---|---|---|
+| `FlyoutPresenterStyle` | `MaterialFlyoutPresenterStyle` | `SimpleFlyoutPresenterStyle` | `OmarchyFlyoutPresenterStyle` | |
+| `MenuFlyoutPresenterStyle` | `MaterialMenuFlyoutPresenterStyle` | `SimpleMenuFlyoutPresenterStyle` | `OmarchyMenuFlyoutPresenterStyle` | Direct match |
+| `MenuFlyoutItemStyle` | `MaterialMenuFlyoutItemStyle` | `SimpleMenuFlyoutItemStyle` | `OmarchyMenuFlyoutItemStyle` | Direct match |
+| `MenuFlyoutSeparatorStyle` | `MaterialMenuFlyoutSeparatorStyle` | `SimpleMenuFlyoutSeparatorStyle` | `OmarchyMenuFlyoutSeparatorStyle` | Direct match |
+| `MenuFlyoutSubItemStyle` | `MaterialMenuFlyoutSubItemStyle` | `SimpleMenuFlyoutSubItemStyle` | `OmarchyMenuFlyoutSubItemStyle` | Direct match |
+| `ToggleMenuFlyoutItemStyle` | `MaterialToggleMenuFlyoutItemStyle` | `SimpleToggleMenuFlyoutItemStyle` | `OmarchyToggleMenuFlyoutItemStyle` | Direct match |
+| `RadioMenuFlyoutItemStyle` | `MaterialRadioMenuFlyoutItemStyle` | `SimpleRadioMenuFlyoutItemStyle` | `OmarchyRadioMenuFlyoutItemStyle` | Radio bullet indicator |
 
 ## Typography
 
-Both themes provide identical semantic typography keys based on the Material Design 3 type scale.
+All themes provide identical semantic typography keys based on the Material Design 3 type scale (Omarchy maps them onto its single monospace face: bold cuts for Display/Headline/Title, the italic cut for Caption).
 
 | Semantic Style Key | Font Resource Keys |
 |---|---|
@@ -240,7 +241,7 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 <SolidColorBrush x:Key="FilledButtonForeground" Color="Red" />
 ```
 
-Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly.
+The **Material**, **Simple** and **Omarchy** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly. Omarchy derives hover, pressed and disabled visuals from opacity tokens rather than per-state brushes, so only the base keys (`*Foreground`, `*Background`, `*BorderBrush`) exist there — see [Omarchy Controls Styles](omarchy-controls-styles.md).
 
 The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
 

@@ -130,6 +130,56 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- OmarchyTab: a row of text tabs, the checked one is the active tab -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ToggleButton_Tabs"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal">
+								<ToggleButton Content="Files"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyTextToggleButtonStyle}" />
+								<ToggleButton Content="Search"
+											  Style="{StaticResource OmarchyTextToggleButtonStyle}" />
+								<ToggleButton Content="Settings"
+											  Style="{StaticResource OmarchyTextToggleButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Icon tabs -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ToggleButton_IconTabs"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal">
+								<ToggleButton Style="{StaticResource OmarchyIconToggleButtonStyle}">
+									<SymbolIcon Symbol="Bold" />
+								</ToggleButton>
+								<ToggleButton IsChecked="True"
+											  Style="{StaticResource OmarchyIconToggleButtonStyle}">
+									<SymbolIcon Symbol="Italic" />
+								</ToggleButton>
+								<ToggleButton Style="{StaticResource OmarchyIconToggleButtonStyle}">
+									<SymbolIcon Symbol="Underline" />
+								</ToggleButton>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ToggleButton_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal">
+								<ToggleButton Content="Disabled Unchecked"
+											  IsEnabled="False"
+											  Style="{StaticResource OmarchyTextToggleButtonStyle}" />
+								<ToggleButton Content="Disabled Checked"
+											  IsChecked="True"
+											  IsEnabled="False"
+											  Style="{StaticResource OmarchyTextToggleButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

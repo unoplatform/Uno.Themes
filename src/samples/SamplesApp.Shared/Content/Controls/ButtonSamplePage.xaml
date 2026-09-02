@@ -709,6 +709,247 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- filled(blue): accent-tinted fill -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_Filled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Content="Filled"
+										Style="{StaticResource OmarchyFilledButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource OmarchyFilledButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- filled(white) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_FilledWhite"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Content="Filled White"
+										Style="{StaticResource OmarchyFilledButtonWhiteStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource OmarchyFilledButtonWhiteStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- outline(white): the implicit Button style -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_Outlined"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Content="Outlined"
+										Style="{StaticResource OmarchyOutlinedButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource OmarchyOutlinedButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- bar(white): borderless text button -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_Text"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Content="Text"
+										Style="{StaticResource OmarchyTextButtonStyle}" />
+								<Button Content="Disabled"
+										IsEnabled="False"
+										Style="{StaticResource OmarchyTextButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- ANSI VARIANTS -->
+						<TextBlock FontSize="14"
+								   Margin="0,8,0,0"
+								   Text="Every Omarchy button kind comes in the 8 ANSI colors" />
+
+						<!-- outline(x) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_OutlinedAnsi"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<StackPanel Orientation="Horizontal"
+											Spacing="12">
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonBlackStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonWhiteStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonRedStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonGreenStyle}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal"
+											Spacing="12">
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonYellowStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonBlueStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonMagentaStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyOutlinedButtonCyanStyle}" />
+								</StackPanel>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- filled(x) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_FilledAnsi"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<StackPanel Orientation="Horizontal"
+											Spacing="12">
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonBlackStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonWhiteStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonRedStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonGreenStyle}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal"
+											Spacing="12">
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonYellowStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonBlueStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonMagentaStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyFilledButtonCyanStyle}" />
+								</StackPanel>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- bar(x) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_TextAnsi"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<StackPanel Orientation="Horizontal"
+											Spacing="12">
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonBlackStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonWhiteStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonRedStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonGreenStyle}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal"
+											Spacing="12">
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonYellowStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonBlueStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonMagentaStyle}" />
+									<Button Content="Click me!"
+											Style="{StaticResource OmarchyTextButtonCyanStyle}" />
+								</StackPanel>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Icon only: outline(white) around an icon -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_Icon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Style="{StaticResource OmarchyIconButtonStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+								<Button IsEnabled="False"
+										Style="{StaticResource OmarchyIconButtonStyle}">
+									<SymbolIcon Symbol="Add" />
+								</Button>
+								<Button Style="{StaticResource OmarchyIconButtonRedStyle}">
+									<SymbolIcon Symbol="Delete" />
+								</Button>
+								<Button Style="{StaticResource OmarchyIconButtonGreenStyle}">
+									<SymbolIcon Symbol="Accept" />
+								</Button>
+								<Button Style="{StaticResource OmarchyIconButtonBlueStyle}">
+									<SymbolIcon Symbol="Edit" />
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Leading Icon -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_LeadingIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Content="Leading Icon"
+										Style="{StaticResource OmarchyFilledButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Add" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+								<Button Content="Leading Icon"
+										Style="{StaticResource OmarchyOutlinedButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Find" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+								<Button Content="Leading Icon"
+										Style="{StaticResource OmarchyTextButtonStyle}">
+									<ut:ControlExtensions.LeadingIcon>
+										<SymbolIcon Symbol="Setting" />
+									</ut:ControlExtensions.LeadingIcon>
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Trailing Icon -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_TrailingIcon"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<Button Content="Trailing Icon"
+										Style="{StaticResource OmarchyFilledButtonStyle}">
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="Forward" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+								<Button Content="Trailing Icon"
+										Style="{StaticResource OmarchyOutlinedButtonStyle}">
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="Download" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+								<Button Content="Trailing Icon"
+										Style="{StaticResource OmarchyTextButtonStyle}">
+									<ut:ControlExtensions.TrailingIcon>
+										<SymbolIcon Symbol="OpenWith" />
+									</ut:ControlExtensions.TrailingIcon>
+								</Button>
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Stretched -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Button_Stretched"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<Button Content="Filled"
+										HorizontalAlignment="Stretch"
+										Style="{StaticResource OmarchyFilledButtonStyle}" />
+								<Button Content="Outlined"
+										HorizontalAlignment="Stretch"
+										Style="{StaticResource OmarchyOutlinedButtonStyle}" />
+								<Button Content="Text"
+										HorizontalAlignment="Stretch"
+										Style="{StaticResource OmarchyTextButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

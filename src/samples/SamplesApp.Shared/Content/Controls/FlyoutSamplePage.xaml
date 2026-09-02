@@ -697,6 +697,64 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Pop-over (OmarchyPopOverContainer) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Flyout_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button x:Name="ShowOmarchyFlyoutButton"
+									Content="Show Flyout"
+									Style="{StaticResource OmarchyOutlinedButtonStyle}">
+								<Button.Flyout>
+									<Flyout FlyoutPresenterStyle="{StaticResource OmarchyFlyoutPresenterStyle}">
+										<StackPanel Spacing="8">
+											<TextBlock Text="Pop-over"
+													   Style="{StaticResource OmarchyTitleMedium}" />
+											<TextBlock Text="A light-dismissable container with a 2 px accent border and sharp corners."
+													   Style="{StaticResource OmarchyBodyMedium}"
+													   TextWrapping="Wrap"
+													   MaxWidth="280" />
+											<Button Content="Close"
+													Click="CloseFlyout"
+													Tag="{Binding ElementName=ShowOmarchyFlyoutButton}"
+													Style="{StaticResource OmarchyTextButtonStyle}" />
+										</StackPanel>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+
+						<!-- Confirmation pop-over -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_Flyout_Confirm"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<Button x:Name="ShowOmarchyConfirmFlyoutButton"
+									Content="Remove Theme"
+									Style="{StaticResource OmarchyOutlinedButtonStyle}">
+								<Button.Flyout>
+									<Flyout FlyoutPresenterStyle="{StaticResource OmarchyFlyoutPresenterStyle}">
+										<StackPanel Spacing="12">
+											<TextBlock Text="Remove Tokyo Night from the theme list?"
+													   Style="{StaticResource OmarchyBodyMedium}" />
+											<StackPanel Orientation="Horizontal"
+														Spacing="8">
+												<Button Content="Remove"
+														Click="CloseFlyout"
+														Tag="{Binding ElementName=ShowOmarchyConfirmFlyoutButton}"
+														Style="{StaticResource OmarchyFilledButtonStyle}" />
+												<Button Content="Cancel"
+														Click="CloseFlyout"
+														Tag="{Binding ElementName=ShowOmarchyConfirmFlyoutButton}"
+														Style="{StaticResource OmarchyOutlinedButtonStyle}" />
+											</StackPanel>
+										</StackPanel>
+									</Flyout>
+								</Button.Flyout>
+							</Button>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

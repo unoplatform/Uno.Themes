@@ -1,0 +1,285 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:ut="using:Uno.Themes"
+					mc:Ignorable="d not_win">
+
+	<!--
+		flutter_omarchy: widgets/tabs.dart (OmarchyTab) and widgets/utils/pointer_area.dart (PointerState).
+
+		OmarchyTab has no accent variants, so this file keeps the per-state brush keys of the Simple theme:
+		  unchecked  normal.black / normal.white, hover bright.black (= muted) / bright.white
+		  checked    background / foreground in every state, italic text (theme.text.italic)
+		  pressed    = hover (the source has no pressed look)
+		The IconToggleButton* keys alias the TextToggleButton* keys (read parity, as in the Simple theme).
+
+		Deviations from the source:
+		- No 120 ms transition: states switch instantly.
+		- The source has no disabled tab; Disabled dims the content (OmarchyForegroundOpacityDisabled).
+		- The source draws no focus visual; keyboard focus shows the theme's bright stroke (FocusBorder).
+		- Indeterminate states look like the unchecked ones.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- One palette feeds both theme dictionaries: identical content. -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- Unchecked -->
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPointerOver" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPointerOver" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPressed" ResourceKey="TextToggleButtonBackgroundPointerOver" />
+			<StaticResource x:Key="TextToggleButtonForegroundPressed" ResourceKey="TextToggleButtonForegroundPointerOver" />
+
+			<!-- Checked (isActive) -->
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPointerOver" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPointerOver" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPressed" ResourceKey="TextToggleButtonBackgroundCheckedPointerOver" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPressed" ResourceKey="TextToggleButtonForegroundCheckedPointerOver" />
+
+			<!-- IconToggleButton aliases -->
+			<StaticResource x:Key="IconToggleButtonBackground" ResourceKey="TextToggleButtonBackground" />
+			<StaticResource x:Key="IconToggleButtonForeground" ResourceKey="TextToggleButtonForeground" />
+			<StaticResource x:Key="IconToggleButtonBackgroundPointerOver" ResourceKey="TextToggleButtonBackgroundPointerOver" />
+			<StaticResource x:Key="IconToggleButtonForegroundPointerOver" ResourceKey="TextToggleButtonForegroundPointerOver" />
+			<StaticResource x:Key="IconToggleButtonBackgroundPressed" ResourceKey="TextToggleButtonBackgroundPressed" />
+			<StaticResource x:Key="IconToggleButtonForegroundPressed" ResourceKey="TextToggleButtonForegroundPressed" />
+			<StaticResource x:Key="IconToggleButtonBackgroundChecked" ResourceKey="TextToggleButtonBackgroundChecked" />
+			<StaticResource x:Key="IconToggleButtonForegroundChecked" ResourceKey="TextToggleButtonForegroundChecked" />
+			<StaticResource x:Key="IconToggleButtonBackgroundCheckedPointerOver" ResourceKey="TextToggleButtonBackgroundCheckedPointerOver" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPointerOver" ResourceKey="TextToggleButtonForegroundCheckedPointerOver" />
+			<StaticResource x:Key="IconToggleButtonBackgroundCheckedPressed" ResourceKey="TextToggleButtonBackgroundCheckedPressed" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPressed" ResourceKey="TextToggleButtonForegroundCheckedPressed" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Default">
+
+			<!-- Unchecked -->
+			<StaticResource x:Key="TextToggleButtonBackground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="TextToggleButtonForeground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPointerOver" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundPointerOver" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundPressed" ResourceKey="TextToggleButtonBackgroundPointerOver" />
+			<StaticResource x:Key="TextToggleButtonForegroundPressed" ResourceKey="TextToggleButtonForegroundPointerOver" />
+
+			<!-- Checked (isActive) -->
+			<StaticResource x:Key="TextToggleButtonBackgroundChecked" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundChecked" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPointerOver" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPointerOver" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="TextToggleButtonBackgroundCheckedPressed" ResourceKey="TextToggleButtonBackgroundCheckedPointerOver" />
+			<StaticResource x:Key="TextToggleButtonForegroundCheckedPressed" ResourceKey="TextToggleButtonForegroundCheckedPointerOver" />
+
+			<!-- IconToggleButton aliases -->
+			<StaticResource x:Key="IconToggleButtonBackground" ResourceKey="TextToggleButtonBackground" />
+			<StaticResource x:Key="IconToggleButtonForeground" ResourceKey="TextToggleButtonForeground" />
+			<StaticResource x:Key="IconToggleButtonBackgroundPointerOver" ResourceKey="TextToggleButtonBackgroundPointerOver" />
+			<StaticResource x:Key="IconToggleButtonForegroundPointerOver" ResourceKey="TextToggleButtonForegroundPointerOver" />
+			<StaticResource x:Key="IconToggleButtonBackgroundPressed" ResourceKey="TextToggleButtonBackgroundPressed" />
+			<StaticResource x:Key="IconToggleButtonForegroundPressed" ResourceKey="TextToggleButtonForegroundPressed" />
+			<StaticResource x:Key="IconToggleButtonBackgroundChecked" ResourceKey="TextToggleButtonBackgroundChecked" />
+			<StaticResource x:Key="IconToggleButtonForegroundChecked" ResourceKey="TextToggleButtonForegroundChecked" />
+			<StaticResource x:Key="IconToggleButtonBackgroundCheckedPointerOver" ResourceKey="TextToggleButtonBackgroundCheckedPointerOver" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPointerOver" ResourceKey="TextToggleButtonForegroundCheckedPointerOver" />
+			<StaticResource x:Key="IconToggleButtonBackgroundCheckedPressed" ResourceKey="TextToggleButtonBackgroundCheckedPressed" />
+			<StaticResource x:Key="IconToggleButtonForegroundCheckedPressed" ResourceKey="TextToggleButtonForegroundCheckedPressed" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- OmarchyTab: text tab, no border, sharp corners. -->
+	<Style x:Key="OmarchyTextToggleButtonStyle"
+		   TargetType="ToggleButton">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMedium}" />
+		<!-- tabs.dart DefaultPadding: horizontal 16 / vertical 8. BaseTheme has no combined Space400/Space200 token. -->
+		<Setter Property="Padding" Value="16,8,16,8" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+		<Setter Property="Foreground" Value="{ThemeResource TextToggleButtonForeground}" />
+		<Setter Property="Background" Value="{ThemeResource TextToggleButtonBackground}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="Root"
+						  Background="{TemplateBinding Background}"
+						  BorderBrush="{TemplateBinding BorderBrush}"
+						  BorderThickness="{TemplateBinding BorderThickness}"
+						  CornerRadius="{TemplateBinding CornerRadius}"
+						  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+
+								<!-- Unchecked states -->
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="LeadingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="TrailingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Checked states: background / foreground colors, italic face -->
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedPressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundCheckedPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPressed}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundCheckedPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedDisabled">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundChecked}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="LeadingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundChecked}" />
+										<Setter Target="TrailingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Indeterminate states (same as unchecked) -->
+								<VisualState x:Name="IndeterminateNormal" />
+								<VisualState x:Name="IndeterminatePointerOver">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminatePressed">
+									<VisualState.Setters>
+										<Setter Target="Root.Background" Value="{ThemeResource TextToggleButtonBackgroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
+										<Setter Target="LeadingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
+										<Setter Target="TrailingIconPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminateDisabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="LeadingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="TrailingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusBorder.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="FocusBorder"
+								BorderBrush="{TemplateBinding Foreground}"
+								BorderThickness="{ThemeResource OmarchyBorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<StackPanel Orientation="Horizontal"
+									Padding="{TemplateBinding Padding}"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Spacing="{ThemeResource Space300}">
+
+							<ContentPresenter x:Name="LeadingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							<ContentPresenter x:Name="TrailingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- OmarchyTab with only an icon: square 40 x 40. -->
+	<Style x:Key="OmarchyIconToggleButtonStyle"
+		   TargetType="ToggleButton"
+		   BasedOn="{StaticResource OmarchyTextToggleButtonStyle}">
+		<Setter Property="FontSize" Value="{ThemeResource IconSizeSmall}" />
+		<Setter Property="MinWidth" Value="{ThemeResource ControlHeightMedium}" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMedium}" />
+		<Setter Property="Padding" Value="{ThemeResource Space200Thickness}" />
+	</Style>
+
+</ResourceDictionary>

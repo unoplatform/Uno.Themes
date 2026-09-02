@@ -167,6 +167,49 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default (OmarchyLoader) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ProgressRing_Default"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing Style="{StaticResource OmarchyProgressRingStyle}"
+							                   IsActive="True" />
+						</smtx:XamlDisplay>
+
+						<!-- ANSI accent variants -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ProgressRing_Accents"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+							            Spacing="16">
+								<muxc:ProgressRing Style="{StaticResource OmarchyProgressRingGreenStyle}"
+								                   IsActive="True" />
+								<muxc:ProgressRing Style="{StaticResource OmarchyProgressRingBlueStyle}"
+								                   IsActive="True" />
+								<muxc:ProgressRing Style="{StaticResource OmarchyProgressRingRedStyle}"
+								                   IsActive="True" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Determinate -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ProgressRing_Determinate"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing Style="{StaticResource OmarchyProgressRingStyle}"
+							                   IsIndeterminate="False"
+							                   Value="65" />
+						</smtx:XamlDisplay>
+
+						<!-- Custom size -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ProgressRing_Large"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressRing Style="{StaticResource OmarchyProgressRingStyle}"
+							                   IsActive="True"
+							                   Width="48"
+							                   Height="48" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

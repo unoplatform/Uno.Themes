@@ -169,6 +169,64 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Default: 0 / 0.2 / 0.6 / 1.0 -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ProgressBar_Default"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="0" />
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="0.2" />
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="0.6" />
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="1" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Green: 0 / 0.2 / 0.6 / 1.0 -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ProgressBar_Green"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarGreenStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="0" />
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarGreenStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="0.2" />
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarGreenStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="0.6" />
+								<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarGreenStyle}"
+								                  Minimum="0"
+								                  Maximum="1"
+								                  Value="1" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Indeterminate -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ProgressBar_Indeterminate"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<muxc:ProgressBar Style="{StaticResource OmarchyProgressBarStyle}"
+							                  IsIndeterminate="True" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

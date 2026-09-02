@@ -1,0 +1,429 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
+
+	<!--
+		Omarchy RadioButton - reproduces flutter_omarchy lib/src/widgets/radio.dart
+		(state model: lib/src/widgets/utils/pointer_area.dart, highlighted = isHovering || hasFocus).
+
+		Same colour model as CheckBox.xaml (radio.dart is the checkbox with a circle and a dot):
+		  Foreground  = the label (a sibling Text in the source)
+		  BorderBrush = the widget's "foreground": highlight border and the inner dot
+		  Background  = the fill source when checked (bright.black neutral, normal.<accent> variants)
+		  Unchecked circle = normal.white border over normal.black fill (fixed keys below).
+		  border: highlighted && checked -> foreground x 0.9 | highlighted -> x 0.6 | checked -> x 1 | else normal.white
+		  fill:   highlighted -> background x 0.6 | checked -> background | else normal.black
+		  neutral background is opaque, accent background is @ 0.4 -> two templates (fill 1 / 0.6 vs 0.4 / 0.24).
+
+		Unlike CheckBox, RadioButton has no CombinedStates: CommonStates, CheckStates and FocusStates are
+		independent groups, and two groups driving one element's Opacity are last-writer-wins. Each group
+		therefore owns its own layers, and the layers another group must hide are wrapped in a host Grid
+		owned by that group (checked fill and unchecked border are hidden while highlighted).
+
+		Deviations:
+		- Pressed = PointerOver (the source never reads isPressed).
+		- Disabled: the source has no disabled visuals; the circle is dimmed to OmarchyBorderOpacityDisabled.
+		- Unchecked + highlighted keeps the normal.black plate under the 0.6 tint (as CheckBox.xaml).
+		- Checked + highlighted border composites the 0.6 hover border over the full checked border
+		  (~0.96 instead of 0.9); hover and keyboard focus at the same time stack their tints.
+		- Selecting an already selected radio is a no-op in the source; WinUI behaves the same.
+		- Every source transition animates over 120 ms; the states below switch instantly.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="RadioButtonForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="RadioButtonBorderBrushUnchecked" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="RadioButtonBackgroundUnchecked" ResourceKey="OmarchyNormalBlackBrush" />
+			<!-- Defaults of the BorderBrush / Background channels (the accent variants replace them) -->
+			<StaticResource x:Key="RadioButtonBorderBrushChecked" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="RadioButtonBackgroundChecked" ResourceKey="OmarchyMutedBrush" />
+			<!-- The dot is painted with the BorderBrush channel; this key documents the mapping and is not read by the template -->
+			<StaticResource x:Key="RadioButtonCheckGlyphFill" ResourceKey="OmarchyForegroundBrush" />
+		</ResourceDictionary>
+
+		<!-- Omarchy has one palette with a light/dark flag: Light and Default are identical -->
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="RadioButtonForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="RadioButtonBorderBrushUnchecked" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="RadioButtonBackgroundUnchecked" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="RadioButtonBorderBrushChecked" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="RadioButtonBackgroundChecked" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="RadioButtonCheckGlyphFill" ResourceKey="OmarchyForegroundBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- radio.dart: size = fontSize (14) x 1.2 = 16.8, rounded to an even pixel (same box as the checkbox) -->
+	<x:Double x:Key="OmarchyRadioButtonSize">18</x:Double>
+	<!-- BorderRadius.circular(size): half the size makes the 18 px box a circle -->
+	<CornerRadius x:Key="OmarchyRadioButtonCornerRadius">9</CornerRadius>
+	<!-- Inner dot: size x 0.35 = 6.3, as a whole pixel -->
+	<x:Double x:Key="OmarchyRadioButtonDotSize">6</x:Double>
+
+	<!-- Neutral radio (accent: null): fills opaque with bright.black -->
+	<Style x:Key="OmarchyRadioButtonStyle"
+		   TargetType="RadioButton">
+		<Setter Property="Background" Value="{ThemeResource RadioButtonBackgroundChecked}" />
+		<Setter Property="Foreground" Value="{ThemeResource RadioButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource RadioButtonBorderBrushChecked}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource OmarchyBorderThickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyRadioButtonCornerRadius}" />
+		<!-- The source rows put the label 8 px to the right of the circle -->
+		<Setter Property="Padding" Value="{ThemeResource Space200LeftThickness}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMedium}" />
+		<!-- Focus is drawn by the FocusFill / FocusBorder layers -->
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="RadioButton">
+					<Grid x:Name="RootGrid"
+						  Background="Transparent">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="UncheckedBorderHoverHost.Opacity" Value="0" />
+										<Setter Target="CheckedFillHoverHost.Opacity" Value="0" />
+										<Setter Target="HoverFill.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+										<Setter Target="HoverBorder.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="UncheckedBorderHoverHost.Opacity" Value="0" />
+										<Setter Target="CheckedFillHoverHost.Opacity" Value="0" />
+										<Setter Target="HoverFill.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+										<Setter Target="HoverBorder.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RadioButtonContainer.Opacity" Value="{ThemeResource OmarchyBorderOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="UncheckedFill.Opacity" Value="0" />
+										<Setter Target="UncheckedBorder.Opacity" Value="0" />
+										<Setter Target="CheckedFill.Opacity" Value="1" />
+										<Setter Target="HighlightBorder.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unchecked" />
+								<VisualState x:Name="Indeterminate" />
+							</VisualStateGroup>
+
+							<!-- hasFocus is part of "highlighted": keyboard focus looks like hover -->
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="UncheckedBorderFocusHost.Opacity" Value="0" />
+										<Setter Target="CheckedFillFocusHost.Opacity" Value="0" />
+										<Setter Target="FocusFill.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+										<Setter Target="FocusBorder.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="PointerFocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- The circle: fill layers, then border layers, then the dot -->
+						<Grid x:Name="RadioButtonContainer"
+							  Grid.Column="0"
+							  Width="{ThemeResource OmarchyRadioButtonSize}"
+							  Height="{ThemeResource OmarchyRadioButtonSize}"
+							  HorizontalAlignment="Center"
+							  VerticalAlignment="Center">
+							<Border x:Name="UncheckedFill"
+									Background="{ThemeResource RadioButtonBackgroundUnchecked}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+							<Grid x:Name="CheckedFillHoverHost">
+								<Grid x:Name="CheckedFillFocusHost">
+									<Border x:Name="CheckedFill"
+											Background="{TemplateBinding Background}"
+											CornerRadius="{TemplateBinding CornerRadius}"
+											Opacity="0" />
+								</Grid>
+							</Grid>
+							<Border x:Name="HoverFill"
+									Background="{TemplateBinding Background}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Border x:Name="FocusFill"
+									Background="{TemplateBinding Background}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Grid x:Name="UncheckedBorderHoverHost">
+								<Grid x:Name="UncheckedBorderFocusHost">
+									<Border x:Name="UncheckedBorder"
+											BorderBrush="{ThemeResource RadioButtonBorderBrushUnchecked}"
+											BorderThickness="{TemplateBinding BorderThickness}"
+											CornerRadius="{TemplateBinding CornerRadius}" />
+								</Grid>
+							</Grid>
+							<Border x:Name="HighlightBorder"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Border x:Name="HoverBorder"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Border x:Name="FocusBorder"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Ellipse x:Name="CheckGlyph"
+									 Width="{ThemeResource OmarchyRadioButtonDotSize}"
+									 Height="{ThemeResource OmarchyRadioButtonDotSize}"
+									 Fill="{TemplateBinding BorderBrush}"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Center"
+									 Opacity="0" />
+						</Grid>
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Grid.Column="1"
+										  Margin="{TemplateBinding Padding}"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  TextWrapping="Wrap" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Accent radio (accent: AnsiColor.x): same template, fill at 0.4 (0.24 when highlighted) -->
+	<Style x:Key="OmarchyAccentRadioButtonStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyRadioButtonStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="RadioButton">
+					<Grid x:Name="RootGrid"
+						  Background="Transparent">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="UncheckedBorderHoverHost.Opacity" Value="0" />
+										<Setter Target="CheckedFillHoverHost.Opacity" Value="0" />
+										<Setter Target="HoverFill.Opacity" Value="{ThemeResource OmarchyCheckFillOpacityHighlighted}" />
+										<Setter Target="HoverBorder.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="UncheckedBorderHoverHost.Opacity" Value="0" />
+										<Setter Target="CheckedFillHoverHost.Opacity" Value="0" />
+										<Setter Target="HoverFill.Opacity" Value="{ThemeResource OmarchyCheckFillOpacityHighlighted}" />
+										<Setter Target="HoverBorder.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="RadioButtonContainer.Opacity" Value="{ThemeResource OmarchyBorderOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="UncheckedFill.Opacity" Value="0" />
+										<Setter Target="UncheckedBorder.Opacity" Value="0" />
+										<Setter Target="CheckedFill.Opacity" Value="{ThemeResource OmarchyCheckFillOpacity}" />
+										<Setter Target="HighlightBorder.Opacity" Value="1" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unchecked" />
+								<VisualState x:Name="Indeterminate" />
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="UncheckedBorderFocusHost.Opacity" Value="0" />
+										<Setter Target="CheckedFillFocusHost.Opacity" Value="0" />
+										<Setter Target="FocusFill.Opacity" Value="{ThemeResource OmarchyCheckFillOpacityHighlighted}" />
+										<Setter Target="FocusBorder.Opacity" Value="{ThemeResource OmarchyHighlightOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="PointerFocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid x:Name="RadioButtonContainer"
+							  Grid.Column="0"
+							  Width="{ThemeResource OmarchyRadioButtonSize}"
+							  Height="{ThemeResource OmarchyRadioButtonSize}"
+							  HorizontalAlignment="Center"
+							  VerticalAlignment="Center">
+							<Border x:Name="UncheckedFill"
+									Background="{ThemeResource RadioButtonBackgroundUnchecked}"
+									CornerRadius="{TemplateBinding CornerRadius}" />
+							<Grid x:Name="CheckedFillHoverHost">
+								<Grid x:Name="CheckedFillFocusHost">
+									<Border x:Name="CheckedFill"
+											Background="{TemplateBinding Background}"
+											CornerRadius="{TemplateBinding CornerRadius}"
+											Opacity="0" />
+								</Grid>
+							</Grid>
+							<Border x:Name="HoverFill"
+									Background="{TemplateBinding Background}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Border x:Name="FocusFill"
+									Background="{TemplateBinding Background}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Grid x:Name="UncheckedBorderHoverHost">
+								<Grid x:Name="UncheckedBorderFocusHost">
+									<Border x:Name="UncheckedBorder"
+											BorderBrush="{ThemeResource RadioButtonBorderBrushUnchecked}"
+											BorderThickness="{TemplateBinding BorderThickness}"
+											CornerRadius="{TemplateBinding CornerRadius}" />
+								</Grid>
+							</Grid>
+							<Border x:Name="HighlightBorder"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Border x:Name="HoverBorder"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Border x:Name="FocusBorder"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}"
+									Opacity="0" />
+							<Ellipse x:Name="CheckGlyph"
+									 Width="{ThemeResource OmarchyRadioButtonDotSize}"
+									 Height="{ThemeResource OmarchyRadioButtonDotSize}"
+									 Fill="{TemplateBinding BorderBrush}"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Center"
+									 Opacity="0" />
+						</Grid>
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Grid.Column="1"
+										  Margin="{TemplateBinding Padding}"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  Foreground="{TemplateBinding Foreground}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  TextWrapping="Wrap" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ANSI accent variants: BorderBrush = bright.<x> (dot / highlight border), Background = normal.<x> (fill) -->
+	<Style x:Key="OmarchyRadioButtonBlackStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightBlackBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlackBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyRadioButtonWhiteStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightWhiteBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalWhiteBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyRadioButtonRedStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightRedBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalRedBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyRadioButtonGreenStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightGreenBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalGreenBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyRadioButtonYellowStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightYellowBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalYellowBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyRadioButtonBlueStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightBlueBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlueBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyRadioButtonMagentaStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightMagentaBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalMagentaBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyRadioButtonCyanStyle"
+		   TargetType="RadioButton"
+		   BasedOn="{StaticResource OmarchyAccentRadioButtonStyle}">
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyBrightCyanBrush}" />
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalCyanBrush}" />
+	</Style>
+
+</ResourceDictionary>

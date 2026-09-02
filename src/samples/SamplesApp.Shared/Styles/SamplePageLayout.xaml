@@ -188,6 +188,13 @@
 													  ContentTemplate="{TemplateBinding SimpleTemplate}"
 													  VerticalAlignment="Stretch"
 													  HorizontalAlignment="Stretch"
+													  Visibility="Collapsed" />
+									<!-- Omarchy Content -->
+									<ContentPresenter x:Name="OmarchyContentContainer"
+													  Content="{TemplateBinding Content}"
+													  ContentTemplate="{TemplateBinding OmarchyTemplate}"
+													  VerticalAlignment="Stretch"
+													  HorizontalAlignment="Stretch"
 													  Visibility="Collapsed" />									</Grid>
 
 									<!-- Optional link to documentation -->
@@ -318,6 +325,12 @@
 								<VisualState x:Name="Simple">
 									<VisualState.Setters>
 										<Setter Target="SimpleContentContainer.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Omarchy">
+									<VisualState.Setters>
+										<Setter Target="OmarchyContentContainer.Visibility" Value="Visible" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

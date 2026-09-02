@@ -84,6 +84,8 @@
   -->
   <ItemGroup>
     <Content Include="../SamplesApp.Shared/Assets/Fonts/**/*.ttf" Link="Assets/Fonts/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Omarchy bundles its own face in the library (ms-appx:///Uno.Omarchy.WinUI/Assets/Fonts/...). -->
+    <Content Include="../../library/Uno.Omarchy.WinUI/Assets/Fonts/*.ttf" Link="Uno.Omarchy.WinUI/Assets/Fonts/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -107,6 +109,7 @@
     <ProjectReference Include="../MaterialSampleApp/MaterialSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
     <ProjectReference Include="../CupertinoSampleApp/CupertinoSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
     <ProjectReference Include="../SimpleSampleApp/SimpleSampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
+    <ProjectReference Include="../OmarchySampleApp/OmarchySampleApp.csproj" ReferenceOutputAssembly="false" Private="false" SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(TargetFramework)" Condition="'$(TargetFramework)'!='net10.0-browserwasm'" />
   </ItemGroup>
 
   <!--
@@ -236,7 +239,7 @@ Payload = payload.ToArray();
           BeforeTargets="AssignTargetPaths">
 
     <ItemGroup>
-      <_GuestWasmApp Include="MaterialSampleApp;CupertinoSampleApp;SimpleSampleApp" />
+      <_GuestWasmApp Include="MaterialSampleApp;CupertinoSampleApp;SimpleSampleApp;OmarchySampleApp" />
       <_GuestWasmApp>
         <RidDir>$(MSBuildProjectDirectory)/../%(Identity)/bin/$(Configuration)/net10.0-browserwasm/browser-wasm</RidDir>
         <NoRidDir>$(MSBuildProjectDirectory)/../%(Identity)/bin/$(Configuration)/net10.0-browserwasm</NoRidDir>

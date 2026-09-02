@@ -85,6 +85,40 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Tiles (OmarchyTile), one selected -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ListView_Tiles"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView SelectionMode="Single"
+									  MaxHeight="300"
+									  Style="{StaticResource OmarchyListViewStyle}"
+									  ItemContainerStyle="{StaticResource OmarchyListViewItemStyle}">
+								<ListViewItem Content="Tokyo Night"
+											  IsSelected="True" />
+								<ListViewItem Content="Catppuccin" />
+								<ListViewItem Content="Nord" />
+								<ListViewItem Content="Gruvbox" />
+								<ListViewItem Content="Everforest" />
+							</ListView>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled Items -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ListView_DisabledItems"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ListView MaxHeight="300"
+									  Style="{StaticResource OmarchyListViewStyle}"
+									  ItemContainerStyle="{StaticResource OmarchyListViewItemStyle}">
+								<ListViewItem Content="hyprland.conf" />
+								<ListViewItem Content="waybar.css (disabled)"
+											  IsEnabled="False" />
+								<ListViewItem Content="alacritty.toml" />
+							</ListView>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
     </Grid>
 </Page>

@@ -1,0 +1,196 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
+
+	<!--
+		OmarchyProgressBar (flutter_omarchy: lib/src/widgets/progress_bar.dart).
+
+		A 4 px normal.black bar with a 1 px inset, so the fill is 2 px tall. The fill is the
+		accent (theme border color by default, bright.{ansi} for the variants) and travels
+		through Foreground.
+
+		The track is painted by LayoutRoot: the control computes its clip from LayoutRoot
+		minus Padding and the template applies it to the padded root, so the clip trims the
+		fill to the inset area and leaves the track alone.
+
+		Deviations:
+		- The source is determinate only. IsIndeterminate keeps the WinUI sliding-bars
+		  animation, painted with the Foreground over the track.
+		- ShowError / ShowPaused have no source equivalent: the determinate bar is unchanged;
+		  an indeterminate bar stops moving and shows the wide bar at rest.
+		- The 1 px inset is a literal Thickness: the spacing scale has no 1 px step
+		  (Space050 is 2 px).
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="ProgressBarForeground" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="ProgressBarBackground" ResourceKey="OmarchyNormalBlackBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="ProgressBarForeground" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="ProgressBarBackground" ResourceKey="OmarchyNormalBlackBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- progress_bar.dart: height: 4, padding: EdgeInsets.all(1) -->
+	<x:Double x:Key="OmarchyProgressBarHeight">4</x:Double>
+	<Thickness x:Key="OmarchyProgressBarPadding">1</Thickness>
+
+	<Style x:Key="OmarchyProgressBarStyle"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource ProgressBarForeground}" />
+		<Setter Property="Background" Value="{ThemeResource ProgressBarBackground}" />
+		<Setter Property="Height" Value="{ThemeResource OmarchyProgressBarHeight}" />
+		<Setter Property="Padding" Value="{ThemeResource OmarchyProgressBarPadding}" />
+		<Setter Property="Maximum" Value="100" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="muxc:ProgressBar">
+					<Grid x:Name="LayoutRoot"
+						  Background="{TemplateBinding Background}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Determinate" />
+								<VisualState x:Name="Updating" />
+
+								<!-- No error / paused look in the source -->
+								<VisualState x:Name="Error" />
+								<VisualState x:Name="Paused" />
+
+								<VisualState x:Name="Indeterminate">
+									<VisualState.Setters>
+										<Setter Target="IndeterminateProgressBarIndicator.Opacity" Value="1" />
+										<Setter Target="IndeterminateProgressBarIndicator2.Opacity" Value="1" />
+									</VisualState.Setters>
+									<Storyboard RepeatBehavior="Forever">
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="IndeterminateProgressBarIndicator"
+																	   Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+											<DiscreteDoubleKeyFrame KeyTime="0"
+																	Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ContainerAnimationStartPosition}" />
+											<SplineDoubleKeyFrame KeyTime="0:0:1.5"
+																  KeySpline="0.4, 0.0, 0.6, 1.0"
+																  Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ContainerAnimationEndPosition}" />
+											<DiscreteDoubleKeyFrame KeyTime="0:0:2"
+																	Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ContainerAnimationEndPosition}" />
+										</DoubleAnimationUsingKeyFrames>
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="IndeterminateProgressBarIndicator2"
+																	   Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+											<DiscreteDoubleKeyFrame KeyTime="0"
+																	Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.Container2AnimationStartPosition}" />
+											<DiscreteDoubleKeyFrame KeyTime="0:0:0.75"
+																	Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.Container2AnimationStartPosition}" />
+											<SplineDoubleKeyFrame KeyTime="0:0:2"
+																  KeySpline="0.4, 0.0, 0.6, 1.0"
+																  Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.Container2AnimationEndPosition}" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+
+								<!-- Indeterminate + error / paused: motion stops, the wide bar stays put -->
+								<VisualState x:Name="IndeterminateError">
+									<VisualState.Setters>
+										<Setter Target="IndeterminateProgressBarIndicator2.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="IndeterminatePaused">
+									<VisualState.Setters>
+										<Setter Target="IndeterminateProgressBarIndicator2.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="ProgressBarRoot"
+								Padding="{TemplateBinding Padding}"
+								Clip="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.ClipRect}">
+							<Grid>
+								<Rectangle x:Name="DeterminateProgressBarIndicator"
+										   HorizontalAlignment="Left"
+										   Fill="{TemplateBinding Foreground}" />
+								<Rectangle x:Name="IndeterminateProgressBarIndicator"
+										   HorizontalAlignment="Left"
+										   Fill="{TemplateBinding Foreground}"
+										   Opacity="0">
+									<Rectangle.RenderTransform>
+										<CompositeTransform />
+									</Rectangle.RenderTransform>
+								</Rectangle>
+								<Rectangle x:Name="IndeterminateProgressBarIndicator2"
+										   HorizontalAlignment="Left"
+										   Fill="{TemplateBinding Foreground}"
+										   Opacity="0">
+									<Rectangle.RenderTransform>
+										<CompositeTransform />
+									</Rectangle.RenderTransform>
+								</Rectangle>
+							</Grid>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- OmarchyProgressBar(accent: AnsiColor.x): fill = bright.x -->
+	<Style x:Key="OmarchyProgressBarBlackStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlackBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyProgressBarWhiteStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightWhiteBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyProgressBarRedStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightRedBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyProgressBarGreenStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightGreenBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyProgressBarYellowStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightYellowBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyProgressBarBlueStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlueBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyProgressBarMagentaStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightMagentaBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchyProgressBarCyanStyle"
+		   BasedOn="{StaticResource OmarchyProgressBarStyle}"
+		   TargetType="muxc:ProgressBar">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightCyanBrush}" />
+	</Style>
+
+</ResourceDictionary>

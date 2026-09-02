@@ -1,0 +1,45 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Omarchy — TextBlock base style
+
+		Reproduces theme/text.dart's normal text style: theme.text.normal (14 px regular cut of
+		CaskaydiaMono Nerd Font Mono) in theme.colors.foreground. The per-slot styles
+		(OmarchyDisplayLarge ... OmarchyCaptionSmall) live in Styles/Application/Typography.xaml and
+		are BasedOn this style; _Resources.xaml applies it implicitly to every TextBlock.
+
+		Deviation: Flutter text neither wraps nor trims by default; the base style wraps and trims
+		with an ellipsis like the other Uno themes so consumers get the same defaults.
+		Light and Default are identical: Omarchy has one palette.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light Theme ─── -->
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="TextBlockForeground" ResourceKey="OmarchyForegroundBrush" />
+		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (Default) ─── -->
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="TextBlockForeground" ResourceKey="OmarchyForegroundBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Base TextBlock Style -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyBaseTextBlockStyle"
+		   TargetType="TextBlock">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="Foreground" Value="{ThemeResource TextBlockForeground}" />
+		<Setter Property="TextWrapping" Value="Wrap" />
+		<Setter Property="TextTrimming" Value="CharacterEllipsis" />
+		<Setter Property="IsTextScaleFactorEnabled" Value="False" />
+	</Style>
+
+</ResourceDictionary>

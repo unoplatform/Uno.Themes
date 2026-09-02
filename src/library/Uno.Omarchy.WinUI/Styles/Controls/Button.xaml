@@ -1,0 +1,651 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:not_win="http://uno.ui/not_win"
+					xmlns:ut="using:Uno.Themes"
+					mc:Ignorable="d not_win">
+
+	<!--
+		flutter_omarchy: widgets/button.dart (OmarchyButtonStyle.filled / .outline / .bar) and
+		widgets/utils/pointer_area.dart (PointerState: enabled > pressed > hovering > focused > normal).
+
+		Tint model. Every Omarchy state is ONE color per role at an alpha, so a template stacks
+		  TintLayer      Background = {TemplateBinding Background} (the normal ANSI color), Opacity driven by the states
+		  BorderElement  BorderBrush = {TemplateBinding BorderBrush}
+		  FocusBorder    BorderBrush = {TemplateBinding Foreground} (the bright ANSI color): focus and outline-pressed stroke
+		  ContentPresenter (+ leading / trailing icons via ut:ControlExtensions, as in the Simple theme)
+		and an accent variant is three setters: Background = normal, Foreground = bright, BorderBrush = normal | transparent.
+		Lightweight styling exposes only the *Background / *Foreground / *BorderBrush base keys; the
+		*PointerOver / *Pressed / *Disabled brush keys of the other themes do not exist here.
+
+		Deviations from the source:
+		- No 120 ms transition (OmarchyButtonStyleData.transitionDuration): states switch instantly.
+		- Disabled foreground is the bright color dimmed (OmarchyForegroundOpacityDisabled / OmarchyMutedForegroundOpacity)
+		  instead of switching to the normal color; the tint model has no per-state foreground brush.
+		- The source resolves hovering before focus, so a hovered + focused button never shows the focus stroke;
+		  here Focused / PointerFocused always show it.
+		- bar (text) buttons draw no focus visual in the source; the bar template shows the bright focus stroke on
+		  keyboard focus so focus stays visible.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- One palette feeds both theme dictionaries (see specs/08-omarchy-theme/progress.md): identical content. -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- filled(blue) -->
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="OmarchyNormalBlueBrush" />
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OmarchyBrightBlueBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- filled(white) -->
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- outline(white) -->
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="OmarchyNormalWhiteBrush" />
+
+			<!-- bar(white) -->
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+
+			<!-- outline(white) with an icon child -->
+			<StaticResource x:Key="IconButtonBackground" ResourceKey="OutlinedButtonBackground" />
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="OutlinedButtonForeground" />
+			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="OutlinedButtonBorderBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Default">
+
+			<!-- filled(blue) -->
+			<StaticResource x:Key="FilledButtonBackground" ResourceKey="OmarchyNormalBlueBrush" />
+			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OmarchyBrightBlueBrush" />
+			<StaticResource x:Key="FilledButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- filled(white) -->
+			<StaticResource x:Key="FilledTonalButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="FilledTonalButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="FilledTonalButtonBorderBrush" ResourceKey="SystemControlTransparentBrush" />
+
+			<!-- outline(white) -->
+			<StaticResource x:Key="OutlinedButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="OutlinedButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="OutlinedButtonBorderBrush" ResourceKey="OmarchyNormalWhiteBrush" />
+
+			<!-- bar(white) -->
+			<StaticResource x:Key="TextButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="TextButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+
+			<!-- outline(white) with an icon child -->
+			<StaticResource x:Key="IconButtonBackground" ResourceKey="OutlinedButtonBackground" />
+			<StaticResource x:Key="IconButtonForeground" ResourceKey="OutlinedButtonForeground" />
+			<StaticResource x:Key="IconButtonBorderBrush" ResourceKey="OutlinedButtonBorderBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- Shared setters (no template). theme.text.normal = 14 px regular; EdgeInsets.all(8); borderWidth 2; no radius. -->
+	<Style x:Key="OmarchyBaseButtonStyle"
+		   TargetType="Button">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMedium}" />
+		<Setter Property="Padding" Value="{ThemeResource Space200Thickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource OmarchyBorderThickness}" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+	</Style>
+
+	<!--
+		filled(accent): tint 0.15 / hover 0.25 / pressed 0.35 / disabled 0.02 (foreground 0.3);
+		focused adds the bright stroke at 0.5. The border is transparent in every state.
+	-->
+	<Style x:Key="OmarchyFilledButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyBaseButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource FilledButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledButtonBorderBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root"
+						  Background="Transparent"
+						  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacityPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacityPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacityDisabled}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="LeadingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+										<Setter Target="TrailingIconPresenter.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusBorder.Opacity" Value="{ThemeResource OmarchyFocusBorderOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FocusBorder.Opacity" Value="{ThemeResource OmarchyFocusBorderOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="TintLayer"
+								Background="{TemplateBinding Background}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="{ThemeResource OmarchyTintOpacity}" />
+
+						<Border x:Name="BorderElement"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<Border x:Name="FocusBorder"
+								BorderBrush="{TemplateBinding Foreground}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<StackPanel Orientation="Horizontal"
+									Padding="{TemplateBinding Padding}"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Spacing="{ThemeResource Space200}">
+
+							<ContentPresenter x:Name="LeadingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							<ContentPresenter x:Name="TrailingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--
+		outline(accent): normal stroke, no tint / hover 0.15 / pressed 0.25 + bright stroke / disabled stroke 0.5
+		(foreground normal, approximated by OmarchyMutedForegroundOpacity); focused swaps in the bright stroke.
+		Pressed and Focused both drive FocusBorder.Opacity from different groups: after a keyboard press the
+		VSM restores the base value, so the stroke can drop until focus moves again.
+	-->
+	<Style x:Key="OmarchyOutlinedButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyBaseButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OutlinedButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource OutlinedButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OutlinedButtonBorderBrush}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root"
+						  Background="Transparent"
+						  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacityPointerOver}" />
+										<Setter Target="FocusBorder.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="BorderElement.Opacity" Value="{ThemeResource OmarchyBorderOpacityDisabled}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+										<Setter Target="LeadingIconPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+										<Setter Target="TrailingIconPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusBorder.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused">
+									<VisualState.Setters>
+										<Setter Target="FocusBorder.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="TintLayer"
+								Background="{TemplateBinding Background}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0" />
+
+						<Border x:Name="BorderElement"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}" />
+
+						<Border x:Name="FocusBorder"
+								BorderBrush="{TemplateBinding Foreground}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<StackPanel Orientation="Horizontal"
+									Padding="{TemplateBinding Padding}"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Spacing="{ThemeResource Space200}">
+
+							<ContentPresenter x:Name="LeadingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							<ContentPresenter x:Name="TrailingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--
+		bar(accent): no border, EdgeInsets.all(12), no tint / hover 0.15 / pressed 0.25 / disabled foreground normal
+		(approximated by OmarchyMutedForegroundOpacity). Accessibility deviation: the source draws no focus visual
+		for bar buttons; this template shows the bright stroke (fixed OmarchyBorderThickness, since the style's
+		BorderThickness is 0) on keyboard focus only, so focus stays visible without touching pointer states.
+	-->
+	<Style x:Key="OmarchyTextButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyBaseButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource TextButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource TextButtonForeground}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource Space300Thickness}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="Root"
+						  Background="Transparent"
+						  AutomationProperties.AccessibilityView="Raw">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacityPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+										<Setter Target="LeadingIconPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+										<Setter Target="TrailingIconPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="FocusBorder.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerFocused" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="TintLayer"
+								Background="{TemplateBinding Background}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0" />
+
+						<Border x:Name="FocusBorder"
+								BorderBrush="{TemplateBinding Foreground}"
+								BorderThickness="{ThemeResource OmarchyBorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<StackPanel Orientation="Horizontal"
+									Padding="{TemplateBinding Padding}"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									Spacing="{ThemeResource Space200}">
+
+							<ContentPresenter x:Name="LeadingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+							<ContentPresenter x:Name="TrailingIconPresenter"
+											  Content="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Visibility="{Binding Path=(ut:ControlExtensions.TrailingIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}"
+											  VerticalAlignment="Center" />
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- filled(white): the FilledTonal keys on the filled template. Doubles as the White accent variant. -->
+	<Style x:Key="OmarchyFilledButtonWhiteStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource FilledTonalButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource FilledTonalButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource FilledTonalButtonBorderBrush}" />
+	</Style>
+
+	<!-- outline(white) around an icon: square, 40 x 40, icon glyphs at ~1.1 x the 14 px text. -->
+	<Style x:Key="OmarchyIconButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource IconButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource IconButtonForeground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource IconButtonBorderBrush}" />
+		<Setter Property="FontSize" Value="{ThemeResource IconSizeSmall}" />
+		<Setter Property="MinWidth" Value="{ThemeResource ControlHeightMedium}" />
+		<Setter Property="MinHeight" Value="{ThemeResource ControlHeightMedium}" />
+		<Setter Property="Padding" Value="{ThemeResource Space200Thickness}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- ANSI accent variants: OmarchyButtonStyle.filled / .outline / .bar (AnsiColor.x) -->
+	<!-- Background = normal color (tint source), Foreground = bright color, BorderBrush = normal color (outline). -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- filled(x) -->
+	<Style x:Key="OmarchyFilledButtonBlackStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlackBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlackBrush}" />
+	</Style>
+	<Style x:Key="OmarchyFilledButtonRedStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalRedBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightRedBrush}" />
+	</Style>
+	<Style x:Key="OmarchyFilledButtonGreenStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalGreenBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightGreenBrush}" />
+	</Style>
+	<Style x:Key="OmarchyFilledButtonYellowStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalYellowBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightYellowBrush}" />
+	</Style>
+	<Style x:Key="OmarchyFilledButtonBlueStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlueBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlueBrush}" />
+	</Style>
+	<Style x:Key="OmarchyFilledButtonMagentaStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalMagentaBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightMagentaBrush}" />
+	</Style>
+	<Style x:Key="OmarchyFilledButtonCyanStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyFilledButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalCyanBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightCyanBrush}" />
+	</Style>
+
+	<!-- outline(x) -->
+	<Style x:Key="OmarchyOutlinedButtonBlackStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlackBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlackBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalBlackBrush}" />
+	</Style>
+	<Style x:Key="OmarchyOutlinedButtonWhiteStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalWhiteBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightWhiteBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalWhiteBrush}" />
+	</Style>
+	<Style x:Key="OmarchyOutlinedButtonRedStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalRedBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightRedBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalRedBrush}" />
+	</Style>
+	<Style x:Key="OmarchyOutlinedButtonGreenStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalGreenBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightGreenBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalGreenBrush}" />
+	</Style>
+	<Style x:Key="OmarchyOutlinedButtonYellowStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalYellowBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightYellowBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalYellowBrush}" />
+	</Style>
+	<Style x:Key="OmarchyOutlinedButtonBlueStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlueBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlueBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalBlueBrush}" />
+	</Style>
+	<Style x:Key="OmarchyOutlinedButtonMagentaStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalMagentaBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightMagentaBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalMagentaBrush}" />
+	</Style>
+	<Style x:Key="OmarchyOutlinedButtonCyanStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyOutlinedButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalCyanBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightCyanBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalCyanBrush}" />
+	</Style>
+
+	<!-- bar(x) -->
+	<Style x:Key="OmarchyTextButtonBlackStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlackBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlackBrush}" />
+	</Style>
+	<Style x:Key="OmarchyTextButtonWhiteStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalWhiteBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightWhiteBrush}" />
+	</Style>
+	<Style x:Key="OmarchyTextButtonRedStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalRedBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightRedBrush}" />
+	</Style>
+	<Style x:Key="OmarchyTextButtonGreenStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalGreenBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightGreenBrush}" />
+	</Style>
+	<Style x:Key="OmarchyTextButtonYellowStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalYellowBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightYellowBrush}" />
+	</Style>
+	<Style x:Key="OmarchyTextButtonBlueStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlueBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlueBrush}" />
+	</Style>
+	<Style x:Key="OmarchyTextButtonMagentaStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalMagentaBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightMagentaBrush}" />
+	</Style>
+	<Style x:Key="OmarchyTextButtonCyanStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyTextButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalCyanBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightCyanBrush}" />
+	</Style>
+
+	<!-- outline(x) around an icon -->
+	<Style x:Key="OmarchyIconButtonBlackStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlackBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlackBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalBlackBrush}" />
+	</Style>
+	<Style x:Key="OmarchyIconButtonWhiteStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalWhiteBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightWhiteBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalWhiteBrush}" />
+	</Style>
+	<Style x:Key="OmarchyIconButtonRedStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalRedBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightRedBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalRedBrush}" />
+	</Style>
+	<Style x:Key="OmarchyIconButtonGreenStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalGreenBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightGreenBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalGreenBrush}" />
+	</Style>
+	<Style x:Key="OmarchyIconButtonYellowStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalYellowBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightYellowBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalYellowBrush}" />
+	</Style>
+	<Style x:Key="OmarchyIconButtonBlueStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalBlueBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlueBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalBlueBrush}" />
+	</Style>
+	<Style x:Key="OmarchyIconButtonMagentaStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalMagentaBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightMagentaBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalMagentaBrush}" />
+	</Style>
+	<Style x:Key="OmarchyIconButtonCyanStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource OmarchyIconButtonStyle}">
+		<Setter Property="Background" Value="{ThemeResource OmarchyNormalCyanBrush}" />
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightCyanBrush}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource OmarchyNormalCyanBrush}" />
+	</Style>
+
+</ResourceDictionary>

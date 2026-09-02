@@ -177,6 +177,55 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Primary: bar(blue) text -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_HyperlinkButton_Primary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<HyperlinkButton Content="Visit Uno Platform"
+												 NavigateUri="https://platform.uno"
+												 Style="{StaticResource OmarchyHyperlinkButtonStyle}" />
+								<HyperlinkButton Content="Disabled Link"
+												 IsEnabled="False"
+												 NavigateUri="https://platform.uno"
+												 Style="{StaticResource OmarchyHyperlinkButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Secondary: foreground-colored text -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_HyperlinkButton_Secondary"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Orientation="Horizontal"
+										Spacing="12">
+								<HyperlinkButton Content="Visit Uno Platform"
+												 NavigateUri="https://platform.uno"
+												 Style="{StaticResource OmarchySecondaryHyperlinkButtonStyle}" />
+								<HyperlinkButton Content="Disabled Link"
+												 IsEnabled="False"
+												 NavigateUri="https://platform.uno"
+												 Style="{StaticResource OmarchySecondaryHyperlinkButtonStyle}" />
+							</StackPanel>
+						</smtx:XamlDisplay>
+
+						<!-- Custom Content -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_HyperlinkButton_CustomContent"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<HyperlinkButton NavigateUri="https://platform.uno"
+											 Style="{StaticResource OmarchyHyperlinkButtonStyle}">
+								<StackPanel Orientation="Horizontal"
+											Spacing="8">
+									<SymbolIcon Symbol="Globe" />
+									<TextBlock Text="Uno Platform Website"
+											   VerticalAlignment="Center" />
+								</StackPanel>
+							</HyperlinkButton>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

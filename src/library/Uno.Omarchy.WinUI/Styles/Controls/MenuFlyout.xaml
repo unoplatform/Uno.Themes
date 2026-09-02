@@ -1,0 +1,722 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					mc:Ignorable="">
+
+	<!--
+		Omarchy — MenuFlyout
+		Reproduces flutter_omarchy widgets/context_menu.dart (OmarchyContextMenu) and
+		widgets/divider.dart (OmarchyDivider).
+
+		Container: background surface with a 2 px border in theme.colors.border (= accent), no
+		padding, min width 180, max width 320.
+		Item: padding 12,6, body text in the foreground color, a 16 px icon 8 px before the label.
+		Hover and keyboard focus paint normal.black (the HoverLayer keeps one brush, the states
+		drive its Opacity 0 -> 1) and turn the text to selectedText (= accent). A disabled item is
+		bright.black (muted) with no hover. The shortcut hint is the italic face at fontSize - 2
+		in bright.black, whatever the state.
+		Divider: 1 px normal.black with 4 px vertical padding.
+
+		Deviations:
+		- The keyboard accelerator text sits 16 px (Space400) after the label; the source uses
+		  the row's 8 px gap.
+		- Toggle / radio / sub-menu items have no Omarchy counterpart: the check mark and the
+		  radio bullet are drawn in accent, the chevron in muted (accent on hover).
+		- No fade-in (100 ms in the source): the theme omits generated durations.
+		- The per-item accent (destructive items) is a Foreground override on the item.
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Lightweight styling ThemeResource aliases -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light (one palette, both dictionaries) ─── -->
+		<ResourceDictionary x:Key="Light">
+			<!-- Presenter (container) -->
+			<StaticResource x:Key="MenuFlyoutPresenterBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="MenuFlyoutPresenterBorderBrush" ResourceKey="OmarchyAccentBrush" />
+
+			<!-- Item -->
+			<StaticResource x:Key="MenuFlyoutItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MenuFlyoutItemForeground" ResourceKey="OmarchyForegroundBrush" />
+			<!-- lighter_background hover layer -->
+			<StaticResource x:Key="MenuFlyoutItemBackgroundPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
+			<!-- selectedText -->
+			<StaticResource x:Key="MenuFlyoutItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="MenuFlyoutItemForegroundPressed" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="MenuFlyoutItemForegroundDisabled" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="MenuFlyoutItemKeyboardAcceleratorTextForeground" ResourceKey="OmarchyMutedBrush" />
+
+			<!-- Sub-menu chevron, toggle check mark / radio bullet -->
+			<StaticResource x:Key="MenuFlyoutSubItemChevron" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="ToggleMenuFlyoutItemCheckGlyphForeground" ResourceKey="OmarchyAccentBrush" />
+
+			<!-- Separator (OmarchyDivider) -->
+			<StaticResource x:Key="MenuFlyoutSeparatorBackground" ResourceKey="OmarchyNormalBlackBrush" />
+		</ResourceDictionary>
+
+		<!-- ─── Default ─── -->
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="MenuFlyoutPresenterBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="MenuFlyoutPresenterBorderBrush" ResourceKey="OmarchyAccentBrush" />
+
+			<StaticResource x:Key="MenuFlyoutItemBackground" ResourceKey="SystemControlTransparentBrush" />
+			<StaticResource x:Key="MenuFlyoutItemForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="MenuFlyoutItemBackgroundPointerOver" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="MenuFlyoutItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="MenuFlyoutItemForegroundPressed" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="MenuFlyoutItemForegroundDisabled" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="MenuFlyoutItemKeyboardAcceleratorTextForeground" ResourceKey="OmarchyMutedBrush" />
+
+			<StaticResource x:Key="MenuFlyoutSubItemChevron" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="ToggleMenuFlyoutItemCheckGlyphForeground" ResourceKey="OmarchyAccentBrush" />
+
+			<StaticResource x:Key="MenuFlyoutSeparatorBackground" ResourceKey="OmarchyNormalBlackBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Sizing / layout constants -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- context_menu.dart: showOmarchyContextMenu minWidth = 180, _ContextMenu maxWidth = 320 -->
+	<x:Double x:Key="OmarchyMenuFlyoutPresenterMinWidth">180</x:Double>
+	<x:Double x:Key="OmarchyMenuFlyoutPresenterMaxWidth">320</x:Double>
+	<!-- _ContextMenuTile: 12 horizontal (Space300), 6 vertical (Space150); no combined token -->
+	<Thickness x:Key="OmarchyMenuFlyoutItemPadding">12,6,12,6</Thickness>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- MenuFlyoutPresenter Style (_ContextMenu container) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyMenuFlyoutPresenterStyle"
+		   TargetType="MenuFlyoutPresenter">
+
+		<Setter Property="Background" Value="{ThemeResource MenuFlyoutPresenterBackground}" />
+		<Setter Property="BorderBrush" Value="{ThemeResource MenuFlyoutPresenterBorderBrush}" />
+		<Setter Property="BorderThickness" Value="{ThemeResource OmarchyBorderThickness}" />
+		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="MinWidth" Value="{ThemeResource OmarchyMenuFlyoutPresenterMinWidth}" />
+		<Setter Property="MaxWidth" Value="{ThemeResource OmarchyMenuFlyoutPresenterMaxWidth}" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- MenuFlyoutItem Style (_ContextMenuTile) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyMenuFlyoutItemStyle"
+		   TargetType="MenuFlyoutItem">
+
+		<Setter Property="Background" Value="{ThemeResource MenuFlyoutItemBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="Padding" Value="{ThemeResource OmarchyMenuFlyoutItemPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="MenuFlyoutItem">
+					<Grid x:Name="LayoutRoot"
+						  Background="{TemplateBinding Background}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- context_menu.dart: hovering = isHovering || hasFocus -->
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="PointerFocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CheckPlaceholderStates">
+								<VisualState x:Name="NoPlaceholder" />
+								<VisualState x:Name="CheckPlaceholder" />
+								<VisualState x:Name="IconPlaceholder">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckAndIconPlaceholder">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="KeyboardAcceleratorTextVisibility">
+								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
+								<VisualState x:Name="KeyboardAcceleratorTextVisible">
+									<VisualState.Setters>
+										<Setter Target="KeyboardAcceleratorTextBlock.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Tint layer: one brush, opacity per state -->
+						<Border x:Name="HoverLayer"
+								Background="{ThemeResource MenuFlyoutItemBackgroundPointerOver}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<Grid Padding="{TemplateBinding Padding}">
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="0"
+									 Width="{ThemeResource IconSizeSmall}"
+									 Height="{ThemeResource IconSizeSmall}"
+									 Margin="{ThemeResource Space200RightThickness}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{TemplateBinding Foreground}" />
+							</Viewbox>
+
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="1"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<!-- Shortcut hint: italic face, fontSize - 2, bright.black -->
+							<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+									   Grid.Column="2"
+									   Margin="{ThemeResource Space400LeftThickness}"
+									   VerticalAlignment="Center"
+									   Foreground="{ThemeResource MenuFlyoutItemKeyboardAcceleratorTextForeground}"
+									   FontFamily="{ThemeResource CaptionLargeFontFamily}"
+									   FontSize="{ThemeResource CaptionLargeFontSize}"
+									   FontStyle="Italic"
+									   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+									   Visibility="Collapsed" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- ToggleMenuFlyoutItem Style -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyToggleMenuFlyoutItemStyle"
+		   TargetType="ToggleMenuFlyoutItem">
+
+		<Setter Property="Background" Value="{ThemeResource MenuFlyoutItemBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="Padding" Value="{ThemeResource OmarchyMenuFlyoutItemPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleMenuFlyoutItem">
+					<Grid x:Name="LayoutRoot"
+						  Background="{TemplateBinding Background}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+										<Setter Target="CheckGlyph.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="PointerFocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Unchecked" />
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="UncheckedWithIcon">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedWithIcon">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+										<Setter Target="CheckGlyph.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="KeyboardAcceleratorTextVisibility">
+								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
+								<VisualState x:Name="KeyboardAcceleratorTextVisible">
+									<VisualState.Setters>
+										<Setter Target="KeyboardAcceleratorTextBlock.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="HoverLayer"
+								Background="{ThemeResource MenuFlyoutItemBackgroundPointerOver}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<Grid Padding="{TemplateBinding Padding}">
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<!-- Check mark, accent, shown through its opacity when checked -->
+							<FontIcon x:Name="CheckGlyph"
+									  Grid.Column="0"
+									  Glyph="&#xE73E;"
+									  FontSize="{ThemeResource BodySmallFontSize}"
+									  Foreground="{ThemeResource ToggleMenuFlyoutItemCheckGlyphForeground}"
+									  Margin="{ThemeResource Space200RightThickness}"
+									  Opacity="0"
+									  VerticalAlignment="Center" />
+
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="1"
+									 Width="{ThemeResource IconSizeSmall}"
+									 Height="{ThemeResource IconSizeSmall}"
+									 Margin="{ThemeResource Space200RightThickness}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{TemplateBinding Foreground}" />
+							</Viewbox>
+
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="2"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+									   Grid.Column="3"
+									   Margin="{ThemeResource Space400LeftThickness}"
+									   VerticalAlignment="Center"
+									   Foreground="{ThemeResource MenuFlyoutItemKeyboardAcceleratorTextForeground}"
+									   FontFamily="{ThemeResource CaptionLargeFontFamily}"
+									   FontSize="{ThemeResource CaptionLargeFontSize}"
+									   FontStyle="Italic"
+									   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+									   Visibility="Collapsed" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- MenuFlyoutSubItem Style -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyMenuFlyoutSubItemStyle"
+		   TargetType="MenuFlyoutSubItem">
+
+		<Setter Property="Background" Value="{ThemeResource MenuFlyoutItemBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="Padding" Value="{ThemeResource OmarchyMenuFlyoutItemPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="MenuFlyoutSubItem">
+					<Grid x:Name="LayoutRoot"
+						  Background="{TemplateBinding Background}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="SubItemChevron.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+										<Setter Target="SubItemChevron.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="SubMenuOpened">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="SubItemChevron.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+										<Setter Target="SubItemChevron.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="PointerFocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="SubItemChevron.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CheckPlaceholderStates">
+								<VisualState x:Name="NoPlaceholder" />
+								<VisualState x:Name="CheckPlaceholder" />
+								<VisualState x:Name="IconPlaceholder">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckAndIconPlaceholder">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="HoverLayer"
+								Background="{ThemeResource MenuFlyoutItemBackgroundPointerOver}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<Grid Padding="{TemplateBinding Padding}">
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="0"
+									 Width="{ThemeResource IconSizeSmall}"
+									 Height="{ThemeResource IconSizeSmall}"
+									 Margin="{ThemeResource Space200RightThickness}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{TemplateBinding Foreground}" />
+							</Viewbox>
+
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="1"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<!-- Chevron for submenu: muted, accent on hover -->
+							<FontIcon x:Name="SubItemChevron"
+									  Grid.Column="2"
+									  Glyph="&#xE76C;"
+									  FontSize="{ThemeResource BodySmallFontSize}"
+									  Foreground="{ThemeResource MenuFlyoutSubItemChevron}"
+									  Margin="{ThemeResource Space400LeftThickness}"
+									  VerticalAlignment="Center" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- RadioMenuFlyoutItem Style -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyRadioMenuFlyoutItemStyle"
+		   TargetType="muxc:RadioMenuFlyoutItem">
+
+		<Setter Property="Background" Value="{ThemeResource MenuFlyoutItemBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource MenuFlyoutItemForeground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="Padding" Value="{ThemeResource OmarchyMenuFlyoutItemPadding}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="muxc:RadioMenuFlyoutItem">
+					<Grid x:Name="LayoutRoot"
+						  Background="{TemplateBinding Background}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+										<Setter Target="RadioDot.Fill" Value="{ThemeResource MenuFlyoutItemForegroundDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Unfocused" />
+								<VisualState x:Name="PointerFocused" />
+								<VisualState x:Name="Focused">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="TextBlock.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+										<Setter Target="IconContent.Foreground" Value="{ThemeResource MenuFlyoutItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Unchecked" />
+								<VisualState x:Name="Checked">
+									<VisualState.Setters>
+										<Setter Target="RadioDot.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="UncheckedWithIcon">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="CheckedWithIcon">
+									<VisualState.Setters>
+										<Setter Target="IconRoot.Visibility" Value="Visible" />
+										<Setter Target="RadioDot.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="KeyboardAcceleratorTextVisibility">
+								<VisualState x:Name="KeyboardAcceleratorTextCollapsed" />
+								<VisualState x:Name="KeyboardAcceleratorTextVisible">
+									<VisualState.Setters>
+										<Setter Target="KeyboardAcceleratorTextBlock.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="HoverLayer"
+								Background="{ThemeResource MenuFlyoutItemBackgroundPointerOver}"
+								Opacity="0"
+								IsHitTestVisible="False" />
+
+						<Grid Padding="{TemplateBinding Padding}">
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<!-- Radio bullet: an accent dot (Space150) in a box the size of the toggle check mark, shown through its opacity when checked -->
+							<Grid x:Name="CheckGlyph"
+								  Grid.Column="0"
+								  Width="{ThemeResource BodySmallFontSize}"
+								  Height="{ThemeResource BodySmallFontSize}"
+								  Margin="{ThemeResource Space200RightThickness}"
+								  VerticalAlignment="Center">
+								<Ellipse x:Name="RadioDot"
+										 Width="{ThemeResource Space150}"
+										 Height="{ThemeResource Space150}"
+										 Fill="{ThemeResource ToggleMenuFlyoutItemCheckGlyphForeground}"
+										 Opacity="0" />
+							</Grid>
+
+							<Viewbox x:Name="IconRoot"
+									 Grid.Column="1"
+									 Width="{ThemeResource IconSizeSmall}"
+									 Height="{ThemeResource IconSizeSmall}"
+									 Margin="{ThemeResource Space200RightThickness}"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Center"
+									 Visibility="Collapsed">
+								<ContentPresenter x:Name="IconContent"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{TemplateBinding Foreground}" />
+							</Viewbox>
+
+							<TextBlock x:Name="TextBlock"
+									   Grid.Column="2"
+									   VerticalAlignment="Center"
+									   Foreground="{TemplateBinding Foreground}"
+									   Text="{TemplateBinding Text}"
+									   TextTrimming="CharacterEllipsis" />
+
+							<TextBlock x:Name="KeyboardAcceleratorTextBlock"
+									   Grid.Column="3"
+									   Margin="{ThemeResource Space400LeftThickness}"
+									   VerticalAlignment="Center"
+									   Foreground="{ThemeResource MenuFlyoutItemKeyboardAcceleratorTextForeground}"
+									   FontFamily="{ThemeResource CaptionLargeFontFamily}"
+									   FontSize="{ThemeResource CaptionLargeFontSize}"
+									   FontStyle="Italic"
+									   Text="{TemplateBinding KeyboardAcceleratorTextOverride}"
+									   Visibility="Collapsed" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- MenuFlyoutSeparator Style (OmarchyDivider.horizontal with 4 px vertical padding) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyMenuFlyoutSeparatorStyle"
+		   TargetType="MenuFlyoutSeparator">
+
+		<Setter Property="Background" Value="{ThemeResource MenuFlyoutSeparatorBackground}" />
+		<Setter Property="Padding" Value="{ThemeResource Space100VerticalThickness}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="MenuFlyoutSeparator">
+					<Rectangle Fill="{TemplateBinding Background}"
+							   Margin="{TemplateBinding Padding}"
+							   Height="{ThemeResource OmarchyDividerWidth}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

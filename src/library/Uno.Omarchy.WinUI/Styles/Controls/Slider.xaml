@@ -1,0 +1,410 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
+
+	<!--
+		OmarchySlider (flutter_omarchy: lib/src/widgets/slider.dart).
+
+		A 4 px normal.black track with a 12 x 12 square thumb, 24 px tall (2 x thumb).
+		Filled track = accent at 0.6; thumb = accent at 0.9, opaque while hovered;
+		bright.white while pressed (anywhere on the slider); disabled: filled track and
+		thumb = bright.black (muted). The accent travels through Foreground (theme border
+		color by default, bright.{ansi} for the variants), so every state is an Opacity
+		change on a layer, never a brush swap.
+
+		Deviations:
+		- `divisions` is not drawn by the source; the TickBar parts stay collapsed
+		  (the control still honors TickPlacement if a consumer opts in).
+		- Keyboard focus = hover look in the source. The WinUI Slider raises only
+		  CommonStates / FocusEngagementStates (no FocusStates), and system focus visuals
+		  are off, so keyboard focus has no in-template representation.
+		- Vertical orientation is not in the source; it mirrors the horizontal geometry.
+		- The filled track stops at the thumb's left edge (WinUI layout) instead of running
+		  under the thumb's centre; only visible through the thumb's 0.1 transparency.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<ResourceDictionary x:Key="Light">
+			<StaticResource x:Key="SliderForeground" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="SliderHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
+		</ResourceDictionary>
+
+		<ResourceDictionary x:Key="Default">
+			<StaticResource x:Key="SliderForeground" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="SliderTrackFill" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundPressed" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="SliderTrackValueFillDisabled" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="SliderThumbBackgroundDisabled" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="SliderHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- slider.dart: _trackHeight = 4, _thumbSize = 12, height = _thumbSize * 2 -->
+	<x:Double x:Key="OmarchySliderTrackHeight">4</x:Double>
+	<x:Double x:Key="OmarchySliderThumbSize">12</x:Double>
+	<x:Double x:Key="OmarchySliderHeight">24</x:Double>
+
+	<!-- Thumb: a bare square; color and opacity are driven from the Slider template -->
+	<Style x:Key="OmarchySliderThumbStyle"
+		   TargetType="Thumb">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Thumb">
+					<Rectangle Fill="{TemplateBinding Background}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="OmarchySliderStyle"
+		   TargetType="Slider">
+		<Setter Property="Background" Value="{ThemeResource SliderTrackFill}" />
+		<Setter Property="Foreground" Value="{ThemeResource SliderForeground}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="ManipulationMode" Value="None" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+		<Setter Property="IsFocusEngagementEnabled" Value="True" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Slider">
+					<Grid Margin="{TemplateBinding Padding}">
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<!-- PointerState.isHovering: thumb = accent, opaque -->
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HorizontalThumb.Opacity" Value="1" />
+										<Setter Target="VerticalThumb.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- PointerState.isPressed: thumb = bright.white -->
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HorizontalThumbPressed.Opacity" Value="1" />
+										<Setter Target="VerticalThumbPressed.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- onChanged == null: filled track and thumb = bright.black (muted) -->
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="HorizontalDecreaseDisabled.Opacity" Value="1" />
+										<Setter Target="HorizontalThumbDisabled.Opacity" Value="1" />
+										<Setter Target="VerticalDecreaseDisabled.Opacity" Value="1" />
+										<Setter Target="VerticalThumbDisabled.Opacity" Value="1" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="FocusEngagementStates">
+								<VisualState x:Name="FocusDisengaged" />
+
+								<VisualState x:Name="FocusEngagedHorizontal">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="False" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="True" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+
+								<VisualState x:Name="FocusEngagedVertical">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="False" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
+																	   Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="True" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<!-- Header -->
+						<ContentPresenter x:Name="HeaderContentPresenter"
+										  Grid.Row="0"
+										  Content="{TemplateBinding Header}"
+										  ContentTemplate="{TemplateBinding HeaderTemplate}"
+										  FontFamily="{ThemeResource BodyLargeFontFamily}"
+										  FontSize="{ThemeResource BodyLargeFontSize}"
+										  Foreground="{ThemeResource SliderHeaderForeground}"
+										  Margin="{ThemeResource Space100BottomThickness}"
+										  TextWrapping="Wrap"
+										  Visibility="Collapsed"
+										  x:DeferLoadStrategy="Lazy" />
+
+						<!-- SliderContainer -->
+						<Grid x:Name="SliderContainer"
+							  Grid.Row="1"
+							  Background="Transparent"
+							  Control.IsTemplateFocusTarget="True">
+
+							<!-- HorizontalTemplate -->
+							<Grid x:Name="HorizontalTemplate"
+								  MinHeight="{ThemeResource OmarchySliderHeight}">
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+
+								<!-- Track background: normal.black -->
+								<Rectangle x:Name="HorizontalTrackRect"
+										   Grid.Row="1"
+										   Grid.ColumnSpan="3"
+										   Height="{ThemeResource OmarchySliderTrackHeight}"
+										   Fill="{TemplateBinding Background}" />
+
+								<!-- Filled track: accent at 0.6 (the control sets HorizontalDecreaseRect.Width; the disabled layer stretches to it) -->
+								<Grid Grid.Row="1"
+									  Height="{ThemeResource OmarchySliderTrackHeight}">
+									<Rectangle x:Name="HorizontalDecreaseRect"
+											   Fill="{TemplateBinding Foreground}"
+											   Opacity="{ThemeResource OmarchySliderTrackOpacity}" />
+									<Rectangle x:Name="HorizontalDecreaseDisabled"
+											   Fill="{ThemeResource SliderTrackValueFillDisabled}"
+											   Opacity="0" />
+								</Grid>
+
+								<!-- Tick marks: the source draws none -->
+								<TickBar x:Name="TopTickBar"
+										 Grid.Row="0"
+										 Grid.ColumnSpan="3"
+										 Height="{ThemeResource OmarchySliderTrackHeight}"
+										 VerticalAlignment="Bottom"
+										 Fill="{TemplateBinding Foreground}"
+										 Visibility="Collapsed" />
+								<TickBar x:Name="HorizontalInlineTickBar"
+										 Grid.Row="1"
+										 Grid.ColumnSpan="3"
+										 Height="{ThemeResource OmarchySliderTrackHeight}"
+										 Fill="{TemplateBinding Foreground}"
+										 Visibility="Collapsed" />
+								<TickBar x:Name="BottomTickBar"
+										 Grid.Row="2"
+										 Grid.ColumnSpan="3"
+										 Height="{ThemeResource OmarchySliderTrackHeight}"
+										 VerticalAlignment="Top"
+										 Fill="{TemplateBinding Foreground}"
+										 Visibility="Collapsed" />
+
+								<!-- Thumb: accent at 0.9; pressed / disabled layers sit on top and never take input -->
+								<Thumb x:Name="HorizontalThumb"
+									   Grid.Row="0"
+									   Grid.RowSpan="3"
+									   Grid.Column="1"
+									   Width="{ThemeResource OmarchySliderThumbSize}"
+									   Height="{ThemeResource OmarchySliderThumbSize}"
+									   AutomationProperties.AccessibilityView="Raw"
+									   Background="{TemplateBinding Foreground}"
+									   DataContext="{TemplateBinding Value}"
+									   Opacity="{ThemeResource OmarchySliderThumbOpacity}"
+									   Style="{StaticResource OmarchySliderThumbStyle}" />
+								<Rectangle x:Name="HorizontalThumbPressed"
+										   Grid.Row="0"
+										   Grid.RowSpan="3"
+										   Grid.Column="1"
+										   Width="{ThemeResource OmarchySliderThumbSize}"
+										   Height="{ThemeResource OmarchySliderThumbSize}"
+										   Fill="{ThemeResource SliderThumbBackgroundPressed}"
+										   IsHitTestVisible="False"
+										   Opacity="0" />
+								<Rectangle x:Name="HorizontalThumbDisabled"
+										   Grid.Row="0"
+										   Grid.RowSpan="3"
+										   Grid.Column="1"
+										   Width="{ThemeResource OmarchySliderThumbSize}"
+										   Height="{ThemeResource OmarchySliderThumbSize}"
+										   Fill="{ThemeResource SliderThumbBackgroundDisabled}"
+										   IsHitTestVisible="False"
+										   Opacity="0" />
+							</Grid>
+
+							<!-- VerticalTemplate -->
+							<Grid x:Name="VerticalTemplate"
+								  MinWidth="{ThemeResource OmarchySliderHeight}"
+								  Visibility="Collapsed">
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<!-- Track background: normal.black -->
+								<Rectangle x:Name="VerticalTrackRect"
+										   Grid.RowSpan="3"
+										   Grid.Column="1"
+										   Width="{ThemeResource OmarchySliderTrackHeight}"
+										   Fill="{TemplateBinding Background}" />
+
+								<!-- Filled track: accent at 0.6 (the control sets VerticalDecreaseRect.Height; the disabled layer stretches to it) -->
+								<Grid Grid.Row="2"
+									  Grid.Column="1"
+									  Width="{ThemeResource OmarchySliderTrackHeight}">
+									<Rectangle x:Name="VerticalDecreaseRect"
+											   Fill="{TemplateBinding Foreground}"
+											   Opacity="{ThemeResource OmarchySliderTrackOpacity}" />
+									<Rectangle x:Name="VerticalDecreaseDisabled"
+											   Fill="{ThemeResource SliderTrackValueFillDisabled}"
+											   Opacity="0" />
+								</Grid>
+
+								<!-- Tick marks: the source draws none -->
+								<TickBar x:Name="LeftTickBar"
+										 Grid.RowSpan="3"
+										 Grid.Column="0"
+										 Width="{ThemeResource OmarchySliderTrackHeight}"
+										 HorizontalAlignment="Right"
+										 Fill="{TemplateBinding Foreground}"
+										 Visibility="Collapsed" />
+								<TickBar x:Name="VerticalInlineTickBar"
+										 Grid.RowSpan="3"
+										 Grid.Column="1"
+										 Width="{ThemeResource OmarchySliderTrackHeight}"
+										 Fill="{TemplateBinding Foreground}"
+										 Visibility="Collapsed" />
+								<TickBar x:Name="RightTickBar"
+										 Grid.RowSpan="3"
+										 Grid.Column="2"
+										 Width="{ThemeResource OmarchySliderTrackHeight}"
+										 HorizontalAlignment="Left"
+										 Fill="{TemplateBinding Foreground}"
+										 Visibility="Collapsed" />
+
+								<!-- Thumb: accent at 0.9; pressed / disabled layers sit on top and never take input -->
+								<Thumb x:Name="VerticalThumb"
+									   Grid.Row="1"
+									   Grid.Column="0"
+									   Grid.ColumnSpan="3"
+									   Width="{ThemeResource OmarchySliderThumbSize}"
+									   Height="{ThemeResource OmarchySliderThumbSize}"
+									   AutomationProperties.AccessibilityView="Raw"
+									   Background="{TemplateBinding Foreground}"
+									   DataContext="{TemplateBinding Value}"
+									   Opacity="{ThemeResource OmarchySliderThumbOpacity}"
+									   Style="{StaticResource OmarchySliderThumbStyle}" />
+								<Rectangle x:Name="VerticalThumbPressed"
+										   Grid.Row="1"
+										   Grid.Column="0"
+										   Grid.ColumnSpan="3"
+										   Width="{ThemeResource OmarchySliderThumbSize}"
+										   Height="{ThemeResource OmarchySliderThumbSize}"
+										   Fill="{ThemeResource SliderThumbBackgroundPressed}"
+										   IsHitTestVisible="False"
+										   Opacity="0" />
+								<Rectangle x:Name="VerticalThumbDisabled"
+										   Grid.Row="1"
+										   Grid.Column="0"
+										   Grid.ColumnSpan="3"
+										   Width="{ThemeResource OmarchySliderThumbSize}"
+										   Height="{ThemeResource OmarchySliderThumbSize}"
+										   Fill="{ThemeResource SliderThumbBackgroundDisabled}"
+										   IsHitTestVisible="False"
+										   Opacity="0" />
+							</Grid>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- OmarchySlider(accent: AnsiColor.x): filled track and thumb = bright.x -->
+	<Style x:Key="OmarchySliderBlackStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlackBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchySliderWhiteStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightWhiteBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchySliderRedStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightRedBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchySliderGreenStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightGreenBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchySliderYellowStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightYellowBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchySliderBlueStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightBlueBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchySliderMagentaStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightMagentaBrush}" />
+	</Style>
+
+	<Style x:Key="OmarchySliderCyanStyle"
+		   BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider">
+		<Setter Property="Foreground" Value="{ThemeResource OmarchyBrightCyanBrush}" />
+	</Style>
+
+</ResourceDictionary>

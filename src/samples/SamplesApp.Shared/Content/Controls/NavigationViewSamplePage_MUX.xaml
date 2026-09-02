@@ -125,6 +125,56 @@
 					</smtx:XamlDisplay>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<smtx:XamlDisplay UniqueKey="Omarchy_NavigationView_MUX"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<sample:ClippedGrid MinHeight="400">
+							<muxc:NavigationView PaneTitle="omarchy"
+												 OpenPaneLength="260"
+												 IsBackButtonVisible="Collapsed"
+												 IsBackEnabled="False"
+												 Style="{StaticResource OmarchyNavigationViewStyle}">
+								<muxc:NavigationView.MenuItems>
+									<muxc:NavigationViewItemHeader Content="Workspace" />
+									<muxc:NavigationViewItem Icon="Home"
+															 Content="Home"
+															 IsSelected="True"
+															 Style="{StaticResource OmarchyNavigationViewItemStyle}" />
+									<muxc:NavigationViewItem Icon="Document"
+															 Content="Files"
+															 Style="{StaticResource OmarchyNavigationViewItemStyle}" />
+									<muxc:NavigationViewItem Icon="Library"
+															 Content="Themes"
+															 SelectsOnInvoked="False"
+															 Style="{StaticResource OmarchyNavigationViewItemStyle}">
+										<muxc:NavigationViewItem.MenuItems>
+											<muxc:NavigationViewItem Icon="Placeholder"
+																	 Content="Tokyo Night"
+																	 Style="{StaticResource OmarchyNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder"
+																	 Content="Catppuccin"
+																	 Style="{StaticResource OmarchyNavigationViewItemStyle}" />
+											<muxc:NavigationViewItem Icon="Placeholder"
+																	 Content="Nord"
+																	 Style="{StaticResource OmarchyNavigationViewItemStyle}" />
+										</muxc:NavigationViewItem.MenuItems>
+									</muxc:NavigationViewItem>
+									<muxc:NavigationViewItemSeparator />
+									<muxc:NavigationViewItemHeader Content="System" />
+									<muxc:NavigationViewItem Icon="Keyboard"
+															 Content="Shortcuts"
+															 Style="{StaticResource OmarchyNavigationViewItemStyle}" />
+									<muxc:NavigationViewItem Icon="Placeholder"
+															 Content="Disabled"
+															 IsEnabled="False"
+															 Style="{StaticResource OmarchyNavigationViewItemStyle}" />
+								</muxc:NavigationView.MenuItems>
+							</muxc:NavigationView>
+						</sample:ClippedGrid>
+					</smtx:XamlDisplay>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

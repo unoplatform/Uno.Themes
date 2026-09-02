@@ -29,5 +29,6 @@ internal static class GuestAppCatalog
 		new GuestAppInfo("Material", "MaterialSampleApp", "MaterialSampleApp"),
 		new GuestAppInfo("Cupertino", "CupertinoSampleApp", "CupertinoSampleApp"),
 		new GuestAppInfo("Simple", "SimpleSampleApp", "SimpleSampleApp"),
+		new GuestAppInfo("Omarchy", "OmarchySampleApp", "OmarchySampleApp"),
 	];
 }

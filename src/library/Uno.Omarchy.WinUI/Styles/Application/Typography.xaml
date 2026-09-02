@@ -1,0 +1,251 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Omarchy — Semantic Typography
+
+		Reproduces theme/text.dart: one monospace face (CaskaydiaMono Nerd Font Mono) at 14 px in
+		three cuts — normal, bold and italic. The slot -> face mapping (bold for titles, italic for
+		captions, regular otherwise) lives in Common/Fonts.xaml; this file only sets sizes, weights
+		and letter spacing, then declares the Omarchy{Slot} TextBlock styles.
+
+		Omarchy uses two sizes (14 for everything, 12 for descriptions); sizes above 14 and below
+		12 are an extension so the semantic scale stays distinguishable:
+		  Display   Bold    32 / 28 / 24
+		  Headline  Bold    20 / 18 / 16
+		  Title     Bold    16 / 14 / 14
+		  Body      Normal  14 / 14 / 12
+		  Label     Normal  14 / 12 / 12 (ExtraSmall 11)
+		  Caption   Normal  12 / 12 / 11 (italic cut)
+
+		Deviations: the source has no letter spacing (monospace), so CharacterSpacing is 0 for every
+		slot, overriding the Material-derived shared defaults. The Caption styles set
+		FontStyle="Italic" on top of the italic font file so the cut is honoured even when the
+		family cannot be resolved. Light and Default are identical: Omarchy has one palette.
+	-->
+
+	<!-- The per-slot FontSize / FontWeight / CharacterSpacing values live in Common/TypeScale.xaml (merged after SharedTypography.xaml). -->
+
+	<!--
+		Omarchy{Slot} TextBlock styles. All are BasedOn OmarchyBaseTextBlockStyle (Controls/TextBlock.xaml)
+		and are exposed under the theme-agnostic keys (DisplayLarge, BodyMedium, ...) by _Resources.xaml.
+	-->
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- DISPLAY -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Display Large -->
+	<Style x:Key="OmarchyDisplayLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplayLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplayLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplayLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplayLargeCharacterSpacing}" />
+	</Style>
+
+	<!-- Display Medium -->
+	<Style x:Key="OmarchyDisplayMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplayMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplayMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplayMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplayMediumCharacterSpacing}" />
+	</Style>
+
+	<!-- Display Small -->
+	<Style x:Key="OmarchyDisplaySmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource DisplaySmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource DisplaySmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource DisplaySmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource DisplaySmallCharacterSpacing}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- HEADLINE -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Headline Large -->
+	<Style x:Key="OmarchyHeadlineLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource HeadlineLargeCharacterSpacing}" />
+	</Style>
+
+	<!-- Headline Medium -->
+	<Style x:Key="OmarchyHeadlineMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource HeadlineMediumCharacterSpacing}" />
+	</Style>
+
+	<!-- Headline Small -->
+	<Style x:Key="OmarchyHeadlineSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource HeadlineSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource HeadlineSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource HeadlineSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource HeadlineSmallCharacterSpacing}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- TITLE -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Title Large -->
+	<Style x:Key="OmarchyTitleLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource TitleLargeCharacterSpacing}" />
+	</Style>
+
+	<!-- Title Medium -->
+	<Style x:Key="OmarchyTitleMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource TitleMediumCharacterSpacing}" />
+	</Style>
+
+	<!-- Title Small -->
+	<Style x:Key="OmarchyTitleSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource TitleSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource TitleSmallCharacterSpacing}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- BODY -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Body Large -->
+	<Style x:Key="OmarchyBodyLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyLargeCharacterSpacing}" />
+	</Style>
+
+	<!-- Body Medium -->
+	<Style x:Key="OmarchyBodyMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource BodyMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodyMediumCharacterSpacing}" />
+	</Style>
+
+	<!-- Body Small -->
+	<Style x:Key="OmarchyBodySmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource BodySmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodySmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodySmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource BodySmallCharacterSpacing}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- LABEL -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Label Large -->
+	<Style x:Key="OmarchyLabelLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelLargeCharacterSpacing}" />
+	</Style>
+
+	<!-- Label Medium -->
+	<Style x:Key="OmarchyLabelMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelMediumCharacterSpacing}" />
+	</Style>
+
+	<!-- Label Small -->
+	<Style x:Key="OmarchyLabelSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelSmallCharacterSpacing}" />
+	</Style>
+
+	<!-- Label ExtraSmall -->
+	<Style x:Key="OmarchyLabelExtraSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource LabelExtraSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource LabelExtraSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource LabelExtraSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource LabelExtraSmallCharacterSpacing}" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- CAPTION (theme.text.italic) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- Caption Large -->
+	<Style x:Key="OmarchyCaptionLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionLargeFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionLargeFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionLargeFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionLargeCharacterSpacing}" />
+		<Setter Property="FontStyle" Value="Italic" />
+	</Style>
+
+	<!-- Caption Medium -->
+	<Style x:Key="OmarchyCaptionMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionMediumFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionMediumFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionMediumFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionMediumCharacterSpacing}" />
+		<Setter Property="FontStyle" Value="Italic" />
+	</Style>
+
+	<!-- Caption Small -->
+	<Style x:Key="OmarchyCaptionSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource OmarchyBaseTextBlockStyle}">
+		<Setter Property="FontFamily" Value="{ThemeResource CaptionSmallFontFamily}" />
+		<Setter Property="FontWeight" Value="{ThemeResource CaptionSmallFontWeight}" />
+		<Setter Property="FontSize" Value="{ThemeResource CaptionSmallFontSize}" />
+		<Setter Property="CharacterSpacing" Value="{ThemeResource CaptionSmallCharacterSpacing}" />
+		<Setter Property="FontStyle" Value="Italic" />
+	</Style>
+
+</ResourceDictionary>

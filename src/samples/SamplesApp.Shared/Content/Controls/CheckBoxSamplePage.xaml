@@ -251,6 +251,91 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- Neutral checkbox (the implicit style) -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_CheckBox_Unchecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Unchecked"
+									  Style="{StaticResource OmarchyCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Omarchy_CheckBox_Checked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Checked"
+									  IsChecked="True"
+									  Style="{StaticResource OmarchyCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Omarchy_CheckBox_Indeterminate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsThreeState="True"
+									  Style="{StaticResource OmarchyCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled States -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_CheckBox_DisabledUnchecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Disabled Unchecked"
+									  IsEnabled="False"
+									  Style="{StaticResource OmarchyCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Omarchy_CheckBox_DisabledChecked"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Disabled Checked"
+									  IsChecked="True"
+									  IsEnabled="False"
+									  Style="{StaticResource OmarchyCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+						<smtx:XamlDisplay UniqueKey="Omarchy_CheckBox_DisabledIndeterminate"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<CheckBox Content="Disabled Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsEnabled="False"
+									  IsThreeState="True"
+									  Style="{StaticResource OmarchyCheckBoxStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- ANSI accent variants -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_CheckBox_Ansi"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<StackPanel Spacing="12">
+								<StackPanel Orientation="Horizontal"
+											Spacing="16">
+									<CheckBox Content="Black"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxBlackStyle}" />
+									<CheckBox Content="White"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxWhiteStyle}" />
+									<CheckBox Content="Red"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxRedStyle}" />
+									<CheckBox Content="Green"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxGreenStyle}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal"
+											Spacing="16">
+									<CheckBox Content="Yellow"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxYellowStyle}" />
+									<CheckBox Content="Blue"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxBlueStyle}" />
+									<CheckBox Content="Magenta"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxMagentaStyle}" />
+									<CheckBox Content="Cyan"
+											  IsChecked="True"
+											  Style="{StaticResource OmarchyCheckBoxCyanStyle}" />
+								</StackPanel>
+							</StackPanel>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

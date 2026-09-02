@@ -94,5 +94,28 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.OmarchyTemplate>
+			<DataTemplate>
+				<StackPanel>
+					<!-- Dialog with title, content, Primary + Secondary buttons (OmarchyDialog) -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_ContentDialog_Confirm"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Confirmation Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildOmarchyConfirmDialog"
+								Style="{StaticResource OmarchyFilledButtonStyle}" />
+					</smtx:XamlDisplay>
+
+					<!-- Dialog with Custom Content -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_ContentDialog_CustomContent"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Show Custom Content Dialog"
+								Click="ShowContentDialog"
+								Tag="BuildOmarchyCustomContentDialog"
+								Style="{StaticResource OmarchyOutlinedButtonStyle}" />
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.OmarchyTemplate>
 	</sample:SamplePageLayout>
 </Page>

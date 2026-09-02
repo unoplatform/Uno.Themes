@@ -1,0 +1,167 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
+
+	<!-- Implicit styles: the flutter_omarchy widget defaults (outline(white) button, neutral checkbox, ...) -->
+	<Style BasedOn="{StaticResource OmarchyOutlinedButtonStyle}"
+		   TargetType="Button" />
+	<Style BasedOn="{StaticResource OmarchyCheckBoxStyle}"
+		   TargetType="CheckBox" />
+	<Style BasedOn="{StaticResource OmarchyComboBoxStyle}"
+		   TargetType="ComboBox" />
+	<Style BasedOn="{StaticResource OmarchyComboBoxItemStyle}"
+		   TargetType="ComboBoxItem" />
+	<Style BasedOn="{StaticResource OmarchyRadioButtonStyle}"
+		   TargetType="RadioButton" />
+	<Style BasedOn="{StaticResource OmarchyOutlinedTextBoxStyle}"
+		   TargetType="TextBox" />
+	<Style BasedOn="{StaticResource OmarchyToggleSwitchStyle}"
+		   TargetType="ToggleSwitch" />
+	<Style BasedOn="{StaticResource OmarchyOutlinedPasswordBoxStyle}"
+		   TargetType="PasswordBox" />
+	<Style BasedOn="{StaticResource OmarchySliderStyle}"
+		   TargetType="Slider" />
+	<Style BasedOn="{StaticResource OmarchyToolTipStyle}"
+		   TargetType="ToolTip" />
+	<Style BasedOn="{StaticResource OmarchyBaseTextBlockStyle}"
+		   TargetType="TextBlock" />
+
+	<!-- ListView + ListViewItem (OmarchyTile) -->
+	<Style BasedOn="{StaticResource OmarchyListViewItemStyle}" TargetType="ListViewItem" />
+	<Style BasedOn="{StaticResource OmarchyListViewStyle}" TargetType="ListView" />
+
+	<!-- ContentDialog (OmarchyDialog) -->
+	<Style BasedOn="{StaticResource OmarchyContentDialogStyle}" TargetType="ContentDialog" />
+
+	<!-- MenuFlyout items (OmarchyContextMenu) -->
+	<Style BasedOn="{StaticResource OmarchyMenuFlyoutItemStyle}" TargetType="MenuFlyoutItem" />
+	<Style BasedOn="{StaticResource OmarchyMenuFlyoutPresenterStyle}" TargetType="MenuFlyoutPresenter" />
+	<Style BasedOn="{StaticResource OmarchyMenuFlyoutSeparatorStyle}" TargetType="MenuFlyoutSeparator" />
+	<Style BasedOn="{StaticResource OmarchyMenuFlyoutSubItemStyle}" TargetType="MenuFlyoutSubItem" />
+	<Style BasedOn="{StaticResource OmarchyToggleMenuFlyoutItemStyle}" TargetType="ToggleMenuFlyoutItem" />
+
+	<!-- ToggleButton (OmarchyTab) -->
+	<Style BasedOn="{StaticResource OmarchyTextToggleButtonStyle}" TargetType="ToggleButton" />
+
+	<!-- FlyoutPresenter (OmarchyPopOverContainer) -->
+	<Style BasedOn="{StaticResource OmarchyFlyoutPresenterStyle}" TargetType="FlyoutPresenter" />
+
+	<!-- HyperlinkButton -->
+	<Style BasedOn="{StaticResource OmarchyHyperlinkButtonStyle}" TargetType="HyperlinkButton" />
+
+	<!-- NavigationView (OmarchyScaffold side panel + OmarchyTile) -->
+	<Style BasedOn="{StaticResource OmarchyNavigationViewStyle}" TargetType="muxc:NavigationView" />
+	<Style BasedOn="{StaticResource OmarchyNavigationViewItemStyle}" TargetType="muxc:NavigationViewItem" />
+
+	<!-- ProgressBar / ProgressRing (OmarchyProgressBar / OmarchyLoader) -->
+	<Style BasedOn="{StaticResource OmarchyProgressBarStyle}" TargetType="muxc:ProgressBar" />
+	<Style BasedOn="{StaticResource OmarchyProgressRingStyle}" TargetType="muxc:ProgressRing" />
+
+	<!-- RadioMenuFlyoutItem -->
+	<Style BasedOn="{StaticResource OmarchyRadioMenuFlyoutItemStyle}" TargetType="muxc:RadioMenuFlyoutItem" />
+
+	<!--
+		Design-system-agnostic semantic aliases (see doc/semantic-styles.md).
+		Controls flutter_omarchy has no widget for (AppBarButton, CommandBar, CalendarView,
+		CalendarDatePicker, DatePicker, MediaTransportControls, PipsPager, RatingControl,
+		ElevatedButton) are deliberately left unaliased.
+	-->
+
+	<!-- Button: filled(blue) / filled(white) / outline(white) / bar(white) -->
+	<StaticResource x:Key="FilledButtonStyle" ResourceKey="OmarchyFilledButtonStyle" />
+	<StaticResource x:Key="FilledTonalButtonStyle" ResourceKey="OmarchyFilledButtonWhiteStyle" />
+	<StaticResource x:Key="OutlinedButtonStyle" ResourceKey="OmarchyOutlinedButtonStyle" />
+	<StaticResource x:Key="TextButtonStyle" ResourceKey="OmarchyTextButtonStyle" />
+	<StaticResource x:Key="IconButtonStyle" ResourceKey="OmarchyIconButtonStyle" />
+
+	<!-- ToggleButton -->
+	<StaticResource x:Key="TextToggleButtonStyle" ResourceKey="OmarchyTextToggleButtonStyle" />
+	<StaticResource x:Key="IconToggleButtonStyle" ResourceKey="OmarchyIconToggleButtonStyle" />
+
+	<!-- TextBox: Outlined = OmarchyInputContainer, Filled = bare OmarchyTextInput -->
+	<StaticResource x:Key="FilledTextBoxStyle" ResourceKey="OmarchyFilledTextBoxStyle" />
+	<StaticResource x:Key="OutlinedTextBoxStyle" ResourceKey="OmarchyOutlinedTextBoxStyle" />
+
+	<!-- PasswordBox -->
+	<StaticResource x:Key="FilledPasswordBoxStyle" ResourceKey="OmarchyFilledPasswordBoxStyle" />
+	<StaticResource x:Key="OutlinedPasswordBoxStyle" ResourceKey="OmarchyOutlinedPasswordBoxStyle" />
+
+	<!-- ComboBox (OmarchySelect) -->
+	<StaticResource x:Key="ComboBoxStyle" ResourceKey="OmarchyComboBoxStyle" />
+	<StaticResource x:Key="ComboBoxItemStyle" ResourceKey="OmarchyComboBoxItemStyle" />
+
+	<!-- Selection controls -->
+	<StaticResource x:Key="CheckBoxStyle" ResourceKey="OmarchyCheckBoxStyle" />
+	<StaticResource x:Key="RadioButtonStyle" ResourceKey="OmarchyRadioButtonStyle" />
+	<StaticResource x:Key="ToggleSwitchStyle" ResourceKey="OmarchyToggleSwitchStyle" />
+	<StaticResource x:Key="SliderStyle" ResourceKey="OmarchySliderStyle" />
+
+	<!-- HyperlinkButton -->
+	<StaticResource x:Key="HyperlinkButtonStyle" ResourceKey="OmarchyHyperlinkButtonStyle" />
+	<StaticResource x:Key="SecondaryHyperlinkButtonStyle" ResourceKey="OmarchySecondaryHyperlinkButtonStyle" />
+
+	<!-- ListView (OmarchyTile) -->
+	<StaticResource x:Key="ListViewStyle" ResourceKey="OmarchyListViewStyle" />
+	<StaticResource x:Key="ListViewItemStyle" ResourceKey="OmarchyListViewItemStyle" />
+
+	<!-- ContentDialog (OmarchyDialog) -->
+	<StaticResource x:Key="ContentDialogStyle" ResourceKey="OmarchyContentDialogStyle" />
+
+	<!-- NavigationView -->
+	<StaticResource x:Key="NavigationViewStyle" ResourceKey="OmarchyNavigationViewStyle" />
+	<StaticResource x:Key="NavigationViewItemStyle" ResourceKey="OmarchyNavigationViewItemStyle" />
+
+	<!-- Progress -->
+	<StaticResource x:Key="ProgressBarStyle" ResourceKey="OmarchyProgressBarStyle" />
+	<StaticResource x:Key="ProgressRingStyle" ResourceKey="OmarchyProgressRingStyle" />
+
+	<!-- Flyouts (OmarchyPopOver / OmarchyContextMenu) -->
+	<StaticResource x:Key="FlyoutPresenterStyle" ResourceKey="OmarchyFlyoutPresenterStyle" />
+	<StaticResource x:Key="MenuFlyoutPresenterStyle" ResourceKey="OmarchyMenuFlyoutPresenterStyle" />
+	<StaticResource x:Key="MenuFlyoutItemStyle" ResourceKey="OmarchyMenuFlyoutItemStyle" />
+	<StaticResource x:Key="MenuFlyoutSeparatorStyle" ResourceKey="OmarchyMenuFlyoutSeparatorStyle" />
+	<StaticResource x:Key="MenuFlyoutSubItemStyle" ResourceKey="OmarchyMenuFlyoutSubItemStyle" />
+	<StaticResource x:Key="ToggleMenuFlyoutItemStyle" ResourceKey="OmarchyToggleMenuFlyoutItemStyle" />
+	<StaticResource x:Key="RadioMenuFlyoutItemStyle" ResourceKey="OmarchyRadioMenuFlyoutItemStyle" />
+
+	<!-- FAB: no floating buttons in Omarchy; the outline icon button is the closest widget -->
+	<StaticResource x:Key="FabStyle" ResourceKey="OmarchyIconButtonStyle" />
+	<StaticResource x:Key="SmallFabStyle" ResourceKey="OmarchyIconButtonStyle" />
+	<StaticResource x:Key="LargeFabStyle" ResourceKey="OmarchyIconButtonStyle" />
+	<StaticResource x:Key="SecondaryFabStyle" ResourceKey="OmarchyIconButtonMagentaStyle" />
+	<StaticResource x:Key="SecondarySmallFabStyle" ResourceKey="OmarchyIconButtonMagentaStyle" />
+	<StaticResource x:Key="SecondaryLargeFabStyle" ResourceKey="OmarchyIconButtonMagentaStyle" />
+	<StaticResource x:Key="TertiaryFabStyle" ResourceKey="OmarchyIconButtonCyanStyle" />
+	<StaticResource x:Key="TertiarySmallFabStyle" ResourceKey="OmarchyIconButtonCyanStyle" />
+	<StaticResource x:Key="TertiaryLargeFabStyle" ResourceKey="OmarchyIconButtonCyanStyle" />
+	<StaticResource x:Key="SurfaceFabStyle" ResourceKey="OmarchyIconButtonStyle" />
+	<StaticResource x:Key="SurfaceSmallFabStyle" ResourceKey="OmarchyIconButtonStyle" />
+	<StaticResource x:Key="SurfaceLargeFabStyle" ResourceKey="OmarchyIconButtonStyle" />
+
+	<!-- Typography -->
+	<StaticResource x:Key="DisplayLarge" ResourceKey="OmarchyDisplayLarge" />
+	<StaticResource x:Key="DisplayMedium" ResourceKey="OmarchyDisplayMedium" />
+	<StaticResource x:Key="DisplaySmall" ResourceKey="OmarchyDisplaySmall" />
+	<StaticResource x:Key="HeadlineLarge" ResourceKey="OmarchyHeadlineLarge" />
+	<StaticResource x:Key="HeadlineMedium" ResourceKey="OmarchyHeadlineMedium" />
+	<StaticResource x:Key="HeadlineSmall" ResourceKey="OmarchyHeadlineSmall" />
+	<StaticResource x:Key="TitleLarge" ResourceKey="OmarchyTitleLarge" />
+	<StaticResource x:Key="TitleMedium" ResourceKey="OmarchyTitleMedium" />
+	<StaticResource x:Key="TitleSmall" ResourceKey="OmarchyTitleSmall" />
+	<StaticResource x:Key="BodyLarge" ResourceKey="OmarchyBodyLarge" />
+	<StaticResource x:Key="BodyMedium" ResourceKey="OmarchyBodyMedium" />
+	<StaticResource x:Key="BodySmall" ResourceKey="OmarchyBodySmall" />
+	<StaticResource x:Key="LabelLarge" ResourceKey="OmarchyLabelLarge" />
+	<StaticResource x:Key="LabelMedium" ResourceKey="OmarchyLabelMedium" />
+	<StaticResource x:Key="LabelSmall" ResourceKey="OmarchyLabelSmall" />
+	<StaticResource x:Key="LabelExtraSmall" ResourceKey="OmarchyLabelExtraSmall" />
+	<StaticResource x:Key="CaptionLarge" ResourceKey="OmarchyCaptionLarge" />
+	<StaticResource x:Key="CaptionMedium" ResourceKey="OmarchyCaptionMedium" />
+	<StaticResource x:Key="CaptionSmall" ResourceKey="OmarchyCaptionSmall" />
+
+</ResourceDictionary>

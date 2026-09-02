@@ -1,0 +1,132 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Omarchy type scale: per-slot FontSize / FontWeight / CharacterSpacing.
+
+		The source (theme/text.dart) has ONE size (14 px) and three faces (normal, bold, italic);
+		the larger Display / Headline / Title sizes are an extension so the semantic type scale
+		stays usable. Bold slots use the bold cut, Caption slots the italic cut (see Fonts.xaml);
+		CharacterSpacing is 0 everywhere because the face is monospace.
+
+		Declared as plain (theme-agnostic) values in a dictionary merged AFTER SharedTypography.xaml:
+		a merged dictionary is searched before a page's own ThemeDictionaries, so values declared
+		inline in Typography.xaml would lose to the shared Material-derived defaults (the same
+		ordering that Fonts.xaml relies on; see specs/lessons.md).
+	-->
+
+
+	<!-- DISPLAY -->
+
+	<!-- Display Large — theme.text.bold, 32 px (extension) -->
+	<x:String x:Key="DisplayLargeFontWeight">Bold</x:String>
+	<x:Double x:Key="DisplayLargeFontSize">32</x:Double>
+	<x:Int32 x:Key="DisplayLargeCharacterSpacing">0</x:Int32>
+
+	<!-- Display Medium — theme.text.bold, 28 px (extension) -->
+	<x:String x:Key="DisplayMediumFontWeight">Bold</x:String>
+	<x:Double x:Key="DisplayMediumFontSize">28</x:Double>
+	<x:Int32 x:Key="DisplayMediumCharacterSpacing">0</x:Int32>
+
+	<!-- Display Small — theme.text.bold, 24 px (extension) -->
+	<x:String x:Key="DisplaySmallFontWeight">Bold</x:String>
+	<x:Double x:Key="DisplaySmallFontSize">24</x:Double>
+	<x:Int32 x:Key="DisplaySmallCharacterSpacing">0</x:Int32>
+
+	<!-- HEADLINE -->
+
+	<!-- Headline Large — theme.text.bold, 20 px (extension) -->
+	<x:String x:Key="HeadlineLargeFontWeight">Bold</x:String>
+	<x:Double x:Key="HeadlineLargeFontSize">20</x:Double>
+	<x:Int32 x:Key="HeadlineLargeCharacterSpacing">0</x:Int32>
+
+	<!-- Headline Medium — theme.text.bold, 18 px (extension) -->
+	<x:String x:Key="HeadlineMediumFontWeight">Bold</x:String>
+	<x:Double x:Key="HeadlineMediumFontSize">18</x:Double>
+	<x:Int32 x:Key="HeadlineMediumCharacterSpacing">0</x:Int32>
+
+	<!-- Headline Small — theme.text.bold, 16 px (extension) -->
+	<x:String x:Key="HeadlineSmallFontWeight">Bold</x:String>
+	<x:Double x:Key="HeadlineSmallFontSize">16</x:Double>
+	<x:Int32 x:Key="HeadlineSmallCharacterSpacing">0</x:Int32>
+
+	<!-- TITLE -->
+
+	<!-- Title Large — theme.text.bold, 16 px (extension) -->
+	<x:String x:Key="TitleLargeFontWeight">Bold</x:String>
+	<x:Double x:Key="TitleLargeFontSize">16</x:Double>
+	<x:Int32 x:Key="TitleLargeCharacterSpacing">0</x:Int32>
+
+	<!-- Title Medium — theme.text.bold, 14 px (navigation_bar.dart title) -->
+	<x:String x:Key="TitleMediumFontWeight">Bold</x:String>
+	<x:Double x:Key="TitleMediumFontSize">14</x:Double>
+	<x:Int32 x:Key="TitleMediumCharacterSpacing">0</x:Int32>
+
+	<!-- Title Small — theme.text.bold, 14 px -->
+	<x:String x:Key="TitleSmallFontWeight">Bold</x:String>
+	<x:Double x:Key="TitleSmallFontSize">14</x:Double>
+	<x:Int32 x:Key="TitleSmallCharacterSpacing">0</x:Int32>
+
+	<!-- LABEL -->
+
+	<!-- Label Large — theme.text.normal, 14 px -->
+	<x:String x:Key="LabelLargeFontWeight">Normal</x:String>
+	<x:Double x:Key="LabelLargeFontSize">14</x:Double>
+	<x:Int32 x:Key="LabelLargeCharacterSpacing">0</x:Int32>
+
+	<!-- Label Medium — theme.text.normal, 12 px -->
+	<x:String x:Key="LabelMediumFontWeight">Normal</x:String>
+	<x:Double x:Key="LabelMediumFontSize">12</x:Double>
+	<x:Int32 x:Key="LabelMediumCharacterSpacing">0</x:Int32>
+
+	<!-- Label Small — theme.text.normal, 12 px -->
+	<x:String x:Key="LabelSmallFontWeight">Normal</x:String>
+	<x:Double x:Key="LabelSmallFontSize">12</x:Double>
+	<x:Int32 x:Key="LabelSmallCharacterSpacing">0</x:Int32>
+
+	<!-- Label ExtraSmall — theme.text.normal, 11 px (extension) -->
+	<x:String x:Key="LabelExtraSmallFontWeight">Normal</x:String>
+	<x:Double x:Key="LabelExtraSmallFontSize">11</x:Double>
+	<x:Int32 x:Key="LabelExtraSmallCharacterSpacing">0</x:Int32>
+
+	<!-- BODY -->
+
+	<!-- Body Large — theme.text.normal, 14 px (the Omarchy default text) -->
+	<x:String x:Key="BodyLargeFontWeight">Normal</x:String>
+	<x:Double x:Key="BodyLargeFontSize">14</x:Double>
+	<x:Int32 x:Key="BodyLargeCharacterSpacing">0</x:Int32>
+
+	<!-- Body Medium — theme.text.normal, 14 px -->
+	<x:String x:Key="BodyMediumFontWeight">Normal</x:String>
+	<x:Double x:Key="BodyMediumFontSize">14</x:Double>
+	<x:Int32 x:Key="BodyMediumCharacterSpacing">0</x:Int32>
+
+	<!-- Body Small — theme.text.normal, 12 px (tile.dart description) -->
+	<x:String x:Key="BodySmallFontWeight">Normal</x:String>
+	<x:Double x:Key="BodySmallFontSize">12</x:Double>
+	<x:Int32 x:Key="BodySmallCharacterSpacing">0</x:Int32>
+
+	<!-- CAPTION -->
+
+	<!-- Caption Large — theme.text.italic, 12 px -->
+	<x:String x:Key="CaptionLargeFontWeight">Normal</x:String>
+	<x:Double x:Key="CaptionLargeFontSize">12</x:Double>
+	<x:Int32 x:Key="CaptionLargeCharacterSpacing">0</x:Int32>
+
+	<!-- Caption Medium — theme.text.italic, 12 px -->
+	<x:String x:Key="CaptionMediumFontWeight">Normal</x:String>
+	<x:Double x:Key="CaptionMediumFontSize">12</x:Double>
+	<x:Int32 x:Key="CaptionMediumCharacterSpacing">0</x:Int32>
+
+	<!-- Caption Small — theme.text.italic, 11 px (extension) -->
+	<x:String x:Key="CaptionSmallFontWeight">Normal</x:String>
+	<x:Double x:Key="CaptionSmallFontSize">11</x:Double>
+	<x:Int32 x:Key="CaptionSmallCharacterSpacing">0</x:Int32>
+
+	</ResourceDictionary>
+
+	<!-- ═══════════════════════════════════════════════════════════════ -->
+	<!-- LIGHT THEME                                                   -->
+	<!-- ═══════════════════════════════════════════════════════════════ -->
+
+</ResourceDictionary>

@@ -1,0 +1,1654 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+					xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives">
+
+	<!--
+		Omarchy — NavigationView & NavigationViewItem Styles
+
+		Reproduces flutter_omarchy's OmarchyScaffold (scaffold.dart: leading side panel + navigation
+		bar + content), OmarchySplitPanel / OmarchyResizeDivider (split_panel.dart,
+		resize_divider.dart: a 1 px normal.black divider between the panel and the content),
+		OmarchyNavigationBar (navigation_bar.dart: 4 x 14 = 56 px tall, bold title, 1 px normal.black
+		bottom border, bar-style buttons from button.dart) and OmarchyTile (tile.dart: 56 px rows,
+		16 px horizontal padding, 22 px leading icon in bright.black, hover surface normal.black at
+		0.5 / pressed at 1, selected = selectedText (accent) in theme.text.italic).
+
+		Template: the built-in WinUI NavigationView template (the one the Simple theme runs on), every
+		template part and visual state kept, re-skinned. Deviations from the source:
+		- Tint model: the hover / pressed surface is one Border fed by the item's Background whose
+		  Opacity the visual states drive; there are no *PointerOver / *Pressed background keys.
+		- No selection indicator pill (the part stays, collapsed): selection = accent italic text.
+		- Keyboard focus renders like hover at the item level (hover surface + accent text); the
+		  icon stays muted because the item-level focus state cannot reach the presenter's icon.
+		  Bar buttons use the system focus visual skinned as a 2 px accent stroke.
+		- Compact rail: CompactPaneLength is 54 = 16 + 22 + 16 so the tile icon is centered in it
+		  (Omarchy has no compact rail — its panel hides entirely under 500 px). The compact-width
+		  setters use that token instead of a {Binding} to CompactPaneLength.
+		- WinUI's Header is mapped to the Omarchy navigation bar: 56 px, centered bold title, 1 px
+		  bottom border.
+		- No VisualTransitions / animations (the source fades over 120 ms; the pane shadow is dropped).
+		- AnimatedIcon glyphs (hamburger, chevron) are plain FontIcons; the chevron swaps glyph
+		  instead of rotating.
+		- Child-item / overflow flyouts use the implicit OmarchyFlyoutPresenterStyle instead of the
+		  built-in inline presenter style.
+		- Group headers (NavigationViewItemHeader) and separators keep the built-in template; only
+		  their brush keys are Omarchy.
+
+		Resource layers:
+		NavigationView*   = lightweight-styling keys (Light and Default are identical: one palette)
+		Omarchy*          = local tokens and styles
+		PaneToggleButtonWidth / PaneToggleButtonHeight / NavigationViewCompactPaneLength keep their
+		WinUI names because the NavigationView code reads them from the application resources.
+	-->
+
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- ─── Light Theme ─── -->
+		<ResourceDictionary x:Key="Light">
+
+			<!-- Pane, content and top pane surfaces (scaffold.dart: theme.colors.background) -->
+			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="OmarchyBackgroundBrush" />
+
+			<!-- Dividers: panel / content split, navigation bar bottom border, item separators (normal.black) -->
+			<StaticResource x:Key="NavigationViewDividerBrush" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="TopNavigationViewItemSeparatorForeground" ResourceKey="OmarchyNormalBlackBrush" />
+
+			<!-- Titles (navigation_bar.dart: theme.text.bold in theme.colors.foreground) and group headers (muted) -->
+			<StaticResource x:Key="NavigationViewPaneTitleForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="NavigationViewHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="NavigationViewItemHeaderForeground" ResourceKey="OmarchyMutedBrush" />
+
+			<!-- Bar buttons (button.dart bar style): bright.white glyph, normal.white tint; accent focus stroke -->
+			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="NavigationViewButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="NavigationViewFocusVisualBrush" ResourceKey="OmarchyAccentBrush" />
+
+			<!-- Items (tile.dart). Background is the hover / pressed surface: its rest opacity is 0 -->
+			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="NavigationViewItemIconForeground" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="NavigationViewItemBackground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="OmarchyAccentBrush" />
+
+		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (Default) ─── -->
+		<ResourceDictionary x:Key="Default">
+
+			<StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="NavigationViewTopPaneBackground" ResourceKey="OmarchyBackgroundBrush" />
+			<StaticResource x:Key="NavigationViewContentBackground" ResourceKey="OmarchyBackgroundBrush" />
+
+			<StaticResource x:Key="NavigationViewDividerBrush" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="NavigationViewItemSeparatorForeground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="TopNavigationViewItemSeparatorForeground" ResourceKey="OmarchyNormalBlackBrush" />
+
+			<StaticResource x:Key="NavigationViewPaneTitleForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="NavigationViewHeaderForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="NavigationViewItemHeaderForeground" ResourceKey="OmarchyMutedBrush" />
+
+			<StaticResource x:Key="NavigationViewButtonForeground" ResourceKey="OmarchyBrightWhiteBrush" />
+			<StaticResource x:Key="NavigationViewButtonBackground" ResourceKey="OmarchyNormalWhiteBrush" />
+			<StaticResource x:Key="NavigationViewFocusVisualBrush" ResourceKey="OmarchyAccentBrush" />
+
+			<StaticResource x:Key="NavigationViewItemForeground" ResourceKey="OmarchyForegroundBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPointerOver" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundPressed" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="NavigationViewItemForegroundSelected" ResourceKey="OmarchyAccentBrush" />
+			<StaticResource x:Key="NavigationViewItemIconForeground" ResourceKey="OmarchyMutedBrush" />
+			<StaticResource x:Key="NavigationViewItemBackground" ResourceKey="OmarchyNormalBlackBrush" />
+			<StaticResource x:Key="NavigationViewSelectionIndicatorForeground" ResourceKey="OmarchyAccentBrush" />
+
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Tokens -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+	<!-- tile.dart: leading icon size -->
+	<x:Double x:Key="OmarchyNavigationViewItemIconSize">22</x:Double>
+
+	<!-- Compact rail = tile padding + icon + padding (16 + 22 + 16) so the icon is centered in it -->
+	<x:Double x:Key="NavigationViewCompactPaneLength">54</x:Double>
+	<!-- Read by the NavigationView code (application resources): width reserved for the hamburger in the pane header row -->
+	<x:Double x:Key="PaneToggleButtonWidth">54</x:Double>
+	<!-- Read by the NavigationView code (application resources): pane header row min height = OmarchyTileHeight -->
+	<x:Double x:Key="PaneToggleButtonHeight">56</x:Double>
+
+	<!-- 1 px dividers (OmarchyDividerWidth) on a single edge: pane / content split, navigation bar bottom border -->
+	<Thickness x:Key="OmarchyNavigationViewPaneBorderThickness">0,0,1,0</Thickness>
+	<Thickness x:Key="OmarchyNavigationViewBarBorderThickness">0,0,0,1</Thickness>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Bar button (button.dart bar style): no border, bright glyph, normal tint at 0.15 / 0.25, 12 px padding -->
+	<!-- Used for the back, close, search and overflow buttons -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewBarButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Background" Value="{ThemeResource NavigationViewButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource NavigationViewButtonForeground}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource Space300Thickness}" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource IconSizeSmall}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="IsTextScaleFactorEnabled" Value="False" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="0" />
+		<Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource NavigationViewFocusVisualBrush}" />
+		<Setter Property="FocusVisualPrimaryThickness" Value="{ThemeResource OmarchyBorderThickness}" />
+		<Setter Property="FocusVisualSecondaryThickness" Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="LayoutRoot"
+						  Background="{ThemeResource SystemControlTransparentBrush}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacityPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Disabled bar buttons switch bright -> normal in the source; the glyph is dimmed instead -->
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="TintLayer"
+								Background="{TemplateBinding Background}"
+								Opacity="0" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Width="{ThemeResource OmarchyNavigationViewItemIconSize}"
+										  Height="{ThemeResource OmarchyNavigationViewItemIconSize}"
+										  Margin="{TemplateBinding Padding}"
+										  HorizontalAlignment="Center"
+										  VerticalAlignment="Center"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw"
+										  Content="{TemplateBinding Content}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  FontFamily="{TemplateBinding FontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
+										  Foreground="{TemplateBinding Foreground}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Pane toggle button: the navigation bar's leading hamburger (bar button) followed by the pane title -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewPaneToggleButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Background" Value="{ThemeResource NavigationViewButtonBackground}" />
+		<Setter Property="Foreground" Value="{ThemeResource NavigationViewButtonForeground}" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource Space300Thickness}" />
+		<Setter Property="MinWidth" Value="{ThemeResource PaneToggleButtonWidth}" />
+		<Setter Property="MinHeight" Value="{ThemeResource OmarchyTileHeight}" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource IconSizeSmall}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="IsTextScaleFactorEnabled" Value="False" />
+		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="FocusVisualMargin" Value="0" />
+		<Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource NavigationViewFocusVisualBrush}" />
+		<Setter Property="FocusVisualPrimaryThickness" Value="{ThemeResource OmarchyBorderThickness}" />
+		<Setter Property="FocusVisualSecondaryThickness" Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="LayoutRoot"
+						  Height="{TemplateBinding MinHeight}"
+						  HorizontalAlignment="Stretch"
+						  Background="{ThemeResource SystemControlTransparentBrush}"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="TintLayer.Opacity" Value="{ThemeResource OmarchyTintOpacityPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="Icon.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+										<Setter Target="ContentPresenter.Opacity" Value="{ThemeResource OmarchyMutedForegroundOpacity}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- The bar button proper: MinWidth is the NavigationView's SmallerPaneToggleButtonWidth (54 - 8 = 46 = 12 + 22 + 12) -->
+						<Grid x:Name="IconBox"
+							  Width="{TemplateBinding MinWidth}"
+							  VerticalAlignment="Center">
+							<Border x:Name="TintLayer"
+									Background="{TemplateBinding Background}"
+									Opacity="0" />
+							<FontIcon x:Name="Icon"
+									  Width="{ThemeResource OmarchyNavigationViewItemIconSize}"
+									  Height="{ThemeResource OmarchyNavigationViewItemIconSize}"
+									  Margin="{TemplateBinding Padding}"
+									  HorizontalAlignment="Center"
+									  VerticalAlignment="Center"
+									  AutomationProperties.AccessibilityView="Raw"
+									  FontFamily="{TemplateBinding FontFamily}"
+									  FontSize="{TemplateBinding FontSize}"
+									  Foreground="{TemplateBinding Foreground}"
+									  Glyph="&#xE700;" />
+						</Grid>
+
+						<!-- Pane title (PaneTitleTextBlock, set by the NavigationView template) -->
+						<ContentPresenter x:Name="ContentPresenter"
+										  Grid.Column="1"
+										  Padding="{ThemeResource Space200LeftThickness}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Content="{TemplateBinding Content}" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- Content header = the navigation bar title (navigation_bar.dart): centered, theme.text.bold, foreground -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewHeaderContentStyle"
+		   TargetType="ContentControl">
+		<Setter Property="MinHeight" Value="{ThemeResource OmarchyTileHeight}" />
+		<Setter Property="Margin" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource Space400HorizontalThickness}" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontFamily" Value="{ThemeResource TitleMediumFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource TitleMediumFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource TitleMediumFontWeight}" />
+		<Setter Property="Foreground" Value="{ThemeResource NavigationViewHeaderForeground}" />
+		<Setter Property="IsTabStop" Value="False" />
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- NavigationView Style -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewStyle"
+		   TargetType="muxc:NavigationView">
+		<Setter Property="PaneToggleButtonStyle" Value="{ThemeResource OmarchyNavigationViewPaneToggleButtonStyle}" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="Background" Value="{ThemeResource NavigationViewContentBackground}" />
+		<Setter Property="CompactPaneLength" Value="{ThemeResource NavigationViewCompactPaneLength}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="muxc:NavigationView">
+					<Grid x:Name="RootGrid">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="DisplayModeGroup">
+								<VisualState x:Name="Compact" />
+								<VisualState x:Name="Expanded" />
+								<!-- Minimal: the pane overlays the content and the hamburger sits in the header bar; nothing to move -->
+								<VisualState x:Name="Minimal" />
+								<VisualState x:Name="TopNavigationMinimal" />
+								<VisualState x:Name="MinimalWithBackButton" />
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="TogglePaneGroup">
+								<VisualState x:Name="TogglePaneButtonCollapsed" />
+								<VisualState x:Name="TogglePaneButtonVisible">
+									<VisualState.Setters>
+										<!-- The pane header row is the navigation bar: OmarchyTileHeight tall -->
+										<Setter Target="PaneContentGridToggleButtonRow.MinHeight" Value="{ThemeResource OmarchyTileHeight}" />
+										<Setter Target="PaneTitlePresenter.Margin" Value="{ThemeResource Space400HorizontalThickness}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="HeaderGroup">
+								<VisualState x:Name="HeaderVisible" />
+								<VisualState x:Name="HeaderCollapsed">
+									<VisualState.Setters>
+										<Setter Target="HeaderContent.Visibility" Value="Collapsed" />
+										<Setter Target="OmarchyHeaderBar.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="AutoSuggestGroup">
+								<VisualState x:Name="AutoSuggestBoxVisible" />
+								<VisualState x:Name="AutoSuggestBoxCollapsed">
+									<VisualState.Setters>
+										<Setter Target="AutoSuggestArea.Visibility" Value="Collapsed" />
+										<Setter Target="TopPaneAutoSuggestArea.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PaneStateGroup">
+								<VisualState x:Name="NotClosedCompact" />
+								<VisualState x:Name="ClosedCompact">
+									<VisualState.Setters>
+										<Setter Target="PaneAutoSuggestBoxPresenter.Visibility" Value="Collapsed" />
+										<Setter Target="PaneAutoSuggestButton.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PaneStateListSizeGroup">
+								<VisualState x:Name="ListSizeFull" />
+								<VisualState x:Name="ListSizeCompact">
+									<VisualState.Setters>
+										<Setter Target="PaneContentGrid.Width" Value="{ThemeResource NavigationViewCompactPaneLength}" />
+										<Setter Target="ShadowCaster.Width" Value="{ThemeResource NavigationViewCompactPaneLength}" />
+										<Setter Target="PaneTitleTextBlock.Visibility" Value="Collapsed" />
+										<Setter Target="PaneHeaderContentBorder.Visibility" Value="Collapsed" />
+										<Setter Target="PaneContentGrid.HorizontalAlignment" Value="Left" />
+										<Setter Target="PaneCustomContentBorder.HorizontalAlignment" Value="Left" />
+										<Setter Target="FooterContentBorder.HorizontalAlignment" Value="Left" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- No shadow in Omarchy: the transitions of the built-in template are dropped, the states stay -->
+							<VisualStateGroup x:Name="PaneOverlayGroup">
+								<VisualState x:Name="PaneOverlaying" />
+								<VisualState x:Name="PaneNotOverlaying">
+									<VisualState.Setters>
+										<Setter Target="ShadowCaster.Opacity" Value="0" />
+										<Setter Target="RootSplitView.PaneBackground" Value="{ThemeResource NavigationViewExpandedPaneBackground}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="TitleBarVisibilityGroup">
+								<VisualState x:Name="TitleBarVisible" />
+								<VisualState x:Name="TitleBarCollapsed">
+									<VisualState.Setters>
+										<!-- Built-in constant: room for the window drag region when the title bar is collapsed -->
+										<Setter Target="PaneContentGrid.Margin" Value="0,32,0,0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- The overflow button is a bar button with a glyph in both modes -->
+							<VisualStateGroup x:Name="OverflowLabelGroup">
+								<VisualState x:Name="OverflowButtonWithLabel" />
+								<VisualState x:Name="OverflowButtonNoLabel" />
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="BackButtonGroup">
+								<VisualState x:Name="BackButtonVisible" />
+								<VisualState x:Name="BackButtonCollapsed">
+									<VisualState.Setters>
+										<Setter Target="BackButtonPlaceholderOnTopNav.Width" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PaneVisibilityGroup">
+								<VisualState x:Name="PaneVisible" />
+								<VisualState x:Name="PaneCollapsed">
+									<VisualState.Setters>
+										<!-- Note that RootSplitView.DisplayMode is set in code so we don't want to -->
+										<!-- write it here and interfere. But these values work together to hide -->
+										<!-- the left pane. -->
+										<Setter Target="RootSplitView.CompactPaneLength" Value="0" />
+										<Setter Target="ShadowCaster.Width" Value="0" />
+										<Setter Target="PaneToggleButtonGrid.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PaneSeparatorStates">
+								<VisualState x:Name="SeparatorCollapsed" />
+								<VisualState x:Name="SeparatorVisible">
+									<VisualState.Setters>
+										<Setter Target="VisualItemsSeparator.Visibility" Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- Content layouts -->
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+
+							<!-- DisplayMode top: the navigation bar as a tab strip (56 px, 1 px bottom border) -->
+							<StackPanel x:Name="TopNavArea"
+										Grid.Row="0"
+										HorizontalAlignment="Stretch"
+										VerticalAlignment="Top"
+										Background="{ThemeResource NavigationViewTopPaneBackground}"
+										Canvas.ZIndex="1"
+										XYFocusKeyboardNavigation="Enabled">
+								<Grid x:Name="TopNavTopPadding"
+									  Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPadding}"
+									  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPaneVisibility}" />
+								<Grid x:Name="TopNavGrid"
+									  Height="{ThemeResource OmarchyTileHeight}"
+									  BorderBrush="{ThemeResource NavigationViewDividerBrush}"
+									  BorderThickness="{ThemeResource OmarchyNavigationViewBarBorderThickness}"
+									  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPaneVisibility}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition x:Name="BackButtonPlaceholderOnTopNav"
+														  Width="{ThemeResource PaneToggleButtonWidth}" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*"
+														  MinWidth="{ThemeResource ControlHeightMedium}" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+
+									<Grid x:Name="TopNavLeftPadding"
+										  Grid.Column="1"
+										  Width="0" />
+
+									<ContentControl x:Name="PaneHeaderOnTopPane"
+													Grid.Column="2"
+													HorizontalContentAlignment="Stretch"
+													VerticalContentAlignment="Stretch"
+													IsTabStop="False" />
+
+									<ContentControl x:Name="PaneTitleOnTopPane"
+													Grid.Column="2"
+													Margin="{ThemeResource Space400HorizontalThickness}"
+													HorizontalContentAlignment="Stretch"
+													VerticalContentAlignment="Stretch"
+													IsTabStop="False" />
+
+									<!-- Top nav ItemsRepeater -->
+									<muxc:ItemsRepeaterScrollHost Grid.Column="3">
+										<ScrollViewer HorizontalScrollBarVisibility="Hidden"
+													  HorizontalScrollMode="Disabled"
+													  VerticalScrollBarVisibility="Hidden"
+													  VerticalScrollMode="Disabled">
+											<muxc:ItemsRepeater x:Name="TopNavMenuItemsHost"
+																AutomationProperties.AccessibilityView="Content"
+																AutomationProperties.LandmarkType="Navigation"
+																AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}">
+												<muxc:ItemsRepeater.Layout>
+													<muxc:StackLayout Orientation="Horizontal" />
+												</muxc:ItemsRepeater.Layout>
+											</muxc:ItemsRepeater>
+										</ScrollViewer>
+									</muxc:ItemsRepeaterScrollHost>
+
+									<Button x:Name="TopNavOverflowButton"
+											Grid.Column="4"
+											Content="&#xE712;"
+											Style="{ThemeResource OmarchyNavigationViewBarButtonStyle}"
+											Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OverflowButtonVisibility}">
+										<Button.Flyout>
+											<!-- Presented by the implicit OmarchyFlyoutPresenterStyle (OmarchyPopOverContainer) -->
+											<Flyout ElementSoundMode="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ElementSoundMode}"
+													Placement="BottomEdgeAlignedRight">
+												<muxc:ItemsRepeaterScrollHost>
+													<ScrollViewer VerticalScrollBarVisibility="Auto">
+														<muxc:ItemsRepeater x:Name="TopNavMenuItemsOverflowHost"
+																			AutomationProperties.AccessibilityView="Content">
+															<muxc:ItemsRepeater.Layout>
+																<muxc:StackLayout />
+															</muxc:ItemsRepeater.Layout>
+														</muxc:ItemsRepeater>
+													</ScrollViewer>
+												</muxc:ItemsRepeaterScrollHost>
+											</Flyout>
+										</Button.Flyout>
+									</Button>
+
+									<ContentControl x:Name="PaneCustomContentOnTopPane"
+													Grid.Column="5"
+													HorizontalContentAlignment="Stretch"
+													VerticalContentAlignment="Stretch"
+													IsTabStop="False" />
+
+									<Grid x:Name="TopPaneAutoSuggestArea"
+										  Grid.Column="6"
+										  Height="{ThemeResource OmarchyTileHeight}">
+										<ContentControl x:Name="TopPaneAutoSuggestBoxPresenter"
+														MinWidth="216"
+														Margin="{ThemeResource Space100HorizontalThickness}"
+														HorizontalContentAlignment="Stretch"
+														VerticalContentAlignment="Center"
+														IsTabStop="False" />
+									</Grid>
+
+									<ContentControl x:Name="PaneFooterOnTopPane"
+													Grid.Column="7"
+													HorizontalContentAlignment="Stretch"
+													VerticalContentAlignment="Stretch"
+													IsTabStop="False" />
+
+									<!-- Top footer menu ItemsRepeater -->
+									<muxc:ItemsRepeater x:Name="TopFooterMenuItemsHost"
+														Grid.Column="8"
+														AutomationProperties.AccessibilityView="Content"
+														AutomationProperties.LandmarkType="Navigation">
+										<muxc:ItemsRepeater.Layout>
+											<muxc:StackLayout Orientation="Horizontal" />
+										</muxc:ItemsRepeater.Layout>
+									</muxc:ItemsRepeater>
+								</Grid>
+
+								<Border x:Name="TopNavContentOverlayAreaGrid"
+										Child="{TemplateBinding ContentOverlay}" />
+							</StackPanel>
+
+							<!-- DisplayMode (compact / minimal / expanded) left: side panel + divider + content (split_panel.dart) -->
+							<SplitView x:Name="RootSplitView"
+									   Grid.Row="1"
+									   Background="{TemplateBinding Background}"
+									   BorderThickness="0"
+									   CompactPaneLength="{TemplateBinding CompactPaneLength}"
+									   CornerRadius="{ThemeResource OmarchyCornerRadius}"
+									   DisplayMode="Inline"
+									   IsPaneOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPaneOpen, Mode=TwoWay}"
+									   IsTabStop="False"
+									   OpenPaneLength="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OpenPaneLength}"
+									   PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}">
+								<SplitView.Pane>
+									<!-- The pane's right border is the resize divider (resize_divider.dart: 1 px normal.black) -->
+									<Grid x:Name="PaneContentGrid"
+										  BorderBrush="{ThemeResource NavigationViewDividerBrush}"
+										  BorderThickness="{ThemeResource OmarchyNavigationViewPaneBorderThickness}"
+										  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="0" />
+											<!-- above button margin + back button space -->
+											<RowDefinition x:Name="PaneContentGridToggleButtonRow"
+														   Height="Auto" />
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="0" />
+											<!-- above list margin -->
+											<RowDefinition x:Name="ItemsContainerRow"
+														   Height="*" />
+										</Grid.RowDefinitions>
+
+										<Grid x:Name="ContentPaneTopPadding"
+											  Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPadding}" />
+
+										<!-- Pane header row = the navigation bar (navigation_bar.dart): 1 px normal.black bottom border -->
+										<Grid Grid.Row="2"
+											  BorderBrush="{ThemeResource NavigationViewDividerBrush}"
+											  BorderThickness="{ThemeResource OmarchyNavigationViewBarBorderThickness}">
+											<Grid.RowDefinitions>
+												<RowDefinition x:Name="PaneHeaderContentBorderRow" />
+											</Grid.RowDefinitions>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition x:Name="PaneHeaderCloseButtonColumn" />
+												<ColumnDefinition x:Name="PaneHeaderToggleButtonColumn" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+											<ContentControl x:Name="PaneHeaderContentBorder"
+															Grid.Column="2"
+															HorizontalContentAlignment="Stretch"
+															VerticalContentAlignment="Stretch"
+															IsTabStop="False" />
+										</Grid>
+
+										<Grid x:Name="AutoSuggestArea"
+											  Grid.Row="3"
+											  MinHeight="{ThemeResource ControlHeightMedium}"
+											  Margin="{ThemeResource Space200BottomThickness}"
+											  VerticalAlignment="Center">
+											<ContentControl x:Name="PaneAutoSuggestBoxPresenter"
+															Margin="{ThemeResource Space400HorizontalThickness}"
+															HorizontalContentAlignment="Stretch"
+															VerticalContentAlignment="Center"
+															IsTabStop="False" />
+											<Button x:Name="PaneAutoSuggestButton"
+													Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}"
+													Content="&#xE721;"
+													Style="{ThemeResource OmarchyNavigationViewBarButtonStyle}"
+													Visibility="Collapsed" />
+										</Grid>
+
+										<ContentControl x:Name="PaneCustomContentBorder"
+														Grid.Row="4"
+														HorizontalContentAlignment="Stretch"
+														VerticalContentAlignment="Stretch"
+														IsTabStop="False" />
+
+										<!-- "Non header" content -->
+										<Grid x:Name="ItemsContainerGrid"
+											  Grid.Row="6">
+											<Grid.RowDefinitions>
+												<!-- MenuItems -->
+												<RowDefinition Height="*" />
+												<!-- Separator if overflow -->
+												<RowDefinition Height="Auto" />
+												<!-- PaneFooter -->
+												<RowDefinition Height="Auto" />
+												<!-- FooterItems -->
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
+
+											<!-- MenuItems -->
+											<muxc:ItemsRepeaterScrollHost HorizontalAlignment="Stretch"
+																		  VerticalAlignment="Stretch">
+												<ScrollViewer x:Name="MenuItemsScrollViewer"
+															  TabNavigation="Local"
+															  VerticalScrollBarVisibility="Auto">
+													<!-- Left nav ItemsRepeater -->
+													<muxc:ItemsRepeater x:Name="MenuItemsHost"
+																		AutomationProperties.AccessibilityView="Content"
+																		AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}">
+														<muxc:ItemsRepeater.Layout>
+															<muxc:StackLayout />
+														</muxc:ItemsRepeater.Layout>
+													</muxc:ItemsRepeater>
+												</ScrollViewer>
+											</muxc:ItemsRepeaterScrollHost>
+
+											<muxc:NavigationViewItemSeparator x:Name="VisualItemsSeparator"
+																			  Grid.Row="1"
+																			  HorizontalAlignment="Stretch"
+																			  VerticalAlignment="Center"
+																			  Visibility="Collapsed" />
+
+											<!-- PaneFooter -->
+											<ContentControl x:Name="FooterContentBorder"
+															Grid.Row="2"
+															HorizontalContentAlignment="Stretch"
+															VerticalContentAlignment="Stretch"
+															IsTabStop="False" />
+
+											<!-- FooterItems -->
+											<muxc:ItemsRepeaterScrollHost Grid.Row="3">
+												<ScrollViewer x:Name="FooterItemsScrollViewer"
+															  VerticalAnchorRatio="1"
+															  VerticalScrollBarVisibility="Auto">
+													<muxc:ItemsRepeater x:Name="FooterMenuItemsHost"
+																		AutomationProperties.AccessibilityView="Content">
+														<muxc:ItemsRepeater.Layout>
+															<muxc:StackLayout />
+														</muxc:ItemsRepeater.Layout>
+													</muxc:ItemsRepeater>
+												</ScrollViewer>
+											</muxc:ItemsRepeaterScrollHost>
+										</Grid>
+									</Grid>
+								</SplitView.Pane>
+
+								<SplitView.Content>
+									<!-- Content: no padding, sharp corners, background (scaffold.dart) -->
+									<Grid x:Name="ContentGrid"
+										  Background="{ThemeResource NavigationViewContentBackground}"
+										  CornerRadius="{ThemeResource OmarchyCornerRadius}">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+
+										<Grid x:Name="ContentTopPadding"
+											  Grid.ColumnSpan="2"
+											  Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPadding}"
+											  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.LeftPaneVisibility}" />
+
+										<!-- Header row = the navigation bar (navigation_bar.dart): full-width 1 px bottom border under the centered title -->
+										<Border x:Name="OmarchyHeaderBar"
+												Grid.Row="1"
+												Grid.ColumnSpan="2"
+												MinHeight="{ThemeResource OmarchyTileHeight}"
+												BorderBrush="{ThemeResource NavigationViewDividerBrush}"
+												BorderThickness="{ThemeResource OmarchyNavigationViewBarBorderThickness}" />
+
+										<Grid x:Name="ContentLeftPadding"
+											  Grid.Row="1" />
+
+										<ContentControl x:Name="HeaderContent"
+														Grid.Row="1"
+														Grid.Column="1"
+														Content="{TemplateBinding Header}"
+														ContentTemplate="{TemplateBinding HeaderTemplate}"
+														Style="{ThemeResource OmarchyNavigationViewHeaderContentStyle}" />
+
+										<ContentPresenter x:Name="ContentPresenter"
+														  Grid.Row="2"
+														  Grid.ColumnSpan="2"
+														  AutomationProperties.LandmarkType="Main"
+														  Content="{TemplateBinding Content}" />
+									</Grid>
+								</SplitView.Content>
+							</SplitView>
+
+							<!-- Overlay pane shadow caster: kept for the pane states, Omarchy draws no shadow -->
+							<Grid x:Name="ShadowCaster"
+								  Grid.RowSpan="2"
+								  Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OpenPaneLength}"
+								  HorizontalAlignment="Left">
+								<Grid.RenderTransform>
+									<CompositeTransform x:Name="ShadowCasterTransform" />
+								</Grid.RenderTransform>
+							</Grid>
+						</Grid>
+
+						<!-- Uno specific: Canvas.ZIndex is ignored on native Android/iOS (#325), so the button Grid is placed last to stay above the content SplitView -->
+						<!-- Button grid: sits in the pane header row (expanded / compact) or in the content header bar (minimal) -->
+						<Grid x:Name="PaneToggleButtonGrid"
+							  HorizontalAlignment="Left"
+							  VerticalAlignment="Top"
+							  Canvas.ZIndex="100">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+
+							<Grid x:Name="TogglePaneTopPadding"
+								  Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.TopPadding}" />
+
+							<Grid x:Name="ButtonHolderGrid"
+								  Grid.Row="1">
+								<Button x:Name="NavigationViewBackButton"
+										Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}"
+										VerticalAlignment="Center"
+										Content="&#xE72B;"
+										IsEnabled="{TemplateBinding IsBackEnabled}"
+										Style="{ThemeResource OmarchyNavigationViewBarButtonStyle}"
+										Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.BackButtonVisibility}">
+									<ToolTipService.ToolTip>
+										<ToolTip x:Name="NavigationViewBackButtonToolTip" />
+									</ToolTipService.ToolTip>
+								</Button>
+
+								<Button x:Name="NavigationViewCloseButton"
+										VerticalAlignment="Center"
+										Content="&#xE72B;"
+										Style="{ThemeResource OmarchyNavigationViewBarButtonStyle}">
+									<ToolTipService.ToolTip>
+										<ToolTip x:Name="NavigationViewCloseButtonToolTip" />
+									</ToolTipService.ToolTip>
+								</Button>
+
+								<Button x:Name="TogglePaneButton"
+										MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Top"
+										AutomationProperties.LandmarkType="Navigation"
+										FocusVisualMargin="0"
+										Style="{TemplateBinding PaneToggleButtonStyle}"
+										Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PaneToggleButtonVisibility}">
+									<!-- navigation_bar.dart: title in theme.text.bold, theme.colors.foreground -->
+									<TextBlock x:Name="PaneTitleTextBlock"
+											   VerticalAlignment="Center"
+											   FontFamily="{ThemeResource TitleMediumFontFamily}"
+											   FontSize="{ThemeResource TitleMediumFontSize}"
+											   FontWeight="{ThemeResource TitleMediumFontWeight}"
+											   Foreground="{ThemeResource NavigationViewPaneTitleForeground}"
+											   Text="{TemplateBinding PaneTitle}"
+											   TextTrimming="CharacterEllipsis"
+											   TextWrapping="NoWrap" />
+								</Button>
+
+								<Grid x:Name="PaneTitleHolder"
+									  Height="{ThemeResource OmarchyTileHeight}"
+									  Visibility="Collapsed">
+									<ContentControl x:Name="PaneTitlePresenter"
+													Margin="{ThemeResource Space400HorizontalThickness}"
+													HorizontalContentAlignment="Stretch"
+													VerticalContentAlignment="Stretch"
+													IsTabStop="False" />
+								</Grid>
+							</Grid>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- NavigationViewItem Style (OmarchyTile) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewItemStyle"
+		   TargetType="muxc:NavigationViewItem">
+		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
+		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
+		<Setter Property="FontFamily" Value="{ThemeResource BodyLargeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource BodyLargeFontSize}" />
+		<Setter Property="FontWeight" Value="{ThemeResource BodyLargeFontWeight}" />
+		<Setter Property="Margin" Value="0" />
+		<Setter Property="Padding" Value="{ThemeResource Space400HorizontalThickness}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="TabNavigation" Value="Once" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="muxc:NavigationViewItem">
+					<Grid x:Name="NVIRootGrid">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="ItemOnNavigationViewListPositionStates">
+								<VisualState x:Name="OnLeftNavigation">
+									<VisualState.Setters>
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource OmarchyNavigationViewItemPresenterStyleWhenOnLeftPane}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="OnTopNavigationPrimary">
+									<VisualState.Setters>
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource OmarchyNavigationViewItemPresenterStyleWhenOnTopPane}" />
+										<Setter Target="ChildrenFlyout.Placement" Value="BottomEdgeAlignedLeft" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="OnTopNavigationOverflow">
+									<VisualState.Setters>
+										<Setter Target="NavigationViewItemPresenter.Style" Value="{ThemeResource OmarchyNavigationViewItemPresenterStyleWhenOnTopPaneOverflow}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- tile.dart has no focus visual; keyboard focus renders like hover (surface + accent text) -->
+							<VisualStateGroup x:Name="KeyboardFocusStates">
+								<VisualState x:Name="KeyboardNormal" />
+								<VisualState x:Name="KeyboardFocused">
+									<VisualState.Setters>
+										<Setter Target="FocusLayer.Opacity" Value="{ThemeResource OmarchyTileHoverOpacity}" />
+										<Setter Target="NavigationViewItemPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="FocusLayer"
+								Background="{TemplateBinding Background}"
+								Opacity="0" />
+
+						<primitives:NavigationViewItemPresenter x:Name="NavigationViewItemPresenter"
+																Padding="{TemplateBinding Padding}"
+																HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+																VerticalAlignment="{TemplateBinding VerticalAlignment}"
+																HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+																VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+																Background="{TemplateBinding Background}"
+																BorderBrush="{TemplateBinding BorderBrush}"
+																BorderThickness="{TemplateBinding BorderThickness}"
+																Content="{TemplateBinding Content}"
+																ContentTemplate="{TemplateBinding ContentTemplate}"
+																ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+																ContentTransitions="{TemplateBinding ContentTransitions}"
+																Control.IsTemplateFocusTarget="True"
+																CornerRadius="{TemplateBinding CornerRadius}"
+																Foreground="{TemplateBinding Foreground}"
+																Icon="{TemplateBinding Icon}"
+																InfoBadge="{TemplateBinding InfoBadge}"
+																IsTabStop="False"
+																UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" />
+
+						<muxc:ItemsRepeater x:Name="NavigationViewItemMenuItemsHost"
+											x:Load="False"
+											Grid.Row="1"
+											Visibility="Collapsed">
+							<muxc:ItemsRepeater.Layout>
+								<muxc:StackLayout Orientation="Vertical" />
+							</muxc:ItemsRepeater.Layout>
+						</muxc:ItemsRepeater>
+
+						<FlyoutBase.AttachedFlyout>
+							<!-- Presented by the implicit OmarchyFlyoutPresenterStyle (OmarchyPopOverContainer) -->
+							<Flyout x:Name="ChildrenFlyout"
+									Placement="RightEdgeAlignedTop">
+								<Grid x:Name="FlyoutRootGrid">
+									<Grid x:Name="FlyoutContentGrid" />
+								</Grid>
+							</Flyout>
+						</FlyoutBase.AttachedFlyout>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- NavigationViewItemPresenter — left pane (OmarchyTile) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewItemPresenterStyleWhenOnLeftPane"
+		   TargetType="primitives:NavigationViewItemPresenter">
+		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
+		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="primitives:NavigationViewItemPresenter">
+					<Grid x:Name="LayoutRoot"
+						  MinHeight="{ThemeResource OmarchyTileHeight}"
+						  Background="{ThemeResource SystemControlTransparentBrush}"
+						  Control.IsTemplateFocusTarget="True"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="PointerStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="{ThemeResource OmarchyTileHoverOpacity}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<!-- Selected: selectedText (accent) in theme.text.italic, no surface -->
+								<VisualState x:Name="Selected">
+									<VisualState.Setters>
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerOverSelected">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="{ThemeResource OmarchyTileHoverOpacity}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PressedSelected">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="DisabledStates">
+								<VisualState x:Name="Enabled" />
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="IconStates">
+								<VisualState x:Name="IconVisible" />
+								<VisualState x:Name="IconCollapsed">
+									<VisualState.Setters>
+										<Setter Target="IconBox.Visibility" Value="Collapsed" />
+										<Setter Target="IconColumn.Width" Value="0" />
+										<Setter Target="IconColumn.Margin" Value="0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="InfoBadgeStates">
+								<VisualState x:Name="InfoBadgeVisible" />
+								<VisualState x:Name="InfoBadgeCollapsed">
+									<VisualState.Setters>
+										<Setter Target="InfoBadgePresenter.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<!-- The chevron swaps glyph (up / down) instead of animating -->
+							<VisualStateGroup x:Name="ChevronStates">
+								<VisualState x:Name="ChevronHidden" />
+								<VisualState x:Name="ChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Glyph" Value="&#xE70E;" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="ChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Glyph" Value="&#xE70D;" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PointerChevronStates">
+								<VisualState x:Name="NormalChevronHidden" />
+								<VisualState x:Name="NormalChevronVisibleOpen" />
+								<VisualState x:Name="NormalChevronVisibleClosed" />
+								<VisualState x:Name="PointerOverChevronHidden" />
+								<VisualState x:Name="PointerOverChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOverChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PressedChevronHidden" />
+								<VisualState x:Name="PressedChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PressedChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PaneAndTopLevelItemStates">
+								<VisualState x:Name="NotClosedCompactAndTopLevelItem" />
+								<VisualState x:Name="ClosedCompactAndTopLevelItem">
+									<VisualState.Setters>
+										<Setter Target="ContentGrid.Margin" Value="0" />
+										<Setter Target="InfoBadgePresenter.(Grid.Column)" Value="0" />
+										<Setter Target="InfoBadgePresenter.(Grid.ColumnSpan)" Value="4" />
+										<Setter Target="InfoBadgePresenter.VerticalAlignment" Value="Top" />
+										<Setter Target="InfoBadgePresenter.HorizontalAlignment" Value="Right" />
+										<Setter Target="InfoBadgePresenter.Margin" Value="0,2,2,0" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- tile.dart: normal.black surface, 0 at rest, 0.5 on hover, 1 when pressed -->
+						<Border x:Name="HoverLayer"
+								Background="{TemplateBinding Background}"
+								Opacity="0" />
+
+						<Grid x:Name="PresenterContentRootGrid">
+							<!-- Wrap SelectionIndicator in a grid so that its offset is 0,0 - this enables the offset animation. -->
+							<Grid HorizontalAlignment="Left"
+								  VerticalAlignment="Center">
+								<!-- No selection pill in Omarchy: the part stays (collapsed) for the control code -->
+								<Rectangle x:Name="SelectionIndicator"
+										   Width="{ThemeResource OmarchyBorderWidth}"
+										   Height="{ThemeResource IconSizeSmall}"
+										   Fill="{ThemeResource NavigationViewSelectionIndicatorForeground}"
+										   Opacity="0"
+										   Visibility="Collapsed" />
+							</Grid>
+
+							<!-- tile.dart: 16 px horizontal padding (the code sets the left Margin for hierarchical indentation) -->
+							<Grid x:Name="ContentGrid"
+								  Padding="{TemplateBinding Padding}"
+								  HorizontalAlignment="Stretch">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<!-- tile.dart: 22 px leading icon in bright.black, 8 px before the title -->
+								<Border x:Name="IconColumn"
+										Width="{ThemeResource OmarchyNavigationViewItemIconSize}"
+										Margin="{ThemeResource Space200RightThickness}">
+									<Viewbox x:Name="IconBox"
+											 Height="{ThemeResource OmarchyNavigationViewItemIconSize}"
+											 HorizontalAlignment="Center">
+										<ContentPresenter x:Name="Icon"
+														  Content="{TemplateBinding Icon}"
+														  Foreground="{ThemeResource NavigationViewItemIconForeground}" />
+									</Viewbox>
+								</Border>
+
+								<ContentPresenter x:Name="ContentPresenter"
+												  Grid.Column="1"
+												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+												  AutomationProperties.AccessibilityView="Raw"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+												  ContentTransitions="{TemplateBinding ContentTransitions}"
+												  Foreground="{TemplateBinding Foreground}" />
+
+								<Grid x:Name="ExpandCollapseChevron"
+									  x:Load="False"
+									  Grid.Column="3"
+									  Width="{ThemeResource ControlHeightMedium}"
+									  HorizontalAlignment="Right"
+									  Background="{ThemeResource SystemControlTransparentBrush}"
+									  Visibility="Collapsed">
+									<!-- 12 px chevron like the built-in template -->
+									<FontIcon x:Name="ExpandCollapseChevronIcon"
+											  HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+											  AutomationProperties.AccessibilityView="Raw"
+											  FontFamily="{ThemeResource SymbolThemeFontFamily}"
+											  FontSize="12"
+											  Foreground="{ThemeResource NavigationViewItemIconForeground}"
+											  Glyph="&#xE70D;"
+											  Visibility="Collapsed" />
+								</Grid>
+
+								<ContentPresenter x:Name="InfoBadgePresenter"
+												  Grid.Column="2"
+												  VerticalAlignment="Center"
+												  Content="{TemplateBinding InfoBadge}" />
+							</Grid>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- NavigationViewItemPresenter — top pane (a tab in the navigation bar) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewItemPresenterStyleWhenOnTopPane"
+		   TargetType="primitives:NavigationViewItemPresenter">
+		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
+		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="primitives:NavigationViewItemPresenter">
+					<Grid x:Name="LayoutRoot"
+						  Background="{ThemeResource SystemControlTransparentBrush}"
+						  Control.IsTemplateFocusTarget="True"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="PointerStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="PointerRectangle.Opacity" Value="{ThemeResource OmarchyTileHoverOpacity}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="PointerRectangle.Opacity" Value="1" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Selected">
+									<VisualState.Setters>
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerOverSelected">
+									<VisualState.Setters>
+										<Setter Target="PointerRectangle.Opacity" Value="{ThemeResource OmarchyTileHoverOpacity}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PressedSelected">
+									<VisualState.Setters>
+										<Setter Target="PointerRectangle.Opacity" Value="1" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="DisabledStates">
+								<VisualState x:Name="Enabled" />
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="NavigationViewIconPositionStates">
+								<VisualState x:Name="IconOnLeft" />
+								<VisualState x:Name="IconOnly">
+									<VisualState.Setters>
+										<Setter Target="IconBox.Margin" Value="0" />
+										<Setter Target="ContentPresenter.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="ContentOnly">
+									<VisualState.Setters>
+										<Setter Target="IconBox.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="InfoBadgeStates">
+								<VisualState x:Name="InfoBadgeVisible" />
+								<VisualState x:Name="InfoBadgeCollapsed">
+									<VisualState.Setters>
+										<Setter Target="InfoBadgePresenter.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="ChevronStates">
+								<VisualState x:Name="ChevronHidden" />
+								<VisualState x:Name="ChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Glyph" Value="&#xE70E;" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="ChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Glyph" Value="&#xE70D;" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PointerChevronStates">
+								<VisualState x:Name="NormalChevronHidden" />
+								<VisualState x:Name="NormalChevronVisibleOpen" />
+								<VisualState x:Name="NormalChevronVisibleClosed" />
+								<VisualState x:Name="PointerOverChevronHidden" />
+								<VisualState x:Name="PointerOverChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOverChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PressedChevronHidden" />
+								<VisualState x:Name="PressedChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PressedChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<!-- The hover / pressed surface (the built-in part name is kept) -->
+						<Rectangle x:Name="PointerRectangle"
+								   Fill="{TemplateBinding Background}"
+								   Opacity="0" />
+
+						<Grid x:Name="ContentGrid"
+							  Padding="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<Viewbox x:Name="IconBox"
+									 Width="{ThemeResource OmarchyNavigationViewItemIconSize}"
+									 Height="{ThemeResource OmarchyNavigationViewItemIconSize}"
+									 Margin="{ThemeResource Space200RightThickness}"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Center">
+								<ContentPresenter x:Name="Icon"
+												  Content="{TemplateBinding Icon}"
+												  Foreground="{ThemeResource NavigationViewItemIconForeground}" />
+							</Viewbox>
+
+							<ContentPresenter x:Name="ContentPresenter"
+											  Grid.Column="1"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="Center"
+											  AutomationProperties.AccessibilityView="Raw"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  Foreground="{TemplateBinding Foreground}"
+											  TextWrapping="NoWrap" />
+
+							<Grid x:Name="ExpandCollapseChevron"
+								  Grid.Column="2"
+								  Width="{ThemeResource ControlHeightMedium}"
+								  HorizontalAlignment="Right"
+								  Background="{ThemeResource SystemControlTransparentBrush}"
+								  Visibility="Collapsed">
+								<FontIcon x:Name="ExpandCollapseChevronIcon"
+										  HorizontalAlignment="Center"
+										  VerticalAlignment="Center"
+										  AutomationProperties.AccessibilityView="Raw"
+										  FontFamily="{ThemeResource SymbolThemeFontFamily}"
+										  FontSize="12"
+										  Foreground="{ThemeResource NavigationViewItemIconForeground}"
+										  Glyph="&#xE70D;" />
+							</Grid>
+
+							<ContentPresenter x:Name="InfoBadgePresenter"
+											  Grid.Column="3"
+											  HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+											  Content="{TemplateBinding InfoBadge}" />
+						</Grid>
+
+						<Grid x:Name="SelectionIndicatorGrid"
+							  HorizontalAlignment="Center"
+							  VerticalAlignment="Bottom">
+							<Rectangle x:Name="SelectionIndicator"
+									   Width="{ThemeResource IconSizeSmall}"
+									   Height="{ThemeResource OmarchyBorderWidth}"
+									   Fill="{ThemeResource NavigationViewSelectionIndicatorForeground}"
+									   Opacity="0"
+									   Visibility="Collapsed" />
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<!-- NavigationViewItemPresenter — top pane overflow menu (an OmarchyTile in the pop-over) -->
+	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+	<Style x:Key="OmarchyNavigationViewItemPresenterStyleWhenOnTopPaneOverflow"
+		   TargetType="primitives:NavigationViewItemPresenter">
+		<Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
+		<Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
+		<Setter Property="UseSystemFocusVisuals" Value="False" />
+		<Setter Property="CornerRadius" Value="{ThemeResource OmarchyCornerRadius}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="primitives:NavigationViewItemPresenter">
+					<Grid x:Name="LayoutRoot"
+						  MinHeight="{ThemeResource OmarchyTileHeight}"
+						  Background="{ThemeResource SystemControlTransparentBrush}"
+						  Control.IsTemplateFocusTarget="True"
+						  CornerRadius="{TemplateBinding CornerRadius}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="PointerStates">
+								<VisualState x:Name="Normal" />
+
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="{ThemeResource OmarchyTileHoverOpacity}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Selected">
+									<VisualState.Setters>
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundSelected}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PointerOverSelected">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="{ThemeResource OmarchyTileHoverOpacity}" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="PressedSelected">
+									<VisualState.Setters>
+										<Setter Target="HoverLayer.Opacity" Value="1" />
+										<Setter Target="Icon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+										<Setter Target="ContentPresenter.FontFamily" Value="{ThemeResource OmarchyItalicFontFamily}" />
+										<Setter Target="ContentPresenter.FontStyle" Value="Italic" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="DisabledStates">
+								<VisualState x:Name="Enabled" />
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="LayoutRoot.Opacity" Value="{ThemeResource OmarchyForegroundOpacityDisabled}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="NavigationViewIconPositionStates">
+								<VisualState x:Name="IconOnLeft" />
+								<VisualState x:Name="IconOnly" />
+								<VisualState x:Name="ContentOnly">
+									<VisualState.Setters>
+										<Setter Target="IconBox.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="InfoBadgeStates">
+								<VisualState x:Name="InfoBadgeVisible" />
+								<VisualState x:Name="InfoBadgeCollapsed">
+									<VisualState.Setters>
+										<Setter Target="InfoBadgePresenter.Visibility" Value="Collapsed" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="ChevronStates">
+								<VisualState x:Name="ChevronHidden" />
+								<VisualState x:Name="ChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Glyph" Value="&#xE70E;" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="ChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevron.Visibility" Value="Visible" />
+										<Setter Target="ExpandCollapseChevronIcon.Glyph" Value="&#xE70D;" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="PointerChevronStates">
+								<VisualState x:Name="NormalChevronHidden" />
+								<VisualState x:Name="NormalChevronVisibleOpen" />
+								<VisualState x:Name="NormalChevronVisibleClosed" />
+								<VisualState x:Name="PointerOverChevronHidden" />
+								<VisualState x:Name="PointerOverChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PointerOverChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PressedChevronHidden" />
+								<VisualState x:Name="PressedChevronVisibleOpen">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="PressedChevronVisibleClosed">
+									<VisualState.Setters>
+										<Setter Target="ExpandCollapseChevronIcon.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="HoverLayer"
+								Background="{TemplateBinding Background}"
+								Opacity="0" />
+
+						<Grid x:Name="PresenterContentRootGrid">
+							<!-- Wrap SelectionIndicator in a grid so that its offset is 0,0 - this enables the offset animation. -->
+							<Grid HorizontalAlignment="Left"
+								  VerticalAlignment="Center">
+								<Rectangle x:Name="SelectionIndicator"
+										   Width="{ThemeResource OmarchyBorderWidth}"
+										   Height="{ThemeResource IconSizeSmall}"
+										   Fill="{ThemeResource NavigationViewSelectionIndicatorForeground}"
+										   Opacity="0"
+										   Visibility="Collapsed" />
+							</Grid>
+
+							<Grid x:Name="ContentGrid"
+								  Padding="{TemplateBinding Padding}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Viewbox x:Name="IconBox"
+										 Width="{ThemeResource OmarchyNavigationViewItemIconSize}"
+										 Height="{ThemeResource OmarchyNavigationViewItemIconSize}"
+										 Margin="{ThemeResource Space200RightThickness}"
+										 HorizontalAlignment="Center"
+										 VerticalAlignment="Center">
+									<ContentPresenter x:Name="Icon"
+													  Content="{TemplateBinding Icon}"
+													  Foreground="{ThemeResource NavigationViewItemIconForeground}" />
+								</Viewbox>
+
+								<ContentPresenter x:Name="ContentPresenter"
+												  Grid.Column="1"
+												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  VerticalAlignment="Center"
+												  AutomationProperties.AccessibilityView="Raw"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+												  ContentTransitions="{TemplateBinding ContentTransitions}"
+												  Foreground="{TemplateBinding Foreground}"
+												  TextWrapping="NoWrap" />
+
+								<Grid x:Name="ExpandCollapseChevron"
+									  x:Load="False"
+									  Grid.Column="3"
+									  Width="{ThemeResource ControlHeightMedium}"
+									  HorizontalAlignment="Right"
+									  Background="{ThemeResource SystemControlTransparentBrush}"
+									  Visibility="Collapsed">
+									<FontIcon x:Name="ExpandCollapseChevronIcon"
+											  HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+											  AutomationProperties.AccessibilityView="Raw"
+											  FontFamily="{ThemeResource SymbolThemeFontFamily}"
+											  FontSize="12"
+											  Foreground="{ThemeResource NavigationViewItemIconForeground}"
+											  Glyph="&#xE70D;" />
+								</Grid>
+
+								<ContentPresenter x:Name="InfoBadgePresenter"
+												  Grid.Column="2"
+												  VerticalAlignment="Center"
+												  Content="{TemplateBinding InfoBadge}" />
+							</Grid>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

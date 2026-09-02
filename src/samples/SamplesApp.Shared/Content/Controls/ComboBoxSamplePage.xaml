@@ -274,6 +274,48 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.SimpleTemplate>
+			<sample:SamplePageLayout.OmarchyTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<!-- OmarchySelect -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ComboBox_Basic"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox Style="{StaticResource OmarchyComboBoxStyle}"
+							          PlaceholderText="Select an option"
+							          Width="300">
+								<x:String>Option 1</x:String>
+								<x:String>Option 2</x:String>
+								<x:String>Option 3</x:String>
+								<x:String>Option 4</x:String>
+							</ComboBox>
+						</smtx:XamlDisplay>
+
+						<!-- Pre-selected Item -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ComboBox_Preselected"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox Style="{StaticResource OmarchyComboBoxStyle}"
+							          SelectedIndex="1"
+							          Width="300">
+								<x:String>First</x:String>
+								<x:String>Second (selected)</x:String>
+								<x:String>Third</x:String>
+							</ComboBox>
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Omarchy_ComboBox_Disabled"
+						                  Style="{StaticResource XamlDisplayBelowStyle}">
+							<ComboBox Style="{StaticResource OmarchyComboBoxStyle}"
+							          PlaceholderText="Disabled"
+							          IsEnabled="False"
+							          Width="300">
+								<x:String>Option 1</x:String>
+								<x:String>Option 2</x:String>
+							</ComboBox>
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.OmarchyTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>

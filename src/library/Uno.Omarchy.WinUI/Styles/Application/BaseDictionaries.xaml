@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Static base layer for OmarchyTheme. Pulled into mergedpages.xaml by the Uno.XamlMerge task
+		(via the Styles\Application\ glob) so that a single Source=mergedpages.xaml on BaseTheme
+		brings in the default converter, typography, font and token resources the theme needs.
+
+		Order matters: entries listed LATER win at lookup time (MergedDictionaries are searched in
+		reverse), and within mergedpages this file (BaseDictionaries) is merged before the theme's
+		own Application styles (Typography.xaml), so the theme's own overrides shadow these defaults.
+
+		Colour resources are intentionally NOT included here: the shared palette, the palette
+		generated from OmarchyTheme.Palette and the Omarchy brushes are added (and rebuilt)
+		dynamically by BaseTheme.UpdateSource / OmarchyTheme.AddThemeSpecificResources so they
+		follow palette changes at runtime.
+	-->
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
+
+		<ResourceDictionary Source="ms-appx:///Uno.Omarchy.WinUI/Styles/Application/Common/Fonts.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Omarchy.WinUI/Styles/Application/Common/TypeScale.xaml" />
+		<ResourceDictionary Source="ms-appx:///Uno.Omarchy.WinUI/Styles/Application/Common/Tokens.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

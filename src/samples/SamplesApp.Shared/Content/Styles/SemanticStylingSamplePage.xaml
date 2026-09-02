@@ -145,5 +145,153 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.OmarchyTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="16"
+							Margin="16,0">
+
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<!-- SECTION 1: Semantic Button Styles                          -->
+					<!-- These are design-system-agnostic style keys that resolve   -->
+					<!-- to the correct Omarchy theme variant.                      -->
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<TextBlock Text="Semantic Button Styles"
+							   Style="{StaticResource TitleLarge}"
+							   Margin="0,16,0,4" />
+					<TextBlock Text="Design-system-agnostic keys that resolve to Omarchy theme styles. The same keys work under Material, Simple and Omarchy themes."
+							   Style="{StaticResource BodyMedium}"
+							   Opacity="0.7"
+							   Margin="0,0,0,8"
+							   TextWrapping="Wrap" />
+
+					<!-- FilledButtonStyle → OmarchyFilledButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_FilledButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Content="FilledButtonStyle"
+									Style="{StaticResource FilledButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource FilledButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- FilledTonalButtonStyle → OmarchyFilledButtonWhiteStyle -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_FilledTonalButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Content="FilledTonalButtonStyle"
+									Style="{StaticResource FilledTonalButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource FilledTonalButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- OutlinedButtonStyle → OmarchyOutlinedButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_OutlinedButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Content="OutlinedButtonStyle"
+									Style="{StaticResource OutlinedButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource OutlinedButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- TextButtonStyle → OmarchyTextButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_TextButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Content="TextButtonStyle"
+									Style="{StaticResource TextButtonStyle}" />
+							<Button Content="Disabled"
+									Style="{StaticResource TextButtonStyle}"
+									IsEnabled="False" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- IconButtonStyle → OmarchyIconButtonStyle -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_IconButton"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Favorite" />
+							</Button>
+							<Button Style="{StaticResource IconButtonStyle}"
+									IsEnabled="False">
+								<SymbolIcon Symbol="Favorite" />
+							</Button>
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<!-- SECTION 2: Lightweight Styling — Semantic Key Override     -->
+					<!-- Override the semantic (unprefixed) resource key. Omarchy   -->
+					<!-- derives hover / pressed from one color and an opacity, so  -->
+					<!-- only the base key exists (no *PointerOver / *Pressed).     -->
+					<!-- ═══════════════════════════════════════════════════════════ -->
+					<TextBlock Text="Lightweight Styling: Semantic Key Override"
+							   Style="{StaticResource TitleLarge}"
+							   Margin="0,32,0,4" />
+					<TextBlock Text="Overriding the semantic key (e.g. FilledButtonBackground) propagates through the alias chain to affect the control. Omarchy derives the hover and pressed tints from that one color."
+							   Style="{StaticResource BodyMedium}"
+							   Opacity="0.7"
+							   Margin="0,0,0,8"
+							   TextWrapping="Wrap" />
+
+					<!-- Override FilledButtonBackground via semantic key -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_Override_FilledButtonBackground"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<StackPanel.Resources>
+								<SolidColorBrush x:Key="FilledButtonBackground"
+												 Color="DarkOrchid" />
+							</StackPanel.Resources>
+							<Button Content="Semantic: FilledButtonBackground"
+									Style="{StaticResource FilledButtonStyle}" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Override FilledTonalButtonBackground via semantic key -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_Override_FilledTonalButtonBackground"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<StackPanel.Resources>
+								<SolidColorBrush x:Key="FilledTonalButtonBackground"
+												 Color="DarkSlateBlue" />
+							</StackPanel.Resources>
+							<Button Content="Semantic: FilledTonalButtonBackground"
+									Style="{StaticResource FilledTonalButtonStyle}" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Override TextButtonForeground via semantic key -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_Semantic_Override_TextButtonForeground"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<StackPanel Orientation="Horizontal"
+									Spacing="12">
+							<StackPanel.Resources>
+								<SolidColorBrush x:Key="TextButtonForeground"
+												 Color="Crimson" />
+							</StackPanel.Resources>
+							<Button Content="Semantic: TextButtonForeground"
+									Style="{StaticResource TextButtonStyle}" />
+						</StackPanel>
+					</smtx:XamlDisplay>
+
+					<!-- Bottom padding -->
+					<Border Height="32" />
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.OmarchyTemplate>
 	</sample:SamplePageLayout>
 </Page>

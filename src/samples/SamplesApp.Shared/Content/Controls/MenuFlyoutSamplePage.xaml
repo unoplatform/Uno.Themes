@@ -132,5 +132,99 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+		<sample:SamplePageLayout.OmarchyTemplate>
+			<DataTemplate>
+				<StackPanel Spacing="8">
+					<!-- Context menu (OmarchyContextMenu): items with shortcut hints, separators, a sub-menu, toggle and radio items -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_MenuFlyout_ContextMenu"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Open Menu"
+								Style="{StaticResource OmarchyOutlinedButtonStyle}">
+							<Button.Flyout>
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource OmarchyMenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="New File"
+													Icon="Add"
+													KeyboardAcceleratorTextOverride="Ctrl+N"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Open..."
+													Icon="OpenFile"
+													KeyboardAcceleratorTextOverride="Ctrl+O"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Save"
+													Icon="Save"
+													KeyboardAcceleratorTextOverride="Ctrl+S"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									<MenuFlyoutSeparator Style="{StaticResource OmarchyMenuFlyoutSeparatorStyle}" />
+									<MenuFlyoutSubItem Text="Open Recent"
+													   Style="{StaticResource OmarchyMenuFlyoutSubItemStyle}">
+										<MenuFlyoutItem Text="hyprland.conf"
+														Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+										<MenuFlyoutItem Text="waybar.css"
+														Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+										<MenuFlyoutItem Text="alacritty.toml"
+														Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									</MenuFlyoutSubItem>
+									<MenuFlyoutSeparator Style="{StaticResource OmarchyMenuFlyoutSeparatorStyle}" />
+									<ToggleMenuFlyoutItem Text="Word Wrap"
+														  IsChecked="True"
+														  KeyboardAcceleratorTextOverride="Alt+Z"
+														  Style="{StaticResource OmarchyToggleMenuFlyoutItemStyle}" />
+									<ToggleMenuFlyoutItem Text="Show Minimap"
+														  Style="{StaticResource OmarchyToggleMenuFlyoutItemStyle}" />
+									<MenuFlyoutSeparator Style="{StaticResource OmarchyMenuFlyoutSeparatorStyle}" />
+									<RadioMenuFlyoutItem Text="Tokyo Night"
+														 GroupName="OmarchyThemeGroup"
+														 IsChecked="True"
+														 Style="{StaticResource OmarchyRadioMenuFlyoutItemStyle}" />
+									<RadioMenuFlyoutItem Text="Catppuccin"
+														 GroupName="OmarchyThemeGroup"
+														 Style="{StaticResource OmarchyRadioMenuFlyoutItemStyle}" />
+									<RadioMenuFlyoutItem Text="Nord"
+														 GroupName="OmarchyThemeGroup"
+														 Style="{StaticResource OmarchyRadioMenuFlyoutItemStyle}" />
+									<MenuFlyoutSeparator Style="{StaticResource OmarchyMenuFlyoutSeparatorStyle}" />
+									<MenuFlyoutItem Text="Quit"
+													KeyboardAcceleratorTextOverride="Ctrl+Q"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+
+					<!-- Disabled Items -->
+					<smtx:XamlDisplay UniqueKey="Omarchy_MenuFlyout_Disabled"
+									  Style="{StaticResource XamlDisplayBelowStyle}">
+						<Button Content="Edit Menu"
+								Style="{StaticResource OmarchyOutlinedButtonStyle}">
+							<Button.Flyout>
+								<MenuFlyout MenuFlyoutPresenterStyle="{StaticResource OmarchyMenuFlyoutPresenterStyle}">
+									<MenuFlyoutItem Text="Undo"
+													IsEnabled="False"
+													KeyboardAcceleratorTextOverride="Ctrl+Z"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Redo"
+													IsEnabled="False"
+													KeyboardAcceleratorTextOverride="Ctrl+Y"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									<MenuFlyoutSeparator Style="{StaticResource OmarchyMenuFlyoutSeparatorStyle}" />
+									<MenuFlyoutItem Text="Cut"
+													Icon="Cut"
+													KeyboardAcceleratorTextOverride="Ctrl+X"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Copy"
+													Icon="Copy"
+													KeyboardAcceleratorTextOverride="Ctrl+C"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+									<MenuFlyoutItem Text="Paste"
+													Icon="Paste"
+													KeyboardAcceleratorTextOverride="Ctrl+V"
+													Style="{StaticResource OmarchyMenuFlyoutItemStyle}" />
+								</MenuFlyout>
+							</Button.Flyout>
+						</Button>
+					</smtx:XamlDisplay>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.OmarchyTemplate>
 	</sample:SamplePageLayout>
 </Page>
