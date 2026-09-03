@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:uuxc="using:Uno.UI.Xaml.Controls"
 					mc:Ignorable="">
 
 	<!-- 28-CornerRadius doesnt match the general 24-Spacing; this is indeed correct. -->
@@ -168,7 +168,7 @@
 							<Border x:Name="BackgroundElement"
 									Opacity="0"
 									Visibility="Collapsed" />
-							<toolkit:ElevatedView x:Name="RealBackgroundElement"
+							<uuxc:ElevatedView x:Name="RealBackgroundElement"
 												  Background="{TemplateBinding Background}"
 												  BackgroundSizing="InnerBorderEdge"
 												  BorderBrush="{TemplateBinding BorderBrush}"
@@ -181,9 +181,9 @@
 												  Margin="{StaticResource MaterialContentDialogEdgeMargin}"
 												  HorizontalAlignment="Center"
 												  VerticalAlignment="Center">
-								<toolkit:ElevatedView.RenderTransform>
+								<uuxc:ElevatedView.RenderTransform>
 									<ScaleTransform x:Name="ScaleTransform" />
-								</toolkit:ElevatedView.RenderTransform>
+								</uuxc:ElevatedView.RenderTransform>
 								
 								<Grid>
 									
@@ -284,7 +284,7 @@
 										</Grid>
 									</Grid>
 								</Grid>
-							</toolkit:ElevatedView>
+							</uuxc:ElevatedView>
 						</Grid>
 					</Border>
 				</ControlTemplate>

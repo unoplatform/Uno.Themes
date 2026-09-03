@@ -2,7 +2,7 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:uuxc="using:Uno.UI.Xaml.Controls"
 					xmlns:ut="using:Uno.Themes"
 					xmlns:xamarin="http://uno.ui/xamarin"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
@@ -377,7 +377,7 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<!-- Elevated View -->
-						<toolkit:ElevatedView x:Name="ElevatedView"
+						<uuxc:ElevatedView x:Name="ElevatedView"
 											  Background="{TemplateBinding Background}"
 											  HorizontalAlignment="Stretch"
 											  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
@@ -521,7 +521,7 @@
 									</Border>
 								</Popup>
 							</Grid>
-						</toolkit:ElevatedView>
+						</uuxc:ElevatedView>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

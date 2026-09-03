@@ -6,7 +6,8 @@
 	  xmlns:ut="using:Uno.Themes"
 	  xmlns:sample="using:Uno.Themes.Samples"
 	  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-	  xmlns:toolkit="using:Uno.UI.Toolkit">
+	  xmlns:uuxc="using:Uno.UI.Xaml.Controls"
+	  xmlns:uub="using:Uno.UI.Behaviors">
 	<Page.Resources>
 		<x:String x:Key="FlyoutCloseGlyphPathData">M1.442037,0L16.002031,14.585751 30.588022,0.025996563 32.001024,1.4409965 17.414783,16.001002 31.97503,30.587006 30.560022,32 15.999268,17.413969 1.4130009,31.973999 0,30.558998 14.586494,15.998742 0.027028472,1.4140019z</x:String>
 	</Page.Resources>
@@ -33,9 +34,9 @@
 												<RowDefinition Height="*" />
 											</Grid.RowDefinitions>
 											<CommandBar Content="FullScreen Flyout Example"
-														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														uub:VisibleBoundsPadding.PaddingMask="Top"
 														Style="{StaticResource MaterialCommandBarStyle}">
-												<toolkit:CommandBarExtensions.NavigationCommand>
+												<uuxc:CommandBarExtensions.NavigationCommand>
 													<AppBarButton Click="CloseFlyout"
 																  Tag="{Binding ElementName=ShowFullScreenFlyoutButton}"
 																  Style="{StaticResource MaterialAppBarButton}">
@@ -43,7 +44,7 @@
 															<PathIcon Data="{StaticResource FlyoutCloseGlyphPathData}" />
 														</AppBarButton.Icon>
 													</AppBarButton>
-												</toolkit:CommandBarExtensions.NavigationCommand>
+												</uuxc:CommandBarExtensions.NavigationCommand>
 											</CommandBar>
 
 											<TextBlock Grid.Row="1"
@@ -77,9 +78,9 @@
 												<RowDefinition Height="*" />
 											</Grid.RowDefinitions>
 											<CommandBar Content="Modal Centered Flyout Example"
-														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														uub:VisibleBoundsPadding.PaddingMask="Top"
 														Style="{StaticResource MaterialCommandBarStyle}">
-												<toolkit:CommandBarExtensions.NavigationCommand>
+												<uuxc:CommandBarExtensions.NavigationCommand>
 													<AppBarButton Click="CloseFlyout"
 																  Tag="{Binding ElementName=ShowModalCenteredFlyoutButton}"
 																  Style="{StaticResource MaterialAppBarButton}">
@@ -87,7 +88,7 @@
 															<PathIcon Data="{StaticResource CloseGlyphPathData}" />
 														</AppBarButton.Icon>
 													</AppBarButton>
-												</toolkit:CommandBarExtensions.NavigationCommand>
+												</uuxc:CommandBarExtensions.NavigationCommand>
 											</CommandBar>
 
 											<TextBlock Grid.Row="1"
@@ -332,9 +333,9 @@
 												<RowDefinition Height="*" />
 											</Grid.RowDefinitions>
 											<CommandBar Content="FullScreen Flyout Example"
-														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														uub:VisibleBoundsPadding.PaddingMask="Top"
 														Style="{StaticResource MaterialCommandBarStyle}">
-												<toolkit:CommandBarExtensions.NavigationCommand>
+												<uuxc:CommandBarExtensions.NavigationCommand>
 													<AppBarButton Click="CloseFlyout"
 																  Tag="{Binding ElementName=ShowFullScreenFlyoutButton}"
 																  Style="{StaticResource MaterialAppBarButton}">
@@ -342,7 +343,7 @@
 															<PathIcon Data="{StaticResource FlyoutCloseGlyphPathData}" />
 														</AppBarButton.Icon>
 													</AppBarButton>
-												</toolkit:CommandBarExtensions.NavigationCommand>
+												</uuxc:CommandBarExtensions.NavigationCommand>
 											</CommandBar>
 
 											<TextBlock Grid.Row="1"
@@ -376,9 +377,9 @@
 												<RowDefinition Height="*" />
 											</Grid.RowDefinitions>
 											<CommandBar Content="Modal Centered Flyout Example"
-														toolkit:VisibleBoundsPadding.PaddingMask="Top"
+														uub:VisibleBoundsPadding.PaddingMask="Top"
 														Style="{StaticResource MaterialCommandBarStyle}">
-												<toolkit:CommandBarExtensions.NavigationCommand>
+												<uuxc:CommandBarExtensions.NavigationCommand>
 													<AppBarButton Click="CloseFlyout"
 																  Tag="{Binding ElementName=ShowModalCenteredFlyoutButton}"
 																  Style="{StaticResource MaterialAppBarButton}">
@@ -386,7 +387,7 @@
 															<PathIcon Data="{StaticResource FlyoutCloseGlyphPathData}" />
 														</AppBarButton.Icon>
 													</AppBarButton>
-												</toolkit:CommandBarExtensions.NavigationCommand>
+												</uuxc:CommandBarExtensions.NavigationCommand>
 											</CommandBar>
 
 											<TextBlock Grid.Row="1"

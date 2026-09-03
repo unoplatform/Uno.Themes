@@ -4,7 +4,7 @@
 					xmlns:ios="http://uno.ui/ios"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:not_win="http://uno.ui/not_win"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:uuxc="using:Uno.UI.Xaml.Controls"
 					xmlns:wasm="http://uno.ui/wasm"
 					mc:Ignorable="ios android wasm not_win">
 
@@ -100,7 +100,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="DatePickerFlyoutPresenter">
-					<toolkit:ElevatedView MaxHeight="398"
+					<uuxc:ElevatedView MaxHeight="398"
 										  Background="{ThemeResource CupertinoQuinaryGrayBrush}"
 										  BorderBrush="{TemplateBinding BorderBrush}"
 										  BorderThickness="{TemplateBinding BorderThickness}"
@@ -187,7 +187,7 @@
 
 							</Grid>
 						</Border>
-					</toolkit:ElevatedView>
+					</uuxc:ElevatedView>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
