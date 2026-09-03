@@ -26,9 +26,14 @@
 		for all slots (overriding the Material-derived shared defaults).
 
 		Font family: the *FontFamily slot keys are declared once, in SharedTypography.xaml,
-		as aliases of the DefaultFontFamily root; Fonts.xaml sets that root to Inter and is
-		merged after SharedTypography.xaml so it wins over the Segoe UI baseline. This file
-		overrides only size, weight and character spacing.
+		as aliases of the DefaultFontFamily root; Fonts.xaml sets that root to Inter. This
+		file overrides only size, weight and character spacing.
+
+		This dictionary is merged by BaseDictionaries.xaml AFTER SharedTypography.xaml, and
+		is excluded from the XamlMergeInput glob in simple-common.props to keep it that way.
+		Both halves are load-bearing: resources merged into mergedpages itself lose to every
+		dictionary BaseDictionaries merges, so a slot declared here would silently resolve to
+		the shared Material value instead of Simple's.
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>

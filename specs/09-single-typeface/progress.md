@@ -182,6 +182,54 @@ re-pointed per-control key guard, and the rendered-weight gate (AGENTS.md §5 pl
 `FontDetailsCache` load failures: only the deliberately nonexistent test fonts. The merge gate is
 lifted.
 
+### Round 6 (2026-09-03): Simple's Typography.xaml never out-ranked SharedTypography
+
+CI build 231819 failed `Runtime Tests - Desktop Simple` on eight rows of
+`When_SimpleThemeLoaded_Then_WeightTokenCarriesTheScaleNuance`. Every "actual" was the value
+`SharedTypography.xaml` declares for that key, and the eight were exactly the keys where Simple
+disagrees with the shared baseline — the other rows passed because the two agree.
+
+**Root cause (pre-existing on `master`, not introduced by this layer).** `Uno.XamlMerge.Task`
+hoists every input file's `MergedDictionaries` to the top of `mergedpages.xaml` and folds every
+input's themed resources into mergedpages' *own* `ThemeDictionaries`. A merged dictionary
+out-ranks the parent's own theme dictionaries, so `SharedTypography.xaml` — merged by
+`BaseDictionaries.xaml` — beat everything `Styles\Application\Typography.xaml` declared.
+`Fonts.xaml` and `Thickness.xaml` were already `XamlMergeInput Remove`d and merged explicitly,
+which is why `DefaultFontFamily` (Inter) always won and the nineteen slot-family rows passed;
+`Typography.xaml` never got that treatment. The comment in `BaseDictionaries.xaml` asserted the
+opposite ordering and was wrong; the comment deleted from Simple's old `Fonts.xaml` had recorded
+the real behaviour ("aliases in Typography.xaml's inline theme dictionaries … can otherwise fall
+back to the wrong weight") — that was the workaround this layer removed without carrying it over.
+
+**Scope was wider than the weights.** A probe reading both the resource token and a rendered
+`DisplayLarge` `TextBlock` returned `FontWeight=400, FontSize=57` on both paths — Simple's display
+text was rendering at the Material baseline's 57px Normal instead of 72px Bold. Twelve of the
+nineteen `*FontSize` tokens and every `*CharacterSpacing` were shadowed the same way. Only the
+weights failed CI because only the weights were asserted.
+
+**Fix.** `Typography.xaml` is removed from the `XamlMergeInput` glob (`simple-common.props`) and
+merged by `BaseDictionaries.xaml` immediately after `SharedTypography.xaml`, exactly as
+`Fonts.xaml` and `Thickness.xaml` already were. This is only possible now: before this layer
+`Typography.xaml` referenced `SimpleBoldFontFamily` and friends via `StaticResource`, so it could
+not load standalone; collapsing to the single root left it literal-only. Both stale comments are
+corrected.
+
+Material is unaffected — its 49 v2 typography tokens match `SharedTypography.xaml` exactly, so
+the shadowing has never had anything to change there.
+
+**Verification** (`net10.0-desktop` Release, headless, CI parity):
+
+| Run                        | Result                                          |
+| -------------------------- | ----------------------------------------------- |
+| Simple, before the fix      | 183 cases, 174 passed, **8 failed**, 1 skipped  |
+| Simple, after the fix       | 213 cases, 212 passed, **0 failed**, 1 skipped  |
+
+Coverage added with the fix: the weight rows go from 9 to all 19 scales, a
+`When_SimpleThemeLoaded_Then_SizeTokenIsTheSdsScale` pins all 19 sizes, and
+`When_DisplayLargeRendered_Then_ItUsesSimplesSizeAndWeight` asserts the rendered value — the token
+tests read through `ResourceDictionary` lookup and a control reads through its `Style`'s
+`ThemeResource` setters, and this bug broke both.
+
 ## Open items
 
 - [x] unoplatform/uno.fonts#76 published as `2.10.0-dev.9`; `Directory.Packages.props` (library

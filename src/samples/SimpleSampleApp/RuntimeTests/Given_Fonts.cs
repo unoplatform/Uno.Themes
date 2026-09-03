@@ -57,6 +57,17 @@ public class Given_Fonts
 		return null!;
 	}
 
+	private static double GetDouble(Grid container, string key)
+	{
+		if (container.Resources.TryGetValue(key, out var value) && value is double d)
+		{
+			return d;
+		}
+
+		Assert.Fail($"Resource '{key}' not found or not of type double");
+		return default;
+	}
+
 	/// <summary>
 	/// Builds a consumer-style font override that redefines the root token under both appearances.
 	/// </summary>
@@ -162,12 +173,22 @@ public class Given_Fonts
 	[DataRow("DisplayLargeFontWeight", "Bold")]
 	[DataRow("DisplayMediumFontWeight", "Bold")]
 	[DataRow("DisplaySmallFontWeight", "Normal")]
+	[DataRow("HeadlineLargeFontWeight", "Normal")]
 	[DataRow("HeadlineMediumFontWeight", "SemiBold")]
+	[DataRow("HeadlineSmallFontWeight", "Normal")]
 	[DataRow("TitleLargeFontWeight", "SemiBold")]
 	[DataRow("TitleMediumFontWeight", "SemiBold")]
+	[DataRow("TitleSmallFontWeight", "SemiBold")]
 	[DataRow("LabelLargeFontWeight", "SemiBold")]
+	[DataRow("LabelMediumFontWeight", "SemiBold")]
+	[DataRow("LabelSmallFontWeight", "SemiBold")]
+	[DataRow("LabelExtraSmallFontWeight", "Normal")]
 	[DataRow("BodyLargeFontWeight", "Normal")]
+	[DataRow("BodyMediumFontWeight", "Normal")]
+	[DataRow("BodySmallFontWeight", "Normal")]
+	[DataRow("CaptionLargeFontWeight", "Normal")]
 	[DataRow("CaptionMediumFontWeight", "Normal")]
+	[DataRow("CaptionSmallFontWeight", "Normal")]
 	// Control-level weight tokens: buttons kept the Medium the old Inter-Medium-baked family
 	// carried, and the named weights consumed by Expander/CalendarView are now actually defined.
 	[DataRow("SimpleButtonFontWeight", "Medium")]
@@ -183,6 +204,81 @@ public class Given_Fonts
 			expectedWeight,
 			GetString(container, resourceKey),
 			$"'{resourceKey}' must carry Simple's per-scale weight nuance now that the family is shared.");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// Size tokens: the same dictionary that carries the weights carries the SDS
+	// sizes, and both reach a consumer through the same merge. Twelve of these
+	// nineteen differ from the Material-derived baseline in SharedTypography, so
+	// they fail the moment Typography.xaml stops out-ranking it.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("DisplayLargeFontSize", 72d)]
+	[DataRow("DisplayMediumFontSize", 48d)]
+	[DataRow("DisplaySmallFontSize", 40d)]
+	[DataRow("HeadlineLargeFontSize", 32d)]
+	[DataRow("HeadlineMediumFontSize", 24d)]
+	[DataRow("HeadlineSmallFontSize", 20d)]
+	[DataRow("TitleLargeFontSize", 20d)]
+	[DataRow("TitleMediumFontSize", 16d)]
+	[DataRow("TitleSmallFontSize", 14d)]
+	[DataRow("LabelLargeFontSize", 16d)]
+	[DataRow("LabelMediumFontSize", 14d)]
+	[DataRow("LabelSmallFontSize", 12d)]
+	[DataRow("LabelExtraSmallFontSize", 12d)]
+	[DataRow("BodyLargeFontSize", 16d)]
+	[DataRow("BodyMediumFontSize", 14d)]
+	[DataRow("BodySmallFontSize", 12d)]
+	[DataRow("CaptionLargeFontSize", 14d)]
+	[DataRow("CaptionMediumFontSize", 12d)]
+	[DataRow("CaptionSmallFontSize", 12d)]
+	public void When_SimpleThemeLoaded_Then_SizeTokenIsTheSdsScale(
+		string resourceKey, double expectedSize)
+	{
+		var container = CreateThemedContainer();
+
+		Assert.AreEqual(
+			expectedSize,
+			GetDouble(container, resourceKey),
+			$"'{resourceKey}' must resolve to Simple's SDS scale, not the shared Material baseline.");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// Rendered guard: the token tests above read through ResourceDictionary
+	// lookup, a rendered control reads through its Style's ThemeResource setters.
+	// Those are different resolution paths, and the shadowing bug this pins broke
+	// both — so assert the value a user actually sees, not only the token.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_DisplayLargeRendered_Then_ItUsesSimplesSizeAndWeight()
+	{
+		var container = CreateThemedContainer();
+		var text = new TextBlock
+		{
+			Text = "probe",
+			Style = (Style)container.Resources["DisplayLarge"],
+		};
+		container.Children.Add(text);
+
+		try
+		{
+			UnitTestsUIContentHelper.Content = container;
+			await UnitTestsUIContentHelper.WaitForLoaded(text);
+
+			Assert.AreEqual(Microsoft.UI.Text.FontWeights.Bold.Weight, text.FontWeight.Weight,
+				"A DisplayLarge TextBlock must render Bold; the shared baseline's Normal means " +
+				"Simple's Typography.xaml lost to SharedTypography.xaml.");
+			Assert.AreEqual(72d, text.FontSize,
+				"A DisplayLarge TextBlock must render at Simple's 72px, not the shared 57px.");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+		}
 	}
 
 	// ─────────────────────────────────────────────────────────────────────

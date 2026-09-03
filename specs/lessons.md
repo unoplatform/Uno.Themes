@@ -4,6 +4,47 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A resource merged into `mergedpages` cannot override one merged *by* it — and a comment claiming it can is not evidence
+
+**Context:** Spec 09 (single typeface, PR #1710). CI failed eight rows asserting Simple's
+`*FontWeight` tokens; each returned the value `SharedTypography.xaml` declares. The tokens were
+declared, correctly, in `Uno.Simple.WinUI/Styles/Application/Typography.xaml`, and
+`BaseDictionaries.xaml` carried a comment stating that file's resources "shadow these shared
+defaults". They never had.
+
+**Root cause:** `Uno.XamlMerge.Task` hoists every input's `MergedDictionaries` to the top of
+`mergedpages.xaml` and folds every input's themed resources into mergedpages' *own*
+`ThemeDictionaries`. A merged dictionary out-ranks the parent's own theme dictionaries, so
+anything `BaseDictionaries.xaml` merges — `SharedTypography.xaml` here — beats every file left in
+the `Styles\Application\` glob. `Fonts.xaml` and `Thickness.xaml` won only because they had been
+removed from the glob and merged explicitly; that was never written down as the *reason*, so the
+next file to need an override didn't get it.
+
+**How to apply:**
+- In a XamlMerge library, "later in the glob wins" is false. The only way a theme file overrides a
+  shared default is `XamlMergeInput Remove` plus an explicit `<ResourceDictionary Source=...>` in
+  the base dictionary, listed after the one it overrides. Treat the `Remove` and the `Source` as a
+  single indivisible edit; either alone is silent breakage.
+- A file that is merged by `Source` must load standalone. `Typography.xaml` could only be moved
+  once the single-typeface collapse left it literal-only — while it still carried
+  `<StaticResource ResourceKey="SimpleBoldFontFamily" />` it would have resolved against the
+  ambient application scope instead (see the `StaticResource` lesson below).
+- **A comment describing merge order is a claim, not a fact.** Two comments in this tree described
+  the ordering, and they contradicted each other: `BaseDictionaries.xaml` said the glob wins,
+  Simple's old `Fonts.xaml` said it doesn't and duplicated the slot mappings to work around it.
+  The one that had a workaround attached to it was the true one. When two comments disagree,
+  believe the one someone paid for.
+- **Assert the rendered value, not only the token.** Resource lookup (`TryGetValue`) and a
+  control's `{ThemeResource}` setters are different resolution paths. Here both were wrong, but
+  that is luck: a token test alone cannot tell you which layer moved.
+- **The blast radius of a shadowing bug is every key in the file, not the ones with tests.** Only
+  the weights failed CI because only the weights were asserted; twelve `*FontSize` tokens and
+  every `*CharacterSpacing` were equally shadowed, and Simple's display text had been rendering at
+  the Material 57px baseline instead of 72px. When a lookup-order defect is confirmed, enumerate
+  the whole dictionary against what it is supposed to override before sizing the fix.
+
+---
+
 ## A design-token "mode" (density) must be a factor over the scale's base unit, never a competing source of the base value
 
 **Context:** Spec 07 (`DefaultSpacing`, issue #1688). The first implementation gave `Density` enum members base-unit pixel values (`Compact = 3`, `Regular = 4`, `Comfy = 5`) and made `DefaultSpacing` an *override* that beat the preset ("override-beats-preset, like the color stack"). The user rejected this: density is a **mode** the consumer picks (Compact / Regular / Comfy), not an alternate spelling of a pixel value.
