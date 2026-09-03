@@ -4,6 +4,41 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A `<StaticResource>` alias hands back a *copy* — asserting `AreSame` on a semantic style key tests the resource system, not the alias
+
+**Context:** TimePicker styles. `Given_TimePickerStyles` and `Given_MaterialPickerStyles` asserted the
+semantic aliases with `Assert.AreSame(Resources["SimpleTimePickerStyle"], Resources["TimePickerStyle"])`.
+Both went red in CI (3 of the 4 failing jobs on the PR) while the aliases were, in fact, correct.
+
+**Root cause:** `<StaticResource x:Key="TimePickerStyle" ResourceKey="SimpleTimePickerStyle" />` resolves
+to an **independent copy** of the referenced `Style` — a different `Style` instance carrying a different
+`ControlTemplate` instance, though with an identical setter list. Measured directly: two lookups of the
+*same* key return the same instance (`sameKeyTwice=True`), but the alias key never matches the key it
+points at (`semanticVsSimple=False`) — and that is equally true of the long-shipped `DatePickerStyle`
+alias, which no test had ever asserted this way. The assertion encoded a guarantee Uno does not make.
+
+**How to apply:**
+- Never assert reference identity across two resource **keys**. Identity holds for repeated lookups of
+  one key; it does not survive a `<StaticResource>` alias. This also rules out comparing the styles'
+  `ControlTemplate` values, which are copied along with the style.
+- Assert what the styles **set**, not what they *are*: compare `TargetType` plus every setter's property
+  and value. That is the contract `doc/semantic-styles.md` publishes ("Direct match"), and it still fails
+  if an alias points at the wrong style or is missing entirely (leaving the Fluent default in place).
+  `Given_SemanticStyles` does the stronger version for buttons — apply both styles to real controls and
+  compare rendered values — but that is not available for every key: `TimePickerFlyoutPresenter` (like
+  the other flyout presenters) has **no public parameterless constructor**, so a test cannot instantiate
+  one. Style-level comparison is the form that covers both a control style and a presenter style.
+- When comparing values, stringify rather than compare references: `FontFamily` and friends are reference
+  types with no cross-instance equality guarantee. Compare `SolidColorBrush` by `Color`, and skip
+  `Template` / `Style`-valued setters — those are the copied references, not observable styling.
+- **Before rewriting an assertion that fails, measure which half is wrong.** Two rounds were burned here
+  guessing at a stronger identity check; one throwaway test that printed the four reference-equality
+  facts (and compared against the shipped `DatePicker` alias as a control) settled it in a single run.
+  When a new test fails, check the equivalent shipped feature first — if it behaves identically, the test
+  is wrong, not the feature.
+
+---
+
 ## A design-token "mode" (density) must be a factor over the scale's base unit, never a competing source of the base value
 
 **Context:** Spec 07 (`DefaultSpacing`, issue #1688). The first implementation gave `Density` enum members base-unit pixel values (`Compact = 3`, `Regular = 4`, `Comfy = 5`) and made `DefaultSpacing` an *override* that beat the preset ("override-beats-preset, like the color stack"). The user rejected this: density is a **mode** the consumer picks (Compact / Regular / Comfy), not an alternate spelling of a pixel value.
@@ -67,6 +102,31 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 - Choose `DataRow` inputs by where the algorithm is **most likely to break**, not by what is convenient or realistic-looking. For color math that means maximum chroma and gamut corners; the neutral cases are free but prove nothing.
 - Treat "simplified", "approximate", or "good enough for realistic inputs" in a comment as a **claim requiring a test that pins the actual error bound** — otherwise it is an unfalsifiable excuse that survives every future review.
 - Porting a reference algorithm (here material-color-utilities) and simplifying one step is fine; validating it only against inputs the simplification handles well is not. Diff against the reference implementation's own published values — M3's baseline palettes are the oracle and cost nothing to check.
+
+---
+
+## XamlStyler reformats whole files to spaces — re-tabify, and never run it repo-wide for a small change
+
+**Context:** TimePicker style work. Running the documented command (`dotnet dnx XamlStyler.Console -c Settings.XamlStyler -f <files>`) on three XAML files reindented every line with **4 spaces**, turning a 2-line change to `Uno.Simple.WinUI/Styles/Controls/DatePicker.xaml` into a 992-line diff.
+
+**Root cause:** `Settings.XamlStyler` at the repo root does not set `IndentWithTabs`, so XamlStyler defaults to spaces — but `.editorconfig` and every checked-in `.xaml` use **tabs**. The formatter and the repo convention disagree.
+
+**How to apply:**
+- After running XamlStyler on any file, re-tabify before committing: `sed -E -i ':a; s/^(\t*)    /\1\t/; ta' <file>`, then confirm with `grep -nE '^\t* {2,}<' <file>` (must be empty).
+- Never run it with `-r -d "."` to tidy a handful of files — it rewrites the whole tree.
+- If a tracked file gets mangled, `git checkout -- <file>` and re-apply the real edit rather than trying to hand-fix the reformat.
+- Root fix, if approved: add `"IndentWithTabs": true` to `Settings.XamlStyler` so the documented command matches `.editorconfig`.
+
+---
+
+## A theme brush that equals the surface it sits on is invisible — assert contrast, not resolution
+
+**Context:** The Simple `TimePicker`/`DatePicker` flyout selection band used `PrimaryVariantLightBrush`, which is `#F5F5F5` in Light but **`#1E1E1E` in Dark — exactly `SurfaceColor`**. The selected row was completely invisible in Dark; every existing test passed because they only asserted that the key *resolved*.
+
+**How to apply:**
+- For any brush painted directly on another themed brush (selection bands, highlights, dividers, scrims), add a runtime assertion that the two resolve to **different colors**, not merely that both resolve.
+- When picking a highlight in the Simple palette, prefer `SurfaceVariantBrush` (`#F5F5F5` Light / `#2C2C2C` Dark) over any `Primary*` key — Simple's primary collapses onto the surface in one theme by design (it is a grayscale palette).
+- Gotcha when writing such tests: `container.Resources["Key"]` resolves `ThemeDictionaries` against the **application** theme and ignores `RequestedTheme` on the container, so `[DataRow(ElementTheme.Light)]` on a dictionary-indexer lookup does **not** test the Light palette. Only values resolved through an applied template honor the element theme.
 
 ---
 
@@ -143,3 +203,33 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+---
+
+## Named columns and dividers belong to the control, not the template — the picker templates cannot own ordering
+
+**Context:** PR #1692 (`dev/sb/time-picker`), new Material v2 / Simple `TimePicker` styles. A revision rendered the field as `9:41 AM` by putting a literal `:` in `FirstColumnDivider` and declaring the `*TextBlockColumn` widths as `Auto`. Review (and Uno's source) showed both were wrong, and the runtime test that "proved" the layout was green for an unrelated reason.
+
+**Root causes, both in `TimePicker.UpdateOrderAndLayout` (`TimePicker.partial.mux.cs`):**
+1. The method reparents the hour / minute / period `TextBlock`s between `First|Second|ThirdPickerHost` to reorder per culture, but it only toggles the **visibility** of `First|SecondColumnDivider` — it never moves them. `GetOrder` has a `periodOrder == 0` branch, so in `ko-KR` / `zh-CN` / `ja-JP` the period occupies `FirstPickerHost` and a fixed colon lands between the period and the hour, leaving hour and minute unseparated. Fluent's neutral `Rectangle` divider is immune by construction.
+2. The same pass assigns `1*` to every populated `*TextBlockColumn` and `0` to the rest, overwriting whatever width the template declared. An `Auto` width in the template is dead markup, so any layout behaviour attributed to it does not exist at runtime.
+
+**How to apply:**
+- In a picker template, treat every part the control looks up by name as **the control's**, not the template's. Before attaching meaning to one (a glyph, a width, an alignment), read what the control does to it in `OnApplyTemplate` and its layout pass. "The part is typed `UIElement`, so I can put anything in it" is a type-safety argument, not a behavioural one.
+- Never encode reading order in a fixed template position. If a separator's correctness depends on which value sits beside it, it is wrong in some culture — use a neutral rule, or derive the whole string from the culture.
+- Match the framework's own template shape (`*` columns, `Rectangle` dividers) unless there is a specific reason to diverge; divergence here bought nothing and cost correctness.
+
+**Verification trap:** the compactness test passed because the assertion (`content.ActualWidth < picker.ActualWidth / 2`) happened to hold for a reason the author had not identified, and the divider assertion only checked the en-US ordering. A test can be green, deterministic, and still prove nothing about the mechanism it claims to guard. When a test protects a layout mechanism, assert the mechanism (the column widths the control assigned; the divider's *type*), not a rendering that one locale produces.
+
+---
+
+## `RequestedTheme` on a container does not change what the `ResourceDictionary` indexer returns
+
+**Context:** Same PR. `Given_TimePickerStyles` was parameterized `[DataRow(ElementTheme.Light)] [DataRow(ElementTheme.Dark)]` over lookups of the form `container.Resources[key]`, where `container` was a `Grid { RequestedTheme = theme }`. The selection-band contrast fix (`PrimaryVariantLightBrush` → `SurfaceVariantBrush`, invisible in Dark) was guarded this way.
+
+**Root cause:** the `ResourceDictionary` indexer resolves `ThemeDictionaries` against the **application** theme and ignores `FrameworkElement.RequestedTheme`. Both rows therefore asserted the same value. Because the Light palette already contrasted (`#F5F5F5` vs `#FFFFFF`), the test **passed on `master`** — it never reproduced the Dark bug it was written for, so the fix shipped with no red/fix/green evidence at all.
+
+**How to apply:**
+- A Light/Dark `[DataRow]` pair over an indexer lookup is a coverage illusion. To resolve a key as an element under a given theme would see it, bind it through a **loaded element** in a container with that `RequestedTheme` (e.g. a `Border` whose `Background` is `{ThemeResource Key}`, built with `XamlReader.Load`) and read the resolved value back.
+- When adding a theme-parameterized test, sanity-check it against `master` first: if it passes there, it is not guarding the bug. This is the cheapest possible red/fix/green check and it catches exactly this class of fake coverage.
+- Note also that `ColumnDefinition` is not a visual-tree child — a `VisualTreeHelper` walk cannot find `x:Name`d columns. Assert them through the owning `Grid.ColumnDefinitions` (or, better, through the widths the control assigned).

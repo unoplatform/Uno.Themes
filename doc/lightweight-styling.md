@@ -227,6 +227,7 @@ For more information about the lightweight styling resource keys used in each co
 - [Slider](styles/Slider.md)
 - [TextBlock](styles/TextBlock.md)
 - [TextBox](styles/TextBox.md)
+- [TimePicker](styles/TimePicker.md)
 - [ToggleButton](styles/ToggleButton.md)
 - [ToggleSwitch](styles/ToggleSwitch.md)
 

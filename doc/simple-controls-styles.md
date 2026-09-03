@@ -90,6 +90,11 @@ uid: Uno.Themes.Simple.Styles
 | `TextBox`                   | `SimpleFilledTextBoxStyle`           |                  |
 | `TextBox`                   | `SimpleTextBoxErrorStyle`            |                  |
 | `TextBox`                   | `SimpleTextBoxSmallStyle`            |                  |
+| `TimePicker`                | `SimpleTimePickerStyle`                   |                  |
+| `TimePicker`                | `SimpleDefaultTimePickerStyle`            | True             |
+| `TimePickerFlyoutPresenter` | `SimpleTimePickerFlyoutPresenterStyle`    |                  |
+| `TimePickerFlyoutPresenter` | `SimpleDefaultTimePickerFlyoutPresenterStyle` | True       |
+| `Button`                    | `SimpleTimePickerFlyoutButtonStyle`       |                  |
 | `ToggleButton`              | `SimpleDefaultToggleButtonStyle`          | True             |
 | `ToggleButton`              | `SimpleTextToggleButtonStyle`             |                  |
 | `ToggleButton`              | `SimpleIconToggleButtonStyle`             |                  |
@@ -190,6 +195,8 @@ The Simple theme also provides well-known style key aliases for compatibility wi
 | `AppBarButtonStyle`                    | `SimpleAppBarButtonStyle`                  |
 | `CalendarDatePickerStyle`              | `SimpleCalendarDatePickerStyle`            |
 | `DatePickerStyle`                      | `SimpleDatePickerStyle`                    |
+| `TimePickerStyle`                      | `SimpleTimePickerStyle`                    |
+| `TimePickerFlyoutPresenterStyle`       | `SimpleTimePickerFlyoutPresenterStyle`     |
 | `AutoSuggestBoxStyle`                  | `SimpleAutoSuggestBoxStyle`                |
 | `ToggleButtonStyle`                    | `SimpleDefaultToggleButtonStyle`           |
 | `DisplayLarge`                         | `SimpleDisplayLarge`                       |

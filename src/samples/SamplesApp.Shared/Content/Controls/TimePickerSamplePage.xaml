@@ -8,7 +8,8 @@
 	  xmlns:ios="http://uno.ui/ios"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:smtx="using:ShowMeTheXAML"
-	  mc:Ignorable="d android ios">
+	  xmlns:xamarin="http://uno.ui/xamarin"
+	  mc:Ignorable="d android ios xamarin">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
@@ -46,12 +47,97 @@
 					</StackPanel>
 				</DataTemplate>
 			</sample:SamplePageLayout.MaterialTemplate>
-			<sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.M3MaterialTemplate>
 				<DataTemplate>
 					<StackPanel>
+
+						<!-- Default -->
+						<TextBlock Text="Default"
+								   Style="{StaticResource TitleSmall}"
+								   Margin="12,16,12,4" />
+
+						<smtx:XamlDisplay UniqueKey="M3_TimePickerSamplePage_Default"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<TimePicker Header="Select a Time"
+										xamarin:UseNativeStyle="False"
+										Style="{StaticResource MaterialTimePickerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- 24-hour clock -->
+						<TextBlock Text="24-hour clock"
+								   Style="{StaticResource TitleSmall}"
+								   Margin="12,8,12,4" />
+
+						<smtx:XamlDisplay UniqueKey="M3_TimePickerSamplePage_24Hour"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<TimePicker Header="Select a Time"
+										xamarin:UseNativeStyle="False"
+										ClockIdentifier="24HourClock"
+										Style="{StaticResource MaterialTimePickerStyle}" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<TextBlock Text="Disabled"
+								   Style="{StaticResource TitleSmall}"
+								   Margin="12,8,12,4" />
+
+						<smtx:XamlDisplay UniqueKey="M3_TimePickerSamplePage_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+
+							<TimePicker Header="Select a Time"
+										xamarin:UseNativeStyle="False"
+										IsEnabled="False"
+										Style="{StaticResource MaterialTimePickerStyle}" />
+						</smtx:XamlDisplay>
 					</StackPanel>
 				</DataTemplate>
+			</sample:SamplePageLayout.M3MaterialTemplate>
+			<sample:SamplePageLayout.CupertinoTemplate>
+				<DataTemplate>
+					<StackPanel />
+				</DataTemplate>
 			</sample:SamplePageLayout.CupertinoTemplate>
+			<sample:SamplePageLayout.SimpleTemplate>
+				<DataTemplate>
+					<StackPanel>
+
+						<!-- Basic TimePicker -->
+						<smtx:XamlDisplay UniqueKey="Simple_TimePicker_Basic"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker />
+						</smtx:XamlDisplay>
+
+						<!-- With Header -->
+						<smtx:XamlDisplay UniqueKey="Simple_TimePicker_WithHeader"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker Header="Start Time" />
+						</smtx:XamlDisplay>
+
+						<!-- 24-hour clock -->
+						<smtx:XamlDisplay UniqueKey="Simple_TimePicker_24Hour"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker Header="Start Time"
+										ClockIdentifier="24HourClock" />
+						</smtx:XamlDisplay>
+
+						<!-- Minute increment -->
+						<smtx:XamlDisplay UniqueKey="Simple_TimePicker_MinuteIncrement"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker Header="Every 15 minutes"
+										MinuteIncrement="15" />
+						</smtx:XamlDisplay>
+
+						<!-- Disabled -->
+						<smtx:XamlDisplay UniqueKey="Simple_TimePicker_Disabled"
+										  Style="{StaticResource XamlDisplayBelowStyle}">
+							<TimePicker Header="Disabled"
+										IsEnabled="False" />
+						</smtx:XamlDisplay>
+					</StackPanel>
+				</DataTemplate>
+			</sample:SamplePageLayout.SimpleTemplate>
 		</sample:SamplePageLayout>
 	</Grid>
 </Page>
