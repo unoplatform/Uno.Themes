@@ -3,8 +3,8 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
 					xmlns:ut="using:Uno.Themes"
-					xmlns:xamarin="http://uno.ui/xamarin"
-					mc:Ignorable="xamarin">
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="not_win">
 
 	<!-- Converters -->
 	<ut:FromNullToValueConverter x:Key="NullToVisible"
@@ -171,7 +171,7 @@
 				Value="Stretch" />
 		<Setter Property="ItemContainerStyle"
 				Value="{StaticResource CupertinoComboBoxItemStyle}" />
-		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
+		<not_win:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 						Value="Below" />
 
 		<Setter Property="ItemsPanel">

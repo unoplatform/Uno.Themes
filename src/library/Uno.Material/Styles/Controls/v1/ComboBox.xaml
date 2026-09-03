@@ -4,9 +4,9 @@
 					xmlns:um="using:Uno.Material"
 					xmlns:uuxc="using:Uno.UI.Xaml.Controls"
 					xmlns:ut="using:Uno.Themes"
-					xmlns:xamarin="http://uno.ui/xamarin"
+					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
-					mc:Ignorable="xamarin">
+					mc:Ignorable="not_win">
 
 	<!-- Converters -->
 	<ut:FromNullToValueConverter x:Key="NullToScaleConverter"
@@ -244,7 +244,7 @@
 				Value="Stretch" />
 		<Setter Property="ItemContainerStyle"
 				Value="{StaticResource MaterialComboBoxItemStyle}" />
-		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
+		<not_win:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 						Value="Below" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->

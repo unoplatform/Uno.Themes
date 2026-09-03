@@ -8,8 +8,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:sample="using:Uno.Themes.Samples"
       xmlns:smtx="using:ShowMeTheXAML"
-      xmlns:xamarin="http://uno.ui/xamarin"
-      mc:Ignorable="d android ios xamarin">
+      xmlns:not_win="http://uno.ui/not_win"
+      mc:Ignorable="d android ios not_win">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<sample:SamplePageLayout>
@@ -27,7 +27,7 @@
 
 							<DatePicker x:Name="myDatePicker"
 							            HorizontalAlignment="Left"
-							            xamarin:UseNativeStyle="False"
+							            not_win:UseNativeStyle="False"
 							            Header="Enter Date"
 							            Style="{StaticResource MaterialDatePickerStyle}" />
 						</smtx:XamlDisplay>
@@ -37,7 +37,7 @@
 
 							<DatePicker x:Name="myDatePicker1"
 							            HorizontalAlignment="Left"
-							            xamarin:UseNativeStyle="False"
+							            not_win:UseNativeStyle="False"
 							            Header="Enter Date" />
 						</smtx:XamlDisplay>
 						
@@ -51,7 +51,7 @@
 						                  UniqueKey="DatePickerSamplePage_Material_Disabled">
 							
 							<DatePicker HorizontalAlignment="Left"
-							            xamarin:UseNativeStyle="False"
+							            not_win:UseNativeStyle="False"
 							            Header="Enter Date"
 							            IsEnabled="False"
 							            Style="{StaticResource MaterialDatePickerStyle}" />
@@ -73,7 +73,7 @@
 
 							<DatePicker x:Name="myDatePicker"
 							            HorizontalAlignment="Left"
-							            xamarin:UseNativeStyle="False"
+							            not_win:UseNativeStyle="False"
 							            Header="Enter Date"
 							            Style="{StaticResource MaterialDatePickerStyle}" />
 						</smtx:XamlDisplay>
@@ -88,7 +88,7 @@
 						                  UniqueKey="M3_DatePickerSamplePage_Material_Disabled">
 
 							<DatePicker HorizontalAlignment="Left"
-							            xamarin:UseNativeStyle="False"
+							            not_win:UseNativeStyle="False"
 							            Header="Enter Date"
 							            IsEnabled="False"
 							            Style="{StaticResource MaterialDatePickerStyle}" />
@@ -104,7 +104,7 @@
 
 							<DatePicker x:Name="myDatePicker2"
 							            HorizontalAlignment="Left"
-							            xamarin:UseNativeStyle="False"
+							            not_win:UseNativeStyle="False"
 							            Header="Enter Date"
 							            Style="{StaticResource CupertinoDatePickerStyle}" />
 						</smtx:XamlDisplay>
