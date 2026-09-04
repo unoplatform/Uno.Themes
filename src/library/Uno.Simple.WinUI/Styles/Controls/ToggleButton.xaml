@@ -25,6 +25,9 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 
+			<!-- Typeface alias: themed so the generated font layer can shadow it (see BaseTheme.FontFamilyAliasKeys). -->
+			<StaticResource x:Key="SimpleToggleButtonFontFamily" ResourceKey="DefaultFontFamily" />
+
 			<!-- ── TextToggleButton — semantic keys (source of truth) ── -->
 
 			<!-- Unchecked -->
@@ -76,6 +79,9 @@
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
+
+			<!-- Typeface alias: themed so the generated font layer can shadow it (see BaseTheme.FontFamilyAliasKeys). -->
+			<StaticResource x:Key="SimpleToggleButtonFontFamily" ResourceKey="DefaultFontFamily" />
 
 			<!-- ── TextToggleButton — semantic keys (source of truth) ── -->
 
@@ -136,7 +142,6 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
-	<StaticResource x:Key="SimpleToggleButtonFontFamily" ResourceKey="DefaultFontFamily" />
 	<x:String x:Key="SimpleToggleButtonFontWeight">Medium</x:String>
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
@@ -144,7 +149,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleTextToggleButtonStyle"
 		   TargetType="ToggleButton">
-		<Setter Property="FontFamily" Value="{StaticResource SimpleToggleButtonFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleToggleButtonFontFamily}" />
 		<Setter Property="FontSize" Value="{StaticResource LabelLargeFontSize}" />
 		<Setter Property="FontWeight" Value="{StaticResource SimpleToggleButtonFontWeight}" />
 		<Setter Property="MinHeight" Value="{StaticResource ControlHeightMedium}" />
@@ -318,7 +323,7 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<Style x:Key="SimpleIconToggleButtonStyle"
 		   TargetType="ToggleButton">
-		<Setter Property="FontFamily" Value="{StaticResource SimpleToggleButtonFontFamily}" />
+		<Setter Property="FontFamily" Value="{ThemeResource SimpleToggleButtonFontFamily}" />
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="MinHeight" Value="{StaticResource SimpleIconLarge}" />
 		<Setter Property="MinWidth" Value="{StaticResource SimpleIconLarge}" />

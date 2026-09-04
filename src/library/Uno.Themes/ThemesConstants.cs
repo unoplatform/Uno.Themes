@@ -15,6 +15,50 @@ internal static class ThemesConstants
 	public static string SharedTypographyResourcePath = $"ms-appx:///{PackageName}/Styles/Applications/Common/SharedTypography.xaml";
 
 	/// <summary>
+	/// The root typeface token every type scale derives from.
+	/// </summary>
+	public const string DefaultFontFamilyKey = "DefaultFontFamily";
+
+	/// <summary>
+	/// Every semantic type-scale family key generated from <c>BaseTheme.DefaultFontFamily</c>,
+	/// alongside the root typeface token they derive from.
+	/// </summary>
+	/// <remarks>
+	/// The keys are listed here — rather than left to the <c>StaticResource</c> aliases
+	/// <c>SharedTypography.xaml</c> declares for them — because those aliases are not the whole story:
+	/// a design system may re-declare its slot families over them, and a later dictionary wins, so an
+	/// alias-only cascade depends on where each design system declares its slots and in which order
+	/// its dictionaries merge. Generating the slot keys from the root — the same way the spacing and
+	/// shape scales are generated from their base unit — makes one font family reach every scale on
+	/// every theme regardless. A slot added to <c>SharedTypography.xaml</c> must be added here too;
+	/// <c>Given_DefaultFontFamily.When_DefaultFontFamilySet_Then_EverySharedTypographySlotFollows</c>
+	/// guards the two against drifting.
+	/// </remarks>
+	public static readonly string[] TypefaceScaleKeys =
+	{
+		DefaultFontFamilyKey,
+		"DisplayLargeFontFamily",
+		"DisplayMediumFontFamily",
+		"DisplaySmallFontFamily",
+		"HeadlineLargeFontFamily",
+		"HeadlineMediumFontFamily",
+		"HeadlineSmallFontFamily",
+		"TitleLargeFontFamily",
+		"TitleMediumFontFamily",
+		"TitleSmallFontFamily",
+		"LabelLargeFontFamily",
+		"LabelMediumFontFamily",
+		"LabelSmallFontFamily",
+		"LabelExtraSmallFontFamily",
+		"BodyLargeFontFamily",
+		"BodyMediumFontFamily",
+		"BodySmallFontFamily",
+		"CaptionLargeFontFamily",
+		"CaptionMediumFontFamily",
+		"CaptionSmallFontFamily",
+	};
+
+	/// <summary>
 	/// Theme dictionary keys the color layer is generated for. "Default" is the dark theme.
 	/// </summary>
 	public static readonly string[] ThemeDictionaryKeys = { "Light", "Default" };

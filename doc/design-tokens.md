@@ -28,6 +28,8 @@ Cupertino has no semantic type scale: its control styles consume `CupertinoFontF
 > `SimpleFontFamily` and per-weight `SimpleRegular/Medium/SemiBold/BoldFontFamily` keys) have been removed. Override
 > `DefaultFontFamily` instead; per-scale weight nuance is carried by the `*FontWeight` tokens.
 
+The root token is also settable as a `DefaultFontFamily` property on the theme — see [Typography Font Swap](#typography-font-swap).
+
 Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSize`, `{Role}{Size}FontWeight`, `{Role}{Size}CharacterSpacing` — for example `DisplayLargeFontFamily`, `BodyMediumFontSize`.
 
 ### Spacing
@@ -111,13 +113,14 @@ To override individual tokens without changing the whole scale, use standard XAM
 
 ### Properties Reference
 
-| Property              | Type      | Description                                                                                                                             |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| `DefaultCornerRadius` | `double`  | Base corner radius unit; generates the full `Radius*` scale. Construction-time.                                                         |
-| `DefaultSpacing`      | `double`  | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Construction-time.               |
-| `DefaultDensity`      | `Density` | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Construction-time.                       |
+| Property              | Type         | Description                                                                                                                                 |
+|-----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Construction-time.                                                             |
+| `DefaultSpacing`      | `double`     | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Construction-time.                   |
+| `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Construction-time.                           |
+| `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |
 
-These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All are construction-time settings — see the note above. Color configuration lives on the separate `Colors` property (`ThemeColors`), which *does* support runtime changes — see [Seed Color Palette](seed-colors.md).
+These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). The three scale measures are construction-time settings — see the note above. `DefaultFontFamily` and the color configuration on the separate `Colors` property (`ThemeColors`) *do* support runtime changes — see [Typography Font Swap](#typography-font-swap) and [Seed Color Palette](seed-colors.md).
 
 ### Density Modes
 
@@ -142,14 +145,46 @@ Pick the density where the theme is declared. Switching it at runtime does not r
 
 ### Typography Font Swap
 
-To change the font for an entire app, override the root typeface token:
+To change the font for an entire app, set one property on the theme:
 
 ```xml
-<!-- MyTypography.xaml -->
+<!-- App.xaml -->
+<MaterialTheme DefaultFontFamily="ms-appx:///Fonts/MyFont.ttf#MyFont" />
+```
+
+That one value generates the `DefaultFontFamily` token and every type-scale `FontFamily` key
+derived from it (`DisplayLargeFontFamily`, `BodyMediumFontFamily`, …), so nothing has to be
+overridden individually. Left unset, the design system's own typeface stands. Point it at a family
+that resolves multiple weights — a variable font, or a font shipping a font manifest — so the
+per-scale `*FontWeight` tokens (`DisplayLargeFontWeight`, …) render as designed.
+
+Unlike the scale measures above, this is **runtime-settable**: assigning it regenerates the derived
+family keys, and text laid out afterwards picks the new font up. Text **already on screen** keeps the
+family it resolved when it loaded — a `FontFamily` is an immutable value, so unlike a seed color
+(whose brushes are live instances the theme rewrites in place) there is nothing to mutate. To move
+text that is already rendered, recreate the root content, or trigger the application-wide resource
+refresh a hot reload performs.
+
+> [!NOTE]
+> This covers text the design system styles. A `TextBlock` with no style resolves the framework's own
+> default instead — `FeatureConfiguration.Font.DefaultTextFontFamily`, which the Uno.Sdk sets to Open
+> Sans on non-Windows targets — and `DefaultFontFamily` does not touch it. Set both if an app mixes
+> styled and unstyled text.
+
+The same token can be redefined in a `ResourceDictionary` instead, which is the route to take when
+only some appearances or some scales should change:
+
+```xml
+<!-- MyTypography.xaml, referenced as FontOverrideSource on the theme -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <FontFamily x:Key="DefaultFontFamily">ms-appx:///Fonts/MyFont.ttf#MyFont</FontFamily>
 </ResourceDictionary>
 ```
 
-Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`). This cascades to all type-scale `FontFamily` keys (`DisplayLargeFontFamily`, `BodyMediumFontFamily`, etc.) without needing to override each one individually. Point it at a family that resolves multiple weights — a variable font, or a font shipping a font manifest — so the per-scale `*FontWeight` tokens (`DisplayLargeFontWeight`, …) render as designed.
+Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`); redefining the root there cascades to every type-scale `FontFamily` key the same way the property does.
+
+A font override wins over the generated tokens, the same way a color override wins over the
+generated seed palette: a key declared in both places takes its value from the override, and a key
+the override is silent about keeps the generated one. A `FontOverrideSource` is re-read from its file
+on every theme rebuild, so a hot-reload edit to it reaches the running app.
