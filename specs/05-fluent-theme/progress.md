@@ -162,6 +162,173 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
     CI covers it via `build/stage-build-wasm.yml`; the payload list and the
     guest-head build script are the two Fluent-specific inputs there.
 
+## Phase 6 — Master integration (2026-09-04)
+
+`master` moved 15 commits while this branch was in flight (Color Fidelity #1697,
+DefaultSpacing/Density #1701, `Application.GetTheme()` #1699, single typeface
+`DefaultFontFamily` #1707/#1710, ThemeResource scale setters #1715). Merged
+(`git merge origin/master`, 4 conflicts: `.gitignore`, `doc/semantic-styles.md`,
+`specs/lessons.md`, `Given_ColorOverridePrecedence.cs` — all additive, both sides
+kept) and adapted:
+
+- [x] **Accent cascade follows `SeedColorMode`** (red/fix/green). #1697 made
+  `Fidelity` the default and pinned the generated light `PrimaryColor` to the
+  seed verbatim; `FluentAccentPalette` still re-solved tone 40 of a raw-chroma
+  palette, so under a seed the built-in accent (`SystemAccentColor`) no longer
+  equalled the semantic `PrimaryColor` — the §9.3 contract — and
+  `SeedColorMode.TonalSpot` was ignored entirely. Fix: `FluentTheme` reads
+  `Colors.SeedColorMode`, `FluentAccentPalette.SeedTones` derives the accent
+  the generator's way (Fidelity: seed verbatim; TonalSpot: tone 40 of the
+  chroma-≥48 palette) and `PaletteOf(color, mode)` is shared with the
+  lightweight bridge's fill tones. The pure-seed cache key now includes the mode.
+- [x] **Dropped the obsolete `UseHighFidelityColors` override** (CS0672 build
+  warning after the merge; the base default is now Fidelity — behavior unchanged).
+- [x] **Stopped double-merging `FontOverrideDictionary`**: `BaseTheme.UpdateSource`
+  now resolves and merges it itself (last, hot-reload re-read); the copy in
+  `AddThemeSpecificResources` would nest the same instance twice (illegal on WinUI).
+- [x] **Adopted the `DefaultFontFamily` root** (red/fix/green): `Fonts.xaml` now
+  declares `DefaultFontFamily` → `ContentControlThemeFontFamily` in place of the
+  removed `TypefacePlain`/`TypefaceBrand` pair, and keeps every slot alias direct
+  (Fluent's root is itself an alias, and alias chaining does not resolve — D16 —
+  so `SharedTypography.xaml`'s slot → root cascade cannot serve Fluent). The
+  duplicated slot aliases in `Typography.xaml` were dead (Fonts.xaml is merged
+  after it) and are deleted; that file now overrides size/weight/spacing only,
+  like the other design systems. `BaseTheme.DefaultFontFamily` (runtime) reaches
+  the Fluent slots through the generated layer — guarded by
+  `Given_FluentTypography.When_DefaultFontFamilySet_SlotFollows_AndClearRestoresPlatformDefault`.
+- [x] Tests: `Given_FluentSeedAccent` +3 (`When_SeedSet_SystemAccentColorIsTheSeed`,
+  `When_SeedSetInTonalSpotMode_AccentFollowsBoostedPalette`,
+  `When_SeedSet_ForwardAndReverseFlowsAgree_InBothBranches` — a resource-graph
+  assertion that holds in either ambient theme; the pre-existing ambient-branch
+  test passed on a dark-mode dev machine and only the Light CI host would have
+  caught the drift), `Given_FluentTypography` root row → `DefaultFontFamily` +4
+  `DefaultFontFamily` rows. Red proven by stashing the library fix: 5 of the new
+  cases fail on the pre-fix library, all pass after.
+- [x] Docs: `seed-colors.md` (cascade bullets mode-aware), `fluent-getting-started.md`
+  (seed bullet), `design-tokens.md` (Fluent typeface default), spec §3.3/D4/§7.2/§9.1.
+- [x] Verification: Debug desktop, Fluent + precedence filter: **239 / 0 failed**
+  (baseline post-merge 234 / 0); `FluentSampleApp` desktop build clean; Release
+  CI-parity full suite — see the review log entry.
+
+## Gap audit — 2026-09-04
+
+Requested with the master integration: a full inspection of the adapter, its
+distance from stock Fluent (`XamlControlsResources`), and the parts of the
+semantic layer it does not cover. Facts below were checked against the Uno.UI
+source (`src/Uno.UI.FluentTheme.v2/Resources/Version2`) and this repo; items are
+ranked by consumer impact. None are fixed here (owner call on scope); each
+names the cheapest fix.
+
+### A. Fluent theme implementation — things to fix
+
+1. **`DefaultFontFamily` does not reach built-in Fluent controls.** XCR templates
+   read `{ThemeResource ContentControlThemeFontFamily}`; under Material/Simple the
+   templates read the theme's tokens, so one property swaps the font app-wide,
+   under Fluent only semantic-styled text follows. Fix: when `DefaultFontFamily`
+   is set, `FluentTheme` writes `ContentControlThemeFontFamily` (the literal
+   family) into its dynamic layer — the same override-driven re-pointing the
+   bridge uses; Fluent's slot aliases then resolve to it too (one level, D16-safe).
+   ~5 lines + a rendered test.
+2. **`DefaultCornerRadius` does not reach built-in Fluent controls** (G4 claims
+   participation; spec §8 says "nothing to build"). XCR templates consume
+   `ControlCornerRadius` / `OverlayCornerRadius`: 44 files via `{ThemeResource}`
+   (re-pointable — S4(b) mechanism), 6 via `{StaticResource}` (CalendarView,
+   ColorPicker, PagerControl, RadioButton, Slider, ToggleSwitch — not reachable
+   without re-templating). Fix: when `DefaultCornerRadius` ≠ 4, write
+   `ControlCornerRadius` = `Radius100` and `OverlayCornerRadius` = `Radius200`
+   into the dynamic layer. ~15 lines + test + `design-tokens.md` note.
+3. **Accent shades are absolute tones.** `Light1–3`/`Dark1–3` are tones
+   60/70/80/30/20/10 of the seed's palette regardless of the seed's own tone, so a
+   seed darker than tone 30 (navy brand colors) gets a light-theme fill (`Dark1`)
+   *lighter* than the accent, and `Dark3` (tone 10) may be lighter than a very
+   dark override basis. Windows derives shades relative to the accent's lightness.
+   Fix: tone offsets from the seed's own HCT tone, clamped to [0, 100], in
+   `SeedTones` / `BuildBranchFor`. Recorded in spec §9.1.
+4. **Override-driven verbatim fill ignores contrast.** A light `PrimaryColor`
+   override becomes the accent fill verbatim while `TextOnAccentFillColorPrimary`
+   stays white → unreadable accent buttons. Material picks `OnPrimary` by
+   contrast. Fix: in override mode also write `TextOnAccentFillColorPrimary` (+
+   `Brush`, + `Secondary`) from the effective `OnPrimaryColor` (override >
+   palette > default). Seeds are unaffected (fill = tone 30 / 70 keeps contrast).
+5. **Palette self-heal is one rebuild late for brushes.** When XCR is merged
+   after FluentTheme (against the documented order), the palette heals in
+   `AddThemeSpecificResources`, but `SemanticBrushUpdater` swept the brushes
+   earlier in the same pass — `*Color` keys are correct immediately, `*Brush`
+   instances catch up on the next rebuild. Documented at the code site; a clean
+   fix needs a pre-color hook in `BaseTheme` (not worth it for a misordering
+   the docs already forbid). Verified the documented order is what the Uno XAML
+   generator emits (`Resources.MergedDictionaries.Add` in document order, before
+   the next item is constructed), so consumers following the docs never hit it.
+6. **Semantic Primary vs Fluent fill is a documented characteristic, not a bug:**
+   Fluent's accent-button fill is `Dark1` (light) / `Light2` (dark), while
+   `PrimaryColor` = `SystemAccentColor` (light) / `Light2` (dark), so under a
+   seed `PrimaryBrush` ≠ `FilledButtonStyle` background in light theme (tone 30
+   vs seed) and in dark theme (tone 70 vs 80). Under Material they are equal.
+   Worth a sentence in `fluent-getting-started.md` "Behavior notes".
+7. Tooling note: `dotnet dnx XamlStyler.Console` on this checkout rewrites
+   CRLF files as LF (whole-file diffs); the two Fluent XAML edits were re-applied
+   without it. Check `git diff --stat` after any styler run.
+
+### B. FluentTheme vs stock Fluent (`XamlControlsResources`)
+
+1. **Lightweight styling only through `Colors.OverrideDictionary`.** The
+   idiomatic WinUI form — `<SolidColorBrush x:Key="FilledButtonBackground">` in
+   `App.xaml` after the theme, or in `Page.Resources` — re-points nothing under
+   Fluent, while the same XAML works under Material/Simple (their templates read
+   the semantic keys). Documented, but it is the largest portability gap. The
+   alternative (always re-point `AccentButtonBackground` ←
+   `{ThemeResource FilledButtonBackground}`, declaratively) was rejected in Phase 3
+   to leave stock rendering and Windows live-accent tracking untouched; worth
+   re-deciding once the windows TFM is dropped (the live-accent argument goes
+   with it).
+2. **`DefaultSpacing` / `DefaultDensity` have no Fluent effect** (spec §8,
+   accepted). WinUI's own compact set (`XamlControlsResources.UseCompactResources`)
+   lives on the consumer's XCR instance — out of the adapter's reach; document
+   the combination in `fluent-getting-started.md`.
+3. **No HighContrast branch.** XCR switches to system colors under Windows high
+   contrast; the Fluent palette / lightweight defaults declare Light/Default
+   only, so semantic brushes resolve HighContrast → Dark → Default
+   (`ThemesConstants.BrushThemeSources`) and keep Fluent dark values next to
+   system-colored built-in controls. Applies to every theme; most visible here.
+   Fix: a HighContrast branch in `ColorPalette.xaml` mapped to `SystemColor*`.
+4. **Surface roles map to solid fallbacks** (`SolidBackgroundFillColor*`, N3):
+   Fluent's translucent `CardBackgroundFillColorDefault` / `LayerFillColorDefault`
+   have no semantic counterpart, so a semantic "card" renders flat-solid.
+   Accepted non-goal; note alongside Mica/Acrylic.
+5. Open from earlier phases: MediaTransportControls sample, screenshot pass vs
+   WinUI Gallery, Windows/WASM validation of S1/S3, Windows-Skia accent probe,
+   D12 closure strip after the windows-TFM drop.
+
+### C. Semantic layer coverage under Fluent
+
+1. **Semantic style keys: complete.** Every §5 key resolves (no GAPs — Fluent is
+   the only theme with none; Simple has three). Material-only keys
+   (`DatePickerFlyoutPresenterStyle`, `RippleStyle`) and Simple-only controls
+   are not semantic — n/a.
+2. **Color roles: complete** (33/33; `ShadowColor` keeps the shared default).
+   Semantic-layer gap (all themes): no roles for Fluent's Success / Caution /
+   Attention system fills (InfoBar severities), card/layer fills, focus strokes
+   — apps cannot express those portably. A semantic-layer extension, not a
+   Fluent fix.
+3. **Typography: complete** (19 slots, `DefaultFontFamily` root, runtime swap).
+4. **Lightweight-styling keys: 6 of 20 documented controls bridged.** Pages
+   without a Fluent column (documented key count): AppBarButton 7,
+   CalendarDatePicker 47, ComboBox 105, DatePicker 62, FloatingActionButton 82,
+   HyperlinkButton 32, NavigationView 172, PasswordBox 93, PipsPager 66,
+   ProgressBar 9, ProgressRing 6, RatingControl 39, TextBlock 92, ToggleButton
+   110. Under Fluent these keys have **no default at all** — app XAML that reads
+   a documented key directly (`{ThemeResource HyperlinkButtonForeground}`)
+   fails to resolve, where Material/Simple provide a value. Cheapest next
+   increments, in order: **HyperlinkButton** (the documented names look like
+   WinUI's own `HyperlinkButtonForeground*`/`Background*`/`BorderBrush*` —
+   probe like RadioButton/Slider, likely native), **PasswordBox** (same
+   `TextControl*` family as the TextBox map, plus the reveal button),
+   **ProgressBar/ProgressRing** (few keys), then ToggleButton and ComboBox
+   (divergent names, full maps).
+5. Tokens: `Space*`/`Radius*` are generated but unconsumed by Fluent controls
+   (A2, B2); opacity/state tokens map to nothing in Fluent's discrete state model
+   (N2, accepted).
+
 ## Follow-ups
 
 - [ ] **Windows-TFM drop (announced 2026-08-11, timing TBD):** when the
@@ -182,6 +349,17 @@ Plan of record: `specs/05-fluent-theme/spec.md`. Update checkboxes as work lands
   (`#FF0078D7`), not an OS value.
 
 ## Review log
+
+- 2026-09-04 — **Master integration + gap audit** (Phase 6 above). Merge of
+  15 master commits; four adaptations, two of them behavior fixes proven
+  red/fix/green (accent cascade follows `SeedColorMode` — the pre-existing
+  ambient-branch agreement test was green on this dark-mode machine and would
+  only have failed in the Light CI host, hence the new both-branches
+  resource-graph guard; `DefaultFontFamily` root). Debug desktop Fluent +
+  precedence filter: 239 cases / 0 failed. Release CI-parity full suite:
+  **491 cases — 490 passed / 1 pre-existing skip (`When_BaseThemeIsCollected_Then_HotReloadHandlerDoesNotResurrectIt`) / 0 failed** (Windows desktop host, dark ambient theme; master baseline before this branch is not directly comparable since the merge added its own suites). Gap audit recorded above (A1/A2 are the two
+  cheap, high-value fixes: `DefaultFontFamily` and `DefaultCornerRadius` not
+  reaching built-in Fluent controls).
 
 - 2026-08-11 — **Direct semantic-key lookups now honor lightweight overrides
   (red/fix/green).** Found during the declarative-pass audit: the bridge's
