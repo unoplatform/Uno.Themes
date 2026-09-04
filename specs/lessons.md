@@ -65,11 +65,20 @@ dictionary. `{ThemeResource}` keeps the reference and re-resolves on a theme-cha
   Whenever a fix's claim is "the control follows", assert the rendered `FontFamily` / `Padding` /
   `CornerRadius` on a realized control after the property changes, not the resource lookup. This is
   the same trap the `SharedTypography` lesson below records, hit from the other side.
-- **Still open elsewhere:** ~16 `{StaticResource}` setters in Simple's control styles read the
-  generated spacing/shape keys (`SimpleSpace300Thickness`, `ControlHeightMedium`,
-  `Simple*CornerRadius`). By the same mechanism a runtime `DefaultSpacing` / `DefaultDensity` /
-  `DefaultCornerRadius` change should not reach them — inferred, **not measured**; it belongs with
-  the density/spacing seam (spec 07/08), not #1705.
+- **The same defect held for the spacing/shape seam, and was measured before it was fixed.** A
+  sweep over Simple and Material v2 (alias closure over `<StaticResource x:Key ResourceKey>`
+  declarations rooted at the generated `Space*` / `Radius*` keys, then every `{StaticResource K}`
+  consumer of that closure) found 98 sites in 22 files — 78 Simple, 20 Material v2. Red: a
+  realized Simple button kept `Padding` 12 after `DefaultSpacing` moved it to 22.5; a realized
+  Material `ContentDialog` kept `CornerRadius` 28 after `DefaultCornerRadius` moved it to 7. The
+  sweep is the way to find these: grep for the *generated* key alone misses every per-control
+  alias (`SimpleButtonCornerRadius`, `MaterialContentDialogPanelPadding`, …) that stands between
+  the token and the setter. Density constants (`ControlHeight*`, `IconSize*`,
+  `TouchTargetMinSize`) are regenerated with fixed values, so a `{StaticResource}` read of those
+  is harmless and was left alone.
+- **`doc/design-tokens.md` had documented the defect as a design property** ("construction-time
+  settings … the new value never reaches the control templates"). A limitation written into the
+  docs is still a claim; check it against the mechanism before carrying it forward.
 
 ---
 
