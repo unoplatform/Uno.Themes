@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Uno.Simple;
@@ -193,6 +194,61 @@ public class Given_DefaultFontFamily
 
 		StringAssert.Contains(GetFontSource(container, resourceKey), SimpleInter,
 			$"Clearing the root must hand '{resourceKey}' back to the design system's own alias.");
+	}
+
+	/// <summary>
+	/// Regenerating an alias key only reaches a control if the style reads it through
+	/// <c>{ThemeResource}</c>: a <c>{StaticResource}</c> setter snapshots the family at parse time
+	/// and never re-resolves, so the key follows the property while the rendered button does not.
+	/// </summary>
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_DefaultFontFamilyChanges_Then_StyledButtonFollows()
+	{
+		var theme = new SimpleTheme();
+		var container = CreateContainer(theme);
+		var stack = new StackPanel();
+		var button = new Button
+		{
+			Content = "probe",
+			Style = (Style)container.Resources["SimpleFilledButtonStyle"],
+		};
+		var toggle = new ToggleButton
+		{
+			Content = "probe",
+			Style = (Style)container.Resources["SimpleTextToggleButtonStyle"],
+		};
+		stack.Children.Add(button);
+		stack.Children.Add(toggle);
+		container.Children.Add(stack);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+
+		try
+		{
+			StringAssert.Contains(button.FontFamily?.Source, SimpleInter,
+				"The button starts on the design system's own typeface.");
+
+			theme.DefaultFontFamily = new FontFamily(ChosenSource);
+
+			// Setters re-resolve on a theme-change pass, the public route this seam has to content
+			// that is already realized (the Design Tokens page's tuner drives the same flip).
+			container.RequestedTheme = ElementTheme.Light;
+			await UnitTestsUIContentHelper.WaitForIdle();
+			container.RequestedTheme = ElementTheme.Dark;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(ChosenSource, button.FontFamily?.Source,
+				"A button styled from SimpleButtonFontFamily must re-resolve it after the family changes.");
+			Assert.AreEqual(ChosenSource, toggle.FontFamily?.Source,
+				"SimpleToggleButtonFontFamily is the same seam and must re-resolve too.");
+		}
+		finally
+		{
+			container.RequestedTheme = ElementTheme.Default;
+			UnitTestsUIContentHelper.Content = null;
+		}
 	}
 
 	// ─────────────────────────────────────────────────────────────────────

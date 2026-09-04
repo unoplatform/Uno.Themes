@@ -4,6 +4,36 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## Regenerating a resource key is half a runtime seam — the setter that reads it must be `{ThemeResource}`
+
+**Context:** Spec 09 (`DefaultFontFamily`, issue #1705). The generated typeface layer rewrites each
+design system's per-control alias keys (`SimpleButtonFontFamily`, …) so a runtime family change
+reaches control templates, and a token test proved the keys followed. Simple's `Button` and
+`ToggleButton` read them with `{StaticResource}`, so the rendered controls stayed on Inter.
+
+**Root cause:** `{StaticResource}` in a `Setter` resolves once, when the dictionary is parsed, and
+holds the value. Writing a new value under that key afterwards changes nothing for controls already
+styled from it, and nothing for controls styled later either — the setter no longer consults the
+dictionary. `{ThemeResource}` keeps the reference and re-resolves on a theme-change pass.
+
+**How to apply:**
+- Any key a `BaseTheme` layer generates or regenerates at runtime (`*FontFamily`, `Space*`,
+  `*CornerRadius`, `ControlHeight*`, the semantic brushes) must be read with `{ThemeResource}`
+  wherever a style consumes it. `{StaticResource}` is correct only for values no theme property can
+  move. The `<StaticResource x:Key=… ResourceKey=…>` *alias declaration* is unaffected — it is the
+  consuming `Setter`/attribute that has to be `{ThemeResource}`.
+- **A token test cannot see this.** `TryGetValue` walks the dictionaries; a setter does not.
+  Whenever a fix's claim is "the control follows", assert the rendered `FontFamily` / `Padding` /
+  `CornerRadius` on a realized control after the property changes, not the resource lookup. This is
+  the same trap the `SharedTypography` lesson below records, hit from the other side.
+- **Still open elsewhere:** ~16 `{StaticResource}` setters in Simple's control styles read the
+  generated spacing/shape keys (`SimpleSpace300Thickness`, `ControlHeightMedium`,
+  `Simple*CornerRadius`). By the same mechanism a runtime `DefaultSpacing` / `DefaultDensity` /
+  `DefaultCornerRadius` change should not reach them — inferred, **not measured**; it belongs with
+  the density/spacing seam (spec 07/08), not #1705.
+
+---
+
 ## A resource merged into `mergedpages` cannot override one merged *by* it — and a comment claiming it can is not evidence
 
 **Context:** Spec 09 (single typeface, PR #1710). CI failed eight rows asserting Simple's

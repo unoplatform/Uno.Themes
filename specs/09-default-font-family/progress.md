@@ -127,6 +127,13 @@ Seven-lane panel over `master..HEAD` (stack #1710 + #1707). Fixes landing in thi
   exposes an internal `FontFamilyAliasKeys` hook that each concrete theme overrides with the keys
   its Styles tree declares; the generated layer writes those too. Cupertino has no `BaseTheme`
   subclass, so `CupertinoFontFamily` has no runtime seam to follow — it stays a static alias.
+- **…and the setters that read them must be `{ThemeResource}`.** Regenerating an alias key reaches
+  nothing if the style reads it with `{StaticResource}`: Simple's `Button` and `ToggleButton` did,
+  so the key followed the property while the rendered control stayed on Inter. Both now use
+  `{ThemeResource}`, matching every other `*FontFamily` setter in Material v2 and Simple
+  (`DatePickerFlyoutPresenterFontFamily` was already correct). Guarded red/green by
+  `Given_DefaultFontFamily.When_DefaultFontFamilyChanges_Then_StyledButtonFollows`, which asserts
+  the *rendered* `FontFamily` rather than the token.
 - **HighContrast.** The generated layer now emits `Default`/`Light`/`HighContrast` (Material and
   Cupertino declare their root in a HighContrast font dictionary that would otherwise win).
 - **Override re-read is cached.** `ResolveFontOverride()` re-parses the consumer file only when the
