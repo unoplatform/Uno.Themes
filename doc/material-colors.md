@@ -9,6 +9,8 @@ uid: Uno.Themes.Material.Colors
 
 ## Colors
 
+The values below are the **defaults**. All of them (except the four `Error*` keys) can be replaced wholesale by setting a single seed color on the theme — see [Seed Color Palette Generation](xref:Uno.Themes.SeedColors) — or individually via color overrides.
+
 | Key                          | LightValue | DarkValue |
 |------------------------------|------------|-----------|
 | `PrimaryColor`               | `#5946D2`  | `#C7BFFF` |
@@ -342,3 +344,8 @@ uid: Uno.Themes.Material.Colors
 | OutlineVariantLowBrush             | `OutlineVariantColor`        | `LowOpacity`      |
 | OutlineVariantDisabledBrush        | `OutlineVariantColor`        | `DisabledOpacity` |
 | SurfaceTintBrush                   | `SurfaceTintColor`           | 1                 |
+
+## Further Reading
+
+- [Seed Color Palette Generation](xref:Uno.Themes.SeedColors) — derive every color role in the tables above from a single seed color
+- [Design Tokens](xref:Uno.Themes.DesignTokens)

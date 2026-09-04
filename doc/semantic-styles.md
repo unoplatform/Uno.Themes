@@ -214,6 +214,8 @@ FAB is a Material-specific concept. Under Simple theme, FAB keys resolve to exis
 
 All themes provide identical semantic typography keys.
 
+Every `*FontFamily` key derives from the single `DefaultFontFamily` root token, so overriding that one key swaps the typeface across the whole type scale; per-scale weight nuance is carried by the `*FontWeight` tokens. See [Design Tokens - Typography](design-tokens.md#typography).
+
 | Semantic Style Key | Font Resource Keys |
 |---|---|
 | `DisplayLarge` | `DisplayLargeFontFamily`, `DisplayLargeFontSize`, `DisplayLargeFontWeight`, `DisplayLargeCharacterSpacing` |
@@ -250,6 +252,8 @@ Semantic style keys also enable portable [lightweight styling](lightweight-styli
 ```
 
 Both **Material** and **Simple** templates reference the same unprefixed keys (e.g. `FilledButtonForeground`) directly.
+
+The color palette underneath these keys can itself be swapped wholesale — generated from a single seed color, and even changed at runtime — see [Seed Color Palette](seed-colors.md).
 
 > [!NOTE]
 > The **Fluent** theme bridges the semantic lightweight-styling keys to the built-in Fluent control resources for Button, TextBox, CheckBox, RadioButton, ToggleSwitch, and Slider. For CheckBox/RadioButton/Slider most key names are WinUI's own, so overrides work natively at any scope; for divergent names, app-wide overrides go through the theme's `Colors.OverrideDictionary` and page-scoped overrides target the Fluent per-control keys directly. See [Lightweight Styling — Fluent theme](lightweight-styling.md#fluent-theme).

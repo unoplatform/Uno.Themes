@@ -4,13 +4,25 @@
 	
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
-			<FontFamily x:Key="CupertinoFontFamily">SF Pro</FontFamily>
+			<!-- Root typeface token (cascades to all type scales) -->
+			<FontFamily x:Key="DefaultFontFamily">SF Pro</FontFamily>
+
+			<!-- Legacy Cupertino-specific font family key -->
+			<StaticResource x:Key="CupertinoFontFamily" ResourceKey="DefaultFontFamily" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Default">
-			<FontFamily x:Key="CupertinoFontFamily">SF Pro</FontFamily>
+			<!-- Root typeface token (cascades to all type scales) -->
+			<FontFamily x:Key="DefaultFontFamily">SF Pro</FontFamily>
+
+			<!-- Legacy Cupertino-specific font family key -->
+			<StaticResource x:Key="CupertinoFontFamily" ResourceKey="DefaultFontFamily" />
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="HighContrast">
-			<FontFamily x:Key="CupertinoFontFamily">SF Pro</FontFamily>
+			<!-- Root typeface token (cascades to all type scales) -->
+			<FontFamily x:Key="DefaultFontFamily">SF Pro</FontFamily>
+
+			<!-- Legacy Cupertino-specific font family key -->
+			<StaticResource x:Key="CupertinoFontFamily" ResourceKey="DefaultFontFamily" />
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

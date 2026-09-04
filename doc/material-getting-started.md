@@ -32,10 +32,14 @@ Initialization of the Uno Material resources is handled by the specialized `Mate
 
 #### Properties
 
-| Property              | Type     | Description                                                                                                                                                                         |
-|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ColorOverrideSource` | `string` | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno Material Color resources |
-| `FontOverrideSource`  | `string` | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno Material font resources  |
+| Property              | Type          | Description                                                                                                                                                                                  |
+|-----------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Colors`              | `ThemeColors` | (Optional) Groups all color configuration: seed colors (`PrimarySeed`, …), the generation mode (`SeedColorMode`), and color overrides. See [Seed Color Palette](xref:Uno.Themes.SeedColors). |
+| `FontOverrideSource`  | `string`      | (Optional) Gets or sets a Uniform Resource Identifier that provides the source location of a `ResourceDictionary` containing overrides for the default Uno Material font resources           |
+| `DefaultCornerRadius` | `double`      | (Optional) Base corner-radius unit driving the shape design tokens. See [Design Tokens](design-tokens.md).                                                                                   |
+| `DefaultSpacing`      | `double`      | (Optional) Base spacing unit (default 4) driving the spacing design tokens; scaled by the `DefaultDensity` mode. See [Design Tokens](design-tokens.md).                                      |
+| `DefaultDensity`      | `Density`     | (Optional) Density mode (`Compact` / `Regular` / `Comfy`) scaling the spacing base unit by ×0.75 / ×1 / ×1.25. See [Design Tokens](design-tokens.md).                                        |
+| `ColorOverrideSource` | `string`      | (Deprecated) Use `OverrideSource` on `Colors` instead — see the [migration notes](xref:Uno.Themes.Material.Migration).                                                                       |
 
 ### Creating a new project with Uno Material
 
@@ -154,7 +158,11 @@ Depending on the type of project template that the Uno Platform application was 
 
 ## Customization
 
-The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
+### Seed Color Palette
+
+The fastest way to a custom color theme: provide a single **seed color** — typically your brand color — and the library generates the complete Light and Dark palette from it, with readable text contrast built in. No resource dictionaries to write, and the seed can even be changed at runtime. See the [Seed Color Palette documentation](xref:Uno.Themes.SeedColors).
+
+The guides below give you full manual control instead. They require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
 
 ### Color Overrides using _Material Theme Builder_ and DSP format
 
@@ -297,31 +305,33 @@ Use this when you want to manually override the default color palette from the U
 
 ### Change Default Font
 
-By default, Uno Material comes pre-packaged with the [Roboto](https://fonts.google.com/specimen/Roboto) font families and automatically includes them in your application. Upon installation of the Uno Material package, you will have the following resources available: `MaterialLightFontFamily`, `MaterialRegularFontFamily`, and `MaterialMediumFontFamily`.
+By default, Uno Material comes pre-packaged with the [Roboto](https://fonts.google.com/specimen/Roboto) font family and automatically includes it in your application. Every type scale derives from the single `DefaultFontFamily` root token; per-scale weight nuance comes from the `*FontWeight` tokens, resolved from that one family reference.
 
-If you would like Uno Material to use a different font, you can override the default font families by following these steps:
+If you would like Uno Material to use a different font:
 
-1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html).
-2. Add a new Resource Dictionary named `MaterialFontsOverride.xaml` to the application project, for example, under `Styles/Application`.
-3. Assuming the font file has been placed in a directory such as `Assets/Fonts/MyCustomFont.ttf`, your override file would look like the following:
+1. Add the custom font following [Custom Fonts documentation](https://platform.uno/docs/articles/features/custom-fonts.html). Prefer a family that resolves multiple weights (a variable font, or a font shipping a [font manifest](https://platform.uno/docs/articles/features/custom-fonts.html#variable-fonts-and-font-manifest)) so the `*FontWeight` tokens render as designed.
+2. Add a Resource Dictionary named `MaterialFontsOverride.xaml` to the application project, for example under `Styles/Application`, and redefine the root token in it:
 
     ```xml
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-        <FontFamily x:Key="MaterialLightFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont</FontFamily>
-        <FontFamily x:Key="MaterialMediumFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont</FontFamily>
-        <FontFamily x:Key="MaterialRegularFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttfMyCustomFont</FontFamily>
+        <FontFamily x:Key="DefaultFontFamily">ms-appx:///Assets/Fonts/MyCustomFont.ttf#MyCustomFont</FontFamily>
 
     </ResourceDictionary>
     ```
 
-4. In the `App.xaml`, update `<MaterialTheme />` with the override from the previous steps:
+3. In `App.xaml`, reference it from the theme:
 
     ```xml
     <MaterialTheme xmlns="using:Uno.Material"
                    FontOverrideSource="ms-appx:///Styles/Application/MaterialFontsOverride.xaml" />
     ```
+
+To change only some appearances or some scales instead, redefine the individual `*FontFamily` token(s) in the same file — see [Typography Font Swap](design-tokens.md#typography-font-swap).
+
+> [!IMPORTANT]
+> Overriding the legacy `MaterialLightFontFamily` / `MaterialMediumFontFamily` / `MaterialRegularFontFamily` keys no longer changes the type scales — see the [migration notes](material-migration.md#typography-and-font-overrides).
 
 ## Using C# Markup
 
@@ -340,10 +350,6 @@ this.Build(r => r.UseMaterial(
      //optional
      new Styles.MaterialFontsOverride()));
 ```
-
-### Seed Color Palette
-
-Instead of manually defining every color, you can provide a single **seed color** and let the library generate the full Light and Dark palette algorithmically using the Material Design 3 HCT color system. See the [Seed Color Palette documentation](xref:Uno.Themes.SeedColors#getting-started).
 
 ## Additional Resources
 

@@ -39,7 +39,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `DatePickerButtonBorderBrushPointerOver`               | `SolidColorBrush` | `PrimaryBrush`                  |
 | `DatePickerButtonBorderBrushPressed`                   | `SolidColorBrush` | `PrimaryBrush`                  |
 | `DatePickerButtonBorderBrushDisabled`                  | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `DatePickerFlyoutPresenterFontFamily`                  | `FontFamily`      | `MaterialRegularFontFamily`     |
+| `DatePickerFlyoutPresenterFontFamily`                  | `FontFamily`      | `DefaultFontFamily`             |
 | `DatePickerFlyoutPresenterFontSize`                    | `Double`          | `ControlContentThemeFontSize`   |
 | `DatePickerFlyoutBorderThickness`                      | `Double`          | 1                               |
 | `DatePickerSpacerThemeWidth`                           | `Double`          | 1                               |

@@ -75,7 +75,7 @@
 		<Setter Property="Foreground" Value="{ThemeResource OnSurfaceMediumBrush}" />
 		<Setter Property="BorderBrush" Value="{ThemeResource OutlineBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
-		<Setter Property="CornerRadius" Value="{StaticResource SimpleContentDialogCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleContentDialogCornerRadius}" />
 
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
@@ -221,7 +221,7 @@
 											MinHeight="{StaticResource SimpleContentDialogMinHeight}" />
 
 									<Grid x:Name="DialogSpace"
-										  Margin="{StaticResource SimpleContentDialogPanelPadding}">
+										  Margin="{ThemeResource SimpleContentDialogPanelPadding}">
 
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
@@ -238,7 +238,7 @@
 												FontFamily="{ThemeResource HeadlineSmallFontFamily}"
 												FontSize="{ThemeResource HeadlineSmallFontSize}"
 														FontWeight="SemiBold"
-														Margin="{StaticResource SimpleContentDialogTitleToContentMargin}"
+														Margin="{ThemeResource SimpleContentDialogTitleToContentMargin}"
 														HorizontalAlignment="Left"
 														VerticalAlignment="Top"
 														IsTabStop="False">
@@ -275,7 +275,7 @@
 										<!-- Command buttons -->
 										<Grid x:Name="CommandSpace"
 											  Grid.Row="2"
-											  Margin="{StaticResource SimpleContentDialogCommandSpaceToContentMargin}"
+											  Margin="{ThemeResource SimpleContentDialogCommandSpaceToContentMargin}"
 											  HorizontalAlignment="Right"
 											  VerticalAlignment="Bottom"
 											  XYFocusKeyboardNavigation="Enabled">

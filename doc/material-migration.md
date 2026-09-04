@@ -7,6 +7,57 @@ uid: Uno.Themes.Material.Migration
 > [!IMPORTANT]
 > UnoFeatures: **Material** — add `<UnoFeatures>Material</UnoFeatures>` to your app's `.csproj` to include Uno Material resources.
 
+## Upgrading to Uno Themes v8
+
+Uno Themes 8.0 reworks seed color generation so the palette faithfully reproduces the seed color you provide. **If your app never sets `PrimarySeed`, nothing changes** — the built-in palettes, style keys, and brush resources are untouched, and you can upgrade without code changes. If your app does use a seed, the generated colors will look different after the upgrade — the sections below explain how and why.
+
+### Seed-generated palettes look different
+
+Two changes affect every app that sets `PrimarySeed`:
+
+- **A color-math fix.** 7.x silently washed out saturated seeds — a vivid brand color generated a muted palette. 8.0 corrects this, so generated palettes are more vivid in every mode. This part of the change has no opt-out.
+- **A new default generation mode.** The default is now `SeedColorMode="Fidelity"`: the light `PrimaryColor` is your seed color verbatim, the color rendered on top of it (`OnPrimaryColor`) is picked automatically for readable contrast, and the supporting palettes follow the seed's saturation — a muted seed now produces a muted palette. To keep the previous always-vibrant recipe, set `SeedColorMode="TonalSpot"`:
+
+```xml
+<MaterialTheme xmlns="using:Uno.Material">
+    <MaterialTheme.Colors>
+        <ut:ThemeColors xmlns:ut="using:Uno.Themes"
+                        PrimarySeed="#6750A4"
+                        SeedColorMode="TonalSpot" />
+    </MaterialTheme.Colors>
+</MaterialTheme>
+```
+
+See [Two generation modes](seed-colors.md#two-generation-modes) for the full description of both modes and guidance on which to choose.
+
+### `UseHighFidelityColors` is now obsolete
+
+This only affects code that subclasses `BaseTheme`. The protected `UseHighFidelityColors` property is `[Obsolete]`, replaced by the public `SeedColorMode` property on `ThemeColors` (also available at runtime via `SemanticThemeHelper.SeedColorMode`). An existing override keeps working — `true` maps to `Fidelity` and `false` to `TonalSpot` — but an explicit `SeedColorMode` assignment on `Colors` wins over the override.
+
+### Runtime seed changes repaint immediately
+
+Changing a seed color at runtime now recolors everything already on screen — including the HighContrast theme — with no page re-navigation or theme toggle needed. If your app worked around the 7.x behavior by recreating its root content after a seed change, that workaround can be removed. See [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes).
+
+To make this possible, the semantic `*Brush` resources are now shared, long-lived instances whose `Color` and `Opacity` are rewritten in place when a seed or override changes. If your code caches a `brush.Color` snapshot or expects a fresh brush instance per theme rebuild, hold on to the resource key instead.
+
+### Single root typeface: `DefaultFontFamily`
+
+The semantic type scales now derive from one root token, `DefaultFontFamily`, and per-scale weight nuance is carried by the `*FontWeight` tokens, resolved from that single family (a variable font, or a font shipping a font manifest) — see [Typography](semantic-styles.md#typography). The font override surface changes accordingly:
+
+- The `TypefacePlain` / `TypefaceBrand` token pair introduced in 7.1.1 is removed. An override file that still defines them is silently ignored; redefine `DefaultFontFamily` instead.
+- Simple's `SimpleFontFamily` and per-weight `SimpleRegularFontFamily` / `SimpleMediumFontFamily` / `SimpleSemiBoldFontFamily` / `SimpleBoldFontFamily` keys are removed; a slot that needs a different weight overrides its `*FontWeight` token.
+- The Material v2 type scales and per-control `*FontFamily` keys (`HyperlinkButtonFontFamily`, `SliderFontFamily`, `TextToggleButtonFontFamily`, `DatePickerFlyoutPresenterFontFamily`, `RatingControlCaptionFontFamily`, `SecondaryRatingControlCaptionFontFamily`) no longer derive from `MaterialRegularFontFamily` / `MaterialMediumFontFamily` / `MaterialLightFontFamily`. Those keys still resolve, to the weight-specific Roboto files, and the v1 styles are unchanged, but overriding them no longer changes v2 typography.
+- `SimpleButtonFontWeight` is now `Medium` (it was `Normal`, with the weight baked into the old Inter-Medium button family) and `SimpleToggleButtonFontWeight` is new. An app that overrides `SimpleButtonFontFamily` with its own font gets Medium buttons unless it also overrides the weight key.
+
+| Legacy key                                                 | Portable token                      | Cascades to         |
+| ---------------------------------------------------------- | ----------------------------------- | ------------------- |
+| `TypefacePlain`, `TypefaceBrand`                           | `DefaultFontFamily`                 | Every type scale    |
+| `SimpleFontFamily`                                         | `DefaultFontFamily`                 | Every type scale    |
+| `SimpleRegular` / `Medium` / `SemiBold` / `BoldFontFamily` | `DefaultFontFamily` + `*FontWeight` | Every type scale    |
+| `MaterialRegularFontFamily`, `MaterialMediumFontFamily`    | `DefaultFontFamily`                 | Every v2 type scale |
+
+The override goes in the file referenced as the theme's `FontOverrideSource` — see [Typography Font Swap](design-tokens.md#typography-font-swap).
+
 ## Upgrading to Uno Themes v7
 
 Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic Design Language, design tokens, and opt-in seed color generation. Visual defaults are unchanged — no semantic color or brush resource key was renamed or removed, and seed generation is off unless you enable it — so most apps upgrade without code changes. The sections below cover the changes that may require action.
@@ -15,7 +66,7 @@ Uno Themes 7.0 introduces the Simple design system, the theme-agnostic Semantic 
 
 - **Simple theme**: new `Uno.Simple.WinUI` and `Uno.Simple.WinUI.Markup` packages providing a minimal, density-driven design system. See [Simple - Getting Started](simple-getting-started.md).
 - **Semantic Design Language**: design-system-agnostic style aliases (`FilledButtonStyle`, `OutlinedTextBoxStyle`, …) shared by Material and Simple, so apps can switch design systems without changing style keys. See [Semantic Design Language](semantic-styles.md).
-- **Design tokens**: spacing (`Space*`), shape (`Radius*`), and density (`ControlHeight*`, `IconSize*`) tokens, driven globally by the new `DefaultDensity` and `DefaultCornerRadius` theme properties. See [Design Tokens](design-tokens.md).
+- **Design tokens**: spacing (`Space*`), shape (`Radius*`), and density (`ControlHeight*`, `IconSize*`) tokens, driven globally by the new `DefaultSpacing`, `DefaultDensity`, and `DefaultCornerRadius` theme properties. See [Design Tokens](design-tokens.md).
 - **Seed color generation** (opt-in): generate a full palette from one or more seed colors via the new `Colors` property (`ThemeColors`) and `SemanticThemeHelper`. See [Seed Color Palette](seed-colors.md).
 - **Control extensions**: new `ControlExtensions.LeadingIcon` and `ControlExtensions.TrailingIcon` attached properties; `ControlExtensions.Icon` keeps working and now forwards its value to `LeadingIcon`. See [Control Extensions](themes-control-extensions.md).
 - **XAML Hot Reload**: theme resources now participate in Hot Reload.
@@ -36,10 +87,10 @@ This only affects code that subclasses `BaseTheme` to build a custom design syst
 
 Color configuration is now grouped on the new `Colors` property, a `ThemeColors` object that also hosts the seed color properties. The legacy properties are deprecated but still work — they write through to the corresponding `Colors` members internally:
 
-| Deprecated member                    | Replacement                                  |
-| ------------------------------------ | -------------------------------------------- |
-| `BaseTheme.ColorOverrideSource`      | `OverrideSource` on `Colors` (`ThemeColors`) |
-| `BaseTheme.ColorOverrideDictionary`  | `OverrideDictionary` on `Colors` (`ThemeColors`) |
+| Deprecated member                   | Replacement                                      |
+|-------------------------------------|--------------------------------------------------|
+| `BaseTheme.ColorOverrideSource`     | `OverrideSource` on `Colors` (`ThemeColors`)     |
+| `BaseTheme.ColorOverrideDictionary` | `OverrideDictionary` on `Colors` (`ThemeColors`) |
 
 Before:
 
@@ -63,15 +114,6 @@ After:
 
 > [!IMPORTANT]
 > Seed generation is opt-in and no theme sets a default seed, so an upgraded app renders with exactly the same colors as 6.1, and explicit color overrides keep winning over everything else — including seed-generated palettes. For the full precedence order, see [Color Precedence](seed-colors.md#color-precedence).
-
-### Typography and font overrides
-
-Existing Material font overrides (`MaterialRegularFontFamily` / `MaterialMediumFontFamily`) continue to work. For overrides meant to apply across design systems, prefer the new root typeface tokens, which cascade through the whole type scale — see [Typography](semantic-styles.md#typography):
-
-| Legacy key (Material-specific) | Portable token  | Cascades to                 |
-| ------------------------------ | --------------- | --------------------------- |
-| `MaterialRegularFontFamily`    | `TypefacePlain` | Display, Headline           |
-| `MaterialMediumFontFamily`     | `TypefaceBrand` | Title, Label, Body, Caption |
 
 ### Material style changes
 
@@ -97,7 +139,7 @@ Material v2 sizing, spacing, and corner-radius resources are no longer hard-code
 | `ButtonPadding`      | `16,0`    | `Space400HorizontalThickness` | `16,0`        |
 | `ButtonCornerRadius` | `20`      | `Radius500CornerRadius`       | `20`          |
 
-Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultDensity` (`Compact` / `Regular` / `Comfy`) and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
+Roughly forty keys across all Material v2 controls follow this pattern. Because the values are now derived, the new `DefaultSpacing`, `DefaultDensity` (`Compact` / `Regular` / `Comfy`), and `DefaultCornerRadius` theme properties reshape every Material control globally. See [Design Tokens](design-tokens.md).
 
 ### `StringFormatConverter` is now culture-aware
 

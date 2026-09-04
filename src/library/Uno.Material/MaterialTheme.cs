@@ -36,15 +36,26 @@ public class MaterialTheme : BaseTheme
 
 	protected override string DefaultStylesSource => MaterialConstants.ResourcePaths.Version2.MergedPages;
 
-	protected override void AddThemeSpecificResources()
+	/// <summary>
+	/// The per-control font family alias keys Material v2 declares — StaticResource aliases that
+	/// snapshot at parse time and therefore need regenerating for a runtime
+	/// <see cref="BaseTheme.DefaultFontFamily"/> change to reach the control templates.
+	/// Keep in sync with the <c>*FontFamily</c> lightweight-styling keys under
+	/// <c>Styles/Controls/v2</c> that alias the root token or a type-scale slot.
+	/// </summary>
+	internal override string[] FontFamilyAliasKeys { get; } =
 	{
-		base.AddThemeSpecificResources();
-
-		// Base fonts ship in the Source bundle (BaseDictionaries.xaml); only a
-		// consumer-supplied override is layered dynamically on top to shadow them.
-		if (FontOverrideDictionary is { } fontOverride)
-		{
-			AddThemeDictionary(fontOverride);
-		}
-	}
+		"CheckBoxFontFamily",
+		"DatePickerFlyoutPresenterFontFamily",
+		"FilledPasswordBoxFontFamily",
+		"FilledTextBoxFontFamily",
+		"HyperlinkButtonFontFamily",
+		"OutlinedPasswordBoxFontFamily",
+		"OutlinedTextBoxFontFamily",
+		"RadioButtonFontFamily",
+		"RatingControlCaptionFontFamily",
+		"SecondaryRatingControlCaptionFontFamily",
+		"SliderFontFamily",
+		"TextToggleButtonFontFamily",
+	};
 }

@@ -78,19 +78,27 @@ Depending on the type of project template that the Uno Platform application was 
 
 ## Customization
 
-The following guides require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
+### Seed Color Palette
+
+The fastest way to a custom color theme: provide a single **seed color** — typically your brand color — and the library generates the complete Light and Dark palette from it, with readable text contrast built in. No resource dictionaries to write, and the seed can even be changed at runtime. See the [Seed Color Palette documentation](xref:Uno.Themes.SeedColors).
+
+The guides below give you full manual control instead. They require the creation of new `ResourceDictionary` files in your application project. For more information on how to define styles and resources in a separate `ResourceDictionary`, refer to the [resource management documentation](xref:Guide.HowTo.Create-Control-Library#moving-the-control-style-in-a-separate-resource-dictionary).
 
 ### Customize Color Palette
 
-You can override the default Simple color palette by providing a `ResourceDictionary` with color overrides:
+You can override the default Simple color palette by providing a `ResourceDictionary` with color overrides through the `Colors` property (a `ThemeColors` object):
 
 ```xml
 <us:SimpleTheme xmlns:us="using:Uno.Simple">
-    <us:SimpleTheme.ColorOverrideDictionary>
-        <ResourceDictionary>
-            <!-- Add color overrides here -->
-        </ResourceDictionary>
-    </us:SimpleTheme.ColorOverrideDictionary>
+    <us:SimpleTheme.Colors>
+        <ut:ThemeColors xmlns:ut="using:Uno.Themes">
+            <ut:ThemeColors.OverrideDictionary>
+                <ResourceDictionary>
+                    <!-- Add color overrides here -->
+                </ResourceDictionary>
+            </ut:ThemeColors.OverrideDictionary>
+        </ut:ThemeColors>
+    </us:SimpleTheme.Colors>
 </us:SimpleTheme>
 ```
 
@@ -107,7 +115,3 @@ You can override the default Simple fonts by providing a `ResourceDictionary` wi
     </us:SimpleTheme.FontOverrideDictionary>
 </us:SimpleTheme>
 ```
-
-### Seed Color Palette
-
-Instead of manually defining every color, you can provide a single **seed color** and let the library generate the full Light and Dark palette algorithmically using the Material Design 3 HCT color system. See the [Seed Color Palette documentation](xref:Uno.Themes.SeedColors#getting-started).

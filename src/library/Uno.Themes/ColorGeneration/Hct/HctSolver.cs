@@ -8,11 +8,24 @@ namespace Uno.Themes.ColorGeneration.Hct;
 
 /// <summary>
 /// Finds the ARGB color that best matches a target Hue, Chroma, and Tone (L*).
-/// Uses CAM16 for hue/chroma and CIE L* for tone, with bisection on chroma
-/// to find the maximum achievable chroma within the sRGB gamut.
+/// Uses CAM16 for hue/chroma and CIE L* for tone. The requested chroma is
+/// delivered exactly whenever it is achievable in sRGB; otherwise the maximum
+/// in-gamut chroma at that hue and tone is used.
 /// </summary>
 internal static class HctSolver
 {
+	// Relative luminance coefficients (CIE Y from linear sRGB), matching ColorMath.ArgbToXyz.
+	private const double YFromLinearR = 0.2126;
+	private const double YFromLinearG = 0.7152;
+	private const double YFromLinearB = 0.0722;
+
+	// Newton's method converges in 2-3 rounds for in-gamut requests; 5 is the reference
+	// implementation's cap and is only reached for coordinates near the gamut boundary.
+	private const int JIterations = 5;
+
+	// Chroma resolution of requested/2^20 — far finer than the 8-bit output can express.
+	private const int ChromaBisections = 20;
+
 	/// <summary>
 	/// Find the ARGB color matching the given HCT coordinates.
 	/// If the requested chroma is not achievable in sRGB, the maximum
@@ -33,23 +46,16 @@ internal static class HctSolver
 			return GrayFromTone(tone);
 		}
 
-		// Compute the CAM16 J that corresponds to this tone (L*)
-		// by running CAM16 forward on a gray at the target tone.
-		double j = JFromTone(tone);
+		double y = ColorMath.YFromLstar(tone);
 
-		// Use CAM16 inverse to get the ARGB at the desired hue, chroma, and J
-		int argb = Cam16.ToArgb(hue, chroma, j, out bool inGamut);
-		double actualTone = ColorMath.LstarFromArgb(argb);
-
-		// Accept if close in tone AND within sRGB gamut
-		if (Math.Abs(actualTone - tone) <= 1.0 && inGamut)
+		if (TrySolveExact(hue, chroma, y, out int argb))
 		{
 			return argb;
 		}
 
-		// The requested chroma may not be achievable at this tone.
-		// Bisect on chroma to find the maximum in-gamut chroma.
-		return BisectChroma(hue, chroma, tone, j);
+		// The requested chroma is outside the sRGB gamut at this hue and tone.
+		// Bisect down to the largest chroma that is achievable.
+		return BisectChroma(hue, chroma, y, tone);
 	}
 
 	/// <summary>Compute a gray ARGB from a tone (L*) value.</summary>
@@ -61,28 +67,68 @@ internal static class HctSolver
 	}
 
 	/// <summary>
-	/// Find the CAM16 J value that corresponds to a given CIE L* (tone)
-	/// by running the CAM16 forward model on a gray at that tone.
+	/// Solve for the color at the requested hue and chroma whose relative luminance is
+	/// <paramref name="targetY"/>, by Newton iteration on the CAM16 lightness J.
+	/// Returns <c>false</c> when the coordinates are outside the sRGB gamut.
 	/// </summary>
-	private static double JFromTone(double tone)
+	/// <remarks>
+	/// J is solved for rather than derived from the tone because the J that yields a given
+	/// L* depends on the chroma — taking J from a gray at the target tone (as the previous
+	/// implementation did) is only correct at chroma 0, and forced the chroma search to give
+	/// up far short of the gamut boundary for any saturated color.
+	/// </remarks>
+	private static bool TrySolveExact(double hue, double chroma, double targetY, out int argb)
 	{
-		int grayArgb = GrayFromTone(tone);
-		return Cam16.FromArgb(grayArgb).J;
+		var vc = ViewingConditions.Default;
+		double j = Math.Sqrt(targetY) * 11.0;
+
+		for (int i = 0; i < JIterations; i++)
+		{
+			Cam16.ToLinrgb(hue, chroma, j, vc, out double r, out double g, out double b);
+
+			if (r < 0.0 || g < 0.0 || b < 0.0)
+			{
+				argb = 0;
+				return false;
+			}
+
+			double y = YFromLinearR * r + YFromLinearG * g + YFromLinearB * b;
+			if (y <= 0.0)
+			{
+				argb = 0;
+				return false;
+			}
+
+			if (i == JIterations - 1 || Math.Abs(y - targetY) < 0.002)
+			{
+				if (r > 100.01 || g > 100.01 || b > 100.01)
+				{
+					argb = 0;
+					return false;
+				}
+
+				argb = ColorMath.ArgbFromLinrgb(r, g, b);
+				return true;
+			}
+
+			// Newton step, using 2 * f(j) / j as the approximation of f'(j).
+			j -= (y - targetY) * j / (2.0 * y);
+		}
+
+		argb = 0;
+		return false;
 	}
 
-	private static int BisectChroma(double hue, double requestedChroma, double tone, double j)
+	private static int BisectChroma(double hue, double requestedChroma, double targetY, double tone)
 	{
 		double low = 0.0;
 		double high = requestedChroma;
 		int bestArgb = GrayFromTone(tone);
 
-		for (int i = 0; i < 32; i++)
+		for (int i = 0; i < ChromaBisections; i++)
 		{
 			double mid = (low + high) / 2.0;
-			int candidate = Cam16.ToArgb(hue, mid, j, out bool inGamut);
-			double actualTone = ColorMath.LstarFromArgb(candidate);
-
-			if (Math.Abs(actualTone - tone) <= 1.0 && inGamut)
+			if (TrySolveExact(hue, mid, targetY, out int candidate))
 			{
 				bestArgb = candidate;
 				low = mid;

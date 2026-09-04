@@ -2,6 +2,7 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:sample="using:Uno.Themes.Samples"
+	  xmlns:local="using:Uno.Themes.Samples.Content.Styles"
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<sample:SamplePageLayout>
@@ -19,7 +20,7 @@
 						<TextBlock Text="Controls Preview"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,16,0,4" />
-						<TextBlock Text="Override DefaultDensity or DefaultCornerRadius on the theme to see how these controls change globally."
+						<TextBlock Text="Override DefaultSpacing, DefaultDensity, or DefaultCornerRadius on the theme to see how these controls change globally."
 								   Style="{StaticResource BodySmall}"
 								   TextWrapping="Wrap"
 								   Opacity="0.6" />
@@ -45,11 +46,9 @@
 						<TextBlock Text="Typography Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<TextBlock Text="TypefacePlain (Display / Headline)"
-								   FontFamily="{ThemeResource TypefacePlain}"
-								   FontSize="20" />
-						<TextBlock Text="TypefaceBrand (Title / Label / Body)"
-								   FontFamily="{ThemeResource TypefaceBrand}"
+						<local:FontFamilyTunerControl />
+						<TextBlock Text="DefaultFontFamily (every type scale)"
+								   FontFamily="{ThemeResource DefaultFontFamily}"
 								   FontSize="20" />
 						<TextBlock Text="Display Large"
 								   Style="{StaticResource DisplayLarge}" />
@@ -199,7 +198,7 @@
 						<TextBlock Text="Controls Preview"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,16,0,4" />
-						<TextBlock Text="Override DefaultDensity or DefaultCornerRadius on the theme to see how these controls change globally."
+						<TextBlock Text="Override DefaultSpacing, DefaultDensity, or DefaultCornerRadius on the theme to see how these controls change globally."
 								   Style="{StaticResource BodySmall}"
 								   TextWrapping="Wrap"
 								   Opacity="0.6" />
@@ -225,11 +224,9 @@
 						<TextBlock Text="Typography Tokens"
 								   Style="{StaticResource TitleLarge}"
 								   Margin="0,24,0,4" />
-						<TextBlock Text="TypefacePlain (Display / Headline)"
-								   FontFamily="{ThemeResource TypefacePlain}"
-								   FontSize="20" />
-						<TextBlock Text="TypefaceBrand (Title / Label / Body)"
-								   FontFamily="{ThemeResource TypefaceBrand}"
+						<local:FontFamilyTunerControl />
+						<TextBlock Text="DefaultFontFamily (every type scale)"
+								   FontFamily="{ThemeResource DefaultFontFamily}"
 								   FontSize="20" />
 						<TextBlock Text="Display Large"
 								   Style="{StaticResource DisplayLarge}" />

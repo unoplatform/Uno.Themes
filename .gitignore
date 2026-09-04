@@ -342,6 +342,6 @@ crosstargeting_override.props
 *.code-workspace
 
 PROGRESS.md
-# AGENTS.md mandates specs/<topic>/progress.md; keep those tracked despite the
-# PROGRESS.md scratch-file ignore above (case-insensitive FS matches lowercase too)
-!specs/*/progress.md
+# core.ignorecase is true on macOS/Windows, so the rule above also swallows the
+# per-spec progress.md files that AGENTS.md requires under specs/<topic>/.
+!specs/**/progress.md

@@ -43,7 +43,7 @@
 
 		<Setter Property="Background" Value="{StaticResource MaterialContentDialogBackground}" />
 		<Setter Property="Foreground" Value="{StaticResource MaterialContentDialogContentForeground}" />
-		<Setter Property="CornerRadius" Value="{StaticResource MaterialContentDialogCornerRadius}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource MaterialContentDialogCornerRadius}" />
 
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="VerticalAlignment" Value="Stretch" />
@@ -197,7 +197,7 @@
 											MinWidth="{StaticResource MaterialContentDialogMinWidth}"
 											MinHeight="{StaticResource MaterialContentDialogMinHeight}" />
 									
-									<Grid x:Name="DialogSpace" Margin="{StaticResource MaterialContentDialogPanelPadding}">
+									<Grid x:Name="DialogSpace" Margin="{ThemeResource MaterialContentDialogPanelPadding}">
 										<Grid.RowDefinitions>
 											<!-- 0: Title, 1: Content, 2: CommandSpace -->
 											<RowDefinition Height="Auto" />
@@ -213,7 +213,7 @@
 														FontFamily="{ThemeResource HeadlineSmallFontFamily}"
 														FontSize="{StaticResource HeadlineSmallFontSize}"
 														FontWeight="{ThemeResource HeadlineSmallFontWeight}"
-														Margin="{StaticResource MaterialContentDialogTitleToContentMargin}"
+														Margin="{ThemeResource MaterialContentDialogTitleToContentMargin}"
 														HorizontalAlignment="Center"
 														VerticalAlignment="Top"
 														IsTabStop="False">
@@ -247,7 +247,7 @@
 										</ScrollViewer>
 										<Grid x:Name="CommandSpace"
 											  Grid.Row="2"
-											  Margin="{StaticResource MaterialContentDialogCommandSpaceToContentMargin}"
+											  Margin="{ThemeResource MaterialContentDialogCommandSpaceToContentMargin}"
 											  HorizontalAlignment="Right"
 											  VerticalAlignment="Bottom"
 											  XYFocusKeyboardNavigation="Enabled">

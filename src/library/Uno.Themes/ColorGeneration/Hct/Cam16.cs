@@ -108,30 +108,18 @@ internal readonly struct Cam16
 	}
 
 	/// <summary>
-	/// Solve for the ARGB color with the given CAM16 J (lightness) and
-	/// chroma at the specified hue, under default viewing conditions.
-	/// Returns the closest in-gamut color.
+	/// Inverse CAM16: produce the linear-RGB components (0-100 scale) for the given
+	/// hue, chroma and lightness J under the supplied viewing conditions.
+	/// The components are <b>not</b> clamped — values outside 0-100 mean the requested
+	/// coordinates fall outside the sRGB gamut, which is how <see cref="HctSolver"/>
+	/// detects the gamut boundary.
 	/// </summary>
-	internal static int ToArgb(double hue, double chroma, double j)
+	internal static void ToLinrgb(
+		double hue, double chroma, double j, ViewingConditions vc,
+		out double linearR, out double linearG, out double linearB)
 	{
-		return ToArgb(hue, chroma, j, ViewingConditions.Default, out _);
-	}
-
-	internal static int ToArgb(double hue, double chroma, double j, out bool isInGamut)
-	{
-		return ToArgb(hue, chroma, j, ViewingConditions.Default, out isInGamut);
-	}
-
-	internal static int ToArgb(double hue, double chroma, double j, ViewingConditions vc, out bool isInGamut)
-	{
-		if (chroma < 0.5 || j < 0.0001)
-		{
-			isInGamut = true;
-			return GrayArgbFromJ(j, vc);
-		}
-
 		double hueRadians = hue * Math.PI / 180.0;
-		double alpha = chroma / Math.Sqrt(j / 100.0);
+		double alpha = chroma == 0.0 || j == 0.0 ? 0.0 : chroma / Math.Sqrt(j / 100.0);
 		double t = Math.Pow(alpha / Math.Pow(1.64 - Math.Pow(0.29, vc.N), 0.73), 1.0 / 0.9);
 
 		double ac = vc.Aw * Math.Pow(j / 100.0, 1.0 / (vc.C * vc.Z));
@@ -166,20 +154,9 @@ internal readonly struct Cam16
 		double z = -0.01584150 * rX - 0.03412294 * gX + 1.0499644 * bX;
 
 		// CIE XYZ → sRGB linear
-		double linearR = 3.2413774792388685 * x - 1.5376652402851851 * y - 0.49885366846268053 * z;
-		double linearG = -0.9691452513005321 * x + 1.8758853451067872 * y + 0.04156585616912061 * z;
-		double linearB = 0.05562093689691305 * x - 0.20395524564742123 * y + 1.0571799993703593 * z;
-
-		int rawR = ColorMath.DelinearizedRaw(linearR);
-		int rawG = ColorMath.DelinearizedRaw(linearG);
-		int rawB = ColorMath.DelinearizedRaw(linearB);
-
-		isInGamut = rawR >= 0 && rawR <= 255 && rawG >= 0 && rawG <= 255 && rawB >= 0 && rawB <= 255;
-
-		return ColorMath.ArgbFromRgb(
-			ColorMath.Clamp8Bit(rawR),
-			ColorMath.Clamp8Bit(rawG),
-			ColorMath.Clamp8Bit(rawB));
+		linearR = 3.2413774792388685 * x - 1.5376652402851851 * y - 0.49885366846268053 * z;
+		linearG = -0.9691452513005321 * x + 1.8758853451067872 * y + 0.04156585616912061 * z;
+		linearB = 0.05562093689691305 * x - 0.20395524564742123 * y + 1.0571799993703593 * z;
 	}
 
 	private static double InverseAdapt(double adapted, double fl)
@@ -194,36 +171,5 @@ internal readonly struct Cam16
 		double base_ = Math.Max(0, 27.13 * abs / (400.0 - abs));
 		double sign = adapted < 0 ? -1.0 : 1.0;
 		return sign * 100.0 / fl * Math.Pow(base_, 1.0 / 0.42);
-	}
-
-	private static int GrayArgbFromJ(double j, ViewingConditions vc)
-	{
-		if (j <= 0)
-		{
-			return ColorMath.ArgbFromRgb(0, 0, 0);
-		}
-
-		double ac = vc.Aw * Math.Pow(j / 100.0, 1.0 / (vc.C * vc.Z));
-		double p2 = ac / vc.Nbb;
-		double adapted = p2 * 20.0 / 61.0;
-
-		double rF = InverseAdapt(adapted, vc.Fl);
-		// For gray, all three CAM16 RGB channels are equal
-		double rCam = rF / vc.RgbD[0];
-		double gCam = rF / vc.RgbD[1];
-		double bCam = rF / vc.RgbD[2];
-
-		// Inverse M16: CAM16 RGB → CIE XYZ
-		double x = 1.8620678 * rCam - 1.0112547 * gCam + 0.14918678 * bCam;
-		double y = 0.38752654 * rCam + 0.62144744 * gCam - 0.00897398 * bCam;
-		double z = -0.01584150 * rCam - 0.03412294 * gCam + 1.0499644 * bCam;
-
-		// CIE XYZ → sRGB linear
-		double linearR = 3.2413774792388685 * x - 1.5376652402851851 * y - 0.49885366846268053 * z;
-		double linearG = -0.9691452513005321 * x + 1.8758853451067872 * y + 0.04156585616912061 * z;
-		double linearB = 0.05562093689691305 * x - 0.20395524564742123 * y + 1.0571799993703593 * z;
-
-		int component = ColorMath.Delinearized(linearR);
-		return ColorMath.ArgbFromRgb(component, component, component);
 	}
 }

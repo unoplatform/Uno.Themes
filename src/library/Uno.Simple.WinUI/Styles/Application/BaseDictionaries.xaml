@@ -8,9 +8,13 @@
 		typography, font and thickness resources the theme needs.
 
 		Order matters: entries listed LATER win at lookup time (MergedDictionaries
-		are searched in reverse), and within mergedpages this file (BaseDictionaries)
-		is merged before the theme's own Application styles (e.g. Typography.xaml),
-		so the theme's own overrides shadow these shared defaults.
+		are searched in reverse), and a merged dictionary beats mergedpages' OWN theme
+		dictionaries. So a file left in the Styles\Application\ glob — whose resources
+		land in mergedpages itself — CANNOT shadow anything listed here: it loses to
+		SharedTypography, not the other way round. Any Simple file that has to override
+		a shared default must therefore be removed from the glob (see simple-common.props)
+		and merged here, AFTER the dictionary it overrides. That is why Typography.xaml,
+		Fonts.xaml and Thickness.xaml are listed below.
 
 		Colour resources are intentionally NOT included here: SharedColors, the
 		shared/seed palettes and Simple's grayscale palette are added (and removed)
@@ -23,6 +27,7 @@
 		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/Converters.xaml" />
 		<ResourceDictionary Source="ms-appx:///Uno.Themes.WinUI/Styles/Applications/Common/SharedTypography.xaml" />
 
+		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/Typography.xaml" />
 		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/Common/Fonts.xaml" />
 		<ResourceDictionary Source="ms-appx:///Uno.Simple.WinUI/Styles/Application/Common/Thickness.xaml" />
 	</ResourceDictionary.MergedDictionaries>

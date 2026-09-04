@@ -20,14 +20,11 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 {
 	/// <summary>
 	/// Simple uses a hand-crafted grayscale palette by default (no seed).
-	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, high-fidelity
-	/// mode preserves the source chroma so low-chroma seeds stay neutral
-	/// instead of being boosted by the M3 minimum-chroma floor.
+	/// When a user explicitly sets <c>Colors.PrimarySeed</c>, the default
+	/// <see cref="SeedColorMode.Fidelity"/> mode keeps the generated
+	/// palette faithful to that seed.
 	/// </summary>
 	protected override Color? DefaultPrimarySeed => null;
-
-	/// <inheritdoc />
-	protected override bool UseHighFidelityColors => true;
 
 	public SimpleTheme()
 		: this(colorOverride: null, fontOverride: null)
@@ -49,15 +46,16 @@ public class SimpleTheme(ResourceDictionary colorOverride = null, ResourceDictio
 
 	protected override string DefaultStylesSource => SimpleConstants.ResourcePaths.MergedPages;
 
-	protected override void AddThemeSpecificResources()
+	/// <summary>
+	/// The font family alias keys Simple declares — StaticResource aliases that snapshot at parse
+	/// time and therefore need regenerating for a runtime <see cref="BaseTheme.DefaultFontFamily"/>
+	/// change to reach the control templates. Keep in sync with the <c>*FontFamily</c>
+	/// lightweight-styling keys under <c>Styles/Controls</c>.
+	/// </summary>
+	internal override string[] FontFamilyAliasKeys { get; } =
 	{
-		base.AddThemeSpecificResources();
-
-		// Base fonts and thickness ship in the Source bundle (BaseDictionaries.xaml); only a
-		// consumer-supplied font override is layered dynamically on top to shadow them.
-		if (FontOverrideDictionary is { } fontOverride)
-		{
-			AddThemeDictionary(fontOverride);
-		}
-	}
+		"SimpleButtonFontFamily",
+		"SimpleToggleButtonFontFamily",
+		"DatePickerFlyoutPresenterFontFamily",
+	};
 }
