@@ -1,6 +1,8 @@
 #nullable enable
 
+using System;
 using System.Collections.Generic;
+using Uno.Themes;
 using Uno.Themes.ColorGeneration;
 using Uno.Themes.ColorGeneration.Hct;
 
@@ -33,7 +35,13 @@ namespace Uno.Fluent;
 /// override visibly recolor controls):
 /// a <b>seed</b> is a generator input — the shades follow the tonal palette
 /// (spec 05 §9.1: light fill = tone 30 / <c>Dark1</c>, dark fill = tone 70 /
-/// <c>Light2</c>, matching Fluent's own accent usage — spike S2/S4); an
+/// <c>Light2</c>, matching Fluent's own accent usage — spike S2/S4), derived
+/// with the theme's <see cref="SeedColorMode"/> exactly as the semantic palette
+/// is: under <see cref="SeedColorMode.Fidelity"/> (the default) the base
+/// <c>SystemAccentColor</c> is the seed verbatim — the generated light
+/// <c>PrimaryColor</c> — and the palette keeps the seed's chroma; under
+/// <see cref="SeedColorMode.TonalSpot"/> it is tone 40 of the chroma-boosted
+/// palette. Either way the forward and reverse flows agree (§9.3); an
 /// explicit <b>PrimaryColor override</b> is the highest-precedence statement
 /// of what "Primary" IS, so it becomes the accent fill VERBATIM for its
 /// branch (with the surrounding shades derived tonally from it). An override
@@ -68,7 +76,8 @@ internal static class FluentAccentPalette
 	private const string DarkBranchKey = "Dark";
 	private const string DefaultBranchKey = "Default";
 
-	// Spec 05 §9.1 — Fluent accent shade → tonal-palette tone.
+	// Spec 05 §9.1 — Fluent accent shade → tonal-palette tone. AccentTone is the
+	// base accent only under TonalSpot; Fidelity pins the seed itself (see SeedTones).
 	private const int AccentTone = 40;
 	private const int Light1Tone = 60;
 	private const int Light2Tone = 70;
@@ -76,6 +85,32 @@ internal static class FluentAccentPalette
 	private const int Dark1Tone = 30;
 	private const int Dark2Tone = 20;
 	private const int Dark3Tone = 10;
+
+	// Material Design 3's tonal-spot minimum chroma on the primary palette — the
+	// same floor SeedColorPaletteGenerator applies under SeedColorMode.TonalSpot.
+	private const double TonalSpotMinimumChroma = 48;
+
+	/// <summary>
+	/// A seed's base accent and tonal palette under a generation mode — the same
+	/// recipe <c>SeedColorPaletteGenerator</c> uses for the light <c>PrimaryColor</c>
+	/// and the primary palette, so the reverse mapping agrees with the forward one
+	/// tone for tone (spec 05 §9.3).
+	/// </summary>
+	private readonly record struct SeedTones(Color Accent, TonalPalette Palette)
+	{
+		internal static SeedTones From(Color seed, SeedColorMode mode)
+		{
+			var palette = PaletteOf(seed, mode);
+
+			// Fidelity: the generated light PrimaryColor IS the (opaque) seed, so the
+			// accent is too. TonalSpot: the M3 recipe's tone 40 of the boosted palette.
+			var accent = mode == SeedColorMode.TonalSpot
+				? ToneColor(palette, AccentTone)
+				: Color.FromArgb(0xFF, seed.R, seed.G, seed.B);
+
+			return new SeedTones(accent, palette);
+		}
+	}
 
 	// UWP-era accent brushes still referenced by some Uno templates; all carry
 	// the base accent in both theme branches (S4 capture).
@@ -143,23 +178,23 @@ internal static class FluentAccentPalette
 	/// <summary>
 	/// Builds the accent override dictionary from the effective drivers: the
 	/// per-branch override basis (verbatim accent) where present, else the
-	/// <paramref name="seed"/>'s tonal mapping. At least one driver must be
-	/// non-null. Consumer-explicit accent-family keys are copied over the
+	/// <paramref name="seed"/>'s tonal mapping under <paramref name="seedColorMode"/>
+	/// (the mode the semantic palette is generated with). At least one driver
+	/// must be non-null. Consumer-explicit accent-family keys are copied over the
 	/// derived values last.
 	/// </summary>
-	internal static ResourceDictionary Build(Color? seed, Color? lightBasis, Color? darkBasis, ResourceDictionary? consumerOverride)
+	internal static ResourceDictionary Build(Color? seed, SeedColorMode seedColorMode, Color? lightBasis, Color? darkBasis, ResourceDictionary? consumerOverride)
 	{
 		var dictionary = new ResourceDictionary();
-		var seedPalette = seed is { } s ? PaletteOf(s) : null;
+		var seedTones = seed is { } s ? SeedTones.From(s, seedColorMode) : (SeedTones?)null;
 
-		if (lightBasis is null && darkBasis is null && seedPalette is { } pure)
+		if (lightBasis is null && darkBasis is null && seedTones is { } pure)
 		{
 			// Pure-seed mode: the shade set is theme-invariant (like the
 			// platform's), so it lives in flat entries visible from both theme
 			// branches; only the closure varies per branch.
-			var accent = ToneColor(pure, AccentTone);
-			WriteShades(dictionary, pure, accent);
-			WriteLegacyBrushes(dictionary, accent);
+			WriteShades(dictionary, pure.Palette, pure.Accent);
+			WriteLegacyBrushes(dictionary, pure.Accent);
 
 			dictionary.ThemeDictionaries[LightBranchKey] = BuildSeedClosure(pure, isLight: true);
 			dictionary.ThemeDictionaries[DefaultBranchKey] = BuildSeedClosure(pure, isLight: false);
@@ -171,12 +206,12 @@ internal static class FluentAccentPalette
 			// for the same key — their relative precedence is not portable).
 			// A branch with neither a basis nor a seed gets no entries at all:
 			// the platform accent stays in effect for it.
-			if (BuildBranchFor(isLight: true, lightBasis, seedPalette) is { } light)
+			if (BuildBranchFor(isLight: true, lightBasis, seedTones) is { } light)
 			{
 				dictionary.ThemeDictionaries[LightBranchKey] = light;
 			}
 
-			if (BuildBranchFor(isLight: false, darkBasis, seedPalette) is { } dark)
+			if (BuildBranchFor(isLight: false, darkBasis, seedTones) is { } dark)
 			{
 				dictionary.ThemeDictionaries[DefaultBranchKey] = dark;
 			}
@@ -190,14 +225,16 @@ internal static class FluentAccentPalette
 		return dictionary;
 	}
 
-	private static ResourceDictionary? BuildBranchFor(bool isLight, Color? basis, TonalPalette? seedPalette)
+	private static ResourceDictionary? BuildBranchFor(bool isLight, Color? basis, SeedTones? seedTones)
 	{
 		if (basis is { } b)
 		{
 			// The override IS the accent for this branch (parity with
 			// Material/Simple: the color the consumer set is the color they
-			// see); the surrounding shades and accent-text tones derive from it.
-			var palette = PaletteOf(b);
+			// see); the surrounding shades and accent-text tones derive from it,
+			// keeping its exact chroma (the override is a verbatim statement, not
+			// a generator input — no mode applies).
+			var palette = PaletteOf(b, SeedColorMode.Fidelity);
 			var branch = new ResourceDictionary();
 
 			branch["SystemAccentColor"] = b;
@@ -220,25 +257,25 @@ internal static class FluentAccentPalette
 			return branch;
 		}
 
-		if (seedPalette is { } sp)
+		if (seedTones is { } st)
 		{
 			// Mixed mode (the OTHER branch has a basis): this branch follows the
 			// seed, with the shade set branch-scoped instead of flat.
-			var branch = BuildSeedClosure(sp, isLight);
-			var accent = ToneColor(sp, AccentTone);
-			WriteShades(branch, sp, accent);
-			WriteLegacyBrushes(branch, accent);
+			var branch = BuildSeedClosure(st, isLight);
+			WriteShades(branch, st.Palette, st.Accent);
+			WriteLegacyBrushes(branch, st.Accent);
 			return branch;
 		}
 
 		return null;
 	}
 
-	private static ResourceDictionary BuildSeedClosure(TonalPalette palette, bool isLight)
+	private static ResourceDictionary BuildSeedClosure(SeedTones tones, bool isLight)
 	{
 		// Fluent's accent usage per branch (S4 capture, matching WinUI):
 		//   light: fill = Dark1; accent text = Dark2 / Dark3 / Dark1
 		//   dark:  fill = Light2; accent text = Light3 / Light3 / Light2
+		var palette = tones.Palette;
 		var branch = new ResourceDictionary();
 		WriteClosure(
 			branch,
@@ -246,7 +283,7 @@ internal static class FluentAccentPalette
 			textPrimary: ToneColor(palette, isLight ? Dark2Tone : Light3Tone),
 			textSecondary: ToneColor(palette, isLight ? Dark3Tone : Light3Tone),
 			textTertiary: ToneColor(palette, isLight ? Dark1Tone : Light2Tone),
-			selectedTextBackground: ToneColor(palette, AccentTone));
+			selectedTextBackground: tones.Accent);
 		return branch;
 	}
 
@@ -397,15 +434,21 @@ internal static class FluentAccentPalette
 		return entries;
 	}
 
-	private static TonalPalette PaletteOf(Color color)
+	/// <summary>
+	/// The primary tonal palette of <paramref name="color"/> under
+	/// <paramref name="mode"/> — the same recipe <c>SeedColorPaletteGenerator</c>
+	/// applies, so every tone the reverse mapping (and the lightweight bridge)
+	/// derives agrees with the seed-generated semantic palette:
+	/// <see cref="SeedColorMode.Fidelity"/> keeps the color's own chroma,
+	/// <see cref="SeedColorMode.TonalSpot"/> enforces M3's minimum of 48.
+	/// </summary>
+	internal static TonalPalette PaletteOf(Color color, SeedColorMode mode)
 	{
-		// High-fidelity generation (chroma preserved, no M3 minimum-chroma
-		// floor): for a seed this must match FluentTheme.UseHighFidelityColors
-		// so the reverse mapping and the seed-generated semantic palette agree
-		// on every tone; for an override basis it keeps the derived shades
-		// faithful to the exact color the consumer chose.
 		var hct = HctColor.FromArgb(ToArgb(color));
-		return new TonalPalette(hct.Hue, hct.Chroma);
+		var chroma = mode == SeedColorMode.TonalSpot
+			? Math.Max(hct.Chroma, TonalSpotMinimumChroma)
+			: hct.Chroma;
+		return new TonalPalette(hct.Hue, chroma);
 	}
 
 	private static Color ToneColor(TonalPalette palette, int tone)

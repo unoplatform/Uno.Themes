@@ -245,9 +245,9 @@ Extension methods on `Application` for theme access.
 
 Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than generate the semantic palette — it also recolors the **built-in Fluent controls** (accent buttons, checked checkboxes, toggle switches, slider fills, …), so stock and semantic-styled UI stay visually coherent:
 
-- The `SystemAccentColor` shade set (`SystemAccentColor`, `Light1`–`Light3`, `Dark1`–`Dark3`) is overridden with tones from the seed's tonal palette (tone 40 for the base accent; 60/70/80 for the light shades; 30/20/10 for the dark shades).
+- The `SystemAccentColor` shade set (`SystemAccentColor`, `Light1`–`Light3`, `Dark1`–`Dark3`) is overridden from the seed's tonal palette: the base accent is the generated light `PrimaryColor` — the seed itself under the default `Fidelity` mode, tone 40 of the chroma-boosted palette under `TonalSpot` — and the shades are tones 60/70/80 (light) and 30/20/10 (dark) of the same palette.
 - The accent-derived design tokens (`AccentFillColor*`, `AccentTextFillColor*` colors and brushes) are overridden per Light/Dark theme following Fluent's own structure — for example, the light-theme accent fill is the `Dark1` shade and the dark-theme fill is `Light2`, exactly as with the platform accent.
-- `FluentTheme` uses **high-fidelity** generation: the seed's chroma is preserved rather than boosted to the Material minimum, so muted corporate colors keep their character.
+- The cascade honors [`SeedColorMode`](#choosing-the-generation-mode) like the semantic palette does, so the built-in accent and the semantic `PrimaryColor` always agree: under the default `Fidelity` mode a muted corporate accent keeps its character in both; `TonalSpot` re-saturates both.
 
 ### PrimaryColor overrides drive the accent too
 
