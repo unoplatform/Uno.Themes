@@ -5,8 +5,8 @@
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
-					xmlns:xamarin="http://uno.ui/xamarin"
-					mc:Ignorable="d xamarin">
+					xmlns:not_win="http://uno.ui/not_win"
+					mc:Ignorable="d not_win">
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Default">
@@ -317,7 +317,7 @@
 									</VisualState.Setters>
 								</VisualState>
 
-								<xamarin:VisualState x:Name="Pressed">
+								<not_win:VisualState x:Name="Pressed">
 									<!-- https://github.com/unoplatform/uno/issues/5099 -->
 									<VisualState.Setters>
 										<Setter Target="HoverOverlay.Opacity" Value="0" />
@@ -327,7 +327,7 @@
 										<Setter Target="ContentPresenter.Foreground" Value="{ThemeResource TextToggleButtonForegroundPressed}" />
 										<Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource TextToggleButtonBorderBrushPressed}" />
 									</VisualState.Setters>
-								</xamarin:VisualState>
+								</not_win:VisualState>
 								<win:VisualState x:Name="Pressed">
 									<Storyboard>
 										<DoubleAnimation Storyboard.TargetName="HoverOverlay"

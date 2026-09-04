@@ -4,7 +4,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:uuxc="using:Uno.UI.Xaml.Controls"
 					mc:Ignorable="d">
 
 	<!-- Need full color for disabled state or else the elevated view looks weird -->
@@ -80,7 +80,7 @@
 				<ControlTemplate TargetType="Button">
 					<Grid>
 
-						<toolkit:ElevatedView x:Name="ElevatedView"
+						<uuxc:ElevatedView x:Name="ElevatedView"
 											  Margin="0,0,6,6"
 											  Elevation="6"
 											  CornerRadius="{TemplateBinding CornerRadius}"
@@ -128,7 +128,7 @@
 									<Border x:Name="FabFocusBorder" />
 								</Grid>
 							</um:Ripple>
-						</toolkit:ElevatedView>
+						</uuxc:ElevatedView>
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
@@ -227,7 +227,7 @@
 				<ControlTemplate TargetType="Button">
 					<Grid>
 
-						<toolkit:ElevatedView x:Name="ElevatedView"
+						<uuxc:ElevatedView x:Name="ElevatedView"
 											  Margin="0,0,4,4"
 											  Elevation="4"
 											  CornerRadius="{TemplateBinding CornerRadius}"
@@ -275,7 +275,7 @@
 									<Border x:Name="FabFocusBorder" />
 								</Grid>
 							</um:Ripple>
-						</toolkit:ElevatedView>
+						</uuxc:ElevatedView>
 
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">

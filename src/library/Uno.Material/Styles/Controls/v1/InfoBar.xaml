@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:uuxc="using:Uno.UI.Xaml.Controls"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
 					mc:Ignorable="">
@@ -38,7 +38,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="muxc:InfoBar">
 
-					<toolkit:ElevatedView x:Name="Root"
+					<uuxc:ElevatedView x:Name="Root"
 										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 										  Background="{TemplateBinding Background}"
@@ -213,7 +213,7 @@
 												  ContentTemplate="{TemplateBinding ContentTemplate}" />
 							</Grid>
 						</Grid>
-					</toolkit:ElevatedView>
+					</uuxc:ElevatedView>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

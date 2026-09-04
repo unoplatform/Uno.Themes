@@ -1,12 +1,11 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:toolkit="using:Uno.UI.Toolkit"
 					xmlns:um="using:Uno.Material"
 					xmlns:ut="using:Uno.Themes"
-					xmlns:xamarin="http://uno.ui/xamarin"
+					xmlns:not_win="http://uno.ui/not_win"
 					xmlns:uno="using:Uno.UI.Xaml.Controls"
-					mc:Ignorable="xamarin">
+					mc:Ignorable="not_win">
 
 	<ResourceDictionary.ThemeDictionaries>
 
@@ -443,7 +442,7 @@
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="HorizontalAlignment" Value="Stretch" />
 		<Setter Property="ItemContainerStyle" Value="{StaticResource MaterialComboBoxItemStyle}" />
-		<xamarin:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
+		<not_win:Setter Property="uno:ComboBox.DropDownPreferredPlacement"
 						Value="Below" />
 
 		<!-- Workaround for WinUI issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6388 -->
