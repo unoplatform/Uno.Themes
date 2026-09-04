@@ -106,13 +106,12 @@ public class Given_FluentTypography
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Root typeface tokens (single-key font swap surface) follow D11 too.
+	// Root typeface token (the single-key font swap surface) follows D11 too.
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("TypefacePlain")]
-	[DataRow("TypefaceBrand")]
+	[DataRow("DefaultFontFamily")]
 	public void When_RootTypeface_IsPlatformDefault(string key)
 	{
 		var container = CreateThemedContainer();
@@ -124,6 +123,39 @@ public class Given_FluentTypography
 		Assert.IsNotNull(fontFamily, $"{key} should be a FontFamily");
 		Assert.AreEqual(GetPlatformDefaultFontFamily().Source, fontFamily.Source,
 			$"{key} must be the platform default (ContentControlThemeFontFamily, D11)");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// BaseTheme.DefaultFontFamily (runtime setting) reaches the Fluent slots:
+	// the generated typeface layer shadows the platform-default aliases, and
+	// clearing it restores them.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("DefaultFontFamily")]
+	[DataRow("DisplayLargeFontFamily")]
+	[DataRow("BodyMediumFontFamily")]
+	[DataRow("CaptionSmallFontFamily")]
+	public void When_DefaultFontFamilySet_SlotFollows_AndClearRestoresPlatformDefault(string key)
+	{
+		// A family that does not exist: the assertion is on the resolved Source, not on glyphs.
+		const string chosen = "ms-appx:///RuntimeTests/Fonts/NotAFont.ttf#Not A Font";
+		var theme = new FluentTheme { DefaultFontFamily = new FontFamily(chosen) };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.IsTrue(container.Resources.TryGetValue(key, out var set) && set is FontFamily,
+			$"{key} should resolve under FluentTheme with DefaultFontFamily set");
+		Assert.AreEqual(chosen, ((FontFamily)set).Source,
+			$"{key} must follow BaseTheme.DefaultFontFamily under FluentTheme");
+
+		theme.DefaultFontFamily = null;
+
+		Assert.IsTrue(container.Resources.TryGetValue(key, out var cleared) && cleared is FontFamily,
+			$"{key} should still resolve after DefaultFontFamily is cleared");
+		Assert.AreEqual(GetPlatformDefaultFontFamily().Source, ((FontFamily)cleared).Source,
+			$"clearing DefaultFontFamily must restore the platform default for {key} (D11)");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────

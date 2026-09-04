@@ -9,16 +9,21 @@
 		platform/Uno default elsewhere — spec 05, D11). No font package ships.
 
 		LOAD-BEARING (specs/lessons.md): this file is merged AFTER
-		SharedTypography.xaml inside BaseDictionaries.xaml so these slot->family
-		mappings deterministically win over the shared Segoe-derived defaults.
-		Typography.xaml declares the same mappings; cross-dictionary
-		<StaticResource> aliases in theme dictionaries resolve eagerly at parse
-		time, and this duplication is what makes resolution deterministic — do
-		not remove either side on a refactor.
+		SharedTypography.xaml inside BaseDictionaries.xaml so the root token and
+		the slot->family mappings deterministically win over the shared Segoe UI
+		baseline.
 
-		Every alias targets ContentControlThemeFontFamily DIRECTLY (never
-		TypefacePlain/TypefaceBrand): alias chaining does not resolve on Uno
-		(spec 05, D16).
+		Unlike Material/Simple, which declare only the DefaultFontFamily root and
+		let SharedTypography.xaml's slot aliases (slot -> DefaultFontFamily)
+		cascade from it, Fluent's root is itself an ALIAS (to the platform token),
+		and an alias whose target is another alias does not resolve on Uno
+		(spec 05 D16, Given_FluentAliasResolution.When_AliasOfAlias_DoesNotResolve).
+		Every slot is therefore re-declared here aliased DIRECTLY to
+		ContentControlThemeFontFamily. The root token is declared too so a direct
+		DefaultFontFamily lookup under FluentTheme yields the platform font, and
+		so BaseTheme.DefaultFontFamily (a runtime setting) has a key to shadow —
+		its generated layer is merged above this dictionary and wins for every
+		key below.
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
@@ -26,9 +31,8 @@
 		<!-- DARK THEME (Default) -->
 		<ResourceDictionary x:Key="Default">
 
-			<!-- Root Typeface Tokens -->
-			<StaticResource x:Key="TypefacePlain" ResourceKey="ContentControlThemeFontFamily" />
-			<StaticResource x:Key="TypefaceBrand" ResourceKey="ContentControlThemeFontFamily" />
+			<!-- Root Typeface Token (platform default; slots below alias the target directly, see header) -->
+			<StaticResource x:Key="DefaultFontFamily" ResourceKey="ContentControlThemeFontFamily" />
 
 			<!-- DISPLAY -->
 			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />
@@ -66,9 +70,8 @@
 		<!-- LIGHT THEME -->
 		<ResourceDictionary x:Key="Light">
 
-			<!-- Root Typeface Tokens -->
-			<StaticResource x:Key="TypefacePlain" ResourceKey="ContentControlThemeFontFamily" />
-			<StaticResource x:Key="TypefaceBrand" ResourceKey="ContentControlThemeFontFamily" />
+			<!-- Root Typeface Token (platform default; slots below alias the target directly, see header) -->
+			<StaticResource x:Key="DefaultFontFamily" ResourceKey="ContentControlThemeFontFamily" />
 
 			<!-- DISPLAY -->
 			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="ContentControlThemeFontFamily" />

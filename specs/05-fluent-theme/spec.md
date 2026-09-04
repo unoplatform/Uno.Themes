@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Phases 1–3 **done**; Phase 4 **done (samples)** — dedicated `FluentSampleApp` head + `Design.Fluent` shared-UI support + Fluent templates across the full §5 alias surface (28 Fluent pages; only MediaTransportControls deferred). Verified: `ok=28/28` navigation sweep, CI-parity runtime suite unchanged at 300/1 (2026-07-15; deltas in `progress.md` review log). Remaining: MediaTransportControls sample, screenshot pass vs WinUI Gallery, Windows/WASM validation |
+| **Status** | Phases 1–3 **done**; Phase 4 **done (samples)** — dedicated `FluentSampleApp` head + `Design.Fluent` shared-UI support + Fluent templates across the full §5 alias surface (28 Fluent pages; only MediaTransportControls deferred). Verified: `ok=28/28` navigation sweep, CI-parity runtime suite unchanged at 300/1 (2026-07-15; deltas in `progress.md` review log). Remaining: MediaTransportControls sample, screenshot pass vs WinUI Gallery, Windows/WASM validation. **2026-09-04:** merged with `master` (#1697 `SeedColorMode`, #1707/#1710 `DefaultFontFamily`, #1701, #1699, #1715) and adapted — see `progress.md` Phase 6 and the gap audit there |
 | **Owner** | Steve Bilogan |
 | **Created** | 2026-07-14 |
 | **Related** | `specs/01-design-tokens/`, `specs/02-semantic-brushes/`, `specs/03-seed-color-palette/`, `.specify/specs/semantic-abstraction-layer/spec.md`, `doc/semantic-styles.md`, `doc/fluent-getting-started.md`, `specs/lessons.md` (eager `<StaticResource>` resolution) |
@@ -156,10 +156,10 @@ public class FluentTheme(ResourceDictionary colorOverride = null, ResourceDictio
     // consistent with the repo-wide opt-in decision (commit 09187371).
     protected override Color? DefaultPrimarySeed => null;
 
-    // When a consumer opts into a seed, preserve source chroma: Windows
-    // accent colors are often corporate colors that must not be re-saturated
-    // by the M3 minimum-chroma floor.
-    protected override bool UseHighFidelityColors => true;
+    // Seed generation mode: the shared SeedColorMode default (Fidelity — the
+    // seed's chroma is preserved, so corporate accent colors are not
+    // re-saturated). No override needed since #1697 made Fidelity the default;
+    // the accent cascade (§9) reads Colors.SeedColorMode and follows it.
 
     protected override string DefaultStylesSource => FluentConstants.ResourcePaths.MergedPages;
 
@@ -232,7 +232,7 @@ reload and readability; M-CODE is the insurance policy.
 | **D1** | Adapter library; never fork Fluent templates. | Forking duplicates Uno.UI/WinUI and drifts every WinUI release. Rejected: "Material-style" full restyle. |
 | **D2** | Package/assembly `Uno.Fluent.WinUI`, namespace `Uno.Fluent`, type `FluentTheme`. | Mirrors `Uno.Simple.WinUI`/`Uno.Simple`/`SimpleTheme` naming exactly. |
 | **D3** | `FluentTheme : BaseTheme`, layered exactly like `SimpleTheme` (palette via ctor `colorOverride`, styles via `DefaultStylesSource`). | Gets seed colors, tokens, hot reload, precedence for free; keeps one theme lifecycle to maintain. |
-| **D4** | `DefaultPrimarySeed => null` (no seed by default); `UseHighFidelityColors => true`. | Fluent's default colors are the platform's. Seed stays opt-in (consistent with 09187371). High fidelity because Windows accent/corporate colors must keep their chroma. |
+| **D4** | `DefaultPrimarySeed => null` (no seed by default); seed generation follows `Colors.SeedColorMode` (default `Fidelity` — originally expressed as `UseHighFidelityColors => true`, dropped 2026-09-04 when master made Fidelity the default and obsoleted the virtual). | Fluent's default colors are the platform's. Seed stays opt-in (consistent with 09187371). Fidelity because Windows accent/corporate colors must keep their chroma. The reverse mapping (§9) must use the **same** mode, or built-in controls and semantic brushes disagree on "Primary". |
 | **D5** | Color mapping is **role → Fluent token name** (normative), with concrete hexes captured from the running platform (Spike S2), not hand-transcribed. | Token names are the stable contract; hexes vary by WinUI version and are easy to get subtly wrong. |
 | **D6** | **DECIDED by S1 (2026-07-14): mechanism C** — the color palette is built in code (per-theme-branch token values resolved from `Application.Current.Resources` during `UpdateSource()`), never via per-branch XAML aliases. Mechanism A remains in use for *style* aliases only. **Narrowed 2026-08-11 (declarative-first):** mechanism C now covers only the *accent-derived* roles; the static per-branch neutrals are declarative (`ColorPalette.xaml`, transport-copied into the branches so accent + neutral roles share one branch dictionary). | S1 case 4 reproduced the `specs/lessons.md` failure mode: per-branch `<StaticResource>` color aliases resolve eagerly against the **ambient** theme, so both branches carry the same value. C is late-bound, branch-correct, and on Windows can read the live system accent. See `spike-results.md` §S1. |
 | **D7** | Typography rule: **where Fluent's type ramp has a counterpart slot, adopt its size/weight; where it doesn't, keep the shared (M3) size and apply Fluent weight conventions** (SemiBold for Display/Headline/Title/Label emphasis slots, Regular for Body/Caption). `CharacterSpacing = 0` everywhere. FontFamily = platform default via `ContentControlThemeFontFamily`. | Fluent's ramp has 8 slots, semantic has 19 — a pure projection would collapse slots into duplicates and destroy the app's visual hierarchy. Hybrid preserves progression while looking Fluent. |
@@ -614,7 +614,7 @@ source, 2026-07-14). All FluentTheme `*CharacterSpacing` = `0`. All
 | `CaptionMedium` | 12 / Medium | **12 / Regular** | = Fluent Caption |
 | `CaptionSmall` | 11 / Medium | **11 / Regular** | keep size |
 
-`TypefacePlain` and `TypefaceBrand` both alias `ContentControlThemeFontFamily`.
+The root token `DefaultFontFamily` aliases `ContentControlThemeFontFamily` (the `TypefacePlain`/`TypefaceBrand` pair it replaced was removed repo-wide by #1710). Because that root is itself an alias and alias chaining does not resolve on Uno (D16), `Fonts.xaml` re-declares every slot's `*FontFamily` aliased directly to the platform token instead of relying on `SharedTypography.xaml`'s slot → root cascade (unlike Material/Simple, whose root is a literal). `BaseTheme.DefaultFontFamily` (runtime setting, #1707) shadows all of them through the generated typeface layer.
 
 ### 7.3 TextBlock styles
 
@@ -659,13 +659,15 @@ correct contrast):
 
 | Fluent token | Tonal-palette tone |
 |---|---|
-| `SystemAccentColor` | Primary tone 40 |
+| `SystemAccentColor` | the generated light `PrimaryColor`: the seed verbatim under `SeedColorMode.Fidelity` (default), tone 40 under `TonalSpot` — so §9.3 holds in both modes (updated 2026-09-04 for #1697) |
 | `SystemAccentColorLight1` | tone 60 |
 | `SystemAccentColorLight2` | tone 70 |
 | `SystemAccentColorLight3` | tone 80 |
 | `SystemAccentColorDark1` | tone 30 |
 | `SystemAccentColorDark2` | tone 20 |
 | `SystemAccentColorDark3` | tone 10 |
+
+All tones are taken from the primary palette built with the theme's `SeedColorMode` (Fidelity: the seed's own chroma; TonalSpot: chroma floored at 48) — the same recipe `SeedColorPaletteGenerator` uses, so every shade agrees with the seed-generated semantic palette tone for tone. Known limitation: the shades are absolute tones, so for a seed darker than tone 30 the light-theme fill (`Dark1`) is *lighter* than the accent; Windows derives its shades relative to the accent's lightness. Tracked in `progress.md` (gap audit).
 
 ### 9.2 Why overriding `SystemAccentColor*` alone is not enough (D12)
 

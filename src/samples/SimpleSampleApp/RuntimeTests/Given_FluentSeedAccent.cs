@@ -23,6 +23,10 @@ public class Given_FluentSeedAccent
 	// A distinctive red that is clearly not any platform accent shade.
 	private static readonly Color SeedRed = Color.FromArgb(0xFF, 0xB0, 0x00, 0x20);
 
+	// A muted (low-chroma) seed: TonalSpot's minimum-chroma floor visibly moves it,
+	// so the two generation modes produce different accents for it.
+	private static readonly Color MutedSeed = Color.FromArgb(0xFF, 0x6B, 0x72, 0x80);
+
 	// Distinctive override colors, matching RuntimeTests/FluentColorOverride.xaml.
 	private static readonly Color OverrideBlue = Color.FromArgb(0xFF, 0x21, 0x96, 0xF3);
 	private static readonly Color OverrideGreen = Color.FromArgb(0xFF, 0x66, 0xBB, 0x6A);
@@ -33,13 +37,15 @@ public class Given_FluentSeedAccent
 		Application.Current.RequestedTheme == ApplicationTheme.Dark;
 
 	/// <summary>
-	/// Expected tone from the seed's palette, matching FluentTheme's
-	/// high-fidelity generation (seed chroma preserved, no M3 minimum floor).
+	/// Expected tone from the seed's primary palette under a generation mode — the
+	/// recipe SeedColorPaletteGenerator applies: Fidelity (the default) keeps the
+	/// seed's chroma, TonalSpot enforces M3's minimum of 48.
 	/// </summary>
-	private static Color Tone(Color seed, int tone)
+	private static Color Tone(Color seed, int tone, SeedColorMode mode = SeedColorMode.Fidelity)
 	{
 		var hct = HctColor.FromArgb((seed.A << 24) | (seed.R << 16) | (seed.G << 8) | seed.B);
-		var argb = new TonalPalette(hct.Hue, hct.Chroma).GetArgb(tone);
+		var chroma = mode == SeedColorMode.TonalSpot ? Math.Max(hct.Chroma, 48) : hct.Chroma;
+		var argb = new TonalPalette(hct.Hue, chroma).GetArgb(tone);
 		return Color.FromArgb(
 			(byte)((argb >> 24) & 0xFF),
 			(byte)((argb >> 16) & 0xFF),
@@ -69,13 +75,42 @@ public class Given_FluentSeedAccent
 		return (Color)value;
 	}
 
+	/// <summary>
+	/// The first definition of <paramref name="key"/> for <paramref name="branchKey"/>
+	/// in the theme's resource graph, searching later (winning) merged dictionaries
+	/// first — i.e. the value the framework resolves for that theme branch. Lets a
+	/// test assert BOTH branches regardless of the ambient app theme
+	/// (see specs/lessons.md, "dark-branch rendering is not testable in the CI host").
+	/// </summary>
+	private static Color? FindBranchColor(ResourceDictionary dictionary, string branchKey, string key)
+	{
+		if (dictionary.ThemeDictionaries.TryGetValue(branchKey, out var branchValue)
+			&& branchValue is ResourceDictionary branch
+			&& branch.TryGetValue(key, out var value)
+			&& value is Color color)
+		{
+			return color;
+		}
+
+		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
+		{
+			if (FindBranchColor(dictionary.MergedDictionaries[i], branchKey, key) is { } nested)
+			{
+				return nested;
+			}
+		}
+
+		return null;
+	}
+
 	// ─────────────────────────────────────────────────────────────────────
 	// Shade set (spec §9.1): SystemAccentColor* follow the tonal palette.
+	// The base accent is the seed itself under the default Fidelity mode
+	// (the generated light PrimaryColor IS the seed) — see the dedicated test.
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("SystemAccentColor", 40)]
 	[DataRow("SystemAccentColorLight1", 60)]
 	[DataRow("SystemAccentColorLight2", 70)]
 	[DataRow("SystemAccentColorLight3", 80)]
@@ -92,6 +127,49 @@ public class Given_FluentSeedAccent
 		// The override is scoped to the theme: the app-level accent must be untouched.
 		Assert.AreNotEqual(Tone(SeedRed, tone), GetColor(Application.Current.Resources, shadeKey),
 			$"a container-scoped seeded FluentTheme must not leak {shadeKey} to app scope");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SeedSet_SystemAccentColorIsTheSeed()
+	{
+		var container = CreateSeededContainer(SeedRed);
+
+		// Fidelity (the default SeedColorMode) pins the generated light PrimaryColor
+		// to the seed verbatim, so the base accent must be the seed too (§9.3).
+		Assert.AreEqual(SeedRed, GetColor(container.Resources, "SystemAccentColor"),
+			"under the default Fidelity mode, SystemAccentColor must be the seed verbatim");
+		Assert.AreNotEqual(SeedRed, GetColor(Application.Current.Resources, "SystemAccentColor"),
+			"a container-scoped seeded FluentTheme must not leak SystemAccentColor to app scope");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SeedSetInTonalSpotMode_AccentFollowsBoostedPalette()
+	{
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { PrimarySeed = MutedSeed, SeedColorMode = SeedColorMode.TonalSpot };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		// TonalSpot: the M3 recipe — tone 40 of the chroma-boosted palette — is
+		// both the generated light PrimaryColor and the base accent; a muted seed
+		// is visibly re-saturated (sanity: the two modes must differ here).
+		var expectedAccent = Tone(MutedSeed, 40, SeedColorMode.TonalSpot);
+		Assert.AreNotEqual(MutedSeed, expectedAccent,
+			"sanity: TonalSpot must move a muted seed, or this test proves nothing");
+
+		Assert.AreEqual(expectedAccent, GetColor(container.Resources, "SystemAccentColor"),
+			"under TonalSpot, SystemAccentColor must be tone 40 of the chroma-boosted palette");
+		Assert.AreEqual(Tone(MutedSeed, 80, SeedColorMode.TonalSpot), GetColor(container.Resources, "SystemAccentColorLight3"),
+			"under TonalSpot, the shades must come from the chroma-boosted palette too");
+
+		// Forward/reverse agreement (§9.3) holds in this mode as well.
+		var expectedAccentKey = IsAmbientDark ? "SystemAccentColorLight3" : "SystemAccentColor";
+		Assert.AreEqual(
+			GetColor(container.Resources, expectedAccentKey),
+			GetColor(container.Resources, "PrimaryColor"),
+			$"the TonalSpot semantic PrimaryColor and the reverse-mapped {expectedAccentKey} must agree (§9.3)");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
@@ -181,14 +259,14 @@ public class Given_FluentSeedAccent
 	{
 		var appDictionaries = Application.Current.Resources.MergedDictionaries;
 		var platformAccent = GetColor(Application.Current.Resources, "SystemAccentColor");
-		Assert.AreNotEqual(Tone(SeedRed, 40), platformAccent,
-			"sanity: the platform accent must differ from the seed tone for this test to be meaningful");
+		Assert.AreNotEqual(SeedRed, platformAccent,
+			"sanity: the platform accent must differ from the seed for this test to be meaningful");
 
 		var theme = CreateSeededTheme(SeedRed);
 		appDictionaries.Add(theme);
 		try
 		{
-			Assert.AreEqual(Tone(SeedRed, 40), GetColor(Application.Current.Resources, "SystemAccentColor"),
+			Assert.AreEqual(SeedRed, GetColor(Application.Current.Resources, "SystemAccentColor"),
 				"the seeded accent should be active before clearing");
 
 			// In-place clear: everything the THEME owns restores immediately.
@@ -242,15 +320,39 @@ public class Given_FluentSeedAccent
 	{
 		var container = CreateSeededContainer(SeedRed);
 
-		// Seeded semantic PrimaryColor: tone 40 (light branch) / tone 80 (dark
-		// branch) — which the reverse mapping exposes as SystemAccentColor and
-		// SystemAccentColorLight3 respectively.
+		// Seeded semantic PrimaryColor: the seed verbatim (light branch, Fidelity)
+		// / tone 80 (dark branch) — which the reverse mapping exposes as
+		// SystemAccentColor and SystemAccentColorLight3 respectively.
 		var expectedAccentKey = IsAmbientDark ? "SystemAccentColorLight3" : "SystemAccentColor";
 
 		Assert.AreEqual(
 			GetColor(container.Resources, expectedAccentKey),
 			GetColor(container.Resources, "PrimaryColor"),
 			$"the seeded semantic PrimaryColor and the reverse-mapped {expectedAccentKey} must agree (§9.3)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_SeedSet_ForwardAndReverseFlowsAgree_InBothBranches()
+	{
+		// The ambient-branch test above can only see one branch per host (the
+		// CI host runs Light, a dark-mode developer machine runs Dark). Compare
+		// the generated palette's OWN branch values against the (theme-invariant)
+		// reverse-mapped shades so the contract is proven for both branches in
+		// either host.
+		var theme = CreateSeededTheme(SeedRed);
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var lightPrimary = FindBranchColor(theme, "Light", "PrimaryColor");
+		var darkPrimary = FindBranchColor(theme, "Default", "PrimaryColor");
+		Assert.IsNotNull(lightPrimary, "the seeded theme should carry a Light-branch PrimaryColor");
+		Assert.IsNotNull(darkPrimary, "the seeded theme should carry a Default (dark) branch PrimaryColor");
+
+		Assert.AreEqual(lightPrimary, GetColor(container.Resources, "SystemAccentColor"),
+			"the LIGHT semantic PrimaryColor must equal the reverse-mapped base accent (§9.3)");
+		Assert.AreEqual(darkPrimary, GetColor(container.Resources, "SystemAccentColorLight3"),
+			"the DARK semantic PrimaryColor (tone 80) must equal the reverse-mapped Light3 shade (§9.3)");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────

@@ -14,7 +14,7 @@ A single root typeface token cascades to all type-scale keys:
 
 | Key                 | Default                                                       | Role             |
 |---------------------|---------------------------------------------------------------|------------------|
-| `DefaultFontFamily` | Segoe UI (Material: Roboto, Simple: Inter, Cupertino: SF Pro) | Every type scale |
+| `DefaultFontFamily` | Segoe UI (Material: Roboto, Simple: Inter, Cupertino: SF Pro, Fluent: the platform default via `ContentControlThemeFontFamily`) | Every type scale |
 
 Per-scale variation is expressed through the `*FontWeight` tokens, not through separate font
 families: the root points at a single family whose weights resolve from one reference (a variable
