@@ -83,8 +83,9 @@ public class FluentTheme : BaseTheme
 
 	// Single-entry cache for the reverse accent mapping (spec 05 §9): seed
 	// changes are rare, but UpdateSource runs on every theme-property change —
-	// don't re-solve the tonal palette when the seed hasn't moved.
-	private (Color Seed, ResourceDictionary Dictionary)? _accentOverride;
+	// don't re-solve the tonal palette when neither the seed nor the generation
+	// mode has moved.
+	private (Color Seed, SeedColorMode Mode, ResourceDictionary Dictionary)? _accentOverride;
 
 	/// <summary>
 	/// Initializes the Fluent theme resources with the default palette and typography.
@@ -107,16 +108,15 @@ public class FluentTheme : BaseTheme
 
 	/// <summary>
 	/// Fluent's default colors come from the platform (accent + neutrals), not from
-	/// a generated seed palette — seed color generation stays opt-in.
+	/// a generated seed palette — seed color generation stays opt-in. When a
+	/// consumer opts into a seed, the generation recipe is the shared default
+	/// (<see cref="SeedColorMode.Fidelity"/>: the seed's chroma is preserved, so
+	/// muted corporate accent colors keep their character); select
+	/// <see cref="SeedColorMode.TonalSpot"/> on <see cref="BaseTheme.Colors"/> for
+	/// Material's vibrant recipe. The accent cascade (spec 05 §9) follows the same
+	/// mode, so built-in controls and semantic brushes agree on what "Primary" is.
 	/// </summary>
 	protected override Color? DefaultPrimarySeed => null;
-
-	/// <summary>
-	/// When a consumer opts into a seed, high-fidelity mode preserves the source
-	/// chroma: Windows accent colors are often corporate colors that must not be
-	/// re-saturated by the M3 minimum-chroma floor.
-	/// </summary>
-	protected override bool UseHighFidelityColors => true;
 
 	/// <inheritdoc />
 	protected override string DefaultStylesSource => FluentConstants.ResourcePaths.MergedPages;
@@ -163,7 +163,9 @@ public class FluentTheme : BaseTheme
 			// The Fluent tokens were unreachable when this theme was constructed
 			// (e.g. XamlControlsResources merged after FluentTheme, against the
 			// documented ordering) — retry on every rebuild so the palette heals
-			// once the tokens become available.
+			// once the tokens become available. The *Color keys resolve through
+			// the live merge immediately; the generated semantic brushes were
+			// swept before this hook runs and catch up on the following rebuild.
 			FluentColorPalette.TryPopulate(palette);
 		}
 
@@ -171,6 +173,12 @@ public class FluentTheme : BaseTheme
 		AddThemeDictionary(_bundleAliasStyles);
 
 		var effectiveSeed = Colors?.PrimarySeed ?? DefaultPrimarySeed;
+
+		// The recipe the base palette is generated with for this seed (the DP
+		// default is Fidelity). The reverse mapping must derive its tones the
+		// same way, or the built-in accent and the semantic PrimaryColor drift
+		// apart (spec 05 §9.3).
+		var seedColorMode = Colors?.SeedColorMode ?? SeedColorMode.Fidelity;
 
 		// The consumer color override, whatever channel supplied it —
 		// Colors.OverrideDictionary / Colors.OverrideSource and the obsolete
@@ -201,16 +209,16 @@ public class FluentTheme : BaseTheme
 			// without a reference change, so override-driven passes rebuild.
 			if (consumerOverride is null && effectiveSeed is { } seed)
 			{
-				if (_accentOverride is not { } cached || cached.Seed != seed)
+				if (_accentOverride is not { } cached || cached.Seed != seed || cached.Mode != seedColorMode)
 				{
-					_accentOverride = (seed, FluentAccentPalette.Build(seed, lightBasis: null, darkBasis: null, consumerOverride: null));
+					_accentOverride = (seed, seedColorMode, FluentAccentPalette.Build(seed, seedColorMode, lightBasis: null, darkBasis: null, consumerOverride: null));
 				}
 
 				AddThemeDictionary(_accentOverride.Value.Dictionary);
 			}
 			else
 			{
-				AddThemeDictionary(FluentAccentPalette.Build(effectiveSeed, lightAccentBasis, darkAccentBasis, consumerOverride));
+				AddThemeDictionary(FluentAccentPalette.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
 			}
 		}
 
@@ -223,14 +231,12 @@ public class FluentTheme : BaseTheme
 		// mutate without a reference change, so no cache here — it is a handful
 		// of brushes and passes only run on theme-property changes).
 		AddThemeDictionary(_lightweightDefaults);
-		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, lightAccentBasis, darkAccentBasis, consumerOverride));
+		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
 
-		// Base typography ships in the Source bundle (BaseDictionaries.xaml); only a
-		// consumer-supplied font override is layered dynamically on top to shadow it.
-		if (FontOverrideDictionary is { } fontOverride)
-		{
-			AddThemeDictionary(fontOverride);
-		}
+		// Base typography ships in the Source bundle (BaseDictionaries.xaml). A
+		// consumer font override is NOT merged here: BaseTheme.UpdateSource resolves
+		// and merges FontOverrideDictionary itself, last, so it is re-read from its
+		// Source on hot reload and wins over the generated DefaultFontFamily layer.
 	}
 
 	private void EnsureBundleStyleAliases()

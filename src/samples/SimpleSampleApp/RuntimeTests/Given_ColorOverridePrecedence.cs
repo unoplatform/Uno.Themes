@@ -181,7 +181,7 @@ public class Given_ColorOverridePrecedence
 		Assert.AreNotEqual((Color)unseededValue, (Color)seededValue,
 			"a seed must take precedence over the code-built Fluent palette");
 
-		// Fluent and Simple share the seed pipeline (high-fidelity generation, no
+		// Fluent and Simple share the seed pipeline (the default SeedColorMode, no
 		// default seed) — the same seed must produce the same PrimaryColor.
 		var simpleSeeded = new SimpleTheme();
 		simpleSeeded.Colors = new ThemeColors { PrimarySeed = SeedPurple };

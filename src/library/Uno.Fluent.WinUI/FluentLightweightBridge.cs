@@ -1,8 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
-using Uno.Themes.ColorGeneration;
-using Uno.Themes.ColorGeneration.Hct;
+using Uno.Themes;
 
 #if WinUI
 using Microsoft.UI.Xaml;
@@ -188,12 +187,13 @@ internal static class FluentLightweightBridge
 	/// semantic key found in <paramref name="consumerOverride"/>.
 	/// </summary>
 	/// <param name="seed">The effective primary seed, when one is active — the accent-fill defaults follow it (tones 30/70, matching FluentAccentPalette).</param>
+	/// <param name="seedColorMode">The generation mode the seed palette uses; the fill tones are taken from the same-mode palette.</param>
 	/// <param name="lightAccentBasis">The light-branch PrimaryColor override, when set — becomes the accent fill verbatim, taking precedence over the seed (matching FluentAccentPalette).</param>
 	/// <param name="darkAccentBasis">The dark-branch PrimaryColor override, when set.</param>
 	/// <param name="consumerOverride">The consumer's <c>Colors.OverrideDictionary</c>, when set.</param>
-	internal static ResourceDictionary Build(Color? seed, Color? lightAccentBasis, Color? darkAccentBasis, ResourceDictionary? consumerOverride)
+	internal static ResourceDictionary Build(Color? seed, SeedColorMode seedColorMode, Color? lightAccentBasis, Color? darkAccentBasis, ResourceDictionary? consumerOverride)
 	{
-		var (lightFill, darkFill) = ResolveAccentFill(seed, lightAccentBasis, darkAccentBasis);
+		var (lightFill, darkFill) = ResolveAccentFill(seed, seedColorMode, lightAccentBasis, darkAccentBasis);
 
 		var light = BuildAccentDefaults(lightFill);
 		var dark = BuildAccentDefaults(darkFill);
@@ -217,14 +217,14 @@ internal static class FluentLightweightBridge
 	/// spike S4). Null when the platform shades are unreachable (no XCR): the
 	/// Filled background defaults are then skipped, graceful degradation.
 	/// </summary>
-	private static (Color? Light, Color? Dark) ResolveAccentFill(Color? seed, Color? lightBasis, Color? darkBasis)
+	private static (Color? Light, Color? Dark) ResolveAccentFill(Color? seed, SeedColorMode seedColorMode, Color? lightBasis, Color? darkBasis)
 	{
 		Color? seedLight = null;
 		Color? seedDark = null;
 		if (seed is { } s && (lightBasis is null || darkBasis is null))
 		{
-			var hct = HctColor.FromArgb((s.A << 24) | (s.R << 16) | (s.G << 8) | s.B);
-			var palette = new TonalPalette(hct.Hue, hct.Chroma);
+			// Same-mode palette as the accent cascade and the semantic palette.
+			var palette = FluentAccentPalette.PaletteOf(s, seedColorMode);
 			seedLight = FromArgb(palette.GetArgb(30));
 			seedDark = FromArgb(palette.GetArgb(70));
 		}
