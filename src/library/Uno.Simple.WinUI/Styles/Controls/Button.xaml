@@ -31,6 +31,9 @@
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
 
+			<!-- Typeface alias: themed so the generated font layer can shadow it (see BaseTheme.FontFamilyAliasKeys). -->
+			<StaticResource x:Key="SimpleButtonFontFamily" ResourceKey="DefaultFontFamily" />
+
 			<!-- ── FilledButton (Primary) — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
 			<StaticResource x:Key="FilledButtonForegroundPointerOver" ResourceKey="OnPrimaryBrush" />
@@ -102,6 +105,9 @@
 
 		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
+
+			<!-- Typeface alias: themed so the generated font layer can shadow it (see BaseTheme.FontFamilyAliasKeys). -->
+			<StaticResource x:Key="SimpleButtonFontFamily" ResourceKey="DefaultFontFamily" />
 
 			<!-- ── FilledButton (Primary) — semantic keys (source of truth) ── -->
 			<StaticResource x:Key="FilledButtonForeground" ResourceKey="OnPrimaryBrush" />
@@ -184,8 +190,12 @@
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Layout / sizing resources (theme-agnostic) -->
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<<<<<<< HEAD
 	<StaticResource x:Key="SimpleButtonFontFamily" ResourceKey="TypefaceBrand" />
 	<x:String x:Key="SimpleButtonFontWeight">Normal</x:String>
+=======
+	<x:String x:Key="SimpleButtonFontWeight">Medium</x:String>
+>>>>>>> 2bee48e (fix(simple): declare the button typeface aliases inside ThemeDictionaries)
 
 	<!-- ═══════════════════════════════════════════════════════════════════════ -->
 	<!-- Base style — shared setters (no template) -->
