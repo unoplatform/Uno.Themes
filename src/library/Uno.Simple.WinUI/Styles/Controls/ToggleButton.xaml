@@ -153,8 +153,8 @@
 		<Setter Property="FontSize" Value="{StaticResource LabelLargeFontSize}" />
 		<Setter Property="FontWeight" Value="{StaticResource SimpleToggleButtonFontWeight}" />
 		<Setter Property="MinHeight" Value="{StaticResource ControlHeightMedium}" />
-		<Setter Property="Padding" Value="{StaticResource SimpleSpace300Thickness}" />
-		<Setter Property="CornerRadius" Value="{StaticResource SimpleToggleButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSpace300Thickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleToggleButtonCornerRadius}" />
 		<Setter Property="BorderThickness" Value="{StaticResource SimpleToggleButtonBorderThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Left" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -290,7 +290,7 @@
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									Spacing="{StaticResource SimpleToggleButtonIconSpacing}">
+									Spacing="{ThemeResource SimpleToggleButtonIconSpacing}">
 
 							<ContentPresenter x:Name="LeadingIconPresenter"
 											  Content="{Binding Path=(ut:ControlExtensions.LeadingIcon), RelativeSource={RelativeSource TemplatedParent}}"
@@ -329,8 +329,8 @@
 		<Setter Property="MinWidth" Value="{StaticResource SimpleIconLarge}" />
 		<Setter Property="MaxHeight" Value="{StaticResource SimpleIconLarge}" />
 		<Setter Property="MaxWidth" Value="{StaticResource SimpleIconLarge}" />
-		<Setter Property="Padding" Value="{StaticResource SimpleSpace200Thickness}" />
-		<Setter Property="CornerRadius" Value="{StaticResource SimpleIconButtonCornerRadius}" />
+		<Setter Property="Padding" Value="{ThemeResource SimpleSpace200Thickness}" />
+		<Setter Property="CornerRadius" Value="{ThemeResource SimpleIconButtonCornerRadius}" />
 		<Setter Property="BorderThickness" Value="{StaticResource SimpleIconButtonBorderThickness}" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />

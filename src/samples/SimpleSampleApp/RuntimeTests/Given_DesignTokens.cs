@@ -421,4 +421,78 @@ public class Given_DesignTokens
 			"Simple button MinHeight should be ControlHeightMedium (40)");
 	}
 
+	// ═══════════════════════════════════════════════════════════════════════
+	// 10. RUNTIME SEAM — the scale measures move controls, not only tokens.
+	// Regenerated Space*/Radius* keys reach a control only if its style reads them through
+	// {ThemeResource}; a {StaticResource} setter snapshots the value at parse time. Asserted on
+	// the application theme (the scope a designer edits), restored in finally.
+	// ═══════════════════════════════════════════════════════════════════════
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_ScaleMeasuresChangeAtRuntime_Then_RealizedButtonFollows()
+	{
+		var theme = SemanticThemeHelper.GetTheme();
+		Assert.IsNotNull(theme, "The Simple sample app must have a BaseTheme in its application resources.");
+
+		var originalSpacing = theme.DefaultSpacing;
+		var originalRadius = theme.DefaultCornerRadius;
+		var originalDensity = theme.DefaultDensity;
+
+		var root = new Grid();
+		var button = new Button
+		{
+			Content = "probe",
+			Style = (Style)Application.Current.Resources["SimpleFilledButtonStyle"],
+		};
+		root.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = root;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		try
+		{
+			// Padding = Space300Thickness, CornerRadius = Radius200CornerRadius at the app's defaults.
+			var paddingBefore = button.Padding;
+			var radiusBefore = button.CornerRadius;
+
+			theme.DefaultSpacing = 10;          // Space300 = 30 at Regular
+			theme.DefaultCornerRadius = 1;      // Radius200 = 2
+			theme.DefaultDensity = Density.Compact; // Space300 = 10 × 0.75 × 3 = 22.5
+
+			// Setters re-resolve on a theme-change pass — the public route to content already realized.
+			root.RequestedTheme = ElementTheme.Light;
+			await UnitTestsUIContentHelper.WaitForIdle();
+			root.RequestedTheme = ElementTheme.Dark;
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(new Thickness(22.5), button.Padding,
+				$"A realized button must re-resolve Space300Thickness after the spacing changes (was {paddingBefore}).");
+			Assert.AreEqual(new CornerRadius(2), button.CornerRadius,
+				$"A realized button must re-resolve Radius200CornerRadius after the radius changes (was {radiusBefore}).");
+
+			// A control created after the change picks the new scale up without any pass.
+			var later = new Button
+			{
+				Content = "later",
+				Style = (Style)Application.Current.Resources["SimpleFilledButtonStyle"],
+			};
+			root.Children.Add(later);
+			await UnitTestsUIContentHelper.WaitForLoaded(later);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.AreEqual(new Thickness(22.5), later.Padding, "A button created after the change must use the new spacing.");
+			Assert.AreEqual(new CornerRadius(2), later.CornerRadius, "A button created after the change must use the new radius.");
+		}
+		finally
+		{
+			theme.DefaultSpacing = originalSpacing;
+			theme.DefaultCornerRadius = originalRadius;
+			theme.DefaultDensity = originalDensity;
+			root.RequestedTheme = ElementTheme.Default;
+			UnitTestsUIContentHelper.Content = null;
+		}
+	}
+
 }

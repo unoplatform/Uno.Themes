@@ -172,7 +172,7 @@
 										  Content="{TemplateBinding Header}"
 										  ContentTemplate="{TemplateBinding HeaderTemplate}"
 										  Foreground="{ThemeResource ToggleSwitchContentForeground}"
-										  Margin="{StaticResource SimpleToggleSwitchHeaderMargin}"
+										  Margin="{ThemeResource SimpleToggleSwitchHeaderMargin}"
 										  VerticalAlignment="Top"
 										  Visibility="Collapsed" />
 
@@ -188,8 +188,8 @@
 							<Rectangle x:Name="OuterBorder"
 									   Width="{StaticResource SimpleToggleSwitchTrackWidth}"
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
-									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchTrackRadius}"
 									   Fill="{ThemeResource ToggleSwitchOuterBorderFill}"
 									   Stroke="{ThemeResource ToggleSwitchOuterBorderStroke}"
 									   StrokeThickness="{StaticResource SimpleToggleSwitchStrokeThickness}"
@@ -199,8 +199,8 @@
 							<Rectangle x:Name="SwitchKnobBounds"
 									   Width="{StaticResource SimpleToggleSwitchTrackWidth}"
 									   Height="{StaticResource SimpleToggleSwitchTrackHeight}"
-									   RadiusX="{StaticResource SimpleToggleSwitchTrackRadius}"
-									   RadiusY="{StaticResource SimpleToggleSwitchTrackRadius}"
+									   RadiusX="{ThemeResource SimpleToggleSwitchTrackRadius}"
+									   RadiusY="{ThemeResource SimpleToggleSwitchTrackRadius}"
 									   Fill="{ThemeResource ToggleSwitchKnobBoundsFill}"
 									   HorizontalAlignment="Center"
 									   Opacity="0" />
@@ -214,8 +214,8 @@
 								<Grid x:Name="SwitchKnobOn"
 									  HorizontalAlignment="Left">
 									<Ellipse x:Name="KnobOn"
-											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
+											 Width="{ThemeResource SimpleToggleSwitchThumbSize}"
+											 Height="{ThemeResource SimpleToggleSwitchThumbSize}"
 											 Fill="{ThemeResource ToggleSwitchKnobOnFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOnMargin}"
 											 HorizontalAlignment="Left"
@@ -227,8 +227,8 @@
 								<Grid x:Name="SwitchKnobOff"
 									  HorizontalAlignment="Left">
 									<Ellipse x:Name="KnobOff"
-											 Width="{StaticResource SimpleToggleSwitchThumbSize}"
-											 Height="{StaticResource SimpleToggleSwitchThumbSize}"
+											 Width="{ThemeResource SimpleToggleSwitchThumbSize}"
+											 Height="{ThemeResource SimpleToggleSwitchThumbSize}"
 											 Fill="{ThemeResource ToggleSwitchKnobOffFill}"
 											 Margin="{StaticResource SimpleToggleSwitchThumbOffMargin}"
 											 HorizontalAlignment="Left"

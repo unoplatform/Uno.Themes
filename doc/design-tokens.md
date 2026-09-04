@@ -92,12 +92,10 @@ This generates all `Radius*` / `Space*` tokens as multiples of the base value. T
 
 For spacing, the [density mode](#density-modes) (`DefaultDensity`) composes with the base unit rather than replacing it: the effective spacing base is `DefaultSpacing × density factor` (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). With the default base of 4, the modes yield 3 / 4 / 5.
 
-> [!IMPORTANT]
-> `DefaultCornerRadius`, `DefaultSpacing`, and `DefaultDensity` are **construction-time settings**. Set them where the theme is declared — normally `App.xaml` — and treat them as fixed for the lifetime of the theme.
+> [!NOTE]
+> `DefaultCornerRadius`, `DefaultSpacing`, and `DefaultDensity` are **runtime-settable**. Assigning one regenerates the `Radius*` / `Space*` token resources, and controls created afterwards pick the new scale up through their styles.
 >
-> Assigning them later does regenerate the `Radius*` and `Space*` token resources, but it does **not** restyle controls: neither the ones already on screen nor ones created afterwards. Unlike colors — which *can* change live, see [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes) — these tokens are `CornerRadius` / `Thickness` / `double` **values**, and the per-control keys that consume them (`ButtonCornerRadius`, `ButtonPadding`, …) are resolved once when the theme's control-style dictionaries are first parsed. There is no live instance to update, so the new value never reaches the control templates.
->
-> If you need to offer density or shape as a user setting, change the property and then recreate the root content (or re-navigate) so the styles are applied fresh.
+> Controls **already on screen** keep the values they resolved when they loaded: these tokens are `CornerRadius` / `Thickness` / `double` **values**, so unlike a seed color — whose brushes are live instances the theme rewrites in place, see [Runtime Seed Color Changes](seed-colors.md#runtime-seed-color-changes) — there is nothing to mutate. Their styles read the tokens through `{ThemeResource}`, so a theme-change pass re-resolves them: toggle the root element's `RequestedTheme` away from its `ActualTheme` and back, or recreate the root content.
 
 ### Via Lightweight Styling
 
@@ -115,12 +113,12 @@ To override individual tokens without changing the whole scale, use standard XAM
 
 | Property              | Type         | Description                                                                                                                                 |
 |-----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Construction-time.                                                             |
-| `DefaultSpacing`      | `double`     | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Construction-time.                   |
-| `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Construction-time.                           |
+| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Runtime-settable.                                                              |
+| `DefaultSpacing`      | `double`     | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Runtime-settable.                    |
+| `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |
 
-These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). The three scale measures are construction-time settings — see the note above. `DefaultFontFamily` and the color configuration on the separate `Colors` property (`ThemeColors`) *do* support runtime changes — see [Typography Font Swap](#typography-font-swap) and [Seed Color Palette](seed-colors.md).
+These properties are defined on `BaseTheme` and inherited by `MaterialTheme`, `SimpleTheme`, and their toolkit wrappers (`MaterialToolkitTheme`, `SimpleToolkitTheme`). All four regenerate their tokens when assigned at runtime; content already on screen re-resolves on a theme-change pass — see the note above and [Typography Font Swap](#typography-font-swap). The color configuration on the separate `Colors` property (`ThemeColors`) changes live — see [Seed Color Palette](seed-colors.md).
 
 ### Density Modes
 
@@ -141,7 +139,7 @@ It is a *mode*, not a value: it scales the `DefaultSpacing` base unit (effective
 <SimpleTheme xmlns="using:Uno.Simple" DefaultSpacing="6" DefaultDensity="Comfy" />
 ```
 
-Pick the density where the theme is declared. Switching it at runtime does not restyle existing or newly-created controls — see [Via Scalar Properties](#via-scalar-properties).
+Switching it at runtime regenerates the `Space*` tokens; controls created afterwards use them, and controls already on screen re-resolve on a theme-change pass — see [Via Scalar Properties](#via-scalar-properties).
 
 ### Typography Font Swap
 
@@ -158,11 +156,12 @@ overridden individually. Left unset, the design system's own typeface stands. Po
 that resolves multiple weights — a variable font, or a font shipping a font manifest — so the
 per-scale `*FontWeight` tokens (`DisplayLargeFontWeight`, …) render as designed.
 
-Unlike the scale measures above, this is **runtime-settable**: assigning it regenerates the derived
+Like the scale measures above, this is **runtime-settable**: assigning it regenerates the derived
 family keys, and text laid out afterwards picks the new font up. Text **already on screen** keeps the
 family it resolved when it loaded — a `FontFamily` is an immutable value, so unlike a seed color
 (whose brushes are live instances the theme rewrites in place) there is nothing to mutate. To move
-text that is already rendered, recreate the root content, or trigger the application-wide resource
+text that is already rendered, run a theme-change pass (toggle the root's `RequestedTheme` away from
+its `ActualTheme` and back), recreate the root content, or trigger the application-wide resource
 refresh a hot reload performs.
 
 > [!NOTE]

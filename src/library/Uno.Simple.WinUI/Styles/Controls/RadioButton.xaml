@@ -189,23 +189,23 @@
 						<!-- Radio Circle -->
 						<Grid x:Name="RadioContainer"
 							  Grid.Column="0"
-							  Width="{StaticResource SimpleRadioButtonSize}"
-							  Height="{StaticResource SimpleRadioButtonSize}"
+							  Width="{ThemeResource SimpleRadioButtonSize}"
+							  Height="{ThemeResource SimpleRadioButtonSize}"
 							  HorizontalAlignment="Center"
 							  VerticalAlignment="Center">
 
 							<!-- Unchecked outer circle -->
 							<Ellipse x:Name="RadioBorder"
-									 Width="{StaticResource SimpleRadioButtonSize}"
-									 Height="{StaticResource SimpleRadioButtonSize}"
+									 Width="{ThemeResource SimpleRadioButtonSize}"
+									 Height="{ThemeResource SimpleRadioButtonSize}"
 									 Fill="{ThemeResource RadioButtonOuterEllipseFill}"
 									 Stroke="{ThemeResource RadioButtonOuterEllipseStroke}"
 									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}" />
 
 							<!-- Checked outer circle (hidden by default) -->
 							<Ellipse x:Name="RadioBorder_Checked"
-									 Width="{StaticResource SimpleRadioButtonSize}"
-									 Height="{StaticResource SimpleRadioButtonSize}"
+									 Width="{ThemeResource SimpleRadioButtonSize}"
+									 Height="{ThemeResource SimpleRadioButtonSize}"
 									 Fill="{ThemeResource RadioButtonOuterEllipseCheckedFill}"
 									 Stroke="{ThemeResource RadioButtonOuterEllipseCheckedStroke}"
 									 StrokeThickness="{StaticResource SimpleRadioButtonStrokeThickness}"
@@ -213,8 +213,8 @@
 
 							<!-- Inner dot (hidden by default) -->
 							<Ellipse x:Name="RadioDot"
-									 Width="{StaticResource SimpleRadioButtonDotSize}"
-									 Height="{StaticResource SimpleRadioButtonDotSize}"
+									 Width="{ThemeResource SimpleRadioButtonDotSize}"
+									 Height="{ThemeResource SimpleRadioButtonDotSize}"
 									 Fill="{ThemeResource OnPrimaryBrush}"
 									 HorizontalAlignment="Center"
 									 VerticalAlignment="Center"
@@ -224,7 +224,7 @@
 						<!-- Content (label) -->
 						<ContentPresenter x:Name="ContentPresenter"
 										  Grid.Column="1"
-										  Margin="{StaticResource SimpleRadioButtonContentMargin}"
+										  Margin="{ThemeResource SimpleRadioButtonContentMargin}"
 										  Content="{TemplateBinding Content}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
