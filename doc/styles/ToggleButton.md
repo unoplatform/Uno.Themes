@@ -41,7 +41,7 @@ IsDefaultStyle\*: Styles in this column will be set as the default implicit styl
 | `TextToggleButtonForegroundIndeterminatePointerOver`  | `SolidColorBrush` | `PrimaryBrush`                  |
 | `TextToggleButtonForegroundIndeterminatePressed`      | `SolidColorBrush` | `PrimaryBrush`                  |
 | `TextToggleButtonForegroundIndeterminateDisabled`     | `SolidColorBrush` | `OnSurfaceLowBrush`             |
-| `TextToggleButtonFontFamily`                          | `FontFamily`      | `MaterialRegularFontFamily`     |
+| `TextToggleButtonFontFamily`                          | `FontFamily`      | `DefaultFontFamily`             |
 | `TextToggleButtonFontSize`                            | `Double`          | `LabelLargeFontSize`            |
 | `TextToggleButtonBorderBrush`                         | `SolidColorBrush` | `SystemControlTransparentBrush` |
 | `TextToggleButtonBorderBrushPointerOver`              | `SolidColorBrush` | `SystemControlTransparentBrush` |
