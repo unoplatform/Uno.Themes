@@ -1,0 +1,140 @@
+<Page x:Class="Uno.Themes.Samples.Content.Styles.SpacingDensitySamplePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<ScrollViewer>
+		<StackPanel Spacing="8" Margin="24,0" MaxWidth="1200">
+
+			<!-- Header -->
+			<TextBlock Text="Spacing &amp; Density"
+					   Style="{StaticResource HeadlineSmall}"
+					   Margin="0,16,0,4" />
+			<TextBlock Text="Adjust the base spacing unit (DefaultSpacing) and the density mode (DefaultDensity) on the running theme, and watch the whole app restyle live. The two axes compose: effective base = DefaultSpacing × density factor."
+					   Style="{StaticResource BodyMedium}"
+					   Opacity="0.7"
+					   TextWrapping="Wrap" />
+
+			<!-- Knobs -->
+			<Grid ColumnSpacing="24" Margin="0,8,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Slider x:Name="SpacingSlider"
+						Header="DefaultSpacing — base unit (px)"
+						Minimum="0"
+						Maximum="12"
+						StepFrequency="0.5"
+						SnapsTo="StepValues"
+						Value="4"
+						ValueChanged="OnSpacingChanged" />
+				<ComboBox x:Name="DensityCombo"
+						  Grid.Column="1"
+						  Header="DefaultDensity"
+						  HorizontalAlignment="Stretch"
+						  VerticalAlignment="Bottom"
+						  SelectionChanged="OnDensityChanged">
+					<ComboBoxItem Content="Compact (×0.75)" />
+					<ComboBoxItem Content="Regular (×1)" />
+					<ComboBoxItem Content="Comfy (×1.25)" />
+				</ComboBox>
+			</Grid>
+			<TextBlock x:Name="EffectiveBaseText"
+					   Style="{StaticResource LabelLarge}" />
+			<TextBlock x:Name="TokenValuesText"
+					   Style="{StaticResource BodySmall}"
+					   Opacity="0.6"
+					   TextWrapping="Wrap" />
+
+			<!-- Spacing token bars -->
+			<TextBlock Text="Spacing Tokens"
+					   Style="{StaticResource TitleMedium}"
+					   Margin="0,16,0,4" />
+			<TextBlock Text="Bars show the actual pixel width of each spacing token."
+					   Style="{StaticResource BodySmall}"
+					   Opacity="0.6" />
+			<StackPanel Spacing="4">
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space050}" Height="16" />
+					<TextBlock Text="Space050" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space100}" Height="16" />
+					<TextBlock Text="Space100" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space150}" Height="16" />
+					<TextBlock Text="Space150" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space200}" Height="16" />
+					<TextBlock Text="Space200" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space300}" Height="16" />
+					<TextBlock Text="Space300" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space400}" Height="16" />
+					<TextBlock Text="Space400" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space600}" Height="16" />
+					<TextBlock Text="Space600" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Border Background="{ThemeResource TertiaryBrush}" Width="{ThemeResource Space800}" Height="16" />
+					<TextBlock Text="Space800" VerticalAlignment="Center" Style="{StaticResource LabelSmall}" />
+				</StackPanel>
+			</StackPanel>
+
+			<!-- Controls Preview -->
+			<TextBlock Text="Controls Preview"
+					   Style="{StaticResource TitleMedium}"
+					   Margin="0,24,0,4" />
+			<TextBlock Text="Standard controls restyled by the running theme — the rest of the app updates the same way."
+					   Style="{StaticResource BodySmall}"
+					   Opacity="0.6"
+					   Margin="0,0,0,8" />
+
+			<StackPanel Orientation="Horizontal" Spacing="12">
+				<Button x:Name="PreviewFilledButton"
+						Content="Filled"
+						Style="{StaticResource FilledButtonStyle}" />
+				<Button Content="Outlined" Style="{StaticResource OutlinedButtonStyle}" />
+				<Button Content="Text" Style="{StaticResource TextButtonStyle}" />
+			</StackPanel>
+			<TextBox PlaceholderText="Filled text field"
+					 Style="{StaticResource FilledTextBoxStyle}"
+					 MaxWidth="400"
+					 HorizontalAlignment="Left"
+					 Margin="0,8,0,0" />
+			<CheckBox Content="Checkbox" IsChecked="True" />
+			<RadioButton Content="Radio option" IsChecked="True" />
+			<ToggleSwitch Header="Toggle switch" IsOn="True" />
+
+			<!-- Usage Snippet -->
+			<TextBlock Text="Usage"
+					   Style="{StaticResource TitleMedium}"
+					   Margin="0,24,0,4" />
+			<TextBlock Text="Spacing and density are construction-time settings — declare them where the theme is defined. This page refreshes the running theme's style layer and forces a theme-change pass to demonstrate the effect live."
+					   Style="{StaticResource BodySmall}"
+					   Opacity="0.6"
+					   TextWrapping="Wrap" />
+			<Border Background="{ThemeResource SurfaceVariantBrush}"
+					CornerRadius="8"
+					Padding="16">
+				<TextBlock x:Name="XamlSnippet"
+						   FontFamily="Consolas, Courier New, monospace"
+						   Style="{StaticResource BodyMedium}"
+						   IsTextSelectionEnabled="True" />
+			</Border>
+
+			<Border Height="32" />
+		</StackPanel>
+	</ScrollViewer>
+</Page>

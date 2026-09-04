@@ -258,3 +258,16 @@ next file to need an override didn't get it.
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.
+
+---
+
+## "Like the seed color picker" means app-wide live application — confirm blast radius before building a sandboxed preview
+
+**Context:** PR #1702 (spacing & density live sample, stacked on #1701). The request was "density and spacing tokens updating at runtime live … just like the color picker for the color seed". The first implementation was a *scoped* sandbox (fresh theme merged into a preview panel only) because the library documents `DefaultSpacing`/`DefaultDensity` as construction-time. The user corrected: they wanted the sliders to restyle the **entire running app**, exactly as `SemanticThemeHelper.PrimarySeed` does.
+
+**How to apply:**
+- When a sample or feature is asked to behave "like" an existing one, the comparison defines the **scope of effect** (app-wide vs. local), not just the interaction pattern. If the reference feature is global, build global — or ask before narrowing scope on technical-limitation grounds.
+- A documented limitation ("construction-time", "requires content recreation") bounds the *default* library behavior, not what a determined caller can do. Verify empirically before treating it as a hard wall. For this repo specifically, two recipes make already-rendered controls pick up a new spacing/shape scale live, both proven by `Given_DesignTokens` runtime tests in the Material head:
+  1. re-set `theme.Source` to its own URI (re-creates the static style layer with fresh lazy `<StaticResource>` alias entries — not a same-value no-op), then change a token DP so `UpdateSource()` re-attaches the dynamic layers, **then**
+  2. flip the root's `RequestedTheme` to the opposite of `ActualTheme` and restore it synchronously — this re-resolves `{ThemeResource}` style-setter bindings (including `Thickness` values) against the current resource graph, same machinery as a dark/light switch.
+  Only reload `Source` when a DP change is guaranteed to follow, since the dynamic layers are missing until `UpdateSource()` runs. `{StaticResource Space*}` refs *inside* control templates stay stale until re-templating — same coverage as a dark/light switch.
