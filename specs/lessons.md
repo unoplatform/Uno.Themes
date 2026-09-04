@@ -4,6 +4,40 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A derived layer that re-implements a base recipe drifts silently when the base gains a mode — consume the mode, and prove agreement for both theme branches from the resource graph
+
+**Context:** Fluent theme, master integration (2026-09-04, `specs/05-fluent-theme/`). #1697 added
+`SeedColorMode` and made `Fidelity` the default, pinning the generated light `PrimaryColor` to the
+seed verbatim. `FluentAccentPalette` had re-implemented the old recipe (tone 40 of a raw-chroma
+palette) instead of consuming the generator's mode, so after the merge the built-in Fluent accent and
+the semantic `PrimaryColor` disagreed under every seed, and `TonalSpot` was ignored — while the
+whole Fluent suite stayed green locally.
+
+**Why it stayed green:** `When_SeedSet_ForwardAndReverseFlowsAgree` asserted the *ambient* branch.
+The dev machine runs Windows dark mode, so it compared the dark `PrimaryColor` (tone 80, unchanged
+by Fidelity) with `SystemAccentColorLight3` (tone 80) — a tautology in that host. Only the Light CI
+host would have failed. Proven by stashing the library fix and re-running: 5 new cases red, the old
+ambient test still green.
+
+**How to apply:**
+- When `BaseTheme` gains a knob (`SeedColorMode`, `DefaultFontFamily`, `DefaultSpacing`, …), grep
+  every concrete theme for code that **re-derives** what the base now parameterizes
+  (`new TonalPalette(hct.Hue, hct.Chroma)`, hard-coded tones, literal font keys) and route it through
+  the same mode/value. Prefer consuming the base's resolved output; when a recipe must be mirrored,
+  put it in one shared helper (`FluentAccentPalette.PaletteOf(color, mode)`) and name the base
+  method it mirrors in the doc comment.
+- An "A agrees with B" contract must be asserted **for both branches** from the theme's own
+  `ThemeDictionaries` (walk later merged dictionaries first — the `FindBranchColor` pattern in
+  `Given_FluentSeedAccent`), never only through the ambient lookup: the CI host and developer
+  machines run different appearances, so an ambient-only test proves a different half on each.
+- A merge from master is a **behavior change** for derived libraries even when nothing in them
+  conflicted. Re-run the derived suites in the CI-parity host and read the *new* warnings (here
+  CS0672 pointed straight at the obsolete override) before assuming a clean merge is a no-op.
+- Red-proof after the fact is cheap: `git stash push -- <lib files>`, build, run the filter, pop
+  (~2 min here). Do it when the test was written alongside the fix.
+
+---
+
 ## A generated layer is always a *merged* dictionary, so it can only shadow keys declared inside `ThemeDictionaries`
 
 **Context:** Spec 09 (`DefaultFontFamily`, PR #1707). `When_DefaultFontFamilySet_Then_ThemeAliasKeysFollow`
@@ -295,7 +329,7 @@ Everything else — literal per-branch colors/brushes, empty styles, setters-onl
 
 1. **Intra-bundle `<StaticResource>` aliases don't see their own bundle below app scope.** An alias like `TextButtonStyle` → `FluentTextButtonStyle` (both shipped in the same merged bundle) resolves at parse time against the app-level scope only. At app scope it happens to work (which is why Simple's `_Resources.xaml` → `Button.xaml` aliases pass); scoped lower, the alias yields nothing — or worse, silently binds to a *foreign* app-level theme's key of the same name. Fix: semantic keys targeting styles the library itself ships are resolved late-bound in code (`FluentTheme._bundleStyleAliases`), from the theme's own `Source` bundle.
 
-2. **Generated semantic brushes materialize once, against the app-level scope.** `SharedColors.xaml` defines `<SolidColorBrush Color="{StaticResource PrimaryColor}"/>`; that color reference is a one-time resolution (already documented atop `Given_ColorOverridePrecedence`). Under a container-scoped theme in a host with a different app-level theme, `PrimaryBrush` & co. carry the *app-level* theme's palette, even though the `*Color` keys resolve correctly from the container. This is a pre-existing property of the shared brush layer (Simple/Material behave identically), not a FluentTheme bug.
+2. **Generated semantic brushes materialize once, against the app-level scope.** `SharedColors.xaml` defines `<SolidColorBrush Color="{StaticResource PrimaryColor}"/>`; that color reference is a one-time resolution (already documented atop `Given_ColorOverridePrecedence`). Under a container-scoped theme in a host with a different app-level theme, `PrimaryBrush` & co. carry the *app-level* theme's palette, even though the `*Color` keys resolve correctly from the container. This is a pre-existing property of the shared brush layer (Simple/Material behave identically), not a FluentTheme bug. *Superseded 2026-09 by `SemanticBrushUpdater` (#1697): brushes are now per-theme-instance and rewritten from the theme's own color layers, so a container-scoped theme's brushes carry its own palette. The app-scope test topology remains the documented consumer shape but is no longer required for correctness.*
 
 **How to apply:** when adding semantic aliases whose target ships in the same library, alias them in code, not XAML. When writing runtime tests that assert *generated brush values*, merge the theme into `Application.Current.Resources.MergedDictionaries` (the documented consumer topology) inside try/finally — container-scoped assertions on generated brushes test the wrong scope. Container-scoped assertions on `*Color` keys, styles, and typography values remain fine.
 
