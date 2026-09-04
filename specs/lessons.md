@@ -4,6 +4,47 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## A resource merged into `mergedpages` cannot override one merged *by* it — and a comment claiming it can is not evidence
+
+**Context:** Spec 09 (single typeface, PR #1710). CI failed eight rows asserting Simple's
+`*FontWeight` tokens; each returned the value `SharedTypography.xaml` declares. The tokens were
+declared, correctly, in `Uno.Simple.WinUI/Styles/Application/Typography.xaml`, and
+`BaseDictionaries.xaml` carried a comment stating that file's resources "shadow these shared
+defaults". They never had.
+
+**Root cause:** `Uno.XamlMerge.Task` hoists every input's `MergedDictionaries` to the top of
+`mergedpages.xaml` and folds every input's themed resources into mergedpages' *own*
+`ThemeDictionaries`. A merged dictionary out-ranks the parent's own theme dictionaries, so
+anything `BaseDictionaries.xaml` merges — `SharedTypography.xaml` here — beats every file left in
+the `Styles\Application\` glob. `Fonts.xaml` and `Thickness.xaml` won only because they had been
+removed from the glob and merged explicitly; that was never written down as the *reason*, so the
+next file to need an override didn't get it.
+
+**How to apply:**
+- In a XamlMerge library, "later in the glob wins" is false. The only way a theme file overrides a
+  shared default is `XamlMergeInput Remove` plus an explicit `<ResourceDictionary Source=...>` in
+  the base dictionary, listed after the one it overrides. Treat the `Remove` and the `Source` as a
+  single indivisible edit; either alone is silent breakage.
+- A file that is merged by `Source` must load standalone. `Typography.xaml` could only be moved
+  once the single-typeface collapse left it literal-only — while it still carried
+  `<StaticResource ResourceKey="SimpleBoldFontFamily" />` it would have resolved against the
+  ambient application scope instead (see the `StaticResource` lesson below).
+- **A comment describing merge order is a claim, not a fact.** Two comments in this tree described
+  the ordering, and they contradicted each other: `BaseDictionaries.xaml` said the glob wins,
+  Simple's old `Fonts.xaml` said it doesn't and duplicated the slot mappings to work around it.
+  The one that had a workaround attached to it was the true one. When two comments disagree,
+  believe the one someone paid for.
+- **Assert the rendered value, not only the token.** Resource lookup (`TryGetValue`) and a
+  control's `{ThemeResource}` setters are different resolution paths. Here both were wrong, but
+  that is luck: a token test alone cannot tell you which layer moved.
+- **The blast radius of a shadowing bug is every key in the file, not the ones with tests.** Only
+  the weights failed CI because only the weights were asserted; twelve `*FontSize` tokens and
+  every `*CharacterSpacing` were equally shadowed, and Simple's display text had been rendering at
+  the Material 57px baseline instead of 72px. When a lookup-order defect is confirmed, enumerate
+  the whole dictionary against what it is supposed to override before sizing the fix.
+
+---
+
 ## A design-token "mode" (density) must be a factor over the scale's base unit, never a competing source of the base value
 
 **Context:** Spec 07 (`DefaultSpacing`, issue #1688). The first implementation gave `Density` enum members base-unit pixel values (`Compact = 3`, `Regular = 4`, `Comfy = 5`) and made `DefaultSpacing` an *override* that beat the preset ("override-beats-preset, like the color stack"). The user rejected this: density is a **mode** the consumer picks (Compact / Regular / Comfy), not an alternate spelling of a pixel value.
@@ -131,15 +172,20 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
-## Typography slot→weight font mappings must be duplicated in Fonts.xaml (not only Typography.xaml)
+## Typography slot aliases resolve their root against the *application* scope — declare the root in the dictionary merged after `SharedTypography.xaml`, and never test an alias cascade from a scoped container
 
-**Context:** PR #1680 (`dev/sb/themes-revert`) — reworking `BaseTheme` resource management. CI runtime tests failed with 5 `Given_Fonts` cases: Bold display slots (`DisplayLargeFontFamily`, `DisplayMediumFontFamily`) resolved to `Inter-Regular` instead of `Inter-Bold`, and SemiBold slots (`HeadlineMediumFontFamily`, `TitleMediumFontFamily`, `LabelLargeFontFamily`) resolved to `Inter-Regular`/`Inter-Medium` instead of `Inter-SemiBold`.
+**Context:** PR #1680 (`dev/sb/themes-revert`) reworked `BaseTheme` resource management and CI failed 5 `Given_Fonts` cases: Bold display slots (`DisplayLargeFontFamily`, `DisplayMediumFontFamily`) resolved to `Inter-Regular`, SemiBold slots to Regular/Medium. PR #1710 then collapsed the per-weight families into the single `DefaultFontFamily` root and deleted the Simple `Fonts.xaml` slot re-declarations that #1680's fix had introduced.
 
-**Root cause:** Simple's `Typography.xaml` maps the semantic font-family slots via `<StaticResource ResourceKey="SimpleBoldFontFamily" />` etc. `SharedTypography.xaml` (Uno.Themes core) *also* defines the same `*FontFamily` keys, aliased to `TypefacePlain`/`TypefaceBrand` (the Segoe-derived defaults). `<StaticResource>` aliases inside `ResourceDictionary.ThemeDictionaries` are resolved **eagerly at parse time** against whatever is visible in scope then — across separate merged dictionaries this resolution is unreliable, so the shared (wrong-weight) defaults can win. Master's fix was to **also** declare the slot→weight `<StaticResource>` mappings in `Fonts.xaml` (which is merged *after* `SharedTypography.xaml` inside `BaseDictionaries.xaml`), making the correct weights win deterministically. A reshape of `Fonts.xaml` deleted those duplicated mappings, reintroducing the bug.
+**Root cause (#1680, per-weight model):** Simple's `Typography.xaml` mapped the semantic slots to weight-specific keys (`SimpleBoldFontFamily`, …) through `<StaticResource>` aliases inside `ThemeDictionaries`, while `SharedTypography.xaml` declared the same slot keys aliased to the Segoe-derived defaults. An alias is stored as a redirect and its *target* is resolved at lookup time (`ResourceDictionary.TryResolveAlias` → `ResourceResolver.ResolveResourceStatic`), against the by-name scope stack and then the application's top-level resources — not against the dictionary the alias sits in. Which family a slot landed on therefore depended on what the application scope held for the target key. The fix duplicated the slot→weight aliases into Simple's `Fonts.xaml`, merged after `SharedTypography.xaml`, so the theme's mapping won deterministically.
+
+**Why #1710 could delete those duplicates:** with one root, every slot alias in every layer (`SharedTypography.xaml`, Material v2 `Typography.xaml`, Simple `Typography.xaml`) targets the same key, `DefaultFontFamily`. Whichever alias is hit, its target resolves to what the application scope holds for that one key, and the theme's `Fonts.xaml` (merged after `SharedTypography.xaml`) wins for it. The per-slot duplication carried no information any more. What still matters is that the root token is declared in the dictionary merged *after* `SharedTypography.xaml`; `Given_Fonts.When_SimpleThemeLoaded_Then_TypographyScaleDerivesFromRoot` (19 slots) guards that ordering. The per-theme alias blocks in Material v2 and Simple `Typography.xaml` were then deleted too: a lookup that misses a key in one dictionary's HighContrast block continues to the next merged dictionary and then to its `Default` block (`ResourceDictionary.GetThemeDictionary` fallback), so `SharedTypography.xaml`'s aliases serve every appearance. `SharedTypography.xaml` is the only declaration of the `*FontFamily` slot keys; the per-theme Typography files override size, weight and spacing only.
+
+**The sharper lesson (measured in #1710):** because the alias target resolves against the application scope, a `SimpleTheme` merged into a `Grid` with a `FontOverrideDictionary` that redefines `DefaultFontFamily` does **not** cascade — `BodyMediumFontFamily` looked up through that grid still returns the *application* theme's Inter root. The same override on the application-level theme (`Application.Current.GetTheme().FontOverrideDictionary = …`) cascades to every slot; that is the documented scenario and what `Given_Fonts.When_RootOverriddenOnApplicationTheme_Then_ScaleFollowsAndClears` pins. A scoped theme can only swap the scales by declaring the concrete `*FontFamily` keys (no alias), which is what the `DefaultFontFamily` property generator in #1707 does.
 
 **How to apply:**
-- When a per-design-system typography file maps font-family slots to weight-specific keys, keep the matching mappings in the **font dictionary that is merged after `SharedTypography.xaml`** (e.g. Simple's `Fonts.xaml`). Do not assume the aliases in `Typography.xaml` alone are sufficient — they are not, because of eager cross-dictionary `<StaticResource>` resolution in theme dictionaries.
-- Treat the slot→weight mappings in `Fonts.xaml` as load-bearing, not redundant. The comment in that file explains why; preserve it on any refactor.
+- Declare the root token in the theme's font dictionary that is merged after `SharedTypography.xaml`; that ordering is what makes the theme's family win over the Segoe UI baseline. Do not re-declare the slot aliases per theme; a design-system-specific key for the root (`SimpleFontFamily`, `CupertinoFontFamily`) is a dead alias: it resolves, but overriding it reaches nothing.
+- Never claim "override X cascades" for an aliased key without a test at the scope the doc describes. Container-scoped runtime tests are the wrong scope for alias cascades: they pass or fail on the ambient application theme, not on the container's. Mutate `Application.Current.GetTheme()` and restore it in `finally`.
+- A "merge gate" test that measures rendered glyphs must first prove the font loaded: a missing `ms-appx` font falls back silently to the platform default, which has its own Bold, so Bold-vs-Normal alone is green on the very configuration it is meant to catch. Measure against a family known not to exist; equal widths mean both fell back.
 
 **Verification trap (the more important lesson):** these font tests **passed in the minimal dedicated `Uno.Themes.RuntimeTests` host but failed in `SimpleSampleApp`** (and therefore in CI). The dedicated host merges `<SimpleTheme/>` app-wide, which "warms" the ambient resolution scope so the fragile `<StaticResource>` aliases happen to resolve to the right weight — a **false positive**. The real consumer-like host (`SimpleSampleApp`, also what CI runs) exposed the bug.
 - **Always verify font/typography/resource-precedence changes in `SimpleSampleApp` (the CI host), not only in a minimal host.** A minimal single-theme host can mask cross-dictionary resolution and merge-order bugs. If two hosts disagree, trust the one that matches CI.

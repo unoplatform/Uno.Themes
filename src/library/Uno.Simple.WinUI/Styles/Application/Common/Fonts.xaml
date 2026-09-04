@@ -3,87 +3,26 @@
 
 	<!--
 		Simple Design System — Typography Tokens
-		Maps SDS Figma typography primitives to XAML resources.
+
+		A single root typeface (Inter) drives every type scale. Per-scale weight
+		nuance (Bold display, SemiBold titles, …) is expressed through the
+		*FontWeight tokens in Typography.xaml; the weights are resolved from this
+		single FontFamily reference via the Inter.ttf variable font (or its font
+		manifest on platforms without variable-font support).
 	-->
 
 	<ResourceDictionary.ThemeDictionaries>
 
 		<!-- ─── Light Theme ─── -->
 		<ResourceDictionary x:Key="Light">
-			<!-- Root typeface tokens (cascade to all type scales) -->
-			<FontFamily x:Key="TypefacePlain">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
-			<FontFamily x:Key="TypefaceBrand">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
-
-			<!-- Per-weight font family resources -->
-			<FontFamily x:Key="SimpleRegularFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
-			<FontFamily x:Key="SimpleMediumFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
-			<FontFamily x:Key="SimpleSemiBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-SemiBold.ttf#Inter</FontFamily>
-			<FontFamily x:Key="SimpleBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Bold.ttf#Inter</FontFamily>
-
-			<!-- Legacy Simple-specific font family key (points to Regular) -->
-			<FontFamily x:Key="SimpleFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
-
-			<!--
-				Semantic typography slot → weight mapping. Declared here as well as in
-				Typography.xaml because Fonts.xaml is merged after SharedTypography: that ordering
-				makes these win over the shared (Segoe-based) defaults deterministically. The
-				equivalent aliases in Typography.xaml's inline theme dictionaries are resolved
-				against the base layer at parse time and can otherwise fall back to the wrong weight.
-			-->
-			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="SimpleBoldFontFamily" />
-			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="SimpleBoldFontFamily" />
-			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<!-- Root typeface token (cascades to all type scales) -->
+			<FontFamily x:Key="DefaultFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter.ttf#Inter</FontFamily>
 		</ResourceDictionary>
+
+		<!-- ─── Dark Theme (Default) ─── -->
 		<ResourceDictionary x:Key="Default">
-			<!-- Root typeface tokens (cascade to all type scales) -->
-			<FontFamily x:Key="TypefacePlain">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
-			<FontFamily x:Key="TypefaceBrand">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
-
-			<!-- Per-weight font family resources -->
-			<FontFamily x:Key="SimpleRegularFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
-			<FontFamily x:Key="SimpleMediumFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Medium.ttf#Inter</FontFamily>
-			<FontFamily x:Key="SimpleSemiBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-SemiBold.ttf#Inter</FontFamily>
-			<FontFamily x:Key="SimpleBoldFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Bold.ttf#Inter</FontFamily>
-
-			<!-- Legacy Simple-specific font family key (points to Regular) -->
-			<FontFamily x:Key="SimpleFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter-Regular.ttf#Inter</FontFamily>
-
-			<!-- See the Light theme block above for why these slot mappings are declared here. -->
-			<StaticResource x:Key="DisplayLargeFontFamily" ResourceKey="SimpleBoldFontFamily" />
-			<StaticResource x:Key="DisplayMediumFontFamily" ResourceKey="SimpleBoldFontFamily" />
-			<StaticResource x:Key="DisplaySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="HeadlineLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="HeadlineMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="HeadlineSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="TitleLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="TitleMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="TitleSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelLargeFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelMediumFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelSmallFontFamily" ResourceKey="SimpleSemiBoldFontFamily" />
-			<StaticResource x:Key="LabelExtraSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="BodyLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="BodyMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="BodySmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="CaptionLargeFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="CaptionMediumFontFamily" ResourceKey="SimpleRegularFontFamily" />
-			<StaticResource x:Key="CaptionSmallFontFamily" ResourceKey="SimpleRegularFontFamily" />
+			<!-- Root typeface token (cascades to all type scales) -->
+			<FontFamily x:Key="DefaultFontFamily">ms-appx:///Uno.Fonts.Inter/Fonts/Inter.ttf#Inter</FontFamily>
 		</ResourceDictionary>
 
 	</ResourceDictionary.ThemeDictionaries>

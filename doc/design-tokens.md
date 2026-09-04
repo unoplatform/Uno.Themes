@@ -10,12 +10,23 @@ Uno.Themes exposes a set of **shared design tokens** — semantic XAML resources
 
 ### Typography
 
-Root typeface tokens cascade to all type-scale keys:
+A single root typeface token cascades to all type-scale keys:
 
-| Key             | Default                                            | Role                        |
-|-----------------|----------------------------------------------------|-----------------------------|
-| `TypefacePlain` | Segoe UI (Material: Roboto Regular, Simple: Inter) | Display, Headline           |
-| `TypefaceBrand` | Segoe UI (Material: Roboto Medium, Simple: Inter)  | Title, Label, Body, Caption |
+| Key                 | Default                                                       | Role             |
+|---------------------|---------------------------------------------------------------|------------------|
+| `DefaultFontFamily` | Segoe UI (Material: Roboto, Simple: Inter, Cupertino: SF Pro) | Every type scale |
+
+Per-scale variation is expressed through the `*FontWeight` tokens, not through separate font
+families: the root points at a single family whose weights resolve from one reference (a variable
+font, or a font with a [font manifest](https://platform.uno/docs/articles/features/custom-fonts.html#variable-fonts-and-font-manifest)
+on platforms without variable-font support).
+
+Cupertino has no semantic type scale: its control styles consume `CupertinoFontFamily`, an alias of the root, and that remains the key to override there — see [Change Default Font](cupertino-getting-started.md#change-default-font).
+
+> [!IMPORTANT]
+> **Breaking change**: the former `TypefacePlain` / `TypefaceBrand` token pair (and Simple's
+> `SimpleFontFamily` and per-weight `SimpleRegular/Medium/SemiBold/BoldFontFamily` keys) have been removed. Override
+> `DefaultFontFamily` instead; per-scale weight nuance is carried by the `*FontWeight` tokens.
 
 Per-scale keys follow the pattern `{Role}{Size}FontFamily`, `{Role}{Size}FontSize`, `{Role}{Size}FontWeight`, `{Role}{Size}CharacterSpacing` — for example `DisplayLargeFontFamily`, `BodyMediumFontSize`.
 
@@ -131,15 +142,14 @@ Pick the density where the theme is declared. Switching it at runtime does not r
 
 ### Typography Font Swap
 
-To change the font for an entire app, override the root typeface tokens:
+To change the font for an entire app, override the root typeface token:
 
 ```xml
 <!-- MyTypography.xaml -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <FontFamily x:Key="TypefacePlain">ms-appx:///Fonts/MyFont-Regular.ttf#MyFont</FontFamily>
-    <FontFamily x:Key="TypefaceBrand">ms-appx:///Fonts/MyFont-Medium.ttf#MyFont</FontFamily>
+    <FontFamily x:Key="DefaultFontFamily">ms-appx:///Fonts/MyFont.ttf#MyFont</FontFamily>
 </ResourceDictionary>
 ```
 
-This cascades to all type-scale `FontFamily` keys (`DisplayLargeFontFamily`, `BodyMediumFontFamily`, etc.) without needing to override each one individually.
+Reference the file as the theme's `FontOverrideSource` (`<MaterialTheme FontOverrideSource="ms-appx:///MyTypography.xaml" />`, likewise on `SimpleTheme`). This cascades to all type-scale `FontFamily` keys (`DisplayLargeFontFamily`, `BodyMediumFontFamily`, etc.) without needing to override each one individually. Point it at a family that resolves multiple weights — a variable font, or a font shipping a font manifest — so the per-scale `*FontWeight` tokens (`DisplayLargeFontWeight`, …) render as designed.
