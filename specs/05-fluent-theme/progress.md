@@ -210,6 +210,59 @@ kept) and adapted:
   (baseline post-merge 234 / 0); `FluentSampleApp` desktop build clean; Release
   CI-parity full suite — see the review log entry.
 
+## Phase 7 — Gap-audit fixes A1–A4 (2026-09-04)
+
+Owner asked for the four "adapter defects worth fixing next" from the gap audit
+to be fixed. All red/fix/green: 23 new or updated cases failed on the pre-fix
+library (`Given_FluentDesignTokens` ×4, `Given_FluentSeedAccent` ×17,
+`Given_FluentLightweightStyling` ×2, `Given_FluentTypography` ×1) and pass after.
+
+- [x] **A1 — `DefaultFontFamily` reaches built-in controls.**
+  `FluentTheme.BuildPlatformTokenOverrides` writes `ContentControlThemeFontFamily`
+  (the family) into the dynamic layer when the property is set; the XCR
+  templates read it through `{ThemeResource}`, so a stock `DefaultButtonStyle`
+  button changes font (rendered test). Unset → nothing written.
+- [x] **A2 — `DefaultCornerRadius` reaches built-in controls.** Same method
+  writes `ControlCornerRadius` (= base) and `OverlayCornerRadius` (= 2 × base,
+  the `Radius200` ratio) when the property is set locally (any value — an
+  explicit 4 is a choice; the DP default means "the platform's"). Rendered:
+  `DefaultButtonStyle` button reports `CornerRadius` 8. Clearing the property
+  (`ClearValue`) restores the stock token. The six `StaticResource` consumers
+  in Uno's Fluent v2 (CalendarView, ColorPicker, PagerControl, RadioButton,
+  Slider, ToggleSwitch) keep the platform value — documented.
+- [x] **A3 — relative accent shades.** `FluentAccentPalette.AccentShades`
+  replaces the absolute-tone table: dark shades at 3/4, 1/2, 1/4 of the accent's
+  own tone; `Light2` anchored at the dark-theme Primary tone (80), `Light1`
+  midway to it, `Light3` at 90. At accent tone 40 the dark shades are the
+  original 30/20/10 and Light1 is 60 (guarded by
+  `When_TonalSpotSeedSet_ShadesAreTheSpecTones`). Applies to seeds (both modes)
+  and to verbatim override bases. Consequence embraced: the dark-branch §9.3
+  agreement is now `PrimaryColor` == `SystemAccentColorLight2` (the actual
+  dark-theme accent fill) instead of the coincidental `Light3` — so a seeded
+  `FilledButtonStyle` in the dark theme is tone 80, exactly Material's dark
+  FilledButton. Ordering guard: `When_DarkSeedSet_ShadesStayOrderedAroundTheAccent`
+  (navy, tone ≈ 12). The lightweight bridge's fill defaults read `Dark1`/`Light2`
+  from the same shade set.
+- [x] **A4 — contrast-aware on-accent text.** `FluentAccentPalette.PickOnAccentText`
+  picks Fluent's white (#FFFFFF / 70%) or black (#000000 / 50%) family by WCAG
+  contrast against the branch's fill; `WriteClosure` writes
+  `TextOnAccentFillColorPrimary`/`Secondary` (+ brushes) in every cascade mode
+  (they are consumer-overridable managed keys). Rendered: a pale (`#FFF176`)
+  `PrimaryColor` override yields a black-text accent button. The bridge applies
+  the same pick to `FilledButtonForeground*`, `CheckBoxGlyphForegroundChecked`
+  and `ToggleSwitchKnobOnFill` only when a driver (seed/override) is active; the
+  declarative stock captures in `LightweightDefaults.xaml` stand for the
+  platform accent (drift guard unchanged).
+- [x] Test-helper lesson (recorded in `specs/lessons.md`): on Uno,
+  `ResourceDictionary.TryGetValue` falls back to the **system resources** for a
+  key the dictionary does not hold, so a per-branch assertion on a system key
+  (`TextOnAccentFillColorPrimary`) through `TryGetValue` silently reads the
+  ambient XCR value. `FindBranchValue` now enumerates own entries.
+- [x] Docs: `fluent-getting-started.md` (design tokens reach built-in controls;
+  Primary vs fill note — audit A6), `design-tokens.md`, `seed-colors.md`
+  (relative shades, on-accent text), `lightweight-styling.md`, spec §8 / §9.1.
+- [x] Verification: see the review log entry.
+
 ## Gap audit — 2026-09-04
 
 Requested with the master integration: a full inspection of the adapter, its
@@ -221,7 +274,9 @@ names the cheapest fix.
 
 ### A. Fluent theme implementation — things to fix
 
-1. **`DefaultFontFamily` does not reach built-in Fluent controls.** XCR templates
+*Items 1–4 fixed 2026-09-04 (Phase 7 below); kept here as the record of what was found and why.*
+
+1. **`DefaultFontFamily` does not reach built-in Fluent controls.** ✅ fixed XCR templates
    read `{ThemeResource ContentControlThemeFontFamily}`; under Material/Simple the
    templates read the theme's tokens, so one property swaps the font app-wide,
    under Fluent only semantic-styled text follows. Fix: when `DefaultFontFamily`
@@ -229,7 +284,7 @@ names the cheapest fix.
    family) into its dynamic layer — the same override-driven re-pointing the
    bridge uses; Fluent's slot aliases then resolve to it too (one level, D16-safe).
    ~5 lines + a rendered test.
-2. **`DefaultCornerRadius` does not reach built-in Fluent controls** (G4 claims
+2. **`DefaultCornerRadius` does not reach built-in Fluent controls** ✅ fixed (G4 claims
    participation; spec §8 says "nothing to build"). XCR templates consume
    `ControlCornerRadius` / `OverlayCornerRadius`: 44 files via `{ThemeResource}`
    (re-pointable — S4(b) mechanism), 6 via `{StaticResource}` (CalendarView,
@@ -237,14 +292,14 @@ names the cheapest fix.
    without re-templating). Fix: when `DefaultCornerRadius` ≠ 4, write
    `ControlCornerRadius` = `Radius100` and `OverlayCornerRadius` = `Radius200`
    into the dynamic layer. ~15 lines + test + `design-tokens.md` note.
-3. **Accent shades are absolute tones.** `Light1–3`/`Dark1–3` are tones
+3. **Accent shades are absolute tones.** ✅ fixed — `Light1–3`/`Dark1–3` were tones
    60/70/80/30/20/10 of the seed's palette regardless of the seed's own tone, so a
    seed darker than tone 30 (navy brand colors) gets a light-theme fill (`Dark1`)
    *lighter* than the accent, and `Dark3` (tone 10) may be lighter than a very
    dark override basis. Windows derives shades relative to the accent's lightness.
    Fix: tone offsets from the seed's own HCT tone, clamped to [0, 100], in
    `SeedTones` / `BuildBranchFor`. Recorded in spec §9.1.
-4. **Override-driven verbatim fill ignores contrast.** A light `PrimaryColor`
+4. **Override-driven verbatim fill ignores contrast.** ✅ fixed — a light `PrimaryColor`
    override becomes the accent fill verbatim while `TextOnAccentFillColorPrimary`
    stays white → unreadable accent buttons. Material picks `OnPrimary` by
    contrast. Fix: in override mode also write `TextOnAccentFillColorPrimary` (+
@@ -349,6 +404,14 @@ names the cheapest fix.
   (`#FF0078D7`), not an OS value.
 
 ## Review log
+
+- 2026-09-04 (later) — **Gap-audit fixes A1–A4** (Phase 7). Red proven on the
+  pre-fix library: 23 failed / 16 passed of the 39 new-or-updated cases. Green
+  after: Debug desktop Fluent + precedence filter **258 / 258**. Release CI-parity full suite:
+  **510 cases — 509 passed / 1 pre-existing skip / 0 failed** (Windows desktop host, dark ambient theme); `FluentSampleApp` desktop build clean. Behavior changes for existing consumers of a seeded
+  or overridden FluentTheme: dark-theme accent fill is tone 80 (was 70), light
+  shades `Light1/2/3` move (60/80/90 at accent tone 40, was 60/70/80), dark
+  shades follow the accent's own tone, and pale accents get black on-accent text.
 
 - 2026-09-04 — **Master integration + gap audit** (Phase 6 above). Merge of
   15 master commits; four adaptations, two of them behavior fixes proven
