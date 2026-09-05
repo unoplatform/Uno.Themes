@@ -27,6 +27,15 @@ public class Given_FluentSeedAccent
 	// so the two generation modes produce different accents for it.
 	private static readonly Color MutedSeed = Color.FromArgb(0xFF, 0x6B, 0x72, 0x80);
 
+	// A very dark brand color (tone ≈ 12): the dark shades must stay darker than it.
+	private static readonly Color Navy = Color.FromArgb(0xFF, 0x00, 0x1F, 0x3F);
+
+	// A pale brand color (tone ≈ 94): white on-accent text would be unreadable on it.
+	private static readonly Color PaleYellow = Color.FromArgb(0xFF, 0xFF, 0xF1, 0x76);
+
+	private static readonly Color White = Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
+	private static readonly Color Black = Color.FromArgb(0xFF, 0x00, 0x00, 0x00);
+
 	// Distinctive override colors, matching RuntimeTests/FluentColorOverride.xaml.
 	private static readonly Color OverrideBlue = Color.FromArgb(0xFF, 0x21, 0x96, 0xF3);
 	private static readonly Color OverrideGreen = Color.FromArgb(0xFF, 0x66, 0xBB, 0x6A);
@@ -52,6 +61,66 @@ public class Given_FluentSeedAccent
 			(byte)((argb >> 8) & 0xFF),
 			(byte)(argb & 0xFF));
 	}
+
+	/// <summary>
+	/// OWN entries only: ResourceDictionary.TryGetValue falls back to the system
+	/// resources (the AMBIENT theme's XCR values) for a key the dictionary does not
+	/// hold, which would defeat a per-branch assertion on a system key such as
+	/// TextOnAccentFillColorPrimary. XAML-backed dictionaries cannot be enumerated
+	/// on Uno; none of the keys asserted through this helper live in one.
+	/// </summary>
+	private static object? TryGetOwnValue(ResourceDictionary dictionary, string key)
+	{
+		try
+		{
+			foreach (var pair in dictionary)
+			{
+				if (pair.Key is string entryKey && entryKey == key)
+				{
+					return pair.Value;
+				}
+			}
+		}
+		catch (NotSupportedException)
+		{
+			// XAML-backed dictionary: not enumerable, and not a holder of the asserted keys.
+		}
+
+		return null;
+	}
+
+	/// <summary>
+	/// Expected accent shade under the Fluent shade rule (spec 05 §9.1, relative):
+	/// the dark shades sit at 3/4, 1/2 and 1/4 of the accent's own tone; Light2 is
+	/// anchored at the dark-theme Primary tone (80), Light1 midway between the
+	/// accent and it, Light3 midway between it and white. The accent tone is the
+	/// seed's own under Fidelity and the nominal 40 under TonalSpot.
+	/// </summary>
+	private static Color Shade(Color seed, string shadeKey, SeedColorMode mode = SeedColorMode.Fidelity)
+	{
+		var hct = HctColor.FromArgb((seed.A << 24) | (seed.R << 16) | (seed.G << 8) | seed.B);
+		var chroma = mode == SeedColorMode.TonalSpot ? Math.Max(hct.Chroma, 48) : hct.Chroma;
+		var accentTone = mode == SeedColorMode.TonalSpot ? 40.0 : hct.Tone;
+		var tone = shadeKey switch
+		{
+			"SystemAccentColorDark1" => accentTone * 0.75,
+			"SystemAccentColorDark2" => accentTone * 0.5,
+			"SystemAccentColorDark3" => accentTone * 0.25,
+			"SystemAccentColorLight1" => (accentTone + 80) / 2,
+			"SystemAccentColorLight2" => 80,
+			"SystemAccentColorLight3" => 90,
+			_ => throw new ArgumentOutOfRangeException(nameof(shadeKey), shadeKey, "not an accent shade key"),
+		};
+		var argb = new TonalPalette(hct.Hue, chroma).GetArgb((int)Math.Round(tone));
+		return Color.FromArgb(
+			(byte)((argb >> 24) & 0xFF),
+			(byte)((argb >> 16) & 0xFF),
+			(byte)((argb >> 8) & 0xFF),
+			(byte)(argb & 0xFF));
+	}
+
+	private static double ToneOf(Color color)
+		=> HctColor.FromArgb((color.A << 24) | (color.R << 16) | (color.G << 8) | color.B).Tone;
 
 	private static FluentTheme CreateSeededTheme(Color seed)
 	{
@@ -83,18 +152,20 @@ public class Given_FluentSeedAccent
 	/// (see specs/lessons.md, "dark-branch rendering is not testable in the CI host").
 	/// </summary>
 	private static Color? FindBranchColor(ResourceDictionary dictionary, string branchKey, string key)
+		=> FindBranchValue(dictionary, branchKey, key) is Color color ? color : null;
+
+	private static object? FindBranchValue(ResourceDictionary dictionary, string branchKey, string key)
 	{
 		if (dictionary.ThemeDictionaries.TryGetValue(branchKey, out var branchValue)
 			&& branchValue is ResourceDictionary branch
-			&& branch.TryGetValue(key, out var value)
-			&& value is Color color)
+			&& TryGetOwnValue(branch, key) is { } value)
 		{
-			return color;
+			return value;
 		}
 
 		for (var i = dictionary.MergedDictionaries.Count - 1; i >= 0; i--)
 		{
-			if (FindBranchColor(dictionary.MergedDictionaries[i], branchKey, key) is { } nested)
+			if (FindBranchValue(dictionary.MergedDictionaries[i], branchKey, key) is { } nested)
 			{
 				return nested;
 			}
@@ -104,29 +175,74 @@ public class Given_FluentSeedAccent
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
-	// Shade set (spec §9.1): SystemAccentColor* follow the tonal palette.
-	// The base accent is the seed itself under the default Fidelity mode
-	// (the generated light PrimaryColor IS the seed) — see the dedicated test.
+	// Shade set (spec §9.1): SystemAccentColor* are derived RELATIVE to the
+	// accent's own tone (dark shades at 3/4, 1/2, 1/4 of it; Light2 anchored at
+	// the dark-theme Primary tone 80). The base accent is the seed itself under
+	// the default Fidelity mode — see the dedicated test.
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
 	[RunsOnUIThread]
-	[DataRow("SystemAccentColorLight1", 60)]
-	[DataRow("SystemAccentColorLight2", 70)]
-	[DataRow("SystemAccentColorLight3", 80)]
-	[DataRow("SystemAccentColorDark1", 30)]
-	[DataRow("SystemAccentColorDark2", 20)]
-	[DataRow("SystemAccentColorDark3", 10)]
-	public void When_SeedSet_AccentShadesFollowTonalPalette(string shadeKey, int tone)
+	[DataRow("SystemAccentColorLight1")]
+	[DataRow("SystemAccentColorLight2")]
+	[DataRow("SystemAccentColorLight3")]
+	[DataRow("SystemAccentColorDark1")]
+	[DataRow("SystemAccentColorDark2")]
+	[DataRow("SystemAccentColorDark3")]
+	public void When_SeedSet_AccentShadesFollowTheAccentTone(string shadeKey)
 	{
 		var container = CreateSeededContainer(SeedRed);
 
-		Assert.AreEqual(Tone(SeedRed, tone), GetColor(container.Resources, shadeKey),
-			$"{shadeKey} must carry tone {tone} of the seed palette (spec 05 §9.1)");
+		Assert.AreEqual(Shade(SeedRed, shadeKey), GetColor(container.Resources, shadeKey),
+			$"{shadeKey} must be the shade relative to the seed's own tone (spec 05 §9.1)");
 
 		// The override is scoped to the theme: the app-level accent must be untouched.
-		Assert.AreNotEqual(Tone(SeedRed, tone), GetColor(Application.Current.Resources, shadeKey),
+		Assert.AreNotEqual(Shade(SeedRed, shadeKey), GetColor(Application.Current.Resources, shadeKey),
 			$"a container-scoped seeded FluentTheme must not leak {shadeKey} to app scope");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow("SystemAccentColorLight1", 60)]
+	[DataRow("SystemAccentColorLight2", 80)]
+	[DataRow("SystemAccentColorLight3", 90)]
+	[DataRow("SystemAccentColorDark1", 30)]
+	[DataRow("SystemAccentColorDark2", 20)]
+	[DataRow("SystemAccentColorDark3", 10)]
+	public void When_TonalSpotSeedSet_ShadesAreTheSpecTones(string shadeKey, int tone)
+	{
+		// TonalSpot puts the accent at tone 40 — the position the relative rule
+		// was calibrated on — so the shades are the spec §9.1 table exactly.
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { PrimarySeed = SeedRed, SeedColorMode = SeedColorMode.TonalSpot };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(Tone(SeedRed, tone, SeedColorMode.TonalSpot), GetColor(container.Resources, shadeKey),
+			$"under TonalSpot, {shadeKey} must be tone {tone} (spec 05 §9.1)");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_DarkSeedSet_ShadesStayOrderedAroundTheAccent()
+	{
+		// A navy brand color (tone ≈ 12): absolute tones would make every dark
+		// shade — including the light-theme accent fill, Dark1 — LIGHTER than
+		// the brand color. The shades must stay ordered around the accent.
+		var container = CreateSeededContainer(Navy);
+
+		var accent = ToneOf(GetColor(container.Resources, "SystemAccentColor"));
+		var dark1 = ToneOf(GetColor(container.Resources, "SystemAccentColorDark1"));
+		var dark2 = ToneOf(GetColor(container.Resources, "SystemAccentColorDark2"));
+		var dark3 = ToneOf(GetColor(container.Resources, "SystemAccentColorDark3"));
+		var light1 = ToneOf(GetColor(container.Resources, "SystemAccentColorLight1"));
+		var light2 = ToneOf(GetColor(container.Resources, "SystemAccentColorLight2"));
+		var light3 = ToneOf(GetColor(container.Resources, "SystemAccentColorLight3"));
+
+		Assert.IsTrue(dark3 < dark2 && dark2 < dark1 && dark1 < accent,
+			$"the dark shades must be ordered and darker than the accent: Dark3 {dark3:F1} < Dark2 {dark2:F1} < Dark1 {dark1:F1} < accent {accent:F1}");
+		Assert.IsTrue(accent < light1 && light1 < light2 && light2 < light3,
+			$"the light shades must be ordered and lighter than the accent: accent {accent:F1} < Light1 {light1:F1} < Light2 {light2:F1} < Light3 {light3:F1}");
 	}
 
 	[TestMethod]
@@ -161,11 +277,11 @@ public class Given_FluentSeedAccent
 
 		Assert.AreEqual(expectedAccent, GetColor(container.Resources, "SystemAccentColor"),
 			"under TonalSpot, SystemAccentColor must be tone 40 of the chroma-boosted palette");
-		Assert.AreEqual(Tone(MutedSeed, 80, SeedColorMode.TonalSpot), GetColor(container.Resources, "SystemAccentColorLight3"),
+		Assert.AreEqual(Tone(MutedSeed, 80, SeedColorMode.TonalSpot), GetColor(container.Resources, "SystemAccentColorLight2"),
 			"under TonalSpot, the shades must come from the chroma-boosted palette too");
 
 		// Forward/reverse agreement (§9.3) holds in this mode as well.
-		var expectedAccentKey = IsAmbientDark ? "SystemAccentColorLight3" : "SystemAccentColor";
+		var expectedAccentKey = IsAmbientDark ? "SystemAccentColorLight2" : "SystemAccentColor";
 		Assert.AreEqual(
 			GetColor(container.Resources, expectedAccentKey),
 			GetColor(container.Resources, "PrimaryColor"),
@@ -174,8 +290,8 @@ public class Given_FluentSeedAccent
 
 	// ─────────────────────────────────────────────────────────────────────
 	// Accent closure (spec §9.2 / D12): the accent-derived colors and brushes
-	// follow the branch mapping — light fill = Dark1 (tone 30), dark fill =
-	// Light2 (tone 70), mirroring XCR's own structure (spike S4).
+	// follow the branch mapping — light fill = Dark1, dark fill = Light2,
+	// mirroring XCR's own structure (spike S4).
 	// ─────────────────────────────────────────────────────────────────────
 
 	[TestMethod]
@@ -184,15 +300,15 @@ public class Given_FluentSeedAccent
 	{
 		var container = CreateSeededContainer(SeedRed);
 
-		var expectedFill = Tone(SeedRed, IsAmbientDark ? 70 : 30);
-		var expectedAccentText = Tone(SeedRed, IsAmbientDark ? 80 : 20);
+		var expectedFill = Shade(SeedRed, IsAmbientDark ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
+		var expectedAccentText = Shade(SeedRed, IsAmbientDark ? "SystemAccentColorLight3" : "SystemAccentColorDark2");
 
 		Assert.IsTrue(
 			container.Resources.TryGetValue("AccentFillColorDefaultBrush", out var fillValue)
 				&& fillValue is SolidColorBrush,
 			"AccentFillColorDefaultBrush should resolve under a seeded FluentTheme");
 		Assert.AreEqual(expectedFill, ((SolidColorBrush)fillValue).Color,
-			"the accent fill must carry the branch-mapped seed tone (light: Dark1/30, dark: Light2/70)");
+			"the accent fill must carry the branch-mapped seed shade (light: Dark1, dark: Light2)");
 
 		Assert.IsTrue(
 			container.Resources.TryGetValue("AccentFillColorSecondaryBrush", out var secondaryValue)
@@ -207,7 +323,119 @@ public class Given_FluentSeedAccent
 				&& textValue is SolidColorBrush,
 			"AccentTextFillColorPrimaryBrush should resolve under a seeded FluentTheme");
 		Assert.AreEqual(expectedAccentText, ((SolidColorBrush)textValue).Color,
-			"accent text must carry the branch-mapped seed tone (light: Dark2/20, dark: Light3/80)");
+			"accent text must carry the branch-mapped seed shade (light: Dark2, dark: Light3)");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
+	// On-accent text: Fluent's stock white (light) / black (dark) families
+	// assume a mid-tone platform accent. A derived fill can be pale or very
+	// dark, so the family is picked by contrast against the branch's fill —
+	// both for seeds and for verbatim PrimaryColor overrides.
+	// ─────────────────────────────────────────────────────────────────────
+
+	private static Color GetBranchColor(FluentTheme theme, string branchKey, string key)
+	{
+		var value = FindBranchColor(theme, branchKey, key);
+		Assert.IsNotNull(value, $"[{branchKey}] {key} should be written by the accent cascade");
+		return value.Value;
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(true)]
+	[DataRow(false)]
+	public void When_PrimaryColorOverridden_OnAccentTextContrastsWithTheFill(bool pale)
+	{
+		// A flat override drives BOTH branches with the basis verbatim as the fill,
+		// so the expectation is the same for each branch regardless of the ambient theme.
+		var overrideDict = new ResourceDictionary();
+		overrideDict["PrimaryColor"] = pale ? PaleYellow : Navy;
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		var expected = pale ? Black : White;
+		foreach (var branch in new[] { "Light", "Default" })
+		{
+			Assert.AreEqual(expected, GetBranchColor(theme, branch, "TextOnAccentFillColorPrimary"),
+				$"[{branch}] on-accent text must contrast with a {(pale ? "pale" : "very dark")} verbatim accent fill");
+			var brush = FindBranchValue(theme, branch, "TextOnAccentFillColorPrimaryBrush") as SolidColorBrush;
+			Assert.IsNotNull(brush, $"[{branch}] TextOnAccentFillColorPrimaryBrush should be written by the accent cascade");
+			Assert.AreEqual(expected, brush.Color,
+				$"[{branch}] the on-accent text BRUSH must carry the same family (XCR templates consume the brush)");
+		}
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_PaleSeedSet_LightThemeOnAccentTextIsDark()
+	{
+		// Seed mode: the light-theme fill is Dark1 = 3/4 of the seed's tone. For a
+		// pale seed that is still a light fill, so the light branch needs black
+		// text; the dark branch fill (tone 80) keeps the stock black too.
+		var theme = CreateSeededTheme(PaleYellow);
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(Black, GetBranchColor(theme, "Light", "TextOnAccentFillColorPrimary"),
+			"a pale seed's light-theme accent fill must get black on-accent text");
+		Assert.AreEqual(Black, GetBranchColor(theme, "Default", "TextOnAccentFillColorPrimary"),
+			"the dark-theme accent fill (tone 80) keeps black on-accent text");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public void When_MidToneSeedSet_OnAccentTextIsTheStockFamily()
+	{
+		// A mid-tone seed reproduces Fluent's stock families: white on the light
+		// fill (Dark1), black on the dark fill (Light2).
+		var theme = CreateSeededTheme(SeedRed);
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.AreEqual(White, GetBranchColor(theme, "Light", "TextOnAccentFillColorPrimary"),
+			"a mid-tone seed keeps white on-accent text in the light theme");
+		Assert.AreEqual(Black, GetBranchColor(theme, "Default", "TextOnAccentFillColorPrimary"),
+			"a mid-tone seed keeps black on-accent text in the dark theme");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_PalePrimaryColorOverridden_RenderedAccentButtonTextIsDark()
+	{
+		var overrideDict = new ResourceDictionary();
+		overrideDict["PrimaryColor"] = PaleYellow;
+
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var button = new Button
+			{
+				Content = "pale",
+				Style = (Style)Application.Current.Resources["AccentButtonStyle"],
+			};
+			var host = new Grid();
+			host.Children.Add(button);
+
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			var foreground = button.Foreground as SolidColorBrush;
+			Assert.IsNotNull(foreground, "the accent button should have a SolidColorBrush foreground");
+			Assert.AreEqual(Black, foreground.Color,
+				"a built-in accent button on a pale verbatim accent must render black text (readable)");
+		}
+		finally
+		{
+			appDictionaries.Remove(theme);
+		}
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
@@ -219,7 +447,7 @@ public class Given_FluentSeedAccent
 	[RunsOnUIThread]
 	public async Task When_SeedSet_RenderedAccentButtonFollowsSeed()
 	{
-		var expectedFill = Tone(SeedRed, IsAmbientDark ? 70 : 30);
+		var expectedFill = Shade(SeedRed, IsAmbientDark ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
 
 		var appDictionaries = Application.Current.Resources.MergedDictionaries;
 		var theme = CreateSeededTheme(SeedRed);
@@ -322,8 +550,9 @@ public class Given_FluentSeedAccent
 
 		// Seeded semantic PrimaryColor: the seed verbatim (light branch, Fidelity)
 		// / tone 80 (dark branch) — which the reverse mapping exposes as
-		// SystemAccentColor and SystemAccentColorLight3 respectively.
-		var expectedAccentKey = IsAmbientDark ? "SystemAccentColorLight3" : "SystemAccentColor";
+		// SystemAccentColor and SystemAccentColorLight2 (Fluent's dark-theme
+		// accent fill, anchored at that tone) respectively.
+		var expectedAccentKey = IsAmbientDark ? "SystemAccentColorLight2" : "SystemAccentColor";
 
 		Assert.AreEqual(
 			GetColor(container.Resources, expectedAccentKey),
@@ -351,8 +580,8 @@ public class Given_FluentSeedAccent
 
 		Assert.AreEqual(lightPrimary, GetColor(container.Resources, "SystemAccentColor"),
 			"the LIGHT semantic PrimaryColor must equal the reverse-mapped base accent (§9.3)");
-		Assert.AreEqual(darkPrimary, GetColor(container.Resources, "SystemAccentColorLight3"),
-			"the DARK semantic PrimaryColor (tone 80) must equal the reverse-mapped Light3 shade (§9.3)");
+		Assert.AreEqual(darkPrimary, GetColor(container.Resources, "SystemAccentColorLight2"),
+			"the DARK semantic PrimaryColor (tone 80) must equal the reverse-mapped Light2 shade — Fluent's dark-theme accent fill (§9.3)");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────

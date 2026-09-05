@@ -637,14 +637,27 @@ S1 case 5 validates the FontFamily alias mechanism.
 
 ## 8. Design tokens (spacing / shape / density)
 
-Nothing Fluent-specific to build — `BaseTheme` generates `Space*`, `Radius*`,
-and density defaults in code for every theme. Notable alignment, to document:
+`BaseTheme` generates `Space*`, `Radius*`, and density defaults in code for
+every theme. Notable alignment, to document:
 
 - `DefaultCornerRadius` default **4** == Fluent `ControlCornerRadius` (4px). ✅
 - `Radius200` (8 at default unit) == Fluent `OverlayCornerRadius` (8px). ✅
 - Fluent controls do not consume `Space*` tokens (their metrics are baked into
   XCR templates); the tokens remain available to app layouts, same as under
   any theme.
+
+**Re-pointing (added 2026-09-04, gap audit A1/A2):** the built-in templates
+read `ControlCornerRadius` / `OverlayCornerRadius` (44 Uno Fluent v2 files via
+`{ThemeResource}`; 6 via `{StaticResource}` — CalendarView, ColorPicker,
+PagerControl, RadioButton, Slider, ToggleSwitch — stay on the platform value)
+and `ContentControlThemeFontFamily`. When the consumer sets
+`DefaultCornerRadius` (locally, any value) or `DefaultFontFamily`, `FluentTheme`
+writes those platform tokens into its dynamic layer (`ControlCornerRadius` =
+base, `OverlayCornerRadius` = 2 × base — the `Radius100`/`Radius200` ratio;
+`ContentControlThemeFontFamily` = the family), the same override-driven S4(b)
+mechanism as the lightweight bridge. Unset properties write nothing, so stock
+rendering stays the platform's. Guarded by `Given_FluentDesignTokens` and
+`Given_FluentTypography.When_DefaultFontFamilySet_PlatformFontTokenAndStockButtonFollow`.
 
 ## 9. Phase 2 — Seed color → Fluent accent (reverse mapping)
 
@@ -660,14 +673,16 @@ correct contrast):
 | Fluent token | Tonal-palette tone |
 |---|---|
 | `SystemAccentColor` | the generated light `PrimaryColor`: the seed verbatim under `SeedColorMode.Fidelity` (default), tone 40 under `TonalSpot` — so §9.3 holds in both modes (updated 2026-09-04 for #1697) |
-| `SystemAccentColorLight1` | tone 60 |
-| `SystemAccentColorLight2` | tone 70 |
-| `SystemAccentColorLight3` | tone 80 |
-| `SystemAccentColorDark1` | tone 30 |
-| `SystemAccentColorDark2` | tone 20 |
-| `SystemAccentColorDark3` | tone 10 |
+| `SystemAccentColorLight1` | midway between the accent tone and 80 (60 at accent tone 40) |
+| `SystemAccentColorLight2` | **80** — anchored at the dark-theme `PrimaryColor` tone, so Fluent's dark-theme fill equals the semantic dark Primary (§9.3 in the dark branch) |
+| `SystemAccentColorLight3` | 90 (midway from 80 to white; where Fluent's own dark-theme accent text sits) |
+| `SystemAccentColorDark1` | 3/4 of the accent tone (30 at accent tone 40) |
+| `SystemAccentColorDark2` | 1/2 of the accent tone (20 at accent tone 40) |
+| `SystemAccentColorDark3` | 1/4 of the accent tone (10 at accent tone 40) |
 
-All tones are taken from the primary palette built with the theme's `SeedColorMode` (Fidelity: the seed's own chroma; TonalSpot: chroma floored at 48) — the same recipe `SeedColorPaletteGenerator` uses, so every shade agrees with the seed-generated semantic palette tone for tone. Known limitation: the shades are absolute tones, so for a seed darker than tone 30 the light-theme fill (`Dark1`) is *lighter* than the accent; Windows derives its shades relative to the accent's lightness. Tracked in `progress.md` (gap audit).
+All tones are taken from the primary palette built with the theme's `SeedColorMode` (Fidelity: the seed's own chroma; TonalSpot: chroma floored at 48) — the same recipe `SeedColorPaletteGenerator` uses, so every shade agrees with the seed-generated semantic palette. **Relative shades (2026-09-04, gap audit A3):** the dark shades are proportional to the accent's own tone, so they stay darker than the accent whatever it is (a navy brand color keeps a navy light-theme fill instead of the lighter tone 30 the original absolute table gave it); the light side is anchored to the dark-theme Primary tone so the dark branch agrees exactly with the semantic palette. At accent tone 40 (TonalSpot) the dark shades are the original 30/20/10 and Light1 is 60. The rule applies to a verbatim `PrimaryColor` override basis too (its own tone and chroma). Edge: for an accent lighter than tone 80 the light shades are not lighter than the accent; the dark-theme fill stays at tone 80, readable with black text.
+
+**On-accent text (2026-09-04, gap audit A4 — refines D12's "seed-invariant" exclusion):** `TextOnAccentFillColorPrimary`/`Secondary` (+ brushes) are written per branch as the Fluent white (`#FFFFFF` / 70%) or black (`#000000` / 50%) family that contrasts best with that branch's fill (`FluentAccentPalette.PickOnAccentText`, WCAG contrast ratio). The stock families assume a mid-tone platform accent; a pale seed's light-theme fill or a pale verbatim override needs black text. `TextOnAccentFillColorDisabled` stays stock (the disabled fill is a seed-invariant neutral). The lightweight bridge applies the same pick to the semantic defaults that sit on the fill (`FilledButtonForeground*`, `CheckBoxGlyphForegroundChecked`, `ToggleSwitchKnobOnFill`); with the platform accent the declarative stock values stand.
 
 ### 9.2 Why overriding `SystemAccentColor*` alone is not enough (D12)
 
