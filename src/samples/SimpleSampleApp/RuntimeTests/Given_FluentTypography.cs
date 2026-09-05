@@ -159,6 +159,51 @@ public class Given_FluentTypography
 	}
 
 	// ─────────────────────────────────────────────────────────────────────
+	// BaseTheme.DefaultFontFamily reaches the BUILT-IN Fluent controls too
+	// (G4 parity with Material/Simple, whose templates read the theme tokens):
+	// the XCR templates read {ThemeResource ContentControlThemeFontFamily}, so
+	// FluentTheme re-points that platform token when the property is set.
+	// ─────────────────────────────────────────────────────────────────────
+
+	[TestMethod]
+	[RunsOnUIThread]
+	public async Task When_DefaultFontFamilySet_PlatformFontTokenAndStockButtonFollow()
+	{
+		const string chosen = "ms-appx:///RuntimeTests/Fonts/NotAFont.ttf#Not A Font";
+		var theme = new FluentTheme { DefaultFontFamily = new FontFamily(chosen) };
+		var container = new Grid();
+		container.Resources.MergedDictionaries.Add(theme);
+
+		Assert.IsTrue(container.Resources.TryGetValue("ContentControlThemeFontFamily", out var token) && token is FontFamily,
+			"ContentControlThemeFontFamily should resolve under FluentTheme");
+		Assert.AreEqual(chosen, ((FontFamily)token).Source,
+			"ContentControlThemeFontFamily must follow DefaultFontFamily so built-in Fluent controls change font too");
+
+		// The CI host's implicit Button style is Simple's — apply the Fluent
+		// default style explicitly; its FontFamily setter reads the platform token.
+		var button = new Button
+		{
+			Content = "typeface",
+			Style = (Style)Application.Current.Resources["DefaultButtonStyle"],
+		};
+		container.Children.Add(button);
+
+		UnitTestsUIContentHelper.Content = container;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+
+		Assert.AreEqual(chosen, button.FontFamily.Source,
+			"a stock Fluent button must render with the theme's DefaultFontFamily (G4)");
+
+		theme.DefaultFontFamily = null;
+
+		Assert.IsTrue(container.Resources.TryGetValue("ContentControlThemeFontFamily", out var cleared) && cleared is FontFamily,
+			"ContentControlThemeFontFamily should still resolve after DefaultFontFamily is cleared");
+		Assert.AreEqual(GetPlatformDefaultFontFamily().Source, ((FontFamily)cleared).Source,
+			"clearing DefaultFontFamily must restore the platform font token");
+	}
+
+	// ─────────────────────────────────────────────────────────────────────
 	// TextBlock styles (spec §7.3): the semantic alias resolves to the Fluent-
 	// prefixed style, and applying it carries the slot values to the control.
 	// ─────────────────────────────────────────────────────────────────────

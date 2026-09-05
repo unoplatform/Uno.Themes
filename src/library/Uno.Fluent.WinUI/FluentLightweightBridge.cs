@@ -56,6 +56,15 @@ namespace Uno.Fluent;
 /// platform values are not verified on every branch.
 /// </para>
 /// <para>
+/// When a seed or a <c>PrimaryColor</c> override drives the accent, the
+/// semantic keys that sit ON the accent fill (<c>FilledButtonForeground*</c>,
+/// <c>CheckBoxGlyphForegroundChecked</c>, <c>ToggleSwitchKnobOnFill</c>) default
+/// to the on-accent family the cascade picked by contrast
+/// (<see cref="FluentAccentPalette.PickOnAccentText"/>), shadowing the stock
+/// white/black captures in LightweightDefaults.xaml — those only hold for a
+/// mid-tone platform accent.
+/// </para>
+/// <para>
 /// Override channels (documented in lightweight-styling.md): app-wide via
 /// <c>Colors.OverrideDictionary</c> (triggers a rebuild pass, feeding this
 /// bridge); page/subtree-scoped overrides target the Fluent per-control keys
@@ -210,47 +219,54 @@ internal static class FluentLightweightBridge
 	}
 
 	/// <summary>
+	/// A branch's accent-button fill, and whether a driver (seed or PrimaryColor
+	/// override) produced it — the stock platform fill leaves the declarative
+	/// on-accent defaults in charge.
+	/// </summary>
+	private readonly record struct AccentFill(Color? Color, bool IsDerived);
+
+	/// <summary>
 	/// The accent-button fill per branch: an explicit PrimaryColor override
 	/// basis verbatim when present (agreeing with FluentAccentPalette's
-	/// override-driven mode), else seed tones 30/70 when a seed is active,
-	/// else the live platform shades (light fill = Dark1, dark fill = Light2 —
-	/// spike S4). Null when the platform shades are unreachable (no XCR): the
-	/// Filled background defaults are then skipped, graceful degradation.
+	/// override-driven mode), else the seed's Dark1 / Light2 shades when a seed
+	/// is active (the same relative shades the accent cascade writes), else the
+	/// live platform shades (light fill = Dark1, dark fill = Light2 — spike S4).
+	/// Null when the platform shades are unreachable (no XCR): the Filled
+	/// background defaults are then skipped, graceful degradation.
 	/// </summary>
-	private static (Color? Light, Color? Dark) ResolveAccentFill(Color? seed, SeedColorMode seedColorMode, Color? lightBasis, Color? darkBasis)
+	private static (AccentFill Light, AccentFill Dark) ResolveAccentFill(Color? seed, SeedColorMode seedColorMode, Color? lightBasis, Color? darkBasis)
 	{
 		Color? seedLight = null;
 		Color? seedDark = null;
 		if (seed is { } s && (lightBasis is null || darkBasis is null))
 		{
-			// Same-mode palette as the accent cascade and the semantic palette.
-			var palette = FluentAccentPalette.PaletteOf(s, seedColorMode);
-			seedLight = FromArgb(palette.GetArgb(30));
-			seedDark = FromArgb(palette.GetArgb(70));
+			var shades = FluentAccentPalette.AccentShades.FromSeed(s, seedColorMode);
+			seedLight = shades.Dark1;
+			seedDark = shades.Light2;
 		}
 
 		var light = lightBasis ?? seedLight;
 		var dark = darkBasis ?? seedDark;
 		if (light is { } && dark is { })
 		{
-			return (light, dark);
+			return (new AccentFill(light, IsDerived: true), new AccentFill(dark, IsDerived: true));
 		}
 
 		if (Application.Current?.Resources is { } resources
 			&& resources.TryGetValue("SystemAccentColorDark1", out var dark1) && dark1 is Color platformLight
 			&& resources.TryGetValue("SystemAccentColorLight2", out var light2) && light2 is Color platformDark)
 		{
-			return (light ?? platformLight, dark ?? platformDark);
+			return (new AccentFill(light ?? platformLight, IsDerived: light is { }), new AccentFill(dark ?? platformDark, IsDerived: dark is { }));
 		}
 
-		return (light, dark);
+		return (new AccentFill(light, IsDerived: light is { }), new AccentFill(dark, IsDerived: dark is { }));
 	}
 
-	private static ResourceDictionary BuildAccentDefaults(Color? accentFill)
+	private static ResourceDictionary BuildAccentDefaults(AccentFill accentFill)
 	{
 		var branch = new ResourceDictionary();
 
-		if (accentFill is { } fill)
+		if (accentFill.Color is { } fill)
 		{
 			// Filled (accent button). Hover/pressed are the fill at 0.9/0.8 BRUSH
 			// opacity — XCR's own structure (spike S4).
@@ -262,6 +278,19 @@ internal static class FluentLightweightBridge
 			// pass-through only — unverified per branch).
 			branch["ToggleSwitchOuterBorderFill"] = new SolidColorBrush(fill);
 			branch["ToggleSwitchOuterBorderStroke"] = new SolidColorBrush(fill);
+
+			if (accentFill.IsDerived)
+			{
+				// Text/glyphs ON a derived fill: the family the accent cascade picked
+				// by contrast (a pale or very dark accent flips it). With the stock
+				// platform fill the declarative white/black defaults stand.
+				var (onAccentPrimary, onAccentSecondary) = FluentAccentPalette.PickOnAccentText(fill);
+				branch["FilledButtonForeground"] = new SolidColorBrush(onAccentPrimary);
+				branch["FilledButtonForegroundPointerOver"] = new SolidColorBrush(onAccentPrimary);
+				branch["FilledButtonForegroundPressed"] = new SolidColorBrush(onAccentSecondary);
+				branch["CheckBoxGlyphForegroundChecked"] = new SolidColorBrush(onAccentPrimary);
+				branch["ToggleSwitchKnobOnFill"] = new SolidColorBrush(onAccentPrimary);
+			}
 		}
 
 		return branch;

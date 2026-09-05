@@ -134,14 +134,47 @@ public class Given_FluentLightweightStyling
 		theme.Colors = new ThemeColors { PrimarySeed = SeedPurple };
 		var container = CreateThemedContainer(theme);
 
-		var hct = HctColor.FromArgb((SeedPurple.A << 24) | (SeedPurple.R << 16) | (SeedPurple.G << 8) | SeedPurple.B);
-		var palette = new TonalPalette(hct.Hue, hct.Chroma);
-		var argb = palette.GetArgb(IsAmbientDark ? 70 : 30);
-		var expected = Color.FromArgb(
-			(byte)((argb >> 24) & 0xFF), (byte)((argb >> 16) & 0xFF), (byte)((argb >> 8) & 0xFF), (byte)(argb & 0xFF));
+		// The bridge default must be the very shade the reverse accent mapping
+		// writes as the branch's fill (light: Dark1, dark: Light2).
+		var expected = GetColor(container.Resources, IsAmbientDark ? "SystemAccentColorLight2" : "SystemAccentColorDark1");
 
 		Assert.AreEqual(expected, GetBrush(container.Resources, "FilledButtonBackground").Color,
-			"under a seed, FilledButtonBackground must agree with the reverse accent mapping (tones 30/70)");
+			"under a seed, FilledButtonBackground must agree with the reverse accent mapping's fill shade");
+	}
+
+	private static Color GetColor(ResourceDictionary resources, string key)
+	{
+		Assert.IsTrue(resources.TryGetValue(key, out var value) && value is Color, $"{key} should resolve to a Color");
+		return (Color)value;
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(true)]
+	[DataRow(false)]
+	public void When_AccentBasisOverridden_OnAccentSemanticDefaultsContrast(bool pale)
+	{
+		// A flat PrimaryColor override is the accent fill verbatim in both
+		// branches; the semantic keys that sit ON that fill must default to the
+		// contrasting family (black on pale, white on very dark) — the stock
+		// white/black captures only hold for a mid-tone platform accent.
+		var overrideDict = new ResourceDictionary();
+		overrideDict["PrimaryColor"] = pale ? Color.FromArgb(0xFF, 0xFF, 0xF1, 0x76) : Color.FromArgb(0xFF, 0x00, 0x1F, 0x3F);
+		var theme = new FluentTheme();
+		theme.Colors = new ThemeColors { OverrideDictionary = overrideDict };
+		var container = CreateThemedContainer(theme);
+
+		var expected = pale ? Color.FromArgb(0xFF, 0x00, 0x00, 0x00) : Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
+		foreach (var key in new[] { "FilledButtonForeground", "FilledButtonForegroundPointerOver", "CheckBoxGlyphForegroundChecked", "ToggleSwitchKnobOnFill" })
+		{
+			Assert.AreEqual(expected, GetBrush(container.Resources, key).Color,
+				$"{key} must default to the on-accent family that contrasts with a {(pale ? "pale" : "very dark")} accent fill");
+		}
+
+		// Pressed text is the same family at Fluent's stock secondary opacity (50% black / 70% white).
+		var expectedPressed = pale ? Color.FromArgb(0x80, 0x00, 0x00, 0x00) : Color.FromArgb(0xB3, 0xFF, 0xFF, 0xFF);
+		Assert.AreEqual(expectedPressed, GetBrush(container.Resources, "FilledButtonForegroundPressed").Color,
+			"the pressed foreground must be the contrasting family at Fluent's secondary opacity");
 	}
 
 	// ─────────────────────────────────────────────────────────────────────

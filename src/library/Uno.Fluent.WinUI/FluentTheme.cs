@@ -233,10 +233,55 @@ public class FluentTheme : BaseTheme
 		AddThemeDictionary(_lightweightDefaults);
 		AddThemeDictionary(FluentLightweightBridge.Build(effectiveSeed, seedColorMode, lightAccentBasis, darkAccentBasis, consumerOverride));
 
+		// Design tokens → built-in controls (spec 05 §8, goal G4). The XCR templates
+		// read ControlCornerRadius / OverlayCornerRadius and
+		// ContentControlThemeFontFamily through {ThemeResource}, so re-pointing
+		// those platform tokens here (the S4(b) mechanism) lets DefaultCornerRadius
+		// and DefaultFontFamily reach stock Fluent controls the way they reach the
+		// Material/Simple templates. Override-driven only: an unset property
+		// writes nothing, so stock rendering stays the platform's.
+		if (BuildPlatformTokenOverrides() is { } platformTokens)
+		{
+			AddThemeDictionary(platformTokens);
+		}
+
 		// Base typography ships in the Source bundle (BaseDictionaries.xaml). A
 		// consumer font override is NOT merged here: BaseTheme.UpdateSource resolves
 		// and merges FontOverrideDictionary itself, last, so it is re-read from its
 		// Source on hot reload and wins over the generated DefaultFontFamily layer.
+	}
+
+	/// <summary>
+	/// The platform tokens the built-in Fluent templates read, re-pointed at the
+	/// theme's design-token settings when the consumer set them; <c>null</c> when
+	/// nothing is set. Flat (theme-invariant) entries: a font family and a corner
+	/// radius do not vary per appearance.
+	/// </summary>
+	private ResourceDictionary? BuildPlatformTokenOverrides()
+	{
+		ResourceDictionary? tokens = null;
+
+		// A locally set DefaultCornerRadius is an explicit choice (even when it is
+		// 4); the DP default means "the platform's". Radius100 is the base unit and
+		// Radius200 twice it — matching ControlCornerRadius (4) / OverlayCornerRadius
+		// (8) at the default unit. Non-finite or negative consumer values are
+		// ignored here, as BaseTheme's shape scale does.
+		if (ReadLocalValue(DefaultCornerRadiusProperty) is double radius
+			&& double.IsFinite(radius)
+			&& radius >= 0)
+		{
+			tokens ??= new ResourceDictionary();
+			tokens["ControlCornerRadius"] = new CornerRadius(radius);
+			tokens["OverlayCornerRadius"] = new CornerRadius(radius * 2);
+		}
+
+		if (DefaultFontFamily is { } family)
+		{
+			tokens ??= new ResourceDictionary();
+			tokens["ContentControlThemeFontFamily"] = family;
+		}
+
+		return tokens;
 	}
 
 	private void EnsureBundleStyleAliases()
