@@ -4,6 +4,37 @@ Domain lessons and postmortems for the Uno.Themes repo. Append new entries at th
 
 ---
 
+## `ResourceDictionary.TryGetValue` falls back to the SYSTEM resources — a per-branch assertion on a system key through it reads the ambient XCR value, not the branch
+
+**Context:** Fluent theme, gap-audit fixes (2026-09-04, `specs/05-fluent-theme/` Phase 7). A new
+resource-graph test walked the theme's `ThemeDictionaries` to assert the Light and Default branches
+of `TextOnAccentFillColorPrimary` independently, using `branch.TryGetValue(key, …)` on each
+candidate branch dictionary. Before the fix the key was not written anywhere in the theme, yet the
+"pale accent → black text" case passed and only the "navy accent → white text" case failed.
+
+**Root cause:** Uno's public `ResourceDictionary.TryGetValue(object, out object)` is
+`TryGetValue(key, out value, shouldCheckSystem: true)` (`ResourceDictionary.cs`). For a key the
+dictionary does not hold, it consults the system resources — where every `XamlControlsResources`
+token lives — resolved against the **ambient** application theme. The first branch dictionary probed
+(a code-built one that lacked the key) therefore returned XCR's stock value for the dark-mode dev
+machine: black. A test on a non-system key (`PrimaryColor`) written the same way was correct by luck.
+
+**How to apply:**
+- Own-entries reads of a dictionary must **enumerate** it (`foreach (var pair in dictionary)`),
+  never `TryGetValue`/`ContainsKey` — both check the system dictionary by default. Catch
+  `NotSupportedException` for XAML-backed dictionaries (not enumerable on Uno) and treat them as
+  "not here"; make sure the asserted keys live in code-built dictionaries. The library code already
+  follows this (`ToOwnEntries` in `FluentAccentPalette` / `FluentLightweightBridge`); the test
+  helper had not.
+- A branch-level test on a key that XCR also defines must be red-proven in **both** directions
+  (a value that differs from the ambient stock, and one that matches it): only the differing case
+  can expose a system-fallback leak, and which direction differs depends on the host's theme.
+- Corollary for comparing "stock" values: the app-level `TryGetValue` result may not have the type
+  the XCR XAML declares (the host's app-level theme or the system lookup decides what is returned);
+  compare container-vs-app resolution as objects instead of asserting the declared type.
+
+---
+
 ## A derived layer that re-implements a base recipe drifts silently when the base gains a mode — consume the mode, and prove agreement for both theme branches from the resource graph
 
 **Context:** Fluent theme, master integration (2026-09-04, `specs/05-fluent-theme/`). #1697 added
