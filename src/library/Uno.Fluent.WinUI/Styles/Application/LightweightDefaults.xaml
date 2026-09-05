@@ -17,6 +17,11 @@
 		they follow the effective primary (PrimaryColor override > seed > live
 		platform accent) and cannot be expressed declaratively — and the
 		override-driven re-pointing of the built-in Fluent per-control resources.
+		The ON-accent captures below (FilledButtonForeground*,
+		CheckBoxGlyphForegroundChecked, ToggleSwitchKnobOnFill — white in the light
+		theme, black in the dark) are the STOCK defaults for the platform accent;
+		when a seed or PrimaryColor override drives the accent, the bridge shadows
+		them with the family picked by contrast against the derived fill.
 		Keys with no Fluent equivalent, and hover/pressed/Disabled keys outside the
 		accent families, are deliberately absent: re-point pass-through only, no
 		defaults (their platform values are not verified on every branch).

@@ -113,7 +113,7 @@ To override individual tokens without changing the whole scale, use standard XAM
 
 | Property              | Type         | Description                                                                                                                                 |
 |-----------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Runtime-settable.                                                              |
+| `DefaultCornerRadius` | `double`     | Base corner radius unit; generates the full `Radius*` scale. Runtime-settable. Under `FluentTheme` it also re-points the platform `ControlCornerRadius` / `OverlayCornerRadius` tokens the built-in templates read. |
 | `DefaultSpacing`      | `double`     | Base spacing unit (default 4); generates the full `Space*` scale, scaled by the `DefaultDensity` mode. Runtime-settable.                    |
 | `DefaultDensity`      | `Density`    | Density mode that scales the spacing base unit (`Compact` ×0.75, `Regular` ×1, `Comfy` ×1.25). Runtime-settable.                            |
 | `DefaultFontFamily`   | `FontFamily` | The font the type scale is generated from: the `DefaultFontFamily` token and every `*FontFamily` key derived from it. Runtime-settable.     |
