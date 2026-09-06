@@ -263,6 +263,53 @@ library (`Given_FluentDesignTokens` ×4, `Given_FluentSeedAccent` ×17,
   (relative shades, on-accent text), `lightweight-styling.md`, spec §8 / §9.1.
 - [x] Verification: see the review log entry.
 
+## Phase 8 — Fluent templates for the style pages (2026-09-06)
+
+Owner request: Fluent templates for the Overview, Semantic Styling, Colors,
+Seed Color and Design Tokens pages. Before this, the Fluent head's landing page
+(`OverviewPage`, navigated by `BuildShell` regardless of design) had no Fluent
+template and `SamplePageLayout` fell back to the first defined one — the
+Material template — logging unresolved `Material*` style keys and rendering
+default-styled controls under Material labels; the four style pages were not
+listed at all.
+
+- [x] `OverviewPage` — `FluentTemplate` (Button / TextBox / CheckBox / RadioButton /
+  ToggleSwitch cards, semantic keys only) + `Design.Fluent`.
+- [x] `SemanticStylingSamplePage` — `FluentTemplate`: the semantic button styles,
+  then a lightweight-styling section that is honest about Fluent: page-scoped
+  overrides target the Fluent per-control keys (`AccentButtonBackground`,
+  `ButtonBorderBrush`), the semantic `TextButtonForeground` works at any scope
+  through the bridge style, and app-wide semantic overrides go through
+  `Colors.OverrideDictionary`. (A page-scoped `FilledButtonBackground` override
+  — the Simple page's demo — does nothing under Fluent; gap audit B1.)
+- [x] `ColorsSamplePage` — `FluentTemplate`: all 33 semantic roles through the
+  shared `ColorPaletteControl`, with the state/opacity variants for Primary,
+  OnPrimary, OnBackground and OnSurface and an intro on the Fluent token mapping.
+- [x] `SeedColorSamplePage` — no per-design templates (a plain page on semantic
+  keys), so "Fluent support" is `Design.Fluent` plus a theme-aware XAML snippet
+  (`<FluentTheme>` / `<SimpleTheme>` / `<MaterialTheme>` by `ActiveDesign` —
+  it was hard-coded to Material for Simple too) and a Fluent-only note on the
+  accent cascade.
+- [x] `DesignTokensSamplePage` — `FluentTemplate` (semantic keys; intro states
+  what reaches Fluent's built-in controls — corner radius, font family — and what
+  does not — spacing, density).
+- [x] **Durable verification: `FluentSampleApp/RuntimeTests/Given_FluentSamplePages`**
+  (new; the Fluent head hosts `Uno.UI.RuntimeTests.Engine` like the Material
+  head). It inflates every shared page that declares `Design.Fluent` under the
+  Fluent head's app-level `FluentTheme` and asserts the page's `FluentTemplate`
+  exists, its presenter is the visible one, and content realized — so a page
+  opted into Fluent without a template (the Overview state above) fails instead
+  of silently falling back. Not part of the CI runtime-test job (that publishes
+  the Simple head only); run it with the desktop head DLL and
+  `UNO_RUNTIME_TESTS_RUN_TESTS='{"Filter":{"Value":"Given_FluentSamplePages"}}'`.
+- [x] Verification: Fluent head Debug desktop build clean (no new warnings);
+  `Given_FluentSamplePages` 2 / 2 — **33** Fluent-enabled pages inflated;
+  Simple / Material / Cupertino desktop heads build clean (shared XAML is
+  head-agnostic). Remaining unresolved-resource log lines during the sweep are the
+  pre-existing parse-time `Material*` / `*Opacity` / `*Color` classes noted in
+  Phase 4 (StaticResources inside the *other* designs' templates and the shared
+  brush dictionary), not Fluent-template misses.
+
 ## Gap audit — 2026-09-04
 
 Requested with the master integration: a full inspection of the adapter, its
@@ -404,6 +451,11 @@ names the cheapest fix.
   (`#FF0078D7`), not an OS value.
 
 ## Review log
+
+- 2026-09-06 — **Fluent templates for the five style pages** (Phase 8 above);
+  fixes the Fluent head's landing page falling back to the Material template.
+  New Fluent-head runtime test `Given_FluentSamplePages` guards every
+  `Design.Fluent` page. Sample-only change: no library or resource-key impact.
 
 - 2026-09-04 (later) — **Gap-audit fixes A1–A4** (Phase 7). Red proven on the
   pre-fix library: 23 failed / 16 passed of the 39 new-or-updated cases. Green

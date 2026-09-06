@@ -8,15 +8,31 @@ namespace Uno.Themes.Samples.Content.Styles;
 	"Seed Color",
 	IconPath = Icons.Styles.Colors,
 	Description = "Generate a full color palette from a single seed color using the HCT color space.",
-	SupportedDesigns = new[] { Design.Material, Design.Simple })]
+	SupportedDesigns = new[] { Design.Material, Design.Simple, Design.Fluent })]
 public sealed partial class SeedColorSamplePage : Page
 {
 	private static Color _lastSeed = Color.FromArgb(0xFF, 0x67, 0x50, 0xA4);
 	private static SeedColorMode _lastSeedColorMode = SeedColorMode.Fidelity;
 
+	// The theme element name for the XAML snippet, per active design.
+	private static string ThemeTypeName => SamplePageLayout.ActiveDesign switch
+	{
+		Design.Simple => "SimpleTheme",
+		Design.Fluent => "FluentTheme",
+		Design.Cupertino => "CupertinoTheme",
+		_ => "MaterialTheme",
+	};
+
 	public SeedColorSamplePage()
 	{
 		this.InitializeComponent();
+
+		if (SamplePageLayout.ActiveDesign == Design.Fluent)
+		{
+			DesignNote.Text = "Under FluentTheme the seed also recolors the built-in Fluent controls: SystemAccentColor and its shades follow the seed, so accent buttons, checked check boxes, toggle switches and slider fills change too, and the text on the accent is picked for contrast.";
+			DesignNote.Visibility = Visibility.Visible;
+		}
+
 		SeedColorPicker.Color = _lastSeed;
 		SeedColorModeCombo.SelectedIndex = _lastSeedColorMode == SeedColorMode.Fidelity ? 0 : 1;
 		ApplySeedColor(_lastSeed);
@@ -49,7 +65,8 @@ public sealed partial class SeedColorSamplePage : Page
 			: "Tonal spot: Material's standard vibrant recipe — a minimum saturation is enforced, so the exact seed color is not reproduced.";
 
 		var modeAttribute = _lastSeedColorMode == SeedColorMode.Fidelity ? string.Empty : "\n                 SeedColorMode=\"TonalSpot\"";
-		XamlSnippet.Text = $"<MaterialTheme>\n  <MaterialTheme.Colors>\n    <ThemeColors PrimarySeed=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\"{modeAttribute} />\n  </MaterialTheme.Colors>\n</MaterialTheme>";
+		var theme = ThemeTypeName;
+		XamlSnippet.Text = $"<{theme}>\n  <{theme}.Colors>\n    <ThemeColors PrimarySeed=\"#{seed.R:X2}{seed.G:X2}{seed.B:X2}\"{modeAttribute} />\n  </{theme}.Colors>\n</{theme}>";
 	}
 
 	private static int ColorToArgb(Color c) => (c.A << 24) | (c.R << 16) | (c.G << 8) | c.B;

@@ -397,5 +397,93 @@
 				</StackPanel>
 			</DataTemplate>
 		</sample:SamplePageLayout.SimpleTemplate>
+
+		<!-- Fluent: semantic keys only, resolved onto the built-in Fluent styles by FluentTheme. -->
+		<sample:SamplePageLayout.FluentTemplate>
+			<DataTemplate>
+				<StackPanel>
+
+					<!--  Button  -->
+					<sample:OverviewSampleView SamplePageType="samples:ButtonSamplePage">
+						<StackPanel Spacing="8">
+
+							<Button Content="Filled"
+									Style="{StaticResource FilledButtonStyle}" />
+
+							<Button Content="Outlined"
+									Style="{StaticResource OutlinedButtonStyle}" />
+
+							<Button Content="Text"
+									Style="{StaticResource TextButtonStyle}" />
+
+							<Button Style="{StaticResource IconButtonStyle}">
+								<SymbolIcon Symbol="Favorite" />
+							</Button>
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  TextBox  -->
+					<sample:OverviewSampleView SamplePageType="samples:TextBoxSamplePage">
+						<StackPanel Spacing="8">
+
+							<TextBox PlaceholderText="Filled"
+									 Style="{StaticResource FilledTextBoxStyle}" />
+
+							<TextBox Header="Outlined"
+									 PlaceholderText="Outlined"
+									 Style="{StaticResource OutlinedTextBoxStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  CheckBox  -->
+					<sample:OverviewSampleView SamplePageType="samples:CheckBoxSamplePage">
+						<StackPanel Spacing="8">
+
+							<CheckBox Content="Checked"
+									  IsChecked="True"
+									  Style="{StaticResource CheckBoxStyle}" />
+
+							<CheckBox Content="Unchecked"
+									  IsChecked="False"
+									  Style="{StaticResource CheckBoxStyle}" />
+
+							<CheckBox Content="Indeterminate"
+									  IsChecked="{x:Null}"
+									  IsThreeState="True"
+									  Style="{StaticResource CheckBoxStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  RadioButton  -->
+					<sample:OverviewSampleView SamplePageType="samples:RadioButtonSamplePage">
+						<StackPanel Spacing="8">
+
+							<RadioButton Content="Checked"
+										 GroupName="FluentOverview"
+										 IsChecked="True"
+										 Style="{StaticResource RadioButtonStyle}" />
+
+							<RadioButton Content="Unchecked"
+										 GroupName="FluentOverview"
+										 Style="{StaticResource RadioButtonStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+
+					<!--  ToggleSwitch  -->
+					<sample:OverviewSampleView SamplePageType="samples:ToggleSwitchSamplePage">
+						<StackPanel Spacing="8">
+
+							<ToggleSwitch Header="ToggleSwitch"
+										  IsOn="True"
+										  Style="{StaticResource ToggleSwitchStyle}" />
+
+							<ToggleSwitch Header="Disabled"
+										  IsEnabled="False"
+										  Style="{StaticResource ToggleSwitchStyle}" />
+						</StackPanel>
+					</sample:OverviewSampleView>
+				</StackPanel>
+			</DataTemplate>
+		</sample:SamplePageLayout.FluentTemplate>
 	</sample:SamplePageLayout>
 </Page>
