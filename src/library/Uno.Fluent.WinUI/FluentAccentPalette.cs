@@ -77,8 +77,6 @@ namespace Uno.Fluent;
 /// </remarks>
 internal static class FluentAccentPalette
 {
-	private const string PrimaryColorKey = "PrimaryColor";
-
 	private const string LightBranchKey = "Light";
 	private const string DarkBranchKey = "Dark";
 	private const string DefaultBranchKey = "Default";
@@ -231,10 +229,10 @@ internal static class FluentAccentPalette
 			return (null, null);
 		}
 
-		var flat = ReadOwnColor(consumerOverride, PrimaryColorKey);
-		var fallback = ReadBranchColor(consumerOverride, DefaultBranchKey, PrimaryColorKey);
-		var light = ReadBranchColor(consumerOverride, LightBranchKey, PrimaryColorKey) ?? fallback ?? flat;
-		var dark = ReadBranchColor(consumerOverride, DarkBranchKey, PrimaryColorKey) ?? fallback ?? flat;
+		var flat = ReadOwnColor(consumerOverride, SemanticColorKeys.Primary);
+		var fallback = ReadBranchColor(consumerOverride, DefaultBranchKey, SemanticColorKeys.Primary);
+		var light = ReadBranchColor(consumerOverride, LightBranchKey, SemanticColorKeys.Primary) ?? fallback ?? flat;
+		var dark = ReadBranchColor(consumerOverride, DarkBranchKey, SemanticColorKeys.Primary) ?? fallback ?? flat;
 		return (light, dark);
 	}
 
