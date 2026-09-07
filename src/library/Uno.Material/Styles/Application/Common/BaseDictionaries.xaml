@@ -2,10 +2,10 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!--
-		Static base layer for MaterialTheme. Pulled into both mergedpages.v1.xaml and
-		mergedpages.v2.xaml by the Uno.XamlMerge task (via the Styles\Application\Common\
-		glob) so that a single Source=mergedpages.<ver>.xaml on BaseTheme brings in the
-		default converter, typography and font resources the theme needs.
+		Static base layer for MaterialTheme. Merged directly into mergedpages.v1.xaml;
+		v2 loads it through its own BaseDictionaries.xaml before the Material v2 type
+		scale. A single Source=mergedpages.<ver>.xaml on BaseTheme brings in the default
+		converter, typography and font resources the theme needs.
 
 		Order matters: entries listed LATER win at lookup time (MergedDictionaries are
 		searched in reverse).

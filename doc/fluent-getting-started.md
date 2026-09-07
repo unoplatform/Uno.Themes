@@ -48,7 +48,7 @@ Or, if you have other existing application-scope resources, add `XamlControlsRes
 `FluentTheme` is an *adapter*, not a style library: it ships **no control templates and no implicit styles**. Fluent is already the implicit default of every WinUI / Uno Platform app; the theme only adds:
 
 - **Semantic style aliases** onto the built-in Fluent styles (`FilledButtonStyle` &rarr; `AccentButtonStyle`, `OutlinedTextBoxStyle` &rarr; `DefaultTextBoxStyle`, …) — see the Fluent column in [Semantic Styles](semantic-styles.md).
-- **Fluent color values** for the semantic color roles: the accent roles read the system accent at theme construction (`SystemAccentColor` and its shades — on Windows, the user's real accent color), and the neutral/surface/error roles carry the corresponding Fluent design-token values, per Light/Dark theme.
+- **Fluent color values** for the semantic color roles: the accent roles read the system accent (`SystemAccentColor` and its shades — on Windows, the user's real accent color), and the neutral/surface/error roles carry the corresponding Fluent design-token values, per Light/Dark theme. The palette refreshes when the platform reports an accent change and on theme rebuilds.
 - **Fluent typography values** for the 19 semantic type slots, using the [Fluent type ramp](https://learn.microsoft.com/en-us/windows/apps/design/style/typography) sizes/weights and the platform-default font (`ContentControlThemeFontFamily`) — no font package is shipped.
 - The shared `BaseTheme` machinery: `Space*`/`Radius*` design tokens, `DefaultSpacing`, `DefaultDensity`, `DefaultCornerRadius`, `DefaultFontFamily`, [seed colors](seed-colors.md) (opt-in), color overrides, and hot reload.
 
@@ -100,7 +100,7 @@ Merge `FluentTheme` **after** `XamlControlsResources`:
 
 ### Override compatibility
 
-The current adapter supports a narrower override contract than Material and Simple:
+Use the shared override channels for semantic resources, with these Fluent mappings and scope rules:
 
 - **Color roles and brushes**: `PrimaryColor` (or a solid `PrimaryBrush`) drives the built-in accent controls, and `OnPrimaryColor` (or a solid `OnPrimaryBrush`) the text on them, from any color-override channel: the constructor's `colorOverride`, `Colors.OverrideDictionary` / `Colors.OverrideSource`, or the obsolete `ColorOverride*` properties. Other semantic overrides change semantic resource lookups only.
 - **Dictionary structure**: override entries may be flat, in the `Light` / `Dark` / `Default` theme dictionaries, or in nested `MergedDictionaries`, following the native lookup order.

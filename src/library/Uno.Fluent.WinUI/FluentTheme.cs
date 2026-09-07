@@ -143,7 +143,7 @@ public partial class FluentTheme : BaseTheme
 		ResourceDictionary? tokens = null;
 
 		// Only a local value is a consumer choice; the DP default means "the platform's". Overlays use
-		// twice the unit (Radius200), matching the platform's 4 / 8.
+		// twice the unit (Radius200), matching the platform's 4 / 8. Invalid values use the shared default.
 		if (ReadLocalValue(DefaultCornerRadiusProperty) != DependencyProperty.UnsetValue)
 		{
 			var radius = SanitizeCornerRadius(DefaultCornerRadius);

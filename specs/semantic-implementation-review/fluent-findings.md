@@ -2,11 +2,40 @@
 
 Review date: 2026-09-06. Scope: the current `Uno.Fluent.WinUI` implementation,
 shared override integration, Fluent runtime tests, and published documentation.
-This is a source audit. No runtime reproduction, build, or platform validation
-was performed by this review lane. Line references identify the implementation
-reviewed before documentation edits.
+The original findings below are preserved as historical source-audit evidence.
+At audit time no runtime reproduction, build, or platform validation was
+performed by this lane. Line references identify that original implementation.
 
-## Overall assessment
+## Resolution update — 2026-09-07
+
+Fluent fixes are implemented in `d7289c42`. The initial Fluent regression run
+reproduced 37 failures (253 passes); after the fixes, complete Desktop runs in
+real application Light and Dark appearances each passed 558 tests, with zero
+failures and one pre-existing skipped hot-reload test. Desktop and WebAssembly
+builds passed. Full command outcomes are in
+[the implementation progress log](../semantic-fixes/progress.md).
+
+| Finding | Resolution | Regression evidence |
+|---|---|---|
+| F1: nested dictionaries | Fixed. Explicit appearance resolution follows own entries, reverse merged children, then the selected appearance dictionary. | `Given_FluentSeedAccent.When_AccentOverridesAreMerged_AppearanceAndSiblingPrecedenceArePreserved`; `When_MergedNativeAccentBrushOverridesSeed_ExplicitBrushAndOpacityWin`; `Given_FluentLightweightStyling.When_LightweightOverrideIsMerged_RenderedFilledButtonUsesLastChild` |
+| F2: Dark-only fallback | Fixed and validated with real Light/Dark app launches. An empty Light branch prevents Dark-generated Default entries from becoming the Light fallback. | `Given_FluentSeedAccent.When_PrimaryOverrideIsAppearanceSpecific_OtherAppearanceKeepsNativeAccent` |
+| F3: constructor override channel | Fixed. Constructor, dictionary, source, and obsolete forwarding channels share the bridge input. | `Given_FluentThemeLifecycle.When_ConstructorOverridesSupplied_NativeButtonUsesTheSameValues`; existing deprecated dictionary/source accent tests |
+| F4: text-button states | Fixed. Semantic foreground/background/border states reach the native template without affecting standard buttons or overriding explicit native resources. Teardown is guarded. | `Given_FluentLightweightStyling.When_TextButtonStateOverridden_RenderedPartsFollowWithoutChangingStandardButton`; `When_TextButtonNativeStateIsOverriddenAtPageScope_NativeOverrideWins`; `When_TextButtonStyleIsReplaced_NativeStateResourcesAreRestored`; `When_TextButtonStyleIsCleared_ThemeDoesNotRetainButton` |
+| F5: font root cascade | Fixed when the DefaultFontFamily property is unset, preserving generated-property and explicit-slot precedence. Root dictionary values populate the semantic slots and native font token. | `Given_FluentThemeLifecycle.When_RootFontOverrideChanges_SlotsAndNativeFontFollowAndClear` |
+| F6: semantic accent brushes | Fixed for PrimaryColor/PrimaryBrush and OnPrimaryColor/OnPrimaryBrush, including brush-over-color precedence and opacity with or without a seed. Other semantic roles are not a general native resource translation. | `Given_FluentSeedAccent.When_SemanticAccentOverrideSet_RenderedNativeButtonUsesColorAndOpacity` |
+| F7: system-accent lifecycle | Fixed. Palette refreshes on rebuild and UISettings notifications; observer lifetime is guarded. | `Given_FluentThemeLifecycle.When_PlatformAccentChanges_UnrelatedRebuildRefreshesSemanticPalette`; `When_PlatformAccentEventRaised_SemanticPaletteRefreshes`; `When_ThemeIsReplaced_SystemAccentSubscriptionDoesNotRetainIt` |
+| F8: existing native brush instances | Fixed for solid accent and supported lightweight brushes. Same realized controls follow seed/override changes and clearing. | `Given_FluentThemeLifecycle.When_SeedChangesAndClears_TheSameNativeButtonUpdates`; `When_LightweightOverrideChanges_TheSameNativeButtonUpdates` |
+| Source reload exception (main review) | Fixed. Fluent reuses the guarded resolved override instead of loading the source a second time after commit. | `Given_FluentThemeLifecycle.When_PreviouslyValidOverrideSourceFails_RebuildRetainsAssignedValues` |
+| Missing presenter style (main review) | Fixed. All 55 semantic control-style keys are available under Fluent, including an empty DatePickerFlyoutPresenter style preserving its native template. | `Given_FluentSemanticStyles.When_DatePickerFlyoutPresenterSemanticStyleApplied_PreservesNativeTemplate` |
+
+Validation boundaries: these are Uno Desktop runtime results, not native WinUI
+runtime results. WebAssembly was built but its runtime tests were not executed.
+The system-accent test raises Uno's UISettings event with controlled platform
+resources; it does not change the Windows OS accent setting. The original
+unconfirmed F2/F8 statements below describe the audit stage and are superseded
+by the actual-consumer regressions listed above.
+
+## Original assessment
 
 Fluent publishes the semantic control-style names and 19 typography styles.
 Its use of built-in styles, nearest-match FAB/elevated aliases, and explicit
@@ -225,7 +254,7 @@ Additional corrections passed to the primary reviewer:
   `BaseTheme.cs:623` onward now caches it across unrelated rebuilds and reloads
   after invalidation.
 
-## Verification
+## Original verification
 
 The evidence above comes from repository source and test inspection. No test
 was added, removed, skipped, or modified. The lane did not run builds or runtime

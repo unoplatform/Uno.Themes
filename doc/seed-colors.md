@@ -265,10 +265,10 @@ Under [`FluentTheme`](fluent-getting-started.md), a seed color does more than ge
 
 ### PrimaryColor overrides drive the accent too
 
-The cascade is not limited to seeds. An explicit **`PrimaryColor` override** — through any channel (`Colors.OverrideDictionary`, `Colors.OverrideSource`, or the legacy `ColorOverrideDictionary` / `ColorOverrideSource` theme properties) — also recolors the built-in Fluent controls, matching how a `PrimaryColor` override visibly recolors controls under Material and Simple:
+The cascade is not limited to seeds. An explicit **`PrimaryColor` override** — through `Colors.OverrideDictionary`, `Colors.OverrideSource`, the theme constructor's `colorOverride` argument, or the legacy `ColorOverrideDictionary` / `ColorOverrideSource` properties — also recolors the built-in Fluent controls:
 
 - Unlike a seed (a *generator input*, mapped through tonal-palette tones), an override is the highest-precedence statement of what Primary **is** — it becomes the accent fill **verbatim** for its theme branch, with the surrounding `SystemAccentColor*` shades and accent-text tones derived relative to it, and the on-accent text family picked by contrast against it.
-- A flat value drives both appearances. `Light` and `Dark` values select their respective appearances; `Default` supplies a fallback for either appearance without its own value. Currently an isolated Dark-only override without a seed can also populate the generated native `Default` branch, making it a fallback in Light. Provide both appearance values for predictable accent behavior.
+- A flat value drives both appearances. `Light` and `Dark` values select their respective appearances; `Default` supplies a fallback when the corresponding appearance dictionary is absent. A Dark-only override leaves Light on the platform accent when no seed is active. Nested merged dictionaries are supported with normal resource-dictionary precedence.
 - When both a seed and a `PrimaryColor` override are set, the **override wins** — the same precedence as in the semantic palette.
 - A `PrimaryColor` in the `FluentTheme` constructor's `colorOverride` is the theme's base palette, as in the other themes: it drives the accent only while no seed is set.
 - An `OnPrimaryColor` (or solid `OnPrimaryBrush`) override becomes the text on the accent (`TextOnAccentFillColor*`), instead of the contrast pick.
@@ -283,7 +283,7 @@ With `ColorPaletteOverride.xaml` defining `PrimaryColor` per theme branch, both 
 
 Every color-override channel feeds the cascade (the constructor's `colorOverride`, `Colors.OverrideDictionary` / `OverrideSource`, the obsolete properties), including entries in nested `MergedDictionaries`; an `OnPrimaryColor` or solid `OnPrimaryBrush` override sets the text on the accent. See [override compatibility](semantic-styles.md#override-compatibility).
 
-Without a seed or a `PrimaryColor` override, none of these overrides exist and the controls follow the platform accent (on Windows, the user's chosen accent color).
+Without a seed or a corresponding explicit override, controls keep the platform accent (on Windows, the user's chosen accent color). The theme refreshes its semantic palette on rebuilds and observes `UISettings.ColorValuesChanged` where the platform supplies that notification.
 
 > [!NOTE]
 > Clearing the seed at runtime (`PrimarySeed = null`) immediately restores the default semantic palette and platform accent, including the accent brushes held by controls already on screen. Explicit color and brush overrides continue to take precedence after the seed is cleared. Built-in controls rendered before the *first* seed or `PrimaryColor` override was set keep the platform accent until they are re-created.
