@@ -1,6 +1,5 @@
 #nullable enable
 
-using System.Collections.Generic;
 using Uno.Themes;
 
 #if WinUI
@@ -77,6 +76,7 @@ internal static class FluentLightweightBridge
 	private const string LightBranchKey = "Light";
 	private const string DarkBranchKey = "Dark";
 	private const string DefaultBranchKey = "Default";
+	private static readonly string[] InteractiveSuffixes = { "", "PointerOver", "Pressed" };
 
 	// Semantic key -> built-in Fluent per-control resource, re-pointed when a
 	// consumer override defines the semantic key (spec 05 §10 step 2).
@@ -182,10 +182,15 @@ internal static class FluentLightweightBridge
 		"TextButtonForeground",
 		"TextButtonForegroundPointerOver",
 		"TextButtonForegroundPressed",
+		"TextButtonForegroundDisabled",
 		"TextButtonBackground",
 		"TextButtonBackgroundPointerOver",
 		"TextButtonBackgroundPressed",
+		"TextButtonBackgroundDisabled",
 		"TextButtonBorderBrush",
+		"TextButtonBorderBrushPointerOver",
+		"TextButtonBorderBrushPressed",
+		"TextButtonBorderBrushDisabled",
 		"IconButtonForeground",
 	};
 
@@ -312,76 +317,48 @@ internal static class FluentLightweightBridge
 	/// </summary>
 	private static void ApplyRepointing(ResourceDictionary light, ResourceDictionary dark, ResourceDictionary consumerOverride)
 	{
-		// Enumeration reads OWN entries only — TryGetValue would also search
-		// the ambient theme branch and break branch fidelity.
-		var flat = ToOwnEntries(consumerOverride);
-		var lightOverrides = BranchEntries(consumerOverride, LightBranchKey);
-		var darkOverrides = BranchEntries(consumerOverride, DarkBranchKey);
-		var fallbackOverrides = BranchEntries(consumerOverride, DefaultBranchKey);
+		ApplyBranch(light, LightBranchKey);
+		ApplyBranch(dark, DarkBranchKey);
 
-		foreach (var (semantic, fluent) in _repointMap)
+		void ApplyBranch(ResourceDictionary branch, string appearance)
 		{
-			Apply(semantic, fluent);
-		}
-
-		foreach (var semantic in _bridgeStyleKeys)
-		{
-			Apply(semantic, fluent: null);
-		}
-
-		void Apply(string semantic, string? fluent)
-		{
-			if (flat.TryGetValue(semantic, out var flatValue))
+			// Explicit semantic palette brushes override the generated defaults; a control
+			// key below remains more specific and takes precedence over the whole role.
+			var primary = FluentResourceResolver.Resolve(consumerOverride, appearance, "PrimaryBrush") as Brush;
+			var onPrimary = FluentResourceResolver.Resolve(consumerOverride, appearance, "OnPrimaryBrush") as Brush;
+			if (onPrimary is null && FluentResourceResolver.Resolve(consumerOverride, appearance, "OnPrimaryColor") is Color onPrimaryColor)
 			{
-				Write(light, flatValue);
-				Write(dark, flatValue);
+				onPrimary = new SolidColorBrush(onPrimaryColor);
+			}
+			foreach (var suffix in InteractiveSuffixes)
+			{
+				if (primary is { })
+				{
+					branch["FilledButtonBackground" + suffix] = primary;
+				}
+				if (onPrimary is { })
+				{
+					branch["FilledButtonForeground" + suffix] = onPrimary;
+				}
 			}
 
-			var lightValue = OwnValue(lightOverrides, semantic) ?? OwnValue(fallbackOverrides, semantic);
-			if (lightValue is { })
+			foreach (var (semantic, fluent) in _repointMap)
 			{
-				Write(light, lightValue);
-			}
-
-			var darkValue = OwnValue(darkOverrides, semantic) ?? OwnValue(fallbackOverrides, semantic);
-			if (darkValue is { })
-			{
-				Write(dark, darkValue);
-			}
-
-			void Write(ResourceDictionary branch, object value)
-			{
-				if (fluent is { })
+				if (FluentResourceResolver.Resolve(consumerOverride, appearance, semantic) is { } value)
 				{
 					branch[fluent] = value;
+					branch[semantic] = value;
 				}
-
-				branch[semantic] = value;
 			}
-		}
-	}
-
-	private static Dictionary<string, object>? BranchEntries(ResourceDictionary dictionary, string branchKey)
-		=> dictionary.ThemeDictionaries.TryGetValue(branchKey, out var value) && value is ResourceDictionary branch
-			? ToOwnEntries(branch)
-			: null;
-
-	private static object? OwnValue(Dictionary<string, object>? entries, string key)
-		=> entries is { } && entries.TryGetValue(key, out var value) ? value : null;
-
-	private static Dictionary<string, object> ToOwnEntries(ResourceDictionary dictionary)
-	{
-		var entries = new Dictionary<string, object>();
-		foreach (var pair in dictionary)
-		{
-			if (pair.Key is string key)
+			foreach (var semantic in _bridgeStyleKeys)
 			{
-				entries[key] = pair.Value;
+				if (FluentResourceResolver.Resolve(consumerOverride, appearance, semantic) is { } value)
+				{
+					branch[semantic] = value;
+				}
 			}
 		}
-		return entries;
 	}
-
 	private static Color FromArgb(int argb) =>
 		Color.FromArgb(
 			(byte)((argb >> 24) & 0xFF),
