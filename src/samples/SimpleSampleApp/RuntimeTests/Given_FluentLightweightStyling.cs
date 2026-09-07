@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Runtime.CompilerServices;
 using Uno.Fluent;
 using Uno.Themes.ColorGeneration;
 using Uno.Themes.ColorGeneration.Hct;
@@ -19,6 +20,249 @@ public class Given_FluentLightweightStyling
 {
 	private static readonly Color OverrideRed = Color.FromArgb(0xFF, 0xB0, 0x00, 0x20);
 	private static readonly Color SeedPurple = Color.FromArgb(0xFF, 0x59, 0x46, 0xD2);
+	private WeakReference<Button>? _releasedTextButton;
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(true)]
+	[DataRow(false)]
+	public async Task When_TextButtonStyleIsCleared_ThemeDoesNotRetainButton(bool semantic)
+	{
+		var theme = new FluentTheme();
+		await CreateAndReleaseTextButton(theme, semantic);
+		// Template application and unloading schedule dispatcher work that can hold
+		// the last realized control until the queue drains.
+		await UnitTestsUIContentHelper.WaitForIdle();
+		CollectReleasedTextButton();
+		Assert.IsNotNull(_releasedTextButton);
+		Assert.IsFalse(_releasedTextButton.TryGetTarget(out _), semantic
+			? "Cleared resource mappings and self-event handlers must not retain the button."
+			: "The native baseline button must also be collectible after the same teardown.");
+		GC.KeepAlive(theme);
+	}
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	private async Task CreateAndReleaseTextButton(FluentTheme theme, bool semantic)
+	{
+		Button? button = new Button
+		{
+			Content = "collect",
+			Style = (Style)(semantic ? theme["TextButtonStyle"] : Application.Current.Resources["DefaultButtonStyle"]),
+		};
+		_releasedTextButton = new WeakReference<Button>(button);
+		Grid? host = new Grid();
+		host.Resources.MergedDictionaries.Add(theme);
+		host.Children.Add(button);
+		UnitTestsUIContentHelper.Content = host;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		button.Style = (Style)Application.Current.Resources["DefaultButtonStyle"];
+		host.Children.Clear();
+		UnitTestsUIContentHelper.Content = null;
+		host.Resources.MergedDictionaries.Remove(theme);
+		// The completed async state machine may itself remain alive in the runner.
+		// Its locals must no longer hold either released visual.
+		button = null;
+		host = null;
+	}
+
+	[MethodImpl(MethodImplOptions.NoInlining)]
+	private static void CollectReleasedTextButton()
+	{
+		GC.Collect();
+		GC.WaitForPendingFinalizers();
+		GC.Collect();
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light)]
+	[DataRow(ElementTheme.Dark)]
+	public async Task When_TextButtonNativeStateIsOverriddenAtPageScope_NativeOverrideWins(ElementTheme appearance)
+	{
+		var host = CreateThemedContainer();
+		host.RequestedTheme = appearance;
+		host.Resources["ButtonForegroundPointerOver"] = new SolidColorBrush(Colors.Magenta);
+		var button = new Button { Content = "native override", Style = (Style)host.Resources["TextButtonStyle"] };
+		host.Children.Add(button);
+		UnitTestsUIContentHelper.Content = host;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.IsTrue(VisualStateManager.GoToState(button, "PointerOver", false));
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.AreEqual(Colors.Magenta, ((SolidColorBrush)FindButtonPresenter(button).Foreground).Color,
+			"Semantic defaults must not shadow an explicit native resource in a parent scope.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light)]
+	[DataRow(ElementTheme.Dark)]
+	public async Task When_TextButtonStyleIsReplaced_NativeStateResourcesAreRestored(ElementTheme appearance)
+	{
+		var host = CreateThemedContainer();
+		host.RequestedTheme = appearance;
+		host.Resources["TextButtonForegroundPointerOver"] = new SolidColorBrush(Colors.Magenta);
+		var nativeStyle = (Style)Application.Current.Resources["DefaultButtonStyle"];
+		var button = new Button { Content = "replace style", Style = (Style)host.Resources["TextButtonStyle"] };
+		var standard = new Button { Content = "baseline", Style = nativeStyle };
+		host.Children.Add(button);
+		host.Children.Add(standard);
+		UnitTestsUIContentHelper.Content = host;
+		await UnitTestsUIContentHelper.WaitForLoaded(button);
+		await UnitTestsUIContentHelper.WaitForLoaded(standard);
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.IsTrue(VisualStateManager.GoToState(button, "PointerOver", false));
+		Assert.IsTrue(VisualStateManager.GoToState(standard, "PointerOver", false));
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.AreEqual(Colors.Magenta, ((SolidColorBrush)FindButtonPresenter(button).Foreground).Color);
+		var expected = ((SolidColorBrush)FindButtonPresenter(standard).Foreground).Color;
+
+		button.Style = nativeStyle;
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.IsTrue(VisualStateManager.GoToState(button, "Normal", false));
+		Assert.IsTrue(VisualStateManager.GoToState(button, "PointerOver", false));
+		await UnitTestsUIContentHelper.WaitForIdle();
+		Assert.AreEqual(expected, ((SolidColorBrush)FindButtonPresenter(button).Foreground).Color,
+			"Changing to the standard style must remove text-button native resource mappings.");
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light, "Normal", false)]
+	[DataRow(ElementTheme.Dark, "Normal", false)]
+	[DataRow(ElementTheme.Light, "PointerOver", false)]
+	[DataRow(ElementTheme.Dark, "PointerOver", false)]
+	[DataRow(ElementTheme.Light, "Pressed", false)]
+	[DataRow(ElementTheme.Dark, "Pressed", false)]
+	[DataRow(ElementTheme.Light, "Disabled", false)]
+	[DataRow(ElementTheme.Dark, "Disabled", false)]
+	[DataRow(ElementTheme.Light, "Normal", true)]
+	[DataRow(ElementTheme.Dark, "Normal", true)]
+	[DataRow(ElementTheme.Light, "PointerOver", true)]
+	[DataRow(ElementTheme.Dark, "PointerOver", true)]
+	[DataRow(ElementTheme.Light, "Pressed", true)]
+	[DataRow(ElementTheme.Dark, "Pressed", true)]
+	[DataRow(ElementTheme.Light, "Disabled", true)]
+	[DataRow(ElementTheme.Dark, "Disabled", true)]
+	public async Task When_TextButtonStateOverridden_RenderedPartsFollowWithoutChangingStandardButton(
+		ElementTheme appearance, string state, bool scoped)
+	{
+		var suffix = state == "Normal" ? "" : state;
+		var overrides = new ResourceDictionary
+		{
+			["TextButtonForeground" + suffix] = new SolidColorBrush(Colors.Magenta),
+			["TextButtonBackground" + suffix] = new SolidColorBrush(Colors.Lime),
+			["TextButtonBorderBrush" + suffix] = new SolidColorBrush(Colors.Blue),
+		};
+		var theme = new FluentTheme();
+		if (!scoped)
+		{
+			theme.Colors = new ThemeColors { OverrideDictionary = overrides };
+		}
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var host = new StackPanel { RequestedTheme = appearance };
+			if (scoped)
+			{
+				host.Resources.MergedDictionaries.Add(overrides);
+			}
+			var textButton = new Button { Content = "text", Style = (Style)theme["TextButtonStyle"] };
+			var standardButton = new Button { Content = "standard", Style = (Style)Application.Current.Resources["DefaultButtonStyle"] };
+			host.Children.Add(textButton);
+			host.Children.Add(standardButton);
+			UnitTestsUIContentHelper.Content = host;
+			await UnitTestsUIContentHelper.WaitForLoaded(textButton);
+			await UnitTestsUIContentHelper.WaitForLoaded(standardButton);
+			await UnitTestsUIContentHelper.WaitForIdle();
+
+			Assert.IsTrue(VisualStateManager.GoToState(textButton, state, false), $"Text button must support {state}.");
+			Assert.IsTrue(VisualStateManager.GoToState(standardButton, state, false), $"Standard button must support {state}.");
+			await UnitTestsUIContentHelper.WaitForIdle();
+			var textPresenter = FindButtonPresenter(textButton);
+			var standardPresenter = FindButtonPresenter(standardButton);
+			Assert.AreEqual(Colors.Magenta, ((SolidColorBrush)textPresenter.Foreground).Color, $"{state} foreground must consume its semantic key.");
+			Assert.AreEqual(Colors.Lime, ((SolidColorBrush)textPresenter.Background).Color, $"{state} background must consume its semantic key.");
+			Assert.AreEqual(Colors.Blue, ((SolidColorBrush)textPresenter.BorderBrush).Color, $"{state} border must consume its semantic key.");
+			Assert.AreNotEqual(Colors.Magenta, ((SolidColorBrush)standardPresenter.Foreground).Color, "Text overrides must not recolor the standard sibling.");
+			Assert.AreNotEqual(Colors.Lime, ((SolidColorBrush)standardPresenter.Background).Color, "Text overrides must not refill the standard sibling.");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+			appDictionaries.Remove(theme);
+		}
+	}
+
+	private static ContentPresenter FindButtonPresenter(DependencyObject parent)
+	{
+		for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+		{
+			var child = VisualTreeHelper.GetChild(parent, i);
+			if (child is ContentPresenter { Name: "ContentPresenter" } presenter)
+			{
+				return presenter;
+			}
+			if (FindButtonPresenterCore(child) is { } nested)
+			{
+				return nested;
+			}
+		}
+		throw new AssertFailedException("The built-in Button template must realize its ContentPresenter.");
+	}
+
+	private static ContentPresenter? FindButtonPresenterCore(DependencyObject parent)
+	{
+		if (parent is ContentPresenter { Name: "ContentPresenter" } presenter)
+		{
+			return presenter;
+		}
+		for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+		{
+			if (FindButtonPresenterCore(VisualTreeHelper.GetChild(parent, i)) is { } nested)
+			{
+				return nested;
+			}
+		}
+		return null;
+	}
+
+	[TestMethod]
+	[RunsOnUIThread]
+	[DataRow(ElementTheme.Light, false)]
+	[DataRow(ElementTheme.Dark, false)]
+	[DataRow(ElementTheme.Light, true)]
+	[DataRow(ElementTheme.Dark, true)]
+	public async Task When_LightweightOverrideIsMerged_RenderedFilledButtonUsesLastChild(ElementTheme appearance, bool insideAppearance)
+	{
+		var overrides = new ResourceDictionary();
+		var entries = overrides;
+		if (insideAppearance)
+		{
+			entries = new ResourceDictionary();
+			overrides.ThemeDictionaries[appearance == ElementTheme.Light ? "Light" : "Dark"] = entries;
+		}
+		entries.MergedDictionaries.Add(new ResourceDictionary { ["FilledButtonBackground"] = new SolidColorBrush(Colors.Blue) });
+		entries.MergedDictionaries.Add(new ResourceDictionary { ["FilledButtonBackground"] = new SolidColorBrush(OverrideRed) });
+		var theme = new FluentTheme { Colors = new ThemeColors { OverrideDictionary = overrides } };
+		var appDictionaries = Application.Current.Resources.MergedDictionaries;
+		appDictionaries.Add(theme);
+		try
+		{
+			var button = new Button { Content = "merged", RequestedTheme = appearance, Style = (Style)theme["FilledButtonStyle"] };
+			UnitTestsUIContentHelper.Content = button;
+			await UnitTestsUIContentHelper.WaitForLoaded(button);
+			await UnitTestsUIContentHelper.WaitForIdle();
+			Assert.AreEqual(OverrideRed, ((SolidColorBrush)button.Background).Color, "The last merged override must reach the native template.");
+		}
+		finally
+		{
+			UnitTestsUIContentHelper.Content = null;
+			appDictionaries.Remove(theme);
+		}
+	}
 
 	private static bool IsAmbientDark =>
 		Application.Current.RequestedTheme == ApplicationTheme.Dark;
