@@ -4,6 +4,8 @@ uid: Uno.Themes.Styles.ToggleButton
 
 # ToggleButton Control
 
+The style defaults and resource tables below describe Material v2. Simple defaults to its text-toggle style, and both its text and icon variants consume `TextToggleButton*` brush keys. The separate `IconToggleButton*` overrides listed here do not affect Simple's icon variant. Fluent maps both semantic styles to the native toggle-button style. See [semantic override compatibility](../semantic-styles.md#override-compatibility).
+
 ## Styles
 
 | Style Key               | IsDefaultStyle\* |
